@@ -1,0 +1,20 @@
+--- ../src/minecraft/net/minecraft/src/StructureVillagePieces.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_base/minecraft/net/minecraft/src/StructureVillagePieces.java	0000-00-00 00:00:00.000000000 -0000
+@@ -181,7 +181,7 @@
+                 int var12 = var8.boundingBox.maxZ - var8.boundingBox.minZ;
+                 int var13 = var11 > var12 ? var11 : var12;
+ 
+-                if (par0ComponentVillageStartPiece.getWorldChunkManager().areBiomesViable(var9, var10, var13 / 2 + 4, MapGenVillageTFC.villageSpawnBiomes))
++                if (par0ComponentVillageStartPiece.getWorldChunkManager().areBiomesViable(var9, var10, var13 / 2 + 4, MapGenVillage.villageSpawnBiomes))
+                 {
+                     par1List.add(var8);
+                     par0ComponentVillageStartPiece.field_35108_e.add(var8);
+@@ -216,7 +216,7 @@
+                 int var13 = var9.boundingBox.maxZ - var9.boundingBox.minZ;
+                 int var14 = var12 > var13 ? var12 : var13;
+ 
+-                if (par0ComponentVillageStartPiece.getWorldChunkManager().areBiomesViable(var10, var11, var14 / 2 + 4, MapGenVillageTFC.villageSpawnBiomes))
++                if (par0ComponentVillageStartPiece.getWorldChunkManager().areBiomesViable(var10, var11, var14 / 2 + 4, MapGenVillage.villageSpawnBiomes))
+                 {
+                     par1List.add(var9);
+                     par0ComponentVillageStartPiece.field_35106_f.add(var9);

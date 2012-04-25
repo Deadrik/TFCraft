@@ -1,0 +1,38 @@
+--- ../src/minecraft/net/minecraft/src/ModLoader.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_base/minecraft/net/minecraft/src/ModLoader.java	0000-00-00 00:00:00.000000000 -0000
+@@ -217,7 +217,7 @@
+ 
+     public static void addBiome(BiomeGenBase var0)
+     {
+-        BiomeGenBase[] var1 = GenLayerBiomeTFC.biomeArray;
++        BiomeGenBase[] var1 = GenLayerBiome.biomeArray;
+         List var2 = Arrays.asList(var1);
+         ArrayList var3 = new ArrayList();
+         var3.addAll(var2);
+@@ -227,7 +227,7 @@
+             var3.add(var0);
+         }
+ 
+-        GenLayerBiomeTFC.biomeArray = (BiomeGenBase[])var3.toArray(new BiomeGenBase[0]);
++        GenLayerBiome.biomeArray = (BiomeGenBase[])var3.toArray(new BiomeGenBase[0]);
+     }
+ 
+     public static void addLocalization(String var0, String var1)
+@@ -1611,7 +1611,7 @@
+ 
+     public static void removeBiome(BiomeGenBase var0)
+     {
+-        BiomeGenBase[] var1 = GenLayerBiomeTFC.biomeArray;
++        BiomeGenBase[] var1 = GenLayerBiome.biomeArray;
+         List var2 = Arrays.asList(var1);
+         ArrayList var3 = new ArrayList();
+         var3.addAll(var2);
+@@ -1621,7 +1621,7 @@
+             var3.remove(var0);
+         }
+ 
+-        GenLayerBiomeTFC.biomeArray = (BiomeGenBase[])var3.toArray(new BiomeGenBase[0]);
++        GenLayerBiome.biomeArray = (BiomeGenBase[])var3.toArray(new BiomeGenBase[0]);
+     }
+ 
+     public static void removeSpawn(Class var0, EnumCreatureType var1)

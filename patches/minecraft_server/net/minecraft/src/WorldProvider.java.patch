@@ -1,0 +1,40 @@
+--- ../src/minecraft_server/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_base/minecraft_server/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
+@@ -39,24 +39,6 @@
+         this.terrainType = par1World.getWorldInfo().getTerrainType();
+         this.registerWorldChunkManager();
+         this.generateLightBrightnessTable();
+-        /**
+-         * TFC Code: This is used to set the initial rock layers for each biome
+-         * */
+-        for(int i = 0; i < BiomeGenBase.biomeList.length; i++)
+-        {
+-        	if(BiomeGenBase.biomeList[i] != null && !(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC))
+-        	{
+-        		BiomeGenBase.biomeList[i].SetupStone(par1World);
+-        	}
+-        	else if(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
+-        	{
+-        		BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
+-        	}
+-        	else if(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC)
+-        	{
+-        		BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace("River ", "").toLowerCase());
+-        	}
+-        }
+     }
+ 
+     /**
+@@ -102,11 +84,7 @@
+     public boolean canCoordinateBeSpawn(int par1, int par2)
+     {
+         int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
+-        //return var3 == Block.grass.blockID;
+-        /*
+-         * This makes it so that the player can spawn on TFC's custom grass
+-         */
+-        return var3 == mod_TFC_Core.terraGrass.blockID || var3 == mod_TFC_Core.terraGrass2.blockID;
++        return var3 == Block.grass.blockID;
+     }
+ 
+     /**

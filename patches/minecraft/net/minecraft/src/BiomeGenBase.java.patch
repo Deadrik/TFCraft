@@ -1,0 +1,644 @@
+--- ../src/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_base/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
+@@ -5,185 +5,47 @@
+ import java.util.List;
+ import java.util.Random;
+ 
+-import net.minecraft.src.TFC_Core.*;
+-
+ public abstract class BiomeGenBase
+ {
+-	public static int ForestColor = 0x56621;
+-	public static int ForestWater = 0x228855;
+-	public static int PlainsColor = 0x56621;
+-	public static int PlainsWater = 0x228855;
+-	public static int TaigaColor = 0xb6659;
+-	public static int TaigaWater = 0x228855;
+-	public static int SwampColor = 0x168e6b;
+-	public static int SwampWater = 0x228855;//0x644c27;
+-	public static int DesertColor = 0xb6659;
+-	public static int DesertWater = 0x228855;
+-	public static int HillsColor = 0xb6659;
+-	public static int HillsWater = 0x228855;
+-	
+     /** An array of all the biomes, indexed by biome id. */
+     public static final BiomeGenBase[] biomeList = new BiomeGenBase[256];
+-    public static final BiomeGenBase ocean = (new BiomeGenOceanTFC(0)).setColor(ForestColor).setBiomeName("Ocean").setMinMaxHeight(-1F, 0.4F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase plains = (new BiomeGenPlainsTFC(1)).setColor(PlainsColor).setBiomeName("Plains1").setTemperatureRainfall(0.8F, 0.4F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase desert = (new BiomeGenDesertTFC(2)).setColor(DesertColor).setBiomeName("Desert1").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
+-    public static final BiomeGenBase extremeHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("Hills1").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest1").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F);
+-    public static final BiomeGenBase taiga = (new BiomeGenTaigaTFC(5)).setColor(TaigaColor).setBiomeName("Taiga1").SetWaterMult(TaigaWater).setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase swampland = (new BiomeGenSwampTFC(6)).setColor(SwampColor).setBiomeName("Swamp1").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase river = (new BiomeGenRiverTFC(7)).setColor(ForestColor).setBiomeName("River Hills1").SetWaterMult(PlainsWater).setMinMaxHeight(-0.5F, 0.0F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase hell = (new BiomeGenHell(8)).setColor(0xff0000).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
+-    public static final BiomeGenBase sky = (new BiomeGenEnd(9)).setColor(0x8080ff).setBiomeName("Sky").setDisableRain();
+-    public static final BiomeGenBase frozenOcean = (new BiomeGenOceanTFC(10)).setColor(ForestColor).setBiomeName("FrozenOcean").setMinMaxHeight(-1F, 0.5F).setTemperatureRainfall(0.0F, 0.5F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase frozenRiver = (new BiomeGenRiverTFC(11)).setColor(0xa0a0ff).setBiomeName("FrozenRiver").setMinMaxHeight(-0.5F, 0.0F).setTemperatureRainfall(0.0F, 0.5F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase icePlains = (new BiomeGenSnowTFC(12)).setColor(0xffffff).setBiomeName("Ice Plains").setTemperatureRainfall(0.0F, 0.5F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase iceMountains = (new BiomeGenSnowTFC(13)).setColor(0xa0a0a0).setBiomeName("Ice Mountains").setMinMaxHeight(0.2F, 1.2F).setTemperatureRainfall(0.0F, 0.5F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase mushroomIsland = (new BiomeGenMushroomIsland(14)).setColor(0xff00ff).setBiomeName("MushroomIsland").setTemperatureRainfall(0.9F, 1.0F).setMinMaxHeight(0.2F, 1.0F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase mushroomIslandShore = (new BiomeGenMushroomIsland(15)).setColor(0xa000ff).setBiomeName("MushroomIslandShore").setTemperatureRainfall(0.9F, 1.0F).setMinMaxHeight(-1F, 0.1F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).setBiomeName("Beach").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F).SetWaterMult(ForestWater);
+-    public static final BiomeGenBase desertHills = desert;
+-    //public static final BiomeGenBase forestHills = (new BiomeGenForestTFC(18)).setColor(0x22551c).setBiomeName("ForestHills").func_4124_a(0x4eba31).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.6F);
+-    //public static final BiomeGenBase taigaHills = (new BiomeGenTaigaTFC(19)).setColor(0x163933).setBiomeName("TaigaHills").func_4124_a(0x4eba31).setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.2F, 0.7F);
+-    public static final BiomeGenBase taigaHills = taiga;
+-    public static final BiomeGenBase forestHills = forest;
+-    public static final BiomeGenBase extremeHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setColor(0x72789a).setBiomeName("Hills1 Edge").setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    
+-    public static final BiomeGenBase jungle = (new BiomeGenJungleTFC(21)).setColor(5470985).setBiomeName("Jungle").SetWaterMult(5470985).setTemperatureRainfall(1.2F, 0.9F).setMinMaxHeight(0.2F, 0.4F);
+-    public static final BiomeGenBase jungleHills = (new BiomeGenJungleTFC(22)).setColor(2900485).setBiomeName("JungleHills").SetWaterMult(5470985).setTemperatureRainfall(1.2F, 0.9F).setMinMaxHeight(1.4F, 0.2F);
+-    
+-    public static final BiomeGenBase desert3 = (new BiomeGenDesertTFC(59)).setColor(DesertColor).setBiomeName("Desert3").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.7F);
+-    public static final BiomeGenBase desert4 = (new BiomeGenDesertTFC(60)).setColor(DesertColor).setBiomeName("Desert4").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
+-    public static final BiomeGenBase desert5 = (new BiomeGenDesertTFC(61)).setColor(DesertColor).setBiomeName("Desert5").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.7F);
+-    public static final BiomeGenBase desert6 = (new BiomeGenDesertTFC(62)).setColor(DesertColor).setBiomeName("Desert6").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.5F);
+-    public static final BiomeGenBase desert7 = (new BiomeGenDesertTFC(63)).setColor(DesertColor).setBiomeName("Desert7").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.3F);
+-    public static final BiomeGenBase desert8 = (new BiomeGenDesertTFC(64)).setColor(DesertColor).setBiomeName("Desert8").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
+-    public static final BiomeGenBase desert9 = (new BiomeGenDesertTFC(65)).setColor(DesertColor).setBiomeName("Desert9").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.4F);
+-    
+-    public static final BiomeGenBase hills2 = (new BiomeGenHillsTFC(112)).setColor(HillsColor).setBiomeName("hills2").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills3 = (new BiomeGenHillsTFC(23)).setColor(HillsColor).setBiomeName("hills3").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills4 = (new BiomeGenHillsTFC(24)).setColor(HillsColor).setBiomeName("hills4").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills5 = (new BiomeGenHillsTFC(25)).setColor(HillsColor).setBiomeName("hills5").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills6 = (new BiomeGenHillsTFC(26)).setColor(HillsColor).setBiomeName("hills6").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.6F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills7 = (new BiomeGenHillsTFC(27)).setColor(HillsColor).setBiomeName("hills7").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills8 = (new BiomeGenHillsTFC(28)).setColor(HillsColor).setBiomeName("hills8").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills9 = (new BiomeGenHillsTFC(29)).setColor(HillsColor).setBiomeName("hills9").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase hills10 = (new BiomeGenHillsTFC(30)).setColor(HillsColor).setBiomeName("hills10").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
+-    
+-    public static final BiomeGenBase forest2 = (new BiomeGenForestTFC(31)).setColor(ForestColor).setBiomeName("Forest2").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.6F);
+-    public static final BiomeGenBase forest3 = (new BiomeGenForestTFC(32)).setColor(ForestColor).setBiomeName("Forest3").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F);
+-    public static final BiomeGenBase forest4 = (new BiomeGenForestTFC(33)).setColor(ForestColor).setBiomeName("Forest4").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F);
+-    public static final BiomeGenBase forest5 = (new BiomeGenForestTFC(34)).setColor(ForestColor).setBiomeName("Forest5").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.7F);
+-    public static final BiomeGenBase forest6 = (new BiomeGenForestTFC(35)).setColor(ForestColor).setBiomeName("Forest6").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F);
+-    public static final BiomeGenBase forest7 = (new BiomeGenForestTFC(36)).setColor(ForestColor).setBiomeName("Forest7").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.4F);
+-    public static final BiomeGenBase forest8 = (new BiomeGenForestTFC(37)).setColor(ForestColor).setBiomeName("Forest8").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F);
+-    public static final BiomeGenBase forest9 = (new BiomeGenForestTFC(38)).setColor(ForestColor).setBiomeName("Forest9").SetWaterMult(ForestWater).setTemperatureRainfall(0.7F, 0.8F);
+-    
+-    public static final BiomeGenBase plains2 = (new BiomeGenPlainsTFC(39)).setColor(PlainsColor).setBiomeName("plains2").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains3 = (new BiomeGenPlainsTFC(40)).setColor(PlainsColor).setBiomeName("plains3").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains4 = (new BiomeGenPlainsTFC(41)).setColor(PlainsColor).setBiomeName("plains4").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains5 = (new BiomeGenPlainsTFC(42)).setColor(PlainsColor).setBiomeName("plains5").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains6 = (new BiomeGenPlainsTFC(43)).setColor(PlainsColor).setBiomeName("plains6").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains7 = (new BiomeGenPlainsTFC(44)).setColor(PlainsColor).setBiomeName("plains7").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains8 = (new BiomeGenPlainsTFC(45)).setColor(PlainsColor).setBiomeName("plains8").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains9 = (new BiomeGenPlainsTFC(46)).setColor(PlainsColor).setBiomeName("plains9").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    public static final BiomeGenBase plains10 = (new BiomeGenPlainsTFC(47)).setColor(PlainsColor).setBiomeName("plains10").SetWaterMult(PlainsWater).setTemperatureRainfall(0.8F, 0.4F);
+-    
+-    public static final BiomeGenBase taiga10 = (new BiomeGenTaigaTFC(48)).setColor(TaigaColor).setBiomeName("Taiga10").SetWaterMult(TaigaWater).setTemperatureRainfall(0.05F, 0.9F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase taiga2 = (new BiomeGenTaigaTFC(49)).setColor(TaigaColor).setBiomeName("Taiga2").SetWaterMult(TaigaWater).setTemperatureRainfall(0.05F, 0.9F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase taiga3 = (new BiomeGenTaigaTFC(50)).setColor(TaigaColor).setBiomeName("Taiga3").SetWaterMult(TaigaWater).setTemperatureRainfall(0.05F, 0.9F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase taiga4 = (new BiomeGenTaigaTFC(51)).setColor(TaigaColor).setBiomeName("Taiga4").SetWaterMult(TaigaWater).setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase taiga5 = (new BiomeGenTaigaTFC(52)).setColor(TaigaColor).setBiomeName("Taiga5").SetWaterMult(TaigaWater).setTemperatureRainfall(0.07F, 0.8F).setMinMaxHeight(0.3F, 1.2F).setEnableSnow();
+-    public static final BiomeGenBase taiga6 = (new BiomeGenTaigaTFC(66)).setColor(TaigaColor).setBiomeName("Taiga6").SetWaterMult(TaigaWater).setTemperatureRainfall(0.03F, 0.8F).setMinMaxHeight(0.2F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase taiga7 = (new BiomeGenTaigaTFC(67)).setColor(TaigaColor).setBiomeName("Taiga7").SetWaterMult(TaigaWater).setTemperatureRainfall(0.08F, 0.8F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase taiga8 = (new BiomeGenTaigaTFC(68)).setColor(TaigaColor).setBiomeName("Taiga8").SetWaterMult(TaigaWater).setTemperatureRainfall(0.01F, 0.8F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    public static final BiomeGenBase taiga9 = (new BiomeGenTaigaTFC(69)).setColor(TaigaColor).setBiomeName("Taiga9").SetWaterMult(TaigaWater).setTemperatureRainfall(0.05F, 0.95F).setMinMaxHeight(0.1F, 0.4F).setEnableSnow();
+-    
+-    public static final BiomeGenBase desert2 = (new BiomeGenDesertTFC(53)).setColor(DesertColor).setBiomeName("Desert2").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
+-    
+-    public static final BiomeGenBase swamp10 = (new BiomeGenSwampTFC(54)).setColor(SwampColor).setBiomeName("Swamp10").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp2 = (new BiomeGenSwampTFC(55)).setColor(SwampColor).setBiomeName("Swamp2").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp3 = (new BiomeGenSwampTFC(56)).setColor(SwampColor).setBiomeName("Swamp3").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp4 = (new BiomeGenSwampTFC(57)).setColor(SwampColor).setBiomeName("Swamp4").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp5 = (new BiomeGenSwampTFC(58)).setColor(SwampColor).setBiomeName("Swamp5").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp6 = (new BiomeGenSwampTFC(70)).setColor(SwampColor).setBiomeName("Swamp6").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp7 = (new BiomeGenSwampTFC(71)).setColor(SwampColor).setBiomeName("Swamp7").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
+-    public static final BiomeGenBase swamp8 = (new BiomeGenSwampTFC(72)).setColor(SwampColor).setBiomeName("Swamp8").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.28F, 0.9F);
+-    public static final BiomeGenBase swamp9 = (new BiomeGenSwampTFC(73)).setColor(SwampColor).setBiomeName("Swamp9").SetWaterMult(SwampWater).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.3F, 0.9F);
+-    
+-    public static final BiomeGenBase HillsEdge2 = (new BiomeGenHillsEdgeTFC(74)).setColor(HillsColor).setBiomeName("Hills2 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge3 = (new BiomeGenHillsEdgeTFC(75)).setColor(HillsColor).setBiomeName("Hills3 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge4 = (new BiomeGenHillsEdgeTFC(76)).setColor(HillsColor).setBiomeName("Hills4 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge5 = (new BiomeGenHillsEdgeTFC(77)).setColor(HillsColor).setBiomeName("Hills5 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge6 = (new BiomeGenHillsEdgeTFC(78)).setColor(HillsColor).setBiomeName("Hills6 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge7 = (new BiomeGenHillsEdgeTFC(79)).setColor(HillsColor).setBiomeName("Hills7 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge8 = (new BiomeGenHillsEdgeTFC(80)).setColor(HillsColor).setBiomeName("Hills8 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge9 = (new BiomeGenHillsEdgeTFC(81)).setColor(HillsColor).setBiomeName("Hills9 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    public static final BiomeGenBase HillsEdge10 = (new BiomeGenHillsEdgeTFC(82)).setColor(HillsColor).setBiomeName("Hills10 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
+-    
+-    public static final BiomeGenBase river2 = (new BiomeGenRiverTFC(83)).setColor(SwampColor).setBiomeName("River Swamp1").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river3 = (new BiomeGenRiverTFC(84)).setColor(SwampColor).setBiomeName("River Swamp2").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river4 = (new BiomeGenRiverTFC(85)).setColor(SwampColor).setBiomeName("River Swamp3").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river5 = (new BiomeGenRiverTFC(86)).setColor(SwampColor).setBiomeName("River Swamp4").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river6 = (new BiomeGenRiverTFC(87)).setColor(SwampColor).setBiomeName("River Swamp5").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river7 = (new BiomeGenRiverTFC(88)).setColor(SwampColor).setBiomeName("River Swamp6").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river8 = (new BiomeGenRiverTFC(89)).setColor(SwampColor).setBiomeName("River Swamp7").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river9 = (new BiomeGenRiverTFC(90)).setColor(SwampColor).setBiomeName("River Swamp8").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river10 = (new BiomeGenRiverTFC(91)).setColor(SwampColor).setBiomeName("River Swamp9").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river11 = (new BiomeGenRiverTFC(92)).setColor(SwampColor).setBiomeName("River Swamp10").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.0F);
+-    
+-    public static final BiomeGenBase river12 = (new BiomeGenRiverTFC(93)).setColor(TaigaColor).setBiomeName("River Taiga1").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.05F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase river13 = (new BiomeGenRiverTFC(94)).setColor(TaigaColor).setBiomeName("River Taiga2").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.05F, 0.9F).setEnableSnow();
+-    public static final BiomeGenBase river14 = (new BiomeGenRiverTFC(95)).setColor(TaigaColor).setBiomeName("River Taiga3").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.05F, 0.9F).setEnableSnow();
+-    public static final BiomeGenBase river15 = (new BiomeGenRiverTFC(96)).setColor(TaigaColor).setBiomeName("River Taiga4").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.05F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase river16 = (new BiomeGenRiverTFC(97)).setColor(TaigaColor).setBiomeName("River Taiga5").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.07F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase river17 = (new BiomeGenRiverTFC(98)).setColor(TaigaColor).setBiomeName("River Taiga6").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.03F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase river18 = (new BiomeGenRiverTFC(99)).setColor(TaigaColor).setBiomeName("River Taiga7").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.08F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase river19 = (new BiomeGenRiverTFC(100)).setColor(TaigaColor).setBiomeName("River Taiga8").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.01F, 0.8F).setEnableSnow();
+-    public static final BiomeGenBase river20 = (new BiomeGenRiverTFC(101)).setColor(TaigaColor).setBiomeName("River Taiga9").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.05F, 0.95F).setEnableSnow();
+-    public static final BiomeGenBase river21 = (new BiomeGenRiverTFC(102)).setColor(TaigaColor).setBiomeName("River Taiga10").SetWaterMult(TaigaWater).setMinMaxHeight(-0.4F, 0.0F).setTemperatureRainfall(0.05F, 0.9F).setEnableSnow();
+-    
+-    public static final BiomeGenBase river22 = (new BiomeGenRiverTFC(103)).setColor(ForestColor).setBiomeName("River forest1").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river23 = (new BiomeGenRiverTFC(104)).setColor(ForestColor).setBiomeName("River forest2").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river24 = (new BiomeGenRiverTFC(105)).setColor(ForestColor).setBiomeName("River forest3").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river25 = (new BiomeGenRiverTFC(106)).setColor(ForestColor).setBiomeName("River forest4").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river26 = (new BiomeGenRiverTFC(107)).setColor(ForestColor).setBiomeName("River forest5").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river27 = (new BiomeGenRiverTFC(108)).setColor(ForestColor).setBiomeName("River forest6").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river28 = (new BiomeGenRiverTFC(109)).setColor(ForestColor).setBiomeName("River forest7").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river29 = (new BiomeGenRiverTFC(110)).setColor(ForestColor).setBiomeName("River forest8").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river30 = (new BiomeGenRiverTFC(111)).setColor(ForestColor).setBiomeName("River forest9").SetWaterMult(ForestWater).setMinMaxHeight(-0.4F, 0.0F);
+-    //<-----------------------------------------------------------------------------------Hills2---------------------------------------------------------------------------------->
+-    public static final BiomeGenBase river31 = (new BiomeGenRiverTFC(113)).setColor(PlainsColor).setBiomeName("River plains1").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river32 = (new BiomeGenRiverTFC(114)).setColor(PlainsColor).setBiomeName("River plains2").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river33 = (new BiomeGenRiverTFC(115)).setColor(PlainsColor).setBiomeName("River plains3").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river34 = (new BiomeGenRiverTFC(116)).setColor(PlainsColor).setBiomeName("River plains4").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river35 = (new BiomeGenRiverTFC(117)).setColor(PlainsColor).setBiomeName("River plains5").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river36 = (new BiomeGenRiverTFC(118)).setColor(PlainsColor).setBiomeName("River plains6").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river37 = (new BiomeGenRiverTFC(119)).setColor(PlainsColor).setBiomeName("River plains7").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river38 = (new BiomeGenRiverTFC(120)).setColor(PlainsColor).setBiomeName("River plains8").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river39 = (new BiomeGenRiverTFC(121)).setColor(PlainsColor).setBiomeName("River plains9").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river40 = (new BiomeGenRiverTFC(122)).setColor(PlainsColor).setBiomeName("River plains10").SetWaterMult(PlainsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    
+-    public static final BiomeGenBase river41 = (new BiomeGenRiverTFC(123)).setColor(HillsColor).setBiomeName("River hills1").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river42 = (new BiomeGenRiverTFC(124)).setColor(HillsColor).setBiomeName("River hills2").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river43 = (new BiomeGenRiverTFC(125)).setColor(HillsColor).setBiomeName("River hills3").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river44 = (new BiomeGenRiverTFC(126)).setColor(HillsColor).setBiomeName("River hills4").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river45 = (new BiomeGenRiverTFC(127)).setColor(HillsColor).setBiomeName("River hills5").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river46 = (new BiomeGenRiverTFC(128)).setColor(HillsColor).setBiomeName("River hills6").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river47 = (new BiomeGenRiverTFC(129)).setColor(HillsColor).setBiomeName("River hills7").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river48 = (new BiomeGenRiverTFC(130)).setColor(HillsColor).setBiomeName("River hills8").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river49 = (new BiomeGenRiverTFC(131)).setColor(HillsColor).setBiomeName("River hills9").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river50 = (new BiomeGenRiverTFC(132)).setColor(HillsColor).setBiomeName("River hills10").SetWaterMult(HillsWater).setMinMaxHeight(-0.4F, 0.0F);
+-    
+-    public static final BiomeGenBase river51 = (new BiomeGenRiverTFC(133)).setColor(DesertColor).setBiomeName("River desert1").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river52 = (new BiomeGenRiverTFC(134)).setColor(DesertColor).setBiomeName("River desert2").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river53 = (new BiomeGenRiverTFC(135)).setColor(DesertColor).setBiomeName("River desert3").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river54 = (new BiomeGenRiverTFC(136)).setColor(DesertColor).setBiomeName("River desert4").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river55 = (new BiomeGenRiverTFC(137)).setColor(DesertColor).setBiomeName("River desert5").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river56 = (new BiomeGenRiverTFC(138)).setColor(DesertColor).setBiomeName("River desert6").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river57 = (new BiomeGenRiverTFC(139)).setColor(DesertColor).setBiomeName("River desert7").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river58 = (new BiomeGenRiverTFC(140)).setColor(DesertColor).setBiomeName("River desert8").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    public static final BiomeGenBase river59 = (new BiomeGenRiverTFC(141)).setColor(DesertColor).setBiomeName("River desert9").SetWaterMult(DesertWater).setMinMaxHeight(-0.4F, 0.0F);
+-    
++    public static final BiomeGenBase ocean = (new BiomeGenOcean(0)).setColor(112).setBiomeName("Ocean").setMinMaxHeight(-1.0F, 0.4F);
++    public static final BiomeGenBase plains = (new BiomeGenPlains(1)).setColor(9286496).setBiomeName("Plains").setTemperatureRainfall(0.8F, 0.4F);
++    public static final BiomeGenBase desert = (new BiomeGenDesert(2)).setColor(16421912).setBiomeName("Desert").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
++    public static final BiomeGenBase extremeHills = (new BiomeGenHills(3)).setColor(6316128).setBiomeName("Extreme Hills").setMinMaxHeight(0.2F, 1.3F).setTemperatureRainfall(0.2F, 0.3F);
++    public static final BiomeGenBase forest = (new BiomeGenForest(4)).setColor(353825).setBiomeName("Forest").func_4124_a(5159473).setTemperatureRainfall(0.7F, 0.8F);
++    public static final BiomeGenBase taiga = (new BiomeGenTaiga(5)).setColor(747097).setBiomeName("Taiga").func_4124_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.1F, 0.4F);
++    public static final BiomeGenBase swampland = (new BiomeGenSwamp(6)).setColor(522674).setBiomeName("Swampland").func_4124_a(9154376).setMinMaxHeight(-0.2F, 0.1F).setTemperatureRainfall(0.8F, 0.9F);
++    public static final BiomeGenBase river = (new BiomeGenRiver(7)).setColor(255).setBiomeName("River").setMinMaxHeight(-0.5F, 0.0F);
++    public static final BiomeGenBase hell = (new BiomeGenHell(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
++
++    /** Is the biome used for sky world. */
++    public static final BiomeGenBase sky = (new BiomeGenEnd(9)).setColor(8421631).setBiomeName("Sky").setDisableRain();
++    public static final BiomeGenBase frozenOcean = (new BiomeGenOcean(10)).setColor(9474208).setBiomeName("FrozenOcean").setEnableSnow().setMinMaxHeight(-1.0F, 0.5F).setTemperatureRainfall(0.0F, 0.5F);
++    public static final BiomeGenBase frozenRiver = (new BiomeGenRiver(11)).setColor(10526975).setBiomeName("FrozenRiver").setEnableSnow().setMinMaxHeight(-0.5F, 0.0F).setTemperatureRainfall(0.0F, 0.5F);
++    public static final BiomeGenBase icePlains = (new BiomeGenSnow(12)).setColor(16777215).setBiomeName("Ice Plains").setEnableSnow().setTemperatureRainfall(0.0F, 0.5F);
++    public static final BiomeGenBase iceMountains = (new BiomeGenSnow(13)).setColor(10526880).setBiomeName("Ice Mountains").setEnableSnow().setMinMaxHeight(0.2F, 1.2F).setTemperatureRainfall(0.0F, 0.5F);
++    public static final BiomeGenBase mushroomIsland = (new BiomeGenMushroomIsland(14)).setColor(16711935).setBiomeName("MushroomIsland").setTemperatureRainfall(0.9F, 1.0F).setMinMaxHeight(0.2F, 1.0F);
++    public static final BiomeGenBase mushroomIslandShore = (new BiomeGenMushroomIsland(15)).setColor(10486015).setBiomeName("MushroomIslandShore").setTemperatureRainfall(0.9F, 1.0F).setMinMaxHeight(-1.0F, 0.1F);
++
++    /** Beach biome. */
++    public static final BiomeGenBase beach = (new BiomeGenBeach(16)).setColor(16440917).setBiomeName("Beach").setTemperatureRainfall(0.8F, 0.4F).setMinMaxHeight(0.0F, 0.1F);
++
++    /** Desert Hills biome. */
++    public static final BiomeGenBase desertHills = (new BiomeGenDesert(17)).setColor(13786898).setBiomeName("DesertHills").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.2F, 0.7F);
++
++    /** Forest Hills biome. */
++    public static final BiomeGenBase forestHills = (new BiomeGenForest(18)).setColor(2250012).setBiomeName("ForestHills").func_4124_a(5159473).setTemperatureRainfall(0.7F, 0.8F).setMinMaxHeight(0.2F, 0.6F);
++
++    /** Taiga Hills biome. */
++    public static final BiomeGenBase taigaHills = (new BiomeGenTaiga(19)).setColor(1456435).setBiomeName("TaigaHills").setEnableSnow().func_4124_a(5159473).setTemperatureRainfall(0.05F, 0.8F).setMinMaxHeight(0.2F, 0.7F);
++
++    /** Extreme Hills Edge biome. */
++    public static final BiomeGenBase extremeHillsEdge = (new BiomeGenHills(20)).setColor(7501978).setBiomeName("Extreme Hills Edge").setMinMaxHeight(0.2F, 0.8F).setTemperatureRainfall(0.2F, 0.3F);
++
++    /** Jungle biome identifier */
++    public static final BiomeGenBase jungle = (new BiomeGenJungle(21)).setColor(5470985).setBiomeName("Jungle").func_4124_a(5470985).setTemperatureRainfall(1.2F, 0.9F).setMinMaxHeight(0.2F, 0.4F);
++    public static final BiomeGenBase jungleHills = (new BiomeGenJungle(22)).setColor(2900485).setBiomeName("JungleHills").func_4124_a(5470985).setTemperatureRainfall(1.2F, 0.9F).setMinMaxHeight(1.8F, 0.2F);
+     public String biomeName;
+     public int color;
+ 
+@@ -239,48 +101,6 @@
+     protected WorldGenBigTree worldGenBigTree;
+     protected WorldGenForest worldGenForest;
+     protected WorldGenSwamp worldGenSwamp;
+-    
+-    protected WorldGenCustomTallTrees worldGenAshTallTrees;
+-    protected WorldGenCustomTallTrees worldGenAspenTallTrees;
+-    protected WorldGenCustomTallTrees worldGenBirchTallTrees;
+-    protected WorldGenCustomTallTrees worldGenChestnutTallTrees;
+-    protected WorldGenCustomTallTrees worldGenDouglasFirTallTrees;
+-    protected WorldGenCustomTallTrees worldGenHickoryTallTrees;
+-    protected WorldGenCustomMapleTallTrees worldGenMapleTallTrees;
+-    protected WorldGenCustomTallTrees worldGenOakTallTrees;
+-    protected WorldGenCustomTallTrees worldGenPineTallTrees;
+-    protected WorldGenCustomRedwoodTrees worldGenRedwoodTallTrees;
+-    protected WorldGenCustomTallTrees worldGenSpruceTallTrees;
+-    protected WorldGenCustomTallTrees worldGenSycamoreTallTrees;
+-    protected WorldGenCustomCedarTrees worldGenWhiteCedarTallTrees;
+-    protected WorldGenCustomTallTrees worldGenWhiteElmTallTrees;
+-
+-    protected WorldGenCustomShortTrees worldGenAshShortTrees;
+-    protected WorldGenCustomShortTrees worldGenAspenShortTrees;
+-    protected WorldGenCustomShortTrees worldGenBirchShortTrees;
+-    protected WorldGenCustomShortTrees worldGenChestnutShortTrees;
+-    protected WorldGenCustomShortTrees worldGenDouglasFirShortTrees;
+-    protected WorldGenCustomShortTrees worldGenHickoryShortTrees;
+-    protected WorldGenCustomMapleShortTrees worldGenMapleShortTrees;
+-    protected WorldGenCustomShortTrees worldGenOakShortTrees;
+-    protected WorldGenCustomShortTrees worldGenPineShortTrees;
+-    protected WorldGenCustomRedwoodTrees worldGenRedwoodShortTrees;
+-    protected WorldGenCustomShortTrees worldGenSpruceShortTrees;
+-    protected WorldGenCustomShortTrees worldGenSycamoreShortTrees;
+-    protected WorldGenCustomShortTrees worldGenWhiteElmShortTrees;
+-    protected WorldGenCustomWillowTrees worldGenWillowShortTrees;
+-    
+-    public int SurfaceType;
+-    public int SurfaceMeta;
+-    public int Layer1;
+-    public int Layer1Type;
+-    public int Layer1Meta;
+-    public int Layer2;
+-    public int Layer2Type;
+-    public int Layer2Meta;
+-    public int Layer3;
+-    public int Layer3Type;
+-    public int Layer3Meta;
+ 
+     protected BiomeGenBase(int par1)
+     {
+@@ -314,56 +134,14 @@
+         this.spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
+         this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
+         this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquid.class, 10, 4, 4));
+-        
+-        SurfaceType = mod_TFC_Core.terraStoneIgIn.blockID;
+-    	SurfaceMeta = 0;
+-    	Layer1 = 56;
+-    	Layer1Type = mod_TFC_Core.terraStoneIgIn.blockID;
+-    	Layer1Meta = 0;
+-    	Layer2 = 40;
+-    	Layer2Type = mod_TFC_Core.terraStoneIgIn.blockID;
+-    	Layer2Meta = 0;
+-    	Layer3 = 20;
+-    	Layer3Type = mod_TFC_Core.terraStoneIgIn.blockID;
+-    	Layer3Meta = 0;
+-    	
+-    	worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);
+-        worldGenAspenTallTrees = new WorldGenCustomTallTrees(false,1);
+-        worldGenBirchTallTrees = new WorldGenCustomTallTrees(false,2);
+-        worldGenChestnutTallTrees = new WorldGenCustomTallTrees(false,3);
+-        worldGenDouglasFirTallTrees = new WorldGenCustomTallTrees(false,4);
+-        worldGenHickoryTallTrees = new WorldGenCustomTallTrees(false,5);
+-        worldGenMapleTallTrees = new WorldGenCustomMapleTallTrees(false,6);
+-        worldGenOakTallTrees = new WorldGenCustomTallTrees(false,0);
+-        worldGenPineTallTrees = new WorldGenCustomTallTrees(false,8);
+-        worldGenRedwoodTallTrees = new WorldGenCustomRedwoodTrees(false,9);
+-        worldGenSpruceTallTrees = new WorldGenCustomTallTrees(false,10);
+-        worldGenSycamoreTallTrees = new WorldGenCustomTallTrees(false,11);
+-        worldGenWhiteCedarTallTrees = new WorldGenCustomCedarTrees(false,12);
+-        worldGenWhiteElmTallTrees = new WorldGenCustomTallTrees(false,13);
+-
+-        worldGenAshShortTrees = new WorldGenCustomShortTrees(false,7);
+-        worldGenAspenShortTrees = new WorldGenCustomShortTrees(false,1);
+-        worldGenBirchShortTrees = new WorldGenCustomShortTrees(false,2);
+-        worldGenChestnutShortTrees = new WorldGenCustomShortTrees(false,3);
+-        worldGenDouglasFirShortTrees = new WorldGenCustomShortTrees(false,4);
+-        worldGenHickoryShortTrees = new WorldGenCustomShortTrees(false,5);
+-        worldGenMapleShortTrees = new WorldGenCustomMapleShortTrees(false,6);
+-        worldGenOakShortTrees = new WorldGenCustomShortTrees(false,0);
+-        worldGenPineShortTrees = new WorldGenCustomShortTrees(false,8);
+-        worldGenRedwoodShortTrees = new WorldGenCustomRedwoodTrees(false,9);
+-        worldGenSpruceShortTrees = new WorldGenCustomShortTrees(false,10);
+-        worldGenSycamoreShortTrees = new WorldGenCustomShortTrees(false,11);
+-        worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
+-        worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
+     }
+ 
+     /**
+      * Allocate a new BiomeDecorator for this BiomeGenBase
+      */
+-    protected BiomeDecoratorTFC createBiomeDecorator()
++    protected BiomeDecorator createBiomeDecorator()
+     {
+-        return new BiomeDecoratorTFC(this);
++        return new BiomeDecorator(this);
+     }
+ 
+     /**
+@@ -558,310 +336,4 @@
+         double var3 = (double)MathHelper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
+         return ColorizerFoliage.getFoliageColor(var1, var3);
+     }
+-    /**
+-     * All TerraFirmaCraft Methods should be added below this point.
+-     * */
+-    protected BiomeGenBase SetWaterMult(int par1)
+-    {
+-        this.waterColorMultiplier = par1;
+-        return this;
+-    }
+-    
+-    public WorldGenerator getTreeGen(int i, Boolean j)
+-    {
+-    	Random R = new Random();
+-    	if(i == 15)
+-    		i = 1;
+-    	switch(i)
+-    	{
+-    	case 7:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) : worldGenAshTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenAshShortTrees;
+-            }
+-		}
+-    	case 1:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,1) :worldGenAspenTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenAspenShortTrees;
+-            }
+-		}
+-    	case 2:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,2) :worldGenBirchTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenBirchShortTrees;
+-            }
+-		}
+-    	case 3:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,3) :worldGenChestnutTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenChestnutShortTrees;
+-            }
+-		}
+-    	case 4:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,4) :worldGenDouglasFirTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenDouglasFirShortTrees;
+-            }
+-		}
+-    	case 5:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,5) :worldGenHickoryTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenHickoryShortTrees;
+-            }
+-		}
+-    	case 6:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,6) :worldGenMapleTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenMapleShortTrees;
+-            }
+-		}
+-    	case 0:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,0) :worldGenOakTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenOakShortTrees;
+-            }
+-		}
+-    	case 8:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,8) :worldGenPineTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenPineShortTrees;
+-            }
+-		}
+-    	case 9:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,9) :worldGenRedwoodTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenRedwoodShortTrees;
+-            }
+-		}
+-    	case 10:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,10) :worldGenSpruceTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenSpruceShortTrees;
+-            }
+-		}
+-    	case 11:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,11) :worldGenSycamoreTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenSycamoreShortTrees;
+-            }
+-		}
+-    	case 12:
+-		{
+-			return worldGenWhiteCedarTallTrees;
+-		}
+-    	case 13:
+-		{
+-			if(j)
+-            {
+-				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,13) :worldGenWhiteElmTallTrees;
+-            }
+-			else
+-        	{
+-        		return worldGenWhiteElmShortTrees;
+-            }
+-		}
+-    	case 14:
+-		{
+-			return worldGenWillowShortTrees;
+-		}
+-    	default:
+-    		{
+-    			if(j)
+-                {
+-    				return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) :worldGenAshTallTrees;
+-                }
+-    			else
+-            	{
+-            		return worldGenAshShortTrees;
+-                }
+-    		}
+-    	}
+-    }
+-    
+-    public int GrassID = mod_TFC_Core.terraGrass.blockID;
+-    public int DirtID = mod_TFC_Core.terraDirt.blockID;
+-    public int ClayID = mod_TFC_Core.terraClay.blockID;
+-    public int ClayGrassID = mod_TFC_Core.terraClayGrass.blockID;
+-    public int TopSoilMetaID = 14;
+-    
+-    protected BiomeGenBase setTopSoil(int grassID, int dirtID, int clayID, int clayGrassID, int meta)
+-    {
+-        this.GrassID = grassID;
+-        this.DirtID = dirtID;
+-        this.ClayID = clayID;
+-        this.ClayGrassID = clayGrassID;
+-        return this;
+-    }
+-
+-	public WorldGenerator getRandomWorldGenForTrees(Random randomGenerator,World currentWorld) 
+-	{
+-		return (WorldGenerator)(randomGenerator.nextInt(10) == 0 ? this.worldGenBigTree : this.worldGenTrees);
+-	}
+-	
+-	public void SetupStone(World world)
+-	{
+-		Random R = new Random(world.getSeed()+this.biomeID);
+-		int[] surface = getRock(R.nextInt(25));
+-		int[] layer1 = getRock(R.nextInt(25));
+-		int[] layer2 = getRock(R.nextInt(25));
+-		int[] layer3 = getRock(R.nextInt(25));
+-		
+-		SurfaceType = 	surface[0];
+-        SurfaceMeta = 	surface[1];
+-        TopSoilMetaID = surface[1];
+-        Layer1Type = 	layer1[0];
+-        Layer1Meta = 	layer1[1];
+-        Layer2Type = 	layer2[0];
+-        Layer2Meta = 	layer2[1];
+-        Layer3Type = 	layer3[0];
+-        Layer3Meta = 	layer3[1];
+-        
+-        Layer3 = 20 + R.nextInt(7);
+-        Layer2 = 30 + R.nextInt(7);
+-        Layer1 = 40 + R.nextInt(12);
+-        
+-        if(TopSoilMetaID < 16)
+-        {
+-        	this.GrassID = mod_TFC_Core.terraGrass.blockID;
+-        	this.DirtID = mod_TFC_Core.terraDirt.blockID;
+-        	this.ClayID = mod_TFC_Core.terraClay.blockID;
+-        	this.ClayGrassID = mod_TFC_Core.terraClayGrass.blockID;
+-        }
+-        else
+-        {
+-        	this.GrassID = mod_TFC_Core.terraGrass2.blockID;
+-        	this.DirtID = mod_TFC_Core.terraDirt2.blockID;
+-        	this.ClayID = mod_TFC_Core.terraClay2.blockID;
+-        	this.ClayGrassID = mod_TFC_Core.terraClayGrass2.blockID;
+-        }
+-        if(this.biomeName.toLowerCase().contains("desert"))
+-        {
+-        	this.GrassID = Block.sand.blockID;
+-        	this.DirtID = Block.sand.blockID;
+-        }
+-	}
+-	
+-	private int[] getRock(int m)
+-	{
+-		int[][] d = {
+-				{mod_TFC_Core.terraStoneIgIn.blockID,0},
+-				{mod_TFC_Core.terraStoneIgIn.blockID,0},
+-				{mod_TFC_Core.terraStoneIgIn.blockID,0},
+-				{mod_TFC_Core.terraStoneIgIn.blockID,1},
+-				{mod_TFC_Core.terraStoneIgIn.blockID,2},
+-				{mod_TFC_Core.terraStoneSed.blockID,3},
+-				{mod_TFC_Core.terraStoneSed.blockID,4},
+-				{mod_TFC_Core.terraStoneSed.blockID,5},
+-				{mod_TFC_Core.terraStoneSed.blockID,6},
+-				{mod_TFC_Core.terraStoneSed.blockID,7},
+-				{mod_TFC_Core.terraStoneSed.blockID,8},
+-				{mod_TFC_Core.terraStoneSed.blockID,9},
+-				{mod_TFC_Core.terraStoneSed.blockID,10},
+-				{mod_TFC_Core.terraStoneSed.blockID,11},
+-				{mod_TFC_Core.terraStoneSed.blockID,12},
+-				{mod_TFC_Core.terraStoneIgEx.blockID,13},
+-				{mod_TFC_Core.terraStoneIgEx.blockID,14},
+-				{mod_TFC_Core.terraStoneIgEx.blockID,15},
+-				{mod_TFC_Core.terraStoneIgEx.blockID,16},
+-				{mod_TFC_Core.terraStoneMM.blockID,17},
+-				{mod_TFC_Core.terraStoneMM.blockID,18},
+-				{mod_TFC_Core.terraStoneMM.blockID,19},
+-				{mod_TFC_Core.terraStoneMM.blockID,20},
+-				{mod_TFC_Core.terraStoneMM.blockID,21},
+-				{mod_TFC_Core.terraStoneMM.blockID,22}};
+-		
+-		return d[m];
+-	}
+-	
+-	public BiomeGenBase GetBiomeByName(String name)
+-	{
+-		for (int i = 0; i < this.biomeList.length; i++)
+-		{
+-			if(biomeList[i] != null)
+-			{
+-				String n = biomeList[i].biomeName.toLowerCase();
+-				if(n.equalsIgnoreCase(name))
+-					return biomeList[i];
+-			}
+-		}
+-		return null;
+-	}
+-	
+-	public void copyBiomeRocks(String name)
+-	{
+-		BiomeGenBase base = GetBiomeByName(name);
+-		SurfaceType = 	base.SurfaceType;
+-        SurfaceMeta = 	base.SurfaceMeta;
+-        TopSoilMetaID = base.SurfaceMeta;
+-        Layer1Type = 	base.Layer1Type;
+-        Layer1Meta = 	base.Layer1Meta;
+-        Layer2Type = 	base.Layer2Type;
+-        Layer2Meta = 	base.Layer2Meta;
+-        Layer3Type = 	base.Layer3Type;
+-        Layer3Meta = 	base.Layer3Meta;
+-        Layer3 = base.Layer3;
+-        Layer2 = base.Layer2;
+-        Layer1 = base.Layer1;
+-	}
+ }

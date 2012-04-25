@@ -1,0 +1,11 @@
+--- ../src/minecraft/net/minecraft/src/ChunkProviderFlat.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_base/minecraft/net/minecraft/src/ChunkProviderFlat.java	0000-00-00 00:00:00.000000000 -0000
+@@ -8,7 +8,7 @@
+     private World worldObj;
+     private Random random;
+     private final boolean useStructures;
+-    private MapGenVillageTFC villageGen = new MapGenVillageTFC(1);
++    private MapGenVillage villageGen = new MapGenVillage(1);
+ 
+     public ChunkProviderFlat(World par1World, long par2, boolean par4)
+     {
