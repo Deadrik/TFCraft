@@ -1,0 +1,59 @@
+--- ../src_base/minecraft/net/minecraft/src/GuiAchievements.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/GuiAchievements.java	0000-00-00 00:00:00.000000000 -0000
+@@ -45,7 +45,7 @@
+     /** Whether the Mouse Button is down or not */
+     private int isMouseButtonDown = 0;
+     private StatFileWriter statFileWriter;
+-    
++
+     private int currentPage = -1;
+     private GuiSmallButton button;
+     private LinkedList<Achievement> minecraftAchievements = new LinkedList<Achievement>();
+@@ -57,8 +57,8 @@
+         short var3 = 141;
+         this.field_27116_m = this.guiMapX = this.field_27112_q = (double)(AchievementList.openInventory.displayColumn * 24 - var2 / 2 - 12);
+         this.field_27115_n = this.guiMapY = this.field_27111_r = (double)(AchievementList.openInventory.displayRow * 24 - var3 / 2);
+-
+         minecraftAchievements.clear();
++
+         for (Object achievement : AchievementList.achievementList)
+         {
+             if (!MinecraftForge.isAchievementInPages((Achievement)achievement))
+@@ -89,14 +89,16 @@
+             this.mc.displayGuiScreen((GuiScreen)null);
+             this.mc.setIngameFocus();
+         }
+-        
+-        if (par1GuiButton.id == 2) 
++
++        if (par1GuiButton.id == 2)
+         {
+             currentPage++;
++
+             if (currentPage >= MinecraftForge.getAchievementPages().size())
+             {
+                 currentPage = -1;
+             }
++
+             button.displayString = getAchievementPageTitle(currentPage);
+         }
+ 
+@@ -318,8 +320,8 @@
+         GL11.glDisable(GL11.GL_TEXTURE_2D);
+         int var27;
+         int var30;
+-
+         List<Achievement> achievementList = (currentPage == -1 ? minecraftAchievements : MinecraftForge.getAchievementPage(currentPage).getAchievements());
++
+         for (var22 = 0; var22 < achievementList.size(); ++var22)
+         {
+             Achievement var33 = achievementList.get(var22);
+@@ -484,7 +486,7 @@
+     {
+         return true;
+     }
+-    
++
+     /**
+      * FORGE: Gets the name for an achievement page by its index
+      */

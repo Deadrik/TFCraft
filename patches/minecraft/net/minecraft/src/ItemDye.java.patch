@@ -1,0 +1,40 @@
+--- ../src_base/minecraft/net/minecraft/src/ItemDye.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/ItemDye.java	0000-00-00 00:00:00.000000000 -0000
+@@ -47,13 +47,14 @@
+             if (par1ItemStack.getItemDamage() == 15)
+             {
+                 int var8 = par3World.getBlockId(par4, par5, par6);
+-                
++
+                 if (ForgeHooks.onUseBonemeal(par3World, var8, par4, par5, par6))
+                 {
+                     if (!par3World.isRemote)
+                     {
+                         par1ItemStack.stackSize--;
+                     }
++
+                     return true;
+                 }
+ 
+@@ -164,17 +165,17 @@
+             }
+         }
+     }
+-    
++
+     /**
+-    * Called when a new CreativeContainer is opened, populate the list 
++    * Called when a new CreativeContainer is opened, populate the list
+     * with all of the items for this item you want a player in creative mode
+     * to have access to.
+-    * 
++    *
+     * @param itemList The list of items currently in the creative inventory
+     */
+     @Override
+     public void addCreativeItems(ArrayList itemList)
+-    {       
++    {
+         for (int x = 0; x < 16; x++)
+         {
+             itemList.add(new ItemStack(this, 1, x));

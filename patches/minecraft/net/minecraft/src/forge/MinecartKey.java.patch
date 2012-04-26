@@ -1,0 +1,23 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/MinecartKey.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/MinecartKey.java	0000-00-00 00:00:00.000000000 -0000
+@@ -8,10 +8,10 @@
+  */
+ public class MinecartKey
+ {
+-    public final Class<? extends EntityMinecart> minecart;
++    public final Class <? extends EntityMinecart > minecart;
+     public final int type;
+ 
+-    public MinecartKey(Class<? extends EntityMinecart> cls, int typtID)
++    public MinecartKey(Class <? extends EntityMinecart > cls, int typtID)
+     {
+         minecart = cls;
+         type = typtID;
+@@ -31,6 +31,7 @@
+         }
+ 
+         final MinecartKey other = (MinecartKey)obj;
++
+         if (this.minecart != other.minecart && (this.minecart == null || !this.minecart.equals(other.minecart)))
+         {
+             return false;

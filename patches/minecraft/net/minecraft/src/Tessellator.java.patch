@@ -1,0 +1,78 @@
+--- ../src_base/minecraft/net/minecraft/src/Tessellator.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/Tessellator.java	0000-00-00 00:00:00.000000000 -0000
+@@ -128,17 +128,18 @@
+     /** Number of vertex buffer objects allocated for use. */
+     private static int vboCount = 10;
+ 
+-    static 
++    static
+     {
+         instance.defaultTexture = true;
+         useVBO = tryVBO && GLContext.getCapabilities().GL_ARB_vertex_buffer_object;
++
+         if (useVBO)
+         {
+             vertexBuffers = GLAllocation.createDirectIntBuffer(vboCount);
+             ARBVertexBufferObject.glGenBuffersARB(vertexBuffers);
+         }
+     }
+-    
++
+     public Tessellator()
+     {
+         this.rawBuffer = null;
+@@ -156,11 +157,12 @@
+         else
+         {
+             this.isDrawing = false;
+-
+             int offs = 0;
++
+             while (offs < vertexCount)
+             {
+                 int vtc = 0;
++
+                 if (drawMode == 7 && convertQuadsToTriangles)
+                 {
+                     Math.min(vertexCount - offs, trivertsInBuffer);
+@@ -169,6 +171,7 @@
+                 {
+                     vtc = Math.min(vertexCount - offs, nativeBufferSize >> 5);
+                 }
++
+                 this.intBuffer.clear();
+                 intBuffer.put(rawBuffer, offs * 8, vtc * 8);
+                 this.byteBuffer.position(0);
+@@ -290,13 +293,13 @@
+                     GL11.glDisableClientState(GL11.GL_NORMAL_ARRAY);
+                 }
+             }
+-            
++
+             if (rawBufferSize > 0x20000 && rawBufferIndex < (rawBufferSize << 3))
+             {
+                 rawBufferSize = 0;
+                 rawBuffer = null;
+             }
+-            
++
+             int var1 = this.rawBufferIndex * 4;
+             this.reset();
+             return var1;
+@@ -459,7 +462,7 @@
+      */
+     public void addVertex(double par1, double par3, double par5)
+     {
+-        if (rawBufferIndex >= rawBufferSize - 32) 
++        if (rawBufferIndex >= rawBufferSize - 32)
+         {
+             if (rawBufferSize == 0)
+             {
+@@ -472,6 +475,7 @@
+                 rawBuffer = Arrays.copyOf(rawBuffer, rawBufferSize);
+             }
+         }
++
+         ++this.addedVertices;
+ 
+         if (this.drawMode == 7 && convertQuadsToTriangles && this.addedVertices % 4 == 0)

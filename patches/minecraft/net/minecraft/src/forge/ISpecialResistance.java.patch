@@ -1,0 +1,10 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/ISpecialResistance.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/ISpecialResistance.java	0000-00-00 00:00:00.000000000 -0000
+@@ -17,7 +17,6 @@
+  */
+ public interface ISpecialResistance
+ {
+-
+     /**
+      * Return the explosion resistance of the block located at position X, Y,
+      * Z, from an exploder explosing on srcX, srcY, srcZ.

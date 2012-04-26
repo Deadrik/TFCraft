@@ -1,0 +1,20 @@
+--- ../src_base/minecraft_server/net/minecraft/src/BlockNetherStalk.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/BlockNetherStalk.java	0000-00-00 00:00:00.000000000 -0000
+@@ -72,14 +72,17 @@
+     {
+         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+         int n = 1;
++
+         if (metadata >= 3)
+         {
+             n = 2 + world.rand.nextInt(3) + (fortune > 0 ? world.rand.nextInt(fortune + 1) : 0);
+         }
++
+         for (int m = 0; m < n; m++)
+         {
+             ret.add(new ItemStack(Item.netherStalkSeeds));
+         }
++
+         return ret;
+     }
+ 

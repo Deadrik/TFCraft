@@ -1,0 +1,32 @@
+--- ../src_base/minecraft_server/net/minecraft/src/BlockLever.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/BlockLever.java	0000-00-00 00:00:00.000000000 -0000
+@@ -47,10 +47,10 @@
+     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+     {
+         return (par5 == 1 && par1World.isBlockSolidOnSide(par2, par3 - 1, par4, 1)) ||
+-               (par5 == 2 && par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2)) ||
+-               (par5 == 3 && par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3)) || 
+-               (par5 == 4 && par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4)) ||
+-               (par5 == 5 && par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5));
++                (par5 == 2 && par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2)) ||
++                (par5 == 3 && par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3)) ||
++                (par5 == 4 && par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4)) ||
++                (par5 == 5 && par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5));
+     }
+ 
+     /**
+@@ -59,10 +59,10 @@
+     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+     {
+         return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5) ||
+-               par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4) ||
+-               par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3) ||
+-               par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2) ||
+-               par1World.isBlockSolidOnSide(par2, par3 - 1, par4, 1);
++                par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4) ||
++                par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3) ||
++                par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2) ||
++                par1World.isBlockSolidOnSide(par2, par3 - 1, par4, 1);
+     }
+ 
+     /**

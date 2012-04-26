@@ -1,0 +1,59 @@
+--- ../src_base/minecraft_server/net/minecraft/src/BlockButton.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/BlockButton.java	0000-00-00 00:00:00.000000000 -0000
+@@ -50,9 +50,9 @@
+     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+     {
+         return (par5 == 2 && par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2)) ||
+-               (par5 == 3 && par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3)) ||
+-               (par5 == 4 && par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4)) ||
+-               (par5 == 5 && par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5));
++                (par5 == 3 && par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3)) ||
++                (par5 == 4 && par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4)) ||
++                (par5 == 5 && par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5));
+     }
+ 
+     /**
+@@ -61,9 +61,9 @@
+     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+     {
+         return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5) ||
+-               par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4) ||
+-               par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3) ||
+-               par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2);
++                par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4) ||
++                par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3) ||
++                par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2);
+     }
+ 
+     /**
+@@ -105,10 +105,26 @@
+      */
+     private int getOrientation(World par1World, int par2, int par3, int par4)
+     {
+-        if (par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5)) return 1;
+-        if (par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4)) return 2;
+-        if (par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3)) return 3;
+-        if (par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2)) return 4;
++        if (par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5))
++        {
++            return 1;
++        }
++
++        if (par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4))
++        {
++            return 2;
++        }
++
++        if (par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3))
++        {
++            return 3;
++        }
++
++        if (par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2))
++        {
++            return 4;
++        }
++
+         return 1;
+     }
+ 

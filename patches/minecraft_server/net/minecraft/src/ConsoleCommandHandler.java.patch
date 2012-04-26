@@ -1,0 +1,26 @@
+--- ../src_base/minecraft_server/net/minecraft/src/ConsoleCommandHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/ConsoleCommandHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -24,6 +24,7 @@
+     /**
+      * handles the command that was issued by an Op/Console
+      */
++
+     public synchronized void handleCommand(ServerCommand par1ServerCommand)
+     {
+         String var2 = par1ServerCommand.command;
+@@ -361,6 +362,7 @@
+                         else if (var4.equalsIgnoreCase("say") && var5.length() > 0)
+                         {
+                             var5 = ForgeHooks.onServerCommandSay(var6, var6.getUsername(), var5);
++
+                             if (var5 != null)
+                             {
+                                 minecraftLogger.info("[" + var7 + "] " + var5);
+@@ -408,7 +410,6 @@
+                         }
+                         else if (FMLServerHandler.instance().handleServerCommand(var2, var6.getUsername(), var6))
+                         {
+-                            
+                         }
+                         else if (ForgeHooks.onServerCommand(var6, var6.getUsername(), var2))
+                         {

@@ -1,0 +1,60 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/EnumHelperClient.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/EnumHelperClient.java	0000-00-00 00:00:00.000000000 -0000
+@@ -7,7 +7,6 @@
+ 
+ public class EnumHelperClient extends EnumHelper
+ {
+-
+     private static Class[][] ctrs =
+     {
+         {JsonNodeType.class},
+@@ -39,7 +38,7 @@
+ 
+         return addEnum(decompiled[1], EnumOptions.class, name,
+                 new Class[] {String.class, boolean.class, boolean.class},
+-                new Object[]{langName,     isSlider,      isToggle     });
++                new Object[] {langName,     isSlider,      isToggle     });
+     }
+     public static EnumOS2 addOS2(String name)
+     {
+@@ -50,7 +49,7 @@
+ 
+         return addEnum(decompiled[2], EnumOS2.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumRarity addRarity(String name, int color, String displayName)
+     {
+@@ -61,7 +60,7 @@
+ 
+         return addEnum(decompiled[3], EnumRarity.class, name,
+                 new Class[] {int.class, String.class},
+-                new Object[]{color,     displayName });
++                new Object[] {color,     displayName });
+     }
+ 
+     private static void setup()
+@@ -84,14 +83,15 @@
+ 
+                 ctrs[x][0].getDeclaredConstructor(enumHeaders);
+                 decompiled[x] = true;
+-
+             }
+             catch (Exception e)
+             {
+                 //Nom Nom Nom
+             }
++
+             //System.out.format("\t%-25s %s\r\n", ctrs[x][0].getName().replace("net.minecraft.src.", ""), decompiled[x]);
+         }
++
+         isSetup = true;
+     }
+ 
+@@ -102,5 +102,4 @@
+             setup();
+         }
+     }
+-
+ }

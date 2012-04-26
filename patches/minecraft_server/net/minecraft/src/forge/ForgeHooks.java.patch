@@ -1,0 +1,465 @@
+--- ../src_base/minecraft_server/net/minecraft/src/forge/ForgeHooks.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/forge/ForgeHooks.java	0000-00-00 00:00:00.000000000 -0000
+@@ -66,6 +66,7 @@
+                 return true;
+             }
+         }
++
+         return false;
+     }
+     static LinkedList<IBonemealHandler> bonemealHandlers = new LinkedList<IBonemealHandler>();
+@@ -79,6 +80,7 @@
+                 return true;
+             }
+         }
++
+         return false;
+     }
+     static LinkedList<IHoeHandler> hoeHandlers = new LinkedList<IHoeHandler>();
+@@ -88,16 +90,17 @@
+         for (ISleepHandler handler : sleepHandlers)
+         {
+             EnumStatus status = handler.sleepInBedAt(player, x, y, z);
++
+             if (status != null)
+             {
+                 return status;
+             }
+         }
++
+         return null;
+     }
+     static LinkedList<ISleepHandler> sleepHandlers = new LinkedList<ISleepHandler>();
+ 
+-
+     public static void onMinecartUpdate(EntityMinecart minecart, int x, int y, int z)
+     {
+         for (IMinecartHandler handler : minecartHandlers)
+@@ -117,11 +120,13 @@
+     public static boolean onMinecartInteract(EntityMinecart minecart, EntityPlayer player)
+     {
+         boolean canceled = true;
++
+         for (IMinecartHandler handler : minecartHandlers)
+         {
+             boolean tmp = handler.onMinecartInteract(minecart, player, canceled);
+             canceled = canceled && tmp;
+         }
++
+         return canceled;
+     }
+ 
+@@ -155,21 +160,24 @@
+     public static boolean onItemPickup(EntityPlayer player, EntityItem item)
+     {
+         boolean cont = true;
++
+         for (IPickupHandler handler : pickupHandlers)
+         {
+             cont = cont && handler.onItemPickup(player, item);
++
+             if (!cont || item.item.stackSize <= 0)
+             {
+                 return false;
+             }
+         }
++
+         return cont;
+     }
+     static LinkedList<IPickupHandler> pickupHandlers = new LinkedList<IPickupHandler>();
+-    
++
+     public static void addActiveChunks(World world, Set<ChunkCoordIntPair> chunkList)
+     {
+-        for(IChunkLoadHandler loader : chunkLoadHandlers)
++        for (IChunkLoadHandler loader : chunkLoadHandlers)
+         {
+             loader.addActiveChunks(world, chunkList);
+         }
+@@ -177,29 +185,31 @@
+ 
+     public static boolean canUnloadChunk(Chunk chunk)
+     {
+-        for(IChunkLoadHandler loader : chunkLoadHandlers)
++        for (IChunkLoadHandler loader : chunkLoadHandlers)
+         {
+-            if(!loader.canUnloadChunk(chunk))
++            if (!loader.canUnloadChunk(chunk))
+             {
+                 return false;
+             }
+         }
++
+         return true;
+     }
+-    
++
+     public static boolean canUpdateEntity(Entity entity)
+     {
+-        for(IChunkLoadHandler loader : chunkLoadHandlers)
++        for (IChunkLoadHandler loader : chunkLoadHandlers)
+         {
+-            if(loader.canUpdateEntity(entity))
++            if (loader.canUpdateEntity(entity))
+             {
+                 return true;
+             }
+         }
++
+         return false;
+     }
+     static LinkedList<IChunkLoadHandler> chunkLoadHandlers = new LinkedList<IChunkLoadHandler>();
+-    
++
+     public static boolean onEntityInteract(EntityPlayer player, Entity entity, boolean isAttack)
+     {
+         for (IEntityInteractHandler handler : entityInteractHandlers)
+@@ -209,6 +219,7 @@
+                 return false;
+             }
+         }
++
+         return true;
+     }
+     static LinkedList<IEntityInteractHandler> entityInteractHandlers = new LinkedList<IEntityInteractHandler>();
+@@ -218,14 +229,16 @@
+         for (IChatHandler handler : chatHandlers)
+         {
+             message = handler.onServerChat(player, message);
++
+             if (message == null)
+             {
+                 return null;
+             }
+         }
++
+         return message;
+     }
+-    
++
+     public static boolean onChatCommand(EntityPlayer player, boolean isOp, String command)
+     {
+         for (IChatHandler handler : chatHandlers)
+@@ -235,9 +248,10 @@
+                 return true;
+             }
+         }
++
+         return false;
+     }
+-    
++
+     public static boolean onServerCommand(Object listener, String username, String command)
+     {
+         for (IChatHandler handler : chatHandlers)
+@@ -247,36 +261,41 @@
+                 return true;
+             }
+         }
++
+         return false;
+     }
+-    
++
+     public static String onServerCommandSay(Object listener, String username, String message)
+     {
+         for (IChatHandler handler : chatHandlers)
+         {
+             message = handler.onServerCommandSay(listener, username, message);
++
+             if (message == null)
+             {
+                 return null;
+             }
+         }
++
+         return message;
+     }
+-    
++
+     public static String onClientChatRecv(String message)
+     {
+         for (IChatHandler handler : chatHandlers)
+         {
+             message = handler.onClientChatRecv(message);
++
+             if (message == null)
+             {
+                 return null;
+             }
+         }
++
+         return message;
+     }
+     static LinkedList<IChatHandler> chatHandlers = new LinkedList<IChatHandler>();
+-    
++
+     public static void onWorldLoad(World world)
+     {
+         for (ISaveEventHandler handler : saveHandlers)
+@@ -326,16 +345,18 @@
+     }
+     static LinkedList<ISaveEventHandler> saveHandlers = new LinkedList<ISaveEventHandler>();
+ 
+-    public static int getItemBurnTime(ItemStack stack) 
++    public static int getItemBurnTime(ItemStack stack)
+     {
+         for (IFuelHandler handler : fuelHandlers)
+         {
+             int ret = handler.getItemBurnTime(stack);
++
+             if (ret > 0)
+             {
+                 return ret;
+             }
+         }
++
+         return 0;
+     }
+     static LinkedList<IFuelHandler> fuelHandlers = new LinkedList<IFuelHandler>();
+@@ -365,21 +386,26 @@
+             {
+                 ProbableItem pi = (ProbableItem)o1;
+                 Integer i1 = (Integer)o2;
++
+                 if (i1 < pi.WeightStart)
+                 {
+                     return 1;
+                 }
++
+                 if (i1 >= pi.WeightEnd)
+                 {
+                     return -1;
+                 }
++
+                 return 0;
+             }
+         });
++
+         if (n < 0)
+         {
+             return null;
+         }
++
+         return list.get(n);
+     }
+ 
+@@ -393,10 +419,12 @@
+     {
+         int index = world.rand.nextInt(plantGrassWeight);
+         ProbableItem item = getRandomItem(plantGrassList, index);
++
+         if (item == null)
+         {
+             return;
+         }
++
+         world.setBlockAndMetadataWithNotify(x, y, z, item.ItemID, item.Metadata);
+     }
+ 
+@@ -410,10 +438,12 @@
+     {
+         int index = world.rand.nextInt(seedGrassWeight);
+         ProbableItem item = getRandomItem(seedGrassList, index);
++
+         if (item == null)
+         {
+             return null;
+         }
++
+         return new ItemStack(item.ItemID, item.Quantity, item.Metadata);
+     }
+ 
+@@ -431,36 +461,43 @@
+         {
+             return true;
+         }
++
+         ItemStack stack = player.inventory.getCurrentItem();
++
+         if (stack == null)
+         {
+             return player.canHarvestBlock(block);
+         }
+ 
+         List info = (List)toolClasses.get(stack.itemID);
++
+         if (info == null)
+         {
+             return player.canHarvestBlock(block);
+         }
++
+         Object[] tmp = info.toArray();
+         String toolClass = (String)tmp[0];
+         int harvestLevel = (Integer)tmp[1];
+-
+         Integer blockHarvestLevel = (Integer)toolHarvestLevels.get(Arrays.asList(block.blockID, metadata, toolClass));
++
+         if (blockHarvestLevel == null)
+         {
+             return player.canHarvestBlock(block);
+         }
++
+         if (blockHarvestLevel > harvestLevel)
+         {
+             return false;
+         }
++
+         return true;
+     }
+ 
+     public static float blockStrength(Block block, EntityPlayer player, int metadata)
+     {
+         float hardness = block.getHardness(metadata);
++
+         if (hardness < 0.0F)
+         {
+             return 0.0F;
+@@ -479,10 +516,12 @@
+     public static boolean isToolEffective(ItemStack stack, Block block, int metadata)
+     {
+         List toolClass = (List)toolClasses.get(stack.itemID);
++
+         if (toolClass == null)
+         {
+             return false;
+         }
++
+         return toolEffectiveness.contains(Arrays.asList(block.blockID, metadata, (String)toolClass.get(0)));
+     }
+ 
+@@ -492,26 +531,23 @@
+         {
+             return;
+         }
+-        toolInit = true;
+ 
++        toolInit = true;
+         MinecraftForge.setToolClass(Item.pickaxeWood,    "pickaxe", 0);
+         MinecraftForge.setToolClass(Item.pickaxeStone,   "pickaxe", 1);
+         MinecraftForge.setToolClass(Item.pickaxeSteel,   "pickaxe", 2);
+         MinecraftForge.setToolClass(Item.pickaxeGold,    "pickaxe", 0);
+         MinecraftForge.setToolClass(Item.pickaxeDiamond, "pickaxe", 3);
+-
+         MinecraftForge.setToolClass(Item.axeWood,    "axe", 0);
+         MinecraftForge.setToolClass(Item.axeStone,   "axe", 1);
+         MinecraftForge.setToolClass(Item.axeSteel,   "axe", 2);
+         MinecraftForge.setToolClass(Item.axeGold,    "axe", 0);
+         MinecraftForge.setToolClass(Item.axeDiamond, "axe", 3);
+-
+         MinecraftForge.setToolClass(Item.shovelWood,    "shovel", 0);
+         MinecraftForge.setToolClass(Item.shovelStone,   "shovel", 1);
+         MinecraftForge.setToolClass(Item.shovelSteel,   "shovel", 2);
+         MinecraftForge.setToolClass(Item.shovelGold,    "shovel", 0);
+         MinecraftForge.setToolClass(Item.shovelDiamond, "shovel", 3);
+-
+         MinecraftForge.setBlockHarvestLevel(Block.obsidian,     "pickaxe", 3);
+         MinecraftForge.setBlockHarvestLevel(Block.oreDiamond,   "pickaxe", 2);
+         MinecraftForge.setBlockHarvestLevel(Block.blockDiamond, "pickaxe", 2);
+@@ -526,7 +562,6 @@
+         MinecraftForge.removeBlockEffectiveness(Block.oreRedstone, "pickaxe");
+         MinecraftForge.removeBlockEffectiveness(Block.obsidian,    "pickaxe");
+         MinecraftForge.removeBlockEffectiveness(Block.oreRedstoneGlowing, "pickaxe");
+-
+         Block[] pickeff =
+         {
+             Block.cobblestone, Block.stairDouble,
+@@ -536,6 +571,7 @@
+             Block.netherrack,  Block.oreLapis,
+             Block.blockLapis
+         };
++
+         for (Block block : pickeff)
+         {
+             MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 0);
+@@ -549,6 +585,7 @@
+             Block.blockClay, Block.tilledField,
+             Block.slowSand,  Block.mycelium
+         };
++
+         for (Block block : spadeEff)
+         {
+             MinecraftForge.setBlockHarvestLevel(block, "shovel", 0);
+@@ -561,11 +598,11 @@
+             Block.stairDouble, Block.stairSingle,
+             Block.pumpkin,     Block.pumpkinLantern
+         };
++
+         for (Block block : axeEff)
+         {
+             MinecraftForge.setBlockHarvestLevel(block, "axe", 0);
+         }
+-
+     }
+ 
+     public static HashMap<Class, EntityTrackerInfo> entityTrackerMap = new HashMap<Class, EntityTrackerInfo>();
+@@ -580,6 +617,7 @@
+     public static Packet getEntitySpawnPacket(Entity entity)
+     {
+         EntityTrackerInfo info = MinecraftForge.getEntityTrackerInfo(entity, false);
++
+         if (info == null)
+         {
+             return null;
+@@ -601,6 +639,7 @@
+                 return true;
+             }
+         }
++
+         return false;
+     }
+ 
+@@ -611,11 +650,13 @@
+         for (IArrowNockHandler handler : arrowNockHandlers)
+         {
+             ItemStack ret = handler.onArrowNock(itemstack, world, player);
++
+             if (ret != null)
+             {
+                 return ret;
+             }
+         }
++
+         return null;
+     }
+     public static ArrayList<IArrowNockHandler> arrowNockHandlers = new ArrayList<IArrowNockHandler>();
+@@ -634,11 +675,9 @@
+         plantGrassList.add(new ProbableItem(Block.plantYellow.blockID, 0, 1, 0, 20));
+         plantGrassList.add(new ProbableItem(Block.plantRed.blockID, 0, 1, 20, 30));
+         plantGrassWeight = 30;
+-
+         seedGrassList = new ArrayList<ProbableItem>();
+         seedGrassList.add(new ProbableItem(Item.seeds.shiftedIndex, 0, 1, 0, 10));
+         seedGrassWeight = 10;
+-        
+         System.out.printf("MinecraftForge v%d.%d.%d.%d Initialized\n", majorVersion, minorVersion, revisionVersion, buildVersion);
+         ModLoader.getLogger().info(String.format("MinecraftForge v%d.%d.%d.%d Initialized\n", majorVersion, minorVersion, revisionVersion, buildVersion));
+     }
+@@ -655,6 +694,7 @@
+         {
+             throw new RuntimeException("Attempted to set Forge's Internal packet handler after it was already set");
+         }
++
+         forgePacketHandler = handler;
+     }
+     public static PacketHandlerBase getPacketHandler()
+@@ -662,16 +702,17 @@
+         return forgePacketHandler;
+     }
+ 
+-    public static boolean onItemDataPacket(NetworkManager net, Packet131MapData pkt) 
++    public static boolean onItemDataPacket(NetworkManager net, Packet131MapData pkt)
+     {
+         NetworkMod mod = MinecraftForge.getModByID(pkt.itemID);
++
+         if (mod == null)
+         {
+             ModLoader.getLogger().log(Level.WARNING, String.format("Received Unknown MapData packet %d:%d", pkt.itemID, pkt.uniqueID));
+             return false;
+         }
++
+         mod.onPacketData(net, pkt.uniqueID, pkt.itemData);
+         return true;
+     }
+ }
+-

@@ -1,0 +1,11 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/IEntityInteractHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/IEntityInteractHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -14,7 +14,7 @@
+      * This is called before a player attacks, or interacts {left or right click by default}
+      * with another entity. Before any damage, or other interaction code is run.
+      * In multiplayer, this is called by both the client and the server.
+-     * 
++     *
+      * @param player The player doing the interacting
+      * @param entity The entity being interacted with
+      * @param isAttack True if it is a attack {left click} false if it is a interact {right click}

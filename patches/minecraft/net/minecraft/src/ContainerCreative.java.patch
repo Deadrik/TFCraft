@@ -1,0 +1,13 @@
+--- ../src_base/minecraft/net/minecraft/src/ContainerCreative.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/ContainerCreative.java	0000-00-00 00:00:00.000000000 -0000
+@@ -75,8 +75,9 @@
+                 block.addCreativeItems((ArrayList)itemList);
+             }
+         }
+-        
++
+         int x = 0;
++
+         for (Item item : Item.itemsList)
+         {
+             if (x++ >= 256 && item != null)

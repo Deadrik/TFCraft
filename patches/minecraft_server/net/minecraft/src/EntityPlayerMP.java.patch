@@ -1,0 +1,15 @@
+--- ../src_base/minecraft_server/net/minecraft/src/EntityPlayerMP.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/EntityPlayerMP.java	0000-00-00 00:00:00.000000000 -0000
+@@ -811,9 +811,9 @@
+             this.playerNetServerHandler.sendPacket(new Packet202PlayerAbilities(this.capabilities));
+         }
+     }
+-    
+-    /* These functions are added to have compatibility with PlayerAPI. 
+-     * If Divisor does not implement these functions, it is his fault, 
++
++    /* These functions are added to have compatibility with PlayerAPI.
++     * If Divisor does not implement these functions, it is his fault,
+      * these are specifically the functions he told me to use and would be guaranteed to be in PAPI.
+      */
+     public final void realGetNextWidowId()

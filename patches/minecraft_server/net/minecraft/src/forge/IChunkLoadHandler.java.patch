@@ -1,0 +1,11 @@
+--- ../src_base/minecraft_server/net/minecraft/src/forge/IChunkLoadHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/forge/IChunkLoadHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -25,7 +25,7 @@
+      * @param chunk The chunk to be unloaded
+      */
+     public boolean canUnloadChunk(Chunk chunk);
+-    
++
+     /**
+      * Called from World.updateEntityWithOptionalForce.
+      * Return true to allow this entity to update.

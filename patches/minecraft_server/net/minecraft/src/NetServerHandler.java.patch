@@ -1,0 +1,148 @@
+--- ../src_base/minecraft_server/net/minecraft/src/NetServerHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/NetServerHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -378,7 +378,6 @@
+                 double var10 = this.playerEntity.posY - ((double)var6 + 0.5D) + 1.5D;
+                 double var12 = this.playerEntity.posZ - ((double)var7 + 0.5D);
+                 double var14 = var8 * var8 + var10 * var10 + var12 * var12;
+-                
+                 double dist = playerEntity.itemInWorldManager.getBlockReachDistance() + 1;
+                 dist *= dist;
+ 
+@@ -474,8 +473,10 @@
+             {
+                 var12 = var11;
+             }
++
+             double dist = playerEntity.itemInWorldManager.getBlockReachDistance() + 1;
+             dist *= dist;
++
+             if (this.hasMoved && this.playerEntity.getDistanceSq((double)var5 + 0.5D, (double)var6 + 0.5D, (double)var7 + 0.5D) < dist && (var12 > mcServer.spawnProtectionSize || var9))
+             {
+                 this.playerEntity.itemInWorldManager.activeBlockOrUseItem(this.playerEntity, var2, var3, var5, var6, var7, var8);
+@@ -601,8 +602,9 @@
+                 }
+             }
+ 
+-            if (FMLServerHandler.instance().handleChatPacket(par1Packet3Chat,playerEntity)) {
+-              // We handled it
++            if (FMLServerHandler.instance().handleChatPacket(par1Packet3Chat, playerEntity))
++            {
++                // We handled it
+             }
+             else if (var2.startsWith("/"))
+             {
+@@ -611,6 +613,7 @@
+             else
+             {
+                 var2 = ForgeHooks.onServerChat(playerEntity, var2);
++
+                 if (var2 != null)
+                 {
+                     var2 = "<" + this.playerEntity.username + "> " + var2;
+@@ -781,7 +784,8 @@
+      */
+     public void handleRespawn(Packet9Respawn par1Packet9Respawn)
+     {
+-        int dim = (this.mcServer.getWorldManager(this.playerEntity.dimension).worldProvider.canRespawnHere() ? this.playerEntity.dimension : 0);        
++        int dim = (this.mcServer.getWorldManager(this.playerEntity.dimension).worldProvider.canRespawnHere() ? this.playerEntity.dimension : 0);
++
+         if (this.playerEntity.gameOver)
+         {
+             this.playerEntity = this.mcServer.configManager.recreatePlayerEntity(this.playerEntity, dim, true);
+@@ -986,53 +990,56 @@
+     {
+         this.playerEntity.capabilities.isFlying = par1Packet202PlayerAbilities.isFlying && this.playerEntity.capabilities.allowFlying;
+     }
+-    
++
+     public EntityPlayerMP getPlayerEntity()
+     {
+         return playerEntity;
+     }
+-    
++
+     @Override
+     public void handleCustomPayload(Packet250CustomPayload pkt)
+     {
+         FMLServerHandler.instance().handlePacket250(pkt, playerEntity);
+         MessageManager inst = MessageManager.getInstance();
+-        if (pkt.channel.equals("REGISTER")) 
++
++        if (pkt.channel.equals("REGISTER"))
+         {
+-            try 
++            try
+             {
+                 String channels = new String(pkt.data, "UTF8");
+-                for (String channel : channels.split("\0")) 
++
++                for (String channel : channels.split("\0"))
+                 {
+                     inst.addActiveChannel(netManager, channel);
+                 }
+-            } 
+-            catch (UnsupportedEncodingException ex) 
++            }
++            catch (UnsupportedEncodingException ex)
+             {
+                 ModLoader.throwException("NetServerHandler.handleCustomPayload", ex);
+             }
+-        } 
+-        else if (pkt.channel.equals("UNREGISTER")) 
++        }
++        else if (pkt.channel.equals("UNREGISTER"))
+         {
+-            try 
++            try
+             {
+                 String channels = new String(pkt.data, "UTF8");
+-                for (String channel : channels.split("\0")) 
++
++                for (String channel : channels.split("\0"))
+                 {
+                     inst.removeActiveChannel(netManager, channel);
+                 }
+             }
+-            catch (UnsupportedEncodingException ex) 
++            catch (UnsupportedEncodingException ex)
+             {
+                 ModLoader.throwException("NetServerHandler.handleCustomPayload", ex);
+             }
+-        } 
+-        else 
++        }
++        else
+         {
+             inst.dispatchIncomingMessage(netManager, pkt.channel, pkt.data);
+         }
+     }
+-    
++
+     @Override
+     public void handleMapData(Packet131MapData par1Packet131MapData)
+     {
+@@ -1043,19 +1050,21 @@
+     public void handleTileEntityData(Packet132TileEntityData pkt)
+     {
+         World world = this.getPlayerEntity().worldObj;
++
+         if (world.blockExists(pkt.xPosition, pkt.yPosition, pkt.zPosition))
+         {
+             TileEntity te = world.getBlockTileEntity(pkt.xPosition, pkt.yPosition, pkt.zPosition);
++
+             if (te != null)
+             {
+                 te.onDataPacket(netManager,  pkt);
+             }
+-            else 
++            else
+             {
+                 ModLoader.getLogger().log(Level.WARNING, String.format(
+-                        "Received a TileEntityData packet for a location that did not have a TileEntity: (%d, %d, %d) %d: %d, %d, %d", 
++                        "Received a TileEntityData packet for a location that did not have a TileEntity: (%d, %d, %d) %d: %d, %d, %d",
+                         pkt.xPosition, pkt.yPosition, pkt.zPosition,
+-                        pkt.actionType, 
++                        pkt.actionType,
+                         pkt.customParam1, pkt.customParam2, pkt.customParam3));
+             }
+         }

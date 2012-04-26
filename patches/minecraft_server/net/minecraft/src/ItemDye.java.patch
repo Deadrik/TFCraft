@@ -1,0 +1,20 @@
+--- ../src_base/minecraft_server/net/minecraft/src/ItemDye.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/ItemDye.java	0000-00-00 00:00:00.000000000 -0000
+@@ -36,14 +36,17 @@
+             if (par1ItemStack.getItemDamage() == 15)
+             {
+                 int var8 = par3World.getBlockId(par4, par5, par6);
++
+                 if (ForgeHooks.onUseBonemeal(par3World, var8, par4, par5, par6))
+                 {
+                     if (!par3World.isRemote)
+                     {
+                         par1ItemStack.stackSize--;
+                     }
++
+                     return true;
+                 }
++
+                 if (var8 == Block.sapling.blockID)
+                 {
+                     if (!par3World.isRemote)

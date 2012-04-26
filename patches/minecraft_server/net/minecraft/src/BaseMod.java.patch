@@ -1,0 +1,49 @@
+--- ../src_base/minecraft_server/net/minecraft/src/BaseMod.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/BaseMod.java	0000-00-00 00:00:00.000000000 -0000
+@@ -59,7 +59,7 @@
+     {
+         onClientLogout((EntityPlayer)player);
+     }
+-    
++
+     @Override
+     public void onPlayerChangedDimension(Object player)
+     {
+@@ -287,8 +287,8 @@
+ 
+     /**
+      * Called when a new client logs in.
+-     * 
+-     * @param player 
++     *
++     * @param player
+      */
+     public void onClientLogin(EntityPlayer player)
+     {
+@@ -296,23 +296,21 @@
+ 
+     /**
+      * Called when a client logs out of the server.
+-     * 
++     *
+      * @param player
+      */
+     public void onClientLogout(EntityPlayer player)
+     {
+-        
+     }
+ 
+     /**
+-     * 
++     *
+      * Called when a client changes dimensions on the server.
+-     * 
++     *
+      * @param player
+      */
+     public void onClientDimensionChanged(EntityPlayer player)
+     {
+-        
+     }
+ 
+     // Spare client junk

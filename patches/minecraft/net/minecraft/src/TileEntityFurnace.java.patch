@@ -1,0 +1,100 @@
+--- ../src_base/minecraft/net/minecraft/src/TileEntityFurnace.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/TileEntityFurnace.java	0000-00-00 00:00:00.000000000 -0000
+@@ -283,9 +283,22 @@
+         else
+         {
+             ItemStack var1 = FurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
+-            if (var1 == null) return false;
+-            if (this.furnaceItemStacks[2] == null) return true;
+-            if (!this.furnaceItemStacks[2].isItemEqual(var1)) return false;
++
++            if (var1 == null)
++            {
++                return false;
++            }
++
++            if (this.furnaceItemStacks[2] == null)
++            {
++                return true;
++            }
++
++            if (!this.furnaceItemStacks[2].isItemEqual(var1))
++            {
++                return false;
++            }
++
+             int result = furnaceItemStacks[2].stackSize + var1.stackSize;
+             return (result <= getInventoryStackLimit() && result <= var1.getMaxStackSize());
+         }
+@@ -338,12 +351,37 @@
+         else
+         {
+             int var1 = par1ItemStack.getItem().shiftedIndex;
+-            if (var1 < 256 && Block.blocksList[var1].blockMaterial == Material.wood) return 300;
+-            if (var1 == Item.stick.shiftedIndex)      return 100; 
+-            if (var1 == Item.coal.shiftedIndex)       return 1600; 
+-            if (var1 == Item.bucketLava.shiftedIndex) return 20000; 
+-            if (var1 == Block.sapling.blockID)        return 100; 
+-            if (var1 == Item.blazeRod.shiftedIndex)   return 2400;
++
++            if (var1 < 256 && Block.blocksList[var1].blockMaterial == Material.wood)
++            {
++                return 300;
++            }
++
++            if (var1 == Item.stick.shiftedIndex)
++            {
++                return 100;
++            }
++
++            if (var1 == Item.coal.shiftedIndex)
++            {
++                return 1600;
++            }
++
++            if (var1 == Item.bucketLava.shiftedIndex)
++            {
++                return 20000;
++            }
++
++            if (var1 == Block.sapling.blockID)
++            {
++                return 100;
++            }
++
++            if (var1 == Item.blazeRod.shiftedIndex)
++            {
++                return 2400;
++            }
++
+             int ret = ForgeHooks.getItemBurnTime(par1ItemStack);
+             return (ret > 0 ? ret : ModLoader.addAllFuel(par1ItemStack.itemID, par1ItemStack.getItemDamage()));
+         }
+@@ -367,15 +405,23 @@
+     public void closeChest() {}
+ 
+     @Override
+-    public int getStartInventorySide(int side) 
++    public int getStartInventorySide(int side)
+     {
+-        if (side == 0) return 1;
+-        if (side == 1) return 0;
++        if (side == 0)
++        {
++            return 1;
++        }
++
++        if (side == 1)
++        {
++            return 0;
++        }
++
+         return 2;
+     }
+ 
+     @Override
+-    public int getSizeInventorySide(int side) 
++    public int getSizeInventorySide(int side)
+     {
+         return 1;
+     }

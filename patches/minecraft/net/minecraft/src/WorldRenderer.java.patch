@@ -1,0 +1,15 @@
+--- ../src_base/minecraft/net/minecraft/src/WorldRenderer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/WorldRenderer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -203,10 +203,12 @@
+                                     {
+                                         var12 = true;
+                                     }
++
+                                     if (!ForgeHooksClient.canRenderInPass(var24, var11))
+                                     {
+                                         continue;
+                                     }
++
+                                     ForgeHooksClient.beforeBlockRender(var24, var10);
+                                     var13 |= var10.renderBlockByRenderType(var24, var17, var15, var16);
+                                     ForgeHooksClient.afterBlockRender(var24, var10);

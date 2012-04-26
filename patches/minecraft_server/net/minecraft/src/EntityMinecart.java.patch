@@ -1,0 +1,581 @@
+--- ../src_base/minecraft_server/net/minecraft/src/EntityMinecart.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/EntityMinecart.java	0000-00-00 00:00:00.000000000 -0000
+@@ -30,7 +30,7 @@
+     protected double velocityX;
+     protected double velocityY;
+     protected double velocityZ;
+-    
++
+     /* Forge: Minecart Compatibility Layer Integration. */
+     public static float defaultMaxSpeedRail = 0.4f;
+     public static float defaultMaxSpeedGround = 0.4f;
+@@ -40,7 +40,7 @@
+     protected boolean canUseRail = true;
+     protected boolean canBePushed = true;
+     private static IMinecartCollisionHandler collisionHandler = null;
+-    
++
+     /* Instance versions of the above physics properties */
+     protected float maxSpeedRail;
+     protected float maxSpeedGround;
+@@ -57,14 +57,13 @@
+         this.preventEntitySpawning = true;
+         this.setSize(0.98F, 0.7F);
+         this.yOffset = this.height / 2.0F;
+-        
+         maxSpeedRail = defaultMaxSpeedRail;
+         maxSpeedGround = defaultMaxSpeedGround;
+         maxSpeedAirLateral = defaultMaxSpeedAirLateral;
+         maxSpeedAirVertical = defaultMaxSpeedAirVertical;
+         dragAir = defaultDragAir;
+     }
+-    
++
+     public EntityMinecart(World world, int type)
+     {
+         this(world);
+@@ -98,6 +97,7 @@
+         {
+             return getCollisionHandler().getCollisionBox(this, par1Entity);
+         }
++
+         return par1Entity.boundingBox;
+     }
+ 
+@@ -110,6 +110,7 @@
+         {
+             return getCollisionHandler().getBoundingBox(this);
+         }
++
+         return null;
+     }
+ 
+@@ -320,7 +321,6 @@
+                 }
+ 
+                 adjustSlopeVelocities(var10);
+-
+                 int[][] var13 = field_468_ak[var10];
+                 double var14 = (double)(var13[1][0] - var13[0][0]);
+                 double var16 = (double)(var13[1][2] - var13[0][2]);
+@@ -388,7 +388,6 @@
+                 this.posX = var26 + var14 * var24;
+                 this.posZ = var28 + var16 * var24;
+                 this.setPosition(this.posX, this.posY + (double)this.yOffset, this.posZ);
+-                
+                 moveMinecartOnRail(var1, var2, var3);
+ 
+                 if (var13[0][1] != 0 && MathHelper.floor_double(this.posX) - var1 == var13[0][0] && MathHelper.floor_double(this.posZ) - var3 == var13[0][2])
+@@ -401,7 +400,6 @@
+                 }
+ 
+                 applyDragAndPushForces();
+-
+                 Vec3D var52 = this.func_182_g(this.posX, this.posY, this.posZ);
+ 
+                 if (var52 != null && var9 != null)
+@@ -429,10 +427,9 @@
+                 }
+ 
+                 double var41;
+-                
+                 updatePushForces();
+-                
+-                if(shouldDoRailFunctions())
++
++                if (shouldDoRailFunctions())
+                 {
+                     ((BlockRail)Block.blocksList[var8]).onMinecartPass(worldObj, this, var1, var2, var3);
+                 }
+@@ -509,8 +506,8 @@
+             }
+ 
+             this.setRotation(this.rotationYaw, this.rotationPitch);
+-            
+             AxisAlignedBB box = null;
++
+             if (getCollisionHandler() != null)
+             {
+                 box = getCollisionHandler().getMinecartCollisionBox(this);
+@@ -638,6 +635,7 @@
+             par1NBTTagCompound.setDouble("PushZ", this.pushZ);
+             par1NBTTagCompound.setInteger("Fuel", this.fuel);
+         }
++
+         if (getSizeInventory() > 0)
+         {
+             NBTTagList var2 = new NBTTagList();
+@@ -670,6 +668,7 @@
+             this.pushZ = par1NBTTagCompound.getDouble("PushZ");
+             this.fuel = par1NBTTagCompound.getInteger("Fuel");
+         }
++
+         if (getSizeInventory() > 0)
+         {
+             NBTTagList var2 = par1NBTTagCompound.getTagList("Items");
+@@ -694,12 +693,13 @@
+     public void applyEntityCollision(Entity par1Entity)
+     {
+         ForgeHooks.onMinecartEntityCollision(this, par1Entity);
++
+         if (getCollisionHandler() != null)
+         {
+             getCollisionHandler().onEntityCollision(this, par1Entity);
+             return;
+         }
+-        
++
+         if (!this.worldObj.isRemote)
+         {
+             if (par1Entity != this.riddenByEntity)
+@@ -900,7 +900,7 @@
+         {
+             return true;
+         }
+-        
++
+         if (canBeRidden())
+         {
+             if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+@@ -1005,18 +1005,18 @@
+     {
+         return this.dataWatcher.getWatchableObjectInt(18);
+     }
+-    
++
+     /**
+      * Drops the cart as a item. The exact item dropped is defined by getItemDropped().
+      */
+     public void dropCartAsItem()
+     {
+-        for(ItemStack item : getItemsDropped())
++        for (ItemStack item : getItemsDropped())
+         {
+             entityDropItem(item, 0);
+         }
+     }
+-    
++
+     /**
+      * Override this to define which items your cart drops when broken.
+      * This does not include items contained in the inventory,
+@@ -1027,19 +1027,21 @@
+     {
+         List<ItemStack> items = new ArrayList<ItemStack>();
+         items.add(new ItemStack(Item.minecartEmpty));
+-        
+-        switch(minecartType)
++
++        switch (minecartType)
+         {
+             case 1:
+                 items.add(new ItemStack(Block.chest));
+                 break;
++
+             case 2:
+                 items.add(new ItemStack(Block.stoneOvenIdle));
+                 break;
+         }
++
+         return items;
+     }
+-    
++
+     /**
+      * This function returns an ItemStack that represents this cart.
+      * This should be an ItemStack that can be used by the player to place the cart.
+@@ -1051,7 +1053,7 @@
+     {
+         return MinecraftForge.getItemForCart(this);
+     }
+-    
++
+     /**
+      * Returns true if this cart is self propelled.
+      * @return True if powered.
+@@ -1061,7 +1063,7 @@
+         return minecartType == 2 && getClass() == EntityMinecart.class;
+     }
+ 
+-    /** 
++    /**
+      * Returns true if this cart is a storage cart
+      * Some carts may have inventories but not be storage carts
+      * and some carts without inventories may be storage carts.
+@@ -1078,14 +1080,15 @@
+      */
+     public boolean canBeRidden()
+     {
+-        if(minecartType == 0 && getClass() == EntityMinecart.class)
++        if (minecartType == 0 && getClass() == EntityMinecart.class)
+         {
+             return true;
+         }
++
+         return false;
+     }
+-    
+-    /** 
++
++    /**
+      * Returns true if this cart can currently use rails.
+      * This function is mainly used to gracefully detach a minecart from a rail.
+      * @return True if the minecart can use rails.
+@@ -1103,9 +1106,9 @@
+     public void setCanUseRail(boolean use)
+     {
+         canUseRail = use;
+-    }    
+-        
+-    /** 
++    }
++
++    /**
+      * Return false if this cart should not call IRail.onMinecartPass() and should ignore Powered Rails.
+      * @return True if this cart should call IRail.onMinecartPass().
+      */
+@@ -1113,7 +1116,7 @@
+     {
+         return true;
+     }
+-    
++
+     /**
+      * Simply returns the minecartType variable.
+      * @return minecartType
+@@ -1122,7 +1125,7 @@
+     {
+         return minecartType;
+     }
+-    
++
+     /**
+      * Gets the current global Minecart Collision handler if none
+      * is registered, returns null
+@@ -1132,7 +1135,7 @@
+     {
+         return collisionHandler;
+     }
+-    
++
+     /**
+      * Sets the global Minecart Collision handler, overwrites any
+      * that is currently set.
+@@ -1142,7 +1145,7 @@
+     {
+         collisionHandler = handler;
+     }
+-    
++
+     /**
+      * Carts should return their drag factor here
+      * @return The drag rate.
+@@ -1150,18 +1153,19 @@
+     protected double getDrag()
+     {
+         return riddenByEntity != null ? 1D : 0.96D;
+-    }   
+-    
++    }
++
+     /**
+      * Moved to allow overrides.
+      * This code applies drag and updates push forces.
+      */
+     protected void applyDragAndPushForces()
+     {
+-        if(isPoweredCart())
++        if (isPoweredCart())
+         {
+             double d27 = MathHelper.sqrt_double(pushX * pushX + pushZ * pushZ);
+-            if(d27 > 0.01D)
++
++            if (d27 > 0.01D)
+             {
+                 pushX /= d27;
+                 pushZ /= d27;
+@@ -1171,36 +1175,41 @@
+                 motionZ *= 0.8D;
+                 motionX += pushX * d29;
+                 motionZ += pushZ * d29;
+-            } else
++            }
++            else
+             {
+                 motionX *= 0.9D;
+                 motionY *= 0.0D;
+                 motionZ *= 0.9D;
+             }
+         }
++
+         motionX *= getDrag();
+         motionY *= 0.0D;
+         motionZ *= getDrag();
+     }
+-    
++
+     /**
+      * Moved to allow overrides.
+      * This code updates push forces.
+      */
+     protected void updatePushForces()
+     {
+-        if(isPoweredCart())
++        if (isPoweredCart())
+         {
+             double push = MathHelper.sqrt_double(pushX * pushX + pushZ * pushZ);
+-            if(push > 0.01D && motionX * motionX + motionZ * motionZ > 0.001D)
++
++            if (push > 0.01D && motionX * motionX + motionZ * motionZ > 0.001D)
+             {
+                 pushX /= push;
+                 pushZ /= push;
+-                if(pushX * motionX + pushZ * motionZ < 0.0D)
++
++                if (pushX * motionX + pushZ * motionZ < 0.0D)
+                 {
+                     pushX = 0.0D;
+                     pushZ = 0.0D;
+-                } else
++                }
++                else
+                 {
+                     pushX = motionX;
+                     pushZ = motionZ;
+@@ -1208,7 +1217,7 @@
+             }
+         }
+     }
+-    
++
+     /**
+      * Moved to allow overrides.
+      * This code handles minecart movement and speed capping when on a rail.
+@@ -1216,27 +1225,46 @@
+     protected void moveMinecartOnRail(int i, int j, int k)
+     {
+         int id = worldObj.getBlockId(i, j, k);
++
+         if (!BlockRail.isRailBlock(id))
+         {
+             return;
+         }
++
+         float railMaxSpeed = ((BlockRail)Block.blocksList[id]).getRailMaxSpeed(worldObj, this, i, j, k);
+-        
+         double maxSpeed = Math.min(railMaxSpeed, getMaxSpeedRail());
+         double mX = motionX;
+         double mZ = motionZ;
+-        if(riddenByEntity != null)
++
++        if (riddenByEntity != null)
+         {
+             mX *= 0.75D;
+             mZ *= 0.75D;
+         }
+-        if(mX < -maxSpeed) mX = -maxSpeed;
+-        if(mX >  maxSpeed) mX =  maxSpeed;
+-        if(mZ < -maxSpeed) mZ = -maxSpeed;
+-        if(mZ >  maxSpeed) mZ =  maxSpeed;
++
++        if (mX < -maxSpeed)
++        {
++            mX = -maxSpeed;
++        }
++
++        if (mX >  maxSpeed)
++        {
++            mX =  maxSpeed;
++        }
++
++        if (mZ < -maxSpeed)
++        {
++            mZ = -maxSpeed;
++        }
++
++        if (mZ >  maxSpeed)
++        {
++            mZ =  maxSpeed;
++        }
++
+         moveEntity(mX, 0.0D, mZ);
+-    }    
+-    
++    }
++
+     /**
+      * Moved to allow overrides.
+      * This code handles minecart movement and speed capping when not on a rail.
+@@ -1244,57 +1272,89 @@
+     protected void moveMinecartOffRail(int i, int j, int k)
+     {
+         double d2 = getMaxSpeedGround();
+-        if(!onGround)
++
++        if (!onGround)
+         {
+             d2 = getMaxSpeedAirLateral();
+         }
+-        if(motionX < -d2) motionX = -d2;
+-        if(motionX >  d2) motionX =  d2;
+-        if(motionZ < -d2) motionZ = -d2;
+-        if(motionZ >  d2) motionZ =  d2;
++
++        if (motionX < -d2)
++        {
++            motionX = -d2;
++        }
++
++        if (motionX >  d2)
++        {
++            motionX =  d2;
++        }
++
++        if (motionZ < -d2)
++        {
++            motionZ = -d2;
++        }
++
++        if (motionZ >  d2)
++        {
++            motionZ =  d2;
++        }
++
+         double moveY = motionY;
+-        if(getMaxSpeedAirVertical() > 0 && motionY > getMaxSpeedAirVertical())
++
++        if (getMaxSpeedAirVertical() > 0 && motionY > getMaxSpeedAirVertical())
+         {
+             moveY = getMaxSpeedAirVertical();
+-            if(Math.abs(motionX) < 0.3f && Math.abs(motionZ) < 0.3f)
++
++            if (Math.abs(motionX) < 0.3f && Math.abs(motionZ) < 0.3f)
+             {
+                 moveY = 0.15f;
+                 motionY = moveY;
+             }
+         }
+-        if(onGround)
++
++        if (onGround)
+         {
+             motionX *= 0.5D;
+             motionY *= 0.5D;
+             motionZ *= 0.5D;
+         }
++
+         moveEntity(motionX, moveY, motionZ);
+-        if(!onGround)
++
++        if (!onGround)
+         {
+             motionX *= getDragAir();
+             motionY *= getDragAir();
+             motionZ *= getDragAir();
+         }
+     }
+-    
++
+     /**
+      * Moved to allow overrides.
+      * This code applies fuel consumption.
+-     */   
++     */
+     protected void updateFuel()
+     {
+-        if (fuel > 0) fuel--;
+-        if (fuel <= 0) pushX = pushZ = 0.0D;
++        if (fuel > 0)
++        {
++            fuel--;
++        }
++
++        if (fuel <= 0)
++        {
++            pushX = pushZ = 0.0D;
++        }
++
+         setMinecartPowered(fuel > 0);
+     }
+-    
++
+     /**
+      * Moved to allow overrides, This code handle slopes affecting velocity.
+-     * @param metadata The blocks position metadata 
++     * @param metadata The blocks position metadata
+      */
+-    protected void adjustSlopeVelocities(int metadata) 
++    protected void adjustSlopeVelocities(int metadata)
+     {
+         double acceleration = 0.0078125D;
++
+         if (metadata == 2)
+         {
+             motionX -= acceleration;
+@@ -1311,12 +1371,12 @@
+         {
+             motionZ -= acceleration;
+         }
+-	}
+-    
++    }
++
+     /**
+      * Getters/setters for physics variables
+      */
+-    
++
+     /**
+      * Returns the carts max speed.
+      * Carts going faster than 1.1 cause issues with chunk loading.
+@@ -1334,42 +1394,42 @@
+     {
+         maxSpeedRail = value;
+     }
+-    
++
+     public float getMaxSpeedGround()
+     {
+         return maxSpeedGround;
+     }
+-    
++
+     public void setMaxSpeedGround(float value)
+     {
+         maxSpeedGround = value;
+     }
+-    
++
+     public float getMaxSpeedAirLateral()
+     {
+         return maxSpeedAirLateral;
+     }
+-    
++
+     public void setMaxSpeedAirLateral(float value)
+     {
+         maxSpeedAirLateral = value;
+     }
+-    
++
+     public float getMaxSpeedAirVertical()
+     {
+         return maxSpeedAirVertical;
+     }
+-    
++
+     public void setMaxSpeedAirVertical(float value)
+     {
+         maxSpeedAirVertical = value;
+     }
+-    
++
+     public double getDragAir()
+     {
+         return dragAir;
+     }
+-    
++
+     public void setDragAir(double value)
+     {
+         dragAir = value;

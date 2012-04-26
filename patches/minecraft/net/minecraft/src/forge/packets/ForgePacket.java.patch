@@ -1,0 +1,21 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/packets/ForgePacket.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/packets/ForgePacket.java	0000-00-00 00:00:00.000000000 -0000
+@@ -21,9 +21,9 @@
+ 
+     public Packet getPacket()
+     {
+-
+         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+         DataOutputStream data = new DataOutputStream(bytes);
++
+         try
+         {
+             data.writeByte(getID());
+@@ -33,6 +33,7 @@
+         {
+             e.printStackTrace();
+         }
++
+         Packet250CustomPayload pkt = new Packet250CustomPayload();
+         pkt.channel = "Forge";
+         pkt.data    = bytes.toByteArray();

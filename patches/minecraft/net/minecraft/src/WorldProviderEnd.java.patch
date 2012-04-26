@@ -1,0 +1,25 @@
+--- ../src_base/minecraft/net/minecraft/src/WorldProviderEnd.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/WorldProviderEnd.java	0000-00-00 00:00:00.000000000 -0000
+@@ -117,19 +117,19 @@
+     }
+ 
+     @Override
+-    public String getSaveFolder() 
++    public String getSaveFolder()
+     {
+         return "DIM1";
+     }
+ 
+     @Override
+-    public String getWelcomeMessage() 
++    public String getWelcomeMessage()
+     {
+         return "Entering the End";
+     }
+ 
+     @Override
+-    public String getDepartMessage() 
++    public String getDepartMessage()
+     {
+         return "Leaving the End";
+     }

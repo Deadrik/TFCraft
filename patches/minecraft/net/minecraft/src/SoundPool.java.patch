@@ -1,0 +1,20 @@
+--- ../src_base/minecraft/net/minecraft/src/SoundPool.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/SoundPool.java	0000-00-00 00:00:00.000000000 -0000
+@@ -34,7 +34,7 @@
+      */
+     public SoundPoolEntry addSound(String par1Str, File par2File)
+     {
+-        try 
++        try
+         {
+             return addSound(par1Str, par2File.toURI().toURL());
+         }
+@@ -46,7 +46,7 @@
+     }
+     /**
+      * URL version of addSound, as the back-end sound engine has full support for various types of URLs
+-     * 
++     *
+      * @param par1Str The name of the sound to add
+      * @param url The url of the sound resource
+      * @return A SoundPoolEntry for the newly added sound

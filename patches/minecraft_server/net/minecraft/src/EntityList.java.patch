@@ -1,0 +1,28 @@
+--- ../src_base/minecraft_server/net/minecraft/src/EntityList.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/EntityList.java	0000-00-00 00:00:00.000000000 -0000
+@@ -202,16 +202,19 @@
+         addMapping(EntityEnderCrystal.class, "EnderCrystal", 200);
+     }
+ 
+-    public static void addNewEntityListMapping(Class<? extends Entity> entityClass, String entityName, int id) {
+-      addMapping(entityClass,entityName,id);
++    public static void addNewEntityListMapping(Class <? extends Entity > entityClass, String entityName, int id)
++    {
++        addMapping(entityClass, entityName, id);
+     }
+ 
+-    public static void addNewEntityListMapping(Class<? extends Entity> entityClass, String entityName, int id, int backgroundEggColour, int foregroundEggColour) {
+-      addMapping(entityClass,entityName,id,backgroundEggColour,foregroundEggColour);
++    public static void addNewEntityListMapping(Class <? extends Entity > entityClass, String entityName, int id, int backgroundEggColour, int foregroundEggColour)
++    {
++        addMapping(entityClass, entityName, id, backgroundEggColour, foregroundEggColour);
+     }
+ 
+     @SuppressWarnings("unchecked")
+-    public static Map<String,Class<? extends Entity>> getEntityToClassMapping() {
+-      return stringToClassMapping;
++    public static Map < String, Class <? extends Entity >> getEntityToClassMapping()
++    {
++        return stringToClassMapping;
+     }
+ }

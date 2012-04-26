@@ -1,0 +1,10 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/IOverrideReplace.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/IOverrideReplace.java	0000-00-00 00:00:00.000000000 -0000
+@@ -17,7 +17,6 @@
+  */
+ public interface IOverrideReplace
+ {
+-
+     /**
+      * Return true if this block has to take control over replacement, for
+      * the intended replacement given by the parameter bid. If false, then

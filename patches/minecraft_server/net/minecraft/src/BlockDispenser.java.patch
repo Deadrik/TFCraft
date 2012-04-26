@@ -1,0 +1,14 @@
+--- ../src_base/minecraft_server/net/minecraft/src/BlockDispenser.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/BlockDispenser.java	0000-00-00 00:00:00.000000000 -0000
+@@ -149,8 +149,9 @@
+             }
+             else
+             {
+-                if (FMLServerHandler.instance().tryDispensingEntity(par1World, var13, var15, var17, var9, var10, var12)) {
+-                  ;
++                if (FMLServerHandler.instance().tryDispensingEntity(par1World, var13, var15, var17, var9, var10, var12))
++                {
++                    ;
+                 }
+                 else if (var12.itemID == Item.arrow.shiftedIndex)
+                 {

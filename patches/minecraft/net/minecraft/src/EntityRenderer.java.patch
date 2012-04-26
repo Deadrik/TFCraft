@@ -1,0 +1,44 @@
+--- ../src_base/minecraft/net/minecraft/src/EntityRenderer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/EntityRenderer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -298,6 +298,7 @@
+         {
+             this.fovMultiplierTemp = mc.thePlayer.getFOVMultiplier();
+         }
++
+         this.fovModifierHandPrev = this.fovModifierHand;
+         this.fovModifierHand += (this.fovMultiplierTemp - this.fovModifierHand) * 0.5F;
+     }
+@@ -1104,11 +1105,13 @@
+                     var20 = (EntityPlayer)var4;
+                     GL11.glDisable(GL11.GL_ALPHA_TEST);
+                     Profiler.endStartSection("outline");
++
+                     if (!ForgeHooksClient.onBlockHighlight(var5, var20, mc.objectMouseOver, 0, var20.inventory.getCurrentItem(), par1))
+                     {
+                         var5.drawBlockBreaking(var20, this.mc.objectMouseOver, 0, var20.inventory.getCurrentItem(), par1);
+                         var5.drawSelectionBox(var20, this.mc.objectMouseOver, 0, var20.inventory.getCurrentItem(), par1);
+                     }
++
+                     GL11.glEnable(GL11.GL_ALPHA_TEST);
+                 }
+             }
+@@ -1178,6 +1181,7 @@
+                     var5.drawBlockBreaking(var20, this.mc.objectMouseOver, 0, var20.inventory.getCurrentItem(), par1);
+                     var5.drawSelectionBox(var20, this.mc.objectMouseOver, 0, var20.inventory.getCurrentItem(), par1);
+                 }
++
+                 GL11.glEnable(GL11.GL_ALPHA_TEST);
+             }
+ 
+@@ -1201,10 +1205,9 @@
+                 this.setupFog(1, par1);
+                 GL11.glPopMatrix();
+             }
+-            
++
+             Profiler.endStartSection("fhooks");
+             ForgeHooksClient.onRenderWorldLast(var5, par1);
+-
+             Profiler.endStartSection("hand");
+ 
+             if (this.cameraZoom == 1.0D)

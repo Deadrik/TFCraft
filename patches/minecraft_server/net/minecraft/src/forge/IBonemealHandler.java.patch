@@ -1,0 +1,7 @@
+--- ../src_base/minecraft_server/net/minecraft/src/forge/IBonemealHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/forge/IBonemealHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -16,4 +16,3 @@
+      */
+     public boolean onUseBonemeal(World world, int blockID, int X, int Y, int Z);
+ }
+-

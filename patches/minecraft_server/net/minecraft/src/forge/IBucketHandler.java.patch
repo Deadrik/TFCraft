@@ -1,0 +1,16 @@
+--- ../src_base/minecraft_server/net/minecraft/src/forge/IBucketHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/forge/IBucketHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -10,7 +10,6 @@
+ 
+ public interface IBucketHandler
+ {
+-
+     /**
+      * This is called before Minecraft tries to fill a bucket with water or
+      * lava. If it returns a non-null result, then the filling process will
+@@ -20,5 +19,4 @@
+      * @see MinecraftForge#registerCustomBucketHander(IBucketHandler)
+      */
+     public ItemStack fillCustomBucket(World world, int X, int Y, int Z);
+-
+ }

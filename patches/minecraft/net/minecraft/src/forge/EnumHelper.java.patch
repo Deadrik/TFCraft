@@ -1,0 +1,193 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/EnumHelper.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/EnumHelper.java	0000-00-00 00:00:00.000000000 -0000
+@@ -41,7 +41,7 @@
+ 
+         return addEnum(decompiledFlags[0], EnumAction.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumArmorMaterial addArmorMaterial(String name, int durability, int[] reductionAmounts, int enchantability)
+     {
+@@ -52,7 +52,7 @@
+ 
+         return addEnum(decompiledFlags[1], EnumArmorMaterial.class, name,
+                 new Class[] { int.class,  int[].class,      int.class      },
+-                new Object[]{ durability, reductionAmounts, enchantability });
++                new Object[] { durability, reductionAmounts, enchantability });
+     }
+     public static EnumArt addArt(String name, String tile, int sizeX, int sizeY, int offsetX, int offsetY)
+     {
+@@ -63,7 +63,7 @@
+ 
+         return addEnum(decompiledFlags[2], EnumArt.class, name,
+                 new Class[] {String.class, int.class, int.class, int.class, int.class},
+-                new Object[]{tile,         sizeX,     sizeY,     offsetX,   offsetY});
++                new Object[] {tile,         sizeX,     sizeY,     offsetX,   offsetY});
+     }
+     public static EnumCreatureAttribute addCreatureAttribute(String name)
+     {
+@@ -74,7 +74,7 @@
+ 
+         return addEnum(decompiledFlags[3], EnumCreatureAttribute.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumCreatureType addCreatureType(String name, Class typeClass, int maxNumber, Material material, boolean peaceful)
+     {
+@@ -85,7 +85,7 @@
+ 
+         return addEnum(decompiledFlags[4], EnumCreatureType.class, name,
+                 new Class[] {Class.class, int.class, Material.class, boolean.class},
+-                new Object[]{typeClass,   maxNumber, material,       peaceful});
++                new Object[] {typeClass,   maxNumber, material,       peaceful});
+     }
+     public static EnumDoor addDoor(String name)
+     {
+@@ -96,7 +96,7 @@
+ 
+         return addEnum(decompiledFlags[5], EnumDoor.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumEnchantmentType addEnchantmentType(String name)
+     {
+@@ -107,7 +107,7 @@
+ 
+         return addEnum(decompiledFlags[6], EnumEnchantmentType.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumMobType addMobType(String name)
+     {
+@@ -118,7 +118,7 @@
+ 
+         return addEnum(decompiledFlags[7], EnumMobType.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumMovingObjectType addMovingObjectType(String name)
+     {
+@@ -129,7 +129,7 @@
+ 
+         return addEnum(decompiledFlags[8], EnumMovingObjectType.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumSkyBlock addSkyBlock(String name, int lightValue)
+     {
+@@ -140,7 +140,7 @@
+ 
+         return addEnum(decompiledFlags[9], EnumSkyBlock.class, name,
+                 new Class[] {int.class },
+-                new Object[]{lightValue});
++                new Object[] {lightValue});
+     }
+     public static EnumStatus addStatus(String name)
+     {
+@@ -151,7 +151,7 @@
+ 
+         return addEnum(decompiledFlags[10], EnumStatus.class, name,
+                 new Class[] {},
+-                new Object[]{});
++                new Object[] {});
+     }
+     public static EnumToolMaterial addToolMaterial(String name, int harvestLevel, int maxUses, float efficiency, int damage, int enchantability)
+     {
+@@ -162,7 +162,7 @@
+ 
+         return addEnum(decompiledFlags[11], EnumToolMaterial.class, name,
+                 new Class[] { int.class,    int.class, float.class,  int.class, int.class       },
+-                new Object[]{ harvestLevel, maxUses,   efficiency,   damage,    enchantability  });
++                new Object[] { harvestLevel, maxUses,   efficiency,   damage,    enchantability  });
+     }
+ 
+     private static void setup()
+@@ -190,17 +190,15 @@
+ 
+                 ctrs[x][0].getDeclaredConstructor(enumHeaders);
+                 decompiledFlags[x] = true;
+-
+             }
+             catch (Exception e)
+             {
+                 //Nom Nom Nom
+             }
++
+             //System.out.format("\t%-25s %s\r\n", ctrs[x][0].getName().replace("net.minecraft.src.", ""), decompiled[x]);
+         }
+ 
+-
+-
+         try
+         {
+             Method getReflectionFactory = Class.forName("sun.reflect.ReflectionFactory").getDeclaredMethod("getReflectionFactory");
+@@ -218,7 +216,6 @@
+         isSetup = true;
+     }
+ 
+-
+     /*
+      * Everything below this is found at the site below, and updated to be able to compile in Eclipse/Java 1.6+
+      * Also modified for use in decompiled code.
+@@ -228,6 +225,7 @@
+     private static Object getConstructorAccessor(boolean decompiled, Class<?> enumClass, Class<?>[] additionalParameterTypes) throws Exception
+     {
+         Class<?>[] parameterTypes = null;
++
+         if (decompiled)
+         {
+             parameterTypes = new Class[additionalParameterTypes.length + 4];
+@@ -244,12 +242,14 @@
+             parameterTypes[1] = int.class;
+             System.arraycopy(additionalParameterTypes, 0, parameterTypes, 2, additionalParameterTypes.length);
+         }
++
+         return newConstructorAccessor.invoke(reflectionFactory, enumClass.getDeclaredConstructor(parameterTypes));
+     }
+ 
+     private static < T extends Enum<? >> T makeEnum(boolean decompiled, Class<T> enumClass, String value, int ordinal, Class<?>[] additionalTypes, Object[] additionalValues) throws Exception
+     {
+         Object[] parms = null;
++
+         if (decompiled)
+         {
+             parms = new Object[additionalValues.length + 4];
+@@ -266,6 +266,7 @@
+             parms[1] = Integer.valueOf(ordinal);
+             System.arraycopy(additionalValues, 0, parms, 2, additionalValues.length);
+         }
++
+         return enumClass.cast(newInstance.invoke(getConstructorAccessor(decompiled, enumClass, additionalTypes), new Object[] {parms}));
+     }
+ 
+@@ -304,7 +305,7 @@
+     }
+ 
+     @SuppressWarnings("unchecked")
+-    public static <T extends Enum<? >> T addEnum(boolean decompiled, Class<T> enumType, String enumName, Class<?>[] paramTypes, Object[] paramValues)
++    public static < T extends Enum<? >> T addEnum(boolean decompiled, Class<T> enumType, String enumName, Class<?>[] paramTypes, Object[] paramValues)
+     {
+         if (!isSetup)
+         {
+@@ -336,6 +337,7 @@
+                 }
+             }
+         }
++
+         valuesField.setAccessible(true);
+ 
+         try
+@@ -346,7 +348,6 @@
+             values.add(newValue);
+             setFailsafeFieldValue(valuesField, null, values.toArray((T[]) Array.newInstance(enumType, 0)));
+             cleanEnumCache(enumType);
+-
+             return newValue;
+         }
+         catch (Exception e)

@@ -1,0 +1,46 @@
+--- ../src_base/minecraft_server/net/minecraft/src/ItemInWorldManager.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/ItemInWorldManager.java	0000-00-00 00:00:00.000000000 -0000
+@@ -185,10 +185,12 @@
+     public boolean blockHarvessted(int par1, int par2, int par3)
+     {
+         ItemStack stack = thisPlayer.getCurrentEquippedItem();
++
+         if (stack != null && stack.getItem().onBlockStartBreak(stack, par1, par2, par3, thisPlayer))
+         {
+             return false;
+         }
++
+         int var4 = this.thisWorld.getBlockId(par1, par2, par3);
+         int var5 = this.thisWorld.getBlockMetadata(par1, par2, par3);
+         this.thisWorld.playAuxSFXAtEntity(this.thisPlayer, 2001, par1, par2, par3, var4 + (this.thisWorld.getBlockMetadata(par1, par2, par3) << 12));
+@@ -262,7 +264,7 @@
+         {
+             return true;
+         }
+-        
++
+         int var8 = par2World.getBlockId(par4, par5, par6);
+ 
+         if (var8 > 0 && Block.blocksList[var8].blockActivated(par2World, par4, par5, par6, par1EntityPlayer))
+@@ -288,10 +290,12 @@
+             {
+                 return false;
+             }
++
+             if (par3ItemStack.stackSize == 0)
+             {
+                 ForgeHooks.onDestroyCurrentItem(par1EntityPlayer, par3ItemStack);
+             }
++
+             return true;
+         }
+     }
+@@ -303,7 +307,7 @@
+     {
+         this.thisWorld = par1WorldServer;
+     }
+-    
++
+     public double getBlockReachDistance()
+     {
+         return blockReachDistance;

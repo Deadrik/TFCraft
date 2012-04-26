@@ -1,0 +1,15 @@
+--- ../src_base/minecraft/net/minecraft/src/BlockContainer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/BlockContainer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -47,10 +47,10 @@
+             var7.onTileEntityPowered(par5, par6);
+         }
+     }
+-    
++
+     /**
+      * Metadata-sensitive version, to fix 1.8.1 regression.
+-     * @param meta The current Metadata 
++     * @param meta The current Metadata
+      * @return And instance of the TileEntity class for this block
+      */
+     public TileEntity getBlockEntity(int meta)

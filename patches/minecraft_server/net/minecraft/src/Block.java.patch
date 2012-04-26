@@ -76,3 +76,445 @@
      public static final Block jukebox = (new BlockJukeBox(84, 74)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setBlockName("jukebox").setRequiresSelfNotify();
      public static final Block fence = (new BlockFence(85, 4)).setHardness(2.0F).setResistance(5.0F).setStepSound(soundWoodFootstep).setBlockName("fence");
      public static final Block pumpkin = (new BlockPumpkin(86, 102, false)).setHardness(1.0F).setStepSound(soundWoodFootstep).setBlockName("pumpkin").setRequiresSelfNotify();
+@@ -538,7 +539,6 @@
+         return this.blockID;
+     }
+ 
+-
+     /**
+      * Deprecated in favor of a metadata sensitive version
+      * @param entityplayer Entity attacking the block
+@@ -566,8 +566,8 @@
+         if (!par1World.isRemote)
+         {
+             int var8 = this.quantityDroppedWithBonus(par7, par1World.rand);
+-            
+             ArrayList<ItemStack> items = getBlockDropped(par1World, par2, par3, par4, par5, par7);
++
+             for (ItemStack item : items)
+             {
+                 if (par1World.rand.nextFloat() <= par6)
+@@ -975,51 +975,51 @@
+     /* =================================================== FORGE START =====================================*/
+     /**
+      * Get a light value for this block, normal ranges are between 0 and 15
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+      * @return The light value
+      */
+-    public int getLightValue(IBlockAccess world, int x, int y, int z) 
++    public int getLightValue(IBlockAccess world, int x, int y, int z)
+     {
+         return lightValue[blockID];
+     }
+ 
+     /**
+      * Checks if a player or entity can use this block to 'climb' like a ladder.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+      * @return True if the block should act like a ladder
+      */
+-    public boolean isLadder(World world, int x, int y, int z) 
++    public boolean isLadder(World world, int x, int y, int z)
+     {
+         return false;
+     }
+-    
++
+     /**
+      * Return true if the block is a normal, solid cube.  This
+      * determines indirect power state, entity ejection from blocks, and a few
+      * others.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+      * @return True if the block is a full cube
+      */
+-    public boolean isBlockNormalCube(World world, int x, int y, int z) 
++    public boolean isBlockNormalCube(World world, int x, int y, int z)
+     {
+         return blockMaterial.isOpaque() && renderAsNormalBlock();
+     }
+ 
+     /**
+      * Checks if the block is a solid face on the given side, used by placement logic.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+@@ -1027,9 +1027,10 @@
+      * @param size The side to check
+      * @return True if the block is solid on the specified side.
+      */
+-    public boolean isBlockSolidOnSide(World world, int x, int y, int z, int side) 
++    public boolean isBlockSolidOnSide(World world, int x, int y, int z, int side)
+     {
+         int meta = world.getBlockMetadata(x, y, z);
++
+         if (this instanceof BlockStep)
+         {
+             return (((meta & 8) == 8 && (side == 1)) || isOpaqueCube());
+@@ -1043,20 +1044,21 @@
+             boolean flipped = ((meta & 4) != 0);
+             return ((meta & 3) + side == 5) || (side == 1 && flipped);
+         }
++
+         return isBlockNormalCube(world, x, y, z);
+     }
+ 
+     /**
+      * Determines if a new block can be replace the space occupied by this one,
+      * Used in the player's placement code to make the block act like water, and lava.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+      * @return True if the block is replaceable by another block
+      */
+-    public boolean isBlockReplaceable(World world, int x, int y, int z) 
++    public boolean isBlockReplaceable(World world, int x, int y, int z)
+     {
+         return false;
+     }
+@@ -1064,81 +1066,81 @@
+     /**
+      * Determines if this block should set fire and deal fire damage
+      * to entities coming into contact with it.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+      * @return True if the block should deal damage
+      */
+-    public boolean isBlockBurning(World world, int x, int y, int z) 
++    public boolean isBlockBurning(World world, int x, int y, int z)
+     {
+         return false;
+     }
+-    
++
+     /**
+      * Determines this block should be treated as an air block
+      * by the rest of the code. This method is primarily
+-     * useful for creating pure logic-blocks that will be invisible 
++     * useful for creating pure logic-blocks that will be invisible
+      * to the player and otherwise interact as air would.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+      * @return True if the block considered air
+      */
+-    public boolean isAirBlock(World world, int x, int y, int z) 
++    public boolean isAirBlock(World world, int x, int y, int z)
+     {
+         return false;
+     }
+ 
+     /**
+      * Metadata sensitive version of the default getHardness function.
+-     * 
++     *
+      * @param meta The block's current metatdata
+      * @return Block hardness
+      */
+-    public float getHardness(int meta) 
++    public float getHardness(int meta)
+     {
+         return blockHardness;
+     }
+ 
+     /**
+      * Determines this block's strength against being destroyed by a player.
+-     * 
++     *
+      * @param world The current world
+      * @param player The player damaging the block, may be null
+      * @param x X Position
+      * @param y Y position
+      * @param z Z position
+-     * @return A value 
++     * @return A value
+      */
+-    public float blockStrength(World world, EntityPlayer player, int x, int y, int z) 
++    public float blockStrength(World world, EntityPlayer player, int x, int y, int z)
+     {
+         return blockStrength(player, world.getBlockMetadata(x, y, z));
+     }
+ 
+     /**
+      * Determines this block's strength against being destroyed by a player.
+-     * 
++     *
+      * @param player The player damaging the block, may be null
+      * @param meta The block's current metadata
+      * @return The larger the value, the faster it breaks.
+      */
+-    public float blockStrength(EntityPlayer player, int meta) 
++    public float blockStrength(EntityPlayer player, int meta)
+     {
+         return ForgeHooks.blockStrength(this, player, meta);
+     }
+ 
+     /**
+      * Determines if the player can harvest this block, obtaining it's drops when the block is destroyed.
+-     * 
++     *
+      * @param player The player damaging the block, may be null
+      * @param meta The block's current metadata
+      * @return True tospawn the drops
+      */
+-    public boolean canHarvestBlock(EntityPlayer player, int meta) 
++    public boolean canHarvestBlock(EntityPlayer player, int meta)
+     {
+         return ForgeHooks.canHarvestBlock(this, player, meta);
+     }
+@@ -1147,13 +1149,13 @@
+      * Called when a player removes a block.  This is responsible for
+      * actually destroying the block, and the block is intact at time of call.
+      * This is called regardless of whether the player can harvest the block or
+-     * not.  
+-     * 
++     * not.
++     *
+      * Return true if the block is actually destroyed.
+      *
+      * Note: When used in multiplayer, this is called on both client and
+      * server sides!
+-     * 
++     *
+      * @param world The current world
+      * @param player The player damaging the block, may be null
+      * @param x X Position
+@@ -1161,29 +1163,29 @@
+      * @param z Z position
+      * @return True if the block is actually destroyed.
+      */
+-    public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) 
++    public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
+     {
+         return world.setBlockWithNotify(x, y, z, 0);
+     }
+ 
+     /**
+-     * Called when a new CreativeContainer is opened, populate the list 
++     * Called when a new CreativeContainer is opened, populate the list
+      * with all of the items for this block you want a player in creative mode
+      * to have access to.
+-     * 
++     *
+      * @param itemList The list of items to display on the creative inventory.
+      */
+     public void addCreativeItems(ArrayList itemList)
+-    {       
++    {
+     }
+-    
++
+     protected static int blockFireSpreadSpeed[] = new int[256];
+     protected static int blockFlammability[] = new int[256];
+-    
++
+     /**
+      * Chance that fire will spread and consume this block.
+      * 300 being a 100% chance, 0, being a 0% chance.
+-     * 
++     *
+      * @param world The current world
+      * @param x The blocks X position
+      * @param y The blocks Y position
+@@ -1196,11 +1198,11 @@
+     {
+         return blockFlammability[blockID];
+     }
+-    
++
+     /**
+      * Called when fire is updating, checks if a block face can catch fire.
+-     * 
+-     * 
++     *
++     *
+      * @param world The current world
+      * @param x The blocks X position
+      * @param y The blocks Y position
+@@ -1213,11 +1215,11 @@
+     {
+         return getFlammability(world, x, y, z, metadata, face) > 0;
+     }
+-    
++
+     /**
+      * Called when fire is updating on a neighbor block.
+      * The higher the number returned, the faster fire will spread around this block.
+-     * 
++     *
+      * @param world The current world
+      * @param x The blocks X position
+      * @param y The blocks Y position
+@@ -1230,19 +1232,19 @@
+     {
+         return blockFireSpreadSpeed[blockID];
+     }
+-    
++
+     /**
+      * Currently only called by fire when it is on top of this block.
+      * Returning true will prevent the fire from naturally dying during updating.
+      * Also prevents firing from dying from rain.
+-     * 
++     *
+      * @param world The current world
+      * @param x The blocks X position
+      * @param y The blocks Y position
+      * @param z The blocks Z position
+      * @param metadata The blocks current metadata
+      * @param face The face that the fire is coming from
+-     * @return 
++     * @return
+      */
+     public boolean isFireSource(World world, int x, int y, int z, int metadata, int face)
+     {
+@@ -1250,10 +1252,12 @@
+         {
+             return true;
+         }
++
+         if ((world.worldProvider instanceof WorldProviderEnd) && blockID == Block.bedrock.blockID && face == 0)
+         {
+             return true;
+         }
++
+         return false;
+     }
+ 
+@@ -1271,11 +1275,11 @@
+ 
+     /**
+      * Called throughout the code as a replacement for block instanceof BlockContainer
+-     * Moving this to the Block base class allows for mods that wish to extend vinella 
++     * Moving this to the Block base class allows for mods that wish to extend vinella
+      * blocks, and also want to have a tile entity on that block, may.
+-     * 
++     *
+      * Return true from this function to specify this block has a tile entity.
+-     * 
++     *
+      * @param metadata Metadata of the current block
+      * @return True if block has a tile entity, false otherwise
+      */
+@@ -1283,12 +1287,12 @@
+     {
+         return isBlockContainer;
+     }
+-    
++
+     /**
+      * Called throughout the code as a replacement for BlockContainer.getBlockEntity
+      * Return the same thing you would from that function.
+      * This will fall back to BlockContainer.getBlockEntity if this block is a BlockContainer.
+-     * 
++     *
+      * @param metadata The Metadata of the current block
+      * @return A instance of a class extending TileEntity
+      */
+@@ -1298,13 +1302,14 @@
+         {
+             return ((BlockContainer)this).getBlockEntity(metadata);
+         }
++
+         return null;
+-    }    
+-    
++    }
++
+     /**
+      * Metadata and fortune sensitive version, this replaces the old (int meta, Random rand)
+-     * version in 1.1. 
+-     * 
++     * version in 1.1.
++     *
+      * @param meta Blocks Metadata
+      * @param fortune Current item fortune level
+      * @param random Random number generator
+@@ -1314,10 +1319,10 @@
+     {
+         return quantityDroppedWithBonus(fortune, random);
+     }
+-    
++
+     /**
+      * This returns a complete list of items dropped from this block.
+-     * 
++     *
+      * @param world The current world
+      * @param x X Position
+      * @param Y Y Position
+@@ -1329,22 +1334,24 @@
+     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+     {
+         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+-        
+         int count = quantityDropped(metadata, fortune, world.rand);
+-        for(int i = 0; i < count; i++)
++
++        for (int i = 0; i < count; i++)
+         {
+             int id = idDropped(metadata, world.rand, 0);
++
+             if (id > 0)
+             {
+                 ret.add(new ItemStack(id, 1, damageDropped(metadata)));
+             }
+         }
++
+         return ret;
+     }
+-    
++
+     /**
+      * Return true from this function if the player with silk touch can harvest this block directly, and not it's normal drops.
+-     * 
++     *
+      * @param world The world
+      * @param player The player doing the harvesting
+      * @param x X Position
+@@ -1355,13 +1362,14 @@
+      */
+     public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+     {
+-    	if (this instanceof BlockGlass)
+-    	{
+-    		return true;
+-    	}
+-    	return renderAsNormalBlock() && !hasTileEntity(metadata);
++        if (this instanceof BlockGlass)
++        {
++            return true;
++        }
++
++        return renderAsNormalBlock() && !hasTileEntity(metadata);
+     }
+-    
++
+     static
+     {
+         Item.itemsList[cloth.blockID] = (new ItemCloth(cloth.blockID - 256)).setItemName("cloth");

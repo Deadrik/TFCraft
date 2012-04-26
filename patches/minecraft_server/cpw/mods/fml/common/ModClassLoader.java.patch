@@ -1,0 +1,87 @@
+--- ../src_base/minecraft_server/cpw/mods/fml/common/ModClassLoader.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/cpw/mods/fml/common/ModClassLoader.java	0000-00-00 00:00:00.000000000 -0000
+@@ -22,14 +22,13 @@
+ 
+ /**
+  * A simple delegating class loader used to load mods into the system
+- * 
+- * 
++ *
++ *
+  * @author cpw
+  *
+  */
+ public class ModClassLoader extends URLClassLoader
+ {
+-
+     public ModClassLoader()
+     {
+         super(new URL[0], ModClassLoader.class.getClassLoader());
+@@ -37,32 +36,44 @@
+ 
+     public void addFile(File modFile) throws MalformedURLException
+     {
+-        ClassLoader cl=getParent();
+-        if (cl instanceof URLClassLoader) {
+-            URLClassLoader ucl=(URLClassLoader) cl;
++        ClassLoader cl = getParent();
++
++        if (cl instanceof URLClassLoader)
++        {
++            URLClassLoader ucl = (URLClassLoader) cl;
+             URL url = modFile.toURI().toURL();
+-            try {
+-                Method addUrl=URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
++
++            try
++            {
++                Method addUrl = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+                 addUrl.setAccessible(true);
+                 addUrl.invoke(ucl, url);
+-            } catch (Exception e) {
++            }
++            catch (Exception e)
++            {
+                 Loader.log.severe("A fatal error occured attempting to load a file into the classloader");
+                 throw new LoaderException(e);
+             }
+         }
+     }
+-    
+-    public File[] getParentSources() {
+-        ClassLoader cl=getParent();
+-        if (cl instanceof URLClassLoader) {
+-            URLClassLoader ucl=(URLClassLoader) cl;
+-            URL[] pUrl=ucl.getURLs();
+-            File[] sources=new File[pUrl.length];
++
++    public File[] getParentSources()
++    {
++        ClassLoader cl = getParent();
++
++        if (cl instanceof URLClassLoader)
++        {
++            URLClassLoader ucl = (URLClassLoader) cl;
++            URL[] pUrl = ucl.getURLs();
++            File[] sources = new File[pUrl.length];
++
+             try
+             {
+-                for (int i=0; i<pUrl.length; i++) {
+-                    sources[i]=new File(pUrl[i].toURI());
++                for (int i = 0; i < pUrl.length; i++)
++                {
++                    sources[i] = new File(pUrl[i].toURI());
+                 }
++
+                 return sources;
+             }
+             catch (URISyntaxException e)
+@@ -70,6 +81,7 @@
+                 Loader.log.throwing("ModClassLoader", "getParentSources", e);
+             }
+         }
++
+         Loader.log.severe("Unable to process our input to locate the minecraft code");
+         throw new LoaderException();
+     }

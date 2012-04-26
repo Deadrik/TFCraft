@@ -1,0 +1,54 @@
+--- ../src_base/minecraft/net/minecraft/client/Minecraft.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/client/Minecraft.java	0000-00-00 00:00:00.000000000 -0000
+@@ -1949,9 +1949,9 @@
+      */
+     public void usePortal(int par1)
+     {
+-    	usePortal(par1, new Teleporter());
++        usePortal(par1, new Teleporter());
+     }
+-    
++
+     public void usePortal(int par1, Teleporter teleporter)
+     {
+         int var2 = this.thePlayer.dimension;
+@@ -1971,7 +1971,7 @@
+         {
+             this.theWorld.updateEntityWithOptionalForce(this.thePlayer, false);
+         }
+-        
++
+         if (thePlayer.dimension == 1)
+         {
+             ChunkCoordinates var10 = var9.getEntrancePortalLocation();
+@@ -1979,14 +1979,14 @@
+             this.thePlayer.posY = (double)var10.posY;
+             var5 = (double)var10.posZ;
+         }
+-        
++
+         if (thePlayer.dimension == 0)
+         {
+-        	changeWorld(var9, pOld.getDepartMessage(), thePlayer);
++            changeWorld(var9, pOld.getDepartMessage(), thePlayer);
+         }
+         else
+         {
+-        	changeWorld(var9, pNew.getWelcomeMessage(), thePlayer);
++            changeWorld(var9, pNew.getWelcomeMessage(), thePlayer);
+         }
+ 
+         this.thePlayer.worldObj = this.theWorld;
+@@ -2280,10 +2280,10 @@
+         {
+             this.usePortal(0);
+         }
+-        
++
+         if (!this.theWorld.isRemote && this.theWorld.worldProvider.canRespawnHere())
+         {
+-        	par2 = this.theWorld.worldProvider.worldType; //Fix for vanilla always re-spawning to the over world.
++            par2 = this.theWorld.worldProvider.worldType; //Fix for vanilla always re-spawning to the over world.
+         }
+ 
+         ChunkCoordinates var4 = null;

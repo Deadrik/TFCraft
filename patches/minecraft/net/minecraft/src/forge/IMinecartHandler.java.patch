@@ -1,0 +1,16 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/IMinecartHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/IMinecartHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -6,7 +6,6 @@
+ 
+ public interface IMinecartHandler
+ {
+-
+     /**
+      * This functions is called at the end of every minecart's doUpdate loop.
+      * If you override EntityMinecart.doUpdate(), is recommended that you retain the code that calls this function.
+@@ -35,5 +34,4 @@
+      * @return Whether the player can interact with the minecart.
+      */
+     public boolean onMinecartInteract(EntityMinecart minecart, EntityPlayer player, boolean canceled);
+-
+ }

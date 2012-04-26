@@ -1,0 +1,286 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/ForgeHooksClient.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/ForgeHooksClient.java	0000-00-00 00:00:00.000000000 -0000
+@@ -31,7 +31,6 @@
+ 
+ public class ForgeHooksClient
+ {
+-
+     public static boolean onBlockHighlight(RenderGlobal render, EntityPlayer player, MovingObjectPosition target, int i, ItemStack itemstack, float partialTicks)
+     {
+         for (IHighlightHandler handler : highlightHandlers)
+@@ -41,6 +40,7 @@
+                 return true;
+             }
+         }
++
+         return false;
+     }
+ 
+@@ -54,7 +54,7 @@
+ 
+     public static LinkedList<IHighlightHandler> highlightHandlers = new LinkedList<IHighlightHandler>();
+     public static LinkedList<IRenderWorldLastHandler> renderWorldLastHandlers = new LinkedList<IRenderWorldLastHandler>();
+-    
++
+     public static void onTextureLoad(String textureName, int textureID)
+     {
+         for (ITextureLoadHandler handler: textureLoadHandlers)
+@@ -70,10 +70,12 @@
+         {
+             return ((IMultipassRender)block).canRenderInPass(pass);
+         }
++
+         if (pass == block.getRenderBlockPass())
+         {
+             return true;
+         }
++
+         return false;
+     }
+ 
+@@ -90,6 +92,7 @@
+             {
+                 return tex - key.tex;
+             }
++
+             return sub - key.sub;
+         }
+         public boolean equals(Object obj)
+@@ -115,11 +118,13 @@
+     protected static void registerRenderContextHandler(String texture, int subID, IRenderContextHandler handler)
+     {
+         Integer texID = textures.get(texture);
++
+         if (texID == null)
+         {
+             texID = ModLoader.getMinecraftInstance().renderEngine.getTexture(texture);
+             textures.put(texture, texID);
+         }
++
+         renderHandlers.put(new TesKey(texID, subID), handler);
+     }
+ 
+@@ -127,17 +132,20 @@
+     {
+         TesKey key = new TesKey(texture, subID);
+         Tessellator tess = tessellators.get(key);
++
+         if (tess == null)
+         {
+             tess = new Tessellator();
+             tessellators.put(key, tess);
+         }
++
+         if (inWorld && !renderTextures.contains(key))
+         {
+             renderTextures.add(key);
+             tess.startDrawingQuads();
+             tess.setTranslation(defaultTessellator.xOffset, defaultTessellator.yOffset, defaultTessellator.zOffset);
+         }
++
+         Tessellator.instance = tess;
+     }
+ 
+@@ -145,11 +153,13 @@
+     protected static void bindTexture(String texture, int subID)
+     {
+         Integer texID = textures.get(texture);
++
+         if (texID == null)
+         {
+             texID = ModLoader.getMinecraftInstance().renderEngine.getTexture(texture);
+             textures.put(texture, texID);
+         }
++
+         if (!inWorld)
+         {
+             if (unbindContext != null)
+@@ -157,20 +167,25 @@
+                 unbindContext.afterRenderContext();
+                 unbindContext = null;
+             }
++
+             if (Tessellator.instance.isDrawing)
+             {
+                 int mode = Tessellator.instance.drawMode;
+                 Tessellator.instance.draw();
+                 Tessellator.instance.startDrawing(mode);
+             }
++
+             GL11.glBindTexture(GL11.GL_TEXTURE_2D, texID);
+             unbindContext = renderHandlers.get(new TesKey(texID, subID));
++
+             if (unbindContext != null)
+             {
+                 unbindContext.beforeRenderContext();
+             }
++
+             return;
+         }
++
+         bindTessellator(texID, subID);
+     }
+ 
+@@ -186,13 +201,16 @@
+             {
+                 int mode = Tessellator.instance.drawMode;
+                 Tessellator.instance.draw();
++
+                 if (unbindContext != null)
+                 {
+                     unbindContext.afterRenderContext();
+                     unbindContext = null;
+                 }
++
+                 Tessellator.instance.startDrawing(mode);
+             }
++
+             GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("/terrain.png"));
+             return;
+         }
+@@ -213,11 +231,13 @@
+     {
+         renderPass = -1;
+         inWorld = false;
++
+         for (TesKey info : renderTextures)
+         {
+             IRenderContextHandler handler = renderHandlers.get(info);
+             GL11.glBindTexture(GL11.GL_TEXTURE_2D, info.tex);
+             Tessellator tess = tessellators.get(info);
++
+             if (handler == null)
+             {
+                 tess.draw();
+@@ -230,6 +250,7 @@
+                 handler.afterRenderContext();
+             }
+         }
++
+         GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("/terrain.png"));
+         Tessellator.renderingWorldRenderer = false;
+         Tessellator.instance = defaultTessellator;
+@@ -251,7 +272,7 @@
+         }
+     }
+ 
+-    public static void overrideTexture (Object obj)
++    public static void overrideTexture(Object obj)
+     {
+         if (obj instanceof ITextureProvider)
+         {
+@@ -270,7 +291,7 @@
+             return def;
+         }
+     }
+-    
++
+     public static void renderEquippedItem(IItemRenderer customRenderer, RenderBlocks renderBlocks, EntityLiving entity, ItemStack item)
+     {
+         if (customRenderer.shouldUseRenderHelper(EQUIPPED, item, EQUIPPED_BLOCK))
+@@ -294,18 +315,18 @@
+             GL11.glPopMatrix();
+         }
+     }
+-    
++
+     /**
+-     * Trys to get the class for the specified name, will also try the 
++     * Trys to get the class for the specified name, will also try the
+      * net.minecraft.src package in case we are in MCP
+      * Returns null if not found.
+-     * 
++     *
+      * @param name The class name
+      * @return The Class, or null if not found
+      */
+     private static Class getClass(String name)
+     {
+-        try 
++        try
+         {
+             return Class.forName(name);
+         }
+@@ -323,7 +344,7 @@
+     }
+ 
+     public static LinkedList<ISoundHandler> soundHandlers = new LinkedList<ISoundHandler>();
+-    public static void onSetupAudio(SoundManager soundManager) 
++    public static void onSetupAudio(SoundManager soundManager)
+     {
+         for (ISoundHandler handler : soundHandlers)
+         {
+@@ -331,7 +352,7 @@
+         }
+     }
+ 
+-    public static void onLoadSoundSettings(SoundManager soundManager) 
++    public static void onLoadSoundSettings(SoundManager soundManager)
+     {
+         for (ISoundHandler handler : soundHandlers)
+         {
+@@ -339,16 +360,18 @@
+         }
+     }
+ 
+-    public static SoundPoolEntry onPlayBackgroundMusic(SoundManager soundManager, SoundPoolEntry entry) 
++    public static SoundPoolEntry onPlayBackgroundMusic(SoundManager soundManager, SoundPoolEntry entry)
+     {
+         for (ISoundHandler handler : soundHandlers)
+         {
+             entry = handler.onPlayBackgroundMusic(soundManager, entry);
++
+             if (entry == null)
+             {
+                 return null;
+             }
+         }
++
+         return entry;
+     }
+ 
+@@ -357,11 +380,13 @@
+         for (ISoundHandler handler : soundHandlers)
+         {
+             entry = handler.onPlayStreaming(soundManager, entry, soundName, x, y, z);
++
+             if (entry == null)
+             {
+                 return null;
+             }
+         }
++
+         return entry;
+     }
+ 
+@@ -370,24 +395,28 @@
+         for (ISoundHandler handler : soundHandlers)
+         {
+             entry = handler.onPlaySound(soundManager, entry, soundName, x, y, z, volume, pitch);
++
+             if (entry == null)
+             {
+                 return null;
+             }
+         }
++
+         return entry;
+     }
+ 
+-    public static SoundPoolEntry onPlaySoundEffect(SoundManager soundManager, SoundPoolEntry entry, String soundName, float volume, float pitch) 
++    public static SoundPoolEntry onPlaySoundEffect(SoundManager soundManager, SoundPoolEntry entry, String soundName, float volume, float pitch)
+     {
+         for (ISoundHandler handler : soundHandlers)
+         {
+-            entry = handler.onPlaySoundEffect(soundManager, entry, soundName,volume, pitch);
++            entry = handler.onPlaySoundEffect(soundManager, entry, soundName, volume, pitch);
++
+             if (entry == null)
+             {
+                 return null;
+             }
+         }
++
+         return entry;
+     }
+ }

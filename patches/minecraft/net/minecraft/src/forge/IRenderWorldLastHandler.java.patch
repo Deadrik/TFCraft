@@ -1,0 +1,7 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/IRenderWorldLastHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/IRenderWorldLastHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -15,4 +15,3 @@
+      */
+     void onRenderWorldLast(RenderGlobal renderer, float partialTicks);
+ }
+-

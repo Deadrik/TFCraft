@@ -1,0 +1,184 @@
+--- ../src_base/minecraft/net/minecraft/src/Chunk.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/Chunk.java	0000-00-00 00:00:00.000000000 -0000
+@@ -143,11 +143,11 @@
+     }
+ 
+     /**
+-     * Metadata sensitive Chunk constructor for use in new ChunkProviders that 
++     * Metadata sensitive Chunk constructor for use in new ChunkProviders that
+      * use metadata sensitive blocks during generation.
+-     * 
++     *
+      * @param world The world this chunk belongs to
+-     * @param ids A ByteArray containing all the BlockID's to set this chunk to 
++     * @param ids A ByteArray containing all the BlockID's to set this chunk to
+      * @param metadata A ByteArray containing all the metadata to set this chunk to
+      * @param chunkX The chunk's X position
+      * @param chunkZ The Chunk's Z position
+@@ -611,7 +611,7 @@
+             {
+                 return false;
+             }
+-            
++
+             ExtendedBlockStorage var9 = this.storageArrays[par2 >> 4];
+             boolean var10 = false;
+ 
+@@ -636,6 +636,7 @@
+                 {
+                     Block.blocksList[var8].onBlockRemoval(this.worldObj, var11, par2, var12);
+                 }
++
+                 if (Block.blocksList[var8] != null && Block.blocksList[var8].hasTileEntity(getBlockMetadata(par1, par2, par3)))
+                 {
+                     this.worldObj.removeBlockTileEntity(var11, par2, var12);
+@@ -697,6 +698,7 @@
+                         }
+                     }
+                 }
++
+                 this.isModified = true;
+                 return true;
+             }
+@@ -763,7 +765,7 @@
+         {
+             return;
+         }
+-        
++
+         ExtendedBlockStorage var6 = this.storageArrays[par3 >> 4];
+ 
+         if (var6 == null)
+@@ -899,7 +901,7 @@
+     {
+         ChunkPosition var4 = new ChunkPosition(par1, par2, par3);
+         TileEntity var5 = (TileEntity)this.chunkTileEntityMap.get(var4);
+-        
++
+         if (var5 != null && var5.isInvalid())
+         {
+             chunkTileEntityMap.remove(var4);
+@@ -910,7 +912,7 @@
+         {
+             int var6 = this.getBlockID(par1, par2, par3);
+             int meta = getBlockMetadata(par1, par2, par3);
+-            
++
+             if (var6 <= 0 || Block.blocksList[var6] == null || !Block.blocksList[var6].hasTileEntity(meta))
+             {
+                 return null;
+@@ -954,15 +956,17 @@
+         par4TileEntity.xCoord = this.xPosition * 16 + par1;
+         par4TileEntity.yCoord = par2;
+         par4TileEntity.zCoord = this.zPosition * 16 + par3;
+-
+         int id = getBlockID(par1, par2, par3);
++
+         if (id > 0 && Block.blocksList[id] != null && Block.blocksList[id].hasTileEntity(getBlockMetadata(par1, par2, par3)))
+         {
+             TileEntity old = (TileEntity)chunkTileEntityMap.get(var5);
++
+             if (old != null)
+             {
+                 old.invalidate();
+             }
++
+             par4TileEntity.validate();
+             this.chunkTileEntityMap.put(var5, par4TileEntity);
+         }
+@@ -998,6 +1002,7 @@
+         {
+             this.worldObj.addLoadedEntities(this.entityLists[var1]);
+         }
++
+         ForgeHooks.onChunkLoad(worldObj, this);
+     }
+ 
+@@ -1019,6 +1024,7 @@
+         {
+             this.worldObj.unloadEntities(this.entityLists[var3]);
+         }
++
+         ForgeHooks.onChunkUnload(worldObj, this);
+     }
+ 
+@@ -1282,16 +1288,16 @@
+ 
+     public void func_48494_a(byte[] par1ArrayOfByte, int par2, int par3, boolean par4)
+     {
+-        
+         Iterator iterator = chunkTileEntityMap.values().iterator();
+-        while(iterator.hasNext())
++
++        while (iterator.hasNext())
+         {
+             TileEntity tileEntity = (TileEntity)iterator.next();
+             tileEntity.updateContainingBlockInfo();
+             tileEntity.getBlockMetadata();
+             tileEntity.getBlockType();
+         }
+-        
++
+         int var5 = 0;
+         int var6;
+ 
+@@ -1388,9 +1394,9 @@
+         }
+ 
+         this.generateHeightMap();
+-        
+         List<TileEntity> invalidList = new ArrayList<TileEntity>();
+         iterator = chunkTileEntityMap.values().iterator();
++
+         while (iterator.hasNext())
+         {
+             TileEntity tileEntity = (TileEntity)iterator.next();
+@@ -1398,13 +1404,15 @@
+             int y = tileEntity.yCoord;
+             int z = tileEntity.zCoord & 15;
+             Block block = tileEntity.getBlockType();
++
+             if (block == null || block.blockID != getBlockID(x, y, z) || tileEntity.getBlockMetadata() != getBlockMetadata(x, y, z))
+             {
+                 invalidList.add(tileEntity);
+             }
++
+             tileEntity.updateContainingBlockInfo();
+         }
+-        
++
+         for (TileEntity tileEntity : invalidList)
+         {
+             tileEntity.invalidate();
+@@ -1513,18 +1521,20 @@
+             }
+         }
+     }
+-    
++
+     /** FORGE: Used to remove only invalid TileEntities */
+-    public void cleanChunkBlockTileEntity(int x, int y, int z) 
++    public void cleanChunkBlockTileEntity(int x, int y, int z)
+     {
+-    	ChunkPosition position = new ChunkPosition(x, y, z);
+-    	if (isChunkLoaded)
+-    	{
+-    		TileEntity entity = (TileEntity)chunkTileEntityMap.get(position);
+-    		if (entity != null && entity.isInvalid())
+-    		{
+-    			chunkTileEntityMap.remove(position);
+-    		}
+-    	}
++        ChunkPosition position = new ChunkPosition(x, y, z);
++
++        if (isChunkLoaded)
++        {
++            TileEntity entity = (TileEntity)chunkTileEntityMap.get(position);
++
++            if (entity != null && entity.isInvalid())
++            {
++                chunkTileEntityMap.remove(position);
++            }
++        }
+     }
+ }

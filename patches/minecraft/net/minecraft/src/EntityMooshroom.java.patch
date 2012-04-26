@@ -1,0 +1,44 @@
+--- ../src_base/minecraft/net/minecraft/src/EntityMooshroom.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/EntityMooshroom.java	0000-00-00 00:00:00.000000000 -0000
+@@ -34,6 +34,7 @@
+                 return true;
+             }
+         }
++
+         return super.interact(par1EntityPlayer);
+     }
+ 
+@@ -44,15 +45,15 @@
+     {
+         return new EntityMooshroom(this.worldObj);
+     }
+-    
++
+     @Override
+-    public boolean isShearable(ItemStack item, World world, int X, int Y, int Z) 
++    public boolean isShearable(ItemStack item, World world, int X, int Y, int Z)
+     {
+         return getGrowingAge() >= 0;
+     }
+ 
+     @Override
+-    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune) 
++    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune)
+     {
+         setDead();
+         EntityCow entitycow = new EntityCow(worldObj);
+@@ -61,12 +62,13 @@
+         entitycow.renderYawOffset = renderYawOffset;
+         worldObj.spawnEntityInWorld(entitycow);
+         worldObj.spawnParticle("largeexplode", posX, posY + (double)(height / 2.0F), posZ, 0.0D, 0.0D, 0.0D);
+-        
+         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
++
+         for (int x = 0; x < 5; x++)
+         {
+             ret.add(new ItemStack(Block.mushroomRed));
+         }
++
+         return ret;
+     }
+ }

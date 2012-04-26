@@ -1,0 +1,17 @@
+--- ../src_base/minecraft_server/net/minecraft/src/forge/IPickupHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/forge/IPickupHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -6,7 +6,6 @@
+ 
+ public interface IPickupHandler
+ {
+-
+     /**
+      * Raised when a player collides with a EntityItem.
+      * The handler may consume all, or part of the stack.
+@@ -22,5 +21,4 @@
+      * @return True If processing should continue.
+      */
+     public boolean onItemPickup(EntityPlayer player, EntityItem item);
+-
+ }
+\ No newline at end of file

@@ -1,0 +1,15 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/ITextureProvider.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/ITextureProvider.java	0000-00-00 00:00:00.000000000 -0000
+@@ -11,12 +11,10 @@
+  */
+ public interface ITextureProvider
+ {
+-
+     /**
+      * This interface has to return the path to a file that is the same size as
+      * terrain.png, but not named terrain.png. It will be used instead of the
+      * regular terrain file to render blocks and items.
+      */
+     public String getTextureFile();
+-
+ }

@@ -1,0 +1,17 @@
+--- ../src_base/minecraft_server/net/minecraft/src/forge/IArrowNockHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/forge/IArrowNockHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -10,7 +10,6 @@
+ 
+ public interface IArrowNockHandler
+ {
+-
+     /**
+      * This is called before a player tries to load an arrow. If it returns
+      * a non-null result, then the normal arrow will not be loaded and the
+@@ -22,5 +21,4 @@
+      * @return The new bow item, or null to continue normally.
+      */
+     public ItemStack onArrowNock(ItemStack itemstack, World world, EntityPlayer player);
+-
+ }
+\ No newline at end of file

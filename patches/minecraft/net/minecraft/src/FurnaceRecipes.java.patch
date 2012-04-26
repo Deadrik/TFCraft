@@ -1,0 +1,41 @@
+--- ../src_base/minecraft/net/minecraft/src/FurnaceRecipes.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/FurnaceRecipes.java	0000-00-00 00:00:00.000000000 -0000
+@@ -61,7 +61,7 @@
+     {
+         return this.smeltingList;
+     }
+-    
++
+     /**
+      * Add a metadata-sensitive furnace recipe
+      * @param itemID The Item ID
+@@ -72,23 +72,26 @@
+     {
+         metaSmeltingList.put(Arrays.asList(itemID, metadata), itemstack);
+     }
+-    
++
+     /**
+      * Used to get the resulting ItemStack form a source ItemStack
+      * @param item The Source ItemStack
+      * @return The result ItemStack
+      */
+-    public ItemStack getSmeltingResult(ItemStack item) 
++    public ItemStack getSmeltingResult(ItemStack item)
+     {
+         if (item == null)
+         {
+             return null;
+         }
++
+         ItemStack ret = (ItemStack)metaSmeltingList.get(Arrays.asList(item.itemID, item.getItemDamage()));
+-        if (ret != null) 
++
++        if (ret != null)
+         {
+             return ret;
+         }
++
+         return (ItemStack)smeltingList.get(Integer.valueOf(item.itemID));
+     }
+ }

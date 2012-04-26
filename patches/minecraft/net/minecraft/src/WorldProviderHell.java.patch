@@ -1,0 +1,30 @@
+--- ../src_base/minecraft/net/minecraft/src/WorldProviderHell.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/WorldProviderHell.java	0000-00-00 00:00:00.000000000 -0000
+@@ -78,23 +78,23 @@
+     }
+ 
+     @Override
+-    public String getSaveFolder() 
++    public String getSaveFolder()
+     {
+         return "DIM-1";
+     }
+ 
+     @Override
+-    public String getWelcomeMessage() 
++    public String getWelcomeMessage()
+     {
+         return "Entering the Nether";
+     }
+ 
+     @Override
+-    public String getDepartMessage() 
++    public String getDepartMessage()
+     {
+         return "Leaving the Nether";
+     }
+-    
++
+     @Override
+     public double getMovementFactor()
+     {

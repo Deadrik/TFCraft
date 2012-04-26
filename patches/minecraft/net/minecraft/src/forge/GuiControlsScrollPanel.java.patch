@@ -1,0 +1,35 @@
+--- ../src_base/minecraft/net/minecraft/src/forge/GuiControlsScrollPanel.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/forge/GuiControlsScrollPanel.java	0000-00-00 00:00:00.000000000 -0000
+@@ -89,14 +89,13 @@
+         xPosition -= 20;
+         boolean flag = _mouseX >= xPosition && _mouseY >= yPosition && _mouseX < xPosition + width && _mouseY < yPosition + height;
+         int k = (flag ? 2 : 1);
+-
+-        GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, mc.renderEngine.getTexture("/gui/gui.png"));
++        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/gui.png"));
+         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+         controls.drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);
+         controls.drawTexturedModalRect(xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height);
+         controls.drawString(mc.fontRenderer, options.getKeyBindingDescription(index), xPosition + width + 4, yPosition + 6, 0xFFFFFFFF);
+-
+         boolean conflict = false;
++
+         for (int x = 0; x < options.keyBindings.length; x++)
+         {
+             if (x != index && options.keyBindings[x].keyCode == options.keyBindings[index].keyCode)
+@@ -105,6 +104,7 @@
+                 break;
+             }
+         }
++
+         String str = (conflict ? "\247c" : "") + options.getOptionDisplayString(index);
+         str = (index == selected ? "\247f> \247e??? \247f<" : str);
+         controls.drawCenteredString(mc.fontRenderer, str, xPosition + (width / 2), yPosition + (height - 8) / 2, 0xFFFFFFFF);
+@@ -119,6 +119,7 @@
+             KeyBinding.resetKeyBindingArrayAndHash();
+             return false;
+         }
++
+         return true;
+     }
+ }

@@ -1,0 +1,25 @@
+--- ../src_base/minecraft/net/minecraft/src/BlockCrops.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/BlockCrops.java	0000-00-00 00:00:00.000000000 -0000
+@@ -134,11 +134,12 @@
+     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+     {
+         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
++
+         if (metadata == 7)
+         {
+             ret.add(new ItemStack(Item.wheat));
+         }
+-        
++
+         for (int n = 0; n < 3 + fortune; n++)
+         {
+             if (world.rand.nextInt(15) <= metadata)
+@@ -146,7 +147,7 @@
+                 ret.add(new ItemStack(Item.seeds));
+             }
+         }
+-        
++
+         return ret;
+     }
+ 
