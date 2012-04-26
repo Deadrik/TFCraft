@@ -22,17 +22,17 @@
  
      /**
       * The number of reeds to generate per chunk. Reeds won't generate if the randomly selected placement is unsuitable.
-@@ -130,6 +130,10 @@
+@@ -129,6 +129,10 @@
+ 
      /** True if decorator should generate surface lava & water */
      public boolean generateLakes;
- 
++    
 +    /**Added By TFC**/
 +    public int looseRocksPerChunk;
 +    public int looseRocksChancePerChunk;
-+
+ 
      public BiomeDecorator(BiomeGenBase par1BiomeGenBase)
      {
-         this.sandGen = new WorldGenSand(7, Block.sand.blockID);
 @@ -204,12 +208,12 @@
              this.sandGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
          }

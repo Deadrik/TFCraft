@@ -41,7 +41,7 @@
          this.generateTerrain(par1, par2, var3);
          this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 -        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
-+        TFC_Core.replaceBlocksForBiome(par1, par2, var3, meta, this.biomesForGeneration, this.stoneNoise, this.noiseGen4, rand);
++        TFC_Core.replaceBlocksForBiome(par1, par2, var3, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
          this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
          this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
  

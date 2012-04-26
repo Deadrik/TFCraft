@@ -25,12 +25,9 @@ def main():
     
     if os.path.isdir(base_dir):
         shutil.rmtree(base_dir)
-    if os.path.isdir(work_dir):
-        shutil.rmtree(work_dir)
         
     print 'Setting up source directories'    
     shutil.copytree(src_dir, base_dir)
-    shutil.copytree(src_dir, work_dir)
     
     print 'Applying TFC patches'
     apply_patches(os.path.join(forge_dir, 'patches'), work_dir)

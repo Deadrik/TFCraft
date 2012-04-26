@@ -41,12 +41,12 @@
          this.generateTerrain(par1, par2, var3);
          this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 -        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
-+        TFC_Core.replaceBlocksForBiome(par1, par2, var3, meta, this.biomesForGeneration, this.stoneNoise, this.noiseGen4, rand);
++        TFC_Core.replaceBlocksForBiome(par1, par2, var3, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
 +        //this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
          this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
          this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
  
-@@ -284,13 +288,6 @@
+@@ -284,12 +288,6 @@
          }
  
          Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
@@ -56,7 +56,6 @@
 -        {
 -            var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
 -        }
--
+ 
          var4.generateSkylightMap();
          return var4;
-     }
