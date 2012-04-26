@@ -32,13 +32,13 @@ def main():
     
     for path, _, filelist in os.walk(work, followlinks=True):
         for cur_file in fnmatch.filter(filelist, '*.java'):
-            file_base = os.path.normpath(os.path.join(base, path[12:], cur_file)).replace(os.path.sep, '/')
-            file_work = os.path.normpath(os.path.join(work, path[12:], cur_file)).replace(os.path.sep, '/')
+            file_base = os.path.normpath(os.path.join(base, path[7:], cur_file)).replace(os.path.sep, '/')
+            file_work = os.path.normpath(os.path.join(work, path[7:], cur_file)).replace(os.path.sep, '/')
             patch = ''
             cmd = 'diff -u %s %s -r --strip-trailing-cr --new-file' % (file_base, file_work)
             process = subprocess.Popen(cmdsplit(cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=-1)
             patch, _ = process.communicate()
-            patch_dir = os.path.join('patches', path[12:])
+            patch_dir = os.path.join('patches', path[7:])
             patch_file = os.path.join(patch_dir, cur_file + '.patch')
             
             if len(patch) > 0:
@@ -63,10 +63,6 @@ def main():
                 os.remove(os.path.join(path, cur_file))
         
     cleanDirs('patches')
-    print 'Grabing copy of Conf'
-    if os.path.exists('conf'):
-        shutil.rmtree('conf')
-    shutil.copytree('../conf', './conf/')
     
 if __name__ == '__main__':
     main()

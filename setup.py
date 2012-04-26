@@ -8,26 +8,16 @@ mcp_dir = os.path.abspath('..')
 src_dir = os.path.join(mcp_dir, 'src')
 
 sys.path.append(mcp_dir)
-from runtime.decompile import decompile
-from runtime.updatenames import updatenames
-from runtime.updatemd5 import updatemd5
-
-from tfc import apply_patches, copytree, reset_logger, download_ff
+from tfc import apply_patches, copytree
 
 
 def main():
     print '=================================== Setup Start ================================='
     
-
     if not os.path.isdir(src_dir):
         print 'Something went wrong, src folder not found at: %s' % src_dir
         sys.exit(1)
     
-    os.chdir(mcp_dir)
-    updatenames(None, True)
-    reset_logger()
-    updatemd5(None, True)
-    reset_logger()
     os.chdir(forge_dir)
     
     base_dir = os.path.join(mcp_dir, 'src_base')

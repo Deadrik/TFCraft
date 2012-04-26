@@ -79,7 +79,7 @@ def main():
     zip_add('install/install.sh')
     zip_add('install/README.txt')
     zip_add('install/install.py')
-    zip_add('forge.py')
+    zip_add('tfc.py')
     zip_add('license.txt')
     zip_end()
     inject_version(os.path.join(forge_dir, 'tfc_common', 'net', 'minecraft', 'src', 'tfc'), 0)
@@ -118,34 +118,6 @@ def zip_end():
     print '=================================== %s Finished =================================' % zip_name
     zip_name = None
     zip_base = None
-    
-def extract_fml_obfed():
-    fml_file = os.path.join(forge_dir, 'fml', 'difflist.txt')
-    if not os.path.isfile(fml_file):
-        print 'Could not find TFCraft\'s DiffList, looking for it at: %s' % fml_file
-        sys.exit(1)
-        
-    with open(fml_file, 'r') as fh:
-        lines = fh.readlines()
-        
-    client = zipfile.ZipFile(os.path.join(mcp_dir, 'temp', 'client_reobf.jar'))
-    server = zipfile.ZipFile(os.path.join(mcp_dir, 'temp', 'server_reobf.jar'))
-    
-    print 'Extracting Reobfed Forge ModLoader classes'
-    lines.append("minecraft/net/minecraft/client/MinecraftApplet.class") #Needed because users dont install Forge properly -.-
-    
-    for line in lines:
-        line = line.replace('\n', '').replace('\r', '').replace('/', os.sep)
-        print line
-        if not os.path.isfile(os.path.join(reobf_dir, line)):
-            side = line.split(os.sep)[0]
-            if side == 'minecraft':
-                client.extract(line[10:].replace(os.sep, '/'), client_dir)
-            else:
-                server.extract(line[17:].replace(os.sep, '/'), server_dir)
-        
-    client.close()
-    server.close()
     
 if __name__ == '__main__':
     main()

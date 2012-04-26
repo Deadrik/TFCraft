@@ -1,0 +1,35 @@
+--- ../src_base/minecraft/net/minecraft/src/GenLayer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/GenLayer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -37,9 +37,9 @@
+         GenLayerRiver var14 = new GenLayerRiver(1L, var5);
+         GenLayerSmooth var16 = new GenLayerSmooth(1000L, var14);
+         GenLayer var6 = GenLayerZoom.func_35515_a(1000L, var17, 0);
+-        GenLayerBiome var15 = new GenLayerBiome(200L, var6, par2WorldType);
++        GenLayerBiomeTFC var15 = new GenLayerBiomeTFC(200L, var6, par2WorldType);
+         var6 = GenLayerZoom.func_35515_a(1000L, var15, 2);
+-        Object var18 = new GenLayerHills(1000L, var6);
++        Object var18 = new GenLayerHillsTFC(1000L, var6);
+ 
+         for (int var7 = 0; var7 < var4; ++var7)
+         {
+@@ -52,17 +52,17 @@
+ 
+             if (var7 == 1)
+             {
+-                var18 = new GenLayerShore(1000L, (GenLayer)var18);
++                var18 = new GenLayerShoreTFC(1000L, (GenLayer)var18);
+             }
+ 
+             if (var7 == 1)
+             {
+-                var18 = new GenLayerSwampRivers(1000L, (GenLayer)var18);
++                var18 = new GenLayerSwampRiversTFC(1000L, (GenLayer)var18);
+             }
+         }
+ 
+         GenLayerSmooth var19 = new GenLayerSmooth(1000L, (GenLayer)var18);
+-        GenLayerRiverMix var20 = new GenLayerRiverMix(100L, var19, var16);
++        GenLayerRiverMixTFC var20 = new GenLayerRiverMixTFC(100L, var19, var16);
+         GenLayerVoronoiZoom var8 = new GenLayerVoronoiZoom(10L, var20);
+         var20.initWorldGenSeed(par0);
+         var8.initWorldGenSeed(par0);
