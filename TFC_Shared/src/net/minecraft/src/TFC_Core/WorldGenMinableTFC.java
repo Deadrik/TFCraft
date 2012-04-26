@@ -138,15 +138,17 @@ public class WorldGenMinableTFC extends WorldGenerator
 					{
 						double d14 = ((double)i3 + 0.5D - d8) / (d10 / 2D);
 						int m = world.getBlockMetadata(k2, l2, i3);
+						boolean isCorrectRockType = world.getBlockId(k2, l2, i3) == LayerID;
+						boolean isCorrectMeta = (m == LayerMeta || LayerMeta == -1);
 
-						if(d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && world.getBlockId(k2, l2, i3) == LayerID && 
-								(m == LayerMeta || LayerMeta == -1) && m != 0)
+						if(d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && isCorrectRockType && 
+								(m == LayerMeta || LayerMeta == -1))
 						{
 							world.setBlockAndMetadata(k2, l2, i3, MPBlockID, MPBlockMeta);
-							if(MPBlockID == mod_TFC_Core.terraOre.blockID && MPBlockMeta == 12)
-							{
-								System.out.println((new StringBuilder()).append("Cassiterite added! ").append(k2).append(",").append(l2).append(",").append(i3).append(",").toString());
-							}
+//							if(MPBlockID == mod_TFC_Core.terraOre.blockID && MPBlockMeta == 12)
+//							{
+//								System.out.println((new StringBuilder()).append("Cassiterite added! ").append(k2).append(",").append(l2).append(",").append(i3).append(",").toString());
+//							}
 						}
 					}
 

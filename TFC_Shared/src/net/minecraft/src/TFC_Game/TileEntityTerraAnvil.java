@@ -38,6 +38,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 	public Boolean rule1;
 	public Boolean rule2;
 	public Boolean rule3;
+	
+	private boolean isDone = false;
 
 	public TileEntityTerraAnvil()
 	{
@@ -52,6 +54,148 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 		rule3 = false;
 	}
 
+	public void updateEntity()
+	{
+		//Handle the anvil health
+
+		//Deal with temperatures
+		TFCHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
+		//reset everything when the input is empty
+		if(anvilItemStacks[1] == null || isDone)
+		{
+			rule1 = false;
+			rule2 = false;
+			rule3 = false;
+			result = null;
+			itemCraftingValue = 0;
+			itemCraftingRules = new int[]{-1,-1,-1};
+			craftingValue = 0;
+			craftingRules = new int[]{-1,-1,-1};
+			craftingRange = 0;
+			isDone = false;
+		}
+		//Find the recipe for the item that we are making. If the item is beign crafted for the first time.
+		if(anvilItemStacks[1] != null && getCraftingValue() == 0)
+		{
+			Collection<Object[]> Recipes = TFC_Game.RecipeMap.get(anvilItemStacks[1].getItem().getItemNameIS(anvilItemStacks[1]));
+			Iterator itr = Recipes.iterator();
+			while(itr.hasNext() && craftingValue == 0)
+			{
+				Object[] O = (Object[]) itr.next();
+
+				//If the blueprint slot is empty and the recipe calls for no blueprint
+				if(anvilItemStacks[5] == null && (Item)O[2] == null)
+				{
+					craftingValue = (Integer)O[0];
+					craftingRules = (int[])O[4];
+					craftingRange = (Integer)O[5];
+					craftingReq = (Integer)O[6];
+					result = (ItemStack)O[3];
+					if(result.stackSize <= 0) {
+						result.stackSize = 1;
+					}
+					break;
+				}
+				//If the blueprint slot is not empty and the recipe calls for a blueprint
+				if(anvilItemStacks[5] != null && anvilItemStacks[5].getItem() == (Item)O[2])
+				{
+					craftingValue = (Integer)O[0];
+					craftingRules = (int[])O[4];
+					craftingRange = (Integer)O[5];
+					craftingReq = (Integer)O[6];
+					result = (ItemStack)O[3];
+					break;
+				}
+			}
+		}
+		else if(anvilItemStacks[1] != null)//If the slot is not empty and crafting ahs already begun
+		{
+			int cv = getCraftingValue();
+			if(anvilItemStacks[1].hasTagCompound() && itemCraftingValue == 0 && itemCraftingRules[0] == -1 && itemCraftingRules[1] == -1 && itemCraftingRules[2] == -1)
+			{
+				itemCraftingValue = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingValue");
+				itemCraftingRules[0] = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingRule1");
+				itemCraftingRules[1] = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingRule2");
+				itemCraftingRules[2] = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingRule3");
+			}
+			if(cv != craftingValue) {
+				cv = -1;
+			}
+			if(getItemCraftingValue() != itemCraftingValue && getCraftingValue() != 0)//if the item crafting value has changed and the recipe is valid.
+			{
+				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingValue", itemCraftingValue);
+				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingRule1", itemCraftingRules[0]);
+				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingRule2", itemCraftingRules[1]);
+				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingRule3", itemCraftingRules[2]);
+			}
+			if(itemCraftingValue > 100 || itemCraftingValue < -50)
+			{
+				Object[] Data = (Object[]) TFCHeat.ItemHeatData.get(anvilItemStacks[1].getItem().getItemNameIS(anvilItemStacks[1]));
+				if(Data != null)
+				{
+					anvilItemStacks[1] = (ItemStack) Data[3];
+				} else {
+					anvilItemStacks[1] = null;
+				}
+			}
+		}
+
+		if(getCraftingValue() == getItemCraftingValue())//if the item crafting value matches the blueprint crafting value.
+		{
+			if(result != null && doRulesMatch(itemCraftingRules, craftingRules))
+			{
+				if(anvilItemStacks[1].stackTagCompound.hasKey("temperature") && TFCHeat.getMeltingPoint(result) != -1)
+				{
+					NBTTagCompound tag = new NBTTagCompound();
+					tag.setFloat("temperature", anvilItemStacks[1].getTagCompound().getFloat("temperature"));
+					result.stackTagCompound = tag;
+				}
+
+				anvilItemStacks[1] = result;
+				if(anvilItemStacks[1].stackSize <= 0) {
+					anvilItemStacks[1].stackSize = 1;
+				}
+				isDone = true;
+				rule1 = false;
+				rule2 = false;
+				rule3 = false;
+				result = null;
+				itemCraftingValue = 0;
+				itemCraftingRules[0] = -1;
+				itemCraftingRules[1] = -1;
+				itemCraftingRules[2] = -1;
+				craftingValue = 0;
+				craftingRules = new int[]{-1,-1,-1};
+				craftingRange = 0;
+				craftingReq = 0;
+			}
+		}
+	}
+
+	public void updateRules(int rule, int slot)
+	{
+		if(anvilItemStacks[slot].hasTagCompound())
+		{
+			NBTTagCompound Tag = anvilItemStacks[slot].getTagCompound();
+			int rule1 = -1;
+			int rule2 = -1;
+			int rule3 = -1;
+			if(Tag.hasKey("itemCraftingRule1")) {
+				rule1 = Tag.getInteger("itemCraftingRule1");
+			}
+			if(Tag.hasKey("itemCraftingRule1")) {
+				rule2 = Tag.getInteger("itemCraftingRule2");
+			}
+			if(Tag.hasKey("itemCraftingRule1")) {
+				rule3 = Tag.getInteger("itemCraftingRule3");
+			}
+
+			itemCraftingRules[2] = rule2;
+			itemCraftingRules[1] = rule1;
+			itemCraftingRules[0] = rule;
+		}
+	}
+	
 	public void actionBend()
 	{
 		if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq)
@@ -162,7 +306,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 			}
 		}
 	}
-
 
 	public void actionWeld()
 	{
@@ -362,24 +505,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 		return c3;
 	}
 
-	public int getSizeInventory()
-	{
-		return anvilItemStacks.length;
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int i)
-	{
-		// TODO Auto-generated method stub
-		return anvilItemStacks[i];
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Boolean isTemperatureWeldable(int i)
 	{
 		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
@@ -414,17 +539,27 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 		return false;
 	}
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public void openChest() {
-		// TODO Auto-generated method stub
+	public void writeToNBT(NBTTagCompound nbttagcompound)
+	{
+		super.writeToNBT(nbttagcompound);
+
+		NBTTagList nbttaglist = new NBTTagList();
+		for(int i = 0; i < anvilItemStacks.length; i++)
+		{
+			if(anvilItemStacks[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				anvilItemStacks[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+
+		nbttagcompound.setTag("Items", nbttaglist);
 
 	}
+	
 
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
@@ -452,160 +587,35 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 			itemstack.stackSize = getInventoryStackLimit();
 		}
 	}
-
-	public void updateEntity()
-	{
-		//Handle the anvil health
-
-		//Deal with temperatures
-		TFCHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
-		//reset everything when the input is empty
-		if(anvilItemStacks[1] == null)
-		{
-			result = null;
-			itemCraftingValue = 0;
-			itemCraftingRules = new int[]{-1,-1,-1};
-			craftingValue = 0;
-			craftingRules = new int[]{-1,-1,-1};
-			craftingRange = 0;
-		}
-		//Find the recipe for the item that we are making. If the item is beign crafted for the first time.
-		if(anvilItemStacks[1] != null && getCraftingValue() == 0)
-		{
-			Collection<Object[]> Recipes = TFC_Game.RecipeMap.get(anvilItemStacks[1].getItem().getItemNameIS(anvilItemStacks[1]));
-			Iterator itr = Recipes.iterator();
-			while(itr.hasNext() && craftingValue == 0)
-			{
-				Object[] O = (Object[]) itr.next();
-
-				//If the blueprint slot is empty and the recipe calls for no blueprint
-				if(anvilItemStacks[5] == null && (Item)O[2] == null)
-				{
-					craftingValue = (Integer)O[0];
-					craftingRules = (int[])O[4];
-					craftingRange = (Integer)O[5];
-					craftingReq = (Integer)O[6];
-					result = (ItemStack)O[3];
-					if(result.stackSize <= 0) {
-						result.stackSize = 1;
-					}
-					break;
-				}
-				//If the blueprint slot is not empty and the recipe calls for a blueprint
-				if(anvilItemStacks[5] != null && anvilItemStacks[5].getItem() == (Item)O[2])
-				{
-					craftingValue = (Integer)O[0];
-					craftingRules = (int[])O[4];
-					craftingRange = (Integer)O[5];
-					craftingReq = (Integer)O[6];
-					result = (ItemStack)O[3];
-					break;
-				}
-			}
-		}
-		else if(anvilItemStacks[1] != null)//If the slot is not empty and crafting ahs already begun
-		{
-			int cv = getCraftingValue();
-			if(anvilItemStacks[1].hasTagCompound() && itemCraftingValue == 0 && itemCraftingRules[0] == -1 && itemCraftingRules[1] == -1 && itemCraftingRules[2] == -1)
-			{
-				itemCraftingValue = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingValue");
-				itemCraftingRules[0] = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingRule1");
-				itemCraftingRules[1] = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingRule2");
-				itemCraftingRules[2] = anvilItemStacks[1].getTagCompound().getInteger("itemCraftingRule3");
-			}
-			if(cv != craftingValue) {
-				cv = -1;
-			}
-			if(getItemCraftingValue() != itemCraftingValue && getCraftingValue() != 0)//if the item crafting value has changed and the recipe is valid.
-			{
-				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingValue", itemCraftingValue);
-				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingRule1", itemCraftingRules[0]);
-				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingRule2", itemCraftingRules[1]);
-				anvilItemStacks[1].getTagCompound().setInteger("itemCraftingRule3", itemCraftingRules[2]);
-			}
-			if(itemCraftingValue > 100 || itemCraftingValue < -50)
-			{
-				Object[] Data = (Object[]) TFCHeat.ItemHeatData.get(anvilItemStacks[1].getItem().getItemNameIS(anvilItemStacks[1]));
-				if(Data != null)
-				{
-					anvilItemStacks[1] = (ItemStack) Data[3];
-				} else {
-					anvilItemStacks[1] = null;
-				}
-			}
-		}
-
-		if(getCraftingValue() == getItemCraftingValue())//if the item crafting value matches the blueprint crafting value.
-		{
-			if(result != null && doRulesMatch(itemCraftingRules, craftingRules))
-			{
-				if(anvilItemStacks[1].stackTagCompound.hasKey("temperature") && TFCHeat.getMeltingPoint(result) != -1)
-				{
-					NBTTagCompound tag = new NBTTagCompound();
-					tag.setFloat("temperature", anvilItemStacks[1].getTagCompound().getFloat("temperature"));
-					result.stackTagCompound = tag;
-				}
-
-				anvilItemStacks[1] = result;
-				if(anvilItemStacks[1].stackSize <= 0) {
-					anvilItemStacks[1].stackSize = 1;
-				}
-
-				result = null;
-				itemCraftingValue = 0;
-				itemCraftingRules[0] = -1;
-				itemCraftingRules[1] = -1;
-				itemCraftingRules[2] = -1;
-				craftingValue = 0;
-				craftingRules = new int[]{-1,-1,-1};
-				craftingRange = 0;
-				craftingReq = 0;
-			}
-		}
+	
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	public void updateRules(int rule, int slot)
-	{
-		if(anvilItemStacks[slot].hasTagCompound())
-		{
-			NBTTagCompound Tag = anvilItemStacks[slot].getTagCompound();
-			int rule1 = -1;
-			int rule2 = -1;
-			int rule3 = -1;
-			if(Tag.hasKey("itemCraftingRule1")) {
-				rule1 = Tag.getInteger("itemCraftingRule1");
-			}
-			if(Tag.hasKey("itemCraftingRule1")) {
-				rule2 = Tag.getInteger("itemCraftingRule2");
-			}
-			if(Tag.hasKey("itemCraftingRule1")) {
-				rule3 = Tag.getInteger("itemCraftingRule3");
-			}
+	@Override
+	public void openChest() {
+		// TODO Auto-generated method stub
 
-			itemCraftingRules[2] = rule2;
-			itemCraftingRules[1] = rule1;
-			itemCraftingRules[0] = rule;
-		}
+	}
+	
+	public int getSizeInventory()
+	{
+		return anvilItemStacks.length;
 	}
 
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	@Override
+	public ItemStack getStackInSlot(int i)
 	{
-		super.writeToNBT(nbttagcompound);
+		// TODO Auto-generated method stub
+		return anvilItemStacks[i];
+	}
 
-		NBTTagList nbttaglist = new NBTTagList();
-		for(int i = 0; i < anvilItemStacks.length; i++)
-		{
-			if(anvilItemStacks[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				anvilItemStacks[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		nbttagcompound.setTag("Items", nbttaglist);
-
+	@Override
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

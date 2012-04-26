@@ -84,7 +84,7 @@ public class TFC_Game
 		RecipeMap.put("item.terraMeltedTin", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraTinIngot), new int[]{0,-1,-1},						0, 				0});
 		RecipeMap.put("item.terraMeltedZinc", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraZincIngot), new int[]{0,-1,-1},						0, 				0});
 		//this is for making pig iron into wrought iron
-		RecipeMap.put("item.terraMeltedPigIron", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new int[]{0,0,0},				0, 				2});
+		RecipeMap.put("item.terraPigIronIngot", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new int[]{0,0,0},				0, 				2});
 
 		RecipeMap.put("item.terraMeltedHCBlackSteel", new Object[]{47,0,null,new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot), new int[]{0,0,4},		0, 				4});
 		RecipeMap.put("item.terraMeltedHCBlueSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot), new int[]{0,0,4},		0, 				5});
@@ -99,14 +99,14 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BismuthPickaxeHead), new int[]{-1,-1,3},				2, 				0});
 		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzePickaxeHead), new int[]{-1,-1,3},	2, 				1});
 		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzePickaxeHead), new int[]{-1,-1,3},		2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelPickaxeHead), new int[]{-1,-1,3},		2, 				4});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelPickaxeHead), new int[]{-1,-1,3},			2, 				5});
+		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelPickaxeHead), new int[]{-1,-1,3},		2, 				5});
+		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelPickaxeHead), new int[]{-1,-1,3},			2, 				6});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BronzePickaxeHead), new int[]{-1,-1,3},				2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.CopperPickaxeHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronPickaxeHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelPickaxeHead), new int[]{-1,-1,3},			2, 				5});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronPickaxeHead), new int[]{-1,-1,3},				2, 				2});
+		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelPickaxeHead), new int[]{-1,-1,3},			2, 				6});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldPickaxeHead), new int[]{-1,-1,3},			2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.SteelPickaxeHead), new int[]{-1,-1,3},					2, 				3});
+		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.SteelPickaxeHead), new int[]{-1,-1,3},					2, 				4});
 		RecipeMap.put("item."+"terraTinIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.TinPickaxeHead), new int[]{-1,-1,3},						2, 				0});
 		RecipeMap.put("item."+"terraZincIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.ZincPickaxeHead), new int[]{-1,-1,3},					2, 				0});
 
@@ -117,7 +117,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelShovelHead), new int[]{-1,-1,3},			2, 				5});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BronzeShovelHead), new int[]{-1,-1,3},				2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.CopperShovelHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronShovelHead), new int[]{-1,-1,3},				2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronShovelHead), new int[]{-1,-1,3},				2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.RedSteelShovelHead), new int[]{-1,-1,3},			2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldShovelHead), new int[]{-1,-1,3},			2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.SteelShovelHead), new int[]{-1,-1,3},					2, 				3});
@@ -131,7 +131,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelHoeHead), new int[]{-1,-1,3},					2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BronzeHoeHead), new int[]{-1,-1,3},						2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.CopperHoeHead), new int[]{-1,-1,3},						2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronHoeHead), new int[]{-1,-1,3},						2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronHoeHead), new int[]{-1,-1,3},						2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelHoeHead), new int[]{-1,-1,3},					2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldHoeHead), new int[]{-1,-1,3},					2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.SteelHoeHead), new int[]{-1,-1,3},							2, 				3});
@@ -145,7 +145,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelAxeHead), new int[]{-1,-1,3},					2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BronzeAxeHead), new int[]{-1,-1,3},						2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.CopperAxeHead), new int[]{-1,-1,3},						2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronAxeHead), new int[]{-1,-1,3},						2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronAxeHead), new int[]{-1,-1,3},						2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelAxeHead), new int[]{-1,-1,3},					2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldAxeHead), new int[]{-1,-1,3},					2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.SteelAxeHead), new int[]{-1,-1,3},							2, 				3});
@@ -159,7 +159,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelHammerHead), new int[]{-1,-1,3},			2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BronzeHammerHead), new int[]{-1,-1,3},					2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.CopperHammerHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronHammerHead), new int[]{-1,-1,3},				2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronHammerHead), new int[]{-1,-1,3},				2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.RedSteelHammerHead), new int[]{-1,-1,3},				2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldHammerHead), new int[]{-1,-1,3},				2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.SteelHammerHead), new int[]{-1,-1,3},					2, 				3});
@@ -173,7 +173,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BlueSteelSwordHead), new int[]{-1,0,4},			2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BronzeSwordHead), new int[]{-1,0,4},					2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.CopperSwordHead), new int[]{-1,0,4},					2, 				1});
-		RecipeMap.put("item."+"terraIronIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.WroughtIronSwordHead), new int[]{-1,0,4},				2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.WroughtIronSwordHead), new int[]{-1,0,4},				2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.RedSteelSwordHead), new int[]{-1,0,4},				2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.RoseGoldSwordHead), new int[]{-1,0,4},				2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.SteelSwordHead), new int[]{-1,0,4},					2, 				3});
@@ -187,7 +187,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelMaceHead), new int[]{-1,-1,4},				2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BronzeMaceHead), new int[]{-1,-1,4},						2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.CopperMaceHead), new int[]{-1,-1,4},						2, 				1});
-		RecipeMap.put("item."+"terraIronIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronMaceHead), new int[]{-1,-1,4},					2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronMaceHead), new int[]{-1,-1,4},					2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.RedSteelMaceHead), new int[]{-1,-1,4},					2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldMaceHead), new int[]{-1,-1,4},					2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.SteelMaceHead), new int[]{-1,-1,4},						2, 				3});
@@ -201,7 +201,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelChiselHead), new int[]{-1,-1,3},			2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BronzeChiselHead), new int[]{-1,-1,3},					2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.CopperChiselHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronChiselHead), new int[]{-1,-1,3},				2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronChiselHead), new int[]{-1,-1,3},				2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.RedSteelChiselHead), new int[]{-1,-1,3},				2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldChiselHead), new int[]{-1,-1,3},				2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.SteelChiselHead), new int[]{-1,-1,3},					2, 				3});
@@ -215,7 +215,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BlueSteelProPickHead), new int[]{-1,0,3},					2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BronzeProPickHead), new int[]{-1,0,3},						2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.CopperProPickHead), new int[]{-1,0,3},						2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.WroughtIronProPickHead), new int[]{-1,0,3},					2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.WroughtIronProPickHead), new int[]{-1,0,3},					2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.RedSteelProPickHead), new int[]{-1,0,3},					2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.RoseGoldProPickHead), new int[]{-1,0,3},					2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.SteelProPickHead), new int[]{-1,0,3},							2, 				3});
@@ -229,7 +229,7 @@ public class TFC_Game
 		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BlueSteelSawHead), new int[]{0,0,-1},					2, 				4});
 		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BronzeSawHead), new int[]{0,0,-1},						2, 				1});
 		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.CopperSawHead), new int[]{0,0,-1},						2, 				1});
-		RecipeMap.put("item."+"terraIronIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.WroughtIronSawHead), new int[]{0,0,-1},					2, 				2});
+		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.WroughtIronSawHead), new int[]{0,0,-1},					2, 				2});
 		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.RedSteelSawHead), new int[]{0,0,-1},					2, 				5});
 		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.RoseGoldSawHead), new int[]{0,0,-1},					2, 				1});
 		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.SteelSawHead), new int[]{0,0,-1},							2, 				3});

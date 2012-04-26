@@ -26,8 +26,8 @@ def cleanDirs(path):
         
 def main():
     print 'Creating patches'
-    base = os.path.normpath(os.path.join('..', 'src'))
-    work = os.path.normpath(os.path.join('..', 'src_base'))
+    base = os.path.normpath(os.path.join('..', 'src_base'))
+    work = os.path.normpath(os.path.join('..', 'src'))
     timestamp = re.compile(r'[0-9-]* [0-9:\.]* [+-][0-9]*\r?\n')
     
     for path, _, filelist in os.walk(work, followlinks=True):
