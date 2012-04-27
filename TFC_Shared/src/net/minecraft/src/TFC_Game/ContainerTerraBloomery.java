@@ -66,7 +66,7 @@ public class ContainerTerraBloomery extends Container
 			}
 			else if (flag)
 			{
-				ItemStack itemstack1 = transferStackInSlot(i);
+				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
 				if (itemstack1 != null)
 				{
 					int k = itemstack1.itemID;
@@ -171,7 +171,7 @@ public class ContainerTerraBloomery extends Container
 		return itemstack;
 	}
 
-	public ItemStack transferStackInSlot(int i)
+	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slot1 = (Slot)inventorySlots.get(0);
@@ -180,11 +180,10 @@ public class ContainerTerraBloomery extends Container
 			ItemStack itemstack1 = slot.getStack();
 			if(i == 0)
 			{
-				//Commented this out in order to get stuff compiling. If shift licking in the bloomery fails this line is why.
-//				if(!ModLoader.getMinecraftInstance().thePlayer.inventory.addItemStackToInventory(itemstack1.copy()))
-//				{
-//					return null;
-//				}
+				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				{
+					return null;
+				}
 				slot.putStack(null);
 			}
 			else

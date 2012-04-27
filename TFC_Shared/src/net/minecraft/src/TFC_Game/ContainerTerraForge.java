@@ -90,7 +90,7 @@ public class ContainerTerraForge extends Container
 			}
 			else if (flag)
 			{
-				ItemStack itemstack1 = transferStackInSlot(i);
+				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
 				if (itemstack1 != null)
 				{
 					int k = itemstack1.itemID;
@@ -147,8 +147,7 @@ public class ContainerTerraForge extends Container
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && 
-								itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC_Core.proxy.areItemStacksEqual(itemstack2, itemstack3))
+						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC_Core.proxy.areItemStacksEqual(itemstack2, itemstack3))
 						{
 							if (itemstack3.stackSize <= slot.getSlotStackLimit())
 							{
@@ -197,7 +196,7 @@ public class ContainerTerraForge extends Container
 	}
 
 
-	public ItemStack transferStackInSlot(int i)
+	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot[] slotinput = {(Slot)inventorySlots.get(2), (Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(0), (Slot)inventorySlots.get(4)};
@@ -208,11 +207,10 @@ public class ContainerTerraForge extends Container
 			ItemStack itemstack1 = slot.getStack();
 			if(i <= 13)
 			{
-				//commented out in order to get everything to compile
-//				if(!ModLoader.getMinecraftInstance().thePlayer.inventory.addItemStackToInventory(itemstack1.copy()))
-//				{
-//					return null;
-//				}
+				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				{
+					return null;
+				}
 				slot.putStack(null);
 			}
 			else
