@@ -485,9 +485,6 @@ public class TFC_Game
 			new ItemStack(mod_TFC_Game.ZincAxeHead), Character.valueOf('I'), new ItemStack(Item.stick)});
 
 		//Swords
-		
-		//Disabled stone swords
-		/*
 		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.IgExStoneSword, 1), new Object[] { "#","#","I", Character.valueOf('#'), 
 			mod_TFC_Core.terraStoneIgExCobble, Character.valueOf('I'), new ItemStack(Item.stick)});
 		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.IgInStoneSword, 1), new Object[] { "#","#","I", Character.valueOf('#'), 
@@ -496,7 +493,6 @@ public class TFC_Game
 			mod_TFC_Core.terraStoneSedCobble, Character.valueOf('I'), new ItemStack(Item.stick)});
 		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.MMStoneSword, 1), new Object[] { "#","#","I", Character.valueOf('#'), 
 			mod_TFC_Core.terraStoneMMCobble, Character.valueOf('I'), new ItemStack(Item.stick)});
-		*/
 
 		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.BismuthSword, 1,0), new Object[] { "#","I", Character.valueOf('#'), 
 			new ItemStack(mod_TFC_Game.BismuthSwordHead), Character.valueOf('I'), new ItemStack(Item.stick)});
