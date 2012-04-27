@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.TFC_Core.*;
+import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.EnumHelper;
 import net.minecraft.src.forge.ICraftingHandler;
@@ -24,8 +25,8 @@ public class mod_TFC_Core extends NetworkMod
     public static float fogValue = -1;
 
     //////////////////Features////////////////////
-    public static int logPileGuiId;
-    public static int workbenchGuiId;
+    public static int logPileGuiId = 0;
+    public static int workbenchGuiId = 1;
 
     //////////////////////////////////////////////
     public static int sulfurRenderId;
@@ -38,6 +39,12 @@ public class mod_TFC_Core extends NetworkMod
     public static int moltenRenderId;
     public static int looseRockRenderId;
     public static int snowRenderId;
+    public static int terraFirepitRenderId;
+    public static int terraAnvilRenderId;
+    public static int terraBellowsRenderId;
+    public static int terraScribeRenderId;
+    public static int terraForgeRenderId;
+    public static int sluiceRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -375,6 +382,7 @@ public class mod_TFC_Core extends NetworkMod
     {
         instance = this;
         proxy = ServerClientProxy.getProxy();
+        MinecraftForge.registerConnectionHandler(new PacketHandler());
 
         sulfurRenderId = ModLoader.getUniqueBlockModelID(this, false);
         woodSupportRenderIdH = ModLoader.getUniqueBlockModelID(this, false);
@@ -383,6 +391,12 @@ public class mod_TFC_Core extends NetworkMod
         oreRenderId = ModLoader.getUniqueBlockModelID(this, false);
         moltenRenderId = ModLoader.getUniqueBlockModelID(this, false);
         looseRockRenderId = ModLoader.getUniqueBlockModelID(this, false);
+        terraFirepitRenderId = ModLoader.getUniqueBlockModelID(this, false);
+        terraAnvilRenderId = ModLoader.getUniqueBlockModelID(this, true);
+        terraBellowsRenderId = ModLoader.getUniqueBlockModelID(this, true);
+        terraScribeRenderId = ModLoader.getUniqueBlockModelID(this, false);
+        terraForgeRenderId = ModLoader.getUniqueBlockModelID(this, false);
+        sluiceRenderId = ModLoader.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.ItemTerraRock.class);
@@ -464,8 +478,7 @@ public class mod_TFC_Core extends NetworkMod
         Item.itemsList[terraClayGrass2.blockID] = new ItemTerraDirt(terraClayGrass2.blockID - 256);
         Item.itemsList[terraClayGrass2.blockID] = new ItemTerraRockCobble(LooseRock.blockID - 256);
 
-        ModLoader.registerTileEntity(TileEntityTerraLogPile.class, "TerraLogPile");
-        ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
+        
 
         terraGrass.setIDs(terraGrass.blockID, terraGrass2.blockID, terraDirt.blockID, terraDirt2.blockID, 
                 terraClay.blockID, terraClay2.blockID, terraClayGrass.blockID, terraClayGrass2.blockID, terraPeat.blockID, terraPeatGrass.blockID);
@@ -492,8 +505,11 @@ public class mod_TFC_Core extends NetworkMod
             RemoveRecipe(new ItemStack(Block.stoneOvenIdle,1));
         }
         TFC_Core.RegisterRecipes();		
-
+        proxy.registerTileEntities();
         setupCraftHook();
+        MinecraftForge.setGuiHandler(this, proxy);
+        MinecraftForge.registerConnectionHandler(new PacketHandler());
+        proxy.registerRenderInformation();
     }
 
 

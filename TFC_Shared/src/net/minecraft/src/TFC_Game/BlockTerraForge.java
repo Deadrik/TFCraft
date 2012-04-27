@@ -7,6 +7,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -143,7 +144,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 
 	public int getRenderType()
 	{
-		return mod_TFC_Game.terraForgeRenderId;
+		return mod_TFC_Core.terraForgeRenderId;
 	}
 
 	@Override

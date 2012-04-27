@@ -12,7 +12,7 @@ public class GuiTerraSluice extends GuiContainer
 
 	public GuiTerraSluice(InventoryPlayer inventoryplayer, TileEntityTerraSluice tileEntitySluice)
 	{
-		super(new ContainterTerraSluice(inventoryplayer,tileEntitySluice) );
+		super(new ContainerTerraSluice(inventoryplayer,tileEntitySluice) );
 		sluiceInventory = tileEntitySluice;
 		
 	}

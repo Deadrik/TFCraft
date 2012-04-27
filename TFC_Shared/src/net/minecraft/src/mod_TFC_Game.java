@@ -13,20 +13,13 @@ public class mod_TFC_Game extends NetworkMod
 	public static mod_TFC_Game instance;
 	public static IProxy proxy;
 
-	public static int terraFirepitRenderId;
-	public static int terraAnvilRenderId;
-	public static int terraBellowsRenderId;
-	public static int terraScribeRenderId;
-	public static int terraForgeRenderId;
-	public static int sluiceRenderId;
-
-	public static int terraFirepitGuiId;
-	public static int terraAnvilGuiId;
-	public static int terraScribeGuiId;
-	public static int terraForgeGuiId;
-	public static int terraMetallurgyGuiId;
-	public static int terraSluiceGuiId;
-	public static int terraBloomeryGuiId;
+	public static int terraFirepitGuiId = 20;
+	public static int terraAnvilGuiId = 21;
+	public static int terraScribeGuiId = 22;
+	public static int terraForgeGuiId = 23;
+	public static int terraMetallurgyGuiId = 24;
+	public static int terraSluiceGuiId = 25;
+	public static int terraBloomeryGuiId = 26;
 
 	public static Block terraFirepit;
 	public static Block terraFirepitOn;
@@ -704,18 +697,19 @@ public class mod_TFC_Game extends NetworkMod
 	{
 		return "0.2a";
 	}
+	
+	public boolean renderWorldBlock(RenderBlocks renderblocks, IBlockAccess iblockaccess, int i, int j, int k, Block block, int l)
+    {
+        
+        return false;
+    }
 
 	@Override
 	public void load()
 	{
 		proxy = ServerClientProxy.getProxy();
 		instance = this;
-		terraFirepitRenderId = ModLoader.getUniqueBlockModelID(this, false);
-		terraAnvilRenderId = ModLoader.getUniqueBlockModelID(this, true);
-		terraBellowsRenderId = ModLoader.getUniqueBlockModelID(this, true);
-		terraScribeRenderId = ModLoader.getUniqueBlockModelID(this, false);
-		terraForgeRenderId = ModLoader.getUniqueBlockModelID(this, false);
-		sluiceRenderId = ModLoader.getUniqueBlockModelID(this, false);
+		
 
 		//Register Blocks	
 		ModLoader.registerBlock(terraFirepit);
@@ -728,18 +722,10 @@ public class mod_TFC_Game extends NetworkMod
 		ModLoader.registerBlock(terraBloomery);
 		ModLoader.registerBlock(terraSluice);
 
-		//Register Tile Entities
-		ModLoader.registerTileEntity(TileEntityTerraFirepit.class, "TerraFirepit");
-		ModLoader.registerTileEntity(TileEntityTerraAnvil.class, "TerraAnvil");
-		ModLoader.registerTileEntity(TileEntityTerraScribe.class, "TerraScribe");
-		ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
-		ModLoader.registerTileEntity(TileEntityTerraForge.class, "TerraForge");
-		ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
-		ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
-		ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
 
 		MinecraftForge.setGuiHandler(this, proxy);
 		MinecraftForge.registerConnectionHandler(new PacketHandler());
+		proxy.registerTileEntities();
 		proxy.registerRenderInformation();
 
 		setupCraftHook();

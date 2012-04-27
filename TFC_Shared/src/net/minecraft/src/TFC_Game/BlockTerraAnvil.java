@@ -11,6 +11,7 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -128,7 +129,7 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 
 	public int getRenderType()
 	{
-		return mod_TFC_Game.terraAnvilRenderId;
+		return mod_TFC_Core.terraAnvilRenderId;
 	}
 
 	@Override

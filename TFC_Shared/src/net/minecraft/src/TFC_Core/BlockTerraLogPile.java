@@ -13,10 +13,16 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 		blockIndexInTexture = 92;
 		EntityClass = tClass;
 	}
+	
+	public static int getDirectionFromMetadata(int i)
+    {
+        return i & 3;
+    }
 
+	@Override
 	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
 	{
-		if (world.isRemote)
+		if (mod_TFC_Core.proxy.isRemote())
 		{
 			return true;
 		}
@@ -34,8 +40,7 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 				}
 				else
 				{
-					//ModLoader.openGUI(entityplayer, new GuiTerraLogPile(entityplayer.inventory, te,world, i, j, k));
-					entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Core.logPileGuiId, world, i, j, k);
+					entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.logPileGuiId, world, i, j, k);
 				}
 				return true;
 			} else {

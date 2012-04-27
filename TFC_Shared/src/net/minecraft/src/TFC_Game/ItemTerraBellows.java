@@ -32,7 +32,7 @@ public class ItemTerraBellows extends Item implements ITextureProvider
 
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if(world.isRemote)
+		if(!world.isRemote)
 		{
 			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
 			if(objectMouseOver == null) {

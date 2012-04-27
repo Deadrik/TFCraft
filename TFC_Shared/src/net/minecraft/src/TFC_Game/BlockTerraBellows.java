@@ -177,7 +177,7 @@ public class BlockTerraBellows extends Block implements ITextureProvider
 
 	public int getRenderType()
 	{
-		return mod_TFC_Game.terraBellowsRenderId;
+		return mod_TFC_Core.terraBellowsRenderId;
 	}
 
 

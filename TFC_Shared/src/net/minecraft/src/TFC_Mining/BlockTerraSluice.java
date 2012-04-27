@@ -10,6 +10,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 
 public class BlockTerraSluice extends BlockContainer
@@ -133,7 +134,7 @@ public class BlockTerraSluice extends BlockContainer
 
 	public int getRenderType()
 	{
-		return mod_TFC_Game.sluiceRenderId;
+		return mod_TFC_Core.sluiceRenderId;
 	}
 
 	@Override

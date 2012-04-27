@@ -14,6 +14,9 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
+import net.minecraft.src.TFC_Game.*;
+import net.minecraft.src.TFC_Mining.ContainerTerraSluice;
+import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
 
 public class ServerProxy implements IProxy {
 
@@ -25,9 +28,17 @@ public class ServerProxy implements IProxy {
 	@Override
 	public void registerTileEntities() 
 	{
-		/*for (IronChestType typ : IronChestType.values()) {
-			ModLoader.registerTileEntity(typ.clazz, typ.name());
-		}*/
+	    ModLoader.registerTileEntity(TileEntityTerraLogPile.class, "TerraLogPile");
+        ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
+        
+        ModLoader.registerTileEntity(TileEntityTerraFirepit.class, "TerraFirepit");
+        ModLoader.registerTileEntity(TileEntityTerraAnvil.class, "TerraAnvil");
+        ModLoader.registerTileEntity(TileEntityTerraScribe.class, "TerraScribe");
+        ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
+        ModLoader.registerTileEntity(TileEntityTerraForge.class, "TerraForge");
+        ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
+        ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
+        ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
 	}
 
 	@Override
@@ -51,14 +62,55 @@ public class ServerProxy implements IProxy {
 	}
 
 	@Override
-	public Object getGuiElement(int ID, EntityPlayer player, World world, int X, int Y, int Z) {
-		TileEntity te=world.getBlockTileEntity(X, Y, Z);
+	public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity te=world.getBlockTileEntity(x, y, z);
 		/*if (te!=null && te instanceof TileEntityIronChest) {
       TileEntityIronChest icte=(TileEntityIronChest) te;
       return new ContainerIronChestBase(player.inventory, icte, icte.getType(), 0, 0);
-    } else*/ {
-    	return null;
-    }
+    } else*/ 
+		switch(ID)
+        {
+            case 0:
+            {
+                return new ContainerTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
+            }
+            case 1:
+            {
+                return new ContainerTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
+            }
+            case 20:
+            {
+                return new ContainerTerraFirepit(player.inventory, (TileEntityTerraFirepit) te);
+            }
+            case 21:
+            {
+                return new ContainerTerraAnvil(player.inventory, (TileEntityTerraAnvil) te);
+            }
+            case 22:
+            {
+                return new ContainerTerraScribe(player.inventory, (TileEntityTerraScribe) te, world);
+            }
+            case 23:
+            {
+                return new ContainerTerraForge(player.inventory, (TileEntityTerraForge) te);
+            }
+            case 24:
+            {
+                return new ContainerTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world);
+            }
+            case 25:
+            {
+                return new ContainerTerraSluice(player.inventory, (TileEntityTerraSluice) te);
+            }
+            case 26:
+            {
+                return new ContainerTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
+            }
+            default:
+            {
+                return null;
+            }
+        }
 	}
 
 	@Override

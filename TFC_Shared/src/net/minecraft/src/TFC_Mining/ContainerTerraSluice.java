@@ -2,7 +2,7 @@ package net.minecraft.src.TFC_Mining;
 
 import net.minecraft.src.*;
 
-public class ContainterTerraSluice extends Container
+public class ContainerTerraSluice extends Container
 {
 	private TileEntityTerraSluice sluice;
 	private int coolTime;
@@ -10,7 +10,7 @@ public class ContainterTerraSluice extends Container
 	private int itemFreezeTime;
 
 
-	public ContainterTerraSluice(InventoryPlayer inventoryplayer, TileEntityTerraSluice tileentitysluice)
+	public ContainerTerraSluice(InventoryPlayer inventoryplayer, TileEntityTerraSluice tileentitysluice)
 	{
 		sluice = tileentitysluice;
 		coolTime = 0;
