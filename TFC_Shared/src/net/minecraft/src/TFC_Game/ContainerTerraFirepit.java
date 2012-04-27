@@ -257,12 +257,12 @@ public class ContainerTerraFirepit extends Container
 
 
 
-	public void updateCraftingResults()
-	{
-		super.updateCraftingResults();
-		for(int i = 0; i < inventorySlots.size(); i++)
-		{
-			ICrafting icrafting = (ICrafting)inventorySlots.get(i);
-		}
-	}
+//	public void updateCraftingResults()
+//	{
+//		super.updateCraftingResults();
+//		for(int i = 0; i < inventorySlots.size(); i++)
+//		{
+//			ICrafting icrafting = (ICrafting)inventorySlots.get(i);
+//		}
+//	}
 }

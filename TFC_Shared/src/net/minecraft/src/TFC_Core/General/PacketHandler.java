@@ -78,22 +78,22 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			int y=tileEntity.yCoord;
 			int z=tileEntity.zCoord;
 			//int typ=tileEntity.getType().ordinal();
-			int[] items=tileEntity.buildIntDataList();
-			boolean hasStacks=(items!=null);
-			try {
-				dos.writeInt(x);
-				dos.writeInt(y);
-				dos.writeInt(z);
-				dos.writeByte(hasStacks? 1 : 0);
-				if (hasStacks) {
-					for (int i=0; i<4; i++) {
-						dos.writeInt(items[i]);
-					}
-				}
-				
-			} catch (IOException e) {
-				// UNPOSSIBLE?
-			}
+//			int[] items=tileEntity.buildIntDataList();
+//			boolean hasStacks=(items!=null);
+//			try {
+//				dos.writeInt(x);
+//				dos.writeInt(y);
+//				dos.writeInt(z);
+//				dos.writeByte(hasStacks? 1 : 0);
+//				if (hasStacks) {
+//					for (int i=0; i<4; i++) {
+//						dos.writeInt(items[i]);
+//					}
+//				}
+//				
+//			} catch (IOException e) {
+//				// UNPOSSIBLE?
+//			}
 			Packet250CustomPayload pkt=new Packet250CustomPayload();
 			pkt.channel="TerraFirmaCraft";
 			pkt.data=bos.toByteArray();
