@@ -5,10 +5,12 @@ import net.minecraft.src.*;
 public class SlotScribePaper extends Slot
 {
 	EntityPlayer player;
-	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+	Container container;
+	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, ContainerTerraScribe scribecontainer, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 		player = entityplayer;
+		container = scribecontainer;
 	}
 
 	public boolean isItemValid(ItemStack itemstack)
@@ -28,6 +30,7 @@ public class SlotScribePaper extends Slot
 	public void onSlotChanged()
 	{
 		inventory.onInventoryChanged();
-
+		//Updates the scribing table. The inventory doesn't matter.
+		container.onCraftMatrixChanged(inventory);
 	}
 }
