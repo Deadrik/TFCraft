@@ -1262,9 +1262,9 @@ public class TFC_Core
 				}
 			}
 		}
-		//jimmnator's javelin disabled till beta 2
-		//ModLoader.addRecipe(new ItemStack(mod_TFC_Core.Javelin, 1, 0), new Object[] { 
-		//"1","2","2", Character.valueOf('1'), Item.flint,Character.valueOf('2'), Item.stick});
+		//javelin
+		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.Javelin, 1, 0), new Object[] { 
+			"1","2","2", Character.valueOf('1'), Item.flint,Character.valueOf('2'), Item.stick});
 
 		//stone picks
 		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgInPick, 1, 0), new Object[] { 

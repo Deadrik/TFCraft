@@ -246,10 +246,11 @@ public class mod_TFC_Core extends NetworkMod
     public static Item TinChisel;
     public static Item ZincChisel;
 
-    public static Item IgInStoneSword;
-    public static Item IgExStoneSword;
-    public static Item SedStoneSword;
-    public static Item MMStoneSword;
+    //Disabled stone swords
+    //public static Item IgInStoneSword;
+    //public static Item IgExStoneSword;
+    //public static Item SedStoneSword;
+    //public static Item MMStoneSword;
     public static Item BismuthSword;
     public static Item BismuthBronzeSword;
     public static Item BlackBronzeSword;
@@ -872,10 +873,11 @@ public class mod_TFC_Core extends NetworkMod
         ZincChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","ZincChisel",16239),ZincToolMaterial).setItemName("Zinc Chisel").setMaxDamage(ZincUses).setIconCoord(13, 7);
         StoneChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","StoneChisel",16240),IgInToolMaterial).setItemName("Stone Chisel").setMaxDamage(IgInStoneUses).setIconCoord(0, 7);
 
-        IgInStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneSword",16241),IgInToolMaterial).setItemName("Stone Sword").setMaxDamage(IgInStoneUses).setIconCoord(0, 13);
-        IgExStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneSword",16242),IgExToolMaterial).setItemName("Stone Sword").setMaxDamage(IgExStoneUses).setIconCoord(0, 13);
-        SedStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneSword",16243),SedToolMaterial).setItemName("Stone Sword").setMaxDamage(SedStoneUses).setIconCoord(0, 13);
-        MMStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneSword",16244),MMToolMaterial).setItemName("Stone Sword").setMaxDamage(MMStoneUses).setIconCoord(0, 13);
+        //Disabled stone swords
+        //IgInStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneSword",16241),IgInToolMaterial).setItemName("Stone Sword").setMaxDamage(IgInStoneUses).setIconCoord(0, 13);
+        //IgExStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneSword",16242),IgExToolMaterial).setItemName("Stone Sword").setMaxDamage(IgExStoneUses).setIconCoord(0, 13);
+        //SedStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneSword",16243),SedToolMaterial).setItemName("Stone Sword").setMaxDamage(SedStoneUses).setIconCoord(0, 13);
+        //MMStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneSword",16244),MMToolMaterial).setItemName("Stone Sword").setMaxDamage(MMStoneUses).setIconCoord(0, 13);
         BismuthSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthSword",16245),BismuthToolMaterial).setItemName("Bismuth Sword").setMaxDamage(BismuthUses).setIconCoord(1, 13);
         BismuthBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeSword",16246),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 13);
         BlackBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeSword",16247),BlackBronzeToolMaterial).setItemName("Black Bronze Sword").setMaxDamage(BlackBronzeUses).setIconCoord(3, 13);
@@ -952,7 +954,8 @@ public class mod_TFC_Core extends NetworkMod
         boneMMShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneMMShovel",16315),MMToolMaterial).setItemName("Bone MM Stone Shovel").setMaxDamage(MMStoneUses).setIconCoord(0, 4);
         boneMMAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneMMAxe",16316),MMToolMaterial).setItemName("Bone MM Stone Axe").setMaxDamage(MMStoneUses).setIconCoord(14, 5);
         boneMMHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setItemName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(14, 6);
-        //Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16299)).setItemName("javelin").setIconCoord(12, 0);
+        
+        Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(12, 0);
 
         SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",18000),Block.crops.blockID,tilledSoil.blockID,tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);
 
