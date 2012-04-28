@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BaseMod;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityItem;
@@ -46,4 +47,6 @@ public interface IProxy extends IGuiHandler {
 	public abstract AxisAlignedBB blockGetSelectedBoundingBoxFromPool(Block B,World par1World, int par2, int par3, int par4);
 	
 	public abstract boolean areItemStacksEqual(ItemStack is1, ItemStack is2);
+	
+	public abstract int getUniqueBlockModelID(BaseMod var0, boolean var1);
 }

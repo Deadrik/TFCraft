@@ -28,8 +28,23 @@ public class ClientProxy implements IProxy {
     @Override
     public void registerRenderInformation() 
     {
-        MinecraftForgeClient.preloadTexture("/cpw/mods/ironchest/sprites/block_textures.png");
-        MinecraftForgeClient.preloadTexture("/cpw/mods/ironchest/sprites/item_textures.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terratools.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terratoolheads.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terrasprites.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terrablocks.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terrablocks2.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terrabedsSprites.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/terrabeds.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/sluicegui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/scribegui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/metallurgygui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/logpilegui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/javelin.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/Forgegui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/Firepitgui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/Bloomerygui.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/anvilgui.png");
     }
 
     @Override
@@ -756,4 +771,9 @@ public class ClientProxy implements IProxy {
     public boolean areItemStacksEqual(ItemStack is1, ItemStack is2) {
         return ItemStack.func_46154_a(is1, is2);
     }
+
+	@Override
+	public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
+		return ModLoader.getUniqueBlockModelID(var0, var1);
+	}
 }

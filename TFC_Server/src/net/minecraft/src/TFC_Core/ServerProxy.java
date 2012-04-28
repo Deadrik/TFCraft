@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BaseMod;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityItem;
@@ -168,5 +169,11 @@ public class ServerProxy implements IProxy {
 	@Override
 	public boolean areItemStacksEqual(ItemStack is1, ItemStack is2) {
 		return ItemStack.func_46124_a(is1, is2);
+	}
+
+	@Override
+	public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
+		//Not used on server
+		return 0;
 	}
 }
