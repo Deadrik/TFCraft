@@ -492,7 +492,7 @@ public class mod_TFC_Core extends NetworkMod
                 terraClay.blockID, terraClay2.blockID, terraClayGrass.blockID, terraClayGrass2.blockID, terraPeat.blockID, terraPeatGrass.blockID);
 
         //Add Item Name Localizations
-        TFC_Core.CreateLocalization();
+        proxy.registerTranslations();
         RemoveRecipe(new ItemStack(Item.stick,4));
         RemoveRecipe(new ItemStack(Block.planks,4));
         if(TFCSettings.enableVanillaRecipes == false)
