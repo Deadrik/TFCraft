@@ -19,7 +19,6 @@ import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.TFCHeat;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
-import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.Vector3f;
 
 public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory
@@ -1484,6 +1483,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
             }
         }
+        if (mod_TFC_Core.proxy != null)
+        {
+        	mod_TFC_Core.proxy.sendCustomPacket(PacketHandlerGame.getPacket(this));
+        }
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound)
@@ -1513,16 +1516,4 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         nbttagcompound.setTag("Items", nbttaglist);
 
     }
-
-    public void handlePacketData(float temp) 
-    {
-        TileEntityTerraFirepit pile = this;
-        fireTemperature = temp;
-        
-    }
-    
-    public Packet getDescriptionPacket() 
-    {
-        return PacketHandler.getPacket(this);
-      }
 }

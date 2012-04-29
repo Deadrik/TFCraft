@@ -9,7 +9,9 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Game.PacketHandlerGame;
 
 public class TileEntityTerraLogPile extends TileEntity implements IInventory
 {
@@ -178,6 +180,10 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
     public void updateEntity()
     {
         TFCHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
+        if (mod_TFC_Core.proxy != null)
+        {
+        	mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this));
+        }
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound)

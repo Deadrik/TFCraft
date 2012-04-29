@@ -1,26 +1,22 @@
-package net.minecraft.src.TFC_Core.General;
+package net.minecraft.src.TFC_Game;
 
 import java.io.*;
 import net.minecraft.src.*;
-import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.forge.*;
 
-public class PacketHandler implements IPacketHandler, IConnectionHandler {
+public class PacketHandlerGame implements IPacketHandler, IConnectionHandler {
     @Override
-    public void onConnect(NetworkManager network)
-    {
-        MessageManager.getInstance().registerChannel(network, this, "TFC tileentity");
+    public void onConnect(NetworkManager network) {
+        MessageManager.getInstance().registerChannel(network, this, "TFC tileentity2");
     }
 
     @Override
-    public void onDisconnect(NetworkManager network, String message, Object[] args)
-    {
+    public void onDisconnect(NetworkManager network, String message, Object[] args) {
         MessageManager.getInstance().removeConnection(network);
     }
 
     @Override
-    public void onLogin(NetworkManager network, Packet1Login login)
-    {
+    public void onLogin(NetworkManager network, Packet1Login login) {
     }
 
     @Override
@@ -42,44 +38,44 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             TileEntity tileent = null;
             
             
-            ////Read common data////
+            ////Read data////
             
 
-        	try
+            try
             {
-            	//Read packet id
-    			packetid = data.readInt();
-    			//Read coords
-    	        for (int i = 0; i < 3; i++)
-    	        {
-    	        	coords[i] = data.readInt();
-    	        }
-                
-                //Get tile entity with coordinates coords
-                World world = mod_TFC_Core.proxy.getCurrentWorld();
-                if (world != null)
-                {
-                	//Retrieve tile entity
-                	tileent = world.getBlockTileEntity(coords[0], coords[1], coords[2]);
-        	        if (tileent != null)
-        	        {
-        	            //Switch depending on packet id
-        			    switch (packetid)
-        			    {
-        			    	//Log pile = 0
-        			        case 0:
-        			        {
-        			        	//Custom tile entity
-        			        	TileEntityTerraLogPile tileent1 = (TileEntityTerraLogPile) tileent;
-        			        	//ItemStacks in the tile entity
-        			            ItemStack[] stacks = tileent1.storage;
-        			            //Number of slots
-        			            int slots = stacks.length;
-        			            
-        			            //Read slots
-        			        	for (int i = 0; i < slots; i++)
-        			        	{
-        			        		int itemID = data.readInt();
+	        	//Read packet id
+				packetid = data.readInt();
+				//Read coords
+		        for (int i = 0; i < 3; i++)
+		        {
+		        	coords[i] = data.readInt();
+		        }
+	            
+	            //Get tile entity with coordinates coords
+	            World world = mod_TFC_Core.proxy.getCurrentWorld();
+	            if (world != null)
+	            {
+	            	//Retrieve tile entity
+	            	tileent = world.getBlockTileEntity(coords[0], coords[1], coords[2]);
+	    	        if (tileent != null)
+	    	        {
+	    	            //Switch depending on packet id
+	    			    switch (packetid)
+	    			    {
+	    			    	//Firepit = 0
+	    			        case 0:
+	    			        {
+	    			        	//Custom tile entity
+	    			        	TileEntityTerraFirepit tileent1 = (TileEntityTerraFirepit) tileent;
+	    			        	//ItemStacks in the tile entity
+	    			            ItemStack[] stacks = tileent1.fireItemStacks;
+	    			            //Number of slots
+	    			            int slots = stacks.length;
+	    			            
+	    			            //Read slots
+	    			        	for (int i = 0; i < slots; i++)
+	    			        	{
+	    			        		int itemID = data.readInt();
         			        		int stackSize = data.readInt();
         			        		int itemDamage = data.readInt();
         			        		if (itemID >= 0)
@@ -90,20 +86,22 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
         			        		{
         			        			stacks[i] = null;
         			        		}
-        			        	}
-        			        }
-        			    }
-        	        }
-                }
+	    			        	}
+	    			        	//Read firepit temperature
+	    			        	tileent1.fireTemperature = data.readFloat();
+	    			        }
+	    			    }
+	    	        }
+	            }
             }
             catch (IOException e)
             {
             	e.printStackTrace();
             }
-    	}
+        }
     }
 
-    public static Packet getPacket(TileEntityTerraLogPile tileEntity) 
+    public static Packet getPacket(TileEntityTerraFirepit tileEntity)
     {
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -116,7 +114,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
         //Internal channel packet id
         int packetid = 0;
         //ItemStacks in the tile entity
-        ItemStack[] stacks = tileEntity.storage;
+        ItemStack[] stacks = tileEntity.fireItemStacks;
         //Number of slots
         int slots = stacks.length;
         //Coordinates of the tile entity
@@ -145,36 +143,38 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     	////Write the variables in the data stream////
     	
 
-    	try 
+        try 
         {
-        	//Write packet id
-        	data.writeInt(packetid);
-        	//Write coordinates
-        	for (int i = 0; i < 3; i++)
-        	{
-                data.writeInt(coords[i]);
-        	}
-        	//Write stack data
-        	for (int i = 0; i < slots; i++)
-        	{
-        		data.writeInt(stackdata[0][i]);
-        		data.writeInt(stackdata[1][i]);
-        		data.writeInt(stackdata[2][i]);
-        	}
+	    	//Write packet id
+	    	data.writeInt(packetid);
+	    	//Write coordinates
+	    	for (int i = 0; i < 3; i++)
+	    	{
+	            data.writeInt(coords[i]);
+	    	}
+	    	//Write stack data
+	    	for (int i = 0; i < slots; i++)
+	    	{
+	    		data.writeInt(stackdata[0][i]);
+	    		data.writeInt(stackdata[1][i]);
+	    		data.writeInt(stackdata[2][i]);
+	    	}
+	    	//Write firepit temperature
+	        data.writeFloat(tileEntity.fireTemperature);
         }
         catch (IOException e) 
         {
             e.printStackTrace();
         }
-	
+        
         
         ////Create packet////
         
-    	
+        
         //Initialize packet
         Packet250CustomPayload packet = new Packet250CustomPayload();
         //Add packet channel, data, and length
-        packet.channel = "TFC tileentity";
+        packet.channel = "TFC tileentity2";
         packet.data = bytes.toByteArray();
         packet.length = packet.data.length;
         //packet ready to be sent
