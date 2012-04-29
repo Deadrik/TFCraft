@@ -2,7 +2,6 @@ package net.minecraft.src;
 
 import java.io.File;
 import net.minecraft.src.TFC_Core.*;
-import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.*;
 import net.minecraft.src.forge.*;
@@ -710,7 +709,7 @@ public class mod_TFC_Game extends NetworkMod
 
 
 		MinecraftForge.setGuiHandler(this, proxy);
-		MinecraftForge.registerConnectionHandler(new PacketHandler());
+		MinecraftForge.registerConnectionHandler(new PacketHandlerGame());
 		proxy.registerTileEntities();
 		proxy.registerRenderInformation();
 

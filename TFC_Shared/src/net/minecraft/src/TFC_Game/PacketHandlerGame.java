@@ -1,4 +1,4 @@
-package net.minecraft.src.TFC_Core.General;
+package net.minecraft.src.TFC_Game;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,10 +19,10 @@ import net.minecraft.src.forge.IConnectionHandler;
 import net.minecraft.src.forge.IPacketHandler;
 import net.minecraft.src.forge.MessageManager;
 
-public class PacketHandler implements IPacketHandler, IConnectionHandler {
+public class PacketHandlerGame implements IPacketHandler, IConnectionHandler {
     @Override
     public void onConnect(NetworkManager network) {
-        MessageManager.getInstance().registerChannel(network, this, "TerraFirmaCraft");
+        MessageManager.getInstance().registerChannel(network, this, "TerraFirmaCraft2");
     }
 
     @Override
@@ -50,24 +50,39 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
         World world= mod_TFC_Core.proxy.getCurrentWorld();
         TileEntity te=world.getBlockTileEntity(x, y, z);
 
-        if (te instanceof TileEntityTerraLogPile) 
+        if (te instanceof TileEntityTerraFirepit) 
         {
-            int[] items = new int[4];
-            TileEntityTerraLogPile icte = (TileEntityTerraLogPile)te;
-            icte.handlePacketData();
+            TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
+            float t;
+            try {
+                t = dis.readFloat();
+            } catch (IOException e) {
+                return;
+            } 
+            icte.handlePacketData(t);
         }
     }
 
-    public static Packet getPacket(TileEntityTerraLogPile tileEntity) 
-    {
+    public static Packet getPacket(TileEntityTerraFirepit tileEntity) {
         ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
         DataOutputStream dos=new DataOutputStream(bos);
         int x=tileEntity.xCoord;
         int y=tileEntity.yCoord;
         int z=tileEntity.zCoord;
 
+        try 
+        {
+            dos.writeInt(x);
+            dos.writeInt(y);
+            dos.writeInt(z);
+            dos.writeFloat(tileEntity.fireTemperature);
+
+        } catch (IOException e) 
+        {
+            // IMPOSSIBLE?
+        }
         Packet250CustomPayload pkt=new Packet250CustomPayload();
-        pkt.channel="TerraFirmaCraft";
+        pkt.channel="TerraFirmaCraft2";
         pkt.data=bos.toByteArray();
         pkt.length=bos.size();
         pkt.isChunkDataPacket=true;
