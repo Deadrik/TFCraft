@@ -1,6 +1,7 @@
 package net.minecraft.src.TFC_Game;
 
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.ServerClientProxy;
 import net.minecraft.src.forge.ForgeHooks;
 
 public class SlotCraftingScribe extends Slot
@@ -26,7 +27,7 @@ public class SlotCraftingScribe extends Slot
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 
-		ModLoader.takenFromCrafting(thePlayer, itemstack, craftMatrix);
+		ServerClientProxy.getProxy().takenFromCrafting(thePlayer, itemstack, craftMatrix);
 		ForgeHooks.onTakenFromCrafting(thePlayer, itemstack, craftMatrix);
 		((TileEntityTerraScribe)paperSlot).scribeItemStacks[1].stackSize--;
 		if(((TileEntityTerraScribe)paperSlot).scribeItemStacks[1].stackSize <= 0)

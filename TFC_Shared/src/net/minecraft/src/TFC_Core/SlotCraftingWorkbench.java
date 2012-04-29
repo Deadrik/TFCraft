@@ -82,7 +82,7 @@ public class SlotCraftingWorkbench extends Slot
 			this.thePlayer.addStat(AchievementList.bookcase, 1);
 		}
 
-		ModLoader.takenFromCrafting(this.thePlayer, par1ItemStack, this.craftMatrix);
+		ServerClientProxy.getProxy().takenFromCrafting(this.thePlayer, par1ItemStack, this.craftMatrix);
 		ForgeHooks.onTakenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
 	}
 

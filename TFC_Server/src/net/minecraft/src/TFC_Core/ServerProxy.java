@@ -3,6 +3,8 @@ package net.minecraft.src.TFC_Core;
 import java.io.File;
 import java.util.Map;
 
+import cpw.mods.fml.server.FMLServerHandler;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BaseMod;
 import net.minecraft.src.BiomeGenBase;
@@ -10,6 +12,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
@@ -175,5 +178,12 @@ public class ServerProxy implements IProxy {
 	public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
 		//Not used on server
 		return 0;
+	}
+
+	@Override
+	public void takenFromCrafting(EntityPlayer entityplayer,
+			ItemStack itemstack, IInventory iinventory) {
+		FMLServerHandler.instance().onItemCrafted(entityplayer, itemstack, iinventory);
+		
 	}
 }

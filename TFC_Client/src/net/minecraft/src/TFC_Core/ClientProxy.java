@@ -12,6 +12,7 @@ import net.minecraft.src.ChestItemRenderHelper;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
@@ -775,5 +776,12 @@ public class ClientProxy implements IProxy {
 	@Override
 	public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
 		return ModLoader.getUniqueBlockModelID(var0, var1);
+	}
+
+	@Override
+	public void takenFromCrafting(EntityPlayer entityplayer,
+			ItemStack itemstack, IInventory iinventory) {
+		ModLoader.takenFromCrafting(entityplayer, itemstack, iinventory);
+		
 	}
 }
