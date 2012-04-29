@@ -384,19 +384,19 @@ public class mod_TFC_Core extends NetworkMod
         proxy = ServerClientProxy.getProxy();
         MinecraftForge.registerConnectionHandler(new PacketHandler());
 
-        sulfurRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        woodSupportRenderIdH = ModLoader.getUniqueBlockModelID(this, false);
-        woodSupportRenderIdV = ModLoader.getUniqueBlockModelID(this, false);
-        grassRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        oreRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        moltenRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        looseRockRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        terraFirepitRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        terraAnvilRenderId = ModLoader.getUniqueBlockModelID(this, true);
-        terraBellowsRenderId = ModLoader.getUniqueBlockModelID(this, true);
-        terraScribeRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        terraForgeRenderId = ModLoader.getUniqueBlockModelID(this, false);
-        sluiceRenderId = ModLoader.getUniqueBlockModelID(this, false);
+        sulfurRenderId = proxy.getUniqueBlockModelID(this, false);
+        woodSupportRenderIdH = proxy.getUniqueBlockModelID(this, false);
+        woodSupportRenderIdV = proxy.getUniqueBlockModelID(this, false);
+        grassRenderId = proxy.getUniqueBlockModelID(this, false);
+        oreRenderId = proxy.getUniqueBlockModelID(this, false);
+        moltenRenderId = proxy.getUniqueBlockModelID(this, false);
+        looseRockRenderId = proxy.getUniqueBlockModelID(this, false);
+        terraFirepitRenderId = proxy.getUniqueBlockModelID(this, false);
+        terraAnvilRenderId = proxy.getUniqueBlockModelID(this, true);
+        terraBellowsRenderId = proxy.getUniqueBlockModelID(this, true);
+        terraScribeRenderId = proxy.getUniqueBlockModelID(this, false);
+        terraForgeRenderId = proxy.getUniqueBlockModelID(this, false);
+        sluiceRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.ItemTerraRock.class);
@@ -492,7 +492,7 @@ public class mod_TFC_Core extends NetworkMod
                 terraClay.blockID, terraClay2.blockID, terraClayGrass.blockID, terraClayGrass2.blockID, terraPeat.blockID, terraPeatGrass.blockID);
 
         //Add Item Name Localizations
-        TFC_Core.CreateLocalization();
+        proxy.registerTranslations();
         RemoveRecipe(new ItemStack(Item.stick,4));
         RemoveRecipe(new ItemStack(Block.planks,4));
         if(TFCSettings.enableVanillaRecipes == false)
