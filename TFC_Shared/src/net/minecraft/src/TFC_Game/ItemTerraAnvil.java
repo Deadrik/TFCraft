@@ -35,11 +35,11 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 		return "/bioxx/terratools.png";
 	}
 
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
 		if(objectMouseOver == null) {
-			return itemstack;
+			return false;
 		}		
 		int x = objectMouseOver.blockX;
 		int y = objectMouseOver.blockY;
@@ -75,9 +75,9 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 					//entity.anvilUsesLeft = itemstack.getItemDamage();
 				}
 			}
-			return new ItemStack(this,0);
+			return true;
 		}
 
-		return itemstack;
+		return false;
 	}
 }

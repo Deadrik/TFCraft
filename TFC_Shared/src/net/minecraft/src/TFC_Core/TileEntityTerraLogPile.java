@@ -197,25 +197,9 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
         nbttagcompound.setTag("Items", nbttaglist);
     }
 
-    public void handlePacketData(int typeData, int[] intData) 
+    public void handlePacketData() 
     {
         TileEntityTerraLogPile pile = this;
-
-        if (intData != null) {
-            int pos = 0;
-            if (intData.length < pile.storage.length * 3) {
-                return;
-            }
-            for (int i = 0; i < pile.storage.length; i++) {
-                if (intData[pos + 2] != 0) {
-                    ItemStack is = new ItemStack(intData[pos], intData[pos + 2], intData[pos + 1]);
-                    pile.storage[i] = is;
-                } else {
-                    pile.storage[i] = null;
-                }
-                pos += 3;
-            }
-        }
     }
     
     public Packet getDescriptionPacket() {
