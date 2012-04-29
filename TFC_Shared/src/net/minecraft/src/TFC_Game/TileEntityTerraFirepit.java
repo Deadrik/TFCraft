@@ -1483,6 +1483,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
             }
         }
+        if (mod_TFC_Core.proxy != null)
+        {
+        	mod_TFC_Core.proxy.sendCustomPacket(PacketHandlerGame.getPacket(this));
+        }
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound)
@@ -1512,16 +1516,4 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         nbttagcompound.setTag("Items", nbttaglist);
 
     }
-
-    public void handlePacketData(float temp) 
-    {
-        TileEntityTerraFirepit pile = this;
-        fireTemperature = temp;
-        
-    }
-    
-    public Packet getDescriptionPacket() 
-    {
-        return PacketHandlerGame.getPacket(this);
-      }
 }

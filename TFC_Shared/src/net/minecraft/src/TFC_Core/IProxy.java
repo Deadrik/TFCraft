@@ -43,4 +43,6 @@ public interface IProxy extends IGuiHandler {
 	public abstract int getUniqueBlockModelID(BaseMod var0, boolean var1);
 	
 	public abstract void takenFromCrafting(EntityPlayer entityplayer, ItemStack itemstack, IInventory iinventory);
+
+	public abstract void sendCustomPacket(Packet packet);
 }
