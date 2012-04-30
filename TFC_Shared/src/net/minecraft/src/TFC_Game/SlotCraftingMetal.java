@@ -2,6 +2,7 @@ package net.minecraft.src.TFC_Game;
 
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ForgeHooks;
+import net.minecraft.src.TFC_Core.ServerClientProxy;
 
 public class SlotCraftingMetal extends Slot
 {
@@ -24,7 +25,7 @@ public class SlotCraftingMetal extends Slot
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 
-		ModLoader.takenFromCrafting(thePlayer, itemstack, craftMatrix);
+		ServerClientProxy.getProxy().takenFromCrafting(thePlayer, itemstack, craftMatrix);
 		ForgeHooks.onTakenFromCrafting(thePlayer, itemstack, craftMatrix);
 
 		for (int i = 0; i < craftMatrix.getSizeInventory(); i++)

@@ -57,10 +57,12 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		if (par0)
 		{
 			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraBloomeryOn.blockID);
+			par1World.markBlockAsNeedsUpdate(par2, par3, par4);
 		}
 		else
 		{
 			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraBloomery.blockID);
+			par1World.markBlockAsNeedsUpdate(par2, par3, par4);
 		}
 
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);

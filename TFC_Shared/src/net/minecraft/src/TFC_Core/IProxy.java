@@ -2,17 +2,8 @@ package net.minecraft.src.TFC_Core;
 
 import java.io.File;
 import java.util.Map;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.World;
-import net.minecraft.src.forge.IGuiHandler;
+import net.minecraft.src.*;
+import net.minecraft.src.forge.*;
 
 public interface IProxy extends IGuiHandler {
 
@@ -49,4 +40,10 @@ public interface IProxy extends IGuiHandler {
 	public abstract boolean areItemStacksEqual(ItemStack is1, ItemStack is2);
 	
 	public abstract int getUniqueBlockModelID(BaseMod var0, boolean var1);
+	
+	public abstract void takenFromCrafting(EntityPlayer entityplayer, ItemStack itemstack, IInventory iinventory);
+	
+	public abstract void sendCustomPacket(Packet packet);
+	
+	public abstract EntityPlayer getPlayer(NetworkManager network);
 }

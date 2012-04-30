@@ -2,22 +2,11 @@ package net.minecraft.src.TFC_Core;
 
 import java.io.File;
 import java.util.Map;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.src.*;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.ContainerTerraSluice;
 import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
+import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy implements IProxy {
 
@@ -176,4 +165,24 @@ public class ServerProxy implements IProxy {
 		//Not used on server
 		return 0;
 	}
+
+    @Override
+    public void takenFromCrafting(EntityPlayer entityplayer,
+            ItemStack itemstack, IInventory iinventory)
+    {
+        FMLServerHandler.instance().onItemCrafted(entityplayer, itemstack, iinventory);  
+    }
+
+    @Override
+    public void sendCustomPacket(Packet packet)
+    {
+        ModLoader.getMinecraftServerInstance().configManager.sendPacketToAllPlayers(packet);
+        
+    }
+    
+    @Override
+    public EntityPlayer getPlayer(NetworkManager network)
+    {
+        return ((NetServerHandler)network.getNetHandler()).getPlayerEntity();
+    }
 }

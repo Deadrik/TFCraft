@@ -45,7 +45,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     private int externalWoodCount;
     int charcoalCounter;
 
-    public int FIREBURNTIME = 240;//default 240
+    public final int FIREBURNTIME = 240;//default 240
 
     private static int[] area =  {0,0,2,2,2,0,0};
     private static int[] area0 = {0,2,1,1,1,2,0};

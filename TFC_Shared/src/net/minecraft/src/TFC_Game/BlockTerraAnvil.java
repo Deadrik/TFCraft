@@ -1,6 +1,8 @@
 package net.minecraft.src.TFC_Game;
 
 import java.util.Random;
+
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityLiving;
@@ -17,23 +19,6 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 {
-	public static int getAnvilTypeFromMeta(int j)
-	{
-		int l = 7;
-		int k = j & l;
-		return k;
-	}
-	public static int getDirectionFromMetadata(int i)
-	{
-		int d = i >> 3;
-
-		if (d == 1) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
-	//TileEntityTerraSluice entity;
 	private int meta;
 	private int xCoord;
 	private int yCoord;
@@ -81,11 +66,24 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Game.terraAnvilGuiId, world, i, j, k);
-				//ModLoader.openGUI(entityplayer, new GuiTerraAnvil(entityplayer.inventory, tileentityanvil));
 			}
 			return true;
 		}
 	}
+	
+	/**
+     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+     * cleared to be reused)
+     */
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        int meta = par1World.getBlockMetadata(par2, par3, par4);
+        int direction = getDirectionFromMetadata(meta);
+        if(direction == 0)
+            return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
+        else
+            return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
+    }
 
 	@Override
 	public TileEntity getBlockEntity()
@@ -249,4 +247,21 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 	{
 		return false;
 	}
+	
+	public static int getAnvilTypeFromMeta(int j)
+    {
+        int l = 7;
+        int k = j & l;
+        return k;
+    }
+    public static int getDirectionFromMetadata(int i)
+    {
+        int d = i >> 3;
+
+        if (d == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

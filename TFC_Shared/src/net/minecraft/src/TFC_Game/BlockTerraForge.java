@@ -1,6 +1,8 @@
 package net.minecraft.src.TFC_Game;
 
 import java.util.Random;
+
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
@@ -13,28 +15,7 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraForge extends BlockContainer implements ITextureProvider
 {
-	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
-	{
-		int var5 = par1World.getBlockMetadata(par2, par3, par4);
-		TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
-
-		if (par0)
-		{
-			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraForgeOn.blockID);
-		}
-		else
-		{
-			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraForge.blockID);
-		}
-
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
-
-		if (var6 != null)
-		{
-			var6.validate();
-			par1World.setBlockTileEntity(par2, par3, par4, var6);
-		}
-	}
+	
 	private int meta;
 	private int xCoord;
 	private int yCoord;
@@ -48,7 +29,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 		super(i, Material.fire);
 		this.blockIndexInTexture = tex;
 		EntityClass = tClass;
-		needsRandomTick = true;
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
@@ -258,22 +239,56 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 	{
 		return 20;
 	}
+	
+	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
+    {
+        int var5 = par1World.getBlockMetadata(par2, par3, par4);
+        TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
 
-	public void updateTick(World world, int i, int j, int k, Random random)
-	{
-		TileEntityTerraForge tileentityfirepit;
-		tileentityfirepit = (TileEntityTerraForge)world.getBlockTileEntity(i, j, k);
-		setLightValue(0.8F);
-		if(tileentityfirepit.fireTemperature < 100)
-		{
-			world.setBlockMetadata(i, j, k, 0);
-			setLightValue(0.0F);
-		}
+        if (par0)
+        {
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraForgeOn.blockID);
+            par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+        }
+        else
+        {
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraForge.blockID);
+            par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+        }
 
-		if(tileentityfirepit.fireTemperature > 210)
-		{
-			world.setBlockMetadata(i, j, k, 1);
-		}
-	}
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
+
+        if (var6 != null)
+        {
+            var6.validate();
+            par1World.setBlockTileEntity(par2, par3, par4, var6);
+        }
+    }
+	
+	/**
+     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+     * cleared to be reused)
+     */
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
+    }
+
+//	public void updateTick(World world, int i, int j, int k, Random random)
+//	{
+//		TileEntityTerraForge tileentityfirepit;
+//		tileentityfirepit = (TileEntityTerraForge)world.getBlockTileEntity(i, j, k);
+//		setLightValue(0.8F);
+//		if(tileentityfirepit.fireTemperature < 100)
+//		{
+//			world.setBlockMetadata(i, j, k, 0);
+//			setLightValue(0.0F);
+//		}
+//
+//		if(tileentityfirepit.fireTemperature > 210)
+//		{
+//			world.setBlockMetadata(i, j, k, 1);
+//		}
+//	}
 
 }

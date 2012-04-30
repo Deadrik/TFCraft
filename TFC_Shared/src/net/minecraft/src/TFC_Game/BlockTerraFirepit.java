@@ -1,6 +1,8 @@
 package net.minecraft.src.TFC_Game;
 
 import java.util.Random;
+
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityPlayer;
@@ -14,28 +16,7 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraFirepit extends BlockContainer implements ITextureProvider
 {
-	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
-	{
-		int var5 = par1World.getBlockMetadata(par2, par3, par4);
-		TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
-
-		if (par0)
-		{
-			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraFirepitOn.blockID);
-		}
-		else
-		{
-			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraFirepit.blockID);
-		}
-
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
-
-		if (var6 != null)
-		{
-			var6.validate();
-			par1World.setBlockTileEntity(par2, par3, par4, var6);
-		}
-	}
+	
 	private int meta;
 	private int xCoord;
 	private int yCoord;
@@ -48,8 +29,8 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 	{
 		super(i, Material.ground);
 		EntityClass = tClass;
-		needsRandomTick = true;
 		this.blockIndexInTexture = tex;
+		this.setBlockBounds(0, 0, 0, 1, 0.1f, 1);
 	}
 
 	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
@@ -85,6 +66,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
 					world.setBlockMetadata(i, j, k, 2);
+					world.markBlockAsNeedsUpdate(i, j, k);
 				}
 			}
 			return true;
@@ -233,4 +215,38 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 	{
 		Block.setBurnProperties(i, j, k);
 	}
+	
+	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
+    {
+        int var5 = par1World.getBlockMetadata(par2, par3, par4);
+        TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
+
+        if (par0)
+        {
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraFirepitOn.blockID);
+            par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+        }
+        else
+        {
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraFirepit.blockID);
+            par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+        }
+
+        par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
+
+        if (var6 != null)
+        {
+            var6.validate();
+            par1World.setBlockTileEntity(par2, par3, par4, var6);
+        }
+    }
+	
+	/**
+     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+     * cleared to be reused)
+     */
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        return null;
+    }
 }

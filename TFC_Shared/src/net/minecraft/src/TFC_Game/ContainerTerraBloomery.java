@@ -4,13 +4,14 @@ import net.minecraft.src.*;
 
 public class ContainerTerraBloomery extends Container
 {
-	private TileEntityTerraBloomery firepit;
+	private TileEntityTerraBloomery bloomery;
+    private float firetemp;
 
 
 	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge)
 	{
-		firepit = tileentityforge;
-
+	    bloomery = tileentityforge;
+	    firetemp = 0;
 		//Input slot
 		addSlot(new Slot(tileentityforge, 0, 80, 33));
 
@@ -209,11 +210,27 @@ public class ContainerTerraBloomery extends Container
 	}
 
 	public void updateCraftingResults()
-	{
-		super.updateCraftingResults();
-		for(int i = 0; i < inventorySlots.size(); i++)
-		{
-			ICrafting icrafting = (ICrafting)inventorySlots.get(i);
-		}
-	}
+    {
+        super.updateCraftingResults();
+        
+        for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+        {
+            ICrafting var2 = (ICrafting)this.crafters.get(var1);
+            if (this.firetemp != this.bloomery.fireTemperature)
+            {
+                var2.updateCraftingInventoryInfo(this, 0, (int)this.bloomery.fireTemperature);
+            }
+        }
+        
+        firetemp = this.bloomery.fireTemperature;
+    }
+	
+	public void updateProgressBar(int par1, int par2)
+    {
+        if (par1 == 0)
+        {
+            this.bloomery.fireTemperature = par2;
+        }
+
+    }
 }

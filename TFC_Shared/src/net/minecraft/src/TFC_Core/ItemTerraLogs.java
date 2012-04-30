@@ -33,95 +33,62 @@ public class ItemTerraLogs extends Item implements ITextureProvider
 	}
 
 	private boolean CreatePile(ItemStack itemstack, World world, int x, int y,
-			int z, int side, int l) {
-		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
-		{
-			world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC_Core.LogPile.blockID, l);
-			if(world.isRemote)
+            int z, int side, int l) {
+        TileEntityTerraLogPile te = null;
+        if(side == 0 && world.getBlockId(x, y-1, z) == 0)
+        {
+            world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC_Core.LogPile.blockID, l);
+            if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y-1, z);
-
-			TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y-1, z);
-			if(te != null)
-			{
-				te.storage[0] = new ItemStack(this,1,itemstack.getItemDamage());
-			}
-			
-			itemstack.stackSize--;
-			return true;
-		}
-		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
-		{
-			world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC_Core.LogPile.blockID, l);
-			if(world.isRemote)
-			    world.markBlockNeedsUpdate(x, y+1, z);
-
-			TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y+1, z);
-			if(te != null)
-			{
-				te.storage[0] = new ItemStack(this,1, itemstack.getItemDamage());
-			}
-			itemstack.stackSize--;
-            return true;
-		}
-		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
-		{
-			world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC_Core.LogPile.blockID, l);
-			if(world.isRemote)
+            te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y-1, z);
+        }
+        else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
+        {
+            world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC_Core.LogPile.blockID, l);
+            if(world.isRemote)
+                world.markBlockNeedsUpdate(x, y+1, z);
+            te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y+1, z);
+        }
+        else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
+        {
+            world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC_Core.LogPile.blockID, l);
+            if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y, z-1);
-
-			TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z-1);
-			if(te != null)
-			{
-				te.storage[0] = new ItemStack(this,1, itemstack.getItemDamage());
-			}
-			itemstack.stackSize--;
-            return true;
-		}
-		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
-		{
-			world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC_Core.LogPile.blockID, l);
-			if(world.isRemote)
+            te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z-1);
+        }
+        else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
+        {
+            world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC_Core.LogPile.blockID, l);
+            if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y, z+1);
-
-			TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z+1);
-			if(te != null)
-			{
-				te.storage[0] = new ItemStack(this,1, itemstack.getItemDamage());
-			}
-			itemstack.stackSize--;
-            return true;
-		}
-		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
-		{
-			world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC_Core.LogPile.blockID, l);
-			if(world.isRemote)
+            te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z+1);
+        }
+        else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
+        {
+            world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC_Core.LogPile.blockID, l);
+            if(world.isRemote)
                 world.markBlockNeedsUpdate(x-1, y, z);
-
-			TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x-1, y, z);
-			if(te != null)
-			{
-				te.storage[0] = new ItemStack(this,1, itemstack.getItemDamage());
-			}
-			itemstack.stackSize--;
-            return true;
-		}
-		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
-		{
-			world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC_Core.LogPile.blockID, l);
-			if(world.isRemote)
+            te = (TileEntityTerraLogPile)world.getBlockTileEntity(x-1, y, z);
+        }
+        else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
+        {
+            world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC_Core.LogPile.blockID, l);
+            if(world.isRemote)
                 world.markBlockNeedsUpdate(x+1, y, z);
-
-			TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x+1, y, z);
-			if(te != null)
-			{
-				te.storage[0] = new ItemStack(this,1, itemstack.getItemDamage());
-			}
-			itemstack.stackSize--;
-            return true;
-		} else {
-			return false;
-		}
-	}
+            te = (TileEntityTerraLogPile)world.getBlockTileEntity(x+1, y, z);
+        }
+        else
+        {
+            return false;
+        }
+        
+        if(te != null)
+        {
+            te.storage[0] = new ItemStack(this,1,itemstack.getItemDamage());
+        }
+        
+        return true;
+    }
 
 	public int getIconFromDamage(int par1)
 	{
@@ -141,7 +108,7 @@ public class ItemTerraLogs extends Item implements ITextureProvider
 		return "/bioxx/terrasprites2.png";
 	}
 	
-	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
     {
 	    MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
         if(objectMouseOver == null) {
@@ -155,15 +122,15 @@ public class ItemTerraLogs extends Item implements ITextureProvider
 
         if(world.getBlockId(x, y, z) != mod_TFC_Core.LogPile.blockID || entityplayer.isSneaking())
         {
-            CreatePile(itemstack, world, x, y, z, side, dir); 
+            if(CreatePile(itemstack, world, x, y, z, side, dir))
+                itemstack.stackSize = itemstack.stackSize-1;
             return true;
         }
-        else
+        else if(world.getBlockId(x, y, z) == mod_TFC_Core.LogPile.blockID)
         {
             TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z);
             if(te != null)
             {
-                boolean created = false;
                 if(te.storage[0] != null && te.contentsMatch(0,itemstack)) {
                     te.injectContents(0,1);
                 } else if(te.storage[0] == null) {
@@ -182,13 +149,14 @@ public class ItemTerraLogs extends Item implements ITextureProvider
                     te.addContents(3, new ItemStack(this,1, itemstack.getItemDamage()));
                 } else
                 {
-                    return CreatePile(itemstack, world, x, y, z, side, dir);
-                }
-                if(!created)
-                {
+                    if(CreatePile(itemstack, world, x, y, z, side, dir));
+                        itemstack.stackSize = itemstack.stackSize-1;
                     return true;
                 }
+                itemstack.stackSize = itemstack.stackSize-1;
+                return true;
             }
+            
         }
         return false;
     }

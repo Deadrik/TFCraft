@@ -4,25 +4,11 @@ import java.io.File;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.ChestItemRenderHelper;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.RenderBlocks;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.*;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.GuiTerraSluice;
 import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
-import net.minecraft.src.forge.MinecraftForgeClient;
+import net.minecraft.src.forge.*;
 
 public class ClientProxy implements IProxy {
     @Override
@@ -776,4 +762,23 @@ public class ClientProxy implements IProxy {
 	public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
 		return ModLoader.getUniqueBlockModelID(var0, var1);
 	}
+	
+	@Override
+	public void takenFromCrafting(EntityPlayer entityplayer,
+	ItemStack itemstack, IInventory iinventory) 
+	{
+	    ModLoader.takenFromCrafting(entityplayer, itemstack, iinventory);
+	}
+
+    @Override
+    public void sendCustomPacket(Packet packet)
+    {
+        ModLoader.sendPacket(packet);     
+    }
+
+    @Override
+    public EntityPlayer getPlayer(NetworkManager network)
+    {
+        return ModLoader.getMinecraftInstance().thePlayer;
+    }
 }

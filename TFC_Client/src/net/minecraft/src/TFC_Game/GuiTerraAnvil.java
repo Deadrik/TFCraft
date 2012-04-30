@@ -81,6 +81,7 @@ public class GuiTerraAnvil extends GuiContainerTFC
 			{
 				AnvilEntity.actionWeld();
 			}
+			this.inventorySlots.updateCraftingResults();
 		}
     }
 

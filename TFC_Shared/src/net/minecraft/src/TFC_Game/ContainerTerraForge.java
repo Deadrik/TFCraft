@@ -5,15 +5,16 @@ import net.minecraft.src.TFC_Core.ItemTerraSmallOre;
 
 public class ContainerTerraForge extends Container
 {
-	private TileEntityTerraForge firepit;
+	private TileEntityTerraForge forge;
 	private int coolTime;
 	private int freezeTime;
 	private int itemFreezeTime;
+    private float firetemp;
 
 
 	public ContainerTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge)
 	{
-		firepit = tileentityforge;
+		forge = tileentityforge;
 
 		coolTime = 0;
 		freezeTime = 0;
@@ -57,7 +58,6 @@ public class ContainerTerraForge extends Container
 	{
 		return true;
 	}
-
 
 	public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
 	{
@@ -195,7 +195,6 @@ public class ContainerTerraForge extends Container
 		return itemstack;
 	}
 
-
 	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
@@ -324,14 +323,28 @@ public class ContainerTerraForge extends Container
 		return null;
 	}
 
-
-
 	public void updateCraftingResults()
 	{
 		super.updateCraftingResults();
-		for(int i = 0; i < inventorySlots.size(); i++)
-		{
-			ICrafting icrafting = (ICrafting)inventorySlots.get(i);
-		}
+		
+		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+        {
+            ICrafting var2 = (ICrafting)this.crafters.get(var1);
+            if (this.firetemp != this.forge.fireTemperature)
+            {
+                var2.updateCraftingInventoryInfo(this, 0, (int)this.forge.fireTemperature);
+            }
+        }
+        
+        firetemp = this.forge.fireTemperature;
 	}
+	
+	public void updateProgressBar(int par1, int par2)
+    {
+        if (par1 == 0)
+        {
+            this.forge.fireTemperature = par2;
+        }
+
+    }
 }

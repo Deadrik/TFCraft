@@ -201,26 +201,4 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
     {
         TileEntityTerraLogPile pile = this;
     }
-    
-    public Packet getDescriptionPacket() {
-        return PacketHandler.getPacket(this);
-      }
-
-    public int[] buildIntDataList() 
-    {
-        int[] sortList = new int[storage.length * 3];
-        int pos = 0;
-        for (ItemStack is : storage) {
-            if (is != null) {
-                sortList[pos++] = is.itemID;
-                sortList[pos++] = is.getItemDamage();
-                sortList[pos++] = is.stackSize;
-            } else {
-                sortList[pos++] = 0;
-                sortList[pos++] = 0;
-                sortList[pos++] = 0;
-            }
-        }
-        return sortList;
-    }
 }

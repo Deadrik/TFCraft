@@ -10,6 +10,7 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 	public BlockLooseRock(int par1) 
 	{
 		super(par1, Material.wood);
+		this.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
 	}
 
 	public int getRenderType()

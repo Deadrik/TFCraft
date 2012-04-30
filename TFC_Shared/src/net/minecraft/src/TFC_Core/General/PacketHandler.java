@@ -5,7 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet1Login;
@@ -14,6 +16,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
+import net.minecraft.src.TFC_Game.TileEntityTerraAnvil;
 import net.minecraft.src.TFC_Game.TileEntityTerraFirepit;
 import net.minecraft.src.forge.IConnectionHandler;
 import net.minecraft.src.forge.IPacketHandler;
@@ -35,48 +38,72 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     }
 
     @Override
-    public void onPacketData(NetworkManager network, String channel, byte[] data) {
+    public void onPacketData(NetworkManager network, String channel, byte[] data) 
+    {
         DataInputStream dis=new DataInputStream(new ByteArrayInputStream(data));
-        int x;
-        int y;
-        int z;
-        try {
-            x = dis.readInt();
-            y = dis.readInt();
-            z = dis.readInt();
-        } catch (IOException e) {
-            return;
-        }
-        World world= mod_TFC_Core.proxy.getCurrentWorld();
-        TileEntity te=world.getBlockTileEntity(x, y, z);
-
-        if (te instanceof TileEntityTerraLogPile) 
+        if(channel.contentEquals("TerraFirmaCraft"))
         {
-            int[] items = new int[4];
-            TileEntityTerraLogPile icte = (TileEntityTerraLogPile)te;
-            icte.handlePacketData();
-        }
-        else if (te instanceof TileEntityTerraFirepit) 
-        {
-            TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
-            float t;
+            int x;
+            int y;
+            int z;
             try {
-                t = dis.readFloat();
+                x = dis.readInt();
+                y = dis.readInt();
+                z = dis.readInt();
             } catch (IOException e) {
                 return;
-            } 
-            icte.handlePacketData(t);
+            }
+            
+            EntityPlayer player = mod_TFC_Core.proxy.getPlayer(network);
+            World world= player.worldObj;
+            if(world != null)
+            {
+                TileEntity te=world.getBlockTileEntity(x, y, z);
+
+                if (te instanceof TileEntityTerraAnvil) 
+                {
+                    TileEntityTerraAnvil icte = (TileEntityTerraAnvil)te;
+                    int id;
+                    try {
+                        id = dis.readInt();
+                    } catch (IOException e) {
+                        return;
+                    } 
+                    icte.handlePacketData(id);
+                }
+                else if (te instanceof TileEntityTerraFirepit) 
+                {
+                    TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
+                    float t;
+                    try {
+                        t = dis.readFloat();
+                    } catch (IOException e) {
+                        return;
+                    } 
+                    icte.handlePacketData(t);
+                }
+            }
         }
     }
 
-    public static Packet getPacket(TileEntityTerraLogPile tileEntity) 
+    public static Packet getPacket(TileEntityTerraAnvil tileEntity, int id) 
     {
         ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
         DataOutputStream dos=new DataOutputStream(bos);
         int x=tileEntity.xCoord;
         int y=tileEntity.yCoord;
         int z=tileEntity.zCoord;
+        try 
+        {
+            dos.writeInt(x);
+            dos.writeInt(y);
+            dos.writeInt(z);
+            dos.writeInt(id);
+        } 
+        catch (IOException e) 
+        {
 
+        }
         Packet250CustomPayload pkt=new Packet250CustomPayload();
         pkt.channel="TerraFirmaCraft";
         pkt.data=bos.toByteArray();

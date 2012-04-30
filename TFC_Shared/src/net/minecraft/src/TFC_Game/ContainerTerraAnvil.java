@@ -5,11 +5,16 @@ import net.minecraft.src.*;
 public class ContainerTerraAnvil extends Container
 {
 	private TileEntityTerraAnvil terraanvil;
+    private int greenIndicator;
+    private int redIndicator;
 
 	public ContainerTerraAnvil(InventoryPlayer inventoryplayer, TileEntityTerraAnvil anvil)
 	{
 		terraanvil = anvil;
-
+		
+		redIndicator = -1000;
+		greenIndicator = -1000;
+		
 		//Hammer slot
 		addSlot(new SlotAnvilHammer(inventoryplayer.player, anvil, 0, 6, 95));
 		//input item slot
@@ -179,6 +184,7 @@ public class ContainerTerraAnvil extends Container
 				}
 			}
 		}
+		this.updateCraftingResults();
 		return itemstack;
 	}
 
@@ -270,6 +276,44 @@ public class ContainerTerraAnvil extends Container
 		return null;
 	}
 
+	public void updateCraftingResults()
+    {
+        super.updateCraftingResults();
+        
+        for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+        {
+            ICrafting var2 = (ICrafting)this.crafters.get(var1);
+            int cv = this.terraanvil.getCraftingValue();
+            int icv = this.terraanvil.getItemCraftingValue();
+            if (this.redIndicator != this.terraanvil.getCraftingValue())
+            {
+                var2.updateCraftingInventoryInfo(this, 0, cv);
+            }
+            if (this.greenIndicator != this.terraanvil.getItemCraftingValue())
+            {
+                var2.updateCraftingInventoryInfo(this, 1, icv);
+            }
+        }
+        
+        greenIndicator = this.terraanvil.getCraftingValue();
+        redIndicator = this.terraanvil.getItemCraftingValue();
+    }
+	
+	/**
+	 * This is needed to make sure that something is done when 
+	 * the client receives the updated progress bar
+	 * */
+	public void updateProgressBar(int par1, int par2)
+    {
+        if (par1 == 0)
+        {
+            this.terraanvil.craftingValue = par2;
+        }
+        else if (par1 == 1)
+        {
+            this.terraanvil.itemCraftingValue = par2;
+        }
 
+    }
 
 }
