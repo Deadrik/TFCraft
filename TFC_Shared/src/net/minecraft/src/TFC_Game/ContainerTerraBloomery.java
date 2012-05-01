@@ -1,11 +1,15 @@
 package net.minecraft.src.TFC_Game;
 
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.General.PacketHandler;
 
 public class ContainerTerraBloomery extends Container
 {
 	private TileEntityTerraBloomery bloomery;
     private float firetemp;
+    private int orecount;
+    private int coalcount;
+    private int outcount;
 
 
 	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge)
@@ -221,7 +225,7 @@ public class ContainerTerraBloomery extends Container
                 var2.updateCraftingInventoryInfo(this, 0, (int)this.bloomery.fireTemperature);
             }
         }
-        
+        mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.orename, this.bloomery.oreDamage));
         firetemp = this.bloomery.fireTemperature;
     }
 	

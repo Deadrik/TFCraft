@@ -188,42 +188,82 @@ public class TFCHeat
 			if(temp < 80)
 			{
 				phrase = "Warm";
+				if(temp>(80 * 0.2)) phrase = phrase + "*";
+				if(temp>(80 * 0.4)) phrase = phrase + "*";
+				if(temp>(80 * 0.6)) phrase = phrase + "*";
+				if(temp>(80 * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 80 && temp < 210)
 			{
 				phrase = "Hot";
+				if(temp>80+((210-80) * 0.2)) phrase = phrase + "*";
+                if(temp>80+((210-80) * 0.4)) phrase = phrase + "*";
+                if(temp>80+((210-80) * 0.6)) phrase = phrase + "*";
+                if(temp>80+((210-80) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 210 &&  temp < 480)
 			{
 				phrase = "Very Hot";
+				if(temp>210+((480-210) * 0.2)) phrase = phrase + "*";
+                if(temp>210+((480-210) * 0.4)) phrase = phrase + "*";
+                if(temp>210+((480-210) * 0.6)) phrase = phrase + "*";
+                if(temp>210+((480-210) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 480 &&  temp < 580)
 			{
 				phrase = "\2474Faint Red";
+				if(temp>480+((580-480) * 0.2)) phrase = phrase + "*";
+                if(temp>480+((580-480) * 0.4)) phrase = phrase + "*";
+                if(temp>480+((580-480) * 0.6)) phrase = phrase + "*";
+                if(temp>480+((580-480) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 580 &&  temp < 730)
 			{
 				phrase = "\2474Dark Red";
+				if(temp>580+((730-580) * 0.2)) phrase = phrase + "*";
+                if(temp>580+((730-580) * 0.4)) phrase = phrase + "*";
+                if(temp>580+((730-580) * 0.6)) phrase = phrase + "*";
+                if(temp>580+((730-580) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 730 &&  temp < 930)
 			{
 				phrase = "\247cBright Red";
+				if(temp>730+((930-730) * 0.2)) phrase = phrase + "*";
+                if(temp>730+((930-730) * 0.4)) phrase = phrase + "*";
+                if(temp>730+((930-730) * 0.6)) phrase = phrase + "*";
+                if(temp>730+((930-730) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 930 &&  temp < 1100)
 			{
 				phrase = "\2476Orange";
+				if(temp>930+((1100-930) * 0.2)) phrase = phrase + "*";
+                if(temp>930+((1100-930) * 0.4)) phrase = phrase + "*";
+                if(temp>930+((1100-930) * 0.6)) phrase = phrase + "*";
+                if(temp>930+((1100-930) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 1100 &&  temp < 1300)
 			{
 				phrase = "\247eYellow";
+				if(temp>1100+((1300-1100) * 0.2)) phrase = phrase + "*";
+                if(temp>1100+((1300-1100) * 0.4)) phrase = phrase + "*";
+                if(temp>1100+((1300-1100) * 0.6)) phrase = phrase + "*";
+                if(temp>1100+((1300-1100) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 1300 &&  temp < 1400)
 			{
 				phrase = "\247eYellow White";
+				if(temp>1300+((1400-1300) * 0.2)) phrase = phrase + "*";
+                if(temp>1300+((1400-1300) * 0.4)) phrase = phrase + "*";
+                if(temp>1300+((1400-1300) * 0.6)) phrase = phrase + "*";
+                if(temp>1300+((1400-1300) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 1400 &&  temp < 1500)
 			{
 				phrase = "\247fWhite";
+				if(temp>1400+((1500-1400) * 0.2)) phrase = phrase + "*";
+                if(temp>1400+((1500-1400) * 0.4)) phrase = phrase + "*";
+                if(temp>1400+((1500-1400) * 0.6)) phrase = phrase + "*";
+                if(temp>1400+((1500-1400) * 0.8)) phrase = phrase + "*";
 			}
 			else if(temp >= 1500)
 			{

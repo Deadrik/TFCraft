@@ -45,5 +45,11 @@ public class ItemTerraSmallOre extends Item implements ITextureProvider
 	{
 		return "/bioxx/terrasprites2.png";
 	}
+	
+    public static String getItemNameDamage(String n, int d) 
+    {
+        String s = blockNames[d];
+        return s;
+    }
 
 }

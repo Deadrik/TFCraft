@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.src.TFC_Core.Custom.*;
 
 public class MapGenVillageTFC extends MapGenStructure
 {
@@ -62,6 +63,6 @@ public class MapGenVillageTFC extends MapGenStructure
 
 	protected StructureStart getStructureStart(int par1, int par2)
 	{
-		return new StructureVillageStart(this.worldObj, this.rand, par1, par2, this.terrainType);
+		return new StructureVillageStartTFC(this.worldObj, this.rand, par1, par2, this.terrainType);
 	}
 }

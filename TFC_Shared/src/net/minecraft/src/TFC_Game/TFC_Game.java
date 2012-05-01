@@ -86,6 +86,9 @@ public class TFC_Game
 		//this is for making pig iron into wrought iron
 		RecipeMap.put("item.terraPigIronIngot", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new int[]{0,0,0},				0, 				2});
 
+		RecipeMap.put("item.terraMeltedWeakBlueSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraWeakBlueSteelIngot), new int[]{0,0,4},      0,              5});
+        RecipeMap.put("item.terraMeltedWeakRedSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraWeakRedSteelIngot), new int[]{0,0,4},          0,              5});
+        RecipeMap.put("item.terraMeltedWeakSteel", new Object[]{37,0,null,new ItemStack(mod_TFC_Core.terraWeakSteelIngot), new int[]{0,0,4},                0,              3});
 		RecipeMap.put("item.terraMeltedHCBlackSteel", new Object[]{47,0,null,new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot), new int[]{0,0,4},		0, 				4});
 		RecipeMap.put("item.terraMeltedHCBlueSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot), new int[]{0,0,4},		0, 				5});
 		RecipeMap.put("item.terraMeltedHCRedSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraHCRedSteelIngot), new int[]{0,0,4},			0, 				5});

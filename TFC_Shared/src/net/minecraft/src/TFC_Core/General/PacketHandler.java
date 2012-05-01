@@ -17,6 +17,7 @@ import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
 import net.minecraft.src.TFC_Game.TileEntityTerraAnvil;
+import net.minecraft.src.TFC_Game.TileEntityTerraBloomery;
 import net.minecraft.src.TFC_Game.TileEntityTerraFirepit;
 import net.minecraft.src.forge.IConnectionHandler;
 import net.minecraft.src.forge.IPacketHandler;
@@ -82,6 +83,25 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     } 
                     icte.handlePacketData(t);
                 }
+                else if (te instanceof TileEntityTerraBloomery) 
+                {
+                    TileEntityTerraBloomery icte = (TileEntityTerraBloomery)te;
+                    int orecount;
+                    int coalcount;
+                    float outcount;
+                    String type;
+                    int dam;
+                    try {
+                        orecount = dis.readInt();
+                        coalcount = dis.readInt();
+                        outcount = dis.readFloat();
+                        type = dis.readUTF();
+                        dam = dis.readInt();
+                    } catch (IOException e) {
+                        return;
+                    } 
+                    icte.handlePacketData(orecount, coalcount, outcount, type, dam);
+                }
             }
         }
     }
@@ -125,6 +145,39 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             dos.writeInt(y);
             dos.writeInt(z);
             dos.writeFloat(tileEntity.fireTemperature);
+
+        } catch (IOException e) 
+        {
+            // IMPOSSIBLE?
+        }
+        Packet250CustomPayload pkt=new Packet250CustomPayload();
+        pkt.channel="TerraFirmaCraft";
+        pkt.data=bos.toByteArray();
+        pkt.length=bos.size();
+        pkt.isChunkDataPacket=true;
+        return pkt;
+    }
+
+    public static Packet getPacket(
+            TileEntityTerraBloomery tileEntity, int oreCount,
+            int charcoalCount, float outCount, String s, int oreDamage)
+    {
+        ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+        DataOutputStream dos=new DataOutputStream(bos);
+        int x=tileEntity.xCoord;
+        int y=tileEntity.yCoord;
+        int z=tileEntity.zCoord;
+
+        try 
+        {
+            dos.writeInt(x);
+            dos.writeInt(y);
+            dos.writeInt(z);
+            dos.writeInt(oreCount);
+            dos.writeInt(charcoalCount);
+            dos.writeFloat(outCount);
+            dos.writeUTF(s);
+            dos.writeInt(oreDamage);
 
         } catch (IOException e) 
         {

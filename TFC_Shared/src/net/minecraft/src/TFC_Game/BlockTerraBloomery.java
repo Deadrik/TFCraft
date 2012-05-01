@@ -14,6 +14,30 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraBloomery extends BlockContainer implements ITextureProvider
 {
+    private Class EntityClass;
+    private int meta;
+    private int xCoord;
+    private int yCoord;
+    private int zCoord;
+    public static final int headBlockToFootBlockMap[][] = {
+        {
+            0, 1
+        }, {
+            -1, 0
+        }, {
+            0, -1
+        }, {
+            1, 0
+        }
+    };
+    
+    public BlockTerraBloomery(int i, Class tClass, int tex)
+    {
+        super(i, Material.rock);
+        this.blockIndexInTexture = tex;
+        EntityClass = tClass;
+    }
+    
 	public static void DoValidCheck(World world, int i, int j, int k, int meta)
 	{
 		if(meta == 0)
@@ -73,41 +97,12 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			par1World.setBlockTileEntity(par2, par3, par4, var6);
 		}
 	}
-	private int meta;
-	private int xCoord;
-
-	private int yCoord;
-
-	private int zCoord;
-
-	public static final int headBlockToFootBlockMap[][] = {
-		{
-			0, 1
-		}, {
-			-1, 0
-		}, {
-			0, -1
-		}, {
-			1, 0
-		}
-	};
-
-	private Class EntityClass;
-
-	public BlockTerraBloomery(int i, Class tClass, int tex)
-	{
-		super(i, Material.rock);
-		this.blockIndexInTexture = tex;
-		EntityClass = tClass;
-	}
-
 	public void addCreativeItems(java.util.ArrayList list)
 	{
 		if(this.blockID != mod_TFC_Game.terraBloomeryOn.blockID) {
 			list.add(new ItemStack(this,1,0));
 		}
 	}
-
 	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -169,10 +164,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		if(j == 3 && i == 4) {
 			return blockIndexInTexture;
 		}
-
-
 		return 64;
-
 	}
 
 	@Override
@@ -216,22 +208,27 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		if(world.getBlockId(par2+dir[0], par3, par4+dir[1]) == mod_TFC_Game.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3, par4+dir[1], 0);
+			world.markBlockNeedsUpdate(par2+dir[0], par3, par4+dir[1]);
 		}
 		if(world.getBlockId(par2+dir[0], par3+1, par4+dir[1]) == mod_TFC_Game.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+1, par4+dir[1], 0);
+			world.markBlockNeedsUpdate(par2+dir[0], par3+1, par4+dir[1]);
 		}
 		if(world.getBlockId(par2+dir[0], par3+2, par4+dir[1]) == mod_TFC_Game.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+2, par4+dir[1], 0);
+			world.markBlockNeedsUpdate(par2+dir[0], par3+2, par4+dir[1]);
 		}
 		if(world.getBlockId(par2+dir[0], par3+3, par4+dir[1]) == mod_TFC_Game.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+3, par4+dir[1], 0);
+			world.markBlockNeedsUpdate(par2+dir[0], par3+3, par4+dir[1]);
 		}
 		if(world.getBlockId(par2+dir[0], par3+4, par4+dir[1]) == mod_TFC_Game.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+4, par4+dir[1], 0);
+			world.markBlockNeedsUpdate(par2+dir[0], par3+4, par4+dir[1]);
 		}
 	}
 
@@ -245,6 +242,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		{
 			((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlock(i, j, k, 0);
+			world.markBlockAsNeedsUpdate(i,j,k);
 		}
 		//DoValidCheck(world,  i,  j,  k,  meta);
 	}
