@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import net.minecraft.src.TFC_Core.Custom.*;
 
-public class MapGenVillageTFC extends MapGenStructure
+public class MapGenVillageTFC extends MapGenStructureTFC
 {
 	/** A list of all the biomes villages can spawn in. */
 	public static List villageSpawnBiomes = Arrays.asList(new BiomeGenBase[] {BiomeGenBase.plains, BiomeGenBase.desert,
@@ -61,7 +61,7 @@ public class MapGenVillageTFC extends MapGenStructure
 		return false;
 	}
 
-	protected StructureStart getStructureStart(int par1, int par2)
+	protected StructureStartTFC getStructureStart(int par1, int par2)
 	{
 		return new StructureVillageStartTFC(this.worldObj, this.rand, par1, par2, this.terrainType);
 	}

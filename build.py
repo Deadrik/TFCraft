@@ -22,11 +22,9 @@ def main():
     sys.exit(build(build_num))
     
 def build(build_num=0):
-    version = load_version(build_num)
     print '=================================== Build Start ================================='   
     print '\nsrc -> backup'
-    copytree(src_dir, backup_dir, 0)
-          
+    copytree(src_dir, backup_dir, -1)    
     print '\ntfc_client -> minecraft'
     copytree(os.path.join(forge_dir, 'tfc_client', 'src'), os.path.join(src_dir, 'minecraft'), -1)
     print '\ntfc_server -> minecraft_server'
@@ -51,7 +49,7 @@ def build(build_num=0):
     print '\nremove src'
     shutil.rmtree(src_dir)
     print '\nbackup -> src'
-    copytree(backup_dir, src_dir, 0)
+    copytree(backup_dir, src_dir, -1)
     print '\nremove backup'
     shutil.rmtree(backup_dir)
         

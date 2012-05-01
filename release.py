@@ -45,30 +45,27 @@ def main():
         print 'Reobfusicate Exception: %d ' % e.code
         error_level = e.code
     
-    extract_fml_obfed()
     version = load_version(build_num)
-    version_str = '%d.%d.%d.%d' % (version['major'], version['minor'], version['revision'], version['build'])
         
-    out_folder = os.path.join(forge_dir, 'TFC-%s' % version_str)
+    out_folder = os.path.join(forge_dir, 'TFC Build')
     if os.path.isdir(out_folder):
         shutil.rmtree(out_folder)
         
     os.makedirs(out_folder)
     
-    zip_start('TFCraft-client-%s.zip' % version_str)
+    zip_start('TFCraft-client.zip')
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
     zip_end()
     
-    zip_start('TFCraft-server-%s.zip' % version_str)
+    zip_start('TFCraft-server.zip')
     zip_folder(server_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
     zip_end()
     
-    inject_version(os.path.join(forge_dir, 'tfc_common', 'net', 'minecraft', 'src', 'tfc'), build_num)
-    zip_start('TFCraft-src-%s.zip' % version_str, 'tfc')
+    zip_start('TFCraft-src.zip')
     zip_add('tfc_client/src', 'src/minecraft')
     zip_add('tfc_server/src', 'src/minecraft_server')
     zip_add('tfc_common',     'src/minecraft')
@@ -82,7 +79,6 @@ def main():
     zip_add('tfc.py')
     zip_add('license.txt')
     zip_end()
-    inject_version(os.path.join(forge_dir, 'tfc_common', 'net', 'minecraft', 'src', 'tfc'), 0)
     
     print '=================================== Release Finished %d =================================' % error_level
     sys.exit(error_level)
@@ -108,7 +104,7 @@ def zip_start(name, base=None):
     zip_name = name
     
     print '=================================== %s Start =================================' % zip_name
-    zip_file = os.path.join(forge_dir, 'forge-%s' % version_str, name)
+    zip_file = os.path.join(mcp_dir, 'TFC Build')
     zip = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
     zip_base = base
     

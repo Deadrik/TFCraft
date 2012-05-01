@@ -8,7 +8,7 @@ import net.minecraft.src.StructureComponent;
 import net.minecraft.src.StructureStart;
 import net.minecraft.src.*;
 
-public class StructureVillageStartTFC extends StructureStart
+public class StructureVillageStartTFC extends StructureStartTFC
 {
     /** well ... thats what it does */
     private boolean hasMoreThanTwoComponents = false;
