@@ -45,6 +45,7 @@ public class mod_TFC_Core extends NetworkMod
     public static int terraScribeRenderId;
     public static int terraForgeRenderId;
     public static int sluiceRenderId;
+    public static int finiteWaterRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -90,6 +91,8 @@ public class mod_TFC_Core extends NetworkMod
 
     public static Block tilledSoil;
     public static Block tilledSoil2;
+
+    public static Block finiteWater;
 
     public static Item terraWoodSupportItemH;
     public static Item terraWoodSupportItemV;
@@ -397,6 +400,7 @@ public class mod_TFC_Core extends NetworkMod
         terraScribeRenderId = proxy.getUniqueBlockModelID(this, false);
         terraForgeRenderId = proxy.getUniqueBlockModelID(this, false);
         sluiceRenderId = proxy.getUniqueBlockModelID(this, false);
+        finiteWaterRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.ItemTerraRock.class);
@@ -435,6 +439,8 @@ public class mod_TFC_Core extends NetworkMod
 
         ModLoader.registerBlock(tilledSoil);
         ModLoader.registerBlock(tilledSoil2);
+
+        ModLoader.registerBlock(finiteWater);
 
         ModLoader.registerBlock(terraWoodSupportV);
         ModLoader.registerBlock(terraWoodSupportH);
@@ -688,6 +694,8 @@ public class mod_TFC_Core extends NetworkMod
 
         tilledSoil = new BlockTerraFarmland(TFCSettings.getIntFor(config,"block","tilledSoil", 177), terraDirt.blockID).setHardness(0.5F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil");
         tilledSoil2 = new BlockTerraFarmland(TFCSettings.getIntFor(config,"block","tilledSoil2", 176), terraDirt2.blockID).setHardness(0.5F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil2");
+
+        finiteWater = new BlockFiniteWater(TFCSettings.getIntFor(config,"block","finiteWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("finiteWater");
 
         terraWood = Block.wood;
         terraLeaves = Block.leaves;

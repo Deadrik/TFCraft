@@ -347,6 +347,8 @@ public class ClientProxy implements IProxy {
 		//peat
 		ModLoader.addLocalization("tile.peat.name", "Peat");
 		ModLoader.addLocalization("tile.PeatGrass.name", "Peat Grass");
+		//finite water
+		ModLoader.addLocalization("tile.finiteWater.name", "Finite Water");
 
 		//Wood
 		String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
@@ -710,6 +712,10 @@ public class ClientProxy implements IProxy {
         if (l == mod_TFC_Core.sluiceRenderId)
         {
             return TFC_CoreRender.RenderSluice(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        if (l == mod_TFC_Core.finiteWaterRenderId)
+        {
+            return TFC_CoreRender.RenderFiniteWater(block, i, j, k, (RenderBlocks)renderblocks);
         }
 
 
