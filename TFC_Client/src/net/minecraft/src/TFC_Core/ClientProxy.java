@@ -452,8 +452,16 @@ public class ClientProxy implements IProxy {
 			ModLoader.addLocalization("item."+ToolNames[i]+" Chisel.name", ToolNames[i] + " Chisel");
 			ModLoader.addLocalization("item."+ToolNames[i]+" Saw.name", ToolNames[i] + " Saw");
 		}
-
+		
+		//Javelin
 		ModLoader.addLocalization("item.javelin.name", "Javelin");
+
+		//Buckets
+		String[] bucketNames = {"Empty","Fresh Water","Salt Water","Milk"};
+		for(int i= 0; i < bucketNames.length; i++)
+		{
+			ModLoader.addLocalization("item.bucket."+bucketNames[i]+".name", bucketNames[i] + " Bucket");
+		}
 
 		ModLoader.addLocalization("item.SeedsWheat.name", "Wheat Seeds");
 

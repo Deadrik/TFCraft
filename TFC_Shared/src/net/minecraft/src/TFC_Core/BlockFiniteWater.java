@@ -26,6 +26,14 @@ public class BlockFiniteWater extends BlockFluid
     }
 	
 	/**
+     * Returns whether this block is collideable based on the arguments passed in Args: blockMetaData, unknownFlag
+     */
+    public boolean canCollideCheck(int par1, boolean par2)
+    {
+        return par2;
+    }
+	
+	/**
      * The type of render function that is called for this block
      */
     public int getRenderType()
@@ -103,6 +111,12 @@ public class BlockFiniteWater extends BlockFluid
 		int blockMeta = world.getBlockMetadata(x, y, z);
 		int blockMeta2 = world.getBlockMetadata(x2, y2, z2);
 		int blockMeta3 = world.getBlockMetadata(x + (x - x2), y + (y - y2), z + (z - z2));
+		
+		if (this.blockID == mod_TFC_Core.finiteSaltWater.blockID && blockID2 == mod_TFC_Core.finiteWater.blockID)
+		{
+			world.setBlockAndMetadataWithNotify(x2, y2, z2, this.blockID, blockMeta2);
+		}
+		
 		if (blockID2 == this.blockID)
 		{
 			if (blockMeta2 > blockMeta + 1 || y > y2)
@@ -148,15 +162,11 @@ public class BlockFiniteWater extends BlockFluid
 				return false;
 			}
 		}
-		else if (liquidCanDisplaceBlock(world, x2, y2, z2) || (y2 < y && world.getBlockMaterial(x2, y2, z2) == Material.water))
+		else if (liquidCanDisplaceBlock(world, x2, y2, z2) || (y2 < y && y2 == 62 && world.getBlockMaterial(x2, y2, z2) == Material.water))
 		{
             if (blockID2 > 0)
             {
-                if (this.blockMaterial == Material.lava)
-                {
-                    this.triggerLavaMixEffects(world, x2, y2, z2);
-                }
-                else if (blockID2 == Block.waterMoving.blockID || blockID2 == Block.waterStill.blockID)
+            	if (blockID2 == Block.waterMoving.blockID || blockID2 == Block.waterStill.blockID || blockID2 == mod_TFC_Core.finiteWater.blockID || blockID2 == mod_TFC_Core.finiteSaltWater.blockID)
                 {
                 	if (blockMeta < 7)
                 	{

@@ -1,6 +1,8 @@
-package net.minecraft.src;
+package net.minecraft.src.TFC_Core;
 
 import java.util.Random;
+
+import net.minecraft.src.*;
 
 public class BlockFlowingTFC extends BlockFlowing
 {
@@ -22,7 +24,7 @@ public class BlockFlowingTFC extends BlockFlowing
      */
     int[] flowCost = new int[4];
 
-    protected BlockFlowingTFC(int par1, Material par2Material)
+    public BlockFlowingTFC(int par1, Material par2Material)
     {
         super(par1, par2Material);
     }
@@ -208,10 +210,28 @@ public class BlockFlowingTFC extends BlockFlowing
                 }
             }
 
-            if (par1World.getBlockId(par2, par3, par4) != mod_TFC_Core.finiteWater.blockID)
-            	par1World.setBlockAndMetadataWithNotify(par2, par3, par4, mod_TFC_Core.finiteWater.blockID, 1);
-            else if (par1World.getBlockMetadata(par2, par3, par4) > 0)
-            	par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) - 1);
+            if (par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("Ocean"))
+            {
+            	if (par1World.getBlockId(par2, par3, par4) != mod_TFC_Core.finiteSaltWater.blockID)
+	            {
+	            	par1World.setBlockAndMetadataWithNotify(par2, par3, par4, mod_TFC_Core.finiteSaltWater.blockID, 1);
+	            }
+	            else if (par1World.getBlockMetadata(par2, par3, par4) > 0)
+	            {
+	            	par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) - 1);
+	            }
+            }
+            else
+            {
+	            if (par1World.getBlockId(par2, par3, par4) != mod_TFC_Core.finiteWater.blockID)
+	            {
+	            	par1World.setBlockAndMetadataWithNotify(par2, par3, par4, mod_TFC_Core.finiteWater.blockID, 1);
+	            }
+	            else if (par1World.getBlockMetadata(par2, par3, par4) > 0)
+	            {
+	            	par1World.setBlockMetadataWithNotify(par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4) - 1);
+	            }
+            }
         }
     }
 
@@ -402,7 +422,7 @@ public class BlockFlowingTFC extends BlockFlowing
     private boolean liquidCanDisplaceBlock(World par1World, int par2, int par3, int par4)
     {
         Material var5 = par1World.getBlockMaterial(par2, par3, par4);
-        return par1World.getBlockId(par2, par3, par4) == mod_TFC_Core.finiteWater.blockID ? true : (var5 == this.blockMaterial ? false : (var5 == Material.lava ? false : !this.blockBlocksFlow(par1World, par2, par3, par4)));
+        return par1World.getBlockId(par2, par3, par4) == mod_TFC_Core.finiteWater.blockID ? true :(var5 == this.blockMaterial ? false : (var5 == Material.lava ? false : !this.blockBlocksFlow(par1World, par2, par3, par4)));
     }
 
     /**
@@ -410,9 +430,10 @@ public class BlockFlowingTFC extends BlockFlowing
      */
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
-    	if (!(par1World.getBiomeGenForCoords(par2, par4) instanceof BiomeGenRiverTFC) &&
-    			!(par1World.getBiomeGenForCoords(par2, par4) instanceof BiomeGenOceanTFC) &&
-    			!(par1World.getBiomeGenForCoords(par2, par4) instanceof BiomeGenDesertTFC && 
+    	if (!(par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("River")) &&
+    			!(par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("Swamp")) &&
+    			!(par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("Ocean")) &&
+    			!(par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("Desert") && 
 				par1World.getBlockId(par2, par3 - 1, par4) == Block.sandStone.blockID &&
 				(par1World.getBlockId(par2, par3 - 4, par4) == Block.sandStone.blockID ||
 				par1World.getBlockId(par2, par3 - 4, par4) == Block.stairSingle.blockID)))
