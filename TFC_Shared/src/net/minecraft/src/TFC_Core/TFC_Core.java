@@ -397,7 +397,7 @@ public class TFC_Core
 
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
-		if(((World) blockAccess).isBlockOpaqueCube(i, j+1, k)) {
+		if(ServerClientProxy.getProxy().getCurrentWorld().isBlockOpaqueCube(i, j+1, k)) {
 			return true;
 		}
 

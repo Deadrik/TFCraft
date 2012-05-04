@@ -1,8 +1,13 @@
-package net.minecraft.src.TFC_Core;
+package net.minecraft.src;
 
 import java.io.File;
 import java.util.Map;
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.ContainerTerraLogPile;
+import net.minecraft.src.TFC_Core.ContainerTerraWorkbench;
+import net.minecraft.src.TFC_Core.IProxy;
+import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
+import net.minecraft.src.TFC_Core.TileEntityTerraWorkbench;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.ContainerTerraSluice;
 import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;

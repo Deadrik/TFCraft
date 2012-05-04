@@ -1,10 +1,25 @@
-package net.minecraft.src.TFC_Core;
+package net.minecraft.src;
 
 import java.io.File;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.EntityFallingDirt;
+import net.minecraft.src.TFC_Core.EntityFallingStone;
+import net.minecraft.src.TFC_Core.EntityFallingStone2;
+import net.minecraft.src.TFC_Core.EntityTerraJavelin;
+import net.minecraft.src.TFC_Core.GuiTerraLogPile;
+import net.minecraft.src.TFC_Core.GuiTerraWorkbench;
+import net.minecraft.src.TFC_Core.IProxy;
+import net.minecraft.src.TFC_Core.RenderFallingDirt;
+import net.minecraft.src.TFC_Core.RenderFallingStone;
+import net.minecraft.src.TFC_Core.RenderFallingStone2;
+import net.minecraft.src.TFC_Core.RenderTerraJavelin;
+import net.minecraft.src.TFC_Core.TFCHeat;
+import net.minecraft.src.TFC_Core.TFC_CoreRender;
+import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
+import net.minecraft.src.TFC_Core.TileEntityTerraWorkbench;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.GuiTerraSluice;
 import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;

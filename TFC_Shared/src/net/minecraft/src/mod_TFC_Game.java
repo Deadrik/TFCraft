@@ -280,7 +280,7 @@ public class mod_TFC_Game extends NetworkMod
 
 		try
 		{
-			config = new Configuration(new File(proxy.getMinecraftDir(), "/config/TFC.cfg"));
+			config = new Configuration(new File(ServerClientProxy.getProxy().getMinecraftDir(), "/config/TFC.cfg"));
 			config.load();
 		} catch (Exception e) {
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to access configuration!").toString());
