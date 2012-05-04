@@ -91,8 +91,6 @@ public class mod_TFC_Core extends NetworkMod
 
     public static Block tilledSoil;
     public static Block tilledSoil2;
-    
-    public static Block bucketWater;
 
     public static Block finiteWater;
     public static Block finiteSaltWater;
@@ -445,9 +443,8 @@ public class mod_TFC_Core extends NetworkMod
         ModLoader.registerBlock(tilledSoil);
         ModLoader.registerBlock(tilledSoil2);
         
-        ModLoader.registerBlock(bucketWater);
-
         ModLoader.registerBlock(finiteWater);
+        ModLoader.registerBlock(finiteSaltWater);
 
         ModLoader.registerBlock(terraWoodSupportV);
         ModLoader.registerBlock(terraWoodSupportH);
@@ -708,8 +705,6 @@ public class mod_TFC_Core extends NetworkMod
         terraWood = Block.wood;
         terraLeaves = Block.leaves;
         terraSapling = Block.sapling;
-        
-        bucketWater = new BlockBucketWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
         MinecraftForge.setBlockHarvestLevel(terraStoneIgIn, "pickaxe", 0);
         MinecraftForge.setBlockHarvestLevel(terraStoneIgEx, "pickaxe", 0);

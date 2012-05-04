@@ -195,7 +195,7 @@ public class ItemTerraBucket  extends Item implements ITextureProvider{
                             return par1ItemStack;
                         }
 
-                        if (par2World.getBiomeGenForCoords(var13, var15).biomeName.contains("Ocean") || par2World.getBiomeGenForCoords(var13, var15).biomeName.contains("Swamp"))
+                        if (par2World.getBiomeGenForCoords(var13, var15).biomeName.contains("Ocean"))
                         {
                             return new ItemStack(this, 1, meta + 9);
                         }
@@ -206,7 +206,7 @@ public class ItemTerraBucket  extends Item implements ITextureProvider{
                             {
                             	for (int j = - 50; j < 51; j++)
                                 {
-                            		if (par2World.getBiomeGenForCoords(var13 + i, var15 + j).biomeName.contains("Ocean") || par2World.getBiomeGenForCoords(var13 + i, var15 + j).biomeName.contains("Swamp"))
+                            		if (par2World.getBiomeGenForCoords(var13 + i, var15 + j).biomeName.contains("Ocean"))
                             		{
                             			ocean = true;
                             			break;

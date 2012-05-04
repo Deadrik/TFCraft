@@ -114,7 +114,7 @@ public class BlockFiniteWater extends BlockFluid
 		
 		if (this.blockID == mod_TFC_Core.finiteSaltWater.blockID && blockID2 == mod_TFC_Core.finiteWater.blockID)
 		{
-			world.setBlockAndMetadataWithNotify(x2, y2, z2, this.blockID, blockMeta2);
+			world.setBlockAndMetadataWithNotify(x2, y2, z2, mod_TFC_Core.finiteSaltWater.blockID, blockMeta2);
 		}
 		
 		if (blockID2 == this.blockID)
@@ -556,11 +556,4 @@ public class BlockFiniteWater extends BlockFluid
             par1World.spawnParticle("dripWater", var21, var22, var23, 0.0D, 0.0D, 0.0D);
         }
     }
-    
-    /*
-    public void addCreativeItems(java.util.ArrayList list)
-	{
-		list.add(new ItemStack(this,1,0));
-	}
-	*/
 }
