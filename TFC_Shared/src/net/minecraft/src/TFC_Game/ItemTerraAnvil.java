@@ -35,7 +35,7 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 		return "/bioxx/terratools.png";
 	}
 
-	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
 		if(objectMouseOver == null) {
@@ -67,14 +67,9 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 				byte0 = 0;
 			}
 			world.setBlockAndMetadataWithNotify( x, y+1, z,mod_TFC_Game.terraAnvil.blockID, byte0+anvilId);
-			if(itemstack.getItemDamage() != 0)
-			{
-				TileEntityTerraAnvil entity = (TileEntityTerraAnvil) world.getBlockTileEntity(x, y+1, z);
-				if(entity != null)
-				{
-					//entity.anvilUsesLeft = itemstack.getItemDamage();
-				}
-			}
+			world.markBlockNeedsUpdate(i, j, k);
+			
+			itemstack.stackSize = itemstack.stackSize-1;
 			return true;
 		}
 

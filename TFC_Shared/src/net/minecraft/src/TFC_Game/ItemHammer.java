@@ -8,7 +8,7 @@ implements ITextureProvider
 {
 	public ItemHammer(int i, EnumToolMaterial e)
 	{
-		super(i, i, e, new Block[] {});
+		super(i, 0, e, new Block[] {});
 	}
 
 	public String getTextureFile() {

@@ -78,7 +78,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		{
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator);
+			WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator,currentWorld);
 			var5.setScale(1.0D, 1.0D, 1.0D);
 			var5.generate(this.currentWorld, this.randomGenerator, var3, this.currentWorld.getHeightValue(var3, var4), var4);
 		}

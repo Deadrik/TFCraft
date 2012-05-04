@@ -38,7 +38,9 @@ def main():
     try:
         os.chdir(mcp_dir)
         reset_logger()
+        print 'reobf start'
         reobfuscate(None, False, True, True)
+        print 'reobf end'
         reset_logger()
         os.chdir(forge_dir)
     except SystemExit, e:
@@ -53,13 +55,24 @@ def main():
         
     os.makedirs(out_folder)
     
-    zip_start('TFCraft-client.zip')
+    zip_start('TFCraft-client-core.zip')
+    zip_folder(client_dir, '', zip)
+    zip_add('TFCraft_credits.txt')
+    zip_add('license.txt')
+    zip_end()
+    zip_start('TFCraft-client-game.zip')
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
     zip_end()
     
-    zip_start('TFCraft-server.zip')
+    zip_start('TFCraft-server-core.zip')
+    zip_folder(server_dir, '', zip)
+    zip_add('TFCraft_credits.txt')
+    zip_add('license.txt')
+    zip_end()
+
+    zip_start('TFCraft-server-game.zip')
     zip_folder(server_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
@@ -104,7 +117,7 @@ def zip_start(name, base=None):
     zip_name = name
     
     print '=================================== %s Start =================================' % zip_name
-    zip_file = os.path.join(mcp_dir, 'TFC Build')
+    zip_file = os.path.join(mcp_dir, 'TFC Build', name)
     zip = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
     zip_base = base
     

@@ -24,15 +24,15 @@ def main():
 def build(build_num=0):
     print '=================================== Build Start ================================='   
     print '\nsrc -> backup'
-    copytree(src_dir, backup_dir, -1)    
+    copytree(src_dir, backup_dir, 0)    
     print '\ntfc_client -> minecraft'
-    copytree(os.path.join(forge_dir, 'tfc_client', 'src'), os.path.join(src_dir, 'minecraft'), -1)
+    copytree(os.path.join(forge_dir, 'tfc_client', 'src'), os.path.join(src_dir, 'minecraft'), 0)
     print '\ntfc_server -> minecraft_server'
-    copytree(os.path.join(forge_dir, 'tfc_server', 'src'), os.path.join(src_dir, 'minecraft_server'), -1)
+    copytree(os.path.join(forge_dir, 'tfc_server', 'src'), os.path.join(src_dir, 'minecraft_server'), 0)
     print '\ntfc_shared -> minecraft'
-    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft'), -1)
+    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft'), 0)
     print '\ntfc_shared -> minecraft_server'
-    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft_server'), -1)
+    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft_server'), 0)
     print
     
     error_level = 0
@@ -49,7 +49,7 @@ def build(build_num=0):
     print '\nremove src'
     shutil.rmtree(src_dir)
     print '\nbackup -> src'
-    copytree(backup_dir, src_dir, -1)
+    copytree(backup_dir, src_dir, 0)
     print '\nremove backup'
     shutil.rmtree(backup_dir)
         
