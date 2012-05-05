@@ -12,6 +12,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 
 public class TFCHeat 
 {

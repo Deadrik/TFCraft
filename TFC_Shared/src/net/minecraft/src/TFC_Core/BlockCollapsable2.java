@@ -6,6 +6,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 
 public class BlockCollapsable2 extends BlockTerra2
 {

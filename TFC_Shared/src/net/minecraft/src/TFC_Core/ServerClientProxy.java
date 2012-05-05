@@ -10,17 +10,7 @@ public enum ServerClientProxy {
 
 	public static IProxy getProxy() 
 	{
-	    boolean b = false;
-	    try 
-        {
-            Class.forName("net.minecraft.client.MinecraftApplet", false, MinecraftForge.class.getClassLoader());
-            b = true;
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            b = false;
-        }  
-		if (b) 
+		if (TFC_Core.isClient()) 
 		{
 			return CLIENT.buildProxy();
 		} 

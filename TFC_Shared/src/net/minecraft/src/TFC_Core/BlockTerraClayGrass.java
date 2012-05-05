@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.General.ColorizerGrass;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraClayGrass extends BlockTerra2

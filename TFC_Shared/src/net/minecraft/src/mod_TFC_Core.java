@@ -10,6 +10,7 @@ import java.util.Random;
 
 import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.EnumHelper;
 import net.minecraft.src.forge.ICraftingHandler;
@@ -973,7 +974,20 @@ public class mod_TFC_Core extends NetworkMod
 
 
 
-
+        TFC_Core.Axes = new Item[]{mod_TFC_Core.terraSedAxe,mod_TFC_Core.terraIgInAxe,mod_TFC_Core.terraIgExAxe,mod_TFC_Core.terraMMAxe,
+                mod_TFC_Core.terraBismuthAxe,mod_TFC_Core.terraBismuthBronzeAxe,mod_TFC_Core.terraBlackBronzeAxe,
+                mod_TFC_Core.terraBlackSteelAxe,mod_TFC_Core.terraBlueSteelAxe,mod_TFC_Core.terraBronzeAxe,mod_TFC_Core.terraCopperAxe,
+                mod_TFC_Core.terraWroughtIronAxe,mod_TFC_Core.terraRedSteelAxe,mod_TFC_Core.terraRoseGoldAxe,mod_TFC_Core.terraSteelAxe,
+                mod_TFC_Core.terraTinAxe,mod_TFC_Core.terraZincAxe,
+                mod_TFC_Core.boneSedAxe,mod_TFC_Core.boneIgInAxe,mod_TFC_Core.boneIgExAxe,mod_TFC_Core.boneMMAxe};
+        TFC_Core.Chisels = new Item[]{mod_TFC_Core.BismuthChisel,mod_TFC_Core.BismuthBronzeChisel,mod_TFC_Core.BlackBronzeChisel,
+            mod_TFC_Core.BlackSteelChisel,mod_TFC_Core.BlueSteelChisel,mod_TFC_Core.BronzeChisel,mod_TFC_Core.CopperChisel,
+            mod_TFC_Core.WroughtIronChisel,mod_TFC_Core.RedSteelChisel,mod_TFC_Core.RoseGoldChisel,mod_TFC_Core.SteelChisel,
+            mod_TFC_Core.TinChisel,mod_TFC_Core.ZincChisel};
+        TFC_Core.Saws = new Item[]{mod_TFC_Core.BismuthSaw,mod_TFC_Core.BismuthBronzeSaw,mod_TFC_Core.BlackBronzeSaw,
+                mod_TFC_Core.BlackSteelSaw,mod_TFC_Core.BlueSteelSaw,mod_TFC_Core.BronzeSaw,mod_TFC_Core.CopperSaw,
+                mod_TFC_Core.WroughtIronSaw,mod_TFC_Core.RedSteelSaw,mod_TFC_Core.RoseGoldSaw,mod_TFC_Core.SteelSaw,
+                mod_TFC_Core.TinSaw,mod_TFC_Core.ZincSaw};
         RegisterToolClasses();
         //last thing
         initOreDictionary();
