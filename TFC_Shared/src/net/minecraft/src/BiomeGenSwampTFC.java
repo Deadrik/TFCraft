@@ -12,15 +12,22 @@ import java.util.Random;
 
 public class BiomeGenSwampTFC extends BiomeGenBase
 {
-	static int swampType;
-	static int treeCommon1 = -1;
-	static Boolean treeCommon1Size;
-	static int treeCommon2 = -1;
-	static Boolean treeCommon2Size;
-	static int treeUncommon = -1;
-	static Boolean treeUncommonSize;
-	static int treeRare = -1;
-	static Boolean treeRareSize;
+	int swampType;
+	int treeCommon1 = -1;
+	Boolean treeCommon1Size;
+	int treeCommon2 = -1;
+	Boolean treeCommon2Size;
+	int treeUncommon = -1;
+	Boolean treeUncommonSize;
+	int treeRare = -1;
+	Boolean treeRareSize;
+	
+	WorldGenerator[] HardwoodGenList = {worldGenWillowShortTrees,worldGenWillowShortTrees,worldGenAshShortTrees,worldGenWhiteElmShortTrees,
+            worldGenOakShortTrees,worldGenBirchShortTrees,worldGenAshTallTrees,worldGenWhiteElmTallTrees,
+            worldGenOakTallTrees,worldGenBirchTallTrees,worldGenBirchTallTrees,worldGenMapleShortTrees,worldGenAspenShortTrees,worldGenAspenTallTrees};
+
+    WorldGenerator[] ConiferGenList = {worldGenWhiteCedarTallTrees,worldGenPineShortTrees,worldGenPineTallTrees,worldGenSpruceShortTrees,worldGenSpruceTallTrees,
+            worldGenBirchShortTrees,worldGenAshTallTrees,worldGenWhiteElmTallTrees,worldGenWhiteElmShortTrees};
 
 	public BiomeGenSwampTFC(int i)
 	{
@@ -42,40 +49,13 @@ public class BiomeGenSwampTFC extends BiomeGenBase
 	@Override
 	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)
 	{
-		WorldGenerator[] HardwoodGenList = {worldGenWillowShortTrees,worldGenWillowShortTrees,worldGenAshShortTrees,worldGenWhiteElmShortTrees,
-				worldGenOakShortTrees,worldGenBirchShortTrees,worldGenAshTallTrees,worldGenWhiteElmTallTrees,
-				worldGenOakTallTrees,worldGenBirchTallTrees,worldGenBirchTallTrees,worldGenMapleShortTrees,worldGenAspenShortTrees,worldGenAspenTallTrees};
-
-		WorldGenerator[] ConiferGenList = {worldGenWhiteCedarTallTrees,worldGenPineShortTrees,worldGenPineTallTrees,worldGenSpruceShortTrees,worldGenSpruceTallTrees,
-				worldGenBirchShortTrees,worldGenAshTallTrees,worldGenWhiteElmTallTrees,worldGenWhiteElmShortTrees};
+		
 
 		if(swampType == -1)
 		{
 			Random R = new Random(world.getSeed() + this.biomeID);
 			swampType = R.nextInt(100);
-			if(!this.getEnableSnow())
-			{
-				treeCommon1 = 0;
-				treeCommon1Size = R.nextBoolean();
-				treeCommon2 = R.nextInt(HardwoodGenList.length);
-				treeCommon2Size = R.nextBoolean();
-				treeUncommon = R.nextInt(HardwoodGenList.length);
-				treeUncommonSize = R.nextBoolean();
-				treeRare = R.nextInt(HardwoodGenList.length);
-				treeRareSize = R.nextBoolean();
-			}
-			else
-			{
-				biomeDecorator.treesPerChunk = 6;
-				treeCommon1 = R.nextInt(ConiferGenList.length);
-				treeCommon1Size = R.nextBoolean();
-				treeCommon2 = R.nextInt(ConiferGenList.length);
-				treeCommon2Size = R.nextBoolean();
-				treeUncommon = R.nextInt(ConiferGenList.length);
-				treeUncommonSize = R.nextBoolean();
-				treeRare = R.nextInt(ConiferGenList.length);
-				treeRareSize = R.nextBoolean();
-			}
+			
 		}
 
 		if(!this.getEnableSnow())
@@ -105,6 +85,34 @@ public class BiomeGenSwampTFC extends BiomeGenBase
 			}	
 		}
 	}
+	
+	public void SetupTrees(World world, Random R)
+    {
+	    if(!this.getEnableSnow())
+        {
+            treeCommon1 = 0;
+            treeCommon1Size = R.nextBoolean();
+            treeCommon2 = R.nextInt(HardwoodGenList.length);
+            treeCommon2Size = R.nextBoolean();
+            treeUncommon = R.nextInt(HardwoodGenList.length);
+            treeUncommonSize = R.nextBoolean();
+            treeRare = R.nextInt(HardwoodGenList.length);
+            treeRareSize = R.nextBoolean();
+        }
+        else
+        {
+            biomeDecorator.treesPerChunk = 6;
+            treeCommon1 = R.nextInt(ConiferGenList.length);
+            treeCommon1Size = R.nextBoolean();
+            treeCommon2 = R.nextInt(ConiferGenList.length);
+            treeCommon2Size = R.nextBoolean();
+            treeUncommon = R.nextInt(ConiferGenList.length);
+            treeUncommonSize = R.nextBoolean();
+            treeRare = R.nextInt(ConiferGenList.length);
+            treeRareSize = R.nextBoolean();
+        }
+
+    }
 
 	/**
 	 * Provides the basic grass color based on the biome temperature and rainfall
