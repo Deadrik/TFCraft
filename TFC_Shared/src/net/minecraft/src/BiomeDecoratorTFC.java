@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 import java.util.Random;
 
+import net.minecraft.src.TFC_Core.WorldGenLiquidsTFC;
+
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
 	/**
@@ -152,7 +154,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(120) + 8);
 				var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-				new WorldGenLiquids(Block.waterMoving.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
+				new WorldGenLiquidsTFC(Block.waterMoving.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 			}
 
 			for (var2 = 0; var2 < 20; ++var2)
@@ -160,7 +162,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 				var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(this.randomGenerator.nextInt(112) + 8) + 8);
 				var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-				new WorldGenLiquids(Block.lavaMoving.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
+				new WorldGenLiquidsTFC(Block.lavaMoving.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 			}
 		}
 	}

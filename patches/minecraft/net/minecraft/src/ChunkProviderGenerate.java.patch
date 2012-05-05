@@ -45,10 +45,11 @@
          this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
          this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
  
-@@ -284,13 +287,6 @@
+@@ -283,14 +286,7 @@
+             this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
          }
  
-         Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+-        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
 -        byte[] var5 = var4.getBiomeArray();
 -
 -        for (int var6 = 0; var6 < var5.length; ++var6)
@@ -56,6 +57,7 @@
 -            var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
 -        }
 -
++        Chunk var4 = new Chunk(this.worldObj, var3, meta, par1, par2);
          var4.generateSkylightMap();
          return var4;
      }

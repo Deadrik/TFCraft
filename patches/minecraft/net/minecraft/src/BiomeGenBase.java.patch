@@ -331,7 +331,7 @@
      }
  
      /**
-@@ -336,4 +558,314 @@
+@@ -336,4 +558,319 @@
          double var3 = (double)MathHelper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
          return ColorizerFoliage.getFoliageColor(var1, var3);
      }
@@ -644,5 +644,10 @@
 +        Layer3 = base.Layer3;
 +        Layer2 = base.Layer2;
 +        Layer1 = base.Layer1;
++    }
++    
++    public void SetupTrees(World world, Random R)
++    {
++        
 +    }
  }

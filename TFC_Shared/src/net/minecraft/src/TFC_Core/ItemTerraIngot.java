@@ -10,6 +10,7 @@ public class ItemTerraIngot extends Item implements ITextureProvider
 	public ItemTerraIngot(int i) 
 	{
 		super(i);
+		this.maxStackSize = 8;
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)

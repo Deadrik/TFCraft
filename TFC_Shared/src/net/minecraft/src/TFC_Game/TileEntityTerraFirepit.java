@@ -223,6 +223,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                             if(fireItemStacks[7] == null && !outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
                             {
                                 fireItemStacks[7] = OutputItem1.copy();
+                                fireItemStacks[7].stackSize= OutputItem1.stackSize;
                             }	
                             else if(fireItemStacks[7] == null && outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
                             {

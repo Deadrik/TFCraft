@@ -1,9 +1,7 @@
 package net.minecraft.src.TFC_Game;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
 import net.minecraft.src.*;
-import net.minecraft.src.Slot;
+import net.minecraft.src.TFC_Core.TFC_Core;
 
 public class SlotFirepitOut extends Slot
 
