@@ -22,7 +22,6 @@ public class BlockFiniteWater extends BlockFluid
 	public BlockFiniteWater(int par1)
     {
         super(par1, Material.water);
-        setTickRandomly(false);
     }
 	
 	/**
@@ -58,6 +57,21 @@ public class BlockFiniteWater extends BlockFluid
      */
     public void updateTick(World world, int x, int y, int z, Random random)
     {    	
+    	//Try to freeze
+		if (world.getBiomeGenForCoords(x, z).temperature < 0.2)
+		{
+	    	if (y == 62)
+	    	{
+    			world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z));
+    			return;
+	    	}
+	    	else if (random.nextInt(200) == 0 && world.canBlockSeeTheSky(x, y, z))
+	    	{
+	    		world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z));
+	    		return;
+	    	}
+		}
+    	
     	//Initialize variables
 		int volume = 0;
 		int remainder = 0;
@@ -383,7 +397,7 @@ public class BlockFiniteWater extends BlockFluid
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
-    {        
+    {
         if (par1World.getBlockId(par2, par3, par4) == this.blockID)
         {
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());

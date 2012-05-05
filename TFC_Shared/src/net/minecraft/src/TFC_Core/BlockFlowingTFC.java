@@ -435,8 +435,8 @@ public class BlockFlowingTFC extends BlockFlowing
     			!(par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("Ocean")) &&
     			!(par1World.getBiomeGenForCoords(par2, par4).biomeName.contains("Desert") && 
 				par1World.getBlockId(par2, par3 - 1, par4) == Block.sandStone.blockID &&
-				(par1World.getBlockId(par2, par3 - 4, par4) == Block.sandStone.blockID ||
-				par1World.getBlockId(par2, par3 - 4, par4) == Block.stairSingle.blockID)))
+				(par1World.getBlockId(par2, par3 + 4, par4) == Block.sandStone.blockID ||
+				par1World.getBlockId(par2, par3 + 4, par4) == Block.stairSingle.blockID)))
     	{
 			par1World.setBlockAndMetadataWithNotify(par2, par3, par4, mod_TFC_Core.finiteWater.blockID, 0);
 			return;

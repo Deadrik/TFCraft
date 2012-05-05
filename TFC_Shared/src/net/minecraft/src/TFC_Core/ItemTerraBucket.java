@@ -189,6 +189,10 @@ public class ItemTerraBucket  extends Item implements ITextureProvider{
                     if (par2World.getBlockMaterial(var13, var14, var15) == Material.water)
                     {
                     	int meta = par2World.getBlockMetadata(var13, var14, var15);
+                    	par2World.notifyBlocksOfNeighborChange(var13, var14 + 1, var15, par2World.getBlockId(var13, var14, var15));
+                    	if (par2World.getBlockId(var13, var14, var15) == mod_TFC_Core.finiteSaltWater.blockID ||
+                    			par2World.getBlockId(var13, var14, var15) == mod_TFC_Core.finiteWater.blockID)
+                            par2World.setBlockWithNotify(var13, var14, var15, 0);
 
                         if (par3EntityPlayer.capabilities.isCreativeMode)
                         {
@@ -279,11 +283,11 @@ public class ItemTerraBucket  extends Item implements ITextureProvider{
                         }
                         else
                         {
-                        	if (par1ItemStack.getItemDamage() > 0 && par1ItemStack.getItemDamage() < 9)
+                        	if (par1ItemStack.getItemDamage() > 0 && par1ItemStack.getItemDamage() < 9 && !(par2World.getBlockMaterial(var13, var14, var15) == Material.water && par2World.getBlockMetadata(var13, var14, var15) == 0))
                         	{
                         		par2World.setBlockAndMetadataWithNotify(var13, var14, var15, mod_TFC_Core.finiteWater.blockID, par1ItemStack.getItemDamage() - 1);
                         	}
-                        	else if (par1ItemStack.getItemDamage() > 8 && par1ItemStack.getItemDamage() < 17)
+                        	else if (par1ItemStack.getItemDamage() > 8 && par1ItemStack.getItemDamage() < 17 && !(par2World.getBlockMaterial(var13, var14, var15) == Material.water && par2World.getBlockMetadata(var13, var14, var15) == 0))
                         	{
                         		par2World.setBlockAndMetadataWithNotify(var13, var14, var15, mod_TFC_Core.finiteSaltWater.blockID, par1ItemStack.getItemDamage() - 9);
                         	}
