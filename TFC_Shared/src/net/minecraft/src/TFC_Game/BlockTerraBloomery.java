@@ -46,6 +46,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			{
 				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
+				world.markBlockNeedsUpdate(i, j, k);
 			}
 		}
 		else if(meta == 1)
@@ -54,6 +55,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			{
 				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
+				world.markBlockNeedsUpdate(i, j, k);
 			}
 		}
 		else if(meta == 2)
@@ -62,6 +64,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			{
 				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
+				world.markBlockNeedsUpdate(i, j, k);
 			}
 		}
 		else if(meta == 3)
@@ -70,6 +73,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			{
 				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
+				world.markBlockNeedsUpdate(i, j, k);
 			}
 		}
 	}
@@ -81,12 +85,12 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		if (par0)
 		{
 			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraBloomeryOn.blockID);
-			par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+			par1World.markBlockNeedsUpdate(par2, par3, par4);
 		}
 		else
 		{
 			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraBloomery.blockID);
-			par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+			par1World.markBlockNeedsUpdate(par2, par3, par4);
 		}
 
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
@@ -121,7 +125,6 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			if(tileentityforge.isValid)
 			{
 				entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Game.terraBloomeryGuiId, world, i, j, k);
-				//ModLoader.openGUI(entityplayer, new GuiTerraBloomery(entityplayer.inventory, tileentityforge));
 			}
 		}
 		return true;
@@ -242,9 +245,8 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		{
 			((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlock(i, j, k, 0);
-			world.markBlockAsNeedsUpdate(i,j,k);
+			world.markBlockNeedsUpdate(i,j,k);
 		}
-		//DoValidCheck(world,  i,  j,  k,  meta);
 	}
 
 	public int tickRate()
@@ -261,6 +263,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		{
 			if(meta >= 4) {
 				world.setBlockMetadata(i, j, k, meta-4);
+				world.markBlockNeedsUpdate(i, j, k);
 			}
 			setLightValue(0.0F);
 		}
@@ -270,6 +273,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 			setLightValue(0.8F);
 			if(meta < 4) {
 				world.setBlockMetadata(i, j, k, meta+4);
+				world.markBlockNeedsUpdate(i, j, k);
 			}
 		}
 	}

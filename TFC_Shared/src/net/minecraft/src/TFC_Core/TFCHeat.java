@@ -436,7 +436,7 @@ public class TFCHeat
 	{
 		if(is != null)
 		{
-			if(is.hasTagCompound())
+			if(is.hasTagCompound() && is.getTagCompound().hasKey("temperature"))
 			{
 				return is.getTagCompound().getFloat("temperature");
 			}

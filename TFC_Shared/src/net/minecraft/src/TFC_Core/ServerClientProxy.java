@@ -1,5 +1,6 @@
 package net.minecraft.src.TFC_Core;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.forge.MinecraftForge;
 
@@ -7,10 +8,24 @@ public enum ServerClientProxy {
 	CLIENT("ClientProxy"),
 	SERVER("ServerProxy");
 
-	public static IProxy getProxy() {
-		if (MinecraftForge.isClient()) {
+	public static IProxy getProxy() 
+	{
+	    boolean b = false;
+	    try 
+        {
+            Class.forName("net.minecraft.client.MinecraftApplet", false, MinecraftForge.class.getClassLoader());
+            b = true;
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            b = false;
+        }  
+		if (b) 
+		{
 			return CLIENT.buildProxy();
-		} else {
+		} 
+		else 
+		{
 			return SERVER.buildProxy();
 		}
 	}

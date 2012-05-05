@@ -23,8 +23,6 @@ public interface IProxy extends IGuiHandler {
 	
 	public abstract String getDisplayName(ItemStack is);
 	
-	public abstract boolean onTickInGame(float var1, Object mc);
-	
 	public abstract void addRenderer(Map map);
 	
 	public abstract boolean renderWorldBlock(Object renderblocks, IBlockAccess iblockaccess, int i, int j, int k, Block block, int l);

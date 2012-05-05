@@ -75,52 +75,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         outCount = 0;
     }
 
-    public boolean AddOreToFire(ItemStack is)
-    {
-        for (int i = 0; i < fireItemStacks.length; i++)
-        {
-            if(fireItemStacks[i] == null)
-            {
-                fireItemStacks[i] = is;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean AddOreToOutput(ItemStack is, ItemStack is2)
-    {
-        ItemStack work = new ItemStack(is.itemID,is.stackSize,is.getItemDamage());
-        /* First we check to see if there are any mergeable items*/
-        for (int i = 0; i < outputItemStacks.length; i++)
-        {
-            if(outputItemStacks[i] != null && outputItemStacks[i].getItem().getItemNameIS(outputItemStacks[i]) == work.getItem().getItemNameIS(work))
-            {
-                if(outputItemStacks[i].getItemDamage() > 0 && work.getItemDamage() > 0)
-                {
-                    int amt = combineMetals(work,outputItemStacks[i]);
-                    if(amt != 0)
-                    {
-                        work.setItemDamage(amt);
-                    } else {
-                        return true;
-                    }
-                }
-            }
-        }
-        /*If not then the item takes a new slot*/
-        for (int i = 0; i < outputItemStacks.length; i++)
-        {
-            if(outputItemStacks[i] == null)
-            {
-                outputItemStacks[i] = work;
-                TFCHeat.SetTemperature(outputItemStacks[i], TFCHeat.GetTemperature(is2));
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void careForInventorySlot(int i, float startTemp)
     {
         NBTTagCompound inputCompound;
@@ -545,24 +499,23 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public boolean isStackValid(int i, int j, int k)
     {
-
         if(worldObj.getBlockId(i, j-1, k) != mod_TFC_Game.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock)
         {
             return false;
         }
-        if(!worldObj.isBlockNormalCube(i+1, j, k) || worldObj.getBlockMaterial(i+1, j, k) != Material.rock && worldObj.getBlockId(i+1, j, k) != mod_TFC_Game.terraBellows.blockID)
+        if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock)
         {
             return false;
         }
-        if(!worldObj.isBlockNormalCube(i-1, j, k) || worldObj.getBlockMaterial(i-1, j, k) != Material.rock && worldObj.getBlockId(i-1, j, k) != mod_TFC_Game.terraBellows.blockID)
+        if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock)
         {
             return false;
         }
-        if(!worldObj.isBlockNormalCube(i, j, k+1) || worldObj.getBlockMaterial(i, j, k+1) != Material.rock && worldObj.getBlockId(i, j, k+1) != mod_TFC_Game.terraBellows.blockID)
+        if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock)
         {
             return false;
         }
-        if(!worldObj.isBlockNormalCube(i, j, k-1) || worldObj.getBlockMaterial(i, j, k-1) != Material.rock && worldObj.getBlockId(i, j, k-1) != mod_TFC_Game.terraBellows.blockID)
+        if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock)
         {
             return false;
         }
@@ -582,7 +535,51 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     }
 
+    public boolean AddOreToFire(ItemStack is)
+    {
+        for (int i = 0; i < fireItemStacks.length; i++)
+        {
+            if(fireItemStacks[i] == null)
+            {
+                fireItemStacks[i] = is;
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public boolean AddOreToOutput(ItemStack is, ItemStack is2)
+    {
+        ItemStack work = new ItemStack(is.itemID,is.stackSize,is.getItemDamage());
+        /* First we check to see if there are any mergeable items*/
+        for (int i = 0; i < outputItemStacks.length; i++)
+        {
+            if(outputItemStacks[i] != null && outputItemStacks[i].getItem().getItemNameIS(outputItemStacks[i]) == work.getItem().getItemNameIS(work))
+            {
+                if(outputItemStacks[i].getItemDamage() > 0 && work.getItemDamage() > 0)
+                {
+                    int amt = combineMetals(work,outputItemStacks[i]);
+                    if(amt != 0)
+                    {
+                        work.setItemDamage(amt);
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }
+        /*If not then the item takes a new slot*/
+        for (int i = 0; i < outputItemStacks.length; i++)
+        {
+            if(outputItemStacks[i] == null)
+            {
+                outputItemStacks[i] = work;
+                TFCHeat.SetTemperature(outputItemStacks[i], TFCHeat.GetTemperature(is2));
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean RemoveOre()
     {
@@ -594,7 +591,9 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 if(input[0].stackSize <= 0) {
                     input[0].stackSize = 1;
                 }
+                outCount -= outputItemStacks[i].getItemDamage();
                 outputItemStacks[i] = null;
+                
                 return true;
             }
         }
@@ -625,13 +624,13 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         {
             if(outputItemStacks[i] != null)
             {
-                out += 2*(1-outputItemStacks[i].getItemDamage()/100);
+                out += outputItemStacks[i].getItemDamage();
             }
         }
 
         return out;
     }
-    
+
     String orename = "";
     int oreDamage = 0;
 
@@ -639,35 +638,39 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     {
         if(!worldObj.isRemote)
         {
-            outCount = getOutputCount();
-            //set orecount to 0 so that we can get a recount of the current amount of ore in the bloomery
-            oreCount = 0;
-            //count the ore in the bloomery stack
-            
-            for (int i = 0; i < fireItemStacks.length; i++)
-            {
-                if(fireItemStacks[i] != null)
-                {
-                    if(OreType.contentEquals(""))
-                    {
-                        OreType = mod_TFC_Game.proxy.getDisplayName(fireItemStacks[i]);
-                        orename = fireItemStacks[i].getItem().getItemName();
-                        oreDamage = fireItemStacks[i].getItemDamage();
-                    }
-                    oreCount++;
-                }
-            }
+            if(outCount > 0)
+                outCount = getOutputCount();
+//            if(oreCount > 0)
+//            {
+//                //set orecount to 0 so that we can get a recount of the current amount of ore in the bloomery
+//                oreCount = 0;
+//                //count the ore in the bloomery stack
+//
+//                for (int i = 0; i < fireItemStacks.length; i++)
+//                {
+//                    if(fireItemStacks[i] != null)
+//                    {
+//                        if(OreType.contentEquals(""))
+//                        {
+//                            OreType = mod_TFC_Game.proxy.getDisplayName(fireItemStacks[i]);
+//                            orename = fireItemStacks[i].getItem().getItemName();
+//                            oreDamage = fireItemStacks[i].getItemDamage();
+//                        }
+//                        oreCount++;
+//                    }
+//                }
+//            }
 
-            int outcnt = 0;
-            for (int i = 0; i < outputItemStacks.length; i++)
-            {
-                if(outputItemStacks[i] != null)
-                {
-                    outcnt++;
-                }
-            }
+            //            int outcnt = 0;
+            //            for (int i = 0; i < outputItemStacks.length; i++)
+            //            {
+            //                if(outputItemStacks[i] != null)
+            //                {
+            //                    outcnt++;
+            //                }
+            //            }
 
-            if(oreCount == 0 && orename != "" && outcnt == 0)
+            if(oreCount == 0 && orename != "" && outCount == 0)
             {
                 OreType = "";
                 orename = "";
@@ -743,6 +746,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                             {
                                 if(AddOreToFire(entity.item)) {
                                     entity.item.stackSize--;
+                                    oreCount+=1;
                                 }
                             }
                         }
@@ -773,8 +777,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
             //Here we make sure that the forge is valid
             isValid = CheckValidity();
-            
-            
+
+
         }
     }
 
@@ -889,6 +893,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         if(t.contentEquals(""))
             this.OreType = "";
         else
-            this.OreType = ItemTerraSmallOre.getItemNameDamage(t, dam);
+            this.OreType = ItemTerraSmallOre.getItemNameDamage(dam);
     }
 }
