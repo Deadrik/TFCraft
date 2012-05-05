@@ -33,6 +33,15 @@
  
      public BiomeDecorator(BiomeGenBase par1BiomeGenBase)
      {
+@@ -173,7 +177,7 @@
+     {
+         if (this.currentWorld != null)
+         {
+-            throw new RuntimeException("Already decorating!!");
++            //throw new RuntimeException("Already decorating!!");
+         }
+         else
+         {
 @@ -204,12 +208,12 @@
              this.sandGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
          }
@@ -52,6 +61,15 @@
  
          for (var1 = 0; var1 < this.sandPerChunk; ++var1)
          {
+@@ -231,7 +235,7 @@
+         {
+             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+-            WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator);
++            WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator, currentWorld);
+             var5.setScale(1.0D, 1.0D, 1.0D);
+             var5.generate(this.currentWorld, this.randomGenerator, var3, this.currentWorld.getHeightValue(var3, var4), var4);
+         }
 @@ -244,31 +248,31 @@
          }
  
