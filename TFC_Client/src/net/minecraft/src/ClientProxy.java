@@ -644,19 +644,6 @@ public class ClientProxy implements IProxy {
     }
 
     @Override
-    public boolean onTickInGame(float var1, Object mc)
-    {
-
-        ItemStack[] inv = ((Minecraft)mc).thePlayer.inventory.mainInventory;
-        double xCoord = ((Minecraft)mc).thePlayer.posX;
-        double yCoord = ((Minecraft)mc).thePlayer.posY;
-        double zCoord = ((Minecraft)mc).thePlayer.posZ;
-
-        TFCHeat.HandleContainerHeat(((Minecraft)mc).theWorld, inv, (int)xCoord,(int)yCoord,(int)zCoord);
-        return true;
-    }
-
-    @Override
     public String getDisplayName(ItemStack is) 
     {
         return is.getItem().getItemDisplayName(is);
@@ -669,7 +656,6 @@ public class ClientProxy implements IProxy {
         map.put(EntityFallingStone.class, new RenderFallingStone());
         map.put(EntityFallingStone2.class, new RenderFallingStone2());
         map.put(EntityTerraJavelin.class, new RenderTerraJavelin());
-
     }
 
     @Override

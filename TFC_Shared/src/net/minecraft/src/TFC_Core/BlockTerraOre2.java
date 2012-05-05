@@ -28,7 +28,7 @@ public class BlockTerraOre2 extends BlockTerra
 	 * Mapping from metadata value to damage value
 	 */
 	@Override
-	protected int damageDropped(int j) 
+	public int damageDropped(int j) 
 	{
 		if(j<7) {
 			return j+25;

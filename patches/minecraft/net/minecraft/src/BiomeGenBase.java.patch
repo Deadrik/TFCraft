@@ -331,7 +331,7 @@
      }
  
      /**
-@@ -336,4 +558,310 @@
+@@ -336,4 +558,314 @@
          double var3 = (double)MathHelper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
          return ColorizerFoliage.getFoliageColor(var1, var3);
      }
@@ -536,13 +536,17 @@
 +        return (WorldGenerator)(randomGenerator.nextInt(10) == 0 ? this.worldGenBigTree : this.worldGenTrees);
 +    }
 +
-+    public void SetupStone(World world)
++    public void SetupStone(World world, Random R)
 +    {
-+        Random R = new Random(world.getSeed()+this.biomeID);
-+        int[] surface = getRock(R.nextInt(25));
-+        int[] layer1 = getRock(R.nextInt(25));
-+        int[] layer2 = getRock(R.nextInt(25));
-+        int[] layer3 = getRock(R.nextInt(25));
++        int s = R.nextInt(25);
++        int l1 = R.nextInt(25);
++        int l2 = R.nextInt(25);
++        int l3 = R.nextInt(25);
++        
++        int[] surface = getRock(s);
++        int[] layer1 = getRock(l1);
++        int[] layer2 = getRock(l2);
++        int[] layer3 = getRock(l3);
 +
 +        SurfaceType = 	surface[0];
 +        SurfaceMeta = 	surface[1];

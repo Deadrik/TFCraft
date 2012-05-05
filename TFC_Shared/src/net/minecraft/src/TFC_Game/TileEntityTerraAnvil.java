@@ -180,6 +180,42 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 }
             }
         }
+        else
+        {
+            if(anvilItemStacks[1] != null && getCraftingValue() == 0)
+            {
+                Collection<Object[]> Recipes = TFC_Game.RecipeMap.get(anvilItemStacks[1].getItem().getItemNameIS(anvilItemStacks[1]));
+                Iterator itr = Recipes.iterator();
+                while(itr.hasNext() && craftingValue == 0)
+                {
+                    Object[] O = (Object[]) itr.next();
+
+                    //If the blueprint slot is empty and the recipe calls for no blueprint
+                    if(anvilItemStacks[5] == null && (Item)O[2] == null)
+                    {
+                        craftingValue = (Integer)O[0];
+                        craftingRules = (int[])O[4];
+                        craftingRange = (Integer)O[5];
+                        craftingReq = (Integer)O[6];
+                        result = (ItemStack)O[3];
+                        if(result.stackSize <= 0) {
+                            result.stackSize = 1;
+                        }
+                        break;
+                    }
+                    //If the blueprint slot is not empty and the recipe calls for a blueprint
+                    if(anvilItemStacks[5] != null && anvilItemStacks[5].getItem() == (Item)O[2])
+                    {
+                        craftingValue = (Integer)O[0];
+                        craftingRules = (int[])O[4];
+                        craftingRange = (Integer)O[5];
+                        craftingReq = (Integer)O[6];
+                        result = (ItemStack)O[3];
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void updateRules(int rule, int slot)

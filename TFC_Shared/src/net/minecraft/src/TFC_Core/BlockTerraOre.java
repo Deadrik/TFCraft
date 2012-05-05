@@ -30,7 +30,7 @@ public class BlockTerraOre extends BlockTerra
 	}
 
 	@Override
-	protected int damageDropped(int j) 
+	public int damageDropped(int j) 
 	{
 		if(j<7) {
 			return j+9;
