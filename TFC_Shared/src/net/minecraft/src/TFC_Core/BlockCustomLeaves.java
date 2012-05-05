@@ -3,6 +3,7 @@ package net.minecraft.src.TFC_Core;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.IShearable;
 import net.minecraft.src.forge.ITextureProvider;
 

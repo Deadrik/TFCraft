@@ -3,6 +3,8 @@ package net.minecraft.src.TFC_Core;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
+import net.minecraft.src.forge.MinecraftForge;
 
 public class TFC_Core
 {
@@ -13,7 +15,7 @@ public class TFC_Core
 		mod_TFC_Core.terraBlackSteelAxe,mod_TFC_Core.terraBlueSteelAxe,mod_TFC_Core.terraBronzeAxe,mod_TFC_Core.terraCopperAxe,
 		mod_TFC_Core.terraWroughtIronAxe,mod_TFC_Core.terraRedSteelAxe,mod_TFC_Core.terraRoseGoldAxe,mod_TFC_Core.terraSteelAxe,
 		mod_TFC_Core.terraTinAxe,mod_TFC_Core.terraZincAxe,
-		mod_TFC_Core.boneSedAxe,mod_TFC_Core.boneIgInAxe,mod_TFC_Core.boneIgExAxe,mod_TFC_Core.boneMMAxe,};
+		mod_TFC_Core.boneSedAxe,mod_TFC_Core.boneIgInAxe,mod_TFC_Core.boneIgExAxe,mod_TFC_Core.boneMMAxe};
 
 	public static Item[] Chisels = {mod_TFC_Core.BismuthChisel,mod_TFC_Core.BismuthBronzeChisel,mod_TFC_Core.BlackBronzeChisel,
 		mod_TFC_Core.BlackSteelChisel,mod_TFC_Core.BlueSteelChisel,mod_TFC_Core.BronzeChisel,mod_TFC_Core.CopperChisel,
@@ -1034,5 +1036,20 @@ public class TFC_Core
 				}
 			}
 		}
+	}
+	
+	public static boolean isClient()
+	{
+	    boolean b = false;
+        try 
+        {
+            Class.forName("net.minecraft.client.MinecraftApplet", false, MinecraftForge.class.getClassLoader());
+            b = true;
+        } 
+        catch (ClassNotFoundException e) 
+        {
+            b = false;
+        }  
+        return b;
 	}
 }

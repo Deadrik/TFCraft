@@ -9,7 +9,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.World;
 import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraMMCobble extends Block implements ITextureProvider
+public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 {
 
 	public static boolean fallInstantly = false;
@@ -89,14 +89,6 @@ public class BlockTerraMMCobble extends Block implements ITextureProvider
 
 	}
 
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
-	{
-		int metadata = world.getBlockMetadata(i, j, k);
-
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-
-		//mc.ingameGUI.addChatMessage("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());  
-	}
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());

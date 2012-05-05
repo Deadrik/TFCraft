@@ -11,6 +11,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraMM extends BlockCollapsable

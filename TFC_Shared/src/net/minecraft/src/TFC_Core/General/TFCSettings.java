@@ -1,7 +1,8 @@
-package net.minecraft.src.TFC_Core;
+package net.minecraft.src.TFC_Core.General;
 
 import java.io.File;
 import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.TFC_Core.ServerClientProxy;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.Property;
 
@@ -17,6 +18,7 @@ public class TFCSettings
 	public static boolean enableVanillaRecipes;
 	public static boolean enableBetterGrass;
 	public static boolean enableInnerGrassFix;
+	public static boolean enableDebugMode;
 
 	public static boolean BlacksmithModeHeatScale;
 
@@ -43,6 +45,7 @@ public class TFCSettings
 		enableVanillaFurnaceRecipes = getBooleanFor(config,"General","enableVanillaFurnaceRecipes",false);
 		enableVanillaRecipes = getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
 		enableInnerGrassFix = getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
+		enableDebugMode = getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		//Metallurgy
 		BlacksmithModeHeatScale = getBooleanFor(config,"Metallurgy","BlacksmithModeHeatScale",true, "Set this to false if you are having a hard time and would like the old color scale for heating metals.");
 		//Caveins
