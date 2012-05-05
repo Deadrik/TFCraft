@@ -331,7 +331,7 @@
      }
  
      /**
-@@ -336,4 +558,319 @@
+@@ -336,4 +558,309 @@
          double var3 = (double)MathHelper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
          return ColorizerFoliage.getFoliageColor(var1, var3);
      }
@@ -502,18 +502,8 @@
 +            {
 +                return worldGenWillowShortTrees;
 +            }
-+            default:
-+            {
-+                if(j)
-+                {
-+                    return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,7) :worldGenAshTallTrees;
-+                }
-+                else
-+                {
-+                    return worldGenAshShortTrees;
-+                }
-+            }
 +        }
++        return worldGenAshShortTrees;
 +    }
 +
 +    public int GrassID = mod_TFC_Core.terraGrass.blockID;
