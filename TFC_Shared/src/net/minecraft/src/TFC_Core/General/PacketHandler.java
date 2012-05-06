@@ -89,18 +89,16 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     int orecount;
                     int coalcount;
                     float outcount;
-                    String type;
                     int dam;
                     try {
                         orecount = dis.readInt();
                         coalcount = dis.readInt();
                         outcount = dis.readFloat();
-                        type = dis.readUTF();
                         dam = dis.readInt();
                     } catch (IOException e) {
                         return;
                     } 
-                    icte.handlePacketData(orecount, coalcount, outcount, type, dam);
+                    icte.handlePacketData(orecount, coalcount, outcount, dam);
                 }
             }
         }
@@ -160,7 +158,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
     public static Packet getPacket(
             TileEntityTerraBloomery tileEntity, int oreCount,
-            int charcoalCount, float outCount, String s, int oreDamage)
+            int charcoalCount, float outCount, int oreDamage)
     {
         ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
         DataOutputStream dos=new DataOutputStream(bos);
@@ -176,7 +174,6 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             dos.writeInt(oreCount);
             dos.writeInt(charcoalCount);
             dos.writeFloat(outCount);
-            dos.writeUTF(s);
             dos.writeInt(oreDamage);
 
         } catch (IOException e) 

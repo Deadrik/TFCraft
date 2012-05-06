@@ -516,6 +516,8 @@ public class mod_TFC_Core extends NetworkMod
         MinecraftForge.setGuiHandler(this, proxy);
         MinecraftForge.registerConnectionHandler(new PacketHandler());
         proxy.registerRenderInformation();
+        
+        MinecraftForge.registerEntity(EntityTerraJavelin.class, this, 1, 160, 5, true);
     }
 
 

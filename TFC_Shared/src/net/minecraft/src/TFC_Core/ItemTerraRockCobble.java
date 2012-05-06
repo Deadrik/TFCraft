@@ -21,6 +21,7 @@ public class ItemTerraRockCobble extends ItemBlock implements ITextureProvider
 	{
 		super(i);
 		setHasSubtypes(true);
+		this.setMaxDamage(0);
 	}
 
 	@Override

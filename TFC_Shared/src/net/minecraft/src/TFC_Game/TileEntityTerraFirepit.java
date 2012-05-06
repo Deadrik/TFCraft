@@ -17,9 +17,9 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
-import net.minecraft.src.TFC_Core.TFCHeat;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Core.General.Vector3f;
 
 public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory

@@ -14,6 +14,9 @@ public class EntityFallingDirt extends Entity
 		super(world);
 		fallTime = 0;
 		metaID = 1;
+		blockID = 209;
+		fallTime = 0;
+		pTime = 0;
 	}
 
 	public EntityFallingDirt(World world, double d, double d1, double d2,

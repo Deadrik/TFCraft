@@ -5,6 +5,7 @@ import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 
 public class TileEntityTerraWorkbench extends TileEntity implements IInventory
 {

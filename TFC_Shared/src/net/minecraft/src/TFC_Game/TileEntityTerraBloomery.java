@@ -23,8 +23,8 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.ItemTerraSmallOre;
-import net.minecraft.src.TFC_Core.TFCHeat;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 
 public class TileEntityTerraBloomery extends TileEntityFireEntity implements IInventory
 {
@@ -396,46 +396,43 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         {
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
             float desiredTemp = 0;
-            if(fuelTimeLeft > 0)
+
+            fuelTimeLeft--;
+            if(airFromBellowsTime > 0)
             {
                 fuelTimeLeft--;
-                if(airFromBellowsTime > 0)
+            }
+            if(numAirBlocks == 0)
+            {
+                for (int x = -1; x < 2; x++)
                 {
-                    fuelTimeLeft--;
-                }
-                if(numAirBlocks == 0)
-                {
-                    for (int x = -1; x < 2; x++)
+                    for (int y = 0; y < 3; y++)
                     {
-                        for (int y = 0; y < 3; y++)
+                        for (int z = -1; z < 2; z++)
                         {
-                            for (int z = -1; z < 2; z++)
-                            {
-                                if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-                                    numAirBlocks++;
-                                }
+                            if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
+                                numAirBlocks++;
                             }
                         }
                     }
                 }
-
-                float bAir = airFromBellows*(1+(float)airFromBellowsTime/120);
-
-                AddedAir = (float)(numAirBlocks+bAir)/25/16;//1038.225 Max //0.3625
-
-                if(yCoord > 60)
-                {					
-                    float w = worldObj.getHeight() - yCoord;
-                    float w1 = w / worldObj.getHeight();
-                    float w2 = 1 - w1;
-                    float w3 = w2 * 0.105F;
-
-                    AddedAir += w3;//? Max //0.1025390625 //@64-40
-                }
-
-                desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
-
             }
+
+            float bAir = airFromBellows*(1+(float)airFromBellowsTime/120);
+
+            AddedAir = (float)(numAirBlocks+bAir)/25/16;
+
+            if(yCoord > 60)
+            {					
+                float w = worldObj.getHeight() - yCoord;
+                float w1 = w / worldObj.getHeight();
+                float w2 = 1 - w1;
+                float w3 = w2 * 0.105F;
+
+                AddedAir += w3;
+            }
+
+            desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
 
             if(fireTemperature < desiredTemp)
             {
@@ -477,6 +474,10 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 BlockTerraBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
             fuelBurnTemp = 0;
+            if(fireTemperature > ambientTemp)
+            {
+                fireTemperature-=0.425F;
+            }
         }
 
 
@@ -593,7 +594,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 }
                 outCount -= outputItemStacks[i].getItemDamage();
                 outputItemStacks[i] = null;
-                
+
                 return true;
             }
         }
@@ -631,8 +632,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         return out;
     }
 
-    String orename = "";
-    int oreDamage = 0;
+    int oreDamage = -1;
 
     public void updateEntity()
     {
@@ -640,40 +640,11 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         {
             if(outCount > 0)
                 outCount = getOutputCount();
-//            if(oreCount > 0)
-//            {
-//                //set orecount to 0 so that we can get a recount of the current amount of ore in the bloomery
-//                oreCount = 0;
-//                //count the ore in the bloomery stack
-//
-//                for (int i = 0; i < fireItemStacks.length; i++)
-//                {
-//                    if(fireItemStacks[i] != null)
-//                    {
-//                        if(OreType.contentEquals(""))
-//                        {
-//                            OreType = mod_TFC_Game.proxy.getDisplayName(fireItemStacks[i]);
-//                            orename = fireItemStacks[i].getItem().getItemName();
-//                            oreDamage = fireItemStacks[i].getItemDamage();
-//                        }
-//                        oreCount++;
-//                    }
-//                }
-//            }
 
-            //            int outcnt = 0;
-            //            for (int i = 0; i < outputItemStacks.length; i++)
-            //            {
-            //                if(outputItemStacks[i] != null)
-            //                {
-            //                    outcnt++;
-            //                }
-            //            }
-
-            if(oreCount == 0 && orename != "" && outCount == 0)
+            if(oreCount == 0 && outCount == 0)
             {
                 OreType = "";
-                orename = "";
+                oreDamage = -1;
             }
 
             //Do the funky math to find how many molten blocks should be placed
@@ -747,6 +718,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                                 if(AddOreToFire(entity.item)) {
                                     entity.item.stackSize--;
                                     oreCount+=1;
+                                    oreDamage = entity.item.getItemDamage();
                                 }
                             }
                         }
@@ -885,14 +857,19 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         }
     }
 
-    public void handlePacketData(int orecount, int coalcount, float outcount, String t, int dam)
+    public void handlePacketData(int orecount, int coalcount, float outcount, int dam)
     {
         this.oreCount = orecount;
         this.charcoalCount = coalcount;
         this.outCount = outcount;
-        if(t.contentEquals(""))
+        if(dam == -1)
             this.OreType = "";
         else
             this.OreType = ItemTerraSmallOre.getItemNameDamage(dam);
+    }
+
+    public void updateGui()
+    {
+        mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, this.oreCount, this.charcoalCount, this.outCount, this.oreDamage));
     }
 }

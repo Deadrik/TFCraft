@@ -1,4 +1,4 @@
-package net.minecraft.src.TFC_Core;
+package net.minecraft.src.TFC_Core.General;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -12,7 +12,6 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Game;
-import net.minecraft.src.TFC_Core.General.TFCSettings;
 
 public class TFCHeat 
 {
@@ -38,8 +37,8 @@ public class TFCHeat
 
 		ItemHeatData.put("item.Ore.Cassiterite", new Object[]{(float)0.69F,100000F,(float)232, new ItemStack(mod_TFC_Game.terraMeltedTin,1,50)});
 
-		ItemHeatData.put("item.Ore.Galena", new Object[]{(float)0.77F,100000F,(float)327.5, new ItemStack(mod_TFC_Game.terraMeltedLead,1,75), 
-				(float)961, new ItemStack(mod_TFC_Game.terraMeltedSilver,1,75)});
+		ItemHeatData.put("item.Ore.Galena", new Object[]{(float)0.77F,100000F,(float)327.5, new ItemStack(mod_TFC_Game.terraMeltedLead,1,80), 
+				(float)961, new ItemStack(mod_TFC_Game.terraMeltedSilver,1,80)});
 
 		ItemHeatData.put("item.Ore.Bismuthinite", new Object[]{(float)0.75F,100000F,(float)271.4, new ItemStack(mod_TFC_Game.terraMeltedBismuth,1,50)});
 
@@ -54,7 +53,7 @@ public class TFCHeat
 		ItemHeatData.put("item.Ore.Sphalerite", new Object[]{(float)0.66F,100000F,(float)419.5, new ItemStack(mod_TFC_Game.terraMeltedZinc,1,50)});
 
 		ItemHeatData.put("item.Ore.Tetrahedrite", new Object[]{(float)0.67F,100000F,(float)961, new ItemStack(mod_TFC_Game.terraMeltedSilver,1,90),
-				(float)1084, new ItemStack(mod_TFC_Game.terraMeltedCopper,1,50)});
+				(float)1084, new ItemStack(mod_TFC_Game.terraMeltedCopper,1,75)});
 
 		ItemHeatData.put("item.terraBismuthIngot", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.terraMeltedBismuth,1)});
 		ItemHeatData.put("item.terraMeltedBismuth", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.terraMeltedBismuth,1)});

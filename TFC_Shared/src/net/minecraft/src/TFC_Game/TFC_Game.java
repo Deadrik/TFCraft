@@ -1,14 +1,19 @@
 package net.minecraft.src.TFC_Game;
 
 import java.util.Hashtable;
+import java.util.Random;
+
 import com.google.common.collect.*;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.TFC_Core.General.AnvilRecipe;
+import net.minecraft.src.TFC_Core.General.CraftingRule;
 
 public class TFC_Game 
 {
@@ -319,16 +324,15 @@ public class TFC_Game
 		}
 	}
 
-	
+	public static void registerAnvilRecipes(Random R)
+	{
+	    AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
+	    
+	    manager.addRecipe(new AnvilRecipe(R,mod_TFC_Game.terraMeltedTin, null,9,CraftingRule.HITLAST,CraftingRule.HITSECONDFROMLAST,CraftingRule.ANY, false, 0));
+	}
 
 	public static void registerRecipes()
 	{
-		///////////////////////Debug Recipes
-		//ModLoader.addRecipe(new ItemStack(mod_TFC_Game.terraBlackSteelAnvilItem, 1), new Object[] { "2", Character.valueOf('2'), new ItemStack(mod_TFC_Core.terraDirt,1, -1)});
-		//ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRedSteelPick, 1), new Object[] { "2", Character.valueOf('2'), new ItemStack(mod_TFC_Core.terraDirt2,1,-1)});
-		//ModLoader.addRecipe(new ItemStack(Block.torchWood, 64), new Object[] { "22", Character.valueOf('2'), new ItemStack(mod_TFC_Core.terraDirt,1, -1)});
-		//ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelAxe, 64,7), new Object[] { "22","22", Character.valueOf('2'), new ItemStack(mod_TFC_Core.terraDirt,1, -1)});
-		///////////////////////
 
 		for(int j = 0; j < Hammers.length; j++)
 		{
