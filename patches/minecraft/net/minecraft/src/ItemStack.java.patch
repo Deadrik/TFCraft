@@ -4,7 +4,7 @@
  import java.util.ArrayList;
  import java.util.List;
  
-+import net.minecraft.src.TFC_Core.TFCHeat;
++import net.minecraft.src.TFC_Core.General.TFCHeat;
 +
  public final class ItemStack
  {
@@ -1068,15 +1068,15 @@
 +						 arraylist.add(TFCHeat.getHeatColor(temp, meltTemp));
 +				 }
 +			 }
-+			 if(stackTagCompound.getInteger("itemCraftingValue") != 0)
++			 if(stackTagCompound.getByte("itemCraftingValue") != 0)
 +			 {
 +				 arraylist.add("This Item Has Been Worked");
 +				 if(stackTagCompound.hasKey("itemCraftingRule1"))
-+					 arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getInteger("itemCraftingRule1")));
++					 arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule1")));
 +				 if(stackTagCompound.hasKey("itemCraftingRule2"))
-+					 arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getInteger("itemCraftingRule2")));
++					 arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule2")));
 +				 if(stackTagCompound.hasKey("itemCraftingRule3"))
-+					 arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getInteger("itemCraftingRule3")));
++					 arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule3")));
 +			 }
 +		 }
 +
@@ -1088,7 +1088,7 @@
 +		 switch(id)
 +		 {
 +		 case 0:
-+			 return "Hammer";
++			 return "Hit";
 +		 case 1:
 +			 return "Draw";
 +		 case 2:

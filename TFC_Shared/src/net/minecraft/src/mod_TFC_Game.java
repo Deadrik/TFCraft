@@ -6,6 +6,7 @@ import java.util.Iterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.TFC_Core.*;
+import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Game.*;
@@ -31,6 +32,7 @@ public class mod_TFC_Game extends NetworkMod
 	public static Item terraFireStarter;
 	public static Block terraBellows;
 	public static Block terraAnvil;
+	public static Block terraAnvil2;
 	public static Block terraScribe;
 	public static Block terraForge;
 	public static Block terraForgeOn;
@@ -41,12 +43,15 @@ public class mod_TFC_Game extends NetworkMod
 
 	public static Item terraBellowsItem;
 	public static Item terraStoneAnvilItem;
+	public static Item terraBismuthBronzeAnvilItem;
+	public static Item terraBlackBronzeAnvilItem;
 	public static Item terraBlackSteelAnvilItem;
 	public static Item terraBlueSteelAnvilItem;
 	public static Item terraBronzeAnvilItem;
 	public static Item terraCopperAnvilItem;
 	public static Item terraWroughtIronAnvilItem;
 	public static Item terraRedSteelAnvilItem;
+	public static Item terraRoseGoldAnvilItem;
 	public static Item terraSteelAnvilItem;
 
 	public static Item StoneHammer;
@@ -64,34 +69,34 @@ public class mod_TFC_Game extends NetworkMod
 	public static Item TinHammer;
 	public static Item ZincHammer;
 
-	public static Item terraMeltedBismuth;
-	public static Item terraMeltedBismuthBronze;
-	public static Item terraMeltedBlackBronze;
-	public static Item terraMeltedBlackSteel;
-	public static Item terraMeltedHCBlackSteel;
-	public static Item terraMeltedBlueSteel;
-	public static Item terraMeltedWeakBlueSteel;
-	public static Item terraMeltedHCBlueSteel;
-	public static Item terraMeltedBrass;
-	public static Item terraMeltedBronze;
-	public static Item terraMeltedCopper;
-	public static Item terraMeltedGold;
-	public static Item terraMeltedWroughtIron;
-	public static Item terraMeltedLead;
-	public static Item terraMeltedNickel;
-	public static Item terraMeltedPigIron;
-	public static Item terraMeltedPlatinum;
-	public static Item terraMeltedRedSteel;
-	public static Item terraMeltedWeakRedSteel;
-	public static Item terraMeltedHCRedSteel;
-	public static Item terraMeltedRoseGold;
-	public static Item terraMeltedSilver;
-	public static Item terraMeltedSteel;
-	public static Item terraMeltedWeakSteel;
-	public static Item terraMeltedHCSteel;
-	public static Item terraMeltedSterlingSilver;
-	public static Item terraMeltedTin;
-	public static Item terraMeltedZinc;
+	public static Item UnshapedBismuth;
+	public static Item UnshapedBismuthBronze;
+	public static Item UnshapedBlackBronze;
+	public static Item UnshapedBlackSteel;
+	public static Item UnshapedHCBlackSteel;
+	public static Item UnshapedBlueSteel;
+	public static Item UnshapedWeakBlueSteel;
+	public static Item UnshapedHCBlueSteel;
+	public static Item UnshapedBrass;
+	public static Item UnshapedBronze;
+	public static Item UnshapedCopper;
+	public static Item UnshapedGold;
+	public static Item UnshapedWroughtIron;
+	public static Item UnshapedLead;
+	public static Item UnshapedNickel;
+	public static Item UnshapedPigIron;
+	public static Item UnshapedPlatinum;
+	public static Item UnshapedRedSteel;
+	public static Item UnshapedWeakRedSteel;
+	public static Item UnshapedHCRedSteel;
+	public static Item UnshapedRoseGold;
+	public static Item UnshapedSilver;
+	public static Item UnshapedSteel;
+	public static Item UnshapedWeakSteel;
+	public static Item UnshapedHCSteel;
+	public static Item UnshapedSterlingSilver;
+	public static Item UnshapedTin;
+	public static Item UnshapedZinc;
 	public static Item terraClayMold;
 	public static Item terraCeramicMold;
 	public static Item terraMeltedUnknown;
@@ -109,7 +114,7 @@ public class mod_TFC_Game extends NetworkMod
 	public static Item SwordBladePlan;
 	public static Item MaceHeadPlan;
 	public static Item SawBladePlan;
-	public static Item ProPickBladePlan;
+	public static Item ProPickHeadPlan;
 
 	//Tool Heads
 	public static Item BismuthPickaxeHead;
@@ -486,7 +491,8 @@ public class mod_TFC_Game extends NetworkMod
         terraBellows = new BlockTerraBellows(getBlockIdFor("terraBellows", 206),Material.wood).setBlockName("terraBellows").setHardness(2);
         terraForge= new BlockTerraForge(getBlockIdFor("terraForge", 216), TileEntityTerraForge.class, 90).setBlockName("terraForge").setHardness(20).setLightValue(0F);
         terraScribe = new BlockTerraScribe(getBlockIdFor("terraScribe", 204), TileEntityTerraScribe.class).setBlockName("terraScribe").setHardness(2);
-        terraAnvil = new BlockTerraAnvil(getBlockIdFor("terraAnvil", 205), TileEntityTerraAnvil.class).setBlockName("terraAnvil").setHardness(3);
+        terraAnvil = new BlockTerraAnvil(getBlockIdFor("terraAnvil", 205),192, TileEntityTerraAnvil.class).setBlockName("terraAnvil").setHardness(3);
+        terraAnvil2 = new BlockTerraAnvil(getBlockIdFor("terraAnvil2", 225),208, TileEntityTerraAnvil.class).setBlockName("terraAnvil2").setHardness(3);
         terraMetalTable = new BlockTerraMetallurgy(getBlockIdFor("terraMetallurgy", 218), TileEntityTerraMetallurgy.class).setBlockName("terraMetallurgy").setHardness(3);
         terraMolten = new BlockTerraMolten(getBlockIdFor("terraMolten", 219)).setBlockName("terraMolten").setHardness(20);
         terraBloomery = new BlockTerraBloomery(getBlockIdFor("terraBloomery", 220), TileEntityTerraBloomery.class, 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
@@ -500,27 +506,27 @@ public class mod_TFC_Game extends NetworkMod
 
         terraSlag = new ItemTerra(getItemIdFor("terraSlag",16349),"/bioxx/terrasprites.png").setItemName("terraSlag").setIconCoord(2, 0);
 
-        terraMeltedBismuth = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBismuth",16350)).setItemName("terraMeltedBismuth").setIconCoord(0, 9);
-        terraMeltedBismuthBronze = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBismuthBronze",16351)).setItemName("terraMeltedBismuthBronze").setIconCoord(1, 9);
-        terraMeltedBlackBronze = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBlackBronze",16352)).setItemName("terraMeltedBlackBronze").setIconCoord(2, 9);
-        terraMeltedBlackSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBlackSteel",16353)).setItemName("terraMeltedBlackSteel").setIconCoord(3, 9);
-        terraMeltedBlueSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBlueSteel",16354)).setItemName("terraMeltedBlueSteel").setIconCoord(4, 9);
-        terraMeltedBrass = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBrass",16355)).setItemName("terraMeltedBrass").setIconCoord(5, 9);
-        terraMeltedBronze = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedBronze",16356)).setItemName("terraMeltedBronze").setIconCoord(6, 9);
-        terraMeltedCopper = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedCopper",16357)).setItemName("terraMeltedCopper").setIconCoord(7, 9);
-        terraMeltedGold = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedGold",16358)).setItemName("terraMeltedGold").setIconCoord(8, 9);
-        terraMeltedWroughtIron = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedIron",16359)).setItemName("terraMeltedWroughtIron").setIconCoord(9, 9);
-        terraMeltedLead = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedLead",16360)).setItemName("terraMeltedLead").setIconCoord(10, 9);
-        terraMeltedNickel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedNickel",16361)).setItemName("terraMeltedNickel").setIconCoord(0, 10);
-        terraMeltedPigIron = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedPigIron",16362)).setItemName("terraMeltedPigIron").setIconCoord(1, 10);
-        terraMeltedPlatinum = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedPlatinum",16363)).setItemName("terraMeltedPlatinum").setIconCoord(2, 10);
-        terraMeltedRedSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedRedSteel",16364)).setItemName("terraMeltedRedSteel").setIconCoord(3, 10);
-        terraMeltedRoseGold = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedRoseGold",16365)).setItemName("terraMeltedRoseGold").setIconCoord(4, 10);
-        terraMeltedSilver = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedSilver",16366)).setItemName("terraMeltedSilver").setIconCoord(5, 10);
-        terraMeltedSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedSteel",16367)).setItemName("terraMeltedSteel").setIconCoord(6, 10);
-        terraMeltedSterlingSilver = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedSterlingSilver",16368)).setItemName("terraMeltedSterlingSilver").setIconCoord(7, 10);
-        terraMeltedTin = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedTin",16369)).setItemName("terraMeltedTin").setIconCoord(8, 10);
-        terraMeltedZinc = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedZinc",16370)).setItemName("terraMeltedZinc").setIconCoord(9, 10);
+        UnshapedBismuth = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBismuth",16350)).setItemName("UnshapedBismuth").setIconCoord(0, 9);
+        UnshapedBismuthBronze = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBismuthBronze",16351)).setItemName("UnshapedBismuthBronze").setIconCoord(1, 9);
+        UnshapedBlackBronze = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBlackBronze",16352)).setItemName("UnshapedBlackBronze").setIconCoord(2, 9);
+        UnshapedBlackSteel = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBlackSteel",16353)).setItemName("UnshapedBlackSteel").setIconCoord(3, 9);
+        UnshapedBlueSteel = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBlueSteel",16354)).setItemName("UnshapedBlueSteel").setIconCoord(4, 9);
+        UnshapedBrass = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBrass",16355)).setItemName("UnshapedBrass").setIconCoord(5, 9);
+        UnshapedBronze = new ItemTerraMeltedMetal(getItemIdFor("UnshapedBronze",16356)).setItemName("UnshapedBronze").setIconCoord(6, 9);
+        UnshapedCopper = new ItemTerraMeltedMetal(getItemIdFor("UnshapedCopper",16357)).setItemName("UnshapedCopper").setIconCoord(7, 9);
+        UnshapedGold = new ItemTerraMeltedMetal(getItemIdFor("UnshapedGold",16358)).setItemName("UnshapedGold").setIconCoord(8, 9);
+        UnshapedWroughtIron = new ItemTerraMeltedMetal(getItemIdFor("UnshapedIron",16359)).setItemName("UnshapedWroughtIron").setIconCoord(9, 9);
+        UnshapedLead = new ItemTerraMeltedMetal(getItemIdFor("UnshapedLead",16360)).setItemName("UnshapedLead").setIconCoord(10, 9);
+        UnshapedNickel = new ItemTerraMeltedMetal(getItemIdFor("UnshapedNickel",16361)).setItemName("UnshapedNickel").setIconCoord(0, 10);
+        UnshapedPigIron = new ItemTerraMeltedMetal(getItemIdFor("UnshapedPigIron",16362)).setItemName("UnshapedPigIron").setIconCoord(1, 10);
+        UnshapedPlatinum = new ItemTerraMeltedMetal(getItemIdFor("UnshapedPlatinum",16363)).setItemName("UnshapedPlatinum").setIconCoord(2, 10);
+        UnshapedRedSteel = new ItemTerraMeltedMetal(getItemIdFor("UnshapedRedSteel",16364)).setItemName("UnshapedRedSteel").setIconCoord(3, 10);
+        UnshapedRoseGold = new ItemTerraMeltedMetal(getItemIdFor("UnshapedRoseGold",16365)).setItemName("UnshapedRoseGold").setIconCoord(4, 10);
+        UnshapedSilver = new ItemTerraMeltedMetal(getItemIdFor("UnshapedSilver",16366)).setItemName("UnshapedSilver").setIconCoord(5, 10);
+        UnshapedSteel = new ItemTerraMeltedMetal(getItemIdFor("UnshapedSteel",16367)).setItemName("UnshapedSteel").setIconCoord(6, 10);
+        UnshapedSterlingSilver = new ItemTerraMeltedMetal(getItemIdFor("UnshapedSterlingSilver",16368)).setItemName("UnshapedSterlingSilver").setIconCoord(7, 10);
+        UnshapedTin = new ItemTerraMeltedMetal(getItemIdFor("UnshapedTin",16369)).setItemName("UnshapedTin").setIconCoord(8, 10);
+        UnshapedZinc = new ItemTerraMeltedMetal(getItemIdFor("UnshapedZinc",16370)).setItemName("UnshapedZinc").setIconCoord(9, 10);
 
         //Hammers
         StoneHammer = new ItemHammer(getItemIdFor("terraStoneHammer",16371),mod_TFC_Core.IgInToolMaterial).setItemName("Stone Hammer").setIconCoord(0, 11).setMaxDamage(mod_TFC_Core.IgInStoneUses);
@@ -550,17 +556,16 @@ public class mod_TFC_Game extends NetworkMod
         SwordBladePlan = new ItemTerraMiscTool(getItemIdFor("SwordBladePlan",17006)).setItemName("SwordBladePlan").setIconCoord(0, 0);
         MaceHeadPlan = new ItemTerraMiscTool(getItemIdFor("MaceHeadPlan",17007)).setItemName("MaceHeadPlan").setIconCoord(0, 0);
         SawBladePlan = new ItemTerraMiscTool(getItemIdFor("SawBladePlan",17008)).setItemName("SawBladePlan").setIconCoord(0, 0);
-        ProPickBladePlan = new ItemTerraMiscTool(getItemIdFor("ProPickHeadPlan",17009)).setItemName("ProPickHeadPlan").setIconCoord(0, 0);
+        ProPickHeadPlan = new ItemTerraMiscTool(getItemIdFor("ProPickHeadPlan",17009)).setItemName("ProPickHeadPlan").setIconCoord(0, 0);
 
-        //Anvils
-        terraStoneAnvilItem = new ItemTerraAnvil(getItemIdFor("terraStoneAnvilItem",16398), 0).setItemName("terraStoneAnvilItem").setIconCoord(0, 2);
-        terraBlackSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBlackSteelAnvilItem",16399), 5).setItemName("terraBlackSteelAnvilItem").setIconCoord(4, 2);
-        terraBlueSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBlueSteelAnvilItem",16400), 7).setItemName("terraBlueSteelAnvilItem").setIconCoord(5, 2);
-        terraBronzeAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBronzeAnvilItem",16401), 2).setItemName("terraBronzeAnvilItem").setIconCoord(6, 2);
-        terraCopperAnvilItem = new ItemTerraAnvil(getItemIdFor("terraCopperAnvilItem",16402), 1).setItemName("terraCopperAnvilItem").setIconCoord(7, 2);
-        terraWroughtIronAnvilItem = new ItemTerraAnvil(getItemIdFor("terraWroughtIronAnvilItem",16403), 3).setItemName("terraWroughtIronAnvilItem").setIconCoord(8, 2);
-        terraRedSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraRedSteelAnvilItem",16404), 6).setItemName("terraRedSteelAnvilItem").setIconCoord(9, 2);
-        terraSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraSteelAnvilItem",16405), 4).setItemName("terraSteelAnvilItem").setIconCoord(11, 2);
+        terraStoneAnvilItem = new ItemTerraAnvil(getItemIdFor("terraStoneAnvilItem",16398), 0, AnvilReq.STONE).setItemName("terraStoneAnvilItem").setIconCoord(0, 2);
+        terraBlackSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBlackSteelAnvilItem",16399), 5, AnvilReq.BLACKSTEEL).setItemName("terraBlackSteelAnvilItem").setIconCoord(4, 2);
+        terraBlueSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBlueSteelAnvilItem",16400), 7, AnvilReq.BLUESTEEL).setItemName("terraBlueSteelAnvilItem").setIconCoord(5, 2);
+        terraBronzeAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBronzeAnvilItem",16401), 2, AnvilReq.BRONZE).setItemName("terraBronzeAnvilItem").setIconCoord(6, 2);
+        terraCopperAnvilItem = new ItemTerraAnvil(getItemIdFor("terraCopperAnvilItem",16402), 1, AnvilReq.COPPER).setItemName("terraCopperAnvilItem").setIconCoord(7, 2);
+        terraWroughtIronAnvilItem = new ItemTerraAnvil(getItemIdFor("terraWroughtIronAnvilItem",16403), 3, AnvilReq.WROUGHTIRON).setItemName("terraWroughtIronAnvilItem").setIconCoord(8, 2);
+        terraRedSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraRedSteelAnvilItem",16404), 6, AnvilReq.REDSTEEL).setItemName("terraRedSteelAnvilItem").setIconCoord(9, 2);
+        terraSteelAnvilItem = new ItemTerraAnvil(getItemIdFor("terraSteelAnvilItem",16405), 4, AnvilReq.STEEL).setItemName("terraSteelAnvilItem").setIconCoord(11, 2);
 
         terraBellowsItem = new ItemTerraBellows(getItemIdFor("terraBellowsItem",16406)).setItemName("terraBellowsItem").setIconCoord(8, 0);
 
@@ -695,13 +700,13 @@ public class mod_TFC_Game extends NetworkMod
         TinSawHead = new ItemTerraMiscToolHead(getItemIdFor("TinSawHead",16615)).setItemName("Tin Saw Blade").setIconCoord(12, 8);
         ZincSawHead = new ItemTerraMiscToolHead(getItemIdFor("ZincSawHead",16616)).setItemName("Zinc Saw Blade").setIconCoord(13, 8);
 
-        terraMeltedHCBlackSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCBlackSteel",16617)).setItemName("terraMeltedHCBlackSteel").setIconCoord(3, 9);
-        terraMeltedWeakBlueSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedWeakBlueSteel",16618)).setItemName("terraMeltedWeakBlueSteel").setIconCoord(4, 9);
-        terraMeltedHCBlueSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCBlueSteel",16619)).setItemName("terraMeltedHCBlueSteel").setIconCoord(4, 9);
-        terraMeltedWeakRedSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedWeakRedSteel",16621)).setItemName("terraMeltedWeakRedSteel").setIconCoord(3, 10);
-        terraMeltedHCRedSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCRedSteel",16622)).setItemName("terraMeltedHCRedSteel").setIconCoord(3, 10);
-        terraMeltedWeakSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedWeakSteel",16623)).setItemName("terraMeltedWeakSteel").setIconCoord(6, 10);
-        terraMeltedHCSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCSteel",16624)).setItemName("terraMeltedHCSteel").setIconCoord(6, 10);
+        UnshapedHCBlackSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCBlackSteel",16617)).setItemName("terraMeltedHCBlackSteel").setIconCoord(3, 9);
+        UnshapedWeakBlueSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedWeakBlueSteel",16618)).setItemName("terraMeltedWeakBlueSteel").setIconCoord(4, 9);
+        UnshapedHCBlueSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCBlueSteel",16619)).setItemName("terraMeltedHCBlueSteel").setIconCoord(4, 9);
+        UnshapedWeakRedSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedWeakRedSteel",16621)).setItemName("terraMeltedWeakRedSteel").setIconCoord(3, 10);
+        UnshapedHCRedSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCRedSteel",16622)).setItemName("terraMeltedHCRedSteel").setIconCoord(3, 10);
+        UnshapedWeakSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedWeakSteel",16623)).setItemName("terraMeltedWeakSteel").setIconCoord(6, 10);
+        UnshapedHCSteel = new ItemTerraMeltedMetal(getItemIdFor("terraMeltedHCSteel",16624)).setItemName("terraMeltedHCSteel").setIconCoord(6, 10);
         Coke = ((ItemTerra) new ItemTerra(getItemIdFor("Coke",16625)).setItemName("coke").setIconCoord(2, 0)).setTexturePath("/bioxx/terrasprites.png");
 
         BismuthProPickHead = new ItemTerraMiscToolHead(getItemIdFor("BismuthProPickHead",16626)).setItemName("Bismuth ProPick Head").setIconCoord(1, 1);
@@ -719,8 +724,12 @@ public class mod_TFC_Game extends NetworkMod
         ZincProPickHead = new ItemTerraMiscToolHead(getItemIdFor("ZincProPickHead",16638)).setItemName("Zinc ProPick Head").setIconCoord(13, 1);
 
         Flux = ((ItemTerra) new ItemTerra(getItemIdFor("Flux",16639)).setItemName("flux").setIconCoord(0, 0)).setTexturePath("/bioxx/terrasprites.png");
+        
+        terraBismuthBronzeAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setItemName("terraBismuthBronzeAnvilItem").setIconCoord(2, 2);
+        terraBlackBronzeAnvilItem = new ItemTerraAnvil(getItemIdFor("terraBlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setItemName("terraBlackBronzeAnvilItem").setIconCoord(3, 2);
+        terraRoseGoldAnvilItem = new ItemTerraAnvil(getItemIdFor("terraRoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setItemName("terraRoseGoldAnvilItem").setIconCoord(10, 2);
         /**Armor Crafting related items*/
-
+        
 
 
         /**Formerly TFC_Mining*/

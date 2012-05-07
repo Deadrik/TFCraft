@@ -126,7 +126,7 @@ public class BlockTerraWood extends Block implements ITextureProvider
 			int x = i;
 			int y = 0;
 			int z = k;
-			super.harvestBlock(world, entityplayer, i, j, k, l);
+			//super.harvestBlock(world, entityplayer, i, j, k, l);
 			boolean checkArray[][][] = new boolean[11][50][11];
 
 			if(		world.getBlockId(i, j+y-1, k) == blockID || world.getBlockId(i, j+y-1, k) == mod_TFC_Core.terraDirt.blockID || 
@@ -214,6 +214,7 @@ public class BlockTerraWood extends Block implements ITextureProvider
 			}
 
 			world.setBlockWithNotify(i, j, k, 0);
+			world.markBlockNeedsUpdate(i, j, k);
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[mod_TFC_Core.Logs.shiftedIndex],1,l));
 		}
 	}

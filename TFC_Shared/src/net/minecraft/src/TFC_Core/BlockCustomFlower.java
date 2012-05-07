@@ -92,6 +92,24 @@ public class BlockCustomFlower extends BlockFlower
 
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
-		this.checkFlowerChange(par1World, par2, par3, par4);
+		this.checkChange(par1World, par2, par3, par4);
 	}
+	
+	/**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor blockID
+     */
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    {
+            this.checkChange(par1World, par2, par3, par4);
+    }
+    
+    protected void checkChange(World par1World, int par2, int par3, int par4)
+    {
+        if (!this.canBlockStay(par1World, par2, par3, par4))
+        {
+            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+            par1World.setBlockWithNotify(par2, par3, par4, 0);
+        }
+    }
 }

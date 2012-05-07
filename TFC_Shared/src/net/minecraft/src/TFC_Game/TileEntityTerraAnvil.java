@@ -23,6 +23,7 @@ import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.General.AnvilRecipe;
+import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.CraftingRule;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
@@ -50,7 +51,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
     private final int lagFixDelay = 5;
     public AnvilRecipe workRecipe;
     private AnvilRecipe workWeldRecipe;
-    
+    public AnvilReq AnvilTier;
+
     public TileEntityTerraAnvil()
     {
         anvilItemStacks = new ItemStack[8];
@@ -62,6 +64,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         rule1 = false;
         rule2 = false;
         rule3 = false;
+
+        AnvilTier = AnvilReq.STONE;
     }
 
     public void updateEntity()
@@ -72,7 +76,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else if(anvilItemStacks[1] != null && workRecipe == null)
         {
-            AnvilRecipe recipe = AnvilCraftingManagerTFC.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[1].getItem(),anvilItemStacks[5]!=null ? anvilItemStacks[5].getItem() : null, false));
+            AnvilRecipe recipe = AnvilCraftingManagerTFC.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[1],anvilItemStacks[5], 
+                    anvilItemStacks[7] != null ? true : false, this.AnvilTier));
             if(recipe != null)
             {
                 workRecipe = recipe;
@@ -85,26 +90,32 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 workedRecently--;
             //Deal with temperatures
             TFCHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
-            
+
             /**
              * Check if the recipe is considered complete
              * */
             if(workRecipe!= null && getItemCraftingValue() != 0)
             {
+                AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
                 Random R = new Random(worldObj.getSeed());
-                AnvilRecipe recipe = new AnvilRecipe(R, anvilItemStacks[1].getItem(),anvilItemStacks[5]!=null ? anvilItemStacks[5].getItem() : null,
+                AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[1],anvilItemStacks[5],
                         getItemCraftingValue(),
-                        CraftingRule.rules[anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule1")],
-                        CraftingRule.rules[anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule2")],
-                        CraftingRule.rules[anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule3")], 
-                        anvilItemStacks[7] != null ? true : false);
-                ItemStack result = AnvilCraftingManagerTFC.getInstance().findCompleteRecipe(recipe);
-                
+                        CraftingRule.ANY,
+                        CraftingRule.ANY,
+                        CraftingRule.ANY, 
+                        anvilItemStacks[7] != null ? true : false, AnvilTier, null);
+                ItemStack result = manager.findCompleteRecipe(recipe, getItemRules());
+
                 if(result != null)
+                {
+                    NBTTagCompound Tag = new NBTTagCompound();
+                    Tag.setFloat("temperature", TFCHeat.GetTemperature(anvilItemStacks[1]));
                     anvilItemStacks[1] = result; 
+                    anvilItemStacks[1].setTagCompound(Tag);
+                }
             }
-            
-            
+
+
         }
         else
         {
@@ -133,7 +144,42 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             itemCraftingRules[2] = rule2;
             itemCraftingRules[1] = rule1;
             itemCraftingRules[0] = rule;
+            
+            Tag.setByte("itemCraftingRule1", (byte) itemCraftingRules[0]);
+            Tag.setByte("itemCraftingRule2", (byte) itemCraftingRules[1]);
+            Tag.setByte("itemCraftingRule3", (byte) itemCraftingRules[2]);
+            
+            anvilItemStacks[slot].setTagCompound(Tag);
         }
+    }
+
+    public int[] getItemRules()
+    {
+        int[] rules = new int[3];
+        if(anvilItemStacks[1].hasTagCompound())
+        {
+            if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule1"))
+                rules[0] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule1");
+            else
+                rules[0] = CraftingRule.ANY.Action;
+            
+            if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule2"))
+                rules[1] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule2");
+            else
+                rules[1] = CraftingRule.ANY.Action;
+            
+            if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule3"))
+                rules[2] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule3");
+            else
+                rules[2] = CraftingRule.ANY.Action;
+        }
+        else
+        {
+            rules[0] = CraftingRule.ANY.Action;
+            rules[1] = CraftingRule.ANY.Action;
+            rules[2] = CraftingRule.ANY.Action;
+        }
+        return rules;
     }
 
     public void actionHeavyHammer()
@@ -144,7 +190,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue -= 9;
+                setItemCraftingValue(-9);
                 updateRules(0,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -167,7 +213,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue -= 3;
+                setItemCraftingValue(-3);
                 updateRules(0,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -190,7 +236,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue -= 15;
+                setItemCraftingValue(-15);
                 updateRules(1,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -212,7 +258,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue -= 49;
+                setItemCraftingValue(-49);
                 updateRules(2,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -234,7 +280,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue += 2;
+                setItemCraftingValue(2);
                 updateRules(3,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -256,7 +302,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue += 7;
+                setItemCraftingValue(7);
                 updateRules(4,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -278,7 +324,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue += 13;
+                setItemCraftingValue(13);
                 updateRules(5,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -300,7 +346,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && anvilItemStacks[1].getItemDamage() == 0 && getAnvilType() >= craftingReq && workedRecently == 0)
             {
                 workedRecently = lagFixDelay;
-                itemCraftingValue += 16;
+                setItemCraftingValue(16);
                 updateRules(6,1);
                 anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
@@ -320,27 +366,38 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         if(!worldObj.isRemote)
         {
             if(isTemperatureWeldable(2) && isTemperatureWeldable(3) && anvilItemStacks[0] != null && 
-                    anvilItemStacks[2].getItemDamage() == 0 && anvilItemStacks[3].getItemDamage() == 0 && getAnvilType() >= craftingReq && anvilItemStacks[7] != null && workedRecently == 0)
+                    anvilItemStacks[2].getItemDamage() == 0 && anvilItemStacks[3].getItemDamage() == 0 && workedRecently == 0 && anvilItemStacks[4] == null)
             {
-                String concact = anvilItemStacks[2].getItem().getItemNameIS(anvilItemStacks[2]) + "|" + anvilItemStacks[3].getItem().getItemNameIS(anvilItemStacks[3]);
-                String concact2 = anvilItemStacks[3].getItem().getItemNameIS(anvilItemStacks[3]) + "|" + anvilItemStacks[2].getItem().getItemNameIS(anvilItemStacks[2]);
-                if(TFC_Game.AnvilWeldRecipes.containsKey(concact))
+                AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
+                Random R = new Random(worldObj.getSeed());
+                AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[2],anvilItemStacks[3],
+                        0,
+                        CraftingRule.ANY,
+                        CraftingRule.ANY,
+                        CraftingRule.ANY, 
+                        anvilItemStacks[7] != null ? true : false, AnvilTier, null);
+                
+                AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[3],anvilItemStacks[2],
+                        0,
+                        CraftingRule.ANY,
+                        CraftingRule.ANY,
+                        CraftingRule.ANY, 
+                        anvilItemStacks[7] != null ? true : false, AnvilTier, null);
+                
+                ItemStack result = manager.findCompleteWeldRecipe(recipe);
+                if(result == null)
+                    result = manager.findCompleteWeldRecipe(recipe2);
+
+                if(result != null)
                 {
-                    Object[] weldData = (Object[])TFC_Game.AnvilWeldRecipes.get(concact);
-                    if(anvilItemStacks[4] == null)
-                    {
-                        workedRecently = lagFixDelay;
-
-                        ItemStack item = new ItemStack(anvilItemStacks[7].getItem(),anvilItemStacks[7].stackSize-1);
-                        if(item.stackSize == 0) {
-                            item = null;
-                        }
-                        anvilItemStacks[7] = item;
-
-                        anvilItemStacks[2] = null;
-                        anvilItemStacks[3] = null;
+                    NBTTagCompound Tag = new NBTTagCompound();
+                    Tag.setFloat("temperature", (TFCHeat.GetTemperature(anvilItemStacks[2])+TFCHeat.GetTemperature(anvilItemStacks[3]))/2);
+                    anvilItemStacks[4] = result; 
+                    anvilItemStacks[4].setTagCompound(Tag);
+                    ItemStack item = new ItemStack(anvilItemStacks[7].getItem(),anvilItemStacks[7].stackSize-2);
+                    if(item.stackSize == 0) {
+                        item = null;
                     }
-
                 }
             }
         }
@@ -458,6 +515,28 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         return "Anvil";
     }
 
+    public boolean setItemCraftingValue(int i)
+    {
+        if(anvilItemStacks[1] != null && anvilItemStacks[1].hasTagCompound() && anvilItemStacks[1].getTagCompound().hasKey("itemCraftingValue"))
+        {
+            Byte icv = anvilItemStacks[1].getTagCompound().getByte("itemCraftingValue");
+            anvilItemStacks[1].getTagCompound().setByte("itemCraftingValue", (byte) (icv + i));
+            return true;
+        }
+        else if(anvilItemStacks[1] != null && anvilItemStacks[1].hasTagCompound())
+        {
+            anvilItemStacks[1].getTagCompound().setByte("itemCraftingValue", (byte)i);
+            return true;
+        }
+        else if(anvilItemStacks[1] != null && !anvilItemStacks[1].hasTagCompound())
+        {
+            NBTTagCompound Tag = new NBTTagCompound();
+            Tag.setByte("itemCraftingValue", (byte)i);
+            anvilItemStacks[1].stackTagCompound = Tag;
+            return true;
+        }
+        return false;
+    }
     public int getItemCraftingValue()
     {
         if(anvilItemStacks[1] != null && anvilItemStacks[1].hasTagCompound() && anvilItemStacks[1].getTagCompound().hasKey("itemCraftingValue"))
@@ -523,7 +602,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 float t = anvilItemStacks[i].getTagCompound().getFloat("temperature");
                 float m = (Float)meltData[2];
 
-                return t < m && t > m - m * 0.10;
+                return t < m && t > m - m * 0.20;
 
             }
         }
@@ -676,6 +755,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
 
     }
-   
+
 
 }

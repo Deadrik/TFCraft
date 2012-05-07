@@ -14,20 +14,20 @@ public class SlotMetal extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 
-		if(itemstack.itemID == mod_TFC_Game.terraMeltedBismuth.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedBismuthBronze.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedBlackBronze.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedBlackSteel.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedBlueSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedBrass.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedBronze.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedCopper.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedGold.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedWroughtIron.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedLead.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedNickel.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedPigIron.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedPlatinum.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedRedSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedRoseGold.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedSilver.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedSterlingSilver.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedTin.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedZinc.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedHCBlueSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedWeakBlueSteel.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedHCRedSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedWeakRedSteel.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedHCSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraMeltedWeakSteel.shiftedIndex || 
-				itemstack.itemID == mod_TFC_Game.terraMeltedHCBlackSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+		if(itemstack.itemID == mod_TFC_Game.UnshapedBismuth.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedBismuthBronze.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedBlackBronze.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedBlackSteel.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedBlueSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedBrass.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedBronze.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedCopper.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedGold.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedWroughtIron.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedLead.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedNickel.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedPigIron.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedPlatinum.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedRedSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedRoseGold.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedSilver.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedSterlingSilver.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedTin.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedZinc.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedHCBlueSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedWeakBlueSteel.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedHCRedSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedWeakRedSteel.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedHCSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.UnshapedWeakSteel.shiftedIndex || 
+				itemstack.itemID == mod_TFC_Game.UnshapedHCBlackSteel.shiftedIndex || itemstack.itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
 		{
 			return true;
 		}

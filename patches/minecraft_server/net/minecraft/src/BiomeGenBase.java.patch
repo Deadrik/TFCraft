@@ -364,7 +364,7 @@
      }
  
      /**
-@@ -297,4 +520,339 @@
+@@ -297,4 +520,338 @@
      {
          this.biomeDecorator.decorate(par1World, par2Random, par3, par4);
      }
@@ -595,10 +595,10 @@
 +
 +    public void SetupStone(World world, Random R)
 +    {
-+        int[] surface = getRock(R.nextInt(25));
-+        int[] layer1 = getRock(R.nextInt(25));
-+        int[] layer2 = getRock(R.nextInt(25));
-+        int[] layer3 = getRock(R.nextInt(25));
++        int[] surface = getRock(R.nextInt(layers.length));
++        int[] layer1 = getRock(R.nextInt(layers.length));
++        int[] layer2 = getRock(R.nextInt(layers.length));
++        int[] layer3 = getRock(R.nextInt(layers.length));
 +
 +        SurfaceType = 	surface[0];
 +        SurfaceMeta = 	surface[1];
@@ -634,37 +634,36 @@
 +            this.DirtID = Block.sand.blockID;
 +        }
 +    }
++    
++    static int[][] layers = {
++            {mod_TFC_Core.terraStoneIgIn.blockID,0},
++            {mod_TFC_Core.terraStoneIgIn.blockID,0},
++            {mod_TFC_Core.terraStoneIgIn.blockID,1},
++            {mod_TFC_Core.terraStoneIgIn.blockID,2},
++            {mod_TFC_Core.terraStoneSed.blockID,3},
++            {mod_TFC_Core.terraStoneSed.blockID,4},
++            {mod_TFC_Core.terraStoneSed.blockID,5},
++            {mod_TFC_Core.terraStoneSed.blockID,6},
++            {mod_TFC_Core.terraStoneSed.blockID,7},
++            {mod_TFC_Core.terraStoneSed.blockID,8},
++            {mod_TFC_Core.terraStoneSed.blockID,9},
++            {mod_TFC_Core.terraStoneSed.blockID,10},
++            {mod_TFC_Core.terraStoneSed.blockID,11},
++            {mod_TFC_Core.terraStoneSed.blockID,12},
++            {mod_TFC_Core.terraStoneIgEx.blockID,13},
++            {mod_TFC_Core.terraStoneIgEx.blockID,14},
++            {mod_TFC_Core.terraStoneIgEx.blockID,15},
++            {mod_TFC_Core.terraStoneIgEx.blockID,16},
++            {mod_TFC_Core.terraStoneMM.blockID,17},
++            {mod_TFC_Core.terraStoneMM.blockID,18},
++            {mod_TFC_Core.terraStoneMM.blockID,19},
++            {mod_TFC_Core.terraStoneMM.blockID,20},
++            {mod_TFC_Core.terraStoneMM.blockID,21},
++            {mod_TFC_Core.terraStoneMM.blockID,22}};
 +
 +    private int[] getRock(int m)
 +    {
-+        int[][] d = {
-+                {mod_TFC_Core.terraStoneIgIn.blockID,0},
-+                {mod_TFC_Core.terraStoneIgIn.blockID,0},
-+                {mod_TFC_Core.terraStoneIgIn.blockID,0},
-+                {mod_TFC_Core.terraStoneIgIn.blockID,1},
-+                {mod_TFC_Core.terraStoneIgIn.blockID,2},
-+                {mod_TFC_Core.terraStoneSed.blockID,3},
-+                {mod_TFC_Core.terraStoneSed.blockID,4},
-+                {mod_TFC_Core.terraStoneSed.blockID,5},
-+                {mod_TFC_Core.terraStoneSed.blockID,6},
-+                {mod_TFC_Core.terraStoneSed.blockID,7},
-+                {mod_TFC_Core.terraStoneSed.blockID,8},
-+                {mod_TFC_Core.terraStoneSed.blockID,9},
-+                {mod_TFC_Core.terraStoneSed.blockID,10},
-+                {mod_TFC_Core.terraStoneSed.blockID,11},
-+                {mod_TFC_Core.terraStoneSed.blockID,12},
-+                {mod_TFC_Core.terraStoneIgEx.blockID,13},
-+                {mod_TFC_Core.terraStoneIgEx.blockID,14},
-+                {mod_TFC_Core.terraStoneIgEx.blockID,15},
-+                {mod_TFC_Core.terraStoneIgEx.blockID,16},
-+                {mod_TFC_Core.terraStoneMM.blockID,17},
-+                {mod_TFC_Core.terraStoneMM.blockID,18},
-+                {mod_TFC_Core.terraStoneMM.blockID,19},
-+                {mod_TFC_Core.terraStoneMM.blockID,20},
-+                {mod_TFC_Core.terraStoneMM.blockID,21},
-+                {mod_TFC_Core.terraStoneMM.blockID,22}};
-+
-+        return d[m];
++        return layers[m];
 +    }
 +
 +    public BiomeGenBase GetBiomeByName(String name)

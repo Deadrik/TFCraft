@@ -549,16 +549,16 @@ public class ClientProxy implements IProxy {
 		//meltedmetal
 		for(int i= 0; i < Names.length; i++)
 		{
-			ModLoader.addLocalization("item.terraMelted"+Names[i].replace(" ", "")+".name", "Unshaped "+Names[i]);
+			ModLoader.addLocalization("item.Unshaped"+Names[i].replace(" ", "")+".name", "Unshaped "+Names[i]);
 		}
 
-		ModLoader.addLocalization("item.terraMeltedHCBlackSteel.name", "Unshaped High Carbon Black Steel");
-		ModLoader.addLocalization("item.terraMeltedHCBlueSteel.name", "Unshaped High Carbon Blue Steel");
-		ModLoader.addLocalization("item.terraMeltedHCRedSteel.name", "Unshaped High Carbon Red Steel");
-		ModLoader.addLocalization("item.terraMeltedHCSteel.name", "Unshaped High Carbon Steel");
-		ModLoader.addLocalization("item.terraMeltedWeakSteel.name", "Unshaped Weak Steel");
-		ModLoader.addLocalization("item.terraMeltedWeakBlueSteel.name", "Unshaped Weak Blue Steel");
-		ModLoader.addLocalization("item.terraMeltedWeakRedSteel.name", "Unshaped Weak Red Steel");
+		ModLoader.addLocalization("item.UnshapedHCBlackSteel.name", "Unshaped High Carbon Black Steel");
+		ModLoader.addLocalization("item.UnshapedHCBlueSteel.name", "Unshaped High Carbon Blue Steel");
+		ModLoader.addLocalization("item.UnshapedHCRedSteel.name", "Unshaped High Carbon Red Steel");
+		ModLoader.addLocalization("item.UnshapedHCSteel.name", "Unshaped High Carbon Steel");
+		ModLoader.addLocalization("item.UnshapedWeakSteel.name", "Unshaped Weak Steel");
+		ModLoader.addLocalization("item.UnshapedWeakBlueSteel.name", "Unshaped Weak Blue Steel");
+		ModLoader.addLocalization("item.UnshapedWeakRedSteel.name", "Unshaped Weak Red Steel");
 
 		ModLoader.addLocalization("item.terraHCBlackSteelIngot.name", "High Carbon Black Steel Ingot");
 		ModLoader.addLocalization("item.terraHCBlueSteelIngot.name", "High Carbon Blue Steel Ingot");
