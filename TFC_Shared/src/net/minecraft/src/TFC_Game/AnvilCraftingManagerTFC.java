@@ -63,12 +63,12 @@ public class AnvilCraftingManagerTFC
         return null;
     }
 	
-	public ItemStack findCompleteRecipe(AnvilRecipe recipe)
+	public ItemStack findCompleteRecipe(AnvilRecipe recipe, int[] rules)
     {
         for (int k = 0; k < recipes.size(); k++)
         {
             AnvilRecipe irecipe = (AnvilRecipe)recipes.get(k);
-            if (irecipe.isComplete(recipe))
+            if (irecipe.isComplete(recipe, rules))
             {
                 return irecipe.getCraftingResult();
             }

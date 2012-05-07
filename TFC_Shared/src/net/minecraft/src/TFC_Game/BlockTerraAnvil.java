@@ -15,6 +15,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
@@ -31,10 +32,11 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 	private Class EntityClass;
 
 	private Random random = new Random();
-	public BlockTerraAnvil(int i, Class tClass)
+	public BlockTerraAnvil(int i,int tex,  Class tClass)
 	{
 		super(i, Material.iron);
 		EntityClass = tClass;
+		this.blockIndexInTexture = tex;
 	}
 
 	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
@@ -105,17 +107,17 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 		int offset = meta * 2;
 
 		if(i == 0) {
-			return 193 + offset;
+			return blockIndexInTexture+ 1 + offset;
 		} else if(i == 1) {
-			return 193 + offset;
+			return blockIndexInTexture+ 1 + offset;
 		} else if(i == 2) {
-			return 192 + offset;
+			return blockIndexInTexture + offset;
 		} else if(i == 3) {
-			return 192 + offset;
+			return blockIndexInTexture + offset;
 		} else if(i == 4) {
-			return 192 + offset;
+			return blockIndexInTexture + offset;
 		} else {
-			return 192 + offset;
+			return blockIndexInTexture + offset;
 		}
 	}
 

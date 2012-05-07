@@ -231,7 +231,7 @@ public class ContainerTerraAnvil extends Container
 					itemstack1.stackSize--;
 				}
 				else if(itemstack1.itemID == mod_TFC_Game.HammerHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.SawBladePlan.shiftedIndex ||
-						itemstack1.itemID == mod_TFC_Game.PickaxeHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.ProPickBladePlan.shiftedIndex ||
+						itemstack1.itemID == mod_TFC_Game.PickaxeHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.ProPickHeadPlan.shiftedIndex ||
 						itemstack1.itemID == mod_TFC_Game.ChiselHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.AxeHeadPlan.shiftedIndex ||
 						itemstack1.itemID == mod_TFC_Game.SwordBladePlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.HoeHeadPlan.shiftedIndex ||
 						itemstack1.itemID == mod_TFC_Game.ShovelHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.MaceHeadPlan.shiftedIndex)

@@ -113,6 +113,7 @@ public class GuiTerraAnvil extends GuiContainerTFC
         if(AnvilEntity.workRecipe != null)
         {
             CraftingRule[] Rules = AnvilEntity.workRecipe.getRules();
+            int[] ItemRules = AnvilEntity.getItemRules();
             for(int i = 0; i < 3; i++)
             {
                 int yOffset = 8 * i;
@@ -120,7 +121,7 @@ public class GuiTerraAnvil extends GuiContainerTFC
 
                 if(i == 0)
                 {
-                    if(Rules[0] != null)
+                    if(Rules[0].matches(ItemRules, 0))
                         s += "\2472";
                     else
                         s += "\2474";
@@ -130,7 +131,7 @@ public class GuiTerraAnvil extends GuiContainerTFC
                 }
                 else if(i == 1)
                 {
-                    if(Rules[1] != null)
+                    if(Rules[1].matches(ItemRules, 1))
                         s += "\2472";
                     else
                         s += "\2474";
@@ -139,7 +140,7 @@ public class GuiTerraAnvil extends GuiContainerTFC
                 }
                 else if(i == 2)
                 {
-                    if(Rules[2] != null)
+                    if(Rules[2].matches(ItemRules, 2))
                         s += "\2472";
                     else
                         s += "\2474";

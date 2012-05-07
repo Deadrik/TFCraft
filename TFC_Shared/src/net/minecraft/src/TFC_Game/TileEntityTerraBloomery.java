@@ -344,39 +344,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     {
         return (int)(fireTemperature * s) / 2500;
     }
-    public void HandleFuelStack()
-    {
-        Random random = new Random();
-        if(fireItemStacks[7] == null)
-        {
-            if(random.nextBoolean() && fireItemStacks[6] != null)
-            {
-                fireItemStacks[7] = fireItemStacks[6];
-                fireItemStacks[6] = null;
-            }
-            else
-            {
-                fireItemStacks[7] = fireItemStacks[8];
-                fireItemStacks[8] = null;
-            }
-        }
-        if(fireItemStacks[6] == null)
-        {
-            if(fireItemStacks[5] != null)
-            {
-                fireItemStacks[6] = fireItemStacks[5];
-                fireItemStacks[5] = null;
-            }
-        }
-        if(fireItemStacks[8] == null)
-        {
-            if(fireItemStacks[9] != null)
-            {
-                fireItemStacks[8] = fireItemStacks[9];
-                fireItemStacks[9] = null;
-            }
-        }
-    }
 
     public void HandleTemperature()
     {
@@ -543,6 +510,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             if(fireItemStacks[i] == null)
             {
                 fireItemStacks[i] = is;
+                OreType = ItemTerraSmallOre.getItemNameDamage(is.getItemDamage());
                 return true;
             }
         }
@@ -564,6 +532,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                     {
                         work.setItemDamage(amt);
                     } else {
+                        oreCount--;
+                        
                         return true;
                     }
                 }
@@ -575,6 +545,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             if(outputItemStacks[i] == null)
             {
                 outputItemStacks[i] = work;
+                oreCount--;
                 TFCHeat.SetTemperature(outputItemStacks[i], TFCHeat.GetTemperature(is2));
                 return true;
             }
@@ -625,7 +596,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         {
             if(outputItemStacks[i] != null)
             {
-                out += outputItemStacks[i].getItemDamage();
+                out += 100-outputItemStacks[i].getItemDamage();
             }
         }
 
@@ -638,8 +609,13 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     {
         if(!worldObj.isRemote)
         {
-            if(outCount > 0)
-                outCount = getOutputCount();
+            outCount = getOutputCount();
+            if(outCount < 0)
+                outCount = 0;
+            if(oreCount < 0)
+                oreCount = 0;
+            if(charcoalCount < 0)
+                charcoalCount = 0;
 
             if(oreCount == 0 && outCount == 0)
             {
@@ -683,7 +659,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             /*Create a list of all the items that are falling into the stack */
             List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
                     xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
-                    xCoord+direction[0]+1, yCoord+moltenCount+2, zCoord+direction[1]+1));
+                    xCoord+direction[0]+1, yCoord+moltenCount+1, zCoord+direction[1]+1));
 
             /*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
             if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1]))

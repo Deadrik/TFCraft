@@ -3,32 +3,29 @@ package net.minecraft.src.TFC_Game;
 import java.util.Hashtable;
 import java.util.Random;
 
-import com.google.common.collect.*;
-
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.General.AnvilRecipe;
+import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.CraftingRule;
 
 public class TFC_Game 
 {
 	public static Hashtable AnvilWeldRecipes;
-	public static com.google.common.collect.Multimap<String,Object[]> RecipeMap;
 
-	public static Item[] MeltedMetal = {mod_TFC_Game.terraMeltedBismuth,mod_TFC_Game.terraMeltedBismuthBronze,mod_TFC_Game.terraMeltedBlackBronze,
-		mod_TFC_Game.terraMeltedBlackSteel,mod_TFC_Game.terraMeltedBlueSteel,mod_TFC_Game.terraMeltedBrass,mod_TFC_Game.terraMeltedBronze,
-		mod_TFC_Game.terraMeltedCopper,mod_TFC_Game.terraMeltedGold,
-		mod_TFC_Game.terraMeltedWroughtIron,mod_TFC_Game.terraMeltedLead,mod_TFC_Game.terraMeltedNickel,mod_TFC_Game.terraMeltedPigIron,
-		mod_TFC_Game.terraMeltedPlatinum,mod_TFC_Game.terraMeltedRedSteel,mod_TFC_Game.terraMeltedRoseGold,mod_TFC_Game.terraMeltedSilver,
-		mod_TFC_Game.terraMeltedSteel,mod_TFC_Game.terraMeltedSterlingSilver,
-		mod_TFC_Game.terraMeltedTin,mod_TFC_Game.terraMeltedZinc, mod_TFC_Game.terraMeltedHCSteel, mod_TFC_Game.terraMeltedWeakSteel,
-		mod_TFC_Game.terraMeltedHCBlackSteel, mod_TFC_Game.terraMeltedHCBlueSteel, mod_TFC_Game.terraMeltedHCRedSteel, 
-		mod_TFC_Game.terraMeltedWeakBlueSteel, mod_TFC_Game.terraMeltedWeakRedSteel};
+	public static Item[] MeltedMetal = {mod_TFC_Game.UnshapedBismuth,mod_TFC_Game.UnshapedBismuthBronze,mod_TFC_Game.UnshapedBlackBronze,
+		mod_TFC_Game.UnshapedBlackSteel,mod_TFC_Game.UnshapedBlueSteel,mod_TFC_Game.UnshapedBrass,mod_TFC_Game.UnshapedBronze,
+		mod_TFC_Game.UnshapedCopper,mod_TFC_Game.UnshapedGold,
+		mod_TFC_Game.UnshapedWroughtIron,mod_TFC_Game.UnshapedLead,mod_TFC_Game.UnshapedNickel,mod_TFC_Game.UnshapedPigIron,
+		mod_TFC_Game.UnshapedPlatinum,mod_TFC_Game.UnshapedRedSteel,mod_TFC_Game.UnshapedRoseGold,mod_TFC_Game.UnshapedSilver,
+		mod_TFC_Game.UnshapedSteel,mod_TFC_Game.UnshapedSterlingSilver,
+		mod_TFC_Game.UnshapedTin,mod_TFC_Game.UnshapedZinc, mod_TFC_Game.UnshapedHCSteel, mod_TFC_Game.UnshapedWeakSteel,
+		mod_TFC_Game.UnshapedHCBlackSteel, mod_TFC_Game.UnshapedHCBlueSteel, mod_TFC_Game.UnshapedHCRedSteel, 
+		mod_TFC_Game.UnshapedWeakBlueSteel, mod_TFC_Game.UnshapedWeakRedSteel};
 
 
 	public static Item[] Hammers = {mod_TFC_Game.BismuthHammer,mod_TFC_Game.BismuthBronzeHammer,mod_TFC_Game.BlackBronzeHammer,
@@ -39,7 +36,6 @@ public class TFC_Game
 	static
 	{
 		AnvilWeldRecipes = new Hashtable();
-		RecipeMap = HashMultimap.create();
 
 		AnvilWeldRecipes.put("item.terraBismuthIngot|item.terraBismuthIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBismuthIngot2x)});
 		AnvilWeldRecipes.put("item.terraBismuthBronzeIngot|item.terraBismuthBronzeIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot2x)});
@@ -64,185 +60,6 @@ public class TFC_Game
 		AnvilWeldRecipes.put("item.terraWeakSteelIngot|item.terraPigIronIngot", new Object[]{new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot)});
 		AnvilWeldRecipes.put("item.terraWeakBlueSteelIngot|item.terraBlackSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot)});
 		AnvilWeldRecipes.put("item.terraWeakRedSteelIngot|item.terraBlackSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraHCRedSteelIngot)});
-
-		////////////////////////////////////////CraftingValue, Tolerance, Schematic,  Result,                  Forging Rules,        			Crafting Variance, Anvil Level
-		//RecipeMap.put("tile.stonebrick", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terra), new int[]{0,-1,-1},                    	0, 				0});
-		RecipeMap.put("item.terraMeltedBismuth", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBismuthIngot), new int[]{0,-1,-1},            	0, 				0});
-		RecipeMap.put("item.terraMeltedBismuthBronze", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new int[]{0,-1,-1},	0, 				1});
-		RecipeMap.put("item.terraMeltedBlackBronze", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new int[]{0,-1,-1},   	0, 				2});
-		RecipeMap.put("item.terraMeltedBlackSteel", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new int[]{0,-1,-1},			0, 				4});
-		RecipeMap.put("item.terraMeltedBlueSteel", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new int[]{0,-1,-1},			0, 				5});
-		RecipeMap.put("item.terraMeltedBrass", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBrassIngot), new int[]{0,-1,-1},					0, 				1});
-		RecipeMap.put("item.terraMeltedBronze", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraBronzeIngot), new int[]{0,-1,-1},					0, 				1});
-		RecipeMap.put("item.terraMeltedCopper", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraCopperIngot), new int[]{0,-1,-1},					0, 				0});
-		RecipeMap.put("item.terraMeltedGold", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraGoldIngot), new int[]{0,-1,-1},						0, 				1});
-		RecipeMap.put("item.terraMeltedWroughtIron", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new int[]{0,-1,-1},		0, 				2});
-		RecipeMap.put("item.terraMeltedLead", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraLeadIngot), new int[]{0,-1,-1},						0, 				0});
-		RecipeMap.put("item.terraMeltedNickel", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraNickelIngot), new int[]{0,-1,-1},					0, 				3});
-		RecipeMap.put("item.terraMeltedPigIron", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraPigIronIngot), new int[]{0,-1,-1},				0, 				2});
-		RecipeMap.put("item.terraMeltedPlatinum", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraPlatinumIngot), new int[]{0,-1,-1},				0, 				3});
-		RecipeMap.put("item.terraMeltedRedSteel", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraRedSteelIngot), new int[]{0,-1,-1},				0, 				5});
-		RecipeMap.put("item.terraMeltedRoseGold", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new int[]{0,-1,-1},				0, 				1});
-		RecipeMap.put("item.terraMeltedSilver", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraSilverIngot), new int[]{0,-1,-1},					0, 				1});
-		RecipeMap.put("item.terraMeltedSteel", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraSteelIngot), new int[]{0,-1,-1},					0, 				3});
-		RecipeMap.put("item.terraMeltedSterlingSilver", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraSterlingSilverIngot), new int[]{0,-1,-1},	0, 				1});
-		RecipeMap.put("item.terraMeltedTin", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraTinIngot), new int[]{0,-1,-1},						0, 				0});
-		RecipeMap.put("item.terraMeltedZinc", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraZincIngot), new int[]{0,-1,-1},						0, 				0});
-		//this is for making pig iron into wrought iron
-		RecipeMap.put("item.terraPigIronIngot", new Object[]{9,0,null,new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new int[]{0,0,0},				0, 				2});
-
-		RecipeMap.put("item.terraMeltedWeakBlueSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraWeakBlueSteelIngot), new int[]{0,0,4},      0,              5});
-        RecipeMap.put("item.terraMeltedWeakRedSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraWeakRedSteelIngot), new int[]{0,0,4},          0,              5});
-        RecipeMap.put("item.terraMeltedWeakSteel", new Object[]{37,0,null,new ItemStack(mod_TFC_Core.terraWeakSteelIngot), new int[]{0,0,4},                0,              3});
-		RecipeMap.put("item.terraMeltedHCBlackSteel", new Object[]{47,0,null,new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot), new int[]{0,0,4},		0, 				4});
-		RecipeMap.put("item.terraMeltedHCBlueSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot), new int[]{0,0,4},		0, 				5});
-		RecipeMap.put("item.terraMeltedHCRedSteel", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraHCRedSteelIngot), new int[]{0,0,4},			0, 				5});
-		RecipeMap.put("item.terraMeltedHCSteel", new Object[]{37,0,null,new ItemStack(mod_TFC_Core.terraHCSteelIngot), new int[]{0,0,4},				0, 				3});
-		RecipeMap.put("item.terraHCBlackSteelIngot", new Object[]{47,0,null,new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new int[]{0,0,4},			0, 				4});
-		RecipeMap.put("item.terraHCBlueSteelIngot", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new int[]{0,0,4},			0, 				5});
-		RecipeMap.put("item.terraHCRedSteelIngot", new Object[]{57,0,null,new ItemStack(mod_TFC_Core.terraRedSteelIngot), new int[]{0,0,4},				0, 				5});
-		RecipeMap.put("item.terraHCSteelIngot", new Object[]{37,0,null,new ItemStack(mod_TFC_Core.terraSteelIngot), new int[]{0,0,4},					0, 				3});
-
-		////////////////////////////////////////CraftingValue, Tolerance, Schematic,  Result,                  													Forging Rules, 		Crafting Variance, Anvil Level
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BismuthPickaxeHead), new int[]{-1,-1,3},				2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzePickaxeHead), new int[]{-1,-1,3},	2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzePickaxeHead), new int[]{-1,-1,3},		2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelPickaxeHead), new int[]{-1,-1,3},		2, 				5});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelPickaxeHead), new int[]{-1,-1,3},			2, 				6});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.BronzePickaxeHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.CopperPickaxeHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronPickaxeHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelPickaxeHead), new int[]{-1,-1,3},			2, 				6});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldPickaxeHead), new int[]{-1,-1,3},			2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.SteelPickaxeHead), new int[]{-1,-1,3},					2, 				4});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.TinPickaxeHead), new int[]{-1,-1,3},						2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{27,0,mod_TFC_Game.PickaxeHeadPlan,new ItemStack(mod_TFC_Game.ZincPickaxeHead), new int[]{-1,-1,3},					2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BismuthShovelHead), new int[]{-1,-1,3},				2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzeShovelHead), new int[]{-1,-1,3},	2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzeShovelHead), new int[]{-1,-1,3},		2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelShovelHead), new int[]{-1,-1,3},		2, 				4});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelShovelHead), new int[]{-1,-1,3},			2, 				5});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.BronzeShovelHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.CopperShovelHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronShovelHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.RedSteelShovelHead), new int[]{-1,-1,3},			2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldShovelHead), new int[]{-1,-1,3},			2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.SteelShovelHead), new int[]{-1,-1,3},					2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.TinShovelHead), new int[]{-1,-1,3},						2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{29,0,mod_TFC_Game.ShovelHeadPlan,new ItemStack(mod_TFC_Game.ZincShovelHead), new int[]{-1,-1,3},					2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BismuthHoeHead), new int[]{-1,-1,3},						2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzeHoeHead), new int[]{-1,-1,3},			2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzeHoeHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelHoeHead), new int[]{-1,-1,3},				2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelHoeHead), new int[]{-1,-1,3},					2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.BronzeHoeHead), new int[]{-1,-1,3},						2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.CopperHoeHead), new int[]{-1,-1,3},						2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronHoeHead), new int[]{-1,-1,3},						2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelHoeHead), new int[]{-1,-1,3},					2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldHoeHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.SteelHoeHead), new int[]{-1,-1,3},							2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.TinHoeHead), new int[]{-1,-1,3},								2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{26,0,mod_TFC_Game.HoeHeadPlan,new ItemStack(mod_TFC_Game.ZincHoeHead), new int[]{-1,-1,3},							2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BismuthAxeHead), new int[]{-1,-1,3},						2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzeAxeHead), new int[]{-1,-1,3},			2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzeAxeHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelAxeHead), new int[]{-1,-1,3},				2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelAxeHead), new int[]{-1,-1,3},					2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.BronzeAxeHead), new int[]{-1,-1,3},						2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.CopperAxeHead), new int[]{-1,-1,3},						2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronAxeHead), new int[]{-1,-1,3},						2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.RedSteelAxeHead), new int[]{-1,-1,3},					2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldAxeHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.SteelAxeHead), new int[]{-1,-1,3},							2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.TinAxeHead), new int[]{-1,-1,3},								2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{31,0,mod_TFC_Game.AxeHeadPlan,new ItemStack(mod_TFC_Game.ZincAxeHead), new int[]{-1,-1,3},							2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BismuthHammerHead), new int[]{-1,-1,3},				2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzeHammerHead), new int[]{-1,-1,3},	2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzeHammerHead), new int[]{-1,-1,3},		2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelHammerHead), new int[]{-1,-1,3},			2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelHammerHead), new int[]{-1,-1,3},			2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.BronzeHammerHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.CopperHammerHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronHammerHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.RedSteelHammerHead), new int[]{-1,-1,3},				2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldHammerHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.SteelHammerHead), new int[]{-1,-1,3},					2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.TinHammerHead), new int[]{-1,-1,3},						2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{36,0,mod_TFC_Game.HammerHeadPlan,new ItemStack(mod_TFC_Game.ZincHammerHead), new int[]{-1,-1,3},						2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BismuthSwordHead), new int[]{-1,0,4},				2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BismuthBronzeSwordHead), new int[]{-1,0,4},	2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BlackBronzeSwordHead), new int[]{-1,0,4},		2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BlackSteelSwordHead), new int[]{-1,0,4},			2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BlueSteelSwordHead), new int[]{-1,0,4},			2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.BronzeSwordHead), new int[]{-1,0,4},					2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.CopperSwordHead), new int[]{-1,0,4},					2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.WroughtIronSwordHead), new int[]{-1,0,4},				2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.RedSteelSwordHead), new int[]{-1,0,4},				2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.RoseGoldSwordHead), new int[]{-1,0,4},				2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.SteelSwordHead), new int[]{-1,0,4},					2, 				3});
-		RecipeMap.put("item."+"terraTinIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.TinSwordHead), new int[]{-1,0,4},						2, 				0});
-		RecipeMap.put("item."+"terraZincIngot2x",  new Object[]{43,0,mod_TFC_Game.SwordBladePlan,new ItemStack(mod_TFC_Game.ZincSwordHead), new int[]{-1,0,4},						2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BismuthMaceHead), new int[]{-1,-1,4},					2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzeMaceHead), new int[]{-1,-1,4},		2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzeMaceHead), new int[]{-1,-1,4},			2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelMaceHead), new int[]{-1,-1,4},				2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelMaceHead), new int[]{-1,-1,4},				2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.BronzeMaceHead), new int[]{-1,-1,4},						2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.CopperMaceHead), new int[]{-1,-1,4},						2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronMaceHead), new int[]{-1,-1,4},					2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.RedSteelMaceHead), new int[]{-1,-1,4},					2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldMaceHead), new int[]{-1,-1,4},					2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.SteelMaceHead), new int[]{-1,-1,4},						2, 				3});
-		RecipeMap.put("item."+"terraTinIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.TinMaceHead), new int[]{-1,-1,4},							2, 				0});
-		RecipeMap.put("item."+"terraZincIngot2x",  new Object[]{39,0,mod_TFC_Game.MaceHeadPlan,new ItemStack(mod_TFC_Game.ZincMaceHead), new int[]{-1,-1,4},							2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BismuthChiselHead), new int[]{-1,-1,3},				2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BismuthBronzeChiselHead), new int[]{-1,-1,3},	2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BlackBronzeChiselHead), new int[]{-1,-1,3},		2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BlackSteelChiselHead), new int[]{-1,-1,3},			2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BlueSteelChiselHead), new int[]{-1,-1,3},			2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.BronzeChiselHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.CopperChiselHead), new int[]{-1,-1,3},					2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.WroughtIronChiselHead), new int[]{-1,-1,3},				2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.RedSteelChiselHead), new int[]{-1,-1,3},				2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.RoseGoldChiselHead), new int[]{-1,-1,3},				2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.SteelChiselHead), new int[]{-1,-1,3},					2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.TinChiselHead), new int[]{-1,-1,3},						2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{33,0,mod_TFC_Game.ChiselHeadPlan,new ItemStack(mod_TFC_Game.ZincChiselHead), new int[]{-1,-1,3},						2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BismuthProPickHead), new int[]{-1,0,3},						2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BismuthBronzeProPickHead), new int[]{-1,0,3},			2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BlackBronzeProPickHead), new int[]{-1,0,3},				2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BlackSteelProPickHead), new int[]{-1,0,3},				2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BlueSteelProPickHead), new int[]{-1,0,3},					2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.BronzeProPickHead), new int[]{-1,0,3},						2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.CopperProPickHead), new int[]{-1,0,3},						2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.WroughtIronProPickHead), new int[]{-1,0,3},					2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.RedSteelProPickHead), new int[]{-1,0,3},					2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.RoseGoldProPickHead), new int[]{-1,0,3},					2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.SteelProPickHead), new int[]{-1,0,3},							2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.TinProPickHead), new int[]{-1,0,3},								2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{41,0,mod_TFC_Game.ProPickBladePlan,new ItemStack(mod_TFC_Game.ZincProPickHead), new int[]{-1,0,3},							2, 				0});
-
-		RecipeMap.put("item."+"terraBismuthIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BismuthSawHead), new int[]{0,0,-1},						2, 				0});
-		RecipeMap.put("item."+"terraBismuthBronzeIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BismuthBronzeSawHead), new int[]{0,0,-1},			2, 				1});
-		RecipeMap.put("item."+"terraBlackBronzeIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BlackBronzeSawHead), new int[]{0,0,-1},				2, 				2});
-		RecipeMap.put("item."+"terraBlackSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BlackSteelSawHead), new int[]{0,0,-1},				2, 				3});
-		RecipeMap.put("item."+"terraBlueSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BlueSteelSawHead), new int[]{0,0,-1},					2, 				4});
-		RecipeMap.put("item."+"terraBronzeIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.BronzeSawHead), new int[]{0,0,-1},						2, 				1});
-		RecipeMap.put("item."+"terraCopperIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.CopperSawHead), new int[]{0,0,-1},						2, 				1});
-		RecipeMap.put("item."+"terraWroughtIronIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.WroughtIronSawHead), new int[]{0,0,-1},					2, 				2});
-		RecipeMap.put("item."+"terraRedSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.RedSteelSawHead), new int[]{0,0,-1},					2, 				5});
-		RecipeMap.put("item."+"terraRoseGoldIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.RoseGoldSawHead), new int[]{0,0,-1},					2, 				1});
-		RecipeMap.put("item."+"terraSteelIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.SteelSawHead), new int[]{0,0,-1},							2, 				3});
-		RecipeMap.put("item."+"terraTinIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.TinSawHead), new int[]{0,0,-1},								2, 				0});
-		RecipeMap.put("item."+"terraZincIngot",  new Object[]{39,0,mod_TFC_Game.SawBladePlan,new ItemStack(mod_TFC_Game.ZincSawHead), new int[]{0,0,-1},							2, 				0});
 
 	}
 
@@ -327,8 +144,215 @@ public class TFC_Game
 	public static void registerAnvilRecipes(Random R)
 	{
 	    AnvilCraftingManagerTFC manager = AnvilCraftingManagerTFC.getInstance();
+	    int v = -5 + R.nextInt(5);
 	    
-	    manager.addRecipe(new AnvilRecipe(R,mod_TFC_Game.terraMeltedTin, null,9,CraftingRule.HITLAST,CraftingRule.HITSECONDFROMLAST,CraftingRule.ANY, false, 0));
+	    /**
+	     * Weld Recipes
+	     */
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot),new ItemStack(mod_TFC_Core.terraBismuthIngot),true,AnvilReq.STONE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot),new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot),new ItemStack(mod_TFC_Core.terraBlackBronzeIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot),new ItemStack(mod_TFC_Core.terraBlackSteelIngot),true,AnvilReq.STEEL));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot),new ItemStack(mod_TFC_Core.terraBlueSteelIngot),true,AnvilReq.BLACKSTEEL));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBrassIngot),new ItemStack(mod_TFC_Core.terraBrassIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot),new ItemStack(mod_TFC_Core.terraBronzeIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot),new ItemStack(mod_TFC_Core.terraCopperIngot),true,AnvilReq.STONE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraGoldIngot),new ItemStack(mod_TFC_Core.terraGoldIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot),new ItemStack(mod_TFC_Core.terraWroughtIronIngot),true,AnvilReq.BRONZE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraLeadIngot),new ItemStack(mod_TFC_Core.terraLeadIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraNickelIngot),new ItemStack(mod_TFC_Core.terraNickelIngot),true,AnvilReq.WROUGHTIRON));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraPigIronIngot),new ItemStack(mod_TFC_Core.terraPigIronIngot),true,AnvilReq.BRONZE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraPlatinumIngot),new ItemStack(mod_TFC_Core.terraPlatinumIngot),true,AnvilReq.BRONZE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot),new ItemStack(mod_TFC_Core.terraRedSteelIngot),true,AnvilReq.BLACKSTEEL));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot),new ItemStack(mod_TFC_Core.terraRoseGoldIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSilverIngot),new ItemStack(mod_TFC_Core.terraSilverIngot),true,AnvilReq.COPPER));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot),new ItemStack(mod_TFC_Core.terraSteelIngot),true,AnvilReq.WROUGHTIRON));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSterlingSilverIngot),new ItemStack(mod_TFC_Core.terraSterlingSilverIngot),true,AnvilReq.BRONZE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot),new ItemStack(mod_TFC_Core.terraTinIngot),true,AnvilReq.STONE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot),new ItemStack(mod_TFC_Core.terraZincIngot),true,AnvilReq.STONE));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWeakSteelIngot),new ItemStack(mod_TFC_Core.terraPigIronIngot),true,AnvilReq.WROUGHTIRON));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWeakBlueSteelIngot),new ItemStack(mod_TFC_Core.terraBlackSteelIngot),true,AnvilReq.BLACKSTEEL));
+	    manager.addWeldRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWeakRedSteelIngot),new ItemStack(mod_TFC_Core.terraBlackSteelIngot),true,AnvilReq.BLACKSTEEL));
+	    
+	    /**
+	     * Normal Recipes Start Here
+	     */
+	    //Ingots
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBismuth), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Core.terraBismuthIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBismuthBronze), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBlackBronze), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraBlackBronzeIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBlackSteel), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Core.terraBlackSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBlueSteel), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraBlueSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBrass), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraBrassIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedBronze), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraBronzeIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedCopper), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Core.terraCopperIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedGold), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraGoldIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedWroughtIron), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Core.terraWroughtIronIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedLead), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraLeadIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedNickel), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Core.terraNickelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedPigIron), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Core.terraPigIronIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedPlatinum), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Core.terraPlatinumIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedRedSteel), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraRedSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedRoseGold), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraRoseGoldIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedSilver), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Core.terraSilverIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedSteel), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Core.terraSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedSterlingSilver), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Core.terraSterlingSilverIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedTin), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Core.terraTinIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedZinc), null,19,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Core.terraZincIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraPigIronIngot), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Core.terraWroughtIronIngot))); 
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedWeakBlueSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraWeakBlueSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedWeakRedSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraWeakRedSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedWeakSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Core.terraWeakSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedHCBlackSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedHCBlueSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedHCRedSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraHCRedSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Game.UnshapedHCSteel), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Core.terraHCSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Core.terraBlackSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraBlueSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraHCRedSteelIngot), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Core.terraRedSteelIngot)));
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraHCSteelIngot), null,89,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.HITTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Core.terraSteelIngot)));
+	    
+	    //Picks
+	    manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzePickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzePickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzePickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.RoseGoldPickaxeHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinPickaxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.PickaxeHeadPlan),27+v,CraftingRule.PUNCHLAST, CraftingRule.BENDLASTTWO, CraftingRule.DRAWLASTTWO, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincPickaxeHead)));
+        //shovels
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.RoseGoldShovelHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinShovelHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.ShovelHeadPlan),28+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.HITLASTTHREE, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincShovelHead)));
+        //axes
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.RoseGoldAxeHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinAxeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.AxeHeadPlan),29+v,CraftingRule.PUNCHLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.UPSETTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincAxeHead)));
+        //hoes
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldHoeHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinHoeHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.HoeHeadPlan),30+v,CraftingRule.PUNCHLAST, CraftingRule.HITLASTTHREE, CraftingRule.BENDLASTTHREE, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincHoeHead)));
+        //Hammers
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldHammerHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinHammerHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.HammerHeadPlan),31+v,CraftingRule.PUNCHLAST, CraftingRule.ANY, CraftingRule.SHRINKNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincHammerHead)));
+        //Chisels
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldChiselHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinChiselHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.ChiselHeadPlan),32+v,CraftingRule.HITLAST, CraftingRule.HITNOTLAST, CraftingRule.DRAWNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincChiselHead)));
+        //ProPicks
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldProPickHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinProPickHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.ProPickHeadPlan),33+v,CraftingRule.PUNCHLAST, CraftingRule.DRAWNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincProPickHead)));
+        //Saws
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldSawHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinSawHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.SawBladePlan),34+v,CraftingRule.HITLAST, CraftingRule.HITSECONDFROMLAST, CraftingRule.ANY, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincSawHead)));
+        //Swords
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldSwordHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinSwordHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot), new ItemStack(mod_TFC_Game.SwordBladePlan),45+v,CraftingRule.HITLAST, CraftingRule.BENDSECONDFROMLAST, CraftingRule.BENDTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincSwordHead)));
+        //Maces
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.BismuthMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(mod_TFC_Game.BismuthBronzeMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(mod_TFC_Game.BlackBronzeMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(mod_TFC_Game.BlackSteelMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BLUESTEEL, new ItemStack(mod_TFC_Game.BlueSteelMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraBronzeIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.BRONZE, new ItemStack(mod_TFC_Game.BronzeMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraCopperIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.COPPER, new ItemStack(mod_TFC_Game.CopperMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(mod_TFC_Game.WroughtIronMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRedSteelIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.REDSTEEL, new ItemStack(mod_TFC_Game.RedSteelMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.ROSEGOLD, new ItemStack(mod_TFC_Game.RoseGoldMaceHead)));       
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraSteelIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STEEL, new ItemStack(mod_TFC_Game.SteelMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraTinIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.TinMaceHead)));
+        manager.addRecipe(new AnvilRecipe(new ItemStack(mod_TFC_Core.terraZincIngot2x), new ItemStack(mod_TFC_Game.MaceHeadPlan),45+v,CraftingRule.HITLAST, CraftingRule.SHRINKNOTLAST, CraftingRule.BENDNOTLAST, false, AnvilReq.STONE, new ItemStack(mod_TFC_Game.ZincMaceHead)));
+        
 	}
 
 	public static void registerRecipes()
@@ -695,38 +719,38 @@ public class TFC_Game
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(mod_TFC_Game.SwordBladePlan, 1), new Object[] { "   ##","  ###"," ### "," ##  ","#    ", Character.valueOf('#'), mod_TFC_Game.terraInk});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(mod_TFC_Game.MaceHeadPlan, 1), new Object[] { "  #  "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), mod_TFC_Game.terraInk});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(mod_TFC_Game.SawBladePlan, 1), new Object[] { "##   ","###  "," ### "," ####","   ##", Character.valueOf('#'), mod_TFC_Game.terraInk});
-		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(mod_TFC_Game.ProPickBladePlan, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), mod_TFC_Game.terraInk});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(mod_TFC_Game.ProPickHeadPlan, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), mod_TFC_Game.terraInk});
 		//metallurgy
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedBismuthBronze, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedCopper),new ItemStack(mod_TFC_Game.terraMeltedCopper),
-			new ItemStack(mod_TFC_Game.terraMeltedTin), new ItemStack(mod_TFC_Game.terraMeltedBismuth)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedBlackBronze, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedCopper),new ItemStack(mod_TFC_Game.terraMeltedCopper),
-			new ItemStack(mod_TFC_Game.terraMeltedSilver), new ItemStack(mod_TFC_Game.terraMeltedGold)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedWeakSteel, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedSteel),new ItemStack(mod_TFC_Game.terraMeltedSteel),
-			new ItemStack(mod_TFC_Game.terraMeltedNickel), new ItemStack(mod_TFC_Game.terraMeltedBlackBronze)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedWeakBlueSteel, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedBlackSteel), new ItemStack(mod_TFC_Game.terraMeltedBismuthBronze), 
-			new ItemStack(mod_TFC_Game.terraMeltedSterlingSilver),new ItemStack(mod_TFC_Game.terraMeltedSteel)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedBrass, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedCopper),new ItemStack(mod_TFC_Game.terraMeltedCopper),
-			new ItemStack(mod_TFC_Game.terraMeltedCopper), new ItemStack(mod_TFC_Game.terraMeltedZinc)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedBronze, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedCopper),new ItemStack(mod_TFC_Game.terraMeltedCopper),
-			new ItemStack(mod_TFC_Game.terraMeltedCopper), new ItemStack(mod_TFC_Game.terraMeltedTin)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedWeakRedSteel, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedBlackSteel), new ItemStack(mod_TFC_Game.terraMeltedRoseGold),  
-			new ItemStack(mod_TFC_Game.terraMeltedPlatinum), new ItemStack(mod_TFC_Game.terraMeltedSteel)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedRoseGold, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedCopper),new ItemStack(mod_TFC_Game.terraMeltedGold),
-			new ItemStack(mod_TFC_Game.terraMeltedGold), new ItemStack(mod_TFC_Game.terraMeltedGold)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedHCSteel, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedPigIron),new ItemStack(mod_TFC_Game.terraMeltedWroughtIron),
-			new ItemStack(mod_TFC_Game.terraMeltedWroughtIron), new ItemStack(mod_TFC_Game.terraMeltedWroughtIron)});
-		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.terraMeltedSterlingSilver, 4), 
-				new Object[] { 	new ItemStack(mod_TFC_Game.terraMeltedCopper),new ItemStack(mod_TFC_Game.terraMeltedSilver),
-			new ItemStack(mod_TFC_Game.terraMeltedSilver), new ItemStack(mod_TFC_Game.terraMeltedSilver)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedBismuthBronze, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedCopper),new ItemStack(mod_TFC_Game.UnshapedCopper),
+			new ItemStack(mod_TFC_Game.UnshapedTin), new ItemStack(mod_TFC_Game.UnshapedBismuth)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedBlackBronze, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedCopper),new ItemStack(mod_TFC_Game.UnshapedCopper),
+			new ItemStack(mod_TFC_Game.UnshapedSilver), new ItemStack(mod_TFC_Game.UnshapedGold)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedWeakSteel, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedSteel),new ItemStack(mod_TFC_Game.UnshapedSteel),
+			new ItemStack(mod_TFC_Game.UnshapedNickel), new ItemStack(mod_TFC_Game.UnshapedBlackBronze)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedWeakBlueSteel, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedBlackSteel), new ItemStack(mod_TFC_Game.UnshapedBismuthBronze), 
+			new ItemStack(mod_TFC_Game.UnshapedSterlingSilver),new ItemStack(mod_TFC_Game.UnshapedSteel)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedBrass, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedCopper),new ItemStack(mod_TFC_Game.UnshapedCopper),
+			new ItemStack(mod_TFC_Game.UnshapedCopper), new ItemStack(mod_TFC_Game.UnshapedZinc)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedBronze, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedCopper),new ItemStack(mod_TFC_Game.UnshapedCopper),
+			new ItemStack(mod_TFC_Game.UnshapedCopper), new ItemStack(mod_TFC_Game.UnshapedTin)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedWeakRedSteel, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedBlackSteel), new ItemStack(mod_TFC_Game.UnshapedRoseGold),  
+			new ItemStack(mod_TFC_Game.UnshapedPlatinum), new ItemStack(mod_TFC_Game.UnshapedSteel)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedRoseGold, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedCopper),new ItemStack(mod_TFC_Game.UnshapedGold),
+			new ItemStack(mod_TFC_Game.UnshapedGold), new ItemStack(mod_TFC_Game.UnshapedGold)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedHCSteel, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedPigIron),new ItemStack(mod_TFC_Game.UnshapedWroughtIron),
+			new ItemStack(mod_TFC_Game.UnshapedWroughtIron), new ItemStack(mod_TFC_Game.UnshapedWroughtIron)});
+		CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(mod_TFC_Game.UnshapedSterlingSilver, 4), 
+				new Object[] { 	new ItemStack(mod_TFC_Game.UnshapedCopper),new ItemStack(mod_TFC_Game.UnshapedSilver),
+			new ItemStack(mod_TFC_Game.UnshapedSilver), new ItemStack(mod_TFC_Game.UnshapedSilver)});
 
 
 	}

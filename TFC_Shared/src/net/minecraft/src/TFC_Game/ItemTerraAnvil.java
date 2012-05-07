@@ -7,18 +7,21 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.Helper;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemTerraAnvil extends Item implements ITextureProvider
 {
 	public int anvilId;
+	public AnvilReq req;
 
-	public ItemTerraAnvil(int i, int id) 
+	public ItemTerraAnvil(int i, int id, AnvilReq Areq) 
 	{
 		super(i);
 		maxStackSize = 1;
 		anvilId = id;
+		req = Areq;
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
@@ -66,8 +69,18 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 			{
 				byte0 = 0;
 			}
-			world.setBlockAndMetadataWithNotify( x, y+1, z,mod_TFC_Game.terraAnvil.blockID, byte0+anvilId);
-			world.markBlockNeedsUpdate(i, j, k);
+			int id = mod_TFC_Game.terraAnvil.blockID;
+			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? mod_TFC_Game.terraAnvil2.blockID : mod_TFC_Game.terraAnvil.blockID;
+			world.setBlockAndMetadataWithNotify( x, y+1, z, id, byte0+anvilId);
+            world.markBlockNeedsUpdate(x, y+1, z);
+			if(world.getBlockTileEntity(x, y+1, z) != null)
+			{
+			    TileEntityTerraAnvil te = (TileEntityTerraAnvil)world.getBlockTileEntity(x, y+1, z);
+			    te.AnvilTier = req;
+			    
+			}
+			
+			
 			
 			itemstack.stackSize = itemstack.stackSize-1;
 			return true;
