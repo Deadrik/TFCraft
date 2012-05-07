@@ -40,7 +40,7 @@ public class GuiTerraBloomery extends GuiContainerTFC
 		drawCenteredString(this.fontRenderer,"Type:" + ForgeEntity.OreType,88,7,0x000000);
 		this.fontRenderer.drawString("Ore:" + ForgeEntity.oreCount*4.5 + "kg",104, 32, 0x000000);
 		this.fontRenderer.drawString("Coal:" + ForgeEntity.charcoalCount*4.5 + "kg",104, 44, 0x000000);
-		this.fontRenderer.drawString("Output:" + 2*(1-ForgeEntity.outCount/100) + "kg",104, 56, 0x000000);
+		this.fontRenderer.drawString("Output:" + ((ForgeEntity.outCount/100)*2) + "kg",104, 56, 0x000000);
     }
 	
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)

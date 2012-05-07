@@ -1,7 +1,7 @@
 package net.minecraft.src.TFC_Game;
 
 import net.minecraft.src.*;
-import net.minecraft.src.TFC_Core.TFCHeat;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 
 public class ContainerTerraMetallurgy extends Container
 {

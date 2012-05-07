@@ -33,9 +33,10 @@ public class BlockCustomFlower extends BlockFlower
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-	{
-		return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
-	}
+    {
+            int var5 = par1World.getBlockId(par2, par3, par4);
+            return (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
+    }
 
 	/**
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
@@ -75,16 +76,6 @@ public class BlockCustomFlower extends BlockFlower
 	public boolean isOpaqueCube()
 	{
 		return false;
-	}
-
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-	 * their own) Args: x, y, z, neighbor blockID
-	 */
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-	{
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		this.checkFlowerChange(par1World, par2, par3, par4);
 	}
 
 	/**

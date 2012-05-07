@@ -9,7 +9,7 @@ public class ContainerTerraBloomery extends Container
     private float firetemp;
     private int orecount;
     private int coalcount;
-    private int outcount;
+    private float outcount;
 
 
 	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge)
@@ -213,6 +213,7 @@ public class ContainerTerraBloomery extends Container
 		return null;
 	}
 
+	private int updatecounter = 0;
 	public void updateCraftingResults()
     {
         super.updateCraftingResults();
@@ -225,8 +226,18 @@ public class ContainerTerraBloomery extends Container
                 var2.updateCraftingInventoryInfo(this, 0, (int)this.bloomery.fireTemperature);
             }
         }
-        mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.orename, this.bloomery.oreDamage));
+        
+        if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 200)
+        {
+            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.oreDamage));
+            updatecounter = 0;
+        }
+        
+        outcount = this.bloomery.outCount;
+        orecount = this.bloomery.oreCount;
+        coalcount = this.bloomery.charcoalCount;
         firetemp = this.bloomery.fireTemperature;
+        updatecounter += 1;
     }
 	
 	public void updateProgressBar(int par1, int par2)

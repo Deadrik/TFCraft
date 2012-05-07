@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.*;
 import net.minecraft.src.forge.*;

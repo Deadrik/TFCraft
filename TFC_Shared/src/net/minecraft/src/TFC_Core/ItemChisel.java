@@ -9,7 +9,7 @@ implements ITextureProvider
 {
 	public ItemChisel(int i, EnumToolMaterial e)
 	{
-		super(i, i, e, new Block[] {});
+		super(i, 0, e, new Block[] {});
 		this.setMaxDamage(e.getMaxUses()/2);
 		this.maxStackSize = 1;
 	}

@@ -249,33 +249,8 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		}
 	}
 
-	public int tickRate()
-	{
-		return 20;
-	}
-
-	public void updateTick(World world, int i, int j, int k, Random random)
-	{
-		TileEntityTerraBloomery tileentityfirepit;
-		tileentityfirepit = (TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k);
-		int meta = world.getBlockMetadata(i, j, k);
-		if(tileentityfirepit.fireTemperature < 100 && tileentityfirepit.fireItemStacks[5] != null)
-		{
-			if(meta >= 4) {
-				world.setBlockMetadata(i, j, k, meta-4);
-				world.markBlockNeedsUpdate(i, j, k);
-			}
-			setLightValue(0.0F);
-		}
-
-		if(tileentityfirepit.fireTemperature > 210)
-		{
-			setLightValue(0.8F);
-			if(meta < 4) {
-				world.setBlockMetadata(i, j, k, meta+4);
-				world.markBlockNeedsUpdate(i, j, k);
-			}
-		}
-	}
-
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+    {       
+        //dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBloomery, 1));
+    }
 }

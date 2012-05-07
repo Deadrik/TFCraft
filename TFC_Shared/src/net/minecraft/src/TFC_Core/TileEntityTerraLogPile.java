@@ -10,6 +10,7 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 
 public class TileEntityTerraLogPile extends TileEntity implements IInventory
 {
