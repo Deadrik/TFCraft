@@ -151,11 +151,11 @@ public class ItemTerraBucket  extends Item implements ITextureProvider{
                         }
 
                     	boolean ocean = false;
-                        for (int i = - 50; i < 51; i++)
+                        for (int i = -1; i < 2; i++)
                         {
-                        	for (int j = - 50; j < 51; j++)
+                        	for (int j = -1; j < 2; j++)
                             {
-                        		if (par2World.getBiomeGenForCoords(var13 + i, var15 + j).biomeName.contains("Ocean"))
+                        		if (par2World.getBiomeGenForCoords(var13 + i*50, var15 + j*50).biomeName.contains("Ocean"))
                         		{
                         			ocean = true;
                         			break;
@@ -206,11 +206,11 @@ public class ItemTerraBucket  extends Item implements ITextureProvider{
                         else
                         {
                         	boolean ocean = false;
-                            for (int i = - 50; i < 51; i++)
+                            for (int i = -1; i < 2; i++)
                             {
-                            	for (int j = - 50; j < 51; j++)
+                            	for (int j = -1; j < 2; j++)
                                 {
-                            		if (par2World.getBiomeGenForCoords(var13 + i, var15 + j).biomeName.contains("Ocean"))
+                            		if (par2World.getBiomeGenForCoords(var13 + i*50, var15 + j*50).biomeName.contains("Ocean"))
                             		{
                             			ocean = true;
                             			break;

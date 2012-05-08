@@ -22,6 +22,7 @@ public class BlockFiniteWater extends BlockFluid
 	public BlockFiniteWater(int par1)
     {
         super(par1, Material.water);
+        this.setTickRandomly(false);
     }
 	
 	/**
@@ -237,7 +238,7 @@ public class BlockFiniteWater extends BlockFluid
      * determine the path of least resistance, this method returns the lowest possible flow cost for the direction of
      * flow indicated. Each necessary horizontal flow adds to the flow cost.
      */
-    private int calculateFlowCost(World par1World, int par2, int par3, int par4, int par5, int par6)
+    private int calculateFlowCost(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5, int par6)
     {
         int var7 = 1000;
 
@@ -268,17 +269,17 @@ public class BlockFiniteWater extends BlockFluid
                     ++var11;
                 }
 
-                if (!this.blockBlocksFlow(par1World, var9, par3, var11) && ((par1World.getBlockMaterial(var9, par3, var11) != this.blockMaterial ||
-                		par1World.getBlockId(var9, par3, var11) == this.blockID) || par1World.getBlockMetadata(var9, par3, var11) != 0))
+                if (!this.blockBlocksFlow(par1iBlockAccess, var9, par3, var11) && ((par1iBlockAccess.getBlockMaterial(var9, par3, var11) != this.blockMaterial ||
+                		par1iBlockAccess.getBlockId(var9, par3, var11) == this.blockID) || par1iBlockAccess.getBlockMetadata(var9, par3, var11) != 0))
                 {
-                    if (!this.blockBlocksFlow(par1World, var9, par3 - 1, var11))
+                    if (!this.blockBlocksFlow(par1iBlockAccess, var9, par3 - 1, var11))
                     {
                         return par5;
                     }
 
                     if (par5 < 4)
                     {
-                        int var12 = this.calculateFlowCost(par1World, var9, par3, var11, par5 + 1, var8);
+                        int var12 = this.calculateFlowCost(par1iBlockAccess, var9, par3, var11, par5 + 1, var8);
 
                         if (var12 < var7)
                         {
@@ -297,7 +298,7 @@ public class BlockFiniteWater extends BlockFluid
      * cost. Each array index corresponds to one of the four cardinal directions. A value of true indicates the
      * direction is optimal.
      */
-    private boolean[] getOptimalFlowDirections(World par1World, int par2, int par3, int par4)
+    private boolean[] getOptimalFlowDirections(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
     {
         int var5;
         int var6;
@@ -328,15 +329,15 @@ public class BlockFiniteWater extends BlockFluid
                 ++var8;
             }
 
-            if (!this.blockBlocksFlow(par1World, var6, par3, var8) && (par1World.getBlockMaterial(var6, par3, var8) != this.blockMaterial || par1World.getBlockMetadata(var6, par3, var8) != 0))
+            if (!this.blockBlocksFlow(par1iBlockAccess, var6, par3, var8) && (par1iBlockAccess.getBlockMaterial(var6, par3, var8) != this.blockMaterial || par1iBlockAccess.getBlockMetadata(var6, par3, var8) != 0))
             {
-                if (!this.blockBlocksFlow(par1World, var6, par3 - 1, var8))
+                if (!this.blockBlocksFlow(par1iBlockAccess, var6, par3 - 1, var8))
                 {
                     this.flowCost[var5] = 0;
                 }
                 else
                 {
-                    this.flowCost[var5] = this.calculateFlowCost(par1World, var6, par3, var8, 1, var5);
+                    this.flowCost[var5] = this.calculateFlowCost(par1iBlockAccess, var6, par3, var8, 1, var5);
                 }
             }
         }
@@ -362,9 +363,9 @@ public class BlockFiniteWater extends BlockFluid
 	/**
      * Returns true if block at coords blocks fluids
      */
-    private boolean blockBlocksFlow(World par1World, int par2, int par3, int par4)
+    private boolean blockBlocksFlow(IBlockAccess par1iBlockAccess, int par2, int par3, int par4)
     {
-        int var5 = par1World.getBlockId(par2, par3, par4);
+        int var5 = par1iBlockAccess.getBlockId(par2, par3, par4);
 
         if (var5 != Block.doorWood.blockID && var5 != Block.doorSteel.blockID && var5 != Block.signPost.blockID && var5 != Block.ladder.blockID && var5 != Block.reed.blockID)
         {
@@ -430,7 +431,7 @@ public class BlockFiniteWater extends BlockFluid
         Vec3D var5 = Vec3D.createVector(0.0D, 0.0D, 0.0D);
         if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 7 && par1IBlockAccess.getBlockId(par2, par3 - 1, par4) != this.blockID)
         {
-	        boolean[] optimal = getOptimalFlowDirections(mod_TFC_Core.proxy.getCurrentWorld(), par2, par3, par4);
+	        boolean[] optimal = getOptimalFlowDirections(par1IBlockAccess, par2, par3, par4);
 	        if (optimal[0])
 	        {
 	        	var5 = var5.addVector(-1.0D, 0.0D, 0.0D);

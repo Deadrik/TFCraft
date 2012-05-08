@@ -11,6 +11,11 @@ public class ItemTerraJavelin extends Item implements ITextureProvider
 		super(par1);
 		this.maxStackSize = 1;
 	}
+	
+	public boolean isFull3D()
+	{
+		return true;
+	}
 
 	@Override
 	public void addCreativeItems(ArrayList itemList)
