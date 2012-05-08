@@ -33,7 +33,7 @@
  
      /** The biomes that are used to generate the chunk */
      private BiomeGenBase[] biomesForGeneration;
-@@ -270,9 +272,11 @@
+@@ -270,26 +272,22 @@
      {
          this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
          byte[] var3 = new byte[32768];
@@ -46,8 +46,14 @@
          this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
          this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
  
-@@ -283,13 +287,7 @@
-             this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
+         if (this.mapFeaturesEnabled)
+         {
+-            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
+-            this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
+-            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
++            //this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
++            //this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
++            //this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
          }
  
 -        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);

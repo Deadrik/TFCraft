@@ -40,6 +40,7 @@ public class BlockCustomSnow extends Block
 		if (!this.canPlaceBlockAt(par1World, par2, par3, par4))
 		{
 			par1World.setBlockWithNotify(par2, par3, par4, 0);
+			par1World.markBlockNeedsUpdate(par2, par3, par4);
 			return false;
 		}
 		else

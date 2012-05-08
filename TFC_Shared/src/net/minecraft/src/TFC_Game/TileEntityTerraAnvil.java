@@ -114,8 +114,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                     anvilItemStacks[1].setTagCompound(Tag);
                 }
             }
-
-
         }
         else
         {
@@ -156,7 +154,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
     public int[] getItemRules()
     {
         int[] rules = new int[3];
-        if(anvilItemStacks[1].hasTagCompound())
+        if(anvilItemStacks[1] != null && anvilItemStacks[1].hasTagCompound())
         {
             if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule1"))
                 rules[0] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule1");

@@ -146,23 +146,23 @@ public class BlockTerraClayGrass extends BlockTerra2
                     int var9 = par4 + par5Random.nextInt(3) - 1;
                     int var10 = par1World.getBlockId(var7, var8 + 1, var9);
 
-                    if (par1World.getBlockId(var7, var8, var9) == dirtID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2)
+                    if (par1World.getBlockId(var7, var8, var9) == dirtID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
                     {
                         par1World.setBlockAndMetadataWithNotify(var7, var8, var9, grassID, par1World.getBlockMetadata(var7, var8, var9));
                     }
-                    if (par1World.getBlockId(var7, var8, var9) == dirt2ID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2)
+                    if (par1World.getBlockId(var7, var8, var9) == dirt2ID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
                     {
                         par1World.setBlockAndMetadataWithNotify(var7, var8, var9, grass2ID, par1World.getBlockMetadata(var7, var8, var9));
                     }
-                    if (par1World.getBlockId(var7, var8, var9) == clayID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2)
+                    if (par1World.getBlockId(var7, var8, var9) == clayID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
                     {
                         par1World.setBlockAndMetadataWithNotify(var7, var8, var9, clayGrassID, par1World.getBlockMetadata(var7, var8, var9));
                     }
-                    if (par1World.getBlockId(var7, var8, var9) == clay2ID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2)
+                    if (par1World.getBlockId(var7, var8, var9) == clay2ID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
                     {
                         par1World.setBlockAndMetadataWithNotify(var7, var8, var9, clayGrass2ID, par1World.getBlockMetadata(var7, var8, var9));
                     }
-                    if (par1World.getBlockId(var7, var8, var9) == peatID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2)
+                    if (par1World.getBlockId(var7, var8, var9) == peatID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
                     {
                         par1World.setBlockAndMetadataWithNotify(var7, var8, var9, peatGrassID, par1World.getBlockMetadata(var7, var8, var9));
                     }

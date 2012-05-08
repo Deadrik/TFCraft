@@ -636,24 +636,24 @@ public class mod_TFC_Core extends NetworkMod
 
 
         //EnumHelper.addToolMaterial(name, harvestLevel, maxUses, efficiency, damage, enchantability)
-        IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 4F, 1, 5);
-        SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 3F, 1, 5);
-        IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 4F, 1, 5);
-        MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 3.5F, 1, 5);
+        IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 1, 5);
+        SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 1, 5);
+        IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 1, 5);
+        MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 1, 5);
 
-        BismuthToolMaterial = EnumHelper.addToolMaterial("Bismuth", 2, BismuthUses, 4F, 2, 10);
-        BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, BismuthBronzeUses, 6F, 3, 10);
-        BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, BlackBronzeUses, 6F, 4, 10);
-        BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, BlackSteelUses, 11F, 6, 12);
-        BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, BlueSteelUses, 14F, 7, 22);
-        BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, BronzeUses, 7F, 4, 13);
-        CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, CopperUses, 6F, 3, 8);
-        IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, WroughtIronUses, 7F, 5, 10);
-        RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, RedSteelUses, 14F, 7, 22);
-        RoseGoldToolMaterial = EnumHelper.addToolMaterial("RoseGold", 2, RoseGoldUses, 6F, 4, 20);
-        SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, 9F, 6, 10);
-        TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, 4F, 2, 8);
-        ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, 4F, 2, 8);
+        BismuthToolMaterial = EnumHelper.addToolMaterial("Bismuth", 2, BismuthUses, 8.0F, 2, 10);
+        BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, BismuthBronzeUses, 10.5F, 3, 10);
+        BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, BlackBronzeUses, 10F, 4, 10);
+        BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, BlackSteelUses, 17F, 6, 12);
+        BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, BlueSteelUses, 20F, 7, 22);
+        BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, BronzeUses, 14F, 4, 13);
+        CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, CopperUses, 9.0F, 3, 8);
+        IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, WroughtIronUses, 15F, 5, 10);
+        RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, RedSteelUses, 20F, 7, 22);
+        RoseGoldToolMaterial = EnumHelper.addToolMaterial("RoseGold", 2, RoseGoldUses, 10F, 4, 20);
+        SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, 16F, 6, 10);
+        TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, 8.0F, 2, 8);
+        ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, 8.0F, 2, 8);
 
         terraStoneIgInCobble = new BlockTerraIgInCobble(TFCSettings.getIntFor(config,"block","terraStoneIgInCobble", 198), Material.rock).setHardness(6F).setResistance(10F).setBlockName("IgInRockCobble");
         terraStoneIgIn = new BlockTerraIgIn(TFCSettings.getIntFor(config,"block","TerraIgIn", 209), Material.rock, terraStoneIgInCobble.blockID).setHardness(8F).setResistance(10F).setBlockName("IgInRock");	

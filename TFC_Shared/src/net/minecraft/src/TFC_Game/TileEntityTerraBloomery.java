@@ -684,8 +684,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                         }
                     }
                     /*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-                    else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem().getItemNameIS(entity.item).contains(".Ore.") && 
-                            (name.compareTo(OreType) == 0 || OreType.compareTo("") == 0))
+                    else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraSmallOre && 
+                            (entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
                     {
                         for(int c = 0; c < entity.item.stackSize; c++)
                         {
