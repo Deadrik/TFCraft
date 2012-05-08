@@ -46,6 +46,7 @@ public class mod_TFC_Core extends NetworkMod
     public static int terraScribeRenderId;
     public static int terraForgeRenderId;
     public static int sluiceRenderId;
+    public static int finiteWaterRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -91,8 +92,9 @@ public class mod_TFC_Core extends NetworkMod
 
     public static Block tilledSoil;
     public static Block tilledSoil2;
-    
-    public static Block bucketWater;
+
+    public static Block finiteWater;
+    public static Block finiteSaltWater;
 
     public static Item terraWoodSupportItemH;
     public static Item terraWoodSupportItemV;
@@ -303,6 +305,7 @@ public class mod_TFC_Core extends NetworkMod
     public static Item Logs;
     public static Item FlintPaxel;
     public static Item Javelin;
+    public static Item bucket;
 
     public static Item boneIgInPick;
     public static Item boneIgInShovel;
@@ -401,6 +404,7 @@ public class mod_TFC_Core extends NetworkMod
         terraScribeRenderId = proxy.getUniqueBlockModelID(this, false);
         terraForgeRenderId = proxy.getUniqueBlockModelID(this, false);
         sluiceRenderId = proxy.getUniqueBlockModelID(this, false);
+        finiteWaterRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.ItemTerraRock.class);
@@ -440,7 +444,8 @@ public class mod_TFC_Core extends NetworkMod
         ModLoader.registerBlock(tilledSoil);
         ModLoader.registerBlock(tilledSoil2);
         
-        ModLoader.registerBlock(bucketWater);
+        ModLoader.registerBlock(finiteWater);
+        ModLoader.registerBlock(finiteSaltWater);
 
         ModLoader.registerBlock(terraWoodSupportV);
         ModLoader.registerBlock(terraWoodSupportH);
@@ -700,11 +705,12 @@ public class mod_TFC_Core extends NetworkMod
         tilledSoil = new BlockTerraFarmland(TFCSettings.getIntFor(config,"block","tilledSoil", 177), terraDirt.blockID).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil");
         tilledSoil2 = new BlockTerraFarmland(TFCSettings.getIntFor(config,"block","tilledSoil2", 176), terraDirt2.blockID).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil2");
 
+        finiteWater = new BlockFiniteWater(TFCSettings.getIntFor(config,"block","finiteWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("finiteWater");
+        finiteSaltWater = new BlockFiniteWater(TFCSettings.getIntFor(config,"block","finiteSaltWater", 225)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("finiteSaltWater");
+
         terraWood = Block.wood;
         terraLeaves = Block.leaves;
         terraSapling = Block.sapling;
-        
-        bucketWater = new BlockBucketWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
         MinecraftForge.setBlockHarvestLevel(terraStoneIgIn, "pickaxe", 0);
         MinecraftForge.setBlockHarvestLevel(terraStoneIgEx, "pickaxe", 0);
@@ -965,7 +971,9 @@ public class mod_TFC_Core extends NetworkMod
         boneMMShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneMMShovel",16315),MMToolMaterial).setItemName("Bone MM Stone Shovel").setMaxDamage(MMStoneUses).setIconCoord(14, 4);
         boneMMAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneMMAxe",16316),MMToolMaterial).setItemName("Bone MM Stone Axe").setMaxDamage(MMStoneUses).setIconCoord(14, 5);
         boneMMHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setItemName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(14, 6);
-        //Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16299)).setItemName("javelin").setIconCoord(12, 0);
+        
+        //Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(12, 0);
+        bucket = new ItemTerraBucket(TFCSettings.getIntFor(config,"item","bucket",16319)).setItemName("bucket").setIconCoord(0, 14);
 
         SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",18000),Block.crops.blockID,tilledSoil.blockID,tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);
 

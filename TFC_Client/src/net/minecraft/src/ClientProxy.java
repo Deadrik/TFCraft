@@ -362,6 +362,8 @@ public class ClientProxy implements IProxy {
 		//peat
 		ModLoader.addLocalization("tile.peat.name", "Peat");
 		ModLoader.addLocalization("tile.PeatGrass.name", "Peat Grass");
+		//finite water
+		ModLoader.addLocalization("tile.finiteWater.name", "Finite Water");
 
 		//Wood
 		String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
@@ -465,8 +467,16 @@ public class ClientProxy implements IProxy {
 			ModLoader.addLocalization("item."+ToolNames[i]+" Chisel.name", ToolNames[i] + " Chisel");
 			ModLoader.addLocalization("item."+ToolNames[i]+" Saw.name", ToolNames[i] + " Saw");
 		}
-
+		
+		//Javelin
 		ModLoader.addLocalization("item.javelin.name", "Javelin");
+
+		//Buckets
+		String[] bucketNames = {"Empty","Fresh Water","Salt Water","Milk"};
+		for(int i= 0; i < bucketNames.length; i++)
+		{
+			ModLoader.addLocalization("item.bucket."+bucketNames[i]+".name", bucketNames[i] + " Bucket");
+		}
 
 		ModLoader.addLocalization("item.SeedsWheat.name", "Wheat Seeds");
 
@@ -711,6 +721,10 @@ public class ClientProxy implements IProxy {
         if (l == mod_TFC_Core.sluiceRenderId)
         {
             return TFC_CoreRender.RenderSluice(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        if (l == mod_TFC_Core.finiteWaterRenderId)
+        {
+            return TFC_CoreRender.RenderFiniteWater(block, i, j, k, (RenderBlocks)renderblocks);
         }
 
 
