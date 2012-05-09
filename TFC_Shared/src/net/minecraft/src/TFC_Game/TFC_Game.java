@@ -15,8 +15,6 @@ import net.minecraft.src.TFC_Core.General.CraftingRule;
 
 public class TFC_Game 
 {
-	public static Hashtable AnvilWeldRecipes;
-
 	public static Item[] MeltedMetal = {mod_TFC_Game.UnshapedBismuth,mod_TFC_Game.UnshapedBismuthBronze,mod_TFC_Game.UnshapedBlackBronze,
 		mod_TFC_Game.UnshapedBlackSteel,mod_TFC_Game.UnshapedBlueSteel,mod_TFC_Game.UnshapedBrass,mod_TFC_Game.UnshapedBronze,
 		mod_TFC_Game.UnshapedCopper,mod_TFC_Game.UnshapedGold,
@@ -32,38 +30,6 @@ public class TFC_Game
 		mod_TFC_Game.BlackSteelHammer,mod_TFC_Game.BlueSteelHammer,mod_TFC_Game.BronzeHammer,mod_TFC_Game.CopperHammer,
 		mod_TFC_Game.WroughtIronHammer,mod_TFC_Game.RedSteelHammer,mod_TFC_Game.RoseGoldHammer,mod_TFC_Game.SteelHammer,
 		mod_TFC_Game.TinHammer,mod_TFC_Game.ZincHammer};
-
-	static
-	{
-		AnvilWeldRecipes = new Hashtable();
-
-		AnvilWeldRecipes.put("item.terraBismuthIngot|item.terraBismuthIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBismuthIngot2x)});
-		AnvilWeldRecipes.put("item.terraBismuthBronzeIngot|item.terraBismuthBronzeIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBismuthBronzeIngot2x)});
-		AnvilWeldRecipes.put("item.terraBlackBronzeIngot|item.terraBlackBronzeIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBlackBronzeIngot2x)});
-		AnvilWeldRecipes.put("item.terraBlackSteelIngot|item.terraBlackSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBlackSteelIngot2x)});
-		AnvilWeldRecipes.put("item.terraBrassIngot|item.terraBrassIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBrassIngot2x)});
-		AnvilWeldRecipes.put("item.terraBronzeIngot|item.terraBronzeIngot", new Object[]{new ItemStack(mod_TFC_Core.terraBronzeIngot2x)});
-		AnvilWeldRecipes.put("item.terraCopperIngot|item.terraCopperIngot", new Object[]{new ItemStack(mod_TFC_Core.terraCopperIngot2x)});
-		AnvilWeldRecipes.put("item.terraGoldIngot|item.terraGoldIngot", new Object[]{new ItemStack(mod_TFC_Core.terraGoldIngot2x)});
-		AnvilWeldRecipes.put("item.terraWroughtIronIngot|item.terraWroughtIronIngot", new Object[]{new ItemStack(mod_TFC_Core.terraWroughtIronIngot2x)});
-		AnvilWeldRecipes.put("item.terraLeadIngot|item.terraLeadIngot", new Object[]{new ItemStack(mod_TFC_Core.terraLeadIngot2x)});
-		AnvilWeldRecipes.put("item.terraNickelIngot|item.terraNickelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraNickelIngot2x)});
-		AnvilWeldRecipes.put("item.terraPigIronIngot|item.terraPigIronIngot", new Object[]{new ItemStack(mod_TFC_Core.terraPigIronIngot2x)});
-		AnvilWeldRecipes.put("item.terraPlatinumIngot|item.terraPlatinumIngot", new Object[]{new ItemStack(mod_TFC_Core.terraPlatinumIngot2x)});
-		AnvilWeldRecipes.put("item.terraRedSteelIngot|item.terraRedSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraRedSteelIngot2x)});
-		AnvilWeldRecipes.put("item.terraRoseGoldIngot|item.terraRoseGoldIngot", new Object[]{new ItemStack(mod_TFC_Core.terraRoseGoldIngot2x)});
-		AnvilWeldRecipes.put("item.terraSilverIngot|item.terraSilverIngot", new Object[]{new ItemStack(mod_TFC_Core.terraSilverIngot2x)});
-		AnvilWeldRecipes.put("item.terraSteelIngot|item.terraSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraSteelIngot2x)});
-		AnvilWeldRecipes.put("item.terraSterlingSilverIngot|item.terraSterlingSilverIngot", new Object[]{new ItemStack(mod_TFC_Core.terraSterlingSilverIngot2x)});
-		AnvilWeldRecipes.put("item.terraTinIngot|item.terraTinIngot", new Object[]{new ItemStack(mod_TFC_Core.terraTinIngot2x)});
-		AnvilWeldRecipes.put("item.terraZincIngot|item.terraZincIngot", new Object[]{new ItemStack(mod_TFC_Core.terraZincIngot2x)});
-		AnvilWeldRecipes.put("item.terraWeakSteelIngot|item.terraPigIronIngot", new Object[]{new ItemStack(mod_TFC_Core.terraHCBlackSteelIngot)});
-		AnvilWeldRecipes.put("item.terraWeakBlueSteelIngot|item.terraBlackSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraHCBlueSteelIngot)});
-		AnvilWeldRecipes.put("item.terraWeakRedSteelIngot|item.terraBlackSteelIngot", new Object[]{new ItemStack(mod_TFC_Core.terraHCRedSteelIngot)});
-
-	}
-
-
 
 	public static EnumWoodMaterial getWoodMaterial(ItemStack is)
 	{

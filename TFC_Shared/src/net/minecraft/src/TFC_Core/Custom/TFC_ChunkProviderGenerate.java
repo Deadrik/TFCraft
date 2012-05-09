@@ -16,7 +16,7 @@ public class TFC_ChunkProviderGenerate
     public static void replaceBlocksForBiomeHigh(int par1, int par2, byte[] blockArray, byte[] metaArray, BiomeGenBase[] par4ArrayOfBiomeGenBase, 
             double[] stoneNoise, NoiseGeneratorOctaves noiseGen4, Random rand)
     {
-        int var5 = 63;
+        int var5 = 24;
         double var6 = 0.03125D;
         stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
@@ -34,7 +34,6 @@ public class TFC_ChunkProviderGenerate
                 for (int height = 127; height >= 0; --height)
                 {
                     int var17 = ((zCoord * 16 + xCoord) * 128 + height);
-
                     metaArray[var17] = 0;
                     
                     {

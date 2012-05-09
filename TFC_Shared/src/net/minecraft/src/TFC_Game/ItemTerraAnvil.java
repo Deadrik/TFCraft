@@ -76,8 +76,7 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 			if(world.getBlockTileEntity(x, y+1, z) != null)
 			{
 			    TileEntityTerraAnvil te = (TileEntityTerraAnvil)world.getBlockTileEntity(x, y+1, z);
-			    te.AnvilTier = req;
-			    
+			    te.AnvilTier = req.Tier;
 			}
 			
 			

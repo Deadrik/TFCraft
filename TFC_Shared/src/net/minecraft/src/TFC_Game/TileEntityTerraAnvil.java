@@ -51,7 +51,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
     private final int lagFixDelay = 5;
     public AnvilRecipe workRecipe;
     private AnvilRecipe workWeldRecipe;
-    public AnvilReq AnvilTier;
+    public int AnvilTier;
 
     public TileEntityTerraAnvil()
     {
@@ -65,7 +65,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         rule2 = false;
         rule3 = false;
 
-        AnvilTier = AnvilReq.STONE;
+        AnvilTier = AnvilReq.STONE.Tier;
     }
 
     public void updateEntity()
@@ -90,7 +90,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 workedRecently--;
             //Deal with temperatures
             TFCHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
-
             /**
              * Check if the recipe is considered complete
              * */
@@ -503,10 +502,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
     {
         return blockMetadata & 7;
     }
-    public int getCraftingValue()
-    {
-        return getRandomCraftingValue(craftingValue,craftingRange);
-    }
     @Override
     public int getInventoryStackLimit()
     {
@@ -587,16 +582,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
     }
 
-    public int getRandomCraftingValue(int cv, int range)
-    {
-        Random R = new Random(this.worldObj.getSeed());
-        int c1 = cv - range;
-        int c2 = range*2;
-        int c3 = c1 + R.nextInt(1+c2);
-
-        return c3;
-    }
-
     public Boolean isTemperatureWeldable(int i)
     {
         if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
@@ -648,6 +633,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
 
         nbttagcompound.setTag("Items", nbttaglist);
+        nbttagcompound.setTag("Tier", nbttaglist);
 
     }
 
@@ -666,6 +652,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 anvilItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
+        
+        AnvilTier = nbttagcompound.getInteger("Tier");
     }
 
     @Override

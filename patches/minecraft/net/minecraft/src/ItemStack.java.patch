@@ -1068,7 +1068,7 @@
 +						 arraylist.add(TFCHeat.getHeatColor(temp, meltTemp));
 +				 }
 +			 }
-+			 if(stackTagCompound.getByte("itemCraftingValue") != 0)
++			 if(stackTagCompound.hasKey("itemCraftingValue") && stackTagCompound.getByte("itemCraftingValue") != 0)
 +			 {
 +				 arraylist.add("This Item Has Been Worked");
 +				 if(stackTagCompound.hasKey("itemCraftingRule1"))

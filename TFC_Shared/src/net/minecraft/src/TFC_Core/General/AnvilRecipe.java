@@ -16,17 +16,17 @@ public class AnvilRecipe
     ItemStack input2;
     boolean flux;
     int craftingValue;
-    AnvilReq anvilreq;
+    int anvilreq;
     
     
     /**
      * Used to check if a recipe matches current crafting inventory
      */    
     public boolean matches(AnvilRecipe A)
-    {
+    {   
         if(     areItemStacksEqual(input1, A.input1) && 
                 areItemStacksEqual(input2, A.input2) &&
-                anvilreq.matches(A.anvilreq))
+                AnvilReq.matches(anvilreq, A.anvilreq))
         {
             if(this.flux && !A.flux)
                 return false;
@@ -40,7 +40,7 @@ public class AnvilRecipe
         if(     areItemStacksEqual(input1, A.input1) && 
                 areItemStacksEqual(input2, A.input2) &&
                 rule0.matches(rules, 0) && rule1.matches(rules, 1) && rule2.matches(rules, 2) && 
-                craftingValue == A.craftingValue && anvilreq.matches(A.anvilreq))
+                craftingValue == A.craftingValue && AnvilReq.matches(anvilreq, A.anvilreq))
         {
             if(this.flux && A.flux)
                 return true;
@@ -53,9 +53,11 @@ public class AnvilRecipe
     public boolean isComplete(AnvilRecipe A)
     {
         if(A.input1 == this.input1 && A.input2 == input2 && 
-                craftingValue == A.craftingValue && anvilreq.matches(A.anvilreq))
+                craftingValue == A.craftingValue && AnvilReq.matches(anvilreq, A.anvilreq))
         {
             if(this.flux && A.flux)
+                return true;
+            else if (!this.flux)
                 return true;
         }
         return false;
@@ -95,12 +97,32 @@ public class AnvilRecipe
         this.rule2 = rule2;
         this.flux = flux;
         this.craftingValue = cv;
+        anvilreq = req.Tier;
+        this.result = result;
+    }
+    
+    public AnvilRecipe(ItemStack in, ItemStack p, int cv, CraftingRule rule0, CraftingRule rule1, CraftingRule rule2, boolean flux, int req, ItemStack result)
+    {
+        input1 = in;
+        input2 = p;
+        this.rule0 = rule0;
+        this.rule1 = rule1;
+        this.rule2 = rule2;
+        this.flux = flux;
+        this.craftingValue = cv;
         anvilreq = req;
         this.result = result;
     }
     
-    
     public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
+    {
+        input1 = in;
+        input2 = p;
+        this.flux = flux;
+        anvilreq = req.Tier;
+    }
+    
+    public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, int req)
     {
         input1 = in;
         input2 = p;
@@ -113,7 +135,7 @@ public class AnvilRecipe
         input1 = in;
         input2 = p;
         this.flux = flux;
-        anvilreq = req;
+        anvilreq = req.Tier;
         this.result = res;
     }
 
