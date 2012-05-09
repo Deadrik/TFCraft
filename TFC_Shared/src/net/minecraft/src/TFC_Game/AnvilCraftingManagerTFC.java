@@ -82,7 +82,7 @@ public class AnvilCraftingManagerTFC
         for (int k = 0; k < recipesWeld.size(); k++)
         {
             AnvilRecipe irecipe = (AnvilRecipe)recipesWeld.get(k);
-            if (irecipe.isComplete(recipe))
+            if (irecipe.matches(recipe))
             {
                 return irecipe.getCraftingResult();
             }

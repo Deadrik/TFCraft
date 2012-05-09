@@ -392,10 +392,17 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                     Tag.setFloat("temperature", (TFCHeat.GetTemperature(anvilItemStacks[2])+TFCHeat.GetTemperature(anvilItemStacks[3]))/2);
                     anvilItemStacks[4] = result; 
                     anvilItemStacks[4].setTagCompound(Tag);
-                    ItemStack item = new ItemStack(anvilItemStacks[7].getItem(),anvilItemStacks[7].stackSize-2);
-                    if(item.stackSize == 0) {
+                    ItemStack item = new ItemStack(anvilItemStacks[7].getItem(),anvilItemStacks[7].stackSize-1);
+                    if(item.stackSize == 0) 
                         item = null;
-                    }
+                    
+                    ItemStack item2 = new ItemStack(anvilItemStacks[0].getItem(),anvilItemStacks[0].stackSize-1);
+                    if(item2.stackSize == 0) 
+                        item2 = null;
+
+                    anvilItemStacks[2] = null;
+                    anvilItemStacks[3] = null;
+                    anvilItemStacks[7] = null;
                 }
             }
         }

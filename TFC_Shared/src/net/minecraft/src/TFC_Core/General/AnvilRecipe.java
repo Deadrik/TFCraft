@@ -107,6 +107,15 @@ public class AnvilRecipe
         this.flux = flux;
         anvilreq = req;
     }
+    
+    public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
+    {
+        input1 = in;
+        input2 = p;
+        this.flux = flux;
+        anvilreq = req;
+        this.result = res;
+    }
 
     public int getCraftingValue()
     {
