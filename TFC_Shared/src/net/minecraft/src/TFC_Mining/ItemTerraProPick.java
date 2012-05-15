@@ -89,14 +89,14 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                         {
                             int meta = world.getBlockMetadata(x+i, y+k, z+j);
 
-                            if(!oreArray.contains(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta))))
+                            if(!oreArray.contains(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta))))
                             {
-                                oreArray.add(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                                oreArray.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                                int index = oreArray.indexOf(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
 
@@ -106,14 +106,14 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                         {
                             int meta = world.getBlockMetadata(x+i, y+k, z+j);
 
-                            if(!oreArray.contains(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta))))
+                            if(!oreArray.contains(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta))))
                             {
-                                oreArray.add(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
+                                oreArray.add(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
+                                int index = oreArray.indexOf(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
                         }
@@ -121,14 +121,14 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                         {
                             int meta = world.getBlockMetadata(x+i, y+k, z+j);
 
-                            if(!oreArray.contains(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta))))
+                            if(!oreArray.contains(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta))))
                             {
-                                oreArray.add(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
+                                oreArray.add(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(ItemTerraSmallOre.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
+                                int index = oreArray.indexOf(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
                         }
@@ -159,6 +159,9 @@ public class ItemTerraProPick extends Item implements ITextureProvider
             }
 
             itemstack.setItemDamage(itemstack.getItemDamage()+1);
+            if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
+                itemstack = null;
+                    
 
             vecArray.add(new Vector3f(x,y,z));
 

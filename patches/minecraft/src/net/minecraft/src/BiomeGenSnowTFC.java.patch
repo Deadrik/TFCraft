@@ -1,0 +1,22 @@
+--- ../src_base/minecraft/src/net/minecraft/src/BiomeGenSnowTFC.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/src/net/minecraft/src/BiomeGenSnowTFC.java	0000-00-00 00:00:00.000000000 -0000
+@@ -0,0 +1,19 @@
++// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
++// Jad home page: http://www.kpdus.com/jad.html
++// Decompiler options: packimports(3) braces deadcode fieldsfirst 
++
++package net.minecraft.src;
++
++// Referenced classes of package net.minecraft.src:
++//            BiomeGenBase, SpawnListEntry, EntityWolf, BiomeDecorator, 
++//            WorldGenerator
++
++public class BiomeGenSnowTFC extends BiomeGenBase
++{
++
++	public BiomeGenSnowTFC(int i)
++	{
++		super(i);
++	}
++
++}

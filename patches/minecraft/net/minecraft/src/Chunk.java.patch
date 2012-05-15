@@ -9,69 +9,12 @@
  
                          if (storageArrays[chunkY] == null)
                          {
-@@ -183,6 +183,65 @@
+@@ -183,6 +183,8 @@
              }
          }
      }
 +    
-+    public Chunk(World world, byte[] ids, byte[] metadata, byte[] ids2, byte[] metadata2, int chunkX, int chunkZ)
-+    {
-+        this(world, chunkX, chunkZ);
-+        int height = ids.length / 256;
-+
-+        for (int x = 0; x < 16; ++x)
-+        {
-+            for (int z = 0; z < 16; ++z)
-+            {
-+                for (int y = 0; y < height; ++y)
-+                {
-+                    int index = x << 11 | z << 7 | y;
-+                    int id    = ids[index] & 0xFF;
-+                    int meta  = metadata[index] & 0x0F;
-+
-+                    if (id != 0)
-+                    {
-+                        int chunkY = (y >> 4);
-+
-+                        if (storageArrays[chunkY] == null)
-+                        {
-+                            storageArrays[chunkY] = new ExtendedBlockStorage(chunkY << 4);
-+                        }
-+
-+                        storageArrays[chunkY].setExtBlockID(x, y & 15, z, id);
-+                        storageArrays[chunkY].setExtBlockMetadata(x, y & 15, z, meta);
-+                    }
-+                }
-+            }
-+        }
-+        
-+        for (int x = 0; x < 16; ++x)
-+        {
-+            for (int z = 0; z < 16; ++z)
-+            {
-+                for (int y = 0; y < height; ++y)
-+                {
-+                    int index = x << 11 | z << 7 | y;
-+                    int id    = ids2[index] & 0xFF;
-+                    int meta  = metadata2[index] & 0x0F;
-+
-+                    if (id != 0)
-+                    {
-+                        int chunkY = 8+(y >> 4);
-+
-+                        if (storageArrays[chunkY] == null)
-+                        {
-+                            int ind = (chunkY << 4) - 8;
-+                            storageArrays[chunkY] = new ExtendedBlockStorage(ind);
-+                        }
-+
-+                        storageArrays[chunkY].setExtBlockID(x, y & 15, z, id);
-+                        storageArrays[chunkY].setExtBlockMetadata(x, y & 15, z, meta);
-+                    }
-+                }
-+            }
-+        }
-+    }
++    
  
      /**
       * Checks whether the chunk is at the X/Z location specified

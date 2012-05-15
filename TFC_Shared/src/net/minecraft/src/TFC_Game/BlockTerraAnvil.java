@@ -141,6 +141,8 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 	{		
 		int type = BlockTerraAnvil.getAnvilTypeFromMeta(l);
 
+		if(blockID == mod_TFC_Game.terraAnvil.blockID)
+		{
 		switch (type)
 		{
 		case 1:
@@ -167,6 +169,21 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 		default:
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraStoneAnvilItem, 1));
 		}
+		}
+		else if(blockID == mod_TFC_Game.terraAnvil2.blockID)
+        {
+        switch (type)
+        {
+        case 1:
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBlackBronzeAnvilItem, 1));
+            break;
+        case 2:
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraRoseGoldAnvilItem, 1));
+            break;
+        default:
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBismuthBronzeAnvilItem, 1));
+        }
+        }
 	}
 
 	public boolean isOpaqueCube()
@@ -242,6 +259,8 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 				}
 			}
 		}
+		
+		
 
 		super.onBlockRemoval(par1World, par2, par3, par4);
 	}

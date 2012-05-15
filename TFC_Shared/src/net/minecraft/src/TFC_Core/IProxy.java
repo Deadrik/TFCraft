@@ -44,4 +44,6 @@ public interface IProxy extends IGuiHandler {
 	public abstract void sendCustomPacket(Packet packet);
 	
 	public abstract EntityPlayer getPlayer(NetworkManager network);
+	
+	public abstract int getArmorRenderID(int i);
 }

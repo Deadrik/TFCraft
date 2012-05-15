@@ -356,7 +356,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             ambientTemp = 62 * a-20;
         }
 
-
         //Now we increase the temperature
         //If the fire is still burning and has fuel
         if(fuelTimeLeft > 0)
@@ -424,6 +423,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         else if(fuelTimeLeft <= 0 && charcoalCount > 0)
         {
             charcoalCount--;
+            updateGui();
             fuelTimeLeft = 1875;
             fuelBurnTemp = 1450;
             if(fireTemperature < 210)
@@ -436,6 +436,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         }
         else
         {
+            updateGui();
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
             if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC_Game.terraBloomeryOn.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
@@ -687,18 +688,19 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                     else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraSmallOre && 
                             (entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
                     {
-                        for(int c = 0; c < entity.item.stackSize; c++)
+                        int c = 0;
+                        for(; c < entity.item.stackSize; c++)
                         {
                             if(charcoalCount+oreCount < 40 && oreCount < 20)
                             {
-                                if(AddOreToFire(entity.item)) {
-                                    entity.item.stackSize--;
+                                if(AddOreToFire(entity.item)) 
+                                {
                                     oreCount+=1;
                                     oreDamage = entity.item.getItemDamage();
                                 }
                             }
                         }
-                        if(entity.item.stackSize == 0) {
+                        if(entity.item.stackSize == c) {
                             entity.setDead();
                         }
                     }

@@ -190,4 +190,10 @@ public class ServerProxy implements IProxy {
     {
         return ((NetServerHandler)network.getNetHandler()).getPlayerEntity();
     }
+
+    @Override
+    public int getArmorRenderID(int i)
+    {
+        return 0;
+    }
 }

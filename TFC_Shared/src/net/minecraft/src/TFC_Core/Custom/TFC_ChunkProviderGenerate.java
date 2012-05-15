@@ -16,7 +16,7 @@ public class TFC_ChunkProviderGenerate
     public static void replaceBlocksForBiomeHigh(int par1, int par2, byte[] blockArray, byte[] metaArray, BiomeGenBase[] par4ArrayOfBiomeGenBase, 
             double[] stoneNoise, NoiseGeneratorOctaves noiseGen4, Random rand)
     {
-        int var5 = 24;
+        int var5 = 16;
         double var6 = 0.03125D;
         stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 
@@ -44,7 +44,7 @@ public class TFC_ChunkProviderGenerate
                         }
                         else if (var18 == Block.stone.blockID)
                         {
-                            if(height <= biomegenbase.Layer3)
+                            if(height+128 <= biomegenbase.Layer3)
                             {
                                 blockArray[var17] = (byte) biomegenbase.Layer3Type; 
                                 metaArray[var17] = (byte)  biomegenbase.Layer3Meta;
@@ -67,7 +67,7 @@ public class TFC_ChunkProviderGenerate
                                     }
                                 }
                             }
-                            else if(height <= biomegenbase.Layer2 && height > biomegenbase.Layer3)
+                            else if(height+128 <= biomegenbase.Layer2 && height +128> biomegenbase.Layer3)
                             {
                                 blockArray[var17] = (byte) biomegenbase.Layer2Type; 
                                 metaArray[var17] = (byte)  biomegenbase.Layer2Meta;
@@ -90,7 +90,7 @@ public class TFC_ChunkProviderGenerate
                                     }
                                 }
                             }
-                            else if(height <= biomegenbase.Layer1 && height > biomegenbase.Layer2)
+                            else if(height+128 <= biomegenbase.Layer1 && height+128 > biomegenbase.Layer2)
                             {
                                 blockArray[var17] = (byte) biomegenbase.Layer1Type; 
                                 metaArray[var17] = (byte)  biomegenbase.Layer1Meta;    
@@ -146,9 +146,10 @@ public class TFC_ChunkProviderGenerate
 
                                 var13 = var12;
 
-                                if (height >= var5 - 1)
+                                if (height >= var5 - 1 && var17+1 < blockArray.length &&blockArray[var17+1] != Block.waterStill.blockID)
                                 {
                                     blockArray[var17] = (byte) var14;
+                                    metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
                                 }
                                 else
                                 {

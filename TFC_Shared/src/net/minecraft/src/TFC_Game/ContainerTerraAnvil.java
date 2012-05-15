@@ -275,6 +275,8 @@ public class ContainerTerraAnvil extends Container
 		}
 		return null;
 	}
+	
+	private int tier = -1;
 
 	public void updateCraftingResults()
     {
@@ -283,20 +285,27 @@ public class ContainerTerraAnvil extends Container
         for (int var1 = 0; var1 < this.crafters.size(); ++var1)
         {
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
-            int cv = this.terraanvil.craftingValue;
-            int icv = this.terraanvil.getItemCraftingValue();
-            if (this.redIndicator != this.terraanvil.craftingValue)
+            int cv = terraanvil.getCraftingValue();
+            int icv = terraanvil.getItemCraftingValueNoSet(1);
+            int t = this.terraanvil.AnvilTier;
+            
+            if (this.redIndicator != cv)
             {
                 var2.updateCraftingInventoryInfo(this, 0, cv);
             }
-            if (this.greenIndicator != this.terraanvil.getItemCraftingValue())
+            if (this.greenIndicator != icv)
             {
                 var2.updateCraftingInventoryInfo(this, 1, icv);
             }
+            if (this.tier != t)
+            {
+                var2.updateCraftingInventoryInfo(this, 2, t);
+            }
         }
         
-        redIndicator = this.terraanvil.workRecipe != null ? this.terraanvil.workRecipe.getCraftingValue() : 0;
-        greenIndicator = this.terraanvil.getItemCraftingValue();
+        redIndicator = terraanvil.craftingValue;
+        greenIndicator = terraanvil.itemCraftingValue;
+        this.tier = this.terraanvil.AnvilTier;
     }
 	
 	/**
@@ -312,6 +321,10 @@ public class ContainerTerraAnvil extends Container
         else if (par1 == 1)
         {
             this.terraanvil.itemCraftingValue = par2;
+        }
+        else if (par1 == 2)
+        {
+            this.terraanvil.AnvilTier = par2;
         }
 
     }

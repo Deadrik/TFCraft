@@ -7,6 +7,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
@@ -14,6 +15,11 @@ public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 
 	public static boolean fallInstantly = false;
 
+	public BlockTerraMMCobble(int i, Material material) 
+	{
+        super(i,90, material);
+    }
+	
 	public static boolean canFallBelow(World world, int i, int j, int k)
 	{
 		int l = world.getBlockId(i, j, k);
@@ -33,14 +39,9 @@ public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 		return material == Material.lava;
 	}
 
-	public BlockTerraMMCobble(int i, Material material) {
-		super(i, material);
-	}
-
-
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 17; i < 23; i++) {
+		for(int i = 0; i < 6; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -51,32 +52,31 @@ public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 	@Override
 	public int damageDropped(int i) 
 	{
-		return i + 16;
+		return i;
 	}
 
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		if(j < 16) {
-			return (int)j+16;
-		} else {
-			return j;
-		}
+	    return blockIndexInTexture + j;
 	}
 
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{	
 		super.harvestBlock(world, entityplayer, i, j, k, l);
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-		//int meta = l;
-		//mc.ingameGUI.addChatMessage("Harvest Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(meta).toString());  
+		
+		if(TFCSettings.enableDebugMode)
+		{
+		    int meta = l;
+		    System.out.println("Harvest Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(meta).toString());  
+		}
 	}
 
 	public void onBlockAdded(World world, int i, int j, int k)
@@ -92,11 +92,6 @@ public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
-	}
-
-	public int tickRate()
-	{
-		return 3;
 	}
 
 	private void tryToFall(World world, int i, int j, int k)

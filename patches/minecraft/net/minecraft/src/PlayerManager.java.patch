@@ -1,0 +1,11 @@
+--- ../src_base/minecraft/net/minecraft/src/PlayerManager.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/PlayerManager.java	0000-00-00 00:00:00.000000000 -0000
+@@ -0,0 +1,8 @@
++package net.minecraft.src;
++
++import java.util.List;
++
++public class PlayerManager
++{
++    public List players;
++}

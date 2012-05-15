@@ -12,6 +12,8 @@ import net.minecraft.src.TFC_Core.EntityTerraJavelin;
 import net.minecraft.src.TFC_Core.GuiTerraLogPile;
 import net.minecraft.src.TFC_Core.GuiTerraWorkbench;
 import net.minecraft.src.TFC_Core.IProxy;
+import net.minecraft.src.TFC_Core.ItemTerra;
+import net.minecraft.src.TFC_Core.ItemTerraArmor;
 import net.minecraft.src.TFC_Core.RenderFallingDirt;
 import net.minecraft.src.TFC_Core.RenderFallingStone;
 import net.minecraft.src.TFC_Core.RenderFallingStone2;
@@ -20,6 +22,7 @@ import net.minecraft.src.TFC_Core.TFC_CoreRender;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
 import net.minecraft.src.TFC_Core.TileEntityTerraWorkbench;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
+import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.TFC_Game.*;
 import net.minecraft.src.TFC_Mining.GuiTerraSluice;
 import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
@@ -29,6 +32,7 @@ public class ClientProxy implements IProxy {
     @Override
     public void registerRenderInformation() 
     {
+        MinecraftForgeClient.preloadTexture("/bioxx/terraRock.png");
         MinecraftForgeClient.preloadTexture("/bioxx/terratools.png");
         MinecraftForgeClient.preloadTexture("/bioxx/terratoolheads.png");
         MinecraftForgeClient.preloadTexture("/bioxx/terrasprites.png");
@@ -502,6 +506,10 @@ public class ClientProxy implements IProxy {
 		ModLoader.addLocalization("item.terraBlackSteelAnvilItem.name", "Black Steel  Anvil");
 		ModLoader.addLocalization("item.terraBlueSteelAnvilItem.name", "Blue Steel Anvil");
 		ModLoader.addLocalization("item.terraRedSteelAnvilItem.name", "Red Steel Anvil");
+		ModLoader.addLocalization("item.terraBismuthBronzeAnvilItem.name", "Bismuth Bronze Anvil");
+		ModLoader.addLocalization("item.terraBlackBronzeAnvilItem.name", "Black Bronze Anvil");
+		ModLoader.addLocalization("item.terraRoseGoldAnvilItem.name", "Rose Gold Anvil");
+		
 		ModLoader.addLocalization("item.terraBellowsItem.name", "Bellows");
 		ModLoader.addLocalization("tile.terraBellows.name", "Bellows");
 		ModLoader.addLocalization("tile.terraScribe.name", "Scribing Table");
@@ -522,6 +530,11 @@ public class ClientProxy implements IProxy {
 		ModLoader.addLocalization("item.MaceHeadPlan.name", "Plan: Mace Head");
 		ModLoader.addLocalization("item.SawBladePlan.name", "Plan: Saw Head");
 		ModLoader.addLocalization("item.ProPickHeadPlan.name", "Plan: Prospecter's Pick Head");
+		ModLoader.addLocalization("item.HelmetPlan.name", "Plan: Plate Helmet");
+		ModLoader.addLocalization("item.ChestplatePlan.name", "Plan: Chestplate");
+		ModLoader.addLocalization("item.GreavesPlan.name", "Plan: Plate Greaves");
+		ModLoader.addLocalization("item.BootsPlan.name", "Plan: Plate Boots");
+		
 		for(int i= 0; i < ToolNames.length; i++)
 		{
 			ModLoader.addLocalization("item."+ToolNames[i]+" Pickaxe Head.name", ToolNames[i] + " Pickaxe Head");
@@ -534,6 +547,23 @@ public class ClientProxy implements IProxy {
 			ModLoader.addLocalization("item."+ToolNames[i]+" Chisel Head.name", ToolNames[i] + " Chisel Head");
 			ModLoader.addLocalization("item."+ToolNames[i]+" Saw Blade.name", ToolNames[i] + " Saw Blade");
 			ModLoader.addLocalization("item."+ToolNames[i]+" ProPick Head.name", ToolNames[i] + " Prospector's Pick Head");
+			/**
+			 * Armor Related
+			 * */
+			ModLoader.addLocalization("item."+ToolNames[i]+"Sheet.name", ToolNames[i] + " Sheet");
+			ModLoader.addLocalization("item."+ToolNames[i]+"Sheet2x.name", ToolNames[i] + " Sheet 2x");
+			ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedHelmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
+			ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedHelmet2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
+			ModLoader.addLocalization("item."+ToolNames[i]+"Helmet.name", ToolNames[i] + " Helmet");
+			ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedChestplate.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 1");
+			ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedChestplate2.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 2");
+            ModLoader.addLocalization("item."+ToolNames[i]+"Chestplate.name", ToolNames[i] + " Chestplate");
+            ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedGreaves.name", "Unfinished " + ToolNames[i] + " Greaves Stage 1");
+            ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedGreaves2.name", "Unfinished " + ToolNames[i] + " Greaves Stage 2");
+            ModLoader.addLocalization("item."+ToolNames[i]+"Greaves.name", ToolNames[i] + " Greaves");
+            ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedBoots.name", "Unfinished " + ToolNames[i] + " Boots Stage 1");
+            ModLoader.addLocalization("item."+ToolNames[i]+"UnfinishedBoots2.name", "Unfinished " + ToolNames[i] + " Boots Stage 2");
+            ModLoader.addLocalization("item."+ToolNames[i]+"Boots.name", ToolNames[i] + " Boots");
 		}
 
 		//meltedmetal
@@ -781,5 +811,12 @@ public class ClientProxy implements IProxy {
     public EntityPlayer getPlayer(NetworkManager network)
     {
         return ModLoader.getMinecraftInstance().thePlayer;
+    }
+
+    @Override
+    public int getArmorRenderID(int i)
+    {
+        String[] Names = {"bismuth", "bismuthbronze", "blackbronze", "blacksteel", "bluesteel", "bronze", "copper", "wroughtiron", "redsteel", "rosegold", "steel", "tin", "zinc"};
+        return ModLoader.addArmor(Names[i]);
     }
 }

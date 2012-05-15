@@ -53,5 +53,11 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 	{
 		return false;
 	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/bioxx/terraRock.png";
+    }
 
 }

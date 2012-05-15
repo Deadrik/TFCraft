@@ -24,7 +24,7 @@ public class BlockTerraSedSmooth extends Block implements ITextureProvider
 
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 3; i < 13; i++) {
+		for(int i = 0; i < 10; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -46,7 +46,7 @@ public class BlockTerraSedSmooth extends Block implements ITextureProvider
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 }
 

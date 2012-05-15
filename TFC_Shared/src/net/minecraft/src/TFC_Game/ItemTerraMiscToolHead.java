@@ -9,6 +9,7 @@ public class ItemTerraMiscToolHead extends Item implements ITextureProvider
 	public ItemTerraMiscToolHead(int i) 
 	{
 		super(i);
+		this.setMaxDamage(100);
 	}
 
 	@Override

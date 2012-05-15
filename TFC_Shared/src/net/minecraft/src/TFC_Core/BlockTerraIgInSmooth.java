@@ -44,7 +44,7 @@ public class BlockTerraIgInSmooth extends Block implements ITextureProvider
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 
 }

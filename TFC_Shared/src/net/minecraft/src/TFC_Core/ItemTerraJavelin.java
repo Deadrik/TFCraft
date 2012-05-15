@@ -6,10 +6,13 @@ import net.minecraft.src.forge.*;
 
 public class ItemTerraJavelin extends Item implements ITextureProvider
 {
+    private int weaponDamage;
 	public ItemTerraJavelin(int par1)
 	{
 		super(par1);
 		this.maxStackSize = 1;
+		this.weaponDamage = 2;
+		
 	}
 
 	@Override
@@ -25,6 +28,14 @@ public class ItemTerraJavelin extends Item implements ITextureProvider
 	{
 		return 1;
 	}
+	
+	/**
+     * Returns the damage against a given entity.
+     */
+    public int getDamageVsEntity(Entity par1Entity)
+    {
+        return this.weaponDamage;
+    }
 
 	/**
 	 * returns the action that specifies what animation to play when the items is being used

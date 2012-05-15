@@ -27,7 +27,7 @@ public class BiomeGenHillsTFC extends BiomeGenBase
         super(i);
         ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
         ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
-        ((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 1;
+        ((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 11;
         ((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 2;
     }
 

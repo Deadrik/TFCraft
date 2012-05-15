@@ -22,38 +22,31 @@ public class BlockTerraMMSmooth extends Block implements ITextureProvider
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 17; i < 23; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
+    {
+        for(int i = 0; i < 6; i++) {
+            list.add(new ItemStack(this,1,i));
+        }
+    }
 
-	/*
-	 * Mapping from metadata value to damage value
-	 */
-	@Override
-	protected int damageDropped(int i) {
-		//		if(i<16)
-		//			return ((int)i+16);
-		//		else
-		//			return i;
-		return i + 16;
-	}
+    /*
+     * Mapping from metadata value to damage value
+     */
+    @Override
+    public int damageDropped(int i) 
+    {
+        return i;
+    }
 
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
-	{
-		if(j<16) {
-			return blockIndexInTexture+(int)j+16;
-		} else {
-			return blockIndexInTexture+j;
-		}
-	}
+    @Override
+    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    {
+        return blockIndexInTexture + j;
+    }
 
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 }
 

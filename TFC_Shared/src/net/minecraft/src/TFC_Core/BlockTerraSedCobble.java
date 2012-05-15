@@ -14,12 +14,12 @@ public class BlockTerraSedCobble extends BlockTerra2 implements ITextureProvider
 	public static boolean fallInstantly = false;
 
 	public BlockTerraSedCobble(int i, Material material) {
-		super(i, material);
+		super(i,80, material);
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 3; i < 13; i++) {
+		for(int i = 0; i < 10; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -67,7 +67,7 @@ public class BlockTerraSedCobble extends BlockTerra2 implements ITextureProvider
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 
 	public void onBlockAdded(World world, int i, int j, int k)

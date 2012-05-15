@@ -24,7 +24,7 @@ public class WorldGenPeatPit extends WorldGenerator
 		int var6 = par2Random.nextInt(this.numberOfBlocks - 8) + 8;
 		byte var7 = 2;
 
-		if(par2Random.nextInt(30) == 0 && par4 <= 70)
+		if(par2Random.nextInt(30) == 0 && par4 <= 150)
 		{
 			for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
 			{

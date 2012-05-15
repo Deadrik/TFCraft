@@ -24,38 +24,29 @@ public class BlockTerraIgExSmooth extends Block implements ITextureProvider
 
 
 	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 13; i < 17; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
+    {
+        for(int i = 0; i < 4; i++) {
+            list.add(new ItemStack(this,1,i));
+        }
+    }
 
-	/*
-	 * Mapping from metadata value to damage value
-	 */
-	@Override
-	protected int damageDropped(int i) {
-		switch (i) {
-		case 0:
-			return 16;
-		default:
-			return i;
-		}
-	}
+    /*
+     * Mapping from metadata value to damage value
+     */
+    @Override
+    public int damageDropped(int i) {
+        return i;
+    }
 
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
-	{
-		switch (j) {
-		case 0:
-			return blockIndexInTexture+16;
-		default:
-			return blockIndexInTexture+j;
-		}
-	}
+    @Override
+    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    {
+        return blockIndexInTexture + j;
+    }
+    
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 }

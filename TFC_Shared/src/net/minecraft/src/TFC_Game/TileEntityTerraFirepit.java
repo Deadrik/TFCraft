@@ -43,7 +43,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     private int externalFireCheckTimer;
     public Boolean canCreateFire;
     private int externalWoodCount;
-    int charcoalCounter;
+    public int charcoalCounter;
 
     public final int FIREBURNTIME = 240;//default 240
 
@@ -922,8 +922,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 for(int i = 0; i < vecArray.size(); i++)
                 {
                     Vector3f vec = (Vector3f)vecArray.toArray()[i];
-                    if(R.nextInt(100) > 75 && getNearWood((int)vec.X, (int)vec.Y, (int)vec.Z)) {
+                    if(R.nextInt(100) > 75 && getNearWood((int)vec.X, (int)vec.Y, (int)vec.Z)) 
+                    {
                         worldObj.setBlock((int)vec.X, (int)vec.Y, (int)vec.Z, Block.fire.blockID);
+                        worldObj.markBlockNeedsUpdate((int)vec.X, (int)vec.Y, (int)vec.Z);
                     }
                 }
             }
@@ -975,6 +977,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 2)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord - 2, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord - 2);
                     }
                 }
                 for(int x = 0; x < area1.length; x++)
@@ -983,6 +986,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 1)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord - 1, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord - 1);
                     }
                 }
                 for(int x = 0; x < area2.length; x++)
@@ -991,6 +995,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord , 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord);
                     }
                 }
                 for(int x = 0; x < area3.length; x++)
@@ -999,6 +1004,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord +1)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord + 1, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord +1);
                     }
                 }
                 for(int x = 0; x < area4.length; x++)
@@ -1007,6 +1013,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord +2)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord + 2, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord + 2);
                     }
                 }
 
@@ -1017,6 +1024,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord - 2)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord - 2, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord - 2);
                     }
                 }
                 for(int x = 0; x < area1_2.length; x++)
@@ -1025,6 +1033,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord - 1)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord - 1, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord - 1);
                     }
                 }
                 for(int x = 0; x < area2_2.length; x++)
@@ -1033,6 +1042,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord);
                     }
                 }
                 for(int x = 0; x < area3_2.length; x++)
@@ -1041,6 +1051,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord +1)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord + 1, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord +1);
                     }
                 }
                 for(int x = 0; x < area4_2.length; x++)
@@ -1049,6 +1060,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord + 2)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord + 2, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord + 2);
                     }
                 }
             }
@@ -1274,18 +1286,26 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     public void updateEntity()
     {
+        int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
+        if(fireTemperature > 210 && Surrounded == 5)
+        {
+            externalFireCheckTimer--;
+            if(externalFireCheckTimer <= 0)
+            {
+                externalFireCheck();
+                externalFireCheckTimer = 100;
+                
+            }
+        }
+        else
+        {
+            charcoalCounter = 0;
+        }
+        
         if(!worldObj.isRemote)
         {
-            int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
-            if(fireTemperature > 210 && Surrounded == 5)
-            {
-                externalFireCheckTimer--;
-                if(externalFireCheckTimer <= 0)
-                {
-                    externalFireCheck();
-                    externalFireCheckTimer = 100;
-                }
-            }
+            
+            //mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this));
 
             //Here we take care of the item that we are cooking in the fire
             NBTTagCompound inputCompound;
@@ -1410,14 +1430,18 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                     AddedAir = (float)(numAirBlocks+bAir)/25/16;//1038.225 Max //0.3625
 
-                    if(yCoord > 60)
+                    if(yCoord > 145 && yCoord < 210)
                     {					
-                        float w = 128- yCoord;
-                        float w1 = w / 128;
+                        float w = 210 - yCoord;
+                        float w1 = w / 210;
                         float w2 = 1 - w1;
                         float w3 = w2 * 0.105F;
 
-                        AddedAir += w3;//? Max //0.1025390625 //@64-40
+                        AddedAir += w3;//0.0725 min / 0.1045 max
+                    }
+                    else if(yCoord >= 210)
+                    {
+                        AddedAir += 0.1045F;
                     }
 
                     desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
@@ -1515,11 +1539,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     }
 
-    public void handlePacketData(float temp) 
+    public void handlePacketData( int charcoal) 
     {
         TileEntityTerraFirepit pile = this;
-        fireTemperature = temp;
-        
+        //charcoalCounter = charcoal;
+
     }
     
     public Packet getDescriptionPacket() 

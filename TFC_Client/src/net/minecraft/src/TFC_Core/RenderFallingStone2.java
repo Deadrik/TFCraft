@@ -21,7 +21,7 @@ public class RenderFallingStone2 extends Render
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d, (float)d1, (float)d2);
-        loadTexture("/bioxx/terrablocks2.png");
+        loadTexture("/bioxx/terraRock.png");
 
         World world = entityfallingstone.getWorld();
         GL11.glDisable(2896 /*GL_LIGHTING*/);

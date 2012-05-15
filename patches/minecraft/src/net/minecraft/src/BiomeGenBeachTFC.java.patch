@@ -1,0 +1,19 @@
+--- ../src_base/minecraft/src/net/minecraft/src/BiomeGenBeachTFC.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/src/net/minecraft/src/BiomeGenBeachTFC.java	0000-00-00 00:00:00.000000000 -0000
+@@ -0,0 +1,16 @@
++package net.minecraft.src;
++
++public class BiomeGenBeachTFC extends BiomeGenBase
++{
++	public BiomeGenBeachTFC(int i)
++	{
++		super(i);
++		spawnableCreatureList.clear();
++		topBlock = (byte)Block.sand.blockID;
++		fillerBlock = (byte)Block.sand.blockID;
++		biomeDecorator.treesPerChunk = -999;
++		biomeDecorator.deadBushPerChunk = 0;
++		biomeDecorator.reedsPerChunk = 0;
++		biomeDecorator.cactiPerChunk = 0;
++	}
++}

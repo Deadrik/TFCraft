@@ -97,7 +97,7 @@ public class EntityFallingStone2 extends Entity
 				if (worldObj.getBlockId(i, j, k) != Block.pistonMoving.blockID)
 				{
 					setDead();
-					if ((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) || BlockSand.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
+					if ((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) || BlockTerraIgInCobble.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
 					{
 						ItemStack itemstack = new ItemStack(blockID,1,metaID);
 						EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);
@@ -109,12 +109,8 @@ public class EntityFallingStone2 extends Entity
 			else if (fallTime > 100 && !worldObj.isRemote)
 			{
 				ItemStack itemstack;
-				if(blockID == mod_TFC_Core.terraStoneMMCobble.blockID || blockID == mod_TFC_Core.terraStoneIgExCobble.blockID && metaID == 0) {
-					itemstack = new ItemStack(blockID,1,metaID+16);
-				} else {
-					itemstack = new ItemStack(blockID,1,metaID);
-				}
 
+				itemstack = new ItemStack(blockID,1,metaID);
 
 				EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);
 				entityitem.delayBeforeCanPickup = 10;

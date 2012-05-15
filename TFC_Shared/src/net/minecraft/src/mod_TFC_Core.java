@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.TFC_Core.*;
+import net.minecraft.src.TFC_Core.Custom.ItemDyeCustom;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.Configuration;
@@ -350,6 +351,20 @@ public class mod_TFC_Core extends NetworkMod
     public static EnumToolMaterial SterlingSilverToolMaterial;
     public static EnumToolMaterial TinToolMaterial;
     public static EnumToolMaterial ZincToolMaterial;
+    
+    public static EnumArmorMaterial BismuthArmorMaterial;
+    public static EnumArmorMaterial BismuthBronzeArmorMaterial;
+    public static EnumArmorMaterial BlackBronzeArmorMaterial;
+    public static EnumArmorMaterial BlackSteelArmorMaterial;
+    public static EnumArmorMaterial BlueSteelArmorMaterial;
+    public static EnumArmorMaterial BronzeArmorMaterial;
+    public static EnumArmorMaterial CopperArmorMaterial;
+    public static EnumArmorMaterial IronArmorMaterial;
+    public static EnumArmorMaterial RedSteelArmorMaterial;
+    public static EnumArmorMaterial RoseGoldArmorMaterial;
+    public static EnumArmorMaterial SteelArmorMaterial;
+    public static EnumArmorMaterial TinArmorMaterial;
+    public static EnumArmorMaterial ZincArmorMaterial;
 
     public static int IgInStoneUses = 60;
     public static int IgExStoneUses = 70;
@@ -403,26 +418,26 @@ public class mod_TFC_Core extends NetworkMod
         sluiceRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
-        ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.ItemTerraRock.class);
-        ModLoader.registerBlock(terraOre2, net.minecraft.src.TFC_Core.ItemTerraRock.class);
-        ModLoader.registerBlock(terraOre3, net.minecraft.src.TFC_Core.ItemTerraRock.class);
-        ModLoader.registerBlock(terraStoneIgIn, net.minecraft.src.TFC_Core.ItemTerraRock.class);
-        ModLoader.registerBlock(terraStoneIgEx, net.minecraft.src.TFC_Core.ItemTerraRock.class);
-        ModLoader.registerBlock(terraStoneSed, net.minecraft.src.TFC_Core.ItemTerraRock.class);
-        ModLoader.registerBlock(terraStoneMM, net.minecraft.src.TFC_Core.ItemTerraRock.class);
+        ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.ItemOre1.class);
+        ModLoader.registerBlock(terraOre2, net.minecraft.src.TFC_Core.ItemOre2.class);
+        ModLoader.registerBlock(terraOre3, net.minecraft.src.TFC_Core.ItemOre3.class);
+        ModLoader.registerBlock(terraStoneIgIn, net.minecraft.src.TFC_Core.ItemIgIn.class);
+        ModLoader.registerBlock(terraStoneIgEx, net.minecraft.src.TFC_Core.ItemIgEx.class);
+        ModLoader.registerBlock(terraStoneSed, net.minecraft.src.TFC_Core.ItemSed.class);
+        ModLoader.registerBlock(terraStoneMM, net.minecraft.src.TFC_Core.ItemMM.class);
 
-        ModLoader.registerBlock(terraStoneIgInCobble, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneIgExCobble, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneSedCobble, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneMMCobble, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneIgInSmooth, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneIgExSmooth, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneSedSmooth, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneMMSmooth, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneIgInBrick, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneIgExBrick, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneSedBrick, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
-        ModLoader.registerBlock(terraStoneMMBrick, net.minecraft.src.TFC_Core.ItemTerraRockCobble.class);
+        ModLoader.registerBlock(terraStoneIgInCobble, net.minecraft.src.TFC_Core.ItemIgInCobble.class);
+        ModLoader.registerBlock(terraStoneIgExCobble, net.minecraft.src.TFC_Core.ItemIgExCobble.class);
+        ModLoader.registerBlock(terraStoneSedCobble, net.minecraft.src.TFC_Core.ItemSedCobble.class);
+        ModLoader.registerBlock(terraStoneMMCobble, net.minecraft.src.TFC_Core.ItemMMCobble.class);
+        ModLoader.registerBlock(terraStoneIgInSmooth, net.minecraft.src.TFC_Core.ItemIgInCobble.class);
+        ModLoader.registerBlock(terraStoneIgExSmooth, net.minecraft.src.TFC_Core.ItemIgExCobble.class);
+        ModLoader.registerBlock(terraStoneSedSmooth, net.minecraft.src.TFC_Core.ItemSedCobble.class);
+        ModLoader.registerBlock(terraStoneMMSmooth, net.minecraft.src.TFC_Core.ItemMMCobble.class);
+        ModLoader.registerBlock(terraStoneIgInBrick, net.minecraft.src.TFC_Core.ItemIgInCobble.class);
+        ModLoader.registerBlock(terraStoneIgExBrick, net.minecraft.src.TFC_Core.ItemIgExCobble.class);
+        ModLoader.registerBlock(terraStoneSedBrick, net.minecraft.src.TFC_Core.ItemSedCobble.class);
+        ModLoader.registerBlock(terraStoneMMBrick, net.minecraft.src.TFC_Core.ItemMMCobble.class);
 
         ModLoader.registerBlock(terraDirt);
         ModLoader.registerBlock(terraDirt2);
@@ -451,28 +466,28 @@ public class mod_TFC_Core extends NetworkMod
         ModLoader.registerBlock(Block.planks, net.minecraft.src.TFC_Core.ItemTerraPlanks.class);
 
         //Items
-        Item.itemsList[terraStoneIgEx.blockID] = new ItemTerraRock(terraStoneIgEx.blockID - 256);
-        Item.itemsList[terraStoneSed.blockID] = new ItemTerraRock(terraStoneSed.blockID - 256);
-        Item.itemsList[terraStoneIgIn.blockID] = new ItemTerraRock(terraStoneIgIn.blockID - 256);
-        Item.itemsList[terraStoneMM.blockID] = new ItemTerraRock(terraStoneMM.blockID - 256);
-        Item.itemsList[terraOre.blockID] = new ItemTerraRock(terraOre.blockID - 256);
-        Item.itemsList[terraOre2.blockID] = new ItemTerraRock(terraOre2.blockID - 256);
-        Item.itemsList[terraOre3.blockID] = new ItemTerraRock(terraOre3.blockID - 256);
+        Item.itemsList[terraStoneIgEx.blockID] = new ItemIgEx(terraStoneIgEx.blockID - 256);
+        Item.itemsList[terraStoneSed.blockID] = new ItemSed(terraStoneSed.blockID - 256);
+        Item.itemsList[terraStoneIgIn.blockID] = new ItemIgIn(terraStoneIgIn.blockID - 256);
+        Item.itemsList[terraStoneMM.blockID] = new ItemMM(terraStoneMM.blockID - 256);
+        Item.itemsList[terraOre.blockID] = new ItemOre1(terraOre.blockID - 256);
+        Item.itemsList[terraOre2.blockID] = new ItemOre2(terraOre2.blockID - 256);
+        Item.itemsList[terraOre3.blockID] = new ItemOre3(terraOre3.blockID - 256);
 
-        Item.itemsList[terraStoneIgExCobble.blockID] = new ItemTerraRockCobble(terraStoneIgExCobble.blockID - 256);
-        Item.itemsList[terraStoneSedCobble.blockID] = new ItemTerraRockCobble(terraStoneSedCobble.blockID - 256);
-        Item.itemsList[terraStoneIgInCobble.blockID] = new ItemTerraRockCobble(terraStoneIgInCobble.blockID - 256);
-        Item.itemsList[terraStoneMMCobble.blockID] = new ItemTerraRockCobble(terraStoneMMCobble.blockID - 256);
+        Item.itemsList[terraStoneIgExCobble.blockID] = new ItemIgExCobble(terraStoneIgExCobble.blockID - 256);
+        Item.itemsList[terraStoneSedCobble.blockID] = new ItemSedCobble(terraStoneSedCobble.blockID - 256);
+        Item.itemsList[terraStoneIgInCobble.blockID] = new ItemIgInCobble(terraStoneIgInCobble.blockID - 256);
+        Item.itemsList[terraStoneMMCobble.blockID] = new ItemMMCobble(terraStoneMMCobble.blockID - 256);
 
-        Item.itemsList[terraStoneIgExBrick.blockID] = new ItemTerraRockCobble(terraStoneIgExBrick.blockID - 256);
-        Item.itemsList[terraStoneSedBrick.blockID] = new ItemTerraRockCobble(terraStoneSedBrick.blockID - 256);
-        Item.itemsList[terraStoneIgInBrick.blockID] = new ItemTerraRockCobble(terraStoneIgInBrick.blockID - 256);
-        Item.itemsList[terraStoneMMBrick.blockID] = new ItemTerraRockCobble(terraStoneMMBrick.blockID - 256);
+        Item.itemsList[terraStoneIgExBrick.blockID] = new ItemIgExCobble(terraStoneIgExBrick.blockID - 256);
+        Item.itemsList[terraStoneSedBrick.blockID] = new ItemSedCobble(terraStoneSedBrick.blockID - 256);
+        Item.itemsList[terraStoneIgInBrick.blockID] = new ItemIgInCobble(terraStoneIgInBrick.blockID - 256);
+        Item.itemsList[terraStoneMMBrick.blockID] = new ItemMMCobble(terraStoneMMBrick.blockID - 256);
 
-        Item.itemsList[terraStoneIgExSmooth.blockID] = new ItemTerraRockCobble(terraStoneIgExSmooth.blockID - 256);
-        Item.itemsList[terraStoneSedSmooth.blockID] = new ItemTerraRockCobble(terraStoneSedSmooth.blockID - 256);
-        Item.itemsList[terraStoneIgInSmooth.blockID] = new ItemTerraRockCobble(terraStoneIgInSmooth.blockID - 256);
-        Item.itemsList[terraStoneMMSmooth.blockID] = new ItemTerraRockCobble(terraStoneMMSmooth.blockID - 256);
+        Item.itemsList[terraStoneIgExSmooth.blockID] = new ItemIgExCobble(terraStoneIgExSmooth.blockID - 256);
+        Item.itemsList[terraStoneSedSmooth.blockID] = new ItemSedCobble(terraStoneSedSmooth.blockID - 256);
+        Item.itemsList[terraStoneIgInSmooth.blockID] = new ItemIgInCobble(terraStoneIgInSmooth.blockID - 256);
+        Item.itemsList[terraStoneMMSmooth.blockID] = new ItemMMCobble(terraStoneMMSmooth.blockID - 256);
 
         Item.itemsList[terraGrass.blockID] = new ItemTerraDirt(terraGrass.blockID - 256);
         Item.itemsList[terraGrass2.blockID] = new ItemTerraDirt(terraGrass2.blockID - 256);
@@ -482,8 +497,7 @@ public class mod_TFC_Core extends NetworkMod
         Item.itemsList[terraClay2.blockID] = new ItemTerraDirt(terraClay2.blockID - 256);
         Item.itemsList[terraClayGrass.blockID] = new ItemTerraDirt(terraClayGrass.blockID - 256);
         Item.itemsList[terraClayGrass2.blockID] = new ItemTerraDirt(terraClayGrass2.blockID - 256);
-        Item.itemsList[terraClayGrass2.blockID] = new ItemTerraRockCobble(LooseRock.blockID - 256);
-
+        
         
 
         terraGrass.setIDs(terraGrass.blockID, terraGrass2.blockID, terraDirt.blockID, terraDirt2.blockID, 
@@ -499,8 +513,7 @@ public class mod_TFC_Core extends NetworkMod
 
         //Add Item Name Localizations
         proxy.registerTranslations();
-        RemoveRecipe(new ItemStack(Item.stick,4));
-        RemoveRecipe(new ItemStack(Block.planks,4));
+        
         if(TFCSettings.enableVanillaRecipes == false)
         {
             RemoveRecipe(new ItemStack(Item.pickaxeWood,1));
@@ -509,6 +522,9 @@ public class mod_TFC_Core extends NetworkMod
             RemoveRecipe(new ItemStack(Item.hoeWood,1));
             RemoveRecipe(new ItemStack(Item.swordWood,1));
             RemoveRecipe(new ItemStack(Block.stoneOvenIdle,1));
+            RemoveRecipe(new ItemStack(Block.torchWood,4));
+            RemoveRecipe(new ItemStack(Item.stick,4));
+            RemoveRecipe(new ItemStack(Block.planks,4));
         }
         TFC_Core.RegisterRecipes();		
         proxy.registerTileEntities();
@@ -534,7 +550,10 @@ public class mod_TFC_Core extends NetworkMod
     @Override
     public void generateSurface(World world, Random rand, int chunkX, int chunkZ)
     {
-        TFC_Core.Generate(world,rand, chunkX, chunkZ);
+        TFC_Core.Generate(world,rand, chunkX, chunkZ,5,96);
+        TFC_Core.Generate(world,rand, chunkX, chunkZ,64,160);
+        TFC_Core.Generate(world,rand, chunkX, chunkZ,128,224);
+        
         TFC_Core.GeneratePits(world,rand, chunkX, chunkZ);
         TFC_Core.GeneratePlants(world,rand, chunkX, chunkZ);
         TFC_Core.GenerateLooseRocks(world,rand, chunkX, chunkZ);
@@ -654,26 +673,40 @@ public class mod_TFC_Core extends NetworkMod
         SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, 16F, 6, 10);
         TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, 8.0F, 2, 8);
         ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, 8.0F, 2, 8);
+        
+        BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 10, new int[] {2,4,3,2}, 1);
+        BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 20, new int[] {4,6,5,4}, 1);
+        BlackBronzeArmorMaterial = EnumHelper.addArmorMaterial("BlackBronze", 20, new int[] {4,6,5,4}, 1);
+        BlackSteelArmorMaterial = EnumHelper.addArmorMaterial("BlackSteel", 35, new int[] {6,8,7,6}, 1);
+        BlueSteelArmorMaterial = EnumHelper.addArmorMaterial("BlueSteel", 40, new int[] {7,8,8,7}, 1);
+        BronzeArmorMaterial = EnumHelper.addArmorMaterial("Bronze", 21, new int[] {4,6,5,4}, 1);
+        CopperArmorMaterial = EnumHelper.addArmorMaterial("Copper", 15, new int[] {3,5,4,3}, 1);
+        IronArmorMaterial = EnumHelper.addArmorMaterial("Iron", 25, new int[] {5,7,6,5}, 1);
+        RedSteelArmorMaterial = EnumHelper.addArmorMaterial("RedSteel", 40, new int[] {7,8,8,7}, 1);
+        RoseGoldArmorMaterial = EnumHelper.addArmorMaterial("RoseGold", 20, new int[] {4,6,5,4}, 1);
+        SteelArmorMaterial = EnumHelper.addArmorMaterial("Steel", 30, new int[] {6,8,7,6}, 1);
+        TinArmorMaterial = EnumHelper.addArmorMaterial("Tin", 10, new int[] {2,4,3,2}, 1);
+        ZincArmorMaterial = EnumHelper.addArmorMaterial("Zinc", 10, new int[] {2,4,3,2}, 1);
 
         terraStoneIgInCobble = new BlockTerraIgInCobble(TFCSettings.getIntFor(config,"block","terraStoneIgInCobble", 198), Material.rock).setHardness(6F).setResistance(10F).setBlockName("IgInRockCobble");
         terraStoneIgIn = new BlockTerraIgIn(TFCSettings.getIntFor(config,"block","TerraIgIn", 209), Material.rock, terraStoneIgInCobble.blockID).setHardness(8F).setResistance(10F).setBlockName("IgInRock");	
-        terraStoneIgInSmooth = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInSmooth", 182), 64).setHardness(12F).setResistance(20F).setBlockName("IgInRockSmooth");
+        terraStoneIgInSmooth = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInSmooth", 182), 48).setHardness(12F).setResistance(20F).setBlockName("IgInRockSmooth");
         terraStoneIgInBrick = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInBrick", 186), 32).setHardness(12F).setResistance(25F).setBlockName("IgInRockBrick");
         
         terraStoneSedCobble = new BlockTerraSedCobble(TFCSettings.getIntFor(config,"block","terraStoneSedCobble", 199), Material.rock).setHardness(4F).setResistance(10F).setBlockName("SedRockCobble");
         terraStoneSed = new BlockTerraSed(TFCSettings.getIntFor(config,"block","TerraSed", 210), Material.rock, terraStoneSedCobble.blockID).setHardness(6F).setResistance(7F).setBlockName("SedRock");
-        terraStoneSedSmooth = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedSmooth", 183), 64).setHardness(10F).setResistance(20F).setBlockName("SedRockSmooth");
-        terraStoneSedBrick = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedBrick", 187), 32).setHardness(10F).setResistance(25F).setBlockName("SedRockBrick");
+        terraStoneSedSmooth = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedSmooth", 183), 112).setHardness(10F).setResistance(20F).setBlockName("SedRockSmooth");
+        terraStoneSedBrick = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedBrick", 187), 96).setHardness(10F).setResistance(25F).setBlockName("SedRockBrick");
         
         terraStoneIgExCobble = new BlockTerraIgExCobble(TFCSettings.getIntFor(config,"block","terraStoneIgExCobble", 200), Material.rock).setHardness(7F).setResistance(10F).setBlockName("IgExRockCobble");
         terraStoneIgEx = new BlockTerraIgEx(TFCSettings.getIntFor(config,"block","TerraIgEx", 211), Material.rock, terraStoneIgExCobble.blockID).setHardness(9F).setResistance(10F).setBlockName("IgExRock");
-        terraStoneIgExSmooth = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExSmooth", 184), 64).setHardness(13F).setResistance(20F).setBlockName("IgExRockSmooth");
-        terraStoneIgExBrick = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExBrick", 188), 32).setHardness(13F).setResistance(25F).setBlockName("IgExRockBrick");
+        terraStoneIgExSmooth = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExSmooth", 184), 51).setHardness(13F).setResistance(20F).setBlockName("IgExRockSmooth");
+        terraStoneIgExBrick = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExBrick", 188), 35).setHardness(13F).setResistance(25F).setBlockName("IgExRockBrick");
         
         terraStoneMMCobble = new BlockTerraMMCobble(TFCSettings.getIntFor(config,"block","terraStoneMMCobble", 201), Material.rock).setHardness(4F).setResistance(10F).setBlockName("MMRockCobble");
         terraStoneMM = new BlockTerraMM(TFCSettings.getIntFor(config,"block","TerraMM", 212), Material.rock, terraStoneMMCobble.blockID).setHardness(6F).setResistance(8F).setBlockName("MMRock");
-        terraStoneMMSmooth = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMSmooth", 185), 64).setHardness(10F).setResistance(20F).setBlockName("MMRockSmooth");
-        terraStoneMMBrick = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMBrick", 189), 32).setHardness(10F).setResistance(25F).setBlockName("MMRockBrick");
+        terraStoneMMSmooth = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMSmooth", 185), 122).setHardness(10F).setResistance(20F).setBlockName("MMRockSmooth");
+        terraStoneMMBrick = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMBrick", 189), 106).setHardness(10F).setResistance(25F).setBlockName("MMRockBrick");
 
         terraDirt = (new net.minecraft.src.TFC_Core.BlockTerraDirt(TFCSettings.getIntFor(config,"block","terraDirt", 190), 112,tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
         terraDirt2 = (new net.minecraft.src.TFC_Core.BlockTerraDirt2(TFCSettings.getIntFor(config,"block","terraDirt2", 191), 128,tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
@@ -885,10 +918,10 @@ public class mod_TFC_Core extends NetworkMod
         ZincChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","ZincChisel",16239),ZincToolMaterial).setItemName("Zinc Chisel").setMaxDamage(ZincUses).setIconCoord(13, 7);
         StoneChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","StoneChisel",16240),IgInToolMaterial).setItemName("Stone Chisel").setMaxDamage(IgInStoneUses).setIconCoord(0, 7);
 
-        IgInStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneSword",16241),IgInToolMaterial).setItemName("Stone Sword").setMaxDamage(IgInStoneUses).setIconCoord(0, 13);
-        IgExStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneSword",16242),IgExToolMaterial).setItemName("Stone Sword").setMaxDamage(IgExStoneUses).setIconCoord(0, 13);
-        SedStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneSword",16243),SedToolMaterial).setItemName("Stone Sword").setMaxDamage(SedStoneUses).setIconCoord(0, 13);
-        MMStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneSword",16244),MMToolMaterial).setItemName("Stone Sword").setMaxDamage(MMStoneUses).setIconCoord(0, 13);
+        //IgInStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneSword",16241),IgInToolMaterial).setItemName("Stone Sword").setMaxDamage(IgInStoneUses).setIconCoord(0, 13);
+        //IgExStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneSword",16242),IgExToolMaterial).setItemName("Stone Sword").setMaxDamage(IgExStoneUses).setIconCoord(0, 13);
+        //SedStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneSword",16243),SedToolMaterial).setItemName("Stone Sword").setMaxDamage(SedStoneUses).setIconCoord(0, 13);
+        //MMStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneSword",16244),MMToolMaterial).setItemName("Stone Sword").setMaxDamage(MMStoneUses).setIconCoord(0, 13);
         BismuthSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthSword",16245),BismuthToolMaterial).setItemName("Bismuth Sword").setMaxDamage(BismuthUses).setIconCoord(1, 13);
         BismuthBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeSword",16246),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 13);
         BlackBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeSword",16247),BlackBronzeToolMaterial).setItemName("Black Bronze Sword").setMaxDamage(BlackBronzeUses).setIconCoord(3, 13);
@@ -903,10 +936,10 @@ public class mod_TFC_Core extends NetworkMod
         TinSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","TinSword",16256),TinToolMaterial).setItemName("Tin Sword").setMaxDamage(TinUses).setIconCoord(12, 13);
         ZincSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","ZincSword",16257),ZincToolMaterial).setItemName("Zinc Sword").setMaxDamage(ZincUses).setIconCoord(13, 13);
 
-        IgInStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneMace",16258),IgInToolMaterial).setItemName("Stone Mace").setMaxDamage(IgInStoneUses).setIconCoord(0, 12);
-        IgExStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneMace",16259),IgExToolMaterial).setItemName("Stone Mace").setMaxDamage(IgExStoneUses).setIconCoord(0, 12);
-        SedStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneMace",16260),SedToolMaterial).setItemName("Stone Mace").setMaxDamage(SedStoneUses).setIconCoord(0, 12);
-        MMStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneMace",16261),MMToolMaterial).setItemName("Stone Mace").setMaxDamage(MMStoneUses).setIconCoord(0, 12);
+        //IgInStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneMace",16258),IgInToolMaterial).setItemName("Stone Mace").setMaxDamage(IgInStoneUses).setIconCoord(0, 12);
+        //IgExStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneMace",16259),IgExToolMaterial).setItemName("Stone Mace").setMaxDamage(IgExStoneUses).setIconCoord(0, 12);
+        //SedStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneMace",16260),SedToolMaterial).setItemName("Stone Mace").setMaxDamage(SedStoneUses).setIconCoord(0, 12);
+        //MMStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneMace",16261),MMToolMaterial).setItemName("Stone Mace").setMaxDamage(MMStoneUses).setIconCoord(0, 12);
         BismuthMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthMace",16262),BismuthToolMaterial).setItemName("Bismuth Mace").setMaxDamage(BismuthUses).setIconCoord(1, 12);
         BismuthBronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeMace",16263),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Mace").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 12);
         BlackBronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeMace",16264),BlackBronzeToolMaterial).setItemName("Black Bronze Mace").setMaxDamage(BlackBronzeUses).setIconCoord(3, 12);
@@ -965,11 +998,13 @@ public class mod_TFC_Core extends NetworkMod
         boneMMShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneMMShovel",16315),MMToolMaterial).setItemName("Bone MM Stone Shovel").setMaxDamage(MMStoneUses).setIconCoord(14, 4);
         boneMMAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneMMAxe",16316),MMToolMaterial).setItemName("Bone MM Stone Axe").setMaxDamage(MMStoneUses).setIconCoord(14, 5);
         boneMMHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setItemName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(14, 6);
-        //Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16299)).setItemName("javelin").setIconCoord(12, 0);
+        Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(15, 1);
 
         SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",18000),Block.crops.blockID,tilledSoil.blockID,tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);
 
-
+        Item.itemsList[Item.dyePowder.shiftedIndex] = null;
+        Item.itemsList[95] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
+        
 
         TFC_Core.Axes = new Item[]{mod_TFC_Core.terraSedAxe,mod_TFC_Core.terraIgInAxe,mod_TFC_Core.terraIgExAxe,mod_TFC_Core.terraMMAxe,
                 mod_TFC_Core.terraBismuthAxe,mod_TFC_Core.terraBismuthBronzeAxe,mod_TFC_Core.terraBlackBronzeAxe,
@@ -1149,7 +1184,7 @@ public class mod_TFC_Core extends NetworkMod
         MinecraftForge.registerOre("terraOreOlivine", new ItemStack(terraOre3,1,56));
         MinecraftForge.registerOre("terraOreLapisLazuli", new ItemStack(terraOre3,1,57));
 
-        MinecraftForge.registerOre("oreTin", new ItemStack(terraOre,1,28));
+        MinecraftForge.registerOre("oreTin", new ItemStack(OreChunk,1,28));
         MinecraftForge.registerOre("oreCopper", new ItemStack(terraOre,1,23));
         MinecraftForge.registerOre("oreCopper", new ItemStack(terraOre,1,36));
         MinecraftForge.registerOre("oreIron", new ItemStack(terraOre,1,26));
@@ -1182,6 +1217,7 @@ public class mod_TFC_Core extends NetworkMod
         MinecraftForge.registerOre("ingotRoseGold", new ItemStack(terraRoseGoldIngot,1));
         MinecraftForge.registerOre("ingotSilver", new ItemStack(terraSilverIngot,1));
         MinecraftForge.registerOre("ingotSteel", new ItemStack(terraSteelIngot,1));
+        MinecraftForge.registerOre("ingotRefinedIron", new ItemStack(terraSteelIngot,1));
         MinecraftForge.registerOre("ingotSterlingSilver", new ItemStack(terraSterlingSilverIngot,1));
         MinecraftForge.registerOre("ingotTin", new ItemStack(terraTinIngot,1));
         MinecraftForge.registerOre("ingotZinc", new ItemStack(terraZincIngot,1));

@@ -14,40 +14,27 @@ public class BlockTerraOre2 extends BlockTerra
 {
 
 	public BlockTerraOre2(int i, Material material) {
-		super(i, material);
+		super(i,144, material);
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 39; i < 55; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
+    {
+        for(int i = 0; i <16; i++) {
+            list.add(new ItemStack(this,1,i));
+        }
+    }
 
-	/*
-	 * Mapping from metadata value to damage value
-	 */
-	@Override
-	public int damageDropped(int j) 
-	{
-		if(j<7) {
-			return j+25;
-		} else {
-			return j-7+16;
-		}
-	}
+    @Override
+    public int damageDropped(int j) 
+    {
+        return j;
+    }
 
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
-	{
-		if(j<7) {
-			return j+48;
-		} else if(j<16) {
-			return j+32;
-		} else {
-			return j;
-		}
-	}
+    @Override
+    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    {
+        return blockIndexInTexture + j;
+    }
 
 	public int getRenderType()
 	{
@@ -61,14 +48,14 @@ public class BlockTerraOre2 extends BlockTerra
 		entityplayer.addExhaustion(0.025F);
 		Random random = new Random();
 
-		ItemStack itemstack = new ItemStack(mod_TFC_Core.OreChunk, 1 ,damageDropped(l));
+		ItemStack itemstack = new ItemStack(mod_TFC_Core.OreChunk, 1 ,damageDropped(l+16));
 
-		if(l == 12)
+		if(l == 5)
 		{
 			//Drop diamonds
 			itemstack = KimberliteGemSpawn();
 		}
-		else if(l == 4)
+		else if(l == 13)
 		{
 			itemstack = new ItemStack(mod_TFC_Core.terraSaltpeterPowder, 1 + random.nextInt(3));
 		}                      
@@ -120,4 +107,19 @@ public class BlockTerraOre2 extends BlockTerra
 
 		//mc.ingameGUI.addChatMessage("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).append(":").append(blockID).toString());  
 	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/bioxx/terraRock.png";
+    }
+	
+	public static String[] blockNames = { "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
+        "Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite"};
+    
+    public static String getItemNameDamage(int d) 
+    {
+        String s = blockNames[d];
+        return s;
+    }
 }

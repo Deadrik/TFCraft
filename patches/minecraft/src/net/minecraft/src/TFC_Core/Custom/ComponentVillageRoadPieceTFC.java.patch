@@ -1,0 +1,12 @@
+--- ../src_base/minecraft/src/net/minecraft/src/TFC_Core/Custom/ComponentVillageRoadPieceTFC.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/src/net/minecraft/src/TFC_Core/Custom/ComponentVillageRoadPieceTFC.java	0000-00-00 00:00:00.000000000 -0000
+@@ -0,0 +1,9 @@
++package net.minecraft.src.TFC_Core.Custom;
++
++public abstract class ComponentVillageRoadPieceTFC extends ComponentVillageTFC
++{
++    protected ComponentVillageRoadPieceTFC(int par1)
++    {
++        super(par1);
++    }
++}

@@ -65,6 +65,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 {
                     TileEntityTerraAnvil icte = (TileEntityTerraAnvil)te;
                     int id;
+                    int tier;
                     try {
                         id = dis.readInt();
                     } catch (IOException e) {
@@ -75,13 +76,15 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 else if (te instanceof TileEntityTerraFirepit) 
                 {
                     TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
-                    float t;
+
+                    int charcoal;
                     try {
-                        t = dis.readFloat();
-                    } catch (IOException e) {
+                        charcoal = dis.readInt();
+                    } catch (IOException e) 
+                    {
                         return;
                     } 
-                    icte.handlePacketData(t);
+                    icte.handlePacketData(charcoal);
                 }
                 else if (te instanceof TileEntityTerraBloomery) 
                 {
@@ -142,7 +145,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             dos.writeInt(x);
             dos.writeInt(y);
             dos.writeInt(z);
-            dos.writeFloat(tileEntity.fireTemperature);
+            dos.writeInt(tileEntity.charcoalCounter);
 
         } catch (IOException e) 
         {

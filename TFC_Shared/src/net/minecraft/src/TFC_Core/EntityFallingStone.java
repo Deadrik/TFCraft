@@ -13,7 +13,7 @@ public class EntityFallingStone extends Entity
 	{
 		super(world);
 		fallTime = 0;
-		metaID = 1;
+		metaID = 0;
 	}
 
 	public EntityFallingStone(World world, double d, double d1, double d2,
@@ -97,7 +97,7 @@ public class EntityFallingStone extends Entity
 				if (worldObj.getBlockId(i, j, k) != Block.pistonMoving.blockID)
 				{
 					setDead();
-					if ((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) || BlockSand.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
+					if ((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) || BlockTerraIgInCobble.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
 					{
 						ItemStack itemstack = new ItemStack(blockID,1,metaID);
 						EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);

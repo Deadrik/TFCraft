@@ -9,6 +9,7 @@ public class ContainerTerraFirepit extends Container
     private TileEntityTerraFirepit firepit;
 
     private float firetemp;
+    private int charcoal;
 
 
 
@@ -16,6 +17,7 @@ public class ContainerTerraFirepit extends Container
     {
         firepit = tileentityfirepit;
         firetemp = -1111;
+        charcoal = 0;
 
         //fuel in slot
         //addSlot(new SlotFirepitFuel(inventoryplayer.player,tileentityfirepit, 0, 44, 8));
@@ -279,9 +281,14 @@ public class ContainerTerraFirepit extends Container
             {
                 var2.updateCraftingInventoryInfo(this, 0, (int)this.firepit.fireTemperature);
             }
+            if (this.charcoal != this.firepit.charcoalCounter)
+            {
+                var2.updateCraftingInventoryInfo(this, 1, (int)this.firepit.charcoalCounter);
+            }
         }
         
         firetemp = this.firepit.fireTemperature;
+        charcoal = this.firepit.charcoalCounter;
     }
     
     public void updateProgressBar(int par1, int par2)
@@ -289,6 +296,10 @@ public class ContainerTerraFirepit extends Container
         if (par1 == 0)
         {
             this.firepit.fireTemperature = par2;
+        }
+        if (par1 == 1)
+        {
+            this.firepit.charcoalCounter = par2;
         }
 
     }

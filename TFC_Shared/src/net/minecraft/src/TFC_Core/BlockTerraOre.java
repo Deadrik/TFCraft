@@ -17,14 +17,13 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraOre extends BlockTerra
 {
-
 	public BlockTerraOre(int i, Material material) {
-		super(i, material);
+		super(i,128, material);
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 23; i <39; i++) {
+		for(int i = 0; i <16; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -32,24 +31,14 @@ public class BlockTerraOre extends BlockTerra
 	@Override
 	public int damageDropped(int j) 
 	{
-		if(j<7) {
-			return j+9;
-		} else {
-			return j-7;
-		}
+		return j;
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
-	{		
-		if(j<7) {
-			return j+32;
-		} else if(j<16) {
-			return j+16;
-		} else {
-			return j;
-		}
-	}
+    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    {
+        return blockIndexInTexture + j;
+    }
 
 	public int getRenderType()
 	{
@@ -65,10 +54,14 @@ public class BlockTerraOre extends BlockTerra
 		entityplayer.addExhaustion(0.025F);
 		Random random = new Random();
 		ItemStack itemstack;
-		if(l != 5 && l != 6) {
-			itemstack  = new ItemStack(mod_TFC_Core.OreChunk, 1, damageDropped(l));
-		} else {
-			itemstack  = new ItemStack(Item.coal,1+random.nextInt(2));
+		if(l == 14 || l == 15) 
+		{
+		    itemstack  = new ItemStack(Item.coal,1+random.nextInt(2));
+			
+		} 
+		else 
+		{
+		    itemstack  = new ItemStack(mod_TFC_Core.OreChunk, 1, damageDropped(l));
 		}
 
 		if (itemstack != null)
@@ -83,4 +76,20 @@ public class BlockTerraOre extends BlockTerra
 	{
 		return mod_TFC_Core.OreChunk.shiftedIndex;
 	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/bioxx/terraRock.png";
+    }
+	
+	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
+        "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
+        "Bituminous Coal", "Lignite"};
+    
+    public static String getItemNameDamage(int d) 
+    {
+        String s = blockNames[d];
+        return s;
+    }
 }

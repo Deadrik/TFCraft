@@ -1,0 +1,17 @@
+--- ../src_base/minecraft/net/minecraft/src/WorldServer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/WorldServer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -0,0 +1,14 @@
++package net.minecraft.src;
++
++public class WorldServer extends World
++{
++
++    public WorldServer(World par1World, WorldProvider par2WorldProvider)
++    {
++        super(par1World, par2WorldProvider);
++        // TODO Auto-generated constructor stub
++    }
++
++    public PlayerManager playerManager;
++
++}

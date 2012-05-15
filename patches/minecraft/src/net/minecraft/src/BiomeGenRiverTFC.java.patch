@@ -1,0 +1,15 @@
+--- ../src_base/minecraft/src/net/minecraft/src/BiomeGenRiverTFC.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/src/net/minecraft/src/BiomeGenRiverTFC.java	0000-00-00 00:00:00.000000000 -0000
+@@ -0,0 +1,12 @@
++package net.minecraft.src;
++
++public class BiomeGenRiverTFC extends BiomeGenBase
++{
++	public BiomeGenRiverTFC(int i)
++	{
++		super(i);
++		spawnableCreatureList.clear();
++		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
++		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
++	}
++}

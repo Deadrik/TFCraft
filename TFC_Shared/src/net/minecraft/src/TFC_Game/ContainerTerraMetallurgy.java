@@ -62,7 +62,8 @@ public class ContainerTerraMetallurgy extends Container
 			ItemStack itemstack = craftMatrix.getStackInSlot(i);
 			if (itemstack != null)
 			{
-				entityplayer.dropPlayerItem(itemstack);
+			    if(itemstack.stackSize > 0)
+			        entityplayer.dropPlayerItem(itemstack);
 			}
 		}
 	}

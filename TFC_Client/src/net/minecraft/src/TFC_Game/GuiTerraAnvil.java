@@ -96,9 +96,9 @@ public class GuiTerraAnvil extends GuiContainerTFC
         int h = (height - 198) / 2;
         drawTexturedModalRect(w, h, 0, 0, 208, 198);
 
-        int i1 = AnvilEntity.workRecipe!= null ? AnvilEntity.workRecipe.getCraftingValue() : 0;
+        int i1 = AnvilEntity.getCraftingValue();
         //(guiX,guiY,sourceMinX,sourceMinY,sourceMaxX,sourceMaxY
-        drawTexturedModalRect(w + 76 + i1, h + 103, 213, 10, 5, 5);
+        drawTexturedModalRect(w + 73 + i1, h + 103, 219, 9, 11, 6);
 
         i1 = AnvilEntity.getItemCraftingValue();
         drawTexturedModalRect(w + 76 + i1, h + 108, 208, 10, 5, 6);

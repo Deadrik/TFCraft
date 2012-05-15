@@ -26,26 +26,16 @@ public class TFCHeat
 		//ItemHeatData.put("tile.stonebrick", new Object[]{(float)0.75F,100000F,(float)1000F, new ItemStack(Block.stone,1)});
 
 		ItemHeatData.put("item.Ore.Native Copper", new Object[]{(float)0.67F,100000F,(float)1084, new ItemStack(mod_TFC_Game.UnshapedCopper,1,50)});
-
 		ItemHeatData.put("item.Ore.Native Gold", new Object[]{(float)0.77F,100000F,(float)1063, new ItemStack(mod_TFC_Game.UnshapedGold,1,50)});
-
 		ItemHeatData.put("item.Ore.Native Platinum", new Object[]{(float)0.82F,100000F,(float)1770, new ItemStack(mod_TFC_Game.UnshapedPlatinum,1,50)});
-
 		ItemHeatData.put("item.Ore.Hematite", new Object[]{(float)0.64F,100000F,(float)1536, new ItemStack(mod_TFC_Game.UnshapedPigIron,1,50)});
-
 		ItemHeatData.put("item.Ore.Native Silver", new Object[]{(float)0.72F,100000F,(float)961, new ItemStack(mod_TFC_Game.UnshapedSilver,1,50)});
-
 		ItemHeatData.put("item.Ore.Cassiterite", new Object[]{(float)0.69F,100000F,(float)232, new ItemStack(mod_TFC_Game.UnshapedTin,1,50)});
-
 		ItemHeatData.put("item.Ore.Galena", new Object[]{(float)0.77F,100000F,(float)327.5, new ItemStack(mod_TFC_Game.UnshapedLead,1,80), 
 				(float)961, new ItemStack(mod_TFC_Game.UnshapedSilver,1,80)});
-
 		ItemHeatData.put("item.Ore.Bismuthinite", new Object[]{(float)0.75F,100000F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,1,50)});
-
 		ItemHeatData.put("item.Ore.Garnierite", new Object[]{(float)0.65F,100000F,(float)1453, new ItemStack(mod_TFC_Game.UnshapedNickel,1,50)});
-
 		ItemHeatData.put("item.Ore.Malachite", new Object[]{(float)0.67F,100000F,(float)1084, new ItemStack(mod_TFC_Game.UnshapedCopper,1,50)});
-
 		ItemHeatData.put("item.Ore.Magnetite", new Object[]{(float)0.64F,100000F,(float)1536, new ItemStack(mod_TFC_Game.UnshapedPigIron,1,50)});
 
 		ItemHeatData.put("item.Ore.Limonite", new Object[]{(float)0.64F,100000F,(float)1536, new ItemStack(mod_TFC_Game.UnshapedPigIron,1,50)});
@@ -58,86 +48,234 @@ public class TFCHeat
 		ItemHeatData.put("item.terraBismuthIngot", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,1)});
 		ItemHeatData.put("item.UnshapedBismuth", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,1)});
 		ItemHeatData.put("item.terraBismuthIngot2x", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+		ItemHeatData.put("item.Bismuth"+"Sheet", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+		ItemHeatData.put("item.Bismuth"+"Sheet2x", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+		ItemHeatData.put("item.Bismuth"+"UnfinishedHelmet", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+		ItemHeatData.put("item.Bismuth"+"UnfinishedHelmet2", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+		ItemHeatData.put("item.Bismuth"+"UnfinishedChestplate", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+        ItemHeatData.put("item.Bismuth"+"UnfinishedChestplate2", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+        ItemHeatData.put("item.Bismuth"+"UnfinishedGreaves", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+        ItemHeatData.put("item.Bismuth"+"UnfinishedGreaves2", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+        ItemHeatData.put("item.Bismuth"+"UnfinishedBoots", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
+        ItemHeatData.put("item.Bismuth"+"UnfinishedBoots2", new Object[]{(float)0.75F,(float)1564F,(float)271.4, new ItemStack(mod_TFC_Game.UnshapedBismuth,2)});
 
 		ItemHeatData.put("item.terraBismuthBronzeIngot", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,1)});
 		ItemHeatData.put("item.UnshapedBismuthBronze", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,1)});
 		ItemHeatData.put("item.terraBismuthBronzeIngot2x", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+		ItemHeatData.put("item.BismuthBronze"+"Sheet", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+		ItemHeatData.put("item.BismuthBronze"+"Sheet2x", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+		ItemHeatData.put("item.BismuthBronze"+"UnfinishedHelmet", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+		ItemHeatData.put("item.BismuthBronze"+"UnfinishedHelmet2", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+		ItemHeatData.put("item.BismuthBronze"+"UnfinishedChestplate", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+        ItemHeatData.put("item.BismuthBronze"+"UnfinishedChestplate2", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+        ItemHeatData.put("item.BismuthBronze"+"UnfinishedGreaves", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+        ItemHeatData.put("item.BismuthBronze"+"UnfinishedGreaves2", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+        ItemHeatData.put("item.BismuthBronze"+"UnfinishedBoots", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
+        ItemHeatData.put("item.BismuthBronze"+"UnfinishedBoots2", new Object[]{(float)0.65F,(float)1941F,(float)985, new ItemStack(mod_TFC_Game.UnshapedBismuthBronze,2)});
 
 		ItemHeatData.put("item.terraBlackBronzeIngot", new Object[]{(float)0.70F, (float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,1)});
 		ItemHeatData.put("item.UnshapedBlackBronze", new Object[]{(float)0.70F, (float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,1)});
 		ItemHeatData.put("item.terraBlackBronzeIngot2x", new Object[]{(float)0.70F, (float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+		ItemHeatData.put("item.BlackBronze"+"Sheet", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+        ItemHeatData.put("item.BlackBronze"+"Sheet2x", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+		ItemHeatData.put("item.BlackBronze"+"UnfinishedHelmet", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+		ItemHeatData.put("item.BlackBronze"+"UnfinishedHelmet2", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+		ItemHeatData.put("item.BlackBronze"+"UnfinishedChestplate", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+        ItemHeatData.put("item.BlackBronze"+"UnfinishedChestplate2", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+        ItemHeatData.put("item.BlackBronze"+"UnfinishedGreaves", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+        ItemHeatData.put("item.BlackBronze"+"UnfinishedGreaves2", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+        ItemHeatData.put("item.BlackBronze"+"UnfinishedBoots", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
+        ItemHeatData.put("item.BlackBronze"+"UnfinishedBoots2", new Object[]{(float)0.70F,(float)2219,(float)1070, new ItemStack(mod_TFC_Game.UnshapedBlackBronze,2)});
 
-		ItemHeatData.put("item.terraBlackSteelIngot", new Object[]{(float)0.63F, (float)2726.85,(float)1485, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,1)});
-		ItemHeatData.put("item.UnshapedBlackSteel", new Object[]{(float)0.63F, (float)2726.85,(float)1485, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,1)});
-		ItemHeatData.put("item.terraBlackSteelIngot2x", new Object[]{(float)0.63F, (float)2726.85,(float)1485, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        float sh = 0.63F; float boil = 2726; float melt = 1485;
+		ItemHeatData.put("item.terraBlackSteelIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,1)});
+		ItemHeatData.put("item.UnshapedBlackSteel", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,1)});
+		ItemHeatData.put("item.terraBlackSteelIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+		ItemHeatData.put("item.BlackSteel"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+		ItemHeatData.put("item.BlackSteel"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
+        ItemHeatData.put("item.BlackSteel"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlackSteel,2)});
 
-		ItemHeatData.put("item.terraBlueSteelIngot", new Object[]{(float)0.60F,(float)3460,(float)1680, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,1)});
-		ItemHeatData.put("item.UnshapedBlueSteel", new Object[]{(float)0.60F,(float)3460,(float)1680, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,1)});
-		ItemHeatData.put("item.terraBlueSteelIngot2x", new Object[]{(float)0.60F,(float)3460,(float)1680, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        sh = 0.60F; boil = 3460; melt = 1680;
+		ItemHeatData.put("item.terraBlueSteelIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,1)});
+		ItemHeatData.put("item.UnshapedBlueSteel", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,1)});
+		ItemHeatData.put("item.terraBlueSteelIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+		ItemHeatData.put("item.BlueSteel"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
+        ItemHeatData.put("item.BlueSteel"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBlueSteel,2)});
 
-		ItemHeatData.put("item.terraBrassIngot", new Object[]{(float)0.65F,(float)1760,(float)930, new ItemStack(mod_TFC_Game.UnshapedBrass,1)});
-		ItemHeatData.put("item.UnshapedBrass", new Object[]{(float)0.65F,(float)1760,(float)930, new ItemStack(mod_TFC_Game.UnshapedBrass,1)});
-		ItemHeatData.put("item.terraBrassIngot2x", new Object[]{(float)0.65F,(float)1760,(float)930, new ItemStack(mod_TFC_Game.UnshapedBrass,2)});
+		sh = 0.65F; boil = 1760; melt = 930;
+		ItemHeatData.put("item.terraBrassIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBrass,1)});
+		ItemHeatData.put("item.UnshapedBrass", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBrass,1)});
+		ItemHeatData.put("item.terraBrassIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBrass,2)});
 
-		ItemHeatData.put("item.terraBronzeIngot", new Object[]{(float)0.65F, (float)2380,(float)950, new ItemStack(mod_TFC_Game.UnshapedBronze,1)});
-		ItemHeatData.put("item.UnshapedBronze", new Object[]{(float)0.65F, (float)2380,(float)950, new ItemStack(mod_TFC_Game.UnshapedBronze,1)});
-		ItemHeatData.put("item.terraBronzeIngot2x", new Object[]{(float)0.65F, (float)2380,(float)950, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+		sh = 0.65F; boil = 2380; melt = 950;
+		ItemHeatData.put("item.terraBronzeIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,1)});
+		ItemHeatData.put("item.UnshapedBronze", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,1)});
+		ItemHeatData.put("item.terraBronzeIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+		ItemHeatData.put("item.Bronze"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
+        ItemHeatData.put("item.Bronze"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedBronze,2)});
 
-		ItemHeatData.put("item.terraCopperIngot", new Object[]{(float)0.67F,(float)2575,(float)1084, new ItemStack(mod_TFC_Game.UnshapedCopper,1)});
-		ItemHeatData.put("item.UnshapedCopper", new Object[]{(float)0.67F,(float)2575,(float)1084, new ItemStack(mod_TFC_Game.UnshapedCopper,1)});
-		ItemHeatData.put("item.terraCopperIngot2x", new Object[]{(float)0.67F,(float)2575,(float)1084, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+		sh = 0.67F; boil = 1760; melt = 1084;
+		ItemHeatData.put("item.terraCopperIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,1)});
+		ItemHeatData.put("item.UnshapedCopper", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,1)});
+		ItemHeatData.put("item.terraCopperIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+		ItemHeatData.put("item.Copper"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
+        ItemHeatData.put("item.Copper"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedCopper,2)});
 
-		ItemHeatData.put("item.terraGoldIngot", new Object[]{(float)0.77F,(float)2856,(float)1063, new ItemStack(mod_TFC_Game.UnshapedGold,1)});
-		ItemHeatData.put("item.UnshapedGold", new Object[]{(float)0.77F,(float)2856,(float)1063, new ItemStack(mod_TFC_Game.UnshapedGold,1)});
-		ItemHeatData.put("item.terraGoldIngot2x", new Object[]{(float)0.77F,(float)2856,(float)1063, new ItemStack(mod_TFC_Game.UnshapedGold,2)});
+		sh = 0.77F; boil = 1760; melt = 1063;
+		ItemHeatData.put("item.terraGoldIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedGold,1)});
+		ItemHeatData.put("item.UnshapedGold", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedGold,1)});
+		ItemHeatData.put("item.terraGoldIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedGold,2)});
 
-		ItemHeatData.put("item.terraWroughtIronIngot", new Object[]{(float)0.64F,(float)2870,(float)1536, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,1)});
-		ItemHeatData.put("item.UnshapedWroughtIron", new Object[]{(float)0.64F,(float)2870,(float)1536, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,1)});
-		ItemHeatData.put("item.terraWroughtIronIngot2x", new Object[]{(float)0.64F,(float)2870,(float)1536, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+		sh = 0.64F; boil = 1760; melt = 1536;
+		ItemHeatData.put("item.terraWroughtIronIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,1)});
+		ItemHeatData.put("item.UnshapedWroughtIron", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,1)});
+		ItemHeatData.put("item.terraWroughtIronIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+		ItemHeatData.put("item.WroughtIron"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
+        ItemHeatData.put("item.WroughtIron"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedWroughtIron,2)});
 
-		ItemHeatData.put("item.terraLeadIngot", new Object[]{(float)0.82F,(float)1750,(float)327.5, new ItemStack(mod_TFC_Game.UnshapedLead,1)});
-		ItemHeatData.put("item.UnshapedLead", new Object[]{(float)0.82F,(float)1750,(float)327.5, new ItemStack(mod_TFC_Game.UnshapedLead,1)});
-		ItemHeatData.put("item.terraLeadIngot2x", new Object[]{(float)0.82F,(float)1750,(float)327.5, new ItemStack(mod_TFC_Game.UnshapedLead,2)});
+		sh = 0.82F; boil = 1750; melt = 327;
+		ItemHeatData.put("item.terraLeadIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedLead,1)});
+		ItemHeatData.put("item.UnshapedLead", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedLead,1)});
+		ItemHeatData.put("item.terraLeadIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedLead,2)});
 
-		ItemHeatData.put("item.terraNickelIngot", new Object[]{(float)0.56F,(float)2732,(float)1453, new ItemStack(mod_TFC_Game.UnshapedNickel,1)});
-		ItemHeatData.put("item.UnshapedNickel", new Object[]{(float)0.56F,(float)2732,(float)1453, new ItemStack(mod_TFC_Game.UnshapedNickel,1)});
-		ItemHeatData.put("item.terraNickelIngot2x", new Object[]{(float)0.56F,(float)2732,(float)1453, new ItemStack(mod_TFC_Game.UnshapedNickel,2)});
+		sh = 0.56F; boil = 2732; melt = 930;
+		ItemHeatData.put("item.terraNickelIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedNickel,1)});
+		ItemHeatData.put("item.UnshapedNickel", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedNickel,1)});
+		ItemHeatData.put("item.terraNickelIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedNickel,2)});
 
-		ItemHeatData.put("item.terraPigIronIngot", new Object[]{(float)0.59F,(float)3150,(float)1500, new ItemStack(mod_TFC_Game.UnshapedPigIron,1)});
-		ItemHeatData.put("item.UnshapedPigIron", new Object[]{(float)0.59F,(float)3150,(float)1500, new ItemStack(mod_TFC_Game.UnshapedPigIron,1)});
-		ItemHeatData.put("item.terraPigIronIngot2x", new Object[]{(float)0.59F,(float)3150,(float)1500, new ItemStack(mod_TFC_Game.UnshapedPigIron,2)});
+		sh = 0.59F; boil = 3150; melt = 1500;
+		ItemHeatData.put("item.terraPigIronIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedPigIron,1)});
+		ItemHeatData.put("item.UnshapedPigIron", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedPigIron,1)});
+		ItemHeatData.put("item.terraPigIronIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedPigIron,2)});
 
-		ItemHeatData.put("item.terraPlatinumIngot", new Object[]{(float)0.82F,(float)3825,(float)1770, new ItemStack(mod_TFC_Game.UnshapedPlatinum,1)});
-		ItemHeatData.put("item.UnshapedPlatinum", new Object[]{(float)0.82F,(float)3825,(float)1770, new ItemStack(mod_TFC_Game.UnshapedPlatinum,1)});
-		ItemHeatData.put("item.terraPlatinumIngot2x", new Object[]{(float)0.82F,(float)3825,(float)1770, new ItemStack(mod_TFC_Game.UnshapedPlatinum,2)});
+		sh = 0.82F; boil = 1760; melt = 1770;
+		ItemHeatData.put("item.terraPlatinumIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedPlatinum,1)});
+		ItemHeatData.put("item.UnshapedPlatinum", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedPlatinum,1)});
+		ItemHeatData.put("item.terraPlatinumIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedPlatinum,2)});
 
-		ItemHeatData.put("item.terraRedSteelIngot", new Object[]{(float)0.60F,(float)3589,(float)1770, new ItemStack(mod_TFC_Game.UnshapedRedSteel,1)});
-		ItemHeatData.put("item.UnshapedRedSteel", new Object[]{(float)0.60F,(float)3589,(float)1770, new ItemStack(mod_TFC_Game.UnshapedRedSteel,1)});
-		ItemHeatData.put("item.terraRedSteelIngot2x", new Object[]{(float)0.60F,(float)3589,(float)1770, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+		sh = 0.60F; boil = 3589; melt = 1770;
+		ItemHeatData.put("item.terraRedSteelIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,1)});
+		ItemHeatData.put("item.UnshapedRedSteel", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,1)});
+		ItemHeatData.put("item.terraRedSteelIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+		ItemHeatData.put("item.RedSteel"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
+        ItemHeatData.put("item.RedSteel"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRedSteel,2)});
 
-		ItemHeatData.put("item.terraRoseGoldIngot", new Object[]{(float)0.69F,(float)2650,(float)960, new ItemStack(mod_TFC_Game.UnshapedRoseGold,1)});
-		ItemHeatData.put("item.UnshapedRoseGold", new Object[]{(float)0.69F,(float)2650,(float)960, new ItemStack(mod_TFC_Game.UnshapedRoseGold,1)});
-		ItemHeatData.put("item.terraRoseGoldIngot2x", new Object[]{(float)0.69F,(float)2650,(float)960, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+		sh = 0.69F; boil = 2650; melt = 960;
+		ItemHeatData.put("item.terraRoseGoldIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,1)});
+		ItemHeatData.put("item.UnshapedRoseGold", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,1)});
+		ItemHeatData.put("item.terraRoseGoldIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+		ItemHeatData.put("item.RoseGold"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
+        ItemHeatData.put("item.RoseGold"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedRoseGold,2)});
 
-		ItemHeatData.put("item.terraSilverIngot", new Object[]{(float)0.72F,(float)2212,(float)961, new ItemStack(mod_TFC_Game.UnshapedSilver,1)});
-		ItemHeatData.put("item.UnshapedSilver", new Object[]{(float)0.72F,(float)2212,(float)961, new ItemStack(mod_TFC_Game.UnshapedSilver,1)});
-		ItemHeatData.put("item.terraSilverIngot2x", new Object[]{(float)0.72F,(float)2212,(float)961, new ItemStack(mod_TFC_Game.UnshapedSilver,2)});
+		sh = 0.72F; boil = 2212; melt = 961;
+		ItemHeatData.put("item.terraSilverIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSilver,1)});
+		ItemHeatData.put("item.UnshapedSilver", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSilver,1)});
+		ItemHeatData.put("item.terraSilverIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSilver,2)});
 
-		ItemHeatData.put("item.terraSteelIngot", new Object[]{(float)0.63F,(float)3500,(float)1540, new ItemStack(mod_TFC_Game.UnshapedSteel,1)});
-		ItemHeatData.put("item.UnshapedSteel", new Object[]{(float)0.63F,(float)3500,(float)1540, new ItemStack(mod_TFC_Game.UnshapedSteel,1)});
-		ItemHeatData.put("item.terraSteelIngot2x", new Object[]{(float)0.63F,(float)3500,(float)1540, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+		sh = 0.63F; boil = 3500; melt = 1540;
+		ItemHeatData.put("item.terraSteelIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,1)});
+		ItemHeatData.put("item.UnshapedSteel", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,1)});
+		ItemHeatData.put("item.terraSteelIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+		ItemHeatData.put("item.Steel"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
+        ItemHeatData.put("item.Steel"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedSteel,2)});
 
-		ItemHeatData.put("item.terraSterlingSilverIngot", new Object[]{(float)0.72F,(float)2212,(float)893, new ItemStack(mod_TFC_Game.UnshapedSterlingSilver,1)});
-		ItemHeatData.put("item.UnshapedSterlingSilver", new Object[]{(float)0.72F,(float)2212,(float)893, new ItemStack(mod_TFC_Game.UnshapedSterlingSilver,1)});
-		ItemHeatData.put("item.terraSterlingSilverIngot2x", new Object[]{(float)0.72F,(float)2212,(float)893, new ItemStack(mod_TFC_Game.UnshapedSterlingSilver,2)});
+		sh = 0.72F; boil = 2212; melt = 893;
+		ItemHeatData.put("item.terraSterlingSilverIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSterlingSilver,1)});
+		ItemHeatData.put("item.UnshapedSterlingSilver", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSterlingSilver,1)});
+		ItemHeatData.put("item.terraSterlingSilverIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedSterlingSilver,2)});
 
-		ItemHeatData.put("item.terraTinIngot", new Object[]{(float)0.69F,(float)2600,(float)232, new ItemStack(mod_TFC_Game.UnshapedTin,1)});
-		ItemHeatData.put("item.UnshapedTin", new Object[]{(float)0.69F,(float)2600,(float)232, new ItemStack(mod_TFC_Game.UnshapedTin,1)});
-		ItemHeatData.put("item.terraTinIngot2x", new Object[]{(float)0.69F,(float)2600,(float)232, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+		sh = 0.69F; boil = 2600; melt = 232;
+		ItemHeatData.put("item.terraTinIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,1)});
+		ItemHeatData.put("item.UnshapedTin", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,1)});
+		ItemHeatData.put("item.terraTinIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+		ItemHeatData.put("item.Tin"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
+        ItemHeatData.put("item.Tin"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedTin,2)});
 
-		ItemHeatData.put("item.terraZincIngot", new Object[]{(float)0.66F,(float)907,(float)419.5, new ItemStack(mod_TFC_Game.UnshapedZinc,1)});
-		ItemHeatData.put("item.UnshapedZinc", new Object[]{(float)0.66F,(float)907,(float)419.5, new ItemStack(mod_TFC_Game.UnshapedZinc,1)});
-		ItemHeatData.put("item.terraZincIngot2x", new Object[]{(float)0.66F,(float)907,(float)419.5, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+		sh = 0.66F; boil = 907; melt = 420;
+		ItemHeatData.put("item.terraZincIngot", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,1)});
+		ItemHeatData.put("item.UnshapedZinc", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,1)});
+		ItemHeatData.put("item.terraZincIngot2x", new Object[]{sh, boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+		ItemHeatData.put("item.Zinc"+"Sheet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"Sheet2x", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedHelmet", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedHelmet2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedChestplate", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedChestplate2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedGreaves", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedGreaves2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedBoots", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
+        ItemHeatData.put("item.Zinc"+"UnfinishedBoots2", new Object[]{sh,boil, melt, new ItemStack(mod_TFC_Game.UnshapedZinc,2)});
 
 		ItemHeatData.put("item.terraHCSteelIngot", new Object[]{(float)0.63F,(float)3500,(float)1540, new ItemStack(mod_TFC_Game.UnshapedHCSteel,1)});
 		ItemHeatData.put("item.terraWeakSteelIngot", new Object[]{(float)0.63F,(float)3500,(float)1540, new ItemStack(mod_TFC_Game.UnshapedWeakSteel,1)});
@@ -167,6 +305,7 @@ public class TFCHeat
 
 		//Torches
 		ItemHeatData.put("item.stick", new Object[]{(float)13.0F,800F,(float)210.5, new ItemStack(Block.torchWood,2)});
+		
 	}
 	public static Boolean canRemoveTag(Object tag, String key, Class c)
 	{
@@ -322,7 +461,7 @@ public class TFCHeat
 	{
 		if(temp < meltTemp)
 		{
-			if(temp > 0 && temp < meltTemp*0.1F)
+			if(temp < meltTemp*0.1F)
 			{
 				return "Cold";
 			}
@@ -465,8 +604,8 @@ public class TFCHeat
 		{
 			if(inventory[i] != null && inventory[i].hasTagCompound())
 			{
-				if(inventory[i].stackSize < 0) {
-					inventory[i].stackSize = 1;
+				if(inventory[i].stackSize <= 0) {
+					inventory[i].stackSize = 0;
 				}
 
 				NBTTagCompound comp = inventory[i].getTagCompound();

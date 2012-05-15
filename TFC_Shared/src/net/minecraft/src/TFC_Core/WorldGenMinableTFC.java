@@ -65,14 +65,14 @@ public class WorldGenMinableTFC extends WorldGenerator
 		this.hDens = hDensity;
 	}
 
-	public boolean BetterOreDistribution(int xChunk, int zChunk, int MPMinableBlockId, int MPMinableBlockMeta)//======================================================================================
+	public boolean BetterOreDistribution(int xChunk, int zChunk, int MPMinableBlockId, int MPMinableBlockMeta, int min, int max)//======================================================================================
 	{
 		if (rand.nextInt(rarity) == 0)
 		{
 			for(int loopCount = 0; loopCount < veinAm; loopCount++)
 			{
 				int temp1 = mPCalculateDensity(diameter, hDens);
-				int temp2 = mPCalculateDensity(height, vDens);
+				int temp2 = mPCalculateDensityVert(height, vDens, min, max);
 				int temp3 = mPCalculateDensity(diameter, hDens);
 				int l5 = xChunk + temp1;
 				int i9 = temp2;
@@ -144,7 +144,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 		return true;
 	}
 
-	public boolean generate(World world, Random random, int x, int z)//absorb default system
+	public boolean generate(World world, Random random, int x, int z, int min, int max)//absorb default system
 	{
 		MPChunk_X = x/16*16;// set output chunk x
 		MPChunk_Z = z/16*16;// set output chunk z
@@ -160,7 +160,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 			MPPrevZ = MPChunk_Z;
 			MPPrevID = MPBlockID;
 			MPPrevMeta = MPBlockMeta;
-			BetterOreDistribution(MPChunk_X, MPChunk_Z, MPBlockID, MPBlockMeta);
+			BetterOreDistribution(MPChunk_X, MPChunk_Z, MPBlockID, MPBlockMeta, min, max);
 
 
 		}
@@ -203,4 +203,24 @@ public class WorldGenMinableTFC extends WorldGenerator
 		if (dValPass > 128) {dValPass = 128;}
 		return dValPass; // return proccesed random value
 	}
+	//======================================================================================
+    public int mPCalculateDensityVert(int oreDist, float oreDens, int min, int max) // returns the density value
+    {
+        int lpCnt = 0;
+        int dValPassInr = 0;
+        int dValPass = 0;
+        oreDens = oreDens * .01F;
+        oreDens = oreDens * (oreDist / 2) + 1F;// establishes number of times to loop
+        lpCnt = (int)oreDens; //stores number of times to loop
+        dValPassInr = (int)(oreDist/oreDens+.5F); // distance devided by number of times it will loop, establishes the number for randomization
+        dValPass = min;
+        while (lpCnt > 0) // loops to acumulate random values
+        {
+            dValPass = dValPass + rand.nextInt(dValPassInr); // acumulate randoms
+            lpCnt--;// decriment loop
+        }
+        if (dValPass < min){dValPass = min;}
+        if (dValPass > max) {dValPass = max;}
+        return dValPass; // return proccesed random value
+    }
 }

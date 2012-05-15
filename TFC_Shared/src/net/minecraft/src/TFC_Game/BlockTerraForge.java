@@ -199,7 +199,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 	}
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).fireTemperature < 210)
+		if (this.blockID == mod_TFC_Game.terraForge.blockID)
 		{
 			return;
 		}

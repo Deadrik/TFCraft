@@ -13,9 +13,9 @@ public class BlockCollapsable extends BlockTerra
 {
 	public int dropBlock;
 
-	protected BlockCollapsable(int par1, Material material, int d)
+	protected BlockCollapsable(int par1,int par2, Material material, int d)
 	{
-		super(par1,  material);
+		super(par1, par2, material);
 		dropBlock = d;
 	}
 
@@ -556,11 +556,6 @@ public class BlockCollapsable extends BlockTerra
 			{
 				Random R = new Random();
 
-				if(fallingBlockID == mod_TFC_Core.terraStoneMMCobble.blockID)
-				{
-					l+=17;
-				}
-
 				world.spawnEntityInWorld(new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5));
 				world.setBlock(i, j, k, 0);
 
@@ -569,4 +564,5 @@ public class BlockCollapsable extends BlockTerra
 		}
 		return false;
 	}
+
 }

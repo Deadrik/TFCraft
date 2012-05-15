@@ -171,7 +171,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).fireTemperature < 210)
+		if (this.blockID == mod_TFC_Game.terraFirepit.blockID)
 		{
 			return;
 		}

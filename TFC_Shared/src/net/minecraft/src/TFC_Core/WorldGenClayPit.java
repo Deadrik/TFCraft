@@ -24,7 +24,7 @@ public class WorldGenClayPit extends WorldGenerator
 		int var6 = par2Random.nextInt(this.numberOfBlocks - 2) + 2;
 		byte var7 = 1;
 
-		if(par2Random.nextInt(30) == 0 && par4 <= 70)
+		if(par2Random.nextInt(30) == 0 && par4 <= 150)
 		{
 			for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
 			{

@@ -1,0 +1,20 @@
+--- ../src_base/minecraft/net/minecraft/src/Packet.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/Packet.java	0000-00-00 00:00:00.000000000 -0000
+@@ -227,7 +227,7 @@
+             short var5 = par1DataInputStream.readShort();
+             var2 = new ItemStack(var3, var4, var5);
+ 
+-            if (Item.itemsList[var3].isDamageable() || Item.itemsList[var3].func_46056_k())
++            if (Item.itemsList[var3].isDamageable() || Item.itemsList[var3].func_46056_k() || true)
+             {
+                 var2.stackTagCompound = this.readNBTTagCompound(par1DataInputStream);
+             }
+@@ -251,7 +251,7 @@
+             par2DataOutputStream.writeByte(par1ItemStack.stackSize);
+             par2DataOutputStream.writeShort(par1ItemStack.getItemDamage());
+ 
+-            if (par1ItemStack.getItem().isDamageable() || par1ItemStack.getItem().func_46056_k())
++            if (par1ItemStack.getItem().isDamageable() || par1ItemStack.getItem().func_46056_k() || true)
+             {
+                 this.writeNBTTagCompound(par1ItemStack.stackTagCompound, par2DataOutputStream);
+             }

@@ -17,37 +17,27 @@ public class BlockTerraOre3 extends BlockTerra
 {
 
 	public BlockTerraOre3(int i, Material material) {
-		super(i, material);
+		super(i,160, material);
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 55; i < 58; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
+    {
+        for(int i = 0; i < 3; i++) {
+            list.add(new ItemStack(this,1,i));
+        }
+    }
 
-	@Override
-	public int damageDropped(int j) 
-	{
-		if(j<7) {
-			return j+41;
-		} else {
-			return j-7+32;
-		}
-	}
+    @Override
+    public int damageDropped(int j) 
+    {
+        return j;
+    }
 
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
-	{
-		if(j<7) {
-			return j+64;
-		} else if(j<16) {
-			return j+48;
-		} else {
-			return j;
-		}
-	}
+    @Override
+    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    {
+        return blockIndexInTexture + j;
+    }
 
 	public int getRenderType()
 	{
@@ -64,7 +54,7 @@ public class BlockTerraOre3 extends BlockTerra
 		entityplayer.addExhaustion(0.025F);
 		Random random = new Random();
 
-		ItemStack itemstack = new ItemStack(mod_TFC_Core.OreChunk, 1, damageDropped(l));
+		ItemStack itemstack = new ItemStack(mod_TFC_Core.OreChunk, 1, damageDropped(l+32));
 
 		if (itemstack != null)
 		{
@@ -78,4 +68,18 @@ public class BlockTerraOre3 extends BlockTerra
 	{
 		return mod_TFC_Core.OreChunk.shiftedIndex;
 	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/bioxx/terraRock.png";
+    }
+	
+	public static String[] blockNames = { "Borax", "Olivine", "LapisLazuli"};
+    
+    public static String getItemNameDamage(int d) 
+    {
+        String s = blockNames[d];
+        return s;
+    }
 }

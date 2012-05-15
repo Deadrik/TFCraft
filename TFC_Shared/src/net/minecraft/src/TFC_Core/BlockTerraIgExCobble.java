@@ -13,6 +13,11 @@ public class BlockTerraIgExCobble extends BlockTerra2 implements ITextureProvide
 
 	public static boolean fallInstantly = false;
 
+	public BlockTerraIgExCobble(int i, Material material) 
+	{
+        super(i,19, material);
+    }
+	
 	public static boolean canFallBelow(World world, int i, int j, int k)
 	{
 		int l = world.getBlockId(i, j, k);
@@ -32,14 +37,12 @@ public class BlockTerraIgExCobble extends BlockTerra2 implements ITextureProvide
 		return material == Material.lava;
 	}
 
-	public BlockTerraIgExCobble(int i, Material material) {
-		super(i, material);
-	}
+	
 
 
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 13; i < 17; i++) {
+		for(int i = 0; i < 4; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -49,12 +52,8 @@ public class BlockTerraIgExCobble extends BlockTerra2 implements ITextureProvide
 	 */
 	@Override
 	protected int damageDropped(int i) {
-		switch (i) {
-		case 0:
-			return 16;
-		default:
+
 			return i;
-		}
 	}
 
 	/**
@@ -62,19 +61,13 @@ public class BlockTerraIgExCobble extends BlockTerra2 implements ITextureProvide
 	 */
 	public int getBlockTextureFromSideAndMetadata(int par1, int par2)
 	{
-		switch (par2) 
-		{
-		case 0:
-			return this.blockIndexInTexture + 16;
-		default:
-			return this.blockIndexInTexture + par2;
-		}
+		return this.blockIndexInTexture + par2;
 	}
 
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return "/bioxx/terraRock.png";
 	}
 
 	public void onBlockAdded(World world, int i, int j, int k)

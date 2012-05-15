@@ -41,7 +41,8 @@ public class ItemTerraAnvil extends Item implements ITextureProvider
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-		if(objectMouseOver == null) {
+		if(objectMouseOver == null) 
+		{
 			return false;
 		}		
 		int x = objectMouseOver.blockX;

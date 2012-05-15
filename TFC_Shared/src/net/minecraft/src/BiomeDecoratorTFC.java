@@ -97,7 +97,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
 		{
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			var4 = this.randomGenerator.nextInt(128);
+			var4 = this.randomGenerator.nextInt(256);
 			var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			new WorldGenDeadBush(Block.deadBush.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 		}
@@ -107,7 +107,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 
-			for (var7 = this.randomGenerator.nextInt(128); var7 > 0 && this.currentWorld.getBlockId(var3, var7 - 1, var4) == 0; --var7)
+			for (var7 = this.randomGenerator.nextInt(256); var7 > 0 && this.currentWorld.getBlockId(var3, var7 - 1, var4) == 0; --var7)
 			{
 				;
 			}
@@ -119,14 +119,14 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		{
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			var7 = this.randomGenerator.nextInt(128);
+			var7 = this.randomGenerator.nextInt(256);
 			this.reedGen.generate(this.currentWorld, this.randomGenerator, var3, var7, var4);
 		}
 
 		for (var2 = 0; var2 < 10; ++var2)
 		{
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			var4 = this.randomGenerator.nextInt(128);
+			var4 = this.randomGenerator.nextInt(256);
 			var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			this.reedGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 		}
@@ -134,7 +134,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		if (this.randomGenerator.nextInt(32) == 0)
 		{
 			var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			var3 = this.randomGenerator.nextInt(128);
+			var3 = this.randomGenerator.nextInt(256);
 			var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			new WorldGenPumpkin().generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
 		}
@@ -142,7 +142,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		for (var2 = 0; var2 < this.cactiPerChunk; ++var2)
 		{
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			var4 = this.randomGenerator.nextInt(128);
+			var4 = this.randomGenerator.nextInt(256);
 			var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			this.cactusGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 		}
@@ -152,7 +152,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			for (var2 = 0; var2 < 50; ++var2)
 			{
 				var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-				var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(120) + 8);
+				var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(247) + 8);
 				var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				new WorldGenLiquidsTFC(Block.waterMoving.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 			}
@@ -160,7 +160,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			for (var2 = 0; var2 < 20; ++var2)
 			{
 				var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-				var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(this.randomGenerator.nextInt(112) + 8) + 8);
+				var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(this.randomGenerator.nextInt(239) + 8) + 8);
 				var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 				new WorldGenLiquidsTFC(Block.lavaMoving.blockID).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 			}
