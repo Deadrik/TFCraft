@@ -541,19 +541,19 @@ public class TFC_Core
 						new Object[] {new ItemStack(mod_TFC_Core.terraStoneIgInCobble,1,j),new ItemStack(Chisels[i],1,-1)});
 			}
 
-			for(int j = 0; j < 13; j++)
+			for(int j = 0; j < 10; j++)
 			{
 				ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneSedBrick,1,j), 
 						new Object[] {new ItemStack(mod_TFC_Core.terraStoneSedCobble,1,j),new ItemStack(Chisels[i],1,-1)});
 			}
 
-			for(int j = 13; j < 17; j++)
+			for(int j = 0; j < 4; j++)
 			{
 				ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneIgExBrick,1,j), 
 						new Object[] {new ItemStack(mod_TFC_Core.terraStoneIgExCobble,1,j),new ItemStack(Chisels[i],1,-1)});
 			}
 
-			for(int j = 17; j < 23; j++)
+			for(int j = 0; j < 6; j++)
 			{
 				ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneMMBrick,1,j), 
 						new Object[] {new ItemStack(mod_TFC_Core.terraStoneMMCobble,1,j),new ItemStack(Chisels[i],1,-1)});

@@ -99,14 +99,4 @@ public class BlockTerraMetallurgy extends BlockContainer implements ITextureProv
 
 		return "/bioxx/terrablocks.png";
 	}
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
 }

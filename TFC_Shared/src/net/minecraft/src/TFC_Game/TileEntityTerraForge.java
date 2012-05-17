@@ -650,14 +650,18 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
 
                     AddedAir = (float)(numAirBlocks+bAir)/25/16;//1038.225 Max //0.3625
 
-                    if(yCoord > 60)
-                    {					
-                        float w = worldObj.getHeight() - yCoord;
-                        float w1 = w / worldObj.getHeight();
+                    if(yCoord > 145 && yCoord < 210)
+                    {                   
+                        float w = 210 - yCoord;
+                        float w1 = w / 210;
                         float w2 = 1 - w1;
                         float w3 = w2 * 0.105F;
 
-                        AddedAir += w3;//? Max //0.1025390625 //@64-40
+                        AddedAir += w3;//0.0725 min / 0.1045 max
+                    }
+                    else if(yCoord >= 210)
+                    {
+                        AddedAir += 0.1045F;
                     }
 
                     desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;

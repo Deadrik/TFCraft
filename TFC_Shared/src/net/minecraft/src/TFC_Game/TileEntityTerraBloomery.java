@@ -388,15 +388,15 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
             AddedAir = (float)(numAirBlocks+bAir)/25/16;
 
-            if(yCoord > 60)
-            {					
-                float w = worldObj.getHeight() - yCoord;
-                float w1 = w / worldObj.getHeight();
-                float w2 = 1 - w1;
-                float w3 = w2 * 0.105F;
-
-                AddedAir += w3;
-            }
+//            if(yCoord > 60)
+//            {					
+//                float w = worldObj.getHeight() - yCoord;
+//                float w1 = w / worldObj.getHeight();
+//                float w2 = 1 - w1;
+//                float w3 = w2 * 0.105F;
+//
+//                AddedAir += w3;
+//            }
 
             desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
 
