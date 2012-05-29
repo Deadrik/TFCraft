@@ -114,7 +114,7 @@ public class EntityTerraJavelin extends Entity
 	{
 		if (!this.worldObj.isRemote)
 		{
-			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0 && par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(mod_TFC_Core.Javelin, 1)))
+			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0 && par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Javelin, 1)))
 			{
 				this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				par1EntityPlayer.onItemPickup(this, 1);

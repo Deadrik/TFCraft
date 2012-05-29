@@ -19,6 +19,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.General.HeatIndex;
@@ -298,7 +299,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                     {
                         if(fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal)
                         {
-                            fireItemStacks[i] = new ItemStack(mod_TFC_Game.terraCeramicMold, 1);
+                            fireItemStacks[i] = new ItemStack(TFCItems.terraCeramicMold, 1);
                             fireItemStacks[i].stackTagCompound = null;
                         }
                     }
@@ -369,19 +370,19 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
 
     public int getMoldIndex()
     {
-        if(fireItemStacks[10] != null && fireItemStacks[10].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[10] != null && fireItemStacks[10].itemID == TFCItems.terraCeramicMold.shiftedIndex)
         {
             return 10;
         }
-        if(fireItemStacks[11] != null && fireItemStacks[11].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[11] != null && fireItemStacks[11].itemID == TFCItems.terraCeramicMold.shiftedIndex)
         {
             return 11;
         }
-        if(fireItemStacks[12] != null && fireItemStacks[12].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[12] != null && fireItemStacks[12].itemID == TFCItems.terraCeramicMold.shiftedIndex)
         {
             return 12;
         }
-        if(fireItemStacks[13] != null && fireItemStacks[13].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[13] != null && fireItemStacks[13].itemID == TFCItems.terraCeramicMold.shiftedIndex)
         {
             return 13;
         }

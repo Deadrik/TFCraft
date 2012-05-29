@@ -208,7 +208,7 @@ public class ContainerTerraAnvil extends Container
 			}
 			else
 			{
-				if(itemstack1.itemID == mod_TFC_Game.Flux.shiftedIndex)
+				if(itemstack1.itemID == TFCItems.Flux.shiftedIndex)
 				{
 					if(slotflux.getHasStack())
 					{
@@ -230,11 +230,11 @@ public class ContainerTerraAnvil extends Container
 					slothammer.putStack(stack);
 					itemstack1.stackSize--;
 				}
-				else if(itemstack1.itemID == mod_TFC_Game.HammerHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.SawBladePlan.shiftedIndex ||
-						itemstack1.itemID == mod_TFC_Game.PickaxeHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.ProPickHeadPlan.shiftedIndex ||
-						itemstack1.itemID == mod_TFC_Game.ChiselHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.AxeHeadPlan.shiftedIndex ||
-						itemstack1.itemID == mod_TFC_Game.SwordBladePlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.HoeHeadPlan.shiftedIndex ||
-						itemstack1.itemID == mod_TFC_Game.ShovelHeadPlan.shiftedIndex || itemstack1.itemID == mod_TFC_Game.MaceHeadPlan.shiftedIndex)
+				else if(itemstack1.itemID == TFCItems.HammerHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.SawBladePlan.shiftedIndex ||
+						itemstack1.itemID == TFCItems.PickaxeHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.ProPickHeadPlan.shiftedIndex ||
+						itemstack1.itemID == TFCItems.ChiselHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.AxeHeadPlan.shiftedIndex ||
+						itemstack1.itemID == TFCItems.SwordBladePlan.shiftedIndex || itemstack1.itemID == TFCItems.HoeHeadPlan.shiftedIndex ||
+						itemstack1.itemID == TFCItems.ShovelHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.MaceHeadPlan.shiftedIndex)
 				{
 					if(slotblueprint.getHasStack())
 					{

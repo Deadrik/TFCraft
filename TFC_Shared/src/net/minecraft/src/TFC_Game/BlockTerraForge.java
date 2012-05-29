@@ -7,6 +7,7 @@ import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
@@ -57,7 +58,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 		{
 			return true;
 		} 
-		else if(itemid == mod_TFC_Game.terraFireStarter.shiftedIndex)
+		else if(itemid == TFCItems.terraFireStarter.shiftedIndex)
 		{
 			if((TileEntityTerraForge)world.getBlockTileEntity(i, j, k) != null)
 			{

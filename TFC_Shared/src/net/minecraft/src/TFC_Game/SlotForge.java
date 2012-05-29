@@ -19,7 +19,7 @@ public class SlotForge extends Slot
 	    {
 	        return false;
 	    }
-		if(!(itemstack.getItem().shiftedIndex == mod_TFC_Core.OreChunk.shiftedIndex))
+		if(!(itemstack.getItem().shiftedIndex == TFCItems.OreChunk.shiftedIndex))
 		{
 			return true;
 		}

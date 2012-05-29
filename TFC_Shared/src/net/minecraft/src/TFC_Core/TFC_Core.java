@@ -10,23 +10,11 @@ public class TFC_Core
 {
 	public enum Direction{PosX,PosZ,NegX,NegZ,None,PosXPosZ,PosXNegZ,NegXPosZ,NegXNegZ,NegY,PosY}
 
-	public static Item[] Axes = {mod_TFC_Core.terraSedAxe,mod_TFC_Core.terraIgInAxe,mod_TFC_Core.terraIgExAxe,mod_TFC_Core.terraMMAxe,
-		mod_TFC_Core.terraBismuthAxe,mod_TFC_Core.terraBismuthBronzeAxe,mod_TFC_Core.terraBlackBronzeAxe,
-		mod_TFC_Core.terraBlackSteelAxe,mod_TFC_Core.terraBlueSteelAxe,mod_TFC_Core.terraBronzeAxe,mod_TFC_Core.terraCopperAxe,
-		mod_TFC_Core.terraWroughtIronAxe,mod_TFC_Core.terraRedSteelAxe,mod_TFC_Core.terraRoseGoldAxe,mod_TFC_Core.terraSteelAxe,
-		mod_TFC_Core.terraTinAxe,mod_TFC_Core.terraZincAxe,
-		mod_TFC_Core.boneSedAxe,mod_TFC_Core.boneIgInAxe,mod_TFC_Core.boneIgExAxe,mod_TFC_Core.boneMMAxe};
+	public static Item[] Axes;
 
-	public static Item[] Chisels = {mod_TFC_Core.BismuthChisel,mod_TFC_Core.BismuthBronzeChisel,mod_TFC_Core.BlackBronzeChisel,
-		mod_TFC_Core.BlackSteelChisel,mod_TFC_Core.BlueSteelChisel,mod_TFC_Core.BronzeChisel,mod_TFC_Core.CopperChisel,
-		mod_TFC_Core.WroughtIronChisel,mod_TFC_Core.RedSteelChisel,mod_TFC_Core.RoseGoldChisel,mod_TFC_Core.SteelChisel,
-		mod_TFC_Core.TinChisel,mod_TFC_Core.ZincChisel};
+	public static Item[] Chisels;
 
-
-	public static Item[] Saws = {mod_TFC_Core.BismuthSaw,mod_TFC_Core.BismuthBronzeSaw,mod_TFC_Core.BlackBronzeSaw,
-		mod_TFC_Core.BlackSteelSaw,mod_TFC_Core.BlueSteelSaw,mod_TFC_Core.BronzeSaw,mod_TFC_Core.CopperSaw,
-		mod_TFC_Core.WroughtIronSaw,mod_TFC_Core.RedSteelSaw,mod_TFC_Core.RoseGoldSaw,mod_TFC_Core.SteelSaw,
-		mod_TFC_Core.TinSaw,mod_TFC_Core.ZincSaw};
+	public static Item[] Saws;
 	
 	private static void createOre(int i, int j, int[] Layers, int rarity, int veinSize, 
 			int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max)
@@ -407,103 +395,103 @@ public class TFC_Core
 		return false;
 	}
 
-	public static ItemStack RandomGem(Random random, int rockType)
-	{
-		ItemStack is = null;
-		if(random.nextInt(250) == 0)
-		{
-			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,0));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,0));
+    public static ItemStack RandomGem(Random random, int rockType)
+    {
+        ItemStack is = null;
+        if(random.nextInt(250) == 0)
+        {
+            ArrayList items = new ArrayList<ItemStack>();
+            items.add(new ItemStack(TFCItems.terraGemAgate,1,0));
+            items.add(new ItemStack(TFCItems.terraGemAmethyst,1,0));
+            items.add(new ItemStack(TFCItems.terraGemBeryl,1,0));
+            items.add(new ItemStack(TFCItems.terraGemEmerald,1,0));
+            items.add(new ItemStack(TFCItems.terraGemGarnet,1,0));
+            items.add(new ItemStack(TFCItems.terraGemJade,1,0));
+            items.add(new ItemStack(TFCItems.terraGemJasper,1,0));
+            items.add(new ItemStack(TFCItems.terraGemOpal,1,0));
+            items.add(new ItemStack(TFCItems.terraGemRuby,1,0));
+            items.add(new ItemStack(TFCItems.terraGemSapphire,1,0));
+            items.add(new ItemStack(TFCItems.terraGemTourmaline,1,0));
+            items.add(new ItemStack(TFCItems.terraGemTopaz,1,0));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+            is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
 
-		}
-		else if(random.nextInt(625) == 0)
-		{
-			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,1));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,1));
+        }
+        else if(random.nextInt(625) == 0)
+        {
+            ArrayList items = new ArrayList<ItemStack>();
+            items.add(new ItemStack(TFCItems.terraGemAgate,1,1));
+            items.add(new ItemStack(TFCItems.terraGemAmethyst,1,1));
+            items.add(new ItemStack(TFCItems.terraGemBeryl,1,1));
+            items.add(new ItemStack(TFCItems.terraGemEmerald,1,1));
+            items.add(new ItemStack(TFCItems.terraGemGarnet,1,1));
+            items.add(new ItemStack(TFCItems.terraGemJade,1,1));
+            items.add(new ItemStack(TFCItems.terraGemJasper,1,1));
+            items.add(new ItemStack(TFCItems.terraGemOpal,1,1));
+            items.add(new ItemStack(TFCItems.terraGemRuby,1,1));
+            items.add(new ItemStack(TFCItems.terraGemSapphire,1,1));
+            items.add(new ItemStack(TFCItems.terraGemTourmaline,1,1));
+            items.add(new ItemStack(TFCItems.terraGemTopaz,1,1));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
-		}
-		else if(random.nextInt(1250) == 0)
-		{
-			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,2));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,2));
+            is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+        }
+        else if(random.nextInt(1250) == 0)
+        {
+            ArrayList items = new ArrayList<ItemStack>();
+            items.add(new ItemStack(TFCItems.terraGemAgate,1,2));
+            items.add(new ItemStack(TFCItems.terraGemAmethyst,1,2));
+            items.add(new ItemStack(TFCItems.terraGemBeryl,1,2));
+            items.add(new ItemStack(TFCItems.terraGemEmerald,1,2));
+            items.add(new ItemStack(TFCItems.terraGemGarnet,1,2));
+            items.add(new ItemStack(TFCItems.terraGemJade,1,2));
+            items.add(new ItemStack(TFCItems.terraGemJasper,1,2));
+            items.add(new ItemStack(TFCItems.terraGemOpal,1,2));
+            items.add(new ItemStack(TFCItems.terraGemRuby,1,2));
+            items.add(new ItemStack(TFCItems.terraGemSapphire,1,2));
+            items.add(new ItemStack(TFCItems.terraGemTourmaline,1,2));
+            items.add(new ItemStack(TFCItems.terraGemTopaz,1,2));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
-		}
-		else if(random.nextInt(1875) == 0)
-		{
-			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,3));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,3));
+            is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+        }
+        else if(random.nextInt(1875) == 0)
+        {
+            ArrayList items = new ArrayList<ItemStack>();
+            items.add(new ItemStack(TFCItems.terraGemAgate,1,3));
+            items.add(new ItemStack(TFCItems.terraGemAmethyst,1,3));
+            items.add(new ItemStack(TFCItems.terraGemBeryl,1,3));
+            items.add(new ItemStack(TFCItems.terraGemEmerald,1,3));
+            items.add(new ItemStack(TFCItems.terraGemGarnet,1,3));
+            items.add(new ItemStack(TFCItems.terraGemJade,1,3));
+            items.add(new ItemStack(TFCItems.terraGemJasper,1,3));
+            items.add(new ItemStack(TFCItems.terraGemOpal,1,3));
+            items.add(new ItemStack(TFCItems.terraGemRuby,1,3));
+            items.add(new ItemStack(TFCItems.terraGemSapphire,1,3));
+            items.add(new ItemStack(TFCItems.terraGemTourmaline,1,3));
+            items.add(new ItemStack(TFCItems.terraGemTopaz,1,3));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
-		}
-		else if(random.nextInt(2500) == 0)
-		{
-			ArrayList items = new ArrayList<ItemStack>();
-			items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,4));
-			items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,4));
+            is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+        }
+        else if(random.nextInt(2500) == 0)
+        {
+            ArrayList items = new ArrayList<ItemStack>();
+            items.add(new ItemStack(TFCItems.terraGemAgate,1,4));
+            items.add(new ItemStack(TFCItems.terraGemAmethyst,1,4));
+            items.add(new ItemStack(TFCItems.terraGemBeryl,1,4));
+            items.add(new ItemStack(TFCItems.terraGemEmerald,1,4));
+            items.add(new ItemStack(TFCItems.terraGemGarnet,1,4));
+            items.add(new ItemStack(TFCItems.terraGemJade,1,4));
+            items.add(new ItemStack(TFCItems.terraGemJasper,1,4));
+            items.add(new ItemStack(TFCItems.terraGemOpal,1,4));
+            items.add(new ItemStack(TFCItems.terraGemRuby,1,4));
+            items.add(new ItemStack(TFCItems.terraGemSapphire,1,4));
+            items.add(new ItemStack(TFCItems.terraGemTourmaline,1,4));
+            items.add(new ItemStack(TFCItems.terraGemTopaz,1,4));
 
-			is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
+            is = (ItemStack)items.toArray()[random.nextInt(items.toArray().length)];
 
-		}
-		return is;
-	}
+        }
+        return is;
+    }
 
 	public static void RegisterRecipes()
 	{
@@ -514,22 +502,22 @@ public class TFC_Core
 		{
 			for(int j = 0; j < Axes.length; j++)
 			{
-				ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 1, i), new Object[] {new ItemStack(mod_TFC_Core.Logs, 1, i), new ItemStack(Axes[j], 1, -1)});
-				ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWoodSupportItemV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(mod_TFC_Core.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
-				ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWoodSupportItemH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(mod_TFC_Core.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
+				ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 1, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Axes[j], 1, -1)});
+				ModLoader.addRecipe(new ItemStack(TFCItems.terraWoodSupportItemV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
+				ModLoader.addRecipe(new ItemStack(TFCItems.terraWoodSupportItemH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(TFCItems.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
 			}
 			for(int j = 0; j < Saws.length; j++)
 			{
-				ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 3, i), new Object[] {new ItemStack(mod_TFC_Core.Logs, 1, i), new ItemStack(Saws[j], 1, -1)});
+				ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 3, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, -1)});
 			}
-			ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 1, i), new Object[] {new ItemStack(mod_TFC_Core.Logs, 1, i), new ItemStack(mod_TFC_Core.FlintPaxel, 1, -1)});
+			ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 1, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(TFCItems.FlintPaxel, 1, -1)});
 		}
 
 		//Red Stone		
 		ModLoader.addRecipe(new ItemStack(Item.redstone, 8), new Object[] { 
-			"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.OreChunk, 1, 28)});
+			"1", Character.valueOf('1'),new ItemStack(TFCItems.OreChunk, 1, 28)});
 		//Lapis Lazuli	
-		ModLoader.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(mod_TFC_Core.OreChunk, 1, 35)});
+		ModLoader.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 35)});
 
 
 		for(int i = 0; i < 13; i++)
@@ -561,18 +549,18 @@ public class TFC_Core
 
 		if(TFCSettings.enableVanillaDiamondRecipe == true)
 		{
-			ModLoader.addRecipe(new ItemStack(Item.diamond, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.terraGemDiamond,1,2)});
-			ModLoader.addRecipe(new ItemStack(Item.diamond, 2), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.terraGemDiamond,1,3)});
-			ModLoader.addRecipe(new ItemStack(Item.diamond, 3), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.terraGemDiamond,1,4)});
+			ModLoader.addRecipe(new ItemStack(Item.diamond, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.terraGemDiamond,1,2)});
+			ModLoader.addRecipe(new ItemStack(Item.diamond, 2), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.terraGemDiamond,1,3)});
+			ModLoader.addRecipe(new ItemStack(Item.diamond, 3), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.terraGemDiamond,1,4)});
 		}
 		if(TFCSettings.enableVanillaIronRecipe == true)
 		{
-			ModLoader.addRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.WroughtIronIngot,1)});
+			ModLoader.addRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.WroughtIronIngot,1)});
 
 		}
 		if(TFCSettings.enableVanillaGoldRecipe == true)
 		{
-			ModLoader.addRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.GoldIngot,1)});
+			ModLoader.addRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GoldIngot,1)});
 		}
 		if(TFCSettings.enableVanillaRecipes == true)
 		{
@@ -595,257 +583,132 @@ public class TFC_Core
 			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneSedCobble.blockID,  new ItemStack(mod_TFC_Core.terraStoneSed));
 			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneMMCobble.blockID,   new ItemStack(mod_TFC_Core.terraStoneMM));
 
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 23,new ItemStack(mod_TFC_Core.CopperIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 32,new ItemStack(mod_TFC_Core.CopperIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 36,new ItemStack(mod_TFC_Core.CopperIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 35,new ItemStack(mod_TFC_Core.ZincIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 34,new ItemStack(mod_TFC_Core.WroughtIronIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 33,new ItemStack(mod_TFC_Core.WroughtIronIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 26,new ItemStack(mod_TFC_Core.WroughtIronIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 25,new ItemStack(mod_TFC_Core.PlatinumIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 24,new ItemStack(mod_TFC_Core.GoldIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 31,new ItemStack(mod_TFC_Core.NickelIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 29,new ItemStack(mod_TFC_Core.SilverIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 27,new ItemStack(mod_TFC_Core.SilverIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 30,new ItemStack(mod_TFC_Core.BismuthIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 28,new ItemStack(mod_TFC_Core.TinIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 23,new ItemStack(TFCItems.CopperIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 32,new ItemStack(TFCItems.CopperIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 36,new ItemStack(TFCItems.CopperIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 35,new ItemStack(TFCItems.ZincIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 34,new ItemStack(TFCItems.WroughtIronIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 33,new ItemStack(TFCItems.WroughtIronIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 26,new ItemStack(TFCItems.WroughtIronIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 25,new ItemStack(TFCItems.PlatinumIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 24,new ItemStack(TFCItems.GoldIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 31,new ItemStack(TFCItems.NickelIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 29,new ItemStack(TFCItems.SilverIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 27,new ItemStack(TFCItems.SilverIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 30,new ItemStack(TFCItems.BismuthIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 28,new ItemStack(TFCItems.TinIngot));
 		}
 	}
 
-	@SuppressWarnings("unused")
 	public static void RegisterTools()
 	{
-		Item[] Ingots = {mod_TFC_Core.BismuthIngot, mod_TFC_Core.BismuthBronzeIngot,mod_TFC_Core.BlackBronzeIngot,
-				mod_TFC_Core.BlackSteelIngot,mod_TFC_Core.BlueSteelIngot,mod_TFC_Core.BrassIngot,mod_TFC_Core.BronzeIngot,
-				mod_TFC_Core.BronzeIngot,mod_TFC_Core.CopperIngot,mod_TFC_Core.GoldIngot,mod_TFC_Core.WroughtIronIngot,mod_TFC_Core.LeadIngot
-				,mod_TFC_Core.NickelIngot,mod_TFC_Core.PigIronIngot,mod_TFC_Core.PlatinumIngot,mod_TFC_Core.RedSteelIngot,
-				mod_TFC_Core.RoseGoldIngot,mod_TFC_Core.SilverIngot,mod_TFC_Core.SteelIngot,mod_TFC_Core.SterlingSilverIngot
-				,mod_TFC_Core.TinIngot,mod_TFC_Core.ZincIngot};
+		Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
+		        TFCItems.BlackSteelIngot,TFCItems.BlueSteelIngot,TFCItems.BrassIngot,TFCItems.BronzeIngot,
+				TFCItems.BronzeIngot,TFCItems.CopperIngot,TFCItems.GoldIngot,TFCItems.WroughtIronIngot,TFCItems.LeadIngot
+				,TFCItems.NickelIngot,TFCItems.PigIronIngot,TFCItems.PlatinumIngot,TFCItems.RedSteelIngot,
+				TFCItems.RoseGoldIngot,TFCItems.SilverIngot,TFCItems.SteelIngot,TFCItems.SterlingSilverIngot
+				,TFCItems.TinIngot,TFCItems.ZincIngot};
 
 		if(TFCSettings.enableVanillaRecipes == true)
 		{
 			//Conversion to vanilla tools for recipes in other mods
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgInPick});
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgExPick});
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraSedPick});
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraMMPick});
-			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgInShovel});
-			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgExShovel});
-			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraSedShovel});
-			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraMMShovel});
-			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgInHoe});
-			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgExHoe});
-			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraSedHoe});
-			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraMMHoe});
-			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgInAxe});
-			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraIgExAxe});
-			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraSedAxe});
-			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), mod_TFC_Core.terraMMAxe});
-
-			for (int i = 0; i < 22 && false; i++)
-			{
-				Object[] pickaxeRecipe = new Object[] { "111"," 2 "," 2 ", Character.valueOf('1'), Ingots[i],Character.valueOf('2'), Item.stick};
-				Object[] shovelRecipe = new Object[] { "1 ","2 ","2 ", Character.valueOf('1'), Ingots[i],Character.valueOf('2'), Item.stick};
-				Object[] hoeRecipe = new Object[] { "11"," 2"," 2", Character.valueOf('1'), Ingots[i],Character.valueOf('2'), Item.stick};
-				Object[] axeRecipe = new Object[] { "11 ","12 "," 2 ", Character.valueOf('1'), Ingots[i],Character.valueOf('2'), Item.stick};
-
-				if (Ingots[i].getItemName().equals("ingotBismuth"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotBismuthBronze"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzePick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBismuthBronzeAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotBlackBronze"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzePick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackBronzeAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotBlackSteel"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlackSteelAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotBlueSteel"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBlueSteelAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotBronze"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBronzePick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBronzeShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBronzeHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBronzeAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotCopper"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraCopperPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraCopperShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraCopperHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraCopperAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotGold"))
-				{
-
-				}
-				if (Ingots[i].getItemName().equals("terraWroughtIronIngot"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWroughtIronAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotNickel"))
-				{
-
-				}
-				if (Ingots[i].getItemName().equals("ingotPigIron"))
-				{
-
-				}
-				if (Ingots[i].getItemName().equals("ingotPlatinum"))
-				{
-
-				}
-				if (Ingots[i].getItemName().equals("ingotRedSteel"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRedSteelPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRedSteelShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRedSteelHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRedSteelAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotRoseGold"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraRoseGoldAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotSilver"))
-				{
-
-				}
-				if (Ingots[i].getItemName().equals("ingotSteel"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSteelPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSteelShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSteelHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSteelAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotSterlingSilver"))
-				{
-
-				}
-				if (Ingots[i].getItemName().equals("ingotTin"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraTinPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraTinShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraTinHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraTinAxe, 1, 0), axeRecipe);
-				}
-				if (Ingots[i].getItemName().equals("ingotZinc"))
-				{
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraZincPick, 1, 0), pickaxeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraZincShovel, 1, 0), shovelRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraZincHoe, 1, 0), hoeRecipe);
-					ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraZincAxe, 1, 0), axeRecipe);
-				}
-			}
+			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgInPick});
+			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgExPick});
+			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraSedPick});
+			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraMMPick});
+			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgInShovel});
+			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgExShovel});
+			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraSedShovel});
+			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraMMShovel});
+			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgInHoe});
+			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgExHoe});
+			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraSedHoe});
+			ModLoader.addRecipe(new ItemStack(Item.hoeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraMMHoe});
+			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgInAxe});
+			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraIgExAxe});
+			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraSedAxe});
+			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.terraMMAxe});
 		}
 		//jimmnator's javelin disabled till beta 2
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.Javelin, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.Javelin, 1, 0), new Object[] { 
 		"1","2","2", Character.valueOf('1'), Item.flint,Character.valueOf('2'), Item.stick});
 
 		//stone picks
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgInPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgInPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgExPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgExPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSedPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraSedPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMMPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraMMPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.stick});
 		//stone shovels
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgInShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgInShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgExShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgExShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSedShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraSedShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMMShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraMMShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.stick});
 		//stone hoes
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgInHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgInHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgExHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgExHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSedHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraSedHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMMHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraMMHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.stick});
 		//stone axes
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgInAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgInAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraIgExAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraIgExAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraSedAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraSedAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.stick});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMMAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraMMAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.stick});
 
 		//the bone versions
 		//stone picks
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgInPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgInPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgExPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgExPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneSedPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneSedPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneMMPick, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneMMPick, 1, 0), new Object[] { 
 			"111"," 2 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.bone});
 		//stone shovels
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgInShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgInShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgExShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgExShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneSedShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneSedShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneMMShovel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneMMShovel, 1, 0), new Object[] { 
 			"1 ","2 ","2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.bone});
 		//stone hoes
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgInHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgInHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgExHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgExHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneSedHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneSedHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneMMHoe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneMMHoe, 1, 0), new Object[] { 
 			"11"," 2"," 2", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.bone});
 		//stone axes
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgInAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgInAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneIgExAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneIgExAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneSedAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneSedAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), Item.bone});
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.boneMMAxe, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.boneMMAxe, 1, 0), new Object[] { 
 			"11 ","12 "," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), Item.bone});
 
-		ModLoader.addRecipe(new ItemStack(mod_TFC_Core.FlintPaxel, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.FlintPaxel, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), Item.flint,Character.valueOf('2'), Item.stick});
 
 

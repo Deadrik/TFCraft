@@ -8,6 +8,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
@@ -74,13 +75,13 @@ public class BlockTerraSluice extends BlockContainer
 					TileEntityTerraSluice tileentitysluice;
 					tileentitysluice = (TileEntityTerraSluice)world.getBlockTileEntity(i, j, k);
 					ItemStack is =entityplayer.getCurrentEquippedItem();
-					if(is!= null && is.itemID == mod_TFC_Game.terraGoldPan.shiftedIndex && is.getItemDamage() != 0)
+					if(is!= null && is.itemID == TFCItems.terraGoldPan.shiftedIndex && is.getItemDamage() != 0)
 					{
 						tileentitysluice.soilAmount+=5;
 						if(tileentitysluice.soilAmount > 50) {
 							tileentitysluice.soilAmount = 50;
 						}
-						entityplayer.setItemInUse(new ItemStack(mod_TFC_Game.terraGoldPan, 1, 0), 0);
+						entityplayer.setItemInUse(new ItemStack(TFCItems.terraGoldPan, 1, 0), 0);
 						/*The line below was uncommented before the smp inclusion. If this section isn't working it's because the above line never worked properly.
 						 * Apparently I was doing the same thing twice, so I'm not sure if one of these wasn't working.*/
 						//mc.thePlayer.inventory.setInventorySlotContents(mc.thePlayer.inventory.currentItem, new ItemStack(mod_TFC_Game.terraGoldPan,1,0));
@@ -141,7 +142,7 @@ public class BlockTerraSluice extends BlockContainer
 	public int idDropped(int i, Random random, int j)
 	{
 		if(!isBlockFootOfBed(i)) {
-			return mod_TFC_Game.terraSluiceItem.shiftedIndex;
+			return TFCItems.terraSluiceItem.shiftedIndex;
 		} else {
 			return 0;
 		}

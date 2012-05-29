@@ -48,7 +48,7 @@ public class BlockCustomCrops extends BlockCustomFlower
 		{
 			if (world.rand.nextInt(15) <= metadata)
 			{
-				ret.add(new ItemStack(mod_TFC_Core.SeedsWheat));
+				ret.add(new ItemStack(TFCItems.SeedsWheat));
 			}
 		}
 

@@ -10,6 +10,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatList;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
@@ -61,7 +62,7 @@ public class BlockTerraOre extends BlockTerra
 		} 
 		else 
 		{
-		    itemstack  = new ItemStack(mod_TFC_Core.OreChunk, 1, damageDropped(l));
+		    itemstack  = new ItemStack(TFCItems.OreChunk, 1, damageDropped(l));
 		}
 
 		if (itemstack != null)
@@ -74,7 +75,7 @@ public class BlockTerraOre extends BlockTerra
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return mod_TFC_Core.OreChunk.shiftedIndex;
+		return TFCItems.OreChunk.shiftedIndex;
 	}
 	
 	@Override

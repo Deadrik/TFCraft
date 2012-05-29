@@ -9,6 +9,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatList;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.forge.ITextureProvider;
@@ -54,7 +55,7 @@ public class BlockTerraOre3 extends BlockTerra
 		entityplayer.addExhaustion(0.025F);
 		Random random = new Random();
 
-		ItemStack itemstack = new ItemStack(mod_TFC_Core.OreChunk, 1, damageDropped(l+32));
+		ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1, damageDropped(l+32));
 
 		if (itemstack != null)
 		{
@@ -66,7 +67,7 @@ public class BlockTerraOre3 extends BlockTerra
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return mod_TFC_Core.OreChunk.shiftedIndex;
+		return TFCItems.OreChunk.shiftedIndex;
 	}
 	
 	@Override

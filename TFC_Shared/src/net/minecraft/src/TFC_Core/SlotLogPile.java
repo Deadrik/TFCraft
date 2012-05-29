@@ -16,7 +16,7 @@ public class SlotLogPile extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == mod_TFC_Core.Logs.shiftedIndex) {
+		if(itemstack.itemID == TFCItems.Logs.shiftedIndex) {
 			return true;
 		}
 

@@ -215,7 +215,7 @@ public class ContainerTerraFirepit extends Container
             }
             else
             {
-                if(itemstack1.itemID == mod_TFC_Core.Logs.shiftedIndex)
+                if(itemstack1.itemID == TFCItems.Logs.shiftedIndex)
                 {
                     if(slotfuel.getHasStack())
                     {

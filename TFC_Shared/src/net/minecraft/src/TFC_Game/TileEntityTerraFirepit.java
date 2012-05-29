@@ -15,6 +15,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
@@ -245,14 +246,14 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[8].stackTagCompound = nbt;
                     }
-                    else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() == mod_TFC_Game.terraCeramicMold)
+                    else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() == TFCItems.terraCeramicMold)
                     {
                         fireItemStacks[7] = output;
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[7].stackTagCompound = nbt;
                     }
-                    else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == mod_TFC_Game.terraCeramicMold)
+                    else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.terraCeramicMold)
                     {
                         fireItemStacks[8] = output;
                         NBTTagCompound nbt = new NBTTagCompound();
@@ -276,7 +277,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                             nbt.setFloat("temperature", inputItemTemp);
                             fireItemStacks[8].stackTagCompound = nbt;
                         }
-                        else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == mod_TFC_Game.terraCeramicMold)
+                        else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.terraCeramicMold)
                         {
                             fireItemStacks[8] = output;
                             fireItemStacks[8].setItemDamage(100-leftover);

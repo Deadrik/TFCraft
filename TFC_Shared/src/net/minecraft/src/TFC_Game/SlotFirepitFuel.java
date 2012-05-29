@@ -13,7 +13,7 @@ public class SlotFirepitFuel extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == mod_TFC_Core.Logs.shiftedIndex || itemstack.itemID == Block.wood.blockID || itemstack.itemID == mod_TFC_Core.terraPeat.blockID) {
+		if(itemstack.itemID == TFCItems.Logs.shiftedIndex || itemstack.itemID == Block.wood.blockID || itemstack.itemID == mod_TFC_Core.terraPeat.blockID) {
 			return true;
 		}
 		return false;

@@ -223,7 +223,7 @@ public class BlockTerraBellows extends Block implements ITextureProvider
 	}
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
-		dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBellowsItem, 1));
+		dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBellowsItem, 1));
 	}
 
 	public boolean isOpaqueCube()

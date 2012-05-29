@@ -354,6 +354,6 @@ public class BlockBucketWater extends BlockFluid
     
     public void addCreativeItems(java.util.ArrayList list)
 	{
-			//list.add(new ItemStack(this,1,0));
+		list.add(new ItemStack(this,1,0));
 	}
 }

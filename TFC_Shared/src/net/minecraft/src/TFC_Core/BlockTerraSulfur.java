@@ -43,7 +43,7 @@ public class BlockTerraSulfur extends Block implements ITextureProvider
 	}
 	public int idDropped(int i, Random random, int j)
 	{
-		return mod_TFC_Core.terraSulfurPowder.shiftedIndex;
+		return TFCItems.terraSulfurPowder.shiftedIndex;
 	}
 
 	public boolean isBlockNormalCube(World world, int i, int j, int k)

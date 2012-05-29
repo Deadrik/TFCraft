@@ -19,8 +19,8 @@ implements ITextureProvider
 
 	public ItemCustomPaxel(int par1)
 	{
-		super(par1, 1, mod_TFC_Core.SedToolMaterial, Block.blocksList);
-		this.toolMaterial = mod_TFC_Core.SedToolMaterial;
+		super(par1, 1, TFCItems.SedToolMaterial, Block.blocksList);
+		this.toolMaterial = TFCItems.SedToolMaterial;
 		this.blocksEffectiveAgainst = Block.blocksList;
 		this.maxStackSize = 1;
 		this.setMaxDamage(10);

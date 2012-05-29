@@ -9,6 +9,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
@@ -116,7 +117,7 @@ public class BlockTerraWood extends Block implements ITextureProvider
 					isAxeorSaw = true;
 				}
 			}
-			if(!isAxeorSaw && equip.getItem() == mod_TFC_Core.FlintPaxel)
+			if(!isAxeorSaw && equip.getItem() == TFCItems.FlintPaxel)
 			{
 				isAxeorSaw = true;
 			}
@@ -163,7 +164,7 @@ public class BlockTerraWood extends Block implements ITextureProvider
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return mod_TFC_Core.Logs.shiftedIndex;
+		return TFCItems.Logs.shiftedIndex;
 	}
 
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
@@ -185,7 +186,7 @@ public class BlockTerraWood extends Block implements ITextureProvider
 		if(!check)
 		{
 			world.setBlock(i, j, k, 0);
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[mod_TFC_Core.Logs.shiftedIndex],1,l));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
 		}
 	}
 
@@ -215,7 +216,7 @@ public class BlockTerraWood extends Block implements ITextureProvider
 
 			world.setBlockWithNotify(i, j, k, 0);
 			world.markBlockNeedsUpdate(i, j, k);
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[mod_TFC_Core.Logs.shiftedIndex],1,l));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
 		}
 	}
 

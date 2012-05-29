@@ -7,6 +7,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.StatList;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 
@@ -48,7 +49,7 @@ public class BlockTerraOre2 extends BlockTerra
 		entityplayer.addExhaustion(0.025F);
 		Random random = new Random();
 
-		ItemStack itemstack = new ItemStack(mod_TFC_Core.OreChunk, 1 ,damageDropped(l+16));
+		ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1 ,damageDropped(l+16));
 
 		if(l == 5)
 		{
@@ -57,7 +58,7 @@ public class BlockTerraOre2 extends BlockTerra
 		}
 		else if(l == 13)
 		{
-			itemstack = new ItemStack(mod_TFC_Core.terraSaltpeterPowder, 1 + random.nextInt(3));
+			itemstack = new ItemStack(TFCItems.terraSaltpeterPowder, 1 + random.nextInt(3));
 		}                      
 		if (itemstack != null)
 		{
@@ -69,7 +70,7 @@ public class BlockTerraOre2 extends BlockTerra
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return mod_TFC_Core.OreChunk.shiftedIndex;
+		return TFCItems.OreChunk.shiftedIndex;
 	}
 
 	public ItemStack KimberliteGemSpawn()
@@ -77,23 +78,23 @@ public class BlockTerraOre2 extends BlockTerra
 		Random random = new Random();
 		if(random.nextInt(25) == 0)
 		{
-			return new ItemStack(mod_TFC_Core.terraGemDiamond,1,0);
+			return new ItemStack(TFCItems.terraGemDiamond,1,0);
 		}
 		if(random.nextInt(50) == 0)
 		{
-			return new ItemStack(mod_TFC_Core.terraGemDiamond,1,1);
+			return new ItemStack(TFCItems.terraGemDiamond,1,1);
 		}
 		if(random.nextInt(75) == 0)
 		{
-			return new ItemStack(mod_TFC_Core.terraGemDiamond,1,2);
+			return new ItemStack(TFCItems.terraGemDiamond,1,2);
 		}
 		if(random.nextInt(150) == 0)
 		{
-			return new ItemStack(mod_TFC_Core.terraGemDiamond,1,3);
+			return new ItemStack(TFCItems.terraGemDiamond,1,3);
 		}
 		if(random.nextInt(300) == 0)
 		{
-			return new ItemStack(mod_TFC_Core.terraGemDiamond,1,4);
+			return new ItemStack(TFCItems.terraGemDiamond,1,4);
 		} else {
 			return null;
 		}

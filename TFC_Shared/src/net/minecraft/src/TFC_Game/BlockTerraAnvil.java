@@ -11,6 +11,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
@@ -146,28 +147,28 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 		switch (type)
 		{
 		case 1:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraCopperAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraCopperAnvilItem, 1));
 			break;
 		case 2:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBronzeAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBronzeAnvilItem, 1));
 			break;
 		case 3:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraWroughtIronAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraWroughtIronAnvilItem, 1));
 			break;
 		case 4:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraSteelAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraSteelAnvilItem, 1));
 			break;
 		case 5:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBlackSteelAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBlackSteelAnvilItem, 1));
 			break;
 		case 6:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraRedSteelAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraRedSteelAnvilItem, 1));
 			break;
 		case 7:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBlueSteelAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBlueSteelAnvilItem, 1));
 			break;
 		default:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraStoneAnvilItem, 1));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraStoneAnvilItem, 1));
 		}
 		}
 		else if(blockID == mod_TFC_Game.terraAnvil2.blockID)
@@ -175,13 +176,13 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
         switch (type)
         {
         case 1:
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBlackBronzeAnvilItem, 1));
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBlackBronzeAnvilItem, 1));
             break;
         case 2:
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraRoseGoldAnvilItem, 1));
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraRoseGoldAnvilItem, 1));
             break;
         default:
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Game.terraBismuthBronzeAnvilItem, 1));
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBismuthBronzeAnvilItem, 1));
         }
         }
 	}

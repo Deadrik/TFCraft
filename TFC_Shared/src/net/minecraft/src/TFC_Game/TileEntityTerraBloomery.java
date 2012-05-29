@@ -19,6 +19,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
@@ -513,7 +514,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     {
         if(input[0] != null)
         {
-            if(input[0].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+            if(input[0].itemID == TFCItems.terraCeramicMold.shiftedIndex)
             {
                 int dam = 0;
                 if(outMetal1Count > 0)
@@ -685,7 +686,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 {
                     EntityItem entity = (EntityItem)iterator.next();
                     String name = mod_TFC_Game.proxy.getDisplayName(entity.item) ;
-                    if(entity.item.itemID == Item.coal.shiftedIndex && entity.item.getItemDamage() == 1 || entity.item.itemID == mod_TFC_Game.Coke.shiftedIndex)
+                    if(entity.item.itemID == Item.coal.shiftedIndex && entity.item.getItemDamage() == 1 || entity.item.itemID == TFCItems.Coke.shiftedIndex)
                     {
                         for(int c = 0; c < entity.item.stackSize; c++)
                         {

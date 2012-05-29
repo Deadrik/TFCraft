@@ -34,7 +34,7 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 				te = (TileEntityTerraLogPile)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				if(is != null && is.getItem().shiftedIndex == mod_TFC_Core.Logs.shiftedIndex)
+				if(is != null && is.getItem().shiftedIndex == TFCItems.Logs.shiftedIndex)
 				{
 					return false;
 				}

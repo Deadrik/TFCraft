@@ -7,6 +7,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.forge.ITextureProvider;
@@ -249,12 +250,12 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 		if(blockID == mod_TFC_Core.terraWoodSupportH.blockID)
 		{
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraWoodSupportItemH, 1, l));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraWoodSupportItemH, 1, l));
 		}
 
 		if(blockID == mod_TFC_Core.terraWoodSupportV.blockID)
 		{
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraWoodSupportItemV, 1, l));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraWoodSupportItemV, 1, l));
 		}
 	}
 

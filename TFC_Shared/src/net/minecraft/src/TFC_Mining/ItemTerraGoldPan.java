@@ -8,6 +8,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
@@ -152,18 +153,18 @@ public class ItemTerraGoldPan extends Item implements ITextureProvider
 					if(random.nextInt(200) == 0)
 					{
 						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,0));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,0));
+						items.add(new ItemStack(TFCItems.terraGemAgate,1,0));
+						items.add(new ItemStack(TFCItems.terraGemAmethyst,1,0));
+						items.add(new ItemStack(TFCItems.terraGemBeryl,1,0));
+						items.add(new ItemStack(TFCItems.terraGemEmerald,1,0));
+						items.add(new ItemStack(TFCItems.terraGemGarnet,1,0));
+						items.add(new ItemStack(TFCItems.terraGemJade,1,0));
+						items.add(new ItemStack(TFCItems.terraGemJasper,1,0));
+						items.add(new ItemStack(TFCItems.terraGemOpal,1,0));
+						items.add(new ItemStack(TFCItems.terraGemRuby,1,0));
+						items.add(new ItemStack(TFCItems.terraGemSapphire,1,0));
+						items.add(new ItemStack(TFCItems.terraGemTourmaline,1,0));
+						items.add(new ItemStack(TFCItems.terraGemTopaz,1,0));
 						items.add(new ItemStack(Item.goldNugget,1,0));
 
 						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
@@ -172,85 +173,85 @@ public class ItemTerraGoldPan extends Item implements ITextureProvider
 					else if(random.nextInt(350) == 0)
 					{
 						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,1));
-						items.add(new ItemStack(mod_TFC_Core.terraGemDiamond,1,0));
+						items.add(new ItemStack(TFCItems.terraGemAgate,1,1));
+						items.add(new ItemStack(TFCItems.terraGemAmethyst,1,1));
+						items.add(new ItemStack(TFCItems.terraGemBeryl,1,1));
+						items.add(new ItemStack(TFCItems.terraGemEmerald,1,1));
+						items.add(new ItemStack(TFCItems.terraGemGarnet,1,1));
+						items.add(new ItemStack(TFCItems.terraGemJade,1,1));
+						items.add(new ItemStack(TFCItems.terraGemJasper,1,1));
+						items.add(new ItemStack(TFCItems.terraGemOpal,1,1));
+						items.add(new ItemStack(TFCItems.terraGemRuby,1,1));
+						items.add(new ItemStack(TFCItems.terraGemSapphire,1,1));
+						items.add(new ItemStack(TFCItems.terraGemTourmaline,1,1));
+						items.add(new ItemStack(TFCItems.terraGemTopaz,1,1));
+						items.add(new ItemStack(TFCItems.terraGemDiamond,1,0));
 						items.add(new ItemStack(Item.goldNugget,2,0));
 
 						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 					}
 					else if(random.nextInt(600) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,2));
-						items.add(new ItemStack(mod_TFC_Core.terraGemDiamond,1,1));
+                    {
+                        ArrayList items = new ArrayList<ItemStack>();
+                        items.add(new ItemStack(TFCItems.terraGemAgate,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemJade,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemJasper,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemOpal,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemRuby,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,2));
+                        items.add(new ItemStack(TFCItems.terraGemDiamond,1,1));
 
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-					}
-					else if(random.nextInt(850) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,3));
-						items.add(new ItemStack(mod_TFC_Core.terraGemDiamond,1,2));
+                        entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
+                    }
+                    else if(random.nextInt(850) == 0)
+                    {
+                        ArrayList items = new ArrayList<ItemStack>();
+                        items.add(new ItemStack(TFCItems.terraGemAgate,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemJade,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemJasper,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemOpal,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemRuby,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,3));
+                        items.add(new ItemStack(TFCItems.terraGemDiamond,1,2));
 
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
-					}
-					else if(random.nextInt(1250) == 0)
-					{
-						ArrayList items = new ArrayList<ItemStack>();
-						items.add(new ItemStack(mod_TFC_Core.terraGemAgate,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemAmethyst,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemBeryl,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemEmerald,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemGarnet,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJade,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemJasper,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemOpal,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemRuby,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemSapphire,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTourmaline,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemTopaz,1,4));
-						items.add(new ItemStack(mod_TFC_Core.terraGemDiamond,1,3));
+                        entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
+                    }
+                    else if(random.nextInt(1250) == 0)
+                    {
+                        ArrayList items = new ArrayList<ItemStack>();
+                        items.add(new ItemStack(TFCItems.terraGemAgate,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemJade,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemJasper,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemOpal,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemRuby,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,4));
+                        items.add(new ItemStack(TFCItems.terraGemDiamond,1,3));
 
-						entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
+                        entityplayer.inventory.addItemStackToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 
-					}
-					else if(random.nextInt(2000) == 0)
-					{
-						entityplayer.inventory.addItemStackToInventory(new ItemStack(mod_TFC_Core.terraGemDiamond,1,2));
-					}
+                    }
+                    else if(random.nextInt(2000) == 0)
+                    {
+                        entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.terraGemDiamond,1,2));
+                    }
 
 					if(usesLeft == 0)
 					{

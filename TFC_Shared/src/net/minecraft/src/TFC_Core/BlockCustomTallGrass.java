@@ -121,7 +121,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
     	ItemStack is = null;
     	if(R.nextInt(20) == 0)
     	{
-    		is = new ItemStack(mod_TFC_Core.SeedsWheat,1);
+    		is = new ItemStack(TFCItems.SeedsWheat,1);
     	}
     	return is;
     }

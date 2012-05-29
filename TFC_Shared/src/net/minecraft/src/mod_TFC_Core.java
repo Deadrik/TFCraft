@@ -18,6 +18,7 @@ import net.minecraft.src.forge.ICraftingHandler;
 import net.minecraft.src.forge.IOreHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
+import net.minecraft.src.TFCItems;
 
 public class mod_TFC_Core extends NetworkMod
 {
@@ -94,263 +95,6 @@ public class mod_TFC_Core extends NetworkMod
     public static Block tilledSoil2;
     
     public static Block bucketWater;
-
-    public static Item terraWoodSupportItemH;
-    public static Item terraWoodSupportItemV;
-
-    public static Item terraGemRuby;
-    public static Item terraGemSapphire;
-    public static Item terraGemEmerald;
-    public static Item terraGemTopaz;
-    public static Item terraGemGarnet;
-    public static Item terraGemOpal;
-    public static Item terraGemAmethyst;
-    public static Item terraGemJasper;
-    public static Item terraGemBeryl;
-    public static Item terraGemTourmaline;
-    public static Item terraGemJade;
-    public static Item terraGemAgate;
-    public static Item terraGemDiamond;
-    public static Item terraSulfurPowder;
-    public static Item terraSaltpeterPowder;
-
-    public static Item BismuthIngot;
-    public static Item BismuthBronzeIngot;
-    public static Item BlackBronzeIngot;
-    public static Item BlackSteelIngot;
-    public static Item HCBlackSteelIngot;
-    public static Item BlueSteelIngot;
-    public static Item WeakBlueSteelIngot;
-    public static Item HCBlueSteelIngot;
-    public static Item BrassIngot;
-    public static Item BronzeIngot;
-    public static Item CopperIngot;
-    public static Item GoldIngot;
-    public static Item WroughtIronIngot;
-    public static Item LeadIngot;
-    public static Item NickelIngot;
-    public static Item PigIronIngot;
-    public static Item PlatinumIngot;
-    public static Item RedSteelIngot;
-    public static Item WeakRedSteelIngot;
-    public static Item HCRedSteelIngot;
-    public static Item RoseGoldIngot;
-    public static Item SilverIngot;
-    public static Item SteelIngot;
-    public static Item WeakSteelIngot;
-    public static Item HCSteelIngot;
-    public static Item SterlingSilverIngot;
-    public static Item TinIngot;
-    public static Item ZincIngot;
-
-    public static Item BismuthIngot2x;
-    public static Item BismuthBronzeIngot2x;
-    public static Item BlackBronzeIngot2x;
-    public static Item BlackSteelIngot2x;
-    public static Item BlueSteelIngot2x;
-    public static Item BrassIngot2x;
-    public static Item BronzeIngot2x;
-    public static Item CopperIngot2x;
-    public static Item GoldIngot2x;
-    public static Item WroughtIronIngot2x;
-    public static Item LeadIngot2x;
-    public static Item NickelIngot2x;
-    public static Item PigIronIngot2x;
-    public static Item PlatinumIngot2x;
-    public static Item RedSteelIngot2x;
-    public static Item RoseGoldIngot2x;
-    public static Item SilverIngot2x;
-    public static Item SteelIngot2x;
-    public static Item SterlingSilverIngot2x;
-    public static Item TinIngot2x;
-    public static Item ZincIngot2x;
-
-    public static Item terraIgInPick;
-    public static Item terraIgInShovel;
-    public static Item terraIgInAxe;
-    public static Item terraIgInHoe;
-    public static Item terraSedPick;
-    public static Item terraSedShovel;
-    public static Item terraSedAxe;
-    public static Item terraSedHoe;
-    public static Item terraIgExPick;
-    public static Item terraIgExShovel;
-    public static Item terraIgExAxe;
-    public static Item terraIgExHoe;
-    public static Item terraMMPick;
-    public static Item terraMMShovel;
-    public static Item terraMMAxe;
-    public static Item terraMMHoe;
-
-    public static Item terraBismuthPick;
-    public static Item terraBismuthShovel;
-    public static Item terraBismuthAxe;
-    public static Item terraBismuthHoe;
-    public static Item terraBismuthBronzePick;
-    public static Item terraBismuthBronzeShovel;
-    public static Item terraBismuthBronzeAxe;
-    public static Item terraBismuthBronzeHoe;
-    public static Item terraBlackBronzePick;
-    public static Item terraBlackBronzeShovel;
-    public static Item terraBlackBronzeAxe;
-    public static Item terraBlackBronzeHoe;
-    public static Item terraBlackSteelPick;
-    public static Item terraBlackSteelShovel;
-    public static Item terraBlackSteelAxe;
-    public static Item terraBlackSteelHoe;
-    public static Item terraBlueSteelPick;
-    public static Item terraBlueSteelShovel;
-    public static Item terraBlueSteelAxe;
-    public static Item terraBlueSteelHoe;
-    public static Item terraBronzePick;
-    public static Item terraBronzeShovel;
-    public static Item terraBronzeAxe;
-    public static Item terraBronzeHoe;
-    public static Item terraCopperPick;
-    public static Item terraCopperShovel;
-    public static Item terraCopperAxe;
-    public static Item terraCopperHoe;
-    public static Item terraWroughtIronPick;
-    public static Item terraWroughtIronShovel;
-    public static Item terraWroughtIronAxe;
-    public static Item terraWroughtIronHoe;
-    public static Item terraRedSteelPick;
-    public static Item terraRedSteelShovel;
-    public static Item terraRedSteelAxe;
-    public static Item terraRedSteelHoe;
-    public static Item terraRoseGoldPick;
-    public static Item terraRoseGoldShovel;
-    public static Item terraRoseGoldAxe;
-    public static Item terraRoseGoldHoe;
-    public static Item terraSteelPick;
-    public static Item terraSteelShovel;
-    public static Item terraSteelAxe;
-    public static Item terraSteelHoe;
-    public static Item terraTinPick;
-    public static Item terraTinShovel;
-    public static Item terraTinAxe;
-    public static Item terraTinHoe;
-    public static Item terraZincPick;
-    public static Item terraZincShovel;
-    public static Item terraZincAxe;
-    public static Item terraZincHoe;
-
-    public static Item StoneChisel;
-    public static Item BismuthChisel;
-    public static Item BismuthBronzeChisel;
-    public static Item BlackBronzeChisel;
-    public static Item BlackSteelChisel;
-    public static Item BlueSteelChisel;
-    public static Item BronzeChisel;
-    public static Item CopperChisel;
-    public static Item WroughtIronChisel;
-    public static Item RedSteelChisel;
-    public static Item RoseGoldChisel;
-    public static Item SteelChisel;
-    public static Item TinChisel;
-    public static Item ZincChisel;
-
-    public static Item IgInStoneSword;
-    public static Item IgExStoneSword;
-    public static Item SedStoneSword;
-    public static Item MMStoneSword;
-    public static Item BismuthSword;
-    public static Item BismuthBronzeSword;
-    public static Item BlackBronzeSword;
-    public static Item BlackSteelSword;
-    public static Item BlueSteelSword;
-    public static Item BronzeSword;
-    public static Item CopperSword;
-    public static Item WroughtIronSword;
-    public static Item RedSteelSword;
-    public static Item RoseGoldSword;
-    public static Item SteelSword;
-    public static Item TinSword;
-    public static Item ZincSword;
-
-    public static Item IgInStoneMace;
-    public static Item IgExStoneMace;
-    public static Item SedStoneMace;
-    public static Item MMStoneMace;	
-    public static Item BismuthMace;
-    public static Item BismuthBronzeMace;
-    public static Item BlackBronzeMace;
-    public static Item BlackSteelMace;
-    public static Item BlueSteelMace;
-    public static Item BronzeMace;
-    public static Item CopperMace;
-    public static Item WroughtIronMace;
-    public static Item RedSteelMace;
-    public static Item RoseGoldMace;
-    public static Item SteelMace;
-    public static Item TinMace;
-    public static Item ZincMace;
-
-    public static Item BismuthSaw;
-    public static Item BismuthBronzeSaw;
-    public static Item BlackBronzeSaw;
-    public static Item BlackSteelSaw;
-    public static Item BlueSteelSaw;
-    public static Item BronzeSaw;
-    public static Item CopperSaw;
-    public static Item WroughtIronSaw;
-    public static Item RedSteelSaw;
-    public static Item RoseGoldSaw;
-    public static Item SteelSaw;
-    public static Item TinSaw;
-    public static Item ZincSaw;
-
-    public static Item OreChunk;
-    public static Item Logs;
-    public static Item FlintPaxel;
-    public static Item Javelin;
-
-    public static Item boneIgInPick;
-    public static Item boneIgInShovel;
-    public static Item boneIgInAxe;
-    public static Item boneIgInHoe;
-    public static Item boneIgExPick;
-    public static Item boneIgExShovel;
-    public static Item boneIgExAxe;
-    public static Item boneIgExHoe;
-    public static Item boneSedPick;
-    public static Item boneSedShovel;
-    public static Item boneSedAxe;
-    public static Item boneSedHoe;
-    public static Item boneMMPick;
-    public static Item boneMMShovel;
-    public static Item boneMMAxe;
-    public static Item boneMMHoe;
-
-    /**Food Related Items and Blocks*/
-    public static Item SeedsWheat;
-    public static Item SeedsMelon;
-    public static Item SeedsPumpkin;
-
-
-    public static EnumToolMaterial IgInToolMaterial;
-    public static EnumToolMaterial SedToolMaterial;
-    public static EnumToolMaterial IgExToolMaterial;
-    public static EnumToolMaterial MMToolMaterial;
-
-    public static EnumToolMaterial BismuthToolMaterial;
-    public static EnumToolMaterial BismuthBronzeToolMaterial;
-    public static EnumToolMaterial BlackBronzeToolMaterial;
-    public static EnumToolMaterial BlackSteelToolMaterial;
-    public static EnumToolMaterial BlueSteelToolMaterial;
-    public static EnumToolMaterial BronzeToolMaterial;
-    public static EnumToolMaterial CopperToolMaterial;
-    public static EnumToolMaterial GoldToolMaterial;
-    public static EnumToolMaterial IronToolMaterial;
-    public static EnumToolMaterial PigIronToolMaterial;
-    public static EnumToolMaterial PlatinumToolMaterial;
-    public static EnumToolMaterial RedSteelToolMaterial;
-    public static EnumToolMaterial RoseGoldToolMaterial;
-    public static EnumToolMaterial SilverToolMaterial;
-    public static EnumToolMaterial SteelToolMaterial;
-    public static EnumToolMaterial SterlingSilverToolMaterial;
-    public static EnumToolMaterial TinToolMaterial;
-    public static EnumToolMaterial ZincToolMaterial;
     
     public static EnumArmorMaterial BismuthArmorMaterial;
     public static EnumArmorMaterial BismuthBronzeArmorMaterial;
@@ -365,24 +109,6 @@ public class mod_TFC_Core extends NetworkMod
     public static EnumArmorMaterial SteelArmorMaterial;
     public static EnumArmorMaterial TinArmorMaterial;
     public static EnumArmorMaterial ZincArmorMaterial;
-
-    public static int IgInStoneUses = 60;
-    public static int IgExStoneUses = 70;
-    public static int SedStoneUses = 50;
-    public static int MMStoneUses = 55;	
-    public static int BismuthUses = 210;
-    public static int BismuthBronzeUses = 580;
-    public static int BlackBronzeUses = 530;
-    public static int BlackSteelUses = 1500;
-    public static int BlueSteelUses = 2000;
-    public static int BronzeUses = 600;
-    public static int CopperUses = 410;
-    public static int WroughtIronUses = 800;
-    public static int RedSteelUses = 2000;
-    public static int RoseGoldUses = 520;
-    public static int SteelUses = 1100;
-    public static int TinUses = 295;
-    public static int ZincUses = 280;
 
     public mod_TFC_Core()
     {
@@ -580,7 +306,7 @@ public class mod_TFC_Core extends NetworkMod
                     HandleItem(entityplayer, iinventory, TFC_Core.Axes);
                     HandleItem(entityplayer, iinventory, TFC_Core.Saws);
                 }
-                else if(itemstack.itemID == terraWoodSupportItemV.shiftedIndex || itemstack.itemID == terraWoodSupportItemH.shiftedIndex)
+                else if(itemstack.itemID == TFCItems.terraWoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.terraWoodSupportItemH.shiftedIndex)
                 {
                     HandleItem(entityplayer, iinventory, TFC_Core.Axes);
                 }
@@ -655,24 +381,6 @@ public class mod_TFC_Core extends NetworkMod
 
 
         //EnumHelper.addToolMaterial(name, harvestLevel, maxUses, efficiency, damage, enchantability)
-        IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 1, 5);
-        SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 1, 5);
-        IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 1, 5);
-        MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 1, 5);
-
-        BismuthToolMaterial = EnumHelper.addToolMaterial("Bismuth", 2, BismuthUses, 9.0F, 2, 10);
-        BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, BismuthBronzeUses, 11.5F, 3, 10);
-        BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, BlackBronzeUses, 11F, 4, 10);
-        BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, BlackSteelUses, 18F, 6, 12);
-        BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, BlueSteelUses, 21F, 7, 22);
-        BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, BronzeUses, 15F, 4, 13);
-        CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, CopperUses, 10.0F, 3, 8);
-        IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, WroughtIronUses, 16F, 5, 10);
-        RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, RedSteelUses, 21F, 7, 22);
-        RoseGoldToolMaterial = EnumHelper.addToolMaterial("RoseGold", 2, RoseGoldUses, 11F, 4, 20);
-        SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, 17F, 6, 10);
-        TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, 9.0F, 2, 8);
-        ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, 9.0F, 2, 8);
         
         BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 10, new int[] {2,4,3,2}, 1);
         BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 20, new int[] {4,6,5,4}, 1);
@@ -758,268 +466,10 @@ public class mod_TFC_Core extends NetworkMod
         MinecraftForge.setBlockHarvestLevel(terraPeat, "shovel", 0);
         MinecraftForge.setBlockHarvestLevel(terraPeatGrass, "shovel", 0);
 
-        BismuthIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthIngot",16028)).setItemName("terraBismuthIngot").setIconCoord(0, 3);
-        BismuthBronzeIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthBronzeIngot",16029)).setItemName("terraBismuthBronzeIngot").setIconCoord(1, 3);
-        BlackBronzeIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBlackBronzeIngot",16030)).setItemName("terraBlackBronzeIngot").setIconCoord(2, 3);
-        BlackSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBlackSteelIngot",16031)).setItemName("terraBlackSteelIngot").setIconCoord(3, 3);
-        BlueSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBlueSteelIngot",16032)).setItemName("terraBlueSteelIngot").setIconCoord(4, 3);
-        BrassIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBrassIngot",16033)).setItemName("terraBrassIngot").setIconCoord(5, 3);
-        BronzeIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBronzeIngot",16034)).setItemName("terraBronzeIngot").setIconCoord(6, 3);
-        CopperIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraCopperIngot",16035)).setItemName("terraCopperIngot").setIconCoord(7, 3);
-        GoldIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraGoldIngot",16036)).setItemName("terraGoldIngot").setIconCoord(8, 3);
-        WroughtIronIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraWroughtIronIngot",16037)).setItemName("terraWroughtIronIngot").setIconCoord(9, 3);
-        LeadIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraLeadIngot",16038)).setItemName("terraLeadIngot").setIconCoord(10, 3);
-        NickelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraNickelIngot",16039)).setItemName("terraNickelIngot").setIconCoord(0, 4);
-        PigIronIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraPigIronIngot",16040)).setItemName("terraPigIronIngot").setIconCoord(1, 4);
-        PlatinumIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraPlatinumIngot",16041)).setItemName("terraPlatinumIngot").setIconCoord(2, 4);
-        RedSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraRedSteelIngot",16042)).setItemName("terraRedSteelIngot").setIconCoord(3, 4);
-        RoseGoldIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraRoseGoldIngot",16043)).setItemName("terraRoseGoldIngot").setIconCoord(4, 4);
-        SilverIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraSilverIngot",16044)).setItemName("terraSilverIngot").setIconCoord(5, 4);
-        SteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraSteelIngot",16045)).setItemName("terraSteelIngot").setIconCoord(6, 4);
-        SterlingSilverIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraSterlingSilverIngot",16046)).setItemName("terraSterlingSilverIngot").setIconCoord(7, 4);
-        TinIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraTinIngot",16047)).setItemName("terraTinIngot").setIconCoord(8, 4);
-        ZincIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraZincIngot",16048)).setItemName("terraZincIngot").setIconCoord(9, 4);
-
-        BismuthIngot2x = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthIngot2x",16049)).setItemName("terraBismuthIngot2x").setIconCoord(0, 7);
-        BismuthBronzeIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthBronzeIngot2x",16050)).setItemName("terraBismuthBronzeIngot2x").setIconCoord(1, 7);
-        BlackBronzeIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBlackBronzeIngot2x",16051)).setItemName("terraBlackBronzeIngot2x").setIconCoord(2, 7);
-        BlackSteelIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBlackSteelIngot2x",16052)).setItemName("terraBlackSteelIngot2x").setIconCoord(3, 7);
-        BlueSteelIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBlueSteelIngot2x",16053)).setItemName("terraBlueSteelIngot2x").setIconCoord(4, 7);
-        BrassIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBrassIngot2x",16054)).setItemName("terraBrassIngot2x").setIconCoord(5, 7);
-        BronzeIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBronzeIngot2x",16055)).setItemName("terraBronzeIngot2x").setIconCoord(6, 7);
-        CopperIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraCopperIngot2x",16056)).setItemName("terraCopperIngot2x").setIconCoord(7, 7);
-        GoldIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraGoldIngot2x",16057)).setItemName("terraGoldIngot2x").setIconCoord(8, 7);
-        WroughtIronIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraWroughtIronIngot2x",16058)).setItemName("terraWroughtIronIngot2x").setIconCoord(9, 7);
-        LeadIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraLeadIngot2x",16059)).setItemName("terraLeadIngot2x").setIconCoord(10, 7);
-        NickelIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraNickelIngot2x",16060)).setItemName("terraNickelIngot2x").setIconCoord(0, 8);
-        PigIronIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraPigIronIngot2x",16061)).setItemName("terraPigIronIngot2x").setIconCoord(1, 8);
-        PlatinumIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraPlatinumIngot2x",16062)).setItemName("terraPlatinumIngot2x").setIconCoord(2, 8);
-        RedSteelIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraRedSteelIngot2x",16063)).setItemName("terraRedSteelIngot2x").setIconCoord(3, 8);
-        RoseGoldIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraRoseGoldIngot2x",16064)).setItemName("terraRoseGoldIngot2x").setIconCoord(4, 8);
-        SilverIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraSilverIngot2x",16065)).setItemName("terraSilverIngot2x").setIconCoord(5, 8);
-        SteelIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraSteelIngot2x",16066)).setItemName("terraSteelIngot2x").setIconCoord(6, 8);
-        SterlingSilverIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraSterlingSilverIngot2x",16067)).setItemName("terraSterlingSilverIngot2x").setIconCoord(7, 8);
-        TinIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraTinIngot2x",16068)).setItemName("terraTinIngot2x").setIconCoord(8, 8);
-        ZincIngot2x  = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraZincIngot2x",16069)).setItemName("terraZincIngot2x").setIconCoord(9, 8);
-
-        terraSulfurPowder = new ItemTerra(TFCSettings.getIntFor(config,"item","terraSulfurPowder",16070)).setTexturePath("/bioxx/terrasprites.png").setItemName("SulfurPowder").setIconCoord(1, 0);
-        terraSaltpeterPowder = new ItemTerra(TFCSettings.getIntFor(config,"item","terraSaltpeterPowder",16071)).setTexturePath("/bioxx/terrasprites.png").setItemName("SaltpeterPowder").setIconCoord(0, 0);
-
-        terraGemRuby = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemRuby",16080)).setItemName("Ruby").setIconCoord(11, 3);
-        terraGemSapphire = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemSapphire",16081)).setItemName("Sapphire").setIconCoord(11, 4);
-        terraGemEmerald = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemEmerald",16082)).setItemName("Emerald").setIconCoord(11, 5);
-        terraGemTopaz = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemTopaz",16083)).setItemName("Topaz").setIconCoord(11, 6);
-        terraGemTourmaline = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemTourmaline",16084)).setItemName("Tourmaline").setIconCoord(11, 7);
-        terraGemJade = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemJade",16085)).setItemName("Jade").setIconCoord(11, 8);
-        terraGemBeryl = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemBeryl",16086)).setItemName("Beryl").setIconCoord(11, 9);
-        terraGemAgate = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemAgate",16087)).setItemName("Agate").setIconCoord(11, 10);
-        terraGemOpal = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemOpal",16088)).setItemName("Opal").setIconCoord(11, 11);
-        terraGemGarnet = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemGarnet",16089)).setItemName("Garnet").setIconCoord(11, 12);
-        terraGemJasper = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemJasper",16090)).setItemName("Jasper").setIconCoord(11, 13);
-        terraGemAmethyst = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemAmethyst",16091)).setItemName("Amethyst").setIconCoord(11, 14);
-        terraGemDiamond = new ItemTerraGem(TFCSettings.getIntFor(config,"item","terraGemDiamond",16092)).setItemName("Diamond").setIconCoord(11, 15);
-
-        //Tools
-        terraIgInPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraIgInPick",16100),IgInToolMaterial).setItemName("IgIn Stone Pick").setMaxDamage(IgInStoneUses).setIconCoord(0, 3);
-        terraIgInShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraIgInShovel",16101),IgInToolMaterial).setItemName("IgIn Stone Shovel").setMaxDamage(IgInStoneUses).setIconCoord(0, 4);
-        terraIgInAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terraIgInAxe",16102),IgInToolMaterial).setItemName("IgIn Stone Axe").setMaxDamage(IgInStoneUses).setIconCoord(0, 5);
-        terraIgInHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraIgInHoe",16103),IgInToolMaterial).setItemName("IgIn Stone Hoe").setMaxDamage(IgInStoneUses).setIconCoord(0, 6);
-        terraSedPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraSedPick",16104),SedToolMaterial).setItemName("Sed Stone Pick").setMaxDamage(SedStoneUses).setIconCoord(0, 3);
-        terraSedShovel= new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraSedShovel",16105),SedToolMaterial).setItemName("Sed Stone Shovel").setMaxDamage(SedStoneUses).setIconCoord(0, 4);
-        terraSedAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terraSedAxe",16106),SedToolMaterial).setItemName("Sed Stone Axe").setMaxDamage(SedStoneUses).setIconCoord(0, 5);
-        terraSedHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraSedHoe",16107),SedToolMaterial).setItemName("Sed Stone Hoe").setMaxDamage(SedStoneUses).setIconCoord(0, 6);
-        terraIgExPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraIgExPick",16108),IgExToolMaterial).setItemName("IgEx Stone Pick").setMaxDamage(IgExStoneUses).setIconCoord(0, 3);
-        terraIgExShovel= new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraIgExShovel",16109),IgExToolMaterial).setItemName("IgEx Stone Shovel").setMaxDamage(IgExStoneUses).setIconCoord(0, 4);
-        terraIgExAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terraIgExAxe",16110),IgExToolMaterial).setItemName("IgEx Stone Axe").setMaxDamage(IgExStoneUses).setIconCoord(0, 5);
-        terraIgExHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraIgExHoe",16111),IgExToolMaterial).setItemName("IgEx Stone Hoe").setMaxDamage(IgExStoneUses).setIconCoord(0, 6);
-        terraMMPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraMMPick",16112),MMToolMaterial).setItemName("MM Stone Pick").setMaxDamage(MMStoneUses).setIconCoord(0, 3);
-        terraMMShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraMMShovel",16113),MMToolMaterial).setItemName("MM Stone Shovel").setMaxDamage(MMStoneUses).setIconCoord(0, 4);
-        terraMMAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terraMMAxe",16114),MMToolMaterial).setItemName("MM Stone Axe").setMaxDamage(MMStoneUses).setIconCoord(0, 5);
-        terraMMHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraMMHoe",16115),MMToolMaterial).setItemName("MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(0, 6);
-
-        terraBismuthPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraBismuthPick",16116),BismuthToolMaterial).setItemName("Bismuth Pick").setMaxDamage(BismuthUses).setIconCoord(1, 3);
-        terraBismuthShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraBismuthShovel",16117),BismuthToolMaterial).setItemName("Bismuth Shovel").setMaxDamage(BismuthUses).setIconCoord(1, 4);
-        terraBismuthAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranBismuthAxe",16118),BismuthToolMaterial).setItemName("Bismuth Axe").setMaxDamage(BismuthUses).setIconCoord(1, 5);
-        terraBismuthHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraBismuthHoe",16119),BismuthToolMaterial).setItemName("Bismuth Hoe").setMaxDamage(BismuthUses).setIconCoord(1, 6);
-
-        terraBismuthBronzePick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraBismuthBronzePick",16120),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Pick").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 3);
-        terraBismuthBronzeShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraBismuthBronzeShovel",16121),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Shovel").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 4);
-        terraBismuthBronzeAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranBismuthBronzeAxe",16122),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Axe").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 5);
-        terraBismuthBronzeHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraBismuthBronzeHoe",16123),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Hoe").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 6);
-
-        terraBlackBronzePick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraBlackBronzePick",16124),BlackBronzeToolMaterial).setItemName("Black Bronze Pick").setMaxDamage(BlackBronzeUses).setIconCoord(3, 3);
-        terraBlackBronzeShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraBlackBronzeShovel",16125),BlackBronzeToolMaterial).setItemName("Black Bronze Shovel").setMaxDamage(BlackBronzeUses).setIconCoord(3, 4);
-        terraBlackBronzeAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranBlackBronzeAxe",16126),BlackBronzeToolMaterial).setItemName("Black Bronze Axe").setMaxDamage(BlackBronzeUses).setIconCoord(3, 5);
-        terraBlackBronzeHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraBlackBronzeHoe",16127),BlackBronzeToolMaterial).setItemName("Black Bronze Hoe").setMaxDamage(BlackBronzeUses).setIconCoord(3, 6);
-
-        terraBlackSteelPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraBlackSteelPick",16128),BlackSteelToolMaterial).setItemName("Black Steel Pick").setMaxDamage(BlackSteelUses).setIconCoord(4, 3);
-        terraBlackSteelShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraBlackSteelShovel",16129),BlackSteelToolMaterial).setItemName("Black Steel Shovel").setMaxDamage(BlackSteelUses).setIconCoord(4, 4);
-        terraBlackSteelAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranBlackSteelAxe",16130),BlackSteelToolMaterial).setItemName("Black Steel Axe").setMaxDamage(BlackSteelUses).setIconCoord(4, 5);
-        terraBlackSteelHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraBlackSteelHoe",16131),BlackSteelToolMaterial).setItemName("Black Steel Hoe").setMaxDamage(BlackSteelUses).setIconCoord(4, 6);
-
-        terraBlueSteelPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraBlueSteelPick",16132),BlueSteelToolMaterial).setItemName("Blue Steel Pick").setMaxDamage(BlueSteelUses).setIconCoord(5, 3);
-        terraBlueSteelShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraBlueSteelShovel",16133),BlueSteelToolMaterial).setItemName("Blue Steel Shovel").setMaxDamage(BlueSteelUses).setIconCoord(5, 4);
-        terraBlueSteelAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranBlueSteelAxe",16134),BlueSteelToolMaterial).setItemName("Blue Steel Axe").setMaxDamage(BlueSteelUses).setIconCoord(5, 5);
-        terraBlueSteelHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraBlueSteelHoe",16135),BlueSteelToolMaterial).setItemName("Blue Steel Hoe").setMaxDamage(BlueSteelUses).setIconCoord(5, 6);
-
-        terraBronzePick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraBronzePick",16136),BronzeToolMaterial).setItemName("Bronze Pick").setMaxDamage(BronzeUses).setIconCoord(6,3);
-        terraBronzeShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraBronzeShovel",16137),BronzeToolMaterial).setItemName("Bronze Shovel").setMaxDamage(BronzeUses).setIconCoord(6, 4);
-        terraBronzeAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranBronzeAxe",16138),BronzeToolMaterial).setItemName("Bronze Axe").setMaxDamage(BronzeUses).setIconCoord(6, 5);
-        terraBronzeHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraBronzeHoe",16139),BronzeToolMaterial).setItemName("Bronze Hoe").setMaxDamage(BronzeUses).setIconCoord(6, 6);
-
-        terraCopperPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraCopperPick",16140),CopperToolMaterial).setItemName("Copper Pick").setMaxDamage(CopperUses).setIconCoord(7, 3);
-        terraCopperShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraCopperShovel",16141),CopperToolMaterial).setItemName("Copper Shovel").setMaxDamage(CopperUses).setIconCoord(7, 4);
-        terraCopperAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranCopperAxe",16142),CopperToolMaterial).setItemName("Copper Axe").setMaxDamage(CopperUses).setIconCoord(7, 5);
-        terraCopperHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraCopperHoe",16143),CopperToolMaterial).setItemName("Copper Hoe").setMaxDamage(CopperUses).setIconCoord(7, 6);
-
-        terraWroughtIronPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraWroughtIronPick",16148),IronToolMaterial).setItemName("Wrought Iron Pick").setMaxDamage(WroughtIronUses).setIconCoord(8, 3);
-        terraWroughtIronShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraWroughtIronShovel",16149),IronToolMaterial).setItemName("Wrought Iron Shovel").setMaxDamage(WroughtIronUses).setIconCoord(8, 4);
-        terraWroughtIronAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranWroughtIronAxe",16150),IronToolMaterial).setItemName("Wrought Iron Axe").setMaxDamage(WroughtIronUses).setIconCoord(8, 5);
-        terraWroughtIronHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraWroughtIronHoe",16151),IronToolMaterial).setItemName("Wrought Iron Hoe").setMaxDamage(WroughtIronUses).setIconCoord(8, 6);
-
-        terraRedSteelPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraRedSteelPick",16168),RedSteelToolMaterial).setItemName("Red Steel Pick").setMaxDamage(RedSteelUses).setIconCoord(9, 3);
-        terraRedSteelShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraRedSteelShovel",16169),RedSteelToolMaterial).setItemName("Red Steel Shovel").setMaxDamage(RedSteelUses).setIconCoord(9, 4);
-        terraRedSteelAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranRedSteelAxe",16170),RedSteelToolMaterial).setItemName("Red Steel Axe").setMaxDamage(RedSteelUses).setIconCoord(9, 5);
-        terraRedSteelHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraRedSteelHoe",16171),RedSteelToolMaterial).setItemName("Red Steel Hoe").setMaxDamage(RedSteelUses).setIconCoord(9, 6);
-
-        terraRoseGoldPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraRoseGoldPick",16172),RoseGoldToolMaterial).setItemName("Rose Gold Pick").setMaxDamage(RoseGoldUses).setIconCoord(10, 3);
-        terraRoseGoldShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraRoseGoldShovel",16173),RoseGoldToolMaterial).setItemName("Rose Gold Shovel").setMaxDamage(RoseGoldUses).setIconCoord(10, 4);
-        terraRoseGoldAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranRoseGoldAxe",16174),RoseGoldToolMaterial).setItemName("Rose Gold Axe").setMaxDamage(RoseGoldUses).setIconCoord(10, 5);
-        terraRoseGoldHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraRoseGoldHoe",16175),RoseGoldToolMaterial).setItemName("Rose Gold Hoe").setMaxDamage(RoseGoldUses).setIconCoord(10, 6);
-
-        terraSteelPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraSteelPick",16180),SteelToolMaterial).setItemName("Steel Pick").setMaxDamage(SteelUses).setIconCoord(11, 3);
-        terraSteelShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraSteelShovel",16181),SteelToolMaterial).setItemName("Steel Shovel").setMaxDamage(SteelUses).setIconCoord(11, 4);
-        terraSteelAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranSteelAxe",16182),SteelToolMaterial).setItemName("Steel Axe").setMaxDamage(SteelUses).setIconCoord(11, 5);
-        terraSteelHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraSteelHoe",16183),SteelToolMaterial).setItemName("Steel Hoe").setMaxDamage(SteelUses).setIconCoord(11, 6);
-
-        terraTinPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraTinPick",16188),TinToolMaterial).setItemName("Tin Pick").setMaxDamage(TinUses).setIconCoord(12, 3);
-        terraTinShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraTinShovel",16189),TinToolMaterial).setItemName("Tin Shovel").setMaxDamage(TinUses).setIconCoord(12, 4);
-        terraTinAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranTinAxe",16190),TinToolMaterial).setItemName("Tin Axe").setMaxDamage(TinUses).setIconCoord(12, 5);
-        terraTinHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraTinHoe",16191),TinToolMaterial).setItemName("Tin Hoe").setMaxDamage(TinUses).setIconCoord(12, 6);
-
-        terraZincPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","terraZincPick",16192),ZincToolMaterial).setItemName("Zinc Pick").setMaxDamage(ZincUses).setIconCoord(13, 3);
-        terraZincShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","terraZincShovel",16193),ZincToolMaterial).setItemName("Zinc Shovel").setMaxDamage(ZincUses).setIconCoord(13, 4);
-        terraZincAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","terranZincAxe",16194),ZincToolMaterial).setItemName("Zinc Axe").setMaxDamage(ZincUses).setIconCoord(13, 5);
-        terraZincHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","terraZincHoe",16195),ZincToolMaterial).setItemName("Zinc Hoe").setMaxDamage(ZincUses).setIconCoord(13, 6);
-
-        //chisels
-        BismuthChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","BismuthChisel",16226),BismuthToolMaterial).setItemName("Bismuth Chisel").setMaxDamage(BismuthUses).setIconCoord(1, 7);
-        BismuthBronzeChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","BismuthBronzeChisel",16227),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Chisel").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 7);
-        BlackBronzeChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","BlackBronzeChisel",16228),BlackBronzeToolMaterial).setItemName("Black Bronze Chisel").setMaxDamage(BlackBronzeUses).setIconCoord(3, 7);
-        BlackSteelChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","BlackSteelChisel",16230),BlackSteelToolMaterial).setItemName("Black Steel Chisel").setMaxDamage(BlackSteelUses).setIconCoord(4, 7);
-        BlueSteelChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","BlueSteelChisel",16231),BlueSteelToolMaterial).setItemName("Blue Steel Chisel").setMaxDamage(BlueSteelUses).setIconCoord(5, 7);
-        BronzeChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","BronzeChisel",16232),BronzeToolMaterial).setItemName("Bronze Chisel").setMaxDamage(BronzeUses).setIconCoord(6, 7);
-        CopperChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","CopperChisel",16233),CopperToolMaterial).setItemName("Copper Chisel").setMaxDamage(CopperUses).setIconCoord(7, 7);
-        WroughtIronChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","WroughtIronChisel",16234),IronToolMaterial).setItemName("Wrought Iron Chisel").setMaxDamage(WroughtIronUses).setIconCoord(8, 7);
-        RedSteelChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","RedSteelChisel",16235),RedSteelToolMaterial).setItemName("Red Steel Chisel").setMaxDamage(RedSteelUses).setIconCoord(9, 7);
-        RoseGoldChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","RoseGoldChisel",16236),RoseGoldToolMaterial).setItemName("Rose Gold Chisel").setMaxDamage(RoseGoldUses).setIconCoord(10, 7);
-        SteelChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","SteelChisel",16237),SteelToolMaterial).setItemName("Steel Chisel").setMaxDamage(SteelUses).setIconCoord(11, 7);
-        TinChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","TinChisel",16238),TinToolMaterial).setItemName("Tin Chisel").setMaxDamage(TinUses).setIconCoord(12, 7);
-        ZincChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","ZincChisel",16239),ZincToolMaterial).setItemName("Zinc Chisel").setMaxDamage(ZincUses).setIconCoord(13, 7);
-        StoneChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","StoneChisel",16240),IgInToolMaterial).setItemName("Stone Chisel").setMaxDamage(IgInStoneUses).setIconCoord(0, 7);
-
-        //IgInStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneSword",16241),IgInToolMaterial).setItemName("Stone Sword").setMaxDamage(IgInStoneUses).setIconCoord(0, 13);
-        //IgExStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneSword",16242),IgExToolMaterial).setItemName("Stone Sword").setMaxDamage(IgExStoneUses).setIconCoord(0, 13);
-        //SedStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneSword",16243),SedToolMaterial).setItemName("Stone Sword").setMaxDamage(SedStoneUses).setIconCoord(0, 13);
-        //MMStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneSword",16244),MMToolMaterial).setItemName("Stone Sword").setMaxDamage(MMStoneUses).setIconCoord(0, 13);
-        BismuthSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthSword",16245),BismuthToolMaterial).setItemName("Bismuth Sword").setMaxDamage(BismuthUses).setIconCoord(1, 13);
-        BismuthBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeSword",16246),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 13);
-        BlackBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeSword",16247),BlackBronzeToolMaterial).setItemName("Black Bronze Sword").setMaxDamage(BlackBronzeUses).setIconCoord(3, 13);
-        BlackSteelSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackSteelSword",16248),BlackSteelToolMaterial).setItemName("Black Steel Sword").setMaxDamage(BlackSteelUses).setIconCoord(4, 13);
-        BlueSteelSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlueSteelSword",16249),BlueSteelToolMaterial).setItemName("Blue Steel Sword").setMaxDamage(BlueSteelUses).setIconCoord(5, 13);
-        BronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BronzeSword",16250),BronzeToolMaterial).setItemName("Bronze Sword").setMaxDamage(BronzeUses).setIconCoord(6, 13);
-        CopperSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","CopperSword",16251),CopperToolMaterial).setItemName("Copper Sword").setMaxDamage(CopperUses).setIconCoord(7, 13);
-        WroughtIronSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","WroughtIronSword",16252),IronToolMaterial).setItemName("Wrought Iron Sword").setMaxDamage(WroughtIronUses).setIconCoord(8, 13);
-        RedSteelSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","RedSteelSword",16253),RedSteelToolMaterial).setItemName("Red Steel Sword").setMaxDamage(RedSteelUses).setIconCoord(9, 13);
-        RoseGoldSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","RoseGoldSword",16254),RoseGoldToolMaterial).setItemName("Rose Gold Sword").setMaxDamage(RoseGoldUses).setIconCoord(10, 13);
-        SteelSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SteelSword",16255),SteelToolMaterial).setItemName("Steel Sword").setMaxDamage(SteelUses).setIconCoord(11, 13);
-        TinSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","TinSword",16256),TinToolMaterial).setItemName("Tin Sword").setMaxDamage(TinUses).setIconCoord(12, 13);
-        ZincSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","ZincSword",16257),ZincToolMaterial).setItemName("Zinc Sword").setMaxDamage(ZincUses).setIconCoord(13, 13);
-
-        //IgInStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneMace",16258),IgInToolMaterial).setItemName("Stone Mace").setMaxDamage(IgInStoneUses).setIconCoord(0, 12);
-        //IgExStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneMace",16259),IgExToolMaterial).setItemName("Stone Mace").setMaxDamage(IgExStoneUses).setIconCoord(0, 12);
-        //SedStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneMace",16260),SedToolMaterial).setItemName("Stone Mace").setMaxDamage(SedStoneUses).setIconCoord(0, 12);
-        //MMStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneMace",16261),MMToolMaterial).setItemName("Stone Mace").setMaxDamage(MMStoneUses).setIconCoord(0, 12);
-        BismuthMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthMace",16262),BismuthToolMaterial).setItemName("Bismuth Mace").setMaxDamage(BismuthUses).setIconCoord(1, 12);
-        BismuthBronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeMace",16263),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Mace").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 12);
-        BlackBronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeMace",16264),BlackBronzeToolMaterial).setItemName("Black Bronze Mace").setMaxDamage(BlackBronzeUses).setIconCoord(3, 12);
-        BlackSteelMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackSteelMace",16265),BlackSteelToolMaterial).setItemName("Black Steel Mace").setMaxDamage(BlackSteelUses).setIconCoord(4, 12);
-        BlueSteelMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlueSteelMace",16266),BlueSteelToolMaterial).setItemName("Blue Steel Mace").setMaxDamage(BlueSteelUses).setIconCoord(5, 12);
-        BronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BronzeMace",16267),BronzeToolMaterial).setItemName("Bronze Mace").setMaxDamage(BronzeUses).setIconCoord(6, 12);
-        CopperMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","CopperMace",16268),CopperToolMaterial).setItemName("Copper Mace").setMaxDamage(CopperUses).setIconCoord(7, 12);
-        WroughtIronMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","WroughtIronMace",16269),IronToolMaterial).setItemName("Wrought Iron Mace").setMaxDamage(WroughtIronUses).setIconCoord(8, 12);
-        RedSteelMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","RedSteelMace",16270),RedSteelToolMaterial).setItemName("Red Steel Mace").setMaxDamage(RedSteelUses).setIconCoord(9, 12);
-        RoseGoldMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","RoseGoldMace",16271),RoseGoldToolMaterial).setItemName("Rose Gold Mace").setMaxDamage(RoseGoldUses).setIconCoord(10, 12);
-        SteelMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SteelMace",16272),SteelToolMaterial).setItemName("Steel Mace").setMaxDamage(SteelUses).setIconCoord(11, 12);
-        TinMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","TinMace",16273),TinToolMaterial).setItemName("Tin Mace").setMaxDamage(TinUses).setIconCoord(12, 12);
-        ZincMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","ZincMace",16274),ZincToolMaterial).setItemName("Zinc Mace").setMaxDamage(ZincUses).setIconCoord(13, 12);
-
-        BismuthSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","BismuthSaw",16275),BismuthToolMaterial).setItemName("Bismuth Saw").setMaxDamage(BismuthUses).setIconCoord(1, 8);
-        BismuthBronzeSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","BismuthBronzeSaw",16276),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Saw").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 8);
-        BlackBronzeSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","BlackBronzeSaw",16277),BlackBronzeToolMaterial).setItemName("Black Bronze Saw").setMaxDamage(BlackBronzeUses).setIconCoord(3, 8);
-        BlackSteelSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","BlackSteelSaw",16278),BlackSteelToolMaterial).setItemName("Black Steel Saw").setMaxDamage(BlackSteelUses).setIconCoord(4, 8);
-        BlueSteelSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","BlueSteelSaw",16279),BlueSteelToolMaterial).setItemName("Blue Steel Saw").setMaxDamage(BlueSteelUses).setIconCoord(5, 8);
-        BronzeSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","BronzeSaw",16280),BronzeToolMaterial).setItemName("Bronze Saw").setMaxDamage(BronzeUses).setIconCoord(6, 8);
-        CopperSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","CopperSaw",16281),CopperToolMaterial).setItemName("Copper Saw").setMaxDamage(CopperUses).setIconCoord(7, 8);
-        WroughtIronSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","WroughtIronSaw",16282),IronToolMaterial).setItemName("Wrought Iron Saw").setMaxDamage(WroughtIronUses).setIconCoord(8, 8);
-        RedSteelSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","RedSteelSaw",16283),RedSteelToolMaterial).setItemName("Red Steel Saw").setMaxDamage(RedSteelUses).setIconCoord(9, 8);
-        RoseGoldSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","RoseGoldSaw",16284),RoseGoldToolMaterial).setItemName("Rose Gold Saw").setMaxDamage(RoseGoldUses).setIconCoord(10, 8);
-        SteelSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","SteelSaw",16285),SteelToolMaterial).setItemName("Steel Saw").setMaxDamage(SteelUses).setIconCoord(11, 8);
-        TinSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","TinSaw",16286),TinToolMaterial).setItemName("Tin Saw").setMaxDamage(TinUses).setIconCoord(12, 8);
-        ZincSaw = new ItemCustomSaw(TFCSettings.getIntFor(config,"item","ZincSaw",16287),ZincToolMaterial).setItemName("Zinc Saw").setMaxDamage(ZincUses).setIconCoord(13, 8);
-
-        HCBlackSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraHCBlackSteelIngot",16290)).setItemName("terraHCBlackSteelIngot").setIconCoord(3, 3);
-        WeakBlueSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraWeakBlueSteelIngot",16291)).setItemName("terraWeakBlueSteelIngot").setIconCoord(4, 3);
-        WeakRedSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraWeakRedSteelIngot",16292)).setItemName("terraWeakRedSteelIngot").setIconCoord(3, 4);
-        WeakSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraWeakSteelIngot",16293)).setItemName("terraWeakSteelIngot").setIconCoord(6, 4);
-        HCBlueSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraHCBlueSteelIngot",16294)).setItemName("terraHCBlueSteelIngot").setIconCoord(4, 3);
-        HCRedSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraHCRedSteelIngot",16295)).setItemName("terraHCRedSteelIngot").setIconCoord(3, 4);
-        HCSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraHCSteelIngot",16296)).setItemName("terraHCSteelIngot").setIconCoord(6, 4);
-
-        OreChunk = new ItemTerraSmallOre(TFCSettings.getIntFor(config,"item","OreChunk",16297)).setItemName("Ore").setIconCoord(0, 3);
-        Logs = new ItemTerraLogs(TFCSettings.getIntFor(config,"item","Logs",16298)).setItemName("Log").setIconCoord(0, 2);
-        FlintPaxel = new ItemCustomPaxel(TFCSettings.getIntFor(config,"item","flintPaxel",16299)).setItemName("flintPaxel").setIconCoord(10, 0);
-
-        terraWoodSupportItemV = new ItemTerraWoodSupport(TFCSettings.getIntFor(config,"item","terraWoodSupportItemV", 16300), true).setItemName("terraWoodSupportItemV").setIconCoord(0, 0);
-        terraWoodSupportItemH = new ItemTerraWoodSupport(TFCSettings.getIntFor(config,"item","terraWoodSupportItemH", 16301), false).setItemName("terraWoodSupportItemH").setIconCoord(0, 1);
-        boneIgInPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","boneIgInPick",16302),IgInToolMaterial).setItemName("Bone IgIn Stone Pick").setMaxDamage(IgInStoneUses).setIconCoord(14, 3);
-        boneIgInShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneIgInShovel",16303),IgInToolMaterial).setItemName("Bone IgIn Stone Shovel").setMaxDamage(IgInStoneUses).setIconCoord(14, 4);
-        boneIgInAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneIgInAxe",16304),IgInToolMaterial).setItemName("Bone IgIn Stone Axe").setMaxDamage(IgInStoneUses).setIconCoord(14, 5);
-        boneIgInHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneIgInHoe",16305),IgInToolMaterial).setItemName("Bone IgIn Stone Hoe").setMaxDamage(IgInStoneUses).setIconCoord(14, 6);
-        boneSedPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","boneSedPick",16306),SedToolMaterial).setItemName("Bone Sed Stone Pick").setMaxDamage(SedStoneUses).setIconCoord(14, 3);
-        boneSedShovel= new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneSedShovel",16307),SedToolMaterial).setItemName("Bone Sed Stone Shovel").setMaxDamage(SedStoneUses).setIconCoord(14, 4);
-        boneSedAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneSedAxe",16308),SedToolMaterial).setItemName("Bone Sed Stone Axe").setMaxDamage(SedStoneUses).setIconCoord(14, 5);
-        boneSedHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneSedHoe",16309),SedToolMaterial).setItemName("Bone Sed Stone Hoe").setMaxDamage(SedStoneUses).setIconCoord(14, 6);
-        boneIgExPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","boneIgExPick",16310),IgExToolMaterial).setItemName("Bone IgEx Stone Pick").setMaxDamage(IgExStoneUses).setIconCoord(14, 3);
-        boneIgExShovel= new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneIgExShovel",16311),IgExToolMaterial).setItemName("Bone IgEx Stone Shovel").setMaxDamage(IgExStoneUses).setIconCoord(14, 4);
-        boneIgExAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneIgExAxe",16312),IgExToolMaterial).setItemName("Bone IgEx Stone Axe").setMaxDamage(IgExStoneUses).setIconCoord(14, 5);
-        boneIgExHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneIgExHoe",16313),IgExToolMaterial).setItemName("Bone IgEx Stone Hoe").setMaxDamage(IgExStoneUses).setIconCoord(14, 6);
-        boneMMPick = new ItemCustomPickaxe(TFCSettings.getIntFor(config,"item","boneMMPick",16314),MMToolMaterial).setItemName("Bone MM Stone Pick").setMaxDamage(MMStoneUses).setIconCoord(14, 3);
-        boneMMShovel = new ItemCustomShovel(TFCSettings.getIntFor(config,"item","boneMMShovel",16315),MMToolMaterial).setItemName("Bone MM Stone Shovel").setMaxDamage(MMStoneUses).setIconCoord(14, 4);
-        boneMMAxe = new ItemCustomAxe(TFCSettings.getIntFor(config,"item","boneMMAxe",16316),MMToolMaterial).setItemName("Bone MM Stone Axe").setMaxDamage(MMStoneUses).setIconCoord(14, 5);
-        boneMMHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setItemName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(14, 6);
-        Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(15, 1);
-
-        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",18000),Block.crops.blockID,tilledSoil.blockID,tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);
-
-        Item.itemsList[Item.dyePowder.shiftedIndex] = null;
-        Item.itemsList[95] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
+        
         
 
-        TFC_Core.Axes = new Item[]{mod_TFC_Core.terraSedAxe,mod_TFC_Core.terraIgInAxe,mod_TFC_Core.terraIgExAxe,mod_TFC_Core.terraMMAxe,
-                mod_TFC_Core.terraBismuthAxe,mod_TFC_Core.terraBismuthBronzeAxe,mod_TFC_Core.terraBlackBronzeAxe,
-                mod_TFC_Core.terraBlackSteelAxe,mod_TFC_Core.terraBlueSteelAxe,mod_TFC_Core.terraBronzeAxe,mod_TFC_Core.terraCopperAxe,
-                mod_TFC_Core.terraWroughtIronAxe,mod_TFC_Core.terraRedSteelAxe,mod_TFC_Core.terraRoseGoldAxe,mod_TFC_Core.terraSteelAxe,
-                mod_TFC_Core.terraTinAxe,mod_TFC_Core.terraZincAxe,
-                mod_TFC_Core.boneSedAxe,mod_TFC_Core.boneIgInAxe,mod_TFC_Core.boneIgExAxe,mod_TFC_Core.boneMMAxe};
-        TFC_Core.Chisels = new Item[]{mod_TFC_Core.BismuthChisel,mod_TFC_Core.BismuthBronzeChisel,mod_TFC_Core.BlackBronzeChisel,
-            mod_TFC_Core.BlackSteelChisel,mod_TFC_Core.BlueSteelChisel,mod_TFC_Core.BronzeChisel,mod_TFC_Core.CopperChisel,
-            mod_TFC_Core.WroughtIronChisel,mod_TFC_Core.RedSteelChisel,mod_TFC_Core.RoseGoldChisel,mod_TFC_Core.SteelChisel,
-            mod_TFC_Core.TinChisel,mod_TFC_Core.ZincChisel};
-        TFC_Core.Saws = new Item[]{mod_TFC_Core.BismuthSaw,mod_TFC_Core.BismuthBronzeSaw,mod_TFC_Core.BlackBronzeSaw,
-                mod_TFC_Core.BlackSteelSaw,mod_TFC_Core.BlueSteelSaw,mod_TFC_Core.BronzeSaw,mod_TFC_Core.CopperSaw,
-                mod_TFC_Core.WroughtIronSaw,mod_TFC_Core.RedSteelSaw,mod_TFC_Core.RoseGoldSaw,mod_TFC_Core.SteelSaw,
-                mod_TFC_Core.TinSaw,mod_TFC_Core.ZincSaw};
+        
         RegisterToolClasses();
         //last thing
         initOreDictionary();
@@ -1032,85 +482,85 @@ public class mod_TFC_Core extends NetworkMod
     private static void RegisterToolClasses() 
     {
         //pickaxes
-        MinecraftForge.setToolClass(terraIgInPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraIgExPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraSedPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraMMPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(boneIgInPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(boneIgExPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(boneSedPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(boneMMPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraBismuthPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraBismuthBronzePick, "pickaxe", 2);
-        MinecraftForge.setToolClass(terraBlackBronzePick, "pickaxe", 2);
-        MinecraftForge.setToolClass(terraBlackSteelPick, "pickaxe", 5);
-        MinecraftForge.setToolClass(terraBlueSteelPick, "pickaxe", 6);
-        MinecraftForge.setToolClass(terraBronzePick, "pickaxe", 2);
-        MinecraftForge.setToolClass(terraCopperPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraWroughtIronPick, "pickaxe", 3);
-        MinecraftForge.setToolClass(terraRedSteelPick, "pickaxe", 6);
-        MinecraftForge.setToolClass(terraRoseGoldPick, "pickaxe", 2);
-        MinecraftForge.setToolClass(terraSteelPick, "pickaxe", 4);
-        MinecraftForge.setToolClass(terraTinPick, "pickaxe", 1);
-        MinecraftForge.setToolClass(terraZincPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraIgInPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraIgExPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraSedPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraMMPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneIgInPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneIgExPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneSedPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneMMPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraBismuthPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraBismuthBronzePick, "pickaxe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraBlackBronzePick, "pickaxe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraBlackSteelPick, "pickaxe", 5);
+        MinecraftForge.setToolClass(TFCItems.terraBlueSteelPick, "pickaxe", 6);
+        MinecraftForge.setToolClass(TFCItems.terraBronzePick, "pickaxe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraCopperPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraWroughtIronPick, "pickaxe", 3);
+        MinecraftForge.setToolClass(TFCItems.terraRedSteelPick, "pickaxe", 6);
+        MinecraftForge.setToolClass(TFCItems.terraRoseGoldPick, "pickaxe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraSteelPick, "pickaxe", 4);
+        MinecraftForge.setToolClass(TFCItems.terraTinPick, "pickaxe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraZincPick, "pickaxe", 1);
         //shovels
-        MinecraftForge.setToolClass(terraIgInShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraIgExShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraSedShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraMMShovel, "shovel", 1);
-        MinecraftForge.setToolClass(boneIgInShovel, "shovel", 1);
-        MinecraftForge.setToolClass(boneIgExShovel, "shovel", 1);
-        MinecraftForge.setToolClass(boneSedShovel, "shovel", 1);
-        MinecraftForge.setToolClass(boneMMShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraBismuthShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraBismuthBronzeShovel, "shovel", 2);
-        MinecraftForge.setToolClass(terraBlackBronzeShovel, "shovel", 2);
-        MinecraftForge.setToolClass(terraBlackSteelShovel, "shovel", 5);
-        MinecraftForge.setToolClass(terraBlueSteelShovel, "shovel", 6);
-        MinecraftForge.setToolClass(terraBronzeShovel, "shovel", 2);
-        MinecraftForge.setToolClass(terraCopperShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraWroughtIronShovel, "shovel", 3);
-        MinecraftForge.setToolClass(terraRedSteelShovel, "shovel", 6);
-        MinecraftForge.setToolClass(terraRoseGoldShovel, "shovel", 2);
-        MinecraftForge.setToolClass(terraSteelShovel, "shovel", 4);
-        MinecraftForge.setToolClass(terraTinShovel, "shovel", 1);
-        MinecraftForge.setToolClass(terraZincShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraIgInShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraIgExShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraSedShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraMMShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.boneIgInShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.boneIgExShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.boneSedShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.boneMMShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraBismuthShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraBismuthBronzeShovel, "shovel", 2);
+        MinecraftForge.setToolClass(TFCItems.terraBlackBronzeShovel, "shovel", 2);
+        MinecraftForge.setToolClass(TFCItems.terraBlackSteelShovel, "shovel", 5);
+        MinecraftForge.setToolClass(TFCItems.terraBlueSteelShovel, "shovel", 6);
+        MinecraftForge.setToolClass(TFCItems.terraBronzeShovel, "shovel", 2);
+        MinecraftForge.setToolClass(TFCItems.terraCopperShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraWroughtIronShovel, "shovel", 3);
+        MinecraftForge.setToolClass(TFCItems.terraRedSteelShovel, "shovel", 6);
+        MinecraftForge.setToolClass(TFCItems.terraRoseGoldShovel, "shovel", 2);
+        MinecraftForge.setToolClass(TFCItems.terraSteelShovel, "shovel", 4);
+        MinecraftForge.setToolClass(TFCItems.terraTinShovel, "shovel", 1);
+        MinecraftForge.setToolClass(TFCItems.terraZincShovel, "shovel", 1);
         //Axes
-        MinecraftForge.setToolClass(terraIgInAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraIgExAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraSedAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraMMAxe, "axe", 1);
-        MinecraftForge.setToolClass(boneIgInAxe, "axe", 1);
-        MinecraftForge.setToolClass(boneIgExAxe, "axe", 1);
-        MinecraftForge.setToolClass(boneSedAxe, "axe", 1);
-        MinecraftForge.setToolClass(boneMMAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraBismuthAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraBismuthBronzeAxe, "axe", 2);
-        MinecraftForge.setToolClass(terraBlackBronzeAxe, "axe", 2);
-        MinecraftForge.setToolClass(terraBlackSteelAxe, "axe", 5);
-        MinecraftForge.setToolClass(terraBlueSteelAxe, "axe", 6);
-        MinecraftForge.setToolClass(terraBronzeAxe, "axe", 2);
-        MinecraftForge.setToolClass(terraCopperAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraWroughtIronAxe, "axe", 3);
-        MinecraftForge.setToolClass(terraRedSteelAxe, "axe", 6);
-        MinecraftForge.setToolClass(terraRoseGoldAxe, "axe", 2);
-        MinecraftForge.setToolClass(terraSteelAxe, "axe", 4);
-        MinecraftForge.setToolClass(terraTinAxe, "axe", 1);
-        MinecraftForge.setToolClass(terraZincAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraIgInAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraIgExAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraSedAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraMMAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneIgInAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneIgExAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneSedAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.boneMMAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraBismuthAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraBismuthBronzeAxe, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraBlackBronzeAxe, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraBlackSteelAxe, "axe", 5);
+        MinecraftForge.setToolClass(TFCItems.terraBlueSteelAxe, "axe", 6);
+        MinecraftForge.setToolClass(TFCItems.terraBronzeAxe, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraCopperAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraWroughtIronAxe, "axe", 3);
+        MinecraftForge.setToolClass(TFCItems.terraRedSteelAxe, "axe", 6);
+        MinecraftForge.setToolClass(TFCItems.terraRoseGoldAxe, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.terraSteelAxe, "axe", 4);
+        MinecraftForge.setToolClass(TFCItems.terraTinAxe, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.terraZincAxe, "axe", 1);
 
-        MinecraftForge.setToolClass(BismuthSaw, "axe", 1);
-        MinecraftForge.setToolClass(BismuthBronzeSaw, "axe", 2);
-        MinecraftForge.setToolClass(BlackBronzeSaw, "axe", 2);
-        MinecraftForge.setToolClass(BlackSteelSaw, "axe", 5);
-        MinecraftForge.setToolClass(BlueSteelSaw, "axe", 6);
-        MinecraftForge.setToolClass(BronzeSaw, "axe", 2);
-        MinecraftForge.setToolClass(CopperSaw, "axe", 1);
-        MinecraftForge.setToolClass(WroughtIronSaw, "axe", 3);
-        MinecraftForge.setToolClass(RedSteelSaw, "axe", 6);
-        MinecraftForge.setToolClass(RoseGoldSaw, "axe", 2);
-        MinecraftForge.setToolClass(SteelSaw, "axe", 4);
-        MinecraftForge.setToolClass(TinSaw, "axe", 1);
-        MinecraftForge.setToolClass(ZincSaw, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.BismuthSaw, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.BismuthBronzeSaw, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.BlackBronzeSaw, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.BlackSteelSaw, "axe", 5);
+        MinecraftForge.setToolClass(TFCItems.BlueSteelSaw, "axe", 6);
+        MinecraftForge.setToolClass(TFCItems.BronzeSaw, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.CopperSaw, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.WroughtIronSaw, "axe", 3);
+        MinecraftForge.setToolClass(TFCItems.RedSteelSaw, "axe", 6);
+        MinecraftForge.setToolClass(TFCItems.RoseGoldSaw, "axe", 2);
+        MinecraftForge.setToolClass(TFCItems.SteelSaw, "axe", 4);
+        MinecraftForge.setToolClass(TFCItems.TinSaw, "axe", 1);
+        MinecraftForge.setToolClass(TFCItems.ZincSaw, "axe", 1);
     }
 
     public static void initOreDictionary() 
@@ -1184,7 +634,7 @@ public class mod_TFC_Core extends NetworkMod
         MinecraftForge.registerOre("terraOreOlivine", new ItemStack(terraOre3,1,56));
         MinecraftForge.registerOre("terraOreLapisLazuli", new ItemStack(terraOre3,1,57));
 
-        MinecraftForge.registerOre("oreTin", new ItemStack(OreChunk,1,28));
+        MinecraftForge.registerOre("oreTin", new ItemStack(TFCItems.OreChunk,1,28));
         MinecraftForge.registerOre("oreCopper", new ItemStack(terraOre,1,23));
         MinecraftForge.registerOre("oreCopper", new ItemStack(terraOre,1,36));
         MinecraftForge.registerOre("oreIron", new ItemStack(terraOre,1,26));
@@ -1199,98 +649,98 @@ public class mod_TFC_Core extends NetworkMod
         MinecraftForge.registerOre("orePlatinum", new ItemStack(terraOre,1,25));
         MinecraftForge.registerOre("itemOreUran", new ItemStack(terraOre2,1,49));
 
-        MinecraftForge.registerOre("ingotBismuth", new ItemStack(BismuthIngot,1));
-        MinecraftForge.registerOre("ingotBismuthBronze", new ItemStack(BismuthBronzeIngot,1));
-        MinecraftForge.registerOre("ingotBrass", new ItemStack(BrassIngot,1));
-        MinecraftForge.registerOre("ingotBronze", new ItemStack(BronzeIngot,1));
-        MinecraftForge.registerOre("ingotBlackBronze", new ItemStack(BlackBronzeIngot,1));
-        MinecraftForge.registerOre("ingotBlackSteel", new ItemStack(BlackSteelIngot,1));
-        MinecraftForge.registerOre("ingotBlueSteel", new ItemStack(BlueSteelIngot,1));
-        MinecraftForge.registerOre("ingotCopper", new ItemStack(CopperIngot,1));
-        MinecraftForge.registerOre("ingotGold", new ItemStack(GoldIngot,1));
-        MinecraftForge.registerOre("ingotWroughtIron", new ItemStack(WroughtIronIngot,1));
-        MinecraftForge.registerOre("ingotLead", new ItemStack(LeadIngot,1));
-        MinecraftForge.registerOre("ingotNickel", new ItemStack(NickelIngot,1));
-        MinecraftForge.registerOre("ingotPigIron", new ItemStack(PigIronIngot,1));
-        MinecraftForge.registerOre("ingotPlatinum", new ItemStack(PlatinumIngot,1));
-        MinecraftForge.registerOre("ingotRedSteel", new ItemStack(RedSteelIngot,1));
-        MinecraftForge.registerOre("ingotRoseGold", new ItemStack(RoseGoldIngot,1));
-        MinecraftForge.registerOre("ingotSilver", new ItemStack(SilverIngot,1));
-        MinecraftForge.registerOre("ingotSteel", new ItemStack(SteelIngot,1));
-        MinecraftForge.registerOre("ingotRefinedIron", new ItemStack(SteelIngot,1));
-        MinecraftForge.registerOre("ingotSterlingSilver", new ItemStack(SterlingSilverIngot,1));
-        MinecraftForge.registerOre("ingotTin", new ItemStack(TinIngot,1));
-        MinecraftForge.registerOre("ingotZinc", new ItemStack(ZincIngot,1));
+        MinecraftForge.registerOre("ingotBismuth", new ItemStack(TFCItems.BismuthIngot,1));
+        MinecraftForge.registerOre("ingotBismuthBronze", new ItemStack(TFCItems.BismuthBronzeIngot,1));
+        MinecraftForge.registerOre("ingotBrass", new ItemStack(TFCItems.BrassIngot,1));
+        MinecraftForge.registerOre("ingotBronze", new ItemStack(TFCItems.BronzeIngot,1));
+        MinecraftForge.registerOre("ingotBlackBronze", new ItemStack(TFCItems.BlackBronzeIngot,1));
+        MinecraftForge.registerOre("ingotBlackSteel", new ItemStack(TFCItems.BlackSteelIngot,1));
+        MinecraftForge.registerOre("ingotBlueSteel", new ItemStack(TFCItems.BlueSteelIngot,1));
+        MinecraftForge.registerOre("ingotCopper", new ItemStack(TFCItems.CopperIngot,1));
+        MinecraftForge.registerOre("ingotGold", new ItemStack(TFCItems.GoldIngot,1));
+        MinecraftForge.registerOre("ingotWroughtIron", new ItemStack(TFCItems.WroughtIronIngot,1));
+        MinecraftForge.registerOre("ingotLead", new ItemStack(TFCItems.LeadIngot,1));
+        MinecraftForge.registerOre("ingotNickel", new ItemStack(TFCItems.NickelIngot,1));
+        MinecraftForge.registerOre("ingotPigIron", new ItemStack(TFCItems.PigIronIngot,1));
+        MinecraftForge.registerOre("ingotPlatinum", new ItemStack(TFCItems.PlatinumIngot,1));
+        MinecraftForge.registerOre("ingotRedSteel", new ItemStack(TFCItems.RedSteelIngot,1));
+        MinecraftForge.registerOre("ingotRoseGold", new ItemStack(TFCItems.RoseGoldIngot,1));
+        MinecraftForge.registerOre("ingotSilver", new ItemStack(TFCItems.SilverIngot,1));
+        MinecraftForge.registerOre("ingotSteel", new ItemStack(TFCItems.SteelIngot,1));
+        MinecraftForge.registerOre("ingotRefinedIron", new ItemStack(TFCItems.SteelIngot,1));
+        MinecraftForge.registerOre("ingotSterlingSilver", new ItemStack(TFCItems.SterlingSilverIngot,1));
+        MinecraftForge.registerOre("ingotTin", new ItemStack(TFCItems.TinIngot,1));
+        MinecraftForge.registerOre("ingotZinc", new ItemStack(TFCItems.ZincIngot,1));
 
-        MinecraftForge.registerOre("gemAgateChipped", new ItemStack(terraGemAgate, 1, 0));
-        MinecraftForge.registerOre("gemAgateFlawed", new ItemStack(terraGemAgate, 1, 1));
-        MinecraftForge.registerOre("gemAgate", new ItemStack(terraGemAgate, 1, 2));
-        MinecraftForge.registerOre("gemAgateFlawless", new ItemStack(terraGemAgate, 1, 3));
-        MinecraftForge.registerOre("gemAgateExquisite", new ItemStack(terraGemAgate, 1, 4));
-        MinecraftForge.registerOre("gemAmethystChipped", new ItemStack(terraGemAmethyst, 1, 0));
-        MinecraftForge.registerOre("gemAmethystFlawed", new ItemStack(terraGemAmethyst, 1, 1));
-        MinecraftForge.registerOre("gemAmethyst", new ItemStack(terraGemAmethyst, 1, 2));
-        MinecraftForge.registerOre("gemAmethystFlawless", new ItemStack(terraGemAmethyst, 1, 3));
-        MinecraftForge.registerOre("gemAmethystExquisite", new ItemStack(terraGemAmethyst, 1, 4));
-        MinecraftForge.registerOre("gemBerylChipped", new ItemStack(terraGemBeryl, 1, 0));
-        MinecraftForge.registerOre("gemBerylFlawed", new ItemStack(terraGemBeryl, 1, 1));
-        MinecraftForge.registerOre("gemBeryl", new ItemStack(terraGemBeryl, 1, 2));
-        MinecraftForge.registerOre("gemBerylFlawless", new ItemStack(terraGemBeryl, 1, 3));
-        MinecraftForge.registerOre("gemBerylExquisite", new ItemStack(terraGemBeryl, 1, 4));
+        MinecraftForge.registerOre("gemAgateChipped", new ItemStack(TFCItems.terraGemAgate, 1, 0));
+        MinecraftForge.registerOre("gemAgateFlawed", new ItemStack(TFCItems.terraGemAgate, 1, 1));
+        MinecraftForge.registerOre("gemAgate", new ItemStack(TFCItems.terraGemAgate, 1, 2));
+        MinecraftForge.registerOre("gemAgateFlawless", new ItemStack(TFCItems.terraGemAgate, 1, 3));
+        MinecraftForge.registerOre("gemAgateExquisite", new ItemStack(TFCItems.terraGemAgate, 1, 4));
+        MinecraftForge.registerOre("gemAmethystChipped", new ItemStack(TFCItems.terraGemAmethyst, 1, 0));
+        MinecraftForge.registerOre("gemAmethystFlawed", new ItemStack(TFCItems.terraGemAmethyst, 1, 1));
+        MinecraftForge.registerOre("gemAmethyst", new ItemStack(TFCItems.terraGemAmethyst, 1, 2));
+        MinecraftForge.registerOre("gemAmethystFlawless", new ItemStack(TFCItems.terraGemAmethyst, 1, 3));
+        MinecraftForge.registerOre("gemAmethystExquisite", new ItemStack(TFCItems.terraGemAmethyst, 1, 4));
+        MinecraftForge.registerOre("gemBerylChipped", new ItemStack(TFCItems.terraGemBeryl, 1, 0));
+        MinecraftForge.registerOre("gemBerylFlawed", new ItemStack(TFCItems.terraGemBeryl, 1, 1));
+        MinecraftForge.registerOre("gemBeryl", new ItemStack(TFCItems.terraGemBeryl, 1, 2));
+        MinecraftForge.registerOre("gemBerylFlawless", new ItemStack(TFCItems.terraGemBeryl, 1, 3));
+        MinecraftForge.registerOre("gemBerylExquisite", new ItemStack(TFCItems.terraGemBeryl, 1, 4));
 
-        MinecraftForge.registerOre("gemEmeraldChipped", new ItemStack(terraGemEmerald, 1, 0));
-        MinecraftForge.registerOre("gemEmeraldFlawed", new ItemStack(terraGemEmerald, 1, 1));
-        MinecraftForge.registerOre("gemEmerald", new ItemStack(terraGemEmerald, 1, 2));
-        MinecraftForge.registerOre("gemEmeraldFlawless", new ItemStack(terraGemEmerald, 1, 3));
-        MinecraftForge.registerOre("gemEmeraldExquisite", new ItemStack(terraGemEmerald, 1, 4));
+        MinecraftForge.registerOre("gemEmeraldChipped", new ItemStack(TFCItems.terraGemEmerald, 1, 0));
+        MinecraftForge.registerOre("gemEmeraldFlawed", new ItemStack(TFCItems.terraGemEmerald, 1, 1));
+        MinecraftForge.registerOre("gemEmerald", new ItemStack(TFCItems.terraGemEmerald, 1, 2));
+        MinecraftForge.registerOre("gemEmeraldFlawless", new ItemStack(TFCItems.terraGemEmerald, 1, 3));
+        MinecraftForge.registerOre("gemEmeraldExquisite", new ItemStack(TFCItems.terraGemEmerald, 1, 4));
 
-        MinecraftForge.registerOre("gemGarnetChipped", new ItemStack(terraGemGarnet, 1, 0));
-        MinecraftForge.registerOre("gemGarnetFlawed", new ItemStack(terraGemGarnet, 1, 1));
-        MinecraftForge.registerOre("gemGarnet", new ItemStack(terraGemGarnet, 1, 2));
-        MinecraftForge.registerOre("gemGarnetFlawless", new ItemStack(terraGemGarnet, 1, 3));
-        MinecraftForge.registerOre("gemGarnetExquisite", new ItemStack(terraGemGarnet, 1, 4));
+        MinecraftForge.registerOre("gemGarnetChipped", new ItemStack(TFCItems.terraGemGarnet, 1, 0));
+        MinecraftForge.registerOre("gemGarnetFlawed", new ItemStack(TFCItems.terraGemGarnet, 1, 1));
+        MinecraftForge.registerOre("gemGarnet", new ItemStack(TFCItems.terraGemGarnet, 1, 2));
+        MinecraftForge.registerOre("gemGarnetFlawless", new ItemStack(TFCItems.terraGemGarnet, 1, 3));
+        MinecraftForge.registerOre("gemGarnetExquisite", new ItemStack(TFCItems.terraGemGarnet, 1, 4));
 
-        MinecraftForge.registerOre("gemJadeChipped", new ItemStack(terraGemJade, 1, 0));
-        MinecraftForge.registerOre("gemJadeFlawed", new ItemStack(terraGemJade, 1, 1));
-        MinecraftForge.registerOre("gemJade", new ItemStack(terraGemJade, 1, 2));
-        MinecraftForge.registerOre("gemJadeFlawless", new ItemStack(terraGemJade, 1, 3));
-        MinecraftForge.registerOre("gemJadeExquisite", new ItemStack(terraGemJade, 1, 4));
+        MinecraftForge.registerOre("gemJadeChipped", new ItemStack(TFCItems.terraGemJade, 1, 0));
+        MinecraftForge.registerOre("gemJadeFlawed", new ItemStack(TFCItems.terraGemJade, 1, 1));
+        MinecraftForge.registerOre("gemJade", new ItemStack(TFCItems.terraGemJade, 1, 2));
+        MinecraftForge.registerOre("gemJadeFlawless", new ItemStack(TFCItems.terraGemJade, 1, 3));
+        MinecraftForge.registerOre("gemJadeExquisite", new ItemStack(TFCItems.terraGemJade, 1, 4));
 
-        MinecraftForge.registerOre("gemJasperChipped", new ItemStack(terraGemJasper, 1, 0));
-        MinecraftForge.registerOre("gemJasperFlawed", new ItemStack(terraGemJasper, 1, 1));
-        MinecraftForge.registerOre("gemJasper", new ItemStack(terraGemJasper, 1, 2));
-        MinecraftForge.registerOre("gemJasperFlawless", new ItemStack(terraGemJasper, 1, 3));
-        MinecraftForge.registerOre("gemJasperExquisite", new ItemStack(terraGemJasper, 1, 4));
+        MinecraftForge.registerOre("gemJasperChipped", new ItemStack(TFCItems.terraGemJasper, 1, 0));
+        MinecraftForge.registerOre("gemJasperFlawed", new ItemStack(TFCItems.terraGemJasper, 1, 1));
+        MinecraftForge.registerOre("gemJasper", new ItemStack(TFCItems.terraGemJasper, 1, 2));
+        MinecraftForge.registerOre("gemJasperFlawless", new ItemStack(TFCItems.terraGemJasper, 1, 3));
+        MinecraftForge.registerOre("gemJasperExquisite", new ItemStack(TFCItems.terraGemJasper, 1, 4));
 
-        MinecraftForge.registerOre("gemOpalChipped", new ItemStack(terraGemOpal, 1, 0));
-        MinecraftForge.registerOre("gemOpalFlawed", new ItemStack(terraGemOpal, 1, 1));
-        MinecraftForge.registerOre("gemOpal", new ItemStack(terraGemOpal, 1, 2));
-        MinecraftForge.registerOre("gemOpalFlawless", new ItemStack(terraGemOpal, 1, 3));
-        MinecraftForge.registerOre("gemOpalExquisite", new ItemStack(terraGemOpal, 1, 4));
+        MinecraftForge.registerOre("gemOpalChipped", new ItemStack(TFCItems.terraGemOpal, 1, 0));
+        MinecraftForge.registerOre("gemOpalFlawed", new ItemStack(TFCItems.terraGemOpal, 1, 1));
+        MinecraftForge.registerOre("gemOpal", new ItemStack(TFCItems.terraGemOpal, 1, 2));
+        MinecraftForge.registerOre("gemOpalFlawless", new ItemStack(TFCItems.terraGemOpal, 1, 3));
+        MinecraftForge.registerOre("gemOpalExquisite", new ItemStack(TFCItems.terraGemOpal, 1, 4));
 
-        MinecraftForge.registerOre("gemRubyChipped", new ItemStack(terraGemRuby, 1, 0));
-        MinecraftForge.registerOre("gemRubyFlawed", new ItemStack(terraGemRuby, 1, 1));
-        MinecraftForge.registerOre("gemRuby", new ItemStack(terraGemRuby, 1, 2));
-        MinecraftForge.registerOre("gemRubyFlawless", new ItemStack(terraGemRuby, 1, 3));
-        MinecraftForge.registerOre("gemRubyExquisite", new ItemStack(terraGemRuby, 1, 4));
+        MinecraftForge.registerOre("gemRubyChipped", new ItemStack(TFCItems.terraGemRuby, 1, 0));
+        MinecraftForge.registerOre("gemRubyFlawed", new ItemStack(TFCItems.terraGemRuby, 1, 1));
+        MinecraftForge.registerOre("gemRuby", new ItemStack(TFCItems.terraGemRuby, 1, 2));
+        MinecraftForge.registerOre("gemRubyFlawless", new ItemStack(TFCItems.terraGemRuby, 1, 3));
+        MinecraftForge.registerOre("gemRubyExquisite", new ItemStack(TFCItems.terraGemRuby, 1, 4));
 
-        MinecraftForge.registerOre("gemSapphireChipped", new ItemStack(terraGemSapphire, 1, 0));
-        MinecraftForge.registerOre("gemSapphireFlawed", new ItemStack(terraGemSapphire, 1, 1));
-        MinecraftForge.registerOre("gemSapphire", new ItemStack(terraGemSapphire, 1, 2));
-        MinecraftForge.registerOre("gemSapphireFlawless", new ItemStack(terraGemSapphire, 1, 3));
-        MinecraftForge.registerOre("gemSapphireExquisite", new ItemStack(terraGemSapphire, 1, 4));
+        MinecraftForge.registerOre("gemSapphireChipped", new ItemStack(TFCItems.terraGemSapphire, 1, 0));
+        MinecraftForge.registerOre("gemSapphireFlawed", new ItemStack(TFCItems.terraGemSapphire, 1, 1));
+        MinecraftForge.registerOre("gemSapphire", new ItemStack(TFCItems.terraGemSapphire, 1, 2));
+        MinecraftForge.registerOre("gemSapphireFlawless", new ItemStack(TFCItems.terraGemSapphire, 1, 3));
+        MinecraftForge.registerOre("gemSapphireExquisite", new ItemStack(TFCItems.terraGemSapphire, 1, 4));
 
-        MinecraftForge.registerOre("gemTourmalineChipped", new ItemStack(terraGemTourmaline, 1, 0));
-        MinecraftForge.registerOre("gemTourmalineFlawed", new ItemStack(terraGemTourmaline, 1, 1));
-        MinecraftForge.registerOre("gemTourmaline", new ItemStack(terraGemTourmaline, 1, 2));
-        MinecraftForge.registerOre("gemTourmalineFlawless", new ItemStack(terraGemTourmaline, 1, 3));
-        MinecraftForge.registerOre("gemTourmalineExquisite", new ItemStack(terraGemTourmaline, 1, 4));
+        MinecraftForge.registerOre("gemTourmalineChipped", new ItemStack(TFCItems.terraGemTourmaline, 1, 0));
+        MinecraftForge.registerOre("gemTourmalineFlawed", new ItemStack(TFCItems.terraGemTourmaline, 1, 1));
+        MinecraftForge.registerOre("gemTourmaline", new ItemStack(TFCItems.terraGemTourmaline, 1, 2));
+        MinecraftForge.registerOre("gemTourmalineFlawless", new ItemStack(TFCItems.terraGemTourmaline, 1, 3));
+        MinecraftForge.registerOre("gemTourmalineExquisite", new ItemStack(TFCItems.terraGemTourmaline, 1, 4));
 
-        MinecraftForge.registerOre("gemTopazChipped", new ItemStack(terraGemTopaz, 1, 0));
-        MinecraftForge.registerOre("gemTopazFlawed", new ItemStack(terraGemTopaz, 1, 1));
-        MinecraftForge.registerOre("gemTopaz", new ItemStack(terraGemTopaz, 1, 2));
-        MinecraftForge.registerOre("gemTopazFlawless", new ItemStack(terraGemTopaz, 1, 3));
-        MinecraftForge.registerOre("gemTopazExquisite", new ItemStack(terraGemTopaz, 1, 4));
+        MinecraftForge.registerOre("gemTopazChipped", new ItemStack(TFCItems.terraGemTopaz, 1, 0));
+        MinecraftForge.registerOre("gemTopazFlawed", new ItemStack(TFCItems.terraGemTopaz, 1, 1));
+        MinecraftForge.registerOre("gemTopaz", new ItemStack(TFCItems.terraGemTopaz, 1, 2));
+        MinecraftForge.registerOre("gemTopazFlawless", new ItemStack(TFCItems.terraGemTopaz, 1, 3));
+        MinecraftForge.registerOre("gemTopazExquisite", new ItemStack(TFCItems.terraGemTopaz, 1, 4));
 
         MinecraftForge.registerOreHandler(new IOreHandler() 
         {
