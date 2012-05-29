@@ -15,6 +15,7 @@ public class mod_Debug extends NetworkMod
 {
 	private KeyBinding Key_Rain = new KeyBinding("Key_Rain", 103);
 	private KeyBinding Key_Creative = new KeyBinding("Key_Creative", 104);
+	private KeyBinding Key_Time = new KeyBinding("Key_Time", 105);
 
 	@Override
 	public void keyboardEvent(KeyBinding var1) 
@@ -23,7 +24,7 @@ public class mod_Debug extends NetworkMod
 		if (var1 == this.Key_Rain)
 		{
 			if(!minecraft.theWorld.isRaining())
-				minecraft.theWorld.worldInfo.setRaining(true);//setRainStrength(1.7F);    
+				minecraft.theWorld.worldInfo.setRaining(true);   
 			else
 				minecraft.theWorld.worldInfo.setRaining(false);
 		}
@@ -49,6 +50,15 @@ public class mod_Debug extends NetworkMod
 				minecraft.thePlayer.capabilities.isFlying = false;
 			}
 		}
+		else if (var1 == this.Key_Time)
+        {
+		    long t = minecraft.theWorld.worldInfo.getWorldTime();
+		    System.out.println(t);
+		    long day = t/36000;
+		    System.out.println(day);
+		    long month = day / 30;
+            System.out.println(month);
+        }
 
 	}
 
@@ -75,8 +85,10 @@ public class mod_Debug extends NetworkMod
 	{
 		ModLoader.registerKey(this, this.Key_Rain, false);
 		ModLoader.registerKey(this, this.Key_Creative, false);
+		ModLoader.registerKey(this, this.Key_Time, false);
 		ModLoader.addLocalization("Key_Rain", "Toggle Rain");
 		ModLoader.addLocalization("Key_Creative", "Toggle Creative");
+		ModLoader.addLocalization("Key_Time", "Print Time");
 		ModLoader.setInGameHook(this, true, false);
 
 

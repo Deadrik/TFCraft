@@ -22,7 +22,7 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.ItemTerraSmallOre;
 import net.minecraft.src.TFC_Core.General.HeatIndex;
 import net.minecraft.src.TFC_Core.General.HeatManager;
@@ -386,7 +386,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 fireTemperature = 220;
             }
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC_Game.terraBloomery.blockID) {
+            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC_Core.terraBloomery.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
             }
         }
@@ -394,7 +394,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         {
             updateGui();
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC_Game.terraBloomeryOn.blockID) {
+            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC_Core.terraBloomeryOn.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
             fuelBurnTemp = 0;
@@ -424,7 +424,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public boolean isStackValid(int i, int j, int k)
     {
-        if(worldObj.getBlockId(i, j-1, k) != mod_TFC_Game.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock)
+        if(worldObj.getBlockId(i, j-1, k) != mod_TFC_Core.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock)
         {
             return false;
         }
@@ -661,11 +661,11 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 /*The stack must be air or already be molten rock*/
                 if(worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
-                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == mod_TFC_Game.terraMolten.blockID)
+                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == mod_TFC_Core.terraMolten.blockID)
                 {
                     //Make sure that the Stack is surrounded by rock
                     if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
-                        worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], mod_TFC_Game.terraMolten.blockID);
+                        worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], mod_TFC_Core.terraMolten.blockID);
                         worldObj.markBlockNeedsUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
                     } else {
                         worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0);
@@ -685,7 +685,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 for (Iterator iterator = list.iterator(); iterator.hasNext();)
                 {
                     EntityItem entity = (EntityItem)iterator.next();
-                    String name = mod_TFC_Game.proxy.getDisplayName(entity.item) ;
+                    String name = mod_TFC_Core.proxy.getDisplayName(entity.item) ;
                     if(entity.item.itemID == Item.coal.shiftedIndex && entity.item.getItemDamage() == 1 || entity.item.itemID == TFCItems.Coke.shiftedIndex)
                     {
                         for(int c = 0; c < entity.item.stackSize; c++)

@@ -21,7 +21,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.Vec3D;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.General.AnvilRecipe;
 import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.CraftingRule;

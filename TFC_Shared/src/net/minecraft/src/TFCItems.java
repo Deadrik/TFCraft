@@ -5,6 +5,7 @@ import java.io.File;
 import net.minecraft.src.Block;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
+import net.minecraft.src.TFC_Core.IProxy;
 import net.minecraft.src.TFC_Core.ItemChisel;
 import net.minecraft.src.TFC_Core.ItemCustomAxe;
 import net.minecraft.src.TFC_Core.ItemCustomHoe;
@@ -14,6 +15,7 @@ import net.minecraft.src.TFC_Core.ItemCustomSaw;
 import net.minecraft.src.TFC_Core.ItemCustomSeeds;
 import net.minecraft.src.TFC_Core.ItemCustomShovel;
 import net.minecraft.src.TFC_Core.ItemTerra;
+import net.minecraft.src.TFC_Core.ItemTerraArmor;
 import net.minecraft.src.TFC_Core.ItemTerraGem;
 import net.minecraft.src.TFC_Core.ItemTerraIngot;
 import net.minecraft.src.TFC_Core.ItemTerraJavelin;
@@ -33,6 +35,7 @@ import net.minecraft.src.TFC_Game.ItemTerraFirestarter;
 import net.minecraft.src.TFC_Game.ItemTerraMeltedMetal;
 import net.minecraft.src.TFC_Game.ItemTerraMiscTool;
 import net.minecraft.src.TFC_Game.ItemTerraMiscToolHead;
+import net.minecraft.src.TFC_Game.ItemUnfinishedArmor;
 import net.minecraft.src.TFC_Mining.BlockTerraSluice;
 import net.minecraft.src.TFC_Mining.ItemTerraGoldPan;
 import net.minecraft.src.TFC_Mining.ItemTerraProPick;
@@ -701,9 +704,12 @@ public class TFCItems
     public static EnumToolMaterial TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, 9.0F, 2, 8);
     public static EnumToolMaterial ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, 9.0F, 2, 8);
     
+    public static Item[] MeltedMetal;
+    public static Item[] Hammers;
     
     static Configuration config;
-    static
+    
+    public static void Setup()
     {
         
         try
@@ -1223,7 +1229,142 @@ public class TFCItems
         TinSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","TinSheet2x",19024)).setItemName("TinSheet2x").setIconCoord(13, 15)).setTexturePath("/bioxx/terraarmor1.png");
         ZincSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","ZincSheet2x",19025)).setItemName("ZincSheet2x").setIconCoord(14, 15)).setTexturePath("/bioxx/terraarmor1.png");
         
-
+        MeltedMetal = new Item[]{BismuthUnshaped, BismuthBronzeUnshaped,BlackBronzeUnshaped,
+            TFCItems.BlackSteelUnshaped,TFCItems.BlueSteelUnshaped,TFCItems.BrassUnshaped,TFCItems.BronzeUnshaped,
+            TFCItems.CopperUnshaped,TFCItems.GoldUnshaped,
+            TFCItems.WroughtIronUnshaped,TFCItems.LeadUnshaped,TFCItems.NickelUnshaped,TFCItems.PigIronUnshaped,
+            TFCItems.PlatinumUnshaped,TFCItems.RedSteelUnshaped,TFCItems.RoseGoldUnshaped,TFCItems.SilverUnshaped,
+            TFCItems.SteelUnshaped,TFCItems.SterlingSilverUnshaped,
+            TFCItems.TinUnshaped,TFCItems.ZincUnshaped, TFCItems.HCSteelUnshaped, TFCItems.WeakSteelUnshaped,
+            TFCItems.HCBlackSteelUnshaped, TFCItems.HCBlueSteelUnshaped, TFCItems.HCRedSteelUnshaped, 
+            TFCItems.WeakBlueSteelUnshaped, TFCItems.WeakRedSteelUnshaped};
+        
+        Hammers  = new Item[]{TFCItems.BismuthHammer,TFCItems.BismuthBronzeHammer,TFCItems.BlackBronzeHammer,
+            TFCItems.BlackSteelHammer,TFCItems.BlueSteelHammer,TFCItems.BronzeHammer,TFCItems.CopperHammer,
+            TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.RoseGoldHammer,TFCItems.SteelHammer,
+            TFCItems.TinHammer,TFCItems.ZincHammer};
+        
+        String[] Names = {"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Rose Gold", "Steel", "Tin", "Zinc"};
+        IProxy proxy = ServerClientProxy.getProxy();
+        
+        EnumArmorMaterial[] mats = new EnumArmorMaterial[]{mod_TFC_Core.BismuthArmorMaterial,mod_TFC_Core.BismuthBronzeArmorMaterial,mod_TFC_Core.BlackBronzeArmorMaterial,mod_TFC_Core.BlackSteelArmorMaterial,mod_TFC_Core.BlueSteelArmorMaterial,
+                mod_TFC_Core.BronzeArmorMaterial,mod_TFC_Core.CopperArmorMaterial,mod_TFC_Core.IronArmorMaterial,mod_TFC_Core.RedSteelArmorMaterial,mod_TFC_Core.RoseGoldArmorMaterial,
+                mod_TFC_Core.SteelArmorMaterial,mod_TFC_Core.TinArmorMaterial,mod_TFC_Core.ZincArmorMaterial};
+        
+        int num = 19026;
+        int i = 0;
+        TFCItems.BismuthUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BismuthBronzeUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackBronzeUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackSteelUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlueSteelUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BronzeUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.CopperUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.WroughtIronUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RedSteelUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RoseGoldUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.SteelUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.TinUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.ZincUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        i = 0;
+        TFCItems.BismuthBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.BismuthBronzeBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.BlackBronzeBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.BlackSteelBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.BlueSteelBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.BronzeBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.CopperBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.WroughtIronBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.RedSteelBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.RoseGoldBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.SteelBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.TinBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        TFCItems.ZincBoots = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Boots",num),mats[i], proxy.getArmorRenderID(i), 3).setItemName(Names[i]+"Boots").setIconCoord(1+i,3)); num++;i++;
+        i = 0;
+        TFCItems.BismuthUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BismuthBronzeUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackBronzeUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackSteelUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlueSteelUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BronzeUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.CopperUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.WroughtIronUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RedSteelUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RoseGoldUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.SteelUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.TinUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.ZincUnfinishedGreaves = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedGreaves",num)).setItemName(Names[i]+"UnfinishedGreaves").setIconCoord(1+i,2)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        i = 0;
+        TFCItems.BismuthGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.BismuthBronzeGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.BlackBronzeGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.BlackSteelGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.BlueSteelGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.BronzeGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.CopperGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.WroughtIronGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.RedSteelGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.RoseGoldGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.SteelGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.TinGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        TFCItems.ZincGreaves = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Greaves",num),mats[i], proxy.getArmorRenderID(i), 2).setItemName(Names[i]+"Greaves").setIconCoord(1+i,2)); num++;i++;
+        i = 0;
+        TFCItems.BismuthUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BismuthBronzeUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackBronzeUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackSteelUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlueSteelUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BronzeUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.CopperUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.WroughtIronUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RedSteelUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RoseGoldUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.SteelUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.TinUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.ZincUnfinishedChestplate = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedChestplate",num)).setItemName(Names[i]+"UnfinishedChestplate").setIconCoord(1+i,1)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        i = 0;
+        TFCItems.BismuthChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.BismuthBronzeChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.BlackBronzeChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.BlackSteelChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.BlueSteelChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.BronzeChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.CopperChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.WroughtIronChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.RedSteelChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.RoseGoldChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.SteelChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.TinChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        TFCItems.ZincChestplate = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Chestplate",num),mats[i], proxy.getArmorRenderID(i), 1).setItemName(Names[i]+"Chestplate").setIconCoord(1+i,1)); num++;i++;
+        i = 0;
+        TFCItems.BismuthUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BismuthBronzeUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackBronzeUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlackSteelUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BlueSteelUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.BronzeUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.CopperUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.WroughtIronUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RedSteelUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.RoseGoldUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.SteelUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.TinUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        TFCItems.ZincUnfinishedHelmet = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedHelmet",num)).setItemName(Names[i]+"UnfinishedHelmet").setIconCoord(1+i,0)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
+        i = 0;
+        TFCItems.BismuthHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.BismuthBronzeHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.BlackBronzeHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.BlackSteelHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.BlueSteelHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.BronzeHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.CopperHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.WroughtIronHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.RedSteelHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.RoseGoldHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.SteelHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.TinHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        TFCItems.ZincHelmet = ((ItemTerraArmor)new ItemTerraArmor(TFCSettings.getIntFor(config,"item",Names[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+        
         
 
 
@@ -1264,5 +1405,9 @@ public class TFCItems
                 BlackSteelSaw,BlueSteelSaw,BronzeSaw,CopperSaw,
                 WroughtIronSaw,RedSteelSaw,RoseGoldSaw,SteelSaw,
                 TinSaw,ZincSaw};
+        
+        if (config != null) {
+            config.save();
+        }
     }
 }

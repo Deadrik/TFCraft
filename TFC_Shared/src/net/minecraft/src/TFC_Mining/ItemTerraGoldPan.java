@@ -11,7 +11,7 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.General.Helper;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -133,7 +133,7 @@ public class ItemTerraGoldPan extends Item implements ITextureProvider
 		}
 		else
 		{
-			if(world.getBlockId(x, y, z) == mod_TFC_Game.terraSluice.blockID)
+			if(world.getBlockId(x, y, z) == mod_TFC_Core.terraSluice.blockID)
 			{
 				((TileEntityTerraSluice)world.getBlockTileEntity(x, y, z)).soilAmount += 5;
 				return new ItemStack(this,1,0);

@@ -66,6 +66,7 @@ public class ClientProxy implements IProxy {
         ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
         ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
         ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
+       
     }
 
     @Override

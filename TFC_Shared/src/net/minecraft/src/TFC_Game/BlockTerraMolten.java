@@ -17,8 +17,8 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatList;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Game.*;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core.*;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.forge.ITextureProvider;
 

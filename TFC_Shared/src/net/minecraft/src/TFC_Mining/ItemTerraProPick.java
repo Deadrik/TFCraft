@@ -15,7 +15,7 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StringTranslate;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.BlockTerraOre;
 import net.minecraft.src.TFC_Core.BlockTerraOre2;
 import net.minecraft.src.TFC_Core.BlockTerraOre3;

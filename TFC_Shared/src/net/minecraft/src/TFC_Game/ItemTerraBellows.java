@@ -6,7 +6,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.General.Helper;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -47,7 +47,7 @@ public class ItemTerraBellows extends Item implements ITextureProvider
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockId(x, y+1, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC_Game.terraBellows.blockID, l);
+				world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC_Core.terraBellows.blockID, l);
 				return new ItemStack(this,0);
 			}
 		}

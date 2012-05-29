@@ -12,7 +12,7 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraFirepit extends BlockContainer implements ITextureProvider
@@ -80,7 +80,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 				tileentityfirepit = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Game.terraFirepitGuiId, world, i, j, k);
+				entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.terraFirepitGuiId, world, i, j, k);
 				//ModLoader.openGUI(entityplayer, new GuiTerraFirepit(entityplayer.inventory, tileentityfirepit));
 			}
 			return true;
@@ -172,7 +172,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this.blockID == mod_TFC_Game.terraFirepit.blockID)
+		if (this.blockID == mod_TFC_Core.terraFirepit.blockID)
 		{
 			return;
 		}
@@ -224,12 +224,12 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 
         if (par0)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraFirepitOn.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Core.terraFirepitOn.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
         else
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraFirepit.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Core.terraFirepit.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
 

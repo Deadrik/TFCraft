@@ -12,7 +12,7 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 
 public class BlockTerraSluice extends BlockContainer
 {
@@ -84,10 +84,10 @@ public class BlockTerraSluice extends BlockContainer
 						entityplayer.setItemInUse(new ItemStack(TFCItems.terraGoldPan, 1, 0), 0);
 						/*The line below was uncommented before the smp inclusion. If this section isn't working it's because the above line never worked properly.
 						 * Apparently I was doing the same thing twice, so I'm not sure if one of these wasn't working.*/
-						//mc.thePlayer.inventory.setInventorySlotContents(mc.thePlayer.inventory.currentItem, new ItemStack(mod_TFC_Game.terraGoldPan,1,0));
+						//mc.thePlayer.inventory.setInventorySlotContents(mc.thePlayer.inventory.currentItem, new ItemStack(mod_TFC_Core.terraGoldPan,1,0));
 						return true;
 					}
-					entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Game.terraSluiceGuiId, world, i, j, k);
+					entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.terraSluiceGuiId, world, i, j, k);
 					//ModLoader.openGUI(entityplayer, new GuiTerraSluice(entityplayer.inventory, tileentitysluice));
 				}
 			}

@@ -17,7 +17,7 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
 import net.minecraft.src.TFC_Core.General.HeatIndex;
 import net.minecraft.src.TFC_Core.General.HeatManager;
@@ -1203,7 +1203,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && Surrounded != 5)
             {
 
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC_Game.terraFirepitOn.blockID) {
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC_Core.terraFirepitOn.blockID) {
                     BlockTerraFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 

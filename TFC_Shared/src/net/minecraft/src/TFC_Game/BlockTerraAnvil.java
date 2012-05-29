@@ -15,7 +15,7 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -68,7 +68,7 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 				tileentityanvil = (TileEntityTerraAnvil)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Game.terraAnvilGuiId, world, i, j, k);
+				entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.terraAnvilGuiId, world, i, j, k);
 			}
 			return true;
 		}
@@ -142,7 +142,7 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 	{		
 		int type = BlockTerraAnvil.getAnvilTypeFromMeta(l);
 
-		if(blockID == mod_TFC_Game.terraAnvil.blockID)
+		if(blockID == mod_TFC_Core.terraAnvil.blockID)
 		{
 		switch (type)
 		{
@@ -171,7 +171,7 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraStoneAnvilItem, 1));
 		}
 		}
-		else if(blockID == mod_TFC_Game.terraAnvil2.blockID)
+		else if(blockID == mod_TFC_Core.terraAnvil2.blockID)
         {
         switch (type)
         {

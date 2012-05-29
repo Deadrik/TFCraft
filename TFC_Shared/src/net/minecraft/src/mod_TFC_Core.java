@@ -4,14 +4,35 @@
 package net.minecraft.src;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.TFC_Core.Custom.ItemDyeCustom;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
+import net.minecraft.src.TFC_Game.BlockTerraAnvil;
+import net.minecraft.src.TFC_Game.BlockTerraBellows;
+import net.minecraft.src.TFC_Game.BlockTerraBloomery;
+import net.minecraft.src.TFC_Game.BlockTerraFirepit;
+import net.minecraft.src.TFC_Game.BlockTerraForge;
+import net.minecraft.src.TFC_Game.BlockTerraMetallurgy;
+import net.minecraft.src.TFC_Game.BlockTerraMolten;
+import net.minecraft.src.TFC_Game.BlockTerraScribe;
+import net.minecraft.src.TFC_Game.TFC_Game;
+import net.minecraft.src.TFC_Game.TileEntityTerraAnvil;
+import net.minecraft.src.TFC_Game.TileEntityTerraBloomery;
+import net.minecraft.src.TFC_Game.TileEntityTerraFirepit;
+import net.minecraft.src.TFC_Game.TileEntityTerraForge;
+import net.minecraft.src.TFC_Game.TileEntityTerraMetallurgy;
+import net.minecraft.src.TFC_Game.TileEntityTerraScribe;
+import net.minecraft.src.TFC_Mining.BlockTerraSluice;
+import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.EnumHelper;
 import net.minecraft.src.forge.ICraftingHandler;
@@ -30,6 +51,13 @@ public class mod_TFC_Core extends NetworkMod
     //////////////////Features////////////////////
     public static int logPileGuiId = 0;
     public static int workbenchGuiId = 1;
+    public static int terraFirepitGuiId = 20;
+    public static int terraAnvilGuiId = 21;
+    public static int terraScribeGuiId = 22;
+    public static int terraForgeGuiId = 23;
+    public static int terraMetallurgyGuiId = 24;
+    public static int terraSluiceGuiId = 25;
+    public static int terraBloomeryGuiId = 26;
 
     //////////////////////////////////////////////
     public static int sulfurRenderId;
@@ -95,6 +123,21 @@ public class mod_TFC_Core extends NetworkMod
     public static Block tilledSoil2;
     
     public static Block bucketWater;
+    public static Block terraFirepit;
+    public static Block terraFirepitOn;
+    
+    public static Block terraBellows;
+    public static Block terraAnvil;
+    public static Block terraAnvil2;
+    public static Block terraScribe;
+    public static Block terraForge;
+    public static Block terraForgeOn;
+    public static Block terraBloomery;
+    public static Block terraBloomeryOn;
+    public static Block terraMetalTable;
+    public static Block terraMolten;
+    
+    public static Block terraSluice;
     
     public static EnumArmorMaterial BismuthArmorMaterial;
     public static EnumArmorMaterial BismuthBronzeArmorMaterial;
@@ -109,6 +152,12 @@ public class mod_TFC_Core extends NetworkMod
     public static EnumArmorMaterial SteelArmorMaterial;
     public static EnumArmorMaterial TinArmorMaterial;
     public static EnumArmorMaterial ZincArmorMaterial;
+
+    public static String[] seasons = { "Summer", "Autumn", "Winter", "Spring" };
+    private static String currentSeason = null;
+    
+    
+    
 
     public mod_TFC_Core()
     {
@@ -190,6 +239,16 @@ public class mod_TFC_Core extends NetworkMod
         ModLoader.registerBlock(Block.leaves, net.minecraft.src.TFC_Core.ItemCustomLeaves.class);
         ModLoader.registerBlock(Block.sapling, net.minecraft.src.TFC_Core.ItemSapling.class);
         ModLoader.registerBlock(Block.planks, net.minecraft.src.TFC_Core.ItemTerraPlanks.class);
+        
+        ModLoader.registerBlock(terraFirepit);
+        ModLoader.registerBlock(terraBellows);
+        ModLoader.registerBlock(terraAnvil);
+        ModLoader.registerBlock(terraScribe);
+        ModLoader.registerBlock(terraForge);
+        ModLoader.registerBlock(terraMetalTable);
+        ModLoader.registerBlock(terraMolten);
+        ModLoader.registerBlock(terraBloomery);
+        ModLoader.registerBlock(terraSluice);
 
         //Items
         Item.itemsList[terraStoneIgEx.blockID] = new ItemIgEx(terraStoneIgEx.blockID - 256);
@@ -252,14 +311,21 @@ public class mod_TFC_Core extends NetworkMod
             RemoveRecipe(new ItemStack(Item.stick,4));
             RemoveRecipe(new ItemStack(Block.planks,4));
         }
-        TFC_Core.RegisterRecipes();		
+        TFCItems.Setup();
+        TFC_Core.RegisterRecipes();	
+        TFC_Game.registerRecipes();
+        RegisterToolClasses();
         proxy.registerTileEntities();
         setupCraftHook();
+        
         MinecraftForge.setGuiHandler(this, proxy);
         MinecraftForge.registerConnectionHandler(new PacketHandler());
         proxy.registerRenderInformation();
         
         MinecraftForge.registerEntity(EntityTerraJavelin.class, this, 1, 160, 5, true);
+        
+      //last thing
+        initOreDictionary();
     }
 
 
@@ -310,6 +376,10 @@ public class mod_TFC_Core extends NetworkMod
                 {
                     HandleItem(entityplayer, iinventory, TFC_Core.Axes);
                 }
+                else if(itemstack.itemID == TFCItems.Flux.shiftedIndex)
+                {
+                    HandleItem(entityplayer, iinventory, TFCItems.Hammers);
+                }
             }
         };
 
@@ -342,7 +412,6 @@ public class mod_TFC_Core extends NetworkMod
                 item.damageItem(1 , entityplayer);
                 if (item.getItemDamage() != 0)
                 {
-                    //ContainerTerraWorkbench cw = (ContainerTerraWorkbench)((GuiContainerTFC)guiscreen).inventorySlots;
                     iinventory.setInventorySlotContents(index, item);
                     iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;
                     if(iinventory.getStackInSlot(index).stackSize > 2)
@@ -367,6 +436,32 @@ public class mod_TFC_Core extends NetworkMod
         }
     }
 
+    public boolean onTickInGame(MinecraftServer minecraftServer)
+    {
+        for (Iterator iterator = minecraftServer.getWorldManager(0).playerManager.players.iterator(); iterator.hasNext();)
+        {
+            EntityPlayer thePlayer = (EntityPlayer)iterator.next();
+            ItemStack[] inv = thePlayer.inventory.mainInventory;
+            double xCoord = thePlayer.posX;
+            double yCoord = thePlayer.posY;
+            double zCoord = thePlayer.posZ;
+
+            TFCHeat.HandleContainerHeat((World)minecraftServer.getWorldManager(0), inv, (int)xCoord,(int)yCoord,(int)zCoord);
+        }
+        return true;
+    }
+
+    public boolean onTickInGame(float var1, Minecraft mc)
+    {
+        ItemStack[] inv = ((Minecraft)mc).thePlayer.inventory.mainInventory;
+        double xCoord = ((Minecraft)mc).thePlayer.posX;
+        double yCoord = ((Minecraft)mc).thePlayer.posY;
+        double zCoord = ((Minecraft)mc).thePlayer.posZ;
+
+        TFCHeat.HandleContainerHeat(((Minecraft)mc).theWorld, inv, (int)xCoord,(int)yCoord,(int)zCoord);
+        return true;
+    }
+   
     static
     {
 
@@ -447,6 +542,21 @@ public class mod_TFC_Core extends NetworkMod
         
         bucketWater = new BlockBucketWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
+        terraFirepit = new BlockTerraFirepit(TFCSettings.getIntFor(config,"block","terraFirepit", 207), TileEntityTerraFirepit.class, 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
+        terraBellows = new BlockTerraBellows(TFCSettings.getIntFor(config,"block","terraBellows", 206),Material.wood).setBlockName("terraBellows").setHardness(2);
+        terraForge= new BlockTerraForge(TFCSettings.getIntFor(config,"block","terraForge", 216), TileEntityTerraForge.class, 90).setBlockName("terraForge").setHardness(20).setLightValue(0F);
+        terraScribe = new BlockTerraScribe(TFCSettings.getIntFor(config,"block","terraScribe", 204), TileEntityTerraScribe.class).setBlockName("terraScribe").setHardness(2);
+        terraAnvil = new BlockTerraAnvil(TFCSettings.getIntFor(config,"block","terraAnvil", 205),192, TileEntityTerraAnvil.class).setBlockName("terraAnvil").setHardness(3);
+        terraAnvil2 = new BlockTerraAnvil(TFCSettings.getIntFor(config,"block","terraAnvil2", 225),208, TileEntityTerraAnvil.class).setBlockName("terraAnvil2").setHardness(3);
+        terraMetalTable = new BlockTerraMetallurgy(TFCSettings.getIntFor(config,"block","terraMetallurgy", 218), TileEntityTerraMetallurgy.class).setBlockName("terraMetallurgy").setHardness(3);
+        terraMolten = new BlockTerraMolten(TFCSettings.getIntFor(config,"block","terraMolten", 219)).setBlockName("terraMolten").setHardness(20);
+        terraBloomery = new BlockTerraBloomery(TFCSettings.getIntFor(config,"block","terraBloomery", 220), TileEntityTerraBloomery.class, 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
+        terraBloomeryOn = new BlockTerraBloomery(TFCSettings.getIntFor(config,"block","terraBloomeryOn", 221), TileEntityTerraBloomery.class, 66).setBlockName("terraBloomeryOn").setHardness(20).setLightValue(1.0F);
+        terraFirepitOn = new BlockTerraFirepit(TFCSettings.getIntFor(config,"block","terraFirepitOn", 222), TileEntityTerraFirepit.class, 81).setBlockName("terraFirepitOn").setHardness(1).setLightValue(1.0F);
+        terraForgeOn = new BlockTerraForge(TFCSettings.getIntFor(config,"block","terraForgeOn", 223), TileEntityTerraForge.class, 91).setBlockName("terraForgeOn").setHardness(20).setLightValue(1.0F);
+        terraSluice = new BlockTerraSluice(TFCSettings.getIntFor(config,"block","TerraSluice", 217), TileEntityTerraSluice.class).setBlockName("Sluice").setHardness(2F).setResistance(20F);
+        
+       
         MinecraftForge.setBlockHarvestLevel(terraStoneIgIn, "pickaxe", 0);
         MinecraftForge.setBlockHarvestLevel(terraStoneIgEx, "pickaxe", 0);
         MinecraftForge.setBlockHarvestLevel(terraStoneSed, "pickaxe", 0);
@@ -468,11 +578,6 @@ public class mod_TFC_Core extends NetworkMod
 
         
         
-
-        
-        RegisterToolClasses();
-        //last thing
-        initOreDictionary();
 
         if (config != null) {
             config.save();

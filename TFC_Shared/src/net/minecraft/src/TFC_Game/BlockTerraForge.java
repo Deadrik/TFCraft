@@ -11,7 +11,7 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraForge extends BlockContainer implements ITextureProvider
@@ -86,7 +86,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 
 				if(tileentityforge.isValid)
 				{
-					entityplayer.openGui(mod_TFC_Game.instance, mod_TFC_Game.terraForgeGuiId, world, i, j, k);
+					entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.terraForgeGuiId, world, i, j, k);
 					//ModLoader.openGUI(entityplayer, new GuiTerraForge(entityplayer.inventory, tileentityforge));
 				}
 			}
@@ -200,7 +200,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 	}
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this.blockID == mod_TFC_Game.terraForge.blockID)
+		if (this.blockID == mod_TFC_Core.terraForge.blockID)
 		{
 			return;
 		}
@@ -248,12 +248,12 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 
         if (par0)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraForgeOn.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Core.terraForgeOn.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
         else
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Game.terraForge.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Core.terraForge.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
 

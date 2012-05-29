@@ -1,5 +1,7 @@
 package net.minecraft.src.TFC_Core.General;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
@@ -47,6 +49,49 @@ public class Helper {
     public static float clamp_float(float par0, float par1, float par2)
     {
         return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
+    }
+    
+    private static Field field_modifiers = null;
+    public static void setPrivateValue(Class var0, Object var1, int var2, Object var3) throws IllegalArgumentException, SecurityException, NoSuchFieldException
+    {
+        try
+        {
+            Field var4 = var0.getDeclaredFields()[var2];
+            var4.setAccessible(true);
+            int var5 = field_modifiers.getInt(var4);
+
+            if ((var5 & 16) != 0)
+            {
+                field_modifiers.setInt(var4, var5 & -17);
+            }
+
+            var4.set(var1, var3);
+        }
+        catch (IllegalAccessException var6)
+        {
+            System.out.println("setPrivateValue Error:" + var6.getMessage());
+        }
+    }
+
+    public static void setPrivateValue(Class var0, Object var1, String var2, Object var3) throws IllegalArgumentException, SecurityException, NoSuchFieldException
+    {
+        try
+        {
+            Field var4 = var0.getDeclaredField(var2);
+            int var5 = field_modifiers.getInt(var4);
+
+            if ((var5 & 16) != 0)
+            {
+                field_modifiers.setInt(var4, var5 & -17);
+            }
+
+            var4.setAccessible(true);
+            var4.set(var1, var3);
+        }
+        catch (IllegalAccessException var6)
+        {
+            System.out.println("setPrivateValue Error:" + var6.getMessage());
+        }
     }
 
 }
