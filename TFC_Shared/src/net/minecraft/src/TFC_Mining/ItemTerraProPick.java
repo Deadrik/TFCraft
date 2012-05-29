@@ -32,7 +32,6 @@ public class ItemTerraProPick extends Item implements ITextureProvider
     {
         super(i);
         maxStackSize = 1;
-        vecArray = new ArrayList<Vector3f>();
     }
 
     @Override
@@ -54,23 +53,23 @@ public class ItemTerraProPick extends Item implements ITextureProvider
             int y = objectMouseOver.blockY;
             int z = objectMouseOver.blockZ;
             int side = objectMouseOver.sideHit;
-            if(vecArray.size() >= 100)
-            {
-                vecArray.remove(0);
-            }
+//            if(vecArray.size() >= 100)
+//            {
+//                vecArray.remove(0);
+//            }
 
             boolean b = false;
-            if(vecArray.size() > 0)
-            {
-                for(int i = 0; i < vecArray.size() && b == false; i++)
-                {
-                    Vector3f vec = (Vector3f)vecArray.toArray()[i];
-                    if(vec.X == x && vec.Y == y && vec.Z == z)
-                    {
-                        b = true;
-                    }
-                }
-            }
+//            if(vecArray.size() > 0)
+//            {
+//                for(int i = 0; i < vecArray.size() && b == false; i++)
+//                {
+//                    Vector3f vec = (Vector3f)vecArray.toArray()[i];
+//                    if(vec.X == x && vec.Y == y && vec.Z == z)
+//                    {
+//                        b = true;
+//                    }
+//                }
+//            }
 
 
             //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);
@@ -135,21 +134,21 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                     }
                 }
             }
-            Random random = new Random();
-            if(b == true)
-            {
-                entityplayer.addChatMessage("You've already prospected here.");
-            }
-            else if(oreArray.toArray().length > 0 && b == false && random.nextInt(100) < 75)
+            Random random = new Random((x*z)+y);
+//            if(b == true)
+//            {
+//                entityplayer.addChatMessage("You've already prospected here.");
+//            }
+            if(oreArray.toArray().length > 0 && /*b == false &&*/ random.nextInt(100) < 60)
             {
                 int rand = random.nextInt(oreArray.toArray().length);
-                if((Integer)oreNumArray.toArray()[rand] < 5) {
+                if((Integer)oreNumArray.toArray()[rand] < 10) {
                     entityplayer.addChatMessage("Found Traces of " + oreArray.toArray()[rand]);
-                } else if((Integer)oreNumArray.toArray()[rand] < 10) {
-                    entityplayer.addChatMessage("Found a small sample of " + oreArray.toArray()[rand]);
                 } else if((Integer)oreNumArray.toArray()[rand] < 20) {
-                    entityplayer.addChatMessage("Found a medium sample of " + oreArray.toArray()[rand]);
+                    entityplayer.addChatMessage("Found a small sample of " + oreArray.toArray()[rand]);
                 } else if((Integer)oreNumArray.toArray()[rand] < 40) {
+                    entityplayer.addChatMessage("Found a medium sample of " + oreArray.toArray()[rand]);
+                } else if((Integer)oreNumArray.toArray()[rand] < 80) {
                     entityplayer.addChatMessage("Found a large sample of " + oreArray.toArray()[rand]);
                 } else {
                     entityplayer.addChatMessage("Found a very large sample of " + oreArray.toArray()[rand]);
@@ -160,10 +159,7 @@ public class ItemTerraProPick extends Item implements ITextureProvider
 
             itemstack.setItemDamage(itemstack.getItemDamage()+1);
             if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
-                itemstack = null;
-                    
-
-            vecArray.add(new Vector3f(x,y,z));
+                itemstack.stackSize = 0;
 
             return true;
         }

@@ -5,7 +5,6 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemTerraMeltedMetal extends Item implements ITextureProvider
 {
-
 	public ItemTerraMeltedMetal(int i) 
 	{
 		super(i);

@@ -1054,7 +1054,7 @@
 +				 float temp = stackTagCompound.getFloat("temperature");
 +				 float meltTemp = 0;
 +				 if(stackTagCompound.hasKey("Item1Melted") && stackTagCompound.getBoolean("Item1Melted") == true)
-+					 meltTemp = TFCHeat.getMeltingPoint2(this);
++					 meltTemp = TFCHeat.getMeltingPoint(this);
 +				 else
 +					 meltTemp = TFCHeat.getMeltingPoint(this);
 +

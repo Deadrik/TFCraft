@@ -1,9 +1,7 @@
 package net.minecraft.src.TFC_Game;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
 import net.minecraft.src.*;
-import net.minecraft.src.Slot;
+import net.minecraft.src.TFC_Core.General.HeatManager;
 
 public class SlotForge extends Slot
 
@@ -16,15 +14,20 @@ public class SlotForge extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(!itemstack.getItem().getItemNameIS(itemstack).contains(".Ore."))
+	    HeatManager manager = HeatManager.getInstance();
+	    if(manager.findMatchingIndex(itemstack) == null)
+	    {
+	        return false;
+	    }
+		if(!(itemstack.getItem().shiftedIndex == mod_TFC_Core.OreChunk.shiftedIndex))
 		{
 			return true;
 		}
 		return false;
 	}
-
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
-	}
+	
+//	public int getSlotStackLimit()
+//	{
+//	    return 1;
+//	}
 }

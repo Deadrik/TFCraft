@@ -9,18 +9,18 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraGrass extends BlockGrass implements ITextureProvider
 {
-	public int grassID = 0;
-	public int grass2ID = 0;
-	public int dirtID = 0;
-	public int dirt2ID = 0;
-	public int clayID = 0;
-	public int clay2ID = 0;
-	public int clayGrassID = 0;
-	public int clayGrass2ID = 0;
-	public int peatID = 0;
-	public int peatGrassID = 0;
-	
-	private Block blk;
+    public int grassID = 0;
+    public int grass2ID = 0;
+    public int dirtID = 0;
+    public int dirt2ID = 0;
+    public int clayID = 0;
+    public int clay2ID = 0;
+    public int clayGrassID = 0;
+    public int clayGrass2ID = 0;
+    public int peatID = 0;
+    public int peatGrassID = 0;
+
+    private Block blk;
     public BlockTerraGrass(int par1, int par2, Block par3)
     {
         super(par1);
@@ -28,31 +28,31 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         this.blockIndexInTexture = par2;
         blk = par3;
     }
-    
+
     @Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrablocks2.png";
-	}
-    
+    public String getTextureFile()
+    {
+        return "/bioxx/terrablocks2.png";
+    }
+
     public void setIDs(int grass, int grass2,int dirt, int dirt2,int clay, int clay2,int claygrass, int claygrass2, int peat, int peatgrass)
     {
-    	grassID = grass;
-    	grass2ID = grass2;
-    	dirtID = dirt;
-    	dirt2ID = dirt2;
-    	clayID = clay;
-    	clay2ID = clay2;
-    	clayGrassID = claygrass;
-    	clayGrass2ID = claygrass2;
-    	peatID = peat;
-    	peatGrassID = peatgrass;
+        grassID = grass;
+        grass2ID = grass2;
+        dirtID = dirt;
+        dirt2ID = dirt2;
+        clayID = clay;
+        clay2ID = clay2;
+        clayGrassID = claygrass;
+        clayGrass2ID = claygrass2;
+        peatID = peat;
+        peatGrassID = peatgrass;
     }
-    
+
     @Override
-	protected int damageDropped(int i) {
-		return i;
-	}
+    protected int damageDropped(int i) {
+        return i;
+    }
 
 
     /**
@@ -63,7 +63,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
     {
         return par1 == 1 ? 255 : (par1 == 0 ? (this.blockIndexInTexture+16) : (this.blockIndexInTexture + par2));
     }
-    
+
     /**
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
@@ -79,31 +79,31 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         }
         else if (par5 == 2)//-Z
         {
-        	if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4-1) == Material.grass)
-        		return 255;
-        	else
-        		return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4-1) == Material.grass)
+                return 255;
+            else
+                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         else if (par5 == 3)//+Z
         {
-        	if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4+1) == Material.grass)
-        		return 255;
-        	else
-        		return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4+1) == Material.grass)
+                return 255;
+            else
+                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         else if (par5 == 4)//-X
         {
-        	if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2-1, par3-1, par4) == Material.grass)
-        		return 255;
-        	else
-        		return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2-1, par3-1, par4) == Material.grass)
+                return 255;
+            else
+                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         else if (par5 == 5)//+X
         {
-        	if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2+1, par3-1, par4) == Material.grass)
-        		return 255;
-        	else
-        		return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2+1, par3-1, par4) == Material.grass)
+                return 255;
+            else
+                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         return this.blockIndexInTexture;
     }
@@ -124,7 +124,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         double var3 = 1.0D;
         return ColorizerGrass.getGrassColor(var1, var3);
     }
-    
+
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */
@@ -134,9 +134,9 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
     }
     @Override
     public int getRenderType()
-	{
-		return mod_TFC_Core.grassRenderId;
-	}
+    {
+        return mod_TFC_Core.grassRenderId;
+    }
 
     /**
      * Ticks the block if it's been scheduled
@@ -184,6 +184,19 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         }
     }
 
+    public void onEntityWalking(World world, int i, int j, int k, Entity par5Entity) 
+    {
+        if (!world.isRemote)
+        {
+            Random R = new Random();
+            if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockTerraDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
+            {
+                int meta = world.getBlockMetadata(i, j, k);
+                world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC_Core.terraDirt.blockID, meta);
+            }
+        }
+    }
+
     /**
      * Returns the ID of the items to drop on destruction.
      */
@@ -192,11 +205,6 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
     {
         return mod_TFC_Core.terraDirt.idDropped(0, par2Random, par3);
     }
-    
-    public void addCreativeItems(java.util.ArrayList list)
-	{
-		//for(int i = 0; i < 16; i++)
-		    //list.add(new ItemStack(this,1,i));
-	}
+
 
 }

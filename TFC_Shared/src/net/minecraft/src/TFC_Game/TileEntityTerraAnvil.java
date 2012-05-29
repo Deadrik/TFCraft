@@ -25,6 +25,8 @@ import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.General.AnvilRecipe;
 import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.CraftingRule;
+import net.minecraft.src.TFC_Core.General.HeatIndex;
+import net.minecraft.src.TFC_Core.General.HeatManager;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
 
@@ -579,16 +581,15 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 
     public Boolean isTemperatureWeldable(int i)
     {
+        HeatManager manager = HeatManager.getInstance();
         if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
         {
-            String n = anvilItemStacks[i].getItem().getItemNameIS(anvilItemStacks[i]);
-            if(TFCHeat.ItemHeatData.containsKey(n))
+            HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
+            if(index != null)
             {
-                Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(anvilItemStacks[i].getItem().getItemNameIS(anvilItemStacks[i]));
-                float t = anvilItemStacks[i].getTagCompound().getFloat("temperature");
-                float m = (Float)meltData[2];
+                float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
 
-                return t < m && t > m - m * 0.20;
+                return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20;
 
             }
         }
@@ -597,15 +598,16 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 
     public Boolean isTemperatureWorkable(int i)
     {
+        
+        HeatManager manager = HeatManager.getInstance();
         if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
         {
-            if(TFCHeat.ItemHeatData.containsKey(anvilItemStacks[1].getItem().getItemNameIS(anvilItemStacks[i])))
+            HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
+            if(index != null)
             {
-                Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(anvilItemStacks[i].getItem().getItemNameIS(anvilItemStacks[i]));
-                float t = anvilItemStacks[i].getTagCompound().getFloat("temperature");
-                float m = (Float)meltData[2];
+                float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
 
-                return t < m && t > m - m * 0.40;
+                return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40;
 
             }
         }

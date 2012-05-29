@@ -325,7 +325,22 @@ public class ContainerTerraForge extends Container
 
 	public void updateCraftingResults()
 	{
-		super.updateCraftingResults();
+	    for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
+        {
+            ItemStack var2 = ((Slot)this.inventorySlots.get(var1)).getStack();
+            ItemStack var3 = (ItemStack)this.inventoryItemStacks.get(var1);
+
+            if (!ItemStack.areItemStacksEqual(var3, var2))
+            {
+                var3 = var2 == null ? null : var2.copy();
+                this.inventoryItemStacks.set(var1, var3);
+
+                for (int var4 = 0; var4 < this.crafters.size(); ++var4)
+                {
+                    ((ICrafting)this.crafters.get(var4)).updateCraftingInventorySlot(this, var1, var3);
+                }
+            }
+        }
 		
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
         {

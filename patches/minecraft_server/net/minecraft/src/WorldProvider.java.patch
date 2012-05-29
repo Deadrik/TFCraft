@@ -36,7 +36,7 @@
 +                BiomeGenBase.biomeList[i].SetupTrees(par1World, R);
 +            }
 +        }
-+        TFC_Game.registerAnvilRecipes(R);
++        TFC_Game.registerAnvilRecipes(R, par1World);
      }
  
      /**

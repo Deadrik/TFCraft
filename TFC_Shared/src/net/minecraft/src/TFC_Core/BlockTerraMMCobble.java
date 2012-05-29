@@ -96,11 +96,8 @@ public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 
 	private void tryToFall(World world, int i, int j, int k)
 	{
-		int l = i;
-		int i1 = j;
-		int j1 = k;
 		int meta = world.getBlockMetadata(i, j, k);
-		if (canFallBelow(world, l, i1 - 1, j1) && i1 >= 0)
+		if (!BlockCollapsable.isNearSupport(world, i, j, k) && canFallBelow(world, i, j - 1, k) && j >= 0)
 		{
 			byte byte0 = 32;
 			if (fallInstantly || !world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))

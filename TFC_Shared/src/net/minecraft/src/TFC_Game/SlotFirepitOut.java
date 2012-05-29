@@ -20,4 +20,9 @@ public class SlotFirepitOut extends Slot
 
 		return false;
 	}
+	
+    public int getSlotStackLimit()
+    {
+        return 1;
+    }
 }

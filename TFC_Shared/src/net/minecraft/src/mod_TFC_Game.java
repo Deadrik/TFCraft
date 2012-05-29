@@ -72,34 +72,34 @@ public class mod_TFC_Game extends NetworkMod
     public static Item TinHammer;
     public static Item ZincHammer;
 
-    public static Item UnshapedBismuth;
-    public static Item UnshapedBismuthBronze;
-    public static Item UnshapedBlackBronze;
-    public static Item UnshapedBlackSteel;
-    public static Item UnshapedHCBlackSteel;
-    public static Item UnshapedBlueSteel;
-    public static Item UnshapedWeakBlueSteel;
-    public static Item UnshapedHCBlueSteel;
-    public static Item UnshapedBrass;
-    public static Item UnshapedBronze;
-    public static Item UnshapedCopper;
-    public static Item UnshapedGold;
-    public static Item UnshapedWroughtIron;
-    public static Item UnshapedLead;
-    public static Item UnshapedNickel;
-    public static Item UnshapedPigIron;
-    public static Item UnshapedPlatinum;
-    public static Item UnshapedRedSteel;
-    public static Item UnshapedWeakRedSteel;
-    public static Item UnshapedHCRedSteel;
-    public static Item UnshapedRoseGold;
-    public static Item UnshapedSilver;
-    public static Item UnshapedSteel;
-    public static Item UnshapedWeakSteel;
-    public static Item UnshapedHCSteel;
-    public static Item UnshapedSterlingSilver;
-    public static Item UnshapedTin;
-    public static Item UnshapedZinc;
+    public static Item BismuthUnshaped;
+    public static Item BismuthBronzeUnshaped;
+    public static Item BlackBronzeUnshaped;
+    public static Item BlackSteelUnshaped;
+    public static Item HCBlackSteelUnshaped;
+    public static Item BlueSteelUnshaped;
+    public static Item WeakBlueSteelUnshaped;
+    public static Item HCBlueSteelUnshaped;
+    public static Item BrassUnshaped;
+    public static Item BronzeUnshaped;
+    public static Item CopperUnshaped;
+    public static Item GoldUnshaped;
+    public static Item WroughtIronUnshaped;
+    public static Item LeadUnshaped;
+    public static Item NickelUnshaped;
+    public static Item PigIronUnshaped;
+    public static Item PlatinumUnshaped;
+    public static Item RedSteelUnshaped;
+    public static Item WeakRedSteelUnshaped;
+    public static Item HCRedSteelUnshaped;
+    public static Item RoseGoldUnshaped;
+    public static Item SilverUnshaped;
+    public static Item SteelUnshaped;
+    public static Item WeakSteelUnshaped;
+    public static Item HCSteelUnshaped;
+    public static Item SterlingSilverUnshaped;
+    public static Item TinUnshaped;
+    public static Item ZincUnshaped;
     public static Item terraClayMold;
     public static Item terraCeramicMold;
     public static Item terraMeltedUnknown;
@@ -733,7 +733,7 @@ public class mod_TFC_Game extends NetworkMod
         
         
         ModLoader.addRecipe(new ItemStack(mod_TFC_Game.RedSteelBoots), new Object[] { "#", Character.valueOf('#'), 
-            new ItemStack(mod_TFC_Core.terraRedSteelIngot)});
+            new ItemStack(mod_TFC_Core.RedSteelIngot)});
     }
 
     @Override
@@ -804,27 +804,27 @@ public class mod_TFC_Game extends NetworkMod
 
         terraSlag = new ItemTerra(TFCSettings.getIntFor(config,"item","terraSlag",16349),"/bioxx/terrasprites.png").setItemName("terraSlag").setIconCoord(2, 0);
 
-        UnshapedBismuth = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBismuth",16350)).setItemName("UnshapedBismuth").setIconCoord(0, 9);
-        UnshapedBismuthBronze = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBismuthBronze",16351)).setItemName("UnshapedBismuthBronze").setIconCoord(1, 9);
-        UnshapedBlackBronze = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBlackBronze",16352)).setItemName("UnshapedBlackBronze").setIconCoord(2, 9);
-        UnshapedBlackSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBlackSteel",16353)).setItemName("UnshapedBlackSteel").setIconCoord(3, 9);
-        UnshapedBlueSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBlueSteel",16354)).setItemName("UnshapedBlueSteel").setIconCoord(4, 9);
-        UnshapedBrass = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBrass",16355)).setItemName("UnshapedBrass").setIconCoord(5, 9);
-        UnshapedBronze = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBronze",16356)).setItemName("UnshapedBronze").setIconCoord(6, 9);
-        UnshapedCopper = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedCopper",16357)).setItemName("UnshapedCopper").setIconCoord(7, 9);
-        UnshapedGold = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedGold",16358)).setItemName("UnshapedGold").setIconCoord(8, 9);
-        UnshapedWroughtIron = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedIron",16359)).setItemName("UnshapedWroughtIron").setIconCoord(9, 9);
-        UnshapedLead = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedLead",16360)).setItemName("UnshapedLead").setIconCoord(10, 9);
-        UnshapedNickel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedNickel",16361)).setItemName("UnshapedNickel").setIconCoord(0, 10);
-        UnshapedPigIron = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedPigIron",16362)).setItemName("UnshapedPigIron").setIconCoord(1, 10);
-        UnshapedPlatinum = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedPlatinum",16363)).setItemName("UnshapedPlatinum").setIconCoord(2, 10);
-        UnshapedRedSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedRedSteel",16364)).setItemName("UnshapedRedSteel").setIconCoord(3, 10);
-        UnshapedRoseGold = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedRoseGold",16365)).setItemName("UnshapedRoseGold").setIconCoord(4, 10);
-        UnshapedSilver = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedSilver",16366)).setItemName("UnshapedSilver").setIconCoord(5, 10);
-        UnshapedSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedSteel",16367)).setItemName("UnshapedSteel").setIconCoord(6, 10);
-        UnshapedSterlingSilver = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedSterlingSilver",16368)).setItemName("UnshapedSterlingSilver").setIconCoord(7, 10);
-        UnshapedTin = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedTin",16369)).setItemName("UnshapedTin").setIconCoord(8, 10);
-        UnshapedZinc = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedZinc",16370)).setItemName("UnshapedZinc").setIconCoord(9, 10);
+        BismuthUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBismuth",16350)).setItemName("UnshapedBismuth").setIconCoord(0, 9);
+        BismuthBronzeUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBismuthBronze",16351)).setItemName("UnshapedBismuthBronze").setIconCoord(1, 9);
+        BlackBronzeUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBlackBronze",16352)).setItemName("UnshapedBlackBronze").setIconCoord(2, 9);
+        BlackSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBlackSteel",16353)).setItemName("UnshapedBlackSteel").setIconCoord(3, 9);
+        BlueSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBlueSteel",16354)).setItemName("UnshapedBlueSteel").setIconCoord(4, 9);
+        BrassUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBrass",16355)).setItemName("UnshapedBrass").setIconCoord(5, 9);
+        BronzeUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedBronze",16356)).setItemName("UnshapedBronze").setIconCoord(6, 9);
+        CopperUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedCopper",16357)).setItemName("UnshapedCopper").setIconCoord(7, 9);
+        GoldUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedGold",16358)).setItemName("UnshapedGold").setIconCoord(8, 9);
+        WroughtIronUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedIron",16359)).setItemName("UnshapedWroughtIron").setIconCoord(9, 9);
+        LeadUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedLead",16360)).setItemName("UnshapedLead").setIconCoord(10, 9);
+        NickelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedNickel",16361)).setItemName("UnshapedNickel").setIconCoord(0, 10);
+        PigIronUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedPigIron",16362)).setItemName("UnshapedPigIron").setIconCoord(1, 10);
+        PlatinumUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedPlatinum",16363)).setItemName("UnshapedPlatinum").setIconCoord(2, 10);
+        RedSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedRedSteel",16364)).setItemName("UnshapedRedSteel").setIconCoord(3, 10);
+        RoseGoldUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedRoseGold",16365)).setItemName("UnshapedRoseGold").setIconCoord(4, 10);
+        SilverUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedSilver",16366)).setItemName("UnshapedSilver").setIconCoord(5, 10);
+        SteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedSteel",16367)).setItemName("UnshapedSteel").setIconCoord(6, 10);
+        SterlingSilverUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedSterlingSilver",16368)).setItemName("UnshapedSterlingSilver").setIconCoord(7, 10);
+        TinUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedTin",16369)).setItemName("UnshapedTin").setIconCoord(8, 10);
+        ZincUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedZinc",16370)).setItemName("UnshapedZinc").setIconCoord(9, 10);
 
         //Hammers
         StoneHammer = new ItemHammer(TFCSettings.getIntFor(config,"item","terraStoneHammer",16371),mod_TFC_Core.IgInToolMaterial).setItemName("Stone Hammer").setIconCoord(0, 11).setMaxDamage(mod_TFC_Core.IgInStoneUses);
@@ -1003,13 +1003,13 @@ public class mod_TFC_Game extends NetworkMod
         TinSawHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","TinSawHead",16615)).setItemName("Tin Saw Blade").setIconCoord(12, 8);
         ZincSawHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","ZincSawHead",16616)).setItemName("Zinc Saw Blade").setIconCoord(13, 8);
 
-        UnshapedHCBlackSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCBlackSteel",16617)).setItemName("UnshapedHCBlackSteel").setIconCoord(3, 9);
-        UnshapedWeakBlueSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakBlueSteel",16618)).setItemName("UnshapedWeakBlueSteel").setIconCoord(4, 9);
-        UnshapedHCBlueSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCBlueSteel",16619)).setItemName("UnshapedHCBlueSteel").setIconCoord(4, 9);
-        UnshapedWeakRedSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakRedSteel",16621)).setItemName("UnshapedWeakRedSteel").setIconCoord(3, 10);
-        UnshapedHCRedSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCRedSteel",16622)).setItemName("UnshapedHCRedSteel").setIconCoord(3, 10);
-        UnshapedWeakSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakSteel",16623)).setItemName("UnshapedWeakSteel").setIconCoord(6, 10);
-        UnshapedHCSteel = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCSteel",16624)).setItemName("UnshapedHCSteel").setIconCoord(6, 10);
+        HCBlackSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCBlackSteel",16617)).setItemName("UnshapedHCBlackSteel").setIconCoord(3, 9);
+        WeakBlueSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakBlueSteel",16618)).setItemName("UnshapedWeakBlueSteel").setIconCoord(4, 9);
+        HCBlueSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCBlueSteel",16619)).setItemName("UnshapedHCBlueSteel").setIconCoord(4, 9);
+        WeakRedSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakRedSteel",16621)).setItemName("UnshapedWeakRedSteel").setIconCoord(3, 10);
+        HCRedSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCRedSteel",16622)).setItemName("UnshapedHCRedSteel").setIconCoord(3, 10);
+        WeakSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakSteel",16623)).setItemName("UnshapedWeakSteel").setIconCoord(6, 10);
+        HCSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCSteel",16624)).setItemName("UnshapedHCSteel").setIconCoord(6, 10);
         Coke = ((ItemTerra) new ItemTerra(TFCSettings.getIntFor(config,"item","Coke",16625)).setItemName("coke").setIconCoord(2, 0)).setTexturePath("/bioxx/terrasprites.png");
 
         BismuthProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthProPickHead",16626)).setItemName("Bismuth ProPick Head").setIconCoord(1, 1);

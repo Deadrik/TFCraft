@@ -23,6 +23,8 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.ItemTerraSmallOre;
+import net.minecraft.src.TFC_Core.General.HeatIndex;
+import net.minecraft.src.TFC_Core.General.HeatManager;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
 
@@ -53,6 +55,11 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     int oreCount;
     float outCount;
 
+    ItemStack outMetal1;
+    int outMetal1Count;
+    ItemStack outMetal2;
+    int outMetal2Count;
+
     public TileEntityTerraBloomery()
     {
         fuelTimeLeft = 0;
@@ -79,6 +86,14 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     {
         NBTTagCompound inputCompound;
         float mod = 1;
+        if(oreCount > charcoalCount) 
+        {
+            float c = (float)charcoalCount/(float)oreCount;
+            mod = (mod * c)*3;
+            if(mod > 1)
+                mod = 1;
+        }
+        
         if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
         {
             inputCompound = fireItemStacks[i].getTagCompound();
@@ -103,11 +118,13 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             if(inputItemTemps[i] <= ambientTemp)
             {
                 fireItemStacks[i].stackTagCompound = null;
+                inputItemTemps[i] = 0;
             }
 
             if(TFCHeat.getIsBoiling(fireItemStacks[i]))
             {
                 fireItemStacks[i] = null;
+                inputItemTemps[i] = 0;
             }
 
         }
@@ -125,49 +142,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             inputItemTemps[i] = 0;
         }
     }
-
-    public void careForOutputSlot(int i)
-    {
-        NBTTagCompound inputCompound;
-        float mod = 1;
-        if(outputItemStacks[i]!= null && outputItemStacks[i].hasTagCompound())
-        {
-            inputCompound = outputItemStacks[i].getTagCompound();
-            inputItemTemps[10+i] = inputCompound.getFloat("temperature");
-
-
-            if(fireTemperature*mod > inputItemTemps[10+i])
-            {
-                String name = outputItemStacks[i].getItem().getItemNameIS(outputItemStacks[i]);
-                float increase = TFCHeat.getTempIncrease(outputItemStacks[i], inputItemTemps[10+i], fireTemperature*mod);
-                inputItemTemps[10+i] += increase;
-            }
-            else if(fireTemperature*mod < inputItemTemps[i])
-            {
-                String name = outputItemStacks[i].getItem().getItemNameIS(outputItemStacks[i]);
-                float increase = TFCHeat.getTempDecrease(outputItemStacks[i]);
-                inputItemTemps[10+i] -= increase;
-            }
-            inputCompound.setFloat("temperature", inputItemTemps[10+i]);
-            outputItemStacks[i].setTagCompound(inputCompound);
-
-            if(inputItemTemps[10+i] <= ambientTemp)
-            {
-                outputItemStacks[i].stackTagCompound = null;
-            }
-
-            if(TFCHeat.getIsBoiling(outputItemStacks[i]))
-            {
-                outputItemStacks[i] = null;
-            }
-
-        }
-        else if(outputItemStacks[i] == null)
-        {
-            inputItemTemps[10+i] = 0;
-        }
-    }
-
+    
     private Boolean CheckValidity() 
     {
         if(!worldObj.isBlockNormalCube(xCoord, yCoord+1, zCoord))
@@ -203,59 +178,38 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         return 0;//returns false if there is no metal left over to combine
     }
 
-    public void CookItems(int i)
+    public void CookItemsNew(int i)
     {
-        //Now we perform the actual cooking
+        HeatManager manager = HeatManager.getInstance();
+        Random R = new Random();
         if(fireItemStacks[i] != null)
         {
-            String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-            if(TFCHeat.ItemHeatData.containsKey(name) && fireItemStacks[i].hasTagCompound())
+            HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
+            if(index != null && inputItemTemps[i] >= index.meltTemp)
             {
-                NBTTagCompound nbt = fireItemStacks[i].getTagCompound();
-                Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]));
-                float meltTemp = (Float)meltData[2];
-                float boilTemp = (Float)meltData[1];
-                float meltTemp2 = -1; 
-                ItemStack OutputItem2 = null;
-                if(meltData.length > 4)
+                fireItemStacks[i] = index.getMorph();
+                if(fireItemStacks[i] != null)
                 {
-                    meltTemp2= (Float)meltData[4];
-                    OutputItem2 = (ItemStack)meltData[5];
+                    NBTTagCompound nbt = new NBTTagCompound();
+                    nbt.setFloat("temperature", inputItemTemps[i]);
+                    fireItemStacks[i].stackTagCompound = nbt;
                 }
-                Boolean Item1Melted = nbt.hasKey("Item1Melted") ? nbt.getBoolean("Item1Melted") : false;
-                ItemStack OutputItem1 = (ItemStack)meltData[3];
-
-                String outName = OutputItem1.getItem().getItemNameIS(OutputItem1);
-                ItemStack InputItem = fireItemStacks[i];
-                String inName = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-
-
-                if(inputItemTemps[i] >= meltTemp && !Item1Melted)
+                else
                 {
-                    if(AddOreToOutput(OutputItem1,fireItemStacks[i]))
-                    {
-                        if(meltTemp2 != -1)
-                        {
-                            nbt.setBoolean("Item1Melted", true);
-                            fireItemStacks[i].setTagCompound(nbt);
-                        }
-                        else
-                        {
-                            fireItemStacks[i] = null;
-                        }
-                    }
+                    oreCount--;
                 }
-                else if(Item1Melted && inputItemTemps[i] >= meltTemp2 && OutputItem2 != null )
-                {
-                    if(AddOreToOutput(OutputItem2,fireItemStacks[i]))
-                    {
-                        fireItemStacks[i] = null;
-                    }
-                }
-            }
-            else
-            {
-                fireItemStacks[i].setTagCompound(new NBTTagCompound());
+
+                ItemStack output = index.getOutput(R);
+
+                if(outMetal1 == null)
+                    outMetal1 = output;
+                else if(outMetal2 == null && outMetal1.getItem().shiftedIndex != output.getItem().shiftedIndex)
+                    outMetal2 = output;
+
+                if(outMetal1.getItem().shiftedIndex == output.getItem().shiftedIndex)
+                    outMetal1Count += 100-output.getItemDamage();
+                else if(outMetal2.getItem().shiftedIndex == output.getItem().shiftedIndex)
+                    outMetal2Count += 100-output.getItemDamage();
             }
         }
     }
@@ -295,7 +249,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
         for (int i = 0; i < getSizeInventory(); i++)
         {
-            if(fireItemStacks[i]!= null)
+            if(fireItemStacks[i] != null)
             {
                 entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
                         fireItemStacks[i]);
@@ -313,7 +267,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         // TODO Auto-generated method stub
         return 1;
     }
-
 
     @Override
     public String getInvName()
@@ -388,23 +341,25 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
             AddedAir = (float)(numAirBlocks+bAir)/25/16;
 
-//            if(yCoord > 60)
-//            {					
-//                float w = worldObj.getHeight() - yCoord;
-//                float w1 = w / worldObj.getHeight();
-//                float w2 = 1 - w1;
-//                float w3 = w2 * 0.105F;
-//
-//                AddedAir += w3;
-//            }
+            //            if(yCoord > 60)
+            //            {					
+            //                float w = worldObj.getHeight() - yCoord;
+            //                float w1 = w / worldObj.getHeight();
+            //                float w2 = 1 - w1;
+            //                float w3 = w2 * 0.105F;
+            //
+            //                AddedAir += w3;
+            //            }
 
             desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
 
             if(fireTemperature < desiredTemp)
             {
                 float t = 1.35F;
-                if(oreCount > charcoalCount) {
-                    t*=charcoalCount/oreCount;
+                if(oreCount > charcoalCount) 
+                {
+                    float c = (float)charcoalCount/(float)oreCount;
+                    t = t * c;
                 }
                 fireTemperature+=t;
             }
@@ -534,7 +489,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                         work.setItemDamage(amt);
                     } else {
                         oreCount--;
-                        
+
                         return true;
                     }
                 }
@@ -556,16 +511,82 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public boolean RemoveOre()
     {
-        for (int i = 0; i < outputItemStacks.length; i++)
+        if(input[0] != null)
         {
-            if(outputItemStacks[i] != null)
+            if(input[0].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
             {
-                input[0] = outputItemStacks[i];
-                if(input[0].stackSize <= 0) {
-                    input[0].stackSize = 1;
+                int dam = 0;
+                if(outMetal1Count > 0)
+                {
+                    if(outMetal1Count > 100)
+                    {
+                        dam = 100;
+                        outMetal1Count -= 100;
+                    }
+                    else
+                    {
+                        dam = outMetal1Count;
+                        outMetal1Count = 0;
+                    }            
+                    input[0] = outMetal1;
                 }
-                outCount -= outputItemStacks[i].getItemDamage();
-                outputItemStacks[i] = null;
+                else if(outMetal2Count > 0)
+                {
+                    if(outMetal2Count > 100)
+                    {
+                        dam = 100;
+                        outMetal2Count -= 100;
+                    }
+                    else
+                    {
+                        dam = outMetal2Count;
+                        outMetal2Count = 0;
+                    }         
+                    input[0] = outMetal2;    
+                }
+
+                if(input[0] != null)
+                    input[0].setItemDamage(100-dam);
+
+                return true;
+            }
+            else if(outMetal1 != null && input[0].itemID == outMetal1.getItem().shiftedIndex && input[0].getItemDamage() > 0)
+            {
+                int i = 100-input[0].getItemDamage();
+                if(i + outMetal1Count < 100)
+                {
+                    input[0].setItemDamage(100-(i + outMetal1Count));
+                    outMetal1Count = 0;
+                }
+                else
+                {
+                    int j = 100 - i;
+                    input[0].setItemDamage(0);
+                    outMetal1Count -= j;
+                }
+
+                if(outMetal1Count == 0)
+                    outMetal1 = null; 
+
+                return true;
+            }
+            else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().shiftedIndex && input[0].getItemDamage() > 0)
+            {
+                int i = 100-input[0].getItemDamage();
+                if(i + outMetal2Count < 100)
+                {
+                    input[0].setItemDamage(100-(i + outMetal2Count));
+                    outMetal2Count = 0;
+                }
+                else
+                {
+                    int j = 100 - i;
+                    input[0].setItemDamage(0);
+                    outMetal2Count -= j;
+                }
+
+                if(outMetal2Count == 0)
+                    outMetal2 = null; 
 
                 return true;
             }
@@ -592,15 +613,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public float getOutputCount()
     {
-        float out = 0;
-        for(int i = 0; i < outputItemStacks.length; i++)
-        {
-            if(outputItemStacks[i] != null)
-            {
-                out += 100-outputItemStacks[i].getItemDamage();
-            }
-        }
-
+        float out = outMetal1Count + outMetal2Count;
         return out;
     }
 
@@ -622,6 +635,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 OreType = "";
                 oreDamage = -1;
+                outMetal1 = null;
+                outMetal2 = null; 
             }
 
             //Do the funky math to find how many molten blocks should be placed
@@ -715,12 +730,10 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 /*Handle temperature for each item in the stack*/
                 careForInventorySlot(i,100);
                 /*Cook each input item */
-                CookItems(i);
-
-                careForOutputSlot(i);
+                CookItemsNew(i);
             }
 
-            if(input[0]!= null && input[0].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+            if(input[0]!= null)
             {
                 RemoveOre();
             }
@@ -766,7 +779,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte)i);
                 input[i].writeToNBT(nbttagcompound1);
-                nbttaglist.appendTag(nbttagcompound1);
+                nbttaglist2.appendTag(nbttagcompound1);
             }
         }
         nbttagcompound.setTag("Input", nbttaglist2);
@@ -779,7 +792,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte)i);
                 outputItemStacks[i].writeToNBT(nbttagcompound1);
-                nbttaglist.appendTag(nbttagcompound1);
+                nbttaglist3.appendTag(nbttagcompound1);
             }
         }
         nbttagcompound.setTag("Output", nbttaglist3);

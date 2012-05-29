@@ -12,17 +12,14 @@ public class ContainerTerraFirepit extends Container
     private int charcoal;
 
 
-
     public ContainerTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit)
     {
         firepit = tileentityfirepit;
         firetemp = -1111;
         charcoal = 0;
 
-        //fuel in slot
-        //addSlot(new SlotFirepitFuel(inventoryplayer.player,tileentityfirepit, 0, 44, 8));
         //Input slot
-        addSlot(new Slot(tileentityfirepit, 1, 80, 20));
+        addSlot(new SlotFirepitIn(inventoryplayer.player,tileentityfirepit, 1, 80, 20));
         //fuel stack
         addSlot(new SlotFirepitFuel(inventoryplayer.player, tileentityfirepit, 0, 8, 8));
         addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 3, 8, 26));
@@ -63,7 +60,6 @@ public class ContainerTerraFirepit extends Container
     {
         return true;
     }
-
 
     public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
     {
@@ -201,7 +197,6 @@ public class ContainerTerraFirepit extends Container
         return itemstack;
     }
 
-
     public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
     {
         Slot slot = (Slot)inventorySlots.get(i);
@@ -254,8 +249,6 @@ public class ContainerTerraFirepit extends Container
         return null;
     }
 
-
-
     public void updateCraftingResults()
     {
         for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
@@ -286,11 +279,12 @@ public class ContainerTerraFirepit extends Container
                 var2.updateCraftingInventoryInfo(this, 1, (int)this.firepit.charcoalCounter);
             }
         }
-        
+
         firetemp = this.firepit.fireTemperature;
         charcoal = this.firepit.charcoalCounter;
+        
     }
-    
+
     public void updateProgressBar(int par1, int par2)
     {
         if (par1 == 0)

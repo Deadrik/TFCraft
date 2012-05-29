@@ -8,7 +8,6 @@ import net.minecraft.src.forge.Property;
 
 public class TFCSettings 
 {
-
 	public static Configuration config;
 
 	public static boolean enableVanillaDiamondRecipe;
@@ -19,6 +18,7 @@ public class TFCSettings
 	public static boolean enableBetterGrass;
 	public static boolean enableInnerGrassFix;
 	public static boolean enableDebugMode;
+	public static boolean sendAllNBT;
 
 	public static boolean BlacksmithModeHeatScale;
 
@@ -46,10 +46,11 @@ public class TFCSettings
 		enableVanillaRecipes = getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
 		enableInnerGrassFix = getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		enableDebugMode = getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
+		sendAllNBT = getBooleanFor(config,"General","sendAllNBT",true, "Setting this to false can cause alot of issues when used in SMP. Leave this set to true to prevent issues.");
 		//Metallurgy
 		BlacksmithModeHeatScale = getBooleanFor(config,"Metallurgy","BlacksmithModeHeatScale",true, "Set this to false if you are having a hard time and would like the old color scale for heating metals.");
 		//Caveins
-		minimumRockLoad = getIntFor(config,"Cavein Options","minimumRockLoad",5, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
+		minimumRockLoad = getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",25, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",50, "This number is the likelyhood for each block to propogate the collapse farther.");
 

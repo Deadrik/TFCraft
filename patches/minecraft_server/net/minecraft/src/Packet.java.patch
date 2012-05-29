@@ -1,20 +1,29 @@
 --- ../src_base/minecraft_server/net/minecraft/src/Packet.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft_server/net/minecraft/src/Packet.java	0000-00-00 00:00:00.000000000 -0000
-@@ -227,7 +227,7 @@
+@@ -9,6 +9,8 @@
+ import java.util.Map;
+ import java.util.Set;
+ 
++import net.minecraft.src.TFC_Core.General.TFCSettings;
++
+ public abstract class Packet
+ {
+     /** Maps packet id to packet class */
+@@ -227,7 +229,7 @@
              short var5 = par1DataInputStream.readShort();
              var2 = new ItemStack(var3, var4, var5);
  
 -            if (Item.itemsList[var3].isDamageable() || Item.itemsList[var3].func_46003_i())
-+            if (Item.itemsList[var3].isDamageable() || Item.itemsList[var3].func_46003_i() || true)
++            if (Item.itemsList[var3].isDamageable() || Item.itemsList[var3].func_46003_i() || TFCSettings.sendAllNBT == true)
              {
                  var2.stackTagCompound = this.readNBTTagCompound(par1DataInputStream);
              }
-@@ -251,7 +251,7 @@
+@@ -251,7 +253,7 @@
              par2DataOutputStream.writeByte(par1ItemStack.stackSize);
              par2DataOutputStream.writeShort(par1ItemStack.getItemDamage());
  
 -            if (par1ItemStack.getItem().isDamageable() || par1ItemStack.getItem().func_46003_i())
-+            if (par1ItemStack.getItem().isDamageable() || par1ItemStack.getItem().func_46003_i() || true)
++            if (par1ItemStack.getItem().isDamageable() || par1ItemStack.getItem().func_46003_i() || TFCSettings.sendAllNBT == true)
              {
                  this.writeNBTTagCompound(par1ItemStack.stackTagCompound, par2DataOutputStream);
              }

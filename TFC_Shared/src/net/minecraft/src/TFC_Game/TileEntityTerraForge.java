@@ -21,6 +21,8 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.mod_TFC_Game;
+import net.minecraft.src.TFC_Core.General.HeatIndex;
+import net.minecraft.src.TFC_Core.General.HeatManager;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
 
@@ -35,7 +37,6 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
     public boolean isValid;
 
     public ItemStack fireItemStacks[];
-    public float inputItemTemp;
     public float ambientTemp;
     Boolean Item1Melted = false;
     public float inputItemTemps[];
@@ -60,7 +61,6 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         isValid = false;
 
         fireItemStacks = new ItemStack[14];
-        inputItemTemp = 0;
         inputItemTemps = new float[5];
         ambientTemp = -1000;
         numAirBlocks = 0;
@@ -131,8 +131,13 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 }
             }
         }
+        
+        HeatManager manager = HeatManager.getInstance();
+        
         if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
         {
+            HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
+            
             inputCompound = fireItemStacks[i].getTagCompound();
 
             if(inputCompound.hasKey("temperature")) {
@@ -172,7 +177,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 //fireItemStacks[i].stackTagCompound = null;
             }
 
-            if(getIsBoiling(fireItemStacks[i]))
+            if(index.boilTemp <= inputItemTemps[i])
             {
                 fireItemStacks[i] = null;
             }
@@ -254,72 +259,48 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         DestItem.setItemDamage(100-(D1 + D2));
     }
 
-    public void CookItems(int i)
+    public void CookItemsNew(int i)
     {
-        //Now we perform the actual cooking
+        HeatManager manager = HeatManager.getInstance();
+        Random R = new Random();
         if(fireItemStacks[i] != null)
         {
-            String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-            if(TFCHeat.ItemHeatData.containsKey(name))
+            HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
+            if(index != null && inputItemTemps[i] > index.meltTemp)
             {
-                Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]));
-                float meltTemp = (Float)meltData[2];
-                float boilTemp = (Float)meltData[1];
+                //Morph the input
+                fireItemStacks[i] = index.getMorph();
 
-                ItemStack OutputItem1 = (ItemStack)meltData[3];
-                String outName = OutputItem1.getItem().getItemNameIS(OutputItem1);
-                ItemStack InputItem = fireItemStacks[i];
-                String inName = InputItem.getItem().getItemNameIS(InputItem);
-
-                NBTTagCompound nbt = fireItemStacks[i].getTagCompound();
-
-                if(inputItemTemps[i] >= meltTemp)
+                if(fireItemStacks[i] != null)
                 {
-                    int stack = fireItemStacks[i].stackSize;
-                    for(int j = 0; j < stack; j++)
+                    HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
+                    if(index2 != null)
                     {
-                        int m = getMoldIndex();
-                        if(outName.contains("Melted") && m != -1 && !inName.contains("Melted"))
-                        {
-                            if(fireItemStacks[i].itemID == OutputItem1.itemID) {
-                                fireItemStacks[m] = new ItemStack(fireItemStacks[m].getItem(),fireItemStacks[m].stackSize+1);
-                            } else {
-                                fireItemStacks[i] = OutputItem1;
-                            }
-                            fireItemStacks[i].stackTagCompound = nbt;
-                            if(fireItemStacks[m].stackSize == 1) {
-                                fireItemStacks[m] = null;
-                            } else {
-                                fireItemStacks[m] = new ItemStack(fireItemStacks[m].getItem(),fireItemStacks[m].stackSize-1);
-                            }
-                        }
-                        else if(outName.contains("Melted") && m == -1 && !inName.contains("Melted"))
-                        {
-                            fireItemStacks[i] = null;
-                        }
-                        else
-                        {
-                            if(InputItem.itemID != OutputItem1.itemID)
-                            {
-                                fireItemStacks[i] = OutputItem1;
-                                if(TFCHeat.ItemHeatData.containsKey(fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i])))
-                                {
-                                    if(fireItemStacks[i].stackTagCompound == null) {
-                                        fireItemStacks[i].stackTagCompound = new NBTTagCompound();
-                                    }
-
-                                    fireItemStacks[i].stackTagCompound.setFloat("temperature", inputItemTemps[i]);
-                                }
-                            }
-                        }
+                        //if the input is a new item, then apply the old temperature to it
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setFloat("temperature", inputItemTemps[i]);
+                        fireItemStacks[i].stackTagCompound = nbt;
                     }
                 }
-                if(inputItemTemps[i] >= boilTemp)
+                else
                 {
-                    if(inName.contains("Melted"))
+                    fireItemStacks[i] = index.getOutput(R);
+
+                    HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
+                    if(index2 != null)
                     {
-                        fireItemStacks[i] = new ItemStack(mod_TFC_Game.terraCeramicMold, 1);
-                        fireItemStacks[i].stackTagCompound = null;
+                      //if the input is a new item, then apply the old temperature to it
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setFloat("temperature", inputItemTemps[i]);
+                        fireItemStacks[i].stackTagCompound = nbt;
+                    }
+                    if(inputItemTemps[i] >= index.boilTemp)
+                    {
+                        if(fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal)
+                        {
+                            fireItemStacks[i] = new ItemStack(mod_TFC_Game.terraCeramicMold, 1);
+                            fireItemStacks[i].stackTagCompound = null;
+                        }
                     }
                 }
             }
@@ -377,39 +358,13 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
     public int getInventoryStackLimit()
     {
         // TODO Auto-generated method stub
-        return 1;
+        return 64;
     }
 
     @Override
     public String getInvName()
     {
         return "Forge";
-    }
-
-    public Boolean getIsBoiling(ItemStack is)
-    {
-        Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(is.getItem().getItemNameIS(is));
-        if(meltData != null && is != null)
-        {
-            if(is != null && is.hasTagCompound())
-            {
-                float temp = is.getTagCompound().getFloat("temperature");
-                return temp >= (Float)meltData[1];
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public Boolean getItem1Melted()
-    {
-        if(fireItemStacks[1] != null && fireItemStacks[1].hasTagCompound()) {
-            return fireItemStacks[1].getTagCompound().getBoolean("Item1Melted");
-        } else {
-            return false;
-        }
     }
 
     public int getMoldIndex()
@@ -579,11 +534,11 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             TFCHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
 
             //Now we cook the input item
-            CookItems(0);
-            CookItems(1);
-            CookItems(2);
-            CookItems(3);
-            CookItems(4);
+            CookItemsNew(0);
+            CookItemsNew(1);
+            CookItemsNew(2);
+            CookItemsNew(3);
+            CookItemsNew(4);
 
             //push the input fuel down the stack
             HandleFuelStack();

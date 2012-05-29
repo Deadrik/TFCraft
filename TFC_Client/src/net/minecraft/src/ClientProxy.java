@@ -170,6 +170,8 @@ public class ClientProxy implements IProxy {
 		ModLoader.addLocalization("item.Ore.Borax.name", "Borax");
 		ModLoader.addLocalization("item.Ore.Olivine.name", "Olivine");
 		ModLoader.addLocalization("item.Ore.LapisLazuli.name", "Lapis Lazuli");
+		ModLoader.addLocalization("item.Ore.GalenaPartial.name", "Partially Smelted Galena");
+		ModLoader.addLocalization("item.Ore.TetrahedritePartial.name", "Partially Smelted Tetrahedrite");
 		//Cobble
 		ModLoader.addLocalization("tile.IgInRockCobble.Granite.name", "Granite Cobblestone");
 		ModLoader.addLocalization("tile.IgInRockCobble.Diorite.name", "Diorite Cobblestone");
@@ -376,8 +378,8 @@ public class ClientProxy implements IProxy {
 			ModLoader.addLocalization("tile.leaves."+WoodNames[i]+".name", WoodNames[i] + " Leaves");
 			ModLoader.addLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
 			ModLoader.addLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
-			ModLoader.addLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","Vertical " + WoodNames[i] + " Support Beam");
-			ModLoader.addLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","Horizontal " + WoodNames[i] + " Support Beam");
+			ModLoader.addLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
+			ModLoader.addLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
 			ModLoader.addLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
 		}
 

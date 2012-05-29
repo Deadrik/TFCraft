@@ -48,41 +48,7 @@ public class BlockTerraSed extends BlockCollapsable
         {
             System.out.println("Harvest Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(l).toString());  
         }
-        Random R = new Random();
-        if(R.nextInt(TFCSettings.initialCollapseRatio) == 0)
-        {
-            if(tryToFall(world, i, j, k, l))
-            {
-                int height = 4;
-                int range = R.nextInt(20);
-                
-                for(int y = -4; y <= 1; y++)
-                {
-                    for(int x = -range; x <= range; x++)
-                    {
-                        for(int z = -range; z <= range; z++)
-                        {
-                            if(R.nextInt(100) < TFCSettings.propogateCollapseChance)
-                            {
-                                if( Block.blocksList[world.getBlockId(i+x,  j+y, k+z)] instanceof BlockCollapsable && tryToFall(world, i+x, j+y, k+z,world.getBlockMetadata( i+x, j+y, k+z)))
-                                {
-                                    int done = 0;
-                                    while(done < height)
-                                    {
-                                        done++;
-                                        if(R.nextInt(100) < TFCSettings.propogateCollapseChance) {
-                                            tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
-                                        } else {
-                                            done = height;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        super.harvestBlock(world, entityplayer, i, j, k, l);
     }
 
     @Override

@@ -508,7 +508,6 @@ public class TFC_Core
 	public static void RegisterRecipes()
 	{
 		RegisterTools();
-		ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraBismuthIngot, -1), new Object[] {new ItemStack(Block.wood, 1)});
 
 		/** Axe Recipes */
 		for(int i = 0; i < 16; i++)
@@ -516,8 +515,8 @@ public class TFC_Core
 			for(int j = 0; j < Axes.length; j++)
 			{
 				ModLoader.addShapelessRecipe(new ItemStack(Block.planks, 1, i), new Object[] {new ItemStack(mod_TFC_Core.Logs, 1, i), new ItemStack(Axes[j], 1, -1)});
-				ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWoodSupportItemV, 4, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(mod_TFC_Core.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
-				ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWoodSupportItemH, 4, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(mod_TFC_Core.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
+				ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWoodSupportItemV, 8, i), new Object[] { "A2"," 2", Character.valueOf('2'), new ItemStack(mod_TFC_Core.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
+				ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraWoodSupportItemH, 8, i), new Object[] { "A ","22", Character.valueOf('2'), new ItemStack(mod_TFC_Core.Logs,1,i), Character.valueOf('A'), new ItemStack(Axes[j], 1, -1)});
 			}
 			for(int j = 0; j < Saws.length; j++)
 			{
@@ -568,12 +567,12 @@ public class TFC_Core
 		}
 		if(TFCSettings.enableVanillaIronRecipe == true)
 		{
-			ModLoader.addRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.terraWroughtIronIngot,1)});
+			ModLoader.addRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.WroughtIronIngot,1)});
 
 		}
 		if(TFCSettings.enableVanillaGoldRecipe == true)
 		{
-			ModLoader.addRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.terraGoldIngot,1)});
+			ModLoader.addRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(mod_TFC_Core.GoldIngot,1)});
 		}
 		if(TFCSettings.enableVanillaRecipes == true)
 		{
@@ -596,32 +595,32 @@ public class TFC_Core
 			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneSedCobble.blockID,  new ItemStack(mod_TFC_Core.terraStoneSed));
 			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneMMCobble.blockID,   new ItemStack(mod_TFC_Core.terraStoneMM));
 
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 23,new ItemStack(mod_TFC_Core.terraCopperIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 32,new ItemStack(mod_TFC_Core.terraCopperIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 36,new ItemStack(mod_TFC_Core.terraCopperIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 35,new ItemStack(mod_TFC_Core.terraZincIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 34,new ItemStack(mod_TFC_Core.terraWroughtIronIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 33,new ItemStack(mod_TFC_Core.terraWroughtIronIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 26,new ItemStack(mod_TFC_Core.terraWroughtIronIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 25,new ItemStack(mod_TFC_Core.terraPlatinumIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 24,new ItemStack(mod_TFC_Core.terraGoldIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 31,new ItemStack(mod_TFC_Core.terraNickelIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 29,new ItemStack(mod_TFC_Core.terraSilverIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 27,new ItemStack(mod_TFC_Core.terraSilverIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 30,new ItemStack(mod_TFC_Core.terraBismuthIngot));
-			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 28,new ItemStack(mod_TFC_Core.terraTinIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 23,new ItemStack(mod_TFC_Core.CopperIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 32,new ItemStack(mod_TFC_Core.CopperIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 36,new ItemStack(mod_TFC_Core.CopperIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 35,new ItemStack(mod_TFC_Core.ZincIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 34,new ItemStack(mod_TFC_Core.WroughtIronIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 33,new ItemStack(mod_TFC_Core.WroughtIronIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 26,new ItemStack(mod_TFC_Core.WroughtIronIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 25,new ItemStack(mod_TFC_Core.PlatinumIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 24,new ItemStack(mod_TFC_Core.GoldIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 31,new ItemStack(mod_TFC_Core.NickelIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 29,new ItemStack(mod_TFC_Core.SilverIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 27,new ItemStack(mod_TFC_Core.SilverIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 30,new ItemStack(mod_TFC_Core.BismuthIngot));
+			FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 28,new ItemStack(mod_TFC_Core.TinIngot));
 		}
 	}
 
 	@SuppressWarnings("unused")
 	public static void RegisterTools()
 	{
-		Item[] Ingots = {mod_TFC_Core.terraBismuthIngot, mod_TFC_Core.terraBismuthBronzeIngot,mod_TFC_Core.terraBlackBronzeIngot,
-				mod_TFC_Core.terraBlackSteelIngot,mod_TFC_Core.terraBlueSteelIngot,mod_TFC_Core.terraBrassIngot,mod_TFC_Core.terraBronzeIngot,
-				mod_TFC_Core.terraBronzeIngot,mod_TFC_Core.terraCopperIngot,mod_TFC_Core.terraGoldIngot,mod_TFC_Core.terraWroughtIronIngot,mod_TFC_Core.terraLeadIngot
-				,mod_TFC_Core.terraNickelIngot,mod_TFC_Core.terraPigIronIngot,mod_TFC_Core.terraPlatinumIngot,mod_TFC_Core.terraRedSteelIngot,
-				mod_TFC_Core.terraRoseGoldIngot,mod_TFC_Core.terraSilverIngot,mod_TFC_Core.terraSteelIngot,mod_TFC_Core.terraSterlingSilverIngot
-				,mod_TFC_Core.terraTinIngot,mod_TFC_Core.terraZincIngot};
+		Item[] Ingots = {mod_TFC_Core.BismuthIngot, mod_TFC_Core.BismuthBronzeIngot,mod_TFC_Core.BlackBronzeIngot,
+				mod_TFC_Core.BlackSteelIngot,mod_TFC_Core.BlueSteelIngot,mod_TFC_Core.BrassIngot,mod_TFC_Core.BronzeIngot,
+				mod_TFC_Core.BronzeIngot,mod_TFC_Core.CopperIngot,mod_TFC_Core.GoldIngot,mod_TFC_Core.WroughtIronIngot,mod_TFC_Core.LeadIngot
+				,mod_TFC_Core.NickelIngot,mod_TFC_Core.PigIronIngot,mod_TFC_Core.PlatinumIngot,mod_TFC_Core.RedSteelIngot,
+				mod_TFC_Core.RoseGoldIngot,mod_TFC_Core.SilverIngot,mod_TFC_Core.SteelIngot,mod_TFC_Core.SterlingSilverIngot
+				,mod_TFC_Core.TinIngot,mod_TFC_Core.ZincIngot};
 
 		if(TFCSettings.enableVanillaRecipes == true)
 		{

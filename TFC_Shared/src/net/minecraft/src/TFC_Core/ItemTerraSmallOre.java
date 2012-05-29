@@ -9,8 +9,8 @@ public class ItemTerraSmallOre extends Item implements ITextureProvider
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
 		"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
-		"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
-		"Borax", "Olivine", "LapisLazuli"};
+		/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
+		/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial"};
 
 
 	public ItemTerraSmallOre(int i) 
@@ -31,6 +31,11 @@ public class ItemTerraSmallOre extends Item implements ITextureProvider
 
 	public int getIconFromDamage(int par1)
 	{
+	    if(par1 == 35)
+	        return this.iconIndex+6;
+	    else if(par1 == 36)
+            return this.iconIndex+13;
+	    
 		return this.iconIndex+par1;
 	}
 
@@ -40,6 +45,7 @@ public class ItemTerraSmallOre extends Item implements ITextureProvider
 		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
 		return s;
 	}
+	
 	@Override
 	public String getTextureFile()
 	{

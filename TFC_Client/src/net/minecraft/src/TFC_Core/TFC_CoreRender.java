@@ -1029,9 +1029,9 @@ public class TFC_CoreRender
 		}
 
 		//X
-		if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
+		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
 		{
-			if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
+			if((blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
 			{
 				if(hasVerticalBeam)//if the block does contain a vertical beam
 				{
@@ -1062,7 +1062,7 @@ public class TFC_CoreRender
 				hasHorizontalBeamX = true;
 			}
 		}
-		else if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
+		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
 		{
 			if(hasVerticalBeam)//if the block does contain a vertical beam
 			{
@@ -1077,9 +1077,9 @@ public class TFC_CoreRender
 			hasHorizontalBeamX = true;
 		}
 		//Z
-		if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
+		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
 		{
-			if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
+			if((blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
 			{
 				if(hasVerticalBeam)//if the block does contain a vertical beam
 				{
@@ -1110,7 +1110,7 @@ public class TFC_CoreRender
 				hasHorizontalBeamZ = true;
 			}
 		}
-		else if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
+		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
 		{
 			if(hasVerticalBeam)//if the block does contain a vertical beam
 			{
@@ -1198,9 +1198,9 @@ public class TFC_CoreRender
 		}
 
 		//X
-		if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
+		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
 		{
-			if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
+			if((blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
 			{
 				if(hasVerticalBeam)//if the block does contain a vertical beam
 				{
@@ -1231,7 +1231,7 @@ public class TFC_CoreRender
 				hasHorizontalBeamX = true;
 			}
 		}
-		else if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
+		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
 		{
 			if(hasVerticalBeam)//if the block does contain a vertical beam
 			{
@@ -1246,9 +1246,9 @@ public class TFC_CoreRender
 			hasHorizontalBeamX = true;
 		}
 		//Z
-		if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
+		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
 		{
-			if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
+			if((blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
 			{
 				if(hasVerticalBeam)//if the block does contain a vertical beam
 				{
@@ -1279,7 +1279,7 @@ public class TFC_CoreRender
 				hasHorizontalBeamZ = true;
 			}
 		}
-		else if(TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && (blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
+		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
 		{
 			if(hasVerticalBeam)//if the block does contain a vertical beam
 			{

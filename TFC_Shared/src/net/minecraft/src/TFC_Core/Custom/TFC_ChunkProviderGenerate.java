@@ -149,19 +149,19 @@ public class TFC_ChunkProviderGenerate
                                 if (height >= var5 - 1 && var17+1 < blockArray.length &&blockArray[var17+1] != Block.waterStill.blockID)
                                 {
                                     blockArray[var17] = (byte) var14;
-                                    metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
+                                    metaArray[var17] = (byte) biomegenbase.TopSoilMetaID;
                                 }
                                 else
                                 {
                                     blockArray[var17] = (byte) var15;
-                                    metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
+                                    metaArray[var17] = (byte) biomegenbase.TopSoilMetaID;
                                 }
                             }
                             else if (var13 > 0)
                             {
                                 --var13;
                                 blockArray[var17] = (byte) var15;
-                                metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
+                                metaArray[var17] = (byte) biomegenbase.TopSoilMetaID;
 
                                 if (var13 == 0 && var15 == Block.sand.blockID)
                                 {
@@ -202,7 +202,15 @@ public class TFC_ChunkProviderGenerate
                     if(height <= 127)
                         blockArray[var17] = (byte) Block.stone.blockID;
 
-                    if (height <= 1)
+                    if (height >= 2 && height <= 6)
+                    {
+                        blockArray[var17] = (byte) Block.lavaStill.blockID;
+                        if(blockArray[var17+1] != (byte) Block.lavaStill.blockID && rand.nextBoolean())
+                        {
+                            blockArray[var17+1] = (byte) Block.lavaStill.blockID;
+                        }
+                    }
+                    else if (height <= 1)
                     {
                         blockArray[var17] = (byte) Block.bedrock.blockID;
                     }

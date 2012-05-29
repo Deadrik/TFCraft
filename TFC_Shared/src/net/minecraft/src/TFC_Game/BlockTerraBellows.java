@@ -204,15 +204,18 @@ public class BlockTerraBellows extends Block implements ITextureProvider
 		float f6 = random.nextFloat() * -0.6F;
 		world.spawnParticle("smoke", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 
+		TileEntity te = world.getBlockTileEntity(i+x, j, k+z);
+		TileEntity te2 = world.getBlockTileEntity(i+x, j-1, k+z);
 		TileEntityFireEntity tileentityfirepit = null;;
-		if((TileEntityFireEntity)world.getBlockTileEntity(i+x, j, k+z)!=null)
+		if(te != null && te instanceof TileEntityFireEntity)
 		{
-			tileentityfirepit = (TileEntityFireEntity)world.getBlockTileEntity(i+x, j, k+z);
+			tileentityfirepit = (TileEntityFireEntity)te;
 		}
-		else if((TileEntityFireEntity)world.getBlockTileEntity(i+x, j-1, k+z)!=null)
+		else if(te2 != null && te2 instanceof TileEntityFireEntity)
 		{
-			tileentityfirepit = (TileEntityFireEntity)world.getBlockTileEntity(i+x, j-1, k+z);
+			tileentityfirepit = (TileEntityFireEntity)te2;
 		}
+		
 		if(tileentityfirepit != null)
 		{
 			tileentityfirepit.receiveAirFromBellows();

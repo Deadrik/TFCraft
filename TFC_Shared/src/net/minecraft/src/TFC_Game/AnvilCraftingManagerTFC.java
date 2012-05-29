@@ -20,9 +20,6 @@ public class AnvilCraftingManagerTFC
 	{
 		recipes = new ArrayList();
 		recipesWeld = new ArrayList();
-
-		System.out.println(new StringBuilder().append(recipes.size()).append(" anvil recipes").toString());
-		System.out.println(new StringBuilder().append(recipes.size()).append(" anvil weld recipes").toString());
 	}
 
 	public void addRecipe(AnvilRecipe recipe)

@@ -36,7 +36,7 @@
 +        	    BiomeGenBase.biomeList[i].SetupTrees(par1World, R);
 +        	}
 +        }
-+        TFC_Game.registerAnvilRecipes(R);
++        TFC_Game.registerAnvilRecipes(R,par1World);
      }
  
      /**
@@ -47,6 +47,25 @@
 -        return var3 == Block.grass.blockID;
 +        //return var3 == Block.grass.blockID;
 +        return var3 == mod_TFC_Core.terraGrass.blockID || var3 == mod_TFC_Core.terraGrass2.blockID;
+     }
+ 
+     /**
+@@ -184,7 +212,7 @@
+      */
+     public float getCloudHeight()
+     {
+-        return 128.0F;
++        return 256.0F;
+     }
+ 
+     public boolean isSkyColored()
+@@ -202,7 +230,8 @@
+ 
+     public int getAverageGroundLevel()
+     {
+-        return this.terrainType.getSeaLevel(this.worldObj);
++        return 145;
++        //return this.terrainType.getSeaLevel(this.worldObj);
      }
  
      /**

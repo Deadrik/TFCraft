@@ -47,45 +47,12 @@ public class BlockTerraMM extends BlockCollapsable
     @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {	
+        dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraStoneMMCobble, 1, damageDropped(l)));
         if(TFCSettings.enableDebugMode)
         {
             System.out.println("Harvest Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(l).toString());  
         }
-        dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraStoneMMCobble, 1, damageDropped(l)));
-        Random R = new Random();
-        if(R.nextInt(TFCSettings.initialCollapseRatio) == 0)
-        {
-            if(tryToFall(world, i, j, k, l))
-            {
-                int height = 4;
-                int range = R.nextInt(20);
-                for(int y = -4; y <= 1; y++)
-                {
-                    for(int x = -range; x <= range; x++)
-                    {
-                        for(int z = -range; z <= range; z++)
-                        {
-                            if(R.nextInt(100) < TFCSettings.propogateCollapseChance)
-                            {
-                                if(tryToFall(world, i+x, j+y, k+z,world.getBlockMetadata( i+x, j+y, k+z)))
-                                {
-                                    int done = 0;
-                                    while(done < height)
-                                    {
-                                        done++;
-                                        if(R.nextInt(100) < TFCSettings.propogateCollapseChance) {
-                                            tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
-                                        } else {
-                                            done = height;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        super.harvestBlock(world, entityplayer, i, j, k, l);
     }
 
     @Override

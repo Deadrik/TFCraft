@@ -18,6 +18,8 @@ import net.minecraft.src.Packet;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Game;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
+import net.minecraft.src.TFC_Core.General.HeatIndex;
+import net.minecraft.src.TFC_Core.General.HeatManager;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Core.General.Vector3f;
@@ -130,8 +132,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public void careForInventorySlot(int i, float startTemp)
     {
         NBTTagCompound inputCompound;
+        HeatManager manager = HeatManager.getInstance();
         if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
         {
+            HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
             float itemTemp = 0F;
             inputCompound = fireItemStacks[i].getTagCompound();
             itemTemp = inputCompound.getFloat("temperature");
@@ -156,7 +160,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 fireItemStacks[i].stackTagCompound = null;
             }
 
-            if(getIsBoiling(fireItemStacks[i]))
+            if(index.boilTemp <= itemTemp)
             {
                 fireItemStacks[i] = null;
             }
@@ -181,308 +185,134 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     {
         int D1 = 100-InputItem.getItemDamage();
         int D2 = 100-DestItem.getItemDamage();
+        //This was causing the infinite amounts possibly
         DestItem.setItemDamage(100-(D1 + D2));
     }
-    public void CookItem()
+    
+    public void CookItemNew()
     {
-        Item1Melted = getItem1Melted();
-        //Now we perform the actual cooking
+        HeatManager manager = HeatManager.getInstance();
+        Random R = new Random();
         if(fireItemStacks[1] != null)
         {
-            String name = fireItemStacks[1].getItem().getItemNameIS(fireItemStacks[1]);
-            if(TFCHeat.ItemHeatData.containsKey(name))
+            HeatIndex index = manager.findMatchingIndex(fireItemStacks[1]);
+            if(index != null && inputItemTemp > index.meltTemp)
             {
-                Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(fireItemStacks[1].getItem().getItemNameIS(fireItemStacks[1]));
-                float meltTemp = (Float)meltData[2];
-                float meltTemp2 = 2000000000;
-
-                ItemStack OutputItem1 = (ItemStack)meltData[3];
-                ItemStack OutputItem2 = null;
-                ItemStack InputItem = fireItemStacks[1];
-                //check if the item has multiple subproducts
-                if(meltData.length/2 != 2)
+                //Morph the input
+                fireItemStacks[1] = index.getMorph();
+                
+                if(fireItemStacks[1] != null)
                 {
-                    meltTemp2 = (Float)meltData[4];
-                    OutputItem2 = (ItemStack)meltData[5];
+                    //if the input is a new item, then apply the old temperature to it
+                    NBTTagCompound nbt = new NBTTagCompound();
+                    nbt.setFloat("temperature", inputItemTemp);
+                    fireItemStacks[1].stackTagCompound = nbt;
                 }
-                String inName = InputItem.getItem().getItemNameIS(InputItem);
-
-                //turn input into result 1
-                if(inputItemTemp > meltTemp && !Item1Melted)
+                
+                ItemStack output = index.getOutput(R);
+                
+                //Check if we should combine the output with a pre-existing output
+                if(output.getItem() instanceof ItemTerraMeltedMetal)
                 {
-                    if(fireItemStacks[7] == null || 
-                            fireItemStacks[7] != null && (fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7]).equals(inName) ||
-                                    fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7]).equals(OutputItem1.getItem().getItemNameIS(OutputItem1))) &&
-                                    fireItemStacks[7].getItemDamage() < fireItemStacks[7].getMaxDamage() || 
-                                    fireItemStacks[7].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+                    int leftover = 0;
+                    boolean addLeftover = false;
+                    if(fireItemStacks[7] != null && output.getItem().shiftedIndex == fireItemStacks[7].getItem().shiftedIndex)
                     {
-                        if(!Item1Melted)
-                        {
-                            String outName = OutputItem1.getItem().getItemNameIS(OutputItem1);
-                            //if the output slot is empty then we set the output item to a copy of the output data
-                            if(fireItemStacks[7] == null && !outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[7] = OutputItem1.copy();
-                                fireItemStacks[7].stackSize= OutputItem1.stackSize;
-                            }	
-                            else if(fireItemStacks[7] == null && outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[7] = InputItem.copy();
-                            }
-                            else//otherwise we find out how much material is in the slot and we add to it.
-                            {
-                                if(inName.contains(".Ore.") && fireItemStacks[7].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
-                                {
-                                    fireItemStacks[7] = OutputItem1.copy();
-                                }
-                                else
-                                {
-                                    String out1Name = fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7]);
-                                    if(out1Name.equals(InputItem.getItem().getItemNameIS(InputItem)) && fireItemStacks[7].getItemDamage() < fireItemStacks[7].getMaxDamage())
-                                    {
-                                        combineMetals(InputItem, fireItemStacks[7]);
-                                    }
-                                    else if(out1Name.equals(OutputItem1.getItem().getItemNameIS(OutputItem1)) && fireItemStacks[7].getItemDamage() < fireItemStacks[7].getMaxDamage())
-                                    {
-                                        combineMetals(OutputItem1, fireItemStacks[7]);
-                                    }
-                                }
-                            }
-                            if(TFCHeat.ItemHeatData.containsKey(fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7])))
-                            {
-                                //now we set the output item's data
-                                NBTTagCompound N7;
-                                if(OutputItem1.hasTagCompound()) {
-                                    N7 = OutputItem1.getTagCompound();
-                                } else {
-                                    N7 = new NBTTagCompound();
-                                }
-                                N7.setFloat("temperature", inputItemTemp);
-                                N7.setBoolean("Item1Melted",false);
-                                fireItemStacks[7].setTagCompound(N7);
-                            }
-
-                            //If the item has a second material then continue melting
-                            if(OutputItem2 != null)
-                            {
-                                NBTTagCompound NB = (NBTTagCompound)InputItem.getTagCompound().copy();
-                                NB.setBoolean("Item1Melted",true);
-                                InputItem.setTagCompound(NB);
-                            }
-                            else//Otherwise we are done with the input item.
-                            {
-
-                                //Now we add the slag.
-                                //First we find out if the input item is a type of ore. If it is, we create the slag
-                                Boolean isOre = inName.toLowerCase().contains("ore"); 
-                                if(isOre)
-                                {
-                                    addByproduct(new ItemStack(mod_TFC_Game.terraSlag,1));
-                                }
-                                fireItemStacks[1] = null;
-                            }
-                        }
+                        int amt1 = 100-output.getItemDamage();//the percentage of the output
+                        int amt2 = 100-fireItemStacks[7].getItemDamage();//the percentage currently in the out slot
+                        int amt3 = amt1 + amt2;//combined amount
+                        leftover = amt3 - 100;//assign the leftover so that we can add to the other slot if applicable
+                        if(leftover > 0) addLeftover = true;
+                        int amt4 = 100-amt3;//convert the percent back to mc damage
+                        if(amt4 < 0) amt4 = 0;//stop the infinite glitch
+                        fireItemStacks[7] = output;
+                        fireItemStacks[7].setItemDamage(amt4);
+                        
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setFloat("temperature", inputItemTemp);
+                        fireItemStacks[7].stackTagCompound = nbt;
                     }
-                    else if(fireItemStacks[8] == null || 
-                            fireItemStacks[8] != null && (fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8]).equals(inName)  ||
-                                    fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8]).equals(OutputItem1.getItem().getItemNameIS(OutputItem1)))&&
-                                    fireItemStacks[8].getItemDamage() < fireItemStacks[8].getMaxDamage() || 
-                                    fireItemStacks[8].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+                    else if(fireItemStacks[8] != null && output.getItem().shiftedIndex == fireItemStacks[8].getItem().shiftedIndex)
                     {
-                        if(!Item1Melted)
+                        int amt1 = 100-output.getItemDamage();//the percentage of the output
+                        int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
+                        int amt3 = amt1 + amt2;//combined amount
+                        int amt4 = 100-amt3;//convert the percent back to mc damage
+                        if(amt4 < 0) amt4 = 0;//stop the infinite glitch
+                        fireItemStacks[8].setItemDamage(amt4);
+                        
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setFloat("temperature", inputItemTemp);
+                        fireItemStacks[8].stackTagCompound = nbt;
+                    }
+                    else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() == mod_TFC_Game.terraCeramicMold)
+                    {
+                        fireItemStacks[7] = output;
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setFloat("temperature", inputItemTemp);
+                        fireItemStacks[7].stackTagCompound = nbt;
+                    }
+                    else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == mod_TFC_Game.terraCeramicMold)
+                    {
+                        fireItemStacks[8] = output;
+                        NBTTagCompound nbt = new NBTTagCompound();
+                        nbt.setFloat("temperature", inputItemTemp);
+                        fireItemStacks[8].stackTagCompound = nbt;
+                    }
+                    
+                    if(addLeftover)
+                    {
+                        if(fireItemStacks[8] != null && output.getItem().shiftedIndex == fireItemStacks[8].getItem().shiftedIndex && fireItemStacks[8].getItemDamage() > 0)
                         {
-                            //if the output slot is empty then we set the output item to a copy of the output data
-                            String outName = OutputItem1.getItem().getItemNameIS(OutputItem1);
-                            //if the output slot is empty then we set the output item to a copy of the output data
-                            if(fireItemStacks[8] == null && !outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[8] = OutputItem1.copy();
-                            }	
-                            else if(fireItemStacks[8] == null && outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[8] = InputItem.copy();
-                            }						
-                            else//otherwise we find out how much material is in the slot and we add to it.
-                            {
-                                if(inName.contains(".Ore.") && fireItemStacks[8].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
-                                {
-                                    fireItemStacks[8] = OutputItem1.copy();
-                                }
-                                else
-                                {
-                                    String out1Name = fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8]);
-                                    if(out1Name.equals(InputItem.getItem().getItemNameIS(InputItem)) && fireItemStacks[8].getItemDamage() < fireItemStacks[8].getMaxDamage())
-                                    {
-                                        combineMetals(InputItem, fireItemStacks[8]);
-                                    }
-                                    else if(out1Name.equals(OutputItem1.getItem().getItemNameIS(OutputItem1)) && fireItemStacks[8].getItemDamage() < fireItemStacks[8].getMaxDamage())
-                                    {
-                                        combineMetals(OutputItem1, fireItemStacks[8]);
-                                    }
-                                }
-                            }
-                            if(TFCHeat.ItemHeatData.containsKey(fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8])))
-                            {
-                                NBTTagCompound N8;
-                                if(OutputItem1.hasTagCompound()) {
-                                    N8 = OutputItem1.getTagCompound();
-                                } else {
-                                    N8 = new NBTTagCompound();
-                                }
-                                N8.setFloat("temperature", inputItemTemp);
-                                N8.setBoolean("Item1Melted",false);
-                                fireItemStacks[8].setTagCompound(N8);
-                            }							
-                            //If the item has a second material
-                            if(OutputItem2 != null)
-                            {
-                                NBTTagCompound NB = (NBTTagCompound)fireItemStacks[1].getTagCompound().copy();
-                                NB.setBoolean("Item1Melted",true);
-                                fireItemStacks[1].setTagCompound(NB);
-                            }
-                            else
-                            {
-                                //Now we add the slag.
-                                //First we find out if the input item is a type of ore. If it is, we create the slag
-                                Boolean isOre = inName.toLowerCase().contains("ore"); 
-                                if(isOre)
-                                {
-                                    addByproduct(new ItemStack(mod_TFC_Game.terraSlag,1));
-                                }
-                                fireItemStacks[1] = null;
-                            }
+                            int amt1 = 100-leftover;//the percentage of the output
+                            int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
+                            int amt3 = amt1 + amt2;//combined amount
+                            int amt4 = 100-amt3;//convert the percent back to mc damage
+                            if(amt4 < 0) amt4 = 0;//stop the infinite glitch
+                            fireItemStacks[8] = output;
+                            fireItemStacks[8].setItemDamage(amt4);
+                            
+                            NBTTagCompound nbt = new NBTTagCompound();
+                            nbt.setFloat("temperature", inputItemTemp);
+                            fireItemStacks[8].stackTagCompound = nbt;
+                        }
+                        else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == mod_TFC_Game.terraCeramicMold)
+                        {
+                            fireItemStacks[8] = output;
+                            fireItemStacks[8].setItemDamage(100-leftover);
+                            NBTTagCompound nbt = new NBTTagCompound();
+                            nbt.setFloat("temperature", inputItemTemp);
+                            fireItemStacks[8].stackTagCompound = nbt;
                         }
                     }
                 }
-                //turn input into result 2
-                else if(inputItemTemp > meltTemp2 && Item1Melted)
+                else
                 {
-                    inName = OutputItem2.getItem().getItemNameIS(fireItemStacks[1]);
-
-                    if(fireItemStacks[7] == null || 
-                            fireItemStacks[7] != null && (fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7]).equals(inName)  ||
-                                    fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7]).equals(OutputItem2.getItem().getItemNameIS(OutputItem2)))&&
-                                    fireItemStacks[7].getItemDamage() < fireItemStacks[7].getMaxDamage() || 
-                                    fireItemStacks[7].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+                    if(fireItemStacks[7] != null && 
+                            fireItemStacks[7].getItem().shiftedIndex == output.getItem().shiftedIndex && 
+                            fireItemStacks[7].stackSize + output.stackSize <= fireItemStacks[7].getMaxStackSize())
                     {
-                        if(Item1Melted)
-                        {
-                            String outName = OutputItem2.getItem().getItemNameIS(OutputItem2);
-                            //if the output slot is empty then we set the output item to a copy of the output data
-                            if(fireItemStacks[7] == null && !outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[7] = OutputItem2.copy();
-                            }	
-                            else if(fireItemStacks[7] == null && outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[7] = InputItem.copy();
-                            }							
-                            else//otherwise we find out how much material is in the slot and we add to it.
-                            {
-                                if(inName.contains(".Ore.") && fireItemStacks[7].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
-                                {
-                                    fireItemStacks[7] = OutputItem1.copy();
-                                }
-                                else
-                                {
-                                    String out1Name = fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7]);
-                                    if(out1Name.equals(InputItem.getItem().getItemNameIS(InputItem)) && fireItemStacks[7].getItemDamage() < fireItemStacks[7].getMaxDamage())
-                                    {
-                                        combineMetals(InputItem, fireItemStacks[7]);
-                                    }
-                                    else if(out1Name.equals(OutputItem2.getItem().getItemNameIS(OutputItem2)) && fireItemStacks[7].getItemDamage() < fireItemStacks[7].getMaxDamage())
-                                    {
-                                        combineMetals(OutputItem2, fireItemStacks[7]);
-                                    }
-                                }
-                            }
-                            if(TFCHeat.ItemHeatData.containsKey(fireItemStacks[7].getItem().getItemNameIS(fireItemStacks[7])))
-                            {
-                                NBTTagCompound N7;
-                                if(OutputItem2.hasTagCompound()) {
-                                    N7 = OutputItem2.getTagCompound();
-                                } else {
-                                    N7 = new NBTTagCompound();
-                                }
-                                N7.setFloat("temperature", inputItemTemp);
-                                N7.setBoolean("Item1Melted",false);
-                                fireItemStacks[7].setTagCompound(N7);
-                            }
-
-                            //Now we add the slag.
-                            //First we find out if the input item is a type of ore. If it is, we create the slag
-                            Boolean isOre = inName.toLowerCase().contains("ore"); 
-                            if(isOre)
-                            {
-                                addByproduct(new ItemStack(mod_TFC_Game.terraSlag,1));
-                            }
-                            fireItemStacks[1] = null;
-                        }
+                        fireItemStacks[7].stackSize += output.stackSize; 
                     }
-                    else if(fireItemStacks[8] == null || 
-                            fireItemStacks[8] != null && (fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8]).equals(inName)  ||
-                                    fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8]).equals(OutputItem2.getItem().getItemNameIS(OutputItem2)))&&
-                                    fireItemStacks[8].getItemDamage() < fireItemStacks[8].getMaxDamage() || 
-                                    fireItemStacks[8].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
+                    else if(fireItemStacks[8] != null && 
+                            fireItemStacks[8].getItem().shiftedIndex == output.getItem().shiftedIndex && 
+                            fireItemStacks[8].stackSize + output.stackSize <= fireItemStacks[8].getMaxStackSize())
                     {
-                        if(Item1Melted)
-                        {
-                            String outName = OutputItem2.getItem().getItemNameIS(OutputItem2);
-                            //if the output slot is empty then we set the output item to a copy of the output data
-                            if(fireItemStacks[8] == null && !outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[8] = OutputItem2.copy();
-                            }	
-                            else if(fireItemStacks[8] == null && outName.equals(InputItem.getItem().getItemNameIS(InputItem)))
-                            {
-                                fireItemStacks[8] = InputItem.copy();
-                            }							
-                            else//otherwise we find out how much material is in the slot and we add to it.
-                            {
-                                if(inName.contains(".Ore.") && fireItemStacks[8].itemID == mod_TFC_Game.terraCeramicMold.shiftedIndex)
-                                {
-                                    fireItemStacks[8] = OutputItem1.copy();
-                                }
-                                else
-                                {
-                                    String out1Name = fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8]);
-                                    if(out1Name.equals(InputItem.getItem().getItemNameIS(InputItem)) && fireItemStacks[8].getItemDamage() < fireItemStacks[8].getMaxDamage())
-                                    {
-                                        combineMetals(InputItem, fireItemStacks[8]);
-                                    }
-                                    else if(out1Name.equals(OutputItem2.getItem().getItemNameIS(OutputItem2)) && fireItemStacks[8].getItemDamage() < fireItemStacks[8].getMaxDamage())
-                                    {
-                                        combineMetals(OutputItem2, fireItemStacks[8]);
-                                    }
-                                }
-                            }
-                            if(TFCHeat.ItemHeatData.containsKey(fireItemStacks[8].getItem().getItemNameIS(fireItemStacks[8])))
-                            {
-                                NBTTagCompound N8 = OutputItem2.getTagCompound();
-                                if(OutputItem2.hasTagCompound()) {
-                                    N8 = OutputItem2.getTagCompound();
-                                } else {
-                                    N8 = new NBTTagCompound();
-                                }
-                                N8.setFloat("temperature", inputItemTemp);
-                                N8.setBoolean("Item1Melted",false);
-                                fireItemStacks[8].setTagCompound(N8);
-                            }
-                            //Now we add the slag.
-                            //First we find out if the input item is a type of ore. If it is, we create the slag
-                            Boolean isOre = inName.toLowerCase().contains("ore"); 
-                            if(isOre)
-                            {
-                                addByproduct(new ItemStack(mod_TFC_Game.terraSlag,1));
-                            }
-                            fireItemStacks[1] = null;
-                        }
+                        fireItemStacks[8].stackSize += output.stackSize; 
+                    }
+                    else if(fireItemStacks[7] == null)
+                    {
+                        fireItemStacks[7] = output; 
+                    }
+                    else if(fireItemStacks[8] == null)
+                    {
+                        fireItemStacks[8] = output; 
                     }
                 }
             }
         }
     }
-
+  
     @Override
     public ItemStack decrStackSize(int i, int j)
     {
@@ -1080,7 +910,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public int getInventoryStackLimit()
     {
         // TODO Auto-generated method stub
-        return 1;
+        return 64;
     }
 
     @Override
@@ -1089,31 +919,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         return "Firepit";
     }
 
-    public Boolean getIsBoiling(ItemStack is)
-    {
-        Object[] meltData = (Object[])TFCHeat.ItemHeatData.get(is.getItem().getItemNameIS(is));
-        if(meltData != null && is != null)
-        {
-            if(is != null && is.hasTagCompound())
-            {
-                float temp = is.getTagCompound().getFloat("temperature");
-                return temp >= (Float)meltData[1];
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    public Boolean getItem1Melted()
-    {
-        if(fireItemStacks[1] != null && fireItemStacks[1].hasTagCompound()) {
-            return fireItemStacks[1].getTagCompound().getBoolean("Item1Melted");
-        } else {
-            return false;
-        }
-    }
     public Boolean getNearWood(int x, int y, int z)
     {
         if(worldObj.getBlockMaterial(x+1, y, z) == Material.wood)
@@ -1294,7 +1099,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
                 externalFireCheck();
                 externalFireCheckTimer = 100;
-                
             }
         }
         else
@@ -1305,12 +1109,12 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         if(!worldObj.isRemote)
         {
             
-            //mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this));
-
+            HeatManager manager = HeatManager.getInstance();
             //Here we take care of the item that we are cooking in the fire
             NBTTagCompound inputCompound;
             if(fireItemStacks[1]!= null && fireItemStacks[1].hasTagCompound())
             {
+                HeatIndex index = manager.findMatchingIndex(fireItemStacks[1]);
                 inputCompound = fireItemStacks[1].getTagCompound();
                 inputItemTemp = inputCompound.getFloat("temperature");
                 Item1Melted = inputCompound.getBoolean("Item1Melted");
@@ -1328,7 +1132,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                 inputCompound.setFloat("temperature", inputItemTemp);
                 fireItemStacks[1].setTagCompound(inputCompound);
-                if(getIsBoiling(fireItemStacks[1]))
+                if(index.boilTemp <= inputItemTemp)
                 {
                     fireItemStacks[1] = null;
                 }
@@ -1365,7 +1169,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
 
             //Now we cook the input item
-            CookItem();
+            //CookItem();
+            CookItemNew();
 
             //push the input fuel down the stack
             HandleFuelStack();

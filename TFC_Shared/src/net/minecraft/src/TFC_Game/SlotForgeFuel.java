@@ -6,24 +6,23 @@ import net.minecraft.src.*;
 import net.minecraft.src.Slot;
 
 public class SlotForgeFuel extends Slot
-
 {
-	public SlotForgeFuel(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
-	{
-		super(iinventory, i, j, k);
+    public SlotForgeFuel(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+    {
+        super(iinventory, i, j, k);
 
-	}
+    }
 
-	public boolean isItemValid(ItemStack itemstack)
-	{
-		if(itemstack.itemID == Item.coal.shiftedIndex) {
-			return true;
-		}
-		return false;
-	}
+    public boolean isItemValid(ItemStack itemstack)
+    {
+        if(itemstack.itemID == Item.coal.shiftedIndex) {
+            return true;
+        }
+        return false;
+    }
 
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
-	}
+    public int getSlotStackLimit()
+    {
+        return 1;
+    }
 }
