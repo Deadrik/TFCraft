@@ -58,6 +58,8 @@ public class mod_Debug extends NetworkMod
 		    System.out.println(day);
 		    long month = day / 30;
             System.out.println(month);
+            
+            System.out.println("DotW:" +TFCSeasons.Days[TFCSeasons.getDayOfWeek(ModLoader.getMinecraftInstance().theWorld)-1]);
         }
 
 	}

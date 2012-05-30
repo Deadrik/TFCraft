@@ -26,8 +26,8 @@ public class SlotForge extends Slot
 		return false;
 	}
 	
-//	public int getSlotStackLimit()
-//	{
-//	    return 1;
-//	}
+	public int getSlotStackLimit()
+	{
+	    return 1;
+	}
 }

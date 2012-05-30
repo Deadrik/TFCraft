@@ -2,6 +2,7 @@ package net.minecraft.src.TFC_Game;
 
 import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.ItemTerraSmallOre;
+import net.minecraft.src.TFC_Core.General.HeatManager;
 
 public class ContainerTerraForge extends Container
 {
@@ -201,6 +202,7 @@ public class ContainerTerraForge extends Container
 		Slot[] slotinput = {(Slot)inventorySlots.get(2), (Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(0), (Slot)inventorySlots.get(4)};
 		Slot[] slotstorage = {(Slot)inventorySlots.get(10), (Slot)inventorySlots.get(11), (Slot)inventorySlots.get(12), (Slot)inventorySlots.get(13)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(6), (Slot)inventorySlots.get(8), (Slot)inventorySlots.get(5), (Slot)inventorySlots.get(9)};
+		HeatManager manager = HeatManager.getInstance();
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
@@ -253,7 +255,7 @@ public class ContainerTerraForge extends Container
 						}
 					}
 				}
-				else if(!(itemstack1.getItem() instanceof ItemTerraSmallOre))
+				else if(!(itemstack1.getItem() instanceof ItemTerraSmallOre) && manager.findMatchingIndex(itemstack1) != null)
 				{
 					int j = 0;
 					while(j < 5)

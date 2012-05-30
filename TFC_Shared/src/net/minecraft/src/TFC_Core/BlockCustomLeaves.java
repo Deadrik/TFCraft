@@ -223,12 +223,15 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
 
 	public boolean isOpaqueCube()
 	{
-		return !this.graphicsLevel;
+	    if(mod_TFC_Core.proxy != null)
+	        return !mod_TFC_Core.proxy.getGraphicsLevel();
+	    else
+	        return false;
 	}
 
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
-		if (this.graphicsLevel)
+		if (mod_TFC_Core.proxy.getGraphicsLevel())
 		{
 			return baseIndexInPNG + j;
 		}
@@ -241,12 +244,6 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
 	public void onEntityWalking(World world, int i, int j, int k, Entity entity)
 	{
 		super.onEntityWalking(world, i, j, k, entity);
-	}
-
-	public void setGraphicsLevel(boolean flag)
-	{
-		graphicsLevel = flag;
-		blockIndexInTexture = baseIndexInPNG + (flag ? 0 : 16);
 	}
 
 	@Override

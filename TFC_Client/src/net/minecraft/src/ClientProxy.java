@@ -822,4 +822,11 @@ public class ClientProxy implements IProxy {
         String[] Names = {"bismuth", "bismuthbronze", "blackbronze", "blacksteel", "bluesteel", "bronze", "copper", "wroughtiron", "redsteel", "rosegold", "steel", "tin", "zinc"};
         return ModLoader.addArmor(Names[i]);
     }
+
+    @Override
+    public boolean getGraphicsLevel()
+    {
+        // TODO Auto-generated method stub
+        return Minecraft.isFancyGraphicsEnabled();
+    }
 }

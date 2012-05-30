@@ -69,6 +69,14 @@ public class TFCHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCRedSteelUnshaped,1), RedSteelRaw,new ItemStack(TFCItems.HCRedSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCSteelUnshaped,1), SteelRaw,new ItemStack(TFCItems.HCSteelUnshaped,1)));
 		
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakSteelIngot,1), SteelRaw,new ItemStack(TFCItems.WeakSteelUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakRedSteelIngot,1), RedSteelRaw,new ItemStack(TFCItems.WeakRedSteelUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakBlueSteelIngot,1), BlueSteelRaw,new ItemStack(TFCItems.WeakBlueSteelUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCBlackSteelIngot,1), BlackSteelRaw,new ItemStack(TFCItems.HCBlackSteelUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCBlueSteelIngot,1), BlueSteelRaw,new ItemStack(TFCItems.HCBlueSteelUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCRedSteelIngot,1), RedSteelRaw,new ItemStack(TFCItems.HCRedSteelUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCSteelIngot,1), SteelRaw,new ItemStack(TFCItems.HCSteelUnshaped,1)));
+		
 		//Bismuth
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthIngot,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthIngot2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));

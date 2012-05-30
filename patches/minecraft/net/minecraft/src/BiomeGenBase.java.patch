@@ -1,10 +1,11 @@
 --- ../src_base/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
-@@ -5,47 +5,185 @@
+@@ -5,47 +5,186 @@
  import java.util.List;
  import java.util.Random;
  
 +import net.minecraft.src.TFC_Core.*;
++import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
 +
  public abstract class BiomeGenBase
  {
@@ -223,7 +224,7 @@
      public String biomeName;
      public int color;
  
-@@ -102,6 +240,48 @@
+@@ -102,6 +241,48 @@
      protected WorldGenForest worldGenForest;
      protected WorldGenSwamp worldGenSwamp;
  
@@ -272,10 +273,12 @@
      protected BiomeGenBase(int par1)
      {
          this.topBlock = (byte)Block.grass.blockID;
-@@ -134,14 +314,56 @@
+@@ -133,15 +314,57 @@
+         this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 4, 4));
          this.spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
          this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
-         this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquid.class, 10, 4, 4));
+-        this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquid.class, 10, 4, 4));
++        this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
 +
 +        SurfaceType = mod_TFC_Core.terraStoneIgIn.blockID;
 +        SurfaceMeta = 0;
@@ -331,7 +334,7 @@
      }
  
      /**
-@@ -166,8 +388,8 @@
+@@ -166,8 +389,8 @@
       */
      private BiomeGenBase setMinMaxHeight(float par1, float par2)
      {
@@ -342,7 +345,7 @@
          return this;
      }
  
-@@ -336,4 +558,317 @@
+@@ -336,4 +559,317 @@
          double var3 = (double)MathHelper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
          return ColorizerFoliage.getFoliageColor(var1, var3);
      }

@@ -20,6 +20,7 @@ public class BlockTerraOre extends BlockTerra
 {
 	public BlockTerraOre(int i, Material material) {
 		super(i,128, material);
+		this.blockIndexInTexture = 128;
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)

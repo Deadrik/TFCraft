@@ -46,4 +46,6 @@ public interface IProxy extends IGuiHandler {
 	public abstract EntityPlayer getPlayer(NetworkManager network);
 	
 	public abstract int getArmorRenderID(int i);
+	
+	public abstract boolean getGraphicsLevel();
 }

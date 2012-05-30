@@ -12,6 +12,7 @@ public class BlockCustomSapling extends BlockCustomFlower implements ITexturePro
 		super(i, j);
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+		this.blockIndexInTexture = j;
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
@@ -28,7 +29,7 @@ public class BlockCustomSapling extends BlockCustomFlower implements ITexturePro
 
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
-		return j+160;
+		return j+blockIndexInTexture;
 	}
 
 	@Override

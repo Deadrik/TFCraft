@@ -269,6 +269,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
             if(index != null && inputItemTemps[i] > index.meltTemp)
             {
+                int dam = fireItemStacks[i].getItemDamage();
                 //Morph the input
                 fireItemStacks[i] = index.getMorph();
 
@@ -295,9 +296,13 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                         nbt.setFloat("temperature", inputItemTemps[i]);
                         fireItemStacks[i].stackTagCompound = nbt;
                     }
+                    if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal)
+                    {
+                        fireItemStacks[i].setItemDamage(dam);
+                    }
                     if(inputItemTemps[i] >= index.boilTemp)
                     {
-                        if(fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal)
+                        if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal)
                         {
                             fireItemStacks[i] = new ItemStack(TFCItems.terraCeramicMold, 1);
                             fireItemStacks[i].stackTagCompound = null;

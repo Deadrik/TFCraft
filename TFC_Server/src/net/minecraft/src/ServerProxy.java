@@ -196,4 +196,11 @@ public class ServerProxy implements IProxy {
     {
         return 0;
     }
+
+    @Override
+    public boolean getGraphicsLevel()
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

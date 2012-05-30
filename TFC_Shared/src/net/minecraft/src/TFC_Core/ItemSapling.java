@@ -17,7 +17,7 @@ public class ItemSapling extends ItemBlock implements ITextureProvider
 
 	public int getIconFromDamage(int i)
 	{
-		return mod_TFC_Core.terraSapling.getBlockTextureFromSideAndMetadata(0, i);
+		return 160+i;
 	}
 
 	@Override

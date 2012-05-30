@@ -153,8 +153,7 @@ public class mod_TFC_Core extends NetworkMod
     public static EnumArmorMaterial TinArmorMaterial;
     public static EnumArmorMaterial ZincArmorMaterial;
 
-    public static String[] seasons = { "Summer", "Autumn", "Winter", "Spring" };
-    private static String currentSeason = null;
+    
     
     
     
@@ -522,7 +521,6 @@ public class mod_TFC_Core extends NetworkMod
         terraPeat = (new net.minecraft.src.TFC_Core.BlockTerraPeat(TFCSettings.getIntFor(config,"block","terraPeat", 180), 135)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("peat");
         terraPeatGrass = (BlockTerraPeatGrass)(new net.minecraft.src.TFC_Core.BlockTerraPeatGrass(TFCSettings.getIntFor(config,"block","terraPeatGrass", 181), 135, terraPeat)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("PeatGrass");
 
-        //Block.grass = (BlockGrass)terraGrass;
         terraOre = new BlockTerraOre(TFCSettings.getIntFor(config,"block","TerraOre", 213), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
         terraOre2 = new BlockTerraOre2(TFCSettings.getIntFor(config,"block","TerraOre2", 214), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
         terraOre3 = new BlockTerraOre3(TFCSettings.getIntFor(config,"block","TerraOre3", 215), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
@@ -536,9 +534,41 @@ public class mod_TFC_Core extends NetworkMod
         tilledSoil = new BlockTerraFarmland(TFCSettings.getIntFor(config,"block","tilledSoil", 177), terraDirt.blockID).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil");
         tilledSoil2 = new BlockTerraFarmland(TFCSettings.getIntFor(config,"block","tilledSoil2", 176), terraDirt2.blockID).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil2");
 
-        terraWood = Block.wood;
-        terraLeaves = Block.leaves;
-        terraSapling = Block.sapling;
+        
+        
+        Block.blocksList[5] = null;
+        Block.blocksList[6] = null;
+        Block.blocksList[17] = null;
+        Block.blocksList[18] = null;
+        Block.blocksList[31] = null;
+        Block.blocksList[37] = null;
+        Block.blocksList[38] = null;
+        Block.blocksList[39] = null;
+        Block.blocksList[40] = null;
+        Block.blocksList[53] = null;
+        Block.blocksList[58] = null;
+        Block.blocksList[59] = null;
+        Block.blocksList[80] = null;
+        Block.blocksList[83] = null;
+        
+        Block.blocksList[5] = (new BlockTerraPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
+        Block.blocksList[6] = (new BlockCustomSapling(6, 160)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sapling").setRequiresSelfNotify();
+        Block.blocksList[17] = (new BlockTerraWood(17)).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
+        Block.blocksList[18] = /*(BlockLeaves)*/(new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
+        Block.blocksList[31] = (BlockTallGrass)(new BlockCustomTallGrass(31, 39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("tallgrass");
+        Block.blocksList[37] = (BlockFlower)(new BlockCustomFlower(37, 13)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("flower");
+        Block.blocksList[38] = (BlockFlower)(new BlockCustomFlower(38, 12)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("rose");
+        Block.blocksList[39] = (BlockFlower)(new BlockCustomMushroom(39, 29)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setLightValue(0.125F).setBlockName("mushroom");
+        Block.blocksList[40] = (BlockFlower)(new BlockCustomMushroom(40, 28)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("mushroom");
+        Block.blocksList[53] = (new BlockCustomStairs(53, Block.planks)).setBlockName("stairsWood").setRequiresSelfNotify();
+        Block.blocksList[58] = (new BlockTerraWorkbench(58, TileEntityTerraWorkbench.class)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
+        Block.blocksList[59] = (new BlockCustomCrops(59, 88)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
+        Block.blocksList[80] = (new BlockCustomSnow(80, 66)).setHardness(0.2F).setStepSound(Block.soundClothFootstep).setBlockName("snow");
+        Block.blocksList[83] = (new BlockCustomReed(83, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("reeds").disableStats();
+        
+        terraWood = Block.blocksList[17];
+        terraLeaves = Block.blocksList[18];
+        terraSapling = Block.blocksList[6];
         
         bucketWater = new BlockBucketWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
