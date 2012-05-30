@@ -27,16 +27,10 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 
 	public BlockTerraForge(int i, Class tClass, int tex)
 	{
-		super(i, Material.fire);
+		super(i, Material.sand);
 		this.blockIndexInTexture = tex;
 		EntityClass = tClass;
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
-	}
-
-	public void addCreativeItems(java.util.ArrayList list)
-	{
-
-		//list.add(new ItemStack(this,1,0));
 	}
 
 	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
@@ -68,7 +62,7 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 				{
 					tileentityforge.fireTemperature = 300;
 					int ss = entityplayer.inventory.getCurrentItem().stackSize;
-					int dam = entityplayer.inventory.getCurrentItem().getItemDamage();
+					int dam = entityplayer.inventory.getCurrentItem().getItemDamage()+1;
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
 					world.setBlockMetadata(i, j, k, 2);
@@ -124,10 +118,10 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 		return s;
 	}
 
-	public int getRenderType()
-	{
-		return mod_TFC_Core.terraForgeRenderId;
-	}
+//	public int getRenderType()
+//	{
+//		return mod_TFC_Core.terraForgeRenderId;
+//	}
 
 	@Override
 	public String getTextureFile() {
@@ -229,17 +223,6 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
 	{
 		return false;
 	}
-
-	public void setBlockBoundsForItemRender() 
-	{
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
-	}
-
-
-	public int tickRate()
-	{
-		return 20;
-	}
 	
 	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
     {
@@ -274,22 +257,14 @@ public class BlockTerraForge extends BlockContainer implements ITextureProvider
     {
         return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
     }
+	
+	/**
+     * Returns the bounding box of the wired rectangular prism to render.
+     */
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
+    }
 
-//	public void updateTick(World world, int i, int j, int k, Random random)
-//	{
-//		TileEntityTerraForge tileentityfirepit;
-//		tileentityfirepit = (TileEntityTerraForge)world.getBlockTileEntity(i, j, k);
-//		setLightValue(0.8F);
-//		if(tileentityfirepit.fireTemperature < 100)
-//		{
-//			world.setBlockMetadata(i, j, k, 0);
-//			setLightValue(0.0F);
-//		}
-//
-//		if(tileentityfirepit.fireTemperature > 210)
-//		{
-//			world.setBlockMetadata(i, j, k, 1);
-//		}
-//	}
 
 }
