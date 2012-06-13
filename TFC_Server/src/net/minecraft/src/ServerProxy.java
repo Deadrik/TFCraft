@@ -3,14 +3,8 @@ package net.minecraft.src;
 import java.io.File;
 import java.util.Map;
 import net.minecraft.src.*;
-import net.minecraft.src.TFC_Core.ContainerTerraLogPile;
-import net.minecraft.src.TFC_Core.ContainerTerraWorkbench;
-import net.minecraft.src.TFC_Core.IProxy;
-import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
-import net.minecraft.src.TFC_Core.TileEntityTerraWorkbench;
-import net.minecraft.src.TFC_Game.*;
-import net.minecraft.src.TFC_Mining.ContainerTerraSluice;
-import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
+import net.minecraft.src.TFC_Core.*;
+import net.minecraft.src.TFC_Core.Containers.*;
 import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy implements IProxy {
@@ -34,6 +28,8 @@ public class ServerProxy implements IProxy {
         ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
         ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
         ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
+        
+        ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 	}
 
 	@Override
@@ -137,10 +133,15 @@ public class ServerProxy implements IProxy {
 	}
 
 
-	public int blockColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+	public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
 	@Override
 	public int blockGetMixedBrightnessForBlock(Block B, IBlockAccess par1iBlockAccess,
@@ -202,5 +203,19 @@ public class ServerProxy implements IProxy {
     {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public void registerKeys(BaseMod b)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyboardEvent(Object e)
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

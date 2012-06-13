@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-import net.minecraft.src.TFC_Core.WorldGenLiquidsTFC;
+import net.minecraft.src.TFC_Core.Custom.WorldGenLiquidsTFC;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {

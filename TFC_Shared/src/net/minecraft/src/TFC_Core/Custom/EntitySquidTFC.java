@@ -21,6 +21,6 @@ public class EntitySquidTFC extends EntitySquid
      */
     public boolean getCanSpawnHere()
     {
-        return this.posY > 128.0D && this.posY < 145.0D && super.getCanSpawnHere();
+        return this.posY > 128.0D && this.posY < 145.0D && this.worldObj.checkIfAABBIsClear(this.boundingBox);
     }
 }

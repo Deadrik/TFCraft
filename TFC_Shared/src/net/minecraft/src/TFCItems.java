@@ -6,41 +6,14 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
 import net.minecraft.src.TFC_Core.IProxy;
-import net.minecraft.src.TFC_Core.ItemChisel;
-import net.minecraft.src.TFC_Core.ItemCustomAxe;
-import net.minecraft.src.TFC_Core.ItemCustomHoe;
-import net.minecraft.src.TFC_Core.ItemCustomPaxel;
-import net.minecraft.src.TFC_Core.ItemCustomPickaxe;
-import net.minecraft.src.TFC_Core.ItemCustomSaw;
-import net.minecraft.src.TFC_Core.ItemCustomSeeds;
-import net.minecraft.src.TFC_Core.ItemCustomShovel;
-import net.minecraft.src.TFC_Core.ItemTerra;
-import net.minecraft.src.TFC_Core.ItemTerraArmor;
-import net.minecraft.src.TFC_Core.ItemTerraGem;
-import net.minecraft.src.TFC_Core.ItemTerraIngot;
-import net.minecraft.src.TFC_Core.ItemTerraJavelin;
-import net.minecraft.src.TFC_Core.ItemTerraLogs;
-import net.minecraft.src.TFC_Core.ItemTerraSmallOre;
-import net.minecraft.src.TFC_Core.ItemTerraSword;
-import net.minecraft.src.TFC_Core.ItemTerraWoodSupport;
 import net.minecraft.src.TFC_Core.ServerClientProxy;
 import net.minecraft.src.TFC_Core.TFC_Core;
+import net.minecraft.src.TFC_Core.TileEntityTerraSluice;
+import net.minecraft.src.TFC_Core.Blocks.BlockTerraSluice;
 import net.minecraft.src.TFC_Core.Custom.ItemDyeCustom;
 import net.minecraft.src.TFC_Core.General.AnvilReq;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
-import net.minecraft.src.TFC_Game.ItemHammer;
-import net.minecraft.src.TFC_Game.ItemTerraAnvil;
-import net.minecraft.src.TFC_Game.ItemTerraBellows;
-import net.minecraft.src.TFC_Game.ItemTerraFirestarter;
-import net.minecraft.src.TFC_Game.ItemTerraMeltedMetal;
-import net.minecraft.src.TFC_Game.ItemTerraMiscTool;
-import net.minecraft.src.TFC_Game.ItemTerraMiscToolHead;
-import net.minecraft.src.TFC_Game.ItemUnfinishedArmor;
-import net.minecraft.src.TFC_Mining.BlockTerraSluice;
-import net.minecraft.src.TFC_Mining.ItemTerraGoldPan;
-import net.minecraft.src.TFC_Mining.ItemTerraProPick;
-import net.minecraft.src.TFC_Mining.ItemTerraSluice;
-import net.minecraft.src.TFC_Mining.TileEntityTerraSluice;
+import net.minecraft.src.TFC_Core.Items.*;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.EnumHelper;
 
@@ -272,6 +245,20 @@ public class TFCItems
     public static Item boneMMShovel;
     public static Item boneMMAxe;
     public static Item boneMMHoe;
+    
+    public static Item BismuthScythe;
+    public static Item BismuthBronzeScythe;
+    public static Item BlackBronzeScythe;
+    public static Item BlackSteelScythe;
+    public static Item BlueSteelScythe;
+    public static Item BronzeScythe;
+    public static Item CopperScythe;
+    public static Item WroughtIronScythe;
+    public static Item RedSteelScythe;
+    public static Item RoseGoldScythe;
+    public static Item SteelScythe;
+    public static Item TinScythe;
+    public static Item ZincScythe;
 
     /**Food Related Items and Blocks*/
     public static Item SeedsWheat;
@@ -355,11 +342,11 @@ public class TFCItems
     public static Item MaceHeadPlan;
     public static Item SawBladePlan;
     public static Item ProPickHeadPlan;
-    
     public static Item HelmetPlan;
     public static Item ChestplatePlan;
     public static Item GreavesPlan;
     public static Item BootsPlan;
+    public static Item ScythePlan;
 
     //Tool Heads
     public static Item BismuthPickaxeHead;
@@ -502,6 +489,20 @@ public class TFCItems
     public static Item SteelProPickHead;
     public static Item TinProPickHead;
     public static Item ZincProPickHead;
+    
+    public static Item BismuthScytheHead;
+    public static Item BismuthBronzeScytheHead;
+    public static Item BlackBronzeScytheHead;
+    public static Item BlackSteelScytheHead;
+    public static Item BlueSteelScytheHead;
+    public static Item BronzeScytheHead;
+    public static Item CopperScytheHead;
+    public static Item WroughtIronScytheHead;
+    public static Item RedSteelScytheHead;
+    public static Item RoseGoldScytheHead;
+    public static Item SteelScytheHead;
+    public static Item TinScytheHead;
+    public static Item ZincScytheHead;
 
     public static Item Coke;
     public static Item Flux;
@@ -667,6 +668,9 @@ public class TFCItems
     public static Item TinHelmet;
     public static Item ZincHelmet;
     
+    public static Item FruitTreeSapling1;
+    public static Item FruitTreeSapling2;
+    
     public static int IgInStoneUses = 60;
     public static int IgExStoneUses = 70;
     public static int SedStoneUses = 50;
@@ -709,6 +713,7 @@ public class TFCItems
     
     static Configuration config;
     
+    
     public static void Setup()
     {
         
@@ -720,6 +725,23 @@ public class TFCItems
             System.out.println(new StringBuilder().append("[TFC] Error while trying to access configuration!").toString());
             config = null;
         }
+        
+        terraGoldPan = new ItemTerraGoldPan(TFCSettings.getIntFor(config,"item","terraGoldPan",16001)).setItemName("GoldPan").setIconCoord(1, 0);
+        terraSluiceItem = new ItemTerraSluice(TFCSettings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(6, 0);
+        terraProPickStone = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickStone",16003)).setItemName("StoneProPick").setIconCoord(0, 1).setMaxDamage(64);
+        terraProPickBismuth = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuth",16004)).setItemName("BismuthProPick").setIconCoord(1, 1).setMaxDamage(128);
+        terraProPickBismuthBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuthBronze",16005)).setItemName("BismuthBronzeProPick").setIconCoord(2, 1).setMaxDamage(180);
+        terraProPickBlackBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackBronze",16006)).setItemName("BlackBronzeProPick").setIconCoord(3, 1).setMaxDamage(220);
+        terraProPickBlackSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackSteel",16007)).setItemName("BlackSteelProPick").setIconCoord(4, 1).setMaxDamage(1024);
+        terraProPickBlueSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlueSteel",16008)).setItemName("BlueSteelProPick").setIconCoord(5, 1).setMaxDamage(1800);
+        terraProPickBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBronze",16009)).setItemName("BronzeProPick").setIconCoord(6, 1).setMaxDamage(180);
+        terraProPickCopper = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickCopper",16010)).setItemName("CopperProPick").setIconCoord(7, 1).setMaxDamage(180);
+        terraProPickIron = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickWroughtIron",16012)).setItemName("WroughtIronProPick").setIconCoord(8, 1).setMaxDamage(256);
+        terraProPickRedSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRedSteel",16016)).setItemName("RedSteelProPick").setIconCoord(9, 1).setMaxDamage(1800);
+        terraProPickRoseGold = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRoseGold",16017)).setItemName("RoseGoldProPick").setIconCoord(10, 1).setMaxDamage(190);
+        terraProPickSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickSteel",16019)).setItemName("SteelProPick").setIconCoord(11, 1).setMaxDamage(768);
+        terraProPickTin = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickTin",16021)).setItemName("TinProPick").setIconCoord(12, 1).setMaxDamage(96);
+        terraProPickZinc = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickZinc",16022)).setItemName("ZincProPick").setIconCoord(13, 1).setMaxDamage(160);
         
         BismuthIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthIngot",16028)).setItemName("terraBismuthIngot").setIconCoord(0, 3);
         BismuthBronzeIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthBronzeIngot",16029)).setItemName("terraBismuthBronzeIngot").setIconCoord(1, 3);
@@ -881,10 +903,6 @@ public class TFCItems
         ZincChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","ZincChisel",16239),ZincToolMaterial).setItemName("Zinc Chisel").setMaxDamage(ZincUses).setIconCoord(13, 7);
         StoneChisel = new ItemChisel(TFCSettings.getIntFor(config,"item","StoneChisel",16240),IgInToolMaterial).setItemName("Stone Chisel").setMaxDamage(IgInStoneUses).setIconCoord(0, 7);
 
-        //IgInStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneSword",16241),IgInToolMaterial).setItemName("Stone Sword").setMaxDamage(IgInStoneUses).setIconCoord(0, 13);
-        //IgExStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneSword",16242),IgExToolMaterial).setItemName("Stone Sword").setMaxDamage(IgExStoneUses).setIconCoord(0, 13);
-        //SedStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneSword",16243),SedToolMaterial).setItemName("Stone Sword").setMaxDamage(SedStoneUses).setIconCoord(0, 13);
-        //MMStoneSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneSword",16244),MMToolMaterial).setItemName("Stone Sword").setMaxDamage(MMStoneUses).setIconCoord(0, 13);
         BismuthSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthSword",16245),BismuthToolMaterial).setItemName("Bismuth Sword").setMaxDamage(BismuthUses).setIconCoord(1, 13);
         BismuthBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeSword",16246),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 13);
         BlackBronzeSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeSword",16247),BlackBronzeToolMaterial).setItemName("Black Bronze Sword").setMaxDamage(BlackBronzeUses).setIconCoord(3, 13);
@@ -899,10 +917,6 @@ public class TFCItems
         TinSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","TinSword",16256),TinToolMaterial).setItemName("Tin Sword").setMaxDamage(TinUses).setIconCoord(12, 13);
         ZincSword = new ItemTerraSword(TFCSettings.getIntFor(config,"item","ZincSword",16257),ZincToolMaterial).setItemName("Zinc Sword").setMaxDamage(ZincUses).setIconCoord(13, 13);
 
-        //IgInStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgInStoneMace",16258),IgInToolMaterial).setItemName("Stone Mace").setMaxDamage(IgInStoneUses).setIconCoord(0, 12);
-        //IgExStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","IgExStoneMace",16259),IgExToolMaterial).setItemName("Stone Mace").setMaxDamage(IgExStoneUses).setIconCoord(0, 12);
-        //SedStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","SedStoneMace",16260),SedToolMaterial).setItemName("Stone Mace").setMaxDamage(SedStoneUses).setIconCoord(0, 12);
-        //MMStoneMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","MMStoneMace",16261),MMToolMaterial).setItemName("Stone Mace").setMaxDamage(MMStoneUses).setIconCoord(0, 12);
         BismuthMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthMace",16262),BismuthToolMaterial).setItemName("Bismuth Mace").setMaxDamage(BismuthUses).setIconCoord(1, 12);
         BismuthBronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BismuthBronzeMace",16263),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Mace").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 12);
         BlackBronzeMace = new ItemTerraSword(TFCSettings.getIntFor(config,"item","BlackBronzeMace",16264),BlackBronzeToolMaterial).setItemName("Black Bronze Mace").setMaxDamage(BlackBronzeUses).setIconCoord(3, 12);
@@ -963,12 +977,8 @@ public class TFCItems
         boneMMHoe = new ItemCustomHoe(TFCSettings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setItemName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(14, 6);
         Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(15, 1);
 
-        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",18000),Block.crops.blockID,mod_TFC_Core.tilledSoil.blockID,mod_TFC_Core.tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);
-
         Item.itemsList[Item.dyePowder.shiftedIndex] = null;
         Item.itemsList[95] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
-        
-        
         
         terraSlag = new ItemTerra(TFCSettings.getIntFor(config,"item","terraSlag",16349),"/bioxx/terrasprites.png").setItemName("terraSlag").setIconCoord(2, 0);
 
@@ -1012,23 +1022,6 @@ public class TFCItems
 
         terraInk = new ItemTerra(TFCSettings.getIntFor(config,"item","terraInk",16391),"/bioxx/terrasprites.png").setItemName("terraInk").setIconCoord(3, 0);
 
-        //Plans
-        PickaxeHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","PickaxeHeadPlan",17000)).setItemName("PickaxeHeadPlan").setIconCoord(0, 0);
-        ShovelHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ShovelHeadPlan",17001)).setItemName("ShovelHeadPlan").setIconCoord(0, 0);
-        HoeHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","HoeHeadPlan",17002)).setItemName("HoeHeadPlan").setIconCoord(0, 0);
-        AxeHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","AxeHeadPlan",17003)).setItemName("AxeHeadPlan").setIconCoord(0, 0);
-        HammerHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","HammerHeadPlan",17004)).setItemName("HammerHeadPlan").setIconCoord(0, 0);
-        ChiselHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ChiselHeadPlan",17005)).setItemName("ChiselHeadPlan").setIconCoord(0, 0);
-        SwordBladePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","SwordBladePlan",17006)).setItemName("SwordBladePlan").setIconCoord(0, 0);
-        MaceHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","MaceHeadPlan",17007)).setItemName("MaceHeadPlan").setIconCoord(0, 0);
-        SawBladePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","SawBladePlan",17008)).setItemName("SawBladePlan").setIconCoord(0, 0);
-        ProPickHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ProPickHeadPlan",17009)).setItemName("ProPickHeadPlan").setIconCoord(0, 0);
-        
-        HelmetPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","HelmetPlan",17010)).setItemName("HelmetPlan").setIconCoord(0, 0);
-        ChestplatePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ChestplatePlan",17011)).setItemName("ChestplatePlan").setIconCoord(0, 0);
-        GreavesPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","GreavesPlan",17012)).setItemName("GreavesPlan").setIconCoord(0, 0);
-        BootsPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","BootsPlan",17013)).setItemName("BootsPlan").setIconCoord(0, 0);
-
         terraStoneAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraStoneAnvilItem",16398), 0, AnvilReq.STONE).setItemName("terraStoneAnvilItem").setIconCoord(0, 2);
         terraBlackSteelAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraBlackSteelAnvilItem",16399), 5, AnvilReq.BLACKSTEEL).setItemName("terraBlackSteelAnvilItem").setIconCoord(4, 2);
         terraBlueSteelAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraBlueSteelAnvilItem",16400), 7, AnvilReq.BLUESTEEL).setItemName("terraBlueSteelAnvilItem").setIconCoord(5, 2);
@@ -1042,7 +1035,7 @@ public class TFCItems
 
         terraFireStarter = new ItemTerraFirestarter(TFCSettings.getIntFor(config,"item","terraFireStarter",16407)).setItemName("terraFireStarter").setIconCoord(7, 0);
         terraClayMold = new ItemTerra(TFCSettings.getIntFor(config,"item","terraClayMold",16408),"/bioxx/terrasprites.png").setItemName("terraClayMold").setIconCoord(10, 10);
-        terraCeramicMold = new ItemTerra(TFCSettings.getIntFor(config,"item","terraFiredClayMold",16409),"/bioxx/terrasprites.png").setItemName("terraFiredClayMold").setIconCoord(6, 10);
+        terraCeramicMold = new ItemTerra(TFCSettings.getIntFor(config,"item","terraFiredClayMold",16409),"/bioxx/terrasprites.png").setItemName("terraFiredClayMold").setIconCoord(10, 6);
         //Tool heads
         BismuthPickaxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthPickaxeHead",16500)).setItemName("Bismuth Pickaxe Head").setIconCoord(1, 3);
         BismuthBronzePickaxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthBronzePickaxeHead",16501)).setItemName("Bismuth Bronze Pickaxe Head").setIconCoord(2, 3);
@@ -1170,7 +1163,7 @@ public class TFCItems
         SteelSawHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SteelSawHead",16614)).setItemName("Steel Saw Blade").setIconCoord(11, 8);
         TinSawHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","TinSawHead",16615)).setItemName("Tin Saw Blade").setIconCoord(12, 8);
         ZincSawHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","ZincSawHead",16616)).setItemName("Zinc Saw Blade").setIconCoord(13, 8);
-
+        
         HCBlackSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCBlackSteel",16617)).setItemName("UnshapedHCBlackSteel").setIconCoord(3, 9);
         WeakBlueSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedWeakBlueSteel",16618)).setItemName("UnshapedWeakBlueSteel").setIconCoord(4, 9);
         HCBlueSteelUnshaped = new ItemTerraMeltedMetal(TFCSettings.getIntFor(config,"item","UnshapedHCBlueSteel",16619)).setItemName("UnshapedHCBlueSteel").setIconCoord(4, 9);
@@ -1193,41 +1186,108 @@ public class TFCItems
         SteelProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SteelProPickHead",16636)).setItemName("Steel ProPick Head").setIconCoord(11, 1);
         TinProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","TinProPickHead",16637)).setItemName("Tin ProPick Head").setIconCoord(12, 1);
         ZincProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","ZincProPickHead",16638)).setItemName("Zinc ProPick Head").setIconCoord(13, 1);
-
+        
         Flux = ((ItemTerra) new ItemTerra(TFCSettings.getIntFor(config,"item","Flux",16639)).setItemName("flux").setIconCoord(0, 0)).setTexturePath("/bioxx/terrasprites.png");
-
         terraBismuthBronzeAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraBismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setItemName("terraBismuthBronzeAnvilItem").setIconCoord(2, 2);
         terraBlackBronzeAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraBlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setItemName("terraBlackBronzeAnvilItem").setIconCoord(3, 2);
         terraRoseGoldAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraRoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setItemName("terraRoseGoldAnvilItem").setIconCoord(10, 2);
         
-        /**Armor Crafting related items*/
-        BismuthSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BismuthSheet",19000)).setItemName("BismuthSheet").setIconCoord(5,14)).setTexturePath("/bioxx/terraarmor1.png");
-        BismuthBronzeSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Bismuth BronzeSheet",19001)).setItemName("Bismuth BronzeSheet").setIconCoord(6, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BlackBronzeSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black BronzeSheet",19002)).setItemName("Black BronzeSheet").setIconCoord(7, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BlackSteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black SteelSheet",19003)).setItemName("Black SteelSheet").setIconCoord(8, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BlueSteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Blue SteelSheet",19004)).setItemName("Blue SteelSheet").setIconCoord(9, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BronzeSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BronzeSheet",19005)).setItemName("BronzeSheet").setIconCoord(11, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        CopperSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","CopperSheet",19006)).setItemName("CopperSheet").setIconCoord(12, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        WroughtIronSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Wrought IronSheet",19007)).setItemName("Wrought IronSheet").setIconCoord(14, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        RedSteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Red SteelSheet",19008)).setItemName("Red SteelSheet").setIconCoord(8, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        RoseGoldSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Rose GoldSheet",19009)).setItemName("Rose GoldSheet").setIconCoord(9, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        SteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","SteelSheet",19010)).setItemName("SteelSheet").setIconCoord(11, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        TinSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","TinSheet",19011)).setItemName("TinSheet").setIconCoord(13, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        ZincSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","ZincSheet",19012)).setItemName("ZincSheet").setIconCoord(14, 15)).setTexturePath("/bioxx/terraarmor1.png");
+        /**
+         * Scythe
+         * */
+        int num = 16643;
+        BismuthScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","BismuthScythe",num),BismuthToolMaterial).setItemName("Bismuth Scythe").setMaxDamage(BismuthUses).setIconCoord(1, 9);num++;
+        BismuthBronzeScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","BismuthBronzeScythe",num),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Scythe").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 9);num++;
+        BlackBronzeScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","BlackBronzeScythe",num),BlackBronzeToolMaterial).setItemName("Black Bronze Scythe").setMaxDamage(BlackBronzeUses).setIconCoord(3, 9);num++;
+        BlackSteelScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","BlackSteelScythe",num),BlackSteelToolMaterial).setItemName("Black Steel Scythe").setMaxDamage(BlackSteelUses).setIconCoord(4, 9);num++;
+        BlueSteelScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","BlueSteelScythe",num),BlueSteelToolMaterial).setItemName("Blue Steel Scythe").setMaxDamage(BlueSteelUses).setIconCoord(5, 9);num++;
+        BronzeScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","BronzeScythe",num),BronzeToolMaterial).setItemName("Bronze Scythe").setMaxDamage(BronzeUses).setIconCoord(6, 9);num++;
+        CopperScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","CopperScythe",num),CopperToolMaterial).setItemName("Copper Scythe").setMaxDamage(CopperUses).setIconCoord(7, 9);num++;
+        WroughtIronScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","WroughtIronScythe",num),IronToolMaterial).setItemName("Wrought Iron Scythe").setMaxDamage(WroughtIronUses).setIconCoord(8, 9);num++;
+        RedSteelScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","RedSteelScythe",num),RedSteelToolMaterial).setItemName("Red Steel Scythe").setMaxDamage(RedSteelUses).setIconCoord(9, 9);num++;
+        RoseGoldScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","RoseGoldScythe",num),RoseGoldToolMaterial).setItemName("Rose Gold Scythe").setMaxDamage(RoseGoldUses).setIconCoord(10, 9);num++;
+        SteelScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","SteelScythe",num),SteelToolMaterial).setItemName("Steel Scythe").setMaxDamage(SteelUses).setIconCoord(11, 9);num++;
+        TinScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","TinScythe",num),TinToolMaterial).setItemName("Tin Scythe").setMaxDamage(TinUses).setIconCoord(12, 9);num++;
+        ZincScythe = new ItemCustomScythe(TFCSettings.getIntFor(config,"item","ZincScythe",num),ZincToolMaterial).setItemName("Zinc Scythe").setMaxDamage(ZincUses).setIconCoord(13, 9);num++;
         
-        BismuthSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BismuthSheet2x",19013)).setItemName("BismuthSheet2x").setIconCoord(5,14)).setTexturePath("/bioxx/terraarmor1.png");
-        BismuthBronzeSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Bismuth BronzeSheet2x",19014)).setItemName("Bismuth BronzeSheet2x").setIconCoord(6, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BlackBronzeSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black BronzeSheet2x",19015)).setItemName("Black BronzeSheet2x").setIconCoord(7, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BlackSteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black SteelSheet2x",19016)).setItemName("Black SteelSheet2x").setIconCoord(8, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BlueSteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Blue SteelSheet2x",19017)).setItemName("Blue SteelSheet2x").setIconCoord(9, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        BronzeSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BronzeSheet2x",19018)).setItemName("BronzeSheet2x").setIconCoord(11, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        CopperSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","CopperSheet2x",19019)).setItemName("CopperSheet2x").setIconCoord(12, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        WroughtIronSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Wrought IronSheet2x",19020)).setItemName("Wrought IronSheet2x").setIconCoord(14, 14)).setTexturePath("/bioxx/terraarmor1.png");
-        RedSteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Red SteelSheet2x",19021)).setItemName("Red SteelSheet2x").setIconCoord(8, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        RoseGoldSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Rose GoldSheet2x",19022)).setItemName("Rose GoldSheet2x").setIconCoord(9, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        SteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","SteelSheet2x",19023)).setItemName("SteelSheet2x").setIconCoord(11, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        TinSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","TinSheet2x",19024)).setItemName("TinSheet2x").setIconCoord(13, 15)).setTexturePath("/bioxx/terraarmor1.png");
-        ZincSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","ZincSheet2x",19025)).setItemName("ZincSheet2x").setIconCoord(14, 15)).setTexturePath("/bioxx/terraarmor1.png");
+        BismuthScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthScytheHead",num)).setItemName("Bismuth Scythe Blade").setIconCoord(1, 9);num++;
+        BismuthBronzeScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthBronzeScytheHead",num)).setItemName("Bismuth Bronze Scythe Blade").setIconCoord(2, 9);num++;
+        BlackBronzeScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BlackBronzeScytheHead",num)).setItemName("Black Bronze Scythe Blade").setIconCoord(3, 9);num++;
+        BlackSteelScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BlackSteelScytheHead",num)).setItemName("Black Steel Scythe Blade").setIconCoord(4, 9);num++;
+        BlueSteelScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BlueSteelScytheHead",num)).setItemName("Blue Steel Scythe Blade").setIconCoord(5, 9);num++;
+        BronzeScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BronzeScytheHead",num)).setItemName("Bronze Scythe Blade").setIconCoord(6, 9);num++;
+        CopperScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","CopperScytheHead",num)).setItemName("Copper Scythe Blade").setIconCoord(7, 9);num++;
+        WroughtIronScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","WroughtIronScytheHead",num)).setItemName("Wrought Iron Scythe Blade").setIconCoord(8, 9);num++;
+        RedSteelScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","RedSteelScytheHead",num)).setItemName("Red Steel Scythe Blade").setIconCoord(9, 9);num++;
+        RoseGoldScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","RoseGoldScytheHead",num)).setItemName("Rose Gold Scythe Blade").setIconCoord(10, 9);num++;
+        SteelScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SteelScytheHead",num)).setItemName("Steel Scythe Blade").setIconCoord(11, 9);num++;
+        TinScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","TinScytheHead",num)).setItemName("Tin Scythe Blade").setIconCoord(12, 9);num++;
+        ZincScytheHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","ZincScytheHead",num)).setItemName("Zinc Scythe Blade").setIconCoord(13, 9);num++;
+
+        /**Plans*/
+        PickaxeHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","PickaxeHeadPlan",num)).setItemName("PickaxeHeadPlan").setIconCoord(0, 0);num++;
+        ShovelHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ShovelHeadPlan",num)).setItemName("ShovelHeadPlan").setIconCoord(0, 0);num++;
+        HoeHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","HoeHeadPlan",num)).setItemName("HoeHeadPlan").setIconCoord(0, 0);num++;
+        AxeHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","AxeHeadPlan",num)).setItemName("AxeHeadPlan").setIconCoord(0, 0);num++;
+        HammerHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","HammerHeadPlan",num)).setItemName("HammerHeadPlan").setIconCoord(0, 0);num++;
+        ChiselHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ChiselHeadPlan",num)).setItemName("ChiselHeadPlan").setIconCoord(0, 0);num++;
+        SwordBladePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","SwordBladePlan",num)).setItemName("SwordBladePlan").setIconCoord(0, 0);num++;
+        MaceHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","MaceHeadPlan",num)).setItemName("MaceHeadPlan").setIconCoord(0, 0);num++;
+        SawBladePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","SawBladePlan",num)).setItemName("SawBladePlan").setIconCoord(0, 0);num++;
+        ProPickHeadPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ProPickHeadPlan",num)).setItemName("ProPickHeadPlan").setIconCoord(0, 0);num++;
+        HelmetPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","HelmetPlan",num)).setItemName("HelmetPlan").setIconCoord(0, 0);num++;
+        ChestplatePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ChestplatePlan",num)).setItemName("ChestplatePlan").setIconCoord(0, 0);num++;
+        GreavesPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","GreavesPlan",num)).setItemName("GreavesPlan").setIconCoord(0, 0);num++;
+        BootsPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","BootsPlan",num)).setItemName("BootsPlan").setIconCoord(0, 0);num++;
+        ScythePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ScythePlan",num)).setItemName("ScythePlan").setIconCoord(0, 0);num++;
+        
+        /**Food Items*/
+        Item.itemsList[63] = null; Item.itemsList[63] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
+        Item.itemsList[64] = null; Item.itemsList[64] = new ItemTerraFood(64, 8, 0.8F, true,"/gui/items.png").setIconCoord(8, 5).setItemName("porkchopCooked");
+        Item.itemsList[93] = null; Item.itemsList[93] = new ItemTerraFood(93, 2, 0.3F, true,"/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
+        Item.itemsList[94] = null; Item.itemsList[94] = new ItemTerraFood(94, 5, 0.6F, true,"/gui/items.png").setIconCoord(10, 5).setItemName("fishCooked");
+        Item.itemsList[107] = null; Item.itemsList[107] = new ItemTerraFood(107, 3, 0.3F, true,"/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
+        Item.itemsList[108] = null; Item.itemsList[108] = new ItemTerraFood(108, 8, 0.8F, true,"/gui/items.png").setIconCoord(10, 6).setItemName("beefCooked");
+        Item.itemsList[109] = null; Item.itemsList[109] = new ItemTerraFood(109, 2, 0.3F, true,"/gui/items.png").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
+        Item.itemsList[110] = null; Item.itemsList[110] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
+        
+        num = 18000;
+        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),Block.crops.blockID,mod_TFC_Core.tilledSoil.blockID,mod_TFC_Core.tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
+        FruitTreeSapling1 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling1", num), "/bioxx/Vegetation.png", 0).setItemName("FruitSapling1").setIconCoord(0, 7);num++;
+        //FruitTreeSapling2 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling2", num), "/bioxx/Vegetation.png", 8).setItemName("FruitSapling2").setIconCoord(0, 7);num++;
+        
+        
+        
+        /**Armor Crafting related items*/
+        num = 19000;
+        BismuthSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BismuthSheet",num)).setItemName("BismuthSheet").setIconCoord(5,14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BismuthBronzeSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Bismuth BronzeSheet",num)).setItemName("Bismuth BronzeSheet").setIconCoord(6, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BlackBronzeSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black BronzeSheet",num)).setItemName("Black BronzeSheet").setIconCoord(7, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BlackSteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black SteelSheet",num)).setItemName("Black SteelSheet").setIconCoord(8, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BlueSteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Blue SteelSheet",num)).setItemName("Blue SteelSheet").setIconCoord(9, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BronzeSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BronzeSheet",num)).setItemName("BronzeSheet").setIconCoord(11, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        CopperSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","CopperSheet",num)).setItemName("CopperSheet").setIconCoord(12, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        WroughtIronSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Wrought IronSheet",num)).setItemName("Wrought IronSheet").setIconCoord(14, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        RedSteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Red SteelSheet",num)).setItemName("Red SteelSheet").setIconCoord(8, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        RoseGoldSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Rose GoldSheet",num)).setItemName("Rose GoldSheet").setIconCoord(9, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        SteelSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","SteelSheet",num)).setItemName("SteelSheet").setIconCoord(11, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        TinSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","TinSheet",num)).setItemName("TinSheet").setIconCoord(13, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        ZincSheet = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","ZincSheet",num)).setItemName("ZincSheet").setIconCoord(14, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        
+        BismuthSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BismuthSheet2x",num)).setItemName("BismuthSheet2x").setIconCoord(5,14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BismuthBronzeSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Bismuth BronzeSheet2x",num)).setItemName("Bismuth BronzeSheet2x").setIconCoord(6, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BlackBronzeSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black BronzeSheet2x",num)).setItemName("Black BronzeSheet2x").setIconCoord(7, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BlackSteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Black SteelSheet2x",num)).setItemName("Black SteelSheet2x").setIconCoord(8, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BlueSteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Blue SteelSheet2x",num)).setItemName("Blue SteelSheet2x").setIconCoord(9, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        BronzeSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","BronzeSheet2x",num)).setItemName("BronzeSheet2x").setIconCoord(11, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        CopperSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","CopperSheet2x",num)).setItemName("CopperSheet2x").setIconCoord(12, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        WroughtIronSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Wrought IronSheet2x",num)).setItemName("Wrought IronSheet2x").setIconCoord(14, 14)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        RedSteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Red SteelSheet2x",num)).setItemName("Red SteelSheet2x").setIconCoord(8, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        RoseGoldSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","Rose GoldSheet2x",num)).setItemName("Rose GoldSheet2x").setIconCoord(9, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        SteelSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","SteelSheet2x",num)).setItemName("SteelSheet2x").setIconCoord(11, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        TinSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","TinSheet2x",num)).setItemName("TinSheet2x").setIconCoord(13, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        ZincSheet2x = ((ItemTerra)new ItemTerra(TFCSettings.getIntFor(config,"item","ZincSheet2x",num)).setItemName("ZincSheet2x").setIconCoord(14, 15)).setTexturePath("/bioxx/terraarmor1.png");num++;
+        
         
         MeltedMetal = new Item[]{BismuthUnshaped, BismuthBronzeUnshaped,BlackBronzeUnshaped,
             TFCItems.BlackSteelUnshaped,TFCItems.BlueSteelUnshaped,TFCItems.BrassUnshaped,TFCItems.BronzeUnshaped,
@@ -1251,7 +1311,7 @@ public class TFCItems
                 mod_TFC_Core.BronzeArmorMaterial,mod_TFC_Core.CopperArmorMaterial,mod_TFC_Core.IronArmorMaterial,mod_TFC_Core.RedSteelArmorMaterial,mod_TFC_Core.RoseGoldArmorMaterial,
                 mod_TFC_Core.SteelArmorMaterial,mod_TFC_Core.TinArmorMaterial,mod_TFC_Core.ZincArmorMaterial};
         
-        int num = 19026;
+        
         int i = 0;
         TFCItems.BismuthUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
         TFCItems.BismuthBronzeUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFCSettings.getIntFor(config,"item",Names[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
@@ -1369,25 +1429,7 @@ public class TFCItems
 
 
         
-        /**Formerly TFC_Mining*/
-        
 
-        terraGoldPan = new ItemTerraGoldPan(TFCSettings.getIntFor(config,"item","terraGoldPan",16001)).setItemName("GoldPan").setIconCoord(1, 0);
-        terraSluiceItem = new ItemTerraSluice(TFCSettings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(6, 0);
-        terraProPickStone = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickStone",16003)).setItemName("StoneProPick").setIconCoord(0, 1).setMaxDamage(64);
-        terraProPickBismuth = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuth",16004)).setItemName("BismuthProPick").setIconCoord(1, 1).setMaxDamage(128);
-        terraProPickBismuthBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuthBronze",16005)).setItemName("BismuthBronzeProPick").setIconCoord(2, 1).setMaxDamage(180);
-        terraProPickBlackBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackBronze",16006)).setItemName("BlackBronzeProPick").setIconCoord(3, 1).setMaxDamage(220);
-        terraProPickBlackSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackSteel",16007)).setItemName("BlackSteelProPick").setIconCoord(4, 1).setMaxDamage(1024);
-        terraProPickBlueSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlueSteel",16008)).setItemName("BlueSteelProPick").setIconCoord(5, 1).setMaxDamage(1800);
-        terraProPickBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBronze",16009)).setItemName("BronzeProPick").setIconCoord(6, 1).setMaxDamage(180);
-        terraProPickCopper = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickCopper",16010)).setItemName("CopperProPick").setIconCoord(7, 1).setMaxDamage(180);
-        terraProPickIron = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickWroughtIron",16012)).setItemName("WroughtIronProPick").setIconCoord(8, 1).setMaxDamage(256);
-        terraProPickRedSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRedSteel",16016)).setItemName("RedSteelProPick").setIconCoord(9, 1).setMaxDamage(1800);
-        terraProPickRoseGold = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRoseGold",16017)).setItemName("RoseGoldProPick").setIconCoord(10, 1).setMaxDamage(190);
-        terraProPickSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickSteel",16019)).setItemName("SteelProPick").setIconCoord(11, 1).setMaxDamage(768);
-        terraProPickTin = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickTin",16021)).setItemName("TinProPick").setIconCoord(12, 1).setMaxDamage(96);
-        terraProPickZinc = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickZinc",16022)).setItemName("ZincProPick").setIconCoord(13, 1).setMaxDamage(160);
         
         TFC_Core.Axes = new Item[]{terraSedAxe,terraIgInAxe,terraIgExAxe,terraMMAxe,
                 terraBismuthAxe,terraBismuthBronzeAxe,terraBlackBronzeAxe,

@@ -3,6 +3,13 @@ package net.minecraft.src.TFC_Core;
 import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.Custom.WorldGenClayPit;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomFlowers;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomFruitTree;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomTallGrass;
+import net.minecraft.src.TFC_Core.Custom.WorldGenLooseRocks;
+import net.minecraft.src.TFC_Core.Custom.WorldGenMinableTFC;
+import net.minecraft.src.TFC_Core.Custom.WorldGenPeatPit;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
 import net.minecraft.src.forge.MinecraftForge;
 
@@ -261,16 +268,16 @@ public class TFC_Core
 
         //============Borax
         createOre(mod_TFC_Core.terraOre3.blockID, 0,new int[]{mod_TFC_Core.terraStoneSed.blockID,4},//Rock Salt, large clusters 
-                /*rarity*/40,/*veinSize*/30,/*veinAmt*/4,/*height*/height,/*diameter*/50,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/32,/*veinSize*/30,/*veinAmt*/4,/*height*/height,/*diameter*/50,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
         createOre(mod_TFC_Core.terraOre3.blockID, 0,new int[]{mod_TFC_Core.terraOre2.blockID,8},//Gypsum, small clusters 
-                /*rarity*/40,/*veinSize*/12,/*veinAmt*/12,/*height*/height,/*diameter*/50,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/5,/*veinSize*/12,/*veinAmt*/12,/*height*/height,/*diameter*/50,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
         //============Lapis Lazuli
         createOre(mod_TFC_Core.terraOre3.blockID, 2,new int[]{mod_TFC_Core.terraStoneMM.blockID,5},//Marble, small clusters 
                 /*rarity*/44,/*veinSize*/8,/*veinAmt*/8,/*height*/height,/*diameter*/60,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Platinum -- (out of order) must follow magnetite and olivine
         createOre(mod_TFC_Core.terraOre.blockID, 2,new int[]{mod_TFC_Core.terraOre.blockID,1,mod_TFC_Core.terraOre3.blockID,8},//magnetite, veins
-                /*rarity*/38,/*veinSize*/8,/*veinAmt*/10,/*height*/height,/*diameter*/15,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/10,/*veinSize*/8,/*veinAmt*/10,/*height*/height,/*diameter*/15,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Gravel
         createOre(Block.gravel.blockID, 0,new int[]{mod_TFC_Core.terraDirt.blockID,-1,
@@ -318,6 +325,8 @@ public class TFC_Core
 		WorldGenCustomFlowers plantRedGen = new WorldGenCustomFlowers(Block.plantRed.blockID);
 		WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Block.mushroomBrown.blockID);
 		WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Block.mushroomRed.blockID);
+		
+		WorldGenCustomFruitTree fruitTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 0);
 
 		int var2;
 		int var3;
@@ -384,6 +393,18 @@ public class TFC_Core
 			var4 = chunk_Z + rand.nextInt(16) + 8;
 			mushroomRedGen.generate(world, rand, var2, var3, var4);
 		}
+		
+		if (rand.nextInt(8) == 0)
+        {
+            var2 = chunk_X + rand.nextInt(16) + 8;
+            
+            var4 = chunk_Z + rand.nextInt(16) + 8;
+            
+            var3 = world.getTopSolidOrLiquidBlock(var2, var4);
+            
+            if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                fruitTree.generate(world, rand, var2, var3, var4);
+        }
 	}
 
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
@@ -713,176 +734,6 @@ public class TFC_Core
 
 
 
-	}
-
-	/**This version performs all the intial block placement in the initial loop, eliminating
-	 * a major source of chunkloader lag.*/
-	public static void replaceBlocksForBiome(int par1, int par2, byte[] blockArray, byte[] metaArray, BiomeGenBase[] par4ArrayOfBiomeGenBase, 
-			double[] stoneNoise, NoiseGeneratorOctaves noiseGen4, Random rand)
-	{
-		byte var5 = 63;
-		double var6 = 0.03125D;
-		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
-
-		for (int xCoord = 0; xCoord < 16; ++xCoord)
-		{
-			for (int zCoord = 0; zCoord < 16; ++zCoord)
-			{
-				BiomeGenBase biomegenbase = par4ArrayOfBiomeGenBase[zCoord + xCoord * 16];
-				float var11 = biomegenbase.getFloatTemperature();
-				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
-				int var13 = -1;
-				int var14 = biomegenbase.GrassID;
-				int var15 = biomegenbase.DirtID;
-
-				for (int height = 127; height >= 0; --height)
-				{
-					int var17 = (zCoord * 16 + xCoord) * 128 + height;
-
-					int var10 = height >> 4;
-		metaArray[var17] = 0;
-
-		if (height <= 1)
-		{
-			blockArray[var17] = (byte) Block.bedrock.blockID;
-		}
-		else
-		{
-			int var18 = blockArray[var17];
-			if (var18 == 0)
-			{
-				var13 = -1;
-			}
-			else if (var18 == Block.stone.blockID)
-			{
-				if(height <= biomegenbase.Layer3)
-				{
-					blockArray[var17] = (byte) biomegenbase.Layer3Type; 
-					metaArray[var17] = (byte)  biomegenbase.Layer3Meta;
-					if(height == biomegenbase.Layer3)
-					{
-						if(rand.nextBoolean())
-						{
-							blockArray[var17+1] = (byte) biomegenbase.Layer3Type; 
-							metaArray[var17+1] = (byte)  biomegenbase.Layer3Meta;
-							if(rand.nextBoolean())
-							{
-								blockArray[var17+2] = (byte) biomegenbase.Layer3Type; 
-								metaArray[var17+2] = (byte)  biomegenbase.Layer3Meta;
-								if(rand.nextBoolean())
-								{
-									blockArray[var17+3] = (byte) biomegenbase.Layer3Type; 
-									metaArray[var17+3] = (byte)  biomegenbase.Layer3Meta;
-								}
-							}
-						}
-					}
-				}
-				else if(height <= biomegenbase.Layer2 && height > biomegenbase.Layer3)
-				{
-					blockArray[var17] = (byte) biomegenbase.Layer2Type; 
-					metaArray[var17] = (byte)  biomegenbase.Layer2Meta;
-					if(height == biomegenbase.Layer2)
-					{
-						if(rand.nextBoolean())
-						{
-							blockArray[var17+1] = (byte) biomegenbase.Layer2Type; 
-							metaArray[var17+1] = (byte)  biomegenbase.Layer2Meta;
-							if(rand.nextBoolean())
-							{
-								blockArray[var17+2] = (byte) biomegenbase.Layer2Type; 
-								metaArray[var17+2] = (byte)  biomegenbase.Layer2Meta;
-								if(rand.nextBoolean())
-								{
-									blockArray[var17+3] = (byte) biomegenbase.Layer2Type; 
-									metaArray[var17+3] = (byte)  biomegenbase.Layer2Meta;
-								}
-							}
-						}
-					}
-				}
-				else if(height <= biomegenbase.Layer1 && height > biomegenbase.Layer2)
-				{
-					blockArray[var17] = (byte) biomegenbase.Layer1Type; 
-					metaArray[var17] = (byte)  biomegenbase.Layer1Meta;    
-					if(height == biomegenbase.Layer3)
-					{
-						if(rand.nextBoolean())
-						{
-							blockArray[var17+1] = (byte) biomegenbase.Layer1Type; 
-							metaArray[var17+1] = (byte)  biomegenbase.Layer1Meta;
-							if(rand.nextBoolean())
-							{
-								blockArray[var17+2] = (byte) biomegenbase.Layer1Type; 
-								metaArray[var17+2] = (byte)  biomegenbase.Layer1Meta;
-								if(rand.nextBoolean())
-								{
-									blockArray[var17+3] = (byte) biomegenbase.Layer1Type; 
-									metaArray[var17+3] = (byte)  biomegenbase.Layer1Meta;
-								}
-							}
-						}
-					}
-				}
-				else
-				{
-					blockArray[var17] = (byte) biomegenbase.SurfaceType; 
-					metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
-				}
-				if (var13 == -1)
-				{
-					if (var12 <= 0)
-					{
-						var14 = 0;
-
-					}
-					else if (height >= var5 - 4 && height <= var5 + 1)
-					{
-						var14 = biomegenbase.GrassID;
-						var15 =  biomegenbase.DirtID;
-					}
-
-					if (height < var5 && var14 == 0)
-					{
-						if (var11 < 0.15F)
-						{
-							var14 = Block.ice.blockID;
-						}
-						else
-						{
-							var14 = Block.waterStill.blockID;
-						}
-					}
-
-					var13 = var12;
-
-					if (height >= var5 - 1)
-					{
-						blockArray[var17] = (byte) var14;
-					}
-					else
-					{
-						blockArray[var17] = (byte) var15;
-						metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
-					}
-				}
-				else if (var13 > 0)
-				{
-					--var13;
-					blockArray[var17] = (byte) var15;
-					metaArray[var17] = (byte) biomegenbase.SurfaceMeta;
-
-					if (var13 == 0 && var15 == Block.sand.blockID)
-					{
-						var13 = rand.nextInt(4);
-						var15 = Block.sandStone.blockID;
-					}
-				}
-			}
-		}
-				}
-			}
-		}
 	}
 
 	public static void SurroundWithLeaves(World world, int i, int j, int k, int meta, Random R)

@@ -7,36 +7,106 @@ public class TFCSeasons
     public static String[] seasons = { "Early Spring","Spring","Late Spring", "Early Summer", "Summer", "Late Summer", "Early Autumn", "Autumn", "Late Autumn", "Early Winter", "Winter", "Late Winter"};
     public static String[] months  = { "March","April","May", "June", "July", "August", "September", "October", "November", "December", "January", "February"};
     public static String[] Days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    private static int currentSeason = 0;
+    
+    public static int currentDay = 0;
+    public static int currentMonth = 0;
+    public static int currentYear = 0;
+    private static long time = 0;
+    
+    public static final int January = 10;
+    public static final int February = 11;
+    public static final int March = 0;
+    public static final int April = 1;
+    public static final int May = 2;
+    public static final int June = 3;
+    public static final int July = 4;
+    public static final int August = 5;
+    public static final int September = 6;
+    public static final int October = 7;
+    public static final int November = 8;
+    public static final int December = 9;
+    
+    
+    public static void UpdateSeasons(World world)
+    {
+        time = world.getWorldInfo().getWorldTime();
+        currentMonth = getMonth();
+        currentYear = getYear();
+    }
     
     public static String getSeason()
     {
-        return seasons[0];
+        return seasons[getMonth()];
     }
     
-    public static int getDayOfWeek(World world)
+    public static long getTotalTicks()
     {
-        long t = world.getWorldInfo().getWorldTime();
-        long day = totalDays(world)+1;
+        return time;
+    }
+    
+    public static int getDayOfWeek()
+    {
+        long day = totalDays()+1;
         
         long days = day / 7;
         long days2 = day - (days*7);
         return (int)days2;
     }
     
-    public static long totalDays(World world)
+    public static int getDayOfMonth()
     {
-        long t = world.getWorldInfo().getWorldTime();
-        return (t/36000);
+        long month = totalMonths();
+        
+        long days = 30*month;
+        long days2 = totalDays() - days;
+        return 1+(int)days2;
     }
     
-    public static long totalMonths(World world)
+    public static int getDayOfYear()
     {
-        return totalDays(world) / 30;
+        long year = getYear();
+        
+        long years = 12960000*year;
+        long years2 = time - years;;
+        return (int) (years2/36000);
     }
     
-    public static long totalYears(World world)
+    public static int getMonth()
     {
-        return totalMonths(world) / 12;
+        long totalmonths = totalMonths();
+        long totalmonths2 = totalmonths / 12;
+        long totalmonths3 = totalmonths-(totalmonths2*12);
+        return (int)totalmonths3;
+    }
+    
+    public static int getYear()
+    {
+        long totalmonths = totalMonths();
+        long totalmonths2 = totalmonths / 12;
+        return (int)totalmonths2;
+    }
+    
+    public static long totalDays()
+    {
+        return (time/36000);
+    }
+    
+    public static long totalMonths()
+    {
+        return totalDays() / 30;
+    }
+    
+    public static long totalYears()
+    {
+        return totalMonths() / 12;
+    }
+    
+    public static long getHour()
+    {
+        long h = (time - ((time / 36000)*36000))/1500;
+        h -= 12;
+        if(h < 0)
+            h = 23+h;
+        return h;
     }
 }

@@ -1,6 +1,7 @@
 package net.minecraft.src.TFC_Core;
 
 import net.minecraft.src.*;
+import net.minecraft.src.TFC_Core.Blocks.BlockTerraIgInCobble;
 
 public class EntityFallingStone extends Entity
 {

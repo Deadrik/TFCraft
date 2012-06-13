@@ -27,7 +27,9 @@ public interface IProxy extends IGuiHandler {
 	
 	public abstract boolean renderWorldBlock(Object renderblocks, IBlockAccess iblockaccess, int i, int j, int k, Block block, int l);
 	
-	public abstract int blockColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
+	public abstract int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
+	
+	public abstract int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
 	
 	public abstract int blockGetMixedBrightnessForBlock(Block B, IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
 	
@@ -48,4 +50,8 @@ public interface IProxy extends IGuiHandler {
 	public abstract int getArmorRenderID(int i);
 	
 	public abstract boolean getGraphicsLevel();
+	
+	public abstract void registerKeys(BaseMod b);
+	
+	public abstract void keyboardEvent(Object e);
 }

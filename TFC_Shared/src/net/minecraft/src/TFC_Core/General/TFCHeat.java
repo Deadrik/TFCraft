@@ -41,7 +41,7 @@ public class TFCHeat
 		HeatRaw SilverRaw = new HeatRaw(0.72F, 961);
 		HeatRaw SteelRaw = new HeatRaw(0.63F, 1540, 3500);//sh = 0.63F; boil = 3500; melt = 1540;
 		HeatRaw SterlingSilverRaw = new HeatRaw(0.72F, 893, 2212);//sh = 0.72F; boil = 2212; melt = 893;
-		HeatRaw TinRaw = new HeatRaw(0.69F, 232);
+		HeatRaw TinRaw = new HeatRaw(.69F, 232);
 		HeatRaw ZincRaw = new HeatRaw(0.66F, 420, 907);//sh = 0.66F; boil = 907; melt = 420;
 		
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(30, 60));
@@ -54,12 +54,13 @@ public class TFCHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,7), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)).setMinMax(15, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,8), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)).setMinMax(15, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,9), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,10), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(25, 60));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,10), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(25, 60).setMorph(new ItemStack(TFCItems.OreChunk,1,37)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,11), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(15, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,12), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,1)).setMinMax(15, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,13), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(5, 20).setMorph(new ItemStack(TFCItems.OreChunk,1,36)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,35), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(10, 25));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,36), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(10, 40));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,37), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(1, 5));
 		
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakSteelUnshaped,1), SteelRaw,new ItemStack(TFCItems.WeakSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakRedSteelUnshaped,1), RedSteelRaw,new ItemStack(TFCItems.WeakRedSteelUnshaped,1)));
@@ -79,218 +80,218 @@ public class TFCHeat
 		
 		//Bismuth
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthIngot,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthIngot2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthIngot2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnshaped,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthSheet,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthSheet2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,4)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedHelmet,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedHelmet,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedChestplate,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedChestplate,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedGreaves,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedGreaves,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedBoots,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedBoots,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthSheet,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthSheet2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,4,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedHelmet,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedHelmet,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedChestplate,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedChestplate,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedGreaves,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedGreaves,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedBoots,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthUnfinishedBoots,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,2,0)));
         //Bismuth Bronze
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeIngot,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeIngot2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnshaped,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeSheet,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeSheet2x,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots,1,0), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots,1,1), BismuthRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeIngot,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeIngot2x,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnshaped,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeSheet,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeSheet2x,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet,1,0), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedHelmet,1,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate,1,0), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedChestplate,1,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves,1,0), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedGreaves,1,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots,1,0), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthBronzeUnfinishedBoots,1,1), BismuthBronzeRaw,new ItemStack(TFCItems.BismuthBronzeUnshaped,2,0)));
         //Black Bronze
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeIngot,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeIngot2x,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeIngot2x,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnshaped,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeSheet,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeSheet2x,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedBoots,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedBoots,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeSheet,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeSheet2x,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedHelmet,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedChestplate,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedGreaves,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedBoots,1,0), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackBronzeUnfinishedBoots,1,1), BlackBronzeRaw,new ItemStack(TFCItems.BlackBronzeUnshaped,2,0)));
         //Black Steel
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelIngot,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelIngot2x,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelIngot2x,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnshaped,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelSheet,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelSheet2x,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedHelmet,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedHelmet,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedChestplate,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedChestplate,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedGreaves,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedGreaves,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedBoots,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedBoots,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelSheet,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelSheet2x,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedHelmet,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedHelmet,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedChestplate,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedChestplate,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedGreaves,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedGreaves,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedBoots,1,0), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlackSteelUnfinishedBoots,1,1), BlackSteelRaw,new ItemStack(TFCItems.BlackSteelUnshaped,2,0)));
         //Blue Steel
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelIngot,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelIngot2x,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelIngot2x,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnshaped,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelSheet,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelSheet2x,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedHelmet,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedHelmet,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedChestplate,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedChestplate,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedGreaves,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedGreaves,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedBoots,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedBoots,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelSheet,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelSheet2x,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedHelmet,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedHelmet,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedChestplate,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedChestplate,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedGreaves,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedGreaves,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedBoots,1,0), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BlueSteelUnfinishedBoots,1,1), BlueSteelRaw,new ItemStack(TFCItems.BlueSteelUnshaped,2,0)));
         //Brass
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassIngot,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassIngot2x,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassIngot2x,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BrassUnshaped,1), BrassRaw,new ItemStack(TFCItems.BrassUnshaped,1)));
         //Bronze
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeIngot,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeIngot2x,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeIngot2x,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnshaped,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeSheet,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeSheet2x,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedHelmet,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedHelmet,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedChestplate,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedChestplate,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedGreaves,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedGreaves,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedBoots,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedBoots,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeSheet,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeSheet2x,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedHelmet,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedHelmet,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedChestplate,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedChestplate,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedGreaves,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedGreaves,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedBoots,1,0), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BronzeUnfinishedBoots,1,1), BronzeRaw,new ItemStack(TFCItems.BronzeUnshaped,2,0)));
         //Copper
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperIngot,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperIngot2x,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperIngot2x,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnshaped,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperSheet,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperSheet2x,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedHelmet,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedHelmet,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedChestplate,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedChestplate,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedGreaves,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedGreaves,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedBoots,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedBoots,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperSheet,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperSheet2x,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedHelmet,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedHelmet,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedChestplate,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedChestplate,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedGreaves,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedGreaves,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedBoots,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CopperUnfinishedBoots,1,1), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,2,0)));
         //Gold
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldIngot,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldIngot2x,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldIngot2x,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldUnshaped,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)));
         //Wrought Iron
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnshaped,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronSheet,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronSheet2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedHelmet,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedHelmet,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedChestplate,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedChestplate,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronSheet,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronSheet2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedHelmet,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedHelmet,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedChestplate,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedChestplate,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedGreaves,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,0), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnfinishedBoots,1,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
         //Lead
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadIngot,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadIngot2x,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadIngot2x,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.LeadUnshaped,1), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)));
         //Nickel
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelIngot,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelIngot2x,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelIngot2x,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.NickelUnshaped,1), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)));
         //Pig Iron
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronIngot,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronIngot2x,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronIngot2x,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PigIronUnshaped,1), PigIronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)));
         //Platinum
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumIngot,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumIngot2x,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumIngot2x,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.PlatinumUnshaped,1), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)));
         //Red Steel
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelIngot,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelIngot2x,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelIngot2x,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnshaped,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelSheet,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelSheet2x,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedHelmet,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedHelmet,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedChestplate,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedChestplate,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedGreaves,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedGreaves,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelSheet,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelSheet2x,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedHelmet,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedHelmet,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedChestplate,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedChestplate,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedGreaves,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedGreaves,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,0), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RedSteelUnfinishedBoots,1,1), RedSteelRaw,new ItemStack(TFCItems.RedSteelUnshaped,2,0)));
         //Rose Gold
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldIngot,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldIngot2x,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldIngot2x,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnshaped,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldSheet,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldSheet2x,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedHelmet,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedHelmet,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedChestplate,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedChestplate,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedGreaves,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedGreaves,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedBoots,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedBoots,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldSheet,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldSheet2x,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedHelmet,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedHelmet,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedChestplate,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedChestplate,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedGreaves,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedGreaves,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedBoots,1,0), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RoseGoldUnfinishedBoots,1,1), RoseGoldRaw,new ItemStack(TFCItems.RoseGoldUnshaped,2,0)));
         //Silver
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverIngot,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverIngot2x,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverIngot2x,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SilverUnshaped,1), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)));
         //Steel
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelIngot,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelIngot2x,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelIngot2x,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnshaped,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelSheet,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelSheet2x,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedHelmet,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedHelmet,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedChestplate,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedChestplate,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedGreaves,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedGreaves,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedBoots,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedBoots,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelSheet,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelSheet2x,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedHelmet,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedHelmet,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedChestplate,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedChestplate,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedGreaves,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedGreaves,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedBoots,1,0), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SteelUnfinishedBoots,1,1), SteelRaw,new ItemStack(TFCItems.SteelUnshaped,2,0)));
         //Sterling Silver
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverIngot,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverIngot2x,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverIngot2x,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SterlingSilverUnshaped,1), SterlingSilverRaw,new ItemStack(TFCItems.SterlingSilverUnshaped,1)));
         //Tin
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinIngot,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinIngot2x,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnshaped,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinSheet,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinSheet2x,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedHelmet,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedHelmet,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedChestplate,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedChestplate,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedGreaves,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedGreaves,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedBoots,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedBoots,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinIngot2x,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnshaped,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)).setMorph(new ItemStack(TFCItems.terraCeramicMold,1)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinSheet,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinSheet2x,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedHelmet,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedHelmet,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedChestplate,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedChestplate,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedGreaves,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedGreaves,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedBoots,1,0), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.TinUnfinishedBoots,1,1), TinRaw,new ItemStack(TFCItems.TinUnshaped,2,0)));
         //Zinc
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincIngot,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincIngot2x,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincIngot2x,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnshaped,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,1)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet2x,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedHelmet,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedHelmet,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedChestplate,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedChestplate,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedGreaves,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedGreaves,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedBoots,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
-        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedBoots,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincSheet2x,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedHelmet,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedHelmet,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedChestplate,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedChestplate,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,4,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedGreaves,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedGreaves,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedBoots,1,0), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ZincUnfinishedBoots,1,1), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,2,0)));
         //Ceramics
         HeatRaw ClayRaw = new HeatRaw(1.40F, 515.5F);
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.terraClayMold,1,1), ClayRaw,new ItemStack(TFCItems.terraCeramicMold, 1)));
@@ -323,7 +324,7 @@ public class TFCHeat
 		{
 			if(temp < 80)
 			{
-				phrase = "Warm";
+				phrase = "Warming";
 				if(temp>(80 * 0.2)) phrase = phrase + "*";
 				if(temp>(80 * 0.4)) phrase = phrase + "*";
 				if(temp>(80 * 0.6)) phrase = phrase + "*";
@@ -576,9 +577,9 @@ public class TFCHeat
 
 	}
 
-	public static float getTempIncrease(ItemStack is, float itemTemp, float fireTemp)
+	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
-		return 0.35F * getSpecificHeat(is);
+		return (0.60F * (fireTemp / fireMaxTemp)) * getSpecificHeat(is);
 	}
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
@@ -589,12 +590,13 @@ public class TFCHeat
 
 		for(int i = 0; i < inventory.length; i++)
 		{
+		    if(inventory[i] != null && inventory[i].stackSize <= 0) 
+		    {
+                inventory[i].stackSize = 1;
+            }
+		    
 			if(inventory[i] != null && inventory[i].hasTagCompound())
 			{
-				if(inventory[i].stackSize <= 0) {
-					inventory[i].stackSize = 0;
-				}
-
 				NBTTagCompound comp = inventory[i].getTagCompound();
 				if(comp.hasKey("temperature"))
 				{

@@ -5,7 +5,7 @@
  import java.util.Random;
  
 +import net.minecraft.src.TFC_Core.TFC_Core;
-+import net.minecraft.src.TFC_Core.WorldGenLakesTFC;
++import net.minecraft.src.TFC_Core.Custom.*;
 +import net.minecraft.src.TFC_Core.Custom.TFC_ChunkProviderGenerate;
 +
  public class ChunkProviderGenerate implements IChunkProvider

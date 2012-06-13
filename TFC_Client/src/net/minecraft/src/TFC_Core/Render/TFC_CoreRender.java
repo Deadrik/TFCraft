@@ -1,0 +1,3850 @@
+package net.minecraft.src.TFC_Core.Render;
+
+import java.util.Random;
+
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.Block;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.RenderBlocks;
+import net.minecraft.src.Tessellator;
+import net.minecraft.src.World;
+import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.TFC_Core.TFCSeasons;
+import net.minecraft.src.TFC_Core.TileEntityFruitTreeWood;
+import net.minecraft.src.TFC_Core.Blocks.BlockTerraAnvil;
+import net.minecraft.src.TFC_Core.Blocks.BlockTerraBellows;
+import net.minecraft.src.TFC_Core.Blocks.BlockTerraSluice;
+
+public class TFC_CoreRender 
+{
+    public static boolean RenderGrass(Block block, int par2, int par3, int par4, 
+            float par5, float par6, float par7, RenderBlocks renderblocks)
+    {
+        renderblocks.enableAO = true;
+        boolean var8 = false;
+        float var9 = renderblocks.lightValueOwn;
+        float var10 = renderblocks.lightValueOwn;
+        float var11 = renderblocks.lightValueOwn;
+        float var12 = renderblocks.lightValueOwn;
+        boolean var13 = true;
+        boolean var14 = true;
+        boolean var15 = true;
+        boolean var16 = true;
+        boolean var17 = true;
+        boolean var18 = true;
+        renderblocks.lightValueOwn = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4);
+        renderblocks.aoLightValueXNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4);
+        renderblocks.aoLightValueYNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4);
+        renderblocks.aoLightValueZNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 - 1);
+        renderblocks.aoLightValueXPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4);
+        renderblocks.aoLightValueYPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4);
+        renderblocks.aoLightValueZPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 + 1);
+        int var19 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4);
+        int var20 = var19;
+        int var21 = var19;
+        int var22 = var19;
+        int var23 = var19;
+        int var24 = var19;
+        int var25 = var19;
+
+        int BGTex = renderblocks.blockAccess.getBlockId(par2, par3+1, par4) == Block.snow.blockID ? 253 : 255;
+
+        if (block.minY <= 0.0D)
+        {
+            var21 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4);
+        }
+
+        if (block.maxY >= 1.0D)
+        {
+            var24 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4);
+        }
+
+        if (block.minX <= 0.0D)
+        {
+            var20 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4);
+        }
+
+        if (block.maxX >= 1.0D)
+        {
+            var23 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4);
+        }
+
+        if (block.minZ <= 0.0D)
+        {
+            var22 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1);
+        }
+
+        if (block.maxZ >= 1.0D)
+        {
+            var25 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1);
+        }
+
+        Tessellator tesselator = Tessellator.instance;
+        tesselator.setBrightness(983055);
+        renderblocks.aoGrassXYZPPC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 + 1, par3 + 1, par4)];
+        renderblocks.aoGrassXYZPNC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 + 1, par3 - 1, par4)];
+        renderblocks.aoGrassXYZPCP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 + 1, par3, par4 + 1)];
+        renderblocks.aoGrassXYZPCN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 + 1, par3, par4 - 1)];
+        renderblocks.aoGrassXYZNPC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 - 1, par3 + 1, par4)];
+        renderblocks.aoGrassXYZNNC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 - 1, par3 - 1, par4)];
+        renderblocks.aoGrassXYZNCN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 - 1, par3, par4 - 1)];
+        renderblocks.aoGrassXYZNCP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2 - 1, par3, par4 + 1)];
+        renderblocks.aoGrassXYZCPP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2, par3 + 1, par4 + 1)];
+        renderblocks.aoGrassXYZCPN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2, par3 + 1, par4 - 1)];
+        renderblocks.aoGrassXYZCNP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2, par3 - 1, par4 + 1)];
+        renderblocks.aoGrassXYZCNN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(par2, par3 - 1, par4 - 1)];
+
+        if (block.blockIndexInTexture != 255)
+        {
+            var18 = false;
+            var17 = false;
+            var16 = false;
+            var15 = false;
+            var13 = false;
+        }
+        else
+        {
+            var18 = true;
+            var17 = true;
+            var16 = true;
+            var15 = true;
+            var13 = true;
+        }
+
+        if (renderblocks.overrideBlockTexture >= 0)
+        {
+            var18 = false;
+            var17 = false;
+            var16 = false;
+            var15 = false;
+            var13 = false;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 - 1, par4, 0))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minY <= 0.0D)
+                {
+                    --par3;
+                }
+
+                renderblocks.aoBrightnessXYNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoBrightnessYZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoBrightnessYZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoBrightnessXYPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4);
+                renderblocks.aoLightValueScratchXYNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoLightValueScratchYZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoLightValueScratchYZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoLightValueScratchXYPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4);
+
+                if (!renderblocks.aoGrassXYZCNN && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXYNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXYNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4 - 1);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNP && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXYNN;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXYNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4 + 1);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4 + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNN && !renderblocks.aoGrassXYZPNC)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXYPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXYPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4 - 1);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNP && !renderblocks.aoGrassXYZPNC)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXYPN;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXYPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4 + 1);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4 + 1);
+                }
+
+                if (block.minY <= 0.0D)
+                {
+                    ++par3;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueYNeg) / 4.0F;
+                var12 = (renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueScratchXYPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXYZPNN) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchYZNN) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessYZNP, var21);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNP, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXYPN, var21);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNN, renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXYZPNN, var21);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessYZNN, var21);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueYNeg;
+                var11 = renderblocks.aoLightValueYNeg;
+                var10 = renderblocks.aoLightValueYNeg;
+                var9 = renderblocks.aoLightValueYNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = renderblocks.aoBrightnessXYNN;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var13 ? par5 : 1.0F) * 0.5F;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var13 ? par6 : 1.0F) * 0.5F;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var13 ? par7 : 1.0F) * 0.5F;
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderBottomFace(block, (double)par2, (double)par3, (double)par4, block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 0));
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 + 1, par4, 1))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxY >= 1.0D)
+                {
+                    ++par3;
+                }
+
+                renderblocks.aoBrightnessXYNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoBrightnessXYPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4);
+                renderblocks.aoBrightnessYZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoBrightnessYZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoLightValueScratchXYNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoLightValueScratchXYPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4);
+                renderblocks.aoLightValueScratchYZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoLightValueScratchYZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 + 1);
+
+                if (!renderblocks.aoGrassXYZCPN && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXYNP;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXYNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4 - 1);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPN && !renderblocks.aoGrassXYZPPC)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXYPP;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXYPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4 - 1);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPP && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXYNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXYNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4 + 1);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4 + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPP && !renderblocks.aoGrassXYZPPC)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXYPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXYPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4 + 1);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4 + 1);
+                }
+
+                if (block.maxY >= 1.0D)
+                {
+                    --par3;
+                }
+
+                var12 = (renderblocks.aoLightValueScratchXYZNPP + renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueYPos) / 4.0F;
+                var9 = (renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchXYZPPP + renderblocks.aoLightValueScratchXYPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchYZPN + renderblocks.aoLightValueScratchXYPP + renderblocks.aoLightValueScratchXYZPPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchYZPN) / 4.0F;
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNPP, renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessYZPP, var24);
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPP, renderblocks.aoBrightnessXYZPPP, renderblocks.aoBrightnessXYPP, var24);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPN, renderblocks.aoBrightnessXYPP, renderblocks.aoBrightnessXYZPPN, var24);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessYZPN, var24);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueYPos;
+                var11 = renderblocks.aoLightValueYPos;
+                var10 = renderblocks.aoLightValueYPos;
+                var9 = renderblocks.aoLightValueYPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var24;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = var14 ? par5 : 1.0F;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = var14 ? par6 : 1.0F;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = var14 ? par7 : 1.0F;
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderTopFace(block, (double)par2, (double)par3, (double)par4, block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 1));
+            var8 = true;
+        }
+
+        int var27;
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 - 1, 2))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minZ <= 0.0D)
+                {
+                    --par4;
+                }
+
+                renderblocks.aoLightValueScratchXZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoLightValueScratchYZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoLightValueScratchYZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4);
+                renderblocks.aoLightValueScratchXZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4);
+                renderblocks.aoBrightnessXZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoBrightnessYZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoBrightnessYZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4);
+                renderblocks.aoBrightnessXZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4);
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZCNN)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3 - 1, par4);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3 - 1, par4);
+                }
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZCPN)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3 + 1, par4);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3 + 1, par4);
+                }
+
+                if (!renderblocks.aoGrassXYZPCN && !renderblocks.aoGrassXYZCNN)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3 - 1, par4);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3 - 1, par4);
+                }
+
+                if (!renderblocks.aoGrassXYZPCN && !renderblocks.aoGrassXYZCPN)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3 + 1, par4);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3 + 1, par4);
+                }
+
+                if (block.minZ <= 0.0D)
+                {
+                    ++par4;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchYZPN) / 4.0F;
+                var10 = (renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchYZPN + renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueScratchXYZPPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchXYZPNN + renderblocks.aoLightValueScratchXZPN) / 4.0F;
+                var12 = (renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueZNeg) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessYZPN, var22);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPN, renderblocks.aoBrightnessXZPN, renderblocks.aoBrightnessXYZPPN, var22);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNN, renderblocks.aoBrightnessXYZPNN, renderblocks.aoBrightnessXZPN, var22);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessYZNN, var22);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueZNeg;
+                var11 = renderblocks.aoLightValueZNeg;
+                var10 = renderblocks.aoLightValueZNeg;
+                var9 = renderblocks.aoLightValueZNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var22;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var15 ? par5 : 1.0F) * 0.8F;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var15 ? par6 : 1.0F) * 0.8F;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var15 ? par7 : 1.0F) * 0.8F;
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            var27 = block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 2);
+            renderblocks.renderEastFace(block, (double)par2, (double)par3, (double)par4, var27);
+
+            if (var27 != 255)
+            {
+                renderblocks.colorRedTopLeft *= par5;
+                renderblocks.colorRedBottomLeft *= par5;
+                renderblocks.colorRedBottomRight *= par5;
+                renderblocks.colorRedTopRight *= par5;
+                renderblocks.colorGreenTopLeft *= par6;
+                renderblocks.colorGreenBottomLeft *= par6;
+                renderblocks.colorGreenBottomRight *= par6;
+                renderblocks.colorGreenTopRight *= par6;
+                renderblocks.colorBlueTopLeft *= par7;
+                renderblocks.colorBlueBottomLeft *= par7;
+                renderblocks.colorBlueBottomRight *= par7;
+                renderblocks.colorBlueTopRight *= par7;
+                renderblocks.renderEastFace(block, (double)par2, (double)par3, (double)par4, 254);
+            }
+            else
+            {
+                if(BGTex == 255)
+                {
+                    renderblocks.colorRedTopLeft *= par5;
+                    renderblocks.colorRedBottomLeft *= par5;
+                    renderblocks.colorRedBottomRight *= par5;
+                    renderblocks.colorRedTopRight *= par5;
+                    renderblocks.colorGreenTopLeft *= par6;
+                    renderblocks.colorGreenBottomLeft *= par6;
+                    renderblocks.colorGreenBottomRight *= par6;
+                    renderblocks.colorGreenTopRight *= par6;
+                    renderblocks.colorBlueTopLeft *= par7;
+                    renderblocks.colorBlueBottomLeft *= par7;
+                    renderblocks.colorBlueBottomRight *= par7;
+                    renderblocks.colorBlueTopRight *= par7;
+                }
+                renderblocks.renderEastFace(block, (double)par2, (double)par3, (double)par4, BGTex);
+            }
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 + 1, 3))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxZ >= 1.0D)
+                {
+                    ++par4;
+                }
+
+                renderblocks.aoLightValueScratchXZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoLightValueScratchXZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3, par4);
+                renderblocks.aoLightValueScratchYZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoLightValueScratchYZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4);
+                renderblocks.aoBrightnessXZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4);
+                renderblocks.aoBrightnessXZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4);
+                renderblocks.aoBrightnessYZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoBrightnessYZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4);
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZCNP)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3 - 1, par4);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3 - 1, par4);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZCPP)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 - 1, par3 + 1, par4);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3 + 1, par4);
+                }
+
+                if (!renderblocks.aoGrassXYZPCP && !renderblocks.aoGrassXYZCNP)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3 - 1, par4);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3 - 1, par4);
+                }
+
+                if (!renderblocks.aoGrassXYZPCP && !renderblocks.aoGrassXYZCPP)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2 + 1, par3 + 1, par4);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3 + 1, par4);
+                }
+
+                if (block.maxZ >= 1.0D)
+                {
+                    --par4;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchXYZNPP + renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchYZPP) / 4.0F;
+                var12 = (renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueScratchXZPP + renderblocks.aoLightValueScratchXYZPPP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueScratchXZPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueZPos) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessXYZNPP, renderblocks.aoBrightnessYZPP, var25);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPP, renderblocks.aoBrightnessXZPP, renderblocks.aoBrightnessXYZPPP, var25);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNP, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXZPP, var25);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessYZNP, var25);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueZPos;
+                var11 = renderblocks.aoLightValueZPos;
+                var10 = renderblocks.aoLightValueZPos;
+                var9 = renderblocks.aoLightValueZPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var25;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var16 ? par5 : 1.0F) * 0.8F;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var16 ? par6 : 1.0F) * 0.8F;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var16 ? par7 : 1.0F) * 0.8F;
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            var27 = block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 3);
+            renderblocks.renderWestFace(block, (double)par2, (double)par3, (double)par4, block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 3));
+
+            if (var27 != 255)
+            {
+                renderblocks.colorRedTopLeft *= par5;
+                renderblocks.colorRedBottomLeft *= par5;
+                renderblocks.colorRedBottomRight *= par5;
+                renderblocks.colorRedTopRight *= par5;
+                renderblocks.colorGreenTopLeft *= par6;
+                renderblocks.colorGreenBottomLeft *= par6;
+                renderblocks.colorGreenBottomRight *= par6;
+                renderblocks.colorGreenTopRight *= par6;
+                renderblocks.colorBlueTopLeft *= par7;
+                renderblocks.colorBlueBottomLeft *= par7;
+                renderblocks.colorBlueBottomRight *= par7;
+                renderblocks.colorBlueTopRight *= par7;
+                renderblocks.renderWestFace(block, (double)par2, (double)par3, (double)par4, 254);
+            }
+            else
+            {
+                if(BGTex == 255)
+                {
+                    renderblocks.colorRedTopLeft *= par5;
+                    renderblocks.colorRedBottomLeft *= par5;
+                    renderblocks.colorRedBottomRight *= par5;
+                    renderblocks.colorRedTopRight *= par5;
+                    renderblocks.colorGreenTopLeft *= par6;
+                    renderblocks.colorGreenBottomLeft *= par6;
+                    renderblocks.colorGreenBottomRight *= par6;
+                    renderblocks.colorGreenTopRight *= par6;
+                    renderblocks.colorBlueTopLeft *= par7;
+                    renderblocks.colorBlueBottomLeft *= par7;
+                    renderblocks.colorBlueBottomRight *= par7;
+                    renderblocks.colorBlueTopRight *= par7;
+                }
+                renderblocks.renderWestFace(block, (double)par2, (double)par3, (double)par4, BGTex);
+            }
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, par2 - 1, par3, par4, 4))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minX <= 0.0D)
+                {
+                    --par2;
+                }
+
+                renderblocks.aoLightValueScratchXYNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoLightValueScratchXZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoLightValueScratchXZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoLightValueScratchXYNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4);
+                renderblocks.aoBrightnessXYNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoBrightnessXZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoBrightnessXZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoBrightnessXYNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4);
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4 - 1);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4 + 1);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4 + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4 - 1);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4 + 1);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4 + 1);
+                }
+
+                if (block.minX <= 0.0D)
+                {
+                    ++par2;
+                }
+
+                var12 = (renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXZNP) / 4.0F;
+                var9 = (renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchXYZNPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueScratchXYNP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueXNeg) / 4.0F;
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXZNP, var20);
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessXYZNPP, var20);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessXYNP, var20);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXZNN, var20);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueXNeg;
+                var11 = renderblocks.aoLightValueXNeg;
+                var10 = renderblocks.aoLightValueXNeg;
+                var9 = renderblocks.aoLightValueXNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var20;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var17 ? par5 : 1.0F) * 0.6F;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var17 ? par6 : 1.0F) * 0.6F;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var17 ? par7 : 1.0F) * 0.6F;
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            var27 = block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 4);
+            renderblocks.renderNorthFace(block, (double)par2, (double)par3, (double)par4, var27);
+
+            if (var27 != 255)
+            {
+                renderblocks.colorRedTopLeft *= par5;
+                renderblocks.colorRedBottomLeft *= par5;
+                renderblocks.colorRedBottomRight *= par5;
+                renderblocks.colorRedTopRight *= par5;
+                renderblocks.colorGreenTopLeft *= par6;
+                renderblocks.colorGreenBottomLeft *= par6;
+                renderblocks.colorGreenBottomRight *= par6;
+                renderblocks.colorGreenTopRight *= par6;
+                renderblocks.colorBlueTopLeft *= par7;
+                renderblocks.colorBlueBottomLeft *= par7;
+                renderblocks.colorBlueBottomRight *= par7;
+                renderblocks.colorBlueTopRight *= par7;
+                renderblocks.renderNorthFace(block, (double)par2, (double)par3, (double)par4, 254);
+            }
+            else
+            {
+                if(BGTex == 255)
+                {
+                    renderblocks.colorRedTopLeft *= par5;
+                    renderblocks.colorRedBottomLeft *= par5;
+                    renderblocks.colorRedBottomRight *= par5;
+                    renderblocks.colorRedTopRight *= par5;
+                    renderblocks.colorGreenTopLeft *= par6;
+                    renderblocks.colorGreenBottomLeft *= par6;
+                    renderblocks.colorGreenBottomRight *= par6;
+                    renderblocks.colorGreenTopRight *= par6;
+                    renderblocks.colorBlueTopLeft *= par7;
+                    renderblocks.colorBlueBottomLeft *= par7;
+                    renderblocks.colorBlueBottomRight *= par7;
+                    renderblocks.colorBlueTopRight *= par7;
+                }
+                renderblocks.renderNorthFace(block, (double)par2, (double)par3, (double)par4, BGTex);
+            }
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, par2 + 1, par3, par4, 5))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxX >= 1.0D)
+                {
+                    ++par2;
+                }
+
+                renderblocks.aoLightValueScratchXYPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoLightValueScratchXZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoLightValueScratchXZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoLightValueScratchXYPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4);
+                renderblocks.aoBrightnessXYPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4);
+                renderblocks.aoBrightnessXZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1);
+                renderblocks.aoBrightnessXZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1);
+                renderblocks.aoBrightnessXYPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4);
+
+                if (!renderblocks.aoGrassXYZPNC && !renderblocks.aoGrassXYZPCN)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4 - 1);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPNC && !renderblocks.aoGrassXYZPCP)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 - 1, par4 + 1);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4 + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPPC && !renderblocks.aoGrassXYZPCN)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4 - 1);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4 - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPPC && !renderblocks.aoGrassXYZPCP)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, par2, par3 + 1, par4 + 1);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4 + 1);
+                }
+
+                if (block.maxX >= 1.0D)
+                {
+                    --par2;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXZPP) / 4.0F;
+                var12 = (renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXZPP + renderblocks.aoLightValueScratchXYPP + renderblocks.aoLightValueScratchXYZPPP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXYZPPN + renderblocks.aoLightValueScratchXYPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYZPNN + renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueXPos) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXZPP, var23);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZPP, renderblocks.aoBrightnessXYPP, renderblocks.aoBrightnessXYZPPP, var23);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZPN, renderblocks.aoBrightnessXYZPPN, renderblocks.aoBrightnessXYPP, var23);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZPNN, renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXZPN, var23);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueXPos;
+                var11 = renderblocks.aoLightValueXPos;
+                var10 = renderblocks.aoLightValueXPos;
+                var9 = renderblocks.aoLightValueXPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var23;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * 0.6F;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * 0.6F;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * 0.6F;
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            var27 = block.getBlockTexture(renderblocks.blockAccess, par2, par3, par4, 5);
+            renderblocks.renderSouthFace(block, (double)par2, (double)par3, (double)par4, var27);
+
+            if (var27 != 255)
+            {
+                renderblocks.colorRedTopLeft *= par5;
+                renderblocks.colorRedBottomLeft *= par5;
+                renderblocks.colorRedBottomRight *= par5;
+                renderblocks.colorRedTopRight *= par5;
+                renderblocks.colorGreenTopLeft *= par6;
+                renderblocks.colorGreenBottomLeft *= par6;
+                renderblocks.colorGreenBottomRight *= par6;
+                renderblocks.colorGreenTopRight *= par6;
+                renderblocks.colorBlueTopLeft *= par7;
+                renderblocks.colorBlueBottomLeft *= par7;
+                renderblocks.colorBlueBottomRight *= par7;
+                renderblocks.colorBlueTopRight *= par7;
+                renderblocks.renderSouthFace(block, (double)par2, (double)par3, (double)par4, 254);
+            }
+            else
+            {
+                if(BGTex == 255)
+                {
+                    renderblocks.colorRedTopLeft *= par5;
+                    renderblocks.colorRedBottomLeft *= par5;
+                    renderblocks.colorRedBottomRight *= par5;
+                    renderblocks.colorRedTopRight *= par5;
+                    renderblocks.colorGreenTopLeft *= par6;
+                    renderblocks.colorGreenBottomLeft *= par6;
+                    renderblocks.colorGreenBottomRight *= par6;
+                    renderblocks.colorGreenTopRight *= par6;
+                    renderblocks.colorBlueTopLeft *= par7;
+                    renderblocks.colorBlueBottomLeft *= par7;
+                    renderblocks.colorBlueBottomRight *= par7;
+                    renderblocks.colorBlueTopRight *= par7;
+                }
+                renderblocks.renderSouthFace(block, (double)par2, (double)par3, (double)par4, BGTex);
+            }
+
+            var8 = true;
+        }
+
+        renderblocks.enableAO = false;
+        return var8;
+    }
+
+    public static boolean RenderSulfur(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+        if(blockAccess.isBlockNormalCube(i, j, k+1) && blockAccess.getBlockId(i, j, k+1) != block.blockID)
+        {
+            block.setBlockBounds(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+        }
+        if(blockAccess.isBlockNormalCube(i, j, k-1) && blockAccess.getBlockId(i, j, k-1) != block.blockID)
+        {
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+        }
+        if(blockAccess.isBlockNormalCube(i+1, j, k) && blockAccess.getBlockId(i+1, j, k) != block.blockID)
+        {
+            block.setBlockBounds(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+        }
+        if(blockAccess.isBlockNormalCube(i-1, j, k) && blockAccess.getBlockId(i-1, j, k) != block.blockID)
+        {
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+        }
+        if(blockAccess.isBlockNormalCube(i, j+1, k) && blockAccess.getBlockId(i, j+1, k) != block.blockID)
+        {
+            block.setBlockBounds(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+        }
+        if(blockAccess.isBlockNormalCube(i, j-1, k) && blockAccess.getBlockId(i, j-1, k) != block.blockID)
+        {
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+        }
+
+        return true;
+    }
+
+    public static boolean RenderSnow(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
+
+        float drift = 0.04F + (meta * 0.06F);
+
+        block.setBlockBounds(0.0F, 0.0F, 0F, 1.0F, drift, 1.0F);
+        renderblocks.renderStandardBlock(block, i, j, k);
+        return true;
+    }
+
+    public static boolean RenderWoodTrunk(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        if(true/*blockAccess.getBlockMaterial(i, j+1, k) == Material.leaves || blockAccess.getBlockMaterial(i, j-1, k) == Material.leaves || 
+                blockAccess.getBlockId(i, j+1, k) == mod_TFC_Core.fruitTreeWood.blockID || blockAccess.getBlockId(i, j-1, k) == mod_TFC_Core.fruitTreeWood.blockID*/)
+        {
+            if(blockAccess.getBlockTileEntity(i, j, k) != null && (blockAccess.getBlockId(i, j-1, k) == mod_TFC_Core.fruitTreeWood.blockID || blockAccess.isBlockOpaqueCube(i, j-1, k)))
+            {
+                block.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            if(blockAccess.getBlockMaterial(i-1, j, k) == Material.leaves || blockAccess.getBlockId(i-1, j, k) == mod_TFC_Core.fruitTreeWood.blockID)
+            {
+                block.setBlockBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            if(blockAccess.getBlockMaterial(i+1, j, k) == Material.leaves || blockAccess.getBlockId(i+1, j, k) == mod_TFC_Core.fruitTreeWood.blockID)
+            {
+                block.setBlockBounds(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            if(blockAccess.getBlockMaterial(i, j, k-1) == Material.leaves || blockAccess.getBlockId(i, j, k-1) == mod_TFC_Core.fruitTreeWood.blockID)
+            {
+                block.setBlockBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            if(blockAccess.getBlockMaterial(i, j, k+1) == Material.leaves || blockAccess.getBlockId(i, j, k+1) == mod_TFC_Core.fruitTreeWood.blockID)
+            {
+                block.setBlockBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+        }
+
+        if(!((TileEntityFruitTreeWood)blockAccess.getBlockTileEntity(i, j, k)).isTrunk && blockAccess.getBlockId(i, j-1, k) != mod_TFC_Core.fruitTreeWood.blockID && !blockAccess.isBlockOpaqueCube(i, j-1, k))
+        {
+
+            block.setBlockBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+        }
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
+        return true;
+    }
+
+    public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(i, k);
+
+        int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
+        Random R = new Random(meta+i*k);
+
+        renderblocks.overrideBlockTexture = getRockTexture(j,biome);
+
+        block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
+        renderblocks.renderStandardBlock(block, i, j, k);
+        block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
+
+
+        renderblocks.overrideBlockTexture = -1;
+        return false;
+    }
+
+    public static boolean RenderWoodSupportBeamH(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        int supportIDv = mod_TFC_Core.terraWoodSupportV.blockID;
+        int supportIDh = mod_TFC_Core.terraWoodSupportH.blockID;
+
+        Boolean hasVerticalBeam = false;
+        Boolean hasHorizontalBeamX = false;
+        Boolean hasHorizontalBeamZ = false;
+
+        //if the block directly beneath is a Vertical Support
+        if((blockAccess.getBlockId(i, j-1, k) == supportIDv))
+        {	
+            block.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            hasVerticalBeam = true;
+        }
+
+        //X
+        if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
+        {
+            if((blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                    block.setBlockBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else if(!hasVerticalBeam)//if the block does not contain a vertical beam
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamX = true;
+            }
+            else//if there is only a beam at the negative x and not the positive x
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamX = true;
+            }
+        }
+        else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
+        {
+            if(hasVerticalBeam)//if the block does contain a vertical beam
+            {
+                block.setBlockBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            else
+            {
+                block.setBlockBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            hasHorizontalBeamX = true;
+        }
+        //Z
+        if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
+        {
+            if((blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                    block.setBlockBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else if(!hasVerticalBeam)//if the block does not contain a vertical beam
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamZ = true;
+            }
+            else//if there is only a beam at the negative x and not the positive x
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamZ = true;
+            }
+        }
+        else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
+        {
+            if(hasVerticalBeam)//if the block does contain a vertical beam
+            {
+                block.setBlockBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            else
+            {
+                block.setBlockBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            hasHorizontalBeamZ = true;
+        }
+
+        float minX = -1;
+        float minY = -1;
+        float minZ = -1;
+
+        float maxX = -1;
+        float maxY = -1;
+        float maxZ = -1;
+
+        if(hasHorizontalBeamX)
+        {
+            minX = 0F;
+            maxX = 1F;
+            minZ = 0.25F;
+            maxZ = 0.75F;
+        }
+        if(hasHorizontalBeamZ)
+        {
+            if(maxX == -1)
+            {
+                minX = 0.25F;
+                maxX = 0.75F;
+            }
+
+            minZ = 0F;
+            maxZ = 1F;
+
+        }
+        if(hasVerticalBeam)
+        {
+            minY = 0F;
+            maxY = 1F;
+            if(maxX == -1)
+            {
+                minX = 0.25F;
+                maxX = 0.75F;
+            }
+            if(maxZ == -1)
+            {
+                minZ = 0.25F;
+                maxZ = 0.75F;
+            }
+        }
+        else
+        {
+            minY = 0.5F;
+            maxY = 1F;
+        }
+
+        block.setBlockBounds(minX,minY, minZ, maxX, maxY, maxZ);
+
+        return true;
+    }
+
+    public static boolean RenderWoodSupportBeamV(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        int supportIDv = mod_TFC_Core.terraWoodSupportV.blockID;
+        int supportIDh = mod_TFC_Core.terraWoodSupportH.blockID;
+
+        Boolean hasVerticalBeam = false;
+        Boolean hasHorizontalBeamX = false;
+        Boolean hasHorizontalBeamZ = false;
+
+        //if the block directly beneath is a Vertical Support or a solid block
+        if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == mod_TFC_Core.terraWoodSupportV.blockID)
+        {	
+            block.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            hasVerticalBeam = true;
+        }
+
+        //X
+        if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
+        {
+            if((blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                    block.setBlockBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else if(!hasVerticalBeam)//if the block does not contain a vertical beam
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamX = true;
+            }
+            else//if there is only a beam at the negative x and not the positive x
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else
+                {
+                    block.setBlockBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamX = true;
+            }
+        }
+        else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
+        {
+            if(hasVerticalBeam)//if the block does contain a vertical beam
+            {
+                block.setBlockBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            else
+            {
+                block.setBlockBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            hasHorizontalBeamX = true;
+        }
+        //Z
+        if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
+        {
+            if((blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                    block.setBlockBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else if(!hasVerticalBeam)//if the block does not contain a vertical beam
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamZ = true;
+            }
+            else//if there is only a beam at the negative x and not the positive x
+            {
+                if(hasVerticalBeam)//if the block does contain a vertical beam
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                else
+                {
+                    block.setBlockBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.renderStandardBlock(block, i, j, k);
+                }
+                hasHorizontalBeamZ = true;
+            }
+        }
+        else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
+        {
+            if(hasVerticalBeam)//if the block does contain a vertical beam
+            {
+                block.setBlockBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            else
+            {
+                block.setBlockBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+            }
+            hasHorizontalBeamZ = true;
+        }
+
+        float minX = 0.25F;
+        float minY = 0;
+        float minZ = 0.25F;
+
+        float maxX = 0.75F;
+        float maxY = 1;
+        float maxZ = 0.75F;
+
+
+        block.setBlockBounds(minX,minY, minZ, maxX, maxY, maxZ);
+
+        return true;
+    }
+
+    public static void renderBlockFallingSand(Block block,int meta, World world, int i, int j, int k)
+    {
+        float f = 0.5F;
+        float f1 = 1.0F;
+        float f2 = 0.8F;
+        float f3 = 0.6F;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.setBrightness(block.getMixedBrightnessForBlock(world, i, j, k));
+        float f4 = 1.0F;
+        float f5 = 1.0F;
+        if (f5 < f4)
+        {
+            f5 = f4;
+        }
+        tessellator.setColorOpaque_F(f * f5, f * f5, f * f5);
+        renderBottomFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(0, meta));
+        f5 = 1.0F;
+        if (f5 < f4)
+        {
+            f5 = f4;
+        }
+        tessellator.setColorOpaque_F(f1 * f5, f1 * f5, f1 * f5);
+        renderTopFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(1, meta));
+        f5 = 1.0F;
+        if (f5 < f4)
+        {
+            f5 = f4;
+        }
+        tessellator.setColorOpaque_F(f2 * f5, f2 * f5, f2 * f5);
+        renderEastFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(2, meta));
+        f5 = 1.0F;
+        if (f5 < f4)
+        {
+            f5 = f4;
+        }
+        tessellator.setColorOpaque_F(f2 * f5, f2 * f5, f2 * f5);
+        renderWestFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(3, meta));
+        f5 = 1.0F;
+        if (f5 < f4)
+        {
+            f5 = f4;
+        }
+        tessellator.setColorOpaque_F(f3 * f5, f3 * f5, f3 * f5);
+        renderNorthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(4, meta));
+        f5 = 1.0F;
+        if (f5 < f4)
+        {
+            f5 = f4;
+        }
+        tessellator.setColorOpaque_F(f3 * f5, f3 * f5, f3 * f5);
+        renderSouthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(5, meta));
+        tessellator.draw();
+    }
+
+    public static void renderBottomFace(Block block, double d, double d1, double d2,
+            int i)
+    {
+        Tessellator tessellator = Tessellator.instance;
+
+        int j = (i & 0xf) << 4;
+        int k = i & 0xf0;
+        double d3 = ((double)j + block.minX * 16D) / 256D;
+        double d4 = (((double)j + block.maxX * 16D) - 0.01D) / 256D;
+        double d5 = ((double)k + block.minZ * 16D) / 256D;
+        double d6 = (((double)k + block.maxZ * 16D) - 0.01D) / 256D;
+        if (block.minX < 0.0D || block.maxX > 1.0D)
+        {
+            d3 = ((float)j + 0.0F) / 256F;
+            d4 = ((float)j + 15.99F) / 256F;
+        }
+        if (block.minZ < 0.0D || block.maxZ > 1.0D)
+        {
+            d5 = ((float)k + 0.0F) / 256F;
+            d6 = ((float)k + 15.99F) / 256F;
+        }
+        double d7 = d4;
+        double d8 = d3;
+        double d9 = d5;
+        double d10 = d6;
+
+        double d11 = d + block.minX;
+        double d12 = d + block.maxX;
+        double d13 = d1 + block.minY;
+        double d14 = d2 + block.minZ;
+        double d15 = d2 + block.maxZ;
+
+        tessellator.addVertexWithUV(d11, d13, d15, d8, d10);
+        tessellator.addVertexWithUV(d11, d13, d14, d3, d5);
+        tessellator.addVertexWithUV(d12, d13, d14, d7, d9);
+        tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
+
+    }
+
+    public static void renderTopFace(Block block, double d, double d1, double d2,
+            int i)
+    {
+        Tessellator tessellator = Tessellator.instance;
+
+        int j = (i & 0xf) << 4;
+        int k = i & 0xf0;
+        double d3 = ((double)j + block.minX * 16D) / 256D;
+        double d4 = (((double)j + block.maxX * 16D) - 0.01D) / 256D;
+        double d5 = ((double)k + block.minZ * 16D) / 256D;
+        double d6 = (((double)k + block.maxZ * 16D) - 0.01D) / 256D;
+        if (block.minX < 0.0D || block.maxX > 1.0D)
+        {
+            d3 = ((float)j + 0.0F) / 256F;
+            d4 = ((float)j + 15.99F) / 256F;
+        }
+        if (block.minZ < 0.0D || block.maxZ > 1.0D)
+        {
+            d5 = ((float)k + 0.0F) / 256F;
+            d6 = ((float)k + 15.99F) / 256F;
+        }
+        double d7 = d4;
+        double d8 = d3;
+        double d9 = d5;
+        double d10 = d6;
+
+        double d11 = d + block.minX;
+        double d12 = d + block.maxX;
+        double d13 = d1 + block.maxY;
+        double d14 = d2 + block.minZ;
+        double d15 = d2 + block.maxZ;
+
+        tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
+        tessellator.addVertexWithUV(d12, d13, d14, d7, d9);
+        tessellator.addVertexWithUV(d11, d13, d14, d3, d5);
+        tessellator.addVertexWithUV(d11, d13, d15, d8, d10);
+
+    }
+
+    public static void renderEastFace(Block block, double d, double d1, double d2,
+            int i)
+    {
+        Tessellator tessellator = Tessellator.instance;
+
+        int j = (i & 0xf) << 4;
+        int k = i & 0xf0;
+        double d3 = ((double)j + block.minX * 16D) / 256D;
+        double d4 = (((double)j + block.maxX * 16D) - 0.01D) / 256D;
+        double d5 = ((double)(k + 16) - block.maxY * 16D) / 256D;
+        double d6 = ((double)(k + 16) - block.minY * 16D - 0.01D) / 256D;
+
+        if (block.minX < 0.0D || block.maxX > 1.0D)
+        {
+            d3 = ((float)j + 0.0F) / 256F;
+            d4 = ((float)j + 15.99F) / 256F;
+        }
+        if (block.minY < 0.0D || block.maxY > 1.0D)
+        {
+            d5 = ((float)k + 0.0F) / 256F;
+            d6 = ((float)k + 15.99F) / 256F;
+        }
+        double d8 = d4;
+        double d9 = d3;
+        double d10 = d5;
+        double d11 = d6;
+
+        double d12 = d + block.minX;
+        double d13 = d + block.maxX;
+        double d14 = d1 + block.minY;
+        double d15 = d1 + block.maxY;
+        double d16 = d2 + block.minZ;
+
+        tessellator.addVertexWithUV(d12, d15, d16, d8, d10);
+        tessellator.addVertexWithUV(d13, d15, d16, d3, d5);
+        tessellator.addVertexWithUV(d13, d14, d16, d9, d11);
+        tessellator.addVertexWithUV(d12, d14, d16, d4, d6);
+
+    }
+
+    public static void renderWestFace(Block block, double d, double d1, double d2,
+            int i)
+    {
+        Tessellator tessellator = Tessellator.instance;
+
+        int j = (i & 0xf) << 4;
+        int k = i & 0xf0;
+        double d3 = ((double)j + block.minX * 16D) / 256D;
+        double d4 = (((double)j + block.maxX * 16D) - 0.01D) / 256D;
+        double d5 = ((double)(k + 16) - block.maxY * 16D) / 256D;
+        double d6 = ((double)(k + 16) - block.minY * 16D - 0.01D) / 256D;
+
+        if (block.minX < 0.0D || block.maxX > 1.0D)
+        {
+            d3 = ((float)j + 0.0F) / 256F;
+            d4 = ((float)j + 15.99F) / 256F;
+        }
+        if (block.minY < 0.0D || block.maxY > 1.0D)
+        {
+            d5 = ((float)k + 0.0F) / 256F;
+            d6 = ((float)k + 15.99F) / 256F;
+        }
+        double d8 = d4;
+        double d9 = d3;
+        double d10 = d5;
+        double d11 = d6;
+
+        double d12 = d + block.minX;
+        double d13 = d + block.maxX;
+        double d14 = d1 + block.minY;
+        double d15 = d1 + block.maxY;
+        double d16 = d2 + block.maxZ;
+
+        tessellator.addVertexWithUV(d12, d15, d16, d3, d5);
+        tessellator.addVertexWithUV(d12, d14, d16, d9, d11);
+        tessellator.addVertexWithUV(d13, d14, d16, d4, d6);
+        tessellator.addVertexWithUV(d13, d15, d16, d8, d10);
+
+    }
+
+    public static void renderNorthFace(Block block, double d, double d1, double d2,
+            int i)
+    {
+        Tessellator tessellator = Tessellator.instance;
+
+        int j = (i & 0xf) << 4;
+        int k = i & 0xf0;
+        double d3 = ((double)j + block.minZ * 16D) / 256D;
+        double d4 = (((double)j + block.maxZ * 16D) - 0.01D) / 256D;
+        double d5 = ((double)(k + 16) - block.maxY * 16D) / 256D;
+        double d6 = ((double)(k + 16) - block.minY * 16D - 0.01D) / 256D;
+
+        if (block.minZ < 0.0D || block.maxZ > 1.0D)
+        {
+            d3 = ((float)j + 0.0F) / 256F;
+            d4 = ((float)j + 15.99F) / 256F;
+        }
+        if (block.minY < 0.0D || block.maxY > 1.0D)
+        {
+            d5 = ((float)k + 0.0F) / 256F;
+            d6 = ((float)k + 15.99F) / 256F;
+        }
+        double d8 = d4;
+        double d9 = d3;
+        double d10 = d5;
+        double d11 = d6;
+
+        double d12 = d + block.minX;
+        double d13 = d1 + block.minY;
+        double d14 = d1 + block.maxY;
+        double d15 = d2 + block.minZ;
+        double d16 = d2 + block.maxZ;
+
+        tessellator.addVertexWithUV(d12, d14, d16, d8, d10);
+        tessellator.addVertexWithUV(d12, d14, d15, d3, d5);
+        tessellator.addVertexWithUV(d12, d13, d15, d9, d11);
+        tessellator.addVertexWithUV(d12, d13, d16, d4, d6);
+
+    }
+
+    public static void renderSouthFace(Block block, double d, double d1, double d2,
+            int i)
+    {
+        Tessellator tessellator = Tessellator.instance;
+
+        int j = (i & 0xf) << 4;
+        int k = i & 0xf0;
+        double d3 = ((double)j + block.minZ * 16D) / 256D;
+        double d4 = (((double)j + block.maxZ * 16D) - 0.01D) / 256D;
+        double d5 = ((double)(k + 16) - block.maxY * 16D) / 256D;
+        double d6 = ((double)(k + 16) - block.minY * 16D - 0.01D) / 256D;
+
+        if (block.minZ < 0.0D || block.maxZ > 1.0D)
+        {
+            d3 = ((float)j + 0.0F) / 256F;
+            d4 = ((float)j + 15.99F) / 256F;
+        }
+        if (block.minY < 0.0D || block.maxY > 1.0D)
+        {
+            d5 = ((float)k + 0.0F) / 256F;
+            d6 = ((float)k + 15.99F) / 256F;
+        }
+        double d8 = d4;
+        double d9 = d3;
+        double d10 = d5;
+        double d11 = d6;
+
+        double d12 = d + block.maxX;
+        double d13 = d1 + block.minY;
+        double d14 = d1 + block.maxY;
+        double d15 = d2 + block.minZ;
+        double d16 = d2 + block.maxZ;
+
+        tessellator.addVertexWithUV(d12, d13, d16, d9, d11);
+        tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
+        tessellator.addVertexWithUV(d12, d14, d15, d8, d10);
+        tessellator.addVertexWithUV(d12, d14, d16, d3, d5);
+
+    }
+
+    public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
+    {
+        BiomeGenBase biome = iblockaccess.getBiomeGenForCoords(xCoord, zCoord);
+        renderblocks.enableAO = true;
+        boolean var8 = false;
+        float var9 = renderblocks.lightValueOwn;
+        float var10 = renderblocks.lightValueOwn;
+        float var11 = renderblocks.lightValueOwn;
+        float var12 = renderblocks.lightValueOwn;
+        boolean var13 = true;
+        boolean var14 = true;
+        boolean var15 = true;
+        boolean var16 = true;
+        boolean var17 = true;
+        boolean var18 = true;
+        renderblocks.lightValueOwn = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord);
+        renderblocks.aoLightValueXNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+        renderblocks.aoLightValueYNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+        renderblocks.aoLightValueZNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+        renderblocks.aoLightValueXPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+        renderblocks.aoLightValueYPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+        renderblocks.aoLightValueZPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+        int var19 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord);
+        int var20 = var19;
+        int var21 = var19;
+        int var22 = var19;
+        int var23 = var19;
+        int var24 = var19;
+        int var25 = var19;
+
+        if (block.minY <= 0.0D)
+        {
+            var21 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+        }
+
+        if (block.maxY >= 1.0D)
+        {
+            var24 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+        }
+
+        if (block.minX <= 0.0D)
+        {
+            var20 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+        }
+
+        if (block.maxX >= 1.0D)
+        {
+            var23 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+        }
+
+        if (block.minZ <= 0.0D)
+        {
+            var22 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+        }
+
+        if (block.maxZ >= 1.0D)
+        {
+            var25 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+        }
+
+        Tessellator tesselator = Tessellator.instance;
+        tesselator.setBrightness(983055);
+        renderblocks.aoGrassXYZPPC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord + 1, zCoord)];
+        renderblocks.aoGrassXYZPNC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord - 1, zCoord)];
+        renderblocks.aoGrassXYZPCP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord, zCoord + 1)];
+        renderblocks.aoGrassXYZPCN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord, zCoord - 1)];
+        renderblocks.aoGrassXYZNPC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord + 1, zCoord)];
+        renderblocks.aoGrassXYZNNC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord - 1, zCoord)];
+        renderblocks.aoGrassXYZNCN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord, zCoord - 1)];
+        renderblocks.aoGrassXYZNCP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord, zCoord + 1)];
+        renderblocks.aoGrassXYZCPP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord + 1, zCoord + 1)];
+        renderblocks.aoGrassXYZCPN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord + 1, zCoord - 1)];
+        renderblocks.aoGrassXYZCNP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord + 1)];
+        renderblocks.aoGrassXYZCNN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord - 1)];
+
+        int var27;
+        float colorMult = 0.78F;
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord, 0))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minY <= 0.0D)
+                {
+                    --yCoord;
+                }
+
+                renderblocks.aoBrightnessXYNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessYZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoBrightnessXYPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchXYNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchYZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+
+                if (!renderblocks.aoGrassXYZCNN && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXYNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXYNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNP && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXYNN;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXYNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNN && !renderblocks.aoGrassXYZPNC)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXYPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXYPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNP && !renderblocks.aoGrassXYZPNC)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXYPN;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXYPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                }
+
+                if (block.minY <= 0.0D)
+                {
+                    ++yCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueYNeg) / 4.0F;
+                var12 = (renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueScratchXYPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXYZPNN) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchYZNN) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessYZNP, var21);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNP, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXYPN, var21);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNN, renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXYZPNN, var21);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessYZNN, var21);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueYNeg;
+                var11 = renderblocks.aoLightValueYNeg;
+                var10 = renderblocks.aoLightValueYNeg;
+                var9 = renderblocks.aoLightValueYNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = renderblocks.aoBrightnessXYNN;
+            }
+
+            var27 = getRockTexture(yCoord, biome);
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord, 1))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxY >= 1.0D)
+                {
+                    ++yCoord;
+                }
+
+                renderblocks.aoBrightnessXYNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessXYPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessYZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchXYPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchYZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+
+                if (!renderblocks.aoGrassXYZCPN && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXYNP;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXYNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPN && !renderblocks.aoGrassXYZPPC)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXYPP;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXYPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPP && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXYNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXYNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPP && !renderblocks.aoGrassXYZPPC)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXYPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXYPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                }
+
+                if (block.maxY >= 1.0D)
+                {
+                    --yCoord;
+                }
+
+                var12 = (renderblocks.aoLightValueScratchXYZNPP + renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueYPos) / 4.0F;
+                var9 = (renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchXYZPPP + renderblocks.aoLightValueScratchXYPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchYZPN + renderblocks.aoLightValueScratchXYPP + renderblocks.aoLightValueScratchXYZPPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchYZPN) / 4.0F;
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNPP, renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessYZPP, var24);
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPP, renderblocks.aoBrightnessXYZPPP, renderblocks.aoBrightnessXYPP, var24);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPN, renderblocks.aoBrightnessXYPP, renderblocks.aoBrightnessXYZPPN, var24);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessYZPN, var24);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueYPos;
+                var11 = renderblocks.aoLightValueYPos;
+                var10 = renderblocks.aoLightValueYPos;
+                var9 = renderblocks.aoLightValueYPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var24;
+            }
+
+            var27 = getRockTexture(yCoord, biome);
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+            var8 = true;
+        }
+
+
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1, 2))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minZ <= 0.0D)
+                {
+                    --zCoord;
+                }
+
+                renderblocks.aoLightValueScratchXZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchYZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoLightValueScratchXZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoBrightnessXZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessYZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZCNN)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZCPN)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCN && !renderblocks.aoGrassXYZCNN)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCN && !renderblocks.aoGrassXYZCPN)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                }
+
+                if (block.minZ <= 0.0D)
+                {
+                    ++zCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchYZPN) / 4.0F;
+                var10 = (renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchYZPN + renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueScratchXYZPPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchXYZPNN + renderblocks.aoLightValueScratchXZPN) / 4.0F;
+                var12 = (renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueZNeg) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessYZPN, var22);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPN, renderblocks.aoBrightnessXZPN, renderblocks.aoBrightnessXYZPPN, var22);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNN, renderblocks.aoBrightnessXYZPNN, renderblocks.aoBrightnessXZPN, var22);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessYZNN, var22);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueZNeg;
+                var11 = renderblocks.aoLightValueZNeg;
+                var10 = renderblocks.aoLightValueZNeg;
+                var9 = renderblocks.aoLightValueZNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var22;
+            }
+
+            var27 = getRockTexture(yCoord, biome);
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+            var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 2);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+
+
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1, 3))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxZ >= 1.0D)
+                {
+                    ++zCoord;
+                }
+
+                renderblocks.aoLightValueScratchXZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchXZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchYZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessXZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessYZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZCNP)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZCPP)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCP && !renderblocks.aoGrassXYZCNP)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCP && !renderblocks.aoGrassXYZCPP)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                }
+
+                if (block.maxZ >= 1.0D)
+                {
+                    --zCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchXYZNPP + renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchYZPP) / 4.0F;
+                var12 = (renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueScratchXZPP + renderblocks.aoLightValueScratchXYZPPP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueScratchXZPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueZPos) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessXYZNPP, renderblocks.aoBrightnessYZPP, var25);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPP, renderblocks.aoBrightnessXZPP, renderblocks.aoBrightnessXYZPPP, var25);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNP, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXZPP, var25);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessYZNP, var25);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueZPos;
+                var11 = renderblocks.aoLightValueZPos;
+                var10 = renderblocks.aoLightValueZPos;
+                var9 = renderblocks.aoLightValueZPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var25;
+            }
+
+            var27 = getRockTexture(yCoord, biome);
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+            var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3));
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord, 4))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minX <= 0.0D)
+                {
+                    --xCoord;
+                }
+
+                renderblocks.aoLightValueScratchXYNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchXZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchXZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXYNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessXZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessXZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoBrightnessXYNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                }
+
+                if (block.minX <= 0.0D)
+                {
+                    ++xCoord;
+                }
+
+                var12 = (renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXZNP) / 4.0F;
+                var9 = (renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchXYZNPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueScratchXYNP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueXNeg) / 4.0F;
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXZNP, var20);
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessXYZNPP, var20);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessXYNP, var20);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXZNN, var20);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueXNeg;
+                var11 = renderblocks.aoLightValueXNeg;
+                var10 = renderblocks.aoLightValueXNeg;
+                var9 = renderblocks.aoLightValueXNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var20;
+            }
+
+            var27 = getRockTexture(yCoord, biome);
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 4);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord, 5))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxX >= 1.0D)
+                {
+                    ++xCoord;
+                }
+
+                renderblocks.aoLightValueScratchXYPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchXZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchXZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXYPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessXZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessXZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoBrightnessXYPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+
+                if (!renderblocks.aoGrassXYZPNC && !renderblocks.aoGrassXYZPCN)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPNC && !renderblocks.aoGrassXYZPCP)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPPC && !renderblocks.aoGrassXYZPCN)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPPC && !renderblocks.aoGrassXYZPCP)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                }
+
+                if (block.maxX >= 1.0D)
+                {
+                    --xCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXZPP) / 4.0F;
+                var12 = (renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXZPP + renderblocks.aoLightValueScratchXYPP + renderblocks.aoLightValueScratchXYZPPP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXYZPPN + renderblocks.aoLightValueScratchXYPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYZPNN + renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueXPos) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXZPP, var23);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZPP, renderblocks.aoBrightnessXYPP, renderblocks.aoBrightnessXYZPPP, var23);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZPN, renderblocks.aoBrightnessXYZPPN, renderblocks.aoBrightnessXYPP, var23);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZPNN, renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXZPN, var23);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueXPos;
+                var11 = renderblocks.aoLightValueXPos;
+                var10 = renderblocks.aoLightValueXPos;
+                var9 = renderblocks.aoLightValueXPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var23;
+            }
+
+            var27 = getRockTexture(yCoord, biome);
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 5);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+
+            var8 = true;
+        }
+
+        renderblocks.enableAO = false;
+        return var8;
+    }
+
+    private static int getRockTexture(int yCoord, BiomeGenBase biome) {
+        int var27;
+        if(yCoord <= biome.Layer3)
+            var27 = Block.blocksList[biome.Layer3Type].getBlockTextureFromSideAndMetadata(5, biome.Layer3Meta);
+        else if(yCoord > biome.Layer3 && yCoord <= biome.Layer2)
+            var27 = Block.blocksList[biome.Layer2Type].getBlockTextureFromSideAndMetadata(5, biome.Layer2Meta);
+        else if(yCoord > biome.Layer2 && yCoord <= biome.Layer1)
+            var27 = Block.blocksList[biome.Layer1Type].getBlockTextureFromSideAndMetadata(5, biome.Layer1Meta);
+        else
+            var27 = Block.blocksList[biome.SurfaceType].getBlockTextureFromSideAndMetadata(5, biome.SurfaceMeta);
+        return var27;
+    }
+
+    public static boolean RenderMolten(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.renderStandardBlock(block, i, j, k);
+
+        //block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.001F, 0.001F, 0.001F);
+        return true;
+    }
+
+    public static boolean renderFirepit(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+        renderblocks.renderStandardBlock(block, i, j, k);
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+        return true;
+    }
+
+    public static boolean renderForge(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        renderblocks.renderStandardBlock(block, i, j, k);
+
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        return true;
+    }
+
+    public static boolean renderBellows(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        int meta = blockAccess.getBlockMetadata(i, j, k);
+        int direction = ((BlockTerraBellows)block).getDirectionFromMetadata(meta);
+
+        if(direction == 0)
+        {
+            //forward
+            renderblocks.overrideBlockTexture = 86;
+            block.setBlockBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            //mid
+            renderblocks.overrideBlockTexture = -1;
+            block.setBlockBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            //back
+            renderblocks.overrideBlockTexture = 87;
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            renderblocks.overrideBlockTexture = -1;
+        }
+        else if(direction == 1)
+        {
+            //forward
+            renderblocks.overrideBlockTexture = 86;
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //mid
+            renderblocks.overrideBlockTexture = -1;
+            block.setBlockBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //back
+            renderblocks.overrideBlockTexture = 87;
+            block.setBlockBounds(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            renderblocks.overrideBlockTexture = -1;
+
+        }
+        else if(direction == 2)
+        {
+            //forward
+            renderblocks.overrideBlockTexture = 86;
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            //mid
+            renderblocks.overrideBlockTexture = -1;
+            block.setBlockBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            //back
+            renderblocks.overrideBlockTexture = 87;
+            block.setBlockBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            renderblocks.overrideBlockTexture = -1;
+        }
+        else if(direction == 3)
+        {
+            //forward
+            renderblocks.overrideBlockTexture = 86;
+            block.setBlockBounds(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //mid
+            renderblocks.overrideBlockTexture = -1;
+            block.setBlockBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //back
+            renderblocks.overrideBlockTexture = 87;
+            block.setBlockBounds(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            renderblocks.overrideBlockTexture = -1;
+        }
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        return true;
+    }
+
+    public static boolean renderAnvil(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        int meta = blockAccess.getBlockMetadata(i, j, k);
+        int direction = ((BlockTerraAnvil)block).getDirectionFromMetadata(meta);
+
+        if(direction == 0)//x
+        {
+            //top
+            block.setBlockBounds(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //core
+            block.setBlockBounds(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //feet
+            block.setBlockBounds(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            block.setBlockBounds(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.80F, 0.6F, 1.0F);
+        }
+        else if(direction == 1)//z
+        {
+            //top
+            block.setBlockBounds(0.1F, 0.4F, 0.3F, 0.9F, 0.6F, 0.7F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //core
+            block.setBlockBounds(0.15F, 0.0F, 0.35F, 0.85F, 0.4F, 0.65F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //feet
+            block.setBlockBounds(0.1F, 0.0F, 0.25F, 0.90F, 0.2F, 0.75F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.00F, 0.1F, 0.80F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.0F, 0.6F, 0.8F);
+
+        }
+
+
+        return true;
+    }
+
+    public static boolean renderAnvil2(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+        int meta = blockAccess.getBlockMetadata(i, j, k);
+        int direction = ((BlockTerraAnvil)block).getDirectionFromMetadata(meta);        
+
+        if(direction == 0)//x
+        {
+            //top
+            block.setBlockBounds(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //core
+            block.setBlockBounds(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //feet
+            block.setBlockBounds(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            block.setBlockBounds(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.80F, 0.6F, 1.0F);
+        }
+        else if(direction == 1)//z
+        {
+            //top
+            block.setBlockBounds(0.1F, 0.4F, 0.3F, 0.9F, 0.6F, 0.7F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //core
+            block.setBlockBounds(0.15F, 0.0F, 0.35F, 0.85F, 0.4F, 0.65F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            //feet
+            block.setBlockBounds(0.1F, 0.0F, 0.25F, 0.90F, 0.2F, 0.75F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+            block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.00F, 0.1F, 0.80F);
+            renderblocks.renderStandardBlock(block, i, j, k);
+
+            block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.0F, 0.6F, 0.8F);
+
+        }
+
+
+        return true;
+    }
+
+    public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+        Tessellator tessellator = Tessellator.instance;
+        int l = blockAccess.getBlockMetadata(i, j, k);
+        int i1 = ((BlockTerraSluice)block).getDirectionFromMetadata(l);
+        float f = 0.5F;
+        float f1 = 1.0F;
+        float f2 = 0.8F;
+        float f3 = 0.6F;
+        int j1 = block.getMixedBrightnessForBlock(blockAccess, i, j, k);
+        tessellator.setBrightness(j1);
+        tessellator.setColorOpaque_F(f, f, f);
+        int k1 = block.getBlockTexture(blockAccess, i, j, k, 0);
+        int l1 = (k1 & 0xf) << 4;
+        int i2 = k1 & 0xf0;
+        double d = (float)l1 / 256F;
+        double d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+        double d2 = (float)i2 / 256F;
+        double d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+        double minX = (double)i + block.minX;
+        double maxX = (double)i + block.maxX;
+        double minY = (double)j + block.minY;
+        double minZ = (double)k + block.minZ;
+        double maxZ = (double)k + block.maxZ;
+        double maxY = (double)j + block.maxY;
+
+        //render ramp
+        if(!((BlockTerraSluice)block).isBlockFootOfBed(l))
+        {
+            if(i1 == 0)
+            {
+                //ribs
+                block.setBlockBounds(0.0F, 0.0F, 0.75F, 1F, 0.75F, 0.8F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.45F, 1F, 0.9F, 0.5F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(minX, maxY, minZ, d1, d2);//d,d3
+                tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, d1, d3);//d,d2
+                tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, d, d3);//d1,d2
+                tessellator.addVertexWithUV(maxX, maxY, minZ, d, d2);//d1,d3
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    //draw water plane
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(minX, maxY, minZ, d1, d2);//d,d3
+                    tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, d1, d3);//d,d2
+                    tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, d, d3);//d1,d2
+                    tessellator.addVertexWithUV(maxX, maxY, minZ, d, d2);//d1,d3
+                }
+            }
+            if(i1 == 1)
+            {
+                //ribs
+                block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.5F, 0.0F, 0.0F, 0.55F, 0.9F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, d, d3);
+                tessellator.addVertexWithUV(maxX, maxY, maxZ, d, d2);
+                tessellator.addVertexWithUV(maxX, maxY, minZ, d1, d2);
+                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d1, d3);
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    //draw water plane
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, d, d3);
+                    tessellator.addVertexWithUV(maxX, maxY, maxZ, d, d2);
+                    tessellator.addVertexWithUV(maxX, maxY, minZ, d1, d2);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d1, d3);
+                }
+            }
+            if(i1 == 2)
+            {
+                //ribs
+                block.setBlockBounds(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.5F, 1F, 0.9F, 0.55F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d, d3);
+                tessellator.addVertexWithUV(minX, maxY, maxZ, d, d2);
+                tessellator.addVertexWithUV(maxX, maxY, maxZ, d1, d2);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d1, d3);
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    //draw water plane
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d, d3);
+                    tessellator.addVertexWithUV(minX, maxY, maxZ, d, d2);
+                    tessellator.addVertexWithUV(maxX, maxY, maxZ, d1, d2);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d1, d3);
+                }
+
+
+            }
+            if(i1 == 3)
+            {        
+                //ribs
+                block.setBlockBounds(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.45F, 0.0F, 0.0F, 0.5F, 0.9F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(maxX, minY+0.5f, minZ, d, d3);
+                tessellator.addVertexWithUV(minX, maxY, minZ, d, d2);
+                tessellator.addVertexWithUV(minX, maxY, maxZ, d1, d2);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, d1, d3);
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = 223;
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(maxX, minY+0.6f, minZ, d, d3);
+                    tessellator.addVertexWithUV(minX, maxY, minZ, d, d2);
+                    tessellator.addVertexWithUV(minX, maxY, maxZ, d1, d2);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, d1, d3);
+                }
+            }
+        }
+        else
+        {
+            if(i1 == 0)
+            {
+                //ribs
+                block.setBlockBounds(0.0F, 0.0F, 0.70F, 1F, 0.3F, 0.75F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.4F, 1F, 0.45F, 0.45F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.1F, 1F, 0.6F, 0.15F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d1, d2);//d,d3
+                tessellator.addVertexWithUV(minX, minY, maxZ, d1, d3);//d,d2
+                tessellator.addVertexWithUV(maxX, minY, maxZ, d, d3);//d1,d2
+                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d, d2);//d1,d3
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    //draw water plane
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d1, d2);//d,d3
+                    tessellator.addVertexWithUV(minX, minY, maxZ, d1, d3);//d,d2
+                    tessellator.addVertexWithUV(maxX, minY, maxZ, d, d3);//d1,d2
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d, d2);//d1,d3
+                }
+            }
+            if(i1 == 1)
+            {
+                //ribs
+                block.setBlockBounds(0.9F, 0.0F, 0.0F, 0.95F, 0.6F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.6F, 0.0F, 0.0F, 0.65F, 0.45F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.3F, 0.0F, 0.0F, 0.35F, 0.3F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(minX, minY, maxZ, d, d3);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, d, d2);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d1, d2);
+                tessellator.addVertexWithUV(minX, minY, minZ, d1, d3);
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    //draw water plane
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(minX, minY, maxZ, d, d3);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, d, d2);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d1, d2);
+                    tessellator.addVertexWithUV(minX, minY, minZ, d1, d3);
+                }
+            }
+            if(i1 == 2)
+            {               
+                //ribs
+                block.setBlockBounds(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.6F, 1F, 0.45F, 0.65F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.9F, 1F, 0.6F, 0.95F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(minX, minY, minZ, d, d3);
+                tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, d, d2);
+                tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, d1, d2);
+                tessellator.addVertexWithUV(maxX, minY, minZ, d1, d3);
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = 223;
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(minX, minY, minZ, d, d3);
+                    tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, d, d2);
+                    tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, d1, d2);
+                    tessellator.addVertexWithUV(maxX, minY, minZ, d1, d3);
+                }
+            }
+            if(i1 == 3)
+            {               
+                //ribs
+                block.setBlockBounds(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.4F, 0.0F, 0.0F, 0.45F, 0.45F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.1F, 0.0F, 0.0F, 0.15F, 0.6F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+
+                tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+                tessellator.addVertexWithUV(maxX, minY, minZ, d, d3);
+                tessellator.addVertexWithUV(minX, minY+0.5f, minZ, d, d2);
+                tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, d1, d2);
+                tessellator.addVertexWithUV(maxX, minY, maxZ, d1, d3);
+
+                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                {
+                    //get water texture
+                    k1 = 223;
+                    l1 = (k1 & 0xf) << 4;
+                    i2 = k1 & 0xf0;
+                    l = block.colorMultiplier(blockAccess, i, j, k);
+                    //reassign the uv coords
+                    d = (float)l1 / 256F;
+                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
+                    d2 = (float)i2 / 256F;
+                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.addVertexWithUV(maxX, minY, minZ, d, d3);
+                    tessellator.addVertexWithUV(minX, minY+0.6f, minZ, d, d2);
+                    tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, d1, d2);
+                    tessellator.addVertexWithUV(maxX, minY, maxZ, d1, d3);
+                }
+            }
+        }
+
+
+        //set the block collision box
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+
+        return true;
+    }
+
+    public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks)
+    {
+        BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(xCoord, zCoord);
+        renderblocks.enableAO = true;
+        boolean var8 = false;
+        float var9 = renderblocks.lightValueOwn;
+        float var10 = renderblocks.lightValueOwn;
+        float var11 = renderblocks.lightValueOwn;
+        float var12 = renderblocks.lightValueOwn;
+        boolean var13 = true;
+        boolean var14 = true;
+        boolean var15 = true;
+        boolean var16 = true;
+        boolean var17 = true;
+        boolean var18 = true;
+        renderblocks.lightValueOwn = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord);
+        renderblocks.aoLightValueXNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+        renderblocks.aoLightValueYNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+        renderblocks.aoLightValueZNeg = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+        renderblocks.aoLightValueXPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+        renderblocks.aoLightValueYPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+        renderblocks.aoLightValueZPos = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+        int var19 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord);
+        int var20 = var19;
+        int var21 = var19;
+        int var22 = var19;
+        int var23 = var19;
+        int var24 = var19;
+        int var25 = var19;
+
+        if (block.minY <= 0.0D)
+        {
+            var21 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+        }
+
+        if (block.maxY >= 1.0D)
+        {
+            var24 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+        }
+
+        if (block.minX <= 0.0D)
+        {
+            var20 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+        }
+
+        if (block.maxX >= 1.0D)
+        {
+            var23 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+        }
+
+        if (block.minZ <= 0.0D)
+        {
+            var22 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+        }
+
+        if (block.maxZ >= 1.0D)
+        {
+            var25 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+        }
+
+        Tessellator tesselator = Tessellator.instance;
+        tesselator.setBrightness(983055);
+        renderblocks.aoGrassXYZPPC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord + 1, zCoord)];
+        renderblocks.aoGrassXYZPNC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord - 1, zCoord)];
+        renderblocks.aoGrassXYZPCP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord, zCoord + 1)];
+        renderblocks.aoGrassXYZPCN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord + 1, yCoord, zCoord - 1)];
+        renderblocks.aoGrassXYZNPC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord + 1, zCoord)];
+        renderblocks.aoGrassXYZNNC = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord - 1, zCoord)];
+        renderblocks.aoGrassXYZNCN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord, zCoord - 1)];
+        renderblocks.aoGrassXYZNCP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord - 1, yCoord, zCoord + 1)];
+        renderblocks.aoGrassXYZCPP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord + 1, zCoord + 1)];
+        renderblocks.aoGrassXYZCPN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord + 1, zCoord - 1)];
+        renderblocks.aoGrassXYZCNP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord + 1)];
+        renderblocks.aoGrassXYZCNN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord - 1)];
+
+        int texIndex;
+        float colorMult = 0.78F;
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord, 0))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minY <= 0.0D)
+                {
+                    --yCoord;
+                }
+
+                renderblocks.aoBrightnessXYNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessYZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoBrightnessXYPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchXYNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchYZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+
+                if (!renderblocks.aoGrassXYZCNN && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXYNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXYNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNP && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXYNN;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXYNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNN && !renderblocks.aoGrassXYZPNC)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXYPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXYPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCNP && !renderblocks.aoGrassXYZPNC)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXYPN;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXYPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                }
+
+                if (block.minY <= 0.0D)
+                {
+                    ++yCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueYNeg) / 4.0F;
+                var12 = (renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueScratchXYPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXYZPNN) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueYNeg + renderblocks.aoLightValueScratchYZNN) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessYZNP, var21);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNP, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXYPN, var21);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNN, renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXYZPNN, var21);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessYZNN, var21);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueYNeg;
+                var11 = renderblocks.aoLightValueYNeg;
+                var10 = renderblocks.aoLightValueYNeg;
+                var9 = renderblocks.aoLightValueYNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = renderblocks.aoBrightnessXYNN;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
+            
+            if(TFCSeasons.currentMonth < 3)
+            {
+                texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+                if(texIndex!= -1)
+                {
+                    renderblocks.colorRedTopLeft *= var9;
+                    renderblocks.colorGreenTopLeft *= var9;
+                    renderblocks.colorBlueTopLeft *= var9;
+                    renderblocks.colorRedBottomLeft *= var10;
+                    renderblocks.colorGreenBottomLeft *= var10;
+                    renderblocks.colorBlueBottomLeft *= var10;
+                    renderblocks.colorRedBottomRight *= var11;
+                    renderblocks.colorGreenBottomRight *= var11;
+                    renderblocks.colorBlueBottomRight *= var11;
+                    renderblocks.colorRedTopRight *= var12;
+                    renderblocks.colorGreenTopRight *= var12;
+                    renderblocks.colorBlueTopRight *= var12;
+                    renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+                }
+            }
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord, 1))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxY >= 1.0D)
+                {
+                    ++yCoord;
+                }
+
+                renderblocks.aoBrightnessXYNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessXYPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessYZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchXYPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchYZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+
+                if (!renderblocks.aoGrassXYZCPN && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXYNP;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXYNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPN && !renderblocks.aoGrassXYZPPC)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXYPP;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXYPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPP && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXYNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXYNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZCPP && !renderblocks.aoGrassXYZPPC)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXYPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXYPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
+                }
+
+                if (block.maxY >= 1.0D)
+                {
+                    --yCoord;
+                }
+
+                var12 = (renderblocks.aoLightValueScratchXYZNPP + renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueYPos) / 4.0F;
+                var9 = (renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchXYZPPP + renderblocks.aoLightValueScratchXYPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchYZPN + renderblocks.aoLightValueScratchXYPP + renderblocks.aoLightValueScratchXYZPPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueYPos + renderblocks.aoLightValueScratchYZPN) / 4.0F;
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNPP, renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessYZPP, var24);
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPP, renderblocks.aoBrightnessXYZPPP, renderblocks.aoBrightnessXYPP, var24);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPN, renderblocks.aoBrightnessXYPP, renderblocks.aoBrightnessXYZPPN, var24);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessYZPN, var24);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueYPos;
+                var11 = renderblocks.aoLightValueYPos;
+                var10 = renderblocks.aoLightValueYPos;
+                var9 = renderblocks.aoLightValueYPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var24;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+            if(TFCSeasons.currentMonth < 3)
+            {
+                texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+                if(texIndex!= -1)
+                {
+                    renderblocks.colorRedTopLeft *= var9;
+                    renderblocks.colorGreenTopLeft *= var9;
+                    renderblocks.colorBlueTopLeft *= var9;
+                    renderblocks.colorRedBottomLeft *= var10;
+                    renderblocks.colorGreenBottomLeft *= var10;
+                    renderblocks.colorBlueBottomLeft *= var10;
+                    renderblocks.colorRedBottomRight *= var11;
+                    renderblocks.colorGreenBottomRight *= var11;
+                    renderblocks.colorBlueBottomRight *= var11;
+                    renderblocks.colorRedTopRight *= var12;
+                    renderblocks.colorGreenTopRight *= var12;
+                    renderblocks.colorBlueTopRight *= var12;
+                    renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+                }
+            }
+            var8 = true;
+        }
+
+
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1, 2))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minZ <= 0.0D)
+                {
+                    --zCoord;
+                }
+
+                renderblocks.aoLightValueScratchXZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchYZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoLightValueScratchXZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoBrightnessXZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessYZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZCNN)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZCPN)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCN && !renderblocks.aoGrassXYZCNN)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCN && !renderblocks.aoGrassXYZCPN)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                }
+
+                if (block.minZ <= 0.0D)
+                {
+                    ++zCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchYZPN) / 4.0F;
+                var10 = (renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchYZPN + renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueScratchXYZPPN) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueZNeg + renderblocks.aoLightValueScratchXYZPNN + renderblocks.aoLightValueScratchXZPN) / 4.0F;
+                var12 = (renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueScratchYZNN + renderblocks.aoLightValueZNeg) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessYZPN, var22);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPN, renderblocks.aoBrightnessXZPN, renderblocks.aoBrightnessXYZPPN, var22);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNN, renderblocks.aoBrightnessXYZPNN, renderblocks.aoBrightnessXZPN, var22);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessYZNN, var22);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueZNeg;
+                var11 = renderblocks.aoLightValueZNeg;
+                var10 = renderblocks.aoLightValueZNeg;
+                var9 = renderblocks.aoLightValueZNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var22;
+            }
+
+
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 2);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+
+            texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+            if(texIndex != -1)
+            {
+                renderblocks.colorRedTopLeft *= var9;
+                renderblocks.colorGreenTopLeft *= var9;
+                renderblocks.colorBlueTopLeft *= var9;
+                renderblocks.colorRedBottomLeft *= var10;
+                renderblocks.colorGreenBottomLeft *= var10;
+                renderblocks.colorBlueBottomLeft *= var10;
+                renderblocks.colorRedBottomRight *= var11;
+                renderblocks.colorGreenBottomRight *= var11;
+                renderblocks.colorBlueBottomRight *= var11;
+                renderblocks.colorRedTopRight *= var12;
+                renderblocks.colorGreenTopRight *= var12;
+                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+            }
+
+
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1, 3))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxZ >= 1.0D)
+                {
+                    ++zCoord;
+                }
+
+                renderblocks.aoLightValueScratchXZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchXZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoLightValueScratchYZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchYZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
+                renderblocks.aoBrightnessXZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
+                renderblocks.aoBrightnessYZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessYZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZCNP)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZCPP)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord + 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCP && !renderblocks.aoGrassXYZCNP)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord - 1, zCoord);
+                }
+
+                if (!renderblocks.aoGrassXYZPCP && !renderblocks.aoGrassXYZCPP)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
+                }
+
+                if (block.maxZ >= 1.0D)
+                {
+                    --zCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchXYZNPP + renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchYZPP) / 4.0F;
+                var12 = (renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchYZPP + renderblocks.aoLightValueScratchXZPP + renderblocks.aoLightValueScratchXYZPPP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueZPos + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueScratchXZPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchYZNP + renderblocks.aoLightValueZPos) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessXYZNPP, renderblocks.aoBrightnessYZPP, var25);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZPP, renderblocks.aoBrightnessXZPP, renderblocks.aoBrightnessXYZPPP, var25);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessYZNP, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXZPP, var25);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessYZNP, var25);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueZPos;
+                var11 = renderblocks.aoLightValueZPos;
+                var10 = renderblocks.aoLightValueZPos;
+                var9 = renderblocks.aoLightValueZPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var25;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3));
+
+            texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+            if(texIndex!= -1)
+            {
+                renderblocks.colorRedTopLeft *= var9;
+                renderblocks.colorGreenTopLeft *= var9;
+                renderblocks.colorBlueTopLeft *= var9;
+                renderblocks.colorRedBottomLeft *= var10;
+                renderblocks.colorGreenBottomLeft *= var10;
+                renderblocks.colorBlueBottomLeft *= var10;
+                renderblocks.colorRedBottomRight *= var11;
+                renderblocks.colorGreenBottomRight *= var11;
+                renderblocks.colorBlueBottomRight *= var11;
+                renderblocks.colorRedTopRight *= var12;
+                renderblocks.colorGreenTopRight *= var12;
+                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+            }
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord, 4))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.minX <= 0.0D)
+                {
+                    --xCoord;
+                }
+
+                renderblocks.aoLightValueScratchXYNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchXZNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchXZNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXYNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessXZNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessXZNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoBrightnessXYNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNNN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZNNC)
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNNP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCN && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXZNN;
+                    renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXZNN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZNPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZNCP && !renderblocks.aoGrassXYZNPC)
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXZNP;
+                    renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXZNP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZNPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                }
+
+                if (block.minX <= 0.0D)
+                {
+                    ++xCoord;
+                }
+
+                var12 = (renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXYZNNP + renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXZNP) / 4.0F;
+                var9 = (renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXZNP + renderblocks.aoLightValueScratchXYNP + renderblocks.aoLightValueScratchXYZNPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueXNeg + renderblocks.aoLightValueScratchXYZNPN + renderblocks.aoLightValueScratchXYNP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXYZNNN + renderblocks.aoLightValueScratchXYNN + renderblocks.aoLightValueScratchXZNN + renderblocks.aoLightValueXNeg) / 4.0F;
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXYZNNP, renderblocks.aoBrightnessXZNP, var20);
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNP, renderblocks.aoBrightnessXYNP, renderblocks.aoBrightnessXYZNPP, var20);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZNN, renderblocks.aoBrightnessXYZNPN, renderblocks.aoBrightnessXYNP, var20);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZNNN, renderblocks.aoBrightnessXYNN, renderblocks.aoBrightnessXZNN, var20);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueXNeg;
+                var11 = renderblocks.aoLightValueXNeg;
+                var10 = renderblocks.aoLightValueXNeg;
+                var9 = renderblocks.aoLightValueXNeg;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var20;
+            }
+
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 4);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+
+            texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+            if(texIndex!= -1)
+            {
+                renderblocks.colorRedTopLeft *= var9;
+                renderblocks.colorGreenTopLeft *= var9;
+                renderblocks.colorBlueTopLeft *= var9;
+                renderblocks.colorRedBottomLeft *= var10;
+                renderblocks.colorGreenBottomLeft *= var10;
+                renderblocks.colorBlueBottomLeft *= var10;
+                renderblocks.colorRedBottomRight *= var11;
+                renderblocks.colorGreenBottomRight *= var11;
+                renderblocks.colorBlueBottomRight *= var11;
+                renderblocks.colorRedTopRight *= var12;
+                renderblocks.colorGreenTopRight *= var12;
+                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+            }
+
+            var8 = true;
+        }
+
+        if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord, 5))
+        {
+            if (renderblocks.aoType > 0)
+            {
+                if (block.maxX >= 1.0D)
+                {
+                    ++xCoord;
+                }
+
+                renderblocks.aoLightValueScratchXYPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoLightValueScratchXZPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoLightValueScratchXZPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoLightValueScratchXYPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+                renderblocks.aoBrightnessXYPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
+                renderblocks.aoBrightnessXZPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
+                renderblocks.aoBrightnessXZPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
+                renderblocks.aoBrightnessXYPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
+
+                if (!renderblocks.aoGrassXYZPNC && !renderblocks.aoGrassXYZPCN)
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPNN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPNN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPNC && !renderblocks.aoGrassXYZPCP)
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPNP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPNP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord + 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPPC && !renderblocks.aoGrassXYZPCN)
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXZPN;
+                    renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXZPN;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPN = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                    renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord - 1);
+                }
+
+                if (!renderblocks.aoGrassXYZPPC && !renderblocks.aoGrassXYZPCP)
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXZPP;
+                    renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXZPP;
+                }
+                else
+                {
+                    renderblocks.aoLightValueScratchXYZPPP = block.getAmbientOcclusionLightValue(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                    renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
+                }
+
+                if (block.maxX >= 1.0D)
+                {
+                    --xCoord;
+                }
+
+                var9 = (renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXYZPNP + renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXZPP) / 4.0F;
+                var12 = (renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXZPP + renderblocks.aoLightValueScratchXYPP + renderblocks.aoLightValueScratchXYZPPP) / 4.0F;
+                var11 = (renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueXPos + renderblocks.aoLightValueScratchXYZPPN + renderblocks.aoLightValueScratchXYPP) / 4.0F;
+                var10 = (renderblocks.aoLightValueScratchXYZPNN + renderblocks.aoLightValueScratchXYPN + renderblocks.aoLightValueScratchXZPN + renderblocks.aoLightValueXPos) / 4.0F;
+                renderblocks.brightnessTopLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXYZPNP, renderblocks.aoBrightnessXZPP, var23);
+                renderblocks.brightnessTopRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZPP, renderblocks.aoBrightnessXYPP, renderblocks.aoBrightnessXYZPPP, var23);
+                renderblocks.brightnessBottomRight = renderblocks.getAoBrightness(renderblocks.aoBrightnessXZPN, renderblocks.aoBrightnessXYZPPN, renderblocks.aoBrightnessXYPP, var23);
+                renderblocks.brightnessBottomLeft = renderblocks.getAoBrightness(renderblocks.aoBrightnessXYZPNN, renderblocks.aoBrightnessXYPN, renderblocks.aoBrightnessXZPN, var23);
+            }
+            else
+            {
+                var12 = renderblocks.aoLightValueXPos;
+                var11 = renderblocks.aoLightValueXPos;
+                var10 = renderblocks.aoLightValueXPos;
+                var9 = renderblocks.aoLightValueXPos;
+                renderblocks.brightnessTopLeft = renderblocks.brightnessBottomLeft = renderblocks.brightnessBottomRight = renderblocks.brightnessTopRight = var23;
+            }
+
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
+
+            texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 5);
+            renderblocks.colorRedTopLeft *= var9;
+            renderblocks.colorGreenTopLeft *= var9;
+            renderblocks.colorBlueTopLeft *= var9;
+            renderblocks.colorRedBottomLeft *= var10;
+            renderblocks.colorGreenBottomLeft *= var10;
+            renderblocks.colorBlueBottomLeft *= var10;
+            renderblocks.colorRedBottomRight *= var11;
+            renderblocks.colorGreenBottomRight *= var11;
+            renderblocks.colorBlueBottomRight *= var11;
+            renderblocks.colorRedTopRight *= var12;
+            renderblocks.colorGreenTopRight *= var12;
+            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+
+            texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+            if(texIndex!= -1)
+            {
+                renderblocks.colorRedTopLeft *= var9;
+                renderblocks.colorGreenTopLeft *= var9;
+                renderblocks.colorBlueTopLeft *= var9;
+                renderblocks.colorRedBottomLeft *= var10;
+                renderblocks.colorGreenBottomLeft *= var10;
+                renderblocks.colorBlueBottomLeft *= var10;
+                renderblocks.colorRedBottomRight *= var11;
+                renderblocks.colorGreenBottomRight *= var11;
+                renderblocks.colorBlueBottomRight *= var11;
+                renderblocks.colorRedTopRight *= var12;
+                renderblocks.colorGreenTopRight *= var12;
+                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+            }
+
+            var8 = true;
+        }
+
+        renderblocks.enableAO = false;
+        return var8;
+    }
+
+    public static int getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)
+    {
+        int out = -1;
+        int meta = world.getBlockMetadata(x, y, z);
+        if(TFCSeasons.currentMonth < 3)//blooming
+        {
+            out = 96+(meta & 7);
+        }
+        else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && meta >= 8)//fruit
+        {
+            out = 80+(meta & 7);
+        }
+        return out;
+    }
+
+    public static boolean RenderToolRack(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        IBlockAccess blockAccess = renderblocks.blockAccess;
+
+
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
+        return true;
+    }
+}

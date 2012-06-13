@@ -3,6 +3,10 @@ package net.minecraft.src;
 import java.util.Random;
 
 import net.minecraft.src.TFC_Core.*;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomHugeTrees;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomShortTrees;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomShrub;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomTallGrass;
 
 public class BiomeGenJungleTFC extends BiomeGenBase
 {

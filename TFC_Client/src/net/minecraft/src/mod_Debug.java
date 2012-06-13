@@ -7,8 +7,6 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.TFC_Core.*;
-import net.minecraft.src.TFC_Game.*;
-import net.minecraft.src.TFC_Mining.*;
 import net.minecraft.src.forge.*;
 
 public class mod_Debug extends NetworkMod
@@ -59,7 +57,7 @@ public class mod_Debug extends NetworkMod
 		    long month = day / 30;
             System.out.println(month);
             
-            System.out.println("DotW:" +TFCSeasons.Days[TFCSeasons.getDayOfWeek(ModLoader.getMinecraftInstance().theWorld)-1]);
+            System.out.println("DotW:" +TFCSeasons.Days[TFCSeasons.getDayOfWeek()-1]);
         }
 
 	}
