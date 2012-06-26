@@ -29,11 +29,12 @@ public class BlockCustomReed extends Block
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		int var5 = par1World.getBlockId(par2, par3 - 1, par4);
-		return var5 == this.blockID ? true : var5 != Block.grass.blockID && var5 != Block.dirt.blockID && 
-				var5 != mod_TFC_Core.terraGrass.blockID && var5 != mod_TFC_Core.terraGrass2.blockID &&
-				var5 != mod_TFC_Core.terraDirt.blockID && var5 != mod_TFC_Core.terraDirt.blockID &&
-				var5 != mod_TFC_Core.terraClayGrass.blockID && var5 != mod_TFC_Core.terraClayGrass2.blockID &&
-				var5 != mod_TFC_Core.terraPeatGrass.blockID && var5 != mod_TFC_Core.terraPeat.blockID && var5 != Block.sand.blockID ? false : par1World.getBlockMaterial(par2 - 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2 + 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 - 1) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 + 1) == Material.water;
+		boolean correctSoil = var5 != Block.grass.blockID && var5 != Block.dirt.blockID && 
+                var5 != mod_TFC_Core.terraGrass.blockID && var5 != mod_TFC_Core.terraGrass2.blockID &&
+                var5 != mod_TFC_Core.terraDirt.blockID && var5 != mod_TFC_Core.terraDirt.blockID &&
+                var5 != mod_TFC_Core.terraClayGrass.blockID && var5 != mod_TFC_Core.terraClayGrass2.blockID &&
+                var5 != mod_TFC_Core.terraPeatGrass.blockID && var5 != mod_TFC_Core.terraPeat.blockID && var5 != Block.sand.blockID;
+		return var5 == this.blockID ? true : correctSoil ? false : par1World.getBlockMaterial(par2 - 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2 + 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 - 1) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 + 1) == Material.water;
 	}
 
 	/**

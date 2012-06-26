@@ -6,11 +6,15 @@ import org.lwjgl.opengl.GL12;
 
 import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.TFCSeasons;
+import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
 
 public class GuiCalendar extends GuiScreen
 {
     World world;
+    int x;
+    int z;
+    EntityPlayer player;
 
     /** The X size of the inventory window in pixels. */
     protected int xSize = 176;
@@ -27,11 +31,14 @@ public class GuiCalendar extends GuiScreen
      */
     protected int guiTop;
 
-    public GuiCalendar(World world, int i, int j, int k)
+    public GuiCalendar(EntityPlayer p, World world, int i, int j, int k)
     {
         this.world = world;
         this.guiLeft = (this.width - this.xSize) / 2;
         this.guiTop = (this.height - this.ySize) / 2;
+        x = i;
+        z = k;
+        player = p;
     }
 
     public void onGuiClosed()
@@ -48,10 +55,11 @@ public class GuiCalendar extends GuiScreen
             controlList.clear();
             int l = (width - xSize) / 2;
             int i1 = (height - ySize) / 2;
-            controlList.add(new GuiButton(0, l+20, i1 + 80, 66, 20, "1 Day"));
-            controlList.add(new GuiButton(1, l+20, i1 + 99, 66, 20, "1 Week"));
-            controlList.add(new GuiButton(2, l+20, i1 + 118, 66, 20, "1 Month"));
-            controlList.add(new GuiButton(3, l+20, i1 + 137, 66, 20, "1 Year"));
+            controlList.add(new GuiButton(0, l+20, i1 + 80, 66, 20, "1 Hour"));
+            controlList.add(new GuiButton(1, l+20, i1 + 99, 66, 20, "1 Day"));
+            controlList.add(new GuiButton(2, l+20, i1 + 118, 66, 20, "1 Week"));
+            controlList.add(new GuiButton(3, l+20, i1 + 137, 66, 20, "1 Month"));
+            controlList.add(new GuiButton(4, l+20, i1 + 156, 66, 20, "1 Year"));
         }
 
     }
@@ -72,8 +80,15 @@ public class GuiCalendar extends GuiScreen
 
         drawCenteredString(fontRenderer,"Calendar", l+87, i1+16, 0xFFFFFF);
         drawCenteredString(fontRenderer,"Season : " + TFCSeasons.seasons[TFCSeasons.getMonth()], l + 87, i1+26, 0x000000);
+        
         drawCenteredString(fontRenderer,"Day : " + TFCSeasons.Days[TFCSeasons.getDayOfWeek()], l + 87, i1+36, 0x000000);
-        drawCenteredString(fontRenderer,"Date : " + TFCSeasons.getDayOfMonth() + " " + TFCSeasons.months[TFCSeasons.getMonth()] + ", " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);
+        int dom = TFCSeasons.getDayOfMonth();
+        int month = TFCSeasons.currentMonth;
+        if(dom == 6 && month == 6)
+            drawCenteredString(fontRenderer,"Date : Bioxx's Birthday!, " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);
+        else
+            drawCenteredString(fontRenderer,"Date : " + dom + " " + TFCSeasons.months[month] + ", " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);
+        drawCenteredString(fontRenderer,"Temperature : " + ((int)TFCHeat.getNormalizedTemp(world.getBiomeGenForCoords((int)player.posX, (int)player.posZ).getFloatTemperature())) + "C", l + 87, i1+56, 0x000000);
         //drawCenteredString(fontRenderer,"Month : " + , l + 87, i1+36, 0x000000);
 
 
@@ -110,19 +125,23 @@ public class GuiCalendar extends GuiScreen
         {
             if (guibutton.id == 0)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 36000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 1000);
             }
             else if (guibutton.id == 1)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 252000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 24000);
             }
             else if (guibutton.id == 2)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 1080000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 168000);
             }
             else if (guibutton.id == 3)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 12960000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 720000);
+            }
+            else if (guibutton.id == 4)
+            {
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 8640000);
             }
 
         }

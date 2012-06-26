@@ -5,14 +5,15 @@ import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.EntityTerraJavelin;
 import net.minecraft.src.forge.*;
 
-public class ItemTerraJavelin extends Item implements ITextureProvider
+public class ItemTerraJavelin extends ItemTool implements ITextureProvider
 {
-    private int weaponDamage;
+    private static int weaponDamage;
     public ItemTerraJavelin(int par1)
     {
-        super(par1);
+        super(par1, weaponDamage, TFCItems.SedToolMaterial, new Block[0]);
         this.maxStackSize = 1;
         this.weaponDamage = 2;
+        this.setMaxDamage(35);
 
     }
 
@@ -121,7 +122,7 @@ public class ItemTerraJavelin extends Item implements ITextureProvider
 
         par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
         par3EntityPlayer.inventory.consumeInventoryItem(TFCItems.Javelin.shiftedIndex);
-
+        var8.setDamageTaken(par1ItemStack.getItemDamage());
         if (!par2World.isRemote)
         {
             par2World.spawnEntityInWorld(var8);

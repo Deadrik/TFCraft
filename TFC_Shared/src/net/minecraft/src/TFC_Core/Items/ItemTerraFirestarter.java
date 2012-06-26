@@ -103,7 +103,11 @@ public class ItemTerraFirestarter extends Item implements ITextureProvider
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }
-                    else if(numcoal >= 9 && world.getBlockMaterial(x, y, z) == Material.rock)
+                    else if(numcoal >= 9 && world.getBlockMaterial(x, y, z) == Material.rock && 
+                            world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
+                            world.getBlockMaterial(x, y+1, z+1) == Material.rock && world.getBlockMaterial(x, y+1, z-1) == Material.rock &&
+                            world.isBlockNormalCube(x, y, z) && world.isBlockNormalCube(x+1, y+1, z) && world.isBlockNormalCube(x-1, y+1, z) && 
+                            world.isBlockNormalCube(x, y+1, z+1) && world.isBlockNormalCube(x, y+1, z-1))
                     {
                         for (Iterator iterator = list.iterator(); iterator.hasNext();)
                         {

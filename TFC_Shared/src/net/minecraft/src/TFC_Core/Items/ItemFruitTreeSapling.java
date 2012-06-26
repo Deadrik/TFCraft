@@ -37,7 +37,7 @@ public class ItemFruitTreeSapling extends ItemTerra
                 world.getBlockId(x, y+1, z) == 0)
         {
             
-            world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC_Core.fruitTreeWood.blockID, itemstack.getItemDamage());
+            world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC_Core.fruitTreeWood.blockID, itemstack.getItemDamage()+offset);
             world.markBlockNeedsUpdate(x, y+1, z);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setHeight(0);
@@ -53,13 +53,13 @@ public class ItemFruitTreeSapling extends ItemTerra
     
     public int getIconFromDamage(int par1)
     {
-        return this.iconIndex + offset;
+        return this.iconIndex + par1;
     }
     
     @Override
     public String getItemNameIS(ItemStack itemstack) 
     {
-        String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
+        String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()+offset]).toString();
         return s;
     }
 

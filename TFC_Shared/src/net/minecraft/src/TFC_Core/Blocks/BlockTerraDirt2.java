@@ -7,25 +7,6 @@ import net.minecraft.src.TFC_Core.EntityFallingDirt;
 
 public class BlockTerraDirt2 extends BlockTerra2
 {	
-	public static boolean canFallBelow(World world, int i, int j, int k)
-	{
-		int l = world.getBlockId(i, j, k);
-		if (l == 0)
-		{
-			return true;
-		}
-		if (l == Block.fire.blockID)
-		{
-			return true;
-		}
-		Material material = Block.blocksList[l].blockMaterial;
-		if (material == Material.water)
-		{
-			return true;
-		}
-		return material == Material.lava;
-	}
-
 	public BlockTerraDirt2(int i, int j, Block Farm)
 	{
 		super(i, j, Material.ground);
@@ -101,4 +82,23 @@ public class BlockTerraDirt2 extends BlockTerra2
 	 {
 		 tryToFall(world, i, j, k);
 	 }
+	 
+	 public static boolean canFallBelow(World world, int i, int j, int k)
+	    {
+	        int l = world.getBlockId(i, j, k);
+	        if (l == 0)
+	        {
+	            return true;
+	        }
+	        if (l == Block.fire.blockID)
+	        {
+	            return true;
+	        }
+	        Material material = Block.blocksList[l].blockMaterial;
+	        if (material == Material.water)
+	        {
+	            return true;
+	        }
+	        return material == Material.lava;
+	    }
 }

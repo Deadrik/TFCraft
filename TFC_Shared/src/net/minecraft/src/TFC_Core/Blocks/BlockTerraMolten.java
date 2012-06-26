@@ -31,7 +31,7 @@ public class BlockTerraMolten extends Block implements ITextureProvider
 
 	public BlockTerraMolten(int i)
 	{
-		super(i, Material.lava);
+		super(i, Material.iron);
 		this.setLightValue(1.0F);
 	}
 

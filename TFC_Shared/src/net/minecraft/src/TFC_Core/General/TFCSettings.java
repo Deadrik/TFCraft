@@ -51,8 +51,8 @@ public class TFCSettings
 		BlacksmithModeHeatScale = getBooleanFor(config,"Metallurgy","BlacksmithModeHeatScale",true, "Set this to false if you are having a hard time and would like the old color scale for heating metals.");
 		//Caveins
 		minimumRockLoad = getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
-		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",25, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
-		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",50, "This number is the likelyhood for each block to propogate the collapse farther.");
+		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
+		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",35, "This number is the likelyhood for each block to propogate the collapse farther.");
 
 		/**Always end with this*/
 		if (config != null) {

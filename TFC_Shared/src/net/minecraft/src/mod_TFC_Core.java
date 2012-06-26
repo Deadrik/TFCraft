@@ -15,6 +15,7 @@ import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.TFC_Core.Blocks.BlockBucketWater;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomCrops;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomFlower;
+import net.minecraft.src.TFC_Core.Blocks.BlockCustomFlowing;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomIce;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomLeaves;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomMushroom;
@@ -22,7 +23,10 @@ import net.minecraft.src.TFC_Core.Blocks.BlockCustomReed;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomSapling;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomSnow;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomStairs;
+import net.minecraft.src.TFC_Core.Blocks.BlockCustomStationary;
 import net.minecraft.src.TFC_Core.Blocks.BlockCustomTallGrass;
+import net.minecraft.src.TFC_Core.Blocks.BlockCustomVine;
+import net.minecraft.src.TFC_Core.Blocks.BlockFiniteWater;
 import net.minecraft.src.TFC_Core.Blocks.BlockFruitLeaves;
 import net.minecraft.src.TFC_Core.Blocks.BlockFruitWood;
 import net.minecraft.src.TFC_Core.Blocks.BlockLooseRock;
@@ -62,6 +66,7 @@ import net.minecraft.src.TFC_Core.Blocks.BlockTerraSulfur;
 import net.minecraft.src.TFC_Core.Blocks.BlockTerraWood;
 import net.minecraft.src.TFC_Core.Blocks.BlockTerraWoodSupport;
 import net.minecraft.src.TFC_Core.Blocks.BlockTerraWorkbench;
+import net.minecraft.src.TFC_Core.Custom.EntityCowTFC;
 import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
 import net.minecraft.src.TFC_Core.Custom.ItemDyeCustom;
 import net.minecraft.src.TFC_Core.General.PacketHandler;
@@ -85,9 +90,12 @@ import net.minecraft.src.forge.ICraftingHandler;
 import net.minecraft.src.forge.IOreHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
+import net.minecraft.src.vazkii.updatemanager.IUpdateManager;
+import net.minecraft.src.vazkii.updatemanager.ModType;
+import net.minecraft.src.vazkii.updatemanager.UMCore;
 import net.minecraft.src.TFCItems;
 
-public class mod_TFC_Core extends NetworkMod
+public class mod_TFC_Core extends NetworkMod implements IUpdateManager
 {
     static Configuration config;
     public static mod_TFC_Core instance;
@@ -125,6 +133,8 @@ public class mod_TFC_Core extends NetworkMod
     public static int terraForgeRenderId;
     public static int sluiceRenderId;
     public static int toolRackRenderId;
+    public static int finiteWaterRenderId;
+    public static int partialRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -171,7 +181,7 @@ public class mod_TFC_Core extends NetworkMod
     public static Block tilledSoil;
     public static Block tilledSoil2;
     
-    public static Block bucketWater;
+    public static Block finiteWater;
     public static Block terraFirepit;
     public static Block terraFirepitOn;
     
@@ -190,6 +200,7 @@ public class mod_TFC_Core extends NetworkMod
     
     public static Block fruitTreeWood;
     public static Block fruitTreeLeaves;
+    public static Block fruitTreeLeaves2;
     
     public static EnumArmorMaterial BismuthArmorMaterial;
     public static EnumArmorMaterial BismuthBronzeArmorMaterial;
@@ -205,11 +216,6 @@ public class mod_TFC_Core extends NetworkMod
     public static EnumArmorMaterial TinArmorMaterial;
     public static EnumArmorMaterial ZincArmorMaterial;
 
-    
-    
-    
-    
-
     public mod_TFC_Core()
     {
         proxy = ServerClientProxy.getProxy();
@@ -218,15 +224,10 @@ public class mod_TFC_Core extends NetworkMod
     }
 
     @Override
-    public String getVersion()
-    {
-        return "0.2a";
-    }
-
-    @Override
     public void load()
     {
         instance = this;
+        UMCore.addMod(this);
         
         MinecraftForge.registerConnectionHandler(new PacketHandler());
         
@@ -239,13 +240,14 @@ public class mod_TFC_Core extends NetworkMod
         moltenRenderId = proxy.getUniqueBlockModelID(this, false);
         looseRockRenderId = proxy.getUniqueBlockModelID(this, false);
         terraFirepitRenderId = proxy.getUniqueBlockModelID(this, false);
-        terraAnvilRenderId = proxy.getUniqueBlockModelID(this, true);
+        terraAnvilRenderId = proxy.getUniqueBlockModelID(this, false);
         terraBellowsRenderId = proxy.getUniqueBlockModelID(this, true);
         terraScribeRenderId = proxy.getUniqueBlockModelID(this, false);
         terraForgeRenderId = proxy.getUniqueBlockModelID(this, false);
         sluiceRenderId = proxy.getUniqueBlockModelID(this, false);
         woodFruitRenderId = proxy.getUniqueBlockModelID(this, false);
         leavesFruitRenderId = proxy.getUniqueBlockModelID(this, false);
+        finiteWaterRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, net.minecraft.src.TFC_Core.Items.ItemOre1.class);
@@ -285,7 +287,7 @@ public class mod_TFC_Core extends NetworkMod
         ModLoader.registerBlock(tilledSoil);
         ModLoader.registerBlock(tilledSoil2);
         
-        ModLoader.registerBlock(bucketWater);
+        ModLoader.registerBlock(finiteWater);
 
         ModLoader.registerBlock(terraWoodSupportV);
         ModLoader.registerBlock(terraWoodSupportH);
@@ -307,6 +309,7 @@ public class mod_TFC_Core extends NetworkMod
         
         ModLoader.registerBlock(fruitTreeWood);
         ModLoader.registerBlock(fruitTreeLeaves);
+        ModLoader.registerBlock(fruitTreeLeaves2);
 
         //Items
         Item.itemsList[terraStoneIgEx.blockID] = new ItemIgEx(terraStoneIgEx.blockID - 256);
@@ -382,6 +385,10 @@ public class mod_TFC_Core extends NetworkMod
         
         MinecraftForge.registerEntity(EntityTerraJavelin.class, this, 1, 160, 5, true);
         MinecraftForge.registerEntity(EntitySquidTFC.class, this, 2, 160, 5, true);
+        MinecraftForge.registerEntity(EntityFallingStone.class, this, 3, 160, 5, true);
+        MinecraftForge.registerEntity(EntityFallingDirt.class, this, 4, 160, 5, true);
+        MinecraftForge.registerEntity(EntityFallingStone2.class, this, 5, 160, 5, true);
+        MinecraftForge.registerEntity(EntityCowTFC.class, this, 6, 160, 5, true);
         
       //last thing
         initOreDictionary();
@@ -602,10 +609,12 @@ public class mod_TFC_Core extends NetworkMod
         
         fruitTreeWood = new BlockFruitWood(TFCSettings.getIntFor(config,"block","fruitTreeWood", 175), 0, TileEntityFruitTreeWood.class).setBlockName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
         fruitTreeLeaves = new BlockFruitLeaves(TFCSettings.getIntFor(config,"block","fruitTreeLeaves", 174), 48).setBlockName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
-        
+        fruitTreeLeaves2 = new BlockFruitLeaves(TFCSettings.getIntFor(config,"block","fruitTreeLeaves2", 173), 56).setBlockName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
         
         Block.blocksList[5] = null;
         Block.blocksList[6] = null;
+        //Block.blocksList[8] = null;
+        //Block.blocksList[9] = null;
         Block.blocksList[17] = null;
         Block.blocksList[18] = null;
         Block.blocksList[31] = null;
@@ -619,11 +628,14 @@ public class mod_TFC_Core extends NetworkMod
         Block.blocksList[78] = null;
         Block.blocksList[79] = null;
         Block.blocksList[83] = null;
+        Block.blocksList[106] = null;
         
         Block.blocksList[5] = (new BlockTerraPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
         Block.blocksList[6] = (new BlockCustomSapling(6, 160)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sapling").setRequiresSelfNotify();
+        //Block.blocksList[8]= (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
+        //Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
         Block.blocksList[17] = (new BlockTerraWood(17)).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
-        Block.blocksList[18] = /*(BlockLeaves)*/(new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
+        Block.blocksList[18] = (new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
         Block.blocksList[31] = (BlockTallGrass)(new BlockCustomTallGrass(31, 39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("tallgrass");
         Block.blocksList[37] = (BlockFlower)(new BlockCustomFlower(37, 13)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("flower");
         Block.blocksList[38] = (BlockFlower)(new BlockCustomFlower(38, 12)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("rose");
@@ -635,13 +647,14 @@ public class mod_TFC_Core extends NetworkMod
         Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setBlockName("snow").setLightOpacity(1);
         Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setBlockName("ice");
         Block.blocksList[83] = (new BlockCustomReed(83, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("reeds").disableStats();
+        Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setBlockName("vine").setRequiresSelfNotify();
         
         
         terraWood = Block.blocksList[17];
         terraLeaves = Block.blocksList[18];
         terraSapling = Block.blocksList[6];
         
-        bucketWater = new BlockBucketWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
+        finiteWater = new BlockFiniteWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
         terraFirepit = new BlockTerraFirepit(TFCSettings.getIntFor(config,"block","terraFirepit", 207), TileEntityTerraFirepit.class, 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
         terraBellows = new BlockTerraBellows(TFCSettings.getIntFor(config,"block","terraBellows", 206),Material.wood).setBlockName("terraBellows").setHardness(2);
@@ -649,6 +662,8 @@ public class mod_TFC_Core extends NetworkMod
         terraScribe = new BlockTerraScribe(TFCSettings.getIntFor(config,"block","terraScribe", 204), TileEntityTerraScribe.class).setBlockName("terraScribe").setHardness(2);
         terraAnvil = new BlockTerraAnvil(TFCSettings.getIntFor(config,"block","terraAnvil", 205),192, TileEntityTerraAnvil.class).setBlockName("terraAnvil").setHardness(3);
         terraAnvil2 = new BlockTerraAnvil(TFCSettings.getIntFor(config,"block","terraAnvil2", 225),208, TileEntityTerraAnvil.class).setBlockName("terraAnvil2").setHardness(3);
+        //ItemBlock lampItem = new ItemBlock(terraAnvil2.blockID - 256);
+        //Item.itemsList[terraAnvil2.blockID] = lampItem;
         terraMetalTable = new BlockTerraMetallurgy(TFCSettings.getIntFor(config,"block","terraMetallurgy", 218), TileEntityTerraMetallurgy.class).setBlockName("terraMetallurgy").setHardness(3);
         terraMolten = new BlockTerraMolten(TFCSettings.getIntFor(config,"block","terraMolten", 219)).setBlockName("terraMolten").setHardness(20);
         terraBloomery = new BlockTerraBloomery(TFCSettings.getIntFor(config,"block","terraBloomery", 220), TileEntityTerraBloomery.class, 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
@@ -1041,13 +1056,37 @@ public class mod_TFC_Core extends NetworkMod
     @Override
     public boolean clientSideRequired() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean serverSideRequired() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
+    }
+
+    
+    public String getUpdateURL()
+    {
+        return "http://www.terrafirmacraft.com/files/TFCVersion.txt";
+    }
+
+    
+    public String getModURL()
+    {
+        return "http://www.terrafirmacraft.com/download/change-log/";
+    }
+
+    
+    public ModType getModType()
+    {
+        return ModType.CORE;
+    }
+    
+    @Override
+    public String getVersion()
+    {
+        return "Beta 2 Pre 39";
     }
 
 }

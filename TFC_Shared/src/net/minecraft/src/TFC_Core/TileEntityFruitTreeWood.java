@@ -29,6 +29,10 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
     {
         birthTime = TFCSeasons.totalDays();
     }
+    public void setBirth(long t)
+    {
+        birthTime += t;
+    }
     
     public void setTrunk(boolean b)
     {

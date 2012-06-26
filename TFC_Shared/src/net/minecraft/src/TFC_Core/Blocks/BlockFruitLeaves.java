@@ -64,11 +64,11 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
 
         if(TFCSeasons.currentMonth >= 3 && TFCSeasons.currentMonth < 9)
         {
-            return index+(meta & 7);
+            return index;
         }
         else
         {
-            return index+(meta & 7) - 32;
+            return index - 32;
         }
     }
 
@@ -90,10 +90,7 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
     {
         if(!world.isRemote)
         {
-            if((world.getBlockId(i, j+1, k) != 0 && world.getBlockId(i, j+2, k) != 0 && world.getBlockId(i, j+2, k) != blockID) ||
-                    world.getBlockId(i, j+1, k) == mod_TFC_Core.fruitTreeWood.blockID || 
-                    world.getBlockId(i, j+2, k) == mod_TFC_Core.fruitTreeWood.blockID || 
-                    (world.getBlockId(i, j+1, k) != blockID && world.isBlockOpaqueCube(i, j-1, k)))
+            if(!canStay(world,i,j,k,blockID))
             {
                 world.setBlock(i, j, k, 0);
                 world.markBlockNeedsUpdate(i, j, k);
@@ -104,19 +101,31 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
             int m = meta - 8;
             //((TileEntityFruitTreeLeaves)world.getBlockTileEntity(i, j, k)).updateEntity();
             FloraManager manager = FloraManager.getInstance();
-            FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(m));
-            FloraIndex fi2 = FloraManager.getInstance().findMatchingIndex(getType(meta));
+            FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(blockID, m));
+            FloraIndex fi2 = FloraManager.getInstance().findMatchingIndex(getType(blockID, meta));
             if(fi2 != null)
             {
-                if(fi2.inHarvest(TFCSeasons.currentMonth))
+                if(world.getBiomeGenForCoords(i, k).getFloatTemperature() >= fi2.minTemp && world.getBiomeGenForCoords(i, k).getFloatTemperature() < fi2.maxTemp)
                 {
-                    if(rand.nextInt(5) == 0)
+                    if(fi2.inHarvest(TFCSeasons.currentMonth))
                     {
-                        if(meta < 8)
+                        if(rand.nextInt(1) == 0)
                         {
-                            meta += 8;
+                            if(meta < 8)
+                            {
+                                meta += 8;
+                            }
+                            world.setBlockMetadata(i, j, k, meta); 
+                            world.markBlockNeedsUpdate(i, j, k);
                         }
-                        world.setBlockMetadata(i, j, k, meta); world.markBlockNeedsUpdate(i, j, k);
+                    }
+                }
+                else
+                {
+                    if(meta >= 8 && rand.nextInt(10) == 0)
+                    {
+                        world.setBlockMetadata(i, j, k, meta-8); 
+                        world.markBlockNeedsUpdate(i, j, k);
                     }
                 }
             }
@@ -126,31 +135,9 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
                 {
                     if(world.getBlockMetadata(i, j, k) >= 8)
                     {
-                        world.setBlockMetadata(i, j, k, meta-8); world.markBlockNeedsUpdate(i, j, k);
+                        world.setBlockMetadata(i, j, k, meta-8); 
+                        world.markBlockNeedsUpdate(i, j, k);
                     }
-                }
-
-                if(fi.inHarvest(TFCSeasons.currentMonth) && meta >= 8)
-                {
-                    if(rand.nextInt(100) < 10)
-                    {
-                        if(fi != null)
-                        {
-                            dropBlockAsItem_do(world, i, j, k, fi.output.copy());
-                        }
-                    }
-
-                    world.setBlockMetadata(i, j, k, m); world.markBlockNeedsUpdate(i, j, k);
-                }
-                else if(!fi.inHarvest(TFCSeasons.currentMonth) && meta >= 8)
-                {
-
-                    if(fi != null)
-                    {
-                        dropBlockAsItem_do(world, i, j, k, fi.output.copy());
-                    }
-
-                    world.setBlockMetadata(i, j, k, m); world.markBlockNeedsUpdate(i, j, k);
                 }
             }
             if(rand.nextInt(100) > 50)
@@ -158,10 +145,21 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
         }
         return;
     }
-
-    public String getType(int meta)
+    
+    public static boolean canStay(World world, int i, int j, int k, int id)
     {
-        if(this.blockID == mod_TFC_Core.fruitTreeLeaves.blockID)
+        if((world.getBlockId(i, j+1, k) != 0 && world.getBlockId(i, j+2, k) != 0 && world.getBlockId(i, j+2, k) != id) ||
+                world.getBlockId(i, j+1, k) == mod_TFC_Core.fruitTreeWood.blockID || 
+                world.getBlockId(i, j+2, k) == mod_TFC_Core.fruitTreeWood.blockID)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static String getType(int id, int meta)
+    {
+        if(id == mod_TFC_Core.fruitTreeLeaves.blockID)
         {
             switch(meta)
             {
@@ -171,31 +169,31 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
                 }
                 case 1:
                 {
-                    return "green apple";
+                    return "banana";
                 }
                 case 2:
                 {
-                    return "olive";
+                    return "orange";
                 }
                 case 3:
                 {
-                    return "banana";
+                    return "green apple";
                 }
                 case 4:
                 {
-                    return "peach";
+                    return "lemon";
                 }
                 case 5:
                 {
-                    return "cherry";
+                    return "olive";
                 }
                 case 6:
                 {
-                    return "plum";
+                    return "cherry";
                 }
                 case 7:
                 {
-                    return "orange";
+                    return "peach";
                 }
             }
         }
@@ -205,7 +203,7 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
             {
                 case 0:
                 {
-                    return "lemon";
+                    return "plum";
                 }
                 case 1:
                 {
@@ -264,7 +262,7 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
                                 }
-                                else if (var15 == mod_TFC_Core.fruitTreeLeaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
+                                else if (var15 == blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
                                 }
@@ -375,8 +373,16 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
         {
             entityplayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);
             entityplayer.addExhaustion(0.025F);
-            if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && l >= 8)
-                dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.appleRed, 1+new Random().nextInt(2)));
+
+            FloraManager manager = FloraManager.getInstance();
+            FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(blockID, l & 7));
+
+            if(fi != null && (fi.inHarvest(TFCSeasons.currentMonth) || fi.inHarvest(TFCSeasons.lastMonth)))
+            {
+                
+                if(fi != null)
+                    dropBlockAsItem_do(world, i, j, k, fi.getOutput());
+            }
 
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }

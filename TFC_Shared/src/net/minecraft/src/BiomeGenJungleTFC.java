@@ -47,4 +47,37 @@ public class BiomeGenJungleTFC extends BiomeGenBase
 	{
 		return (WorldGenerator)(par1Random.nextInt(10) == 0 ? new WorldGenCustomShortTrees(false,15) : par1Random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : par1Random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + par1Random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15));
 	}
+	
+	protected float getMonthTemp(int month)
+    {
+        switch(month)
+        {
+            case 11:
+                return 0.78F;
+            case 0:
+                return 0.78F;
+            case 1:
+                return 0.78F;
+            case 2:
+                return 0.79F;
+            case 3:
+                return 0.79F; 
+            case 4:
+                return 0.79F;
+            case 5:
+                return 0.78F;
+            case 6:
+                return 0.78F;
+            case 7:
+                return 0.78F;
+            case 8:
+                return 0.77F;
+            case 9:
+                return 0.77F;
+            case 10:
+                return 0.77F;
+            default:
+                return 1F;
+        }
+    }
 }

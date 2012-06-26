@@ -259,13 +259,20 @@ public class TFCItems
     public static Item SteelScythe;
     public static Item TinScythe;
     public static Item ZincScythe;
-
-    /**Food Related Items and Blocks*/
-    public static Item SeedsWheat;
-    public static Item SeedsMelon;
-    public static Item SeedsPumpkin;
     
-    
+    public static Item BismuthKnife;
+    public static Item BismuthBronzeKnife;
+    public static Item BlackBronzeKnife;
+    public static Item BlackSteelKnife;
+    public static Item BlueSteelKnife;
+    public static Item BronzeKnife;
+    public static Item CopperKnife;
+    public static Item WroughtIronKnife;
+    public static Item RedSteelKnife;
+    public static Item RoseGoldKnife;
+    public static Item SteelKnife;
+    public static Item TinKnife;
+    public static Item ZincKnife;
     
     public static Item terraFireStarter;
     public static Item terraBellowsItem;
@@ -347,6 +354,7 @@ public class TFCItems
     public static Item GreavesPlan;
     public static Item BootsPlan;
     public static Item ScythePlan;
+    public static Item KnifePlan;
 
     //Tool Heads
     public static Item BismuthPickaxeHead;
@@ -503,6 +511,20 @@ public class TFCItems
     public static Item SteelScytheHead;
     public static Item TinScytheHead;
     public static Item ZincScytheHead;
+    
+    public static Item BismuthKnifeHead;
+    public static Item BismuthBronzeKnifeHead;
+    public static Item BlackBronzeKnifeHead;
+    public static Item BlackSteelKnifeHead;
+    public static Item BlueSteelKnifeHead;
+    public static Item BronzeKnifeHead;
+    public static Item CopperKnifeHead;
+    public static Item WroughtIronKnifeHead;
+    public static Item RedSteelKnifeHead;
+    public static Item RoseGoldKnifeHead;
+    public static Item SteelKnifeHead;
+    public static Item TinKnifeHead;
+    public static Item ZincKnifeHead;
 
     public static Item Coke;
     public static Item Flux;
@@ -668,8 +690,29 @@ public class TFCItems
     public static Item TinHelmet;
     public static Item ZincHelmet;
     
+    public static Item WoodenBucketEmpty;
+    public static Item WoodenBucketWater;
+    public static Item WoodenBucketMilk;
+    
+    /**Food Related Items and Blocks*/
+    public static Item SeedsWheat;
+    public static Item SeedsMelon;
+    public static Item SeedsPumpkin;
+    
     public static Item FruitTreeSapling1;
     public static Item FruitTreeSapling2;
+    
+    public static Item RedApple;
+    public static Item GreenApple;
+    public static Item Banana;
+    public static Item Orange;
+    public static Item Lemon;
+    public static Item Olive;
+    public static Item Cherry;
+    public static Item Peach;
+    public static Item Plum;
+    public static Item Egg;
+    public static Item EggCooked;
     
     public static int IgInStoneUses = 60;
     public static int IgExStoneUses = 70;
@@ -978,7 +1021,7 @@ public class TFCItems
         Javelin = new ItemTerraJavelin(TFCSettings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(15, 1);
 
         Item.itemsList[Item.dyePowder.shiftedIndex] = null;
-        Item.itemsList[95] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
+        Item.itemsList[Item.dyePowder.shiftedIndex] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
         
         terraSlag = new ItemTerra(TFCSettings.getIntFor(config,"item","terraSlag",16349),"/bioxx/terrasprites.png").setItemName("terraSlag").setIconCoord(2, 0);
 
@@ -1191,7 +1234,7 @@ public class TFCItems
         terraBismuthBronzeAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraBismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setItemName("terraBismuthBronzeAnvilItem").setIconCoord(2, 2);
         terraBlackBronzeAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraBlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setItemName("terraBlackBronzeAnvilItem").setIconCoord(3, 2);
         terraRoseGoldAnvilItem = new ItemTerraAnvil(TFCSettings.getIntFor(config,"item","terraRoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setItemName("terraRoseGoldAnvilItem").setIconCoord(10, 2);
-        
+
         /**
          * Scythe
          * */
@@ -1240,22 +1283,67 @@ public class TFCItems
         GreavesPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","GreavesPlan",num)).setItemName("GreavesPlan").setIconCoord(0, 0);num++;
         BootsPlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","BootsPlan",num)).setItemName("BootsPlan").setIconCoord(0, 0);num++;
         ScythePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","ScythePlan",num)).setItemName("ScythePlan").setIconCoord(0, 0);num++;
+        KnifePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","KnifePlan",num)).setItemName("KnifePlan").setIconCoord(0, 0);num++;
         
+        WoodenBucketEmpty = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketEmpty",num), 0)).setIconCoord(13, 0).setItemName("WoodenBucketEmpty");num++;
+        WoodenBucketWater = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketWater",num), mod_TFC_Core.finiteWater.blockID)).setIconCoord(14, 0).setItemName("WoodenBucketWater").setContainerItem(WoodenBucketEmpty);num++;
+        WoodenBucketMilk = (new ItemCustomBucketMilk(TFCSettings.getIntFor(config,"item","WoodenBucketMilk",num))).setIconCoord(15, 0).setItemName("WoodenBucketMilk").setContainerItem(WoodenBucketEmpty);num++;
+        
+        BismuthKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthKnifeHead",num)).setItemName("Bismuth Knife Blade").setIconCoord(1, 10);num++;
+        BismuthBronzeKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthBronzeKnifeHead",num)).setItemName("Bismuth Bronze Knife Blade").setIconCoord(2, 10);num++;
+        BlackBronzeKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BlackBronzeKnifeHead",num)).setItemName("Black Bronze Knife Blade").setIconCoord(3, 10);num++;
+        BlackSteelKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BlackSteelKnifeHead",num)).setItemName("Black Steel Knife Blade").setIconCoord(4, 10);num++;
+        BlueSteelKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BlueSteelKnifeHead",num)).setItemName("Blue Steel Knife Blade").setIconCoord(5, 10);num++;
+        BronzeKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BronzeKnifeHead",num)).setItemName("Bronze Knife Blade").setIconCoord(6, 10);num++;
+        CopperKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","CopperKnifeHead",num)).setItemName("Copper Knife Blade").setIconCoord(7, 10);num++;
+        WroughtIronKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","WroughtIronKnifeHead",num)).setItemName("Wrought Iron Knife Blade").setIconCoord(8, 10);num++;
+        RedSteelKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","RedSteelKnifeHead",num)).setItemName("Red Steel Knife Blade").setIconCoord(9, 10);num++;
+        RoseGoldKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","RoseGoldKnifeHead",num)).setItemName("Rose Gold Knife Blade").setIconCoord(10, 10);num++;
+        SteelKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SteelKnifeHead",num)).setItemName("Steel Knife Blade").setIconCoord(11, 10);num++;
+        TinKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","TinKnifeHead",num)).setItemName("Tin Knife Blade").setIconCoord(12, 10);num++;
+        ZincKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","ZincKnifeHead",num)).setItemName("Zinc Knife Blade").setIconCoord(13, 10);num++;
+        
+        BismuthKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","BismuthKnife",num),BismuthToolMaterial).setItemName("Bismuth Knife").setMaxDamage(BismuthUses).setIconCoord(1, 10);num++;
+        BismuthBronzeKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","BismuthBronzeKnife",num),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Knife").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 10);num++;
+        BlackBronzeKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","BlackBronzeKnife",num),BlackBronzeToolMaterial).setItemName("Black Bronze Knife").setMaxDamage(BlackBronzeUses).setIconCoord(3, 10);num++;
+        BlackSteelKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","BlackSteelKnife",num),BlackSteelToolMaterial).setItemName("Black Steel Knife").setMaxDamage(BlackSteelUses).setIconCoord(4, 10);num++;
+        BlueSteelKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","BlueSteelKnife",num),BlueSteelToolMaterial).setItemName("Blue Steel Knife").setMaxDamage(BlueSteelUses).setIconCoord(5, 10);num++;
+        BronzeKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","BronzeKnife",num),BronzeToolMaterial).setItemName("Bronze Knife").setMaxDamage(BronzeUses).setIconCoord(6, 10);num++;
+        CopperKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","CopperKnife",num),CopperToolMaterial).setItemName("Copper Knife").setMaxDamage(CopperUses).setIconCoord(7, 10);num++;
+        WroughtIronKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","WroughtIronKnife",num),IronToolMaterial).setItemName("Wrought Iron Knife").setMaxDamage(WroughtIronUses).setIconCoord(8, 10);num++;
+        RedSteelKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","RedSteelKnife",num),RedSteelToolMaterial).setItemName("Red Steel Knife").setMaxDamage(RedSteelUses).setIconCoord(9, 10);num++;
+        RoseGoldKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","RoseGoldKnife",num),RoseGoldToolMaterial).setItemName("Rose Gold Knife").setMaxDamage(RoseGoldUses).setIconCoord(10, 10);num++;
+        SteelKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","SteelKnife",num),SteelToolMaterial).setItemName("Steel Knife").setMaxDamage(SteelUses).setIconCoord(11, 10);num++;
+        TinKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","TinKnife",num),TinToolMaterial).setItemName("Tin Knife").setMaxDamage(TinUses).setIconCoord(12, 10);num++;
+        ZincKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","ZincKnife",num),ZincToolMaterial).setItemName("Zinc Knife").setMaxDamage(ZincUses).setIconCoord(13, 10);num++;
+        
+        Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
         /**Food Items*/
-        Item.itemsList[63] = null; Item.itemsList[63] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
-        Item.itemsList[64] = null; Item.itemsList[64] = new ItemTerraFood(64, 8, 0.8F, true,"/gui/items.png").setIconCoord(8, 5).setItemName("porkchopCooked");
-        Item.itemsList[93] = null; Item.itemsList[93] = new ItemTerraFood(93, 2, 0.3F, true,"/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
-        Item.itemsList[94] = null; Item.itemsList[94] = new ItemTerraFood(94, 5, 0.6F, true,"/gui/items.png").setIconCoord(10, 5).setItemName("fishCooked");
-        Item.itemsList[107] = null; Item.itemsList[107] = new ItemTerraFood(107, 3, 0.3F, true,"/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
-        Item.itemsList[108] = null; Item.itemsList[108] = new ItemTerraFood(108, 8, 0.8F, true,"/gui/items.png").setIconCoord(10, 6).setItemName("beefCooked");
-        Item.itemsList[109] = null; Item.itemsList[109] = new ItemTerraFood(109, 2, 0.3F, true,"/gui/items.png").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
-        Item.itemsList[110] = null; Item.itemsList[110] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
+        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
+        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 8, 0.8F, true,"/gui/items.png").setIconCoord(8, 5).setItemName("porkchopCooked");
+        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerraFood(93, 2, 0.3F, true,"/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
+        Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 5, 0.6F, true,"/gui/items.png").setIconCoord(10, 5).setItemName("fishCooked");
+        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerraFood(107, 3, 0.3F, true,"/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
+        Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 8, 0.8F, true,"/gui/items.png").setIconCoord(10, 6).setItemName("beefCooked");
+        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerraFood(109, 2, 0.3F, true,"/gui/items.png").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
+        Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
+        Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 5, 0.6F, false,"/gui/items.png")).setIconCoord(9, 2).setItemName("bread");
+        Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
         
         num = 18000;
         SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),Block.crops.blockID,mod_TFC_Core.tilledSoil.blockID,mod_TFC_Core.tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
         FruitTreeSapling1 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling1", num), "/bioxx/Vegetation.png", 0).setItemName("FruitSapling1").setIconCoord(0, 7);num++;
-        //FruitTreeSapling2 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling2", num), "/bioxx/Vegetation.png", 8).setItemName("FruitSapling2").setIconCoord(0, 7);num++;
-        
+        FruitTreeSapling2 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling2", num), "/bioxx/Vegetation.png", 8).setItemName("FruitSapling2").setIconCoord(8, 7);num++;
+        RedApple = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Red Apple",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(2, 0).setItemName("Fruit.Red Apple");num++;
+        Banana = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Banana",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 0).setItemName("Fruit.Banana");num++;
+        Orange = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Orange",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(1, 0).setItemName("Fruit.Orange");num++;
+        GreenApple = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Green Apple",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(3, 0).setItemName("Fruit.Green Apple");num++;
+        Lemon = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Lemon",num), 2, 0.03F, false,"/bioxx/FoodSprites.png").setIconCoord(4, 0).setItemName("Fruit.Lemon");num++;
+        Olive = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Olive",num), 1, 0.05F, false,"/bioxx/FoodSprites.png").setIconCoord(8, 0).setItemName("Fruit.Olive");num++;
+        Cherry = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Cherry",num), 1, 0.03F, false,"/bioxx/FoodSprites.png").setIconCoord(5, 0).setItemName("Fruit.Cherry");num++;
+        Peach = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Peach",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(6, 0).setItemName("Fruit.Peach");num++;
+        Plum = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Plum",num), 2, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(7, 0).setItemName("Fruit.Plum");num++;
+        EggCooked = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Meat.EggCooked",num), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Meat.EggCooked");num++;
         
         
         /**Armor Crafting related items*/

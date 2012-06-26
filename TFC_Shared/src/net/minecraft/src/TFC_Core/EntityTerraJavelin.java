@@ -12,6 +12,7 @@ public class EntityTerraJavelin extends Entity
 	private int inData = 0;
 	private boolean inGround = false;
 	public boolean doesArrowBelongToPlayer = false;
+	private int damageTaken = 0;
 
 	/** Seems to be some sort of timer for animating an arrow. */
 	public int arrowShake = 0;
@@ -114,7 +115,7 @@ public class EntityTerraJavelin extends Entity
 	{
 		if (!this.worldObj.isRemote)
 		{
-			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0 && par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Javelin, 1)))
+			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0 && par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Javelin, 1, damageTaken)))
 			{
 				this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				par1EntityPlayer.onItemPickup(this, 1);
@@ -381,6 +382,7 @@ public class EntityTerraJavelin extends Entity
 		this.arrowShake = par1NBTTagCompound.getByte("shake") & 255;
 		this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
 		this.doesArrowBelongToPlayer = par1NBTTagCompound.getBoolean("player");
+		this.damageTaken = par1NBTTagCompound.getShort("damageTaken");
 
 		if (par1NBTTagCompound.hasKey("damage"))
 		{
@@ -417,6 +419,10 @@ public class EntityTerraJavelin extends Entity
 	{
 		this.damage = par1;
 	}
+	public void setDamageTaken(int par1)
+    {
+        this.damageTaken = par1;
+    }
 
 	/**
 	 * Sets the velocity to the args. Args: x, y, z
@@ -453,5 +459,6 @@ public class EntityTerraJavelin extends Entity
 		par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
 		par1NBTTagCompound.setBoolean("player", this.doesArrowBelongToPlayer);
 		par1NBTTagCompound.setDouble("damage", this.damage);
+		par1NBTTagCompound.setShort("damageTaken", (short)this.damageTaken);
 	}
 }

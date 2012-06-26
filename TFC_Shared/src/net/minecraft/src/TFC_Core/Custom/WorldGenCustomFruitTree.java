@@ -19,82 +19,62 @@ public class WorldGenCustomFruitTree extends WorldGenerator
     }
     public boolean generate(World world, Random random, int i, int j, int k)
     {
-        if(world.getBlockId(i, j, k) == 0)
+        if(world.getBlockId(i, j, k) == 0 && j < 250)
         {
             world.setBlockAndMetadata(i, j, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setHeight(0);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirth();
-        }
-        if(world.getBlockId(i, j+1, k) == 0)
-        {
-            world.setBlockAndMetadata(i, j+1, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setTrunk(true);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setHeight(1);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setBirth();
-        }
-        if(world.getBlockId(i, j+2, k) == 0)
-        {
-            world.setBlockAndMetadata(i, j+2, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setTrunk(true);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setHeight(2);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setBirth();
-
-            if(world.getBlockId(i+1, j+2, k) == 0)
-                world.setBlockAndMetadata(i+1, j+2, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            SurroundWithLeaves(world,i+1,j+2,k);
             
-//            if(world.getBlockId(i+1, j+3, k) == 0)
-//                world.setBlockAndMetadata(i+1, j+3, k, leavesId, metaId);
-//            if(world.getBlockId(i+2, j+2, k) == 0)
-//                world.setBlockAndMetadata(i+2, j+2, k, leavesId, metaId);
-//            if(world.getBlockId(i+1, j+2, k+1) == 0)
-//                world.setBlockAndMetadata(i+1, j+2, k+1, leavesId, metaId);
-//            if(world.getBlockId(i+1, j+2, k-1) == 0)
-//                world.setBlockAndMetadata(i+1, j+2, k-1, leavesId, metaId);
+            if(world.getBlockId(i, j+1, k) == 0)
+            {
+                world.setBlockAndMetadata(i, j+1, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setTrunk(true);
+                ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setHeight(1);
+                ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setBirth();
+                
+                if(world.getBlockId(i, j+2, k) == 0)
+                {
+                    world.setBlockAndMetadata(i, j+2, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setTrunk(true);
+                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setHeight(2);
+                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setBirth();
 
-            world.setBlockAndMetadata(i-1, j+2, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            SurroundWithLeaves(world,i-1,j+2,k);
-//            world.setBlockAndMetadata(i-1, j+3, k, leavesId, metaId);
-//            world.setBlockAndMetadata(i-2, j+2, k, leavesId, metaId);
-//            world.setBlockAndMetadata(i-1, j+2, k+1, leavesId, metaId);
-//            world.setBlockAndMetadata(i-1, j+2, k-1, leavesId, metaId);
-
-            world.setBlockAndMetadata(i, j+2, k+1, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            SurroundWithLeaves(world,i,j+2,k+1);
-//            world.setBlockAndMetadata(i, j+3, k+1, leavesId, metaId);
-//            world.setBlockAndMetadata(i, j+2, k+2, leavesId, metaId);
-//            world.setBlockAndMetadata(i+1, j+2, k+1, leavesId, metaId);
-//            world.setBlockAndMetadata(i-1, j+2, k+1, leavesId, metaId);
-
-            world.setBlockAndMetadata(i, j+2, k-1, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            SurroundWithLeaves(world,i,j+2,k-1);
-//            world.setBlockAndMetadata(i, j+3, k-1, leavesId, metaId);
-//            world.setBlockAndMetadata(i, j+2, k-2, leavesId, metaId);
-//            world.setBlockAndMetadata(i+1, j+2, k-1, leavesId, metaId);
-//            world.setBlockAndMetadata(i-1, j+2, k-1, leavesId, metaId);
-
+                    if(world.getBlockId(i+1, j+2, k) == 0 || world.getBlockId(i+1, j+2, k) == leavesId)
+                    {
+                        world.setBlockAndMetadata(i+1, j+2, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                        SurroundWithLeaves(world,i+1,j+2,k);
+                    }
+                    if(world.getBlockId(i-1, j+2, k) == 0 || world.getBlockId(i-1, j+2, k-1) == leavesId)
+                    {
+                        world.setBlockAndMetadata(i-1, j+2, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                        SurroundWithLeaves(world,i-1,j+2,k);
+                    }
+                    if(world.getBlockId(i, j+2, k+1) == 0 || world.getBlockId(i, j+2, k+1) == leavesId)
+                    {
+                        world.setBlockAndMetadata(i, j+2, k+1, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                        SurroundWithLeaves(world,i,j+2,k+1);
+                    }
+                    if(world.getBlockId(i, j+2, k-1) == 0 || world.getBlockId(i, j+2, k-1) == leavesId)
+                    {
+                        world.setBlockAndMetadata(i, j+2, k-1, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                        SurroundWithLeaves(world,i,j+2,k-1);
+                    }
+                    
+                    if(world.getBlockId(i, j+3, k) == 0 || world.getBlockId(i, j+3, k) == leavesId)
+                    {
+                        world.setBlockAndMetadata(i, j+3, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
+                        ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setTrunk(true);
+                        ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setHeight(3);
+                        ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setBirth();
+                        SurroundWithLeaves(world,i,j+3,k);
+                    }
+                }         
+            }  
         }
-        if(world.getBlockId(i, j+3, k) == 0 || world.getBlockId(i, j+3, k) == leavesId)
-        {
-            world.setBlockAndMetadata(i, j+3, k, mod_TFC_Core.fruitTreeWood.blockID, metaId);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setTrunk(true);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setHeight(3);
-            ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setBirth();
-            SurroundWithLeaves(world,i,j+3,k);
-        }
-
-
-//        if(world.getBlockId(i, j+4, k) == 0)
-//        {
-//            world.setBlockAndMetadata(i, j+4, k, leavesId, metaId);
-//        }
-
-
-
         return true;
     }
-    
+
     public void SurroundWithLeaves(World world, int i, int j, int k)
     {
         for (int y = 1; y >= 0; y--)

@@ -164,7 +164,7 @@ public class TFC_GameRender
 			
 		}
 
-		
+		block.setBlockBoundsBasedOnState(blockAccess, i, j, k);
 		return true;
 	}
 }

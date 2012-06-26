@@ -9,6 +9,7 @@ public class TFCSeasons
     public static String[] Days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     
     public static int currentDay = 0;
+    public static int lastMonth = 11;
     public static int currentMonth = 0;
     public static int currentYear = 0;
     private static long time = 0;
@@ -30,7 +31,14 @@ public class TFCSeasons
     public static void UpdateSeasons(World world)
     {
         time = world.getWorldInfo().getWorldTime();
-        currentMonth = getMonth();
+        int m = getMonth();
+        int m1 = m - 1;
+        
+        if(m1 < 0)
+            m1 = 11;
+        
+        lastMonth = m1;
+        currentMonth = m;
         currentYear = getYear();
     }
     
@@ -68,7 +76,7 @@ public class TFCSeasons
         
         long years = 12960000*year;
         long years2 = time - years;;
-        return (int) (years2/36000);
+        return (int) (years2/24000);
     }
     
     public static int getMonth()
@@ -88,13 +96,13 @@ public class TFCSeasons
     
     public static long totalDays()
     {
-        return (time/36000);
+        return (time/24000);
     }
     
     public static long totalMonths()
     {
         return totalDays() / 30;
-    }
+    } 
     
     public static long totalYears()
     {
@@ -103,10 +111,13 @@ public class TFCSeasons
     
     public static long getHour()
     {
-        long h = (time - ((time / 36000)*36000))/1500;
+        long h = (time - ((time / 24000)*24000))/1000;
+        h -= 6;
+        if(h < 0)
+            h = 23 + h;
         h -= 12;
         if(h < 0)
             h = 23+h;
-        return h;
+        return  h;
     }
 }

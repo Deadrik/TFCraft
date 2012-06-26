@@ -325,51 +325,48 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 fuelTimeLeft--;
             }
-            if(numAirBlocks == 0)
+//            if(numAirBlocks == 0)
+//            {
+//                for (int x = -1; x < 2; x++)
+//                {
+//                    for (int y = 0; y < 3; y++)
+//                    {
+//                        for (int z = -1; z < 2; z++)
+//                        {
+//                            if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
+//                                numAirBlocks++;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            if(yCoord < 128)
             {
-                for (int x = -1; x < 2; x++)
-                {
-                    for (int y = 0; y < 3; y++)
-                    {
-                        for (int z = -1; z < 2; z++)
-                        {
-                            if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-                                numAirBlocks++;
-                            }
-                        }
-                    }
-                }
+                numAirBlocks = -1 * (256-(yCoord*2));
+            }
+            float t = 1;
+            if(oreCount > charcoalCount) 
+            {
+                t = oreCount - charcoalCount;
+                t*= 0.05F;
+                t = 1 - t;
             }
 
             float bAir = airFromBellows*(1+(float)airFromBellowsTime/120);
 
             AddedAir = (float)(numAirBlocks+bAir)/25/16;
 
-            //            if(yCoord > 60)
-            //            {					
-            //                float w = worldObj.getHeight() - yCoord;
-            //                float w1 = w / worldObj.getHeight();
-            //                float w2 = 1 - w1;
-            //                float w3 = w2 * 0.105F;
-            //
-            //                AddedAir += w3;
-            //            }
-
-            desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
+            desiredTemp = (fuelBurnTemp + fuelBurnTemp * AddedAir)*t;
 
             if(fireTemperature < desiredTemp)
             {
-                float t = 1.35F;
-                if(oreCount > charcoalCount) 
-                {
-                    float c = (float)charcoalCount/(float)oreCount;
-                    t = t * c;
-                }
-                fireTemperature+=t;
+                float tm = 1.35F;
+
+                fireTemperature+=tm;
             }
             else if(fireTemperature > desiredTemp)
             {
-                if(desiredTemp != ambientTemp)
+                if(desiredTemp > ambientTemp)
                 {
                     if(airFromBellows == 0) {
                         fireTemperature-=0.225F;
@@ -551,6 +548,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
                 if(input[0] != null)
                     input[0].setItemDamage(100-dam);
+                
+                TFCHeat.SetTemperature(input[0], fireTemperature);
 
                 return true;
             }
@@ -571,6 +570,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
                 if(outMetal1Count == 0)
                     outMetal1 = null; 
+                
+                TFCHeat.SetTemperature(input[0], fireTemperature);
 
                 return true;
             }
@@ -591,6 +592,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
                 if(outMetal2Count == 0)
                     outMetal2 = null; 
+                
+                TFCHeat.SetTemperature(input[0], fireTemperature);
 
                 return true;
             }
@@ -663,8 +666,9 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             for (int i = 0; i < 5; i++)
             {
                 /*The stack must be air or already be molten rock*/
-                if(worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
-                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == mod_TFC_Core.terraMolten.blockID)
+                if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
+                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == mod_TFC_Core.terraMolten.blockID) &&
+                        worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
                 {
                     //Make sure that the Stack is surrounded by rock
                     if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
@@ -712,7 +716,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                         {
                             if(charcoalCount+oreCount < 40 && oreCount < 20)
                             {
-                                if(AddOreToFire(entity.item)) 
+                                if(AddOreToFire(new ItemStack(entity.item.getItem(),1,entity.item.getItemDamage()))) 
                                 {
                                     oreCount+=1;
                                     oreDamage = entity.item.getItemDamage();

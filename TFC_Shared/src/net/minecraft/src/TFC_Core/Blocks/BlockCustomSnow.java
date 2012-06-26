@@ -170,20 +170,35 @@ public class BlockCustomSnow extends Block
 			}
 		}
 		
-		if(par1World.isRaining() && TFCSeasons.currentMonth >= 9)
+		if(par1World.isRaining() && par1World.getBiomeGenForCoords(par2, par4).getFloatTemperature() <= 0.2F)//Raining and Below Freezing
 		{      
-			if(meta <= 15 && par5Random.nextInt(3) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) {
+			if(meta < 3 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) 
+			{
 				par1World.setBlockMetadata(par2, par3, par4, meta+1);
-			} else if(meta < 3 && par5Random.nextInt(3) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
+			} 
+			else if(meta < 15 && par5Random.nextInt(8) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves)
+            {
+                par1World.setBlockMetadata(par2, par3, par4, meta+1);
+            }
+			else if(meta < 3 && par5Random.nextInt(3) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
 			{
 				par1World.setBlockMetadata(par2, par3, par4, meta+1);
 			}
 		}
-		else if(par1World.isRaining() && TFCSeasons.currentMonth < 9)
+		else if(par1World.isRaining() && par1World.getBiomeGenForCoords(par2, par4).getFloatTemperature() > 0.2F)//Raining and above freezing
         {      
-            if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) {
-                par1World.setBlockMetadata(par2, par3, par4, meta-1);
-            } else if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
+            if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) 
+            {
+                if(meta > 1) 
+                {
+                    par1World.setBlockMetadata(par2, par3, par4, meta-1);
+                } 
+                else 
+                {
+                    par1World.setBlockWithNotify(par2, par3, par4, 0);
+                }
+            } 
+            else if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
             {
                 if(meta > 1) {
                     par1World.setBlockMetadata(par2, par3, par4, meta-1);
@@ -192,19 +207,22 @@ public class BlockCustomSnow extends Block
                 }
             }
         }
-		else if(TFCSeasons.currentMonth < 9)
+		else if(par1World.getBiomeGenForCoords(par2, par4).getFloatTemperature() > 0.2F)//Above fReezing
 		{
-			if(meta > 1 && par5Random.nextInt(5) == 0) {
+			if(meta > 1 ) {
 				par1World.setBlockMetadata(par2, par3, par4, meta-1);
-			} else if(meta == 1 && par5Random.nextInt(5) == 0) {
+			} else if(meta == 1) {
 				par1World.setBlockWithNotify(par2, par3, par4, 0);
 			}
 		}
-		else
+		else//Below Freezing
 		{
-		    if(meta > 1) {
+		    if(meta > 1 && par5Random.nextInt(5) == 0) 
+		    {
                 par1World.setBlockMetadata(par2, par3, par4, meta-1);
-            } else {
+            } 
+		    else if(meta == 1 && par5Random.nextInt(5) == 0)
+            {
                 par1World.setBlockWithNotify(par2, par3, par4, 0);
             }
 		}

@@ -14,11 +14,12 @@ import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraOre3 extends BlockTerra
+public class BlockTerraOre3 extends BlockTerraOre
 {
 
 	public BlockTerraOre3(int i, Material material) {
-		super(i,160, material);
+		super(i, material);
+		this.blockIndexInTexture = 160;
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
@@ -34,17 +35,6 @@ public class BlockTerraOre3 extends BlockTerra
         return j+32;
     }
 
-    @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
-    {
-        return blockIndexInTexture + j;
-    }
-
-	public int getRenderType()
-	{
-		return mod_TFC_Core.oreRenderId;
-	}
-
 	/*
 	 * Mapping from metadata value to damage value
 	 */
@@ -54,7 +44,7 @@ public class BlockTerraOre3 extends BlockTerra
 	    if(entityplayer != null)
         {
             entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-            entityplayer.addExhaustion(0.025F);
+            entityplayer.addExhaustion(0.075F);
         }
 		Random random = new Random();
 
@@ -65,12 +55,6 @@ public class BlockTerraOre3 extends BlockTerra
 			dropBlockAsItem_do(world, i, j, k, itemstack);
 		}
 
-	}
-
-	@Override
-	public int idDropped(int i, Random random, int j)
-	{
-		return TFCItems.OreChunk.shiftedIndex;
 	}
 	
 	@Override

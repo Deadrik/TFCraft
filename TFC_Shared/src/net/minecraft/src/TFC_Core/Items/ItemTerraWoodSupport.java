@@ -21,6 +21,8 @@ public class ItemTerraWoodSupport extends Item implements ITextureProvider
 		super(i);
 		maxStackSize = 8;
 		isVertical = vert;
+		this.hasSubtypes = true;
+		this.setMaxDamage(0);
 	}
 
 	/**

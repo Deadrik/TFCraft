@@ -6,10 +6,12 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
 import net.minecraft.src.StatList;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.EntityFallingStone;
+import net.minecraft.src.TFC_Core.EntityFallingStone2;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
 
 public class BlockCollapsable extends BlockTerra
@@ -22,7 +24,7 @@ public class BlockCollapsable extends BlockTerra
         dropBlock = d;
     }
 
-    public boolean canFallBelow(World world, int i, int j, int k)
+    public static boolean canFallBelow(World world, int i, int j, int k)
     {		
         int l = world.getBlockId(i, j, k);
 
@@ -81,7 +83,7 @@ public class BlockCollapsable extends BlockTerra
 
         if(world.isBlockOpaqueCube(i+1, j, k))
         {
-            if(world.isBlockOpaqueCube(i+1, j-1, k))
+            if(world.isBlockOpaqueCube(i+1, j-1, k) && world.isBlockOpaqueCube(i+1, j-2, k))
             {
                 return true;
             }
@@ -89,7 +91,7 @@ public class BlockCollapsable extends BlockTerra
 
         if(world.isBlockOpaqueCube(i-1, j, k))
         {
-            if(world.isBlockOpaqueCube(i-1, j-1, k))
+            if(world.isBlockOpaqueCube(i-1, j-1, k) && world.isBlockOpaqueCube(i-1, j-2, k))
             {
                 return true;
             }
@@ -97,7 +99,7 @@ public class BlockCollapsable extends BlockTerra
 
         if(world.isBlockOpaqueCube(i, j, k+1))
         {
-            if(world.isBlockOpaqueCube(i, j-1, k+1))
+            if(world.isBlockOpaqueCube(i, j-1, k+1) && world.isBlockOpaqueCube(i, j-2, k+1))
             {
                 return true;
             }
@@ -105,7 +107,7 @@ public class BlockCollapsable extends BlockTerra
 
         if(world.isBlockOpaqueCube(i, j, k-1))
         {
-            if(world.isBlockOpaqueCube(i, j-1, k-1))
+            if(world.isBlockOpaqueCube(i, j-1, k-1) && world.isBlockOpaqueCube(i, j-2, k-1))
             {
                 return true;
             }
@@ -200,7 +202,7 @@ public class BlockCollapsable extends BlockTerra
             {
                 Random R = new Random();
 
-                world.spawnEntityInWorld(new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5));
+                world.spawnEntityInWorld(new EntityFallingStone2(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5));
                 world.setBlock(i, j, k, 0);
                 world.markBlockNeedsUpdate(i, j, k);
 
@@ -216,7 +218,7 @@ public class BlockCollapsable extends BlockTerra
         if(entityplayer != null)
         {
             entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-            entityplayer.addExhaustion(0.025F);
+            entityplayer.addExhaustion(0.075F);
         }
         Random R = new Random();
         if(R.nextInt(TFCSettings.initialCollapseRatio) == 0)
@@ -228,14 +230,16 @@ public class BlockCollapsable extends BlockTerra
                     if(tryToFall(world, i+x1, j, k+z1,l))
                     {
                         int height = 4;
-                        int range = R.nextInt(20);
+                        int range = 5+R.nextInt(30);
                         for(int y = -4; y <= 1; y++)
                         {
                             for(int x = -range; x <= range; x++)
                             {
                                 for(int z = -range; z <= range; z++)
                                 {
-                                    if(R.nextInt(100) < TFCSettings.propogateCollapseChance)
+                                    double distance = Math.sqrt(Math.pow(i-(i+x),2) + Math.pow(j-(j+y),2) + Math.pow(k-(k+z),2));
+                                    
+                                    if(R.nextInt(100) < TFCSettings.propogateCollapseChance && distance < 35)
                                     {
                                         if(tryToFall(world, i+x, j+y, k+z,world.getBlockMetadata( i+x, j+y, k+z)))
                                         {

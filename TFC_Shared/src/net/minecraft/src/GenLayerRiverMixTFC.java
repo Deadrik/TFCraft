@@ -191,43 +191,43 @@ public class GenLayerRiverMixTFC extends GenLayer
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.extremeHills.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river41.biomeID;
+					layerOut[var8] = BiomeGenBase.extremeHills.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills2.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river42.biomeID;
+					layerOut[var8] = BiomeGenBase.hills2.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills3.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river43.biomeID;
+					layerOut[var8] = BiomeGenBase.hills3.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills4.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river44.biomeID;
+					layerOut[var8] = BiomeGenBase.hills4.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills5.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river45.biomeID;
+					layerOut[var8] = BiomeGenBase.hills5.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills6.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river46.biomeID;
+					layerOut[var8] = BiomeGenBase.hills6.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills7.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river47.biomeID;
+					layerOut[var8] = BiomeGenBase.hills7.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills8.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river48.biomeID;
+					layerOut[var8] = BiomeGenBase.hills8.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills9.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river49.biomeID;
+					layerOut[var8] = BiomeGenBase.hills9.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.hills10.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river40.biomeID;
+					layerOut[var8] = BiomeGenBase.hills10.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.desert.biomeID)
 				{
@@ -267,43 +267,43 @@ public class GenLayerRiverMixTFC extends GenLayer
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.extremeHillsEdge.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river41.biomeID;
+					layerOut[var8] = BiomeGenBase.extremeHillsEdge.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge2.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river42.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge2.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge3.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river43.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge3.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge4.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river44.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge4.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge5.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river45.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge5.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge6.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river46.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge6.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge7.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river47.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge7.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge8.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river48.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge8.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge9.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river49.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge9.biomeID;
 				}
 				else if(layerBiomes[var8] == BiomeGenBase.HillsEdge10.biomeID)
 				{
-					layerOut[var8] = BiomeGenBase.river40.biomeID;
+					layerOut[var8] = BiomeGenBase.HillsEdge10.biomeID;
 				}
 				else if (layerBiomes[var8] != BiomeGenBase.mushroomIsland.biomeID && layerBiomes[var8] != BiomeGenBase.mushroomIslandShore.biomeID)
 				{

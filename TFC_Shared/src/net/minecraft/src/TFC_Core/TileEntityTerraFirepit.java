@@ -139,7 +139,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         HeatManager manager = HeatManager.getInstance();
         HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
         
-        if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
+        if( index!= null && fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
         {
             float itemTemp = 0F;
             inputCompound = fireItemStacks[i].getTagCompound();
@@ -207,7 +207,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 int damage = output.getItemDamage();
                 if(output.getItem().shiftedIndex == fireItemStacks[1].getItem().shiftedIndex)
                     damage = fireItemStacks[1].getItemDamage();
-                
+                ItemStack mold = null;
+                if(fireItemStacks[1].getItem() instanceof ItemTerraMeltedMetal)
+                {
+                    mold = new ItemStack(TFCItems.terraCeramicMold,1);
+                }
                 //Morph the input
                 fireItemStacks[1] = index.getMorph();
                 
@@ -240,6 +244,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[7].stackTagCompound = nbt;
+                        
+                        if(fireItemStacks[1] == null && mold != null)
+                        {
+                            fireItemStacks[1] = mold;
+                        }
                     }
                     else if(fireItemStacks[8] != null && output != null && output.getItem().shiftedIndex == fireItemStacks[8].getItem().shiftedIndex && fireItemStacks[8].getItemDamage() > 0)
                     {
@@ -254,6 +263,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[8].stackTagCompound = nbt;
+                        
+                        if(fireItemStacks[1] == null && mold != null)
+                        {
+                            fireItemStacks[1] = mold;
+                        }
                     }
                     else if(output != null && fireItemStacks[7] != null && fireItemStacks[7].getItem() == TFCItems.terraCeramicMold)
                     {

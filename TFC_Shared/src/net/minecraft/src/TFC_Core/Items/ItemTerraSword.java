@@ -3,14 +3,14 @@ package net.minecraft.src.TFC_Core.Items;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraSword extends Item implements ITextureProvider
+public class ItemTerraSword extends ItemSword implements ITextureProvider
 {
 	private int weaponDamage;
 	private final EnumToolMaterial toolMaterial;
 
 	public ItemTerraSword(int par1, EnumToolMaterial par2EnumToolMaterial)
 	{
-		super(par1);
+		super(par1, par2EnumToolMaterial);
 		this.toolMaterial = par2EnumToolMaterial;
 		this.maxStackSize = 1;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());

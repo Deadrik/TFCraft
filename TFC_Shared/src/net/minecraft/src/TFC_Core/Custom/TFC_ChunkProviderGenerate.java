@@ -138,6 +138,10 @@ public class TFC_ChunkProviderGenerate
                                     {
                                         var14 = Block.ice.blockID;
                                     }
+                                    else if (biomegenbase.getFloatRainfall() == 0)
+                                    {
+                                        var14 = 0;
+                                    }
                                     else
                                     {
                                         var14 = Block.waterStill.blockID;
@@ -176,7 +180,8 @@ public class TFC_ChunkProviderGenerate
         }
     }
     
-    public static void replaceBlocksForBiomeLow(int par1, int par2, byte[] blockArray, byte[] metaArray, BiomeGenBase[] par4ArrayOfBiomeGenBase, double[] stoneNoise, NoiseGeneratorOctaves noiseGen4, Random rand)
+    public static void replaceBlocksForBiomeLow(int par1, int par2, byte[] blockArray, byte[] metaArray, BiomeGenBase[] par4ArrayOfBiomeGenBase, 
+            double[] stoneNoise, NoiseGeneratorOctaves noiseGen4, Random rand)
     {
         int var5 = 63;
         double var6 = 0.03125D;

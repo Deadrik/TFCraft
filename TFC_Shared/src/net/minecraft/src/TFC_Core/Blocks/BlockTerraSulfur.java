@@ -38,8 +38,8 @@ public class BlockTerraSulfur extends Block implements ITextureProvider
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		super.harvestBlock(world, entityplayer, i, j, k, l);
-		this.dropBlockAsItem(world, i, j, k, l, 0);
+		//super.harvestBlock(world, entityplayer, i, j, k, l);
+	    dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraSulfurPowder, quantityDropped(new Random())));
 	}
 	public int idDropped(int i, Random random, int j)
 	{

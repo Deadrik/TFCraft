@@ -55,7 +55,7 @@ public class BlockTerraOre extends BlockTerra
 	    if(entityplayer != null)
 	    {
 	        entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-	        entityplayer.addExhaustion(0.025F);
+	        entityplayer.addExhaustion(0.075F);
 	    }
 		Random random = new Random();
 		ItemStack itemstack;

@@ -3,6 +3,8 @@ package net.minecraft.src.TFC_Core.General;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
+
+import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -22,26 +24,26 @@ public class TFCHeat
 	{
 	    HeatManager manager = HeatManager.getInstance();
 		
-		HeatRaw BismuthRaw = new HeatRaw(0.75F, 271, 1564);
+		HeatRaw BismuthRaw = new HeatRaw(0.70F, 271, 1564);
 		HeatRaw BismuthBronzeRaw = new HeatRaw(0.65F, 985, 1941);
 		HeatRaw BlackBronzeRaw = new HeatRaw(0.7F, 1070, 2219);
-		HeatRaw BlackSteelRaw = new HeatRaw(0.63F, 1485, 2726);
-		HeatRaw BlueSteelRaw = new HeatRaw(0.6F, 1680, 3460);
-		HeatRaw BrassRaw = new HeatRaw(0.65F, 930, 1760);
-		HeatRaw BronzeRaw = new HeatRaw(0.65F, 950, 2380);
-		HeatRaw CopperRaw = new HeatRaw(0.67F, 1084);
-		HeatRaw GoldRaw = new HeatRaw(0.77F, 1063);
-		HeatRaw IronRaw = new HeatRaw(0.64F, 1536);
-		HeatRaw LeadRaw = new HeatRaw(0.77F, 328);
-		HeatRaw NickelRaw = new HeatRaw(0.65F, 1453);
-		HeatRaw PigIronRaw = new HeatRaw(0.59F, 1500, 3150);
+		HeatRaw BlackSteelRaw = new HeatRaw(0.66F, 1485, 2726);
+		HeatRaw BlueSteelRaw = new HeatRaw(0.63F, 1540, 3460);
+		HeatRaw BrassRaw = new HeatRaw(0.68F, 930, 1760);
+		HeatRaw BronzeRaw = new HeatRaw(0.68F, 950, 2380);
+		HeatRaw CopperRaw = new HeatRaw(0.70F, 1084);
+		HeatRaw GoldRaw = new HeatRaw(0.75F, 1063);
+		HeatRaw IronRaw = new HeatRaw(0.67F, 1536);
+		HeatRaw LeadRaw = new HeatRaw(0.75F, 328);
+		HeatRaw NickelRaw = new HeatRaw(0.68F, 1453);
+		HeatRaw PigIronRaw = new HeatRaw(0.64F, 1500, 3150);
 		HeatRaw PlatinumRaw = new HeatRaw(0.82F, 1770);
-		HeatRaw RedSteelRaw = new HeatRaw(0.6F, 1770, 3589);
+		HeatRaw RedSteelRaw = new HeatRaw(0.63F, 1540, 3589);
 		HeatRaw RoseGoldRaw = new HeatRaw(0.69F, 960, 2650);
 		HeatRaw SilverRaw = new HeatRaw(0.72F, 961);
-		HeatRaw SteelRaw = new HeatRaw(0.63F, 1540, 3500);//sh = 0.63F; boil = 3500; melt = 1540;
+		HeatRaw SteelRaw = new HeatRaw(0.66F, 1540, 3500);//sh = 0.63F; boil = 3500; melt = 1540;
 		HeatRaw SterlingSilverRaw = new HeatRaw(0.72F, 893, 2212);//sh = 0.72F; boil = 2212; melt = 893;
-		HeatRaw TinRaw = new HeatRaw(.69F, 232);
+		HeatRaw TinRaw = new HeatRaw(0.69F, 232);
 		HeatRaw ZincRaw = new HeatRaw(0.66F, 420, 907);//sh = 0.66F; boil = 907; melt = 420;
 		
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(30, 60));
@@ -295,14 +297,15 @@ public class TFCHeat
         //Ceramics
         HeatRaw ClayRaw = new HeatRaw(1.40F, 515.5F);
         manager.addIndex(new HeatIndex(new ItemStack(TFCItems.terraClayMold,1,1), ClayRaw,new ItemStack(TFCItems.terraCeramicMold, 1)));
-        manager.addIndex(new HeatIndex(new ItemStack(Block.sand, 1), 0.75F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
+        manager.addIndex(new HeatIndex(new ItemStack(Block.sand, 1, -1), 0.75F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
         //Food
         manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, 385, new ItemStack(Item.porkCooked, 1)));
         manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, 425, new ItemStack(Item.beefCooked, 1)));
         manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.chickenCooked, 1)));
         manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.fishCooked, 1)));
+        manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, 425,new ItemStack(TFCItems.EggCooked, 1)));
         //Other
-        manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1), 13.0F,210,600F,new ItemStack(Block.torchWood, 2)));
+        manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, -1), 13.0F,210,600F,new ItemStack(Block.torchWood, 2)));
         
 	}
 	public static Boolean canRemoveTag(Object tag, String key, Class c)
@@ -579,7 +582,7 @@ public class TFCHeat
 
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
-		return (0.60F * (fireTemp / fireMaxTemp)) * getSpecificHeat(is);
+		return (0.70F * (fireTemp / fireMaxTemp)) * getSpecificHeat(is);
 	}
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
@@ -650,4 +653,17 @@ public class TFCHeat
 
 		return true;
 	}
+
+	public static float getAmbient(BiomeGenBase biome)
+	{
+        float a = biome.getFloatTemperature();
+        a = a / 2.5F;//Normalize the value to between 0 and 1
+        return (62 * a-20)+13.8f;
+	}
+	
+	public static float getNormalizedTemp(float a)
+    {
+        a = a / 2.5F;//Normalize the value to between 0 and 1
+        return (62 * a-20)+13.8f;
+    }
 }

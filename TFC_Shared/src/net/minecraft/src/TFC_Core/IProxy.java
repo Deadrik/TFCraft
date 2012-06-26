@@ -31,6 +31,8 @@ public interface IProxy extends IGuiHandler {
 	
 	public abstract int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
 	
+	public abstract int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
+	
 	public abstract int blockGetMixedBrightnessForBlock(Block B, IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
 	
 	public abstract int blockGetRenderBlockPass(Block B);
@@ -54,4 +56,8 @@ public interface IProxy extends IGuiHandler {
 	public abstract void registerKeys(BaseMod b);
 	
 	public abstract void keyboardEvent(Object e);
+	
+	public abstract float getLightBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
+
+	public abstract int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5);
 }

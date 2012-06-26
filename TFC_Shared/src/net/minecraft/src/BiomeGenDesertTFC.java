@@ -23,6 +23,7 @@ public class BiomeGenDesertTFC extends BiomeGenBase
 		biomeDecorator.deadBushPerChunk = 2;
 		biomeDecorator.reedsPerChunk = 50;
 		biomeDecorator.cactiPerChunk = 10;
+		setMinMaxHeight(0.2F, 0.3F);
 	}
 
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
@@ -37,4 +38,37 @@ public class BiomeGenDesertTFC extends BiomeGenBase
 			var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
 		}
 	}
+	
+	protected float getMonthTemp(int month)
+    {
+        switch(month)
+        {
+            case 11:
+                return 0.75F;
+            case 0:
+                return 0.80F;
+            case 1:
+                return 0.85F;
+            case 2:
+                return 0.90F;
+            case 3:
+                return 0.95F; 
+            case 4:
+                return 1F;
+            case 5:
+                return 0.95F;
+            case 6:
+                return 0.90F;
+            case 7:
+                return 0.85F;
+            case 8:
+                return 0.80F;
+            case 9:
+                return 0.75F;
+            case 10:
+                return 0.70F;
+            default:
+                return 1F;
+        }
+    }
 }

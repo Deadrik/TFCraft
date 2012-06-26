@@ -66,6 +66,7 @@ public class BlockTerraMM extends BlockCollapsable
     {
         if(!world.isRemote)
         {
+            super.onBlockDestroyedByExplosion(world, i, j, k);
             Random random = new Random();
 
             ItemStack is = null;

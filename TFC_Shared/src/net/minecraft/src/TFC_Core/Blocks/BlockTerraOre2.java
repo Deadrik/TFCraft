@@ -12,11 +12,12 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 
-public class BlockTerraOre2 extends BlockTerra
+public class BlockTerraOre2 extends BlockTerraOre
 {
 
 	public BlockTerraOre2(int i, Material material) {
-		super(i,144, material);
+		super(i, material);
+		this.blockIndexInTexture = 144;
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
@@ -32,30 +33,17 @@ public class BlockTerraOre2 extends BlockTerra
         return j+16;
     }
 
-    @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
-    {
-        return blockIndexInTexture + j;
-    }
-
-	public int getRenderType()
-	{
-		return mod_TFC_Core.oreRenderId;
-	}
-
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 	    if(entityplayer != null)
         {
             entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-            entityplayer.addExhaustion(0.025F);
+            entityplayer.addExhaustion(0.075F);
         }
 		Random random = new Random();
 
-		int m = l;
-		System.out.println(m);
-		ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1 , damageDropped(m));
+		ItemStack itemstack = new ItemStack(TFCItems.OreChunk, 1 , damageDropped(l));
 
 		if(l == 5)
 		{
@@ -80,18 +68,6 @@ public class BlockTerraOre2 extends BlockTerra
 	        }
 		}
 
-	}
-	
-//	@Override
-//	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) 
-//    {
-//        harvestBlock(par1World, null, par2,par3,par4,par1World.getBlockMetadata(par2, par3, par4));
-//    }
-
-	@Override
-	public int idDropped(int i, Random random, int j)
-	{
-		return TFCItems.OreChunk.shiftedIndex;
 	}
 
 	public ItemStack KimberliteGemSpawn()
@@ -119,15 +95,6 @@ public class BlockTerraOre2 extends BlockTerra
 		} else {
 			return null;
 		}
-	}
-
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
-	{
-		int metadata = world.getBlockMetadata(i, j, k);
-
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-
-		//mc.ingameGUI.addChatMessage("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).append(":").append(blockID).toString());  
 	}
 	
 	@Override

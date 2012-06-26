@@ -21,7 +21,7 @@ public class Helper {
 		return getMovingObjectPositionFromPlayer(world, par3EntityPlayer, true);
 	}
 
-	protected static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityPlayer par2EntityPlayer, boolean par3)
+	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityPlayer par2EntityPlayer, boolean par3)
 	{
 		float var4 = 1.0F;
 		float var5 = par2EntityPlayer.prevRotationPitch + (par2EntityPlayer.rotationPitch - par2EntityPlayer.prevRotationPitch) * var4;

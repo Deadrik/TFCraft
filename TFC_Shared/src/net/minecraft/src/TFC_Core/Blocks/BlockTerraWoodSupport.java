@@ -1,5 +1,7 @@
 package net.minecraft.src.TFC_Core.Blocks;
 
+import java.util.Random;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
@@ -69,6 +71,12 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 	{
 		return j;
 	}
+	
+	@Override
+    public int idDropped(int i, Random random, int j)
+    {
+        return 0;
+    }
 
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j) 

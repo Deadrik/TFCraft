@@ -32,6 +32,8 @@ public class BiomeGenForestTFC extends BiomeGenBase
 		treeCommon2 = -1;
 		treeUncommon = -1;
 		treeRare = -1;
+		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
+        ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
 	}
 
 	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)

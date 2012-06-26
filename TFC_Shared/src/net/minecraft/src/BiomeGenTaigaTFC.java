@@ -33,6 +33,9 @@ public class BiomeGenTaigaTFC extends BiomeGenBase
 		treeCommon2 = 0;
 		treeUncommon = 0;
 		treeRare = 0;
+		setMinMaxHeight(0.2F, 0.4F);
+		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
+        ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
 	}
 
 	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)

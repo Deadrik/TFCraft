@@ -1,5 +1,7 @@
 package net.minecraft.src.TFC_Core.Blocks;
 
+import java.util.Random;
+
 import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
 import net.minecraft.src.forge.ITextureProvider;
@@ -121,6 +123,12 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
             tileentityanvil.ejectContents();
             par1World.removeBlockTileEntity(par2, par3, par4);
         }
+    }
+	
+	@Override
+    public int idDropped(int i, Random random, int j)
+    {
+        return 0;
     }
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)

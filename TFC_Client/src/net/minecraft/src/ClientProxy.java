@@ -22,6 +22,7 @@ import net.minecraft.src.TFC_Core.TileEntityTerraScribe;
 import net.minecraft.src.TFC_Core.TileEntityTerraSluice;
 import net.minecraft.src.TFC_Core.TileEntityTerraWorkbench;
 import net.minecraft.src.TFC_Core.Custom.ColorizerFoliageTFC;
+import net.minecraft.src.TFC_Core.Custom.EntityCowTFC;
 import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
 import net.minecraft.src.TFC_Core.GUI.GuiCalendar;
 import net.minecraft.src.TFC_Core.GUI.GuiTerraAnvil;
@@ -407,13 +408,18 @@ public class ClientProxy implements IProxy
             ModLoader.addLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
             ModLoader.addLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
             ModLoader.addLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
+            //ModLoader.addLocalization("item.Stick."+WoodNames[i]+".name", WoodNames[i]+" Stick");
         }
-        
+        ModLoader.addLocalization("item.Stick.name", "Stick");
         String[] FruitTreeNames = {"Red Apple","Banana","Green Apple","Orange","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
         for(int i= 0; i < FruitTreeNames.length; i++)
         {
             ModLoader.addLocalization("item.FruitSapling1."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
+            ModLoader.addLocalization("item.FruitSapling2."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
+            ModLoader.addLocalization("item.Fruit."+FruitTreeNames[i]+".name", FruitTreeNames[i]);
         }
+        
+        ModLoader.addLocalization("item.Meat.EggCooked.name", "Cooked Egg");
 
         //Gems
         String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
@@ -503,11 +509,15 @@ public class ClientProxy implements IProxy
             ModLoader.addLocalization("item."+ToolNames[i]+" Chisel.name", ToolNames[i] + " Chisel");
             ModLoader.addLocalization("item."+ToolNames[i]+" Saw.name", ToolNames[i] + " Saw");
             ModLoader.addLocalization("item."+ToolNames[i]+" Scythe.name", ToolNames[i] + " Scythe");
+            ModLoader.addLocalization("item."+ToolNames[i]+" Knife.name", ToolNames[i] + " Knife");
         }
 
         ModLoader.addLocalization("item.javelin.name", "Javelin");
 
         ModLoader.addLocalization("item.SeedsWheat.name", "Wheat Seeds");
+        ModLoader.addLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
+        ModLoader.addLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
+        ModLoader.addLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");
 
         /*==================================================================
          * TFC Mining Localization
@@ -570,6 +580,7 @@ public class ClientProxy implements IProxy
         ModLoader.addLocalization("item.GreavesPlan.name", "Plan: Plate Greaves");
         ModLoader.addLocalization("item.BootsPlan.name", "Plan: Plate Boots");
         ModLoader.addLocalization("item.ScythePlan.name", "Plan: Scythe Blade");
+        ModLoader.addLocalization("item.KnifePlan.name", "Plan: Knife Blade");
 
         for(int i= 0; i < ToolNames.length; i++)
         {
@@ -584,6 +595,7 @@ public class ClientProxy implements IProxy
             ModLoader.addLocalization("item."+ToolNames[i]+" Saw Blade.name", ToolNames[i] + " Saw Blade");
             ModLoader.addLocalization("item."+ToolNames[i]+" ProPick Head.name", ToolNames[i] + " Prospector's Pick Head");
             ModLoader.addLocalization("item."+ToolNames[i]+" Scythe Blade.name", ToolNames[i] + " Scythe Blade");
+            ModLoader.addLocalization("item."+ToolNames[i]+" Knife Blade.name", ToolNames[i] + " Knife Blade");
             /**
              * Armor Related
              * */
@@ -703,7 +715,7 @@ public class ClientProxy implements IProxy
             }
             case 27:
             {
-                return new GuiCalendar(world, x, y, z);
+                return new GuiCalendar(player, world, x, y, z);
             }
 
         }
@@ -726,6 +738,7 @@ public class ClientProxy implements IProxy
         map.put(EntityFallingStone2.class, new RenderFallingStone2());
         map.put(EntityTerraJavelin.class, new RenderTerraJavelin());
         map.put(EntitySquidTFC.class, new RenderSquid(new ModelSquid(), 0.7F));
+        map.put(EntityCowTFC.class, new RenderCow(new ModelCow(), 0.7F));
     }
 
     @Override
@@ -812,11 +825,34 @@ public class ClientProxy implements IProxy
             float var8 = (float)(var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
         }
+        else if (l == mod_TFC_Core.finiteWaterRenderId)
+        {
+            return TFC_CoreRender.RenderFiniteWater(block, i, j, k, (RenderBlocks)renderblocks);
+        }
 
 
         return false;
     }
 
+    public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        int var5 = 0;
+        int var6 = 0;
+        int var7 = 0;
+
+        for (int var8 = -1; var8 <= 1; ++var8)
+        {
+            for (int var9 = -1; var9 <= 1; ++var9)
+            {
+                int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).waterColorMultiplier;
+                var5 += (var10 & 16711680) >> 16;
+            var6 += (var10 & 65280) >> 8;
+            var7 += var10 & 255;
+            }
+        }
+        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+    }
+    
     public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int var5 = 0;
@@ -841,6 +877,8 @@ public class ClientProxy implements IProxy
         int var5 = 0;
         int var6 = 0;
         int var7 = 0;
+        
+        int[] rgb = {0,0,0};
 
         int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         if(par1IBlockAccess.getBlockId(par2, par3, par4) == mod_TFC_Core.fruitTreeLeaves.blockID)
@@ -854,13 +892,11 @@ public class ClientProxy implements IProxy
                         BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
 
                         int var10 = ColorizerFoliageTFC.getFoliageYellow();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-            var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
 
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
             else
@@ -870,12 +906,54 @@ public class ClientProxy implements IProxy
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
                         int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-                var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+        }
+        else if(par1IBlockAccess.getBlockId(par2, par3, par4) == Block.vine.blockID)
+        {
+            if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && !(par1IBlockAccess.getBiomeGenForCoords(par2, par4) instanceof BiomeGenJungleTFC))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageDead();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else if(TFCSeasons.currentMonth >= 6 && !(par1IBlockAccess.getBiomeGenForCoords(par2, par4) instanceof BiomeGenJungleTFC))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageDead();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
         }
@@ -892,13 +970,11 @@ public class ClientProxy implements IProxy
                         double var1 = (double)MathHelper.clamp_float(biome.getFloatTemperature(), 0.0F, 1.0F);
                         double var3 = (double)MathHelper.clamp_float(biome.getFloatRainfall(), 0.0F, 1.0F);
                         int var10 = ColorizerFoliageTFC.getFoliageColor(var1, var3);
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-        var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
 
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
             else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
@@ -907,16 +983,12 @@ public class ClientProxy implements IProxy
                 {
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
-
                         int var10 = ColorizerFoliageTFC.getFoliageYellow();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-            var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
 
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
             else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && (meta == 6))
@@ -925,50 +997,39 @@ public class ClientProxy implements IProxy
                 {
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
-
                         int var10 = ColorizerFoliageTFC.getFoliageRed();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-            var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
-
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
-            else if(TFCSeasons.currentMonth >= 6  && TFCSeasons.currentMonth < 9)
+            else if(TFCSeasons.currentMonth >= 6  && TFCSeasons.currentMonth < 9 && !(meta == 15))
             {
                 for (int var8 = -1; var8 <= 1; ++var8)
                 {
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
                         int var10 = ColorizerFoliageTFC.getFoliageOrange();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-                var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
 
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
-            else if(TFCSeasons.currentMonth >= 6)
+            else if(TFCSeasons.currentMonth >= 6 && !(meta == 15))
             {
                 for (int var8 = -1; var8 <= 1; ++var8)
                 {
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
                         int var10 = ColorizerFoliageTFC.getFoliageDead();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-                var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
 
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
             else
@@ -978,15 +1039,22 @@ public class ClientProxy implements IProxy
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
                         int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
-                        var5 += (var10 & 16711680) >> 16;
-                    var6 += (var10 & 65280) >> 8;
-                var7 += var10 & 255;
+                        rgb = applyColor(var10, rgb);
                     }
                 }
-                int x = (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
                 return x;
             }
         }
+    }
+
+    private int[] applyColor(int c, int[] rgb)
+    {        
+        rgb[0] += ((c & 16711680) >> 16);
+        rgb[1] += ((c & 65280) >> 8);
+        rgb[2] += (c & 255);
+        
+        return rgb;
     }
 
 
@@ -1065,5 +1133,22 @@ public class ClientProxy implements IProxy
         {
             minecraft.thePlayer.openGui(mod_TFC_Core.instance, 27, minecraft.theWorld, 0, 0, 0);
         }
+        else if (bind == this.Key_Calendar && minecraft.currentScreen instanceof GuiCalendar)
+        {
+            minecraft.thePlayer.closeScreen();
+        }
+    }
+
+    @Override
+    public int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return par1iBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
+    }
+
+    @Override
+    public float getLightBrightness(IBlockAccess par1iBlockAccess, int par2,
+            int par3, int par4)
+    {
+        return par1iBlockAccess.getLightBrightness(par2, par3, par4);
     }
 }

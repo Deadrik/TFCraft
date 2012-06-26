@@ -6,15 +6,20 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.TFCSeasons;
 import net.minecraft.src.TFC_Core.TileEntityFruitTreeWood;
+import net.minecraft.src.TFC_Core.Blocks.BlockFiniteWater;
+import net.minecraft.src.TFC_Core.Blocks.BlockFruitLeaves;
 import net.minecraft.src.TFC_Core.Blocks.BlockTerraAnvil;
 import net.minecraft.src.TFC_Core.Blocks.BlockTerraBellows;
 import net.minecraft.src.TFC_Core.Blocks.BlockTerraSluice;
+import net.minecraft.src.TFC_Core.General.FloraIndex;
+import net.minecraft.src.TFC_Core.General.FloraManager;
 
 public class TFC_CoreRender 
 {
@@ -1692,7 +1697,7 @@ public class TFC_CoreRender
         renderblocks.aoGrassXYZCNN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord - 1)];
 
         int var27;
-        float colorMult = 0.78F;
+        float colorMult = 0.6F;//was 0.78F
 
         if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord, 0))
         {
@@ -1781,35 +1786,11 @@ public class TFC_CoreRender
 
             var27 = getRockTexture(yCoord, biome);
 
-            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
-            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
-            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
-
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
             renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            
             renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
             var8 = true;
         }
@@ -1901,36 +1882,12 @@ public class TFC_CoreRender
 
             var27 = getRockTexture(yCoord, biome);
 
-            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
-            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
-            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
-
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;;
             renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            
             var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
             var8 = true;
         }
@@ -2024,36 +1981,14 @@ public class TFC_CoreRender
 
             var27 = getRockTexture(yCoord, biome);
 
-            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
-            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
-            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
-
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
             renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
             var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 2);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
 
 
@@ -2148,36 +2083,12 @@ public class TFC_CoreRender
 
             var27 = getRockTexture(yCoord, biome);
 
-            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
-            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
-            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
-
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
             renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
+            
             var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3));
 
             var8 = true;
@@ -2269,37 +2180,12 @@ public class TFC_CoreRender
             }
 
             var27 = getRockTexture(yCoord, biome);
-
-            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
-            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
-            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
-
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
             renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            
             var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 4);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
 
             var8 = true;
@@ -2392,36 +2278,12 @@ public class TFC_CoreRender
 
             var27 = getRockTexture(yCoord, biome);
 
-            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = (var18 ? par5 : 1.0F) * colorMult;
-            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
-            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
-
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
+            renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+            renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
             renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord,  var27);
+            
             var27 = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 5);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, var27);
 
             var8 = true;
@@ -2986,6 +2848,14 @@ public class TFC_CoreRender
     public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks)
     {
         BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(xCoord, zCoord);
+        int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
+        if(meta >= 8)
+            meta-=8;
+        FloraManager manager = FloraManager.getInstance();
+        FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block.blockID, meta));
+        
+        if(index == null)
+            return false;
         renderblocks.enableAO = true;
         boolean var8 = false;
         float var9 = renderblocks.lightValueOwn;
@@ -3150,37 +3020,16 @@ public class TFC_CoreRender
             renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = (var18 ? par6 : 1.0F) * colorMult;
             renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
 
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
-            
-            if(TFCSeasons.currentMonth < 3)
+
+            if(index.inBloom(TFCSeasons.currentMonth))
             {
                 texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
                 if(texIndex!= -1)
                 {
-                    renderblocks.colorRedTopLeft *= var9;
-                    renderblocks.colorGreenTopLeft *= var9;
-                    renderblocks.colorBlueTopLeft *= var9;
-                    renderblocks.colorRedBottomLeft *= var10;
-                    renderblocks.colorGreenBottomLeft *= var10;
-                    renderblocks.colorBlueBottomLeft *= var10;
-                    renderblocks.colorRedBottomRight *= var11;
-                    renderblocks.colorGreenBottomRight *= var11;
-                    renderblocks.colorBlueBottomRight *= var11;
-                    renderblocks.colorRedTopRight *= var12;
-                    renderblocks.colorGreenTopRight *= var12;
-                    renderblocks.colorBlueTopRight *= var12;
+                    renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+                    renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+                    renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
                     renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
                 }
             }
@@ -3277,36 +3126,16 @@ public class TFC_CoreRender
             renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
 
             texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
-            if(TFCSeasons.currentMonth < 3)
+            
+            if(index.inBloom(TFCSeasons.currentMonth))
             {
                 texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
                 if(texIndex!= -1)
                 {
-                    renderblocks.colorRedTopLeft *= var9;
-                    renderblocks.colorGreenTopLeft *= var9;
-                    renderblocks.colorBlueTopLeft *= var9;
-                    renderblocks.colorRedBottomLeft *= var10;
-                    renderblocks.colorGreenBottomLeft *= var10;
-                    renderblocks.colorBlueBottomLeft *= var10;
-                    renderblocks.colorRedBottomRight *= var11;
-                    renderblocks.colorGreenBottomRight *= var11;
-                    renderblocks.colorBlueBottomRight *= var11;
-                    renderblocks.colorRedTopRight *= var12;
-                    renderblocks.colorGreenTopRight *= var12;
-                    renderblocks.colorBlueTopRight *= var12;
+                    renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+                    renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+                    renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
                     renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
                 }
             }
@@ -3407,35 +3236,14 @@ public class TFC_CoreRender
             renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
 
             texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 2);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
             if(texIndex != -1)
             {
-                renderblocks.colorRedTopLeft *= var9;
-                renderblocks.colorGreenTopLeft *= var9;
-                renderblocks.colorBlueTopLeft *= var9;
-                renderblocks.colorRedBottomLeft *= var10;
-                renderblocks.colorGreenBottomLeft *= var10;
-                renderblocks.colorBlueBottomLeft *= var10;
-                renderblocks.colorRedBottomRight *= var11;
-                renderblocks.colorGreenBottomRight *= var11;
-                renderblocks.colorBlueBottomRight *= var11;
-                renderblocks.colorRedTopRight *= var12;
-                renderblocks.colorGreenTopRight *= var12;
-                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
                 renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
             }
 
@@ -3534,35 +3342,14 @@ public class TFC_CoreRender
             renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
 
             texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3));
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
             if(texIndex!= -1)
             {
-                renderblocks.colorRedTopLeft *= var9;
-                renderblocks.colorGreenTopLeft *= var9;
-                renderblocks.colorBlueTopLeft *= var9;
-                renderblocks.colorRedBottomLeft *= var10;
-                renderblocks.colorGreenBottomLeft *= var10;
-                renderblocks.colorBlueBottomLeft *= var10;
-                renderblocks.colorRedBottomRight *= var11;
-                renderblocks.colorGreenBottomRight *= var11;
-                renderblocks.colorBlueBottomRight *= var11;
-                renderblocks.colorRedTopRight *= var12;
-                renderblocks.colorGreenTopRight *= var12;
-                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
                 renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
             }
 
@@ -3660,35 +3447,14 @@ public class TFC_CoreRender
             renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
 
             texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 4);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
             if(texIndex!= -1)
             {
-                renderblocks.colorRedTopLeft *= var9;
-                renderblocks.colorGreenTopLeft *= var9;
-                renderblocks.colorBlueTopLeft *= var9;
-                renderblocks.colorRedBottomLeft *= var10;
-                renderblocks.colorGreenBottomLeft *= var10;
-                renderblocks.colorBlueBottomLeft *= var10;
-                renderblocks.colorRedBottomRight *= var11;
-                renderblocks.colorGreenBottomRight *= var11;
-                renderblocks.colorBlueBottomRight *= var11;
-                renderblocks.colorRedTopRight *= var12;
-                renderblocks.colorGreenTopRight *= var12;
-                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
                 renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
             }
 
@@ -3785,35 +3551,14 @@ public class TFC_CoreRender
             renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = (var18 ? par7 : 1.0F) * colorMult;
 
             texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 5);
-            renderblocks.colorRedTopLeft *= var9;
-            renderblocks.colorGreenTopLeft *= var9;
-            renderblocks.colorBlueTopLeft *= var9;
-            renderblocks.colorRedBottomLeft *= var10;
-            renderblocks.colorGreenBottomLeft *= var10;
-            renderblocks.colorBlueBottomLeft *= var10;
-            renderblocks.colorRedBottomRight *= var11;
-            renderblocks.colorGreenBottomRight *= var11;
-            renderblocks.colorBlueBottomRight *= var11;
-            renderblocks.colorRedTopRight *= var12;
-            renderblocks.colorGreenTopRight *= var12;
-            renderblocks.colorBlueTopRight *= var12;
             renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
             if(texIndex!= -1)
             {
-                renderblocks.colorRedTopLeft *= var9;
-                renderblocks.colorGreenTopLeft *= var9;
-                renderblocks.colorBlueTopLeft *= var9;
-                renderblocks.colorRedBottomLeft *= var10;
-                renderblocks.colorGreenBottomLeft *= var10;
-                renderblocks.colorBlueBottomLeft *= var10;
-                renderblocks.colorRedBottomRight *= var11;
-                renderblocks.colorGreenBottomRight *= var11;
-                renderblocks.colorBlueBottomRight *= var11;
-                renderblocks.colorRedTopRight *= var12;
-                renderblocks.colorGreenTopRight *= var12;
-                renderblocks.colorBlueTopRight *= var12;
+                renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
+                renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
                 renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
             }
 
@@ -3828,13 +3573,19 @@ public class TFC_CoreRender
     {
         int out = -1;
         int meta = world.getBlockMetadata(x, y, z);
-        if(TFCSeasons.currentMonth < 3)//blooming
+        
+        FloraManager manager = FloraManager.getInstance();
+        FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(world.getBlockId(x, y, z), meta & 7));
+        if(index != null)
         {
-            out = 96+(meta & 7);
-        }
-        else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && meta >= 8)//fruit
-        {
-            out = 80+(meta & 7);
+            if(index.inBloom(TFCSeasons.currentMonth))//blooming
+            {
+                out = 96+(meta & 7);
+            }
+            else if(index.inHarvest(TFCSeasons.currentMonth) && meta >= 8)//fruit
+            {
+                out = 80+(meta & 7);
+            }
         }
         return out;
     }
@@ -3846,5 +3597,201 @@ public class TFC_CoreRender
 
         block.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
         return true;
+    }
+
+    /**
+     * Renders a block based on the BlockFluids class at the given coordinates
+     */
+    public static boolean RenderFiniteWater(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
+    {
+        Tessellator var5 = Tessellator.instance;
+        int var6 = par1Block.colorMultiplier(renderblocks.blockAccess, par2, par3, par4);
+        float var7 = (float)(var6 >> 16 & 255) / 255.0F;
+        float var8 = (float)(var6 >> 8 & 255) / 255.0F;
+        float var9 = (float)(var6 & 255) / 255.0F;
+        boolean var10 = par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 + 1, par4, 1);
+        boolean var11 = par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 - 1, par4, 0);
+        boolean[] var12 = new boolean[] {par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 - 1, 2), par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 + 1, 3), par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2 - 1, par3, par4, 4), par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2 + 1, par3, par4, 5)};
+
+        if (!var10 && !var11 && !var12[0] && !var12[1] && !var12[2] && !var12[3])
+        {
+            return false;
+        }
+        else
+        {
+            boolean var13 = false;
+            float var14 = 0.5F;
+            float var15 = 1.0F;
+            float var16 = 0.8F;
+            float var17 = 0.6F;
+            double var18 = 0.0D;
+            double var20 = 1.0D;
+            Material var22 = par1Block.blockMaterial;
+            int var23 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
+            double var24 = (double)renderblocks.getFluidHeight(par2, par3, par4, var22);
+            double var26 = (double)renderblocks.getFluidHeight(par2, par3, par4 + 1, var22);
+            double var28 = (double)renderblocks.getFluidHeight(par2 + 1, par3, par4 + 1, var22);
+            double var30 = (double)renderblocks.getFluidHeight(par2 + 1, par3, par4, var22);
+            double var32 = 0.0010000000474974513D;
+            int var34;
+            int var35;
+            float var36;
+            int var37;
+            double var42;
+            double var40;
+            double var44;
+
+            if (renderblocks.renderAllFaces || var10)
+            {
+                var13 = true;
+                var34 = par1Block.getBlockTextureFromSideAndMetadata(1, var23);
+                var36 = (float)BlockFiniteWater.func_293_a(renderblocks.blockAccess, par2, par3, par4, var22);
+
+                if (var36 > -999.0F)
+                {
+                    var34 = par1Block.getBlockTextureFromSideAndMetadata(2, var23);
+                }
+
+                var24 -= var32;
+                var26 -= var32;
+                var28 -= var32;
+                var30 -= var32;
+                var37 = (var34 & 15) << 4;
+                var35 = var34 & 240;
+                double var38 = ((double)var37 + 8.0D) / 256.0D;
+                var40 = ((double)var35 + 8.0D) / 256.0D;
+
+                if (var36 < -999.0F)
+                {
+                    var36 = 0.0F;
+                }
+                else
+                {
+                    var38 = (double)((float)(var37 + 16) / 256.0F);
+                    var40 = (double)((float)(var35 + 16) / 256.0F);
+                }
+
+                var42 = (double)(MathHelper.sin(var36) * 8.0F) / 256.0D;
+                var44 = (double)(MathHelper.cos(var36) * 8.0F) / 256.0D;
+                var5.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4));
+                float var46 = 1.0F;
+                var5.setColorOpaque_F(var15 * var46 * var7, var15 * var46 * var8, var15 * var46 * var9);
+                var5.addVertexWithUV((double)(par2 + 0), (double)par3 + var24, (double)(par4 + 0), var38 - var44 - var42, var40 - var44 + var42);
+                var5.addVertexWithUV((double)(par2 + 0), (double)par3 + var26, (double)(par4 + 1), var38 - var44 + var42, var40 + var44 + var42);
+                var5.addVertexWithUV((double)(par2 + 1), (double)par3 + var28, (double)(par4 + 1), var38 + var44 + var42, var40 + var44 - var42);
+                var5.addVertexWithUV((double)(par2 + 1), (double)par3 + var30, (double)(par4 + 0), var38 + var44 - var42, var40 - var44 - var42);
+            }
+
+            if (renderblocks.renderAllFaces || var11)
+            {
+                var5.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
+                var36 = 1.0F;
+                var5.setColorOpaque_F(var14 * var36, var14 * var36, var14 * var36);
+                renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3 + var32, (double)par4, par1Block.getBlockTextureFromSide(0));
+                var13 = true;
+            }
+
+            for (var34 = 0; var34 < 4; ++var34)
+            {
+                int var64 = par2;
+                var35 = par4;
+
+                if (var34 == 0)
+                {
+                    var35 = par4 - 1;
+                }
+
+                if (var34 == 1)
+                {
+                    ++var35;
+                }
+
+                if (var34 == 2)
+                {
+                    var64 = par2 - 1;
+                }
+
+                if (var34 == 3)
+                {
+                    ++var64;
+                }
+
+                var37 = par1Block.getBlockTextureFromSideAndMetadata(var34 + 2, var23);
+                int var63 = (var37 & 15) << 4;
+                int var39 = var37 & 240;
+
+                if (renderblocks.renderAllFaces || var12[var34])
+                {
+                    double var65;
+                    double var50;
+                    double var48;
+
+                    if (var34 == 0)
+                    {
+                        var42 = var24;
+                        var40 = var30;
+                        var65 = (double)par2;
+                        var50 = (double)(par2 + 1);
+                        var44 = (double)par4 + var32;
+                        var48 = (double)par4 + var32;
+                    }
+                    else if (var34 == 1)
+                    {
+                        var42 = var28;
+                        var40 = var26;
+                        var65 = (double)(par2 + 1);
+                        var50 = (double)par2;
+                        var44 = (double)(par4 + 1) - var32;
+                        var48 = (double)(par4 + 1) - var32;
+                    }
+                    else if (var34 == 2)
+                    {
+                        var42 = var26;
+                        var40 = var24;
+                        var65 = (double)par2 + var32;
+                        var50 = (double)par2 + var32;
+                        var44 = (double)(par4 + 1);
+                        var48 = (double)par4;
+                    }
+                    else
+                    {
+                        var42 = var30;
+                        var40 = var28;
+                        var65 = (double)(par2 + 1) - var32;
+                        var50 = (double)(par2 + 1) - var32;
+                        var44 = (double)par4;
+                        var48 = (double)(par4 + 1);
+                    }
+
+                    var13 = true;
+                    double var52 = (double)((float)(var63 + 0) / 256.0F);
+                    double var54 = ((double)(var63 + 16) - 0.01D) / 256.0D;
+                    double var56 = ((double)var39 + (1.0D - var42) * 16.0D) / 256.0D;
+                    double var58 = ((double)var39 + (1.0D - var40) * 16.0D) / 256.0D;
+                    double var60 = ((double)(var39 + 16) - 0.01D) / 256.0D;
+                    var5.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, var64, par3, var35));
+                    float var62 = 1.0F;
+
+                    if (var34 < 2)
+                    {
+                        var62 *= var16;
+                    }
+                    else
+                    {
+                        var62 *= var17;
+                    }
+
+                    var5.setColorOpaque_F(var15 * var62 * var7, var15 * var62 * var8, var15 * var62 * var9);
+                    var5.addVertexWithUV(var65, (double)par3 + var42, var44, var52, var56);
+                    var5.addVertexWithUV(var50, (double)par3 + var40, var48, var54, var58);
+                    var5.addVertexWithUV(var50, (double)(par3 + 0), var48, var54, var60);
+                    var5.addVertexWithUV(var65, (double)(par3 + 0), var44, var52, var60);
+                }
+            }
+
+            par1Block.minY = var18;
+            par1Block.maxY = var20;
+            return var13;
+        }
     }
 }

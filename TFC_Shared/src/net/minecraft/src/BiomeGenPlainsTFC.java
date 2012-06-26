@@ -10,7 +10,6 @@ package net.minecraft.src;
 
 public class BiomeGenPlainsTFC extends BiomeGenBase
 {
-
 	public BiomeGenPlainsTFC(int i)
 	{
 		super(i);

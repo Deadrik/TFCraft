@@ -25,10 +25,25 @@ public class BiomeGenHillsTFC extends BiomeGenBase
     public BiomeGenHillsTFC(int i)
     {
         super(i);
-        ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
+        ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 6;
         ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
         ((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 11;
         ((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 2;
+    }
+    
+    public WorldGenerator getRandomWorldGenForTrees(Random random, World world)
+    {       
+
+        int rand = random.nextInt(100);
+        if(rand < 40) {
+            return getTreeGen(treeCommon1,treeCommon1Size);
+        } else if(rand < 80) {
+            return getTreeGen(treeCommon2,treeCommon2Size);
+        } else if(rand < 95) {
+            return getTreeGen(treeUncommon,treeUncommonSize);
+        } else {
+            return getTreeGen(treeRare,treeRareSize);
+        }
     }
 
 

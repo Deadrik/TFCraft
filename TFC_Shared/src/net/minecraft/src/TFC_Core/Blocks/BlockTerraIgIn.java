@@ -56,6 +56,7 @@ public class BlockTerraIgIn extends BlockCollapsable
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
     {if(!world.isRemote)
     {
+        super.onBlockDestroyedByExplosion(world, i, j, k);
         Random random = new Random();
 
         ItemStack is = null;

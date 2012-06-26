@@ -59,7 +59,7 @@ public class GenLayerBiomeTFC extends GenLayer
 				}
 				else
 				{
-					var6[var8 + var7 * par3] = BiomeGenBase.icePlains.biomeID;
+					var6[var8 + var7 * par3] = BiomeGenBase.plains.biomeID;
 				}
 			}
 		}

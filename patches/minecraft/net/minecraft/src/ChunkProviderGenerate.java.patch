@@ -85,16 +85,36 @@
          var4.generateSkylightMap();
          return var4;
      }
-@@ -485,7 +493,7 @@
+@@ -471,9 +479,9 @@
+ 
+         if (this.mapFeaturesEnabled)
+         {
+-            this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+-            var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+-            this.strongholdGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
++//            this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
++//            var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
++//            this.strongholdGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+         }
+ 
+         int var12;
+@@ -483,20 +491,20 @@
+         if (!var11 && this.rand.nextInt(4) == 0)
+         {
              var12 = var4 + this.rand.nextInt(16) + 8;
-             var13 = this.rand.nextInt(128);
+-            var13 = this.rand.nextInt(128);
++            var13 = this.rand.nextInt(255);
              var14 = var5 + this.rand.nextInt(16) + 8;
 -            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
 +            (new WorldGenLakesTFC(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
          }
  
          if (!var11 && this.rand.nextInt(8) == 0)
-@@ -496,7 +504,7 @@
+         {
+             var12 = var4 + this.rand.nextInt(16) + 8;
+-            var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
++            var13 = this.rand.nextInt(this.rand.nextInt(246) + 8);
+             var14 = var5 + this.rand.nextInt(16) + 8;
  
              if (var13 < 63 || this.rand.nextInt(10) == 0)
              {
@@ -103,11 +123,61 @@
              }
          }
  
-@@ -588,4 +596,235 @@
+@@ -506,10 +514,10 @@
+             var14 = this.rand.nextInt(128);
+             int var15 = var5 + this.rand.nextInt(16) + 8;
+ 
+-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
+-            {
+-                ;
+-            }
++//            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
++//            {
++//                ;
++//            }
+         }
+ 
+         var6.decorate(this.worldObj, this.rand, var4, var5);
+@@ -528,7 +536,7 @@
+                     this.worldObj.setBlockWithNotify(var12 + var4, var14 - 1, var13 + var5, Block.ice.blockID);
+                 }
+ 
+-                if (this.worldObj.canSnowAt(var12 + var4, var14, var13 + var5))
++                if (canSnowAt(this.worldObj, var12 + var4, var14, var13 + var5))
+                 {
+                     this.worldObj.setBlockWithNotify(var12 + var4, var14, var13 + var5, Block.snow.blockID);
+                 }
+@@ -588,4 +596,261 @@
      {
          return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
      }
 +    
++    
++    public boolean canSnowAt(World world, int par1, int par2, int par3)
++    {
++        BiomeGenBase var4 = world.getBiomeGenForCoords(par1, par3);
++        float var5 = var4.getFloatTemperature();
++
++        if (var5 > 0.15F && par2 < 220)
++        {
++            return false;
++        }
++        else
++        {
++            if (par2 >= 0 && par2 < 256 && world.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10)
++            {
++                int var6 = world.getBlockId(par1, par2 - 1, par3);
++                int var7 = world.getBlockId(par1, par2, par3);
++
++                if (var7 == 0 && Block.snow.canPlaceBlockAt(world, par1, par2, par3) && var6 != 0 && var6 != Block.ice.blockID && Block.blocksList[var6].blockMaterial.blocksMovement())
++                {
++                    return true;
++                }
++            }
++
++            return false;
++        }
++    }
 +    
 +    
 +    
@@ -240,7 +310,7 @@
 +                    for (int var22 = -var19; var22 <= var19; ++var22)
 +                    {
 +                        BiomeGenBase blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
-+                        float blendedHeight = this.field_35388_l[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight +*/ 2.0F);
++                        float blendedHeight = this.field_35388_l[var21 + 2 + (var22 + 2) * 5] / (blendBiome.minHeight + 2.0F);//<---blendBiome.minHeight was commented out
 +
 +                        if (blendBiome.minHeight > baseBiome.minHeight)
 +                        {
@@ -298,7 +368,7 @@
 +                    var48 = var48 * (double)par6 / 16.0D;
 +                    double var28 = (double)par6 / 2.0D + var48 * 4.0D;
 +                    double var30 = 0.0D;
-+                    double var32 = ((double)var46 - var28) * 12.0D * 128.0D / 128.0D / (2.8+var26);
++                    double var32 = ((double)var46 - var28) * 12.0D * 128.0D / 128.0D / (2.70 + var26);
 +
 +                    if (var32 < 0.0D)
 +                    {

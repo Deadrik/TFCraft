@@ -2,6 +2,9 @@ package net.minecraft.src;
 
 import java.util.Random;
 
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomPumpkin;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomReed;
+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomSand;
 import net.minecraft.src.TFC_Core.Custom.WorldGenLiquidsTFC;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
@@ -31,14 +34,16 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		super(par1BiomeGenBase);
 		this.flowersPerChunk = 2;
 		this.grassPerChunk = 1;
-
 		this.mushroomsPerChunk = 0;
-
+		
+		this.reedGen = new WorldGenCustomReed();
+		this.sandGen = new WorldGenCustomSand(7, Block.sand.blockID);
 	}
 
 	/**
 	 * The method that does the work of actually decorating chunks
 	 */
+	@Override
 	protected void decorate()
 	{
 		this.generateOres();
@@ -136,7 +141,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			var3 = this.randomGenerator.nextInt(256);
 			var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			new WorldGenPumpkin().generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
+			new WorldGenCustomPumpkin().generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
 		}
 
 		for (var2 = 0; var2 < this.cactiPerChunk; ++var2)

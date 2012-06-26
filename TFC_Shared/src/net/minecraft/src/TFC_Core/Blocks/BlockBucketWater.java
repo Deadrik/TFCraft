@@ -5,7 +5,7 @@ import java.util.Random;
 
 import net.minecraft.src.*;
 
-public class BlockBucketWater extends BlockFluid
+public class BlockBucketWater extends BlockCustomFluid
 {
 	/**
      * Indicates whether the flow direction is optimal. Each array index corresponds to one of the four cardinal
@@ -47,6 +47,8 @@ public class BlockBucketWater extends BlockFluid
 		int direction = 0;
 		boolean[] optimal = new boolean[4];
 		
+		int meta = world.getBlockMetadata(x, y, z);
+		
 		//Try to move down
 		if (moveToBlock(world, x, y, z, x, y - 1, z))
 		{
@@ -66,46 +68,61 @@ public class BlockBucketWater extends BlockFluid
 		}
 		else if (optimal[1])
 		{
-			if (!moveToBlock(world, x, y, z, x + 1, y, z))
-				if (!moveToBlock(world, x, y, z, x, y, z + 1))
-					if (!moveToBlock(world, x, y, z, x, y, z - 1))
-						if (!moveToBlock(world, x, y, z, x - 1, y, z));
+		    if (!moveToBlock(world, x, y, z, x + 1, y, z))
+                if (!moveToBlock(world, x, y, z, x, y, z + 1))
+                    if (!moveToBlock(world, x, y, z, x, y, z - 1))
+                        if (!moveToBlock(world, x, y, z, x - 1, y, z));
 		}
 		else if (optimal[2])
 		{
-			if (!moveToBlock(world, x, y, z, x, y, z - 1))
-				if (!moveToBlock(world, x, y, z, x - 1, y, z))
-					if (!moveToBlock(world, x, y, z, x + 1, y, z))
-						if (!moveToBlock(world, x, y, z, x, y, z + 1));
+		    if (!moveToBlock(world, x, y, z, x, y, z - 1))
+                if (!moveToBlock(world, x, y, z, x - 1, y, z))
+                    if (!moveToBlock(world, x, y, z, x + 1, y, z))
+                        if (!moveToBlock(world, x, y, z, x, y, z + 1));
 		}
 		else if (optimal[3])
 		{
-			if (!moveToBlock(world, x, y, z, x, y, z + 1))
-				if (!moveToBlock(world, x, y, z, x - 1, y, z))
-					if (!moveToBlock(world, x, y, z, x + 1, y, z))
-						if (!moveToBlock(world, x, y, z, x, y, z - 1));
+		    if (!moveToBlock(world, x, y, z, x, y, z + 1))
+                if (!moveToBlock(world, x, y, z, x - 1, y, z))
+                    if (!moveToBlock(world, x, y, z, x + 1, y, z))
+                        if (!moveToBlock(world, x, y, z, x, y, z - 1));
 		}
+		
+//		if (meta == world.getBlockMetadata(x, y, z) && meta > 5)
+//		{
+//		    if(random.nextInt(100) < 10)
+//		    {
+//		        if(meta > 1)
+//		            world.setBlockMetadata(x, y, z, meta-1);
+//		        else
+//		            world.setBlock(x, y, z, 0);
+//		    }
+//		}
     }
 
 	private boolean moveToBlock(World world, int x, int y, int z, int x2, int y2, int z2)
 	{
 		int blockID2 = world.getBlockId(x2, y2, z2);
-		int blockMeta = world.getBlockMetadata(x, y, z);
-		int blockMeta2 = world.getBlockMetadata(x2, y2, z2);
+		int originMeta = world.getBlockMetadata(x, y, z);
+		int destMeta = world.getBlockMetadata(x2, y2, z2);
 		if (blockID2 == this.blockID)
 		{
-			if (blockMeta2 > blockMeta + 1 || y > y2)
+			if (destMeta > originMeta || y > y2)
 			{
-				if (blockMeta < 7 && blockMeta2 > 0)
+				if (originMeta < 7 && destMeta > 0)
 				{
-					world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1);
-					world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1);
+					world.setBlockMetadata(x, y, z, originMeta + 1);
+					world.markBlockNeedsUpdate(x, y, z);
+					world.setBlockMetadata(x2, y2, z2, destMeta - 1);
+					world.markBlockNeedsUpdate(x2, y2, z2);
 					return true;
 				}
-				else if (blockMeta2 > 0)
+				else if (destMeta > 0)
 				{
 					world.setBlockWithNotify(x, y, z, 0);
-					world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1);
+					world.markBlockNeedsUpdate(x, y, z);
+					world.setBlockMetadata(x2, y2, z2, destMeta - 1);
+					world.markBlockNeedsUpdate(x2, y2, z2);
 					return true;
 				}
 				else
@@ -128,14 +145,16 @@ public class BlockBucketWater extends BlockFluid
                 }
                 else if (blockID2 == Block.waterMoving.blockID || blockID2 == Block.waterStill.blockID)
                 {
-                	if (blockMeta < 7)
+                	if (originMeta < 7)
                 	{
-        				world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1);
+        				world.setBlockMetadataWithNotify(x, y, z, originMeta + 1);
+        				world.markBlockNeedsUpdate(x, y, z);
                     	return true;
                 	}
         			else
         			{
         				world.setBlockWithNotify(x, y, z, 0);
+        				world.markBlockNeedsUpdate(x, y, z);
                     	return true;
         			}
                 }
@@ -144,16 +163,21 @@ public class BlockBucketWater extends BlockFluid
                     Block.blocksList[blockID2].dropBlockAsItem(world, x2, y2, z2, world.getBlockMetadata(x2, y2, z2), 0);
                 }
             }
+            
             if (y2 < y)
             {
             	world.setBlockWithNotify(x, y, z, 0);
-    			world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, blockMeta);
+            	world.markBlockNeedsUpdate(x, y, z);
+    			world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, originMeta);
+    			world.markBlockNeedsUpdate(x2, y2, z2);
     			return true;
             }
-            if (blockMeta < 7)
+            if (originMeta < 7)
             {
-				world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1);
+				world.setBlockMetadataWithNotify(x, y, z, originMeta + 1);
+				world.markBlockNeedsUpdate(x, y, z);
 				world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7);
+				world.markBlockNeedsUpdate(x2, y2, z2);
 	        	return true;
             }
 			else if (world.getBlockId(x - 1, y, z) != this.blockID &&
@@ -168,7 +192,9 @@ public class BlockBucketWater extends BlockFluid
 			else
 			{
 				world.setBlockWithNotify(x, y, z, 0);
+				world.markBlockNeedsUpdate(x, y, z);
 				world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7);
+				world.markBlockNeedsUpdate(x2, y2, z2);
 	        	return true;
 			}
 		}
@@ -214,8 +240,8 @@ public class BlockBucketWater extends BlockFluid
                     ++var11;
                 }
 
-                if (!this.blockBlocksFlow(par1World, var9, par3, var11) && ((par1World.getBlockMaterial(var9, par3, var11) != this.blockMaterial ||
-                		par1World.getBlockId(var9, par3, var11) == this.blockID) || par1World.getBlockMetadata(var9, par3, var11) != 0))
+                if (!this.blockBlocksFlow(par1World, var9, par3, var11) && ((par1World.getBlockMaterial(var9, par3, var11) != this.blockMaterial /*||
+                		par1World.getBlockId(var9, par3, var11) == this.blockID) || par1World.getBlockMetadata(var9, par3, var11) != 0*/)))
                 {
                     if (!this.blockBlocksFlow(par1World, var9, par3 - 1, var11))
                     {
@@ -274,7 +300,7 @@ public class BlockBucketWater extends BlockFluid
                 ++var8;
             }
 
-            if (!this.blockBlocksFlow(par1World, var6, par3, var8) && (par1World.getBlockMaterial(var6, par3, var8) != this.blockMaterial || par1World.getBlockMetadata(var6, par3, var8) != 0))
+            if (!this.blockBlocksFlow(par1World, var6, par3, var8) && (par1World.getBlockId(var6, par3, var8) != this.blockID || par1World.getBlockMetadata(var6, par3, var8) != 0))
             {
                 if (!this.blockBlocksFlow(par1World, var6, par3 - 1, var8))
                 {
@@ -346,10 +372,10 @@ public class BlockBucketWater extends BlockFluid
     {
         super.onBlockAdded(par1World, par2, par3, par4);
 
-        if (par1World.getBlockId(par2, par3, par4) == this.blockID)
-        {
+//        if (par1World.getBlockId(par2, par3, par4) == this.blockID)
+//        {
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
-        }
+//        }
     }
     
     public void addCreativeItems(java.util.ArrayList list)

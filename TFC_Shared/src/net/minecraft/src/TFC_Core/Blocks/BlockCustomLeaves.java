@@ -172,7 +172,8 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
                 }
                 else
                 {
-                    this.destroyLeaves(par1World, par2, par3, par4);
+                    if(par1World.getChunkFromBlockCoords(par2, par4) != null)
+                        this.destroyLeaves(par1World, par2, par3, par4);
                 }
             }
         }
@@ -253,7 +254,7 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
         {
             entityplayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);
             entityplayer.addExhaustion(0.025F);
-            if(new Random().nextInt(100) < 30)
+            if(new Random().nextInt(100) < 28)
                 dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
             else if(new Random().nextInt(100) < 6 && l != 9 && l != 15)
                 dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraSapling, 1, l));

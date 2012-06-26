@@ -11,6 +11,8 @@ public class FloraIndex
     public int BloomFinish;
     public int HarvestStart;
     public int HarvestFinish;
+    public float minTemp;
+    public float maxTemp;
     public ItemStack output;
     
     /**
@@ -28,12 +30,20 @@ public class FloraIndex
         HarvestStart = h1;
         HarvestFinish = h2;
         output = o;
+        minTemp = 0.3F;
+        maxTemp = 2;
     }
     
     public ItemStack getOutput(Random R, int i)
     {
         ItemStack is = output.copy();
         is.stackSize += R.nextInt(i);
+        return is;
+    }
+    
+    public ItemStack getOutput()
+    {
+        ItemStack is = output.copy();
         return is;
     }
     
@@ -51,6 +61,13 @@ public class FloraIndex
             return true;
         
         return false;
+    }
+    
+    public FloraIndex setTemp(float min, float max)
+    {
+        minTemp = min;
+        maxTemp = max;
+        return this;
     }
     
 }

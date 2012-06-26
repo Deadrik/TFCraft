@@ -218,4 +218,28 @@ public class ServerProxy implements IProxy {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public int waterColorMultiplier(IBlockAccess par1iBlockAccess, int par2,
+            int par3, int par4)
+    {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public float getLightBrightness(IBlockAccess par1iBlockAccess, int par2,
+            int par3, int par4)
+    {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess,
+            int par2, int par3, int par4, int par5)
+    {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

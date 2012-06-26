@@ -138,7 +138,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 			if (Block.blocksList[this.blockIndex].blockMaterial == Material.lava)
 			{
 				int id = mod_TFC_Core.terraStoneIgEx.blockID;
-				int meta = 13+ random.nextInt(3);
+				int meta = random.nextInt(4);
 				for (i2 = 0; i2 < 16; ++i2)
 				{
 					for (j3 = 0; j3 < 16; ++j3)
