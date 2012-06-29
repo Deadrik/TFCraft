@@ -123,25 +123,14 @@ public class GuiCalendar extends GuiScreen
     {
         if(!world.isRemote)
         {
-            if (guibutton.id == 0)
+            switch(guibutton.id)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 1000);
-            }
-            else if (guibutton.id == 1)
-            {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 24000);
-            }
-            else if (guibutton.id == 2)
-            {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 168000);
-            }
-            else if (guibutton.id == 3)
-            {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 720000);
-            }
-            else if (guibutton.id == 4)
-            {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 8640000);
+                case 0:this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 1000);break;
+                case 1:this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 24000);break;
+                case 2:this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 168000);break;
+                case 3:this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 720000);break;
+                case 4:this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 8640000);break;
+                default: /*unknown*/
             }
 
         }
