@@ -230,6 +230,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -253,6 +255,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -276,6 +280,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -298,6 +304,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -320,6 +328,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -342,6 +352,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -364,6 +376,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -386,6 +400,8 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
                     anvilItemStacks[0] = null;
                 }
+                Random R = new Random(xCoord*yCoord+zCoord);
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
             }
         }
         else
@@ -438,7 +454,10 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                     anvilItemStacks[2] = null;
                     anvilItemStacks[3] = null;
                     anvilItemStacks[7] = null;
+                    
+                    worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
                 }
+                
             }
         }
         else

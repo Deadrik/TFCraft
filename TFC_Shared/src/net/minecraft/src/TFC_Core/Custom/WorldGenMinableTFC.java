@@ -25,7 +25,6 @@ public class WorldGenMinableTFC extends WorldGenerator
 	public static int MPPrevMeta;
 	public static int MPPrevLayerID;
 	public static int MPPrevLayerMeta;
-	private Random rand;
 	private World worldObj;
 
 	private int rarity = 2;
@@ -65,15 +64,15 @@ public class WorldGenMinableTFC extends WorldGenerator
 		this.hDens = hDensity;
 	}
 
-	public boolean BetterOreDistribution(int xChunk, int zChunk, int MPMinableBlockId, int MPMinableBlockMeta, int min, int max)//======================================================================================
+	public boolean BetterOreDistribution(int xChunk, int zChunk, int MPMinableBlockId, int MPMinableBlockMeta, int min, int max, Random rand)//======================================================================================
 	{
 		if (rand.nextInt(rarity) == 0)
 		{
 			for(int loopCount = 0; loopCount < veinAm; loopCount++)
 			{
-				int temp1 = mPCalculateDensity(diameter, hDens);
-				int temp2 = mPCalculateDensityVert(height, vDens, min, max);
-				int temp3 = mPCalculateDensity(diameter, hDens);
+				int temp1 = mPCalculateDensity(rand, diameter, hDens);
+				int temp2 = mPCalculateDensityVert(rand, height, vDens, min, max);
+				int temp3 = mPCalculateDensity(rand, diameter, hDens);
 				int l5 = xChunk + temp1;
 				int i9 = temp2;
 				int k13 = zChunk + temp3;
@@ -151,7 +150,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 		MPBlockID = minableBlockId;// set output block ID
 		MPBlockMeta = minableBlockMeta;
 		worldObj = world;
-		rand = random;
+		//rand = random;
 		if(MPChunk_X != MPPrevX || MPChunk_Z != MPPrevZ || MPBlockID != MPPrevID || 
 				MPBlockID == MPPrevID && MPBlockMeta != MPPrevMeta || MPLayerID != MPPrevLayerID || MPLayerMeta != MPPrevLayerMeta)// if it is a new x or y chunk or is a new ore, then generate
 		{ 
@@ -160,7 +159,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 			MPPrevZ = MPChunk_Z;
 			MPPrevID = MPBlockID;
 			MPPrevMeta = MPBlockMeta;
-			BetterOreDistribution(MPChunk_X, MPChunk_Z, MPBlockID, MPBlockMeta, min, max);
+			BetterOreDistribution(MPChunk_X, MPChunk_Z, MPBlockID, MPBlockMeta, min, max,random);
 
 
 		}
@@ -184,7 +183,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 	}
 
 	//======================================================================================
-	public int mPCalculateDensity(int oreDist, float oreDens) // returns the density value
+	public int mPCalculateDensity(Random rand, int oreDist, float oreDens) // returns the density value
 	{
 		int lpCnt = 0;
 		int dValPassInr = 0;
@@ -204,7 +203,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 		return dValPass; // return proccesed random value
 	}
 	//======================================================================================
-    public int mPCalculateDensityVert(int oreDist, float oreDens, int min, int max) // returns the density value
+    public int mPCalculateDensityVert(Random rand, int oreDist, float oreDens, int min, int max) // returns the density value
     {
         int lpCnt = 0;
         int dValPassInr = 0;

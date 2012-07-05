@@ -5,10 +5,9 @@ import net.minecraft.src.IInventory;
 import net.minecraft.src.*;
 import net.minecraft.src.Slot;
 
-public class SlotFirepitCharcoal extends Slot
-
+public class SlotBlocked extends Slot
 {
-	public SlotFirepitCharcoal(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+	public SlotBlocked(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 
@@ -24,7 +23,7 @@ public class SlotFirepitCharcoal extends Slot
 		Boolean B = itemstack.hasTagCompound();
 		if(!B)
 		{
-			super.onPickupFromSlot(itemstack);
+			//super.onPickupFromSlot(itemstack);
 		}
 	}
 }

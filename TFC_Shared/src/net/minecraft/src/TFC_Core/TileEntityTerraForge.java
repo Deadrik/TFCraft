@@ -609,6 +609,10 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             } else if(fireTemperature < ambientTemp) {
                 fireTemperature = ambientTemp;
             }
+            //Play the fire sound
+            Random R = new Random();
+            if(R.nextInt(10) == 0 && fireTemperature > 210)
+                worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
 
             if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
             {

@@ -1,53 +1,35 @@
 package net.minecraft.src;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.TFC_Core.EntityFallingDirt;
-import net.minecraft.src.TFC_Core.EntityFallingStone;
-import net.minecraft.src.TFC_Core.EntityFallingStone2;
-import net.minecraft.src.TFC_Core.EntityTerraJavelin;
-import net.minecraft.src.TFC_Core.IProxy;
-import net.minecraft.src.TFC_Core.TFCSeasons;
-import net.minecraft.src.TFC_Core.TileEntityFruitTreeWood;
-import net.minecraft.src.TFC_Core.TileEntityTerraAnvil;
-import net.minecraft.src.TFC_Core.TileEntityTerraBloomery;
-import net.minecraft.src.TFC_Core.TileEntityTerraFirepit;
-import net.minecraft.src.TFC_Core.TileEntityTerraForge;
-import net.minecraft.src.TFC_Core.TileEntityTerraLogPile;
-import net.minecraft.src.TFC_Core.TileEntityTerraMetallurgy;
-import net.minecraft.src.TFC_Core.TileEntityTerraScribe;
-import net.minecraft.src.TFC_Core.TileEntityTerraSluice;
-import net.minecraft.src.TFC_Core.TileEntityTerraWorkbench;
+import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.TFC_Core.Custom.ColorizerFoliageTFC;
+import net.minecraft.src.TFC_Core.Custom.EntityBear;
+import net.minecraft.src.TFC_Core.Custom.EntityChickenTFC;
 import net.minecraft.src.TFC_Core.Custom.EntityCowTFC;
+import net.minecraft.src.TFC_Core.Custom.EntityPigTFC;
+import net.minecraft.src.TFC_Core.Custom.EntitySheepTFC;
 import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
-import net.minecraft.src.TFC_Core.GUI.GuiCalendar;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraAnvil;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraBloomery;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraFirepit;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraForge;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraLogPile;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraMetallurgy;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraScribe;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraSluice;
-import net.minecraft.src.TFC_Core.GUI.GuiTerraWorkbench;
+import net.minecraft.src.TFC_Core.Custom.EntityWolfTFC;
+import net.minecraft.src.TFC_Core.GUI.*;
+import net.minecraft.src.TFC_Core.General.PacketHandler;
+import net.minecraft.src.TFC_Core.General.PlayerManagerTFC;
 import net.minecraft.src.TFC_Core.General.TFCHeat;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
+import net.minecraft.src.TFC_Core.Items.ItemChisel;
 import net.minecraft.src.TFC_Core.Items.ItemTerra;
 import net.minecraft.src.TFC_Core.Items.ItemTerraArmor;
-import net.minecraft.src.TFC_Core.Render.RenderFallingDirt;
-import net.minecraft.src.TFC_Core.Render.RenderFallingStone;
-import net.minecraft.src.TFC_Core.Render.RenderFallingStone2;
-import net.minecraft.src.TFC_Core.Render.RenderTerraJavelin;
-import net.minecraft.src.TFC_Core.Render.TFC_CoreRender;
+import net.minecraft.src.TFC_Core.Render.*;
 import net.minecraft.src.forge.*;
 
 public class ClientProxy implements IProxy 
 {
     public KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
+    public KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
 
     public void registerRenderInformation() 
     {
@@ -88,20 +70,593 @@ public class ClientProxy implements IProxy
         ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
 
         ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
+        ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
+        ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
+        
+        MinecraftForgeClient.registerSoundHandler(new SoundHandler());
+        MinecraftForgeClient.registerHighlightHandler(new RenderHighlight());
+        
+        ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0);
+        ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1);
+        ModLoader.registerEntityID(EntityBear.class, "bear", 2,0xd1d003, 0x101010);
+        ModLoader.registerEntityID(EntityChickenTFC.class, "chicken", 3);
+        ModLoader.registerEntityID(EntityPigTFC.class, "pig", 4);
+        ModLoader.registerEntityID(EntitySquidTFC.class, "squid", 5);
+    }
+
+    
+
+    @Override
+    public File getMinecraftDir() {
+        return Minecraft.getMinecraftDir();
+    }
+
+    @Override
+    public void applyExtraDataToDrops(EntityItem entityitem, NBTTagCompound data) {
+        entityitem.item.setTagCompound(data);
 
     }
 
     @Override
-    public void registerTranslations() 
+    public boolean isRemote() {
+        return ModLoader.getMinecraftInstance().theWorld.isRemote;
+    }
+
+    @Override
+    public World getCurrentWorld() {
+        return ModLoader.getMinecraftInstance().theWorld;
+    }
+
+    @Override
+    public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+    {
+        TileEntity te;
+        try
+        {
+            te= world.getBlockTileEntity(x, y, z);
+        }
+        catch(Exception e)
+        {
+            te = null;
+        }
+
+        switch(ID)
+        {
+            case 0:
+            {
+                return new GuiTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
+            }
+            case 1:
+            {
+                return new GuiTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
+            }
+            case 20:
+            {
+                return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te);
+            }
+            case 21:
+            {
+                return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te);
+            }
+            case 22:
+            {
+                return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world);
+            }
+            case 23:
+            {
+                return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te);
+            }
+            case 24:
+            {
+                return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world);
+            }
+            case 25:
+            {
+                return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te);
+            }
+            case 26:
+            {
+                return new GuiTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
+            }
+            case 27:
+            {
+                return new GuiCalendar(player, world, x, y, z);
+            }
+            case 28:
+            {
+                return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType ,world);
+            }
+
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public String getDisplayName(ItemStack is) 
+    {
+        return is.getItem().getItemDisplayName(is);
+    }
+
+    @Override
+    public void addRenderer(Map map) 
+    {
+        map.put(EntityFallingDirt.class, new RenderFallingDirt());
+        map.put(EntityFallingStone.class, new RenderFallingStone());
+        map.put(EntityFallingStone2.class, new RenderFallingStone2());
+        map.put(EntityTerraJavelin.class, new RenderTerraJavelin());
+        map.put(EntitySquidTFC.class, new RenderSquid(new ModelSquid(), 0.7F));
+        map.put(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
+        map.put(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(),new ModelSheep1TFC(), 0.7F));
+        map.put(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), 0.5F));
+        map.put(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
+        map.put(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
+        map.put(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
+    }
+
+    @Override
+    public boolean renderWorldBlock(Object renderblocks,
+            IBlockAccess iblockaccess, int i, int j, int k, Block block, int l) 
+    {
+        if (l == mod_TFC_Core.sulfurRenderId)
+        {
+            return TFC_CoreRender.RenderSulfur(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.moltenRenderId)
+        {
+            return TFC_CoreRender.RenderMolten(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.woodSupportRenderIdH)
+        {
+            return TFC_CoreRender.RenderWoodSupportBeamH(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.woodSupportRenderIdV)
+        {
+            return TFC_CoreRender.RenderWoodSupportBeamV(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.grassRenderId)
+        {
+            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
+            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
+            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
+            float var8 = (float)(var5 & 255) / 255.0F;
+            return TFC_CoreRender.RenderGrass(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.oreRenderId)
+        {
+            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
+            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
+            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
+            float var8 = (float)(var5 & 255) / 255.0F;
+            return TFC_CoreRender.RenderOre(block, i, j, k,  var6, var7, var8, (RenderBlocks)renderblocks, iblockaccess);
+        }
+        else if (l == mod_TFC_Core.looseRockRenderId)
+        {
+            return TFC_CoreRender.RenderLooseRock(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.snowRenderId)
+        {
+            return TFC_CoreRender.RenderSnow(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.terraFirepitRenderId)
+        {
+            return TFC_CoreRender.renderFirepit(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.terraForgeRenderId)
+        {
+            return TFC_CoreRender.renderForge(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.terraBellowsRenderId)
+        {
+            return TFC_CoreRender.renderBellows(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.terraAnvilRenderId)
+        {
+            return TFC_CoreRender.renderAnvil(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.sluiceRenderId)
+        {
+            return TFC_CoreRender.RenderSluice(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.woodFruitRenderId)
+        {
+            return TFC_CoreRender.RenderWoodTrunk(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.leavesFruitRenderId)
+        {
+            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
+            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
+            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
+            float var8 = (float)(var5 & 255) / 255.0F;
+            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.toolRackRenderId)
+        {
+            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
+            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
+            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
+            float var8 = (float)(var5 & 255) / 255.0F;
+            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.finiteWaterRenderId)
+        {
+            return TFC_CoreRender.RenderFiniteWater(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.stairRenderId)
+        {
+            return TFC_CoreRender.renderBlockStairs(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+        else if (l == mod_TFC_Core.slabRenderId)
+        {
+            return TFC_CoreRender.renderBlockSlab(block, i, j, k, (RenderBlocks)renderblocks);
+        }
+
+
+        return false;
+    }
+
+    public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        int var5 = 0;
+        int var6 = 0;
+        int var7 = 0;
+
+        for (int var8 = -1; var8 <= 1; ++var8)
+        {
+            for (int var9 = -1; var9 <= 1; ++var9)
+            {
+                int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).waterColorMultiplier;
+                var5 += (var10 & 16711680) >> 16;
+            var6 += (var10 & 65280) >> 8;
+            var7 += var10 & 255;
+            }
+        }
+        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+    }
+
+    public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        int var5 = 0;
+        int var6 = 0;
+        int var7 = 0;
+
+        for (int var8 = -1; var8 <= 1; ++var8)
+        {
+            for (int var9 = -1; var9 <= 1; ++var9)
+            {
+                int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeGrassColor();
+                var5 += (var10 & 16711680) >> 16;
+            var6 += (var10 & 65280) >> 8;
+        var7 += var10 & 255;
+            }
+        }
+        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
+    }
+
+    public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        int var5 = 0;
+        int var6 = 0;
+        int var7 = 0;
+
+        int[] rgb = {0,0,0};
+
+        int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+        if(par1IBlockAccess.getBlockId(par2, par3, par4) == mod_TFC_Core.fruitTreeLeaves.blockID)
+        {
+            if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9)
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+
+                        int var10 = ColorizerFoliageTFC.getFoliageYellow();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+        }
+        else if(par1IBlockAccess.getBlockId(par2, par3, par4) == Block.vine.blockID)
+        {
+            if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && !(par1IBlockAccess.getBiomeGenForCoords(par2, par4) instanceof BiomeGenJungleTFC))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageDead();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else if(TFCSeasons.currentMonth >= 6 && !(par1IBlockAccess.getBiomeGenForCoords(par2, par4) instanceof BiomeGenJungleTFC))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageDead();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+        }
+        else
+        {
+            if(TFCSeasons.currentMonth >= 6 && (meta == 9 || meta == 8 || meta == 12))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+
+                        double var1 = (double)MathHelper.clamp_float(biome.getFloatTemperature(), 0.0F, 1.0F);
+                        double var3 = (double)MathHelper.clamp_float(biome.getFloatRainfall(), 0.0F, 1.0F);
+                        int var10 = ColorizerFoliageTFC.getFoliageColor(var1, var3);
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageYellow();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && (meta == 6))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageRed();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else if(TFCSeasons.currentMonth >= 6  && TFCSeasons.currentMonth < 9 && !(meta == 15))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageOrange();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else if(TFCSeasons.currentMonth >= 6 && !(meta == 15))
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = ColorizerFoliageTFC.getFoliageDead();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+            else
+            {
+                for (int var8 = -1; var8 <= 1; ++var8)
+                {
+                    for (int var9 = -1; var9 <= 1; ++var9)
+                    {
+                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
+                        rgb = applyColor(var10, rgb);
+                    }
+                }
+                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+                return x;
+            }
+        }
+    }
+
+    private int[] applyColor(int c, int[] rgb)
+    {        
+        rgb[0] += ((c & 16711680) >> 16);
+        rgb[1] += ((c & 65280) >> 8);
+        rgb[2] += (c & 255);
+
+        return rgb;
+    }
+
+
+    @Override
+    public int blockGetMixedBrightnessForBlock(Block B,IBlockAccess par1iBlockAccess,
+            int par2, int par3, int par4) {
+        return B.getMixedBrightnessForBlock(par1iBlockAccess, par2, par3, par4);
+    }
+
+    @Override
+    public int blockGetRenderBlockPass(Block B) {
+        return B.getRenderBlockPass();
+    }
+
+    @Override
+    public AxisAlignedBB blockGetSelectedBoundingBoxFromPool(Block B,World par1World,
+            int par2, int par3, int par4) 
+    {
+        return B.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
+    }
+
+    @Override
+    public boolean areItemStacksEqual(ItemStack is1, ItemStack is2) {
+        return ItemStack.func_46154_a(is1, is2);
+    }
+
+    @Override
+    public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
+        return ModLoader.getUniqueBlockModelID(var0, var1);
+    }
+
+    @Override
+    public void takenFromCrafting(EntityPlayer entityplayer,
+            ItemStack itemstack, IInventory iinventory) 
+    {
+        ModLoader.takenFromCrafting(entityplayer, itemstack, iinventory);
+    }
+
+    @Override
+    public void sendCustomPacket(Packet packet)
+    {
+        ModLoader.sendPacket(packet);     
+    }
+
+    @Override
+    public EntityPlayer getPlayer(NetworkManager network)
+    {
+        return ModLoader.getMinecraftInstance().thePlayer;
+    }
+
+    @Override
+    public int getArmorRenderID(int i)
+    {
+        String[] Names = {"bismuth", "bismuthbronze", "blackbronze", "blacksteel", "bluesteel", "bronze", "copper", "wroughtiron", "redsteel", "rosegold", "steel", "tin", "zinc"};
+        return ModLoader.addArmor(Names[i]);
+    }
+
+    @Override
+    public boolean getGraphicsLevel()
+    {
+        // TODO Auto-generated method stub
+        return Minecraft.isFancyGraphicsEnabled();
+    }
+
+    @Override
+    public void registerKeys(BaseMod b)
+    {
+        ModLoader.registerKey(b, Key_Calendar, false);
+        ModLoader.registerKey(b, Key_ToolMode, false);
+    }
+
+    private long keyTime = 0;
+    public void keyboardEvent(Object e)
+    {
+        KeyBinding bind = (KeyBinding)e;
+        Minecraft minecraft = ModLoader.getMinecraftInstance();
+        if(keyTime+1 < TFCSeasons.getTotalTicks() && minecraft.theWorld != null)
+        {
+            keyTime = TFCSeasons.getTotalTicks();
+            if (bind == this.Key_Calendar && minecraft.inGameHasFocus)
+            {
+                minecraft.thePlayer.openGui(mod_TFC_Core.instance, 27, minecraft.theWorld, 0, 0, 0);
+            }
+            else if (bind == this.Key_Calendar && minecraft.currentScreen instanceof GuiCalendar)
+            {
+                minecraft.thePlayer.closeScreen();
+            }
+            else if (bind == this.Key_ToolMode && minecraft.thePlayer.getCurrentEquippedItem() != null 
+                    && minecraft.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && minecraft.inGameHasFocus)
+            {
+                ItemChisel.mode = ItemChisel.mode == 0 ? 1 : ItemChisel.mode == 1 ? 2 : 0;
+                String type = ItemChisel.mode == 0 ? "Smoothing" : ItemChisel.mode == 1 ? "Creating Stairs" : "Creating Slabs";
+                minecraft.ingameGUI.addChatMessage(type);
+
+                if(minecraft.theWorld.isRemote)
+                {
+                    PacketHandler.sendKeyPress(0);
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return par1iBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
+    }
+
+    @Override
+    public float getLightBrightness(IBlockAccess par1iBlockAccess, int par2,
+            int par3, int par4)
+    {
+        return par1iBlockAccess.getLightBrightness(par2, par3, par4);
+    }
+
+    @Override
+    public void sendCustomPacketToPlayer(String player, Packet packet)
     {
 
+    }
+    
+    @Override
+    public void registerTranslations() 
+    {
         ModLoader.addLocalization("Key_Calendar", "Open Calendar");
         String[] Names = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze","Copper","Gold"
                 ,"Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver", "Steel", "Sterling Silver",
                 "Tin", "Zinc"};
+        String[] rockNames = {"Granite", "Diorite", "Gabbro", 
+            "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
+            "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
+            "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
         /*==================================================================
          * TFC Core Localization
          *==================================================================*/
+        for(int i= 0; i < rockNames.length; i++)
+        {
+            ModLoader.addLocalization("item.LooseRock."+rockNames[i]+".name", rockNames[i] + " Rock");
+            ModLoader.addLocalization("item.FlatRock."+rockNames[i]+".name", rockNames[i] + " Rock");
+        }
         ModLoader.addLocalization("tile.IgInRock.Granite.name", "Granite");
         ModLoader.addLocalization("tile.IgInRock.Diorite.name", "Diorite");
         ModLoader.addLocalization("tile.IgInRock.Gabbro.name", "Gabbro");
@@ -418,7 +973,7 @@ public class ClientProxy implements IProxy
             ModLoader.addLocalization("item.FruitSapling2."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
             ModLoader.addLocalization("item.Fruit."+FruitTreeNames[i]+".name", FruitTreeNames[i]);
         }
-        
+
         ModLoader.addLocalization("item.Meat.EggCooked.name", "Cooked Egg");
 
         //Gems
@@ -642,513 +1197,26 @@ public class ClientProxy implements IProxy
     }
 
     @Override
-    public File getMinecraftDir() {
-        return Minecraft.getMinecraftDir();
-    }
-
-    @Override
-    public void applyExtraDataToDrops(EntityItem entityitem, NBTTagCompound data) {
-        entityitem.item.setTagCompound(data);
-
-    }
-
-    @Override
-    public boolean isRemote() {
-        return ModLoader.getMinecraftInstance().theWorld.isRemote;
-    }
-
-    @Override
-    public World getCurrentWorld() {
-        return ModLoader.getMinecraftInstance().theWorld;
-    }
-
-    @Override
-    public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+    public String getPlayerName()
     {
-        TileEntity te;
+        return ModLoader.getMinecraftInstance().thePlayer.username;
+    }
+
+    @Override
+    public void handleHealthUpdate(Class c, byte par1)
+    {
         try
         {
-            te= world.getBlockTileEntity(x, y, z);
-        }
-        catch(Exception e)
+            c.getSuperclass().getMethod("handleHealthUpdate", Byte.class).invoke(par1);
+        } catch (Exception e1)
         {
-            te = null;
-        }
-
-        switch(ID)
-        {
-            case 0:
-            {
-                return new GuiTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
-            }
-            case 1:
-            {
-                return new GuiTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
-            }
-            case 20:
-            {
-                return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te);
-            }
-            case 21:
-            {
-                return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te);
-            }
-            case 22:
-            {
-                return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world);
-            }
-            case 23:
-            {
-                return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te);
-            }
-            case 24:
-            {
-                return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world);
-            }
-            case 25:
-            {
-                return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te);
-            }
-            case 26:
-            {
-                return new GuiTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
-            }
-            case 27:
-            {
-                return new GuiCalendar(player, world, x, y, z);
-            }
-
-        }
-
-        return null;
-
-    }
-
-    @Override
-    public String getDisplayName(ItemStack is) 
-    {
-        return is.getItem().getItemDisplayName(is);
-    }
-
-    @Override
-    public void addRenderer(Map map) 
-    {
-        map.put(EntityFallingDirt.class, new RenderFallingDirt());
-        map.put(EntityFallingStone.class, new RenderFallingStone());
-        map.put(EntityFallingStone2.class, new RenderFallingStone2());
-        map.put(EntityTerraJavelin.class, new RenderTerraJavelin());
-        map.put(EntitySquidTFC.class, new RenderSquid(new ModelSquid(), 0.7F));
-        map.put(EntityCowTFC.class, new RenderCow(new ModelCow(), 0.7F));
-    }
-
-    @Override
-    public boolean renderWorldBlock(Object renderblocks,
-            IBlockAccess iblockaccess, int i, int j, int k, Block block, int l) 
-    {
-        if (l == mod_TFC_Core.sulfurRenderId)
-        {
-            return TFC_CoreRender.RenderSulfur(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.moltenRenderId)
-        {
-            return TFC_CoreRender.RenderMolten(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.woodSupportRenderIdH)
-        {
-            return TFC_CoreRender.RenderWoodSupportBeamH(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.woodSupportRenderIdV)
-        {
-            return TFC_CoreRender.RenderWoodSupportBeamV(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.grassRenderId)
-        {
-            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderGrass(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.oreRenderId)
-        {
-            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderOre(block, i, j, k,  var6, var7, var8, (RenderBlocks)renderblocks, iblockaccess);
-        }
-        else if (l == mod_TFC_Core.looseRockRenderId)
-        {
-            return TFC_CoreRender.RenderLooseRock(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.snowRenderId)
-        {
-            return TFC_CoreRender.RenderSnow(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.terraFirepitRenderId)
-        {
-            return TFC_CoreRender.renderFirepit(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.terraForgeRenderId)
-        {
-            return TFC_CoreRender.renderForge(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.terraBellowsRenderId)
-        {
-            return TFC_CoreRender.renderBellows(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.terraAnvilRenderId)
-        {
-            return TFC_CoreRender.renderAnvil(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.sluiceRenderId)
-        {
-            return TFC_CoreRender.RenderSluice(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.woodFruitRenderId)
-        {
-            return TFC_CoreRender.RenderWoodTrunk(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.leavesFruitRenderId)
-        {
-            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.toolRackRenderId)
-        {
-            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
-        }
-        else if (l == mod_TFC_Core.finiteWaterRenderId)
-        {
-            return TFC_CoreRender.RenderFiniteWater(block, i, j, k, (RenderBlocks)renderblocks);
-        }
-
-
-        return false;
-    }
-
-    public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-        int var5 = 0;
-        int var6 = 0;
-        int var7 = 0;
-
-        for (int var8 = -1; var8 <= 1; ++var8)
-        {
-            for (int var9 = -1; var9 <= 1; ++var9)
-            {
-                int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).waterColorMultiplier;
-                var5 += (var10 & 16711680) >> 16;
-            var6 += (var10 & 65280) >> 8;
-            var7 += var10 & 255;
-            }
-        }
-        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
-    }
-    
-    public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-        int var5 = 0;
-        int var6 = 0;
-        int var7 = 0;
-
-        for (int var8 = -1; var8 <= 1; ++var8)
-        {
-            for (int var9 = -1; var9 <= 1; ++var9)
-            {
-                int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeGrassColor();
-                var5 += (var10 & 16711680) >> 16;
-            var6 += (var10 & 65280) >> 8;
-            var7 += var10 & 255;
-            }
-        }
-        return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
-    }
-
-    public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-        int var5 = 0;
-        int var6 = 0;
-        int var7 = 0;
+            //e1.printStackTrace();
+        } //.handleHealthUpdate(par1);
         
-        int[] rgb = {0,0,0};
-
-        int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-        if(par1IBlockAccess.getBlockId(par2, par3, par4) == mod_TFC_Core.fruitTreeLeaves.blockID)
-        {
-            if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9)
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
-
-                        int var10 = ColorizerFoliageTFC.getFoliageYellow();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-        }
-        else if(par1IBlockAccess.getBlockId(par2, par3, par4) == Block.vine.blockID)
-        {
-            if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && !(par1IBlockAccess.getBiomeGenForCoords(par2, par4) instanceof BiomeGenJungleTFC))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = ColorizerFoliageTFC.getFoliageDead();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else if(TFCSeasons.currentMonth >= 6 && !(par1IBlockAccess.getBiomeGenForCoords(par2, par4) instanceof BiomeGenJungleTFC))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = ColorizerFoliageTFC.getFoliageDead();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-        }
-        else
-        {
-            if(TFCSeasons.currentMonth >= 6 && (meta == 9 || meta == 8 || meta == 12))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
-
-                        double var1 = (double)MathHelper.clamp_float(biome.getFloatTemperature(), 0.0F, 1.0F);
-                        double var3 = (double)MathHelper.clamp_float(biome.getFloatRainfall(), 0.0F, 1.0F);
-                        int var10 = ColorizerFoliageTFC.getFoliageColor(var1, var3);
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = ColorizerFoliageTFC.getFoliageYellow();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9 && (meta == 6))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = ColorizerFoliageTFC.getFoliageRed();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else if(TFCSeasons.currentMonth >= 6  && TFCSeasons.currentMonth < 9 && !(meta == 15))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = ColorizerFoliageTFC.getFoliageOrange();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else if(TFCSeasons.currentMonth >= 6 && !(meta == 15))
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = ColorizerFoliageTFC.getFoliageDead();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-            else
-            {
-                for (int var8 = -1; var8 <= 1; ++var8)
-                {
-                    for (int var9 = -1; var9 <= 1; ++var9)
-                    {
-                        int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).getBiomeFoliageColor();
-                        rgb = applyColor(var10, rgb);
-                    }
-                }
-                int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-                return x;
-            }
-        }
     }
-
-    private int[] applyColor(int c, int[] rgb)
-    {        
-        rgb[0] += ((c & 16711680) >> 16);
-        rgb[1] += ((c & 65280) >> 8);
-        rgb[2] += (c & 255);
-        
-        return rgb;
-    }
-
-
     @Override
-    public int blockGetMixedBrightnessForBlock(Block B,IBlockAccess par1iBlockAccess,
-            int par2, int par3, int par4) {
-        return B.getMixedBrightnessForBlock(par1iBlockAccess, par2, par3, par4);
-    }
-
-    @Override
-    public int blockGetRenderBlockPass(Block B) {
-        return B.getRenderBlockPass();
-    }
-
-    @Override
-    public AxisAlignedBB blockGetSelectedBoundingBoxFromPool(Block B,World par1World,
-            int par2, int par3, int par4) 
+    public boolean aiTargetShouldExecute(EntityAITarget target, EntityLiving par1EntityLiving, boolean par2)
     {
-        return B.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
-    }
-
-    @Override
-    public boolean areItemStacksEqual(ItemStack is1, ItemStack is2) {
-        return ItemStack.func_46154_a(is1, is2);
-    }
-
-    @Override
-    public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
-        return ModLoader.getUniqueBlockModelID(var0, var1);
-    }
-
-    @Override
-    public void takenFromCrafting(EntityPlayer entityplayer,
-            ItemStack itemstack, IInventory iinventory) 
-    {
-        ModLoader.takenFromCrafting(entityplayer, itemstack, iinventory);
-    }
-
-    @Override
-    public void sendCustomPacket(Packet packet)
-    {
-        ModLoader.sendPacket(packet);     
-    }
-
-    @Override
-    public EntityPlayer getPlayer(NetworkManager network)
-    {
-        return ModLoader.getMinecraftInstance().thePlayer;
-    }
-
-    @Override
-    public int getArmorRenderID(int i)
-    {
-        String[] Names = {"bismuth", "bismuthbronze", "blackbronze", "blacksteel", "bluesteel", "bronze", "copper", "wroughtiron", "redsteel", "rosegold", "steel", "tin", "zinc"};
-        return ModLoader.addArmor(Names[i]);
-    }
-
-    @Override
-    public boolean getGraphicsLevel()
-    {
-        // TODO Auto-generated method stub
-        return Minecraft.isFancyGraphicsEnabled();
-    }
-
-    @Override
-    public void registerKeys(BaseMod b)
-    {
-        ModLoader.registerKey(b, Key_Calendar, false);
-    }
-
-    public void keyboardEvent(Object e)
-    {
-        KeyBinding bind = (KeyBinding)e;
-        Minecraft minecraft = ModLoader.getMinecraftInstance();
-        if (bind == this.Key_Calendar && minecraft.inGameHasFocus)
-        {
-            minecraft.thePlayer.openGui(mod_TFC_Core.instance, 27, minecraft.theWorld, 0, 0, 0);
-        }
-        else if (bind == this.Key_Calendar && minecraft.currentScreen instanceof GuiCalendar)
-        {
-            minecraft.thePlayer.closeScreen();
-        }
-    }
-
-    @Override
-    public int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        return par1iBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
-    }
-
-    @Override
-    public float getLightBrightness(IBlockAccess par1iBlockAccess, int par2,
-            int par3, int par4)
-    {
-        return par1iBlockAccess.getLightBrightness(par2, par3, par4);
+        return target.func_48376_a(par1EntityLiving, par2);
     }
 }

@@ -88,7 +88,7 @@ public class GuiCalendar extends GuiScreen
             drawCenteredString(fontRenderer,"Date : Bioxx's Birthday!, " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);
         else
             drawCenteredString(fontRenderer,"Date : " + dom + " " + TFCSeasons.months[month] + ", " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);
-        drawCenteredString(fontRenderer,"Temperature : " + ((int)TFCHeat.getNormalizedTemp(world.getBiomeGenForCoords((int)player.posX, (int)player.posZ).getFloatTemperature())) + "C", l + 87, i1+56, 0x000000);
+        drawCenteredString(fontRenderer,"Temperature : " + ((int)TFCHeat.getNormalizedTemp(world.getBiomeGenForCoords((int)player.posX, (int)player.posZ).getHeightAdjustedTemperature((int)player.posY))) + "C", l + 87, i1+56, 0x000000);
         //drawCenteredString(fontRenderer,"Month : " + , l + 87, i1+36, 0x000000);
 
 

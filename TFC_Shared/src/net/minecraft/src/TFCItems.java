@@ -714,6 +714,35 @@ public class TFCItems
     public static Item Egg;
     public static Item EggCooked;
     
+    public static Item LooseRock;
+    public static Item FlatRock;
+    
+    public static Item IgInStonePickaxeHead;
+    public static Item SedStonePickaxeHead;
+    public static Item IgExStonePickaxeHead;
+    public static Item MMStonePickaxeHead;
+    public static Item IgInStoneShovelHead;
+    public static Item SedStoneShovelHead;
+    public static Item IgExStoneShovelHead;
+    public static Item MMStoneShovelHead;
+    public static Item IgInStoneAxeHead;
+    public static Item SedStoneAxeHead;
+    public static Item IgExStoneAxeHead;
+    public static Item MMStoneAxeHead;
+    public static Item IgInStoneHoeHead;
+    public static Item SedStoneHoeHead;
+    public static Item IgExStoneHoeHead;
+    public static Item MMStoneHoeHead;
+    
+    public static Item StoneKnife;
+    public static Item StoneKnifeHead;
+    public static Item StoneHammerHead;
+    public static Item StoneProPickHead;
+    
+    
+    /**
+     * Item Uses Setup
+     * */
     public static int IgInStoneUses = 60;
     public static int IgExStoneUses = 70;
     public static int SedStoneUses = 50;
@@ -1316,6 +1345,35 @@ public class TFCItems
         SteelKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","SteelKnife",num),SteelToolMaterial).setItemName("Steel Knife").setMaxDamage(SteelUses).setIconCoord(11, 10);num++;
         TinKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","TinKnife",num),TinToolMaterial).setItemName("Tin Knife").setMaxDamage(TinUses).setIconCoord(12, 10);num++;
         ZincKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","ZincKnife",num),ZincToolMaterial).setItemName("Zinc Knife").setMaxDamage(ZincUses).setIconCoord(13, 10);num++;
+        
+        LooseRock = ((ItemTerra) new ItemLooseRock(TFCSettings.getIntFor(config,"item","LooseRock",num)).setItemName("LooseRock")).setTexturePath("/bioxx/terraRock.png");num++;
+        FlatRock = ((ItemTerra) new ItemFlatRock(TFCSettings.getIntFor(config,"item","FlatRock",num)).setItemName("FlatRock")).setTexturePath("/bioxx/terraRock.png");num++;
+        
+        IgInStonePickaxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgInStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
+        SedStonePickaxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SedStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
+        IgExStonePickaxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgExStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
+        MMStonePickaxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","MMStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
+        
+        IgInStoneShovelHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgInStoneShovelHead",num)).setItemName("Stone Shovel Head").setIconCoord(0, 4);num++;
+        SedStoneShovelHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SedStoneShovelHead",num)).setItemName("Stone Shovel Head").setIconCoord(0, 4);num++;
+        IgExStoneShovelHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgExStoneShovelHead",num)).setItemName("Stone Shovel Head").setIconCoord(0, 4);num++;
+        MMStoneShovelHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","MMStoneShovelHead",num)).setItemName("Stone Shovel Head").setIconCoord(0, 4);num++;
+        
+        IgInStoneAxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgInStoneAxeHead",num)).setItemName("Stone Axe Head").setIconCoord(0, 5);num++;
+        SedStoneAxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SedStoneAxeHead",num)).setItemName("Stone Axe Head").setIconCoord(0, 5);num++;
+        IgExStoneAxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgExStoneAxeHead",num)).setItemName("Stone Axe Head").setIconCoord(0, 5);num++;
+        MMStoneAxeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","MMStoneAxeHead",num)).setItemName("Stone Axe Head").setIconCoord(0, 5);num++;
+        
+        IgInStoneHoeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgInStoneHoeHead",num)).setItemName("Stone Hoe Head").setIconCoord(0, 6);num++;
+        SedStoneHoeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","SedStoneHoeHead",num)).setItemName("Stone Hoe Head").setIconCoord(0, 6);num++;
+        IgExStoneHoeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","IgExStoneHoeHead",num)).setItemName("Stone Hoe Head").setIconCoord(0, 6);num++;
+        MMStoneHoeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","MMStoneHoeHead",num)).setItemName("Stone Hoe Head").setIconCoord(0, 6);num++;
+        
+        StoneKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneKnifeHead",num)).setItemName("Stone Knife Blade").setIconCoord(0, 10);num++;
+        StoneHammerHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneHammerHead",num)).setItemName("Stone Hammer Head").setIconCoord(0, 11);num++;
+        StoneProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneProPickHead",num)).setItemName("Stone ProPick Head").setIconCoord(0, 10);num++;
+        
+        StoneKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","StoneKnife",num),IgExToolMaterial).setItemName("Stone Knife").setMaxDamage(IgExStoneUses).setIconCoord(0, 10);num++;
         
         Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
         /**Food Items*/

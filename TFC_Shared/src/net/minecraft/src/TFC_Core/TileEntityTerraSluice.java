@@ -215,10 +215,18 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
 
                 //items.add(mod_TFCraft.terraSmallOre);
                 //items.add(mod_TFCraft.terraTinyOre);
-
+                
+                BiomeGenBase biome1 = worldObj.getBiomeGenForCoords(xCoord+100, zCoord);
+                BiomeGenBase biome2 = worldObj.getBiomeGenForCoords(xCoord-100, zCoord);
+                BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord+100);
+                BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord-100);
+                
+                
+                
+                ArrayList items = new ArrayList<ItemStack>();
                 if(random.nextInt(200) == 0)
                 {
-                    ArrayList items = new ArrayList<ItemStack>();
+                    
                     items.add(new ItemStack(TFCItems.terraGemAgate,1,0));
                     items.add(new ItemStack(TFCItems.terraGemAmethyst,1,0));
                     items.add(new ItemStack(TFCItems.terraGemBeryl,1,0));
@@ -238,7 +246,6 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                 }
                 else if(random.nextInt(500) == 0)
                 {
-                    ArrayList items = new ArrayList<ItemStack>();
                     items.add(new ItemStack(TFCItems.terraGemAgate,1,1));
                     items.add(new ItemStack(TFCItems.terraGemAmethyst,1,1));
                     items.add(new ItemStack(TFCItems.terraGemBeryl,1,1));
@@ -257,7 +264,6 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                 }
                 else if(random.nextInt(1000) == 0)
                 {
-                    ArrayList items = new ArrayList<ItemStack>();
                     items.add(new ItemStack(TFCItems.terraGemAgate,1,2));
                     items.add(new ItemStack(TFCItems.terraGemAmethyst,1,2));
                     items.add(new ItemStack(TFCItems.terraGemBeryl,1,2));
@@ -275,7 +281,6 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                 }
                 else if(random.nextInt(1500) == 0)
                 {
-                    ArrayList items = new ArrayList<ItemStack>();
                     items.add(new ItemStack(TFCItems.terraGemAgate,1,3));
                     items.add(new ItemStack(TFCItems.terraGemAmethyst,1,3));
                     items.add(new ItemStack(TFCItems.terraGemBeryl,1,3));
@@ -293,7 +298,6 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                 }
                 else if(random.nextInt(2000) == 0)
                 {
-                    ArrayList items = new ArrayList<ItemStack>();
                     items.add(new ItemStack(TFCItems.terraGemAgate,1,4));
                     items.add(new ItemStack(TFCItems.terraGemAmethyst,1,4));
                     items.add(new ItemStack(TFCItems.terraGemBeryl,1,4));

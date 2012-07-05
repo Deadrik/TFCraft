@@ -7,12 +7,16 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.TFC_Core.EntityFallingStone;
 import net.minecraft.src.TFC_Core.EntityFallingStone2;
+import net.minecraft.src.TFC_Core.TileEntityPartial;
+import net.minecraft.src.TFC_Core.General.Helper;
 import net.minecraft.src.TFC_Core.General.TFCSettings;
+import net.minecraft.src.TFC_Core.Items.ItemChisel;
 
 public class BlockCollapsable extends BlockTerra
 {
@@ -200,11 +204,35 @@ public class BlockCollapsable extends BlockTerra
         {
             if (!world.isRemote && fallingBlockID != -1)
             {
-                Random R = new Random();
-
-                world.spawnEntityInWorld(new EntityFallingStone2(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5));
+                EntityFallingStone2 ent = new EntityFallingStone2(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5);
+                world.spawnEntityInWorld(ent);
+                Random R = new Random(i*j+k);
+                if(R.nextInt(100) > 90)
+                    world.playSoundAtEntity(ent, "fallingrocklong", 1.0F, 0.8F + (R.nextFloat()/2));
+                
                 world.setBlock(i, j, k, 0);
                 world.markBlockNeedsUpdate(i, j, k);
+                
+                if(world.getBlockId(i, j-1, k) == mod_TFC_Core.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
+                        ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
+                {
+                    world.setBlock(i, j-1, k, 0);
+                    world.markBlockNeedsUpdate(i, j-1, k);
+                    
+                    if(world.getBlockId(i, j-2, k) == mod_TFC_Core.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
+                            ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
+                    {
+                        world.setBlock(i, j-2, k, 0);
+                        world.markBlockNeedsUpdate(i, j-2, k);
+                        
+                        if(world.getBlockId(i, j-3, k) == mod_TFC_Core.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
+                                ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
+                        {
+                            world.setBlock(i, j-3, k, 0);
+                            world.markBlockNeedsUpdate(i, j-3, k);
+                        }
+                    }
+                }
 
                 return true;
             }
@@ -263,6 +291,51 @@ public class BlockCollapsable extends BlockTerra
             }
         }
     }
+    
+//    public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) 
+//    {
+//        if(player != null)
+//        {
+//            player.addStat(StatList.mineBlockStatArray[blockID], 1);
+//            player.addExhaustion(0.075F);
+//        }
+//
+//        MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, world);
+//        if(objectMouseOver == null) {
+//            return false;
+//        }       
+//        int side = objectMouseOver.sideHit;
+//        int sub = objectMouseOver.subHit;
+//
+//
+//        if(true)
+//        {
+//            
+//            ItemChisel.CreateSlab(world, i, j, k, this.blockID, (byte) world.getBlockMetadata(i, j, k), side, mod_TFC_Core.stoneMinedSlabs.blockID);
+//            TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(i,j,k);
+//            int id = te.TypeID;
+//            int meta = te.MetaID;
+//            ItemChisel.CreateSlab(world, i, j, k, te.TypeID, te.MetaID, side, mod_TFC_Core.stoneMinedSlabs.blockID);
+//            te = (TileEntityPartial) world.getBlockTileEntity(i, j, k);
+//            Block.blocksList[id].harvestBlock(world, player, i, j, k, meta);
+//            if(te != null)
+//            {
+//                long extraX = (te.extraData) & 0xf;
+//                long extraY = (te.extraData >> 4) & 0xf;
+//                long extraZ = (te.extraData >> 8) & 0xf;
+//                long extraX2 = (te.extraData >> 12) & 0xf;
+//                long extraY2 = (te.extraData >> 16) & 0xf;
+//                long extraZ2 = (te.extraData >> 20) & 0xf;
+//
+//                if(extraX+extraY+extraZ+extraX2+extraY2+extraZ2 > 8)
+//                    return world.setBlockWithNotify(i, j, k, 0);
+//            }
+//            else
+//                return world.setBlockWithNotify(i, j, k, 0);
+//        }
+//
+//        return false;
+//    }
     
     public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) 
     {

@@ -153,9 +153,9 @@ public class ItemDyeCustom extends Item
      */
     public void useItemOnEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
     {
-        if (par2EntityLiving instanceof EntitySheep)
+        if (par2EntityLiving instanceof EntitySheepTFC)
         {
-            EntitySheep var3 = (EntitySheep)par2EntityLiving;
+            EntitySheepTFC var3 = (EntitySheepTFC)par2EntityLiving;
             int var4 = BlockCloth.getBlockFromDye(par1ItemStack.getItemDamage());
 
             if (!var3.getSheared() && var3.getFleeceColor() != var4)

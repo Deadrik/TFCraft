@@ -108,7 +108,7 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
 	{
 		return "/bioxx/terrasprites2.png";
 	}
-	
+	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
     {
 	    MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
@@ -161,12 +161,5 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
         }
         return false;
     }
-
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
-	{
-		
-
-		return itemstack;
-	}
 
 }

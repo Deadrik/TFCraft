@@ -166,7 +166,11 @@ public class MapGenRavineUpperTFC extends MapGenBase
 											}
 
 											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
-													var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID)
+													var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID ||
+													var52 == mod_TFC_Core.terraGrass.blockID || var52 == mod_TFC_Core.terraGrass2.blockID ||
+													var52 == mod_TFC_Core.terraDirt.blockID || var52 == mod_TFC_Core.terraDirt2.blockID ||
+                                                    var52 == mod_TFC_Core.terraClay.blockID || var52 == mod_TFC_Core.terraClay2.blockID ||
+                                                    var52 == mod_TFC_Core.terraClayGrass.blockID || var52 == mod_TFC_Core.terraClayGrass2.blockID || var52 == mod_TFC_Core.terraPeat.blockID)
 											{
 												if (var49 < 10)
 												{

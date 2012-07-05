@@ -7,7 +7,7 @@ public class MapGenCavesTFC extends MapGenBase
 	/**
 	 * Generates a node in the current cave system recursion tree.
 	 */
-	protected void generateCaveNode(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17)
+	protected void generateCaveNode(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
 	{
 		double var19 = (double)(par3 * 16 + 8);
 		double var21 = (double)(par4 * 16 + 8);
@@ -33,7 +33,7 @@ public class MapGenCavesTFC extends MapGenBase
 
 		for (boolean var28 = var25.nextInt(6) == 0; par15 < par16; ++par15)
 		{
-			double var29 = 1.5D + (double)(MathHelper.sin((float)par15 * (float)Math.PI / (float)par16) * par12 * 1.0F);
+			double var29 = width + (double)(MathHelper.sin((float)par15 * (float)Math.PI / (float)par16) * par12 * 1.0F);
 			double var31 = var29 * par17;
 			float var33 = MathHelper.cos(par14);
 			float var34 = MathHelper.sin(par14);
@@ -59,8 +59,8 @@ public class MapGenCavesTFC extends MapGenBase
 
 			if (!var54 && par15 == var27 && par12 > 1.0F && par16 > 0)
 			{
-				this.generateCaveNode(var25.nextLong(), par3, par4, par5ArrayOfByte, par6, par8, par10, var25.nextFloat() * 0.5F + 0.5F, par13 - (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D);
-				this.generateCaveNode(var25.nextLong(), par3, par4, par5ArrayOfByte, par6, par8, par10, var25.nextFloat() * 0.5F + 0.5F, par13 + (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D);
+				this.generateCaveNode(var25.nextLong(), par3, par4, par5ArrayOfByte, par6, par8, par10, var25.nextFloat() * 0.5F + 0.5F, par13 - (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D, width);
+				this.generateCaveNode(var25.nextLong(), par3, par4, par5ArrayOfByte, par6, par8, par10, var25.nextFloat() * 0.5F + 0.5F, par13 + (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D, width);
 				return;
 			}
 
@@ -81,7 +81,7 @@ public class MapGenCavesTFC extends MapGenBase
 					int var55 = MathHelper.floor_double(par6 - var29) - par3 * 16 - 1;
 					int var36 = MathHelper.floor_double(par6 + var29) - par3 * 16 + 1;
 					int var57 = MathHelper.floor_double(par8 - var31) - 1;
-					int var38 = MathHelper.floor_double(par8 + var31) + 1;
+					int yCoord = MathHelper.floor_double(par8 + var31) + 1;
 					int var56 = MathHelper.floor_double(par10 - var29) - par4 * 16 - 1;
 					int var40 = MathHelper.floor_double(par10 + var29) - par4 * 16 + 1;
 
@@ -100,9 +100,9 @@ public class MapGenCavesTFC extends MapGenBase
 						var57 = 1;
 					}
 
-					if (var38 > 120)
+					if (yCoord > 127)
 					{
-						var38 = 120;
+						yCoord = 127;
 					}
 
 					if (var56 < 0)
@@ -123,7 +123,7 @@ public class MapGenCavesTFC extends MapGenBase
 					{
 						for (int var43 = var56; !var58 && var43 < var40; ++var43)
 						{
-							for (int var44 = var38 + 1; !var58 && var44 >= var57 - 1; --var44)
+							for (int var44 = yCoord + 1; !var58 && var44 >= var57 - 1; --var44)
 							{
 								var45 = (var42 * 16 + var43) * 128 + var44;
 
@@ -152,12 +152,12 @@ public class MapGenCavesTFC extends MapGenBase
 							for (var45 = var56; var45 < var40; ++var45)
 							{
 								double var46 = ((double)(var45 + par4 * 16) + 0.5D - par10) / var29;
-								int var48 = (var42 * 16 + var45) * 128 + var38;
+								int var48 = (var42 * 16 + var45) * 128 + yCoord;
 								boolean var49 = false;
 
 								if (var59 * var59 + var46 * var46 < 1.0D)
 								{
-									for (int var50 = var38 - 1; var50 >= var57; --var50)
+									for (int var50 = yCoord - 1; var50 >= var57; --var50)
 									{
 										double var51 = ((double)var50 + 0.5D - par8) / var31;
 
@@ -175,7 +175,7 @@ public class MapGenCavesTFC extends MapGenBase
 											{
 												if (var50 < 10)
 												{
-													par5ArrayOfByte[var48] = (byte)Block.lavaMoving.blockID;
+													par5ArrayOfByte[var48] = (byte)Block.lavaStill.blockID;
 												}
 												else
 												{
@@ -214,17 +214,19 @@ public class MapGenCavesTFC extends MapGenBase
 	 */
 	protected void generateLargeCaveNode(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10)
 	{
-		this.generateCaveNode(par1, par3, par4, par5ArrayOfByte, par6, par8, par10, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
+		this.generateCaveNode(par1, par3, par4, par5ArrayOfByte, par6, par8, par10, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D, 2.5D);
 	}
 
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
+	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
+		BiomeGenBase biome = world.getBiomeGenForCoords(par2, par4);
+		
 
-		if (this.rand.nextInt(15) != 0)
+		if (this.rand.nextInt(25) != 0)
 		{
 			var7 = 0;
 		}
@@ -235,6 +237,27 @@ public class MapGenCavesTFC extends MapGenBase
 			double var11 = (double)this.rand.nextInt(this.rand.nextInt(120) + 8);
 			double var13 = (double)(par3 * 16 + this.rand.nextInt(16));
 			int var15 = 1;
+			
+			double width = 1.5;
+			if(var11 < 32)
+			    width = 4.5;
+			else if (var11 < 64)
+			    width = 3.5;
+			else if (var11 < 96)
+                width = 2.5;
+			
+			int layerID = biome.getRockLayer(par3);
+			if(layerID == mod_TFC_Core.terraStoneIgEx.blockID)
+			    width -= 0.75;
+			else if(layerID == mod_TFC_Core.terraStoneIgIn.blockID)
+                width -= 0.75;
+			else if(layerID == mod_TFC_Core.terraStoneSed.blockID)
+                width -= 0.3;
+			else if(layerID == mod_TFC_Core.terraStoneMM.blockID)
+                width -= 0.2;
+			
+			if(this.rand.nextInt(8) == 0)
+			    width += 1 ;
 
 			if (this.rand.nextInt(4) == 0)
 			{
@@ -253,7 +276,7 @@ public class MapGenCavesTFC extends MapGenBase
 					var19 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.generateCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var9, var11, var13, var19, var17, var18, 0, 0, 1.0D);
+				this.generateCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var9, var11, var13, var19, var17, var18, 0, 0, 1.0D, width);
 			}
 		}
 	}

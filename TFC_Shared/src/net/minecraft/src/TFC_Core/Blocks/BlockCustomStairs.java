@@ -131,7 +131,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public int getRenderType()
 	{
-		return 10;
+	    return 10;
 	}
 
 	/**
@@ -298,4 +298,9 @@ public class BlockCustomStairs extends Block
 	{
 		this.modelBlock.velocityToAddToEntity(par1World, par2, par3, par4, par5Entity, par6Vec3D);
 	}
+	
+	public void addCreativeItems(java.util.ArrayList list)
+    {
+        list.add(new ItemStack(this,1));
+    }
 }

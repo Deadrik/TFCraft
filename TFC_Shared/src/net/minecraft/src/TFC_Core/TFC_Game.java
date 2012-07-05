@@ -633,10 +633,10 @@ public class TFC_Game
 
         for(int j = 0; j < TFCItems.Hammers.length; j++)
         {
-            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(mod_TFC_Core.terraStoneSedCobble, 1, 5), new ItemStack(TFCItems.Hammers[j], 1, -1)});
-            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(mod_TFC_Core.terraStoneSedCobble, 1, 9), new ItemStack(TFCItems.Hammers[j], 1, -1)});
-            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(mod_TFC_Core.terraStoneMMCobble, 1, 5), new ItemStack(TFCItems.Hammers[j], 1, -1)});
-            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(mod_TFC_Core.terraStoneSedCobble, 1, 7), new ItemStack(TFCItems.Hammers[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 8), new ItemStack(TFCItems.Hammers[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 12), new ItemStack(TFCItems.Hammers[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 22), new ItemStack(TFCItems.Hammers[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 10), new ItemStack(TFCItems.Hammers[j], 1, -1)});
             ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 6), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.Hammers[j], 1, -1)});
         }
         
@@ -677,20 +677,8 @@ public class TFC_Game
         ModLoader.addRecipe(new ItemStack(Block.railPowered, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,-1), Character.valueOf('r'), Item.redstone});
         ModLoader.addRecipe(new ItemStack(Item.minecartEmpty, 1), new Object[] { "P P","PPP", Character.valueOf('P'), TFCItems.WroughtIronSheet});
         ModLoader.addRecipe(new ItemStack(Item.shears, 1), new Object[] { "P "," P", Character.valueOf('P'), TFCItems.WroughtIronIngot});
-        ModLoader.addRecipe(new ItemStack(Block.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(Item.stick,1,-1), Character.valueOf('H'), new ItemStack(mod_TFC_Core.terraStoneIgExCobble,1,-1)});
-        ModLoader.addRecipe(new ItemStack(Block.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(Item.stick,1,-1), Character.valueOf('H'), new ItemStack(mod_TFC_Core.terraStoneIgInCobble,1,-1)});
-        ModLoader.addRecipe(new ItemStack(Block.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(Item.stick,1,-1), Character.valueOf('H'), new ItemStack(mod_TFC_Core.terraStoneSedCobble,1,-1)});
-        ModLoader.addRecipe(new ItemStack(Block.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(Item.stick,1,-1), Character.valueOf('H'), new ItemStack(mod_TFC_Core.terraStoneMMCobble,1,-1)});
+        ModLoader.addRecipe(new ItemStack(Block.lever, 1), new Object[] { "P","H", Character.valueOf('P'), new ItemStack(Item.stick,1,-1), Character.valueOf('H'), new ItemStack(TFCItems.LooseRock,1,-1)});
         
-        //stone hammers
-        ModLoader.addRecipe(new ItemStack(TFCItems.StoneHammer, 1), new Object[] { 
-            "111","121"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-        ModLoader.addRecipe(new ItemStack(TFCItems.StoneHammer, 1), new Object[] { 
-            "111","121"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-        ModLoader.addRecipe(new ItemStack(TFCItems.StoneHammer, 1), new Object[] { 
-            "111","121"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-        ModLoader.addRecipe(new ItemStack(TFCItems.StoneHammer, 1), new Object[] { 
-            "111","121"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
 
         for(int i = 0; i <= 25; i+=5)
         {
@@ -1001,17 +989,44 @@ public class TFC_Game
                 new ItemStack(TFCItems.TinScytheHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});                
             ModLoader.addRecipe(new ItemStack(TFCItems.ZincScythe, 1,(int)(TFCItems.ZincUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
                 new ItemStack(TFCItems.ZincScytheHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+          //Knifes
+            ModLoader.addRecipe(new ItemStack(TFCItems.BismuthKnife, 1,(int)(TFCItems.BismuthUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BismuthKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.BismuthBronzeKnife, 1,(int)(TFCItems.BismuthBronzeUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BismuthBronzeKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.BlackBronzeKnife, 1,(int)(TFCItems.BlackBronzeUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BlackBronzeKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.BlackSteelKnife, 1,(int)(TFCItems.BlackSteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BlackSteelKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.BlueSteelKnife, 1,(int)(TFCItems.BlueSteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BlueSteelKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.BronzeKnife, 1,(int)(TFCItems.BronzeUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BronzeKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.CopperKnife, 1,(int)(TFCItems.CopperUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.CopperKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.WroughtIronKnife, 1,(int)(TFCItems.WroughtIronUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.WroughtIronKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.RedSteelKnife, 1,(int)(TFCItems.RedSteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.RedSteelKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.RoseGoldKnife, 1,(int)(TFCItems.RoseGoldUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.RoseGoldKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.SteelKnife, 1,(int)(TFCItems.SteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.SteelKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
+            ModLoader.addRecipe(new ItemStack(TFCItems.TinKnife, 1,(int)(TFCItems.TinUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.TinKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});                
+            ModLoader.addRecipe(new ItemStack(TFCItems.ZincKnife, 1,(int)(TFCItems.ZincUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.ZincKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});
         }
 
         //stone prospecting pick
-        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
-            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
-            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
-            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
-            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
+//        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
+//            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgInCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
+//        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
+//            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneIgExCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
+//        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
+//            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneSedCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
+//        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
+//            "111"," 21"," 2 ", Character.valueOf('1'), mod_TFC_Core.terraStoneMMCobble,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
         //scribing table
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PickaxeHeadPlan, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), TFCItems.terraInk});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ShovelHeadPlan, 1), new Object[] { " ### "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), TFCItems.terraInk});
@@ -1069,6 +1084,47 @@ public class TFC_Game
         CraftingManagerTFC.getInstance().addShapelessRecipe(new ItemStack(TFCItems.SterlingSilverUnshaped, 4), 
                 new Object[] {  new ItemStack(TFCItems.CopperUnshaped),new ItemStack(TFCItems.SilverUnshaped),
             new ItemStack(TFCItems.SilverUnshaped), new ItemStack(TFCItems.SilverUnshaped)});
+        
+        //Knapping
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneKnifeHead, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, -1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneHammerHead, 1), new Object[] { "#####","#####","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, -1)});
+        for(int i = 0; i < 3; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStonePickaxeHead, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 3; i < 13; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStonePickaxeHead, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 13; i < 17; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStonePickaxeHead, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 17; i < 23; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStonePickaxeHead, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        
+        for(int i = 0; i < 3; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneShovelHead, 1), new Object[] { " ### "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 3; i < 13; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneShovelHead, 1), new Object[] { " ### "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 13; i < 17; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneShovelHead, 1), new Object[] { " ### "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 17; i < 23; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneShovelHead, 1), new Object[] { " ### "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        
+        for(int i = 0; i < 3; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 3; i < 13; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 13; i < 17; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 17; i < 23; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        
+        for(int i = 0; i < 3; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 3; i < 13; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 13; i < 17; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        for(int i = 17; i < 23; i++)
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneProPickHead, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, -1)});
 
         //Gold Pan
 //        ModLoader.addRecipe(new ItemStack(TFCItems.terraGoldPan, 1, 0), new Object[] { 

@@ -163,6 +163,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 		{
 			((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlock(i, j, k, 0);
+			return;
 		}
 		int numAirBlocks = 0;
 		for (int x = -1; x < 2; x++)

@@ -49,6 +49,8 @@ public interface IProxy extends IGuiHandler {
 	
 	public abstract EntityPlayer getPlayer(NetworkManager network);
 	
+	public abstract String getPlayerName();
+	
 	public abstract int getArmorRenderID(int i);
 	
 	public abstract boolean getGraphicsLevel();
@@ -60,4 +62,10 @@ public interface IProxy extends IGuiHandler {
 	public abstract float getLightBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4);
 
 	public abstract int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5);
+	
+	public abstract void sendCustomPacketToPlayer(String player, Packet packet);
+	
+	public abstract void handleHealthUpdate(Class c, byte par1);
+	
+	public abstract boolean aiTargetShouldExecute(EntityAITarget target, EntityLiving par1EntityLiving, boolean par2);
 }

@@ -20,12 +20,21 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
-		super.harvestBlock(world, entityplayer, i, j, k, l);
+	    BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
+	    int off = 0;
+	    
+	    if(biome.SurfaceType == mod_TFC_Core.terraStoneSed.blockID) off = 3;
+	    else if(biome.SurfaceType == mod_TFC_Core.terraStoneIgEx.blockID) off = 13;
+	    else if(biome.SurfaceType == mod_TFC_Core.terraStoneMM.blockID) off = 17;
+	    
+	    dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1, biome.SurfaceMeta+off));
+	    
+		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 
 	public int idDropped(int i, Random random, int j)
 	{
-		return Item.flint.shiftedIndex;
+		return TFCItems.LooseRock.shiftedIndex;
 	}
 
 	public boolean isOpaqueCube()

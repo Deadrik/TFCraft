@@ -8,7 +8,7 @@ import net.minecraft.src.*;
 //Keep in mind that you still need to fill in some blanks
 //- ZeuX
 
-public class ModelScribeTable extends ModelBase
+public class ModelScribeTable extends ModelBaseTFC
 {
 //fields
  ModelRenderer Shape1;

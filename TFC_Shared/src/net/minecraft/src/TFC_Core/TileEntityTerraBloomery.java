@@ -76,7 +76,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         fireItemStacks = new ItemStack[20];
         outputItemStacks = new ItemStack[20];
         input = new ItemStack[1];
-        inputItemTemps = new float[40];
+        inputItemTemps = new float[80];
         ambientTemp = -1000;
         numAirBlocks = 0;
         airFromBellows = 0F;
@@ -325,21 +325,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 fuelTimeLeft--;
             }
-//            if(numAirBlocks == 0)
-//            {
-//                for (int x = -1; x < 2; x++)
-//                {
-//                    for (int y = 0; y < 3; y++)
-//                    {
-//                        for (int z = -1; z < 2; z++)
-//                        {
-//                            if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-//                                numAirBlocks++;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            
             if(yCoord < 128)
             {
                 numAirBlocks = -1 * (256-(yCoord*2));
@@ -424,23 +410,23 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public boolean isStackValid(int i, int j, int k)
     {
-        if(worldObj.getBlockId(i, j-1, k) != mod_TFC_Core.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock)
+        if((worldObj.getBlockId(i, j-1, k) != mod_TFC_Core.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || !worldObj.isBlockNormalCube(i, j-1, k))
         {
             return false;
         }
-        if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock)
+        if(worldObj.getBlockMaterial(i+1, j, k) != Material.rock || !worldObj.isBlockNormalCube(i+1, j, k))
         {
             return false;
         }
-        if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock)
+        if(worldObj.getBlockMaterial(i-1, j, k) != Material.rock || !worldObj.isBlockNormalCube(i-1, j, k))
         {
             return false;
         }
-        if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock)
+        if(worldObj.getBlockMaterial(i, j, k+1) != Material.rock || !worldObj.isBlockNormalCube(i, j, k+1))
         {
             return false;
         }
-        if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock)
+        if(worldObj.getBlockMaterial(i, j, k-1) != Material.rock || !worldObj.isBlockNormalCube(i, j, k-1))
         {
             return false;
         }
@@ -650,12 +636,11 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             float count = charcoalCount+oreCount;
 
             int moltenCount = 0;
-            if(count > 0 && count < 1) {
-                moltenCount = 1;
-            } else
-            {
-                moltenCount = (int)Math.ceil(count / 8);
-            }
+            if(count > 0 && count <= 8) {moltenCount = 1;} 
+            else if(count > 8 && count <= 16) {moltenCount = 2;} 
+            else if(count > 16 && count <= 24) {moltenCount = 3;} 
+            else if(count > 24 && count <= 32) {moltenCount = 4;} 
+            else if(count > 32 && count <= 40) {moltenCount = 5;} 
 
             //get the direction that the bloomery is facing so that we know where the stack should be
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
@@ -683,10 +668,12 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             /*Create a list of all the items that are falling into the stack */
             List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
                     xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
-                    xCoord+direction[0]+1, yCoord+moltenCount+1, zCoord+direction[1]+1));
+                    xCoord+direction[0]+1, yCoord+moltenCount+0.1, zCoord+direction[1]+1));
 
+            if(moltenCount == 0)
+                moltenCount = 1;
             /*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
-            if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1]))
+            if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount-1, zCoord+direction[1]))
             {
                 /*Iterate through the list and check for charcoal, coke, and ore*/
                 for (Iterator iterator = list.iterator(); iterator.hasNext();)
@@ -711,8 +698,8 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                     else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraSmallOre && 
                             (entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
                     {
-                        int c = 0;
-                        for(; c < entity.item.stackSize; c++)
+                        int c = entity.item.stackSize;
+                        for(; c > 0; c--)
                         {
                             if(charcoalCount+oreCount < 40 && oreCount < 20)
                             {
@@ -723,9 +710,11 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                                 }
                             }
                         }
-                        if(entity.item.stackSize == c) {
+                        if(c == 0) {
                             entity.setDead();
                         }
+                        else
+                            entity.item.stackSize = c; 
                     }
                 }
             }

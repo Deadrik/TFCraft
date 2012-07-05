@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.EntityFallingDirt;
+import net.minecraft.src.TFC_Core.EntityFallingStone2;
 
 public class BlockTerraDirt extends BlockTerra2
 {
@@ -92,8 +93,10 @@ public class BlockTerraDirt extends BlockTerra2
                 }
                 else
                 {
-                    EntityFallingDirt entityfallingsand = new EntityFallingDirt(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta ,0);
-                    world.spawnEntityInWorld(entityfallingsand);
+                    EntityFallingDirt ent = new EntityFallingDirt(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
+                    world.spawnEntityInWorld(ent);
+                    Random R = new Random(i*j+k);
+                    world.playSoundAtEntity(ent, "fallingdirtshort", 1.0F, 0.8F + (R.nextFloat()/2));
                 }
             }
         }

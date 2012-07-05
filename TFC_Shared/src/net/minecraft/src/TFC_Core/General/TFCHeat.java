@@ -46,23 +46,23 @@ public class TFCHeat
 		HeatRaw TinRaw = new HeatRaw(0.69F, 232);
 		HeatRaw ZincRaw = new HeatRaw(0.66F, 420, 907);//sh = 0.66F; boil = 907; melt = 420;
 		
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(30, 60));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMinMax(30, 60));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,2), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(30, 60));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,3), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,4), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(30, 60));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,5), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,6), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)).setMinMax(15, 40).setMorph(new ItemStack(TFCItems.OreChunk,1,35)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,7), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,8), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,9), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(15, 40));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(15, 30));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMinMax(15, 30));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,2), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,3), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(5, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,4), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(15, 30));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,5), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,6), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)).setMinMax(10, 20).setMorph(new ItemStack(TFCItems.OreChunk,1,35)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,7), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,8), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,9), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(10, 20));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,10), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(25, 60).setMorph(new ItemStack(TFCItems.OreChunk,1,37)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,11), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,12), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,1)).setMinMax(15, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,13), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(5, 20).setMorph(new ItemStack(TFCItems.OreChunk,1,36)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,35), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(10, 25));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,36), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(10, 40));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,37), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(1, 5));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,11), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,12), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,13), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(5, 10).setMorph(new ItemStack(TFCItems.OreChunk,1,36)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,35), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(5, 15));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,36), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(10, 20));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,37), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(1, 3));
 		
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakSteelUnshaped,1), SteelRaw,new ItemStack(TFCItems.WeakSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakRedSteelUnshaped,1), RedSteelRaw,new ItemStack(TFCItems.WeakRedSteelUnshaped,1)));
@@ -587,7 +587,7 @@ public class TFCHeat
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
-		float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getFloatTemperature();
+		float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
 		ambient = ambient / 2.0F;//Normalize the value to between 0 and 1
 		ambient = 62 * ambient-20;
 
@@ -632,6 +632,56 @@ public class TFCHeat
 			}
 		}
 	}
+	
+	public static void HandleContainerHeatChest(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
+    {
+        float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
+        ambient = ambient / 2.0F;//Normalize the value to between 0 and 1
+        ambient = 62 * ambient-20;
+
+        for(int i = 0; i < inventory.length; i++)
+        {
+            if(inventory[i] != null && inventory[i].stackSize <= 0) 
+            {
+                inventory[i].stackSize = 1;
+            }
+            
+            if(inventory[i] != null && inventory[i].hasTagCompound())
+            {
+                NBTTagCompound comp = inventory[i].getTagCompound();
+                if(comp.hasKey("temperature"))
+                {
+                    float temp = comp.getFloat("temperature");
+                    if(temp > ambient)
+                    {
+                        temp -= TFCHeat.getTempDecrease(inventory[i]);
+                        temp -= TFCHeat.getTempDecrease(inventory[i]);
+                        temp -= TFCHeat.getTempDecrease(inventory[i]);
+                        comp.setFloat("temperature",temp);
+                    }
+                    inventory[i].setTagCompound(comp);
+                    if(temp <= ambient)
+                    {
+                        Collection C = comp.getTags();
+                        Iterator itr = C.iterator();
+                        while(itr.hasNext())
+                        {
+                            Object tag = itr.next();
+                            if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
+                            {
+                                itr.remove();
+                                break;
+                            }
+                        }
+                    }
+                    if(comp.getTags().size() == 0)
+                    {
+                        inventory[i].stackTagCompound = null;
+                    }
+                }
+            }
+        }
+    }
 
 	public static Boolean SetTemperature(ItemStack is, float Temp)
 	{

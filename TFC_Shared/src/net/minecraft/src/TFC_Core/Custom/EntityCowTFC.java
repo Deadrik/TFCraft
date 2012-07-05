@@ -2,7 +2,7 @@ package net.minecraft.src.TFC_Core.Custom;
 
 import net.minecraft.src.*;
 
-public class EntityCowTFC extends EntityCow
+public class EntityCowTFC extends EntityAnimalTFC
 {
     public EntityCowTFC(World par1World)
     {
@@ -12,7 +12,7 @@ public class EntityCowTFC extends EntityCow
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        this.tasks.addTask(2, new EntityAIMate(this, 0.2F));
+        this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.shiftedIndex, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
         this.tasks.addTask(5, new EntityAIWander(this, 0.2F));

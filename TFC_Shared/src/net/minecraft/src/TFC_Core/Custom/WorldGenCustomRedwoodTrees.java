@@ -186,32 +186,32 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 				}
 			}
 		}
-		//Create the branches
-		for (int j2 = 0 ; j2 < treeHeight ; j2+=2)
-		{
-			int i3 = world.getBlockId (xCoord, yCoord + j2, zCoord);
-			if (i3 == Block.wood.blockID)
-			{
-				for (int x = xCoord ; x <= xCoord; x++)
-				{
-					for (int z = zCoord ; z <= zCoord; z++)
-					{
-						if(random.nextInt(4) == 0) {
-							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.PosX, random);
-						}
-						if(random.nextInt(4) == 0) {
-							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.NegX, random);
-						}
-						if(random.nextInt(4) == 0) {
-							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.PosZ, random);
-						}
-						if(random.nextInt(4) == 0) {
-							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.NegZ, random);
-						}
-					}
-				}
-			}
-		}
+//		//Create the branches
+//		for (int j2 = 0 ; j2 < treeHeight ; j2+=2)
+//		{
+//			int i3 = world.getBlockId (xCoord, yCoord + j2, zCoord);
+//			if (i3 == Block.wood.blockID)
+//			{
+//				for (int x = xCoord ; x <= xCoord; x++)
+//				{
+//					for (int z = zCoord ; z <= zCoord; z++)
+//					{
+//						if(random.nextInt(4) == 0) {
+//							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.PosX, random);
+//						}
+//						if(random.nextInt(4) == 0) {
+//							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.NegX, random);
+//						}
+//						if(random.nextInt(4) == 0) {
+//							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.PosZ, random);
+//						}
+//						if(random.nextInt(4) == 0) {
+//							TFC_Core.CreateTreeLimb(world, x, yCoord + j2, z, treeId, TFC_Core.Direction.NegZ, random);
+//						}
+//					}
+//				}
+//			}
+//		}
 
 		return true;
 	}

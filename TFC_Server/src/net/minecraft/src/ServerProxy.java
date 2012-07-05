@@ -5,6 +5,13 @@ import java.util.Map;
 import net.minecraft.src.*;
 import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.TFC_Core.Containers.*;
+import net.minecraft.src.TFC_Core.Custom.EntityBear;
+import net.minecraft.src.TFC_Core.Custom.EntityChickenTFC;
+import net.minecraft.src.TFC_Core.Custom.EntityCowTFC;
+import net.minecraft.src.TFC_Core.Custom.EntityPigTFC;
+import net.minecraft.src.TFC_Core.Custom.EntitySheepTFC;
+import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
+import net.minecraft.src.TFC_Core.General.PlayerManagerTFC;
 import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy implements IProxy {
@@ -30,6 +37,14 @@ public class ServerProxy implements IProxy {
         ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
         
         ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
+        ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
+        
+        ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0);
+        ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1);
+        ModLoader.registerEntityID(EntityBear.class, "bear", 2,0xd1d003, 0x101010);
+        ModLoader.registerEntityID(EntityChickenTFC.class, "chicken", 3);
+        ModLoader.registerEntityID(EntityPigTFC.class, "pig", 4);
+        ModLoader.registerEntityID(EntitySquidTFC.class, "squid", 5);
 	}
 
 	@Override
@@ -53,12 +68,9 @@ public class ServerProxy implements IProxy {
 	}
 
 	@Override
-	public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	{
 		TileEntity te=world.getBlockTileEntity(x, y, z);
-		/*if (te!=null && te instanceof TileEntityIronChest) {
-      TileEntityIronChest icte=(TileEntityIronChest) te;
-      return new ContainerIronChestBase(player.inventory, icte, icte.getType(), 0, 0);
-    } else*/ 
 		switch(ID)
         {
             case 0:
@@ -96,6 +108,10 @@ public class ServerProxy implements IProxy {
             case 26:
             {
                 return new ContainerTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
+            }
+            case 28:
+            {
+                return new ContainerKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType, world);
             }
             default:
             {
@@ -182,8 +198,7 @@ public class ServerProxy implements IProxy {
     @Override
     public void sendCustomPacket(Packet packet)
     {
-        ModLoader.getMinecraftServerInstance().configManager.sendPacketToAllPlayers(packet);
-        
+        ModLoader.getMinecraftServerInstance().configManager.sendPacketToAllPlayers(packet);        
     }
     
     @Override
@@ -241,5 +256,30 @@ public class ServerProxy implements IProxy {
     {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public void sendCustomPacketToPlayer(String player, Packet packet)
+    {
+        ModLoader.getMinecraftServerInstance().configManager.sendPacketToPlayer(player, packet);     
+    }
+
+    @Override
+    public String getPlayerName()
+    {
+        return "";
+    }
+
+    @Override
+    public void handleHealthUpdate(Class c, byte par1)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @Override
+    public boolean aiTargetShouldExecute(EntityAITarget target, EntityLiving par1EntityLiving, boolean par2)
+    {
+        return target.func_48284_a(par1EntityLiving, par2);
     }
 }

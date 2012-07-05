@@ -1134,6 +1134,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             charcoalCounter = 0;
         }
         
+        Random R = new Random();
+        
+        if(R.nextInt(10) == 0 && fireTemperature > 210)
+            worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
+        
         if(!worldObj.isRemote)
         {
             

@@ -19,14 +19,14 @@ public class mod_Debug extends NetworkMod
 	public void keyboardEvent(KeyBinding var1) 
 	{
 		Minecraft minecraft = ModLoader.getMinecraftInstance();
-		if (var1 == this.Key_Rain)
+		if (var1 == this.Key_Rain && minecraft.inGameHasFocus)
 		{
 			if(!minecraft.theWorld.isRaining())
 				minecraft.theWorld.worldInfo.setRaining(true);   
 			else
 				minecraft.theWorld.worldInfo.setRaining(false);
 		}
-		else if (var1 == this.Key_Creative)
+		else if (var1 == this.Key_Creative && minecraft.inGameHasFocus)
 		{
 			if(minecraft.theWorld.worldInfo.getGameType() == 0)
 			{
@@ -48,7 +48,7 @@ public class mod_Debug extends NetworkMod
 				minecraft.thePlayer.capabilities.isFlying = false;
 			}
 		}
-		else if (var1 == this.Key_Time)
+		else if (var1 == this.Key_Time && minecraft.inGameHasFocus)
         {
 		    long t = minecraft.theWorld.worldInfo.getWorldTime();
 		    System.out.println(t);

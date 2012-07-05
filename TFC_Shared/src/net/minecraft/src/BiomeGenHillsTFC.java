@@ -6,6 +6,9 @@ package net.minecraft.src;
 
 import java.util.Random;
 
+import net.minecraft.src.TFC_Core.Custom.EntityBear;
+import net.minecraft.src.TFC_Core.Custom.EntityWolfTFC;
+
 // Referenced classes of package net.minecraft.src:
 //            BiomeGenBase, SpawnListEntry, EntityWolf, BiomeDecorator, 
 //            WorldGenerator
@@ -25,6 +28,9 @@ public class BiomeGenHillsTFC extends BiomeGenBase
     public BiomeGenHillsTFC(int i)
     {
         super(i);
+        spawnableCreatureList.clear();
+        spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 3, 1, 3));
+        spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 7, 2, 3));
         ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 6;
         ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
         ((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 11;

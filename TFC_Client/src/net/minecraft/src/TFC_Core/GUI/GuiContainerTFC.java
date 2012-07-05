@@ -163,7 +163,7 @@ public abstract class GuiContainerTFC extends GuiScreen
 
                     if (var18 == 0)
                     {
-                        var19 = "\u00a7" + Integer.toHexString(var22.getRarity().nameColor) + var19;
+                        var19 = "\u00a7" + Integer.toHexString(var22.getRarity().rarityColor) + var19;
                     }
                     else
                     {
