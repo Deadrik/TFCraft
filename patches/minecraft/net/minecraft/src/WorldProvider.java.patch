@@ -1,15 +1,16 @@
 --- ../src_base/minecraft/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
-@@ -1,5 +1,8 @@
+@@ -1,5 +1,9 @@
  package net.minecraft.src;
  
 +import java.util.Random;
 +
-+import net.minecraft.src.TFC_Core.TFC_Game;
++import TFC.Core.TFC_Game;
++
  import net.minecraft.src.forge.DimensionManager;
  
  public abstract class WorldProvider
-@@ -39,6 +42,31 @@
+@@ -39,6 +43,31 @@
          this.terrainType = par1World.getWorldInfo().getTerrainType();
          this.registerWorldChunkManager();
          this.generateLightBrightnessTable();
@@ -41,7 +42,7 @@
      }
  
      /**
-@@ -77,7 +105,8 @@
+@@ -77,7 +106,8 @@
      public boolean canCoordinateBeSpawn(int par1, int par2)
      {
          int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
@@ -51,7 +52,7 @@
      }
  
      /**
-@@ -184,7 +213,7 @@
+@@ -184,7 +214,7 @@
       */
      public float getCloudHeight()
      {
@@ -60,13 +61,3 @@
      }
  
      public boolean isSkyColored()
-@@ -202,7 +231,8 @@
- 
-     public int getAverageGroundLevel()
-     {
--        return this.terrainType.getSeaLevel(this.worldObj);
-+        return 145;
-+        //return this.terrainType.getSeaLevel(this.worldObj);
-     }
- 
-     /**

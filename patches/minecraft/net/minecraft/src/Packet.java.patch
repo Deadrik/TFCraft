@@ -1,15 +1,16 @@
 --- ../src_base/minecraft/net/minecraft/src/Packet.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/Packet.java	0000-00-00 00:00:00.000000000 -0000
-@@ -9,6 +9,8 @@
+@@ -9,6 +9,9 @@
  import java.util.Map;
  import java.util.Set;
  
-+import net.minecraft.src.TFC_Core.General.TFCSettings;
++import TFC.Core.TFCSettings;
++
 +
  public abstract class Packet
  {
      /** Maps packet id to packet class */
-@@ -227,7 +229,7 @@
+@@ -227,7 +230,7 @@
              short var5 = par1DataInputStream.readShort();
              var2 = new ItemStack(var3, var4, var5);
  
@@ -18,7 +19,7 @@
              {
                  var2.stackTagCompound = this.readNBTTagCompound(par1DataInputStream);
              }
-@@ -251,7 +253,7 @@
+@@ -251,7 +254,7 @@
              par2DataOutputStream.writeByte(par1ItemStack.stackSize);
              par2DataOutputStream.writeShort(par1ItemStack.getItemDamage());
  

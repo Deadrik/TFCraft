@@ -1,23 +1,27 @@
 --- ../src_base/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
-@@ -5,47 +5,201 @@
+@@ -5,47 +5,205 @@
  import java.util.List;
  import java.util.Random;
  
++import TFC.Core.ColorizerFoliageTFC;
++import TFC.Core.ColorizerGrassTFC;
++import TFC.Core.TFCSeasons;
++import TFC.Entities.EntityChickenTFC;
++import TFC.Entities.EntityCowTFC;
++import TFC.Entities.EntityPigTFC;
++import TFC.Entities.EntitySheepTFC;
++import TFC.Entities.EntitySquidTFC;
++import TFC.WorldGen.WorldGenCustomBigTree;
++import TFC.WorldGen.WorldGenCustomCedarTrees;
++import TFC.WorldGen.WorldGenCustomMapleShortTrees;
++import TFC.WorldGen.WorldGenCustomMapleTallTrees;
++import TFC.WorldGen.WorldGenCustomRedwoodTrees;
++import TFC.WorldGen.WorldGenCustomShortTrees;
++import TFC.WorldGen.WorldGenCustomTallTrees;
++import TFC.WorldGen.WorldGenCustomWillowTrees;
++
 +import net.minecraft.client.Minecraft;
-+import net.minecraft.src.TFC_Core.*;
-+import net.minecraft.src.TFC_Core.Custom.ColorizerFoliageTFC;
-+import net.minecraft.src.TFC_Core.Custom.ColorizerGrassTFC;
-+import net.minecraft.src.TFC_Core.Custom.EntityCowTFC;
-+import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomBigTree;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomCedarTrees;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomMapleShortTrees;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomMapleTallTrees;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomRedwoodTrees;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomShortTrees;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomTallTrees;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenCustomWillowTrees;
 +
  public abstract class BiomeGenBase
  {
@@ -111,15 +115,15 @@
 +    public static final BiomeGenBase desert8 = (new BiomeGenDesertTFC(64)).setColor(DesertColor).setBiomeName("Desert8").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
 +    public static final BiomeGenBase desert9 = (new BiomeGenDesertTFC(65)).setColor(DesertColor).setBiomeName("Desert9").SetWaterMult(DesertWater).setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setMinMaxHeight(0.1F, 0.2F);
 +
-+    public static final BiomeGenBase hills2 = (new BiomeGenHillsTFC(112)).setColor(HillsColor).setBiomeName("hills2").SetWaterMult(HillsWater).setMinMaxHeight(0.8F, 2.4F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase hills3 = (new BiomeGenHillsTFC(23)).setColor(HillsColor).setBiomeName("hills3").SetWaterMult(HillsWater).setMinMaxHeight(0.6F, 1.8F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase hills4 = (new BiomeGenHillsTFC(24)).setColor(HillsColor).setBiomeName("hills4").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.3F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills2 = (new BiomeGenHillsTFC(112)).setColor(HillsColor).setBiomeName("hills2").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.4F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills3 = (new BiomeGenHillsTFC(23)).setColor(HillsColor).setBiomeName("hills3").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.8F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills4 = (new BiomeGenHillsTFC(24)).setColor(HillsColor).setBiomeName("hills4").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.45F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase hills5 = (new BiomeGenHillsTFC(25)).setColor(HillsColor).setBiomeName("hills5").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.4F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase hills6 = (new BiomeGenHillsTFC(26)).setColor(HillsColor).setBiomeName("hills6").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.7F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase hills7 = (new BiomeGenHillsTFC(27)).setColor(HillsColor).setBiomeName("hills7").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.6F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills6 = (new BiomeGenHillsTFC(26)).setColor(HillsColor).setBiomeName("hills6").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.5F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills7 = (new BiomeGenHillsTFC(27)).setColor(HillsColor).setBiomeName("hills7").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.8F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase hills8 = (new BiomeGenHillsTFC(28)).setColor(HillsColor).setBiomeName("hills8").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.5F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase hills9 = (new BiomeGenHillsTFC(29)).setColor(HillsColor).setBiomeName("hills9").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.85F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase hills10 = (new BiomeGenHillsTFC(30)).setColor(HillsColor).setBiomeName("hills10").SetWaterMult(HillsWater).setMinMaxHeight(0.8F, 2.3F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills9 = (new BiomeGenHillsTFC(29)).setColor(HillsColor).setBiomeName("hills9").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.8F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase hills10 = (new BiomeGenHillsTFC(30)).setColor(HillsColor).setBiomeName("hills10").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 1.3F).setTemperatureRainfall(0.7F, 0.3F);
 +
 +    public static final BiomeGenBase forest2 = (new BiomeGenForestTFC(31)).setColor(ForestColor).setBiomeName("Forest2").SetWaterMult(ForestWater).setTemperatureRainfall(0.78F, 0.8F).setMinMaxHeight(0.3F, 0.6F);
 +    public static final BiomeGenBase forest3 = (new BiomeGenForestTFC(32)).setColor(ForestColor).setBiomeName("Forest3").SetWaterMult(ForestWater).setTemperatureRainfall(0.78F, 0.8F).setMinMaxHeight(0.2F, 0.4F);
@@ -162,15 +166,15 @@
 +    public static final BiomeGenBase swamp8 = (new BiomeGenSwampTFC(72)).setColor(SwampColor).setBiomeName("Swamp8").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.1F).setTemperatureRainfall(0.68F, 0.9F);
 +    public static final BiomeGenBase swamp9 = (new BiomeGenSwampTFC(73)).setColor(SwampColor).setBiomeName("Swamp9").SetWaterMult(SwampWater).setMinMaxHeight(-0.4F, 0.1F).setTemperatureRainfall(0.65F, 0.9F);
 +
-+    public static final BiomeGenBase HillsEdge2 = (new BiomeGenHillsEdgeTFC(74)).setColor(HillsColor).setBiomeName("Hills2 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 0.8F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase HillsEdge3 = (new BiomeGenHillsEdgeTFC(75)).setColor(HillsColor).setBiomeName("Hills3 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.6F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase HillsEdge2 = (new BiomeGenHillsEdgeTFC(74)).setColor(HillsColor).setBiomeName("Hills2 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase HillsEdge3 = (new BiomeGenHillsEdgeTFC(75)).setColor(HillsColor).setBiomeName("Hills3 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase HillsEdge4 = (new BiomeGenHillsEdgeTFC(76)).setColor(HillsColor).setBiomeName("Hills4 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase HillsEdge5 = (new BiomeGenHillsEdgeTFC(77)).setColor(HillsColor).setBiomeName("Hills5 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase HillsEdge6 = (new BiomeGenHillsEdgeTFC(78)).setColor(HillsColor).setBiomeName("Hills6 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase HillsEdge7 = (new BiomeGenHillsEdgeTFC(79)).setColor(HillsColor).setBiomeName("Hills7 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase HillsEdge8 = (new BiomeGenHillsEdgeTFC(80)).setColor(HillsColor).setBiomeName("Hills8 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +    public static final BiomeGenBase HillsEdge9 = (new BiomeGenHillsEdgeTFC(81)).setColor(HillsColor).setBiomeName("Hills9 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
-+    public static final BiomeGenBase HillsEdge10 = (new BiomeGenHillsEdgeTFC(82)).setColor(HillsColor).setBiomeName("Hills10 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.4F, 0.8F).setTemperatureRainfall(0.7F, 0.3F);
++    public static final BiomeGenBase HillsEdge10 = (new BiomeGenHillsEdgeTFC(82)).setColor(HillsColor).setBiomeName("Hills10 Edge").SetWaterMult(HillsWater).setMinMaxHeight(0.2F, 0.4F).setTemperatureRainfall(0.7F, 0.3F);
 +
 +    public static final BiomeGenBase river2 = (new BiomeGenRiverTFC(83)).setColor(SwampColor).setBiomeName("River Swamp1").SetWaterMult(SwampWater).setMinMaxHeight(riverDepthMin, riverDepthMax).setTemperatureRainfall(0.8F, 0.9F);
 +    public static final BiomeGenBase river3 = (new BiomeGenRiverTFC(84)).setColor(SwampColor).setBiomeName("River Swamp2").SetWaterMult(SwampWater).setMinMaxHeight(riverDepthMin, riverDepthMax).setTemperatureRainfall(0.8F, 0.9F);
@@ -239,7 +243,7 @@
      public String biomeName;
      public int color;
  
-@@ -102,8 +256,52 @@
+@@ -102,8 +260,52 @@
      protected WorldGenForest worldGenForest;
      protected WorldGenSwamp worldGenSwamp;
  
@@ -292,20 +296,31 @@
          this.topBlock = (byte)Block.grass.blockID;
          this.fillerBlock = (byte)Block.dirt.blockID;
          this.field_6502_q = 5169201;
-@@ -126,22 +324,64 @@
-         this.spawnableCreatureList.add(new SpawnListEntry(EntitySheep.class, 12, 4, 4));
-         this.spawnableCreatureList.add(new SpawnListEntry(EntityPig.class, 10, 4, 4));
-         this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 10, 4, 4));
+@@ -123,25 +325,67 @@
+         this.biomeID = par1;
+         biomeList[par1] = this;
+         this.biomeDecorator = this.createBiomeDecorator();
+-        this.spawnableCreatureList.add(new SpawnListEntry(EntitySheep.class, 12, 4, 4));
+-        this.spawnableCreatureList.add(new SpawnListEntry(EntityPig.class, 10, 4, 4));
+-        this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 10, 4, 4));
 -        this.spawnableCreatureList.add(new SpawnListEntry(EntityCow.class, 8, 4, 4));
-+        this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 4, 4));
-         this.spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10, 4, 4));
-         this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 10, 4, 4));
-         this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 10, 4, 4));
-         this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 4, 4));
+-        this.spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10, 4, 4));
+-        this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 10, 4, 4));
+-        this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 10, 4, 4));
+-        this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 4, 4));
++        this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 8, 1, 4));
++        this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 6, 1, 4));
++        this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 6, 1, 4));
++        this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 4, 1, 4));
++        this.spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10, 3, 3));
++        this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 10, 4, 7));
++        this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 10, 3, 3));
++        this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 1, 4));
          this.spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
-         this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
+-        this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
 -        this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquid.class, 10, 4, 4));
-+        this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
++        this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 1));
++        this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 1, 4));
 +
 +        SurfaceType = mod_TFC_Core.terraStoneIgIn.blockID;
 +        SurfaceMeta = 0;
@@ -361,7 +376,7 @@
      }
  
      /**
-@@ -164,10 +404,10 @@
+@@ -164,10 +408,10 @@
      /**
       * Sets the minimum and maximum height of this biome. Seems to go from -2.0 to 2.0.
       */
@@ -375,7 +390,7 @@
          return this;
      }
  
-@@ -285,7 +525,10 @@
+@@ -288,7 +532,10 @@
       */
      public final int getIntRainfall()
      {
@@ -387,7 +402,7 @@
      }
  
      /**
-@@ -293,23 +536,74 @@
+@@ -296,23 +543,82 @@
       */
      public final int getIntTemperature()
      {
@@ -456,6 +471,14 @@
      }
 -
 +    
++    public final float getHeightAdjustedTemperature(int y)
++    {
++        float temp = getFloatTemperature();
++        if(y > 180)
++            temp -= temp * (y-180)/90;
++        return temp;
++    }
++    
      /**
 -     * Gets a floating point representation of this biome's temperature
 +     * Gets a floating point representation of this biome's rainfall
@@ -471,7 +494,7 @@
      }
  
      public void decorate(World par1World, Random par2Random, int par3, int par4)
-@@ -322,9 +616,14 @@
+@@ -325,9 +631,14 @@
       */
      public int getBiomeGrassColor()
      {
@@ -487,7 +510,7 @@
      }
  
      /**
-@@ -332,8 +631,378 @@
+@@ -335,8 +646,390 @@
       */
      public int getBiomeFoliageColor()
      {
@@ -865,5 +888,17 @@
 +    public void SetupTrees(World world, Random R)
 +    {
 +        
++    }
++    
++    public int getRockLayer(int y)
++    {
++        if(y < Layer3)
++            return Layer3Type;
++        else if(y < Layer2)
++            return Layer2Type;
++        else if(y < Layer1)
++            return Layer1Type;
++        else
++            return SurfaceType;
      }
  }

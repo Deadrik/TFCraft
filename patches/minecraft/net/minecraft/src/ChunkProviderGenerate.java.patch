@@ -1,23 +1,26 @@
 --- ../src_base/minecraft/net/minecraft/src/ChunkProviderGenerate.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/ChunkProviderGenerate.java	0000-00-00 00:00:00.000000000 -0000
-@@ -3,6 +3,10 @@
+@@ -3,6 +3,12 @@
  import java.util.List;
  import java.util.Random;
  
-+import net.minecraft.src.TFC_Core.TFC_Core;
-+import net.minecraft.src.TFC_Core.Custom.TFC_ChunkProviderGenerate;
-+import net.minecraft.src.TFC_Core.Custom.WorldGenLakesTFC;
++import TFC.Core.TFC_Core;
++import TFC.TileEntities.TileEntityPartial;
++import TFC.WorldGen.TFC_ChunkProviderGenerate;
++import TFC.WorldGen.WorldGenLakesTFC;
++
 +
  public class ChunkProviderGenerate implements IChunkProvider
  {
      /** RNG. */
-@@ -36,19 +40,21 @@
+@@ -36,19 +42,22 @@
      /** Holds the overall noise array used in chunk generation */
      private double[] noiseArray;
      private double[] stoneNoise = new double[256];
 -    private MapGenBase caveGenerator = new MapGenCaves();
 +    private MapGenBase caveGenerator = new MapGenCavesTFC();
 +    private MapGenBase caveGenerator2 = new MapGenCavesUpperTFC();
++    private MapGenBase caveGenerator3 = new MapGenRiverRavineTFC();
  
      /** Holds Stronghold Generator */
 -    private MapGenStronghold strongholdGenerator = new MapGenStronghold();
@@ -37,7 +40,7 @@
  
      /** The biomes that are used to generate the chunk */
      private BiomeGenBase[] biomesForGeneration;
-@@ -269,28 +275,30 @@
+@@ -269,28 +278,32 @@
      public Chunk provideChunk(int par1, int par2)
      {
          this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
@@ -53,39 +56,41 @@
 -        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
 -        this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
 -        this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
-+        
-+        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2, meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        //TFC_ChunkProviderGenerate.replaceBlocksForBiome(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        this.caveGenerator.generate(this, this.worldObj, par1, par2, ids);
-+        this.caveGenerator2.generate(this, this.worldObj, par1, par2, ids2);
-+        this.ravineGenerator.generate(this, this.worldObj, par1, par2, ids);
-+        this.ravineGenerator2.generate(this, this.worldObj, par1, par2, ids2);
  
-         if (this.mapFeaturesEnabled)
-         {
+-        if (this.mapFeaturesEnabled)
+-        {
 -            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
 -            this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
 -            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
+-        }
+-
+-        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+-        byte[] var5 = var4.getBiomeArray();
++        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2, meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
++        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
++        //TFC_ChunkProviderGenerate.replaceBlocksForBiome(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
++        this.caveGenerator3.generate(this, this.worldObj, par1, par2, ids);
++        this.caveGenerator.generate(this, this.worldObj, par1, par2, ids);
++        //this.caveGenerator2.generate(this, this.worldObj, par1, par2, ids2);
++        this.ravineGenerator.generate(this, this.worldObj, par1, par2, ids);
++        this.ravineGenerator2.generate(this, this.worldObj, par1, par2, ids2);
++        
+ 
+-        for (int var6 = 0; var6 < var5.length; ++var6)
++        if (this.mapFeaturesEnabled)
+         {
+-            var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
 +            //this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
 +            //this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
 +            //this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
          }
--
--        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
--        byte[] var5 = var4.getBiomeArray();
--
--        for (int var6 = 0; var6 < var5.length; ++var6)
--        {
--            var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
--        }
 -
 +        //Chunk var4 = new Chunk(this.worldObj, ids, meta, par1, par2);
 +        Chunk var4 = new ChunkTFC(this.worldObj, ids, meta, ids2, meta2, par1, par2);
          var4.generateSkylightMap();
          return var4;
      }
-@@ -471,9 +479,9 @@
+@@ -471,9 +484,9 @@
  
          if (this.mapFeaturesEnabled)
          {
@@ -98,7 +103,7 @@
          }
  
          int var12;
-@@ -483,20 +491,20 @@
+@@ -483,20 +496,20 @@
          if (!var11 && this.rand.nextInt(4) == 0)
          {
              var12 = var4 + this.rand.nextInt(16) + 8;
@@ -123,7 +128,7 @@
              }
          }
  
-@@ -506,10 +514,10 @@
+@@ -506,10 +519,10 @@
              var14 = this.rand.nextInt(128);
              int var15 = var5 + this.rand.nextInt(16) + 8;
  
@@ -138,7 +143,7 @@
          }
  
          var6.decorate(this.worldObj, this.rand, var4, var5);
-@@ -528,7 +536,7 @@
+@@ -528,7 +541,7 @@
                      this.worldObj.setBlockWithNotify(var12 + var4, var14 - 1, var13 + var5, Block.ice.blockID);
                  }
  
@@ -147,7 +152,7 @@
                  {
                      this.worldObj.setBlockWithNotify(var12 + var4, var14, var13 + var5, Block.snow.blockID);
                  }
-@@ -588,4 +596,261 @@
+@@ -588,4 +601,261 @@
      {
          return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
      }
@@ -156,9 +161,9 @@
 +    public boolean canSnowAt(World world, int par1, int par2, int par3)
 +    {
 +        BiomeGenBase var4 = world.getBiomeGenForCoords(par1, par3);
-+        float var5 = var4.getFloatTemperature();
++        float var5 = var4.getHeightAdjustedTemperature(par2);
 +
-+        if (var5 > 0.15F && par2 < 220)
++        if (var5 > 0.15F)
 +        {
 +            return false;
 +        }
