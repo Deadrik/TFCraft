@@ -112,7 +112,7 @@ public class EntityAIMateTFC extends EntityAIBase
         targetMate.setGrowingAge (6000);
         theAnimal.resetInLove ();
         targetMate.resetInLove ();
-        entityanimal.setGrowingAge (-24000);
+        entityanimal.setGrowingAge (-24000 * entityanimal.adultAge);
         entityanimal.setLocationAndAngles (theAnimal.posX, theAnimal.posY, theAnimal.posZ, 0.0F, 0.0F);
         theWorld.spawnEntityInWorld (entityanimal);
         Random random = theAnimal.getRNG ();
