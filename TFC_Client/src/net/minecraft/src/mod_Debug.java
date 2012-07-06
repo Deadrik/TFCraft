@@ -5,8 +5,9 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import TFC.Core.TFCSeasons;
+
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.TFC_Core.*;
 import net.minecraft.src.forge.*;
 
 public class mod_Debug extends NetworkMod

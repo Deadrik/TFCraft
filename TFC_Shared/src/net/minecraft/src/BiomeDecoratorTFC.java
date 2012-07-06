@@ -2,10 +2,11 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-import net.minecraft.src.TFC_Core.Custom.WorldGenCustomPumpkin;
-import net.minecraft.src.TFC_Core.Custom.WorldGenCustomReed;
-import net.minecraft.src.TFC_Core.Custom.WorldGenCustomSand;
-import net.minecraft.src.TFC_Core.Custom.WorldGenLiquidsTFC;
+import TFC.WorldGen.WorldGenCustomPumpkin;
+import TFC.WorldGen.WorldGenCustomReed;
+import TFC.WorldGen.WorldGenCustomSand;
+import TFC.WorldGen.WorldGenLiquidsTFC;
+
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {

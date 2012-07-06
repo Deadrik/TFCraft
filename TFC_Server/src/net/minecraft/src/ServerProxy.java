@@ -2,16 +2,12 @@ package net.minecraft.src;
 
 import java.io.File;
 import java.util.Map;
-import net.minecraft.src.*;
-import net.minecraft.src.TFC_Core.*;
-import net.minecraft.src.TFC_Core.Containers.*;
-import net.minecraft.src.TFC_Core.Custom.EntityBear;
-import net.minecraft.src.TFC_Core.Custom.EntityChickenTFC;
-import net.minecraft.src.TFC_Core.Custom.EntityCowTFC;
-import net.minecraft.src.TFC_Core.Custom.EntityPigTFC;
-import net.minecraft.src.TFC_Core.Custom.EntitySheepTFC;
-import net.minecraft.src.TFC_Core.Custom.EntitySquidTFC;
-import net.minecraft.src.TFC_Core.General.PlayerManagerTFC;
+
+import TFC.Containers.*;
+import TFC.Core.IProxy;
+import TFC.Core.*;
+import TFC.Entities.*;
+import TFC.TileEntities.*;
 import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy implements IProxy {
@@ -38,6 +34,7 @@ public class ServerProxy implements IProxy {
         
         ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
         ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
+        ModLoader.registerTileEntity(TileEntityChestTFC.class, "TileEntityChestTFC");
         
         ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0);
         ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1);

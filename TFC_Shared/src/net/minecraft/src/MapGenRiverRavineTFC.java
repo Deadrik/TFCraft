@@ -213,7 +213,7 @@ public class MapGenRiverRavineTFC extends MapGenBase
 	 */
 	 protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
 	{
-		if (this.rand.nextInt(100) == 0)
+		if (this.rand.nextInt(400) == 0)
 		{
 		    range = 32;
 			double var7 = (double)(par2 * 16 + this.rand.nextInt(16));

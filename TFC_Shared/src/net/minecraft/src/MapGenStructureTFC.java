@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.src.TFC_Core.Custom.StructureComponentTFC;
-import net.minecraft.src.TFC_Core.Custom.StructureStartTFC;
+import TFC.WorldGen.StructureComponentTFC;
+import TFC.WorldGen.StructureStartTFC;
+
 
 public abstract class MapGenStructureTFC extends MapGenBase
 {

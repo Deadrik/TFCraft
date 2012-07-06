@@ -3,7 +3,9 @@ package net.minecraft.src;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.src.TFC_Core.Custom.*;
+
+import TFC.WorldGen.StructureStartTFC;
+import TFC.WorldGen.StructureVillageStartTFC;
 
 public class MapGenVillageTFC extends MapGenStructureTFC
 {
