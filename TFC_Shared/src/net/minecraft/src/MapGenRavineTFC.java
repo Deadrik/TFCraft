@@ -124,7 +124,7 @@ public class MapGenRavineTFC extends MapGenBase
 
 								if (var43 >= 0 && var43 < 128)
 								{
-									if (par5ArrayOfByte[var44] == Block.waterMoving.blockID || par5ArrayOfByte[var44] == Block.waterStill.blockID)
+									if (par5ArrayOfByte[var44] == Block.waterMoving.blockID || par5ArrayOfByte[var44] == Block.waterStill.blockID || par5ArrayOfByte[var44] == mod_TFC_Core.finiteWater.blockID)
 									{
 										var58 = true;
 									}
@@ -170,7 +170,7 @@ public class MapGenRavineTFC extends MapGenBase
 											{
 												if (var49 < 10)
 												{
-													par5ArrayOfByte[var47] = (byte)Block.lavaMoving.blockID;
+													par5ArrayOfByte[var47] = (byte)Block.lavaStill.blockID;
 												}
 												else
 												{

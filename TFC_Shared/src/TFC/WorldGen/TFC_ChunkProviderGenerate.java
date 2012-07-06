@@ -210,9 +210,12 @@ public class TFC_ChunkProviderGenerate
                     if (height >= 2 && height <= 6)
                     {
                         blockArray[var17] = (byte) Block.lavaStill.blockID;
+                        metaArray[var17] = 0; 
+                        
                         if(blockArray[var17+1] != (byte) Block.lavaStill.blockID && rand.nextBoolean())
                         {
                             blockArray[var17+1] = (byte) Block.lavaStill.blockID;
+                            metaArray[var17+1] = 0; 
                         }
                     }
                     else if (height <= 1)

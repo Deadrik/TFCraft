@@ -2,9 +2,19 @@ package net.minecraft.src;
 
 import java.util.Random;
 
+import TFC.Core.TFCSettings;
+
 public class MapGenRiverRavineTFC extends MapGenBase
 {
 	private float[] field_35627_a = new float[1024];
+	
+	private byte[] metaArray;
+	
+	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+    {
+	    metaArray = meta;
+	    super.generate(par1IChunkProvider, par2World, par3, par4, id);
+    }
 
 	protected void generateRavine(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
 	{
@@ -175,9 +185,15 @@ public class MapGenRiverRavineTFC extends MapGenBase
 												else
 												{
 												    if(var49 < waterHeight)
+												    {
 												        par5ArrayOfByte[var47] = (byte)Block.waterStill.blockID;
+												        metaArray[var47] = 0;
+												    }
                                                     else
+                                                    {
                                                         par5ArrayOfByte[var47] = 0;
+                                                        metaArray[var47] = 0;
+                                                    }
 
 													if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
 													{
@@ -211,7 +227,7 @@ public class MapGenRiverRavineTFC extends MapGenBase
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	 protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
+	 protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
 	{
 		if (this.rand.nextInt(400) == 0)
 		{

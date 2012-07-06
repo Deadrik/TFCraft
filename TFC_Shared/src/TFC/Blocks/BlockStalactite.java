@@ -36,7 +36,7 @@ public class BlockStalactite extends BlockSlab
 
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
     {
-        if (((((TileEntityPartial)world.getBlockTileEntity(i, j, k)).extraData >> 24) & 0x1) == 1 &&random.nextInt(500) == 0)
+        if (((((TileEntityPartial)world.getBlockTileEntity(i, j, k)).extraData >> 24) & 1) == 1 && random.nextInt(10) == 0)
         {
             float f = (float)i + 0.5F;
             float f1 = (float)j + 0.1F + random.nextFloat() * 6F / 16F;
@@ -46,7 +46,7 @@ public class BlockStalactite extends BlockSlab
             float f4 = random.nextFloat() * 0.6F;
             float f5 = random.nextFloat() * -0.6F;
             float f6 = random.nextFloat() * -0.6F;
-            world.spawnParticle("water", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, -0.005D, 0.0D);
+            world.spawnParticle("water", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, -0.5D, 0.0D);
         }
     }
 }

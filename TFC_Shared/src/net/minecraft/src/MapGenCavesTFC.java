@@ -129,7 +129,7 @@ public class MapGenCavesTFC extends MapGenBase
 
 								if (var44 >= 0 && var44 < 128)
 								{
-									if (par5ArrayOfByte[var45] == Block.waterMoving.blockID || par5ArrayOfByte[var45] == Block.waterStill.blockID)
+									if (par5ArrayOfByte[var45] == Block.waterMoving.blockID || par5ArrayOfByte[var45] == Block.waterStill.blockID  || par5ArrayOfByte[var45] == mod_TFC_Core.finiteWater.blockID)
 									{
 										var58 = true;
 									}
