@@ -34,6 +34,11 @@ public class EntityAIMateTFC extends EntityAIBase
         else
         {
             targetMate = func_48258_h ();
+            if (targetMate != null){
+            	if ((targetMate.sex + theAnimal.sex != 1)||(theAnimal.pregnant || targetMate.pregnant)){
+            		return false;
+            	}
+            }
             return targetMate != null;
         }
     }
@@ -101,28 +106,6 @@ public class EntityAIMateTFC extends EntityAIBase
 
     private void func_48257_i ()
     {
-        EntityAnimalTFC entityanimal = (EntityAnimalTFC) theAnimal.spawnBabyAnimal (targetMate);
-
-        if (entityanimal == null)
-        {
-            return;
-        }
-
-        theAnimal.setGrowingAge (6000);
-        targetMate.setGrowingAge (6000);
-        theAnimal.resetInLove ();
-        targetMate.resetInLove ();
-        entityanimal.setGrowingAge (-24000 * entityanimal.adultAge);
-        entityanimal.setLocationAndAngles (theAnimal.posX, theAnimal.posY, theAnimal.posZ, 0.0F, 0.0F);
-        theWorld.spawnEntityInWorld (entityanimal);
-        Random random = theAnimal.getRNG ();
-
-        for (int i = 0 ; i < 7 ; i++)
-        {
-            double d = random.nextGaussian () * 0.02D;
-            double d1 = random.nextGaussian () * 0.02D;
-            double d2 = random.nextGaussian () * 0.02D;
-            theWorld.spawnParticle ("heart", (theAnimal.posX + (double) (random.nextFloat () * theAnimal.width * 2.0F)) - (double) theAnimal.width, theAnimal.posY + 0.5D + (double) (random.nextFloat () * theAnimal.height), (theAnimal.posZ + (double) (random.nextFloat () * theAnimal.width * 2.0F)) - (double) theAnimal.width, d, d1, d2);
-        }
+       theAnimal.mate(targetMate);
     }
 }

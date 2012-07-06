@@ -2,6 +2,7 @@ package TFC.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import TFC.Core.TFCSeasons;
 
@@ -15,6 +16,10 @@ public class EntityAnimalTFC extends EntityAnimal
     public boolean mateForLife;
     public EntityAnimalTFC mate;
     public EntityAnimalTFC parent;
+    public int pregnancyTime;
+    protected long conception;
+    private float mateSizeMod;
+    public boolean pregnant;
     public float size_mod;
     private int pickUp;
     public int hunger;
@@ -34,11 +39,37 @@ public class EntityAnimalTFC extends EntityAnimal
         pickUp = 0;
         breeding = 0;
         mateForLife = false;
+        pregnant = false;
+        pregnancyTime = 120;
+        conception = 0;
+        mateSizeMod = 0;
         parent = null;
         mate = null;
         sex = rand.nextInt (2);
         tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
         size_mod = (float) (((rand.nextInt (5) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex);
+        birthTime = TFCSeasons.getTotalTicks();
+        adultTime = birthTime;
+        adultAge = 90;
+    }
+    
+    public EntityAnimalTFC(World par1World,EntityAnimalTFC mother, float F_size)
+    {
+        super(par1World);
+        animalID = TFCSeasons.getTotalTicks() + entityId;
+        hunger = 168000;
+        pickUp = 0;
+        breeding = 0;
+        mateForLife = false;
+        pregnant = false;
+        pregnancyTime = 120;
+        conception = 0;
+        mateSizeMod = 0;
+        parent = mother;
+        mate = null;
+        sex = rand.nextInt (2);
+        tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
+        size_mod = (float) (((rand.nextInt (5) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
         birthTime = TFCSeasons.getTotalTicks();
         adultTime = birthTime;
         adultAge = 90;
@@ -77,6 +108,13 @@ public class EntityAnimalTFC extends EntityAnimal
             setGrowingAge((int)i);
         }
         
+        if(pregnant){
+        	if(TFCSeasons.getTotalTicks() == conception + pregnancyTime*24000){
+        		EntityAnimalTFC baby = new EntityAnimalTFC(worldObj, this,mateSizeMod);
+        		giveBirth(baby);
+        		pregnant = false;
+        	}
+        }
 
         if (this.getGrowingAge() != 0)
         {
@@ -186,6 +224,9 @@ public class EntityAnimalTFC extends EntityAnimal
         par1NBTTagCompound.setInteger ("Sex", sex);
         par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
         par1NBTTagCompound.setInteger ("Hunger", hunger);
+        par1NBTTagCompound.setBoolean("Pregnant", pregnant);
+      	par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
+      	par1NBTTagCompound.setLong("ConceptionTime",conception);
         if (mate != null)
         {
             par1NBTTagCompound.setLong ("Mate number", mate.animalID);
@@ -218,6 +259,9 @@ public class EntityAnimalTFC extends EntityAnimal
         sex = par1NBTTagCompound.getInteger ("Sex");
         size_mod = par1NBTTagCompound.getFloat ("Size Modifier");
         hunger = par1NBTTagCompound.getInteger ("Hunger");
+        pregnant = par1NBTTagCompound.getBoolean("Pregnant");
+        mateSizeMod = par1NBTTagCompound.getFloat("MateSize");
+        conception = par1NBTTagCompound.getLong("ConceptionTime"); 
         long i = par1NBTTagCompound.getLong ("Mate number");
         if (i != -1)
         {
@@ -278,11 +322,35 @@ public class EntityAnimalTFC extends EntityAnimal
         }
         else
         {
-            return isInLove () && par1EntityAnimal.isInLove ();
+            return isInLove () && par1EntityAnimal.isInLove () && par1EntityAnimal.sex != sex;
         }
     }
 
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1){
         return null;}
-
+    public int getDamageMod(){
+    	int i = rand.nextInt((int)size_mod*10);
+    	if (i > 6){
+    		return 1;
+    	}
+    	return 0;
+    }
+    
+    public void mate(EntityAnimalTFC targetMate){
+    	 if (sex == 0){
+    		 targetMate.mate(this);
+    		 return;
+    	 }
+         conception = TFCSeasons.getTotalTicks();
+         pregnant = true;
+         targetMate.setGrowingAge (24000);
+         resetInLove ();
+         targetMate.resetInLove ();
+         mateSizeMod = targetMate.size_mod;
+    }
+    public void giveBirth (EntityAnimalTFC entityanimal){
+        entityanimal.setGrowingAge (-24000 * entityanimal.adultAge);
+        entityanimal.setLocationAndAngles (posX, posY, posZ, 0.0F, 0.0F);
+        worldObj.spawnEntityInWorld (entityanimal);
+    }
 }
