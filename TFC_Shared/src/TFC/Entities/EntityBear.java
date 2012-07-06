@@ -36,6 +36,9 @@ public class EntityBear extends EntityTameableTFC
         tasks.addTask (8, new EntityAIWatchClosest (this, net.minecraft.src.EntityPlayer.class, 8F));
         tasks.addTask (9, new EntityAILookIdle (this));
         targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntitySheepTFC.class, 16F, 200, false));
+        targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPigTFC.class, 16F, 200, false));
+        targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
+        targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         fooditems.add(Item.beefRaw.shiftedIndex);
         fooditems.add(Item.porkRaw.shiftedIndex);
         fooditems.add(Item.fishRaw.shiftedIndex);
