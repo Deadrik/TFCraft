@@ -46,6 +46,7 @@ public class ContainerChestTFC extends Container
     /**
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.
      */
+    @Override
     public ItemStack transferStackInSlot(int par1)
     {
         ItemStack var2 = null;

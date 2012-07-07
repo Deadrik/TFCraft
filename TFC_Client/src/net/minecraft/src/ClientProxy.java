@@ -25,6 +25,7 @@ import TFC.Entities.EntitySquidTFC;
 import TFC.Entities.EntityTerraJavelin;
 import TFC.Entities.EntityWolfTFC;
 import TFC.GUI.GuiCalendar;
+import TFC.GUI.GuiChestTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiTerraAnvil;
 import TFC.GUI.GuiTerraBloomery;
@@ -213,6 +214,10 @@ public class ClientProxy implements IProxy
             case 28:
             {
                 return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType ,world);
+            }
+            case 29:
+            {
+                return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te));
             }
 
         }
@@ -1256,11 +1261,7 @@ public class ClientProxy implements IProxy
         try
         {
             c.getSuperclass().getMethod("handleHealthUpdate", Byte.class).invoke(par1);
-        } catch (Exception e1)
-        {
-            //e1.printStackTrace();
-        } //.handleHealthUpdate(par1);
-        
+        } catch (Exception e1){}  
     }
     @Override
     public boolean aiTargetShouldExecute(EntityAITarget target, EntityLiving par1EntityLiving, boolean par2)

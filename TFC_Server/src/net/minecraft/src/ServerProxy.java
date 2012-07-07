@@ -110,6 +110,10 @@ public class ServerProxy implements IProxy {
             {
                 return new ContainerKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType, world);
             }
+            case 29:
+            {
+                return new ContainerChestTFC(player.inventory, (TileEntityChestTFC) te);
+            }
             default:
             {
                 return null;

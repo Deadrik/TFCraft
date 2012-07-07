@@ -31,22 +31,21 @@ public class BlockStalactite extends BlockSlab
     public BlockStalactite(int par1)
     {
         super(par1);
-        // TODO Auto-generated constructor stub
     }
 
     public void randomDisplayTick(World world, int i, int j, int k, Random random)
     {
-        if (((((TileEntityPartial)world.getBlockTileEntity(i, j, k)).extraData >> 24) & 1) == 1 && random.nextInt(10) == 0)
+        if ((world.isBlockNormalCube(i, j+1, k) || world.isBlockNormalCube(i, j+2, k)) && ((((TileEntityPartial)world.getBlockTileEntity(i, j, k)).extraData >> 24) & 1) == 1 && random.nextInt(80) == 0)
         {
             float f = (float)i + 0.5F;
-            float f1 = (float)j + 0.1F + random.nextFloat() * 6F / 16F;
+            float f1 = (float)j-0.08f;
             float f2 = (float)k + 0.5F;
             float f3 = 0.52F;
             
             float f4 = random.nextFloat() * 0.6F;
             float f5 = random.nextFloat() * -0.6F;
             float f6 = random.nextFloat() * -0.6F;
-            world.spawnParticle("water", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, -0.5D, 0.0D);
+            world.spawnParticle("dripWater", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
         }
     }
 }

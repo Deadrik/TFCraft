@@ -120,7 +120,6 @@ public class BlockSlab extends BlockPartial
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
     {
         TileEntityPartial te = (TileEntityPartial) par1IBlockAccess.getBlockTileEntity(i, j, k);
-        int md = par1IBlockAccess.getBlockMetadata(i, j, k);
         
         long extraX = (te.extraData) & 0xf;
         long extraY = (te.extraData >> 4) & 0xf;
