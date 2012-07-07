@@ -1267,4 +1267,9 @@ public class ClientProxy implements IProxy
     {
         return target.func_48376_a(par1EntityLiving, par2);
     }
+    @Override
+    public boolean aiTargetfunc_48100_a(Class par1Class, EntityLiving entity)
+    {
+        return entity.func_48100_a(par1Class);
+    }
 }

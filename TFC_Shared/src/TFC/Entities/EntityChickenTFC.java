@@ -13,7 +13,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
 
     /** The time until the next egg is spawned. */
     public int timeUntilNextEgg;
-
+    private EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
     public EntityChickenTFC(World par1World)
     {
         super(par1World);
@@ -27,6 +27,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.shiftedIndex, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, new EntityAIWander(this, var2));
+        this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
     }

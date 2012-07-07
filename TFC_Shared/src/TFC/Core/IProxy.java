@@ -68,4 +68,5 @@ public interface IProxy extends IGuiHandler {
 	public abstract void handleHealthUpdate(Class c, byte par1);
 	
 	public abstract boolean aiTargetShouldExecute(EntityAITarget target, EntityLiving par1EntityLiving, boolean par2);
+	public abstract boolean aiTargetfunc_48100_a(Class par1Class, EntityLiving entity);
 }
