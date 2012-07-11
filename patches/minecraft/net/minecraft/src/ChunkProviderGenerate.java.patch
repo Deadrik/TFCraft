@@ -20,7 +20,7 @@
 -    private MapGenBase caveGenerator = new MapGenCaves();
 +    private MapGenBase caveGenerator = new MapGenCavesTFC();
 +    private MapGenBase caveGenerator2 = new MapGenCavesUpperTFC();
-+    private MapGenBase caveGenerator3 = new MapGenRiverRavineTFC();
++    private MapGenRiverRavineTFC underRiverGen = new MapGenRiverRavineTFC();
  
      /** Holds Stronghold Generator */
 -    private MapGenStronghold strongholdGenerator = new MapGenStronghold();
@@ -40,7 +40,7 @@
  
      /** The biomes that are used to generate the chunk */
      private BiomeGenBase[] biomesForGeneration;
-@@ -269,28 +278,32 @@
+@@ -269,29 +278,35 @@
      public Chunk provideChunk(int par1, int par2)
      {
          this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
@@ -68,8 +68,9 @@
 -        byte[] var5 = var4.getBiomeArray();
 +        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2, meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
 +        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
++        
 +        //TFC_ChunkProviderGenerate.replaceBlocksForBiome(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        this.caveGenerator3.generate(this, this.worldObj, par1, par2, ids);
++        this.underRiverGen.generate(this, this.worldObj, par1, par2, ids, meta);
 +        this.caveGenerator.generate(this, this.worldObj, par1, par2, ids);
 +        //this.caveGenerator2.generate(this, this.worldObj, par1, par2, ids2);
 +        this.ravineGenerator.generate(this, this.worldObj, par1, par2, ids);
@@ -88,9 +89,11 @@
 +        //Chunk var4 = new Chunk(this.worldObj, ids, meta, par1, par2);
 +        Chunk var4 = new ChunkTFC(this.worldObj, ids, meta, ids2, meta2, par1, par2);
          var4.generateSkylightMap();
++        var4.resetRelightChecks();
          return var4;
      }
-@@ -471,9 +484,9 @@
+ 
+@@ -471,9 +486,9 @@
  
          if (this.mapFeaturesEnabled)
          {
@@ -103,7 +106,7 @@
          }
  
          int var12;
-@@ -483,20 +496,20 @@
+@@ -483,20 +498,20 @@
          if (!var11 && this.rand.nextInt(4) == 0)
          {
              var12 = var4 + this.rand.nextInt(16) + 8;
@@ -128,7 +131,7 @@
              }
          }
  
-@@ -506,10 +519,10 @@
+@@ -506,10 +521,10 @@
              var14 = this.rand.nextInt(128);
              int var15 = var5 + this.rand.nextInt(16) + 8;
  
@@ -143,7 +146,7 @@
          }
  
          var6.decorate(this.worldObj, this.rand, var4, var5);
-@@ -528,7 +541,7 @@
+@@ -528,7 +543,7 @@
                      this.worldObj.setBlockWithNotify(var12 + var4, var14 - 1, var13 + var5, Block.ice.blockID);
                  }
  
@@ -152,7 +155,7 @@
                  {
                      this.worldObj.setBlockWithNotify(var12 + var4, var14, var13 + var5, Block.snow.blockID);
                  }
-@@ -588,4 +601,261 @@
+@@ -588,4 +603,261 @@
      {
          return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
      }

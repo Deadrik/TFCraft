@@ -16,7 +16,7 @@
 -    private MapGenBase caveGenerator = new MapGenCaves();
 +    private MapGenBase caveGenerator = new MapGenCavesTFC();
 +    private MapGenBase caveGenerator2 = new MapGenCavesUpperTFC();
-+    private MapGenBase underRiverGen = new MapGenRiverRavineTFC();
++    private MapGenRiverRavineTFC underRiverGen = new MapGenRiverRavineTFC();
  
      /** Holds Stronghold Generator */
 -    private MapGenStronghold strongholdGenerator = new MapGenStronghold();
@@ -62,7 +62,7 @@
 +        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2, meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
 +        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
 +        //TFC_ChunkProviderGenerate.replaceBlocksForBiome(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        underRiverGen.generate(this, this.worldObj, par1, par2, ids);
++        underRiverGen.generate(this, this.worldObj, par1, par2, ids, meta);
 +        this.caveGenerator.generate(this, this.worldObj, par1, par2, ids);
 +        //this.caveGenerator2.generate(this, this.worldObj, par1, par2, ids2);
 +        this.ravineGenerator.generate(this, this.worldObj, par1, par2, ids);

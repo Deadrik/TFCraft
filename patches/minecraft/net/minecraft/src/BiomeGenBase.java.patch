@@ -1,6 +1,6 @@
 --- ../src_base/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
-@@ -5,47 +5,205 @@
+@@ -5,47 +5,206 @@
  import java.util.List;
  import java.util.Random;
  
@@ -20,6 +20,7 @@
 +import TFC.WorldGen.WorldGenCustomShortTrees;
 +import TFC.WorldGen.WorldGenCustomTallTrees;
 +import TFC.WorldGen.WorldGenCustomWillowTrees;
++import TFC.WorldGen.WorldGenDouglasFir;
 +
 +import net.minecraft.client.Minecraft;
 +
@@ -243,7 +244,7 @@
      public String biomeName;
      public int color;
  
-@@ -102,8 +260,52 @@
+@@ -102,8 +261,52 @@
      protected WorldGenForest worldGenForest;
      protected WorldGenSwamp worldGenSwamp;
  
@@ -251,7 +252,7 @@
 +    protected WorldGenCustomTallTrees worldGenAspenTallTrees;
 +    protected WorldGenCustomTallTrees worldGenBirchTallTrees;
 +    protected WorldGenCustomTallTrees worldGenChestnutTallTrees;
-+    protected WorldGenCustomTallTrees worldGenDouglasFirTallTrees;
++    protected WorldGenDouglasFir worldGenDouglasFirTallTrees;
 +    protected WorldGenCustomTallTrees worldGenHickoryTallTrees;
 +    protected WorldGenCustomMapleTallTrees worldGenMapleTallTrees;
 +    protected WorldGenCustomTallTrees worldGenOakTallTrees;
@@ -266,7 +267,7 @@
 +    protected WorldGenCustomShortTrees worldGenAspenShortTrees;
 +    protected WorldGenCustomShortTrees worldGenBirchShortTrees;
 +    protected WorldGenCustomShortTrees worldGenChestnutShortTrees;
-+    protected WorldGenCustomShortTrees worldGenDouglasFirShortTrees;
++    protected WorldGenDouglasFir worldGenDouglasFirShortTrees;
 +    protected WorldGenCustomShortTrees worldGenHickoryShortTrees;
 +    protected WorldGenCustomMapleShortTrees worldGenMapleShortTrees;
 +    protected WorldGenCustomShortTrees worldGenOakShortTrees;
@@ -296,7 +297,7 @@
          this.topBlock = (byte)Block.grass.blockID;
          this.fillerBlock = (byte)Block.dirt.blockID;
          this.field_6502_q = 5169201;
-@@ -123,25 +325,67 @@
+@@ -123,25 +326,67 @@
          this.biomeID = par1;
          biomeList[par1] = this;
          this.biomeDecorator = this.createBiomeDecorator();
@@ -338,7 +339,7 @@
 +        worldGenAspenTallTrees = new WorldGenCustomTallTrees(false,1);
 +        worldGenBirchTallTrees = new WorldGenCustomTallTrees(false,2);
 +        worldGenChestnutTallTrees = new WorldGenCustomTallTrees(false,3);
-+        worldGenDouglasFirTallTrees = new WorldGenCustomTallTrees(false,4);
++        worldGenDouglasFirTallTrees = new WorldGenDouglasFir(false,4);
 +        worldGenHickoryTallTrees = new WorldGenCustomTallTrees(false,5);
 +        worldGenMapleTallTrees = new WorldGenCustomMapleTallTrees(false,6);
 +        worldGenOakTallTrees = new WorldGenCustomTallTrees(false,0);
@@ -353,7 +354,7 @@
 +        worldGenAspenShortTrees = new WorldGenCustomShortTrees(false,1);
 +        worldGenBirchShortTrees = new WorldGenCustomShortTrees(false,2);
 +        worldGenChestnutShortTrees = new WorldGenCustomShortTrees(false,3);
-+        worldGenDouglasFirShortTrees = new WorldGenCustomShortTrees(false,4);
++        worldGenDouglasFirShortTrees = new WorldGenDouglasFir(false,4);
 +        worldGenHickoryShortTrees = new WorldGenCustomShortTrees(false,5);
 +        worldGenMapleShortTrees = new WorldGenCustomMapleShortTrees(false,6);
 +        worldGenOakShortTrees = new WorldGenCustomShortTrees(false,0);
@@ -376,7 +377,7 @@
      }
  
      /**
-@@ -164,10 +408,10 @@
+@@ -164,10 +409,10 @@
      /**
       * Sets the minimum and maximum height of this biome. Seems to go from -2.0 to 2.0.
       */
@@ -390,7 +391,7 @@
          return this;
      }
  
-@@ -288,7 +532,10 @@
+@@ -288,7 +533,10 @@
       */
      public final int getIntRainfall()
      {
@@ -402,7 +403,7 @@
      }
  
      /**
-@@ -296,23 +543,82 @@
+@@ -296,23 +544,82 @@
       */
      public final int getIntTemperature()
      {
@@ -494,7 +495,7 @@
      }
  
      public void decorate(World par1World, Random par2Random, int par3, int par4)
-@@ -325,9 +631,14 @@
+@@ -325,9 +632,14 @@
       */
      public int getBiomeGrassColor()
      {
@@ -510,7 +511,7 @@
      }
  
      /**
-@@ -335,8 +646,390 @@
+@@ -335,8 +647,390 @@
       */
      public int getBiomeFoliageColor()
      {

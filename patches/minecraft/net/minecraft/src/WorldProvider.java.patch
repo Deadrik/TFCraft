@@ -1,48 +1,28 @@
 --- ../src_base/minecraft/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
-@@ -1,5 +1,9 @@
+@@ -1,5 +1,10 @@
  package net.minecraft.src;
  
 +import java.util.Random;
 +
++import TFC.Core.TFC_Core;
 +import TFC.Core.TFC_Game;
 +
  import net.minecraft.src.forge.DimensionManager;
  
  public abstract class WorldProvider
-@@ -39,6 +43,31 @@
+@@ -39,6 +44,10 @@
          this.terrainType = par1World.getWorldInfo().getTerrainType();
          this.registerWorldChunkManager();
          this.generateLightBrightnessTable();
 +        /**
 +         * TFC Code: This is used to set the initial rock layers for each biome
 +         * */
-+        Random R = new Random(par1World.getSeed());
-+        for(int i = 0; i < BiomeGenBase.biomeList.length; i++)
-+        {
-+            R = new Random(par1World.getSeed()+i);
-+        	if(BiomeGenBase.biomeList[i] != null && !(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC))
-+        	{
-+        		BiomeGenBase.biomeList[i].SetupStone(par1World, R);
-+        	}
-+        	else if(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
-+        	{
-+        		BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
-+        	}
-+        	else if(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC)
-+        	{
-+        		BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace("River ", "").toLowerCase());
-+        	}
-+        	if(BiomeGenBase.biomeList[i] != null)
-+        	{
-+        	    BiomeGenBase.biomeList[i].SetupTrees(par1World, R);
-+        	}
-+        }
-+        TFC_Game.registerAnvilRecipes(R,par1World);
++        TFC_Core.SetupWorld(par1World);
      }
  
      /**
-@@ -77,7 +106,8 @@
+@@ -77,7 +86,8 @@
      public boolean canCoordinateBeSpawn(int par1, int par2)
      {
          int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
@@ -52,7 +32,7 @@
      }
  
      /**
-@@ -184,7 +214,7 @@
+@@ -184,7 +194,7 @@
       */
      public float getCloudHeight()
      {
