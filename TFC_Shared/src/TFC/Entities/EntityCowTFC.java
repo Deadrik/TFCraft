@@ -4,6 +4,7 @@ import net.minecraft.src.*;
 
 public class EntityCowTFC extends EntityAnimalTFC
 {
+	private EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
     public EntityCowTFC(World par1World)
     {
         super(par1World);
@@ -15,6 +16,7 @@ public class EntityCowTFC extends EntityAnimalTFC
         this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.shiftedIndex, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
+        this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
