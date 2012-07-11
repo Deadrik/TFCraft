@@ -1159,7 +1159,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     @Override
     public String getVersion()
     {
-        return "Beta 2 Build 43";
+        return "Beta 2 Build 45";
     }
 
     @Override

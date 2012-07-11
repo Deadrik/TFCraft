@@ -84,7 +84,7 @@ public class ItemTerraProPick extends Item implements ITextureProvider
             {
                 for (int j = -12; j < 12; j++)
                 {
-                    for (int k = -6; k < 6; k++)
+                    for (int k = -12; k < 12; k++)
                     {
                         int oreid = world.getBlockId(x+i, y+k, z+j);
 

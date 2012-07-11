@@ -26,7 +26,7 @@ import net.minecraft.src.forge.IPacketHandler;
 import net.minecraft.src.forge.MessageManager;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
-    
+
     @Override
     public void onConnect(NetworkManager network) {
         MessageManager.getInstance().registerChannel(network, this, "TerraFirmaCraft");
@@ -35,8 +35,17 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
     @Override
     public void onDisconnect(NetworkManager network, String message, Object[] args) {
+        
+        PlayerInfo PI = new PlayerInfo(mod_TFC_Core.proxy.getPlayer(network).username);
+        for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size(); i++)
+        {
+            if(PlayerManagerTFC.getInstance().Players.get(i).Name.equalsIgnoreCase(PI.Name))
+            {
+                System.out.println("PlayerManager Successfully removed player " + mod_TFC_Core.proxy.getPlayer(network).username);
+                PlayerManagerTFC.getInstance().Players.remove(i);
+            }  
+        }
         MessageManager.getInstance().removeConnection(network);
-        PlayerManagerTFC.getInstance().Players.remove(new PlayerInfo(mod_TFC_Core.proxy.getPlayer(network).username));
     }
 
     @Override
@@ -150,28 +159,31 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
                 DataOutputStream dos=new DataOutputStream(bos);
                 TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-                try 
+                if(te != null)
                 {
-                    dos.writeByte(0);
-                    dos.writeInt(x);
-                    dos.writeInt(y);
-                    dos.writeInt(z);
-                    dos.writeShort(te.TypeID);
-                    dos.writeByte(te.MetaID);
-                    dos.writeByte(te.material);
-                    dos.writeLong(te.extraData);
+                    try 
+                    {
+                        dos.writeByte(0);
+                        dos.writeInt(x);
+                        dos.writeInt(y);
+                        dos.writeInt(z);
+                        dos.writeShort(te.TypeID);
+                        dos.writeByte(te.MetaID);
+                        dos.writeByte(te.material);
+                        dos.writeLong(te.extraData);
 
-                } catch (IOException e) 
-                {
-                    // IMPOSSIBLE?
+                    } catch (IOException e) 
+                    {
+                        // IMPOSSIBLE?
+                    }
+                    Packet250CustomPayload pkt=new Packet250CustomPayload();
+                    pkt.channel="TerraFirmaCraft";
+                    pkt.data=bos.toByteArray();
+                    pkt.length=bos.size();
+                    pkt.isChunkDataPacket=true;
+
+                    mod_TFC_Core.proxy.sendCustomPacketToPlayer(player.username, pkt);
                 }
-                Packet250CustomPayload pkt=new Packet250CustomPayload();
-                pkt.channel="TerraFirmaCraft";
-                pkt.data=bos.toByteArray();
-                pkt.length=bos.size();
-                pkt.isChunkDataPacket=true;
-
-                mod_TFC_Core.proxy.sendCustomPacketToPlayer(player.username, pkt);
             }
             else if(type == 2)//Keypress changes
             {
@@ -300,6 +312,38 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 dos.writeInt(te.xCoord);
                 dos.writeInt(te.yCoord);
                 dos.writeInt(te.zCoord);
+                dos.close();
+
+                pkt.channel="TerraFirmaCraft";
+                pkt.data=bos.toByteArray();
+                pkt.length=bos.size();
+                pkt.isChunkDataPacket=true;
+
+                mod_TFC_Core.proxy.sendCustomPacket(pkt);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    
+    public static void broadcastPartialData(TileEntityPartial te) {
+        if (TFC_Core.isClient()) return;
+        else 
+        {
+            try
+            {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                DataOutputStream dos = new DataOutputStream(bos);
+                Packet250CustomPayload pkt = new Packet250CustomPayload();
+
+                dos.writeByte(0);
+                dos.writeInt(te.xCoord);
+                dos.writeInt(te.yCoord);
+                dos.writeInt(te.zCoord);
+                dos.writeShort(te.TypeID);
+                dos.writeByte(te.MetaID);
+                dos.writeByte(te.material);
+                dos.writeLong(te.extraData);
                 dos.close();
 
                 pkt.channel="TerraFirmaCraft";

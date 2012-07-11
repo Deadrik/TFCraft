@@ -1054,4 +1054,30 @@ public class TFC_Core
             }
         }
     }
+
+    public static void SetupWorld(World world)
+    {
+        long seed = world.getSeed();
+        Random R = new Random(seed & 0xffffffff);
+        for(int i = 0; i < BiomeGenBase.biomeList.length; i++)
+        {
+            if(BiomeGenBase.biomeList[i] != null && !(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC))
+            {
+                BiomeGenBase.biomeList[i].SetupStone(world, R);
+            }
+            else if(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
+            {
+                BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
+            }
+            else if(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC)
+            {
+                BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace("River ", "").toLowerCase());
+            }
+            if(BiomeGenBase.biomeList[i] != null)
+            {
+                BiomeGenBase.biomeList[i].SetupTrees(world, R);
+            }
+        }
+        TFC_Game.registerAnvilRecipes(R, world);
+    }
 }

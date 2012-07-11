@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
+import TFC.Entities.EntityChickenTFC;
 import TFC.WorldGen.WorldGenCustomHugeTrees;
 import TFC.WorldGen.WorldGenCustomShortTrees;
 import TFC.WorldGen.WorldGenCustomShrub;
@@ -16,7 +17,7 @@ public class BiomeGenJungleTFC extends BiomeGenBase
 		this.biomeDecorator.grassPerChunk = 25;
 		this.biomeDecorator.flowersPerChunk = 4;
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 10, 4, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 4, 4));
 
 	}
 

@@ -43,7 +43,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
 		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, this.moveSpeed, 10.0F, 2.0F));
-		this.tasks.addTask(6, new EntityAIMate(this, this.moveSpeed));
+		this.tasks.addTask(6, new EntityAIMateTFC(this, this.moveSpeed));
 		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
 		this.tasks.addTask(8, new EntityAIBegTFC(this, 8.0F));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));

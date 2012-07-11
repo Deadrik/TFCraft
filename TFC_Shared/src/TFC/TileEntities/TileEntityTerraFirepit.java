@@ -1137,14 +1137,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             charcoalCounter = 0;
         }
         
-        Random R = new Random();
-        
-        if(R.nextInt(10) == 0 && fireTemperature > 210)
-            worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
+        Random R = new Random();            
         
         if(!worldObj.isRemote)
         {
-            
             HeatManager manager = HeatManager.getInstance();
             //Here we take care of the item that we are cooking in the fire
             NBTTagCompound inputCompound;
@@ -1169,7 +1165,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                 inputCompound.setFloat("temperature", inputItemTemp);
                 fireItemStacks[1].setTagCompound(inputCompound);
-                if(index.boilTemp <= inputItemTemp)
+                if(index != null && index.boilTemp <= inputItemTemp)
                 {
                     fireItemStacks[1] = null;
                 }

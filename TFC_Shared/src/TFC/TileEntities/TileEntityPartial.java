@@ -19,9 +19,22 @@ public class TileEntityPartial extends TileEntity
     public void validate()
     {
         super.validate();
+        initialize();
+    }
+    
+    public void initialize()
+    {
         if (this.worldObj.isRemote)
         {
             PacketHandler.requestInitialData(this);
+        }
+    }
+    
+    public void broadcast()
+    {
+        if (!this.worldObj.isRemote)
+        {
+            PacketHandler.broadcastPartialData(this);
         }
     }
     

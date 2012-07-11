@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Items.ItemTerraLogs;
 import TFC.TileEntities.TileEntityTerraFirepit;
+import TFC.TileEntities.TileEntityTerraLogPile;
 
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
@@ -142,17 +143,6 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 		return "/bioxx/terrablocks.png";
 	}
 
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{		
-		if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)!=null)
-		{
-			TileEntityTerraFirepit tileentityanvil;
-			tileentityanvil = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
-			tileentityanvil.ejectContents();
-		}	
-	}
-
-
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -193,6 +183,11 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 		}
 		else
 		{
+		    if (random.nextInt(24) == 0)
+	        {
+		        world.playSoundEffect(i,j,k, "fire.fire", 0.4F + (random.nextFloat()/2), 0.7F + random.nextFloat());
+	        }
+		    
 			float f = (float)i + 0.5F;
 			float f1 = (float)j + 0.1F + random.nextFloat() * 6F / 16F;
 			float f2 = (float)k + 0.5F;
@@ -235,6 +230,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
+        
         TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
 
         if (par0)
@@ -264,5 +260,31 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
+    }
+    
+    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+    {       
+        Eject(world,i,j,k);
+    }
+
+    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) {
+        Eject(par1World,par2,par3,par4);
+    }
+
+    public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+        Eject(par1World,par2,par3,par4);
+    }
+
+    //public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
+    
+    public void Eject(World par1World, int par2, int par3, int par4)
+    {
+        if((TileEntityTerraFirepit)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        {
+            TileEntityTerraFirepit tileentityanvil;
+            tileentityanvil = (TileEntityTerraFirepit)par1World.getBlockTileEntity(par2, par3, par4);
+            tileentityanvil.ejectContents();
+            par1World.removeBlockTileEntity(par2, par3, par4);
+        }
     }
 }

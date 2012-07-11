@@ -175,13 +175,14 @@ public class ItemChisel extends ItemTool implements ITextureProvider
             {
                 System.out.println("Extra ="+te.extraData);  
             }
+            
+            
         }
-        else
-        {
-            te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
-            if(te != null)
-                te.validate();
-        }
+        
+        te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+        if(te != null)
+            te.broadcast();
+        
         world.markBlockNeedsUpdate(x, y, z);
     }
     public static void CreateSlab(World world, int x, int y, int z, int id, byte meta, int side)
