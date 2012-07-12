@@ -92,7 +92,7 @@ public class EntityAIFollowParentTFC extends EntityAIBase
 	 */
 	public boolean continueExecuting()
 	{
-		if (!this.parentAnimal.isEntityAlive())
+		if (!this.parentAnimal.isEntityAlive()||childAnimal.parent==null)
 		{
 			return false;
 		}
@@ -128,7 +128,7 @@ public class EntityAIFollowParentTFC extends EntityAIBase
 			this.field_48246_d = 10;
 			this.childAnimal.getNavigator().tryMoveToEntityLiving(this.parentAnimal, this.field_48248_c);
 		}
-		double var1 = this.childAnimal.getDistanceSqToEntity(this.parentAnimal);
+		double var1 = this.childAnimal.getDistanceSqToEntity(childAnimal.parent);
 		float a = (this.childAnimal.getGrowingAge()/(this.childAnimal.adultAge * -24000F));
 		if (parentAnimal instanceof EntityAnimalTFC){
 			if ((a >= 0.9F)&& var1 <= 3.0F && this.parentAnimal.getClass() == this.childAnimal.getClass() && this.childAnimal.hunger < 144000 && ((EntityAnimalTFC)this.parentAnimal).sex == 0){
