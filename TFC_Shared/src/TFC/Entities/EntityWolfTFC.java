@@ -50,7 +50,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTargetTFC(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTargetTFC(this));
-		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+		this.targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, true));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntitySheepTFC.class, 16.0F, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 16.0F, 200, false));
 	}
@@ -216,7 +216,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 		{
 			this.numTicksToChaseTarget = 10;
 		}
-		if (!isAngry()){
+		if (!isAngry() && getOwner() != null){
 			float f = 8F;
 			List list = worldObj.getEntitiesWithinAABB (EntityPlayer.class, boundingBox.expand (f, f, f));
 			boolean target = false;
