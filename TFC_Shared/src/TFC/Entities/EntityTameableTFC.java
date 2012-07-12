@@ -10,6 +10,9 @@ public abstract class EntityTameableTFC extends EntityAnimalTFC
     {
         super(par1World);
     }
+    public EntityTameableTFC(World par1World,EntityAnimalTFC mother,float father_size){
+    	super(par1World,mother,father_size);
+    }
 
     protected void entityInit()
     {
