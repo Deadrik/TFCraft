@@ -1,0 +1,18 @@
+[
+{
+  "modid" : "mod_TFC_Core",
+  "name" : "TerraFirmaCraft",
+  "version" : "@VERSION@",
+  "url" : "www.terrafirmacraft.com",
+  "credits" : "marcopolo1613","Dunkleosteus","Jimmynator","Breathesleep","RogueHydra",
+  "authors": [
+    "Bioxx"
+  ],
+  "description": "Mod Update Manager is an Open Source API that coordinates the versions of your mods in-game.",
+  "logoFile" : "",
+  "updateUrl" : "http://www.terrafirmacraft.com/download/change-log/",
+  "parent" : "",
+  "screenshots": [
+  ]
+}
+]

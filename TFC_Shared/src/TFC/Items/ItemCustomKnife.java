@@ -11,7 +11,7 @@ implements ITextureProvider
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = e.getDamageVsEntity();
+		this.weaponDamage = 1 + e.getDamageVsEntity();
 	}
 
 	public int getDamageVsEntity(Entity par1Entity)

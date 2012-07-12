@@ -125,12 +125,12 @@ public class ClientProxy implements IProxy
         MinecraftForgeClient.registerSoundHandler(new SoundHandler());
         MinecraftForgeClient.registerHighlightHandler(new RenderHighlight());
         
-        ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0);
-        ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1);
-        ModLoader.registerEntityID(EntityBear.class, "bear", 2,0xd1d003, 0x101010);
-        ModLoader.registerEntityID(EntityChickenTFC.class, "chicken", 3);
-        ModLoader.registerEntityID(EntityPigTFC.class, "pig", 4);
-        ModLoader.registerEntityID(EntitySquidTFC.class, "squid", 5);
+        ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0, 0xffffff, 0xbbbbbb);
+        ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1, 0xffffff, 0xbbbbbb);
+        ModLoader.registerEntityID(EntityBear.class, "bear", 2, 0xd1d003, 0x101010);
+        ModLoader.registerEntityID(EntityChickenTFC.class, "chicken", 3, 0xffffff, 0xbbbbbb);
+        ModLoader.registerEntityID(EntityPigTFC.class, "pig", 4, 0xffffff, 0xbbbbbb);
+        ModLoader.registerEntityID(EntitySquidTFC.class, "squid", 5, 0xffffff, 0xbbbbbb);
     }
 
     

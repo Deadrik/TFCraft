@@ -14,62 +14,12 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
+import vazkii.um.UpdateManager;
+import vazkii.um.UpdateManagerMod;
+
 import TFC.*;
 import TFC.Blocks.*;
-import TFC.Blocks.BlockCustomCrops;
-import TFC.Blocks.BlockCustomFlower;
-import TFC.Blocks.BlockCustomIce;
-import TFC.Blocks.BlockCustomLeaves;
-import TFC.Blocks.BlockCustomMushroom;
-import TFC.Blocks.BlockCustomReed;
-import TFC.Blocks.BlockCustomSapling;
-import TFC.Blocks.BlockCustomSnow;
-import TFC.Blocks.BlockCustomStairs;
-import TFC.Blocks.BlockCustomTallGrass;
-import TFC.Blocks.BlockCustomVine;
-import TFC.Blocks.BlockFiniteWater;
-import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.BlockFruitWood;
-import TFC.Blocks.BlockLooseRock;
-import TFC.Blocks.BlockSlab;
-import TFC.Blocks.BlockStair;
-import TFC.Blocks.BlockStalactite;
-import TFC.Blocks.BlockTerraAnvil;
-import TFC.Blocks.BlockTerraBellows;
-import TFC.Blocks.BlockTerraBloomery;
-import TFC.Blocks.BlockTerraClayGrass;
-import TFC.Blocks.BlockTerraClayGrass2;
-import TFC.Blocks.BlockTerraFarmland;
-import TFC.Blocks.BlockTerraFirepit;
-import TFC.Blocks.BlockTerraForge;
-import TFC.Blocks.BlockTerraGrass;
-import TFC.Blocks.BlockTerraGrass2;
-import TFC.Blocks.BlockTerraIgEx;
-import TFC.Blocks.BlockTerraIgExCobble;
-import TFC.Blocks.BlockTerraIgExSmooth;
-import TFC.Blocks.BlockTerraIgIn;
-import TFC.Blocks.BlockTerraIgInCobble;
-import TFC.Blocks.BlockTerraIgInSmooth;
-import TFC.Blocks.BlockTerraLogPile;
-import TFC.Blocks.BlockTerraMM;
-import TFC.Blocks.BlockTerraMMCobble;
-import TFC.Blocks.BlockTerraMMSmooth;
-import TFC.Blocks.BlockTerraMetallurgy;
-import TFC.Blocks.BlockTerraMolten;
-import TFC.Blocks.BlockTerraOre;
-import TFC.Blocks.BlockTerraOre2;
-import TFC.Blocks.BlockTerraOre3;
-import TFC.Blocks.BlockTerraPeatGrass;
-import TFC.Blocks.BlockTerraPlanks;
-import TFC.Blocks.BlockTerraScribe;
-import TFC.Blocks.BlockTerraSed;
-import TFC.Blocks.BlockTerraSedCobble;
-import TFC.Blocks.BlockTerraSedSmooth;
-import TFC.Blocks.BlockTerraSluice;
-import TFC.Blocks.BlockTerraSulfur;
-import TFC.Blocks.BlockTerraWood;
-import TFC.Blocks.BlockTerraWoodSupport;
-import TFC.Blocks.BlockTerraWorkbench;
+import TFC.Core.EntityLivingHandler;
 import TFC.Core.IProxy;
 import TFC.Core.ItemDyeCustom;
 import TFC.Core.PacketHandler;
@@ -445,6 +395,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
         MinecraftForge.registerEntity(EntityPigTFC.class, this, 10, 160, 5, true);
         
         FMLCommonHandler.instance().registerTickHandler(this);
+        MinecraftForge.registerEntityLivingHandler(new EntityLivingHandler());
         //last thing
         initOreDictionary();
     }
@@ -1218,5 +1169,4 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
         }
         return false;
     }
-
 }

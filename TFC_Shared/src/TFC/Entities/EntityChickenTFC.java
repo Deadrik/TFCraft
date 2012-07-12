@@ -18,7 +18,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     {
         super(par1World);
         this.texture = "/mob/chicken.png";
-        this.setSize(0.3F, 0.7F);
+        //this.setSize(0.3F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         float var2 = 0.25F;
         this.tasks.addTask(0, new EntityAISwimming(this));
