@@ -1,5 +1,6 @@
 package TFC.Entities;
 
+import TFC.Core.RandomPositionGeneratorTFC;
 import net.minecraft.src.*;
 
 public class EntityAIPanicTFC extends EntityAIBase
@@ -48,19 +49,19 @@ public class EntityAIPanicTFC extends EntityAIBase
 		}
 		else
 		{
-			//Vec3D var1 = RandomPositionGenerator.func_48622_a(this.field_48316_a, 5, 4);
+			Vec3D var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
 
-			//if (var1 == null)
-			//{
-			//	return false;
-			//}
-			//else
-			//{
+			if (var1 == null)
+			{
+				return false;
+			}
+			else
+			{
 				this.field_48315_c = field_48316_a.posX + (field_48316_a.fearSource.posX - field_48316_a.posX)*10;
 				this.field_48312_d = field_48316_a.posY;
 				this.field_48313_e = field_48316_a.posZ + (field_48316_a.fearSource.posZ - field_48316_a.posZ)*10;
 				return true;
-			//}
+			}
 		}
 	}
 
@@ -69,7 +70,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 	 */
 	public void startExecuting()
 	{
-		//Vec3D var1 = RandomPositionGenerator.func_48622_a(this.field_48316_a, 5, 4);
+		Vec3D var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
 
 		this.field_48315_c = field_48316_a.posX + (field_48316_a.fearSource.posX - field_48316_a.posX)*10;
 		this.field_48312_d = field_48316_a.posY;
