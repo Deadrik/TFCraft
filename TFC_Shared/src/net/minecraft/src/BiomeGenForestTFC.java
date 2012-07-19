@@ -79,7 +79,7 @@ public class BiomeGenForestTFC extends BiomeGenBase
             treeRare = R.nextInt(13);
         }
 
-        System.out.println("treeCommon1:" + treeCommon1+" "+"treeCommon2:" + treeCommon2+" "+"treeUncommon:" + treeUncommon+" "+"treeRare:" + treeRare);
+        //System.out.println("treeCommon1:" + treeCommon1+" "+"treeCommon2:" + treeCommon2+" "+"treeUncommon:" + treeUncommon+" "+"treeRare:" + treeRare);
     }
 
 }

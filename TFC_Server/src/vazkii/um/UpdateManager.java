@@ -17,6 +17,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Packet3Chat;
+import net.minecraft.src.ServerConfigurationManager;
 
 /**
  *  The main Update Manager class, you shouldn't have to call methods from here.
@@ -84,8 +85,39 @@ public class UpdateManager {
 				return;
 			}	
 		}else if(o instanceof String)
-			loadedModsMap.put(m, m.getUMVersion().equals(getWebVersionFor(m)));
+			loadedModsMap.put(m, m.useParsedChecking() ? compareVersions(m.getUMVersion(), getWebVersionFor(m)) : m.getUMVersion().equals(getWebVersionFor(m)));
 		else throw new IllegalArgumentException("Invalid Check Object Type: " + o.toString());
+	}
+	
+	/**
+     * Compares two Strings lexigraphically and char-wise. If their length is not equal, but their content in the
+     * shorter length is, returns false if the web version string is longer
+     * @param umVersion version String reported by the mod
+     * @param webVersion version String retrieved from the mod's version URL
+     * @return true if umVersion is higher or equal to webVersion, false otherwise
+     * @author AtomicStryker
+     */
+	private static Boolean compareVersions(String umVersion, String webVersion)
+	{
+		boolean newer = false;
+		for (int i = 0; i < Math.min(umVersion.length(), webVersion.length()); i++)
+		{
+             int comparedchar = webVersion.substring(i, i+1).compareTo(umVersion.substring(i, i+1));
+             
+             // case: web version is higher, return false immediatly
+             if (comparedchar > 0)
+                     return false;
+             
+             // case: local version is not only equal but higher in a digit
+             if (comparedchar < 0)
+                     newer = true;
+		}
+    
+		// if a web version is LONGER and the local version was equal up to it's end, the web version must be newer
+		if (webVersion.length() > umVersion.length() && !newer)
+			return false;
+		
+		return true;
 	}
 	
 	public static boolean areModsUpdated(){
@@ -200,5 +232,12 @@ public class UpdateManager {
 				return false;
 		
 		return true;
+	}
+	
+	/**
+	 * Util, checks if an alert message can be sent to a player.
+	 */
+	public static boolean canAlertPlayer(EntityPlayer player, ServerConfigurationManager manager){
+		return Settings.getBoolean("opOnly") ? manager.isOp(player.username) : true; 
 	}
 }

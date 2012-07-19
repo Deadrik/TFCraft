@@ -202,6 +202,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 else
                 {
                     oreCount--;
+                    charcoalCount--;
                 }
 
                 ItemStack output = index.getOutput(R);

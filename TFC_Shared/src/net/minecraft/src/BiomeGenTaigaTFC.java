@@ -89,4 +89,37 @@ public class BiomeGenTaigaTFC extends BiomeGenBase
 
     }
 	
+	protected float getMonthTemp(int month)
+    {
+        switch(month)
+        {
+            case 11:
+                return -1F;
+            case 0:
+                return 0F;
+            case 1:
+                return 0.25F;
+            case 2:
+                return 0.8F;
+            case 3:
+                return 0.75F; 
+            case 4:
+                return 1F;
+            case 5:
+                return 0.75F;
+            case 6:
+                return 0.5F;
+            case 7:
+                return 0.25F;
+            case 8:
+                return 0F;
+            case 9:
+                return -1F;
+            case 10:
+                return -2F;
+            default:
+                return 1F;
+        }
+    }
+	
 }

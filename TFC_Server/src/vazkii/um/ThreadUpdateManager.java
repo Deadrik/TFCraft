@@ -1,6 +1,7 @@
 package vazkii.um;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.mod_UpdateManager;
 
 /**
  * @author Vazkii
@@ -26,18 +27,25 @@ public class ThreadUpdateManager extends Thread {
 	public void run(){
 		while(MinecraftServer.isServerRunning(ms)){
 			try{
-				ms.log("[Mod Update Manager] Thread Executed Check.");
+				int sleepTime = Settings.getInt("checkDelay");
+				
+				while(sleepTime <= 0)
+					sleep(1000);
+				
+				ms.log("[Mod Update Manager] Thread Executed Check. " + sleepTime);
 					if(UpdateManager.online){
 						UpdateManager.loadMods();
 						if(!UpdateManager.areModsUpdated()){
 							ms.logWarning("[Mod Update Manager] Detected Outdated Mods.");
 							UpdateManager.warnUsersOfOutdated(true);
 						}
-						sleep(900000);
+
+						sleep(sleepTime*1000);
 					}
 			}catch(Throwable e){
 				ms.logSevere("[Mod Update Manager] Thread Failed! Please Restart Server or contact Vazkii!");
-				e.printStackTrace();
+				ms.logSevere("Error Report: ");
+				ms.logSevere(e.toString());
 			}
 		}
 	}

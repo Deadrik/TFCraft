@@ -52,6 +52,7 @@ public class CapeHandler {
 		fillModders();
 		goldPlayers.clear();
 		fillHelpers();
+		System.out.println("");
 	}
 	
 	static void fillModders(){

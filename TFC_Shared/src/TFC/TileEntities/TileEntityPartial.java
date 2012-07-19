@@ -114,35 +114,35 @@ public class TileEntityPartial extends TileEntity
     public void setMaterial(Material mat)
     {
         byte n = 1;
-        if(mat == Material.ground) {material = n;} 
-        else if(mat == Material.wood){n++; material = n;}
-        else if(mat == Material.rock){n++; material = n;}
-        else if(mat == Material.iron){n++; material = n;}
-        else if(mat == Material.water){n++; material = n;}
-        else if(mat == Material.lava){n++; material = n;}
-        else if(mat == Material.leaves){n++; material = n;}
-        else if(mat == Material.plants){n++; material = n;}
-        else if(mat == Material.vine){n++; material = n;}
-        else if(mat == Material.sponge){n++; material = n;}
-        else if(mat == Material.cloth){n++; material = n;}
-        else if(mat == Material.fire){n++; material = n;}
-        else if(mat == Material.sand){n++; material = n;}
-        else if(mat == Material.circuits){n++; material = n;}
-        else if(mat == Material.glass){n++; material = n;}
-        else if(mat == Material.redstoneLight){n++; material = n;}
-        else if(mat == Material.tnt){n++; material = n;}
-        else if(mat == Material.unused){n++; material = n;}
-        else if(mat == Material.ice){n++; material = n;}
-        else if(mat == Material.snow){n++; material = n;}
-        else if(mat == Material.craftedSnow){n++; material = n;}
-        else if(mat == Material.cactus){n++; material = n;}
-        else if(mat == Material.clay){n++; material = n;}
-        else if(mat == Material.pumpkin){n++; material = n;}
-        else if(mat == Material.dragonEgg){n++; material = n;}
-        else if(mat == Material.portal){n++; material = n;}
-        else if(mat == Material.cake){n++; material = n;}
-        else if(mat == Material.web){n++; material = n;}
-        else if(mat == Material.piston){n++; material = n;}
+        if(mat == Material.ground) {material = 1;} 
+        else if(mat == Material.wood){n++; material = 2;}
+        else if(mat == Material.rock){n++; material = 3;}
+        else if(mat == Material.iron){n++; material = 4;}
+        else if(mat == Material.water){n++; material = 5;}
+        else if(mat == Material.lava){n++; material = 6;}
+        else if(mat == Material.leaves){n++; material = 7;}
+        else if(mat == Material.plants){n++; material = 8;}
+        else if(mat == Material.vine){n++; material = 9;}
+        else if(mat == Material.sponge){n++; material = 10;}
+        else if(mat == Material.cloth){n++; material = 11;}
+        else if(mat == Material.fire){n++; material = 12;}
+        else if(mat == Material.sand){n++; material = 13;}
+        else if(mat == Material.circuits){n++; material = 14;}
+        else if(mat == Material.glass){n++; material = 15;}
+        else if(mat == Material.redstoneLight){n++; material = 16;}
+        else if(mat == Material.tnt){n++; material = 17;}
+        else if(mat == Material.unused){n++; material = 18;}
+        else if(mat == Material.ice){n++; material = 19;}
+        else if(mat == Material.snow){n++; material = 20;}
+        else if(mat == Material.craftedSnow){n++; material = 21;}
+        else if(mat == Material.cactus){n++; material = 22;}
+        else if(mat == Material.clay){n++; material = 23;}
+        else if(mat == Material.pumpkin){n++; material = 24;}
+        else if(mat == Material.dragonEgg){n++; material = 25;}
+        else if(mat == Material.portal){n++; material = 26;}
+        else if(mat == Material.cake){n++; material = 27;}
+        else if(mat == Material.web){n++; material = 28;}
+        else if(mat == Material.piston){n++; material = 29;}
         else if(mat == Material.grass){n++; material = 0;}
     }
 

@@ -93,6 +93,16 @@ public abstract class UpdateManagerMod {
 	}
 	
 	/**
+	 * Checks if the version checking for the mod should check for actual versions.
+	 * @return false if the checking should be modVersion.equals(webVersion), true
+	 * if the checking should be done trough AtomicStryker's version comparing
+	 * method (UpdateManager.compareVersions(...)).
+	 */
+	public boolean useParsedChecking(){
+		return true;
+	}
+	
+	/**
 	 * This is used to get the release of the mod, it overwrites getUMVersion() in version checking and it's integer
 	 * based, so if you have release 12, and the latest is release 11 it won't tell you you have outdated mods.
 	 */

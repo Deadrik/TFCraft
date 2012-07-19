@@ -393,7 +393,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
         MinecraftForge.registerEntity(EntityBear.class, this, 8, 160, 5, true);
         MinecraftForge.registerEntity(EntityChickenTFC.class, this, 9, 160, 5, true);
         MinecraftForge.registerEntity(EntityPigTFC.class, this, 10, 160, 5, true);
-        
+
         FMLCommonHandler.instance().registerTickHandler(this);
         MinecraftForge.registerEntityLivingHandler(new EntityLivingHandler());
         //last thing
@@ -435,52 +435,55 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
             {
                 int index = 0;
 
-                if(itemstack.itemID == mod_TFC_Core.terraStoneSedBrick.blockID || itemstack.itemID == mod_TFC_Core.terraStoneIgInBrick.blockID || 
-                        itemstack.itemID == mod_TFC_Core.terraStoneIgExBrick.blockID || itemstack.itemID == mod_TFC_Core.terraStoneMMBrick.blockID)
+                if(iinventory != null)
                 {
-                    HandleItem(entityplayer, iinventory, TFC_Core.Chisels);
-                }
-                else if(itemstack.itemID == Block.planks.blockID)
-                {
-                    HandleItem(entityplayer, iinventory, TFC_Core.Axes);
-                    HandleItem(entityplayer, iinventory, TFC_Core.Saws);
-                }
-                else if(itemstack.itemID == TFCItems.terraWoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.terraWoodSupportItemH.shiftedIndex)
-                {
-                    HandleItem(entityplayer, iinventory, TFC_Core.Axes);
-                }
-                else if(itemstack.itemID == TFCItems.Flux.shiftedIndex)
-                {
-                    HandleItem(entityplayer, iinventory, TFCItems.Hammers);
-                }
-                else if(itemstack.itemID == TFCItems.LooseRock.shiftedIndex)
-                {
-                    boolean openGui = false;
-                    for(int i = 0; i < iinventory.getSizeInventory(); i++) 
-                    {             
-                        if(iinventory.getStackInSlot(i) == null) 
-                        {
-                            continue;
-                        }
-                        if(iinventory.getStackInSlot(i).itemID == TFCItems.LooseRock.shiftedIndex)
-                        {
-                            if(iinventory.getStackInSlot(i).stackSize == 1)
-                                iinventory.setInventorySlotContents(i, null);
-                            else
-                            {
-                                ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
-                                iinventory.setInventorySlotContents(i, is);
-                            }
-                            itemstack.stackSize = 1;
-                            PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-                            pi.knappingRockType = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
-                            openGui = true;
-                        }
+                    if(itemstack.itemID == mod_TFC_Core.terraStoneSedBrick.blockID || itemstack.itemID == mod_TFC_Core.terraStoneIgInBrick.blockID || 
+                            itemstack.itemID == mod_TFC_Core.terraStoneIgExBrick.blockID || itemstack.itemID == mod_TFC_Core.terraStoneMMBrick.blockID)
+                    {
+                        HandleItem(entityplayer, iinventory, TFC_Core.Chisels);
                     }
-                    if(openGui)
-                        entityplayer.openGui(mod_TFC_Core.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-                    
-                    //itemstack = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
+                    else if(itemstack.itemID == Block.planks.blockID)
+                    {
+                        HandleItem(entityplayer, iinventory, TFC_Core.Axes);
+                        HandleItem(entityplayer, iinventory, TFC_Core.Saws);
+                    }
+                    else if(itemstack.itemID == TFCItems.terraWoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.terraWoodSupportItemH.shiftedIndex)
+                    {
+                        HandleItem(entityplayer, iinventory, TFC_Core.Axes);
+                    }
+                    else if(itemstack.itemID == TFCItems.Flux.shiftedIndex)
+                    {
+                        HandleItem(entityplayer, iinventory, TFCItems.Hammers);
+                    }
+                    else if(itemstack.itemID == TFCItems.LooseRock.shiftedIndex)
+                    {
+                        boolean openGui = false;
+                        for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+                        {             
+                            if(iinventory.getStackInSlot(i) == null) 
+                            {
+                                continue;
+                            }
+                            if(iinventory.getStackInSlot(i).itemID == TFCItems.LooseRock.shiftedIndex)
+                            {
+                                if(iinventory.getStackInSlot(i).stackSize == 1)
+                                    iinventory.setInventorySlotContents(i, null);
+                                else
+                                {
+                                    ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
+                                    iinventory.setInventorySlotContents(i, is);
+                                }
+                                itemstack.stackSize = 1;
+                                PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+                                pi.knappingRockType = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
+                                openGui = true;
+                            }
+                        }
+                        if(openGui)
+                            entityplayer.openGui(mod_TFC_Core.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+
+                        //itemstack = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
+                    }
                 }
             }
         };
@@ -571,25 +574,25 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
         TinArmorMaterial = EnumHelper.addArmorMaterial("Tin", 10, new int[] {2,4,3,2}, 1);
         ZincArmorMaterial = EnumHelper.addArmorMaterial("Zinc", 10, new int[] {2,4,3,2}, 1);
 
-        terraStoneIgInCobble = new BlockTerraIgInCobble(TFCSettings.getIntFor(config,"block","terraStoneIgInCobble", 198), Material.rock).setHardness(5F).setResistance(10F).setBlockName("IgInRockCobble");
-        terraStoneIgIn = new BlockTerraIgIn(TFCSettings.getIntFor(config,"block","TerraIgIn", 209), Material.rock, terraStoneIgInCobble.blockID).setHardness(5F).setResistance(10F).setBlockName("IgInRock");	
-        terraStoneIgInSmooth = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInSmooth", 182), 48).setHardness(5F).setResistance(20F).setBlockName("IgInRockSmooth");
-        terraStoneIgInBrick = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInBrick", 186), 32).setHardness(5F).setResistance(15F).setBlockName("IgInRockBrick");
+        terraStoneIgInCobble = new BlockTerraIgInCobble(TFCSettings.getIntFor(config,"block","terraStoneIgInCobble", 198), Material.rock).setHardness(10F).setResistance(10F).setBlockName("IgInRockCobble");
+        terraStoneIgIn = new BlockTerraIgIn(TFCSettings.getIntFor(config,"block","TerraIgIn", 209), Material.rock, terraStoneIgInCobble.blockID).setHardness(10F).setResistance(10F).setBlockName("IgInRock");	
+        terraStoneIgInSmooth = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInSmooth", 182), 48).setHardness(10F).setResistance(20F).setBlockName("IgInRockSmooth");
+        terraStoneIgInBrick = new BlockTerraIgInSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgInBrick", 186), 32).setHardness(10F).setResistance(15F).setBlockName("IgInRockBrick");
 
-        terraStoneSedCobble = new BlockTerraSedCobble(TFCSettings.getIntFor(config,"block","terraStoneSedCobble", 199), Material.rock).setHardness(5F).setResistance(10F).setBlockName("SedRockCobble");
-        terraStoneSed = new BlockTerraSed(TFCSettings.getIntFor(config,"block","TerraSed", 210), Material.rock, terraStoneSedCobble.blockID).setHardness(5F).setResistance(7F).setBlockName("SedRock");
-        terraStoneSedSmooth = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedSmooth", 183), 112).setHardness(5F).setResistance(20F).setBlockName("SedRockSmooth");
-        terraStoneSedBrick = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedBrick", 187), 96).setHardness(5F).setResistance(15F).setBlockName("SedRockBrick");
+        terraStoneSedCobble = new BlockTerraSedCobble(TFCSettings.getIntFor(config,"block","terraStoneSedCobble", 199), Material.rock).setHardness(10F).setResistance(10F).setBlockName("SedRockCobble");
+        terraStoneSed = new BlockTerraSed(TFCSettings.getIntFor(config,"block","TerraSed", 210), Material.rock, terraStoneSedCobble.blockID).setHardness(10F).setResistance(7F).setBlockName("SedRock");
+        terraStoneSedSmooth = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedSmooth", 183), 112).setHardness(10F).setResistance(20F).setBlockName("SedRockSmooth");
+        terraStoneSedBrick = new BlockTerraSedSmooth(TFCSettings.getIntFor(config,"block","terraStoneSedBrick", 187), 96).setHardness(10F).setResistance(15F).setBlockName("SedRockBrick");
 
-        terraStoneIgExCobble = new BlockTerraIgExCobble(TFCSettings.getIntFor(config,"block","terraStoneIgExCobble", 200), Material.rock).setHardness(5F).setResistance(10F).setBlockName("IgExRockCobble");
-        terraStoneIgEx = new BlockTerraIgEx(TFCSettings.getIntFor(config,"block","TerraIgEx", 211), Material.rock, terraStoneIgExCobble.blockID).setHardness(5F).setResistance(10F).setBlockName("IgExRock");
-        terraStoneIgExSmooth = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExSmooth", 184), 51).setHardness(5F).setResistance(20F).setBlockName("IgExRockSmooth");
-        terraStoneIgExBrick = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExBrick", 188), 35).setHardness(5F).setResistance(15F).setBlockName("IgExRockBrick");
+        terraStoneIgExCobble = new BlockTerraIgExCobble(TFCSettings.getIntFor(config,"block","terraStoneIgExCobble", 200), Material.rock).setHardness(10F).setResistance(10F).setBlockName("IgExRockCobble");
+        terraStoneIgEx = new BlockTerraIgEx(TFCSettings.getIntFor(config,"block","TerraIgEx", 211), Material.rock, terraStoneIgExCobble.blockID).setHardness(10F).setResistance(10F).setBlockName("IgExRock");
+        terraStoneIgExSmooth = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExSmooth", 184), 51).setHardness(10F).setResistance(20F).setBlockName("IgExRockSmooth");
+        terraStoneIgExBrick = new BlockTerraIgExSmooth(TFCSettings.getIntFor(config,"block","terraStoneIgExBrick", 188), 35).setHardness(1F).setResistance(15F).setBlockName("IgExRockBrick");
 
-        terraStoneMMCobble = new BlockTerraMMCobble(TFCSettings.getIntFor(config,"block","terraStoneMMCobble", 201), Material.rock).setHardness(5F).setResistance(10F).setBlockName("MMRockCobble");
-        terraStoneMM = new BlockTerraMM(TFCSettings.getIntFor(config,"block","TerraMM", 212), Material.rock, terraStoneMMCobble.blockID).setHardness(5F).setResistance(8F).setBlockName("MMRock");
-        terraStoneMMSmooth = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMSmooth", 185), 122).setHardness(5F).setResistance(20F).setBlockName("MMRockSmooth");
-        terraStoneMMBrick = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMBrick", 189), 106).setHardness(5F).setResistance(15F).setBlockName("MMRockBrick");
+        terraStoneMMCobble = new BlockTerraMMCobble(TFCSettings.getIntFor(config,"block","terraStoneMMCobble", 201), Material.rock).setHardness(10F).setResistance(10F).setBlockName("MMRockCobble");
+        terraStoneMM = new BlockTerraMM(TFCSettings.getIntFor(config,"block","TerraMM", 212), Material.rock, terraStoneMMCobble.blockID).setHardness(10F).setResistance(8F).setBlockName("MMRock");
+        terraStoneMMSmooth = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMSmooth", 185), 122).setHardness(10F).setResistance(20F).setBlockName("MMRockSmooth");
+        terraStoneMMBrick = new BlockTerraMMSmooth(TFCSettings.getIntFor(config,"block","terraStoneMMBrick", 189), 106).setHardness(10F).setResistance(15F).setBlockName("MMRockBrick");
 
         terraDirt = (new TFC.Blocks.BlockTerraDirt(TFCSettings.getIntFor(config,"block","terraDirt", 190), 112,tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
         terraDirt2 = (new TFC.Blocks.BlockTerraDirt2(TFCSettings.getIntFor(config,"block","terraDirt2", 191), 128,tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
@@ -602,9 +605,9 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
         terraPeat = (new TFC.Blocks.BlockTerraPeat(TFCSettings.getIntFor(config,"block","terraPeat", 180), 135)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("peat");
         terraPeatGrass = (BlockTerraPeatGrass)(new TFC.Blocks.BlockTerraPeatGrass(TFCSettings.getIntFor(config,"block","terraPeatGrass", 181), 135, terraPeat)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("PeatGrass");
 
-        terraOre = new BlockTerraOre(TFCSettings.getIntFor(config,"block","TerraOre", 213), Material.rock).setHardness(8F).setResistance(10F).setBlockName("Ore");
-        terraOre2 = new BlockTerraOre2(TFCSettings.getIntFor(config,"block","TerraOre2", 214), Material.rock).setHardness(8F).setResistance(10F).setBlockName("Ore");
-        terraOre3 = new BlockTerraOre3(TFCSettings.getIntFor(config,"block","TerraOre3", 215), Material.rock).setHardness(8F).setResistance(10F).setBlockName("Ore");
+        terraOre = new BlockTerraOre(TFCSettings.getIntFor(config,"block","TerraOre", 213), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+        terraOre2 = new BlockTerraOre2(TFCSettings.getIntFor(config,"block","TerraOre2", 214), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+        terraOre3 = new BlockTerraOre3(TFCSettings.getIntFor(config,"block","TerraOre3", 215), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
         LooseRock = new BlockLooseRock(TFCSettings.getIntFor(config,"block","LooseRock", 179)).setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
         LogPile = new BlockTerraLogPile(TFCSettings.getIntFor(config,"block","LogPile", 178), TileEntityTerraLogPile.class).setHardness(10F).setResistance(1F).setBlockName("LogPile");
 
@@ -1110,7 +1113,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     @Override
     public String getVersion()
     {
-        return "Beta 2 Build 45";
+        return "Beta 2 Build 46b";
     }
 
     @Override
@@ -1130,12 +1133,12 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
                 assert ((tickData[0] instanceof World));
                 world = (World)tickData[0];
             }
-            
-            TFCSeasons.UpdateSeasons(world);
-//            for(Object p : world.playerEntities)
-//            {
 
-//            }
+            TFCSeasons.UpdateSeasons(world);
+            for(Object p : world.playerEntities)
+            {
+                TFCHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
+            }
         }
     }
 
@@ -1156,9 +1159,9 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     {
         return "TFC";
     }
-    
+
     private boolean doOnce = false;
-    
+
     public boolean onTickInGame(float time, Minecraft minecraftInstance)
     {
         if(!doOnce && TFC_Core.isClient())

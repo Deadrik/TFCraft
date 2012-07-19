@@ -30,8 +30,8 @@ public class FloraIndex
         HarvestStart = h1;
         HarvestFinish = h2;
         output = o;
-        minTemp = 0.3F;
-        maxTemp = 2;
+        minTemp = 0F;
+        maxTemp = 43;
     }
     
     public ItemStack getOutput(Random R, int i)

@@ -58,7 +58,7 @@ public class BiomeGenSwampTFC extends BiomeGenBase
 
         }
 
-        if(!this.getEnableSnow())
+        if(this.temperature > 27)
         {
             int rand = random.nextInt(100);
             if(rand < 40) {
@@ -88,7 +88,7 @@ public class BiomeGenSwampTFC extends BiomeGenBase
 
     public void SetupTrees(World world, Random R)
     {
-        if(this.temperature > 0.7)
+        if(this.temperature > 27)
         {
             while(treeCommon1 == -1 && treeCommon2 == -1 && treeUncommon == -1 && treeRare == -1)
             {

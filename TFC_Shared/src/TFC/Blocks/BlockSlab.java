@@ -82,6 +82,20 @@ public class BlockSlab extends BlockPartial
     }
     
     /**
+     * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
+     * axisAlignedBB, arrayList
+     */
+    public void getCollidingBoundingBoxes(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+    {
+        AxisAlignedBB var7 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+
+        if (var7 != null && par5AxisAlignedBB.intersectsWith(var7))
+        {
+            par6ArrayList.add(var7);
+        }
+    }
+    
+    /**
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
@@ -92,18 +106,16 @@ public class BlockSlab extends BlockPartial
         int md = world.getBlockMetadata(i, j, k);
         
         short type = te.TypeID;
+        
         if (type <= 0)
             return super.getCollisionBoundingBoxFromPool(world, i, j, k);
-        int meta = te.MetaID;
-        int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
-        long extraX = (te.extraData) & 0xf;
-        long extraY = (te.extraData >> 4) & 0xf;
-        long extraZ = (te.extraData >> 8) & 0xf;
-        long extraX2 = (te.extraData >> 12) & 0xf;
-        long extraY2 = (te.extraData >> 16) & 0xf;
-        long extraZ2 = (te.extraData >> 20) & 0xf;
-        
-        
+
+        byte extraX = (byte) ((te.extraData) & 0xf);
+        byte extraY = (byte) ((te.extraData >> 4) & 0xf);
+        byte extraZ = (byte) ((te.extraData >> 8) & 0xf);
+        byte extraX2 = (byte) ((te.extraData >> 12) & 0xf);
+        byte extraY2 = (byte) ((te.extraData >> 16) & 0xf);
+        byte extraZ2 = (byte) ((te.extraData >> 20) & 0xf);
 
         return AxisAlignedBB.getBoundingBoxFromPool(i + (0.1F * extraX), j + (0.1F * extraY),  k + (0.1F * extraZ), i + (1 - (0.1F * extraX2)), j + (1 - (0.1F * extraY2)), k + (1 - (0.1F * extraZ2)));
     }

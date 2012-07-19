@@ -74,7 +74,7 @@ public class EntityLivingHandler implements IEntityLivingHandler
             int damage)
     {
         // TODO Auto-generated method stub
-        return 0;
+        return damage;
     }
 
     @Override

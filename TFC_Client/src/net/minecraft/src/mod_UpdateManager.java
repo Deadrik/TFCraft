@@ -28,7 +28,7 @@ public class mod_UpdateManager extends BaseMod {
 	};
 	
 	public String getVersion() {
-		return "by Vazkii. Version 2.1";
+		return "by Vazkii. Version 2.2";
 	}
 	
 	public void modsLoaded() {
@@ -104,7 +104,7 @@ public class mod_UpdateManager extends BaseMod {
 		}
 		
 		public String getUMVersion(){
-			return "2.1";
+			return "2.2";
 		}
 		
 		public  ModType getModType(){

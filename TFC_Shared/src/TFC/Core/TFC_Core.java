@@ -3,6 +3,8 @@ package TFC.Core;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.ReflectionHelper;
+
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.WorldGenClayPit;
 import TFC.WorldGen.WorldGenCustomFlowers;
@@ -161,7 +163,7 @@ public class TFC_Core
 
         //============Sphalerite
         createOre(mod_TFC_Core.terraOre.blockID, 12,new int[]{mod_TFC_Core.terraStoneMM.blockID,-1},//mm, veins
-                /*rarity*/2,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/60,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/60,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
     }
     public static void Generate(World world, Random rand, int chunkX, int chunkZ, int min, int max)
     {
@@ -905,7 +907,7 @@ public class TFC_Core
                     {
                         if(world.getBlockId(x, y-1, z) == 0 && world.getBlockId(x, y-2, z) == 0 && world.getBlockId(x, y-3, z) == 0)
                         {
-                            
+
                             if(R.nextInt(25) == 0)
                             {
                                 int type = R.nextInt(4);
@@ -1057,27 +1059,43 @@ public class TFC_Core
 
     public static void SetupWorld(World world)
     {
-        long seed = world.getSeed();
-        Random R = new Random(seed & 0xffffffff);
-        for(int i = 0; i < BiomeGenBase.biomeList.length; i++)
+            Random R = new Random(world.getSeed());
+            System.out.println(world.getSeed());
+            for(int i = 0; i < BiomeGenBase.biomeList.length; i++)
+            {
+                if(BiomeGenBase.biomeList[i] != null && !(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC))
+                {
+                    BiomeGenBase.biomeList[i].SetupStone(world, R);
+                }
+                else if(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
+                {
+                    BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
+                }
+                else if(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC)
+                {
+                    BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace("River ", "").toLowerCase());
+                }
+                if(BiomeGenBase.biomeList[i] != null)
+                {
+                    BiomeGenBase.biomeList[i].SetupTrees(world, R);
+                }
+            }
+            TFC_Game.registerAnvilRecipes(R, world);
+    }
+    
+    public static void SetupWorld(World w, long seed)
+    {
+        World world = w;
+        try
         {
-            if(BiomeGenBase.biomeList[i] != null && !(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC))
-            {
-                BiomeGenBase.biomeList[i].SetupStone(world, R);
-            }
-            else if(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
-            {
-                BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
-            }
-            else if(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC)
-            {
-                BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace("River ", "").toLowerCase());
-            }
-            if(BiomeGenBase.biomeList[i] != null)
-            {
-                BiomeGenBase.biomeList[i].SetupTrees(world, R);
-            }
+            //ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), "randomSeed", seed);
+            ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), 0, seed);
+            SetupWorld(w);
         }
-        TFC_Game.registerAnvilRecipes(R, world);
+        catch(Exception ex)
+        {
+            
+        }
+        
     }
 }

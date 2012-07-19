@@ -214,6 +214,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 if(fireItemStacks[1].getItem() instanceof ItemTerraMeltedMetal)
                 {
                     mold = new ItemStack(TFCItems.terraCeramicMold,1);
+                    mold.stackSize = 1;
+                    mold.setItemDamage(0);
                 }
                 //Morph the input
                 fireItemStacks[1] = index.getMorph();
@@ -1199,6 +1201,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             FuelStack[3] = fireItemStacks[5];
 
             TFCHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
+            
 
 
 
@@ -1348,6 +1351,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
             }
         }
+        
+        TFCHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound)

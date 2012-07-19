@@ -35,7 +35,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
     @Override
     public void onDisconnect(NetworkManager network, String message, Object[] args) {
-        
+
         PlayerInfo PI = new PlayerInfo(mod_TFC_Core.proxy.getPlayer(network).username);
         for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size(); i++)
         {
@@ -52,6 +52,34 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     public void onLogin(NetworkManager network, Packet1Login login) 
     {
         PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(login.username));
+
+        ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+        DataOutputStream dos=new DataOutputStream(bos);
+        EntityPlayer player = mod_TFC_Core.proxy.getPlayer(network);
+        World world= player.worldObj;
+
+        if(world.isRemote)
+        {
+            try
+            {
+                dos.writeByte(3);
+
+            } 
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            Packet250CustomPayload pkt=new Packet250CustomPayload();
+            pkt.channel="TerraFirmaCraft";
+            pkt.data=bos.toByteArray();
+            pkt.length=bos.size();
+            pkt.isChunkDataPacket=false;
+            System.out.println("Client requesting seed info");
+            
+            mod_TFC_Core.proxy.sendCustomPacket(pkt);
+        }
     }
 
     @Override
@@ -207,6 +235,47 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     } 
                 }
             }
+            else if(type == 3)//Initialization
+            {
+                if(world.isRemote)
+                {
+                    long seed = 0;
+                    try 
+                    {
+                        seed = dis.readLong();
+
+                    } catch (IOException e) 
+                    {
+                        // IMPOSSIBLE?
+                    }
+                    System.out.println("Client recieve seed: "+seed);
+                    TFC_Core.SetupWorld(world, seed);
+                }
+                else
+                {
+                    ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+                    DataOutputStream dos=new DataOutputStream(bos);
+                    try
+                    {
+                        dos.writeByte(3);
+                        dos.writeLong(world.getSeed());
+
+                    } 
+                    catch (IOException e)
+                    {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    Packet250CustomPayload pkt=new Packet250CustomPayload();
+                    pkt.channel="TerraFirmaCraft";
+                    pkt.data=bos.toByteArray();
+                    pkt.length=bos.size();
+                    pkt.isChunkDataPacket=false;
+                    System.out.println("Server send seed: "+world.getSeed());
+                    mod_TFC_Core.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                }
+            }
         }
     }
     static long keyTimer = 0;
@@ -325,7 +394,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             }
         }
     }
-    
+
     public static void broadcastPartialData(TileEntityPartial te) {
         if (TFC_Core.isClient()) return;
         else 

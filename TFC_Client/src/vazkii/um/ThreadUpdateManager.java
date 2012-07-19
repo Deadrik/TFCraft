@@ -35,10 +35,11 @@ public class ThreadUpdateManager extends Thread {
 				try {
 					while(mc.running){
 						int sleepTime = Settings.getInt("checkDelay");
-						System.out.println(Settings.getInt("checkDelay") + " " + sleepTime);
 						
-						if(sleepTime <= 0)
+						if(sleepTime <= 0){
+							System.out.println("[Mod Update Manager] Killing Thread");
 							finalize();
+						}
 						
 						while(mc.thePlayer == null ||  mc.theWorld == null || (mc.theWorld.isRemote && !Settings.getBoolean("smpEnable"))) sleep(1000);
 						System.out.println("[Mod Update Manager] Thread executed check.");
