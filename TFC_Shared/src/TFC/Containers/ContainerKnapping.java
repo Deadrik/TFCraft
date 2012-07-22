@@ -19,7 +19,7 @@ public class ContainerKnapping extends Container
 {
     /** The crafting matrix inventory (3x3). */
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 5);
-    
+
 
     /** The crafting result, size 1. */
     public IInventory craftResult = new InventoryCraftResult();
@@ -38,12 +38,9 @@ public class ContainerKnapping extends Container
 
         addSlot(new SlotCraftingMetal(inventoryplayer.player, craftMatrix, craftResult,0, 128, 35));
 
-        for (int l = 0; l < 5; l++)
+        for(int j = 0; j < 9; j++)
         {
-            for (int k1 = 0; k1 < 5; k1++)
-            {
-                addSlot(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
-            }
+            addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 151));
         }
 
         for(int i = 0; i < 3; i++)
@@ -55,10 +52,15 @@ public class ContainerKnapping extends Container
 
         }
 
-        for(int j = 0; j < 9; j++)
+        for (int l = 0; l < 5; l++)
         {
-            addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 151));
+            for (int k1 = 0; k1 < 5; k1++)
+            {
+                addSlot(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
+            }
         }
+
+
 
         this.onCraftMatrixChanged(this.craftMatrix);
     }
@@ -77,55 +79,42 @@ public class ContainerKnapping extends Container
     public ItemStack transferStackInSlot(int par1)
     {
         ItemStack var2 = null;
-        Slot var3 = (Slot)this.inventorySlots.get(par1);
+        Slot grabbedSlot = (Slot)this.inventorySlots.get(par1);
 
-        if (var3 != null && var3.getHasStack())
+        if(grabbedSlot != null && grabbedSlot.getHasStack())
         {
-            ItemStack var4 = var3.getStack();
+            ItemStack var4 = grabbedSlot.getStack();
             var2 = var4.copy();
-            
-            if((var3) instanceof SlotBlocked && 
-                    var3.getHasStack())
-            {
-                var3.inventory.setInventorySlotContents(par1-1, null);
-                this.onCraftMatrixChanged(this.craftMatrix);
-            }
 
-            if (par1 == 0)
+            if(par1 < 10)
             {
-                if (!this.mergeItemStack(var4, 10, 46, true))
-                {
-                    return null;
-                }
-
-                //var3.func_48433_a(var4, var2);
-            }
-            else if (par1 >= 10 && par1 < 37)
-            {
-                if (!this.mergeItemStack(var4, 37, 46, false))
+                if (!this.mergeItemStack(var4, 10, 36, true))
                 {
                     return null;
                 }
             }
-            else if (par1 >= 37 && par1 < 46)
+            else if(par1 >= 10 && par1 < 37)
             {
-                if (!this.mergeItemStack(var4, 10, 37, false))
+                if (!this.mergeItemStack(var4, 0, 9, true))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(var4, 10, 46, false))
+            else if(par1 >= 37 && par1 < 62)
             {
-                return null;
+                if (!this.mergeItemStack(var4, 0, 36, true))
+                {
+                    return null;
+                }
             }
 
             if (var4.stackSize == 0)
             {
-                var3.putStack((ItemStack)null);
+                grabbedSlot.putStack((ItemStack)null);
             }
             else
             {
-                var3.onSlotChanged();
+                grabbedSlot.onSlotChanged();
             }
 
             if (var4.stackSize == var2.stackSize)
@@ -133,8 +122,65 @@ public class ContainerKnapping extends Container
                 return null;
             }
 
-            var3.onPickupFromSlot(var4);
+            grabbedSlot.onPickupFromSlot(var4);
         }
+
+        //        if (var3 != null && var3.getHasStack())
+            //        {
+            //            ItemStack var4 = var3.getStack();
+        //            var2 = var4.copy();
+        //            
+        //            if((var3) instanceof SlotBlocked && 
+        //                    var3.getHasStack())
+        //            {
+        //                var3.inventory.setInventorySlotContents(par1-1, null);
+        //                this.onCraftMatrixChanged(this.craftMatrix);
+        //            }
+        //
+        //            if (par1 == 0)
+        //            {
+        //                if (!this.mergeItemStack(var4, 10, 46, true))
+        //                {
+        //                    return null;
+        //                }
+        //
+        //                //var3.func_48433_a(var4, var2);
+        //            }
+        //            else if (par1 >= 10 && par1 < 37)
+        //            {
+        //                if (!this.mergeItemStack(var4, 0, 9, false))
+        //                {
+        //                    return null;
+        //                }
+        //            }
+        //            else if (par1 >= 0 && par1 < 9)
+        //            {
+        //                if (!this.mergeItemStack(var4, 10, 37, false))
+        //                {
+        //                    return null;
+        //                }
+        //            }
+        //            else if (!this.mergeItemStack(var4, 10, 46, false))
+        //            {
+        //                return null;
+        //            }
+        //
+        //            if (var4.stackSize == 0)
+        //            {
+        //                var3.putStack((ItemStack)null);
+        //            }
+        //            else
+        //            {
+        //                var3.onSlotChanged();
+        //            }
+        //
+        //            if (var4.stackSize == var2.stackSize)
+        //            {
+        //                return null;
+        //            }
+        //
+        //            var3.onPickupFromSlot(var4);
+        //        }
 
         return var2;
     }

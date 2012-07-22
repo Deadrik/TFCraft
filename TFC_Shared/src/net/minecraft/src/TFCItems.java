@@ -1408,7 +1408,7 @@ public class TFCItems
         
         StoneKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneKnifeHead",num)).setItemName("Stone Knife Blade").setIconCoord(0, 10);num++;
         StoneHammerHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneHammerHead",num)).setItemName("Stone Hammer Head").setIconCoord(0, 11);num++;
-        StoneProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneProPickHead",num)).setItemName("Stone ProPick Head").setIconCoord(0, 10);num++;
+        StoneProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneProPickHead",num)).setItemName("Stone ProPick Head").setIconCoord(0, 1);num++;
         
         StoneKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","StoneKnife",num),IgExToolMaterial).setItemName("Stone Knife").setMaxDamage(IgExStoneUses).setIconCoord(0, 10);num++;
         

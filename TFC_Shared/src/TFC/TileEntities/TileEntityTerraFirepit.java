@@ -1152,7 +1152,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 index = manager.findMatchingIndex(fireItemStacks[1]);
                 inputCompound = fireItemStacks[1].getTagCompound();
                 inputItemTemp = inputCompound.getFloat("temperature");
-                Item1Melted = inputCompound.getBoolean("Item1Melted");
 
                 if(index != null && fireTemperature > inputItemTemp)
                 {
@@ -1178,16 +1177,14 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 if(fireTemperature > 210 && index != null)
                 {
                     inputCompound = new NBTTagCompound();
-                    inputCompound.setFloat("temperature", ambientTemp);
-                    inputCompound.setBoolean("Item1Melted",false);
+                    inputCompound.setFloat("temperature", worldObj.getBiomeGenForCoords(xCoord, zCoord).getHeightAdjustedTemperature(yCoord)+10);
                     fireItemStacks[1].setTagCompound(inputCompound);
-                    Item1Melted = false;
-                    inputItemTemp = ambientTemp;
+                    inputItemTemp = worldObj.getBiomeGenForCoords(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
                 }
             }
             else if(fireItemStacks[1] == null)
             {
-                inputItemTemp = ambientTemp;
+                inputItemTemp = worldObj.getBiomeGenForCoords(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
             }
             //careForInventorySlot(1,fireTemperature);
             //careForInventorySlot(6,fireTemperature);
@@ -1202,21 +1199,15 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
             TFCHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
             
-
-
-
             //Now we cook the input item
-            //CookItem();
             CookItemNew();
 
             //push the input fuel down the stack
             HandleFuelStack();
             if(ambientTemp == -1000)	
             {
-                BiomeGenBase var25 = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-                float a = var25.getFloatTemperature();
-                a = a / 2.0F;//Normalize the value to between 0 and 1
-                ambientTemp = 62 * a-20;
+                BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+                ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
             }
             //here we set the various temperatures to range
             if(fireTemperature > MaxFireTemp) {

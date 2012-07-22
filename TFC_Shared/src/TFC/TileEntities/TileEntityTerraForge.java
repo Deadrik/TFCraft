@@ -599,10 +599,8 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
 
             if(ambientTemp == -1000)	
             {
-                BiomeGenBase var25 = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-                float a = var25.getFloatTemperature();
-                a = a / 2.0F;//Normalize the value to between 0 and 1
-                ambientTemp = 62 * a-20;
+                BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+                ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
             }
             //here we set the various temperatures to range
             if(fireTemperature > MaxFireTemp) {

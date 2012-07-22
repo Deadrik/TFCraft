@@ -115,7 +115,7 @@ public class ItemLooseRock extends ItemTerra
     @Override
     public void addCreativeItems(java.util.ArrayList list)
     {
-        for(int i = 0; i < 16; i++) {
+        for(int i = 0; i < 23; i++) {
             list.add(new ItemStack(this,1,i));
         }
     }

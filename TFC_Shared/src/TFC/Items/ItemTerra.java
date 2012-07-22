@@ -2,6 +2,8 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Core.HeatIndex;
+import TFC.Core.HeatManager;
 import TFC.Core.TFCHeat;
 
 import net.minecraft.src.Enchantment;
@@ -64,11 +66,12 @@ public class ItemTerra extends Item  implements ITextureProvider
             if(stackTagCompound.hasKey("temperature"))
             {
                 float temp = stackTagCompound.getFloat("temperature");
-                float meltTemp = 0;
-                if(stackTagCompound.hasKey("Item1Melted") && stackTagCompound.getBoolean("Item1Melted") == true)
-                    meltTemp = TFCHeat.getMeltingPoint(is);
-                else
-                    meltTemp = TFCHeat.getMeltingPoint(is);
+                float meltTemp = -1;
+                HeatIndex hi = HeatManager.getInstance().findMatchingIndex(is);
+                if(hi != null)
+                {
+                    meltTemp = hi.meltTemp;
+                }
 
                 if(meltTemp != -1)
                 {

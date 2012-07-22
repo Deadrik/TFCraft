@@ -85,14 +85,17 @@ public class BlockSlab extends BlockPartial
      * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
      * axisAlignedBB, arrayList
      */
-    public void getCollidingBoundingBoxes(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
     {
-        AxisAlignedBB var7 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+        AxisAlignedBB var7 = this.getCollisionBoundingBoxFromPool(world, i, j, k);
 
         if (var7 != null && par5AxisAlignedBB.intersectsWith(var7))
         {
+            var7 =  getCollisionBoundingBoxFromPool(world,i,j,k);
             par6ArrayList.add(var7);
         }
+        super.getCollidingBoundingBoxes(world, i, j, k, par5AxisAlignedBB, par6ArrayList);
+        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
     
     /**
@@ -118,6 +121,8 @@ public class BlockSlab extends BlockPartial
         byte extraZ2 = (byte) ((te.extraData >> 20) & 0xf);
 
         return AxisAlignedBB.getBoundingBoxFromPool(i + (0.1F * extraX), j + (0.1F * extraY),  k + (0.1F * extraZ), i + (1 - (0.1F * extraX2)), j + (1 - (0.1F * extraY2)), k + (1 - (0.1F * extraZ2)));
+        
+        //return super.getCollisionBoundingBoxFromPool(world, i, j, k);
     }
     
     /**

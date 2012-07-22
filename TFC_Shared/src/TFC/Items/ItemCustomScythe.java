@@ -11,7 +11,7 @@ implements ITextureProvider
 	public ItemCustomScythe(int i, EnumToolMaterial e)
 	{
 		super(i, e.getDamageVsEntity(),e, blocks);
-		this.setMaxDamage(e.getMaxUses());
+		this.setMaxDamage(e.getMaxUses()*3);
 		this.weaponDamage = e.getDamageVsEntity();
 		this.efficiencyOnProperMaterial = e.getEfficiencyOnProperMaterial();
 	}

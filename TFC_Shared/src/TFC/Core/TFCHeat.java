@@ -582,14 +582,12 @@ public class TFCHeat
 
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
-		return (0.70F * (fireTemp / fireMaxTemp)) * getSpecificHeat(is);
+		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is);
 	}
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
 		float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
-		ambient = ambient / 2.0F;//Normalize the value to between 0 and 1
-		ambient = 62 * ambient-20;
 
 		for(int i = 0; i < inventory.length; i++)
 		{
@@ -636,8 +634,6 @@ public class TFCHeat
 	public static void HandleContainerHeatChest(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
     {
         float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
-        ambient = ambient / 2.0F;//Normalize the value to between 0 and 1
-        ambient = 62 * ambient-20;
 
         for(int i = 0; i < inventory.length; i++)
         {
@@ -713,8 +709,6 @@ public class TFCHeat
 	
 	public static float getNormalizedTemp(float a)
     {
-//        a = a / 2.5F;//Normalize the value to between 0 and 1
-//        a = (60 * a)-20;
         return a;
     }
 }

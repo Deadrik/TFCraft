@@ -1019,7 +1019,7 @@ public class ClientProxy implements IProxy
             //ModLoader.addLocalization("item.Stick."+WoodNames[i]+".name", WoodNames[i]+" Stick");
         }
         ModLoader.addLocalization("item.Stick.name", "Stick");
-        String[] FruitTreeNames = {"Red Apple","Banana","Green Apple","Orange","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
+        String[] FruitTreeNames = {"Red Apple","Banana", "Orange", "Green Apple","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
         for(int i= 0; i < FruitTreeNames.length; i++)
         {
             ModLoader.addLocalization("item.FruitSapling1."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");

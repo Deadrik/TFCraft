@@ -408,7 +408,7 @@
      }
  
      /**
-@@ -296,23 +549,115 @@
+@@ -296,23 +549,114 @@
       */
      public final int getIntTemperature()
      {
@@ -463,6 +463,18 @@
 +    public final float getFloatTemperature()
      {
 -        return this.rainfall;
++        float temp = getTemp();
++        if(temp <= 0)
++        {
++            return 0;
++        }
++        else
++            return 0.5f;
+     }
+-
++    
++    private float getTemp()
++    {
 +        float day = (float)TFCSeasons.getDayOfYear()+1;
 +        Random R = new Random((int)day * TFCSeasons.currentYear);
 +        float mod = getMonthTemp(TFCSeasons.currentMonth);
@@ -478,41 +490,28 @@
 +            hourMod = 0.2F - (((float)(hour-12)/11) * 0.2F);
 +        
 +        float m = 0;
-+//        if(modLast > mod)
-+//        {
-+//            m = ((modLast-mod)/30)*day2;
-+//            m = (modLast - m);
-+//            float t = (this.temperature * m)+hourMod;
-+//            return t;   
-+//        }
-+//        else
-+//        {
-+//            m = ((mod-modLast)/30)*day2;
-+//            m = (modLast + m);
-+//            float t = (this.temperature * m)+hourMod;
-+//            return t;    
-+//        }
++        float temp = 0;
 +        
 +        if(modLast > mod)
 +        {
 +            m = ((modLast-mod)/30)*day2;
 +            m = (modLast - m);
-+            float t = (this.temperature * m)+(hourMod*this.temperature);
-+            return t;   
++            temp = (this.temperature * m)+(hourMod*this.temperature); 
 +        }
 +        else
 +        {
 +            m = ((mod-modLast)/30)*day2;
 +            m = (modLast + m);
-+            float t = (this.temperature * m)+(hourMod*this.temperature);
-+            return t;    
++            temp = (this.temperature * m)+(hourMod*this.temperature);
 +        }
-     }
--
++        
++        return temp;
++    }
 +    
 +    public final float getHeightAdjustedTemperature(int y)
 +    {
-+        float temp = getFloatTemperature();
++        float temp = getTemp();
++        
 +        if(y > 180)
 +            temp -= temp * (y-180)/90;
 +        return temp;
@@ -533,7 +532,7 @@
      }
  
      public void decorate(World par1World, Random par2Random, int par3, int par4)
-@@ -325,9 +670,14 @@
+@@ -325,9 +669,14 @@
       */
      public int getBiomeGrassColor()
      {
@@ -549,7 +548,7 @@
      }
  
      /**
-@@ -335,8 +685,393 @@
+@@ -335,8 +684,393 @@
       */
      public int getBiomeFoliageColor()
      {

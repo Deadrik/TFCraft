@@ -416,7 +416,8 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     {
         TFC_Core.Generate(world,rand, chunkX, chunkZ,5,96);
         TFC_Core.Generate(world,rand, chunkX, chunkZ,64,130);
-        TFC_Core.GenerateHigh(world,rand, chunkX, chunkZ,100,224);
+        TFC_Core.GenerateHigh(world,rand, chunkX, chunkZ,100,150);
+        TFC_Core.GenerateHigh(world,rand, chunkX, chunkZ,130,200);
 
         TFC_Core.GeneratePits(world,rand, chunkX, chunkZ);
         TFC_Core.GeneratePlants(world,rand, chunkX, chunkZ);
@@ -1113,7 +1114,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     @Override
     public String getVersion()
     {
-        return "Beta 2 Build 46b";
+        return "Beta 2 Build 46e";
     }
 
     @Override
