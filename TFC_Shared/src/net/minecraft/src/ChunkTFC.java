@@ -94,5 +94,39 @@ public class ChunkTFC extends Chunk
         }
         setStorageArrays(EBS);
     }
+    
+//    public ChunkTFC(World world, byte[] ids, byte[] metadata, int chunkX, int chunkZ)
+//    {
+//        super(world, chunkX, chunkZ);
+//        
+//        ExtendedBlockStorage[] EBS = getBlockStorageArray();
+//        int height = ids.length / 256;
+//
+//        for (int x = 0; x < 16; ++x)
+//        {
+//            for (int z = 0; z < 16; ++z)
+//            {
+//                for (int y = 0; y < height; ++y)
+//                {
+//                    int index = x << 12 | z << 8 | y;
+//                    int id    = ids[index] & 0xFF;
+//                    int meta  = metadata[index] & 0x0F;
+//
+//                    if (id != 0)
+//                    {
+//                        int chunkY = y >> 4;
+//
+//                        if (EBS[chunkY] == null)
+//                        {
+//                            EBS[chunkY] = new ExtendedBlockStorage(chunkY << 4);
+//                        }
+//
+//                        EBS[chunkY].setExtBlockID(x, y & 15, z, id);
+//                        EBS[chunkY].setExtBlockMetadata(x, y & 15, z, meta);
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }

@@ -175,8 +175,13 @@ public class MapGenRiverRavineTFC extends MapGenBase
 												var48 = true;
 											}
 
-											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
-													var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID)
+											if (var53 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var53 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
+                                                    var53 == (byte)mod_TFC_Core.terraStoneSed.blockID || var53 == (byte)mod_TFC_Core.terraStoneMM.blockID || 
+                                                    var53 == (byte)Block.stone.blockID || var53 == (byte)Block.dirt.blockID || (byte)var53 == Block.grass.blockID ||
+                                                    var53 == (byte)mod_TFC_Core.terraGrass.blockID || var53 == (byte)mod_TFC_Core.terraGrass2.blockID||
+                                                    var53 == (byte)mod_TFC_Core.terraDirt.blockID || var53 == (byte)mod_TFC_Core.terraDirt2.blockID||
+                                                    var53 == (byte)mod_TFC_Core.terraClayGrass.blockID || var53 == (byte)mod_TFC_Core.terraClayGrass2.blockID||
+                                                    var53 == (byte)mod_TFC_Core.terraClay.blockID || var53 == (byte)mod_TFC_Core.terraClay2.blockID)
 											{
 												if (var49 < 10)
 												{

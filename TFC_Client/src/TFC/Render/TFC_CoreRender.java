@@ -1980,6 +1980,7 @@ public class TFC_CoreRender
         int j1 = block.getMixedBrightnessForBlock(blockAccess, i, j, k);
         tessellator.setBrightness(j1);
         tessellator.setColorOpaque_F(f, f, f);
+
         int k1 = block.getBlockTexture(blockAccess, i, j, k, 0);
         int l1 = (k1 & 0xf) << 4;
         int i2 = k1 & 0xf0;
@@ -1994,6 +1995,11 @@ public class TFC_CoreRender
         double minZ = (double)k + block.minZ;
         double maxZ = (double)k + block.maxZ;
         double maxY = (double)j + block.maxY;
+        
+        int var10 = blockAccess.getBiomeGenForCoords(i, k).waterColorMultiplier;
+        int waterR = (var10 & 16711680) >> 16;
+        int waterG = (var10 & 65280) >> 8;
+        int waterB = var10 & 255;
 
         //render ramp
         if(!((BlockTerraSluice)block).isBlockFootOfBed(l))
@@ -2025,14 +2031,15 @@ public class TFC_CoreRender
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
                     //draw water plane
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    //tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(minX, maxY, minZ, d1, d2);//d,d3
                     tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, d1, d3);//d,d2
                     tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, d, d3);//d1,d2
                     tessellator.addVertexWithUV(maxX, maxY, minZ, d, d2);//d1,d3
                 }
             }
-            if(i1 == 1)
+            else if(i1 == 1)
             {
                 //ribs
                 block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
@@ -2060,14 +2067,14 @@ public class TFC_CoreRender
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
                     //draw water plane
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, d, d3);
                     tessellator.addVertexWithUV(maxX, maxY, maxZ, d, d2);
                     tessellator.addVertexWithUV(maxX, maxY, minZ, d1, d2);
                     tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d1, d3);
                 }
             }
-            if(i1 == 2)
+            else if(i1 == 2)
             {
                 //ribs
                 block.setBlockBounds(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
@@ -2095,7 +2102,7 @@ public class TFC_CoreRender
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
                     //draw water plane
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d, d3);
                     tessellator.addVertexWithUV(minX, maxY, maxZ, d, d2);
                     tessellator.addVertexWithUV(maxX, maxY, maxZ, d1, d2);
@@ -2104,7 +2111,7 @@ public class TFC_CoreRender
 
 
             }
-            if(i1 == 3)
+            else if(i1 == 3)
             {        
                 //ribs
                 block.setBlockBounds(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
@@ -2131,7 +2138,7 @@ public class TFC_CoreRender
                     d2 = (float)i2 / 256F;
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(maxX, minY+0.6f, minZ, d, d3);
                     tessellator.addVertexWithUV(minX, maxY, minZ, d, d2);
                     tessellator.addVertexWithUV(minX, maxY, maxZ, d1, d2);
@@ -2171,7 +2178,7 @@ public class TFC_CoreRender
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
                     //draw water plane
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d1, d2);//d,d3
                     tessellator.addVertexWithUV(minX, minY, maxZ, d1, d3);//d,d2
                     tessellator.addVertexWithUV(maxX, minY, maxZ, d, d3);//d1,d2
@@ -2208,7 +2215,7 @@ public class TFC_CoreRender
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
                     //draw water plane
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(minX, minY, maxZ, d, d3);
                     tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, d, d2);
                     tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d1, d2);
@@ -2238,13 +2245,14 @@ public class TFC_CoreRender
                     l1 = (k1 & 0xf) << 4;
                     i2 = k1 & 0xf0;
                     l = block.colorMultiplier(blockAccess, i, j, k);
+                    
                     //reassign the uv coords
                     d = (float)l1 / 256F;
                     d1 = ((double)(l1 + 16) - 0.01D) / 256D;
                     d2 = (float)i2 / 256F;
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
 
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(minX, minY, minZ, d, d3);
                     tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, d, d2);
                     tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, d1, d2);
@@ -2279,7 +2287,7 @@ public class TFC_CoreRender
                     d1 = ((double)(l1 + 16) - 0.01D) / 256D;
                     d2 = (float)i2 / 256F;
                     d3 = ((double)(i2 + 16) - 0.01D) / 256D;
-                    tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                    tessellator.setColorOpaque(waterR, waterG, waterB);
                     tessellator.addVertexWithUV(maxX, minY, minZ, d, d3);
                     tessellator.addVertexWithUV(minX, minY+0.6f, minZ, d, d2);
                     tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, d1, d2);

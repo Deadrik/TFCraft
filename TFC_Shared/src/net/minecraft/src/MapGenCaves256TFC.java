@@ -2,12 +2,20 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class MapGenRiverCavesTFC extends MapGenBase
+public class MapGenCaves256TFC extends MapGenBase
 {
+    
+    private byte[] metaArray;
+    
+    public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+    {
+        metaArray = meta;
+        super.generate(par1IChunkProvider, par2World, par3, par4, id);
+    }
 	/**
 	 * Generates a node in the current cave system recursion tree.
 	 */
-	protected void generateCaveNode(long par1, int par3, int par4, byte[] idArray, double par6, double genY, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width, double waterHeight)
+	protected void generateCaveNode(long par1, int par3, int par4, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
 	{
 		double var19 = (double)(par3 * 16 + 8);
 		double var21 = (double)(par4 * 16 + 8);
@@ -38,7 +46,7 @@ public class MapGenRiverCavesTFC extends MapGenBase
 			float var33 = MathHelper.cos(par14);
 			float var34 = MathHelper.sin(par14);
 			par6 += (double)(MathHelper.cos(par13) * var33);
-			genY += (double)var34;
+			par8 += (double)var34;
 			par10 += (double)(MathHelper.sin(par13) * var33);
 
 			if (var28)
@@ -59,8 +67,8 @@ public class MapGenRiverCavesTFC extends MapGenBase
 
 			if (!var54 && par15 == var27 && par12 > 1.0F && par16 > 0)
 			{
-				this.generateCaveNode(var25.nextLong(), par3, par4, idArray, par6, genY, par10, var25.nextFloat() * 0.5F + 0.5F, par13 - (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D, width, waterHeight);
-				this.generateCaveNode(var25.nextLong(), par3, par4, idArray, par6, genY, par10, var25.nextFloat() * 0.5F + 0.5F, par13 + (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D, width, waterHeight);
+				this.generateCaveNode(var25.nextLong(), par3, par4, blockArray, par6, par8, par10, var25.nextFloat() * 0.5F + 0.5F, par13 - (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D, width);
+				this.generateCaveNode(var25.nextLong(), par3, par4, blockArray, par6, par8, par10, var25.nextFloat() * 0.5F + 0.5F, par13 + (float)Math.PI / 2F, par14 / 3.0F, par15, par16, 1.0D, width);
 				return;
 			}
 
@@ -80,8 +88,8 @@ public class MapGenRiverCavesTFC extends MapGenBase
 				{
 					int var55 = MathHelper.floor_double(par6 - var29) - par3 * 16 - 1;
 					int var36 = MathHelper.floor_double(par6 + var29) - par3 * 16 + 1;
-					int var57 = MathHelper.floor_double(genY - var31) - 1;
-					int yCoord = MathHelper.floor_double(genY + var31) + 1;
+					int var57 = MathHelper.floor_double(par8 - var31) - 1;
+					int yCoord = MathHelper.floor_double(par8 + var31) + 1;
 					int var56 = MathHelper.floor_double(par10 - var29) - par4 * 16 - 1;
 					int var40 = MathHelper.floor_double(par10 + var29) - par4 * 16 + 1;
 
@@ -100,9 +108,9 @@ public class MapGenRiverCavesTFC extends MapGenBase
 						var57 = 1;
 					}
 
-					if (yCoord > 127)
+					if (yCoord > 255)
 					{
-						yCoord = 127;
+						yCoord = 255;
 					}
 
 					if (var56 < 0)
@@ -125,13 +133,13 @@ public class MapGenRiverCavesTFC extends MapGenBase
 						{
 							for (int var44 = yCoord + 1; !var58 && var44 >= var57 - 1; --var44)
 							{
-								var45 = (var42 * 16 + var43) * 128 + var44;
+								var45 = (var42 * 16 + var43) * 256 + var44;
 
-								if (var44 >= 0 && var44 < 128)
+								if (var44 >= 0 && var44 < 256)
 								{
-									if (idArray[var45] == Block.waterMoving.blockID || idArray[var45] == Block.waterStill.blockID)
+									if (blockArray[var45] == Block.waterMoving.blockID || blockArray[var45] == Block.waterStill.blockID  || blockArray[var45] == mod_TFC_Core.finiteWater.blockID)
 									{
-										var58 = false;
+										var58 = true;
 									}
 
 									if (var44 != var57 - 1 && var42 != var55 && var42 != var36 - 1 && var43 != var56 && var43 != var40 - 1)
@@ -152,18 +160,18 @@ public class MapGenRiverCavesTFC extends MapGenBase
 							for (var45 = var56; var45 < var40; ++var45)
 							{
 								double var46 = ((double)(var45 + par4 * 16) + 0.5D - par10) / var29;
-								int var48 = (var42 * 16 + var45) * 128 + yCoord;
+								int var48 = (var42 * 16 + var45) * 256 + yCoord;
 								boolean var49 = false;
 
 								if (var59 * var59 + var46 * var46 < 1.0D)
 								{
 									for (int var50 = yCoord - 1; var50 >= var57; --var50)
 									{
-										double var51 = ((double)var50 + 0.5D - genY) / var31;
+										double var51 = ((double)var50 + 0.5D - par8) / var31;
 
 										if (var51 > -0.7D && var59 * var59 + var51 * var51 + var46 * var46 < 1.0D)
 										{
-											byte var53 = idArray[var48];
+											byte var53 = blockArray[var48];
 
 											if (var53 == mod_TFC_Core.terraGrass.blockID || var53 == mod_TFC_Core.terraGrass2.blockID)
 											{
@@ -171,18 +179,39 @@ public class MapGenRiverCavesTFC extends MapGenBase
 											}
 
 											if (var53 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var53 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
-													var53 == (byte)mod_TFC_Core.terraStoneSed.blockID || var53 == (byte)mod_TFC_Core.terraStoneMM.blockID || var53 == Block.stone.blockID || var53 == Block.dirt.blockID || var53 == Block.grass.blockID)
+													var53 == (byte)mod_TFC_Core.terraStoneSed.blockID || var53 == (byte)mod_TFC_Core.terraStoneMM.blockID || 
+													var53 == Block.stone.blockID || var53 == Block.dirt.blockID || var53 == Block.grass.blockID ||
+													var53 == mod_TFC_Core.terraGrass.blockID || var53 == mod_TFC_Core.terraGrass2.blockID ||
+                                                    var53 == mod_TFC_Core.terraDirt.blockID || var53 == mod_TFC_Core.terraDirt2.blockID ||
+                                                    var53 == mod_TFC_Core.terraClayGrass.blockID || var53 == mod_TFC_Core.terraClayGrass2.blockID ||
+                                                    var53 == mod_TFC_Core.terraClay.blockID || var53 == mod_TFC_Core.terraClay2.blockID)
 											{
 												if (var50 < 10)
 												{
-													idArray[var48] = (byte)Block.lavaStill.blockID;
+													blockArray[var48] = (byte)Block.lavaStill.blockID;
+													metaArray[var48] = 0;
 												}
 												else
 												{
-												    if(var50 < waterHeight)
-												        idArray[var48] = (byte)Block.waterStill.blockID;
-												    else
-												        idArray[var48] = 0;
+												    byte meta = 0;
+                                                    if(var49)
+                                                    {
+                                                        meta = metaArray[var48];
+                                                    }
+                                                    
+													blockArray[var48] = 0;
+													metaArray[var48] = 0;
+
+//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
+//													{
+//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
+//														metaArray[var48-1] = meta;
+//													}
+//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
+//													{
+//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
+//														metaArray[var48-1] = meta;
+//													}
 												}
 											}
 										}
@@ -204,41 +233,47 @@ public class MapGenRiverCavesTFC extends MapGenBase
 	}
 
 	/**
+	 * Generates a larger initial cave node than usual. Called 25% of the time.
+	 */
+	protected void generateLargeCaveNode(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10)
+	{
+		this.generateCaveNode(par1, par3, par4, par5ArrayOfByte, par6, par8, par10, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D, 2.5D);
+	}
+
+	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
 	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
 	{
-		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(10) + 1) + 1);
+		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 		BiomeGenBase biome = world.getBiomeGenForCoords(par2, par4);
 		
-
-		if (this.rand.nextInt(35) != 0)
+		if (this.rand.nextInt(15) != 0)
 		{
 			var7 = 0;
 		}
-		
-		double y = (double)this.rand.nextInt(70)+30;
 
 		for (int var8 = 0; var8 < var7; ++var8)
 		{
-			double xCoord = (double)(par2 * 16 + this.rand.nextInt(16));
-			double yCoord = (double)this.rand.nextInt(this.rand.nextInt(20)+1);
-			double zCoord = (double)(par3 * 16 + this.rand.nextInt(16));
+			double var9 = (double)(par2 * 16 + this.rand.nextInt(16));
+			double height = (double)this.rand.nextInt(this.rand.nextInt(247) + 8);
+			double var13 = (double)(par4 * 16 + this.rand.nextInt(16));
 			int var15 = 1;
 			
-			double width = 1.5;
-			if(yCoord < 32)
-			    width = 3.5;
-			else if (yCoord < 64)
-			    width = 3.5;
-			else if (yCoord < 96)
+			double width = 2;
+			if(height < 32)
+			    width = 4.5;
+			else if (height < 64)
+			    width = 3.0;
+			else if (height < 96)
                 width = 2.5;
 			
 			int layerID = biome.getRockLayer(par3);
+			
 			if(layerID == mod_TFC_Core.terraStoneIgEx.blockID)
-			    width -= 0.75;
+			    width -= 0.55;
 			else if(layerID == mod_TFC_Core.terraStoneIgIn.blockID)
-                width -= 0.75;
+                width -= 0.55;
 			else if(layerID == mod_TFC_Core.terraStoneSed.blockID)
                 width -= 0.3;
 			else if(layerID == mod_TFC_Core.terraStoneMM.blockID)
@@ -246,6 +281,12 @@ public class MapGenRiverCavesTFC extends MapGenBase
 			
 			if(this.rand.nextInt(8) == 0)
 			    width += 1 ;
+
+			if (this.rand.nextInt(4) == 0)
+			{
+				this.generateLargeCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var9, height, var13);
+				var15 += this.rand.nextInt(4);
+			}
 
 			for (int var16 = 0; var16 < var15; ++var16)
 			{
@@ -258,7 +299,7 @@ public class MapGenRiverCavesTFC extends MapGenBase
 					var19 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.generateCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, xCoord, yCoord, zCoord, var19, var17, var18, 0, 0, 1.0D, width, yCoord);
+				this.generateCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var9, height, var13, var19, var17, var18, 0, 0, 1.0D, width);
 			}
 		}
 	}

@@ -184,9 +184,34 @@ public class BlockTerraSluice extends BlockContainer
 		{
 			world.setBlockAndMetadataWithNotify(i + byte0, j, k + byte1, this.blockID, l + 8);
 		}
+		
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		//mc.ingameGUI.addChatMessage("Dir = "+(new StringBuilder()).append(l).toString());
 	}
+	
+	public boolean canBlockStay(World world, int i, int j, int k)
+    {
+	    int l = getDirectionFromMetadata(world.getBlockMetadata(i, j, k));
+	    if(l == 0)//+z
+        {
+            if(!world.isBlockNormalCube(i+1, j, k) || !world.isBlockNormalCube(i-1, j, k) || !world.isBlockNormalCube(i, j, k-1) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || world.isBlockNormalCube(i, j+1, k))
+                return false;
+        }
+        if(l == 1)//-x
+        {
+            
+        }
+        if(l == 2)//-z
+        {
+            
+        }
+        if(l == 3)//+x
+        {
+            
+        }
+        return true;
+    }
 
 	public void onBlockRemoval(World world, int i, int j, int k)
 	{
@@ -208,14 +233,14 @@ public class BlockTerraSluice extends BlockContainer
 
 		if(isBlockFootOfBed(i1))
 		{
-			if(world.getBlockId(i - headBlockToFootBlockMap[j1][0], j, k - headBlockToFootBlockMap[j1][1]) != blockID)
+			if(world.getBlockId(i - headBlockToFootBlockMap[j1][0], j, k - headBlockToFootBlockMap[j1][1]) != blockID || canBlockStay(world, i, j, k))
 			{
 				world.setBlockWithNotify(i, j, k, 0);
 			}
 		}
 		else
 		{
-			if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID)
+			if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID || canBlockStay(world, i, j, k))
 			{
 				world.setBlockWithNotify(i, j, k, 0);
 				if(!world.isRemote)

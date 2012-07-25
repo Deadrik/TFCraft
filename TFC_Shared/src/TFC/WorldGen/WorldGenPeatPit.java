@@ -24,7 +24,7 @@ public class WorldGenPeatPit extends WorldGenerator
 		int var6 = par2Random.nextInt(this.numberOfBlocks - 8) + 8;
 		byte var7 = 2;
 
-		if(par2Random.nextInt(30) == 0 && par4 <= 150)
+		if(par2Random.nextInt(30) == 0 && par4 <= 146)
 		{
 			for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
 			{
@@ -39,8 +39,10 @@ public class WorldGenPeatPit extends WorldGenerator
 						{
 							int var13 = par1World.getBlockId(var8, var12, var9);
 							BiomeGenBase biome = par1World.getBiomeGenForCoords(var8, var9);
-							if(biome == BiomeGenBase.swampland || biome == BiomeGenBase.swamp10 || biome == BiomeGenBase.swamp2 || 
-									biome == BiomeGenBase.swamp3 || biome == BiomeGenBase.swamp4 || biome == BiomeGenBase.swamp5)
+							if(biome == BiomeGenBase.swampland|| biome == BiomeGenBase.swamp2 || biome == BiomeGenBase.swamp3 || 
+							        biome == BiomeGenBase.swamp4 || biome == BiomeGenBase.swamp5 || biome == BiomeGenBase.swamp6 || 
+							        biome == BiomeGenBase.swamp7 || biome == BiomeGenBase.swamp8 || biome == BiomeGenBase.swamp9 || 
+							        biome == BiomeGenBase.swamp10)
 							{
 								if (var13 == mod_TFC_Core.terraDirt.blockID || var13 == mod_TFC_Core.terraDirt2.blockID || 
 										var13 == mod_TFC_Core.terraClay.blockID || var13 == mod_TFC_Core.terraClay2.blockID || var13 == mod_TFC_Core.terraPeat.blockID)

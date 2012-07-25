@@ -32,13 +32,31 @@ public class TFC_Core
     {
         for(int n = 0; n < Layers.length/2;)
         {
-            BiomeGenBase biome = world.getBiomeGenForCoords(chunkX*16, chunkZ*16);
-            if((biome.SurfaceType == Layers[n] && (biome.SurfaceType == Layers[n+1] || Layers[n+1] == -1)) || 
-                    (biome.Layer1 == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (biome.Layer2 == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (biome.Layer3 == Layers[n] && (biome.Layer3Meta == Layers[n+1] || Layers[n+1] == -1)))
+            BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+            if((biome.SurfaceType == Layers[n] && (biome.SurfaceMeta == Layers[n+1] || Layers[n+1] == -1)) || 
+                    (biome.Layer1Type == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
+                    (biome.Layer2Type == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
+                    (biome.Layer3Type == Layers[n] && (biome.Layer3Meta == Layers[n+1] || Layers[n+1] == -1)))
             {
                 new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generate(
+                        world, rand, chunkX, chunkZ, min, max);
+            }
+            n+=2;
+        }
+    }
+    
+    private static void createOreVein(int i, int j, int[] Layers, int rarity, int veinSize, 
+            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max)
+    {
+        for(int n = 0; n < Layers.length/2;)
+        {
+            BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+            if((biome.SurfaceType == Layers[n] && (biome.SurfaceMeta == Layers[n+1] || Layers[n+1] == -1)) || 
+                    (biome.Layer1Type == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
+                    (biome.Layer2Type == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
+                    (biome.Layer3Type == Layers[n] && (biome.Layer3Meta == Layers[n+1] || Layers[n+1] == -1)))
+            {
+                new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generateVein(
                         world, rand, chunkX, chunkZ, min, max);
             }
             n+=2;
@@ -169,94 +187,94 @@ public class TFC_Core
     {
         int height = max-min;
         //============Copper
-        createOre(mod_TFC_Core.terraOre.blockID, 0,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
-                /*rarity*/50,/*veinSize*/80,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 0,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
+                /*rarity*/100,/*veinSize*/80,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Gold
-        createOre(mod_TFC_Core.terraOre.blockID, 1,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneIgIn.blockID,-1},//Ig veins
-                /*rarity*/90,/*veinSize*/35,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 1,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneIgIn.blockID,-1},//Ig veins
+                /*rarity*/130,/*veinSize*/35,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, min, max);
 
         //============Hematite
-        createOre(mod_TFC_Core.terraOre.blockID, 3,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx veins
-                /*rarity*/50,/*veinSize*/80,/*veinAmt*/22,/*height*/height,/*diameter*/100,/*vDensity*/40,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 3,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx veins
+                /*rarity*/100,/*veinSize*/80,/*veinAmt*/22,/*height*/height,/*diameter*/100,/*vDensity*/40,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
 
-        //============Silver1
-        createOre(mod_TFC_Core.terraOre.blockID, 4,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0,mod_TFC_Core.terraStoneMM.blockID,4},//granite and gneiss, veins
-                /*rarity*/50,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
+        //============Silver
+        createOreVein(mod_TFC_Core.terraOre.blockID, 4,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0,mod_TFC_Core.terraStoneMM.blockID,4},//granite and gneiss, veins
+                /*rarity*/100,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cassiterite
-        createOre(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0},//Granite Veins
-                /*rarity*/50,/*veinSize*/85,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/50,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0},//Granite Veins
+                /*rarity*/100,/*veinSize*/85,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/50,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cassiterite2
-        createOre(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx Veins
-                /*rarity*/70,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx Veins
+                /*rarity*/140,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Galena
-        createOre(mod_TFC_Core.terraOre.blockID, 6,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneMM.blockID,-1,
+        createOreVein(mod_TFC_Core.terraOre.blockID, 6,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneMM.blockID,-1,
                 mod_TFC_Core.terraStoneIgIn.blockID,0,mod_TFC_Core.terraStoneSed.blockID,5},//igex, mm, granite, limestone as veins
-                /*rarity*/60,/*veinSize*/80,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/120,/*veinSize*/80,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Bismuthinite
-        createOre(mod_TFC_Core.terraOre.blockID, 7,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,-1},//Granite Veins
-                /*rarity*/60,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 7,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,-1},//Granite Veins
+                /*rarity*/120,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Garnierite
-        createOre(mod_TFC_Core.terraOre.blockID, 8,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//Gabbro Veins
-                /*rarity*/80,/*veinSize*/40,/*veinAmt*/15,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/10,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 8,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//Gabbro Veins
+                /*rarity*/160,/*veinSize*/40,/*veinAmt*/15,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/10,         world, rand, chunkX, chunkZ, min, max);
 
         //============Malachite
-        createOre(mod_TFC_Core.terraOre.blockID, 9,new int[]{mod_TFC_Core.terraStoneSed.blockID,5,mod_TFC_Core.terraStoneMM.blockID,5},//limestone and marble veins
-                /*rarity*/70,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 9,new int[]{mod_TFC_Core.terraStoneSed.blockID,5,mod_TFC_Core.terraStoneMM.blockID,5},//limestone and marble veins
+                /*rarity*/140,/*veinSize*/80,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, min, max);
 
         //============Magnetite
-        createOre(mod_TFC_Core.terraOre.blockID, 10,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
-                /*rarity*/100,/*veinSize*/80,/*veinAmt*/16,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 10,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
+                /*rarity*/180,/*veinSize*/80,/*veinAmt*/16,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Limonite
-        createOre(mod_TFC_Core.terraOre.blockID, 11,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
-                /*rarity*/100,/*veinSize*/85,/*veinAmt*/20,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 11,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
+                /*rarity*/180,/*veinSize*/85,/*veinAmt*/20,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Sphalerite
-        createOre(mod_TFC_Core.terraOre.blockID, 12,new int[]{mod_TFC_Core.terraStoneMM.blockID,-1},//mm, veins
-                /*rarity*/70,/*veinSize*/80,/*veinAmt*/18,/*height*/height,/*diameter*/100,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
+        createOreVein(mod_TFC_Core.terraOre.blockID, 12,new int[]{mod_TFC_Core.terraStoneMM.blockID,-1},//mm, veins
+                /*rarity*/140,/*veinSize*/80,/*veinAmt*/18,/*height*/height,/*diameter*/100,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Tetrahedrite
-        createOre(mod_TFC_Core.terraOre.blockID, 13,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneMM.blockID,-1,
+        createOreVein(mod_TFC_Core.terraOre.blockID, 13,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneMM.blockID,-1,
                 mod_TFC_Core.terraStoneIgIn.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,-1},//everything, veins
                 /*rarity*/120,/*veinSize*/85,/*veinAmt*/25,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
 
         //============Bituminous Coal
         createOre(mod_TFC_Core.terraOre.blockID, 14,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, veins
-                /*rarity*/80,/*veinSize*/28,/*veinAmt*/16,/*height*/height,/*diameter*/100,/*vDensity*/60,/*hDensity*/70,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/80,/*veinSize*/28,/*veinAmt*/30,/*height*/height,/*diameter*/200,/*vDensity*/60,/*hDensity*/70,         world, rand, chunkX, chunkZ, min, max);
 
         //============Lignite
         createOre(mod_TFC_Core.terraOre.blockID, 15,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, veins
-                /*rarity*/80,/*veinSize*/28,/*veinAmt*/16,/*height*/height,/*diameter*/100,/*vDensity*/10,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
+                /*rarity*/80,/*veinSize*/28,/*veinAmt*/30,/*height*/height,/*diameter*/200,/*vDensity*/10,/*hDensity*/80,         world, rand, chunkX, chunkZ, min, max);
 
         //        //============Kaolinite
         //        createOre(mod_TFC_Core.terraOre2.blockID, 0,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, large clusters
         //                /*rarity*/60,/*veinSize*/40,/*veinAmt*/2,/*height*/height,/*diameter*/40,/*vDensity*/50,/*hDensity*/90,         world, rand, chunkX, chunkZ, min, max);
 
         //============Gypsum
-        createOre(mod_TFC_Core.terraOre2.blockID, 1,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, large clusters
+        createOreVein(mod_TFC_Core.terraOre2.blockID, 1,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, large clusters
                 /*rarity*/110,/*veinSize*/40,/*veinAmt*/12,/*height*/height,/*diameter*/40,/*vDensity*/50,/*hDensity*/90,         world, rand, chunkX, chunkZ, min, max);
 
         //============Satinspar
-        createOre(mod_TFC_Core.terraOre2.blockID, 2,new int[]{mod_TFC_Core.terraOre2.blockID,8},//gypsum, small clusters
+        createOreVein(mod_TFC_Core.terraOre2.blockID, 2,new int[]{mod_TFC_Core.terraOre2.blockID,8},//gypsum, small clusters
                 /*rarity*/2,/*veinSize*/6,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Selenite
-        createOre(mod_TFC_Core.terraOre2.blockID, 3,new int[]{mod_TFC_Core.terraOre2.blockID,8},//gypsum, small clusters
+        createOreVein(mod_TFC_Core.terraOre2.blockID, 3,new int[]{mod_TFC_Core.terraOre2.blockID,8},//gypsum, small clusters
                 /*rarity*/2,/*veinSize*/6,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Graphite
-        createOre(mod_TFC_Core.terraOre2.blockID, 4,new int[]{mod_TFC_Core.terraStoneMM.blockID,4,mod_TFC_Core.terraStoneMM.blockID,0,
+        createOreVein(mod_TFC_Core.terraOre2.blockID, 4,new int[]{mod_TFC_Core.terraStoneMM.blockID,4,mod_TFC_Core.terraStoneMM.blockID,0,
                 mod_TFC_Core.terraStoneMM.blockID,5, mod_TFC_Core.terraStoneMM.blockID,3},//gneiss, quartzite, marble, schist, small clusters
                 /*rarity*/80,/*veinSize*/6,/*veinAmt*/24,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Kimberlite
-        createOre(mod_TFC_Core.terraOre2.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//Gabbro, large clusters
+        createOreVein(mod_TFC_Core.terraOre2.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//Gabbro, large clusters
                 /*rarity*/150,/*veinSize*/40,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/90,         world, rand, chunkX, chunkZ, min, max);
 
         //============Petrified Wood
@@ -325,7 +343,7 @@ public class TFC_Core
 
     public static void GenerateLooseRocks(World currentWorld, Random randomGenerator, int chunk_X, int chunk_Z)
     {
-        BiomeGenBase biome = currentWorld.getBiomeGenForCoords(chunk_X*16, chunk_Z*16);
+        BiomeGenBase biome = currentWorld.getBiomeGenForCoords(chunk_X, chunk_Z);
 
 
         for (int var2 = 0; var2 < ((BiomeDecoratorTFC)biome.biomeDecorator).looseRocksPerChunk; var2++)
@@ -357,7 +375,7 @@ public class TFC_Core
 
     public static void GeneratePlants(World world, Random rand, int chunk_X, int chunk_Z)
     {
-        BiomeGenBase biome = world.getBiomeGenForCoords(chunk_X*16, chunk_Z*16);
+        BiomeGenBase biome = world.getBiomeGenForCoords(chunk_X, chunk_Z);
         WorldGenCustomFlowers plantYellowGen = new WorldGenCustomFlowers(Block.plantYellow.blockID);
         WorldGenCustomFlowers plantRedGen = new WorldGenCustomFlowers(Block.plantRed.blockID);
         WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Block.mushroomBrown.blockID);
@@ -992,7 +1010,7 @@ public class TFC_Core
                             }
                         }
                     }
-                    else if(y <128 && id == 0 && (world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneIgEx.blockID || world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneIgIn.blockID || 
+                    else if(y <128 && id == 0 && world.getBlockLightValue(x, y-1, z) < 10 && (world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneIgEx.blockID || world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneIgIn.blockID || 
                             world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneSed.blockID || world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneMM.blockID))
                     {
                         if(world.getBlockId(x, y+1, z) == 0 && world.getBlockId(x, y+2, z) == 0 && world.getBlockId(x, y+3, z) == 0)

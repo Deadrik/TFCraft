@@ -22,9 +22,9 @@ public class WorldGenClayPit extends WorldGenerator
 	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
 	{
 		int var6 = par2Random.nextInt(this.numberOfBlocks - 2) + 2;
-		byte var7 = 1;
+		byte var7 = 2;
 
-		if(par2Random.nextInt(30) == 0 && par4 <= 150)
+		if(par2Random.nextInt(30) == 0 && par4 <= 147)
 		{
 			for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
 			{

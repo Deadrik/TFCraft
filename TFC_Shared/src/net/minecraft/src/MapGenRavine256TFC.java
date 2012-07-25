@@ -2,11 +2,19 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class MapGenRavineUpperTFC extends MapGenBase
+public class MapGenRavine256TFC extends MapGenBase
 {
 	private float[] field_35627_a = new float[1024];
 
-	protected void generateRavine(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17)
+	private byte[] metaArray;
+    
+    public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+    {
+        metaArray = meta;
+        super.generate(par1IChunkProvider, par2World, par3, par4, id);
+    }
+    
+	protected void generateRavine(long par1, int par3, int par4, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17)
 	{
 		Random var19 = new Random(par1);
 		double var20 = (double)(par3 * 16 + 8);
@@ -30,7 +38,7 @@ public class MapGenRavineUpperTFC extends MapGenBase
 
 		float var27 = 1.0F;
 
-		for (int var28 = 0; var28 < 128; ++var28)
+		for (int var28 = 0; var28 < 256; ++var28)
 		{
 			if (var28 == 0 || var19.nextInt(3) == 0)
 			{
@@ -95,9 +103,9 @@ public class MapGenRavineUpperTFC extends MapGenBase
 						var55 = 1;
 					}
 
-					if (var37 > 120)
+					if (var37 > 250)
 					{
-						var37 = 120;
+						var37 = 250;
 					}
 
 					if (var57 < 0)
@@ -120,11 +128,11 @@ public class MapGenRavineUpperTFC extends MapGenBase
 						{
 							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
 							{
-								var44 = (var41 * 16 + var42) * 128 + var43;
+								var44 = (var41 * 16 + var42) * 256 + var43;
 
-								if (var43 >= 0 && var43 < 128)
+								if (var43 >= 0 && var43 < 256)
 								{
-									if (par5ArrayOfByte[var44] == Block.waterMoving.blockID || par5ArrayOfByte[var44] == Block.waterStill.blockID)
+									if (blockArray[var44] == Block.waterMoving.blockID || blockArray[var44] == Block.waterStill.blockID || blockArray[var44] == mod_TFC_Core.finiteWater.blockID)
 									{
 										var58 = true;
 									}
@@ -147,7 +155,7 @@ public class MapGenRavineUpperTFC extends MapGenBase
 							for (var44 = var57; var44 < var39; ++var44)
 							{
 								double var45 = ((double)(var44 + par4 * 16) + 0.5D - par10) / var53;
-								int var47 = (var41 * 16 + var44) * 128 + var37;
+								int var47 = (var41 * 16 + var44) * 256 + var37;
 								boolean var48 = false;
 
 								if (var59 * var59 + var45 * var45 < 1.0D)
@@ -158,35 +166,43 @@ public class MapGenRavineUpperTFC extends MapGenBase
 
 										if ((var59 * var59 + var45 * var45) * (double)this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
-											byte var52 = par5ArrayOfByte[var47];
+											byte var52 = blockArray[var47];
 
 											if (var52 == mod_TFC_Core.terraGrass.blockID || var52 == mod_TFC_Core.terraGrass2.blockID)
 											{
 												var48 = true;
 											}
 
-											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
-													var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID ||
-													var52 == mod_TFC_Core.terraGrass.blockID || var52 == mod_TFC_Core.terraGrass2.blockID ||
-													var52 == mod_TFC_Core.terraDirt.blockID || var52 == mod_TFC_Core.terraDirt2.blockID ||
-                                                    var52 == mod_TFC_Core.terraClay.blockID || var52 == mod_TFC_Core.terraClay2.blockID ||
-                                                    var52 == mod_TFC_Core.terraClayGrass.blockID || var52 == mod_TFC_Core.terraClayGrass2.blockID || var52 == mod_TFC_Core.terraPeat.blockID)
+											if (var52 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
+											        var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || 
+											                var52 == (byte)Block.stone.blockID || var52 == (byte)Block.dirt.blockID || (byte)var52 == Block.grass.blockID ||
+											                        var52 == (byte)mod_TFC_Core.terraGrass.blockID || var52 == (byte)mod_TFC_Core.terraGrass2.blockID||
+											                                var52 == (byte)mod_TFC_Core.terraDirt.blockID || var52 == (byte)mod_TFC_Core.terraDirt2.blockID||
+											                                        var52 == (byte)mod_TFC_Core.terraClayGrass.blockID || var52 == (byte)mod_TFC_Core.terraClayGrass2.blockID||
+											                                                var52 == (byte)mod_TFC_Core.terraClay.blockID || var52 == (byte)mod_TFC_Core.terraClay2.blockID)
 											{
 												if (var49 < 10)
 												{
-													//par5ArrayOfByte[var47] = (byte)Block.lavaMoving.blockID;
+													blockArray[var47] = (byte)Block.lavaStill.blockID;
 												}
 												else
 												{
-													par5ArrayOfByte[var47] = 0;
+												    byte meta = 0;
+												    if(var48)
+												    {
+												        meta = metaArray[var47];
+												    }
+													blockArray[var47] = 0;
 
-//													if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
+//													if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
 //													{
-//														par5ArrayOfByte[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
+//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
+//														metaArray[var47-1] = meta;
 //													}
-//													else if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
+//													else if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
 //													{
-//														par5ArrayOfByte[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
+//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
+//														metaArray[var47-1] = meta;
 //													}
 
 												}
@@ -217,7 +233,7 @@ public class MapGenRavineUpperTFC extends MapGenBase
 		if (this.rand.nextInt(50) == 0)
 		{
 			double var7 = (double)(par2 * 16 + this.rand.nextInt(16));
-			double var9 = (double)(this.rand.nextInt(this.rand.nextInt(40) + 8) + 20);
+			double var9 = (double)(this.rand.nextInt(this.rand.nextInt(220) + 8) + 20);
 			double var11 = (double)(par3 * 16 + this.rand.nextInt(16));
 			byte var13 = 1;
 
