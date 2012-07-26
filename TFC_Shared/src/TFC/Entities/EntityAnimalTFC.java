@@ -65,7 +65,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		size_mod = (float) (((rand.nextInt (5) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		birthTime = TFCSeasons.getTotalTicks();
 		adultTime = birthTime;
-		adultAge = 90;		
+		adultAge = 90;		  
 	}
 
 	public EntityAnimalTFC(World par1World,EntityAnimalTFC mother, float F_size)

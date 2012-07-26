@@ -7,6 +7,7 @@ import TFC.WorldGen.WorldGenCustomHugeTrees;
 import TFC.WorldGen.WorldGenCustomRedwoodTrees;
 import TFC.WorldGen.WorldGenCustomShortTrees;
 import TFC.WorldGen.WorldGenCustomWillowTrees;
+import TFC.WorldGen.WorldGenDouglasFir;
 
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
@@ -68,7 +69,7 @@ public class BlockCustomSapling extends BlockCustomFlower implements ITexturePro
 		}
 		case 4:
 		{
-			obj = new WorldGenCustomShortTrees(false,4);
+			obj = new WorldGenDouglasFir(false,4);
 			break;
 		}
 		case 5:

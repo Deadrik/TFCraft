@@ -54,30 +54,14 @@ public class ItemTerraFood extends ItemFood  implements ITextureProvider
             {
                 float temp = stackTagCompound.getFloat("temperature");
                 float meltTemp = 0;
-                if(stackTagCompound.hasKey("Item1Melted") && stackTagCompound.getBoolean("Item1Melted") == true)
-                    meltTemp = TFCHeat.getMeltingPoint(is);
-                else
-                    meltTemp = TFCHeat.getMeltingPoint(is);
+                
+                meltTemp = TFCHeat.getMeltingPoint(is);
 
                 if(meltTemp != -1)
                 {
                     if(is.getItem() instanceof ItemFood)
                         arraylist.add(TFCHeat.getHeatColorFood(temp, meltTemp));
-                    else if(is.itemID == Item.stick.shiftedIndex)
-                        arraylist.add(TFCHeat.getHeatColorTorch(temp, meltTemp));
-                    else
-                        arraylist.add(TFCHeat.getHeatColor(temp, meltTemp));
                 }
-            }
-            if(stackTagCompound.hasKey("itemCraftingValue") && stackTagCompound.getByte("itemCraftingValue") != 0)
-            {
-                arraylist.add("This Item Has Been Worked");
-                if(stackTagCompound.hasKey("itemCraftingRule1"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule1")));
-                if(stackTagCompound.hasKey("itemCraftingRule2"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule2")));
-                if(stackTagCompound.hasKey("itemCraftingRule3"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule3")));
             }
         }
 	}

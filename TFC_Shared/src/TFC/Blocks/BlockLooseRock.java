@@ -1,5 +1,6 @@
 package TFC.Blocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
@@ -27,7 +28,39 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 	    else if(biome.SurfaceType == mod_TFC_Core.terraStoneIgEx.blockID) off = 13;
 	    else if(biome.SurfaceType == mod_TFC_Core.terraStoneMM.blockID) off = 17;
 	    
-	    dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1, biome.SurfaceMeta+off));
+	    ArrayList coreSample = new ArrayList<Item>();
+	    ArrayList coreSampleStacks = new ArrayList<ItemStack>();
+	    
+	    for(int x = -15; x <= 15; x++)
+        {
+            for(int z = -15; z <= 15; z++)
+            {
+                for(int y = j; y > j-35; y--)
+                {
+                    if(world.getBlockId(i+x, y, k+z) == mod_TFC_Core.terraOre.blockID)
+                    {
+                        int m = world.getBlockMetadata(i+x, y, k+z);
+                        if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))
+                        {
+                            //coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                            if(m!= 14 && m != 15)
+                            {
+                                coreSample.add(BlockTerraOre.getDroppedItem(m));
+                                coreSampleStacks.add(new ItemStack(BlockTerraOre.getDroppedItem(m), 1, m));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+	    Random R = new Random();
+	    
+	    if(!coreSampleStacks.isEmpty() && R.nextInt(3) == 0)
+	    {
+	        dropBlockAsItem_do(world, i, j, k,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
+	    }
+	    else
+	        dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1, biome.SurfaceMeta+off));
 	    
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}

@@ -1,7 +1,7 @@
 package TFC.TileEntities;
 
 import TFC.Core.PacketHandler;
-import TFC.Items.ItemTerraSmallOre;
+import TFC.Items.ItemTerraOre;
 import net.minecraft.src.*;
 
 public class TileEntityPartial extends TileEntity

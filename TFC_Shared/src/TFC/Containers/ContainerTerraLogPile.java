@@ -15,7 +15,7 @@ import net.minecraft.src.Slot;
 import net.minecraft.src.SlotCrafting;
 import net.minecraft.src.World;
 
-public class ContainerTerraLogPile extends Container
+public class ContainerTerraLogPile extends ContainerTFC
 {
 	private World worldObj;
 	private int posX;
@@ -103,19 +103,19 @@ public class ContainerTerraLogPile extends Container
 			 }
 			 else if (par1 >= 4 && par1 < 40)
 			 {
-				 if (!this.mergeItemStack(var4, 0, 4, false))
+				 if (!this.mergeItemStack(var4, 0, 4, false,4))
 				 {
 					 return null;
 				 }
 			 }
-			 else if (par1 >= 37 && par1 < 46)
-			 {
-				 if (!this.mergeItemStack(var4, 10, 37, false))
-				 {
-					 return null;
-				 }
-			 }
-			 else if (!this.mergeItemStack(var4, 10, 40, false))
+//			 else if (par1 >= 37 && par1 < 46)
+//			 {
+//				 if (!this.mergeItemStack(var4, 10, 37, false))
+//				 {
+//					 return null;
+//				 }
+//			 }
+			 else if (!this.mergeItemStack(var4, 4, 40, false))
 			 {
 				 return null;
 			 }

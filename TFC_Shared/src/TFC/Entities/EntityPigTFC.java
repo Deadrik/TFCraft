@@ -118,6 +118,32 @@ public class EntityPigTFC extends EntityAnimalTFC
     {
         return this.isBurning() ? Item.porkCooked.shiftedIndex : Item.porkRaw.shiftedIndex;
     }
+    
+    protected void dropFewItems(boolean par1, int par2)
+    {
+        int var3 = 1;
+        int var4;
+
+        for (var4 = 0; var4 < var3; ++var4)
+        {
+            this.dropItem(Item.leather.shiftedIndex, 5+this.rand.nextInt(5));
+        }
+
+        var3 = 1;
+
+        for (var4 = 0; var4 < var3; ++var4)
+        {
+            if (this.isBurning())
+            {
+                
+                this.dropItem(Item.porkCooked.shiftedIndex, (int) (this.size_mod *(10+this.rand.nextInt(8))));
+            }
+            else
+            {
+                this.dropItem(Item.porkRaw.shiftedIndex, (int) (this.size_mod *(10+this.rand.nextInt(8))));
+            }
+        }
+    }
 
     /**
      * Returns true if the pig is saddled.

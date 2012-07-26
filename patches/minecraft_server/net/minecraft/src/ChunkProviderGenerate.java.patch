@@ -36,7 +36,7 @@
  
      /** The biomes that are used to generate the chunk */
      private BiomeGenBase[] biomesForGeneration;
-@@ -269,28 +274,33 @@
+@@ -269,28 +274,31 @@
      public Chunk provideChunk(int par1, int par2)
      {
          this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
@@ -46,7 +46,10 @@
 +        byte[] ids2 = new byte[32768];
 +        byte[] meta = new byte[32768];
 +        byte[] meta2 = new byte[32768];
-+        //this.generateTerrain(par1, par2, ids);
++        
++        byte[] ids3 = new byte[16*16*256];
++        byte[] meta3 = new byte[16*16*256];
++        
 +        this.generateTerrainHigh(par1, par2, ids2);
          this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 -        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
@@ -59,16 +62,12 @@
 -            this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
 -            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
 -        }
-+        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2, meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        //TFC_ChunkProviderGenerate.replaceBlocksForBiome(par1, par2, ids, meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand);
-+        underRiverGen.generate(this, this.worldObj, par1, par2, ids, meta);
-+        this.caveGenerator.generate(this, this.worldObj, par1, par2, ids);
-+        //this.caveGenerator2.generate(this, this.worldObj, par1, par2, ids2);
-+        this.ravineGenerator.generate(this, this.worldObj, par1, par2, ids);
-+        this.ravineGenerator2.generate(this, this.worldObj, par1, par2, ids2);
++        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2,meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand, ids3, meta3);
++        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids,meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand, ids3, meta3);
 +        
-+        
++        new MapGenCaves256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
++        new MapGenRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
++        new MapGenRiverRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
  
 -        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
 -        byte[] var5 = var4.getBiomeArray();
@@ -82,12 +81,11 @@
 +            //this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
          }
 -
-+        //Chunk var4 = new Chunk(this.worldObj, ids, meta, par1, par2);
-+        Chunk var4 = new ChunkTFC(this.worldObj, ids, meta, ids2, meta2, par1, par2);
++        Chunk var4 = new ChunkTFC(this.worldObj, ids3, meta3, par1, par2);
          var4.generateSkylightMap();
          return var4;
      }
-@@ -471,9 +481,9 @@
+@@ -471,9 +479,9 @@
  
          if (this.mapFeaturesEnabled)
          {
@@ -100,7 +98,7 @@
          }
  
          int var12;
-@@ -485,7 +495,7 @@
+@@ -485,7 +493,7 @@
              var12 = var4 + this.rand.nextInt(16) + 8;
              var13 = this.rand.nextInt(128);
              var14 = var5 + this.rand.nextInt(16) + 8;
@@ -109,7 +107,7 @@
          }
  
          if (!var11 && this.rand.nextInt(8) == 0)
-@@ -496,7 +506,7 @@
+@@ -496,7 +504,7 @@
  
              if (var13 < 63 || this.rand.nextInt(10) == 0)
              {
@@ -118,7 +116,7 @@
              }
          }
  
-@@ -506,10 +516,10 @@
+@@ -506,10 +514,10 @@
              var14 = this.rand.nextInt(128);
              int var15 = var5 + this.rand.nextInt(16) + 8;
  
@@ -133,7 +131,7 @@
          }
  
          var6.decorate(this.worldObj, this.rand, var4, var5);
-@@ -580,4 +590,235 @@
+@@ -580,4 +588,235 @@
      {
          return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
      }

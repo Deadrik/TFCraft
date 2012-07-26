@@ -10,7 +10,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
-import TFC.Items.ItemTerraSmallOre;
+import TFC.Items.ItemTerraOre;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BiomeGenBase;
@@ -455,7 +455,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             if(fireItemStacks[i] == null)
             {
                 fireItemStacks[i] = is;
-                OreType = ItemTerraSmallOre.getItemNameDamage(is.getItemDamage());
+                OreType = ItemTerraOre.getItemNameDamage(is.getItemDamage());
                 return true;
             }
         }
@@ -697,7 +697,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                         }
                     }
                     /*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-                    else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraSmallOre && 
+                    else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraOre && 
                             (entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
                     {
                         int c = entity.item.stackSize;
@@ -857,7 +857,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         if(dam == -1)
             this.OreType = "";
         else
-            this.OreType = ItemTerraSmallOre.getItemNameDamage(dam);
+            this.OreType = ItemTerraOre.getItemNameDamage(dam);
     }
 
     public void updateGui()

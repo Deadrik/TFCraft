@@ -6,18 +6,13 @@ import net.minecraft.src.*;
 public class ContainerTerraSluice extends Container
 {
 	private TileEntityTerraSluice sluice;
-	private int coolTime;
-	private int freezeTime;
-	private int itemFreezeTime;
+	private EntityPlayer player;
 
 
 	public ContainerTerraSluice(InventoryPlayer inventoryplayer, TileEntityTerraSluice tileentitysluice)
 	{
 		sluice = tileentitysluice;
-		coolTime = 0;
-		freezeTime = 0;
-		itemFreezeTime = 0;
-
+		player = inventoryplayer.player;
 		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 0, 116, 16));
 		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 1, 134, 16));
 		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 2, 152, 16));
@@ -58,10 +53,10 @@ public class ContainerTerraSluice extends Container
 			ItemStack itemstack1 = slot.getStack();
 			if(i <= 8)
 			{
-//				if(!ModLoader.getMinecraftInstance().thePlayer.inventory.addItemStackToInventory(itemstack1.copy()))
-//				{
-//					return null;
-//				}
+				if(!player.inventory.addItemStackToInventory(itemstack1.copy()))
+				{
+					return null;
+				}
 				slot.putStack(null);
 			}
 			if(itemstack1.stackSize == 0)
@@ -74,16 +69,52 @@ public class ContainerTerraSluice extends Container
 		}
 		return null;
 	}
-
-
+	private int soilamt = 0;
+	private int progress = 0;
 	public void updateCraftingResults()
-	{
-		super.updateCraftingResults();
-		for(int i = 0; i < inventorySlots.size(); i++)
-		{
-			ICrafting icrafting = (ICrafting)inventorySlots.get(i);
-		}
-	}
+    {
+        for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
+        {
+            ItemStack var2 = ((Slot)this.inventorySlots.get(var1)).getStack();
+            ItemStack var3 = (ItemStack)this.inventoryItemStacks.get(var1);
 
+            if (!ItemStack.areItemStacksEqual(var3, var2))
+            {
+                var3 = var2 == null ? null : var2.copy();
+                this.inventoryItemStacks.set(var1, var3);
 
+                for (int var4 = 0; var4 < this.crafters.size(); ++var4)
+                {
+                    ((ICrafting)this.crafters.get(var4)).updateCraftingInventorySlot(this, var1, var3);
+                }
+            }
+        }
+        for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+        {
+            ICrafting var2 = (ICrafting)this.crafters.get(var1);
+            if (this.soilamt != this.sluice.soilAmount)
+            {
+                var2.updateCraftingInventoryInfo(this, 0, this.sluice.soilAmount);
+            }
+            if (this.progress != this.sluice.processTimeRemaining)
+            {
+                var2.updateCraftingInventoryInfo(this, 1, this.sluice.processTimeRemaining);
+            }
+        }
+
+        soilamt = this.sluice.soilAmount;
+        progress = this.sluice.processTimeRemaining;
+    }
+	
+	public void updateProgressBar(int par1, int par2)
+    {
+        if (par1 == 0)
+        {
+            this.sluice.soilAmount = par2;
+        }
+        if (par1 == 1)
+        {
+            this.sluice.processTimeRemaining = par2;
+        }
+    }
 }

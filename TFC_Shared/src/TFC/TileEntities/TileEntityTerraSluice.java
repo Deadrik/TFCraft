@@ -1,8 +1,11 @@
 package TFC.TileEntities;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
+import TFC.Blocks.BlockTerraOre;
 import TFC.Blocks.BlockTerraSluice;
 import TFC.Items.ItemOre1;
 import net.minecraft.src.*;
@@ -15,30 +18,19 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
     public boolean processing;
     public boolean waterInput;
     public boolean waterOutput;
-    
+    public byte soilType;
+
     private boolean initialized = false;
+
+    private ArrayList coreSample = new ArrayList<Item>();
+    private ArrayList coreSampleStacks = new ArrayList<ItemStack>();
 
     public TileEntityTerraSluice()
     {
         sluiceItemStacks = new ItemStack[9];
         soilAmount = 0;
         processTimeRemaining = 0;
-        
-        ArrayList coreSample = new ArrayList<ItemStack>();
-        
-        for(int x = -100; x < 100; x += 2)
-        {
-            for(int z = -100; z < 100; z += 2)
-            {
-                for(int y = yCoord; y > 90; y--)
-                {
-                    if(worldObj.getBlockId(x, y, z) == mod_TFC_Core.terraOre.blockID)
-                    {
-                        
-                    }
-                }
-            }
-        }
+        soilType = 0;
     }
 
     public void addToInventory(ItemStack is)
@@ -201,7 +193,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                 sluiceItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
-
+        soilType = nbttagcompound.getByte("soilType");
         soilAmount = nbttagcompound.getInteger("soilAmount");
         processTimeRemaining = nbttagcompound.getInteger("processTimeRemaining");
     }
@@ -227,7 +219,53 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
          *********************************************************/
         if(!worldObj.isRemote)
         {
-          //This is where we handle the processing of the material
+            if(!initialized)
+            {
+                for(int x = -100; x <= 100; x += 2)
+                {
+                    for(int z = -100; z <= 100; z += 2)
+                    {
+                        for(int y = yCoord; y > yCoord-50; y--)
+                        {
+                            if(worldObj.getBlockId(x+xCoord, y, z+zCoord) == mod_TFC_Core.terraOre.blockID)
+                            {
+                                int m = worldObj.getBlockMetadata(x+xCoord, y, z+zCoord);
+                                if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))
+                                {
+                                    //coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                                    if(m!= 14 && m != 15)
+                                    {
+                                        coreSample.add(BlockTerraOre.getDroppedItem(m));
+                                        coreSampleStacks.add(new ItemStack(BlockTerraOre.getDroppedItem(m), 1, m));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                initialized = true;
+            }
+            int[] dir = BlockTerraSluice.headBlockToFootBlockMap[BlockTerraSluice.getDirectionFromMetadata(meta)];
+            List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
+                    xCoord, yCoord, zCoord, 
+                    xCoord+1, yCoord+1.1f, zCoord+1));
+            
+            for (Iterator iterator = list.iterator(); iterator.hasNext();)
+            {
+                EntityItem entity = (EntityItem)iterator.next();
+                if(entity.item.itemID == Block.gravel.blockID || entity.item.itemID == Block.sand.blockID)
+                {
+                    if(soilAmount < 50 && entity.item.stackSize == 1)
+                    {
+                        soilAmount += 20;
+                        entity.setDead();
+                        if(soilAmount > 50)
+                            soilAmount = 50;
+                    }
+                }
+            }
+
+            //This is where we handle the processing of the material
             if(soilAmount > 0 && waterInput && waterOutput)
             {
                 if(processTimeRemaining != 200) {
@@ -246,11 +284,20 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                     BiomeGenBase biome3 = worldObj.getBiomeGenForCoords(xCoord, zCoord+100);
                     BiomeGenBase biome4 = worldObj.getBiomeGenForCoords(xCoord, zCoord-100);
 
-                    
+                    float gemMod = 1;
+                    float oreMod = 1;
+                    if(soilType == 1)
+                        gemMod = 0.65f;
+                    else if(soilType == 2)
+                        oreMod = 0.6f;
 
 
                     ArrayList items = new ArrayList<ItemStack>();
-                    if(random.nextInt(200) == 0)
+                    if(random.nextInt((int) (200*oreMod)) == 0 && !coreSampleStacks.isEmpty())
+                    {
+                        addToInventory((ItemStack)coreSampleStacks.toArray()[random.nextInt(coreSampleStacks.toArray().length)]);
+                    }
+                    else if(random.nextInt((int) (400*gemMod)) == 0)
                     {
 
                         items.add(new ItemStack(TFCItems.terraGemAgate,1,0));
@@ -265,12 +312,11 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                         items.add(new ItemStack(TFCItems.terraGemSapphire,1,0));
                         items.add(new ItemStack(TFCItems.terraGemTourmaline,1,0));
                         items.add(new ItemStack(TFCItems.terraGemTopaz,1,0));
-                        items.add(new ItemStack(Item.goldNugget,1,0));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 
                     }
-                    else if(random.nextInt(500) == 0)
+                    else if(random.nextInt((int) (800*gemMod)) == 0)
                     {
                         items.add(new ItemStack(TFCItems.terraGemAgate,1,1));
                         items.add(new ItemStack(TFCItems.terraGemAmethyst,1,1));
@@ -284,11 +330,10 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                         items.add(new ItemStack(TFCItems.terraGemSapphire,1,1));
                         items.add(new ItemStack(TFCItems.terraGemTourmaline,1,1));
                         items.add(new ItemStack(TFCItems.terraGemTopaz,1,1));
-                        items.add(new ItemStack(Item.goldNugget,2,0));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
                     }
-                    else if(random.nextInt(1000) == 0)
+                    else if(random.nextInt((int) (1600*gemMod)) == 0)
                     {
                         items.add(new ItemStack(TFCItems.terraGemAgate,1,2));
                         items.add(new ItemStack(TFCItems.terraGemAmethyst,1,2));
@@ -305,7 +350,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
                     }
-                    else if(random.nextInt(1500) == 0)
+                    else if(random.nextInt((int) (3200*gemMod)) == 0)
                     {
                         items.add(new ItemStack(TFCItems.terraGemAgate,1,3));
                         items.add(new ItemStack(TFCItems.terraGemAmethyst,1,3));
@@ -322,7 +367,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
                     }
-                    else if(random.nextInt(2000) == 0)
+                    else if(random.nextInt((int) (6400*gemMod)) == 0)
                     {
                         items.add(new ItemStack(TFCItems.terraGemAgate,1,4));
                         items.add(new ItemStack(TFCItems.terraGemAmethyst,1,4));
@@ -340,23 +385,25 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 
                     }
-                    else if(random.nextInt(2000) == 0)
+                    else if(random.nextInt((int) (12800*gemMod)) == 0)
                     {
-                        if(random.nextInt(1) == 0)
+                        int r = random.nextInt(50);
+                        
+                        if(r == 0)
                         {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,0));
+                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,3));
                         }
-                        else if(random.nextInt(10) == 0)
-                        {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,1));
-                        }
-                        else if(random.nextInt(25) == 0)
+                        else if(r < 15)
                         {
                             addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,2));
                         }
-                        else if(random.nextInt(50) == 0)
+                        else if(r < 25)
                         {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,3));
+                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,1));
+                        }
+                        else if(r < 50)
+                        {
+                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,0));
                         }
                     }
                     processTimeRemaining = 0;
@@ -556,6 +603,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
     {
         super.writeToNBT(nbttagcompound);
 
+        nbttagcompound.setByte("soilType", soilType);
         nbttagcompound.setInteger("soilAmount", soilAmount);
         nbttagcompound.setInteger("processTimeRemaining", processTimeRemaining);
 

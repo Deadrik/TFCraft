@@ -150,11 +150,11 @@ public class EntityChickenTFC extends EntityAnimalTFC
      */
     protected void dropFewItems(boolean par1, int par2)
     {
-        int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
+        int var3 = 1;
 
         for (int var4 = 0; var4 < var3; ++var4)
         {
-            this.dropItem(Item.feather.shiftedIndex, 1);
+            this.dropItem(Item.feather.shiftedIndex,(int) (this.size_mod * (5+this.rand.nextInt(10))));
         }
 
         if (this.isBurning())

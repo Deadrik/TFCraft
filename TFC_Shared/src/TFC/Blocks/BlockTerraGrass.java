@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFCSettings;
+import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
@@ -208,5 +209,27 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         return mod_TFC_Core.terraDirt.idDropped(0, par2Random, par3);
     }
 
+//    /**
+//     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+//     * cleared to be reused)
+//     */
+//    @Override
+//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+//    {
+//        if((world.getBlockId(i+1, j, k) == 0 || world.getBlockId(i-1, j, k) == 0 || 
+//                world.getBlockId(i, j, k+1) == 0 || world.getBlockId(i, j, k-1) == 0) && 
+//                world.getBlockId(i, j+1, k) != 0)
+//
+//            return AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1);
+//        else
+//            return AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1);
+//        
+//        //return super.getCollisionBoundingBoxFromPool(world, i, j, k);
+//    }
+//    
+//    public boolean isOpaqueCube()
+//    {
+//        return false;
+//    }
 
 }

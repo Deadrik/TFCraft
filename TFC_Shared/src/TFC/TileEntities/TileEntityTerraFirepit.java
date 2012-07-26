@@ -10,6 +10,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
+import TFC.Core.TFCSeasons;
 import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
 import TFC.Items.ItemTerraMeltedMetal;
@@ -26,6 +27,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TFCItems;
+import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC_Core;
 import net.minecraft.src.mod_TFC_Core;
 
@@ -51,10 +53,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public Boolean canCreateFire;
     private int externalWoodCount;
     public int charcoalCounter;
-    
+
     private final int MaxFireTemp = 2000;
 
-    public final int FIREBURNTIME = 240;//default 240
+    public final int FIREBURNTIME = 2;//default 240
 
     private static int[] area =  {0,0,2,2,2,0,0};
     private static int[] area0 = {0,2,1,1,1,2,0};
@@ -141,7 +143,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         NBTTagCompound inputCompound;
         HeatManager manager = HeatManager.getInstance();
         HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
-        
+
         if( index!= null && fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
         {
             float itemTemp = 0F;
@@ -196,7 +198,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         //This was causing the infinite amounts possibly
         DestItem.setItemDamage(100-(D1 + D2));
     }
-    
+
     public void CookItemNew()
     {
         HeatManager manager = HeatManager.getInstance();
@@ -211,15 +213,34 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 if(output.getItem().shiftedIndex == fireItemStacks[1].getItem().shiftedIndex)
                     damage = fireItemStacks[1].getItemDamage();
                 ItemStack mold = null;
+
+
                 if(fireItemStacks[1].getItem() instanceof ItemTerraMeltedMetal)
                 {
+                    if(fireItemStacks[7] == null && fireItemStacks[8] == null)
+                    {
+                        fireItemStacks[7] = fireItemStacks[1].copy();
+                        fireItemStacks[1] = null;
+                        return;
+                    }
+                    else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.terraCeramicMold && 
+                            (fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
+                    {
+                        if(fireItemStacks[8] == null)
+                        {
+                            fireItemStacks[8] = fireItemStacks[1].copy();
+                            fireItemStacks[1] = null;
+                            return;
+                        }
+                    }
+
                     mold = new ItemStack(TFCItems.terraCeramicMold,1);
                     mold.stackSize = 1;
                     mold.setItemDamage(0);
                 }
                 //Morph the input
                 fireItemStacks[1] = index.getMorph();
-                
+
                 if(fireItemStacks[1] != null && manager.findMatchingIndex(fireItemStacks[1]) != null)
                 {
                     //if the input is a new item, then apply the old temperature to it
@@ -227,8 +248,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     nbt.setFloat("temperature", inputItemTemp);
                     fireItemStacks[1].stackTagCompound = nbt;
                 }
-                
-                
+
+
                 //Check if we should combine the output with a pre-existing output
                 if(output != null && output.getItem() instanceof ItemTerraMeltedMetal)
                 {
@@ -245,11 +266,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         if(amt4 < 0) amt4 = 0;//stop the infinite glitch
                         fireItemStacks[7] = output.copy();
                         fireItemStacks[7].setItemDamage(amt4);
-                        
+
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[7].stackTagCompound = nbt;
-                        
+
                         if(fireItemStacks[1] == null && mold != null)
                         {
                             fireItemStacks[1] = mold;
@@ -264,11 +285,11 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         if(amt4 < 0) amt4 = 0;//stop the infinite glitch
                         fireItemStacks[8] = output.copy();
                         fireItemStacks[8].setItemDamage(amt4);
-                        
+
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[8].stackTagCompound = nbt;
-                        
+
                         if(fireItemStacks[1] == null && mold != null)
                         {
                             fireItemStacks[1] = mold;
@@ -278,7 +299,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         fireItemStacks[7] = output.copy();
                         fireItemStacks[7].setItemDamage(damage);
-                        
+
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[7].stackTagCompound = nbt;
@@ -287,12 +308,12 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     {
                         fireItemStacks[8] = output.copy();
                         fireItemStacks[8].setItemDamage(damage);
-                        
+
                         NBTTagCompound nbt = new NBTTagCompound();
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[8].stackTagCompound = nbt;
                     }
-                    
+
                     if(addLeftover)
                     {
                         if(fireItemStacks[8] != null && output.getItem().shiftedIndex == fireItemStacks[8].getItem().shiftedIndex && fireItemStacks[8].getItemDamage() > 0)
@@ -304,7 +325,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                             if(amt4 < 0) amt4 = 0;//stop the infinite glitch
                             fireItemStacks[8] = output.copy();
                             fireItemStacks[8].setItemDamage(amt4);
-                            
+
                             NBTTagCompound nbt = new NBTTagCompound();
                             nbt.setFloat("temperature", inputItemTemp);
                             fireItemStacks[8].stackTagCompound = nbt;
@@ -345,7 +366,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             }
         }
     }
-  
+
     @Override
     public ItemStack decrStackSize(int i, int j)
     {
@@ -393,7 +414,188 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         }
     }
 
+    private List vecArray = new ArrayList<Vector3f>();
     public void externalFireCheck()
+    {
+        Random R = new Random();
+        if(externalFireCheckTimer == 0)
+        {
+            int oldWoodCount = externalWoodCount;
+            externalWoodCount = 0;
+            
+            vecArray = new ArrayList<Vector3f>();
+            ProcessPile(worldObj,xCoord,yCoord,zCoord,false);
+
+            //Now we actually set fire to the air blocks
+            if(vecArray.size() > 0)
+            {
+                for(int i = 0; i < vecArray.size(); i++)
+                {
+                    Vector3f vec = (Vector3f)vecArray.toArray()[i];
+                    if(R.nextInt(100) > 75 && getNearWood((int)vec.X, (int)vec.Y, (int)vec.Z)) 
+                    {
+                        worldObj.setBlock((int)vec.X, (int)vec.Y, (int)vec.Z, Block.fire.blockID);
+                        worldObj.markBlockNeedsUpdate((int)vec.X, (int)vec.Y, (int)vec.Z);
+                    }
+                }
+            }
+            //This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
+            if(oldWoodCount != externalWoodCount) {
+                charcoalCounter = 0;
+            } else if(charcoalCounter == 0)
+            {
+                charcoalCounter = (int) TFCSeasons.getTotalTicks();
+            }
+
+            if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME*100) < TFCSeasons.getTotalTicks() )
+            {
+                charcoalCounter = 0;
+                float percent = 25+R.nextInt(25);
+                externalWoodCount = (int) (externalWoodCount * (percent/100));
+                ProcessPile(worldObj,xCoord,yCoord,zCoord,true);
+                while(externalWoodCount > 0)
+                {
+                    if(externalWoodCount > Item.coal.getItemStackLimit())
+                    {
+                        ItemStack is = new ItemStack(Item.coal,Item.coal.getItemStackLimit(),1);
+                        worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord,zCoord,is));
+                        //addByproduct(new ItemStack(Item.coal,Item.coal.getItemStackLimit(),1));
+                        externalWoodCount -= Item.coal.getItemStackLimit();
+                    }
+                    else
+                    {
+                        //addByproduct(new ItemStack(Item.coal,externalWoodCount,1));
+                        ItemStack is = new ItemStack(Item.coal,externalWoodCount,1);
+                        worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord+1,zCoord,is));
+                        externalWoodCount = 0;
+                    }
+                }
+
+                //Empty the fuel stack and set the fire out. It shouldn't be on after all this time.
+                fireItemStacks[0] = null;
+                fireItemStacks[3] = null;
+                fireItemStacks[4] = null;
+                fireItemStacks[5] = null;
+                fuelTimeLeft = 0;
+                fuelBurnTemp = ambientTemp;
+                fireTemperature = ambientTemp;
+                worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+            }
+        }
+    }
+
+    private void ProcessPile(World world, int i, int j, int k, boolean empty)
+    {
+        int x = i;
+        int y = 0;
+        int z = k;
+        boolean checkArray[][][] = new boolean[25][13][25];
+        boolean reachedTop = false;
+
+        while(!reachedTop && j+y >= 0)
+        {
+            if(world.getBlockId(x, j+y+1, z) != mod_TFC_Core.LogPile.blockID)
+            {
+                reachedTop = true;
+            }
+            scanLogs(world,i,j+y,k,checkArray,13,y,13, empty);
+            y++;
+        }
+    }
+
+    private boolean checkOut(World world, int i, int j, int k, boolean empty)
+    {
+        if(world.getBlockId(i, j, k) == 0)
+            vecArray.add(new Vector3f(i, j, k));        
+
+        else if(world.getBlockId(i, j, k) == mod_TFC_Core.LogPile.blockID)
+        {
+            if(!empty)
+            {
+                if(world.getBlockId(i+1, j, k) == 0)
+                    vecArray.add(new Vector3f(i+1, j, k));
+                else if(world.getBlockId(i-1, j, k) == 0)
+                    vecArray.add(new Vector3f(i-1, j, k));
+                else if(world.getBlockId(i, j, k+1) == 0)
+                    vecArray.add(new Vector3f(i, j, k+1));
+                else if(world.getBlockId(i, j, k-1) == 0)
+                    vecArray.add(new Vector3f(i, j, k-1));
+                else if(world.getBlockId(i, j+1, k) == 0)
+                    vecArray.add(new Vector3f(i, j+1, k));
+                else if(world.getBlockId(i, j-1, k) == 0)
+                    vecArray.add(new Vector3f(i, j-1, k));
+            }
+
+            TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(i, j, k);
+            if(te != null)
+            {
+                if(te.storage[0] != null) 
+                {
+                    if(!empty)
+                        externalWoodCount += te.storage[0].stackSize;
+                    else
+                        te.storage[0] = null;
+                }
+                if(te.storage[1] != null) 
+                {
+                    if(!empty)
+                        externalWoodCount += te.storage[1].stackSize;
+                    else
+                        te.storage[1] = null;
+                }
+                if(te.storage[2] != null) 
+                {
+                    if(!empty)
+                        externalWoodCount += te.storage[2].stackSize;
+                    else
+                        te.storage[2] = null;
+                }
+                if(te.storage[3] != null) 
+                {
+                    if(!empty)
+                        externalWoodCount += te.storage[3].stackSize;
+                    else
+                        te.storage[3] = null;
+                }
+            }
+            if(empty)
+            {
+                world.setBlock(i, j, k, 0);
+                world.markBlockNeedsUpdate(i, j, k);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private void scanLogs(World world, int i, int j, int k, boolean[][][] checkArray,int x, int y, int z, boolean empty)
+    {
+        if(y >= 0)
+        {
+            checkArray[x][y][z] = true;
+            int offsetX = 0;int offsetY = 0;int offsetZ = 0;
+
+            for (offsetY = 0; offsetY <= 1; offsetY++)
+            {
+                for (offsetX = -1; offsetX <= 1; offsetX++)
+                {
+                    for (offsetZ = -1; offsetZ <= 1; offsetZ++)
+                    {
+                        if(x+offsetX < 25 && x+offsetX >= 0 && z+offsetZ < 25 && z+offsetZ >= 0 && y+offsetY < 13 && y+offsetY >= 0)
+                        {
+                            if(!checkArray[x+offsetX][y+offsetY][z+offsetZ] && checkOut(world, i+offsetX, j+offsetY, k+offsetZ, empty))
+                            {
+                                scanLogs(world,i+offsetX, j+offsetY, k+offsetZ, checkArray,x+offsetX,y+offsetY,z+offsetZ, empty);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void externalFireCheckOld()
     {
         Random R = new Random();
         if(externalFireCheckTimer == 0)
@@ -1125,12 +1327,15 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public void updateEntity()
     {
         int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
-        if(fireTemperature > 210 && Surrounded == 5)
+        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == mod_TFC_Core.LogPile.blockID/*Surrounded == 5*/)
         {
             externalFireCheckTimer--;
             if(externalFireCheckTimer <= 0)
             {
-                externalFireCheck();
+                if(!worldObj.isRemote)
+                {
+                    externalFireCheck();
+                }
                 externalFireCheckTimer = 100;
             }
         }
@@ -1138,9 +1343,9 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         {
             charcoalCounter = 0;
         }
-        
+
         Random R = new Random();            
-        
+
         if(!worldObj.isRemote)
         {
             HeatManager manager = HeatManager.getInstance();
@@ -1198,7 +1403,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             FuelStack[3] = fireItemStacks[5];
 
             TFCHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
-            
+
             //Now we cook the input item
             CookItemNew();
 
@@ -1342,7 +1547,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
             }
         }
-        
+
         TFCHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
     }
 
@@ -1380,9 +1585,9 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         //charcoalCounter = charcoal;
 
     }
-    
+
     public Packet getDescriptionPacket() 
     {
         return PacketHandler.getPacket(this);
-      }
+    }
 }

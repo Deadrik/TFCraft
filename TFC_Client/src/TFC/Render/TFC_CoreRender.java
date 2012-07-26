@@ -9,18 +9,21 @@ import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.BlockTerraAnvil;
 import TFC.Blocks.BlockTerraBellows;
 import TFC.Blocks.BlockTerraSluice;
+import TFC.Core.AnvilReq;
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
 import TFC.Core.TFCSeasons;
 import TFC.Core.TFC_Core.Direction;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TileEntityTerraAnvil;
 
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.World;
@@ -1743,7 +1746,7 @@ public class TFC_CoreRender
         return true;
     }
 
-    private static int getRockTexture(int yCoord, BiomeGenBase biome) {
+    public static int getRockTexture(int yCoord, BiomeGenBase biome) {
         int var27;
         if(yCoord <= biome.Layer3)
             var27 = Block.blocksList[biome.Layer3Type].getBlockTextureFromSideAndMetadata(5, biome.Layer3Meta);
@@ -1876,45 +1879,48 @@ public class TFC_CoreRender
         int meta = blockAccess.getBlockMetadata(i, j, k);
         int direction = ((BlockTerraAnvil)block).getDirectionFromMetadata(meta);
 
-        if(direction == 0)//x
-        {
-            //top
-            block.setBlockBounds(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
-            renderblocks.renderStandardBlock(block, i, j, k);
+            if(direction == 0)//x
+            {
+                //top
+                block.setBlockBounds(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
+                renderblocks.renderStandardBlock(block, i, j, k);
 
-            //core
-            block.setBlockBounds(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
-            renderblocks.renderStandardBlock(block, i, j, k);
+                //core
+                block.setBlockBounds(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
+                renderblocks.renderStandardBlock(block, i, j, k);
 
-            //feet
-            block.setBlockBounds(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
-            renderblocks.renderStandardBlock(block, i, j, k);
-            block.setBlockBounds(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
-            renderblocks.renderStandardBlock(block, i, j, k);
+                //feet
+                block.setBlockBounds(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
+                renderblocks.renderStandardBlock(block, i, j, k);
 
-            block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.80F, 0.6F, 1.0F);
-        }
-        else if(direction == 1)//z
-        {
-            //top
-            block.setBlockBounds(0.1F, 0.4F, 0.3F, 0.9F, 0.6F, 0.7F);
-            renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.80F, 0.6F, 1.0F);
+            }
+            else if(direction == 1)//z
+            {
+                //top
+                block.setBlockBounds(0.1F, 0.4F, 0.3F, 0.9F, 0.6F, 0.7F);
+                renderblocks.renderStandardBlock(block, i, j, k);
 
-            //core
-            block.setBlockBounds(0.15F, 0.0F, 0.35F, 0.85F, 0.4F, 0.65F);
-            renderblocks.renderStandardBlock(block, i, j, k);
+                //core
+                block.setBlockBounds(0.15F, 0.0F, 0.35F, 0.85F, 0.4F, 0.65F);
+                renderblocks.renderStandardBlock(block, i, j, k);
 
-            //feet
-            block.setBlockBounds(0.1F, 0.0F, 0.25F, 0.90F, 0.2F, 0.75F);
-            renderblocks.renderStandardBlock(block, i, j, k);
-            block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.00F, 0.1F, 0.80F);
-            renderblocks.renderStandardBlock(block, i, j, k);
+                //feet
+                block.setBlockBounds(0.1F, 0.0F, 0.25F, 0.90F, 0.2F, 0.75F);
+                renderblocks.renderStandardBlock(block, i, j, k);
+                block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.00F, 0.1F, 0.80F);
+                renderblocks.renderStandardBlock(block, i, j, k);
 
-            block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.0F, 0.6F, 0.8F);
+                block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.0F, 0.6F, 0.8F);
 
-        }
-
-
+            }
+            
+            if(((TileEntityTerraAnvil)blockAccess.getBlockTileEntity(i, j, k)).AnvilTier == AnvilReq.STONE.Tier)
+            {
+                block.setBlockBounds(0.0F, 0.0F, 0.00F, 1.0F, 1.0F, 1.0F);
+            }
         return true;
     }
 
@@ -1995,7 +2001,7 @@ public class TFC_CoreRender
         double minZ = (double)k + block.minZ;
         double maxZ = (double)k + block.maxZ;
         double maxY = (double)j + block.maxY;
-        
+
         int var10 = blockAccess.getBiomeGenForCoords(i, k).waterColorMultiplier;
         int waterR = (var10 & 16711680) >> 16;
         int waterG = (var10 & 65280) >> 8;
@@ -2245,7 +2251,7 @@ public class TFC_CoreRender
                     l1 = (k1 & 0xf) << 4;
                     i2 = k1 & 0xf0;
                     l = block.colorMultiplier(blockAccess, i, j, k);
-                    
+
                     //reassign the uv coords
                     d = (float)l1 / 256F;
                     d1 = ((double)(l1 + 16) - 0.01D) / 256D;

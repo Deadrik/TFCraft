@@ -79,11 +79,13 @@ public class BlockTerraSluice extends BlockContainer
 					ItemStack is =entityplayer.getCurrentEquippedItem();
 					if(is!= null && is.itemID == TFCItems.terraGoldPan.shiftedIndex && is.getItemDamage() != 0)
 					{
-						tileentitysluice.soilAmount+=5;
+						tileentitysluice.soilAmount+=7;
+						tileentitysluice.soilType = (byte) is.getItemDamage();
 						if(tileentitysluice.soilAmount > 50) {
 							tileentitysluice.soilAmount = 50;
 						}
-						entityplayer.setItemInUse(new ItemStack(TFCItems.terraGoldPan, 1, 0), 0);
+						is.setItemDamage(0);
+						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, is);
 						/*The line below was uncommented before the smp inclusion. If this section isn't working it's because the above line never worked properly.
 						 * Apparently I was doing the same thing twice, so I'm not sure if one of these wasn't working.*/
 						//mc.thePlayer.inventory.setInventorySlotContents(mc.thePlayer.inventory.currentItem, new ItemStack(mod_TFC_Core.terraGoldPan,1,0));
@@ -189,29 +191,102 @@ public class BlockTerraSluice extends BlockContainer
 		//mc.ingameGUI.addChatMessage("Dir = "+(new StringBuilder()).append(l).toString());
 	}
 	
-	public boolean canBlockStay(World world, int i, int j, int k)
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-	    int l = getDirectionFromMetadata(world.getBlockMetadata(i, j, k));
-	    if(l == 0)//+z
+        int var5 = par1World.getBlockId(par2, par3, par4);
+        
+        int dir = getDirectionFromMetadata(par1World.getBlockMetadata(par2, par3, par4));
+        int[] offset = headBlockToFootBlockMap[dir];
+        
+        boolean stay = (canStay(par1World, par2,par3,par4,false,dir) && 
+                canStay(par1World, par2+offset[0],par3,par4+offset[1],true,dir)) && 
+                (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover());
+        
+        return stay;
+    }
+	
+	public boolean canPlace(World world, int i, int j, int k,int dir)
+    {
+	    int var5 = world.getBlockId(i, j, k);
+        
+        int[] offset = headBlockToFootBlockMap[dir];
+        
+        boolean stay = (canStay(world, i,j,k,false,dir) && 
+                canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
+                (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover());
+        
+        return stay;
+    }
+	
+	private boolean canStay(World world, int i, int j, int k, boolean foot, int dir)
+	{
+	    int l = dir;
+        if(l == 0)//+z
         {
-            if(!world.isBlockNormalCube(i+1, j, k) || !world.isBlockNormalCube(i-1, j, k) || !world.isBlockNormalCube(i, j, k-1) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || world.isBlockNormalCube(i, j+1, k))
+            if(!foot && 
+                    (!world.isBlockNormalCube(i+1, j, k) || 
+                    !world.isBlockNormalCube(i-1, j, k) || 
+                    !world.isBlockNormalCube(i, j, k-1) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
+            else if(foot && 
+                    (!world.isBlockNormalCube(i+1, j, k) || 
+                    !world.isBlockNormalCube(i-1, j, k) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
                 return false;
         }
         if(l == 1)//-x
         {
-            
+            if(!foot && 
+                    (!world.isBlockNormalCube(i, j, k+1) || 
+                    !world.isBlockNormalCube(i, j, k-1) || 
+                    !world.isBlockNormalCube(i+1, j, k)  ||
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
+            else if(foot && 
+                    (!world.isBlockNormalCube(i, j, k+1) || 
+                     !world.isBlockNormalCube(i, j, k-1) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
         }
         if(l == 2)//-z
         {
-            
+            if(!foot && 
+                    (!world.isBlockNormalCube(i+1, j, k) || 
+                    !world.isBlockNormalCube(i-1, j, k) || 
+                    !world.isBlockNormalCube(i, j, k+1) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
+            else if(foot && 
+                    (!world.isBlockNormalCube(i+1, j, k) || 
+                    !world.isBlockNormalCube(i-1, j, k) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
         }
         if(l == 3)//+x
         {
-            
+            if(!foot && 
+                    (!world.isBlockNormalCube(i, j, k+1) || 
+                    !world.isBlockNormalCube(i, j, k-1) || 
+                    !world.isBlockNormalCube(i-1, j, k)  ||
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
+            else if(foot && 
+                    (!world.isBlockNormalCube(i, j, k+1) || 
+                     !world.isBlockNormalCube(i, j, k-1) || 
+                    !world.isBlockNormalCube(i, j-1, k)  || 
+                    world.isBlockNormalCube(i, j+2, k)))
+                return false;
         }
         return true;
-    }
+	}
 
 	public void onBlockRemoval(World world, int i, int j, int k)
 	{
@@ -233,14 +308,14 @@ public class BlockTerraSluice extends BlockContainer
 
 		if(isBlockFootOfBed(i1))
 		{
-			if(world.getBlockId(i - headBlockToFootBlockMap[j1][0], j, k - headBlockToFootBlockMap[j1][1]) != blockID || canBlockStay(world, i, j, k))
+			if(world.getBlockId(i - headBlockToFootBlockMap[j1][0], j, k - headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,true,j1))
 			{
 				world.setBlockWithNotify(i, j, k, 0);
 			}
 		}
 		else
 		{
-			if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID || canBlockStay(world, i, j, k))
+			if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,false,j1))
 			{
 				world.setBlockWithNotify(i, j, k, 0);
 				if(!world.isRemote)

@@ -807,6 +807,25 @@ public class ClientProxy implements IProxy
         ModLoader.addLocalization("item.Ore.GalenaPartial.name", "Partially Smelted Galena");
         ModLoader.addLocalization("item.Ore.TetrahedritePartial.name", "Partially Smelted Tetrahedrite");
         ModLoader.addLocalization("item.Ore.MagnetitePartial.name", "Partially Smelted Magnetite");
+        
+        ModLoader.addLocalization("item.Small Ore.Native Copper.name", "Native Copper Nugget");
+        ModLoader.addLocalization("item.Small Ore.Native Gold.name", "Native Gold Nugget");
+        ModLoader.addLocalization("item.Small Ore.Native Platinum.name", "Native Platinum Nugget");
+        ModLoader.addLocalization("item.Small Ore.Hematite.name", "Small Hematite");
+        ModLoader.addLocalization("item.Small Ore.Native Silver.name", "Native Silver Nugget");
+        ModLoader.addLocalization("item.Small Ore.Cassiterite.name", "Small Cassiterite");
+        ModLoader.addLocalization("item.Small Ore.Galena.name", "Small Galena");
+        ModLoader.addLocalization("item.Small Ore.Bismuthinite.name", "Small Bismuthinite");
+        ModLoader.addLocalization("item.Small Ore.Garnierite.name", "Small Garnierite");
+        ModLoader.addLocalization("item.Small Ore.Malachite.name", "Small Malachite");
+        ModLoader.addLocalization("item.Small Ore.Magnetite.name", "Small Magnetite");
+        ModLoader.addLocalization("item.Small Ore.Limonite.name", "Small Limonite");
+        ModLoader.addLocalization("item.Small Ore.Sphalerite.name", "Small Sphalerite");
+        ModLoader.addLocalization("item.Small Ore.Tetrahedrite.name", "Small Tetrahedrite");
+        ModLoader.addLocalization("item.Small Ore.GalenaPartial.name", "Small Partially Smelted Galena");
+        ModLoader.addLocalization("item.Small Ore.TetrahedritePartial.name", "Small Partially Smelted Tetrahedrite");
+        ModLoader.addLocalization("item.Small Ore.MagnetitePartial.name", "Small Partially Smelted Magnetite");
+        
         //Cobble
         ModLoader.addLocalization("tile.IgInRockCobble.Granite.name", "Granite Cobblestone");
         ModLoader.addLocalization("tile.IgInRockCobble.Diorite.name", "Diorite Cobblestone");
@@ -1016,6 +1035,7 @@ public class ClientProxy implements IProxy
             ModLoader.addLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
             ModLoader.addLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
             ModLoader.addLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
+            ModLoader.addLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
             //ModLoader.addLocalization("item.Stick."+WoodNames[i]+".name", WoodNames[i]+" Stick");
         }
         ModLoader.addLocalization("item.Stick.name", "Stick");
@@ -1273,4 +1293,6 @@ public class ClientProxy implements IProxy
     {
         return entity.func_48100_a(par1Class);
     }
+
+
 }

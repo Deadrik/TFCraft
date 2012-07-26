@@ -64,6 +64,24 @@ public class TFCHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,36), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(20, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,37), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(2, 6));
 		
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,2), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(1, 4));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,3), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,4), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,5), TinRaw,new ItemStack(TFCItems.TinUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,6), LeadRaw,new ItemStack(TFCItems.LeadUnshaped,1)).setMinMax(5, 10).setMorph(new ItemStack(TFCItems.OreChunk,1,35)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,7), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,8), NickelRaw,new ItemStack(TFCItems.NickelUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,9), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,10), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(5, 10).setMorph(new ItemStack(TFCItems.OreChunk,1,37)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,11), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,12), ZincRaw,new ItemStack(TFCItems.ZincUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,13), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(3, 6).setMorph(new ItemStack(TFCItems.OreChunk,1,36)));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,35), SilverRaw,new ItemStack(TFCItems.SilverUnshaped,1)).setMinMax(4, 8));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,36), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(5, 10));
+        manager.addIndex(new HeatIndex(new ItemStack(TFCItems.SmallOreChunk,1,37), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(1, 3));
+		
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakSteelUnshaped,1), SteelRaw,new ItemStack(TFCItems.WeakSteelUnshaped,1)).setMorph(new ItemStack(TFCItems.terraCeramicMold)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakRedSteelUnshaped,1), RedSteelRaw,new ItemStack(TFCItems.WeakRedSteelUnshaped,1)).setMorph(new ItemStack(TFCItems.terraCeramicMold)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WeakBlueSteelUnshaped,1), BlueSteelRaw,new ItemStack(TFCItems.WeakBlueSteelUnshaped,1)).setMorph(new ItemStack(TFCItems.terraCeramicMold)));
@@ -320,7 +338,7 @@ public class TFCHeat
 		return false;
 	}
 
-	public static String getHeatColor(float temp, float meltTemp)
+	public static String getHeatColor(float temp, float meltTemp, float boilTemp)
 	{
 		String phrase = "";
 		if(TFCSettings.BlacksmithModeHeatScale)
@@ -410,8 +428,13 @@ public class TFCHeat
 				phrase = "\247fBrilliant White";
 			}
 
-			if(temp > meltTemp) {
-				phrase = phrase + "\247f - Liquid";
+			if(temp > meltTemp && temp > boilTemp - (boilTemp*0.1F)) 
+			{
+				phrase = phrase + "\247f - Liquid \247c!Caution!";
+			}
+			else if(temp > meltTemp)
+			{
+			    phrase = phrase + "\247f - Liquid";
 			}
 		}
 		else
@@ -452,6 +475,8 @@ public class TFCHeat
 				}
 			}
 
+			
+			    
 			return "\247fBrilliant White: Liquid";
 		}
 

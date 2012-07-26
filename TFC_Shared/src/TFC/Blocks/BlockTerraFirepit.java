@@ -209,10 +209,11 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 				if(((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).charcoalCounter != 0)
 				{
 					world.spawnParticle("smoke", f+f4 - 0.3F, f1+2.5,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle("smoke", f+f4 - 0.3F-1, f1+2.5,  f2 + f5 + 0.3F+1, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle("smoke", f+f4 - 0.3F-2, f1+1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle("smoke", f+f4 - 0.3F+2, f1+1.5,  f2 + f5 + 0.3F+2, 0.0D, 0.0D, 0.0D);
-					world.spawnParticle("smoke", f+f4 - 0.3F+1, f1+1.5,  f2 + f5 + 0.3F-2, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle("smoke", f+f4 - 0.1F, f1+2.5,  f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
+//					world.spawnParticle("smoke", f+f4 - 0.3F-1, f1+2.5,  f2 + f5 + 0.3F+1, 0.0D, 0.0D, 0.0D);
+//					world.spawnParticle("smoke", f+f4 - 0.3F-2, f1+1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
+//					world.spawnParticle("smoke", f+f4 - 0.3F+2, f1+1.5,  f2 + f5 + 0.3F+2, 0.0D, 0.0D, 0.0D);
+//					world.spawnParticle("smoke", f+f4 - 0.3F+1, f1+1.5,  f2 + f5 + 0.3F-2, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}

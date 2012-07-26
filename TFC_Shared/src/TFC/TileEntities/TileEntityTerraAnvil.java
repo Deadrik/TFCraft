@@ -16,6 +16,7 @@ import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
 import TFC.Items.ItemTerraMeltedMetal;
 
+import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
@@ -470,6 +471,19 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
     public void closeChest() 
     {
         workRecipe = null;
+        if(AnvilTier == AnvilReq.STONE.Tier)
+        {
+            ejectContents();
+            BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+            if(yCoord < biome.Layer3)
+                worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, biome.Layer3Type, biome.Layer3Meta);
+            else if(yCoord < biome.Layer2)
+                worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, biome.Layer2Type, biome.Layer2Meta);
+            else                 
+                worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, biome.Layer1Type, biome.Layer1Meta);
+            
+            
+        }
     }
     @Override
     public ItemStack decrStackSize(int i, int j)

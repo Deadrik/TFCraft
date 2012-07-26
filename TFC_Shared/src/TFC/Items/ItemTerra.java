@@ -67,20 +67,20 @@ public class ItemTerra extends Item  implements ITextureProvider
             {
                 float temp = stackTagCompound.getFloat("temperature");
                 float meltTemp = -1;
+                float boilTemp = 10000;
                 HeatIndex hi = HeatManager.getInstance().findMatchingIndex(is);
                 if(hi != null)
                 {
                     meltTemp = hi.meltTemp;
+                    boilTemp = hi.boilTemp;
                 }
 
                 if(meltTemp != -1)
                 {
-                    if(is.getItem() instanceof ItemFood)
-                        arraylist.add(TFCHeat.getHeatColorFood(temp, meltTemp));
-                    else if(is.itemID == Item.stick.shiftedIndex)
+                    if(is.itemID == Item.stick.shiftedIndex)
                         arraylist.add(TFCHeat.getHeatColorTorch(temp, meltTemp));
                     else
-                        arraylist.add(TFCHeat.getHeatColor(temp, meltTemp));
+                        arraylist.add(TFCHeat.getHeatColor(temp, meltTemp, boilTemp));
                 }
             }
             if(stackTagCompound.hasKey("itemCraftingValue") && stackTagCompound.getByte("itemCraftingValue") != 0)

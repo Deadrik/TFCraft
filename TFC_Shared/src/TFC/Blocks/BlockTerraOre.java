@@ -106,48 +106,15 @@ public class BlockTerraOre extends BlockTerra
         return s;
     }
     
-//    public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) 
-//    {
-//        if(player != null)
-//        {
-//            player.addStat(StatList.mineBlockStatArray[blockID], 1);
-//            player.addExhaustion(0.075F);
-//        }
-//
-//        MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, world);
-//        if(objectMouseOver == null) {
-//            return false;
-//        }       
-//        int side = objectMouseOver.sideHit;
-//        int sub = objectMouseOver.subHit;
-//
-//
-//        if(true)
-//        {
-//            
-//            ItemChisel.CreateSlab(world, i, j, k, this.blockID, (byte) world.getBlockMetadata(i, j, k), side, mod_TFC_Core.stoneMinedSlabs.blockID);
-//            TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(i,j,k);
-//            int id = te.TypeID;
-//            int meta = te.MetaID;
-//            ItemChisel.CreateSlab(world, i, j, k, te.TypeID, te.MetaID, side, mod_TFC_Core.stoneMinedSlabs.blockID);
-//            te = (TileEntityPartial) world.getBlockTileEntity(i, j, k);
-//            //Block.blocksList[id].harvestBlock(world, player, i, j, k, meta);
-//            if(te != null)
-//            {
-//                long extraX = (te.extraData) & 0xf;
-//                long extraY = (te.extraData >> 4) & 0xf;
-//                long extraZ = (te.extraData >> 8) & 0xf;
-//                long extraX2 = (te.extraData >> 12) & 0xf;
-//                long extraY2 = (te.extraData >> 16) & 0xf;
-//                long extraZ2 = (te.extraData >> 20) & 0xf;
-//
-//                if(extraX+extraY+extraZ+extraX2+extraY2+extraZ2 > 8)
-//                    return world.setBlockWithNotify(i, j, k, 0);
-//            }
-//            else
-//                return world.setBlockWithNotify(i, j, k, 0);
-//        }
-//
-//        return false;
-//    }
+    public static Item getDroppedItem(int meta)
+    {
+        if(meta == 14 || meta == 15) 
+        {
+            return Item.coal;
+        } 
+        else 
+        {
+            return TFCItems.SmallOreChunk;
+        }
+    }
 }

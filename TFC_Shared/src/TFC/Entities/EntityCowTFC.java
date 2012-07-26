@@ -108,24 +108,19 @@ public class EntityCowTFC extends EntityAnimalTFC
         int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
         int var4;
 
-        for (var4 = 0; var4 < var3; ++var4)
-        {
-            this.dropItem(Item.leather.shiftedIndex, 1);
-        }
 
-        var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + par2);
+            this.dropItem(Item.leather.shiftedIndex, 5+this.rand.nextInt(15));
 
-        for (var4 = 0; var4 < var3; ++var4)
-        {
             if (this.isBurning())
             {
-                this.dropItem(Item.beefCooked.shiftedIndex, 1);
+                
+                this.dropItem(Item.beefCooked.shiftedIndex, (int) (this.size_mod *(15+this.rand.nextInt(10))));
             }
             else
             {
-                this.dropItem(Item.beefRaw.shiftedIndex, 1);
+                this.dropItem(Item.beefRaw.shiftedIndex, (int) (this.size_mod *(15+this.rand.nextInt(10))));
             }
-        }
+
     }
 
     /**

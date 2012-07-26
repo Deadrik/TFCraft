@@ -25,6 +25,7 @@ import TFC.Items.ItemFlatRock;
 import TFC.Items.ItemFruitTreeSapling;
 import TFC.Items.ItemHammer;
 import TFC.Items.ItemLooseRock;
+import TFC.Items.ItemPlank;
 import TFC.Items.ItemStick;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemTerraAnvil;
@@ -40,9 +41,10 @@ import TFC.Items.ItemTerraLogs;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.Items.ItemTerraMiscTool;
 import TFC.Items.ItemTerraMiscToolHead;
+import TFC.Items.ItemTerraOreSmall;
 import TFC.Items.ItemTerraProPick;
 import TFC.Items.ItemTerraSluice;
-import TFC.Items.ItemTerraSmallOre;
+import TFC.Items.ItemTerraOre;
 import TFC.Items.ItemTerraSword;
 import TFC.Items.ItemTerraWoodSupport;
 import TFC.Items.ItemUnfinishedArmor;
@@ -775,6 +777,8 @@ public class TFCItems
     public static Item StoneKnifeHead;
     public static Item StoneHammerHead;
     public static Item StoneProPickHead;
+    public static Item SmallOreChunk;
+    public static Item SinglePlank;
     
     
     /**
@@ -784,19 +788,19 @@ public class TFCItems
     public static int IgExStoneUses = 70;
     public static int SedStoneUses = 50;
     public static int MMStoneUses = 55; 
-    public static int BismuthUses = 210;
-    public static int BismuthBronzeUses = 580;
-    public static int BlackBronzeUses = 530;
-    public static int BlackSteelUses = 1500;
-    public static int BlueSteelUses = 2000;
-    public static int BronzeUses = 600;
-    public static int CopperUses = 410;
-    public static int WroughtIronUses = 800;
-    public static int RedSteelUses = 2000;
-    public static int RoseGoldUses = 520;
-    public static int SteelUses = 1100;
-    public static int TinUses = 295;
-    public static int ZincUses = 280;
+    public static int BismuthUses = 420;
+    public static int BismuthBronzeUses = 1160;
+    public static int BlackBronzeUses = 1060;
+    public static int BlackSteelUses = 3000;
+    public static int BlueSteelUses = 4000;
+    public static int BronzeUses = 1200;
+    public static int CopperUses = 820;
+    public static int WroughtIronUses = 1600;
+    public static int RedSteelUses = 4000;
+    public static int RoseGoldUses = 1040;
+    public static int SteelUses = 2200;
+    public static int TinUses = 590;
+    public static int ZincUses = 560;
     
     public static EnumToolMaterial IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 1, 5);
     public static EnumToolMaterial SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 1, 5);
@@ -836,7 +840,8 @@ public class TFCItems
         }
         
         terraGoldPan = new ItemTerraGoldPan(TFCSettings.getIntFor(config,"item","terraGoldPan",16001)).setItemName("GoldPan").setIconCoord(1, 0);
-        terraSluiceItem = new ItemTerraSluice(TFCSettings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(6, 0);
+        terraSluiceItem = new ItemTerraSluice(TFCSettings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(9, 0);
+        
         terraProPickStone = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickStone",16003)).setItemName("StoneProPick").setIconCoord(0, 1).setMaxDamage(64);
         terraProPickBismuth = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuth",16004)).setItemName("BismuthProPick").setIconCoord(1, 1).setMaxDamage(128);
         terraProPickBismuthBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuthBronze",16005)).setItemName("BismuthBronzeProPick").setIconCoord(2, 1).setMaxDamage(180);
@@ -1062,7 +1067,7 @@ public class TFCItems
         HCRedSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraHCRedSteelIngot",16295)).setItemName("terraHCRedSteelIngot").setIconCoord(3, 4);
         HCSteelIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraHCSteelIngot",16296)).setItemName("terraHCSteelIngot").setIconCoord(6, 4);
 
-        OreChunk = new ItemTerraSmallOre(TFCSettings.getIntFor(config,"item","OreChunk",16297)).setItemName("Ore").setIconCoord(0, 3);
+        OreChunk = new ItemTerraOre(TFCSettings.getIntFor(config,"item","OreChunk",16297)).setItemName("Ore").setIconCoord(0, 3);
         Logs = new ItemTerraLogs(TFCSettings.getIntFor(config,"item","Logs",16298)).setItemName("Log").setIconCoord(0, 2);
         FlintPaxel = new ItemCustomPaxel(TFCSettings.getIntFor(config,"item","flintPaxel",16299)).setItemName("flintPaxel").setIconCoord(10, 0);
 
@@ -1411,6 +1416,9 @@ public class TFCItems
         StoneProPickHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","StoneProPickHead",num)).setItemName("Stone ProPick Head").setIconCoord(0, 1);num++;
         
         StoneKnife = new ItemCustomKnife(TFCSettings.getIntFor(config,"item","StoneKnife",num),IgExToolMaterial).setItemName("Stone Knife").setMaxDamage(IgExStoneUses).setIconCoord(0, 10);num++;
+        SmallOreChunk = new ItemTerraOreSmall(TFCSettings.getIntFor(config,"item","SmallOreChunk",num++)).setItemName("Small Ore").setIconCoord(0, 14);
+        SinglePlank = new ItemPlank(TFCSettings.getIntFor(config,"item","SinglePlank",num++),"/bioxx/terrasprites2.png").setItemName("SinglePlank").setIconCoord(0, 6);
+        
         
         Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
         /**Food Items*/
@@ -1630,6 +1638,11 @@ public class TFCItems
                 BlackSteelSaw,BlueSteelSaw,BronzeSaw,CopperSaw,
                 WroughtIronSaw,RedSteelSaw,RoseGoldSaw,SteelSaw,
                 TinSaw,ZincSaw};
+        
+        TFC_Core.Knives = new Item[]{StoneKnife,BismuthKnife,BismuthBronzeKnife,BlackBronzeKnife,
+                BlackSteelKnife,BlueSteelKnife,BronzeKnife,CopperKnife,
+                WroughtIronKnife,RedSteelKnife,RoseGoldKnife,SteelKnife,
+                TinKnife,ZincKnife};
         
         if (config != null) {
             config.save();

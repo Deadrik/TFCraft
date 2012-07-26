@@ -4,7 +4,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraSmallOre extends ItemTerra implements ITextureProvider
+public class ItemTerraOre extends ItemTerra implements ITextureProvider
 {
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
@@ -13,7 +13,7 @@ public class ItemTerraSmallOre extends ItemTerra implements ITextureProvider
 		/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
 
 
-	public ItemTerraSmallOre(int i) 
+	public ItemTerraOre(int i) 
 	{
 		super(i);
 		setMaxDamage(0);

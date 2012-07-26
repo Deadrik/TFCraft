@@ -443,10 +443,14 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
                     {
                         HandleItem(entityplayer, iinventory, TFC_Core.Chisels);
                     }
-                    else if(itemstack.itemID == Block.planks.blockID)
+                    else if(itemstack.itemID == TFCItems.SinglePlank.shiftedIndex)
                     {
                         HandleItem(entityplayer, iinventory, TFC_Core.Axes);
                         HandleItem(entityplayer, iinventory, TFC_Core.Saws);
+                    }
+                    else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex)
+                    {
+                        HandleItem(entityplayer, iinventory, TFC_Core.Knives);
                     }
                     else if(itemstack.itemID == TFCItems.terraWoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.terraWoodSupportItemH.shiftedIndex)
                     {
@@ -1114,7 +1118,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     @Override
     public String getVersion()
     {
-        return "Beta 2 Build 46e";
+        return "Beta 2 Build 47d";
     }
 
     @Override

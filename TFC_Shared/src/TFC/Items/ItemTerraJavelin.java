@@ -14,7 +14,7 @@ public class ItemTerraJavelin extends ItemTool implements ITextureProvider
         super(par1, weaponDamage, TFCItems.SedToolMaterial, new Block[0]);
         this.maxStackSize = 1;
         this.weaponDamage = 2;
-        this.setMaxDamage(35);
+        this.setMaxDamage(50);
 
     }
 

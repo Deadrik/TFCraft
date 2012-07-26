@@ -22,7 +22,7 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.maxStackSize = 4;
+		this.maxStackSize = 12;
 	}
 
 	@Override

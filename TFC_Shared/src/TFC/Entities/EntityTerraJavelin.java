@@ -276,7 +276,7 @@ public class EntityTerraJavelin extends Entity
 						}
 
 						this.worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-						if(rand.nextInt(5) == 0) {
+						if(rand.nextInt(10) == 0) {
 							this.setDead();
 						}
 					}

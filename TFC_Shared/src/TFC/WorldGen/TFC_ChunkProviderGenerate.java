@@ -8,6 +8,7 @@ import net.minecraft.src.ChunkProviderGenerate;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NoiseGeneratorOctaves;
 import net.minecraft.src.World;
+import net.minecraft.src.*;
 
 public class TFC_ChunkProviderGenerate
 {
@@ -171,10 +172,25 @@ public class TFC_ChunkProviderGenerate
                             }
                         }
 
-                        if(((height > var5-2 && height <= var5+1) || (height < var5 && blockArray[index+2] == Block.waterStill.blockID)) && biomegenbase.biomeID == 0)//If its an ocean give it a sandy bottom
+                        if(biomegenbase.biomeID == 0)
                         {
-                            blockArrayBig[indexBig] = (byte) Block.sand.blockID;
-                            metaArrayBig[indexBig] = 0;
+                            if(((height > var5-2 && height <= var5+1) || (height < var5 && blockArray[index+2] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
+                            {
+
+                                blockArrayBig[indexBig] = (byte) Block.sand.blockID;
+                                metaArrayBig[indexBig] = 0;
+                            }
+                        }
+                        else if(!(biomegenbase instanceof BiomeGenSwampTFC))
+                        {
+                            if(((height > var5-2 && height < var5 && blockArray[index+1] == Block.waterStill.blockID) || (height < var5 && blockArray[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
+                            {
+                                if(blockArrayBig[indexBig] != Block.sand.blockID && rand.nextInt(3) != 0)
+                                {
+                                    blockArrayBig[indexBig] = (byte) Block.gravel.blockID;
+                                    metaArrayBig[indexBig] = 0;
+                                }
+                            }
                         }
                     }
                 }
