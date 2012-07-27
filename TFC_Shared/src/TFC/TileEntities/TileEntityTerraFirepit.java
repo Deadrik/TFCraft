@@ -56,7 +56,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     private final int MaxFireTemp = 2000;
 
-    public final int FIREBURNTIME = 2;//default 240
+    public final int FIREBURNTIME = 240;//default 240
 
     private static int[] area =  {0,0,2,2,2,0,0};
     private static int[] area0 = {0,2,1,1,1,2,0};
@@ -1546,9 +1546,13 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     fireItemStacks[8].stackSize = 1;
                 }
             }
+            
+            if(fuelTimeLeft <= 0)
+            {
+                TFCHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
+            }
         }
 
-        TFCHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound)
