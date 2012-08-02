@@ -1,5 +1,8 @@
 package TFC.Items;
 
+import java.util.List;
+
+import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ForgeHooks;
 import net.minecraft.src.forge.ITextureProvider;
@@ -15,6 +18,12 @@ implements ITextureProvider
 	public String getTextureFile() {
 		return "/bioxx/terratools.png";
 	}
+	
+	public void addInformation(ItemStack is, List arraylist) 
+    {
+        if(TFCSettings.enableDebugMode)
+            arraylist.add("Damage: "+is.getItemDamage());
+    }
 
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return

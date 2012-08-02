@@ -298,7 +298,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                     Boolean useCount = false;
                     if(output.getItem() instanceof ItemTerraMeltedMetal)
                     {
-                        if(output.stackSize > 1)
+                        if(output.stackSize >= 1)
                         {
                             count = 0;
                             int c = output.stackSize;
@@ -307,24 +307,32 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                                 if(fireItemStacks[10] != null && fireItemStacks[10].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[10].stackSize--;
+                                    if(fireItemStacks[10].stackSize == 0)
+                                        fireItemStacks[10] = null;
                                     c--;
                                     count++;
                                 }
                                 else if(fireItemStacks[11] != null && fireItemStacks[11].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[11].stackSize--;
+                                    if(fireItemStacks[11].stackSize == 0)
+                                        fireItemStacks[11] = null;
                                     c--;
                                     count++;
                                 }
                                 else if(fireItemStacks[12] != null && fireItemStacks[12].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[12].stackSize--;
+                                    if(fireItemStacks[12].stackSize == 0)
+                                        fireItemStacks[12] = null;
                                     c--;
                                     count++;
                                 }
                                 else if(fireItemStacks[13] != null && fireItemStacks[13].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[13].stackSize--;
+                                    if(fireItemStacks[13].stackSize == 0)
+                                        fireItemStacks[13] = null;
                                     c--;
                                     count++;
                                 }
@@ -334,7 +342,12 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                     }
                     fireItemStacks[i] = index.getOutput(R);
                     if(useCount)
-                        fireItemStacks[i].stackSize = count;
+                    {
+                        if(count > 0)
+                            fireItemStacks[i].stackSize = count;
+                        else
+                            fireItemStacks[i] = null;
+                    }
                     
                     HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
                     if(index2 != null)

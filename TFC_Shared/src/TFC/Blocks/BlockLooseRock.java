@@ -18,6 +18,11 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 	{
 		return mod_TFC_Core.looseRockRenderId;
 	}
+	
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+    {
+        return true;
+    }
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
@@ -74,6 +79,11 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 	{
 		return false;
 	}
+	
+	public boolean isCollidable()
+    {
+        return false;
+    }
 
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{

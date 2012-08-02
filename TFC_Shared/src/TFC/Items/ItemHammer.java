@@ -1,6 +1,9 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.Core.Helper;
+import TFC.Core.TFCSettings;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import net.minecraft.src.*;
@@ -18,6 +21,12 @@ implements ITextureProvider
         return "/bioxx/terratools.png";
     }
 
+    public void addInformation(ItemStack is, List arraylist) 
+    {
+        if(TFCSettings.enableDebugMode)
+            arraylist.add("Damage: "+is.getItemDamage());
+    }
+    
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int l)
     {

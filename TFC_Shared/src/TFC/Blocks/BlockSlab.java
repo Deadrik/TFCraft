@@ -26,17 +26,15 @@ import net.minecraft.src.mod_TFC_Core;
 
 public class BlockSlab extends BlockPartial
 {
-
     public BlockSlab(int par1)
     {
         super(par1, Material.rock);
-        // TODO Auto-generated constructor stub
     }
     
     @Override
     public int getRenderType()
     {
-            return mod_TFC_Core.slabRenderId;
+        return mod_TFC_Core.slabRenderId;
     }
 
     /**
@@ -121,8 +119,6 @@ public class BlockSlab extends BlockPartial
         byte extraZ2 = (byte) ((te.extraData >> 20) & 0xf);
 
         return AxisAlignedBB.getBoundingBoxFromPool(i + (0.1F * extraX), j + (0.1F * extraY),  k + (0.1F * extraZ), i + (1 - (0.1F * extraX2)), j + (1 - (0.1F * extraY2)), k + (1 - (0.1F * extraZ2)));
-        
-        //return super.getCollisionBoundingBoxFromPool(world, i, j, k);
     }
     
     /**
@@ -158,5 +154,10 @@ public class BlockSlab extends BlockPartial
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {   
 
+    }
+    
+    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+    {
+        return true;
     }
 }

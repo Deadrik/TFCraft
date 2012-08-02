@@ -288,4 +288,9 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
             par1World.removeBlockTileEntity(par2, par3, par4);
         }
     }
+    
+    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+    {
+        return true;
+    }
 }

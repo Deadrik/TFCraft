@@ -1,5 +1,6 @@
 package TFC.Blocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.Core.Helper;
@@ -9,6 +10,7 @@ import TFC.Entities.EntityFallingStone2;
 import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
@@ -293,54 +295,38 @@ public class BlockCollapsable extends BlockTerra
         }
     }
     
-//    public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) 
-//    {
-//        if(player != null)
-//        {
-//            player.addStat(StatList.mineBlockStatArray[blockID], 1);
-//            player.addExhaustion(0.075F);
-//        }
-//
-//        MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, world);
-//        if(objectMouseOver == null) {
-//            return false;
-//        }       
-//        int side = objectMouseOver.sideHit;
-//        int sub = objectMouseOver.subHit;
-//
-//
-//        if(true)
-//        {
-//            
-//            ItemChisel.CreateSlab(world, i, j, k, this.blockID, (byte) world.getBlockMetadata(i, j, k), side, mod_TFC_Core.stoneMinedSlabs.blockID);
-//            TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(i,j,k);
-//            int id = te.TypeID;
-//            int meta = te.MetaID;
-//            ItemChisel.CreateSlab(world, i, j, k, te.TypeID, te.MetaID, side, mod_TFC_Core.stoneMinedSlabs.blockID);
-//            te = (TileEntityPartial) world.getBlockTileEntity(i, j, k);
-//            Block.blocksList[id].harvestBlock(world, player, i, j, k, meta);
-//            if(te != null)
-//            {
-//                long extraX = (te.extraData) & 0xf;
-//                long extraY = (te.extraData >> 4) & 0xf;
-//                long extraZ = (te.extraData >> 8) & 0xf;
-//                long extraX2 = (te.extraData >> 12) & 0xf;
-//                long extraY2 = (te.extraData >> 16) & 0xf;
-//                long extraZ2 = (te.extraData >> 20) & 0xf;
-//
-//                if(extraX+extraY+extraZ+extraX2+extraY2+extraZ2 > 8)
-//                    return world.setBlockWithNotify(i, j, k, 0);
-//            }
-//            else
-//                return world.setBlockWithNotify(i, j, k, 0);
-//        }
-//
-//        return false;
-//    }
-    
     public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) 
     {
         harvestBlock(par1World, null, par2,par3,par4,par1World.getBlockMetadata(par2, par3, par4));
+    }
+    
+    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+    {
+        if((world.getBlockId(i+1, j, k) == 0 || world.getBlockId(i-1, j, k) == 0 || 
+                world.getBlockId(i, j, k+1) == 0 || world.getBlockId(i, j, k-1) == 0) && 
+                world.getBlockId(i, j+1, k) == 0)
+        {
+            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
+
+            double minX = 0.25;
+            double minZ = 0.25;
+            double maxX = 0.75;
+            double maxZ = 0.75;
+
+            if(world.getBlockId(i+1, j, k) == 0)
+                maxX = 0.5;
+            if(world.getBlockId(i-1, j, k) == 0)
+                minX = 0.5;
+            if(world.getBlockId(i, j, k+1) == 0)
+                maxZ = 0.5;
+            if(world.getBlockId(i, j, k-1) == 0)
+                minZ = 0.5;
+
+            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
+
+        }
+        else
+            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
     }
 
 }

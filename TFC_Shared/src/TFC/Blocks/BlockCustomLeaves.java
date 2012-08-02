@@ -21,6 +21,10 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
         this.setTickRandomly(false);
     }
     
+    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        return true;
+    }
     
     /**
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called

@@ -625,13 +625,9 @@ public class TFC_Game
 
     public static void registerRecipes()
     {
-
-        
-        
-
         for(int i = 0; i <= 25; i+=5)
         {
-            float j = (float)i / 100;
+            float j = ((float)i / 100);
             //pickaxes
             ModLoader.addRecipe(new ItemStack(TFCItems.terraBismuthPick, 1, (int)(TFCItems.BismuthUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
                 new ItemStack(TFCItems.BismuthPickaxeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,-1)});

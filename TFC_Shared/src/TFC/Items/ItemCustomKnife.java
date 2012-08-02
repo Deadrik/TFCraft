@@ -1,5 +1,8 @@
 package TFC.Items;
 
+import java.util.List;
+
+import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -33,4 +36,10 @@ implements ITextureProvider
 		par1ItemStack.damageItem(1, par3EntityLiving);
 		return true;
 	}
+	
+	public void addInformation(ItemStack is, List arraylist) 
+    {
+        if(TFCSettings.enableDebugMode)
+            arraylist.add("Damage: "+is.getItemDamage());
+    }
 }

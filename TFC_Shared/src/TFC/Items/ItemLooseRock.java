@@ -24,15 +24,15 @@ public class ItemLooseRock extends ItemTerra
         texture = tex;
 
     }
-    
+
     int[][] map = 
-            {   {0,-1,0},
-                {0,1,0},
-                {0,0,-1},
-                {0,0,1},
-                {-1,0,0},
-                {1,0,0},
-            };
+        {   {0,-1,0},
+            {0,1,0},
+            {0,0,-1},
+            {0,0,1},
+            {-1,0,0},
+            {1,0,0},
+        };
 
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
@@ -47,14 +47,18 @@ public class ItemLooseRock extends ItemTerra
         int side = objectMouseOver.sideHit;
         int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 
-        if(     (itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneIgInCobble.blockID, itemstack.getItemDamage())) || 
-                (itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
-                (itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
-                (itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
+        double dist = entityplayer.getDistance(x + map[side][0], y + map[side][1], z + map[side][2])-1.6;
+        if(dist > 0.5)
         {
-            world.markBlockNeedsUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
-            itemstack.stackSize = itemstack.stackSize-1;
-            return true;
+            if(     (itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneIgInCobble.blockID, itemstack.getItemDamage())) || 
+                    (itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
+                    (itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
+                    (itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC_Core.terraStoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
+            {
+                world.markBlockNeedsUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
+                itemstack.stackSize = itemstack.stackSize-1;
+                return true;            
+            }
         }
 
         return false;
@@ -71,10 +75,10 @@ public class ItemLooseRock extends ItemTerra
         String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
         return s;
     }
-    
+
     public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
     {
-        
+
     }
 
     public int getIconFromDamage(int i)

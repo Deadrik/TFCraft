@@ -39,6 +39,5 @@ public abstract class BlockTerra extends Block implements ITextureProvider
             int metadata = world.getBlockMetadata(i, j, k);
             System.out.println("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());
         }
-        //mc.ingameGUI.addChatMessage("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());  
     }
 }

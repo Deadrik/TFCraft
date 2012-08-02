@@ -843,19 +843,19 @@ public class TFCItems
         terraSluiceItem = new ItemTerraSluice(TFCSettings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(9, 0);
         
         terraProPickStone = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickStone",16003)).setItemName("StoneProPick").setIconCoord(0, 1).setMaxDamage(64);
-        terraProPickBismuth = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuth",16004)).setItemName("BismuthProPick").setIconCoord(1, 1).setMaxDamage(128);
-        terraProPickBismuthBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuthBronze",16005)).setItemName("BismuthBronzeProPick").setIconCoord(2, 1).setMaxDamage(180);
-        terraProPickBlackBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackBronze",16006)).setItemName("BlackBronzeProPick").setIconCoord(3, 1).setMaxDamage(220);
-        terraProPickBlackSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackSteel",16007)).setItemName("BlackSteelProPick").setIconCoord(4, 1).setMaxDamage(1024);
-        terraProPickBlueSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlueSteel",16008)).setItemName("BlueSteelProPick").setIconCoord(5, 1).setMaxDamage(1800);
-        terraProPickBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBronze",16009)).setItemName("BronzeProPick").setIconCoord(6, 1).setMaxDamage(180);
-        terraProPickCopper = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickCopper",16010)).setItemName("CopperProPick").setIconCoord(7, 1).setMaxDamage(180);
-        terraProPickIron = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickWroughtIron",16012)).setItemName("WroughtIronProPick").setIconCoord(8, 1).setMaxDamage(256);
-        terraProPickRedSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRedSteel",16016)).setItemName("RedSteelProPick").setIconCoord(9, 1).setMaxDamage(1800);
-        terraProPickRoseGold = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRoseGold",16017)).setItemName("RoseGoldProPick").setIconCoord(10, 1).setMaxDamage(190);
-        terraProPickSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickSteel",16019)).setItemName("SteelProPick").setIconCoord(11, 1).setMaxDamage(768);
-        terraProPickTin = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickTin",16021)).setItemName("TinProPick").setIconCoord(12, 1).setMaxDamage(96);
-        terraProPickZinc = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickZinc",16022)).setItemName("ZincProPick").setIconCoord(13, 1).setMaxDamage(160);
+        terraProPickBismuth = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuth",16004)).setItemName("BismuthProPick").setIconCoord(1, 1).setMaxDamage(BismuthUses);
+        terraProPickBismuthBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBismuthBronze",16005)).setItemName("BismuthBronzeProPick").setIconCoord(2, 1).setMaxDamage(BismuthBronzeUses);
+        terraProPickBlackBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackBronze",16006)).setItemName("BlackBronzeProPick").setIconCoord(3, 1).setMaxDamage(BlackBronzeUses);
+        terraProPickBlackSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlackSteel",16007)).setItemName("BlackSteelProPick").setIconCoord(4, 1).setMaxDamage(BlackSteelUses);
+        terraProPickBlueSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBlueSteel",16008)).setItemName("BlueSteelProPick").setIconCoord(5, 1).setMaxDamage(BlueSteelUses);
+        terraProPickBronze = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickBronze",16009)).setItemName("BronzeProPick").setIconCoord(6, 1).setMaxDamage(BronzeUses);
+        terraProPickCopper = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickCopper",16010)).setItemName("CopperProPick").setIconCoord(7, 1).setMaxDamage(CopperUses);
+        terraProPickIron = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickWroughtIron",16012)).setItemName("WroughtIronProPick").setIconCoord(8, 1).setMaxDamage(WroughtIronUses);
+        terraProPickRedSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRedSteel",16016)).setItemName("RedSteelProPick").setIconCoord(9, 1).setMaxDamage(RedSteelUses);
+        terraProPickRoseGold = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickRoseGold",16017)).setItemName("RoseGoldProPick").setIconCoord(10, 1).setMaxDamage(RoseGoldUses);
+        terraProPickSteel = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickSteel",16019)).setItemName("SteelProPick").setIconCoord(11, 1).setMaxDamage(SteelUses);
+        terraProPickTin = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickTin",16021)).setItemName("TinProPick").setIconCoord(12, 1).setMaxDamage(TinUses);
+        terraProPickZinc = new ItemTerraProPick(TFCSettings.getIntFor(config,"item","terraProPickZinc",16022)).setItemName("ZincProPick").setIconCoord(13, 1).setMaxDamage(ZincUses);
         
         BismuthIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthIngot",16028)).setItemName("terraBismuthIngot").setIconCoord(0, 3);
         BismuthBronzeIngot = new ItemTerraIngot(TFCSettings.getIntFor(config,"item","terraBismuthBronzeIngot",16029)).setItemName("terraBismuthBronzeIngot").setIconCoord(1, 3);

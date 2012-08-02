@@ -8,6 +8,7 @@ import TFC.Blocks.BlockTerraOre;
 import TFC.Blocks.BlockTerraOre2;
 import TFC.Blocks.BlockTerraOre3;
 import TFC.Core.Helper;
+import TFC.Core.TFCSettings;
 import TFC.Core.Vector3f;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -40,6 +41,11 @@ public class ItemTerraProPick extends Item implements ITextureProvider
         return "/bioxx/terratools.png";
     }
 
+    public void addInformation(ItemStack is, List arraylist) 
+    {
+        if(TFCSettings.enableDebugMode)
+            arraylist.add("Damage: "+is.getItemDamage());
+    }
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l)
     {

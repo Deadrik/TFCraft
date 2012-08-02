@@ -1,5 +1,6 @@
 package TFC.Blocks;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.Entities.EntityFallingDirt;
@@ -106,6 +107,35 @@ public class BlockTerraDirt extends BlockTerra2
     public void updateTick(World world, int i, int j, int k, Random random)
     {
         tryToFall(world, i, j, k);
+    }
+    
+    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+    {
+        if((world.getBlockId(i+1, j, k) == 0 || world.getBlockId(i-1, j, k) == 0 || 
+                world.getBlockId(i, j, k+1) == 0 || world.getBlockId(i, j, k-1) == 0) && 
+                world.getBlockId(i, j+1, k) == 0)
+        {
+            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
+
+            double minX = 0.25;
+            double minZ = 0.25;
+            double maxX = 0.75;
+            double maxZ = 0.75;
+
+            if(world.getBlockId(i+1, j, k) == 0)
+                maxX = 0.5;
+            if(world.getBlockId(i-1, j, k) == 0)
+                minX = 0.5;
+            if(world.getBlockId(i, j, k+1) == 0)
+                maxZ = 0.5;
+            if(world.getBlockId(i, j, k-1) == 0)
+                minZ = 0.5;
+
+            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
+
+        }
+        else
+            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
     }
 
 }
