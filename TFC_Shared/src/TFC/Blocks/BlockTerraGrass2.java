@@ -50,6 +50,23 @@ public class BlockTerraGrass2 extends BlockTerra2
     protected int damageDropped(int i) {
         return i;
     }
+    
+    public boolean isBlockNormalCube(World world, int i, int j, int k) 
+    {
+        if(world.isAirBlock(i, j+1, k))
+        {
+            if(world.isAirBlock(i+1, j, k))
+                return false;
+            if(world.isAirBlock(i-1, j, k))
+                return false;
+            if(world.isAirBlock(i, j, k+1))
+                return false;
+            if(world.isAirBlock(i, j, k-1))
+                return false;
+        }
+
+        return true;
+    }
 
 
     /**

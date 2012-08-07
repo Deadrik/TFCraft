@@ -14,6 +14,7 @@ import TFC.Core.TFCSeasons;
 import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
 import TFC.Items.ItemTerraMeltedMetal;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityItem;
@@ -1382,14 +1383,14 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 if(fireTemperature > 210 && index != null)
                 {
                     inputCompound = new NBTTagCompound();
-                    inputCompound.setFloat("temperature", worldObj.getBiomeGenForCoords(xCoord, zCoord).getHeightAdjustedTemperature(yCoord)+10);
+                    inputCompound.setFloat("temperature",  ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord)+10);
                     fireItemStacks[1].setTagCompound(inputCompound);
-                    inputItemTemp = worldObj.getBiomeGenForCoords(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
+                    inputItemTemp = ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
                 }
             }
             else if(fireItemStacks[1] == null)
             {
-                inputItemTemp = worldObj.getBiomeGenForCoords(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
+                inputItemTemp =  ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
             }
             //careForInventorySlot(1,fireTemperature);
             //careForInventorySlot(6,fireTemperature);
@@ -1411,7 +1412,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             HandleFuelStack();
             if(ambientTemp == -1000)	
             {
-                BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+                TFCBiome biome = (TFCBiome) worldObj.getBiomeGenForCoords(xCoord, zCoord);
                 ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
             }
             //here we set the various temperatures to range

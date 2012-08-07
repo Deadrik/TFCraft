@@ -2,6 +2,8 @@ package TFC.Blocks;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -26,7 +28,7 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
-	    BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
+	    TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
 	    int off = 0;
 	    
 	    if(biome.SurfaceType == mod_TFC_Core.terraStoneSed.blockID) off = 3;

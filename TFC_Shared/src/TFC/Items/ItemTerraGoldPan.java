@@ -8,6 +8,7 @@ import TFC.Blocks.BlockTerraOre;
 import TFC.Core.Helper;
 import TFC.Core.TFCSettings;
 import TFC.TileEntities.TileEntityTerraSluice;
+import TFC.WorldGen.BiomeGenRiverTFC;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 

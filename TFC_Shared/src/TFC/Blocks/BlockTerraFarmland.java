@@ -1,6 +1,8 @@
 package TFC.Blocks;
 
 import java.util.Random;
+
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 
 
@@ -121,7 +123,7 @@ public class BlockTerraFarmland extends BlockTerra2
 
 		if (var6.isSolid())
 		{
-			int id = par1World.getBiomeGenForCoords(par2, par4).DirtID;
+			int id = ((TFCBiome)par1World.getBiomeGenForCoords(par2, par4)).DirtID;
 			par1World.setBlockWithNotify(par2, par3, par4, id);
 		}
 	}

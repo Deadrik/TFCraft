@@ -17,6 +17,7 @@ import TFC.Core.TFC_Core.Direction;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.WorldGen.TFCBiome;
 
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -55,7 +56,7 @@ public class TFC_CoreRender
         if(over == -1 && (type == mod_TFC_Core.terraOre.blockID || type == mod_TFC_Core.terraOre2.blockID || type == mod_TFC_Core.terraOre3.blockID))
         {
             BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
-            renderblocks.overrideBlockTexture = getRockTexture(par3,biome);
+            renderblocks.overrideBlockTexture = getRockTexture(par3,(TFCBiome)biome);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
             renderblocks.overrideBlockTexture = over;
         }
@@ -1121,7 +1122,7 @@ public class TFC_CoreRender
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
         Random R = new Random(meta+i*k);
 
-        renderblocks.overrideBlockTexture = getRockTexture(j,biome);
+        renderblocks.overrideBlockTexture = getRockTexture(j,(TFCBiome)biome);
 
         block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
         renderblocks.renderStandardBlock(block, i, j, k);
@@ -1732,7 +1733,7 @@ public class TFC_CoreRender
 
         if(over == -1)
         {
-            renderblocks.overrideBlockTexture = getRockTexture(yCoord,biome);
+            renderblocks.overrideBlockTexture = getRockTexture(yCoord,(TFCBiome) biome);
             renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
             renderblocks.overrideBlockTexture = over;
 
@@ -1746,7 +1747,7 @@ public class TFC_CoreRender
         return true;
     }
 
-    public static int getRockTexture(int yCoord, BiomeGenBase biome) {
+    public static int getRockTexture(int yCoord, TFCBiome biome) {
         int var27;
         if(yCoord <= biome.Layer3)
             var27 = Block.blocksList[biome.Layer3Type].getBlockTextureFromSideAndMetadata(5, biome.Layer3Meta);

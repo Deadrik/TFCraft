@@ -3,6 +3,7 @@ package TFC.Containers;
 import TFC.Core.AnvilReq;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 
 public class ContainerTerraAnvil extends Container
@@ -336,7 +337,7 @@ public class ContainerTerraAnvil extends Container
         if(anvil.AnvilTier == AnvilReq.STONE.Tier)
         {
             //anvil.ejectContents();
-            BiomeGenBase biome = anvil.worldObj.getBiomeGenForCoords(anvil.xCoord, anvil.zCoord);
+            TFCBiome biome = (TFCBiome) anvil.worldObj.getBiomeGenForCoords(anvil.xCoord, anvil.zCoord);
             if(anvil.yCoord < biome.Layer3)
                 anvil.worldObj.setBlockAndMetadata(anvil.xCoord, anvil.yCoord, anvil.zCoord, biome.Layer3Type, biome.Layer3Meta);
             else if(anvil.yCoord < biome.Layer2)

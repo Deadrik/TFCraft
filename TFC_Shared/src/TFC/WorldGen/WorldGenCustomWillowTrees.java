@@ -140,7 +140,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			return false;
 		}
 		if(world.getBlockId(i, j - 1, k) == 0) {
-			world.setBlockAndMetadata(i, j - 1, k, world.getBiomeGenForCoords(i, k).DirtID,world.getBiomeGenForCoords(i, k).SurfaceMeta);
+			world.setBlockAndMetadata(i, j - 1, k, ((TFCBiome)world.getBiomeGenForCoords(i, k)).DirtID, ((TFCBiome)world.getBiomeGenForCoords(i, k)).SurfaceMeta);
 		}
 		int z1, x1, y,x,z;
 		y = height+j;

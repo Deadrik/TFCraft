@@ -137,5 +137,22 @@ public class BlockTerraDirt extends BlockTerra2
         else
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
     }
+    
+    public boolean isBlockNormalCube(World world, int i, int j, int k) 
+    {
+        if(world.isAirBlock(i, j+1, k))
+        {
+            if(world.isAirBlock(i+1, j, k))
+                return false;
+            if(world.isAirBlock(i-1, j, k))
+                return false;
+            if(world.isAirBlock(i, j, k+1))
+                return false;
+            if(world.isAirBlock(i, j, k-1))
+                return false;
+        }
+
+        return true;
+    }
 
 }

@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import TFC.Core.ColorizerFoliageTFC;
+import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.IProxy;
 import TFC.Core.PacketHandler;
 import TFC.Core.PlayerManagerTFC;
@@ -70,6 +71,7 @@ import TFC.TileEntities.TileEntityTerraMetallurgy;
 import TFC.TileEntities.TileEntityTerraScribe;
 import TFC.TileEntities.TileEntityTerraSluice;
 import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.WorldGen.BiomeGenJungleTFC;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
@@ -102,6 +104,9 @@ public class ClientProxy implements IProxy
         MinecraftForgeClient.preloadTexture("/bioxx/anvilgui.png");
         MinecraftForgeClient.preloadTexture("/bioxx/calendargui.png");
         MinecraftForgeClient.preloadTexture("/bioxx/Vegetation.png");
+        
+        ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
+        ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
     }
 
     @Override

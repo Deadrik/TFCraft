@@ -63,7 +63,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 			return false;
 		}
 		//set the block below the tree to dirt.
-		world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, world.getBiomeGenForCoords(xCoord, zCoord).DirtID,world.getBiomeGenForCoords(xCoord, zCoord).SurfaceMeta);
+		world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, ((TFCBiome)world.getBiomeGenForCoords(xCoord, zCoord)).DirtID,((TFCBiome)world.getBiomeGenForCoords(xCoord, zCoord)).SurfaceMeta);
 		//Now we create the leaves. generates from the bottom up.
 		for (int treeHeightOffset = yCoord + 1; treeHeightOffset <= yCoord + treeHeight; treeHeightOffset++)
 		{

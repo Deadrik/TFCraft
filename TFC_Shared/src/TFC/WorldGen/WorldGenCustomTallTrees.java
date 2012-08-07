@@ -66,7 +66,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 		{
 			return false;
 		}
-		world.setBlockAndMetadata(i, j - 1, k, world.getBiomeGenForCoords(i, k).DirtID,world.getBiomeGenForCoords(i, k).SurfaceMeta);
+		world.setBlockAndMetadata(i, j - 1, k, ((TFCBiome)world.getBiomeGenForCoords(i, k)).DirtID, ((TFCBiome)world.getBiomeGenForCoords(i, k)).SurfaceMeta);
 		for (int k1 = j - 3 + l; k1 <= j + l; k1++)
 		{
 			int j2 = k1 - (j + l);

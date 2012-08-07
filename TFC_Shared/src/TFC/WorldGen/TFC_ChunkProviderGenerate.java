@@ -2,12 +2,6 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.ChunkProviderGenerate;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.NoiseGeneratorOctaves;
-import net.minecraft.src.World;
 import net.minecraft.src.*;
 
 public class TFC_ChunkProviderGenerate
@@ -25,7 +19,7 @@ public class TFC_ChunkProviderGenerate
         {
             for (int zCoord = 0; zCoord < 16; ++zCoord)
             {
-                BiomeGenBase biomegenbase = par4ArrayOfBiomeGenBase[zCoord + xCoord * 16];
+                TFCBiome biomegenbase = (TFCBiome) par4ArrayOfBiomeGenBase[zCoord + xCoord * 16];
                 float var11 = biomegenbase.getFloatTemperature();
                 int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
                 int var13 = -1;
@@ -209,7 +203,7 @@ public class TFC_ChunkProviderGenerate
         {
             for (int zCoord = 0; zCoord < 16; ++zCoord)
             {
-                BiomeGenBase biomegenbase = par4ArrayOfBiomeGenBase[zCoord + xCoord * 16];
+                TFCBiome biomegenbase = (TFCBiome) par4ArrayOfBiomeGenBase[zCoord + xCoord * 16];
                 float var11 = biomegenbase.getFloatTemperature();
                 int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
                 int var13 = -1;
@@ -327,7 +321,7 @@ public class TFC_ChunkProviderGenerate
         {
             for (int var9 = 0; var9 < 16; ++var9)
             {
-                BiomeGenBase biomegenbase = par4ArrayOfBiomeGenBase[var9 + var8 * 16];
+                TFCBiome biomegenbase = (TFCBiome) par4ArrayOfBiomeGenBase[var9 + var8 * 16];
                 float var11 = biomegenbase.getFloatTemperature();
                 int var12 = (int)(stoneNoise[var8 + var9 * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
                 int blockDensity = -1;

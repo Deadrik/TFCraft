@@ -12,6 +12,7 @@ import TFC.Core.HeatManager;
 import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
 import TFC.Items.ItemTerraMeltedMetal;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityItem;
@@ -612,7 +613,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
 
             if(ambientTemp == -1000)	
             {
-                BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+                TFCBiome biome = (TFCBiome) worldObj.getBiomeGenForCoords(xCoord, zCoord);
                 ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
             }
             //here we set the various temperatures to range

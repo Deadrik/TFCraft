@@ -6,6 +6,10 @@ import java.util.Random;
 import cpw.mods.fml.common.ReflectionHelper;
 
 import TFC.TileEntities.TileEntityPartial;
+import TFC.WorldGen.BiomeDecoratorTFC;
+import TFC.WorldGen.BiomeGenHillsEdgeTFC;
+import TFC.WorldGen.BiomeGenRiverTFC;
+import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.WorldGenClayPit;
 import TFC.WorldGen.WorldGenCustomFlowers;
 import TFC.WorldGen.WorldGenCustomFruitTree;
@@ -34,7 +38,7 @@ public class TFC_Core
     {
         for(int n = 0; n < Layers.length/2;)
         {
-            BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+            TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
             if((biome.SurfaceType == Layers[n] && (biome.SurfaceMeta == Layers[n+1] || Layers[n+1] == -1)) || 
                     (biome.Layer1Type == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
                     (biome.Layer2Type == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
@@ -52,7 +56,7 @@ public class TFC_Core
     {
         for(int n = 0; n < Layers.length/2;)
         {
-            BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+            TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
             if((biome.SurfaceType == Layers[n] && (biome.SurfaceMeta == Layers[n+1] || Layers[n+1] == -1)) || 
                     (biome.Layer1Type == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
                     (biome.Layer2Type == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
@@ -364,7 +368,7 @@ public class TFC_Core
         {
             int var2 = chunkX + rand.nextInt(16) + 8;
             int var3 = chunkZ + rand.nextInt(16) + 8;
-            new WorldGenClayPit(16, world.getBiomeGenForCoords(var2, var3)).generate(world, rand, var2, world.getTopSolidOrLiquidBlock(var2, var3), var3);
+            new WorldGenClayPit(16, (TFCBiome) world.getBiomeGenForCoords(var2, var3)).generate(world, rand, var2, world.getTopSolidOrLiquidBlock(var2, var3), var3);
         }
 
         for (int var1 = 0; var1 < 1; ++var1)
@@ -655,8 +659,8 @@ public class TFC_Core
         ModLoader.addRecipe(new ItemStack(TFCItems.Javelin, 1), new Object[] { 
             "1","2", Character.valueOf('1'), new ItemStack(TFCItems.LooseRock, 1, -1),Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
         ModLoader.addShapelessRecipe(new ItemStack(Item.arrow, 8), new Object[] { 
-             new ItemStack(TFCItems.LooseRock, 1, -1), new ItemStack(Item.stick,1,-1),
-             new ItemStack(Item.feather,1,-1)});
+            new ItemStack(TFCItems.LooseRock, 1, -1), new ItemStack(Item.stick,1,-1),
+            new ItemStack(Item.feather,1,-1)});
 
         //stone picks
 
@@ -741,8 +745,8 @@ public class TFC_Core
         //        ModLoader.addRecipe(new ItemStack(TFCItems.terraProPickStone, 1, 0), new Object[] { 
         //            "1","2", Character.valueOf('1'), TFCItems.StoneProPickHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
 
-//        ModLoader.addRecipe(new ItemStack(TFCItems.FlintPaxel, 1, 0), new Object[] { 
-//            "1","2", Character.valueOf('1'), Item.flint,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
+        //        ModLoader.addRecipe(new ItemStack(TFCItems.FlintPaxel, 1, 0), new Object[] { 
+        //            "1","2", Character.valueOf('1'), Item.flint,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
 
         ModLoader.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, -1) });
 
@@ -816,7 +820,7 @@ public class TFC_Core
         //Sluice
         ModLoader.addRecipe(new ItemStack(TFCItems.terraSluiceItem, 1), new Object[] { 
             "  1"," 12","122", Character.valueOf('1'),new ItemStack(Item.stick,1,-1), Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,-1)});
-        
+
         for(int j = 0; j < TFCItems.Hammers.length; j++)
         {
             ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 8), new ItemStack(TFCItems.Hammers[j], 1, -1)});
@@ -825,7 +829,7 @@ public class TFC_Core
             ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 10), new ItemStack(TFCItems.Hammers[j], 1, -1)});
             ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 6), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.Hammers[j], 1, -1)});
         }
-        
+
         ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, -1)});
 
         ModLoader.addRecipe(new ItemStack(Item.redstone, 8, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.OreChunk,1,27)});
@@ -1152,33 +1156,36 @@ public class TFC_Core
         System.out.println(world.getSeed());
         int count = 0;
 
-            for(int i = 0; i < BiomeGenBase.biomeList.length; i++)
+        for(int i = 0; i < TFCBiome.biomeList.length; i++)
+        {
+            if(TFCBiome.biomeList[i] instanceof TFCBiome)
             {
-                if(BiomeGenBase.biomeList[i] != null && !(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC))
+                if(TFCBiome.biomeList[i] != null && !(TFCBiome.biomeList[i] instanceof BiomeGenHillsEdgeTFC) && !(TFCBiome.biomeList[i] instanceof BiomeGenRiverTFC))
                 {
-                    BiomeGenBase.biomeList[i].SetupStone(world, R);
+                    ((TFCBiome)TFCBiome.biomeList[i]).SetupStone(world, R);
                 }
-                else if(BiomeGenBase.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
+                else if(TFCBiome.biomeList[i] instanceof BiomeGenHillsEdgeTFC)
                 {
-                    BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
+                    ((TFCBiome)TFCBiome.biomeList[i]).copyBiomeRocks(TFCBiome.biomeList[i].biomeName.replace(" Edge", "").toLowerCase());
                 }
-                else if(BiomeGenBase.biomeList[i] instanceof BiomeGenRiverTFC)
+                else if(TFCBiome.biomeList[i] instanceof BiomeGenRiverTFC)
                 {
-                    BiomeGenBase.biomeList[i].copyBiomeRocks(BiomeGenBase.biomeList[i].biomeName.replace("River ", "").toLowerCase());
+                    ((TFCBiome)TFCBiome.biomeList[i]).copyBiomeRocks(TFCBiome.biomeList[i].biomeName.replace("River ", "").toLowerCase());
                 }
-                if(BiomeGenBase.biomeList[i] != null)
+                if(TFCBiome.biomeList[i] != null)
                 {
-                    BiomeGenBase.biomeList[i].SetupTrees(world, R);
+                    ((TFCBiome)TFCBiome.biomeList[i]).SetupTrees(world, R);
                 }
             }
+        }
 
-//            for(int i = 0; i < BiomeGenBase.deck.length; i++)
-//            {
-//                if(BiomeGenBase.deck[i] == true)
-//                {
-//                    count++;
-//                }
-//            }
+        //            for(int i = 0; i < BiomeGenBase.deck.length; i++)
+        //            {
+        //                if(BiomeGenBase.deck[i] == true)
+        //                {
+        //                    count++;
+        //                }
+        //            }
 
         TFC_Game.registerAnvilRecipes(R, world);
     }

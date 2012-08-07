@@ -120,7 +120,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 								id == mod_TFC_Core.terraPeat.blockID || id == mod_TFC_Core.terraPeatGrass.blockID) && 
 								world.getSavedLightValue(EnumSkyBlock.Sky, i + i2, j + k4, k + j3) > 0)
 						{
-							BiomeGenBase var35 = world.getBiomeGenForCoords(i + i2, k + j3);
+							TFCBiome var35 = (TFCBiome) world.getBiomeGenForCoords(i + i2, k + j3);
 
 							if (var35.topBlock == Block.mycelium.blockID)
 							{

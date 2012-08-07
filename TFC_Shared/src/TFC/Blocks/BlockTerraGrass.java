@@ -57,6 +57,22 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         return i;
     }
 
+    public boolean isBlockNormalCube(World world, int i, int j, int k) 
+    {
+        if(world.isAirBlock(i, j+1, k))
+        {
+            if(world.isAirBlock(i+1, j, k))
+                return false;
+            if(world.isAirBlock(i-1, j, k))
+                return false;
+            if(world.isAirBlock(i, j, k+1))
+                return false;
+            if(world.isAirBlock(i, j, k-1))
+                return false;
+        }
+
+        return true;
+    }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -201,6 +217,11 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         }
     }
 
+    //    public boolean renderAsNormalBlock()
+    //    {
+    //        return false;
+    //    }
+
     /**
      * Returns the ID of the items to drop on destruction.
      */
@@ -218,10 +239,10 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         {
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
 
-            double minX = 0.25;
-            double minZ = 0.25;
-            double maxX = 0.75;
-            double maxZ = 0.75;
+            double minX = 0.1;
+            double minZ = 0.1;
+            double maxX = 0.9;
+            double maxZ = 0.9;
 
             if(world.getBlockId(i+1, j, k) == 0)
                 maxX = 0.5;
@@ -233,12 +254,11 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
                 minZ = 0.5;
 
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
-
         }
         else
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
     }
-    
+
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         if(!world.blockExists(i, j-1, k))

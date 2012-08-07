@@ -8,12 +8,12 @@ public class WorldGenClayPit extends WorldGenerator
 {
 	/** The block ID for clay. */
 	private int clayBlockId;
-	private BiomeGenBase biome;
+	private TFCBiome biome;
 
 	/** The number of blocks to generate. */
 	private int numberOfBlocks;
 
-	public WorldGenClayPit(int par1, BiomeGenBase b)
+	public WorldGenClayPit(int par1, TFCBiome b)
 	{
 		biome = b;
 		this.numberOfBlocks = par1;

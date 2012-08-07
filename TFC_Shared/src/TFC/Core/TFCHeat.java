@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import TFC.WorldGen.TFCBiome;
+
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
@@ -612,7 +614,7 @@ public class TFCHeat
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
-		float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
+		float ambient = ((TFCBiome)world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
 
 		for(int i = 0; i < inventory.length; i++)
 		{
@@ -658,7 +660,7 @@ public class TFCHeat
 	
 	public static void HandleContainerHeatChest(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
     {
-        float ambient = world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord).getHeightAdjustedTemperature(yCoord);
+        float ambient = ((TFCBiome)world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
 
         for(int i = 0; i < inventory.length; i++)
         {

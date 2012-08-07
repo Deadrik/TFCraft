@@ -111,10 +111,10 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 				if ((blockUnder == mod_TFC_Core.terraDirt.blockID || blockUnder == mod_TFC_Core.terraDirt2.blockID || blockUnder == mod_TFC_Core.terraGrass.blockID || blockUnder == mod_TFC_Core.terraGrass2.blockID ||
 						blockUnder == mod_TFC_Core.terraClayGrass.blockID || blockUnder == mod_TFC_Core.terraClayGrass2.blockID) && par4 < 256 - var6 - 1)
 				{
-					par1World.setBlockAndMetadata(par3, par4 - 1, par5, par1World.getBiomeGenForCoords(par3, par5).DirtID,par1World.getBiomeGenForCoords(par3, par5).SurfaceMeta);
-					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5, par1World.getBiomeGenForCoords(par3, par5).DirtID,par1World.getBiomeGenForCoords(par3, par5).SurfaceMeta);
-					par1World.setBlockAndMetadata(par3, par4 - 1, par5 + 1, par1World.getBiomeGenForCoords(par3, par5).DirtID,par1World.getBiomeGenForCoords(par3, par5).SurfaceMeta);
-					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5 + 1, par1World.getBiomeGenForCoords(par3, par5).DirtID,par1World.getBiomeGenForCoords(par3, par5).SurfaceMeta);
+					par1World.setBlockAndMetadata(par3, par4 - 1, par5, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
+					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
+					par1World.setBlockAndMetadata(par3, par4 - 1, par5 + 1, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
+					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5 + 1, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
 					this.func_48192_a(par1World, par3, par5, par4 + var6, 2, par2Random);
 
 					for (int var14 = par4 + var6 - 2 - par2Random.nextInt(4); var14 > par4 + var6 / 2; var14 -= 2 + par2Random.nextInt(4))

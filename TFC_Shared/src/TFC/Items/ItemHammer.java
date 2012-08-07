@@ -6,6 +6,7 @@ import TFC.Core.Helper;
 import TFC.Core.TFCSettings;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -35,7 +36,7 @@ implements ITextureProvider
             int id2 = world.getBlockId(x, y, z);
             int meta = 0;
             int meta2 = world.getBlockMetadata(x, y, z);
-            BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+            TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(x, z);
             if(y < biome.Layer3)
             {
                 id = biome.Layer3Type; meta = biome.Layer3Meta;

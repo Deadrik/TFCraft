@@ -697,13 +697,6 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
 
 
 
-
-
-
-
-
-
-
         MinecraftForge.setBlockHarvestLevel(terraStoneIgIn, "pickaxe", 0);
         MinecraftForge.setBlockHarvestLevel(terraStoneIgEx, "pickaxe", 0);
         MinecraftForge.setBlockHarvestLevel(terraStoneSed, "pickaxe", 0);

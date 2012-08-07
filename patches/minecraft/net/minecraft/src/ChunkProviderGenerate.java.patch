@@ -1,11 +1,22 @@
 --- ../src_base/minecraft/net/minecraft/src/ChunkProviderGenerate.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src/minecraft/net/minecraft/src/ChunkProviderGenerate.java	0000-00-00 00:00:00.000000000 -0000
-@@ -3,6 +3,12 @@
+@@ -3,6 +3,23 @@
  import java.util.List;
  import java.util.Random;
  
 +import TFC.Core.TFC_Core;
 +import TFC.TileEntities.TileEntityPartial;
++import TFC.WorldGen.ChunkTFC;
++import TFC.WorldGen.MapGenCaves256TFC;
++import TFC.WorldGen.MapGenCavesTFC;
++import TFC.WorldGen.MapGenCavesUpperTFC;
++import TFC.WorldGen.MapGenRavine256TFC;
++import TFC.WorldGen.MapGenRavineTFC;
++import TFC.WorldGen.MapGenRavineUpperTFC;
++import TFC.WorldGen.MapGenRiverRavine256TFC;
++import TFC.WorldGen.MapGenRiverRavineTFC;
++import TFC.WorldGen.MapGenVillageTFC;
++import TFC.WorldGen.TFCBiome;
 +import TFC.WorldGen.TFC_ChunkProviderGenerate;
 +import TFC.WorldGen.WorldGenLakesTFC;
 +
@@ -13,7 +24,7 @@
  public class ChunkProviderGenerate implements IChunkProvider
  {
      /** RNG. */
-@@ -36,19 +42,22 @@
+@@ -36,19 +53,22 @@
      /** Holds the overall noise array used in chunk generation */
      private double[] noiseArray;
      private double[] stoneNoise = new double[256];
@@ -23,8 +34,7 @@
 +    private MapGenRiverRavineTFC underRiverGen = new MapGenRiverRavineTFC();
  
      /** Holds Stronghold Generator */
--    private MapGenStronghold strongholdGenerator = new MapGenStronghold();
-+    private MapGenStrongholdTFC strongholdGenerator = new MapGenStrongholdTFC();
+     private MapGenStronghold strongholdGenerator = new MapGenStronghold();
  
      /** Holds Village Generator */
 -    private MapGenVillage villageGenerator = new MapGenVillage(0);
@@ -40,7 +50,7 @@
  
      /** The biomes that are used to generate the chunk */
      private BiomeGenBase[] biomesForGeneration;
-@@ -269,29 +278,34 @@
+@@ -269,29 +289,34 @@
      public Chunk provideChunk(int par1, int par2)
      {
          this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
@@ -90,7 +100,16 @@
          return var4;
      }
  
-@@ -471,9 +485,9 @@
+@@ -462,7 +487,7 @@
+         BlockSand.fallInstantly = true;
+         int var4 = par2 * 16;
+         int var5 = par3 * 16;
+-        BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
++        TFCBiome var6 = (TFCBiome) this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
+         this.rand.setSeed(this.worldObj.getSeed());
+         long var7 = this.rand.nextLong() / 2L * 2L + 1L;
+         long var9 = this.rand.nextLong() / 2L * 2L + 1L;
+@@ -471,9 +496,9 @@
  
          if (this.mapFeaturesEnabled)
          {
@@ -103,7 +122,7 @@
          }
  
          int var12;
-@@ -483,20 +497,20 @@
+@@ -483,20 +508,20 @@
          if (!var11 && this.rand.nextInt(4) == 0)
          {
              var12 = var4 + this.rand.nextInt(16) + 8;
@@ -128,7 +147,7 @@
              }
          }
  
-@@ -506,10 +520,10 @@
+@@ -506,10 +531,10 @@
              var14 = this.rand.nextInt(128);
              int var15 = var5 + this.rand.nextInt(16) + 8;
  
@@ -143,7 +162,7 @@
          }
  
          var6.decorate(this.worldObj, this.rand, var4, var5);
-@@ -528,7 +542,7 @@
+@@ -528,7 +553,7 @@
                      this.worldObj.setBlockWithNotify(var12 + var4, var14 - 1, var13 + var5, Block.ice.blockID);
                  }
  
@@ -152,14 +171,14 @@
                  {
                      this.worldObj.setBlockWithNotify(var12 + var4, var14, var13 + var5, Block.snow.blockID);
                  }
-@@ -588,4 +602,479 @@
+@@ -588,4 +613,479 @@
      {
          return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
      }
 +
 +    public boolean canSnowAt(World world, int par1, int par2, int par3)
 +    {
-+        BiomeGenBase var4 = world.getBiomeGenForCoords(par1, par3);
++        TFCBiome var4 = (TFCBiome)world.getBiomeGenForCoords(par1, par3);
 +        float var5 = var4.getHeightAdjustedTemperature(par2);
 +
 +        if (var5 > 0.15F)

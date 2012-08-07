@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
@@ -39,6 +40,11 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		}
 		return false;
 	}
+	
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        return true;
+    }
 
 	public static int isNextToSupport(World world, int x, int y, int z)
 	{

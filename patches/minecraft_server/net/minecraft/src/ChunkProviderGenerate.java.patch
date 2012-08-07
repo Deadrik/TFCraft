@@ -19,8 +19,7 @@
 +    private MapGenRiverRavineTFC underRiverGen = new MapGenRiverRavineTFC();
  
      /** Holds Stronghold Generator */
--    private MapGenStronghold strongholdGenerator = new MapGenStronghold();
-+    private MapGenStrongholdTFC strongholdGenerator = new MapGenStrongholdTFC();
+     private MapGenStronghold strongholdGenerator = new MapGenStronghold();
  
      /** Holds Village Generator */
 -    private MapGenVillage villageGenerator = new MapGenVillage(0);
