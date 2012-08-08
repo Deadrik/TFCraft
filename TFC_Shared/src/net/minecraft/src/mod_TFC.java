@@ -101,6 +101,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
     public static int terraMetallurgyGuiId = 24;
     public static int terraSluiceGuiId = 25;
     public static int terraBloomeryGuiId = 26;
+    
 
     //////////////////////////////////////////////
     public static int sulfurRenderId;
@@ -125,6 +126,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
     public static int partialRenderId;
     public static int stairRenderId;
     public static int slabRenderId;
+    public static int farmlandRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;

@@ -349,6 +349,10 @@ public class ClientProxy implements IProxy
         {
             return TFC_CoreRender.renderBlockSlab(block, i, j, k, (RenderBlocks)renderblocks);
         }
+        else if (l == mod_TFC.farmlandRenderId)
+        {
+            return TFC_CoreRender.RenderFarmland(block, i, j, k, (RenderBlocks)renderblocks);
+        }
 
 
         return false;

@@ -34,28 +34,18 @@ import net.minecraft.src.mod_TFC;
 
 public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory
 {
-    public float fuelTimeLeft;
-    public float fuelBurnTemp;
-    public int fuelBuildup;
-    public float fireTemperature;
-    public int timeleft;
-    public float AddedAir;
+    
 
     public ItemStack fireItemStacks[];
     public float inputItemTemp;
-    public float ambientTemp;
-    Boolean Item1Melted = false;
 
     private int prevStackSize;
-    public int numAirBlocks;
     private ItemStack prevWorkItemStack;
 
     private int externalFireCheckTimer;
     public Boolean canCreateFire;
     private int externalWoodCount;
     public int charcoalCounter;
-
-    private final int MaxFireTemp = 2000;
 
     public final int FIREBURNTIME = 240;//default 240
 
@@ -76,14 +66,14 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     {
         fuelTimeLeft = 375;
         fuelBurnTemp =  613;
-        fuelBuildup = 0;
         fireTemperature = 350;
         AddedAir = 0F;
+        
+        MaxFireTemp = 2000;
 
         fireItemStacks = new ItemStack[11];
         inputItemTemp = 0;
         ambientTemp = -1000;
-        numAirBlocks = 0;
 
         externalFireCheckTimer = 0;
         externalWoodCount = 0;
@@ -596,543 +586,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         }
     }
 
-    public void externalFireCheckOld()
-    {
-        Random R = new Random();
-        if(externalFireCheckTimer == 0)
-        {
-            List vecArray = new ArrayList<Vector3f>();
-            int oldWoodCount = externalWoodCount;
-            externalWoodCount = 0;
-            //Base Layer
-            for(int x = 0; x < area.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 3);
-                if(area[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord - 3));
-                    }
-
-                    if(area[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 3);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area0.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 2);
-                if(area0[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord - 2));
-                    }
-
-                    if(area0[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 2);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area1.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 1);
-                if(area1[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord - 1));
-                    }
-
-                    if(area1[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 1);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area2.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord);
-                if(area2[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord));
-                    }
-
-                    if(area2[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area3.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 1);
-                if(area3[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord +1));
-                    }
-
-                    if(area3[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord + 1);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area4.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 2);
-                if(area4[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord + 2));
-                    }
-
-                    if(area4[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord + 2);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area5.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 3);
-                if(area5[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord + 3));
-                    }
-
-                    if(area5[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord + 3);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-
-
-            //Top Wood layer
-            for(int x = 0; x < area0_2.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-2, yCoord, zCoord - 2);
-                if(area0_2[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord -2));
-                    }
-
-                    if(area0_2[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord - 2);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area1_2.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-2, yCoord, zCoord - 1);
-                if(area1_2[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord -1));
-                    }
-
-                    if(area1_2[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord - 1);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area2_2.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-2, yCoord, zCoord);
-                if(area2_2[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord));
-                    }
-
-                    if(area2_2[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord );
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area3_2.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-2, yCoord, zCoord + 1);
-                if(area3_2[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord + 1));
-                    }
-
-                    if(area3_2[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord + 1);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            for(int x = 0; x < area4_2.length; x++)
-            {
-                int id = worldObj.getBlockId(xCoord+x-2, yCoord, zCoord + 2);
-                if(area4_2[x] != 0)
-                {
-                    if(id == 0) {
-                        vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord + 2));
-                    }
-
-                    if(area4_2[x] == 1 && id == mod_TFC.LogPile.blockID)
-                    {
-                        TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord + 2);
-                        if(te != null)
-                        {
-                            if(te.storage[0] != null) {
-                                externalWoodCount += te.storage[0].stackSize;
-                            }
-                            if(te.storage[1] != null) {
-                                externalWoodCount += te.storage[1].stackSize;
-                            }
-                            if(te.storage[2] != null) {
-                                externalWoodCount += te.storage[2].stackSize;
-                            }
-                            if(te.storage[3] != null) {
-                                externalWoodCount += te.storage[3].stackSize;
-                            }
-                        }
-                    }
-                }
-            }
-            //Top dirt layer
-            for(int x = -1; x < 2; x++)
-            {
-                for(int z = -1; z < 2; z++)
-                {
-                    int id = worldObj.getBlockId(xCoord+x, yCoord+2, zCoord +z);
-                    if(id == 0 || worldObj.getBlockMaterial(xCoord+x, yCoord+2, zCoord+z) == Material.wood)
-                    {
-                        vecArray.add(new Vector3f(xCoord+x, yCoord+2, zCoord + z));
-                    }
-                }
-            }
-
-            //Now we actually set fire to the air blocks
-            if(vecArray.size() > 0)
-            {
-
-                for(int i = 0; i < vecArray.size(); i++)
-                {
-                    Vector3f vec = (Vector3f)vecArray.toArray()[i];
-                    if(R.nextInt(100) > 75 && getNearWood((int)vec.X, (int)vec.Y, (int)vec.Z)) 
-                    {
-                        worldObj.setBlock((int)vec.X, (int)vec.Y, (int)vec.Z, Block.fire.blockID);
-                        worldObj.markBlockNeedsUpdate((int)vec.X, (int)vec.Y, (int)vec.Z);
-                    }
-                }
-            }
-
-
-            //This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
-            if(oldWoodCount != externalWoodCount) {
-                charcoalCounter = 0;
-            } else {
-                charcoalCounter++;
-            }
-
-            //Minecraft mc = ModLoader.getMinecraftInstance();
-            //mc.ingameGUI.addChatMessage("charcoalCounter:" + charcoalCounter);
-
-            if(charcoalCounter == FIREBURNTIME)
-            {
-                charcoalCounter = 0;
-                float percent = 25+R.nextInt(25);
-                externalWoodCount = (int) (externalWoodCount * (percent/100));
-                while(externalWoodCount > 0)
-                {
-                    if(externalWoodCount > Item.coal.getItemStackLimit())
-                    {
-                        addByproduct(new ItemStack(Item.coal,Item.coal.getItemStackLimit(),1));
-                        externalWoodCount -= Item.coal.getItemStackLimit();
-                    }
-                    else
-                    {
-                        addByproduct(new ItemStack(Item.coal,externalWoodCount,1));
-                        externalWoodCount = 0;
-                    }
-
-
-                }
-                //Empty the fuel stack and set the fire out. It shouldn't be on after all this time.
-                fireItemStacks[0] = null;
-                fireItemStacks[3] = null;
-                fireItemStacks[4] = null;
-                fireItemStacks[5] = null;
-                fuelTimeLeft = 0;
-                fuelBurnTemp = ambientTemp;
-                fireTemperature = ambientTemp;
-
-
-                for(int x = 0; x < area0.length; x++)
-                {
-                    if(area0[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 2) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 2)).clearContents();
-                        worldObj.setBlock(xCoord+x-3, yCoord, zCoord - 2, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord - 2);
-                    }
-                }
-                for(int x = 0; x < area1.length; x++)
-                {
-                    if(area1[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 1) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 1)).clearContents();
-                        worldObj.setBlock(xCoord+x-3, yCoord, zCoord - 1, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord - 1);
-                    }
-                }
-                for(int x = 0; x < area2.length; x++)
-                {
-                    if(area2[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord)).clearContents();
-                        worldObj.setBlock(xCoord+x-3, yCoord, zCoord , 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord);
-                    }
-                }
-                for(int x = 0; x < area3.length; x++)
-                {
-                    if(area3[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 1) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord +1)).clearContents();
-                        worldObj.setBlock(xCoord+x-3, yCoord, zCoord + 1, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord +1);
-                    }
-                }
-                for(int x = 0; x < area4.length; x++)
-                {
-                    if(area4[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 2) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord +2)).clearContents();
-                        worldObj.setBlock(xCoord+x-3, yCoord, zCoord + 2, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-3, yCoord, zCoord + 2);
-                    }
-                }
-
-                //Top Wood layer
-                for(int x = 0; x < area0_2.length; x++)
-                {
-                    if(area0_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord - 2) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord - 2)).clearContents();
-                        worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord - 2, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord - 2);
-                    }
-                }
-                for(int x = 0; x < area1_2.length; x++)
-                {
-                    if(area1_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord - 1) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord - 1)).clearContents();
-                        worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord - 1, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord - 1);
-                    }
-                }
-                for(int x = 0; x < area2_2.length; x++)
-                {
-                    if(area2_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord)).clearContents();
-                        worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord);
-                    }
-                }
-                for(int x = 0; x < area3_2.length; x++)
-                {
-                    if(area3_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord + 1) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord +1)).clearContents();
-                        worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord + 1, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord +1);
-                    }
-                }
-                for(int x = 0; x < area4_2.length; x++)
-                {
-                    if(area4_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord + 2) == mod_TFC.LogPile.blockID)
-                    {
-                        ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord + 2)).clearContents();
-                        worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord + 2, 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+x-2, yCoord+1, zCoord + 2);
-                    }
-                }
-            }
-        }
-    }
-
     public float getInputTemp()
     {
         if(fireItemStacks[1] != null && fireItemStacks[1].hasTagCompound()) {
@@ -1248,10 +701,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         return count;
     }
 
-    public int getTemperatureScaled(int s)
-    {
-        return (int)(fireTemperature * s) / MaxFireTemp;
-    }
+    
 
     public void HandleFuelStack()
     {
@@ -1287,7 +737,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        timeleft = nbttagcompound.getInteger("timeleft");
         fireTemperature = nbttagcompound.getFloat("temperature");
         fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
         fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
@@ -1320,15 +769,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     }
 
-    public void setNumAirBlocks(int n)
-    {
-        numAirBlocks = n;
-    }
-
     public void updateEntity()
     {
         int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
-        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == mod_TFC.LogPile.blockID/*Surrounded == 5*/)
+        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == mod_TFC.LogPile.blockID)
         {
             externalFireCheckTimer--;
             if(externalFireCheckTimer <= 0)
@@ -1416,11 +860,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
             }
             //here we set the various temperatures to range
-            if(fireTemperature > MaxFireTemp) {
-                fireTemperature = MaxFireTemp;
-            } else if(fireTemperature < ambientTemp) {
-                fireTemperature = ambientTemp;
-            }
+            this.keepTempToRange();
 
             if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
             {
@@ -1443,70 +883,18 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 float desiredTemp = 0;
                 if(Surrounded != 5)
                 {
-                    fuelTimeLeft--;
-                    if(airFromBellowsTime > 0)
-                    {
-                        fuelTimeLeft--;
-                    }
 
-                    if(numAirBlocks == 0)
-                    {
-                        for (int x = -1; x < 2; x++)
-                        {
-                            for (int y = 0; y < 3; y++)
-                            {
-                                for (int z = -1; z < 2; z++)
-                                {
-                                    if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-                                        numAirBlocks++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    float bAir = airFromBellows*(1+(float)airFromBellowsTime/120);
-
-                    AddedAir = (float)(numAirBlocks+bAir)/25/16;//1038.225 Max //0.3625
-
-                    if(yCoord > 145 && yCoord < 210)
-                    {					
-                        float w = 210 - yCoord;
-                        float w1 = w / 210;
-                        float w2 = 1 - w1;
-                        float w3 = w2 * 0.105F;
-
-                        AddedAir += w3;//0.0725 min / 0.1045 max
-                    }
-                    else if(yCoord >= 210)
-                    {
-                        AddedAir += 0.1045F;
-                    }
-
-                    desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
+                    desiredTemp = handleTemp();
                 }
                 else
                 {
                     desiredTemp = 300;
                 }
 
-                if(fireTemperature < desiredTemp)
-                {
-                    fireTemperature+=0.85F;
-                }
-                else if(fireTemperature > desiredTemp)
-                {
-                    if(desiredTemp != ambientTemp)
-                    {
-                        if(airFromBellows == 0) {
-                            fireTemperature-=0.125F;
-                        } else {
-                            fireTemperature-=0.08F;
-                        }
-                    }
-                }
+                handleTempFlux(desiredTemp);
             }
-            else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[5] != null)
+            else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[5] != null &&
+                    (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
             {
                 if(fireItemStacks[5] != null)
                 {
@@ -1559,7 +947,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
-        nbttagcompound.setInteger("timeleft", timeleft);
         nbttagcompound.setFloat("temperature", fireTemperature);
         nbttagcompound.setFloat("fuelTimeLeft", fuelTimeLeft);
         nbttagcompound.setFloat("fuelBurnTemp", fuelBurnTemp);

@@ -3259,4 +3259,12 @@ public class TFC_CoreRender
             return var13;
         }
     }
+
+    public static boolean RenderFarmland(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    {
+        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        renderblocks.renderStandardBlock(block, i, j, k);
+
+        return true;
+    }
 }

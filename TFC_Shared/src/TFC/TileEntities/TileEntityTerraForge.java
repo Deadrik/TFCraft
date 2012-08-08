@@ -33,17 +33,9 @@ import net.minecraft.src.mod_TFC;
 
 public class TileEntityTerraForge extends TileEntityFireEntity implements IInventory
 {
-    public float fuelTimeLeft;
-    public float fuelBurnTemp;
-    public int fuelBuildup;
-    public float fireTemperature;
-    public int timeleft;
-    public float AddedAir;
     public boolean isValid;
 
     public ItemStack fireItemStacks[];
-    public float ambientTemp;
-    Boolean Item1Melted = false;
     public float inputItemTemps[];
 
     private int prevStackSize;
@@ -54,15 +46,12 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
     public Boolean canCreateFire;
     private int externalWoodCount;
     private int charcoalCounter;
-    
-    private final int MaxFireTemp = 2500;
 
     public TileEntityTerraForge()
     {
         super();
         fuelTimeLeft = 900;
         fuelBurnTemp =  1400;
-        fuelBuildup = 0;
         fireTemperature = 400;
         AddedAir = 0F;
         isValid = false;
@@ -75,6 +64,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         externalFireCheckTimer = 0;
         externalWoodCount = 0;
         charcoalCounter = 0;
+        MaxFireTemp = 2500;
 
     }
 
@@ -349,7 +339,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                         else
                             fireItemStacks[i] = null;
                     }
-                    
+
                     HeatIndex index2 = manager.findMatchingIndex(fireItemStacks[i]);
                     if(index2 != null)
                     {
@@ -474,11 +464,6 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         return null;
     }
 
-    public int getTemperatureScaled(int s)
-    {
-        return (int)(fireTemperature * s) / MaxFireTemp;
-    }
-
     public void HandleFuelStack()
     {
         Random random = new Random();
@@ -528,7 +513,6 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        timeleft = nbttagcompound.getInteger("timeleft");
         fireTemperature = nbttagcompound.getFloat("temperature");
         fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
         fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
@@ -547,16 +531,6 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             {
                 fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
-        }
-    }
-
-    public void receiveAirFromBellows()
-    {
-        if(airFromBellowsTime < 360) {
-            airFromBellowsTime += 120;
-        }
-        if(airFromBellowsTime > 360) {
-            airFromBellowsTime = 360;
         }
     }
 
@@ -617,11 +591,8 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 ambientTemp = biome.getHeightAdjustedTemperature(yCoord);
             }
             //here we set the various temperatures to range
-            if(fireTemperature > MaxFireTemp) {
-                fireTemperature = MaxFireTemp;
-            } else if(fireTemperature < ambientTemp) {
-                fireTemperature = ambientTemp;
-            }
+            this.keepTempToRange();
+
             //Play the fire sound
             Random R = new Random();
             if(R.nextInt(10) == 0 && fireTemperature > 210)
@@ -646,70 +617,9 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                     BlockTerraForge.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 
-                float desiredTemp = 0;
-                if(true)
-                {
-                    fuelTimeLeft--;
-                    if(airFromBellowsTime > 0)
-                    {
-                        fuelTimeLeft--;
-                    }
+                float desiredTemp = handleTemp();
 
-                    if(numAirBlocks == 0)
-                    {
-                        for (int x = -1; x < 2; x++)
-                        {
-                            for (int y = 0; y < 3; y++)
-                            {
-                                for (int z = -1; z < 2; z++)
-                                {
-                                    if(worldObj.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-                                        numAirBlocks++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    float bAir = airFromBellows*(1+(float)airFromBellowsTime/120);
-
-                    AddedAir = (float)(numAirBlocks+bAir)/25/16;//1038.225 Max //0.3625
-
-//                    if(yCoord > 145 && yCoord < 210)
-//                    {                   
-//                        float w = 210 - yCoord;
-//                        float w1 = w / 210;
-//                        float w2 = 1 - w1;
-//                        float w3 = w2 * 0.105F;
-//
-//                        AddedAir += w3;//0.0725 min / 0.1045 max
-//                    }
-//                    else if(yCoord >= 210)
-//                    {
-//                        AddedAir += 0.1045F;
-//                    }
-                    
-                    AddedAir += 0.1045F;//Added to make up for removing the height from the equation.
-                    
-                    desiredTemp = fuelBurnTemp + fuelBurnTemp * AddedAir;
-
-                }
-
-                if(fireTemperature < desiredTemp)
-                {
-                    fireTemperature+=1.35F;
-                }
-                else if(fireTemperature > desiredTemp)
-                {
-                    if(desiredTemp != ambientTemp)
-                    {
-                        if(airFromBellows == 0) {
-                            fireTemperature-=0.125F;
-                        } else {
-                            fireTemperature-=0.08F;
-                        }
-                    }
-                }
+                handleTempFlux(desiredTemp);
             }
             else if(fuelTimeLeft <= 0 && fireTemperature >= 210 && fireItemStacks[7] != null && 
                     (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
@@ -731,7 +641,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 }
             }
             //If there is no more fuel and the fire is still hot, we start to cool it off.
-            if(fuelTimeLeft <= 0 && fireTemperature > ambientTemp || worldObj.isRaining())
+            if(fuelTimeLeft <= 0 && fireTemperature > ambientTemp || (worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)))
             {
                 if(airFromBellows == 0) {
                     fireTemperature-=0.125F;
@@ -766,7 +676,6 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
     public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
-        nbttagcompound.setInteger("timeleft", timeleft);
         nbttagcompound.setFloat("temperature", fireTemperature);
         nbttagcompound.setFloat("fuelTimeLeft", fuelTimeLeft);
         nbttagcompound.setFloat("fuelBurnTemp", fuelBurnTemp);

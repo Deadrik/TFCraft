@@ -156,22 +156,6 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 			world.setBlock(i, j, k, 0);
 			return;
 		}
-		int numAirBlocks = 0;
-		for (int x = -1; x < 2; x++)
-		{
-			for (int y = 0; y < 2; y++)
-			{
-				for (int z = -1; z < 2; z++)
-				{
-					if(world.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-						numAirBlocks++;
-					}
-				}
-			}
-		}
-		if(world.getBlockTileEntity(i, j, k) != null) {
-			((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).setNumAirBlocks(numAirBlocks);
-		}
 	}
 
 
