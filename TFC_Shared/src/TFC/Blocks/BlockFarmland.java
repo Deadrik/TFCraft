@@ -9,6 +9,11 @@ public class BlockFarmland extends BlockPartial
         super(par1, Material.ground);
     }
     
+    public int getRenderType()
+    {
+        return 0;
+    }
+    
     @Override
     public String getTextureFile()
     {

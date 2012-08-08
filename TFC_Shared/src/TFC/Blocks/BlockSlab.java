@@ -22,7 +22,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class BlockSlab extends BlockPartial
 {
@@ -34,7 +34,7 @@ public class BlockSlab extends BlockPartial
     @Override
     public int getRenderType()
     {
-        return mod_TFC_Core.slabRenderId;
+        return mod_TFC.slabRenderId;
     }
 
     /**

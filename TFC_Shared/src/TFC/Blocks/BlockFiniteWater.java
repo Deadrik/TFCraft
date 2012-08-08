@@ -38,7 +38,7 @@ public class BlockFiniteWater extends BlockFluid
      */
     public int getRenderType()
     {
-        return mod_TFC_Core.finiteWaterRenderId;
+        return mod_TFC.finiteWaterRenderId;
     }
     
     /**
@@ -150,9 +150,9 @@ public class BlockFiniteWater extends BlockFluid
             world.setBlock(x, y, z, 0);
             return true;
         }
-        if (this.blockID == mod_TFC_Core.finiteWater.blockID && blockID2 == mod_TFC_Core.finiteWater.blockID)
+        if (this.blockID == mod_TFC.finiteWater.blockID && blockID2 == mod_TFC.finiteWater.blockID)
         {
-            world.setBlockAndMetadataWithNotify(x2, y2, z2, mod_TFC_Core.finiteWater.blockID, blockMeta2);
+            world.setBlockAndMetadataWithNotify(x2, y2, z2, mod_TFC.finiteWater.blockID, blockMeta2);
         }
         
         if (blockID2 == this.blockID)
@@ -442,7 +442,7 @@ public class BlockFiniteWater extends BlockFluid
     public static double func_293_a(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, Material par4Material)
     {
         Vec3D var5 = null;
-        var5 = ((BlockFiniteWater)mod_TFC_Core.finiteWater).getFlowVector(par0IBlockAccess, par1, par2, par3);
+        var5 = ((BlockFiniteWater)mod_TFC.finiteWater).getFlowVector(par0IBlockAccess, par1, par2, par3);
         return var5.xCoord == 0.0D && var5.zCoord == 0.0D ? -1000.0D : Math.atan2(var5.zCoord, var5.xCoord) - (Math.PI / 2D);
     }
     

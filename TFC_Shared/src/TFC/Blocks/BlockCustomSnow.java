@@ -63,7 +63,7 @@ public class BlockCustomSnow extends Block
 
 	public int getRenderType()
 	{
-		return mod_TFC_Core.snowRenderId;
+		return mod_TFC.snowRenderId;
 	}
 
 	/**

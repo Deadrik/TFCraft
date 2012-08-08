@@ -28,7 +28,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
 public class TFC_CoreRender 
@@ -53,7 +53,7 @@ public class TFC_CoreRender
         par1Block.setBlockBounds(0.0F+ (0.1F * extraX), 0.0F+ (0.1F * extraY), 0.0F+ (0.1F * extraZ), 1.0F-(0.1F * extraX2), 1-(0.1F * extraY2), 1.0F-(0.1F * extraZ2));
 
         int over = renderblocks.overrideBlockTexture;
-        if(over == -1 && (type == mod_TFC_Core.terraOre.blockID || type == mod_TFC_Core.terraOre2.blockID || type == mod_TFC_Core.terraOre3.blockID))
+        if(over == -1 && (type == mod_TFC.terraOre.blockID || type == mod_TFC.terraOre2.blockID || type == mod_TFC.terraOre3.blockID))
         {
             BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
             renderblocks.overrideBlockTexture = getRockTexture(par3,(TFCBiome)biome);
@@ -1067,34 +1067,34 @@ public class TFC_CoreRender
         if(true/*blockAccess.getBlockMaterial(i, j+1, k) == Material.leaves || blockAccess.getBlockMaterial(i, j-1, k) == Material.leaves || 
                 blockAccess.getBlockId(i, j+1, k) == mod_TFC_Core.fruitTreeWood.blockID || blockAccess.getBlockId(i, j-1, k) == mod_TFC_Core.fruitTreeWood.blockID*/)
         {
-            if(blockAccess.getBlockTileEntity(i, j, k) != null && (blockAccess.getBlockId(i, j-1, k) == mod_TFC_Core.fruitTreeWood.blockID || blockAccess.isBlockOpaqueCube(i, j-1, k)))
+            if(blockAccess.getBlockTileEntity(i, j, k) != null && (blockAccess.getBlockId(i, j-1, k) == mod_TFC.fruitTreeWood.blockID || blockAccess.isBlockOpaqueCube(i, j-1, k)))
             {
                 block.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
-            if(blockAccess.getBlockMaterial(i-1, j, k) == Material.leaves || blockAccess.getBlockId(i-1, j, k) == mod_TFC_Core.fruitTreeWood.blockID)
+            if(blockAccess.getBlockMaterial(i-1, j, k) == Material.leaves || blockAccess.getBlockId(i-1, j, k) == mod_TFC.fruitTreeWood.blockID)
             {
                 block.setBlockBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
-            if(blockAccess.getBlockMaterial(i+1, j, k) == Material.leaves || blockAccess.getBlockId(i+1, j, k) == mod_TFC_Core.fruitTreeWood.blockID)
+            if(blockAccess.getBlockMaterial(i+1, j, k) == Material.leaves || blockAccess.getBlockId(i+1, j, k) == mod_TFC.fruitTreeWood.blockID)
             {
                 block.setBlockBounds(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
-            if(blockAccess.getBlockMaterial(i, j, k-1) == Material.leaves || blockAccess.getBlockId(i, j, k-1) == mod_TFC_Core.fruitTreeWood.blockID)
+            if(blockAccess.getBlockMaterial(i, j, k-1) == Material.leaves || blockAccess.getBlockId(i, j, k-1) == mod_TFC.fruitTreeWood.blockID)
             {
                 block.setBlockBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
-            if(blockAccess.getBlockMaterial(i, j, k+1) == Material.leaves || blockAccess.getBlockId(i, j, k+1) == mod_TFC_Core.fruitTreeWood.blockID)
+            if(blockAccess.getBlockMaterial(i, j, k+1) == Material.leaves || blockAccess.getBlockId(i, j, k+1) == mod_TFC.fruitTreeWood.blockID)
             {
                 block.setBlockBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
         }
 
-        if(!((TileEntityFruitTreeWood)blockAccess.getBlockTileEntity(i, j, k)).isTrunk && blockAccess.getBlockId(i, j-1, k) != mod_TFC_Core.fruitTreeWood.blockID && !blockAccess.isBlockOpaqueCube(i, j-1, k))
+        if(!((TileEntityFruitTreeWood)blockAccess.getBlockTileEntity(i, j, k)).isTrunk && blockAccess.getBlockId(i, j-1, k) != mod_TFC.fruitTreeWood.blockID && !blockAccess.isBlockOpaqueCube(i, j-1, k))
         {
 
             block.setBlockBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
@@ -1137,8 +1137,8 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        int supportIDv = mod_TFC_Core.terraWoodSupportV.blockID;
-        int supportIDh = mod_TFC_Core.terraWoodSupportH.blockID;
+        int supportIDv = mod_TFC.terraWoodSupportV.blockID;
+        int supportIDh = mod_TFC.terraWoodSupportH.blockID;
 
         Boolean hasVerticalBeam = false;
         Boolean hasHorizontalBeamX = false;
@@ -1306,15 +1306,15 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        int supportIDv = mod_TFC_Core.terraWoodSupportV.blockID;
-        int supportIDh = mod_TFC_Core.terraWoodSupportH.blockID;
+        int supportIDv = mod_TFC.terraWoodSupportV.blockID;
+        int supportIDh = mod_TFC.terraWoodSupportH.blockID;
 
         Boolean hasVerticalBeam = false;
         Boolean hasHorizontalBeamX = false;
         Boolean hasHorizontalBeamZ = false;
 
         //if the block directly beneath is a Vertical Support or a solid block
-        if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == mod_TFC_Core.terraWoodSupportV.blockID)
+        if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == mod_TFC.terraWoodSupportV.blockID)
         {	
             block.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
             renderblocks.renderStandardBlock(block, i, j, k);

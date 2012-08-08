@@ -12,7 +12,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraWoodSupport extends Block implements ITextureProvider
@@ -48,19 +48,19 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 
 	public static int isNextToSupport(World world, int x, int y, int z)
 	{
-		if(world.getBlockId(x+1, y, z) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x+1, y, z) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x+1, y, z) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x+1, y, z) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 5;
 		}
-		if(world.getBlockId(x-1, y, z) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x-1, y, z) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x-1, y, z) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x-1, y, z) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 4;
 		}
-		if(world.getBlockId(x, y, z+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x, y, z+1) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x, y, z+1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x, y, z+1) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 3;
 		}
-		if(world.getBlockId(x, y, z-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x, y, z-1) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x, y, z-1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x, y, z-1) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 2;
 		}
@@ -92,8 +92,8 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		int hSupportID = mod_TFC_Core.terraWoodSupportH.blockID;
-		int vSupportID = mod_TFC_Core.terraWoodSupportV.blockID;
+		int hSupportID = mod_TFC.terraWoodSupportH.blockID;
+		int vSupportID = mod_TFC.terraWoodSupportV.blockID;
 
 		Boolean isHorizontal = world.getBlockId(i, j, k) == hSupportID;
 		Boolean isVertical = world.getBlockId(i, j, k) == vSupportID;
@@ -106,23 +106,23 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		{
 			minY = 0.5;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minZ = 0;
 			}
-			if(world.getBlockId(i, j-1, k) == mod_TFC_Core.terraWoodSupportV.blockID)
+			if(world.getBlockId(i, j-1, k) == mod_TFC.terraWoodSupportV.blockID)
 			{
 				minY = 0;
 			}
@@ -131,19 +131,19 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		{
 			minY = 0;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minZ = 0;
 			}
@@ -184,17 +184,17 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 	}
 	public int getRenderType()
 	{
-		if(this.blockID == mod_TFC_Core.terraWoodSupportV.blockID) {
-			return mod_TFC_Core.woodSupportRenderIdV;
+		if(this.blockID == mod_TFC.terraWoodSupportV.blockID) {
+			return mod_TFC.woodSupportRenderIdV;
 		} else {
-			return mod_TFC_Core.woodSupportRenderIdH;
+			return mod_TFC.woodSupportRenderIdH;
 		}
 	}
 
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		int hSupportID = mod_TFC_Core.terraWoodSupportH.blockID;
-		int vSupportID = mod_TFC_Core.terraWoodSupportV.blockID;
+		int hSupportID = mod_TFC.terraWoodSupportH.blockID;
+		int vSupportID = mod_TFC.terraWoodSupportV.blockID;
 
 		Boolean isHorizontal = world.getBlockId(i, j, k) == hSupportID;
 		Boolean isVertical = world.getBlockId(i, j, k) == vSupportID;
@@ -207,23 +207,23 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		{
 			minY = 0.5;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minZ = 0;
 			}
-			if(world.getBlockId(i, j-1, k) == mod_TFC_Core.terraWoodSupportV.blockID)
+			if(world.getBlockId(i, j-1, k) == mod_TFC.terraWoodSupportV.blockID)
 			{
 				minY = 0;
 			}
@@ -232,19 +232,19 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		{
 			minY = 0;
 			maxY = 1;
-			if(world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i+1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxX = 1;
 			}
-			if(world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i-1, j, k) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minX = 0;
 			}
-			if(world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k+1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				maxZ = 1;
 			}
-			if(world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC_Core.terraWoodSupportH.blockID)
+			if(world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(i, j, k-1) == mod_TFC.terraWoodSupportH.blockID)
 			{
 				minZ = 0;
 			}
@@ -262,12 +262,12 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		if(blockID == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(blockID == mod_TFC.terraWoodSupportH.blockID)
 		{
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraWoodSupportItemH, 1, l));
 		}
 
-		if(blockID == mod_TFC_Core.terraWoodSupportV.blockID)
+		if(blockID == mod_TFC.terraWoodSupportV.blockID)
 		{
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraWoodSupportItemV, 1, l));
 		}
@@ -291,8 +291,8 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 
-		int hSupportID = mod_TFC_Core.terraWoodSupportH.blockID;
-		int vSupportID = mod_TFC_Core.terraWoodSupportV.blockID;
+		int hSupportID = mod_TFC.terraWoodSupportH.blockID;
+		int vSupportID = mod_TFC.terraWoodSupportV.blockID;
 
 		Boolean isHorizontal = world.getBlockId(i, j, k) == hSupportID;
 		Boolean isVertical = world.getBlockId(i, j, k) == vSupportID;
@@ -310,8 +310,8 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 		}
 		else if(isHorizontal)//Horizontal Beam
 		{
-			Boolean b1 = !getSupportInRange(world,i,j,k,5,mod_TFC_Core.terraWoodSupportV.blockID);
-			Boolean b2 = !getSupportInRange(world,i,j-1,k,5,mod_TFC_Core.terraWoodSupportV.blockID);
+			Boolean b1 = !getSupportInRange(world,i,j,k,5,mod_TFC.terraWoodSupportV.blockID);
+			Boolean b2 = !getSupportInRange(world,i,j-1,k,5,mod_TFC.terraWoodSupportV.blockID);
 			Boolean support = isNextToSupport(world,i,j,k) == 0;
 			//if the block on any side is not a support then break
 			if(support  || b2 || b1 && b2)

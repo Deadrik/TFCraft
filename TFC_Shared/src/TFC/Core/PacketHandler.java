@@ -20,7 +20,7 @@ import net.minecraft.src.Packet1Login;
 import net.minecraft.src.Packet250CustomPayload;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.IConnectionHandler;
 import net.minecraft.src.forge.IPacketHandler;
 import net.minecraft.src.forge.MessageManager;
@@ -36,12 +36,12 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     @Override
     public void onDisconnect(NetworkManager network, String message, Object[] args) {
 
-        PlayerInfo PI = new PlayerInfo(mod_TFC_Core.proxy.getPlayer(network).username);
+        PlayerInfo PI = new PlayerInfo(mod_TFC.proxy.getPlayer(network).username);
         for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size(); i++)
         {
             if(PlayerManagerTFC.getInstance().Players.get(i).Name.equalsIgnoreCase(PI.Name))
             {
-                System.out.println("PlayerManager Successfully removed player " + mod_TFC_Core.proxy.getPlayer(network).username);
+                System.out.println("PlayerManager Successfully removed player " + mod_TFC.proxy.getPlayer(network).username);
                 PlayerManagerTFC.getInstance().Players.remove(i);
             }  
         }
@@ -55,7 +55,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
         ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
         DataOutputStream dos=new DataOutputStream(bos);
-        EntityPlayer player = mod_TFC_Core.proxy.getPlayer(network);
+        EntityPlayer player = mod_TFC.proxy.getPlayer(network);
         World world= player.worldObj;
 
         if(world.isRemote)
@@ -78,7 +78,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             pkt.isChunkDataPacket=false;
             System.out.println("Client requesting seed info");
             
-            mod_TFC_Core.proxy.sendCustomPacket(pkt);
+            mod_TFC.proxy.sendCustomPacket(pkt);
         }
     }
 
@@ -98,7 +98,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 return;
             }
 
-            EntityPlayer player = mod_TFC_Core.proxy.getPlayer(network);
+            EntityPlayer player = mod_TFC.proxy.getPlayer(network);
             World world= player.worldObj;
 
             if(type == 0)
@@ -210,7 +210,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     pkt.length=bos.size();
                     pkt.isChunkDataPacket=true;
 
-                    mod_TFC_Core.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                    mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
                 }
             }
             else if(type == 2)//Keypress changes
@@ -273,7 +273,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     pkt.length=bos.size();
                     pkt.isChunkDataPacket=false;
                     System.out.println("Server send seed: "+world.getSeed());
-                    mod_TFC_Core.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                    mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
                 }
             }
         }
@@ -388,7 +388,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=true;
 
-                mod_TFC_Core.proxy.sendCustomPacket(pkt);
+                mod_TFC.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -420,7 +420,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=true;
 
-                mod_TFC_Core.proxy.sendCustomPacket(pkt);
+                mod_TFC.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -447,7 +447,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=false;
 
-                mod_TFC_Core.proxy.sendCustomPacket(pkt);
+                mod_TFC.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

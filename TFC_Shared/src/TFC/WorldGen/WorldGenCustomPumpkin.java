@@ -15,10 +15,10 @@ public class WorldGenCustomPumpkin extends WorldGenerator
 			int var9 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 			int var5 = par1World.getBlockId(var7, var8 - 1, var9);
 			if (par1World.isAirBlock(var7, var8, var9) && 
-					(var5 == Block.grass.blockID || var5 == mod_TFC_Core.terraGrass.blockID || var5 == mod_TFC_Core.terraGrass2.blockID ||
-					var5 == mod_TFC_Core.terraDirt.blockID || var5 == mod_TFC_Core.terraDirt.blockID ||
-					var5 == mod_TFC_Core.terraClayGrass.blockID || var5 == mod_TFC_Core.terraClayGrass2.blockID ||
-					var5 == mod_TFC_Core.terraPeatGrass.blockID || var5 == mod_TFC_Core.terraPeat.blockID) && Block.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
+					(var5 == Block.grass.blockID || var5 == mod_TFC.terraGrass.blockID || var5 == mod_TFC.terraGrass2.blockID ||
+					var5 == mod_TFC.terraDirt.blockID || var5 == mod_TFC.terraDirt.blockID ||
+					var5 == mod_TFC.terraClayGrass.blockID || var5 == mod_TFC.terraClayGrass2.blockID ||
+					var5 == mod_TFC.terraPeatGrass.blockID || var5 == mod_TFC.terraPeat.blockID) && Block.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
 			{
 				par1World.setBlockAndMetadata(var7, var8, var9, Block.pumpkin.blockID, par2Random.nextInt(4));
 			}

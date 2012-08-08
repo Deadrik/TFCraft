@@ -185,7 +185,7 @@ public class ContainerTerraMetallurgy extends Container
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC_Core.proxy.areItemStacksEqual(itemstack2, itemstack3))
+						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
 						{
 							if (itemstack3.stackSize <= slot.getSlotStackLimit())
 							{
@@ -213,7 +213,7 @@ public class ContainerTerraMetallurgy extends Container
 							itemstack2.stackSize += j1;
 						}
 					}
-					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC_Core.proxy.areItemStacksEqual(itemstack2, itemstack3))
+					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
 					{
 						int k1 = itemstack2.stackSize;
 						if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())

@@ -43,10 +43,10 @@ public class WorldGenCustomSand extends WorldGenerator
                             int var13 = par1World.getBlockId(var8, var12, var9);
 
                             boolean notCorrectSoil = var13 != Block.grass.blockID && var13 != Block.dirt.blockID && 
-                                    var13 != mod_TFC_Core.terraGrass.blockID && var13 != mod_TFC_Core.terraGrass2.blockID &&
-                                    var13 != mod_TFC_Core.terraDirt.blockID && var13 != mod_TFC_Core.terraDirt.blockID &&
-                                    var13 != mod_TFC_Core.terraClayGrass.blockID && var13 != mod_TFC_Core.terraClayGrass2.blockID &&
-                                    var13 != mod_TFC_Core.terraPeatGrass.blockID && var13 != mod_TFC_Core.terraPeat.blockID && var13 != Block.sand.blockID;
+                                    var13 != mod_TFC.terraGrass.blockID && var13 != mod_TFC.terraGrass2.blockID &&
+                                    var13 != mod_TFC.terraDirt.blockID && var13 != mod_TFC.terraDirt.blockID &&
+                                    var13 != mod_TFC.terraClayGrass.blockID && var13 != mod_TFC.terraClayGrass2.blockID &&
+                                    var13 != mod_TFC.terraPeatGrass.blockID && var13 != mod_TFC.terraPeat.blockID && var13 != Block.sand.blockID;
                             if (!notCorrectSoil)
                             {
                                 par1World.setBlock(var8, var12, var9, this.sandID);

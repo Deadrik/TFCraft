@@ -257,23 +257,23 @@ public class ClientProxy implements IProxy
     public boolean renderWorldBlock(Object renderblocks,
             IBlockAccess iblockaccess, int i, int j, int k, Block block, int l) 
     {
-        if (l == mod_TFC_Core.sulfurRenderId)
+        if (l == mod_TFC.sulfurRenderId)
         {
             return TFC_CoreRender.RenderSulfur(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.moltenRenderId)
+        else if (l == mod_TFC.moltenRenderId)
         {
             return TFC_CoreRender.RenderMolten(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.woodSupportRenderIdH)
+        else if (l == mod_TFC.woodSupportRenderIdH)
         {
             return TFC_CoreRender.RenderWoodSupportBeamH(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.woodSupportRenderIdV)
+        else if (l == mod_TFC.woodSupportRenderIdV)
         {
             return TFC_CoreRender.RenderWoodSupportBeamV(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.grassRenderId)
+        else if (l == mod_TFC.grassRenderId)
         {
             int var5 = block.colorMultiplier(iblockaccess, i, j, k);
             float var6 = (float)(var5 >> 16 & 255) / 255.0F;
@@ -281,7 +281,7 @@ public class ClientProxy implements IProxy
             float var8 = (float)(var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderGrass(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.oreRenderId)
+        else if (l == mod_TFC.oreRenderId)
         {
             int var5 = block.colorMultiplier(iblockaccess, i, j, k);
             float var6 = (float)(var5 >> 16 & 255) / 255.0F;
@@ -289,39 +289,39 @@ public class ClientProxy implements IProxy
             float var8 = (float)(var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderOre(block, i, j, k,  var6, var7, var8, (RenderBlocks)renderblocks, iblockaccess);
         }
-        else if (l == mod_TFC_Core.looseRockRenderId)
+        else if (l == mod_TFC.looseRockRenderId)
         {
             return TFC_CoreRender.RenderLooseRock(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.snowRenderId)
+        else if (l == mod_TFC.snowRenderId)
         {
             return TFC_CoreRender.RenderSnow(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.terraFirepitRenderId)
+        else if (l == mod_TFC.terraFirepitRenderId)
         {
             return TFC_CoreRender.renderFirepit(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.terraForgeRenderId)
+        else if (l == mod_TFC.terraForgeRenderId)
         {
             return TFC_CoreRender.renderForge(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.terraBellowsRenderId)
+        else if (l == mod_TFC.terraBellowsRenderId)
         {
             return TFC_CoreRender.renderBellows(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.terraAnvilRenderId)
+        else if (l == mod_TFC.terraAnvilRenderId)
         {
             return TFC_CoreRender.renderAnvil(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.sluiceRenderId)
+        else if (l == mod_TFC.sluiceRenderId)
         {
             return TFC_CoreRender.RenderSluice(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.woodFruitRenderId)
+        else if (l == mod_TFC.woodFruitRenderId)
         {
             return TFC_CoreRender.RenderWoodTrunk(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.leavesFruitRenderId)
+        else if (l == mod_TFC.leavesFruitRenderId)
         {
             int var5 = block.colorMultiplier(iblockaccess, i, j, k);
             float var6 = (float)(var5 >> 16 & 255) / 255.0F;
@@ -329,7 +329,7 @@ public class ClientProxy implements IProxy
             float var8 = (float)(var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.toolRackRenderId)
+        else if (l == mod_TFC.toolRackRenderId)
         {
             int var5 = block.colorMultiplier(iblockaccess, i, j, k);
             float var6 = (float)(var5 >> 16 & 255) / 255.0F;
@@ -337,15 +337,15 @@ public class ClientProxy implements IProxy
             float var8 = (float)(var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.finiteWaterRenderId)
+        else if (l == mod_TFC.finiteWaterRenderId)
         {
             return TFC_CoreRender.RenderFiniteWater(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.stairRenderId)
+        else if (l == mod_TFC.stairRenderId)
         {
             return TFC_CoreRender.renderBlockStairs(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC_Core.slabRenderId)
+        else if (l == mod_TFC.slabRenderId)
         {
             return TFC_CoreRender.renderBlockSlab(block, i, j, k, (RenderBlocks)renderblocks);
         }
@@ -401,7 +401,7 @@ public class ClientProxy implements IProxy
         int[] rgb = {0,0,0};
 
         int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-        if(par1IBlockAccess.getBlockId(par2, par3, par4) == mod_TFC_Core.fruitTreeLeaves.blockID)
+        if(par1IBlockAccess.getBlockId(par2, par3, par4) == mod_TFC.fruitTreeLeaves.blockID)
         {
             if(TFCSeasons.currentMonth >= 6 && TFCSeasons.currentMonth < 9)
             {
@@ -656,7 +656,7 @@ public class ClientProxy implements IProxy
             keyTime = TFCSeasons.getTotalTicks();
             if (bind == this.Key_Calendar && minecraft.inGameHasFocus)
             {
-                minecraft.thePlayer.openGui(mod_TFC_Core.instance, 27, minecraft.theWorld, 0, 0, 0);
+                minecraft.thePlayer.openGui(mod_TFC.instance, 27, minecraft.theWorld, 0, 0, 0);
             }
             else if (bind == this.Key_Calendar && minecraft.currentScreen instanceof GuiCalendar)
             {

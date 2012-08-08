@@ -48,7 +48,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        return mod_TFC_Core.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+        return mod_TFC.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     /**
@@ -110,10 +110,10 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
     @Override
     protected boolean canThisPlantGrowOnThisBlockID(int par1)
     {
-        return par1 == mod_TFC_Core.terraGrass.blockID || par1 == mod_TFC_Core.terraGrass2.blockID || 
-        par1 == mod_TFC_Core.terraDirt.blockID || par1 == mod_TFC_Core.terraDirt2.blockID ||
-        par1 == mod_TFC_Core.terraClayGrass.blockID || par1 == mod_TFC_Core.terraClayGrass2.blockID ||
-        par1 == mod_TFC_Core.terraPeatGrass.blockID ||
+        return par1 == mod_TFC.terraGrass.blockID || par1 == mod_TFC.terraGrass2.blockID || 
+        par1 == mod_TFC.terraDirt.blockID || par1 == mod_TFC.terraDirt2.blockID ||
+        par1 == mod_TFC.terraClayGrass.blockID || par1 == mod_TFC.terraClayGrass2.blockID ||
+        par1 == mod_TFC.terraPeatGrass.blockID ||
         par1 == Block.tilledField.blockID;
     }
 

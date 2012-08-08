@@ -19,7 +19,7 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class BlockCollapsable extends BlockTerra
 {
@@ -164,7 +164,7 @@ public class BlockCollapsable extends BlockTerra
             {
                 for(int z = -4; z < 5; z++)
                 {
-                    if(world.getBlockId(i+x, j+y, k+z) == mod_TFC_Core.terraWoodSupportH.blockID)
+                    if(world.getBlockId(i+x, j+y, k+z) == mod_TFC.terraWoodSupportH.blockID)
                     {
                         return true;
                     }
@@ -216,19 +216,19 @@ public class BlockCollapsable extends BlockTerra
                 world.setBlock(i, j, k, 0);
                 world.markBlockNeedsUpdate(i, j, k);
                 
-                if(world.getBlockId(i, j-1, k) == mod_TFC_Core.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
+                if(world.getBlockId(i, j-1, k) == mod_TFC.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
                         ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
                 {
                     world.setBlock(i, j-1, k, 0);
                     world.markBlockNeedsUpdate(i, j-1, k);
                     
-                    if(world.getBlockId(i, j-2, k) == mod_TFC_Core.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
+                    if(world.getBlockId(i, j-2, k) == mod_TFC.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
                             ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
                     {
                         world.setBlock(i, j-2, k, 0);
                         world.markBlockNeedsUpdate(i, j-2, k);
                         
-                        if(world.getBlockId(i, j-3, k) == mod_TFC_Core.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
+                        if(world.getBlockId(i, j-3, k) == mod_TFC.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
                                 ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
                         {
                             world.setBlock(i, j-3, k, 0);

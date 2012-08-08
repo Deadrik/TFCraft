@@ -83,10 +83,10 @@ import net.minecraft.src.vazkii.updatemanager.ModType;
 import net.minecraft.src.vazkii.updatemanager.UMCore;
 import net.minecraft.src.TFCItems;
 
-public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHandler
+public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
 {
     static Configuration config;
-    public static mod_TFC_Core instance;
+    public static mod_TFC instance;
     public static IProxy proxy;
     public static float fogValue = -1;
 
@@ -210,7 +210,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
     public static EnumArmorMaterial TinArmorMaterial;
     public static EnumArmorMaterial ZincArmorMaterial;
 
-    public mod_TFC_Core()
+    public mod_TFC()
     {
         proxy = ServerClientProxy.getProxy();
         ModLoader.setInGameHook(this, true, true);
@@ -438,8 +438,8 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
 
                 if(iinventory != null)
                 {
-                    if(itemstack.itemID == mod_TFC_Core.terraStoneSedBrick.blockID || itemstack.itemID == mod_TFC_Core.terraStoneIgInBrick.blockID || 
-                            itemstack.itemID == mod_TFC_Core.terraStoneIgExBrick.blockID || itemstack.itemID == mod_TFC_Core.terraStoneMMBrick.blockID)
+                    if(itemstack.itemID == mod_TFC.terraStoneSedBrick.blockID || itemstack.itemID == mod_TFC.terraStoneIgInBrick.blockID || 
+                            itemstack.itemID == mod_TFC.terraStoneIgExBrick.blockID || itemstack.itemID == mod_TFC.terraStoneMMBrick.blockID)
                     {
                         HandleItem(entityplayer, iinventory, TFC_Core.Chisels);
                     }
@@ -485,7 +485,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
                             }
                         }
                         if(openGui)
-                            entityplayer.openGui(mod_TFC_Core.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+                            entityplayer.openGui(mod_TFC.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 
                         //itemstack = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
                     }
@@ -1165,7 +1165,7 @@ public class mod_TFC_Core extends NetworkMod implements IUpdateManager, ITickHan
         if(!doOnce && TFC_Core.isClient())
         {
             if(PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(minecraftInstance.thePlayer) == null)
-                PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(mod_TFC_Core.proxy.getPlayerName()));
+                PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(mod_TFC.proxy.getPlayerName()));
             doOnce = true;
         }
         return false;

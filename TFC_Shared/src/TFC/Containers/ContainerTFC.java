@@ -4,7 +4,7 @@ import net.minecraft.src.Container;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class ContainerTFC extends Container
 {
@@ -37,7 +37,7 @@ public class ContainerTFC extends Container
                 var8 = var7.getStack();
 
                 if (var8 != null && var8.itemID == is.itemID && (!is.getHasSubtypes() || is.getItemDamage() == var8.getItemDamage()) && 
-                        mod_TFC_Core.proxy.areItemStacksEqual(is, var8) && var8.stackSize+is.stackSize < maxStack)
+                        mod_TFC.proxy.areItemStacksEqual(is, var8) && var8.stackSize+is.stackSize < maxStack)
                 {
                     int var9 = var8.stackSize + is.stackSize;
 

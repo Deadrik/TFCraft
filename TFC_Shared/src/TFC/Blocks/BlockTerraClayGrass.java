@@ -104,7 +104,7 @@ public class BlockTerraClayGrass extends BlockTerra2
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-    	return mod_TFC_Core.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+    	return mod_TFC.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
     
     public int getBlockColor()
@@ -124,7 +124,7 @@ public class BlockTerraClayGrass extends BlockTerra2
     
     public int getRenderType()
 	{
-		return mod_TFC_Core.grassRenderId;
+		return mod_TFC.grassRenderId;
 	}
 
     /**

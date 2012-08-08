@@ -56,7 +56,7 @@ public class ItemChisel extends ItemTool implements ITextureProvider
     {
         if(!world.isRemote)
         {
-            world.setBlockAndMetadataWithNotify(x, y, z, mod_TFC_Core.stoneStairs.blockID, m);
+            world.setBlockAndMetadataWithNotify(x, y, z, mod_TFC.stoneStairs.blockID, m);
             TileEntityPartial te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
             te.TypeID = (short) id;
             te.MetaID = (byte) meta;
@@ -187,6 +187,6 @@ public class ItemChisel extends ItemTool implements ITextureProvider
     }
     public static void CreateSlab(World world, int x, int y, int z, int id, byte meta, int side)
     {
-        CreateSlab(world,x,y,z,id,meta,side, mod_TFC_Core.stoneSlabs.blockID);
+        CreateSlab(world,x,y,z,id,meta,side, mod_TFC.stoneSlabs.blockID);
     }
 }

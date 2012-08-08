@@ -29,8 +29,8 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
+import net.minecraft.src.mod_TFC;
 
 public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory
 {
@@ -496,7 +496,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
         while(!reachedTop && j+y >= 0)
         {
-            if(world.getBlockId(x, j+y+1, z) != mod_TFC_Core.LogPile.blockID)
+            if(world.getBlockId(x, j+y+1, z) != mod_TFC.LogPile.blockID)
             {
                 reachedTop = true;
             }
@@ -510,7 +510,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         if(world.getBlockId(i, j, k) == 0)
             vecArray.add(new Vector3f(i, j, k));        
 
-        else if(world.getBlockId(i, j, k) == mod_TFC_Core.LogPile.blockID)
+        else if(world.getBlockId(i, j, k) == mod_TFC.LogPile.blockID)
         {
             if(!empty)
             {
@@ -614,7 +614,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord - 3));
                     }
 
-                    if(area[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 3);
                         if(te != null)
@@ -644,7 +644,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord - 2));
                     }
 
-                    if(area0[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area0[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 2);
                         if(te != null)
@@ -674,7 +674,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord - 1));
                     }
 
-                    if(area1[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area1[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 1);
                         if(te != null)
@@ -704,7 +704,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord));
                     }
 
-                    if(area2[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area2[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord);
                         if(te != null)
@@ -734,7 +734,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord +1));
                     }
 
-                    if(area3[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area3[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord + 1);
                         if(te != null)
@@ -764,7 +764,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord + 2));
                     }
 
-                    if(area4[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area4[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord + 2);
                         if(te != null)
@@ -794,7 +794,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-3, yCoord, zCoord + 3));
                     }
 
-                    if(area5[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area5[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord + 3);
                         if(te != null)
@@ -827,7 +827,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord -2));
                     }
 
-                    if(area0_2[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area0_2[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord - 2);
                         if(te != null)
@@ -857,7 +857,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord -1));
                     }
 
-                    if(area1_2[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area1_2[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord - 1);
                         if(te != null)
@@ -887,7 +887,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord));
                     }
 
-                    if(area2_2[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area2_2[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord );
                         if(te != null)
@@ -917,7 +917,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord + 1));
                     }
 
-                    if(area3_2[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area3_2[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord + 1);
                         if(te != null)
@@ -947,7 +947,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         vecArray.add(new Vector3f(xCoord+x-2, yCoord, zCoord + 2));
                     }
 
-                    if(area4_2[x] == 1 && id == mod_TFC_Core.LogPile.blockID)
+                    if(area4_2[x] == 1 && id == mod_TFC.LogPile.blockID)
                     {
                         TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord, zCoord + 2);
                         if(te != null)
@@ -1039,7 +1039,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                 for(int x = 0; x < area0.length; x++)
                 {
-                    if(area0[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 2) == mod_TFC_Core.LogPile.blockID)
+                    if(area0[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 2) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 2)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord - 2, 0);
@@ -1048,7 +1048,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area1.length; x++)
                 {
-                    if(area1[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 1) == mod_TFC_Core.LogPile.blockID)
+                    if(area1[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord - 1) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord - 1)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord - 1, 0);
@@ -1057,7 +1057,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area2.length; x++)
                 {
-                    if(area2[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord) == mod_TFC_Core.LogPile.blockID)
+                    if(area2[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord , 0);
@@ -1066,7 +1066,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area3.length; x++)
                 {
-                    if(area3[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 1) == mod_TFC_Core.LogPile.blockID)
+                    if(area3[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 1) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord +1)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord + 1, 0);
@@ -1075,7 +1075,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area4.length; x++)
                 {
-                    if(area4[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 2) == mod_TFC_Core.LogPile.blockID)
+                    if(area4[x] == 1 && worldObj.getBlockId(xCoord+x-3, yCoord, zCoord + 2) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-3, yCoord, zCoord +2)).clearContents();
                         worldObj.setBlock(xCoord+x-3, yCoord, zCoord + 2, 0);
@@ -1086,7 +1086,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 //Top Wood layer
                 for(int x = 0; x < area0_2.length; x++)
                 {
-                    if(area0_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord - 2) == mod_TFC_Core.LogPile.blockID)
+                    if(area0_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord - 2) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord - 2)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord - 2, 0);
@@ -1095,7 +1095,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area1_2.length; x++)
                 {
-                    if(area1_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord - 1) == mod_TFC_Core.LogPile.blockID)
+                    if(area1_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord - 1) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord - 1)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord - 1, 0);
@@ -1104,7 +1104,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area2_2.length; x++)
                 {
-                    if(area2_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord) == mod_TFC_Core.LogPile.blockID)
+                    if(area2_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord, 0);
@@ -1113,7 +1113,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area3_2.length; x++)
                 {
-                    if(area3_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord + 1) == mod_TFC_Core.LogPile.blockID)
+                    if(area3_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord + 1) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord +1)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord + 1, 0);
@@ -1122,7 +1122,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 }
                 for(int x = 0; x < area4_2.length; x++)
                 {
-                    if(area4_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord + 2) == mod_TFC_Core.LogPile.blockID)
+                    if(area4_2[x] == 1 && worldObj.getBlockId(xCoord+x-2, yCoord+1, zCoord + 2) == mod_TFC.LogPile.blockID)
                     {
                         ((TileEntityTerraLogPile)worldObj.getBlockTileEntity(xCoord+x-2, yCoord+1, zCoord + 2)).clearContents();
                         worldObj.setBlock(xCoord+x-2, yCoord+1, zCoord + 2, 0);
@@ -1328,7 +1328,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public void updateEntity()
     {
         int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
-        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == mod_TFC_Core.LogPile.blockID/*Surrounded == 5*/)
+        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == mod_TFC.LogPile.blockID/*Surrounded == 5*/)
         {
             externalFireCheckTimer--;
             if(externalFireCheckTimer <= 0)
@@ -1436,7 +1436,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && Surrounded != 5)
             {
 
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC_Core.terraFirepitOn.blockID) {
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC.terraFirepitOn.blockID) {
                     BlockTerraFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 

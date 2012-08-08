@@ -17,9 +17,9 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatList;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core.*;
-import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC.*;
+import net.minecraft.src.mod_TFC;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraMolten extends Block implements ITextureProvider

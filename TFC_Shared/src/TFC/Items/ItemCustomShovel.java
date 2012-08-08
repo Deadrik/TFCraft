@@ -11,8 +11,8 @@ implements ITextureProvider
 {
     /** an array of the blocks this spade is effective against */
     private static Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, 
-        mod_TFC_Core.terraDirt, mod_TFC_Core.terraDirt2, mod_TFC_Core.terraGrass, mod_TFC_Core.terraGrass2, mod_TFC_Core.terraClayGrass, mod_TFC_Core.terraClayGrass2, mod_TFC_Core.terraPeatGrass, mod_TFC_Core.terraPeat, 
-        mod_TFC_Core.terraClay, mod_TFC_Core.terraClay2};
+        mod_TFC.terraDirt, mod_TFC.terraDirt2, mod_TFC.terraGrass, mod_TFC.terraGrass2, mod_TFC.terraClayGrass, mod_TFC.terraClayGrass2, mod_TFC.terraPeatGrass, mod_TFC.terraPeat, 
+        mod_TFC.terraClay, mod_TFC.terraClay2};
 
     public ItemCustomShovel(int par1, EnumToolMaterial par2EnumToolMaterial)
     {

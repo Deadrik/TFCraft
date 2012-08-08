@@ -11,7 +11,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraBloomery extends BlockContainer implements ITextureProvider
@@ -86,12 +86,12 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 
 		if (par0)
 		{
-			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Core.terraBloomeryOn.blockID);
+			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC.terraBloomeryOn.blockID);
 			par1World.markBlockNeedsUpdate(par2, par3, par4);
 		}
 		else
 		{
-			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC_Core.terraBloomery.blockID);
+			par1World.setBlockWithNotify(par2, par3, par4, mod_TFC.terraBloomery.blockID);
 			par1World.markBlockNeedsUpdate(par2, par3, par4);
 		}
 
@@ -105,7 +105,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 	}
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		if(this.blockID != mod_TFC_Core.terraBloomeryOn.blockID) {
+		if(this.blockID != mod_TFC.terraBloomeryOn.blockID) {
 			list.add(new ItemStack(this,1,0));
 		}
 	}
@@ -126,7 +126,7 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 
 			if(tileentityforge.isValid)
 			{
-				entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.terraBloomeryGuiId, world, i, j, k);
+				entityplayer.openGui(mod_TFC.instance, mod_TFC.terraBloomeryGuiId, world, i, j, k);
 			}
 		}
 		return true;
@@ -210,27 +210,27 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 	{
 		meta = world.getBlockMetadata(par2, par3, par4);
 		int[] dir = headBlockToFootBlockMap[meta & 3];
-		if(world.getBlockId(par2+dir[0], par3, par4+dir[1]) == mod_TFC_Core.terraMolten.blockID)
+		if(world.getBlockId(par2+dir[0], par3, par4+dir[1]) == mod_TFC.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3, par4+dir[1], 0);
 			world.markBlockNeedsUpdate(par2+dir[0], par3, par4+dir[1]);
 		}
-		if(world.getBlockId(par2+dir[0], par3+1, par4+dir[1]) == mod_TFC_Core.terraMolten.blockID)
+		if(world.getBlockId(par2+dir[0], par3+1, par4+dir[1]) == mod_TFC.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+1, par4+dir[1], 0);
 			world.markBlockNeedsUpdate(par2+dir[0], par3+1, par4+dir[1]);
 		}
-		if(world.getBlockId(par2+dir[0], par3+2, par4+dir[1]) == mod_TFC_Core.terraMolten.blockID)
+		if(world.getBlockId(par2+dir[0], par3+2, par4+dir[1]) == mod_TFC.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+2, par4+dir[1], 0);
 			world.markBlockNeedsUpdate(par2+dir[0], par3+2, par4+dir[1]);
 		}
-		if(world.getBlockId(par2+dir[0], par3+3, par4+dir[1]) == mod_TFC_Core.terraMolten.blockID)
+		if(world.getBlockId(par2+dir[0], par3+3, par4+dir[1]) == mod_TFC.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+3, par4+dir[1], 0);
 			world.markBlockNeedsUpdate(par2+dir[0], par3+3, par4+dir[1]);
 		}
-		if(world.getBlockId(par2+dir[0], par3+4, par4+dir[1]) == mod_TFC_Core.terraMolten.blockID)
+		if(world.getBlockId(par2+dir[0], par3+4, par4+dir[1]) == mod_TFC.terraMolten.blockID)
 		{
 			world.setBlock(par2+dir[0], par3+4, par4+dir[1], 0);
 			world.markBlockNeedsUpdate(par2+dir[0], par3+4, par4+dir[1]);

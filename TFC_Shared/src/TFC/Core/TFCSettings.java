@@ -2,7 +2,7 @@ package TFC.Core;
 
 import java.io.File;
 
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.Property;
 

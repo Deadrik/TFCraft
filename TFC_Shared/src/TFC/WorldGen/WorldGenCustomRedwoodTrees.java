@@ -66,8 +66,8 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 			return false;
 		}
 		int var3 = world.getBlockId (xCoord, yCoord - 1, zCoord);
-		if (!(var3 == mod_TFC_Core.terraDirt.blockID || var3 == mod_TFC_Core.terraDirt2.blockID || var3 == mod_TFC_Core.terraGrass.blockID || var3 == mod_TFC_Core.terraGrass2.blockID ||
-				var3 == mod_TFC_Core.terraClayGrass.blockID || var3 == mod_TFC_Core.terraClayGrass2.blockID)|| yCoord >= world.getHeight() - treeHeight - 1)
+		if (!(var3 == mod_TFC.terraDirt.blockID || var3 == mod_TFC.terraDirt2.blockID || var3 == mod_TFC.terraGrass.blockID || var3 == mod_TFC.terraGrass2.blockID ||
+				var3 == mod_TFC.terraClayGrass.blockID || var3 == mod_TFC.terraClayGrass2.blockID)|| yCoord >= world.getHeight() - treeHeight - 1)
 		{
 			return false;
 		}
@@ -111,7 +111,7 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 						int j4 = zPos - zCoord;
 						if ((Math.abs(l3) != width || Math.abs(j4) != width ||random.nextInt (2) != 0) && 
 								!Block.opaqueCubeLookup [world.getBlockId (xPos, yPos, zPos)]&&
-										world.getBlockId (xPos, yPos, zPos) != mod_TFC_Core.terraWood.blockID)
+										world.getBlockId (xPos, yPos, zPos) != mod_TFC.terraWood.blockID)
 						{
 							setBlockAndMetadata(world, xPos, yPos, zPos, Block.leaves.blockID, treeId);
 						}
@@ -162,7 +162,7 @@ public class WorldGenCustomRedwoodTrees extends WorldGenerator
 						int j4 = zPos - zCoord;
 						if ((Math.abs(l3) != width || Math.abs(j4) != width ||random.nextInt (2) != 0) && 
 								!Block.opaqueCubeLookup [world.getBlockId (xPos, yPos, zPos)]&&
-										world.getBlockId (xPos, yPos, zPos) != mod_TFC_Core.terraWood.blockID)
+										world.getBlockId (xPos, yPos, zPos) != mod_TFC.terraWood.blockID)
 						{
 							setBlockAndMetadata(world, xPos, yPos, zPos, Block.leaves.blockID, treeId);
 						}

@@ -21,7 +21,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraSed extends BlockCollapsable
@@ -67,7 +67,7 @@ public class BlockTerraSed extends BlockCollapsable
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return mod_TFC_Core.terraStoneSedCobble.blockID;
+        return mod_TFC.terraStoneSedCobble.blockID;
     }
 
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
@@ -181,7 +181,7 @@ public class BlockTerraSed extends BlockCollapsable
             
             if(mode == 0)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, mod_TFC_Core.terraStoneSedSmooth.blockID, meta);
+                world.setBlockAndMetadataWithNotify(x, y, z, mod_TFC.terraStoneSedSmooth.blockID, meta);
                 return true;
             }
             else if(mode == 1)

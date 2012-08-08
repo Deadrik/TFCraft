@@ -23,7 +23,7 @@ public class BlockCustomCrops extends BlockCustomFlower
 	 */
 	protected boolean canThisPlantGrowOnThisBlockID(int par1)
 	{
-		boolean b = par1 == mod_TFC_Core.tilledSoil.blockID || par1 == mod_TFC_Core.tilledSoil2.blockID;
+		boolean b = par1 == mod_TFC.tilledSoil.blockID || par1 == mod_TFC.tilledSoil2.blockID;
 		return b;
 	}
 
@@ -95,7 +95,7 @@ public class BlockCustomCrops extends BlockCustomFlower
 				 int var19 = par1World.getBlockId(var17, par3 - 1, var18);
 				 float var20 = 0.0F;
 
-				 if (var19 == mod_TFC_Core.tilledSoil.blockID || var19 == mod_TFC_Core.tilledSoil2.blockID)
+				 if (var19 == mod_TFC.tilledSoil.blockID || var19 == mod_TFC.tilledSoil2.blockID)
 				 {
 					 var20 = 1.0F;
 

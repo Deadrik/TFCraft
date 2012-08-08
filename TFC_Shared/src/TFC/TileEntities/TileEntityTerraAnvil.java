@@ -32,8 +32,8 @@ import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.Vec3D;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
+import net.minecraft.src.mod_TFC;
 
 public class TileEntityTerraAnvil extends TileEntity implements IInventory
 {
@@ -239,7 +239,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 0));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 0));
         }
     }
 
@@ -264,7 +264,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, -1));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, -1));
         }
 
     }
@@ -289,7 +289,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 1));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 1));
         }
     }
 
@@ -313,7 +313,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 2));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 2));
         }
     }
 
@@ -337,7 +337,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 3));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 3));
         }
     }
 
@@ -361,7 +361,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 4));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 4));
         }
     }
 
@@ -385,7 +385,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 5));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 5));
         }
     }
 
@@ -409,7 +409,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 6));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 6));
         }
     } 
 
@@ -465,7 +465,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this, 7));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 7));
         }
     }
     @Override

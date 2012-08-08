@@ -115,7 +115,7 @@ public class ItemCustomBucket extends Item implements ITextureProvider
 
                     if (par2World.isAirBlock(var13, var14, var15) || !par2World.getBlockMaterial(var13, var14, var15).isSolid())
                     {
-                        if (par2World.worldProvider.isHellWorld && this.isFull == mod_TFC_Core.finiteWater.blockID)
+                        if (par2World.worldProvider.isHellWorld && this.isFull == mod_TFC.finiteWater.blockID)
                         {
                             par2World.playSoundEffect(var5 + 0.5D, var7 + 0.5D, var9 + 0.5D, "random.fizz", 0.5F, 2.6F + (par2World.rand.nextFloat() - par2World.rand.nextFloat()) * 0.8F);
 

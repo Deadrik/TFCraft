@@ -134,7 +134,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        return mod_TFC_Core.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+        return mod_TFC.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     public int getBlockColor()
@@ -154,7 +154,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
     @Override
     public int getRenderType()
     {
-        return mod_TFC_Core.grassRenderId;
+        return mod_TFC.grassRenderId;
     }
 
     /**
@@ -212,7 +212,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
             if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockTerraDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
             {
                 int meta = world.getBlockMetadata(i, j, k);
-                world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC_Core.terraDirt.blockID, meta);
+                world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.terraDirt.blockID, meta);
             }
         }
     }
@@ -228,7 +228,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
     @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return mod_TFC_Core.terraDirt.idDropped(0, par2Random, par3);
+        return mod_TFC.terraDirt.idDropped(0, par2Random, par3);
     }
 
     public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
@@ -264,7 +264,7 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         if(!world.blockExists(i, j-1, k))
         {
             int meta = world.getBlockMetadata(i, j, k);
-            world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC_Core.terraDirt.blockID, meta);
+            world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.terraDirt.blockID, meta);
         }
     }
 

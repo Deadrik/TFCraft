@@ -21,8 +21,8 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StringTranslate;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemTerraProPick extends Item implements ITextureProvider
@@ -66,23 +66,23 @@ public class ItemTerraProPick extends Item implements ITextureProvider
             boolean isOre = false;
             
             int id = world.getBlockId(x, y, z);
-            if(id == mod_TFC_Core.terraOre.blockID)
+            if(id == mod_TFC.terraOre.blockID)
             {
                 isOre = true;
                 int meta = world.getBlockMetadata(x, y, z);
-                oreArray.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                oreArray.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC.terraOre).damageDropped(meta)));
             }
-            else if(id == mod_TFC_Core.terraOre2.blockID)
+            else if(id == mod_TFC.terraOre2.blockID)
             {
                 isOre = true;
                 int meta = world.getBlockMetadata(x, y, z);
-                oreArray.add(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
+                oreArray.add(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC.terraOre2).damageDropped(meta)));
             }
-            else if(id == mod_TFC_Core.terraOre3.blockID)
+            else if(id == mod_TFC.terraOre3.blockID)
             {
                 isOre = true;
                 int meta = world.getBlockMetadata(x, y, z);
-                oreArray.add(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
+                oreArray.add(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC.terraOre3).damageDropped(meta)));
             }
             //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);
             
@@ -95,53 +95,53 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                         int oreid = world.getBlockId(x+i, y+k, z+j);
 
                         ItemStack is;
-                        if(oreid == mod_TFC_Core.terraOre.blockID)
+                        if(oreid == mod_TFC.terraOre.blockID)
                         {
                             int meta = world.getBlockMetadata(x+i, y+k, z+j);
 
-                            if(!oreArray.contains(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta))))
+                            if(!oreArray.contains(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC.terraOre).damageDropped(meta))))
                             {
-                                oreArray.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                                oreArray.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC.terraOre).damageDropped(meta)));
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
+                                int index = oreArray.indexOf(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC.terraOre).damageDropped(meta)));
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
 
 
                         }
-                        else if(oreid == mod_TFC_Core.terraOre2.blockID)
+                        else if(oreid == mod_TFC.terraOre2.blockID)
                         {
                             int meta = world.getBlockMetadata(x+i, y+k, z+j);
 
                             if(meta != 6)
                             {
-                                if(!oreArray.contains(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta))))
+                                if(!oreArray.contains(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC.terraOre2).damageDropped(meta))))
                                 {
-                                    oreArray.add(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
+                                    oreArray.add(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC.terraOre2).damageDropped(meta)));
                                     oreNumArray.add(1);
                                 }
                                 else
                                 {
-                                    int index = oreArray.indexOf(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC_Core.terraOre2).damageDropped(meta)));
+                                    int index = oreArray.indexOf(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC.terraOre2).damageDropped(meta)));
                                     oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                                 }
                             }
                         }
-                        else if(oreid == mod_TFC_Core.terraOre3.blockID)
+                        else if(oreid == mod_TFC.terraOre3.blockID)
                         {
                             int meta = world.getBlockMetadata(x+i, y+k, z+j);
 
-                            if(!oreArray.contains(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta))))
+                            if(!oreArray.contains(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC.terraOre3).damageDropped(meta))))
                             {
-                                oreArray.add(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
+                                oreArray.add(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC.terraOre3).damageDropped(meta)));
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC_Core.terraOre3).damageDropped(meta)));
+                                int index = oreArray.indexOf(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC.terraOre3).damageDropped(meta)));
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
                         }

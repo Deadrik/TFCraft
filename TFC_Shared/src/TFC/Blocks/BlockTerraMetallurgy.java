@@ -7,7 +7,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraMetallurgy extends BlockContainer implements ITextureProvider
@@ -58,7 +58,7 @@ public class BlockTerraMetallurgy extends BlockContainer implements ITextureProv
 				tileentityanvil = (TileEntityTerraMetallurgy)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.terraMetallurgyGuiId, world, i, j, k);
+				entityplayer.openGui(mod_TFC.instance, mod_TFC.terraMetallurgyGuiId, world, i, j, k);
 				//ModLoader.openGUI(entityplayer, new GuiTerraMetallurgy(entityplayer.inventory, tileentityanvil, world));
 			}
 			return true;

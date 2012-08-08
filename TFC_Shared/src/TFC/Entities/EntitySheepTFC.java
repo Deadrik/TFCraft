@@ -115,7 +115,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     
     public void healthUpdateToProxy(byte par1)
     {
-        mod_TFC_Core.proxy.handleHealthUpdate(this.getClass(), par1);
+        mod_TFC.proxy.handleHealthUpdate(this.getClass(), par1);
     }
 
     public float func_44003_c(float par1)

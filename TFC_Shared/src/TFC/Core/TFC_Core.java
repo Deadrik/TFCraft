@@ -170,92 +170,92 @@ public class TFC_Core
     {
         int height = max-min;
         //============Copper
-        createOre(mod_TFC_Core.terraOre.blockID, 0,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
+        createOre(mod_TFC.terraOre.blockID, 0,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
                 /*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cassiterite
-        createOre(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0},//Granite Veins
+        createOre(mod_TFC.terraOre.blockID, 5,new int[]{mod_TFC.terraStoneIgIn.blockID,0},//Granite Veins
                 /*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cassiterite2
-        createOre(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx Veins
+        createOre(mod_TFC.terraOre.blockID, 5,new int[]{mod_TFC.terraStoneIgEx.blockID,-1},//IgEx Veins
                 /*rarity*/20,/*veinSize*/10,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Bismuthinite
-        createOre(mod_TFC_Core.terraOre.blockID, 7,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,-1},//Granite Veins
+        createOre(mod_TFC.terraOre.blockID, 7,new int[]{mod_TFC.terraStoneIgIn.blockID,-1,mod_TFC.terraStoneSed.blockID,-1},//Granite Veins
                 /*rarity*/25,/*veinSize*/10,/*veinAmt*/25,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Sphalerite
-        createOre(mod_TFC_Core.terraOre.blockID, 12,new int[]{mod_TFC_Core.terraStoneMM.blockID,-1},//mm, veins
+        createOre(mod_TFC.terraOre.blockID, 12,new int[]{mod_TFC.terraStoneMM.blockID,-1},//mm, veins
                 /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
     }
     public static void Generate(World world, Random rand, int chunkX, int chunkZ, int min, int max)
     {
         int height = max-min;
         //============Copper
-        createOreVein(mod_TFC_Core.terraOre.blockID, 0,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
+        createOreVein(mod_TFC.terraOre.blockID, 0,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
                 /*rarity*/100,/*veinSize*/80,/*veinAmt*/55,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Gold
-        createOreVein(mod_TFC_Core.terraOre.blockID, 1,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneIgIn.blockID,-1},//Ig veins
+        createOreVein(mod_TFC.terraOre.blockID, 1,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,mod_TFC.terraStoneIgIn.blockID,-1},//Ig veins
                 /*rarity*/130,/*veinSize*/35,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, min, max);
 
         //============Hematite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 3,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx veins
+        createOreVein(mod_TFC.terraOre.blockID, 3,new int[]{mod_TFC.terraStoneIgEx.blockID,-1},//IgEx veins
                 /*rarity*/100,/*veinSize*/80,/*veinAmt*/42,/*height*/height,/*diameter*/100,/*vDensity*/40,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
 
         //============Silver
-        createOreVein(mod_TFC_Core.terraOre.blockID, 4,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0,mod_TFC_Core.terraStoneMM.blockID,4},//granite and gneiss, veins
+        createOreVein(mod_TFC.terraOre.blockID, 4,new int[]{mod_TFC.terraStoneIgIn.blockID,0,mod_TFC.terraStoneMM.blockID,4},//granite and gneiss, veins
                 /*rarity*/100,/*veinSize*/80,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cassiterite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0},//Granite Veins
+        createOreVein(mod_TFC.terraOre.blockID, 5,new int[]{mod_TFC.terraStoneIgIn.blockID,0},//Granite Veins
                 /*rarity*/100,/*veinSize*/85,/*veinAmt*/55,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/50,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cassiterite2
-        createOreVein(mod_TFC_Core.terraOre.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1},//IgEx Veins
+        createOreVein(mod_TFC.terraOre.blockID, 5,new int[]{mod_TFC.terraStoneIgEx.blockID,-1},//IgEx Veins
                 /*rarity*/140,/*veinSize*/80,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Galena
-        createOreVein(mod_TFC_Core.terraOre.blockID, 6,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneMM.blockID,-1,
-                mod_TFC_Core.terraStoneIgIn.blockID,0,mod_TFC_Core.terraStoneSed.blockID,5},//igex, mm, granite, limestone as veins
+        createOreVein(mod_TFC.terraOre.blockID, 6,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,mod_TFC.terraStoneMM.blockID,-1,
+                mod_TFC.terraStoneIgIn.blockID,0,mod_TFC.terraStoneSed.blockID,5},//igex, mm, granite, limestone as veins
                 /*rarity*/120,/*veinSize*/80,/*veinAmt*/55,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Bismuthinite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 7,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,-1},//Granite Veins
+        createOreVein(mod_TFC.terraOre.blockID, 7,new int[]{mod_TFC.terraStoneIgIn.blockID,-1,mod_TFC.terraStoneSed.blockID,-1},//Granite Veins
                 /*rarity*/120,/*veinSize*/80,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Garnierite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 8,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//Gabbro Veins
+        createOreVein(mod_TFC.terraOre.blockID, 8,new int[]{mod_TFC.terraStoneIgIn.blockID,2},//Gabbro Veins
                 /*rarity*/160,/*veinSize*/40,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/10,         world, rand, chunkX, chunkZ, min, max);
 
         //============Malachite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 9,new int[]{mod_TFC_Core.terraStoneSed.blockID,5,mod_TFC_Core.terraStoneMM.blockID,5},//limestone and marble veins
+        createOreVein(mod_TFC.terraOre.blockID, 9,new int[]{mod_TFC.terraStoneSed.blockID,5,mod_TFC.terraStoneMM.blockID,5},//limestone and marble veins
                 /*rarity*/140,/*veinSize*/80,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, min, max);
 
         //============Magnetite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 10,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
+        createOreVein(mod_TFC.terraOre.blockID, 10,new int[]{mod_TFC.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
                 /*rarity*/180,/*veinSize*/80,/*veinAmt*/36,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Limonite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 11,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
+        createOreVein(mod_TFC.terraOre.blockID, 11,new int[]{mod_TFC.terraStoneSed.blockID,-1},//Sedimentary, Large Cluster
                 /*rarity*/180,/*veinSize*/85,/*veinAmt*/40,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Sphalerite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 12,new int[]{mod_TFC_Core.terraStoneMM.blockID,-1},//mm, veins
+        createOreVein(mod_TFC.terraOre.blockID, 12,new int[]{mod_TFC.terraStoneMM.blockID,-1},//mm, veins
                 /*rarity*/140,/*veinSize*/80,/*veinAmt*/38,/*height*/height,/*diameter*/100,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Tetrahedrite
-        createOreVein(mod_TFC_Core.terraOre.blockID, 13,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneMM.blockID,-1,
-                mod_TFC_Core.terraStoneIgIn.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,-1},//everything, veins
+        createOreVein(mod_TFC.terraOre.blockID, 13,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,mod_TFC.terraStoneMM.blockID,-1,
+                mod_TFC.terraStoneIgIn.blockID,-1,mod_TFC.terraStoneSed.blockID,-1},//everything, veins
                 /*rarity*/120,/*veinSize*/85,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, min, max);
 
         //============Bituminous Coal
-        createOre(mod_TFC_Core.terraOre.blockID, 14,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, veins
+        createOre(mod_TFC.terraOre.blockID, 14,new int[]{mod_TFC.terraStoneSed.blockID,-1},//sedimentary, veins
                 /*rarity*/80,/*veinSize*/80,/*veinAmt*/60,/*height*/height,/*diameter*/200,/*vDensity*/60,/*hDensity*/80,         world, rand, chunkX, chunkZ, min, max);
 
         //============Lignite
-        createOre(mod_TFC_Core.terraOre.blockID, 15,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, veins
+        createOre(mod_TFC.terraOre.blockID, 15,new int[]{mod_TFC.terraStoneSed.blockID,-1},//sedimentary, veins
                 /*rarity*/80,/*veinSize*/80,/*veinAmt*/60,/*height*/height,/*diameter*/200,/*vDensity*/10,/*hDensity*/80,         world, rand, chunkX, chunkZ, min, max);
 
         //        //============Kaolinite
@@ -263,28 +263,28 @@ public class TFC_Core
         //                /*rarity*/60,/*veinSize*/40,/*veinAmt*/2,/*height*/height,/*diameter*/40,/*vDensity*/50,/*hDensity*/90,         world, rand, chunkX, chunkZ, min, max);
 
         //============Gypsum
-        createOre(mod_TFC_Core.terraOre2.blockID, 1,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, large clusters
+        createOre(mod_TFC.terraOre2.blockID, 1,new int[]{mod_TFC.terraStoneSed.blockID,-1},//sedimentary, large clusters
                 /*rarity*/110,/*veinSize*/40,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/50,/*hDensity*/90,         world, rand, chunkX, chunkZ, min, max);
 
         //============Satinspar
-        createOreVein(mod_TFC_Core.terraOre2.blockID, 2,new int[]{mod_TFC_Core.terraOre2.blockID,8},//gypsum, small clusters
+        createOreVein(mod_TFC.terraOre2.blockID, 2,new int[]{mod_TFC.terraOre2.blockID,8},//gypsum, small clusters
                 /*rarity*/2,/*veinSize*/6,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Selenite
-        createOreVein(mod_TFC_Core.terraOre2.blockID, 3,new int[]{mod_TFC_Core.terraOre2.blockID,8},//gypsum, small clusters
+        createOreVein(mod_TFC.terraOre2.blockID, 3,new int[]{mod_TFC.terraOre2.blockID,8},//gypsum, small clusters
                 /*rarity*/2,/*veinSize*/6,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Graphite
-        createOreVein(mod_TFC_Core.terraOre2.blockID, 4,new int[]{mod_TFC_Core.terraStoneMM.blockID,4,mod_TFC_Core.terraStoneMM.blockID,0,
-                mod_TFC_Core.terraStoneMM.blockID,5, mod_TFC_Core.terraStoneMM.blockID,3},//gneiss, quartzite, marble, schist, small clusters
+        createOreVein(mod_TFC.terraOre2.blockID, 4,new int[]{mod_TFC.terraStoneMM.blockID,4,mod_TFC.terraStoneMM.blockID,0,
+                mod_TFC.terraStoneMM.blockID,5, mod_TFC.terraStoneMM.blockID,3},//gneiss, quartzite, marble, schist, small clusters
                 /*rarity*/80,/*veinSize*/6,/*veinAmt*/24,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Kimberlite
-        createOreVein(mod_TFC_Core.terraOre2.blockID, 5,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//Gabbro, large clusters
+        createOreVein(mod_TFC.terraOre2.blockID, 5,new int[]{mod_TFC.terraStoneIgIn.blockID,2},//Gabbro, large clusters
                 /*rarity*/200,/*veinSize*/40,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/90,         world, rand, chunkX, chunkZ, min, max);
 
         //============Petrified Wood
-        createOre(mod_TFC_Core.terraOre2.blockID, 6,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, small clusters 
+        createOre(mod_TFC.terraOre2.blockID, 6,new int[]{mod_TFC.terraStoneSed.blockID,-1},//Sedimentary, small clusters 
                 /*rarity*/200,/*veinSize*/10,/*veinAmt*/5,/*height*/height,/*diameter*/20,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Sulfur
@@ -292,7 +292,7 @@ public class TFC_Core
         //              /*rarity*/4,/*veinSize*/6,/*veinAmt*/10,/*height*/128,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ);
 
         //============Jet
-        createOre(mod_TFC_Core.terraOre2.blockID, 8,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//Sedimentary, med clusters 
+        createOre(mod_TFC.terraOre2.blockID, 8,new int[]{mod_TFC.terraStoneSed.blockID,-1},//Sedimentary, med clusters 
                 /*rarity*/100,/*veinSize*/30,/*veinAmt*/10,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Microcline
@@ -300,50 +300,50 @@ public class TFC_Core
         //                /*rarity*/45,/*veinSize*/64,/*veinAmt*/2,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Pitchblende
-        createOre(mod_TFC_Core.terraOre2.blockID, 10,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0},//granite, small clusters 
+        createOre(mod_TFC.terraOre2.blockID, 10,new int[]{mod_TFC.terraStoneIgIn.blockID,0},//granite, small clusters 
                 /*rarity*/100,/*veinSize*/10,/*veinAmt*/10,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cinnabar
-        createOreVein(mod_TFC_Core.terraOre2.blockID, 11,new int[]{mod_TFC_Core.terraStoneIgEx.blockID,-1,mod_TFC_Core.terraStoneSed.blockID,2,
-                mod_TFC_Core.terraStoneMM.blockID,0},//igex, shale, quartzite small clusters
+        createOreVein(mod_TFC.terraOre2.blockID, 11,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,mod_TFC.terraStoneSed.blockID,2,
+                mod_TFC.terraStoneMM.blockID,0},//igex, shale, quartzite small clusters
                 /*rarity*/60,/*veinSize*/35,/*veinAmt*/30,/*height*/height,/*diameter*/50,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Cryolite
-        createOre(mod_TFC_Core.terraOre2.blockID, 12,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,0},//granite, small clusters 
+        createOre(mod_TFC.terraOre2.blockID, 12,new int[]{mod_TFC.terraStoneIgIn.blockID,0},//granite, small clusters 
                 /*rarity*/100,/*veinSize*/10,/*veinAmt*/20,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Saltpeter
-        createOre(mod_TFC_Core.terraOre2.blockID, 13,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sed, small clusters 
+        createOre(mod_TFC.terraOre2.blockID, 13,new int[]{mod_TFC.terraStoneSed.blockID,-1},//sed, small clusters 
                 /*rarity*/100,/*veinSize*/10,/*veinAmt*/20,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Olivine(Out of Order) must come before serpentine
-        createOre(mod_TFC_Core.terraOre3.blockID, 1,new int[]{mod_TFC_Core.terraStoneIgIn.blockID,2},//gabbro, large clusters 
+        createOre(mod_TFC.terraOre3.blockID, 1,new int[]{mod_TFC.terraStoneIgIn.blockID,2},//gabbro, large clusters 
                 /*rarity*/80,/*veinSize*/30,/*veinAmt*/14,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Serpentine
-        createOre(mod_TFC_Core.terraOre2.blockID, 14,new int[]{mod_TFC_Core.terraOre3.blockID,8},//Olivine, small clusters 
+        createOre(mod_TFC.terraOre2.blockID, 14,new int[]{mod_TFC.terraOre3.blockID,8},//Olivine, small clusters 
                 /*rarity*/2,/*veinSize*/10,/*veinAmt*/8,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Sylvite
-        createOre(mod_TFC_Core.terraOre2.blockID, 15,new int[]{mod_TFC_Core.terraStoneSed.blockID,4},//Rock Salt, large clusters 
+        createOre(mod_TFC.terraOre2.blockID, 15,new int[]{mod_TFC.terraStoneSed.blockID,4},//Rock Salt, large clusters 
                 /*rarity*/80,/*veinSize*/40,/*veinAmt*/14,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
 
         //============Borax
-        createOre(mod_TFC_Core.terraOre3.blockID, 0,new int[]{mod_TFC_Core.terraStoneSed.blockID,4},//Rock Salt, large clusters 
+        createOre(mod_TFC.terraOre3.blockID, 0,new int[]{mod_TFC.terraStoneSed.blockID,4},//Rock Salt, large clusters 
                 /*rarity*/50,/*veinSize*/50,/*veinAmt*/24,/*height*/height,/*diameter*/200,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
-        createOre(mod_TFC_Core.terraOre3.blockID, 0,new int[]{mod_TFC_Core.terraOre2.blockID,8},//Gypsum, small clusters 
+        createOre(mod_TFC.terraOre3.blockID, 0,new int[]{mod_TFC.terraOre2.blockID,8},//Gypsum, small clusters 
                 /*rarity*/3,/*veinSize*/12,/*veinAmt*/22,/*height*/height,/*diameter*/200,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
         //============Lapis Lazuli
-        createOre(mod_TFC_Core.terraOre3.blockID, 2,new int[]{mod_TFC_Core.terraStoneMM.blockID,5},//Marble, small clusters 
+        createOre(mod_TFC.terraOre3.blockID, 2,new int[]{mod_TFC.terraStoneMM.blockID,5},//Marble, small clusters 
                 /*rarity*/90,/*veinSize*/20,/*veinAmt*/26,/*height*/height,/*diameter*/60,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Platinum -- (out of order) must follow magnetite and olivine
-        createOre(mod_TFC_Core.terraOre.blockID, 2,new int[]{mod_TFC_Core.terraOre.blockID,1,mod_TFC_Core.terraOre3.blockID,8},//magnetite, veins
+        createOre(mod_TFC.terraOre.blockID, 2,new int[]{mod_TFC.terraOre.blockID,1,mod_TFC.terraOre3.blockID,8},//magnetite, veins
                 /*rarity*/10,/*veinSize*/8,/*veinAmt*/10,/*height*/height,/*diameter*/25,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, min, max);
 
         //============Gravel
-        createOre(Block.gravel.blockID, 0,new int[]{mod_TFC_Core.terraDirt.blockID,-1,
-                mod_TFC_Core.terraDirt2.blockID,-1,mod_TFC_Core.terraGrass.blockID,-1,mod_TFC_Core.terraGrass2.blockID,-1},//Everywhere, Clusters
+        createOre(Block.gravel.blockID, 0,new int[]{mod_TFC.terraDirt.blockID,-1,
+                mod_TFC.terraDirt2.blockID,-1,mod_TFC.terraGrass.blockID,-1,mod_TFC.terraGrass2.blockID,-1},//Everywhere, Clusters
                 /*rarity*/12,/*veinSize*/40,/*veinAmt*/5,/*height*/height,/*diameter*/40,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, min, max);
     }
 
@@ -387,17 +387,17 @@ public class TFC_Core
         WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Block.mushroomBrown.blockID);
         WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Block.mushroomRed.blockID);
 
-        WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 0);
-        WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 1);
-        WorldGenCustomFruitTree orangeTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 2);
-        WorldGenCustomFruitTree grappleTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 3);
-        WorldGenCustomFruitTree lemonTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 4);
-        WorldGenCustomFruitTree oliveTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 5);
-        WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 6);
-        WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, mod_TFC_Core.fruitTreeLeaves.blockID, 7);
+        WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 0);
+        WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 1);
+        WorldGenCustomFruitTree orangeTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 2);
+        WorldGenCustomFruitTree grappleTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 3);
+        WorldGenCustomFruitTree lemonTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 4);
+        WorldGenCustomFruitTree oliveTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 5);
+        WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 6);
+        WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 7);
 
-        WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, mod_TFC_Core.fruitTreeLeaves2.blockID, 0);
-        WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, mod_TFC_Core.fruitTreeLeaves2.blockID, 1);
+        WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, mod_TFC.fruitTreeLeaves2.blockID, 0);
+        WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, mod_TFC.fruitTreeLeaves2.blockID, 1);
 
         int var2;
         int var3;
@@ -476,55 +476,55 @@ public class TFC_Core
             {
                 default:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         appleTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 1:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         bananaTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 2:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         orangeTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 3:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         grappleTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 4:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         lemonTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 5:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         oliveTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 6:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         cherryTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 7:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         peachTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
                 case 8:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
                         plumTree.generate(world, rand, var2, var3, var4);
                     break;
                 }
@@ -791,25 +791,25 @@ public class TFC_Core
         {			
             for(int j = 0; j < 3; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneIgInBrick,1,j), 
+                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneIgInBrick,1,j), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
 
             for(int j = 3; j < 13; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneSedBrick,1,j-3), 
+                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneSedBrick,1,j-3), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
 
             for(int j = 13; j < 17; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneIgExBrick,1,j-13), 
+                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneIgExBrick,1,j-13), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
 
             for(int j = 17; j < 23; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC_Core.terraStoneMMBrick,1,j-17), 
+                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneMMBrick,1,j-17), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
         }
@@ -849,19 +849,19 @@ public class TFC_Core
         ModLoader.addRecipe(new ItemStack(TFCItems.terraBismuthBronzeAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BismuthBronzeIngot2x});
         ModLoader.addRecipe(new ItemStack(TFCItems.terraBlackBronzeAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BlackBronzeIngot2x});
 
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraScribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1),
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraScribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1),
             Character.valueOf('P'), Item.paper,Character.valueOf('L'), Item.feather});
         ModLoader.addRecipe(new ItemStack(TFCItems.terraClayMold, 4), new Object[] { "# #","###", Character.valueOf('#'), Item.clay});
 
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneIgEx});
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneIgIn});
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneSed});
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneMM});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgEx});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgIn});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneSed});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneMM});
 
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneIgExBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneIgInBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneSedBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
-        ModLoader.addRecipe(new ItemStack(mod_TFC_Core.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC_Core.terraStoneMMBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgExBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgInBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneSedBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneMMBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
 
         ModLoader.addRecipe(new ItemStack(Block.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,-1)});
         ModLoader.addRecipe(new ItemStack(Block.railPowered, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,-1), Character.valueOf('r'), Item.redstone});
@@ -895,38 +895,38 @@ public class TFC_Core
         if(TFCSettings.enableVanillaRecipes == true)
         {
             //Terrastone to Cobblestone
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC_Core.terraStoneSedCobble});
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC_Core.terraStoneIgInCobble});
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC_Core.terraStoneIgExCobble});
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC_Core.terraStoneMMCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneSedCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneIgInCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneIgExCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneMMCobble});
         }
 
         if(TFCSettings.enableVanillaFurnaceRecipes  == true)
         {
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneIgIn.blockID, new ItemStack(Block.stone));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneIgEx.blockID, new ItemStack(Block.stone));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneSed.blockID,  new ItemStack(Block.stone));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneMM.blockID,   new ItemStack(Block.stone));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneIgIn.blockID, new ItemStack(Block.stone));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneIgEx.blockID, new ItemStack(Block.stone));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneSed.blockID,  new ItemStack(Block.stone));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneMM.blockID,   new ItemStack(Block.stone));
 
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneIgInCobble.blockID, new ItemStack(mod_TFC_Core.terraStoneIgIn));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneIgExCobble.blockID, new ItemStack(mod_TFC_Core.terraStoneIgEx));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneSedCobble.blockID,  new ItemStack(mod_TFC_Core.terraStoneSed));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraStoneMMCobble.blockID,   new ItemStack(mod_TFC_Core.terraStoneMM));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneIgInCobble.blockID, new ItemStack(mod_TFC.terraStoneIgIn));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneIgExCobble.blockID, new ItemStack(mod_TFC.terraStoneIgEx));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneSedCobble.blockID,  new ItemStack(mod_TFC.terraStoneSed));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraStoneMMCobble.blockID,   new ItemStack(mod_TFC.terraStoneMM));
 
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 23,new ItemStack(TFCItems.CopperIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 32,new ItemStack(TFCItems.CopperIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 36,new ItemStack(TFCItems.CopperIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 35,new ItemStack(TFCItems.ZincIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 34,new ItemStack(TFCItems.WroughtIronIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 33,new ItemStack(TFCItems.WroughtIronIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 26,new ItemStack(TFCItems.WroughtIronIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 25,new ItemStack(TFCItems.PlatinumIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 24,new ItemStack(TFCItems.GoldIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 31,new ItemStack(TFCItems.NickelIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 29,new ItemStack(TFCItems.SilverIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 27,new ItemStack(TFCItems.SilverIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 30,new ItemStack(TFCItems.BismuthIngot));
-            FurnaceRecipes.smelting().addSmelting(mod_TFC_Core.terraOre.blockID, 28,new ItemStack(TFCItems.TinIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 23,new ItemStack(TFCItems.CopperIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 32,new ItemStack(TFCItems.CopperIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 36,new ItemStack(TFCItems.CopperIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 35,new ItemStack(TFCItems.ZincIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 34,new ItemStack(TFCItems.WroughtIronIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 33,new ItemStack(TFCItems.WroughtIronIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 26,new ItemStack(TFCItems.WroughtIronIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 25,new ItemStack(TFCItems.PlatinumIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 24,new ItemStack(TFCItems.GoldIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 31,new ItemStack(TFCItems.NickelIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 29,new ItemStack(TFCItems.SilverIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 27,new ItemStack(TFCItems.SilverIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 30,new ItemStack(TFCItems.BismuthIngot));
+            FurnaceRecipes.smelting().addSmelting(mod_TFC.terraOre.blockID, 28,new ItemStack(TFCItems.TinIngot));
         }
 
         if(TFCSettings.enableVanillaRecipes == true)
@@ -995,8 +995,8 @@ public class TFC_Core
 
                     int id = world.getBlockId(x, y, z);
 
-                    if(y > 8 && id == 0 && (world.getBlockId(x, y+1, z) == mod_TFC_Core.terraStoneIgEx.blockID || world.getBlockId(x, y+1, z) == mod_TFC_Core.terraStoneIgIn.blockID || 
-                            world.getBlockId(x, y+1, z) == mod_TFC_Core.terraStoneSed.blockID || world.getBlockId(x, y+1, z) == mod_TFC_Core.terraStoneMM.blockID))
+                    if(y > 8 && id == 0 && (world.getBlockId(x, y+1, z) == mod_TFC.terraStoneIgEx.blockID || world.getBlockId(x, y+1, z) == mod_TFC.terraStoneIgIn.blockID || 
+                            world.getBlockId(x, y+1, z) == mod_TFC.terraStoneSed.blockID || world.getBlockId(x, y+1, z) == mod_TFC.terraStoneMM.blockID))
                     {
                         if(world.getBlockId(x, y-1, z) == 0 && world.getBlockId(x, y-2, z) == 0 && world.getBlockId(x, y-3, z) == 0)
                         {
@@ -1009,74 +1009,74 @@ public class TFC_Core
                                 {
                                     case 0:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929 + 16777216L; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-1, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 2105858 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-2, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-2, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 3158787 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
                                     }
                                     case 1:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-1, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158851 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
                                     }
                                     case 2:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-1, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4211779 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
                                     }
                                     case 3:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 2101505 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-1, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4203010 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-2, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-2, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
                                     }
                                     case 4:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-2, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-2, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
                                     }
                                     case 5:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1057026 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, mod_TFC_Core.stoneStalac.blockID);
+                                        world.setBlock(x, y-1, z, mod_TFC.stoneStalac.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158531L + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -1085,8 +1085,8 @@ public class TFC_Core
                             }
                         }
                     }
-                    else if(y <128 && id == 0 && world.getBlockLightValue(x, y-1, z) < 10 && (world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneIgEx.blockID || world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneIgIn.blockID || 
-                            world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneSed.blockID || world.getBlockId(x, y-1, z) == mod_TFC_Core.terraStoneMM.blockID))
+                    else if(y <128 && id == 0 && world.getBlockLightValue(x, y-1, z) < 10 && (world.getBlockId(x, y-1, z) == mod_TFC.terraStoneIgEx.blockID || world.getBlockId(x, y-1, z) == mod_TFC.terraStoneIgIn.blockID || 
+                            world.getBlockId(x, y-1, z) == mod_TFC.terraStoneSed.blockID || world.getBlockId(x, y-1, z) == mod_TFC.terraStoneMM.blockID))
                     {
                         if(world.getBlockId(x, y+1, z) == 0 && world.getBlockId(x, y+2, z) == 0 && world.getBlockId(x, y+3, z) == 0)
                         {
@@ -1098,45 +1098,45 @@ public class TFC_Core
                                 {
                                     case 0:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1057026; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+1, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y+1, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 3158531;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+2, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y+2, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4207363;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
                                     }
                                     case 1:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052930; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+1, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y+1, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 3158274;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+2, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y+2, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4407811;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
                                     }
                                     case 2:
                                     {
-                                        world.setBlock(x, y, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+1, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y+1, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 2105858;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+2, z, mod_TFC_Core.stoneSlabs.blockID);
+                                        world.setBlock(x, y+2, z, mod_TFC.stoneSlabs.blockID);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 3552003;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
@@ -1209,7 +1209,7 @@ public class TFC_Core
     public static boolean isRawStone(World world,int x, int y, int z)
     {
         int id = world.getBlockId(x, y, z);
-        return id == mod_TFC_Core.terraStoneIgEx.blockID || id == mod_TFC_Core.terraStoneIgIn.blockID || 
-                id == mod_TFC_Core.terraStoneSed.blockID || id == mod_TFC_Core.terraStoneMM.blockID;
+        return id == mod_TFC.terraStoneIgEx.blockID || id == mod_TFC.terraStoneIgIn.blockID || 
+                id == mod_TFC.terraStoneSed.blockID || id == mod_TFC.terraStoneMM.blockID;
     }
 }

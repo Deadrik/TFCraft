@@ -26,7 +26,7 @@ public class BlockTerraSulfur extends Block implements ITextureProvider
 
 	public int getRenderType()
 	{
-		return mod_TFC_Core.sulfurRenderId;
+		return mod_TFC.sulfurRenderId;
 	}
 
 	@Override

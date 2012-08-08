@@ -33,9 +33,9 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
             int var2 = MathHelper.floor_double(this.theEntity.posY);
             int var3 = MathHelper.floor_double(this.theEntity.posZ);
             return this.theWorld.getBlockId(var1, var2, var3) == Block.tallGrass.blockID && this.theWorld.getBlockMetadata(var1, var2, var3) == 1 ? true : (this.theWorld.getBlockId(var1, var2 - 1, var3) == Block.grass.blockID ||
-                    this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraGrass.blockID || this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraGrass2.blockID || 
-                    this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraPeatGrass.blockID ||
-                    this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraClayGrass.blockID || this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraClayGrass2.blockID);
+                    this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraGrass.blockID || this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraGrass2.blockID || 
+                    this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraPeatGrass.blockID ||
+                    this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraClayGrass.blockID || this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraClayGrass2.blockID);
         }
     }
 
@@ -64,38 +64,38 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
                 this.theWorld.setBlockWithNotify(var1, var2 - 1, var3, Block.dirt.blockID);
                 this.theEntity.eatGrassBonus();
             }
-            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraGrass.blockID)
+            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraGrass.blockID)
             {
                 int meta = this.theWorld.getBlockMetadata(var1, var2 - 1, var3);
-                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC_Core.terraGrass.blockID);
-                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC_Core.terraDirt.blockID, meta);
+                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC.terraGrass.blockID);
+                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC.terraDirt.blockID, meta);
                 this.theEntity.eatGrassBonus();
             }
-            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraGrass2.blockID)
+            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraGrass2.blockID)
             {
                 int meta = this.theWorld.getBlockMetadata(var1, var2 - 1, var3);
-                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC_Core.terraGrass2.blockID);
-                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC_Core.terraDirt2.blockID, meta);
+                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC.terraGrass2.blockID);
+                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC.terraDirt2.blockID, meta);
                 this.theEntity.eatGrassBonus();
             }
-            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraClayGrass.blockID)
+            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraClayGrass.blockID)
             {
                 int meta = this.theWorld.getBlockMetadata(var1, var2 - 1, var3);
-                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC_Core.terraClayGrass.blockID);
-                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC_Core.terraDirt.blockID, meta);
+                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC.terraClayGrass.blockID);
+                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC.terraDirt.blockID, meta);
                 this.theEntity.eatGrassBonus();
             }
-            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraClayGrass2.blockID)
+            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraClayGrass2.blockID)
             {
                 int meta = this.theWorld.getBlockMetadata(var1, var2 - 1, var3);
-                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC_Core.terraClayGrass2.blockID);
-                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC_Core.terraDirt2.blockID, meta);
+                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC.terraClayGrass2.blockID);
+                this.theWorld.setBlockAndMetadataWithNotify(var1, var2 - 1, var3, mod_TFC.terraDirt2.blockID, meta);
                 this.theEntity.eatGrassBonus();
             }
-            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC_Core.terraPeatGrass.blockID)
+            else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraPeatGrass.blockID)
             {
-                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC_Core.terraPeatGrass.blockID);
-                this.theWorld.setBlockWithNotify(var1, var2 - 1, var3, mod_TFC_Core.terraPeat.blockID);
+                this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, mod_TFC.terraPeatGrass.blockID);
+                this.theWorld.setBlockWithNotify(var1, var2 - 1, var3, mod_TFC.terraPeat.blockID);
                 this.theEntity.eatGrassBonus();
             }
         }

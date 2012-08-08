@@ -32,7 +32,7 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-         return mod_TFC_Core.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
+         return mod_TFC.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     /**
@@ -107,11 +107,11 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
                             {
                                 var15 = par1World.getBlockId(par2 + var12, par3 + var13, par4 + var14);
 
-                                if (var15 == mod_TFC_Core.terraWood.blockID)
+                                if (var15 == mod_TFC.terraWood.blockID)
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
                                 }
-                                else if (var15 == mod_TFC_Core.terraLeaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
+                                else if (var15 == mod_TFC.terraLeaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
                                 }
@@ -204,7 +204,7 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return mod_TFC_Core.terraSapling.blockID;
+        return mod_TFC.terraSapling.blockID;
     }
     @Override
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
@@ -233,7 +233,7 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
                             if(new Random().nextInt(100) < 11)
                                 dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(Item.stick, 1));
                             else if(new Random().nextInt(100) < 4 && l != 9 && l != 15)
-                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(mod_TFC_Core.terraSapling, 1, l));
+                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(mod_TFC.terraSapling, 1, l));
                             removeLeaves(world, i+x, j+y, k+z);
                             super.harvestBlock(world, entityplayer, i+x, j+y, k+z, l);
                             
@@ -262,7 +262,7 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
             if(new Random().nextInt(100) < 28)
                 dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
             else if(new Random().nextInt(100) < 6 && l != 9 && l != 15)
-                dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraSapling, 1, l));
+                dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC.terraSapling, 1, l));
 
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
@@ -275,15 +275,15 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
 
     public boolean isOpaqueCube()
     {
-        if(mod_TFC_Core.proxy != null)
-            return !mod_TFC_Core.proxy.getGraphicsLevel();
+        if(mod_TFC.proxy != null)
+            return !mod_TFC.proxy.getGraphicsLevel();
         else
             return false;
     }
 
     public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
-        if (mod_TFC_Core.proxy.getGraphicsLevel())
+        if (mod_TFC.proxy.getGraphicsLevel())
         {
             return baseIndexInPNG + j;
         }

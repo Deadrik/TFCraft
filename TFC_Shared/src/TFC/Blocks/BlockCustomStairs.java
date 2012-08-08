@@ -115,7 +115,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		return mod_TFC_Core.proxy.blockGetMixedBrightnessForBlock(modelBlock, par1IBlockAccess, par2, par3, par4);
+		return mod_TFC.proxy.blockGetMixedBrightnessForBlock(modelBlock, par1IBlockAccess, par2, par3, par4);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public int getRenderBlockPass()
 	{
-		return mod_TFC_Core.proxy.blockGetRenderBlockPass(modelBlock);
+		return mod_TFC.proxy.blockGetRenderBlockPass(modelBlock);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		return mod_TFC_Core.proxy.blockGetSelectedBoundingBoxFromPool(modelBlock, par1World, par2, par3, par4);
+		return mod_TFC.proxy.blockGetSelectedBoundingBoxFromPool(modelBlock, par1World, par2, par3, par4);
 	}
 
 	/**

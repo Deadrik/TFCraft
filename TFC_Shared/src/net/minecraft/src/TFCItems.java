@@ -1357,7 +1357,7 @@ public class TFCItems
         KnifePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","KnifePlan",num)).setItemName("KnifePlan").setIconCoord(0, 0);num++;
         
         WoodenBucketEmpty = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketEmpty",num), 0)).setIconCoord(13, 0).setItemName("WoodenBucketEmpty");num++;
-        WoodenBucketWater = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketWater",num), mod_TFC_Core.finiteWater.blockID)).setIconCoord(14, 0).setItemName("WoodenBucketWater").setContainerItem(WoodenBucketEmpty);num++;
+        WoodenBucketWater = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketWater",num), mod_TFC.finiteWater.blockID)).setIconCoord(14, 0).setItemName("WoodenBucketWater").setContainerItem(WoodenBucketEmpty);num++;
         WoodenBucketMilk = (new ItemCustomBucketMilk(TFCSettings.getIntFor(config,"item","WoodenBucketMilk",num))).setIconCoord(15, 0).setItemName("WoodenBucketMilk").setContainerItem(WoodenBucketEmpty);num++;
         
         BismuthKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthKnifeHead",num)).setItemName("Bismuth Knife Blade").setIconCoord(1, 10);num++;
@@ -1434,7 +1434,7 @@ public class TFCItems
         Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
         
         num = 18000;
-        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),Block.crops.blockID,mod_TFC_Core.tilledSoil.blockID,mod_TFC_Core.tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
+        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),Block.crops.blockID,mod_TFC.tilledSoil.blockID,mod_TFC.tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
         FruitTreeSapling1 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling1", num), "/bioxx/Vegetation.png", 0).setItemName("FruitSapling1").setIconCoord(0, 7);num++;
         FruitTreeSapling2 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling2", num), "/bioxx/Vegetation.png", 8).setItemName("FruitSapling2").setIconCoord(8, 7);num++;
         RedApple = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Red Apple",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(2, 0).setItemName("Fruit.Red Apple");num++;
@@ -1498,9 +1498,9 @@ public class TFCItems
         String[] Names = {"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Rose Gold", "Steel", "Tin", "Zinc"};
         IProxy proxy = ServerClientProxy.getProxy();
         
-        EnumArmorMaterial[] mats = new EnumArmorMaterial[]{mod_TFC_Core.BismuthArmorMaterial,mod_TFC_Core.BismuthBronzeArmorMaterial,mod_TFC_Core.BlackBronzeArmorMaterial,mod_TFC_Core.BlackSteelArmorMaterial,mod_TFC_Core.BlueSteelArmorMaterial,
-                mod_TFC_Core.BronzeArmorMaterial,mod_TFC_Core.CopperArmorMaterial,mod_TFC_Core.IronArmorMaterial,mod_TFC_Core.RedSteelArmorMaterial,mod_TFC_Core.RoseGoldArmorMaterial,
-                mod_TFC_Core.SteelArmorMaterial,mod_TFC_Core.TinArmorMaterial,mod_TFC_Core.ZincArmorMaterial};
+        EnumArmorMaterial[] mats = new EnumArmorMaterial[]{mod_TFC.BismuthArmorMaterial,mod_TFC.BismuthBronzeArmorMaterial,mod_TFC.BlackBronzeArmorMaterial,mod_TFC.BlackSteelArmorMaterial,mod_TFC.BlueSteelArmorMaterial,
+                mod_TFC.BronzeArmorMaterial,mod_TFC.CopperArmorMaterial,mod_TFC.IronArmorMaterial,mod_TFC.RedSteelArmorMaterial,mod_TFC.RoseGoldArmorMaterial,
+                mod_TFC.SteelArmorMaterial,mod_TFC.TinArmorMaterial,mod_TFC.ZincArmorMaterial};
         
         
         int i = 0;

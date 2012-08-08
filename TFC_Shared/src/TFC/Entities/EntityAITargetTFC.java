@@ -97,7 +97,7 @@ public class EntityAITargetTFC extends EntityAITarget
         }
         else if (par1EntityLiving.boundingBox.maxY > this.taskOwner.boundingBox.minY && par1EntityLiving.boundingBox.minY < this.taskOwner.boundingBox.maxY)
         {
-            if (!(mod_TFC_Core.proxy.aiTargetfunc_48100_a(par1EntityLiving.getClass(),taskOwner)))
+            if (!(mod_TFC.proxy.aiTargetfunc_48100_a(par1EntityLiving.getClass(),taskOwner)))
             {
                 return false;
             }

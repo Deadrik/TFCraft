@@ -8,7 +8,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemTerraLogs extends ItemTerra implements ITextureProvider
@@ -38,42 +38,42 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
         TileEntityTerraLogPile te = null;
         if(side == 0 && world.getBlockId(x, y-1, z) == 0)
         {
-            world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC_Core.LogPile.blockID, l);
+            world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC.LogPile.blockID, l);
             if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y-1, z);
             te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y-1, z);
         }
         else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
         {
-            world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC_Core.LogPile.blockID, l);
+            world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC.LogPile.blockID, l);
             if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y+1, z);
             te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y+1, z);
         }
         else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
         {
-            world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC_Core.LogPile.blockID, l);
+            world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC.LogPile.blockID, l);
             if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y, z-1);
             te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z-1);
         }
         else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
         {
-            world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC_Core.LogPile.blockID, l);
+            world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC.LogPile.blockID, l);
             if(world.isRemote)
                 world.markBlockNeedsUpdate(x, y, z+1);
             te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z+1);
         }
         else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
         {
-            world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC_Core.LogPile.blockID, l);
+            world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC.LogPile.blockID, l);
             if(world.isRemote)
                 world.markBlockNeedsUpdate(x-1, y, z);
             te = (TileEntityTerraLogPile)world.getBlockTileEntity(x-1, y, z);
         }
         else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
         {
-            world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC_Core.LogPile.blockID, l);
+            world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC.LogPile.blockID, l);
             if(world.isRemote)
                 world.markBlockNeedsUpdate(x+1, y, z);
             te = (TileEntityTerraLogPile)world.getBlockTileEntity(x+1, y, z);
@@ -121,13 +121,13 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
         int side = objectMouseOver.sideHit;
         int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 
-        if(world.getBlockId(x, y, z) != mod_TFC_Core.LogPile.blockID || entityplayer.isSneaking())
+        if(world.getBlockId(x, y, z) != mod_TFC.LogPile.blockID || entityplayer.isSneaking())
         {
             if(CreatePile(itemstack, world, x, y, z, side, dir))
                 itemstack.stackSize = itemstack.stackSize-1;
             return true;
         }
-        else if(world.getBlockId(x, y, z) == mod_TFC_Core.LogPile.blockID)
+        else if(world.getBlockId(x, y, z) == mod_TFC.LogPile.blockID)
         {
             TileEntityTerraLogPile te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z);
             if(te != null)

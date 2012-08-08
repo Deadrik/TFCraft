@@ -37,7 +37,7 @@ public abstract class BlockCustomFluid extends Block
         }
         else
         {
-            return mod_TFC_Core.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
+            return mod_TFC.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
         }
     }
 
@@ -307,8 +307,8 @@ public abstract class BlockCustomFluid extends Block
      */
     public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        int var5 = mod_TFC_Core.proxy.getLightBrightnessSkyBlocks(par1IBlockAccess, par2, par3, par4, 0);
-        int var6 = mod_TFC_Core.proxy.getLightBrightnessSkyBlocks(par1IBlockAccess, par2, par3+1, par4, 0);
+        int var5 = mod_TFC.proxy.getLightBrightnessSkyBlocks(par1IBlockAccess, par2, par3, par4, 0);
+        int var6 = mod_TFC.proxy.getLightBrightnessSkyBlocks(par1IBlockAccess, par2, par3+1, par4, 0);
         int var7 = var5 & 255;
         int var8 = var6 & 255;
         int var9 = var5 >> 16 & 255;
@@ -321,8 +321,8 @@ public abstract class BlockCustomFluid extends Block
      */
     public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        float var5 = mod_TFC_Core.proxy.getLightBrightness(par1IBlockAccess, par2, par3, par4);
-        float var6 = mod_TFC_Core.proxy.getLightBrightness(par1IBlockAccess, par2, par3+1, par4);
+        float var5 = mod_TFC.proxy.getLightBrightness(par1IBlockAccess, par2, par3, par4);
+        float var6 = mod_TFC.proxy.getLightBrightness(par1IBlockAccess, par2, par3+1, par4);
         return var5 > var6 ? var5 : var6;
     }
 

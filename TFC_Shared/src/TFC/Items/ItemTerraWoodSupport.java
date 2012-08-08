@@ -6,7 +6,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemTerraWoodSupport extends Item implements ITextureProvider
@@ -90,7 +90,7 @@ public class ItemTerraWoodSupport extends Item implements ITextureProvider
 				for(int z = -6; z < 4; z++)
 				{
 
-					if(world.getBlockId(i+x, j+y, k+z) == mod_TFC_Core.terraWoodSupportV.blockID)
+					if(world.getBlockId(i+x, j+y, k+z) == mod_TFC.terraWoodSupportV.blockID)
 					{
 						return true;
 					}
@@ -102,19 +102,19 @@ public class ItemTerraWoodSupport extends Item implements ITextureProvider
 
 	private int isNextToSupport(World world, int x, int y, int z)
 	{
-		if(world.getBlockId(x+1, y, z) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x+1, y, z) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x+1, y, z) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x+1, y, z) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 5;
 		}
-		if(world.getBlockId(x-1, y, z) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x-1, y, z) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x-1, y, z) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x-1, y, z) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 4;
 		}
-		if(world.getBlockId(x, y, z+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x, y, z+1) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x, y, z+1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x, y, z+1) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 3;
 		}
-		if(world.getBlockId(x, y, z-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.getBlockId(x, y, z-1) == mod_TFC_Core.terraWoodSupportH.blockID)
+		if(world.getBlockId(x, y, z-1) == mod_TFC.terraWoodSupportV.blockID || world.getBlockId(x, y, z-1) == mod_TFC.terraWoodSupportH.blockID)
 		{
 			return 2;
 		}
@@ -134,7 +134,7 @@ public class ItemTerraWoodSupport extends Item implements ITextureProvider
 
 		int metaID = itemstack.getItemDamage();
 		int id0 = world.getBlockId(x, y-1, z);
-		Boolean vSupport = id0 == mod_TFC_Core.terraWoodSupportV.blockID;
+		Boolean vSupport = id0 == mod_TFC.terraWoodSupportV.blockID;
 		Boolean b1 = world.isBlockOpaqueCube(x, y-2, z);
 
 		//bottom
@@ -143,55 +143,55 @@ public class ItemTerraWoodSupport extends Item implements ITextureProvider
 			if(side == 0 && world.getBlockId(x, y-1, z) == 0 /*&& world.isBlockOpaqueCube(x, y, z)*/)
 			{
 				boolean nextToSupport = isNextToSupport(world,x,y-1,z) != 0;
-				boolean SupportRange1 = getSupportInRange(world, x,y-1,z,5,mod_TFC_Core.terraWoodSupportV.blockID);
-				boolean SupportRange2 = getSupportInRange(world, x,y-2,z,5,mod_TFC_Core.terraWoodSupportV.blockID);
-				if(nextToSupport && (SupportRange1 || SupportRange2) || world.getBlockId(x, y-2, z) == mod_TFC_Core.terraWoodSupportV.blockID)
+				boolean SupportRange1 = getSupportInRange(world, x,y-1,z,5,mod_TFC.terraWoodSupportV.blockID);
+				boolean SupportRange2 = getSupportInRange(world, x,y-2,z,5,mod_TFC.terraWoodSupportV.blockID);
+				if(nextToSupport && (SupportRange1 || SupportRange2) || world.getBlockId(x, y-2, z) == mod_TFC.terraWoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC_Core.terraWoodSupportH.blockID, metaID);
+					world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC.terraWoodSupportH.blockID, metaID);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
 			else if(side == 2 && world.getBlockId(x, y, z-1) == 0 /*&& world.isBlockOpaqueCube(x, y+1, z-1)*/)
 			{
 				if(isNextToSupport(world,x,y,z-1) != 0 && 
-						(getSupportInRange(world, x,y,z-1,5,mod_TFC_Core.terraWoodSupportV.blockID) || 
-								getSupportInRange(world, x,y-1,z-1,5,mod_TFC_Core.terraWoodSupportV.blockID)) || 
-								world.getBlockId(x, y-1, z-1) == mod_TFC_Core.terraWoodSupportV.blockID)
+						(getSupportInRange(world, x,y,z-1,5,mod_TFC.terraWoodSupportV.blockID) || 
+								getSupportInRange(world, x,y-1,z-1,5,mod_TFC.terraWoodSupportV.blockID)) || 
+								world.getBlockId(x, y-1, z-1) == mod_TFC.terraWoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC_Core.terraWoodSupportH.blockID, metaID);
+					world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC.terraWoodSupportH.blockID, metaID);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
 			else if(side == 3 && world.getBlockId(x, y, z+1) == 0 /*&& world.isBlockOpaqueCube(x, y+1, z+1)*/)
 			{
 				if(isNextToSupport(world,x,y,z+1) != 0 && 
-						(getSupportInRange(world, x,y,z+1,5,mod_TFC_Core.terraWoodSupportV.blockID) || 
-								getSupportInRange(world, x,y-1,z+1,5,mod_TFC_Core.terraWoodSupportV.blockID)) || 
-								world.getBlockId(x, y-1, z+1) == mod_TFC_Core.terraWoodSupportV.blockID)
+						(getSupportInRange(world, x,y,z+1,5,mod_TFC.terraWoodSupportV.blockID) || 
+								getSupportInRange(world, x,y-1,z+1,5,mod_TFC.terraWoodSupportV.blockID)) || 
+								world.getBlockId(x, y-1, z+1) == mod_TFC.terraWoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC_Core.terraWoodSupportH.blockID, metaID);
+					world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC.terraWoodSupportH.blockID, metaID);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
 			else if(side == 4 && world.getBlockId(x-1, y, z) == 0 /*&& world.isBlockOpaqueCube(x-1, y+1, z)*/)
 			{
 				if(isNextToSupport(world,x-1,y,z) != 0  && 
-						(getSupportInRange(world, x-1,y,z,5,mod_TFC_Core.terraWoodSupportV.blockID) || 
-								getSupportInRange(world, x-1,y-1,z,5,mod_TFC_Core.terraWoodSupportV.blockID)) || 
-								world.getBlockId(x-1, y-1, z) == mod_TFC_Core.terraWoodSupportV.blockID)
+						(getSupportInRange(world, x-1,y,z,5,mod_TFC.terraWoodSupportV.blockID) || 
+								getSupportInRange(world, x-1,y-1,z,5,mod_TFC.terraWoodSupportV.blockID)) || 
+								world.getBlockId(x-1, y-1, z) == mod_TFC.terraWoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC_Core.terraWoodSupportH.blockID, metaID);
+					world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC.terraWoodSupportH.blockID, metaID);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
 			else if(side == 5 && world.getBlockId(x+1, y, z) == 0 /*&& world.isBlockOpaqueCube(x+1, y+1, z)*/)
 			{
 				if(isNextToSupport(world,x+1,y,z) != 0 && 
-						(getSupportInRange(world, x+1,y,z,5,mod_TFC_Core.terraWoodSupportV.blockID) || 
-								getSupportInRange(world, x+1,y-1,z,5,mod_TFC_Core.terraWoodSupportV.blockID)) || 
-								world.getBlockId(x+1, y-1, z) == mod_TFC_Core.terraWoodSupportV.blockID)
+						(getSupportInRange(world, x+1,y,z,5,mod_TFC.terraWoodSupportV.blockID) || 
+								getSupportInRange(world, x+1,y-1,z,5,mod_TFC.terraWoodSupportV.blockID)) || 
+								world.getBlockId(x+1, y-1, z) == mod_TFC.terraWoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC_Core.terraWoodSupportH.blockID, metaID);
+					world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC.terraWoodSupportH.blockID, metaID);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
@@ -203,38 +203,38 @@ public class ItemTerraWoodSupport extends Item implements ITextureProvider
 				//if the block beneath is opaque or is another support
 				if(vSupport || b1 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC_Core.terraWoodSupportH.blockID, metaID);
+					world.setBlockAndMetadataWithNotify( x, y-1, z, mod_TFC.terraWoodSupportH.blockID, metaID);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
 			//top
 			else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC_Core.terraWoodSupportV.blockID, metaID);
+				world.setBlockAndMetadataWithNotify( x, y+1, z, mod_TFC.terraWoodSupportV.blockID, metaID);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
-			else if(side == 2 && (world.getBlockId(x, y-1, z-1) == mod_TFC_Core.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z-1)) &&
+			else if(side == 2 && (world.getBlockId(x, y-1, z-1) == mod_TFC.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z-1)) &&
 					world.getBlockId(x, y, z-1) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC_Core.terraWoodSupportV.blockID, metaID);
+				world.setBlockAndMetadataWithNotify( x, y, z-1, mod_TFC.terraWoodSupportV.blockID, metaID);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
-			else if(side == 3 && (world.getBlockId(x, y-1, z+1) == mod_TFC_Core.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z+1)) &&
+			else if(side == 3 && (world.getBlockId(x, y-1, z+1) == mod_TFC.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z+1)) &&
 					world.getBlockId(x, y, z+1) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC_Core.terraWoodSupportV.blockID, metaID);
+				world.setBlockAndMetadataWithNotify( x, y, z+1, mod_TFC.terraWoodSupportV.blockID, metaID);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
-			else if(side == 4 && (world.getBlockId(x-1, y-1, z) == mod_TFC_Core.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x-1, y-1, z)) &&
+			else if(side == 4 && (world.getBlockId(x-1, y-1, z) == mod_TFC.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x-1, y-1, z)) &&
 					world.getBlockId(x-1, y, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC_Core.terraWoodSupportV.blockID, metaID);
+				world.setBlockAndMetadataWithNotify( x-1, y, z, mod_TFC.terraWoodSupportV.blockID, metaID);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
-			else if(side == 5 && (world.getBlockId(x+1, y-1, z) == mod_TFC_Core.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x+1, y-1, z)) &&
+			else if(side == 5 && (world.getBlockId(x+1, y-1, z) == mod_TFC.terraWoodSupportV.blockID || world.isBlockOpaqueCube(x+1, y-1, z)) &&
 					world.getBlockId(x+1, y, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC_Core.terraWoodSupportV.blockID, metaID);
+				world.setBlockAndMetadataWithNotify( x+1, y, z, mod_TFC.terraWoodSupportV.blockID, metaID);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
 		}

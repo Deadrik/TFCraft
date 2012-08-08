@@ -21,7 +21,7 @@ import net.minecraft.src.StatList;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class BlockTerraIgEx extends BlockCollapsable
 {
@@ -183,7 +183,7 @@ public class BlockTerraIgEx extends BlockCollapsable
 
             if(mode == 0)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, mod_TFC_Core.terraStoneIgExSmooth.blockID, meta);
+                world.setBlockAndMetadataWithNotify(x, y, z, mod_TFC.terraStoneIgExSmooth.blockID, meta);
                 return true;
             }
             else if(mode == 1)

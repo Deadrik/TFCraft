@@ -20,7 +20,7 @@ public class WorldGenLooseRocks extends WorldGenerator
 				(world.getBlockMaterial(var8, var9, var10) == Material.grass || 
 				world.getBlockMaterial(var8, var9, var10) == Material.rock) && world.isBlockOpaqueCube(var8, var9, var10))
 		{
-			world.setBlock(var8, var9+1, var10, mod_TFC_Core.LooseRock.blockID);
+			world.setBlock(var8, var9+1, var10, mod_TFC.LooseRock.blockID);
 
 		}
 

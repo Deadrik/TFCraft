@@ -55,12 +55,12 @@ public class ItemTerraSluice extends Item implements ITextureProvider
         {
             byte0 = 1;
         }
-        if(((BlockTerraSluice)mod_TFC_Core.terraSluice).canPlace(world, i, j+1, k,r))
+        if(((BlockTerraSluice)mod_TFC.terraSluice).canPlace(world, i, j+1, k,r))
         {
-            world.setBlockAndMetadata(i, j+1, k, mod_TFC_Core.terraSluice.blockID, r);
-            if(world.getBlockId(i, j+1, k) == mod_TFC_Core.terraSluice.blockID)
+            world.setBlockAndMetadata(i, j+1, k, mod_TFC.terraSluice.blockID, r);
+            if(world.getBlockId(i, j+1, k) == mod_TFC.terraSluice.blockID)
             {
-                world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, mod_TFC_Core.terraSluice.blockID, r + 8);
+                world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, mod_TFC.terraSluice.blockID, r + 8);
                 entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
             }
             return true;

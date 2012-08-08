@@ -129,7 +129,7 @@ public class ContainerTerraBloomery extends Container
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC_Core.proxy.areItemStacksEqual(itemstack2, itemstack3))
+						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
 						{
 							if (itemstack3.stackSize <= slot.getSlotStackLimit())
 							{
@@ -157,7 +157,7 @@ public class ContainerTerraBloomery extends Container
 							itemstack2.stackSize += j1;
 						}
 					}
-					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC_Core.proxy.areItemStacksEqual(itemstack2, itemstack3))
+					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
 					{
 						int k1 = itemstack2.stackSize;
 						if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())
@@ -230,7 +230,7 @@ public class ContainerTerraBloomery extends Container
         
         if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 200)
         {
-            mod_TFC_Core.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.oreDamage));
+            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.oreDamage));
             updatecounter = 0;
         }
         

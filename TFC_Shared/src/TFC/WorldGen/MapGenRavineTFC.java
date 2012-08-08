@@ -6,7 +6,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class MapGenRavineTFC extends MapGenBase
 {
@@ -130,7 +130,7 @@ public class MapGenRavineTFC extends MapGenBase
 
 								if (var43 >= 0 && var43 < 128)
 								{
-									if (par5ArrayOfByte[var44] == Block.waterMoving.blockID || par5ArrayOfByte[var44] == Block.waterStill.blockID || par5ArrayOfByte[var44] == mod_TFC_Core.finiteWater.blockID)
+									if (par5ArrayOfByte[var44] == Block.waterMoving.blockID || par5ArrayOfByte[var44] == Block.waterStill.blockID || par5ArrayOfByte[var44] == mod_TFC.finiteWater.blockID)
 									{
 										var58 = true;
 									}
@@ -166,13 +166,13 @@ public class MapGenRavineTFC extends MapGenBase
 										{
 											byte var52 = par5ArrayOfByte[var47];
 
-											if (var52 == mod_TFC_Core.terraGrass.blockID || var52 == mod_TFC_Core.terraGrass2.blockID)
+											if (var52 == mod_TFC.terraGrass.blockID || var52 == mod_TFC.terraGrass2.blockID)
 											{
 												var48 = true;
 											}
 
-											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
-													var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID)
+											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC.terraStoneIgIn.blockID || var52 == (byte)mod_TFC.terraStoneIgEx.blockID || 
+													var52 == (byte)mod_TFC.terraStoneSed.blockID || var52 == (byte)mod_TFC.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID)
 											{
 												if (var49 < 10)
 												{
@@ -182,11 +182,11 @@ public class MapGenRavineTFC extends MapGenBase
 												{
 													par5ArrayOfByte[var47] = 0;
 
-													if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
+													if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC.terraDirt.blockID)
 													{
 														par5ArrayOfByte[var47 - 1] = (byte) ((TFCBiome)this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16)).GrassID;
 													}
-													else if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
+													else if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC.terraDirt2.blockID)
 													{
 														par5ArrayOfByte[var47 - 1] = (byte) ((TFCBiome)this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16)).GrassID;
 													}

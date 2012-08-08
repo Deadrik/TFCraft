@@ -6,7 +6,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class MapGenRavineUpperTFC extends MapGenBase
 {
@@ -166,17 +166,17 @@ public class MapGenRavineUpperTFC extends MapGenBase
 										{
 											byte var52 = par5ArrayOfByte[var47];
 
-											if (var52 == mod_TFC_Core.terraGrass.blockID || var52 == mod_TFC_Core.terraGrass2.blockID)
+											if (var52 == mod_TFC.terraGrass.blockID || var52 == mod_TFC.terraGrass2.blockID)
 											{
 												var48 = true;
 											}
 
-											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgIn.blockID || var52 == (byte)mod_TFC_Core.terraStoneIgEx.blockID || 
-													var52 == (byte)mod_TFC_Core.terraStoneSed.blockID || var52 == (byte)mod_TFC_Core.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID ||
-													var52 == mod_TFC_Core.terraGrass.blockID || var52 == mod_TFC_Core.terraGrass2.blockID ||
-													var52 == mod_TFC_Core.terraDirt.blockID || var52 == mod_TFC_Core.terraDirt2.blockID ||
-                                                    var52 == mod_TFC_Core.terraClay.blockID || var52 == mod_TFC_Core.terraClay2.blockID ||
-                                                    var52 == mod_TFC_Core.terraClayGrass.blockID || var52 == mod_TFC_Core.terraClayGrass2.blockID || var52 == mod_TFC_Core.terraPeat.blockID)
+											if (var52 == (byte)Block.stone.blockID || var52 == (byte)mod_TFC.terraStoneIgIn.blockID || var52 == (byte)mod_TFC.terraStoneIgEx.blockID || 
+													var52 == (byte)mod_TFC.terraStoneSed.blockID || var52 == (byte)mod_TFC.terraStoneMM.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID ||
+													var52 == mod_TFC.terraGrass.blockID || var52 == mod_TFC.terraGrass2.blockID ||
+													var52 == mod_TFC.terraDirt.blockID || var52 == mod_TFC.terraDirt2.blockID ||
+                                                    var52 == mod_TFC.terraClay.blockID || var52 == mod_TFC.terraClay2.blockID ||
+                                                    var52 == mod_TFC.terraClayGrass.blockID || var52 == mod_TFC.terraClayGrass2.blockID || var52 == mod_TFC.terraPeat.blockID)
 											{
 												if (var49 < 10)
 												{

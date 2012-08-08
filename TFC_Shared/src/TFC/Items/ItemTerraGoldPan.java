@@ -169,7 +169,7 @@ public class ItemTerraGoldPan extends Item implements ITextureProvider
                         {
                             for(int j = y; j > y-35; j--)
                             {
-                                if(world.getBlockId(i+x, j, k+z) == mod_TFC_Core.terraOre.blockID)
+                                if(world.getBlockId(i+x, j, k+z) == mod_TFC.terraOre.blockID)
                                 {
                                     int m = world.getBlockMetadata(i+x, j, k+z);
                                     if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))

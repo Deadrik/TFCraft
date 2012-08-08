@@ -19,7 +19,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.SpawnListEntry;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.client.*;
 
 public class TFCBiome extends BiomeGenBase
@@ -249,16 +249,16 @@ public class TFCBiome extends BiomeGenBase
         this.enableRain = true;
         
         super.biomeList[par1] = this;
-        SurfaceType = mod_TFC_Core.terraStoneIgIn.blockID;
+        SurfaceType = mod_TFC.terraStoneIgIn.blockID;
         SurfaceMeta = 0;
         Layer1 = 56;
-        Layer1Type = mod_TFC_Core.terraStoneIgIn.blockID;
+        Layer1Type = mod_TFC.terraStoneIgIn.blockID;
         Layer1Meta = 0;
         Layer2 = 40;
-        Layer2Type = mod_TFC_Core.terraStoneIgIn.blockID;
+        Layer2Type = mod_TFC.terraStoneIgIn.blockID;
         Layer2Meta = 0;
         Layer3 = 20;
-        Layer3Type = mod_TFC_Core.terraStoneIgIn.blockID;
+        Layer3Type = mod_TFC.terraStoneIgIn.blockID;
         Layer3Meta = 0;
 
         worldGenAshTallTrees = new WorldGenCustomTallTrees(false,7);
@@ -670,10 +670,10 @@ public class TFCBiome extends BiomeGenBase
         return worldGenAshShortTrees;
     }
 
-    public int GrassID = mod_TFC_Core.terraGrass.blockID;
-    public int DirtID = mod_TFC_Core.terraDirt.blockID;
-    public int ClayID = mod_TFC_Core.terraClay.blockID;
-    public int ClayGrassID = mod_TFC_Core.terraClayGrass.blockID;
+    public int GrassID = mod_TFC.terraGrass.blockID;
+    public int DirtID = mod_TFC.terraDirt.blockID;
+    public int ClayID = mod_TFC.terraClay.blockID;
+    public int ClayGrassID = mod_TFC.terraClayGrass.blockID;
     public int TopSoilMetaID = 0;
 
     protected TFCBiome setTopSoil(int grassID, int dirtID, int clayID, int clayGrassID, int meta)
@@ -720,11 +720,11 @@ public class TFCBiome extends BiomeGenBase
         Layer2 = 110 + R.nextInt(10);
         Layer1 = 130;
         
-        if(SurfaceType == mod_TFC_Core.terraStoneIgIn.blockID)
+        if(SurfaceType == mod_TFC.terraStoneIgIn.blockID)
             TopSoilMetaID = layer1[1];
-        else if(SurfaceType == mod_TFC_Core.terraStoneSed.blockID)
+        else if(SurfaceType == mod_TFC.terraStoneSed.blockID)
             TopSoilMetaID = layer1[1]+3;
-        else if(SurfaceType == mod_TFC_Core.terraStoneIgEx.blockID)
+        else if(SurfaceType == mod_TFC.terraStoneIgEx.blockID)
             TopSoilMetaID = layer1[1]+13;
         else
             TopSoilMetaID = layer1[1]+17;
@@ -732,17 +732,17 @@ public class TFCBiome extends BiomeGenBase
 
         if(TopSoilMetaID < 16)
         {
-            this.GrassID = mod_TFC_Core.terraGrass.blockID;
-            this.DirtID = mod_TFC_Core.terraDirt.blockID;
-            this.ClayID = mod_TFC_Core.terraClay.blockID;
-            this.ClayGrassID = mod_TFC_Core.terraClayGrass.blockID;
+            this.GrassID = mod_TFC.terraGrass.blockID;
+            this.DirtID = mod_TFC.terraDirt.blockID;
+            this.ClayID = mod_TFC.terraClay.blockID;
+            this.ClayGrassID = mod_TFC.terraClayGrass.blockID;
         }
         else
         {
-            this.GrassID = mod_TFC_Core.terraGrass2.blockID;
-            this.DirtID = mod_TFC_Core.terraDirt2.blockID;
-            this.ClayID = mod_TFC_Core.terraClay2.blockID;
-            this.ClayGrassID = mod_TFC_Core.terraClayGrass2.blockID;
+            this.GrassID = mod_TFC.terraGrass2.blockID;
+            this.DirtID = mod_TFC.terraDirt2.blockID;
+            this.ClayID = mod_TFC.terraClay2.blockID;
+            this.ClayGrassID = mod_TFC.terraClayGrass2.blockID;
         }
         if(this.biomeName.toLowerCase().contains("desert"))
         {
@@ -754,30 +754,30 @@ public class TFCBiome extends BiomeGenBase
     private int[] getRock(int m)
     {
         int[][] d = {
-                {mod_TFC_Core.terraStoneIgIn.blockID,0},
-                {mod_TFC_Core.terraStoneIgIn.blockID,0},
-                {mod_TFC_Core.terraStoneIgIn.blockID,1},
-                {mod_TFC_Core.terraStoneIgIn.blockID,2},
-                {mod_TFC_Core.terraStoneSed.blockID,0},
-                {mod_TFC_Core.terraStoneSed.blockID,1},
-                {mod_TFC_Core.terraStoneSed.blockID,2},
-                {mod_TFC_Core.terraStoneSed.blockID,3},
-                {mod_TFC_Core.terraStoneSed.blockID,4},
-                {mod_TFC_Core.terraStoneSed.blockID,5},
-                {mod_TFC_Core.terraStoneSed.blockID,6},
-                {mod_TFC_Core.terraStoneSed.blockID,7},
-                {mod_TFC_Core.terraStoneSed.blockID,8},
-                {mod_TFC_Core.terraStoneSed.blockID,9},
-                {mod_TFC_Core.terraStoneIgEx.blockID,0},
-                {mod_TFC_Core.terraStoneIgEx.blockID,1},
-                {mod_TFC_Core.terraStoneIgEx.blockID,2},
-                {mod_TFC_Core.terraStoneIgEx.blockID,3},
-                {mod_TFC_Core.terraStoneMM.blockID,0},
-                {mod_TFC_Core.terraStoneMM.blockID,1},
-                {mod_TFC_Core.terraStoneMM.blockID,2},
-                {mod_TFC_Core.terraStoneMM.blockID,3},
-                {mod_TFC_Core.terraStoneMM.blockID,4},
-                {mod_TFC_Core.terraStoneMM.blockID,5}};
+                {mod_TFC.terraStoneIgIn.blockID,0},
+                {mod_TFC.terraStoneIgIn.blockID,0},
+                {mod_TFC.terraStoneIgIn.blockID,1},
+                {mod_TFC.terraStoneIgIn.blockID,2},
+                {mod_TFC.terraStoneSed.blockID,0},
+                {mod_TFC.terraStoneSed.blockID,1},
+                {mod_TFC.terraStoneSed.blockID,2},
+                {mod_TFC.terraStoneSed.blockID,3},
+                {mod_TFC.terraStoneSed.blockID,4},
+                {mod_TFC.terraStoneSed.blockID,5},
+                {mod_TFC.terraStoneSed.blockID,6},
+                {mod_TFC.terraStoneSed.blockID,7},
+                {mod_TFC.terraStoneSed.blockID,8},
+                {mod_TFC.terraStoneSed.blockID,9},
+                {mod_TFC.terraStoneIgEx.blockID,0},
+                {mod_TFC.terraStoneIgEx.blockID,1},
+                {mod_TFC.terraStoneIgEx.blockID,2},
+                {mod_TFC.terraStoneIgEx.blockID,3},
+                {mod_TFC.terraStoneMM.blockID,0},
+                {mod_TFC.terraStoneMM.blockID,1},
+                {mod_TFC.terraStoneMM.blockID,2},
+                {mod_TFC.terraStoneMM.blockID,3},
+                {mod_TFC.terraStoneMM.blockID,4},
+                {mod_TFC.terraStoneMM.blockID,5}};
 
         return d[m];
     }
@@ -813,17 +813,17 @@ public class TFCBiome extends BiomeGenBase
         Layer1 = base.Layer1;
         if(TopSoilMetaID < 16)
         {
-            this.GrassID = mod_TFC_Core.terraGrass.blockID;
-            this.DirtID = mod_TFC_Core.terraDirt.blockID;
-            this.ClayID = mod_TFC_Core.terraClay.blockID;
-            this.ClayGrassID = mod_TFC_Core.terraClayGrass.blockID;
+            this.GrassID = mod_TFC.terraGrass.blockID;
+            this.DirtID = mod_TFC.terraDirt.blockID;
+            this.ClayID = mod_TFC.terraClay.blockID;
+            this.ClayGrassID = mod_TFC.terraClayGrass.blockID;
         }
         else
         {
-            this.GrassID = mod_TFC_Core.terraGrass2.blockID;
-            this.DirtID = mod_TFC_Core.terraDirt2.blockID;
-            this.ClayID = mod_TFC_Core.terraClay2.blockID;
-            this.ClayGrassID = mod_TFC_Core.terraClayGrass2.blockID;
+            this.GrassID = mod_TFC.terraGrass2.blockID;
+            this.DirtID = mod_TFC.terraDirt2.blockID;
+            this.ClayID = mod_TFC.terraClay2.blockID;
+            this.ClayGrassID = mod_TFC.terraClayGrass2.blockID;
         }
         if(this.biomeName.toLowerCase().contains("desert"))
         {

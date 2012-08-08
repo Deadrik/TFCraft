@@ -61,8 +61,8 @@ implements ITextureProvider
                 int side = objectMouseOver.sideHit;
                 if(side == 1)
                 {
-                world.setBlock(x, y, z, mod_TFC_Core.terraAnvil.blockID);
-                mod_TFC_Core.terraAnvil.blockActivated(world, x, y, z, player);
+                world.setBlock(x, y, z, mod_TFC.terraAnvil.blockID);
+                mod_TFC.terraAnvil.blockActivated(world, x, y, z, player);
                 return false;
                 }
             }

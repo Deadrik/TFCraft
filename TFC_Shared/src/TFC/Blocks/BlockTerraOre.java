@@ -17,8 +17,8 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
+import net.minecraft.src.mod_TFC;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraOre extends BlockTerra
@@ -49,7 +49,7 @@ public class BlockTerraOre extends BlockTerra
 
 	public int getRenderType()
 	{
-		return mod_TFC_Core.oreRenderId;
+		return mod_TFC.oreRenderId;
 	}
 
 	/*

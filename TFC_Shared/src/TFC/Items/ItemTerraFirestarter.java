@@ -100,7 +100,7 @@ public class ItemTerraFirestarter extends Item implements ITextureProvider
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC_Core.terraFirepitOn.blockID, 2);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC.terraFirepitOn.blockID, 2);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }
@@ -122,7 +122,7 @@ public class ItemTerraFirestarter extends Item implements ITextureProvider
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC_Core.terraForgeOn.blockID, 1);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC.terraForgeOn.blockID, 1);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }

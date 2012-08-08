@@ -26,7 +26,7 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 	@Override
 	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
 	{
-		if (mod_TFC_Core.proxy.isRemote())
+		if (mod_TFC.proxy.isRemote())
 		{
 			return true;
 		}
@@ -44,7 +44,7 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 				}
 				else
 				{
-					entityplayer.openGui(mod_TFC_Core.instance, mod_TFC_Core.logPileGuiId, world, i, j, k);
+					entityplayer.openGui(mod_TFC.instance, mod_TFC.logPileGuiId, world, i, j, k);
 				}
 				return true;
 			} else {

@@ -16,7 +16,7 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
 
 public class BlockTerraOre2 extends BlockTerraOre
 {

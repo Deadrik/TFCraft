@@ -9,14 +9,14 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC_Core;
-import net.minecraft.src.mod_TFC_Core;
+import net.minecraft.src.mod_TFC;
+import net.minecraft.src.mod_TFC;
 
 public class TFC_Game 
 {
     public static EnumWoodMaterial getWoodMaterial(ItemStack is)
     {
-        if(is.itemID == mod_TFC_Core.terraPeat.blockID)
+        if(is.itemID == mod_TFC.terraPeat.blockID)
         {
             return EnumWoodMaterial.PEAT;
         }
