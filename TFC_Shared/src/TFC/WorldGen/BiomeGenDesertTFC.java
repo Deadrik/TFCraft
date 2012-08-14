@@ -6,6 +6,8 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.Core.TFCSeasons;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenDesertWells;
@@ -76,5 +78,10 @@ public class BiomeGenDesertTFC extends TFCBiome
             default:
                 return 1F;
         }
+    }
+	
+	public float getFloatRainfall()
+    {
+        return this.rainfall;
     }
 }

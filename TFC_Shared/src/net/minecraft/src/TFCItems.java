@@ -737,6 +737,9 @@ public class TFCItems
     public static Item SeedsWheat;
     public static Item SeedsMelon;
     public static Item SeedsPumpkin;
+    public static Item SeedsWildWheat;
+    public static Item SeedsCorn;
+    public static Item SeedsTomato;
     
     public static Item FruitTreeSapling1;
     public static Item FruitTreeSapling2;
@@ -1434,7 +1437,6 @@ public class TFCItems
         Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
         
         num = 18000;
-        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),Block.crops.blockID,mod_TFC.tilledSoil.blockID,mod_TFC.tilledSoil2.blockID).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
         FruitTreeSapling1 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling1", num), "/bioxx/Vegetation.png", 0).setItemName("FruitSapling1").setIconCoord(0, 7);num++;
         FruitTreeSapling2 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling2", num), "/bioxx/Vegetation.png", 8).setItemName("FruitSapling2").setIconCoord(8, 7);num++;
         RedApple = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Red Apple",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(2, 0).setItemName("Fruit.Red Apple");num++;
@@ -1447,6 +1449,12 @@ public class TFCItems
         Peach = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Peach",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(6, 0).setItemName("Fruit.Peach");num++;
         Plum = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Plum",num), 2, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(7, 0).setItemName("Fruit.Plum");num++;
         EggCooked = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Meat.EggCooked",num), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Meat.EggCooked");num++;
+        
+        num = 18500;
+        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),0).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
+        SeedsWildWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildWheat",num),1).setItemName("SeedsWildWheat").setIconCoord(9, 0);num++;
+        SeedsCorn = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsCorn",num),2).setItemName("SeedsCorn").setIconCoord(9, 0);num++;
+        SeedsTomato = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsTomato",num),3).setItemName("SeedsTomato").setIconCoord(9, 0);num++;
         
         
         /**Armor Crafting related items*/

@@ -145,7 +145,8 @@ public class BlockFiniteWater extends BlockFluid
         int blockMeta2 = world.getBlockMetadata(x2, y2, z2);
         int blockMeta3 = world.getBlockMetadata(x + (x - x2), y + (y - y2), z + (z - z2));
         
-        if(world.getBlockId(x, y-1, z) == Block.waterStill.blockID)
+        //if it runs into vanilla style water, let it be absorbed.
+        if(world.getBlockId(x, y-1, z) == Block.waterStill.blockID || world.getBlockId(x, y-1, z) == Block.waterMoving.blockID)
         {
             world.setBlock(x, y, z, 0);
             return true;

@@ -40,39 +40,9 @@ import TFC.GUI.GuiTerraWorkbench;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemTerraArmor;
-import TFC.Render.ModelBear;
-import TFC.Render.ModelChickenTFC;
-import TFC.Render.ModelCowTFC;
-import TFC.Render.ModelPigTFC;
-import TFC.Render.ModelSheep1TFC;
-import TFC.Render.ModelSheep2TFC;
-import TFC.Render.ModelWolfTFC;
-import TFC.Render.RenderBear;
-import TFC.Render.RenderChickenTFC;
-import TFC.Render.RenderCowTFC;
-import TFC.Render.RenderFallingDirt;
-import TFC.Render.RenderFallingStone;
-import TFC.Render.RenderFallingStone2;
-import TFC.Render.RenderPigTFC;
-import TFC.Render.RenderSheepTFC;
-import TFC.Render.RenderTerraJavelin;
-import TFC.Render.RenderWolfTFC;
-import TFC.Render.TFC_CoreRender;
-import TFC.Render.TileEntityChestRendererTFC;
-import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TileEntityFruitTreeWood;
-import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityTerraBloomery;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraForge;
-import TFC.TileEntities.TileEntityTerraLogPile;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
-import TFC.TileEntities.TileEntityTerraScribe;
-import TFC.TileEntities.TileEntityTerraSluice;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.Render.*;
+import TFC.TileEntities.*;
 import TFC.WorldGen.BiomeGenJungleTFC;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.*;
@@ -122,6 +92,8 @@ public class ClientProxy implements IProxy
         ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
         ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
         ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
+        ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
+        ModLoader.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
 
         ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
         ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
@@ -349,9 +321,9 @@ public class ClientProxy implements IProxy
         {
             return TFC_CoreRender.renderBlockSlab(block, i, j, k, (RenderBlocks)renderblocks);
         }
-        else if (l == mod_TFC.farmlandRenderId)
+        else if (l == mod_TFC.cropRenderId)
         {
-            return TFC_CoreRender.RenderFarmland(block, i, j, k, (RenderBlocks)renderblocks);
+            return TFC_CoreRender.RenderCrop(block, i, j, k, (RenderBlocks)renderblocks);
         }
 
 

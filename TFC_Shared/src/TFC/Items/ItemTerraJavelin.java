@@ -83,7 +83,7 @@ public class ItemTerraJavelin extends ItemTool implements ITextureProvider
     {
         int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
         float var7 = (float)var6 / 20.0F;
-        var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
+        var7 = (var7 * var7 + var7 * 2.0F) / 8.0F;
 
         if ((double)var7 < 0.1D)
         {

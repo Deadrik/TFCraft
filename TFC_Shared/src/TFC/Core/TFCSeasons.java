@@ -27,6 +27,9 @@ public class TFCSeasons
     public static final int November = 8;
     public static final int December = 9;
     
+    private static final long hourLength = TFCSettings.dayLength/24;
+    private static final long dayLength = TFCSettings.dayLength;
+    
     
     public static void UpdateSeasons(World world)
     {
@@ -76,7 +79,7 @@ public class TFCSeasons
         
         long years = 12960000*year;
         long years2 = time - years;;
-        return (int) (years2/24000);
+        return (int) (years2/dayLength);
     }
     
     public static int getMonth()
@@ -96,7 +99,12 @@ public class TFCSeasons
     
     public static long totalDays()
     {
-        return (time/24000);
+        return (time/dayLength);
+    }
+    
+    public static long totalHours()
+    {
+        return (time/hourLength);
     }
     
     public static long totalMonths()
@@ -111,7 +119,7 @@ public class TFCSeasons
     
     public static long getHour()
     {
-        long h = (time - ((time / 24000)*24000))/1000;
+        long h = (time - ((time / dayLength)*dayLength))/hourLength;
         h -= 6;
         if(h < 0)
             h = 23 + h;
@@ -119,5 +127,34 @@ public class TFCSeasons
         if(h < 0)
             h = 23+h;
         return  h;
+    }
+
+    public static boolean isSpring()
+    {
+        if(getDayOfYear() >= 20 && getDayOfYear() <= 111)
+            return true;
+        
+        return false;
+    }
+    public static boolean isSummer()
+    {
+        if(getDayOfYear() >= 112 && getDayOfYear() <= 202)
+            return true;
+        
+        return false;
+    }
+    public static boolean isFall()
+    {
+        if(getDayOfYear() >= 203 && getDayOfYear() <= 293)
+            return true;
+        
+        return false;
+    }
+    public static boolean isWinter()
+    {
+        if(getDayOfYear() >= 294 || getDayOfYear() < 20)
+            return true;
+        
+        return false;
     }
 }

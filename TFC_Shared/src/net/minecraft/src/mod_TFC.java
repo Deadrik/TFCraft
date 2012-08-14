@@ -126,7 +126,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
     public static int partialRenderId;
     public static int stairRenderId;
     public static int slabRenderId;
-    public static int farmlandRenderId;
+    public static int cropRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -246,6 +246,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
         finiteWaterRenderId = proxy.getUniqueBlockModelID(this, false);
         stairRenderId = proxy.getUniqueBlockModelID(this, false);
         slabRenderId = proxy.getUniqueBlockModelID(this, false);
+        cropRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, TFC.Items.ItemOre1.class);
@@ -663,7 +664,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
         Block.blocksList[53] = (new BlockCustomStairs(53, Block.planks)).setBlockName("stairsWood").setRequiresSelfNotify();
         Block.blocksList[54] = (new BlockChestTFC(54)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("chest").setRequiresSelfNotify();
         Block.blocksList[58] = (new BlockTerraWorkbench(58, TileEntityTerraWorkbench.class)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
-        Block.blocksList[59] = (new BlockCustomCrops(59, 88)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
+        Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
         Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setBlockName("snow").setLightOpacity(1);
         Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setBlockName("ice");
         Block.blocksList[83] = (new BlockCustomReed(83, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("reeds").disableStats();

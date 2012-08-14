@@ -10,10 +10,13 @@ import TFC.Blocks.BlockTerraAnvil;
 import TFC.Blocks.BlockTerraBellows;
 import TFC.Blocks.BlockTerraSluice;
 import TFC.Core.AnvilReq;
+import TFC.Core.CropIndex;
+import TFC.Core.CropManager;
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
 import TFC.Core.TFCSeasons;
 import TFC.Core.TFC_Core.Direction;
+import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
@@ -3259,12 +3262,107 @@ public class TFC_CoreRender
             return var13;
         }
     }
-
-    public static boolean RenderFarmland(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    
+    public static boolean RenderCrop(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-        block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
-        renderblocks.renderStandardBlock(block, i, j, k);
+        IBlockAccess blockaccess = renderblocks.blockAccess;
+        TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
+        CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+        
+        int stage = (int) Math.floor(te.growth);
+        if(stage > crop.numGrowthStages)
+            stage = crop.numGrowthStages;
+        
+        switch(te.cropId)
+        {
+            case 0:
+            {
+                Tessellator var5 = Tessellator.instance;
+                var5.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
+                var5.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("terrain.png"));
+
+                int index = 88 + stage;
+                
+                renderBlockCropsImpl(block, blockaccess.getBlockMetadata(i, j, k), (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index);
+                break;
+            }
+            case 1:
+            {
+                Tessellator var5 = Tessellator.instance;
+                var5.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
+                var5.setColorOpaque_F(0.8F, 0.8F, 0.8F);
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("terrain.png"));
+
+                int index = 88 + stage;
+                
+                renderBlockCropsImpl(block, blockaccess.getBlockMetadata(i, j, k), (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index);
+                break;
+            }
+            default:
+            {
+                renderblocks.renderBlockCrops(block, i, j, k);
+            }
+        }
 
         return true;
+    }
+    
+    public static void renderBlockCropsImpl(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderblocks, int tex)
+    {
+        Tessellator var9 = Tessellator.instance;
+        int var10 = tex;
+
+        if (renderblocks.overrideBlockTexture >= 0)
+        {
+            var10 = renderblocks.overrideBlockTexture;
+        }
+
+        int var11 = (var10 & 15) << 4;
+        int var12 = var10 & 240;
+        double var13 = (double)((float)var11 / 256.0F);
+        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
+        double var17 = (double)((float)var12 / 256.0F);
+        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+        double var21 = par3 + 0.5D - 0.25D;
+        double var23 = par3 + 0.5D + 0.25D;
+        double var25 = par7 + 0.5D - 0.5D;
+        double var27 = par7 + 0.5D + 0.5D;
+        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var13, var17);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var15, var17);
+        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var13, var17);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var15, var17);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var13, var17);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var15, var17);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var13, var17);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var15, var17);
+        var21 = par3 + 0.5D - 0.5D;
+        var23 = par3 + 0.5D + 0.5D;
+        var25 = par7 + 0.5D - 0.25D;
+        var27 = par7 + 0.5D + 0.25D;
+        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var13, var17);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var15, var17);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var13, var17);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var15, var17);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var13, var17);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var15, var17);
+        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var13, var17);
+        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var15, var17);
     }
 }

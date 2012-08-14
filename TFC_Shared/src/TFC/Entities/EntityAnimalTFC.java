@@ -436,12 +436,14 @@ public class EntityAnimalTFC extends EntityAnimal
 	}
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if (sex == 0){
-			par1EntityPlayer.addChatMessage("Male");
-		}
-		else{
-			par1EntityPlayer.addChatMessage("Female");
-		}
+	    if(!par1EntityPlayer.worldObj.isRemote){ 
+            if (sex == 0){
+                 par1EntityPlayer.addChatMessage("Male");
+            }
+            else{
+                 par1EntityPlayer.addChatMessage("Female");
+            }
+       }
 		return super.interact(par1EntityPlayer);
 	}
 }

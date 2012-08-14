@@ -7,9 +7,11 @@ import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Helper;
 import TFC.Core.TFCSeasons;
+import TFC.Core.WeatherManager;
 import TFC.Entities.*;
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.BiomeGenDesert;
 import net.minecraft.src.BiomeGenEnd;
 import net.minecraft.src.BiomeGenHell;
 import net.minecraft.src.BiomeGenMushroomIsland;
@@ -410,13 +412,13 @@ public class TFCBiome extends BiomeGenBase
         {
             m = ((modLast-mod)/30)*day2;
             m = (modLast - m);
-            temp = (this.temperature * m)+(hourMod*this.temperature); 
+            temp = ((this.temperature+WeatherManager.getInstance().getDailyTemp()) * m)+(hourMod*(this.temperature+WeatherManager.getInstance().getDailyTemp())); 
         }
         else
         {
             m = ((mod-modLast)/30)*day2;
             m = (modLast + m);
-            temp = (this.temperature * m)+(hourMod*this.temperature);
+            temp = ((this.temperature+WeatherManager.getInstance().getDailyTemp()) * m)+(hourMod*(this.temperature+WeatherManager.getInstance().getDailyTemp()));
         }
         
         return temp;

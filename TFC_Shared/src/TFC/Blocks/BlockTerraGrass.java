@@ -233,27 +233,28 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
 
     public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
     {
-        if((world.getBlockId(i+1, j, k) == 0 || world.getBlockId(i-1, j, k) == 0 || 
-                world.getBlockId(i, j, k+1) == 0 || world.getBlockId(i, j, k-1) == 0) && 
-                world.getBlockId(i, j+1, k) == 0)
+        if((!world.isBlockOpaqueCube(i+1, j, k) || !world.isBlockOpaqueCube(i-1, j, k) || 
+                !world.isBlockOpaqueCube(i, j, k+1) || !world.isBlockOpaqueCube(i, j, k-1)) && 
+                !world.isBlockOpaqueCube(i, j+1, k))
         {
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
 
-            double minX = 0.1;
-            double minZ = 0.1;
-            double maxX = 0.9;
-            double maxZ = 0.9;
+            double minX = 0.25;
+            double minZ = 0.25;
+            double maxX = 0.75;
+            double maxZ = 0.75;
 
-            if(world.getBlockId(i+1, j, k) == 0)
+            if(!world.isBlockOpaqueCube(i+1, j, k))
                 maxX = 0.5;
-            if(world.getBlockId(i-1, j, k) == 0)
+            if(!world.isBlockOpaqueCube(i-1, j, k))
                 minX = 0.5;
-            if(world.getBlockId(i, j, k+1) == 0)
+            if(!world.isBlockOpaqueCube(i, j, k+1))
                 maxZ = 0.5;
-            if(world.getBlockId(i, j, k-1) == 0)
+            if(!world.isBlockOpaqueCube(i, j, k-1))
                 minZ = 0.5;
 
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
+
         }
         else
             par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));

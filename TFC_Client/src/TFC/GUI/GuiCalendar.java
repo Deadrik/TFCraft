@@ -86,7 +86,7 @@ public class GuiCalendar extends GuiScreen
         drawCenteredString(fontRenderer,"Day : " + TFCSeasons.Days[TFCSeasons.getDayOfWeek()], l + 87, i1+36, 0x000000);
         int dom = TFCSeasons.getDayOfMonth();
         int month = TFCSeasons.currentMonth;
-        if(dom == 6 && month == 6)
+        if(dom == 7 && month == 4)
             drawCenteredString(fontRenderer,"Date : Bioxx's Birthday!, " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);
         else
             drawCenteredString(fontRenderer,"Date : " + dom + " " + TFCSeasons.months[month] + ", " +(1000+TFCSeasons.getYear()), l + 87, i1+46, 0x000000);

@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Map;
 
 import TFC.Containers.*;
-import TFC.Core.IProxy;
 import TFC.Core.*;
 import TFC.Entities.*;
 import TFC.TileEntities.*;
@@ -35,6 +34,8 @@ public class ServerProxy implements IProxy {
         ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
         ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
         ModLoader.registerTileEntity(TileEntityChestTFC.class, "TileEntityChestTFC");
+        ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
+        ModLoader.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
         
         ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0);
         ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1);

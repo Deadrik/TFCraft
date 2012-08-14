@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Proxy;
 
+import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.TileEntities.TileEntityTerraBloomery;
@@ -77,7 +78,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             pkt.length=bos.size();
             pkt.isChunkDataPacket=false;
             System.out.println("Client requesting seed info");
-            
+
             mod_TFC.proxy.sendCustomPacket(pkt);
         }
     }
@@ -173,6 +174,21 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                         } 
                         icte.handlePacketData(id, meta, mat, ex);
                     }
+                    else if (te instanceof TileEntityCrop) 
+                    {
+                        TileEntityCrop icte = (TileEntityCrop)te;
+                        int id;
+                        float growth;
+
+                        try {
+                            id = dis.readInt();
+                            growth = dis.readFloat();
+
+                        } catch (IOException e) {
+                            return;
+                        } 
+                        icte.handlePacketData(id, growth);
+                    }
                 }
             }
             else if(type == 1)//Init Tile Entities
@@ -186,31 +202,57 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 }
                 ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
                 DataOutputStream dos=new DataOutputStream(bos);
-                TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+                TileEntity te = (TileEntity) world.getBlockTileEntity(x, y, z);
                 if(te != null)
                 {
-                    try 
+                    if (te instanceof TileEntityPartial) 
                     {
-                        dos.writeByte(0);
-                        dos.writeInt(x);
-                        dos.writeInt(y);
-                        dos.writeInt(z);
-                        dos.writeShort(te.TypeID);
-                        dos.writeByte(te.MetaID);
-                        dos.writeByte(te.material);
-                        dos.writeLong(te.extraData);
+                        try 
+                        {
+                            dos.writeByte(0);
+                            dos.writeInt(x);
+                            dos.writeInt(y);
+                            dos.writeInt(z);
+                            dos.writeShort(((TileEntityPartial)te).TypeID);
+                            dos.writeByte(((TileEntityPartial)te).MetaID);
+                            dos.writeByte(((TileEntityPartial)te).material);
+                            dos.writeLong(((TileEntityPartial)te).extraData);
 
-                    } catch (IOException e) 
-                    {
-                        // IMPOSSIBLE?
+                        } catch (IOException e) 
+                        {
+                            // IMPOSSIBLE?
+                        }
+                        Packet250CustomPayload pkt=new Packet250CustomPayload();
+                        pkt.channel="TerraFirmaCraft";
+                        pkt.data=bos.toByteArray();
+                        pkt.length=bos.size();
+                        pkt.isChunkDataPacket=true;
+
+                        mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
                     }
-                    Packet250CustomPayload pkt=new Packet250CustomPayload();
-                    pkt.channel="TerraFirmaCraft";
-                    pkt.data=bos.toByteArray();
-                    pkt.length=bos.size();
-                    pkt.isChunkDataPacket=true;
+                    else if (te instanceof TileEntityCrop) 
+                    {
+                        try 
+                        {
+                            dos.writeByte(0);
+                            dos.writeInt(x);
+                            dos.writeInt(y);
+                            dos.writeInt(z);
+                            dos.writeInt(((TileEntityCrop)te).cropId);
+                            dos.writeFloat(((TileEntityCrop)te).growth);
 
-                    mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                        } catch (IOException e) 
+                        {
+                            // IMPOSSIBLE?
+                        }
+                        Packet250CustomPayload pkt=new Packet250CustomPayload();
+                        pkt.channel="TerraFirmaCraft";
+                        pkt.data=bos.toByteArray();
+                        pkt.length=bos.size();
+                        pkt.isChunkDataPacket=true;
+
+                        mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                    }
                 }
             }
             else if(type == 2)//Keypress changes
@@ -248,7 +290,6 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     {
                         // IMPOSSIBLE?
                     }
-                    System.out.println("Client recieve seed: "+seed);
                     TFC_Core.SetupWorld(world, seed);
                 }
                 else
@@ -272,7 +313,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     pkt.data=bos.toByteArray();
                     pkt.length=bos.size();
                     pkt.isChunkDataPacket=false;
-                    System.out.println("Server send seed: "+world.getSeed());
+
                     mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
                 }
             }
@@ -413,6 +454,36 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 dos.writeByte(te.MetaID);
                 dos.writeByte(te.material);
                 dos.writeLong(te.extraData);
+                dos.close();
+
+                pkt.channel="TerraFirmaCraft";
+                pkt.data=bos.toByteArray();
+                pkt.length=bos.size();
+                pkt.isChunkDataPacket=true;
+
+                mod_TFC.proxy.sendCustomPacket(pkt);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void broadcastCropData(TileEntityCrop te) {
+        if (TFC_Core.isClient()) return;
+        else 
+        {
+            try
+            {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                DataOutputStream dos = new DataOutputStream(bos);
+                Packet250CustomPayload pkt = new Packet250CustomPayload();
+
+                dos.writeByte(0);
+                dos.writeInt(te.xCoord);
+                dos.writeInt(te.yCoord);
+                dos.writeInt(te.zCoord);
+                dos.writeInt(te.cropId);
+                dos.writeFloat(te.growth);
                 dos.close();
 
                 pkt.channel="TerraFirmaCraft";

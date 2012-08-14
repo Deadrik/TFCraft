@@ -2,33 +2,13 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.TileEntities.TileEntityFarmland;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 
 
-public class BlockTerraFarmland extends BlockTerra2
+public class BlockTerraFarmland extends BlockContainer
 {
-	/**
-	 * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
-	 */
-	public static boolean isWaterNearby(World par1World, int par2, int par3, int par4)
-	{
-		for (int var5 = par2 - 4; var5 <= par2 + 4; ++var5)
-		{
-			for (int var6 = par3; var6 <= par3 + 1; ++var6)
-			{
-				for (int var7 = par4 - 4; var7 <= par4 + 4; ++var7)
-				{
-					if (par1World.getBlockMaterial(var5, var6, var7) == Material.water)
-					{
-						return true;
-					}
-				}
-			}
-		}
-
-		return false;
-	}
 	int dirtID;
 
 	public BlockTerraFarmland(int par1, int id)
@@ -89,6 +69,28 @@ public class BlockTerraFarmland extends BlockTerra2
 
 		return false;
 	}
+	
+	/**
+     * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
+     */
+    public static boolean isWaterNearby(World par1World, int par2, int par3, int par4)
+    {
+        for (int var5 = par2 - 4; var5 <= par2 + 4; ++var5)
+        {
+            for (int var6 = par3; var6 <= par3 + 1; ++var6)
+            {
+                for (int var7 = par4 - 4; var7 <= par4 + 4; ++var7)
+                {
+                    if (par1World.getBlockMaterial(var5, var6, var7) == Material.water)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
@@ -99,18 +101,18 @@ public class BlockTerraFarmland extends BlockTerra2
 		return false;
 	}
 
-	/**
-	 * Block's chance to react to an entity falling on it.
-	 */
-	public void onFallenUpon(World world, int i, int j, int k, Entity par5Entity, float par6)
-	{
-		if (world.rand.nextFloat() < par6 - 0.5F)
-		{
-			int id = dirtID;
-			int meta = world.getBlockMetadata(i, j, k);
-			world.setBlockAndMetadataWithNotify(i, j, k, id, meta);
-		}
-	}
+//	/**
+//	 * Block's chance to react to an entity falling on it.
+//	 */
+//	public void onFallenUpon(World world, int i, int j, int k, Entity par5Entity, float par6)
+//	{
+//		if (world.rand.nextFloat() < par6 - 0.5F)
+//		{
+//			int id = dirtID;
+//			int meta = world.getBlockMetadata(i, j, k);
+//			world.setBlockAndMetadataWithNotify(i, j, k, id, meta);
+//		}
+//	}
 
 	/**
 	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
@@ -135,25 +137,24 @@ public class BlockTerraFarmland extends BlockTerra2
 	{
 		return false;
 	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/bioxx/terrablocks2.png";
+    }
 
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-	{
-		int meta = par1World.getBlockMetadata(par2, par3, par4);
-		long l = par1World.getWorldTime();
+    @Override
+    public TileEntity getBlockEntity()
+    {
+        try
+        {
+            return TileEntityFarmland.class.newInstance();
 
-		if (!BlockTerraFarmland.isWaterNearby(par1World, par2, par3, par4) && !par1World.canLightningStrikeAt(par2, par3 + 1, par4))
-		{
-			if (!this.isCropsNearby(par1World, par2, par3, par4) && par5Random.nextInt(20) == 0)
-			{
-				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, dirtID, meta);
-			}
-		}
-		else
-		{
-			//par1World.setBlockMetadataWithNotify(par2, par3, par4, 7);
-		}
-	}
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

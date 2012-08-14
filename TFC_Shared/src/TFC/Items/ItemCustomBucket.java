@@ -20,14 +20,14 @@ public class ItemCustomBucket extends Item implements ITextureProvider
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer par3EntityPlayer)
     {
         float var4 = 1.0F;
         double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double)var4;
         double var7 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * (double)var4 + 1.62D - (double)par3EntityPlayer.yOffset;
         double var9 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * (double)var4;
         boolean var11 = this.isFull == 0;
-        MovingObjectPosition var12 = Helper.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, var11);
+        MovingObjectPosition var12 = Helper.getMovingObjectPositionFromPlayer(world, par3EntityPlayer, var11);
 
         if (var12 == null)
         {
@@ -37,31 +37,31 @@ public class ItemCustomBucket extends Item implements ITextureProvider
         {
             if (var12.typeOfHit == EnumMovingObjectType.TILE)
             {
-                int var13 = var12.blockX;
-                int var14 = var12.blockY;
-                int var15 = var12.blockZ;
+                int i = var12.blockX;
+                int j = var12.blockY;
+                int k = var12.blockZ;
 
-                if (!par2World.canMineBlock(par3EntityPlayer, var13, var14, var15))
+                if (!world.canMineBlock(par3EntityPlayer, i, j, k))
                 {
                     return par1ItemStack;
                 }
 
                 if (this.isFull == 0)
                 {
-                    if (!par3EntityPlayer.canPlayerEdit(var13, var14, var15))
+                    if (!par3EntityPlayer.canPlayerEdit(i, j, k))
                     {
                         return par1ItemStack;
                     }
                     
-                    ItemStack stack = MinecraftForge.fillCustomBucket(par2World, var13, var14, var15);
+                    ItemStack stack = MinecraftForge.fillCustomBucket(world, i, j, k);
                     if (stack != null)
                     {
                         return stack;
                     }
 
-                    if (par2World.getBlockMaterial(var13, var14, var15) == Material.water && par2World.getBlockMetadata(var13, var14, var15) <=2)
+                    if (world.getBlockMaterial(i, j, k) == Material.water && world.getBlockMetadata(i, j, k) <=2)
                     {
-                        par2World.setBlockWithNotify(var13, var14, var15, 0);
+                        world.setBlockWithNotify(i, j, k, 0);
 
                         if (par3EntityPlayer.capabilities.isCreativeMode)
                         {
@@ -80,53 +80,66 @@ public class ItemCustomBucket extends Item implements ITextureProvider
 
                     if (var12.sideHit == 0)
                     {
-                        --var14;
+                        --j;
                     }
-
-                    if (var12.sideHit == 1)
+                    else if (var12.sideHit == 1)
                     {
-                        ++var14;
+                        ++j;
                     }
-
-                    if (var12.sideHit == 2)
+                    else if (var12.sideHit == 2)
                     {
-                        --var15;
+                        --k;
                     }
-
-                    if (var12.sideHit == 3)
+                    else if (var12.sideHit == 3)
                     {
-                        ++var15;
+                        ++k;
                     }
-
-                    if (var12.sideHit == 4)
+                    else if (var12.sideHit == 4)
                     {
-                        --var13;
+                        --i;
                     }
-
-                    if (var12.sideHit == 5)
+                    else if (var12.sideHit == 5)
                     {
-                        ++var13;
+                        ++i;
                     }
 
-                    if (!par3EntityPlayer.canPlayerEdit(var13, var14, var15))
+                    if (!par3EntityPlayer.canPlayerEdit(i, j, k))
                     {
                         return par1ItemStack;
                     }
 
-                    if (par2World.isAirBlock(var13, var14, var15) || !par2World.getBlockMaterial(var13, var14, var15).isSolid())
+                    if (world.isAirBlock(i, j, k) || !world.getBlockMaterial(i, j, k).isSolid())
                     {
-                        if (par2World.worldProvider.isHellWorld && this.isFull == mod_TFC.finiteWater.blockID)
+                        if (world.worldProvider.isHellWorld && this.isFull == mod_TFC.finiteWater.blockID)
                         {
-                            par2World.playSoundEffect(var5 + 0.5D, var7 + 0.5D, var9 + 0.5D, "random.fizz", 0.5F, 2.6F + (par2World.rand.nextFloat() - par2World.rand.nextFloat()) * 0.8F);
+                            world.playSoundEffect(var5 + 0.5D, var7 + 0.5D, var9 + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
                             for (int var16 = 0; var16 < 8; ++var16)
                             {
-                                par2World.spawnParticle("largesmoke", (double)var13 + Math.random(), (double)var14 + Math.random(), (double)var15 + Math.random(), 0.0D, 0.0D, 0.0D);
+                                world.spawnParticle("largesmoke", (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0D, 0.0D, 0.0D);
                             }
                         }
                         else
                         {
-                            par2World.setBlockAndMetadataWithNotify(var13, var14, var15, this.isFull, 0);
+                            if(world.getBlockId(i, j, k) == mod_TFC.finiteWater.blockID)
+                            {
+                                int bucketMeta = 0;
+                                int blockMeta = world.getBlockMetadata(i, j, k);
+                                if(blockMeta > 0)
+                                {
+                                    bucketMeta = bucketMeta + blockMeta;
+                                    world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.finiteWater.blockID, 0);
+                                    world.setBlockAndMetadataWithNotify(i, j+1, k, mod_TFC.finiteWater.blockID, bucketMeta);
+                                }
+                                else
+                                {
+                                    world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.finiteWater.blockID, 0);
+                                }
+                            }
+                            else
+                            {
+                                world.setBlockAndMetadataWithNotify(i, j, k, this.isFull, 0);
+                            }
                         }
 
                         if (par3EntityPlayer.capabilities.isCreativeMode)
