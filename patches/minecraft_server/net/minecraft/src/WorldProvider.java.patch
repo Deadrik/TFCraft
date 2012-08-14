@@ -29,7 +29,7 @@
 +        /*
 +         * This makes it so that the player can spawn on TFC's custom grass
 +         */
-+        return var3 == mod_TFC_Core.terraGrass.blockID || var3 == mod_TFC_Core.terraGrass2.blockID;
++        return var3 == mod_TFC.terraGrass.blockID || var3 == mod_TFC.terraGrass2.blockID;
      }
  
      /**
