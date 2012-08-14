@@ -34,6 +34,7 @@ public class EntityBear extends EntityTameableTFC
 		{
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
 		}
+		degreeOfDiversion = 4;
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, net.minecraft.src.EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
@@ -54,7 +55,8 @@ public class EntityBear extends EntityTameableTFC
 		super (par1World,mother,father_size);
 		texture = "/mob/Bear.png";
 		setSize (1.2F, 1.2F);
-		moveSpeed = 0.2F;        
+		moveSpeed = 0.2F;
+		degreeOfDiversion = 4;
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		tasks.addTask (3, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
@@ -86,6 +88,9 @@ public class EntityBear extends EntityTameableTFC
 		return true;
 	}
 
+	public int getDegree(){
+		return degreeOfDiversion;
+	}
 
 	/**
 	 * Sets the active target the Task system uses for tracking

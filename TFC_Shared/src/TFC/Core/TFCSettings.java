@@ -49,7 +49,7 @@ public class TFCSettings
 		enableInnerGrassFix = getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		enableDebugMode = getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		sendAllNBT = getBooleanFor(config,"General","sendAllNBT",true, "Setting this to false can cause alot of issues when used in SMP. Leave this set to true to prevent issues.");
-		dayLength = getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days");
+		dayLength = getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days. DO NOT CHANGE THIS ON THE CLIENT IF YOU PLAY SMP UNLESS THE SERVER HAS IT CHANGED AS WELL.");
 		//Metallurgy
 		BlacksmithModeHeatScale = getBooleanFor(config,"Metallurgy","BlacksmithModeHeatScale",true, "Set this to false if you are having a hard time and would like the old color scale for heating metals.");
 		//Caveins

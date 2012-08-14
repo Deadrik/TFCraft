@@ -10,4 +10,5 @@ import net.minecraft.src.*;
 public abstract class ModelBaseTFC extends ModelBase
 {
     public float age;
+    public int sex;
 }

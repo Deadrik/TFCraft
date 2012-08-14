@@ -35,6 +35,7 @@ import TFC.Core.TFC_Game;
 import TFC.Entities.EntityBear;
 import TFC.Entities.EntityChickenTFC;
 import TFC.Entities.EntityCowTFC;
+import TFC.Entities.EntityDeer;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 import TFC.Entities.EntityFallingStone2;
@@ -396,6 +397,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
         MinecraftForge.registerEntity(EntityBear.class, this, 8, 160, 5, true);
         MinecraftForge.registerEntity(EntityChickenTFC.class, this, 9, 160, 5, true);
         MinecraftForge.registerEntity(EntityPigTFC.class, this, 10, 160, 5, true);
+        MinecraftForge.registerEntity(EntityDeer.class, this, 11, 160, 5, true);
 
         FMLCommonHandler.instance().registerTickHandler(this);
         MinecraftForge.registerEntityLivingHandler(new EntityLivingHandler());

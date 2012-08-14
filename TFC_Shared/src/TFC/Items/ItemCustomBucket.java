@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.Core.Helper;
+import TFC.Entities.EntityCowTFC;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 import net.minecraft.src.forge.MinecraftForge;
@@ -151,7 +152,7 @@ public class ItemCustomBucket extends Item implements ITextureProvider
                     }
                 }
             }
-            else if (this.isFull == 0 && var12.entityHit instanceof EntityCow)
+            else if (this.isFull == 0 && var12.entityHit instanceof EntityCowTFC && ((EntityCowTFC)var12.entityHit).sex == 1)
             {
                 return new ItemStack(TFCItems.WoodenBucketMilk);
             }

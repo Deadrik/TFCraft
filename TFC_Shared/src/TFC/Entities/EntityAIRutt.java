@@ -29,7 +29,17 @@ public class EntityAIRutt extends EntityAIBase
      */
     public boolean shouldExecute ()
     {
-        if (theAnimal.hunger < 84000 || theAnimal.sex == 0 || !(TFCSeasons.getMonth() >= theAnimal.matingStart && TFCSeasons.getMonth() <= theAnimal.matingEnd)||theAnimal.breeding != 0)
+    	if (theAnimal.getAttackTarget()!= null){
+    		return false;
+    	}
+    	if (theAnimal.getHealth()*3 <= theAnimal.getMaxHealth()){
+    		theAnimal.ruttVictor = false;
+    		if(theAnimal.getAttackTarget()!=null&&theAnimal.getAttackTarget().getClass() == theAnimal.getClass()){
+    			((EntityAnimalTFC)theAnimal.getAttackTarget()).ruttVictor = true;    			
+    		}
+    		return false;
+    	}
+        if (theAnimal.hunger < 84000 || theAnimal.sex == 1 || !(TFCSeasons.getMonth() >= theAnimal.matingStart && TFCSeasons.getMonth() <= theAnimal.matingEnd)||theAnimal.breeding != 0||theAnimal.getAttackTarget()!=null)
         {
             return false;
         }
@@ -46,7 +56,7 @@ public class EntityAIRutt extends EntityAIBase
      */
     public boolean continueExecuting ()
     {
-        return !((theAnimal.getHealth() <= theAnimal.getMaxHealth() / 4)||(theAnimal.ruttVictor));
+        return !((theAnimal.getHealth() <= theAnimal.getMaxHealth() / 4)||(theAnimal.ruttVictor))||theAnimal.getAttackTarget()!=null;
     }
 
 

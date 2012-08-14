@@ -35,7 +35,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 		fooditems.add(Item.porkRaw.shiftedIndex);
 		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
-		this.moveSpeed = 0.3F;
+		this.moveSpeed = 0.4F;
 		warning = -121;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
@@ -53,6 +53,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 		this.targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, true));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntitySheepTFC.class, 16.0F, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 16.0F, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntityDeer.class, 16.0F, 200, false));
 	}
 
 	/**

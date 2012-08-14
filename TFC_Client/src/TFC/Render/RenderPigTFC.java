@@ -1,5 +1,8 @@
 package TFC.Render;
 
+import org.lwjgl.opengl.GL11;
+
+import TFC.Entities.EntityBear;
 import TFC.Entities.EntityPigTFC;
 import net.minecraft.src.*;
 
@@ -28,6 +31,16 @@ public class RenderPigTFC extends RenderLivingTFC
     protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
     {
         return this.renderSaddledPig((EntityPigTFC)par1EntityLiving, par2, par3);
+    }
+    
+    protected void preRenderCallback (EntityLiving par1EntityLiving, float par2)
+    {
+	preRenderScale ((EntityPigTFC) par1EntityLiving, par2);
+    }
+
+    protected void preRenderScale (EntityPigTFC par1EntityPig, float par2)
+    {
+	GL11.glScalef (par1EntityPig.size_mod,par1EntityPig.size_mod,par1EntityPig.size_mod);
     }
 
     public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)

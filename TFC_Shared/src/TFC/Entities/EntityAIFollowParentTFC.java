@@ -26,7 +26,7 @@ public class EntityAIFollowParentTFC extends EntityAIBase
     public boolean shouldExecute()
     {
         double var3 = Double.MAX_VALUE;
-        if (this.childAnimal.getGrowingAge() >= 0)
+        if (this.childAnimal.getGrowingAge() >= 0 || childAnimal.worldObj.loadedEntityList.contains(childAnimal.parent))
         {
             return false;
         }

@@ -1,6 +1,9 @@
 package TFC.Render;
 
+import org.lwjgl.opengl.GL11;
+
 import TFC.Entities.EntityChickenTFC;
+import TFC.Entities.EntityPigTFC;
 import net.minecraft.src.*;
 
 public class RenderChickenTFC extends RenderLivingTFC
@@ -28,6 +31,16 @@ public class RenderChickenTFC extends RenderLivingTFC
     protected float handleRotationFloat(EntityLiving par1EntityLiving, float par2)
     {
         return this.getWingRotation((EntityChickenTFC)par1EntityLiving, par2);
+    }
+    
+    protected void preRenderCallback (EntityLiving par1EntityLiving, float par2)
+    {
+	preRenderScale ((EntityChickenTFC) par1EntityLiving, par2);
+    }
+
+    protected void preRenderScale (EntityChickenTFC par1EntityChicken, float par2)
+    {
+	GL11.glScalef (par1EntityChicken.size_mod,par1EntityChicken.size_mod,par1EntityChicken.size_mod);
     }
 
     public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)

@@ -1,6 +1,9 @@
 package TFC.Render;
 
+import org.lwjgl.opengl.GL11;
+
 import TFC.Entities.EntityCowTFC;
+import TFC.Entities.EntityPigTFC;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityCow;
 import net.minecraft.src.EntityLiving;
@@ -17,6 +20,16 @@ public class RenderCowTFC extends RenderLivingTFC
     public void renderCow(EntityCowTFC par1EntityCow, double par2, double par4, double par6, float par8, float par9)
     {
         super.doRenderLiving(par1EntityCow, par2, par4, par6, par8, par9);
+    }
+    
+    protected void preRenderCallback (EntityLiving par1EntityLiving, float par2)
+    {
+	preRenderScale ((EntityCowTFC) par1EntityLiving, par2);
+    }
+
+    protected void preRenderScale (EntityCowTFC par1EntityCow, float par2)
+    {
+	GL11.glScalef (par1EntityCow.size_mod,par1EntityCow.size_mod,par1EntityCow.size_mod);
     }
 
     public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)

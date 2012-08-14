@@ -10,8 +10,7 @@ import net.minecraft.src.SpawnListEntry;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
-import TFC.Entities.EntityBear;
-import TFC.Entities.EntityWolfTFC;
+import TFC.Entities.*;
 
 // Referenced classes of package net.minecraft.src:
 //            BiomeGenBase, SpawnListEntry, EntityWolf, BiomeDecorator, 
@@ -34,6 +33,8 @@ public class BiomeGenForestTFC extends TFCBiome
 		super(i);
 		spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 5, 1, 5));
 		spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 5, 1, 2));
+        spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 10, 3, 8));
+        
 		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 10;
 		((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 2;
 		treeCommon1 = -1;

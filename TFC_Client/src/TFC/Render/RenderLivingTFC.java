@@ -66,10 +66,10 @@ public class RenderLivingTFC extends Render
 	}
 
 	mainModel.isChild = par1EntityLiving.isChild ();
-	if (mainModel.isChild)
-	{
-	    mainModel.age = ((float) (((EntityAgeable) par1EntityLiving).getGrowingAge ()) / -24000F) / (float) ((EntityAnimalTFC)par1EntityLiving).adultAge;
-	}
+	if (par1EntityLiving instanceof EntityAnimalTFC){
+		mainModel.sex = ((EntityAnimalTFC)par1EntityLiving).sex;
+	}	
+	    mainModel.age = ((float) (((EntityAgeable) par1EntityLiving).getGrowingAge ()) / -24000F) / (float) ((EntityAnimalTFC)par1EntityLiving).adultAge;	
 
 	if (renderPassModel != null)
 	{

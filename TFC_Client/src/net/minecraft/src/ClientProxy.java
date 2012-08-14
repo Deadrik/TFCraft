@@ -17,6 +17,7 @@ import TFC.Core.TFCSettings;
 import TFC.Entities.EntityBear;
 import TFC.Entities.EntityChickenTFC;
 import TFC.Entities.EntityCowTFC;
+import TFC.Entities.EntityDeer;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 import TFC.Entities.EntityFallingStone2;
@@ -108,6 +109,7 @@ public class ClientProxy implements IProxy
         ModLoader.registerEntityID(EntityChickenTFC.class, "chicken", 3, 0xffffff, 0xbbbbbb);
         ModLoader.registerEntityID(EntityPigTFC.class, "pig", 4, 0xffffff, 0xbbbbbb);
         ModLoader.registerEntityID(EntitySquidTFC.class, "squid", 5, 0xffffff, 0xbbbbbb);
+        ModLoader.registerEntityID(EntityDeer.class, "deer", 6, 0xffffff, 0x105510);
     }
 
     
@@ -223,6 +225,7 @@ public class ClientProxy implements IProxy
         map.put(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
         map.put(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
         map.put(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
+        map.put(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
     }
 
     @Override
