@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import bioxx.importers.WavefrontObject;
+
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.IProxy;
@@ -75,9 +77,22 @@ public class ClientProxy implements IProxy
         MinecraftForgeClient.preloadTexture("/bioxx/anvilgui.png");
         MinecraftForgeClient.preloadTexture("/bioxx/calendargui.png");
         MinecraftForgeClient.preloadTexture("/bioxx/Vegetation.png");
+        MinecraftForgeClient.preloadTexture("/bioxx/TFC_Plants.png");
         
         ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
         ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
+        
+        TFC_CoreRender.TomatoPlant = new WavefrontObject[]{
+                new WavefrontObject().parse("/models/tomato_00.obj"),
+                new WavefrontObject().parse("/models/tomato_01.obj"),
+                new WavefrontObject().parse("/models/tomato_02.obj"),
+                new WavefrontObject().parse("/models/tomato_03.obj"),
+                new WavefrontObject().parse("/models/box.obj"),
+                new WavefrontObject().parse("/models/tomato_05.obj"),
+                new WavefrontObject().parse("/models/tomato_06.obj"),
+                new WavefrontObject().parse("/models/tomato_07.obj"),
+                new WavefrontObject().parse("/models/tomato_08.obj"),
+                new WavefrontObject().parse("/models/tomato_09.obj")};
     }
 
     @Override
@@ -1127,6 +1142,10 @@ public class ClientProxy implements IProxy
         ModLoader.addLocalization("item.javelin.name", "Javelin");
 
         ModLoader.addLocalization("item.SeedsWheat.name", "Wheat Seeds");
+        ModLoader.addLocalization("item.SeedsWildWheat.name", "Wild Wheat Seeds");
+        ModLoader.addLocalization("item.SeedsCorn.name", "Corn Seeds");
+        ModLoader.addLocalization("item.SeedsTomato.name", "Tomato Seeds");
+        
         ModLoader.addLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
         ModLoader.addLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
         ModLoader.addLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");

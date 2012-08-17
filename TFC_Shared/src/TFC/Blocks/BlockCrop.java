@@ -35,6 +35,17 @@ public class BlockCrop extends BlockContainer
         
         TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+        if(crop != null)
+        {
+            ItemStack is1 = crop.getOutput1();
+            ItemStack is2 = crop.getOutput2();
+            
+            if(is1 != null)
+                world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+            
+            if(is2 != null)
+                world.spawnEntityInWorld(new EntityItem(world, i, j, k, is2));
+        }
     }
 
 	/**
@@ -85,6 +96,12 @@ public class BlockCrop extends BlockContainer
 	{
 		return false;
 	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/bioxx/TFC_Plants.png";
+    }
 
     @Override
     public TileEntity getBlockEntity()

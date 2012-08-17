@@ -11,6 +11,7 @@ import TFC.Core.HeatManager;
 import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
 import TFC.Core.TFCSeasons;
+import TFC.Core.TFCSettings;
 import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
 import TFC.Items.ItemTerraMeltedMetal;
@@ -47,7 +48,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     private int externalWoodCount;
     public int charcoalCounter;
 
-    public final int FIREBURNTIME = 240;//default 240
+    public final int FIREBURNTIME = (int) ((TFCSeasons.hourLength*18)/100);//default 240
 
     private static int[] area =  {0,0,2,2,2,0,0};
     private static int[] area0 = {0,2,1,1,1,2,0};

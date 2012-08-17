@@ -4,6 +4,8 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import bioxx.importers.WavefrontObject;
+
 import TFC.Blocks.BlockFiniteWater;
 import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.BlockTerraAnvil;
@@ -22,6 +24,7 @@ import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.WorldGen.TFCBiome;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
@@ -3262,12 +3265,15 @@ public class TFC_CoreRender
             return var13;
         }
     }
+  
+    public static WavefrontObject[] TomatoPlant;
     
     public static boolean RenderCrop(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
         IBlockAccess blockaccess = renderblocks.blockAccess;
         TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+        Minecraft mc = ModLoader.getMinecraftInstance();
         
         int stage = (int) Math.floor(te.growth);
         if(stage > crop.numGrowthStages)
@@ -3280,7 +3286,7 @@ public class TFC_CoreRender
                 Tessellator var5 = Tessellator.instance;
                 var5.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
                 var5.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("terrain.png"));
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/terrain.png"));
 
                 int index = 88 + stage;
                 
@@ -3292,16 +3298,36 @@ public class TFC_CoreRender
                 Tessellator var5 = Tessellator.instance;
                 var5.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
                 var5.setColorOpaque_F(0.8F, 0.8F, 0.8F);
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("terrain.png"));
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/terrain.png"));
+                mc.renderEngine.bindTexture(0);
 
                 int index = 88 + stage;
                 
                 renderBlockCropsImpl(block, blockaccess.getBlockMetadata(i, j, k), (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index);
                 break;
             }
+            case 3:
+            {
+                int tex = 0;
+                int x = (tex & 0xf);
+                int y = (tex & 0xf0) >> 4;
+
+                
+                double uMin = (double)((float)x / 256.0F);
+                double uMax = (double)(((float)x + 15.99F) / 256.0F);
+                double vMin = (double)((float)y / 256.0F);
+                double vMax = (double)(((float)y + 15.99F) / 256.0F);
+                
+                uMin = (0.0625*x);
+                vMin = (0.0625*y);
+                
+                TomatoPlant[4].drawUV(i, j, k, uMin, uMax, vMin, vMax);
+                break;
+            }
             default:
             {
                 renderblocks.renderBlockCrops(block, i, j, k);
+                break;
             }
         }
 

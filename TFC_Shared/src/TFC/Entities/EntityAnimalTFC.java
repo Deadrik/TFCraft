@@ -103,7 +103,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		//adultTime = TFCSeasons.getTotalTicks() - par1;
+		adultTime = TFCSeasons.getTotalTicks() - par1;
 		dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
 
