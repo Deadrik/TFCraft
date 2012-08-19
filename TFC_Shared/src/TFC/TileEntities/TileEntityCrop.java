@@ -12,13 +12,9 @@ import net.minecraft.src.*;
 
 public class TileEntityCrop extends TileEntity
 {
-    //temp
-
-
-    //important
     public float growth;
     public int cropId;
-    private long growthTimer;
+    private long growthTimer;//Tracks the time since the plant was planted
     private byte sunLevel;
 
     public TileEntityCrop()
@@ -28,24 +24,28 @@ public class TileEntityCrop extends TileEntity
         sunLevel = 5;
     }
 
+    private boolean checkedSun = false;
     @Override
     public void updateEntity()
     {
         Random R = new Random();
-        if(!worldObj.isRemote)
+        if(!worldObj.isRemote && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0)
         {
             long hours = TFCSeasons.totalHours();
             
-            if(TFCSeasons.getHour() == 12)
+            if(!checkedSun && TFCSeasons.getHour() == 12)
             {
                 if(worldObj.getBlockLightValue(xCoord, yCoord, zCoord) < 15)
                     sunLevel--;
                 else
                     sunLevel++;
+                
+                checkedSun = true;
             }
             
             if(growthTimer < hours && sunLevel > 0)
             {
+                checkedSun = false;
                 CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
                 TileEntityFarmland tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
                 
@@ -82,7 +82,7 @@ public class TileEntityCrop extends TileEntity
 
                 growth += growthRate;
                 
-                if(growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || tef.waterSaturation == -1)
+                if(growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || tef.waterSaturation <= -1)
                     worldObj.setBlock(xCoord, yCoord, zCoord, 0);
                 
                 growthTimer += R.nextInt(2)+23;
@@ -92,6 +92,11 @@ public class TileEntityCrop extends TileEntity
                 worldObj.setBlock(xCoord, yCoord, zCoord, 0);
             }
         }
+    }
+    
+    public float getEstimatedGrowth(CropIndex crop)
+    {
+        return ((float)crop.numGrowthStages/(growthTimer/TFCSeasons.dayLength))*1.5f;
     }
 
 

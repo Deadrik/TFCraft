@@ -56,11 +56,7 @@ public class BlockTerraSed extends BlockCollapsable
         Random R = new Random();
         if(R.nextBoolean())
             dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1+R.nextInt(4), l+3));
-        
-        if(TFCSettings.enableDebugMode)
-        {
-            System.out.println("Harvest Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(l).toString());  
-        }
+
         super.harvestBlock(world, entityplayer, i, j, k, l);
     }
 

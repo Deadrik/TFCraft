@@ -82,17 +82,20 @@ public class ClientProxy implements IProxy
         ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
         ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
         
-        TFC_CoreRender.TomatoPlant = new WavefrontObject[]{
-                new WavefrontObject().parse("/models/tomato_00.obj"),
-                new WavefrontObject().parse("/models/tomato_01.obj"),
-                new WavefrontObject().parse("/models/tomato_02.obj"),
-                new WavefrontObject().parse("/models/tomato_03.obj"),
-                new WavefrontObject().parse("/models/box.obj"),
-                new WavefrontObject().parse("/models/tomato_05.obj"),
-                new WavefrontObject().parse("/models/tomato_06.obj"),
-                new WavefrontObject().parse("/models/tomato_07.obj"),
-                new WavefrontObject().parse("/models/tomato_08.obj"),
-                new WavefrontObject().parse("/models/tomato_09.obj")};
+        try{
+//        TFC_CoreRender.TomatoPlant = new WavefrontObject[]{
+//                new WavefrontObject().parse("/models/tomato_00.obj"),
+//                new WavefrontObject().parse("/models/tomato_01.obj"),
+//                new WavefrontObject().parse("/models/tomato_02.obj"),
+//                new WavefrontObject().parse("/models/tomato_03.obj"),
+//                new WavefrontObject().parse("/models/box.obj"),
+//                new WavefrontObject().parse("/models/tomato_05.obj"),
+//                new WavefrontObject().parse("/models/tomato_06.obj"),
+//                new WavefrontObject().parse("/models/tomato_07.obj"),
+//                new WavefrontObject().parse("/models/tomato_08.obj"),
+//                new WavefrontObject().parse("/models/tomato_09.obj")};
+        }
+        catch(Exception ex){}
     }
 
     @Override

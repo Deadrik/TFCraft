@@ -122,7 +122,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	{
 		Entity entity = par1DamageSource.getEntity();
 		fearSource = par1DamageSource.getEntity();
-		System.out.println("yep");
+		//System.out.println("yep");
 		if (entity.getClass() == getClass() && (((EntityAnimalTFC)entity).rutting)){
 			setAttackTarget((EntityLiving)entity);
 			if (getHealth() <= getMaxHealth()/4){
@@ -442,8 +442,8 @@ public class EntityAnimalTFC extends EntityAnimal
 	}
 	public void giveBirth (EntityAnimalTFC entityanimal){
 		entityanimal.setGrowingAge (-TFCSettings.dayLength * entityanimal.adultAge);
-		System.out.println("yep");
-		System.out.println(posX);
+		//System.out.println("yep");
+		//System.out.println(posX);
 		entityanimal.setLocationAndAngles (posX,posY,posZ, 0.0F, 0.0F);
 		if(worldObj.spawnEntityInWorld (entityanimal)){
 			children.add(entityanimal);

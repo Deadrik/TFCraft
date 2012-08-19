@@ -56,6 +56,21 @@ public class BlockCrop extends BlockContainer
 	{
 		return null;
 	}
+	
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+    {
+	    TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
+	    int type = 0;
+	    if(te != null)
+	    {
+	        type = te.cropId;
+	    }
+	    
+	    if(type == 4)
+	        return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+2, k+1);
+	    
+	    return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
+    }
 
 	/**
 	 * Returns the ID of the items to drop on destruction.

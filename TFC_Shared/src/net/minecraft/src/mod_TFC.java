@@ -14,57 +14,12 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
-import vazkii.um.UpdateManager;
-import vazkii.um.UpdateManagerMod;
-
 import TFC.*;
 import TFC.Blocks.*;
-import TFC.Core.EntityLivingHandler;
-import TFC.Core.IProxy;
-import TFC.Core.ItemDyeCustom;
-import TFC.Core.PacketHandler;
-import TFC.Core.PlayerInfo;
-import TFC.Core.PlayerManagerTFC;
-import TFC.Core.PlayerTFC;
-import TFC.Core.ServerClientProxy;
-import TFC.Core.TFCHeat;
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
-import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Game;
-import TFC.Entities.EntityBear;
-import TFC.Entities.EntityChickenTFC;
-import TFC.Entities.EntityCowTFC;
-import TFC.Entities.EntityDeer;
-import TFC.Entities.EntityFallingDirt;
-import TFC.Entities.EntityFallingStone;
-import TFC.Entities.EntityFallingStone2;
-import TFC.Entities.EntityPigTFC;
-import TFC.Entities.EntitySquidTFC;
-import TFC.Entities.EntityTerraJavelin;
-import TFC.Entities.EntityWolfTFC;
-import TFC.Items.ItemIgEx;
-import TFC.Items.ItemIgExCobble;
-import TFC.Items.ItemIgIn;
-import TFC.Items.ItemIgInCobble;
-import TFC.Items.ItemMM;
-import TFC.Items.ItemMMCobble;
-import TFC.Items.ItemOre1;
-import TFC.Items.ItemOre2;
-import TFC.Items.ItemOre3;
-import TFC.Items.ItemSed;
-import TFC.Items.ItemSedCobble;
-import TFC.Items.ItemTerraDirt;
-import TFC.TileEntities.TileEntityFruitTreeWood;
-import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityTerraBloomery;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraForge;
-import TFC.TileEntities.TileEntityTerraLogPile;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
-import TFC.TileEntities.TileEntityTerraScribe;
-import TFC.TileEntities.TileEntityTerraSluice;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.Core.*;
+import TFC.Entities.*;
+import TFC.Items.*;
+import TFC.TileEntities.*;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ITickHandler;
@@ -79,12 +34,9 @@ import net.minecraft.src.forge.ICraftingHandler;
 import net.minecraft.src.forge.IOreHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
-import net.minecraft.src.vazkii.updatemanager.IUpdateManager;
-import net.minecraft.src.vazkii.updatemanager.ModType;
-import net.minecraft.src.vazkii.updatemanager.UMCore;
 import net.minecraft.src.TFCItems;
 
-public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
+public class mod_TFC extends NetworkMod implements ITickHandler
 {
     static Configuration config;
     public static mod_TFC instance;
@@ -224,10 +176,8 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
     public void load()
     {
         instance = this;
-        UMCore.addMod(this);
 
         MinecraftForge.registerConnectionHandler(new PacketHandler());
-        PlayerAPI.register("PlayerTFC", PlayerTFC.class);
 
         sulfurRenderId = proxy.getUniqueBlockModelID(this, false);
         woodSupportRenderIdH = proxy.getUniqueBlockModelID(this, false);
@@ -316,37 +266,37 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
         ModLoader.registerBlock(stoneStalac);
 
         //Items
-        Item.itemsList[terraStoneIgEx.blockID] = new ItemIgEx(terraStoneIgEx.blockID - 256);
-        Item.itemsList[terraStoneSed.blockID] = new ItemSed(terraStoneSed.blockID - 256);
-        Item.itemsList[terraStoneIgIn.blockID] = new ItemIgIn(terraStoneIgIn.blockID - 256);
-        Item.itemsList[terraStoneMM.blockID] = new ItemMM(terraStoneMM.blockID - 256);
-        Item.itemsList[terraOre.blockID] = new ItemOre1(terraOre.blockID - 256);
-        Item.itemsList[terraOre2.blockID] = new ItemOre2(terraOre2.blockID - 256);
-        Item.itemsList[terraOre3.blockID] = new ItemOre3(terraOre3.blockID - 256);
-
-        Item.itemsList[terraStoneIgExCobble.blockID] = new ItemIgExCobble(terraStoneIgExCobble.blockID - 256);
-        Item.itemsList[terraStoneSedCobble.blockID] = new ItemSedCobble(terraStoneSedCobble.blockID - 256);
-        Item.itemsList[terraStoneIgInCobble.blockID] = new ItemIgInCobble(terraStoneIgInCobble.blockID - 256);
-        Item.itemsList[terraStoneMMCobble.blockID] = new ItemMMCobble(terraStoneMMCobble.blockID - 256);
-
-        Item.itemsList[terraStoneIgExBrick.blockID] = new ItemIgExCobble(terraStoneIgExBrick.blockID - 256);
-        Item.itemsList[terraStoneSedBrick.blockID] = new ItemSedCobble(terraStoneSedBrick.blockID - 256);
-        Item.itemsList[terraStoneIgInBrick.blockID] = new ItemIgInCobble(terraStoneIgInBrick.blockID - 256);
-        Item.itemsList[terraStoneMMBrick.blockID] = new ItemMMCobble(terraStoneMMBrick.blockID - 256);
-
-        Item.itemsList[terraStoneIgExSmooth.blockID] = new ItemIgExCobble(terraStoneIgExSmooth.blockID - 256);
-        Item.itemsList[terraStoneSedSmooth.blockID] = new ItemSedCobble(terraStoneSedSmooth.blockID - 256);
-        Item.itemsList[terraStoneIgInSmooth.blockID] = new ItemIgInCobble(terraStoneIgInSmooth.blockID - 256);
-        Item.itemsList[terraStoneMMSmooth.blockID] = new ItemMMCobble(terraStoneMMSmooth.blockID - 256);
-
-        Item.itemsList[terraGrass.blockID] = new ItemTerraDirt(terraGrass.blockID - 256);
-        Item.itemsList[terraGrass2.blockID] = new ItemTerraDirt(terraGrass2.blockID - 256);
-        Item.itemsList[terraDirt.blockID] = new ItemTerraDirt(terraDirt.blockID - 256);
-        Item.itemsList[terraDirt2.blockID] = new ItemTerraDirt(terraDirt2.blockID - 256);
-        Item.itemsList[terraClay.blockID] = new ItemTerraDirt(terraClay.blockID - 256);
-        Item.itemsList[terraClay2.blockID] = new ItemTerraDirt(terraClay2.blockID - 256);
-        Item.itemsList[terraClayGrass.blockID] = new ItemTerraDirt(terraClayGrass.blockID - 256);
-        Item.itemsList[terraClayGrass2.blockID] = new ItemTerraDirt(terraClayGrass2.blockID - 256);
+//        Item.itemsList[terraStoneIgEx.blockID] = new ItemIgEx(terraStoneIgEx.blockID - 256);
+//        Item.itemsList[terraStoneSed.blockID] = new ItemSed(terraStoneSed.blockID - 256);
+//        Item.itemsList[terraStoneIgIn.blockID] = new ItemIgIn(terraStoneIgIn.blockID - 256);
+//        Item.itemsList[terraStoneMM.blockID] = new ItemMM(terraStoneMM.blockID - 256);
+//        Item.itemsList[terraOre.blockID] = new ItemOre1(terraOre.blockID - 256);
+//        Item.itemsList[terraOre2.blockID] = new ItemOre2(terraOre2.blockID - 256);
+//        Item.itemsList[terraOre3.blockID] = new ItemOre3(terraOre3.blockID - 256);
+//
+//        Item.itemsList[terraStoneIgExCobble.blockID] = new ItemIgExCobble(terraStoneIgExCobble.blockID - 256);
+//        Item.itemsList[terraStoneSedCobble.blockID] = new ItemSedCobble(terraStoneSedCobble.blockID - 256);
+//        Item.itemsList[terraStoneIgInCobble.blockID] = new ItemIgInCobble(terraStoneIgInCobble.blockID - 256);
+//        Item.itemsList[terraStoneMMCobble.blockID] = new ItemMMCobble(terraStoneMMCobble.blockID - 256);
+//
+//        Item.itemsList[terraStoneIgExBrick.blockID] = new ItemIgExCobble(terraStoneIgExBrick.blockID - 256);
+//        Item.itemsList[terraStoneSedBrick.blockID] = new ItemSedCobble(terraStoneSedBrick.blockID - 256);
+//        Item.itemsList[terraStoneIgInBrick.blockID] = new ItemIgInCobble(terraStoneIgInBrick.blockID - 256);
+//        Item.itemsList[terraStoneMMBrick.blockID] = new ItemMMCobble(terraStoneMMBrick.blockID - 256);
+//
+//        Item.itemsList[terraStoneIgExSmooth.blockID] = new ItemIgExCobble(terraStoneIgExSmooth.blockID - 256);
+//        Item.itemsList[terraStoneSedSmooth.blockID] = new ItemSedCobble(terraStoneSedSmooth.blockID - 256);
+//        Item.itemsList[terraStoneIgInSmooth.blockID] = new ItemIgInCobble(terraStoneIgInSmooth.blockID - 256);
+//        Item.itemsList[terraStoneMMSmooth.blockID] = new ItemMMCobble(terraStoneMMSmooth.blockID - 256);
+//
+//        Item.itemsList[terraGrass.blockID] = new ItemTerraDirt(terraGrass.blockID - 256);
+//        Item.itemsList[terraGrass2.blockID] = new ItemTerraDirt(terraGrass2.blockID - 256);
+//        Item.itemsList[terraDirt.blockID] = new ItemTerraDirt(terraDirt.blockID - 256);
+//        Item.itemsList[terraDirt2.blockID] = new ItemTerraDirt(terraDirt2.blockID - 256);
+//        Item.itemsList[terraClay.blockID] = new ItemTerraDirt(terraClay.blockID - 256);
+//        Item.itemsList[terraClay2.blockID] = new ItemTerraDirt(terraClay2.blockID - 256);
+//        Item.itemsList[terraClayGrass.blockID] = new ItemTerraDirt(terraClayGrass.blockID - 256);
+//        Item.itemsList[terraClayGrass2.blockID] = new ItemTerraDirt(terraClayGrass2.blockID - 256);
 
 
 
@@ -401,8 +351,7 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
 
         FMLCommonHandler.instance().registerTickHandler(this);
         MinecraftForge.registerEntityLivingHandler(new EntityLivingHandler());
-        //last thing
-        initOreDictionary();
+
     }
 
 
@@ -814,275 +763,6 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
         MinecraftForge.setToolClass(TFCItems.ZincSaw, "axe", 1);
     }
 
-    public static void initOreDictionary() 
-    {
-        MinecraftForge.registerOre("terraRock", new ItemStack(terraStoneIgIn,1));
-        MinecraftForge.registerOre("terraRock", new ItemStack(terraStoneIgEx,1));
-        MinecraftForge.registerOre("terraRock", new ItemStack(terraStoneSed,1));
-        MinecraftForge.registerOre("terraRock", new ItemStack(terraStoneMM,1));
-        MinecraftForge.registerOre("terraRockIgIn", new ItemStack(terraStoneIgIn,1));
-        MinecraftForge.registerOre("terraRockIgEx", new ItemStack(terraStoneIgEx,1));
-        MinecraftForge.registerOre("terraRockSed", new ItemStack(terraStoneSed,1));
-        MinecraftForge.registerOre("terraRockMM", new ItemStack(terraStoneMM,1));
-
-        MinecraftForge.registerOre("terraRockGranite", new ItemStack(terraStoneIgIn,1,0));
-        MinecraftForge.registerOre("terraRockDiorite", new ItemStack(terraStoneIgIn,1,1));
-        MinecraftForge.registerOre("terraRockGabbro", new ItemStack(terraStoneIgIn,1,2));
-        MinecraftForge.registerOre("terraRockSiltstone", new ItemStack(terraStoneSed,1,3));
-        MinecraftForge.registerOre("terraRockMudstone", new ItemStack(terraStoneSed,1,4));
-        MinecraftForge.registerOre("terraRockShale", new ItemStack(terraStoneSed,1,5));
-        MinecraftForge.registerOre("terraRockClaystone", new ItemStack(terraStoneSed,1,6));
-        MinecraftForge.registerOre("terraRockRockSalt", new ItemStack(terraStoneSed,1,7));
-        MinecraftForge.registerOre("terraRockLimestone", new ItemStack(terraStoneSed,1,8));
-        MinecraftForge.registerOre("terraRockConglomerate", new ItemStack(terraStoneSed,1,9));
-        MinecraftForge.registerOre("terraRockDolomite", new ItemStack(terraStoneSed,1,10));
-        MinecraftForge.registerOre("terraRockChert", new ItemStack(terraStoneSed,1,11));
-        MinecraftForge.registerOre("terraRockChalk", new ItemStack(terraStoneSed,1,12));
-        MinecraftForge.registerOre("terraRockRhyolite", new ItemStack(terraStoneIgEx,1,13));
-        MinecraftForge.registerOre("terraRockBasalt", new ItemStack(terraStoneIgEx,1,14));
-        MinecraftForge.registerOre("terraRockAndesite", new ItemStack(terraStoneIgEx,1,15));
-        MinecraftForge.registerOre("terraRockDacite", new ItemStack(terraStoneIgEx,1,16));
-        MinecraftForge.registerOre("terraRockQuartzite", new ItemStack(terraStoneMM,1,17));
-        MinecraftForge.registerOre("terraRockSlate", new ItemStack(terraStoneMM,1,18));
-        MinecraftForge.registerOre("terraRockPhyllite", new ItemStack(terraStoneMM,1,19));
-        MinecraftForge.registerOre("terraRockSchist", new ItemStack(terraStoneMM,1,20));
-        MinecraftForge.registerOre("terraRockGneiss", new ItemStack(terraStoneMM,1,21));
-        MinecraftForge.registerOre("terraRockMarble", new ItemStack(terraStoneMM,1,22));
-
-        MinecraftForge.registerOre("terraOreNativeCopper", new ItemStack(terraOre,1,23));
-        MinecraftForge.registerOre("terraOreNativeGold", new ItemStack(terraOre,1,24));
-        MinecraftForge.registerOre("terraOreNativePlatinum", new ItemStack(terraOre,1,25));
-        MinecraftForge.registerOre("terraOreHematite", new ItemStack(terraOre,1,26));
-        MinecraftForge.registerOre("terraOreNativeSilver", new ItemStack(terraOre,1,27));
-        MinecraftForge.registerOre("terraOreCassiterite", new ItemStack(terraOre,1,28));
-        MinecraftForge.registerOre("terraOreGalena", new ItemStack(terraOre,1,29));
-        MinecraftForge.registerOre("terraOreBismuthinite", new ItemStack(terraOre,1,30));
-        MinecraftForge.registerOre("terraOreGarnierite", new ItemStack(terraOre,1,31));
-        MinecraftForge.registerOre("terraOreMalachite", new ItemStack(terraOre,1,32));
-        MinecraftForge.registerOre("terraOreMagnetite", new ItemStack(terraOre,1,33));
-        MinecraftForge.registerOre("terraOreLimonite", new ItemStack(terraOre,1,34));
-        MinecraftForge.registerOre("terraOreSphalerite", new ItemStack(terraOre,1,35));
-        MinecraftForge.registerOre("terraOreTetrahedrite", new ItemStack(terraOre,1,36));
-        MinecraftForge.registerOre("terraOreBituminousCoal", new ItemStack(terraOre,1,37));
-        MinecraftForge.registerOre("terraOreLignite", new ItemStack(terraOre,1,38));
-        MinecraftForge.registerOre("terraOreKaolinite", new ItemStack(terraOre2,1,39));
-        MinecraftForge.registerOre("terraOreGypsum", new ItemStack(terraOre2,1,40));
-        MinecraftForge.registerOre("terraOreSatinspar", new ItemStack(terraOre2,1,41));
-        MinecraftForge.registerOre("terraOreSelenite", new ItemStack(terraOre2,1,42));
-        MinecraftForge.registerOre("terraOreGraphite", new ItemStack(terraOre2,1,43));
-        MinecraftForge.registerOre("terraOreKimberlite", new ItemStack(terraOre2,1,44));
-        MinecraftForge.registerOre("terraOrePetrifiedWood", new ItemStack(terraOre2,1,45));
-        MinecraftForge.registerOre("terraOreSulfur", new ItemStack(terraOre2,1,46));
-        MinecraftForge.registerOre("terraOreJet", new ItemStack(terraOre2,1,47));
-        MinecraftForge.registerOre("terraOreMicrocline", new ItemStack(terraOre2,1,48));
-        MinecraftForge.registerOre("terraOrePitchblende", new ItemStack(terraOre2,1,49));
-        MinecraftForge.registerOre("terraOreCinnabar", new ItemStack(terraOre2,1,50));
-        MinecraftForge.registerOre("terraOreCryolite", new ItemStack(terraOre2,1,51));
-        MinecraftForge.registerOre("terraOreSaltpeter", new ItemStack(terraOre2,1,52));
-        MinecraftForge.registerOre("terraOreSerpentine", new ItemStack(terraOre2,1,53));
-        MinecraftForge.registerOre("terraOreSylvite", new ItemStack(terraOre2,1,54));
-        MinecraftForge.registerOre("terraOreBorax", new ItemStack(terraOre3,1,55));
-        MinecraftForge.registerOre("terraOreOlivine", new ItemStack(terraOre3,1,56));
-        MinecraftForge.registerOre("terraOreLapisLazuli", new ItemStack(terraOre3,1,57));
-
-        MinecraftForge.registerOre("oreTin", new ItemStack(TFCItems.OreChunk,1,28));
-        MinecraftForge.registerOre("oreCopper", new ItemStack(terraOre,1,23));
-        MinecraftForge.registerOre("oreCopper", new ItemStack(terraOre,1,36));
-        MinecraftForge.registerOre("oreIron", new ItemStack(terraOre,1,26));
-        MinecraftForge.registerOre("oreIron", new ItemStack(terraOre,1,33));
-        MinecraftForge.registerOre("oreIron", new ItemStack(terraOre,1,34));
-        MinecraftForge.registerOre("oreGold", new ItemStack(terraOre,1,24));
-        MinecraftForge.registerOre("oreSilver", new ItemStack(terraOre,1,27));
-        MinecraftForge.registerOre("oreSilver", new ItemStack(terraOre,1,29));
-        MinecraftForge.registerOre("oreZinc", new ItemStack(terraOre,1,35));
-        MinecraftForge.registerOre("oreBismuth", new ItemStack(terraOre,1,30));
-        MinecraftForge.registerOre("oreNickel", new ItemStack(terraOre,1,31));
-        MinecraftForge.registerOre("orePlatinum", new ItemStack(terraOre,1,25));
-        MinecraftForge.registerOre("itemOreUran", new ItemStack(terraOre2,1,49));
-
-        MinecraftForge.registerOre("ingotBismuth", new ItemStack(TFCItems.BismuthIngot,1));
-        MinecraftForge.registerOre("ingotBismuthBronze", new ItemStack(TFCItems.BismuthBronzeIngot,1));
-        MinecraftForge.registerOre("ingotBrass", new ItemStack(TFCItems.BrassIngot,1));
-        MinecraftForge.registerOre("ingotBronze", new ItemStack(TFCItems.BronzeIngot,1));
-        MinecraftForge.registerOre("ingotBlackBronze", new ItemStack(TFCItems.BlackBronzeIngot,1));
-        MinecraftForge.registerOre("ingotBlackSteel", new ItemStack(TFCItems.BlackSteelIngot,1));
-        MinecraftForge.registerOre("ingotBlueSteel", new ItemStack(TFCItems.BlueSteelIngot,1));
-        MinecraftForge.registerOre("ingotCopper", new ItemStack(TFCItems.CopperIngot,1));
-        MinecraftForge.registerOre("ingotGold", new ItemStack(TFCItems.GoldIngot,1));
-        MinecraftForge.registerOre("ingotWroughtIron", new ItemStack(TFCItems.WroughtIronIngot,1));
-        MinecraftForge.registerOre("ingotLead", new ItemStack(TFCItems.LeadIngot,1));
-        MinecraftForge.registerOre("ingotNickel", new ItemStack(TFCItems.NickelIngot,1));
-        MinecraftForge.registerOre("ingotPigIron", new ItemStack(TFCItems.PigIronIngot,1));
-        MinecraftForge.registerOre("ingotPlatinum", new ItemStack(TFCItems.PlatinumIngot,1));
-        MinecraftForge.registerOre("ingotRedSteel", new ItemStack(TFCItems.RedSteelIngot,1));
-        MinecraftForge.registerOre("ingotRoseGold", new ItemStack(TFCItems.RoseGoldIngot,1));
-        MinecraftForge.registerOre("ingotSilver", new ItemStack(TFCItems.SilverIngot,1));
-        MinecraftForge.registerOre("ingotSteel", new ItemStack(TFCItems.SteelIngot,1));
-        MinecraftForge.registerOre("ingotRefinedIron", new ItemStack(TFCItems.SteelIngot,1));
-        MinecraftForge.registerOre("ingotSterlingSilver", new ItemStack(TFCItems.SterlingSilverIngot,1));
-        MinecraftForge.registerOre("ingotTin", new ItemStack(TFCItems.TinIngot,1));
-        MinecraftForge.registerOre("ingotZinc", new ItemStack(TFCItems.ZincIngot,1));
-
-        MinecraftForge.registerOre("gemAgateChipped", new ItemStack(TFCItems.terraGemAgate, 1, 0));
-        MinecraftForge.registerOre("gemAgateFlawed", new ItemStack(TFCItems.terraGemAgate, 1, 1));
-        MinecraftForge.registerOre("gemAgate", new ItemStack(TFCItems.terraGemAgate, 1, 2));
-        MinecraftForge.registerOre("gemAgateFlawless", new ItemStack(TFCItems.terraGemAgate, 1, 3));
-        MinecraftForge.registerOre("gemAgateExquisite", new ItemStack(TFCItems.terraGemAgate, 1, 4));
-        MinecraftForge.registerOre("gemAmethystChipped", new ItemStack(TFCItems.terraGemAmethyst, 1, 0));
-        MinecraftForge.registerOre("gemAmethystFlawed", new ItemStack(TFCItems.terraGemAmethyst, 1, 1));
-        MinecraftForge.registerOre("gemAmethyst", new ItemStack(TFCItems.terraGemAmethyst, 1, 2));
-        MinecraftForge.registerOre("gemAmethystFlawless", new ItemStack(TFCItems.terraGemAmethyst, 1, 3));
-        MinecraftForge.registerOre("gemAmethystExquisite", new ItemStack(TFCItems.terraGemAmethyst, 1, 4));
-        MinecraftForge.registerOre("gemBerylChipped", new ItemStack(TFCItems.terraGemBeryl, 1, 0));
-        MinecraftForge.registerOre("gemBerylFlawed", new ItemStack(TFCItems.terraGemBeryl, 1, 1));
-        MinecraftForge.registerOre("gemBeryl", new ItemStack(TFCItems.terraGemBeryl, 1, 2));
-        MinecraftForge.registerOre("gemBerylFlawless", new ItemStack(TFCItems.terraGemBeryl, 1, 3));
-        MinecraftForge.registerOre("gemBerylExquisite", new ItemStack(TFCItems.terraGemBeryl, 1, 4));
-
-        MinecraftForge.registerOre("gemEmeraldChipped", new ItemStack(TFCItems.terraGemEmerald, 1, 0));
-        MinecraftForge.registerOre("gemEmeraldFlawed", new ItemStack(TFCItems.terraGemEmerald, 1, 1));
-        MinecraftForge.registerOre("gemEmerald", new ItemStack(TFCItems.terraGemEmerald, 1, 2));
-        MinecraftForge.registerOre("gemEmeraldFlawless", new ItemStack(TFCItems.terraGemEmerald, 1, 3));
-        MinecraftForge.registerOre("gemEmeraldExquisite", new ItemStack(TFCItems.terraGemEmerald, 1, 4));
-
-        MinecraftForge.registerOre("gemGarnetChipped", new ItemStack(TFCItems.terraGemGarnet, 1, 0));
-        MinecraftForge.registerOre("gemGarnetFlawed", new ItemStack(TFCItems.terraGemGarnet, 1, 1));
-        MinecraftForge.registerOre("gemGarnet", new ItemStack(TFCItems.terraGemGarnet, 1, 2));
-        MinecraftForge.registerOre("gemGarnetFlawless", new ItemStack(TFCItems.terraGemGarnet, 1, 3));
-        MinecraftForge.registerOre("gemGarnetExquisite", new ItemStack(TFCItems.terraGemGarnet, 1, 4));
-
-        MinecraftForge.registerOre("gemJadeChipped", new ItemStack(TFCItems.terraGemJade, 1, 0));
-        MinecraftForge.registerOre("gemJadeFlawed", new ItemStack(TFCItems.terraGemJade, 1, 1));
-        MinecraftForge.registerOre("gemJade", new ItemStack(TFCItems.terraGemJade, 1, 2));
-        MinecraftForge.registerOre("gemJadeFlawless", new ItemStack(TFCItems.terraGemJade, 1, 3));
-        MinecraftForge.registerOre("gemJadeExquisite", new ItemStack(TFCItems.terraGemJade, 1, 4));
-
-        MinecraftForge.registerOre("gemJasperChipped", new ItemStack(TFCItems.terraGemJasper, 1, 0));
-        MinecraftForge.registerOre("gemJasperFlawed", new ItemStack(TFCItems.terraGemJasper, 1, 1));
-        MinecraftForge.registerOre("gemJasper", new ItemStack(TFCItems.terraGemJasper, 1, 2));
-        MinecraftForge.registerOre("gemJasperFlawless", new ItemStack(TFCItems.terraGemJasper, 1, 3));
-        MinecraftForge.registerOre("gemJasperExquisite", new ItemStack(TFCItems.terraGemJasper, 1, 4));
-
-        MinecraftForge.registerOre("gemOpalChipped", new ItemStack(TFCItems.terraGemOpal, 1, 0));
-        MinecraftForge.registerOre("gemOpalFlawed", new ItemStack(TFCItems.terraGemOpal, 1, 1));
-        MinecraftForge.registerOre("gemOpal", new ItemStack(TFCItems.terraGemOpal, 1, 2));
-        MinecraftForge.registerOre("gemOpalFlawless", new ItemStack(TFCItems.terraGemOpal, 1, 3));
-        MinecraftForge.registerOre("gemOpalExquisite", new ItemStack(TFCItems.terraGemOpal, 1, 4));
-
-        MinecraftForge.registerOre("gemRubyChipped", new ItemStack(TFCItems.terraGemRuby, 1, 0));
-        MinecraftForge.registerOre("gemRubyFlawed", new ItemStack(TFCItems.terraGemRuby, 1, 1));
-        MinecraftForge.registerOre("gemRuby", new ItemStack(TFCItems.terraGemRuby, 1, 2));
-        MinecraftForge.registerOre("gemRubyFlawless", new ItemStack(TFCItems.terraGemRuby, 1, 3));
-        MinecraftForge.registerOre("gemRubyExquisite", new ItemStack(TFCItems.terraGemRuby, 1, 4));
-
-        MinecraftForge.registerOre("gemSapphireChipped", new ItemStack(TFCItems.terraGemSapphire, 1, 0));
-        MinecraftForge.registerOre("gemSapphireFlawed", new ItemStack(TFCItems.terraGemSapphire, 1, 1));
-        MinecraftForge.registerOre("gemSapphire", new ItemStack(TFCItems.terraGemSapphire, 1, 2));
-        MinecraftForge.registerOre("gemSapphireFlawless", new ItemStack(TFCItems.terraGemSapphire, 1, 3));
-        MinecraftForge.registerOre("gemSapphireExquisite", new ItemStack(TFCItems.terraGemSapphire, 1, 4));
-
-        MinecraftForge.registerOre("gemTourmalineChipped", new ItemStack(TFCItems.terraGemTourmaline, 1, 0));
-        MinecraftForge.registerOre("gemTourmalineFlawed", new ItemStack(TFCItems.terraGemTourmaline, 1, 1));
-        MinecraftForge.registerOre("gemTourmaline", new ItemStack(TFCItems.terraGemTourmaline, 1, 2));
-        MinecraftForge.registerOre("gemTourmalineFlawless", new ItemStack(TFCItems.terraGemTourmaline, 1, 3));
-        MinecraftForge.registerOre("gemTourmalineExquisite", new ItemStack(TFCItems.terraGemTourmaline, 1, 4));
-
-        MinecraftForge.registerOre("gemTopazChipped", new ItemStack(TFCItems.terraGemTopaz, 1, 0));
-        MinecraftForge.registerOre("gemTopazFlawed", new ItemStack(TFCItems.terraGemTopaz, 1, 1));
-        MinecraftForge.registerOre("gemTopaz", new ItemStack(TFCItems.terraGemTopaz, 1, 2));
-        MinecraftForge.registerOre("gemTopazFlawless", new ItemStack(TFCItems.terraGemTopaz, 1, 3));
-        MinecraftForge.registerOre("gemTopazExquisite", new ItemStack(TFCItems.terraGemTopaz, 1, 4));
-
-        MinecraftForge.registerOreHandler(new IOreHandler() 
-        {
-            public void registerOre(String oreClass, ItemStack ore) 
-            {
-                Object[] pickaxeRecipe = new Object[] { "111"," 2 "," 2 ", Character.valueOf('1'), ore,Character.valueOf('2'), Item.stick};
-                Object[] shovelRecipe = new Object[] { "1 ","2 ","2 ", Character.valueOf('1'), ore,Character.valueOf('2'), Item.stick};
-                Object[] hoeRecipe = new Object[] { "11"," 2"," 2", Character.valueOf('1'), ore,Character.valueOf('2'), Item.stick};
-                Object[] axeRecipe = new Object[] { "11 ","12 "," 2 ", Character.valueOf('1'), ore,Character.valueOf('2'), Item.stick};
-
-                if (oreClass.equals("ingotBismuth"))
-                {
-
-                }
-                if (oreClass.equals("ingotBismuthBronze"))
-                {
-
-                }
-                if (oreClass.equals("ingotBlackBronze"))
-                {
-
-                }
-                if (oreClass.equals("ingotBlackSteel"))
-                {
-
-                }
-                if (oreClass.equals("ingotBlueSteel"))
-                {
-
-                }
-                if (oreClass.equals("ingotBronze"))
-                {
-
-                }
-                if (oreClass.equals("ingotCopper"))
-                {
-
-                }
-                if (oreClass.equals("ingotGold"))
-                {
-
-                }
-                if (oreClass.equals("ingotWroughtIron"))
-                {
-
-                }
-                if (oreClass.equals("ingotNickel"))
-                {
-
-                }
-                if (oreClass.equals("ingotPigIron"))
-                {
-
-                }
-                if (oreClass.equals("ingotPlatinum"))
-                {
-
-                }
-                if (oreClass.equals("ingotRedSteel"))
-                {
-
-                }
-                if (oreClass.equals("ingotRoseGold"))
-                {
-
-                }
-                if (oreClass.equals("ingotSilver"))
-                {
-
-                }
-                if (oreClass.equals("ingotSteel"))
-                {
-
-                }
-                if (oreClass.equals("ingotSterlingSilver"))
-                {
-
-                }
-                if (oreClass.equals("ingotTin"))
-                {
-
-                }
-                if (oreClass.equals("ingotZinc"))
-                {
-
-                }
-            }
-        });
-
-    }
-
     @Override
     public boolean clientSideRequired() {
         // TODO Auto-generated method stub
@@ -1093,24 +773,6 @@ public class mod_TFC extends NetworkMod implements IUpdateManager, ITickHandler
     public boolean serverSideRequired() {
         // TODO Auto-generated method stub
         return true;
-    }
-
-
-    public String getUpdateURL()
-    {
-        return "http://www.terrafirmacraft.com/files/TFCVersion.txt";
-    }
-
-
-    public String getModURL()
-    {
-        return "http://www.terrafirmacraft.com/download/change-log/";
-    }
-
-
-    public ModType getModType()
-    {
-        return ModType.CORE;
     }
 
     @Override

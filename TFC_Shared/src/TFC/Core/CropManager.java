@@ -54,10 +54,13 @@ public class CropManager
         
         instance.addIndex(new CropIndex(/*ID*/1, /*Name*/"wild wheat", /*type*/0, /*time*/130, /*stages*/7, /*minGTemp*/8, /*minATemp*/-4, /*nutrientUsage*/1.0f).setOutput1(Item.wheat, 1, 2).setOutput2Chance(TFCItems.SeedsWildWheat, 1, 2, 5));
         
-        instance.addIndex(new CropIndex(/*ID*/2, /*Name*/"corn", /*type*/0, /*time*/135, /*stages*/7, /*minGTemp*/8, /*minATemp*/-4, /*nutrientUsage*/1.2f, 
+        instance.addIndex(new CropIndex(/*ID*/2, /*Name*/"corn", /*type*/0, /*time*/135, /*stages*/5, /*minGTemp*/8, /*minATemp*/-4, /*nutrientUsage*/1.2f, 
                 /*out1Item*/Item.wheat, /*out1Min*/1, /*out1Max*/2, /*out2Item*/TFCItems.SeedsCorn, /*out2Min*/1, /*out2Max*/3));
         
-        instance.addIndex(new CropIndex(/*ID*/3, /*Name*/"tomatoes", /*type*/0, /*time*/60, /*stages*/7, /*minGTemp*/8, /*minATemp*/-4, /*nutrientUsage*/1.2f, 
-                /*out1Item*/Item.wheat, /*out1Min*/1, /*out1Max*/2, /*out2Item*/TFCItems.SeedsTomato, /*out2Min*/1, /*out2Max*/3));
+        instance.addIndex(new CropIndex(/*ID*/3, /*Name*/"wild corn", /*type*/0, /*time*/135, /*stages*/5, /*minGTemp*/8, /*minATemp*/-4, /*nutrientUsage*/1.2f, 
+                /*out1Item*/Item.wheat, /*out1Min*/1, /*out1Max*/2, /*out2Item*/TFCItems.SeedsCorn, /*out2Min*/1, /*out2Max*/3));
+        
+        instance.addIndex(new CropIndex(/*ID*/4, /*Name*/"tomatoes", /*type*/0, /*time*/60, /*stages*/7, /*minGTemp*/8, /*minATemp*/-4, /*nutrientUsage*/1.2f, 
+                /*out1Item*/Item.wheat, /*out1Min*/1, /*out1Max*/2, /*out2Item*/TFCItems.SeedsTomato, /*out2Min*/1, /*out2Max*/3).setWaterUsage(1.2f));
     }
 }

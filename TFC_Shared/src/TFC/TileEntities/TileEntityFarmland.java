@@ -12,7 +12,7 @@ public class TileEntityFarmland extends TileEntity
 {
     public long nutrientTimer = -1;
     public int[] nutrients = {8500,8500,8500};
-    public byte waterSaturation = 1;
+    public float waterSaturation = 10;
 
     public TileEntityFarmland()
     {
@@ -55,19 +55,19 @@ public class TileEntityFarmland extends TileEntity
                 if(BlockTerraFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord))
                 {
                     waterSaturation += 1;
-                    if(waterSaturation > 7)
-                        waterSaturation = 7;
+                    if(waterSaturation > 30)
+                        waterSaturation = 30;
                 }
                 else
                 {
-                    waterSaturation--;
+                    waterSaturation -= 1*crop.waterUsageMult;
                 }
                 
                 if(worldObj.isRaining() && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
                 {
-                    waterSaturation += 1;
-                    if(waterSaturation > 7)
-                        waterSaturation = 7;
+                    waterSaturation += 3;
+                    if(waterSaturation > 30)
+                        waterSaturation = 30;
                 }
             }
         }
@@ -87,7 +87,7 @@ public class TileEntityFarmland extends TileEntity
         
         nutrients = par1NBTTagCompound.getIntArray("nutrients");
         nutrientTimer = par1NBTTagCompound.getLong("nutrientTimer");
-        waterSaturation = par1NBTTagCompound.getByte("waterSaturation");
+        waterSaturation = par1NBTTagCompound.getFloat("waterSaturation");
     }
 
     /**
@@ -98,6 +98,6 @@ public class TileEntityFarmland extends TileEntity
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setIntArray("nutrients", nutrients);
         par1NBTTagCompound.setLong("nutrientTimer", nutrientTimer);
-        par1NBTTagCompound.setByte("waterSaturation", waterSaturation);        
+        par1NBTTagCompound.setFloat("waterSaturation", waterSaturation);        
     }
 }

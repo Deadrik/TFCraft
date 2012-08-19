@@ -66,7 +66,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 			}
 			if(field_48240_d.posX != field_48240_d.prevPosX || field_48240_d.posZ != field_48240_d.prevPosZ){
 				theEntity.panic+=300/this.field_48240_d.getDistanceSqToEntity(this.theEntity);
-				System.out.println(theEntity.panic);
+				//System.out.println("Panic: "+theEntity.panic);
 				if (field_48240_d.isSneaking()){
 					theEntity.panic-=100/this.field_48240_d.getDistanceSqToEntity(this.theEntity);
 				}

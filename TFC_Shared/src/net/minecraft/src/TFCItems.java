@@ -739,7 +739,24 @@ public class TFCItems
     public static Item SeedsPumpkin;
     public static Item SeedsWildWheat;
     public static Item SeedsCorn;
+    public static Item SeedsWildCorn;
     public static Item SeedsTomato;
+    public static Item SeedsBarley;
+    public static Item SeedsWildBarley;
+    public static Item SeedsRye;
+    public static Item SeedsWildRye;
+    public static Item SeedsOat;
+    public static Item SeedsWildOat;
+    public static Item SeedsRice;
+    public static Item SeedsWildRice;
+    public static Item SeedsPotato;
+    public static Item SeedsWildPotato;
+    public static Item SeedsOnion;
+    public static Item SeedsCabbage;
+    public static Item SeedsGarlic;
+    public static Item SeedsCarrot;
+    public static Item SeedsSugarcane;
+    public static Item SeedsHemp;
     
     public static Item FruitTreeSapling1;
     public static Item FruitTreeSapling2;
@@ -1450,11 +1467,29 @@ public class TFCItems
         Plum = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Fruit.Plum",num), 2, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(7, 0).setItemName("Fruit.Plum");num++;
         EggCooked = new ItemTerraFood(TFCSettings.getIntFor(config,"item","Meat.EggCooked",num), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Meat.EggCooked");num++;
         
-        num = 18500;
-        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num),0).setItemName("SeedsWheat").setIconCoord(9, 0);num++;
-        SeedsWildWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildWheat",num),1).setItemName("SeedsWildWheat").setIconCoord(9, 0);num++;
-        SeedsCorn = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsCorn",num),2).setItemName("SeedsCorn").setIconCoord(9, 0);num++;
-        SeedsTomato = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsTomato",num),3).setItemName("SeedsTomato").setIconCoord(9, 0);num++;
+        num = 18900;
+        SeedsWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWheat",num++),0).setItemName("SeedsWheat").setIconCoord(9, 0);
+        SeedsWildWheat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildWheat",num++),1).setItemName("SeedsWildWheat").setIconCoord(9, 0);
+        SeedsCorn = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsCorn",num++),2).setItemName("SeedsCorn").setIconCoord(9, 0);
+        SeedsWildCorn = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildCorn",num++),3).setItemName("SeedsWildCorn").setIconCoord(9, 0);
+        SeedsTomato = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsTomato",num++),4).setItemName("SeedsTomato").setIconCoord(9, 0);
+        SeedsBarley = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsBarley",num++),5).setItemName("SeedsBarley").setIconCoord(9, 0);
+        SeedsWildBarley = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildBarley",num++),6).setItemName("SeedsWildBarley").setIconCoord(9, 0);
+        SeedsRye = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsRye",num++),7).setItemName("SeedsRye").setIconCoord(9, 0);
+        SeedsWildRye = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildRye",num++),8).setItemName("SeedsWildRye").setIconCoord(9, 0);
+        SeedsOat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsOat",num++),9).setItemName("SeedsOat").setIconCoord(9, 0);
+        SeedsWildOat = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildBarley",num++),10).setItemName("SeedsWildBarley").setIconCoord(9, 0);
+        SeedsRice = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsRice",num++),11).setItemName("SeedsRice").setIconCoord(9, 0);
+        SeedsWildRice = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildRice",num++),12).setItemName("SeedsWildRice").setIconCoord(9, 0);
+        SeedsPotato = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsPotato",num++),13).setItemName("SeedsPotato").setIconCoord(9, 0);
+        SeedsWildPotato = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsWildPotato",num++),14).setItemName("SeedsWildPotato").setIconCoord(9, 0);
+        SeedsOnion = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsOnion",num++),15).setItemName("SeedsOnion").setIconCoord(9, 0);
+        SeedsCabbage = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsCabbage",num++),16).setItemName("SeedsCabbage").setIconCoord(9, 0);
+        SeedsGarlic = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsGarlic",num++),17).setItemName("SeedsGarlic").setIconCoord(9, 0);
+        SeedsCarrot = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsCarrot",num++),18).setItemName("SeedsCarrot").setIconCoord(9, 0);
+        SeedsSugarcane = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsSugarcane",num++),19).setItemName("SeedsSugarcane").setIconCoord(9, 0);
+        SeedsHemp = new ItemCustomSeeds(TFCSettings.getIntFor(config,"item","SeedsHemp",num++),20).setItemName("SeedsHemp").setIconCoord(9, 0);
+        
         
         
         /**Armor Crafting related items*/

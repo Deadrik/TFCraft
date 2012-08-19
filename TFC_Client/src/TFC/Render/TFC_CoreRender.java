@@ -3279,49 +3279,44 @@ public class TFC_CoreRender
         if(stage > crop.numGrowthStages)
             stage = crop.numGrowthStages;
         
+        int meta = blockaccess.getBlockMetadata(i, j, k);
+        
+        float est = te.getEstimatedGrowth(crop);
+        float mult = 0.85f + (0.15f * (te.growth / est));
+        if(mult > 1.15f) {mult = 1.15f;}
+        
         switch(te.cropId)
         {
-            case 0:
+            case 0://Wheat
             {
-                Tessellator var5 = Tessellator.instance;
-                var5.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
-                var5.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/terrain.png"));
-
-                int index = 88 + stage;
+                byte index = (byte) (16 + stage);
                 
-                renderBlockCropsImpl(block, blockaccess.getBlockMetadata(i, j, k), (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index);
+                renderBlockCropsImpl(block, (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index, mult, 1.0);
                 break;
             }
-            case 1:
+            case 1://Wild Wheat
             {
-                Tessellator var5 = Tessellator.instance;
-                var5.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
-                var5.setColorOpaque_F(0.8F, 0.8F, 0.8F);
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/terrain.png"));
-                mc.renderEngine.bindTexture(0);
-
-                int index = 88 + stage;
+                byte index = (byte) (16 + stage);
                 
-                renderBlockCropsImpl(block, blockaccess.getBlockMetadata(i, j, k), (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index);
+                renderBlockCropsImpl(block, (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index, mult, 1.0);
                 break;
             }
-            case 3:
+            case 2://Corn
             {
-                int tex = 0;
-                int x = (tex & 0xf);
-                int y = (tex & 0xf0) >> 4;
-
-                
-                double uMin = (double)((float)x / 256.0F);
-                double uMax = (double)(((float)x + 15.99F) / 256.0F);
-                double vMin = (double)((float)y / 256.0F);
-                double vMax = (double)(((float)y + 15.99F) / 256.0F);
-                
-                uMin = (0.0625*x);
-                vMin = (0.0625*y);
-                
-                TomatoPlant[4].drawUV(i, j, k, uMin, uMax, vMin, vMax);
+                byte index = (byte) (96 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 2.0);
+                break;
+            }
+            case 3://Wild Corn
+            {
+                byte index = (byte) (96 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 2.0);
+                break;
+            }
+            case 4://Tomato
+            {                
+                byte index = (byte) (240 + stage);
+                drawCrossedSquares(block, i, j, k, index, 1.0f, 2.0);
                 break;
             }
             default:
@@ -3334,61 +3329,102 @@ public class TFC_CoreRender
         return true;
     }
     
-    public static void renderBlockCropsImpl(Block par1Block, int par2, double par3, double par5, double par7, RenderBlocks renderblocks, int tex)
+    public static void renderBlockCropsImpl(Block par1Block, double par3, double par5, double par7, RenderBlocks renderblocks, byte index, float heightMult, double height)
     {
         Tessellator var9 = Tessellator.instance;
-        int var10 = tex;
 
-        if (renderblocks.overrideBlockTexture >= 0)
-        {
-            var10 = renderblocks.overrideBlockTexture;
-        }
-
-        int var11 = (var10 & 15) << 4;
-        int var12 = var10 & 240;
-        double var13 = (double)((float)var11 / 256.0F);
-        double var15 = (double)(((float)var11 + 15.99F) / 256.0F);
-        double var17 = (double)((float)var12 / 256.0F);
-        double var19 = (double)(((float)var12 + 15.99F) / 256.0F);
+        int texX = (index & 15) << 4;
+        int texY = (index+(16-(int)(16*height))) & 240;
+        
+        double var13 = (double)((float)texX / 256.0F);
+        double var15 = (double)(((float)texX + 15.99F) / 256.0F);
+        double var17 = (double)((float)texY / 256.0F);
+        double var19 = (double)(((float)texY + 15.99F) / 256.0F);
         double var21 = par3 + 0.5D - 0.25D;
         double var23 = par3 + 0.5D + 0.25D;
         double var25 = par7 + 0.5D - 0.5D;
         double var27 = par7 + 0.5D + 0.5D;
-        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var15, var17);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var15, var17);
+        
+        double y = par5;        
+        
+        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var13, var17);
+        var9.addVertexWithUV(var21, y + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var21, y + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var15, var17);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var13, var17);
+        var9.addVertexWithUV(var21, y + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var21, y + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var15, var17);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var13, var17);
+        var9.addVertexWithUV(var23, y + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var23, y + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var15, var17);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var13, var17);
+        var9.addVertexWithUV(var23, y + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var23, y + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var15, var17);
         var21 = par3 + 0.5D - 0.5D;
         var23 = par3 + 0.5D + 0.5D;
         var25 = par7 + 0.5D - 0.25D;
         var27 = par7 + 0.5D + 0.25D;
-        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var25, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var25, var15, var17);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var13, var17);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var15, var17);
-        var9.addVertexWithUV(var21, par5 + 1.0D, var27, var13, var17);
-        var9.addVertexWithUV(var21, par5 + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, par5 + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, par5 + 1.0D, var27, var15, var17);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var13, var17);
+        var9.addVertexWithUV(var21, y + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var23, y + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var15, var17);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var13, var17);
+        var9.addVertexWithUV(var23, y + 0.0D, var25, var13, var19);
+        var9.addVertexWithUV(var21, y + 0.0D, var25, var15, var19);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var15, var17);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var13, var17);
+        var9.addVertexWithUV(var23, y + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var21, y + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var15, var17);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var13, var17);
+        var9.addVertexWithUV(var21, y + 0.0D, var27, var13, var19);
+        var9.addVertexWithUV(var23, y + 0.0D, var27, var15, var19);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var15, var17);
     }
+
+    public static void drawCrossedSquares(Block par1Block, double par3, double par5, double par7, byte index, float heightMult, double height)
+    {
+        Tessellator var9 = Tessellator.instance;
+
+        var9.setColorOpaque_F(1.0f, 1.0f, 1.0f);
+        int texX = (index & 15) << 4;
+        int texY = index & 240;
+        int texY2 = (index+(16-(int)(16*height))) & 240;
+        
+        double minX = (double)((float)texX / 256.0F);
+        double maxX = (double)(((float)texX + 15.99F) / 256.0F);
+        double minY = (double)((float)texY2 / 256.0F);
+        double maxY = (double)(((float)texY + 15.99F) / 256.0F);
+        
+        double var21 = par3 + 0.5D - 0.45D;
+        double var23 = par3 + 0.5D + 0.45D;
+        double var25 = par7 + 0.5D - 0.45D;
+        double var27 = par7 + 0.5D + 0.45D;
+        
+        double y = par5;    
+        
+        var9.addVertexWithUV(var21, y + (height*heightMult), var25, minX, minY);
+        var9.addVertexWithUV(var21, y + 0.0D, var25, minX, maxY);
+        var9.addVertexWithUV(var23, y + 0.0D, var27, maxX, maxY);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var27, maxX, minY);
+        
+        var9.addVertexWithUV(var23, y + (height*heightMult), var27, minX, minY);
+        var9.addVertexWithUV(var23, y + 0.0D, var27, minX, maxY);
+        var9.addVertexWithUV(var21, y + 0.0D, var25, maxX, maxY);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var25, maxX, minY);
+        
+        var9.addVertexWithUV(var21, y + (height*heightMult), var27, minX, minY);
+        var9.addVertexWithUV(var21, y + 0.0D, var27, minX, maxY);
+        var9.addVertexWithUV(var23, y + 0.0D, var25, maxX, maxY);
+        var9.addVertexWithUV(var23, y + (height*heightMult), var25, maxX, minY);
+        
+        var9.addVertexWithUV(var23, y + (height*heightMult), var25, minX, minY);
+        var9.addVertexWithUV(var23, y + 0.0D, var25, minX, maxY);
+        var9.addVertexWithUV(var21, y + 0.0D, var27, maxX, maxY);
+        var9.addVertexWithUV(var21, y + (height*heightMult), var27, maxX, minY);
+    }
+    
 }

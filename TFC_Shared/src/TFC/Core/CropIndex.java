@@ -27,6 +27,7 @@ public class CropIndex
     public int Output2Max;
     
     public boolean needsSunlight = true;
+    public float waterUsageMult = 1;
     
     
     
@@ -118,6 +119,12 @@ public class CropIndex
     public CropIndex setNeedsSunlight(boolean b)
     {
         needsSunlight = b;
+        return this;
+    }
+    
+    public CropIndex setWaterUsage(float m)
+    {
+        waterUsageMult = m;
         return this;
     }
 }

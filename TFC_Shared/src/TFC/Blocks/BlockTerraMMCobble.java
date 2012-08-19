@@ -88,12 +88,6 @@ public class BlockTerraMMCobble extends BlockTerra2 implements ITextureProvider
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{	
 		super.harvestBlock(world, entityplayer, i, j, k, l);
-		
-		if(TFCSettings.enableDebugMode)
-		{
-		    int meta = l;
-		    System.out.println("Harvest Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(meta).toString());  
-		}
 	}
 
 	public void onBlockAdded(World world, int i, int j, int k)
