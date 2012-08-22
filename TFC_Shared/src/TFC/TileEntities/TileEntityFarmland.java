@@ -11,12 +11,11 @@ import net.minecraft.src.*;
 public class TileEntityFarmland extends TileEntity
 {
     public long nutrientTimer = -1;
-    public int[] nutrients = {8500,8500,8500};
+    public int[] nutrients = {85000,85000,85000};
     public float waterSaturation = 10;
 
     public TileEntityFarmland()
     {
-        nutrients = new int[]{8500,8500,8500};
     }
 
     @Override
@@ -33,21 +32,31 @@ public class TileEntityFarmland extends TileEntity
                 if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID))
                 {
                     crop = CropManager.getInstance().getCropFromId(((TileEntityCrop)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).cropId);
+                    
+                    if((crop.cycleType != 0))
+                    {
+                        if(nutrients[0] < 120000)
+                            nutrients[0] += crop.nutrientExtraRestore[0];
+                    }
+                    if((crop.cycleType != 1))
+                    {
+                        if(nutrients[1] < 120000)
+                            nutrients[1] += crop.nutrientExtraRestore[1];
+                    }
+                    if((crop.cycleType != 2))
+                    {
+                        if(nutrients[2] < 120000)
+                            nutrients[2] += crop.nutrientExtraRestore[2];
+                    }
                 }
-                if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0 || (crop != null && crop.cycleType != 0))
+                else
                 {
-                    if(nutrients[0] < 12000)
-                        nutrients[0]+=8;
-                }
-                if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0 || (crop != null && crop.cycleType != 1))
-                {
-                    if(nutrients[1] < 12000)
-                        nutrients[1]+=8;
-                }
-                if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0 || (crop != null && crop.cycleType != 2))
-                {
-                    if(nutrients[2] < 12000)
-                        nutrients[2]+=8;
+                    if(nutrients[0] < 120000)
+                        nutrients[0]+=80;
+                    if(nutrients[1] < 120000)
+                        nutrients[1]+=80;
+                    if(nutrients[2] < 120000)
+                        nutrients[2]+=80;
                 }
 
                 nutrientTimer+=24;
@@ -75,7 +84,7 @@ public class TileEntityFarmland extends TileEntity
 
     public void DrainNutrients(int type, float multiplier)
     {
-        nutrients[type] -= 10*multiplier;
+        nutrients[type] -= 250*multiplier;
     }
 
     /**

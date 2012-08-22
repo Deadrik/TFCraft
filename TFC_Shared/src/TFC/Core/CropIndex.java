@@ -14,24 +14,25 @@ public class CropIndex
     public int numGrowthStages;
     public float minGrowthTemp;
     public float minAliveTemp;
-    public float nutrientUsage;
-    
+    public float nutrientUsageMult;
+    public int[] nutrientExtraRestore;
+    public boolean dormantInFrost;
+    public int maxLifespan = -1;
+
     public int chanceForOutput1 = 100;
     public Item Output1;
     public int Output1Min;
     public int Output1Max;
-    
+
     public int chanceForOutput2 = 100;
     public Item Output2;
     public int Output2Min;
     public int Output2Max;
-    
+
     public boolean needsSunlight = true;
     public float waterUsageMult = 1;
-    
-    
-    
-    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nUsage, Item out1, int out1Min, int out1Max, Item out2, int out2Min, int out2Max)
+
+    private CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp)
     {
         growthTime = growth;
         cycleType = type;
@@ -40,26 +41,22 @@ public class CropIndex
         numGrowthStages = stages;
         minGrowthTemp = minGTemp;
         minAliveTemp = minATemp;
-        Output1 = out1;
-        Output1Min = out1Min;
-        Output1Max = out1Max;
-        Output2 = out2;
-        Output2Min = out2Min;
-        Output2Max = out2Max;
-        nutrientUsage = nUsage;
+        nutrientExtraRestore = new int[]{0,0,0};
+        nutrientUsageMult = 1.0f;
+        dormantInFrost = false;
     }
-    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nUsage)
+    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier)
     {
-        growthTime = growth;
-        cycleType = type;
-        cropName = name.toLowerCase();
-        cropId = ID;
-        numGrowthStages = stages;
-        minGrowthTemp = minGTemp;
-        minAliveTemp = minATemp;
-        nutrientUsage = nUsage;
+        this(ID,name,type,growth,stages,minGTemp,minATemp);
+        nutrientUsageMult = nutrientUsageMultiplier;
     }
-    
+    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, int[] nutriRestore)
+    {
+        this(ID,name,type,growth,stages,minGTemp,minATemp);
+        nutrientExtraRestore = nutriRestore;
+        nutrientUsageMult = nutrientUsageMultiplier;
+    }
+
     public CropIndex setOutput1(Item o, int oMin, int oMax)
     {
         Output1 = o;
@@ -89,42 +86,59 @@ public class CropIndex
         Output2Max = oMax;
         chanceForOutput2 = chance;
         return this;
-    }
-    
+    }  
     public ItemStack getOutput1()
     {
-        ItemStack is = new ItemStack(Output1);
-        Random R = new Random();
-        if(R.nextInt(100) < chanceForOutput1)
+        if(Output1 != null)
         {
-            is.stackSize = Output1Min + R.nextInt(Output1Max-Output1Min);
-            if(is.stackSize > 0)
-                return is;
+            ItemStack is = new ItemStack(Output1);
+            Random R = new Random();
+            if(R.nextInt(100) < chanceForOutput1)
+            {
+                int added = 0;
+                if(Output1Max > Output1Min)
+                    added = R.nextInt(Output1Max-Output1Min);
+                is.stackSize = Output1Min + added;
+                if(is.stackSize > 0)
+                    return is;
+            }
         }
         return null;
     }
     public ItemStack getOutput2()
     {
-        ItemStack is = new ItemStack(Output2);
-        Random R = new Random();
-        if(R.nextInt(100) < chanceForOutput2)
+        if(Output2 != null)
         {
-            is.stackSize = Output2Min + R.nextInt(Output2Max-Output2Min);
-            if(is.stackSize > 0)
-                return is;
+            ItemStack is = new ItemStack(Output2);
+            Random R = new Random();
+            if(R.nextInt(100) < chanceForOutput2)
+            {
+                int added = 0;
+                if(Output2Max > Output2Min)
+                    added = R.nextInt(Output2Max-Output2Min);
+                is.stackSize = Output2Min + added;
+                if(is.stackSize > 0)
+                    return is;
+            }
         }
         return null;
     }
-    
+
     public CropIndex setNeedsSunlight(boolean b)
     {
         needsSunlight = b;
         return this;
     }
-    
+
     public CropIndex setWaterUsage(float m)
     {
         waterUsageMult = m;
+        return this;
+    }
+
+    public CropIndex setGoesDormant(boolean b)
+    {
+        dormantInFrost = b;
         return this;
     }
 }

@@ -81,24 +81,21 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 	{
 		return false;
 	}
-	
-	public boolean isCollidable()
-    {
-        return false;
-    }
 
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
 	{
-		if (par1World.getBlockId(par2, par3-1, par4) == 0)
+		if (world.getBlockId(i, j-1, k) == 0)
 		{
-			this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-			par1World.setBlockWithNotify(par2, par3, par4, 0);
+		    this.harvestBlock(world,null,i,j,k,par5);
+			//this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+			world.setBlockWithNotify(i, j, k, 0);
 			return;
 		}
-		if (!Block.blocksList[par1World.getBlockId(par2, par3-1, par4)].isOpaqueCube())
+		if (!Block.blocksList[world.getBlockId(i, j-1, k)].isOpaqueCube())
 		{
-			this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-			par1World.setBlockWithNotify(par2, par3, par4, 0);
+		    this.harvestBlock(world,null,i,j,k,par5);
+			//this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+			world.setBlockWithNotify(i, j, k, 0);
 			return;
 		}
 	}

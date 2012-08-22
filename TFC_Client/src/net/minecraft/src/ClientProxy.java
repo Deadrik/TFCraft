@@ -697,16 +697,161 @@ public class ClientProxy implements IProxy
     public void registerTranslations() 
     {
         ModLoader.addLocalization("Key_Calendar", "Open Calendar");
-        String[] Names = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze","Copper","Gold"
-                ,"Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver", "Steel", "Sterling Silver",
-                "Tin", "Zinc"};
+
+        
+
+        //Gems
+        String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
+                "Jade","Garnet","Amethyst","Beryl","Jasper","Tourmaline","Diamond"};
+
+        for(int i= 0; i < GemNames.length; i++)
+        {
+            ModLoader.addLocalization("item."+GemNames[i]+".Chipped.name", "Chipped "+GemNames[i]);
+            ModLoader.addLocalization("item."+GemNames[i]+".Flawed.name", "Flawed "+GemNames[i]);
+            ModLoader.addLocalization("item."+GemNames[i]+".Normal.name",  GemNames[i]);
+            ModLoader.addLocalization("item."+GemNames[i]+".Flawless.name", "Flawless "+GemNames[i]);
+            ModLoader.addLocalization("item."+GemNames[i]+".Exquisite.name", "Exquisite "+GemNames[i]);
+        }
+
+        ModLoader.addLocalization("item.javelin.name", "Javelin");
+
+        ModLoader.addLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
+        ModLoader.addLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
+        ModLoader.addLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");
+
+        ModLoader.addLocalization("item.SluiceItem.name", "Sluice");
+
+        ModLoader.addLocalization("item.GoldPan.GoldPan.name", "Gold Pan - Empty");
+        ModLoader.addLocalization("item.GoldPan.GoldPanSand.name", "Gold Pan - Sand");
+        ModLoader.addLocalization("item.GoldPan.GoldPanGravel.name", "Gold Pan - Gravel");
+        ModLoader.addLocalization("item.GoldPan.GoldPanClay.name", "Gold Pan - Clay");
+        ModLoader.addLocalization("item.GoldPan.GoldPanDirt.name", "Gold Pan - Dirt");
+    
+        ModLoader.addLocalization("item.terraFireStarter.name", "Firestarter");
+        ModLoader.addLocalization("item.terraSlag.name", "Slag");
+
+
+        ModLoader.addLocalization("item.terraBellowsItem.name", "Bellows");
+        ModLoader.addLocalization("tile.terraBellows.name", "Bellows");
+        ModLoader.addLocalization("tile.terraScribe.name", "Scribing Table");
+        ModLoader.addLocalization("item.terraInk.name", "Marking");
+        ModLoader.addLocalization("item.terraClayMold.name", "Clay Mold");
+        ModLoader.addLocalization("item.terraFiredClayMold.name", "Ceramic Mold");
+        ModLoader.addLocalization("tile.terraForge.name", "Forge");
+        ModLoader.addLocalization("tile.terraBloomery.name", "Bloomery");
+        ModLoader.addLocalization("tile.terraMetallurgy.name", "Metallurgy Table");
+
+        ModLoader.addLocalization("item.PickaxeHeadPlan.name", "Plan: Pickaxe Head");
+        ModLoader.addLocalization("item.ShovelHeadPlan.name", "Plan: Shovel Head");
+        ModLoader.addLocalization("item.HoeHeadPlan.name", "Plan: Hoe Head");
+        ModLoader.addLocalization("item.AxeHeadPlan.name", "Plan: Axe Head");
+        ModLoader.addLocalization("item.HammerHeadPlan.name", "Plan: Hammer Head");
+        ModLoader.addLocalization("item.ChiselHeadPlan.name", "Plan: Chisel Head");
+        ModLoader.addLocalization("item.SwordBladePlan.name", "Plan: Sword Blade");
+        ModLoader.addLocalization("item.MaceHeadPlan.name", "Plan: Mace Head");
+        ModLoader.addLocalization("item.SawBladePlan.name", "Plan: Saw Head");
+        ModLoader.addLocalization("item.ProPickHeadPlan.name", "Plan: Prospecter's Pick Head");
+        ModLoader.addLocalization("item.HelmetPlan.name", "Plan: Plate Helmet");
+        ModLoader.addLocalization("item.ChestplatePlan.name", "Plan: Chestplate");
+        ModLoader.addLocalization("item.GreavesPlan.name", "Plan: Plate Greaves");
+        ModLoader.addLocalization("item.BootsPlan.name", "Plan: Plate Boots");
+        ModLoader.addLocalization("item.ScythePlan.name", "Plan: Scythe Blade");
+        ModLoader.addLocalization("item.KnifePlan.name", "Plan: Knife Blade");
+
+        ModLoader.addLocalization("item.coke.name", "Coke");
+        ModLoader.addLocalization("item.flux.name", "Flux");
+        
+        RegisterTerrain();
+        RegisterMetal();
+        RegisterFood();
+        RegisterWood();
+    }
+    
+    private void RegisterFood()
+    {
+        String[] FruitTreeNames = {"Red Apple","Banana", "Orange", "Green Apple","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
+        for(int i= 0; i < FruitTreeNames.length; i++)
+        {
+            ModLoader.addLocalization("item.FruitSapling1."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
+            ModLoader.addLocalization("item.FruitSapling2."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
+            ModLoader.addLocalization("item.Fruit."+FruitTreeNames[i]+".name", FruitTreeNames[i]);
+        }
+        
+        ModLoader.addLocalization("item.SeedsWheat.name", "Wheat Seeds");
+        ModLoader.addLocalization("item.SeedsWildWheat.name", "Wild Wheat Seeds");
+        ModLoader.addLocalization("item.SeedsMaize.name", "Maize Seeds");
+        ModLoader.addLocalization("item.SeedsWildMaize.name", "Wild Maize Seeds");
+        ModLoader.addLocalization("item.SeedsTomato.name", "Tomato Seeds");
+        ModLoader.addLocalization("item.SeedsBarley.name", "Barley Seeds");
+        ModLoader.addLocalization("item.SeedsWildBarley.name", "Wild Barley Seeds");
+        ModLoader.addLocalization("item.SeedsRye.name", "Rye Seeds");
+        ModLoader.addLocalization("item.SeedsWildRye.name", "Wild Rye Seeds");
+        ModLoader.addLocalization("item.SeedsOat.name", "Oat Seeds");
+        ModLoader.addLocalization("item.SeedsWildOat.name", "Wild Oat Seeds");
+        ModLoader.addLocalization("item.SeedsRice.name", "Rice Seeds");
+        ModLoader.addLocalization("item.SeedsWildRice.name", "Wild Rice Seeds");
+        ModLoader.addLocalization("item.SeedsPotato.name", "Potato Seeds");
+        ModLoader.addLocalization("item.SeedsWildPotato.name", "Wild Potato Seeds");
+        ModLoader.addLocalization("item.SeedsOnion.name", "Onion Seeds");
+        ModLoader.addLocalization("item.SeedsCabbage.name", "Cabbage Seeds");
+        ModLoader.addLocalization("item.SeedsGarlic.name", "Garlic Seeds");
+        ModLoader.addLocalization("item.SeedsCarrot.name", "Carrot Seeds");
+        ModLoader.addLocalization("item.SeedsSugarcane.name", "Sugarcane Seeds");
+        ModLoader.addLocalization("item.SeedsHemp.name", "Hemp Seeds");
+        ModLoader.addLocalization("item.SeedsSoybean.name", "Soybean Seeds");
+        ModLoader.addLocalization("item.SeedsGreenbean.name", "Greenbean Seeds");
+        ModLoader.addLocalization("item.SeedsYam.name", "Yam Seeds");
+        ModLoader.addLocalization("item.SeedsBellPepper.name", "Bell Pepper Seeds");
+        ModLoader.addLocalization("item.SeedsSquash.name", "Squash Seeds");
+        
+        
+        ModLoader.addLocalization("item.Meat.EggCooked.name", "Cooked Egg");
+        
+        ModLoader.addLocalization("item.WheatGrain.name", "Wheat Grain");
+        ModLoader.addLocalization("item.WildWheatGrain.name", "Wild Wheat Grain");
+        ModLoader.addLocalization("item.WheatWhole.name", "Wheat");
+        ModLoader.addLocalization("item.BarleyGrain.name", "Barley Grain");
+        ModLoader.addLocalization("item.WildBarleyGrain.name", "Wild Barley Grain");
+        ModLoader.addLocalization("item.BarleyWhole.name", "Barley");
+        ModLoader.addLocalization("item.OatGrain.name", "Oat Grain");
+        ModLoader.addLocalization("item.WildOatGrain.name", "Wild Oat Grain");
+        ModLoader.addLocalization("item.OatWhole.name", "Oat");
+        ModLoader.addLocalization("item.RyeGrain.name", "Rye Grain");
+        ModLoader.addLocalization("item.WildRyeGrain.name", "Wild Rye Grain");
+        ModLoader.addLocalization("item.RyeWhole.name", "Rye");
+        ModLoader.addLocalization("item.RiceGrain.name", "Rice Grain");
+        ModLoader.addLocalization("item.WildRiceGrain.name", "Wild Rice Grain");
+        ModLoader.addLocalization("item.RiceWhole.name", "Rice");
+        
+        ModLoader.addLocalization("item.MaizeEar.name", "Maize Ear");
+        ModLoader.addLocalization("item.WildMaizeEar.name", "Wild Maize Ear");
+        ModLoader.addLocalization("item.Tomato.name", "Tomato");
+        ModLoader.addLocalization("item.Potato.name", "Potato");
+        ModLoader.addLocalization("item.WildPotato.name", "Wild Potato");
+        
+        ModLoader.addLocalization("item.Onion.name", "Onion");
+        ModLoader.addLocalization("item.Cabbage.name", "Cabbage");
+        ModLoader.addLocalization("item.Garlic.name", "Garlic");
+        ModLoader.addLocalization("item.Carrot.name", "Carrot");
+        ModLoader.addLocalization("item.Sugarcane.name", "Sugarcane");
+        ModLoader.addLocalization("item.Hemp.name", "Hemp");
+        ModLoader.addLocalization("item.Soybeans.name", "Soybeans");
+        ModLoader.addLocalization("item.Greenbeans.name", "Greenbeans");
+        ModLoader.addLocalization("item.Yam.name", "Yam");
+        ModLoader.addLocalization("item.GreenBellPepper.name", "Green Bell Pepper");
+        ModLoader.addLocalization("item.YellowBellPepper.name", "Yellow Bell Pepper");
+        ModLoader.addLocalization("item.RedBellPepper.name", "Red Bell Pepper");
+        ModLoader.addLocalization("item.Squash.name", "Squash");
+        
+    }
+    
+    private void RegisterTerrain()
+    {
         String[] rockNames = {"Granite", "Diorite", "Gabbro", 
-            "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-            "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
-            "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-        /*==================================================================
-         * TFC Core Localization
-         *==================================================================*/
+                "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
+                "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
+                "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+        
         for(int i= 0; i < rockNames.length; i++)
         {
             ModLoader.addLocalization("item.LooseRock."+rockNames[i]+".name", rockNames[i] + " Rock");
@@ -1024,56 +1169,6 @@ public class ClientProxy implements IProxy
         //peat
         ModLoader.addLocalization("tile.peat.name", "Peat");
         ModLoader.addLocalization("tile.PeatGrass.name", "Peat Grass");
-
-        //Wood
-        String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-                "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-        for(int i= 0; i < WoodNames.length; i++)
-        {
-            ModLoader.addLocalization("tile.log."+WoodNames[i]+".name", WoodNames[i]);
-            ModLoader.addLocalization("tile.leaves."+WoodNames[i]+".name", WoodNames[i] + " Leaves");
-            ModLoader.addLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
-            ModLoader.addLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
-            ModLoader.addLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
-            ModLoader.addLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
-            ModLoader.addLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
-            ModLoader.addLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
-            //ModLoader.addLocalization("item.Stick."+WoodNames[i]+".name", WoodNames[i]+" Stick");
-        }
-        ModLoader.addLocalization("item.Stick.name", "Stick");
-        String[] FruitTreeNames = {"Red Apple","Banana", "Orange", "Green Apple","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
-        for(int i= 0; i < FruitTreeNames.length; i++)
-        {
-            ModLoader.addLocalization("item.FruitSapling1."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
-            ModLoader.addLocalization("item.FruitSapling2."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
-            ModLoader.addLocalization("item.Fruit."+FruitTreeNames[i]+".name", FruitTreeNames[i]);
-        }
-
-        ModLoader.addLocalization("item.Meat.EggCooked.name", "Cooked Egg");
-
-        //Gems
-        String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
-                "Jade","Garnet","Amethyst","Beryl","Jasper","Tourmaline","Diamond"};
-
-        for(int i= 0; i < GemNames.length; i++)
-        {
-            ModLoader.addLocalization("item."+GemNames[i]+".Chipped.name", "Chipped "+GemNames[i]);
-            ModLoader.addLocalization("item."+GemNames[i]+".Flawed.name", "Flawed "+GemNames[i]);
-            ModLoader.addLocalization("item."+GemNames[i]+".Normal.name",  GemNames[i]);
-            ModLoader.addLocalization("item."+GemNames[i]+".Flawless.name", "Flawless "+GemNames[i]);
-            ModLoader.addLocalization("item."+GemNames[i]+".Exquisite.name", "Exquisite "+GemNames[i]);
-        }
-
-        for(int i= 0; i < Names.length; i++)
-        {
-            ModLoader.addLocalization("item.terra"+Names[i].replace(" ", "")+"Ingot.name", Names[i] + " Ingot");
-        }
-        for(int i= 0; i < Names.length; i++)
-        {
-            ModLoader.addLocalization("item.terra"+Names[i].replace(" ", "")+"Ingot2x.name", Names[i] + " Ingot 2x");
-        }
-
-
         ModLoader.addLocalization("item.SulfurPowder.name", "Sulfur Powder");
         ModLoader.addLocalization("item.SaltpeterPowder.name", "Saltpeter");
         ModLoader.addLocalization("item.flintPaxel.name", "Flint Tool");
@@ -1124,9 +1219,50 @@ public class ClientProxy implements IProxy
         ModLoader.addLocalization("item.Bone MM Stone Hoe.name", "Stone Hoe");
 
         ModLoader.addLocalization("item.Stone Hammer.name", "Stone Hammer");
-
+    }
+    
+    private void RegisterWood()
+    {
+        String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+                "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+        for(int i= 0; i < WoodNames.length; i++)
+        {
+            ModLoader.addLocalization("tile.log."+WoodNames[i]+".name", WoodNames[i]);
+            ModLoader.addLocalization("tile.leaves."+WoodNames[i]+".name", WoodNames[i] + " Leaves");
+            ModLoader.addLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
+            ModLoader.addLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
+            ModLoader.addLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
+            ModLoader.addLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
+            ModLoader.addLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
+            ModLoader.addLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
+        }
+        ModLoader.addLocalization("item.Stick.name", "Stick");
+    }
+    
+    private void RegisterMetal()
+    {
         String[] ToolNames = {"Stone","Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel", "Bronze", "Copper"
                 ,"Wrought Iron","Red Steel","Rose Gold", "Steel", "Tin", "Zinc"};
+        
+        String[] Names = {"Bismuth","Bismuth Bronze","Black Bronze","Black Steel","Blue Steel","Brass","Bronze","Copper","Gold"
+                ,"Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver", "Steel", "Sterling Silver",
+                "Tin", "Zinc"};
+        
+        ModLoader.addLocalization("item.StoneProPick.name", "Stone Prospector's Pick");
+        
+        ModLoader.addLocalization("tile.terraAnvil.name", "Anvil");
+        ModLoader.addLocalization("item.terraStoneAnvilItem.name", "Stone Anvil");
+        ModLoader.addLocalization("item.terraCopperAnvilItem.name", "Copper Anvil");
+        ModLoader.addLocalization("item.terraBronzeAnvilItem.name", "Bronze Anvil");
+        ModLoader.addLocalization("item.terraWroughtIronAnvilItem.name", "Wrought Iron Anvil");
+        ModLoader.addLocalization("item.terraSteelAnvilItem.name", "Steel Anvil");
+        ModLoader.addLocalization("item.terraBlackSteelAnvilItem.name", "Black Steel  Anvil");
+        ModLoader.addLocalization("item.terraBlueSteelAnvilItem.name", "Blue Steel Anvil");
+        ModLoader.addLocalization("item.terraRedSteelAnvilItem.name", "Red Steel Anvil");
+        ModLoader.addLocalization("item.terraBismuthBronzeAnvilItem.name", "Bismuth Bronze Anvil");
+        ModLoader.addLocalization("item.terraBlackBronzeAnvilItem.name", "Black Bronze Anvil");
+        ModLoader.addLocalization("item.terraRoseGoldAnvilItem.name", "Rose Gold Anvil");
+        
         for(int i= 0; i < ToolNames.length; i++)
         {
             ModLoader.addLocalization("item."+ToolNames[i]+" Pick.name", ToolNames[i] + " Pickaxe");
@@ -1140,84 +1276,7 @@ public class ClientProxy implements IProxy
             ModLoader.addLocalization("item."+ToolNames[i]+" Saw.name", ToolNames[i] + " Saw");
             ModLoader.addLocalization("item."+ToolNames[i]+" Scythe.name", ToolNames[i] + " Scythe");
             ModLoader.addLocalization("item."+ToolNames[i]+" Knife.name", ToolNames[i] + " Knife");
-        }
-
-        ModLoader.addLocalization("item.javelin.name", "Javelin");
-
-        ModLoader.addLocalization("item.SeedsWheat.name", "Wheat Seeds");
-        ModLoader.addLocalization("item.SeedsWildWheat.name", "Wild Wheat Seeds");
-        ModLoader.addLocalization("item.SeedsCorn.name", "Corn Seeds");
-        ModLoader.addLocalization("item.SeedsTomato.name", "Tomato Seeds");
-        
-        ModLoader.addLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
-        ModLoader.addLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
-        ModLoader.addLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");
-
-        /*==================================================================
-         * TFC Mining Localization
-         *==================================================================*/
-        ModLoader.addLocalization("item.SluiceItem.name", "Sluice");
-
-        //TFC_Mining
-        ModLoader.addLocalization("item.GoldPan.GoldPan.name", "Gold Pan - Empty");
-        ModLoader.addLocalization("item.GoldPan.GoldPanSand.name", "Gold Pan - Sand");
-        ModLoader.addLocalization("item.GoldPan.GoldPanGravel.name", "Gold Pan - Gravel");
-        ModLoader.addLocalization("item.GoldPan.GoldPanClay.name", "Gold Pan - Clay");
-        ModLoader.addLocalization("item.GoldPan.GoldPanDirt.name", "Gold Pan - Dirt");
-        //Prospecting picks
-        ModLoader.addLocalization("item.StoneProPick.name", "Stone Prospector's Pick");
-        for(int i= 0; i < ToolNames.length; i++)
-        {
-            ModLoader.addLocalization("item."+ToolNames[i].replace(" ", "")+"ProPick.name", ToolNames[i] + " Prospector's Pick");
-        }
-
-        /*==================================================================
-         * TFC Game Localization
-         *==================================================================*/
-        ModLoader.addLocalization("item.terraFireStarter.name", "Firestarter");
-        ModLoader.addLocalization("item.terraSlag.name", "Slag");
-        ModLoader.addLocalization("tile.terraAnvil.name", "Anvil");
-        ModLoader.addLocalization("item.terraStoneAnvilItem.name", "Stone Anvil");
-        ModLoader.addLocalization("item.terraCopperAnvilItem.name", "Copper Anvil");
-        ModLoader.addLocalization("item.terraBronzeAnvilItem.name", "Bronze Anvil");
-        ModLoader.addLocalization("item.terraWroughtIronAnvilItem.name", "Wrought Iron Anvil");
-        ModLoader.addLocalization("item.terraSteelAnvilItem.name", "Steel Anvil");
-        ModLoader.addLocalization("item.terraBlackSteelAnvilItem.name", "Black Steel  Anvil");
-        ModLoader.addLocalization("item.terraBlueSteelAnvilItem.name", "Blue Steel Anvil");
-        ModLoader.addLocalization("item.terraRedSteelAnvilItem.name", "Red Steel Anvil");
-        ModLoader.addLocalization("item.terraBismuthBronzeAnvilItem.name", "Bismuth Bronze Anvil");
-        ModLoader.addLocalization("item.terraBlackBronzeAnvilItem.name", "Black Bronze Anvil");
-        ModLoader.addLocalization("item.terraRoseGoldAnvilItem.name", "Rose Gold Anvil");
-
-        ModLoader.addLocalization("item.terraBellowsItem.name", "Bellows");
-        ModLoader.addLocalization("tile.terraBellows.name", "Bellows");
-        ModLoader.addLocalization("tile.terraScribe.name", "Scribing Table");
-        ModLoader.addLocalization("item.terraInk.name", "Marking");
-        ModLoader.addLocalization("item.terraClayMold.name", "Clay Mold");
-        ModLoader.addLocalization("item.terraFiredClayMold.name", "Ceramic Mold");
-        ModLoader.addLocalization("tile.terraForge.name", "Forge");
-        ModLoader.addLocalization("tile.terraBloomery.name", "Bloomery");
-        ModLoader.addLocalization("tile.terraMetallurgy.name", "Metallurgy Table");
-
-        ModLoader.addLocalization("item.PickaxeHeadPlan.name", "Plan: Pickaxe Head");
-        ModLoader.addLocalization("item.ShovelHeadPlan.name", "Plan: Shovel Head");
-        ModLoader.addLocalization("item.HoeHeadPlan.name", "Plan: Hoe Head");
-        ModLoader.addLocalization("item.AxeHeadPlan.name", "Plan: Axe Head");
-        ModLoader.addLocalization("item.HammerHeadPlan.name", "Plan: Hammer Head");
-        ModLoader.addLocalization("item.ChiselHeadPlan.name", "Plan: Chisel Head");
-        ModLoader.addLocalization("item.SwordBladePlan.name", "Plan: Sword Blade");
-        ModLoader.addLocalization("item.MaceHeadPlan.name", "Plan: Mace Head");
-        ModLoader.addLocalization("item.SawBladePlan.name", "Plan: Saw Head");
-        ModLoader.addLocalization("item.ProPickHeadPlan.name", "Plan: Prospecter's Pick Head");
-        ModLoader.addLocalization("item.HelmetPlan.name", "Plan: Plate Helmet");
-        ModLoader.addLocalization("item.ChestplatePlan.name", "Plan: Chestplate");
-        ModLoader.addLocalization("item.GreavesPlan.name", "Plan: Plate Greaves");
-        ModLoader.addLocalization("item.BootsPlan.name", "Plan: Plate Boots");
-        ModLoader.addLocalization("item.ScythePlan.name", "Plan: Scythe Blade");
-        ModLoader.addLocalization("item.KnifePlan.name", "Plan: Knife Blade");
-
-        for(int i= 0; i < ToolNames.length; i++)
-        {
+            ModLoader.addLocalization("item."+ToolNames[i]+" ProPick.name", ToolNames[i] + " Prospector's Pick");
             ModLoader.addLocalization("item."+ToolNames[i]+" Pickaxe Head.name", ToolNames[i] + " Pickaxe Head");
             ModLoader.addLocalization("item."+ToolNames[i]+" Shovel Head.name", ToolNames[i] + " Shovel Head");
             ModLoader.addLocalization("item."+ToolNames[i]+" Axe Head.name", ToolNames[i] + " Axe Head");
@@ -1253,6 +1312,8 @@ public class ClientProxy implements IProxy
         for(int i= 0; i < Names.length; i++)
         {
             ModLoader.addLocalization("item.Unshaped"+Names[i].replace(" ", "")+".name", "Unshaped "+Names[i]);
+            ModLoader.addLocalization("item.terra"+Names[i].replace(" ", "")+"Ingot.name", Names[i] + " Ingot");
+            ModLoader.addLocalization("item.terra"+Names[i].replace(" ", "")+"Ingot2x.name", Names[i] + " Ingot 2x");
         }
 
         ModLoader.addLocalization("item.UnshapedHCBlackSteel.name", "Unshaped High Carbon Black Steel");
@@ -1270,9 +1331,6 @@ public class ClientProxy implements IProxy
         ModLoader.addLocalization("item.terraWeakSteelIngot.name", "Weak Steel Ingot");
         ModLoader.addLocalization("item.terraWeakBlueSteelIngot.name", "Weak Blue Steel Ingot");
         ModLoader.addLocalization("item.terraWeakRedSteelIngot.name", "Weak Red Steel Ingot");
-
-        ModLoader.addLocalization("item.coke.name", "Coke");
-        ModLoader.addLocalization("item.flux.name", "Flux");
     }
 
     @Override

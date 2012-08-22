@@ -127,23 +127,23 @@ public class GuiCalendar extends GuiScreen
         {
             if (guibutton.id == 0)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 1000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + (TFCSeasons.dayLength/24));
             }
             else if (guibutton.id == 1)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 24000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + TFCSeasons.dayLength);
             }
             else if (guibutton.id == 2)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 168000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + (TFCSeasons.dayLength*7));
             }
             else if (guibutton.id == 3)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 720000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + (TFCSeasons.dayLength*30));
             }
             else if (guibutton.id == 4)
             {
-                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + 8640000);
+                this.world.getWorldInfo().setWorldTime(TFCSeasons.getTotalTicks() + (TFCSeasons.dayLength*360));
             }
 
         }

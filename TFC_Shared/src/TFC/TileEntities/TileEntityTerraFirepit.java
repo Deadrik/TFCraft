@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import TFC.Blocks.BlockTerraFirepit;
+import TFC.Blocks.BlockFirepit;
 import TFC.Core.EnumWoodMaterial;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
@@ -870,7 +870,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
-                BlockTerraFirepit.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
+                BlockFirepit.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
 
             //If the fire is still burning and has fuel
@@ -878,7 +878,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
 
                 if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC.terraFirepitOn.blockID) {
-                    BlockTerraFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                    BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 
                 float desiredTemp = 0;

@@ -57,22 +57,22 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         return i;
     }
 
-    public boolean isBlockNormalCube(World world, int i, int j, int k) 
-    {
-        if(world.isAirBlock(i, j+1, k))
-        {
-            if(world.isAirBlock(i+1, j, k))
-                return false;
-            if(world.isAirBlock(i-1, j, k))
-                return false;
-            if(world.isAirBlock(i, j, k+1))
-                return false;
-            if(world.isAirBlock(i, j, k-1))
-                return false;
-        }
-
-        return true;
-    }
+//    public boolean isBlockNormalCube(World world, int i, int j, int k) 
+//    {
+//        if(world.isAirBlock(i, j+1, k))
+//        {
+//            if(world.isAirBlock(i+1, j, k))
+//                return false;
+//            if(world.isAirBlock(i-1, j, k))
+//                return false;
+//            if(world.isAirBlock(i, j, k+1))
+//                return false;
+//            if(world.isAirBlock(i, j, k-1))
+//                return false;
+//        }
+//
+//        return true;
+//    }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -231,34 +231,34 @@ public class BlockTerraGrass extends BlockGrass implements ITextureProvider
         return mod_TFC.terraDirt.idDropped(0, par2Random, par3);
     }
 
-    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
-    {
-        if((!world.isBlockOpaqueCube(i+1, j, k) || !world.isBlockOpaqueCube(i-1, j, k) || 
-                !world.isBlockOpaqueCube(i, j, k+1) || !world.isBlockOpaqueCube(i, j, k-1)) && 
-                !world.isBlockOpaqueCube(i, j+1, k))
-        {
-            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
-
-            double minX = 0.25;
-            double minZ = 0.25;
-            double maxX = 0.75;
-            double maxZ = 0.75;
-
-            if(!world.isBlockOpaqueCube(i+1, j, k))
-                maxX = 0.5;
-            if(!world.isBlockOpaqueCube(i-1, j, k))
-                minX = 0.5;
-            if(!world.isBlockOpaqueCube(i, j, k+1))
-                maxZ = 0.5;
-            if(!world.isBlockOpaqueCube(i, j, k-1))
-                minZ = 0.5;
-
-            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
-
-        }
-        else
-            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
-    }
+//    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+//    {
+//        if(world.isRemote && (!world.isBlockOpaqueCube(i+1, j, k) || !world.isBlockOpaqueCube(i-1, j, k) || 
+//                !world.isBlockOpaqueCube(i, j, k+1) || !world.isBlockOpaqueCube(i, j, k-1)) && 
+//                !world.isBlockOpaqueCube(i, j+1, k))
+//        {
+//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
+//
+//            double minX = 0.25;
+//            double minZ = 0.25;
+//            double maxX = 0.75;
+//            double maxZ = 0.75;
+//
+//            if(!world.isBlockOpaqueCube(i+1, j, k))
+//                maxX = 0.5;
+//            if(!world.isBlockOpaqueCube(i-1, j, k))
+//                minX = 0.5;
+//            if(!world.isBlockOpaqueCube(i, j, k+1))
+//                maxZ = 0.5;
+//            if(!world.isBlockOpaqueCube(i, j, k-1))
+//                minZ = 0.5;
+//
+//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
+//
+//        }
+//        else
+//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
+//    }
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {

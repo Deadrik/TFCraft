@@ -183,15 +183,15 @@ public class TFCBiome extends BiomeGenBase
     public static final TFCBiome river49 = (new BiomeGenRiverTFC(131)).setColor(HillsColor).setBiomeName("River hills9").SetWaterMult(HillsWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
     public static final TFCBiome river50 = (new BiomeGenRiverTFC(132)).setColor(HillsColor).setBiomeName("River hills10").SetWaterMult(HillsWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
 
-    public static final TFCBiome river51 = (new BiomeGenRiverTFC(133)).setColor(DesertColor).setBiomeName("River desert1").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river52 = (new BiomeGenRiverTFC(134)).setColor(DesertColor).setBiomeName("River desert2").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river53 = (new BiomeGenRiverTFC(135)).setColor(DesertColor).setBiomeName("River desert3").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river54 = (new BiomeGenRiverTFC(136)).setColor(DesertColor).setBiomeName("River desert4").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river55 = (new BiomeGenRiverTFC(137)).setColor(DesertColor).setBiomeName("River desert5").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river56 = (new BiomeGenRiverTFC(138)).setColor(DesertColor).setBiomeName("River desert6").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river57 = (new BiomeGenRiverTFC(139)).setColor(DesertColor).setBiomeName("River desert7").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river58 = (new BiomeGenRiverTFC(140)).setColor(DesertColor).setBiomeName("River desert8").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
-    public static final TFCBiome river59 = (new BiomeGenRiverTFC(141)).setColor(DesertColor).setBiomeName("River desert9").SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river51 = (new BiomeGenRiverTFC(133)).setColor(DesertColor).setBiomeName("River desert1").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river52 = (new BiomeGenRiverTFC(134)).setColor(DesertColor).setBiomeName("River desert2").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river53 = (new BiomeGenRiverTFC(135)).setColor(DesertColor).setBiomeName("River desert3").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river54 = (new BiomeGenRiverTFC(136)).setColor(DesertColor).setBiomeName("River desert4").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river55 = (new BiomeGenRiverTFC(137)).setColor(DesertColor).setBiomeName("River desert5").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river56 = (new BiomeGenRiverTFC(138)).setColor(DesertColor).setBiomeName("River desert6").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river57 = (new BiomeGenRiverTFC(139)).setColor(DesertColor).setBiomeName("River desert7").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river58 = (new BiomeGenRiverTFC(140)).setColor(DesertColor).setBiomeName("River desert8").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
+    public static final TFCBiome river59 = (new BiomeGenRiverTFC(141)).setColor(DesertColor).setBiomeName("River desert9").setDisableRain().SetWaterMult(DesertWater).setMinMaxHeight(riverDepthMin, riverDepthMax);
     
     protected WorldGenCustomTallTrees worldGenAshTallTrees;
     protected WorldGenCustomTallTrees worldGenAspenTallTrees;

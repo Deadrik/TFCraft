@@ -9,7 +9,7 @@ import TFC.TileEntities.TileEntityTerraLogPile;
 import net.minecraft.src.*;
 import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraFirepit extends BlockContainer implements ITextureProvider
+public class BlockFirepit extends BlockContainer implements ITextureProvider
 {
 	
 	private int meta;
@@ -20,7 +20,7 @@ public class BlockTerraFirepit extends BlockContainer implements ITextureProvide
 
 	private Class EntityClass;
 
-	public BlockTerraFirepit(int i, Class tClass, int tex)
+	public BlockFirepit(int i, Class tClass, int tex)
 	{
 		super(i, Material.ground);
 		EntityClass = tClass;

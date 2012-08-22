@@ -16,7 +16,7 @@ public class BlockTerraFarmland extends BlockContainer
 		super(par1, Material.ground);
 		this.blockIndexInTexture = 176;
 		this.setTickRandomly(true);
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
+		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 		dirtID = id;
 		//this.setLightOpacity(255);
 	}
@@ -101,19 +101,6 @@ public class BlockTerraFarmland extends BlockContainer
 		return false;
 	}
 
-//	/**
-//	 * Block's chance to react to an entity falling on it.
-//	 */
-//	public void onFallenUpon(World world, int i, int j, int k, Entity par5Entity, float par6)
-//	{
-//		if (world.rand.nextFloat() < par6 - 0.5F)
-//		{
-//			int id = dirtID;
-//			int meta = world.getBlockMetadata(i, j, k);
-//			world.setBlockAndMetadataWithNotify(i, j, k, id, meta);
-//		}
-//	}
-
 	/**
 	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
 	 * their own) Args: x, y, z, neighbor blockID
@@ -135,7 +122,7 @@ public class BlockTerraFarmland extends BlockContainer
 	 */
 	public boolean renderAsNormalBlock()
 	{
-		return false;
+		return true;
 	}
 	
 	@Override

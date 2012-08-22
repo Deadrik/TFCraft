@@ -65,30 +65,4 @@ public class ItemTerraFood extends ItemFood  implements ITextureProvider
             }
         }
 	}
-	
-	public static String getRuleFromId(int id)
-    {
-        switch(id)
-        {
-        case 0:
-            return "Hit";
-        case 1:
-            return "Draw";
-        case 2:
-            return "Quench";
-        case 3:
-            return "Punch";
-        case 4:
-            return "Bend";
-        case 5:
-            return "Upset";
-        case 6:
-            return "Shrink";
-        case 7:
-            return "Weld";
-        default:
-            return "";
-        }
-    }
-
 }

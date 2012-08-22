@@ -80,6 +80,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
     public static int stairRenderId;
     public static int slabRenderId;
     public static int cropRenderId;
+    public static int cookingPitRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -198,6 +199,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
         stairRenderId = proxy.getUniqueBlockModelID(this, false);
         slabRenderId = proxy.getUniqueBlockModelID(this, false);
         cropRenderId = proxy.getUniqueBlockModelID(this, false);
+        cookingPitRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, TFC.Items.ItemOre1.class);
@@ -402,7 +404,8 @@ public class mod_TFC extends NetworkMod implements ITickHandler
                         HandleItem(entityplayer, iinventory, TFC_Core.Axes);
                         HandleItem(entityplayer, iinventory, TFC_Core.Saws);
                     }
-                    else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex)
+                    else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex || 
+                            itemstack.getItem() instanceof ItemTerraFood)
                     {
                         HandleItem(entityplayer, iinventory, TFC_Core.Knives);
                     }
@@ -615,7 +618,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
         Block.blocksList[53] = (new BlockCustomStairs(53, Block.planks)).setBlockName("stairsWood").setRequiresSelfNotify();
         Block.blocksList[54] = (new BlockChestTFC(54)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("chest").setRequiresSelfNotify();
         Block.blocksList[58] = (new BlockTerraWorkbench(58, TileEntityTerraWorkbench.class)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
-        Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
+        Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
         Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setBlockName("snow").setLightOpacity(1);
         Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setBlockName("ice");
         Block.blocksList[83] = (new BlockCustomReed(83, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("reeds").disableStats();
@@ -628,7 +631,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
 
         finiteWater = new BlockFiniteWater(TFCSettings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
-        terraFirepit = new BlockTerraFirepit(TFCSettings.getIntFor(config,"block","terraFirepit", 207), TileEntityTerraFirepit.class, 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
+        terraFirepit = new BlockFirepit(TFCSettings.getIntFor(config,"block","terraFirepit", 207), TileEntityTerraFirepit.class, 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
         terraBellows = new BlockTerraBellows(TFCSettings.getIntFor(config,"block","terraBellows", 206),Material.wood).setBlockName("terraBellows").setHardness(2);
         terraForge= new BlockTerraForge(TFCSettings.getIntFor(config,"block","terraForge", 216), TileEntityTerraForge.class, 90).setBlockName("terraForge").setHardness(20).setLightValue(0F);
         terraScribe = new BlockTerraScribe(TFCSettings.getIntFor(config,"block","terraScribe", 204), TileEntityTerraScribe.class).setBlockName("terraScribe").setHardness(2);
@@ -639,7 +642,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
         terraMolten = new BlockTerraMolten(TFCSettings.getIntFor(config,"block","terraMolten", 219)).setBlockName("terraMolten").setHardness(20);
         terraBloomery = new BlockTerraBloomery(TFCSettings.getIntFor(config,"block","terraBloomery", 220), TileEntityTerraBloomery.class, 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
         terraBloomeryOn = new BlockTerraBloomery(TFCSettings.getIntFor(config,"block","terraBloomeryOn", 221), TileEntityTerraBloomery.class, 66).setBlockName("terraBloomeryOn").setHardness(20).setLightValue(1.0F);
-        terraFirepitOn = new BlockTerraFirepit(TFCSettings.getIntFor(config,"block","terraFirepitOn", 222), TileEntityTerraFirepit.class, 81).setBlockName("terraFirepitOn").setHardness(1).setLightValue(1.0F);
+        terraFirepitOn = new BlockFirepit(TFCSettings.getIntFor(config,"block","terraFirepitOn", 222), TileEntityTerraFirepit.class, 81).setBlockName("terraFirepitOn").setHardness(1).setLightValue(1.0F);
         terraForgeOn = new BlockTerraForge(TFCSettings.getIntFor(config,"block","terraForgeOn", 223), TileEntityTerraForge.class, 91).setBlockName("terraForgeOn").setHardness(20).setLightValue(1.0F);
         terraSluice = new BlockTerraSluice(TFCSettings.getIntFor(config,"block","TerraSluice", 217), TileEntityTerraSluice.class).setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
@@ -778,7 +781,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
     @Override
     public String getVersion()
     {
-        return "Beta 2 Build 47f";
+        return "Beta 2 Build 48";
     }
 
     @Override

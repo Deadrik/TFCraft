@@ -38,7 +38,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     public void onDisconnect(NetworkManager network, String message, Object[] args) {
 
         PlayerInfo PI = new PlayerInfo(mod_TFC.proxy.getPlayer(network).username);
-        for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size(); i++)
+        for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
         {
             if(PlayerManagerTFC.getInstance().Players.get(i).Name.equalsIgnoreCase(PI.Name))
             {
@@ -77,7 +77,6 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             pkt.data=bos.toByteArray();
             pkt.length=bos.size();
             pkt.isChunkDataPacket=false;
-            System.out.println("Client requesting seed info");
 
             mod_TFC.proxy.sendCustomPacket(pkt);
         }
@@ -285,6 +284,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     try 
                     {
                         seed = dis.readLong();
+                        TFCSeasons.dayLength = dis.readLong();
 
                     } catch (IOException e) 
                     {
@@ -300,6 +300,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     {
                         dos.writeByte(3);
                         dos.writeLong(world.getSeed());
+                        dos.writeLong(TFCSeasons.dayLength);
 
                     } 
                     catch (IOException e)

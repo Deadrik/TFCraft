@@ -3288,25 +3288,14 @@ public class TFC_CoreRender
         switch(te.cropId)
         {
             case 0://Wheat
-            {
-                byte index = (byte) (16 + stage);
-                
-                renderBlockCropsImpl(block, (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index, mult, 1.0);
-                break;
-            }
             case 1://Wild Wheat
             {
                 byte index = (byte) (16 + stage);
                 
-                renderBlockCropsImpl(block, (double)i, (double)((float)j - 0.0625F), (double)k,renderblocks, index, mult, 1.0);
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
                 break;
             }
             case 2://Corn
-            {
-                byte index = (byte) (96 + stage);
-                drawCrossedSquares(block, i, j, k, index, mult, 2.0);
-                break;
-            }
             case 3://Wild Corn
             {
                 byte index = (byte) (96 + stage);
@@ -3317,6 +3306,81 @@ public class TFC_CoreRender
             {                
                 byte index = (byte) (240 + stage);
                 drawCrossedSquares(block, i, j, k, index, 1.0f, 2.0);
+                break;
+            }
+            case 5://Barley
+            case 6://Wild Barley
+            {
+                byte index = (byte) (0 + stage);
+                
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
+                break;
+            }
+            case 7://Rye
+            case 8://Wild Rye
+            {
+                byte index = (byte) (32 + stage);
+                
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
+                break;
+            }
+            case 9://Oat
+            case 10://Wild Oat
+            {
+                byte index = (byte) (48 + stage);
+                
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
+                break;
+            }
+            case 11://Rice
+            case 12://Wild Rice
+            {
+                byte index = (byte) (64 + stage);
+                
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
+                break;
+            }
+            case 13://Potato
+            case 14://Wild Potato
+            {                
+                byte index = (byte) (112 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 15://Onion
+            {                
+                byte index = (byte) (128 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 16://Cabbage
+            {                
+                byte index = (byte) (144 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 17://Garlic
+            {                
+                byte index = (byte) (213 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 18://Carrots
+            {                
+                byte index = (byte) (208 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 19://Sugarcane
+            {                
+                byte index = (byte) (218 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 20://Hemp
+            {                
+                byte index = (byte) (192 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 3.0);
                 break;
             }
             default:

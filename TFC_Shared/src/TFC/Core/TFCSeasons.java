@@ -28,7 +28,7 @@ public class TFCSeasons
     public static final int December = 9;
     
     public static final long hourLength = TFCSettings.dayLength/24;
-    public static final long dayLength = TFCSettings.dayLength;
+    public static long dayLength = TFCSettings.dayLength;
     
     
     public static void UpdateSeasons(World world)

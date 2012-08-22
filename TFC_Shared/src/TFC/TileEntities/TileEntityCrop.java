@@ -31,69 +31,87 @@ public class TileEntityCrop extends TileEntity
         Random R = new Random();
         if(!worldObj.isRemote && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0)
         {
-            long hours = TFCSeasons.totalHours();
+            CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
             
+            long hours = TFCSeasons.totalHours();
+
             if(!checkedSun && TFCSeasons.getHour() == 12)
             {
-                if(worldObj.getBlockLightValue(xCoord, yCoord, zCoord) < 15)
+                if(crop.needsSunlight && worldObj.getBlockLightValue(xCoord, yCoord, zCoord) < 15)
                     sunLevel--;
-                else
+                else if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
                     sunLevel++;
-                
+
                 checkedSun = true;
             }
-            
+
             if(growthTimer < hours && sunLevel > 0)
             {
                 checkedSun = false;
-                CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-                TileEntityFarmland tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
                 
+                TileEntityFarmland tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+
                 float ambientTemp = ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
                 float tempAdded = 0;
 
-                if(ambientTemp < crop.minGrowthTemp)
+                if(!crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
                 {
                     tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
                 }
-                else if(ambientTemp < 25)
+                else if(crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
+                {
+                    if(growth > 1)
+                        tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
+                    
+                }
+                else if(ambientTemp < 28)
                 {
                     tempAdded = ambientTemp* 0.0003f;
                 }
                 else if(ambientTemp < 37)
                 {
-                    tempAdded = (25-(ambientTemp-25))* 0.0003f;
+                    tempAdded = (28-(ambientTemp-28))* 0.0003f;
                 }
 
-                if(ambientTemp < crop.minAliveTemp)
+                if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
                 {
                     worldObj.setBlock(xCoord, yCoord, zCoord, 0);
                 }
-                
+                else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
+                {
+                    if(growth > 1)
+                        worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                }
+
                 int nutriType = crop.cycleType;
-                int nutri = tef.nutrients[nutriType];
-                float nutriMult = (float)nutri/10000 > 1 ? 1 : (float)nutri/10000;
-                tef.DrainNutrients(nutriType, crop.nutrientUsage);
-                tef.waterSaturation--;
-                
+                int nutri = tef != null ? tef.nutrients[nutriType] : 85000;
+
+                float nutriMult = (float)nutri/100000 > 1 ? 1 : (float)nutri/100000;
+
+                if(tef != null)
+                {
+                    tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
+                    tef.waterSaturation--;
+                }
+
 
 
                 float growthRate = (((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult;
 
                 growth += growthRate;
-                
-                if(growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || tef.waterSaturation <= -1)
+
+                if(crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || (tef != null && tef.waterSaturation <= -1))
                     worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-                
+
                 growthTimer += R.nextInt(2)+23;
             }
-            else if(sunLevel <= 0)
+            else if(crop.needsSunlight && sunLevel <= 0)
             {
                 worldObj.setBlock(xCoord, yCoord, zCoord, 0);
             }
         }
     }
-    
+
     public float getEstimatedGrowth(CropIndex crop)
     {
         return ((float)crop.numGrowthStages/(growthTimer/TFCSeasons.dayLength))*1.5f;
@@ -125,22 +143,22 @@ public class TileEntityCrop extends TileEntity
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+     public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
-        super.readFromNBT(par1NBTTagCompound);
-        growth = par1NBTTagCompound.getFloat("growth");
-        cropId = par1NBTTagCompound.getInteger("cropId");
-        growthTimer = par1NBTTagCompound.getLong("growthTimer");
+         super.readFromNBT(par1NBTTagCompound);
+         growth = par1NBTTagCompound.getFloat("growth");
+         cropId = par1NBTTagCompound.getInteger("cropId");
+         growthTimer = par1NBTTagCompound.getLong("growthTimer");
     }
 
-    /**
-     * Writes a tile entity to NBT.
-     */
-    public void writeToNBT(NBTTagCompound nbt)
-    {
-        super.writeToNBT(nbt);
-        nbt.setFloat("growth", growth);
-        nbt.setInteger("cropId", cropId);
-        nbt.setLong("growthTimer", growthTimer);
-    }
+     /**
+      * Writes a tile entity to NBT.
+      */
+     public void writeToNBT(NBTTagCompound nbt)
+     {
+         super.writeToNBT(nbt);
+         nbt.setFloat("growth", growth);
+         nbt.setInteger("cropId", cropId);
+         nbt.setLong("growthTimer", growthTimer);
+     }
 }

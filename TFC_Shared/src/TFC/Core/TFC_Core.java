@@ -750,7 +750,6 @@ public class TFC_Core
 
         ModLoader.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, -1) });
 
-        /** Axe Recipes */
         for(int i = 0; i < 16; i++)
         {
             for(int j = 0; j < Axes.length; j++)
@@ -763,13 +762,26 @@ public class TFC_Core
             {
                 ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 12, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, -1)});
             }
-            for(int j = 0; j < Knives.length; j++)
-            {
-                ModLoader.addRecipe(new ItemStack(Item.bowlEmpty, 4, 0), new Object[] { 
-                    "2","1", Character.valueOf('1'),new ItemStack(TFCItems.Logs,1,-1), Character.valueOf('2'),new ItemStack(Knives[j], 1, -1)});
-            }
+            
             ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 4, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(TFCItems.FlintPaxel, 1, -1)});
             ModLoader.addRecipe(new ItemStack(Block.planks.blockID, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
+        }
+        
+        for(int j = 0; j < Knives.length; j++)
+        {
+            ModLoader.addRecipe(new ItemStack(Item.bowlEmpty, 4, 0), new Object[] { 
+                "2","1", Character.valueOf('1'),new ItemStack(TFCItems.Logs,1,-1), Character.valueOf('2'),new ItemStack(Knives[j], 1, -1)});
+            
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WheatGrain, 4), new Object[] {new ItemStack(TFCItems.WheatWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.RyeGrain, 4), new Object[] {new ItemStack(TFCItems.RyeWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.BarleyGrain, 4), new Object[] {new ItemStack(TFCItems.BarleyWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.OatGrain, 4), new Object[] {new ItemStack(TFCItems.OatWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.RiceGrain, 4), new Object[] {new ItemStack(TFCItems.RiceWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WildWheatGrain, 4), new Object[] {new ItemStack(TFCItems.WildWheatWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WildRyeGrain, 4), new Object[] {new ItemStack(TFCItems.WildRyeWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WildBarleyGrain, 4), new Object[] {new ItemStack(TFCItems.WildBarleyWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WildOatGrain, 4), new Object[] {new ItemStack(TFCItems.WildOatWhole, 1),new ItemStack(Knives[j], 1, -1)});
+            ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WildRiceGrain, 4), new Object[] {new ItemStack(TFCItems.WildRiceWhole, 1),new ItemStack(Knives[j], 1, -1)});
         }
 
         //Chest
@@ -872,6 +884,24 @@ public class TFC_Core
         ModLoader.addRecipe(new ItemStack(Block.trapdoor, 1, 0), new Object[] { "###","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1)});
         ModLoader.addRecipe(new ItemStack(Block.signPost, 1, 0), new Object[] { "###","###"," 1 ", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1),Character.valueOf('1'), new ItemStack(Item.stick,1,-1)});
 
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsWildWheat, 1), new Object[] {new ItemStack(TFCItems.WildWheatGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsWildRye, 1), new Object[] {new ItemStack(TFCItems.WildRyeGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsWildBarley, 1), new Object[] {new ItemStack(TFCItems.WildBarleyGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsWildOat, 1), new Object[] {new ItemStack(TFCItems.WildOatGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsWildRice, 1), new Object[] {new ItemStack(TFCItems.WildRiceGrain, 1)});
+        
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsWheat, 1), new Object[] {new ItemStack(TFCItems.WheatGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsRye, 1), new Object[] {new ItemStack(TFCItems.RyeGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsBarley, 1), new Object[] {new ItemStack(TFCItems.BarleyGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsOat, 1), new Object[] {new ItemStack(TFCItems.OatGrain, 1)});
+        ModLoader.addShapelessRecipe(new ItemStack(TFCItems.SeedsRice, 1), new Object[] {new ItemStack(TFCItems.RiceGrain, 1)});
+        
+        ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.WheatGrain});
+        ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.RyeGrain});
+        ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.BarleyGrain});
+        ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.OatGrain});
+        ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.RiceGrain});
+        
         VanillaRecipes();
     }
 
