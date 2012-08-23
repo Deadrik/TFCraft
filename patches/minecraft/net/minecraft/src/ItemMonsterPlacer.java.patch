@@ -1,0 +1,13 @@
+--- ../src_base/minecraft/net/minecraft/src/ItemMonsterPlacer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/ItemMonsterPlacer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -85,6 +85,10 @@
+ 
+             if (var8 != null)
+             {
++                if (var8 instanceof TFC.Entities.EntityAnimalTFC)
++                {
++                ((TFC.Entities.EntityAnimalTFC) var8).setGrowingAge (-24000 * ((TFC.Entities.EntityAnimalTFC)var8).adultAge);
++                }
+                 var8.setLocationAndAngles(par2, par4, par6, par0World.rand.nextFloat() * 360.0F, 0.0F);
+                 par0World.spawnEntityInWorld(var8);
+                 ((EntityLiving)var8).playLivingSound();

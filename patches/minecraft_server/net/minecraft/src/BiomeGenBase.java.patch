@@ -1,0 +1,38 @@
+--- ../src_base/minecraft_server/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/BiomeGenBase.java	0000-00-00 00:00:00.000000000 -0000
+@@ -94,7 +94,7 @@
+     /**
+      * Is true (default) if the biome support rain (desert and nether can't have rain)
+      */
+-    private boolean enableRain;
++    protected boolean enableRain;
+ 
+     /** The id number to this biome, and its index in the biomeList array. */
+     public final int biomeID;
+@@ -275,7 +275,7 @@
+     /**
+      * Gets an integer representation of this biome's rainfall
+      */
+-    public final int getIntRainfall()
++    public int getIntRainfall()
+     {
+         return (int)(this.rainfall * 65536.0F);
+     }
+@@ -283,7 +283,7 @@
+     /**
+      * Gets an integer representation of this biome's temperature
+      */
+-    public final int getIntTemperature()
++    public int getIntTemperature()
+     {
+         return (int)(this.temperature * 65536.0F);
+     }
+@@ -291,7 +291,7 @@
+     /**
+      * Gets a floating point representation of this biome's temperature
+      */
+-    public final float getFloatTemperature()
++    public float getFloatTemperature()
+     {
+         return this.temperature;
+     }

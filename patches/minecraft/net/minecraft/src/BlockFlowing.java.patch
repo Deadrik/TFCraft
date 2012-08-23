@@ -1,0 +1,11 @@
+--- ../src_base/minecraft/net/minecraft/src/BlockFlowing.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft/net/minecraft/src/BlockFlowing.java	0000-00-00 00:00:00.000000000 -0000
+@@ -51,7 +51,7 @@
+         int var6 = this.getFlowDecay(par1World, par2, par3, par4);
+         byte var7 = 1;
+ 
+-        if (this.blockMaterial == Material.lava && !par1World.worldProvider.isHellWorld)
++        if (this.blockMaterial == Material.lava /*&& !par1World.worldProvider.isHellWorld*/)
+         {
+             var7 = 2;
+         }

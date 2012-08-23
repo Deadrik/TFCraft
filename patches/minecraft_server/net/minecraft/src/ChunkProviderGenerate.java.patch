@@ -1,0 +1,368 @@
+--- ../src_base/minecraft_server/net/minecraft/src/ChunkProviderGenerate.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/ChunkProviderGenerate.java	0000-00-00 00:00:00.000000000 -0000
+@@ -3,6 +3,8 @@
+ import java.util.List;
+ import java.util.Random;
+ 
++import TFC.WorldGen.*;
++
+ public class ChunkProviderGenerate implements IChunkProvider
+ {
+     /** RNG. */
+@@ -36,19 +38,22 @@
+     /** Holds the overall noise array used in chunk generation */
+     private double[] noiseArray;
+     private double[] stoneNoise = new double[256];
+-    private MapGenBase caveGenerator = new MapGenCaves();
++    private MapGenBase caveGenerator = new MapGenCavesTFC();
++    private MapGenBase caveGenerator2 = new MapGenCavesUpperTFC();
++    private MapGenRiverRavineTFC underRiverGen = new MapGenRiverRavineTFC();
+ 
+     /** Holds Stronghold Generator */
+     private MapGenStronghold strongholdGenerator = new MapGenStronghold();
+ 
+     /** Holds Village Generator */
+-    private MapGenVillage villageGenerator = new MapGenVillage(0);
++    private MapGenVillageTFC villageGenerator = new MapGenVillageTFC(0);
+ 
+     /** Holds Mineshaft Generator */
+     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
+ 
+     /** Holds ravine generator */
+-    private MapGenBase ravineGenerator = new MapGenRavine();
++    private MapGenBase ravineGenerator = new MapGenRavineTFC();
++    private MapGenBase ravineGenerator2 = new MapGenRavineUpperTFC();
+ 
+     /** The biomes that are used to generate the chunk */
+     private BiomeGenBase[] biomesForGeneration;
+@@ -269,28 +274,31 @@
+     public Chunk provideChunk(int par1, int par2)
+     {
+         this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
+-        byte[] var3 = new byte[32768];
+-        this.generateTerrain(par1, par2, var3);
++        byte[] ids = new byte[32768];
++        byte[] ids2 = new byte[32768];
++        byte[] meta = new byte[32768];
++        byte[] meta2 = new byte[32768];
++        
++        byte[] ids3 = new byte[16*16*256];
++        byte[] meta3 = new byte[16*16*256];
++        
++        this.generateTerrainHigh(par1, par2, ids2);
+         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
+-        this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
+-        this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
+-        this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
+ 
+-        if (this.mapFeaturesEnabled)
+-        {
+-            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
+-            this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
+-            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
+-        }
++        TFC_ChunkProviderGenerate.replaceBlocksForBiomeHigh(par1, par2, ids2,meta2, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand, ids3, meta3);
++        TFC_ChunkProviderGenerate.replaceBlocksForBiomeLow(par1, par2, ids,meta, this.biomesForGeneration,this.stoneNoise,this.noiseGen4, rand, ids3, meta3);
++        
++        new MapGenCaves256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
++        new MapGenRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
++        new MapGenRiverRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
+ 
+-        Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+-        byte[] var5 = var4.getBiomeArray();
+-
+-        for (int var6 = 0; var6 < var5.length; ++var6)
++        if (this.mapFeaturesEnabled)
+         {
+-            var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
++            //this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
++            //this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
++            //this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
+         }
+-
++        Chunk var4 = new ChunkTFC(this.worldObj, ids3, meta3, par1, par2);
+         var4.generateSkylightMap();
+         return var4;
+     }
+@@ -471,9 +479,9 @@
+ 
+         if (this.mapFeaturesEnabled)
+         {
+-            this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+-            var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+-            this.strongholdGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
++//            this.mineshaftGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
++//            var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
++//            this.strongholdGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
+         }
+ 
+         int var12;
+@@ -485,7 +493,7 @@
+             var12 = var4 + this.rand.nextInt(16) + 8;
+             var13 = this.rand.nextInt(128);
+             var14 = var5 + this.rand.nextInt(16) + 8;
+-            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
++            (new WorldGenLakesTFC(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+         }
+ 
+         if (!var11 && this.rand.nextInt(8) == 0)
+@@ -496,7 +504,7 @@
+ 
+             if (var13 < 63 || this.rand.nextInt(10) == 0)
+             {
+-                (new WorldGenLakes(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
++                (new WorldGenLakesTFC(Block.lavaStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+             }
+         }
+ 
+@@ -506,10 +514,10 @@
+             var14 = this.rand.nextInt(128);
+             int var15 = var5 + this.rand.nextInt(16) + 8;
+ 
+-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
+-            {
+-                ;
+-            }
++//            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
++//            {
++//                ;
++//            }
+         }
+ 
+         var6.decorate(this.worldObj, this.rand, var4, var5);
+@@ -580,4 +588,235 @@
+     {
+         return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
+     }
++
++
++
++
++    /**
++     * Generates the shape of the terrain for the chunk though its all stone though the water is frozen if the
++     * temperature is low enough
++     */
++    public void generateTerrainHigh(int par1, int par2, byte[] par3ArrayOfByte)
++    {
++        byte var4 = 4;
++        byte var5 = 16;
++        int seaLevel = 16;
++        int var7 = var4 + 1;
++        byte var8 = 17;
++        int var9 = var4 + 1;
++        this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, var7 + 5, var9 + 5);
++        this.noiseArray = this.initializeNoiseFieldHigh(this.noiseArray, par1 * var4, 0, par2 * var4, var7, var8, var9);
++
++
++        for (int var10 = 0; var10 < var4; ++var10)
++        {
++            for (int var11 = 0; var11 < var4; ++var11)
++            {
++                for (int var12 = 0; var12 < var5; ++var12)
++                {
++                    double yLerp = 0.125D;
++                    double var15 = this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 0];
++                    double var17 = this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 0];
++                    double var19 = this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 0];
++                    double var21 = this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 0];
++                    double var23 = (this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 1] - var15) * yLerp;
++                    double var25 = (this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 1] - var17) * yLerp;
++                    double var27 = (this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 1] - var19) * yLerp;
++                    double var29 = (this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 1] - var21) * yLerp;
++
++                    for (int var31 = 0; var31 < 8; ++var31)
++                    {
++                        double xLerp = 0.25D;
++                        double var34 = var15;
++                        double var36 = var17;
++                        double var38 = (var19 - var15) * xLerp;
++                        double var40 = (var21 - var17) * xLerp;
++
++                        for (int var42 = 0; var42 < 4; ++var42)
++                        {
++                            int var43 = var42 + var10 * 4 << 11 | 0 + var11 * 4 << 7 | var12 * 8 + var31;
++                            short var44 = 128;
++                            var43 -= var44;
++                            double zLerp = 0.25D;
++                            double var49 = (var36 - var34) * zLerp;
++                            double var47 = var34 - var49;
++
++                            for (int var51 = 0; var51 < 4; ++var51)
++                            {
++                                if ((var47 += var49) > 0.0D)
++                                {
++                                    par3ArrayOfByte[var43 += var44] = (byte)Block.stone.blockID;
++                                }
++                                else if (var12 * 8 + var31 < seaLevel)
++                                {
++                                    par3ArrayOfByte[var43 += var44] = (byte)Block.waterStill.blockID;
++                                }
++                                else
++                                {
++                                    par3ArrayOfByte[var43 += var44] = 0;
++                                }
++                            }
++                            var34 += var38;
++                            var36 += var40;
++                        }
++                        var15 += var23;
++                        var17 += var25;
++                        var19 += var27;
++                        var21 += var29;
++                    }
++                }
++            }
++        }
++    }
++
++    /**
++     * generates a subset of the level's terrain data. Takes 7 arguments: the [empty] noise array, the position, and the
++     * size.
++     */
++    private double[] initializeNoiseFieldHigh(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7)
++    {
++        if (par1ArrayOfDouble == null)
++        {
++            par1ArrayOfDouble = new double[par5 * par6 * par7];
++        }
++
++        if (this.field_35561_l == null)
++        {
++            this.field_35561_l = new float[25];
++
++            for (int var8 = -2; var8 <= 2; ++var8)
++            {
++                for (int var9 = -2; var9 <= 2; ++var9)
++                {
++                    float var10 = 10.0F / MathHelper.sqrt_float((float)(var8 * var8 + var9 * var9) + 0.2F);
++                    this.field_35561_l[var8 + 2 + (var9 + 2) * 5] = var10;
++                }
++            }
++        }
++
++        double var44 = 684.412D;
++        double var45 = 684.412D;
++        this.noise5 = this.noiseGen5.generateNoiseOctaves(this.noise5, par2, par4, par5, par7, 1.121D, 1.121D, 0.5D);
++        this.noise6 = this.noiseGen6.generateNoiseOctaves(this.noise6, par2, par4, par5, par7, 200.0D, 200.0D, 0.5D);
++        this.noise3 = this.noiseGen3.generateNoiseOctaves(this.noise3, par2, par3, par4, par5, par6, par7, var44 / 80.0D, var45 / 160.0D, var44 / 80.0D);
++        this.noise1 = this.noiseGen1.generateNoiseOctaves(this.noise1, par2, par3, par4, par5, par6, par7, var44, var45, var44);
++        this.noise2 = this.noiseGen2.generateNoiseOctaves(this.noise2, par2, par3, par4, par5, par6, par7, var44, var45, var44);
++        boolean var43 = false;
++        boolean var42 = false;
++        int var12 = 0;
++        int var13 = 0;
++
++        for (int var14 = 0; var14 < par5; ++var14)
++        {
++            for (int var15 = 0; var15 < par7; ++var15)
++            {
++                float var16 = 0.0F;
++                float var17 = 0.0F;
++                float var18 = 0.0F;
++                byte var19 = 2;
++                BiomeGenBase baseBiome = this.biomesForGeneration[var14 + 2 + (var15 + 2) * (par5 + 5)];
++
++                for (int var21 = -var19; var21 <= var19; ++var21)
++                {
++                    for (int var22 = -var19; var22 <= var19; ++var22)
++                    {
++                        BiomeGenBase blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
++                        float blendedHeight = this.field_35561_l[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight +*/ 2.0F);
++
++                        if (blendBiome.minHeight > baseBiome.minHeight)
++                        {
++                            blendedHeight /= 2.0F;
++                        }
++
++                        var16 += blendBiome.maxHeight * blendedHeight;
++                        var17 += blendBiome.minHeight * blendedHeight;
++                        var18 += blendedHeight;
++                    }
++                }
++
++                var16 /= var18;
++                var17 /= var18;
++                var16 = var16 * 0.9F + 0.1F;
++                var17 = (var17 * 4.0F - 1.0F) / 8.0F;
++                double var47 = this.noise6[var13] / 8000.0D;
++
++                if (var47 < 0.0D)
++                {
++                    var47 = -var47 * 0.3D;
++                }
++
++                var47 = var47 * 3.0D - 2.0D;
++
++                if (var47 < 0.0D)
++                {
++                    var47 /= 2.0D;
++
++                    if (var47 < -1.0D)
++                    {
++                        var47 = -1.0D;
++                    }
++
++                    var47 /= 1.4D;
++                    var47 /= 2.0D;
++                }
++                else
++                {
++                    if (var47 > 1.0D)
++                    {
++                        var47 = 1.0D;
++                    }
++
++                    var47 /= 8.0D;
++                }
++
++                ++var13;
++
++                for (int var46 = 0; var46 < par6; ++var46)
++                {
++                    double var48 = (double)var17;
++                    double var26 = (double)var16;
++                    var48 += var47 * 0.2D;
++                    var48 = var48 * (double)par6 / 16.0D;
++                    double var28 = (double)par6 / 2.0D + var48 * 4.0D;
++                    double var30 = 0.0D;
++                    double var32 = ((double)var46 - var28) * 12.0D * 128.0D / 128.0D / (2.8+var26);
++
++                    if (var32 < 0.0D)
++                    {
++                        var32 *= 4.0D;
++                    }
++
++                    double var34 = this.noise1[var12] / 512.0D;
++                    double var36 = this.noise2[var12] / 512.0D;
++                    double var38 = (this.noise3[var12] / 10.0D + 1.0D) / 2.0D;
++
++                    if (var38 < 0.0D)
++                    {
++                        var30 = var34;
++                    }
++                    else if (var38 > 1.0D)
++                    {
++                        var30 = var36;
++                    }
++                    else
++                    {
++                        var30 = var34 + (var36 - var34) * var38;
++                    }
++
++                    var30 -= var32;
++
++                    if (var46 > par6 - 4)
++                    {
++                        double var40 = (double)((float)(var46 - (par6 - 4)) / 3.0F);
++                        var30 = var30 * (1.0D - var40) + -10.0D * var40;
++                    }
++
++                    par1ArrayOfDouble[var12] = var30;
++                    ++var12;
++                }
++            }
++        }
++
++        return par1ArrayOfDouble;
++    }
+ }

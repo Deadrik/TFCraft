@@ -1,0 +1,11 @@
+--- ../src_base/minecraft_server/net/minecraft/src/WorldType.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/minecraft_server/net/minecraft/src/WorldType.java	0000-00-00 00:00:00.000000000 -0000
+@@ -115,7 +115,7 @@
+ 
+     public int getMinimumSpawnHeight(World world)
+     {
+-        return this == FLAT ? 4 : 64;
++        return this == FLAT ? 4 : 145;
+     }
+ 
+     public BiomeGenBase[] getBiomesForWorldType() {
