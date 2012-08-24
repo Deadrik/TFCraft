@@ -238,7 +238,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		if(TFCSeasons.getTotalTicks() > (birthTime + adultAge*TFCSettings.dayLength)){
 	          setGrowingAge(0);
 	          }
-	          else{
+	          else if (isChild()){
 	               setGrowingAge((int)(TFCSeasons.getTotalTicks() - (birthTime + adultAge*TFCSettings.dayLength)));
 	          }
 	}
@@ -283,6 +283,11 @@ public class EntityAnimalTFC extends EntityAnimal
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public boolean isWheat(ItemStack par1ItemStack)
+    {
+        return par1ItemStack.itemID == TFCItems.WheatGrain.shiftedIndex || par1ItemStack.itemID == TFCItems.WildBarleyWhole.shiftedIndex ||par1ItemStack.itemID == TFCItems.WildOatWhole.shiftedIndex||par1ItemStack.itemID == TFCItems.WildRyeWhole.shiftedIndex;
+    }
 
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
@@ -452,6 +457,11 @@ public class EntityAnimalTFC extends EntityAnimal
 			mate.children.add(entityanimal);
 		}
 	}
+	 public void eatGrassBonus()
+	    {
+hunger+=24000;
+
+	    }
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		if(!par1EntityPlayer.worldObj.isRemote){

@@ -32,7 +32,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, var2));
@@ -259,19 +259,8 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
      */
     public void eatGrassBonus()
     {
+    	super.eatGrassBonus();
         this.setSheared(false);
-
-        if (this.isChild())
-        {
-            int var1 = this.getGrowingAge() + 1200;
-
-            if (var1 > 0)
-            {
-                var1 = 0;
-            }
-
-            this.setGrowingAge(var1);
-        }
     }
 
     @Override
