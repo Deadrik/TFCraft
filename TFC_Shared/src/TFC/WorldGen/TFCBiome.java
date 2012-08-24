@@ -16,6 +16,12 @@ import net.minecraft.src.BiomeGenEnd;
 import net.minecraft.src.BiomeGenHell;
 import net.minecraft.src.BiomeGenMushroomIsland;
 import net.minecraft.src.Block;
+import net.minecraft.src.EntityCreeper;
+import net.minecraft.src.EntityEnderman;
+import net.minecraft.src.EntitySkeleton;
+import net.minecraft.src.EntitySlime;
+import net.minecraft.src.EntitySpider;
+import net.minecraft.src.EntityZombie;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.SpawnListEntry;
@@ -300,6 +306,13 @@ public class TFCBiome extends BiomeGenBase
         this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 4, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 4, 4));
         this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
+        
+        this.spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
     }
     
     /**

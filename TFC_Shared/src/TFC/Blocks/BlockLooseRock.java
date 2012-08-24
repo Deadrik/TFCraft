@@ -87,14 +87,12 @@ public class BlockLooseRock extends BlockTerra implements ITextureProvider
 		if (world.getBlockId(i, j-1, k) == 0)
 		{
 		    this.harvestBlock(world,null,i,j,k,par5);
-			//this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
 			world.setBlockWithNotify(i, j, k, 0);
 			return;
 		}
 		if (!Block.blocksList[world.getBlockId(i, j-1, k)].isOpaqueCube())
 		{
 		    this.harvestBlock(world,null,i,j,k,par5);
-			//this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
 			world.setBlockWithNotify(i, j, k, 0);
 			return;
 		}

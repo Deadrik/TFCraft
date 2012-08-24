@@ -287,6 +287,6 @@ public class ServerProxy implements IProxy {
     @Override
     public boolean aiTargetfunc_48100_a(Class par1Class, EntityLiving entity)
     {
-        return entity.func_48336_a(par1Class);
+        return EntityCreeper.class != par1Class && EntityGhast.class != par1Class;
     }
 }
