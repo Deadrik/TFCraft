@@ -1,0 +1,22 @@
+--- ../src_base/common/net/minecraft/src/SpawnerAnimals.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/common/net/minecraft/src/SpawnerAnimals.java	0000-00-00 00:00:00.000000000 -0000
+@@ -7,6 +7,8 @@
+ import java.util.List;
+ import java.util.Random;
+ 
++import TFC.Entities.EntitySheepTFC;
++
+ import net.minecraftforge.common.MinecraftForge;
+ import net.minecraftforge.event.entity.living.LivingSpecialSpawnEvent;
+ 
+@@ -253,6 +255,10 @@
+                 par1World.spawnEntityInWorld(var6);
+             }
+         }
++        else if (par0EntityLiving instanceof EntitySheepTFC)
++        {
++            ((EntitySheepTFC)par0EntityLiving).setFleeceColor(EntitySheepTFC.getRandomFleeceColor(par1World.rand));
++        }
+     }
+ 
+     /**

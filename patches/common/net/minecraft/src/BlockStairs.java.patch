@@ -1,0 +1,11 @@
+--- ../src_base/common/net/minecraft/src/BlockStairs.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/common/net/minecraft/src/BlockStairs.java	0000-00-00 00:00:00.000000000 -0000
+@@ -20,7 +20,7 @@
+         super(par1, par2Block.blockIndexInTexture, par2Block.blockMaterial);
+         this.modelBlock = par2Block;
+         this.field_72158_c = par3;
+-        this.setHardness(par2Block.blockHardness);
++        this.setHardness(par2Block.getBlockHardness());
+         this.setResistance(par2Block.blockResistance / 3.0F);
+         this.setStepSound(par2Block.stepSound);
+         this.setLightOpacity(255);

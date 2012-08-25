@@ -1,0 +1,33 @@
+--- ../src_base/common/net/minecraft/src/Block.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/common/net/minecraft/src/Block.java	0000-00-00 00:00:00.000000000 -0000
+@@ -214,7 +214,7 @@
+     public final int blockID;
+ 
+     /** Indicates how many hits it takes to break a block. */
+-    protected float blockHardness;
++    private float blockHardness;
+ 
+     /** Indicates the blocks resistance to explosions. */
+     protected float blockResistance;
+@@ -385,7 +385,7 @@
+      */
+     public Block setHardness(float par1)
+     {
+-        this.blockHardness = par1;
++        this.setBlockHardness(par1);
+ 
+         if (this.blockResistance < par1 * 5.0F)
+         {
+@@ -1922,4 +1922,12 @@
+ 
+         return new ItemStack(id, 1, getDamageValue(world, x, y, z));
+     }
++
++	public float getBlockHardness() {
++		return blockHardness;
++	}
++
++	public void setBlockHardness(float blockHardness) {
++		this.blockHardness = blockHardness;
++	}
+ }

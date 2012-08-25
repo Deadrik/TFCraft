@@ -1,18 +1,14 @@
---- ../src_base/minecraft/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
-+++ ../src/minecraft/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
-@@ -1,5 +1,11 @@
+--- ../src_base/common/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src/common/net/minecraft/src/WorldProvider.java	0000-00-00 00:00:00.000000000 -0000
+@@ -1,5 +1,7 @@
  package net.minecraft.src;
  
-+import java.util.Random;
-+
 +import TFC.Core.TFCSettings;
 +import TFC.Core.TFC_Core;
-+import TFC.Core.TFC_Game;
-+
- import net.minecraft.src.forge.DimensionManager;
- 
- public abstract class WorldProvider
-@@ -39,6 +45,10 @@
+ import net.minecraftforge.client.SkyProvider;
+ import net.minecraftforge.common.DimensionManager;
+ import cpw.mods.fml.common.Side;
+@@ -44,6 +46,10 @@
          this.terrainType = par1World.getWorldInfo().getTerrainType();
          this.registerWorldChunkManager();
          this.generateLightBrightnessTable();
@@ -23,7 +19,7 @@
      }
  
      /**
-@@ -77,7 +87,8 @@
+@@ -82,7 +88,8 @@
      public boolean canCoordinateBeSpawn(int par1, int par2)
      {
          int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
@@ -33,7 +29,7 @@
      }
  
      /**
-@@ -85,8 +96,8 @@
+@@ -90,8 +97,8 @@
       */
      public float calculateCelestialAngle(long par1, float par3)
      {
@@ -44,16 +40,16 @@
  
          if (var5 < 0.0F)
          {
-@@ -106,7 +117,7 @@
- 
+@@ -112,7 +119,7 @@
+     @SideOnly(Side.CLIENT)
      public int getMoonPhase(long par1, float par3)
      {
 -        return (int)(par1 / 24000L) % 8;
 +        return (int)(par1 / (long)TFCSettings.dayLength) % 8;
      }
  
-     public boolean func_48217_e()
-@@ -184,7 +195,7 @@
+     /**
+@@ -199,7 +206,7 @@
       */
      public float getCloudHeight()
      {
@@ -61,4 +57,4 @@
 +        return 256.0F;
      }
  
-     public boolean isSkyColored()
+     @SideOnly(Side.CLIENT)
