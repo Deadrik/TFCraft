@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.Core.Helper;
+import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
@@ -47,18 +48,46 @@ public class ItemLooseRock extends ItemTerra
         int side = objectMouseOver.sideHit;
         int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 
-        double dist = entityplayer.getDistance(x + map[side][0], y + map[side][1], z + map[side][2])-1.6;
-        if(dist > 0.5)
+        double xCoord = x + map[side][0];
+        double yCoord = y + map[side][1];
+        double zCoord = z + map[side][2];
+
+        if((entityplayer.posX > xCoord+1  || entityplayer.posX < xCoord) || 
+                (entityplayer.posZ > zCoord+1 || entityplayer.posZ < zCoord) || 
+                (entityplayer.posY > yCoord+1.63 || entityplayer.posY < yCoord-1))
         {
-            if(     (itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneIgInCobble.blockID, itemstack.getItemDamage())) || 
-                    (itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
-                    (itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
-                    (itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
+            if(!world.isRemote)
             {
-                world.markBlockNeedsUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
-                itemstack.stackSize = itemstack.stackSize-1;
-                return true;            
+                if(world.getBlockId(x, y, z) == Block.snow.blockID)
+                {
+                    if(     (itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x, y, z, mod_TFC.terraStoneIgInCobble.blockID, itemstack.getItemDamage())) || 
+                            (itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x, y, z, mod_TFC.terraStoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
+                            (itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x, y, z, mod_TFC.terraStoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
+                            (itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x, y, z, mod_TFC.terraStoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
+                    {
+                        if(!world.isRemote)
+                        {
+                            world.markBlockNeedsUpdate(x, y, z);
+                            itemstack.stackSize = itemstack.stackSize-1;   
+                        }
+                        return true; 
+                    }
+                }
+                else if((world.getBlockId(x + map[side][0], y + map[side][1], z + map[side][2]) == 0 || world.getBlockId(x + map[side][0], y + map[side][1], z + map[side][2]) == Block.snow.blockID) &&
+                        (itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneIgInCobble.blockID, itemstack.getItemDamage())) || 
+                        (itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
+                        (itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
+                        (itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], mod_TFC.terraStoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
+                {
+                    if(!world.isRemote)
+                    {
+                        world.markBlockNeedsUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
+                        itemstack.stackSize = itemstack.stackSize-1;   
+                    }
+                    return true; 
+                }
             }
+
         }
 
         return false;

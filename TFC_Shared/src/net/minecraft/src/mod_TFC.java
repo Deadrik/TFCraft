@@ -81,6 +81,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
     public static int slabRenderId;
     public static int cropRenderId;
     public static int cookingPitRenderId;
+    public static int leavesRenderId;
 
     public static Block terraStoneIgIn;
     public static Block terraStoneIgEx;
@@ -200,6 +201,7 @@ public class mod_TFC extends NetworkMod implements ITickHandler
         slabRenderId = proxy.getUniqueBlockModelID(this, false);
         cropRenderId = proxy.getUniqueBlockModelID(this, false);
         cookingPitRenderId = proxy.getUniqueBlockModelID(this, false);
+        leavesRenderId = proxy.getUniqueBlockModelID(this, false);
 
         //Register Blocks
         ModLoader.registerBlock(terraOre, TFC.Items.ItemOre1.class);

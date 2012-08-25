@@ -67,7 +67,7 @@ public class TileEntityFarmland extends TileEntity
                     if(waterSaturation > 30)
                         waterSaturation = 30;
                 }
-                else
+                else if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID) && crop != null)
                 {
                     waterSaturation -= 1*crop.waterUsageMult;
                 }

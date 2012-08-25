@@ -19,7 +19,7 @@ public class TileEntityCrop extends TileEntity
 
     public TileEntityCrop()
     {
-        growth = 0;
+        growth = 0.1f;
         growthTimer = TFCSeasons.totalHours();
         sunLevel = 5;
     }
@@ -76,11 +76,15 @@ public class TileEntityCrop extends TileEntity
                 if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
                 {
                     worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                    worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
                 }
                 else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
                 {
                     if(growth > 1)
+                    {
                         worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+                    }
                 }
 
                 int nutriType = crop.cycleType;
@@ -98,16 +102,27 @@ public class TileEntityCrop extends TileEntity
 
                 float growthRate = (((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult;
 
+                int oldGrowth = (int) Math.floor(growth);
+                
                 growth += growthRate;
+                
+                if(oldGrowth < (int) Math.floor(growth))
+                {
+                    broadcast();
+                }
 
-                if(crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || (tef != null && tef.waterSaturation <= -1))
+                if(crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || (tef != null && tef.waterSaturation <= -1) || growth < 0)
+                {
                     worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                    worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+                }
 
                 growthTimer += R.nextInt(2)+23;
             }
             else if(crop.needsSunlight && sunLevel <= 0)
             {
                 worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+                worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
             }
         }
     }
@@ -138,6 +153,7 @@ public class TileEntityCrop extends TileEntity
     {
         this.cropId = i;
         this.growth = g;
+        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
     }
 
     /**

@@ -21,6 +21,18 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
         this.setTickRandomly(false);
     }
     
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+    
+    @Override
+    public int getRenderType()
+    {
+        return mod_TFC.leavesRenderId;
+    }
+    
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return true;

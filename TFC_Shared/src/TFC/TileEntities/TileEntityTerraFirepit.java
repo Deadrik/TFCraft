@@ -50,19 +50,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     public final int FIREBURNTIME = (int) ((TFCSeasons.hourLength*18)/100);//default 240
 
-    private static int[] area =  {0,0,2,2,2,0,0};
-    private static int[] area0 = {0,2,1,1,1,2,0};
-    private static int[] area1 = {2,1,1,1,1,1,2};
-    private static int[] area2 = {2,1,1,3,1,1,2};
-    private static int[] area3 = {2,1,1,1,1,1,2};
-    private static int[] area4 = {0,2,1,1,1,2,0};
-    private static int[] area5 = {0,0,2,2,2,0,0};
-    private static int[] area0_2 = {0,2,2,2,0};
-    private static int[] area1_2 = {2,1,1,1,2};
-    private static int[] area2_2 = {2,1,1,1,2};
-    private static int[] area3_2 = {2,1,1,1,2};
-    private static int[] area4_2 = {0,2,2,2,0};
-
     public TileEntityTerraFirepit()
     {
         fuelTimeLeft = 375;
@@ -491,7 +478,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
                 reachedTop = true;
             }
-            scanLogs(world,i,j+y,k,checkArray,13,y,13, empty);
+            scanLogs(world,i,j+y,k,checkArray,12,y,12, empty);
             y++;
         }
     }
@@ -701,8 +688,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         }
         return count;
     }
-
-    
 
     public void HandleFuelStack()
     {

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
+import TFC.Core.TFCSettings;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.WorldGen.TFCBiome;
@@ -40,7 +41,13 @@ public class BlockCrop extends BlockContainer
                     world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
                 te.growth = 4;
             }
+            if(TFCSettings.enableDebugMode)
+            {
+                System.out.println("Crop ID: " + te.cropId);
+                System.out.println("Growth: " + te.growth);
+            }
         }
+        
         return false;
     }
 

@@ -346,6 +346,14 @@ public class ClientProxy implements IProxy
         {
             return TFC_CoreRender.RenderCrop(block, i, j, k, (RenderBlocks)renderblocks);
         }
+        else if (l == mod_TFC.leavesRenderId)
+        {
+            int var5 = block.colorMultiplier(iblockaccess, i, j, k);
+            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
+            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
+            float var8 = (float)(var5 & 255) / 255.0F;
+            return TFC_CoreRender.RenderNewLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderblocks, getGraphicsLevel(), true);
+        }
 
 
         return false;
