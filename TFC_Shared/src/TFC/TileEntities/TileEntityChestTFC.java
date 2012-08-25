@@ -266,7 +266,7 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
 
         if (++this.ticksSinceSync % 20 * 4 == 0)
         {
-            this.worldObj.sendClientEvent(this.xCoord, this.yCoord, this.zCoord, 1, this.numUsingPlayers);
+
         }
 
         this.prevLidAngle = this.lidAngle;
@@ -350,13 +350,13 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
     public void openChest()
     {
         ++this.numUsingPlayers;
-        this.worldObj.sendClientEvent(this.xCoord, this.yCoord, this.zCoord, 1, this.numUsingPlayers);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.chest.blockID, 1, this.numUsingPlayers);
     }
 
     public void closeChest()
     {
         --this.numUsingPlayers;
-        this.worldObj.sendClientEvent(this.xCoord, this.yCoord, this.zCoord, 1, this.numUsingPlayers);
+        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, Block.chest.blockID, 1, this.numUsingPlayers);
     }
 
     /**

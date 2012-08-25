@@ -1,11 +1,13 @@
 package TFC.Blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Material;
@@ -31,7 +33,7 @@ public class BlockStair extends BlockPartial
      * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
      * axisAlignedBB, arrayList
      */
-    public void getCollidingBoundingBoxes(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+    public void addCollidingBlockToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
     {
         int var7 = par1World.getBlockMetadata(par2, par3, par4);
         int var8 = var7 & 3;
@@ -49,27 +51,27 @@ public class BlockStair extends BlockPartial
         }
 
         this.setBlockBounds(0.0F, var9, 0.0F, 1.0F, var10, 1.0F);
-        super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+        super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
         if (var8 == 0)
         {
             this.setBlockBounds(0.5F, var11, 0.0F, 1.0F, var12, 1.0F);
-            super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+            super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         }
         else if (var8 == 1)
         {
             this.setBlockBounds(0.0F, var11, 0.0F, 0.5F, var12, 1.0F);
-            super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+            super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         }
         else if (var8 == 2)
         {
             this.setBlockBounds(0.0F, var11, 0.5F, 1.0F, var12, 1.0F);
-            super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+            super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         }
         else if (var8 == 3)
         {
             this.setBlockBounds(0.0F, var11, 0.0F, 1.0F, var12, 0.5F);
-            super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+            super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         }
 
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

@@ -2,9 +2,8 @@ package TFC.Items;
 
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemIgExCobble extends ItemBlock implements ITextureProvider
+public class ItemIgExCobble extends ItemBlock
 {
 	public static String[] blockNames = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
 

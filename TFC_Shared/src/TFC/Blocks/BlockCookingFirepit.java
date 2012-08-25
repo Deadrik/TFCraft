@@ -7,9 +7,8 @@ import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockCookingFirepit extends BlockContainer implements ITextureProvider
+public class BlockCookingFirepit extends BlockContainer
 {
 	private Class EntityClass;
 
@@ -68,20 +67,6 @@ public class BlockCookingFirepit extends BlockContainer implements ITextureProvi
 			}
 			return true;
 		}
-	}
-
-	@Override
-	public TileEntity getBlockEntity()
-	{
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
@@ -261,4 +246,10 @@ public class BlockCookingFirepit extends BlockContainer implements ITextureProvi
     {
         return true;
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

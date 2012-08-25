@@ -15,10 +15,8 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraWood extends Block implements ITextureProvider
+public class BlockTerraWood extends Block
 {
 
     public BlockTerraWood(int i) 

@@ -1,9 +1,8 @@
 package TFC.Items;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraSword extends ItemSword implements ITextureProvider
+public class ItemTerraSword extends ItemSword
 {
 	private int weaponDamage;
 	private final EnumToolMaterial toolMaterial;

@@ -6,14 +6,14 @@ import net.minecraft.src.*;
 
 public class RandomPositionGeneratorTFC
 {
-    private static Vec3D field_48624_a = Vec3D.createVectorHelper(0.0D, 0.0D, 0.0D);
+    private static Vec3 field_48624_a = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
 
-    public static Vec3D func_48622_a(EntityCreature par0EntityCreature, int par1, int par2)
+    public static Vec3 func_48622_a(EntityCreature par0EntityCreature, int par1, int par2)
     {
-        return func_48621_c(par0EntityCreature, par1, par2, (Vec3D)null);
+        return func_48621_c(par0EntityCreature, par1, par2, (Vec3)null);
     }
 
-    public static Vec3D func_48620_a(EntityCreature par0EntityCreature, int par1, int par2, Vec3D par3Vec3D)
+    public static Vec3 func_48620_a(EntityCreature par0EntityCreature, int par1, int par2, Vec3 par3Vec3D)
     {
         field_48624_a.xCoord = par3Vec3D.xCoord - par0EntityCreature.posX;
         field_48624_a.yCoord = par3Vec3D.yCoord - par0EntityCreature.posY;
@@ -21,7 +21,7 @@ public class RandomPositionGeneratorTFC
         return func_48621_c(par0EntityCreature, par1, par2, field_48624_a);
     }
 
-    public static Vec3D func_48623_b(EntityCreature par0EntityCreature, int par1, int par2, Vec3D par3Vec3D)
+    public static Vec3 func_48623_b(EntityCreature par0EntityCreature, int par1, int par2, Vec3 par3Vec3D)
     {
         field_48624_a.xCoord = par0EntityCreature.posX - par3Vec3D.xCoord;
         field_48624_a.yCoord = par0EntityCreature.posY - par3Vec3D.yCoord;
@@ -29,7 +29,7 @@ public class RandomPositionGeneratorTFC
         return func_48621_c(par0EntityCreature, par1, par2, field_48624_a);
     }
 
-    private static Vec3D func_48621_c(EntityCreature par0EntityCreature, int par1, int par2, Vec3D par3Vec3D)
+    private static Vec3 func_48621_c(EntityCreature par0EntityCreature, int par1, int par2, Vec3 par3Vec3D)
     {
         Random var4 = par0EntityCreature.getRNG();
         boolean var5 = false;
@@ -41,7 +41,7 @@ public class RandomPositionGeneratorTFC
 
         if (par0EntityCreature.hasHome())
         {
-            double var11 = par0EntityCreature.getHomePosition().getEuclideanDistanceTo(MathHelper.floor_double(par0EntityCreature.posX), MathHelper.floor_double(par0EntityCreature.posY), MathHelper.floor_double(par0EntityCreature.posZ)) + 4.0D;
+            double var11 = par0EntityCreature.getHomePosition().getDistanceSquared(MathHelper.floor_double(par0EntityCreature.posX), MathHelper.floor_double(par0EntityCreature.posY), MathHelper.floor_double(par0EntityCreature.posZ)) + 4.0D;
             var10 = var11 < (double)(par0EntityCreature.getMaximumHomeDistance() + (float)par1);
         }
         else
@@ -79,7 +79,7 @@ public class RandomPositionGeneratorTFC
 
         if (var5)
         {
-            return Vec3D.createVector((double)var6, (double)var7, (double)var8);
+            return Vec3.createVectorHelper((double)var6, (double)var7, (double)var8);
         }
         else
         {

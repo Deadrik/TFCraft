@@ -2,12 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.TileEntities.TileEntityTerraLogPile;
+import TFC.TileEntities.*;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraLogPile extends BlockContainer implements ITextureProvider
+public class BlockTerraLogPile extends BlockContainer
 {
 	private Class EntityClass;
 
@@ -24,7 +23,7 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
     }
 
 	@Override
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		if (mod_TFC.proxy.isRemote())
 		{
@@ -52,22 +51,6 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 			}
 
 		}
-	}
-
-	
-
-	@Override
-	public TileEntity getBlockEntity() 
-	{
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
@@ -146,4 +129,10 @@ public class BlockTerraLogPile extends BlockContainer implements ITextureProvide
 	}
 
 	public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityTerraLogPile();
+	}
 }

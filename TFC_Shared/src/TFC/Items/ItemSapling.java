@@ -1,9 +1,8 @@
 package TFC.Items;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemSapling extends ItemBlock implements ITextureProvider
+public class ItemSapling extends ItemBlock
 {
 	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};

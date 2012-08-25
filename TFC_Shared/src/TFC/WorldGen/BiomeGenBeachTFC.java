@@ -10,9 +10,9 @@ public class BiomeGenBeachTFC extends TFCBiome
 		spawnableCreatureList.clear();
 		topBlock = (byte)Block.sand.blockID;
 		fillerBlock = (byte)Block.sand.blockID;
-		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = -999;
-		((BiomeDecoratorTFC)this.biomeDecorator).deadBushPerChunk = 0;
-		((BiomeDecoratorTFC)this.biomeDecorator).reedsPerChunk = 0;
-		((BiomeDecoratorTFC)this.biomeDecorator).cactiPerChunk = 0;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = -999;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).deadBushPerChunk = 0;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).reedsPerChunk = 0;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).cactiPerChunk = 0;
 	}
 }

@@ -23,10 +23,8 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockFruitWood extends BlockContainer implements ITextureProvider
+public class BlockFruitWood extends BlockContainer
 {
     private Class EntityClass;
     public BlockFruitWood(int i, int index, Class c) 
@@ -205,20 +203,6 @@ public class BlockFruitWood extends BlockContainer implements ITextureProvider
             world.setBlockWithNotify(i, j, k, 0);
             world.markBlockNeedsUpdate(i, j, k);
         }
-    }
-
-    @Override
-    public TileEntity getBlockEntity()
-    {
-        try
-        {
-            return (TileEntity) EntityClass.newInstance();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public int getRenderType()
@@ -436,4 +420,9 @@ public class BlockFruitWood extends BlockContainer implements ITextureProvider
             }
         return "";
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		return new TileEntityFruitTreeWood();
+	}
 }

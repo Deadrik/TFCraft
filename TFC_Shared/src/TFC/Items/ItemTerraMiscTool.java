@@ -1,9 +1,8 @@
 package TFC.Items;
 
 import net.minecraft.src.Item;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraMiscTool extends ItemTerra implements ITextureProvider
+public class ItemTerraMiscTool extends ItemTerra
 {
 
 	public ItemTerraMiscTool(int i) 

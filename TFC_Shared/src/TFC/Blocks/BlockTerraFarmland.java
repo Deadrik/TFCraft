@@ -36,7 +36,7 @@ public class BlockTerraFarmland extends BlockContainer
 	 */
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		return AxisAlignedBB.getBoundingBoxFromPool((double)(par2 + 0), (double)(par3 + 0), (double)(par4 + 0), (double)(par2 + 1), (double)(par3 + 1), (double)(par4 + 1));
+		return AxisAlignedBB.getBoundingBox((double)(par2 + 0), (double)(par3 + 0), (double)(par4 + 0), (double)(par2 + 1), (double)(par3 + 1), (double)(par4 + 1));
 	}
 
 	/**
@@ -131,17 +131,9 @@ public class BlockTerraFarmland extends BlockContainer
         return "/bioxx/terrablocks2.png";
     }
 
-    @Override
-    public TileEntity getBlockEntity()
-    {
-        try
-        {
-            return TileEntityFarmland.class.newInstance();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityFarmland();
+	}
 }

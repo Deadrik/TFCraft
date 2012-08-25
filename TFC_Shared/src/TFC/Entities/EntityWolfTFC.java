@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import TFC.Core.TFCSeasons;
+import TFC.Core.TFCSettings;
 
 import net.minecraft.src.*;
 
@@ -32,6 +33,33 @@ public class EntityWolfTFC extends EntityTameableTFC
 	{
 		super(par1World);
 		fooditems.add(Item.beefRaw.shiftedIndex);
+		fooditems.add(Item.porkRaw.shiftedIndex);
+		this.texture = "/mob/wolf.png";
+		this.setSize(0.6F, 0.8F);
+		this.moveSpeed = 0.4F;
+		warning = -121;
+		this.getNavigator().setAvoidsWater(true);
+		this.tasks.addTask(1, new EntityAISwimming(this));
+		this.tasks.addTask(2, this.aiSit);
+		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
+		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, this.moveSpeed, 10.0F, 2.0F));
+		this.tasks.addTask(6, new EntityAIMateTFC(this, this.moveSpeed));
+		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
+		this.tasks.addTask(8, new EntityAIBegTFC(this, 8.0F));
+		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(9, new EntityAILookIdle(this));
+		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTargetTFC(this));
+		this.targetTasks.addTask(2, new EntityAIOwnerHurtTargetTFC(this));
+		this.targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, true));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntitySheepTFC.class, 16.0F, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntityPigTFC.class, 16.0F, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamedTFC(this, EntityDeer.class, 16.0F, 200, false));
+	}
+	public EntityWolfTFC(World par1World,EntityAnimalTFC mother, float F_size)
+	{
+    	super(par1World,mother,F_size);
+    	fooditems.add(Item.beefRaw.shiftedIndex);
 		fooditems.add(Item.porkRaw.shiftedIndex);
 		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
@@ -193,6 +221,16 @@ public class EntityWolfTFC extends EntityTameableTFC
 			this.timeWolfIsShaking = 0.0F;
 			this.prevTimeWolfIsShaking = 0.0F;
 			this.worldObj.setEntityState(this, (byte)8);
+		}
+		if(pregnant){
+			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+				int i = rand.nextInt(5) + 3;
+				for (int x = 0; x<i;x++){
+				EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);
+				giveBirth(baby);
+				}
+				pregnant = false;
+			}
 		}
 	}
 

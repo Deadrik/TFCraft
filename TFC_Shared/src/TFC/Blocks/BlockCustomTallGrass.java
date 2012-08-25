@@ -7,8 +7,7 @@ import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ForgeHooks;
-import net.minecraft.src.forge.IShearable;
+import net.minecraftforge.common.IShearable;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 {

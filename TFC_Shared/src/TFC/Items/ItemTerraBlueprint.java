@@ -5,9 +5,8 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraBlueprint extends Item implements ITextureProvider
+public class ItemTerraBlueprint extends Item
 {
 	public static StructureBlueprint[] blueprints = new StructureBlueprint[64];
 

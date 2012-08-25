@@ -21,9 +21,8 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraIgExSmooth extends Block implements ITextureProvider
+public class BlockTerraIgExSmooth extends Block
 {
 	public BlockTerraIgExSmooth(int i, int tex) 
 	{
@@ -63,7 +62,7 @@ public class BlockTerraIgExSmooth extends Block implements ITextureProvider
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
     @Override
-    public boolean blockActivated(World world, int x, int y, int z, EntityPlayer entityplayer) 
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) 
     {
         boolean hasHammer = false;
         for(int i = 0; i < 9;i++)
@@ -110,7 +109,7 @@ public class BlockTerraIgExSmooth extends Block implements ITextureProvider
             }
             
             int mode = 0;
-            if(!TFC_Core.isClient())
+            if(!world.isRemote)
             {
                 PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
                 

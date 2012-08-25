@@ -5,9 +5,8 @@ import java.util.List;
 import TFC.Core.TFCSettings;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraMiscToolHead extends ItemTerra implements ITextureProvider
+public class ItemTerraMiscToolHead extends ItemTerra
 {
 
 	public ItemTerraMiscToolHead(int i) 

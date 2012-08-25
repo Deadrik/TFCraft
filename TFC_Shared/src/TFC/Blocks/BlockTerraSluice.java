@@ -99,24 +99,6 @@ public class BlockTerraSluice extends BlockContainer
 		}
 	}
 
-	@Override
-	public TileEntity getBlockEntity()
-	{
-
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-		try
-		{
-			if(!isBlockFootOfBed(meta)) {
-				return (TileEntity) EntityClass.newInstance();
-			}
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(j == 4) {
@@ -324,10 +306,6 @@ public class BlockTerraSluice extends BlockContainer
 				}
 			}
 		}
-		if(this.getBlockEntity()!= null)
-		{
-			this.getBlockEntity().canUpdate();
-		}
 	}
 
 	public boolean renderAsNormalBlock()
@@ -342,6 +320,14 @@ public class BlockTerraSluice extends BlockContainer
 		xCoord = i;
 		yCoord = j;
 		zCoord = k;
+	}
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		if(!isBlockFootOfBed(meta)) {
+			return new TileEntityTerraSluice();
+		}
+		return null;
 	}
 
 }

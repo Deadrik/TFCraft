@@ -1,7 +1,10 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.Core.Helper;
 import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
@@ -34,11 +37,10 @@ public class ItemLooseRock extends ItemTerra
             {-1,0,0},
             {1,0,0},
         };
-
-    @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+    
+    public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, float par8, float par9, float par10)
     {
-        MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
+    	MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
         if(objectMouseOver == null) {
             return false;
         }
@@ -146,7 +148,7 @@ public class ItemLooseRock extends ItemTerra
     }
 
     @Override
-    public void addCreativeItems(java.util.ArrayList list)
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
     {
         for(int i = 0; i < 23; i++) {
             list.add(new ItemStack(this,1,i));

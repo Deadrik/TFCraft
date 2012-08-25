@@ -3,9 +3,8 @@ package TFC.Blocks;
 import TFC.Core.TFCSettings;
 import TFC.Core.TFC_Core;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public abstract class BlockTerra2 extends Block implements ITextureProvider
+public abstract class BlockTerra2 extends Block
 {
 	protected BlockTerra2(int par1) 
 	{
@@ -31,7 +30,7 @@ public abstract class BlockTerra2 extends Block implements ITextureProvider
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
     {
         //TODO: Debug Message should go here if debug is toggled on
-        if(TFCSettings.enableDebugMode && TFC_Core.isClient())
+        if(TFCSettings.enableDebugMode && world.isRemote)
         {
             int metadata = world.getBlockMetadata(i, j, k);
             System.out.println("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());

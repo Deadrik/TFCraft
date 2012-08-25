@@ -18,10 +18,8 @@ import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
+public class BlockTerraAnvil extends BlockContainer
 {
 	private int meta;
 	private int xCoord;
@@ -85,24 +83,10 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
         int meta = par1World.getBlockMetadata(par2, par3, par4);
         int direction = getDirectionFromMetadata(meta);
         if(direction == 0)
-            return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
+            return AxisAlignedBB.getBoundingBox((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
         else
-            return AxisAlignedBB.getBoundingBoxFromPool((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
+            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
     }
-
-	@Override
-	public TileEntity getBlockEntity()
-	{
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
@@ -222,7 +206,7 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 		world.setBlockMetadataWithNotify(i, j, k, byte0);
 
 	}
-	public void onBlockRemoval(World par1World, int par2, int par3, int par4)
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		TileEntityTerraAnvil var5 = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -265,7 +249,7 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
 		
 		
 
-		super.onBlockRemoval(par1World, par2, par3, par4);
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
 	public boolean renderAsNormalBlock()
 	{
@@ -288,4 +272,10 @@ public class BlockTerraAnvil extends BlockContainer implements ITextureProvider
             return 0;
         }
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityTerraAnvil();
+	}
 }

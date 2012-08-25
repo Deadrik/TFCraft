@@ -8,9 +8,8 @@ import TFC.Core.TFCSettings;
 import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraGrass extends BlockGrass implements ITextureProvider
+public class BlockTerraGrass extends BlockGrass
 {
     public int grassID = 0;
     public int grass2ID = 0;

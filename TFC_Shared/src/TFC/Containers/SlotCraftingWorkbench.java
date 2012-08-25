@@ -1,8 +1,6 @@
 package TFC.Containers;
 
-import TFC.Core.ServerClientProxy;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ForgeHooks;
 
 public class SlotCraftingWorkbench extends Slot
 {
@@ -83,8 +81,8 @@ public class SlotCraftingWorkbench extends Slot
 			this.thePlayer.addStat(AchievementList.bookcase, 1);
 		}
 
-		ServerClientProxy.getProxy().takenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
-		ForgeHooks.onTakenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
+		mod_TFC.proxy.takenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
+		//ForgeHooks.onTakenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
 	}
 
 	protected void func_48435_a(ItemStack par1ItemStack, int par2)

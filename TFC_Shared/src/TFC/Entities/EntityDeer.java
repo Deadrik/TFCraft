@@ -3,10 +3,10 @@ package TFC.Entities;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.Core.TFCSeasons;
 import TFC.Core.TFCSettings;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.IShearable;
 
 public class EntityDeer extends EntityAnimalTFC
 {    
@@ -38,6 +38,29 @@ public class EntityDeer extends EntityAnimalTFC
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
+    public EntityDeer(World par1World,EntityAnimalTFC mother, float F_size)
+	{
+    	super(par1World,mother,F_size);
+    	running = false;
+        this.texture = "/mob/deer.png";
+        this.setSize(0.9F, 1.3F);
+        float var2 = 0.23F / 1.1F;
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+        this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
+        this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
+        this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
+        this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8.0F, 0.5F, 0.7F));
+        this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16.0F, 0.25F, 0.3F));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.shiftedIndex, false));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
+        this.tasks.addTask(5, this.aiEatGrass);
+        //this.tasks.addTask(5, new EntityAIRutt(this, var2));
+        this.tasks.addTask(6, new EntityAIWander(this, var2));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+	}
     
     /**
      * Returns true if the newer Entity AI code should be run
@@ -75,6 +98,14 @@ public class EntityDeer extends EntityAnimalTFC
         else{
         	this.texture = "/mob/deer.png";
         }
+        if(pregnant){
+			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+				EntityDeer baby = new EntityDeer(worldObj, this,mateSizeMod);
+				giveBirth(baby);
+				pregnant = false;
+			}
+		}
+
         super.onLivingUpdate();
     }
 
@@ -94,10 +125,6 @@ public class EntityDeer extends EntityAnimalTFC
      */
     protected void dropFewItems(boolean par1, int par2)
     {
-        if (!this.getSheared())
-        {
-            this.entityDropItem(new ItemStack(Block.cloth.blockID, 1, this.getFleeceColor()), 0.0F);
-        }
     }
 
     /**

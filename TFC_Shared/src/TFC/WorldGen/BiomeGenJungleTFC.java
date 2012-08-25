@@ -11,15 +11,19 @@ import net.minecraft.src.WorldGenVines;
 import net.minecraft.src.WorldGenerator;
 
 import TFC.Entities.EntityChickenTFC;
+import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
+import TFC.WorldGen.Generators.WorldGenCustomShrub;
+import TFC.WorldGen.Generators.WorldGenCustomTallGrass;
 
 public class BiomeGenJungleTFC extends TFCBiome
 {
 	public BiomeGenJungleTFC(int id)
 	{
 		super(id);
-		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 50;
-		((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 25;
-		((BiomeDecoratorTFC)this.biomeDecorator).flowersPerChunk = 4;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 50;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 25;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).flowersPerChunk = 4;
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 4, 4));
 

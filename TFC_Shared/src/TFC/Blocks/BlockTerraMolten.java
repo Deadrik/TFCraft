@@ -20,9 +20,8 @@ import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC.*;
 import net.minecraft.src.mod_TFC;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraMolten extends Block implements ITextureProvider
+public class BlockTerraMolten extends Block
 {
 	private int meta;
 	private int xCoord;

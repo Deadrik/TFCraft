@@ -9,6 +9,15 @@ import TFC.Core.Helper;
 import TFC.Core.TFCSeasons;
 import TFC.Core.WeatherManager;
 import TFC.Entities.*;
+import TFC.WorldGen.Generators.WorldGenCustomBigTree;
+import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
+import TFC.WorldGen.Generators.WorldGenCustomMapleShortTrees;
+import TFC.WorldGen.Generators.WorldGenCustomMapleTallTrees;
+import TFC.WorldGen.Generators.WorldGenCustomRedwoodTrees;
+import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
+import TFC.WorldGen.Generators.WorldGenCustomTallTrees;
+import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
+import TFC.WorldGen.Generators.WorldGenDouglasFir;
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.BiomeGenDesert;
@@ -299,7 +308,7 @@ public class TFCBiome extends BiomeGenBase
         worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
         worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
         
-        this.biomeDecorator = this.createBiomeDecorator();
+        this.theBiomeDecorator = this.createBiomeDecorator();
         
         this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 4, 4));
@@ -325,7 +334,7 @@ public class TFCBiome extends BiomeGenBase
     
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
-        this.biomeDecorator.decorate(par1World, par2Random, par3, par4);
+        this.theBiomeDecorator.decorate(par1World, par2Random, par3, par4);
     }
     
     /**
@@ -702,7 +711,7 @@ public class TFCBiome extends BiomeGenBase
 
     public WorldGenerator getRandomWorldGenForTrees(Random randomGenerator,World currentWorld) 
     {
-        return (WorldGenerator)(randomGenerator.nextInt(10) == 0 ? this.worldGenBigTree : this.worldGenTrees);
+        return (WorldGenerator)(randomGenerator.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);
     }
 
     public static boolean[] deck = new boolean[24];

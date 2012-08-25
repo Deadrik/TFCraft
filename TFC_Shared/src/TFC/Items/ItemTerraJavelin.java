@@ -1,12 +1,12 @@
 package TFC.Items;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import TFC.Entities.EntityTerraJavelin;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.*;
 
-public class ItemTerraJavelin extends ItemTool implements ITextureProvider
+public class ItemTerraJavelin extends ItemTool
 {
     private static int weaponDamage;
     public ItemTerraJavelin(int par1)
@@ -19,9 +19,9 @@ public class ItemTerraJavelin extends ItemTool implements ITextureProvider
     }
 
     @Override
-    public void addCreativeItems(ArrayList itemList)
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
     {
-        itemList.add(new ItemStack(this));
+        list.add(new ItemStack(this));
     }
 
     /**
@@ -70,6 +70,7 @@ public class ItemTerraJavelin extends ItemTool implements ITextureProvider
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));

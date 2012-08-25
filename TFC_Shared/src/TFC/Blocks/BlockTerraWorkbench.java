@@ -35,21 +35,6 @@ public class BlockTerraWorkbench extends BlockContainer
 		}
 	}
 
-	@Override
-	public TileEntity getBlockEntity() 
-	{
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public int getBlockTextureFromSide(int i)
 	{
 		if (i == 1)
@@ -68,5 +53,11 @@ public class BlockTerraWorkbench extends BlockContainer
 		{
 			return blockIndexInTexture;
 		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityTerraWorkbench();
 	}
 }

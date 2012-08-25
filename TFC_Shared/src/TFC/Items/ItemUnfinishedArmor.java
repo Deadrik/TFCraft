@@ -2,9 +2,8 @@ package TFC.Items;
 
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemUnfinishedArmor extends ItemTerra implements ITextureProvider
+public class ItemUnfinishedArmor extends ItemTerra
 {
 	String texture;
 

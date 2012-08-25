@@ -4,10 +4,8 @@ import java.util.List;
 
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemCustomSaw extends ItemAxe
-implements ITextureProvider
 {
 	public ItemCustomSaw(int i, EnumToolMaterial e)
 	{

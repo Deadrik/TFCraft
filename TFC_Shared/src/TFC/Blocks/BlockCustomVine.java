@@ -6,7 +6,7 @@ import java.util.Random;
 import TFC.Core.ColorizerFoliageTFC;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.IShearable;
+import net.minecraftforge.common.IShearable;
 
 public class BlockCustomVine extends Block implements IShearable
 {

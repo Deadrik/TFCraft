@@ -6,7 +6,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.Vec3D;
+import net.minecraft.src.Vec3;
 import net.minecraft.src.World;
 
 public class Helper {
@@ -29,7 +29,7 @@ public class Helper {
 		double var7 = par2EntityPlayer.prevPosX + (par2EntityPlayer.posX - par2EntityPlayer.prevPosX) * (double)var4;
 		double var9 = par2EntityPlayer.prevPosY + (par2EntityPlayer.posY - par2EntityPlayer.prevPosY) * (double)var4 + 1.62D - (double)par2EntityPlayer.yOffset;
 		double var11 = par2EntityPlayer.prevPosZ + (par2EntityPlayer.posZ - par2EntityPlayer.prevPosZ) * (double)var4;
-		Vec3D var13 = Vec3D.createVector(var7, var9, var11);
+		Vec3 var13 = Vec3.createVectorHelper(var7, var9, var11);
 		float var14 = MathHelper.cos(-var6 * 0.017453292F - (float)Math.PI);
 		float var15 = MathHelper.sin(-var6 * 0.017453292F - (float)Math.PI);
 		float var16 = -MathHelper.cos(-var5 * 0.017453292F);
@@ -37,7 +37,7 @@ public class Helper {
 		float var18 = var15 * var16;
 		float var20 = var14 * var16;
 		double var21 = 4; /*ModLoader.getMinecraftInstance().playerController.getBlockReachDistance()*/
-		Vec3D var23 = var13.addVector((double)var18 * var21, (double)var17 * var21, (double)var20 * var21);
+		Vec3 var23 = var13.addVector((double)var18 * var21, (double)var17 * var21, (double)var20 * var21);
 		MovingObjectPosition var24 = par1World.rayTraceBlocks_do_do(var13, var23, par3, !par3);
 		return var24;
 	}

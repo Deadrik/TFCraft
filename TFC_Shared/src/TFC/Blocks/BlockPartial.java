@@ -10,27 +10,12 @@ import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockPartial extends BlockContainer implements ITextureProvider
+public class BlockPartial extends BlockContainer
 {
     public BlockPartial(int par1, Material m)
     {
         super(par1, m);
-    }
-
-    @Override
-    public TileEntity getBlockEntity()
-    {
-        try
-        {
-            return (TileEntityPartial) TileEntityPartial.class.newInstance();
-        } 
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
     }
     @Override
     public boolean isOpaqueCube()
@@ -75,5 +60,10 @@ public class BlockPartial extends BlockContainer implements ITextureProvider
     {   
 
     }
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityPartial();
+	}
 
 }

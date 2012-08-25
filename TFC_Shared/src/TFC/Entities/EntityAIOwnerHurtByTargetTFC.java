@@ -34,7 +34,7 @@ public class EntityAIOwnerHurtByTargetTFC extends EntityAITarget
             else
             {
                 this.field_48393_b = var1.getAITarget();
-                return mod_TFC.proxy.aiTargetShouldExecute(this, field_48393_b, false);
+                return this.isSuitableTarget(field_48393_b, false);
             }
         }
     }

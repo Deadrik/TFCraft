@@ -10,9 +10,8 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraAnvil extends Item implements ITextureProvider
+public class ItemTerraAnvil extends Item
 {
 	public int anvilId;
 	public AnvilReq req;

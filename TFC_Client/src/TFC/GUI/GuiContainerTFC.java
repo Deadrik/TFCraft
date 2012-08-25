@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public abstract class GuiContainerTFC extends GuiScreen
+public abstract class GuiContainerTFC extends GuiContainer
 {
     /** Stacks renderer. Icons, stack size, health, etc... */
     protected static RenderItem itemRenderer = new RenderItem();
@@ -34,6 +34,7 @@ public abstract class GuiContainerTFC extends GuiScreen
 
     public GuiContainerTFC(Container par1Container)
     {
+    	super(par1Container);
         this.inventorySlots = par1Container;
     }
 
@@ -343,18 +344,6 @@ public abstract class GuiContainerTFC extends GuiScreen
         if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
         {
             this.mc.thePlayer.closeScreen();
-        }
-    }
-
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
-    public void onGuiClosed()
-    {
-        if (this.mc.thePlayer != null)
-        {
-            this.inventorySlots.onCraftGuiClosed(this.mc.thePlayer);
-            this.mc.playerController.func_20086_a(this.inventorySlots.windowId, this.mc.thePlayer);
         }
     }
 

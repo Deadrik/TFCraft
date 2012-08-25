@@ -4,10 +4,8 @@ import java.util.List;
 
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemCustomShovel extends ItemTool
-implements ITextureProvider
 {
     /** an array of the blocks this spade is effective against */
     private static Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, 

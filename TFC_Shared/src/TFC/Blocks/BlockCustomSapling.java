@@ -2,17 +2,16 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.WorldGen.WorldGenCustomCedarTrees;
-import TFC.WorldGen.WorldGenCustomHugeTrees;
-import TFC.WorldGen.WorldGenCustomRedwoodTrees;
-import TFC.WorldGen.WorldGenCustomShortTrees;
-import TFC.WorldGen.WorldGenCustomWillowTrees;
-import TFC.WorldGen.WorldGenDouglasFir;
+import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
+import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.WorldGenCustomRedwoodTrees;
+import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
+import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
+import TFC.WorldGen.Generators.WorldGenDouglasFir;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockCustomSapling extends BlockCustomFlower implements ITextureProvider
+public class BlockCustomSapling extends BlockCustomFlower
 {
 	public BlockCustomSapling(int i, int j)
 	{

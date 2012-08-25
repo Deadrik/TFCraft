@@ -7,9 +7,8 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraWoodSupport extends Item implements ITextureProvider
+public class ItemTerraWoodSupport extends Item
 {
 	Boolean isVertical;
 

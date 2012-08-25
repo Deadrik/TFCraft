@@ -37,7 +37,7 @@ public class ContainerTFC extends Container
                 var8 = var7.getStack();
 
                 if (var8 != null && var8.itemID == is.itemID && (!is.getHasSubtypes() || is.getItemDamage() == var8.getItemDamage()) && 
-                        mod_TFC.proxy.areItemStacksEqual(is, var8) && var8.stackSize+is.stackSize < maxStack)
+                		ItemStack.areItemStacksEqual(is, var8) && var8.stackSize+is.stackSize < maxStack)
                 {
                     int var9 = var8.stackSize + is.stackSize;
 

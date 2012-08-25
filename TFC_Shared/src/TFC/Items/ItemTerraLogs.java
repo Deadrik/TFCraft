@@ -1,7 +1,10 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.Core.Helper;
 import TFC.TileEntities.TileEntityTerraLogPile;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -9,9 +12,8 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraLogs extends ItemTerra implements ITextureProvider
+public class ItemTerraLogs extends ItemTerra
 {
 	public static String[] blockNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 		"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
@@ -26,7 +28,7 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
 	}
 
 	@Override
-	public void addCreativeItems(java.util.ArrayList list)
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < 16; i++) {
 			list.add(new ItemStack(this,1,i));
@@ -109,7 +111,7 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
 		return "/bioxx/terrasprites2.png";
 	}
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ) 
     {
 	    MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
         if(objectMouseOver == null) {
@@ -118,7 +120,7 @@ public class ItemTerraLogs extends ItemTerra implements ITextureProvider
         int x = objectMouseOver.blockX;
         int y = objectMouseOver.blockY;
         int z = objectMouseOver.blockZ;
-        int side = objectMouseOver.sideHit;
+
         int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 
         if(world.getBlockId(x, y, z) != mod_TFC.LogPile.blockID || entityplayer.isSneaking())

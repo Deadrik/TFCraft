@@ -681,7 +681,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 for (Iterator iterator = list.iterator(); iterator.hasNext();)
                 {
                     EntityItem entity = (EntityItem)iterator.next();
-                    String name = mod_TFC.proxy.getDisplayName(entity.item) ;
                     if(entity.item.itemID == Item.coal.shiftedIndex && entity.item.getItemDamage() == 1 || entity.item.itemID == TFCItems.Coke.shiftedIndex)
                     {
                         for(int c = 0; c < entity.item.stackSize; c++)

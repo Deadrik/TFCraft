@@ -116,7 +116,7 @@ public class WavefrontObject
         try
         {
             //FileInputStream fstream = new FileInputStream(ModLoader.getMinecraftInstance().getMinecraftDir()+file);
-            InputStream is = ModLoader.getMinecraftInstance().renderEngine.texturePack.selectedTexturePack.getResourceAsStream(file);
+            InputStream is = ModLoader.getMinecraftInstance().renderEngine.texturePack.getSelectedTexturePack().getResourceAsStream(file);
             // Get the object of DataInputStream
             DataInputStream in = new DataInputStream(is);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));

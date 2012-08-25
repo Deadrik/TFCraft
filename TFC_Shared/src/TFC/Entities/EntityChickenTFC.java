@@ -1,5 +1,7 @@
 package TFC.Entities;
 
+import TFC.Core.TFCSeasons;
+import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
 
 public class EntityChickenTFC extends EntityAnimalTFC
@@ -31,6 +33,23 @@ public class EntityChickenTFC extends EntityAnimalTFC
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
     }
+    public EntityChickenTFC(World par1World,EntityAnimalTFC mother, float F_size)
+	{
+    	super(par1World,mother,F_size);
+    	this.texture = "/mob/chicken.png";
+        //this.setSize(0.3F, 0.7F);
+        this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+        float var2 = 0.25F;
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+        this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
+        this.tasks.addTask(5, new EntityAIWander(this, var2));
+        this.tasks.addTask(5, this.aiEatGrass);
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+	}
 
     /**
      * Returns true if the newer Entity AI code should be run
@@ -59,6 +78,16 @@ public class EntityChickenTFC extends EntityAnimalTFC
         this.field_756_e = this.field_752_b;
         this.field_757_d = this.destPos;
         this.destPos = (float)((double)this.destPos + (double)(this.onGround ? -1 : 4) * 0.3D);
+        if(pregnant){
+			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+				int i = rand.nextInt(4) + 9;
+				for (int x = 0; x<i;x++){
+				EntityChickenTFC baby = new EntityChickenTFC(worldObj, this,mateSizeMod);
+				giveBirth(baby);
+				}
+				pregnant = false;
+			}
+		}
 
         if (this.destPos < 0.0F)
         {

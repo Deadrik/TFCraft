@@ -141,6 +141,10 @@ public class EntityAnimalTFC extends EntityAnimal
 		{
 			hunger = 168000;
 		}
+		if (hunger > 0)
+		{
+			hunger--;
+		}
 		/**
 		 * This Cancels out the growingAge from EntityAgeable
 		 * */
@@ -165,13 +169,13 @@ public class EntityAnimalTFC extends EntityAnimal
 		}
 
 
-		if(pregnant){
+		/*if(pregnant){
 			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
 				EntityAnimalTFC baby = new EntityAnimalTFC(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;
 			}
-		}
+		}*/
 
 		if (this.getGrowingAge() != 0)
 		{

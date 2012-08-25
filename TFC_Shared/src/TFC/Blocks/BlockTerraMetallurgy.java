@@ -8,9 +8,8 @@ import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraMetallurgy extends BlockContainer implements ITextureProvider
+public class BlockTerraMetallurgy extends BlockContainer
 {
 	private int meta;
 	private int xCoord;
@@ -65,22 +64,6 @@ public class BlockTerraMetallurgy extends BlockContainer implements ITextureProv
 		}
 	}
 
-	@Override
-	public TileEntity getBlockEntity()
-	{
-
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 1) {
@@ -99,5 +82,11 @@ public class BlockTerraMetallurgy extends BlockContainer implements ITextureProv
 	public String getTextureFile() {
 
 		return "/bioxx/terrablocks.png";
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityTerraMetallurgy();
 	}
 }

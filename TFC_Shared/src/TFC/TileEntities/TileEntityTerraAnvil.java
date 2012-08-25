@@ -30,9 +30,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.Vec3D;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 import net.minecraft.src.mod_TFC;
 
 public class TileEntityTerraAnvil extends TileEntity implements IInventory

@@ -2,9 +2,8 @@ package TFC.Items;
 
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraPlanks extends ItemBlock implements ITextureProvider
+public class ItemTerraPlanks extends ItemBlock
 {
 	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};

@@ -24,35 +24,35 @@ public class ContainerTerraForge extends ContainerTFC
 		itemFreezeTime = 0;
 
 		//Input slot
-		addSlot(new SlotForge(inventoryplayer.player,tileentityforge, 0, 44, 8));
-		addSlot(new SlotForge(inventoryplayer.player,tileentityforge, 1, 62, 26));
-		addSlot(new SlotForge(inventoryplayer.player,tileentityforge, 2, 80, 44));
-		addSlot(new SlotForge(inventoryplayer.player,tileentityforge, 3, 98, 26));
-		addSlot(new SlotForge(inventoryplayer.player,tileentityforge, 4, 116, 8));
+		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 0, 44, 8));
+		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 1, 62, 26));
+		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 2, 80, 44));
+		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 3, 98, 26));
+		addSlotToContainer(new SlotForge(inventoryplayer.player,tileentityforge, 4, 116, 8));
 		//fuel stack
-		addSlot(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 5, 44, 26));
-		addSlot(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 6, 62, 44));
-		addSlot(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 7, 80, 62));
-		addSlot(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 8, 98, 44));
-		addSlot(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 9, 116, 26));
+		addSlotToContainer(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 5, 44, 26));
+		addSlotToContainer(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 6, 62, 44));
+		addSlotToContainer(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 7, 80, 62));
+		addSlotToContainer(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 8, 98, 44));
+		addSlotToContainer(new SlotForgeFuel(inventoryplayer.player, tileentityforge, 9, 116, 26));
 		//Storage slot
-		addSlot(new Slot(tileentityforge, 10, 152, 8));
-		addSlot(new Slot(tileentityforge, 11, 152, 26));
-		addSlot(new Slot(tileentityforge, 12, 152, 44));
-		addSlot(new Slot(tileentityforge, 13, 152, 62));
+		addSlotToContainer(new Slot(tileentityforge, 10, 152, 8));
+		addSlotToContainer(new Slot(tileentityforge, 11, 152, 26));
+		addSlotToContainer(new Slot(tileentityforge, 12, 152, 44));
+		addSlotToContainer(new Slot(tileentityforge, 13, 152, 62));
 
 		for(int i = 0; i < 3; i++)
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlot(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
 			}
 
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 142));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
 
 	}
@@ -150,7 +150,7 @@ public class ContainerTerraForge extends ContainerTFC
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
 						{
 							if (itemstack3.stackSize <= slot.getSlotStackLimit())
 							{
@@ -178,7 +178,7 @@ public class ContainerTerraForge extends ContainerTFC
 							itemstack2.stackSize += j1;
 						}
 					}
-					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && ItemStack.areItemStacksEqual(itemstack2, itemstack3))
 					{
 						int k1 = itemstack2.stackSize;
 						if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())

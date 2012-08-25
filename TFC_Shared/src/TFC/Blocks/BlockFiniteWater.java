@@ -432,9 +432,9 @@ public class BlockFiniteWater extends BlockFluid
     /**
      * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
      */
-    public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3D par6Vec3D)
+    public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3D)
     {
-        Vec3D var7 = this.getFlowVector(par1World, par2, par3, par4);
+        Vec3 var7 = this.getFlowVector(par1World, par2, par3, par4);
         par6Vec3D.xCoord += var7.xCoord;
         par6Vec3D.yCoord += var7.yCoord;
         par6Vec3D.zCoord += var7.zCoord;
@@ -442,7 +442,7 @@ public class BlockFiniteWater extends BlockFluid
     
     public static double func_293_a(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, Material par4Material)
     {
-        Vec3D var5 = null;
+        Vec3 var5 = null;
         var5 = ((BlockFiniteWater)mod_TFC.finiteWater).getFlowVector(par0IBlockAccess, par1, par2, par3);
         return var5.xCoord == 0.0D && var5.zCoord == 0.0D ? -1000.0D : Math.atan2(var5.zCoord, var5.xCoord) - (Math.PI / 2D);
     }
@@ -450,9 +450,9 @@ public class BlockFiniteWater extends BlockFluid
     /**
      * Returns a vector indicating the direction and intensity of fluid flow.
      */
-    private Vec3D getFlowVector(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    private Vec3 getFlowVector(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        Vec3D var5 = Vec3D.createVector(0.0D, 0.0D, 0.0D);
+        Vec3 var5 = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
         if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 7 && par1IBlockAccess.getBlockId(par2, par3 - 1, par4) != this.blockID)
         {
             boolean[] optimal = getOptimalFlowDirections(par1IBlockAccess, par2, par3, par4);

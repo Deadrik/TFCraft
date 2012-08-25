@@ -22,13 +22,13 @@ public class ContainerTerraMetallurgy extends Container
 		craftResult = new InventoryCraftResult();
 		worldObj = world;
 		//output
-		addSlot(new SlotCraftingMetal(inventoryplayer.player, craftMatrix, craftResult,0, 128, 35));
+		addSlotToContainer(new SlotCraftingMetal(inventoryplayer.player, craftMatrix, craftResult,0, 128, 35));
 
 		for (int l = 0; l < 5; l++)
 		{
 			for (int k1 = 0; k1 < 5; k1++)
 			{
-				addSlot(new SlotMetal(craftMatrix, k1 + l * 5, 8 + k1 * 18, l * 18 - 1));
+				addSlotToContainer(new SlotMetal(craftMatrix, k1 + l * 5, 8 + k1 * 18, l * 18 - 1));
 			}
 		}
 
@@ -36,14 +36,14 @@ public class ContainerTerraMetallurgy extends Container
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlot(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
 			}
 
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 151));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 151));
 		}
 
 
@@ -185,7 +185,7 @@ public class ContainerTerraMetallurgy extends Container
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
 						{
 							if (itemstack3.stackSize <= slot.getSlotStackLimit())
 							{
@@ -213,7 +213,7 @@ public class ContainerTerraMetallurgy extends Container
 							itemstack2.stackSize += j1;
 						}
 					}
-					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && ItemStack.areItemStacksEqual(itemstack2, itemstack3))
 					{
 						int k1 = itemstack2.stackSize;
 						if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())

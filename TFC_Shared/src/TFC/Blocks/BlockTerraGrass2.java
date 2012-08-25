@@ -7,7 +7,6 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFCSettings;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
 public class BlockTerraGrass2 extends BlockTerra2
 {

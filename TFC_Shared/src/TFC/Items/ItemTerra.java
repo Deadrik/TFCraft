@@ -15,9 +15,8 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.World;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerra extends Item  implements ITextureProvider
+public class ItemTerra extends Item
 {
     protected String texture;
 

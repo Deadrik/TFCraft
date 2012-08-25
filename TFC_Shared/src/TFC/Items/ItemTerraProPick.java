@@ -22,10 +22,8 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StringTranslate;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraProPick extends Item implements ITextureProvider
+public class ItemTerraProPick extends Item
 {
     List vecArray;
 
@@ -47,7 +45,7 @@ public class ItemTerraProPick extends Item implements ITextureProvider
             arraylist.add("Damage: "+is.getItemDamage());
     }
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l)
+    public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int side, float hitX, float hitY, float hitZ) 
     {
         if(!world.isRemote)
         {
@@ -55,33 +53,29 @@ public class ItemTerraProPick extends Item implements ITextureProvider
             if(objectMouseOver == null) {
                 return false;
             }		
-            int x = objectMouseOver.blockX;
-            int y = objectMouseOver.blockY;
-            int z = objectMouseOver.blockZ;
-            int side = objectMouseOver.sideHit;
 
             ArrayList oreArray = new ArrayList<String>();
             ArrayList oreNumArray = new ArrayList<Integer>();
             
             boolean isOre = false;
             
-            int id = world.getBlockId(x, y, z);
+            int id = world.getBlockId((int)hitX, (int)hitY, (int)hitZ);
             if(id == mod_TFC.terraOre.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata(x, y, z);
+                int meta = world.getBlockMetadata((int)hitX, (int)hitY, (int)hitZ);
                 oreArray.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC.terraOre).damageDropped(meta)));
             }
             else if(id == mod_TFC.terraOre2.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata(x, y, z);
+                int meta = world.getBlockMetadata((int)hitX, (int)hitY, (int)hitZ);
                 oreArray.add(BlockTerraOre2.getItemNameDamage(((BlockTerraOre2)mod_TFC.terraOre2).damageDropped(meta)));
             }
             else if(id == mod_TFC.terraOre3.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata(x, y, z);
+                int meta = world.getBlockMetadata((int)hitX, (int)hitY, (int)hitZ);
                 oreArray.add(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC.terraOre3).damageDropped(meta)));
             }
             //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);
@@ -92,12 +86,12 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                 {
                     for (int k = -12; k < 12; k++)
                     {
-                        int oreid = world.getBlockId(x+i, y+k, z+j);
+                        int oreid = world.getBlockId((int)hitX+i, (int)hitY+k, (int)hitZ+j);
 
                         ItemStack is;
                         if(oreid == mod_TFC.terraOre.blockID)
                         {
-                            int meta = world.getBlockMetadata(x+i, y+k, z+j);
+                            int meta = world.getBlockMetadata((int)hitX+i, (int)hitY+k, (int)hitZ+j);
 
                             if(!oreArray.contains(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC.terraOre).damageDropped(meta))))
                             {
@@ -114,7 +108,7 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                         }
                         else if(oreid == mod_TFC.terraOre2.blockID)
                         {
-                            int meta = world.getBlockMetadata(x+i, y+k, z+j);
+                            int meta = world.getBlockMetadata((int)hitX+i, (int)hitY+k, (int)hitZ+j);
 
                             if(meta != 6)
                             {
@@ -132,7 +126,7 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                         }
                         else if(oreid == mod_TFC.terraOre3.blockID)
                         {
-                            int meta = world.getBlockMetadata(x+i, y+k, z+j);
+                            int meta = world.getBlockMetadata((int)hitX+i, (int)hitY+k, (int)hitZ+j);
 
                             if(!oreArray.contains(BlockTerraOre3.getItemNameDamage(((BlockTerraOre3)mod_TFC.terraOre3).damageDropped(meta))))
                             {
@@ -149,7 +143,7 @@ public class ItemTerraProPick extends Item implements ITextureProvider
                 }
             }
 
-            Random random = new Random((x*z)+y);
+            Random random = new Random((long) ((hitX*hitZ)+hitY));
             if(oreArray.toArray().length > 0 && !isOre && random.nextInt(100) < 60)
             {
                 int rand = random.nextInt(oreArray.toArray().length);

@@ -1,11 +1,9 @@
 package TFC.Items;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ForgeHooks;
-import net.minecraft.src.forge.ITextureProvider;
+import net.minecraftforge.common.ForgeHooks;
 
 public class ItemCustomPaxel extends ItemTool
-implements ITextureProvider
 {
 	/** Array of blocks the tool has extra effect against. */
 	private Block[] blocksEffectiveAgainst;

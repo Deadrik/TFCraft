@@ -6,6 +6,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFCHeat;
 
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
@@ -15,9 +16,8 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.World;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemPlank extends ItemTerra  implements ITextureProvider
+public class ItemPlank extends ItemTerra
 {
     String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
             "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
@@ -48,7 +48,7 @@ public class ItemPlank extends ItemTerra  implements ITextureProvider
     }
     
     @Override
-    public void addCreativeItems(java.util.ArrayList list)
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
     {
         for(int i = 0; i < Names.length; i++) {
             list.add(new ItemStack(this,1,i));

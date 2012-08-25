@@ -36,7 +36,6 @@ import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.MinecraftForgeClient;
 
 public class TFC_CoreRender 
 {

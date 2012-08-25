@@ -7,9 +7,8 @@ import java.util.Random;
 import TFC.Core.Helper;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraFirestarter extends Item implements ITextureProvider
+public class ItemTerraFirestarter extends Item
 {
 
     public ItemTerraFirestarter(int i)

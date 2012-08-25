@@ -13,9 +13,8 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraWoodSupport extends Block implements ITextureProvider
+public class BlockTerraWoodSupport extends Block
 {
 	public static Boolean getSupportInRange(World world, int x, int y, int z, int range, int supportID)
 	{
@@ -149,7 +148,7 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 			}
 		}
 
-		return AxisAlignedBB.getBoundingBoxFromPool((double)i + minX, (double)j + minY, (double)k + minZ, (double)i + maxX, (double)j + maxY, (double)k + maxZ);
+		return AxisAlignedBB.getBoundingBox((double)i + minX, (double)j + minY, (double)k + minZ, (double)i + maxX, (double)j + maxY, (double)k + maxZ);
 	}
 
 	public float getHardness(int md)
@@ -250,7 +249,7 @@ public class BlockTerraWoodSupport extends Block implements ITextureProvider
 			}
 		}
 
-		return AxisAlignedBB.getBoundingBoxFromPool((double)i + minX, (double)j + minY, (double)k + minZ, (double)i + maxX, (double)j + maxY, (double)k + maxZ);
+		return AxisAlignedBB.getBoundingBox((double)i + minX, (double)j + minY, (double)k + minZ, (double)i + maxX, (double)j + maxY, (double)k + maxZ);
 	}
 
 	@Override

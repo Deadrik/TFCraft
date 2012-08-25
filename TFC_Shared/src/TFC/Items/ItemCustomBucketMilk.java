@@ -1,9 +1,8 @@
 package TFC.Items;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemCustomBucketMilk extends Item implements ITextureProvider
+public class ItemCustomBucketMilk extends Item
 {
     public ItemCustomBucketMilk(int par1)
     {

@@ -12,9 +12,8 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraBloomery extends BlockContainer implements ITextureProvider
+public class BlockTerraBloomery extends BlockContainer
 {
     private Class EntityClass;
     private int meta;
@@ -137,20 +136,6 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
 		return world.isBlockOpaqueCube(i, j-1, k) && world.isBlockOpaqueCube(i, j+1, k);
 	}
 
-	@Override
-	public TileEntity getBlockEntity()
-	{
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 0 || i == 1) {
@@ -255,4 +240,10 @@ public class BlockTerraBloomery extends BlockContainer implements ITextureProvid
     {       
         //dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraBloomery, 1));
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityTerraBloomery();
+	}
 }

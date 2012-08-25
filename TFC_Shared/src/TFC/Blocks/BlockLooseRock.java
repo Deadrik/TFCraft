@@ -5,9 +5,8 @@ import java.util.Random;
 
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockLooseRock extends BlockTerra implements ITextureProvider
+public class BlockLooseRock extends BlockTerra
 {
 
 	public BlockLooseRock(int par1) 

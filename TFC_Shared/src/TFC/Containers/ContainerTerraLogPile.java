@@ -30,10 +30,10 @@ public class ContainerTerraLogPile extends ContainerTFC
 		this.posX = par3;
 		this.posY = par4;
 		this.posZ = par5;
-		this.addSlot(new SlotLogPile(par1InventoryPlayer.player,wb, 0, 71, 25));
-		this.addSlot(new SlotLogPile(par1InventoryPlayer.player,wb, 1, 89, 25));
-		this.addSlot(new SlotLogPile(par1InventoryPlayer.player,wb, 2, 71, 43));
-		this.addSlot(new SlotLogPile(par1InventoryPlayer.player,wb, 3, 89, 43));
+		this.addSlotToContainer(new SlotLogPile(par1InventoryPlayer.player,wb, 0, 71, 25));
+		this.addSlotToContainer(new SlotLogPile(par1InventoryPlayer.player,wb, 1, 89, 25));
+		this.addSlotToContainer(new SlotLogPile(par1InventoryPlayer.player,wb, 2, 71, 43));
+		this.addSlotToContainer(new SlotLogPile(par1InventoryPlayer.player,wb, 3, 89, 43));
 		int var6;
 		int var7;
 
@@ -42,13 +42,13 @@ public class ContainerTerraLogPile extends ContainerTFC
 		{
 			for (var7 = 0; var7 < 9; ++var7)
 			{
-				this.addSlot(new Slot(par1InventoryPlayer, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
+				this.addSlotToContainer(new Slot(par1InventoryPlayer, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
 			}
 		}
 
 		for (var6 = 0; var6 < 9; ++var6)
 		{
-			this.addSlot(new Slot(par1InventoryPlayer, var6, 8 + var6 * 18, 142));
+			this.addSlotToContainer(new Slot(par1InventoryPlayer, var6, 8 + var6 * 18, 142));
 		}
 
 	}

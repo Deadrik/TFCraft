@@ -4,10 +4,8 @@ import java.util.List;
 
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemCustomPickaxe extends ItemPickaxe
-implements ITextureProvider
 {
 	public ItemCustomPickaxe(int i, EnumToolMaterial e)
 	{

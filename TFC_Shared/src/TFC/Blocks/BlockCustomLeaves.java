@@ -6,10 +6,9 @@ import java.util.Random;
 import TFC.Core.TFCSettings;
 import TFC.Items.ItemCustomScythe;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.IShearable;
-import net.minecraft.src.forge.ITextureProvider;
+import net.minecraftforge.common.IShearable;
 
-public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, IShearable
+public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
     private int baseIndexInPNG;
     int adjacentTreeBlocks[];
@@ -77,10 +76,7 @@ public class BlockCustomLeaves extends BlockLeaves implements ITextureProvider, 
     /**onBlockRemoval needs to remain here in order to override the Block Leaves implementation 
      * of the method which causes leaves to change metadata*/
     @Override
-    public void onBlockRemoval(World par1World, int par2, int par3, int par4)
-    {
-
-    }
+    public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {}
 
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int l)

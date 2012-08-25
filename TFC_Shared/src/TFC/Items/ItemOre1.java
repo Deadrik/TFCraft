@@ -2,9 +2,8 @@ package TFC.Items;
 
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemOre1 extends ItemBlock implements ITextureProvider
+public class ItemOre1 extends ItemBlock
 {
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 

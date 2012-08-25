@@ -13,27 +13,27 @@ public class ContainerTerraSluice extends Container
 	{
 		sluice = tileentitysluice;
 		player = inventoryplayer.player;
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 0, 116, 16));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 1, 134, 16));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 2, 152, 16));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 3, 116, 34));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 4, 134, 34));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 5, 152, 34));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 6, 116, 52));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 7, 134, 52));
-		addSlot(new SlotSluice(inventoryplayer.player, tileentitysluice, 8, 152, 52));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 0, 116, 16));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 1, 134, 16));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 2, 152, 16));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 3, 116, 34));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 4, 134, 34));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 5, 152, 34));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 6, 116, 52));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 7, 134, 52));
+		addSlotToContainer(new SlotSluice(inventoryplayer.player, tileentitysluice, 8, 152, 52));
 		for(int i = 0; i < 3; i++)
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlot(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
 			}
 
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 142));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
 
 	}

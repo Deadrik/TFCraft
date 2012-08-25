@@ -4,9 +4,8 @@ import TFC.Core.Helper;
 import TFC.Core.TFCSettings;
 import TFC.TileEntities.TileEntityPartial;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemChisel extends ItemTool implements ITextureProvider
+public class ItemChisel extends ItemTool
 {
     public static int mode = 0;
     public ItemChisel(int i, EnumToolMaterial e)
@@ -27,21 +26,17 @@ public class ItemChisel extends ItemTool implements ITextureProvider
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+    public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
     {
-        if(!world.isRemote)
+        if(!player.worldObj.isRemote)      
         {
-            MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
+            MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
             if(objectMouseOver == null) {
                 return false;
             }		
-            int x = objectMouseOver.blockX;
-            int y = objectMouseOver.blockY;
-            int z = objectMouseOver.blockZ;
-            int side = objectMouseOver.sideHit;
 
-            int id = world.getBlockId(x, y, z);
-            int meta = world.getBlockMetadata(x, y, z);
+            int id = player.worldObj.getBlockId(x, y, z);
+            int meta = player.worldObj.getBlockMetadata(x, y, z);
 
             itemstack.setItemDamage(itemstack.getItemDamage()+1);
             if(itemstack.getItemDamage() >= itemstack.getMaxDamage())

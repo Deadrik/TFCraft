@@ -41,7 +41,7 @@ public class BlockSlab extends BlockPartial
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
     @Override
-    public boolean blockActivated(World world, int x, int y, int z, EntityPlayer entityplayer) 
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)  
     {
         boolean hasHammer = false;
         for(int i = 0; i < 9;i++)
@@ -61,7 +61,7 @@ public class BlockSlab extends BlockPartial
             byte meta = (byte) world.getBlockMetadata(x, y, z);
 
             int mode = 0;
-            if(!TFC_Core.isClient())
+            if(!world.isRemote)
             {
                 PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
                 
@@ -77,23 +77,6 @@ public class BlockSlab extends BlockPartial
             }
         }
         return false;
-    }
-    
-    /**
-     * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
-     * axisAlignedBB, arrayList
-     */
-    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
-    {
-        AxisAlignedBB var7 = this.getCollisionBoundingBoxFromPool(world, i, j, k);
-
-        if (var7 != null && par5AxisAlignedBB.intersectsWith(var7))
-        {
-            var7 =  getCollisionBoundingBoxFromPool(world,i,j,k);
-            par6ArrayList.add(var7);
-        }
-        super.getCollidingBoundingBoxes(world, i, j, k, par5AxisAlignedBB, par6ArrayList);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
     
     /**
@@ -118,7 +101,7 @@ public class BlockSlab extends BlockPartial
         byte extraY2 = (byte) ((te.extraData >> 16) & 0xf);
         byte extraZ2 = (byte) ((te.extraData >> 20) & 0xf);
 
-        return AxisAlignedBB.getBoundingBoxFromPool(i + (0.1F * extraX), j + (0.1F * extraY),  k + (0.1F * extraZ), i + (1 - (0.1F * extraX2)), j + (1 - (0.1F * extraY2)), k + (1 - (0.1F * extraZ2)));
+        return AxisAlignedBB.getBoundingBox(i + (0.1F * extraX), j + (0.1F * extraY),  k + (0.1F * extraZ), i + (1 - (0.1F * extraX2)), j + (1 - (0.1F * extraY2)), k + (1 - (0.1F * extraZ2)));
     }
     
     /**

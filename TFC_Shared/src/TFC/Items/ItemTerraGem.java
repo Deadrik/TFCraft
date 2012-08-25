@@ -3,9 +3,8 @@ package TFC.Items;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraGem extends Item implements ITextureProvider
+public class ItemTerraGem extends Item
 {
 	public static String[] gemNames = {"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
 

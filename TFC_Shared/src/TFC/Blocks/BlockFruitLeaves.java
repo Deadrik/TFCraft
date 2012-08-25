@@ -8,10 +8,8 @@ import TFC.Core.FloraManager;
 import TFC.Core.TFCSeasons;
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.IShearable;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockFruitLeaves extends Block implements ITextureProvider
+public class BlockFruitLeaves extends Block
 {
     private int baseIndexInPNG;
     int adjacentTreeBlocks[];
@@ -213,13 +211,6 @@ public class BlockFruitLeaves extends Block implements ITextureProvider
             }
         }
         return "";
-    }
-    /**onBlockRemoval needs to remain here in order to override the Block Leaves implementation 
-     * of the method which causes leaves to change metadata*/
-    @Override
-    public void onBlockRemoval(World par1World, int par2, int par3, int par4)
-    {
-
     }
 
     @Override

@@ -3,9 +3,8 @@ package TFC.Blocks;
 import java.util.Random;
 
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraSulfur extends Block implements ITextureProvider
+public class BlockTerraSulfur extends Block
 {
 
 	public BlockTerraSulfur(int i, Material material)

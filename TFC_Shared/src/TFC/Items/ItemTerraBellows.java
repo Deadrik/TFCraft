@@ -8,9 +8,8 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraBellows extends Item implements ITextureProvider
+public class ItemTerraBellows extends Item
 {
 	public ItemTerraBellows(int i) 
 	{

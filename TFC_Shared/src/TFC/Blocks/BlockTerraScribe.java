@@ -8,9 +8,8 @@ import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockTerraScribe extends BlockContainer implements ITextureProvider
+public class BlockTerraScribe extends BlockContainer
 {
 	//TileEntityTerraSluice entity;
 	private int meta;
@@ -67,22 +66,6 @@ public class BlockTerraScribe extends BlockContainer implements ITextureProvider
 		}
 	}
 
-	@Override
-	public TileEntity getBlockEntity()
-	{
-
-		//Minecraft mc = ModLoader.getMinecraftInstance();
-		try
-		{
-			return (TileEntity) EntityClass.newInstance();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 1) {
@@ -110,6 +93,12 @@ public class BlockTerraScribe extends BlockContainer implements ITextureProvider
 	public boolean renderAsNormalBlock()
 	{
 		return false;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityTerraScribe();
 	}
 
 }

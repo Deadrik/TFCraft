@@ -35,14 +35,14 @@ public class BiomeGenForestTFC extends TFCBiome
 		spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 5, 1, 2));
         spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 10, 3, 8));
         
-		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 10;
-		((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 2;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 10;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 2;
 		treeCommon1 = -1;
 		treeCommon2 = -1;
 		treeUncommon = -1;
 		treeRare = -1;
-		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
-        ((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 4;
+        ((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
 	}
 
 	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)

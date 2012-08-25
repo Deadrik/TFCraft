@@ -27,12 +27,8 @@ def build(build_num=0):
     copytree(src_dir, backup_dir, 0)    
     print '\ntfc_client -> minecraft'
     copytree(os.path.join(forge_dir, 'tfc_client', 'src'), os.path.join(src_dir, 'minecraft'), 0)
-    print '\ntfc_server -> minecraft_server'
-    copytree(os.path.join(forge_dir, 'tfc_server', 'src'), os.path.join(src_dir, 'minecraft_server'), 0)
-    print '\ntfc_shared -> minecraft'
-    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft'), 0)
-    print '\ntfc_shared -> minecraft_server'
-    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft_server'), 0)
+    print '\ntfc_shared -> common'
+    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'common'), 0)
     print
     
     error_level = 0

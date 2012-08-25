@@ -4,6 +4,10 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import bioxx.importers.WavefrontObject;
 
 import TFC.Core.ColorizerFoliageTFC;
@@ -11,8 +15,6 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.IProxy;
 import TFC.Core.PacketHandler;
 import TFC.Core.PlayerManagerTFC;
-import TFC.Core.RenderHighlight;
-import TFC.Core.SoundHandler;
 import TFC.Core.TFCHeat;
 import TFC.Core.TFCSeasons;
 import TFC.Core.TFCSettings;
@@ -48,9 +50,9 @@ import TFC.TileEntities.*;
 import TFC.WorldGen.BiomeGenJungleTFC;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.*;
+import net.minecraftforge.client.MinecraftForgeClient;
 
-public class ClientProxy implements IProxy 
+public class ClientProxy extends CommonProxy 
 {
     public KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
     public KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
@@ -82,168 +84,25 @@ public class ClientProxy implements IProxy
         ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
         ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
         
-        try{
-//        TFC_CoreRender.TomatoPlant = new WavefrontObject[]{
-//                new WavefrontObject().parse("/models/tomato_00.obj"),
-//                new WavefrontObject().parse("/models/tomato_01.obj"),
-//                new WavefrontObject().parse("/models/tomato_02.obj"),
-//                new WavefrontObject().parse("/models/tomato_03.obj"),
-//                new WavefrontObject().parse("/models/box.obj"),
-//                new WavefrontObject().parse("/models/tomato_05.obj"),
-//                new WavefrontObject().parse("/models/tomato_06.obj"),
-//                new WavefrontObject().parse("/models/tomato_07.obj"),
-//                new WavefrontObject().parse("/models/tomato_08.obj"),
-//                new WavefrontObject().parse("/models/tomato_09.obj")};
-        }
-        catch(Exception ex){}
-    }
-
-    @Override
-    public void registerTileEntities()
-    {
-        ModLoader.registerTileEntity(TileEntityTerraLogPile.class, "TerraLogPile");
-        ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
-        ModLoader.registerTileEntity(TileEntityTerraFirepit.class, "TerraFirepit");
-        ModLoader.registerTileEntity(TileEntityTerraAnvil.class, "TerraAnvil");
-        ModLoader.registerTileEntity(TileEntityTerraScribe.class, "TerraScribe");
-        ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
-        ModLoader.registerTileEntity(TileEntityTerraForge.class, "TerraForge");
-        ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
-        ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
-        ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
-        ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
-        ModLoader.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
-
-        ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
-        ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
-        ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
-        
-        MinecraftForgeClient.registerSoundHandler(new SoundHandler());
-        MinecraftForgeClient.registerHighlightHandler(new RenderHighlight());
-        
-        ModLoader.registerEntityID(EntityCowTFC.class, "cow", 0, 0xffffff, 0xbbbbbb);
-        ModLoader.registerEntityID(EntitySheepTFC.class, "sheep", 1, 0xffffff, 0xbbbbbb);
-        ModLoader.registerEntityID(EntityBear.class, "bear", 2, 0xd1d003, 0x101010);
-        ModLoader.registerEntityID(EntityChickenTFC.class, "chicken", 3, 0xffffff, 0xbbbbbb);
-        ModLoader.registerEntityID(EntityPigTFC.class, "pig", 4, 0xffffff, 0xbbbbbb);
-        ModLoader.registerEntityID(EntitySquidTFC.class, "squid", 5, 0xffffff, 0xbbbbbb);
-        ModLoader.registerEntityID(EntityDeer.class, "deer", 6, 0xffffff, 0x105510);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFallingDirt.class, new RenderFallingDirt());
+    	RenderingRegistry.registerEntityRenderingHandler(EntityFallingStone.class, new RenderFallingStone());
+    	RenderingRegistry.registerEntityRenderingHandler(EntityFallingStone2.class, new RenderFallingStone2());
+    	RenderingRegistry.registerEntityRenderingHandler(EntityTerraJavelin.class, new RenderTerraJavelin());
+    	RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquid(new ModelSquid(), 0.7F));
+    	RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
+    	RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(),new ModelSheep1TFC(), 0.7F));
+    	RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), 0.5F));
+    	RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
     }
 
     
 
     @Override
-    public File getMinecraftDir() {
-        return Minecraft.getMinecraftDir();
-    }
-
-    @Override
-    public void applyExtraDataToDrops(EntityItem entityitem, NBTTagCompound data) {
-        entityitem.item.setTagCompound(data);
-
-    }
-
-    @Override
-    public boolean isRemote() {
-        return ModLoader.getMinecraftInstance().theWorld.isRemote;
-    }
-
-    @Override
     public World getCurrentWorld() {
         return ModLoader.getMinecraftInstance().theWorld;
-    }
-
-    @Override
-    public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
-    {
-        TileEntity te;
-        try
-        {
-            te= world.getBlockTileEntity(x, y, z);
-        }
-        catch(Exception e)
-        {
-            te = null;
-        }
-
-        switch(ID)
-        {
-            case 0:
-            {
-                return new GuiTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
-            }
-            case 1:
-            {
-                return new GuiTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
-            }
-            case 20:
-            {
-                return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te);
-            }
-            case 21:
-            {
-                return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te);
-            }
-            case 22:
-            {
-                return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world);
-            }
-            case 23:
-            {
-                return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te);
-            }
-            case 24:
-            {
-                return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world);
-            }
-            case 25:
-            {
-                return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te);
-            }
-            case 26:
-            {
-                return new GuiTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
-            }
-            case 27:
-            {
-                return new GuiCalendar(player, world, x, y, z);
-            }
-            case 28:
-            {
-                return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType ,world);
-            }
-            case 29:
-            {
-                return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te));
-            }
-
-        }
-
-        return null;
-
-    }
-
-    @Override
-    public String getDisplayName(ItemStack is) 
-    {
-        return is.getItem().getItemDisplayName(is);
-    }
-
-    @Override
-    public void addRenderer(Map map) 
-    {
-        map.put(EntityFallingDirt.class, new RenderFallingDirt());
-        map.put(EntityFallingStone.class, new RenderFallingStone());
-        map.put(EntityFallingStone2.class, new RenderFallingStone2());
-        map.put(EntityTerraJavelin.class, new RenderTerraJavelin());
-        map.put(EntitySquidTFC.class, new RenderSquid(new ModelSquid(), 0.7F));
-        map.put(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
-        map.put(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(),new ModelSheep1TFC(), 0.7F));
-        map.put(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), 0.5F));
-        map.put(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
-        map.put(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
-        map.put(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
-        map.put(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
     }
 
     @Override
@@ -582,42 +441,6 @@ public class ClientProxy implements IProxy
         return rgb;
     }
 
-
-    @Override
-    public int blockGetMixedBrightnessForBlock(Block B,IBlockAccess par1iBlockAccess,
-            int par2, int par3, int par4) {
-        return B.getMixedBrightnessForBlock(par1iBlockAccess, par2, par3, par4);
-    }
-
-    @Override
-    public int blockGetRenderBlockPass(Block B) {
-        return B.getRenderBlockPass();
-    }
-
-    @Override
-    public AxisAlignedBB blockGetSelectedBoundingBoxFromPool(Block B,World par1World,
-            int par2, int par3, int par4) 
-    {
-        return B.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
-    }
-
-    @Override
-    public boolean areItemStacksEqual(ItemStack is1, ItemStack is2) {
-        return ItemStack.func_46154_a(is1, is2);
-    }
-
-    @Override
-    public int getUniqueBlockModelID(BaseMod var0, boolean var1) {
-        return ModLoader.getUniqueBlockModelID(var0, var1);
-    }
-
-    @Override
-    public void takenFromCrafting(EntityPlayer entityplayer,
-            ItemStack itemstack, IInventory iinventory) 
-    {
-        ModLoader.takenFromCrafting(entityplayer, itemstack, iinventory);
-    }
-
     @Override
     public void sendCustomPacket(Packet packet)
     {
@@ -625,23 +448,10 @@ public class ClientProxy implements IProxy
     }
 
     @Override
-    public EntityPlayer getPlayer(NetworkManager network)
-    {
-        return ModLoader.getMinecraftInstance().thePlayer;
-    }
-
-    @Override
     public int getArmorRenderID(int i)
     {
         String[] Names = {"bismuth", "bismuthbronze", "blackbronze", "blacksteel", "bluesteel", "bronze", "copper", "wroughtiron", "redsteel", "rosegold", "steel", "tin", "zinc"};
         return ModLoader.addArmor(Names[i]);
-    }
-
-    @Override
-    public boolean getGraphicsLevel()
-    {
-        // TODO Auto-generated method stub
-        return Minecraft.isFancyGraphicsEnabled();
     }
 
     @Override
@@ -672,7 +482,7 @@ public class ClientProxy implements IProxy
             {
                 ItemChisel.mode = ItemChisel.mode == 0 ? 1 : ItemChisel.mode == 1 ? 2 : 0;
                 String type = ItemChisel.mode == 0 ? "Smoothing" : ItemChisel.mode == 1 ? "Creating Stairs" : "Creating Slabs";
-                minecraft.ingameGUI.addChatMessage(type);
+                minecraft.ingameGUI.getChatGUI().printChatMessage(type);
 
                 if(minecraft.theWorld.isRemote)
                 {
@@ -683,30 +493,9 @@ public class ClientProxy implements IProxy
     }
 
     @Override
-    public int getLightBrightnessSkyBlocks(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        return par1iBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
-    }
-
-    @Override
-    public float getLightBrightness(IBlockAccess par1iBlockAccess, int par2,
-            int par3, int par4)
-    {
-        return par1iBlockAccess.getLightBrightness(par2, par3, par4);
-    }
-
-    @Override
-    public void sendCustomPacketToPlayer(String player, Packet packet)
-    {
-
-    }
-    
-    @Override
     public void registerTranslations() 
     {
         ModLoader.addLocalization("Key_Calendar", "Open Calendar");
-
-        
 
         //Gems
         String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
@@ -1341,29 +1130,12 @@ public class ClientProxy implements IProxy
         ModLoader.addLocalization("item.terraWeakRedSteelIngot.name", "Weak Red Steel Ingot");
     }
 
-    @Override
-    public String getPlayerName()
-    {
-        return ModLoader.getMinecraftInstance().thePlayer.username;
-    }
-
-    @Override
     public void handleHealthUpdate(Class c, byte par1)
     {
         try
         {
             c.getSuperclass().getMethod("handleHealthUpdate", Byte.class).invoke(par1);
         } catch (Exception e1){}  
-    }
-    @Override
-    public boolean aiTargetShouldExecute(EntityAITarget target, EntityLiving par1EntityLiving, boolean par2)
-    {
-        return target.func_48376_a(par1EntityLiving, par2);
-    }
-    @Override
-    public boolean aiTargetfunc_48100_a(Class par1Class, EntityLiving entity)
-    {
-        return EntityCreeper.class != par1Class && EntityGhast.class != par1Class;
     }
 
 

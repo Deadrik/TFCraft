@@ -2,6 +2,11 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
+import TFC.WorldGen.Generators.WorldGenCustomReed;
+import TFC.WorldGen.Generators.WorldGenCustomSand;
+import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
+
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.Block;
 import net.minecraft.src.World;

@@ -21,22 +21,22 @@ public class ContainerTerraFirepit extends Container
         charcoal = 0;
 
         //Input slot
-        addSlot(new SlotFirepitIn(inventoryplayer.player,tileentityfirepit, 1, 80, 20));
+        addSlotToContainer(new SlotFirepitIn(inventoryplayer.player,tileentityfirepit, 1, 80, 20));
         //fuel stack
-        addSlot(new SlotFirepitFuel(inventoryplayer.player, tileentityfirepit, 0, 8, 8));
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 3, 8, 26));
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 4, 8, 44));
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 5, 8, 62));
+        addSlotToContainer(new SlotFirepitFuel(inventoryplayer.player, tileentityfirepit, 0, 8, 8));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 3, 8, 26));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 4, 8, 44));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 5, 8, 62));
 
         //item output
-        addSlot(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 7, 71, 48));
-        addSlot(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 8, 89, 48));
+        addSlotToContainer(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 7, 71, 48));
+        addSlotToContainer(new SlotFirepitOut(inventoryplayer.player, tileentityfirepit, 8, 89, 48));
 
         //byproducts out
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 2, 127, 23));
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 6, 145, 23));
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 9, 127, 41));
-        addSlot(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 10, 145, 41));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 2, 127, 23));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 6, 145, 23));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 9, 127, 41));
+        addSlotToContainer(new SlotFirepit(inventoryplayer.player, tileentityfirepit, 10, 145, 41));
 
 
         //slag output
@@ -46,14 +46,14 @@ public class ContainerTerraFirepit extends Container
         {
             for(int k = 0; k < 9; k++)
             {
-                addSlot(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
+            	addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
             }
 
         }
 
         for(int j = 0; j < 9; j++)
         {
-            addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 142));
+        	addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
         }
 
     }
@@ -151,7 +151,7 @@ public class ContainerTerraFirepit extends Container
                     }
                     else if (slot.isItemValid(itemstack3))
                     {
-                        if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+                        if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
                         {
                             if (itemstack3.stackSize <= slot.getSlotStackLimit())
                             {
@@ -179,7 +179,7 @@ public class ContainerTerraFirepit extends Container
                             itemstack2.stackSize += j1;
                         }
                     }
-                    else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+                    else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && ItemStack.areItemStacksEqual(itemstack2, itemstack3))
                     {
                         int k1 = itemstack2.stackSize;
                         if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())

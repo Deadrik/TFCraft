@@ -1,6 +1,7 @@
 package TFC.Blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.src.*;
@@ -14,19 +15,10 @@ public class BlockCustomStairs extends Block
 	{
 		super(par1, 4, par2Block.blockMaterial);
 		this.modelBlock = par2Block;
-		this.setHardness(par2Block.getHardness());
+		this.setHardness(par2Block.getBlockHardness());
 		this.setResistance(10);
 		this.setStepSound(par2Block.stepSound);
 		this.setLightOpacity(255);
-	}
-
-	/**
-	 * Called upon block activation (left or right click on the block.). The three integers represent x,y,z of the
-	 * block.
-	 */
-	public boolean blockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
-	{
-		return this.modelBlock.blockActivated(par1World, par2, par3, par4, par5EntityPlayer);
 	}
 
 	/**
@@ -45,11 +37,8 @@ public class BlockCustomStairs extends Block
 		return this.modelBlock.canPlaceBlockAt(par1World, par2, par3, par4);
 	}
 
-	/**
-	 * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
-	 * axisAlignedBB, arrayList
-	 */
-	public void getCollidingBoundingBoxes(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+	@Override
+	public void addCollidingBlockToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
 	{
 		int var7 = par1World.getBlockMetadata(par2, par3, par4);
 		int var8 = var7 & 3;
@@ -67,27 +56,27 @@ public class BlockCustomStairs extends Block
 		}
 
 		this.setBlockBounds(0.0F, var9, 0.0F, 1.0F, var10, 1.0F);
-		super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+		super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
 		if (var8 == 0)
 		{
 			this.setBlockBounds(0.5F, var11, 0.0F, 1.0F, var12, 1.0F);
-			super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+			super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 		}
 		else if (var8 == 1)
 		{
 			this.setBlockBounds(0.0F, var11, 0.0F, 0.5F, var12, 1.0F);
-			super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+			super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 		}
 		else if (var8 == 2)
 		{
 			this.setBlockBounds(0.0F, var11, 0.5F, 1.0F, var12, 1.0F);
-			super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+			super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 		}
 		else if (var8 == 3)
 		{
 			this.setBlockBounds(0.0F, var11, 0.0F, 1.0F, var12, 0.5F);
-			super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6ArrayList);
+			super.addCollidingBlockToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 		}
 
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -115,7 +104,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		return mod_TFC.proxy.blockGetMixedBrightnessForBlock(modelBlock, par1IBlockAccess, par2, par3, par4);
+		return this.modelBlock.getMixedBrightnessForBlock(par1IBlockAccess, par2, par3, par4);
 	}
 
 	/**
@@ -123,7 +112,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public int getRenderBlockPass()
 	{
-		return mod_TFC.proxy.blockGetRenderBlockPass(modelBlock);
+		return this.modelBlock.getRenderBlockPass();
 	}
 
 	/**
@@ -139,7 +128,7 @@ public class BlockCustomStairs extends Block
 	 */
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		return mod_TFC.proxy.blockGetSelectedBoundingBoxFromPool(modelBlock, par1World, par2, par3, par4);
+		return modelBlock.getSelectedBoundingBoxFromPool(par1World, par2, par3, par4);
 	}
 
 	/**
@@ -234,12 +223,10 @@ public class BlockCustomStairs extends Block
 		}
 	}
 
-	/**
-	 * Called whenever the block is removed.
-	 */
-	public void onBlockRemoval(World par1World, int par2, int par3, int par4)
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
-		this.modelBlock.onBlockRemoval(par1World, par2, par3, par4);
+		this.modelBlock.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
 
 	/**
@@ -294,7 +281,7 @@ public class BlockCustomStairs extends Block
 	/**
 	 * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
 	 */
-	public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3D par6Vec3D)
+	public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3D)
 	{
 		this.modelBlock.velocityToAddToEntity(par1World, par2, par3, par4, par5Entity, par6Vec3D);
 	}

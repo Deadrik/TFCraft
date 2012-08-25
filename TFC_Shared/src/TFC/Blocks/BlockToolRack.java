@@ -5,9 +5,8 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockToolRack extends BlockContainer implements ITextureProvider
+public class BlockToolRack extends BlockContainer
 {
 
     public BlockToolRack(int par1, Material par2Material)
@@ -21,13 +20,6 @@ public class BlockToolRack extends BlockContainer implements ITextureProvider
     {
         // TODO Auto-generated method stub
         return "/bioxx/terrablocks.png";
-    }
-
-    @Override
-    public TileEntity getBlockEntity()
-    {
-        // TODO Auto-generated method stub
-        return null;
     }
     
     public void Eject(World par1World, int par2, int par3, int par4)
@@ -55,5 +47,11 @@ public class BlockToolRack extends BlockContainer implements ITextureProvider
     }
 
     public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

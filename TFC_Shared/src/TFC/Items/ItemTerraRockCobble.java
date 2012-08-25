@@ -2,9 +2,8 @@ package TFC.Items;
 
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraRockCobble extends ItemBlock implements ITextureProvider
+public class ItemTerraRockCobble extends ItemBlock
 {
 	public static String[] blockNames = {"Granite", "Diorite", "Gabbro", 
 		"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 

@@ -1,8 +1,8 @@
 package TFC.Containers;
 
-import TFC.Core.ServerClientProxy;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ForgeHooks;
+import net.minecraftforge.common.ForgeHooks;
 
 public class SlotCraftingMetal extends Slot
 {
@@ -25,8 +25,8 @@ public class SlotCraftingMetal extends Slot
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 
-		ServerClientProxy.getProxy().takenFromCrafting(thePlayer, itemstack, craftMatrix);
-		ForgeHooks.onTakenFromCrafting(thePlayer, itemstack, craftMatrix);
+		mod_TFC.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
+		GameRegistry.onItemCrafted(thePlayer, itemstack, craftMatrix);
 
 		for (int i = 0; i < craftMatrix.getSizeInventory(); i++)
 		{

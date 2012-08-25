@@ -20,32 +20,30 @@ public class ContainerTerraAnvil extends Container
         greenIndicator = -1000;
 
         //Hammer slot
-        addSlot(new SlotAnvilHammer(inventoryplayer.player, anvil, 0, 6, 95));
+        addSlotToContainer(new SlotAnvilHammer(inventoryplayer.player, anvil, 0, 6, 95));
         //input item slot
-        addSlot(new Slot(anvil, 1, 87, 6));
+        addSlotToContainer(new Slot(anvil, 1, 87, 6));
         //blueprint slot
-        addSlot(new Slot(anvil, 5, 105, 6));
+        addSlotToContainer(new Slot(anvil, 5, 105, 6));
         //Weld slots
-        addSlot(new Slot(anvil,  2, 87, 33));
-        addSlot(new Slot(anvil,  3, 105, 33));
-        addSlot(new SlotAnvilWeldOut(inventoryplayer.player, anvil, 4, 96, 55));
-        addSlot(new SlotAnvilFlux(inventoryplayer.player, anvil, 7, 186, 95));
-
-
+        addSlotToContainer(new Slot(anvil,  2, 87, 33));
+        addSlotToContainer(new Slot(anvil,  3, 105, 33));
+        addSlotToContainer(new SlotAnvilWeldOut(inventoryplayer.player, anvil, 4, 96, 55));
+        addSlotToContainer(new SlotAnvilFlux(inventoryplayer.player, anvil, 7, 186, 95));
 
         for(int i = 0; i < 3; i++)
         {
             for(int k = 0; k < 9; k++)
             {
                 int m = k + i * 9 + 9;
-                addSlot(new Slot(inventoryplayer, m, 24 + k * 18, 116 + i * 18));
+                addSlotToContainer(new Slot(inventoryplayer, m, 24 + k * 18, 116 + i * 18));
             }
 
         }
 
         for(int j = 0; j < 9; j++)
         {
-            addSlot(new Slot(inventoryplayer, j, 24 + j * 18, 174));
+        	addSlotToContainer(new Slot(inventoryplayer, j, 24 + j * 18, 174));
         }
 
     }
@@ -143,7 +141,7 @@ public class ContainerTerraAnvil extends Container
                     }
                     else if (slot.isItemValid(itemstack3))
                     {
-                        if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+                        if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
                         {
                             if (itemstack3.stackSize <= slot.getSlotStackLimit())
                             {
@@ -171,7 +169,7 @@ public class ContainerTerraAnvil extends Container
                             itemstack2.stackSize += j1;
                         }
                     }
-                    else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+                    else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && ItemStack.areItemStacksEqual(itemstack2, itemstack3))
                     {
                         int k1 = itemstack2.stackSize;
                         if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())

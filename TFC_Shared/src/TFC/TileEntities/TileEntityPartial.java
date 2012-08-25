@@ -82,8 +82,6 @@ public class TileEntityPartial extends TileEntity
                 return Material.redstoneLight;
             case 17:
                 return Material.tnt;
-            case 18:
-                return Material.unused;
             case 19:
                 return Material.ice;
             case 20:
@@ -131,7 +129,6 @@ public class TileEntityPartial extends TileEntity
         else if(mat == Material.glass){n++; material = 15;}
         else if(mat == Material.redstoneLight){n++; material = 16;}
         else if(mat == Material.tnt){n++; material = 17;}
-        else if(mat == Material.unused){n++; material = 18;}
         else if(mat == Material.ice){n++; material = 19;}
         else if(mat == Material.snow){n++; material = 20;}
         else if(mat == Material.craftedSnow){n++; material = 21;}

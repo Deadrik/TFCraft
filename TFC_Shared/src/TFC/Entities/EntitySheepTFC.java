@@ -3,8 +3,11 @@ package TFC.Entities;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.Core.TFCSeasons;
+import TFC.Core.TFCSettings;
+
 import net.minecraft.src.*;
-import net.minecraft.src.forge.IShearable;
+import net.minecraftforge.common.IShearable;
 
 public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
 {
@@ -39,6 +42,23 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
+    public EntitySheepTFC(World par1World,EntityAnimalTFC mother, float F_size)
+	{
+    	super(par1World,mother,F_size);
+        this.texture = "/mob/sheep.png";
+        this.setSize(0.9F, 1.3F);
+        float var2 = 0.23F;
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+        this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
+        this.tasks.addTask(5, this.aiEatGrass);
+        this.tasks.addTask(6, new EntityAIWander(this, var2));
+        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+	}
     
     /**
      * Returns true if the newer Entity AI code should be run
@@ -67,6 +87,16 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         
         float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
         setSize(0.9F*t,0.9F*t);
+        if(pregnant){
+			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+				int i = rand.nextInt(3) + 1;
+				for (int x = 0; x<i;x++){
+				EntitySheepTFC baby = new EntitySheepTFC(worldObj, this,mateSizeMod);
+				giveBirth(baby);
+				}
+				pregnant = false;
+			}
+		}
 
         super.onLivingUpdate();
     }

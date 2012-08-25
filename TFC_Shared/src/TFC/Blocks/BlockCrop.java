@@ -154,17 +154,9 @@ public class BlockCrop extends BlockContainer
         return "/bioxx/TFC_Plants.png";
     }
 
-    @Override
-    public TileEntity getBlockEntity()
-    {
-        try
-        {
-            return TileEntityCrop.class.newInstance();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityCrop();
+	}
 }

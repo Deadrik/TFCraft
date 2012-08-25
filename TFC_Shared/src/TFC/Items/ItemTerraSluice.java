@@ -2,9 +2,8 @@ package TFC.Items;
 
 import TFC.Blocks.BlockTerraSluice;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraSluice extends Item implements ITextureProvider
+public class ItemTerraSluice extends Item
 {
 
     public ItemTerraSluice(int i)

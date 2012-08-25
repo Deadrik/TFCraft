@@ -65,7 +65,7 @@ public class EntityAIMoveTowardsFood extends EntityAIBase
 			}
 		}
 		
-		Vec3D vec3d = RandomPositionGeneratorTFC.func_48620_a (theEntity, 10, 10, Vec3D.createVector (targetEntity.posX, targetEntity.posY, targetEntity.posZ));
+		Vec3 vec3d = RandomPositionGeneratorTFC.func_48620_a (theEntity, 10, 10, Vec3.createVectorHelper(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
 
 		if (vec3d == null)
 		{

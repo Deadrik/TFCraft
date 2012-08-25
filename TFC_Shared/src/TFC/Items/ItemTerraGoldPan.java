@@ -10,9 +10,8 @@ import TFC.Core.TFCSettings;
 import TFC.TileEntities.TileEntityTerraSluice;
 import TFC.WorldGen.BiomeGenRiverTFC;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraGoldPan extends Item implements ITextureProvider
+public class ItemTerraGoldPan extends Item
 {
     public static String[] blockNames = {"GoldPan", "GoldPanSand", "GoldPanGravel", "GoldPanClay", "GoldPanDirt"};
 
@@ -59,7 +58,7 @@ public class ItemTerraGoldPan extends Item implements ITextureProvider
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l)
+    public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l, float par8, float par9, float par10)
     {
 
         MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);

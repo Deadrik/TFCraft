@@ -4,10 +4,8 @@ import java.util.List;
 
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemCustomKnife extends ItemSword
-implements ITextureProvider
 {
 	private int weaponDamage = 1;
 	public ItemCustomKnife(int i, EnumToolMaterial e)

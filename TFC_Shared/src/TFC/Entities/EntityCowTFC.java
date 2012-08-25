@@ -1,5 +1,7 @@
 package TFC.Entities;
 
+import TFC.Core.TFCSeasons;
+import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
 
 public class EntityCowTFC extends EntityAnimalTFC
@@ -21,6 +23,22 @@ public class EntityCowTFC extends EntityAnimalTFC
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
     }
+    public EntityCowTFC(World par1World,EntityAnimalTFC mother, float F_size)
+	{
+    	super(par1World,mother,F_size);
+    	this.texture = "/mob/cow.png";
+        this.setSize(0.9F, 1.3F);
+        this.getNavigator().setAvoidsWater(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+        this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
+        this.tasks.addTask(5, this.aiEatGrass);
+        this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(7, new EntityAILookIdle(this));
+	}
     
     public void onLivingUpdate()
     {
@@ -28,7 +46,14 @@ public class EntityCowTFC extends EntityAnimalTFC
         
         float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
         setSize(0.9F*t,0.9F*t);
-        
+        if(pregnant){
+			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+				EntityCowTFC baby = new EntityCowTFC(worldObj, this,mateSizeMod);
+				giveBirth(baby);
+				pregnant = false;
+			}
+		}
+
     }
 
     /**

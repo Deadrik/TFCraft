@@ -1,5 +1,8 @@
 package TFC.Items;
 
+import java.util.List;
+
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ItemStack;
 
 public class ItemTerraOreSmall extends ItemTerraOre
@@ -16,7 +19,7 @@ public class ItemTerraOreSmall extends ItemTerraOre
     }
 
     @Override
-    public void addCreativeItems(java.util.ArrayList list)
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
     {
         for(int i = 0; i < 14; i++) {
             list.add(new ItemStack(this,1,i));}

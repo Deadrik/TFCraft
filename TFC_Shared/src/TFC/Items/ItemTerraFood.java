@@ -10,9 +10,8 @@ import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraFood extends ItemFood  implements ITextureProvider
+public class ItemTerraFood extends ItemFood
 {
 	String texture;
 

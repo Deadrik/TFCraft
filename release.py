@@ -14,7 +14,6 @@ from build import build
 
 reobf_dir = os.path.join(mcp_dir, 'reobf')
 client_dir = os.path.join(reobf_dir, 'minecraft')
-server_dir = os.path.join(reobf_dir, 'minecraft_server')
 zip = None
 zip_name = None
 zip_base = None
@@ -61,17 +60,9 @@ def main():
     zip_add('license.txt')
     zip_end()
     
-    zip_start('TFCraft-server-core.zip')
-    zip_folder(server_dir, '', zip)
-    zip_add('TFCraft_credits.txt')
-    zip_add('license.txt')
-    zip_end()
-    
     zip_start('TFCraft-src.zip')
     zip_add('tfc_client/src', 'src/minecraft')
-    zip_add('tfc_server/src', 'src/minecraft_server')
     zip_add('tfc_common',     'src/minecraft')
-    zip_add('tfc_common',     'src/minecraft_server')
     zip_add('patches',          'patches')
     zip_add('tfc_credits.txt')
     zip_add('install/install.cmd')

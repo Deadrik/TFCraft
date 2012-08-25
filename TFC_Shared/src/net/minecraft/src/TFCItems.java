@@ -3,58 +3,14 @@ package net.minecraft.src;
 import java.io.File;
 
 import TFC.Blocks.BlockTerraSluice;
-import TFC.Core.AnvilReq;
-import TFC.Core.IProxy;
-import TFC.Core.ItemDyeCustom;
-import TFC.Core.ServerClientProxy;
-import TFC.Core.TFCSettings;
-import TFC.Core.TFC_Core;
-import TFC.Items.ItemChisel;
-import TFC.Items.ItemCustomAxe;
-import TFC.Items.ItemCustomBucket;
-import TFC.Items.ItemCustomBucketMilk;
-import TFC.Items.ItemCustomHoe;
-import TFC.Items.ItemCustomKnife;
-import TFC.Items.ItemCustomPaxel;
-import TFC.Items.ItemCustomPickaxe;
-import TFC.Items.ItemCustomSaw;
-import TFC.Items.ItemCustomScythe;
-import TFC.Items.ItemCustomSeeds;
-import TFC.Items.ItemCustomShovel;
-import TFC.Items.ItemFlatRock;
-import TFC.Items.ItemFruitTreeSapling;
-import TFC.Items.ItemHammer;
-import TFC.Items.ItemLooseRock;
-import TFC.Items.ItemPlank;
-import TFC.Items.ItemStick;
-import TFC.Items.ItemTerra;
-import TFC.Items.ItemTerraAnvil;
-import TFC.Items.ItemTerraArmor;
-import TFC.Items.ItemTerraBellows;
-import TFC.Items.ItemTerraFirestarter;
-import TFC.Items.ItemTerraFood;
-import TFC.Items.ItemTerraGem;
-import TFC.Items.ItemTerraGoldPan;
-import TFC.Items.ItemTerraIngot;
-import TFC.Items.ItemTerraJavelin;
-import TFC.Items.ItemTerraLogs;
-import TFC.Items.ItemTerraMeltedMetal;
-import TFC.Items.ItemTerraMiscTool;
-import TFC.Items.ItemTerraMiscToolHead;
-import TFC.Items.ItemTerraOreSmall;
-import TFC.Items.ItemTerraProPick;
-import TFC.Items.ItemTerraSluice;
-import TFC.Items.ItemTerraOre;
-import TFC.Items.ItemTerraSword;
-import TFC.Items.ItemTerraWoodSupport;
-import TFC.Items.ItemUnfinishedArmor;
+import TFC.Core.*;
+import TFC.Items.*;
 import TFC.TileEntities.TileEntityTerraSluice;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
-import net.minecraft.src.forge.Configuration;
-import net.minecraft.src.forge.EnumHelper;
+import net.minecraftforge.common.*;
 
 public class TFCItems
 {
@@ -892,7 +848,7 @@ public class TFCItems
         
         try
         {
-            config = new Configuration(new File(ServerClientProxy.getProxy().getMinecraftDir(), "/config/TFC.cfg"));
+            config = new net.minecraftforge.common.Configuration(new File(mod_TFC.proxy.getMinecraftDir(), "/config/TFC.cfg"));
             config.load();
         } catch (Exception e) {
             System.out.println(new StringBuilder().append("[TFC] Error while trying to access configuration!").toString());
@@ -1619,7 +1575,7 @@ public class TFCItems
             TFCItems.TinHammer,TFCItems.ZincHammer};
         
         String[] Names = {"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Rose Gold", "Steel", "Tin", "Zinc"};
-        IProxy proxy = ServerClientProxy.getProxy();
+        CommonProxy proxy = mod_TFC.proxy;
         
         EnumArmorMaterial[] mats = new EnumArmorMaterial[]{mod_TFC.BismuthArmorMaterial,mod_TFC.BismuthBronzeArmorMaterial,mod_TFC.BlackBronzeArmorMaterial,mod_TFC.BlackSteelArmorMaterial,mod_TFC.BlueSteelArmorMaterial,
                 mod_TFC.BronzeArmorMaterial,mod_TFC.CopperArmorMaterial,mod_TFC.IronArmorMaterial,mod_TFC.RedSteelArmorMaterial,mod_TFC.RoseGoldArmorMaterial,

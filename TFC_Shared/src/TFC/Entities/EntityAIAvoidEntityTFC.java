@@ -96,7 +96,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 					}
 				}
 			}
-			Vec3D var2 = RandomPositionGeneratorTFC.func_48623_b(this.theEntity, 16, 7, Vec3D.createVector(this.field_48240_d.posX, this.field_48240_d.posY, this.field_48240_d.posZ));
+			Vec3 var2 = RandomPositionGeneratorTFC.func_48623_b(this.theEntity, 16, 7, Vec3.createVectorHelper(this.field_48240_d.posX, this.field_48240_d.posY, this.field_48240_d.posZ));
 
 			if (var2 == null)
 			{

@@ -34,7 +34,7 @@ public class ContainerTerraWorkbench extends Container
         this.posX = par3;
         this.posY = par4;
         this.posZ = par5;
-        this.addSlot(new SlotCrafting(par1InventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 35));
+        this.addSlotToContainer(new SlotCrafting(par1InventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 35));
         int var6;
         int var7;
 
@@ -42,7 +42,7 @@ public class ContainerTerraWorkbench extends Container
         {
             for (var7 = 0; var7 < 3; ++var7)
             {
-                this.addSlot(new Slot(this.craftMatrix, var7 + var6 * 3, 30 + var7 * 18, 17 + var6 * 18));
+                this.addSlotToContainer(new Slot(this.craftMatrix, var7 + var6 * 3, 30 + var7 * 18, 17 + var6 * 18));
             }
         }
 
@@ -50,13 +50,13 @@ public class ContainerTerraWorkbench extends Container
         {
             for (var7 = 0; var7 < 9; ++var7)
             {
-                this.addSlot(new Slot(par1InventoryPlayer, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
+                this.addSlotToContainer(new Slot(par1InventoryPlayer, var7 + var6 * 9 + 9, 8 + var7 * 18, 84 + var6 * 18));
             }
         }
 
         for (var6 = 0; var6 < 9; ++var6)
         {
-            this.addSlot(new Slot(par1InventoryPlayer, var6, 8 + var6 * 18, 142));
+            this.addSlotToContainer(new Slot(par1InventoryPlayer, var6, 8 + var6 * 18, 142));
         }
 
         this.onCraftMatrixChanged(this.craftMatrix);

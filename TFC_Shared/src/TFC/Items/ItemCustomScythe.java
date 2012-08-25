@@ -4,10 +4,8 @@ import java.util.List;
 
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemCustomScythe extends ItemTool
-implements ITextureProvider
 {
     static Block[] blocks = {Block.blocksList[18]};
 	private int weaponDamage;

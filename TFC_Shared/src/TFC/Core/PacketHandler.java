@@ -7,6 +7,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Proxy;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.common.network.IConnectionHandler;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
+
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
@@ -14,7 +20,11 @@ import TFC.TileEntities.TileEntityTerraBloomery;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.NetHandler;
+import net.minecraft.src.NetLoginHandler;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet1Login;
@@ -22,41 +32,25 @@ import net.minecraft.src.Packet250CustomPayload;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_TFC;
-import net.minecraft.src.forge.IConnectionHandler;
-import net.minecraft.src.forge.IPacketHandler;
-import net.minecraft.src.forge.MessageManager;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
     @Override
-    public void onConnect(NetworkManager network) {
-        MessageManager.getInstance().registerChannel(network, this, "TerraFirmaCraft");
-
-    }
-
-    @Override
-    public void onDisconnect(NetworkManager network, String message, Object[] args) {
-
-        PlayerInfo PI = new PlayerInfo(mod_TFC.proxy.getPlayer(network).username);
-        for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
-        {
-            if(PlayerManagerTFC.getInstance().Players.get(i).Name.equalsIgnoreCase(PI.Name))
-            {
-                System.out.println("PlayerManager Successfully removed player " + mod_TFC.proxy.getPlayer(network).username);
-                PlayerManagerTFC.getInstance().Players.remove(i);
-            }  
-        }
-        MessageManager.getInstance().removeConnection(network);
-    }
-
-    @Override
-    public void onLogin(NetworkManager network, Packet1Login login) 
+    public void clientLoggedIn(NetHandler clientHandler,
+			NetworkManager manager, Packet1Login login) 
     {
-        PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(login.username));
+
+    }
+
+
+    @Override
+    public void playerLoggedIn(Player p, NetHandler netHandler,NetworkManager manager)
+    {
+        PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(""/*login.username*/));
 
         ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
         DataOutputStream dos=new DataOutputStream(bos);
-        EntityPlayer player = mod_TFC.proxy.getPlayer(network);
+        EntityPlayer player = (EntityPlayer)p;
         World world= player.worldObj;
 
         if(world.isRemote)
@@ -83,10 +77,11 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     }
 
     @Override
-    public void onPacketData(NetworkManager network, String channel, byte[] data) 
+    public void onPacketData(NetworkManager manager,
+			Packet250CustomPayload packet, Player p)
     {
-        DataInputStream dis=new DataInputStream(new ByteArrayInputStream(data));
-        if(channel.contentEquals("TerraFirmaCraft"))
+        DataInputStream dis=new DataInputStream(new ByteArrayInputStream(packet.data));
+        if(true/*channel.contentEquals("TerraFirmaCraft")*/)
         {
             byte type = 0;
             int x;
@@ -97,8 +92,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             } catch (IOException e) {
                 return;
             }
-
-            EntityPlayer player = mod_TFC.proxy.getPlayer(network);
+            EntityPlayer player = (EntityPlayer)p;
             World world= player.worldObj;
 
             if(type == 0)
@@ -410,7 +404,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     }
 
     public static void requestInitialData(TileEntity te) {
-        if (!TFC_Core.isClient()) return;
+        if (!te.worldObj.isRemote) return;
         else 
         {
             try
@@ -438,7 +432,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     }
 
     public static void broadcastPartialData(TileEntityPartial te) {
-        if (TFC_Core.isClient()) return;
+        if (te.worldObj.isRemote) return;
         else 
         {
             try
@@ -470,7 +464,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     }
 
     public static void broadcastCropData(TileEntityCrop te) {
-        if (TFC_Core.isClient()) return;
+        if (te.worldObj.isRemote) return;
         else 
         {
             try
@@ -499,9 +493,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public static void sendKeyPress(int type) //0 = chiselmode
     {
-        if (!TFC_Core.isClient()) return;
+        if (!ModLoader.getMinecraftInstance().theWorld.isRemote) return;
         else 
         {
             try
@@ -525,4 +520,40 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             }
         }
     }
+
+	@Override
+	public String connectionReceived(NetLoginHandler netHandler,
+			NetworkManager manager) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void connectionOpened(NetHandler netClientHandler, String server,
+			int port, NetworkManager manager) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void connectionOpened(NetHandler netClientHandler,
+			MinecraftServer server, NetworkManager manager) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void connectionClosed(NetworkManager manager) 
+	{
+//		PlayerInfo PI = new PlayerInfo(manager.);
+//        for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
+//        {
+//            if(PlayerManagerTFC.getInstance().Players.get(i).Name.equalsIgnoreCase(PI.Name))
+//            {
+//                System.out.println("PlayerManager Successfully removed player " + mod_TFC.proxy.getPlayer(network).username);
+//                PlayerManagerTFC.getInstance().Players.remove(i);
+//            }  
+//        }
+		
+	}
 }

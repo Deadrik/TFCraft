@@ -28,10 +28,10 @@ public class BiomeGenHillsEdgeTFC extends TFCBiome
 	public BiomeGenHillsEdgeTFC(int i)
 	{
 		super(i);
-		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksPerChunk = 4;
-		((BiomeDecoratorTFC)this.biomeDecorator).looseRocksChancePerChunk = 90;
-		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = 2;
-		((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 2;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 4;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 2;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 2;
 		
 		setColor(HillsColor);
 	}

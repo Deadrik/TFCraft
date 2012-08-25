@@ -36,18 +36,18 @@ public class ContainerKnapping extends Container
         int var6;
         int var7;
 
-        addSlot(new SlotCraftingMetal(inventoryplayer.player, craftMatrix, craftResult,0, 128, 35));
+        addSlotToContainer(new SlotCraftingMetal(inventoryplayer.player, craftMatrix, craftResult,0, 128, 35));
 
         for(int j = 0; j < 9; j++)
         {
-            addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 151));
+        	addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 151));
         }
 
         for(int i = 0; i < 3; i++)
         {
             for(int k = 0; k < 9; k++)
             {
-                addSlot(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
+            	addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
             }
 
         }
@@ -56,7 +56,7 @@ public class ContainerKnapping extends Container
         {
             for (int k1 = 0; k1 < 5; k1++)
             {
-                addSlot(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
+            	addSlotToContainer(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
             }
         }
 

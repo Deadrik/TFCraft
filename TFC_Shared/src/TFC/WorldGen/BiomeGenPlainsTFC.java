@@ -15,8 +15,8 @@ public class BiomeGenPlainsTFC extends TFCBiome
 	public BiomeGenPlainsTFC(int i)
 	{
 		super(i);
-		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = -999;
-		((BiomeDecoratorTFC)this.biomeDecorator).flowersPerChunk = 4;
-		((BiomeDecoratorTFC)this.biomeDecorator).grassPerChunk = 20;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = -999;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).flowersPerChunk = 4;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 20;
 	}
 }

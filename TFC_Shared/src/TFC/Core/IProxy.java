@@ -2,8 +2,9 @@ package TFC.Core;
 
 import java.io.File;
 import java.util.Map;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.*;
 
 public interface IProxy extends IGuiHandler {
 

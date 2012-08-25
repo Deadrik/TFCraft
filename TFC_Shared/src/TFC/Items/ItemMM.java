@@ -2,9 +2,8 @@ package TFC.Items;
 
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemMM extends ItemBlock implements ITextureProvider
+public class ItemMM extends ItemBlock
 {
 	public static String[] blockNames = { "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
 

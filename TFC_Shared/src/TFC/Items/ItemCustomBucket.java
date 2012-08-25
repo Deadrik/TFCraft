@@ -3,10 +3,10 @@ package TFC.Items;
 import TFC.Core.Helper;
 import TFC.Entities.EntityCowTFC;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
-import net.minecraft.src.forge.MinecraftForge;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-public class ItemCustomBucket extends Item implements ITextureProvider
+public class ItemCustomBucket extends Item
 {
     /** field for checking if the bucket has been filled. */
     private int isFull;
@@ -54,10 +54,15 @@ public class ItemCustomBucket extends Item implements ITextureProvider
                         return par1ItemStack;
                     }
                     
-                    ItemStack stack = MinecraftForge.fillCustomBucket(world, i, j, k);
-                    if (stack != null)
+                    FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, par1ItemStack, world, var12);
+                    if (event.isCanceled())
                     {
-                        return stack;
+                        return par1ItemStack;
+                    }
+                    
+                    if (event.isHandeled())
+                    {
+                        return event.result;
                     }
 
                     if (world.getBlockMaterial(i, j, k) == Material.water && world.getBlockMetadata(i, j, k) <=2)
@@ -111,7 +116,7 @@ public class ItemCustomBucket extends Item implements ITextureProvider
 
                     if (world.isAirBlock(i, j, k) || !world.getBlockMaterial(i, j, k).isSolid())
                     {
-                        if (world.worldProvider.isHellWorld && this.isFull == mod_TFC.finiteWater.blockID)
+                        if (world.provider.isHellWorld && this.isFull == mod_TFC.finiteWater.blockID)
                         {
                             world.playSoundEffect(var5 + 0.5D, var7 + 0.5D, var9 + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 

@@ -2,6 +2,9 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+
 import net.minecraft.src.*;
 
 public abstract class BlockCustomFluid extends Block
@@ -20,11 +23,13 @@ public abstract class BlockCustomFluid extends Block
         return this.blockMaterial != Material.lava;
     }
 
+    @SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
         return 16777215;
     }
 
+    @SideOnly(Side.CLIENT)
     /**
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
      * when first determining what to render.
@@ -41,6 +46,7 @@ public abstract class BlockCustomFluid extends Block
         }
     }
 
+    
     /**
      * Returns the percentage of the fluid block that is air, based on the given flow decay of the fluid.
      */
@@ -176,9 +182,9 @@ public abstract class BlockCustomFluid extends Block
     /**
      * Returns a vector indicating the direction and intensity of fluid flow.
      */
-    private Vec3D getFlowVector(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    private Vec3 getFlowVector(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        Vec3D var5 = Vec3D.createVector(0.0D, 0.0D, 0.0D);
+        Vec3 var5 = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
         int var6 = this.getEffectiveFlowDecay(par1IBlockAccess, par2, par3, par4);
 
         for (int var7 = 0; var7 < 4; ++var7)
@@ -286,9 +292,9 @@ public abstract class BlockCustomFluid extends Block
     /**
      * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
      */
-    public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3D par6Vec3D)
+    public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3D)
     {
-        Vec3D var7 = this.getFlowVector(par1World, par2, par3, par4);
+        Vec3 var7 = this.getFlowVector(par1World, par2, par3, par4);
         par6Vec3D.xCoord += var7.xCoord;
         par6Vec3D.yCoord += var7.yCoord;
         par6Vec3D.zCoord += var7.zCoord;
@@ -307,8 +313,8 @@ public abstract class BlockCustomFluid extends Block
      */
     public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        int var5 = mod_TFC.proxy.getLightBrightnessSkyBlocks(par1IBlockAccess, par2, par3, par4, 0);
-        int var6 = mod_TFC.proxy.getLightBrightnessSkyBlocks(par1IBlockAccess, par2, par3+1, par4, 0);
+        int var5 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
+        int var6 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3+1, par4, 0);
         int var7 = var5 & 255;
         int var8 = var6 & 255;
         int var9 = var5 >> 16 & 255;
@@ -321,8 +327,8 @@ public abstract class BlockCustomFluid extends Block
      */
     public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        float var5 = mod_TFC.proxy.getLightBrightness(par1IBlockAccess, par2, par3, par4);
-        float var6 = mod_TFC.proxy.getLightBrightness(par1IBlockAccess, par2, par3+1, par4);
+        float var5 = par1IBlockAccess.getLightBrightness(par2, par3, par4);
+        float var6 = par1IBlockAccess.getLightBrightness(par2, par3+1, par4);
         return var5 > var6 ? var5 : var6;
     }
 
@@ -342,6 +348,7 @@ public abstract class BlockCustomFluid extends Block
         return this.blockMaterial == Material.water ? 1 : 0;
     }
 
+    @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
@@ -492,7 +499,7 @@ public abstract class BlockCustomFluid extends Block
 
     public static double func_293_a(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, Material par4Material)
     {
-        Vec3D var5 = null;
+        Vec3 var5 = null;
 
         if (par4Material == Material.water)
         {

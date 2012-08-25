@@ -26,10 +26,10 @@ public class BiomeGenDesertTFC extends TFCBiome
 		spawnableCreatureList.clear();
 		topBlock = (byte)Block.sand.blockID;
 		fillerBlock = (byte)Block.sand.blockID;
-		((BiomeDecoratorTFC)this.biomeDecorator).treesPerChunk = -999;
-		((BiomeDecoratorTFC)this.biomeDecorator).deadBushPerChunk = 2;
-		((BiomeDecoratorTFC)this.biomeDecorator).reedsPerChunk = 50;
-		((BiomeDecoratorTFC)this.biomeDecorator).cactiPerChunk = 10;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = -999;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).deadBushPerChunk = 2;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).reedsPerChunk = 50;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).cactiPerChunk = 10;
 		setMinMaxHeight(0.2F, 0.3F);
 		setColor(DesertColor);
 	}

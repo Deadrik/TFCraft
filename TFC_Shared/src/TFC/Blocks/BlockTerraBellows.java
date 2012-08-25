@@ -4,9 +4,8 @@ import java.util.Random;
 
 import TFC.TileEntities.TileEntityFireEntity;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.*;
 
-public class BlockTerraBellows extends Block implements ITextureProvider
+public class BlockTerraBellows extends Block
 {
 	private int meta;
 	private int xCoord;

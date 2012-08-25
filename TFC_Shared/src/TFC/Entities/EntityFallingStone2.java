@@ -112,7 +112,7 @@ public class EntityFallingStone2 extends Entity
                 if (worldObj.getBlockId(i, j, k) != Block.pistonMoving.blockID)
                 {
                     setDead();
-                    if (((!worldObj.canBlockBePlacedAt(blockID, i, j, k, true, 1) && 
+                    if (((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this) && 
                             BlockCollapsable.canFallBelow(worldObj, i, j - 1, k)) || 
                             !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
                     {

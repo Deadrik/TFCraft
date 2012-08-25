@@ -49,7 +49,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 		}
 		else
 		{
-			Vec3D var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
+			Vec3 var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
 
 			if (var1 == null)
 			{
@@ -70,7 +70,7 @@ public class EntityAIPanicTFC extends EntityAIBase
 	 */
 	public void startExecuting()
 	{
-		Vec3D var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
+		Vec3 var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
 
 		this.field_48315_c = field_48316_a.posX + (field_48316_a.fearSource.posX - field_48316_a.posX)*10;
 		this.field_48312_d = field_48316_a.posY;

@@ -4,11 +4,11 @@ import java.util.List;
 
 import TFC.Core.TFCSettings;
 import net.minecraft.src.*;
-import net.minecraft.src.forge.ForgeHooks;
-import net.minecraft.src.forge.ITextureProvider;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.UseHoeEvent;
 
 public class ItemCustomHoe extends ItemHoe
-implements ITextureProvider
 {
 	public ItemCustomHoe(int i, EnumToolMaterial e)
 	{
@@ -37,11 +37,17 @@ implements ITextureProvider
 		}
 		else
 		{
-			if (ForgeHooks.onUseHoe(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6))
-			{
-				par1ItemStack.damageItem(1, par2EntityPlayer);
-				return true;
-			}
+			UseHoeEvent event = new UseHoeEvent(par2EntityPlayer, par1ItemStack, par3World, par4, par5, par6);
+            if (MinecraftForge.EVENT_BUS.post(event))
+            {
+                return false;
+            }
+            if (event.isHandeled())
+            {
+                par1ItemStack.damageItem(1, par2EntityPlayer);
+                return true;
+            }
+            
 			int var8 = par3World.getBlockId(par4, par5, par6);
 			int var9 = par3World.getBlockId(par4, par5 + 1, par6);
 

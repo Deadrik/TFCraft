@@ -18,20 +18,20 @@ public class ContainerTerraBloomery extends Container
 	    bloomery = tileentityforge;
 	    firetemp = 0;
 		//Input slot
-		addSlot(new Slot(tileentityforge, 0, 80, 33));
+	    addSlotToContainer(new Slot(tileentityforge, 0, 80, 33));
 
 		for(int i = 0; i < 3; i++)
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlot(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
 			}
 
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlot(new Slot(inventoryplayer, j, 8 + j * 18, 142));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
 
 	}
@@ -129,7 +129,7 @@ public class ContainerTerraBloomery extends Container
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
-						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+						if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
 						{
 							if (itemstack3.stackSize <= slot.getSlotStackLimit())
 							{
@@ -157,7 +157,7 @@ public class ContainerTerraBloomery extends Container
 							itemstack2.stackSize += j1;
 						}
 					}
-					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && mod_TFC.proxy.areItemStacksEqual(itemstack2, itemstack3))
+					else if (itemstack2.itemID == itemstack3.itemID && itemstack3.getMaxStackSize() > 1 && (!itemstack2.getHasSubtypes() || itemstack2.getItemDamage() == itemstack3.getItemDamage()) && ItemStack.areItemStacksEqual(itemstack2, itemstack3))
 					{
 						int k1 = itemstack2.stackSize;
 						if (k1 > 0 && k1 + itemstack3.stackSize <= itemstack3.getMaxStackSize())

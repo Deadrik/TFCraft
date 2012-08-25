@@ -145,7 +145,7 @@ public class EntityTerraJavelin extends Entity
 			Block.blocksList[var15].setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
 			AxisAlignedBB var2 = Block.blocksList[var15].getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 
-			if (var2 != null && var2.isVecInside(Vec3D.createVector(this.posX, this.posY, this.posZ)))
+			if (var2 != null && var2.isVecInside(Vec3.createVectorHelper(this.posX, this.posY, this.posZ)))
 			{
 				this.inGround = true;
 			}
@@ -183,15 +183,15 @@ public class EntityTerraJavelin extends Entity
 		else
 		{
 			++this.ticksInAir;
-			Vec3D var16 = Vec3D.createVector(this.posX, this.posY, this.posZ);
-			Vec3D var17 = Vec3D.createVector(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 var16 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			Vec3 var17 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition var3 = this.worldObj.rayTraceBlocks_do_do(var16, var17, false, true);
-			var16 = Vec3D.createVector(this.posX, this.posY, this.posZ);
-			var17 = Vec3D.createVector(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			var16 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+			var17 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			if (var3 != null)
 			{
-				var17 = Vec3D.createVector(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
+				var17 = Vec3.createVectorHelper(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
 			}
 
 			Entity var4 = null;

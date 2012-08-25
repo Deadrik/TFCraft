@@ -6,6 +6,7 @@ import java.util.Random;
 import TFC.TileEntities.TileEntityChestTFC;
 
 import net.minecraft.src.*;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockChestTFC extends BlockContainer
 {
@@ -445,7 +446,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Called whenever the block is removed.
      */
-    public void onBlockRemoval(World par1World, int par2, int par3, int par4)
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         TileEntityChestTFC var5 = (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -486,7 +487,7 @@ public class BlockChestTFC extends BlockContainer
             }
         }
 
-        super.onBlockRemoval(par1World, par2, par3, par4);
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
 
     /**
@@ -501,7 +502,7 @@ public class BlockChestTFC extends BlockContainer
         {
             return true;
         }
-        else if (par1World.isBlockSolidOnSide(par2, par3 + 1, par4, 0))
+        else if (par1World.isBlockSolidOnSide(par2, par3 + 1, par4, ForgeDirection.getOrientation(0)))
         {
             return true;
         }
@@ -509,19 +510,19 @@ public class BlockChestTFC extends BlockContainer
         {
             return true;
         }
-        else if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 - 1, par3 + 1, par4, 0) || isOcelotBlockingChest(par1World, par2 - 1, par3, par4)))
+        else if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 - 1, par3 + 1, par4, ForgeDirection.getOrientation(0)) || isOcelotBlockingChest(par1World, par2 - 1, par3, par4)))
         {
             return true;
         }
-        else if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 + 1, par3 + 1, par4, 0) || isOcelotBlockingChest(par1World, par2 + 1, par3, par4)))
+        else if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 + 1, par3 + 1, par4, ForgeDirection.getOrientation(0)) || isOcelotBlockingChest(par1World, par2 + 1, par3, par4)))
         {
             return true;
         }
-        else if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 - 1, 0) || isOcelotBlockingChest(par1World, par2, par3, par4 - 1)))
+        else if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 - 1, ForgeDirection.getOrientation(0)) || isOcelotBlockingChest(par1World, par2, par3, par4 - 1)))
         {
             return true;
         }
-        else if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 + 1, 0) || isOcelotBlockingChest(par1World, par2, par3, par4 + 1)))
+        else if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 + 1, ForgeDirection.getOrientation(0)) || isOcelotBlockingChest(par1World, par2, par3, par4 + 1)))
         {
             return true;
         }
@@ -573,7 +574,7 @@ public class BlockChestTFC extends BlockContainer
      */
     private static boolean isOcelotBlockingChest(World par0World, int par1, int par2, int par3)
     {
-        Iterator var4 = par0World.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getBoundingBoxFromPool((double)par1, (double)(par2 + 1), (double)par3, (double)(par1 + 1), (double)(par2 + 2), (double)(par3 + 1))).iterator();
+        Iterator var4 = par0World.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getBoundingBox((double)par1, (double)(par2 + 1), (double)par3, (double)(par1 + 1), (double)(par2 + 2), (double)(par3 + 1))).iterator();
         EntityOcelot var6;
 
         do
@@ -590,4 +591,10 @@ public class BlockChestTFC extends BlockContainer
 
         return true;
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return new TileEntityChestTFC();
+	}
 }

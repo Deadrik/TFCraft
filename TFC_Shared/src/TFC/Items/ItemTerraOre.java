@@ -1,10 +1,12 @@
 package TFC.Items;
 
+import java.util.List;
+
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraOre extends ItemTerra implements ITextureProvider
+public class ItemTerraOre extends ItemTerra
 {
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
@@ -22,7 +24,7 @@ public class ItemTerraOre extends ItemTerra implements ITextureProvider
 	}
 
 	@Override
-	public void addCreativeItems(java.util.ArrayList list)
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < blockNames.length; i++) {
 			list.add(new ItemStack(this,1,i));

@@ -1,9 +1,8 @@
 package TFC.Items;
 
 import net.minecraft.src.Item;
-import net.minecraft.src.forge.ITextureProvider;
 
-public class ItemTerraMeltedMetal extends ItemTerra implements ITextureProvider
+public class ItemTerraMeltedMetal extends ItemTerra
 {
 	public ItemTerraMeltedMetal(int i) 
 	{

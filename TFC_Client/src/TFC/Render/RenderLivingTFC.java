@@ -2,6 +2,7 @@ package TFC.Render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -47,187 +48,184 @@ public class RenderLivingTFC extends Render
     }
 
 
-    public void doRenderLiving (EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
     {
-	GL11.glPushMatrix ();
-	GL11.glDisable (GL11.GL_CULL_FACE);
-	mainModel.onGround = renderSwingProgress (par1EntityLiving, par9);
+        GL11.glPushMatrix();
+        GL11.glDisable(GL11.GL_CULL_FACE);
+        this.mainModel.onGround = this.renderSwingProgress(par1EntityLiving, par9);
 
-	if (renderPassModel != null)
-	{
-	    renderPassModel.onGround = mainModel.onGround;
-	}
+        if (this.renderPassModel != null)
+        {
+            this.renderPassModel.onGround = this.mainModel.onGround;
+        }
 
-	mainModel.isRiding = par1EntityLiving.isRiding ();
+        this.mainModel.isRiding = par1EntityLiving.isRiding();
 
-	if (renderPassModel != null)
-	{
-	    renderPassModel.isRiding = mainModel.isRiding;
-	}
+        if (this.renderPassModel != null)
+        {
+            this.renderPassModel.isRiding = this.mainModel.isRiding;
+        }
 
-	mainModel.isChild = par1EntityLiving.isChild ();
-	if (par1EntityLiving instanceof EntityAnimalTFC){
-		mainModel.sex = ((EntityAnimalTFC)par1EntityLiving).sex;
-	}	
-	    mainModel.age = ((float) (((EntityAgeable) par1EntityLiving).getGrowingAge ()) / -24000F) / (float) ((EntityAnimalTFC)par1EntityLiving).adultAge;	
+        this.mainModel.isChild = par1EntityLiving.isChild();
 
-	if (renderPassModel != null)
-	{
-	    renderPassModel.isChild = mainModel.isChild;
-	    renderPassModel.age = mainModel.age;
-	}
+        if (this.renderPassModel != null)
+        {
+            this.renderPassModel.isChild = this.mainModel.isChild;
+        }
 
-	try
-	{
-	    float f = func_48418_a (par1EntityLiving.prevRenderYawOffset, par1EntityLiving.renderYawOffset, par9);
-	    float f1 = func_48418_a (par1EntityLiving.prevRotationYawHead, par1EntityLiving.rotationYawHead, par9);
-	    float f2 = par1EntityLiving.prevRotationPitch + (par1EntityLiving.rotationPitch - par1EntityLiving.prevRotationPitch) * par9;
-	    renderLivingAt (par1EntityLiving, par2, par4, par6);
-	    float f3 = handleRotationFloat (par1EntityLiving, par9);
-	    rotateCorpse (par1EntityLiving, f3, f, par9);
-	    float f4 = 0.0625F;
-	    GL11.glEnable (GL12.GL_RESCALE_NORMAL);
-	    GL11.glScalef (-1F, -1F, 1.0F);
-	    preRenderCallback (par1EntityLiving, par9);
-	    GL11.glTranslatef (0.0F, -24F * f4 - 0.0078125F, 0.0F);
-	    float f5 = par1EntityLiving.field_705_Q + (par1EntityLiving.field_704_R - par1EntityLiving.field_705_Q) * par9;
-	    float f6 = par1EntityLiving.field_703_S - par1EntityLiving.field_704_R * (1.0F - par9);
+        try
+        {
+            float var10 = this.func_48418_a(par1EntityLiving.prevRenderYawOffset, par1EntityLiving.renderYawOffset, par9);
+            float var11 = this.func_48418_a(par1EntityLiving.prevRotationYawHead, par1EntityLiving.rotationYawHead, par9);
+            float var12 = par1EntityLiving.prevRotationPitch + (par1EntityLiving.rotationPitch - par1EntityLiving.prevRotationPitch) * par9;
+            this.renderLivingAt(par1EntityLiving, par2, par4, par6);
+            float var13 = this.handleRotationFloat(par1EntityLiving, par9);
+            this.rotateCorpse(par1EntityLiving, var13, var10, par9);
+            float var14 = 0.0625F;
+            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            GL11.glScalef(-1.0F, -1.0F, 1.0F);
+            this.preRenderCallback(par1EntityLiving, par9);
+            GL11.glTranslatef(0.0F, -24.0F * var14 - 0.0078125F, 0.0F);
+            float var15 = par1EntityLiving.prevLegYaw + (par1EntityLiving.legYaw - par1EntityLiving.prevLegYaw) * par9;
+            float var16 = par1EntityLiving.field_70754_ba - par1EntityLiving.legYaw * (1.0F - par9);
 
-	    if (par1EntityLiving.isChild ())
-	    {
-		f6 *= 1F + 2F*mainModel.age;
-	    }
+            if (par1EntityLiving.isChild())
+            {
+                var16 *= 3.0F;
+            }
 
-	    if (f5 > 1.0F)
-	    {
-		f5 = 1.0F;
-	    }
+            if (var15 > 1.0F)
+            {
+                var15 = 1.0F;
+            }
 
-	    GL11.glEnable (GL11.GL_ALPHA_TEST);
-	    mainModel.setLivingAnimations (par1EntityLiving, f6, f5, par9);
-	    renderModel (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
+            GL11.glEnable(GL11.GL_ALPHA_TEST);
+            this.mainModel.setLivingAnimations(par1EntityLiving, var16, var15, par9);
+            this.renderModel(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
+            float var19;
+            int var18;
+            float var20;
+            float var22;
 
-	    for (int i = 0 ; i < 4 ; i++)
-	    {
-		int j = shouldRenderPass (par1EntityLiving, i, par9);
+            for (int var17 = 0; var17 < 4; ++var17)
+            {
+                var18 = this.shouldRenderPass(par1EntityLiving, var17, par9);
 
-		if (j <= 0)
-		{
-		    continue;
-		}
+                if (var18 > 0)
+                {
+                    this.renderPassModel.setLivingAnimations(par1EntityLiving, var16, var15, par9);
+                    this.renderPassModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
 
-		renderPassModel.setLivingAnimations (par1EntityLiving, f6, f5, par9);
-		renderPassModel.render (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
+                    if (var18 == 15)
+                    {
+                        var19 = (float)par1EntityLiving.ticksExisted + par9;
+                        this.loadTexture("%blur%/misc/glint.png");
+                        GL11.glEnable(GL11.GL_BLEND);
+                        var20 = 0.5F;
+                        GL11.glColor4f(var20, var20, var20, 1.0F);
+                        GL11.glDepthFunc(GL11.GL_EQUAL);
+                        GL11.glDepthMask(false);
 
-		if (j == 15)
-		{
-		    float f8 = (float) par1EntityLiving.ticksExisted + par9;
-		    loadTexture ("%blur%/misc/glint.png");
-		    GL11.glEnable (GL11.GL_BLEND);
-		    float f10 = 0.5F;
-		    GL11.glColor4f (f10, f10, f10, 1.0F);
-		    GL11.glDepthFunc (GL11.GL_EQUAL);
-		    GL11.glDepthMask (false);
+                        for (int var21 = 0; var21 < 2; ++var21)
+                        {
+                            GL11.glDisable(GL11.GL_LIGHTING);
+                            var22 = 0.76F;
+                            GL11.glColor4f(0.5F * var22, 0.25F * var22, 0.8F * var22, 1.0F);
+                            GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
+                            GL11.glMatrixMode(GL11.GL_TEXTURE);
+                            GL11.glLoadIdentity();
+                            float var23 = var19 * (0.001F + (float)var21 * 0.003F) * 20.0F;
+                            float var24 = 0.33333334F;
+                            GL11.glScalef(var24, var24, var24);
+                            GL11.glRotatef(30.0F - (float)var21 * 60.0F, 0.0F, 0.0F, 1.0F);
+                            GL11.glTranslatef(0.0F, var23, 0.0F);
+                            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+                            this.renderPassModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
+                        }
 
-		    for (int i1 = 0 ; i1 < 2 ; i1++)
-		    {
-			GL11.glDisable (GL11.GL_LIGHTING);
-			float f13 = 0.76F;
-			GL11.glColor4f (0.5F * f13, 0.25F * f13, 0.8F * f13, 1.0F);
-			GL11.glBlendFunc (GL11.GL_SRC_COLOR, GL11.GL_ONE);
-			GL11.glMatrixMode (GL11.GL_TEXTURE);
-			GL11.glLoadIdentity ();
-			float f15 = f8 * (0.001F + (float) i1 * 0.003F) * 20F;
-			float f16 = 0.3333333F;
-			GL11.glScalef (f16, f16, f16);
-			GL11.glRotatef (30F - (float) i1 * 60F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef (0.0F, f15, 0.0F);
-			GL11.glMatrixMode (GL11.GL_MODELVIEW);
-			renderPassModel.render (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
-		    }
+                        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                        GL11.glMatrixMode(GL11.GL_TEXTURE);
+                        GL11.glDepthMask(true);
+                        GL11.glLoadIdentity();
+                        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+                        GL11.glEnable(GL11.GL_LIGHTING);
+                        GL11.glDisable(GL11.GL_BLEND);
+                        GL11.glDepthFunc(GL11.GL_LEQUAL);
+                    }
 
-		    GL11.glColor4f (1.0F, 1.0F, 1.0F, 1.0F);
-		    GL11.glMatrixMode (GL11.GL_TEXTURE);
-		    GL11.glDepthMask (true);
-		    GL11.glLoadIdentity ();
-		    GL11.glMatrixMode (GL11.GL_MODELVIEW);
-		    GL11.glEnable (GL11.GL_LIGHTING);
-		    GL11.glDisable (GL11.GL_BLEND);
-		    GL11.glDepthFunc (GL11.GL_LEQUAL);
-		}
+                    GL11.glDisable(GL11.GL_BLEND);
+                    GL11.glEnable(GL11.GL_ALPHA_TEST);
+                }
+            }
 
-		GL11.glDisable (GL11.GL_BLEND);
-		GL11.glEnable (GL11.GL_ALPHA_TEST);
-	    }
+            this.renderEquippedItems(par1EntityLiving, par9);
+            float var26 = par1EntityLiving.getBrightness(par9);
+            var18 = this.getColorMultiplier(par1EntityLiving, var26, par9);
+            OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+            OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 
-	    renderEquippedItems (par1EntityLiving, par9);
-	    float f7 = par1EntityLiving.getBrightness (par9);
-	    int k = getColorMultiplier (par1EntityLiving, f7, par9);
-	    OpenGlHelper.setActiveTexture (OpenGlHelper.lightmapTexUnit);
-	    GL11.glDisable (GL11.GL_TEXTURE_2D);
-	    OpenGlHelper.setActiveTexture (OpenGlHelper.defaultTexUnit);
+            if ((var18 >> 24 & 255) > 0 || par1EntityLiving.hurtTime > 0 || par1EntityLiving.deathTime > 0)
+            {
+                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                GL11.glDisable(GL11.GL_ALPHA_TEST);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                GL11.glDepthFunc(GL11.GL_EQUAL);
 
-	    if ((k >> 24 & 0xff) > 0 || par1EntityLiving.hurtTime > 0 || par1EntityLiving.deathTime > 0)
-	    {
-		GL11.glDisable (GL11.GL_TEXTURE_2D);
-		GL11.glDisable (GL11.GL_ALPHA_TEST);
-		GL11.glEnable (GL11.GL_BLEND);
-		GL11.glBlendFunc (GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glDepthFunc (GL11.GL_EQUAL);
+                if (par1EntityLiving.hurtTime > 0 || par1EntityLiving.deathTime > 0)
+                {
+                    GL11.glColor4f(var26, 0.0F, 0.0F, 0.4F);
+                    this.mainModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
 
-		if (par1EntityLiving.hurtTime > 0 || par1EntityLiving.deathTime > 0)
-		{
-		    GL11.glColor4f (f7, 0.0F, 0.0F, 0.4F);
-		    mainModel.render (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
+                    for (int var27 = 0; var27 < 4; ++var27)
+                    {
+                        if (this.inheritRenderPass(par1EntityLiving, var27, par9) >= 0)
+                        {
+                            GL11.glColor4f(var26, 0.0F, 0.0F, 0.4F);
+                            this.renderPassModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
+                        }
+                    }
+                }
 
-		    for (int l = 0 ; l < 4 ; l++)
-		    {
-			if (inheritRenderPass (par1EntityLiving, l, par9) >= 0)
-			{
-			    GL11.glColor4f (f7, 0.0F, 0.0F, 0.4F);
-			    renderPassModel.render (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
-			}
-		    }
-		}
+                if ((var18 >> 24 & 255) > 0)
+                {
+                    var19 = (float)(var18 >> 16 & 255) / 255.0F;
+                    var20 = (float)(var18 >> 8 & 255) / 255.0F;
+                    float var29 = (float)(var18 & 255) / 255.0F;
+                    var22 = (float)(var18 >> 24 & 255) / 255.0F;
+                    GL11.glColor4f(var19, var20, var29, var22);
+                    this.mainModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
 
-		if ((k >> 24 & 0xff) > 0)
-		{
-		    float f9 = (float) (k >> 16 & 0xff) / 255F;
-		    float f11 = (float) (k >> 8 & 0xff) / 255F;
-		    float f12 = (float) (k & 0xff) / 255F;
-		    float f14 = (float) (k >> 24 & 0xff) / 255F;
-		    GL11.glColor4f (f9, f11, f12, f14);
-		    mainModel.render (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
+                    for (int var28 = 0; var28 < 4; ++var28)
+                    {
+                        if (this.inheritRenderPass(par1EntityLiving, var28, par9) >= 0)
+                        {
+                            GL11.glColor4f(var19, var20, var29, var22);
+                            this.renderPassModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
+                        }
+                    }
+                }
 
-		    for (int j1 = 0 ; j1 < 4 ; j1++)
-		    {
-			if (inheritRenderPass (par1EntityLiving, j1, par9) >= 0)
-			{
-			    GL11.glColor4f (f9, f11, f12, f14);
-			    renderPassModel.render (par1EntityLiving, f6, f5, f3, f1 - f, f2, f4);
-			}
-		    }
-		}
+                GL11.glDepthFunc(GL11.GL_LEQUAL);
+                GL11.glDisable(GL11.GL_BLEND);
+                GL11.glEnable(GL11.GL_ALPHA_TEST);
+                GL11.glEnable(GL11.GL_TEXTURE_2D);
+            }
 
-		GL11.glDepthFunc (GL11.GL_LEQUAL);
-		GL11.glDisable (GL11.GL_BLEND);
-		GL11.glEnable (GL11.GL_ALPHA_TEST);
-		GL11.glEnable (GL11.GL_TEXTURE_2D);
-	    }
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        }
+        catch (Exception var25)
+        {
+            var25.printStackTrace();
+        }
 
-	    GL11.glDisable (GL12.GL_RESCALE_NORMAL);
-	}
-	catch (Exception exception)
-	{
-	    exception.printStackTrace ();
-	}
-
-	OpenGlHelper.setActiveTexture (OpenGlHelper.lightmapTexUnit);
-	GL11.glEnable (GL11.GL_TEXTURE_2D);
-	OpenGlHelper.setActiveTexture (OpenGlHelper.defaultTexUnit);
-	GL11.glEnable (GL11.GL_CULL_FACE);
-	GL11.glPopMatrix ();
-	passSpecialRender (par1EntityLiving, par2, par4, par6);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glPopMatrix();
+        this.passSpecialRender(par1EntityLiving, par2, par4, par6);
     }
 
 
