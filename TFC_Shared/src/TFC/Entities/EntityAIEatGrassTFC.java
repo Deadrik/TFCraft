@@ -23,7 +23,7 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
      */
     public boolean shouldExecute()
     {
-        if (((EntityAnimalTFC)theEntity).hunger > 144000 || theEntity.getRNG().nextInt(20)!=0)
+        if (((EntityAnimalTFC)theEntity).hunger > 160000 || theEntity.getRNG().nextInt(20)!=0)
         {
             return false;
         }
@@ -32,6 +32,7 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
             int var1 = MathHelper.floor_double(this.theEntity.posX);
             int var2 = MathHelper.floor_double(this.theEntity.posY);
             int var3 = MathHelper.floor_double(this.theEntity.posZ);
+            eatGrassTick = 5;
             return this.theWorld.getBlockId(var1, var2, var3) == Block.tallGrass.blockID && this.theWorld.getBlockMetadata(var1, var2, var3) == 1 ? true : (this.theWorld.getBlockId(var1, var2 - 1, var3) == Block.grass.blockID ||
                     this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraGrass.blockID || this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraGrass2.blockID || 
                     this.theWorld.getBlockId(var1, var2 - 1, var3) == mod_TFC.terraPeatGrass.blockID ||
