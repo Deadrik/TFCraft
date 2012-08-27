@@ -2,6 +2,7 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 import TFC.WorldGen.Generators.WorldGenLakesTFC;
 
 import net.minecraft.src.BiomeGenBase;

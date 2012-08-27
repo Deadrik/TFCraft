@@ -3,6 +3,8 @@ package TFC.WorldGen;
 import java.util.ArrayList;
 import java.util.List;
 
+import TFC.WorldGen.GenLayers.GenLayerTFC;
+
 import net.minecraft.src.*;
 
 public class DataCache

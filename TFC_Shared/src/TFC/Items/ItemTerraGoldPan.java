@@ -8,7 +8,7 @@ import TFC.Blocks.BlockTerraOre;
 import TFC.Core.Helper;
 import TFC.Core.TFCSettings;
 import TFC.TileEntities.TileEntityTerraSluice;
-import TFC.WorldGen.BiomeGenRiverTFC;
+import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import net.minecraft.src.*;
 
 public class ItemTerraGoldPan extends Item

@@ -7,9 +7,9 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.BiomeDecoratorTFC;
-import TFC.WorldGen.BiomeGenHillsEdgeTFC;
-import TFC.WorldGen.BiomeGenRiverTFC;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.Biomes.BiomeGenHillsEdgeTFC;
+import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import TFC.WorldGen.Generators.WorldGenClayPit;
 import TFC.WorldGen.Generators.WorldGenCustomFlowers;
 import TFC.WorldGen.Generators.WorldGenCustomFruitTree;

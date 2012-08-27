@@ -1,5 +1,7 @@
 package TFC.WorldGen;
 
+import TFC.WorldGen.GenLayers.GenLayerTFC;
+
 public class DataCacheBlockTFC
 {
     /** The array of biome types stored in this BiomeCacheBlock. */

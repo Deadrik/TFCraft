@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.WorldGen.GenLayers.GenLayerTFC;
+import TFC.WorldGen.GenLayers.GenRockLayerTFC;
+import TFC.WorldGen.GenLayers.GenTreeLayerTFC;
+
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
