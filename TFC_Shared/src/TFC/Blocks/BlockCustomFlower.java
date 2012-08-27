@@ -45,11 +45,11 @@ public class BlockCustomFlower extends BlockFlower
 	@Override
 	protected boolean canThisPlantGrowOnThisBlockID(int par1)
 	{
-		return par1 == mod_TFC.terraGrass.blockID || par1 == mod_TFC.terraGrass2.blockID || 
-				par1 == mod_TFC.terraDirt.blockID || par1 == mod_TFC.terraDirt2.blockID ||
-				par1 == mod_TFC.terraClayGrass.blockID || par1 == mod_TFC.terraClayGrass2.blockID ||
-				par1 == mod_TFC.terraPeatGrass.blockID ||
-				par1 == mod_TFC.tilledSoil.blockID || par1 == mod_TFC.tilledSoil2.blockID;
+		return par1 == TFCBlocks.terraGrass.blockID || par1 == TFCBlocks.terraGrass2.blockID || 
+				par1 == TFCBlocks.terraDirt.blockID || par1 == TFCBlocks.terraDirt2.blockID ||
+				par1 == TFCBlocks.terraClayGrass.blockID || par1 == TFCBlocks.terraClayGrass2.blockID ||
+				par1 == TFCBlocks.terraPeatGrass.blockID ||
+				par1 == TFCBlocks.tilledSoil.blockID || par1 == TFCBlocks.tilledSoil2.blockID;
 	}
 
 	/**

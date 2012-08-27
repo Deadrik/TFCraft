@@ -227,7 +227,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                     {
                         for(int y = yCoord; y > yCoord-50; y--)
                         {
-                            if(worldObj.getBlockId(x+xCoord, y, z+zCoord) == mod_TFC.terraOre.blockID)
+                            if(worldObj.getBlockId(x+xCoord, y, z+zCoord) == TFCBlocks.terraOre.blockID)
                             {
                                 int m = worldObj.getBlockMetadata(x+xCoord, y, z+zCoord);
                                 if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))

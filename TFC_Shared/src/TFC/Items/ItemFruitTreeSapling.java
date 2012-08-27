@@ -37,7 +37,7 @@ public class ItemFruitTreeSapling extends ItemTerra
                 world.getBlockId(x, y+1, z) == 0)
         {
             
-            world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC.fruitTreeWood.blockID, itemstack.getItemDamage()+offset);
+            world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, itemstack.getItemDamage()+offset);
             world.markBlockNeedsUpdate(x, y+1, z);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setHeight(0);

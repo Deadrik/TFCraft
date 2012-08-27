@@ -6,8 +6,8 @@ import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 
 public class MapGenRavine256TFC extends MapGenBase
 {
@@ -139,7 +139,7 @@ public class MapGenRavine256TFC extends MapGenBase
 
 								if (var43 >= 0 && var43 < 256)
 								{
-									if (blockArray[var44] == Block.waterMoving.blockID || blockArray[var44] == Block.waterStill.blockID || blockArray[var44] == mod_TFC.finiteWater.blockID)
+									if (blockArray[var44] == Block.waterMoving.blockID || blockArray[var44] == Block.waterStill.blockID || blockArray[var44] == TFCBlocks.finiteWater.blockID)
 									{
 										var58 = true;
 									}
@@ -175,18 +175,18 @@ public class MapGenRavine256TFC extends MapGenBase
 										{
 											byte var52 = blockArray[var47];
 
-											if (var52 == mod_TFC.terraGrass.blockID || var52 == mod_TFC.terraGrass2.blockID)
+											if (var52 == TFCBlocks.terraGrass.blockID || var52 == TFCBlocks.terraGrass2.blockID)
 											{
 												var48 = true;
 											}
 
-											if (var52 == (byte)mod_TFC.terraStoneIgIn.blockID || var52 == (byte)mod_TFC.terraStoneIgEx.blockID || 
-											        var52 == (byte)mod_TFC.terraStoneSed.blockID || var52 == (byte)mod_TFC.terraStoneMM.blockID || 
+											if (var52 == (byte)TFCBlocks.terraStoneIgIn.blockID || var52 == (byte)TFCBlocks.terraStoneIgEx.blockID || 
+											        var52 == (byte)TFCBlocks.terraStoneSed.blockID || var52 == (byte)TFCBlocks.terraStoneMM.blockID || 
 											                var52 == (byte)Block.stone.blockID || var52 == (byte)Block.dirt.blockID || (byte)var52 == Block.grass.blockID ||
-											                        var52 == (byte)mod_TFC.terraGrass.blockID || var52 == (byte)mod_TFC.terraGrass2.blockID||
-											                                var52 == (byte)mod_TFC.terraDirt.blockID || var52 == (byte)mod_TFC.terraDirt2.blockID||
-											                                        var52 == (byte)mod_TFC.terraClayGrass.blockID || var52 == (byte)mod_TFC.terraClayGrass2.blockID||
-											                                                var52 == (byte)mod_TFC.terraClay.blockID || var52 == (byte)mod_TFC.terraClay2.blockID)
+											                        var52 == (byte)TFCBlocks.terraGrass.blockID || var52 == (byte)TFCBlocks.terraGrass2.blockID||
+											                                var52 == (byte)TFCBlocks.terraDirt.blockID || var52 == (byte)TFCBlocks.terraDirt2.blockID||
+											                                        var52 == (byte)TFCBlocks.terraClayGrass.blockID || var52 == (byte)TFCBlocks.terraClayGrass2.blockID||
+											                                                var52 == (byte)TFCBlocks.terraClay.blockID || var52 == (byte)TFCBlocks.terraClay2.blockID)
 											{
 												if (var49 < 10)
 												{

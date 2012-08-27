@@ -14,10 +14,11 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraAnvil extends BlockContainer
 {
@@ -68,7 +69,7 @@ public class BlockTerraAnvil extends BlockContainer
 				tileentityanvil = (TileEntityTerraAnvil)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(mod_TFC.instance, mod_TFC.terraAnvilGuiId, world, i, j, k);
+				entityplayer.openGui(TerraFirmaCraft.instance, 21, world, i, j, k);
 			}
 			return true;
 		}
@@ -116,7 +117,7 @@ public class BlockTerraAnvil extends BlockContainer
 
 	public int getRenderType()
 	{
-		return mod_TFC.terraAnvilRenderId;
+		return TFCBlocks.terraAnvilRenderId;
 	}
 
 	@Override
@@ -128,7 +129,7 @@ public class BlockTerraAnvil extends BlockContainer
 	{		
 		int type = BlockTerraAnvil.getAnvilTypeFromMeta(l);
 
-		if(blockID == mod_TFC.terraAnvil.blockID)
+		if(blockID == TFCBlocks.terraAnvil.blockID)
 		{
 		switch (type)
 		{
@@ -157,7 +158,7 @@ public class BlockTerraAnvil extends BlockContainer
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraStoneAnvilItem, 1));
 		}
 		}
-		else if(blockID == mod_TFC.terraAnvil2.blockID)
+		else if(blockID == TFCBlocks.terraAnvil2.blockID)
         {
         switch (type)
         {

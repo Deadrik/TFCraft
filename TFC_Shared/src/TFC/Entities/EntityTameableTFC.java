@@ -90,7 +90,7 @@ public abstract class EntityTameableTFC extends EntityAnimalTFC
         }
         else
         {
-            mod_TFC.proxy.handleHealthUpdate(this.getClass(), par1);
+        	super.handleHealthUpdate(par1);
         }
     }
 

@@ -134,11 +134,6 @@ public class EntityDeer extends EntityAnimalTFC
     {
         return Block.cloth.blockID;
     }
-    
-    public void healthUpdateToProxy(byte par1)
-    {
-        mod_TFC.proxy.handleHealthUpdate(this.getClass(), par1);
-    }
 
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.

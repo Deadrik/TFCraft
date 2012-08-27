@@ -29,13 +29,13 @@ public class BlockFruitLeaves extends Block
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         if(TFCSeasons.currentMonth >= 3 && TFCSeasons.currentMonth < 9)
-            return mod_TFC.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
+            return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
         else return 0xFFFFFF;
     }
 
     public int getRenderType()
     {
-        return mod_TFC.leavesFruitRenderId;
+        return TFCBlocks.leavesFruitRenderId;
     }
 
     public boolean isOpaqueCube()
@@ -52,7 +52,7 @@ public class BlockFruitLeaves extends Block
     {
         int index = baseIndexInPNG;
 
-        if (mod_TFC.proxy.getGraphicsLevel())
+        if (TerraFirmaCraft.proxy.getGraphicsLevel())
         {
             index = baseIndexInPNG+(meta & 7);
         }
@@ -148,8 +148,8 @@ public class BlockFruitLeaves extends Block
     public static boolean canStay(World world, int i, int j, int k, int id)
     {
         if((world.getBlockId(i, j+1, k) != 0 && world.getBlockId(i, j+2, k) != 0 && world.getBlockId(i, j+2, k) != id) ||
-                world.getBlockId(i, j+1, k) == mod_TFC.fruitTreeWood.blockID || 
-                world.getBlockId(i, j+2, k) == mod_TFC.fruitTreeWood.blockID)
+                world.getBlockId(i, j+1, k) == TFCBlocks.fruitTreeWood.blockID || 
+                world.getBlockId(i, j+2, k) == TFCBlocks.fruitTreeWood.blockID)
         {
             return false;
         }
@@ -158,7 +158,7 @@ public class BlockFruitLeaves extends Block
 
     public static String getType(int id, int meta)
     {
-        if(id == mod_TFC.fruitTreeLeaves.blockID)
+        if(id == TFCBlocks.fruitTreeLeaves.blockID)
         {
             switch(meta)
             {
@@ -250,7 +250,7 @@ public class BlockFruitLeaves extends Block
                             {
                                 var15 = par1World.getBlockId(par2 + var12, par3 + var13, par4 + var14);
 
-                                if (var15 == mod_TFC.fruitTreeWood.blockID)
+                                if (var15 == TFCBlocks.fruitTreeWood.blockID)
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
                                 }
@@ -346,7 +346,7 @@ public class BlockFruitLeaves extends Block
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return mod_TFC.terraSapling.blockID;
+        return TFCBlocks.terraSapling.blockID;
     }
     @Override
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)

@@ -29,7 +29,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public int getRenderType()
     {
-        return mod_TFC.leavesRenderId;
+        return TFCBlocks.leavesRenderId;
     }
     
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -43,7 +43,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-         return mod_TFC.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
+         return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     /**
@@ -76,7 +76,10 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     /**onBlockRemoval needs to remain here in order to override the Block Leaves implementation 
      * of the method which causes leaves to change metadata*/
     @Override
-    public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {}
+    public void beginLeavesDecay(World world, int x, int y, int z)
+    {
+    	
+    }
 
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int l)
@@ -115,11 +118,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
                             {
                                 var15 = par1World.getBlockId(par2 + var12, par3 + var13, par4 + var14);
 
-                                if (var15 == mod_TFC.terraWood.blockID)
+                                if (var15 == TFCBlocks.terraWood.blockID)
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
                                 }
-                                else if (var15 == mod_TFC.terraLeaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
+                                else if (var15 == TFCBlocks.terraLeaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
                                 }
@@ -212,7 +215,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return mod_TFC.terraSapling.blockID;
+        return TFCBlocks.terraSapling.blockID;
     }
     @Override
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
@@ -241,7 +244,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
                             if(new Random().nextInt(100) < 11)
                                 dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(Item.stick, 1));
                             else if(new Random().nextInt(100) < 4 && l != 9 && l != 15)
-                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(mod_TFC.terraSapling, 1, l));
+                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(TFCBlocks.terraSapling, 1, l));
                             removeLeaves(world, i+x, j+y, k+z);
                             super.harvestBlock(world, entityplayer, i+x, j+y, k+z, l);
                             
@@ -270,7 +273,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
             if(new Random().nextInt(100) < 28)
                 dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
             else if(new Random().nextInt(100) < 6 && l != 9 && l != 15)
-                dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC.terraSapling, 1, l));
+                dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCBlocks.terraSapling, 1, l));
 
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
@@ -283,15 +286,15 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
     public boolean isOpaqueCube()
     {
-        if(mod_TFC.proxy != null)
-            return !mod_TFC.proxy.getGraphicsLevel();
+        if(TerraFirmaCraft.proxy != null)
+            return !TerraFirmaCraft.proxy.getGraphicsLevel();
         else
             return false;
     }
 
     public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
-        if (mod_TFC.proxy.getGraphicsLevel())
+        if (TerraFirmaCraft.proxy.getGraphicsLevel())
         {
             return baseIndexInPNG + j;
         }

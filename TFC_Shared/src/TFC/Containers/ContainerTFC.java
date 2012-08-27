@@ -4,7 +4,7 @@ import net.minecraft.src.Container;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class ContainerTFC extends Container
 {

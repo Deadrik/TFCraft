@@ -116,7 +116,7 @@ public class ItemCustomBucket extends Item
 
                     if (world.isAirBlock(i, j, k) || !world.getBlockMaterial(i, j, k).isSolid())
                     {
-                        if (world.provider.isHellWorld && this.isFull == mod_TFC.finiteWater.blockID)
+                        if (world.provider.isHellWorld && this.isFull == TFCBlocks.finiteWater.blockID)
                         {
                             world.playSoundEffect(var5 + 0.5D, var7 + 0.5D, var9 + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 
@@ -127,19 +127,19 @@ public class ItemCustomBucket extends Item
                         }
                         else
                         {
-                            if(world.getBlockId(i, j, k) == mod_TFC.finiteWater.blockID)
+                            if(world.getBlockId(i, j, k) == TFCBlocks.finiteWater.blockID)
                             {
                                 int bucketMeta = 0;
                                 int blockMeta = world.getBlockMetadata(i, j, k);
                                 if(blockMeta > 0)
                                 {
                                     bucketMeta = bucketMeta + blockMeta;
-                                    world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.finiteWater.blockID, 0);
-                                    world.setBlockAndMetadataWithNotify(i, j+1, k, mod_TFC.finiteWater.blockID, bucketMeta);
+                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0);
+                                    world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.finiteWater.blockID, bucketMeta);
                                 }
                                 else
                                 {
-                                    world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.finiteWater.blockID, 0);
+                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0);
                                 }
                             }
                             else

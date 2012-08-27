@@ -1,6 +1,6 @@
 package TFC.TileEntities;
 
-import TFC.Core.PacketHandler;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 import net.minecraft.src.*;
 

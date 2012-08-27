@@ -28,7 +28,7 @@ public class SlotCraftingScribe extends Slot
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 
-		mod_TFC.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
+		TerraFirmaCraft.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
 		GameRegistry.onItemCrafted(thePlayer, itemstack, craftMatrix);
 		((TileEntityTerraScribe)paperSlot).scribeItemStacks[1].stackSize--;
 		if(((TileEntityTerraScribe)paperSlot).scribeItemStacks[1].stackSize <= 0)

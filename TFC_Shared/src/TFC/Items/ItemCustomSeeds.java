@@ -17,8 +17,8 @@ public class ItemCustomSeeds extends Item
 	public ItemCustomSeeds(int par1, int cropId)
 	{
 		super(par1);
-		this.soilBlockID = mod_TFC.tilledSoil.blockID;
-		this.soilBlockID2 = mod_TFC.tilledSoil2.blockID;
+		this.soilBlockID = TFCBlocks.tilledSoil.blockID;
+		this.soilBlockID2 = TFCBlocks.tilledSoil2.blockID;
 		this.cropId = cropId;
 	}
 

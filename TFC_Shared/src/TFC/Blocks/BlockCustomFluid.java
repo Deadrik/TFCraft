@@ -42,7 +42,7 @@ public abstract class BlockCustomFluid extends Block
         }
         else
         {
-            return mod_TFC.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
+            return TerraFirmaCraft.proxy.waterColorMultiplier(par1IBlockAccess, par2, par3, par4);
         }
     }
 

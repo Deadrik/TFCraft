@@ -6,8 +6,8 @@ import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 
 import TFC.Core.TFCSettings;
 
@@ -177,18 +177,18 @@ public class MapGenRiverRavineTFC extends MapGenBase
 										{
 											byte var52 = par5ArrayOfByte[var47];
 
-											if (var52 == mod_TFC.terraGrass.blockID || var52 == mod_TFC.terraGrass2.blockID)
+											if (var52 == TFCBlocks.terraGrass.blockID || var52 == TFCBlocks.terraGrass2.blockID)
 											{
 												var48 = true;
 											}
 
-											if (var53 == (byte)mod_TFC.terraStoneIgIn.blockID || var53 == (byte)mod_TFC.terraStoneIgEx.blockID || 
-                                                    var53 == (byte)mod_TFC.terraStoneSed.blockID || var53 == (byte)mod_TFC.terraStoneMM.blockID || 
+											if (var53 == (byte)TFCBlocks.terraStoneIgIn.blockID || var53 == (byte)TFCBlocks.terraStoneIgEx.blockID || 
+                                                    var53 == (byte)TFCBlocks.terraStoneSed.blockID || var53 == (byte)TFCBlocks.terraStoneMM.blockID || 
                                                     var53 == (byte)Block.stone.blockID || var53 == (byte)Block.dirt.blockID || (byte)var53 == Block.grass.blockID ||
-                                                    var53 == (byte)mod_TFC.terraGrass.blockID || var53 == (byte)mod_TFC.terraGrass2.blockID||
-                                                    var53 == (byte)mod_TFC.terraDirt.blockID || var53 == (byte)mod_TFC.terraDirt2.blockID||
-                                                    var53 == (byte)mod_TFC.terraClayGrass.blockID || var53 == (byte)mod_TFC.terraClayGrass2.blockID||
-                                                    var53 == (byte)mod_TFC.terraClay.blockID || var53 == (byte)mod_TFC.terraClay2.blockID)
+                                                    var53 == (byte)TFCBlocks.terraGrass.blockID || var53 == (byte)TFCBlocks.terraGrass2.blockID||
+                                                    var53 == (byte)TFCBlocks.terraDirt.blockID || var53 == (byte)TFCBlocks.terraDirt2.blockID||
+                                                    var53 == (byte)TFCBlocks.terraClayGrass.blockID || var53 == (byte)TFCBlocks.terraClayGrass2.blockID||
+                                                    var53 == (byte)TFCBlocks.terraClay.blockID || var53 == (byte)TFCBlocks.terraClay2.blockID)
 											{
 												if (var49 < 10)
 												{
@@ -207,11 +207,11 @@ public class MapGenRiverRavineTFC extends MapGenBase
                                                         metaArray[var47] = 0;
                                                     }
 
-													if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC.terraDirt.blockID)
+													if (var48 && par5ArrayOfByte[var47 - 1] == (byte)TFCBlocks.terraDirt.blockID)
 													{
 														par5ArrayOfByte[var47 - 1] = (byte) ((TFCBiome)this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16)).GrassID;
 													}
-													else if (var48 && par5ArrayOfByte[var47 - 1] == (byte)mod_TFC.terraDirt2.blockID)
+													else if (var48 && par5ArrayOfByte[var47 - 1] == (byte)TFCBlocks.terraDirt2.blockID)
 													{
 														par5ArrayOfByte[var47 - 1] = (byte) ((TFCBiome)this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16)).GrassID;
 													}

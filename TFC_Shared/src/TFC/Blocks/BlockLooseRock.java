@@ -17,7 +17,7 @@ public class BlockLooseRock extends BlockTerra
 
 	public int getRenderType()
 	{
-		return mod_TFC.looseRockRenderId;
+		return TFCBlocks.looseRockRenderId;
 	}
 	
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
@@ -30,9 +30,9 @@ public class BlockLooseRock extends BlockTerra
 	    TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
 	    int off = 0;
 	    
-	    if(biome.SurfaceType == mod_TFC.terraStoneSed.blockID) off = 3;
-	    else if(biome.SurfaceType == mod_TFC.terraStoneIgEx.blockID) off = 13;
-	    else if(biome.SurfaceType == mod_TFC.terraStoneMM.blockID) off = 17;
+	    if(biome.SurfaceType == TFCBlocks.terraStoneSed.blockID) off = 3;
+	    else if(biome.SurfaceType == TFCBlocks.terraStoneIgEx.blockID) off = 13;
+	    else if(biome.SurfaceType == TFCBlocks.terraStoneMM.blockID) off = 17;
 	    
 	    ArrayList coreSample = new ArrayList<Item>();
 	    ArrayList coreSampleStacks = new ArrayList<ItemStack>();
@@ -43,7 +43,7 @@ public class BlockLooseRock extends BlockTerra
             {
                 for(int y = j; y > j-35; y--)
                 {
-                    if(world.getBlockId(i+x, y, k+z) == mod_TFC.terraOre.blockID)
+                    if(world.getBlockId(i+x, y, k+z) == TFCBlocks.terraOre.blockID)
                     {
                         int m = world.getBlockMetadata(i+x, y, k+z);
                         if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))

@@ -2,9 +2,9 @@ package TFC.TileEntities;
 
 import java.util.Random;
 
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
 import TFC.Core.TFCSeasons;
+import TFC.Handlers.PacketHandler;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;

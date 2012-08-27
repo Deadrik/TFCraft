@@ -6,7 +6,7 @@ import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
 import TFC.Core.TFC_Core;
-import TFC.Entities.EntityFallingStone2;
+import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import net.minecraft.src.Block;
@@ -117,7 +117,7 @@ public class BlockTerraIgInCobble extends BlockTerra2
 			}
 			else if (!world.isRemote)
 			{
-			    EntityFallingStone2 ent = new EntityFallingStone2(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
+			    EntityFallingStone ent = new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
                 world.spawnEntityInWorld(ent);
                 Random R = new Random(i*j+k);
                 world.playSoundAtEntity(ent, "fallingrockshort", 1.0F, 0.8F + (R.nextFloat()/2));

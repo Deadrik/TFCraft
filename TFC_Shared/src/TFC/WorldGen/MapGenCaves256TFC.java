@@ -7,8 +7,8 @@ import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 
 public class MapGenCaves256TFC extends MapGenBase
 {
@@ -145,7 +145,7 @@ public class MapGenCaves256TFC extends MapGenBase
 
 								if (var44 >= 0 && var44 < 256)
 								{
-									if (blockArray[var45] == Block.waterMoving.blockID || blockArray[var45] == Block.waterStill.blockID  || blockArray[var45] == mod_TFC.finiteWater.blockID)
+									if (blockArray[var45] == Block.waterMoving.blockID || blockArray[var45] == Block.waterStill.blockID  || blockArray[var45] == TFCBlocks.finiteWater.blockID)
 									{
 										var58 = true;
 									}
@@ -181,18 +181,18 @@ public class MapGenCaves256TFC extends MapGenBase
 										{
 											byte var53 = blockArray[var48];
 
-											if (var53 == mod_TFC.terraGrass.blockID || var53 == mod_TFC.terraGrass2.blockID)
+											if (var53 == TFCBlocks.terraGrass.blockID || var53 == TFCBlocks.terraGrass2.blockID)
 											{
 												var49 = true;
 											}
 
-											if (var53 == (byte)mod_TFC.terraStoneIgIn.blockID || var53 == (byte)mod_TFC.terraStoneIgEx.blockID || 
-													var53 == (byte)mod_TFC.terraStoneSed.blockID || var53 == (byte)mod_TFC.terraStoneMM.blockID || 
+											if (var53 == (byte)TFCBlocks.terraStoneIgIn.blockID || var53 == (byte)TFCBlocks.terraStoneIgEx.blockID || 
+													var53 == (byte)TFCBlocks.terraStoneSed.blockID || var53 == (byte)TFCBlocks.terraStoneMM.blockID || 
 													var53 == Block.stone.blockID || var53 == Block.dirt.blockID || var53 == Block.grass.blockID ||
-													var53 == mod_TFC.terraGrass.blockID || var53 == mod_TFC.terraGrass2.blockID ||
-                                                    var53 == mod_TFC.terraDirt.blockID || var53 == mod_TFC.terraDirt2.blockID ||
-                                                    var53 == mod_TFC.terraClayGrass.blockID || var53 == mod_TFC.terraClayGrass2.blockID ||
-                                                    var53 == mod_TFC.terraClay.blockID || var53 == mod_TFC.terraClay2.blockID)
+													var53 == TFCBlocks.terraGrass.blockID || var53 == TFCBlocks.terraGrass2.blockID ||
+                                                    var53 == TFCBlocks.terraDirt.blockID || var53 == TFCBlocks.terraDirt2.blockID ||
+                                                    var53 == TFCBlocks.terraClayGrass.blockID || var53 == TFCBlocks.terraClayGrass2.blockID ||
+                                                    var53 == TFCBlocks.terraClay.blockID || var53 == TFCBlocks.terraClay2.blockID)
 											{
 												if (var50 < 10)
 												{
@@ -278,13 +278,13 @@ public class MapGenCaves256TFC extends MapGenBase
 			
 			int layerID = biome.getRockLayer(par3);
 			
-			if(layerID == mod_TFC.terraStoneIgEx.blockID)
+			if(layerID == TFCBlocks.terraStoneIgEx.blockID)
 			    width -= 0.55;
-			else if(layerID == mod_TFC.terraStoneIgIn.blockID)
+			else if(layerID == TFCBlocks.terraStoneIgIn.blockID)
                 width -= 0.55;
-			else if(layerID == mod_TFC.terraStoneSed.blockID)
+			else if(layerID == TFCBlocks.terraStoneSed.blockID)
                 width -= 0.3;
-			else if(layerID == mod_TFC.terraStoneMM.blockID)
+			else if(layerID == TFCBlocks.terraStoneMM.blockID)
                 width -= 0.2;
 			
 			if(this.rand.nextInt(8) == 0)

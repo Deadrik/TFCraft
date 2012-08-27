@@ -20,7 +20,7 @@ public class BlockCrop extends BlockContainer
 
     public int getRenderType()
     {
-        return mod_TFC.cropRenderId;
+        return TFCBlocks.cropRenderId;
     }
 
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
@@ -133,7 +133,7 @@ public class BlockCrop extends BlockContainer
     {
         super.onNeighborBlockChange(world, i, j, k, par5);
 
-        if (!(world.getBlockId(i, j-1, k) == mod_TFC.tilledSoil.blockID || world.getBlockId(i, j-1, k) == mod_TFC.tilledSoil2.blockID))
+        if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID))
         {
             world.setBlockWithNotify(i, j, k, 0);
         }

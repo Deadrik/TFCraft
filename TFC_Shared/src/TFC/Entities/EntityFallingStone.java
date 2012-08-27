@@ -15,7 +15,8 @@ public class EntityFallingStone extends Entity
     {
         super(world);
         fallTime = 0;
-        metaID = 0;
+        blockID = 198;
+        metaID = 1;
     }
 
     public EntityFallingStone(World world, double d, double d1, double d2,
@@ -36,7 +37,8 @@ public class EntityFallingStone extends Entity
         prevPosY = d1;
         prevPosZ = d2;
         pTime = processTime;
-        this.dataWatcher.addObject(18, Integer.valueOf(blockID));
+        this.dataWatcher.updateObject(21, blockID);
+        this.dataWatcher.updateObject(22, metaID);
     }
 
     public boolean canBeCollidedWith()
@@ -49,8 +51,11 @@ public class EntityFallingStone extends Entity
         return false;
     }
 
+    @Override
     protected void entityInit()
     {
+        this.dataWatcher.addObject(21, Integer.valueOf(blockID));
+        this.dataWatcher.addObject(22, Integer.valueOf(metaID));
     }
 
     public float getShadowSize()
@@ -65,6 +70,11 @@ public class EntityFallingStone extends Entity
 
     public void onUpdate()
     {
+        if (worldObj.isRemote && fallTime == 1)
+        {
+            blockID = dataWatcher.getWatchableObjectInt(21);
+            metaID = dataWatcher.getWatchableObjectInt(22);
+        }
         if(pTime == 0)
         {
             if (blockID == 0)
@@ -84,9 +94,11 @@ public class EntityFallingStone extends Entity
             int i = MathHelper.floor_double(posX);
             int j = MathHelper.floor_double(posY);
             int k = MathHelper.floor_double(posZ);
-            if (fallTime == 1 /*&& worldObj.getBlockId(i, j, k) == blockID*/)
+
+            if (fallTime == 1 && worldObj.getBlockId(i, j, k) == blockID)
             {
                 worldObj.setBlockWithNotify(i, j, k, 0);
+
             }
             else if (!worldObj.isRemote && fallTime == 1)
             {
@@ -100,7 +112,9 @@ public class EntityFallingStone extends Entity
                 if (worldObj.getBlockId(i, j, k) != Block.pistonMoving.blockID)
                 {
                     setDead();
-                    if ((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this) || BlockCollapsable.canFallBelow(worldObj, i, j - 1, k) || !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
+                    if (((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this) && 
+                            BlockCollapsable.canFallBelow(worldObj, i, j - 1, k)) || 
+                            !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)) && !worldObj.isRemote)
                     {
                         ItemStack itemstack = new ItemStack(blockID,1,metaID);
                         EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);
@@ -111,7 +125,10 @@ public class EntityFallingStone extends Entity
             }
             else if (fallTime > 100 && !worldObj.isRemote)
             {
-                ItemStack itemstack = new ItemStack(blockID,1,metaID);
+                ItemStack itemstack;
+
+                itemstack = new ItemStack(blockID,1,metaID);
+
                 EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);
                 entityitem.delayBeforeCanPickup = 10;
                 worldObj.spawnEntityInWorld(entityitem);
@@ -126,11 +143,13 @@ public class EntityFallingStone extends Entity
     protected void readEntityFromNBT(NBTTagCompound nbttagcompound)
     {
         blockID = nbttagcompound.getByte("Tile") & 0xff;
+        metaID = nbttagcompound.getByte("Meta") & 0x0f;
     }
 
     protected void writeEntityToNBT(NBTTagCompound nbttagcompound)
     {
         nbttagcompound.setByte("Tile", (byte)blockID);
+        nbttagcompound.setByte("Meta", (byte)metaID);
     }
 
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) 

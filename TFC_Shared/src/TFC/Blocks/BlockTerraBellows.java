@@ -178,7 +178,7 @@ public class BlockTerraBellows extends Block
 
 	public int getRenderType()
 	{
-		return mod_TFC.terraBellowsRenderId;
+		return TFCBlocks.terraBellowsRenderId;
 	}
 
 

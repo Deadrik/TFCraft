@@ -12,8 +12,8 @@ import TFC.Core.AnvilReq;
 import TFC.Core.CraftingRule;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 
@@ -31,7 +31,7 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class TileEntityTerraAnvil extends TileEntity implements IInventory
 {
@@ -237,7 +237,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 0));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 0));
         }
     }
 
@@ -262,7 +262,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, -1));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, -1));
         }
 
     }
@@ -287,7 +287,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 1));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 1));
         }
     }
 
@@ -311,7 +311,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 2));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 2));
         }
     }
 
@@ -335,7 +335,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 3));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 3));
         }
     }
 
@@ -359,7 +359,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 4));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 4));
         }
     }
 
@@ -383,7 +383,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 5));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 5));
         }
     }
 
@@ -407,7 +407,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 6));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 6));
         }
     } 
 
@@ -463,7 +463,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         }
         else
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, 7));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, 7));
         }
     }
     @Override

@@ -41,7 +41,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						int j3 = world.getBlockId(i2, i1, l2);
-						if (j3 != 0 && j3 != mod_TFC.terraLeaves.blockID)
+						if (j3 != 0 && j3 != TFCBlocks.terraLeaves.blockID)
 						{
 							flag = false;
 						}
@@ -63,8 +63,8 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 			int x = 0;
 		}
 		int var8 = world.getBlockId(i, j - 1, k);
-		if (!(var8 == mod_TFC.terraDirt.blockID || var8 == mod_TFC.terraDirt2.blockID ||var8 == mod_TFC.terraGrass.blockID ||var8 == mod_TFC.terraGrass2.blockID ||
-				var8 == mod_TFC.terraClayGrass.blockID ||var8 == mod_TFC.terraClayGrass2.blockID) || j >= world.getHeight() - l - 1)
+		if (!(var8 == TFCBlocks.terraDirt.blockID || var8 == TFCBlocks.terraDirt2.blockID ||var8 == TFCBlocks.terraGrass.blockID ||var8 == TFCBlocks.terraGrass2.blockID ||
+				var8 == TFCBlocks.terraClayGrass.blockID ||var8 == TFCBlocks.terraClayGrass2.blockID) || j >= world.getHeight() - l - 1)
 		{
 			return false;
 		}
@@ -81,7 +81,7 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 					int j4 = i4 - k;
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && !Block.opaqueCubeLookup[world.getBlockId(k3, k1, i4)])
 					{
-						setBlockAndMetadata(world, k3, k1, i4, mod_TFC.terraLeaves.blockID, treeId);
+						setBlockAndMetadata(world, k3, k1, i4, TFCBlocks.terraLeaves.blockID, treeId);
 					}
 				}
 			}
@@ -90,9 +90,9 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 		for (int l1 = 0; l1 < l; l1++)
 		{
 			int k2 = world.getBlockId(i, j + l1, k);
-			if (k2 == 0 || k2 == mod_TFC.terraLeaves.blockID)
+			if (k2 == 0 || k2 == TFCBlocks.terraLeaves.blockID)
 			{
-				setBlockAndMetadata(world, i, j + l1, k, mod_TFC.terraWood.blockID, treeId);
+				setBlockAndMetadata(world, i, j + l1, k, TFCBlocks.terraWood.blockID, treeId);
 			}
 		}
 

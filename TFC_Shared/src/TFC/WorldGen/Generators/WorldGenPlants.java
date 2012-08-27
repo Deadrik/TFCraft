@@ -26,17 +26,17 @@ public class WorldGenPlants implements IWorldGenerator
         WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Block.mushroomBrown.blockID);
         WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Block.mushroomRed.blockID);
 
-        WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 0);
-        WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 1);
-        WorldGenCustomFruitTree orangeTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 2);
-        WorldGenCustomFruitTree grappleTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 3);
-        WorldGenCustomFruitTree lemonTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 4);
-        WorldGenCustomFruitTree oliveTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 5);
-        WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 6);
-        WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, mod_TFC.fruitTreeLeaves.blockID, 7);
+        WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 0);
+        WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 1);
+        WorldGenCustomFruitTree orangeTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 2);
+        WorldGenCustomFruitTree grappleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 3);
+        WorldGenCustomFruitTree lemonTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 4);
+        WorldGenCustomFruitTree oliveTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 5);
+        WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 6);
+        WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 7);
 
-        WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, mod_TFC.fruitTreeLeaves2.blockID, 0);
-        WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, mod_TFC.fruitTreeLeaves2.blockID, 1);
+        WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
+        WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
 
         int var2;
         int var3;
@@ -115,55 +115,55 @@ public class WorldGenPlants implements IWorldGenerator
             {
                 default:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         appleTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 1:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         bananaTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 2:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         orangeTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 3:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         grappleTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 4:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         lemonTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 5:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         oliveTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 6:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         cherryTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 7:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         peachTree.generate(world, random, var2, var3, var4);
                     break;
                 }
                 case 8:
                 {
-                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC.terraGrass2.blockID))
+                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == TFCBlocks.terraGrass2.blockID))
                         plumTree.generate(world, random, var2, var3, var4);
                     break;
                 }

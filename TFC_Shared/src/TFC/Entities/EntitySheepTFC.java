@@ -3,6 +3,9 @@ package TFC.Entities;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+
 import TFC.Core.TFCSeasons;
 import TFC.Core.TFCSettings;
 
@@ -130,7 +133,8 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     {
         return Block.cloth.blockID;
     }
-
+    
+    @SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte par1)
     {
         if (par1 == 10)
@@ -139,15 +143,10 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         }
         else
         {
-            healthUpdateToProxy(par1);
+            super.handleHealthUpdate(par1);
         }
     }
     
-    public void healthUpdateToProxy(byte par1)
-    {
-        mod_TFC.proxy.handleHealthUpdate(this.getClass(), par1);
-    }
-
     public float func_44003_c(float par1)
     {
         return this.sheepTimer <= 0 ? 0.0F : (this.sheepTimer >= 4 && this.sheepTimer <= 36 ? 1.0F : (this.sheepTimer < 4 ? ((float)this.sheepTimer - par1) / 4.0F : -((float)(this.sheepTimer - 40) - par1) / 4.0F));

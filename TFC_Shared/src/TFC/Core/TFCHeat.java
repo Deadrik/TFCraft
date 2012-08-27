@@ -16,7 +16,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TFCItems;
 
 public class TFCHeat 

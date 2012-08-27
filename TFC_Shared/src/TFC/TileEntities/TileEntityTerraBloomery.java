@@ -8,8 +8,8 @@ import java.util.Random;
 import TFC.Blocks.BlockTerraBloomery;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 
 import net.minecraft.src.AxisAlignedBB;
@@ -26,10 +26,11 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class TileEntityTerraBloomery extends TileEntityFireEntity implements IInventory
 {
@@ -374,7 +375,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 fireTemperature = 220;
             }
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC.terraBloomery.blockID) {
+            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.terraBloomery.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
             }
         }
@@ -382,7 +383,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         {
             updateGui();
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == mod_TFC.terraBloomeryOn.blockID) {
+            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.terraBloomeryOn.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
             fuelBurnTemp = 0;
@@ -412,7 +413,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public boolean isStackValid(int i, int j, int k)
     {
-        if((worldObj.getBlockId(i, j-1, k) != mod_TFC.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || !worldObj.isBlockNormalCube(i, j-1, k))
+        if((worldObj.getBlockId(i, j-1, k) != TFCBlocks.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || !worldObj.isBlockNormalCube(i, j-1, k))
         {
             return false;
         }
@@ -654,12 +655,12 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 /*The stack must be air or already be molten rock*/
                 if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
-                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == mod_TFC.terraMolten.blockID) &&
+                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == TFCBlocks.terraMolten.blockID) &&
                         worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
                 {
                     //Make sure that the Stack is surrounded by rock
                     if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
-                        worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], mod_TFC.terraMolten.blockID);
+                        worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.terraMolten.blockID);
                         worldObj.markBlockNeedsUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
                     } else {
                         worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0);
@@ -861,6 +862,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
 
     public void updateGui()
     {
-        mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this, this.oreCount, this.charcoalCount, this.outCount, this.oreDamage));
+        TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, this.oreCount, this.charcoalCount, this.outCount, this.oreDamage));
     }
 }

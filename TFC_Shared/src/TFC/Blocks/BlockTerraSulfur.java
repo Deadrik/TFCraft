@@ -25,7 +25,7 @@ public class BlockTerraSulfur extends Block
 
 	public int getRenderType()
 	{
-		return mod_TFC.sulfurRenderId;
+		return TFCBlocks.sulfurRenderId;
 	}
 
 	@Override

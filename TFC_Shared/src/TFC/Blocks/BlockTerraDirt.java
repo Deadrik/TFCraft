@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.Entities.EntityFallingDirt;
-import TFC.Entities.EntityFallingStone2;
+import TFC.Entities.EntityFallingStone;
 
 import net.minecraft.src.*;
 

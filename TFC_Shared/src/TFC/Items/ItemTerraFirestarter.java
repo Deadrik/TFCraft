@@ -99,7 +99,7 @@ public class ItemTerraFirestarter extends Item
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC.terraFirepitOn.blockID, 2);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.terraFirepitOn.blockID, 2);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }
@@ -121,7 +121,7 @@ public class ItemTerraFirestarter extends Item
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, mod_TFC.terraForgeOn.blockID, 1);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.terraForgeOn.blockID, 1);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }

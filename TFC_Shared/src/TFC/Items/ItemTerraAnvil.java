@@ -8,8 +8,8 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 
 public class ItemTerraAnvil extends Item
 {
@@ -70,8 +70,8 @@ public class ItemTerraAnvil extends Item
 			{
 				byte0 = 0;
 			}
-			int id = mod_TFC.terraAnvil.blockID;
-			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? mod_TFC.terraAnvil2.blockID : mod_TFC.terraAnvil.blockID;
+			int id = TFCBlocks.terraAnvil.blockID;
+			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? TFCBlocks.terraAnvil2.blockID : TFCBlocks.terraAnvil.blockID;
 			world.setBlockAndMetadataWithNotify( x, y+1, z, id, byte0+anvilId);
             world.markBlockNeedsUpdate(x, y+1, z);
 			if(world.getBlockTileEntity(x, y+1, z) != null)

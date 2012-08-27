@@ -7,16 +7,16 @@ import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class TFC_Game 
 {
     public static EnumWoodMaterial getWoodMaterial(ItemStack is)
     {
-        if(is.itemID == mod_TFC.terraPeat.blockID)
+        if(is.itemID == TFCBlocks.terraPeat.blockID)
         {
             return EnumWoodMaterial.PEAT;
         }
@@ -98,7 +98,12 @@ public class TFC_Game
         /**
          * Weld Recipes
          */
-        manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot),new ItemStack(TFCItems.BismuthIngot),true,AnvilReq.STONE, new ItemStack(TFCItems.BismuthIngot2x, 1)));
+        manager.addWeldRecipe(new AnvilRecipe(
+        		new ItemStack(TFCItems.BismuthIngot),
+        		new ItemStack(TFCItems.BismuthIngot),
+        		true,
+        		AnvilReq.STONE, 
+        		new ItemStack(TFCItems.BismuthIngot2x, 1)));
         manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot),new ItemStack(TFCItems.BismuthBronzeIngot),true,AnvilReq.COPPER, new ItemStack(TFCItems.BismuthBronzeIngot2x, 1)));
         manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot),new ItemStack(TFCItems.BlackBronzeIngot),true,AnvilReq.COPPER, new ItemStack(TFCItems.BlackBronzeIngot2x, 1)));
         manager.addWeldRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot),new ItemStack(TFCItems.BlackSteelIngot),true,AnvilReq.STEEL, new ItemStack(TFCItems.BlackSteelIngot2x, 1)));
@@ -623,7 +628,7 @@ public class TFC_Game
         else return 0;
     }
 
-    public static void registerRecipes()
+    public static void RegisterToolRecipes()
     {
         for(int i = 0; i <= 25; i+=5)
         {

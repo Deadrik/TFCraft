@@ -46,15 +46,15 @@ public class WorldGenPeatPit extends WorldGenerator
 							        biome == TFCBiome.swamp7 || biome == TFCBiome.swamp8 || biome == TFCBiome.swamp9 || 
 							        biome == TFCBiome.swamp10)
 							{
-								if (var13 == mod_TFC.terraDirt.blockID || var13 == mod_TFC.terraDirt2.blockID || 
-										var13 == mod_TFC.terraClay.blockID || var13 == mod_TFC.terraClay2.blockID || var13 == mod_TFC.terraPeat.blockID)
+								if (var13 == TFCBlocks.terraDirt.blockID || var13 == TFCBlocks.terraDirt2.blockID || 
+										var13 == TFCBlocks.terraClay.blockID || var13 == TFCBlocks.terraClay2.blockID || var13 == TFCBlocks.terraPeat.blockID)
 								{
-									par1World.setBlock(var8, var12, var9, mod_TFC.terraPeat.blockID);
+									par1World.setBlock(var8, var12, var9, TFCBlocks.terraPeat.blockID);
 								}
-								else if(var13 == mod_TFC.terraGrass.blockID || var13 == mod_TFC.terraGrass2.blockID ||
-										var13 == mod_TFC.terraClayGrass.blockID || var13 == mod_TFC.terraClayGrass2.blockID || var13 == mod_TFC.terraPeatGrass.blockID)
+								else if(var13 == TFCBlocks.terraGrass.blockID || var13 == TFCBlocks.terraGrass2.blockID ||
+										var13 == TFCBlocks.terraClayGrass.blockID || var13 == TFCBlocks.terraClayGrass2.blockID || var13 == TFCBlocks.terraPeatGrass.blockID)
 								{
-									par1World.setBlock(var8, var12, var9, mod_TFC.terraPeatGrass.blockID);
+									par1World.setBlock(var8, var12, var9, TFCBlocks.terraPeatGrass.blockID);
 								}
 							}
 						}

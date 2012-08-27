@@ -8,12 +8,12 @@ import TFC.Blocks.BlockFirepit;
 import TFC.Core.EnumWoodMaterial;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
 import TFC.Core.TFCSeasons;
 import TFC.Core.TFCSettings;
 import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
@@ -28,10 +28,10 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory
 {
@@ -474,7 +474,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
         while(!reachedTop && j+y >= 0)
         {
-            if(world.getBlockId(x, j+y+1, z) != mod_TFC.LogPile.blockID)
+            if(world.getBlockId(x, j+y+1, z) != TFCBlocks.LogPile.blockID)
             {
                 reachedTop = true;
             }
@@ -488,7 +488,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         if(world.getBlockId(i, j, k) == 0)
             vecArray.add(new Vector3f(i, j, k));        
 
-        else if(world.getBlockId(i, j, k) == mod_TFC.LogPile.blockID)
+        else if(world.getBlockId(i, j, k) == TFCBlocks.LogPile.blockID)
         {
             if(!empty)
             {
@@ -758,7 +758,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     public void updateEntity()
     {
         int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
-        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == mod_TFC.LogPile.blockID)
+        if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == TFCBlocks.LogPile.blockID)
         {
             externalFireCheckTimer--;
             if(externalFireCheckTimer <= 0)
@@ -862,7 +862,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && Surrounded != 5)
             {
 
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC.terraFirepitOn.blockID) {
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.terraFirepitOn.blockID) {
                     BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 

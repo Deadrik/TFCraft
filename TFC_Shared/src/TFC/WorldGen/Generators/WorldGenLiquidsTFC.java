@@ -15,39 +15,39 @@ public class WorldGenLiquidsTFC extends WorldGenerator
 
 	public boolean generate(World world, Random random, int i, int j, int k)
 	{
-		if (world.getBlockId(i, j + 1, k) != mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i, j + 1, k) != mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i, j + 1, k) != mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i, j + 1, k) != mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i, j + 1, k) != TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i, j + 1, k) != TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i, j + 1, k) != TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i, j + 1, k) != TFCBlocks.terraStoneMM.blockID)
 		{
 			return false;
 		}
-		if (world.getBlockId(i, j - 1, k) != mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i, j - 1, k) != mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i, j - 1, k) != mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i, j - 1, k) != mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i, j - 1, k) != TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i, j - 1, k) != TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i, j - 1, k) != TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i, j - 1, k) != TFCBlocks.terraStoneMM.blockID)
 		{
 			return false;
 		}
-		if (world.getBlockId(i, j, k) != 0 && world.getBlockId(i, j, k) != mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i, j, k) != mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i, j, k) != mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i, j, k) != mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i, j, k) != 0 && world.getBlockId(i, j, k) != TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i, j, k) != TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i, j, k) != TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i, j, k) != TFCBlocks.terraStoneMM.blockID)
 		{
 			return false;
 		}
 		int l = 0;
-		if (world.getBlockId(i - 1, j, k) == mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i - 1, j, k) == mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i - 1, j, k) == mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i - 1, j, k) == mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i - 1, j, k) == TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i - 1, j, k) == TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i - 1, j, k) == TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i - 1, j, k) == TFCBlocks.terraStoneMM.blockID)
 		{
 			l++;
 		}
-		if (world.getBlockId(i + 1, j, k) == mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i + 1, j, k) == mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i + 1, j, k) == mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i + 1, j, k) == mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i + 1, j, k) == TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i + 1, j, k) == TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i + 1, j, k) == TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i + 1, j, k) == TFCBlocks.terraStoneMM.blockID)
 		{
 			l++;
 		}
-		if (world.getBlockId(i, j, k - 1) == mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i, j, k - 1) == mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i, j, k - 1) == mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i, j, k - 1) == mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i, j, k - 1) == TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i, j, k - 1) == TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i, j, k - 1) == TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i, j, k - 1) == TFCBlocks.terraStoneMM.blockID)
 		{
 			l++;
 		}
-		if (world.getBlockId(i, j, k + 1) == mod_TFC.terraStoneIgIn.blockID && world.getBlockId(i, j, k + 1) == mod_TFC.terraStoneSed.blockID &&
-				world.getBlockId(i, j, k + 1) == mod_TFC.terraStoneIgEx.blockID &&world.getBlockId(i, j, k + 1) == mod_TFC.terraStoneMM.blockID)
+		if (world.getBlockId(i, j, k + 1) == TFCBlocks.terraStoneIgIn.blockID && world.getBlockId(i, j, k + 1) == TFCBlocks.terraStoneSed.blockID &&
+				world.getBlockId(i, j, k + 1) == TFCBlocks.terraStoneIgEx.blockID &&world.getBlockId(i, j, k + 1) == TFCBlocks.terraStoneMM.blockID)
 		{
 			l++;
 		}

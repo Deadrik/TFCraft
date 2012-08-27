@@ -35,7 +35,7 @@ public class TFC_Core
 
     static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
     {
-        if(mod_TFC.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k)) {
+        if(TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k)) {
             return true;
         }
 
@@ -298,25 +298,25 @@ public class TFC_Core
         {			
             for(int j = 0; j < 3; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneIgInBrick,1,j), 
+                ModLoader.addShapelessRecipe(new ItemStack(TFCBlocks.terraStoneIgInBrick,1,j), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
 
             for(int j = 3; j < 13; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneSedBrick,1,j-3), 
+                ModLoader.addShapelessRecipe(new ItemStack(TFCBlocks.terraStoneSedBrick,1,j-3), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
 
             for(int j = 13; j < 17; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneIgExBrick,1,j-13), 
+                ModLoader.addShapelessRecipe(new ItemStack(TFCBlocks.terraStoneIgExBrick,1,j-13), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
 
             for(int j = 17; j < 23; j++)
             {
-                ModLoader.addShapelessRecipe(new ItemStack(mod_TFC.terraStoneMMBrick,1,j-17), 
+                ModLoader.addShapelessRecipe(new ItemStack(TFCBlocks.terraStoneMMBrick,1,j-17), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,-1)});
             }
         }
@@ -356,19 +356,19 @@ public class TFC_Core
         ModLoader.addRecipe(new ItemStack(TFCItems.terraBismuthBronzeAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BismuthBronzeIngot2x});
         ModLoader.addRecipe(new ItemStack(TFCItems.terraBlackBronzeAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.BlackBronzeIngot2x});
 
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraScribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1),
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraScribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1),
             Character.valueOf('P'), Item.paper,Character.valueOf('L'), Item.feather});
         ModLoader.addRecipe(new ItemStack(TFCItems.terraClayMold, 4), new Object[] { "# #","###", Character.valueOf('#'), Item.clay});
 
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgEx});
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgIn});
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneSed});
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), mod_TFC.terraStoneMM});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneIgEx});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneIgIn});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneSed});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneMM});
 
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgExBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneIgInBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneSedBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
-        ModLoader.addRecipe(new ItemStack(mod_TFC.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), mod_TFC.terraStoneMMBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneIgExBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneIgInBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneSedBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
+        ModLoader.addRecipe(new ItemStack(TFCBlocks.terraBloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneMMBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
 
         ModLoader.addRecipe(new ItemStack(Block.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,-1)});
         ModLoader.addRecipe(new ItemStack(Block.railPowered, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,-1), Character.valueOf('r'), Item.redstone});
@@ -420,10 +420,10 @@ public class TFC_Core
         if(TFCSettings.enableVanillaRecipes == true)
         {
             //Terrastone to Cobblestone
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneSedCobble});
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneIgInCobble});
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneIgExCobble});
-            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),mod_TFC.terraStoneMMCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.terraStoneSedCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.terraStoneIgInCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.terraStoneIgExCobble});
+            ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.terraStoneMMCobble});
         }
 
         if(TFCSettings.enableVanillaRecipes == true)
@@ -523,7 +523,7 @@ public class TFC_Core
     public static boolean isRawStone(World world,int x, int y, int z)
     {
         int id = world.getBlockId(x, y, z);
-        return id == mod_TFC.terraStoneIgEx.blockID || id == mod_TFC.terraStoneIgIn.blockID || 
-                id == mod_TFC.terraStoneSed.blockID || id == mod_TFC.terraStoneMM.blockID;
+        return id == TFCBlocks.terraStoneIgEx.blockID || id == TFCBlocks.terraStoneIgIn.blockID || 
+                id == TFCBlocks.terraStoneSed.blockID || id == TFCBlocks.terraStoneMM.blockID;
     }
 }

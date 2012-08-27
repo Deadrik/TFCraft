@@ -10,11 +10,12 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraSluice extends BlockContainer
 {
@@ -91,7 +92,7 @@ public class BlockTerraSluice extends BlockContainer
 						//mc.thePlayer.inventory.setInventorySlotContents(mc.thePlayer.inventory.currentItem, new ItemStack(mod_TFC_Core.terraGoldPan,1,0));
 						return true;
 					}
-					entityplayer.openGui(mod_TFC.instance, mod_TFC.terraSluiceGuiId, world, i, j, k);
+					entityplayer.openGui(TerraFirmaCraft.instance, 25, world, i, j, k);
 					//ModLoader.openGUI(entityplayer, new GuiTerraSluice(entityplayer.inventory, tileentitysluice));
 				}
 			}
@@ -121,7 +122,7 @@ public class BlockTerraSluice extends BlockContainer
 
 	public int getRenderType()
 	{
-		return mod_TFC.sluiceRenderId;
+		return TFCBlocks.sluiceRenderId;
 	}
 
 	@Override

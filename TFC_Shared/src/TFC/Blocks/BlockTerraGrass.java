@@ -1,6 +1,7 @@
 package TFC.Blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import TFC.Core.ColorizerGrassTFC;
@@ -56,22 +57,7 @@ public class BlockTerraGrass extends BlockGrass
         return i;
     }
 
-//    public boolean isBlockNormalCube(World world, int i, int j, int k) 
-//    {
-//        if(world.isAirBlock(i, j+1, k))
-//        {
-//            if(world.isAirBlock(i+1, j, k))
-//                return false;
-//            if(world.isAirBlock(i-1, j, k))
-//                return false;
-//            if(world.isAirBlock(i, j, k+1))
-//                return false;
-//            if(world.isAirBlock(i, j, k-1))
-//                return false;
-//        }
-//
-//        return true;
-//    }
+    
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -133,7 +119,7 @@ public class BlockTerraGrass extends BlockGrass
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        return mod_TFC.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+        return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     public int getBlockColor()
@@ -153,7 +139,7 @@ public class BlockTerraGrass extends BlockGrass
     @Override
     public int getRenderType()
     {
-        return mod_TFC.grassRenderId;
+        return TFCBlocks.grassRenderId;
     }
 
     /**
@@ -211,7 +197,7 @@ public class BlockTerraGrass extends BlockGrass
             if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockTerraDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
             {
                 int meta = world.getBlockMetadata(i, j, k);
-                world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.terraDirt.blockID, meta);
+                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.terraDirt.blockID, meta);
             }
         }
     }
@@ -227,16 +213,34 @@ public class BlockTerraGrass extends BlockGrass
     @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return mod_TFC.terraDirt.idDropped(0, par2Random, par3);
+        return TFCBlocks.terraDirt.idDropped(0, par2Random, par3);
     }
 
-//    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
+//    public boolean isBlockNormalCube(World world, int i, int j, int k) 
+//    {
+//        if(world.isAirBlock(i, j+1, k))
+//        {
+//            if(world.isAirBlock(i+1, j, k))
+//                return false;
+//            if(world.isAirBlock(i-1, j, k))
+//                return false;
+//            if(world.isAirBlock(i, j, k+1))
+//                return false;
+//            if(world.isAirBlock(i, j, k-1))
+//                return false;
+//        }
+//
+//        return true;
+//    }
+//    @Override
+//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 //    {
 //        if(world.isRemote && (!world.isBlockOpaqueCube(i+1, j, k) || !world.isBlockOpaqueCube(i-1, j, k) || 
 //                !world.isBlockOpaqueCube(i, j, k+1) || !world.isBlockOpaqueCube(i, j, k-1)) && 
 //                !world.isBlockOpaqueCube(i, j+1, k))
 //        {
-//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
+//        	AxisAlignedBB.getAABBPool().clearPool();
+//        	AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(i, j, k,i +1,j + 0.5f,k + 1);
 //
 //            double minX = 0.25;
 //            double minZ = 0.25;
@@ -252,11 +256,12 @@ public class BlockTerraGrass extends BlockGrass
 //            if(!world.isBlockOpaqueCube(i, j, k-1))
 //                minZ = 0.5;
 //
-//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
+//            return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ);
 //
 //        }
 //        else
-//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
+//        	return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(i, j, k,i + 1,j + 1,k +1);
+//        
 //    }
 
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
@@ -264,8 +269,13 @@ public class BlockTerraGrass extends BlockGrass
         if(!world.blockExists(i, j-1, k))
         {
             int meta = world.getBlockMetadata(i, j, k);
-            world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.terraDirt.blockID, meta);
+            world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.terraDirt.blockID, meta);
         }
     }
 
+//    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+//    {
+//    	for(int i = 0; i < 16; i++)
+//    		par3List.add(new ItemStack(par1, 1, i));
+//    }
 }

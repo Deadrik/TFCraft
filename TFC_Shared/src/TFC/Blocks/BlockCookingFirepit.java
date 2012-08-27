@@ -62,7 +62,7 @@ public class BlockCookingFirepit extends BlockContainer
 				tileentityfirepit = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(mod_TFC.instance, mod_TFC.terraFirepitGuiId, world, i, j, k);
+				entityplayer.openGui(TerraFirmaCraft.instance, 20, world, i, j, k);
 				//ModLoader.openGUI(entityplayer, new GuiTerraFirepit(entityplayer.inventory, tileentityfirepit));
 			}
 			return true;
@@ -103,7 +103,7 @@ public class BlockCookingFirepit extends BlockContainer
 
 	public int getRenderType()
 	{
-		return mod_TFC.cookingPitRenderId;
+		return TFCBlocks.cookingPitRenderId;
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class BlockCookingFirepit extends BlockContainer
 
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this.blockID == mod_TFC.terraFirepit.blockID)
+		if (this.blockID == TFCBlocks.terraFirepit.blockID)
 		{
 			return;
 		}
@@ -189,12 +189,12 @@ public class BlockCookingFirepit extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC.terraFirepitOn.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.terraFirepitOn.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
         else
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC.terraFirepit.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.terraFirepit.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
 

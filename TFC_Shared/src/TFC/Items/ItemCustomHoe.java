@@ -51,18 +51,18 @@ public class ItemCustomHoe extends ItemHoe
 			int var8 = par3World.getBlockId(par4, par5, par6);
 			int var9 = par3World.getBlockId(par4, par5 + 1, par6);
 
-			if (par7 == 0 || var9 != 0 || var8 != mod_TFC.terraGrass.blockID && var8 != mod_TFC.terraGrass2.blockID &&
-					var8 != mod_TFC.terraDirt.blockID && var8 != mod_TFC.terraDirt2.blockID)
+			if (par7 == 0 || var9 != 0 || var8 != TFCBlocks.terraGrass.blockID && var8 != TFCBlocks.terraGrass2.blockID &&
+					var8 != TFCBlocks.terraDirt.blockID && var8 != TFCBlocks.terraDirt2.blockID)
 			{
 				return false;
 			}
 			else
 			{
-				Block var10 = var8 == mod_TFC.terraDirt.blockID || var8 == mod_TFC.terraGrass.blockID ? mod_TFC.terraDirt : var8 == mod_TFC.terraDirt2.blockID || var8 == mod_TFC.terraGrass2.blockID ? mod_TFC.terraDirt2 : null;
+				Block var10 = var8 == TFCBlocks.terraDirt.blockID || var8 == TFCBlocks.terraGrass.blockID ? TFCBlocks.terraDirt : var8 == TFCBlocks.terraDirt2.blockID || var8 == TFCBlocks.terraGrass2.blockID ? TFCBlocks.terraDirt2 : null;
 				if(var10 != null)
 				{
 					int meta = par3World.getBlockMetadata(par4, par5, par6);
-					if(var10.blockID == mod_TFC.terraDirt.blockID)
+					if(var10.blockID == TFCBlocks.terraDirt.blockID)
 					{
 						par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), var10.stepSound.getStepSound(), (var10.stepSound.getVolume() + 1.0F) / 2.0F, var10.stepSound.getPitch() * 0.8F);
 
@@ -72,12 +72,12 @@ public class ItemCustomHoe extends ItemHoe
 						}
 						else
 						{
-							par3World.setBlockAndMetadataWithNotify(par4, par5, par6, mod_TFC.tilledSoil.blockID, meta);
+							par3World.setBlockAndMetadataWithNotify(par4, par5, par6, TFCBlocks.tilledSoil.blockID, meta);
 							par1ItemStack.damageItem(1, par2EntityPlayer);
 							return true;
 						}
 					}
-					else if(var10.blockID == mod_TFC.terraDirt2.blockID)
+					else if(var10.blockID == TFCBlocks.terraDirt2.blockID)
 					{
 						par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), var10.stepSound.getStepSound(), (var10.stepSound.getVolume() + 1.0F) / 2.0F, var10.stepSound.getPitch() * 0.8F);
 
@@ -87,7 +87,7 @@ public class ItemCustomHoe extends ItemHoe
 						}
 						else
 						{
-							par3World.setBlockAndMetadataWithNotify(par4, par5, par6, mod_TFC.tilledSoil2.blockID, meta);
+							par3World.setBlockAndMetadataWithNotify(par4, par5, par6, TFCBlocks.tilledSoil2.blockID, meta);
 							par1ItemStack.damageItem(1, par2EntityPlayer);
 							return true;
 						}

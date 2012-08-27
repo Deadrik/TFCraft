@@ -1,6 +1,6 @@
 package TFC.Containers;
 
-import TFC.Core.PacketHandler;
+import TFC.Handlers.PacketHandler;
 import TFC.TileEntities.TileEntityTerraBloomery;
 import net.minecraft.src.*;
 
@@ -230,7 +230,7 @@ public class ContainerTerraBloomery extends Container
         
         if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 200)
         {
-            mod_TFC.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.oreDamage));
+            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.oreDamage));
             updatecounter = 0;
         }
         

@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Handlers;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,6 +13,10 @@ import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
+import TFC.Core.PlayerInfo;
+import TFC.Core.PlayerManagerTFC;
+import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
@@ -31,7 +35,7 @@ import net.minecraft.src.Packet1Login;
 import net.minecraft.src.Packet250CustomPayload;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
@@ -72,7 +76,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             pkt.length=bos.size();
             pkt.isChunkDataPacket=false;
 
-            mod_TFC.proxy.sendCustomPacket(pkt);
+            TerraFirmaCraft.proxy.sendCustomPacket(pkt);
         }
     }
 
@@ -221,7 +225,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                         pkt.length=bos.size();
                         pkt.isChunkDataPacket=true;
 
-                        mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                        TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
                     }
                     else if (te instanceof TileEntityCrop) 
                     {
@@ -244,7 +248,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                         pkt.length=bos.size();
                         pkt.isChunkDataPacket=true;
 
-                        mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                        TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
                     }
                 }
             }
@@ -309,7 +313,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     pkt.length=bos.size();
                     pkt.isChunkDataPacket=false;
 
-                    mod_TFC.proxy.sendCustomPacketToPlayer(player.username, pkt);
+                    TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
                 }
             }
         }
@@ -424,7 +428,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=true;
 
-                mod_TFC.proxy.sendCustomPacket(pkt);
+                TerraFirmaCraft.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -456,7 +460,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=true;
 
-                mod_TFC.proxy.sendCustomPacket(pkt);
+                TerraFirmaCraft.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -486,7 +490,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=true;
 
-                mod_TFC.proxy.sendCustomPacket(pkt);
+                TerraFirmaCraft.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -514,7 +518,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                 pkt.length=bos.size();
                 pkt.isChunkDataPacket=false;
 
-                mod_TFC.proxy.sendCustomPacket(pkt);
+                TerraFirmaCraft.proxy.sendCustomPacket(pkt);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

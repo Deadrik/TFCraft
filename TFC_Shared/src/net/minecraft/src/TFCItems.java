@@ -845,16 +845,31 @@ public class TFCItems
     
     public static void Setup()
     {
-        
         try
         {
-            config = new net.minecraftforge.common.Configuration(new File(mod_TFC.proxy.getMinecraftDir(), "/config/TFC.cfg"));
+            config = new net.minecraftforge.common.Configuration(
+            		new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
             config.load();
         } catch (Exception e) {
-            System.out.println(new StringBuilder().append("[TFC] Error while trying to access configuration!").toString());
+            System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
             config = null;
-        }
+        } 
+        System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
         
+        BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 10, new int[] {2,4,3,2}, 1);
+		BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 20, new int[] {4,6,5,4}, 1);
+		BlackBronzeArmorMaterial = EnumHelper.addArmorMaterial("BlackBronze", 20, new int[] {4,6,5,4}, 1);
+		BlackSteelArmorMaterial = EnumHelper.addArmorMaterial("BlackSteel", 35, new int[] {6,8,7,6}, 1);
+		BlueSteelArmorMaterial = EnumHelper.addArmorMaterial("BlueSteel", 40, new int[] {7,8,8,7}, 1);
+		BronzeArmorMaterial = EnumHelper.addArmorMaterial("Bronze", 21, new int[] {4,6,5,4}, 1);
+		CopperArmorMaterial = EnumHelper.addArmorMaterial("Copper", 15, new int[] {3,5,4,3}, 1);
+		IronArmorMaterial = EnumHelper.addArmorMaterial("Iron", 25, new int[] {5,7,6,5}, 1);
+		RedSteelArmorMaterial = EnumHelper.addArmorMaterial("RedSteel", 40, new int[] {7,8,8,7}, 1);
+		RoseGoldArmorMaterial = EnumHelper.addArmorMaterial("RoseGold", 20, new int[] {4,6,5,4}, 1);
+		SteelArmorMaterial = EnumHelper.addArmorMaterial("Steel", 30, new int[] {6,8,7,6}, 1);
+		TinArmorMaterial = EnumHelper.addArmorMaterial("Tin", 10, new int[] {2,4,3,2}, 1);
+		ZincArmorMaterial = EnumHelper.addArmorMaterial("Zinc", 10, new int[] {2,4,3,2}, 1);
+		
         terraGoldPan = new ItemTerraGoldPan(TFCSettings.getIntFor(config,"item","terraGoldPan",16001)).setItemName("GoldPan").setIconCoord(1, 0);
         terraSluiceItem = new ItemTerraSluice(TFCSettings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(9, 0);
         
@@ -1373,7 +1388,7 @@ public class TFCItems
         KnifePlan = new ItemTerraMiscTool(TFCSettings.getIntFor(config,"item","KnifePlan",num)).setItemName("KnifePlan").setIconCoord(0, 0);num++;
         
         WoodenBucketEmpty = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketEmpty",num), 0)).setIconCoord(13, 0).setItemName("WoodenBucketEmpty");num++;
-        WoodenBucketWater = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketWater",num), mod_TFC.finiteWater.blockID)).setIconCoord(14, 0).setItemName("WoodenBucketWater").setContainerItem(WoodenBucketEmpty);num++;
+        WoodenBucketWater = (new ItemCustomBucket(TFCSettings.getIntFor(config,"item","WoodenBucketWater",num), TFCBlocks.finiteWater.blockID)).setIconCoord(14, 0).setItemName("WoodenBucketWater").setContainerItem(WoodenBucketEmpty);num++;
         WoodenBucketMilk = (new ItemCustomBucketMilk(TFCSettings.getIntFor(config,"item","WoodenBucketMilk",num))).setIconCoord(15, 0).setItemName("WoodenBucketMilk").setContainerItem(WoodenBucketEmpty);num++;
         
         BismuthKnifeHead = new ItemTerraMiscToolHead(TFCSettings.getIntFor(config,"item","BismuthKnifeHead",num)).setItemName("Bismuth Knife Blade").setIconCoord(1, 10);num++;
@@ -1575,11 +1590,11 @@ public class TFCItems
             TFCItems.TinHammer,TFCItems.ZincHammer};
         
         String[] Names = {"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Rose Gold", "Steel", "Tin", "Zinc"};
-        CommonProxy proxy = mod_TFC.proxy;
+        CommonProxy proxy = TerraFirmaCraft.proxy;
         
-        EnumArmorMaterial[] mats = new EnumArmorMaterial[]{mod_TFC.BismuthArmorMaterial,mod_TFC.BismuthBronzeArmorMaterial,mod_TFC.BlackBronzeArmorMaterial,mod_TFC.BlackSteelArmorMaterial,mod_TFC.BlueSteelArmorMaterial,
-                mod_TFC.BronzeArmorMaterial,mod_TFC.CopperArmorMaterial,mod_TFC.IronArmorMaterial,mod_TFC.RedSteelArmorMaterial,mod_TFC.RoseGoldArmorMaterial,
-                mod_TFC.SteelArmorMaterial,mod_TFC.TinArmorMaterial,mod_TFC.ZincArmorMaterial};
+        EnumArmorMaterial[] mats = new EnumArmorMaterial[]{TFCItems.BismuthArmorMaterial,TFCItems.BismuthBronzeArmorMaterial,TFCItems.BlackBronzeArmorMaterial,TFCItems.BlackSteelArmorMaterial,TFCItems.BlueSteelArmorMaterial,
+                TFCItems.BronzeArmorMaterial,TFCItems.CopperArmorMaterial,TFCItems.IronArmorMaterial,TFCItems.RedSteelArmorMaterial,TFCItems.RoseGoldArmorMaterial,
+                TFCItems.SteelArmorMaterial,TFCItems.TinArmorMaterial,TFCItems.ZincArmorMaterial};
         
         
         int i = 0;
@@ -1727,4 +1742,19 @@ public class TFCItems
             config.save();
         }
     }
+
+
+	public static EnumArmorMaterial BismuthArmorMaterial;
+	public static EnumArmorMaterial BismuthBronzeArmorMaterial;
+	public static EnumArmorMaterial BlackBronzeArmorMaterial;
+	public static EnumArmorMaterial BlackSteelArmorMaterial;
+	public static EnumArmorMaterial BlueSteelArmorMaterial;
+	public static EnumArmorMaterial BronzeArmorMaterial;
+	public static EnumArmorMaterial CopperArmorMaterial;
+	public static EnumArmorMaterial IronArmorMaterial;
+	public static EnumArmorMaterial RedSteelArmorMaterial;
+	public static EnumArmorMaterial RoseGoldArmorMaterial;
+	public static EnumArmorMaterial SteelArmorMaterial;
+	public static EnumArmorMaterial TinArmorMaterial;
+	public static EnumArmorMaterial ZincArmorMaterial;
 }

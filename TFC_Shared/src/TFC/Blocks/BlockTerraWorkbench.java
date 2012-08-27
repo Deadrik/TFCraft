@@ -29,7 +29,7 @@ public class BlockTerraWorkbench extends BlockContainer
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				//ModLoader.openGUI(entityplayer, new GuiTerraWorkbench(entityplayer.inventory, tileentityanvil,world, i, j, k));
-				entityplayer.openGui(mod_TFC.instance, mod_TFC.workbenchGuiId, world, i, j, k);
+				entityplayer.openGui(TerraFirmaCraft.instance, 1, world, i, j, k);
 			}
 			return true;
 		}

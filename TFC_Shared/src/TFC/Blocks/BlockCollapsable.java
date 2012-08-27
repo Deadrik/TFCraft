@@ -6,7 +6,7 @@ import java.util.Random;
 import TFC.Core.Helper;
 import TFC.Core.TFCSettings;
 import TFC.Entities.EntityFallingStone;
-import TFC.Entities.EntityFallingStone2;
+import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 
@@ -18,8 +18,8 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 
 public class BlockCollapsable extends BlockTerra
 {
@@ -164,7 +164,7 @@ public class BlockCollapsable extends BlockTerra
             {
                 for(int z = -4; z < 5; z++)
                 {
-                    if(world.getBlockId(i+x, j+y, k+z) == mod_TFC.terraWoodSupportH.blockID)
+                    if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.terraWoodSupportH.blockID)
                     {
                         return true;
                     }
@@ -207,7 +207,7 @@ public class BlockCollapsable extends BlockTerra
         {
             if (!world.isRemote && fallingBlockID != -1)
             {
-                EntityFallingStone2 ent = new EntityFallingStone2(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5);
+                EntityFallingStone ent = new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5);
                 world.spawnEntityInWorld(ent);
                 Random R = new Random(i*j+k);
                 if(R.nextInt(100) > 90)
@@ -216,19 +216,19 @@ public class BlockCollapsable extends BlockTerra
                 world.setBlock(i, j, k, 0);
                 world.markBlockNeedsUpdate(i, j, k);
                 
-                if(world.getBlockId(i, j-1, k) == mod_TFC.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
+                if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
                         ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
                 {
                     world.setBlock(i, j-1, k, 0);
                     world.markBlockNeedsUpdate(i, j-1, k);
                     
-                    if(world.getBlockId(i, j-2, k) == mod_TFC.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
+                    if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
                             ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
                     {
                         world.setBlock(i, j-2, k, 0);
                         world.markBlockNeedsUpdate(i, j-2, k);
                         
-                        if(world.getBlockId(i, j-3, k) == mod_TFC.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
+                        if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
                                 ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
                         {
                             world.setBlock(i, j-3, k, 0);

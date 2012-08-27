@@ -135,8 +135,8 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			return false;
 		}
 		int var3 = world.getBlockId (i, j - 1, k);
-		if (!(var3 == mod_TFC.terraDirt.blockID || var3 == mod_TFC.terraDirt2.blockID || var3 == mod_TFC.terraGrass.blockID || var3 == mod_TFC.terraGrass2.blockID ||
-				var3 == mod_TFC.terraClayGrass.blockID || var3 == mod_TFC.terraClayGrass2.blockID)|| j >= world.getHeight() - height - 1 || 
+		if (!(var3 == TFCBlocks.terraDirt.blockID || var3 == TFCBlocks.terraDirt2.blockID || var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID ||
+				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| j >= world.getHeight() - height - 1 || 
 				world.getBlockMaterial (i, j, k) == Material.water)
 		{
 			return false;

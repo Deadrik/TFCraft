@@ -81,7 +81,7 @@ public class SlotCraftingWorkbench extends Slot
 			this.thePlayer.addStat(AchievementList.bookcase, 1);
 		}
 
-		mod_TFC.proxy.takenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
+		TerraFirmaCraft.proxy.takenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
 		//ForgeHooks.onTakenFromCrafting(thePlayer, par1ItemStack, craftMatrix);
 	}
 

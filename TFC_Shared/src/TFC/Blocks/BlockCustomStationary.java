@@ -63,57 +63,57 @@ public class BlockCustomStationary extends BlockCustomFluid
             if(biome instanceof BiomeGenRiverTFC || biome instanceof BiomeGenOceanTFC || biome instanceof BiomeGenSwampTFC)
             {
                 if(par1World.getBlockId(par2+1, par3, par4) == 0 || 
-                        (par1World.getBlockId(par2+1, par3, par4) == mod_TFC.finiteWater.blockID && par1World.getBlockMetadata(par2+1, par3, par4) != 0))
+                        (par1World.getBlockId(par2+1, par3, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2+1, par3, par4) != 0))
                 {
                     par1World.editingBlocks = true;
-                    par1World.setBlockAndMetadata(par2+1, par3, par4, mod_TFC.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadata(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, 0);
                     par1World.markBlocksDirty(par2+1, par3, par4, par2+1, par3, par4);
-                    par1World.scheduleBlockUpdate(par2+1, par3, par4, mod_TFC.finiteWater.blockID, this.tickRate());
+                    par1World.scheduleBlockUpdate(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
                 else if(par1World.getBlockId(par2-1, par3, par4) == 0 || 
-                        (par1World.getBlockId(par2-1, par3, par4) == mod_TFC.finiteWater.blockID && par1World.getBlockMetadata(par2-1, par3, par4) != 0))
+                        (par1World.getBlockId(par2-1, par3, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2-1, par3, par4) != 0))
                 {
                     par1World.editingBlocks = true;
-                    par1World.setBlockAndMetadata(par2-1, par3, par4, mod_TFC.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadata(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, 0);
                     par1World.markBlocksDirty(par2-1, par3, par4, par2-1, par3, par4);
-                    par1World.scheduleBlockUpdate(par2-1, par3, par4, mod_TFC.finiteWater.blockID, this.tickRate());
+                    par1World.scheduleBlockUpdate(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
                 else if(par1World.getBlockId(par2, par3, par4+1) == 0 || 
-                        (par1World.getBlockId(par2, par3, par4+1) == mod_TFC.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4+1) != 0))
+                        (par1World.getBlockId(par2, par3, par4+1) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4+1) != 0))
                 {
                     par1World.editingBlocks = true;
-                    par1World.setBlockAndMetadata(par2, par3, par4+1, mod_TFC.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadata(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, 0);
                     par1World.markBlocksDirty(par2, par3, par4+1, par2, par3, par4+1);
-                    par1World.scheduleBlockUpdate(par2, par3, par4+1, mod_TFC.finiteWater.blockID, this.tickRate());
+                    par1World.scheduleBlockUpdate(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
                 else if(par1World.getBlockId(par2, par3, par4-1) == 0 || 
-                        (par1World.getBlockId(par2, par3, par4-1) == mod_TFC.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4-1) != 0))
+                        (par1World.getBlockId(par2, par3, par4-1) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4-1) != 0))
                 {
                     par1World.editingBlocks = true;
-                    par1World.setBlockAndMetadata(par2, par3, par4-1, mod_TFC.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadata(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, 0);
                     par1World.markBlocksDirty(par2, par3, par4-1, par2, par3, par4-1);
-                    par1World.scheduleBlockUpdate(par2, par3, par4-1, mod_TFC.finiteWater.blockID, this.tickRate());
+                    par1World.scheduleBlockUpdate(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
                 else if(par1World.getBlockId(par2, par3-1, par4) == 0 || 
-                        (par1World.getBlockId(par2, par3-1, par4) == mod_TFC.finiteWater.blockID && par1World.getBlockMetadata(par2, par3-1, par4) != 0))
+                        (par1World.getBlockId(par2, par3-1, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3-1, par4) != 0))
                 {
                     par1World.editingBlocks = true;
-                    par1World.setBlockAndMetadata(par2, par3-1, par4, mod_TFC.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadata(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, 0);
                     par1World.markBlocksDirty(par2, par3-1, par4, par2, par3-1, par4);
-                    par1World.scheduleBlockUpdate(par2, par3-1, par4, mod_TFC.finiteWater.blockID, this.tickRate());
+                    par1World.scheduleBlockUpdate(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
             }
             else
             {
                 par1World.editingBlocks = true;
-                par1World.setBlockAndMetadata(par2, par3, par4, mod_TFC.finiteWater.blockID, 0);
+                par1World.setBlockAndMetadata(par2, par3, par4, TFCBlocks.finiteWater.blockID, 0);
                 par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
-                par1World.scheduleBlockUpdate(par2, par3, par4, mod_TFC.finiteWater.blockID, this.tickRate());
+                par1World.scheduleBlockUpdate(par2, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                 par1World.editingBlocks = false;
             }
         }

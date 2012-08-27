@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Entities.EntityFallingStone2;
+import TFC.Entities.EntityFallingStone;
 
 public class RenderFallingStone2 extends Render
 {
@@ -18,7 +18,7 @@ public class RenderFallingStone2 extends Render
 
     }
 
-    public void doRenderFallingStone(EntityFallingStone2 entityfallingstone, double d, double d1, double d2,
+    public void doRenderFallingStone(EntityFallingStone entityfallingstone, double d, double d1, double d2,
             float f, float f1)
     {
         GL11.glPushMatrix();
@@ -37,6 +37,6 @@ public class RenderFallingStone2 extends Render
     public void doRender(Entity entity, double d, double d1, double d2,
             float f, float f1)
     {
-        doRenderFallingStone((EntityFallingStone2)entity, d, d1, d2, f, f1);
+        doRenderFallingStone((EntityFallingStone)entity, d, d1, d2, f, f1);
     }
 }

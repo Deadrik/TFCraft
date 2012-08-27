@@ -25,7 +25,7 @@ public class SlotCraftingMetal extends Slot
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 
-		mod_TFC.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
+		TerraFirmaCraft.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
 		GameRegistry.onItemCrafted(thePlayer, itemstack, craftMatrix);
 
 		for (int i = 0; i < craftMatrix.getSizeInventory(); i++)

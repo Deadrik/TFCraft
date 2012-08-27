@@ -10,11 +10,12 @@ import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraForge extends BlockContainer
 {
@@ -91,7 +92,7 @@ public class BlockTerraForge extends BlockContainer
 
 				if(tileentityforge.isValid)
 				{
-					entityplayer.openGui(mod_TFC.instance, mod_TFC.terraForgeGuiId, world, i, j, k);
+					entityplayer.openGui(TerraFirmaCraft.instance, 23, world, i, j, k);
 					//ModLoader.openGUI(entityplayer, new GuiTerraForge(entityplayer.inventory, tileentityforge));
 				}
 			}
@@ -117,7 +118,7 @@ public class BlockTerraForge extends BlockContainer
 
 	public int getRenderType()
 	{
-		return mod_TFC.terraForgeRenderId;
+		return TFCBlocks.terraForgeRenderId;
 	}
 
 	@Override
@@ -191,7 +192,7 @@ public class BlockTerraForge extends BlockContainer
 	}
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this.blockID == mod_TFC.terraForge.blockID)
+		if (this.blockID == TFCBlocks.terraForge.blockID)
 		{
 			return;
 		}
@@ -228,12 +229,12 @@ public class BlockTerraForge extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC.terraForgeOn.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.terraForgeOn.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
         else
         {
-            par1World.setBlockWithNotify(par2, par3, par4, mod_TFC.terraForge.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.terraForge.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
 

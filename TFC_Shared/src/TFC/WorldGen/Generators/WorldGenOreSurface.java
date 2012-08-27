@@ -24,23 +24,23 @@ public class WorldGenOreSurface implements IWorldGenerator
 	{
 		int height = Min-Max;
         //============Copper
-        createOre(mod_TFC.terraOre.blockID, 0,new int[]{mod_TFC.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
+        createOre(TFCBlocks.terraOre.blockID, 0,new int[]{TFCBlocks.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
                 /*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max);
 
         //============Cassiterite
-        createOre(mod_TFC.terraOre.blockID, 5,new int[]{mod_TFC.terraStoneIgIn.blockID,0},//Granite Veins
+        createOre(TFCBlocks.terraOre.blockID, 5,new int[]{TFCBlocks.terraStoneIgIn.blockID,0},//Granite Veins
                 /*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, Min, Max);
 
         //============Cassiterite2
-        createOre(mod_TFC.terraOre.blockID, 5,new int[]{mod_TFC.terraStoneIgEx.blockID,-1},//IgEx Veins
+        createOre(TFCBlocks.terraOre.blockID, 5,new int[]{TFCBlocks.terraStoneIgEx.blockID,-1},//IgEx Veins
                 /*rarity*/20,/*veinSize*/10,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max);
 
         //============Bismuthinite
-        createOre(mod_TFC.terraOre.blockID, 7,new int[]{mod_TFC.terraStoneIgIn.blockID,-1,mod_TFC.terraStoneSed.blockID,-1},//Granite Veins
+        createOre(TFCBlocks.terraOre.blockID, 7,new int[]{TFCBlocks.terraStoneIgIn.blockID,-1,TFCBlocks.terraStoneSed.blockID,-1},//Granite Veins
                 /*rarity*/25,/*veinSize*/10,/*veinAmt*/25,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max);
 
         //============Sphalerite
-        createOre(mod_TFC.terraOre.blockID, 12,new int[]{mod_TFC.terraStoneMM.blockID,-1},//mm, veins
+        createOre(TFCBlocks.terraOre.blockID, 12,new int[]{TFCBlocks.terraStoneMM.blockID,-1},//mm, veins
                 /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max);
 		
 	}

@@ -3,8 +3,8 @@ package TFC.TileEntities;
 import TFC.Blocks.BlockTerraFarmland;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCSeasons;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 import net.minecraft.src.*;
 

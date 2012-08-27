@@ -2,7 +2,7 @@ package TFC.Core;
 
 import java.io.File;
 
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -33,12 +33,13 @@ public class TFCSettings
 	{
 		try
 		{
-			config = new Configuration(new File(mod_TFC.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
+			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
 			config.load();
 		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access configuration!").toString());
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to access settings configuration!").toString());
 			config = null;
 		}
+		System.out.println(new StringBuilder().append("[TFC] Loading Settings").toString());
 		/**Start setup here*/
 		//General
 		enableVanillaDiamondRecipe = getBooleanFor(config, "General","enableVanillaDiamondRecipe",false);

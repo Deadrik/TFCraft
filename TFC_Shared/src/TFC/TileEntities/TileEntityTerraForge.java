@@ -9,8 +9,8 @@ import java.util.Random;
 import TFC.Blocks.BlockTerraForge;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCHeat;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
@@ -27,9 +27,9 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.mod_TFC;
 
 public class TileEntityTerraForge extends TileEntityFireEntity implements IInventory
 {
@@ -605,7 +605,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC.terraForge.blockID) {
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.terraForge.blockID) {
                     BlockTerraForge.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
                 }
             }
@@ -613,7 +613,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             //If the fire is still burning and has fuel
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
             {
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != mod_TFC.terraForgeOn.blockID) {
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.terraForgeOn.blockID) {
                     BlockTerraForge.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 

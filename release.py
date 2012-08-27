@@ -14,6 +14,7 @@ from build import build
 
 reobf_dir = os.path.join(mcp_dir, 'reobf')
 client_dir = os.path.join(reobf_dir, 'minecraft')
+server_dir = os.path.join(reobf_dir, 'minecraft_server')
 zip = None
 zip_name = None
 zip_base = None

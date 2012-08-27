@@ -25,7 +25,7 @@ public class BlockTerraLogPile extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		if (mod_TFC.proxy.isRemote())
+		if (TerraFirmaCraft.proxy.isRemote())
 		{
 			return true;
 		}
@@ -43,7 +43,7 @@ public class BlockTerraLogPile extends BlockContainer
 				}
 				else
 				{
-					entityplayer.openGui(mod_TFC.instance, mod_TFC.logPileGuiId, world, i, j, k);
+					entityplayer.openGui(TerraFirmaCraft.instance, 0, world, i, j, k);
 				}
 				return true;
 			} else {

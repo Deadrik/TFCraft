@@ -4,8 +4,8 @@ import java.util.Random;
 
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
-import TFC.Core.PacketHandler;
 import TFC.Core.TFCSeasons;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
@@ -132,7 +132,13 @@ public class TileEntityCrop extends TileEntity
         return ((float)crop.numGrowthStages/(growthTimer/TFCSeasons.dayLength))*1.5f;
     }
 
-
+    @Override
+    public void validate()
+    {
+        super.validate();
+        initialize();
+    }
+    
     public void initialize()
     {
         if (this.worldObj.isRemote)

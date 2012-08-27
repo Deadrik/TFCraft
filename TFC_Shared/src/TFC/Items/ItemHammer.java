@@ -58,8 +58,8 @@ public class ItemHammer extends ItemTool
 			int side = objectMouseOver.sideHit;
 			if(side == 1)
 			{
-				player.worldObj.setBlock(x, y, z, mod_TFC.terraAnvil.blockID);
-				mod_TFC.terraAnvil.onBlockActivated(player.worldObj, x, y, z, player,1,0,0,0);
+				player.worldObj.setBlock(x, y, z, TFCBlocks.terraAnvil.blockID);
+				TFCBlocks.terraAnvil.onBlockActivated(player.worldObj, x, y, z, player,1,0,0,0);
 				return false;
 			}
 		}

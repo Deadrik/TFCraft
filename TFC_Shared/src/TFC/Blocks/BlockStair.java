@@ -11,8 +11,8 @@ import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Material;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
 
 public class BlockStair extends BlockPartial
 {
@@ -26,7 +26,7 @@ public class BlockStair extends BlockPartial
     @Override
     public int getRenderType()
     {
-        return mod_TFC.stairRenderId;
+        return TFCBlocks.stairRenderId;
     }
 
     /**

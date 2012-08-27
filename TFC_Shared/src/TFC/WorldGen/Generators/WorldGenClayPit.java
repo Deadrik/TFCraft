@@ -41,12 +41,12 @@ public class WorldGenClayPit extends WorldGenerator
 						{
 							int var13 = par1World.getBlockId(var8, var12, var9);
 
-							if (var13 == mod_TFC.terraDirt.blockID || var13 == mod_TFC.terraDirt2.blockID || var13 == mod_TFC.terraClay.blockID|| var13 == mod_TFC.terraClay2.blockID)
+							if (var13 == TFCBlocks.terraDirt.blockID || var13 == TFCBlocks.terraDirt2.blockID || var13 == TFCBlocks.terraClay.blockID|| var13 == TFCBlocks.terraClay2.blockID)
 							{
 								par1World.setBlockAndMetadata(var8, var12, var9, biome.ClayID, biome.TopSoilMetaID);
 							}
-							else if(var13 == mod_TFC.terraGrass.blockID || var13 == mod_TFC.terraGrass2.blockID ||
-									var13 == mod_TFC.terraClayGrass.blockID || var13 == mod_TFC.terraClayGrass2.blockID)
+							else if(var13 == TFCBlocks.terraGrass.blockID || var13 == TFCBlocks.terraGrass2.blockID ||
+									var13 == TFCBlocks.terraClayGrass.blockID || var13 == TFCBlocks.terraClayGrass2.blockID)
 							{
 								par1World.setBlockAndMetadata(var8, var12, var9, biome.ClayGrassID, biome.TopSoilMetaID);
 							}

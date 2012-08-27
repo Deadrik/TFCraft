@@ -3,6 +3,8 @@ package net.minecraft.src;
 import java.io.File;
 import java.util.Map;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import TFC.Containers.*;
 import TFC.Core.*;
 import TFC.Entities.*;
@@ -50,9 +52,6 @@ public class CommonProxy implements IGuiHandler
         ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
         ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
         
-//        GameRegistry.registerSoundHandler(new SoundHandler());
-//        MinecraftForgeClient.registerHighlightHandler(new RenderHighlight());
-        
         EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "cow", 100, 0xffffff, 0xbbbbbb);
         EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheep", 101, 0xffffff, 0xbbbbbb);
         EntityRegistry.registerGlobalEntityID(EntityBear.class, "bear", 102, 0xd1d003, 0x101010);
@@ -61,24 +60,23 @@ public class CommonProxy implements IGuiHandler
         EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squid", 105, 0xffffff, 0xbbbbbb);
         EntityRegistry.registerGlobalEntityID(EntityDeer.class, "deer", 106, 0xffffff, 0x105510);
         
-        EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityFallingStone.class, "fallingstone", 3,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityFallingDirt.class, "fallingdirt", 4,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityFallingStone2.class, "fallingdirt2", 5,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityCowTFC.class, "cowTFC", 6,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityWolfTFC.class, "wolfTFC", 7,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityBear.class, "bearTFC", 8,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,mod_TFC.instance, 160, 5, true);
-        EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,mod_TFC.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityFallingStone.class, "fallingstone", 3,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityFallingDirt.class, "fallingdirt", 4,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityCowTFC.class, "cowTFC", 6,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityWolfTFC.class, "wolfTFC", 7,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityBear.class, "bearTFC", 8,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,TerraFirmaCraft.instance, 160, 5, true);
+        EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,TerraFirmaCraft.instance, 160, 5, true);
     }
 
 	public void registerTranslations() {
 	}
 
 	public File getMinecraftDir() {
-		return new File(".");
+		return ModLoader.getMinecraftInstance().getMinecraftDir();/*new File(".");*/
 	}
 
 	public boolean isRemote() {
@@ -189,18 +187,15 @@ public class CommonProxy implements IGuiHandler
         return false;
     }
 
-    public void registerKeys(BaseMod b)
-    {
-        // TODO Auto-generated method stub
-        
+    public void registerKeys(){
     }
 
-    public void keyboardEvent(Object e)
-    {
-        // TODO Auto-generated method stub
-        
+    public void registerKeyBindingHandler(){ 
     }
+    
 
+    public void registerSoundHandler() {
+    }
 
     public void sendCustomPacketToPlayer(String player, Packet packet)
     {
@@ -276,8 +271,4 @@ public class CommonProxy implements IGuiHandler
 		return null;
 	}
 	
-	public void handleHealthUpdate(Class c, byte par1)
-	{
-		
-	}
 }

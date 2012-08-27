@@ -127,7 +127,7 @@ public class BlockTerraGrass2 extends BlockTerra2
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        return mod_TFC.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
+        return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     public int getBlockColor()
@@ -147,7 +147,7 @@ public class BlockTerraGrass2 extends BlockTerra2
 
     public int getRenderType()
     {
-        return mod_TFC.grassRenderId;
+        return TFCBlocks.grassRenderId;
     }
 
     /**
@@ -201,7 +201,7 @@ public class BlockTerraGrass2 extends BlockTerra2
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return mod_TFC.terraDirt2.idDropped(0, par2Random, par3);
+        return TFCBlocks.terraDirt2.idDropped(0, par2Random, par3);
     }
 
     public void onEntityWalking(World world, int i, int j, int k, Entity par5Entity) 
@@ -212,7 +212,7 @@ public class BlockTerraGrass2 extends BlockTerra2
             if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockTerraDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
             {
                 int meta = world.getBlockMetadata(i, j, k);
-                world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.terraDirt2.blockID, meta);
+                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.terraDirt2.blockID, meta);
             }
         }
     }
@@ -251,7 +251,7 @@ public class BlockTerraGrass2 extends BlockTerra2
         if(!world.blockExists(i, j-1, k))
         {
             int meta = world.getBlockMetadata(i, j, k);
-            world.setBlockAndMetadataWithNotify(i, j, k, mod_TFC.terraDirt2.blockID, meta);
+            world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.terraDirt2.blockID, meta);
         }
     }
 }

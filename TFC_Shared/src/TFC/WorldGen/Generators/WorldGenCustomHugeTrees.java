@@ -88,8 +88,8 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							var12 = par1World.getBlockId(var10, blockUnder, var11);
 
 							if (var12 != 0 && var12 != Block.leaves.blockID && var12 != Block.grass.blockID && var12 != Block.dirt.blockID && var12 != Block.wood.blockID && var12 != Block.sapling.blockID && 
-									!(var12 == mod_TFC.terraDirt.blockID || var12 == mod_TFC.terraDirt2.blockID ||var12 == mod_TFC.terraGrass.blockID ||var12 == mod_TFC.terraGrass2.blockID ||
-									var12 == mod_TFC.terraClayGrass.blockID ||var12 == mod_TFC.terraClayGrass2.blockID))
+									!(var12 == TFCBlocks.terraDirt.blockID || var12 == TFCBlocks.terraDirt2.blockID ||var12 == TFCBlocks.terraGrass.blockID ||var12 == TFCBlocks.terraGrass2.blockID ||
+									var12 == TFCBlocks.terraClayGrass.blockID ||var12 == TFCBlocks.terraClayGrass2.blockID))
 							{
 								var7 = false;
 							}
@@ -110,8 +110,8 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 			{
 				blockUnder = par1World.getBlockId(par3, par4 - 1, par5);
 
-				if ((blockUnder == mod_TFC.terraDirt.blockID || blockUnder == mod_TFC.terraDirt2.blockID || blockUnder == mod_TFC.terraGrass.blockID || blockUnder == mod_TFC.terraGrass2.blockID ||
-						blockUnder == mod_TFC.terraClayGrass.blockID || blockUnder == mod_TFC.terraClayGrass2.blockID) && par4 < 256 - var6 - 1)
+				if ((blockUnder == TFCBlocks.terraDirt.blockID || blockUnder == TFCBlocks.terraDirt2.blockID || blockUnder == TFCBlocks.terraGrass.blockID || blockUnder == TFCBlocks.terraGrass2.blockID ||
+						blockUnder == TFCBlocks.terraClayGrass.blockID || blockUnder == TFCBlocks.terraClayGrass2.blockID) && par4 < 256 - var6 - 1)
 				{
 					par1World.setBlockAndMetadata(par3, par4 - 1, par5, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
 					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);

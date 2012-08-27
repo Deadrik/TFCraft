@@ -227,7 +227,7 @@ public class BlockCustomVine extends Block implements IShearable
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        return mod_TFC.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
+        return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
     /**

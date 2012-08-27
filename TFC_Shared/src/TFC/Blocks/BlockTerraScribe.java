@@ -7,7 +7,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_TFC;
+import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraScribe extends BlockContainer
 {
@@ -59,7 +59,7 @@ public class BlockTerraScribe extends BlockContainer
 				tileentityanvil = (TileEntityTerraScribe)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(mod_TFC.instance, mod_TFC.terraScribeGuiId, world, i, j, k);
+				entityplayer.openGui(TerraFirmaCraft.instance, 22, world, i, j, k);
 				//ModLoader.openGUI(entityplayer, new GuiTerraScribe(entityplayer.inventory, tileentityanvil, world));
 			}
 			return true;
