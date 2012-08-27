@@ -3,7 +3,7 @@ package TFC.WorldGen;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
 
-public class GenLayerRiverMixTFC extends GenLayer
+public class GenLayerRiverMixTFC extends GenLayerTFC
 {
 	private GenLayer field_35512_b;
 	private GenLayer field_35513_c;

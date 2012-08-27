@@ -493,14 +493,6 @@ public class TFC_Core
             }
         }
 
-        //            for(int i = 0; i < BiomeGenBase.deck.length; i++)
-        //            {
-        //                if(BiomeGenBase.deck[i] == true)
-        //                {
-        //                    count++;
-        //                }
-        //            }
-
         TFC_Game.registerAnvilRecipes(R, world);
     }
 

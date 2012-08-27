@@ -23,7 +23,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 	/** The amount of tall grass to generate per chunk. */
 	public int grassPerChunk;
-	
+
 	public TFCBiome biome;
 
 	/**
@@ -31,20 +31,20 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	 * this number in red mushroom patches. These mushrooms go beyond the default base number of mushrooms.
 	 */
 	public int mushroomsPerChunk;
-	
+
 	public int treesPerChunk;
-	
+
 	public int deadBushPerChunk;
-	
+
 	public int clayPerChunk;
-	
+
 	public int cactiPerChunk;
 
-    /**
-     * The number of reeds to generate per chunk. Reeds won't generate if the randomly selected placement is unsuitable.
-     */
+	/**
+	 * The number of reeds to generate per chunk. Reeds won't generate if the randomly selected placement is unsuitable.
+	 */
 	public int reedsPerChunk;
-    
+
 	public int waterlilyPerChunk;
 
 
@@ -58,7 +58,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.flowersPerChunk = 2;
 		this.grassPerChunk = 1;
 		this.mushroomsPerChunk = 0;
-		
+
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Block.sand.blockID);
 		biome = par1BiomeGenBase;
@@ -109,9 +109,14 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		{
 			var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator,currentWorld);
-			var5.setScale(1.0D, 1.0D, 1.0D);
-			var5.generate(this.currentWorld, this.randomGenerator, var3, this.currentWorld.getHeightValue(var3, var4), var4);
+			//WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator,currentWorld);
+			DataLayer TreeType = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getTreeLayerAt(var3, var4);
+			WorldGenerator var5 = this.biome.getTreeGen(TreeType.data1, false);
+			if(var5 != null)
+			{
+				var5.setScale(1.0D, 1.0D, 1.0D);
+				var5.generate(this.currentWorld, this.randomGenerator, var3, this.currentWorld.getHeightValue(var3, var4), var4);
+			}
 		}
 
 		int var7;

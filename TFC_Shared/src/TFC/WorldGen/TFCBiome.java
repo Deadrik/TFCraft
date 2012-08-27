@@ -3,6 +3,8 @@ package TFC.WorldGen;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Helper;
@@ -263,7 +265,6 @@ public class TFCBiome extends BiomeGenBase
         this.spawnableMonsterList = new ArrayList();
         this.spawnableCreatureList = new ArrayList();
         this.spawnableWaterCreatureList = new ArrayList();
-        this.enableRain = true;
         
         super.biomeList[par1] = this;
         SurfaceType = TFCBlocks.terraStoneIgIn.blockID;
@@ -377,13 +378,13 @@ public class TFCBiome extends BiomeGenBase
      */
     protected TFCBiome setDisableRain()
     {
-        this.enableRain = false;
+    	ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
         return this;
     }
     
-    public int getIntRainfall()
+    public int getIntRain()
     {
-        if(TFCSeasons.getMonth() < 3)
+        if(TFCSeasons.getMonth() < 3 || TFCSeasons.currentMonth >= 10)
             return (int)((this.rainfall+0.1F) * 65536.0F);
         else
             return (int)(this.rainfall * 65536.0F);
@@ -392,15 +393,15 @@ public class TFCBiome extends BiomeGenBase
     /**
      * Gets an integer representation of this biome's temperature
      */
-    public int getIntTemperature()
+    public int getIntTemp()
     {
-        return (int) (getFloatTemperature() * 65536.0F);   
+        return (int) (getFloatTemp() * 65536.0F);   
     }
 
     /**
      * Gets a floating point representation of this biome's temperature
      */    
-    public float getFloatTemperature()
+    public float getFloatTemp()
     {
         float temp = getTemp();
         if(temp <= 0)
@@ -458,7 +459,7 @@ public class TFCBiome extends BiomeGenBase
     /**
      * Gets a floating point representation of this biome's rainfall
      */
-    public float getFloatRainfall()
+    public float getFloatRain()
     {
         if(TFCSeasons.currentMonth < 3 || TFCSeasons.currentMonth >= 9)
             return this.rainfall+0.1F;
@@ -473,8 +474,8 @@ public class TFCBiome extends BiomeGenBase
     {
         if(TFCSeasons.currentMonth < 6)
         {
-        double var1 = (double)Helper.clamp_float(this.getFloatTemperature(), 0.0F, 1.0F);
-        double var3 = (double)Helper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
+        double var1 = (double)Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
+        double var3 = (double)Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
         return ColorizerGrassTFC.getGrassColor(var1, var3);
         }
         else
@@ -488,8 +489,8 @@ public class TFCBiome extends BiomeGenBase
     {
         if(TFCSeasons.currentMonth < 9)
         {
-        double var1 = (double)Helper.clamp_float(this.getFloatTemperature(), 0.0F, 1.0F);
-        double var3 = (double)Helper.clamp_float(this.getFloatRainfall(), 0.0F, 1.0F);
+        double var1 = (double)Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
+        double var3 = (double)Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
         return ColorizerFoliageTFC.getFoliageColor(var1, var3);
         }
         else
@@ -691,7 +692,7 @@ public class TFCBiome extends BiomeGenBase
                 return worldGenWillowShortTrees;
             }
         }
-        return worldGenAshShortTrees;
+        return null;
     }
 
     public int GrassID = TFCBlocks.terraGrass.blockID;

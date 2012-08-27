@@ -4,12 +4,12 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
 
-public class GenLayerHillsTFC extends GenLayer
+public class GenLayerHillsTFC extends GenLayerTFC
 {
 	public GenLayerHillsTFC(long par1, GenLayer par3GenLayer)
 	{
 		super(par1);
-		this.parent = par3GenLayer;
+		this.parent = (GenLayerTFC) par3GenLayer;
 	}
 
 	/**

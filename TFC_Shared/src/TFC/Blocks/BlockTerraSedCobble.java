@@ -5,6 +5,7 @@ import java.util.Random;
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
+import TFC.Core.TFCSounds;
 import TFC.Core.TFC_Core;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
@@ -108,13 +109,16 @@ public class BlockTerraSedCobble extends BlockTerra2
         return TFCItems.LooseRock.shiftedIndex;
     }
 
-	public void tryToFall(World world, int i, int j, int k)
+	private void tryToFall(World world, int i, int j, int k)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
 		if (!BlockCollapsable.isNearSupport(world, i, j, k) && BlockCollapsable.canFallBelow(world, i, j - 1, k) && j >= 0)
 		{
+			EntityFallingStone ent = new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
+			Random R = new Random(i*j+k);
+			
 			byte byte0 = 32;
-			if (fallInstantly || !world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
+			if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
 			{
 				world.setBlockWithNotify(i, j, k, 0);
 				for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
@@ -125,10 +129,8 @@ public class BlockTerraSedCobble extends BlockTerra2
 			}
 			else if (!world.isRemote)
 			{
-			    EntityFallingStone ent = new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
                 world.spawnEntityInWorld(ent);
-                Random R = new Random(i*j+k);
-                world.playSoundAtEntity(ent, "fallingrockshort", 1.0F, 0.8F + (R.nextFloat()/2));
+                world.playSoundAtEntity(ent, TFCSounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
 			}
 		}
 	}
@@ -138,9 +140,6 @@ public class BlockTerraSedCobble extends BlockTerra2
 		tryToFall(world, i, j, k);
 	}
 	
-	/**
-     * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
-     */
 	   /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */

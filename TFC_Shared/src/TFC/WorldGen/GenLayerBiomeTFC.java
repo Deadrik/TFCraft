@@ -5,7 +5,7 @@ import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
 import net.minecraft.src.WorldType;
 
-public class GenLayerBiomeTFC extends GenLayer
+public class GenLayerBiomeTFC extends GenLayerTFC
 {
 	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.desert, TFCBiome.forest, TFCBiome.extremeHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.taiga,
 	    TFCBiome.desert3,TFCBiome.desert4,TFCBiome.desert5,TFCBiome.desert6,
@@ -26,7 +26,7 @@ public class GenLayerBiomeTFC extends GenLayer
 	{
 		super(par1);
 		this.allowedBiomes = biomeArray;
-		this.parent = par3GenLayer;
+		this.parent = (GenLayerTFC) par3GenLayer;
 
 		if (par4WorldType == WorldType.DEFAULT_1_1)
 		{

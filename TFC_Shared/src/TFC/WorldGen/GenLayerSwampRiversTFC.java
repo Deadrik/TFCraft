@@ -3,12 +3,12 @@ package TFC.WorldGen;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
 
-public class GenLayerSwampRiversTFC extends GenLayer
+public class GenLayerSwampRiversTFC extends GenLayerTFC
 {
 	public GenLayerSwampRiversTFC(long par1, GenLayer par3GenLayer)
 	{
 		super(par1);
-		this.parent = par3GenLayer;
+		this.parent = (GenLayerTFC) par3GenLayer;
 	}
 
 	/**

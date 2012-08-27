@@ -80,7 +80,7 @@ public class BiomeGenDesertTFC extends TFCBiome
         }
     }
 	
-	public float getFloatRainfall()
+	public float getFloatRain()
     {
         return this.rainfall;
     }

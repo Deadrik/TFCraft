@@ -15,7 +15,7 @@ public class BlockCustomStairs extends Block
 	{
 		super(par1, 4, par2Block.blockMaterial);
 		this.modelBlock = par2Block;
-		this.setHardness(par2Block.getBlockHardness());
+		this.setHardness(5);
 		this.setResistance(10);
 		this.setStepSound(par2Block.stepSound);
 		this.setLightOpacity(255);

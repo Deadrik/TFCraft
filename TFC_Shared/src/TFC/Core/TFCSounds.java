@@ -2,7 +2,7 @@ package TFC.Core;
 
 public class TFCSounds 
 {
-	private static final String LOCATION = "/sounds/tfc/";
+	private static final String LOCATION = "sounds/tfc/";
 	private static final String PREFIX = "sounds.tfc.";
 	
 	public static String [] soundFiles = {

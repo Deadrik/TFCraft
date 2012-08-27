@@ -2,6 +2,7 @@ package TFC.Entities;
 
 import TFC.Blocks.BlockCollapsable;
 import TFC.Blocks.BlockTerraIgInCobble;
+import TFC.Core.TFCSounds;
 import net.minecraft.src.*;
 
 public class EntityFallingStone extends Entity
@@ -74,6 +75,7 @@ public class EntityFallingStone extends Entity
         {
             blockID = dataWatcher.getWatchableObjectInt(21);
             metaID = dataWatcher.getWatchableObjectInt(22);
+            //worldObj.playSoundAtEntity(this, TFCSounds.FALLININGROCKSHORT, 1.0F, 0.8F + (worldObj.rand.nextFloat()/2));
         }
         if(pTime == 0)
         {

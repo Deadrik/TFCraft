@@ -54,6 +54,7 @@ import TFC.Items.ItemTerraArmor;
 import TFC.Render.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.BiomeGenJungleTFC;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -201,7 +202,7 @@ public class ClientProxy extends CommonProxy
                 {
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+                        TFCBiome biome  = (TFCBiome) par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
 
                         int var10 = ColorizerFoliageTFC.getFoliageYellow();
                         rgb = applyColor(var10, rgb);
@@ -277,10 +278,10 @@ public class ClientProxy extends CommonProxy
                 {
                     for (int var9 = -1; var9 <= 1; ++var9)
                     {
-                        BiomeGenBase biome  = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+                        TFCBiome biome  = (TFCBiome) par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
 
-                        double var1 = (double)MathHelper.clamp_float(biome.getFloatTemperature(), 0.0F, 1.0F);
-                        double var3 = (double)MathHelper.clamp_float(biome.getFloatRainfall(), 0.0F, 1.0F);
+                        double var1 = (double)MathHelper.clamp_float(biome.getFloatTemp(), 0.0F, 1.0F);
+                        double var3 = (double)MathHelper.clamp_float(biome.getFloatRain(), 0.0F, 1.0F);
                         int var10 = ColorizerFoliageTFC.getFoliageColor(var1, var3);
                         rgb = applyColor(var10, rgb);
                     }

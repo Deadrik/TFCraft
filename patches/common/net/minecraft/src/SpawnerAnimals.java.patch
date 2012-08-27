@@ -9,14 +9,76 @@
  import net.minecraftforge.common.MinecraftForge;
  import net.minecraftforge.event.entity.living.LivingSpecialSpawnEvent;
  
-@@ -253,6 +255,10 @@
-                 par1World.spawnEntityInWorld(var6);
-             }
-         }
-+        else if (par0EntityLiving instanceof EntitySheepTFC)
-+        {
-+            ((EntitySheepTFC)par0EntityLiving).setFleeceColor(EntitySheepTFC.getRandomFleeceColor(par1World.rand));
-+        }
+@@ -221,39 +223,39 @@
      }
  
      /**
+-     * determines if a skeleton spawns on a spider, and if a sheep is a different color
+-     */
+-    private static void creatureSpecificInit(EntityLiving par0EntityLiving, World par1World, float par2, float par3, float par4)
+-    {
+-        LivingSpecialSpawnEvent event = new LivingSpecialSpawnEvent(par0EntityLiving, par1World, par2, par3, par4);
+-        MinecraftForge.EVENT_BUS.post(event);
+-        if (event.isHandeled())
+-        {
+-            return;
+-        }
+-        
+-        if (par0EntityLiving instanceof EntitySpider && par1World.rand.nextInt(100) == 0)
+-        {
+-            EntitySkeleton var7 = new EntitySkeleton(par1World);
+-            var7.setLocationAndAngles((double)par2, (double)par3, (double)par4, par0EntityLiving.rotationYaw, 0.0F);
+-            par1World.spawnEntityInWorld(var7);
+-            var7.mountEntity(par0EntityLiving);
+-        }
+-        else if (par0EntityLiving instanceof EntitySheep)
+-        {
+-            ((EntitySheep)par0EntityLiving).setFleeceColor(EntitySheep.getRandomFleeceColor(par1World.rand));
+-        }
+-        else if (par0EntityLiving instanceof EntityOcelot && par1World.rand.nextInt(7) == 0)
+-        {
+-            for (int var5 = 0; var5 < 2; ++var5)
+-            {
+-                EntityOcelot var6 = new EntityOcelot(par1World);
+-                var6.setLocationAndAngles((double)par2, (double)par3, (double)par4, par0EntityLiving.rotationYaw, 0.0F);
+-                var6.setGrowingAge(-24000);
+-                par1World.spawnEntityInWorld(var6);
+-            }
+-        }
+-    }
++	 * determines if a skeleton spawns on a spider, and if a sheep is a different color
++	 */
++	private static void creatureSpecificInit(EntityLiving par0EntityLiving, World par1World, float par2, float par3, float par4)
++	{
++	    LivingSpecialSpawnEvent event = new LivingSpecialSpawnEvent(par0EntityLiving, par1World, par2, par3, par4);
++	    MinecraftForge.EVENT_BUS.post(event);
++	    if (event.isHandeled())
++	    {
++	        return;
++	    }
++	    
++	    if (par0EntityLiving instanceof EntitySpider && par1World.rand.nextInt(100) == 0)
++	    {
++	        EntitySkeleton var7 = new EntitySkeleton(par1World);
++	        var7.setLocationAndAngles((double)par2, (double)par3, (double)par4, par0EntityLiving.rotationYaw, 0.0F);
++	        par1World.spawnEntityInWorld(var7);
++	        var7.mountEntity(par0EntityLiving);
++	    }
++	    else if (par0EntityLiving instanceof EntitySheep)
++	    {
++	        ((EntitySheep)par0EntityLiving).setFleeceColor(EntitySheep.getRandomFleeceColor(par1World.rand));
++	    }
++	    else if (par0EntityLiving instanceof EntityOcelot && par1World.rand.nextInt(7) == 0)
++	    {
++	        for (int var5 = 0; var5 < 2; ++var5)
++	        {
++	            EntityOcelot var6 = new EntityOcelot(par1World);
++	            var6.setLocationAndAngles((double)par2, (double)par3, (double)par4, par0EntityLiving.rotationYaw, 0.0F);
++	            var6.setGrowingAge(-24000);
++	            par1World.spawnEntityInWorld(var6);
++	        }
++	    }
++	}
+ 
+     /**
+      * Called during chunk generation to spawn initial creatures.

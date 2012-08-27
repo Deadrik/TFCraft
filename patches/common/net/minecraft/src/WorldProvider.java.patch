@@ -25,7 +25,7 @@
          int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
 -        return var3 == Block.grass.blockID;
 +        //return var3 == Block.grass.blockID;
-+        return var3 == mod_TFC.terraGrass.blockID || var3 == mod_TFC.terraGrass2.blockID;
++        return var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID;
      }
  
      /**

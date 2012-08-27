@@ -42,6 +42,7 @@ import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.*;
 import TFC.TileEntities.*;
+import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.*;
 
 import net.minecraft.client.Minecraft;
@@ -114,6 +115,8 @@ public class TerraFirmaCraft implements ITickHandler
 		
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
+		
+		TFCWorldType.DEFAULT = new TFCWorldType(0, "TFC", 1);
 	}
 
 	@Init
