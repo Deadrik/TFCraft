@@ -6,76 +6,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import TFC.Blocks.BlockChestTFC;
-import TFC.Blocks.BlockCrop;
-import TFC.Blocks.BlockCustomFlower;
-import TFC.Blocks.BlockCustomIce;
-import TFC.Blocks.BlockCustomLeaves;
-import TFC.Blocks.BlockCustomMushroom;
-import TFC.Blocks.BlockCustomReed;
-import TFC.Blocks.BlockCustomSapling;
-import TFC.Blocks.BlockCustomSnow;
-import TFC.Blocks.BlockCustomStairs;
-import TFC.Blocks.BlockCustomTallGrass;
-import TFC.Blocks.BlockCustomVine;
-import TFC.Blocks.BlockFiniteWater;
-import TFC.Blocks.BlockFirepit;
-import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.BlockFruitWood;
-import TFC.Blocks.BlockLooseRock;
-import TFC.Blocks.BlockSlab;
-import TFC.Blocks.BlockStair;
-import TFC.Blocks.BlockStalactite;
-import TFC.Blocks.BlockTerraAnvil;
-import TFC.Blocks.BlockTerraBellows;
-import TFC.Blocks.BlockTerraBloomery;
-import TFC.Blocks.BlockTerraClayGrass;
-import TFC.Blocks.BlockTerraClayGrass2;
-import TFC.Blocks.BlockTerraFarmland;
-import TFC.Blocks.BlockTerraForge;
-import TFC.Blocks.BlockTerraGrass;
-import TFC.Blocks.BlockTerraGrass2;
-import TFC.Blocks.BlockTerraIgEx;
-import TFC.Blocks.BlockTerraIgExCobble;
-import TFC.Blocks.BlockTerraIgExSmooth;
-import TFC.Blocks.BlockTerraIgIn;
-import TFC.Blocks.BlockTerraIgInCobble;
-import TFC.Blocks.BlockTerraIgInSmooth;
-import TFC.Blocks.BlockTerraLogPile;
-import TFC.Blocks.BlockTerraMM;
-import TFC.Blocks.BlockTerraMMCobble;
-import TFC.Blocks.BlockTerraMMSmooth;
-import TFC.Blocks.BlockTerraMetallurgy;
-import TFC.Blocks.BlockTerraMolten;
-import TFC.Blocks.BlockTerraOre;
-import TFC.Blocks.BlockTerraOre2;
-import TFC.Blocks.BlockTerraOre3;
-import TFC.Blocks.BlockTerraPeatGrass;
-import TFC.Blocks.BlockTerraPlanks;
-import TFC.Blocks.BlockTerraScribe;
-import TFC.Blocks.BlockTerraSed;
-import TFC.Blocks.BlockTerraSedCobble;
-import TFC.Blocks.BlockTerraSedSmooth;
-import TFC.Blocks.BlockTerraSluice;
-import TFC.Blocks.BlockTerraSulfur;
-import TFC.Blocks.BlockTerraWood;
-import TFC.Blocks.BlockTerraWoodSupport;
-import TFC.Blocks.BlockTerraWorkbench;
+import TFC.Blocks.*;
 import TFC.Core.TFCSettings;
-import TFC.TileEntities.TileEntityFruitTreeWood;
-import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityTerraBloomery;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraForge;
-import TFC.TileEntities.TileEntityTerraLogPile;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
-import TFC.TileEntities.TileEntityTerraScribe;
-import TFC.TileEntities.TileEntityTerraSluice;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.TileEntities.*;
 
 public class TFCBlocks 
 {
-
 	//////////////////////////////////////////////
 	public static int sulfurRenderId;
 	public static int woodFruitRenderId;
@@ -308,8 +244,9 @@ public class TFCBlocks
 
 		Block.blocksList[5] = null;
 		Block.blocksList[6] = null;
-		//Block.blocksList[8] = null;
+		Block.blocksList[8] = null;
 		//Block.blocksList[9] = null;
+		Block.blocksList[10] = null;
 		Block.blocksList[17] = null;
 		Block.blocksList[18] = null;
 		Block.blocksList[31] = null;
@@ -328,8 +265,9 @@ public class TFCBlocks
 
 		Block.blocksList[5] = (new BlockTerraPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
 		Block.blocksList[6] = (new BlockCustomSapling(6, 160)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sapling").setRequiresSelfNotify();
-		//Block.blocksList[8]= (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
+		Block.blocksList[8]= (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
 		//Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
+		Block.blocksList[10]= (new BlockCustomFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setLightOpacity(255).setBlockName("lava").disableStats().setRequiresSelfNotify();
 		Block.blocksList[17] = (new BlockTerraWood(17)).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
 		Block.blocksList[18] = (new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
 		Block.blocksList[31] = (BlockTallGrass)(new BlockCustomTallGrass(31, 39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("tallgrass");

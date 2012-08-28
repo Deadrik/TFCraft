@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.src.*;
 
-public class BlockCustomFlowing extends BlockCustomFluid
+public class BlockCustomFlowing extends BlockFlowing
 {
     /**
      * Number of horizontally adjacent liquid source blocks. Diagonal doesn't count. Only source blocks of the same
@@ -37,7 +37,6 @@ public class BlockCustomFlowing extends BlockCustomFluid
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
         par1World.setBlockAndMetadata(par2, par3, par4, this.blockID + 1, var5);
         par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
-        par1World.markBlockNeedsUpdate(par2, par3, par4);
     }
 
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -53,7 +52,7 @@ public class BlockCustomFlowing extends BlockCustomFluid
         int var6 = this.getFlowDecay(par1World, par2, par3, par4);
         byte var7 = 1;
 
-        if (this.blockMaterial == Material.lava /*&& !par1World.worldProvider.isHellWorld*/)
+        if (this.blockMaterial == Material.lava /*&& !par1World.provider.isHellWorld*/)
         {
             var7 = 2;
         }
@@ -108,7 +107,14 @@ public class BlockCustomFlowing extends BlockCustomFluid
                 var8 = false;
             }
 
-            if (var10 != var6)
+            if (var10 == var6)
+            {
+                if (var8)
+                {
+                    this.updateFlow(par1World, par2, par3, par4);
+                }
+            }
+            else
             {
                 var6 = var10;
 
@@ -122,10 +128,6 @@ public class BlockCustomFlowing extends BlockCustomFluid
                     par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
                     par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
                 }
-            }
-            else if (var8)
-            {
-                this.updateFlow(par1World, par2, par3, par4);
             }
         }
         else
@@ -144,11 +146,11 @@ public class BlockCustomFlowing extends BlockCustomFluid
 
             if (var6 >= 8)
             {
-                par1World.setBlockAndMetadataWithNotify(par2, par3 - 1, par4, this.blockID, var6);
+                this.flowIntoBlock(par1World, par2, par3 - 1, par4, var6);
             }
             else
             {
-                par1World.setBlockAndMetadataWithNotify(par2, par3 - 1, par4, this.blockID, var6 + 8);
+                this.flowIntoBlock(par1World, par2, par3 - 1, par4, var6 + 8);
             }
         }
         else if (var6 >= 0 && (var6 == 0 || this.blockBlocksFlow(par1World, par2, par3 - 1, par4)))
@@ -311,13 +313,13 @@ public class BlockCustomFlowing extends BlockCustomFluid
 
             if (!this.blockBlocksFlow(par1World, var6, par3, var8) && (par1World.getBlockMaterial(var6, par3, var8) != this.blockMaterial || par1World.getBlockMetadata(var6, par3, var8) != 0))
             {
-                if (!this.blockBlocksFlow(par1World, var6, par3 - 1, var8))
+                if (this.blockBlocksFlow(par1World, var6, par3 - 1, var8))
                 {
-                    this.flowCost[var5] = 0;
+                    this.flowCost[var5] = this.calculateFlowCost(par1World, var6, par3, var8, 1, var5);
                 }
                 else
                 {
-                    this.flowCost[var5] = this.calculateFlowCost(par1World, var6, par3, var8, 1, var5);
+                    this.flowCost[var5] = 0;
                 }
             }
         }

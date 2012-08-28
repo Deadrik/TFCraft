@@ -386,8 +386,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerKeys()
     {
-//        ModLoader.registerKey(b, Key_Calendar, false);
-//        ModLoader.registerKey(b, Key_ToolMode, false);
     	KeyBindings.addKeyBinding("Key_Calendar", 49);
 		KeyBindings.addIsRepeating(false);
 		KeyBindings.addKeyBinding("Key_ToolMode", 50);

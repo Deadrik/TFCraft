@@ -156,7 +156,10 @@ public class TerraFirmaCraft implements ITickHandler
 			RemoveRecipe(new ItemStack(Item.stick,4));
 			RemoveRecipe(new ItemStack(Block.planks,4));
 		}
-
+		
+		//Register new Minecarts
+		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 0, new ItemStack(TFCItems.minecartEmpty));
+		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
 	}
 
 	@PostInit

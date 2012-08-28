@@ -796,6 +796,9 @@ public class TFCItems
     public static Item SmallOreChunk;
     public static Item SinglePlank;
     
+    public static Item minecartEmpty;
+    public static Item minecartCrate;
+    
     
     /**
      * Item Uses Setup
@@ -855,6 +858,23 @@ public class TFCItems
             config = null;
         } 
         System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
+        
+        //Replace any vanilla Items here
+        Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
+        
+        minecartEmpty = (new ItemCustomMinecart(TFCSettings.getIntFor(config,"item","minecartEmpty",15999), 0)).setIconCoord(7, 8).setItemName("minecart");
+        minecartCrate = (new ItemCustomMinecart(TFCSettings.getIntFor(config,"item","minecartCrate",16000), 1)).setIconCoord(7, 9).setItemName("minecartChest");
+        
+        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
+        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 8, 0.8F, true,"/gui/items.png").setIconCoord(8, 5).setItemName("porkchopCooked");
+        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerraFood(93, 2, 0.3F, true,"/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
+        Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 5, 0.6F, true,"/gui/items.png").setIconCoord(10, 5).setItemName("fishCooked");
+        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerraFood(107, 3, 0.3F, true,"/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
+        Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 8, 0.8F, true,"/gui/items.png").setIconCoord(10, 6).setItemName("beefCooked");
+        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerraFood(109, 2, 0.3F, true,"/gui/items.png").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
+        Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
+        Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 5, 0.6F, false,"/gui/items.png")).setIconCoord(9, 2).setItemName("bread");
+        Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
         
         BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 10, new int[] {2,4,3,2}, 1);
 		BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 20, new int[] {4,6,5,4}, 1);
@@ -1451,18 +1471,7 @@ public class TFCItems
         SinglePlank = new ItemPlank(TFCSettings.getIntFor(config,"item","SinglePlank",num++),"/bioxx/terrasprites2.png").setItemName("SinglePlank").setIconCoord(0, 6);
         
         
-        Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
-        /**Food Items*/
-        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
-        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 8, 0.8F, true,"/gui/items.png").setIconCoord(8, 5).setItemName("porkchopCooked");
-        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerraFood(93, 2, 0.3F, true,"/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
-        Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 5, 0.6F, true,"/gui/items.png").setIconCoord(10, 5).setItemName("fishCooked");
-        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerraFood(107, 3, 0.3F, true,"/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
-        Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 8, 0.8F, true,"/gui/items.png").setIconCoord(10, 6).setItemName("beefCooked");
-        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerraFood(109, 2, 0.3F, true,"/gui/items.png").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
-        Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
-        Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 5, 0.6F, false,"/gui/items.png")).setIconCoord(9, 2).setItemName("bread");
-        Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
+        
         
         num = 18000;
         FruitTreeSapling1 = new ItemFruitTreeSapling(TFCSettings.getIntFor(config,"item","FruitSapling1", num), "/bioxx/Vegetation.png", 0).setItemName("FruitSapling1").setIconCoord(0, 7);num++;
