@@ -2,7 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
@@ -15,22 +18,22 @@ public class WorldGenLakesTFC extends WorldGenerator
 		this.blockIndex = par1;
 	}
 
-	public boolean generate(World world, Random random, int i, int j, int k)
+	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
-		i -= 8;
+		xCoord -= 8;
 
-		for (k -= 8; j > 5 && world.isAirBlock(i, j, k); --j)
+		for (zCoord -= 8; yCoord > 5 && world.isAirBlock(xCoord, yCoord, zCoord); --yCoord)
 		{
 			;
 		}
 
-		if (j <= 4)
+		if (yCoord <= 4)
 		{
 			return false;
 		}
 		else
 		{
-			j -= 4;
+			yCoord -= 4;
 			boolean[] var6 = new boolean[2048];
 			int var7 = random.nextInt(4) + 4;
 			int i2;
@@ -78,14 +81,14 @@ public class WorldGenLakesTFC extends WorldGenerator
 
 						if (var33)
 						{
-							Material var12 = world.getBlockMaterial(i + i2, j + k4, k + j3);
+							Material var12 = world.getBlockMaterial(xCoord + i2, yCoord + k4, zCoord + j3);
 
 							if (k4 >= 4 && var12.isLiquid())
 							{
 								return false;
 							}
 
-							if (k4 < 4 && !var12.isSolid() && world.getBlockId(i + i2, j + k4, k + j3) != this.blockIndex)
+							if (k4 < 4 && !var12.isSolid() && world.getBlockId(xCoord + i2, yCoord + k4, zCoord + j3) != this.blockIndex)
 							{
 								return false;
 							}
@@ -102,7 +105,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 					{
 						if (var6[(i2 * 16 + j3) * 8 + k4])
 						{
-							world.setBlock(i + i2, j + k4, k + j3, k4 >= 4 ? 0 : this.blockIndex);
+							world.setBlock(xCoord + i2, yCoord + k4, zCoord + j3, k4 >= 4 ? 0 : this.blockIndex);
 						}
 					}
 				}
@@ -114,23 +117,24 @@ public class WorldGenLakesTFC extends WorldGenerator
 				{
 					for (k4 = 4; k4 < 8; ++k4)
 					{
-						int id = world.getBlockId(i + i2, j + k4 - 1, k + j3);
+						int id = world.getBlockId(xCoord + i2, yCoord + k4 - 1, zCoord + j3);
 						if (var6[(i2 * 16 + j3) * 8 + k4] && (id == Block.dirt.blockID || id == TFCBlocks.terraDirt.blockID
 								|| id == TFCBlocks.terraDirt2.blockID || id == TFCBlocks.terraGrass.blockID || id == TFCBlocks.terraGrass2.blockID || 
 								id == TFCBlocks.terraClayGrass.blockID || id == TFCBlocks.terraClayGrass2.blockID || 
 								id == TFCBlocks.terraClay.blockID || id == TFCBlocks.terraClay2.blockID || 
 								id == TFCBlocks.terraPeat.blockID || id == TFCBlocks.terraPeatGrass.blockID) && 
-								world.getSavedLightValue(EnumSkyBlock.Sky, i + i2, j + k4, k + j3) > 0)
+								world.getSavedLightValue(EnumSkyBlock.Sky, xCoord + i2, yCoord + k4, zCoord + j3) > 0)
 						{
-							TFCBiome var35 = (TFCBiome) world.getBiomeGenForCoords(i + i2, k + j3);
+							TFCBiome var35 = (TFCBiome) world.getBiomeGenForCoords(xCoord + i2, zCoord + j3);
 
 							if (var35.topBlock == Block.mycelium.blockID)
 							{
-								world.setBlock(i + i2, j + k4 - 1, k + j3, Block.mycelium.blockID);
+								world.setBlock(xCoord + i2, yCoord + k4 - 1, zCoord + j3, Block.mycelium.blockID);
 							}
 							else
 							{
-								world.setBlock(i + i2, j + k4 - 1, k + j3, var35.GrassID);
+								DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord + i2, zCoord + j3, 0);
+								world.setBlock(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFC_Core.getTypeForGrass(rockLayer1.data2));
 							}
 						}
 					}
@@ -149,33 +153,33 @@ public class WorldGenLakesTFC extends WorldGenerator
 						{
 							var33 = !var6[(i2 * 16 + j3) * 8 + k4] && (i2 < 15 && var6[((i2 + 1) * 16 + j3) * 8 + k4] || i2 > 0 && var6[((i2 - 1) * 16 + j3) * 8 + k4] || j3 < 15 && var6[(i2 * 16 + j3 + 1) * 8 + k4] || j3 > 0 && var6[(i2 * 16 + j3 - 1) * 8 + k4] || k4 < 7 && var6[(i2 * 16 + j3) * 8 + k4 + 1] || k4 > 0 && var6[(i2 * 16 + j3) * 8 + k4 - 1]);
 
-							if (var33 && (k4 < 4 || random.nextInt(2) != 0) && world.getBlockMaterial(i + i2, j + k4, k + j3).isSolid())
+							if (var33 && (k4 < 4 || random.nextInt(2) != 0) && world.getBlockMaterial(xCoord + i2, yCoord + k4, zCoord + j3).isSolid())
 							{
-								world.setBlockAndMetadata(i + i2, j + k4, k + j3, id, meta);
+								world.setBlockAndMetadata(xCoord + i2, yCoord + k4, zCoord + j3, id, meta);
 
-								if(world.getBlockId(i + i2 + 1, j + k4, k + j3) == 0)
+								if(world.getBlockId(xCoord + i2 + 1, yCoord + k4, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(i + i2 + 1, j + k4, k + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2 + 1, yCoord + k4, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
 								}
-								if(world.getBlockId(i + i2 - 1, j + k4, k + j3) == 0)
+								if(world.getBlockId(xCoord + i2 - 1, yCoord + k4, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(i + i2 - 1, j + k4, k + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2 - 1, yCoord + k4, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
 								}
-								if(world.getBlockId(i + i2, j + k4 + 1, k + j3) == 0)
+								if(world.getBlockId(xCoord + i2, yCoord + k4 + 1, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(i + i2, j + k4 + 1, k + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 + 1, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
 								}
-								if(world.getBlockId(i + i2, j + k4 - 1, k + j3) == 0)
+								if(world.getBlockId(xCoord + i2, yCoord + k4 - 1, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(i + i2, j + k4 - 1, k + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
 								}
-								if(world.getBlockId(i + i2, j + k4, k + j3 + 1) == 0)
+								if(world.getBlockId(xCoord + i2, yCoord + k4, zCoord + j3 + 1) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(i + i2, j + k4, k + j3 + 1, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3 + 1, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
 								}
-								if(world.getBlockId(i + i2, j + k4, k + j3 - 1) == 0)
+								if(world.getBlockId(xCoord + i2, yCoord + k4, zCoord + j3 - 1) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(i + i2, j + k4, k + j3 - 1, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3 - 1, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
 								}
 							}
 						}
@@ -191,9 +195,9 @@ public class WorldGenLakesTFC extends WorldGenerator
 					{
 						byte var34 = 4;
 
-						if (world.isBlockFreezable(i + i2, j + var34, k + j3))
+						if (world.isBlockFreezable(xCoord + i2, yCoord + var34, zCoord + j3))
 						{
-							world.setBlock(i + i2, j + var34, k + j3, Block.ice.blockID);
+							world.setBlock(xCoord + i2, yCoord + var34, zCoord + j3, Block.ice.blockID);
 						}
 					}
 				}

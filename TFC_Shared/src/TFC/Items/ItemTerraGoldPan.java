@@ -6,7 +6,7 @@ import java.util.Random;
 
 import TFC.Blocks.BlockTerraOre;
 import TFC.Core.Helper;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityTerraSluice;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import net.minecraft.src.*;
@@ -150,7 +150,7 @@ public class ItemTerraGoldPan extends Item
                 int blockAboveId = world.getBlockId(x, y+1, z);
                 int blockAboveMeta = world.getBlockMetadata(x, y+1, z);
 
-                if(TFCSettings.enableDebugMode)
+                if(TFC_Settings.enableDebugMode)
                     System.out.println(new StringBuilder().append(blockAboveId).append(" ").append(blockAboveMeta).toString());
 
                 if(blockAboveId == Block.waterStill.blockID && blockAboveMeta > 0)

@@ -42,6 +42,7 @@ import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.*;
 import TFC.TileEntities.*;
+import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.*;
 
@@ -63,16 +64,8 @@ public class TerraFirmaCraft implements ITickHandler
 	public static CommonProxy proxy;
 
 	//////////////////Features////////////////////
-//	public static int logPileGuiId = 0;
-//	public static int workbenchGuiId = 1;
-//	public static int toolRackGuiId = 2;
-//	public static int terraFirepitGuiId = 20;
-//	public static int terraAnvilGuiId = 21;
-//	public static int terraScribeGuiId = 22;
-//	public static int terraForgeGuiId = 23;
-//	public static int terraMetallurgyGuiId = 24;
-//	public static int terraSluiceGuiId = 25;
-	//public static int terraBloomeryGuiId = 26;
+	public static int RockLayer2Height = 110;
+	public static int RockLayer3Height = 55;
 	
 	public TerraFirmaCraft()
 	{
@@ -90,8 +83,7 @@ public class TerraFirmaCraft implements ITickHandler
 		//Load Items
 		TFCItems.Setup();
 
-		//Register Blocks
-		
+		//Register Generators		
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(100,150));
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
@@ -117,6 +109,7 @@ public class TerraFirmaCraft implements ITickHandler
 		proxy.registerSoundHandler();
 		
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "TFC", 1);
+		DimensionManager.registerProviderType(0, TFCProvider.class, true);
 	}
 
 	@Init
@@ -144,7 +137,7 @@ public class TerraFirmaCraft implements ITickHandler
 		proxy.registerRenderInformation();
 
 
-		if(TFCSettings.enableVanillaRecipes == false)
+		if(TFC_Settings.enableVanillaRecipes == false)
 		{
 			RemoveRecipe(new ItemStack(Item.pickaxeWood,1));
 			RemoveRecipe(new ItemStack(Item.axeWood,1));
@@ -158,7 +151,7 @@ public class TerraFirmaCraft implements ITickHandler
 		}
 		
 		//Register new Minecarts
-		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 0, new ItemStack(TFCItems.minecartEmpty));
+		//MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 0, new ItemStack(TFCItems.minecartEmpty));
 		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
 	}
 
@@ -282,10 +275,10 @@ public class TerraFirmaCraft implements ITickHandler
 			world = (World)tickData[0];
 
 
-			TFCSeasons.UpdateSeasons(world);
+			TFC_Time.UpdateSeasons(world);
 			for(Object p : world.playerEntities)
 			{
-				TFCHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
+				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
 			}
 		}
 

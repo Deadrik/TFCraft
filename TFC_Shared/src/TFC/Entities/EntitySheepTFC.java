@@ -6,8 +6,8 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 
 import net.minecraft.src.*;
 import net.minecraftforge.common.IShearable;
@@ -91,7 +91,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
         setSize(0.9F*t,0.9F*t);
         if(pregnant){
-			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x<i;x++){
 				EntitySheepTFC baby = new EntitySheepTFC(worldObj, this,mateSizeMod);

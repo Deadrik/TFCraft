@@ -9,7 +9,8 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Settings;
 
 public class MapGenRiverRavine256TFC extends MapGenBase
 {
@@ -23,11 +24,11 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 	    super.generate(par1IChunkProvider, par2World, par3, par4, id);
     }
 
-	protected void generateRavine(long par1, int par3, int par4, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
+	protected void generateRavine(long par1, int xCoord, int zCoord, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
 	{
 		Random var19 = new Random(par1);
-		double var20 = (double)(par3 * 16 + 8);
-		double var22 = (double)(par4 * 16 + 8);
+		double var20 = (double)(xCoord * 16 + 8);
+		double var22 = (double)(zCoord * 16 + 8);
 		float var24 = 0.0F;
 		float var25 = 0.0F;
 
@@ -90,12 +91,12 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 
 				if (par6 >= var20 - 16.0D - var53 * 2.0D && par10 >= var22 - 16.0D - var53 * 2.0D && par6 <= var20 + 16.0D + var53 * 2.0D && par10 <= var22 + 16.0D + var53 * 2.0D)
 				{
-					int var56 = MathHelper.floor_double(par6 - var53) - par3 * 16 - 1;
-					int var35 = MathHelper.floor_double(par6 + var53) - par3 * 16 + 1;
+					int var56 = MathHelper.floor_double(par6 - var53) - xCoord * 16 - 1;
+					int var35 = MathHelper.floor_double(par6 + var53) - xCoord * 16 + 1;
 					int var55 = MathHelper.floor_double(par8 - var30) - 1;
 					int var37 = MathHelper.floor_double(par8 + var30) + 1;
-					int var57 = MathHelper.floor_double(par10 - var53) - par4 * 16 - 1;
-					int var39 = MathHelper.floor_double(par10 + var53) - par4 * 16 + 1;
+					int var57 = MathHelper.floor_double(par10 - var53) - zCoord * 16 - 1;
+					int var39 = MathHelper.floor_double(par10 + var53) - zCoord * 16 + 1;
 
 					if (var56 < 0)
 					{
@@ -128,16 +129,16 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 					}
 
 					boolean var58 = false;
-					int var41;
-					int var44;
+					int x;
+					int z;
 
-					for (var41 = var56; !var58 && var41 < var35; ++var41)
+					for (x = var56; !var58 && x < var35; ++x)
 					{
 						for (int var42 = var57; !var58 && var42 < var39; ++var42)
 						{
 							for (int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43)
 							{
-								var44 = (var41 * 16 + var42) * 256 + var43;
+								z = (x * 16 + var42) * 256 + var43;
 
 								if (var43 >= 0 && var43 < 256)
 								{
@@ -146,7 +147,7 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 //										var58 = true;
 //									}
 
-									if (var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1)
+									if (var43 != var55 - 1 && x != var56 && x != var35 - 1 && var42 != var57 && var42 != var39 - 1)
 									{
 										var43 = var55;
 									}
@@ -157,14 +158,14 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 
 					if (!var58)
 					{
-						for (var41 = var56; var41 < var35; ++var41)
+						for (x = var56; x < var35; ++x)
 						{
-							double var59 = ((double)(var41 + par3 * 16) + 0.5D - par6) / var53;
+							double var59 = ((double)(x + xCoord * 16) + 0.5D - par6) / var53;
 
-							for (var44 = var57; var44 < var39; ++var44)
+							for (z = var57; z < var39; ++z)
 							{
-								double var45 = ((double)(var44 + par4 * 16) + 0.5D - par10) / var53;
-								int var47 = (var41 * 16 + var44) * 256 + var37;
+								double var45 = ((double)(z + zCoord * 16) + 0.5D - par10) / var53;
+								int var47 = (x * 16 + z) * 256 + var37;
 								boolean var48 = false;
 
 								if (var59 * var59 + var45 * var45 < 1.0D)
@@ -206,14 +207,12 @@ public class MapGenRiverRavine256TFC extends MapGenBase
                                                         blockArray[var47] = 0;
                                                         metaArray[var47] = 0;
                                                     }
-
-													if (var48 && blockArray[var47 - 1] == (byte)TFCBlocks.terraDirt.blockID)
+												    
+												    DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt((int)x + xCoord * 16, (int)z + zCoord * 16, 0);
+												    
+													if (var48 && TFC_Core.isDirt(blockArray[var47 - 1]))
 													{
-														blockArray[var47 - 1] = (byte) ((TFCBiome)this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16)).GrassID;
-													}
-													else if (var48 && blockArray[var47 - 1] == (byte)TFCBlocks.terraDirt2.blockID)
-													{
-														blockArray[var47 - 1] = (byte) ((TFCBiome)this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16)).GrassID;
+														blockArray[var47 - 1] = (byte) TFC_Core.getTypeForGrass(rockLayer1.data2);
 													}
 
 												}

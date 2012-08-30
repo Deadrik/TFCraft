@@ -15,7 +15,7 @@ import cpw.mods.fml.common.network.Player;
 
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
@@ -255,9 +255,9 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             else if(type == 2)//Keypress changes
             {
                 byte change;
-                if(keyTimer + 1 < TFCSeasons.getTotalTicks())
+                if(keyTimer + 1 < TFC_Time.getTotalTicks())
                 {
-                    keyTimer = TFCSeasons.getTotalTicks();
+                    keyTimer = TFC_Time.getTotalTicks();
                     try 
                     {
                         change = dis.readByte();
@@ -282,7 +282,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     try 
                     {
                         seed = dis.readLong();
-                        TFCSeasons.dayLength = dis.readLong();
+                        TFC_Time.dayLength = dis.readLong();
 
                     } catch (IOException e) 
                     {
@@ -298,7 +298,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
                     {
                         dos.writeByte(3);
                         dos.writeLong(world.getSeed());
-                        dos.writeLong(TFCSeasons.dayLength);
+                        dos.writeLong(TFC_Time.dayLength);
 
                     } 
                     catch (IOException e)

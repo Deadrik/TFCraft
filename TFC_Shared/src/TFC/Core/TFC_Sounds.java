@@ -1,6 +1,6 @@
 package TFC.Core;
 
-public class TFCSounds 
+public class TFC_Sounds 
 {
 	private static final String LOCATION = "sounds/tfc/";
 	private static final String PREFIX = "sounds.tfc.";

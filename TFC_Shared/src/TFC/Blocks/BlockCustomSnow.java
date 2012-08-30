@@ -2,7 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Time;
 import TFC.WorldGen.TFCBiome;
 
 import net.minecraft.src.*;

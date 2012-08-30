@@ -2,8 +2,8 @@ package TFC.Entities;
 
 import java.util.Random;
 
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 
 import net.minecraft.src.*;
 
@@ -226,7 +226,7 @@ public class EntityBear extends EntityTameableTFC
 			worldObj.setEntityState (this, (byte) 8);
 		}
 		if(pregnant){
-			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x<i;x++){
 				EntityBear baby = new EntityBear(worldObj, this,mateSizeMod);
@@ -238,7 +238,7 @@ public class EntityBear extends EntityTameableTFC
 
 
 
-		if (TFCSeasons.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
+		if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
 			int i = rand.nextInt(3);
 			if (mateSizeMod == 0){
 				this.mateSizeMod = (float) (((rand.nextInt (5) - 2) / 10f) + 1F);

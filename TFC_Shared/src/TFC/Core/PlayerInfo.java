@@ -19,7 +19,7 @@ public class PlayerInfo
     public void switchChiselMode()
     {
         ChiselMode = ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : 0;
-        if(TFCSettings.enableDebugMode)
+        if(TFC_Settings.enableDebugMode)
             System.out.println(ChiselMode);
     }
 }

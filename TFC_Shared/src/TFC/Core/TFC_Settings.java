@@ -6,7 +6,7 @@ import net.minecraft.src.TerraFirmaCraft;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
-public class TFCSettings 
+public class TFC_Settings 
 {
 	public static Configuration config;
 

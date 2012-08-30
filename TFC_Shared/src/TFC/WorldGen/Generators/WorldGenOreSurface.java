@@ -4,7 +4,9 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
@@ -50,11 +52,12 @@ public class WorldGenOreSurface implements IWorldGenerator
     {
         for(int n = 0; n < Layers.length/2;)
         {
-            TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-            if((biome.SurfaceType == Layers[n] && (biome.SurfaceMeta == Layers[n+1] || Layers[n+1] == -1)) || 
-                    (biome.Layer1Type == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (biome.Layer2Type == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (biome.Layer3Type == Layers[n] && (biome.Layer3Meta == Layers[n+1] || Layers[n+1] == -1)))
+            DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
+            DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
+            DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
+            if((rockLayer1.data1 == Layers[n] && (rockLayer1.data2 == Layers[n+1] || Layers[n+1] == -1)) || 
+                    (rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
+                    (rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
             {
                 new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generate(
                         world, rand, chunkX, chunkZ, min, max);
@@ -68,11 +71,12 @@ public class WorldGenOreSurface implements IWorldGenerator
     {
         for(int n = 0; n < Layers.length/2;)
         {
-            TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(chunkX, chunkZ);
-            if((biome.SurfaceType == Layers[n] && (biome.SurfaceMeta == Layers[n+1] || Layers[n+1] == -1)) || 
-                    (biome.Layer1Type == Layers[n] && (biome.Layer1Meta == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (biome.Layer2Type == Layers[n] && (biome.Layer2Meta == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (biome.Layer3Type == Layers[n] && (biome.Layer3Meta == Layers[n+1] || Layers[n+1] == -1)))
+        	DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
+            DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
+            DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
+            if((rockLayer1.data1 == Layers[n] && (rockLayer1.data2 == Layers[n+1] || Layers[n+1] == -1)) || 
+                    (rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
+                    (rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
             {
                 new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generateVein(
                         world, rand, chunkX, chunkZ, min, max);

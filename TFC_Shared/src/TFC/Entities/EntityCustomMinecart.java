@@ -59,6 +59,11 @@ public class EntityCustomMinecart extends EntityMinecart
      */
     public int getSizeInventory()
     {
-        return (minecartType == 1 && getClass() == EntityCustomMinecart.class ? 18 : 0);
+        return 18;
+    }
+    
+    public boolean isStorageCart()
+    {
+        return true;
     }
 }

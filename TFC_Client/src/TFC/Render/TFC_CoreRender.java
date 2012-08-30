@@ -16,14 +16,16 @@ import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core.Direction;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.BiomeGenBase;
@@ -63,7 +65,7 @@ public class TFC_CoreRender
         if(over == -1 && (type == TFCBlocks.terraOre.blockID || type == TFCBlocks.terraOre2.blockID || type == TFCBlocks.terraOre3.blockID))
         {
             BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
-            renderblocks.overrideBlockTexture = getRockTexture(par3,(TFCBiome)biome);
+            renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, par2, par3, par4);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
             renderblocks.overrideBlockTexture = over;
         }
@@ -1129,7 +1131,7 @@ public class TFC_CoreRender
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
         Random R = new Random(meta+i*k);
 
-        renderblocks.overrideBlockTexture = getRockTexture(j,(TFCBiome)biome);
+        renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, i,j,k);
 
         block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
         renderblocks.renderStandardBlock(block, i, j, k);
@@ -1740,7 +1742,7 @@ public class TFC_CoreRender
 
         if(over == -1)
         {
-            renderblocks.overrideBlockTexture = getRockTexture(yCoord,(TFCBiome) biome);
+            renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, xCoord, yCoord, zCoord);
             renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
             renderblocks.overrideBlockTexture = over;
 
@@ -1754,16 +1756,17 @@ public class TFC_CoreRender
         return true;
     }
 
-    public static int getRockTexture(int yCoord, TFCBiome biome) {
+    public static int getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) {
         int var27;
-        if(yCoord <= biome.Layer3)
-            var27 = Block.blocksList[biome.Layer3Type].getBlockTextureFromSideAndMetadata(5, biome.Layer3Meta);
-        else if(yCoord > biome.Layer3 && yCoord <= biome.Layer2)
-            var27 = Block.blocksList[biome.Layer2Type].getBlockTextureFromSideAndMetadata(5, biome.Layer2Meta);
-        else if(yCoord > biome.Layer2 && yCoord <= biome.Layer1)
-            var27 = Block.blocksList[biome.Layer1Type].getBlockTextureFromSideAndMetadata(5, biome.Layer1Meta);
+        DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+        DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
+        DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
+        if(yCoord <= TerraFirmaCraft.RockLayer3Height)
+            var27 = Block.blocksList[rockLayer3.data1].getBlockTextureFromSideAndMetadata(5, rockLayer3.data2);
+        else if(yCoord > TerraFirmaCraft.RockLayer3Height && yCoord <= TerraFirmaCraft.RockLayer2Height)
+            var27 = Block.blocksList[rockLayer2.data1].getBlockTextureFromSideAndMetadata(5, rockLayer2.data2);
         else
-            var27 = Block.blocksList[biome.SurfaceType].getBlockTextureFromSideAndMetadata(5, biome.SurfaceMeta);
+            var27 = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(5, rockLayer1.data2);
         return var27;
     }
 
@@ -2494,7 +2497,7 @@ public class TFC_CoreRender
 
             renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
 
-            if(index.inBloom(TFCSeasons.currentMonth))
+            if(index.inBloom(TFC_Time.currentMonth))
             {
                 texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
                 if(texIndex!= -1)
@@ -2600,7 +2603,7 @@ public class TFC_CoreRender
             texIndex = block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
             renderblocks.renderTopFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
-            if(index.inBloom(TFCSeasons.currentMonth))
+            if(index.inBloom(TFC_Time.currentMonth))
             {
                 texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
                 if(texIndex!= -1)
@@ -3050,11 +3053,11 @@ public class TFC_CoreRender
         FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(world.getBlockId(x, y, z), meta & 7));
         if(index != null)
         {
-            if(index.inBloom(TFCSeasons.currentMonth))//blooming
+            if(index.inBloom(TFC_Time.currentMonth))//blooming
             {
                 out = 96+(meta & 7);
             }
-            else if(index.inHarvest(TFCSeasons.currentMonth) && meta >= 8)//fruit
+            else if(index.inHarvest(TFC_Time.currentMonth) && meta >= 8)//fruit
             {
                 out = 80+(meta & 7);
             }
@@ -3574,9 +3577,9 @@ public class TFC_CoreRender
         int texIndex;
         float colorMult = 0.78F;
 
-        boolean xInRange = xCoord > ModLoader.getMinecraftInstance().renderViewEntity.posX-TFCSettings.leavesLOD && xCoord < ModLoader.getMinecraftInstance().renderViewEntity.posX+TFCSettings.leavesLOD;
-        boolean yInRange = yCoord > ModLoader.getMinecraftInstance().renderViewEntity.posY-TFCSettings.leavesLOD && yCoord < ModLoader.getMinecraftInstance().renderViewEntity.posY+TFCSettings.leavesLOD;
-        boolean zInRange = zCoord > ModLoader.getMinecraftInstance().renderViewEntity.posZ-TFCSettings.leavesLOD && zCoord < ModLoader.getMinecraftInstance().renderViewEntity.posZ+TFCSettings.leavesLOD;
+        boolean xInRange = xCoord > ModLoader.getMinecraftInstance().renderViewEntity.posX-TFC_Settings.leavesLOD && xCoord < ModLoader.getMinecraftInstance().renderViewEntity.posX+TFC_Settings.leavesLOD;
+        boolean yInRange = yCoord > ModLoader.getMinecraftInstance().renderViewEntity.posY-TFC_Settings.leavesLOD && yCoord < ModLoader.getMinecraftInstance().renderViewEntity.posY+TFC_Settings.leavesLOD;
+        boolean zInRange = zCoord > ModLoader.getMinecraftInstance().renderViewEntity.posZ-TFC_Settings.leavesLOD && zCoord < ModLoader.getMinecraftInstance().renderViewEntity.posZ+TFC_Settings.leavesLOD;
 
         if (renderAll || (xInRange && yInRange && zInRange) || (!firstTry &&
                 block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord-1, zCoord, 0)))

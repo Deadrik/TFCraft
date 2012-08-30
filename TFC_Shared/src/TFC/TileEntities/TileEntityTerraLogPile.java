@@ -2,7 +2,7 @@ package TFC.TileEntities;
 
 import java.util.Random;
 
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
@@ -182,7 +182,7 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
 
     public void updateEntity()
     {
-        TFCHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
+        TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
     }
 
     public void writeToNBT(NBTTagCompound nbttagcompound)

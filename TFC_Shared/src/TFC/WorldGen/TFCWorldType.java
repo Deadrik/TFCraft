@@ -25,14 +25,16 @@ public class TFCWorldType extends WorldType
 
     public IChunkProvider getChunkGenerator(World world)
     {
-        return new ChunkProviderGenerateTFC(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
+        return new TFCChunkProviderGenerate(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
     }
 
+    @Override
     public int getMinimumSpawnHeight(World world)
     {
         return 145;
     }
 
+    @Override
     public double getHorizon(World world)
     {
         return 144.0D;

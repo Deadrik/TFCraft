@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 
 import net.minecraft.src.*;
 
@@ -46,7 +46,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	public EntityAnimalTFC(World par1World)
 	{
 		super(par1World);
-		animalID = TFCSeasons.getTotalTicks() + entityId;
+		animalID = TFC_Time.getTotalTicks() + entityId;
 		hunger = 168000;
 		pickUp = 0;
 		panic = 0;
@@ -67,7 +67,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
 		tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (float) (((rand.nextInt (degreeOfDiversion) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex);
-		birthTime = TFCSeasons.getTotalTicks();
+		birthTime = TFC_Time.getTotalTicks();
 		adultTime = birthTime;
 		adultAge = 90;		
 	}
@@ -75,7 +75,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	public EntityAnimalTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
 		super(par1World);
-		animalID = TFCSeasons.getTotalTicks() + entityId;
+		animalID = TFC_Time.getTotalTicks() + entityId;
 		hunger = 168000;
 		pickUp = 0;
 		breeding = 0;
@@ -95,15 +95,15 @@ public class EntityAnimalTFC extends EntityAnimal
 		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
 		tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (float) (((rand.nextInt (getDegree()+1) - getDegree()/2) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
-		birthTime = TFCSeasons.getTotalTicks();
+		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 90;
-		adultTime = birthTime + TFCSettings.dayLength * adultAge;
+		adultTime = birthTime + TFC_Settings.dayLength * adultAge;
 	}
 
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		adultTime = TFCSeasons.getTotalTicks() - par1;
+		adultTime = TFC_Time.getTotalTicks() - par1;
 		dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
 
@@ -155,7 +155,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		if (panic > 0){
 			panic--;
 		}
-		long i = TFCSeasons.getTotalTicks() - adultTime;
+		long i = TFC_Time.getTotalTicks() - adultTime;
 
 		if (i < 0)
 		{
@@ -239,11 +239,11 @@ public class EntityAnimalTFC extends EntityAnimal
 			}
 		}
 		
-		if(TFCSeasons.getTotalTicks() > (birthTime + adultAge*TFCSettings.dayLength)){
+		if(TFC_Time.getTotalTicks() > (birthTime + adultAge*TFC_Settings.dayLength)){
 	          setGrowingAge(0);
 	          }
 	          else if (isChild()){
-	               setGrowingAge((int)(TFCSeasons.getTotalTicks() - (birthTime + adultAge*TFCSettings.dayLength)));
+	               setGrowingAge((int)(TFC_Time.getTotalTicks() - (birthTime + adultAge*TFC_Settings.dayLength)));
 	          }
 	}
 
@@ -444,15 +444,15 @@ public class EntityAnimalTFC extends EntityAnimal
 			targetMate.mate(this);
 			return;
 		}
-		conception = TFCSeasons.getTotalTicks();
+		conception = TFC_Time.getTotalTicks();
 		pregnant = true;
-		targetMate.setGrowingAge (TFCSettings.dayLength);
+		targetMate.setGrowingAge (TFC_Settings.dayLength);
 		resetInLove ();
 		targetMate.resetInLove ();
 		mateSizeMod = targetMate.size_mod;
 	}
 	public void giveBirth (EntityAnimalTFC entityanimal){
-		entityanimal.setGrowingAge (-TFCSettings.dayLength * entityanimal.adultAge);
+		entityanimal.setGrowingAge (-TFC_Settings.dayLength * entityanimal.adultAge);
 		//System.out.println("yep");
 		//System.out.println(posX);
 		entityanimal.setLocationAndAngles (posX,posY,posZ, 0.0F, 0.0F);

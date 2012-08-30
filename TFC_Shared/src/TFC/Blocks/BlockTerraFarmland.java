@@ -2,8 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityFarmland;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.*;
 
 
@@ -112,7 +115,8 @@ public class BlockTerraFarmland extends BlockContainer
 
 		if (var6.isSolid())
 		{
-			int id = ((TFCBiome)par1World.getBiomeGenForCoords(par2, par4)).DirtID;
+			DataLayer rockLayer = ((TFCWorldChunkManager)par1World.getWorldChunkManager()).getRockLayerAt(par2, par4, 0);
+			int id = TFC_Core.getTypeForDirt(rockLayer.data2);
 			par1World.setBlockWithNotify(par2, par3, par4, id);
 		}
 	}

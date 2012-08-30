@@ -19,7 +19,7 @@ import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TFCItems;
 
-public class TFCHeat 
+public class TFC_ItemHeat 
 {
 	
 	static
@@ -343,7 +343,7 @@ public class TFCHeat
 	public static String getHeatColor(float temp, float meltTemp, float boilTemp)
 	{
 		String phrase = "";
-		if(TFCSettings.BlacksmithModeHeatScale)
+		if(TFC_Settings.BlacksmithModeHeatScale)
 		{
 			if(temp < 80)
 			{
@@ -631,7 +631,7 @@ public class TFCHeat
 					float temp = comp.getFloat("temperature");
 					if(temp > ambient)
 					{
-						temp -= TFCHeat.getTempDecrease(inventory[i]);
+						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
 						comp.setFloat("temperature",temp);
 					}
 					inventory[i].setTagCompound(comp);
@@ -677,9 +677,9 @@ public class TFCHeat
                     float temp = comp.getFloat("temperature");
                     if(temp > ambient)
                     {
-                        temp -= TFCHeat.getTempDecrease(inventory[i]);
-                        temp -= TFCHeat.getTempDecrease(inventory[i]);
-                        temp -= TFCHeat.getTempDecrease(inventory[i]);
+                        temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
+                        temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
+                        temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
                         comp.setFloat("temperature",temp);
                     }
                     inventory[i].setTagCompound(comp);
@@ -727,15 +727,4 @@ public class TFCHeat
 		return true;
 	}
 
-	public static float getAmbient(BiomeGenBase biome)
-	{
-        float a = biome.getFloatTemperature();
-        a = a / 2.5F;//Normalize the value to between 0 and 1
-        return (62 * a-20)+17f;
-	}
-	
-	public static float getNormalizedTemp(float a)
-    {
-        return a;
-    }
 }

@@ -2,7 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,7 +21,7 @@ public class ItemCustomHoe extends ItemHoe
 	
 	public void addInformation(ItemStack is, List arraylist) 
     {
-        if(TFCSettings.enableDebugMode)
+        if(TFC_Settings.enableDebugMode)
             arraylist.add("Damage: "+is.getItemDamage());
     }
 

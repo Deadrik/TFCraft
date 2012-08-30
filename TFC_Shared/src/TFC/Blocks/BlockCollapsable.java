@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.Core.Helper;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.Entities.EntityFallingStone;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
@@ -176,7 +176,7 @@ public class BlockCollapsable extends BlockTerra
 
     public Boolean isUnderLoad(World world, int i, int j, int k)
     {
-        for(int x = 1; x <= TFCSettings.minimumRockLoad; x++)
+        for(int x = 1; x <= TFC_Settings.minimumRockLoad; x++)
         {
             if(!world.isBlockOpaqueCube(i, j+x, k))
             {
@@ -252,7 +252,7 @@ public class BlockCollapsable extends BlockTerra
             entityplayer.addExhaustion(0.075F);
         }
         Random R = new Random();
-        if(R.nextInt(TFCSettings.initialCollapseRatio) == 0)
+        if(R.nextInt(TFC_Settings.initialCollapseRatio) == 0)
         {
             for(int x1 = -1; x1 < 2; x1++)
             {
@@ -270,7 +270,7 @@ public class BlockCollapsable extends BlockTerra
                                 {
                                     double distance = Math.sqrt(Math.pow(i-(i+x),2) + Math.pow(j-(j+y),2) + Math.pow(k-(k+z),2));
                                     
-                                    if(R.nextInt(100) < TFCSettings.propogateCollapseChance && distance < 35)
+                                    if(R.nextInt(100) < TFC_Settings.propogateCollapseChance && distance < 35)
                                     {
                                         if(tryToFall(world, i+x, j+y, k+z,world.getBlockMetadata( i+x, j+y, k+z)))
                                         {
@@ -278,7 +278,7 @@ public class BlockCollapsable extends BlockTerra
                                             while(done < height)
                                             {
                                                 done++;
-                                                if(R.nextInt(100) < TFCSettings.propogateCollapseChance) {
+                                                if(R.nextInt(100) < TFC_Settings.propogateCollapseChance) {
                                                     tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
                                                 } else {
                                                     done = height;

@@ -2,6 +2,8 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 import TFC.WorldGen.Generators.WorldGenLakesTFC;
 
@@ -23,7 +25,7 @@ import net.minecraft.src.SpawnerAnimals;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
+public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
 	/** RNG. */
 	private Random rand;
@@ -54,14 +56,14 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 	private double[] noiseArray;
 	private double[] stoneNoise = new double[256];
 
-	private MapGenRiverRavineTFC underRiverGen = new MapGenRiverRavineTFC();
-
 	/** The biomes that are used to generate the chunk */
 	private BiomeGenBase[] biomesForGeneration;
 
 	private DataLayer[] rockLayer1;
 	private DataLayer[] rockLayer2;
 	private DataLayer[] rockLayer3;
+	private DataLayer[] evtLayer;
+	private DataLayer[] rainfallLayer;
 
 	/** A double array that hold terrain noise from noiseGen3 */
 	double[] noise3;
@@ -84,7 +86,7 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 	float[] parabolicField;
 	int[][] field_73219_j = new int[32][32];
 
-	public ChunkProviderGenerateTFC(World par1World, long par2, boolean par4) {
+	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4) {
 		super(par1World, par2, par4);
 
 		this.worldObj = par1World;
@@ -112,10 +114,12 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 
 		this.generateTerrainHigh(par1, par2, ids2);
 		
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
+		biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 		rockLayer1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer1, par1 * 16, par2 * 16, 16, 16, 0);
 		rockLayer2 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer2, par1 * 16, par2 * 16, 16, 16, 1);
 		rockLayer3 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer3, par1 * 16, par2 * 16, 16, 16, 2);
+		evtLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadEVTLayerGeneratorData(evtLayer, par1 * 16, par2 * 16, 16, 16);
+		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, par1 * 16, par2 * 16, 16, 16);
 
 		replaceBlocksForBiomeHigh(par1, par2, ids2,meta2, rand, ids3, meta3);
 		replaceBlocksForBiomeLow(par1, par2, ids,meta, rand, ids3, meta3);
@@ -195,8 +199,7 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 
 	public boolean canSnowAt(World world, int par1, int par2, int par3)
 	{
-		TFCBiome var4 = (TFCBiome)world.getBiomeGenForCoords(par1, par3);
-		float var5 = var4.getHeightAdjustedTemperature(par2);
+		float var5 = TFC_Climate.getHeightAdjustedTemp(par2, par3);
 
 		if (var5 > 0F)
 		{
@@ -227,9 +230,8 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 		int var7 = var4 + 1;
 		byte var8 = 17;
 		int var9 = var4 + 1;
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, var7 + 5, var9 + 5);
+		this.biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, var7 + 5, var9 + 5);
 		this.noiseArray = this.initializeNoiseFieldHigh(this.noiseArray, par1 * var4, 0, par2 * var4, var7, var8, var9);
-
 
 		for (int var10 = 0; var10 < var4; ++var10)
 		{
@@ -443,16 +445,12 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 		return par1ArrayOfDouble;
 	}
 
-	/**This version performs all the intial block placement in the initial loop, eliminating
-	 * a major source of chunkloader lag.*/
 	public void replaceBlocksForBiomeHigh(int par1, int par2, byte[] blockArray, byte[] metaArray, Random rand, byte[] blockArrayBig, byte[] metaArrayBig)
 	{
 		int var5 = 16;
 		double var6 = 0.03125D;
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 		
-		
-
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
@@ -461,19 +459,24 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 				DataLayer rock1 = rockLayer1[zCoord + xCoord * 16];
 				DataLayer rock2 = rockLayer2[zCoord + xCoord * 16];
 				DataLayer rock3 = rockLayer3[zCoord + xCoord * 16];
+				DataLayer evt = evtLayer[zCoord + xCoord * 16];
+				DataLayer rainfall = rainfallLayer[zCoord + xCoord * 16];
 
-				float var11 = biomegenbase.getFloatTemperature();
 				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
-				int var14 = biomegenbase.GrassID;
-				int var15 = biomegenbase.DirtID;
-				int soilMeta = 0;
+				int surfaceBlock = TFC_Core.getTypeForGrass(rock1.data2);
+				int subSurfaceBlock = TFC_Core.getTypeForDirt(rock1.data2);
+				int soilMeta = TFC_Core.getMetaForGrass(rock1.data1, rock1.data2);
+				
+				float _temp = TFC_Climate.getBioTemperature(par2*16);
 
 				for (int height = 127; height >= 0; --height)
 				{
 					int indexBig = ((zCoord * 16 + xCoord) * 256 + height + 128);
 					int index = ((zCoord * 16 + xCoord) * 128 + height);
 					metaArrayBig[indexBig] = 0;
+					
+					float temp = TFC_Climate.adjustHeightToTemp(height, _temp);
 
 					int var18 = blockArray[index];
 					blockArrayBig[indexBig] = blockArray[index];
@@ -489,8 +492,6 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 						blockArrayBig[indexBig] = (byte) rock1.data1; 
 						metaArrayBig[indexBig] = (byte)  rock1.data2;    
 						
-						
-
 						if(rock1.data1 == TFCBlocks.terraStoneIgIn.blockID)
 							soilMeta = rock1.data2;
 				        else if(rock1.data1 == TFCBlocks.terraStoneSed.blockID)
@@ -500,38 +501,56 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 				        else
 				        	soilMeta = rock1.data2+17;
 				            
-
-				        if(soilMeta < 16)
+						
+						
+						//First we check to see if its a cold desert
+						if(((evt.floatdata1 >= 0.125f && evt.floatdata1 <= 0.5f) && 
+								(rainfall.floatdata1 >= 62.5f && rainfall.floatdata1 <= 250)) && 
+								temp < 1.5f)
+						{
+							surfaceBlock = Block.sand.blockID;
+							subSurfaceBlock = Block.sand.blockID;
+						}
+						//Next we check for all other warm deserts
+						else if(((evt.floatdata1 >= 2f && evt.floatdata1 <= 16f) && 
+								(rainfall.floatdata1 >= 62.5f && rainfall.floatdata1 <= 125)))
+						{
+							surfaceBlock = Block.sand.blockID;
+							subSurfaceBlock = Block.sand.blockID;
+						}
+						else if(soilMeta < 16)
 				        {
-				            var14 = TFCBlocks.terraGrass.blockID;
-				            var15 = TFCBlocks.terraDirt.blockID;
+				            surfaceBlock = TFCBlocks.terraGrass.blockID;
+				            subSurfaceBlock = TFCBlocks.terraDirt.blockID;
 				        }
 				        else
 				        {
-				            var14 = TFCBlocks.terraGrass2.blockID;
-				            var15 = TFCBlocks.terraDirt2.blockID;
+				            surfaceBlock = TFCBlocks.terraGrass2.blockID;
+				            subSurfaceBlock = TFCBlocks.terraDirt2.blockID;
 				        }
+				        
+				        
 
 						if (var13 == -1)
 						{
 							if (var12 <= 0)
 							{
-								var14 = 0;
+								surfaceBlock = 0;
 							}
 
-							if (height < var5 && var14 == 0)
+							if (height < var5 && surfaceBlock == 0)
 							{
-								if (var11 < 0.15F)
+								if (temp < 0.15F)
 								{
-									var14 = Block.ice.blockID;
+									surfaceBlock = Block.ice.blockID;
 								}
 								else if (biomegenbase.getFloatRain() == 0)
 								{
-									var14 = 0;
+									surfaceBlock = 0;
 								}
 								else
 								{
-									var14 = Block.waterStill.blockID;
+									surfaceBlock = Block.waterStill.blockID;
 								}
 							}
 
@@ -539,25 +558,25 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 
 							if (height >= var5 - 1 && index+1 < blockArray.length && blockArray[index+1] != Block.waterStill.blockID)
 							{
-								blockArrayBig[indexBig] = (byte) var14;
-								metaArrayBig[indexBig] = (byte) biomegenbase.TopSoilMetaID;
+								blockArrayBig[indexBig] = (byte) surfaceBlock;
+								metaArrayBig[indexBig] = (byte) soilMeta;
 							}
 							else
 							{
-								blockArrayBig[indexBig] = (byte) var15;
-								metaArrayBig[indexBig] = (byte) biomegenbase.TopSoilMetaID;
+								blockArrayBig[indexBig] = (byte) subSurfaceBlock;
+								metaArrayBig[indexBig] = (byte) soilMeta;
 							}
 						}
 						else if (var13 > 0)
 						{
 							--var13;
-							blockArrayBig[indexBig] = (byte) var15;
-							metaArrayBig[indexBig] = (byte) biomegenbase.TopSoilMetaID;
+							blockArrayBig[indexBig] = (byte) subSurfaceBlock;
+							metaArrayBig[indexBig] = (byte) soilMeta;
 
-							if (var13 == 0 && var15 == Block.sand.blockID)
+							if (var13 == 0 && subSurfaceBlock == Block.sand.blockID)
 							{
 								var13 = rand.nextInt(4);
-								var15 = Block.sandStone.blockID;
+								subSurfaceBlock = Block.sandStone.blockID;
 							}
 						}
 
@@ -606,9 +625,8 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 				float var11 = biomegenbase.getFloatTemperature();
 				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
-				int var14 = biomegenbase.GrassID;
-				int var15 = biomegenbase.DirtID;
 				
+				int top = 0;
 
 				for (int height = 127; height >= 0; --height)
 				{
@@ -684,6 +702,14 @@ public class ChunkProviderGenerateTFC extends ChunkProviderGenerate
 						{
 							blockArrayBig[indexBig] = (byte) rock1.data1; 
 							metaArrayBig[indexBig] = (byte) rock1.data2;
+						}
+						
+						if (var13 == -1)
+						{
+							if (var12 <= 0)
+							{
+								
+							}
 						}
 					}
 				}

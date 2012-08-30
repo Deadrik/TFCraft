@@ -4,7 +4,7 @@ import java.util.List;
 
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
@@ -51,7 +51,7 @@ public class ItemTerra extends Item
 
             if(stackTagCompound.hasKey("temperature"))
             {
-                TFCHeat.HandleContainerHeat(world, new ItemStack[]{is}, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+                TFC_ItemHeat.HandleContainerHeat(world, new ItemStack[]{is}, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
             }
         }
     }
@@ -77,9 +77,9 @@ public class ItemTerra extends Item
                 if(meltTemp != -1)
                 {
                     if(is.itemID == Item.stick.shiftedIndex)
-                        arraylist.add(TFCHeat.getHeatColorTorch(temp, meltTemp));
+                        arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
                     else
-                        arraylist.add(TFCHeat.getHeatColor(temp, meltTemp, boilTemp));
+                        arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));
                 }
             }
             if(stackTagCompound.hasKey("itemCraftingValue") && stackTagCompound.getByte("itemCraftingValue") != 0)

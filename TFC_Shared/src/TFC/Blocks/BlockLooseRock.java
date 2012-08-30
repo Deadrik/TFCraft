@@ -3,7 +3,10 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.*;
 
 public class BlockLooseRock extends BlockTerra
@@ -25,14 +28,11 @@ public class BlockLooseRock extends BlockTerra
         return true;
     }
 
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int xCoord, int yCoord, int zCoord, int l)
 	{		
-	    TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(i, k);
-	    int off = 0;
+	    TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(xCoord, zCoord);
 	    
-	    if(biome.SurfaceType == TFCBlocks.terraStoneSed.blockID) off = 3;
-	    else if(biome.SurfaceType == TFCBlocks.terraStoneIgEx.blockID) off = 13;
-	    else if(biome.SurfaceType == TFCBlocks.terraStoneMM.blockID) off = 17;
+	    DataLayer rockLayer = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 	    
 	    ArrayList coreSample = new ArrayList<Item>();
 	    ArrayList coreSampleStacks = new ArrayList<ItemStack>();
@@ -41,11 +41,11 @@ public class BlockLooseRock extends BlockTerra
         {
             for(int z = -15; z <= 15; z++)
             {
-                for(int y = j; y > j-35; y--)
+                for(int y = yCoord; y > yCoord-35; y--)
                 {
-                    if(world.getBlockId(i+x, y, k+z) == TFCBlocks.terraOre.blockID)
+                    if(world.getBlockId(xCoord+x, y, zCoord+z) == TFCBlocks.terraOre.blockID)
                     {
-                        int m = world.getBlockMetadata(i+x, y, k+z);
+                        int m = world.getBlockMetadata(xCoord+x, y, zCoord+z);
                         if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))
                         {
                             //coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
@@ -63,10 +63,10 @@ public class BlockLooseRock extends BlockTerra
 	    
 	    if(!coreSampleStacks.isEmpty() && R.nextInt(3) == 0)
 	    {
-	        dropBlockAsItem_do(world, i, j, k,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
+	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
 	    }
 	    else
-	        dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1, biome.SurfaceMeta+off));
+	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getMetaForGrass(rockLayer.data1, rockLayer.data2)));
 	    
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}

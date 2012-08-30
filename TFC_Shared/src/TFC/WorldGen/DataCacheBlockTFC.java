@@ -4,21 +4,21 @@ import TFC.WorldGen.GenLayers.GenLayerTFC;
 
 public class DataCacheBlockTFC
 {
-    /** The array of biome types stored in this BiomeCacheBlock. */
+    /** The array of data types stored in this DataCacheBlockTFC. */
     public DataLayer[] data;
     
     private int index;
 
-    /** The x coordinate of the BiomeCacheBlock. */
+    /** The x coordinate of the DataCacheBlockTFC. */
     public int xPosition;
 
-    /** The z coordinate of the BiomeCacheBlock. */
+    /** The z coordinate of the DataCacheBlockTFC. */
     public int zPosition;
 
-    /** The last time this BiomeCacheBlock was accessed, in milliseconds. */
+    /** The last time this DataCacheBlockTFC was accessed, in milliseconds. */
     public long lastAccessTime;
     
-    /** The BiomeCache object that contains this BiomeCacheBlock */
+    /** The DataCache object that contains this DataCacheBlockTFC */
     final DataCache theDataCache;
 
     public DataCacheBlockTFC(DataCache datacache, GenLayerTFC indexLayers, int par2, int par3,int ind)
@@ -33,7 +33,7 @@ public class DataCacheBlockTFC
     }
 
     /**
-     * Returns the BiomeGenBase related to the x, z position from the cache block.
+     * Returns the Datalayer related to the x, z position from the cache block.
      */
     public DataLayer getDataLayerAt(int par1, int par2)
     {

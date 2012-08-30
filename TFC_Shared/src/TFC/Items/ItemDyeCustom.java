@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Items;
 
 import java.util.ArrayList;
 import java.util.List;

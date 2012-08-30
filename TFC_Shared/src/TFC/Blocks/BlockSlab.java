@@ -6,7 +6,7 @@ import java.util.Random;
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;

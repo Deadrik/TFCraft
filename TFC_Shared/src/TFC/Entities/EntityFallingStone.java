@@ -2,7 +2,7 @@ package TFC.Entities;
 
 import TFC.Blocks.BlockCollapsable;
 import TFC.Blocks.BlockTerraIgInCobble;
-import TFC.Core.TFCSounds;
+import TFC.Core.TFC_Sounds;
 import net.minecraft.src.*;
 
 public class EntityFallingStone extends Entity

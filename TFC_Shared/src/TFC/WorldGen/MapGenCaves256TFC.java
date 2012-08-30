@@ -263,10 +263,12 @@ public class MapGenCaves256TFC extends MapGenBase
 
 		for (int var8 = 0; var8 < var7; ++var8)
 		{
-			double var9 = (double)(par2 * 16 + this.rand.nextInt(16));
+			double xCoord = (double)(par2 * 16 + this.rand.nextInt(16));
 			double height = (double)this.rand.nextInt(this.rand.nextInt(247) + 8);
-			double var13 = (double)(par4 * 16 + this.rand.nextInt(16));
+			double zCoord = (double)(par4 * 16 + this.rand.nextInt(16));
 			int var15 = 1;
+			
+			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt((int)xCoord, (int)zCoord, 0);
 			
 			double width = 2;
 			if(height < 32)
@@ -276,7 +278,7 @@ public class MapGenCaves256TFC extends MapGenBase
 			else if (height < 96)
                 width = 2.5;
 			
-			int layerID = biome.getRockLayer(par3);
+			int layerID = rockLayer1.data1;
 			
 			if(layerID == TFCBlocks.terraStoneIgEx.blockID)
 			    width -= 0.55;
@@ -292,7 +294,7 @@ public class MapGenCaves256TFC extends MapGenBase
 
 			if (this.rand.nextInt(4) == 0)
 			{
-				this.generateLargeCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var9, height, var13);
+				this.generateLargeCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, xCoord, height, zCoord);
 				var15 += this.rand.nextInt(4);
 			}
 
@@ -307,7 +309,7 @@ public class MapGenCaves256TFC extends MapGenBase
 					var19 *= this.rand.nextFloat() * this.rand.nextFloat() * 3.0F + 1.0F;
 				}
 
-				this.generateCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, var9, height, var13, var19, var17, var18, 0, 0, 1.0D, width);
+				this.generateCaveNode(this.rand.nextLong(), par4, par5, par6ArrayOfByte, xCoord, height, zCoord, var19, var17, var18, 0, 0, 1.0D, width);
 			}
 		}
 	}

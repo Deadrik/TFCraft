@@ -2,7 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
@@ -21,34 +24,35 @@ public class WorldGenClayPit extends WorldGenerator
 		this.numberOfBlocks = par1;
 	}
 
-	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+	public boolean generate(World world, Random par2Random, int i, int j, int k)
 	{
 		int var6 = par2Random.nextInt(this.numberOfBlocks - 2) + 2;
 		byte var7 = 2;
 
-		if(par2Random.nextInt(30) == 0 && par4 <= 147)
+		if(par2Random.nextInt(30) == 0 && j <= 147)
 		{
-			for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
+			for (int xCoord = i - var6; xCoord <= i + var6; ++xCoord)
 			{
-				for (int var9 = par5 - var6; var9 <= par5 + var6; ++var9)
+				for (int zCoord = k - var6; zCoord <= k + var6; ++zCoord)
 				{
-					int var10 = var8 - par3;
-					int var11 = var9 - par5;
+					int var10 = xCoord - i;
+					int var11 = zCoord - k;
 
 					if (var10 * var10 + var11 * var11 <= var6 * var6)
 					{
-						for (int var12 = par4 - var7; var12 <= par4 + var7; ++var12)
+						for (int yCoord = j - var7; yCoord <= j + var7; ++yCoord)
 						{
-							int var13 = par1World.getBlockId(var8, var12, var9);
+							int ID = world.getBlockId(xCoord, yCoord, zCoord);
 
-							if (var13 == TFCBlocks.terraDirt.blockID || var13 == TFCBlocks.terraDirt2.blockID || var13 == TFCBlocks.terraClay.blockID|| var13 == TFCBlocks.terraClay2.blockID)
+							DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+							
+							if (ID == TFCBlocks.terraDirt.blockID || ID == TFCBlocks.terraDirt2.blockID)
 							{
-								par1World.setBlockAndMetadata(var8, var12, var9, biome.ClayID, biome.TopSoilMetaID);
+								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
 							}
-							else if(var13 == TFCBlocks.terraGrass.blockID || var13 == TFCBlocks.terraGrass2.blockID ||
-									var13 == TFCBlocks.terraClayGrass.blockID || var13 == TFCBlocks.terraClayGrass2.blockID)
+							else if(ID == TFCBlocks.terraGrass.blockID || ID == TFCBlocks.terraGrass2.blockID)
 							{
-								par1World.setBlockAndMetadata(var8, var12, var9, biome.ClayGrassID, biome.TopSoilMetaID);
+								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
 							}
 						}
 					}

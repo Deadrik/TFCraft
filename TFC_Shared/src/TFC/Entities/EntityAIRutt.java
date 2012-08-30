@@ -2,7 +2,7 @@ package TFC.Entities;
 
 import java.util.*;
 
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Time;
 
 import net.minecraft.src.*;
 
@@ -39,7 +39,7 @@ public class EntityAIRutt extends EntityAIBase
     		}
     		return false;
     	}
-        if (theAnimal.hunger < 84000 || theAnimal.sex == 1 || !(TFCSeasons.getMonth() >= theAnimal.matingStart && TFCSeasons.getMonth() <= theAnimal.matingEnd)||theAnimal.breeding != 0||theAnimal.getAttackTarget()!=null)
+        if (theAnimal.hunger < 84000 || theAnimal.sex == 1 || !(TFC_Time.getMonth() >= theAnimal.matingStart && TFC_Time.getMonth() <= theAnimal.matingEnd)||theAnimal.breeding != 0||theAnimal.getAttackTarget()!=null)
         {
             return false;
         }

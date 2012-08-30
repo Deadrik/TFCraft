@@ -8,7 +8,7 @@ import java.util.Random;
 import TFC.Blocks.BlockTerraBloomery;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 
@@ -109,13 +109,13 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             if(fireTemperature*mod > inputItemTemps[i])
             {
                 String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-                float increase = TFCHeat.getTempIncrease(fireItemStacks[i], fireTemperature*mod, MaxFireTemp);
+                float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i], fireTemperature*mod, MaxFireTemp);
                 inputItemTemps[i] += increase;
             }
             else if(fireTemperature*mod < inputItemTemps[i])
             {
                 String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-                float increase = TFCHeat.getTempDecrease(fireItemStacks[i]);
+                float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
                 inputItemTemps[i] -= increase;
             }
             inputCompound.setFloat("temperature", inputItemTemps[i]);
@@ -127,7 +127,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 inputItemTemps[i] = 0;
             }
 
-            if(TFCHeat.getIsBoiling(fireItemStacks[i]))
+            if(TFC_ItemHeat.getIsBoiling(fireItemStacks[i]))
             {
                 fireItemStacks[i] = null;
                 inputItemTemps[i] = 0;
@@ -136,7 +136,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         }
         else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
         {
-            if(TFCHeat.getMeltingPoint(fireItemStacks[i]) != -1)
+            if(TFC_ItemHeat.getMeltingPoint(fireItemStacks[i]) != -1)
             {
                 inputCompound = new NBTTagCompound();
                 inputCompound.setFloat("temperature", startTemp);
@@ -492,7 +492,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
             {
                 outputItemStacks[i] = work;
                 oreCount--;
-                TFCHeat.SetTemperature(outputItemStacks[i], TFCHeat.GetTemperature(is2));
+                TFC_ItemHeat.SetTemperature(outputItemStacks[i], TFC_ItemHeat.GetTemperature(is2));
                 return true;
             }
         }
@@ -538,7 +538,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 if(input[0] != null)
                     input[0].setItemDamage(100-dam);
                 
-                TFCHeat.SetTemperature(input[0], fireTemperature);
+                TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
 
                 return true;
             }
@@ -560,7 +560,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 if(outMetal1Count == 0)
                     outMetal1 = null; 
                 
-                TFCHeat.SetTemperature(input[0], fireTemperature);
+                TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
 
                 return true;
             }
@@ -582,7 +582,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                 if(outMetal2Count == 0)
                     outMetal2 = null; 
                 
-                TFCHeat.SetTemperature(input[0], fireTemperature);
+                TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
 
                 return true;
             }
@@ -697,7 +697,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
                         }
                     }
                     /*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-                    else if(TFCHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraOre && 
+                    else if(TFC_ItemHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraOre && 
                             (entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
                     {
                         int c = entity.item.stackSize;

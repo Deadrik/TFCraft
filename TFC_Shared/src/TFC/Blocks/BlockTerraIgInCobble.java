@@ -5,7 +5,7 @@ import java.util.Random;
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
-import TFC.Core.TFCSounds;
+import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
@@ -122,7 +122,7 @@ public class BlockTerraIgInCobble extends BlockTerra2
 			else if (!world.isRemote)
 			{
                 world.spawnEntityInWorld(ent);
-                world.playSoundAtEntity(ent, TFCSounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
+                world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
 			}
 		}
 	}

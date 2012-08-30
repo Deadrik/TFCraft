@@ -8,9 +8,9 @@ import TFC.Blocks.BlockFirepit;
 import TFC.Core.EnumWoodMaterial;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
 import TFC.Handlers.PacketHandler;
@@ -48,7 +48,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
     private int externalWoodCount;
     public int charcoalCounter;
 
-    public final int FIREBURNTIME = (int) ((TFCSeasons.hourLength*18)/100);//default 240
+    public final int FIREBURNTIME = (int) ((TFC_Time.hourLength*18)/100);//default 240
 
     public TileEntityTerraFirepit()
     {
@@ -132,13 +132,13 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fireTemperature > itemTemp)
             {
                 String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-                float increase = TFCHeat.getTempIncrease(fireItemStacks[i],fireTemperature,MaxFireTemp);
+                float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i],fireTemperature,MaxFireTemp);
                 itemTemp += increase;
             }
             else if(fireTemperature < itemTemp)
             {
                 String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-                float increase = TFCHeat.getTempDecrease(fireItemStacks[i]);
+                float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
                 itemTemp -= increase;
             }
             inputCompound.setFloat("temperature", itemTemp);
@@ -423,10 +423,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 charcoalCounter = 0;
             } else if(charcoalCounter == 0)
             {
-                charcoalCounter = (int) TFCSeasons.getTotalTicks();
+                charcoalCounter = (int) TFC_Time.getTotalTicks();
             }
 
-            if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME*100) < TFCSeasons.getTotalTicks() )
+            if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME*100) < TFC_Time.getTotalTicks() )
             {
                 charcoalCounter = 0;
                 float percent = 25+R.nextInt(25);
@@ -791,12 +791,12 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                 if(index != null && fireTemperature > inputItemTemp)
                 {
-                    float increase = TFCHeat.getTempIncrease(fireItemStacks[1], fireTemperature, MaxFireTemp);
+                    float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[1], fireTemperature, MaxFireTemp);
                     inputItemTemp += increase;
                 }
                 if(fireTemperature < inputItemTemp)
                 {
-                    float increase = TFCHeat.getTempDecrease(fireItemStacks[1]);
+                    float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[1]);
                     inputItemTemp -= increase;
                 }
 
@@ -833,7 +833,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             FuelStack[2] = fireItemStacks[4];
             FuelStack[3] = fireItemStacks[5];
 
-            TFCHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
+            TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
 
             //Now we cook the input item
             CookItemNew();
@@ -924,7 +924,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             
             if(fuelTimeLeft <= 0)
             {
-                TFCHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
+                TFC_ItemHeat.HandleContainerHeat(this.worldObj, fireItemStacks, xCoord,yCoord,zCoord);
             }
         }
 

@@ -8,7 +8,7 @@ import TFC.Blocks.BlockTerraOre;
 import TFC.Blocks.BlockTerraOre2;
 import TFC.Blocks.BlockTerraOre3;
 import TFC.Core.Helper;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.Core.Vector3f;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -41,7 +41,7 @@ public class ItemTerraProPick extends Item
 
     public void addInformation(ItemStack is, List arraylist) 
     {
-        if(TFCSettings.enableDebugMode)
+        if(TFC_Settings.enableDebugMode)
             arraylist.add("Damage: "+is.getItemDamage());
     }
     @Override

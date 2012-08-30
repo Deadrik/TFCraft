@@ -4,7 +4,7 @@ import java.util.Random;
 
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 import TFC.WorldGen.TFCBiome;
@@ -20,7 +20,7 @@ public class TileEntityCrop extends TileEntity
     public TileEntityCrop()
     {
         growth = 0.1f;
-        growthTimer = TFCSeasons.totalHours();
+        growthTimer = TFC_Time.totalHours();
         sunLevel = 5;
     }
 
@@ -33,9 +33,9 @@ public class TileEntityCrop extends TileEntity
         {
             CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
             
-            long hours = TFCSeasons.totalHours();
+            long hours = TFC_Time.totalHours();
 
-            if(!checkedSun && TFCSeasons.getHour() == 12)
+            if(!checkedSun && TFC_Time.getHour() == 12)
             {
                 if(crop.needsSunlight && worldObj.getBlockLightValue(xCoord, yCoord, zCoord) < 15)
                     sunLevel--;
@@ -129,7 +129,7 @@ public class TileEntityCrop extends TileEntity
 
     public float getEstimatedGrowth(CropIndex crop)
     {
-        return ((float)crop.numGrowthStages/(growthTimer/TFCSeasons.dayLength))*1.5f;
+        return ((float)crop.numGrowthStages/(growthTimer/TFC_Time.dayLength))*1.5f;
     }
 
     @Override

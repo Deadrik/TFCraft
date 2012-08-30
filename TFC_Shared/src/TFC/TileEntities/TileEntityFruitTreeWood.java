@@ -2,8 +2,8 @@ package TFC.TileEntities;
 
 import java.util.Random;
 
-import TFC.Core.TFCHeat;
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
@@ -29,7 +29,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
     
     public void setBirth()
     {
-        birthTime = TFCSeasons.totalDays();
+        birthTime = TFC_Time.totalDays();
     }
     public void setBirth(long t)
     {

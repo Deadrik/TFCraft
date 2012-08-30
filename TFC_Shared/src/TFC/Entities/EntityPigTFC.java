@@ -1,7 +1,7 @@
 package TFC.Entities;
 
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 import net.minecraft.src.*;
 
 public class EntityPigTFC extends EntityAnimalTFC
@@ -61,7 +61,7 @@ public class EntityPigTFC extends EntityAnimalTFC
         float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
         setSize(0.7F*t,0.7F*t);
         if(pregnant){
-			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(5) + 8;
 				for (int x = 0; x < i;x++){
 				EntityPigTFC baby = new EntityPigTFC(worldObj, this,mateSizeMod);

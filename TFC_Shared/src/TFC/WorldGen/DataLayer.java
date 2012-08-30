@@ -4,7 +4,7 @@ import net.minecraft.src.TFCBlocks;
 
 public class DataLayer 
 {
-	public static DataLayer[] layers = new DataLayer[50];
+	public static DataLayer[] layers = new DataLayer[120];
 	
 	public static DataLayer Granite = new DataLayer(0,TFCBlocks.terraStoneIgIn.blockID, 0);
 	public static DataLayer Diorite = new DataLayer(1,TFCBlocks.terraStoneIgIn.blockID, 1);
@@ -47,9 +47,30 @@ public class DataLayer
 	public static DataLayer WhiteElm = new DataLayer(43, 13);
 	public static DataLayer Willow = new DataLayer(44, 14);
 	
+	public static DataLayer EVT_0_125 = new DataLayer(80,"0.125", 0.125f);
+	public static DataLayer EVT_0_25 = new DataLayer(81,"0.25", 0.25f);
+	public static DataLayer EVT_0_5 = new DataLayer(82,"0.5", 0.5f);
+	public static DataLayer EVT_1 = new DataLayer(83,"1", 1);
+	public static DataLayer EVT_2 = new DataLayer(84,"2", 2);
+	public static DataLayer EVT_4 = new DataLayer(85,"4", 4);
+	public static DataLayer EVT_8 = new DataLayer(86,"8", 8);
+	public static DataLayer EVT_16 = new DataLayer(87,"16", 16);
+	
+	public static DataLayer Rain_62_5 = new DataLayer(100,"62.5", 62.5f);
+	public static DataLayer Rain_125 = new DataLayer(101,"125", 125f);
+	public static DataLayer Rain_250 = new DataLayer(102,"250", 250f);
+	public static DataLayer Rain_500 = new DataLayer(103,"500", 500f);
+	public static DataLayer Rain_1000 = new DataLayer(104,"1000", 1000f);
+	public static DataLayer Rain_2000 = new DataLayer(105,"2000", 2000f);
+	public static DataLayer Rain_4000 = new DataLayer(106,"4000", 4000f);
+	public static DataLayer Rain_8000 = new DataLayer(107,"8000", 8000f);
+	
+	
 	public int ID;
 	public int data1;//used as block id in rocks
 	public int data2;//used as metadata in rocks
+	public float floatdata1;//used as metadata in rocks
+	public String name;
 	
 	
 	public DataLayer(int index, int id, int meta)
@@ -57,6 +78,7 @@ public class DataLayer
 		ID = index;
 		data1 = id;
 		data2 = meta;
+		floatdata1 = 0;
 		layers[index] = this;
 	}
 	
@@ -65,6 +87,27 @@ public class DataLayer
 		ID = index;
 		data1 = id;
 		data2 = 0;
+		floatdata1 = 0;
+		layers[index] = this;
+	}
+	
+	public DataLayer(int index, String n, int id)
+	{
+		ID = index;
+		data1 = id;
+		data2 = 0;
+		floatdata1 = 0;
+		name = n;
+		layers[index] = this;
+	}
+	
+	public DataLayer(int index, String n, float f)
+	{
+		ID = index;
+		floatdata1 = f;
+		data1 = 0;
+		data2 = 0;
+		name = n;
 		layers[index] = this;
 	}
 }

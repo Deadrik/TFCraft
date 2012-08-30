@@ -1,6 +1,6 @@
 package TFC.Blocks;
 
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import net.minecraft.src.*;
 
@@ -32,7 +32,7 @@ public abstract class BlockTerra extends Block
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
     {
         //TODO: Debug Message should go here if debug is toggled on
-        if(TFCSettings.enableDebugMode && world.isRemote)
+        if(TFC_Settings.enableDebugMode && world.isRemote)
         {
             int metadata = world.getBlockMetadata(i, j, k);
             System.out.println("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());

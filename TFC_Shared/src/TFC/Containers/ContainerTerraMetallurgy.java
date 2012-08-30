@@ -3,7 +3,7 @@ package TFC.Containers;
 import TFC.Core.CraftingManagerTFC;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
 import net.minecraft.src.*;

@@ -9,7 +9,7 @@ import java.util.Random;
 import TFC.Blocks.BlockTerraForge;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.WorldGen.TFCBiome;
@@ -146,13 +146,13 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             if(fireTemperature*mod > inputItemTemps[i])
             {
                 String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-                float increase = TFCHeat.getTempIncrease(fireItemStacks[i], fireTemperature*mod, MaxFireTemp);
+                float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i], fireTemperature*mod, MaxFireTemp);
                 inputItemTemps[i] += increase;
             }
             else if(fireTemperature*mod < inputItemTemps[i])
             {
                 String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
-                float increase = TFCHeat.getTempDecrease(fireItemStacks[i]);
+                float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
                 inputItemTemps[i] -= increase;
             }
             inputCompound.setFloat("temperature", inputItemTemps[i]);
@@ -165,7 +165,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 while(itr.hasNext())
                 {
                     Object tag = itr.next();
-                    if(TFCHeat.canRemoveTag(tag, "temperature", NBTTagFloat.class))
+                    if(TFC_ItemHeat.canRemoveTag(tag, "temperature", NBTTagFloat.class))
                     {
                         itr.remove();
                         break;
@@ -182,7 +182,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         }
         else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
         {
-            if(TFCHeat.getMeltingPoint(fireItemStacks[i]) != -1)
+            if(TFC_ItemHeat.getMeltingPoint(fireItemStacks[i]) != -1)
             {
                 inputCompound = new NBTTagCompound();
                 inputCompound.setFloat("temperature", startTemp);
@@ -573,7 +573,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             FuelStack[7] = fireItemStacks[12];
             FuelStack[8] = fireItemStacks[13];
 
-            TFCHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
+            TFC_ItemHeat.HandleContainerHeat(this.worldObj, FuelStack, xCoord,yCoord,zCoord);
 
             //Now we cook the input item
             CookItemsNew(0);

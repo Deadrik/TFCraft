@@ -1,7 +1,7 @@
 package TFC.Items;
 
 import TFC.Core.Helper;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 import net.minecraft.src.*;
 
@@ -83,7 +83,7 @@ public class ItemChisel extends ItemTool
                 world.notifyBlockChange(x, y, z, SlabID);
             }
 
-            if(TFCSettings.enableDebugMode)
+            if(TFC_Settings.enableDebugMode)
                 System.out.println(side);
 
             long extraX = (te.extraData) & 0xf;
@@ -166,7 +166,7 @@ public class ItemChisel extends ItemTool
                     te.extraData =  old2;
             }
             
-            if(TFCSettings.enableDebugMode)
+            if(TFC_Settings.enableDebugMode)
             {
                 System.out.println("Extra ="+te.extraData);  
             }

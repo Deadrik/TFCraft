@@ -41,13 +41,9 @@ public class GenLayerTreeTypes extends GenLayerTFC
 				{
 					var6[var8 + var7 * par3] = DataLayer.NoTree.ID;
 				}
-				else if (var9 == 1)
-				{
-					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
-				}
 				else
 				{
-					var6[var8 + var7 * par3] = DataLayer.NoTree.ID;
+					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 				}
 			}
 		}

@@ -59,6 +59,8 @@ public class CommonProxy implements IGuiHandler
         EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "pig", 104, 0xffffff, 0xbbbbbb);
         EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squid", 105, 0xffffff, 0xbbbbbb);
         EntityRegistry.registerGlobalEntityID(EntityDeer.class, "deer", 106, 0xffffff, 0x105510);
+        EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", 107);
+        //EntityRegistry.registerGlobalEntityID(EntityCustomMinecartCrate.class, "minecartCrate", 108);
         
         EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
         EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);
@@ -70,6 +72,9 @@ public class CommonProxy implements IGuiHandler
         EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9,TerraFirmaCraft.instance, 160, 5, true);
         EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,TerraFirmaCraft.instance, 160, 5, true);
         EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,TerraFirmaCraft.instance, 160, 5, true);
+        
+        EntityRegistry.registerModEntity(EntityCustomMinecart.class, "TFC minecart", 12,TerraFirmaCraft.instance, 160, 5, true);
+        //EntityRegistry.registerModEntity(EntityCustomMinecartCrate.class, "TFC minecartCrate", 13,TerraFirmaCraft.instance, 160, 5, true);
     }
 
 	public void registerTranslations() {

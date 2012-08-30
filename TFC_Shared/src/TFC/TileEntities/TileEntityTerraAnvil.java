@@ -12,10 +12,13 @@ import TFC.Core.AnvilReq;
 import TFC.Core.CraftingRule;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -92,7 +95,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
             if(workedRecently > 0)
                 workedRecently--;
             //Deal with temperatures
-            TFCHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
+            TFC_ItemHeat.HandleContainerHeat(this.worldObj, anvilItemStacks, xCoord,yCoord,zCoord);
             /**
              * Check if the recipe is considered complete
              * */
@@ -129,7 +132,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(result != null)
                 {
                     NBTTagCompound Tag = new NBTTagCompound();
-                    Tag.setFloat("temperature", TFCHeat.GetTemperature(anvilItemStacks[1]));
+                    Tag.setFloat("temperature", TFC_ItemHeat.GetTemperature(anvilItemStacks[1]));
                     anvilItemStacks[1] = result; 
                     anvilItemStacks[1].setTagCompound(Tag);
                     float pct = (offset*5);
@@ -441,7 +444,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                 if(result != null)
                 {
                     NBTTagCompound Tag = new NBTTagCompound();
-                    Tag.setFloat("temperature", (TFCHeat.GetTemperature(anvilItemStacks[2])+TFCHeat.GetTemperature(anvilItemStacks[3]))/2);
+                    Tag.setFloat("temperature", (TFC_ItemHeat.GetTemperature(anvilItemStacks[2])+TFC_ItemHeat.GetTemperature(anvilItemStacks[3]))/2);
                     anvilItemStacks[4] = result; 
                     anvilItemStacks[4].setTagCompound(Tag);
                     ItemStack item = new ItemStack(anvilItemStacks[7].getItem(),anvilItemStacks[7].stackSize-1);
@@ -473,13 +476,9 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         if(AnvilTier == AnvilReq.STONE.Tier)
         {
             ejectContents();
-            TFCBiome biome = (TFCBiome) worldObj.getBiomeGenForCoords(xCoord, zCoord);
-            if(yCoord < biome.Layer3)
-                worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, biome.Layer3Type, biome.Layer3Meta);
-            else if(yCoord < biome.Layer2)
-                worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, biome.Layer2Type, biome.Layer2Meta);
-            else                 
-                worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, biome.Layer1Type, biome.Layer1Meta);
+            DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, TFC_Core.getRockLayerFromHeight(yCoord));
+            
+            worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, rockLayer1.data1, rockLayer1.data2);
             
             
         }

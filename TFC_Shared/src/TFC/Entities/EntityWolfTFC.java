@@ -3,8 +3,8 @@ package TFC.Entities;
 import java.util.Iterator;
 import java.util.List;
 
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 
 import net.minecraft.src.*;
 
@@ -223,7 +223,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 			this.worldObj.setEntityState(this, (byte)8);
 		}
 		if(pregnant){
-			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(5) + 3;
 				for (int x = 0; x<i;x++){
 				EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);
@@ -271,7 +271,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 						this.worldObj.playSoundAtEntity(this, "mob.wolf.growl", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 					}
 					if (warning == -121){
-						warning = TFCSeasons.getTotalTicks();
+						warning = TFC_Time.getTotalTicks();
 					}
 					//getLookHelper().setLookPosition(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, 10.0F, (float)getVerticalFaceSpeed());
 				}
@@ -280,7 +280,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 				warning = -61;
 			}
 		}
-		if (TFCSeasons.getTotalTicks() == warning + 120){
+		if (TFC_Time.getTotalTicks() == warning + 120){
 			this.worldObj.playSoundAtEntity(this, "mob.wolf.bark", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			setAngry(true);
 		}

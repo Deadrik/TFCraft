@@ -1,6 +1,6 @@
 package TFC.TileEntities;
 
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
@@ -110,7 +110,7 @@ public class TileEntityTerraWorkbench extends TileEntity implements IInventory
 
 	public void updateEntity()
 	{
-		TFCHeat.HandleContainerHeat(this.worldObj,craftingMatrix, (int)xCoord,(int)yCoord,(int)zCoord);
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,craftingMatrix, (int)xCoord,(int)yCoord,(int)zCoord);
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound)

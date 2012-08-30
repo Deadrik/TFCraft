@@ -1,5 +1,6 @@
 package TFC.WorldGen.GenLayers;
 
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 
 public class GenLayerRiverTFC extends GenLayerTFC
@@ -39,7 +40,7 @@ public class GenLayerRiverTFC extends GenLayerTFC
                 }
                 else
                 {
-                    var10[var12 + var11 * par3] = BiomeGenBase.river.biomeID;
+                    var10[var12 + var11 * par3] = TFCBiome.river.biomeID;
                 }
             }
         }

@@ -3,7 +3,7 @@ package TFC.TileEntities;
 import TFC.Blocks.BlockTerraFarmland;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 import net.minecraft.src.*;
@@ -24,9 +24,9 @@ public class TileEntityFarmland extends TileEntity
         if(!worldObj.isRemote)
         {
             if(nutrientTimer <= 0)
-                nutrientTimer = TFCSeasons.totalHours();
+                nutrientTimer = TFC_Time.totalHours();
             
-            if(nutrientTimer < TFCSeasons.totalHours())
+            if(nutrientTimer < TFC_Time.totalHours())
             {
                 CropIndex crop = null;
                 if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID))

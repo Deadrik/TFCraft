@@ -5,7 +5,7 @@ import java.util.Random;
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
-import TFC.Core.TFCSounds;
+import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
@@ -129,7 +129,7 @@ public class BlockTerraIgExCobble extends BlockTerra2
 			    EntityFallingStone ent = new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
 				world.spawnEntityInWorld(ent);
 				Random R = new Random(i*j+k);
-				world.playSoundAtEntity(ent, TFCSounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
+				world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
 			}
 		}
 	}

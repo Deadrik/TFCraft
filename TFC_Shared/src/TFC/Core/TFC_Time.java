@@ -2,7 +2,7 @@ package TFC.Core;
 
 import net.minecraft.src.World;
 
-public class TFCSeasons
+public class TFC_Time
 {
     public static String[] seasons = { "Early Spring","Spring","Late Spring", "Early Summer", "Summer", "Late Summer", "Early Autumn", "Autumn", "Late Autumn", "Early Winter", "Winter", "Late Winter"};
     public static String[] months  = { "March","April","May", "June", "July", "August", "September", "October", "November", "December", "January", "February"};
@@ -27,8 +27,8 @@ public class TFCSeasons
     public static final int November = 8;
     public static final int December = 9;
     
-    public static final long hourLength = TFCSettings.dayLength/24;
-    public static long dayLength = TFCSettings.dayLength;
+    public static final long hourLength = TFC_Settings.dayLength/24;
+    public static long dayLength = TFC_Settings.dayLength;
     
     
     public static void UpdateSeasons(World world)
@@ -157,4 +157,23 @@ public class TFCSeasons
         
         return false;
     }
+    
+    public static int getMonthFromDayOfYear(int day)
+    {
+    	return day / 30;
+    }
+    
+    public static int getPrevMonth()
+    {
+    	return lastMonth;
+    }
+    
+    public static int getPrevMonth(int month)
+    {
+    	if(month == 0)
+    		return 11;
+    	return month - 1;
+    }
+
+    
 }

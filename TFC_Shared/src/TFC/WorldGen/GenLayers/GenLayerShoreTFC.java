@@ -48,28 +48,7 @@ public class GenLayerShoreTFC extends GenLayerTFC
                         var6[var8 + var7 * par3] = TFCBiome.mushroomIslandShore.biomeID;
                     }
                 }
-                else if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.extremeHills.biomeID &&
-                        !(var9 == TFCBiome.swamp10.biomeID || var9 == TFCBiome.swamp2.biomeID || var9 == TFCBiome.swamp3.biomeID || 
-                        var9 == TFCBiome.swamp4.biomeID || var9 == TFCBiome.swamp5.biomeID || var9 == TFCBiome.swamp6.biomeID || var9 == TFCBiome.swamp7.biomeID ||
-                        var9 == TFCBiome.swamp8.biomeID || var9 == TFCBiome.swamp9.biomeID) && !(var9 == TFCBiome.hills2.biomeID || var9 == TFCBiome.hills3.biomeID || 
-                        var9 == TFCBiome.hills4.biomeID || 
-                        var9 == TFCBiome.hills5.biomeID || var9 == TFCBiome.hills6.biomeID || var9 == TFCBiome.hills7.biomeID || var9 == TFCBiome.hills8.biomeID ||
-                        var9 == TFCBiome.hills9.biomeID || var9 == TFCBiome.hills10.biomeID) && 
-                        !(var9 != TFCBiome.river2.biomeID || var9 != TFCBiome.river3.biomeID ||var9 != TFCBiome.river3.biomeID ||var9 != TFCBiome.river4.biomeID ||
-                        var9 != TFCBiome.river5.biomeID ||var9 != TFCBiome.river6.biomeID ||var9 != TFCBiome.river7.biomeID ||var9 != TFCBiome.river8.biomeID ||
-                        var9 != TFCBiome.river9.biomeID ||var9 != TFCBiome.river10.biomeID ||var9 != TFCBiome.river11.biomeID ||var9 != TFCBiome.river12.biomeID ||
-                        var9 != TFCBiome.river13.biomeID ||var9 != TFCBiome.river14.biomeID ||var9 != TFCBiome.river15.biomeID ||var9 != TFCBiome.river16.biomeID ||
-                        var9 != TFCBiome.river17.biomeID ||var9 != TFCBiome.river18.biomeID ||var9 != TFCBiome.river19.biomeID ||var9 != TFCBiome.river20.biomeID ||
-                        var9 != TFCBiome.river21.biomeID ||var9 != TFCBiome.river22.biomeID ||var9 != TFCBiome.river23.biomeID ||var9 != TFCBiome.river24.biomeID ||
-                        var9 != TFCBiome.river25.biomeID ||var9 != TFCBiome.river26.biomeID ||var9 != TFCBiome.river27.biomeID ||var9 != TFCBiome.river28.biomeID ||
-                        var9 != TFCBiome.river29.biomeID ||var9 != TFCBiome.river30.biomeID ||var9 != TFCBiome.river31.biomeID ||var9 != TFCBiome.river32.biomeID ||
-                        var9 != TFCBiome.river33.biomeID ||var9 != TFCBiome.river34.biomeID ||var9 != TFCBiome.river35.biomeID ||var9 != TFCBiome.river36.biomeID ||
-                        var9 != TFCBiome.river37.biomeID ||var9 != TFCBiome.river38.biomeID ||var9 != TFCBiome.river39.biomeID ||var9 != TFCBiome.river40.biomeID ||
-                        var9 != TFCBiome.river41.biomeID ||var9 != TFCBiome.river42.biomeID ||var9 != TFCBiome.river43.biomeID ||var9 != TFCBiome.river44.biomeID ||
-                        var9 != TFCBiome.river45.biomeID ||var9 != TFCBiome.river46.biomeID ||var9 != TFCBiome.river47.biomeID ||var9 != TFCBiome.river48.biomeID ||
-                        var9 != TFCBiome.river49.biomeID ||var9 != TFCBiome.river50.biomeID ||var9 != TFCBiome.river51.biomeID ||var9 != TFCBiome.river52.biomeID ||
-                        var9 != TFCBiome.river53.biomeID ||var9 != TFCBiome.river54.biomeID ||var9 != TFCBiome.river55.biomeID ||var9 != TFCBiome.river56.biomeID ||
-                        var9 != TFCBiome.river57.biomeID ||var9 != TFCBiome.river58.biomeID ||var9 != TFCBiome.river59.biomeID))
+                else if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.extremeHills.biomeID)
                 {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
@@ -85,64 +64,16 @@ public class GenLayerShoreTFC extends GenLayerTFC
                         var6[var8 + var7 * par3] = TFCBiome.beach.biomeID;
                     }
                 }
-                else if (var9 == TFCBiome.extremeHills.biomeID || var9 == TFCBiome.hills2.biomeID || var9 == TFCBiome.hills3.biomeID || 
-                        var9 == TFCBiome.hills4.biomeID || 
-                        var9 == TFCBiome.hills5.biomeID || var9 == TFCBiome.hills6.biomeID || var9 == TFCBiome.hills7.biomeID || var9 == TFCBiome.hills8.biomeID ||
-                        var9 == TFCBiome.hills9.biomeID || var9 == TFCBiome.hills10.biomeID)
+                else if (var9 == TFCBiome.extremeHills.biomeID)
                 {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
                     var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
                     var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-                    if (var10 == TFCBiome.extremeHills.biomeID && var11 == TFCBiome.extremeHills.biomeID && var12 == TFCBiome.extremeHills.biomeID && var13 == TFCBiome.extremeHills.biomeID||
-                            var10 == TFCBiome.hills2.biomeID && var11 == TFCBiome.hills2.biomeID && var12 == TFCBiome.hills2.biomeID && var13 == TFCBiome.hills2.biomeID ||
-                            var10 == TFCBiome.hills3.biomeID && var11 == TFCBiome.hills3.biomeID && var12 == TFCBiome.hills3.biomeID && var13 == TFCBiome.hills3.biomeID ||
-                            var10 == TFCBiome.hills4.biomeID && var11 == TFCBiome.hills4.biomeID && var12 == TFCBiome.hills4.biomeID && var13 == TFCBiome.hills4.biomeID ||
-                            var10 == TFCBiome.hills5.biomeID && var11 == TFCBiome.hills5.biomeID && var12 == TFCBiome.hills5.biomeID && var13 == TFCBiome.hills5.biomeID ||
-                            var10 == TFCBiome.hills6.biomeID && var11 == TFCBiome.hills6.biomeID && var12 == TFCBiome.hills6.biomeID && var13 == TFCBiome.hills6.biomeID ||
-                            var10 == TFCBiome.hills7.biomeID && var11 == TFCBiome.hills7.biomeID && var12 == TFCBiome.hills7.biomeID && var13 == TFCBiome.hills7.biomeID ||
-                            var10 == TFCBiome.hills8.biomeID && var11 == TFCBiome.hills8.biomeID && var12 == TFCBiome.hills8.biomeID && var13 == TFCBiome.hills8.biomeID ||
-                            var10 == TFCBiome.hills9.biomeID && var11 == TFCBiome.hills9.biomeID && var12 == TFCBiome.hills9.biomeID && var13 == TFCBiome.hills9.biomeID ||
-                            var10 == TFCBiome.hills10.biomeID && var11 == TFCBiome.hills10.biomeID && var12 == TFCBiome.hills10.biomeID && var13 == TFCBiome.hills10.biomeID)
+                    if (var10 == TFCBiome.extremeHills.biomeID && var11 == TFCBiome.extremeHills.biomeID && var12 == TFCBiome.extremeHills.biomeID && var13 == TFCBiome.extremeHills.biomeID)
                     {
                         var6[var8 + var7 * par3] = var9;
-                    }
-                    else if(var10 == TFCBiome.hills2.biomeID || var11 == TFCBiome.hills2.biomeID || var12 == TFCBiome.hills2.biomeID || var13 == TFCBiome.hills2.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge2.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills3.biomeID || var11 == TFCBiome.hills3.biomeID || var12 == TFCBiome.hills3.biomeID || var13 == TFCBiome.hills3.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge3.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills4.biomeID || var11 == TFCBiome.hills4.biomeID || var12 == TFCBiome.hills4.biomeID || var13 == TFCBiome.hills4.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge4.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills5.biomeID || var11 == TFCBiome.hills5.biomeID || var12 == TFCBiome.hills5.biomeID || var13 == TFCBiome.hills5.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge5.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills6.biomeID || var11 == TFCBiome.hills6.biomeID || var12 == TFCBiome.hills6.biomeID || var13 == TFCBiome.hills6.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge6.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills7.biomeID || var11 == TFCBiome.hills7.biomeID || var12 == TFCBiome.hills7.biomeID || var13 == TFCBiome.hills7.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge7.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills8.biomeID || var11 == TFCBiome.hills8.biomeID || var12 == TFCBiome.hills8.biomeID || var13 == TFCBiome.hills8.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge8.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills9.biomeID || var11 == TFCBiome.hills9.biomeID || var12 == TFCBiome.hills9.biomeID || var13 == TFCBiome.hills9.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge9.biomeID;
-                    }
-                    else if(var10 == TFCBiome.hills10.biomeID || var11 == TFCBiome.hills10.biomeID || var12 == TFCBiome.hills10.biomeID || var13 == TFCBiome.hills10.biomeID)
-                    {
-                        var6[var8 + var7 * par3] = TFCBiome.HillsEdge10.biomeID;
                     }
                     else
                     {

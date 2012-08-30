@@ -2,7 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import net.minecraft.src.*;
 
 public class ItemCustomPickaxe extends ItemPickaxe
@@ -18,7 +18,7 @@ public class ItemCustomPickaxe extends ItemPickaxe
 	
 	public void addInformation(ItemStack is, List arraylist) 
     {
-        if(TFCSettings.enableDebugMode)
+        if(TFC_Settings.enableDebugMode)
             arraylist.add("Damage: "+is.getItemDamage());
     }
 }

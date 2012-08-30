@@ -3,7 +3,7 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.Items.ItemCustomScythe;
 import net.minecraft.src.*;
 import net.minecraftforge.common.IShearable;
@@ -66,7 +66,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
-        return TFCSettings.enableInnerGrassFix;
+        return TFC_Settings.enableInnerGrassFix;
     }
 
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)

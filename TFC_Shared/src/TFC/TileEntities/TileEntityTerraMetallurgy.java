@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Item;
@@ -43,7 +43,7 @@ public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
 				if(is.getTagCompound().hasKey("temperature"))
 				{
 					temp1[i] = is.getTagCompound().getFloat("temperature");
-					if(temp1[i] < TFCHeat.getMeltingPoint(is))
+					if(temp1[i] < TFC_ItemHeat.getMeltingPoint(is))
 					{
 						return (float) -1;
 					}

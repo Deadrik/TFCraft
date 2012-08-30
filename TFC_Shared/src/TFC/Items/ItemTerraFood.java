@@ -2,7 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Item;
@@ -54,12 +54,12 @@ public class ItemTerraFood extends ItemFood
                 float temp = stackTagCompound.getFloat("temperature");
                 float meltTemp = 0;
                 
-                meltTemp = TFCHeat.getMeltingPoint(is);
+                meltTemp = TFC_ItemHeat.getMeltingPoint(is);
 
                 if(meltTemp != -1)
                 {
                     if(is.getItem() instanceof ItemFood)
-                        arraylist.add(TFCHeat.getHeatColorFood(temp, meltTemp));
+                        arraylist.add(TFC_ItemHeat.getHeatColorFood(temp, meltTemp));
                 }
             }
         }

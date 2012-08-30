@@ -41,10 +41,7 @@ public class WorldGenPeatPit extends WorldGenerator
 						{
 							int var13 = par1World.getBlockId(var8, var12, var9);
 							TFCBiome biome = (TFCBiome) par1World.getBiomeGenForCoords(var8, var9);
-							if(biome == BiomeGenBase.swampland|| biome == TFCBiome.swamp2 || biome == TFCBiome.swamp3 || 
-							        biome == TFCBiome.swamp4 || biome == TFCBiome.swamp5 || biome == TFCBiome.swamp6 || 
-							        biome == TFCBiome.swamp7 || biome == TFCBiome.swamp8 || biome == TFCBiome.swamp9 || 
-							        biome == TFCBiome.swamp10)
+							if(biome == BiomeGenBase.swampland)
 							{
 								if (var13 == TFCBlocks.terraDirt.blockID || var13 == TFCBlocks.terraDirt2.blockID || 
 										var13 == TFCBlocks.terraClay.blockID || var13 == TFCBlocks.terraClay2.blockID || var13 == TFCBlocks.terraPeat.blockID)

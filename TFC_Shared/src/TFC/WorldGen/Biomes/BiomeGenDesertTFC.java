@@ -6,7 +6,7 @@ package TFC.WorldGen.Biomes;
 
 import java.util.Random;
 
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_Time;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 

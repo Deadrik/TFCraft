@@ -3,8 +3,8 @@ package TFC.Entities;
 import java.util.ArrayList;
 import java.util.Random;
 
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 
 import net.minecraft.src.*;
 
@@ -90,7 +90,7 @@ public class EntityDeer extends EntityAnimalTFC
     public void onLivingUpdate()
     {
         int g = getGrowingAge();
-        float t = (1.0F-(g/(-TFCSettings.dayLength*adultAge)));
+        float t = (1.0F-(g/(-TFC_Settings.dayLength*adultAge)));
         setSize(0.9F*t,0.9F*t);
         if(g <= (-12000*adultAge)){
         	this.texture = "/mob/deer_fawn.png";
@@ -99,7 +99,7 @@ public class EntityDeer extends EntityAnimalTFC
         	this.texture = "/mob/deer.png";
         }
         if(pregnant){
-			if(TFCSeasons.getTotalTicks() >= conception + pregnancyTime*TFCSettings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				EntityDeer baby = new EntityDeer(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;

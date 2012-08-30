@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.*;
@@ -83,28 +83,28 @@ public class BlockTerraGrass extends BlockGrass
         }
         else if (par5 == 2)//-Z
         {
-            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4-1) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4-1) == Material.grass)
                 return 255;
             else
                 return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         else if (par5 == 3)//+Z
         {
-            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4+1) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4+1) == Material.grass)
                 return 255;
             else
                 return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         else if (par5 == 4)//-X
         {
-            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2-1, par3-1, par4) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2-1, par3-1, par4) == Material.grass)
                 return 255;
             else
                 return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         }
         else if (par5 == 5)//+X
         {
-            if(TFCSettings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2+1, par3-1, par4) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2+1, par3-1, par4) == Material.grass)
                 return 255;
             else
                 return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);

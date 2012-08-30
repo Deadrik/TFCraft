@@ -2,7 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
@@ -77,31 +80,31 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 	}
 
 
-	public boolean generate (World world, Random random, int i, int j, int k)
+	public boolean generate (World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int height = random.nextInt (2) + 3;
-		for (; world.getBlockMaterial (i, j - 1, k) == Material.water ; j--)
+		for (; world.getBlockMaterial (xCoord, yCoord - 1, zCoord) == Material.water ; yCoord--)
 		{
 		}
 		boolean flag = true;
-		if (j < 1 || j + height + 5 > world.getHeight())
+		if (yCoord < 1 || yCoord + height + 5 > world.getHeight())
 		{
 			return false;
 		}
-		for (int i1 = j ; i1 <= j + 1 + height ; i1++)
+		for (int i1 = yCoord ; i1 <= yCoord + 1 + height ; i1++)
 		{
 			byte byte0 = 1;
-			if (i1 == j)
+			if (i1 == yCoord)
 			{
 				byte0 = 0;
 			}
-			if (i1 >= j + 1 + height - 2)
+			if (i1 >= yCoord + 1 + height - 2)
 			{
 				byte0 = 3;
 			}
-			for (int j2 = i - byte0 ; j2 <= i + byte0 && flag ; j2++)
+			for (int j2 = xCoord - byte0 ; j2 <= xCoord + byte0 && flag ; j2++)
 			{
-				for (int j3 = k - byte0 ; j3 <= k + byte0 && flag ; j3++)
+				for (int j3 = zCoord - byte0 ; j3 <= zCoord + byte0 && flag ; j3++)
 				{
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
@@ -112,7 +115,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 						}
 						if (i4 == Block.waterStill.blockID || i4 == Block.waterMoving.blockID)
 						{
-							if (i1 > j)
+							if (i1 > yCoord)
 							{
 								flag = false;
 							}
@@ -134,20 +137,22 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		{
 			return false;
 		}
-		int var3 = world.getBlockId (i, j - 1, k);
+		int var3 = world.getBlockId (xCoord, yCoord - 1, zCoord);
 		if (!(var3 == TFCBlocks.terraDirt.blockID || var3 == TFCBlocks.terraDirt2.blockID || var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID ||
-				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| j >= world.getHeight() - height - 1 || 
-				world.getBlockMaterial (i, j, k) == Material.water)
+				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| yCoord >= world.getHeight() - height - 1 || 
+				world.getBlockMaterial (xCoord, yCoord, zCoord) == Material.water)
 		{
 			return false;
 		}
-		if(world.getBlockId(i, j - 1, k) == 0) {
-			world.setBlockAndMetadata(i, j - 1, k, ((TFCBiome)world.getBiomeGenForCoords(i, k)).DirtID, ((TFCBiome)world.getBiomeGenForCoords(i, k)).SurfaceMeta);
+		if(world.getBlockId(xCoord, yCoord - 1, zCoord) == 0) {
+			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+			//set the block below the tree to dirt.
+			world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
 		}
 		int z1, x1, y,x,z;
-		y = height+j;
-		x = i;
-		z = k;
+		y = height+yCoord;
+		x = xCoord;
+		z = zCoord;
 		for (int n = 0 ; n < 2 ; n++)
 		{
 			x1 = 1 - n * (random.nextInt (1) - random.nextInt (1));
@@ -170,21 +175,21 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			}
 			createLeafGroup (X + x, Y + y, Z + z, random, world);
 		}
-		createLeafGroup (i, j + height + 1, k, random, world);
+		createLeafGroup (xCoord, yCoord + height + 1, zCoord, random, world);
 		for (int l1 = 0 ; l1 < height ; l1++)
 		{
-			int l2 = world.getBlockId (i, j + l1, k);
+			int l2 = world.getBlockId (xCoord, yCoord + l1, zCoord);
 			if (l2 == 0 || l2 == Block.leaves.blockID || l2 == Block.waterMoving.blockID || l2 == Block.waterStill.blockID)
 			{
-				world.setBlockAndMetadata (i, j + l1, k, Block.wood.blockID, treeId);
+				world.setBlockAndMetadata (xCoord, yCoord + l1, zCoord, Block.wood.blockID, treeId);
 			}
 		}
 
-		for (int i2 = j + height ; i2 <= j + height + 5 ; i2++)
+		for (int i2 = yCoord + height ; i2 <= yCoord + height + 5 ; i2++)
 		{
-			for (int k4 = i - 6 ; k4 <= i + 6 ; k4++)
+			for (int k4 = xCoord - 6 ; k4 <= xCoord + 6 ; k4++)
 			{
-				for (int i5 = k - 6 ; i5 <= k + 6 ; i5++)
+				for (int i5 = zCoord - 6 ; i5 <= zCoord + 6 ; i5++)
 				{
 					if (world.getBlockId (k4, i2, i5) != Block.leaves.blockID)
 					{

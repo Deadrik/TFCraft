@@ -4,8 +4,8 @@ import java.util.Random;
 
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
-import TFC.Core.TFCHeat;
-import TFC.Core.TFCSeasons;
+import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Core.Direction;
 import TFC.TileEntities.TileEntityFruitTreeWood;
@@ -242,12 +242,12 @@ public class BlockFruitWood extends BlockContainer
     {
         FloraManager manager = FloraManager.getInstance();
         FloraIndex fi = manager.findMatchingIndex(this.getType(world.getBlockMetadata(i, j, k)));
-        if(!world.isRemote && world.getBlockTileEntity(i, j, k) != null && TFCSeasons.currentMonth < 6 && 
+        if(!world.isRemote && world.getBlockTileEntity(i, j, k) != null && TFC_Time.currentMonth < 6 && 
                 fi != null && world.getBiomeGenForCoords(i, k).getFloatTemperature() >= fi.minTemp && world.getBiomeGenForCoords(i, k).getFloatTemperature() < fi.maxTemp)
         {
             TileEntityFruitTreeWood te = (TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k);
             int t = 1;
-            if(TFCSeasons.currentMonth < 3)
+            if(TFC_Time.currentMonth < 3)
                 t = 2;
             
             int leafGrowthRate = 20;
@@ -255,7 +255,7 @@ public class BlockFruitWood extends BlockContainer
             int branchGrowTime = 20;
 
             //grow upward
-            if(te.birthTime + trunkGrowTime < TFCSeasons.totalDays() && te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
+            if(te.birthTime + trunkGrowTime < TFC_Time.totalDays() && te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
                     (world.getBlockId(i, j+1, k) == 0 || world.getBlockId(i, j+1, k) == TFCBlocks.fruitTreeLeaves.blockID))
             {
                     world.setBlockAndMetadata(i, j+1, k, this.blockID, world.getBlockMetadata(i, j, k));
@@ -265,7 +265,7 @@ public class BlockFruitWood extends BlockContainer
 
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirth(trunkGrowTime);
             }
-            else if(te.birthTime + branchGrowTime < TFCSeasons.totalDays() && te.height == 2 && te.isTrunk && rand.nextInt(16/t) == 0 &&
+            else if(te.birthTime + branchGrowTime < TFC_Time.totalDays() && te.height == 2 && te.isTrunk && rand.nextInt(16/t) == 0 &&
                     world.getBlockId(i, j+1, k) != blockID)
             {
                     int r = rand.nextInt(4);
@@ -300,7 +300,7 @@ public class BlockFruitWood extends BlockContainer
 
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirth(branchGrowTime);
             }
-            else if(te.birthTime + 1 < TFCSeasons.totalDays() && rand.nextInt(leafGrowthRate) == 0 && world.getBlockId(i, j+2, k) != blockID)
+            else if(te.birthTime + 1 < TFC_Time.totalDays() && rand.nextInt(leafGrowthRate) == 0 && world.getBlockId(i, j+2, k) != blockID)
             {
                 if(world.getBlockId(i, j+1, k) == 0 && world.getBlockId(i, j+2, k) == 0 && BlockFruitLeaves.canStay(world, i, j+1, k, TFCBlocks.fruitTreeLeaves.blockID))//above
                 {

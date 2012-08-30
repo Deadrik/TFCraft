@@ -5,8 +5,8 @@ import java.util.Random;
 
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
-import TFC.Core.TFCSeasons;
-import TFC.Core.TFCSettings;
+import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 import net.minecraft.src.*;
 
 public class BlockFruitLeaves extends Block
@@ -28,7 +28,7 @@ public class BlockFruitLeaves extends Block
      */
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        if(TFCSeasons.currentMonth >= 3 && TFCSeasons.currentMonth < 9)
+        if(TFC_Time.currentMonth >= 3 && TFC_Time.currentMonth < 9)
             return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
         else return 0xFFFFFF;
     }
@@ -61,7 +61,7 @@ public class BlockFruitLeaves extends Block
             index = baseIndexInPNG+(meta & 7) + 16;
         }
 
-        if(TFCSeasons.currentMonth >= 3 && TFCSeasons.currentMonth < 9)
+        if(TFC_Time.currentMonth >= 3 && TFC_Time.currentMonth < 9)
         {
             return index;
         }
@@ -82,7 +82,7 @@ public class BlockFruitLeaves extends Block
 
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
-        return TFCSettings.enableInnerGrassFix;
+        return TFC_Settings.enableInnerGrassFix;
     }
 
     public void updateTick(World world, int i, int j, int k, Random rand)
@@ -106,7 +106,7 @@ public class BlockFruitLeaves extends Block
             {
                 if(world.getBiomeGenForCoords(i, k).getFloatTemperature() >= fi2.minTemp && world.getBiomeGenForCoords(i, k).getFloatTemperature() < fi2.maxTemp)
                 {
-                    if(fi2.inHarvest(TFCSeasons.currentMonth))
+                    if(fi2.inHarvest(TFC_Time.currentMonth))
                     {
                         if(rand.nextInt(1) == 0)
                         {
@@ -130,7 +130,7 @@ public class BlockFruitLeaves extends Block
             }
             if(fi != null)
             {
-                if(!fi.inHarvest(TFCSeasons.currentMonth))
+                if(!fi.inHarvest(TFC_Time.currentMonth))
                 {
                     if(world.getBlockMetadata(i, j, k) >= 8)
                     {
@@ -369,7 +369,7 @@ public class BlockFruitLeaves extends Block
             FloraManager manager = FloraManager.getInstance();
             FloraIndex fi = FloraManager.getInstance().findMatchingIndex(getType(blockID, l & 7));
 
-            if(fi != null && (fi.inHarvest(TFCSeasons.currentMonth) || fi.inHarvest(TFCSeasons.lastMonth)))
+            if(fi != null && (fi.inHarvest(TFC_Time.currentMonth) || fi.inHarvest(TFC_Time.lastMonth)))
             {
                 
                 if(fi != null)

@@ -2,7 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
@@ -53,39 +56,39 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 		}
 	}
 
-	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+	public boolean generate(World world, Random par2Random, int xCoord, int yCoord, int zCoord)
 	{
 		int var6 = par2Random.nextInt(3) + this.field_48195_a;
 		boolean var7 = true;
 
-		if (par4 >= 1 && par4 + var6 + 1 <= 256)
+		if (yCoord >= 1 && yCoord + var6 + 1 <= 256)
 		{
 			int blockUnder;
 			int var10;
 			int var11;
 			int var12;
 
-			for (blockUnder = par4; blockUnder <= par4 + 1 + var6; ++blockUnder)
+			for (blockUnder = yCoord; blockUnder <= yCoord + 1 + var6; ++blockUnder)
 			{
 				byte var9 = 2;
 
-				if (blockUnder == par4)
+				if (blockUnder == yCoord)
 				{
 					var9 = 1;
 				}
 
-				if (blockUnder >= par4 + 1 + var6 - 2)
+				if (blockUnder >= yCoord + 1 + var6 - 2)
 				{
 					var9 = 2;
 				}
 
-				for (var10 = par3 - var9; var10 <= par3 + var9 && var7; ++var10)
+				for (var10 = xCoord - var9; var10 <= xCoord + var9 && var7; ++var10)
 				{
-					for (var11 = par5 - var9; var11 <= par5 + var9 && var7; ++var11)
+					for (var11 = zCoord - var9; var11 <= zCoord + var9 && var7; ++var11)
 					{
 						if (blockUnder >= 0 && blockUnder < 256)
 						{
-							var12 = par1World.getBlockId(var10, blockUnder, var11);
+							var12 = world.getBlockId(var10, blockUnder, var11);
 
 							if (var12 != 0 && var12 != Block.leaves.blockID && var12 != Block.grass.blockID && var12 != Block.dirt.blockID && var12 != Block.wood.blockID && var12 != Block.sapling.blockID && 
 									!(var12 == TFCBlocks.terraDirt.blockID || var12 == TFCBlocks.terraDirt2.blockID ||var12 == TFCBlocks.terraGrass.blockID ||var12 == TFCBlocks.terraGrass2.blockID ||
@@ -108,112 +111,114 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 			}
 			else
 			{
-				blockUnder = par1World.getBlockId(par3, par4 - 1, par5);
+				blockUnder = world.getBlockId(xCoord, yCoord - 1, zCoord);
 
 				if ((blockUnder == TFCBlocks.terraDirt.blockID || blockUnder == TFCBlocks.terraDirt2.blockID || blockUnder == TFCBlocks.terraGrass.blockID || blockUnder == TFCBlocks.terraGrass2.blockID ||
-						blockUnder == TFCBlocks.terraClayGrass.blockID || blockUnder == TFCBlocks.terraClayGrass2.blockID) && par4 < 256 - var6 - 1)
+						blockUnder == TFCBlocks.terraClayGrass.blockID || blockUnder == TFCBlocks.terraClayGrass2.blockID) && yCoord < 256 - var6 - 1)
 				{
-					par1World.setBlockAndMetadata(par3, par4 - 1, par5, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
-					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
-					par1World.setBlockAndMetadata(par3, par4 - 1, par5 + 1, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
-					par1World.setBlockAndMetadata(par3 + 1, par4 - 1, par5 + 1, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).DirtID, ((TFCBiome)par1World.getBiomeGenForCoords(par3, par5)).SurfaceMeta);
-					this.func_48192_a(par1World, par3, par5, par4 + var6, 2, par2Random);
+					DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+			        
+					world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord + 1, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord + 1, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord + 1, yCoord - 1, zCoord + 1, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+					this.func_48192_a(world, xCoord, zCoord, yCoord + var6, 2, par2Random);
 
-					for (int var14 = par4 + var6 - 2 - par2Random.nextInt(4); var14 > par4 + var6 / 2; var14 -= 2 + par2Random.nextInt(4))
+					for (int var14 = yCoord + var6 - 2 - par2Random.nextInt(4); var14 > yCoord + var6 / 2; var14 -= 2 + par2Random.nextInt(4))
 					{
 						float var15 = par2Random.nextFloat() * (float)Math.PI * 2.0F;
-						var11 = par3 + (int)(0.5F + MathHelper.cos(var15) * 4.0F);
-						var12 = par5 + (int)(0.5F + MathHelper.sin(var15) * 4.0F);
-						this.func_48192_a(par1World, var11, var12, var14, 0, par2Random);
+						var11 = xCoord + (int)(0.5F + MathHelper.cos(var15) * 4.0F);
+						var12 = zCoord + (int)(0.5F + MathHelper.sin(var15) * 4.0F);
+						this.func_48192_a(world, var11, var12, var14, 0, par2Random);
 
 						for (int var13 = 0; var13 < 5; ++var13)
 						{
-							var11 = par3 + (int)(1.5F + MathHelper.cos(var15) * (float)var13);
-							var12 = par5 + (int)(1.5F + MathHelper.sin(var15) * (float)var13);
-							this.setBlockAndMetadata(par1World, var11, var14 - 3 + var13 / 2, var12, Block.wood.blockID, this.woodMetadata);
+							var11 = xCoord + (int)(1.5F + MathHelper.cos(var15) * (float)var13);
+							var12 = zCoord + (int)(1.5F + MathHelper.sin(var15) * (float)var13);
+							this.setBlockAndMetadata(world, var11, var14 - 3 + var13 / 2, var12, Block.wood.blockID, this.woodMetadata);
 						}
 					}
 
 					for (var10 = 0; var10 < var6; ++var10)
 					{
-						var11 = par1World.getBlockId(par3, par4 + var10, par5);
+						var11 = world.getBlockId(xCoord, yCoord + var10, zCoord);
 
 						if (var11 == 0 || var11 == Block.leaves.blockID)
 						{
-							this.setBlockAndMetadata(par1World, par3, par4 + var10, par5, Block.wood.blockID, this.woodMetadata);
+							this.setBlockAndMetadata(world, xCoord, yCoord + var10, zCoord, Block.wood.blockID, this.woodMetadata);
 
 							if (var10 > 0)
 							{
-								if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 - 1, par4 + var10, par5))
+								if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord - 1, yCoord + var10, zCoord))
 								{
-									this.setBlockAndMetadata(par1World, par3 - 1, par4 + var10, par5, Block.vine.blockID, 8);
+									this.setBlockAndMetadata(world, xCoord - 1, yCoord + var10, zCoord, Block.vine.blockID, 8);
 								}
 
-								if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + var10, par5 - 1))
+								if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord, yCoord + var10, zCoord - 1))
 								{
-									this.setBlockAndMetadata(par1World, par3, par4 + var10, par5 - 1, Block.vine.blockID, 1);
+									this.setBlockAndMetadata(world, xCoord, yCoord + var10, zCoord - 1, Block.vine.blockID, 1);
 								}
 							}
 						}
 
 						if (var10 < var6 - 1)
 						{
-							var11 = par1World.getBlockId(par3 + 1, par4 + var10, par5);
+							var11 = world.getBlockId(xCoord + 1, yCoord + var10, zCoord);
 
 							if (var11 == 0 || var11 == Block.leaves.blockID)
 							{
-								this.setBlockAndMetadata(par1World, par3 + 1, par4 + var10, par5, Block.wood.blockID, this.woodMetadata);
+								this.setBlockAndMetadata(world, xCoord + 1, yCoord + var10, zCoord, Block.wood.blockID, this.woodMetadata);
 
 								if (var10 > 0)
 								{
-									if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 2, par4 + var10, par5))
+									if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord + 2, yCoord + var10, zCoord))
 									{
-										this.setBlockAndMetadata(par1World, par3 + 2, par4 + var10, par5, Block.vine.blockID, 2);
+										this.setBlockAndMetadata(world, xCoord + 2, yCoord + var10, zCoord, Block.vine.blockID, 2);
 									}
 
-									if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 1, par4 + var10, par5 - 1))
+									if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord + 1, yCoord + var10, zCoord - 1))
 									{
-										this.setBlockAndMetadata(par1World, par3 + 1, par4 + var10, par5 - 1, Block.vine.blockID, 1);
+										this.setBlockAndMetadata(world, xCoord + 1, yCoord + var10, zCoord - 1, Block.vine.blockID, 1);
 									}
 								}
 							}
 
-							var11 = par1World.getBlockId(par3 + 1, par4 + var10, par5 + 1);
+							var11 = world.getBlockId(xCoord + 1, yCoord + var10, zCoord + 1);
 
 							if (var11 == 0 || var11 == Block.leaves.blockID)
 							{
-								this.setBlockAndMetadata(par1World, par3 + 1, par4 + var10, par5 + 1, Block.wood.blockID, this.woodMetadata);
+								this.setBlockAndMetadata(world, xCoord + 1, yCoord + var10, zCoord + 1, Block.wood.blockID, this.woodMetadata);
 
 								if (var10 > 0)
 								{
-									if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 2, par4 + var10, par5 + 1))
+									if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord + 2, yCoord + var10, zCoord + 1))
 									{
-										this.setBlockAndMetadata(par1World, par3 + 2, par4 + var10, par5 + 1, Block.vine.blockID, 2);
+										this.setBlockAndMetadata(world, xCoord + 2, yCoord + var10, zCoord + 1, Block.vine.blockID, 2);
 									}
 
-									if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 1, par4 + var10, par5 + 2))
+									if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord + 1, yCoord + var10, zCoord + 2))
 									{
-										this.setBlockAndMetadata(par1World, par3 + 1, par4 + var10, par5 + 2, Block.vine.blockID, 4);
+										this.setBlockAndMetadata(world, xCoord + 1, yCoord + var10, zCoord + 2, Block.vine.blockID, 4);
 									}
 								}
 							}
 
-							var11 = par1World.getBlockId(par3, par4 + var10, par5 + 1);
+							var11 = world.getBlockId(xCoord, yCoord + var10, zCoord + 1);
 
 							if (var11 == 0 || var11 == Block.leaves.blockID)
 							{
-								this.setBlockAndMetadata(par1World, par3, par4 + var10, par5 + 1, Block.wood.blockID, this.woodMetadata);
+								this.setBlockAndMetadata(world, xCoord, yCoord + var10, zCoord + 1, Block.wood.blockID, this.woodMetadata);
 
 								if (var10 > 0)
 								{
-									if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 - 1, par4 + var10, par5 + 1))
+									if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord - 1, yCoord + var10, zCoord + 1))
 									{
-										this.setBlockAndMetadata(par1World, par3 - 1, par4 + var10, par5 + 1, Block.vine.blockID, 8);
+										this.setBlockAndMetadata(world, xCoord - 1, yCoord + var10, zCoord + 1, Block.vine.blockID, 8);
 									}
 
-									if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + var10, par5 + 2))
+									if (par2Random.nextInt(3) > 0 && world.isAirBlock(xCoord, yCoord + var10, zCoord + 2))
 									{
-										this.setBlockAndMetadata(par1World, par3, par4 + var10, par5 + 2, Block.vine.blockID, 4);
+										this.setBlockAndMetadata(world, xCoord, yCoord + var10, zCoord + 2, Block.vine.blockID, 4);
 									}
 								}
 							}

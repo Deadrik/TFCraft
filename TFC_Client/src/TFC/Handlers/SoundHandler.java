@@ -5,7 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Level;
 
-import TFC.Core.TFCSounds;
+import TFC.Core.TFC_Sounds;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -22,7 +22,7 @@ public class SoundHandler
     public void onSoundLoad(SoundLoadEvent event) {
 
         // For each custom sound file we have defined in Sounds
-        for (String soundFile : TFCSounds.soundFiles) {
+        for (String soundFile : TFC_Sounds.soundFiles) {
             // Try to add the custom sound file to the pool of sounds
             try {
             	URL path = TerraFirmaCraft.instance.getClass().getResource("/" + soundFile);

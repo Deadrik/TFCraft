@@ -1,9 +1,12 @@
 package TFC.Containers;
 
 import TFC.Core.AnvilReq;
+import TFC.Core.TFC_Core;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.*;
 
 public class ContainerTerraAnvil extends Container
@@ -334,14 +337,11 @@ public class ContainerTerraAnvil extends Container
     {
         if(anvil.AnvilTier == AnvilReq.STONE.Tier)
         {
-            //anvil.ejectContents();
-            TFCBiome biome = (TFCBiome) anvil.worldObj.getBiomeGenForCoords(anvil.xCoord, anvil.zCoord);
-            if(anvil.yCoord < biome.Layer3)
-                anvil.worldObj.setBlockAndMetadata(anvil.xCoord, anvil.yCoord, anvil.zCoord, biome.Layer3Type, biome.Layer3Meta);
-            else if(anvil.yCoord < biome.Layer2)
-                anvil.worldObj.setBlockAndMetadata(anvil.xCoord, anvil.yCoord, anvil.zCoord, biome.Layer2Type, biome.Layer2Meta);
-            else                 
-                anvil.worldObj.setBlockAndMetadata(anvil.xCoord, anvil.yCoord, anvil.zCoord, biome.Layer1Type, biome.Layer1Meta);
+            //anvil.ejectContents();            
+            DataLayer rockLayer1 = ((TFCWorldChunkManager)anvil.worldObj.getWorldChunkManager()).getRockLayerAt(anvil.xCoord, anvil.zCoord, TFC_Core.getRockLayerFromHeight(anvil.yCoord));
+            
+            anvil.worldObj.setBlockAndMetadata(anvil.xCoord, anvil.yCoord, anvil.zCoord, rockLayer1.data1, rockLayer1.data2);
+
         }
         super.onCraftGuiClosed(par1EntityPlayer);
     }

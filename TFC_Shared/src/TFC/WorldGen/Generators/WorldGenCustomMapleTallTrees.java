@@ -2,7 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
@@ -15,28 +18,28 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 		super(flag);
 		treeId=id;
 	}
-	public boolean generate(World world, Random random, int i, int j, int k)
+	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		int l = random.nextInt(3) + 8;
 		boolean flag = true;
-		if (j < 1 || j + l + 1 > world.getHeight())
+		if (yCoord < 1 || yCoord + l + 1 > world.getHeight())
 		{
 			return false;
 		}
-		for (int i1 = j; i1 <= j + 1 + l; i1++)
+		for (int i1 = yCoord; i1 <= yCoord + 1 + l; i1++)
 		{
 			byte byte0 = 1;
-			if (i1 == j)
+			if (i1 == yCoord)
 			{
 				byte0 = 0;
 			}
-			if (i1 >= j + 1 + l - 2)
+			if (i1 >= yCoord + 1 + l - 2)
 			{
 				byte0 = 2;
 			}
-			for (int i2 = i - byte0; i2 <= i + byte0 && flag; i2++)
+			for (int i2 = xCoord - byte0; i2 <= xCoord + byte0 && flag; i2++)
 			{
-				for (int l2 = k - byte0; l2 <= k + byte0 && flag; l2++)
+				for (int l2 = zCoord - byte0; l2 <= zCoord + byte0 && flag; l2++)
 				{
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
@@ -62,23 +65,25 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 		{
 			int x = 0;
 		}
-		int var3 = world.getBlockId(i, j - 1, k);
+		int var3 = world.getBlockId(xCoord, yCoord - 1, zCoord);
 		if (!(var3 == TFCBlocks.terraDirt.blockID || var3 == TFCBlocks.terraDirt2.blockID || var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID ||
-				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| j >= world.getHeight() - l - 1)
+				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| yCoord >= world.getHeight() - l - 1)
 		{
 			return false;
 		}
-		world.setBlockAndMetadata(i, j - 1, k, ((TFCBiome)world.getBiomeGenForCoords(i, k)).DirtID, ((TFCBiome)world.getBiomeGenForCoords(i, k)).SurfaceMeta);
-		for (int k1 = j - 3 + l; k1 <= j + l; k1++)
+		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+		//set the block below the tree to dirt.
+		world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+		for (int k1 = yCoord - 3 + l; k1 <= yCoord + l; k1++)
 		{
-			int j2 = k1 - (j + l);
+			int j2 = k1 - (yCoord + l);
 			int i3 = 1 - j2 / 2;
-			for (int k3 = i - i3; k3 <= i + i3; k3++)
+			for (int k3 = xCoord - i3; k3 <= xCoord + i3; k3++)
 			{
-				int l3 = k3 - i;
-				for (int i4 = k - i3; i4 <= k + i3; i4++)
+				int l3 = k3 - xCoord;
+				for (int i4 = zCoord - i3; i4 <= zCoord + i3; i4++)
 				{
-					int j4 = i4 - k;
+					int j4 = i4 - zCoord;
 					if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && !Block.opaqueCubeLookup[world.getBlockId(k3, k1, i4)])
 					{
 						setBlockAndMetadata(world, k3, k1, i4, TFCBlocks.terraLeaves.blockID, treeId);
@@ -89,10 +94,10 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 
 		for (int l1 = 0; l1 < l; l1++)
 		{
-			int k2 = world.getBlockId(i, j + l1, k);
+			int k2 = world.getBlockId(xCoord, yCoord + l1, zCoord);
 			if (k2 == 0 || k2 == TFCBlocks.terraLeaves.blockID)
 			{
-				setBlockAndMetadata(world, i, j + l1, k, TFCBlocks.terraWood.blockID, treeId);
+				setBlockAndMetadata(world, xCoord, yCoord + l1, zCoord, TFCBlocks.terraWood.blockID, treeId);
 			}
 		}
 

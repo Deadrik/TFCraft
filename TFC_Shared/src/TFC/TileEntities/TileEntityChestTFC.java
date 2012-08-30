@@ -1,6 +1,6 @@
 package TFC.TileEntities;
 
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 import net.minecraft.src.*;
 
 public class TileEntityChestTFC extends TileEntity implements IInventory
@@ -260,7 +260,7 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
     {
         super.updateEntity();
         
-        TFCHeat.HandleContainerHeatChest(this.worldObj, chestContents, xCoord, yCoord, zCoord);
+        TFC_ItemHeat.HandleContainerHeatChest(this.worldObj, chestContents, xCoord, yCoord, zCoord);
         
         this.checkForAdjacentChests();
 

@@ -1,5 +1,6 @@
 package TFC.WorldGen.GenLayers;
 
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
@@ -44,17 +45,17 @@ public class GenLayerHillsTFC extends GenLayerTFC
                     {
                         var10 = BiomeGenBase.taigaHills.biomeID;
                     }
-                    else*/ if (var9 == BiomeGenBase.plains.biomeID)
+                    else*/ if (var9 == TFCBiome.plains.biomeID)
                     {
-                    	var10 = BiomeGenBase.forest.biomeID;
+                    	var10 = TFCBiome.forest.biomeID;
                     }
-                    else if (var9 == BiomeGenBase.icePlains.biomeID)
+                    else if (var9 == TFCBiome.icePlains.biomeID)
                     {
-                    	var10 = BiomeGenBase.iceMountains.biomeID;
+                    	var10 = TFCBiome.iceMountains.biomeID;
                     }
-                    else if (var9 == BiomeGenBase.jungle.biomeID)
+                    else if (var9 == TFCBiome.jungle.biomeID)
                     {
-                    	var10 = BiomeGenBase.jungleHills.biomeID;
+                    	var10 = TFCBiome.jungleHills.biomeID;
                     }
 
                     if (var10 != var9)

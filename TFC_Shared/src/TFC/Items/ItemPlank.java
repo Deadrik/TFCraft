@@ -4,7 +4,7 @@ import java.util.List;
 
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCHeat;
+import TFC.Core.TFC_ItemHeat;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Enchantment;
