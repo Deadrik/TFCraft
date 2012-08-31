@@ -8,7 +8,8 @@ import net.minecraft.src.WorldType;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
-	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.desert, TFCBiome.forest, TFCBiome.extremeHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.taiga, TFCBiome.rollingHills};
+	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, 
+		TFCBiome.rollingHills, TFCBiome.Mountains};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private BiomeGenBase[] allowedBiomes;

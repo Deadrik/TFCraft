@@ -98,7 +98,7 @@ public class GuiCalendar extends GuiScreen
         else
             drawCenteredString(fontRenderer,"Date : " + dom + " " + TFC_Time.months[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 
-        float temp = Math.round((TFC_Climate.getHeightAdjustedTemp((int) player.posY, (int) player.posZ)));
+        float temp = Math.round((TFC_Climate.getHeightAdjustedTemp((int) player.posX, (int) player.posY, (int) player.posZ)));
         DecimalFormat d = new DecimalFormat("#.##");
 
         drawCenteredString(fontRenderer,"Temperature : " + (int)temp + "C", l + 87, i1+56, 0x000000);
@@ -112,8 +112,8 @@ public class GuiCalendar extends GuiScreen
         else
             hour+=h;
         drawCenteredString(fontRenderer,"Hour : " + hour, l + 87, i1+66, 0x000000);
-        drawCenteredString(fontRenderer,"EVT : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt((int) player.posX, (int) player.posZ).name, l + 87, i1+76, 0x000000);
-        drawCenteredString(fontRenderer,"Rain : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getRainfallLayerAt((int) player.posX, (int) player.posZ).name, l + 87, i1+86, 0x000000);
+        drawCenteredString(fontRenderer,"EVT : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt((int) player.posX, (int) player.posZ).floatdata1, l + 87, i1+76, 0x000000);
+        drawCenteredString(fontRenderer,"Rain : " + TFC_Climate.getTerrainAdjustedRainfall((int) player.posX,(int) player.posY, (int) player.posZ), l + 87, i1+86, 0x000000);
         
         for (int var6 = 0; var6 < this.controlList.size(); ++var6)
         {

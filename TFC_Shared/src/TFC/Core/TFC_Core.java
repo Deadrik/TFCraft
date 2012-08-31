@@ -503,6 +503,18 @@ public class TFC_Core
 		
 		return false;
 	}
+	
+	public static boolean isGrass(int id)
+	{
+		if(id == TFCBlocks.terraGrass.blockID || id == TFCBlocks.terraGrass2.blockID ||
+				id == TFCBlocks.terraClayGrass.blockID || id == TFCBlocks.terraClayGrass2.blockID ||
+				id == TFCBlocks.terraPeatGrass.blockID)
+		{
+			return true;
+		}
+		
+		return false;
+	}
 
 	public static int getMetaForGrass(int inType, int inMeta)
 	{

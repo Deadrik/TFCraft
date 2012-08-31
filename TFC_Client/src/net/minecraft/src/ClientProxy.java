@@ -107,21 +107,19 @@ public class ClientProxy extends CommonProxy
 	public World getCurrentWorld() {
 		return ModLoader.getMinecraftInstance().theWorld;
 	}
+	
 	@Override
 	public File getMinecraftDir() {
 		return ModLoader.getMinecraftInstance().getMinecraftDir();
 	}
-
+	
 	@Override
-	public boolean renderWorldBlock(Object renderblocks,
-			IBlockAccess iblockaccess, int i, int j, int k, Block block, int l) 
+	public void RegisterCommands()
 	{
-
-
-
-		return false;
+		
 	}
-
+	
+	@Override
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		int var5 = 0;
@@ -204,7 +202,7 @@ public class ClientProxy extends CommonProxy
 		else if(par1IBlockAccess.getBlockId(i, j, k) == Block.vine.blockID)
 		{
 			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && 
-					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(j, k) < 30)
+					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				//Get the fade multiplier
 				float daymult = getTimeMult(TFC_Time.totalDays(),(TFC_Time.totalYears()*360+180), (TFC_Time.totalYears()*360+270));
@@ -224,7 +222,7 @@ public class ClientProxy extends CommonProxy
 				return x;
 			}
 			else if(TFC_Time.currentMonth >= TFC_Time.February || TFC_Time.currentMonth <= TFC_Time.March && 
-					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(j, k) < 30)
+					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 
 				float daymult = getTimeMult(TFC_Time.totalDays()-TFC_Time.totalYears()*360,(TFC_Time.totalMonths()*30+330), (TFC_Time.totalMonths()*30+270));
@@ -244,7 +242,7 @@ public class ClientProxy extends CommonProxy
 
 			}
 			else if(TFC_Time.currentMonth >= 9 && 
-					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(j, k) < 30)
+					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{

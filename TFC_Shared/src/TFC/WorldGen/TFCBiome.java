@@ -88,7 +88,7 @@ public class TFCBiome extends BiomeGenBase
 
     public static final TFCBiome desert = (new BiomeGenDesertTFC(2)).setBiomeName("Desert").setDisableRain().setTemperatureRainfall(36F, 0.0F).setMinMaxHeight(0.1F, 0.15F);
 
-    public static final TFCBiome extremeHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("Hills").setMinMaxHeight(0.4F, 1.3F);
+    public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("High Hills").setMinMaxHeight(0.2F, 1.0F);
 
     public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.2F);
 
@@ -98,9 +98,11 @@ public class TFCBiome extends BiomeGenBase
 
     public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setColor(SwampColor).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.15F);
 
-    public static final TFCBiome extremeHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setColor(HillsColor).setBiomeName("Hills Edge").setMinMaxHeight(0.2F, 0.4F);
+    public static final TFCBiome HighHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setColor(HillsColor).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F);
     
-    public static final TFCBiome rollingHills = (new BiomeGenPlainsTFC(30)).setColor(PlainsColor).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.3F);
+    public static final TFCBiome rollingHills = (new TFCBiome(30)).setColor(PlainsColor).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.3F);
+    public static final TFCBiome Mountains = (new TFCBiome(31)).setColor(HillsColor).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
+    public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
     
     protected WorldGenCustomTallTrees worldGenAshTallTrees;
     protected WorldGenCustomTallTrees worldGenAspenTallTrees;

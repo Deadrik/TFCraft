@@ -47,15 +47,15 @@ public class GenLayerHillsTFC extends GenLayerTFC
                     }
                     else*/ if (var9 == TFCBiome.plains.biomeID)
                     {
-                    	var10 = TFCBiome.forest.biomeID;
+                    	//var10 = TFCBiome.forest.biomeID;
                     }
                     else if (var9 == TFCBiome.icePlains.biomeID)
                     {
-                    	var10 = TFCBiome.iceMountains.biomeID;
+                    	//var10 = TFCBiome.iceMountains.biomeID;
                     }
                     else if (var9 == TFCBiome.jungle.biomeID)
                     {
-                    	var10 = TFCBiome.jungleHills.biomeID;
+                    	//var10 = TFCBiome.jungleHills.biomeID;
                     }
 
                     if (var10 != var9)

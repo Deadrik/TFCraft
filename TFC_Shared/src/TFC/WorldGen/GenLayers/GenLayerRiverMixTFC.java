@@ -45,17 +45,17 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
                 {
                     layerOut[var8] = TFCBiome.river.biomeID;
                 }
-                else if(layerBiomes[var8] == TFCBiome.extremeHills.biomeID)
+                else if(layerBiomes[var8] == TFCBiome.HighHills.biomeID)
                 {
-                    layerOut[var8] = TFCBiome.extremeHills.biomeID;
+                    layerOut[var8] = TFCBiome.HighHills.biomeID;
                 }
                 else if(layerBiomes[var8] == TFCBiome.desert.biomeID)
                 {
                     layerOut[var8] = TFCBiome.river.biomeID;
                 }
-                else if(layerBiomes[var8] == TFCBiome.extremeHillsEdge.biomeID)
+                else if(layerBiomes[var8] == TFCBiome.HighHillsEdge.biomeID)
                 {
-                    layerOut[var8] = TFCBiome.extremeHillsEdge.biomeID;
+                    layerOut[var8] = TFCBiome.HighHillsEdge.biomeID;
                 }
                 else
                 {

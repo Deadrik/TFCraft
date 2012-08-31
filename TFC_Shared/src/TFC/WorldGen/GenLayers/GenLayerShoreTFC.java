@@ -48,7 +48,7 @@ public class GenLayerShoreTFC extends GenLayerTFC
                         var6[var8 + var7 * par3] = TFCBiome.mushroomIslandShore.biomeID;
                     }
                 }
-                else if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.extremeHills.biomeID)
+                else if (var9 != TFCBiome.ocean.biomeID && var9 != TFCBiome.river.biomeID && var9 != TFCBiome.swampland.biomeID && var9 != TFCBiome.HighHills.biomeID)
                 {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
@@ -64,20 +64,36 @@ public class GenLayerShoreTFC extends GenLayerTFC
                         var6[var8 + var7 * par3] = TFCBiome.beach.biomeID;
                     }
                 }
-                else if (var9 == TFCBiome.extremeHills.biomeID)
+                else if (var9 == TFCBiome.HighHills.biomeID)
                 {
                     var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
                     var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
                     var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
                     var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
 
-                    if (var10 == TFCBiome.extremeHills.biomeID && var11 == TFCBiome.extremeHills.biomeID && var12 == TFCBiome.extremeHills.biomeID && var13 == TFCBiome.extremeHills.biomeID)
+                    if (var10 == TFCBiome.HighHills.biomeID && var11 == TFCBiome.HighHills.biomeID && var12 == TFCBiome.HighHills.biomeID && var13 == TFCBiome.HighHills.biomeID)
                     {
                         var6[var8 + var7 * par3] = var9;
                     }
                     else
                     {
-                        var6[var8 + var7 * par3] = TFCBiome.extremeHillsEdge.biomeID;
+                        var6[var8 + var7 * par3] = TFCBiome.HighHillsEdge.biomeID;
+                    }
+                }
+                else if (var9 == TFCBiome.Mountains.biomeID)
+                {
+                    var10 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];
+                    var11 = var5[var8 + 1 + 1 + (var7 + 1) * (par3 + 2)];
+                    var12 = var5[var8 + 1 - 1 + (var7 + 1) * (par3 + 2)];
+                    var13 = var5[var8 + 1 + (var7 + 1 + 1) * (par3 + 2)];
+
+                    if (var10 == TFCBiome.Mountains.biomeID && var11 == TFCBiome.Mountains.biomeID && var12 == TFCBiome.Mountains.biomeID && var13 == TFCBiome.Mountains.biomeID)
+                    {
+                        var6[var8 + var7 * par3] = var9;
+                    }
+                    else
+                    {
+                        var6[var8 + var7 * par3] = TFCBiome.MountainsEdge.biomeID;
                     }
                 }
                 else

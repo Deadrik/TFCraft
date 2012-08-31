@@ -199,7 +199,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 	public boolean canSnowAt(World world, int par1, int par2, int par3)
 	{
-		float var5 = TFC_Climate.getHeightAdjustedTemp(par2, par3);
+		float var5 = TFC_Climate.getHeightAdjustedTemp(par1, par2, par3);
 
 		if (var5 > 0F)
 		{
@@ -346,7 +346,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					for (int var22 = -var19; var22 <= var19; ++var22)
 					{
 						BiomeGenBase blendBiome = this.biomesForGeneration[var14 + var21 + 2 + (var15 + var22 + 2) * (par5 + 5)];
-						float blendedHeight = this.parabolicField[var21 + 2 + (var22 + 2) * 5] / (blendBiome.minHeight + 2.0F);//<---blendBiome.minHeight was commented out
+						float blendedHeight = this.parabolicField[var21 + 2 + (var22 + 2) * 5] / (/*blendBiome.minHeight*/ + 2.0F);//<---blendBiome.minHeight was commented out
 
 						if (blendBiome.minHeight > baseBiome.minHeight)
 						{
@@ -455,7 +455,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
-				TFCBiome biomegenbase = (TFCBiome) biomesForGeneration[zCoord + xCoord * 16];
+				BiomeGenBase biomegenbase = biomesForGeneration[zCoord + xCoord * 16];
 				DataLayer rock1 = rockLayer1[zCoord + xCoord * 16];
 				DataLayer rock2 = rockLayer2[zCoord + xCoord * 16];
 				DataLayer rock3 = rockLayer3[zCoord + xCoord * 16];
@@ -468,7 +468,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int subSurfaceBlock = TFC_Core.getTypeForDirt(rock1.data2);
 				int soilMeta = TFC_Core.getMetaForGrass(rock1.data1, rock1.data2);
 				
-				float _temp = TFC_Climate.getBioTemperature(par2*16);
+				float _temp = TFC_Climate.getBioTemperature(par1*16, par2*16);
 
 				for (int height = 127; height >= 0; --height)
 				{
@@ -544,7 +544,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								{
 									surfaceBlock = Block.ice.blockID;
 								}
-								else if (biomegenbase.getFloatRain() == 0)
+								else if (rainfall.floatdata1 < 125)
 								{
 									surfaceBlock = 0;
 								}
@@ -589,7 +589,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								metaArrayBig[indexBig] = 0;
 							}
 						}
-						else if(!(biomegenbase instanceof BiomeGenSwampTFC))
+						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
 						{
 							if(((height > var5-2 && height < var5 && blockArray[index+1] == Block.waterStill.blockID) || (height < var5 && blockArray[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
 							{

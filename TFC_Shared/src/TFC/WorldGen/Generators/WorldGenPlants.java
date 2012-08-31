@@ -108,7 +108,7 @@ public class WorldGenPlants implements IWorldGenerator
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
 
-			bioTemperature = TFC_Climate.getBioTemperatureHeight(yCoord, zCoord);
+			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			if(bioTemperature >= 1.5)
 			{
 //				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);

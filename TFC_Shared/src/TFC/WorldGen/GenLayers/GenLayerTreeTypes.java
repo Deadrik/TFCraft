@@ -8,7 +8,7 @@ import net.minecraft.src.WorldType;
 
 public class GenLayerTreeTypes extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.NoTree, DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
+	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Ash, DataLayer.Aspen, DataLayer.Birch, DataLayer.Chestnut, DataLayer.DouglasFir, DataLayer.Hickory, DataLayer.Maple, DataLayer.Oak, DataLayer.Pine, DataLayer.Redwood, 
 		DataLayer.Pine, DataLayer.Spruce, DataLayer.Sycamore, DataLayer.WhiteCedar, DataLayer.WhiteElm, DataLayer.Willow};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
@@ -39,7 +39,7 @@ public class GenLayerTreeTypes extends GenLayerTFC
 
 				if (var9 == 0)
 				{
-					var6[var8 + var7 * par3] = DataLayer.NoTree.ID;
+					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 				}
 				else
 				{
