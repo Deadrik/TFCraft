@@ -6,36 +6,15 @@ import net.minecraft.src.*;
 
 public class WorldGenDouglasFir extends WorldGenerator
 {
-    private final int field_48202_a;
-    private final boolean field_48200_b;
-    private final int field_48201_c;
-    private final int field_48199_d;
     private boolean Tall = false;
     
     private int metaID;
 
-    public WorldGenDouglasFir(boolean par1, int m)
+    public WorldGenDouglasFir(boolean par1, int m, boolean t)
     {
-        this(par1, 4, 0, 0, false);
+        super(par1);
         metaID = m;
-    }
-
-    public WorldGenDouglasFir(boolean par1,boolean tall, int par2, int par3, int par4, boolean par5)
-    {
-        super(par1);
-        Tall = tall;
-        field_48202_a = par2;
-        field_48201_c = par3;
-        field_48199_d = par4;
-        field_48200_b = par5;
-    }
-    public WorldGenDouglasFir(boolean par1, int par2, int par3, int par4, boolean par5)
-    {
-        super(par1);
-        field_48202_a = par2;
-        field_48201_c = par3;
-        field_48199_d = par4;
-        field_48200_b = par5;
+        Tall = t;
     }
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
@@ -146,82 +125,8 @@ public class WorldGenDouglasFir extends WorldGenerator
 
             setBlockAndMetadata(par1World, par3, par4 + l1, par5, Block.wood.blockID, metaID);
 
-            if (!field_48200_b || l1 <= 0)
-            {
-                continue;
-            }
-
-            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 - 1, par4 + l1, par5))
-            {
-                setBlockAndMetadata(par1World, par3 - 1, par4 + l1, par5, Block.vine.blockID, 8);
-            }
-
-            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 1, par4 + l1, par5))
-            {
-                setBlockAndMetadata(par1World, par3 + 1, par4 + l1, par5, Block.vine.blockID, 2);
-            }
-
-            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + l1, par5 - 1))
-            {
-                setBlockAndMetadata(par1World, par3, par4 + l1, par5 - 1, Block.vine.blockID, 1);
-            }
-
-            if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + l1, par5 + 1))
-            {
-                setBlockAndMetadata(par1World, par3, par4 + l1, par5 + 1, Block.vine.blockID, 4);
-            }
         }
-
-        if (field_48200_b)
-        {
-            for (int i2 = (par4 - 3) + i; i2 <= par4 + i; i2++)
-            {
-                int i3 = i2 - (par4 + i);
-                int k3 = 2 - i3 / 2;
-
-                for (int i4 = par3 - k3; i4 <= par3 + k3; i4++)
-                {
-                    for (int k4 = par5 - k3; k4 <= par5 + k3; k4++)
-                    {
-                        if (par1World.getBlockId(i4, i2, k4) != Block.leaves.blockID)
-                        {
-                            continue;
-                        }
-
-                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(i4 - 1, i2, k4) == 0)
-                        {
-                            func_48198_a(par1World, i4 - 1, i2, k4, 8);
-                        }
-
-                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(i4 + 1, i2, k4) == 0)
-                        {
-                            func_48198_a(par1World, i4 + 1, i2, k4, 2);
-                        }
-
-                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(i4, i2, k4 - 1) == 0)
-                        {
-                            func_48198_a(par1World, i4, i2, k4 - 1, 1);
-                        }
-
-                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(i4, i2, k4 + 1) == 0)
-                        {
-                            func_48198_a(par1World, i4, i2, k4 + 1, 4);
-                        }
-                    }
-                }
-            }
-        }
-
         return true;
     }
 
-    private void func_48198_a(World par1World, int par2, int par3, int par4, int par5)
-    {
-        setBlockAndMetadata(par1World, par2, par3, par4, Block.vine.blockID, par5);
-
-        for (int i = 4; par1World.getBlockId(par2, --par3, par4) == 0 && i > 0; i--)
-        {
-            setBlockAndMetadata(par1World, par2, par3, par4, Block.vine.blockID, par5);
-        }
-    }
 }

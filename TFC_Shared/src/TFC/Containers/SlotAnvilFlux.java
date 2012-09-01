@@ -1,5 +1,6 @@
 package TFC.Containers;
 
+import TFC.Core.TFCItems;
 import net.minecraft.src.*;
 
 public class SlotAnvilFlux extends Slot

@@ -1,6 +1,8 @@
 package TFC.Entities;
 
 import java.util.List;
+
+import TFC.Core.TFCItems;
 import net.minecraft.src.*;
 
 public class EntityTerraJavelin extends Entity

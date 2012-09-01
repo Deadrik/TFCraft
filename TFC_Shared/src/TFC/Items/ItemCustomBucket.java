@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.Core.Helper;
+import TFC.Core.TFCItems;
 import TFC.Entities.EntityCowTFC;
 import net.minecraft.src.*;
 import net.minecraftforge.common.MinecraftForge;

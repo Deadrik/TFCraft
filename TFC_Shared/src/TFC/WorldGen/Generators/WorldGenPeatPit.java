@@ -2,11 +2,13 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import TFC.WorldGen.TFCBiome;
 
 import net.minecraft.src.*;
 
-public class WorldGenPeatPit extends WorldGenerator
+public class WorldGenPeatPit implements IWorldGenerator
 {
 	/** The block ID for clay. */
 	private int clayBlockId;
@@ -61,5 +63,19 @@ public class WorldGenPeatPit extends WorldGenerator
 		}
 
 		return true;
+	}
+	
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world,
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	{
+		chunkX *= 16;
+		chunkZ *= 16;
+
+
+		int var7 = chunkX + random.nextInt(16) + 8;
+		int var3 = chunkZ + random.nextInt(16) + 8;
+
+		generate(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3)-1, var3);
 	}
 }

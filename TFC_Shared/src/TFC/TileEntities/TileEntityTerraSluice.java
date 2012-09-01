@@ -7,6 +7,7 @@ import java.util.Random;
 
 import TFC.Blocks.BlockTerraOre;
 import TFC.Blocks.BlockTerraSluice;
+import TFC.Core.TFCItems;
 import TFC.Items.ItemOre1;
 import net.minecraft.src.*;
 

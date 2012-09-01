@@ -1,18 +1,23 @@
 package TFC.Blocks;
 
+import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Core.Direction;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
 
@@ -24,7 +29,12 @@ public class BlockTerraWood extends Block
         super(i, Material.wood);
     }
 
-    public void addCreativeItems(java.util.ArrayList list)
+    @SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
     {
         for(int i = 0; i < 16; i++) {
             list.add(new ItemStack(this,1,i));

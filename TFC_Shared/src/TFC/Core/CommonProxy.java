@@ -1,11 +1,21 @@
-package net.minecraft.src;
+package TFC.Core;
 
 import java.io.File;
 import java.util.Map;
 
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.Packet;
+import net.minecraft.src.TerraFirmaCraft;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 import net.minecraftforge.common.MinecraftForge;
 
 import TFC.Commands.GetBioTempCommand;
+import TFC.Commands.GetTreesCommand;
 import TFC.Containers.*;
 import TFC.Core.*;
 import TFC.Entities.*;
@@ -173,12 +183,6 @@ public class CommonProxy implements IGuiHandler
 		return false;
 	}
 
-	public void	RegisterCommands()
-	{
-		CommandHandler CH = ((CommandHandler)FMLCommonHandler.instance().getMinecraftServerInstance().getCommandManager());
-		CH.registerCommand(new GetBioTempCommand());
-	}
-
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
 	{
 		TileEntity te=world.getBlockTileEntity(x, y, z);
@@ -263,7 +267,7 @@ public class CommonProxy implements IGuiHandler
 
 	public void sendCustomPacket(Packet packet)
 	{
-
+		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
 	}
 
 	public int getArmorRenderID(int i)

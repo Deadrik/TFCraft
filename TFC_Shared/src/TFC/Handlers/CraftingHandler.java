@@ -2,6 +2,7 @@ package TFC.Handlers;
 
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerraFood;
 import net.minecraft.src.EntityPlayer;
@@ -9,7 +10,6 @@ import net.minecraft.src.IInventory;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.TerraFirmaCraft;
 import cpw.mods.fml.common.ICraftingHandler;
 

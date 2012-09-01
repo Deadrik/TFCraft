@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Core.TFCItems;
 import net.minecraft.src.*;
 
 public class ItemCustomBucketMilk extends Item

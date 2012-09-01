@@ -1,6 +1,7 @@
 package TFC.Containers;
 
 import TFC.Core.AnvilReq;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityTerraAnvil;

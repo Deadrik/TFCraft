@@ -1,9 +1,7 @@
 package TFC.Containers;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
+import TFC.Core.TFCItems;
 import net.minecraft.src.*;
-import net.minecraft.src.Slot;
 
 public class SlotLogPile extends Slot
 

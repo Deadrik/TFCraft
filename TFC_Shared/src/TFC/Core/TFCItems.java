@@ -1,4 +1,4 @@
-package net.minecraft.src;
+package TFC.Core;
 
 import java.io.File;
 
@@ -8,8 +8,12 @@ import TFC.Items.*;
 import TFC.TileEntities.TileEntityTerraSluice;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.EnumArmorMaterial;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
+import net.minecraft.src.Potion;
+import net.minecraft.src.TFCBlocks;
+import net.minecraft.src.TerraFirmaCraft;
 import net.minecraftforge.common.*;
 
 public class TFCItems

@@ -1,7 +1,11 @@
 package TFC.Blocks;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
@@ -10,6 +14,37 @@ import net.minecraft.src.*;
 
 public class BlockTerraDirt extends BlockTerra2
 {
+    
+
+    public BlockTerraDirt(int i, int j, Block Farm)
+    {
+        super(i, j, Material.ground);
+        this.setCreativeTab(CreativeTabs.tabBlock);
+    }
+
+    public void addCreativeItems(java.util.ArrayList list)
+    {
+        for(int i = 0; i < 16; i++) {
+            list.add(new ItemStack(this,1,i));
+        }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+    	for(int i = 0; i < 15; i++)
+    		par3List.add(new ItemStack(par1, 1, i));
+    }
+
+    @Override
+    protected int damageDropped(int i) {
+        return i;
+    }
+    
     public static boolean canFallBelow(World world, int i, int j, int k)
     {
         int l = world.getBlockId(i, j, k);
@@ -27,23 +62,6 @@ public class BlockTerraDirt extends BlockTerra2
             return true;
         }
         return material == Material.lava;
-    }
-
-    public BlockTerraDirt(int i, int j, Block Farm)
-    {
-        super(i, j, Material.ground);
-    }
-
-    public void addCreativeItems(java.util.ArrayList list)
-    {
-        for(int i = 0; i < 16; i++) {
-            list.add(new ItemStack(this,1,i));
-        }
-    }
-
-    @Override
-    protected int damageDropped(int i) {
-        return i;
     }
 
     /**
@@ -109,50 +127,5 @@ public class BlockTerraDirt extends BlockTerra2
         tryToFall(world, i, j, k);
     }
     
-//    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
-//    {
-//        if((!world.isBlockOpaqueCube(i+1, j, k) || !world.isBlockOpaqueCube(i-1, j, k) || 
-//                !world.isBlockOpaqueCube(i, j, k+1) || !world.isBlockOpaqueCube(i, j, k-1)) && 
-//                !world.isBlockOpaqueCube(i, j+1, k))
-//        {
-//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i +1,j + 0.5f,k + 1));
-//
-//            double minX = 0.25;
-//            double minZ = 0.25;
-//            double maxX = 0.75;
-//            double maxZ = 0.75;
-//
-//            if(!world.isBlockOpaqueCube(i+1, j, k))
-//                maxX = 0.5;
-//            if(!world.isBlockOpaqueCube(i-1, j, k))
-//                minX = 0.5;
-//            if(!world.isBlockOpaqueCube(i, j, k+1))
-//                maxZ = 0.5;
-//            if(!world.isBlockOpaqueCube(i, j, k-1))
-//                minZ = 0.5;
-//
-//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ));
-//
-//        }
-//        else
-//            par6ArrayList.add(AxisAlignedBB.getBoundingBoxFromPool(i, j, k,i + 1,j + 1,k +1));
-//    }
-    
-//    public boolean isBlockNormalCube(World world, int i, int j, int k) 
-//    {
-//        if(world.isAirBlock(i, j+1, k))
-//        {
-//            if(world.isAirBlock(i+1, j, k))
-//                return false;
-//            if(world.isAirBlock(i-1, j, k))
-//                return false;
-//            if(world.isAirBlock(i, j, k+1))
-//                return false;
-//            if(world.isAirBlock(i, j, k-1))
-//                return false;
-//        }
-//
-//        return true;
-//    }
 
 }

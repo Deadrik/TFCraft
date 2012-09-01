@@ -6,6 +6,7 @@ import java.util.Random;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 
+import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.ChunkPosition;
 import net.minecraft.src.World;
 
@@ -27,14 +28,14 @@ public class TFC_Climate
 		float z = zCoord;
 
 		//Clamp Z
-		if(z > 40000) z = 40000;
-		if(z < -40000) z = -40000;
+		if(z > getMaxZPos()) z = getMaxZPos();
+		if(z < -getMaxZPos()) z = -getMaxZPos();
 
 		//Get the factor
 		if(z > 0)
-			factor = (40000-z)/40000;
+			factor = (getMaxZPos()-z)/getMaxZPos();
 		else
-			factor = (-40000-z)/-40000;
+			factor = (-getMaxZPos()-z)/-getMaxZPos();
 
 		return factor;
 	}
@@ -95,7 +96,7 @@ public class TFC_Climate
 	protected static float getTemp(int day, int x, int z)
 	{
 		float zTemp = getZFactor(z);
-		zTemp *= (getMaxTemperature()+35)-35;
+		zTemp = (zTemp * (getMaxTemperature()+35))-35;
 
 		float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/8000;
 
@@ -148,7 +149,7 @@ public class TFC_Climate
 	protected static float getBioTemp(int day, int x, int z)
 	{
 		float zTemp = getZFactor(z);
-		zTemp *= (getMaxTemperature()+35)-35;
+		zTemp = (zTemp * (getMaxTemperature()+35))-35;
 
 		float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/8000;
 
@@ -277,21 +278,21 @@ public class TFC_Climate
 
 	public static float getMaxTemperature()
 	{
-		return 24;
+		return 20;
 	}
 
 	public static float getBioTemperatureHeight(int x, int y, int z)
 	{
 		float temp = 0;
-		for(int i = 0; i < 24; i++)
+		for(int i = 0; i < 12; i++)
 		{
-			float t = getHeightAdjustedBioTemp(i*15, x, y, z);
+			float t = getHeightAdjustedBioTemp(i*30, x, y, z);
 			if(t < 0)
 				t = 0;
 
 			temp += t;
 		}
-		return temp/24;
+		return temp/12;
 	}
 
 	public static float getBioTemperature(int x, int z)
@@ -314,29 +315,14 @@ public class TFC_Climate
 	 */
 	public static int getGrassColor(World world, int x, int y, int z)
 	{
-		if(TFC_Time.currentMonth < 6)
-		{
-			double var1 = (double)Helper.clamp_float(getTemp(x, z)/getMaxTemperature(), 0.0F, 1.0F);
+			float temp = (getTemp(x, z)/getMaxTemperature());
 
-			double[] var3 = new double[5];
+			float rain = (TFC_Climate.getTerrainAdjustedRainfall(x, y, z) / 8000);
 
-			var3[0] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 8000, 0.0F, 1.0F);
-			var3[1] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x+1, z).floatdata1 / 8000, 0.0F, 1.0F);
-			var3[2] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x-1, z).floatdata1 / 8000, 0.0F, 1.0F);
-			var3[3] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z+1).floatdata1 / 8000, 0.0F, 1.0F);
-			var3[4] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z-1).floatdata1 / 8000, 0.0F, 1.0F);
-			//var3[5] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x+5, z).floatdata1 / 8000, 0.0F, 1.0F);
-			//var3[6] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x-5, z).floatdata1 / 8000, 0.0F, 1.0F);
-			//var3[7] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z+5).floatdata1 / 8000, 0.0F, 1.0F);
-			//var3[8] = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z-5).floatdata1 / 8000, 0.0F, 1.0F);
-
-			double var4 = (var3[0]+var3[1]+var3[2]+var3[3]+var3[4]/*+var3[5]+var3[6]+var3[7]+var3[8]*/)/5;
-			//double var4 = (double)Helper.clamp_float(((TFCWorldChunkManager)world.provider.worldChunkMgr).getRainfallLayerAt(x, z).floatdata1 / 8000, 0.0F, 1.0F);
-
-			return ColorizerGrassTFC.getGrassColor(var1, var4);
-		}
-		else
-			return ColorizerGrassTFC.getGrassDead();
+			double var1 = (double)Helper.clamp_float(temp, 0.0F, 1.0F);
+			double var3 = (double)Helper.clamp_float(rain, 0.0F, 1.0F);
+			
+			return ColorizerGrassTFC.getGrassColor(var1, var3);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -347,9 +333,10 @@ public class TFC_Climate
 	{
 		if(TFC_Time.currentMonth < 9)
 		{
-			float temp = getTemp(x, z)/getMaxTemperature();
+			float temp = (getTemp(x, z)+35)/(getMaxTemperature()+35);
 			//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
-			float rain = (((TFCWorldChunkManager)world.provider.worldChunkMgr).getRainfallLayerAt(x, z).floatdata1 / 8000);
+			float rain = (TFC_Climate.getTerrainAdjustedRainfall(x, y, z) / 8000);
+
 			double var1 = (double)Helper.clamp_float(temp, 0.0F, 1.0F);
 			double var3 = (double)Helper.clamp_float(rain, 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
@@ -364,29 +351,83 @@ public class TFC_Climate
 
 	public static float getRainfall(int x, int y, int z)
 	{
-		return manager.getRainfallLayerAt(x, z).floatdata1;
+		return 1000;
+		//return manager.getRainfallLayerAt(x, z).floatdata1;
 	}
 
 	public static float getTerrainAdjustedRainfall(int x, int y, int z)
 	{
 		float rain = manager.getRainfallLayerAt(x, z).floatdata1;
 		ArrayList biomes = new ArrayList<TFCBiome>();
-		biomes.add(TFCBiome.Mountains);
-		
-		float rainMod = 1;
-		ChunkPosition pos = null;
-		
+		biomes.add(TFCBiome.river);
+		biomes.add(TFCBiome.ocean);
+		biomes.add(TFCBiome.swampland);
+
+		float rainModWest = 1;
+		float rainModNorth = 1;
+		float rainModSouth = 1;
+		float rainModEast = 1;
+
+		BiomeGenBase biome = null;
+
+
 		for(int i = 0; i < 8; i++)
 		{
-			pos = manager.findBiomePosition((x-512)+(64*i), z, 1, biomes, worldObj.rand);
-			if(pos != null)
-			{
-				if(worldObj.getBiomeGenForCoords(pos.x, pos.z) == TFCBiome.Mountains)
-					rainMod = 1 - (i * 0.125f);
-				else if(worldObj.getBiomeGenForCoords(pos.x, pos.z) == TFCBiome.ocean)
-					rainMod = 1 + (i * 0.125f);
-			}
+			biome = worldObj.getBiomeGenForCoords((x-512)+(64*i), z);
+
+				if(biome.biomeID == TFCBiome.Mountains.biomeID)
+					rainModWest = 1 - (i * 0.0625f);
+				else if(biome.biomeID == TFCBiome.ocean.biomeID)
+					rainModWest = 1 + (i * 0.125f);
+
 		}
-		return rain*rainMod;
+		for(int i = 0; i < 8; i++)
+		{
+			biome =  worldObj.getBiomeGenForCoords(x, (z+512)-(64*i));
+
+				if(biome.biomeID == TFCBiome.Mountains.biomeID)
+					rainModSouth = 1 - (i * 0.0625f);
+				else if(biome.biomeID == TFCBiome.ocean.biomeID)
+					rainModSouth = 1 + (i * 0.125f);
+
+		}
+		for(int i = 0; i < 2; i++)
+		{
+			biome = worldObj.getBiomeGenForCoords(x, (z-128)+(64*i));
+
+				if(biome.biomeID == TFCBiome.ocean.biomeID)
+					rainModNorth +=  0.35f;
+
+		}
+		for(int i = 0; i < 2; i++)
+		{
+			biome = worldObj.getBiomeGenForCoords((x+128)-(64*i), z);
+
+				if(biome.biomeID == TFCBiome.ocean.biomeID)
+					rainModEast += 0.35f;
+
+		}
+		
+		ChunkPosition pos = manager.findBiomePosition(x, z, 64, biomes, worldObj.rand);
+		float addMoisture = 1;
+		if(pos != null)
+		{
+			addMoisture = 2;
+		}
+		
+		
+		return rain*((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture)/5);
+
+
+	}
+
+	public static int getTreeLayer(int x, int y, int z, int index)
+	{
+		return manager.getTreeLayerAt(x, z, index).data1;
+	}
+	
+	public static int getMaxZPos()
+	{
+		return 20000;
 	}
 }

@@ -2,6 +2,7 @@ package TFC.Containers;
 
 import java.util.ArrayList;
 
+import TFC.Core.TFCItems;
 import TFC.TileEntities.TileEntityTerraFirepit;
 
 import net.minecraft.src.*;

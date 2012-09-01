@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFCItems;
 import TFC.Items.ItemTerraLogs;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;

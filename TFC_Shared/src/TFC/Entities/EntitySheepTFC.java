@@ -6,6 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 

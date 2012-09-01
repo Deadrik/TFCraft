@@ -14,10 +14,10 @@ public class BlockTerraFarmland extends BlockContainer
 {
 	int dirtID;
 
-	public BlockTerraFarmland(int par1, int id)
+	public BlockTerraFarmland(int par1, int id, int tex)
 	{
 		super(par1, Material.ground);
-		this.blockIndexInTexture = 176;
+		this.blockIndexInTexture = tex;
 		this.setTickRandomly(true);
 		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 		dirtID = id;

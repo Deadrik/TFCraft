@@ -59,11 +59,12 @@ def main():
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
+    zip_add('TFC Resources')
     zip_end()
     
     zip_start('TFCraft-src.zip')
     zip_add('tfc_client/src', 'src/minecraft')
-    zip_add('tfc_common',     'src/minecraft')
+    zip_add('tfc_shared/src',     'src/minecraft')
     zip_add('patches',          'patches')
     zip_add('tfc_credits.txt')
     zip_add('install/install.cmd')

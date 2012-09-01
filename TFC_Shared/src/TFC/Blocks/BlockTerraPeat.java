@@ -1,5 +1,9 @@
 package TFC.Blocks;
 
+import java.util.List;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.*;
 
 public class BlockTerraPeat extends BlockTerra2
@@ -9,7 +13,13 @@ public class BlockTerraPeat extends BlockTerra2
 	{
 		super(i, j, Material.ground);
 	}
-	public void addCreativeItems(java.util.ArrayList list)
+	
+	@SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
 	}

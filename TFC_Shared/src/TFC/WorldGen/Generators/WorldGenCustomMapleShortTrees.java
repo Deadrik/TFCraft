@@ -73,7 +73,7 @@ public class WorldGenCustomMapleShortTrees extends WorldGenerator
 		}
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
-		world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+		world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 		for (int k1 = yCoord - 3 + l; k1 <= yCoord + l; k1++)
 		{
 			int j2 = k1 - (yCoord + l);

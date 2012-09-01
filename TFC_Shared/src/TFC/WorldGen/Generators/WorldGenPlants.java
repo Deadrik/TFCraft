@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Blocks.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -58,13 +59,14 @@ public class WorldGenPlants implements IWorldGenerator
 
 		if(rainfall.floatdata1 >= 62.5f) 
 		{
-			
+
 		}
 		if(rainfall.floatdata1 >= 125) 
 		{
 			if(evt.floatdata1 > 1)
 			{
 				grassPerChunk+=24;
+				flowersPerChunk += 3;
 			}
 		}
 		if(rainfall.floatdata1 >= 250) 
@@ -72,6 +74,7 @@ public class WorldGenPlants implements IWorldGenerator
 			if(evt.floatdata1 > 0.25f)
 			{
 				grassPerChunk+=24;
+				flowersPerChunk += 3;
 			}
 		}
 		if(rainfall.floatdata1 >= 500) 
@@ -79,28 +82,37 @@ public class WorldGenPlants implements IWorldGenerator
 			if(evt.floatdata1 >= 0.125f)
 			{
 				grassPerChunk+=24;
+				flowersPerChunk += 3;
 			}
 		}
 
-		for (int i = 0; i < ((BiomeDecoratorTFC)biome.theBiomeDecorator).flowersPerChunk; ++i)
+		for (int i = 0; i < flowersPerChunk; ++i)
 		{
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;
 			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 
-			plantYellowGen.generate(world, random, xCoord, yCoord, zCoord);
-
-			if (random.nextInt(4) == 0)
+			if(bioTemperature > 1.5)
 			{
-				xCoord = chunkX + random.nextInt(16) + 8;
-				zCoord = chunkZ + random.nextInt(16) + 8;
-				yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-				plantRedGen.generate(world, random, xCoord, yCoord, zCoord);
+				plantYellowGen.generate(world, random, xCoord, yCoord, zCoord);
+
+				if (random.nextInt(4) == 0)
+				{
+					xCoord = chunkX + random.nextInt(16) + 8;
+					zCoord = chunkZ + random.nextInt(16) + 8;
+					yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
+					bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
+					if(bioTemperature > 1.5)
+					{
+						plantRedGen.generate(world, random, xCoord, yCoord, zCoord);
+					}
+				}
 			}
 		}
 
 
-		
+
 		for (int i  = 0; i < grassPerChunk; ++i)
 		{
 
@@ -111,8 +123,8 @@ public class WorldGenPlants implements IWorldGenerator
 			bioTemperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			if(bioTemperature >= 1.5)
 			{
-//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);
-//				var6.generate(world, random, xCoord, yCoord, zCoord);
+				//				WorldGenerator var6 = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);
+				//				var6.generate(world, random, xCoord, yCoord, zCoord);
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
 						((BlockCustomTallGrass)Block.blocksList[Block.tallGrass.blockID]).canBlockStay(world, xCoord, yCoord, zCoord))
 				{
@@ -165,64 +177,64 @@ public class WorldGenPlants implements IWorldGenerator
 			{
 			default:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					appleTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 1:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					bananaTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 2:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					orangeTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 3:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					grappleTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 4:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					lemonTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 5:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					oliveTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 6:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					cherryTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 7:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					peachTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			case 8:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && (world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass.blockID || world.getBlockId(xCoord, yCoord-1, zCoord) == TFCBlocks.terraGrass2.blockID))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
 					plumTree.generate(world, random, xCoord, yCoord, zCoord);
 				break;
 			}
 			//                case 9:
-				//                {
-					//                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
-						//                        cacaoTree.generate(world, rand, var2, var3, var4);
-					//                    break;
-					//                }
+			//                {
+			//                    if(world.getBlockId(var2, var3, var4) == 0 && (world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass.blockID || world.getBlockId(var2, var3-1, var4) == mod_TFC_Core.terraGrass2.blockID))
+			//                        cacaoTree.generate(world, rand, var2, var3, var4);
+			//                    break;
+			//                }
 			}
 		}
 

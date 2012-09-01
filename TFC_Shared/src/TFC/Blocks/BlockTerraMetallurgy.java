@@ -1,7 +1,12 @@
 package TFC.Blocks;
 
+import java.util.List;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
 import net.minecraft.src.BlockContainer;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
@@ -24,7 +29,12 @@ public class BlockTerraMetallurgy extends BlockContainer
 		EntityClass = tClass;
 	}
 
-	public void addCreativeItems(java.util.ArrayList list)
+	@SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
 	}

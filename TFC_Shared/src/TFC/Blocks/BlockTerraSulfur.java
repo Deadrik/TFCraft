@@ -2,6 +2,8 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFCItems;
+
 import net.minecraft.src.*;
 
 public class BlockTerraSulfur extends Block

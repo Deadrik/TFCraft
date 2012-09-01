@@ -1,5 +1,6 @@
 package TFC.Containers;
 
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import net.minecraft.src.*;
 

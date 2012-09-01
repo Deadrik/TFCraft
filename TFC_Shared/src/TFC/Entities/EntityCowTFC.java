@@ -1,5 +1,6 @@
 package TFC.Entities;
 
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import net.minecraft.src.*;

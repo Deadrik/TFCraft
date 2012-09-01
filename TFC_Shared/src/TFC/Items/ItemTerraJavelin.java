@@ -3,6 +3,7 @@ package TFC.Items;
 import java.util.ArrayList;
 import java.util.List;
 
+import TFC.Core.TFCItems;
 import TFC.Entities.EntityTerraJavelin;
 import net.minecraft.src.*;
 

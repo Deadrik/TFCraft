@@ -1,0 +1,18 @@
+[
+{
+  "modid" : "mod_TerraFirmaCraft",
+  "name" : "TerraFirmaCraft",
+  "version" : "Beta 2",
+  "url" : "",
+  "credits" : "",
+  "authors": [
+    "Vazkii"
+  ],
+  "description": "",
+  "logoFile" : "",
+  "updateUrl" : "http://www.terrafirmacraft.com/",
+  "parent" : "",
+  "screenshots": [
+  ]
+}
+]

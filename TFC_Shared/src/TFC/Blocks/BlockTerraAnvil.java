@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.Random;
 
 import TFC.Core.AnvilReq;
+import TFC.Core.TFCItems;
 import TFC.TileEntities.TileEntityTerraAnvil;
 
 import net.minecraft.src.AxisAlignedBB;
@@ -15,7 +16,6 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;

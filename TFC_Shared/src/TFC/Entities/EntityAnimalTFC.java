@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 

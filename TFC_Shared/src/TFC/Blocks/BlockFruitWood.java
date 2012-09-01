@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
@@ -20,7 +21,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 

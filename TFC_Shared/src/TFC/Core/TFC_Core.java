@@ -477,7 +477,7 @@ public class TFC_Core
 		try
 		{
 			//ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), "randomSeed", seed);
-			//ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), 0, seed);
+			ReflectionHelper.setPrivateValue(WorldInfo.class, w.getWorldInfo(), seed, 0);
 			SetupWorld(w);
 		}
 		catch(Exception ex)
@@ -493,30 +493,66 @@ public class TFC_Core
 		return id == TFCBlocks.terraStoneIgEx.blockID || id == TFCBlocks.terraStoneIgIn.blockID || 
 				id == TFCBlocks.terraStoneSed.blockID || id == TFCBlocks.terraStoneMM.blockID;
 	}
-	
+
+	public static boolean isRawStone(int id)
+	{
+		return id == TFCBlocks.terraStoneIgEx.blockID || id == TFCBlocks.terraStoneIgIn.blockID || 
+				id == TFCBlocks.terraStoneSed.blockID || id == TFCBlocks.terraStoneMM.blockID;
+	}
+
 	public static boolean isDirt(int id)
 	{
-		if(id == TFCBlocks.terraDirt.blockID || id == TFCBlocks.terraDirt2.blockID)
-		{
-			return true;
-		}
-		
-		return false;
+		return (id == TFCBlocks.terraDirt.blockID || id == TFCBlocks.terraDirt2.blockID);
 	}
-	
+
 	public static boolean isGrass(int id)
 	{
-		if(id == TFCBlocks.terraGrass.blockID || id == TFCBlocks.terraGrass2.blockID ||
+		return (id == TFCBlocks.terraGrass.blockID || id == TFCBlocks.terraGrass2.blockID ||
 				id == TFCBlocks.terraClayGrass.blockID || id == TFCBlocks.terraClayGrass2.blockID ||
-				id == TFCBlocks.terraPeatGrass.blockID)
-		{
+				id == TFCBlocks.terraPeatGrass.blockID || id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
+
+	}
+	
+	public static boolean isDryGrass(int id)
+	{
+		return (id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
+
+	}
+
+	public static boolean isClay(int id)
+	{
+		if(id == TFCBlocks.terraClay.blockID || id == TFCBlocks.terraClay2.blockID)
 			return true;
-		}
-		
 		return false;
 	}
 
-	public static int getMetaForGrass(int inType, int inMeta)
+	public static boolean isSand(int id)
+	{
+		if(id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID)
+			return true;
+		return false;
+	}
+
+	public static boolean isPeat(int id)
+	{
+		if(id == TFCBlocks.terraPeat.blockID)
+			return true;
+		return false;
+	}
+
+	public static boolean isWater(int id)
+	{
+		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID || id == TFCBlocks.finiteWater.blockID)
+			return true;
+		return false;
+	}
+
+	public static boolean isSoil(int id)
+	{
+		return isGrass(id) || isDirt(id) || isClay(id);
+	}
+
+	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
 		if(inType == TFCBlocks.terraStoneIgIn.blockID)
 			return inMeta;
@@ -527,54 +563,61 @@ public class TFC_Core
 		else
 			return inMeta+17;
 	}
+
+	public static int getTypeForGrassWithRain(int inMeta, float rain)
+	{
+		if(rain >= 500)
+			return getTypeForGrass(inMeta);
+		return getTypeForDryGrass(inMeta);
+
+	}
+
 	public static int getTypeForGrass(int inMeta)
 	{
 		if(inMeta < 16)
-		{
 			return TFCBlocks.terraGrass.blockID;
-		}
-		else
-		{
-			return TFCBlocks.terraGrass2.blockID;
-		}
+		return TFCBlocks.terraGrass2.blockID;
 	}
-	
+
+	public static int getTypeForDryGrass(int inMeta)
+	{
+		if(inMeta < 16)
+			return TFCBlocks.DryGrass.blockID;
+		return TFCBlocks.DryGrass2.blockID;
+	}
+
 	public static int getTypeForClayGrass(int inMeta)
 	{
 		if(inMeta < 16)
-		{
 			return TFCBlocks.terraClayGrass.blockID;
-		}
-		else
-		{
-			return TFCBlocks.terraClayGrass2.blockID;
-		}
+		return TFCBlocks.terraClayGrass2.blockID;
 	}
-	
+
 	public static int getTypeForDirt(int inMeta)
 	{
 		if(inMeta < 16)
-		{
 			return TFCBlocks.terraDirt.blockID;
-		}
-		else
-		{
-			return TFCBlocks.terraDirt2.blockID;
-		}
+		return TFCBlocks.terraDirt2.blockID;
 	}
-	
+
 	public static int getTypeForClay(int inMeta)
 	{
 		if(inMeta < 16)
-		{
+
 			return TFCBlocks.terraClay.blockID;
-		}
-		else
-		{
-			return TFCBlocks.terraClay2.blockID;
-		}
+		return TFCBlocks.terraClay2.blockID;
+
 	}
-	
+
+	public static int getTypeForSand(int inMeta)
+	{
+		if(inMeta < 16)
+
+			return TFCBlocks.Sand.blockID;
+		return TFCBlocks.Sand2.blockID;
+
+	}
+
 	public static int getRockLayerFromHeight( int y)
 	{
 		if(y <= TerraFirmaCraft.RockLayer3Height)
@@ -584,6 +627,6 @@ public class TFC_Core
 		else
 			return 0;
 	}
-	
+
 
 }

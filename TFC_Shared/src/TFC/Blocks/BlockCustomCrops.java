@@ -3,6 +3,8 @@ package TFC.Blocks;
 import java.util.Random;
 import java.util.ArrayList;
 
+import TFC.Core.TFCItems;
+
 import net.minecraft.src.*;
 
 

@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
@@ -66,7 +67,7 @@ public class BlockLooseRock extends BlockTerra
 	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
 	    }
 	    else
-	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getMetaForGrass(rockLayer.data1, rockLayer.data2)));
+	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getSoilMetaFromStone(rockLayer.data1, rockLayer.data2)));
 	    
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}

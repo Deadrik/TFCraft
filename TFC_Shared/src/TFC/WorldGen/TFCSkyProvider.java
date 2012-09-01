@@ -62,6 +62,7 @@ public class TFCSkyProvider extends SkyProvider{
 
 		GL11.glColor3f(var3, var4, var5);
 		Tessellator var23 = Tessellator.instance;
+
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_FOG);
 		GL11.glColor3f(var3, var4, var5);
@@ -100,23 +101,26 @@ public class TFCSkyProvider extends SkyProvider{
 				var10 = var13;
 			}
 
-			var23.startDrawing(6);
-			var23.setColorRGBA_F(var8, var9, var10, var24[3]);
-			var23.addVertex(0.0D, 100.0D, 0.0D);
-			byte var26 = 16;
-			var23.setColorRGBA_F(var24[0], var24[1], var24[2], 0.0F);
-
-			for (int var27 = 0; var27 <= var26; ++var27)
+			if(!var23.isDrawing)
 			{
-				var13 = (float)var27 * (float)Math.PI * 2.0F / (float)var26;
-				float var14 = MathHelper.sin(var13);
-				float var15 = MathHelper.cos(var13);
-				var23.addVertex((double)(var14 * 120.0F), (double)(var15 * 120.0F), (double)(-var15 * 40.0F * var24[3]));
-			}
+				var23.startDrawing(6);
+				var23.setColorRGBA_F(var8, var9, var10, var24[3]);
+				var23.addVertex(0.0D, 100.0D, 0.0D);
+				byte var26 = 16;
+				var23.setColorRGBA_F(var24[0], var24[1], var24[2], 0.0F);
 
-			var23.draw();
-			GL11.glPopMatrix();
-			GL11.glShadeModel(GL11.GL_FLAT);
+				for (int var27 = 0; var27 <= var26; ++var27)
+				{
+					var13 = (float)var27 * (float)Math.PI * 2.0F / (float)var26;
+					float var14 = MathHelper.sin(var13);
+					float var15 = MathHelper.cos(var13);
+					var23.addVertex((double)(var14 * 120.0F), (double)(var15 * 120.0F), (double)(-var15 * 40.0F * var24[3]));
+				}
+
+				var23.draw();
+				GL11.glPopMatrix();
+				GL11.glShadeModel(GL11.GL_FLAT);
+			}
 		}
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -132,12 +136,15 @@ public class TFCSkyProvider extends SkyProvider{
 		GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
 		var12 = 30.0F;
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/terrain/sun.png"));
-		var23.startDrawingQuads();
-		var23.addVertexWithUV((double)(-var12), 100.0D, (double)(-var12), 0.0D, 0.0D);
-		var23.addVertexWithUV((double)var12, 100.0D, (double)(-var12), 1.0D, 0.0D);
-		var23.addVertexWithUV((double)var12, 100.0D, (double)var12, 1.0D, 1.0D);
-		var23.addVertexWithUV((double)(-var12), 100.0D, (double)var12, 0.0D, 1.0D);
-		var23.draw();
+		if(!var23.isDrawing)
+		{
+			var23.startDrawingQuads();
+			var23.addVertexWithUV((double)(-var12), 100.0D, (double)(-var12), 0.0D, 0.0D);
+			var23.addVertexWithUV((double)var12, 100.0D, (double)(-var12), 1.0D, 0.0D);
+			var23.addVertexWithUV((double)var12, 100.0D, (double)var12, 1.0D, 1.0D);
+			var23.addVertexWithUV((double)(-var12), 100.0D, (double)var12, 0.0D, 1.0D);
+			var23.draw();
+		}
 		var12 = 20.0F;
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/terrain/moon_phases.png"));
 		int var28 = world.getMoonPhase(partialTicks);
@@ -147,12 +154,15 @@ public class TFCSkyProvider extends SkyProvider{
 		float var17 = (float)(var29 + 0) / 2.0F;
 		float var18 = (float)(var30 + 1) / 4.0F;
 		float var19 = (float)(var29 + 1) / 2.0F;
+		if(!var23.isDrawing)
+		{
 		var23.startDrawingQuads();
 		var23.addVertexWithUV((double)(-var12), -100.0D, (double)var12, (double)var18, (double)var19);
 		var23.addVertexWithUV((double)var12, -100.0D, (double)var12, (double)var16, (double)var19);
 		var23.addVertexWithUV((double)var12, -100.0D, (double)(-var12), (double)var16, (double)var17);
 		var23.addVertexWithUV((double)(-var12), -100.0D, (double)(-var12), (double)var18, (double)var17);
 		var23.draw();
+		}
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		float var20 = world.getStarBrightness(partialTicks) * var8;
 
@@ -222,27 +232,27 @@ public class TFCSkyProvider extends SkyProvider{
 		GL11.glDepthMask(true);
 
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 
-    /**
-     * takes temperature, returns color
-     */
-    public int getSkyColorByTemp(float par1)
-    {
-        par1 /= 3.0F;
+	/**
+	 * takes temperature, returns color
+	 */
+	public int getSkyColorByTemp(float par1)
+	{
+		par1 /= 3.0F;
 
-        if (par1 < -1.0F)
-        {
-            par1 = -1.0F;
-        }
+		if (par1 < -1.0F)
+		{
+			par1 = -1.0F;
+		}
 
-        if (par1 > 1.0F)
-        {
-            par1 = 1.0F;
-        }
+		if (par1 > 1.0F)
+		{
+			par1 = 1.0F;
+		}
 
-        return Color.getHSBColor(0.62222224F - par1 * 0.05F, 0.5F + par1 * 0.1F, 1.0F).getRGB();
-    }
+		return Color.getHSBColor(0.62222224F - par1 * 0.05F, 0.5F + par1 * 0.1F, 1.0F).getRGB();
+	}
 
 }

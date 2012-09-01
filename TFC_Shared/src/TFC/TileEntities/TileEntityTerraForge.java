@@ -9,6 +9,7 @@ import java.util.Random;
 import TFC.Blocks.BlockTerraForge;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
@@ -28,7 +29,6 @@ import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 
 public class TileEntityTerraForge extends TileEntityFireEntity implements IInventory

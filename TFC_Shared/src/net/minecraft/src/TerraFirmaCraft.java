@@ -39,6 +39,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import TFC.*;
 import TFC.Blocks.*;
 import TFC.Commands.GetBioTempCommand;
+import TFC.Commands.GetTreesCommand;
 import TFC.Core.*;
 import TFC.Entities.*;
 import TFC.Handlers.BlockRenderHandler;
@@ -53,7 +54,6 @@ import TFC.WorldGen.Generators.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.TFCItems;
 import net.minecraftforge.common.*;
 
 @Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "B2 Build 49")
@@ -65,7 +65,7 @@ public class TerraFirmaCraft implements ITickHandler
 	@Instance
 	public static TerraFirmaCraft instance;
 
-	@SidedProxy(clientSide = "net.minecraft.src.ClientProxy", serverSide = "net.minecraft.src.CommonProxy")
+	@SidedProxy(clientSide = "TFC.Core.ClientProxy", serverSide = "TFC.Core.CommonProxy")
 	public static CommonProxy proxy;
 
 	//////////////////Features////////////////////
@@ -84,7 +84,7 @@ public class TerraFirmaCraft implements ITickHandler
 
 		//Load Blocks
 		TFCBlocks.LoadBlocks();
-		
+		TFCBlocks.RegisterBlocks();
 		//Load Items
 		TFCItems.Setup();
 
@@ -95,8 +95,11 @@ public class TerraFirmaCraft implements ITickHandler
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
 		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
+		GameRegistry.registerWorldGenerator(new WorldGenFixGrass());
+		GameRegistry.registerWorldGenerator(new WorldGenForests());
 		GameRegistry.registerWorldGenerator(new WorldGenPlants());
 		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
+		
 
 		//Add Item Name Localizations
 		proxy.registerTranslations();
@@ -170,6 +173,7 @@ public class TerraFirmaCraft implements ITickHandler
     public void serverStarting(FMLServerStartingEvent evt)
     {
         evt.registerServerCommand(new GetBioTempCommand());
+        evt.registerServerCommand(new GetTreesCommand());
     }
 
 	private static void RemoveRecipe(ItemStack resultItem) {
@@ -234,7 +238,7 @@ public class TerraFirmaCraft implements ITickHandler
 	@Override
 	public EnumSet ticks()
 	{
-		return EnumSet.of(TickType.WORLD, TickType.WORLDLOAD, TickType.CLIENT, TickType.PLAYER);
+		return EnumSet.of(TickType.WORLD, TickType.WORLDLOAD, TickType.PLAYER);
 	}
 	@Override
 	public String getLabel()

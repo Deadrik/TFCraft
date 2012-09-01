@@ -9,6 +9,7 @@ import cpw.mods.fml.common.asm.SideOnly;
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemChisel;
@@ -24,7 +25,6 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
@@ -33,14 +33,6 @@ public class BlockTerraIgEx extends BlockCollapsable
 	public BlockTerraIgEx(int i, Material material, int id) {
 		super(i,3, material, id);
 		this.setCreativeTab(CreativeTabs.tabBlock);
-	}
-
-
-	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 0; i < 4; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
 	}
 
 	/*

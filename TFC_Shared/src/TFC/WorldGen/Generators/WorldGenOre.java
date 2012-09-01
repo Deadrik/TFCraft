@@ -24,6 +24,8 @@ public class WorldGenOre implements IWorldGenerator
 	public void generate(Random rand, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
+		chunkX *= 16;
+		chunkZ *= 16;
 		int height = Min-Max;
 		//============Copper
         createOreVein(TFCBlocks.terraOre.blockID, 0,new int[]{TFCBlocks.terraStoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins

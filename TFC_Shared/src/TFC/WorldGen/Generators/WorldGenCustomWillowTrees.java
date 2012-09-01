@@ -68,12 +68,12 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 
 	private void func_35265_a (World world, int i, int j, int k, int l)
 	{
-		if(world.getBlockId(i, j, k) == 0) {
+		if(world.getBlockId(i, j, k) == 0 && Block.vine.canBlockStay(world, i, j, k)) {
 			world.setBlockAndMetadataWithNotify (i, j, k, Block.vine.blockID, l);
 		}
 		for (int i1 = 4 ; world.getBlockId (i, --j, k) == 0 && i1 > 0 ; i1--)
 		{
-			if(world.getBlockId(i, j, k) == 0) {
+			if(world.getBlockId(i, j, k) == 0 && Block.vine.canBlockStay(world, i, j, k)) {
 				world.setBlockAndMetadataWithNotify (i, j, k, Block.vine.blockID, l);
 			}
 		}
@@ -147,7 +147,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		if(world.getBlockId(xCoord, yCoord - 1, zCoord) == 0) {
 			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 			//set the block below the tree to dirt.
-			world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+			world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 		}
 		int z1, x1, y,x,z;
 		y = height+yCoord;

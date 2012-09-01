@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFCItems;
 import TFC.TileEntities.TileEntityFireEntity;
 import net.minecraft.src.*;
 

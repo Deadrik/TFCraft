@@ -118,10 +118,10 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 				{
 					DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 			        
-					world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
-					world.setBlockAndMetadata(xCoord + 1, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
-					world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord + 1, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
-					world.setBlockAndMetadata(xCoord + 1, yCoord - 1, zCoord + 1, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord + 1, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord + 1, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
+					world.setBlockAndMetadata(xCoord + 1, yCoord - 1, zCoord + 1, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 					this.func_48192_a(world, xCoord, zCoord, yCoord + var6, 2, par2Random);
 
 					for (int var14 = yCoord + var6 - 2 - par2Random.nextInt(4); var14 > yCoord + var6 / 2; var14 -= 2 + par2Random.nextInt(4))

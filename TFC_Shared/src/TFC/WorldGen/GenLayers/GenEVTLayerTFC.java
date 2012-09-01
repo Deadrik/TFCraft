@@ -59,9 +59,9 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
         }
         GenLayerSmoothTFC var19 = new GenLayerSmoothTFC(1000L, (GenLayerTFC)var18);
         GenLayerVoronoiZoomTFC var8 = new GenLayerVoronoiZoomTFC(10L, var19);
-        var6.initWorldGenSeed(par0);
+        var19.initWorldGenSeed(par0);
         var8.initWorldGenSeed(par0);
-        return new GenLayerTFC[] {var6, var8};
+        return new GenLayerTFC[] {var19, var8};
     }
 
     public GenEVTLayerTFC(long par1)

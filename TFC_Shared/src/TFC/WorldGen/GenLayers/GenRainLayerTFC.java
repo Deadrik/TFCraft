@@ -36,7 +36,7 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
         var10 = new GenLayerAddIslandTFC(3L, var11);
         var11 = new GenLayerZoomTFC(2003L, var10);
         var10 = new GenLayerAddIslandTFC(4L, var11);
-        byte var4 = 5;
+        byte var4 = 4;
 
         GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
         GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
@@ -59,9 +59,9 @@ public abstract class GenRainLayerTFC extends GenLayerTFC
         }
         GenLayerSmoothTFC var19 = new GenLayerSmoothTFC(1000L, (GenLayerTFC)var18);
         GenLayerVoronoiZoomTFC var8 = new GenLayerVoronoiZoomTFC(10L, var19);
-        var6.initWorldGenSeed(par0);
+        var19.initWorldGenSeed(par0);
         var8.initWorldGenSeed(par0);
-        return new GenLayerTFC[] {var6, var8};
+        return new GenLayerTFC[] {var19, var8};
     }
 
     public GenRainLayerTFC(long par1)

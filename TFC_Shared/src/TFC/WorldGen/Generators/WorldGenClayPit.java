@@ -2,14 +2,17 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import TFC.Core.TFC_Core;
+import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.src.*;
 
-public class WorldGenClayPit extends WorldGenerator
+public class WorldGenClayPit implements IWorldGenerator
 {
 	/** The block ID for clay. */
 	private int clayBlockId;
@@ -45,14 +48,14 @@ public class WorldGenClayPit extends WorldGenerator
 							int ID = world.getBlockId(xCoord, yCoord, zCoord);
 
 							DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
-							
+
 							if (ID == TFCBlocks.terraDirt.blockID || ID == TFCBlocks.terraDirt2.blockID)
 							{
-								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 							}
 							else if(ID == TFCBlocks.terraGrass.blockID || ID == TFCBlocks.terraGrass2.blockID)
 							{
-								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getMetaForGrass(rockLayer1.data1, rockLayer1.data2));
+								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 							}
 						}
 					}
@@ -61,5 +64,19 @@ public class WorldGenClayPit extends WorldGenerator
 		}
 
 		return true;
+	}
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world,
+			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	{
+		chunkX *= 16;
+		chunkZ *= 16;
+
+
+		int var7 = chunkX + random.nextInt(16) + 8;
+		int var3 = chunkZ + random.nextInt(16) + 8;
+
+		generate(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3)-1, var3);
 	}
 }

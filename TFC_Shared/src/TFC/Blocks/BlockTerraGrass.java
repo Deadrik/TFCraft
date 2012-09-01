@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import TFC.Core.ColorizerGrassTFC;
+import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
@@ -12,24 +14,11 @@ import net.minecraft.src.*;
 
 public class BlockTerraGrass extends BlockGrass
 {
-    public int grassID = 0;
-    public int grass2ID = 0;
-    public int dirtID = 0;
-    public int dirt2ID = 0;
-    public int clayID = 0;
-    public int clay2ID = 0;
-    public int clayGrassID = 0;
-    public int clayGrass2ID = 0;
-    public int peatID = 0;
-    public int peatGrassID = 0;
-
-    private Block blk;
-    public BlockTerraGrass(int par1, int par2, Block par3)
+    public BlockTerraGrass(int par1, int par2)
     {
         super(par1);
         this.setTickRandomly(true);
         this.blockIndexInTexture = par2;
-        blk = par3;
     }
 
     @Override
@@ -38,26 +27,10 @@ public class BlockTerraGrass extends BlockGrass
         return "/bioxx/terrablocks2.png";
     }
 
-    public void setIDs(int grass, int grass2,int dirt, int dirt2,int clay, int clay2,int claygrass, int claygrass2, int peat, int peatgrass)
-    {
-        grassID = grass;
-        grass2ID = grass2;
-        dirtID = dirt;
-        dirt2ID = dirt2;
-        clayID = clay;
-        clay2ID = clay2;
-        clayGrassID = claygrass;
-        clayGrass2ID = claygrass2;
-        peatID = peat;
-        peatGrassID = peatgrass;
-    }
-
     @Override
     protected int damageDropped(int i) {
         return i;
     }
-
-    
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -71,43 +44,45 @@ public class BlockTerraGrass extends BlockGrass
     /**
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
-    public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public int getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
     {
+    	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord))];
+    	
         if (par5 == 1)//top
         {
             return 255;
         }
         else if (par5 == 0)//bottom
         {
-            return this.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+            return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 2)//-Z
         {
-            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4-1) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 3)//+Z
         {
-            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2, par3-1, par4+1) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 4)//-X
         {
-            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2-1, par3-1, par4) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 5)//+X
         {
-            if(TFC_Settings.enableBetterGrass == true && par1IBlockAccess.getBlockMaterial(par2+1, par3-1, par4) == Material.grass)
+            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         return this.blockIndexInTexture;
     }
@@ -146,46 +121,42 @@ public class BlockTerraGrass extends BlockGrass
      * Ticks the block if it's been scheduled
      */
     @Override
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    public void updateTick(World world, int par2, int par3, int par4, Random par5Random)
     {
-        if (!par1World.isRemote)
+        if (!world.isRemote)
         {
-            if (par1World.getBlockLightValue(par2, par3 + 1, par4) < 4 && Block.lightOpacity[par1World.getBlockId(par2, par3 + 1, par4)] > 2)
+            if (world.getBlockLightValue(par2, par3 + 1, par4) < 4 && Block.lightOpacity[world.getBlockId(par2, par3 + 1, par4)] > 2)
             {
-                par1World.setBlockAndMetadataWithNotify(par2, par3, par4, dirtID, par1World.getBlockMetadata(par2, par3, par4));
+                world.setBlockAndMetadataWithNotify(par2, par3, par4, TFC_Core.getTypeForDirt(world.getBlockMetadata(par2, par3, par4)), world.getBlockMetadata(par2, par3, par4));
             }
-            else if (par1World.getBlockLightValue(par2, par3 + 1, par4) >= 9)
-            {
+            else if (world.getBlockLightValue(par2, par3 + 1, par4) >= 9)
+            {            	
                 for (int var6 = 0; var6 < 4; ++var6)
                 {
-                    int var7 = par2 + par5Random.nextInt(3) - 1;
-                    int var8 = par3 + par5Random.nextInt(5) - 3;
-                    int var9 = par4 + par5Random.nextInt(3) - 1;
-                    int var10 = par1World.getBlockId(var7, var8 + 1, var9);
+                    int x = par2 + par5Random.nextInt(3) - 1;
+                    int y = par3 + par5Random.nextInt(5) - 3;
+                    int z = par4 + par5Random.nextInt(3) - 1;
 
-                    if (par1World.getBlockId(var7, var8, var9) == dirtID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
+                    float rain = 1000/*TFC_Climate.getRainfall(x, y + 1, z)*/;
+                    
+                    int id = world.getBlockId(x, y, z);
+                    int meta = world.getBlockMetadata(x, y, z);
+
+                    if (TFC_Core.isDirt(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && Block.lightOpacity[id] <= 2 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
-                        par1World.setBlockAndMetadataWithNotify(var7, var8, var9, grassID, par1World.getBlockMetadata(var7, var8, var9));
+                        world.setBlockAndMetadataWithNotify(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta);
                     }
-                    if (par1World.getBlockId(var7, var8, var9) == dirt2ID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
+                    if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && Block.lightOpacity[id] <= 2 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
-                        par1World.setBlockAndMetadataWithNotify(var7, var8, var9, grass2ID, par1World.getBlockMetadata(var7, var8, var9));
+                        world.setBlockAndMetadataWithNotify(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta);
                     }
-                    if (par1World.getBlockId(var7, var8, var9) == clayID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
+                    if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && Block.lightOpacity[id] <= 2 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
-                        par1World.setBlockAndMetadataWithNotify(var7, var8, var9, clayGrassID, par1World.getBlockMetadata(var7, var8, var9));
-                    }
-                    if (par1World.getBlockId(var7, var8, var9) == clay2ID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
-                    {
-                        par1World.setBlockAndMetadataWithNotify(var7, var8, var9, clayGrass2ID, par1World.getBlockMetadata(var7, var8, var9));
-                    }
-                    if (par1World.getBlockId(var7, var8, var9) == peatID && par1World.getBlockLightValue(var7, var8 + 1, var9) >= 4 && Block.lightOpacity[var10] <= 2 && par1World.getBlockMaterial(var7, var8 + 1, var9) != Material.water)
-                    {
-                        par1World.setBlockAndMetadataWithNotify(var7, var8, var9, peatGrassID, par1World.getBlockMetadata(var7, var8, var9));
+                        world.setBlockWithNotify(x, y, z, TFCBlocks.terraPeatGrass.blockID);
                     }
                 }
             }
-            par1World.markBlockNeedsUpdate(par2, par3, par4);
+            world.markBlockNeedsUpdate(par2, par3, par4);
         }
     }
 
@@ -197,7 +168,7 @@ public class BlockTerraGrass extends BlockGrass
             if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockTerraDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
             {
                 int meta = world.getBlockMetadata(i, j, k);
-                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.terraDirt.blockID, meta);
+                world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(meta), meta);
             }
         }
     }
@@ -213,7 +184,7 @@ public class BlockTerraGrass extends BlockGrass
     @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return TFCBlocks.terraDirt.idDropped(0, par2Random, par3);
+        return Block.blocksList[TFC_Core.getTypeForDirt(par1)].idDropped(par1, par2Random, par3);
     }
 
 //    public boolean isBlockNormalCube(World world, int i, int j, int k) 
@@ -269,7 +240,7 @@ public class BlockTerraGrass extends BlockGrass
         if(!world.blockExists(i, j-1, k))
         {
             int meta = world.getBlockMetadata(i, j, k);
-            world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.terraDirt.blockID, meta);
+            	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(meta), meta);
         }
     }
 

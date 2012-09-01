@@ -104,155 +104,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
 		}
 
-		var1 = this.treesPerChunk;
-
-		if (this.randomGenerator.nextInt(10) == 0)
-		{
-			++var1;
-		}
-
-
-
-		for (var2 = 0; var2 < var1; ++var2)
-		{
-			xCoord = this.chunk_X + this.randomGenerator.nextInt(16);
-			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16);
-			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			
-			float rainfall = TFC_Climate.getTerrainAdjustedRainfall(xCoord, yCoord, zCoord);
-
-			DataLayer TreeType0 = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getTreeLayerAt(xCoord, zCoord, 0);
-			DataLayer TreeType1 = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getTreeLayerAt(xCoord, zCoord, 1);
-			DataLayer TreeType2 = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getTreeLayerAt(xCoord, zCoord, 2);
-			DataLayer EVT = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getEVTLayerAt(xCoord, zCoord);
-			DataLayer Rainfall = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getRainfallLayerAt(xCoord, zCoord);
-			WorldGenerator gen0 = this.biome.getTreeGen(TreeType0.data1, false);
-			WorldGenerator gen1 = this.biome.getTreeGen(TreeType1.data1, false);
-			WorldGenerator gen2 = this.biome.getTreeGen(TreeType2.data1, false);
-			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
-
-			try
-			{
-				if(EVT.floatdata1 >= EnumTree.KAPOK.minEVT && EVT.floatdata1 <= EnumTree.KAPOK.maxEVT && 
-						rainfall >= EnumTree.KAPOK.minRain && rainfall <= EnumTree.KAPOK.maxRain && 
-						temperature >= EnumTree.KAPOK.minTemp && temperature <= EnumTree.KAPOK.maxTemp)
-				{
-					var1 = 50;
-					gen0 = (WorldGenerator)(randomGenerator.nextInt(10) == 0 ? new WorldGenCustomShortTrees(false,15) : randomGenerator.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
-						randomGenerator.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + randomGenerator.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15));
-
-					gen0.setScale(1.0D, 1.0D, 1.0D);
-					gen0.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-				}
-				else
-				{
-					int randomNumber = this.randomGenerator.nextInt(100);
-
-					float tree0EVTMin = 0;
-					float tree0EVTMax = 0;
-					float tree1EVTMin = 0;
-					float tree1EVTMax = 0;
-					float tree2EVTMin = 0;
-					float tree2EVTMax = 0;
-
-					float tree0RainMin = 0;
-					float tree0RainMax = 0;
-					float tree1RainMin = 0;
-					float tree1RainMax = 0;
-					float tree2RainMin = 0;
-					float tree2RainMax = 0;
-
-					float tree0TempMin = 0;
-					float tree0TempMax = 0;
-					float tree1TempMin = 0;
-					float tree1TempMax = 0;
-					float tree2TempMin = 0;
-					float tree2TempMax = 0;
-
-					try
-					{
-						tree0EVTMin = EnumTree.values()[TreeType0.data1].minEVT;
-						tree0EVTMax = EnumTree.values()[TreeType0.data1].maxEVT;
-
-						tree0RainMin = EnumTree.values()[TreeType0.data1].minRain;
-						tree0RainMax = EnumTree.values()[TreeType0.data1].maxRain;
-
-						tree0TempMin = EnumTree.values()[TreeType0.data1].minTemp;
-						tree0TempMax = EnumTree.values()[TreeType0.data1].maxTemp;
-					}
-					catch(Exception e){}
-
-					try
-					{
-						tree1EVTMin = EnumTree.values()[TreeType1.data1].minEVT;
-						tree1EVTMax = EnumTree.values()[TreeType1.data1].maxEVT;
-
-						tree1RainMin = EnumTree.values()[TreeType1.data1].minRain;
-						tree1RainMax = EnumTree.values()[TreeType1.data1].maxRain;
-
-						tree1TempMin = EnumTree.values()[TreeType1.data1].minTemp;
-						tree1TempMax = EnumTree.values()[TreeType1.data1].maxTemp;
-					}
-					catch(Exception e){}
-
-					try
-					{
-						tree2EVTMin = EnumTree.values()[TreeType2.data1].minEVT;
-						tree2EVTMax = EnumTree.values()[TreeType2.data1].maxEVT;
-
-						tree2RainMin = EnumTree.values()[TreeType2.data1].minRain;
-						tree2RainMax = EnumTree.values()[TreeType2.data1].maxRain;
-
-						tree2TempMin = EnumTree.values()[TreeType2.data1].minTemp;
-						tree2TempMax = EnumTree.values()[TreeType2.data1].maxTemp;
-					}
-					catch(Exception e){}
-
-					
-
-					if(randomNumber < 40 && gen0 != null)
-					{
-						if(TreeType0.data1 != -1 &&
-								EVT.floatdata1 >= tree0EVTMin && EVT.floatdata1 <= tree0EVTMax && 
-										rainfall >= tree0RainMin && rainfall <= tree0RainMax && 
-								temperature >= tree0TempMin && temperature <= tree0TempMax)
-						{
-							gen0.setScale(1.0D, 1.0D, 1.0D);
-							gen0.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-							break;
-						}
-					}
-					else if(randomNumber < 80 && gen1 != null)
-					{
-						if(gen1 != null && TreeType1.data1 != -1 &&
-								EVT.floatdata1 >= tree1EVTMin && EVT.floatdata1 <= tree1EVTMax && 
-										rainfall >= tree1RainMin && rainfall <= tree1RainMax && 
-								temperature >= tree1TempMin && temperature <= tree1TempMax)
-						{
-							gen1.setScale(1.0D, 1.0D, 1.0D);
-							gen1.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-							break;
-						}
-					}
-					else if(gen2 != null)
-					{
-						if(gen2 != null && TreeType2.data1 != -1 &&
-								EVT.floatdata1 >= tree2EVTMin && EVT.floatdata1 <= tree2EVTMax && 
-										rainfall >= tree2RainMin && rainfall <= tree2RainMax && 
-								temperature >= tree2TempMin && temperature <= tree2TempMax)
-						{
-							gen2.setScale(1.0D, 1.0D, 1.0D);
-							gen2.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-							break;
-						}
-					}
-
-				}
-			}catch(IndexOutOfBoundsException e)
-			{
-				e.printStackTrace();System.out.println("Tree0 Type: "+TreeType0.data1);System.out.println("Tree1 Type: "+TreeType1.data1);System.out.println("Tree2 Type: "+TreeType2.data1);
-			}
-		}
+		
 
 
 
@@ -262,7 +114,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 
-			DataLayer EVT = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getEVTLayerAt(xCoord, zCoord);
 			DataLayer Rainfall = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getRainfallLayerAt(xCoord, zCoord);
 
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
@@ -280,23 +131,18 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
-		for (var2 = 0; var2 < this.reedsPerChunk; ++var2)
-		{
-			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
-		}
-
 		for (var2 = 0; var2 < 10; ++var2)
 		{
+			if(randomGenerator.nextInt(100) < 10)
+			{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			}
 		}
 
-		if (this.randomGenerator.nextInt(32) == 0)
+		if (this.randomGenerator.nextInt(300) == 0)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;

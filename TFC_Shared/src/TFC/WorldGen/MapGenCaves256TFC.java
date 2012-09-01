@@ -2,6 +2,8 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
@@ -186,13 +188,8 @@ public class MapGenCaves256TFC extends MapGenBase
 												var49 = true;
 											}
 
-											if (var53 == (byte)TFCBlocks.terraStoneIgIn.blockID || var53 == (byte)TFCBlocks.terraStoneIgEx.blockID || 
-													var53 == (byte)TFCBlocks.terraStoneSed.blockID || var53 == (byte)TFCBlocks.terraStoneMM.blockID || 
-													var53 == Block.stone.blockID || var53 == Block.dirt.blockID || var53 == Block.grass.blockID ||
-													var53 == TFCBlocks.terraGrass.blockID || var53 == TFCBlocks.terraGrass2.blockID ||
-                                                    var53 == TFCBlocks.terraDirt.blockID || var53 == TFCBlocks.terraDirt2.blockID ||
-                                                    var53 == TFCBlocks.terraClayGrass.blockID || var53 == TFCBlocks.terraClayGrass2.blockID ||
-                                                    var53 == TFCBlocks.terraClay.blockID || var53 == TFCBlocks.terraClay2.blockID)
+											if (TFC_Core.isRawStone(var53) ||
+													TFC_Core.isSoil(var53))
 											{
 												if (var50 < 10)
 												{
@@ -256,7 +253,7 @@ public class MapGenCaves256TFC extends MapGenBase
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(par2, par4);
 		
-		if (this.rand.nextInt(15) != 0)
+		if (this.rand.nextInt(100) <= 10)
 		{
 			var7 = 0;
 		}
@@ -290,7 +287,7 @@ public class MapGenCaves256TFC extends MapGenBase
                 width -= 0.2;
 			
 			if(this.rand.nextInt(8) == 0)
-			    width += 1 ;
+			    width += 1;
 
 			if (this.rand.nextInt(4) == 0)
 			{

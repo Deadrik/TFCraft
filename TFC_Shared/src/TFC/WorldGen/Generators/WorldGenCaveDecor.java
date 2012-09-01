@@ -20,6 +20,8 @@ public class WorldGenCaveDecor implements IWorldGenerator
 	public void generate(Random rand, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
+		chunkX *= 16;
+		chunkZ *= 16;
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
         {
             for (int zCoord = 0; zCoord < 16; ++zCoord)

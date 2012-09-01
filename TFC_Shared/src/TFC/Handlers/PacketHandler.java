@@ -29,6 +29,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NetHandler;
 import net.minecraft.src.NetLoginHandler;
+import net.minecraft.src.NetServerHandler;
 import net.minecraft.src.NetworkManager;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet1Login;
@@ -50,19 +51,20 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
     @Override
     public void playerLoggedIn(Player p, NetHandler netHandler,NetworkManager manager)
     {
-        PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(""/*login.username*/));
+        PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(((EntityPlayer)p).username));
 
         ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
         DataOutputStream dos=new DataOutputStream(bos);
         EntityPlayer player = (EntityPlayer)p;
         World world= player.worldObj;
 
-        if(world.isRemote)
+        if(!world.isRemote)
         {
             try
             {
                 dos.writeByte(3);
-
+                dos.writeLong(world.getSeed());
+                dos.writeLong(TFC_Time.dayLength);
             } 
             catch (IOException e)
             {
@@ -75,8 +77,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
             pkt.data=bos.toByteArray();
             pkt.length=bos.size();
             pkt.isChunkDataPacket=false;
-
-            TerraFirmaCraft.proxy.sendCustomPacket(pkt);
+                   
+            ((NetServerHandler)netHandler).sendPacketToPlayer(pkt);
         }
     }
 

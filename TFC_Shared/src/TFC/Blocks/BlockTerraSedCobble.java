@@ -1,23 +1,28 @@
 package TFC.Blocks;
 
+import java.util.List;
 import java.util.Random;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
 
@@ -30,12 +35,16 @@ public class BlockTerraSedCobble extends BlockTerra2
 		super(i,80, material);
 	}
 
-	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 0; i < 10; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
+	@SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+    	for(int i = 0; i < 10; i++)
+    		par3List.add(new ItemStack(par1, 1, i));
+    }
 
 
 	public boolean canFallBelow(World world, int i, int j, int k)

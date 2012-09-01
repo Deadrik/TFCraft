@@ -2,6 +2,8 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFCItems;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
@@ -11,7 +13,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 
 public class BlockTerraWoodSupport extends Block

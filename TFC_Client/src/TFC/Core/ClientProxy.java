@@ -1,4 +1,4 @@
-package net.minecraft.src;
+package TFC.Core;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -14,7 +14,8 @@ import bioxx.importers.WavefrontObject;
 
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.KeyBindings;
+import TFC.Core.CommonProxy;
+import TFC.Core.EnumTree;
 import TFC.Core.PlayerManagerTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
@@ -107,18 +108,12 @@ public class ClientProxy extends CommonProxy
 	public World getCurrentWorld() {
 		return ModLoader.getMinecraftInstance().theWorld;
 	}
-	
+
 	@Override
 	public File getMinecraftDir() {
 		return ModLoader.getMinecraftInstance().getMinecraftDir();
 	}
-	
-	@Override
-	public void RegisterCommands()
-	{
-		
-	}
-	
+
 	@Override
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
@@ -149,10 +144,10 @@ public class ClientProxy extends CommonProxy
 		{
 			for (int x = -1; x <= 1; ++x)
 			{
-				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i, j ,k);
+				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j ,k + z);
 				var5 += (var10 & 16711680) >> 16;
-			var6 += (var10 & 65280) >> 8;
-		var7 += var10 & 255;
+				var6 += (var10 & 65280) >> 8;
+				var7 += var10 & 255;
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
@@ -171,14 +166,9 @@ public class ClientProxy extends CommonProxy
 		{
 			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
 			{
-				for (int var8 = -1; var8 <= 1; ++var8)
-				{
-					for (int var9 = -1; var9 <= 1; ++var9)
-					{
-				int var10 = ColorizerFoliageTFC.getFoliageYellow();
-				rgb = applyColor(var10, rgb);
-					}
-				}
+
+						int var10 = ColorizerFoliageTFC.getFoliageYellow();
+						rgb = applyColor(var10, rgb);
 
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
@@ -190,7 +180,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k);
+						int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9);
 						rgb = applyColor(var10, rgb);
 					}
 				}
@@ -211,7 +201,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k) * (1-daymult));
+						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9) * (1-daymult));
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -230,8 +220,8 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-				int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k) * daymult);
-				rgb = applyColor(color, rgb);
+						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9) * daymult);
+						rgb = applyColor(color, rgb);
 					}
 				}
 				int color = (int) (ColorizerFoliageTFC.getFoliageDead() * (1-daymult));
@@ -248,8 +238,8 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-				int color = ColorizerFoliageTFC.getFoliageDead();
-				rgb = applyColor(color, rgb);
+						int color = ColorizerFoliageTFC.getFoliageDead();
+						rgb = applyColor(color, rgb);
 					}
 				}
 
@@ -262,7 +252,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k));
+						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -274,14 +264,14 @@ public class ClientProxy extends CommonProxy
 		}
 		else
 		{
-			if(TFC_Time.currentMonth >= TFC_Time.September && (meta == 9 || meta == 8 || meta == 12))
+			if(TFC_Time.currentMonth >= TFC_Time.September && EnumTree.values()[meta].isEvergreen)
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-				int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k);
-				rgb = applyColor(var10, rgb);
+						int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9);
+						rgb = applyColor(var10, rgb);
 					}
 				}
 
@@ -297,7 +287,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k) * (1-daymult));
+						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9) * (1-daymult));
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -343,7 +333,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i, j ,k);
+						int var10 = TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9);
 						rgb = applyColor(var10, rgb);
 					}
 				}

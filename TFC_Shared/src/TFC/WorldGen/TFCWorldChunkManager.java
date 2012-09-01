@@ -106,12 +106,15 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		//Setup Trees
 		genTrees = new GenLayerTFC[3];
 		treesIndexLayer = new GenLayerTFC[3];
+		
 		GenLayerTFC[] var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(par1+4, par3WorldType);
 		genTrees[0] = var8[0];
 		treesIndexLayer[0] = var8[1];
+		
 		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(par1+5, par3WorldType);
 		genTrees[1] = var8[0];
 		treesIndexLayer[1] = var8[1];
+		
 		var8 = GenTreeLayerTFC.initializeAllBiomeGenerators(par1+6, par3WorldType);
 		genTrees[2] = var8[0];
 		treesIndexLayer[2] = var8[1];

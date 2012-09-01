@@ -8,6 +8,7 @@ import TFC.Blocks.BlockFirepit;
 import TFC.Core.EnumWoodMaterial;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
@@ -29,7 +30,6 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
 

@@ -464,9 +464,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
-				int surfaceBlock = TFC_Core.getTypeForGrass(rock1.data2);
+				
+				int surfaceBlock = TFC_Core.getTypeForGrassWithRain(rock1.data2, rainfall.floatdata1);
 				int subSurfaceBlock = TFC_Core.getTypeForDirt(rock1.data2);
-				int soilMeta = TFC_Core.getMetaForGrass(rock1.data1, rock1.data2);
+				int soilMeta = TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
 				
 				float _temp = TFC_Climate.getBioTemperature(par1*16, par2*16);
 
@@ -504,31 +505,18 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						
 						
 						//First we check to see if its a cold desert
-						if(((evt.floatdata1 >= 0.125f && evt.floatdata1 <= 0.5f) && 
-								(rainfall.floatdata1 >= 62.5f && rainfall.floatdata1 <= 250)) && 
+						if(rainfall.floatdata1 < 125 && 
 								temp < 1.5f)
 						{
-							surfaceBlock = Block.sand.blockID;
-							subSurfaceBlock = Block.sand.blockID;
+							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
 						}
 						//Next we check for all other warm deserts
-						else if(((evt.floatdata1 >= 2f && evt.floatdata1 <= 16f) && 
-								(rainfall.floatdata1 >= 62.5f && rainfall.floatdata1 <= 125)))
+						else if(rainfall.floatdata1 < 125 && biomegenbase.maxHeight < 0.5f)
 						{
-							surfaceBlock = Block.sand.blockID;
-							subSurfaceBlock = Block.sand.blockID;
-						}
-						else if(soilMeta < 16)
-				        {
-				            surfaceBlock = TFCBlocks.terraGrass.blockID;
-				            subSurfaceBlock = TFCBlocks.terraDirt.blockID;
-				        }
-				        else
-				        {
-				            surfaceBlock = TFCBlocks.terraGrass2.blockID;
-				            subSurfaceBlock = TFCBlocks.terraDirt2.blockID;
-				        }
-				        
+							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+						}				        
 				        
 
 						if (var13 == -1)
@@ -573,10 +561,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							blockArrayBig[indexBig] = (byte) subSurfaceBlock;
 							metaArrayBig[indexBig] = (byte) soilMeta;
 
-							if (var13 == 0 && subSurfaceBlock == Block.sand.blockID)
+							if (var13 == 0 && subSurfaceBlock == TFC_Core.getTypeForSand(soilMeta))
 							{
 								var13 = rand.nextInt(4);
-								subSurfaceBlock = Block.sandStone.blockID;
+								subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
 							}
 						}
 
@@ -585,15 +573,15 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							if(((height > var5-2 && height <= var5+1) || (height < var5 && blockArray[index+2] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
 							{
 
-								blockArrayBig[indexBig] = (byte) Block.sand.blockID;
-								metaArrayBig[indexBig] = 0;
+								blockArrayBig[indexBig] = (byte) TFC_Core.getTypeForSand(soilMeta);
+								metaArrayBig[indexBig] = (byte) soilMeta;
 							}
 						}
 						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
 						{
 							if(((height > var5-2 && height < var5 && blockArray[index+1] == Block.waterStill.blockID) || (height < var5 && blockArray[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
 							{
-								if(blockArrayBig[indexBig] != Block.sand.blockID && rand.nextInt(3) != 0)
+								if(blockArrayBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
 								{
 									blockArrayBig[indexBig] = (byte) Block.gravel.blockID;
 									metaArrayBig[indexBig] = 0;
@@ -617,12 +605,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
-				TFCBiome biomegenbase = (TFCBiome) biomesForGeneration[zCoord + xCoord * 16];
 				DataLayer rock1 = rockLayer1[zCoord + xCoord * 16];
 				DataLayer rock2 = rockLayer2[zCoord + xCoord * 16];
 				DataLayer rock3 = rockLayer3[zCoord + xCoord * 16];
 				
-				float var11 = biomegenbase.getFloatTemperature();
 				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				

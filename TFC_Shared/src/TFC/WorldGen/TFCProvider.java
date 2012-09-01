@@ -30,7 +30,7 @@ public class TFCProvider extends WorldProvider
 	{
 		this.worldChunkMgr = terrainType.getChunkManager(this.worldObj);
 		//TFC_Core.SetupWorld(this.worldObj);
-		TFC_Game.registerAnvilRecipes(this.worldObj.rand, this.worldObj);
+		//TFC_Game.registerAnvilRecipes(this.worldObj.rand, this.worldObj);
 		skyprovider = new TFCSkyProvider(ModLoader.getMinecraftInstance());
 		TFC_Climate.manager = (TFCWorldChunkManager) worldChunkMgr;
 		TFC_Climate.worldObj = worldObj;
@@ -202,7 +202,7 @@ public class TFCProvider extends WorldProvider
 
 			while(var5 == null)
 			{
-				var5 = var2.findBiomePosition(xOffset, -15000, 256, var3, var4);
+				var5 = var2.findBiomePosition(xOffset, -(TFC_Climate.getMaxZPos()/2), 256, var3, var4);
 
 				if (var5 != null)
 				{

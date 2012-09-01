@@ -68,7 +68,7 @@ public class BlockCustomSapling extends BlockCustomFlower
 		}
 		case 4:
 		{
-			obj = new WorldGenDouglasFir(false,4);
+			obj = new WorldGenDouglasFir(false, 4, false);
 			break;
 		}
 		case 5:

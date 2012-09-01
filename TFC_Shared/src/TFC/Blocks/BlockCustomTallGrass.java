@@ -5,6 +5,7 @@ import java.util.Random;
 
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
+import TFC.Core.TFCItems;
 
 import net.minecraft.src.*;
 import net.minecraftforge.common.IShearable;

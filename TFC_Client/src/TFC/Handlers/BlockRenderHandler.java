@@ -1,6 +1,7 @@
 package TFC.Handlers;
 
 import TFC.Render.TFC_CoreRender;
+import TFC.Render.Blocks.*;
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.ModLoader;
@@ -44,7 +45,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
             float var6 = (float)(var5 >> 16 & 255) / 255.0F;
             float var7 = (float)(var5 >> 8 & 255) / 255.0F;
             float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderGrass(block, i, j, k, var6, var7, var8, renderer);
+            return RenderGrass.Render(block, i, j, k, var6, var7, var8, renderer);
         }
         else if (modelId == TFCBlocks.oreRenderId)
         {

@@ -33,6 +33,7 @@ import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomTallTrees;
 import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
 import TFC.WorldGen.Generators.WorldGenDouglasFir;
+import TFC.WorldGen.Generators.WorldGenRedwoodXL;
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.BiomeGenDesert;
@@ -90,49 +91,49 @@ public class TFCBiome extends BiomeGenBase
 
     public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("High Hills").setMinMaxHeight(0.2F, 1.0F);
 
-    public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.2F);
+    public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
 
     public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setColor(PlainsColor).setBiomeName("Plains").setMinMaxHeight(0.1F, 0.2F);
 
     public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setColor(TaigaColor).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
 
-    public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setColor(SwampColor).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.15F);
+    public static final TFCBiome swampland = (new BiomeGenSwampTFC(6)).setColor(SwampColor).setBiomeName("Swamp").setMinMaxHeight(-0.1F, 0.1F);
 
     public static final TFCBiome HighHillsEdge = (new BiomeGenHillsEdgeTFC(20)).setColor(HillsColor).setBiomeName("High Hills Edge").setMinMaxHeight(0.2F, 0.4F);
     
-    public static final TFCBiome rollingHills = (new TFCBiome(30)).setColor(PlainsColor).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.3F);
+    public static final TFCBiome rollingHills = (new TFCBiome(30)).setColor(PlainsColor).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F);
     public static final TFCBiome Mountains = (new TFCBiome(31)).setColor(HillsColor).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
     public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
     
-    protected WorldGenCustomTallTrees worldGenAshTallTrees;
-    protected WorldGenCustomTallTrees worldGenAspenTallTrees;
-    protected WorldGenCustomTallTrees worldGenBirchTallTrees;
-    protected WorldGenCustomTallTrees worldGenChestnutTallTrees;
-    protected WorldGenDouglasFir worldGenDouglasFirTallTrees;
-    protected WorldGenCustomTallTrees worldGenHickoryTallTrees;
-    protected WorldGenCustomMapleTallTrees worldGenMapleTallTrees;
-    protected WorldGenCustomTallTrees worldGenOakTallTrees;
-    protected WorldGenCustomTallTrees worldGenPineTallTrees;
-    protected WorldGenCustomRedwoodTrees worldGenRedwoodTallTrees;
-    protected WorldGenCustomTallTrees worldGenSpruceTallTrees;
-    protected WorldGenCustomTallTrees worldGenSycamoreTallTrees;
-    protected WorldGenCustomCedarTrees worldGenWhiteCedarTallTrees;
-    protected WorldGenCustomTallTrees worldGenWhiteElmTallTrees;
+    protected static WorldGenCustomTallTrees worldGenAshTallTrees;
+    protected static WorldGenCustomTallTrees worldGenAspenTallTrees;
+    protected static WorldGenCustomTallTrees worldGenBirchTallTrees;
+    protected static WorldGenCustomTallTrees worldGenChestnutTallTrees;
+    protected static WorldGenDouglasFir worldGenDouglasFirTallTrees;
+    protected static WorldGenCustomTallTrees worldGenHickoryTallTrees;
+    protected static WorldGenCustomMapleTallTrees worldGenMapleTallTrees;
+    protected static WorldGenCustomTallTrees worldGenOakTallTrees;
+    protected static WorldGenCustomTallTrees worldGenPineTallTrees;
+    protected static WorldGenRedwoodXL worldGenRedwoodTallTrees;
+    protected static WorldGenCustomTallTrees worldGenSpruceTallTrees;
+    protected static WorldGenCustomTallTrees worldGenSycamoreTallTrees;
+    protected static WorldGenCustomCedarTrees worldGenWhiteCedarTallTrees;
+    protected static WorldGenCustomTallTrees worldGenWhiteElmTallTrees;
 
-    protected WorldGenCustomShortTrees worldGenAshShortTrees;
-    protected WorldGenCustomShortTrees worldGenAspenShortTrees;
-    protected WorldGenCustomShortTrees worldGenBirchShortTrees;
-    protected WorldGenCustomShortTrees worldGenChestnutShortTrees;
-    protected WorldGenDouglasFir worldGenDouglasFirShortTrees;
-    protected WorldGenCustomShortTrees worldGenHickoryShortTrees;
-    protected WorldGenCustomMapleShortTrees worldGenMapleShortTrees;
-    protected WorldGenCustomShortTrees worldGenOakShortTrees;
-    protected WorldGenCustomShortTrees worldGenPineShortTrees;
-    protected WorldGenCustomRedwoodTrees worldGenRedwoodShortTrees;
-    protected WorldGenCustomShortTrees worldGenSpruceShortTrees;
-    protected WorldGenCustomShortTrees worldGenSycamoreShortTrees;
-    protected WorldGenCustomShortTrees worldGenWhiteElmShortTrees;
-    protected WorldGenCustomWillowTrees worldGenWillowShortTrees;
+    protected static WorldGenCustomShortTrees worldGenAshShortTrees;
+    protected static WorldGenCustomShortTrees worldGenAspenShortTrees;
+    protected static WorldGenCustomShortTrees worldGenBirchShortTrees;
+    protected static WorldGenCustomShortTrees worldGenChestnutShortTrees;
+    protected static WorldGenDouglasFir worldGenDouglasFirShortTrees;
+    protected static WorldGenCustomShortTrees worldGenHickoryShortTrees;
+    protected static WorldGenCustomMapleShortTrees worldGenMapleShortTrees;
+    protected static WorldGenCustomShortTrees worldGenOakShortTrees;
+    protected static WorldGenCustomShortTrees worldGenPineShortTrees;
+    protected static WorldGenRedwoodXL worldGenRedwoodShortTrees;
+    protected static WorldGenCustomShortTrees worldGenSpruceShortTrees;
+    protected static WorldGenCustomShortTrees worldGenSycamoreShortTrees;
+    protected static WorldGenCustomShortTrees worldGenWhiteElmShortTrees;
+    protected static WorldGenCustomWillowTrees worldGenWillowShortTrees;
     
     public TFCBiome(int par1)
     {
@@ -154,12 +155,12 @@ public class TFCBiome extends BiomeGenBase
         worldGenAspenTallTrees = new WorldGenCustomTallTrees(false,1);
         worldGenBirchTallTrees = new WorldGenCustomTallTrees(false,2);
         worldGenChestnutTallTrees = new WorldGenCustomTallTrees(false,3);
-        worldGenDouglasFirTallTrees = new WorldGenDouglasFir(false,4);
+        worldGenDouglasFirTallTrees = new WorldGenDouglasFir(false,4, true);
         worldGenHickoryTallTrees = new WorldGenCustomTallTrees(false,5);
         worldGenMapleTallTrees = new WorldGenCustomMapleTallTrees(false,6);
         worldGenOakTallTrees = new WorldGenCustomTallTrees(false,0);
         worldGenPineTallTrees = new WorldGenCustomTallTrees(false,8);
-        worldGenRedwoodTallTrees = new WorldGenCustomRedwoodTrees(false,9);
+        worldGenRedwoodTallTrees = new WorldGenRedwoodXL(false);
         worldGenSpruceTallTrees = new WorldGenCustomTallTrees(false,10);
         worldGenSycamoreTallTrees = new WorldGenCustomTallTrees(false,11);
         worldGenWhiteCedarTallTrees = new WorldGenCustomCedarTrees(false,12);
@@ -169,12 +170,12 @@ public class TFCBiome extends BiomeGenBase
         worldGenAspenShortTrees = new WorldGenCustomShortTrees(false,1);
         worldGenBirchShortTrees = new WorldGenCustomShortTrees(false,2);
         worldGenChestnutShortTrees = new WorldGenCustomShortTrees(false,3);
-        worldGenDouglasFirShortTrees = new WorldGenDouglasFir(false,4);
+        worldGenDouglasFirShortTrees = new WorldGenDouglasFir(false,4, false);
         worldGenHickoryShortTrees = new WorldGenCustomShortTrees(false,5);
         worldGenMapleShortTrees = new WorldGenCustomMapleShortTrees(false,6);
         worldGenOakShortTrees = new WorldGenCustomShortTrees(false,0);
         worldGenPineShortTrees = new WorldGenCustomShortTrees(false,8);
-        worldGenRedwoodShortTrees = new WorldGenCustomRedwoodTrees(false,9);
+        worldGenRedwoodShortTrees = new WorldGenRedwoodXL(false);
         worldGenSpruceShortTrees = new WorldGenCustomShortTrees(false,10);
         worldGenSycamoreShortTrees = new WorldGenCustomShortTrees(false,11);
         worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
@@ -411,7 +412,7 @@ public class TFCBiome extends BiomeGenBase
         }
     }
     
-    public WorldGenerator getTreeGen(int i, Boolean j)
+    public static WorldGenerator getTreeGen(int i, Boolean j)
     {
         Random R = new Random();
         if(i == 15)

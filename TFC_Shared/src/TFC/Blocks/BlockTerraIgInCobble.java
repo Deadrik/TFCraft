@@ -1,23 +1,28 @@
 package TFC.Blocks;
 
+import java.util.List;
 import java.util.Random;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.Core.Helper;
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
+import TFC.Core.TFCItems;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TFCItems;
 import net.minecraft.src.World;
 
 public class BlockTerraIgInCobble extends BlockTerra2
@@ -27,7 +32,12 @@ public class BlockTerraIgInCobble extends BlockTerra2
 	}
 
 
-	public void addCreativeItems(java.util.ArrayList list)
+	@SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < 3; i++) {
 			list.add(new ItemStack(this,1,i));
