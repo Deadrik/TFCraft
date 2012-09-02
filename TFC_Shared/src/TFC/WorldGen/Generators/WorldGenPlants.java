@@ -25,8 +25,8 @@ public class WorldGenPlants implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		chunkX *= 16;
-		chunkZ *= 16;
+		//		chunkX *= 16;
+		//		chunkZ *= 16;
 		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
 		WorldGenCustomFlowers plantYellowGen = new WorldGenCustomFlowers(Block.plantYellow.blockID);
 		WorldGenCustomFlowers plantRedGen = new WorldGenCustomFlowers(Block.plantRed.blockID);
@@ -63,27 +63,18 @@ public class WorldGenPlants implements IWorldGenerator
 		}
 		if(rainfall.floatdata1 >= 125) 
 		{
-			if(evt.floatdata1 > 1)
-			{
-				grassPerChunk+=24;
-				flowersPerChunk += 3;
-			}
+			grassPerChunk+=24;
+			flowersPerChunk += 3;
 		}
 		if(rainfall.floatdata1 >= 250) 
 		{
-			if(evt.floatdata1 > 0.25f)
-			{
-				grassPerChunk+=24;
-				flowersPerChunk += 3;
-			}
+			grassPerChunk+=24;
+			flowersPerChunk += 3;
 		}
 		if(rainfall.floatdata1 >= 500) 
 		{
-			if(evt.floatdata1 >= 0.125f)
-			{
-				grassPerChunk+=24;
-				flowersPerChunk += 3;
-			}
+			grassPerChunk+=24;
+			flowersPerChunk += 3;
 		}
 
 		for (int i = 0; i < flowersPerChunk; ++i)
@@ -168,7 +159,7 @@ public class WorldGenPlants implements IWorldGenerator
 			mushroomRedGen.generate(world, random, xCoord, yCoord, zCoord);
 		}
 
-		if (random.nextInt(50) == 0 )
+		if (random.nextInt(70) == 0  && rainfall.floatdata1 > 500)
 		{
 			xCoord = chunkX + random.nextInt(16) + 8;
 			zCoord = chunkZ + random.nextInt(16) + 8;

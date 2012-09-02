@@ -183,61 +183,7 @@ public class CommonProxy implements IGuiHandler
 		return false;
 	}
 
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
-	{
-		TileEntity te=world.getBlockTileEntity(x, y, z);
-		switch(ID)
-		{
-		case 0:
-		{
-			return new ContainerTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
-		}
-		case 1:
-		{
-			return new ContainerTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
-		}
-		case 20:
-		{
-			return new ContainerTerraFirepit(player.inventory, (TileEntityTerraFirepit) te);
-		}
-		case 21:
-		{
-			return new ContainerTerraAnvil(player.inventory, (TileEntityTerraAnvil) te);
-		}
-		case 22:
-		{
-			return new ContainerTerraScribe(player.inventory, (TileEntityTerraScribe) te, world);
-		}
-		case 23:
-		{
-			return new ContainerTerraForge(player.inventory, (TileEntityTerraForge) te);
-		}
-		case 24:
-		{
-			return new ContainerTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world);
-		}
-		case 25:
-		{
-			return new ContainerTerraSluice(player.inventory, (TileEntityTerraSluice) te);
-		}
-		case 26:
-		{
-			return new ContainerTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
-		}
-		case 28:
-		{
-			return new ContainerKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType, world);
-		}
-		case 29:
-		{
-			return new ContainerChestTFC(player.inventory, (TileEntityChestTFC) te);
-		}
-		default:
-		{
-			return null;
-		}
-		}
-	}
+	
 
 	public World getCurrentWorld() {
 		return null;
@@ -295,6 +241,63 @@ public class CommonProxy implements IGuiHandler
 	{
 		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);     
 	}
+	
+	@Override
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
+	{
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		switch(ID)
+		{
+		case 0:
+		{
+			return new ContainerTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
+		}
+		case 1:
+		{
+			return new ContainerTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
+		}
+		case 20:
+		{
+			return new ContainerTerraFirepit(player.inventory, (TileEntityTerraFirepit) te, world, x, y, z);
+		}
+		case 21:
+		{
+			return new ContainerTerraAnvil(player.inventory, (TileEntityTerraAnvil) te, world, x, y, z);
+		}
+		case 22:
+		{
+			return new ContainerTerraScribe(player.inventory, (TileEntityTerraScribe) te, world, x, y, z);
+		}
+		case 23:
+		{
+			return new ContainerTerraForge(player.inventory, (TileEntityTerraForge) te, world, x, y, z);
+		}
+		case 24:
+		{
+			return new ContainerTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world, x, y, z);
+		}
+		case 25:
+		{
+			return new ContainerTerraSluice(player.inventory, (TileEntityTerraSluice) te, world, x, y, z);
+		}
+		case 26:
+		{
+			return new ContainerTerraBloomery(player.inventory, (TileEntityTerraBloomery) te, world, x, y, z);
+		}
+		case 28:
+		{
+			return new ContainerKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType, world, x, y, z);
+		}
+		case 29:
+		{
+			return new ContainerChestTFC(player.inventory, (TileEntityChestTFC) te, world, x, y, z);
+		}
+		default:
+		{
+			return null;
+		}
+		}
+	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
@@ -322,31 +325,31 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 20:
 		{
-			return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te);
+			return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te, world, x, y, z);
 		}
 		case 21:
 		{
-			return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te);
+			return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{
-			return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world);
+			return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world, x, y, z);
 		}
 		case 23:
 		{
-			return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te);
+			return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te, world, x, y, z);
 		}
 		case 24:
 		{
-			return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world);
+			return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world, x, y, z);
 		}
 		case 25:
 		{
-			return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te);
+			return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te, world, x, y, z);
 		}
 		case 26:
 		{
-			return new GuiTerraBloomery(player.inventory, (TileEntityTerraBloomery) te);
+			return new GuiTerraBloomery(player.inventory, (TileEntityTerraBloomery) te, world, x, y, z);
 		}
 		case 27:
 		{
@@ -354,11 +357,11 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 28:
 		{
-			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType ,world);
+			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType , world, x, y, z);
 		}
 		case 29:
 		{
-			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te));
+			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
 		}
 
 		}

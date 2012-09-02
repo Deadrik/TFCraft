@@ -13,9 +13,9 @@ public class GuiTerraForge extends GuiContainerTFC
 	private TileEntityTerraForge ForgeEntity;
 
 
-	public GuiTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge)
+	public GuiTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraForge(inventoryplayer,tileentityforge) );
+		super(new ContainerTerraForge(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;
 		
 	}

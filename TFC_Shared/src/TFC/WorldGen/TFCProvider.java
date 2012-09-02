@@ -44,7 +44,7 @@ public class TFCProvider extends WorldProvider
 	{
 		int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
 		//return var3 == Block.grass.blockID;
-		return var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID;
+		return TFC_Core.isGrass(var3);
 	}
 
 	@Override
@@ -190,7 +190,7 @@ public class TFCProvider extends WorldProvider
 		else
 		{
 
-			WorldChunkManager var2 = worldChunkMgr;
+			TFCWorldChunkManager var2 = (TFCWorldChunkManager) worldChunkMgr;
 			List var3 = var2.getBiomesToSpawnIn();
 			Random var4 = new Random(worldObj.getWorldInfo().getSeed());
 
@@ -202,7 +202,7 @@ public class TFCProvider extends WorldProvider
 
 			while(var5 == null)
 			{
-				var5 = var2.findBiomePosition(xOffset, -(TFC_Climate.getMaxZPos()/2), 256, var3, var4);
+				var5 = var2.findBiomePosition(xOffset, -(TFC_Climate.getMaxZPos()/2), 64, var3, var4);
 
 				if (var5 != null)
 				{

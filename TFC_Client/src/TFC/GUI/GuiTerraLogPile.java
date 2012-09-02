@@ -7,7 +7,7 @@ import TFC.Containers.ContainerTerraLogPile;
 import TFC.TileEntities.TileEntityTerraLogPile;
 import net.minecraft.src.*;
 
-public class GuiTerraLogPile extends GuiContainerTFC
+public class GuiTerraLogPile extends GuiContainer
 {
     public GuiTerraLogPile(InventoryPlayer inventoryplayer, TileEntityTerraLogPile wb, World world, int i, int j, int k)
     {

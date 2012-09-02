@@ -60,7 +60,7 @@ public abstract class GuiContainerTFC extends GuiContainer
         this.drawGuiContainerBackgroundLayer(par3, par1, par2);
         
         GL11.glPopMatrix();
-        super.drawScreen(par1, par2, par3);
+        //super.drawScreen(par1, par2, par3);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         
@@ -200,6 +200,7 @@ public abstract class GuiContainerTFC extends GuiContainer
     /**
      * Draws an inventory slot
      */
+
     private void drawSlotInventory(Slot par1Slot)
     {
         int var2 = par1Slot.xDisplayPosition;

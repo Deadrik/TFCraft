@@ -25,7 +25,6 @@ public class BlockTerraDryGrass extends BlockTerraGrass
     @Override
     public int getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
     {
-    	float rain = TFC_Climate.getTerrainAdjustedRainfall(xCoord, yCoord, zCoord);
     	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord))];
     	
         if (par5 == 1)//top

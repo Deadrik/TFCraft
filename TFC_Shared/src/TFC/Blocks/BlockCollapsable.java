@@ -345,5 +345,11 @@ public class BlockCollapsable extends BlockTerra
 //
 //        return true;
 //    }
+    
+    @Override
+	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
+	{
+		return false;
+	}
 
 }

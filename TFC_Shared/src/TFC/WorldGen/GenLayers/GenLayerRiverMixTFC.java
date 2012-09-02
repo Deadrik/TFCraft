@@ -57,6 +57,14 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
                 {
                     layerOut[var8] = TFCBiome.HighHillsEdge.biomeID;
                 }
+                else if(layerBiomes[var8] == TFCBiome.Mountains.biomeID)
+                {
+                    layerOut[var8] = TFCBiome.Mountains.biomeID;
+                }
+                else if(layerBiomes[var8] == TFCBiome.MountainsEdge.biomeID)
+                {
+                    layerOut[var8] = TFCBiome.MountainsEdge.biomeID;
+                }
                 else
                 {
                     layerOut[var8] = TFCBiome.river.biomeID;

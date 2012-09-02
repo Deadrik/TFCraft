@@ -1,5 +1,7 @@
 package TFC.Containers;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.Container;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
@@ -14,6 +16,20 @@ public class ContainerTFC extends Container
     {
         // TODO Auto-generated method stub
         return false;
+    }
+    
+    @SideOnly(Side.CLIENT)
+
+    /**
+     * places itemstacks in first x slots, x being aitemstack.lenght
+     */
+    public void putStacksInSlots(ItemStack[] par1ArrayOfItemStack)
+    {
+        for (int var2 = 0; var2 < par1ArrayOfItemStack.length; ++var2)
+        {
+        	if(par1ArrayOfItemStack[var2] != null)
+        		this.getSlot(var2).putStack(par1ArrayOfItemStack[var2]);
+        }
     }
     
     protected boolean mergeItemStack(ItemStack is, int start, int end, boolean par4, int maxStack)

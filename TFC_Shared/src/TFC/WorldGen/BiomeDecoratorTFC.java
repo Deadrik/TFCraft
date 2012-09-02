@@ -4,12 +4,14 @@ import java.util.Random;
 
 import TFC.Core.EnumTree;
 import TFC.Core.TFC_Climate;
-import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.*;
 import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
 import TFC.WorldGen.Generators.WorldGenCustomReed;
 import TFC.WorldGen.Generators.WorldGenCustomSand;
 import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomShrub;
+import TFC.WorldGen.Generators.WorldGenFixGrass;
+import TFC.WorldGen.Generators.WorldGenForests;
 import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
 
 import net.minecraft.src.BiomeDecorator;
@@ -83,12 +85,12 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int yCoord;
 		int zCoord;
 
-		for (var1 = 0; var1 < this.sandPerChunk2; ++var1)
-		{
-			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-		}
+//		for (var1 = 0; var1 < this.sandPerChunk2; ++var1)
+//		{
+//			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+//			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+//			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+//		}
 
 		//        for (var1 = 0; var1 < this.clayPerChunk; ++var1)
 		//        {
@@ -97,16 +99,22 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		//            this.clayGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
 		//        }
 
-		for (var1 = 0; var1 < this.sandPerChunk; ++var1)
-		{
-			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-		}
+//		for (var1 = 0; var1 < this.sandPerChunk; ++var1)
+//		{
+//			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+//			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+//			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
+//		}
 
+		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
+
+		new WorldGenForests().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
 		
-
-
+		new WorldGenLooseRocks().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
+		
+		new WorldGenPlants().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
+		
+		new WorldGenSoilPits().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);		
 
 		for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
 		{

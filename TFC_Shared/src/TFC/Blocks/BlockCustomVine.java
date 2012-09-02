@@ -171,6 +171,11 @@ public class BlockCustomVine extends Block implements IShearable
             return var2.renderAsNormalBlock() && var2.blockMaterial.blocksMovement();
         }
     }
+    
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+    {
+        return canVineStay(par1World, par2, par3, par4);
+    }
 
     /**
      * Returns if the vine can stay in the world. It also changes the metadata according to neighboring blocks.

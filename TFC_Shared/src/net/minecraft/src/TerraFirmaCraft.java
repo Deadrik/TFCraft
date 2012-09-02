@@ -93,12 +93,12 @@ public class TerraFirmaCraft implements ITickHandler
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
+//		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
-		GameRegistry.registerWorldGenerator(new WorldGenFixGrass());
-		GameRegistry.registerWorldGenerator(new WorldGenForests());
-		GameRegistry.registerWorldGenerator(new WorldGenPlants());
-		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
+//		GameRegistry.registerWorldGenerator(new WorldGenFixGrass());
+//		GameRegistry.registerWorldGenerator(new WorldGenForests());
+//		GameRegistry.registerWorldGenerator(new WorldGenPlants());
+//		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
 		
 
 		//Add Item Name Localizations

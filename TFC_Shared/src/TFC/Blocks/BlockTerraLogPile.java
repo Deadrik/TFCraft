@@ -26,7 +26,7 @@ public class BlockTerraLogPile extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		if (TerraFirmaCraft.proxy.isRemote())
+		if (world.isRemote)
 		{
 			return true;
 		}

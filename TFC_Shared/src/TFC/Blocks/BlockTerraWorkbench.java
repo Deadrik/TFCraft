@@ -22,15 +22,7 @@ public class BlockTerraWorkbench extends BlockContainer
 		}
 		else
 		{
-			if((TileEntityTerraWorkbench)world.getBlockTileEntity(i, j, k)!=null)
-			{
-				TileEntityTerraWorkbench tileentityanvil;
-				tileentityanvil = (TileEntityTerraWorkbench)world.getBlockTileEntity(i, j, k);
-				ItemStack is = entityplayer.getCurrentEquippedItem();
-
-				//ModLoader.openGUI(entityplayer, new GuiTerraWorkbench(entityplayer.inventory, tileentityanvil,world, i, j, k));
-				entityplayer.openGui(TerraFirmaCraft.instance, 1, world, i, j, k);
-			}
+			entityplayer.openGui(TerraFirmaCraft.instance, 1, world, i, j, k);
 			return true;
 		}
 	}

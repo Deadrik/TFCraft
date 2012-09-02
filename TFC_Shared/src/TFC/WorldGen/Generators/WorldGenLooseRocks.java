@@ -35,8 +35,8 @@ public class WorldGenLooseRocks implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		chunkX *= 16;
-		chunkZ *= 16;
+//		chunkX *= 16;
+//		chunkZ *= 16;
 		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
 		
 

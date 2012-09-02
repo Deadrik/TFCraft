@@ -36,4 +36,10 @@ public abstract class BlockTerra2 extends Block
             System.out.println("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());
         }
     }
+	
+	@Override
+	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
+	{
+		return false;
+	}
 }

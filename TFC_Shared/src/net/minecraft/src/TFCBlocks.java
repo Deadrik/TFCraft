@@ -275,7 +275,7 @@ public class TFCBlocks
 		Block.blocksList[8]= (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
 		//Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
 		Block.blocksList[10]= (new BlockCustomFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setLightOpacity(255).setBlockName("lava").disableStats().setRequiresSelfNotify();
-		Block.blocksList[17] = (new BlockTerraWood(17)).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
+		Block.blocksList[17] = (new BlockTerraWood(17)).setHardness(20.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
 		Block.blocksList[18] = (new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
 		Block.blocksList[31] = (BlockTallGrass)(new BlockCustomTallGrass(31, 39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("tallgrass");
 		Block.blocksList[37] = (BlockFlower)(new BlockCustomFlower(37, 13)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("flower");

@@ -3,13 +3,13 @@ package TFC.WorldGen.GenLayers;
 import net.minecraft.src.*;
 import TFC.WorldGen.*;
 
-public abstract class GenRockLayerTFC extends GenLayerTFC
+public abstract class GenRockLayer2TFC extends GenLayerTFC
 {
     /** seed from World#getWorldSeed that is used in the LCG prng */
     private long worldGenSeed;
 
     /** parent GenLayer that was provided via the constructor */
-    protected GenRockLayerTFC parent;
+    protected GenRockLayer2TFC parent;
 
     /**
      * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
@@ -40,10 +40,10 @@ public abstract class GenRockLayerTFC extends GenLayerTFC
 
         GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
         GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
-        var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4);
+        var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4+2);
         GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var5);
         GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
-        GenLayerRockTypes var17 = new GenLayerRockTypes(200L, var6, par2WorldType);
+        GenLayerRockTypes var17 = new GenLayerRockTypes(200L, var6, par2WorldType, 2);
         var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var17, 2);
 
         Object var18 = new GenLayerSmoothTFC(1000L, var6);
@@ -64,7 +64,7 @@ public abstract class GenRockLayerTFC extends GenLayerTFC
         return new GenLayerTFC[] {var19, var8};
     }
 
-    public GenRockLayerTFC(long par1)
+    public GenRockLayer2TFC(long par1)
     {
     	super(par1);
     }

@@ -15,7 +15,7 @@ public class ContainerTerraForge extends ContainerTFC
     private float firetemp;
 
 
-	public ContainerTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge)
+	public ContainerTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
 

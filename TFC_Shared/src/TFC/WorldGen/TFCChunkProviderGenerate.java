@@ -512,7 +512,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
 						}
 						//Next we check for all other warm deserts
-						else if(rainfall.floatdata1 < 125 && biomegenbase.maxHeight < 0.5f)
+						else if(rainfall.floatdata1 < 125 && biomegenbase.maxHeight < 0.5f && 
+								temp > 20f)
 						{
 							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
 							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
@@ -577,6 +578,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								metaArrayBig[indexBig] = (byte) soilMeta;
 							}
 						}
+//						else if(biomegenbase.biomeID == BiomeGenBase.beach.biomeID)
+//						{
+//							if((height >= var5 && height < var5+2 && blockArray[index] != Block.waterStill.blockID))//If its a beach make it sandy
+//							{
+//								blockArrayBig[indexBig] = (byte) TFC_Core.getTypeForSand(soilMeta);
+//								metaArrayBig[indexBig] = (byte) soilMeta;
+//							}
+//						}
 						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
 						{
 							if(((height > var5-2 && height < var5 && blockArray[index+1] == Block.waterStill.blockID) || (height < var5 && blockArray[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom

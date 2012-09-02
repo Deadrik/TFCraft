@@ -15,7 +15,7 @@ public class ContainerTerraMetallurgy extends Container
 	public IInventory craftResult;
 	private World worldObj;
 
-	public ContainerTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityTerraMetallurgy scribe, World world)
+	public ContainerTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityTerraMetallurgy scribe, World world, int x, int y, int z)
 	{
 		terrametallurgy = scribe;
 		craftMatrix = new InventoryCrafting(this, 5, 5);

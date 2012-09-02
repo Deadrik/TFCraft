@@ -41,6 +41,7 @@ public class TFC_Time
             m1 = 11;
         
         lastMonth = m1;
+        currentDay = getDayOfYear();
         currentMonth = m;
         currentYear = getYear();
     }
@@ -160,7 +161,16 @@ public class TFC_Time
     
     public static int getMonthFromDayOfYear(int day)
     {
+    	if(day < 0)
+    		day = 360 + day;
     	return day / 30;
+    }
+    
+    public static int getDayOfMonthFromDayOfYear(int day)
+    {
+    	if(day < 0)
+    		day = 360 + day;
+    	return (day - ((int)Math.floor((day/30))*30));
     }
     
     public static int getPrevMonth()

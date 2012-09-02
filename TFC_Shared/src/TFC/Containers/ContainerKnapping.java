@@ -25,7 +25,7 @@ public class ContainerKnapping extends Container
     public IInventory craftResult = new InventoryCraftResult();
     private World worldObj;
 
-    public ContainerKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world)
+    public ContainerKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
     {
         for (int j1 = 0; j1 < 25; j1++)
         {

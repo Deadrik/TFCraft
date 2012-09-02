@@ -7,7 +7,7 @@ public class ContainerChestTFC extends Container
     private IInventory lowerChestInventory;
     private int numRows;
 
-    public ContainerChestTFC(IInventory par1IInventory, IInventory par2IInventory)
+    public ContainerChestTFC(IInventory par1IInventory, IInventory par2IInventory, World world, int x, int y, int z)
     {
         this.lowerChestInventory = par2IInventory;
         this.numRows = par2IInventory.getSizeInventory() / 9;

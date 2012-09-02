@@ -40,7 +40,7 @@ public abstract class GenEVTLayerTFC extends GenLayerTFC
 
         GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
         GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
-        var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4);
+        var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4+2);
         GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var5);
         GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
         GenLayerEVTTypes var17 = new GenLayerEVTTypes(200L, var6, par2WorldType);

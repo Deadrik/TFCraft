@@ -1041,6 +1041,5 @@ public class ClientProxy extends CommonProxy
 		// TODO Auto-generated method stub
 		return ModLoader.getMinecraftInstance().isFancyGraphicsEnabled();
 	}
-
-
+	
 }

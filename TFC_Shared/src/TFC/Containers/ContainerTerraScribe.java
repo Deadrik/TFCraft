@@ -11,7 +11,7 @@ public class ContainerTerraScribe extends Container
 	public IInventory craftResult;
 	private World worldObj;
 
-	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe scribe, World world)
+	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe scribe, World world, int x, int y, int z)
 	{
 		terraScribe = scribe;
 		craftMatrix = new InventoryCrafting(this, 5, 5);

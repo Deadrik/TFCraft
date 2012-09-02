@@ -13,7 +13,7 @@ public class ContainerTerraBloomery extends Container
     private float outcount;
 
 
-	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge)
+	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge, World world, int x, int y, int z)
 	{
 	    bloomery = tileentityforge;
 	    firetemp = 0;

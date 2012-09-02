@@ -8,7 +8,7 @@ import TFC.Core.TFC_Climate;
 import TFC.WorldGen.GenLayers.GenEVTLayerTFC;
 import TFC.WorldGen.GenLayers.GenLayerTFC;
 import TFC.WorldGen.GenLayers.GenRainLayerTFC;
-import TFC.WorldGen.GenLayers.GenRockLayerTFC;
+import TFC.WorldGen.GenLayers.GenRockLayer2TFC;
 import TFC.WorldGen.GenLayers.GenTreeLayerTFC;
 
 import cpw.mods.fml.common.Side;
@@ -77,6 +77,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.biomesToSpawnIn.add(TFCBiome.rollingHills);
 		this.biomesToSpawnIn.add(TFCBiome.taiga);
 		this.biomesToSpawnIn.add(TFCBiome.swampland);
+		this.biomesToSpawnIn.add(TFCBiome.Mountains);
 
 	}
 
@@ -88,9 +89,9 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.biomeIndexLayer = var4[1];
 
 		//Setup Rocks
-		GenLayerTFC[] var5 = GenRockLayerTFC.initializeAllBiomeGenerators(par1+1, par3WorldType);
-		GenLayerTFC[] var6 = GenRockLayerTFC.initializeAllBiomeGenerators(par1+2, par3WorldType);
-		GenLayerTFC[] var7 = GenRockLayerTFC.initializeAllBiomeGenerators(par1+3, par3WorldType);
+		GenLayerTFC[] var5 = GenRockLayer2TFC.initializeAllBiomeGenerators(par1+1, par3WorldType);
+		GenLayerTFC[] var6 = GenRockLayer2TFC.initializeAllBiomeGenerators(par1+2, par3WorldType);
+		GenLayerTFC[] var7 = GenRockLayer2TFC.initializeAllBiomeGenerators(par1+3, par3WorldType);
 		genRocks = new GenLayerTFC[3];
 		rocksIndexLayer = new GenLayerTFC[3];
 		this.genRocks[0] = var5[0];

@@ -13,9 +13,9 @@ public class GuiTerraBloomery extends GuiContainerTFC
 	private TileEntityTerraBloomery ForgeEntity;
 
 
-	public GuiTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge)
+	public GuiTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraBloomery(inventoryplayer,tileentityforge) );
+		super(new ContainerTerraBloomery(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;
 		
 	}

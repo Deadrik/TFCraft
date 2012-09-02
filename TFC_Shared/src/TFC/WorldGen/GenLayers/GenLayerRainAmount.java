@@ -8,8 +8,8 @@ import net.minecraft.src.WorldType;
 
 public class GenLayerRainAmount extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Rain_62_5,DataLayer.Rain_125,DataLayer.Rain_250,DataLayer.Rain_500,DataLayer.Rain_1000,DataLayer.Rain_2000,DataLayer.Rain_4000,
-		DataLayer.Rain_8000, DataLayer.Rain_500, DataLayer.Rain_1000, DataLayer.Rain_2000, DataLayer.Rain_4000, DataLayer.Rain_8000};
+	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.Rain_62_5,DataLayer.Rain_125,DataLayer.Rain_250,DataLayer.Rain_500, DataLayer.Rain_2000,DataLayer.Rain_4000,
+		DataLayer.Rain_8000, DataLayer.Rain_500, DataLayer.Rain_2000, DataLayer.Rain_4000, DataLayer.Rain_8000};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;

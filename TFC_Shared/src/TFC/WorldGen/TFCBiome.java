@@ -33,6 +33,8 @@ import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomTallTrees;
 import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
 import TFC.WorldGen.Generators.WorldGenDouglasFir;
+import TFC.WorldGen.Generators.WorldGenPineShort;
+import TFC.WorldGen.Generators.WorldGenPineTall;
 import TFC.WorldGen.Generators.WorldGenRedwoodXL;
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.BiomeGenBase;
@@ -89,7 +91,7 @@ public class TFCBiome extends BiomeGenBase
 
     public static final TFCBiome desert = (new BiomeGenDesertTFC(2)).setBiomeName("Desert").setDisableRain().setTemperatureRainfall(36F, 0.0F).setMinMaxHeight(0.1F, 0.15F);
 
-    public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("High Hills").setMinMaxHeight(0.2F, 1.0F);
+    public static final TFCBiome HighHills = (new BiomeGenHillsTFC(3)).setColor(HillsColor).setBiomeName("High Hills").setMinMaxHeight(0.8F, 1.6F);
 
     public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
 
@@ -113,7 +115,7 @@ public class TFCBiome extends BiomeGenBase
     protected static WorldGenCustomTallTrees worldGenHickoryTallTrees;
     protected static WorldGenCustomMapleTallTrees worldGenMapleTallTrees;
     protected static WorldGenCustomTallTrees worldGenOakTallTrees;
-    protected static WorldGenCustomTallTrees worldGenPineTallTrees;
+    protected static WorldGenPineTall worldGenPineTallTrees;
     protected static WorldGenRedwoodXL worldGenRedwoodTallTrees;
     protected static WorldGenCustomTallTrees worldGenSpruceTallTrees;
     protected static WorldGenCustomTallTrees worldGenSycamoreTallTrees;
@@ -128,12 +130,13 @@ public class TFCBiome extends BiomeGenBase
     protected static WorldGenCustomShortTrees worldGenHickoryShortTrees;
     protected static WorldGenCustomMapleShortTrees worldGenMapleShortTrees;
     protected static WorldGenCustomShortTrees worldGenOakShortTrees;
-    protected static WorldGenCustomShortTrees worldGenPineShortTrees;
+    protected static WorldGenPineShort worldGenPineShortTrees;
     protected static WorldGenRedwoodXL worldGenRedwoodShortTrees;
     protected static WorldGenCustomShortTrees worldGenSpruceShortTrees;
     protected static WorldGenCustomShortTrees worldGenSycamoreShortTrees;
     protected static WorldGenCustomShortTrees worldGenWhiteElmShortTrees;
     protected static WorldGenCustomWillowTrees worldGenWillowShortTrees;
+    
     
     public TFCBiome(int par1)
     {
@@ -159,7 +162,7 @@ public class TFCBiome extends BiomeGenBase
         worldGenHickoryTallTrees = new WorldGenCustomTallTrees(false,5);
         worldGenMapleTallTrees = new WorldGenCustomMapleTallTrees(false,6);
         worldGenOakTallTrees = new WorldGenCustomTallTrees(false,0);
-        worldGenPineTallTrees = new WorldGenCustomTallTrees(false,8);
+        worldGenPineTallTrees = new WorldGenPineTall(8);
         worldGenRedwoodTallTrees = new WorldGenRedwoodXL(false);
         worldGenSpruceTallTrees = new WorldGenCustomTallTrees(false,10);
         worldGenSycamoreTallTrees = new WorldGenCustomTallTrees(false,11);
@@ -174,7 +177,7 @@ public class TFCBiome extends BiomeGenBase
         worldGenHickoryShortTrees = new WorldGenCustomShortTrees(false,5);
         worldGenMapleShortTrees = new WorldGenCustomMapleShortTrees(false,6);
         worldGenOakShortTrees = new WorldGenCustomShortTrees(false,0);
-        worldGenPineShortTrees = new WorldGenCustomShortTrees(false,8);
+        worldGenPineShortTrees = new WorldGenPineShort(false, 8);
         worldGenRedwoodShortTrees = new WorldGenRedwoodXL(false);
         worldGenSpruceShortTrees = new WorldGenCustomShortTrees(false,10);
         worldGenSycamoreShortTrees = new WorldGenCustomShortTrees(false,11);
@@ -197,7 +200,7 @@ public class TFCBiome extends BiomeGenBase
         this.spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
     }
-    
+        
     /**
      * Allocate a new BiomeDecorator for this BiomeGenBase
      */
@@ -467,7 +470,7 @@ public class TFCBiome extends BiomeGenBase
             {
                 if(j)
                 {
-                    return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,4) :worldGenDouglasFirTallTrees;
+                    return worldGenDouglasFirTallTrees;
                 }
                 else
                 {
@@ -511,7 +514,7 @@ public class TFCBiome extends BiomeGenBase
             {
                 if(j)
                 {
-                    return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,8) :worldGenPineTallTrees;
+                    return worldGenPineTallTrees;
                 }
                 else
                 {
@@ -522,7 +525,7 @@ public class TFCBiome extends BiomeGenBase
             {
                 if(j)
                 {
-                    return R.nextInt(20) == 0 ? new WorldGenCustomBigTree(false,9) :worldGenRedwoodTallTrees;
+                    return worldGenRedwoodTallTrees;
                 }
                 else
                 {
@@ -591,6 +594,11 @@ public class TFCBiome extends BiomeGenBase
             }
         }
         return null;
+    }
+    
+    public static int getSurfaceRockLayer(World world, int i, int k)
+    {
+    	return ((TFCWorldChunkManager)world.provider.worldChunkMgr).getRockLayerAt(i, k, 0).data2;
     }
 
 }

@@ -9,7 +9,7 @@ public class ContainerTerraSluice extends Container
 	private EntityPlayer player;
 
 
-	public ContainerTerraSluice(InventoryPlayer inventoryplayer, TileEntityTerraSluice tileentitysluice)
+	public ContainerTerraSluice(InventoryPlayer inventoryplayer, TileEntityTerraSluice tileentitysluice, World world, int x, int y, int z)
 	{
 		sluice = tileentitysluice;
 		player = inventoryplayer.player;

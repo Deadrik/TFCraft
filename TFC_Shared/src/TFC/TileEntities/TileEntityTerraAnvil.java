@@ -59,7 +59,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 
     public TileEntityTerraAnvil()
     {
-        anvilItemStacks = new ItemStack[8];
+        anvilItemStacks = new ItemStack[7];
         itemCraftingValue = 0;
         itemCraftingRules = new int[]{-1,-1,-1};
         craftingValue = 0;
@@ -78,7 +78,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         else if(anvilItemStacks[1] != null && workRecipe == null)
         {
             AnvilRecipe recipe = AnvilCraftingManagerTFC.getInstance().findMatchingRecipe(new AnvilRecipe(anvilItemStacks[1],anvilItemStacks[5], 
-                    anvilItemStacks[7] != null ? true : false, this.AnvilTier));
+                    anvilItemStacks[6] != null ? true : false, this.AnvilTier));
             if(recipe != null)
             {
                 workRecipe = recipe;
@@ -121,7 +121,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                                 CraftingRule.ANY,
                                 CraftingRule.ANY,
                                 CraftingRule.ANY, 
-                                anvilItemStacks[7] != null ? true : false, AnvilTier, null);
+                                anvilItemStacks[6] != null ? true : false, AnvilTier, null);
 
                         result = manager.findCompleteRecipe(recipe, getItemRules());
                         if(result != null)
@@ -428,14 +428,14 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                         CraftingRule.ANY,
                         CraftingRule.ANY,
                         CraftingRule.ANY, 
-                        anvilItemStacks[7] != null ? true : false, AnvilTier, null);
+                        anvilItemStacks[6] != null ? true : false, AnvilTier, null);
 
                 AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[3],anvilItemStacks[2],
                         0,
                         CraftingRule.ANY,
                         CraftingRule.ANY,
                         CraftingRule.ANY, 
-                        anvilItemStacks[7] != null ? true : false, AnvilTier, null);
+                        anvilItemStacks[6] != null ? true : false, AnvilTier, null);
 
                 ItemStack result = manager.findCompleteWeldRecipe(recipe);
                 if(result == null)
@@ -447,7 +447,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
                     Tag.setFloat("temperature", (TFC_ItemHeat.GetTemperature(anvilItemStacks[2])+TFC_ItemHeat.GetTemperature(anvilItemStacks[3]))/2);
                     anvilItemStacks[4] = result; 
                     anvilItemStacks[4].setTagCompound(Tag);
-                    ItemStack item = new ItemStack(anvilItemStacks[7].getItem(),anvilItemStacks[7].stackSize-1);
+                    ItemStack item = new ItemStack(anvilItemStacks[6].getItem(),anvilItemStacks[6].stackSize-1);
                     if(item.stackSize == 0) 
                         item = null;
 
@@ -457,7 +457,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 
                     anvilItemStacks[2] = null;
                     anvilItemStacks[3] = null;
-                    anvilItemStacks[7] = null;
+                    anvilItemStacks[6] = null;
                     
                     worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.7F + (R.nextFloat()/2));
                 }

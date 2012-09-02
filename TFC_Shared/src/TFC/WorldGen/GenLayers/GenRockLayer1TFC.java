@@ -3,13 +3,13 @@ package TFC.WorldGen.GenLayers;
 import net.minecraft.src.*;
 import TFC.WorldGen.*;
 
-public abstract class GenLayerTFC extends GenLayer
+public abstract class GenRockLayer1TFC extends GenLayerTFC
 {
     /** seed from World#getWorldSeed that is used in the LCG prng */
     private long worldGenSeed;
 
     /** parent GenLayer that was provided via the constructor */
-    protected GenLayerTFC parent;
+    protected GenRockLayer1TFC parent;
 
     /**
      * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
@@ -38,15 +38,15 @@ public abstract class GenLayerTFC extends GenLayer
         var10 = new GenLayerAddIslandTFC(4L, var11);
         byte var4 = 5;
 
-        GenLayerTFC var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
+        GenLayerTFC var5 = (GenLayerTFC)GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
         GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);
-        var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4 + 2);
-        GenLayerRiverTFC var14 = new GenLayerRiverTFC(1L, var5);
-        GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var14);
+        var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var13, var4+2);
+        GenLayerSmoothTFC var15 = new GenLayerSmoothTFC(1000L, var5);
         GenLayerTFC var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
-        GenLayerBiomeTFC var17 = new GenLayerBiomeTFC(200L, var6, par2WorldType);
+        GenLayerRockTypes var17 = new GenLayerRockTypes(200L, var6, par2WorldType,1);
         var6 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var17, 2);
-        Object var18 = new GenLayerHillsTFC(1000L, var6);
+
+        Object var18 = new GenLayerSmoothTFC(1000L, var6);
 
         for (int var7 = 0; var7 < var4; ++var7)
         {
@@ -56,27 +56,15 @@ public abstract class GenLayerTFC extends GenLayer
             {
                 var18 = new GenLayerAddIslandTFC(3L, (GenLayerTFC)var18);
             }
-
-            if (var7 == 1)
-            {
-                var18 = new GenLayerShoreTFC(1000L, (GenLayerTFC)var18);
-            }
-
-            if (var7 == 1)
-            {
-                var18 = new GenLayerSwampRiversTFC(1000L, (GenLayerTFC)var18);
-            }
         }
-
         GenLayerSmoothTFC var19 = new GenLayerSmoothTFC(1000L, (GenLayerTFC)var18);
-        GenLayerRiverMixTFC var20 = new GenLayerRiverMixTFC(100L, var19, var15);
-        GenLayerVoronoiZoomTFC var8 = new GenLayerVoronoiZoomTFC(10L, var20);
-        var20.initWorldGenSeed(par0);
+        GenLayerVoronoiZoomTFC var8 = new GenLayerVoronoiZoomTFC(10L, var19);
+        var19.initWorldGenSeed(par0);
         var8.initWorldGenSeed(par0);
-        return new GenLayerTFC[] {var20, var8, var20};
+        return new GenLayerTFC[] {var19, var8};
     }
 
-    public GenLayerTFC(long par1)
+    public GenRockLayer1TFC(long par1)
     {
     	super(par1);
     }

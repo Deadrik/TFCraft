@@ -8,9 +8,8 @@ import net.minecraft.src.WorldType;
 
 public class GenLayerEVTTypes extends GenLayerTFC
 {
-	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.EVT_0_125,DataLayer.EVT_0_25,DataLayer.EVT_0_5,DataLayer.EVT_1,
-		DataLayer.EVT_0_125,DataLayer.EVT_0_25,DataLayer.EVT_0_5,DataLayer.EVT_1,
-		DataLayer.EVT_2,DataLayer.EVT_4,DataLayer.EVT_8,DataLayer.EVT_16};
+	public static DataLayer[] biomeArray = new DataLayer[] {DataLayer.EVT_0_125,DataLayer.EVT_0_25,DataLayer.EVT_1,DataLayer.EVT_1,
+		DataLayer.EVT_2,DataLayer.EVT_4,DataLayer.EVT_4,DataLayer.EVT_8,DataLayer.EVT_16};
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
@@ -40,11 +39,11 @@ public class GenLayerEVTTypes extends GenLayerTFC
 
 				if (var9 == 0)
 				{
-					var6[var8 + var7 * par3] = DataLayer.EVT_0_5.ID;
+					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
 				}
 				else
 				{
-					var6[var8 + var7 * par3] = this.allowedBiomes[this.nextInt(this.allowedBiomes.length)].ID;
+					var6[var8 + var7 * par3] = DataLayer.EVT_0_5.ID;
 				}
 			}
 		}

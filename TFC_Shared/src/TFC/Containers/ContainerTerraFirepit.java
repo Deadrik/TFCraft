@@ -15,7 +15,7 @@ public class ContainerTerraFirepit extends Container
     private int charcoal;
 
 
-    public ContainerTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit)
+    public ContainerTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit, World world, int x, int y, int z)
     {
         firepit = tileentityfirepit;
         firetemp = -1111;

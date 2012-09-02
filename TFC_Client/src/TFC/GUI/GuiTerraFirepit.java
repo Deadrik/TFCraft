@@ -13,9 +13,9 @@ public class GuiTerraFirepit extends GuiContainerTFC
 	private TileEntityTerraFirepit FirepitEntity;
 
 
-	public GuiTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit)
+	public GuiTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraFirepit(inventoryplayer,tileentityfirepit) );
+		super(new ContainerTerraFirepit(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
 		
 	}

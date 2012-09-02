@@ -6,6 +6,7 @@ package TFC.WorldGen.Generators;
 import java.util.Random;
 
 import TFC.Core.TFC_Core;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 
 public class WorldGenRedwoodXL extends WorldGenerator {
@@ -23,16 +24,15 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 	public boolean generate(World world, Random rand, int x, int y,
 			int z)
 	{
-		final int height = rand.nextInt(30) + 32;
-		final int j = 1 + rand.nextInt(12);
+		final int height = rand.nextInt(20) + 22;
+		final int j = 5 + rand.nextInt(12);
 		final int k = height - j;
-		final int l = 2 + rand.nextInt(6);
+		final int l = 4 + rand.nextInt(6);
 
 		if (y < 1 || y + height + 1 > 256) return false;
 
-		final int id = world.getBlockId(x, y - 1, z);
-
-		if (!TFC_Core.isSoil(id) || y >= 256 - height - 1) return false;
+		if (!TFC_Core.isGrass(world.getBlockId(x, y - 1, z)) || !TFC_Core.isGrass(world.getBlockId(x-1, y - 1, z)) || 
+				!TFC_Core.isGrass(world.getBlockId(x, y - 1, z-1)) || !TFC_Core.isGrass(world.getBlockId(x-1, y - 1, z-1)) || y >= 180) return false;
 
 		for (int y1 = y; y1 <= y + 1 + height; y1++) {
 			int k1 = 1;
@@ -55,10 +55,13 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 						return false;
 		}
 
-		world.setBlock(x, y - 1, z, Block.dirt.blockID);
-		world.setBlock(x - 1, y - 1, z, Block.dirt.blockID);
-		world.setBlock(x, y - 1, z - 1, Block.dirt.blockID);
-		world.setBlock(x - 1, y - 1, z - 1, Block.dirt.blockID);
+		int meta = TFCBiome.getSurfaceRockLayer(world, x, z);
+		int dirtID =  TFC_Core.getTypeForDirt(meta);
+		int dirtMeta =  TFC_Core.getSoilMetaFromStone(dirtID, meta);
+		world.setBlockAndMetadata(x, y - 1, z, dirtID, meta);
+		world.setBlockAndMetadata(x - 1, y - 1, z, dirtID, meta);
+		world.setBlockAndMetadata(x, y - 1, z - 1, dirtID, meta);
+		world.setBlockAndMetadata(x - 1, y - 1, z - 1, dirtID, meta);
 		int l1 = rand.nextInt(2);
 		int j2 = 1;
 		boolean flag1 = false;

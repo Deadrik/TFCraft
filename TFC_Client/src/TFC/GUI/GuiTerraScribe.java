@@ -13,9 +13,9 @@ public class GuiTerraScribe extends GuiContainerTFC
 	private TileEntityTerraScribe FirepitEntity;
 
 
-	public GuiTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe tileentityfirepit, World world)
+	public GuiTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe tileentityfirepit, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraScribe(inventoryplayer,tileentityfirepit,world) );
+		super(new ContainerTerraScribe(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
 		
 	}

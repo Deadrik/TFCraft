@@ -13,9 +13,9 @@ public class GuiTerraMetallurgy extends GuiContainerTFC
 	private TileEntityTerraMetallurgy entityMetallurgy;
 
 
-	public GuiTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityTerraMetallurgy tileentityMetallurgy, World world)
+	public GuiTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityTerraMetallurgy tileentityMetallurgy, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraMetallurgy(inventoryplayer,tileentityMetallurgy,world) );
+		super(new ContainerTerraMetallurgy(inventoryplayer,tileentityMetallurgy, world, x, y, z) );
 		entityMetallurgy = tileentityMetallurgy;
 		
 	}

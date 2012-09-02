@@ -10,9 +10,9 @@ import net.minecraft.src.*;
 
 public class GuiKnapping extends GuiContainerTFC
 {
-    public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world)
+    public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
     {
-        super(new ContainerKnapping(inventoryplayer, is, world));
+        super(new ContainerKnapping(inventoryplayer, is, world, x, y, z));
     }
 
     public void onGuiClosed()

@@ -28,24 +28,27 @@ public class WorldGenForests implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		chunkX *= 16;
-		chunkZ *= 16;
+//		chunkX *= 16;
+//		chunkZ *= 16;
 		
 		BiomeGenBase biome;
 
-		int xCoord = chunkX + random.nextInt(16) + 8;
+		int xCoord = chunkX;
 		int yCoord = 145;
-		int zCoord = chunkZ + random.nextInt(16) + 8;
+		int zCoord = chunkZ;
 		
-		int numTrees = 6;
+		int numTreesBase = 6;
 		
 
 		if (random.nextInt(10) == 0)
 		{
-			numTrees -= 4;
+			numTreesBase -= 4;
 		}
 		
-		float rainfall = TFC_Climate.getTerrainAdjustedRainfall(xCoord, 0, zCoord);
+		int numTrees = 1;
+		
+		
+		
 		
 		for (int var2 = 0; var2 < numTrees; ++var2)
 		{
@@ -53,9 +56,16 @@ public class WorldGenForests implements IWorldGenerator
 			zCoord = chunkZ + random.nextInt(16);
 			yCoord = world.getHeightValue(xCoord, zCoord);
 			
+			float rainfall = TFC_Climate.getRainfall(xCoord, 0, zCoord);
+			
+			if(getNearWater(world, xCoord, yCoord, zCoord))
+			{
+				rainfall*=2;
+			}
+			
 			biome = world.getBiomeGenForCoords(xCoord, zCoord);
 			
-			numTrees += ((rainfall / 1000)*2);
+			numTrees = (int) (numTreesBase + ((rainfall / 1000)*2));
 			
 			if(numTrees > 30)
 				numTrees = 30;
@@ -80,6 +90,17 @@ public class WorldGenForests implements IWorldGenerator
 
 			try
 			{
+				if((TreeType0 == 9 || TreeType1 == 9 || TreeType2 == 9) && EVT.floatdata1 <= EnumTree.REDWOOD.maxEVT && 
+						rainfall >= EnumTree.REDWOOD.minRain && rainfall <= EnumTree.REDWOOD.maxRain && 
+						temperature >= EnumTree.REDWOOD.minTemp && temperature <= EnumTree.REDWOOD.maxTemp)
+				{
+					numTrees = 30;
+					gen0 = TFCBiome.getTreeGen(9, random.nextBoolean());
+					gen1 = TFCBiome.getTreeGen(8, random.nextBoolean());
+					gen2 = TFCBiome.getTreeGen(9, random.nextBoolean());
+					
+				}
+				
 				if(EVT.floatdata1 <= EnumTree.KAPOK.maxEVT && 
 						rainfall >= EnumTree.KAPOK.minRain && rainfall <= EnumTree.KAPOK.maxRain && 
 						temperature >= EnumTree.KAPOK.minTemp && temperature <= EnumTree.KAPOK.maxTemp)
@@ -168,10 +189,28 @@ public class WorldGenForests implements IWorldGenerator
 				}
 			}catch(IndexOutOfBoundsException e)
 			{
-				e.printStackTrace();System.out.println("Tree0 Type: "+TreeType0);System.out.println("Tree1 Type: "+TreeType1);System.out.println("Tree2 Type: "+TreeType2);
+				//e.printStackTrace();System.out.println("Tree0 Type: "+TreeType0);System.out.println("Tree1 Type: "+TreeType1);System.out.println("Tree2 Type: "+TreeType2);
 			}
 		}
+	}
+	
+	public boolean getNearWater(World world, int x, int y, int z)
+	{
+		BiomeGenBase biome;
 
-
+		for (int x1 = -4; x1 < 5; ++x1)
+		{
+			for (int z1 = -4; z1 < 5; ++z1)
+			{
+				for (int y1 = -2; y1 < 1; ++y1)
+				{
+					if(TFC_Core.isWater(world.getBlockId(x+x1, y+y1, z+z1)))
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

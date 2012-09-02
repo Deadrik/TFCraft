@@ -16,9 +16,9 @@ public class GuiChestTFC extends GuiContainer
      */
     private int inventoryRows = 0;
 
-    public GuiChestTFC(IInventory par1IInventory, IInventory par2IInventory)
+    public GuiChestTFC(IInventory par1IInventory, IInventory par2IInventory, World world, int x, int y, int z)
     {
-        super(new ContainerChestTFC(par1IInventory, par2IInventory));
+        super(new ContainerChestTFC(par1IInventory, par2IInventory, world, x, y, z));
         this.upperChestInventory = par1IInventory;
         this.lowerChestInventory = par2IInventory;
         this.allowUserInput = false;
