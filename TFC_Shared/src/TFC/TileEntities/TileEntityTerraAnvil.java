@@ -1,5 +1,8 @@
 package TFC.TileEntities;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -36,7 +39,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
 
-public class TileEntityTerraAnvil extends TileEntity implements IInventory
+public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventory
 {
     public ItemStack anvilItemStacks[];
 
@@ -731,53 +734,103 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
 
     public void handlePacketData(int id)
     {
-        switch(id)
+        
+    }
+
+    @Override
+    public void initialize()
+    {
+    	if (this.worldObj.isRemote)
         {
-            case -1:
-            {
-                actionLightHammer();
-                break;
-            }
-            case 0:
-            {
-                actionHeavyHammer();
-                break;
-            }
-            case 1:
-            {
-                actionDraw();
-                break;
-            }
-            case 2:
-            {
-                actionQuench();
-                break;
-            }
-            case 3:
-            {
-                actionPunch();
-                break;
-            }
-            case 4:
-            {
-                actionBend();
-                break;
-            }
-            case 5:
-            {
-                actionUpset();
-                break;
-            }
-            case 6:   
-            {
-                actionShrink();
-                break;
-            }
-            case 7:
-            {
-                actionWeld();
-                break;
-            }
+            PacketHandler.requestInitialData(this);
         }
     }
+    
+	@Override
+ 	public void handleDataPacket(DataInputStream inStream) {
+		try {
+			switch(inStream.readInt())
+	        {
+	            case -1:
+	            {
+	                actionLightHammer();
+	                break;
+	            }
+	            case 0:
+	            {
+	                actionHeavyHammer();
+	                break;
+	            }
+	            case 1:
+	            {
+	                actionDraw();
+	                break;
+	            }
+	            case 2:
+	            {
+	                actionQuench();
+	                break;
+	            }
+	            case 3:
+	            {
+	                actionPunch();
+	                break;
+	            }
+	            case 4:
+	            {
+	                actionBend();
+	                break;
+	            }
+	            case 5:
+	            {
+	                actionUpset();
+	                break;
+	            }
+	            case 6:   
+	            {
+	                actionShrink();
+	                break;
+	            }
+	            case 7:
+	            {
+	                actionWeld();
+	                break;
+	            }
+	        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) {
+		try {
+			outStream.writeInt(stonePair[0]);
+			outStream.writeInt(stonePair[1]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) {
+		try {
+			stonePair[0] = inStream.readInt();
+			stonePair[1] = inStream.readInt();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	
+	@Override
+	public void onInventoryChanged() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -17,6 +17,7 @@ import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
+import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
@@ -40,12 +41,13 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
-	
+
 	private static final int Packet_Recieve_Init_Client = 0;
 	private static final int Packet_Recieve_Init_Server = 1;
 	private static final int Packet_Recieve_Keypress_Server = 2;
 	private static final int Packet_Recieve_InitWorld_Server = 3;
-	
+	private static final int Packet_Recieve_Data_Client = 4;
+
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
 			NetworkManager manager, Packet1Login login) 
@@ -117,81 +119,86 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			}
 			if(world != null)
 			{
-				TileEntity te=world.getBlockTileEntity(x, y, z);
+				TileEntity te = world.getBlockTileEntity(x, y, z);
 
-				if (te instanceof TileEntityTerraAnvil) 
+				if (te instanceof NetworkTileEntity) 
 				{
-					TileEntityTerraAnvil icte = (TileEntityTerraAnvil)te;
-					int id;
-					try {
-						id = dis.readInt();
-					} catch (IOException e) {
-						return;
-					} 
-					icte.handlePacketData(id);
+					((NetworkTileEntity)te).handleInitPacket(dis);
 				}
-				else if (te instanceof TileEntityTerraFirepit) 
-				{
-					TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
 
-					int charcoal;
-					try {
-						charcoal = dis.readInt();
-					} catch (IOException e) 
-					{
-						return;
-					} 
-					icte.handlePacketData(charcoal);
-				}
-				else if (te instanceof TileEntityTerraBloomery) 
-				{
-					TileEntityTerraBloomery icte = (TileEntityTerraBloomery)te;
-					int orecount;
-					int coalcount;
-					float outcount;
-					int dam;
-					try {
-						orecount = dis.readInt();
-						coalcount = dis.readInt();
-						outcount = dis.readFloat();
-						dam = dis.readInt();
-					} catch (IOException e) {
-						return;
-					} 
-					icte.handlePacketData(orecount, coalcount, outcount, dam);
-				}
-				else if (te instanceof TileEntityPartial) 
-				{
-					TileEntityPartial icte = (TileEntityPartial)te;
-					short id;
-					byte meta;
-					byte mat;
-					long ex;
-					try {
-						id = dis.readShort();
-						meta = dis.readByte();
-						mat = dis.readByte();
-						ex = dis.readLong();
-					} catch (IOException e) {
-						return;
-					} 
-					icte.handlePacketData(id, meta, mat, ex);
-				}
-				else if (te instanceof TileEntityCrop) 
-				{
-					TileEntityCrop icte = (TileEntityCrop)te;
-					int id;
-					float growth;
-
-					try {
-						id = dis.readInt();
-						growth = dis.readFloat();
-
-					} catch (IOException e) {
-						return;
-					} 
-					icte.handlePacketData(id, growth);
-				}
+				//				if (te instanceof TileEntityTerraAnvil) 
+				//				{
+				//					TileEntityTerraAnvil icte = (TileEntityTerraAnvil)te;
+				//					int id;
+				//					try {
+				//						id = dis.readInt();
+				//					} catch (IOException e) {
+				//						return;
+				//					} 
+				//					icte.handlePacketData(id);
+				//				}
+				//				else if (te instanceof TileEntityTerraFirepit) 
+				//				{
+				//					TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
+				//
+				//					int charcoal;
+				//					try {
+				//						charcoal = dis.readInt();
+				//					} catch (IOException e) 
+				//					{
+				//						return;
+				//					} 
+				//					icte.handlePacketData(charcoal);
+				//				}
+				//				else if (te instanceof TileEntityTerraBloomery) 
+				//				{
+				//					TileEntityTerraBloomery icte = (TileEntityTerraBloomery)te;
+				//					int orecount;
+				//					int coalcount;
+				//					float outcount;
+				//					int dam;
+				//					try {
+				//						orecount = dis.readInt();
+				//						coalcount = dis.readInt();
+				//						outcount = dis.readFloat();
+				//						dam = dis.readInt();
+				//					} catch (IOException e) {
+				//						return;
+				//					} 
+				//					icte.handlePacketData(orecount, coalcount, outcount, dam);
+				//				}
+				//				else if (te instanceof TileEntityPartial) 
+				//				{
+				//					TileEntityPartial icte = (TileEntityPartial)te;
+				//					short id;
+				//					byte meta;
+				//					byte mat;
+				//					long ex;
+				//					try {
+				//						id = dis.readShort();
+				//						meta = dis.readByte();
+				//						mat = dis.readByte();
+				//						ex = dis.readLong();
+				//					} catch (IOException e) {
+				//						return;
+				//					} 
+				//					icte.handlePacketData(id, meta, mat, ex);
+				//				}
+				//				else if (te instanceof TileEntityCrop) 
+				//				{
+				//					TileEntityCrop icte = (TileEntityCrop)te;
+				//					int id;
+				//					float growth;
+				//
+				//					try {
+				//						id = dis.readInt();
+				//						growth = dis.readFloat();
+				//
+				//					} catch (IOException e) {
+				//						return;
+				//					} 
+				//					icte.handlePacketData(id, growth);
+				//				}
 			}
 		}
 		else if(type == Packet_Recieve_Init_Server)//Init Tile Entities
@@ -208,6 +215,19 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			TileEntity te = (TileEntity) world.getBlockTileEntity(x, y, z);
 			if(te != null)
 			{
+				if (te instanceof NetworkTileEntity) 
+				{
+					try 
+					{
+						dos.writeByte(0);
+						dos.writeInt(x);
+						dos.writeInt(y);
+						dos.writeInt(z);
+					} catch (IOException e) {}
+					
+					((NetworkTileEntity)te).createInitPacket(dos);
+				}
+
 				if (te instanceof TileEntityPartial) 
 				{
 					try 
