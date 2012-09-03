@@ -40,6 +40,7 @@ import TFC.*;
 import TFC.Blocks.*;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetTreesCommand;
+import TFC.Containers.ContainerTFC;
 import TFC.Core.*;
 import TFC.Entities.*;
 import TFC.Handlers.BlockRenderHandler;
@@ -196,6 +197,9 @@ public class TerraFirmaCraft implements ITickHandler
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData)
 	{
+		if(ContainerTFC.slotClicked > 0)
+			ContainerTFC.slotClicked--;
+		
 		if (type.contains(TickType.WORLD))
 		{
 			World world;

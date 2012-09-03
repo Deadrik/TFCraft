@@ -21,12 +21,9 @@ public class BlockTerraMetallurgy extends BlockContainer
 	private int yCoord;
 	private int zCoord;
 
-	private Class EntityClass;
-
-	public BlockTerraMetallurgy(int i, Class tClass)
+	public BlockTerraMetallurgy(int i)
 	{
 		super(i, Material.rock);
-		EntityClass = tClass;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -25,19 +25,14 @@ public class BlockTerraAnvil extends BlockContainer
 	private int meta;
 	private int xCoord;
 	private int yCoord;
-
 	private int zCoord;
-
-
 	private int anvilId;
 
-	private Class EntityClass;
 
 	private Random random = new Random();
-	public BlockTerraAnvil(int i,int tex,  Class tClass)
+	public BlockTerraAnvil(int i,int tex)
 	{
 		super(i, Material.iron);
-		EntityClass = tClass;
 		this.blockIndexInTexture = tex;
 	}
 

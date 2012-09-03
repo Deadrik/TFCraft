@@ -16,7 +16,6 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraBloomery extends BlockContainer
 {
-    private Class EntityClass;
     private int meta;
     private int xCoord;
     private int yCoord;
@@ -33,11 +32,10 @@ public class BlockTerraBloomery extends BlockContainer
         }
     };
     
-    public BlockTerraBloomery(int i, Class tClass, int tex)
+    public BlockTerraBloomery(int i, int tex)
     {
         super(i, Material.rock);
         this.blockIndexInTexture = tex;
-        EntityClass = tClass;
     }
     
 	public static void DoValidCheck(World world, int i, int j, int k, int meta)

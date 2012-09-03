@@ -16,18 +16,14 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraScribe extends BlockContainer
 {
-	//TileEntityTerraSluice entity;
 	private int meta;
 	private int xCoord;
 	private int yCoord;
 	private int zCoord;
 
-	private Class EntityClass;
-
-	public BlockTerraScribe(int i, Class tClass)
+	public BlockTerraScribe(int i)
 	{
 		super(i, Material.wood);
-		EntityClass = tClass;
 		needsRandomTick = true;
 	}
 

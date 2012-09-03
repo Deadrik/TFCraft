@@ -284,7 +284,7 @@ public class TFCBlocks
 		Block.blocksList[40] = (BlockFlower)(new BlockCustomMushroom(40, 28)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("mushroom");
 		Block.blocksList[53] = (new BlockCustomStairs(53, Block.planks)).setBlockName("stairsWood").setRequiresSelfNotify();
 		Block.blocksList[54] = (new BlockChestTFC(54)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("chest").setRequiresSelfNotify();
-		Block.blocksList[58] = (new BlockTerraWorkbench(58, TileEntityTerraWorkbench.class)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
+		Block.blocksList[58] = (new BlockTerraWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
 		Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
 		Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setBlockName("snow").setLightOpacity(1);
 		Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setBlockName("ice");
@@ -298,20 +298,20 @@ public class TFCBlocks
 
 		TFCBlocks.finiteWater = new BlockFiniteWater(TFC_Settings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
-		TFCBlocks.terraFirepit = new BlockFirepit(TFC_Settings.getIntFor(config,"block","terraFirepit", 2015), TileEntityTerraFirepit.class, 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
+		TFCBlocks.terraFirepit = new BlockFirepit(TFC_Settings.getIntFor(config,"block","terraFirepit", 2015), 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
 		TFCBlocks.terraBellows = new BlockTerraBellows(TFC_Settings.getIntFor(config,"block","terraBellows", 2014),Material.wood).setBlockName("terraBellows").setHardness(2);
-		TFCBlocks.terraForge= new BlockTerraForge(TFC_Settings.getIntFor(config,"block","terraForge", 2013), TileEntityTerraForge.class, 90).setBlockName("terraForge").setHardness(20).setLightValue(0F);
-		TFCBlocks.terraScribe = new BlockTerraScribe(TFC_Settings.getIntFor(config,"block","terraScribe", 2012), TileEntityTerraScribe.class).setBlockName("terraScribe").setHardness(2);
-		TFCBlocks.terraAnvil = new BlockTerraAnvil(TFC_Settings.getIntFor(config,"block","terraAnvil", 2011),192, TileEntityTerraAnvil.class).setBlockName("terraAnvil").setHardness(3);
-		TFCBlocks.terraAnvil2 = new BlockTerraAnvil(TFC_Settings.getIntFor(config,"block","terraAnvil2", 2010),208, TileEntityTerraAnvil.class).setBlockName("terraAnvil2").setHardness(3);
+		TFCBlocks.terraForge= new BlockTerraForge(TFC_Settings.getIntFor(config,"block","terraForge", 2013), 90).setBlockName("terraForge").setHardness(20).setLightValue(0F);
+		TFCBlocks.terraScribe = new BlockTerraScribe(TFC_Settings.getIntFor(config,"block","terraScribe", 2012)).setBlockName("terraScribe").setHardness(2);
+		TFCBlocks.terraAnvil = new BlockTerraAnvil(TFC_Settings.getIntFor(config,"block","terraAnvil", 2011),192).setBlockName("terraAnvil").setHardness(3);
+		TFCBlocks.terraAnvil2 = new BlockTerraAnvil(TFC_Settings.getIntFor(config,"block","terraAnvil2", 2010),208).setBlockName("terraAnvil2").setHardness(3);
 
-		TFCBlocks.terraMetalTable = new BlockTerraMetallurgy(TFC_Settings.getIntFor(config,"block","terraMetallurgy", 2009), TileEntityTerraMetallurgy.class).setBlockName("terraMetallurgy").setHardness(3);
+		TFCBlocks.terraMetalTable = new BlockTerraMetallurgy(TFC_Settings.getIntFor(config,"block","terraMetallurgy", 2009)).setBlockName("terraMetallurgy").setHardness(3);
 		TFCBlocks.terraMolten = new BlockTerraMolten(TFC_Settings.getIntFor(config,"block","terraMolten", 2008)).setBlockName("terraMolten").setHardness(20);
-		TFCBlocks.terraBloomery = new BlockTerraBloomery(TFC_Settings.getIntFor(config,"block","terraBloomery", 2007), TileEntityTerraBloomery.class, 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
-		TFCBlocks.terraBloomeryOn = new BlockTerraBloomery(TFC_Settings.getIntFor(config,"block","terraBloomeryOn", 2006), TileEntityTerraBloomery.class, 66).setBlockName("terraBloomeryOn").setHardness(20).setLightValue(1.0F);
-		TFCBlocks.terraFirepitOn = new BlockFirepit(TFC_Settings.getIntFor(config,"block","terraFirepitOn", 2005), TileEntityTerraFirepit.class, 81).setBlockName("terraFirepitOn").setHardness(1).setLightValue(1.0F);
-		TFCBlocks.terraForgeOn = new BlockTerraForge(TFC_Settings.getIntFor(config,"block","terraForgeOn", 2004), TileEntityTerraForge.class, 91).setBlockName("terraForgeOn").setHardness(20).setLightValue(1.0F);
-		TFCBlocks.terraSluice = new BlockTerraSluice(TFC_Settings.getIntFor(config,"block","TerraSluice", 2003), TileEntityTerraSluice.class).setBlockName("Sluice").setHardness(2F).setResistance(20F);
+		TFCBlocks.terraBloomery = new BlockTerraBloomery(TFC_Settings.getIntFor(config,"block","terraBloomery", 2007), 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
+		TFCBlocks.terraBloomeryOn = new BlockTerraBloomery(TFC_Settings.getIntFor(config,"block","terraBloomeryOn", 2006), 66).setBlockName("terraBloomeryOn").setHardness(20).setLightValue(1.0F);
+		TFCBlocks.terraFirepitOn = new BlockFirepit(TFC_Settings.getIntFor(config,"block","terraFirepitOn", 2005), 81).setBlockName("terraFirepitOn").setHardness(1).setLightValue(1.0F);
+		TFCBlocks.terraForgeOn = new BlockTerraForge(TFC_Settings.getIntFor(config,"block","terraForgeOn", 2004), 91).setBlockName("terraForgeOn").setHardness(20).setLightValue(1.0F);
+		TFCBlocks.terraSluice = new BlockTerraSluice(TFC_Settings.getIntFor(config,"block","TerraSluice", 2003)).setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
 		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(5).setResistance(15F);
 		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setBlockName("stoneSlabs").setRequiresSelfNotify().setHardness(5).setResistance(15F);

@@ -10,7 +10,7 @@ import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.*;
 
-public class ContainerTerraAnvil extends ContainerTFC
+public class ContainerTerraAnvil extends Container
 {
 	private TileEntityTerraAnvil anvil;
 	private int greenIndicator;
@@ -59,6 +59,8 @@ public class ContainerTerraAnvil extends ContainerTFC
 		return true;
 	}
 
+
+	@Override
 	public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;

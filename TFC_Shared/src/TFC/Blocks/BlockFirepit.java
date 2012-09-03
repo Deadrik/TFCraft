@@ -18,12 +18,10 @@ public class BlockFirepit extends BlockContainer
 
 	private int zCoord;
 
-	private Class EntityClass;
 
-	public BlockFirepit(int i, Class tClass, int tex)
+	public BlockFirepit(int i, int tex)
 	{
 		super(i, Material.ground);
-		EntityClass = tClass;
 		this.blockIndexInTexture = tex;
 		this.setBlockBounds(0, 0, 0, 1, 0.1f, 1);
 	}

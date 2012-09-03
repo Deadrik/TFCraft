@@ -62,9 +62,10 @@ public class ContainerTerraWorkbench extends Container
         this.onCraftMatrixChanged(this.craftMatrix);
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
-        return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != Block.workbench.blockID ? false : par1EntityPlayer.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
+        return true;
     }
 
     /**

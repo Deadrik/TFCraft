@@ -9,7 +9,7 @@ import TFC.Core.CraftingRule;
 import TFC.TileEntities.TileEntityTerraAnvil;
 
 
-public class GuiTerraAnvil extends GuiContainerTFC
+public class GuiTerraAnvil extends GuiContainer
 {
 	private TileEntityTerraAnvil AnvilEntity;
 
@@ -45,46 +45,44 @@ public class GuiTerraAnvil extends GuiContainerTFC
 
 	protected void actionPerformed(GuiButton guibutton)
 	{
-		if(true)
+
+		if (guibutton.id == 0)
 		{
-			if (guibutton.id == 0)
-			{
-				AnvilEntity.actionLightHammer();
-			}
-			else if (guibutton.id == 1)
-			{
-				AnvilEntity.actionHeavyHammer();
-			}
-			else if (guibutton.id == 2)
-			{
-				AnvilEntity.actionDraw();
-			}
-			else if (guibutton.id == 3)
-			{
-				AnvilEntity.actionQuench();
-			}
-			else if (guibutton.id == 4)
-			{
-				AnvilEntity.actionPunch();
-			}
-			else if (guibutton.id == 5)
-			{
-				AnvilEntity.actionBend();
-			}
-			else if (guibutton.id == 6)
-			{
-				AnvilEntity.actionUpset();
-			}
-			else if (guibutton.id == 7)
-			{
-				AnvilEntity.actionShrink();
-			}
-			else if (guibutton.id == 8)
-			{
-				AnvilEntity.actionWeld();
-			}
-			this.inventorySlots.updateCraftingResults();
+			AnvilEntity.actionLightHammer();
 		}
+		else if (guibutton.id == 1)
+		{
+			AnvilEntity.actionHeavyHammer();
+		}
+		else if (guibutton.id == 2)
+		{
+			AnvilEntity.actionDraw();
+		}
+		else if (guibutton.id == 3)
+		{
+			AnvilEntity.actionQuench();
+		}
+		else if (guibutton.id == 4)
+		{
+			AnvilEntity.actionPunch();
+		}
+		else if (guibutton.id == 5)
+		{
+			AnvilEntity.actionBend();
+		}
+		else if (guibutton.id == 6)
+		{
+			AnvilEntity.actionUpset();
+		}
+		else if (guibutton.id == 7)
+		{
+			AnvilEntity.actionShrink();
+		}
+		else if (guibutton.id == 8)
+		{
+			AnvilEntity.actionWeld();
+		}
+		this.inventorySlots.updateCraftingResults();
 	}
 
 	@Override

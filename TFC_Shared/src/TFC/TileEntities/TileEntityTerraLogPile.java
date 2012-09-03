@@ -39,7 +39,11 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
 
     @Override
     public void closeChest() {
-
+    	if(storage[0] == null && storage[1] == null &&
+				storage[2] == null && storage[3] == null)
+		{
+			worldObj.setBlockWithNotify(xCoord, yCoord, zCoord, 0);
+		}
 
     }
 
@@ -112,7 +116,8 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
     {
         return "Log Pile";
     }
-
+    
+    @Override
     public int getSizeInventory()
     {
         return storage.length;
@@ -152,7 +157,7 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
         // TODO Auto-generated method stub
 
     }
-
+    @Override
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
@@ -179,12 +184,13 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
             itemstack.stackSize = getInventoryStackLimit();
         }
     }
-
+    
+    @Override
     public void updateEntity()
     {
         TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
     }
-
+    @Override
     public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);

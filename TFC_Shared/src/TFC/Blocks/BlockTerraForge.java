@@ -26,17 +26,16 @@ public class BlockTerraForge extends BlockContainer
 
 	private int zCoord;
 
-	private Class EntityClass;
 
-	public BlockTerraForge(int i, Class tClass, int tex)
+
+	public BlockTerraForge(int i, int tex)
 	{
 		super(i, Material.sand);
 		this.blockIndexInTexture = tex;
-		EntityClass = tClass;
 		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
 	}
 
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;

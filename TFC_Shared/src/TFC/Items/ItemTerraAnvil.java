@@ -1,8 +1,11 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.Core.AnvilReq;
 import TFC.Core.Helper;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -24,6 +27,7 @@ public class ItemTerraAnvil extends Item
 		req = Areq;
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		this.setTabToDisplayOn(CreativeTabs.tabMisc);
 	}
 
 	@Override
@@ -37,20 +41,16 @@ public class ItemTerraAnvil extends Item
 	{
 		return "/bioxx/terratools.png";
 	}
+	
+//	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+//    {
+//        par3List.add(new ItemStack(par1, 1, 0));
+//    }
 
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-		if(objectMouseOver == null) 
-		{
-			return false;
-		}		
-		int x = objectMouseOver.blockX;
-		int y = objectMouseOver.blockY;
-		int z = objectMouseOver.blockZ;
-		int side = objectMouseOver.sideHit;
-		int meta = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
-		if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
+		int meta = MathHelper.floor_double((double)(player.rotationYaw * 4F / 360F) + 0.5D) & 3;
+		if(!world.isRemote && side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 				world.getBlockId(x, y+1, z) == 0)
 		{
 			byte byte0 = 0;
@@ -82,7 +82,7 @@ public class ItemTerraAnvil extends Item
 			
 			
 			
-			itemstack.stackSize = itemstack.stackSize-1;
+			stack.stackSize = stack.stackSize-1;
 			return true;
 		}
 

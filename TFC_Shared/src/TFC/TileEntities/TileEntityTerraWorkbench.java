@@ -11,11 +11,6 @@ public class TileEntityTerraWorkbench extends TileEntity implements IInventory
 {
 	public ItemStack[] craftingMatrix;
 
-	static
-	{
-
-	}
-
 	public TileEntityTerraWorkbench()
 	{
 		craftingMatrix = new ItemStack[9];
@@ -84,7 +79,7 @@ public class TileEntityTerraWorkbench extends TileEntity implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

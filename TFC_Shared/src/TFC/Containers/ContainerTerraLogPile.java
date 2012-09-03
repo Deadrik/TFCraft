@@ -47,14 +47,7 @@ public class ContainerTerraLogPile extends ContainerTFC
 		if(!world.isRemote)
 		{
 			logpile.closeChest();
-			if(logpile.storage[0] == null && logpile.storage[1] == null &&
-					logpile.storage[2] == null && logpile.storage[3] == null)
-			{
-				world.setBlockWithNotify(posX, posY, posZ, 0);
-			}
 		}
-
-
 	}
 
 	/**
@@ -77,7 +70,6 @@ public class ContainerTerraLogPile extends ContainerTFC
 					return null;
 				}
 
-				//var3.func_48433_a(var4, var2);
 			}
 			else if (par1 >= 4 && par1 < 40)
 			{
@@ -86,13 +78,6 @@ public class ContainerTerraLogPile extends ContainerTFC
 					return null;
 				}
 			}
-			//			 else if (par1 >= 37 && par1 < 46)
-			//			 {
-			//				 if (!this.mergeItemStack(var4, 10, 37, false))
-			//				 {
-			//					 return null;
-			//				 }
-			//			 }
 			else if (!this.mergeItemStack(var4, 4, 40, false))
 			{
 				return null;
@@ -132,7 +117,6 @@ public class ContainerTerraLogPile extends ContainerTFC
 
 		int row;
 		int col;
-
 
 		for (row = 0; row < 3; ++row)
 		{

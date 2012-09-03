@@ -19,20 +19,10 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockTerraSluice extends BlockContainer
 {
-	public static int getDirectionFromMetadata(int i)
-	{
-		return i & 3;
-	}
-	public static boolean isBlockFootOfBed(int i)
-	{
-		return (i & 8) != 0;
-	}
 	TileEntityTerraSluice entity;
 	private int meta;
 	private int xCoord;
-
 	private int yCoord;
-
 	private int zCoord;
 	public static final int headBlockToFootBlockMap[][] = {
 		{
@@ -46,18 +36,15 @@ public class BlockTerraSluice extends BlockContainer
 		}
 	};
 
-	private Class EntityClass;
-
-	public BlockTerraSluice(int i, Class tClass)
+	public BlockTerraSluice(int i)
 	{
 		super(i, Material.wood);
-		EntityClass = tClass;
 		needsRandomTick = true;
-		entity = new TileEntityTerraSluice();
-		entity.canUpdate();
+//		entity = new TileEntityTerraSluice();
+//		entity.canUpdate();
 	}
 
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;
@@ -107,6 +94,15 @@ public class BlockTerraSluice extends BlockContainer
 		} else {
 			return 4;
 		}
+	}
+	
+	public static int getDirectionFromMetadata(int i)
+	{
+		return i & 3;
+	}
+	public static boolean isBlockFootOfBed(int i)
+	{
+		return (i & 8) != 0;
 	}
 
 	public boolean getIsRecievingWater(int i)
