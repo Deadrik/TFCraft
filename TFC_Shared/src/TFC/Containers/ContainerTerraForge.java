@@ -6,7 +6,7 @@ import TFC.Items.ItemTerraOreSmall;
 import TFC.TileEntities.TileEntityTerraForge;
 import net.minecraft.src.*;
 
-public class ContainerTerraForge extends ContainerTFC
+public class ContainerTerraForge extends Container
 {
 	private TileEntityTerraForge forge;
 	private int coolTime;
@@ -327,6 +327,7 @@ public class ContainerTerraForge extends ContainerTFC
 		return null;
 	}
 
+	@Override
 	public void updateCraftingResults()
 	{
 	    for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)

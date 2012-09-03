@@ -8,7 +8,7 @@ import TFC.Containers.ContainerTerraBloomery;
 import TFC.TileEntities.TileEntityTerraBloomery;
 
 
-public class GuiTerraBloomery extends GuiContainerTFC
+public class GuiTerraBloomery extends GuiContainer
 {
 	private TileEntityTerraBloomery ForgeEntity;
 

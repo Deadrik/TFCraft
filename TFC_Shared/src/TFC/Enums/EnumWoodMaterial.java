@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Enums;
 
 public enum EnumWoodMaterial
 {

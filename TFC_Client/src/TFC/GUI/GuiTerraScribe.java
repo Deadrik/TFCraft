@@ -8,7 +8,7 @@ import TFC.Containers.ContainerTerraScribe;
 import TFC.TileEntities.TileEntityTerraScribe;
 
 
-public class GuiTerraScribe extends GuiContainerTFC
+public class GuiTerraScribe extends GuiContainer
 {
 	private TileEntityTerraScribe FirepitEntity;
 

@@ -7,7 +7,7 @@ import TFC.Containers.ContainerTerraWorkbench;
 import TFC.TileEntities.TileEntityTerraWorkbench;
 import net.minecraft.src.*;
 
-public class GuiTerraWorkbench extends GuiContainerTFC
+public class GuiTerraWorkbench extends GuiContainer
 {
     public GuiTerraWorkbench(InventoryPlayer inventoryplayer, TileEntityTerraWorkbench wb, World world, int i, int j, int k)
     {

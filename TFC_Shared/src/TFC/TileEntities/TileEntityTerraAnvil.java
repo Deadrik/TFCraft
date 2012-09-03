@@ -47,6 +47,7 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
     public int craftingReq;
     public int[] craftingRules;
     private ItemStack result;
+    public int[] stonePair = {0,0};
 
     private boolean isDone = false;
     private int workedRecently = 0;
@@ -64,7 +65,6 @@ public class TileEntityTerraAnvil extends TileEntity implements IInventory
         itemCraftingRules = new int[]{-1,-1,-1};
         craftingValue = 0;
         craftingRules = new int[]{-1,-1,-1};
-
         AnvilTier = AnvilReq.STONE.Tier;
     }
 

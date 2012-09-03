@@ -4,9 +4,9 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-import TFC.Core.EnumTree;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
+import TFC.Enums.EnumTree;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;

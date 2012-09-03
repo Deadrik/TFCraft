@@ -77,7 +77,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         }
         else if (modelId == TFCBlocks.terraAnvilRenderId)
         {
-            return TFC_CoreRender.renderAnvil(block, i, j, k, renderer);
+            return RenderAnvil.renderAnvil(block, i, j, k, renderer);
         }
         else if (modelId == TFCBlocks.sluiceRenderId)
         {

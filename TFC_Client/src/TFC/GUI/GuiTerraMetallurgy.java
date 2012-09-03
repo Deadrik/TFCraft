@@ -8,7 +8,7 @@ import TFC.Containers.ContainerTerraMetallurgy;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
 
 
-public class GuiTerraMetallurgy extends GuiContainerTFC
+public class GuiTerraMetallurgy extends GuiContainer
 {
 	private TileEntityTerraMetallurgy entityMetallurgy;
 

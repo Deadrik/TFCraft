@@ -15,7 +15,7 @@ import net.minecraft.src.Slot;
 import net.minecraft.src.SlotCrafting;
 import net.minecraft.src.World;
 
-public class ContainerTerraLogPile extends ContainerTFC
+public class ContainerTerraLogPile extends Container
 {
 	private World world;
 	private int posX;

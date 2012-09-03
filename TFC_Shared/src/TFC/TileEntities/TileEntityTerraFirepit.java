@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import TFC.Blocks.BlockFirepit;
-import TFC.Core.EnumWoodMaterial;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFCItems;
@@ -14,6 +13,7 @@ import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
+import TFC.Enums.EnumWoodMaterial;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.WorldGen.TFCBiome;

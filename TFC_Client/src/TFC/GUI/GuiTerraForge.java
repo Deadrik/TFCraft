@@ -8,7 +8,7 @@ import TFC.Containers.ContainerTerraForge;
 import TFC.TileEntities.TileEntityTerraForge;
 
 
-public class GuiTerraForge extends GuiContainerTFC
+public class GuiTerraForge extends GuiContainer
 {
 	private TileEntityTerraForge ForgeEntity;
 

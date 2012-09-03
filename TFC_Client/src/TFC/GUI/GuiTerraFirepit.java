@@ -8,7 +8,7 @@ import TFC.Containers.ContainerTerraFirepit;
 import TFC.TileEntities.TileEntityTerraFirepit;
 
 
-public class GuiTerraFirepit extends GuiContainerTFC
+public class GuiTerraFirepit extends GuiContainer
 {
 	private TileEntityTerraFirepit FirepitEntity;
 

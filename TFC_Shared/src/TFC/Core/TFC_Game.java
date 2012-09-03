@@ -3,6 +3,8 @@ package TFC.Core;
 import java.util.Hashtable;
 import java.util.Random;
 
+import TFC.Enums.EnumWoodMaterial;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;

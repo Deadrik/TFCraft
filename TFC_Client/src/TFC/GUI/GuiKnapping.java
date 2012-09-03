@@ -8,7 +8,7 @@ import TFC.Containers.ContainerTerraWorkbench;
 import TFC.TileEntities.TileEntityTerraWorkbench;
 import net.minecraft.src.*;
 
-public class GuiKnapping extends GuiContainerTFC
+public class GuiKnapping extends GuiContainer
 {
     public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
     {

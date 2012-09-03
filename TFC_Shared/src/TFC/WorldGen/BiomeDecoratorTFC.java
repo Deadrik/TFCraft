@@ -2,17 +2,9 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
-import TFC.Core.EnumTree;
 import TFC.Core.TFC_Climate;
+import TFC.Enums.EnumTree;
 import TFC.WorldGen.Generators.*;
-import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
-import TFC.WorldGen.Generators.WorldGenCustomReed;
-import TFC.WorldGen.Generators.WorldGenCustomSand;
-import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
-import TFC.WorldGen.Generators.WorldGenCustomShrub;
-import TFC.WorldGen.Generators.WorldGenFixGrass;
-import TFC.WorldGen.Generators.WorldGenForests;
-import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
 
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.Block;
