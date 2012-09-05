@@ -1,10 +1,15 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
 import net.minecraft.src.*;
 
-public class TileEntityPartial extends TileEntity
+public class TileEntityPartial extends NetworkTileEntity
 {
     public short TypeID = -1;
     public byte MetaID = 0;
@@ -15,28 +20,20 @@ public class TileEntityPartial extends TileEntity
     {
         
     }
-
-    public void validate()
-    {
-        super.validate();
-        initialize();
-    }
     
-    public void initialize()
-    {
-        if (this.worldObj.isRemote)
-        {
-            PacketHandler.requestInitialData(this);
-        }
-    }
-    
-    public void broadcast()
-    {
-        if (!this.worldObj.isRemote)
-        {
-            PacketHandler.broadcastPartialData(this);
-        }
-    }
+    public Packet createUpdatePacket()
+	{
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+		DataOutputStream outStream = new DataOutputStream(bos);	
+		try {
+			outStream.writeShort(TypeID);
+			outStream.writeByte(MetaID);
+			outStream.writeByte(material);
+			outStream.writeLong(extraData);	
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
     
     @Override
     public boolean canUpdate()
@@ -167,12 +164,31 @@ public class TileEntityPartial extends TileEntity
         par1NBTTagCompound.setLong("extraData", extraData);
     }
 
-    public void handlePacketData(short id, byte meta, byte mat, long ex)
-    {
-        TypeID = id;
-        MetaID = meta;
-        material = mat;
-        extraData = ex;
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	{
+		TypeID = inStream.readShort();
+        MetaID = inStream.readByte();
+        material = inStream.readByte();
+        extraData = inStream.readLong();
         this.worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
-    }
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException 
+	{
+		outStream.writeShort(TypeID);
+		outStream.writeByte(MetaID);
+		outStream.writeByte(material);
+		outStream.writeLong(extraData);		
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException 
+	{
+		TypeID = inStream.readShort();
+        MetaID = inStream.readByte();
+        material = inStream.readByte();
+        extraData = inStream.readLong();
+	}
 }

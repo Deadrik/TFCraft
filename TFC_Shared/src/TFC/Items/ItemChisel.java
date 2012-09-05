@@ -176,7 +176,7 @@ public class ItemChisel extends ItemTool
         
         te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
         if(te != null)
-            te.broadcast();
+        	te.broadcastPacketInRange(te.createUpdatePacket());
         
         world.markBlockNeedsUpdate(x, y, z);
     }

@@ -2,7 +2,11 @@ package TFC.Render.Blocks;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
+import net.minecraft.src.Tessellator;
+import net.minecraftforge.client.ForgeHooksClient;
 import TFC.Blocks.BlockTerraAnvil;
 import TFC.Core.AnvilReq;
 import TFC.Core.TFC_Climate;
@@ -17,8 +21,10 @@ public class RenderAnvil {
 
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int direction = ((BlockTerraAnvil)block).getDirectionFromMetadata(meta);
+		
+		TileEntityTerraAnvil te = (TileEntityTerraAnvil)blockAccess.getBlockTileEntity(i, j, k);
 
-		if(((TileEntityTerraAnvil)blockAccess.getBlockTileEntity(i, j, k)).AnvilTier != AnvilReq.STONE.Tier)
+		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
 			if(direction == 0)//x
 			{
@@ -55,14 +61,25 @@ public class RenderAnvil {
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.0F, 0.6F, 0.8F);
-
-			}
+			}	
 		}
 		else
 		{
-
-			block.setBlockBounds(0.0F, 0.0F, 0.00F, 1.0F, 1.0F, 1.0F);
-			renderblocks.renderStandardBlock(block, i, j, k);
+			if(Block.blocksList[te.stonePair[0]] != null)
+			{
+				ForgeHooksClient.bindTexture("/bioxx/terraRock.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terraRock.png"));
+				renderblocks.overrideBlockTexture = Block.blocksList[te.stonePair[0]].getBlockTextureFromSideAndMetadata(0, te.stonePair[1]);
+				block.setBlockBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
+				renderblocks.renderStandardBlock(block, i, j, k);
+				if(te.anvilItemStacks[0] != null)
+				{
+					ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
+					renderblocks.overrideBlockTexture = Item.itemsList[te.anvilItemStacks[0].itemID].getIconIndex(te.anvilItemStacks[0]);
+					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
+					renderblocks.renderStandardBlock(block, i, j, k);
+				}
+				renderblocks.clearOverrideBlockTexture();
+			}
 		}
 		return true;
 	}

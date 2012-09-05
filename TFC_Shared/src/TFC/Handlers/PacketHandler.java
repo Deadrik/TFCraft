@@ -21,7 +21,7 @@ import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityTerraBloomery;
+import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
@@ -35,6 +35,7 @@ import net.minecraft.src.NetworkManager;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet1Login;
 import net.minecraft.src.Packet250CustomPayload;
+import net.minecraft.src.TcpConnection;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
@@ -42,11 +43,11 @@ import net.minecraft.src.TerraFirmaCraft;
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 
-	private static final int Packet_Recieve_Init_Client = 0;
-	private static final int Packet_Recieve_Init_Server = 1;
-	private static final int Packet_Recieve_Keypress_Server = 2;
-	private static final int Packet_Recieve_InitWorld_Server = 3;
-	private static final int Packet_Recieve_Data_Client = 4;
+	public static final byte Packet_Init_Block_Client = 0;
+	public static final byte Packet_Init_Block_Server = 1;
+	public static final byte Packet_Keypress_Server = 2;
+	public static final byte Packet_Init_World_Client = 3;
+	public static final byte Packet_Data_Client = 4;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -70,7 +71,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		{
 			try
 			{
-				dos.writeByte(3);
+				dos.writeByte(Packet_Init_World_Client);
 				dos.writeLong(world.getSeed());
 				dos.writeLong(TFC_Time.dayLength);
 			} 
@@ -102,448 +103,97 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		int z;
 		try {
 			type = dis.readByte();
+
+			EntityPlayer player = (EntityPlayer)p;
+			World world= player.worldObj;
+
+			if(type == Packet_Init_Block_Client)//Client recieves the init packet from the server and assigns the data
+			{
+
+				x = dis.readInt();
+				y = dis.readInt();
+				z = dis.readInt();
+
+				if(world != null)
+				{
+					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+					te.handleInitPacket(dis);
+				}
+			}
+			else if(type == Packet_Init_Block_Server)//Server builds the init packet and sends it to the client.
+			{
+				try {
+					x = dis.readInt();
+					y = dis.readInt();
+					z = dis.readInt();
+				} catch (IOException e) {
+					return;
+				}
+				ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+				DataOutputStream dos=new DataOutputStream(bos);
+				NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+				if(te != null)
+				{
+
+					dos.writeByte(Packet_Init_Block_Client);
+					dos.writeInt(x);
+					dos.writeInt(y);
+					dos.writeInt(z);
+					te.createInitPacket(dos);
+
+					Packet250CustomPayload pkt=new Packet250CustomPayload();
+					pkt.channel="TerraFirmaCraft";
+					pkt.data=bos.toByteArray();
+					pkt.length=bos.size();
+					pkt.isChunkDataPacket=false;
+
+					TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player, pkt);
+				}
+			}
+			else if(type == Packet_Keypress_Server)
+			{
+				byte change;
+				if(keyTimer + 1 < TFC_Time.getTotalTicks())
+				{
+					keyTimer = TFC_Time.getTotalTicks();
+					try 
+					{
+						change = dis.readByte();
+						if(change == 0)//ChiselMode
+						{
+							PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+							if(pi!=null) pi.switchChiselMode();
+						}
+					} 
+					catch (IOException e) 
+					{
+						return;
+					} 
+				}
+			}
+			else if(type == Packet_Init_World_Client)
+			{
+				if(world.isRemote)
+				{
+					long seed = 0;
+					try 
+					{
+						seed = dis.readLong();
+						TFC_Time.dayLength = dis.readLong();
+
+					} catch (IOException e) 
+					{
+						// IMPOSSIBLE?
+					}
+					TFC_Core.SetupWorld(world, seed);
+				}
+			}
 		} catch (IOException e) {
 			return;
 		}
-		EntityPlayer player = (EntityPlayer)p;
-		World world= player.worldObj;
-
-		if(type == Packet_Recieve_Init_Client)
-		{
-			try {
-				x = dis.readInt();
-				y = dis.readInt();
-				z = dis.readInt();
-			} catch (IOException e) {
-				return;
-			}
-			if(world != null)
-			{
-				TileEntity te = world.getBlockTileEntity(x, y, z);
-
-				if (te instanceof NetworkTileEntity) 
-				{
-					((NetworkTileEntity)te).handleInitPacket(dis);
-				}
-
-				//				if (te instanceof TileEntityTerraAnvil) 
-				//				{
-				//					TileEntityTerraAnvil icte = (TileEntityTerraAnvil)te;
-				//					int id;
-				//					try {
-				//						id = dis.readInt();
-				//					} catch (IOException e) {
-				//						return;
-				//					} 
-				//					icte.handlePacketData(id);
-				//				}
-				//				else if (te instanceof TileEntityTerraFirepit) 
-				//				{
-				//					TileEntityTerraFirepit icte = (TileEntityTerraFirepit)te;
-				//
-				//					int charcoal;
-				//					try {
-				//						charcoal = dis.readInt();
-				//					} catch (IOException e) 
-				//					{
-				//						return;
-				//					} 
-				//					icte.handlePacketData(charcoal);
-				//				}
-				//				else if (te instanceof TileEntityTerraBloomery) 
-				//				{
-				//					TileEntityTerraBloomery icte = (TileEntityTerraBloomery)te;
-				//					int orecount;
-				//					int coalcount;
-				//					float outcount;
-				//					int dam;
-				//					try {
-				//						orecount = dis.readInt();
-				//						coalcount = dis.readInt();
-				//						outcount = dis.readFloat();
-				//						dam = dis.readInt();
-				//					} catch (IOException e) {
-				//						return;
-				//					} 
-				//					icte.handlePacketData(orecount, coalcount, outcount, dam);
-				//				}
-				//				else if (te instanceof TileEntityPartial) 
-				//				{
-				//					TileEntityPartial icte = (TileEntityPartial)te;
-				//					short id;
-				//					byte meta;
-				//					byte mat;
-				//					long ex;
-				//					try {
-				//						id = dis.readShort();
-				//						meta = dis.readByte();
-				//						mat = dis.readByte();
-				//						ex = dis.readLong();
-				//					} catch (IOException e) {
-				//						return;
-				//					} 
-				//					icte.handlePacketData(id, meta, mat, ex);
-				//				}
-				//				else if (te instanceof TileEntityCrop) 
-				//				{
-				//					TileEntityCrop icte = (TileEntityCrop)te;
-				//					int id;
-				//					float growth;
-				//
-				//					try {
-				//						id = dis.readInt();
-				//						growth = dis.readFloat();
-				//
-				//					} catch (IOException e) {
-				//						return;
-				//					} 
-				//					icte.handlePacketData(id, growth);
-				//				}
-			}
-		}
-		else if(type == Packet_Recieve_Init_Server)//Init Tile Entities
-		{
-			try {
-				x = dis.readInt();
-				y = dis.readInt();
-				z = dis.readInt();
-			} catch (IOException e) {
-				return;
-			}
-			ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-			DataOutputStream dos=new DataOutputStream(bos);
-			TileEntity te = (TileEntity) world.getBlockTileEntity(x, y, z);
-			if(te != null)
-			{
-				if (te instanceof NetworkTileEntity) 
-				{
-					try 
-					{
-						dos.writeByte(0);
-						dos.writeInt(x);
-						dos.writeInt(y);
-						dos.writeInt(z);
-					} catch (IOException e) {}
-					
-					((NetworkTileEntity)te).createInitPacket(dos);
-				}
-
-				if (te instanceof TileEntityPartial) 
-				{
-					try 
-					{
-						dos.writeByte(0);
-						dos.writeInt(x);
-						dos.writeInt(y);
-						dos.writeInt(z);
-						dos.writeShort(((TileEntityPartial)te).TypeID);
-						dos.writeByte(((TileEntityPartial)te).MetaID);
-						dos.writeByte(((TileEntityPartial)te).material);
-						dos.writeLong(((TileEntityPartial)te).extraData);
-
-					} catch (IOException e) 
-					{
-						// IMPOSSIBLE?
-					}
-					Packet250CustomPayload pkt=new Packet250CustomPayload();
-					pkt.channel="TerraFirmaCraft";
-					pkt.data=bos.toByteArray();
-					pkt.length=bos.size();
-					pkt.isChunkDataPacket=true;
-
-					TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
-				}
-				else if (te instanceof TileEntityCrop) 
-				{
-					try 
-					{
-						dos.writeByte(0);
-						dos.writeInt(x);
-						dos.writeInt(y);
-						dos.writeInt(z);
-						dos.writeInt(((TileEntityCrop)te).cropId);
-						dos.writeFloat(((TileEntityCrop)te).growth);
-
-					} catch (IOException e) 
-					{
-						// IMPOSSIBLE?
-					}
-					Packet250CustomPayload pkt=new Packet250CustomPayload();
-					pkt.channel="TerraFirmaCraft";
-					pkt.data=bos.toByteArray();
-					pkt.length=bos.size();
-					pkt.isChunkDataPacket=true;
-
-					TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
-				}
-				else if (te instanceof TileEntityTerraAnvil) 
-				{
-					try 
-					{
-						dos.writeByte(0);
-						dos.writeInt(x);
-						dos.writeInt(y);
-						dos.writeInt(z);
-						dos.writeInt(((TileEntityTerraAnvil)te).stonePair[0]);
-						dos.writeInt(((TileEntityTerraAnvil)te).stonePair[1]);
-
-					} catch (IOException e) 
-					{
-						// IMPOSSIBLE?
-					}
-					Packet250CustomPayload pkt=new Packet250CustomPayload();
-					pkt.channel="TerraFirmaCraft";
-					pkt.data=bos.toByteArray();
-					pkt.length=bos.size();
-					pkt.isChunkDataPacket=true;
-
-					TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
-				}
-			}
-		}
-		else if(type == Packet_Recieve_Keypress_Server)
-		{
-			byte change;
-			if(keyTimer + 1 < TFC_Time.getTotalTicks())
-			{
-				keyTimer = TFC_Time.getTotalTicks();
-				try 
-				{
-					change = dis.readByte();
-					if(change == 0)//ChiselMode
-					{
-						PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-
-						if(pi!=null) pi.switchChiselMode();
-					}
-				} 
-				catch (IOException e) 
-				{
-					return;
-				} 
-			}
-		}
-		else if(type == Packet_Recieve_InitWorld_Server)
-		{
-			if(world.isRemote)
-			{
-				long seed = 0;
-				try 
-				{
-					seed = dis.readLong();
-					TFC_Time.dayLength = dis.readLong();
-
-				} catch (IOException e) 
-				{
-					// IMPOSSIBLE?
-				}
-				TFC_Core.SetupWorld(world, seed);
-			}
-			else
-			{
-				ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-				DataOutputStream dos=new DataOutputStream(bos);
-				try
-				{
-					dos.writeByte(3);
-					dos.writeLong(world.getSeed());
-					dos.writeLong(TFC_Time.dayLength);
-
-				} 
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				Packet250CustomPayload pkt=new Packet250CustomPayload();
-				pkt.channel="TerraFirmaCraft";
-				pkt.data=bos.toByteArray();
-				pkt.length=bos.size();
-				pkt.isChunkDataPacket=false;
-
-				TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player.username, pkt);
-			}
-		}
 	}
 	static long keyTimer = 0;
-
-	public static Packet getPacket(TileEntityTerraAnvil tileEntity, int id) 
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		int x=tileEntity.xCoord;
-		int y=tileEntity.yCoord;
-		int z=tileEntity.zCoord;
-		try 
-		{
-			dos.writeByte(0);
-			dos.writeInt(x);
-			dos.writeInt(y);
-			dos.writeInt(z);
-			dos.writeInt(id);
-		} 
-		catch (IOException e) 
-		{
-
-		}
-		Packet250CustomPayload pkt=new Packet250CustomPayload();
-		pkt.channel="TerraFirmaCraft";
-		pkt.data=bos.toByteArray();
-		pkt.length=bos.size();
-		pkt.isChunkDataPacket=true;
-		return pkt;
-	}
-
-	public static Packet getPacket(TileEntityTerraFirepit tileEntity) {
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		int x=tileEntity.xCoord;
-		int y=tileEntity.yCoord;
-		int z=tileEntity.zCoord;
-
-		try 
-		{
-			dos.writeByte(0);
-			dos.writeInt(x);
-			dos.writeInt(y);
-			dos.writeInt(z);
-			dos.writeInt(tileEntity.charcoalCounter);
-
-		} catch (IOException e) 
-		{
-			// IMPOSSIBLE?
-		}
-		Packet250CustomPayload pkt=new Packet250CustomPayload();
-		pkt.channel="TerraFirmaCraft";
-		pkt.data=bos.toByteArray();
-		pkt.length=bos.size();
-		pkt.isChunkDataPacket=true;
-		return pkt;
-	}
-
-	public static Packet getPacket(
-			TileEntityTerraBloomery tileEntity, int oreCount,
-			int charcoalCount, float outCount, int oreDamage)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		int x=tileEntity.xCoord;
-		int y=tileEntity.yCoord;
-		int z=tileEntity.zCoord;
-
-		try 
-		{
-			dos.writeByte(0);
-			dos.writeInt(x);
-			dos.writeInt(y);
-			dos.writeInt(z);
-			dos.writeInt(oreCount);
-			dos.writeInt(charcoalCount);
-			dos.writeFloat(outCount);
-			dos.writeInt(oreDamage);
-
-		} catch (IOException e) 
-		{
-			// IMPOSSIBLE?
-		}
-		Packet250CustomPayload pkt=new Packet250CustomPayload();
-		pkt.channel="TerraFirmaCraft";
-		pkt.data=bos.toByteArray();
-		pkt.length=bos.size();
-		pkt.isChunkDataPacket=true;
-		return pkt;
-	}
-
-	public static void requestInitialData(TileEntity te) {
-		if (!te.worldObj.isRemote) return;
-		else 
-		{
-			try
-			{
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				DataOutputStream dos = new DataOutputStream(bos);
-				Packet250CustomPayload pkt = new Packet250CustomPayload();
-
-				dos.writeByte(1);
-				dos.writeInt(te.xCoord);
-				dos.writeInt(te.yCoord);
-				dos.writeInt(te.zCoord);
-				dos.close();
-
-				pkt.channel="TerraFirmaCraft";
-				pkt.data=bos.toByteArray();
-				pkt.length=bos.size();
-				pkt.isChunkDataPacket=true;
-
-				TerraFirmaCraft.proxy.sendCustomPacket(pkt);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-
-	public static void broadcastPartialData(TileEntityPartial te) {
-		if (te.worldObj.isRemote) return;
-		else 
-		{
-			try
-			{
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				DataOutputStream dos = new DataOutputStream(bos);
-				Packet250CustomPayload pkt = new Packet250CustomPayload();
-
-				dos.writeByte(0);
-				dos.writeInt(te.xCoord);
-				dos.writeInt(te.yCoord);
-				dos.writeInt(te.zCoord);
-				dos.writeShort(te.TypeID);
-				dos.writeByte(te.MetaID);
-				dos.writeByte(te.material);
-				dos.writeLong(te.extraData);
-				dos.close();
-
-				pkt.channel="TerraFirmaCraft";
-				pkt.data=bos.toByteArray();
-				pkt.length=bos.size();
-				pkt.isChunkDataPacket=true;
-
-				TerraFirmaCraft.proxy.sendCustomPacket(pkt);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-
-	public static void broadcastCropData(TileEntityCrop te) {
-		if (te.worldObj.isRemote) return;
-		else 
-		{
-			try
-			{
-				ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				DataOutputStream dos = new DataOutputStream(bos);
-				Packet250CustomPayload pkt = new Packet250CustomPayload();
-
-				dos.writeByte(0);
-				dos.writeInt(te.xCoord);
-				dos.writeInt(te.yCoord);
-				dos.writeInt(te.zCoord);
-				dos.writeInt(te.cropId);
-				dos.writeFloat(te.growth);
-				dos.close();
-
-				pkt.channel="TerraFirmaCraft";
-				pkt.data=bos.toByteArray();
-				pkt.length=bos.size();
-				pkt.isChunkDataPacket=true;
-
-				TerraFirmaCraft.proxy.sendCustomPacket(pkt);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
 
 	@SideOnly(Side.CLIENT)
 	public static void sendKeyPress(int type) //0 = chiselmode
@@ -606,6 +256,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		//                PlayerManagerTFC.getInstance().Players.remove(i);
 		//            }  
 		//        }
-
+		int i = ((TcpConnection)manager).field_74468_e;
+		i++;
 	}
 }

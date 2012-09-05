@@ -956,16 +956,4 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         nbttagcompound.setTag("Items", nbttaglist);
 
     }
-
-    public void handlePacketData( int charcoal) 
-    {
-        TileEntityTerraFirepit pile = this;
-        //charcoalCounter = charcoal;
-
-    }
-
-    public Packet getDescriptionPacket() 
-    {
-        return PacketHandler.getPacket(this);
-    }
 }

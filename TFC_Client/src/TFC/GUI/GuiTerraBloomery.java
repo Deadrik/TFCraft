@@ -5,15 +5,15 @@ import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Containers.ContainerTerraBloomery;
-import TFC.TileEntities.TileEntityTerraBloomery;
+import TFC.TileEntities.TileEntityBloomery;
 
 
 public class GuiTerraBloomery extends GuiContainer
 {
-	private TileEntityTerraBloomery ForgeEntity;
+	private TileEntityBloomery ForgeEntity;
 
 
-	public GuiTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge, World world, int x, int y, int z)
+	public GuiTerraBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraBloomery(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;

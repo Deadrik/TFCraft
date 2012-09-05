@@ -1,5 +1,9 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,12 +31,13 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
+import net.minecraft.src.Packet;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TerraFirmaCraft;
 
-public class TileEntityTerraBloomery extends TileEntityFireEntity implements IInventory
+public class TileEntityBloomery extends TileEntityFireEntity implements IInventory
 {
     public float fuelTimeLeft;
     public float fuelBurnTemp;
@@ -60,13 +65,14 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
     public int charcoalCount;
     public int oreCount;
     public float outCount;
+    public int oreDamage = -1;
 
     ItemStack outMetal1;
     int outMetal1Count;
     ItemStack outMetal2;
     int outMetal2Count;
 
-    public TileEntityTerraBloomery()
+    public TileEntityBloomery()
     {
         fuelTimeLeft = 0;
         fuelBurnTemp =  0;
@@ -86,6 +92,7 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         charcoalCount = 0;
         oreCount = 0;
         outCount = 0;
+        shouldSendInitData = false;
     }
 
     public void careForInventorySlot(int i, float startTemp)
@@ -613,8 +620,6 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         return out;
     }
 
-    public int oreDamage = -1;
-
     public void updateEntity()
     {
         if(!worldObj.isRemote)
@@ -849,19 +854,38 @@ public class TileEntityTerraBloomery extends TileEntityFireEntity implements IIn
         }
     }
 
-    public void handlePacketData(int orecount, int coalcount, float outcount, int dam)
-    {
-        this.oreCount = orecount;
-        this.charcoalCount = coalcount;
-        this.outCount = outcount;
-        if(dam == -1)
-            this.OreType = "";
-        else
-            this.OreType = ItemTerraOre.getItemNameDamage(dam);
-    }
-
     public void updateGui()
     {
-        TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this, this.oreCount, this.charcoalCount, this.outCount, this.oreDamage));
+        this.broadcastPacketInRange(createUpdatePacket());
     }
+    
+    @Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException {
+
+    	oreCount = inStream.readInt();
+    	charcoalCount = inStream.readInt();
+    	oreDamage = inStream.readInt();
+		outCount = inStream.readFloat();
+		
+		if(oreDamage == -1)
+            this.OreType = "";
+        else
+            this.OreType = ItemTerraOre.getItemNameDamage(oreDamage);
+
+		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+	}
+
+	public Packet createUpdatePacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);	
+		try {
+			dos.writeInt(oreCount);
+			dos.writeInt(charcoalCount);
+			dos.writeInt(oreDamage);
+			dos.writeFloat(outCount);
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
 }

@@ -1,8 +1,12 @@
 package TFC.TileEntities;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import net.minecraft.src.TileEntity;
 
-public class TileEntityFireEntity extends TileEntity
+public class TileEntityFireEntity extends NetworkTileEntity
 {
 	public float airFromBellows;
 	public float airFromBellowsTime;
@@ -81,5 +85,29 @@ public class TileEntityFireEntity extends TileEntity
                 }
             }
         }
+	}
+
+
+
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 }

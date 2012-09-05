@@ -343,14 +343,6 @@ public class ContainerTerraAnvil extends Container
 	}
 	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
 	{
-		if(anvil.AnvilTier == AnvilReq.STONE.Tier)
-		{
-			//anvil.ejectContents();            
-			DataLayer rockLayer1 = ((TFCWorldChunkManager)anvil.worldObj.getWorldChunkManager()).getRockLayerAt(anvil.xCoord, anvil.zCoord, TFC_Core.getRockLayerFromHeight(anvil.yCoord));
-
-			anvil.worldObj.setBlockAndMetadata(anvil.xCoord, anvil.yCoord, anvil.zCoord, rockLayer1.data1, rockLayer1.data2);
-
-		}
 		super.onCraftGuiClosed(par1EntityPlayer);
 	}
 

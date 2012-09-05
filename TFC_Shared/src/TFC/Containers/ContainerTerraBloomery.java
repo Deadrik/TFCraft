@@ -1,19 +1,19 @@
 package TFC.Containers;
 
 import TFC.Handlers.PacketHandler;
-import TFC.TileEntities.TileEntityTerraBloomery;
+import TFC.TileEntities.TileEntityBloomery;
 import net.minecraft.src.*;
 
 public class ContainerTerraBloomery extends Container
 {
-	private TileEntityTerraBloomery bloomery;
+	private TileEntityBloomery bloomery;
     private float firetemp;
     private int orecount;
     private int coalcount;
     private float outcount;
 
 
-	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityTerraBloomery tileentityforge, World world, int x, int y, int z)
+	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
 	{
 	    bloomery = tileentityforge;
 	    firetemp = 0;
@@ -228,9 +228,9 @@ public class ContainerTerraBloomery extends Container
             }
         }
         
-        if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 200)
+        if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
         {
-            TerraFirmaCraft.proxy.sendCustomPacket(PacketHandler.getPacket(this.bloomery, this.bloomery.oreCount, this.bloomery.charcoalCount, this.bloomery.outCount, this.bloomery.oreDamage));
+        	bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
             updatecounter = 0;
         }
         

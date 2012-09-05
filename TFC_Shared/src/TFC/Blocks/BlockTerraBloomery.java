@@ -2,7 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.TileEntities.TileEntityTerraBloomery;
+import TFC.TileEntities.TileEntityBloomery;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
@@ -44,7 +44,7 @@ public class BlockTerraBloomery extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i-1, j, k) || !world.isBlockOpaqueCube(i+1, j, k))
 			{
-				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
+				((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
 				world.markBlockNeedsUpdate(i, j, k);
 			}
@@ -53,7 +53,7 @@ public class BlockTerraBloomery extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i, j, k-1) || !world.isBlockOpaqueCube(i, j, k+1))
 			{
-				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
+				((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
 				world.markBlockNeedsUpdate(i, j, k);
 			}
@@ -62,7 +62,7 @@ public class BlockTerraBloomery extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i-1, j, k) || !world.isBlockOpaqueCube(i+1, j, k))
 			{
-				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
+				((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
 				world.markBlockNeedsUpdate(i, j, k);
 			}
@@ -71,7 +71,7 @@ public class BlockTerraBloomery extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i, j, k-1) || !world.isBlockOpaqueCube(i, j, k+1))
 			{
-				((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
+				((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 				world.setBlock(i, j, k, 0);
 				world.markBlockNeedsUpdate(i, j, k);
 			}
@@ -116,10 +116,10 @@ public class BlockTerraBloomery extends BlockContainer
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
 
-		if((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)!=null)
+		if((TileEntityBloomery)world.getBlockTileEntity(i, j, k)!=null)
 		{
-			TileEntityTerraBloomery tileentityforge;
-			tileentityforge = (TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k);
+			TileEntityBloomery tileentityforge;
+			tileentityforge = (TileEntityBloomery)world.getBlockTileEntity(i, j, k);
 			ItemStack is =entityplayer.getCurrentEquippedItem();
 
 			if(tileentityforge.isValid)
@@ -229,7 +229,7 @@ public class BlockTerraBloomery extends BlockContainer
 
 		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
-			((TileEntityTerraBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
+			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlock(i, j, k, 0);
 			world.markBlockNeedsUpdate(i,j,k);
 		}
@@ -243,6 +243,6 @@ public class BlockTerraBloomery extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityTerraBloomery();
+		return new TileEntityBloomery();
 	}
 }

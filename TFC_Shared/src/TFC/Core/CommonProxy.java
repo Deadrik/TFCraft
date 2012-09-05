@@ -55,7 +55,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityTerraScribe.class, "TerraScribe");
 		ModLoader.registerTileEntity(TileEntityTerraForge.class, "TerraForge");
 		ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
-		ModLoader.registerTileEntity(TileEntityTerraBloomery.class, "TerraBloomery");
+		ModLoader.registerTileEntity(TileEntityBloomery.class, "TerraBloomery");
 		ModLoader.registerTileEntity(TileEntityTerraSluice.class, "TerraSluice");
 		ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
 		ModLoader.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
@@ -183,8 +183,6 @@ public class CommonProxy implements IGuiHandler
 		return false;
 	}
 
-	
-
 	public World getCurrentWorld() {
 		return null;
 	}
@@ -204,16 +202,10 @@ public class CommonProxy implements IGuiHandler
 		return 0;
 	}
 
-
 	public void takenFromCrafting(EntityPlayer entityplayer,
 			ItemStack itemstack, IInventory iinventory)
 	{
 		GameRegistry.onItemCrafted(entityplayer, itemstack, iinventory);  
-	}
-
-	public void sendCustomPacket(Packet packet)
-	{
-		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
 	}
 
 	public int getArmorRenderID(int i)
@@ -233,13 +225,22 @@ public class CommonProxy implements IGuiHandler
 	public void registerKeyBindingHandler(){ 
 	}
 
-
 	public void registerSoundHandler() {
 	}
 
-	public void sendCustomPacketToPlayer(String player, Packet packet)
+	public void sendCustomPacket(Packet packet)
 	{
-		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);     
+		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
+	}
+	
+	public void sendCustomPacketToPlayer(EntityPlayer player, Packet packet)
+	{ 
+		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendToAllNear(player.posX, player.posY, player.posZ, 5, 0, packet);
+	}
+	
+	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)
+	{ 
+		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendToAllNear(X, Y, Z, range, 0, packet);
 	}
 	
 	@Override
@@ -282,7 +283,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 26:
 		{
-			return new ContainerTerraBloomery(player.inventory, (TileEntityTerraBloomery) te, world, x, y, z);
+			return new ContainerTerraBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
 		}
 		case 28:
 		{
@@ -349,7 +350,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 26:
 		{
-			return new GuiTerraBloomery(player.inventory, (TileEntityTerraBloomery) te, world, x, y, z);
+			return new GuiTerraBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
 		}
 		case 27:
 		{

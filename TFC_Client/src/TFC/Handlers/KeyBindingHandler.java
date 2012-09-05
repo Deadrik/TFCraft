@@ -53,7 +53,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 
 				if(player.worldObj.isRemote)
 				{
-					PacketHandler.sendKeyPress(0);
+					PacketHandler.sendKeyPress(PacketHandler.Packet_Keypress_Server);
 				}
 			}
 		}

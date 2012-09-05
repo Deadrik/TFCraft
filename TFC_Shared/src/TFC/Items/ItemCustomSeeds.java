@@ -41,7 +41,7 @@ public class ItemCustomSeeds extends Item
 				world.setBlockWithNotify(i, j + 1, k, Block.crops.blockID);
 				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(i, j+1, k));
 				te.cropId = cropId;
-				te.broadcast();
+				te.broadcastPacketInRange(te.createCropUpdatePacket());
 				--par1ItemStack.stackSize;
 				return true;
 			}
