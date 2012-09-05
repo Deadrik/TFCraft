@@ -53,14 +53,14 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public void clientLoggedIn(NetHandler clientHandler,
 			NetworkManager manager, Packet1Login login) 
 	{
-
+		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(clientHandler.getPlayer().username, manager));
 	}
 
 
 	@Override
 	public void playerLoggedIn(Player p, NetHandler netHandler,NetworkManager manager)
 	{
-		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(((EntityPlayer)p).username));
+		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(((EntityPlayer)p).username, manager));
 
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
@@ -207,7 +207,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				DataOutputStream dos = new DataOutputStream(bos);
 				Packet250CustomPayload pkt = new Packet250CustomPayload();
 
-				dos.writeByte(2);
+				dos.writeByte(Packet_Keypress_Server);
 				dos.writeByte(type);
 				dos.close();
 
@@ -247,16 +247,14 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	@Override
 	public void connectionClosed(NetworkManager manager) 
 	{
-		//		PlayerInfo PI = new PlayerInfo(manager.);
-		//        for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
-		//        {
-		//            if(PlayerManagerTFC.getInstance().Players.get(i).Name.equalsIgnoreCase(PI.Name))
-		//            {
-		//                System.out.println("PlayerManager Successfully removed player " + mod_TFC.proxy.getPlayer(network).username);
-		//                PlayerManagerTFC.getInstance().Players.remove(i);
-		//            }  
-		//        }
-		int i = ((TcpConnection)manager).field_74468_e;
-		i++;
+		PlayerInfo PI = new PlayerInfo("", manager);
+		for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
+		{
+			if(PlayerManagerTFC.getInstance().Players.get(i).networkManager == manager)
+			{
+				System.out.println("PlayerManager Successfully removed player " + PlayerManagerTFC.getInstance().Players.get(i).Name);
+				PlayerManagerTFC.getInstance().Players.remove(i);
+			}  
+		}
 	}
 }

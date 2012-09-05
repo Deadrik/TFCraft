@@ -190,5 +190,7 @@ public class TileEntityPartial extends NetworkTileEntity
         MetaID = inStream.readByte();
         material = inStream.readByte();
         extraData = inStream.readLong();
+        
+        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
 }

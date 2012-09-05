@@ -214,13 +214,6 @@ public class TerraFirmaCraft implements ITickHandler
 				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
 			}
 		}
-
-		if(type.contains(TickType.PLAYER))
-		{
-			EntityPlayer player = (EntityPlayer)tickData[0];
-			if(!doOnce && PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player) == null)
-				PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(player.username));
-		}
 		
 		if(type.contains(TickType.WORLDLOAD))
 		{

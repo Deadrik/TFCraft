@@ -494,7 +494,7 @@ public class BlockChestTFC extends BlockContainer
      * Called upon block activation (left or right click on the block.). The three integers represent x,y,z of the
      * block.
      */
-    public boolean blockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer)
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
     {
         Object var6 = (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -554,7 +554,7 @@ public class BlockChestTFC extends BlockContainer
             }
             else
             {
-                par5EntityPlayer.displayGUIChest((IInventory)var6);
+                entityplayer.displayGUIChest((IInventory)var6);
                 return true;
             }
         }

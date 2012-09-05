@@ -36,6 +36,46 @@ public class BlockSlab extends BlockPartial
     {
         return TFCBlocks.slabRenderId;
     }
+    
+    @Override
+    public boolean isLadder(World world, int x, int y, int z) 
+    {
+    	TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
+    	if(10 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
+    		return true;
+    	
+    	return false;
+    }
+    
+    public static int getTopChiselLevel(long data)
+    {
+    	return (int) ((data >> 16) & 0xf);
+    }
+    
+    public static int getBottomChiselLevel(long data)
+    {
+    	return (int) ((data >> 4) & 0xf);
+    }
+    
+    public static int getPosXChiselLevel(long data)
+    {
+    	return (int) ((data >> 12) & 0xf);
+    }
+    
+    public static int getNegXChiselLevel(long data)
+    {
+    	return (int) ((data) & 0xf);
+    }
+    
+    public static int getPosZChiselLevel(long data)
+    {
+    	return (int) ((data >> 20) & 0xf);
+    }
+    
+    public static int getNegZChiselLevel(long data)
+    {
+    	return (int) ((data >> 8) & 0xf);
+    }
 
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer

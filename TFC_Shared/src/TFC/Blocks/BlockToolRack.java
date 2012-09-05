@@ -32,6 +32,11 @@ public class BlockToolRack extends BlockContainer
 //            par1World.removeBlockTileEntity(par2, par3, par4);
 //        }
     }
+    
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
+    {
+    	return false;
+    }
 
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {       

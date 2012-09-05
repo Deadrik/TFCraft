@@ -28,11 +28,11 @@ public class BlockCrop extends BlockContainer
         return true;
     }
     
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer player)
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
     {
         TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
-        if(crop != null)
+        if(crop != null && !world.isRemote)
         {
             if(crop.cropId == 4 && te.growth >= 7)
             {

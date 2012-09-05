@@ -11,13 +11,6 @@ import net.minecraft.src.*;
 
 public class BlockFirepit extends BlockContainer
 {
-	
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-
-	private int zCoord;
-
 
 	public BlockFirepit(int i, int tex)
 	{
@@ -26,12 +19,12 @@ public class BlockFirepit extends BlockContainer
 		this.setBlockBounds(0, 0, 0, 1, 0.1f, 1);
 	}
 
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
+		int xCoord = i;
+		int yCoord = j;
+		int zCoord = k;
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
 		if(equippedItem != null)
@@ -73,7 +66,6 @@ public class BlockFirepit extends BlockContainer
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
 				entityplayer.openGui(TerraFirmaCraft.instance, 20, world, i, j, k);
-				//ModLoader.openGUI(entityplayer, new GuiTerraFirepit(entityplayer.inventory, tileentityfirepit));
 			}
 			return true;
 		}

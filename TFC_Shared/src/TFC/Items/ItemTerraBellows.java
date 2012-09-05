@@ -29,28 +29,19 @@ public class ItemTerraBellows extends Item
 		return "/bioxx/terratools.png";
 	}
 
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
 		if(!world.isRemote)
 		{
-			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null) {
-				return itemstack;
-			}		
-			int x = objectMouseOver.blockX;
-			int y = objectMouseOver.blockY;
-			int z = objectMouseOver.blockZ;
-			int side = objectMouseOver.sideHit;
-
 			int l = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockId(x, y+1, z) == 0)
 			{
 				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.terraBellows.blockID, l);
-				return new ItemStack(this,0);
+				return true;
 			}
 		}
 
-		return itemstack;
+		return false;
 	}
 }

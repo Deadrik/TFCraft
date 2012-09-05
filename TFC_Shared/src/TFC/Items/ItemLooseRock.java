@@ -21,12 +21,12 @@ public class ItemLooseRock extends ItemTerra
         super(id);
         this.hasSubtypes = true;
         this.setMaxDamage(0);
+        this.setTabToDisplayOn(CreativeTabs.tabMaterials);
     }
     public ItemLooseRock(int id, String tex) 
     {
         super(id);
         texture = tex;
-
     }
 
     int[][] map = 
@@ -37,17 +37,14 @@ public class ItemLooseRock extends ItemTerra
             {-1,0,0},
             {1,0,0},
         };
-    
-    public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, float par8, float par9, float par10)
+
+    public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
     	MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
         if(objectMouseOver == null) {
             return false;
         }
-        int x = objectMouseOver.blockX;
-        int y = objectMouseOver.blockY;
-        int z = objectMouseOver.blockZ;
-        int side = objectMouseOver.sideHit;
+
         int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 
         double xCoord = x + map[side][0];

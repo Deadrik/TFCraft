@@ -36,7 +36,7 @@ public class BlockTerraAnvil extends BlockContainer
 		this.blockIndexInTexture = tex;
 	}
 
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;

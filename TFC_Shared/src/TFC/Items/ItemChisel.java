@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
@@ -49,8 +50,7 @@ public class ItemChisel extends ItemTool
 
     public static void CreateStairs(World world, int x, int y, int z, int id, byte meta, byte m)
     {
-        if(!world.isRemote)
-        {
+
             world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStairs.blockID, m);
             TileEntityPartial te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
             te.TypeID = (short) id;
@@ -60,14 +60,12 @@ public class ItemChisel extends ItemTool
             te.validate();
             world.markBlockNeedsUpdate(x, y, z);
 
-        }
     }
     public static void CreateSlab(World world, int x, int y, int z, int id, byte meta, int side, int SlabID)
     {
         TileEntityPartial te;
-        if(!world.isRemote)
+        if(true)
         {
-
             if(world.getBlockId(x, y, z) != SlabID)
             {
                 world.setBlockAndMetadataWithNotify(x, y, z, SlabID, side);
@@ -100,7 +98,7 @@ public class ItemChisel extends ItemTool
                 long new2 = (e << 4);
                 long old2 = new2 | (te.extraData - new1);
 
-                if(e + extraY2 >= 10)
+                if(e + BlockSlab.getTopChiselLevel(te.extraData) >= 10)
                     world.setBlockWithNotify(x, y, z, 0);
                 else
                     te.extraData =  old2;
@@ -112,7 +110,7 @@ public class ItemChisel extends ItemTool
                 long new2 = (e << 16);
                 long old2 = new2 | (te.extraData - new1);
 
-                if(e + extraY >= 10)
+                if(e + BlockSlab.getBottomChiselLevel(te.extraData) >= 10)
                     world.setBlockWithNotify(x, y, z, 0);
                 else
                     te.extraData =  old2;
@@ -124,7 +122,7 @@ public class ItemChisel extends ItemTool
                 long new2 = (e << 8);
                 long old2 = new2 | (te.extraData - new1);
 
-                if(e + extraZ2 >= 10)
+                if(e + BlockSlab.getPosZChiselLevel(te.extraData) >= 10)
                     world.setBlockWithNotify(x, y, z, 0);
                 else
                     te.extraData =  old2;
@@ -136,7 +134,7 @@ public class ItemChisel extends ItemTool
                 long new2 = (e << 20);
                 long old2 = new2 | (te.extraData - new1);
 
-                if(e + extraZ >= 10)
+                if(e + BlockSlab.getNegZChiselLevel(te.extraData) >= 10)
                     world.setBlockWithNotify(x, y, z, 0);
                 else
                     te.extraData =  old2;
@@ -148,7 +146,7 @@ public class ItemChisel extends ItemTool
                 long new2 = (e);
                 long old2 = new2 | (te.extraData - new1);
 
-                if(e + extraX2 >= 10)
+                if(e + BlockSlab.getPosXChiselLevel(te.extraData) >= 10)
                     world.setBlockWithNotify(x, y, z, 0);
                 else
                     te.extraData =  old2;
@@ -160,7 +158,7 @@ public class ItemChisel extends ItemTool
                 long new2 = (e << 12);
                 long old2 = new2 | (te.extraData - new1);
 
-                if(e + extraX >= 10)
+                if(e + BlockSlab.getNegXChiselLevel(te.extraData) >= 10)
                     world.setBlockWithNotify(x, y, z, 0);
                 else
                     te.extraData =  old2;

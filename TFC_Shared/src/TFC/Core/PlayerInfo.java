@@ -2,18 +2,21 @@ package TFC.Core;
 
 import TFC.Items.ItemChisel;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.NetworkManager;
 
 public class PlayerInfo
 {
     public String Name;
     public int ChiselMode;
     public ItemStack knappingRockType;
+    public NetworkManager networkManager;
     
-    public PlayerInfo(String name)
+    public PlayerInfo(String name, NetworkManager nm)
     {
         Name = name;
         ChiselMode = 0;
         knappingRockType = null;
+        networkManager = nm;
     }
     
     public void switchChiselMode()

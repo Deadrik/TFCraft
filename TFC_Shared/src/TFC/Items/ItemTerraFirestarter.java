@@ -35,7 +35,8 @@ public class ItemTerraFirestarter extends Item
     {
         return "/bioxx/terratools.png";
     }
-
+    
+    @Override
     public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
     {
         if(!world.isRemote)
@@ -66,17 +67,15 @@ public class ItemTerraFirestarter extends Item
                         EntityItem entity = (EntityItem)iterator.next();
                         if(entity.item.itemID == Item.paper.shiftedIndex)
                         {
-                            entity.setDead();
                             hasPaper = 20;
                         }
                         else if(entity.item.itemID == Item.stick.shiftedIndex)
                         {
-                            numsticks++;
-
+                            numsticks+=entity.item.stackSize;
                         }
                         else if(entity.item.itemID == Item.coal.shiftedIndex)
                         {
-                            numcoal++;
+                            numcoal+=entity.item.stackSize;
                         }
                     }
                 }
@@ -95,6 +94,10 @@ public class ItemTerraFirestarter extends Item
                         {
                             EntityItem entity = (EntityItem)iterator.next();
                             if(entity.item.itemID == Item.stick.shiftedIndex)
+                            {
+                                entity.setDead();
+                            }
+                            if(entity.item.itemID == Item.paper.shiftedIndex)
                             {
                                 entity.setDead();
                             }
