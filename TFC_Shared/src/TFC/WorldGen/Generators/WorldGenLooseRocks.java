@@ -45,7 +45,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
             int var7 = chunkX + random.nextInt(16) + 8;
             int var3 = chunkZ + random.nextInt(16) + 8;
 
-            new WorldGenLooseRocks().generate(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3)-1, var3);
+            generate(world, random, var7, world.getTopSolidOrLiquidBlock(var7, var3)-1, var3);
         }
 		
 	}

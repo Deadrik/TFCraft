@@ -101,7 +101,6 @@ public class TerraFirmaCraft implements ITickHandler
 //		GameRegistry.registerWorldGenerator(new WorldGenPlants());
 //		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
 		
-
 		//Add Item Name Localizations
 		proxy.registerTranslations();
 
@@ -117,7 +116,7 @@ public class TerraFirmaCraft implements ITickHandler
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
 		
-		TFCWorldType.DEFAULT = new TFCWorldType(0, "TFC", 1);
+		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
 	}
 

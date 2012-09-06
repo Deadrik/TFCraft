@@ -344,6 +344,7 @@ public class ContainerTerraAnvil extends Container
 	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
 	{
 		super.onCraftGuiClosed(par1EntityPlayer);
+		anvil.closeChest();
 	}
 
 }

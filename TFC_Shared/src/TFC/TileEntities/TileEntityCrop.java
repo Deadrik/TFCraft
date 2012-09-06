@@ -8,6 +8,7 @@ import java.util.Random;
 
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraOre;
@@ -24,7 +25,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	public TileEntityCrop()
 	{
 		growth = 0.1f;
-		growthTimer = TFC_Time.totalHours();
+		growthTimer = TFC_Time.getTotalTicks();
 		sunLevel = 5;
 	}
 
@@ -37,25 +38,19 @@ public class TileEntityCrop extends NetworkTileEntity
 		{
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
-			long hours = TFC_Time.totalHours();
+			long time = TFC_Time.getTotalTicks();
 
-			if(!checkedSun && TFC_Time.getHour() == 12)
+			if(growthTimer < time && sunLevel > 0)
 			{
-				if(crop.needsSunlight && worldObj.getBlockLightValue(xCoord, yCoord, zCoord) < 15)
-					sunLevel--;
-				else if(worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+				if(crop.needsSunlight && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+				{
 					sunLevel++;
-
-				checkedSun = true;
-			}
-
-			if(growthTimer < hours && sunLevel > 0)
-			{
-				checkedSun = false;
-
+					if(sunLevel > 30) sunLevel = 30;
+				}
+				
 				TileEntityFarmland tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
 
-				float ambientTemp = ((TFCBiome)worldObj.getBiomeGenForCoords(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
+				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
 				float tempAdded = 0;
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
@@ -66,7 +61,6 @@ public class TileEntityCrop extends NetworkTileEntity
 				{
 					if(growth > 1)
 						tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
-
 				}
 				else if(ambientTemp < 28)
 				{
@@ -113,13 +107,13 @@ public class TileEntityCrop extends NetworkTileEntity
 					this.broadcastPacketInRange(createCropUpdatePacket());
 				}
 
-				if(crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2) || (tef != null && tef.waterSaturation <= -1) || growth < 0)
+				if((crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2)) || (tef != null && tef.waterSaturation <= -1) || growth < 0)
 				{
 					worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 					worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 				}
 
-				growthTimer += R.nextInt(2)+23;
+				growthTimer += (R.nextInt(2)+23)*TFC_Time.hourLength;
 			}
 			else if(crop.needsSunlight && sunLevel <= 0)
 			{
@@ -161,7 +155,6 @@ public class TileEntityCrop extends NetworkTileEntity
 
 		cropId = inStream.readInt();
 		growth = inStream.readFloat();
-
 		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -175,6 +168,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 		cropId = inStream.readInt();
 		growth = inStream.readFloat();
+		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
 	
 	public Packet createCropUpdatePacket()
@@ -182,6 +176,10 @@ public class TileEntityCrop extends NetworkTileEntity
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);	
 		try {
+			dos.writeByte(PacketHandler.Packet_Data_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
 			dos.writeInt(cropId);
 			dos.writeFloat(growth);
 		} catch (IOException e) {

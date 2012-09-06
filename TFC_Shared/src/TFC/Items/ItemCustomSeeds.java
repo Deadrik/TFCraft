@@ -1,5 +1,7 @@
 package TFC.Items;
 
+import TFC.Core.CropIndex;
+import TFC.Core.CropManager;
 import TFC.TileEntities.TileEntityCrop;
 import net.minecraft.src.*;
 
@@ -26,23 +28,29 @@ public class ItemCustomSeeds extends Item
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS !
 	 */
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World world, int i, int j, int k, int par7)
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
-		if (par7 != 1)
+		if (side != 1 || world.isRemote)
 		{
 			return false;
 		}
-		else if (par2EntityPlayer.canPlayerEdit(i, j, k) && par2EntityPlayer.canPlayerEdit(i, j + 1, k))
+		else if (player.canPlayerEdit(x, y, z) && player.canPlayerEdit(x, y+1, z))
 		{
-			int var8 = world.getBlockId(i, j, k);
+			int var8 = world.getBlockId(x, y, z);
 
-			if ((var8 == this.soilBlockID || var8 == this.soilBlockID2) && world.isAirBlock(i, j + 1, k))
+			if ((var8 == this.soilBlockID || var8 == this.soilBlockID2) && world.isAirBlock(x, y+1, z))
 			{
-				world.setBlockWithNotify(i, j + 1, k, Block.crops.blockID);
-				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(i, j+1, k));
+				CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
+				
+				if(crop.needsSunlight && !world.canBlockSeeTheSky(x, y+1, z))
+					return false;
+				
+				world.setBlockWithNotify(x, y+1, z, Block.crops.blockID);
+				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(x, y+1, z));
 				te.cropId = cropId;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
-				--par1ItemStack.stackSize;
+				world.markBlockAsNeedsUpdate(x, y, z);
+				--stack.stackSize;
 				return true;
 			}
 			else

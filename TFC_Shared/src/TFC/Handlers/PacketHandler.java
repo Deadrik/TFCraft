@@ -98,9 +98,9 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(packet.data));
 
 		byte type = 0;
-		int x;
-		int y;
-		int z;
+		int x = 0;
+		int y = 0;
+		int z = 0;
 		try {
 			type = dis.readByte();
 
@@ -110,6 +110,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			if(type == Packet_Init_Block_Client)//Client recieves the init packet from the server and assigns the data
 			{
 
+				try
+				{
 				x = dis.readInt();
 				y = dis.readInt();
 				z = dis.readInt();
@@ -117,18 +119,21 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				if(world != null)
 				{
 					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
-					te.handleInitPacket(dis);
+					if(te!= null)
+						te.handleInitPacket(dis);
+				}
+				}catch(Exception e)
+				{
+					System.out.println("PacketHandler error in Packet Type: " + type + ", "+x + ", "+y + ", "+z);
 				}
 			}
 			else if(type == Packet_Init_Block_Server)//Server builds the init packet and sends it to the client.
 			{
-				try {
-					x = dis.readInt();
-					y = dis.readInt();
-					z = dis.readInt();
-				} catch (IOException e) {
-					return;
-				}
+
+				x = dis.readInt();
+				y = dis.readInt();
+				z = dis.readInt();
+
 				ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 				DataOutputStream dos=new DataOutputStream(bos);
 				NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
@@ -189,7 +194,21 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					TFC_Core.SetupWorld(world, seed);
 				}
 			}
-		} catch (IOException e) {
+			else if(type == Packet_Data_Client)
+			{
+				if(world.isRemote)
+				{
+					x = dis.readInt();
+					y = dis.readInt();
+					z = dis.readInt();
+
+					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+					if(te!= null)
+						te.handleDataPacket(dis);
+				}
+			}
+		} catch (Exception e) 
+		{
 			return;
 		}
 	}

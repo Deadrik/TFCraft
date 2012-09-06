@@ -6,6 +6,8 @@ import java.util.Map;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -28,6 +30,8 @@ import TFC.Items.*;
 import TFC.Render.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCProvider;
+import TFC.WorldGen.TFCSkyProvider;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
 import net.minecraft.client.Minecraft;
@@ -39,7 +43,8 @@ public class ClientProxy extends CommonProxy
 {
 	public KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
 	public KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
-
+	
+	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
 		MinecraftForgeClient.preloadTexture("/bioxx/terraRock.png");
@@ -103,10 +108,21 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cookingPitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
+	
+	public void registerTileEntities()
+	{
+		super.registerTileEntities();
+		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
+	}
 
 	@Override
 	public World getCurrentWorld() {
 		return ModLoader.getMinecraftInstance().theWorld;
+	}
+	
+	public void registerSkyProvider(TFCProvider P)
+	{
+		P.skyprovider = new TFCSkyProvider(ModLoader.getMinecraftInstance());
 	}
 
 	@Override
@@ -503,24 +519,28 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.SeedsBellPepper.name", "Bell Pepper Seeds");
 		LR.addStringLocalization("item.SeedsSquash.name", "Squash Seeds");
 
-
 		LR.addStringLocalization("item.Meat.EggCooked.name", "Cooked Egg");
 
 		LR.addStringLocalization("item.WheatGrain.name", "Wheat Grain");
 		LR.addStringLocalization("item.WildWheatGrain.name", "Wild Wheat Grain");
 		LR.addStringLocalization("item.WheatWhole.name", "Wheat");
+		LR.addStringLocalization("item.WildWheatWhole.name", "Wild Wheat");
 		LR.addStringLocalization("item.BarleyGrain.name", "Barley Grain");
 		LR.addStringLocalization("item.WildBarleyGrain.name", "Wild Barley Grain");
 		LR.addStringLocalization("item.BarleyWhole.name", "Barley");
+		LR.addStringLocalization("item.WildBarleyWhole.name", "Wild Barley");
 		LR.addStringLocalization("item.OatGrain.name", "Oat Grain");
 		LR.addStringLocalization("item.WildOatGrain.name", "Wild Oat Grain");
 		LR.addStringLocalization("item.OatWhole.name", "Oat");
+		LR.addStringLocalization("item.WildOatWhole.name", "Wild Oat");
 		LR.addStringLocalization("item.RyeGrain.name", "Rye Grain");
 		LR.addStringLocalization("item.WildRyeGrain.name", "Wild Rye Grain");
 		LR.addStringLocalization("item.RyeWhole.name", "Rye");
+		LR.addStringLocalization("item.WildRyeWhole.name", "Wild Rye");
 		LR.addStringLocalization("item.RiceGrain.name", "Rice Grain");
 		LR.addStringLocalization("item.WildRiceGrain.name", "Wild Rice Grain");
 		LR.addStringLocalization("item.RiceWhole.name", "Rice");
+		LR.addStringLocalization("item.WildRiceWhole.name", "Wild Rice");
 
 		LR.addStringLocalization("item.MaizeEar.name", "Maize Ear");
 		LR.addStringLocalization("item.WildMaizeEar.name", "Wild Maize Ear");

@@ -30,9 +30,9 @@ public class ItemTerraSluice extends Item
 		return "/bioxx/terratools.png";
 	}
 
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ)
 	{
-		if(world.isRemote)
+		if(!world.isRemote)
 		{
 			int xCoord = i;
 			int yCoord = j;

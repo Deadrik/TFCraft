@@ -375,7 +375,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
         else if(fuelTimeLeft <= 0 && charcoalCount > 0)
         {
             charcoalCount--;
-            updateGui();
+            
             fuelTimeLeft = 1875;
             fuelBurnTemp = 1450;
             if(fireTemperature < 210)
@@ -385,10 +385,11 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.terraBloomery.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
             }
+            //updateGui();
         }
         else
         {
-            updateGui();
+            
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
             if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.terraBloomeryOn.blockID) {
                 BlockTerraBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
@@ -398,6 +399,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             {
                 fireTemperature-=0.425F;
             }
+            //updateGui();
         }
 
 
@@ -856,7 +858,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
     public void updateGui()
     {
-        this.broadcastPacketInRange(createUpdatePacket());
+    	TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
     }
     
     @Override
@@ -880,6 +882,10 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);	
 		try {
+			dos.writeByte(PacketHandler.Packet_Data_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
 			dos.writeInt(oreCount);
 			dos.writeInt(charcoalCount);
 			dos.writeInt(oreDamage);
@@ -887,5 +893,15 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		} catch (IOException e) {
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		
 	}
 }

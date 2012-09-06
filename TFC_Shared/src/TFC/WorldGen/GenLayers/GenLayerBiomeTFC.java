@@ -8,7 +8,7 @@ import net.minecraft.src.WorldType;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {
-	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, 
+	public static BiomeGenBase[] biomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.plains, 
 		TFCBiome.rollingHills, TFCBiome.Mountains};
 	
 

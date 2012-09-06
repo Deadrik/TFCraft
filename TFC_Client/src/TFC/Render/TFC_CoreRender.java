@@ -136,8 +136,6 @@ public class TFC_CoreRender
         return true;
     }
 
-    
-
     public static boolean RenderSulfur(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
@@ -241,14 +239,13 @@ public class TFC_CoreRender
         return true;
     }
 
-    public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)
+    public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)	
     {
-        BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(i, k);
-
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
-        Random R = new Random(meta+i*k);
-
-        renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, i,j,k);
+        World w = ModLoader.getMinecraftInstance().theWorld;
+        TFCWorldChunkManager wcm = ((TFCWorldChunkManager)ModLoader.getMinecraftInstance().theWorld.getWorldChunkManager());
+        DataLayer rockLayer1 = ((TFCWorldChunkManager)ModLoader.getMinecraftInstance().theWorld.getWorldChunkManager()).getRockLayerAt(i, k, 0);
+        renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(0, rockLayer1.data2);
 
         block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
         renderblocks.renderStandardBlock(block, i, j, k);
@@ -880,7 +877,7 @@ public class TFC_CoreRender
         DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
         if(yCoord <= TerraFirmaCraft.RockLayer3Height)
             var27 = Block.blocksList[rockLayer3.data1].getBlockTextureFromSideAndMetadata(5, rockLayer3.data2);
-        else if(yCoord > TerraFirmaCraft.RockLayer3Height && yCoord <= TerraFirmaCraft.RockLayer2Height)
+        else if(yCoord <= TerraFirmaCraft.RockLayer2Height)
             var27 = Block.blocksList[rockLayer2.data1].getBlockTextureFromSideAndMetadata(5, rockLayer2.data2);
         else
             var27 = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(5, rockLayer1.data2);
@@ -999,8 +996,6 @@ public class TFC_CoreRender
         block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         return true;
     }
-
-
 
     public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {

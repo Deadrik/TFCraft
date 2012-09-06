@@ -55,11 +55,11 @@ def main():
         
     os.makedirs(out_folder)
     
-    zip_start('TFCraft-client-core.zip')
+    zip_start('TFCraft-Universal-Core-B2-Build.zip')
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
-    zip_add('TFC Resources')
+    zip_folder('TFC Resources', '', zip)
     zip_end()
     
     zip_start('TFCraft-src.zip')

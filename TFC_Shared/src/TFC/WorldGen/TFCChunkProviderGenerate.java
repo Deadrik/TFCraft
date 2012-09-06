@@ -15,6 +15,7 @@ import net.minecraft.src.ChunkProviderGenerate;
 import net.minecraft.src.EnumSkyBlock;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
+import net.minecraft.src.MapGenCaves;
 import net.minecraft.src.MapGenMineshaft;
 import net.minecraft.src.MapGenScatteredFeature;
 import net.minecraft.src.MapGenStronghold;
@@ -125,7 +126,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		replaceBlocksForBiomeLow(par1, par2, ids,meta, rand, ids3, meta3);
 
 
-		new MapGenCaves256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
+		new MapGenCavesTFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
 		new MapGenRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
 		new MapGenRiverRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
 
@@ -455,10 +456,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
-				BiomeGenBase biomegenbase = biomesForGeneration[zCoord + xCoord * 16];
-				DataLayer rock1 = rockLayer1[zCoord + xCoord * 16];
-				DataLayer rock2 = rockLayer2[zCoord + xCoord * 16];
-				DataLayer rock3 = rockLayer3[zCoord + xCoord * 16];
+				BiomeGenBase biomegenbase = biomesForGeneration[xCoord + zCoord * 16];
+				DataLayer rock1 = rockLayer1[xCoord + zCoord * 16];
+				rock1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(par1 * 16 + xCoord, par2 * 16 + zCoord, 0);
+				DataLayer rock2 = rockLayer2[xCoord + zCoord * 16];
+				DataLayer rock3 = rockLayer3[xCoord + zCoord * 16];
 				DataLayer evt = evtLayer[zCoord + xCoord * 16];
 				DataLayer rainfall = rainfallLayer[zCoord + xCoord * 16];
 
@@ -491,17 +493,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					{
 
 						blockArrayBig[indexBig] = (byte) rock1.data1; 
-						metaArrayBig[indexBig] = (byte)  rock1.data2;    
-						
-						if(rock1.data1 == TFCBlocks.terraStoneIgIn.blockID)
-							soilMeta = rock1.data2;
-				        else if(rock1.data1 == TFCBlocks.terraStoneSed.blockID)
-				        	soilMeta = rock1.data2+3;
-				        else if(rock1.data1 == TFCBlocks.terraStoneIgEx.blockID)
-				        	soilMeta = rock1.data2+13;
-				        else
-				        	soilMeta = rock1.data2+17;
-				            
+						metaArrayBig[indexBig] = (byte)  rock1.data2;              
 						
 						
 						//First we check to see if its a cold desert

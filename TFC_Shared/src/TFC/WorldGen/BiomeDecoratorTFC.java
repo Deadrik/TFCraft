@@ -58,6 +58,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.grassPerChunk = 1;
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
+		looseRocksPerChunk = 10;
 
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Block.sand.blockID);
@@ -76,27 +77,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int xCoord;
 		int yCoord;
 		int zCoord;
-
-//		for (var1 = 0; var1 < this.sandPerChunk2; ++var1)
-//		{
-//			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-//			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-//			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-//		}
-
-		//        for (var1 = 0; var1 < this.clayPerChunk; ++var1)
-		//        {
-		//            var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-		//            var3 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-		//            this.clayGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
-		//        }
-
-//		for (var1 = 0; var1 < this.sandPerChunk; ++var1)
-//		{
-//			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-//			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-//			this.sandGen.generate(this.currentWorld, this.randomGenerator, xCoord, this.currentWorld.getTopSolidOrLiquidBlock(xCoord, zCoord), zCoord);
-//		}
 
 		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
 

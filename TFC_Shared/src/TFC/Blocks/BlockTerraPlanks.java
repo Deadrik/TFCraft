@@ -16,6 +16,7 @@ public class BlockTerraPlanks extends Block
 	public BlockTerraPlanks(int i, Material material) 
 	{
 		super(i, Material.wood);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@SideOnly(Side.CLIENT)

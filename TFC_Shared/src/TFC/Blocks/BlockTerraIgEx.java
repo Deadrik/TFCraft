@@ -32,7 +32,6 @@ public class BlockTerraIgEx extends BlockCollapsable
 {
 	public BlockTerraIgEx(int i, Material material, int id) {
 		super(i,3, material, id);
-		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	/*

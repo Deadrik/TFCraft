@@ -150,7 +150,7 @@ public class BlockTerraAnvil extends BlockContainer
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraBlueSteelAnvilItem, 1));
 			break;
 		default:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.terraStoneAnvilItem, 1));
+			break;
 		}
 		}
 		else if(blockID == TFCBlocks.terraAnvil2.blockID)

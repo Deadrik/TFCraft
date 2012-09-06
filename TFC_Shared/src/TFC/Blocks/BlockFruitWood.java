@@ -32,7 +32,6 @@ public class BlockFruitWood extends BlockContainer
         super(i, Material.wood);
         this.blockIndexInTexture = index;
         EntityClass = c;
-        this.setTickRandomly(true);
     }
 
     public void addCreativeItems(java.util.ArrayList list)
@@ -107,10 +106,7 @@ public class BlockFruitWood extends BlockContainer
                 //super.harvestBlock(world, entityplayer, i, j, k, l);
                 boolean checkArray[][][] = new boolean[11][50][11];
 
-                if(		world.getBlockId(i, j+y-1, k) == blockID || world.getBlockId(i, j+y-1, k) == TFCBlocks.terraDirt.blockID || 
-                        world.getBlockId(i, j+y-1, k) == TFCBlocks.terraDirt2.blockID || world.getBlockId(i, j+y-1, k) == TFCBlocks.terraClay.blockID || 
-                        world.getBlockId(i, j+y-1, k) == TFCBlocks.terraClay2.blockID || world.getBlockId(i, j+y-1, k) == TFCBlocks.terraGrass.blockID || 
-                        world.getBlockId(i, j+y-1, k) == TFCBlocks.terraGrass2.blockID || world.isBlockOpaqueCube(i, j+y-1, k))
+                if(TFC_Core.isGrass(world.getBlockId(i, j+y-1, k)) || TFC_Core.isDirt(world.getBlockId(i, j+y-1, k)))
                 {
                     boolean reachedTop = false;
                     while(!reachedTop)
@@ -255,7 +251,7 @@ public class BlockFruitWood extends BlockContainer
             int branchGrowTime = 20;
 
             //grow upward
-            if(te.birthTime + trunkGrowTime < TFC_Time.totalDays() && te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
+            if(te.birthTimeWood + trunkGrowTime < TFC_Time.totalDays() && te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
                     (world.getBlockId(i, j+1, k) == 0 || world.getBlockId(i, j+1, k) == TFCBlocks.fruitTreeLeaves.blockID))
             {
                     world.setBlockAndMetadata(i, j+1, k, this.blockID, world.getBlockMetadata(i, j, k));
@@ -263,9 +259,9 @@ public class BlockFruitWood extends BlockContainer
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setHeight(te.height+1);
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setBirth();
 
-                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirth(trunkGrowTime);
+                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirthWood(trunkGrowTime);
             }
-            else if(te.birthTime + branchGrowTime < TFC_Time.totalDays() && te.height == 2 && te.isTrunk && rand.nextInt(16/t) == 0 &&
+            else if(te.birthTimeWood + branchGrowTime < TFC_Time.totalDays() && te.height == 2 && te.isTrunk && rand.nextInt(16/t) == 0 &&
                     world.getBlockId(i, j+1, k) != blockID)
             {
                     int r = rand.nextInt(4);
@@ -298,9 +294,9 @@ public class BlockFruitWood extends BlockContainer
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k+1)).setBirth();
                     }
 
-                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirth(branchGrowTime);
+                    ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirthWood(branchGrowTime);
             }
-            else if(te.birthTime + 1 < TFC_Time.totalDays() && rand.nextInt(leafGrowthRate) == 0 && world.getBlockId(i, j+2, k) != blockID)
+            else if(te.birthTimeWood + 1 < TFC_Time.totalDays() && rand.nextInt(leafGrowthRate) == 0 && world.getBlockId(i, j+2, k) != blockID)
             {
                 if(world.getBlockId(i, j+1, k) == 0 && world.getBlockId(i, j+2, k) == 0 && BlockFruitLeaves.canStay(world, i, j+1, k, TFCBlocks.fruitTreeLeaves.blockID))//above
                 {

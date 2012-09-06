@@ -15,6 +15,7 @@ import net.minecraft.src.Entity;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.TFCBlocks;
+import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.Vec3;
 import net.minecraft.src.WorldChunkManager;
 import net.minecraft.src.WorldProvider;
@@ -24,14 +25,14 @@ import net.minecraftforge.client.SkyProvider;
 
 public class TFCProvider extends WorldProvider
 {	
-	SkyProvider skyprovider;
+	public SkyProvider skyprovider;
 	@Override
 	protected void registerWorldChunkManager()
 	{
 		this.worldChunkMgr = terrainType.getChunkManager(this.worldObj);
 		//TFC_Core.SetupWorld(this.worldObj);
 		//TFC_Game.registerAnvilRecipes(this.worldObj.rand, this.worldObj);
-		skyprovider = new TFCSkyProvider(ModLoader.getMinecraftInstance());
+		TerraFirmaCraft.proxy.registerSkyProvider();
 		TFC_Climate.manager = (TFCWorldChunkManager) worldChunkMgr;
 		TFC_Climate.worldObj = worldObj;
 	}

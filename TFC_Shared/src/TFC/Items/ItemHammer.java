@@ -36,7 +36,7 @@ public class ItemHammer extends ItemTool
 			int id2 = player.worldObj.getBlockId(x, y, z);
 			int meta2 = player.worldObj.getBlockMetadata(x, y, z);
 
-			if(TFC_Core.isRawStone(player.worldObj, x, y, z))
+			if(id2 == TFCBlocks.terraStoneIgEx.blockID || id2 == TFCBlocks.terraStoneIgIn.blockID)
 			{
 				if(side == 1)
 				{

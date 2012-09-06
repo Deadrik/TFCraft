@@ -68,7 +68,6 @@ public class TFC_Time
     public static int getDayOfMonth()
     {
         long month = totalMonths();
-        
         long days = 30*month;
         long days2 = totalDays() - days;
         return 1+(int)days2;
@@ -77,10 +76,24 @@ public class TFC_Time
     public static int getDayOfYear()
     {
         long year = getYear();
-        
-        long years = 12960000*year;
-        long years2 = time - years;;
+        long years = (dayLength*360)*year;
+        long years2 = time - years;
         return (int) (years2/dayLength);
+    }
+    
+    public static int getDayOfYearFromTick(long tick)
+    {
+        long year = getYear();
+        long years = (tick / (dayLength*360));
+        long years2 = tick - years;
+        return (int) (years2/dayLength);
+    }
+    
+    public static int getDayOfYearFromDays(long days)
+    {
+        long years = (days / 360);
+        long years2 = days - (360 * years);
+        return (int)years2;
     }
     
     public static int getMonth()

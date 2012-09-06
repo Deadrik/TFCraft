@@ -467,7 +467,9 @@ public class TFC_Core
 
 	public static void SetupWorld(World world)
 	{
-		Random R = new Random(world.getSeed());
+		long seed = world.getSeed();
+		Random R = new Random(seed);
+		world.provider.registerWorld(world);
 		TFC_Game.registerAnvilRecipes(R, world);
 	}
 
@@ -559,9 +561,13 @@ public class TFC_Core
 		else if(inType == TFCBlocks.terraStoneSed.blockID)
 			return inMeta+3;
 		else if(inType == TFCBlocks.terraStoneIgEx.blockID)
+		{
+			if(inMeta == 3)
+				return 0;
 			return inMeta+13;
+		}
 		else
-			return inMeta+17;
+			return inMeta+1;
 	}
 
 	public static int getTypeForGrassWithRain(int inMeta, float rain)

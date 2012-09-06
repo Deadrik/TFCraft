@@ -111,14 +111,14 @@ public class BlockTerraFarmland extends BlockContainer
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-		Material var6 = par1World.getBlockMaterial(par2, par3 + 1, par4);
-
-		if (var6.isSolid())
-		{
-			DataLayer rockLayer = ((TFCWorldChunkManager)par1World.getWorldChunkManager()).getRockLayerAt(par2, par4, 0);
-			int id = TFC_Core.getTypeForDirt(rockLayer.data2);
-			par1World.setBlockWithNotify(par2, par3, par4, id);
-		}
+//		Material var6 = par1World.getBlockMaterial(par2, par3 + 1, par4);
+//
+//		if (var6.isSolid())
+//		{
+//			DataLayer rockLayer = ((TFCWorldChunkManager)par1World.getWorldChunkManager()).getRockLayerAt(par2, par4, 0);
+//			int id = TFC_Core.getTypeForDirt(rockLayer.data2);
+//			par1World.setBlockWithNotify(par2, par3, par4, id);
+//		}
 	}
 
 	/**

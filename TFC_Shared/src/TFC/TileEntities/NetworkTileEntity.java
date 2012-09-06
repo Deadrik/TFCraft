@@ -56,7 +56,7 @@ public abstract class NetworkTileEntity extends TileEntity {
 	{
 		super.validate();
 		
-		if(worldObj.isRemote)
+		if(worldObj.isRemote && this.shouldSendInitData)
 		{
 			try {
 				requestInitialization();

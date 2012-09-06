@@ -20,31 +20,21 @@ public class ItemFruitTreeSapling extends ItemTerra
         setHasSubtypes(true);
     }
     
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
     {
-        MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-        if(objectMouseOver == null) 
-        {
-            return false;
-        }       
-        int x = objectMouseOver.blockX;
-        int y = objectMouseOver.blockY;
-        int z = objectMouseOver.blockZ;
-        int side = objectMouseOver.sideHit;
-        int meta = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
+        int meta = MathHelper.floor_double((double)(player.rotationYaw * 4F / 360F) + 0.5D) & 3;
         if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
                 (world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.ground) &&
                 world.getBlockId(x, y+1, z) == 0)
         {
             
-            world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, itemstack.getItemDamage()+offset);
+            world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset);
             world.markBlockNeedsUpdate(x, y+1, z);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setHeight(0);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setBirth();
             
-            
-            itemstack.stackSize = itemstack.stackSize-1;
+            stack.stackSize = stack.stackSize-1;
             return true;
         }
 

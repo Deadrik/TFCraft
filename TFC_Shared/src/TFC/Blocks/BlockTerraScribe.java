@@ -25,6 +25,7 @@ public class BlockTerraScribe extends BlockContainer
 	{
 		super(i, Material.wood);
 		needsRandomTick = true;
+		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -37,7 +38,7 @@ public class BlockTerraScribe extends BlockContainer
 		list.add(new ItemStack(this,1,0));
 	}
 
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;

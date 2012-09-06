@@ -251,7 +251,6 @@ public class MapGenCaves256TFC extends MapGenBase
 	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
-		TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(par2, par4);
 		
 		if (this.rand.nextInt(100) <= 10)
 		{

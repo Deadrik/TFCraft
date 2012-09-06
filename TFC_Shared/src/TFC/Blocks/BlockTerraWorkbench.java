@@ -9,6 +9,7 @@ public class BlockTerraWorkbench extends BlockContainer
 	{
 		super(i, Material.wood);
 		blockIndexInTexture = 59;
+		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
@@ -16,9 +17,8 @@ public class BlockTerraWorkbench extends BlockContainer
 		if (!world.isRemote)
 		{
 			entityplayer.openGui(TerraFirmaCraft.instance, 1, world, i, j, k);
-			return true;
 		}
-		return false;
+		return true;
 	}
 
 	public int getBlockTextureFromSide(int i)

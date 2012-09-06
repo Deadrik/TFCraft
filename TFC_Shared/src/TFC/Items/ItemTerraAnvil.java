@@ -74,6 +74,7 @@ public class ItemTerraAnvil extends Item
 			    TileEntityTerraAnvil te = (TileEntityTerraAnvil)world.getBlockTileEntity(x, y+1, z);
 			    te.AnvilTier = req.Tier;
 			}
+			player.inventory.mainInventory[player.inventory.currentItem] = null;
 			return true;
 		}
 

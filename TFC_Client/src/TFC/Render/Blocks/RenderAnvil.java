@@ -78,6 +78,7 @@ public class RenderAnvil {
 					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
+				block.setBlockBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}

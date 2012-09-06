@@ -17,6 +17,7 @@ public class ItemTerraFirestarter extends Item
         this.setMaxDamage(8);
         maxStackSize = 1;
         this.hasSubtypes = false;
+        this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
 
     @Override

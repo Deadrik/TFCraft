@@ -58,7 +58,7 @@ public class BlockCrop extends BlockContainer
 
     }
     
-    public void onBlockRemoval(World world, int i, int j, int k) 
+    public void breakBlock(World world, int i, int j, int k, int l, int m) 
     {
         TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);

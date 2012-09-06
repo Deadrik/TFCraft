@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.TileEntities.TileEntityBloomery;
 import net.minecraft.src.BlockContainer;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
@@ -36,6 +37,7 @@ public class BlockTerraBloomery extends BlockContainer
     {
         super(i, Material.rock);
         this.blockIndexInTexture = tex;
+        this.setCreativeTab(CreativeTabs.tabRedstone);
     }
     
 	public static void DoValidCheck(World world, int i, int j, int k, int meta)
@@ -107,7 +109,7 @@ public class BlockTerraBloomery extends BlockContainer
 			list.add(new ItemStack(this,1,0));
 		}
 	}
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;

@@ -174,7 +174,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 //fireItemStacks[i].stackTagCompound = null;
             }
 
-            if(index.boilTemp <= inputItemTemps[i])
+            if(index != null && index.boilTemp <= inputItemTemps[i])
             {
                 fireItemStacks[i] = null;
             }
@@ -698,12 +698,4 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         }
         nbttagcompound.setTag("Items", nbttaglist);
     }
-
-    public void handlePacketData(float temp) 
-    {
-        TileEntityTerraForge pile = this;
-        fireTemperature = temp;
-
-    }
-
 }

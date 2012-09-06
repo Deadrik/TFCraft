@@ -62,7 +62,6 @@ public class CommonProxy implements IGuiHandler
 
 		ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 		ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
-		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
@@ -176,7 +175,12 @@ public class CommonProxy implements IGuiHandler
 	}
 
 	public File getMinecraftDir() {
-		return ModLoader.getMinecraftInstance().getMinecraftDir();/*new File(".");*/
+		return ModLoader.getMinecraftServerInstance().getFile("");/*new File(".");*/
+	}
+	
+	public void registerSkyProvider()
+	{
+		
 	}
 
 	public boolean isRemote() {

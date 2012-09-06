@@ -12,6 +12,7 @@ import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
@@ -29,6 +30,7 @@ public class BlockCollapsable extends BlockTerra
     {
         super(par1, par2, material);
         dropBlock = d;
+        this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
     public static boolean canFallBelow(World world, int i, int j, int k)

@@ -460,6 +460,12 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 	public void closeChest() 
 	{
 		workRecipe = null;
+		if(!worldObj.isRemote && anvilItemStacks[0] == null && this.AnvilTier == AnvilReq.STONE.Tier)
+		{
+			ejectContents();
+			worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, stonePair[0], stonePair[1]);
+		}
+		worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
 	}
 	@Override
 	public ItemStack decrStackSize(int i, int j)

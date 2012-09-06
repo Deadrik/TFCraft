@@ -32,4 +32,18 @@ public class WeatherManager
         return (r.nextInt(200)-100)/10;
     }
     
+    public float getWeeklyTemp(int week)
+    {
+        Random r = new Random(seed + week);
+
+        return (r.nextInt(200)-100)/10;
+    }
+    
+    public static int getDayOfWeek(long day)
+    {        
+        long days = day / 6;
+        long days2 = day - (days*6);
+        return (int)days2;
+    }
+    
 }

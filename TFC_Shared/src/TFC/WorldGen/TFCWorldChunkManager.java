@@ -80,10 +80,13 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		this.biomesToSpawnIn.add(TFCBiome.Mountains);
 
 	}
+	
+	public long seed = 0;
 
 	public TFCWorldChunkManager(long par1, WorldType par3WorldType)
 	{
 		this();
+		seed = par1;
 		GenLayerTFC[] var4 = GenLayerTFC.initializeAllBiomeGenerators(par1, par3WorldType);
 		this.genBiomes = var4[0];
 		this.biomeIndexLayer = var4[1];

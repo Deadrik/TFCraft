@@ -26,14 +26,12 @@ public class ContainerTerraBloomery extends Container
 			{
 				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
 			}
-
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
 			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
-
 	}
 
 	public boolean canInteractWith(EntityPlayer entityplayer)

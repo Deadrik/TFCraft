@@ -19,13 +19,6 @@ public class BlockSand extends BlockTerra2
         super(i, j, Material.sand);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
-
-    public void addCreativeItems(java.util.ArrayList list)
-    {
-        for(int i = 0; i < 16; i++) {
-            list.add(new ItemStack(this,1,i));
-        }
-    }
     
     @SideOnly(Side.CLIENT)
     @Override
