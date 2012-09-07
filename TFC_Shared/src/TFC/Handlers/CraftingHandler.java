@@ -102,7 +102,7 @@ public class CraftingHandler implements ICraftingHandler
 			if(item != null)
 			{
 				item.damageItem(1 , entityplayer);
-				if (item.getItemDamage() != 0)
+				if (item.getItemDamage() != 0 || entityplayer.capabilities.isCreativeMode)
 				{
 					iinventory.setInventorySlotContents(index, item);
 					iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;

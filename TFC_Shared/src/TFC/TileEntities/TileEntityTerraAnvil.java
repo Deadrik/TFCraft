@@ -714,7 +714,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		AnvilTier = nbttagcompound.getInteger("Tier");
 		stonePair = nbttagcompound.getIntArray("stonePair");
 	}
-	
+
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException  
 	{
@@ -792,6 +792,10 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		DataOutputStream dos=new DataOutputStream(bos);
 
 		try {
+			dos.writeByte(PacketHandler.Packet_Data_Server);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
 			dos.writeInt(id);
 		} catch (IOException e) {
 		}
@@ -799,4 +803,57 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
+	{
+		switch(inStream.readInt())
+		{
+		case -1:
+		{
+			actionLightHammer();
+			break;
+		}
+		case 0:
+		{
+			actionHeavyHammer();
+			break;
+		}
+		case 1:
+		{
+			actionDraw();
+			break;
+		}
+		case 2:
+		{
+			actionQuench();
+			break;
+		}
+		case 3:
+		{
+			actionPunch();
+			break;
+		}
+		case 4:
+		{
+			actionBend();
+			break;
+		}
+		case 5:
+		{
+			actionUpset();
+			break;
+		}
+		case 6:   
+		{
+			actionShrink();
+			break;
+		}
+		case 7:
+		{
+			actionWeld();
+			break;
+		}
+		}		
+		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+	}
 }

@@ -64,12 +64,15 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
+			int blockID = TFCBlocks.fruitTreeWood.blockID;
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 			if(birthTimeWood + GrowTime < TFC_Time.totalDays() && height < 3)
 			{
 				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromDays(birthTimeWood + GrowTime), xCoord, yCoord, zCoord);
 				int t = 1;
 				if(temp > 8 && temp < 22)
 					t = 2;
+				
 				//First we attempt to grow the trunk of the tree higher
 				if(height <= 2 && isTrunk && worldObj.rand.nextInt(16/t) == 0 &&
 						(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0 || worldObj.getBlockId(xCoord, yCoord+1, zCoord) == TFCBlocks.fruitTreeLeaves.blockID))
@@ -87,28 +90,28 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 					int r = worldObj.rand.nextInt(4);
                     if(r == 0 && worldObj.getBlockId(xCoord+1, yCoord, zCoord) == 0 || worldObj.getBlockId(xCoord+1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                    	worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord, blockType.blockID, blockMetadata);
+                    	worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord, TFCBlocks.fruitTreeWood.blockID, meta);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord)).setTrunk(false);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord)).setHeight(height);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord+1, yCoord, zCoord)).setBirth();
                     }
                     else if(r == 1 && worldObj.getBlockId(xCoord, yCoord, zCoord-1) == 0 || worldObj.getBlockId(xCoord, yCoord, zCoord-1) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                    	worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord-1, blockType.blockID, blockMetadata);
+                    	worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord-1, TFCBlocks.fruitTreeWood.blockID, meta);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1)).setTrunk(false);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1)).setHeight(height);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord-1)).setBirth();
                     }
                     else if(r == 2 && worldObj.getBlockId(xCoord-1, yCoord, zCoord) == 0 || worldObj.getBlockId(xCoord-1, yCoord, zCoord) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                    	worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord, blockType.blockID, blockMetadata);
+                    	worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord, TFCBlocks.fruitTreeWood.blockID, meta);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord)).setTrunk(false);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord)).setHeight(height);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord-1, yCoord, zCoord)).setBirth();
                     }
                     else if(r == 3 && worldObj.getBlockId(xCoord, yCoord, zCoord+1) == 0 || worldObj.getBlockId(xCoord, yCoord, zCoord+1) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                    	worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord+1, blockType.blockID, blockMetadata);
+                    	worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord+1, TFCBlocks.fruitTreeWood.blockID, meta);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1)).setTrunk(false);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1)).setHeight(height);
                         ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord+1)).setBirth();
@@ -118,51 +121,51 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	            }
 			}
 			
-			if(birthTimeLeaves + 2 < TFC_Time.totalDays() && worldObj.rand.nextInt((int) leafGrowthRate) == 0 && worldObj.getBlockId(xCoord, yCoord+2, zCoord) != blockType.blockID)
+			if(birthTimeLeaves + 2 < TFC_Time.totalDays() && worldObj.rand.nextInt((int) leafGrowthRate) == 0 && worldObj.getBlockId(xCoord, yCoord+2, zCoord) != TFCBlocks.fruitTreeWood.blockID)
             {
                 if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0 && worldObj.getBlockId(xCoord, yCoord+2, zCoord) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord+1, zCoord, TFCBlocks.fruitTreeLeaves.blockID))//above
                 {
-                    worldObj.setBlockAndMetadata(xCoord, yCoord+1, zCoord, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord, yCoord+1, zCoord, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord, yCoord+1, zCoord);
                 }
                 else if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == 0 && worldObj.getBlockId(xCoord+1, yCoord+1, zCoord) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord+1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves.blockID))//+x
                 {
-                    worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord+1, yCoord, zCoord);
                 }
                 else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == 0 && worldObj.getBlockId(xCoord-1, yCoord+1, zCoord) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord-1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves.blockID))//-x
                 {
-                    worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord-1, yCoord, zCoord);
                 }
                 else if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == 0 && worldObj.getBlockId(xCoord, yCoord+1, zCoord+1) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID))//+z
                 {
-                    worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord+1);
                 }
                 else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == 0 && worldObj.getBlockId(xCoord, yCoord+1, zCoord-1) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID))//-z
                 {
-                    worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord-1);
                 }
                 else if(worldObj.getBlockId(xCoord+1, yCoord, zCoord-1) == 0 && worldObj.getBlockId(xCoord+1, yCoord+1, zCoord-1) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord+1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID))//+x/-z
                 {
-                    worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord+1, yCoord, zCoord-1);
                 }
                 else if(worldObj.getBlockId(xCoord+1, yCoord, zCoord+1) == 0 && worldObj.getBlockId(xCoord+1, yCoord+1, zCoord+1) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord+1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID))//+x/+z
                 {
-                    worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord+1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord+1, yCoord, zCoord+1);
                 }
                 else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord-1) == 0 && worldObj.getBlockId(xCoord-1, yCoord+1, zCoord-1) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord-1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID))//-x/-z
                 {
-                    worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord-1, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord-1, yCoord, zCoord-1);
                 }
                 else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord+1) == 0 && worldObj.getBlockId(xCoord-1, yCoord+1, zCoord+1) == 0 && BlockFruitLeaves.canStay(worldObj, xCoord-1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID))//-x/+z
                 {
-                    worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID, worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+                    worldObj.setBlockAndMetadata(xCoord-1, yCoord, zCoord+1, TFCBlocks.fruitTreeLeaves.blockID, meta);
                     worldObj.markBlockNeedsUpdate(xCoord-1, yCoord, zCoord+1);
                 }
                 setBirthLeaves(2);

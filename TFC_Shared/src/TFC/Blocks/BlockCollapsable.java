@@ -49,6 +49,10 @@ public class BlockCollapsable extends BlockTerra
         {
             return true;
         }
+        if (l == Block.tallGrass.blockID)
+        {
+            return true;
+        }
         if (l == Block.torchWood.blockID)
         {
             return true;

@@ -45,7 +45,6 @@ public class GuiTerraAnvil extends GuiContainer
 
 	protected void actionPerformed(GuiButton guibutton)
 	{
-
 		if (guibutton.id == 0)
 		{
 			AnvilEntity.actionLightHammer();

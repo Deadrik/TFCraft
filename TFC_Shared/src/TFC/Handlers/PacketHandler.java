@@ -48,6 +48,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public static final byte Packet_Keypress_Server = 2;
 	public static final byte Packet_Init_World_Client = 3;
 	public static final byte Packet_Data_Client = 4;
+	public static final byte Packet_Data_Server = 5;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -205,6 +206,19 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
 					if(te!= null)
 						te.handleDataPacket(dis);
+				}
+			}
+			else if(type == Packet_Data_Server)
+			{
+				if(!world.isRemote)
+				{
+					x = dis.readInt();
+					y = dis.readInt();
+					z = dis.readInt();
+
+					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+					if(te!= null)
+						te.handleDataPacketServer(dis);
 				}
 			}
 		} catch (Exception e) 

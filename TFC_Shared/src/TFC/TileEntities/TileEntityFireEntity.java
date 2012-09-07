@@ -110,4 +110,13 @@ public class TileEntityFireEntity extends NetworkTileEntity
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

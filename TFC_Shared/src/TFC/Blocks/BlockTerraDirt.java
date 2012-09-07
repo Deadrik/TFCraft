@@ -7,6 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 
@@ -14,19 +15,10 @@ import net.minecraft.src.*;
 
 public class BlockTerraDirt extends BlockTerra2
 {
-    
-
     public BlockTerraDirt(int i, int j, Block Farm)
     {
         super(i, j, Material.ground);
         this.setCreativeTab(CreativeTabs.tabBlock);
-    }
-
-    public void addCreativeItems(java.util.ArrayList list)
-    {
-        for(int i = 0; i < 16; i++) {
-            list.add(new ItemStack(this,1,i));
-        }
     }
     
     @SideOnly(Side.CLIENT)
@@ -99,13 +91,13 @@ public class BlockTerraDirt extends BlockTerra2
         if(!world.isRemote)
         {
             int meta = world.getBlockMetadata(i, j, k);
-            if (!BlockCollapsable.isNearSupport(world, i, j, k) && canFallBelow(world, i, j - 1, k) && j >= 0)
+            if (!BlockCollapsable.isNearSupport(world, i, j, k) && BlockCollapsable.canFallBelow(world, i, j - 1, k) && j >= 0)
             {
                 byte byte0 = 32;
                 if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
                 {
                     world.setBlockWithNotify(i, j, k, 0);
-                    for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
+                    for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
                         world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta);
@@ -116,7 +108,7 @@ public class BlockTerraDirt extends BlockTerra2
                     EntityFallingDirt ent = new EntityFallingDirt(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
                     world.spawnEntityInWorld(ent);
                     Random R = new Random(i*j+k);
-                    world.playSoundAtEntity(ent, "fallingdirtshort", 1.0F, 0.8F + (R.nextFloat()/2));
+                    world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
                 }
             }
         }

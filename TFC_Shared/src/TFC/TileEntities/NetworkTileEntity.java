@@ -19,10 +19,16 @@ public abstract class NetworkTileEntity extends TileEntity {
 
 	public boolean shouldSendInitData = true;
 	/**
-	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across.
+	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across. Read by the client only.
 	 * @param inStream
 	 */
 	public abstract void handleDataPacket(DataInputStream inStream) throws IOException;
+	
+	/**
+	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across. Read by the server only.
+	 * @param inStream
+	 */
+	public abstract void handleDataPacketServer(DataInputStream inStream) throws IOException;
 
 	/**
 	 * To make it easy the x/y/z should already be added by the packet handler. Add whatever variables 

@@ -186,4 +186,11 @@ public class TileEntityCrop extends NetworkTileEntity
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -36,15 +36,15 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 		if(tickEnd)
 		{
 			EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
-			if (bind.keyCode == this.Key_Calendar.keyCode && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().currentScreen == null)
+			if (bind.keyDescription == Key_Calendar.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
 				player.openGui(TerraFirmaCraft.instance, 27, player.worldObj, 0, 0, 0);
 			}
-			else if (bind.keyCode == Key_Calendar.keyCode && FMLClientHandler.instance().getClient().currentScreen instanceof GuiCalendar)
+			else if (bind.keyDescription == Key_Calendar.keyDescription && FMLClientHandler.instance().getClient().currentScreen instanceof GuiCalendar)
 			{
 				player.closeScreen();
 			}
-			else if (bind.keyCode == Key_ToolMode.keyCode && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
+			else if (bind.keyDescription == Key_ToolMode.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
 					&& player.getCurrentEquippedItem().getItem() instanceof ItemChisel && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
 				ItemChisel.mode = ItemChisel.mode == 0 ? 1 : ItemChisel.mode == 1 ? 2 : 0;

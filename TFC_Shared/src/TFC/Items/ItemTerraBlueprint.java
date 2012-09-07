@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.Core.StructureBlueprint;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -16,6 +17,7 @@ public class ItemTerraBlueprint extends Item
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setItemName("Blueprint");
+		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
 	}
 
 	public void AddBlueprint(StructureBlueprint sb, int id)

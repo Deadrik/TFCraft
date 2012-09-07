@@ -133,8 +133,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(terraStoneSedBrick, TFC.Items.ItemSedCobble.class);
 		GameRegistry.registerBlock(terraStoneMMBrick, TFC.Items.ItemMMCobble.class);
 
-		GameRegistry.registerBlock(terraDirt);
-		GameRegistry.registerBlock(terraDirt2);
+		GameRegistry.registerBlock(terraDirt, TFC.Items.ItemDirt.class);
+		GameRegistry.registerBlock(terraDirt2, TFC.Items.ItemDirt.class);
 		GameRegistry.registerBlock(Sand, TFC.Items.ItemSand.class);
 		GameRegistry.registerBlock(Sand2, TFC.Items.ItemSand.class);
 		GameRegistry.registerBlock(terraClay);

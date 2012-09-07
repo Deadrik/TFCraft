@@ -193,4 +193,11 @@ public class TileEntityPartial extends NetworkTileEntity
         
         worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }
