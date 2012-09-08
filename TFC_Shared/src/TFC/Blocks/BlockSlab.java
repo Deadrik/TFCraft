@@ -89,7 +89,7 @@ public class BlockSlab extends BlockPartial
             if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
                 hasHammer = true;
         }
-        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer)
+        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
         {
             MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
             if(objectMouseOver == null) {

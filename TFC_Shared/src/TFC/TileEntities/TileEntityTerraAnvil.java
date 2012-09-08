@@ -18,6 +18,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Sounds;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerraMeltedMetal;
 import TFC.WorldGen.DataLayer;
@@ -766,7 +767,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 			break;
 		}
 		}		
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
 
 	@Override

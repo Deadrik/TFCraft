@@ -1556,8 +1556,6 @@ public class TFCItems
         SeedsSugarcane = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSugarcane",num++),19).setItemName("SeedsSugarcane").setIconCoord(9, 0);
         SeedsHemp = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsHemp",num++),20).setItemName("SeedsHemp").setIconCoord(9, 0);
         
-        
-        
         /**Armor Crafting related items*/
         num = 19000;
         BismuthSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item","BismuthSheet",num)).setItemName("BismuthSheet").setIconCoord(5,14)).setTexturePath("/bioxx/terraarmor1.png");num++;

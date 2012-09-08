@@ -39,6 +39,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import TFC.*;
 import TFC.Blocks.*;
 import TFC.Commands.GetBioTempCommand;
+import TFC.Commands.GetRocksCommand;
 import TFC.Commands.GetTreesCommand;
 import TFC.Containers.ContainerTFC;
 import TFC.Core.*;
@@ -76,6 +77,7 @@ public class TerraFirmaCraft implements ITickHandler
 	public TerraFirmaCraft()
 	{
 		TickRegistry.registerTickHandler(this, Side.SERVER);
+		TickRegistry.registerTickHandler(this, Side.CLIENT);
 	}
 
 	@PreInit
@@ -111,7 +113,7 @@ public class TerraFirmaCraft implements ITickHandler
 		proxy.registerKeyBindingHandler();
 		
 		//Register Tile Entites
-		proxy.registerTileEntities();
+		proxy.registerTileEntities(true);
 		
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
@@ -174,6 +176,7 @@ public class TerraFirmaCraft implements ITickHandler
     {
         evt.registerServerCommand(new GetBioTempCommand());
         evt.registerServerCommand(new GetTreesCommand());
+        evt.registerServerCommand(new GetRocksCommand());
     }
 
 	private static void RemoveRecipe(ItemStack resultItem) {
@@ -195,10 +198,7 @@ public class TerraFirmaCraft implements ITickHandler
 	private boolean doOnce = false;
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData)
-	{
-		if(ContainerTFC.slotClicked > 0)
-			ContainerTFC.slotClicked--;
-		
+	{		
 		if (type.contains(TickType.WORLD))
 		{
 			World world;
@@ -206,8 +206,10 @@ public class TerraFirmaCraft implements ITickHandler
 			assert ((tickData[0] instanceof World));
 			world = (World)tickData[0];
 
-
-			TFC_Time.UpdateSeasons(world);
+			//Allow the server to increment time
+			if(!world.isRemote)
+				TFC_Time.UpdateTime(world);
+			
 			for(Object p : world.playerEntities)
 			{
 				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
@@ -220,7 +222,17 @@ public class TerraFirmaCraft implements ITickHandler
 			if(world.provider.worldType == 0)
 			{
 				((TFCProvider)world.provider).createSpawnPosition();
+				TFC_Core.SetupWorld(world);
 			}
+		}
+		
+		if(type.contains(TickType.PLAYER))
+		{
+			World world = ((EntityPlayer)tickData[0]).worldObj;
+			
+			//Allow the client to increment time
+			if(world.isRemote)
+				TFC_Time.UpdateTime(world);
 		}
 	}
 

@@ -388,6 +388,11 @@ public class TFC_Climate
 	{
 		return manager.getTreeLayerAt(x, z, index).data1;
 	}
+	
+	public static int[] getRockLayer(int x, int y, int z, int index)
+	{
+		return new int[] {manager.getRockLayerAt(x, z, index).data1, manager.getRockLayerAt(x, z, index).data2};
+	}
 
 	public static int getMaxZPos()
 	{

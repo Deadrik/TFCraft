@@ -32,7 +32,7 @@ public class ItemDirt extends ItemBlock
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terraBlocks2.png";
+		return "/bioxx/terrablocks2.png";
 	}
 	
     @Override

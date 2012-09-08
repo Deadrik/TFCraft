@@ -20,21 +20,7 @@ public class TileEntityPartial extends NetworkTileEntity
     {
         
     }
-    
-    public Packet createUpdatePacket()
-	{
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
-		DataOutputStream outStream = new DataOutputStream(bos);	
-		try {
-			outStream.writeShort(TypeID);
-			outStream.writeByte(MetaID);
-			outStream.writeByte(material);
-			outStream.writeLong(extraData);	
-		} catch (IOException e) {
-		}
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
-	}
-    
+
     @Override
     public boolean canUpdate()
     {
@@ -167,9 +153,6 @@ public class TileEntityPartial extends NetworkTileEntity
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
-		TypeID = inStream.readShort();
-        MetaID = inStream.readByte();
-        material = inStream.readByte();
         extraData = inStream.readLong();
         worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
@@ -199,5 +182,20 @@ public class TileEntityPartial extends NetworkTileEntity
 			throws IOException {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Packet createUpdatePacket()
+	{
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+		DataOutputStream outStream = new DataOutputStream(bos);	
+		try {
+			outStream.writeByte(PacketHandler.Packet_Data_Client);
+			outStream.writeInt(xCoord);
+			outStream.writeInt(yCoord);
+			outStream.writeInt(zCoord);
+			outStream.writeLong(extraData);	
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 }

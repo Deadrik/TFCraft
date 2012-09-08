@@ -46,7 +46,7 @@ public class CommonProxy implements IGuiHandler
 		// NOOP on server
 	}
 
-	public void registerTileEntities()
+	public void registerTileEntities(boolean b)
 	{
 		ModLoader.registerTileEntity(TileEntityTerraLogPile.class, "TerraLogPile");
 		ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
@@ -62,6 +62,9 @@ public class CommonProxy implements IGuiHandler
 
 		ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 		ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
+		
+		if(b)
+			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
 
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
@@ -83,6 +86,7 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,TerraFirmaCraft.instance, 160, 5, true);
+		
 
 		EntityRegistry.registerModEntity(EntityCustomMinecart.class, "TFC minecart", 12,TerraFirmaCraft.instance, 160, 5, true);
 		//EntityRegistry.registerModEntity(EntityCustomMinecartCrate.class, "TFC minecartCrate", 13,TerraFirmaCraft.instance, 160, 5, true);

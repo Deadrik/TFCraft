@@ -204,7 +204,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		{
 			pickUp--;
 		}
-		if (hunger > 144000 && rand.nextInt (100) == 0 && health < getMaxHealth ())
+		if (hunger > 144000 && rand.nextInt (100) == 0 && health < getMaxHealth () && !isDead)
 		{
 			health++;
 		}

@@ -36,7 +36,7 @@ public class ItemTerraLogs extends ItemTerra
 		}
 	}
 
-	private boolean CreatePile(ItemStack itemstack, World world, int x, int y,
+	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
 			int z, int side, int l) {
 		TileEntityTerraLogPile te = null;
 		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
@@ -89,6 +89,13 @@ public class ItemTerraLogs extends ItemTerra
 		if(te != null)
 		{
 			te.storage[0] = new ItemStack(this,1,itemstack.getItemDamage());
+			if(entityplayer.capabilities.isCreativeMode)
+			{
+				te.storage[0] = new ItemStack(this,4,itemstack.getItemDamage());
+				te.storage[1] = new ItemStack(this,4,itemstack.getItemDamage());
+				te.storage[2] = new ItemStack(this,4,itemstack.getItemDamage());
+				te.storage[3] = new ItemStack(this,4,itemstack.getItemDamage());
+			}
 		}
 
 		return true;
@@ -121,7 +128,7 @@ public class ItemTerraLogs extends ItemTerra
 
 			if(world.getBlockId(x, y, z) != TFCBlocks.LogPile.blockID || entityplayer.isSneaking())
 			{
-				if(CreatePile(itemstack, world, x, y, z, side, dir))
+				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
 					itemstack.stackSize = itemstack.stackSize-1;
 				return true;
 			}
@@ -148,7 +155,7 @@ public class ItemTerraLogs extends ItemTerra
 						te.addContents(3, new ItemStack(this,1, itemstack.getItemDamage()));
 					} else
 					{
-						if(CreatePile(itemstack, world, x, y, z, side, dir));
+						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir));
 						itemstack.stackSize = itemstack.stackSize-1;
 						return true;
 					}

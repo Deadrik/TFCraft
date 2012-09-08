@@ -430,36 +430,10 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
                 charcoalCounter = 0;
                 float percent = 25+R.nextInt(25);
-                externalWoodCount = (int) (externalWoodCount * (percent/100));
-                ProcessPile(worldObj,xCoord,yCoord,zCoord,true);
-                while(externalWoodCount > 0)
-                {
-                    if(externalWoodCount > Item.coal.getItemStackLimit())
-                    {
-                        ItemStack is = new ItemStack(Item.coal,Item.coal.getItemStackLimit(),1);
-                        worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord,zCoord,is));
-                        //addByproduct(new ItemStack(Item.coal,Item.coal.getItemStackLimit(),1));
-                        externalWoodCount -= Item.coal.getItemStackLimit();
-                    }
-                    else
-                    {
-                        //addByproduct(new ItemStack(Item.coal,externalWoodCount,1));
-                        ItemStack is = new ItemStack(Item.coal,externalWoodCount,1);
-                        worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord+1,zCoord,is));
-                        externalWoodCount = 0;
-                    }
-                }
 
-                //Empty the fuel stack and set the fire out. It shouldn't be on after all this time.
-                fireItemStacks[0] = null;
-                fireItemStacks[3] = null;
-                fireItemStacks[4] = null;
-                fireItemStacks[5] = null;
-                fuelTimeLeft = 0;
-                fuelBurnTemp = ambientTemp;
-                fireTemperature = ambientTemp;
                 worldObj.setBlock(xCoord, yCoord, zCoord, 0);
                 worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+                ProcessPile(worldObj,xCoord,yCoord,zCoord,true);                
             }
         }
     }
@@ -507,40 +481,43 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             }
 
             TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(i, j, k);
+            int count = 0;
             if(te != null)
             {
                 if(te.storage[0] != null) 
                 {
                     if(!empty)
-                        externalWoodCount += te.storage[0].stackSize;
+                        externalWoodCount += te.storage[0].stackSize; 
                     else
-                        te.storage[0] = null;
+                    	{count += te.storage[0].stackSize; te.storage[0] = null;}
                 }
                 if(te.storage[1] != null) 
                 {
                     if(!empty)
                         externalWoodCount += te.storage[1].stackSize;
                     else
-                        te.storage[1] = null;
+                    	{count += te.storage[1].stackSize; te.storage[1] = null;}
                 }
                 if(te.storage[2] != null) 
                 {
                     if(!empty)
                         externalWoodCount += te.storage[2].stackSize;
                     else
-                        te.storage[2] = null;
+                    	{count += te.storage[2].stackSize; te.storage[2] = null;}
                 }
                 if(te.storage[3] != null) 
                 {
                     if(!empty)
                         externalWoodCount += te.storage[3].stackSize;
                     else
-                        te.storage[3] = null;
+                    	{count += te.storage[3].stackSize; te.storage[3] = null;}
                 }
             }
             if(empty)
             {
-                world.setBlock(i, j, k, 0);
+            	float percent = 25 + world.rand.nextInt(25);
+                count = (int) (count * (percent/100));
+                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.Charcoal.blockID, count);
                 world.markBlockNeedsUpdate(i, j, k);
             }
             return true;

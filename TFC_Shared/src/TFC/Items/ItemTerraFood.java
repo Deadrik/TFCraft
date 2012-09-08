@@ -64,4 +64,9 @@ public class ItemTerraFood extends ItemFood
             }
         }
 	}
+	
+	public boolean getShareTag()
+    {
+        return true;
+    }
 }

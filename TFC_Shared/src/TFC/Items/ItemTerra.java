@@ -41,6 +41,11 @@ public class ItemTerra extends Item
         texture = t;
         return this;
     }
+    
+    public boolean getShareTag()
+    {
+        return true;
+    }
 
     @Override
     public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 

@@ -168,8 +168,6 @@ public class ItemChisel extends ItemTool
             {
                 System.out.println("Extra ="+te.extraData);  
             }
-            
-            
         }
         
         te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);

@@ -106,6 +106,7 @@ public class TFCBlocks
 	public static Block Sand2;
 	public static Block DryGrass;
 	public static Block DryGrass2;
+	public static Block Charcoal;
 	
 	
 	static Configuration config;
@@ -149,7 +150,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DryGrass2);
 		GameRegistry.registerBlock(LooseRock);
 		GameRegistry.registerBlock(LogPile);
-
+		GameRegistry.registerBlock(Charcoal);
+		
 		GameRegistry.registerBlock(tilledSoil);
 		GameRegistry.registerBlock(tilledSoil2);
 
@@ -249,6 +251,8 @@ public class TFCBlocks
 		TFCBlocks.Sand = new TFC.Blocks.BlockSand(TFC_Settings.getIntFor(config,"block","Sand", 216), 208).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		TFCBlocks.Sand2 = new BlockSand2(TFC_Settings.getIntFor(config,"block","Sand2", 217), 224).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		
+		
+		
 		Block.blocksList[5] = null;
 		Block.blocksList[6] = null;
 		Block.blocksList[8] = null;
@@ -316,6 +320,8 @@ public class TFCBlocks
 		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(5).setResistance(15F);
 		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setBlockName("stoneSlabs").setRequiresSelfNotify().setHardness(5).setResistance(15F);
 		TFCBlocks.stoneStalac = new BlockStalactite(TFC_Settings.getIntFor(config,"block","stoneStalac", 2002)).setBlockName("stoneStalac").setRequiresSelfNotify().setHardness(5);
+		
+		Charcoal = new BlockCharcoal(TFC_Settings.getIntFor(config,"block","Charcoal", 2016)).setHardness(3F).setResistance(10F).setBlockName("Charcoal");
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.terraStoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.terraStoneIgEx, "pickaxe", 0);
@@ -340,6 +346,7 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.terraPeatGrass, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand2, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(Charcoal, "shovel", 0);
 
 		if (config != null) {
 			config.save();

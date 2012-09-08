@@ -31,7 +31,7 @@ public class TFC_Time
     public static long dayLength = TFC_Settings.dayLength;
     
     
-    public static void UpdateSeasons(World world)
+    public static void UpdateTime(World world)
     {
         time = world.getWorldInfo().getWorldTime();
         int m = getMonth();

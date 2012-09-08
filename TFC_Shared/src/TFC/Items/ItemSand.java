@@ -32,7 +32,7 @@ public class ItemSand extends ItemBlock
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terraBlocks2.png";
+		return "/bioxx/terrablocks2.png";
 	}
 	
     @Override
@@ -86,6 +86,11 @@ public class ItemSand extends ItemBlock
                     arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule3")));
             }
         }
+    }
+    
+    public boolean getShareTag()
+    {
+        return true;
     }
 
     public static String getRuleFromId(int id)

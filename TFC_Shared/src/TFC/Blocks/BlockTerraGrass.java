@@ -121,7 +121,7 @@ public class BlockTerraGrass extends BlockGrass
      * Ticks the block if it's been scheduled
      */
     @Override
-    public void updateTick(World world, int par2, int par3, int par4, Random par5Random)
+    public void updateTick(World world, int par2, int par3, int par4, Random rand)
     {
         if (!world.isRemote)
         {
@@ -133,26 +133,31 @@ public class BlockTerraGrass extends BlockGrass
             {            	
                 for (int var6 = 0; var6 < 4; ++var6)
                 {
-                    int x = par2 + par5Random.nextInt(3) - 1;
-                    int y = par3 + par5Random.nextInt(5) - 3;
-                    int z = par4 + par5Random.nextInt(3) - 1;
+                    int x = par2 + rand.nextInt(3) - 1;
+                    int y = par3 + rand.nextInt(5) - 3;
+                    int z = par4 + rand.nextInt(3) - 1;
 
                     float rain = 1000/*TFC_Climate.getRainfall(x, y + 1, z)*/;
                     
                     int id = world.getBlockId(x, y, z);
                     int meta = world.getBlockMetadata(x, y, z);
 
-                    if (TFC_Core.isDirt(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && Block.lightOpacity[id] <= 2 && world.getBlockMaterial(x, y + 1, z) != Material.water)
+                    if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 &&
+                    		world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
                         world.setBlockAndMetadataWithNotify(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta);
                     }
-                    if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && Block.lightOpacity[id] <= 2 && world.getBlockMaterial(x, y + 1, z) != Material.water)
+                    else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
                         world.setBlockAndMetadataWithNotify(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta);
                     }
-                    if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && Block.lightOpacity[id] <= 2 && world.getBlockMaterial(x, y + 1, z) != Material.water)
+                    else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
                         world.setBlockWithNotify(x, y, z, TFCBlocks.terraPeatGrass.blockID);
+                    }
+                    else if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt((int) ((8400-rain)/4)) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
+                    {
+                    	world.setBlockAndMetadataWithNotify(x, y+1, z, Block.tallGrass.blockID, 1);
                     }
                 }
             }

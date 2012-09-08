@@ -5,7 +5,7 @@ import net.minecraft.src.ItemStack;
 
 public class ItemTerraPlanks extends ItemBlock
 {
-	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+	public static String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 
 

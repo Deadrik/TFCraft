@@ -109,9 +109,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
-	public void registerTileEntities()
+	public void registerTileEntities(boolean b)
 	{
-		super.registerTileEntities();
+		super.registerTileEntities(false);
 		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 	}
 
