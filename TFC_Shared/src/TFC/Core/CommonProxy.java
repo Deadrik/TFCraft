@@ -62,6 +62,7 @@ public class CommonProxy implements IGuiHandler
 
 		ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 		ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
+		ModLoader.registerTileEntity(TileEntityDetailed.class, "Detailed");
 		
 		if(b)
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
@@ -231,6 +232,9 @@ public class CommonProxy implements IGuiHandler
 	}
 
 	public void registerKeyBindingHandler(){ 
+	}
+	
+	public void registerHighlightHandler(){ 
 	}
 
 	public void registerSoundHandler() {

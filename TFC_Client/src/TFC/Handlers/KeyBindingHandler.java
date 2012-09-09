@@ -47,8 +47,8 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 			else if (bind.keyDescription == Key_ToolMode.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
 					&& player.getCurrentEquippedItem().getItem() instanceof ItemChisel && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
-				ItemChisel.mode = ItemChisel.mode == 0 ? 1 : ItemChisel.mode == 1 ? 2 : 0;
-				String type = ItemChisel.mode == 0 ? "Smoothing" : ItemChisel.mode == 1 ? "Creating Stairs" : "Creating Slabs";
+				ItemChisel.mode = ItemChisel.mode == 0 ? 1 : ItemChisel.mode == 1 ? 2 /*: ItemChisel.mode == 2 ? 3*/ : 0;
+				String type = ItemChisel.mode == 0 ? "Smoothing" : ItemChisel.mode == 1 ? "Creating Stairs" /*: ItemChisel.mode == 3 ? "Detailing"*/ : "Creating Slabs";
 				player.addChatMessage(type);
 
 				if(player.worldObj.isRemote)

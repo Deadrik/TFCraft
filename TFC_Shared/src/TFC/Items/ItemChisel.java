@@ -1,14 +1,19 @@
 package TFC.Items;
 
+import java.util.BitSet;
+
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 import net.minecraft.src.*;
 
 public class ItemChisel extends ItemTool
 {
     public static int mode = 0;
+    public static int depth = 1;
     public ItemChisel(int i, EnumToolMaterial e)
     {
         super(i, 0, e, new Block[] {});
@@ -179,5 +184,100 @@ public class ItemChisel extends ItemTool
     public static void CreateSlab(World world, int x, int y, int z, int id, byte meta, int side)
     {
         CreateSlab(world,x,y,z,id,meta,side, TFCBlocks.stoneSlabs.blockID);
+    }
+    
+    public static void CreateDetailed(World world, int x, int y, int z, int id, byte meta, int side, float hitX, float hitY, float hitZ)
+    {
+    	TileEntityDetailed te;
+    	
+    	if(id == TFCBlocks.stoneSlabs.blockID)
+        {
+    		TileEntityPartial tep = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
+    		int extraX = (int) ((tep.extraData) & 0xf);
+    		int extraY = (int) ((tep.extraData >> 4) & 0xf);
+            int extraZ = (int) ((tep.extraData >> 8) & 0xf);
+            int extraX2 = 10 - (int) ((tep.extraData >> 12) & 0xf);
+            int extraY2 = 10 - (int) ((tep.extraData >> 16) & 0xf);
+            int extraZ2 = 10 - (int) ((tep.extraData >> 20) & 0xf);
+            world.setBlock(x, y, z, TFCBlocks.StoneDetailed.blockID);
+            te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
+            te.TypeID = tep.TypeID;
+            te.MetaID = tep.MetaID;
+            te.setMaterial(tep.getMaterial());
+            
+            for(int subX = 0; subX < 10; subX++)
+            {
+            	for(int subZ = 0; subZ < 10; subZ++)
+                {
+            		for(int subY = 0; subY < 10; subY++)
+                    {
+            			if(subX >= extraX && subX < extraX2 && subY >= extraY && subY < extraY2 && subZ >= extraZ && subZ < extraZ2)
+            				te.data.set((subX * 10 + subZ)*10 + subY);
+                    }
+                }
+            }
+            return;
+        }
+    	else if(TFC_Core.isRawStone(id) || TFC_Core.isSmoothStone(id))
+        {
+            world.setBlockWithNotify(x, y, z, TFCBlocks.StoneDetailed.blockID);
+
+            te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
+            te.TypeID = (short) id;
+            te.MetaID = (byte) meta;
+            te.setMaterial(world.getBlockMaterial(x, y, z));
+            
+            for(int subX = 0; subX < 10; subX++)
+            {
+            	for(int subZ = 0; subZ < 10; subZ++)
+                {
+            		for(int subY = 0; subY < 10; subY++)
+                    {
+            			te.data.set((subX * 10 + subZ)*10 + subY);
+                    }
+                }
+            }
+        }
+    	else if(id == TFCBlocks.StoneDetailed.blockID)
+    	{
+    		te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
+    		    		
+    		int subX = (int) ((hitX)*10);
+    		int subY = (int) ((hitY)*10);
+    		int subZ = (int) ((hitZ)*10);
+    		if(subX > 9)
+    			subX = 9;
+    		if(subY > 9)
+    			subY = 9;
+    		if(subZ > 9)
+    			subZ = 9;
+    		
+    		if(side == 2)
+    			subX -= depth;
+    		else if(side == 3)
+    			subX += depth;
+    		
+    		if(side == 1)
+    			subY -= depth;
+    		else if(side == 0)
+    			subY += depth;
+    		
+    		if(side == 4)
+    			subZ -= depth;
+    		else if(side == 5)
+    			subZ += depth;
+    		
+    		int index = (subX * 10 + subZ)*10 + subY;
+    		if(te.data.get(index))
+    		{
+    			te.data.clear(index);
+    			te.broadcastPacketInRange(te.createUpdatePacket());
+    		}
+    	}
+        else
+        {
+            te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
+            world.notifyBlockChange(x, y, z, TFCBlocks.StoneDetailed.blockID);
+        }
     }
 }

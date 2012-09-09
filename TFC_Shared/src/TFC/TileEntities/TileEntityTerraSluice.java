@@ -31,7 +31,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
         sluiceItemStacks = new ItemStack[9];
         soilAmount = 0;
         processTimeRemaining = 0;
-        soilType = 0;
+        soilType = 1;
     }
 
     public void addToInventory(ItemStack is)
@@ -254,7 +254,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
             for (Iterator iterator = list.iterator(); iterator.hasNext();)
             {
                 EntityItem entity = (EntityItem)iterator.next();
-                if(entity.item.itemID == Block.gravel.blockID || entity.item.itemID == Block.sand.blockID)
+                if(entity.item.itemID == Block.gravel.blockID || entity.item.itemID == TFCBlocks.Sand.blockID || entity.item.itemID == TFCBlocks.Sand2.blockID)
                 {
                     if(soilAmount < 50 && entity.item.stackSize == 1)
                     {

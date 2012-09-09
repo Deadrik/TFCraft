@@ -25,7 +25,7 @@ public class ItemFruitTreeSapling extends ItemTerra
         int meta = MathHelper.floor_double((double)(player.rotationYaw * 4F / 360F) + 0.5D) & 3;
         if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
                 (world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.ground) &&
-                world.getBlockId(x, y+1, z) == 0)
+                world.getBlockId(x, y+1, z) == 0 && !world.isRemote)
         {
             
             world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset);

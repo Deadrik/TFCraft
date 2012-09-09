@@ -32,7 +32,7 @@ public enum EnumTree
 	
 	WILLOW("WILLOW", /*minRain*/1000f, /*maxRain*/16000f, /*minTemp*/6, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
 	
-	KAPOK("KAPOK", /*minRain*/4000f, /*maxRain*/16000f, /*minTemp*/15, /*maxTemp*/30, /*minEVT*/0f, /*maxEVT*/0.45f, false);
+	KAPOK("KAPOK", /*minRain*/4000f, /*maxRain*/16000f, /*minTemp*/15, /*maxTemp*/30, /*minEVT*/0f, /*maxEVT*/0.5f, false);
 
 	public final float minRain;
 	public final float maxRain;

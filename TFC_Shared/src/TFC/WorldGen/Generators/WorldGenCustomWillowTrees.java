@@ -185,35 +185,35 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			}
 		}
 
-		for (int i2 = yCoord + height ; i2 <= yCoord + height + 5 ; i2++)
-		{
-			for (int k4 = xCoord - 6 ; k4 <= xCoord + 6 ; k4++)
-			{
-				for (int i5 = zCoord - 6 ; i5 <= zCoord + 6 ; i5++)
-				{
-					if (world.getBlockId (k4, i2, i5) != Block.leaves.blockID)
-					{
-						continue;
-					}
-					if (random.nextInt (4) == 0 && world.getBlockId (k4 - 1, i2, i5) == 0)
-					{
-						func_35265_a (world, k4 - 1, i2, i5, 8);
-					}
-					if (random.nextInt (4) == 0 && world.getBlockId (k4 + 1, i2, i5) == 0)
-					{
-						func_35265_a (world, k4 + 1, i2, i5, 2);
-					}
-					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 - 1) == 0)
-					{
-						func_35265_a (world, k4, i2, i5 - 1, 1);
-					}
-					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 + 1) == 0)
-					{
-						func_35265_a (world, k4, i2, i5 + 1, 4);
-					}
-				}
-			}
-		}
+//		for (int i2 = yCoord + height ; i2 <= yCoord + height + 5 ; i2++)
+//		{
+//			for (int k4 = xCoord - 6 ; k4 <= xCoord + 6 ; k4++)
+//			{
+//				for (int i5 = zCoord - 6 ; i5 <= zCoord + 6 ; i5++)
+//				{
+//					if (world.getBlockId (k4, i2, i5) != Block.leaves.blockID)
+//					{
+//						continue;
+//					}
+//					if (random.nextInt (4) == 0 && world.getBlockId (k4 - 1, i2, i5) == 0)
+//					{
+//						func_35265_a (world, k4 - 1, i2, i5, 8);
+//					}
+//					if (random.nextInt (4) == 0 && world.getBlockId (k4 + 1, i2, i5) == 0)
+//					{
+//						func_35265_a (world, k4 + 1, i2, i5, 2);
+//					}
+//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 - 1) == 0)
+//					{
+//						func_35265_a (world, k4, i2, i5 - 1, 1);
+//					}
+//					if (random.nextInt (4) == 0 && world.getBlockId (k4, i2, i5 + 1) == 0)
+//					{
+//						func_35265_a (world, k4, i2, i5 + 1, 4);
+//					}
+//				}
+//			}
+//		}
 
 		return true;
 	}

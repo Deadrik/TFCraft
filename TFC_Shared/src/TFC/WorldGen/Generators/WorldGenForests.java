@@ -39,16 +39,12 @@ public class WorldGenForests implements IWorldGenerator
 		
 		int numTreesBase = 6;
 		
-
 		if (random.nextInt(10) == 0)
 		{
 			numTreesBase -= 4;
 		}
 		
 		int numTrees = 1;
-		
-		
-		
 		
 		for (int var2 = 0; var2 < numTrees; ++var2)
 		{
@@ -177,7 +173,7 @@ public class WorldGenForests implements IWorldGenerator
 							gen1.generate(world, random, xCoord, yCoord, zCoord);
 						}
 					}
-					else if(randomNumber < 90 && gen2 != null)
+					else if(randomNumber < 100 && gen2 != null)
 					{
 						if(canSpawn2)
 						{

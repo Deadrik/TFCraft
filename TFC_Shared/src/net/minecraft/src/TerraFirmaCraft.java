@@ -112,6 +112,9 @@ public class TerraFirmaCraft implements ITickHandler
 		//Register KeyBinding Handler (Client only)
 		proxy.registerKeyBindingHandler();
 		
+		//Register Block Highlight Handler (Client only)
+		proxy.registerHighlightHandler();
+		
 		//Register Tile Entites
 		proxy.registerTileEntities(true);
 		
@@ -199,23 +202,6 @@ public class TerraFirmaCraft implements ITickHandler
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData)
 	{		
-		if (type.contains(TickType.WORLD))
-		{
-			World world;
-
-			assert ((tickData[0] instanceof World));
-			world = (World)tickData[0];
-
-			//Allow the server to increment time
-			if(!world.isRemote)
-				TFC_Time.UpdateTime(world);
-			
-			for(Object p : world.playerEntities)
-			{
-				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
-			}
-		}
-		
 		if(type.contains(TickType.WORLDLOAD))
 		{
 			World world = (World)tickData[0];
@@ -239,8 +225,22 @@ public class TerraFirmaCraft implements ITickHandler
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData)
 	{
+		if (type.contains(TickType.WORLD))
+		{
+			World world;
 
+			assert ((tickData[0] instanceof World));
+			world = (World)tickData[0];
 
+			//Allow the server to increment time
+			if(!world.isRemote)
+				TFC_Time.UpdateTime(world);
+			
+			for(Object p : world.playerEntities)
+			{
+				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
+			}
+		}
 	}
 
 	@Override

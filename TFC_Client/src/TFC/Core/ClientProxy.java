@@ -107,6 +107,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cropRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.cookingPitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
@@ -400,6 +401,11 @@ public class ClientProxy extends CommonProxy
 	public void registerKeyBindingHandler()
 	{
 		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
+	}
+	
+	public void registerHighlightHandler()
+	{
+		MinecraftForge.EVENT_BUS.register(new ChiselHighlightHandler());
 	}
 
 	@Override

@@ -127,6 +127,10 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
             float var8 = (float)(var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderNewLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderer, ModLoader.getMinecraftInstance().isFancyGraphicsEnabled(), true);
         }
+        else if (modelId == TFCBlocks.detailedRenderId)
+        {
+            return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);
+        }
 		return false;
 	}
 

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
@@ -41,7 +42,7 @@ public class WorldGenClayPit implements IWorldGenerator
 					int var10 = xCoord - i;
 					int var11 = zCoord - k;
 
-					if (var10 * var10 + var11 * var11 <= var6 * var6)
+					if (var10 * var10 + var11 * var11 <= var6 * var6 && TFC_Climate.getRainfall(xCoord, 145, zCoord) >= 1000)
 					{
 						for (int yCoord = j - var7; yCoord <= j + var7; ++yCoord)
 						{

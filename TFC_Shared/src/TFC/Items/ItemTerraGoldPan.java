@@ -7,6 +7,7 @@ import java.util.Random;
 import TFC.Blocks.BlockTerraOre;
 import TFC.Core.Helper;
 import TFC.Core.TFCItems;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityTerraSluice;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
@@ -99,7 +100,7 @@ public class ItemTerraGoldPan extends Item
                     }
                 }
                 Random R = new Random();
-                if(world.getBlockId(x, y-1, z) == Block.sand.blockID && isBiomeRiver)
+                if(TFC_Core.isSand(world.getBlockId(x, y-1, z)) && isBiomeRiver)
                 {
                     if(R.nextInt(10) == 0) {
                         world.setBlockWithNotify(x, y-1, z, 0);
@@ -117,7 +118,7 @@ public class ItemTerraGoldPan extends Item
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
                     return true;
                 }
-                else if(world.getBlockId(x, y-2, z) == Block.sand.blockID && isBiomeRiver)
+                else if(TFC_Core.isSand(world.getBlockId(x, y-2, z)) && isBiomeRiver)
                 {
                     if(R.nextInt(10) == 0) {
                         world.setBlockWithNotify(x, y-2, z, 0);

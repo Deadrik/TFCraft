@@ -358,7 +358,7 @@ public class TFC_Core
 
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.terraScribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1),
 			Character.valueOf('P'), Item.paper,Character.valueOf('L'), Item.feather});
-		ModLoader.addRecipe(new ItemStack(TFCItems.terraClayMold, 4), new Object[] { "# #","###", Character.valueOf('#'), Item.clay});
+		ModLoader.addRecipe(new ItemStack(TFCItems.terraClayMold, 4), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,-1)});
 
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneIgEx});
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.terraMetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.terraStoneIgIn});
@@ -494,6 +494,19 @@ public class TFC_Core
 		int id = world.getBlockId(x, y, z);
 		return id == TFCBlocks.terraStoneIgEx.blockID || id == TFCBlocks.terraStoneIgIn.blockID || 
 				id == TFCBlocks.terraStoneSed.blockID || id == TFCBlocks.terraStoneMM.blockID;
+	}
+	
+	public static boolean isSmoothStone(World world,int x, int y, int z)
+	{
+		int id = world.getBlockId(x, y, z);
+		return id == TFCBlocks.terraStoneIgExSmooth.blockID || id == TFCBlocks.terraStoneIgInSmooth.blockID || 
+				id == TFCBlocks.terraStoneSedSmooth.blockID || id == TFCBlocks.terraStoneMMSmooth.blockID;
+	}
+	
+	public static boolean isSmoothStone(int id)
+	{
+		return id == TFCBlocks.terraStoneIgExSmooth.blockID || id == TFCBlocks.terraStoneIgInSmooth.blockID || 
+				id == TFCBlocks.terraStoneSedSmooth.blockID || id == TFCBlocks.terraStoneMMSmooth.blockID;
 	}
 
 	public static boolean isRawStone(int id)

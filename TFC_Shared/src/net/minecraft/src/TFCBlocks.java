@@ -43,6 +43,8 @@ public class TFCBlocks
 	public static int cropRenderId;
 	public static int cookingPitRenderId;
 	public static int leavesRenderId;
+	public static int detailedRenderId;
+	
 	public static Block terraStoneIgIn;
 	public static Block terraStoneIgEx;
 	public static Block terraStoneSed;
@@ -107,6 +109,7 @@ public class TFCBlocks
 	public static Block DryGrass;
 	public static Block DryGrass2;
 	public static Block Charcoal;
+	public static Block StoneDetailed;
 	
 	
 	static Configuration config;
@@ -151,6 +154,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(LooseRock);
 		GameRegistry.registerBlock(LogPile);
 		GameRegistry.registerBlock(Charcoal);
+		GameRegistry.registerBlock(StoneDetailed);
 		
 		GameRegistry.registerBlock(tilledSoil);
 		GameRegistry.registerBlock(tilledSoil2);
@@ -317,11 +321,13 @@ public class TFCBlocks
 		TFCBlocks.terraForgeOn = new BlockTerraForge(TFC_Settings.getIntFor(config,"block","terraForgeOn", 2004), 91).setBlockName("terraForgeOn").setHardness(20).setLightValue(1.0F);
 		TFCBlocks.terraSluice = new BlockTerraSluice(TFC_Settings.getIntFor(config,"block","TerraSluice", 2003)).setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
-		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(5).setResistance(15F);
-		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setBlockName("stoneSlabs").setRequiresSelfNotify().setHardness(5).setResistance(15F);
+		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
+		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setBlockName("stoneSlabs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
 		TFCBlocks.stoneStalac = new BlockStalactite(TFC_Settings.getIntFor(config,"block","stoneStalac", 2002)).setBlockName("stoneStalac").setRequiresSelfNotify().setHardness(5);
 		
 		Charcoal = new BlockCharcoal(TFC_Settings.getIntFor(config,"block","Charcoal", 2016)).setHardness(3F).setResistance(10F).setBlockName("Charcoal");
+		
+		StoneDetailed = new BlockDetailed(TFC_Settings.getIntFor(config,"block","StoneDetailed", 2017)).setBlockName("StoneDetailed").setHardness(10).setResistance(15F);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.terraStoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.terraStoneIgEx, "pickaxe", 0);
