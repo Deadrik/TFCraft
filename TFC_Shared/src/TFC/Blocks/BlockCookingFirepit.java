@@ -3,7 +3,7 @@ package TFC.Blocks;
 import java.util.Random;
 
 import TFC.Core.TFCItems;
-import TFC.Items.ItemTerraLogs;
+import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
@@ -77,7 +77,7 @@ public class BlockCookingFirepit extends BlockContainer
 	
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
-        if(entity instanceof EntityItem && ((EntityItem)entity).item.getItem() instanceof ItemTerraLogs)
+        if(entity instanceof EntityItem && ((EntityItem)entity).item.getItem() instanceof ItemLogs)
         {
             if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)!=null)
             {

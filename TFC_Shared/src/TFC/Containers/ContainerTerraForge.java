@@ -1,8 +1,8 @@
 package TFC.Containers;
 
 import TFC.Core.HeatManager;
-import TFC.Items.ItemTerraOre;
-import TFC.Items.ItemTerraOreSmall;
+import TFC.Items.ItemOre;
+import TFC.Items.ItemOreSmall;
 import TFC.TileEntities.TileEntityTerraForge;
 import net.minecraft.src.*;
 
@@ -257,7 +257,7 @@ public class ContainerTerraForge extends Container
 						}
 					}
 				}
-				else if(!(itemstack1.getItem() instanceof ItemTerraOre) && manager.findMatchingIndex(itemstack1) != null)
+				else if(!(itemstack1.getItem() instanceof ItemOre) && manager.findMatchingIndex(itemstack1) != null)
 				{
 					int j = 0;
 					while(j < 5)

@@ -3,7 +3,7 @@ package TFC.Blocks;
 import java.util.Random;
 
 import TFC.Core.TFCItems;
-import TFC.Items.ItemTerraFirestarter;
+import TFC.Items.ItemFirestarter;
 import TFC.TileEntities.TileEntityTerraForge;
 
 import net.minecraft.src.AxisAlignedBB;
@@ -54,7 +54,7 @@ public class BlockTerraForge extends BlockContainer
 		{
 			return true;
 		} 
-		else if(equippedItem != null && equippedItem.getItem() instanceof ItemTerraFirestarter)
+		else if(equippedItem != null && equippedItem.getItem() instanceof ItemFirestarter)
 		{
 			if((TileEntityTerraForge)world.getBlockTileEntity(i, j, k) != null)
 			{

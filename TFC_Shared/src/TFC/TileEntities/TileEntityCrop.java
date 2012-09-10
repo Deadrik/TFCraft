@@ -11,7 +11,7 @@ import TFC.Core.CropManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraOre;
+import TFC.Items.ItemOre;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.*;
 

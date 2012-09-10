@@ -7,11 +7,11 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 
-public class ItemTerraBlueprint extends Item
+public class ItemBlueprint extends Item
 {
 	public static StructureBlueprint[] blueprints = new StructureBlueprint[64];
 
-	public ItemTerraBlueprint(int i)
+	public ItemBlueprint(int i)
 	{
 		super(i);
 		setMaxDamage(0);

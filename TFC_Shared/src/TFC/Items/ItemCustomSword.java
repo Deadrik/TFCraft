@@ -2,12 +2,12 @@ package TFC.Items;
 
 import net.minecraft.src.*;
 
-public class ItemTerraSword extends ItemSword
+public class ItemCustomSword extends ItemSword
 {
 	private int weaponDamage;
 	private final EnumToolMaterial toolMaterial;
 
-	public ItemTerraSword(int par1, EnumToolMaterial par2EnumToolMaterial)
+	public ItemCustomSword(int par1, EnumToolMaterial par2EnumToolMaterial)
 	{
 		super(par1, par2EnumToolMaterial);
 		this.toolMaterial = par2EnumToolMaterial;

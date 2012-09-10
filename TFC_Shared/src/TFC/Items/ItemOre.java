@@ -6,7 +6,7 @@ import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
-public class ItemTerraOre extends ItemTerra
+public class ItemOre extends ItemTerra
 {
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
@@ -15,7 +15,7 @@ public class ItemTerraOre extends ItemTerra
 		/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
 
 
-	public ItemTerraOre(int i) 
+	public ItemOre(int i) 
 	{
 		super(i);
 		setMaxDamage(0);

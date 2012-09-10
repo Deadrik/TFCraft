@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ItemStack;
 
-public class ItemTerraOreSmall extends ItemTerraOre
+public class ItemOreSmall extends ItemOre
 {
     public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
         "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
@@ -13,7 +13,7 @@ public class ItemTerraOreSmall extends ItemTerraOre
         /*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
         /*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
 
-    public ItemTerraOreSmall(int i)
+    public ItemOreSmall(int i)
     {
         super(i);
     }

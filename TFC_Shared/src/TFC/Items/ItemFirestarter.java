@@ -8,10 +8,10 @@ import TFC.Core.Helper;
 
 import net.minecraft.src.*;
 
-public class ItemTerraFirestarter extends Item
+public class ItemFirestarter extends Item
 {
 
-    public ItemTerraFirestarter(int i)
+    public ItemFirestarter(int i)
     {
         super(i);
         this.setMaxDamage(8);

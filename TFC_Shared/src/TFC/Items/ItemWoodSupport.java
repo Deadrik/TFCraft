@@ -8,14 +8,14 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemTerraWoodSupport extends Item
+public class ItemWoodSupport extends Item
 {
 	Boolean isVertical;
 
 	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 
-	public ItemTerraWoodSupport(int i, Boolean vert) 
+	public ItemWoodSupport(int i, Boolean vert) 
 	{
 		super(i);
 		maxStackSize = 8;

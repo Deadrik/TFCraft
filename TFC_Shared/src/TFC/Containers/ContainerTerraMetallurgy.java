@@ -4,7 +4,7 @@ import TFC.Core.CraftingManagerTFC;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Items.ItemTerraMeltedMetal;
+import TFC.Items.ItemMeltedMetal;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
 import net.minecraft.src.*;
 
@@ -259,7 +259,7 @@ public class ContainerTerraMetallurgy extends Container
 				}
 				slot.putStack(null);
 			}
-			else if(itemstack1.getItem() instanceof ItemTerraMeltedMetal)
+			else if(itemstack1.getItem() instanceof ItemMeltedMetal)
 			{
 				int j = 0;
 				while(j < 25)

@@ -12,7 +12,6 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.Blocks.*;
 import TFC.Core.TFC_Settings;
-import TFC.Items.ItemTerraDirt;
 import TFC.TileEntities.*;
 
 public class TFCBlocks 
@@ -167,7 +166,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Block.wood, TFC.Items.ItemCustomWood.class);
 		GameRegistry.registerBlock(Block.leaves, TFC.Items.ItemCustomLeaves.class);
 		GameRegistry.registerBlock(Block.sapling, TFC.Items.ItemSapling.class);
-		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemTerraPlanks.class);
+		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemPlankBlock.class);
 
 		GameRegistry.registerBlock(terraFirepit);
 		GameRegistry.registerBlock(terraBellows);

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.BitSet;
 
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraOre;
+import TFC.Items.ItemOre;
 import net.minecraft.src.*;
 
 public class TileEntityDetailed extends NetworkTileEntity

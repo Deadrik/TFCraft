@@ -7,10 +7,10 @@ import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
-public class ItemTerraMiscToolHead extends ItemTerra
+public class ItemMiscToolHead extends ItemTerra
 {
 
-	public ItemTerraMiscToolHead(int i) 
+	public ItemMiscToolHead(int i) 
 	{
 		super(i);
 		this.setMaxDamage(100);

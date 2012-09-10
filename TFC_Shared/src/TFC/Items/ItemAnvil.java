@@ -14,12 +14,12 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemTerraAnvil extends Item
+public class ItemAnvil extends Item
 {
 	public int anvilId;
 	public AnvilReq req;
 
-	public ItemTerraAnvil(int i, int id, AnvilReq Areq) 
+	public ItemAnvil(int i, int id, AnvilReq Areq) 
 	{
 		super(i);
 		maxStackSize = 1;

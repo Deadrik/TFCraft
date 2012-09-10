@@ -12,7 +12,7 @@ import TFC.Core.HeatManager;
 import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraMeltedMetal;
+import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -268,7 +268,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 int dam = fireItemStacks[i].getItemDamage();
                 ItemStack is = fireItemStacks[i].copy();
                 //Morph the input
-                if(!(fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal))
+                if(!(fireItemStacks[i].getItem() instanceof ItemMeltedMetal))
                     fireItemStacks[i] = index.getMorph();
 
                 if(fireItemStacks[i] != null)
@@ -287,7 +287,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                     ItemStack output = index.getOutput(R);
                     int count = 1;
                     Boolean useCount = false;
-                    if(output.getItem() instanceof ItemTerraMeltedMetal)
+                    if(output.getItem() instanceof ItemMeltedMetal)
                     {
                         if(output.stackSize >= 1)
                         {
@@ -348,13 +348,13 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                         nbt.setFloat("temperature", inputItemTemps[i]);
                         fireItemStacks[i].stackTagCompound = nbt;
                     }
-                    if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal && is.getItem() instanceof ItemTerraMeltedMetal)
+                    if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemMeltedMetal && is.getItem() instanceof ItemMeltedMetal)
                     {
                         fireItemStacks[i].setItemDamage(dam);
                     }
                     if(inputItemTemps[i] >= index.boilTemp)
                     {
-                        if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemTerraMeltedMetal)
+                        if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemMeltedMetal)
                         {
                             fireItemStacks[i] = new ItemStack(TFCItems.terraCeramicMold, 1);
                             fireItemStacks[i].stackTagCompound = null;

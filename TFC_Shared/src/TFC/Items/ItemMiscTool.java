@@ -3,10 +3,10 @@ package TFC.Items;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 
-public class ItemTerraMiscTool extends ItemTerra
+public class ItemMiscTool extends ItemTerra
 {
 
-	public ItemTerraMiscTool(int i) 
+	public ItemMiscTool(int i) 
 	{
 		super(i);
 		this.setTabToDisplayOn(CreativeTabs.tabMisc);

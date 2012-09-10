@@ -24,11 +24,11 @@ import net.minecraft.src.StringTranslate;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemTerraProPick extends Item
+public class ItemProPick extends Item
 {
     List vecArray;
 
-    public ItemTerraProPick(int i) 
+    public ItemProPick(int i) 
     {
         super(i);
         maxStackSize = 1;

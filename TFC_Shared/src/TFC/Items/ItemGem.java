@@ -4,11 +4,11 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
 
-public class ItemTerraGem extends Item
+public class ItemGem extends Item
 {
 	public static String[] gemNames = {"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
 
-	public ItemTerraGem(int i) 
+	public ItemGem(int i) 
 	{
 		super(i);
 		setMaxDamage(0);

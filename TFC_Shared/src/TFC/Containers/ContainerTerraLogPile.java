@@ -1,6 +1,6 @@
 package TFC.Containers;
 
-import TFC.Items.ItemTerraLogs;
+import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityTerraLogPile;
 import net.minecraft.src.Block;
 import net.minecraft.src.Container;
@@ -58,7 +58,7 @@ public class ContainerTerraLogPile extends Container
 		ItemStack var2 = null;
 		Slot var3 = (Slot)this.inventorySlots.get(par1);
 
-		if (var3 != null && var3.getHasStack() && var3.getStack().getItem() instanceof ItemTerraLogs)
+		if (var3 != null && var3.getHasStack() && var3.getStack().getItem() instanceof ItemLogs)
 		{
 			ItemStack var4 = var3.getStack();
 			var2 = var4.copy();

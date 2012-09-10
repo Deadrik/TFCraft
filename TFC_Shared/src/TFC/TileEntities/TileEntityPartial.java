@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraOre;
+import TFC.Items.ItemOre;
 import net.minecraft.src.*;
 
 public class TileEntityPartial extends NetworkTileEntity

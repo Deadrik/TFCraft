@@ -13,13 +13,13 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemTerraLogs extends ItemTerra
+public class ItemLogs extends ItemTerra
 {
 	public static String[] blockNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 		"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 
 
-	public ItemTerraLogs(int i) 
+	public ItemLogs(int i) 
 	{
 		super(i);
 		setMaxDamage(0);

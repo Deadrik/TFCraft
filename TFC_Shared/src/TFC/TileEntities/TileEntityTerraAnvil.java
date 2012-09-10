@@ -20,7 +20,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraMeltedMetal;
+import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -609,7 +609,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 				float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
 
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.20 && 
-						(anvilItemStacks[i].getItem() instanceof ItemTerraMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
+						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 
 			}
 		}
@@ -628,7 +628,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 				float temp = anvilItemStacks[i].getTagCompound().getFloat("temperature");
 
 				return temp < index.meltTemp && temp > index.meltTemp - index.meltTemp * 0.40 && 
-						(anvilItemStacks[i].getItem() instanceof ItemTerraMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
+						(anvilItemStacks[i].getItem() instanceof ItemMeltedMetal ? anvilItemStacks[i].getItemDamage() == 0 : true);
 
 			}
 		}

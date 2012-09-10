@@ -10,9 +10,9 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemTerraBellows extends Item
+public class ItemBellows extends Item
 {
-	public ItemTerraBellows(int i) 
+	public ItemBellows(int i) 
 	{
 		super(i);
 		maxStackSize = 1;

@@ -5,7 +5,7 @@ import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraOre;
+import TFC.Items.ItemOre;
 import net.minecraft.src.*;
 
 public class TileEntityFarmland extends TileEntity

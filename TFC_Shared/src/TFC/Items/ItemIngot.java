@@ -2,20 +2,27 @@ package TFC.Items;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
 
-public class ItemTerraMeltedMetal extends ItemTerra
+public class ItemIngot extends ItemTerra
 {
-	public ItemTerraMeltedMetal(int i) 
+
+	public ItemIngot(int i) 
 	{
 		super(i);
-		setMaxDamage(100);
-		this.setMaxStackSize(1);
+		this.maxStackSize = 8;
 		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+	}
+
+	public void addCreativeItems(java.util.ArrayList list)
+	{
+		list.add(new ItemStack(this));
 	}
 
 	@Override
 	public String getTextureFile()
 	{
 		return "/bioxx/terrasprites.png";
-	}	
+	}
+
 }

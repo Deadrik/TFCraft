@@ -15,7 +15,7 @@ import TFC.Core.TFC_Game;
 import TFC.Core.Vector3f;
 import TFC.Enums.EnumWoodMaterial;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraMeltedMetal;
+import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -194,7 +194,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 ItemStack mold = null;
 
 
-                if(fireItemStacks[1].getItem() instanceof ItemTerraMeltedMetal)
+                if(fireItemStacks[1].getItem() instanceof ItemMeltedMetal)
                 {
                     if(fireItemStacks[7] == null && fireItemStacks[8] == null)
                     {
@@ -230,7 +230,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
 
                 //Check if we should combine the output with a pre-existing output
-                if(output != null && output.getItem() instanceof ItemTerraMeltedMetal)
+                if(output != null && output.getItem() instanceof ItemMeltedMetal)
                 {
                     int leftover = 0;
                     boolean addLeftover = false;

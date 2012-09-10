@@ -7,10 +7,10 @@ import TFC.Core.TFCItems;
 import TFC.Entities.EntityTerraJavelin;
 import net.minecraft.src.*;
 
-public class ItemTerraJavelin extends ItemTool
+public class ItemJavelin extends ItemTool
 {
     private static int weaponDamage;
-    public ItemTerraJavelin(int par1)
+    public ItemJavelin(int par1)
     {
         super(par1, weaponDamage, TFCItems.SedToolMaterial, new Block[0]);
         this.maxStackSize = 1;

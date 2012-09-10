@@ -13,12 +13,12 @@ import TFC.TileEntities.TileEntityTerraSluice;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import net.minecraft.src.*;
 
-public class ItemTerraGoldPan extends Item
+public class ItemGoldPan extends Item
 {
     public static String[] blockNames = {"GoldPan", "GoldPanSand", "GoldPanGravel", "GoldPanClay", "GoldPanDirt"};
 
     private int useTimer = 0;
-    public ItemTerraGoldPan(int i) 
+    public ItemGoldPan(int i) 
     {
         super(i);
         setMaxDamage(0);

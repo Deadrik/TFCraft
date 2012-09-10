@@ -1,7 +1,7 @@
 package TFC.Containers;
 
 import TFC.Core.HeatManager;
-import TFC.Items.ItemTerraOre;
+import TFC.Items.ItemOre;
 import net.minecraft.src.*;
 
 public class SlotForge extends Slot
@@ -20,7 +20,7 @@ public class SlotForge extends Slot
 	    {
 	        return false;
 	    }
-		if(!(itemstack.getItem() instanceof ItemTerraOre))
+		if(!(itemstack.getItem() instanceof ItemOre))
 		{
 			return true;
 		}

@@ -15,7 +15,7 @@ import TFC.Core.HeatManager;
 import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemTerraOre;
+import TFC.Items.ItemOre;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BiomeGenBase;
@@ -465,7 +465,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             if(fireItemStacks[i] == null)
             {
                 fireItemStacks[i] = is;
-                OreType = ItemTerraOre.getItemNameDamage(is.getItemDamage());
+                OreType = ItemOre.getItemNameDamage(is.getItemDamage());
                 return true;
             }
         }
@@ -704,7 +704,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
                         }
                     }
                     /*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-                    else if(TFC_ItemHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemTerraOre && 
+                    else if(TFC_ItemHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemOre && 
                             (entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
                     {
                         int c = entity.item.stackSize;
@@ -872,7 +872,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		if(oreDamage == -1)
             this.OreType = "";
         else
-            this.OreType = ItemTerraOre.getItemNameDamage(oreDamage);
+            this.OreType = ItemOre.getItemNameDamage(oreDamage);
 
 		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}

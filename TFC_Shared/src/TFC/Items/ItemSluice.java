@@ -3,10 +3,10 @@ package TFC.Items;
 import TFC.Blocks.BlockTerraSluice;
 import net.minecraft.src.*;
 
-public class ItemTerraSluice extends Item
+public class ItemSluice extends Item
 {
 
-	public ItemTerraSluice(int i)
+	public ItemSluice(int i)
 	{
 		super(i);
 	}
