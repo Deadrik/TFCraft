@@ -71,6 +71,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
+    	onNeighborBlockChange(par1World,par2,par3,par4,0);
         return;
     }
     /**onBlockRemoval needs to remain here in order to override the Block Leaves implementation 
@@ -189,15 +190,23 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
                 else
                 {
                     if(par1World.getChunkFromBlockCoords(par2, par4) != null)
+                    {
                         this.destroyLeaves(par1World, par2, par3, par4);
+                    }
                 }
             }
         }
     }
 
-    private void destroyLeaves(World world, int i, int j, int k)
+    private void destroyLeaves(World world, int par1, int par2, int par3)
     {
-        world.setBlockWithNotify(i, j, k, 0);
+        world.setBlock(par1, par2, par3, 0);
+        world.scheduleBlockUpdate(par1 - 1, par2, par3, blockID, 5);
+        world.scheduleBlockUpdate(par1 + 1, par2, par3, blockID, 5);
+        world.scheduleBlockUpdate(par1, par2 - 1, par3, blockID, 5);
+        world.scheduleBlockUpdate(par1, par2 + 1, par3, blockID, 5);
+        world.scheduleBlockUpdate(par1, par2, par3 - 1, blockID, 5);
+        world.scheduleBlockUpdate(par1, par2, par3 + 1, blockID, 5);
     }
 
     private void removeLeaves(World world, int i, int j, int k)
