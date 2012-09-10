@@ -124,18 +124,18 @@ public class TFCBlocks
 		GameRegistry.registerBlock(terraStoneSed, TFC.Items.ItemSed.class);
 		GameRegistry.registerBlock(terraStoneMM, TFC.Items.ItemMM.class);
 
-		GameRegistry.registerBlock(terraStoneIgInCobble, TFC.Items.ItemIgInCobble.class);
-		GameRegistry.registerBlock(terraStoneIgExCobble, TFC.Items.ItemIgExCobble.class);
-		GameRegistry.registerBlock(terraStoneSedCobble, TFC.Items.ItemSedCobble.class);
-		GameRegistry.registerBlock(terraStoneMMCobble, TFC.Items.ItemMMCobble.class);
-		GameRegistry.registerBlock(terraStoneIgInSmooth, TFC.Items.ItemIgInCobble.class);
-		GameRegistry.registerBlock(terraStoneIgExSmooth, TFC.Items.ItemIgExCobble.class);
-		GameRegistry.registerBlock(terraStoneSedSmooth, TFC.Items.ItemSedCobble.class);
-		GameRegistry.registerBlock(terraStoneMMSmooth, TFC.Items.ItemMMCobble.class);
-		GameRegistry.registerBlock(terraStoneIgInBrick, TFC.Items.ItemIgInCobble.class);
-		GameRegistry.registerBlock(terraStoneIgExBrick, TFC.Items.ItemIgExCobble.class);
-		GameRegistry.registerBlock(terraStoneSedBrick, TFC.Items.ItemSedCobble.class);
-		GameRegistry.registerBlock(terraStoneMMBrick, TFC.Items.ItemMMCobble.class);
+		GameRegistry.registerBlock(terraStoneIgInCobble, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(terraStoneIgExCobble, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(terraStoneSedCobble, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(terraStoneMMCobble, TFC.Items.ItemMM.class);
+		GameRegistry.registerBlock(terraStoneIgInSmooth, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(terraStoneIgExSmooth, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(terraStoneSedSmooth, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(terraStoneMMSmooth, TFC.Items.ItemMM.class);
+		GameRegistry.registerBlock(terraStoneIgInBrick, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(terraStoneIgExBrick, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(terraStoneSedBrick, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(terraStoneMMBrick, TFC.Items.ItemMM.class);
 
 		GameRegistry.registerBlock(terraDirt, TFC.Items.ItemDirt.class);
 		GameRegistry.registerBlock(terraDirt2, TFC.Items.ItemDirt.class);

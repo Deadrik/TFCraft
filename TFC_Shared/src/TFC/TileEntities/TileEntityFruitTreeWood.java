@@ -77,7 +77,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 				if(height <= 2 && isTrunk && worldObj.rand.nextInt(16/t) == 0 &&
 						(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0 || worldObj.getBlockId(xCoord, yCoord+1, zCoord) == TFCBlocks.fruitTreeLeaves.blockID))
 				{
-					worldObj.setBlockAndMetadata(xCoord, yCoord+1, zCoord, blockType.blockID, blockMetadata);
+					worldObj.setBlockAndMetadata(xCoord, yCoord+1, zCoord, TFCBlocks.fruitTreeWood.blockID, meta);
                     ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).setTrunk(true);
                     ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).setHeight(height+1);
                     ((TileEntityFruitTreeWood)worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord)).setBirthWood(GrowTime);

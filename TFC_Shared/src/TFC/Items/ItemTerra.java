@@ -5,6 +5,7 @@ import java.util.List;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Enums.EnumSize;
 
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
@@ -19,10 +20,12 @@ import net.minecraft.src.World;
 public class ItemTerra extends Item
 {
     protected String texture;
+    public EnumSize size;
 
     public ItemTerra(int id) 
     {
         super(id);
+        size = EnumSize.TINY;
     }
     public ItemTerra(int id, String tex) 
     {
@@ -63,6 +66,9 @@ public class ItemTerra extends Item
 
     public void addInformation(ItemStack is, List arraylist) 
     {
+    	if(size!= null)
+    		arraylist.add("Size: " + size.name());
+    	
         if (is.hasTagCompound())
         {
             NBTTagCompound stackTagCompound = is.getTagCompound();

@@ -564,7 +564,7 @@ public class TFC_Core
 
 	public static boolean isSoil(int id)
 	{
-		return isGrass(id) || isDirt(id) || isClay(id);
+		return isGrass(id) || isDirt(id) || isClay(id) || isPeat(id);
 	}
 
 	public static int getSoilMetaFromStone(int inType, int inMeta)

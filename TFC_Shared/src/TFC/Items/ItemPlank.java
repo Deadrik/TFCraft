@@ -5,6 +5,7 @@ import java.util.List;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Enums.EnumSize;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Enchantment;
@@ -28,6 +29,7 @@ public class ItemPlank extends ItemTerra
         texture = tex;
         this.hasSubtypes = true;
         this.setMaxDamage(0);
+        this.size = EnumSize.MEDIUM;
     }
     
     @Override

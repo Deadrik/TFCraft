@@ -62,7 +62,7 @@ import net.minecraftforge.common.*;
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft implements ITickHandler
 {
-	
+
 
 	@Instance
 	public static TerraFirmaCraft instance;
@@ -73,7 +73,7 @@ public class TerraFirmaCraft implements ITickHandler
 	//////////////////Features////////////////////
 	public static int RockLayer2Height = 110;
 	public static int RockLayer3Height = 55;
-	
+
 	public TerraFirmaCraft()
 	{
 		TickRegistry.registerTickHandler(this, Side.SERVER);
@@ -96,13 +96,13 @@ public class TerraFirmaCraft implements ITickHandler
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-//		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
+		//		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
-//		GameRegistry.registerWorldGenerator(new WorldGenFixGrass());
-//		GameRegistry.registerWorldGenerator(new WorldGenForests());
-//		GameRegistry.registerWorldGenerator(new WorldGenPlants());
-//		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
-		
+		//		GameRegistry.registerWorldGenerator(new WorldGenFixGrass());
+		//		GameRegistry.registerWorldGenerator(new WorldGenForests());
+		//		GameRegistry.registerWorldGenerator(new WorldGenPlants());
+		//		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
+
 		//Add Item Name Localizations
 		proxy.registerTranslations();
 
@@ -111,16 +111,16 @@ public class TerraFirmaCraft implements ITickHandler
 
 		//Register KeyBinding Handler (Client only)
 		proxy.registerKeyBindingHandler();
-		
+
 		//Register Block Highlight Handler (Client only)
 		proxy.registerHighlightHandler();
-		
+
 		//Register Tile Entites
 		proxy.registerTileEntities(true);
-		
+
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
-		
+
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
 	}
@@ -130,23 +130,23 @@ public class TerraFirmaCraft implements ITickHandler
 	{
 
 		TFC_Core.RegisterRecipes();	
-		
-		TFC_Game.RegisterToolRecipes();
-		
-		proxy.registerToolClasses();
-		
-		// Register Crafting Handler
-        GameRegistry.registerCraftingHandler(new CraftingHandler());
-        
-        // Register the EntityLiving Handler
-        MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
-        // Register Gui Handler
+		TFC_Game.RegisterToolRecipes();
+
+		proxy.registerToolClasses();
+
+		// Register Crafting Handler
+		GameRegistry.registerCraftingHandler(new CraftingHandler());
+
+		// Register the EntityLiving Handler
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+
+		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
-		
+
 		// Register Packet Handler
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());
-		
+
 		proxy.registerRenderInformation();
 
 
@@ -162,10 +162,10 @@ public class TerraFirmaCraft implements ITickHandler
 			RemoveRecipe(new ItemStack(Item.stick,4));
 			RemoveRecipe(new ItemStack(Block.planks,4));
 		}
-		
+
 		//Register new Minecarts
 		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
-		
+
 	}
 
 	@PostInit
@@ -173,14 +173,14 @@ public class TerraFirmaCraft implements ITickHandler
 	{
 
 	}
-	
+
 	@ServerStarting
-    public void serverStarting(FMLServerStartingEvent evt)
-    {
-        evt.registerServerCommand(new GetBioTempCommand());
-        evt.registerServerCommand(new GetTreesCommand());
-        evt.registerServerCommand(new GetRocksCommand());
-    }
+	public void serverStarting(FMLServerStartingEvent evt)
+	{
+		evt.registerServerCommand(new GetBioTempCommand());
+		evt.registerServerCommand(new GetTreesCommand());
+		evt.registerServerCommand(new GetRocksCommand());
+	}
 
 	private static void RemoveRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
@@ -211,11 +211,11 @@ public class TerraFirmaCraft implements ITickHandler
 				TFC_Core.SetupWorld(world);
 			}
 		}
-		
+
 		if(type.contains(TickType.PLAYER))
 		{
 			World world = ((EntityPlayer)tickData[0]).worldObj;
-			
+
 			//Allow the client to increment time
 			if(world.isRemote)
 				TFC_Time.UpdateTime(world);
@@ -225,20 +225,19 @@ public class TerraFirmaCraft implements ITickHandler
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData)
 	{
-		if (type.contains(TickType.WORLD))
+		if (type.contains(TickType.PLAYER))
 		{
 			World world;
 
-			assert ((tickData[0] instanceof World));
-			world = (World)tickData[0];
+			world = ((EntityPlayer)tickData[0]).worldObj;
 
 			//Allow the server to increment time
 			if(!world.isRemote)
-				TFC_Time.UpdateTime(world);
-			
-			for(Object p : world.playerEntities)
 			{
-				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)p).inventory.mainInventory, (int)((EntityPlayer)p).posX, (int)((EntityPlayer)p).posY, (int)((EntityPlayer)p).posZ);
+				TFC_Time.UpdateTime(world);
+
+				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)tickData[0]).inventory.mainInventory, 
+						(int)((EntityPlayer)tickData[0]).posX, (int)((EntityPlayer)tickData[0]).posY, (int)((EntityPlayer)tickData[0]).posZ);
 			}
 		}
 	}

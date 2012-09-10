@@ -2,6 +2,8 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+
 
 import net.minecraft.src.*;
 
@@ -46,11 +48,7 @@ public class BlockCustomFlower extends BlockFlower
 	@Override
 	protected boolean canThisPlantGrowOnThisBlockID(int par1)
 	{
-		return par1 == TFCBlocks.terraGrass.blockID || par1 == TFCBlocks.terraGrass2.blockID || 
-				par1 == TFCBlocks.terraDirt.blockID || par1 == TFCBlocks.terraDirt2.blockID ||
-				par1 == TFCBlocks.terraClayGrass.blockID || par1 == TFCBlocks.terraClayGrass2.blockID ||
-				par1 == TFCBlocks.terraPeatGrass.blockID ||
-				par1 == TFCBlocks.tilledSoil.blockID || par1 == TFCBlocks.tilledSoil2.blockID;
+		return TFC_Core.isSoil(par1);
 	}
 
 	/**
