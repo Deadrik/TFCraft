@@ -61,28 +61,28 @@ public class BlockTerraGrass extends BlockGrass
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 3)//+Z
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 4)//-X
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         else if (par5 == 5)//+X
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
                 return 255;
             else
-                return blk.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
         }
         return this.blockIndexInTexture;
     }
@@ -137,7 +137,7 @@ public class BlockTerraGrass extends BlockGrass
                     int y = par3 + rand.nextInt(5) - 3;
                     int z = par4 + rand.nextInt(3) - 1;
 
-                    float rain = 1000/*TFC_Climate.getRainfall(x, y + 1, z)*/;
+                    float rain = TFC_Climate.getRainfall(x, y + 1, z);
                     
                     int id = world.getBlockId(x, y, z);
                     int meta = world.getBlockMetadata(x, y, z);
