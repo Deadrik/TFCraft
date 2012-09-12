@@ -1359,9 +1359,9 @@ public class TFCItems
         ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setItemName("Zinc ProPick Head").setIconCoord(13, 1);
         
         Flux = ((ItemTerra) new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setItemName("flux").setIconCoord(0, 0)).setTexturePath("/bioxx/terrasprites.png");
-        BismuthBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setItemName("terraBismuthBronzeAnvilItem").setIconCoord(2, 2);
-        BlackBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setItemName("terraBlackBronzeAnvilItem").setIconCoord(3, 2);
-        RoseGoldAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraRoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setItemName("terraRoseGoldAnvilItem").setIconCoord(10, 2);
+        BismuthBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setItemName("BismuthBronzeAnvilItem").setIconCoord(2, 2);
+        BlackBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setItemName("BlackBronzeAnvilItem").setIconCoord(3, 2);
+        RoseGoldAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","RoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setItemName("RoseGoldAnvilItem").setIconCoord(10, 2);
 
         /**
          * Scythe

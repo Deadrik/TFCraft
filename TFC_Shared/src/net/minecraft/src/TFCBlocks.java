@@ -201,48 +201,48 @@ public class TFCBlocks
 
 		System.out.println(new StringBuilder().append("[TFC] Loading Blocks").toString());
 
-		TFCBlocks.StoneIgInCobble = new BlockIgInCobble(TFC_Settings.getIntFor(config,"block","terraStoneIgInCobble", 198), Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
-		TFCBlocks.StoneIgIn = new BlockIgIn(TFC_Settings.getIntFor(config,"block","TerraIgIn", 209), Material.rock, TFCBlocks.StoneIgInCobble.blockID).setHardness(13F).setResistance(10F).setBlockName("IgInRock");	
-		TFCBlocks.StoneIgInSmooth = new BlockIgInSmooth(TFC_Settings.getIntFor(config,"block","terraStoneIgInSmooth", 182), 48).setHardness(13F).setResistance(20F).setBlockName("IgInRockSmooth");
-		TFCBlocks.StoneIgInBrick = new BlockIgInSmooth(TFC_Settings.getIntFor(config,"block","terraStoneIgInBrick", 186), 32).setHardness(13F).setResistance(15F).setBlockName("IgInRockBrick");
+		TFCBlocks.StoneIgInCobble = new BlockIgInCobble(TFC_Settings.getIntFor(config,"block","StoneIgInCobble", 198), Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgInRockCobble");
+		TFCBlocks.StoneIgIn = new BlockIgIn(TFC_Settings.getIntFor(config,"block","StoneIgIn", 209), Material.rock, TFCBlocks.StoneIgInCobble.blockID).setHardness(13F).setResistance(10F).setBlockName("IgInRock");	
+		TFCBlocks.StoneIgInSmooth = new BlockIgInSmooth(TFC_Settings.getIntFor(config,"block","StoneIgInSmooth", 182), 48).setHardness(13F).setResistance(20F).setBlockName("IgInRockSmooth");
+		TFCBlocks.StoneIgInBrick = new BlockIgInSmooth(TFC_Settings.getIntFor(config,"block","StoneIgInBrick", 186), 32).setHardness(13F).setResistance(15F).setBlockName("IgInRockBrick");
 
-		TFCBlocks.StoneSedCobble = new BlockSedCobble(TFC_Settings.getIntFor(config,"block","terraStoneSedCobble", 199), Material.rock).setHardness(10F).setResistance(10F).setBlockName("SedRockCobble");
-		TFCBlocks.StoneSed = new BlockSed(TFC_Settings.getIntFor(config,"block","TerraSed", 210), Material.rock, TFCBlocks.StoneSedCobble.blockID).setHardness(10F).setResistance(7F).setBlockName("SedRock");
-		TFCBlocks.StoneSedSmooth = new BlockSedSmooth(TFC_Settings.getIntFor(config,"block","terraStoneSedSmooth", 183), 112).setHardness(10F).setResistance(20F).setBlockName("SedRockSmooth");
-		TFCBlocks.StoneSedBrick = new BlockSedSmooth(TFC_Settings.getIntFor(config,"block","terraStoneSedBrick", 187), 96).setHardness(10F).setResistance(15F).setBlockName("SedRockBrick");
+		TFCBlocks.StoneSedCobble = new BlockSedCobble(TFC_Settings.getIntFor(config,"block","StoneSedCobble", 199), Material.rock).setHardness(10F).setResistance(10F).setBlockName("SedRockCobble");
+		TFCBlocks.StoneSed = new BlockSed(TFC_Settings.getIntFor(config,"block","StoneSed", 210), Material.rock, TFCBlocks.StoneSedCobble.blockID).setHardness(10F).setResistance(7F).setBlockName("SedRock");
+		TFCBlocks.StoneSedSmooth = new BlockSedSmooth(TFC_Settings.getIntFor(config,"block","StoneSedSmooth", 183), 112).setHardness(10F).setResistance(20F).setBlockName("SedRockSmooth");
+		TFCBlocks.StoneSedBrick = new BlockSedSmooth(TFC_Settings.getIntFor(config,"block","StoneSedBrick", 187), 96).setHardness(10F).setResistance(15F).setBlockName("SedRockBrick");
 
-		TFCBlocks.StoneIgExCobble = new BlockIgExCobble(TFC_Settings.getIntFor(config,"block","terraStoneIgExCobble", 200), Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgExRockCobble");
-		TFCBlocks.StoneIgEx = new BlockIgEx(TFC_Settings.getIntFor(config,"block","TerraIgEx", 211), Material.rock, TFCBlocks.StoneIgExCobble.blockID).setHardness(13F).setResistance(10F).setBlockName("IgExRock");
-		TFCBlocks.StoneIgExSmooth = new BlockIgExSmooth(TFC_Settings.getIntFor(config,"block","terraStoneIgExSmooth", 184), 51).setHardness(13F).setResistance(20F).setBlockName("IgExRockSmooth");
-		TFCBlocks.StoneIgExBrick = new BlockIgExSmooth(TFC_Settings.getIntFor(config,"block","terraStoneIgExBrick", 188), 35).setHardness(13F).setResistance(15F).setBlockName("IgExRockBrick");
+		TFCBlocks.StoneIgExCobble = new BlockIgExCobble(TFC_Settings.getIntFor(config,"block","StoneIgExCobble", 200), Material.rock).setHardness(13F).setResistance(10F).setBlockName("IgExRockCobble");
+		TFCBlocks.StoneIgEx = new BlockIgEx(TFC_Settings.getIntFor(config,"block","StoneIgEx", 211), Material.rock, TFCBlocks.StoneIgExCobble.blockID).setHardness(13F).setResistance(10F).setBlockName("IgExRock");
+		TFCBlocks.StoneIgExSmooth = new BlockIgExSmooth(TFC_Settings.getIntFor(config,"block","StoneIgExSmooth", 184), 51).setHardness(13F).setResistance(20F).setBlockName("IgExRockSmooth");
+		TFCBlocks.StoneIgExBrick = new BlockIgExSmooth(TFC_Settings.getIntFor(config,"block","StoneIgExBrick", 188), 35).setHardness(13F).setResistance(15F).setBlockName("IgExRockBrick");
 
-		TFCBlocks.StoneMMCobble = new BlockMMCobble(TFC_Settings.getIntFor(config,"block","terraStoneMMCobble", 201), Material.rock).setHardness(10F).setResistance(10F).setBlockName("MMRockCobble");
-		TFCBlocks.StoneMM = new BlockMM(TFC_Settings.getIntFor(config,"block","TerraMM", 212), Material.rock, TFCBlocks.StoneMMCobble.blockID).setHardness(10F).setResistance(8F).setBlockName("MMRock");
-		TFCBlocks.StoneMMSmooth = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","terraStoneMMSmooth", 185), 122).setHardness(10F).setResistance(20F).setBlockName("MMRockSmooth");
-		TFCBlocks.StoneMMBrick = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","terraStoneMMBrick", 189), 106).setHardness(10F).setResistance(15F).setBlockName("MMRockBrick");
+		TFCBlocks.StoneMMCobble = new BlockMMCobble(TFC_Settings.getIntFor(config,"block","StoneMMCobble", 201), Material.rock).setHardness(10F).setResistance(10F).setBlockName("MMRockCobble");
+		TFCBlocks.StoneMM = new BlockMM(TFC_Settings.getIntFor(config,"block","StoneMM", 212), Material.rock, TFCBlocks.StoneMMCobble.blockID).setHardness(10F).setResistance(8F).setBlockName("MMRock");
+		TFCBlocks.StoneMMSmooth = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","StoneMMSmooth", 185), 122).setHardness(10F).setResistance(20F).setBlockName("MMRockSmooth");
+		TFCBlocks.StoneMMBrick = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","StoneMMBrick", 189), 106).setHardness(10F).setResistance(15F).setBlockName("MMRockBrick");
 
-		TFCBlocks.Dirt = (new TFC.Blocks.BlockDirt(TFC_Settings.getIntFor(config,"block","terraDirt", 190), 112,TFCBlocks.tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
-		TFCBlocks.Dirt2 = (new TFC.Blocks.BlockDirt2(TFC_Settings.getIntFor(config,"block","terraDirt2", 191), 128,TFCBlocks.tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
-		TFCBlocks.Clay = (new TFC.Blocks.BlockClay(TFC_Settings.getIntFor(config,"block","terraClay", 192), 144)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("clay");
-		TFCBlocks.Clay2 = (new TFC.Blocks.BlockClay2(TFC_Settings.getIntFor(config,"block","terraClay2", 193), 160)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("clay");
-		TFCBlocks.ClayGrass = (BlockClayGrass) (new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","terraClayGrass", 194), 144)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("ClayGrass"); 
-		TFCBlocks.ClayGrass2 = (BlockClayGrass) (new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","terraClayGrass2", 195), 160)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("ClayGrass"); 
-		TFCBlocks.Grass = (TFC.Blocks.BlockGrass)(new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","terraGrass", 196), 112)).setHardness(2F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");
-		TFCBlocks.Grass2 = (TFC.Blocks.BlockGrass)(new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","terraGrass2", 197), 128)).setHardness(2F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");  
-		TFCBlocks.Peat = (new TFC.Blocks.BlockPeat(TFC_Settings.getIntFor(config,"block","terraPeat", 180), 135)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("peat");
-		TFCBlocks.PeatGrass = (BlockPeatGrass)(new TFC.Blocks.BlockPeatGrass(TFC_Settings.getIntFor(config,"block","terraPeatGrass", 181), 135)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("PeatGrass");
+		TFCBlocks.Dirt = (new TFC.Blocks.BlockDirt(TFC_Settings.getIntFor(config,"block","Dirt", 190), 112,TFCBlocks.tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
+		TFCBlocks.Dirt2 = (new TFC.Blocks.BlockDirt2(TFC_Settings.getIntFor(config,"block","Dirt2", 191), 128,TFCBlocks.tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("dirt");
+		TFCBlocks.Clay = (new TFC.Blocks.BlockClay(TFC_Settings.getIntFor(config,"block","Clay", 192), 144)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("clay");
+		TFCBlocks.Clay2 = (new TFC.Blocks.BlockClay2(TFC_Settings.getIntFor(config,"block","Clay2", 193), 160)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("clay");
+		TFCBlocks.ClayGrass = (BlockClayGrass) (new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass", 194), 144)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("ClayGrass"); 
+		TFCBlocks.ClayGrass2 = (BlockClayGrass) (new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass2", 195), 160)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("ClayGrass"); 
+		TFCBlocks.Grass = (TFC.Blocks.BlockGrass)(new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass", 196), 112)).setHardness(2F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");
+		TFCBlocks.Grass2 = (TFC.Blocks.BlockGrass)(new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass2", 197), 128)).setHardness(2F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");  
+		TFCBlocks.Peat = (new TFC.Blocks.BlockPeat(TFC_Settings.getIntFor(config,"block","Peat", 180), 135)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setBlockName("peat");
+		TFCBlocks.PeatGrass = (BlockPeatGrass)(new TFC.Blocks.BlockPeatGrass(TFC_Settings.getIntFor(config,"block","PeatGrass", 181), 135)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("PeatGrass");
 		TFCBlocks.DryGrass = (new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass", 218), 112)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");
 		TFCBlocks.DryGrass2 =(new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass2", 219), 128)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setBlockName("Grass");  
 
-		TFCBlocks.Ore = new TFC.Blocks.BlockOre(TFC_Settings.getIntFor(config,"block","TerraOre", 213), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
-		TFCBlocks.Ore2 = new BlockOre2(TFC_Settings.getIntFor(config,"block","TerraOre2", 214), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
-		TFCBlocks.Ore3 = new BlockOre3(TFC_Settings.getIntFor(config,"block","TerraOre3", 215), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+		TFCBlocks.Ore = new TFC.Blocks.BlockOre(TFC_Settings.getIntFor(config,"block","Ore", 213), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+		TFCBlocks.Ore2 = new BlockOre2(TFC_Settings.getIntFor(config,"block","Ore2", 214), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
+		TFCBlocks.Ore3 = new BlockOre3(TFC_Settings.getIntFor(config,"block","Ore3", 215), Material.rock).setHardness(10F).setResistance(10F).setBlockName("Ore");
 		TFCBlocks.LooseRock = new BlockLooseRock(TFC_Settings.getIntFor(config,"block","LooseRock", 179)).setHardness(0.05F).setResistance(1F).setBlockName("LooseRock");
 		TFCBlocks.LogPile = new BlockLogPile(TFC_Settings.getIntFor(config,"block","LogPile", 178), TileEntityTerraLogPile.class).setHardness(10F).setResistance(1F).setBlockName("LogPile");
 
-		TFCBlocks.Sulfur = new BlockSulfur(TFC_Settings.getIntFor(config,"block","TerraSulfur", 208), Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFC_Settings.getIntFor(config,"block","terraWoodSupportV", 203), Material.wood).setBlockName("WoodSupportV").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFC_Settings.getIntFor(config,"block","terraWoodSupportH", 202), Material.wood).setBlockName("WoodSupportH").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.Sulfur = new BlockSulfur(TFC_Settings.getIntFor(config,"block","Sulfur", 208), Material.rock).setBlockName("Sulfur").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFC_Settings.getIntFor(config,"block","WoodSupportV", 203), Material.wood).setBlockName("WoodSupportV").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFC_Settings.getIntFor(config,"block","WoodSupportH", 202), Material.wood).setBlockName("WoodSupportH").setHardness(0.5F).setResistance(1F);
 
 		TFCBlocks.tilledSoil = new TFC.Blocks.BlockFarmland(TFC_Settings.getIntFor(config,"block","tilledSoil", 177), TFCBlocks.Dirt.blockID, 176).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil");
 		TFCBlocks.tilledSoil2 = new TFC.Blocks.BlockFarmland(TFC_Settings.getIntFor(config,"block","tilledSoil2", 176), TFCBlocks.Dirt2.blockID, 192).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("tilledSoil2");
@@ -305,20 +305,20 @@ public class TFCBlocks
 
 		TFCBlocks.finiteWater = new BlockFiniteWater(TFC_Settings.getIntFor(config,"block","bucketWater", 224)).setHardness(100.0F).setLightOpacity(3).disableStats().setRequiresSelfNotify().setBlockName("bucketWater");
 
-		TFCBlocks.Firepit = new BlockFirepit(TFC_Settings.getIntFor(config,"block","terraFirepit", 2015), 80).setBlockName("terraFirepit").setHardness(1).setLightValue(0F);
-		TFCBlocks.Bellows = new BlockBellows(TFC_Settings.getIntFor(config,"block","terraBellows", 2014),Material.wood).setBlockName("terraBellows").setHardness(2);
-		TFCBlocks.Forge= new BlockForge(TFC_Settings.getIntFor(config,"block","terraForge", 2013), 90).setBlockName("terraForge").setHardness(20).setLightValue(0F);
-		TFCBlocks.Scribe = new BlockScribe(TFC_Settings.getIntFor(config,"block","terraScribe", 2012)).setBlockName("terraScribe").setHardness(2);
-		TFCBlocks.Anvil = new BlockAnvil(TFC_Settings.getIntFor(config,"block","terraAnvil", 2011),192).setBlockName("terraAnvil").setHardness(3);
-		TFCBlocks.Anvil2 = new BlockAnvil(TFC_Settings.getIntFor(config,"block","terraAnvil2", 2010),208).setBlockName("terraAnvil2").setHardness(3);
+		TFCBlocks.Firepit = new BlockFirepit(TFC_Settings.getIntFor(config,"block","Firepit", 2015), 80).setBlockName("Firepit").setHardness(1).setLightValue(0F);
+		TFCBlocks.Bellows = new BlockBellows(TFC_Settings.getIntFor(config,"block","Bellows", 2014),Material.wood).setBlockName("Bellows").setHardness(2);
+		TFCBlocks.Forge= new BlockForge(TFC_Settings.getIntFor(config,"block","Forge", 2013), 90).setBlockName("Forge").setHardness(20).setLightValue(0F);
+		TFCBlocks.Scribe = new BlockScribe(TFC_Settings.getIntFor(config,"block","Scribe", 2012)).setBlockName("Scribe").setHardness(2);
+		TFCBlocks.Anvil = new BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil", 2011),192).setBlockName("Anvil").setHardness(3);
+		TFCBlocks.Anvil2 = new BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil2", 2010),208).setBlockName("Anvil2").setHardness(3);
 
-		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","terraMetallurgy", 2009)).setBlockName("terraMetallurgy").setHardness(3);
-		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","terraMolten", 2008)).setBlockName("terraMolten").setHardness(20);
-		TFCBlocks.Bloomery = new BlockBloomery(TFC_Settings.getIntFor(config,"block","terraBloomery", 2007), 65).setBlockName("terraBloomery").setHardness(20).setLightValue(0F);
-		TFCBlocks.BloomeryOn = new BlockBloomery(TFC_Settings.getIntFor(config,"block","terraBloomeryOn", 2006), 66).setBlockName("terraBloomeryOn").setHardness(20).setLightValue(1.0F);
-		TFCBlocks.FirepitOn = new BlockFirepit(TFC_Settings.getIntFor(config,"block","terraFirepitOn", 2005), 81).setBlockName("terraFirepitOn").setHardness(1).setLightValue(1.0F);
-		TFCBlocks.ForgeOn = new BlockForge(TFC_Settings.getIntFor(config,"block","terraForgeOn", 2004), 91).setBlockName("terraForgeOn").setHardness(20).setLightValue(1.0F);
-		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","TerraSluice", 2003)).setBlockName("Sluice").setHardness(2F).setResistance(20F);
+		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","Metallurgy", 2009)).setBlockName("Metallurgy").setHardness(3);
+		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setBlockName("Molten").setHardness(20);
+		TFCBlocks.Bloomery = new BlockBloomery(TFC_Settings.getIntFor(config,"block","Bloomery", 2007), 65).setBlockName("Bloomery").setHardness(20).setLightValue(0F);
+		TFCBlocks.BloomeryOn = new BlockBloomery(TFC_Settings.getIntFor(config,"block","BloomeryOn", 2006), 66).setBlockName("BloomeryOn").setHardness(20).setLightValue(1.0F);
+		TFCBlocks.FirepitOn = new BlockFirepit(TFC_Settings.getIntFor(config,"block","FirepitOn", 2005), 81).setBlockName("FirepitOn").setHardness(1).setLightValue(1.0F);
+		TFCBlocks.ForgeOn = new BlockForge(TFC_Settings.getIntFor(config,"block","ForgeOn", 2004), 91).setBlockName("ForgeOn").setHardness(20).setLightValue(1.0F);
+		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","Sluice", 2003)).setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
 		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
 		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setBlockName("stoneSlabs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
