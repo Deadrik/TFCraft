@@ -48,6 +48,8 @@ import TFC.Handlers.BlockRenderHandler;
 import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.ClientTickHandler;
+import TFC.Handlers.ServerTickHandler;
 import TFC.Items.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCProvider;
@@ -58,12 +60,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "B2 Build 49")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "B2 Build 50")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
-public class TerraFirmaCraft implements ITickHandler
+public class TerraFirmaCraft
 {
-
-
 	@Instance
 	public static TerraFirmaCraft instance;
 
@@ -76,8 +76,8 @@ public class TerraFirmaCraft implements ITickHandler
 
 	public TerraFirmaCraft()
 	{
-		TickRegistry.registerTickHandler(this, Side.SERVER);
-		TickRegistry.registerTickHandler(this, Side.CLIENT);
+		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
+		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 	}
 
 	@PreInit
@@ -96,12 +96,9 @@ public class TerraFirmaCraft implements ITickHandler
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-		//		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
+
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
-		//		GameRegistry.registerWorldGenerator(new WorldGenFixGrass());
-		//		GameRegistry.registerWorldGenerator(new WorldGenForests());
-		//		GameRegistry.registerWorldGenerator(new WorldGenPlants());
-		//		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
+
 
 		//Add Item Name Localizations
 		proxy.registerTranslations();
@@ -197,60 +194,4 @@ public class TerraFirmaCraft implements ITickHandler
 			}
 		}
 	}
-
-	private boolean doOnce = false;
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData)
-	{		
-		if(type.contains(TickType.WORLDLOAD))
-		{
-			World world = (World)tickData[0];
-			if(world.provider.worldType == 0)
-			{
-				((TFCProvider)world.provider).createSpawnPosition();
-				TFC_Core.SetupWorld(world);
-			}
-		}
-
-		if(type.contains(TickType.PLAYER))
-		{
-			World world = ((EntityPlayer)tickData[0]).worldObj;
-
-			//Allow the client to increment time
-			if(world.isRemote)
-				TFC_Time.UpdateTime(world);
-		}
-	}
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData)
-	{
-		if (type.contains(TickType.PLAYER))
-		{
-			World world;
-
-			world = ((EntityPlayer)tickData[0]).worldObj;
-
-			//Allow the server to increment time
-			if(!world.isRemote)
-			{
-				TFC_Time.UpdateTime(world);
-
-				TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)tickData[0]).inventory.mainInventory, 
-						(int)((EntityPlayer)tickData[0]).posX, (int)((EntityPlayer)tickData[0]).posY, (int)((EntityPlayer)tickData[0]).posZ);
-			}
-		}
-	}
-
-	@Override
-	public EnumSet ticks()
-	{
-		return EnumSet.of(TickType.WORLD, TickType.WORLDLOAD, TickType.PLAYER);
-	}
-	@Override
-	public String getLabel()
-	{
-		return "TFC";
-	}
-
 }
