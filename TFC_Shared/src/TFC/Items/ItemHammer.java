@@ -36,11 +36,11 @@ public class ItemHammer extends ItemTool
 			int id2 = player.worldObj.getBlockId(x, y, z);
 			int meta2 = player.worldObj.getBlockMetadata(x, y, z);
 
-			if(id2 == TFCBlocks.terraStoneIgEx.blockID || id2 == TFCBlocks.terraStoneIgIn.blockID)
+			if(id2 == TFCBlocks.StoneIgEx.blockID || id2 == TFCBlocks.StoneIgIn.blockID)
 			{
 				if(side == 1)
 				{
-					world.setBlockWithNotify(x, y, z, TFCBlocks.terraAnvil.blockID);
+					world.setBlockWithNotify(x, y, z, TFCBlocks.Anvil.blockID);
 					TileEntityTerraAnvil te = (TileEntityTerraAnvil) world.getBlockTileEntity(x, y, z);
 					if(te != null)
 					{

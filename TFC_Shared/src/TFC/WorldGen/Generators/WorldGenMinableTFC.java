@@ -338,10 +338,10 @@ public class WorldGenMinableTFC extends WorldGenerator
     }
     private boolean isRock(int i)
     {
-        if(i == TFCBlocks.terraStoneIgIn.blockID || i == TFCBlocks.terraStoneIgEx.blockID || 
-                i == TFCBlocks.terraStoneMM.blockID || i == TFCBlocks.terraStoneSed.blockID ||
-                i == TFCBlocks.terraOre.blockID || i == TFCBlocks.terraOre2.blockID || 
-                i == TFCBlocks.terraOre3.blockID)
+        if(i == TFCBlocks.StoneIgIn.blockID || i == TFCBlocks.StoneIgEx.blockID || 
+                i == TFCBlocks.StoneMM.blockID || i == TFCBlocks.StoneSed.blockID ||
+                i == TFCBlocks.Ore.blockID || i == TFCBlocks.Ore2.blockID || 
+                i == TFCBlocks.Ore3.blockID)
         {
             return true;
         }

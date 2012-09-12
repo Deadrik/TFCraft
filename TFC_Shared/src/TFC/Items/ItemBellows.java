@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.Core.Helper;
+import TFC.Enums.EnumSize;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
@@ -10,13 +11,13 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemBellows extends Item
+public class ItemBellows extends ItemTerra
 {
 	public ItemBellows(int i) 
 	{
 		super(i);
-		maxStackSize = 1;
 		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.size = EnumSize.EXTREME;
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class ItemBellows extends Item
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockId(x, y+1, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.terraBellows.blockID, l);
+				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.Bellows.blockID, l);
 				player.inventory.mainInventory[player.inventory.currentItem] = null;
 				return true;
 			}

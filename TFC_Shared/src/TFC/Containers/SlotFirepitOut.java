@@ -15,7 +15,7 @@ public class SlotFirepitOut extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == TFCItems.terraCeramicMold.shiftedIndex) {
+		if(itemstack.itemID == TFCItems.CeramicMold.shiftedIndex) {
 			return true;
 		}
 

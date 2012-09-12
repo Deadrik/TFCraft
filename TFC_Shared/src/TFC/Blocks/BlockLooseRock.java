@@ -44,16 +44,16 @@ public class BlockLooseRock extends BlockTerra
             {
                 for(int y = yCoord; y > yCoord-35; y--)
                 {
-                    if(world.getBlockId(xCoord+x, y, zCoord+z) == TFCBlocks.terraOre.blockID)
+                    if(world.getBlockId(xCoord+x, y, zCoord+z) == TFCBlocks.Ore.blockID)
                     {
                         int m = world.getBlockMetadata(xCoord+x, y, zCoord+z);
-                        if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))
+                        if(!coreSample.contains(BlockOre.getDroppedItem(m)))
                         {
                             //coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
                             if(m!= 14 && m != 15)
                             {
-                                coreSample.add(BlockTerraOre.getDroppedItem(m));
-                                coreSampleStacks.add(new ItemStack(BlockTerraOre.getDroppedItem(m), 1, m));
+                                coreSample.add(BlockOre.getDroppedItem(m));
+                                coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
                             }
                         }
                     }

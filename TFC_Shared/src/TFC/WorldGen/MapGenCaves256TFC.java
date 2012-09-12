@@ -183,7 +183,7 @@ public class MapGenCaves256TFC extends MapGenBase
 										{
 											byte var53 = blockArray[var48];
 
-											if (var53 == TFCBlocks.terraGrass.blockID || var53 == TFCBlocks.terraGrass2.blockID)
+											if (var53 == TFCBlocks.Grass.blockID || var53 == TFCBlocks.Grass2.blockID)
 											{
 												var49 = true;
 											}
@@ -276,13 +276,13 @@ public class MapGenCaves256TFC extends MapGenBase
 			
 			int layerID = rockLayer1.data1;
 			
-			if(layerID == TFCBlocks.terraStoneIgEx.blockID)
+			if(layerID == TFCBlocks.StoneIgEx.blockID)
 			    width -= 0.55;
-			else if(layerID == TFCBlocks.terraStoneIgIn.blockID)
+			else if(layerID == TFCBlocks.StoneIgIn.blockID)
                 width -= 0.55;
-			else if(layerID == TFCBlocks.terraStoneSed.blockID)
+			else if(layerID == TFCBlocks.StoneSed.blockID)
                 width -= 0.3;
-			else if(layerID == TFCBlocks.terraStoneMM.blockID)
+			else if(layerID == TFCBlocks.StoneMM.blockID)
                 width -= 0.2;
 			
 			if(this.rand.nextInt(8) == 0)

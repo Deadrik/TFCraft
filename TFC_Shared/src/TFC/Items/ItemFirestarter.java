@@ -5,17 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 import TFC.Core.Helper;
+import TFC.Enums.EnumSize;
 
 import net.minecraft.src.*;
 
-public class ItemFirestarter extends Item
+public class ItemFirestarter extends ItemTerra
 {
 
     public ItemFirestarter(int i)
     {
         super(i);
         this.setMaxDamage(8);
-        maxStackSize = 1;
+        this.size = EnumSize.SMALL;
         this.hasSubtypes = false;
         this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
@@ -103,7 +104,7 @@ public class ItemFirestarter extends Item
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.terraFirepitOn.blockID, 2);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.FirepitOn.blockID, 2);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }
@@ -125,7 +126,7 @@ public class ItemFirestarter extends Item
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.terraForgeOn.blockID, 1);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.ForgeOn.blockID, 1);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }

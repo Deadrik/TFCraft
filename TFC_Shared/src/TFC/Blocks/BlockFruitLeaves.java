@@ -346,7 +346,7 @@ public class BlockFruitLeaves extends Block
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCBlocks.terraSapling.blockID;
+        return TFCBlocks.Sapling.blockID;
     }
     @Override
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)

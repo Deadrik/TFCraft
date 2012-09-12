@@ -16,10 +16,10 @@ public class WorldGenCustomPumpkin extends WorldGenerator
 			int var9 = par5 + par2Random.nextInt(8) - par2Random.nextInt(8);
 			int var5 = par1World.getBlockId(var7, var8 - 1, var9);
 			if (par1World.isAirBlock(var7, var8, var9) && 
-					(var5 == Block.grass.blockID || var5 == TFCBlocks.terraGrass.blockID || var5 == TFCBlocks.terraGrass2.blockID ||
-					var5 == TFCBlocks.terraDirt.blockID || var5 == TFCBlocks.terraDirt.blockID ||
-					var5 == TFCBlocks.terraClayGrass.blockID || var5 == TFCBlocks.terraClayGrass2.blockID ||
-					var5 == TFCBlocks.terraPeatGrass.blockID || var5 == TFCBlocks.terraPeat.blockID) && Block.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
+					(var5 == Block.grass.blockID || var5 == TFCBlocks.Grass.blockID || var5 == TFCBlocks.Grass2.blockID ||
+					var5 == TFCBlocks.Dirt.blockID || var5 == TFCBlocks.Dirt.blockID ||
+					var5 == TFCBlocks.ClayGrass.blockID || var5 == TFCBlocks.ClayGrass2.blockID ||
+					var5 == TFCBlocks.PeatGrass.blockID || var5 == TFCBlocks.Peat.blockID) && Block.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
 			{
 				par1World.setBlockAndMetadata(var7, var8, var9, Block.pumpkin.blockID, par2Random.nextInt(4));
 			}

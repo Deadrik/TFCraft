@@ -14,9 +14,9 @@ public class WorldGenPineShort extends WorldGenerator
     {
         super(par1);
         metaLeaf = id;
-		blockLeaf = TFCBlocks.terraLeaves.blockID;
+		blockLeaf = TFCBlocks.Leaves.blockID;
 		metaWood = id;
-		blockWood = TFCBlocks.terraWood.blockID;
+		blockWood = TFCBlocks.Wood.blockID;
     }
 
     public boolean generate(World world, Random par2Random, int x, int y, int z)

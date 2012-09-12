@@ -26,6 +26,7 @@ public class ItemTerra extends Item
     {
         super(id);
         size = EnumSize.TINY;
+        maxStackSize = size.stackSize;
     }
     public ItemTerra(int id, String tex) 
     {
@@ -37,6 +38,11 @@ public class ItemTerra extends Item
     public String getTextureFile()
     {
         return texture;
+    }
+    
+    public int getItemStackLimit()
+    {
+        return this.size.stackSize;
     }
 
     public ItemTerra setTexturePath(String t)

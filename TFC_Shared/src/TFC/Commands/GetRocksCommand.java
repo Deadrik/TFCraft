@@ -47,11 +47,11 @@ public class GetRocksCommand extends CommandBase{
 	
 	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.terraStoneIgIn.blockID)
+		if(inType == TFCBlocks.StoneIgIn.blockID)
 			return inMeta;
-		else if(inType == TFCBlocks.terraStoneSed.blockID)
+		else if(inType == TFCBlocks.StoneSed.blockID)
 			return inMeta+3;
-		else if(inType == TFCBlocks.terraStoneIgEx.blockID)
+		else if(inType == TFCBlocks.StoneIgEx.blockID)
 		{
 			return inMeta+13;
 		}

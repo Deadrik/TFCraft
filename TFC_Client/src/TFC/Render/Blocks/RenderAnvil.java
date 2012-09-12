@@ -7,7 +7,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraftforge.client.ForgeHooksClient;
-import TFC.Blocks.BlockTerraAnvil;
+import TFC.Blocks.BlockAnvil;
 import TFC.Core.AnvilReq;
 import TFC.Core.TFC_Climate;
 import TFC.TileEntities.TileEntityTerraAnvil;
@@ -20,7 +20,7 @@ public class RenderAnvil {
 		IBlockAccess blockAccess = renderblocks.blockAccess;
 
 		int meta = blockAccess.getBlockMetadata(i, j, k);
-		int direction = ((BlockTerraAnvil)block).getDirectionFromMetadata(meta);
+		int direction = ((BlockAnvil)block).getDirectionFromMetadata(meta);
 		
 		TileEntityTerraAnvil te = (TileEntityTerraAnvil)blockAccess.getBlockTileEntity(i, j, k);
 

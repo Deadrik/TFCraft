@@ -50,11 +50,11 @@ public class WorldGenClayPit implements IWorldGenerator
 
 							DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 
-							if (ID == TFCBlocks.terraDirt.blockID || ID == TFCBlocks.terraDirt2.blockID)
+							if (ID == TFCBlocks.Dirt.blockID || ID == TFCBlocks.Dirt2.blockID)
 							{
 								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 							}
-							else if(ID == TFCBlocks.terraGrass.blockID || ID == TFCBlocks.terraGrass2.blockID)
+							else if(ID == TFCBlocks.Grass.blockID || ID == TFCBlocks.Grass2.blockID)
 							{
 								world.setBlockAndMetadata(xCoord, yCoord, zCoord, TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 							}

@@ -1,6 +1,6 @@
 package TFC.Items;
 
-import TFC.Blocks.BlockTerraSluice;
+import TFC.Blocks.BlockSluice;
 import net.minecraft.src.*;
 
 public class ItemSluice extends Item
@@ -56,12 +56,12 @@ public class ItemSluice extends Item
 			{
 				byte0 = 1;
 			}
-			if(((BlockTerraSluice)TFCBlocks.terraSluice).canPlace(world, i, j+1, k,r))
+			if(((BlockSluice)TFCBlocks.Sluice).canPlace(world, i, j+1, k,r))
 			{
-				world.setBlockAndMetadata(i, j+1, k, TFCBlocks.terraSluice.blockID, r);
-				if(world.getBlockId(i, j+1, k) == TFCBlocks.terraSluice.blockID)
+				world.setBlockAndMetadata(i, j+1, k, TFCBlocks.Sluice.blockID, r);
+				if(world.getBlockId(i, j+1, k) == TFCBlocks.Sluice.blockID)
 				{
-					world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, TFCBlocks.terraSluice.blockID, r + 8);
+					world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, TFCBlocks.Sluice.blockID, r + 8);
 					entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
 				}
 				return true;

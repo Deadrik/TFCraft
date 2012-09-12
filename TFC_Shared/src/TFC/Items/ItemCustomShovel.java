@@ -9,8 +9,8 @@ public class ItemCustomShovel extends ItemTool
 {
     /** an array of the blocks this spade is effective against */
     private static Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, 
-        TFCBlocks.terraDirt, TFCBlocks.terraDirt2, TFCBlocks.terraGrass, TFCBlocks.terraGrass2, TFCBlocks.terraClayGrass, TFCBlocks.terraClayGrass2, TFCBlocks.terraPeatGrass, TFCBlocks.terraPeat, 
-        TFCBlocks.terraClay, TFCBlocks.terraClay2};
+        TFCBlocks.Dirt, TFCBlocks.Dirt2, TFCBlocks.Grass, TFCBlocks.Grass2, TFCBlocks.ClayGrass, TFCBlocks.ClayGrass2, TFCBlocks.PeatGrass, TFCBlocks.Peat, 
+        TFCBlocks.Clay, TFCBlocks.Clay2};
 
     public ItemCustomShovel(int par1, EnumToolMaterial par2EnumToolMaterial)
     {

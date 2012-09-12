@@ -23,8 +23,8 @@ public class CraftingHandler implements ICraftingHandler
 
 		if(iinventory != null)
 		{
-			if(itemstack.itemID == TFCBlocks.terraStoneSedBrick.blockID || itemstack.itemID == TFCBlocks.terraStoneIgInBrick.blockID || 
-					itemstack.itemID == TFCBlocks.terraStoneIgExBrick.blockID || itemstack.itemID == TFCBlocks.terraStoneMMBrick.blockID)
+			if(itemstack.itemID == TFCBlocks.StoneSedBrick.blockID || itemstack.itemID == TFCBlocks.StoneIgInBrick.blockID || 
+					itemstack.itemID == TFCBlocks.StoneIgExBrick.blockID || itemstack.itemID == TFCBlocks.StoneMMBrick.blockID)
 			{
 				HandleItem(entityplayer, iinventory, TFC_Core.Chisels);
 			}
@@ -38,7 +38,7 @@ public class CraftingHandler implements ICraftingHandler
 			{
 				HandleItem(entityplayer, iinventory, TFC_Core.Knives);
 			}
-			else if(itemstack.itemID == TFCItems.terraWoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.terraWoodSupportItemH.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex)
 			{
 				HandleItem(entityplayer, iinventory, TFC_Core.Axes);
 			}

@@ -118,11 +118,11 @@ public class WorldGenLakesTFC extends WorldGenerator
 					for (k4 = 4; k4 < 8; ++k4)
 					{
 						int id = world.getBlockId(xCoord + i2, yCoord + k4 - 1, zCoord + j3);
-						if (var6[(i2 * 16 + j3) * 8 + k4] && (id == Block.dirt.blockID || id == TFCBlocks.terraDirt.blockID
-								|| id == TFCBlocks.terraDirt2.blockID || id == TFCBlocks.terraGrass.blockID || id == TFCBlocks.terraGrass2.blockID || 
-								id == TFCBlocks.terraClayGrass.blockID || id == TFCBlocks.terraClayGrass2.blockID || 
-								id == TFCBlocks.terraClay.blockID || id == TFCBlocks.terraClay2.blockID || 
-								id == TFCBlocks.terraPeat.blockID || id == TFCBlocks.terraPeatGrass.blockID) && 
+						if (var6[(i2 * 16 + j3) * 8 + k4] && (id == Block.dirt.blockID || id == TFCBlocks.Dirt.blockID
+								|| id == TFCBlocks.Dirt2.blockID || id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID || 
+								id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID || 
+								id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID || 
+								id == TFCBlocks.Peat.blockID || id == TFCBlocks.PeatGrass.blockID) && 
 								world.getSavedLightValue(EnumSkyBlock.Sky, xCoord + i2, yCoord + k4, zCoord + j3) > 0)
 						{
 							TFCBiome var35 = (TFCBiome) world.getBiomeGenForCoords(xCoord + i2, zCoord + j3);
@@ -143,7 +143,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 
 			if (Block.blocksList[this.blockIndex].blockMaterial == Material.lava)
 			{
-				int id = TFCBlocks.terraStoneIgEx.blockID;
+				int id = TFCBlocks.StoneIgEx.blockID;
 				int meta = random.nextInt(4);
 				for (i2 = 0; i2 < 16; ++i2)
 				{
@@ -159,27 +159,27 @@ public class WorldGenLakesTFC extends WorldGenerator
 
 								if(world.getBlockId(xCoord + i2 + 1, yCoord + k4, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(xCoord + i2 + 1, yCoord + k4, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2 + 1, yCoord + k4, zCoord + j3, TFCBlocks.Sulfur.blockID,new Random().nextInt(4));
 								}
 								if(world.getBlockId(xCoord + i2 - 1, yCoord + k4, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(xCoord + i2 - 1, yCoord + k4, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2 - 1, yCoord + k4, zCoord + j3, TFCBlocks.Sulfur.blockID,new Random().nextInt(4));
 								}
 								if(world.getBlockId(xCoord + i2, yCoord + k4 + 1, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 + 1, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 + 1, zCoord + j3, TFCBlocks.Sulfur.blockID,new Random().nextInt(4));
 								}
 								if(world.getBlockId(xCoord + i2, yCoord + k4 - 1, zCoord + j3) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFCBlocks.Sulfur.blockID,new Random().nextInt(4));
 								}
 								if(world.getBlockId(xCoord + i2, yCoord + k4, zCoord + j3 + 1) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3 + 1, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3 + 1, TFCBlocks.Sulfur.blockID,new Random().nextInt(4));
 								}
 								if(world.getBlockId(xCoord + i2, yCoord + k4, zCoord + j3 - 1) == 0)
 								{
-									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3 - 1, TFCBlocks.terraSulfur.blockID,new Random().nextInt(4));
+									world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3 - 1, TFCBlocks.Sulfur.blockID,new Random().nextInt(4));
 								}
 							}
 						}

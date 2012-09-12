@@ -6,6 +6,7 @@ import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 import net.minecraft.src.*;
@@ -18,7 +19,6 @@ public class ItemChisel extends ItemTool
     {
         super(i, 0, e, new Block[] {});
         this.setMaxDamage(e.getMaxUses()/2);
-        this.maxStackSize = 1;
     }
 
     public String getTextureFile() {

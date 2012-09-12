@@ -470,8 +470,8 @@ public class WorldGenCustomBigTree extends WorldGenerator
 		  int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
 		  int var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
-		  if (!(var3 == TFCBlocks.terraDirt.blockID || var3 == TFCBlocks.terraDirt2.blockID || var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID ||
-				  var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID))
+		  if (!(var3 == TFCBlocks.Dirt.blockID || var3 == TFCBlocks.Dirt2.blockID || var3 == TFCBlocks.Grass.blockID || var3 == TFCBlocks.Grass2.blockID ||
+				  var3 == TFCBlocks.ClayGrass.blockID || var3 == TFCBlocks.ClayGrass2.blockID))
 		  {
 			  return false;
 		  }

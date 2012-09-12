@@ -254,13 +254,13 @@ public class MapGenCavesTFC extends MapGenBase
 		
 		int layerID = rockLayer1.data1;
 		
-		if(layerID == TFCBlocks.terraStoneIgEx.blockID)
+		if(layerID == TFCBlocks.StoneIgEx.blockID)
 		    width -= 0.55;
-		else if(layerID == TFCBlocks.terraStoneIgIn.blockID)
+		else if(layerID == TFCBlocks.StoneIgIn.blockID)
             width -= 0.55;
-		else if(layerID == TFCBlocks.terraStoneSed.blockID)
+		else if(layerID == TFCBlocks.StoneSed.blockID)
             width -= 0.3;
-		else if(layerID == TFCBlocks.terraStoneMM.blockID)
+		else if(layerID == TFCBlocks.StoneMM.blockID)
             width -= 0.2;
 		
 		if(this.rand.nextInt(8) == 0)

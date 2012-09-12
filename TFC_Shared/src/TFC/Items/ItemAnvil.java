@@ -4,6 +4,7 @@ import java.util.List;
 
 import TFC.Core.AnvilReq;
 import TFC.Core.Helper;
+import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
@@ -14,7 +15,7 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemAnvil extends Item
+public class ItemAnvil extends ItemTerra
 {
 	public int anvilId;
 	public AnvilReq req;
@@ -22,12 +23,12 @@ public class ItemAnvil extends Item
 	public ItemAnvil(int i, int id, AnvilReq Areq) 
 	{
 		super(i);
-		maxStackSize = 1;
 		anvilId = id;
 		req = Areq;
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.size = EnumSize.EXTREME;
 	}
 
 	@Override
@@ -65,8 +66,8 @@ public class ItemAnvil extends Item
 			{
 				byte0 = 0;
 			}
-			int id = TFCBlocks.terraAnvil.blockID;
-			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? TFCBlocks.terraAnvil2.blockID : TFCBlocks.terraAnvil.blockID;
+			int id = TFCBlocks.Anvil.blockID;
+			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? TFCBlocks.Anvil2.blockID : TFCBlocks.Anvil.blockID;
 			world.setBlockAndMetadataWithNotify( x, y+1, z, id, byte0+anvilId);
             world.markBlockNeedsUpdate(x, y+1, z);
 			if(world.getBlockTileEntity(x, y+1, z) != null)

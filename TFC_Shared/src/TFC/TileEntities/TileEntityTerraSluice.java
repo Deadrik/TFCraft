@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import TFC.Blocks.BlockTerraOre;
-import TFC.Blocks.BlockTerraSluice;
+import TFC.Blocks.BlockOre;
+import TFC.Blocks.BlockSluice;
 import TFC.Core.TFCItems;
 import TFC.Items.ItemOre1;
 import net.minecraft.src.*;
@@ -228,16 +228,16 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                     {
                         for(int y = yCoord; y > yCoord-50; y--)
                         {
-                            if(worldObj.getBlockId(x+xCoord, y, z+zCoord) == TFCBlocks.terraOre.blockID)
+                            if(worldObj.getBlockId(x+xCoord, y, z+zCoord) == TFCBlocks.Ore.blockID)
                             {
                                 int m = worldObj.getBlockMetadata(x+xCoord, y, z+zCoord);
-                                if(!coreSample.contains(BlockTerraOre.getDroppedItem(m)))
+                                if(!coreSample.contains(BlockOre.getDroppedItem(m)))
                                 {
                                     //coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
                                     if(m!= 14 && m != 15)
                                     {
-                                        coreSample.add(BlockTerraOre.getDroppedItem(m));
-                                        coreSampleStacks.add(new ItemStack(BlockTerraOre.getDroppedItem(m), 1, m));
+                                        coreSample.add(BlockOre.getDroppedItem(m));
+                                        coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
                                     }
                                 }
                             }
@@ -246,7 +246,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                 }
                 initialized = true;
             }
-            int[] dir = BlockTerraSluice.headBlockToFootBlockMap[BlockTerraSluice.getDirectionFromMetadata(meta)];
+            int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
             List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
                     xCoord, yCoord, zCoord, 
                     xCoord+1, yCoord+1.1f, zCoord+1));
@@ -301,87 +301,87 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                     else if(random.nextInt((int) (400*gemMod)) == 0)
                     {
 
-                        items.add(new ItemStack(TFCItems.terraGemAgate,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemJade,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemJasper,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemOpal,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemRuby,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,0));
-                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,0));
+                        items.add(new ItemStack(TFCItems.GemAgate,1,0));
+                        items.add(new ItemStack(TFCItems.GemAmethyst,1,0));
+                        items.add(new ItemStack(TFCItems.GemBeryl,1,0));
+                        items.add(new ItemStack(TFCItems.GemEmerald,1,0));
+                        items.add(new ItemStack(TFCItems.GemGarnet,1,0));
+                        items.add(new ItemStack(TFCItems.GemJade,1,0));
+                        items.add(new ItemStack(TFCItems.GemJasper,1,0));
+                        items.add(new ItemStack(TFCItems.GemOpal,1,0));
+                        items.add(new ItemStack(TFCItems.GemRuby,1,0));
+                        items.add(new ItemStack(TFCItems.GemSapphire,1,0));
+                        items.add(new ItemStack(TFCItems.GemTourmaline,1,0));
+                        items.add(new ItemStack(TFCItems.GemTopaz,1,0));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 
                     }
                     else if(random.nextInt((int) (800*gemMod)) == 0)
                     {
-                        items.add(new ItemStack(TFCItems.terraGemAgate,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemJade,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemJasper,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemOpal,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemRuby,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,1));
-                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,1));
+                        items.add(new ItemStack(TFCItems.GemAgate,1,1));
+                        items.add(new ItemStack(TFCItems.GemAmethyst,1,1));
+                        items.add(new ItemStack(TFCItems.GemBeryl,1,1));
+                        items.add(new ItemStack(TFCItems.GemEmerald,1,1));
+                        items.add(new ItemStack(TFCItems.GemGarnet,1,1));
+                        items.add(new ItemStack(TFCItems.GemJade,1,1));
+                        items.add(new ItemStack(TFCItems.GemJasper,1,1));
+                        items.add(new ItemStack(TFCItems.GemOpal,1,1));
+                        items.add(new ItemStack(TFCItems.GemRuby,1,1));
+                        items.add(new ItemStack(TFCItems.GemSapphire,1,1));
+                        items.add(new ItemStack(TFCItems.GemTourmaline,1,1));
+                        items.add(new ItemStack(TFCItems.GemTopaz,1,1));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
                     }
                     else if(random.nextInt((int) (1600*gemMod)) == 0)
                     {
-                        items.add(new ItemStack(TFCItems.terraGemAgate,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemJade,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemJasper,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemOpal,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemRuby,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,2));
-                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,2));
+                        items.add(new ItemStack(TFCItems.GemAgate,1,2));
+                        items.add(new ItemStack(TFCItems.GemAmethyst,1,2));
+                        items.add(new ItemStack(TFCItems.GemBeryl,1,2));
+                        items.add(new ItemStack(TFCItems.GemEmerald,1,2));
+                        items.add(new ItemStack(TFCItems.GemGarnet,1,2));
+                        items.add(new ItemStack(TFCItems.GemJade,1,2));
+                        items.add(new ItemStack(TFCItems.GemJasper,1,2));
+                        items.add(new ItemStack(TFCItems.GemOpal,1,2));
+                        items.add(new ItemStack(TFCItems.GemRuby,1,2));
+                        items.add(new ItemStack(TFCItems.GemSapphire,1,2));
+                        items.add(new ItemStack(TFCItems.GemTourmaline,1,2));
+                        items.add(new ItemStack(TFCItems.GemTopaz,1,2));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
                     }
                     else if(random.nextInt((int) (3200*gemMod)) == 0)
                     {
-                        items.add(new ItemStack(TFCItems.terraGemAgate,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemJade,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemJasper,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemOpal,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemRuby,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,3));
-                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,3));
+                        items.add(new ItemStack(TFCItems.GemAgate,1,3));
+                        items.add(new ItemStack(TFCItems.GemAmethyst,1,3));
+                        items.add(new ItemStack(TFCItems.GemBeryl,1,3));
+                        items.add(new ItemStack(TFCItems.GemEmerald,1,3));
+                        items.add(new ItemStack(TFCItems.GemGarnet,1,3));
+                        items.add(new ItemStack(TFCItems.GemJade,1,3));
+                        items.add(new ItemStack(TFCItems.GemJasper,1,3));
+                        items.add(new ItemStack(TFCItems.GemOpal,1,3));
+                        items.add(new ItemStack(TFCItems.GemRuby,1,3));
+                        items.add(new ItemStack(TFCItems.GemSapphire,1,3));
+                        items.add(new ItemStack(TFCItems.GemTourmaline,1,3));
+                        items.add(new ItemStack(TFCItems.GemTopaz,1,3));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
                     }
                     else if(random.nextInt((int) (6400*gemMod)) == 0)
                     {
-                        items.add(new ItemStack(TFCItems.terraGemAgate,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemAmethyst,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemBeryl,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemEmerald,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemGarnet,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemJade,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemJasper,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemOpal,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemRuby,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemSapphire,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemTourmaline,1,4));
-                        items.add(new ItemStack(TFCItems.terraGemTopaz,1,4));
+                        items.add(new ItemStack(TFCItems.GemAgate,1,4));
+                        items.add(new ItemStack(TFCItems.GemAmethyst,1,4));
+                        items.add(new ItemStack(TFCItems.GemBeryl,1,4));
+                        items.add(new ItemStack(TFCItems.GemEmerald,1,4));
+                        items.add(new ItemStack(TFCItems.GemGarnet,1,4));
+                        items.add(new ItemStack(TFCItems.GemJade,1,4));
+                        items.add(new ItemStack(TFCItems.GemJasper,1,4));
+                        items.add(new ItemStack(TFCItems.GemOpal,1,4));
+                        items.add(new ItemStack(TFCItems.GemRuby,1,4));
+                        items.add(new ItemStack(TFCItems.GemSapphire,1,4));
+                        items.add(new ItemStack(TFCItems.GemTourmaline,1,4));
+                        items.add(new ItemStack(TFCItems.GemTopaz,1,4));
 
                         addToInventory((ItemStack)items.toArray()[random.nextInt(items.toArray().length)]);
 
@@ -392,19 +392,19 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
                         
                         if(r == 0)
                         {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,3));
+                            addToInventory(new ItemStack(TFCItems.GemDiamond,1,3));
                         }
                         else if(r < 15)
                         {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,2));
+                            addToInventory(new ItemStack(TFCItems.GemDiamond,1,2));
                         }
                         else if(r < 25)
                         {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,1));
+                            addToInventory(new ItemStack(TFCItems.GemDiamond,1,1));
                         }
                         else if(r < 50)
                         {
-                            addToInventory(new ItemStack(TFCItems.terraGemDiamond,1,0));
+                            addToInventory(new ItemStack(TFCItems.GemDiamond,1,0));
                         }
                     }
                     processTimeRemaining = 0;
@@ -450,7 +450,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
         ///////////This is where we handle the water flow
         ////////////////////////////////////////////////////////
         boolean isFlowing = (meta & 4) == 4;
-        boolean isFoot = BlockTerraSluice.isBlockFootOfBed(meta);
+        boolean isFoot = BlockSluice.isBlockFootOfBed(meta);
 
         if((meta & 3) == 0 && !isFoot)
         {

@@ -27,8 +27,8 @@ public class WorldGenCustomShrub extends WorldGenerator
 
 		int var7 = par1World.getBlockId(par3, par4, par5);
 
-		if (var7 == TFCBlocks.terraDirt.blockID || var7 == TFCBlocks.terraDirt2.blockID ||var7 == TFCBlocks.terraGrass.blockID ||var7 == TFCBlocks.terraGrass2.blockID ||
-				var7 == TFCBlocks.terraClayGrass.blockID ||var7 == TFCBlocks.terraClayGrass2.blockID)
+		if (var7 == TFCBlocks.Dirt.blockID || var7 == TFCBlocks.Dirt2.blockID ||var7 == TFCBlocks.Grass.blockID ||var7 == TFCBlocks.Grass2.blockID ||
+				var7 == TFCBlocks.ClayGrass.blockID ||var7 == TFCBlocks.ClayGrass2.blockID)
 		{
 			++par4;
 			par1World.setBlockAndMetadata(par3, par4, par5, Block.wood.blockID, this.field_48196_b);

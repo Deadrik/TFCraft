@@ -31,10 +31,10 @@ public class BlockCustomReed extends Block
 	{
 		int var5 = par1World.getBlockId(par2, par3 - 1, par4);
 		boolean correctSoil = var5 != Block.grass.blockID && var5 != Block.dirt.blockID && 
-                var5 != TFCBlocks.terraGrass.blockID && var5 != TFCBlocks.terraGrass2.blockID &&
-                var5 != TFCBlocks.terraDirt.blockID && var5 != TFCBlocks.terraDirt.blockID &&
-                var5 != TFCBlocks.terraClayGrass.blockID && var5 != TFCBlocks.terraClayGrass2.blockID &&
-                var5 != TFCBlocks.terraPeatGrass.blockID && var5 != TFCBlocks.terraPeat.blockID && var5 != Block.sand.blockID;
+                var5 != TFCBlocks.Grass.blockID && var5 != TFCBlocks.Grass2.blockID &&
+                var5 != TFCBlocks.Dirt.blockID && var5 != TFCBlocks.Dirt.blockID &&
+                var5 != TFCBlocks.ClayGrass.blockID && var5 != TFCBlocks.ClayGrass2.blockID &&
+                var5 != TFCBlocks.PeatGrass.blockID && var5 != TFCBlocks.Peat.blockID && var5 != Block.sand.blockID;
 		return var5 == this.blockID ? true : correctSoil ? false : par1World.getBlockMaterial(par2 - 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2 + 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 - 1) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 + 1) == Material.water;
 	}
 

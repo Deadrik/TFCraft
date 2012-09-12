@@ -119,11 +119,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
                             {
                                 var15 = par1World.getBlockId(par2 + var12, par3 + var13, par4 + var14);
 
-                                if (var15 == TFCBlocks.terraWood.blockID)
+                                if (var15 == TFCBlocks.Wood.blockID)
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
                                 }
-                                else if (var15 == TFCBlocks.terraLeaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
+                                else if (var15 == TFCBlocks.Leaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
                                 {
                                     this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
                                 }
@@ -224,7 +224,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCBlocks.terraSapling.blockID;
+        return TFCBlocks.Sapling.blockID;
     }
     @Override
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
@@ -253,7 +253,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
                             if(new Random().nextInt(100) < 11)
                                 dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(Item.stick, 1));
                             else if(new Random().nextInt(100) < 4 && l != 9 && l != 15)
-                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(TFCBlocks.terraSapling, 1, l));
+                                dropBlockAsItem_do(world, i+x, j+y, k+z, new ItemStack(TFCBlocks.Sapling, 1, l));
                             removeLeaves(world, i+x, j+y, k+z);
                             super.harvestBlock(world, entityplayer, i+x, j+y, k+z, l);
                             
@@ -282,7 +282,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
             if(new Random().nextInt(100) < 28)
                 dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
             else if(new Random().nextInt(100) < 6 && l != 9 && l != 15)
-                dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCBlocks.terraSapling, 1, l));
+                dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCBlocks.Sapling, 1, l));
 
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }

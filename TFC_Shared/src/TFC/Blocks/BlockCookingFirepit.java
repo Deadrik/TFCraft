@@ -36,7 +36,7 @@ public class BlockCookingFirepit extends BlockContainer
 		{
 			return true;
 		} 
-		else if(itemid == TFCItems.terraFireStarter.shiftedIndex)
+		else if(itemid == TFCItems.FireStarter.shiftedIndex)
 		{
 			if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k) != null)
 			{
@@ -131,7 +131,7 @@ public class BlockCookingFirepit extends BlockContainer
 
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this.blockID == TFCBlocks.terraFirepit.blockID)
+		if (this.blockID == TFCBlocks.Firepit.blockID)
 		{
 			return;
 		}
@@ -190,12 +190,12 @@ public class BlockCookingFirepit extends BlockContainer
 
         if (par0)
         {
-            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.terraFirepitOn.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.FirepitOn.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
         else
         {
-            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.terraFirepit.blockID);
+            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Firepit.blockID);
             par1World.markBlockAsNeedsUpdate(par2, par3, par4);
         }
 

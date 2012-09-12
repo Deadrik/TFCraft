@@ -45,15 +45,15 @@ public class WorldGenPeatPit implements IWorldGenerator
 							TFCBiome biome = (TFCBiome) par1World.getBiomeGenForCoords(var8, var9);
 							if(biome == BiomeGenBase.swampland)
 							{
-								if (var13 == TFCBlocks.terraDirt.blockID || var13 == TFCBlocks.terraDirt2.blockID || 
-										var13 == TFCBlocks.terraClay.blockID || var13 == TFCBlocks.terraClay2.blockID || var13 == TFCBlocks.terraPeat.blockID)
+								if (var13 == TFCBlocks.Dirt.blockID || var13 == TFCBlocks.Dirt2.blockID || 
+										var13 == TFCBlocks.Clay.blockID || var13 == TFCBlocks.Clay2.blockID || var13 == TFCBlocks.Peat.blockID)
 								{
-									par1World.setBlock(var8, var12, var9, TFCBlocks.terraPeat.blockID);
+									par1World.setBlock(var8, var12, var9, TFCBlocks.Peat.blockID);
 								}
-								else if(var13 == TFCBlocks.terraGrass.blockID || var13 == TFCBlocks.terraGrass2.blockID ||
-										var13 == TFCBlocks.terraClayGrass.blockID || var13 == TFCBlocks.terraClayGrass2.blockID || var13 == TFCBlocks.terraPeatGrass.blockID)
+								else if(var13 == TFCBlocks.Grass.blockID || var13 == TFCBlocks.Grass2.blockID ||
+										var13 == TFCBlocks.ClayGrass.blockID || var13 == TFCBlocks.ClayGrass2.blockID || var13 == TFCBlocks.PeatGrass.blockID)
 								{
-									par1World.setBlock(var8, var12, var9, TFCBlocks.terraPeatGrass.blockID);
+									par1World.setBlock(var8, var12, var9, TFCBlocks.PeatGrass.blockID);
 								}
 							}
 						}

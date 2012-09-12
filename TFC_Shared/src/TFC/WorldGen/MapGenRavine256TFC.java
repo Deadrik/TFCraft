@@ -176,18 +176,18 @@ public class MapGenRavine256TFC extends MapGenBase
 										{
 											byte var52 = blockArray[var47];
 
-											if (var52 == TFCBlocks.terraGrass.blockID || var52 == TFCBlocks.terraGrass2.blockID)
+											if (var52 == TFCBlocks.Grass.blockID || var52 == TFCBlocks.Grass2.blockID)
 											{
 												var48 = true;
 											}
 
-											if (var52 == (byte)TFCBlocks.terraStoneIgIn.blockID || var52 == (byte)TFCBlocks.terraStoneIgEx.blockID || 
-											        var52 == (byte)TFCBlocks.terraStoneSed.blockID || var52 == (byte)TFCBlocks.terraStoneMM.blockID || 
+											if (var52 == (byte)TFCBlocks.StoneIgIn.blockID || var52 == (byte)TFCBlocks.StoneIgEx.blockID || 
+											        var52 == (byte)TFCBlocks.StoneSed.blockID || var52 == (byte)TFCBlocks.StoneMM.blockID || 
 											                var52 == (byte)Block.stone.blockID || var52 == (byte)Block.dirt.blockID || (byte)var52 == Block.grass.blockID ||
-											                        var52 == (byte)TFCBlocks.terraGrass.blockID || var52 == (byte)TFCBlocks.terraGrass2.blockID||
-											                                var52 == (byte)TFCBlocks.terraDirt.blockID || var52 == (byte)TFCBlocks.terraDirt2.blockID||
-											                                        var52 == (byte)TFCBlocks.terraClayGrass.blockID || var52 == (byte)TFCBlocks.terraClayGrass2.blockID||
-											                                                var52 == (byte)TFCBlocks.terraClay.blockID || var52 == (byte)TFCBlocks.terraClay2.blockID)
+											                        var52 == (byte)TFCBlocks.Grass.blockID || var52 == (byte)TFCBlocks.Grass2.blockID||
+											                                var52 == (byte)TFCBlocks.Dirt.blockID || var52 == (byte)TFCBlocks.Dirt2.blockID||
+											                                        var52 == (byte)TFCBlocks.ClayGrass.blockID || var52 == (byte)TFCBlocks.ClayGrass2.blockID||
+											                                                var52 == (byte)TFCBlocks.Clay.blockID || var52 == (byte)TFCBlocks.Clay2.blockID)
 											{
 												if (var49 < 10)
 												{

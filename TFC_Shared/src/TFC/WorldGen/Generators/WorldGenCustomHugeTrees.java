@@ -91,8 +91,8 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							var12 = world.getBlockId(var10, blockUnder, var11);
 
 							if (var12 != 0 && var12 != Block.leaves.blockID && var12 != Block.grass.blockID && var12 != Block.dirt.blockID && var12 != Block.wood.blockID && var12 != Block.sapling.blockID && 
-									!(var12 == TFCBlocks.terraDirt.blockID || var12 == TFCBlocks.terraDirt2.blockID ||var12 == TFCBlocks.terraGrass.blockID ||var12 == TFCBlocks.terraGrass2.blockID ||
-									var12 == TFCBlocks.terraClayGrass.blockID ||var12 == TFCBlocks.terraClayGrass2.blockID))
+									!(var12 == TFCBlocks.Dirt.blockID || var12 == TFCBlocks.Dirt2.blockID ||var12 == TFCBlocks.Grass.blockID ||var12 == TFCBlocks.Grass2.blockID ||
+									var12 == TFCBlocks.ClayGrass.blockID ||var12 == TFCBlocks.ClayGrass2.blockID))
 							{
 								var7 = false;
 							}
@@ -113,8 +113,8 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 			{
 				blockUnder = world.getBlockId(xCoord, yCoord - 1, zCoord);
 
-				if ((blockUnder == TFCBlocks.terraDirt.blockID || blockUnder == TFCBlocks.terraDirt2.blockID || blockUnder == TFCBlocks.terraGrass.blockID || blockUnder == TFCBlocks.terraGrass2.blockID ||
-						blockUnder == TFCBlocks.terraClayGrass.blockID || blockUnder == TFCBlocks.terraClayGrass2.blockID) && yCoord < 256 - var6 - 1)
+				if ((blockUnder == TFCBlocks.Dirt.blockID || blockUnder == TFCBlocks.Dirt2.blockID || blockUnder == TFCBlocks.Grass.blockID || blockUnder == TFCBlocks.Grass2.blockID ||
+						blockUnder == TFCBlocks.ClayGrass.blockID || blockUnder == TFCBlocks.ClayGrass2.blockID) && yCoord < 256 - var6 - 1)
 				{
 					DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 			        

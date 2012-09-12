@@ -44,7 +44,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 					if (i1 >= 0 && i1 < world.getHeight())
 					{
 						int j3 = world.getBlockId(i2, i1, l2);
-						if (j3 != 0 && j3 != TFCBlocks.terraLeaves.blockID)
+						if (j3 != 0 && j3 != TFCBlocks.Leaves.blockID)
 						{
 							flag = false;
 						}
@@ -62,8 +62,8 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 			return false;
 		}
 		int var3 = world.getBlockId(xCoord, yCoord - 1, zCoord);
-		if (!(var3 == TFCBlocks.terraDirt.blockID || var3 == TFCBlocks.terraDirt2.blockID || var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID ||
-				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| yCoord >= world.getHeight() - treeHeight - 1)
+		if (!(var3 == TFCBlocks.Dirt.blockID || var3 == TFCBlocks.Dirt2.blockID || var3 == TFCBlocks.Grass.blockID || var3 == TFCBlocks.Grass2.blockID ||
+				var3 == TFCBlocks.ClayGrass.blockID || var3 == TFCBlocks.ClayGrass2.blockID)|| yCoord >= world.getHeight() - treeHeight - 1)
 		{
 			return false;
 		}
@@ -84,7 +84,7 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 					int j4 = zPos - zCoord;
 					if ((Math.abs(l3) != treeRadius || Math.abs(j4) != treeRadius || random.nextInt(2) != 0 && treeDiameter != 0) && !Block.opaqueCubeLookup[world.getBlockId(xPos, treeHeightOffset, zPos)])
 					{
-						setBlockAndMetadata(world, xPos, treeHeightOffset, zPos, TFCBlocks.terraLeaves.blockID, treeId);
+						setBlockAndMetadata(world, xPos, treeHeightOffset, zPos, TFCBlocks.Leaves.blockID, treeId);
 					}
 				}
 			}
@@ -93,9 +93,9 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 		for (int l1 = 0; l1 < treeHeight; l1++)
 		{
 			int k2 = world.getBlockId(xCoord, yCoord + l1, zCoord);
-			if (k2 == 0 || k2 == TFCBlocks.terraLeaves.blockID)
+			if (k2 == 0 || k2 == TFCBlocks.Leaves.blockID)
 			{
-				setBlockAndMetadata(world, xCoord, yCoord + l1, zCoord, TFCBlocks.terraWood.blockID, treeId);
+				setBlockAndMetadata(world, xCoord, yCoord + l1, zCoord, TFCBlocks.Wood.blockID, treeId);
 			}
 		}
 

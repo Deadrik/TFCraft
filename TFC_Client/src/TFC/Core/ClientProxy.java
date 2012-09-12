@@ -419,7 +419,7 @@ public class ClientProxy extends CommonProxy
 		LanguageRegistry LR = LanguageRegistry.instance();
 
 		LR.addStringLocalization("Key_Calendar", "Open Calendar");
-
+		LR.addStringLocalization("generator.DEFAULT", "TFC Default");
 		//Gems
 		String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
 				"Jade","Garnet","Amethyst","Beryl","Jasper","Tourmaline","Diamond"};
@@ -447,19 +447,19 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.GoldPan.GoldPanClay.name", "Gold Pan - Clay");
 		LR.addStringLocalization("item.GoldPan.GoldPanDirt.name", "Gold Pan - Dirt");
 
-		LR.addStringLocalization("item.terraFireStarter.name", "Firestarter");
-		LR.addStringLocalization("item.terraSlag.name", "Slag");
+		LR.addStringLocalization("item.FireStarter.name", "Firestarter");
+		LR.addStringLocalization("item.Slag.name", "Slag");
 
 
-		LR.addStringLocalization("item.terraBellowsItem.name", "Bellows");
-		LR.addStringLocalization("tile.terraBellows.name", "Bellows");
-		LR.addStringLocalization("tile.terraScribe.name", "Scribing Table");
-		LR.addStringLocalization("item.terraInk.name", "Marking");
-		LR.addStringLocalization("item.terraClayMold.name", "Clay Mold");
-		LR.addStringLocalization("item.terraFiredClayMold.name", "Ceramic Mold");
-		LR.addStringLocalization("tile.terraForge.name", "Forge");
-		LR.addStringLocalization("tile.terraBloomery.name", "Bloomery");
-		LR.addStringLocalization("tile.terraMetallurgy.name", "Metallurgy Table");
+		LR.addStringLocalization("item.BellowsItem.name", "Bellows");
+		LR.addStringLocalization("tile.Bellows.name", "Bellows");
+		LR.addStringLocalization("tile.Scribe.name", "Scribing Table");
+		LR.addStringLocalization("item.Ink.name", "Marking");
+		LR.addStringLocalization("item.ClayMold.name", "Clay Mold");
+		LR.addStringLocalization("item.FiredClayMold.name", "Ceramic Mold");
+		LR.addStringLocalization("tile.Forge.name", "Forge");
+		LR.addStringLocalization("tile.Bloomery.name", "Bloomery");
+		LR.addStringLocalization("tile.Metallurgy.name", "Metallurgy Table");
 
 		LR.addStringLocalization("item.PickaxeHeadPlan.name", "Plan: Pickaxe Head");
 		LR.addStringLocalization("item.ShovelHeadPlan.name", "Plan: Shovel Head");
@@ -958,8 +958,8 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("tile.leaves."+WoodNames[i]+".name", WoodNames[i] + " Leaves");
 			LR.addStringLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
 			LR.addStringLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
-			LR.addStringLocalization("item.terraWoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
-			LR.addStringLocalization("item.terraWoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
+			LR.addStringLocalization("item.WoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
+			LR.addStringLocalization("item.WoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
 			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
 			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
 		}
@@ -978,18 +978,18 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("item.StoneProPick.name", "Stone Prospector's Pick");
 
-		LR.addStringLocalization("tile.terraAnvil.name", "Anvil");
-		LR.addStringLocalization("item.terraStoneAnvilItem.name", "Stone Anvil");
-		LR.addStringLocalization("item.terraCopperAnvilItem.name", "Copper Anvil");
-		LR.addStringLocalization("item.terraBronzeAnvilItem.name", "Bronze Anvil");
-		LR.addStringLocalization("item.terraWroughtIronAnvilItem.name", "Wrought Iron Anvil");
-		LR.addStringLocalization("item.terraSteelAnvilItem.name", "Steel Anvil");
-		LR.addStringLocalization("item.terraBlackSteelAnvilItem.name", "Black Steel  Anvil");
-		LR.addStringLocalization("item.terraBlueSteelAnvilItem.name", "Blue Steel Anvil");
-		LR.addStringLocalization("item.terraRedSteelAnvilItem.name", "Red Steel Anvil");
-		LR.addStringLocalization("item.terraBismuthBronzeAnvilItem.name", "Bismuth Bronze Anvil");
-		LR.addStringLocalization("item.terraBlackBronzeAnvilItem.name", "Black Bronze Anvil");
-		LR.addStringLocalization("item.terraRoseGoldAnvilItem.name", "Rose Gold Anvil");
+		LR.addStringLocalization("tile.Anvil.name", "Anvil");
+		LR.addStringLocalization("item.StoneAnvilItem.name", "Stone Anvil");
+		LR.addStringLocalization("item.CopperAnvilItem.name", "Copper Anvil");
+		LR.addStringLocalization("item.BronzeAnvilItem.name", "Bronze Anvil");
+		LR.addStringLocalization("item.WroughtIronAnvilItem.name", "Wrought Iron Anvil");
+		LR.addStringLocalization("item.SteelAnvilItem.name", "Steel Anvil");
+		LR.addStringLocalization("item.BlackSteelAnvilItem.name", "Black Steel  Anvil");
+		LR.addStringLocalization("item.BlueSteelAnvilItem.name", "Blue Steel Anvil");
+		LR.addStringLocalization("item.RedSteelAnvilItem.name", "Red Steel Anvil");
+		LR.addStringLocalization("item.BismuthBronzeAnvilItem.name", "Bismuth Bronze Anvil");
+		LR.addStringLocalization("item.BlackBronzeAnvilItem.name", "Black Bronze Anvil");
+		LR.addStringLocalization("item.RoseGoldAnvilItem.name", "Rose Gold Anvil");
 
 		for(int i= 0; i < ToolNames.length; i++)
 		{
@@ -1040,8 +1040,8 @@ public class ClientProxy extends CommonProxy
 		for(int i= 0; i < Names.length; i++)
 		{
 			LR.addStringLocalization("item.Unshaped"+Names[i].replace(" ", "")+".name", "Unshaped "+Names[i]);
-			LR.addStringLocalization("item.terra"+Names[i].replace(" ", "")+"Ingot.name", Names[i] + " Ingot");
-			LR.addStringLocalization("item.terra"+Names[i].replace(" ", "")+"Ingot2x.name", Names[i] + " Ingot 2x");
+			LR.addStringLocalization("item."+Names[i].replace(" ", "")+"Ingot.name", Names[i] + " Ingot");
+			LR.addStringLocalization("item."+Names[i].replace(" ", "")+"Ingot2x.name", Names[i] + " Ingot 2x");
 		}
 
 		LR.addStringLocalization("item.UnshapedHCBlackSteel.name", "Unshaped High Carbon Black Steel");
@@ -1052,13 +1052,13 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.UnshapedWeakBlueSteel.name", "Unshaped Weak Blue Steel");
 		LR.addStringLocalization("item.UnshapedWeakRedSteel.name", "Unshaped Weak Red Steel");
 
-		LR.addStringLocalization("item.terraHCBlackSteelIngot.name", "High Carbon Black Steel Ingot");
-		LR.addStringLocalization("item.terraHCBlueSteelIngot.name", "High Carbon Blue Steel Ingot");
-		LR.addStringLocalization("item.terraHCRedSteelIngot.name", "High Carbon Red Steel Ingot");
-		LR.addStringLocalization("item.terraHCSteelIngot.name", "High Carbon Steel Ingot");
-		LR.addStringLocalization("item.terraWeakSteelIngot.name", "Weak Steel Ingot");
-		LR.addStringLocalization("item.terraWeakBlueSteelIngot.name", "Weak Blue Steel Ingot");
-		LR.addStringLocalization("item.terraWeakRedSteelIngot.name", "Weak Red Steel Ingot");
+		LR.addStringLocalization("item.HCBlackSteelIngot.name", "High Carbon Black Steel Ingot");
+		LR.addStringLocalization("item.HCBlueSteelIngot.name", "High Carbon Blue Steel Ingot");
+		LR.addStringLocalization("item.HCRedSteelIngot.name", "High Carbon Red Steel Ingot");
+		LR.addStringLocalization("item.HCSteelIngot.name", "High Carbon Steel Ingot");
+		LR.addStringLocalization("item.WeakSteelIngot.name", "Weak Steel Ingot");
+		LR.addStringLocalization("item.WeakBlueSteelIngot.name", "Weak Blue Steel Ingot");
+		LR.addStringLocalization("item.WeakRedSteelIngot.name", "Weak Red Steel Ingot");
 	}
 
 	public boolean getGraphicsLevel()

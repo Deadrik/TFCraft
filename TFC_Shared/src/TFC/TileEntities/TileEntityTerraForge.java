@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import TFC.Blocks.BlockTerraForge;
+import TFC.Blocks.BlockForge;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFCItems;
@@ -295,7 +295,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                             int c = output.stackSize;
                             for(int iterations = 0;c > 0 && iterations <= 20;iterations++)
                             {
-                                if(fireItemStacks[10] != null && fireItemStacks[10].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
+                                if(fireItemStacks[10] != null && fireItemStacks[10].getItem().shiftedIndex == TFCItems.CeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[10].stackSize--;
                                     if(fireItemStacks[10].stackSize == 0)
@@ -303,7 +303,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                                     c--;
                                     count++;
                                 }
-                                else if(fireItemStacks[11] != null && fireItemStacks[11].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
+                                else if(fireItemStacks[11] != null && fireItemStacks[11].getItem().shiftedIndex == TFCItems.CeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[11].stackSize--;
                                     if(fireItemStacks[11].stackSize == 0)
@@ -311,7 +311,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                                     c--;
                                     count++;
                                 }
-                                else if(fireItemStacks[12] != null && fireItemStacks[12].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
+                                else if(fireItemStacks[12] != null && fireItemStacks[12].getItem().shiftedIndex == TFCItems.CeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[12].stackSize--;
                                     if(fireItemStacks[12].stackSize == 0)
@@ -319,7 +319,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                                     c--;
                                     count++;
                                 }
-                                else if(fireItemStacks[13] != null && fireItemStacks[13].getItem().shiftedIndex == TFCItems.terraCeramicMold.shiftedIndex)
+                                else if(fireItemStacks[13] != null && fireItemStacks[13].getItem().shiftedIndex == TFCItems.CeramicMold.shiftedIndex)
                                 {
                                     fireItemStacks[13].stackSize--;
                                     if(fireItemStacks[13].stackSize == 0)
@@ -356,7 +356,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                     {
                         if(fireItemStacks[i] != null && fireItemStacks[i].getItem() instanceof ItemMeltedMetal)
                         {
-                            fireItemStacks[i] = new ItemStack(TFCItems.terraCeramicMold, 1);
+                            fireItemStacks[i] = new ItemStack(TFCItems.CeramicMold, 1);
                             fireItemStacks[i].stackTagCompound = null;
                         }
                     }
@@ -427,19 +427,19 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
 
     public int getMoldIndex()
     {
-        if(fireItemStacks[10] != null && fireItemStacks[10].itemID == TFCItems.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[10] != null && fireItemStacks[10].itemID == TFCItems.CeramicMold.shiftedIndex)
         {
             return 10;
         }
-        if(fireItemStacks[11] != null && fireItemStacks[11].itemID == TFCItems.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[11] != null && fireItemStacks[11].itemID == TFCItems.CeramicMold.shiftedIndex)
         {
             return 11;
         }
-        if(fireItemStacks[12] != null && fireItemStacks[12].itemID == TFCItems.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[12] != null && fireItemStacks[12].itemID == TFCItems.CeramicMold.shiftedIndex)
         {
             return 12;
         }
-        if(fireItemStacks[13] != null && fireItemStacks[13].itemID == TFCItems.terraCeramicMold.shiftedIndex)
+        if(fireItemStacks[13] != null && fireItemStacks[13].itemID == TFCItems.CeramicMold.shiftedIndex)
         {
             return 13;
         }
@@ -605,16 +605,16 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.terraForge.blockID) {
-                    BlockTerraForge.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.Forge.blockID) {
+                    BlockForge.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
                 }
             }
 
             //If the fire is still burning and has fuel
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
             {
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.terraForgeOn.blockID) {
-                    BlockTerraForge.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.ForgeOn.blockID) {
+                    BlockForge.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 
                 float desiredTemp = handleTemp();

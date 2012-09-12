@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import TFC.Blocks.BlockTerraBloomery;
+import TFC.Blocks.BlockBloomery;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFCItems;
@@ -314,7 +314,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
     public void HandleTemperature()
     {
-        int[] direction = BlockTerraBloomery.headBlockToFootBlockMap[worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3];
+        int[] direction = BlockBloomery.headBlockToFootBlockMap[worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3];
         if(ambientTemp == -1000)	
         {
             BiomeGenBase var25 = worldObj.getBiomeGenForCoords(xCoord, zCoord);
@@ -382,8 +382,8 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             {
                 fireTemperature = 220;
             }
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.terraBloomery.blockID) {
-                BlockTerraBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
+            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.Bloomery.blockID) {
+                BlockBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
             }
             //updateGui();
         }
@@ -391,8 +391,8 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
         {
             
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.terraBloomeryOn.blockID) {
-                BlockTerraBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
+            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.BloomeryOn.blockID) {
+                BlockBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
             fuelBurnTemp = 0;
             if(fireTemperature > ambientTemp)
@@ -422,7 +422,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
     public boolean isStackValid(int i, int j, int k)
     {
-        if((worldObj.getBlockId(i, j-1, k) != TFCBlocks.terraMolten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || !worldObj.isBlockNormalCube(i, j-1, k))
+        if((worldObj.getBlockId(i, j-1, k) != TFCBlocks.Molten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || !worldObj.isBlockNormalCube(i, j-1, k))
         {
             return false;
         }
@@ -512,7 +512,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
     {
         if(input[0] != null)
         {
-            if(input[0].itemID == TFCItems.terraCeramicMold.shiftedIndex)
+            if(input[0].itemID == TFCItems.CeramicMold.shiftedIndex)
             {
                 int dam = 0;
                 if(outMetal1Count > 0)
@@ -655,19 +655,19 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             //get the direction that the bloomery is facing so that we know where the stack should be
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
 
-            int[] direction = BlockTerraBloomery.headBlockToFootBlockMap[meta];
+            int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
 
             /*Fill the bloomery stack with molten ore. */
             for (int i = 0; i < 5; i++)
             {
                 /*The stack must be air or already be molten rock*/
                 if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
-                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == TFCBlocks.terraMolten.blockID) &&
+                        worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == TFCBlocks.Molten.blockID) &&
                         worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
                 {
                     //Make sure that the Stack is surrounded by rock
                     if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
-                        worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.terraMolten.blockID);
+                        worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID);
                         worldObj.markBlockNeedsUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
                     } else {
                         worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0);

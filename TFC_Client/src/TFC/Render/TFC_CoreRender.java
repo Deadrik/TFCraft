@@ -8,9 +8,9 @@ import bioxx.importers.WavefrontObject;
 
 import TFC.Blocks.BlockFiniteWater;
 import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.BlockTerraAnvil;
-import TFC.Blocks.BlockTerraBellows;
-import TFC.Blocks.BlockTerraSluice;
+import TFC.Blocks.BlockAnvil;
+import TFC.Blocks.BlockBellows;
+import TFC.Blocks.BlockSluice;
 import TFC.Core.AnvilReq;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
@@ -62,7 +62,7 @@ public class TFC_CoreRender
         par1Block.setBlockBounds(0.0F+ (0.1F * extraX), 0.0F+ (0.1F * extraY), 0.0F+ (0.1F * extraZ), 1.0F-(0.1F * extraX2), 1-(0.1F * extraY2), 1.0F-(0.1F * extraZ2));
 
         int over = renderblocks.overrideBlockTexture;
-        if(over == -1 && (type == TFCBlocks.terraOre.blockID || type == TFCBlocks.terraOre2.blockID || type == TFCBlocks.terraOre3.blockID))
+        if(over == -1 && (type == TFCBlocks.Ore.blockID || type == TFCBlocks.Ore2.blockID || type == TFCBlocks.Ore3.blockID))
         {
             BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
             renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, par2, par3, par4);
@@ -260,8 +260,8 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        int supportIDv = TFCBlocks.terraWoodSupportV.blockID;
-        int supportIDh = TFCBlocks.terraWoodSupportH.blockID;
+        int supportIDv = TFCBlocks.WoodSupportV.blockID;
+        int supportIDh = TFCBlocks.WoodSupportH.blockID;
 
         Boolean hasVerticalBeam = false;
         Boolean hasHorizontalBeamX = false;
@@ -429,15 +429,15 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        int supportIDv = TFCBlocks.terraWoodSupportV.blockID;
-        int supportIDh = TFCBlocks.terraWoodSupportH.blockID;
+        int supportIDv = TFCBlocks.WoodSupportV.blockID;
+        int supportIDh = TFCBlocks.WoodSupportH.blockID;
 
         Boolean hasVerticalBeam = false;
         Boolean hasHorizontalBeamX = false;
         Boolean hasHorizontalBeamZ = false;
 
         //if the block directly beneath is a Vertical Support or a solid block
-        if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == TFCBlocks.terraWoodSupportV.blockID)
+        if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == TFCBlocks.WoodSupportV.blockID)
         {	
             block.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
             renderblocks.renderStandardBlock(block, i, j, k);
@@ -921,7 +921,7 @@ public class TFC_CoreRender
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
         int meta = blockAccess.getBlockMetadata(i, j, k);
-        int direction = ((BlockTerraBellows)block).getDirectionFromMetadata(meta);
+        int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
 
         if(direction == 0)
         {
@@ -1002,7 +1002,7 @@ public class TFC_CoreRender
         IBlockAccess blockAccess = renderblocks.blockAccess;
         Tessellator tessellator = Tessellator.instance;
         int l = blockAccess.getBlockMetadata(i, j, k);
-        int i1 = ((BlockTerraSluice)block).getDirectionFromMetadata(l);
+        int i1 = ((BlockSluice)block).getDirectionFromMetadata(l);
         float f = 0.5F;
         float f1 = 1.0F;
         float f2 = 0.8F;
@@ -1032,7 +1032,7 @@ public class TFC_CoreRender
         int waterB = var10 & 255;
 
         //render ramp
-        if(!((BlockTerraSluice)block).isBlockFootOfBed(l))
+        if(!((BlockSluice)block).isBlockFootOfBed(l))
         {
             if(i1 == 0)
             {
@@ -1047,7 +1047,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, d1, d3);//d,d2
                 tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, d, d3);//d1,d2
                 tessellator.addVertexWithUV(maxX, maxY, minZ, d, d2);//d1,d3
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
@@ -1083,7 +1083,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(maxX, maxY, minZ, d1, d2);
                 tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d1, d3);
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
@@ -1118,7 +1118,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(maxX, maxY, maxZ, d1, d2);
                 tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d1, d3);
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
@@ -1155,7 +1155,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(minX, maxY, maxZ, d1, d2);
                 tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, d1, d3);
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = 223;
@@ -1194,7 +1194,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(maxX, minY, maxZ, d, d3);//d1,d2
                 tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d, d2);//d1,d3
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
@@ -1231,7 +1231,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d1, d2);
                 tessellator.addVertexWithUV(minX, minY, minZ, d1, d3);
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
@@ -1268,7 +1268,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, d1, d2);
                 tessellator.addVertexWithUV(maxX, minY, minZ, d1, d3);
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = 223;
@@ -1305,7 +1305,7 @@ public class TFC_CoreRender
                 tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, d1, d2);
                 tessellator.addVertexWithUV(maxX, minY, maxZ, d1, d3);
 
-                if(((BlockTerraSluice)block).getIsRecievingWater(l))
+                if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
                     k1 = 223;

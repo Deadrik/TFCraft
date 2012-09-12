@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Enums.EnumSize;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -10,7 +11,7 @@ public class ItemIngot extends ItemTerra
 	public ItemIngot(int i) 
 	{
 		super(i);
-		this.maxStackSize = 8;
+		this.size = EnumSize.MEDIUM;
 		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
 	}
 

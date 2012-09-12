@@ -3,6 +3,7 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.Core.Helper;
+import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityTerraLogPile;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
@@ -24,7 +25,7 @@ public class ItemLogs extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.maxStackSize = 12;
+		this.size = EnumSize.SMALL;
 		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
 	}
 

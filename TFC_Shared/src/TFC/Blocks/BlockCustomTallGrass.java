@@ -110,10 +110,10 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
     @Override
     protected boolean canThisPlantGrowOnThisBlockID(int par1)
     {
-        return par1 == TFCBlocks.terraGrass.blockID || par1 == TFCBlocks.terraGrass2.blockID || 
-                par1 == TFCBlocks.terraDirt.blockID || par1 == TFCBlocks.terraDirt2.blockID ||
-                par1 == TFCBlocks.terraClayGrass.blockID || par1 == TFCBlocks.terraClayGrass2.blockID ||
-                par1 == TFCBlocks.terraPeatGrass.blockID ||
+        return par1 == TFCBlocks.Grass.blockID || par1 == TFCBlocks.Grass2.blockID || 
+                par1 == TFCBlocks.Dirt.blockID || par1 == TFCBlocks.Dirt2.blockID ||
+                par1 == TFCBlocks.ClayGrass.blockID || par1 == TFCBlocks.ClayGrass2.blockID ||
+                par1 == TFCBlocks.PeatGrass.blockID ||
                 par1 == Block.tilledField.blockID;
     }
     

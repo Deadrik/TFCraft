@@ -1,6 +1,6 @@
 package TFC.TileEntities;
 
-import TFC.Blocks.BlockTerraFarmland;
+import TFC.Blocks.BlockFarmland;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Core.TFC_Time;
@@ -61,7 +61,7 @@ public class TileEntityFarmland extends TileEntity
 
                 nutrientTimer+=24;
                 
-                if(BlockTerraFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord))
+                if(BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord))
                 {
                     waterSaturation += 1;
                     if(waterSaturation > 30)

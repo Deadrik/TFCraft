@@ -202,7 +202,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         fireItemStacks[1] = null;
                         return;
                     }
-                    else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.terraCeramicMold && 
+                    else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.CeramicMold && 
                             (fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
                     {
                         if(fireItemStacks[8] == null)
@@ -213,7 +213,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         }
                     }
 
-                    mold = new ItemStack(TFCItems.terraCeramicMold,1);
+                    mold = new ItemStack(TFCItems.CeramicMold,1);
                     mold.stackSize = 1;
                     mold.setItemDamage(0);
                 }
@@ -274,7 +274,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                             fireItemStacks[1] = mold;
                         }
                     }
-                    else if(output != null && fireItemStacks[7] != null && fireItemStacks[7].getItem() == TFCItems.terraCeramicMold)
+                    else if(output != null && fireItemStacks[7] != null && fireItemStacks[7].getItem() == TFCItems.CeramicMold)
                     {
                         fireItemStacks[7] = output.copy();
                         fireItemStacks[7].setItemDamage(damage);
@@ -283,7 +283,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         nbt.setFloat("temperature", inputItemTemp);
                         fireItemStacks[7].stackTagCompound = nbt;
                     }
-                    else if(output != null && fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.terraCeramicMold)
+                    else if(output != null && fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.CeramicMold)
                     {
                         fireItemStacks[8] = output.copy();
                         fireItemStacks[8].setItemDamage(damage);
@@ -309,7 +309,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                             nbt.setFloat("temperature", inputItemTemp);
                             fireItemStacks[8].stackTagCompound = nbt;
                         }
-                        else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.terraCeramicMold)
+                        else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.CeramicMold)
                         {
                             fireItemStacks[8] = output.copy();
                             fireItemStacks[8].setItemDamage(100-leftover);
@@ -839,7 +839,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && Surrounded != 5)
             {
 
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.terraFirepitOn.blockID) {
+                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.FirepitOn.blockID) {
                     BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 

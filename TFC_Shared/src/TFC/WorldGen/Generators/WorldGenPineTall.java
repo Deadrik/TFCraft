@@ -13,9 +13,9 @@ public class WorldGenPineTall extends WorldGenerator
 	public WorldGenPineTall(int id)
 	{
 		metaLeaf = id;
-		blockLeaf = TFCBlocks.terraLeaves.blockID;
+		blockLeaf = TFCBlocks.Leaves.blockID;
 		metaWood = id;
-		blockWood = TFCBlocks.terraWood.blockID;
+		blockWood = TFCBlocks.Wood.blockID;
 	}
 	
     public boolean generate(World world, Random par2Random, int i, int j, int k)

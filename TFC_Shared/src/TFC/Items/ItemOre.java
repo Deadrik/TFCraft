@@ -2,6 +2,8 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Enums.EnumSize;
+
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -20,7 +22,7 @@ public class ItemOre extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.maxStackSize = 8;
+		this.size = EnumSize.MEDIUM;
 	}
 
 	@Override

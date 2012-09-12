@@ -138,8 +138,8 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			return false;
 		}
 		int var3 = world.getBlockId (xCoord, yCoord - 1, zCoord);
-		if (!(var3 == TFCBlocks.terraDirt.blockID || var3 == TFCBlocks.terraDirt2.blockID || var3 == TFCBlocks.terraGrass.blockID || var3 == TFCBlocks.terraGrass2.blockID ||
-				var3 == TFCBlocks.terraClayGrass.blockID || var3 == TFCBlocks.terraClayGrass2.blockID)|| yCoord >= world.getHeight() - height - 1 || 
+		if (!(var3 == TFCBlocks.Dirt.blockID || var3 == TFCBlocks.Dirt2.blockID || var3 == TFCBlocks.Grass.blockID || var3 == TFCBlocks.Grass2.blockID ||
+				var3 == TFCBlocks.ClayGrass.blockID || var3 == TFCBlocks.ClayGrass2.blockID)|| yCoord >= world.getHeight() - height - 1 || 
 				world.getBlockMaterial (xCoord, yCoord, zCoord) == Material.water)
 		{
 			return false;

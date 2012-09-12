@@ -170,7 +170,7 @@ public class BlockCollapsable extends BlockTerra
             {
                 for(int z = -4; z < 5; z++)
                 {
-                    if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.terraWoodSupportH.blockID)
+                    if(world.getBlockId(i+x, j+y, k+z) == TFCBlocks.WoodSupportH.blockID)
                     {
                         return true;
                     }
@@ -201,7 +201,7 @@ public class BlockCollapsable extends BlockTerra
         int fallingBlockID = -1;
         
         Block B = Block.blocksList[world.getBlockId(i, j, k)];
-        if(B instanceof BlockTerraIgIn || B instanceof BlockTerraIgEx || B instanceof BlockTerraMM || B instanceof BlockTerraSed)
+        if(B instanceof BlockIgIn || B instanceof BlockIgEx || B instanceof BlockMM || B instanceof BlockSed)
             fallingBlockID = ((BlockCollapsable)Block.blocksList[world.getBlockId(i, j, k)]).dropBlock;
 
         if(world.getBlockId(xCoord, yCoord, zCoord) == Block.bedrock.blockID || world.getBlockId(xCoord, yCoord, zCoord) == fallingBlockID)

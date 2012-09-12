@@ -58,12 +58,12 @@ public class ItemCustomHoe extends ItemHoe
 			}
 			else
 			{
-				Block var10 = var8 == TFCBlocks.terraDirt.blockID || var8 == TFCBlocks.terraGrass.blockID || var8 == TFCBlocks.DryGrass.blockID ? TFCBlocks.terraDirt : 
-					var8 == TFCBlocks.terraDirt2.blockID || var8 == TFCBlocks.terraGrass2.blockID || var8 == TFCBlocks.DryGrass2.blockID ? TFCBlocks.terraDirt2 : null;
+				Block var10 = var8 == TFCBlocks.Dirt.blockID || var8 == TFCBlocks.Grass.blockID || var8 == TFCBlocks.DryGrass.blockID ? TFCBlocks.Dirt : 
+					var8 == TFCBlocks.Dirt2.blockID || var8 == TFCBlocks.Grass2.blockID || var8 == TFCBlocks.DryGrass2.blockID ? TFCBlocks.Dirt2 : null;
 				if(var10 != null)
 				{
 					int meta = world.getBlockMetadata(x, y, z);
-					if(var10.blockID == TFCBlocks.terraDirt.blockID)
+					if(var10.blockID == TFCBlocks.Dirt.blockID)
 					{
 						world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), var10.stepSound.getStepSound(), (var10.stepSound.getVolume() + 1.0F) / 2.0F, var10.stepSound.getPitch() * 0.8F);
 
@@ -79,7 +79,7 @@ public class ItemCustomHoe extends ItemHoe
 							return true;
 						}
 					}
-					else if(var10.blockID == TFCBlocks.terraDirt2.blockID)
+					else if(var10.blockID == TFCBlocks.Dirt2.blockID)
 					{
 						world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), var10.stepSound.getStepSound(), (var10.stepSound.getVolume() + 1.0F) / 2.0F, var10.stepSound.getPitch() * 0.8F);
 
