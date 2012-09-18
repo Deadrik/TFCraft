@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Enums.EnumSize;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 
@@ -17,4 +18,9 @@ public class ItemMiscTool extends ItemTerra
 	{
 		return "/bioxx/terratools.png";
 	}	
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
+	}
 }

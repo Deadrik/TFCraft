@@ -2,6 +2,9 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
+
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ItemStack;
 
@@ -28,4 +31,15 @@ public class ItemOreSmall extends ItemOre
             list.add(new ItemStack(this,1,36));
             list.add(new ItemStack(this,1,37));
     }
+    
+    @Override
+	public EnumSize getSize() {
+		return EnumSize.SMALL;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.HEAVY;
+	}
 }

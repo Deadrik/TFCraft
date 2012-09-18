@@ -1,5 +1,7 @@
 package TFC.Blocks;
 
+import TFC.Enums.EnumSize;
+import TFC.Items.ISize;
 import TFC.TileEntities.TileEntityTerraWorkbench;
 import net.minecraft.src.*;
 

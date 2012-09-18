@@ -58,16 +58,22 @@ public class BlockCharcoal extends BlockTerra {
 			}
 			if(isShovel)
 			{
+				int top = 0;
+				while(world.getBlockId(i, j+top+1, k) == blockID)
+					++top;
+				
 				dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.coal,1,1));
 				if(l-1 > 0)
 				{
 					if(world.getBlockId(i, j+1, k) == blockID)
 					{
-						int m1 = world.getBlockMetadata(i, j+1, k);
+						int m1 = world.getBlockMetadata(i, j+top, k);
 						if(m1-1 > 0)
-							world.setBlockAndMetadataWithNotify(i, j+1, k, blockID, m1-1);
+						{
+							world.setBlockMetadataWithNotify(i, j+top, k, m1-1);
+						}
 						else
-							world.setBlock(i, j+1, k, 0);
+							world.setBlock(i, j+top, k, 0);
 
 						world.setBlockAndMetadataWithNotify(i, j, k, blockID, 8);
 					}
@@ -76,7 +82,8 @@ public class BlockCharcoal extends BlockTerra {
 						world.setBlockAndMetadataWithNotify(i, j, k, blockID, l-1);
 					}
 
-					world.markBlockAsNeedsUpdate(i, j, k);
+					world.markBlockNeedsUpdate(i, j, k);
+					world.markBlockNeedsUpdate(i, j+top, k);
 				}
 				else
 					world.setBlock(i, j, k, 0);
@@ -157,7 +164,6 @@ public class BlockCharcoal extends BlockTerra {
 				int meta = world.getBlockMetadata(i, j, k);
 				world.setBlockAndMetadata(i, j-1, k, blockID, meta);
 				world.setBlockWithNotify(i, j, k, 0);
-				
 			}
 			else
 			{

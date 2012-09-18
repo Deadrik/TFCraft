@@ -17,7 +17,11 @@ public class ItemBellows extends ItemTerra
 	{
 		super(i);
 		this.setTabToDisplayOn(CreativeTabs.tabMisc);
-		this.size = EnumSize.EXTREME;
+	}
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.HUGE;
 	}
 
 	@Override

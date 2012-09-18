@@ -3,7 +3,7 @@ package TFC.Items;
 import TFC.Core.TFCItems;
 import net.minecraft.src.*;
 
-public class ItemCustomBucketMilk extends Item
+public class ItemCustomBucketMilk extends ItemTerra
 {
     public ItemCustomBucketMilk(int par1)
     {

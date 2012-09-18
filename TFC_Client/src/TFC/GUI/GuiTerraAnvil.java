@@ -5,7 +5,7 @@ import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Containers.ContainerTerraAnvil;
-import TFC.Core.CraftingRule;
+import TFC.Enums.CraftingRuleEnum;
 import TFC.TileEntities.TileEntityTerraAnvil;
 
 
@@ -113,7 +113,7 @@ public class GuiTerraAnvil extends GuiContainer
 		fontRenderer.drawString("Rules:", w + 209, h+30-8, 0x404040);
 		if(AnvilEntity.workRecipe != null)
 		{
-			CraftingRule[] Rules = AnvilEntity.workRecipe.getRules();
+			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
 			int[] ItemRules = AnvilEntity.getItemRules();
 			for(int i = 0; i < 3; i++)
 			{

@@ -109,6 +109,10 @@ public class TFCBlocks
 	public static Block DryGrass2;
 	public static Block Charcoal;
 	public static Block StoneDetailed;
+	public static Block WIP;
+	public static Block WoodVert;
+	public static Block WoodHoriz;
+	public static Block WoodHoriz2;
 	
 	
 	static Configuration config;
@@ -171,11 +175,11 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Firepit);
 		GameRegistry.registerBlock(Bellows);
 		GameRegistry.registerBlock(Anvil);
-		GameRegistry.registerBlock(Scribe);
+		GameRegistry.registerBlock(Scribe, TFC.Items.ItemTerraBlock.class);
 		GameRegistry.registerBlock(Forge);
-		GameRegistry.registerBlock(MetalTable);
+		GameRegistry.registerBlock(MetalTable, TFC.Items.ItemTerraBlock.class);
 		GameRegistry.registerBlock(Molten);
-		GameRegistry.registerBlock(Bloomery);
+		GameRegistry.registerBlock(Bloomery, TFC.Items.ItemTerraBlock.class);
 		GameRegistry.registerBlock(Sluice);
 
 		GameRegistry.registerBlock(fruitTreeWood);
@@ -185,6 +189,11 @@ public class TFCBlocks
 		GameRegistry.registerBlock(stoneStairs);
 		GameRegistry.registerBlock(stoneSlabs);
 		GameRegistry.registerBlock(stoneStalac);
+		
+		GameRegistry.registerBlock(WIP);
+		GameRegistry.registerBlock(WoodVert);
+		GameRegistry.registerBlock(WoodHoriz);
+		GameRegistry.registerBlock(WoodHoriz2);
 
 	}
 	
@@ -254,6 +263,7 @@ public class TFCBlocks
 		TFCBlocks.Sand = new TFC.Blocks.BlockSand(TFC_Settings.getIntFor(config,"block","Sand", 216), 208).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		TFCBlocks.Sand2 = new BlockSand2(TFC_Settings.getIntFor(config,"block","Sand2", 217), 224).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		
+		TFCBlocks.WIP = (new TFC.Blocks.BlockWIP(TFC_Settings.getIntFor(config,"block","WIP", 2200), 112)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("WIP");
 		
 		
 		Block.blocksList[5] = null;
@@ -277,12 +287,12 @@ public class TFCBlocks
 		Block.blocksList[83] = null;
 		Block.blocksList[106] = null;
 
-		Block.blocksList[5] = (new BlockPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
+		Block.blocksList[5] = (new TFC.Blocks.BlockPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
 		Block.blocksList[6] = (new BlockCustomSapling(6, 160)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sapling").setRequiresSelfNotify();
-		Block.blocksList[8]= (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
+		Block.blocksList[8] = (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
 		//Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
-		Block.blocksList[10]= (new BlockCustomFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setLightOpacity(255).setBlockName("lava").disableStats().setRequiresSelfNotify();
-		Block.blocksList[17] = (new BlockWood(17)).setHardness(40.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
+		Block.blocksList[10] = (new BlockCustomFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setLightOpacity(255).setBlockName("lava").disableStats().setRequiresSelfNotify();
+		Block.blocksList[17] = (new TFC.Blocks.BlockLogNatural(17)).setHardness(40.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
 		Block.blocksList[18] = (new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
 		Block.blocksList[31] = (BlockTallGrass)(new BlockCustomTallGrass(31, 39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("tallgrass");
 		Block.blocksList[37] = (BlockFlower)(new BlockCustomFlower(37, 13)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("flower");
@@ -291,7 +301,7 @@ public class TFCBlocks
 		Block.blocksList[40] = (BlockFlower)(new BlockCustomMushroom(40, 28)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("mushroom");
 		Block.blocksList[53] = (new BlockCustomStairs(53, Block.planks)).setBlockName("stairsWood").setRequiresSelfNotify();
 		Block.blocksList[54] = (new BlockChestTFC(54)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("chest").setRequiresSelfNotify();
-		Block.blocksList[58] = (new BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
+		Block.blocksList[58] = (new TFC.Blocks.BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
 		Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").disableStats().setRequiresSelfNotify();
 		Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setBlockName("snow").setLightOpacity(1);
 		Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setBlockName("ice");
@@ -327,6 +337,10 @@ public class TFCBlocks
 		Charcoal = new BlockCharcoal(TFC_Settings.getIntFor(config,"block","Charcoal", 2016)).setHardness(3F).setResistance(10F).setBlockName("Charcoal");
 		
 		StoneDetailed = new BlockDetailed(TFC_Settings.getIntFor(config,"block","StoneDetailed", 2017)).setBlockName("StoneDetailed").setHardness(10).setResistance(15F);
+		
+		WoodVert = new BlockLogVert(TFC_Settings.getIntFor(config,"block","WoodVert", 2018)).setBlockName("WoodVert").setHardness(40).setResistance(15F);
+		WoodHoriz = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz", 2019), 0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F);
+		WoodHoriz2 = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz2", 2020), 8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

@@ -21,10 +21,10 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 import net.minecraft.src.TerraFirmaCraft;
 
-public class BlockWood extends Block
+public class BlockLogNatural extends Block
 {
 
-    public BlockWood(int i) 
+    public BlockLogNatural(int i) 
     {
         super(i, Material.wood);
     }
@@ -68,36 +68,6 @@ public class BlockWood extends Block
             return j+144;
         }
         return j+128;
-    }
-    public float getHardness(int md)
-    {
-        switch(md)
-        {
-            case 5:
-            {
-                return 5.0F;
-            }
-            case 6:
-            {
-                return 4.0F;
-            }
-            case 0:
-            {
-                return 5.0F;
-            }
-            case 11:
-            {
-                return 3.5F;
-            }
-            case 13:
-            {
-                return 3.5F;
-            }
-            default:
-            {
-                return 2.0F;
-            }
-        }
     }
 
     @Override

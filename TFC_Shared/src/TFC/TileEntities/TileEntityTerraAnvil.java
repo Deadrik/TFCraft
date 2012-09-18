@@ -13,12 +13,12 @@ import java.util.Random;
 import TFC.Core.AnvilCraftingManagerTFC;
 import TFC.Core.AnvilRecipe;
 import TFC.Core.AnvilReq;
-import TFC.Core.CraftingRule;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
+import TFC.Enums.CraftingRuleEnum;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.DataLayer;
@@ -124,9 +124,9 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 							offset = offset + (-2 * offset);
 						recipe = new AnvilRecipe(anvilItemStacks[1],anvilItemStacks[5],
 								workRecipe.getCraftingValue(),
-								CraftingRule.ANY,
-								CraftingRule.ANY,
-								CraftingRule.ANY, 
+								CraftingRuleEnum.ANY,
+								CraftingRuleEnum.ANY,
+								CraftingRuleEnum.ANY, 
 								anvilItemStacks[6] != null ? true : false, AnvilTier, null);
 
 						result = manager.findCompleteRecipe(recipe, getItemRules());
@@ -204,23 +204,23 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule1"))
 				rules[0] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule1");
 			else
-				rules[0] = CraftingRule.ANY.Action;
+				rules[0] = CraftingRuleEnum.ANY.Action;
 
 			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule2"))
 				rules[1] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule2");
 			else
-				rules[1] = CraftingRule.ANY.Action;
+				rules[1] = CraftingRuleEnum.ANY.Action;
 
 			if(anvilItemStacks[1].stackTagCompound.hasKey("itemCraftingRule3"))
 				rules[2] = anvilItemStacks[1].stackTagCompound.getByte("itemCraftingRule3");
 			else
-				rules[2] = CraftingRule.ANY.Action;
+				rules[2] = CraftingRuleEnum.ANY.Action;
 		}
 		else
 		{
-			rules[0] = CraftingRule.ANY.Action;
-			rules[1] = CraftingRule.ANY.Action;
-			rules[2] = CraftingRule.ANY.Action;
+			rules[0] = CraftingRuleEnum.ANY.Action;
+			rules[1] = CraftingRuleEnum.ANY.Action;
+			rules[2] = CraftingRuleEnum.ANY.Action;
 		}
 		return rules;
 	}
@@ -415,16 +415,16 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 				Random R = new Random(worldObj.getSeed());
 				AnvilRecipe recipe = new AnvilRecipe(anvilItemStacks[2],anvilItemStacks[3],
 						0,
-						CraftingRule.ANY,
-						CraftingRule.ANY,
-						CraftingRule.ANY, 
+						CraftingRuleEnum.ANY,
+						CraftingRuleEnum.ANY,
+						CraftingRuleEnum.ANY, 
 						anvilItemStacks[6] != null ? true : false, AnvilTier, null);
 
 				AnvilRecipe recipe2 = new AnvilRecipe(anvilItemStacks[3],anvilItemStacks[2],
 						0,
-						CraftingRule.ANY,
-						CraftingRule.ANY,
-						CraftingRule.ANY, 
+						CraftingRuleEnum.ANY,
+						CraftingRuleEnum.ANY,
+						CraftingRuleEnum.ANY, 
 						anvilItemStacks[6] != null ? true : false, AnvilTier, null);
 
 				ItemStack result = manager.findCompleteWeldRecipe(recipe);
@@ -466,7 +466,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 			ejectContents();
 			worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, stonePair[0], stonePair[1]);
 		}
-		worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
 	@Override
 	public ItemStack decrStackSize(int i, int j)
@@ -784,7 +784,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		AnvilTier = inStream.readInt();
 		stonePair[0] = inStream.readInt();
 		stonePair[1] = inStream.readInt();
-		worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public Packet createAnvilUsePacket(int id)

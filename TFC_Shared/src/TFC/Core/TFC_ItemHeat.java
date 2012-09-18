@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
 
 import net.minecraft.src.BiomeGenBase;
@@ -611,6 +612,44 @@ public class TFC_ItemHeat
 	{
 		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is);
 	}
+	
+	public static void HandleItemHeat(ItemStack is, int xCoord, int yCoord, int zCoord)
+	{
+		float ambient = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
+		
+		if(is.hasTagCompound())
+		{
+			NBTTagCompound comp = is.getTagCompound();
+			if(comp.hasKey("temperature"))
+			{
+				float temp = comp.getFloat("temperature");
+				if(temp > ambient)
+				{
+					temp -= TFC_ItemHeat.getTempDecrease(is);
+					comp.setFloat("temperature",temp);
+				}
+				is.setTagCompound(comp);
+				if(temp <= ambient)
+				{
+					Collection C = comp.getTags();
+					Iterator itr = C.iterator();
+					while(itr.hasNext())
+					{
+						Object tag = itr.next();
+						if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
+						{
+							itr.remove();
+							break;
+						}
+					}
+				}
+				if(comp.getTags().size() == 0)
+				{
+					is.stackTagCompound = null;
+				}
+			}
+		}
+	}
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
@@ -623,7 +662,7 @@ public class TFC_ItemHeat
                 inventory[i].stackSize = 1;
             }
 		    
-			if(inventory[i] != null && inventory[i].hasTagCompound())
+			if(inventory[i] != null && inventory[i].hasTagCompound() && !(inventory[i].getItem() instanceof ItemTerra))
 			{
 				NBTTagCompound comp = inventory[i].getTagCompound();
 				if(comp.hasKey("temperature"))

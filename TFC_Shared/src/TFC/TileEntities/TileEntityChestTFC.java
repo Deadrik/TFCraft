@@ -5,7 +5,7 @@ import net.minecraft.src.*;
 
 public class TileEntityChestTFC extends TileEntity implements IInventory
 {
-    private ItemStack[] chestContents = new ItemStack[9];
+    private ItemStack[] chestContents = new ItemStack[18];
 
     /** Determines if the check for adjacent chests has taken place. */
     public boolean adjacentChestChecked = false;
@@ -39,7 +39,7 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
      */
     public int getSizeInventory()
     {
-        return 9;
+        return 18;
     }
 
     /**

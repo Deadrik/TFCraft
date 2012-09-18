@@ -2,6 +2,8 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.Core.TFC_Core;
+
 
 import net.minecraft.src.*;
 
@@ -30,12 +32,8 @@ public class BlockCustomReed extends Block
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		int var5 = par1World.getBlockId(par2, par3 - 1, par4);
-		boolean correctSoil = var5 != Block.grass.blockID && var5 != Block.dirt.blockID && 
-                var5 != TFCBlocks.Grass.blockID && var5 != TFCBlocks.Grass2.blockID &&
-                var5 != TFCBlocks.Dirt.blockID && var5 != TFCBlocks.Dirt.blockID &&
-                var5 != TFCBlocks.ClayGrass.blockID && var5 != TFCBlocks.ClayGrass2.blockID &&
-                var5 != TFCBlocks.PeatGrass.blockID && var5 != TFCBlocks.Peat.blockID && var5 != Block.sand.blockID;
-		return var5 == this.blockID ? true : correctSoil ? false : par1World.getBlockMaterial(par2 - 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2 + 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 - 1) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 + 1) == Material.water;
+		boolean correctSoil = TFC_Core.isSoil(var5) || TFC_Core.isSand(var5);
+		return var5 == this.blockID ? true : !correctSoil ? false : par1World.getBlockMaterial(par2 - 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2 + 1, par3 - 1, par4) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 - 1) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 + 1) == Material.water;
 	}
 
 	/**

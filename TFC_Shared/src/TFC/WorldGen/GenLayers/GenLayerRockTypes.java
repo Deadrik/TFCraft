@@ -10,16 +10,9 @@ public class GenLayerRockTypes extends GenLayerTFC
 {
 	public static DataLayer[] biomeArray1 = new DataLayer[] {DataLayer.Siltstone, DataLayer.Mudstone, DataLayer.Shale, DataLayer.Claystone, DataLayer.RockSalt, 
 		DataLayer.Limestone, DataLayer.Conglomerate, DataLayer.Dolomite, DataLayer.Chert, DataLayer.Chalk,
-		DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro, 
 		DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite,
-		DataLayer.Quartzite,DataLayer.Slate,DataLayer.Phyllite,DataLayer.Schist,DataLayer.Gneiss,DataLayer.Marble};
-	
-	public static DataLayer[] biomeArray2 = new DataLayer[] {DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro, 
-		DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite,
-		DataLayer.Quartzite,DataLayer.Slate,DataLayer.Phyllite,DataLayer.Schist,DataLayer.Gneiss,DataLayer.Marble};
-	
-	public static DataLayer[] biomeArray3 = new DataLayer[] {DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro, 
-		DataLayer.Rhyolite,DataLayer.Basalt,DataLayer.Andesite,DataLayer.Dacite};
+		DataLayer.Quartzite,DataLayer.Slate,DataLayer.Phyllite,DataLayer.Schist,DataLayer.Gneiss,DataLayer.Marble, DataLayer.Granite, DataLayer.Diorite, DataLayer.Gabbro};
+
 
 	/** this sets all the biomes that are allowed to appear in the overworld */
 	private DataLayer[] allowedBiomes;
@@ -27,12 +20,9 @@ public class GenLayerRockTypes extends GenLayerTFC
 	public GenLayerRockTypes(long par1, GenLayer par3GenLayer, WorldType par4WorldType, int layer)
 	{
 		super(par1);
-		if(layer == 1)
-			this.allowedBiomes = biomeArray1;
-		else if(layer == 2)
-			this.allowedBiomes = biomeArray2;
-		else if(layer == 3)
-			this.allowedBiomes = biomeArray3;
+
+		this.allowedBiomes = biomeArray1;
+
 		
 		this.parent = (GenLayerTFC) par3GenLayer;
 	}

@@ -40,6 +40,7 @@ public class BlockCrop extends BlockContainer
                 if(is1 != null)
                     world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
                 te.growth = 4;
+                te.broadcastPacketInRange(te.createCropUpdatePacket());
             }
             if(TFC_Settings.enableDebugMode)
             {

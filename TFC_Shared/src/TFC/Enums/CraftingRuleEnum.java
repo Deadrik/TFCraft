@@ -1,6 +1,6 @@
-package TFC.Core;
+package TFC.Enums;
 
-public enum CraftingRule
+public enum CraftingRuleEnum
 {
     ANY("Any", -1, 0, 2),
     HITANY("Hit, Any", 0, 0, 2),
@@ -60,7 +60,7 @@ public enum CraftingRule
     public final int Action;
     public final String Name;
     
-    CraftingRule(String n, int action, int min, int max)
+    CraftingRuleEnum(String n, int action, int min, int max)
     {
         Name = n;
         Min = min;
@@ -77,7 +77,7 @@ public enum CraftingRule
         return false;
     }
     
-    public boolean matches(CraftingRule R, int position)
+    public boolean matches(CraftingRuleEnum R, int position)
     {
         if((Action == R.Action || Action == this.ANY.Action))
             if(position >= Min && position <= Max)

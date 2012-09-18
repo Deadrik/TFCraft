@@ -28,6 +28,7 @@ public class TFC_Settings
 	
 	public static int dayLength;
 	public static int leavesLOD;
+	public static boolean enableInventoryHeat;
 
 	static
 	{
@@ -52,7 +53,7 @@ public class TFC_Settings
 		enableDebugMode = getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		sendAllNBT = getBooleanFor(config,"General","sendAllNBT",true, "Setting this to false can cause alot of issues when used in SMP. Leave this set to true to prevent issues.");
 		dayLength = getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days.");
-		leavesLOD  = getIntFor(config,"General","leavesLOD",20, "This is how far from the player that the dynamic leaf block switching should occur");
+		enableInventoryHeat = getBooleanFor(config, "General","enableInventoryHeat",true,"Set this to false to turn off player inventory heat management. This stops items from cooling while in the player's inventory.");
 		//Metallurgy
 		BlacksmithModeHeatScale = getBooleanFor(config,"Metallurgy","BlacksmithModeHeatScale",true, "Set this to false if you are having a hard time and would like the old color scale for heating metals.");
 		//Caveins

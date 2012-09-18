@@ -45,6 +45,8 @@ import TFC.Containers.ContainerTFC;
 import TFC.Core.*;
 import TFC.Entities.*;
 import TFC.Handlers.BlockRenderHandler;
+import TFC.Handlers.ChunkDataEventHandler;
+import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.PacketHandler;
@@ -96,9 +98,7 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
-
 
 		//Add Item Name Localizations
 		proxy.registerTranslations();
@@ -125,7 +125,6 @@ public class TerraFirmaCraft
 	@Init
 	public void load(FMLInitializationEvent evt)
 	{
-
 		TFC_Core.RegisterRecipes();	
 
 		TFC_Game.RegisterToolRecipes();
@@ -145,6 +144,12 @@ public class TerraFirmaCraft
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());
 
 		proxy.registerRenderInformation();
+		
+		// Register the Chunk Data Load/Save Handler
+		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
+		
+		// Register the Chunk Load/Save Handler
+		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
 
 		if(TFC_Settings.enableVanillaRecipes == false)
@@ -168,7 +173,7 @@ public class TerraFirmaCraft
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
-
+		ServerPlayerAPI.register("TFC Player", TFC_Player.class);
 	}
 
 	@ServerStarting
@@ -179,7 +184,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetRocksCommand());
 	}
 
-	private static void RemoveRecipe(ItemStack resultItem) {
+	public static void RemoveRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++)
 		{

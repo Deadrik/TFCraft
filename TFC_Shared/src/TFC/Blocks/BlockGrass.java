@@ -155,7 +155,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
                     {
                         world.setBlockWithNotify(x, y, z, TFCBlocks.PeatGrass.blockID);
                     }
-                    else if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt((int) ((8400-rain)/4)) == 0 && 
+                    else if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt((int) ((16400-rain)/4)) == 0 && 
                     		world.getBlockMaterial(x, y + 1, z) != Material.water && world.getBlockId(x, y+1, z) == 0)
                     {
                     	world.setBlockAndMetadataWithNotify(x, y+1, z, Block.tallGrass.blockID, 1);

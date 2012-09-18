@@ -5,8 +5,11 @@ import java.util.List;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
@@ -17,20 +20,18 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.World;
 
-public class ItemTerra extends Item
+public class ItemTerra extends Item implements ISize
 {
     protected String texture;
-    public EnumSize size;
 
     public ItemTerra(int id) 
     {
         super(id);
-        size = EnumSize.TINY;
-        maxStackSize = size.stackSize;
+        this.setTabToDisplayOn(CreativeTabs.tabMisc);
     }
     public ItemTerra(int id, String tex) 
     {
-        super(id);
+        this(id);
         texture = tex;
     }
 
@@ -42,7 +43,10 @@ public class ItemTerra extends Item
     
     public int getItemStackLimit()
     {
-        return this.size.stackSize;
+    	if(canStack())
+    		return this.getSize().stackSize * getWeight().multiplier <= 64 ? this.getSize().stackSize * getWeight().multiplier : 64;
+    	else
+    		return 1;
     }
 
     public ItemTerra setTexturePath(String t)
@@ -59,21 +63,26 @@ public class ItemTerra extends Item
     @Override
     public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
     {
-        if (is.hasTagCompound())
+        if (!world.isRemote && is.hasTagCompound())
         {
             NBTTagCompound stackTagCompound = is.getTagCompound();
 
             if(stackTagCompound.hasKey("temperature"))
             {
-                TFC_ItemHeat.HandleContainerHeat(world, new ItemStack[]{is}, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+                TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
             }
         }
+    }
+    
+    public static void addSizeInformation(ISize object, List arraylist)
+    {
+    	if(object.getSize()!= null && object.getWeight() != null)
+    		arraylist.add("\u2696" + object.getWeight().getName() + " \u21F2" + object.getSize().getName());
     }
 
     public void addInformation(ItemStack is, List arraylist) 
     {
-    	if(size!= null)
-    		arraylist.add("Size: " + size.name());
+    	ItemTerra.addSizeInformation(this, arraylist);
     	
         if (is.hasTagCompound())
         {
@@ -136,5 +145,22 @@ public class ItemTerra extends Item
                 return "";
         }
     }
+
+	@Override
+	public boolean canStack() 
+	{
+		return true;
+	}
+	
+	@Override
+	public EnumSize getSize() 
+	{
+		return EnumSize.TINY;
+	}
+	@Override
+	public EnumWeight getWeight() 
+	{
+		return EnumWeight.MEDIUM;
+	}
 
 }

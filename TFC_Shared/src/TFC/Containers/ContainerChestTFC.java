@@ -1,5 +1,6 @@
 package TFC.Containers;
 
+import TFC.TileEntities.TileEntityChestTFC;
 import net.minecraft.src.*;
 
 public class ContainerChestTFC extends Container
@@ -7,11 +8,33 @@ public class ContainerChestTFC extends Container
     private IInventory lowerChestInventory;
     private int numRows;
 
-    public ContainerChestTFC(IInventory par1IInventory, IInventory par2IInventory, World world, int x, int y, int z)
+    public ContainerChestTFC(IInventory playerInv, IInventory chestInv, World world, int x, int y, int z)
     {
-        this.lowerChestInventory = par2IInventory;
-        this.numRows = par2IInventory.getSizeInventory() / 9;
-        par2IInventory.openChest();
+    	TileEntityChestTFC chest = (TileEntityChestTFC)chestInv;
+        this.lowerChestInventory = chestInv;
+        
+        if (chest.adjacentChestXNeg != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chest.adjacentChestXNeg, chestInv);
+        }
+
+        if (chest.adjacentChestXPos != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chestInv, chest.adjacentChestXPos);
+        }
+
+        if (chest.adjacentChestZNeg != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chest.adjacentChestZNeg, chestInv);
+        }
+
+        if (chest.adjacentChestZPosition != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chestInv, chest.adjacentChestZPosition);
+        }
+        
+        this.numRows = lowerChestInventory.getSizeInventory() / 9;
+        lowerChestInventory.openChest();
         int var3 = (this.numRows - 4) * 18;
         int var4;
         int var5;
@@ -20,7 +43,7 @@ public class ContainerChestTFC extends Container
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par2IInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18));
+                this.addSlotToContainer(new SlotSizeSmall(lowerChestInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18));
             }
         }
 
@@ -28,13 +51,13 @@ public class ContainerChestTFC extends Container
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new Slot(par1IInventory, var5 + var4 * 9 + 9, 8 + var5 * 18, 103 + var4 * 18 + var3));
+                this.addSlotToContainer(new Slot(playerInv, var5 + var4 * 9 + 9, 8 + var5 * 18, 103 + var4 * 18 + var3));
             }
         }
 
         for (var4 = 0; var4 < 9; ++var4)
         {
-            this.addSlotToContainer(new Slot(par1IInventory, var4, 8 + var4 * 18, 161 + var3));
+            this.addSlotToContainer(new Slot(playerInv, var4, 8 + var4 * 18, 161 + var3));
         }
     }
 

@@ -28,7 +28,11 @@ public class ItemAnvil extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setTabToDisplayOn(CreativeTabs.tabMisc);
-		this.size = EnumSize.EXTREME;
+	}
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.HUGE;
 	}
 
 	@Override

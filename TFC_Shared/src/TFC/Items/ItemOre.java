@@ -3,6 +3,7 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
@@ -22,7 +23,17 @@ public class ItemOre extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.size = EnumSize.MEDIUM;
+	}
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.HEAVY;
 	}
 
 	@Override

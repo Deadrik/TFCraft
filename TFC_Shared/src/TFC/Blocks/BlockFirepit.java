@@ -52,7 +52,7 @@ public class BlockFirepit extends BlockContainer
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
 					world.setBlockMetadata(i, j, k, 2);
-					world.markBlockAsNeedsUpdate(i, j, k);
+					world.markBlockNeedsUpdate(i, j, k);
 				}
 			}
 			return true;
@@ -197,12 +197,12 @@ public class BlockFirepit extends BlockContainer
         if (par0)
         {
             par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.FirepitOn.blockID);
-            par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+            par1World.markBlockNeedsUpdate(par2, par3, par4);
         }
         else
         {
             par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Firepit.blockID);
-            par1World.markBlockAsNeedsUpdate(par2, par3, par4);
+            par1World.markBlockNeedsUpdate(par2, par3, par4);
         }
 
         par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);

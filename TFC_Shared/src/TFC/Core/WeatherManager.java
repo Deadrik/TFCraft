@@ -29,7 +29,7 @@ public class WeatherManager
     {
         Random r = new Random(seed + day);
 
-        return (r.nextInt(200)-100)/10;
+        return (r.nextInt(200)-100)/20;
     }
     
     public float getWeeklyTemp(int week)

@@ -4,12 +4,14 @@ import java.util.List;
 
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.UseHoeEvent;
 
-public class ItemCustomHoe extends ItemHoe
+public class ItemCustomHoe extends ItemHoe implements ISize
 {
 	public ItemCustomHoe(int i, EnumToolMaterial e)
 	{
@@ -19,12 +21,6 @@ public class ItemCustomHoe extends ItemHoe
 	public String getTextureFile() {
 		return "/bioxx/terratools.png";
 	}
-	
-	public void addInformation(ItemStack is, List arraylist) 
-    {
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: "+is.getItemDamage());
-    }
 
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -74,7 +70,7 @@ public class ItemCustomHoe extends ItemHoe
 						else
 						{
 							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil.blockID, meta);
-							world.markBlockAsNeedsUpdate(x, y, z);
+							world.markBlockNeedsUpdate(x, y, z);
 							stack.damageItem(1, player);
 							return true;
 						}
@@ -90,7 +86,7 @@ public class ItemCustomHoe extends ItemHoe
 						else
 						{
 							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil2.blockID, meta);
-							world.markBlockAsNeedsUpdate(x, y, z);
+							world.markBlockNeedsUpdate(x, y, z);
 							stack.damageItem(1, player);
 							return true;
 						}
@@ -99,5 +95,38 @@ public class ItemCustomHoe extends ItemHoe
 			}
 			return false;
 		}
+	}
+	
+	public void addInformation(ItemStack is, List arraylist) 
+    {
+		ItemTerra.addSizeInformation(this, arraylist);
+		
+        if(TFC_Settings.enableDebugMode)
+            arraylist.add("Damage: " + is.getItemDamage());
+    }
+	
+	public int getItemStackLimit()
+    {
+    	if(canStack())
+    		return this.getSize().stackSize * getWeight().multiplier;
+    	else
+    		return 1;
+    }
+
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
+	}
+	
+	@Override
+	public boolean canStack() 
+	{
+		return false;
+	}
+
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.LIGHT;
 	}
 }

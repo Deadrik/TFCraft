@@ -6,29 +6,29 @@ public class DataLayer
 {
 	public static DataLayer[] layers = new DataLayer[120];
 	
-	public static DataLayer Granite = new DataLayer(0,TFCBlocks.StoneIgIn.blockID, 0);
-	public static DataLayer Diorite = new DataLayer(1,TFCBlocks.StoneIgIn.blockID, 1);
-	public static DataLayer Gabbro = new DataLayer(2,TFCBlocks.StoneIgIn.blockID, 2);
-	public static DataLayer Siltstone = new DataLayer(3,TFCBlocks.StoneSed.blockID, 0);
-	public static DataLayer Mudstone = new DataLayer(4,TFCBlocks.StoneSed.blockID, 1);
-	public static DataLayer Shale = new DataLayer(5,TFCBlocks.StoneSed.blockID, 2);
-	public static DataLayer Claystone = new DataLayer(6,TFCBlocks.StoneSed.blockID, 3);
-	public static DataLayer RockSalt = new DataLayer(7,TFCBlocks.StoneSed.blockID, 4);
-	public static DataLayer Limestone = new DataLayer(8,TFCBlocks.StoneSed.blockID, 5);
-	public static DataLayer Conglomerate = new DataLayer(9,TFCBlocks.StoneSed.blockID, 6);
-	public static DataLayer Dolomite = new DataLayer(10,TFCBlocks.StoneSed.blockID, 7);
-	public static DataLayer Chert = new DataLayer(11,TFCBlocks.StoneSed.blockID, 8);
-	public static DataLayer Chalk = new DataLayer(12,TFCBlocks.StoneSed.blockID, 9);
-	public static DataLayer Rhyolite = new DataLayer(13,TFCBlocks.StoneIgEx.blockID, 0);
-	public static DataLayer Basalt = new DataLayer(14,TFCBlocks.StoneIgEx.blockID, 1);
-	public static DataLayer Andesite = new DataLayer(15,TFCBlocks.StoneIgEx.blockID, 2);
-	public static DataLayer Dacite = new DataLayer(16,TFCBlocks.StoneIgEx.blockID, 3);
-	public static DataLayer Quartzite = new DataLayer(17,TFCBlocks.StoneMM.blockID, 0);
-	public static DataLayer Slate = new DataLayer(18,TFCBlocks.StoneMM.blockID, 1);
-	public static DataLayer Phyllite = new DataLayer(19,TFCBlocks.StoneMM.blockID, 2);
-	public static DataLayer Schist = new DataLayer(20,TFCBlocks.StoneMM.blockID, 3);
-	public static DataLayer Gneiss = new DataLayer(21,TFCBlocks.StoneMM.blockID, 4);
-	public static DataLayer Marble = new DataLayer(22,TFCBlocks.StoneMM.blockID, 5);
+	public static DataLayer Granite = new DataLayer(0,TFCBlocks.StoneIgIn.blockID, 0, "Granite");
+	public static DataLayer Diorite = new DataLayer(1,TFCBlocks.StoneIgIn.blockID, 1, "Diorite");
+	public static DataLayer Gabbro = new DataLayer(2,TFCBlocks.StoneIgIn.blockID, 2, "Gabbro");
+	public static DataLayer Siltstone = new DataLayer(3,TFCBlocks.StoneSed.blockID, 0, "Siltstone");
+	public static DataLayer Mudstone = new DataLayer(4,TFCBlocks.StoneSed.blockID, 1, "Mudstone");
+	public static DataLayer Shale = new DataLayer(5,TFCBlocks.StoneSed.blockID, 2, "Shale");
+	public static DataLayer Claystone = new DataLayer(6,TFCBlocks.StoneSed.blockID, 3, "Claystone");
+	public static DataLayer RockSalt = new DataLayer(7,TFCBlocks.StoneSed.blockID, 4, "RockSalt");
+	public static DataLayer Limestone = new DataLayer(8,TFCBlocks.StoneSed.blockID, 5, "Limestone");
+	public static DataLayer Conglomerate = new DataLayer(9,TFCBlocks.StoneSed.blockID, 6, "Conglomerate");
+	public static DataLayer Dolomite = new DataLayer(10,TFCBlocks.StoneSed.blockID, 7, "Dolomite");
+	public static DataLayer Chert = new DataLayer(11,TFCBlocks.StoneSed.blockID, 8, "Chert");
+	public static DataLayer Chalk = new DataLayer(12,TFCBlocks.StoneSed.blockID, 9, "Chalk");
+	public static DataLayer Rhyolite = new DataLayer(13,TFCBlocks.StoneIgEx.blockID, 0, "Rhyolite");
+	public static DataLayer Basalt = new DataLayer(14,TFCBlocks.StoneIgEx.blockID, 1, "Basalt");
+	public static DataLayer Andesite = new DataLayer(15,TFCBlocks.StoneIgEx.blockID, 2, "Andesite");
+	public static DataLayer Dacite = new DataLayer(16,TFCBlocks.StoneIgEx.blockID, 3, "Dacite");
+	public static DataLayer Quartzite = new DataLayer(17,TFCBlocks.StoneMM.blockID, 0, "Quartzite");
+	public static DataLayer Slate = new DataLayer(18,TFCBlocks.StoneMM.blockID, 1, "Slate");
+	public static DataLayer Phyllite = new DataLayer(19,TFCBlocks.StoneMM.blockID, 2, "Phyllite");
+	public static DataLayer Schist = new DataLayer(20,TFCBlocks.StoneMM.blockID, 3, "Schist");
+	public static DataLayer Gneiss = new DataLayer(21,TFCBlocks.StoneMM.blockID, 4, "Gneiss");
+	public static DataLayer Marble = new DataLayer(22,TFCBlocks.StoneMM.blockID, 5, "Marble");
 	
 	public static DataLayer NoTree = new DataLayer(29, -1);
 	public static DataLayer Ash = new DataLayer(30, 7);
@@ -80,6 +80,16 @@ public class DataLayer
 		data2 = meta;
 		floatdata1 = 0;
 		layers[index] = this;
+	}
+	
+	public DataLayer(int index, int id, int meta, String s)
+	{
+		ID = index;
+		data1 = id;
+		data2 = meta;
+		floatdata1 = 0;
+		layers[index] = this;
+		name = s;
 	}
 	
 	public DataLayer(int index, int id)

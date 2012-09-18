@@ -76,15 +76,15 @@ public class BlockFarmland extends BlockContainer
 	/**
      * returns true if there's water nearby (x-4 to x+4, y to y+1, k-4 to k+4)
      */
-    public static boolean isWaterNearby(World par1World, int par2, int par3, int par4)
+    public static boolean isWaterNearby(World world, int i, int j, int k)
     {
-        for (int var5 = par2 - 4; var5 <= par2 + 4; ++var5)
+        for (int x = i - 4; x <= i + 4; ++x)
         {
-            for (int var6 = par3; var6 <= par3 + 1; ++var6)
+            for (int y = j; y <= j + 1; ++y)
             {
-                for (int var7 = par4 - 4; var7 <= par4 + 4; ++var7)
+                for (int z = k - 4; z <= k + 4; ++z)
                 {
-                    if (par1World.getBlockMaterial(var5, var6, var7) == Material.water)
+                    if (world.getBlockMaterial(x, y, z) == Material.water)
                     {
                         return true;
                     }

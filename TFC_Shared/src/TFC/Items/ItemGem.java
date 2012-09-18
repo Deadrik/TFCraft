@@ -4,7 +4,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
 
-public class ItemGem extends Item
+public class ItemGem extends ItemTerra
 {
 	public static String[] gemNames = {"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
 

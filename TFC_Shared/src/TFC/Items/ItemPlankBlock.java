@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Enums.EnumSize;
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
 
@@ -12,6 +13,11 @@ public class ItemPlankBlock extends ItemTerraBlock
 	public ItemPlankBlock(int i) 
 	{
 		super(i);
+	}
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package TFC.Commands;
 
-import TFC.Core.Manager;
 import TFC.Core.TFC_Climate;
 import TFC.Enums.EnumTree;
 import net.minecraft.server.MinecraftServer;

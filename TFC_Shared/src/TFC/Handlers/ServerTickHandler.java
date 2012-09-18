@@ -3,9 +3,14 @@ package TFC.Handlers;
 import java.util.EnumSet;
 
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.SpawnerAnimals;
 import net.minecraft.src.World;
+import net.minecraft.src.WorldServer;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.WorldGen.TFCProvider;
 
@@ -14,7 +19,8 @@ import cpw.mods.fml.common.TickType;
 
 public class ServerTickHandler implements ITickHandler
 {
-
+	private int chunkPruneTimer = 0;
+	
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) 
 	{
@@ -25,19 +31,25 @@ public class ServerTickHandler implements ITickHandler
 			{
 				((TFCProvider)world.provider).createSpawnPosition();
 				TFC_Core.SetupWorld(world);
+				world.setAllowedSpawnTypes(false, false);
 			}
+		}
+		
+		if(type.contains(TickType.WORLD))
+		{
+			WorldServer world = (WorldServer)tickData[0];
+			
+			SpawnerAnimals.findChunksForSpawning(world, true, world.getWorldInfo().getWorldTime() % 400L == 0L);
+			
+			//Allow the server to increment time
+			TFC_Time.UpdateTime(world);
 		}
 
 		if (type.contains(TickType.PLAYER))
 		{
 			World world;
-			world = ((EntityPlayer)tickData[0]).worldObj;
-
-			//Allow the server to increment time
-			TFC_Time.UpdateTime(world);
-			TFC_ItemHeat.HandleContainerHeat(world, ((EntityPlayer)tickData[0]).inventory.mainInventory, 
-					(int)((EntityPlayer)tickData[0]).posX, (int)((EntityPlayer)tickData[0]).posY, (int)((EntityPlayer)tickData[0]).posZ);
-
+			EntityPlayer player = (EntityPlayer)tickData[0];
+			world = player.worldObj;
 		}
 	}
 

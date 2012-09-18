@@ -6,6 +6,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Enchantment;
@@ -29,8 +30,18 @@ public class ItemPlank extends ItemTerra
         texture = tex;
         this.hasSubtypes = true;
         this.setMaxDamage(0);
-        this.size = EnumSize.MEDIUM;
     }
+    
+    @Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
+	}
+    
+    @Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.LIGHT;
+	}
     
     @Override
     public String getItemNameIS(ItemStack itemstack) 

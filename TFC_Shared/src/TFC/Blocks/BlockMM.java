@@ -137,7 +137,7 @@ public class BlockMM extends BlockCollapsable
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) 
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
     {
         boolean hasHammer = false;
         for(int i = 0; i < 9;i++)
@@ -145,14 +145,8 @@ public class BlockMM extends BlockCollapsable
             if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
                 hasHammer = true;
         }
-        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer)
+        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
         {
-            MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-            if(objectMouseOver == null) {
-                return false;
-            }       
-            int side = objectMouseOver.sideHit;
-
             int id = world.getBlockId(x, y, z);
             byte meta = (byte) world.getBlockMetadata(x, y, z);
 

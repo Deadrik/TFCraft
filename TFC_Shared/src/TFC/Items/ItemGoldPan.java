@@ -25,8 +25,12 @@ public class ItemGoldPan extends ItemTerra
         setMaxDamage(0);
         setHasSubtypes(true);
         setItemName("GoldPan");
-        this.size = EnumSize.SMALL;
     }
+    
+    @Override
+	public EnumSize getSize() {
+		return EnumSize.SMALL;
+	}
 
     public int getIconFromDamage(int i)
     {

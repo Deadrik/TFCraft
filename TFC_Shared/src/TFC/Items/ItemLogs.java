@@ -4,6 +4,7 @@ import java.util.List;
 
 import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityTerraLogPile;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
@@ -25,8 +26,18 @@ public class ItemLogs extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.size = EnumSize.SMALL;
 		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+	}
+
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.LARGE;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.MEDIUM;
 	}
 
 	@Override
@@ -119,7 +130,7 @@ public class ItemLogs extends ItemTerra
 	{
 		return "/bioxx/terrasprites2.png";
 	}
-	
+
 	@Override
 	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
@@ -127,7 +138,7 @@ public class ItemLogs extends ItemTerra
 		{
 			int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 
-			if(world.getBlockId(x, y, z) != TFCBlocks.LogPile.blockID || entityplayer.isSneaking())
+			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.LogPile.blockID || (side != 1 && side != 0)))
 			{
 				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
 					itemstack.stackSize = itemstack.stackSize-1;
@@ -165,8 +176,59 @@ public class ItemLogs extends ItemTerra
 				}
 
 			}
+			else
+			{
+				int m = itemstack.getItemDamage();
+				if(side == 1)
+				{
+					world.setBlockAndMetadata(x, y+1, z, TFCBlocks.WoodVert.blockID, m);
+					itemstack.stackSize = itemstack.stackSize-1;
+				}
+				else if(side == 0 && world.getBlockId(x, y-1, z) == 0)
+				{
+					world.setBlockAndMetadata(x, y-1, z, TFCBlocks.WoodVert.blockID, m);
+					itemstack.stackSize = itemstack.stackSize-1;
+				}
+				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
+				{
+					setSide(world, itemstack, m, dir, x, y, z, 0, 0, -1);
+				}
+				else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
+				{
+					setSide(world, itemstack, m, dir, x, y, z, 0, 0, 1);
+				}
+				else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
+				{
+					setSide(world, itemstack, m, dir, x, y, z, -1, 0, 0);
+				}
+				else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
+				{
+					setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
+				}
+				return true;
+			}
 		}
 		return false;
+	}
+	
+	public void setSide(World world, ItemStack itemstack, int m, int dir, int x, int y, int z, int i, int j, int k)
+	{
+		if(m < 8)
+		{
+			if(dir == 0 || dir == 2)
+				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m);
+			else
+				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8);
+			itemstack.stackSize = itemstack.stackSize-1;
+		}
+		else if(m >= 8)
+		{
+			if(dir == 0 || dir == 2)
+				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8);
+			else
+				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8);
+			itemstack.stackSize = itemstack.stackSize-1;
+		}
 	}
 
 }

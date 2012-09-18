@@ -3,9 +3,10 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.Entities.EntityCustomMinecart;
+import TFC.Enums.EnumSize;
 import net.minecraft.src.*;
 
-public class ItemCustomMinecart extends Item
+public class ItemCustomMinecart extends ItemTerra
 {
     public int minecartType;
 
@@ -41,4 +42,20 @@ public class ItemCustomMinecart extends Item
     {
         par3List.add(new ItemStack(par1, 1, 0));
     }
+    
+    @Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.MEDIUM;
+	}
+
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public String getTextureFile() {
+		return "/gui/items.png";
+	}
 }

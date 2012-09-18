@@ -36,7 +36,7 @@ public abstract class GenLayerTFC extends GenLayer
         var10 = new GenLayerAddIslandTFC(3L, var11);
         var11 = new GenLayerZoomTFC(2003L, var10);
         var10 = new GenLayerAddIslandTFC(4L, var11);
-        byte var4 = 5;
+        byte var4 = 4;
 
         GenLayerTFC var5 = (GenLayerTFC) GenLayerZoomTFC.func_75915_a(1000L, var10, 0);
         GenLayerRiverInitTFC var13 = new GenLayerRiverInitTFC(100L, var5);

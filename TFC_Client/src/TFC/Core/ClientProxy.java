@@ -121,6 +121,10 @@ public class ClientProxy extends CommonProxy
 		return ModLoader.getMinecraftInstance().theWorld;
 	}
 	
+	public boolean isRemote() {
+		return true;
+	}
+	
 	public void registerSkyProvider(TFCProvider P)
 	{
 		P.skyprovider = new TFCSkyProvider(ModLoader.getMinecraftInstance());
@@ -183,10 +187,8 @@ public class ClientProxy extends CommonProxy
 		{
 			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
 			{
-
-						int var10 = ColorizerFoliageTFC.getFoliageYellow();
-						rgb = applyColor(var10, rgb);
-
+				int var10 = ColorizerFoliageTFC.getFoliageYellow();
+				rgb = applyColor(var10, rgb);
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
@@ -211,19 +213,15 @@ public class ClientProxy extends CommonProxy
 			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && 
 					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
-				//Get the fade multiplier
-				float daymult = getTimeMult(TFC_Time.totalDays(),(TFC_Time.totalYears()*360+180), (TFC_Time.totalYears()*360+270));
 				int color = 0;
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9) * (1-daymult));
+						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				}
-				color = (int) (ColorizerFoliageTFC.getFoliageDead() * daymult);
-				rgb = applyColor(color, rgb);
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
@@ -231,18 +229,14 @@ public class ClientProxy extends CommonProxy
 			else if(TFC_Time.currentMonth >= TFC_Time.February || TFC_Time.currentMonth <= TFC_Time.March && 
 					!(((TFCWorldChunkManager)getCurrentWorld().provider.worldChunkMgr).getEVTLayerAt(i, k).floatdata1 < 0.8) && TFC_Climate.getHeightAdjustedTemp(i, j, k) < 30)
 			{
-
-				float daymult = getTimeMult(TFC_Time.totalDays()-TFC_Time.totalYears()*360,(TFC_Time.totalMonths()*30+330), (TFC_Time.totalMonths()*30+270));
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9) * daymult);
+						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				}
-				int color = (int) (ColorizerFoliageTFC.getFoliageDead() * (1-daymult));
-				rgb = applyColor(color, rgb);
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
@@ -273,8 +267,6 @@ public class ClientProxy extends CommonProxy
 						rgb = applyColor(color, rgb);
 					}
 				}
-
-
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
@@ -298,48 +290,57 @@ public class ClientProxy extends CommonProxy
 			else if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && (meta == 4 || meta == 7 || meta == 5 || meta == 14))
 			{
 				int color = 0;
-				//Get the fade multiplier
-				float daymult = getTimeMult(TFC_Time.totalDays(),(TFC_Time.totalYears()*360+180), (TFC_Time.totalYears()*360+270));
+				//Get the fade multiplie
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9) * (1-daymult));
+						color = ColorizerFoliageTFC.getFoliageYellow();
 						rgb = applyColor(color, rgb);
 					}
 				}
-				color = (int) (ColorizerFoliageTFC.getFoliageDead() * daymult);
-				rgb = applyColor(color, rgb);
-
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
 			else if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && (meta == 6))
 			{
-
-				int var10 = ColorizerFoliageTFC.getFoliageRed();
-				rgb = applyColor(var10, rgb);
+				for (int var8 = -1; var8 <= 1; ++var8)
+				{
+					for (int var9 = -1; var9 <= 1; ++var9)
+					{
+						int var10 = ColorizerFoliageTFC.getFoliageRed();
+						rgb = applyColor(var10, rgb);
+					}
+				}
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
 			else if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December && !(meta == 15))
 			{
-
+				for (int var8 = -1; var8 <= 1; ++var8)
+				{
+					for (int var9 = -1; var9 <= 1; ++var9)
+					{
 				int var10 = ColorizerFoliageTFC.getFoliageOrange();
 				rgb = applyColor(var10, rgb);
-
+					}
+				}
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
 			}
 			else if(TFC_Time.currentMonth >= TFC_Time.September && !(meta == 15))
 			{
-
-				int var10 = ColorizerFoliageTFC.getFoliageDead();
-				rgb = applyColor(var10, rgb);
-
+				for (int var8 = -1; var8 <= 1; ++var8)
+				{
+					for (int var9 = -1; var9 <= 1; ++var9)
+					{
+						int var10 = ColorizerFoliageTFC.getFoliageDead();
+						rgb = applyColor(var10, rgb);
+					}
+				}
 
 				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
 				return x;
@@ -438,6 +439,12 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
 		LR.addStringLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
 		LR.addStringLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");
+		
+		LR.addStringLocalization("item.RedSteelBucketEmpty.name", "Red Steel Bucket (Empty)");
+		LR.addStringLocalization("item.RedSteelBucketWater.name", "Red Steel Bucket (Water)");
+		
+		LR.addStringLocalization("item.BlueSteelBucketEmpty.name", "Blue Steel Bucket (Empty)");
+		LR.addStringLocalization("item.BlueSteelBucketLava.name", "Blue Steel Bucket (Lava)");
 
 		LR.addStringLocalization("item.SluiceItem.name", "Sluice");
 
@@ -477,6 +484,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.BootsPlan.name", "Plan: Plate Boots");
 		LR.addStringLocalization("item.ScythePlan.name", "Plan: Scythe Blade");
 		LR.addStringLocalization("item.KnifePlan.name", "Plan: Knife Blade");
+		LR.addStringLocalization("item.BucketPlan.name", "Plan: Bucket");
 
 		LR.addStringLocalization("item.coke.name", "Coke");
 		LR.addStringLocalization("item.flux.name", "Flux");

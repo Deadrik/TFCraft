@@ -3,9 +3,11 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.Core.TFC_Settings;
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.*;
 
-public class ItemCustomSaw extends ItemAxe
+public class ItemCustomSaw extends ItemAxe implements ISize
 {
 	public ItemCustomSaw(int i, EnumToolMaterial e)
 	{
@@ -25,7 +27,34 @@ public class ItemCustomSaw extends ItemAxe
 	
 	public void addInformation(ItemStack is, List arraylist) 
     {
+		ItemTerra.addSizeInformation(this, arraylist);
+		
         if(TFC_Settings.enableDebugMode)
             arraylist.add("Damage: "+is.getItemDamage());
     }
+	
+	public int getItemStackLimit()
+    {
+    	if(canStack())
+    		return this.getSize().stackSize * getWeight().multiplier;
+    	else
+    		return 1;
+    }
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
+	}
+	
+	@Override
+	public boolean canStack() 
+	{
+		return false;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.MEDIUM;
+	}
 }

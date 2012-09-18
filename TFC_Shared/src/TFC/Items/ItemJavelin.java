@@ -7,7 +7,7 @@ import TFC.Core.TFCItems;
 import TFC.Entities.EntityTerraJavelin;
 import net.minecraft.src.*;
 
-public class ItemJavelin extends ItemTool
+public class ItemJavelin extends ItemTerraTool
 {
     private static int weaponDamage;
     public ItemJavelin(int par1)

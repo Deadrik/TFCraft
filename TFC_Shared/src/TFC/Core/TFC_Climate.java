@@ -50,7 +50,7 @@ public class TFC_Climate
 		float zMod = getZFactor(z);
 		float zTemp = (zMod * getMaxTemperature())-10;
 
-		float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/8000;
+		float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/16000;
 
 		Random R = new Random(day * x + z);
 		

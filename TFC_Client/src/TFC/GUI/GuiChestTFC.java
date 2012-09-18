@@ -5,6 +5,7 @@ import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Containers.ContainerChestTFC;
+import TFC.TileEntities.TileEntityChestTFC;
 
 public class GuiChestTFC extends GuiContainer
 {
@@ -16,15 +17,39 @@ public class GuiChestTFC extends GuiContainer
      */
     private int inventoryRows = 0;
 
-    public GuiChestTFC(IInventory par1IInventory, IInventory par2IInventory, World world, int x, int y, int z)
+    public GuiChestTFC(IInventory par1IInventory, IInventory chestInv, World world, int x, int y, int z)
     {
-        super(new ContainerChestTFC(par1IInventory, par2IInventory, world, x, y, z));
+        super(new ContainerChestTFC(par1IInventory, chestInv, world, x, y, z));
+        
+        TileEntityChestTFC chest = (TileEntityChestTFC)chestInv;
+        
         this.upperChestInventory = par1IInventory;
-        this.lowerChestInventory = par2IInventory;
+        this.lowerChestInventory = chestInv;
+        
+        if (chest.adjacentChestXNeg != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chest.adjacentChestXNeg, chestInv);
+        }
+
+        if (chest.adjacentChestXPos != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chestInv, chest.adjacentChestXPos);
+        }
+
+        if (chest.adjacentChestZNeg != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chest.adjacentChestZNeg, chestInv);
+        }
+
+        if (chest.adjacentChestZPosition != null)
+        {
+        	lowerChestInventory = new InventoryLargeChest("Large chest", chestInv, chest.adjacentChestZPosition);
+        }
+        
         this.allowUserInput = false;
         short var3 = 222;
         int var4 = var3 - 108;
-        this.inventoryRows = par2IInventory.getSizeInventory() / 9;
+        this.inventoryRows = lowerChestInventory.getSizeInventory() / 9;
         this.ySize = var4 + this.inventoryRows * 18;
     }
 

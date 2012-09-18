@@ -4,6 +4,7 @@ import java.io.File;
 
 import TFC.Blocks.BlockSluice;
 import TFC.Core.*;
+import TFC.Enums.EnumSize;
 import TFC.Items.*;
 import TFC.TileEntities.TileEntityTerraSluice;
 
@@ -11,6 +12,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.EnumArmorMaterial;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
+import net.minecraft.src.ItemCoal;
 import net.minecraft.src.Potion;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TerraFirmaCraft;
@@ -354,6 +356,7 @@ public class TFCItems
     public static Item BootsPlan;
     public static Item ScythePlan;
     public static Item KnifePlan;
+    public static Item BucketPlan;
 
     //Tool Heads
     public static Item BismuthPickaxeHead;
@@ -803,6 +806,12 @@ public class TFCItems
     public static Item minecartEmpty;
     public static Item minecartCrate;
     
+    public static Item RedSteelBucketEmpty;
+    public static Item RedSteelBucketWater;
+    
+    public static Item BlueSteelBucketEmpty;
+    public static Item BlueSteelBucketLava;
+    
     
     /**
      * Item Uses Setup
@@ -864,11 +873,9 @@ public class TFCItems
         System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
         
         //Replace any vanilla Items here
+        Item.itemsList[Item.coal.shiftedIndex] = null; Item.itemsList[Item.coal.shiftedIndex] = (new TFC.Items.ItemCoal(7)).setIconCoord(7, 0).setItemName("coal");
         Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
-        //Item.itemsList[Item.minecartEmpty.shiftedIndex] = null; Item.itemsList[Item.minecartEmpty.shiftedIndex] = new ItemCustomMinecart(Item.minecartEmpty.shiftedIndex, 0).setIconCoord(7, 8).setItemName("minecart");
-        //Item.itemsList[Item.minecartCrate.shiftedIndex] = null; Item.itemsList[Item.minecartCrate.shiftedIndex] = new ItemCustomMinecart(Item.minecartCrate.shiftedIndex, 1).setIconCoord(7, 9).setItemName("minecartChest");
-        
-        //minecartEmpty = (new ItemCustomMinecart(TFCSettings.getIntFor(config,"item","minecartEmpty",15999), 0)).setIconCoord(7, 8).setItemName("minecart");
+
         minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setIconCoord(7, 9).setItemName("minecartChest");
         
         Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
@@ -881,6 +888,7 @@ public class TFCItems
         Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
         Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 5, 0.6F, false,"/gui/items.png")).setIconCoord(9, 2).setItemName("bread");
         Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
+        Item.itemsList[Item.dyePowder.shiftedIndex] = null; Item.itemsList[Item.dyePowder.shiftedIndex] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
         
         BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 10, new int[] {2,4,3,2}, 1);
 		BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 20, new int[] {4,6,5,4}, 1);
@@ -899,20 +907,20 @@ public class TFCItems
         terraGoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setItemName("GoldPan").setIconCoord(1, 0);
         terraSluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setItemName("SluiceItem").setIconCoord(9, 0);
         
-        ProPickStone = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickStone",16003)).setItemName("StoneProPick").setIconCoord(0, 1).setMaxDamage(64);
-        ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setItemName("BismuthProPick").setIconCoord(1, 1).setMaxDamage(BismuthUses);
-        ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setItemName("BismuthBronzeProPick").setIconCoord(2, 1).setMaxDamage(BismuthBronzeUses);
-        ProPickBlackBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackBronze",16006)).setItemName("BlackBronzeProPick").setIconCoord(3, 1).setMaxDamage(BlackBronzeUses);
-        ProPickBlackSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackSteel",16007)).setItemName("BlackSteelProPick").setIconCoord(4, 1).setMaxDamage(BlackSteelUses);
-        ProPickBlueSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlueSteel",16008)).setItemName("BlueSteelProPick").setIconCoord(5, 1).setMaxDamage(BlueSteelUses);
-        ProPickBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBronze",16009)).setItemName("BronzeProPick").setIconCoord(6, 1).setMaxDamage(BronzeUses);
-        ProPickCopper = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickCopper",16010)).setItemName("CopperProPick").setIconCoord(7, 1).setMaxDamage(CopperUses);
-        ProPickIron = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickWroughtIron",16012)).setItemName("WroughtIronProPick").setIconCoord(8, 1).setMaxDamage(WroughtIronUses);
-        ProPickRedSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRedSteel",16016)).setItemName("RedSteelProPick").setIconCoord(9, 1).setMaxDamage(RedSteelUses);
-        ProPickRoseGold = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRoseGold",16017)).setItemName("RoseGoldProPick").setIconCoord(10, 1).setMaxDamage(RoseGoldUses);
-        ProPickSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickSteel",16019)).setItemName("SteelProPick").setIconCoord(11, 1).setMaxDamage(SteelUses);
-        ProPickTin = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickTin",16021)).setItemName("TinProPick").setIconCoord(12, 1).setMaxDamage(TinUses);
-        ProPickZinc = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickZinc",16022)).setItemName("ZincProPick").setIconCoord(13, 1).setMaxDamage(ZincUses);
+        ProPickStone = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickStone",16003)).setItemName("Stone ProPick").setIconCoord(0, 1).setMaxDamage(64);
+        ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setItemName("Bismuth ProPick").setIconCoord(1, 1).setMaxDamage(BismuthUses);
+        ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setItemName("Bismuth Bronze ProPick").setIconCoord(2, 1).setMaxDamage(BismuthBronzeUses);
+        ProPickBlackBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackBronze",16006)).setItemName("Black Bronze ProPick").setIconCoord(3, 1).setMaxDamage(BlackBronzeUses);
+        ProPickBlackSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackSteel",16007)).setItemName("Black Steel ProPick").setIconCoord(4, 1).setMaxDamage(BlackSteelUses);
+        ProPickBlueSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlueSteel",16008)).setItemName("Blue Steel ProPick").setIconCoord(5, 1).setMaxDamage(BlueSteelUses);
+        ProPickBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBronze",16009)).setItemName("Bronze ProPick").setIconCoord(6, 1).setMaxDamage(BronzeUses);
+        ProPickCopper = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickCopper",16010)).setItemName("Copper ProPick").setIconCoord(7, 1).setMaxDamage(CopperUses);
+        ProPickIron = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickWroughtIron",16012)).setItemName("Wrought Iron ProPick").setIconCoord(8, 1).setMaxDamage(WroughtIronUses);
+        ProPickRedSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRedSteel",16016)).setItemName("Red Steel ProPick").setIconCoord(9, 1).setMaxDamage(RedSteelUses);
+        ProPickRoseGold = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRoseGold",16017)).setItemName("Rose Gold ProPick").setIconCoord(10, 1).setMaxDamage(RoseGoldUses);
+        ProPickSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickSteel",16019)).setItemName("Steel ProPick").setIconCoord(11, 1).setMaxDamage(SteelUses);
+        ProPickTin = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickTin",16021)).setItemName("Tin ProPick").setIconCoord(12, 1).setMaxDamage(TinUses);
+        ProPickZinc = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickZinc",16022)).setItemName("Zinc ProPick").setIconCoord(13, 1).setMaxDamage(ZincUses);
         
         BismuthIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot",16028)).setItemName("BismuthIngot").setIconCoord(0, 3);
         BismuthBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot",16029)).setItemName("BismuthBronzeIngot").setIconCoord(1, 3);
@@ -936,30 +944,30 @@ public class TFCItems
         TinIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot",16047)).setItemName("TinIngot").setIconCoord(8, 4);
         ZincIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot",16048)).setItemName("ZincIngot").setIconCoord(9, 4);
 
-        BismuthIngot2x = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot2x",16049)).setItemName("BismuthIngot2x").setIconCoord(0, 7);
-        BismuthBronzeIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot2x",16050)).setItemName("BismuthBronzeIngot2x").setIconCoord(1, 7);
-        BlackBronzeIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot2x",16051)).setItemName("BlackBronzeIngot2x").setIconCoord(2, 7);
-        BlackSteelIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot2x",16052)).setItemName("BlackSteelIngot2x").setIconCoord(3, 7);
-        BlueSteelIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot2x",16053)).setItemName("BlueSteelIngot2x").setIconCoord(4, 7);
-        BrassIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot2x",16054)).setItemName("BrassIngot2x").setIconCoord(5, 7);
-        BronzeIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot2x",16055)).setItemName("BronzeIngot2x").setIconCoord(6, 7);
-        CopperIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot2x",16056)).setItemName("CopperIngot2x").setIconCoord(7, 7);
-        GoldIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot2x",16057)).setItemName("GoldIngot2x").setIconCoord(8, 7);
-        WroughtIronIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot2x",16058)).setItemName("WroughtIronIngot2x").setIconCoord(9, 7);
-        LeadIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot2x",16059)).setItemName("LeadIngot2x").setIconCoord(10, 7);
-        NickelIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot2x",16060)).setItemName("NickelIngot2x").setIconCoord(0, 8);
-        PigIronIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot2x",16061)).setItemName("PigIronIngot2x").setIconCoord(1, 8);
-        PlatinumIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot2x",16062)).setItemName("PlatinumIngot2x").setIconCoord(2, 8);
-        RedSteelIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot2x",16063)).setItemName("RedSteelIngot2x").setIconCoord(3, 8);
-        RoseGoldIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot2x",16064)).setItemName("RoseGoldIngot2x").setIconCoord(4, 8);
-        SilverIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot2x",16065)).setItemName("SilverIngot2x").setIconCoord(5, 8);
-        SteelIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot2x",16066)).setItemName("SteelIngot2x").setIconCoord(6, 8);
-        SterlingSilverIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot2x",16067)).setItemName("SterlingSilverIngot2x").setIconCoord(7, 8);
-        TinIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot2x",16068)).setItemName("TinIngot2x").setIconCoord(8, 8);
-        ZincIngot2x  = new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot2x",16069)).setItemName("ZincIngot2x").setIconCoord(9, 8);
+        BismuthIngot2x = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot2x",16049)).setItemName("BismuthIngot2x").setIconCoord(0, 7)).setSize(EnumSize.LARGE);
+        BismuthBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot2x",16050)).setItemName("BismuthBronzeIngot2x").setIconCoord(1, 7)).setSize(EnumSize.LARGE);
+        BlackBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot2x",16051)).setItemName("BlackBronzeIngot2x").setIconCoord(2, 7)).setSize(EnumSize.LARGE);
+        BlackSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot2x",16052)).setItemName("BlackSteelIngot2x").setIconCoord(3, 7)).setSize(EnumSize.LARGE);
+        BlueSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot2x",16053)).setItemName("BlueSteelIngot2x").setIconCoord(4, 7)).setSize(EnumSize.LARGE);
+        BrassIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot2x",16054)).setItemName("BrassIngot2x").setIconCoord(5, 7)).setSize(EnumSize.LARGE);
+        BronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot2x",16055)).setItemName("BronzeIngot2x").setIconCoord(6, 7)).setSize(EnumSize.LARGE);
+        CopperIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot2x",16056)).setItemName("CopperIngot2x").setIconCoord(7, 7)).setSize(EnumSize.LARGE);
+        GoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot2x",16057)).setItemName("GoldIngot2x").setIconCoord(8, 7)).setSize(EnumSize.LARGE);
+        WroughtIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot2x",16058)).setItemName("WroughtIronIngot2x").setIconCoord(9, 7)).setSize(EnumSize.LARGE);
+        LeadIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot2x",16059)).setItemName("LeadIngot2x").setIconCoord(10, 7)).setSize(EnumSize.LARGE);
+        NickelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot2x",16060)).setItemName("NickelIngot2x").setIconCoord(0, 8)).setSize(EnumSize.LARGE);
+        PigIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot2x",16061)).setItemName("PigIronIngot2x").setIconCoord(1, 8)).setSize(EnumSize.LARGE);
+        PlatinumIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot2x",16062)).setItemName("PlatinumIngot2x").setIconCoord(2, 8)).setSize(EnumSize.LARGE);
+        RedSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot2x",16063)).setItemName("RedSteelIngot2x").setIconCoord(3, 8)).setSize(EnumSize.LARGE);
+        RoseGoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot2x",16064)).setItemName("RoseGoldIngot2x").setIconCoord(4, 8)).setSize(EnumSize.LARGE);
+        SilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot2x",16065)).setItemName("SilverIngot2x").setIconCoord(5, 8)).setSize(EnumSize.LARGE);
+        SteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot2x",16066)).setItemName("SteelIngot2x").setIconCoord(6, 8)).setSize(EnumSize.LARGE);
+        SterlingSilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot2x",16067)).setItemName("SterlingSilverIngot2x").setIconCoord(7, 8)).setSize(EnumSize.LARGE);
+        TinIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot2x",16068)).setItemName("TinIngot2x").setIconCoord(8, 8)).setSize(EnumSize.LARGE);
+        ZincIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot2x",16069)).setItemName("ZincIngot2x").setIconCoord(9, 8)).setSize(EnumSize.LARGE);
 
-        SulfurPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SulfurPowder",16070)).setTexturePath("/bioxx/sprites.png").setItemName("SulfurPowder").setIconCoord(1, 0);
-        SaltpeterPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SaltpeterPowder",16071)).setTexturePath("/bioxx/sprites.png").setItemName("SaltpeterPowder").setIconCoord(0, 0);
+        SulfurPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SulfurPowder",16070)).setTexturePath("/bioxx/terrasprites.png").setItemName("SulfurPowder").setIconCoord(1, 0);
+        SaltpeterPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SaltpeterPowder",16071)).setTexturePath("/bioxx/terrasprites.png").setItemName("SaltpeterPowder").setIconCoord(0, 0);
 
         GemRuby = new ItemGem(TFC_Settings.getIntFor(config,"item","GemRuby",16080)).setItemName("Ruby").setIconCoord(11, 3);
         GemSapphire = new ItemGem(TFC_Settings.getIntFor(config,"item","GemSapphire",16081)).setItemName("Sapphire").setIconCoord(11, 4);
@@ -995,67 +1003,67 @@ public class TFCItems
 
         BismuthPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BismuthPick",16116),BismuthToolMaterial).setItemName("Bismuth Pick").setMaxDamage(BismuthUses).setIconCoord(1, 3);
         BismuthShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BismuthShovel",16117),BismuthToolMaterial).setItemName("Bismuth Shovel").setMaxDamage(BismuthUses).setIconCoord(1, 4);
-        BismuthAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nBismuthAxe",16118),BismuthToolMaterial).setItemName("Bismuth Axe").setMaxDamage(BismuthUses).setIconCoord(1, 5);
+        BismuthAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BismuthAxe",16118),BismuthToolMaterial).setItemName("Bismuth Axe").setMaxDamage(BismuthUses).setIconCoord(1, 5);
         BismuthHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BismuthHoe",16119),BismuthToolMaterial).setItemName("Bismuth Hoe").setMaxDamage(BismuthUses).setIconCoord(1, 6);
 
         BismuthBronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BismuthBronzePick",16120),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Pick").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 3);
         BismuthBronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BismuthBronzeShovel",16121),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Shovel").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 4);
-        BismuthBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nBismuthBronzeAxe",16122),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Axe").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 5);
+        BismuthBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BismuthBronzeAxe",16122),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Axe").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 5);
         BismuthBronzeHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BismuthBronzeHoe",16123),BismuthBronzeToolMaterial).setItemName("Bismuth Bronze Hoe").setMaxDamage(BismuthBronzeUses).setIconCoord(2, 6);
 
         BlackBronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BlackBronzePick",16124),BlackBronzeToolMaterial).setItemName("Black Bronze Pick").setMaxDamage(BlackBronzeUses).setIconCoord(3, 3);
         BlackBronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BlackBronzeShovel",16125),BlackBronzeToolMaterial).setItemName("Black Bronze Shovel").setMaxDamage(BlackBronzeUses).setIconCoord(3, 4);
-        BlackBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nBlackBronzeAxe",16126),BlackBronzeToolMaterial).setItemName("Black Bronze Axe").setMaxDamage(BlackBronzeUses).setIconCoord(3, 5);
+        BlackBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BlackBronzeAxe",16126),BlackBronzeToolMaterial).setItemName("Black Bronze Axe").setMaxDamage(BlackBronzeUses).setIconCoord(3, 5);
         BlackBronzeHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BlackBronzeHoe",16127),BlackBronzeToolMaterial).setItemName("Black Bronze Hoe").setMaxDamage(BlackBronzeUses).setIconCoord(3, 6);
 
         BlackSteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BlackSteelPick",16128),BlackSteelToolMaterial).setItemName("Black Steel Pick").setMaxDamage(BlackSteelUses).setIconCoord(4, 3);
         BlackSteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BlackSteelShovel",16129),BlackSteelToolMaterial).setItemName("Black Steel Shovel").setMaxDamage(BlackSteelUses).setIconCoord(4, 4);
-        BlackSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nBlackSteelAxe",16130),BlackSteelToolMaterial).setItemName("Black Steel Axe").setMaxDamage(BlackSteelUses).setIconCoord(4, 5);
+        BlackSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BlackSteelAxe",16130),BlackSteelToolMaterial).setItemName("Black Steel Axe").setMaxDamage(BlackSteelUses).setIconCoord(4, 5);
         BlackSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BlackSteelHoe",16131),BlackSteelToolMaterial).setItemName("Black Steel Hoe").setMaxDamage(BlackSteelUses).setIconCoord(4, 6);
 
         BlueSteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BlueSteelPick",16132),BlueSteelToolMaterial).setItemName("Blue Steel Pick").setMaxDamage(BlueSteelUses).setIconCoord(5, 3);
         BlueSteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BlueSteelShovel",16133),BlueSteelToolMaterial).setItemName("Blue Steel Shovel").setMaxDamage(BlueSteelUses).setIconCoord(5, 4);
-        BlueSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nBlueSteelAxe",16134),BlueSteelToolMaterial).setItemName("Blue Steel Axe").setMaxDamage(BlueSteelUses).setIconCoord(5, 5);
+        BlueSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BlueSteelAxe",16134),BlueSteelToolMaterial).setItemName("Blue Steel Axe").setMaxDamage(BlueSteelUses).setIconCoord(5, 5);
         BlueSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BlueSteelHoe",16135),BlueSteelToolMaterial).setItemName("Blue Steel Hoe").setMaxDamage(BlueSteelUses).setIconCoord(5, 6);
 
         BronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BronzePick",16136),BronzeToolMaterial).setItemName("Bronze Pick").setMaxDamage(BronzeUses).setIconCoord(6,3);
         BronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BronzeShovel",16137),BronzeToolMaterial).setItemName("Bronze Shovel").setMaxDamage(BronzeUses).setIconCoord(6, 4);
-        BronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nBronzeAxe",16138),BronzeToolMaterial).setItemName("Bronze Axe").setMaxDamage(BronzeUses).setIconCoord(6, 5);
+        BronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BronzeAxe",16138),BronzeToolMaterial).setItemName("Bronze Axe").setMaxDamage(BronzeUses).setIconCoord(6, 5);
         BronzeHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BronzeHoe",16139),BronzeToolMaterial).setItemName("Bronze Hoe").setMaxDamage(BronzeUses).setIconCoord(6, 6);
 
         CopperPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","CopperPick",16140),CopperToolMaterial).setItemName("Copper Pick").setMaxDamage(CopperUses).setIconCoord(7, 3);
         CopperShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","CopperShovel",16141),CopperToolMaterial).setItemName("Copper Shovel").setMaxDamage(CopperUses).setIconCoord(7, 4);
-        CopperAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nCopperAxe",16142),CopperToolMaterial).setItemName("Copper Axe").setMaxDamage(CopperUses).setIconCoord(7, 5);
+        CopperAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","CopperAxe",16142),CopperToolMaterial).setItemName("Copper Axe").setMaxDamage(CopperUses).setIconCoord(7, 5);
         CopperHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","CopperHoe",16143),CopperToolMaterial).setItemName("Copper Hoe").setMaxDamage(CopperUses).setIconCoord(7, 6);
 
         WroughtIronPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","WroughtIronPick",16148),IronToolMaterial).setItemName("Wrought Iron Pick").setMaxDamage(WroughtIronUses).setIconCoord(8, 3);
         WroughtIronShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","WroughtIronShovel",16149),IronToolMaterial).setItemName("Wrought Iron Shovel").setMaxDamage(WroughtIronUses).setIconCoord(8, 4);
-        WroughtIronAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nWroughtIronAxe",16150),IronToolMaterial).setItemName("Wrought Iron Axe").setMaxDamage(WroughtIronUses).setIconCoord(8, 5);
+        WroughtIronAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","WroughtIronAxe",16150),IronToolMaterial).setItemName("Wrought Iron Axe").setMaxDamage(WroughtIronUses).setIconCoord(8, 5);
         WroughtIronHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","WroughtIronHoe",16151),IronToolMaterial).setItemName("Wrought Iron Hoe").setMaxDamage(WroughtIronUses).setIconCoord(8, 6);
 
         RedSteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","RedSteelPick",16168),RedSteelToolMaterial).setItemName("Red Steel Pick").setMaxDamage(RedSteelUses).setIconCoord(9, 3);
         RedSteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","RedSteelShovel",16169),RedSteelToolMaterial).setItemName("Red Steel Shovel").setMaxDamage(RedSteelUses).setIconCoord(9, 4);
-        RedSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nRedSteelAxe",16170),RedSteelToolMaterial).setItemName("Red Steel Axe").setMaxDamage(RedSteelUses).setIconCoord(9, 5);
+        RedSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","RedSteelAxe",16170),RedSteelToolMaterial).setItemName("Red Steel Axe").setMaxDamage(RedSteelUses).setIconCoord(9, 5);
         RedSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","RedSteelHoe",16171),RedSteelToolMaterial).setItemName("Red Steel Hoe").setMaxDamage(RedSteelUses).setIconCoord(9, 6);
 
         RoseGoldPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","RoseGoldPick",16172),RoseGoldToolMaterial).setItemName("Rose Gold Pick").setMaxDamage(RoseGoldUses).setIconCoord(10, 3);
         RoseGoldShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","RoseGoldShovel",16173),RoseGoldToolMaterial).setItemName("Rose Gold Shovel").setMaxDamage(RoseGoldUses).setIconCoord(10, 4);
-        RoseGoldAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nRoseGoldAxe",16174),RoseGoldToolMaterial).setItemName("Rose Gold Axe").setMaxDamage(RoseGoldUses).setIconCoord(10, 5);
+        RoseGoldAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","RoseGoldAxe",16174),RoseGoldToolMaterial).setItemName("Rose Gold Axe").setMaxDamage(RoseGoldUses).setIconCoord(10, 5);
         RoseGoldHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","RoseGoldHoe",16175),RoseGoldToolMaterial).setItemName("Rose Gold Hoe").setMaxDamage(RoseGoldUses).setIconCoord(10, 6);
 
         SteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","SteelPick",16180),SteelToolMaterial).setItemName("Steel Pick").setMaxDamage(SteelUses).setIconCoord(11, 3);
         SteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","SteelShovel",16181),SteelToolMaterial).setItemName("Steel Shovel").setMaxDamage(SteelUses).setIconCoord(11, 4);
-        SteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nSteelAxe",16182),SteelToolMaterial).setItemName("Steel Axe").setMaxDamage(SteelUses).setIconCoord(11, 5);
+        SteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","SteelAxe",16182),SteelToolMaterial).setItemName("Steel Axe").setMaxDamage(SteelUses).setIconCoord(11, 5);
         SteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","SteelHoe",16183),SteelToolMaterial).setItemName("Steel Hoe").setMaxDamage(SteelUses).setIconCoord(11, 6);
 
         TinPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","TinPick",16188),TinToolMaterial).setItemName("Tin Pick").setMaxDamage(TinUses).setIconCoord(12, 3);
         TinShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","TinShovel",16189),TinToolMaterial).setItemName("Tin Shovel").setMaxDamage(TinUses).setIconCoord(12, 4);
-        TinAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nTinAxe",16190),TinToolMaterial).setItemName("Tin Axe").setMaxDamage(TinUses).setIconCoord(12, 5);
+        TinAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","TinAxe",16190),TinToolMaterial).setItemName("Tin Axe").setMaxDamage(TinUses).setIconCoord(12, 5);
         TinHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","TinHoe",16191),TinToolMaterial).setItemName("Tin Hoe").setMaxDamage(TinUses).setIconCoord(12, 6);
 
         ZincPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","ZincPick",16192),ZincToolMaterial).setItemName("Zinc Pick").setMaxDamage(ZincUses).setIconCoord(13, 3);
         ZincShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","ZincShovel",16193),ZincToolMaterial).setItemName("Zinc Shovel").setMaxDamage(ZincUses).setIconCoord(13, 4);
-        ZincAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","nZincAxe",16194),ZincToolMaterial).setItemName("Zinc Axe").setMaxDamage(ZincUses).setIconCoord(13, 5);
+        ZincAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","ZincAxe",16194),ZincToolMaterial).setItemName("Zinc Axe").setMaxDamage(ZincUses).setIconCoord(13, 5);
         ZincHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","ZincHoe",16195),ZincToolMaterial).setItemName("Zinc Hoe").setMaxDamage(ZincUses).setIconCoord(13, 6);
 
         //chisels
@@ -1148,9 +1156,6 @@ public class TFCItems
         boneMMHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setItemName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses).setIconCoord(14, 6);
         Javelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","javelin",16318)).setItemName("javelin").setIconCoord(15, 1);
 
-        Item.itemsList[Item.dyePowder.shiftedIndex] = null;
-        Item.itemsList[Item.dyePowder.shiftedIndex] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
-        
         terraSlag = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraSlag",16349),"/bioxx/terrasprites.png").setItemName("terraSlag").setIconCoord(2, 0);
 
         BismuthUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBismuth",16350)).setItemName("UnshapedBismuth").setIconCoord(0, 9);
@@ -1412,6 +1417,7 @@ public class TFCItems
         BootsPlan = new ItemMiscTool(TFC_Settings.getIntFor(config,"item","BootsPlan",num)).setItemName("BootsPlan").setIconCoord(0, 0);num++;
         ScythePlan = new ItemMiscTool(TFC_Settings.getIntFor(config,"item","ScythePlan",num)).setItemName("ScythePlan").setIconCoord(0, 0);num++;
         KnifePlan = new ItemMiscTool(TFC_Settings.getIntFor(config,"item","KnifePlan",num)).setItemName("KnifePlan").setIconCoord(0, 0);num++;
+        BucketPlan = new ItemMiscTool(TFC_Settings.getIntFor(config,"item","BucketPlan",num)).setItemName("BucketPlan").setIconCoord(0, 0);num++;
         
         WoodenBucketEmpty = (new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","WoodenBucketEmpty",num), 0)).setIconCoord(13, 0).setItemName("WoodenBucketEmpty");num++;
         WoodenBucketWater = (new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","WoodenBucketWater",num), TFCBlocks.finiteWater.blockID)).setIconCoord(14, 0).setItemName("WoodenBucketWater").setContainerItem(WoodenBucketEmpty);num++;
@@ -1476,7 +1482,11 @@ public class TFCItems
         SmallOreChunk = new ItemOreSmall(TFC_Settings.getIntFor(config,"item","SmallOreChunk",num++)).setItemName("Small Ore").setIconCoord(0, 14);
         SinglePlank = new ItemPlank(TFC_Settings.getIntFor(config,"item","SinglePlank",num++),"/bioxx/terrasprites2.png").setItemName("SinglePlank").setIconCoord(0, 6);
         
+        RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketEmpty",num++), 0)).setIconCoord(13, 2).setItemName("RedSteelBucketEmpty");
+        RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketWater",num++), Block.waterMoving.blockID)).setIconCoord(14, 2).setItemName("RedSteelBucketWater");
         
+        BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketEmpty",num++), 0)).setIconCoord(12, 2).setItemName("BlueSteelBucketEmpty");
+        BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketLava",num++), Block.lavaMoving.blockID)).setIconCoord(15, 2).setItemName("BlueSteelBucketLava");
         
         
         num = 18000;

@@ -1,5 +1,7 @@
 package TFC.Items;
 
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.*;
 
 public class ItemStick extends ItemTerra
@@ -17,16 +19,8 @@ public class ItemStick extends ItemTerra
 
     public int getIconFromDamage(int i)
     {
-        return 16+i;
+        return 16;
     }
-
-//    @Override
-//    public String getItemNameIS(ItemStack itemstack) 
-//    {
-//        String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
-//        return s;
-//    }
-
     public int getMetadata(int i)
     {
         return i;
@@ -38,9 +32,14 @@ public class ItemStick extends ItemTerra
         return "/bioxx/terrasprites.png";
     }
     
-//    public void addCreativeItems(java.util.ArrayList list)
-//    {
-//        for(int i = 0; i < 16; i++)
-//            list.add(new ItemStack(this,1,i));
-//    }
+    @Override
+	public EnumSize getSize() 
+	{
+		return EnumSize.TINY;
+	}
+	@Override
+	public EnumWeight getWeight() 
+	{
+		return EnumWeight.LIGHT;
+	}
 }

@@ -16,10 +16,14 @@ public class ItemFirestarter extends ItemTerra
     {
         super(i);
         this.setMaxDamage(8);
-        this.size = EnumSize.SMALL;
         this.hasSubtypes = false;
         this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
+    
+    @Override
+	public EnumSize getSize() {
+		return EnumSize.SMALL;
+	}
 
     @Override
     public String getItemNameIS(ItemStack itemstack) 
@@ -31,6 +35,12 @@ public class ItemFirestarter extends ItemTerra
     {
         return i;
     }
+    
+    @Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
     @Override
     public String getTextureFile()

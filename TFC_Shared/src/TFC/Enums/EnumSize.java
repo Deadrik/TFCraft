@@ -2,27 +2,33 @@ package TFC.Enums;
 
 public enum EnumSize 
 {
-	TINY("TINY", /*size*/64),
+	TINY("Tiny", /*size*/64),
 	
-	VERYSMALL("VERYSMALL", /*size*/32),
+	VERYSMALL("Very Small", /*size*/32),
 	
-	SMALL("SMALL", /*size*/16),
+	SMALL("Small", /*size*/16),
 	
-	MEDIUM("MEDIUM", /*size*/8),
+	MEDIUM("Medium", /*size*/8),
 	
-	LARGE("LARGE", /*size*/4),
+	LARGE("Large", /*size*/4),
 	
-	VERYLARGE("VERYLARGE", /*size*/2),
+	VERYLARGE("Very Large", /*size*/2),
 	
-	EXTREME("EXTREME", /*size*/1);
+	HUGE("Huge", /*size*/1);
 
 	public final int stackSize;
-
+	private final String name;
 	private static final EnumSize Sizes[] = new EnumSize[] {
-		TINY,SMALL,MEDIUM};
+		TINY, VERYSMALL, SMALL, MEDIUM, LARGE, VERYLARGE, HUGE};
 
 	private EnumSize(String s, int i)
 	{
+		name = s;
 		stackSize = i;
+	}
+	
+	public String getName()
+	{
+		return name;
 	}
 }

@@ -13,7 +13,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 
-public class ItemDyeCustom extends Item
+public class ItemDyeCustom extends ItemTerra
 {
 	/** List of dye color names */
     public static final String[] dyeColorNames = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white"};
@@ -21,7 +21,7 @@ public class ItemDyeCustom extends Item
 
     public ItemDyeCustom(int par1)
     {
-        super(par1);
+        super(par1,"/gui/items.png");
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setTabToDisplayOn(CreativeTabs.tabMaterials);

@@ -1,9 +1,11 @@
 package TFC.Items;
 
 import TFC.Blocks.BlockSluice;
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.*;
 
-public class ItemSluice extends Item
+public class ItemSluice extends ItemTerra
 {
 
 	public ItemSluice(int i)
@@ -70,4 +72,13 @@ public class ItemSluice extends Item
 		return false;
 	}
 
+	public EnumSize getSize()
+	{
+		return EnumSize.HUGE;
+	}
+	@Override
+	public EnumWeight getWeight() 
+	{
+		return EnumWeight.HEAVY;
+	}
 }

@@ -3,9 +3,10 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.Core.TFC_Settings;
+import TFC.Enums.EnumSize;
 import net.minecraft.src.*;
 
-public class ItemCustomKnife extends ItemSword
+public class ItemCustomKnife extends ItemWeapon
 {
 	private int weaponDamage = 1;
 	public ItemCustomKnife(int i, EnumToolMaterial e)
@@ -15,29 +16,19 @@ public class ItemCustomKnife extends ItemSword
 		this.weaponDamage = 1 + e.getDamageVsEntity();
 	}
 
-	public int getDamageVsEntity(Entity par1Entity)
-	{
-		return this.weaponDamage;
-	}
-
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
-	{
-		return EnumAction.block;
-	}
-
 	public String getTextureFile() {
 		return "/bioxx/terratools.png";
 	}
-
-	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+	
+	public EnumSize getSize()
 	{
-		par1ItemStack.damageItem(1, par3EntityLiving);
-		return true;
+		return EnumSize.SMALL;
 	}
 	
-	public void addInformation(ItemStack is, List arraylist) 
-    {
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: "+is.getItemDamage());
-    }
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

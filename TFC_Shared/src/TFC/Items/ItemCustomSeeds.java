@@ -2,10 +2,11 @@ package TFC.Items;
 
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
+import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityCrop;
 import net.minecraft.src.*;
 
-public class ItemCustomSeeds extends Item
+public class ItemCustomSeeds extends ItemTerra
 {
 	/**
 	 * The type of block this seed turns into (wheat or pumpkin stems for instance)
@@ -22,7 +23,20 @@ public class ItemCustomSeeds extends Item
 		this.soilBlockID = TFCBlocks.tilledSoil.blockID;
 		this.soilBlockID2 = TFCBlocks.tilledSoil2.blockID;
 		this.cropId = cropId;
+		this.setTabToDisplayOn(CreativeTabs.tabFood);
 	}
+	
+	@Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.TINY;
+	}
+	
+	@Override
+    public String getTextureFile()
+    {
+        return "/gui/items.png";
+    }
 
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -49,7 +63,7 @@ public class ItemCustomSeeds extends Item
 				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(x, y+1, z));
 				te.cropId = cropId;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
-				world.markBlockAsNeedsUpdate(x, y, z);
+				world.markBlockNeedsUpdate(x, y, z);
 				--stack.stackSize;
 				return true;
 			}

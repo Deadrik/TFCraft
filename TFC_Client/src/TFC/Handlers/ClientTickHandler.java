@@ -2,13 +2,13 @@ package TFC.Handlers;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.World;
+import net.minecraft.src.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.WorldGen.TFCProvider;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -25,10 +25,18 @@ public class ClientTickHandler implements ITickHandler
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
 		if(type.contains(TickType.PLAYER))
 		{
-			World world = ((EntityPlayer)tickData[0]).worldObj;
+			EntityPlayer player = (EntityPlayer)tickData[0];
+			World world = player.worldObj;
 
-			//Allow the client to increment time
-			TFC_Time.UpdateTime(world);
+			//			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory)
+			//			{
+			//				player.openGui(TerraFirmaCraft.instance, 27, player.worldObj, 0, 0, 0);
+			//			}
+			if(ModLoader.getMinecraftServerInstance().isDedicatedServer())
+			{
+				//Allow the client to increment time
+				TFC_Time.UpdateTime(world);
+			}
 		}
 	}
 

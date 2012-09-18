@@ -1,6 +1,5 @@
 package TFC.Commands;
 
-import TFC.Core.Manager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Enums.EnumTree;

@@ -10,6 +10,8 @@ import TFC.Blocks.BlockOre3;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Vector3f;
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
@@ -24,7 +26,7 @@ import net.minecraft.src.StringTranslate;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
-public class ItemProPick extends Item
+public class ItemProPick extends ItemTerra
 {
     List vecArray;
 
@@ -41,11 +43,6 @@ public class ItemProPick extends Item
         return "/bioxx/terratools.png";
     }
 
-    public void addInformation(ItemStack is, List arraylist) 
-    {
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: "+is.getItemDamage());
-    }
     @Override
     public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
     {
@@ -173,4 +170,22 @@ public class ItemProPick extends Item
         }
         return false;
     }
+    
+    @Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.SMALL;
+	}
+
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.LIGHT;
+	}
 }

@@ -5,18 +5,18 @@ import java.util.List;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.*;
 
-public class ItemTerraBlock extends ItemBlock
+public class ItemTerraBlock extends ItemBlock implements ISize
 {
 	public String[] blockNames;
-	public EnumSize size;
 	
 	public ItemTerraBlock(int par1) 
 	{
 		super(par1);
-		size = EnumSize.MEDIUM;
 		setHasSubtypes(true);
 		this.setTabToDisplayOn(CreativeTabs.tabBlock);
 	}
@@ -24,9 +24,30 @@ public class ItemTerraBlock extends ItemBlock
 	@Override
 	public String getItemNameIS(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
+		if(blockNames != null)
+		{
+			String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
+			return s;
+		}
+		else
+		{
+			return itemstack.getItem().getItemName();
+		}
 	}
+	
+	@Override
+    public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+    {
+        if (!world.isRemote && is.hasTagCompound() && TFC_Settings.enableInventoryHeat)
+        {
+            NBTTagCompound stackTagCompound = is.getTagCompound();
+
+            if(stackTagCompound.hasKey("temperature"))
+            {
+            	TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+            }
+        }
+    }
 	
 	@Override
 	public int getMetadata(int i) 
@@ -36,8 +57,7 @@ public class ItemTerraBlock extends ItemBlock
 
     public void addInformation(ItemStack is, List arraylist) 
     {
-    	if(size!= null)
-    		arraylist.add("Size: " + size.name());
+    	ItemTerra.addSizeInformation(this, arraylist);
     	
         if (is.hasTagCompound())
         {
@@ -70,5 +90,31 @@ public class ItemTerraBlock extends ItemBlock
     {
         return true;
     }
+    
+    public int getItemStackLimit()
+    {
+    	if(canStack())
+    		return this.getSize().stackSize * getWeight().multiplier;
+    	else
+    		return 1;
+    }
+
+	@Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.VERYSMALL;
+	}
+
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.HEAVY;
+	}
 
 }

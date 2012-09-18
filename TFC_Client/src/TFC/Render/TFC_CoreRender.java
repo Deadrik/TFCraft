@@ -243,8 +243,8 @@ public class TFC_CoreRender
     {
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
         World w = ModLoader.getMinecraftInstance().theWorld;
-        TFCWorldChunkManager wcm = ((TFCWorldChunkManager)ModLoader.getMinecraftInstance().theWorld.getWorldChunkManager());
-        DataLayer rockLayer1 = ((TFCWorldChunkManager)ModLoader.getMinecraftInstance().theWorld.getWorldChunkManager()).getRockLayerAt(i, k, 0);
+        TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
+        DataLayer rockLayer1 = ((TFCWorldChunkManager)w.getWorldChunkManager()).getRockLayerAt(i, k, 0);
         renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(0, rockLayer1.data2);
 
         block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);

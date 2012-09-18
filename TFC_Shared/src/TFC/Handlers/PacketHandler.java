@@ -42,7 +42,6 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
-
 	public static final byte Packet_Init_Block_Client = 0;
 	public static final byte Packet_Init_Block_Server = 1;
 	public static final byte Packet_Keypress_Server = 2;
@@ -289,5 +288,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				PlayerManagerTFC.getInstance().Players.remove(i);
 			}  
 		}
+		
+		if(TerraFirmaCraft.proxy.isRemote())
+			manager.closeConnections();
+		else
+			manager.serverShutdown();
 	}
 }

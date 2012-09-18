@@ -36,27 +36,27 @@ public class TileEntityFarmland extends TileEntity
                     if((crop.cycleType != 0))
                     {
                         if(nutrients[0] < 120000)
-                            nutrients[0] += crop.nutrientExtraRestore[0];
+                            nutrients[0] += 80 + crop.nutrientExtraRestore[0];
                     }
                     if((crop.cycleType != 1))
                     {
                         if(nutrients[1] < 120000)
-                            nutrients[1] += crop.nutrientExtraRestore[1];
+                            nutrients[1] += 80 + crop.nutrientExtraRestore[1];
                     }
                     if((crop.cycleType != 2))
                     {
                         if(nutrients[2] < 120000)
-                            nutrients[2] += crop.nutrientExtraRestore[2];
+                            nutrients[2] += 80 + crop.nutrientExtraRestore[2];
                     }
                 }
                 else
                 {
                     if(nutrients[0] < 120000)
-                        nutrients[0]+=80;
+                        nutrients[0]+=120;
                     if(nutrients[1] < 120000)
-                        nutrients[1]+=80;
+                        nutrients[1]+=120;
                     if(nutrients[2] < 120000)
-                        nutrients[2]+=80;
+                        nutrients[2]+=120;
                 }
 
                 nutrientTimer+=24;

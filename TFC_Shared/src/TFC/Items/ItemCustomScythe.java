@@ -5,7 +5,7 @@ import java.util.List;
 import TFC.Core.TFC_Settings;
 import net.minecraft.src.*;
 
-public class ItemCustomScythe extends ItemTool
+public class ItemCustomScythe extends ItemTerraTool
 {
     static Block[] blocks = {Block.blocksList[18]};
 	private int weaponDamage;
@@ -22,18 +22,10 @@ public class ItemCustomScythe extends ItemTool
 		return this.weaponDamage;
 	}
 
-	public String getTextureFile() {
-		return "/bioxx/terratools.png";
-	}
-
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
 	{
 		par1ItemStack.damageItem(1, par3EntityLiving);
 		return true;
 	}
-	public void addInformation(ItemStack is, List arraylist) 
-    {
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: "+is.getItemDamage());
-    }
+
 }

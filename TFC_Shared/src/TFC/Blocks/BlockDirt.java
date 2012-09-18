@@ -76,10 +76,6 @@ public class BlockDirt extends BlockTerra2
     {
         world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
     }
-    public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
-    }
 
     public int tickRate()
     {
@@ -115,9 +111,97 @@ public class BlockDirt extends BlockTerra2
     }
 
     public void updateTick(World world, int i, int j, int k, Random random)
-    {
-        tryToFall(world, i, j, k);
-    }
+	{
+		if(!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(i, j, k);
+			boolean PosXAir = false;
+			boolean NegXAir = false;
+			boolean PosZAir = false;
+			boolean NegZAir = false;
+			boolean PosXAir2 = false;
+			boolean NegXAir2 = false;
+			boolean PosZAir2 = false;
+			boolean NegZAir2 = false;
+			byte count = 0;
+			List sides = new ArrayList<Integer>();
+
+			if(world.getBlockId(i+1, j, k) == 0)
+			{
+				count++;
+				if(world.getBlockId(i+1, j-1, k) == 0)
+					//PosXAir = true;
+					sides.add(0);
+			}
+			if(world.getBlockId(i, j, k+1) == 0)
+			{
+				count++;
+				if(world.getBlockId(i, j-1, k+1) == 0)
+					//PosZAir = true;
+					sides.add(1);
+			}
+			if(world.getBlockId(i-1, j, k) == 0)
+			{
+				count++;
+				if(world.getBlockId(i-1, j-1, k) == 0)
+					//NegXAir = true;
+					sides.add(2);
+			}
+			if(world.getBlockId(i, j, k-1) == 0)
+			{
+				count++;
+				if(world.getBlockId(i, j-1, k-1) == 0)
+					//NegZAir = true; 
+					sides.add(3);
+			}
+
+			if((random.nextInt(5) == 0 || count > 2) && sides.size() >= 1)
+			{
+				switch((Integer)sides.get(random.nextInt(sides.size())))
+				{
+				case 0:
+				{
+					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadata(i+1, j, k, blockID,meta);
+					tryToFall(world, i+1, j, k);
+					break;
+				}
+				case 1:
+				{
+					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadata(i, j, k+1, blockID,meta);
+					tryToFall(world, i, j, k+1);
+					break;
+				}
+				case 2:
+				{
+					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadata(i-1, j, k, blockID,meta);
+					tryToFall(world, i-1, j, k);
+					break;
+				}
+				case 3:
+				{
+					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadata(i, j, k-1, blockID,meta);
+					tryToFall(world, i, j, k-1);
+					break;
+				}
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
+	{
+		if(!world.isRemote)
+		{
+			tryToFall(world, i, j, k);
+			world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+		}
+	}
     
 
 }

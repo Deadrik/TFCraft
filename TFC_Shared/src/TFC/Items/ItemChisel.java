@@ -11,7 +11,7 @@ import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 import net.minecraft.src.*;
 
-public class ItemChisel extends ItemTool
+public class ItemChisel extends ItemTerraTool
 {
     public static int mode = 0;
     public static int depth = 1;
@@ -30,6 +30,11 @@ public class ItemChisel extends ItemTool
         par1ItemStack.damageItem(1, par6EntityLiving);
         return true;
     }
+    
+    @Override
+	public EnumSize getSize() {
+		return EnumSize.VERYSMALL;
+	}
 
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 

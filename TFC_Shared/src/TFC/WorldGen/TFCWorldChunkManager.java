@@ -82,7 +82,6 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	}
 	
 	public long seed = 0;
-
 	public TFCWorldChunkManager(long par1, WorldType par3WorldType)
 	{
 		this();

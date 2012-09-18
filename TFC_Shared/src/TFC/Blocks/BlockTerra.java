@@ -53,6 +53,6 @@ public abstract class BlockTerra extends Block
 			int metadata = world.getBlockMetadata(x, y, z);
 			System.out.println("Meta = "+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());
 		}
-		return true;
+		return false;
     }
 }

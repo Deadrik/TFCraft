@@ -3,11 +3,12 @@ package TFC.Items;
 import TFC.Core.Helper;
 import TFC.Core.TFCItems;
 import TFC.Entities.EntityCowTFC;
+import TFC.Enums.EnumSize;
 import net.minecraft.src.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-public class ItemCustomBucket extends Item
+public class ItemCustomBucket extends ItemTerra
 {
     /** field for checking if the bucket has been filled. */
     private int isFull;
@@ -15,9 +16,20 @@ public class ItemCustomBucket extends Item
     public ItemCustomBucket(int par1, int par2)
     {
         super(par1);
-        this.maxStackSize = 1;
         this.isFull = par2;
     }
+    
+    @Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.MEDIUM;
+	}
+    
+    @Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer

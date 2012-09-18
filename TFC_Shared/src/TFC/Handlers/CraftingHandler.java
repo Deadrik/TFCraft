@@ -33,6 +33,10 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(entityplayer, iinventory, TFC_Core.Axes);
 				HandleItem(entityplayer, iinventory, TFC_Core.Saws);
 			}
+			else if(itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex)
+			{
+				HandleItem(entityplayer, iinventory, TFC_Core.Saws);
+			}
 			else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex || 
 					itemstack.getItem() instanceof ItemTerraFood)
 			{

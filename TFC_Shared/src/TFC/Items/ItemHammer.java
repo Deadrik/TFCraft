@@ -11,21 +11,11 @@ import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.*;
 
-public class ItemHammer extends ItemTool
+public class ItemHammer extends ItemTerraTool
 {
 	public ItemHammer(int i, EnumToolMaterial e)
 	{
 		super(i, 0, e, new Block[] {});
-	}
-
-	public String getTextureFile() {
-		return "/bioxx/terratools.png";
-	}
-
-	public void addInformation(ItemStack is, List arraylist) 
-	{
-		if(TFC_Settings.enableDebugMode)
-			arraylist.add("Damage: "+is.getItemDamage());
 	}
 
 	@Override

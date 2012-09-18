@@ -19,10 +19,14 @@ public class ItemWoodSupport extends ItemTerra
 	public ItemWoodSupport(int i, Boolean vert) 
 	{
 		super(i);
-		this.size = EnumSize.MEDIUM;
 		isVertical = vert;
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
+	}
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.MEDIUM;
 	}
 
 	/**

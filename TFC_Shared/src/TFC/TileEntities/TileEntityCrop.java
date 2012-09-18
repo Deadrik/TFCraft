@@ -64,7 +64,7 @@ public class TileEntityCrop extends NetworkTileEntity
 				}
 				else if(ambientTemp < 28)
 				{
-					tempAdded = ambientTemp* 0.0003f;
+					tempAdded = ambientTemp* 0.00035f;
 				}
 				else if(ambientTemp < 37)
 				{

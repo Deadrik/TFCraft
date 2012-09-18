@@ -3,13 +3,16 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Settings;
 
 import net.minecraft.src.Enchantment;
+import net.minecraft.src.Entity;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
+import net.minecraft.src.World;
 
 public class ItemTerraFood extends ItemFood
 {
@@ -64,6 +67,20 @@ public class ItemTerraFood extends ItemFood
             }
         }
 	}
+	
+	@Override
+    public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+    {
+        if (!world.isRemote && is.hasTagCompound() && TFC_Settings.enableInventoryHeat)
+        {
+            NBTTagCompound stackTagCompound = is.getTagCompound();
+
+            if(stackTagCompound.hasKey("temperature"))
+            {
+            	TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+            }
+        }
+    }
 	
 	public boolean getShareTag()
     {

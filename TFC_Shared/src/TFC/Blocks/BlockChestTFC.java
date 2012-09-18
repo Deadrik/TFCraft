@@ -554,7 +554,8 @@ public class BlockChestTFC extends BlockContainer
             }
             else
             {
-                entityplayer.displayGUIChest((IInventory)var6);
+                //entityplayer.displayGUIChest((IInventory)var6);
+                entityplayer.openGui(TerraFirmaCraft.instance, 29, par1World, par2, par3, par4);
                 return true;
             }
         }

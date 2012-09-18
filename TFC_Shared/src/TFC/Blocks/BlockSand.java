@@ -7,6 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 
@@ -75,10 +76,6 @@ public class BlockSand extends BlockTerra2
     {
         world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
     }
-    public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
-    }
 
     private void tryToFall(World world, int i, int j, int k)
     {
@@ -102,16 +99,110 @@ public class BlockSand extends BlockTerra2
                     EntityFallingDirt ent = new EntityFallingDirt(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
                     world.spawnEntityInWorld(ent);
                     Random R = new Random(i*j+k);
-                    world.playSoundAtEntity(ent, "fallingdirtshort", 1.0F, 0.8F + (R.nextFloat()/2));
+                    world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
                 }
             }
         }
     }
 
     public void updateTick(World world, int i, int j, int k, Random random)
-    {
-        tryToFall(world, i, j, k);
-    }
+	{
+		if(!world.isRemote)
+		{
+			int meta = world.getBlockMetadata(i, j, k);
+			boolean PosXAir = false;
+			boolean NegXAir = false;
+			boolean PosZAir = false;
+			boolean NegZAir = false;
+			boolean PosXAir2 = false;
+			boolean NegXAir2 = false;
+			boolean PosZAir2 = false;
+			boolean NegZAir2 = false;
+			byte count = 0;
+			List sides = new ArrayList<Integer>();
+
+			if(world.getBlockId(i+1, j, k) == 0)
+			{
+				count++;
+				if(world.getBlockId(i+1, j-1, k) == 0)
+					//PosXAir = true;
+					sides.add(0);
+			}
+			if(world.getBlockId(i, j, k+1) == 0)
+			{
+				count++;
+				if(world.getBlockId(i, j-1, k+1) == 0)
+					//PosZAir = true;
+					sides.add(1);
+			}
+			if(world.getBlockId(i-1, j, k) == 0)
+			{
+				count++;
+				if(world.getBlockId(i-1, j-1, k) == 0)
+					//NegXAir = true;
+					sides.add(2);
+			}
+			if(world.getBlockId(i, j, k-1) == 0)
+			{
+				count++;
+				if(world.getBlockId(i, j-1, k-1) == 0)
+					//NegZAir = true; 
+					sides.add(3);
+			}
+
+			if((random.nextInt(5) == 0 || count > 2) && sides.size() >= 1)
+			{
+				switch((Integer)sides.get(random.nextInt(sides.size())))
+				{
+				case 0:
+				{
+					world.setBlockAndMetadata(i+1, j, k, blockID,meta);
+					tryToFall(world, i+1, j, k);
+					world.setBlock(i, j, k, 0);
+					break;
+				}
+				case 1:
+				{
+					world.setBlockAndMetadata(i, j, k+1, blockID,meta);
+					tryToFall(world, i, j, k+1);
+					world.setBlock(i, j, k, 0);
+					break;
+				}
+				case 2:
+				{
+					world.setBlockAndMetadata(i-1, j, k, blockID,meta);
+					tryToFall(world, i-1, j, k);
+					world.setBlock(i, j, k, 0);
+					break;
+				}
+				case 3:
+				{
+					world.setBlockAndMetadata(i, j, k-1, blockID,meta);
+					tryToFall(world, i, j, k-1);
+					world.setBlock(i, j, k, 0);
+					break;
+				}
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
+	{
+		if(!world.isRemote)
+		{
+			if(world.getBlockId(i, j-1, k) == 0)
+			{
+				int meta = world.getBlockMetadata(i, j, k);
+				world.setBlockAndMetadata(i, j-1, k, blockID, meta);
+				world.setBlockWithNotify(i, j, k, 0);
+
+			}
+			world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+		}
+	}
     
 
 }

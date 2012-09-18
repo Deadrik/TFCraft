@@ -1,5 +1,7 @@
 package TFC.Items;
 
+import TFC.Enums.EnumSize;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
@@ -12,6 +14,7 @@ public class ItemUnfinishedArmor extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
+		this.setTabToDisplayOn(CreativeTabs.tabMisc);
 	}
 	public ItemUnfinishedArmor(int id, String tex) 
 	{
@@ -43,5 +46,24 @@ public class ItemUnfinishedArmor extends ItemTerra
 	    
         return s;
     }
+	
+	public int getItemStackLimit()
+    {
+    	if(canStack())
+    		return this.getSize().stackSize;
+    	else
+    		return 1;
+    }
+
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.LARGE;
+	}
+	
+	@Override
+	public boolean canStack() 
+	{
+		return true;
+	}
 
 }

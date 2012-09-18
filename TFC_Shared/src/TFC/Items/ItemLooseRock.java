@@ -16,7 +16,6 @@ import net.minecraft.src.World;
 
 public class ItemLooseRock extends ItemTerra
 {
-
 	public ItemLooseRock(int id) 
 	{
 		super(id);

@@ -9,11 +9,11 @@ import TFC.Entities.EntityFallingDirt;
 
 import net.minecraft.src.*;
 
-public class BlockDirt2 extends BlockTerra2
+public class BlockDirt2 extends BlockDirt
 {	
     public BlockDirt2(int i, int j, Block Farm)
     {
-        super(i, j, Material.ground);
+        super(i, j, Farm);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
@@ -27,37 +27,7 @@ public class BlockDirt2 extends BlockTerra2
     	for(int i = 0; i < 7; i++)
     		par3List.add(new ItemStack(par1, 1, i));
     }
-
-    /**
-     * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
-     */
-    public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        return this.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-    }
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
-    {
-        return this.blockIndexInTexture + par2;
-    }
-
-    public void onBlockAdded(World world, int i, int j, int k)
-    {
-        world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
-    }
-    public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
-    }
-
-    public int tickRate()
-    {
-        return 3;
-    }
-
+    
     private void tryToFall(World world, int i, int j, int k)
     {
         if(!world.isRemote)
@@ -86,29 +56,4 @@ public class BlockDirt2 extends BlockTerra2
             }
         }
     }
-
-    public void updateTick(World world, int i, int j, int k, Random random)
-    {
-        tryToFall(world, i, j, k);
-    }
-
-    public static boolean canFallBelow(World world, int i, int j, int k)
-    {
-        int l = world.getBlockId(i, j, k);
-        if (l == 0)
-        {
-            return true;
-        }
-        if (l == Block.fire.blockID)
-        {
-            return true;
-        }
-        Material material = Block.blocksList[l].blockMaterial;
-        if (material == Material.water)
-        {
-            return true;
-        }
-        return material == Material.lava;
-    }
-
 }
