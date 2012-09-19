@@ -11,14 +11,6 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BlockRenderHandler implements ISimpleBlockRenderingHandler 
 {
-
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelId,
-			RenderBlocks renderer) {
-		
-		
-	}
-
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k,
 			Block block, int modelId, RenderBlocks renderer) 
@@ -97,11 +89,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         }
         else if (modelId == TFCBlocks.toolRackRenderId)
         {
-            int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, renderer);
+            return RenderToolRack.renderToolRack(block, i, j, k, renderer);
         }
         else if (modelId == TFCBlocks.finiteWaterRenderId)
         {
@@ -144,6 +132,13 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	public int getRenderId() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelID,
+			RenderBlocks renderer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

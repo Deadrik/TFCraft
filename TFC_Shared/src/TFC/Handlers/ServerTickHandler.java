@@ -12,6 +12,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
+import TFC.WorldGen.SpawnerAnimalsTFC;
 import TFC.WorldGen.TFCProvider;
 
 import cpw.mods.fml.common.ITickHandler;
@@ -31,15 +32,14 @@ public class ServerTickHandler implements ITickHandler
 			{
 				((TFCProvider)world.provider).createSpawnPosition();
 				TFC_Core.SetupWorld(world);
-				world.setAllowedSpawnTypes(false, false);
 			}
 		}
 		
 		if(type.contains(TickType.WORLD))
 		{
 			WorldServer world = (WorldServer)tickData[0];
-			
-			SpawnerAnimals.findChunksForSpawning(world, true, world.getWorldInfo().getWorldTime() % 400L == 0L);
+			world.setAllowedSpawnTypes(false, false);
+			SpawnerAnimalsTFC.findChunksForSpawning(world, true, world.getWorldInfo().getWorldTime() % 400L == 0L);
 			
 			//Allow the server to increment time
 			TFC_Time.UpdateTime(world);

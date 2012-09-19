@@ -39,14 +39,6 @@ public class TFC_Player extends ServerPlayerBase
 
 			if(currentChunkX != lastChunkX || currentChunkZ != lastChunkZ)
 			{
-				//Add protection time to the chunks
-				for(int i = -1; i < 2; i++)
-				{
-					for(int k = -1; k < 2; k++)
-					{
-						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, 6);
-					}
-				}
 				ChunkDataManager.setLastVisted(lastChunkX, lastChunkZ);
 				//Reset the timer since we've entered a new chunk
 				spawnProtectionTimer = TFC_Time.getTotalTicks();
@@ -62,13 +54,18 @@ public class TFC_Player extends ServerPlayerBase
 		{
 			if(spawnProtectionTimer + TFC_Time.hourLength < TFC_Time.getTotalTicks())
 			{
-				spawnProtectionTimer += TFC_Time.hourLength;
+				int t = (int) ((TFC_Time.getTotalTicks() - spawnProtectionTimer) / TFC_Time.hourLength);
 
-				ChunkData data = (ChunkData) ChunkDataManager.chunkmap.get(lastChunkX + "," + lastChunkZ);
-				if(data != null)
+				//Add protection time to the chunks
+				for(int i = -1; i < 2; i++)
 				{
-					data.spawnProtection += 6;
+					for(int k = -1; k < 2; k++)
+					{
+						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, 7 * t);
+					}
 				}
+				
+				spawnProtectionTimer += TFC_Time.hourLength;
 			}
 		}
 	}

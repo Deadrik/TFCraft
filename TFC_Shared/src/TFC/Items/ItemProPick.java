@@ -46,7 +46,7 @@ public class ItemProPick extends ItemTerra
     @Override
     public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
     {
-        if(!world.isRemote)
+        if(!world.isRemote && world.getBlockId(x, y, z) != TFCBlocks.ToolRack.blockID)
         {
             ArrayList oreArray = new ArrayList<String>();
             ArrayList oreNumArray = new ArrayList<Integer>();

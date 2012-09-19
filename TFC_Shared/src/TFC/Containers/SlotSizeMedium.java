@@ -5,9 +5,8 @@ import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
 import net.minecraft.src.*;
 
-public class SlotSizeMedium extends Slot
+public class SlotSizeMedium extends SlotSize
 {
-	EnumSize size = EnumSize.MEDIUM;
 	public SlotSizeMedium(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);

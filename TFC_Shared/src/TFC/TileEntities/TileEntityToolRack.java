@@ -1,5 +1,9 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 import TFC.Core.TFC_ItemHeat;
@@ -7,19 +11,22 @@ import TFC.Handlers.PacketHandler;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
+import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 
-public class TileEntityToolRack extends TileEntity implements IInventory
+public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 {
     public ItemStack[] storage;
+    public byte woodType;
 
     public TileEntityToolRack()
     {
-        storage = new ItemStack[6];
+        storage = new ItemStack[4];
+        woodType = 0;
     }
 
     public void addContents(int index, ItemStack is)
@@ -33,10 +40,6 @@ public class TileEntityToolRack extends TileEntity implements IInventory
     {
         storage[0] = null;
         storage[1] = null;
-        storage[2] = null;
-        storage[3] = null;
-        storage[4] = null;
-        storage[5] = null;
     }
 
     @Override
@@ -101,6 +104,26 @@ public class TileEntityToolRack extends TileEntity implements IInventory
             }
         }
     }
+    
+    public void ejectItem(int index)
+    {
+    	float f3 = 0.05F;
+        EntityItem entityitem;
+        Random rand = new Random();
+        float f = rand.nextFloat() * 0.8F + 0.1F;
+        float f1 = rand.nextFloat() * 2.0F + 0.4F;
+        float f2 = rand.nextFloat() * 0.8F + 0.1F;
+        
+    	if(storage[index]!= null)
+        {
+            entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+                    storage[index]);
+            entityitem.motionX = (float)rand.nextGaussian() * f3;
+            entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.05F;
+            entityitem.motionZ = (float)rand.nextGaussian() * f3;
+            worldObj.spawnEntityInWorld(entityitem);
+        }
+    }
 
     @Override
     public int getInventoryStackLimit()
@@ -155,7 +178,7 @@ public class TileEntityToolRack extends TileEntity implements IInventory
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-
+        woodType = nbttagcompound.getByte("woodType");
         NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
         storage = new ItemStack[getSizeInventory()];
         for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -199,10 +222,65 @@ public class TileEntityToolRack extends TileEntity implements IInventory
             }
         }
         nbttagcompound.setTag("Items", nbttaglist);
+        nbttagcompound.setByte("woodType", woodType);
     }
 
-    public void handlePacketData() 
-    {
-        TileEntityToolRack pile = this;
-    }
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	{
+		handleInitPacket(inStream);
+		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream)throws IOException 
+	{
+		
+		
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		outStream.writeByte(woodType);
+		outStream.writeInt(storage[0] != null ? storage[0].itemID : -1);
+		outStream.writeInt(storage[1] != null ? storage[1].itemID : -1);
+		outStream.writeInt(storage[2] != null ? storage[2].itemID : -1);
+		outStream.writeInt(storage[3] != null ? storage[3].itemID : -1);
+	}
+
+	@Override
+	public void handleInitPacket(DataInputStream inStream) throws IOException 
+	{
+		woodType = inStream.readByte();
+		int s1 = inStream.readInt();
+		int s2 = inStream.readInt();
+		int s3 = inStream.readInt();
+		int s4 = inStream.readInt();
+		storage[0] = s1 != -1 ? new ItemStack(Item.itemsList[s1]) : null;
+		storage[1] = s2 != -1 ? new ItemStack(Item.itemsList[s2]) : null;
+		storage[2] = s3 != -1 ? new ItemStack(Item.itemsList[s3]) : null;
+		storage[3] = s4 != -1 ? new ItemStack(Item.itemsList[s4]) : null;
+		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public Packet createUpdatePacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+			dos.writeByte(woodType);
+			dos.writeInt(storage[0] != null ? storage[0].itemID : -1);
+			dos.writeInt(storage[1] != null ? storage[1].itemID : -1);
+			dos.writeInt(storage[2] != null ? storage[2].itemID : -1);
+			dos.writeInt(storage[3] != null ? storage[3].itemID : -1);
+		} catch (IOException e) {
+		}
+
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
 }

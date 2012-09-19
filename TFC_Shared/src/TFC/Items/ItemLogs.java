@@ -31,7 +31,7 @@ public class ItemLogs extends ItemTerra
 
 	@Override
 	public EnumSize getSize() {
-		return EnumSize.LARGE;
+		return EnumSize.MEDIUM;
 	}
 	
 	@Override

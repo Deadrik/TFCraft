@@ -2,6 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
@@ -28,7 +29,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	 */
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
-		if (world.isRemote)
+		if (world.isRemote || world.getBlockId(x, y, z) == TFCBlocks.ToolRack.blockID)
 		{
 			return false;
 		}

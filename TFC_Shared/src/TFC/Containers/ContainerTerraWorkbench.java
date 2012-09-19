@@ -14,7 +14,7 @@ import net.minecraft.src.Slot;
 import net.minecraft.src.SlotCrafting;
 import net.minecraft.src.World;
 
-public class ContainerTerraWorkbench extends Container
+public class ContainerTerraWorkbench extends ContainerTFC
 {
     /** The crafting matrix inventory (3x3). */
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);

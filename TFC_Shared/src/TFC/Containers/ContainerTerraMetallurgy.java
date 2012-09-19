@@ -8,7 +8,7 @@ import TFC.Items.ItemMeltedMetal;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
 import net.minecraft.src.*;
 
-public class ContainerTerraMetallurgy extends Container
+public class ContainerTerraMetallurgy extends ContainerTFC
 {
 	private TileEntityTerraMetallurgy terrametallurgy;
 	public InventoryCrafting craftMatrix;

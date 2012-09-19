@@ -21,7 +21,7 @@ public class RenderAnvil {
 
 		int meta = blockAccess.getBlockMetadata(i, j, k);
 		int direction = ((BlockAnvil)block).getDirectionFromMetadata(meta);
-		
+
 		TileEntityTerraAnvil te = (TileEntityTerraAnvil)blockAccess.getBlockTileEntity(i, j, k);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
@@ -75,8 +75,28 @@ public class RenderAnvil {
 				{
 					ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 					renderblocks.overrideBlockTexture = Item.itemsList[te.anvilItemStacks[0].itemID].getIconIndex(te.anvilItemStacks[0]);
-					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
-					renderblocks.renderStandardBlock(block, i, j, k);
+					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
+					//					renderblocks.renderStandardBlock(block, i, j, k);
+					Tessellator tessellator = Tessellator.instance;
+
+					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
+			        int z = renderblocks.overrideBlockTexture & 0xf0;
+
+			        double minX = ((double)x + 0	) / 256D;
+			        double maxX = ((double)x + 16	) / 256D;
+			        double minZ = ((double)z + 0	) / 256D;
+			        double maxZ = ((double)z + 16	) / 256D;
+
+			        tessellator.addTranslation(0.5f, 0f, 0.5f);
+
+					tessellator.addVertexWithUV(i, j + 0.901, k + 0.4, minX, maxZ);
+					tessellator.addVertexWithUV(i + 0.4, j + 0.901, k + 0.4, maxX, maxZ);
+					tessellator.addVertexWithUV(i + 0.4, j + 0.901, k, maxX, minZ);
+					tessellator.addVertexWithUV(i, j + 0.901, k, minX, minZ);
+					
+					tessellator.addTranslation(-0.5f, 0f, -0.5f);
+
+
 				}
 				block.setBlockBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.clearOverrideBlockTexture();

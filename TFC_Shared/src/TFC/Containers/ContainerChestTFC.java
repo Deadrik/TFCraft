@@ -1,9 +1,13 @@
 package TFC.Containers;
 
+import java.util.ArrayList;
+
+import TFC.Core.TFCItems;
+import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityChestTFC;
 import net.minecraft.src.*;
 
-public class ContainerChestTFC extends Container
+public class ContainerChestTFC extends ContainerTFC
 {
     private IInventory lowerChestInventory;
     private int numRows;
@@ -38,12 +42,15 @@ public class ContainerChestTFC extends Container
         int var3 = (this.numRows - 4) * 18;
         int var4;
         int var5;
+        
+        ArrayList exceptions = new ArrayList<Item>();
+        exceptions.add(TFCItems.Logs);
 
         for (var4 = 0; var4 < this.numRows; ++var4)
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
-                this.addSlotToContainer(new SlotSizeSmall(lowerChestInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18));
+                this.addSlotToContainer(new SlotSize(lowerChestInventory, var5 + var4 * 9, 8 + var5 * 18, 18 + var4 * 18).setSize(EnumSize.MEDIUM).addItemException(exceptions));
             }
         }
 

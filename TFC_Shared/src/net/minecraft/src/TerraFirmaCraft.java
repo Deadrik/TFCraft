@@ -38,20 +38,10 @@ import cpw.mods.fml.common.registry.TickRegistry;
 
 import TFC.*;
 import TFC.Blocks.*;
-import TFC.Commands.GetBioTempCommand;
-import TFC.Commands.GetRocksCommand;
-import TFC.Commands.GetTreesCommand;
-import TFC.Containers.ContainerTFC;
+import TFC.Commands.*;
 import TFC.Core.*;
 import TFC.Entities.*;
-import TFC.Handlers.BlockRenderHandler;
-import TFC.Handlers.ChunkDataEventHandler;
-import TFC.Handlers.ChunkEventHandler;
-import TFC.Handlers.CraftingHandler;
-import TFC.Handlers.EntityLivingHandler;
-import TFC.Handlers.PacketHandler;
-import TFC.Handlers.ClientTickHandler;
-import TFC.Handlers.ServerTickHandler;
+import TFC.Handlers.*;
 import TFC.Items.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCProvider;
@@ -182,6 +172,7 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetBioTempCommand());
 		evt.registerServerCommand(new GetTreesCommand());
 		evt.registerServerCommand(new GetRocksCommand());
+		evt.registerServerCommand(new GetSpawnProtectionCommand());
 	}
 
 	public static void RemoveRecipe(ItemStack resultItem) {

@@ -27,6 +27,8 @@ public class ChunkData
 		spawnProtection -= visit;
 		if(spawnProtection < -24)
 			spawnProtection = -24;
+		
+		lastVisited = TFC_Time.getTotalTicks();
 	}
 	
 	public NBTTagCompound getTag()
@@ -35,6 +37,10 @@ public class ChunkData
 		
 		tag.setInteger("chunkX", chunkX);
 		tag.setInteger("chunkZ", chunkZ);
+		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
+		spawnProtection -= visit;
+		if(spawnProtection < -24)
+			spawnProtection = -24;
 		tag.setInteger("spawnProtection", spawnProtection);
 		tag.setLong("lastVisited", lastVisited);
 		return tag;
@@ -47,5 +53,36 @@ public class ChunkData
 		lastVisited = 0;
 		spawnProtection = -24;
 		return this;
+	}
+	
+	public int getSpawnProtectionWithUpdate()
+	{
+		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
+		spawnProtection -= visit;
+		if(spawnProtection < -24)
+			spawnProtection = -24;
+		
+		lastVisited = TFC_Time.getTotalTicks();
+		
+		if(spawnProtection > 4320)
+			spawnProtection = 4320;
+		
+		return spawnProtection;
+	}
+	
+	public void setSpawnProtectionWithUpdate(int amount)
+	{
+		long visit = (TFC_Time.getTotalTicks() - lastVisited) / TFC_Time.hourLength;
+		spawnProtection -= visit;
+		
+		if(spawnProtection < -24)
+			spawnProtection = -24;
+		
+		spawnProtection += amount;
+		
+		if(spawnProtection > 4320)
+			spawnProtection = 4320;
+		
+		lastVisited = TFC_Time.getTotalTicks();
 	}
 }

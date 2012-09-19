@@ -6,7 +6,7 @@ import TFC.Items.ItemOreSmall;
 import TFC.TileEntities.TileEntityTerraForge;
 import net.minecraft.src.*;
 
-public class ContainerTerraForge extends Container
+public class ContainerTerraForge extends ContainerTFC
 {
 	private TileEntityTerraForge forge;
 	private int coolTime;

@@ -4,7 +4,7 @@ import TFC.Handlers.PacketHandler;
 import TFC.TileEntities.TileEntityBloomery;
 import net.minecraft.src.*;
 
-public class ContainerTerraBloomery extends Container
+public class ContainerTerraBloomery extends ContainerTFC
 {
 	private TileEntityBloomery bloomery;
     private float firetemp;

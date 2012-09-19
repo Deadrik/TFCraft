@@ -3,7 +3,7 @@ package TFC.Containers;
 import TFC.TileEntities.TileEntityTerraSluice;
 import net.minecraft.src.*;
 
-public class ContainerTerraSluice extends Container
+public class ContainerTerraSluice extends ContainerTFC
 {
 	private TileEntityTerraSluice sluice;
 	private EntityPlayer player;

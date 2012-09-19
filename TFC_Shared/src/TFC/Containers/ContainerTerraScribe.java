@@ -4,7 +4,7 @@ import TFC.Core.CraftingManagerTFC;
 import TFC.TileEntities.TileEntityTerraScribe;
 import net.minecraft.src.*;
 
-public class ContainerTerraScribe extends Container
+public class ContainerTerraScribe extends ContainerTFC
 {
 	private TileEntityTerraScribe terraScribe;
 	public InventoryCrafting craftMatrix;

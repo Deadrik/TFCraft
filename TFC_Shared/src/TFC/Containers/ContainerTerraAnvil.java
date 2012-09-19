@@ -10,7 +10,7 @@ import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.*;
 
-public class ContainerTerraAnvil extends Container
+public class ContainerTerraAnvil extends ContainerTFC
 {
 	private TileEntityTerraAnvil anvil;
 	private int greenIndicator;

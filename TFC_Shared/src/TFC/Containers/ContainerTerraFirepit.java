@@ -7,7 +7,7 @@ import TFC.TileEntities.TileEntityTerraFirepit;
 
 import net.minecraft.src.*;
 
-public class ContainerTerraFirepit extends Container
+public class ContainerTerraFirepit extends ContainerTFC
 {
     private TileEntityTerraFirepit firepit;
 

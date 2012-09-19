@@ -2,6 +2,8 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
@@ -101,9 +103,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
 	}
 
-	public Chunk provideChunk(int par1, int par2)
+	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
-		this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
+		this.rand.setSeed((long)chunkX * 341873128712L + (long)chunkZ * 132897987541L);
 
 		byte[] ids = new byte[32768];
 		byte[] ids2 = new byte[32768];
@@ -113,25 +115,29 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		byte[] ids3 = new byte[16*16*256];
 		byte[] meta3 = new byte[16*16*256];
 
-		this.generateTerrainHigh(par1, par2, ids2);
+		this.generateTerrainHigh(chunkX, chunkZ, ids2);
 		
-		biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadBlockGeneratorData(biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-		rockLayer1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer1, par1 * 16, par2 * 16, 16, 16, 0);
-		rockLayer2 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer2, par1 * 16, par2 * 16, 16, 16, 1);
-		rockLayer3 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer3, par1 * 16, par2 * 16, 16, 16, 2);
-		evtLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadEVTLayerGeneratorData(evtLayer, par1 * 16, par2 * 16, 16, 16);
-		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, par1 * 16, par2 * 16, 16, 16);
+		biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadBlockGeneratorData(biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
+		rockLayer1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
+		rockLayer2 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer2, chunkX * 16, chunkZ * 16, 16, 16, 1);
+		rockLayer3 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer3, chunkX * 16, chunkZ * 16, 16, 16, 2);
+		evtLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
+		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
-		replaceBlocksForBiomeHigh(par1, par2, ids2,meta2, rand, ids3, meta3);
-		replaceBlocksForBiomeLow(par1, par2, ids,meta, rand, ids3, meta3);
+		replaceBlocksForBiomeHigh(chunkX, chunkZ, ids2,meta2, rand, ids3, meta3);
+		replaceBlocksForBiomeLow(chunkX, chunkZ, ids,meta, rand, ids3, meta3);
 
 
-		new MapGenCavesTFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
-		new MapGenRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
-		new MapGenRiverRavine256TFC().generate(this, this.worldObj, par1, par2, ids3, meta3);
+		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
+		new MapGenRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
+		new MapGenRiverRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
 
-		Chunk var4 = new ChunkTFC(this.worldObj, ids3, meta3, par1, par2);
-
+		Chunk var4 = new ChunkTFC(this.worldObj, ids3, meta3, chunkX, chunkZ);
+		
+		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
+		String key = data.chunkX + "," + data.chunkZ;
+		ChunkDataManager.chunkmap.put(key, data);
+		
 		var4.generateSkylightMap();
 		return var4;
 	}
@@ -173,7 +179,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 
 		var6.decorate(this.worldObj, this.rand, var4, var5);
-		SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
+		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
 		var4 += 8;
 		var5 += 8;
 

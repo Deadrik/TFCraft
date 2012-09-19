@@ -2,6 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -50,6 +51,23 @@ public class ItemWeapon extends ItemSword implements ISize
     		return this.getSize().stackSize * getWeight().multiplier;
     	else
     		return 1;
+    }
+	
+	/**
+     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     */
+    public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+    {
+    	 MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
+         if(objectMouseOver == null) {
+             return is;
+         }	
+         
+         if(world.getBlockId(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack.blockID)
+        	 return is;
+         
+         player.setItemInUse(is, this.getMaxItemUseDuration(is));
+        return is;
     }
 
 	/**
@@ -105,15 +123,6 @@ public class ItemWeapon extends ItemSword implements ISize
 	{
 		par1ItemStack.damageItem(2, par6EntityLiving);
 		return true;
-	}
-
-	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-	 */
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	{
-		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-		return par1ItemStack;
 	}
 
 	@Override

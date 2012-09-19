@@ -113,7 +113,7 @@ public class TFCBlocks
 	public static Block WoodVert;
 	public static Block WoodHoriz;
 	public static Block WoodHoriz2;
-	
+	public static Block ToolRack;
 	
 	static Configuration config;
 	
@@ -194,6 +194,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodVert);
 		GameRegistry.registerBlock(WoodHoriz);
 		GameRegistry.registerBlock(WoodHoriz2);
+		
+		GameRegistry.registerBlock(ToolRack, TFC.Items.ItemToolRack.class);
 
 	}
 	
@@ -341,6 +343,12 @@ public class TFCBlocks
 		WoodVert = new BlockLogVert(TFC_Settings.getIntFor(config,"block","WoodVert", 2018)).setBlockName("WoodVert").setHardness(40).setResistance(15F);
 		WoodHoriz = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz", 2019), 0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F);
 		WoodHoriz2 = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz2", 2020), 8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F);
+		
+		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021));
+		
+		
+		
+		
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

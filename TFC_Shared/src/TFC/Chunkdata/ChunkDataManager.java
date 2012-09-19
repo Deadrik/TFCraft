@@ -44,7 +44,7 @@ public class ChunkDataManager
 			if(d != null)
 			{
 				if(d.spawnProtection < 4320)
-					d.spawnProtection += amount;
+					d.setSpawnProtectionWithUpdate(amount);
 				return true;
 			}
 		}
@@ -63,74 +63,5 @@ public class ChunkDataManager
 			}
 		}
 		return false;
-	}
-	
-	@Deprecated
-	public static ChunkData getChunkData(World world, int x, int z)
-	{
-		FileInputStream fin;
-		try 
-		{
-			String path = "/" + world.getWorldInfo().getWorldName();
-
-			if(!ModLoader.getMinecraftServerInstance().isDedicatedServer())
-				path = "\\saves\\" + world.getWorldInfo().getWorldName();
-
-			File file = new File(TerraFirmaCraft.proxy.getMinecraftDir(), path + "\\chunkmanager\\" + x + "," + z + ".cm");
-
-			if(file.canRead())
-			{
-				fin = new FileInputStream(file);
-				DataInputStream di = new DataInputStream(fin);
-				NBTTagCompound tag = new NBTTagCompound();
-				tag = (NBTTagCompound) NBTTagCompound.readNamedTag(di);
-				return new ChunkData(tag);
-			}
-		} catch (FileNotFoundException e) {
-			//e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-	
-	@Deprecated
-	public static void saveChunkData(World world, ChunkData data)
-	{
-		FileOutputStream fout;
-		try 
-		{
-			String path = "/" + world.getWorldInfo().getWorldName();
-
-			if(!ModLoader.getMinecraftServerInstance().isDedicatedServer())
-				path = "\\saves\\" + world.getWorldInfo().getWorldName();
-
-			File file = new File(TerraFirmaCraft.proxy.getMinecraftDir(), path + "\\chunkmanager\\" + data.chunkX + "," + data.chunkZ + ".cm");
-
-			if (file.getParentFile() != null)
-			{
-				file.getParentFile().mkdirs();
-			}
-
-			if (!file.exists() && !file.createNewFile())
-			{
-				return;
-			}
-
-			if(file.canWrite())
-			{
-				//fout = new FileOutputStream(path + "/chunkmanager/" + data.chunkX + "," + data.chunkZ + ".cm");
-				fout = new FileOutputStream(file);
-				DataOutputStream dout = new DataOutputStream(fout);
-				NBTTagCompound tag = data.getTag();
-				tag.writeNamedTag(tag, dout);
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }
