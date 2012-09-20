@@ -11,6 +11,7 @@ import net.minecraft.src.World;
 import net.minecraftforge.common.ForgeDirection;
 import TFC.Core.AnvilReq;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.TileEntities.TileEntityToolRack;
 import cpw.mods.fml.common.Side;
@@ -18,6 +19,9 @@ import cpw.mods.fml.common.asm.SideOnly;
 
 public class ItemToolRack extends ItemTerraBlock
 {
+	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+            "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
 	public ItemToolRack(int id) {
 		super(id);
 		this.setIconIndex(16);
@@ -29,6 +33,11 @@ public class ItemToolRack extends ItemTerraBlock
 	public EnumSize getSize() {
 		return EnumSize.HUGE;
 	}
+	
+	 @Override
+		public EnumWeight getWeight() {
+			return EnumWeight.LIGHT;
+		}
 
 	@Override
 	public int getMetadata(int i) 
@@ -46,8 +55,16 @@ public class ItemToolRack extends ItemTerraBlock
 	{
 		return "/bioxx/terrasprites.png";
 	}
+	
+	@Override
+    public String getItemNameIS(ItemStack itemstack) 
+    {
+        String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
+        return s;
+    }
 
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		int dir = MathHelper.floor_double((double)(player.rotationYaw * 4F / 360F) + 0.5D) & 3;
 		if(!world.isRemote && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z))
@@ -63,7 +80,7 @@ public class ItemToolRack extends ItemTerraBlock
 					te.woodType = (byte) itemstack.getItemDamage();
 					te.broadcastPacketInRange(te.createUpdatePacket());
 				}
-				player.inventory.mainInventory[player.inventory.currentItem] = null;
+				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 			}
 			else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 			{
@@ -75,7 +92,7 @@ public class ItemToolRack extends ItemTerraBlock
 					te.woodType = (byte) itemstack.getItemDamage();
 					te.broadcastPacketInRange(te.createUpdatePacket());
 				}
-				player.inventory.mainInventory[player.inventory.currentItem] = null;
+				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 			}
 			else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 			{
@@ -87,7 +104,7 @@ public class ItemToolRack extends ItemTerraBlock
 					te.woodType = (byte) itemstack.getItemDamage();
 					te.broadcastPacketInRange(te.createUpdatePacket());
 				}
-				player.inventory.mainInventory[player.inventory.currentItem] = null;
+				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 			}
 			else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 			{
@@ -99,7 +116,7 @@ public class ItemToolRack extends ItemTerraBlock
 					te.woodType = (byte) itemstack.getItemDamage();
 					te.broadcastPacketInRange(te.createUpdatePacket());
 				}
-				player.inventory.mainInventory[player.inventory.currentItem] = null;
+				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 			}
 			return true;
 		}

@@ -190,9 +190,8 @@ public class SpawnerAnimalsTFC
                                 							int z = var19 >> 4;
                                                             
                                                             ChunkData data = (ChunkData) ChunkDataManager.chunkmap.get(x + "," + z);
-                                                            int sp = data.getSpawnProtectionWithUpdate();
                                                             
-                                                            if (var38.getCanSpawnHere() && (data == null || sp <= 0))
+                                                            if (var38.getCanSpawnHere() && (data == null || data.getSpawnProtectionWithUpdate() <= 0))
                                                             {
                                                                 ++var15;
                                                                 par0WorldServer.spawnEntityInWorld(var38);

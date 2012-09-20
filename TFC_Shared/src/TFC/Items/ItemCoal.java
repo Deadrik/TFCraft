@@ -15,7 +15,7 @@ public class ItemCoal extends ItemTerra {
 		super(id, "/gui/items.png");
 		this.setHasSubtypes(true);
         this.setMaxDamage(0);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 	
 	@Override

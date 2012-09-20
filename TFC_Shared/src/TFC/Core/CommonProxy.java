@@ -33,6 +33,7 @@ import TFC.GUI.GuiTerraSluice;
 import TFC.GUI.GuiTerraWorkbench;
 import TFC.Render.TileEntityChestRendererTFC;
 import TFC.TileEntities.*;
+import TFC.WorldGen.TFCProvider;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -185,7 +186,7 @@ public class CommonProxy implements IGuiHandler
 		return ModLoader.getMinecraftServerInstance().getFile("");/*new File(".");*/
 	}
 	
-	public void registerSkyProvider()
+	public void registerSkyProvider(TFCProvider P)
 	{
 		
 	}

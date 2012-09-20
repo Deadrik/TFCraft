@@ -7,7 +7,7 @@ import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import net.minecraft.src.*;
 
-public class ItemCustomSaw extends ItemAxe implements ISize
+public class ItemCustomSaw extends ItemCustomAxe implements ISize
 {
 	public ItemCustomSaw(int i, EnumToolMaterial e)
 	{

@@ -27,7 +27,7 @@ public class ItemTerra extends Item implements ISize
     public ItemTerra(int id) 
     {
         super(id);
-        this.setTabToDisplayOn(CreativeTabs.tabMisc);
+        this.setCreativeTab(CreativeTabs.tabMisc);
     }
     public ItemTerra(int id, String tex) 
     {

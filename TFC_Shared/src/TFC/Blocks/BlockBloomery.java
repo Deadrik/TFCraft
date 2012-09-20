@@ -17,29 +17,29 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockBloomery extends BlockContainer
 {
-    private int meta;
-    private int xCoord;
-    private int yCoord;
-    private int zCoord;
-    public static final int headBlockToFootBlockMap[][] = {
-        {
-            0, 1
-        }, {
-            -1, 0
-        }, {
-            0, -1
-        }, {
-            1, 0
-        }
-    };
-    
-    public BlockBloomery(int i, int tex)
-    {
-        super(i, Material.rock);
-        this.blockIndexInTexture = tex;
-        this.setCreativeTab(CreativeTabs.tabRedstone);
-    }
-    
+	private int meta;
+	private int xCoord;
+	private int yCoord;
+	private int zCoord;
+	public static final int headBlockToFootBlockMap[][] = {
+		{
+			0, 1
+		}, {
+			-1, 0
+		}, {
+			0, -1
+		}, {
+			1, 0
+		}
+	};
+
+	public BlockBloomery(int i, int tex)
+	{
+		super(i, Material.rock);
+		this.blockIndexInTexture = tex;
+		this.setCreativeTab(CreativeTabs.tabRedstone);
+	}
+
 	public static void DoValidCheck(World world, int i, int j, int k, int meta)
 	{
 		if(meta == 0)
@@ -164,6 +164,7 @@ public class BlockBloomery extends BlockContainer
 		return "/bioxx/terrablocks.png";
 	}
 
+	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
 	{
 		xCoord = i;
@@ -192,37 +193,43 @@ public class BlockBloomery extends BlockContainer
 
 	}
 
-	public void onBlockRemoval(World world, int par2, int par3, int par4) 
+	@Override
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) 
 	{
-		meta = world.getBlockMetadata(par2, par3, par4);
-		int[] dir = headBlockToFootBlockMap[meta & 3];
-		if(world.getBlockId(par2+dir[0], par3, par4+dir[1]) == TFCBlocks.Molten.blockID)
+		if(!world.isRemote)
 		{
-			world.setBlock(par2+dir[0], par3, par4+dir[1], 0);
-			world.markBlockNeedsUpdate(par2+dir[0], par3, par4+dir[1]);
+			meta = world.getBlockMetadata(i, j, k);
+			int[] dir = headBlockToFootBlockMap[meta & 3];
+			if(world.getBlockId(i+dir[0], j, k+dir[1]) == TFCBlocks.Molten.blockID)
+			{
+				world.setBlock(i+dir[0], j, k+dir[1], 0);
+				world.markBlockNeedsUpdate(i+dir[0], j, k+dir[1]);
+			}
+			if(world.getBlockId(i+dir[0], j+1, k+dir[1]) == TFCBlocks.Molten.blockID)
+			{
+				world.setBlock(i+dir[0], j+1, k+dir[1], 0);
+				world.markBlockNeedsUpdate(i+dir[0], j+1, k+dir[1]);
+			}
+			if(world.getBlockId(i+dir[0], j+2, k+dir[1]) == TFCBlocks.Molten.blockID)
+			{
+				world.setBlock(i+dir[0], j+2, k+dir[1], 0);
+				world.markBlockNeedsUpdate(i+dir[0], j+2, k+dir[1]);
+			}
+			if(world.getBlockId(i+dir[0], j+3, k+dir[1]) == TFCBlocks.Molten.blockID)
+			{
+				world.setBlock(i+dir[0], j+3, k+dir[1], 0);
+				world.markBlockNeedsUpdate(i+dir[0], j+3, k+dir[1]);
+			}
+			if(world.getBlockId(i+dir[0], j+4, k+dir[1]) == TFCBlocks.Molten.blockID)
+			{
+				world.setBlock(i+dir[0], j+4, k+dir[1], 0);
+				world.markBlockNeedsUpdate(i+dir[0], j+4, k+dir[1]);
+			}
 		}
-		if(world.getBlockId(par2+dir[0], par3+1, par4+dir[1]) == TFCBlocks.Molten.blockID)
-		{
-			world.setBlock(par2+dir[0], par3+1, par4+dir[1], 0);
-			world.markBlockNeedsUpdate(par2+dir[0], par3+1, par4+dir[1]);
-		}
-		if(world.getBlockId(par2+dir[0], par3+2, par4+dir[1]) == TFCBlocks.Molten.blockID)
-		{
-			world.setBlock(par2+dir[0], par3+2, par4+dir[1], 0);
-			world.markBlockNeedsUpdate(par2+dir[0], par3+2, par4+dir[1]);
-		}
-		if(world.getBlockId(par2+dir[0], par3+3, par4+dir[1]) == TFCBlocks.Molten.blockID)
-		{
-			world.setBlock(par2+dir[0], par3+3, par4+dir[1], 0);
-			world.markBlockNeedsUpdate(par2+dir[0], par3+3, par4+dir[1]);
-		}
-		if(world.getBlockId(par2+dir[0], par3+4, par4+dir[1]) == TFCBlocks.Molten.blockID)
-		{
-			world.setBlock(par2+dir[0], par3+4, par4+dir[1], 0);
-			world.markBlockNeedsUpdate(par2+dir[0], par3+4, par4+dir[1]);
-		}
+		return true;
 	}
 
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		meta = world.getBlockMetadata(i, j, k) & 3;
@@ -237,10 +244,11 @@ public class BlockBloomery extends BlockContainer
 		}
 	}
 
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {       
-        //dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraBloomery, 1));
-    }
+	{       
+		//dropBlockAsItem_do(world, i, j, k, new ItemStack(mod_TFC_Core.terraBloomery, 1));
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

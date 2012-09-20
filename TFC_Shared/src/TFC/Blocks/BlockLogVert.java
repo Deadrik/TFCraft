@@ -8,6 +8,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.Core.ColorizerGrassTFC;
+import TFC.Core.Recipes;
 import TFC.Core.TFCItems;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -21,7 +22,7 @@ public class BlockLogVert extends BlockTerra
     public BlockLogVert(int par1)
     {
         super(par1, Material.wood);
-        this.setCreativeTab(CreativeTabs.tabDeco);
+        this.setCreativeTab(CreativeTabs.tabDecorations);
     }
     
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
@@ -31,16 +32,16 @@ public class BlockLogVert extends BlockTerra
         ItemStack equip = entityplayer.getCurrentEquippedItem();
         if(equip!=null)
         {
-            for(int cnt = 0; cnt < TFC_Core.Axes.length && !isAxeorSaw; cnt++)
+            for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
             {
-                if(equip.getItem() == TFC_Core.Axes[cnt])
+                if(equip.getItem() == Recipes.Axes[cnt])
                 {
                     isAxeorSaw = true;
                 }
             }
-            for(int cnt = 0; cnt < TFC_Core.Saws.length && !isAxeorSaw; cnt++)
+            for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
             {
-                if(equip.getItem() == TFC_Core.Saws[cnt])
+                if(equip.getItem() == Recipes.Saws[cnt])
                 {
                     isAxeorSaw = true;
                 }

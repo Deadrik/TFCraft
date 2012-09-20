@@ -12,7 +12,7 @@ public class ItemIngot extends ItemTerra
 	public ItemIngot(int i) 
 	{
 		super(i);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 	
 	@Override

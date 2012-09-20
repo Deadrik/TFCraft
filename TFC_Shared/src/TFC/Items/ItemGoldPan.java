@@ -31,6 +31,11 @@ public class ItemGoldPan extends ItemTerra
 	public EnumSize getSize() {
 		return EnumSize.SMALL;
 	}
+    
+    public int getItemStackLimit()
+    {
+    	return 1;
+    }
 
     public int getIconFromDamage(int i)
     {
@@ -65,7 +70,7 @@ public class ItemGoldPan extends ItemTerra
     }
 
     @Override
-    public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l, float par8, float par9, float par10)
     {
 
         MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);

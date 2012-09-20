@@ -128,7 +128,7 @@ public class ItemWeapon extends ItemSword implements ISize
 	@Override
 	public EnumSize getSize() {
 		// TODO Auto-generated method stub
-		return EnumSize.MEDIUM;
+		return EnumSize.LARGE;
 	}
 
 	@Override

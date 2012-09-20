@@ -92,7 +92,7 @@ public class BlockDirt extends BlockTerra2
                 byte byte0 = 32;
                 if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
                 {
-                    world.setBlockWithNotify(i, j, k, 0);
+                    world.setBlock(i, j, k, 0);
                     for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
@@ -155,7 +155,7 @@ public class BlockDirt extends BlockTerra2
 					sides.add(3);
 			}
 
-			if((random.nextInt(5) == 0 || count > 2) && sides.size() >= 1)
+			if((count > 2) && sides.size() >= 1)
 			{
 				switch((Integer)sides.get(random.nextInt(sides.size())))
 				{

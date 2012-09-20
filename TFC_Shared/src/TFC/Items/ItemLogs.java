@@ -6,6 +6,7 @@ import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityTerraLogPile;
+import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
@@ -26,7 +27,7 @@ public class ItemLogs extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 
 	@Override
@@ -132,7 +133,7 @@ public class ItemLogs extends ItemTerra
 	}
 
 	@Override
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{

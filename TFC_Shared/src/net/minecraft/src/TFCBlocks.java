@@ -344,7 +344,7 @@ public class TFCBlocks
 		WoodHoriz = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz", 2019), 0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F);
 		WoodHoriz2 = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz2", 2020), 8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F);
 		
-		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021));
+		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setBlockName("ToolRack");
 		
 		
 		

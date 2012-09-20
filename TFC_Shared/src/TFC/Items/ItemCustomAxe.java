@@ -42,7 +42,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize
 
 	@Override
 	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
+		return EnumSize.LARGE;
 	}
 	
 	@Override

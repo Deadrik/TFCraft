@@ -1,0 +1,16 @@
+[
+{
+  "modid" : "TerraFirmaCraft",
+  "name" : "TerraFirmaCraft",
+  "url" : "www.terrafirmacraft.com",
+  "authors": [
+    "Bioxx"
+  ],
+  "description": "TerraFirmaCraft is a total conversion for minecraft that tries to bring hardcore believability to minecraft.",
+  "logoFile" : "/bioxx/TFCLogo.png",
+  "updateUrl" : "http://www.terrafirmacraft.com/download/change-log/",
+  "parent" : "",
+  "screenshots": [
+  ]
+}
+]

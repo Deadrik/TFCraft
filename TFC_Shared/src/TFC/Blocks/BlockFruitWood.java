@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
+import TFC.Core.Recipes;
 import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
@@ -75,16 +76,16 @@ public class BlockFruitWood extends BlockContainer
         ItemStack equip = entityplayer.getCurrentEquippedItem();
         if(equip!=null)
         {
-            for(int cnt = 0; cnt < TFC_Core.Axes.length && !isAxeorSaw; cnt++)
+            for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
             {
-                if(equip.getItem() == TFC_Core.Axes[cnt])
+                if(equip.getItem() == Recipes.Axes[cnt])
                 {
                     isAxeorSaw = true;
                 }
             }
-            for(int cnt = 0; cnt < TFC_Core.Saws.length && !isAxeorSaw; cnt++)
+            for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
             {
-                if(equip.getItem() == TFC_Core.Saws[cnt])
+                if(equip.getItem() == Recipes.Saws[cnt])
                 {
                     isAxeorSaw = true;
                 }

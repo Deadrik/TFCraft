@@ -116,7 +116,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 
 	@Override
 	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
+		return EnumSize.LARGE;
 	}
 	
 	@Override

@@ -32,7 +32,7 @@ public class TFCProvider extends WorldProvider
 		this.worldChunkMgr = terrainType.getChunkManager(this.worldObj);
 		//TFC_Core.SetupWorld(this.worldObj);
 		//TFC_Game.registerAnvilRecipes(this.worldObj.rand, this.worldObj);
-		TerraFirmaCraft.proxy.registerSkyProvider();
+		TerraFirmaCraft.proxy.registerSkyProvider(this);
 		TFC_Climate.manager = (TFCWorldChunkManager) worldChunkMgr;
 		TFC_Climate.worldObj = worldObj;
 	}
@@ -165,11 +165,6 @@ public class TFCProvider extends WorldProvider
 		return 256.0F;
 	}
 
-	@Override
-	public String func_80007_l() {
-		return null;
-	}
-
 	@SideOnly(Side.CLIENT)
 	public SkyProvider getSkyProvider()
 	{
@@ -233,6 +228,12 @@ public class TFCProvider extends WorldProvider
 
 			worldObj.getWorldInfo().setSpawnPosition(var6, var7, var8);
 		}
+	}
+
+	@Override
+	public String getDimensionName() {
+		// TODO Auto-generated method stub
+		return "DEFAULT";
 	}
 
 }

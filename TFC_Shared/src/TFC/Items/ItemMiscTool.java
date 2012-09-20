@@ -10,7 +10,7 @@ public class ItemMiscTool extends ItemTerra
 	public ItemMiscTool(int i) 
 	{
 		super(i);
-		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 
 	@Override

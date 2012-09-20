@@ -34,7 +34,7 @@ public class ItemProPick extends ItemTerra
     {
         super(i);
         maxStackSize = 1;
-        this.setTabToDisplayOn(CreativeTabs.tabTools);
+        this.setCreativeTab(CreativeTabs.tabTools);
     }
 
     @Override

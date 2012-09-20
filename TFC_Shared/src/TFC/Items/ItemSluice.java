@@ -32,7 +32,7 @@ public class ItemSluice extends ItemTerra
 		return "/bioxx/terratools.png";
 	}
 
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{

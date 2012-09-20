@@ -32,11 +32,10 @@ public class ClientTickHandler implements ITickHandler
 			//			{
 			//				player.openGui(TerraFirmaCraft.instance, 27, player.worldObj, 0, 0, 0);
 			//			}
-			if(ModLoader.getMinecraftServerInstance().isDedicatedServer())
-			{
+
 				//Allow the client to increment time
 				TFC_Time.UpdateTime(world);
-			}
+
 		}
 	}
 

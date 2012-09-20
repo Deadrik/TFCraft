@@ -24,7 +24,7 @@ public class ItemDyeCustom extends ItemTerra
         super(par1,"/gui/items.png");
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
-        this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+        this.setCreativeTab(CreativeTabs.tabMaterials);
     }
 
     @SideOnly(Side.CLIENT)
@@ -127,7 +127,7 @@ public class ItemDyeCustom extends ItemTerra
 //                    return true;
 //                }
 
-                if (var11 == Block.cocoa.blockID)
+                if (var11 == Block.cocoaPlant.blockID)
                 {
                     if (!par3World.isRemote)
                     {
@@ -222,11 +222,11 @@ public class ItemDyeCustom extends ItemTerra
 
                     if (par3World.isAirBlock(par4, par5, par6))
                     {
-                        par3World.setBlockWithNotify(par4, par5, par6, Block.cocoa.blockID);
+                        par3World.setBlockWithNotify(par4, par5, par6, Block.cocoaPlant.blockID);
 
-                        if (par3World.getBlockId(par4, par5, par6) == Block.cocoa.blockID)
+                        if (par3World.getBlockId(par4, par5, par6) == Block.cocoaPlant.blockID)
                         {
-                            Block.blocksList[Block.cocoa.blockID].updateBlockMetadata(par3World, par4, par5, par6, par7, par8, par9, par10);
+                            Block.blocksList[Block.cocoaPlant.blockID].updateBlockMetadata(par3World, par4, par5, par6, par7, par8, par9, par10);
                         }
 
                         if (!par2EntityPlayer.capabilities.isCreativeMode)

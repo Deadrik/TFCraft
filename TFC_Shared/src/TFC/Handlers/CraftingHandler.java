@@ -2,6 +2,7 @@ package TFC.Handlers;
 
 import TFC.Core.PlayerInfo;
 import TFC.Core.PlayerManagerTFC;
+import TFC.Core.Recipes;
 import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerraFood;
@@ -26,29 +27,29 @@ public class CraftingHandler implements ICraftingHandler
 			if(itemstack.itemID == TFCBlocks.StoneSedBrick.blockID || itemstack.itemID == TFCBlocks.StoneIgInBrick.blockID || 
 					itemstack.itemID == TFCBlocks.StoneIgExBrick.blockID || itemstack.itemID == TFCBlocks.StoneMMBrick.blockID)
 			{
-				HandleItem(entityplayer, iinventory, TFC_Core.Chisels);
+				HandleItem(entityplayer, iinventory, Recipes.Chisels);
 			}
 			else if(itemstack.itemID == TFCItems.SinglePlank.shiftedIndex)
 			{
-				HandleItem(entityplayer, iinventory, TFC_Core.Axes);
-				HandleItem(entityplayer, iinventory, TFC_Core.Saws);
+				HandleItem(entityplayer, iinventory, Recipes.Axes);
+				HandleItem(entityplayer, iinventory, Recipes.Saws);
 			}
 			else if(itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex)
 			{
-				HandleItem(entityplayer, iinventory, TFC_Core.Saws);
+				HandleItem(entityplayer, iinventory, Recipes.Saws);
 			}
 			else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex || 
 					itemstack.getItem() instanceof ItemTerraFood)
 			{
-				HandleItem(entityplayer, iinventory, TFC_Core.Knives);
+				HandleItem(entityplayer, iinventory, Recipes.Knives);
 			}
 			else if(itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex)
 			{
-				HandleItem(entityplayer, iinventory, TFC_Core.Axes);
+				HandleItem(entityplayer, iinventory, Recipes.Axes);
 			}
 			else if(itemstack.itemID == TFCItems.Flux.shiftedIndex)
 			{
-				HandleItem(entityplayer, iinventory, TFCItems.Hammers);
+				HandleItem(entityplayer, iinventory, Recipes.Hammers);
 			}
 			else if(itemstack.itemID == TFCItems.LooseRock.shiftedIndex)
 			{

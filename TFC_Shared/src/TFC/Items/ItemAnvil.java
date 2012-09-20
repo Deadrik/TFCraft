@@ -5,6 +5,7 @@ import java.util.List;
 import TFC.Core.AnvilReq;
 import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
@@ -27,7 +28,7 @@ public class ItemAnvil extends ItemTerra
 		req = Areq;
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 	
 	@Override
@@ -35,6 +36,11 @@ public class ItemAnvil extends ItemTerra
 		return EnumSize.HUGE;
 	}
 
+	@Override
+	public EnumWeight getWeight() {
+		return EnumWeight.HEAVY;
+	}
+	
 	@Override
 	public int getMetadata(int i) 
 	{		
@@ -47,7 +53,8 @@ public class ItemAnvil extends ItemTerra
 		return "/bioxx/terratools.png";
 	}
 
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		int meta = MathHelper.floor_double((double)(player.rotationYaw * 4F / 360F) + 0.5D) & 3;
 		if(!world.isRemote && side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 

@@ -192,7 +192,6 @@ public class BlockCollapsable extends BlockTerra
         return true;
     }
 
-
     public Boolean tryToFall(World world, int i, int j, int k, int l)
     {
         int xCoord = i;

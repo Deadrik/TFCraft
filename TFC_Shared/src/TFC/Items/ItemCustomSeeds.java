@@ -3,6 +3,7 @@ package TFC.Items;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityCrop;
 import net.minecraft.src.*;
 
@@ -23,13 +24,19 @@ public class ItemCustomSeeds extends ItemTerra
 		this.soilBlockID = TFCBlocks.tilledSoil.blockID;
 		this.soilBlockID2 = TFCBlocks.tilledSoil2.blockID;
 		this.cropId = cropId;
-		this.setTabToDisplayOn(CreativeTabs.tabFood);
+		this.setCreativeTab(CreativeTabs.tabFood);
 	}
 	
 	@Override
 	public EnumSize getSize() {
 		// TODO Auto-generated method stub
 		return EnumSize.TINY;
+	}
+	
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.LIGHT;
 	}
 	
 	@Override

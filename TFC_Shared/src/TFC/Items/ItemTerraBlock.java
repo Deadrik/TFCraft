@@ -18,7 +18,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	{
 		super(par1);
 		setHasSubtypes(true);
-		this.setTabToDisplayOn(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
 	@Override

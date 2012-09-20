@@ -11,7 +11,7 @@ public class ItemMeltedMetal extends ItemTerra
 	{
 		super(i);
 		setMaxDamage(100);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 
 	@Override

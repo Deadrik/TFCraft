@@ -16,7 +16,7 @@ public class ItemBellows extends ItemTerra
 	public ItemBellows(int i) 
 	{
 		super(i);
-		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 	
 	@Override
@@ -35,8 +35,9 @@ public class ItemBellows extends ItemTerra
 	{
 		return "/bioxx/terratools.png";
 	}
-
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
 		{
@@ -45,7 +46,7 @@ public class ItemBellows extends ItemTerra
 					world.getBlockId(x, y+1, z) == 0)
 			{
 				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.Bellows.blockID, l);
-				player.inventory.mainInventory[player.inventory.currentItem] = null;
+				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 				return true;
 			}
 		}

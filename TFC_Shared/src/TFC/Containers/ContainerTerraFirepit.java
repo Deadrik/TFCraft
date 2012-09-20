@@ -152,7 +152,9 @@ public class ContainerTerraFirepit extends ContainerTFC
                     }
                     else if (slot.isItemValid(itemstack3))
                     {
-                        if (itemstack2.itemID != itemstack3.itemID || itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || !ItemStack.areItemStacksEqual(itemstack2, itemstack3))
+                        if (itemstack2.itemID != itemstack3.itemID || 
+                        		itemstack2.getHasSubtypes() && itemstack2.getItemDamage() != itemstack3.getItemDamage() || 
+                        		!ItemStack.func_77970_a(itemstack2, itemstack3))
                         {
                             if (itemstack3.stackSize <= slot.getSlotStackLimit())
                             {

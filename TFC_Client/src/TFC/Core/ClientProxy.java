@@ -971,6 +971,7 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("item.WoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
 			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
 			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
+			LR.addStringLocalization("tile.ToolRack."+WoodNames[i]+".name", WoodNames[i] + " Tool Rack");
 		}
 		LR.addStringLocalization("item.Stick.name", "Stick");
 	}

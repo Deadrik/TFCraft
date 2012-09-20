@@ -21,7 +21,7 @@ public class ItemLooseRock extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 	public ItemLooseRock(int id, String tex) 
 	{
@@ -38,7 +38,8 @@ public class ItemLooseRock extends ItemTerra
 			{1,0,0},
 		};
 
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
 		if(objectMouseOver == null) {

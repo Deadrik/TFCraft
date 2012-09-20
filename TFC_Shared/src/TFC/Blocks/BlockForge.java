@@ -19,7 +19,7 @@ import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockForge extends BlockContainer
 {
-	
+
 	private int meta;
 	private int xCoord;
 	private int yCoord;
@@ -65,17 +65,17 @@ public class BlockForge extends BlockContainer
 					tileentityforge.fireTemperature = 300;
 					int ss = entityplayer.inventory.getCurrentItem().stackSize;
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage()+1;
-					
-		            if(dam >= entityplayer.getCurrentEquippedItem().getItem().getMaxDamage())
-		            {
-		                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
-	                            null);
-		            }
-		            else
-		            {
-					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
-							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
-		            }
+
+					if(dam >= entityplayer.getCurrentEquippedItem().getItem().getMaxDamage())
+					{
+						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
+								null);
+					}
+					else
+					{
+						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
+								new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
+					}
 					world.setBlockMetadata(i, j, k, 2);
 				}
 			}
@@ -143,50 +143,36 @@ public class BlockForge extends BlockContainer
 	}
 
 
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
+	public void onNeighborBlockChange(World world, int x, int y, int z, int l)
 	{
-		if(!world.isBlockOpaqueCube(i, j-1, k) || world.getBlockMaterial(i, j-1, k) != Material.rock)
+		if((world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
+				world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
+				world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
+						world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (ItemFirestarter.checkSlabsAround(world, x, y, z)))))
 		{
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlock(i, j, k, 0);
+			((TileEntityTerraForge)world.getBlockTileEntity(x, y, z)).ejectContents();
+			world.setBlock(x, y, z, 0);
 		}
-		else if(!world.isBlockOpaqueCube(i+1, j, k) || world.getBlockMaterial(i+1, j, k) != Material.rock)
+		else
 		{
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlock(i, j, k, 0);
-		}
-		else if(!world.isBlockOpaqueCube(i-1, j, k) || world.getBlockMaterial(i-1, j, k) != Material.rock)
-		{
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlock(i, j, k, 0);
-		}
-		else if(!world.isBlockOpaqueCube(i, j, k+1) || world.getBlockMaterial(i, j, k+1) != Material.rock)
-		{
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlock(i, j, k, 0);
-		}
-		else if(!world.isBlockOpaqueCube(i, j, k-1) || world.getBlockMaterial(i, j, k-1) != Material.rock)
-		{
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlock(i, j, k, 0);
-		}
-		int numAirBlocks = 0;
-		for (int x = -1; x < 2; x++)
-		{
-			for (int y = 0; y < 2; y++)
+			int numAirBlocks = 0;
+			for (int i = -1; i < 2; i++)
 			{
-				for (int z = -1; z < 2; z++)
+				for (int j = 0; j < 2; j++)
 				{
-					if(world.getBlockId(xCoord+x, yCoord+y, zCoord+z) == 0) {
-						numAirBlocks++;
+					for (int k = -1; k < 2; k++)
+					{
+						if(world.getBlockId(xCoord+i, yCoord+j, zCoord+k) == 0) {
+							numAirBlocks++;
+						}
 					}
 				}
 			}
-		}
-		if(world.getBlockTileEntity(i, j, k) != null)
-		{
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).setNumAirBlocks(numAirBlocks);
-			((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).isValid = false;
+			if(world.getBlockTileEntity(x, y, z) != null)
+			{
+				((TileEntityTerraForge)world.getBlockTileEntity(x, y, z)).setNumAirBlocks(numAirBlocks);
+				((TileEntityTerraForge)world.getBlockTileEntity(x, y, z)).isValid = false;
+			}
 		}
 	}
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
@@ -220,48 +206,48 @@ public class BlockForge extends BlockContainer
 	{
 		return false;
 	}
-	
+
 	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
-    {
-        int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
+	{
+		int var5 = par1World.getBlockMetadata(par2, par3, par4);
+		TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
 
-        if (par0)
-        {
-            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.ForgeOn.blockID);
-            par1World.markBlockNeedsUpdate(par2, par3, par4);
-        }
-        else
-        {
-            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Forge.blockID);
-            par1World.markBlockNeedsUpdate(par2, par3, par4);
-        }
+		if (par0)
+		{
+			par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.ForgeOn.blockID);
+			par1World.markBlockNeedsUpdate(par2, par3, par4);
+		}
+		else
+		{
+			par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Forge.blockID);
+			par1World.markBlockNeedsUpdate(par2, par3, par4);
+		}
 
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
 
-        if (var6 != null)
-        {
-            var6.validate();
-            par1World.setBlockTileEntity(par2, par3, par4, var6);
-        }
-    }
-	
+		if (var6 != null)
+		{
+			var6.validate();
+			par1World.setBlockTileEntity(par2, par3, par4, var6);
+		}
+	}
+
 	/**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
+	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+	 * cleared to be reused)
+	 */
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
-    }
-	
+	{
+		return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
+	}
+
 	/**
-     * Returns the bounding box of the wired rectangular prism to render.
-     */
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
-    }
+	 * Returns the bounding box of the wired rectangular prism to render.
+	 */
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

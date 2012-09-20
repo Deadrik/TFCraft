@@ -4,8 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
+import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.*;
 
@@ -17,7 +19,7 @@ public class ItemFirestarter extends ItemTerra
         super(i);
         this.setMaxDamage(8);
         this.hasSubtypes = false;
-        this.setTabToDisplayOn(CreativeTabs.tabTools);
+        this.setCreativeTab(CreativeTabs.tabTools);
     }
     
     @Override
@@ -121,8 +123,8 @@ public class ItemFirestarter extends ItemTerra
                     else if(numcoal >= 9 && world.getBlockMaterial(x, y, z) == Material.rock && 
                             world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
                             world.getBlockMaterial(x, y+1, z+1) == Material.rock && world.getBlockMaterial(x, y+1, z-1) == Material.rock &&
-                            world.isBlockNormalCube(x, y, z) && world.isBlockNormalCube(x+1, y+1, z) && world.isBlockNormalCube(x-1, y+1, z) && 
-                            world.isBlockNormalCube(x, y+1, z+1) && world.isBlockNormalCube(x, y+1, z-1))
+                            world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y+1, z) && world.isBlockNormalCube(x-1, y+1, z) && 
+                            world.isBlockNormalCube(x, y+1, z+1) && world.isBlockNormalCube(x, y+1, z-1)) || (checkSlabsAround(world, x, y+1, z))))
                     {
                         for (Iterator iterator = list.iterator(); iterator.hasNext();)
                         {
@@ -149,5 +151,40 @@ public class ItemFirestarter extends ItemTerra
         return false;
     }
     
-    
+    public static boolean checkSlabsAround(World world, int x, int y, int z)
+    {
+    	if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
+    		if(BlockSlab.getPosXChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    	}
+    	if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
+    		if(BlockSlab.getNegXChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    	}
+    	if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
+    		if(BlockSlab.getPosZChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    	}
+    	if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
+    		if(BlockSlab.getNegZChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    	}
+    	return true;
+    }
 }

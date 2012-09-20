@@ -17,7 +17,7 @@ public class ItemBlueprint extends Item
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setItemName("Blueprint");
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 
 	public void AddBlueprint(StructureBlueprint sb, int id)

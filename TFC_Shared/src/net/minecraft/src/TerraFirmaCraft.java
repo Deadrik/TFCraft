@@ -52,7 +52,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "B2 Build 50")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "B2 Build 52")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
@@ -115,7 +115,7 @@ public class TerraFirmaCraft
 	@Init
 	public void load(FMLInitializationEvent evt)
 	{
-		TFC_Core.RegisterRecipes();	
+		Recipes.registerRecipes();	
 
 		TFC_Game.RegisterToolRecipes();
 

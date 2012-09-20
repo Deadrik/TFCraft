@@ -14,7 +14,7 @@ public class ItemStick extends ItemTerra
         super(i);
         setMaxDamage(0);
         setHasSubtypes(true);
-        this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+        this.setCreativeTab(CreativeTabs.tabMaterials);
     }
 
     public int getIconFromDamage(int i)

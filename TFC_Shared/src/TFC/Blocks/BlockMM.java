@@ -189,16 +189,25 @@ public class BlockMM extends BlockCollapsable
             
             if(mode == 0)
             {
+            	if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
+        		return false;
+        	
                 world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta);
                 return true;
             }
             else if(mode == 1)
             {
+            	if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
+        		return false;
+        	
                 ItemChisel.CreateStairs(world, x, y, z, id, meta, m);
                 return true;
             }
             else if(mode == 2)
             {
+            	if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
+        		return false;
+        	
                 ItemChisel.CreateSlab(world, x, y, z, id, meta, side);
                 return true;
             }

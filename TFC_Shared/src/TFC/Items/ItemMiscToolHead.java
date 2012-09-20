@@ -16,7 +16,7 @@ public class ItemMiscToolHead extends ItemTerra
 		super(i);
 		this.setMaxDamage(100);
 		this.setMaxStackSize(4);
-		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 
 	@Override

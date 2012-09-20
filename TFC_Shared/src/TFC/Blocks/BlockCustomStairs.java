@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+
 import net.minecraft.src.*;
 
 public class BlockCustomStairs extends Block
@@ -19,6 +22,7 @@ public class BlockCustomStairs extends Block
 		this.setResistance(10);
 		this.setStepSound(par2Block.stepSound);
 		this.setLightOpacity(255);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	/**
@@ -286,8 +290,16 @@ public class BlockCustomStairs extends Block
 		this.modelBlock.velocityToAddToEntity(par1World, par2, par3, par4, par5Entity, par6Vec3D);
 	}
 	
-	public void addCreativeItems(java.util.ArrayList list)
-    {
-        list.add(new ItemStack(this,1));
-    }
+	@SideOnly(Side.CLIENT)
+    @Override
+    /**
+     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+     */
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		for(int i = 0; i < 16; i++) 
+		{
+			list.add(new ItemStack(this,1,i));
+		}
+	}
 }

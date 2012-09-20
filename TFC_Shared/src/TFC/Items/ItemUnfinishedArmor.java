@@ -14,7 +14,7 @@ public class ItemUnfinishedArmor extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setTabToDisplayOn(CreativeTabs.tabMisc);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 	public ItemUnfinishedArmor(int id, String tex) 
 	{
