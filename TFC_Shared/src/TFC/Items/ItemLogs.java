@@ -168,9 +168,11 @@ public class ItemLogs extends ItemTerra
 						te.addContents(3, new ItemStack(this,1, itemstack.getItemDamage()));
 					} else
 					{
-						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir));
-						itemstack.stackSize = itemstack.stackSize-1;
+						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))						
+							itemstack.stackSize = itemstack.stackSize-1;
+						
 						return true;
+						
 					}
 					itemstack.stackSize = itemstack.stackSize-1;
 					return true;
