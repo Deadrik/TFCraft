@@ -59,6 +59,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 3158787 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
+                                        break;
                                     }
                                     case 1:
                                     {
@@ -70,6 +71,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158851 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
+                                        break;
                                     }
                                     case 2:
                                     {
@@ -81,6 +83,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4211779 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
+                                        break;
                                     }
                                     case 3:
                                     {
@@ -96,6 +99,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
+                                        break;
                                     }
                                     case 4:
                                     {
@@ -107,6 +111,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
+                                        break;
                                     }
                                     case 5:
                                     {
@@ -118,6 +123,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158531L + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
+                                        break;
                                     }
                                 }
                             }
@@ -148,6 +154,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4207363;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
+                                        break;
                                     }
                                     case 1:
                                     {
@@ -163,6 +170,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4407811;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
+                                        break;
                                     }
                                     case 2:
                                     {
@@ -178,6 +186,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 3552003;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
+                                        break;
                                     }
                                 }
                             }
