@@ -122,7 +122,9 @@ public class BlockDirt extends BlockTerra2
 			boolean PosXAir2 = false;
 			boolean NegXAir2 = false;
 			boolean PosZAir2 = false;
-			boolean NegZAir2 = false;
+			boolean NegZAir2 = false;	
+			
+			boolean isBelowAir = world.getBlockId(i, j-1, k) == 0;
 			byte count = 0;
 			List sides = new ArrayList<Integer>();
 
@@ -155,7 +157,7 @@ public class BlockDirt extends BlockTerra2
 					sides.add(3);
 			}
 
-			if((count > 2) && sides.size() >= 1)
+			if(!isBelowAir && (count > 2) && sides.size() >= 1)
 			{
 				switch((Integer)sides.get(random.nextInt(sides.size())))
 				{
@@ -189,6 +191,10 @@ public class BlockDirt extends BlockTerra2
 				}
 				}
 
+			}
+			else if(isBelowAir)
+			{
+				tryToFall(world, i, j, k);
 			}
 		}
 	}
