@@ -16,10 +16,12 @@ import net.minecraft.src.TileEntity;
 public class TileEntityTerraLogPile extends TileEntity implements IInventory
 {
     public ItemStack[] storage;
+    private int logPileOpeners;
 
     public TileEntityTerraLogPile()
     {
         storage = new ItemStack[4];
+        logPileOpeners = 0;
     }
 
     public void addContents(int index, ItemStack is)
@@ -39,7 +41,9 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
 
     @Override
     public void closeChest() {
-    	if(storage[0] == null && storage[1] == null &&
+    	--logPileOpeners;
+    	
+    	if(logPileOpeners == 0 && storage[0] == null && storage[1] == null &&
 				storage[2] == null && storage[3] == null)
 		{
 			worldObj.setBlockWithNotify(xCoord, yCoord, zCoord, 0);
@@ -155,7 +159,7 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
     @Override
     public void openChest() {
         // TODO Auto-generated method stub
-
+    	++logPileOpeners;
     }
     @Override
     public void readFromNBT(NBTTagCompound nbttagcompound)
