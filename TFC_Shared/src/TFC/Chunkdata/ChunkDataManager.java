@@ -36,6 +36,18 @@ public class ChunkDataManager
 		}
 	}
 	
+	public static ChunkData getData(int x, int z)
+	{
+		synchronized(chunkmap)
+		{
+			if(chunkmap.containsKey(x + "," + z))
+			{
+				return (ChunkData) chunkmap.get(x + "," + z);
+			}
+			else return null;
+		}
+	}
+	
 	public static boolean addProtection(int x, int z, int amount)
 	{
 		synchronized(chunkmap)

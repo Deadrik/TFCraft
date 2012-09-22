@@ -1,5 +1,6 @@
 package TFC.Commands;
 
+import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Enums.EnumTree;
@@ -39,8 +40,22 @@ public class GetRocksCommand extends CommandBase{
 		String t0s = ItemLooseRock.blockNames[t0[1]];
 		String t1s = ItemLooseRock.blockNames[t1[1]];
 		String t2s = ItemLooseRock.blockNames[t2[1]];
-
-		throw new PlayerNotFoundException("Rock Layer 1: "+ t0s + "   Rock Layer 2: "+ t1s + "   Rock Layer 3: "+ t2s);
+		
+		String ore1 = "Empty";
+		String ore2 = "Empty";
+		String ore3 = "Empty";
+		
+		if(ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList1.size() > 0)
+			ore1 = ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList1.get(0);
+		if(ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList2.size() > 0)
+			ore2 = ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList2.get(0);
+		if(ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList3.size() > 0)
+			ore3 = ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList3.get(0);
+		
+		throw new PlayerNotFoundException("Rock Layer 1: "+ t0s + "   Rock Layer 2: "+ t1s + "   Rock Layer 3: "+ t2s + 
+				"   Ore1: " + ore1+ 
+				"   Ore2: " + ore2+ 
+				"   Ore3: " + ore3);
 
 	}
 	

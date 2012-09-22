@@ -11,25 +11,15 @@ public class ItemStick extends ItemTerra
 
     public ItemStick(int i)
     {
-        super(i);
+        super(i, "/gui/items.png");
         setMaxDamage(0);
         setHasSubtypes(true);
         this.setCreativeTab(CreativeTabs.tabMaterials);
     }
-
-    public int getIconFromDamage(int i)
-    {
-        return 16;
-    }
+    
     public int getMetadata(int i)
     {
         return i;
-    }
-
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terrasprites.png";
     }
     
     @Override

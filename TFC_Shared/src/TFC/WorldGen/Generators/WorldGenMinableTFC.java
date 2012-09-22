@@ -2,6 +2,9 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
+
 
 import net.minecraft.src.*;
 
@@ -35,6 +38,9 @@ public class WorldGenMinableTFC extends WorldGenerator
     private int diameter = 2;
     private int vDens = 2;
     private int hDens = 2;
+    
+    private ChunkData chunkdata;
+    private String name;
 
     public WorldGenMinableTFC(int i, int j)
     {
@@ -74,9 +80,9 @@ public class WorldGenMinableTFC extends WorldGenerator
                 int temp1 = mPCalculateDensity(rand, diameter, hDens);
                 int temp2 = mPCalculateDensityVert(rand, height, vDens, min, max);
                 int temp3 = mPCalculateDensity(rand, diameter, hDens);
-                int l5 = xChunk + temp1;
+                int l5 = xChunk*16 + temp1;
                 int i9 = temp2;
-                int k13 = zChunk + temp3;
+                int k13 = zChunk*16 + temp3;
                 BODgenerate(worldObj, rand, l5, i9, k13, veinSi);
 
             }
@@ -93,9 +99,9 @@ public class WorldGenMinableTFC extends WorldGenerator
                 int temp1 = mPCalculateDensity(rand, diameter, hDens);
                 int temp2 = mPCalculateDensityVert(rand, height, vDens, min, max);
                 int temp3 = mPCalculateDensity(rand, diameter, hDens);
-                int l5 = xChunk + temp1;
+                int l5 = xChunk*16 + temp1;
                 int i9 = temp2;
-                int k13 = zChunk + temp3;
+                int k13 = zChunk*16 + temp3;
                 BODgenerateVein(worldObj, rand, l5, i9, k13, veinSi);
 
             }
@@ -105,6 +111,8 @@ public class WorldGenMinableTFC extends WorldGenerator
 
     public boolean BODgenerateVein(World world, Random rand, int parX, int parY, int parZ, int xyz)
     {
+    	boolean doOnce = true;
+    	
         //==========================================mp mod
         int posX = parX;
         int posY = parY;
@@ -189,6 +197,21 @@ public class WorldGenMinableTFC extends WorldGenerator
                         if(isCorrectRockType && isCorrectMeta)
                         {
                             world.setBlockAndMetadata(posX, posY, posZ, MPBlockID, MPBlockMeta);
+                            if(doOnce)
+                            {
+                            	if(posY >= TerraFirmaCraft.RockLayer2Height && !chunkdata.oreList1.contains(name))
+                            	{
+                            		chunkdata.oreList1.add(name);
+                            	}
+                            	else if(posY >= TerraFirmaCraft.RockLayer3Height && !chunkdata.oreList2.contains(name))
+                            	{
+                            		chunkdata.oreList2.add(name);
+                            	}
+                            	else if (!chunkdata.oreList3.contains(name))
+                            	{
+                            		chunkdata.oreList3.add(name);
+                            	}
+                            }
                         }
 
                         blocksMade++;
@@ -204,6 +227,21 @@ public class WorldGenMinableTFC extends WorldGenerator
                 if(isCorrectRockType && isCorrectMeta)
                 {
                     world.setBlockAndMetadata(posX, posY, posZ, MPBlockID, MPBlockMeta);
+                    if(doOnce)
+                    {
+                    	if(posY >= TerraFirmaCraft.RockLayer2Height && !chunkdata.oreList1.contains(name))
+                    	{
+                    		chunkdata.oreList1.add(name);
+                    	}
+                    	else if(posY >= TerraFirmaCraft.RockLayer3Height && !chunkdata.oreList2.contains(name))
+                    	{
+                    		chunkdata.oreList2.add(name);
+                    	}
+                    	else if (!chunkdata.oreList3.contains(name))
+                    	{
+                    		chunkdata.oreList3.add(name);
+                    	}
+                    }
                 }                      
 
                 blocksMade++;
@@ -226,6 +264,8 @@ public class WorldGenMinableTFC extends WorldGenerator
 
     public boolean BODgenerate(World world, Random rand, int x, int y, int z, int xyz)
     {
+    	boolean doOnce = true;
+    	
         numberOfBlocks = xyz; 
 
         float f = rand.nextFloat() * (float)Math.PI;
@@ -274,21 +314,37 @@ public class WorldGenMinableTFC extends WorldGenerator
                                 (m == LayerMeta || LayerMeta == -1))
                         {
                             world.setBlockAndMetadata(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta);
+                            if(doOnce)
+                            {
+                            	if(yCoord >= TerraFirmaCraft.RockLayer2Height && !chunkdata.oreList1.contains(name))
+                            	{
+                            		chunkdata.oreList1.add(name);
+                            	}
+                            	else if(yCoord >= TerraFirmaCraft.RockLayer3Height && !chunkdata.oreList2.contains(name))
+                            	{
+                            		chunkdata.oreList2.add(name);
+                            	}
+                            	else if (!chunkdata.oreList3.contains(name))
+                            	{
+                            		chunkdata.oreList3.add(name);
+                            	}
+                            	doOnce = false;
+                            }
                         }
                     }
-
                 }
-
             }
-
         }
         return true;
     }
 
-    public boolean generate(World world, Random random, int x, int z, int min, int max)//absorb default system
+    public boolean generate(World world, Random random, int x, int z, int min, int max, String n)//absorb default system
     {
-        MPChunk_X = x/16*16;// set output chunk x
-        MPChunk_Z = z/16*16;// set output chunk z
+        MPChunk_X = x >> 4;// set output chunk x
+        MPChunk_Z = z >> 4;// set output chunk z
+        
+        chunkdata = ChunkDataManager.getData(MPChunk_X, MPChunk_Z);
+        
         MPBlockID = minableBlockId;// set output block ID
         MPBlockMeta = minableBlockMeta;
         worldObj = world;
@@ -301,17 +357,19 @@ public class WorldGenMinableTFC extends WorldGenerator
             MPPrevZ = MPChunk_Z;
             MPPrevID = MPBlockID;
             MPPrevMeta = MPBlockMeta;
+            this.name = n;
             BetterOreDistribution(MPChunk_X, MPChunk_Z, MPBlockID, MPBlockMeta, min, max,random);
-
-
         }
         return true;
     }
     
-    public boolean generateVein(World world, Random random, int x, int z, int min, int max)//absorb default system
+    public boolean generateVein(World world, Random random, int x, int z, int min, int max, String n)//absorb default system
     {
-        MPChunk_X = x/16*16;// set output chunk x
-        MPChunk_Z = z/16*16;// set output chunk z
+        MPChunk_X = x >> 4;// set output chunk x
+        MPChunk_Z = z >> 4;// set output chunk z
+            
+        chunkdata = ChunkDataManager.getData(MPChunk_X, MPChunk_Z);
+            
         MPBlockID = minableBlockId;// set output block ID
         MPBlockMeta = minableBlockMeta;
         worldObj = world;
@@ -324,9 +382,8 @@ public class WorldGenMinableTFC extends WorldGenerator
             MPPrevZ = MPChunk_Z;
             MPPrevID = MPBlockID;
             MPPrevMeta = MPBlockMeta;
+            this.name = n;
             BetterOreDistributionVein(MPChunk_X, MPChunk_Z, MPBlockID, MPBlockMeta, min, max,random);
-
-
         }
         return true;
     }

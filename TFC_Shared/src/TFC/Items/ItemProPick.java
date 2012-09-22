@@ -7,6 +7,9 @@ import java.util.Random;
 import TFC.Blocks.BlockOre;
 import TFC.Blocks.BlockOre2;
 import TFC.Blocks.BlockOre3;
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
+import TFC.Containers.MessageQue;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Vector3f;
@@ -24,6 +27,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StringTranslate;
 import net.minecraft.src.TFCBlocks;
+import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.World;
 
 public class ItemProPick extends ItemTerra
@@ -44,10 +48,25 @@ public class ItemProPick extends ItemTerra
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
     {
         if(!world.isRemote && world.getBlockId(x, y, z) != TFCBlocks.ToolRack.blockID)
         {
+//        	Random rand = new Random(x*z+y);
+//        	ChunkData data = ChunkDataManager.getData(x >> 4, z >> 4);
+//        	
+//        	int currentLayer = y < TerraFirmaCraft.RockLayer3Height ? 3 : y < TerraFirmaCraft.RockLayer2Height ? 2 : 1;
+//        	
+//        	if(currentLayer == 1)
+//        	{
+//        		if(data.oreList1.size() > 0)
+//        		{
+//        			String Ore = data.oreList1.get(rand.nextInt(data.oreList1.size()));
+//        			MessageQue.instance.addMessage("Ore");
+//        		}
+//        	}
+        	
+        	
             ArrayList oreArray = new ArrayList<String>();
             ArrayList oreNumArray = new ArrayList<Integer>();
             

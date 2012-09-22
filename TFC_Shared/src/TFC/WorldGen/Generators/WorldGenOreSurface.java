@@ -29,28 +29,28 @@ public class WorldGenOreSurface implements IWorldGenerator
 		int height = Min-Max;
         //============Copper
         createOre(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
-                /*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max);
+                /*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Native Copper");
 
         //============Cassiterite
         createOre(TFCBlocks.Ore.blockID, 5,new int[]{TFCBlocks.StoneIgIn.blockID,0},//Granite Veins
-                /*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, Min, Max);
+                /*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, Min, Max, "Cassiterite");
 
         //============Cassiterite2
         createOre(TFCBlocks.Ore.blockID, 5,new int[]{TFCBlocks.StoneIgEx.blockID,-1},//IgEx Veins
-                /*rarity*/20,/*veinSize*/10,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max);
+                /*rarity*/20,/*veinSize*/10,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Cassiterite");
 
         //============Bismuthinite
         createOre(TFCBlocks.Ore.blockID, 7,new int[]{TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//Granite Veins
-                /*rarity*/25,/*veinSize*/10,/*veinAmt*/25,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max);
+                /*rarity*/25,/*veinSize*/10,/*veinAmt*/25,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Bismuthinite");
 
         //============Sphalerite
         createOre(TFCBlocks.Ore.blockID, 12,new int[]{TFCBlocks.StoneMM.blockID,-1},//mm, veins
-                /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max);
+                /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Sphalerite");
 		
 	}
 	
 	private static void createOre(int i, int j, int[] Layers, int rarity, int veinSize, 
-            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max)
+            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
     {
         for(int n = 0; n < Layers.length/2;)
         {
@@ -62,14 +62,14 @@ public class WorldGenOreSurface implements IWorldGenerator
                     (rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
             {
                 new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generate(
-                        world, rand, chunkX, chunkZ, min, max);
+                        world, rand, chunkX, chunkZ, min, max, name);
             }
             n+=2;
         }
     }
 
     private static void createOreVein(int i, int j, int[] Layers, int rarity, int veinSize, 
-            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max)
+            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
     {
         for(int n = 0; n < Layers.length/2;)
         {
@@ -81,7 +81,7 @@ public class WorldGenOreSurface implements IWorldGenerator
                     (rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
             {
                 new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generateVein(
-                        world, rand, chunkX, chunkZ, min, max);
+                        world, rand, chunkX, chunkZ, min, max, name);
             }
             n+=2;
         }
