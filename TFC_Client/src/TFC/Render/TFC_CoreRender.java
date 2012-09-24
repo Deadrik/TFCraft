@@ -2296,6 +2296,10 @@ public class TFC_CoreRender
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
         Minecraft mc = ModLoader.getMinecraftInstance();
         
+        Tessellator tesselator = Tessellator.instance;
+    	tesselator.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
+    	tesselator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+        
         int stage = (int) Math.floor(te.growth);
         if(stage > crop.numGrowthStages)
             stage = crop.numGrowthStages;
