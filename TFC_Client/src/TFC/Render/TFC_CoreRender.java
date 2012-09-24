@@ -2309,6 +2309,12 @@ public class TFC_CoreRender
         float est = te.getEstimatedGrowth(crop);
         float mult = 0.85f + (0.15f * (te.growth / est));
         if(mult > 1.15f) {mult = 1.15f;}
+
+        if(renderblocks.overrideBlockTexture >= 0)
+        {
+        	renderblocks.clearOverrideBlockTexture();
+        	mc.renderEngine.bindTexture(mc.renderEngine.getTexture(block.getTextureFile()));
+        }
         
         switch(te.cropId)
         {
