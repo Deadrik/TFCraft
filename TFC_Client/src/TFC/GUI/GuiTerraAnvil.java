@@ -118,11 +118,15 @@ public class GuiTerraAnvil extends GuiContainer
 			for(int i = 0; i < 3; i++)
 			{
 				int yOffset = 8 * i;
-				String s = "\u2022";			
+				String s = "\u2022";	
+				boolean match = false;
 
 				if(i == 0)
 				{
 					if(Rules[0].matches(ItemRules, 0))
+						match = true;
+					
+					if(match)
 						s += "\2472";
 					else
 						s += "\2474";
@@ -133,6 +137,9 @@ public class GuiTerraAnvil extends GuiContainer
 				else if(i == 1)
 				{
 					if(Rules[1].matches(ItemRules, 1))
+						match = true;
+					
+					if(match)
 						s += "\2472";
 					else
 						s += "\2474";
@@ -142,12 +149,21 @@ public class GuiTerraAnvil extends GuiContainer
 				else if(i == 2)
 				{
 					if(Rules[2].matches(ItemRules, 2))
+						match = true;
+					
+					if(match)
 						s += "\2472";
 					else
 						s += "\2474";
 
 					s += Rules[2].Name;
 				}
+				
+				if(match)
+					s += "\u2714";
+				else
+					s += "\u2718";
+				
 				fontRenderer.drawString(s, w + 209, h+30+yOffset, 0x404040);
 			}
 		}

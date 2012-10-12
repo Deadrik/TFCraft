@@ -38,7 +38,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
     public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
     {
-        if (!world.isRemote && is.hasTagCompound() && TFC_Settings.enableInventoryHeat)
+        if (!world.isRemote && is.hasTagCompound())
         {
             NBTTagCompound stackTagCompound = is.getTagCompound();
 

@@ -326,9 +326,9 @@ public class TFC_Core
 
 	public static int getRockLayerFromHeight( int y)
 	{
-		if(y <= TerraFirmaCraft.RockLayer3Height)
+		if(y <= TFC_Settings.RockLayer3Height)
 			return 2;
-		else if(y <= TerraFirmaCraft.RockLayer2Height)
+		else if(y <= TFC_Settings.RockLayer2Height)
 			return 1;
 		else
 			return 0;

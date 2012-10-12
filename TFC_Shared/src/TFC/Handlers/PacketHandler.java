@@ -74,6 +74,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeByte(Packet_Init_World_Client);
 				dos.writeLong(world.getSeed());
 				dos.writeLong(TFC_Time.dayLength);
+				dos.writeInt(TFC_Time.daysInYear);
 			} 
 			catch (IOException e)
 			{
@@ -186,6 +187,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					{
 						seed = dis.readLong();
 						TFC_Time.dayLength = dis.readLong();
+						TFC_Time.daysInYear = dis.readInt();
 
 					} catch (IOException e) 
 					{

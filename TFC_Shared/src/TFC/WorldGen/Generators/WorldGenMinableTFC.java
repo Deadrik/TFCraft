@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
+import TFC.Core.TFC_Settings;
 
 
 import net.minecraft.src.*;
@@ -199,18 +200,20 @@ public class WorldGenMinableTFC extends WorldGenerator
                             world.setBlockAndMetadata(posX, posY, posZ, MPBlockID, MPBlockMeta);
                             if(doOnce)
                             {
-                            	if(posY >= TerraFirmaCraft.RockLayer2Height && !chunkdata.oreList1.contains(name))
+                            	if(posY >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
                             	{
                             		chunkdata.oreList1.add(name);
                             	}
-                            	else if(posY >= TerraFirmaCraft.RockLayer3Height && !chunkdata.oreList2.contains(name))
+                            	else if(posY >= TFC_Settings.RockLayer3Height && !chunkdata.oreList2.contains(name))
                             	{
                             		chunkdata.oreList2.add(name);
                             	}
                             	else if (!chunkdata.oreList3.contains(name))
                             	{
                             		chunkdata.oreList3.add(name);
+                            		
                             	}
+                            	doOnce = false;
                             }
                         }
 
@@ -229,11 +232,11 @@ public class WorldGenMinableTFC extends WorldGenerator
                     world.setBlockAndMetadata(posX, posY, posZ, MPBlockID, MPBlockMeta);
                     if(doOnce)
                     {
-                    	if(posY >= TerraFirmaCraft.RockLayer2Height && !chunkdata.oreList1.contains(name))
+                    	if(posY >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
                     	{
                     		chunkdata.oreList1.add(name);
                     	}
-                    	else if(posY >= TerraFirmaCraft.RockLayer3Height && !chunkdata.oreList2.contains(name))
+                    	else if(posY >= TFC_Settings.RockLayer3Height && !chunkdata.oreList2.contains(name))
                     	{
                     		chunkdata.oreList2.add(name);
                     	}
@@ -241,6 +244,7 @@ public class WorldGenMinableTFC extends WorldGenerator
                     	{
                     		chunkdata.oreList3.add(name);
                     	}
+                    	doOnce = false;
                     }
                 }                      
 
@@ -316,11 +320,11 @@ public class WorldGenMinableTFC extends WorldGenerator
                             world.setBlockAndMetadata(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta);
                             if(doOnce)
                             {
-                            	if(yCoord >= TerraFirmaCraft.RockLayer2Height && !chunkdata.oreList1.contains(name))
+                            	if(yCoord >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
                             	{
                             		chunkdata.oreList1.add(name);
                             	}
-                            	else if(yCoord >= TerraFirmaCraft.RockLayer3Height && !chunkdata.oreList2.contains(name))
+                            	else if(yCoord >= TFC_Settings.RockLayer3Height && !chunkdata.oreList2.contains(name))
                             	{
                             		chunkdata.oreList2.add(name);
                             	}

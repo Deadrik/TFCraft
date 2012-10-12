@@ -100,7 +100,6 @@ public class GuiCalendar extends GuiScreen
             drawCenteredString(fontRenderer,"Date : " + dom + " " + TFC_Time.months[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 
         float temp = Math.round((TFC_Climate.getHeightAdjustedTemp((int) player.posX, (int) player.posY, (int) player.posZ)));
-        DecimalFormat d = new DecimalFormat("#.##");
 
         drawCenteredString(fontRenderer,"Temperature : " + (int)temp + "C", l + 87, i1+56, 0x000000);
         //drawCenteredString(fontRenderer,"Month : " + , l + 87, i1+36, 0x000000);
@@ -143,28 +142,23 @@ public class GuiCalendar extends GuiScreen
         {
             if (guibutton.id == 0)
             {
-                //this.world.getWorldInfo().setWorldTime(TFC_Time.getTotalTicks() + (TFC_Time.dayLength/24));
                 ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength/24));
             }
             else if (guibutton.id == 1)
             {
-                //this.world.getWorldInfo().setWorldTime(TFC_Time.getTotalTicks() + TFC_Time.dayLength);
                 ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength));
             }
             else if (guibutton.id == 2)
             {
-                //this.world.getWorldInfo().setWorldTime(TFC_Time.getTotalTicks() + (TFC_Time.dayLength*7));
                 ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength*7));
             }
             else if (guibutton.id == 3)
             {
-                //this.world.getWorldInfo().setWorldTime(TFC_Time.getTotalTicks() + (TFC_Time.dayLength*30));
-                ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength*30));
+                ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength * TFC_Time.daysInMonth));
             }
             else if (guibutton.id == 4)
             {
-                //this.world.getWorldInfo().setWorldTime(TFC_Time.getTotalTicks() + (TFC_Time.dayLength*360));
-                ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength*360));
+                ModLoader.getMinecraftInstance().thePlayer.sendChatMessage("/time add " + (TFC_Time.dayLength * TFC_Time.daysInYear));
             }
 
         }

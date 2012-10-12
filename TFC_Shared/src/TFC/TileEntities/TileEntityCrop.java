@@ -36,6 +36,9 @@ public class TileEntityCrop extends NetworkTileEntity
 		Random R = new Random();
 		if(!worldObj.isRemote && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0)
 		{
+			float timeMultiplier = 360/TFC_Time.daysInYear;
+			
+			
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
 			long time = TFC_Time.getTotalTicks();
@@ -86,17 +89,16 @@ public class TileEntityCrop extends NetworkTileEntity
 				}
 
 				int nutriType = crop.cycleType;
-				int nutri = tef != null ? tef.nutrients[nutriType] : 85000;
+				int nutri = tef != null ? tef.nutrients[nutriType] : 18000;
 
-				float nutriMult = (float)nutri/100000 > 1 ? 1 : (float)nutri/100000;
+				float nutriMult = (0.5f + ((float)nutri >= 18000 ? 1 : (float)nutri/18000)*0.5f);
 
 				if(tef != null)
 				{
 					tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
-					tef.waterSaturation--;
 				}
 
-				float growthRate = (((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult;
+				float growthRate = ((((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult) * timeMultiplier;
 
 				int oldGrowth = (int) Math.floor(growth);
 
@@ -107,7 +109,7 @@ public class TileEntityCrop extends NetworkTileEntity
 					this.broadcastPacketInRange(createCropUpdatePacket());
 				}
 
-				if((crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2)) || (tef != null && tef.waterSaturation <= -1) || growth < 0)
+				if((crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2)) || growth < 0)
 				{
 					worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 					worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);

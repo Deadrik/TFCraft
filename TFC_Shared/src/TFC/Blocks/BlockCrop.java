@@ -95,17 +95,17 @@ public class BlockCrop extends BlockContainer
             type = te.cropId;
         }
 
-        if(meta == 0)
-        {
-            if(type == 4)
-                return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+2, k+1);
-        }
-        else if(meta == 1)
-        {
-            if(type == 4)
-                return AxisAlignedBB.getBoundingBox(i, j-1, k, i+1, j+1, k+1);
-        }
-        return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
+//        if(meta == 0)
+//        {
+//            if(type == 4)
+//                return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+2, k+1);
+//        }
+//        else if(meta == 1)
+//        {
+//            if(type == 4)
+//                return AxisAlignedBB.getBoundingBox(i, j-1, k, i+1, j+1, k+1);
+//        }
+        return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.3, k+1);
     }
 
     /**

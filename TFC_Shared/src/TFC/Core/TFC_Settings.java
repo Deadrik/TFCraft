@@ -20,15 +20,16 @@ public class TFC_Settings
 	public static boolean enableDebugMode;
 	public static boolean sendAllNBT;
 
-	public static boolean BlacksmithModeHeatScale;
-
 	public static int minimumRockLoad;
 	public static int initialCollapseRatio;
 	public static int propogateCollapseChance;
 	
 	public static int dayLength;
-	public static int leavesLOD;
-	public static boolean enableInventoryHeat;
+	public static int yearLength;
+	
+	//////////////////Features////////////////////
+	public static int RockLayer2Height = 110;
+	public static int RockLayer3Height = 55;
 
 	static
 	{
@@ -53,9 +54,7 @@ public class TFC_Settings
 		enableDebugMode = getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
 		sendAllNBT = getBooleanFor(config,"General","sendAllNBT",true, "Setting this to false can cause alot of issues when used in SMP. Leave this set to true to prevent issues.");
 		dayLength = getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days.");
-		enableInventoryHeat = getBooleanFor(config, "General","enableInventoryHeat",true,"Set this to false to turn off player inventory heat management. This stops items from cooling while in the player's inventory.");
-		//Metallurgy
-		BlacksmithModeHeatScale = getBooleanFor(config,"Metallurgy","BlacksmithModeHeatScale",true, "Set this to false if you are having a hard time and would like the old color scale for heating metals.");
+		yearLength = getIntFor(config,"General","yearLength",360, "This is how many days are in a year. Keep this to multiples of 12.");
 		//Caveins
 		minimumRockLoad = getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");

@@ -4,6 +4,8 @@ import net.minecraft.src.World;
 
 public class TFC_Time
 {
+	private static World worldObj;
+	
     public static String[] seasons = { "Early Spring","Spring","Late Spring", "Early Summer", "Summer", "Late Summer", "Early Autumn", "Autumn", "Late Autumn", "Early Winter", "Winter", "Late Winter"};
     public static String[] months  = { "March","April","May", "June", "July", "August", "September", "October", "November", "December", "January", "February"};
     public static String[] Days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -29,6 +31,11 @@ public class TFC_Time
     
     public static final long hourLength = TFC_Settings.dayLength/24;
     public static long dayLength = TFC_Settings.dayLength;
+    
+    public static int daysInYear = TFC_Settings.yearLength;
+    public static int daysInMonth = daysInYear/12;
+    public static long ticksInYear = daysInYear * dayLength;
+    
     
     
     public static void UpdateTime(World world)
@@ -68,7 +75,7 @@ public class TFC_Time
     public static int getDayOfMonth()
     {
         long month = totalMonths();
-        long days = 30*month;
+        long days = daysInMonth*month;
         long days2 = totalDays() - days;
         return 1+(int)days2;
     }
@@ -76,7 +83,7 @@ public class TFC_Time
     public static int getDayOfYear()
     {
         long year = getYear();
-        long years = (dayLength*360)*year;
+        long years = (ticksInYear)*year;
         long years2 = time - years;
         return (int) (years2/dayLength);
     }
@@ -84,15 +91,15 @@ public class TFC_Time
     public static int getDayOfYearFromTick(long tick)
     {
         long year = getYear();
-        long years = (tick / (dayLength*360));
+        long years = (tick / (ticksInYear));
         long years2 = tick - years;
         return (int) (years2/dayLength);
     }
     
     public static int getDayOfYearFromDays(long days)
     {
-        long years = (days / 360);
-        long years2 = days - (360 * years);
+        long years = (days / daysInYear);
+        long years2 = days - (daysInYear * years);
         return (int)years2;
     }
     
@@ -123,7 +130,7 @@ public class TFC_Time
     
     public static long totalMonths()
     {
-        return totalDays() / 30;
+        return totalDays() / daysInMonth;
     } 
     
     public static long totalYears()
@@ -175,15 +182,15 @@ public class TFC_Time
     public static int getMonthFromDayOfYear(int day)
     {
     	if(day < 0)
-    		day = 360 + day;
-    	return day / 30;
+    		day = daysInYear + day;
+    	return day / (daysInMonth);
     }
     
     public static int getDayOfMonthFromDayOfYear(int day)
     {
     	if(day < 0)
-    		day = 360 + day;
-    	return (day - ((int)Math.floor((day/30))*30));
+    		day = daysInYear + day;
+    	return (day - ((int)Math.floor((day/daysInMonth))*daysInMonth));
     }
     
     public static int getPrevMonth()

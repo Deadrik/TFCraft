@@ -105,7 +105,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         }
         else if (modelId == TFCBlocks.cropRenderId)
         {
-            return TFC_CoreRender.RenderCrop(block, i, j, k, renderer);
+            return RenderCrop.render(block, i, j, k, renderer);
         }
         else if (modelId == TFCBlocks.leavesRenderId)
         {
@@ -113,7 +113,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
             float var6 = (float)(var5 >> 16 & 255) / 255.0F;
             float var7 = (float)(var5 >> 8 & 255) / 255.0F;
             float var8 = (float)(var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderNewLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderer, ModLoader.getMinecraftInstance().isFancyGraphicsEnabled(), true);
+            return RenderLeaves.renderLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderer, ModLoader.getMinecraftInstance().isFancyGraphicsEnabled(), true);
         }
         else if (modelId == TFCBlocks.detailedRenderId)
         {
