@@ -91,8 +91,7 @@ public class ItemProPick extends ItemTerra
                 int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
                 oreArray.add(BlockOre3.getItemNameDamage(((BlockOre3)TFCBlocks.Ore3).damageDropped(meta)));
             }
-            //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);
-            
+            //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);          
             for (int i = -12; i < 12 && !isOre; i++)
             {
                 for (int j = -12; j < 12; j++)
