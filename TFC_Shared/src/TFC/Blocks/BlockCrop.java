@@ -5,6 +5,7 @@ import java.util.Random;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Core.TFC_Settings;
+import TFC.Items.ItemCustomScythe;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.WorldGen.TFCBiome;
@@ -46,6 +47,7 @@ public class BlockCrop extends BlockContainer
             {
                 System.out.println("Crop ID: " + te.cropId);
                 System.out.println("Growth: " + te.growth);
+                System.out.println("Est Growth: " + te.getEstimatedGrowth(crop));
             }
         }
         
@@ -54,16 +56,46 @@ public class BlockCrop extends BlockContainer
 
     public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
     {
-        player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
-        player.addExhaustion(0.025F);
+        ItemStack itemstack = player.inventory.getCurrentItem();
+        if(!world.isRemote && itemstack != null && itemstack.getItem() instanceof ItemCustomScythe)
+        {
+        	for(int x = -1; x < 2; x++)
+            {
+                for(int z = -1; z < 2; z++)
+                {
+                        if(world.getBlockId( i+x, j, k+z) == this.blockID && player.inventory.getStackInSlot(player.inventory.currentItem) != null)
+                        {
+                        	player.addStat(StatList.mineBlockStatArray[this.blockID], 1);
+                        	player.addExhaustion(0.045F);
+
+                        	//breakBlock(world, i+x, j, k+z, l, 0);
+                        	world.setBlock(i+x, j, k+z, 0);
+                            
+                            int ss = itemstack.stackSize;
+                            int dam = itemstack.getItemDamage()+2;
+                            
+                            if(dam >= itemstack.getItem().getMaxDamage())
+                            {
+                            	player.inventory.setInventorySlotContents(player.inventory.currentItem, 
+                                        null);
+                            }
+                            else
+                            {
+                            	player.inventory.setInventorySlotContents(player.inventory.currentItem, 
+                                    new ItemStack(itemstack.getItem(),ss,dam));
+                            }
+                        }
+                }
+            }
+        }
 
     }
     
     public void breakBlock(World world, int i, int j, int k, int l, int m) 
     {
-        TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
+    	TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
-        if(crop != null && te.growth >= crop.numGrowthStages)
+        if(crop != null && te.growth >= crop.numGrowthStages-1)
         {
             ItemStack is1 = crop.getOutput1();
             ItemStack is2 = crop.getOutput2();

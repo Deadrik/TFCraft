@@ -42,7 +42,6 @@ public class RenderCrop
             case 1://Wild Wheat
             {
                 byte index = (byte) (16 + stage);
-                
                 renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
                 break;
             }
@@ -63,23 +62,20 @@ public class RenderCrop
             case 6://Wild Barley
             {
                 byte index = (byte) (0 + stage);
-                
-                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k, renderblocks, index, mult, 1.0);
                 break;
             }
             case 7://Rye
             case 8://Wild Rye
             {
                 byte index = (byte) (32 + stage);
-                
-                renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
+                renderBlockCropsImpl(block, (double)i, (double)j, (double)k, renderblocks, index, mult, 1.0);
                 break;
             }
             case 9://Oat
             case 10://Wild Oat
             {
                 byte index = (byte) (48 + stage);
-                
                 renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
                 break;
             }
@@ -87,7 +83,6 @@ public class RenderCrop
             case 12://Wild Rice
             {
                 byte index = (byte) (64 + stage);
-                
                 renderBlockCropsImpl(block, (double)i, (double)j, (double)k,renderblocks, index, mult, 1.0);
                 break;
             }

@@ -251,9 +251,18 @@ public class TFC_CoreRender
         if(rockLayer1 != null)
         	renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(0, rockLayer1.data2);
 
-        block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
+        Random R = new Random(i*k+j);
+        
+        float xOffset = (R.nextInt(5) - 2) * 0.05f;
+        float zOffset = (R.nextInt(5) - 2) * 0.05f;
+        
+        float xOffset2 = (R.nextInt(5) - 2) * 0.05f;
+        float yOffset2 = (R.nextInt(5) - 2) * 0.05f;
+        float zOffset2 = (R.nextInt(5) - 2) * 0.05f;
+        
+        block.setBlockBounds(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
         renderblocks.renderStandardBlock(block, i, j, k);
-        block.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
+        block.setBlockBounds(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
 
 
         renderblocks.overrideBlockTexture = over;
