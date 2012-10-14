@@ -12,19 +12,19 @@ import net.minecraft.src.World;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 
-public class MapGenRiverRavine256TFC extends MapGenBase
+public class MapGenRiverRavine256TFC extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
 	
-	private byte[] metaArray;
+	private int[] metaArray;
 	
-	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, int[] id, int[] meta)
     {
 	    metaArray = meta;
 	    super.generate(par1IChunkProvider, par2World, par3, par4, id);
     }
 
-	protected void generateRavine(long par1, int xCoord, int zCoord, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
+	protected void generateRavine(long par1, int xCoord, int zCoord, int[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
 	{
 		Random var19 = new Random(par1);
 		double var20 = (double)(xCoord * 16 + 8);
@@ -176,7 +176,7 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 
 										if ((var59 * var59 + var45 * var45) * (double)this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
-											byte var52 = blockArray[var47];
+											int var52 = blockArray[var47];
 
 											if (var52 == TFCBlocks.Grass.blockID || var52 == TFCBlocks.Grass2.blockID)
 											{
@@ -238,7 +238,7 @@ public class MapGenRiverRavine256TFC extends MapGenBase
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	 protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
+	 protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, int[] par6ArrayOfByte)
 	{
 		if (this.rand.nextInt(400) == 0)
 		{

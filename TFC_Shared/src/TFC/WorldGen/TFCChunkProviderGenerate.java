@@ -107,13 +107,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		this.rand.setSeed((long)chunkX * 341873128712L + (long)chunkZ * 132897987541L);
 
-		byte[] ids = new byte[32768];
-		byte[] ids2 = new byte[32768];
-		byte[] meta = new byte[32768];
-		byte[] meta2 = new byte[32768];
+		int[] ids = new int[32768];
+		int[] ids2 = new int[32768];
+		int[] meta = new int[32768];
+		int[] meta2 = new int[32768];
 
-		byte[] ids3 = new byte[16*16*256];
-		byte[] meta3 = new byte[16*16*256];
+		int[] ids3 = new int[16*16*256];
+		int[] meta3 = new int[16*16*256];
 
 		this.generateTerrainHigh(chunkX, chunkZ, ids2);
 		
@@ -124,8 +124,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		evtLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
-		replaceBlocksForBiomeHigh(chunkX, chunkZ, ids2,meta2, rand, ids3, meta3);
-		replaceBlocksForBiomeLow(chunkX, chunkZ, ids,meta, rand, ids3, meta3);
+		replaceBlocksForBiomeHigh(chunkX, chunkZ, ids2, meta2, rand, ids3, meta3);
+		replaceBlocksForBiomeLow(chunkX, chunkZ, ids, meta, rand, ids3, meta3);
 
 
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
@@ -229,7 +229,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 	}
 
-	public void generateTerrainHigh(int par1, int par2, byte[] blockArray)
+	public void generateTerrainHigh(int par1, int par2, int[] blockArray)
 	{
 		byte var4 = 4;
 		byte var5 = 16;
@@ -452,7 +452,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		return par1ArrayOfDouble;
 	}
 
-	public void replaceBlocksForBiomeHigh(int par1, int par2, byte[] blockArray, byte[] metaArray, Random rand, byte[] blockArrayBig, byte[] metaArrayBig)
+	public void replaceBlocksForBiomeHigh(int par1, int par2, int[] blockArray, int[] metaArray, Random rand, int[] blockArrayBig, int[] metaArrayBig)
 	{
 		int var5 = 16;
 		double var6 = 0.03125D;
@@ -602,7 +602,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	}
 
 	private double[] layer2Noise = new double[256];
-	public void replaceBlocksForBiomeLow(int par1, int par2, byte[] blockArray, byte[] metaArray,  Random rand, byte[] blockArrayBig, byte[] metaArrayBig)
+	public void replaceBlocksForBiomeLow(int par1, int par2, int[] blockArray, int[] metaArray,  Random rand, int[] blockArrayBig, int[] metaArrayBig)
 	{
 		int var5 = 63;
 		double var6 = 0.03125D;

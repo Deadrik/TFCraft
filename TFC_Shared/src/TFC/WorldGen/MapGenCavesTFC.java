@@ -6,12 +6,11 @@ import TFC.Core.TFC_Core;
 
 import net.minecraft.src.*;
 
-public class MapGenCavesTFC extends MapGenBase
+public class MapGenCavesTFC extends MapGenBaseTFC
 {
-	
-	private byte[] metaArray;
+	private int[] metaArray;
     
-    public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+    public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, int[] id, int[] meta)
     {
         metaArray = meta;
         super.generate(par1IChunkProvider, par2World, par3, par4, id);
@@ -19,7 +18,7 @@ public class MapGenCavesTFC extends MapGenBase
     /**
      * Generates a larger initial cave node than usual. Called 25% of the time.
      */
-    protected void generateLargeCaveNode(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10)
+    protected void generateLargeCaveNode(long par1, int par3, int par4, int[] par5ArrayOfByte, double par6, double par8, double par10)
     {
         this.generateCaveNode(par1, par3, par4, par5ArrayOfByte, par6, par8, par10, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D, 2.5D);
     }
@@ -27,7 +26,7 @@ public class MapGenCavesTFC extends MapGenBase
     /**
      * Generates a node in the current cave system recursion tree.
      */
-    protected void generateCaveNode(long par1, int par3, int par4, byte[] idArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
+    protected void generateCaveNode(long par1, int par3, int par4, int[] idArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
     {
         double var19 = (double)(par3 * 16 + 8);
         double var21 = (double)(par4 * 16 + 8);
@@ -230,7 +229,7 @@ public class MapGenCavesTFC extends MapGenBase
     /**
      * Recursively called by generate() (generate) and optionally by itself.
      */
-    protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] ids)
+    protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, int[] ids)
     {
         int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
         

@@ -6,7 +6,7 @@ import net.minecraft.src.World;
 
 public class ChunkTFC extends Chunk
 {
-    public ChunkTFC(World world, byte[] ids, byte[] metadata, int chunkX, int chunkZ)
+    public ChunkTFC(World world, int[] ids, int[] metadata, int chunkX, int chunkZ)
     {
         super(world, chunkX, chunkZ);
         int height = ids.length / 256;
