@@ -119,6 +119,10 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);
         }
+//        else if (modelId == TFCBlocks.spawnMeterRenderId)
+//        {
+//            return RenderSpawnMeter.render(block, i, j, k, renderer);
+//        }
 		return false;
 	}
 
@@ -135,9 +139,13 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID,
-			RenderBlocks renderer) {
-		// TODO Auto-generated method stub
+	public void renderInventoryBlock(Block block, int metadata, int modelId,
+			RenderBlocks renderer) 
+	{
+//		if (modelId == TFCBlocks.spawnMeterRenderId)
+//        {
+//            RenderSpawnMeter.renderItem(block, metadata, renderer);
+//        }
 		
 	}
 

@@ -204,6 +204,11 @@ public class TFC_Time
     		return 11;
     	return month - 1;
     }
+    
+    public static float getYearRatio()
+    {
+    	return daysInYear / 360;
+    }
 
     
 }

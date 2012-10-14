@@ -3,6 +3,8 @@ package TFC.Entities;
 import java.util.Iterator;
 import java.util.List;
 
+import TFC.Core.TFC_Time;
+
 import net.minecraft.src.*;
 
 public class EntityAIFollowParentTFC extends EntityAIBase
@@ -132,7 +134,7 @@ public class EntityAIFollowParentTFC extends EntityAIBase
                 this.childAnimal.getNavigator().tryMoveToEntityLiving(this.parentAnimal, this.field_48248_c);
             }
             double var1 = this.childAnimal.getDistanceSqToEntity(childAnimal.parent);
-            float a = (this.childAnimal.getGrowingAge()/(this.childAnimal.adultAge * -24000F));
+            float a = (this.childAnimal.getGrowingAge()/(TFC_Time.getYearRatio() * this.childAnimal.adultAge * -24000F));
             if (parentAnimal instanceof EntityAnimalTFC){
                 if ((a >= 0.9F)&& var1 <= 3.0F && this.parentAnimal.getClass() == this.childAnimal.getClass() && this.childAnimal.hunger < 144000 && ((EntityAnimalTFC)this.parentAnimal).sex == 0){
                     this.childAnimal.hunger+=24000;

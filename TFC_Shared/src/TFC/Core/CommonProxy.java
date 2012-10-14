@@ -66,6 +66,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityDetailed.class, "Detailed");
 		
 		ModLoader.registerTileEntity(TileEntityToolRack.class, "ToolRack");
+		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
 		
 		if(b)
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");

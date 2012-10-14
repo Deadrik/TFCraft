@@ -1,9 +1,14 @@
 package TFC.Core;
 
+import java.util.List;
+
 import net.minecraft.src.Block;
+import net.minecraft.src.CraftingManager;
+import net.minecraft.src.IRecipe;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.ShapedRecipes;
 import net.minecraft.src.TFCBlocks;
 
 public class Recipes 
@@ -282,7 +287,7 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.BarleyGrain});
 		ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.OatGrain});
 		ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.RiceGrain});
-		
+
 		VanillaRecipes();
 	}
 	
@@ -328,6 +333,34 @@ public class Recipes
 			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExAxe});
 			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedAxe});
 			ModLoader.addRecipe(new ItemStack(Item.axeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMAxe});
+		}
+		else
+		{
+			RemoveRecipe(new ItemStack(Item.pickaxeWood,1));
+			RemoveRecipe(new ItemStack(Item.axeWood,1));
+			RemoveRecipe(new ItemStack(Item.shovelWood,1));
+			RemoveRecipe(new ItemStack(Item.hoeWood,1));
+			RemoveRecipe(new ItemStack(Item.swordWood,1));
+			RemoveRecipe(new ItemStack(Block.stoneOvenIdle,1));
+			RemoveRecipe(new ItemStack(Block.torchWood,4));
+			RemoveRecipe(new ItemStack(Item.stick,4));
+			RemoveRecipe(new ItemStack(Block.planks,4));
+		}
+	}
+	
+	public static void RemoveRecipe(ItemStack resultItem) {
+		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
+		for (int i = 0; i < recipes.size(); i++)
+		{
+			IRecipe tmpRecipe = recipes.get(i);
+			if (tmpRecipe instanceof ShapedRecipes) {
+				ShapedRecipes recipe = (ShapedRecipes)tmpRecipe;
+				ItemStack recipeResult = recipe.getRecipeOutput();
+
+				if (ItemStack.areItemStacksEqual(resultItem, recipeResult)) {
+					recipes.remove(i--);
+				}
+			}
 		}
 	}
 }

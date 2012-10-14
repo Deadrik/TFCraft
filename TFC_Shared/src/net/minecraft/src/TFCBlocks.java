@@ -43,6 +43,7 @@ public class TFCBlocks
 	public static int cookingPitRenderId;
 	public static int leavesRenderId;
 	public static int detailedRenderId;
+	public static int spawnMeterRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -114,6 +115,7 @@ public class TFCBlocks
 	public static Block WoodHoriz;
 	public static Block WoodHoriz2;
 	public static Block ToolRack;
+	public static Block SpawnMeter;
 	
 	static Configuration config;
 	
@@ -196,6 +198,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz2);
 		
 		GameRegistry.registerBlock(ToolRack, TFC.Items.ItemToolRack.class);
+		GameRegistry.registerBlock(SpawnMeter);
 
 	}
 	
@@ -345,7 +348,7 @@ public class TFCBlocks
 		WoodHoriz2 = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz2", 2020), 8).setBlockName("WoodHoriz2").setHardness(40).setResistance(15F);
 		
 		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setBlockName("ToolRack");
-		
+		SpawnMeter = new BlockSpawnMeter(TFC_Settings.getIntFor(config,"block","SpawnMeter", 2022)).setHardness(3F).setBlockName("SpawnMeter");
 		
 		
 		

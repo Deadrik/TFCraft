@@ -131,6 +131,7 @@ public class TerraFirmaCraft
 		// Register Packet Handler
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());
 
+		// Register all the render stuff for the client
 		proxy.registerRenderInformation();
 		
 		// Register the Chunk Data Load/Save Handler
@@ -139,22 +140,11 @@ public class TerraFirmaCraft
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
-
-		if(TFC_Settings.enableVanillaRecipes == false)
-		{
-			RemoveRecipe(new ItemStack(Item.pickaxeWood,1));
-			RemoveRecipe(new ItemStack(Item.axeWood,1));
-			RemoveRecipe(new ItemStack(Item.shovelWood,1));
-			RemoveRecipe(new ItemStack(Item.hoeWood,1));
-			RemoveRecipe(new ItemStack(Item.swordWood,1));
-			RemoveRecipe(new ItemStack(Block.stoneOvenIdle,1));
-			RemoveRecipe(new ItemStack(Block.torchWood,4));
-			RemoveRecipe(new ItemStack(Item.stick,4));
-			RemoveRecipe(new ItemStack(Block.planks,4));
-		}
-
 		//Register new Minecarts
 		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
+		
+		//Register our player tracker
+		GameRegistry.registerPlayerTracker(new PlayerTracker());
 
 	}
 
@@ -173,19 +163,5 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetSpawnProtectionCommand());
 	}
 
-	public static void RemoveRecipe(ItemStack resultItem) {
-		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
-		for (int i = 0; i < recipes.size(); i++)
-		{
-			IRecipe tmpRecipe = recipes.get(i);
-			if (tmpRecipe instanceof ShapedRecipes) {
-				ShapedRecipes recipe = (ShapedRecipes)tmpRecipe;
-				ItemStack recipeResult = recipe.getRecipeOutput();
-
-				if (ItemStack.areItemStacksEqual(resultItem, recipeResult)) {
-					recipes.remove(i--);
-				}
-			}
-		}
-	}
+	
 }

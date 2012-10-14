@@ -90,7 +90,7 @@ public class EntityDeer extends EntityAnimalTFC
     public void onLivingUpdate()
     {
         int g = getGrowingAge();
-        float t = (1.0F-(g/(-TFC_Settings.dayLength*adultAge)));
+        float t = (1.0F-(g/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
         setSize(0.9F*t,0.9F*t);
         if(g <= (-12000*adultAge)){
         	this.texture = "/mob/deer_fawn.png";
@@ -99,7 +99,7 @@ public class EntityDeer extends EntityAnimalTFC
         	this.texture = "/mob/deer.png";
         }
         if(pregnant){
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + TFC_Time.getYearRatio() * pregnancyTime * TFC_Settings.dayLength){
 				EntityDeer baby = new EntityDeer(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;

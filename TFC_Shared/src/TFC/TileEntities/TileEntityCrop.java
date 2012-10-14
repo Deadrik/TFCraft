@@ -92,7 +92,7 @@ public class TileEntityCrop extends NetworkTileEntity
 				int nutri = tef != null ? tef.nutrients[nutriType] : 18000;
 				float waterBoost = TFC.Blocks.BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.3f : 0;
 
-				float nutriMult = (0.2f + ((float)nutri >= 18000 ? 1 : (float)nutri/18000)*0.5f);
+				float nutriMult = (0.2f + ((float)nutri >= 18000 ? 1 : (float)nutri/18000) * 0.5f);
 
 				if(tef != null)
 				{

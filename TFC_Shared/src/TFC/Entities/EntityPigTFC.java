@@ -59,7 +59,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     public void onLivingUpdate ()
     {
         super.onLivingUpdate ();
-        float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
+        float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
         setSize(0.7F*t,0.7F*t);
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){

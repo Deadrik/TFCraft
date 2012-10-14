@@ -239,13 +239,13 @@ public class EntityAnimalTFC extends EntityAnimal
 				}
 			}
 		}
-		
-		if(TFC_Time.getTotalTicks() > (birthTime + adultAge*TFC_Settings.dayLength)){
-	          setGrowingAge(0);
-	          }
-	          else if (isChild()){
-	               setGrowingAge((int)(TFC_Time.getTotalTicks() - (birthTime + adultAge*TFC_Settings.dayLength)));
-	          }
+
+		if(TFC_Time.getTotalTicks() > (birthTime + TFC_Time.getYearRatio()*adultAge*TFC_Settings.dayLength)){
+			setGrowingAge(0);
+		}
+		else if (isChild()){
+			setGrowingAge((int)(TFC_Time.getTotalTicks() - (birthTime + TFC_Time.getYearRatio()*adultAge*TFC_Settings.dayLength)));
+		}
 	}
 
 	public void setInLove(boolean n){
@@ -290,9 +290,9 @@ public class EntityAnimalTFC extends EntityAnimal
 	}
 	@Override
 	public boolean isWheat(ItemStack par1ItemStack)
-    {
-        return par1ItemStack.itemID == TFCItems.WheatGrain.shiftedIndex || par1ItemStack.itemID == TFCItems.WildBarleyWhole.shiftedIndex ||par1ItemStack.itemID == TFCItems.WildOatWhole.shiftedIndex||par1ItemStack.itemID == TFCItems.WildRyeWhole.shiftedIndex;
-    }
+	{
+		return par1ItemStack.itemID == TFCItems.WheatGrain.shiftedIndex || par1ItemStack.itemID == TFCItems.WildBarleyWhole.shiftedIndex ||par1ItemStack.itemID == TFCItems.WildOatWhole.shiftedIndex||par1ItemStack.itemID == TFCItems.WildRyeWhole.shiftedIndex;
+	}
 
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
@@ -440,7 +440,8 @@ public class EntityAnimalTFC extends EntityAnimal
 		return 0;
 	}
 
-	public void mate(EntityAnimalTFC targetMate){
+	public void mate(EntityAnimalTFC targetMate)
+	{
 		if (sex == 0){
 			targetMate.mate(this);
 			return;
@@ -452,8 +453,9 @@ public class EntityAnimalTFC extends EntityAnimal
 		targetMate.resetInLove ();
 		mateSizeMod = targetMate.size_mod;
 	}
+
 	public void giveBirth (EntityAnimalTFC entityanimal){
-		entityanimal.setGrowingAge (-TFC_Settings.dayLength * entityanimal.adultAge);
+		entityanimal.setGrowingAge ((int) (TFC_Time.getYearRatio() * entityanimal.adultAge * -TFC_Settings.dayLength));
 		//System.out.println("yep");
 		//System.out.println(posX);
 		entityanimal.setLocationAndAngles (posX,posY,posZ, 0.0F, 0.0F);
@@ -464,11 +466,12 @@ public class EntityAnimalTFC extends EntityAnimal
 			mate.children.add(entityanimal);
 		}
 	}
-	 public void eatGrassBonus()
-	    {
-hunger+=24000;
 
-	    }
+	public void eatGrassBonus()
+	{
+		hunger+=24000;
+	}
+
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		if(!par1EntityPlayer.worldObj.isRemote){
