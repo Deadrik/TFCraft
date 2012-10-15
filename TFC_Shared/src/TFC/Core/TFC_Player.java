@@ -19,7 +19,7 @@ public class TFC_Player extends ServerPlayerBase
 	public int lastChunkZ;
 	
 	//Last time the spawn protection was updated
-	private long spawnProtectionTimer = 0;
+	private long spawnProtectionTimer = -1;
 
 	public TFC_Player(ServerPlayerAPI var1) {
 		super(var1);
@@ -49,7 +49,7 @@ public class TFC_Player extends ServerPlayerBase
 			{
 				ChunkDataManager.setLastVisted(lastChunkX, lastChunkZ);
 				//Reset the timer since we've entered a new chunk
-				spawnProtectionTimer = TFC_Time.getTotalTicks();
+				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
 
 			}
 		}
@@ -72,22 +72,22 @@ public class TFC_Player extends ServerPlayerBase
 	{
 		if(!this.player.worldObj.isRemote)
 		{
+			if(spawnProtectionTimer == -1)
+				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
 			
 			if (this.player.worldObj.difficultySetting == 0 && this.player.getHealthField() < this.getMaxHealth() && this.player.ticksExisted % 20 * 12 == 0)
 	        {
 	            this.heal(1);
 	        }
 			
-			if(spawnProtectionTimer + TFC_Time.hourLength < TFC_Time.getTotalTicks())
+			if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 			{
-				int t = (int) ((TFC_Time.getTotalTicks() - spawnProtectionTimer) / TFC_Time.hourLength);
-
 				//Add protection time to the chunks
 				for(int i = -1; i < 2; i++)
 				{
 					for(int k = -1; k < 2; k++)
 					{
-						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, 7 * t);
+						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, 6);
 					}
 				}
 				
@@ -119,7 +119,7 @@ public class TFC_Player extends ServerPlayerBase
         }
     }
 	
-	public int getMaxHealth()
+	public static int getMaxHealth()
     {
         return 100;
     }

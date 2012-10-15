@@ -43,7 +43,6 @@ public class TFCBlocks
 	public static int cookingPitRenderId;
 	public static int leavesRenderId;
 	public static int detailedRenderId;
-	public static int spawnMeterRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;

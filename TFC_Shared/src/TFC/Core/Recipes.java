@@ -20,11 +20,13 @@ public class Recipes
 	public static Item[] Saws;
 
 	public static Item[] Knives;
-	
+
 	public static Item[] MeltedMetal;
-	
-    public static Item[] Hammers;
-	
+
+	public static Item[] Hammers;
+
+	public static Item[] Gems;
+
 	public static void registerRecipes()
 	{
 		Item[] Ingots = {TFCItems.BismuthIngot, TFCItems.BismuthBronzeIngot,TFCItems.BlackBronzeIngot,
@@ -220,7 +222,7 @@ public class Recipes
 			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 10), new ItemStack(Recipes.Hammers[j], 1, -1)});
 			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 6), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, -1)});
 		}
-		
+
 		//Tool Rack
 		for(int j = 0; j < 16; j++)
 		{
@@ -288,9 +290,23 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.OatGrain});
 		ModLoader.addRecipe(new ItemStack(Item.bread, 1), new Object[] { "PPP", Character.valueOf('P'), TFCItems.RiceGrain});
 
+		for(int j = 0; j < Gems.length; j++)
+		{
+			for(int k = 0; k < 3; k++)
+			{
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
+					Character.valueOf('P'), TFCBlocks.StoneIgExSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Block.glass,1)});
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
+					Character.valueOf('P'), TFCBlocks.StoneIgInSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Block.glass,1)});
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
+					Character.valueOf('P'), TFCBlocks.StoneSedSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Block.glass,1)});
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.SpawnMeter, 1), new Object[] { "PPP","GKG","PPP", 
+					Character.valueOf('P'), TFCBlocks.StoneMMSmooth, Character.valueOf('K'), new ItemStack(Gems[j],1,0), Character.valueOf('G'), new ItemStack(Block.glass,1)});
+			}
+		}
 		VanillaRecipes();
 	}
-	
+
 	private static void VanillaRecipes()
 	{
 		if(TFC_Settings.enableVanillaDiamondRecipe == true)
@@ -347,7 +363,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Block.planks,4));
 		}
 	}
-	
+
 	public static void RemoveRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++)

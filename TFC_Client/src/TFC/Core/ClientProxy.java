@@ -108,7 +108,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.spawnMeterRenderId = RenderingRegistry.getNextAvailableRenderId(), new SpawnMeterRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
@@ -490,7 +489,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.coke.name", "Coke");
 		LR.addStringLocalization("item.flux.name", "Flux");
 
-		LR.addStringLocalization("tile.SpawnMeter.name", "Spawn Meter");
+		LR.addStringLocalization("tile.SpawnMeter.name", "Protection Meter");
 		
 		RegisterTerrain();
 		RegisterMetal();

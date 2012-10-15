@@ -13,21 +13,11 @@ public class BlockSpawnMeter extends BlockTerraContainer
 		this.setLightValue(0.25F);
 	}
 	
-	public int getRenderType()
-	{
-		return TFCBlocks.spawnMeterRenderId;
-	}
-	
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-	
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-	
+
 	@Override
 	public int damageDropped(int j) 
 	{
@@ -43,7 +33,7 @@ public class BlockSpawnMeter extends BlockTerraContainer
     public int getBlockTextureFromSideAndMetadata(int i, int j) 
     {
 		if(i < 2)
-			return blockIndexInTexture+4;
+			return blockIndexInTexture+9;
 		
 		return blockIndexInTexture+j;
     }

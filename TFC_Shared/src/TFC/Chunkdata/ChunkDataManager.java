@@ -55,7 +55,7 @@ public class ChunkDataManager
 			ChunkData d = (ChunkData) chunkmap.get(x + "," + z);
 			if(d != null)
 			{
-				if(d.spawnProtection < 4320)
+				if(d.spawnProtection < 24*TFC_Time.daysInMonth*6)
 					d.setSpawnProtectionWithUpdate(amount);
 				return true;
 			}

@@ -1,5 +1,6 @@
 package TFC.Handlers;
 
+import TFC.Core.TFC_Player;
 import TFC.Core.TFC_PlayerMP;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
@@ -10,8 +11,8 @@ public class PlayerTracker implements IPlayerTracker
 
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
-		TFC_PlayerMP playerMP = new TFC_PlayerMP((EntityPlayerMP) player);
-		player = playerMP;
+//		TFC_PlayerMP playerMP = new TFC_PlayerMP((EntityPlayerMP) player);
+//		player = playerMP;
 	}
 
 	@Override
@@ -28,9 +29,10 @@ public class PlayerTracker implements IPlayerTracker
 	@Override
 	public void onPlayerRespawn(EntityPlayer player) 
 	{
-		TFC_PlayerMP playerMP = new TFC_PlayerMP((EntityPlayerMP) player);
-		playerMP.setEntityHealth(playerMP.getMaxHealth());
-		player = playerMP;
+//		TFC_PlayerMP playerMP = new TFC_PlayerMP((EntityPlayerMP) player);
+//		playerMP.setEntityHealth(playerMP.getMaxHealth());
+//		player = playerMP;
+		player.setEntityHealth(TFC_Player.getMaxHealth());
 	}
 
 }

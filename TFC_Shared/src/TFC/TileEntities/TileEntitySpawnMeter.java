@@ -2,6 +2,7 @@ package TFC.TileEntities;
 
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Time;
+import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 
 public class TileEntitySpawnMeter extends TileEntity
@@ -20,18 +21,16 @@ public class TileEntitySpawnMeter extends TileEntity
 			if(timer < TFC_Time.getTotalTicks())
 			{
 				timer += TFC_Time.hourLength;
-				TFC.Chunkdata.ChunkData cd = ChunkDataManager.getData(xCoord, zCoord);
+				TFC.Chunkdata.ChunkData cd = ChunkDataManager.getData(xCoord >> 4, zCoord >> 4);
 				if(cd != null)
 				{
 					int protection = cd.spawnProtection;
-					if(protection <= 0)
-						worldObj.setBlockMetadata(xCoord, yCoord, zCoord, 0);
-					else if(protection > 0 && protection < 24)
-						worldObj.setBlockMetadata(xCoord, yCoord, zCoord, 1);
-					else if(protection >= 24 && protection < 168)
-						worldObj.setBlockMetadata(xCoord, yCoord, zCoord, 2);
-					else
-						worldObj.setBlockMetadata(xCoord, yCoord, zCoord, 3);
+					int meta = 0;
+					
+					meta = protection > 384 ? 8 : protection / 48;
+					
+					worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, TFCBlocks.SpawnMeter.blockID, meta);
+					worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
 				}
 			}
 		}
