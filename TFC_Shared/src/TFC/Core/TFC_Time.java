@@ -207,7 +207,7 @@ public class TFC_Time
     
     public static float getYearRatio()
     {
-    	return daysInYear / 360;
+    	return (float)daysInYear / 360f;
     }
 
     

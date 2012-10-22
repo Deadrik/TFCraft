@@ -101,7 +101,7 @@ public class GuiCalendar extends GuiScreen
 
         float temp = Math.round((TFC_Climate.getHeightAdjustedTemp((int) player.posX, (int) player.posY, (int) player.posZ)));
 
-        drawCenteredString(fontRenderer,"Temperature : " + (int)temp + "C", l + 87, i1+56, 0x000000);
+        //drawCenteredString(fontRenderer,"Temperature : " + (int)temp + "C", l + 87, i1+56, 0x000000);
         //drawCenteredString(fontRenderer,"Month : " + , l + 87, i1+36, 0x000000);
 
 
@@ -111,11 +111,11 @@ public class GuiCalendar extends GuiScreen
             hour = "The Witching Hour";
         else
             hour+=h;
-        drawCenteredString(fontRenderer,"Hour : " + hour, l + 87, i1+66, 0x000000);
-        drawCenteredString(fontRenderer,"EVT : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt((int) player.posX, (int) player.posZ).floatdata1, l + 87, i1+76, 0x000000);
+        drawCenteredString(fontRenderer,"Hour : " + hour, l + 87, i1+56, 0x000000);
+        //drawCenteredString(fontRenderer,"EVT : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt((int) player.posX, (int) player.posZ).floatdata1, l + 87, i1+76, 0x000000);
         
-        int rain = (int) TFC_Climate.getRainfall((int) player.posX,(int) player.posY, (int) player.posZ);
-        drawCenteredString(fontRenderer,"Rain : " + rain, l + 87, i1+86, 0x000000);
+        //int rain = (int) TFC_Climate.getRainfall((int) player.posX,(int) player.posY, (int) player.posZ);
+        //drawCenteredString(fontRenderer,"Rain : " + rain, l + 87, i1+86, 0x000000);
         
         for (int var6 = 0; var6 < this.controlList.size(); ++var6)
         {

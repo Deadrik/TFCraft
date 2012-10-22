@@ -17,11 +17,11 @@ import bioxx.importers.WavefrontObject;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.CommonProxy;
-import TFC.Core.PlayerManagerTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.*;
 import TFC.Enums.EnumTree;
 import TFC.GUI.*;
@@ -490,6 +490,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.flux.name", "Flux");
 
 		LR.addStringLocalization("tile.SpawnMeter.name", "Protection Meter");
+		LR.addStringLocalization("effect.bleed","Bleeding");
 		
 		RegisterTerrain();
 		RegisterMetal();

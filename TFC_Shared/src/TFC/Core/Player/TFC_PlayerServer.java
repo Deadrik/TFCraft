@@ -1,0 +1,251 @@
+package TFC.Core.Player;
+
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
+import TFC.Core.TFC_Time;
+import TFC.Food.FoodStatsTFC;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.Block;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityArrow;
+import net.minecraft.src.EntityDamageSource;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.FoodStats;
+import net.minecraft.src.ItemInWorldManager;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.ServerPlayerAPI;
+import net.minecraft.src.ServerPlayerBase;
+import net.minecraft.src.StepSound;
+import net.minecraft.src.World;
+import net.minecraftforge.common.ForgeHooks;
+
+public class TFC_PlayerServer extends ServerPlayerBase
+{
+	//Last Visited Chunk
+	public int lastChunkX;
+	public int lastChunkY;
+	public int lastChunkZ;
+	
+	//Last time the spawn protection was updated
+	private long spawnProtectionTimer = -1;
+	
+	private FoodStatsTFC foodstats;
+	private FoodStats oldFood;
+
+	public TFC_PlayerServer(ServerPlayerAPI var1) {
+		super(var1);
+		foodstats = new FoodStatsTFC();
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, int dam)
+    {
+        if (this.player.getInitialInvulnerabilityField() > 0)
+        {
+            return false;
+        }
+        else
+        {
+        	int damage = dam;
+            if (!this.player.mcServer.isPVPEnabled() && source instanceof EntityDamageSource)
+            {
+                Entity var3 = source.getEntity();
+
+                if (var3 instanceof EntityPlayer)
+                {
+                    return false;
+                }
+
+                if (var3 instanceof EntityArrow)
+                {
+                    EntityArrow var4 = (EntityArrow)var3;
+
+                    if (var4.shootingEntity instanceof EntityPlayer)
+                    {
+                        return false;
+                    }
+                }
+            }
+            if(source == DamageSource.drown)
+            {
+            	damage = 50;
+            }
+            else if(source == DamageSource.lava)
+            {
+            	damage = 100;
+            }
+
+            return super.attackEntityFrom(source, damage);
+        }
+    }
+
+	@Override
+	public void beforeMoveEntity(double x, double y, double z) 
+	{
+		if(!this.player.worldObj.isRemote)
+		{
+			lastChunkX = (int)player.posX >> 4;
+			lastChunkY = (int)player.posY >> 4;
+			lastChunkZ = (int)player.posZ >> 4;
+		}
+	}
+
+	@Override
+	public void afterMoveEntity(double x, double y, double z) 
+	{
+		if(!this.player.worldObj.isRemote)
+		{
+			int currentChunkX = (int)player.posX >> 4;
+			int currentChunkY = (int)player.posY >> 4;
+			int currentChunkZ = (int)player.posZ >> 4;
+
+			if(currentChunkX != lastChunkX || currentChunkZ != lastChunkZ)
+			{
+				ChunkDataManager.setLastVisted(lastChunkX, lastChunkZ);
+				//Reset the timer since we've entered a new chunk
+				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
+
+			}
+		}
+	}
+	
+	@Override
+	public void afterLocalConstructing(MinecraftServer var1, World var2, String var3, ItemInWorldManager var4) 
+	{
+		//this.player.setFoodStatsField(new FoodStatsTFC());
+		if(this.player.getHealth() == 20)
+			this.player.setHealthField(this.getMaxHealth());
+	}
+	
+	@Override
+	public void beforeOnLivingUpdate() 
+	{
+		oldFood = this.player.getFoodStats();
+		if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.5f)
+		{
+			if(this.player.isSprinting())
+			{
+				this.player.setSprinting(false);
+			}
+		}
+	}
+
+	@Override
+	public void afterOnLivingUpdate() 
+	{
+		this.player.setFoodStatsField(oldFood);
+		if(!this.player.worldObj.isRemote)
+		{
+			if(spawnProtectionTimer == -1)
+				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
+			
+			if (this.player.worldObj.difficultySetting == 0 && shouldHeal(this.player) && this.player.ticksExisted % 20 * 12 == 0)
+	        {
+	            this.heal(1);
+	        }
+			
+			if(spawnProtectionTimer < TFC_Time.getTotalTicks())
+			{
+				//Add protection time to the chunks
+				for(int i = -1; i < 2; i++)
+				{
+					for(int k = -1; k < 2; k++)
+					{
+						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, 6);
+					}
+				}
+				
+				spawnProtectionTimer += TFC_Time.hourLength;
+			}
+			
+			this.foodstats.onUpdate(player);
+		}
+	}
+	
+	public static boolean shouldHeal(EntityPlayer player)
+    {
+		int health = player.getHealth();
+        return health > 0 && health < getMaxHealth();
+    }
+	
+	@Override
+	public void heal(int var1)
+    {
+		int health = this.player.getHealthField();
+		if (health > 0)
+        {
+            this.player.setHealthField(health + var1);
+
+            if (this.player.getHealthField() > this.getMaxHealth())
+            {
+            	this.player.setHealthField(getMaxHealth());
+            }
+
+            this.player.hurtResistantTime = this.player.maxHurtResistantTime / 2;
+        }
+    }
+	
+	public static int getMaxHealth()
+    {
+        return 1000;
+    }
+	
+	public FoodStatsTFC getFoodStatsTFC()
+	{
+		return this.foodstats;
+	}
+	
+	public void fall(float fallDistance)
+    {
+		fallDistance = ForgeHooks.onLivingFall(this.player, fallDistance);
+        if (fallDistance <= 0)
+        {
+            return;
+        }
+
+        int var2 = MathHelper.ceiling_float_int(fallDistance - 3.0F);
+
+        //Play the falling sounds
+        if (var2 > 0)
+        {
+            if (var2 > 4)
+            {
+                this.player.worldObj.playSoundAtEntity(this.player, "damage.fallbig", 1.0F, 1.0F);
+            }
+            else
+            {
+            	this.player.worldObj.playSoundAtEntity(this.player, "damage.fallsmall", 1.0F, 1.0F);
+            }
+
+            //this.attackEntityFrom(DamageSource.fall, var2);
+            int var3 = this.player.worldObj.getBlockId(MathHelper.floor_double(this.player.posX), MathHelper.floor_double(this.player.posY - 0.20000000298023224D - (double)this.player.yOffset), MathHelper.floor_double(this.player.posZ));
+
+            if (var3 > 0)
+            {
+                StepSound var4 = Block.blocksList[var3].stepSound;
+                this.player.worldObj.playSoundAtEntity(this.player, var4.getStepSound(), var4.getVolume() * 0.5F, var4.getPitch() * 0.75F);
+            }
+        }
+        
+        //Deal the damage and apply status effects
+        
+    }
+	
+	@Override
+	public void beforeReadEntityFromNBT(NBTTagCompound var1) 
+	{
+		if (!var1.hasKey("Health"))
+        {
+			this.player.setHealthField(getMaxHealth());
+        }
+		this.foodstats.readNBT(var1);
+	}
+	
+	@Override
+	public void beforeWriteEntityToNBT(NBTTagCompound var1) 
+	{
+		this.foodstats.writeNBT(var1);
+	}
+}

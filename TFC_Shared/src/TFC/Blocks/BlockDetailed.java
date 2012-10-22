@@ -3,6 +3,8 @@ package TFC.Blocks;
 import java.util.ArrayList;
 
 import TFC.Core.*;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;

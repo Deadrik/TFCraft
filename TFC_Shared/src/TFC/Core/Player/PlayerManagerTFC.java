@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Core.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,16 @@ public class PlayerManagerTFC
         for(PlayerInfo pi : Players)
         {
             if(pi.Name.equals(player.username))
+                return pi;
+        }
+        return null;
+    }
+    
+    public PlayerInfo getPlayerInfoFromName(String name)
+    {
+        for(PlayerInfo pi : Players)
+        {
+            if(pi.Name.equals(name))
                 return pi;
         }
         return null;

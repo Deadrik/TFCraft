@@ -28,13 +28,17 @@ public class ClientTickHandler implements ITickHandler
 			EntityPlayer player = (EntityPlayer)tickData[0];
 			World world = player.worldObj;
 
-			//			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory)
+			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory)
+			{
+				player.openGui(TerraFirmaCraft.instance, 31, player.worldObj, 0, 0, 0);
+			}
+			//			if(FMLClientHandler.instance().getClient().inGameHasFocus)
 			//			{
-			//				player.openGui(TerraFirmaCraft.instance, 27, player.worldObj, 0, 0, 0);
+			//				player.openGui(TerraFirmaCraft.instance, 30, player.worldObj, 0, 0, 0);
 			//			}
 
-				//Allow the client to increment time
-				TFC_Time.UpdateTime(world);
+			//Allow the client to increment time
+			TFC_Time.UpdateTime(world);
 
 		}
 	}

@@ -1,9 +1,10 @@
-package TFC.Handlers;
+package TFC.Core.Player;
 
-import TFC.Core.TFC_Player;
-import TFC.Core.TFC_PlayerMP;
+import TFC.Food.TFCPotion;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.Potion;
+import net.minecraft.src.PotionEffect;
 import cpw.mods.fml.common.IPlayerTracker;
 
 public class PlayerTracker implements IPlayerTracker
@@ -11,8 +12,6 @@ public class PlayerTracker implements IPlayerTracker
 
 	@Override
 	public void onPlayerLogin(EntityPlayer player) {
-//		TFC_PlayerMP playerMP = new TFC_PlayerMP((EntityPlayerMP) player);
-//		player = playerMP;
 	}
 
 	@Override
@@ -29,10 +28,9 @@ public class PlayerTracker implements IPlayerTracker
 	@Override
 	public void onPlayerRespawn(EntityPlayer player) 
 	{
-//		TFC_PlayerMP playerMP = new TFC_PlayerMP((EntityPlayerMP) player);
-//		playerMP.setEntityHealth(playerMP.getMaxHealth());
-//		player = playerMP;
-		player.setEntityHealth(TFC_Player.getMaxHealth());
+		player.setEntityHealth(TFC_PlayerServer.getMaxHealth());
+		player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*60, 1));
+		player.addPotionEffect(new PotionEffect(TFCPotion.bleed.id, 20*60, 1));
 	}
 
 }

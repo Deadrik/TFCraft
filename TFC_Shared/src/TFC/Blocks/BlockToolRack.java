@@ -7,8 +7,10 @@ import cpw.mods.fml.common.asm.SideOnly;
 import TFC.Items.ItemProPick;
 import TFC.Items.ItemWeapon;
 import TFC.TileEntities.TileEntityToolRack;
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.Entity;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
@@ -22,7 +24,6 @@ import net.minecraft.src.World;
 
 public class BlockToolRack extends BlockContainer
 {
-
 	public BlockToolRack(int par1)
 	{
 		super(par1, Material.wood);
@@ -41,6 +42,20 @@ public class BlockToolRack extends BlockContainer
 	{
 		return false;
 	}
+	
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+        return true;
+    }
+	
+	/**
+     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+     * cleared to be reused)
+     */
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        return null;
+    }
 
 	public boolean renderAsNormalBlock()
 	{

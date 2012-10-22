@@ -89,7 +89,10 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
             this.sheepTimer = Math.max(0, this.sheepTimer - 1);
         }
         
-        float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+        float negDay = -TFC_Settings.dayLength;
+        float ratio = TFC_Time.getYearRatio();
+        float t = (1.0F-(getGrowingAge()/(ratio * adultAge * negDay)));
+        //float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
         setSize(0.9F*t,0.9F*t);
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
@@ -107,7 +110,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
 
     public int getMaxHealth()
     {
-        return 8;
+        return 400;
     }
 
     protected void entityInit()

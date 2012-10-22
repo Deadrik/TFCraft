@@ -42,7 +42,11 @@ import TFC.*;
 import TFC.Blocks.*;
 import TFC.Commands.*;
 import TFC.Core.*;
+import TFC.Core.Player.PlayerTracker;
+import TFC.Core.Player.TFC_PlayerClient;
+import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.*;
+import TFC.Food.TFCPotion;
 import TFC.Handlers.*;
 import TFC.Items.*;
 import TFC.TileEntities.*;
@@ -145,13 +149,17 @@ public class TerraFirmaCraft
 		
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
+		
+		//Setup custom potion effects
+		TFCPotion.Setup();
 
 	}
 
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
-		ServerPlayerAPI.register("TFC Player", TFC_Player.class);
+		ServerPlayerAPI.register("TFC Player Server", TFC_PlayerServer.class);
+		PlayerAPI.register("TFC Player Client", TFC_PlayerClient.class);
 	}
 
 	@ServerStarting

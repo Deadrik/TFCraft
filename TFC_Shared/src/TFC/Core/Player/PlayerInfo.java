@@ -1,8 +1,9 @@
-package TFC.Core;
+package TFC.Core.Player;
 
 import TFC.Items.ItemChisel;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NetworkManager;
+import net.minecraft.src.ServerPlayerBase;
 
 public class PlayerInfo
 {
@@ -23,4 +24,5 @@ public class PlayerInfo
     {
         ChiselMode = ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 /*: ChiselMode == 2 ? 3*/ : 0;
     }
+
 }

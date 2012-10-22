@@ -3,6 +3,8 @@ package TFC.Core;
 import java.io.File;
 import java.util.Map;
 
+import net.minecraft.src.Container;
+import net.minecraft.src.ContainerPlayer;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.IInventory;
@@ -18,9 +20,12 @@ import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetTreesCommand;
 import TFC.Containers.*;
 import TFC.Core.*;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.*;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
+import TFC.GUI.GuiHUD;
+import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiTerraAnvil;
 import TFC.GUI.GuiTerraBloomery;
@@ -309,6 +314,10 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerChestTFC(player.inventory, (TileEntityChestTFC) te, world, x, y, z);
 		}
+		case 31:
+		{
+			return new ContainerPlayer(player.inventory);
+		}
 		default:
 		{
 			return null;
@@ -379,6 +388,14 @@ public class CommonProxy implements IGuiHandler
 		case 29:
 		{
 			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
+		}
+		case 30:
+		{
+			return new GuiHUD(ModLoader.getMinecraftInstance());
+		}
+		case 31:
+		{
+			return new GuiInventoryTFC(player);
 		}
 
 		}

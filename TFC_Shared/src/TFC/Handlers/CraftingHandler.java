@@ -1,10 +1,10 @@
 package TFC.Handlers;
 
-import TFC.Core.PlayerInfo;
-import TFC.Core.PlayerManagerTFC;
 import TFC.Core.Recipes;
 import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemTerraFood;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;

@@ -13,10 +13,13 @@ import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
-import TFC.Core.PlayerInfo;
-import TFC.Core.PlayerManagerTFC;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Player.TFC_PlayerClient;
+import TFC.Core.Player.TFC_PlayerServer;
+import TFC.GUI.GuiHUD;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
@@ -26,19 +29,7 @@ import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.NetHandler;
-import net.minecraft.src.NetLoginHandler;
-import net.minecraft.src.NetServerHandler;
-import net.minecraft.src.NetworkManager;
-import net.minecraft.src.Packet;
-import net.minecraft.src.Packet1Login;
-import net.minecraft.src.Packet250CustomPayload;
-import net.minecraft.src.TcpConnection;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
+import net.minecraft.src.*;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
@@ -54,6 +45,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			NetworkManager manager, Packet1Login login) 
 	{
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(clientHandler.getPlayer().username, manager));
+		ModLoader.getMinecraftInstance().ingameGUI = new GuiHUD(ModLoader.getMinecraftInstance());
 	}
 
 
@@ -65,6 +57,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
 		EntityPlayer player = (EntityPlayer)p;
+		TFC_PlayerServer playerserver = ((TFC.Core.Player.TFC_PlayerServer)((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server"));
 		World world= player.worldObj;
 
 		if(!world.isRemote)
@@ -75,6 +68,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeLong(world.getSeed());
 				dos.writeLong(TFC_Time.dayLength);
 				dos.writeInt(TFC_Time.daysInYear);
+				dos.writeInt(playerserver.getFoodStatsTFC().foodLevel);
+				dos.writeInt(playerserver.getFoodStatsTFC().waterLevel);
 			} 
 			catch (IOException e)
 			{
@@ -97,7 +92,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			Packet250CustomPayload packet, Player p)
 	{
 		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(packet.data));
-
+		
 		byte type = 0;
 		int x = 0;
 		int y = 0;
@@ -106,7 +101,17 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			type = dis.readByte();
 
 			EntityPlayer player = (EntityPlayer)p;
+			TFC_PlayerClient playerClient = null;
+			TFC_PlayerServer playerServer = null;;
 			World world= player.worldObj;
+			if(world.isRemote)
+			{
+				playerClient = (TFC_PlayerClient)((EntityPlayerSP)player).getPlayerBase("TFC Player Client");
+			}
+			else
+			{	
+				playerServer = (TFC_PlayerServer)((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
+			}
 
 			if(type == Packet_Init_Block_Client)//Client recieves the init packet from the server and assigns the data
 			{
@@ -188,6 +193,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						seed = dis.readLong();
 						TFC_Time.dayLength = dis.readLong();
 						TFC_Time.daysInYear = dis.readInt();
+						playerClient.getFoodStatsTFC().foodLevel = dis.readInt();
+						playerClient.getFoodStatsTFC().waterLevel = dis.readInt();
 
 					} catch (IOException e) 
 					{

@@ -9,7 +9,7 @@ import net.minecraft.src.*;
 public class ItemFruitTreeSapling extends ItemTerra
 {
     
-    String[] Names = {"Red Apple","Banana","Green Apple","Orange","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
+    String[] Names = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
     int offset;
 
     public ItemFruitTreeSapling(int id, String tex, int off)

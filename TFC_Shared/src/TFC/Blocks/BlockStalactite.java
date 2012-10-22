@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.Core.Helper;
-import TFC.Core.PlayerInfo;
-import TFC.Core.PlayerManagerTFC;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityPartial;

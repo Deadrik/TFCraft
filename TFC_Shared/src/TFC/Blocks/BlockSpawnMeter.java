@@ -10,12 +10,18 @@ public class BlockSpawnMeter extends BlockTerraContainer
 		super(par1, Material.rock);
 		this.blockIndexInTexture = 48;
 		this.setCreativeTab(CreativeTabs.tabDecorations);
-		this.setLightValue(0.25F);
+		this.setLightValue(1F);
 	}
+	
+	public int getLightValue(IBlockAccess world, int x, int y, int z) 
+    {
+		int meta = world.getBlockMetadata(x, y, z);
+        return Math.min(meta, 8);
+    }
 	
 	public boolean isOpaqueCube()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -23,11 +29,6 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	{
 		return j;
 	}
-	
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {  
-		
-    }
 
 	@Override
     public int getBlockTextureFromSideAndMetadata(int i, int j) 
