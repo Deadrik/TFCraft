@@ -34,6 +34,7 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Handles the food game logic.
 	 */
+	@Override
 	public void onUpdate(EntityPlayer player)
 	{
 		int difficulty = player.worldObj.difficultySetting;
@@ -105,12 +106,14 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Get the player's food level.
 	 */
+	@Override
 	public int getFoodLevel()
 	{
 		return this.foodLevel;
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public int getPrevFoodLevel()
 	{
 		return this.prevFoodLevel;
@@ -119,6 +122,7 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * If foodLevel is not max.
 	 */
+	@Override
 	public boolean needFood()
 	{
 		return this.foodLevel < 100;
@@ -127,6 +131,7 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Reads food stats from an NBT object.
 	 */
+	@Override
 	public void readNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		if (par1NBTTagCompound.hasKey("foodCompound"))
@@ -143,6 +148,7 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Writes food stats to an NBT object.
 	 */
+	@Override
 	public void writeNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		NBTTagCompound foodCompound = new NBTTagCompound();
@@ -157,6 +163,7 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * adds input to foodExhaustionLevel to a max of 40
 	 */
+	@Override
 	public void addExhaustion(float par1)
 	{
 		this.foodExhaustionLevel = Math.min(this.foodExhaustionLevel + par1, 40.0F);
@@ -165,20 +172,42 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Get the player's food saturation level.
 	 */
+	@Override
 	public float getSaturationLevel()
 	{
 		return this.foodSaturationLevel;
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void setFoodLevel(int par1)
 	{
 		this.foodLevel = par1;
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void setFoodSaturationLevel(float par1)
 	{
 		this.foodSaturationLevel = par1;
 	}
+	
+	/**
+     * Args: int foodLevel, float foodSaturationModifier
+     */
+	@Override
+    public void addStats(int par1, float par2)
+    {
+        this.foodLevel = Math.min(par1 + this.foodLevel, 20);
+        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 * par2 * 2.0F, (float)this.foodLevel);
+    }
+
+    /**
+     * Eat some food.
+     */
+	@Override
+    public void addStats(ItemFood par1ItemFood)
+    {
+        this.addStats(par1ItemFood.getHealAmount(), par1ItemFood.getSaturationModifier());
+    }
 }

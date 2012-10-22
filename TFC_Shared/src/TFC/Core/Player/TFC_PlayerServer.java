@@ -1,9 +1,14 @@
 package TFC.Core.Player;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Time;
 import TFC.Food.FoodStatsTFC;
+import TFC.Handlers.PacketHandler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.Block;
 import net.minecraft.src.DamageSource;
@@ -15,6 +20,9 @@ import net.minecraft.src.FoodStats;
 import net.minecraft.src.ItemInWorldManager;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.Packet;
+import net.minecraft.src.Packet250CustomPayload;
+import net.minecraft.src.Packet8UpdateHealth;
 import net.minecraft.src.ServerPlayerAPI;
 import net.minecraft.src.ServerPlayerBase;
 import net.minecraft.src.StepSound;
@@ -115,7 +123,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	public void afterLocalConstructing(MinecraftServer var1, World var2, String var3, ItemInWorldManager var4) 
 	{
 		//this.player.setFoodStatsField(new FoodStatsTFC());
-		if(this.player.getHealth() == 20)
+		if(this.player.getHealth() == 20 && this.player.ticksExisted == 0)
 			this.player.setHealthField(this.getMaxHealth());
 	}
 	
@@ -123,7 +131,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	public void beforeOnLivingUpdate() 
 	{
 		oldFood = this.player.getFoodStats();
-		if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.5f)
+		if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.25f)
 		{
 			if(this.player.isSprinting())
 			{
@@ -161,6 +169,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 			}
 			
 			this.foodstats.onUpdate(player);
+			this.player.playerNetServerHandler.sendPacketToPlayer(getStatusPacket());
 		}
 	}
 	
@@ -247,5 +256,29 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	public void beforeWriteEntityToNBT(NBTTagCompound var1) 
 	{
 		this.foodstats.writeNBT(var1);
+	}
+	
+	private Packet getStatusPacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+		Packet250CustomPayload pkt=new Packet250CustomPayload();
+		try 
+		{
+			//The packet type sent determines who is expected to process this packet, the client or the server.
+			dos.writeByte(PacketHandler.Packet_Player_Status);
+			dos.writeInt(this.foodstats.foodLevel);
+			dos.writeInt(this.foodstats.waterLevel);
+			
+			pkt.channel="TerraFirmaCraft";
+			pkt.data = bos.toByteArray();
+			pkt.length= pkt.data.length;
+			pkt.isChunkDataPacket=false;
+		} 
+		catch (IOException e) 
+		{
+
+		}
+		return pkt;
 	}
 }

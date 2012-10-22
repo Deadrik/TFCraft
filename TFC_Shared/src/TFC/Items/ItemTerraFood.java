@@ -4,9 +4,12 @@ import java.util.List;
 
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Player.TFC_PlayerServer;
 
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
@@ -80,6 +83,18 @@ public class ItemTerraFood extends ItemFood
             	TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
             }
         }
+    }
+	
+	@Override
+	public ItemStack onFoodEaten(ItemStack is, World world, EntityPlayer player)
+    {
+        --is.stackSize;
+        TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
+        playerServer.getFoodStatsTFC().addStats(this);
+        player.getFoodStats().addStats(this);
+        world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+        this.func_77849_c(is, world, player);
+        return is;
     }
 	
 	public boolean getShareTag()

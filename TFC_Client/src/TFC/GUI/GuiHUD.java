@@ -148,15 +148,15 @@ public class GuiHUD extends GuiIngame
 				//Draw Health
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/bioxx/icons.png"));
-				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 0, 90, 10);
+				this.drawTexturedModalRect(scaledWidth / 2-91, healthRowHeight, 0, 0, 90, 10);
 				float maxHealth = playerclient.getMaxHealth();
 				float percentHealth = (float)this.mc.thePlayer.getHealth()/maxHealth;
-				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
+				this.drawTexturedModalRect(scaledWidth / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
-				String h = String.valueOf(this.mc.thePlayer.getHealth());
-				this.drawCenteredString(fontRenderer, h, scaledWidth / 2 + 45, healthRowHeight+1, 0xFFFFFF);
+				//String h = String.valueOf(this.mc.thePlayer.getHealth());
+				//this.drawCenteredString(fontRenderer, h, scaledWidth / 2 + 45, healthRowHeight+1, 0xFFFFFF);
 
-				//DrawFood
+				//Draw Food and Water
 				FoodStatsTFC foodstats = playerclient.getFoodStatsTFC();
 				foodLevel = foodstats.getFoodLevel();
 				preFoodLevel = foodstats.getPrevFoodLevel();
@@ -168,10 +168,10 @@ public class GuiHUD extends GuiIngame
 
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/bioxx/icons.png"));
-				this.drawTexturedModalRect(scaledWidth / 2 - 91, healthRowHeight, 0, 18, 90, 5);
-				this.drawTexturedModalRect(scaledWidth / 2 - 91, healthRowHeight, 0, 23, (int) (90*percentFood), 5);
-				this.drawTexturedModalRect(scaledWidth / 2 - 91, healthRowHeight+5, 0, 28, 90, 5);
-				this.drawTexturedModalRect(scaledWidth / 2 - 91, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
+				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 18, 90, 5);
+				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 23, (int) (90*percentFood), 5);
+				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight+5, 0, 28, 90, 5);
+				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
 			}
 
 

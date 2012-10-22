@@ -6,6 +6,7 @@ import java.util.Map;
 import net.minecraft.src.Container;
 import net.minecraft.src.ContainerPlayer;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
@@ -254,9 +255,9 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
 	}
 	
-	public void sendCustomPacketToPlayer(EntityPlayer player, Packet packet)
+	public void sendCustomPacketToPlayer(EntityPlayerMP player, Packet packet)
 	{ 
-		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendToAllNear(player.posX, player.posY, player.posZ, 5, 0, packet);
+		player.playerNetServerHandler.sendPacketToPlayer(packet);
 	}
 	
 	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)

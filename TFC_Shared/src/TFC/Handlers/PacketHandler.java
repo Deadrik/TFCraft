@@ -39,6 +39,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public static final byte Packet_Init_World_Client = 3;
 	public static final byte Packet_Data_Client = 4;
 	public static final byte Packet_Data_Server = 5;
+	public static final byte Packet_Player_Status = 6;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -158,7 +159,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					pkt.length=bos.size();
 					pkt.isChunkDataPacket=false;
 
-					TerraFirmaCraft.proxy.sendCustomPacketToPlayer(player, pkt);
+					TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP) player, pkt);
 				}
 			}
 			else if(type == Packet_Keypress_Server)
@@ -227,6 +228,18 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
 					if(te!= null)
 						te.handleDataPacketServer(dis);
+				}
+			}
+			else if (type == Packet_Player_Status)
+			{
+				if(world.isRemote)
+				{
+					try 
+					{
+						playerClient.getFoodStatsTFC().foodLevel = dis.readInt();
+						playerClient.getFoodStatsTFC().waterLevel = dis.readInt();
+
+					} catch (IOException e) {}
 				}
 			}
 		} catch (Exception e) 
