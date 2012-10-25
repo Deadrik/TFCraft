@@ -87,7 +87,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	 * Used to store the 5x5 parabolic field that is used during terrain generation.
 	 */
 	float[] parabolicField;
-	int[][] field_73219_j = new int[32][32];
+	
+	int[] heightMap = new int[256];
+	
 
 	public TFCChunkProviderGenerate(World par1World, long par2, boolean par4) {
 		super(par1World, par2, par4);
@@ -124,6 +126,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		evtLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadEVTLayerGeneratorData(evtLayer, chunkX * 16, chunkZ * 16, 16, 16);
 		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
+		heightMap = new int[256];
 		replaceBlocksForBiomeHigh(chunkX, chunkZ, ids2, meta2, rand, ids3, meta3);
 		replaceBlocksForBiomeLow(chunkX, chunkZ, ids, meta, rand, ids3, meta3);
 
@@ -462,15 +465,16 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
-				BiomeGenBase biomegenbase = biomesForGeneration[xCoord + zCoord * 16];
-				DataLayer rock1 = rockLayer1[xCoord + zCoord * 16];
-				rock1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(par1 * 16 + xCoord, par2 * 16 + zCoord, 0);
-				DataLayer rock2 = rockLayer2[xCoord + zCoord * 16];
-				DataLayer rock3 = rockLayer3[xCoord + zCoord * 16];
-				DataLayer evt = evtLayer[zCoord + xCoord * 16];
-				DataLayer rainfall = rainfallLayer[zCoord + xCoord * 16];
+				int arrayIndex = xCoord + zCoord * 16;
+				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndex];
+				DataLayer rock1 = rockLayer1[arrayIndex];
+				//rock1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(par1 * 16 + xCoord, par2 * 16 + zCoord, 0);
+				DataLayer rock2 = rockLayer2[arrayIndex];
+				DataLayer rock3 = rockLayer3[arrayIndex];
+				DataLayer evt = evtLayer[arrayIndex];
+				DataLayer rainfall = rainfallLayer[arrayIndex];
 
-				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
+				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
 				
 				int surfaceBlock = TFC_Core.getTypeForGrassWithRain(rock1.data2, rainfall.floatdata1);
@@ -481,8 +485,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 				for (int height = 127; height >= 0; --height)
 				{
-					int indexBig = ((zCoord * 16 + xCoord) * 256 + height + 128);
-					int index = ((zCoord * 16 + xCoord) * 128 + height);
+					int indexBig = ((arrayIndex) * 256 + height + 128);
+					int index = ((arrayIndex) * 128 + height);
 					metaArrayBig[indexBig] = 0;
 					
 					float temp = TFC_Climate.adjustHeightToTemp(height, _temp);
@@ -497,9 +501,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					}
 					else if (var18 == Block.stone.blockID)
 					{
-
-						blockArrayBig[indexBig] = (byte) rock1.data1; 
-						metaArrayBig[indexBig] = (byte)  rock1.data2;              
+						if(heightMap[arrayIndex] == 0 && height-16 >= 0)
+						{
+							heightMap[arrayIndex] = height-16;
+						}
+						
+						convertStone(128+height, arrayIndex, indexBig, blockArrayBig, metaArrayBig, rock1, rock2, rock3);       
 						
 						
 						//First we check to see if its a cold desert
@@ -612,19 +619,20 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
-				DataLayer rock1 = rockLayer1[zCoord + xCoord * 16];
-				DataLayer rock2 = rockLayer2[zCoord + xCoord * 16];
-				DataLayer rock3 = rockLayer3[zCoord + xCoord * 16];
+				int arrayIndex = xCoord + zCoord * 16;
+				DataLayer rock1 = rockLayer1[arrayIndex];
+				DataLayer rock2 = rockLayer2[arrayIndex];
+				DataLayer rock3 = rockLayer3[arrayIndex];
 				
-				int var12 = (int)(stoneNoise[xCoord + zCoord * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				
 				int top = 0;
 
 				for (int height = 127; height >= 0; --height)
 				{
-					int index = ((zCoord * 16 + xCoord) * 128 + height);
-					int indexBig = ((zCoord * 16 + xCoord) * 256 + height);
+					int index = ((arrayIndex) * 128 + height);
+					int indexBig = ((arrayIndex) * 256 + height);
 
 					metaArrayBig[indexBig] = 0;
 
@@ -645,57 +653,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					}
 					else
 					{
-						if(height <= 55)
-						{
-							blockArrayBig[indexBig] = (byte) rock3.data1; 
-							metaArrayBig[indexBig] = (byte) rock3.data2;
-							if(height == 55)
-							{
-								if(rand.nextBoolean())
-								{
-									blockArrayBig[indexBig+1] = (byte) rock3.data1; 
-									metaArrayBig[indexBig+1] = (byte) rock3.data2;
-									if(rand.nextBoolean())
-									{
-										blockArrayBig[indexBig+2] = (byte) rock3.data1; 
-										metaArrayBig[indexBig+2] = (byte) rock3.data2;
-										if(rand.nextBoolean())
-										{
-											blockArrayBig[indexBig+3] = (byte) rock3.data1; 
-											metaArrayBig[indexBig+3] = (byte) rock3.data2;
-										}
-									}
-								}
-							}
-						}
-						else if(height <= 110 && height > 55)
-						{
-							blockArrayBig[indexBig] = (byte) rock2.data1; 
-							metaArrayBig[indexBig] = (byte) rock2.data2;
-							if(height == 110)
-							{
-								if(rand.nextBoolean())
-								{
-									blockArrayBig[indexBig+1] = (byte) rock2.data1; 
-									metaArrayBig[indexBig+1] = (byte) rock2.data2;
-									if(rand.nextBoolean())
-									{
-										blockArrayBig[indexBig+2] = (byte) rock2.data1; 
-										metaArrayBig[indexBig+2] = (byte) rock2.data2;
-										if(rand.nextBoolean())
-										{
-											blockArrayBig[indexBig+3] = (byte) rock2.data1; 
-											metaArrayBig[indexBig+3] = (byte) rock2.data2;
-										}
-									}
-								}
-							}
-						}
-						else
-						{
-							blockArrayBig[indexBig] = (byte) rock1.data1; 
-							metaArrayBig[indexBig] = (byte) rock1.data2;
-						}
+						convertStone(height, arrayIndex, indexBig, blockArrayBig, metaArrayBig, rock1, rock2, rock3);      
 						
 						if (var13 == -1)
 						{
@@ -707,6 +665,61 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					}
 				}
 			}
+		}
+	}
+	
+	public void convertStone(int height, int indexArray, int indexBig, int[] blockArrayBig, int[] metaArrayBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
+	{
+		if(height <= 55+heightMap[indexArray])
+		{
+			blockArrayBig[indexBig] = (byte) rock3.data1; 
+			metaArrayBig[indexBig] = (byte) rock3.data2;
+			if(height == 55+heightMap[indexArray])
+			{
+				if(rand.nextBoolean())
+				{
+					blockArrayBig[indexBig+1] = (byte) rock3.data1; 
+					metaArrayBig[indexBig+1] = (byte) rock3.data2;
+					if(rand.nextBoolean())
+					{
+						blockArrayBig[indexBig+2] = (byte) rock3.data1; 
+						metaArrayBig[indexBig+2] = (byte) rock3.data2;
+						if(rand.nextBoolean())
+						{
+							blockArrayBig[indexBig+3] = (byte) rock3.data1; 
+							metaArrayBig[indexBig+3] = (byte) rock3.data2;
+						}
+					}
+				}
+			}
+		}
+		else if(height <= 110+heightMap[indexArray] && height > 55+heightMap[indexArray])
+		{
+			blockArrayBig[indexBig] = (byte) rock2.data1; 
+			metaArrayBig[indexBig] = (byte) rock2.data2;
+			if(height == 110+heightMap[indexArray])
+			{
+				if(rand.nextBoolean())
+				{
+					blockArrayBig[indexBig+1] = (byte) rock2.data1; 
+					metaArrayBig[indexBig+1] = (byte) rock2.data2;
+					if(rand.nextBoolean())
+					{
+						blockArrayBig[indexBig+2] = (byte) rock2.data1; 
+						metaArrayBig[indexBig+2] = (byte) rock2.data2;
+						if(rand.nextBoolean())
+						{
+							blockArrayBig[indexBig+3] = (byte) rock2.data1; 
+							metaArrayBig[indexBig+3] = (byte) rock2.data2;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			blockArrayBig[indexBig] = (byte) rock1.data1; 
+			metaArrayBig[indexBig] = (byte) rock1.data2;
 		}
 	}
 }

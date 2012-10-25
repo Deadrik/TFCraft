@@ -20,6 +20,7 @@ import net.minecraft.src.World;
 public class ItemTerraFood extends ItemFood
 {
 	String texture;
+	public int foodID;
 
 	public ItemTerraFood(int id, int healAmt) 
 	{

@@ -14,28 +14,7 @@ import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Food.FoodStatsTFC;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Block;
-import net.minecraft.src.Chunk;
-import net.minecraft.src.EntityDragon;
-import net.minecraft.src.EnumSkyBlock;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.FoodStats;
-import net.minecraft.src.GuiIngame;
-import net.minecraft.src.GuiNewChat;
-import net.minecraft.src.GuiPlayerInfo;
-import net.minecraft.src.InventoryPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.NetClientHandler;
-import net.minecraft.src.Potion;
-import net.minecraft.src.RenderDragon;
-import net.minecraft.src.RenderHelper;
-import net.minecraft.src.RenderItem;
-import net.minecraft.src.ScaledResolution;
-import net.minecraft.src.StatCollector;
-import net.minecraft.src.StringUtils;
-import net.minecraft.src.Tessellator;
+import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeHooks;
 
 public class GuiHUD extends GuiIngame

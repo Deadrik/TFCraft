@@ -12,6 +12,7 @@ import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Packet;
+import net.minecraft.src.ServerPlayerAPI;
 import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
@@ -22,6 +23,7 @@ import TFC.Commands.GetTreesCommand;
 import TFC.Containers.*;
 import TFC.Core.*;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.*;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
@@ -186,6 +188,16 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.ZincSaw, "axe", 1);
 	}
 
+	public void RegisterPlayerApiClasses()
+	{
+		ServerPlayerAPI.register("TFC Player Server", TFC_PlayerServer.class);
+	}
+	
+	public void onClientLogin()
+	{
+		
+	}
+	
 	public void registerTranslations() {
 	}
 
@@ -330,76 +342,6 @@ public class CommonProxy implements IGuiHandler
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) 
 	{
-		TileEntity te;
-		try
-		{
-			te= world.getBlockTileEntity(x, y, z);
-		}
-		catch(Exception e)
-		{
-			te = null;
-		}
-
-		switch(ID)
-		{
-		case 0:
-		{
-			return new GuiTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
-		}
-		case 1:
-		{
-			return new GuiTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
-		}
-		case 20:
-		{
-			return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te, world, x, y, z);
-		}
-		case 21:
-		{
-			return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te, world, x, y, z);
-		}
-		case 22:
-		{
-			return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world, x, y, z);
-		}
-		case 23:
-		{
-			return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te, world, x, y, z);
-		}
-		case 24:
-		{
-			return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world, x, y, z);
-		}
-		case 25:
-		{
-			return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te, world, x, y, z);
-		}
-		case 26:
-		{
-			return new GuiTerraBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
-		}
-		case 27:
-		{
-			return new GuiCalendar(player, world, x, y, z);
-		}
-		case 28:
-		{
-			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType , world, x, y, z);
-		}
-		case 29:
-		{
-			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
-		}
-		case 30:
-		{
-			return new GuiHUD(ModLoader.getMinecraftInstance());
-		}
-		case 31:
-		{
-			return new GuiInventoryTFC(player);
-		}
-
-		}
 		return null;
 	}
 

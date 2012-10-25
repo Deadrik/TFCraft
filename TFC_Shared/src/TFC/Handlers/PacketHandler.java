@@ -46,7 +46,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			NetworkManager manager, Packet1Login login) 
 	{
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(clientHandler.getPlayer().username, manager));
-		ModLoader.getMinecraftInstance().ingameGUI = new GuiHUD(ModLoader.getMinecraftInstance());
+		TerraFirmaCraft.proxy.onClientLogin();
 	}
 
 
@@ -57,8 +57,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
-		EntityPlayer player = (EntityPlayer)p;
-		TFC_PlayerServer playerserver = ((TFC.Core.Player.TFC_PlayerServer)((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server"));
+		EntityPlayerMP player = (EntityPlayerMP)p;
 		World world= player.worldObj;
 
 		if(!world.isRemote)
@@ -69,8 +68,6 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeLong(world.getSeed());
 				dos.writeLong(TFC_Time.dayLength);
 				dos.writeInt(TFC_Time.daysInYear);
-				dos.writeInt(playerserver.getFoodStatsTFC().foodLevel);
-				dos.writeInt(playerserver.getFoodStatsTFC().waterLevel);
 			} 
 			catch (IOException e)
 			{
@@ -306,7 +303,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		{
 			if(PlayerManagerTFC.getInstance().Players.get(i).networkManager == manager)
 			{
-				System.out.println("PlayerManager Successfully removed player " + PlayerManagerTFC.getInstance().Players.get(i).Name);
+				//System.out.println("PlayerManager Successfully removed player " + PlayerManagerTFC.getInstance().Players.get(i).Name);
 				PlayerManagerTFC.getInstance().Players.remove(i);
 			}  
 		}

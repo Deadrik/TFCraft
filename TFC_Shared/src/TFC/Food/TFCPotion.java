@@ -21,7 +21,6 @@ public class TFCPotion extends Potion
 		super(par1, par2, par3);
 	}
 	
-	@SideOnly(Side.CLIENT)
 	@Override
 	public TFCPotion setIconIndex(int par1, int par2)
     {

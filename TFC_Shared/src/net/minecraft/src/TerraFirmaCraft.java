@@ -27,6 +27,7 @@ import cpw.mods.fml.common.Mod.ServerStopping;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.modloader.BaseModProxy;
@@ -58,7 +59,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "B2 Build 53")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 53")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
@@ -158,8 +159,7 @@ public class TerraFirmaCraft
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
-		ServerPlayerAPI.register("TFC Player Server", TFC_PlayerServer.class);
-		PlayerAPI.register("TFC Player Client", TFC_PlayerClient.class);
+		this.proxy.RegisterPlayerApiClasses();
 	}
 
 	@ServerStarting
@@ -169,7 +169,5 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetTreesCommand());
 		evt.registerServerCommand(new GetRocksCommand());
 		evt.registerServerCommand(new GetSpawnProtectionCommand());
-	}
-
-	
+	}	
 }

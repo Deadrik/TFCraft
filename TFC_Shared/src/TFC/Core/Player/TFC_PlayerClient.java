@@ -50,7 +50,7 @@ public class TFC_PlayerClient extends PlayerBase
 	public void afterOnLivingUpdate() 
 	{
 		this.player.setFoodStatsField(oldFood);			
-		this.foodstats.onUpdate(player);
+		//this.foodstats.onUpdate(player);
 	}
 	
 	public FoodStatsTFC getFoodStatsTFC()

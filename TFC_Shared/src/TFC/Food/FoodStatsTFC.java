@@ -9,19 +9,26 @@ import net.minecraft.src.*;
 
 public class FoodStatsTFC extends FoodStats
 {
-
-	/** The player's food level. */
+	/** The player's food level. This measures how much food the player can handle.*/
 	public int foodLevel = 100;
+	
+	public int carbs = 0;
+	private static int maxCarbs = 300;//Grams
+	public int protein = 0;
+	private static int maxProtein = 50;//Grams
+	public int fats = 0;
+	private static int maxFats = 65;//Grams
 
-	/** The player's food saturation. */
+	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
 	private float foodSaturationLevel = 5.0F;
 
-	/** The player's food exhaustion. */
+	/** The player's food exhaustion. This measures the rate of hunger decay. 
+	 * When this reaches 4, some of the stored food is consumed by either 
+	 * reducing the satiation or the food level.*/
 	private float foodExhaustionLevel;
 
 	/** The player's food timer value. */
 	private long foodTimer = 0;
-	private int prevFoodLevel = 100;
 
 	public int waterLevel = getMaxWater();
 	private long waterTimer = 0;
@@ -38,7 +45,6 @@ public class FoodStatsTFC extends FoodStats
 	public void onUpdate(EntityPlayer player)
 	{
 		int difficulty = player.worldObj.difficultySetting;
-		this.prevFoodLevel = this.foodLevel;
 
 		if (this.foodExhaustionLevel > 4.0F)
 		{
@@ -50,7 +56,7 @@ public class FoodStatsTFC extends FoodStats
 			}
 			else if (difficulty > 0)
 			{
-				this.foodLevel = Math.max(this.foodLevel - 1, 0);
+				this.foodLevel = Math.max(this.foodLevel - 4, 0);
 			}
 		}
 
@@ -63,10 +69,10 @@ public class FoodStatsTFC extends FoodStats
 			}
 			else if (this.foodLevel <= 0)
 			{
-				//if (difficulty > 1 || (difficulty == 1 && player.getHealth() > 50))
-				//{
-				//    player.attackEntityFrom(DamageSource.starve, 50);
-				//}
+				if (difficulty > 1 || (difficulty == 1 && player.getHealth() > 50))
+				{
+				    player.attackEntityFrom(DamageSource.starve, 50);
+				}
 				this.foodTimer = TFC_Time.getTotalTicks();
 			}
 			else
@@ -110,13 +116,6 @@ public class FoodStatsTFC extends FoodStats
 	public int getFoodLevel()
 	{
 		return this.foodLevel;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getPrevFoodLevel()
-	{
-		return this.prevFoodLevel;
 	}
 
 	/**

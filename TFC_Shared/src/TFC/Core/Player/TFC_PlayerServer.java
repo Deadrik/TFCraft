@@ -23,6 +23,8 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet250CustomPayload;
 import net.minecraft.src.Packet8UpdateHealth;
+import net.minecraft.src.Potion;
+import net.minecraft.src.PotionEffect;
 import net.minecraft.src.ServerPlayerAPI;
 import net.minecraft.src.ServerPlayerBase;
 import net.minecraft.src.StepSound;
@@ -125,13 +127,20 @@ public class TFC_PlayerServer extends ServerPlayerBase
 		//this.player.setFoodStatsField(new FoodStatsTFC());
 		if(this.player.getHealth() == 20 && this.player.ticksExisted == 0)
 			this.player.setHealthField(this.getMaxHealth());
+		
+		this.player.capabilities = new PlayerCapabilitiesTFC();
 	}
 	
 	@Override
 	public void beforeOnLivingUpdate() 
 	{
 		oldFood = this.player.getFoodStats();
-		if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.25f)
+
+		if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.25f && player.worldObj.difficultySetting >= 1)
+		{
+			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,1,1));
+		}
+		else if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.5f)
 		{
 			if(this.player.isSprinting())
 			{

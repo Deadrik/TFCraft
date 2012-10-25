@@ -229,6 +229,20 @@ public class TFCProvider extends WorldProvider
 			worldObj.getWorldInfo().setSpawnPosition(var6, var7, var8);
 		}
 	}
+	
+	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
+    {
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+			return true;
+		return false;
+    }
+
+    public boolean canSnowAt(int x, int y, int z)
+    {
+    	if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+			return true;
+		return false;
+    }
 
 	@Override
 	public String getDimensionName() {

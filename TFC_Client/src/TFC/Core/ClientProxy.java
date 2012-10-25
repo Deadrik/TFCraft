@@ -22,6 +22,8 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Player.TFC_PlayerClient;
+import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.*;
 import TFC.Enums.EnumTree;
 import TFC.GUI.*;
@@ -115,6 +117,17 @@ public class ClientProxy extends CommonProxy
 		super.registerTileEntities(false);
 		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 	}
+	
+	public void onClientLogin()
+	{
+		ModLoader.getMinecraftInstance().ingameGUI = new GuiHUD(ModLoader.getMinecraftInstance());
+	}
+	
+	public void RegisterPlayerApiClasses()
+	{
+		super.RegisterPlayerApiClasses();
+		PlayerAPI.register("TFC Player Client", TFC_PlayerClient.class);
+	}
 
 	@Override
 	public World getCurrentWorld() {
@@ -133,6 +146,83 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public File getMinecraftDir() {
 		return ModLoader.getMinecraftInstance().getMinecraftDir();
+	}
+	
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
+			int x, int y, int z) 
+	{
+		TileEntity te;
+		try
+		{
+			te= world.getBlockTileEntity(x, y, z);
+		}
+		catch(Exception e)
+		{
+			te = null;
+		}
+
+		switch(ID)
+		{
+		case 0:
+		{
+			return new GuiTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
+		}
+		case 1:
+		{
+			return new GuiTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
+		}
+		case 20:
+		{
+			return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te, world, x, y, z);
+		}
+		case 21:
+		{
+			return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te, world, x, y, z);
+		}
+		case 22:
+		{
+			return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world, x, y, z);
+		}
+		case 23:
+		{
+			return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te, world, x, y, z);
+		}
+		case 24:
+		{
+			return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world, x, y, z);
+		}
+		case 25:
+		{
+			return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te, world, x, y, z);
+		}
+		case 26:
+		{
+			return new GuiTerraBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
+		}
+		case 27:
+		{
+			return new GuiCalendar(player, world, x, y, z);
+		}
+		case 28:
+		{
+			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType , world, x, y, z);
+		}
+		case 29:
+		{
+			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
+		}
+		case 30:
+		{
+			return new GuiHUD(ModLoader.getMinecraftInstance());
+		}
+		case 31:
+		{
+			return new GuiInventoryTFC(player);
+		}
+
+		}
+		return null;
 	}
 
 	@Override
