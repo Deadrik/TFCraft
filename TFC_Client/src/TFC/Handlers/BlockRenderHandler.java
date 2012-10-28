@@ -119,6 +119,10 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);
         }
+        else if (modelId == TFCBlocks.foodPrepRenderId)
+        {
+            return RenderFoodPrep.render(block, i, j, k, renderer);
+        }
 		return false;
 	}
 

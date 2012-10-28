@@ -215,6 +215,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 		return this.foodstats;
 	}
 	
+	@Override
 	public void fall(float fallDistance)
     {
 		fallDistance = ForgeHooks.onLivingFall(this.player, fallDistance);
@@ -237,7 +238,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
             	this.player.worldObj.playSoundAtEntity(this.player, "damage.fallsmall", 1.0F, 1.0F);
             }
 
-            //this.attackEntityFrom(DamageSource.fall, var2);
+            this.attackEntityFrom(DamageSource.fall, var2*50);
             int var3 = this.player.worldObj.getBlockId(MathHelper.floor_double(this.player.posX), MathHelper.floor_double(this.player.posY - 0.20000000298023224D - (double)this.player.yOffset), MathHelper.floor_double(this.player.posZ));
 
             if (var3 > 0)

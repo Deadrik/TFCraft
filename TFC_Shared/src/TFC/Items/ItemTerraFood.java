@@ -5,6 +5,8 @@ import java.util.List;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
@@ -17,7 +19,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.World;
 
-public class ItemTerraFood extends ItemFood
+public class ItemTerraFood extends ItemFood implements ISize
 {
 	String texture;
 	public int foodID;
@@ -32,11 +34,18 @@ public class ItemTerraFood extends ItemFood
 		texture = tex;
 	}
 	
-	public ItemTerraFood(int par1, int par2, float par3, boolean par4, String tex)
+	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, String tex, int foodid)
     {
-	    super(par1, par2, par3, par4);
+	    super(id, healAmt, saturation, wolfFood);
 	    texture = tex;
+	    foodID = foodid;
     }
+	
+	public ItemTerraFood setFoodID(int id)
+	{
+		foodID = id;
+		return this;
+	}
 
 	@Override
 	public String getTextureFile()
@@ -102,4 +111,19 @@ public class ItemTerraFood extends ItemFood
     {
         return true;
     }
+	@Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.VERYSMALL;
+	}
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.LIGHT;
+	}
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

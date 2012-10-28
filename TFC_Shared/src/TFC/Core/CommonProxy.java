@@ -75,6 +75,7 @@ public class CommonProxy implements IGuiHandler
 		
 		ModLoader.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
+		ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
 		
 		if(b)
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
@@ -330,6 +331,10 @@ public class CommonProxy implements IGuiHandler
 		case 31:
 		{
 			return new ContainerPlayer(player.inventory);
+		}
+		case 32:
+		{
+			return new ContainerFoodPrep(player.inventory, (TileEntityFoodPrep) te, world, x, y, z);
 		}
 		default:
 		{

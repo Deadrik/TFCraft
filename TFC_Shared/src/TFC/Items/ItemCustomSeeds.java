@@ -42,7 +42,7 @@ public class ItemCustomSeeds extends ItemTerra
 	@Override
     public String getTextureFile()
     {
-        return "/gui/items.png";
+        return "/bioxx/FoodSprites.png";
     }
 
 	/**

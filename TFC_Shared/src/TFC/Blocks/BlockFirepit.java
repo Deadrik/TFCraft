@@ -19,6 +19,7 @@ public class BlockFirepit extends BlockContainer
 		this.setBlockBounds(0, 0, 0, 1, 0.1f, 1);
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		int meta = world.getBlockMetadata(i, j, k);

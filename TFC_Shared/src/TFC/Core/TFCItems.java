@@ -5,6 +5,7 @@ import java.io.File;
 import TFC.Blocks.BlockSluice;
 import TFC.Core.*;
 import TFC.Enums.EnumSize;
+import TFC.Food.TFCMeal;
 import TFC.Items.*;
 import TFC.TileEntities.TileEntityTerraSluice;
 
@@ -14,6 +15,7 @@ import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemCoal;
 import net.minecraft.src.Potion;
+import net.minecraft.src.PotionEffect;
 import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TerraFirmaCraft;
 import net.minecraftforge.common.*;
@@ -812,6 +814,16 @@ public class TFCItems
     public static Item BlueSteelBucketEmpty;
     public static Item BlueSteelBucketLava;
     
+    public static Item MealGeneric;
+    public static Item MealMoveSpeed;
+    public static Item MealDigSpeed;
+    public static Item MealDamageBoost;
+    public static Item MealJump;
+    public static Item MealDamageResist;
+    public static Item MealFireResist;
+    public static Item MealWaterBreathing;
+    public static Item MealNightVision;
+    
     
     /**
      * Item Uses Setup
@@ -877,15 +889,15 @@ public class TFCItems
 
         minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setIconCoord(7, 9).setItemName("minecartChest");
         
-        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerraFood(63, 3, 0.3F, true,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
-        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 8, 0.8F, true,"/gui/items.png").setIconCoord(8, 5).setItemName("porkchopCooked");
-        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerraFood(93, 2, 0.3F, true,"/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
-        Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 5, 0.6F, true,"/gui/items.png").setIconCoord(10, 5).setItemName("fishCooked");
-        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerraFood(107, 3, 0.3F, true,"/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
-        Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 8, 0.8F, true,"/gui/items.png").setIconCoord(10, 6).setItemName("beefCooked");
-        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerraFood(109, 2, 0.3F, true,"/gui/items.png").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setIconCoord(9, 7).setItemName("chickenRaw");
-        Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 6, 0.6F, true,"/gui/items.png").setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
-        Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 5, 0.6F, false,"/gui/items.png")).setIconCoord(9, 2).setItemName("bread");
+        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerra(63,"/gui/items.png").setIconCoord(7, 5).setItemName("porkchopRaw");
+        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 35, 0.8F, true,"/gui/items.png", 38).setIconCoord(8, 5).setItemName("porkchopCooked");
+        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerra(93, "/gui/items.png").setIconCoord(9, 5).setItemName("fishRaw");
+        Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 30, 0.6F, true,"/gui/items.png", 39).setIconCoord(10, 5).setItemName("fishCooked");
+        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerra(107, "/gui/items.png").setIconCoord(9, 6).setItemName("beefRaw");
+        Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 40, 0.8F, true,"/gui/items.png", 40).setIconCoord(10, 6).setItemName("beefCooked");
+        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerra(109,"/gui/items.png").setIconCoord(9, 7).setItemName("chickenRaw");
+        Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 35, 0.6F, true,"/gui/items.png", 41).setIconCoord(10, 6).setIconCoord(10, 7).setItemName("chickenCooked");
+        Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false,"/gui/items.png", 42)).setIconCoord(9, 2).setItemName("bread");
         Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setIconCoord(12, 0).setItemName("egg");
         Item.itemsList[Item.dyePowder.shiftedIndex] = null; Item.itemsList[Item.dyePowder.shiftedIndex] = new ItemDyeCustom(95).setIconCoord(14, 4).setItemName("dyePowder");
         
@@ -1491,45 +1503,45 @@ public class TFCItems
         num = 18000;
         FruitTreeSapling1 = new ItemFruitTreeSapling(TFC_Settings.getIntFor(config,"item","FruitSapling1", num), "/bioxx/Vegetation.png", 0).setItemName("FruitSapling1").setIconCoord(0, 7);num++;
         FruitTreeSapling2 = new ItemFruitTreeSapling(TFC_Settings.getIntFor(config,"item","FruitSapling2", num), "/bioxx/Vegetation.png", 8).setItemName("FruitSapling2").setIconCoord(8, 7);num++;
-        RedApple = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Red Apple",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(2, 0).setItemName("Fruit.Red Apple");num++;
-        Banana = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Banana",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 0).setItemName("Fruit.Banana");num++;
-        Orange = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Orange",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(1, 0).setItemName("Fruit.Orange");num++;
-        GreenApple = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Green Apple",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(3, 0).setItemName("Fruit.Green Apple");num++;
-        Lemon = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Lemon",num), 2, 0.03F, false,"/bioxx/FoodSprites.png").setIconCoord(4, 0).setItemName("Fruit.Lemon");num++;
-        Olive = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Olive",num), 1, 0.05F, false,"/bioxx/FoodSprites.png").setIconCoord(8, 0).setItemName("Fruit.Olive");num++;
-        Cherry = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Cherry",num), 1, 0.03F, false,"/bioxx/FoodSprites.png").setIconCoord(5, 0).setItemName("Fruit.Cherry");num++;
-        Peach = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Peach",num), 3, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(6, 0).setItemName("Fruit.Peach");num++;
-        Plum = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Plum",num), 2, 0.1F, false,"/bioxx/FoodSprites.png").setIconCoord(7, 0).setItemName("Fruit.Plum");num++;
-        EggCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Meat.EggCooked",num), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Meat.EggCooked");num++;
+        RedApple = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Red Apple",num), 15, 0.1F, false,"/bioxx/FoodSprites.png", 2).setIconCoord(2, 0).setItemName("Fruit.Red Apple");num++;
+        Banana = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Banana",num), 10, 0.1F, false,"/bioxx/FoodSprites.png", 3).setIconCoord(0, 0).setItemName("Fruit.Banana");num++;
+        Orange = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Orange",num), 10, 0.1F, false,"/bioxx/FoodSprites.png", 4).setIconCoord(1, 0).setItemName("Fruit.Orange");num++;
+        GreenApple = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Green Apple",num), 15, 0.1F, false,"/bioxx/FoodSprites.png", 5).setIconCoord(3, 0).setItemName("Fruit.Green Apple");num++;
+        Lemon = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Lemon",num), 10, 0.03F, false,"/bioxx/FoodSprites.png", 6).setIconCoord(4, 0).setItemName("Fruit.Lemon");num++;
+        Olive = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Olive",num), 10, 0.05F, false,"/bioxx/FoodSprites.png", 7).setIconCoord(8, 0).setItemName("Fruit.Olive");num++;
+        Cherry = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Cherry",num), 10, 0.03F, false,"/bioxx/FoodSprites.png", 8).setIconCoord(5, 0).setItemName("Fruit.Cherry");num++;
+        Peach = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Peach",num), 12, 0.1F, false,"/bioxx/FoodSprites.png", 9).setIconCoord(6, 0).setItemName("Fruit.Peach");num++;
+        Plum = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Plum",num), 10, 0.1F, false,"/bioxx/FoodSprites.png", 10).setIconCoord(7, 0).setItemName("Fruit.Plum");num++;
+        EggCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Meat.EggCooked",num), 25, 0.4F, false,"/bioxx/FoodSprites.png", 11).setIconCoord(0, 7).setItemName("Meat.EggCooked");num++;
         
-        WheatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WheatGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(1, 4).setItemName("WheatGrain");
-        WildWheatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildWheatGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(1, 4).setItemName("WildWheatGrain");
-        BarleyGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","BarleyGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 4).setItemName("BarleyGrain");
-        WildBarleyGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildBarleyGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 4).setItemName("WildBarleyGrain");
-        OatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","OatGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(3, 4).setItemName("OatGrain");
-        WildOatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildOatGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(3, 4).setItemName("WildOatGrain");
-        RyeGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RyeGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(2, 4).setItemName("RyeGrain");
-        WildRyeGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildRyeGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(2, 4).setItemName("WildRyeGrain");
-        RiceGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RiceGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(4, 4).setItemName("RiceGrain");
-        WildRiceGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildRiceGrain",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(4, 4).setItemName("WildRiceGrain");
-        MaizeEar = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","MaizeEar",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(5, 4).setItemName("MaizeEar");
-        WildMaizeEar = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildMaizeEar",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(5, 4).setItemName("WildMaizeEar");
-        Tomato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Tomato",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(15, 4).setItemName("Tomato");
-        Potato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Potato",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(6, 4).setItemName("Potato");
-        WildPotato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildPotato",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(6, 4).setItemName("WildPotato");
-        Onion = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Onion",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(7, 4).setItemName("Onion");
-        Cabbage = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Cabbage",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(8, 4).setItemName("Cabbage");
-        Garlic = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Garlic",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(11, 4).setItemName("Garlic");
-        Carrot = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Carrot",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(12, 4).setItemName("Carrot");
-        Sugarcane = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Sugarcane",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(13, 4).setItemName("Sugarcane");
-        Hemp = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Hemp",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(15, 2).setItemName("Hemp");
-        Soybeans = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Soybeans",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Soybeans");
-        Greenbeans = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Greenbeans",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Greenbeans");
-        Yam = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Yam",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Yam");
-        GreenBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","GreenBellPepper",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("GreenBellPepper");
-        YellowBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","YellowBellPepper",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("YellowBellPepper");
-        RedBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RedBellPepper",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("RedBellPepper");
-        Squash = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Squash",num++), 4, 0.4F, false,"/bioxx/FoodSprites.png").setIconCoord(0, 7).setItemName("Squash");
+        WheatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WheatGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 12).setIconCoord(1, 4).setItemName("WheatGrain");
+        WildWheatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildWheatGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 13).setIconCoord(1, 4).setItemName("WildWheatGrain");
+        BarleyGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","BarleyGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 14).setIconCoord(0, 4).setItemName("BarleyGrain");
+        WildBarleyGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildBarleyGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 15).setIconCoord(0, 4).setItemName("WildBarleyGrain");
+        OatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","OatGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 16).setIconCoord(3, 4).setItemName("OatGrain");
+        WildOatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildOatGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 17).setIconCoord(3, 4).setItemName("WildOatGrain");
+        RyeGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RyeGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 18).setIconCoord(2, 4).setItemName("RyeGrain");
+        WildRyeGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildRyeGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 19).setIconCoord(2, 4).setItemName("WildRyeGrain");
+        RiceGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RiceGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 20).setIconCoord(4, 4).setItemName("RiceGrain");
+        WildRiceGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildRiceGrain",num++), 1, 0.4F, false,"/bioxx/FoodSprites.png", 21).setIconCoord(4, 4).setItemName("WildRiceGrain");
+        MaizeEar = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","MaizeEar",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 22).setIconCoord(5, 4).setItemName("MaizeEar");
+        WildMaizeEar = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildMaizeEar",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 23).setIconCoord(5, 4).setItemName("WildMaizeEar");
+        Tomato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Tomato",num++), 15, 0.4F, false,"/bioxx/FoodSprites.png", 24).setIconCoord(15, 4).setItemName("Tomato");
+        Potato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Potato",num++), 22, 0.4F, false,"/bioxx/FoodSprites.png", 25).setIconCoord(6, 4).setItemName("Potato");
+        WildPotato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WildPotato",num++), 22, 0.4F, false,"/bioxx/FoodSprites.png", 26).setIconCoord(6, 4).setItemName("WildPotato");
+        Onion = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Onion",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 27).setIconCoord(7, 4).setItemName("Onion");
+        Cabbage = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Cabbage",num++), 20, 0.4F, false,"/bioxx/FoodSprites.png", 28).setIconCoord(8, 4).setItemName("Cabbage");
+        Garlic = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Garlic",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 29).setIconCoord(11, 4).setItemName("Garlic");
+        Carrot = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Carrot",num++), 5, 0.4F, false,"/bioxx/FoodSprites.png", 30).setIconCoord(12, 4).setItemName("Carrot");
+        Sugarcane = new ItemTerra(TFC_Settings.getIntFor(config,"item","Sugarcane",num++),"/bioxx/FoodSprites.png").setIconCoord(13, 4).setItemName("Sugarcane");
+        Hemp = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hemp",num++), "/bioxx/FoodSprites.png").setIconCoord(15, 2).setItemName("Hemp");
+        Soybeans = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Soybeans",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 31).setIconCoord(0, 7).setItemName("Soybeans");
+        Greenbeans = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Greenbeans",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 32).setIconCoord(0, 7).setItemName("Greenbeans");
+        Yam = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Yam",num++), 18, 0.4F, false,"/bioxx/FoodSprites.png", 33).setIconCoord(0, 7).setItemName("Yam");
+        GreenBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","GreenBellPepper",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 34).setIconCoord(0, 7).setItemName("GreenBellPepper");
+        YellowBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","YellowBellPepper",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 35).setIconCoord(0, 7).setItemName("YellowBellPepper");
+        RedBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RedBellPepper",num++), 10, 0.4F, false,"/bioxx/FoodSprites.png", 36).setIconCoord(0, 7).setItemName("RedBellPepper");
+        Squash = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Squash",num++), 12, 0.4F, false,"/bioxx/FoodSprites.png", 37).setIconCoord(0, 7).setItemName("Squash");
         
         WheatWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","WheatWhole",num++),"/bioxx/FoodSprites.png").setItemName("WheatWhole").setIconCoord(1, 5);
         WildWheatWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","WildWheatWhole",num++),"/bioxx/FoodSprites.png").setItemName("WildWheatWhole").setIconCoord(1, 5);
@@ -1542,28 +1554,38 @@ public class TFCItems
         RiceWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","RiceWhole",num++),"/bioxx/FoodSprites.png").setItemName("RiceWhole").setIconCoord(4, 5);
         WildRiceWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","WildRiceWhole",num++),"/bioxx/FoodSprites.png").setItemName("WildRiceWhole").setIconCoord(4, 5);
         
+        MealGeneric = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealGeneric",num++),"/bioxx/FoodSprites.png").setItemName("MealGeneric").setIconCoord(15, 0);
+        MealMoveSpeed = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealMoveSpeed",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.moveSpeed.id,8000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealDigSpeed = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealDigSpeed",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.digSpeed.id,8000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealDamageBoost = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealDamageBoost",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.damageBoost.id,4000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealJump = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealJump",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.jump.id,8000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealDamageResist = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealDamageResist",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.resistance.id,8000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealFireResist = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealFireResist",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.fireResistance.id,8000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealWaterBreathing = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealWaterBreathing",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.waterBreathing.id,8000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        MealNightVision = new TFCMeal(TFC_Settings.getIntFor(config,"item","MealNightVision",num++),"/bioxx/FoodSprites.png").setPotionEffect(new PotionEffect(Potion.nightVision.id,4000,1)).setItemName("MealGeneric").setIconCoord(15, 0);
+        
         num = 18900;
-        SeedsWheat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWheat",num++),0).setItemName("SeedsWheat").setIconCoord(9, 0);
-        SeedsWildWheat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildWheat",num++),1).setItemName("SeedsWildWheat").setIconCoord(9, 0);
-        SeedsMaize = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsMaize",num++),2).setItemName("SeedsMaize").setIconCoord(9, 0);
-        SeedsWildMaize = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildMaize",num++),3).setItemName("SeedsWildMaize").setIconCoord(9, 0);
-        SeedsTomato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsTomato",num++),4).setItemName("SeedsTomato").setIconCoord(9, 0);
-        SeedsBarley = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsBarley",num++),5).setItemName("SeedsBarley").setIconCoord(9, 0);
-        SeedsWildBarley = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildBarley",num++),6).setItemName("SeedsWildBarley").setIconCoord(9, 0);
-        SeedsRye = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRye",num++),7).setItemName("SeedsRye").setIconCoord(9, 0);
-        SeedsWildRye = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildRye",num++),8).setItemName("SeedsWildRye").setIconCoord(9, 0);
-        SeedsOat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsOat",num++),9).setItemName("SeedsOat").setIconCoord(9, 0);
-        SeedsWildOat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildOat",num++),10).setItemName("SeedsWildOat").setIconCoord(9, 0);
-        SeedsRice = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRice",num++),11).setItemName("SeedsRice").setIconCoord(9, 0);
-        SeedsWildRice = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildRice",num++),12).setItemName("SeedsWildRice").setIconCoord(9, 0);
-        SeedsPotato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsPotato",num++),13).setItemName("SeedsPotato").setIconCoord(9, 0);
-        SeedsWildPotato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildPotato",num++),14).setItemName("SeedsWildPotato").setIconCoord(9, 0);
-        SeedsOnion = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsOnion",num++),15).setItemName("SeedsOnion").setIconCoord(9, 0);
-        SeedsCabbage = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsCabbage",num++),16).setItemName("SeedsCabbage").setIconCoord(9, 0);
-        SeedsGarlic = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsGarlic",num++),17).setItemName("SeedsGarlic").setIconCoord(9, 0);
-        SeedsCarrot = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsCarrot",num++),18).setItemName("SeedsCarrot").setIconCoord(9, 0);
-        SeedsSugarcane = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSugarcane",num++),19).setItemName("SeedsSugarcane").setIconCoord(9, 0);
-        SeedsHemp = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsHemp",num++),20).setItemName("SeedsHemp").setIconCoord(9, 0);
+        SeedsWheat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWheat",num++),0).setItemName("SeedsWheat").setIconCoord(0, 8);
+        SeedsWildWheat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildWheat",num++),1).setItemName("SeedsWildWheat").setIconCoord(1, 8);
+        SeedsBarley = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsBarley",num++),5).setItemName("SeedsBarley").setIconCoord(2, 8);
+        SeedsWildBarley = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildBarley",num++),6).setItemName("SeedsWildBarley").setIconCoord(3, 8);
+        SeedsRye = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRye",num++),7).setItemName("SeedsRye").setIconCoord(4, 8);
+        SeedsWildRye = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildRye",num++),8).setItemName("SeedsWildRye").setIconCoord(5, 8);
+        SeedsOat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsOat",num++),9).setItemName("SeedsOat").setIconCoord(6, 8);
+        SeedsWildOat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildOat",num++),10).setItemName("SeedsWildOat").setIconCoord(7, 8);
+        SeedsRice = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRice",num++),11).setItemName("SeedsRice").setIconCoord(8, 8);
+        SeedsWildRice = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildRice",num++),12).setItemName("SeedsWildRice").setIconCoord(9, 8);
+        SeedsMaize = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsMaize",num++),2).setItemName("SeedsMaize").setIconCoord(10, 8);
+        SeedsWildMaize = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildMaize",num++),3).setItemName("SeedsWildMaize").setIconCoord(11, 8);
+        SeedsPotato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsPotato",num++),13).setItemName("SeedsPotato").setIconCoord(12, 8);
+        SeedsWildPotato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWildPotato",num++),14).setItemName("SeedsWildPotato").setIconCoord(13, 8);
+        SeedsOnion = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsOnion",num++),15).setItemName("SeedsOnion").setIconCoord(14, 8);
+        SeedsCabbage = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsCabbage",num++),16).setItemName("SeedsCabbage").setIconCoord(15, 8);
+        SeedsGarlic = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsGarlic",num++),17).setItemName("SeedsGarlic").setIconCoord(0, 9);
+        SeedsCarrot = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsCarrot",num++),18).setItemName("SeedsCarrot").setIconCoord(1, 9);
+        SeedsSugarcane = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSugarcane",num++),19).setItemName("SeedsSugarcane").setIconCoord(2, 9);
+        SeedsHemp = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsHemp",num++),20).setItemName("SeedsHemp").setIconCoord(3, 9);
+        SeedsTomato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsTomato",num++),4).setItemName("SeedsTomato").setIconCoord(4, 9);
         
         /**Armor Crafting related items*/
         num = 19000;
@@ -1765,10 +1787,15 @@ public class TFCItems
         Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
         		TFCItems.GemJade, TFCItems.GemJasper, TFCItems.GemOpal,TFCItems.GemRuby,TFCItems.GemSapphire,TFCItems.GemTopaz,TFCItems.GemTourmaline};
         
+        Meals = new Item[]{MealMoveSpeed, MealDigSpeed, MealDamageBoost, MealJump, MealDamageResist, 
+            	MealFireResist, MealWaterBreathing, MealNightVision};
+        
         if (config != null) {
             config.save();
         }
     }
+    
+    public static Item[] Meals;
 
 
 	public static EnumArmorMaterial BismuthArmorMaterial;

@@ -20,10 +20,6 @@ public class SlotBlocked extends Slot
 
 	public void onPickupFromSlot(ItemStack itemstack)
 	{
-		Boolean B = itemstack.hasTagCompound();
-		if(!B)
-		{
-			//super.onPickupFromSlot(itemstack);
-		}
+		super.onPickupFromSlot(itemstack);
 	}
 }

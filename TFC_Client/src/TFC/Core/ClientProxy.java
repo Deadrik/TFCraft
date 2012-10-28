@@ -70,6 +70,8 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture("/bioxx/calendargui.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/Vegetation.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/TFC_Plants.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/foodprepgui.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/FoodSprites.png");
 
 		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
 		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -110,6 +112,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
@@ -219,6 +222,10 @@ public class ClientProxy extends CommonProxy
 		case 31:
 		{
 			return new GuiInventoryTFC(player);
+		}
+		case 32:
+		{
+			return new GuiFoodPrep(player.inventory, ((TileEntityFoodPrep) te), world, x, y, z);
 		}
 
 		}
@@ -668,6 +675,8 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.YellowBellPepper.name", "Yellow Bell Pepper");
 		LR.addStringLocalization("item.RedBellPepper.name", "Red Bell Pepper");
 		LR.addStringLocalization("item.Squash.name", "Squash");
+		
+		LR.addStringLocalization("item.MealGeneric.name", "Meal");
 
 	}
 

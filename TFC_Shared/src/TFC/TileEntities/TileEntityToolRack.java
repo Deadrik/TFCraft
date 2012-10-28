@@ -40,6 +40,8 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
     {
         storage[0] = null;
         storage[1] = null;
+        storage[2] = null;
+        storage[3] = null;
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.minecraft.src.PotionHealth;
 public class TFCPotion extends Potion
 {
     public static Potion bleed;
-    
+    public static Potion nausea;
     
     /** The name of the Potion. */
     private String name = "";

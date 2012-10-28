@@ -43,6 +43,7 @@ public class TFCBlocks
 	public static int cookingPitRenderId;
 	public static int leavesRenderId;
 	public static int detailedRenderId;
+	public static int foodPrepRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -115,6 +116,7 @@ public class TFCBlocks
 	public static Block WoodHoriz2;
 	public static Block ToolRack;
 	public static Block SpawnMeter;
+	public static Block FoodPrep;
 	
 	static Configuration config;
 	
@@ -348,6 +350,7 @@ public class TFCBlocks
 		
 		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setBlockName("ToolRack");
 		SpawnMeter = new BlockSpawnMeter(TFC_Settings.getIntFor(config,"block","SpawnMeter", 2022)).setHardness(3F).setBlockName("SpawnMeter");
+		FoodPrep = new BlockFoodPrep(TFC_Settings.getIntFor(config,"block","FoodPrep", 2023)).setHardness(3F).setBlockName("FoodPrep");
 		
 		
 		

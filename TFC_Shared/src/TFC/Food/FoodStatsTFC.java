@@ -12,12 +12,6 @@ public class FoodStatsTFC extends FoodStats
 	/** The player's food level. This measures how much food the player can handle.*/
 	public int foodLevel = 100;
 	
-	public int carbs = 0;
-	private static int maxCarbs = 300;//Grams
-	public int protein = 0;
-	private static int maxProtein = 50;//Grams
-	public int fats = 0;
-	private static int maxFats = 65;//Grams
 
 	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
 	private float foodSaturationLevel = 5.0F;
@@ -36,6 +30,7 @@ public class FoodStatsTFC extends FoodStats
 	public FoodStatsTFC()
 	{
 		waterTimer = TFC_Time.getTotalTicks();
+		foodTimer = TFC_Time.getTotalTicks();
 	}
 
 	/**
@@ -62,10 +57,19 @@ public class FoodStatsTFC extends FoodStats
 
 		if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength/2)
 		{
-			if (this.foodLevel >= 10 && TFC_PlayerServer.shouldHeal(player))
+			this.foodTimer = TFC_Time.getTotalTicks();
+			if (this.foodLevel >= 25 && TFC_PlayerServer.shouldHeal(player))
 			{
-				this.foodTimer = TFC_Time.getTotalTicks();
 				player.heal(10);
+				
+				if (this.foodSaturationLevel > 0.0F)
+				{
+					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 4.0F, 0.0F);
+				}
+				else if (difficulty > 0)
+				{
+					this.foodLevel = Math.max(this.foodLevel - 2, 0);
+				}
 			}
 			else if (this.foodLevel <= 0)
 			{
@@ -73,11 +77,6 @@ public class FoodStatsTFC extends FoodStats
 				{
 				    player.attackEntityFrom(DamageSource.starve, 50);
 				}
-				this.foodTimer = TFC_Time.getTotalTicks();
-			}
-			else
-			{
-				this.foodTimer = TFC_Time.getTotalTicks();
 			}
 		}
 		
@@ -91,10 +90,10 @@ public class FoodStatsTFC extends FoodStats
 		{
 			/**Reduce the player's water for normal living*/
 			waterLevel -= 1;
-			if(player.isSprinting())
-			{
-				waterLevel -= 3;
-			}
+//			if(player.isSprinting())
+//			{
+//				waterLevel -= 3;
+//			}
 			if(player.isInWater())
 			{
 				waterLevel = getMaxWater();
@@ -197,8 +196,8 @@ public class FoodStatsTFC extends FoodStats
 	@Override
     public void addStats(int par1, float par2)
     {
-        this.foodLevel = Math.min(par1 + this.foodLevel, 20);
-        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 * par2 * 2.0F, (float)this.foodLevel);
+        this.foodLevel = Math.min(par1 + this.foodLevel, 100);
+        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 / 3 * par2 * 2.0F, (float)this.foodLevel);
     }
 
     /**
