@@ -2,7 +2,11 @@ package TFC.Core;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.EntityCreature;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.Vec3;
 
 public class RandomPositionGeneratorTFC
 {

@@ -70,37 +70,37 @@ public class ContainerKnapping extends Container
      */
     public void onCraftMatrixChanged(IInventory par1IInventory)
     {
-        this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix));
+        this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
     }
 
     /**
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.
      */
-    public ItemStack transferStackInSlot(int par1)
+    public ItemStack func_82846_b(EntityPlayer player, int clickedIndex)
     {
         ItemStack var2 = null;
-        Slot grabbedSlot = (Slot)this.inventorySlots.get(par1);
+        Slot grabbedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
         if(grabbedSlot != null && grabbedSlot.getHasStack())
         {
             ItemStack var4 = grabbedSlot.getStack();
             var2 = var4.copy();
 
-            if(par1 < 10)
+            if(clickedIndex < 10)
             {
                 if (!this.mergeItemStack(var4, 10, 36, true))
                 {
                     return null;
                 }
             }
-            else if(par1 >= 10 && par1 < 37)
+            else if(clickedIndex >= 10 && clickedIndex < 37)
             {
                 if (!this.mergeItemStack(var4, 0, 9, true))
                 {
                     return null;
                 }
             }
-            else if(par1 >= 37 && par1 < 62)
+            else if(clickedIndex >= 37 && clickedIndex < 62)
             {
                 if (!this.mergeItemStack(var4, 0, 36, true))
                 {
@@ -122,65 +122,8 @@ public class ContainerKnapping extends Container
                 return null;
             }
 
-            grabbedSlot.onPickupFromSlot(var4);
+            grabbedSlot.func_82870_a(player, var4);
         }
-
-        //        if (var3 != null && var3.getHasStack())
-            //        {
-            //            ItemStack var4 = var3.getStack();
-        //            var2 = var4.copy();
-        //            
-        //            if((var3) instanceof SlotBlocked && 
-        //                    var3.getHasStack())
-        //            {
-        //                var3.inventory.setInventorySlotContents(par1-1, null);
-        //                this.onCraftMatrixChanged(this.craftMatrix);
-        //            }
-        //
-        //            if (par1 == 0)
-        //            {
-        //                if (!this.mergeItemStack(var4, 10, 46, true))
-        //                {
-        //                    return null;
-        //                }
-        //
-        //                //var3.func_48433_a(var4, var2);
-        //            }
-        //            else if (par1 >= 10 && par1 < 37)
-        //            {
-        //                if (!this.mergeItemStack(var4, 0, 9, false))
-        //                {
-        //                    return null;
-        //                }
-        //            }
-        //            else if (par1 >= 0 && par1 < 9)
-        //            {
-        //                if (!this.mergeItemStack(var4, 10, 37, false))
-        //                {
-        //                    return null;
-        //                }
-        //            }
-        //            else if (!this.mergeItemStack(var4, 10, 46, false))
-        //            {
-        //                return null;
-        //            }
-        //
-        //            if (var4.stackSize == 0)
-        //            {
-        //                var3.putStack((ItemStack)null);
-        //            }
-        //            else
-        //            {
-        //                var3.onSlotChanged();
-        //            }
-        //
-        //            if (var4.stackSize == var2.stackSize)
-        //            {
-        //                return null;
-        //            }
-        //
-        //            var3.onPickupFromSlot(var4);
-        //        }
 
         return var2;
     }

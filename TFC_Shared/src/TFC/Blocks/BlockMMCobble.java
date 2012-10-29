@@ -6,8 +6,8 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.TFCItems;
 import TFC.Core.Helper;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;

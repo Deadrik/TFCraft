@@ -1,14 +1,19 @@
 package TFC.Containers;
 
+import TFC.*;
 import TFC.Core.AnvilReq;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ICrafting;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
+import net.minecraft.src.World;
 
 public class ContainerTerraAnvil extends ContainerTFC
 {
@@ -61,7 +66,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 
 
 	@Override
-	public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
+	public ItemStack slotClick(int i, int j, int k, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
 		if (j > 1)
@@ -90,17 +95,17 @@ public class ContainerTerraAnvil extends ContainerTFC
 					}
 				}
 			}
-			else if (flag)
+			else if (k == 1)
 			{
 				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
 				if (itemstack1 != null)
 				{
-					int k = itemstack1.itemID;
+					int id = itemstack1.itemID;
 					itemstack = itemstack1.copy();
 					Slot slot1 = (Slot)inventorySlots.get(i);
-					if (slot1 != null && slot1.getStack() != null && slot1.getStack().itemID == k)
+					if (slot1 != null && slot1.getStack() != null && slot1.getStack().itemID == id)
 					{
-						retrySlotClick(i, j, flag, entityplayer);
+						retrySlotClick(i, j, true, entityplayer);
 					}
 				}
 			}
@@ -145,7 +150,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 						{
 							slot.putStack(null);
 						}
-						slot.onPickupFromSlot(inventoryplayer.getItemStack());
+						slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
@@ -189,7 +194,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 							{
 								slot.putStack(null);
 							}
-							slot.onPickupFromSlot(inventoryplayer.getItemStack());
+							slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
 						}
 					}
 				}

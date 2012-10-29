@@ -4,34 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockFirepit;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
-import TFC.Core.TFCItems;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Time;
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Game;
-import TFC.Core.Vector3f;
+import TFC.Core.*;
 import TFC.Enums.EnumWoodMaterial;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagList;
-import net.minecraft.src.Packet;
-import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
+import net.minecraft.src.*;
 
 public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory
 {
@@ -376,7 +358,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         EntityItem entityitem;
         Random rand = new Random();
         float f = rand.nextFloat() * 0.8F + 0.1F;
-        float f1 = rand.nextFloat() * 2.0F + 0.4F;
+        float f1 = rand.nextFloat() * 0.8F + 0.3F;
         float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
         for (int i = 0; i < getSizeInventory(); i++)
@@ -389,6 +371,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
                 entityitem.motionZ = (float)rand.nextGaussian() * f3;
                 worldObj.spawnEntityInWorld(entityitem);
+                fireItemStacks[i] = null;
             }
         }
     }
@@ -828,19 +811,24 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1);
+                worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
             }
-            else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
+            else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) !=0 )
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
-                BlockFirepit.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
+                worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+                //BlockFirepit.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
 
             //If the fire is still burning and has fuel
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && Surrounded != 5)
             {
 
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.FirepitOn.blockID) {
-                    BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
+                if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0 ) 
+                {
+                	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2);
+                	worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+                    //BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 
                 float desiredTemp = 0;
@@ -861,7 +849,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
                 if(fireItemStacks[5] != null)
                 {
-                    EnumWoodMaterial m = TFC_Game.getWoodMaterial(fireItemStacks[5]);
+                    EnumWoodMaterial m = TFC_Core.getWoodMaterial(fireItemStacks[5]);
                     fireItemStacks[5] = null;
 
                     fuelTimeLeft = m.burnTimeMax;

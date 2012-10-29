@@ -1,9 +1,13 @@
 package TFC.Items;
 
+import TFC.*;
 import TFC.Blocks.BlockSluice;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
 
 public class ItemSluice extends ItemTerra
 {

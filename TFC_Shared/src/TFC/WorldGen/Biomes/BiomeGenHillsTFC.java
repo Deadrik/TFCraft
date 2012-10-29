@@ -11,8 +11,8 @@ import net.minecraft.src.SpawnListEntry;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
-import TFC.Entities.EntityBear;
-import TFC.Entities.EntityWolfTFC;
+import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 

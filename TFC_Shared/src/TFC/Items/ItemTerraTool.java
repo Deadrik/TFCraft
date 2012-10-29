@@ -6,6 +6,7 @@ import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ItemTool;
@@ -20,7 +21,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 	}
 
-	public void addInformation(ItemStack is, List arraylist) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		ItemTerra.addSizeInformation(this, arraylist);
 		

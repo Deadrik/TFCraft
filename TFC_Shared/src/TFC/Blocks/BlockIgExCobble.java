@@ -6,8 +6,9 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
@@ -24,7 +25,6 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockIgExCobble extends BlockTerra2
 {
@@ -71,7 +71,7 @@ public class BlockIgExCobble extends BlockTerra2
 	 * Mapping from metadata value to damage value
 	 */
 	@Override
-	protected int damageDropped(int i) {
+	public int damageDropped(int i) {
 
 			return i+13;
 	}
@@ -85,6 +85,7 @@ public class BlockIgExCobble extends BlockTerra2
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int par1, int par2)
 	{
 		return this.blockIndexInTexture + par2;
@@ -96,21 +97,25 @@ public class BlockIgExCobble extends BlockTerra2
 		return "/bioxx/terraRock.png";
 	}
 
+	@Override
 	public void onBlockAdded(World world, int i, int j, int k)
 	{
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
+	@Override
 	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
 	{
 
 	}
 
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
+	@Override
 	public int tickRate()
 	{
 		return 3;

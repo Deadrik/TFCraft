@@ -14,11 +14,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Time;
 
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.World;
 
 public class ChunkDataManager 

@@ -1,10 +1,14 @@
 package TFC.Render;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModelRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Entities.EntityWolfTFC;
+import TFC.*;
+import TFC.Entities.Mobs.EntityWolfTFC;
 
 public class ModelWolfTFC extends ModelBaseTFC
 {
@@ -71,7 +75,7 @@ public class ModelWolfTFC extends ModelBaseTFC
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
     {
         super.render(par1Entity, par2, par3, par4, par5, par6, par7);
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7);
+        this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
 
         if (this.isChild)
         {
@@ -171,9 +175,9 @@ public class ModelWolfTFC extends ModelBaseTFC
     /**
      * Sets the models various rotation angles.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity)
     {
-        super.setRotationAngles(par1, par2, par3, par4, par5, par6);
+        super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
         this.wolfHeadMain.rotateAngleX = par5 / (180F / (float)Math.PI);
         this.wolfHeadMain.rotateAngleY = par4 / (180F / (float)Math.PI);
         this.wolfTail.rotateAngleX = par3;

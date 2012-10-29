@@ -7,25 +7,28 @@ import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumArmorMaterial;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemArmor;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraftforge.common.ISpecialArmor;
 
 public class ItemCustomArmor extends ItemArmor implements ISize
 {
-
     public ItemCustomArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4)
     {
         super(par1,par2EnumArmorMaterial,par3,par4);
     }
-    
+    @Override
     public String getTextureFile() 
     {
         return "/bioxx/terraarmor1.png";
     }
-    
+    @Override
     public int getItemStackLimit()
     {
     	if(canStack())
@@ -45,7 +48,8 @@ public class ItemCustomArmor extends ItemArmor implements ISize
 		return false;
 	}
 	
-	public void addInformation(ItemStack is, List arraylist) 
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		ItemTerra.addSizeInformation(this, arraylist);
     	

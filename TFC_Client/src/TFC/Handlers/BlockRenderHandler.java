@@ -1,12 +1,12 @@
 package TFC.Handlers;
 
+import TFC.TFCBlocks;
 import TFC.Render.TFC_CoreRender;
 import TFC.Render.Blocks.*;
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
-import net.minecraft.src.TFCBlocks;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BlockRenderHandler implements ISimpleBlockRenderingHandler 

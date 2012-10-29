@@ -7,12 +7,14 @@ import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.TFCBlocks;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Time;
 import TFC.Core.WeatherManager;
 import TFC.Entities.*;
+import TFC.Entities.Mobs.*;
 import TFC.WorldGen.Biomes.BiomeGenBeachTFC;
 import TFC.WorldGen.Biomes.BiomeGenDesertTFC;
 import TFC.WorldGen.Biomes.BiomeGenForestTFC;
@@ -54,7 +56,6 @@ import net.minecraft.src.EntityZombie;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.SpawnListEntry;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 import net.minecraft.client.*;
@@ -193,12 +194,12 @@ public class TFCBiome extends BiomeGenBase
         this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 4, 4));
         this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
         
-        this.spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10, 4, 4));
-        this.spawnableMonsterList.add(new SpawnListEntry(EntityZombie.class, 10, 4, 4));
-        this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 10, 4, 4));
-        this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10, 4, 4));
-        this.spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 10, 4, 4));
-        this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntityZombieTFC.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonTFC.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeperTFC.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 10, 4, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 4));
     }
         
     /**

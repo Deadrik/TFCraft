@@ -4,12 +4,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityPartial;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.World;
 
 public class ItemFirestarter extends ItemTerra
 {

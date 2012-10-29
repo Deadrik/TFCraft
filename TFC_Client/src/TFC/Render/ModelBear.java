@@ -6,9 +6,13 @@
 
 package TFC.Render;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModelRenderer;
 
 import org.lwjgl.opengl.GL11;
+
+import TFC.*;
 
 public class ModelBear extends ModelBaseTFC
 {
@@ -109,7 +113,7 @@ public class ModelBear extends ModelBaseTFC
     public void render (Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
 	super.render (entity, f, f1, f2, f3, f4, f5);
-	setRotationAngles (f, f1, f2, f3, f4, f5);
+	setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
 	if (isChild)
 	{
@@ -162,9 +166,9 @@ public class ModelBear extends ModelBaseTFC
     }
 
 
-    public void setRotationAngles (float f, float f1, float f2, float f3, float f4, float f5)
+    public void setRotationAngles (float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
-	super.setRotationAngles (f, f1, f2, f3, f4, f5);
+	super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 	BearHead.rotateAngleX = f4 / (180F / (float) Math.PI);
 	BearHead.rotateAngleY = f3 / (180F / (float) Math.PI);
 

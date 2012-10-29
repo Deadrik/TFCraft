@@ -7,12 +7,18 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.*;
 import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 import TFC.Items.ItemCustomShovel;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockWIP extends BlockTerra2
 {
@@ -23,7 +29,7 @@ public class BlockWIP extends BlockTerra2
 	}
 
 	@Override
-	protected int damageDropped(int i) {
+	public int damageDropped(int i) {
 		return i;
 	}
 

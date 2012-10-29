@@ -1,8 +1,11 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Core.TFC_Core;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotFirepitOut extends Slot
 

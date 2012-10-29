@@ -2,12 +2,22 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockCookingFirepit extends BlockContainer
 {

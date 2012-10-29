@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.TFCBlocks;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
@@ -21,7 +22,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class BlockSlab extends BlockPartial

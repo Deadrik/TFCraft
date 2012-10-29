@@ -14,6 +14,7 @@ public class ContainerTFC extends Container
 		return true;
 	}
 	
+	@Override
 	protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
     {
         boolean var5 = false;

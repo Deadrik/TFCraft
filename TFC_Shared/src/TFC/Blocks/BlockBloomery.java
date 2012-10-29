@@ -2,6 +2,8 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.TileEntities.TileEntityBloomery;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
@@ -10,10 +12,8 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockBloomery extends BlockContainer
 {

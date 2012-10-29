@@ -2,11 +2,16 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.WorldGen.BiomeDecoratorTFC;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.Block;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class WorldGenLooseRocks implements IWorldGenerator
 {

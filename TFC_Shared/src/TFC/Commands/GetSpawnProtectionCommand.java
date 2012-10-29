@@ -20,7 +20,7 @@ public class GetSpawnProtectionCommand extends CommandBase{
 	@Override
 	public void processCommand(ICommandSender sender, String[] params) 
 	{
-		if(sender.canCommandSenderUseCommand(sender.getCommandSenderName()))
+		if(sender.canCommandSenderUseCommand(0, sender.getCommandSenderName()))
 		{
             MinecraftServer var3 = MinecraftServer.getServer();
             EntityPlayerMP var4;

@@ -2,9 +2,11 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 
-import net.minecraft.src.*;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomFruitTree2 extends WorldGenerator
 {

@@ -5,11 +5,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Blocks.BlockOre;
 import TFC.Blocks.BlockSluice;
-import TFC.Core.TFCItems;
 import TFC.Items.ItemOre1;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.NBTTagList;
+import net.minecraft.src.TileEntity;
 
 public class TileEntityTerraSluice extends TileEntity implements IInventory
 {	

@@ -3,9 +3,19 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Settings;
 import TFC.Items.ItemCustomScythe;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BlockLeaves;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.StatList;
+import net.minecraft.src.World;
 import net.minecraftforge.common.IShearable;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
@@ -288,11 +298,13 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         }
     }
 
-    protected int damageDropped(int i)
+    @Override
+    public int damageDropped(int i)
     {
         return i;
     }
 
+    @Override
     public boolean isOpaqueCube()
     {
         if(TerraFirmaCraft.proxy != null)
@@ -301,6 +313,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
             return false;
     }
 
+    @Override
     public int getBlockTextureFromSideAndMetadata(int i, int j)
     {
         if (TerraFirmaCraft.proxy.getGraphicsLevel())
@@ -313,6 +326,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         }
     }
 
+    @Override
     public void onEntityWalking(World world, int i, int j, int k, Entity entity)
     {
         super.onEntityWalking(world, i, j, k, entity);
@@ -324,6 +338,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         return "/bioxx/terrablocks.png";
     }
 
+    @Override
     public void addCreativeItems(java.util.ArrayList list)
     {
         for(int i = 0; i < 16; i++)

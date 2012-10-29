@@ -1,8 +1,8 @@
 package TFC.TileEntities;
 
+import TFC.TFCBlocks;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Time;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 
 public class TileEntitySpawnMeter extends TileEntity

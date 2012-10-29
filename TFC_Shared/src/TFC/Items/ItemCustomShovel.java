@@ -2,8 +2,10 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Core.TFC_Settings;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EnumToolMaterial;
 
 public class ItemCustomShovel extends ItemTerraTool
 {

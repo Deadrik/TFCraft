@@ -2,8 +2,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 
-import net.minecraft.src.*;
+
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomBigTree extends WorldGenerator
 {

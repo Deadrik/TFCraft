@@ -1,7 +1,9 @@
 package TFC.Handlers;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -10,8 +12,6 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TerraFirmaCraft;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler

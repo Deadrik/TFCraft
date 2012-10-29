@@ -3,12 +3,20 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Core.TFC_Core;
+import TFC.TileEntities.TileEntityCrop;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockLooseRock extends BlockTerra
 {
@@ -16,19 +24,19 @@ public class BlockLooseRock extends BlockTerra
 	public BlockLooseRock(int par1) 
 	{
 		super(par1, Material.wood);
-		this.setBlockBounds(0.40F, 0.00F, 0.4F, 0.6F, 0.10F, 0.7F);
+		//this.setBlockBounds(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
 	}
-
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.looseRockRenderId;
 	}
-	
+	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
     {
         return true;
     }
-
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int xCoord, int yCoord, int zCoord, int l)
 	{		
 	    TFCBiome biome = (TFCBiome) world.getBiomeGenForCoords(xCoord, zCoord);
@@ -76,12 +84,12 @@ public class BlockLooseRock extends BlockTerra
 	{
 		return TFCItems.LooseRock.shiftedIndex;
 	}
-
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
 	{
 		if (world.getBlockId(i, j-1, k) == 0)
@@ -98,6 +106,7 @@ public class BlockLooseRock extends BlockTerra
 		}
 	}
 
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -107,6 +116,18 @@ public class BlockLooseRock extends BlockTerra
     public String getTextureFile()
     {
         return "/bioxx/terraRock.png";
+    }
+	
+	@Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+    {
+        return null;
+    }
+
+    @Override
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+    {
+        return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.25, k+1);
     }
 
 }

@@ -14,6 +14,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import bioxx.importers.WavefrontObject;
 
+import TFC.*;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.CommonProxy;
@@ -25,6 +26,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.*;
+import TFC.Entities.Mobs.*;
 import TFC.Enums.EnumTree;
 import TFC.GUI.*;
 import TFC.Handlers.*;
@@ -37,7 +39,27 @@ import TFC.WorldGen.TFCSkyProvider;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.KeyBinding;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.ModelSlime;
+import net.minecraft.src.ModelSquid;
+import net.minecraft.src.Packet;
+import net.minecraft.src.PlayerAPI;
+import net.minecraft.src.RenderBlaze;
+import net.minecraft.src.RenderEnderman;
+import net.minecraft.src.RenderGhast;
+import net.minecraft.src.RenderIronGolem;
+import net.minecraft.src.RenderSilverfish;
+import net.minecraft.src.RenderSkeleton;
+import net.minecraft.src.RenderSlime;
+import net.minecraft.src.RenderSpider;
+import net.minecraft.src.RenderSquid;
+import net.minecraft.src.RenderZombie;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -88,6 +110,18 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderCustomMinecart());
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeleton());
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieTFC.class, new RenderZombie());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderTFC.class, new RenderSpider());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySlimeTFC.class, new RenderSlime(new ModelSlime(16), new ModelSlime(0), 0.25F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySilverfishTFC.class, new RenderSilverfish());
+		RenderingRegistry.registerEntityRenderingHandler(EntityGhastTFC.class, new RenderGhast());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCaveSpiderTFC.class, new RenderSpider());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlazeTFC.class, new RenderBlaze());
+		RenderingRegistry.registerEntityRenderingHandler(EntityEndermanTFC.class, new RenderEnderman());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
+		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sulfurRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdH = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());

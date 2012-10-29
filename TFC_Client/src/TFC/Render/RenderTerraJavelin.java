@@ -3,8 +3,12 @@ package TFC.Render;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import TFC.*;
 import TFC.Entities.EntityTerraJavelin;
-import net.minecraft.src.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.Render;
+import net.minecraft.src.Tessellator;
 
 public class RenderTerraJavelin extends Render
 {

@@ -2,7 +2,14 @@ package TFC.Core;
 
 import java.util.*;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.IRecipe;
+import net.minecraft.src.InventoryCrafting;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class CraftingManagerTFC
 {
@@ -117,7 +124,7 @@ public class CraftingManagerTFC
 		recipes.add(new ShapelessRecipesTFC(itemstack, arraylist));
 	}
 
-	public ItemStack findMatchingRecipe(InventoryCrafting inventorycrafting)
+	public ItemStack findMatchingRecipe(InventoryCrafting inventorycrafting, World world)
 	{
 		int i = 0;
 		ItemStack itemstack = null;
@@ -156,7 +163,7 @@ public class CraftingManagerTFC
 		for (int k = 0; k < recipes.size(); k++)
 		{
 			IRecipe irecipe = (IRecipe)recipes.get(k);
-			if (irecipe.matches(inventorycrafting))
+			if (irecipe.matches(inventorycrafting, world))
 			{
 				return irecipe.getCraftingResult(inventorycrafting);
 			}

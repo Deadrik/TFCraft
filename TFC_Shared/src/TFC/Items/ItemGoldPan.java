@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Blocks.BlockOre;
 import TFC.Core.Helper;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityTerraSluice;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.World;
 
 public class ItemGoldPan extends ItemTerra
 {

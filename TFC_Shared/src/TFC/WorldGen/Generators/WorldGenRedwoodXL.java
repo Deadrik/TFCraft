@@ -5,9 +5,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.TFCBiome;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenRedwoodXL extends WorldGenerator {
 	final int	blockLeaf, metaLeaf, blockWood, metaWood;

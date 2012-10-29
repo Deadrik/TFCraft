@@ -1,8 +1,9 @@
 package TFC.Containers;
 
+import TFC.*;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
-import net.minecraft.src.*;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
 
 public class SlotAnvilWeldOut extends Slot
@@ -14,13 +15,9 @@ public class SlotAnvilWeldOut extends Slot
 
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		return false;
-	}
-
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
 	}
 }

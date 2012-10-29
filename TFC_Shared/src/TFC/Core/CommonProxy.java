@@ -13,11 +13,12 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Packet;
 import net.minecraft.src.ServerPlayerAPI;
-import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetTreesCommand;
 import TFC.Containers.*;
@@ -25,6 +26,7 @@ import TFC.Core.*;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.*;
+import TFC.Entities.Mobs.*;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
 import TFC.GUI.GuiHUD;
@@ -87,8 +89,19 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "pig", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squid", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityDeer.class, "deer", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", ModLoader.getUniqueEntityId());
-		//EntityRegistry.registerGlobalEntityID(EntityCustomMinecartCrate.class, "minecartCrate", 108);
+		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "skeleton", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityZombieTFC.class, "zombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySpiderTFC.class, "spider", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySlimeTFC.class, "slime", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySilverfishTFC.class, "silverfish", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityGhastTFC.class, "ghast", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityCaveSpiderTFC.class, "cavespider", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityBlazeTFC.class, "blaze", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityEndermanTFC.class, "enderman", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "pigzombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolem", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 
 		EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);
@@ -101,9 +114,20 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,TerraFirmaCraft.instance, 160, 5, true);
 		
-
 		EntityRegistry.registerModEntity(EntityCustomMinecart.class, "TFC minecart", 12,TerraFirmaCraft.instance, 160, 5, true);
-		//EntityRegistry.registerModEntity(EntityCustomMinecartCrate.class, "TFC minecartCrate", 13,TerraFirmaCraft.instance, 160, 5, true);
+		
+		EntityRegistry.registerModEntity(EntitySkeletonTFC.class, "skeletonTFC", 13,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityZombieTFC.class, "zombieTFC", 14,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntitySpiderTFC.class, "spiderTFC", 15,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntitySlimeTFC.class, "slimeTFC", 16,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntitySilverfishTFC.class, "silverfishTFC", 17,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityGhastTFC.class, "ghastTFC", 18,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityCaveSpiderTFC.class, "cavespiderTFC", 19,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityBlazeTFC.class, "blazeTFC", 20,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityEndermanTFC.class, "endermanTFC", 21,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityPigZombieTFC.class, "pigzombieTFC", 22,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityIronGolemTFC.class, "irongolemTFC", 23,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityCreeperTFC.class, "creeperTFC", 24,TerraFirmaCraft.instance, 160, 5, true);
 	}
 
 	public void registerToolClasses() {
@@ -330,7 +354,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 31:
 		{
-			return new ContainerPlayer(player.inventory);
+			return new ContainerPlayer(player.inventory, false, player);
 		}
 		case 32:
 		{

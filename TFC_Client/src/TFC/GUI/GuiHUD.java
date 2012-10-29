@@ -7,6 +7,7 @@ import java.util.Random;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import TFC.*;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.TFC_PlayerClient;
@@ -14,7 +15,25 @@ import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Food.FoodStatsTFC;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Chunk;
+import net.minecraft.src.EnumSkyBlock;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.GuiIngame;
+import net.minecraft.src.GuiNewChat;
+import net.minecraft.src.GuiPlayerInfo;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.NetClientHandler;
+import net.minecraft.src.Potion;
+import net.minecraft.src.RenderHelper;
+import net.minecraft.src.RenderItem;
+import net.minecraft.src.ScaledResolution;
+import net.minecraft.src.StatCollector;
+import net.minecraft.src.StringUtils;
+import net.minecraft.src.Tessellator;
 import net.minecraftforge.common.ForgeHooks;
 
 public class GuiHUD extends GuiIngame
@@ -143,7 +162,7 @@ public class GuiHUD extends GuiIngame
 				int waterLevel = foodstats.waterLevel;
 
 				float percentFood = (float)foodLevel/100f;
-				float percentWater = (float)waterLevel/(float)FoodStatsTFC.getMaxWater();
+				float percentWater = (float)waterLevel/(float)foodstats.getMaxWater(this.mc.thePlayer);
 
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/bioxx/icons.png"));
@@ -169,26 +188,29 @@ public class GuiHUD extends GuiIngame
 			boolean var14 = false;
 			if (this.mc.playerController.shouldDrawHUD())
 			{         
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/gui/icons.png"));
 				var18 = scaledWidth / 2 - 91;
 				var19 = scaledWidth / 2 + 91;
 				this.mc.mcProfiler.startSection("expBar");
 				var20 = this.mc.thePlayer.xpBarCap();
 
-				//                if (var20 > 0)
-				//                {
-				//                    short var21 = 182;
-				//                    var22 = (int)(this.mc.thePlayer.experience * (float)(var21 + 1));
-				//                    var23 = var7 - 32 + 3;
-				//                    this.drawTexturedModalRect(var18, var23, 0, 64, var21, 5);
-				//
-				//                    if (var22 > 0)
-				//                    {
-				//                        this.drawTexturedModalRect(var18, var23, 0, 69, var22, 5);
-				//                    }
-				//                }
+				if (var20 > 0)
+				{
+					short var21 = 182;
+					int xp = (int)(this.mc.thePlayer.experience * (float)(var21 + 1));
+					int yOffset = scaledHeight - 32 + 3;
+					this.drawTexturedModalRect(var18, yOffset, 0, 64, var21, 5);
+
+					if (xp > 0)
+					{
+						this.drawTexturedModalRect(var18, yOffset, 0, 69, xp, 5);
+					}
+				}
 
 
-				var23 = ForgeHooks.getTotalArmorValue(mc.thePlayer);
+				int yOffset = scaledHeight - 49;
+				int armorValue = ForgeHooks.getTotalArmorValue(mc.thePlayer);
 				int var24 = -1;
 
 				if (this.mc.thePlayer.isPotionActive(Potion.regeneration))
@@ -204,25 +226,26 @@ public class GuiHUD extends GuiIngame
 
 				for (var25 = 0; var25 < 10; ++var25)
 				{
-					//                    if (var23 > 0)
-					//                    {
-					//                        var26 = var18 + var25 * 8;
-					//
-					//                        if (var25 * 2 + 1 < var23)
-					//                        {
-					//                            this.drawTexturedModalRect(var26, var22, 34, 9, 9, 9);
-					//                        }
-					//
-					//                        if (var25 * 2 + 1 == var23)
-					//                        {
-					//                            this.drawTexturedModalRect(var26, var22, 25, 9, 9, 9);
-					//                        }
-					//
-					//                        if (var25 * 2 + 1 > var23)
-					//                        {
-					//                            this.drawTexturedModalRect(var26, var22, 16, 9, 9, 9);
-					//                        }
-					//                    }
+					if (armorValue > 0)
+					{
+						
+						var26 = var18 + var25 * 8;
+
+						if (var25 * 2 + 1 < armorValue)
+						{
+							this.drawTexturedModalRect(var26, scaledHeight, 34, 9, 9, 9);
+						}
+
+						if (var25 * 2 + 1 == armorValue)
+						{
+							this.drawTexturedModalRect(var26, scaledHeight, 25, 9, 9, 9);
+						}
+
+						if (var25 * 2 + 1 > armorValue)
+						{
+							this.drawTexturedModalRect(var26, scaledHeight, 16, 9, 9, 9);
+						}
+					}
 
 					var26 = 16;
 
@@ -258,87 +281,34 @@ public class GuiHUD extends GuiIngame
 						var30 = 5;
 					}
 
-					//                    this.drawTexturedModalRect(var28, var29, 16 + var27 * 9, 9 * var30, 9, 9);
-					//
-					//                    if (var11)
-						//                    {
-						//                        if (var25 * 2 + 1 < var13)
-							//                        {
-							//                            this.drawTexturedModalRect(var28, var29, var26 + 54, 9 * var30, 9, 9);
-					//                        }
-					//
-					//                        if (var25 * 2 + 1 == var13)
-					//                        {
-					//                            this.drawTexturedModalRect(var28, var29, var26 + 63, 9 * var30, 9, 9);
-					//                        }
-					//                    }
-					//
-					//                    if (var25 * 2 + 1 < var12)
-					//                    {
-					//                        this.drawTexturedModalRect(var28, var29, var26 + 36, 9 * var30, 9, 9);
-					//                    }
-					//
-					//                    if (var25 * 2 + 1 == var12)
-					//                    {
-					//                        this.drawTexturedModalRect(var28, var29, var26 + 45, 9 * var30, 9, 9);
-					//                    }
+					//					                    this.drawTexturedModalRect(var28, var29, 16 + var27 * 9, 9 * var30, 9, 9);
+					//					
+					//					                    if (var11)
+						//						                    {
+						//						                        if (var25 * 2 + 1 < var13)
+							//							                        {
+							//							                            this.drawTexturedModalRect(var28, var29, var26 + 54, 9 * var30, 9, 9);
+					//					                        }
+					//					
+					//					                        if (var25 * 2 + 1 == var13)
+					//					                        {
+					//					                            this.drawTexturedModalRect(var28, var29, var26 + 63, 9 * var30, 9, 9);
+					//					                        }
+					//					                    }
+					//					
+					//					                    if (var25 * 2 + 1 < var12)
+					//					                    {
+					//					                        this.drawTexturedModalRect(var28, var29, var26 + 36, 9 * var30, 9, 9);
+					//					                    }
+					//					
+					//					                    if (var25 * 2 + 1 == var12)
+					//					                    {
+					//					                        this.drawTexturedModalRect(var28, var29, var26 + 45, 9 * var30, 9, 9);
+					//					                    }
 				}
 
 				this.mc.mcProfiler.endStartSection("food");
 				int var52;
-
-
-
-				for (var25 = 0; var25 < 10; ++var25)
-				{
-					var26 = healthRowHeight;
-					var52 = 16;
-					byte var53 = 0;
-
-					if (this.mc.thePlayer.isPotionActive(Potion.hunger))
-					{
-						var52 += 36;
-						var53 = 13;
-					}
-
-//					if (this.mc.thePlayer.getFoodStats().getSaturationLevel() <= 0.0F && this.updateCounter % (foodLevel * 3 + 1) == 0)
-//					{
-//						var26 = healthRowHeight + (this.rand.nextInt(3) - 1);
-//					}
-
-					if (var14)
-					{
-						var53 = 1;
-					}
-
-					var29 = var19 - var25 * 8 - 9;
-
-					//                    this.drawTexturedModalRect(var29, var26, 16 + var53 * 9, 27, 9, 9);
-					//
-					//                    if (var14)
-						//                    {
-						//                        if (var25 * 2 + 1 < var17)
-							//                        {
-							//                            this.drawTexturedModalRect(var29, var26, var52 + 54, 27, 9, 9);
-					//                        }
-					//
-					//                        if (var25 * 2 + 1 == var17)
-					//                        {
-					//                            this.drawTexturedModalRect(var29, var26, var52 + 63, 27, 9, 9);
-					//                        }
-					//                    }
-					//
-					//                    if (var25 * 2 + 1 < var16)
-					//                    {
-					//                        this.drawTexturedModalRect(var29, var26, var52 + 36, 27, 9, 9);
-					//                    }
-					//
-					//                    if (var25 * 2 + 1 == var16)
-					//                    {
-					//                        this.drawTexturedModalRect(var29, var26, var52 + 45, 27, 9, 9);
-					//                    }
-				}
-
 				this.mc.mcProfiler.endStartSection("air");
 
 				if (this.mc.thePlayer.isInsideOfMaterial(Material.water))
@@ -604,33 +574,33 @@ public class GuiHUD extends GuiIngame
 	/**
 	 * Renders dragon's (boss) health on the HUD
 	 */
-	private void renderBossHealth()
-	{
-		if (RenderDragon.entityDragon != null)
-		{
-			EntityDragon var1 = RenderDragon.entityDragon;
-			RenderDragon.entityDragon = null;
-			FontRenderer var2 = this.mc.fontRenderer;
-			ScaledResolution var3 = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
-			int var4 = var3.getScaledWidth();
-			short var5 = 182;
-			int var6 = var4 / 2 - var5 / 2;
-			int var7 = (int)((float)var1.getDragonHealth() / (float)var1.getMaxHealth() * (float)(var5 + 1));
-			byte var8 = 12;
-			this.drawTexturedModalRect(var6, var8, 0, 74, var5, 5);
-			this.drawTexturedModalRect(var6, var8, 0, 74, var5, 5);
-
-			if (var7 > 0)
-			{
-				this.drawTexturedModalRect(var6, var8, 0, 79, var7, 5);
-			}
-
-			String var9 = "Boss health";
-			var2.drawStringWithShadow(var9, var4 / 2 - var2.getStringWidth(var9) / 2, var8 - 10, 16711935);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/gui/icons.png"));
-		}
-	}
+	//	private void renderBossHealth()
+	//	{
+	//		if (RenderDragon.entityDragon != null)
+	//		{
+	//			EntityDragon var1 = RenderDragon.entityDragon;
+	//			RenderDragon.entityDragon = null;
+	//			FontRenderer var2 = this.mc.fontRenderer;
+	//			ScaledResolution var3 = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+	//			int var4 = var3.getScaledWidth();
+	//			short var5 = 182;
+	//			int var6 = var4 / 2 - var5 / 2;
+	//			int var7 = (int)((float)var1.getDragonHealth() / (float)var1.getMaxHealth() * (float)(var5 + 1));
+	//			byte var8 = 12;
+	//			this.drawTexturedModalRect(var6, var8, 0, 74, var5, 5);
+	//			this.drawTexturedModalRect(var6, var8, 0, 74, var5, 5);
+	//
+	//			if (var7 > 0)
+	//			{
+	//				this.drawTexturedModalRect(var6, var8, 0, 79, var7, 5);
+	//			}
+	//
+	//			String var9 = "Boss health";
+	//			var2.drawStringWithShadow(var9, var4 / 2 - var2.getStringWidth(var9) / 2, var8 - 10, 16711935);
+	//			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	//			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/gui/icons.png"));
+	//		}
+	//	}
 
 	private void renderPumpkinBlur(int par1, int par2)
 	{

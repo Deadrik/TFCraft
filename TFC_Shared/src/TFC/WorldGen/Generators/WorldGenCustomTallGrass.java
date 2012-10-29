@@ -2,9 +2,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Blocks.BlockCustomTallGrass;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomTallGrass extends WorldGenerator
 {

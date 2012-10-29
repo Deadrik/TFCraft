@@ -7,11 +7,17 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.*;
 import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockDirt extends BlockTerra2
 {
@@ -33,7 +39,7 @@ public class BlockDirt extends BlockTerra2
     }
 
     @Override
-    protected int damageDropped(int i) {
+    public int damageDropped(int i) {
         return i;
     }
     
@@ -59,6 +65,7 @@ public class BlockDirt extends BlockTerra2
     /**
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
+    @Override
     public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         return this.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -67,16 +74,19 @@ public class BlockDirt extends BlockTerra2
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
+    @Override
     public int getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
         return this.blockIndexInTexture + par2;
     }
 
+    @Override
     public void onBlockAdded(World world, int i, int j, int k)
     {
         world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
     }
 
+    @Override
     public int tickRate()
     {
         return 3;
@@ -110,6 +120,7 @@ public class BlockDirt extends BlockTerra2
         }
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random)
 	{
 		if(!world.isRemote)

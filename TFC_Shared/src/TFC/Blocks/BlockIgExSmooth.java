@@ -6,6 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
@@ -25,7 +26,6 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockIgExSmooth extends Block
 {

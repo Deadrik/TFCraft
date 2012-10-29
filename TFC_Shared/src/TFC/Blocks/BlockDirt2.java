@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Sounds;
 import TFC.Entities.EntityFallingDirt;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class BlockDirt2 extends BlockDirt
 {	
@@ -18,10 +22,11 @@ public class BlockDirt2 extends BlockDirt
     }
 
     @Override
-    protected int damageDropped(int i) {
+    public int damageDropped(int i) {
         return i;
     }
     
+    @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
     	for(int i = 0; i < 7; i++)

@@ -1,10 +1,12 @@
 package TFC.Render;
 
-import net.minecraft.src.*;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.TileEntitySpecialRenderer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityTerraScribe;
 
 public class TileEntityScribeTableRenderer extends TileEntitySpecialRenderer {

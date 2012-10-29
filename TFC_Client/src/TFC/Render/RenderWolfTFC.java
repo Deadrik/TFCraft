@@ -1,7 +1,7 @@
 package TFC.Render;
 
-import TFC.Entities.EntityCowTFC;
-import TFC.Entities.EntityWolfTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntityWolfTFC;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityCow;
 import net.minecraft.src.EntityLiving;

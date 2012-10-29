@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
 import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
 import TFC.WorldGen.Generators.WorldGenCustomRedwoodTrees;
@@ -9,7 +10,10 @@ import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
 import TFC.WorldGen.Generators.WorldGenDouglasFir;
 
-import net.minecraft.src.*;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class BlockCustomSapling extends BlockCustomFlower
 {
@@ -27,12 +31,13 @@ public class BlockCustomSapling extends BlockCustomFlower
 			list.add(new ItemStack(this,1,i));
 		}
 	}
-
-	protected int damageDropped(int i)
+	
+	@Override
+	public int damageDropped(int i)
 	{
 		return i;
 	}
-
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		return j+blockIndexInTexture;
@@ -137,7 +142,8 @@ public class BlockCustomSapling extends BlockCustomFlower
 			world.setBlockAndMetadata(i, j, k, blockID, l);
 		}
 	}
-
+	
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{
 		if(par1World.getBlockMaterial(par2, par3-1, par4) != Material.grass)
@@ -148,7 +154,8 @@ public class BlockCustomSapling extends BlockCustomFlower
 			par1World.setBlock(par2, par3, par4, 0);
 		}
 	}
-
+	
+	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
 		if (world.isRemote)

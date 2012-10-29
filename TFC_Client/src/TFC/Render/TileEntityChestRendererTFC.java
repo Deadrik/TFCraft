@@ -1,10 +1,15 @@
 package TFC.Render;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.ModelChest;
+import net.minecraft.src.ModelLargeChest;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.TileEntitySpecialRenderer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityChestTFC;
 
 public class TileEntityChestRendererTFC extends TileEntitySpecialRenderer

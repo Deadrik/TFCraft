@@ -1,6 +1,8 @@
 package TFC.WorldGen.GenLayers;
 
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.GenLayer;
+import net.minecraft.src.IntCache;
 
 public class GenLayerSmoothTFC extends GenLayerTFC
 {

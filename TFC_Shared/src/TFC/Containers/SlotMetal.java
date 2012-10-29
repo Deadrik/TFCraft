@@ -1,7 +1,9 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotMetal extends Slot
 
@@ -12,6 +14,7 @@ public class SlotMetal extends Slot
 
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 
@@ -34,10 +37,5 @@ public class SlotMetal extends Slot
 			return true;
 		}
 		return false;
-	}
-
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
 	}
 }

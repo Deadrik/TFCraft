@@ -2,7 +2,11 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenDouglasFir extends WorldGenerator
 {

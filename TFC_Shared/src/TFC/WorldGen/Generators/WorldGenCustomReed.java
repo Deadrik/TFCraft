@@ -2,9 +2,13 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Blocks.BlockCustomReed;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomReed extends WorldGenerator
 {

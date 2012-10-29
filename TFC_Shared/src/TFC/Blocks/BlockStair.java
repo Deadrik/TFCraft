@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import TFC.TFCBlocks;
 import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.AxisAlignedBB;
@@ -11,7 +12,6 @@ import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Material;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class BlockStair extends BlockPartial

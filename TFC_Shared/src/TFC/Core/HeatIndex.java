@@ -2,7 +2,10 @@ package TFC.Core;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
 
 public class HeatIndex
 {

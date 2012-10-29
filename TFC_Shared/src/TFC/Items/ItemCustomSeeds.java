@@ -1,11 +1,16 @@
 package TFC.Items;
 
+import TFC.*;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityCrop;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class ItemCustomSeeds extends ItemTerra
 {
@@ -49,13 +54,14 @@ public class ItemCustomSeeds extends ItemTerra
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS !
 	 */
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
 		if (side != 1 || world.isRemote)
 		{
 			return false;
 		}
-		else if (player.canPlayerEdit(x, y, z) && player.canPlayerEdit(x, y+1, z))
+		else if (player.func_82247_a(x, y, z, side, stack) && player.func_82247_a(x, y + 1, z, side, stack))
 		{
 			int var8 = world.getBlockId(x, y, z);
 

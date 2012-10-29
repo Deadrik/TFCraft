@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.ArrayList;
 
+import TFC.*;
 import TFC.Core.*;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -10,7 +11,12 @@ import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockDetailed extends BlockPartial
 {

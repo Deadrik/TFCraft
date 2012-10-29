@@ -1,12 +1,15 @@
 package TFC.TileEntities;
 
+import TFC.*;
 import TFC.Blocks.BlockFarmland;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.TileEntity;
 
 public class TileEntityFarmland extends TileEntity
 {

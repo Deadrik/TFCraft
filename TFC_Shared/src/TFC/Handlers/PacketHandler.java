@@ -13,6 +13,7 @@ import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
+import TFC.*;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
@@ -29,7 +30,17 @@ import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.EntityPlayerSP;
+import net.minecraft.src.INetworkManager;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.NetHandler;
+import net.minecraft.src.NetLoginHandler;
+import net.minecraft.src.NetServerHandler;
+import net.minecraft.src.Packet1Login;
+import net.minecraft.src.Packet250CustomPayload;
+import net.minecraft.src.World;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
@@ -43,7 +54,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
-			NetworkManager manager, Packet1Login login) 
+			INetworkManager manager, Packet1Login login) 
 	{
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(clientHandler.getPlayer().username, manager));
 		TerraFirmaCraft.proxy.onClientLogin();
@@ -51,7 +62,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 
 	@Override
-	public void playerLoggedIn(Player p, NetHandler netHandler,NetworkManager manager)
+	public void playerLoggedIn(Player p, NetHandler netHandler, INetworkManager manager)
 	{
 		PlayerManagerTFC.getInstance().Players.add(new PlayerInfo(((EntityPlayer)p).username, manager));
 
@@ -86,7 +97,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	}
 
 	@Override
-	public void onPacketData(NetworkManager manager,
+	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player p)
 	{
 		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(packet.data));
@@ -276,41 +287,41 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 	@Override
 	public String connectionReceived(NetLoginHandler netHandler,
-			NetworkManager manager) {
+			INetworkManager manager) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void connectionOpened(NetHandler netClientHandler, String server,
-			int port, NetworkManager manager) {
+			int port, INetworkManager manager) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void connectionOpened(NetHandler netClientHandler,
-			MinecraftServer server, NetworkManager manager) {
+			MinecraftServer server, INetworkManager manager) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void connectionClosed(NetworkManager manager) 
+	public void connectionClosed(INetworkManager manager) 
 	{
 		PlayerInfo PI = new PlayerInfo("", manager);
 		for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
 		{
 			if(PlayerManagerTFC.getInstance().Players.get(i).networkManager == manager)
 			{
-				//System.out.println("PlayerManager Successfully removed player " + PlayerManagerTFC.getInstance().Players.get(i).Name);
+				System.out.println("PlayerManager Successfully removed player " + PlayerManagerTFC.getInstance().Players.get(i).Name);
 				PlayerManagerTFC.getInstance().Players.remove(i);
 			}  
 		}
 		
-		if(TerraFirmaCraft.proxy.isRemote())
-			manager.closeConnections();
-		else
-			manager.serverShutdown();
+//		if(TerraFirmaCraft.proxy.isRemote())
+//			manager.closeConnections();
+//		else
+//			manager.serverShutdown();
 	}
 }

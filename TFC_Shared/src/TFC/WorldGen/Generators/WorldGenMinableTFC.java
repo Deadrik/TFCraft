@@ -2,12 +2,15 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Settings;
 
 
-import net.minecraft.src.*;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenMinableTFC extends WorldGenerator
 {

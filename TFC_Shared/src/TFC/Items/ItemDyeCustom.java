@@ -6,11 +6,23 @@ import java.util.List;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import TFC.Entities.EntitySheepTFC;
+import TFC.*;
+import TFC.Entities.Mobs.EntitySheepTFC;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockCloth;
+import net.minecraft.src.BlockDirectional;
+import net.minecraft.src.BlockLog;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntitySheep;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 
 public class ItemDyeCustom extends ItemTerra
@@ -46,7 +58,7 @@ public class ItemDyeCustom extends ItemTerra
 
     public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
-        if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6))
+        if (!par2EntityPlayer.func_82247_a(par4, par5, par6, par7, par1ItemStack))
         {
             return false;
         }
@@ -65,7 +77,7 @@ public class ItemDyeCustom extends ItemTerra
                     return false;
                 }
 
-                if (event.isHandeled())
+                if (event.getResult() == Result.ALLOW)
                 {
                    if (!par3World.isRemote)
                     {

@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.CropIndex;
 import TFC.Core.CropManager;
 import TFC.Core.TFC_Settings;
@@ -9,7 +10,16 @@ import TFC.Items.ItemCustomScythe;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.WorldGen.TFCBiome;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.StatList;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 
 public class BlockCrop extends BlockContainer
@@ -112,11 +122,13 @@ public class BlockCrop extends BlockContainer
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
     }
 
+    @Override
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
     {
         TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
@@ -126,17 +138,6 @@ public class BlockCrop extends BlockContainer
         {
             type = te.cropId;
         }
-
-//        if(meta == 0)
-//        {
-//            if(type == 4)
-//                return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+2, k+1);
-//        }
-//        else if(meta == 1)
-//        {
-//            if(type == 4)
-//                return AxisAlignedBB.getBoundingBox(i, j-1, k, i+1, j+1, k+1);
-//        }
         return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.3, k+1);
     }
 

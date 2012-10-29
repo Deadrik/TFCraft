@@ -1,7 +1,13 @@
 package TFC.Containers;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityTerraSluice;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ICrafting;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
+import net.minecraft.src.World;
 
 public class ContainerTerraSluice extends ContainerTFC
 {
@@ -44,7 +50,8 @@ public class ContainerTerraSluice extends ContainerTFC
 	}
 
 
-	public ItemStack transferStackInSlot(int i)
+	@Override
+	public ItemStack func_82846_b(EntityPlayer player, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotpaper = (Slot)inventorySlots.get(1);
@@ -69,6 +76,7 @@ public class ContainerTerraSluice extends ContainerTFC
 		}
 		return null;
 	}
+	
 	private int soilamt = 0;
 	private int progress = 0;
 	public void updateCraftingResults()

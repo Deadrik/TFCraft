@@ -10,7 +10,7 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldGenVines;
 import net.minecraft.src.WorldGenerator;
 
-import TFC.Entities.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;

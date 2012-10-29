@@ -2,7 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenBigMushroom;
 
 public class BlockCustomMushroom extends BlockCustomFlower
 {

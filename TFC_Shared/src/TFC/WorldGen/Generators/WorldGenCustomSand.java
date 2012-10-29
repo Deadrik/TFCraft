@@ -2,11 +2,14 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.TFCWorldChunkManager;
 
 
-import net.minecraft.src.*;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomSand extends WorldGenerator
 {

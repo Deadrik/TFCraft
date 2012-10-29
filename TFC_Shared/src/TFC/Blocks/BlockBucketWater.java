@@ -3,7 +3,12 @@ package TFC.Blocks;
 import java.math.MathContext;
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockBucketWater extends BlockCustomFluid
 {

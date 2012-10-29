@@ -29,8 +29,7 @@ public class ContainerTerraWorkbench extends ContainerTFC
 
     public ContainerTerraWorkbench(InventoryPlayer par1InventoryPlayer, TileEntityTerraWorkbench wb, World par2World, int par3, int par4, int par5)
     {
-        this.workbench = wb;
-        this.worldObj = par2World;
+    	this.worldObj = par2World;
         this.posX = par3;
         this.posY = par4;
         this.posZ = par5;
@@ -62,10 +61,12 @@ public class ContainerTerraWorkbench extends ContainerTFC
         this.onCraftMatrixChanged(this.craftMatrix);
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    /**
+     * Callback for when the crafting matrix is changed.
+     */
+    public void onCraftMatrixChanged(IInventory par1IInventory)
     {
-        return true;
+        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().func_82787_a(this.craftMatrix, this.worldObj));
     }
 
     /**
@@ -83,89 +84,72 @@ public class ContainerTerraWorkbench extends ContainerTFC
 
                 if (var3 != null)
                 {
-                    if(var3.stackSize >= 1)
-                    {
-                        par1EntityPlayer.dropPlayerItem(var3);
-                    }
-                    else
-                    {
-                        this.craftMatrix.setInventorySlotContents(var2, null);
-                    }
+                    par1EntityPlayer.dropPlayerItem(var3);
                 }
             }
         }
     }
 
-    /**
-     * Callback for when the crafting matrix is changed.
-     */
-    public void onCraftMatrixChanged(IInventory par1IInventory)
+    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
-        for (int j1 = 0; j1 < 9; j1++)
-        {
-            workbench.craftingMatrix[j1] = craftMatrix.getStackInSlot(j1);
-        }
-        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix));
+        return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != Block.workbench.blockID ? false : par1EntityPlayer.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
     }
 
-    /**
-     * Called to transfer a stack from one inventory to the other eg. when shift clicking.
-     */
-    public ItemStack transferStackInSlot(int par1)
+    public ItemStack func_82846_b(EntityPlayer par1EntityPlayer, int par2)
     {
-        ItemStack var2 = null;
-        Slot var3 = (Slot)this.inventorySlots.get(par1);
+        ItemStack var3 = null;
+        Slot var4 = (Slot)this.inventorySlots.get(par2);
 
-        if (var3 != null && var3.getHasStack())
+        if (var4 != null && var4.getHasStack())
         {
-            ItemStack var4 = var3.getStack();
-            var2 = var4.copy();
+            ItemStack var5 = var4.getStack();
+            var3 = var5.copy();
 
-            if (par1 == 0)
+            if (par2 == 0)
             {
-                if (!this.mergeItemStack(var4, 10, 46, true))
+                if (!this.mergeItemStack(var5, 10, 46, true))
                 {
                     return null;
                 }
 
-                //var3.func_48433_a(var4, var2);
+                var4.onSlotChange(var5, var3);
             }
-            else if (par1 >= 10 && par1 < 37)
+            else if (par2 >= 10 && par2 < 37)
             {
-                if (!this.mergeItemStack(var4, 37, 46, false))
+                if (!this.mergeItemStack(var5, 37, 46, false))
                 {
                     return null;
                 }
             }
-            else if (par1 >= 37 && par1 < 46)
+            else if (par2 >= 37 && par2 < 46)
             {
-                if (!this.mergeItemStack(var4, 10, 37, false))
+                if (!this.mergeItemStack(var5, 10, 37, false))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(var4, 10, 46, false))
+            else if (!this.mergeItemStack(var5, 10, 46, false))
             {
                 return null;
             }
 
-            if (var4.stackSize == 0)
+            if (var5.stackSize == 0)
             {
-                var3.putStack((ItemStack)null);
+                var4.putStack((ItemStack)null);
             }
             else
             {
-                var3.onSlotChanged();
+                var4.onSlotChanged();
             }
 
-            if (var4.stackSize == var2.stackSize)
+            if (var5.stackSize == var3.stackSize)
             {
                 return null;
             }
 
-            var3.onPickupFromSlot(var4);
+            var4.func_82870_a(par1EntityPlayer, var5);
         }
 
-        return var2;
+        return var3;
     }
 }

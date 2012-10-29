@@ -1,7 +1,10 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotScribeCrafting extends Slot
 {
@@ -11,7 +14,7 @@ public class SlotScribeCrafting extends Slot
 		super(iinventory, i, j, k);
 		player = entityplayer;
 	}
-
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		if(itemstack.itemID == TFCItems.Ink.shiftedIndex)
@@ -21,14 +24,9 @@ public class SlotScribeCrafting extends Slot
 		return false;
 	}
 
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
-	}
-
+	@Override
 	public void onSlotChanged()
 	{
 		inventory.onInventoryChanged();
-
 	}
 }

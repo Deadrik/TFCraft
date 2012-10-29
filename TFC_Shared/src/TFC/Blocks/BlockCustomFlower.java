@@ -2,10 +2,14 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BlockFlower;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockCustomFlower extends BlockFlower
 {

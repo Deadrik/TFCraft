@@ -2,10 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Settings;
 
-import net.minecraft.src.*;
+import net.minecraft.src.ItemStack;
 
 public class BlockPeatGrass extends BlockGrass
 {

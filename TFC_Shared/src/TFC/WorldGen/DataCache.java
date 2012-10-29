@@ -3,9 +3,10 @@ package TFC.WorldGen;
 import java.util.ArrayList;
 import java.util.List;
 
+import TFC.*;
 import TFC.WorldGen.GenLayers.GenLayerTFC;
 
-import net.minecraft.src.*;
+import net.minecraft.src.LongHashMap;
 
 public class DataCache
 {

@@ -4,10 +4,12 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.TFCBiome;
 
-import net.minecraft.src.*;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
 
 public class WorldGenCaveDecor implements IWorldGenerator
 {

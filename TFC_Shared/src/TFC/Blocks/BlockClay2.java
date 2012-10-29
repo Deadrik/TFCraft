@@ -3,7 +3,12 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
 
 public class BlockClay2 extends BlockTerra2
 {

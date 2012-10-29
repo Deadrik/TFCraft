@@ -2,9 +2,12 @@ package TFC.Render;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Entities.EntityBear;
-import TFC.Entities.EntityPigTFC;
-import net.minecraft.src.*;
+import TFC.*;
+import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntityPigTFC;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.ModelBase;
 
 public class RenderPigTFC extends RenderLivingTFC
 {

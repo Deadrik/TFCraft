@@ -8,7 +8,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.Block;
 import net.minecraft.src.DamageSource;
+import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.FoodStats;
 import net.minecraft.src.ItemInWorldManager;
 import net.minecraft.src.MathHelper;
@@ -58,7 +60,18 @@ public class TFC_PlayerClient extends PlayerBase
 		return this.foodstats;
 	}
 	
-	public static int getMaxHealth()
+	public static TFC_PlayerClient getFromEntityPlayer(EntityPlayer p)
+	{
+		EntityClientPlayerMP pmp = (EntityClientPlayerMP) p;
+		return (TFC_PlayerClient) pmp.getPlayerBase("TFC Player Client");
+	}
+	
+	public int getMaxHealth()
+    {
+        return 1000+(this.player.experienceLevel*25);
+    }
+	
+	public static int getStartingMaxHealth()
     {
         return 1000;
     }

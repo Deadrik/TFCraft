@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Level;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Sounds;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -12,7 +13,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.src.Entity;
 import net.minecraft.src.SoundManager;
 import net.minecraft.src.SoundPoolEntry;
-import net.minecraft.src.TerraFirmaCraft;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 

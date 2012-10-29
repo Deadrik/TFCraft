@@ -2,12 +2,16 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomHugeTrees extends WorldGenerator
 {

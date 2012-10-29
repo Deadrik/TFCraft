@@ -1,7 +1,11 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotFirepitFuel extends Slot
 

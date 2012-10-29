@@ -2,12 +2,15 @@ package TFC.Handlers;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemChisel;
 import TFC.Render.Blocks.RenderDetailed;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Tessellator;
+import net.minecraft.src.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 

@@ -32,7 +32,7 @@ public class BlockPlanks extends Block
 	}
 
 	@Override
-	protected int damageDropped(int j) 
+	public int damageDropped(int j) 
 	{
 		return j;
 	}
@@ -43,47 +43,15 @@ public class BlockPlanks extends Block
 		return j+176;
 	}
 
-	public float getHardness(int md)
-	{
-		switch(md)
-		{
-		case 5:
-		{
-			return 3.5F;
-		}
-		case 6:
-		{
-			return 3.0F;
-		}
-		case 0:
-		{
-			return 3.5F;
-		}
-		case 11:
-		{
-			return 2.5F;
-		}
-		case 13:
-		{
-			return 2.5F;
-		}
-		default:
-		{
-			return 2.0F;
-		}
-		}
-	}
-
 	@Override
 	public String getTextureFile() 
 	{
 		return "/bioxx/terrablocks.png";
 	}
 
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-
-
 		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 

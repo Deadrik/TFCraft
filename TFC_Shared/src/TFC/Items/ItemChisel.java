@@ -2,6 +2,7 @@ package TFC.Items;
 
 import java.util.BitSet;
 
+import TFC.*;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
@@ -9,7 +10,13 @@ import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.World;
 
 public class ItemChisel extends ItemTerraTool
 {

@@ -2,9 +2,13 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
 
 public class MapGenCavesTFC extends MapGenBaseTFC
 {

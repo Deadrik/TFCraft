@@ -1,11 +1,17 @@
 package TFC.Items;
 
+import TFC.*;
 import TFC.Core.Helper;
-import TFC.Core.TFCItems;
-import TFC.Entities.EntityCowTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Enums.EnumSize;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumMovingObjectType;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 public class ItemCustomBucket extends ItemTerra
@@ -62,7 +68,7 @@ public class ItemCustomBucket extends ItemTerra
 
                 if (this.isFull == 0)
                 {
-                    if (!par3EntityPlayer.canPlayerEdit(i, j, k))
+                    if (!par3EntityPlayer.func_82247_a(i, j, k, var12.sideHit, par1ItemStack))
                     {
                         return par1ItemStack;
                     }
@@ -73,7 +79,7 @@ public class ItemCustomBucket extends ItemTerra
                         return par1ItemStack;
                     }
                     
-                    if (event.isHandeled())
+                    if (event.getResult() == Event.Result.ALLOW)
                     {
                         return event.result;
                     }
@@ -122,7 +128,7 @@ public class ItemCustomBucket extends ItemTerra
                         ++i;
                     }
 
-                    if (!par3EntityPlayer.canPlayerEdit(i, j, k))
+                    if (!par3EntityPlayer.func_82247_a(i, j, k, var12.sideHit, par1ItemStack))
                     {
                         return par1ItemStack;
                     }

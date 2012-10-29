@@ -1,7 +1,12 @@
 package TFC.Items;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.ItemTool;
 import net.minecraftforge.common.ForgeHooks;
 
 public class ItemCustomPaxel extends ItemTool

@@ -6,10 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.Blocks.BlockForge;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
@@ -28,7 +29,6 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 
 public class TileEntityTerraForge extends TileEntityFireEntity implements IInventory
@@ -395,7 +395,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
         EntityItem entityitem;
         Random rand = new Random();
         float f = rand.nextFloat() * 0.8F + 0.1F;
-        float f1 = rand.nextFloat() * 2.0F + 0.4F;
+        float f1 = rand.nextFloat() * 0.8F + 0.4F;
         float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
         for (int i = 0; i < getSizeInventory(); i++)
@@ -408,6 +408,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
                 entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
                 entityitem.motionZ = (float)rand.nextGaussian() * f3;
                 worldObj.spawnEntityInWorld(entityitem);
+                fireItemStacks[i] = null;
             }
         }
     }

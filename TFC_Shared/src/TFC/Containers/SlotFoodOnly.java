@@ -1,10 +1,12 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
 import TFC.Items.ItemTerraFood;
-import net.minecraft.src.*;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotFoodOnly extends Slot
 

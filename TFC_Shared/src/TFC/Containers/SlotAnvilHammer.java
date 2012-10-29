@@ -1,7 +1,11 @@
 package TFC.Containers;
 
+import TFC.*;
 import TFC.Items.ItemHammer;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotAnvilHammer extends Slot
 
@@ -18,10 +22,5 @@ public class SlotAnvilHammer extends Slot
 		} else {
 			return false;
 		}
-	}
-
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
 	}
 }

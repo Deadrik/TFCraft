@@ -2,11 +2,16 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.WorldGen.Biomes.BiomeGenOceanTFC;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.Block;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockCustomStationary extends BlockCustomFluid
 {

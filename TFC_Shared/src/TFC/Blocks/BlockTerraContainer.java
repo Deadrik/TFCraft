@@ -1,9 +1,15 @@
 package TFC.Blocks;
 
+import TFC.*;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
-import net.minecraft.src.*;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public abstract class BlockTerraContainer extends BlockContainer
 {

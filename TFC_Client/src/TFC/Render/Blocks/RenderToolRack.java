@@ -2,6 +2,7 @@ package TFC.Render.Blocks;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.TFCBlocks;
 import TFC.Blocks.BlockToolRack;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.TileEntities.TileEntityToolRack;
@@ -10,7 +11,6 @@ import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Item;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraftforge.client.ForgeHooksClient;
 
@@ -411,65 +411,65 @@ public class RenderToolRack
 	
 	private static void renderRackDir0(Block block, int i, int j, int k, RenderBlocks renderblocks, float yOffset) 
 	{
-		block.setBlockBounds(0.0F, yOffset, 0.95F, 1F, yOffset + 0.05F, 1F);
+		renderblocks.func_83020_a(0.0F, yOffset, 0.95F, 1F, yOffset + 0.05F, 1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.2F, yOffset, 0.9F, 0.22F, yOffset + 0.05F, 0.95F);
+		renderblocks.func_83020_a(0.2F, yOffset, 0.9F, 0.22F, yOffset + 0.05F, 0.95F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.3F, yOffset, 0.9F, 0.32F, yOffset + 0.05F, 0.95F);
+		renderblocks.func_83020_a(0.3F, yOffset, 0.9F, 0.32F, yOffset + 0.05F, 0.95F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.68F, yOffset, 0.9F, 0.70F, yOffset + 0.05F, 0.95F);
+		renderblocks.func_83020_a(0.68F, yOffset, 0.9F, 0.70F, yOffset + 0.05F, 0.95F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.78F, yOffset, 0.9F, 0.8F, yOffset + 0.05F, 0.95F);
+		renderblocks.func_83020_a(0.78F, yOffset, 0.9F, 0.8F, yOffset + 0.05F, 0.95F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 	}
 	
 	private static void renderRackDir1(Block block, int i, int j, int k, RenderBlocks renderblocks, float yOffset) 
 	{
-		block.setBlockBounds(0.0F, yOffset, 0.0F, 0.05F, yOffset + 0.05F, 1F);
+		renderblocks.func_83020_a(0.0F, yOffset, 0.0F, 0.05F, yOffset + 0.05F, 1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.05F, yOffset, 0.2F, 0.1F, yOffset + 0.05F, 0.22F);
+		renderblocks.func_83020_a(0.05F, yOffset, 0.2F, 0.1F, yOffset + 0.05F, 0.22F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.05F, yOffset, 0.3F, 0.1F, yOffset + 0.05F, 0.32F);
+		renderblocks.func_83020_a(0.05F, yOffset, 0.3F, 0.1F, yOffset + 0.05F, 0.32F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.05F, yOffset, 0.68F, 0.1F, yOffset + 0.05F, 0.7F);
+		renderblocks.func_83020_a(0.05F, yOffset, 0.68F, 0.1F, yOffset + 0.05F, 0.7F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.05F, yOffset, 0.78F, 0.1F, yOffset + 0.05F, 0.8F);
+		renderblocks.func_83020_a(0.05F, yOffset, 0.78F, 0.1F, yOffset + 0.05F, 0.8F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 	}
 
 	private static void renderRackDir2(Block block, int i, int j, int k, RenderBlocks renderblocks, float yOffset) 
 	{
-		block.setBlockBounds(0.0F, yOffset, 0.0F, 1F, yOffset + 0.05F, 0.05F);
+		renderblocks.func_83020_a(0.0F, yOffset, 0.0F, 1F, yOffset + 0.05F, 0.05F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.2F, yOffset, 0.05F, 0.22F, yOffset + 0.05F, 0.1F);
+		renderblocks.func_83020_a(0.2F, yOffset, 0.05F, 0.22F, yOffset + 0.05F, 0.1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.3F, yOffset, 0.05F, 0.32F, yOffset + 0.05F, 0.1F);
+		renderblocks.func_83020_a(0.3F, yOffset, 0.05F, 0.32F, yOffset + 0.05F, 0.1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.68F, yOffset, 0.05F, 0.70F, yOffset + 0.05F, 0.1F);
+		renderblocks.func_83020_a(0.68F, yOffset, 0.05F, 0.70F, yOffset + 0.05F, 0.1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.78F, yOffset, 0.05F, 0.8F, yOffset + 0.05F, 0.1F);
+		renderblocks.func_83020_a(0.78F, yOffset, 0.05F, 0.8F, yOffset + 0.05F, 0.1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 	}
 	
 	private static void renderRackDir3(Block block, int i, int j, int k, RenderBlocks renderblocks, float yOffset) 
 	{
-		block.setBlockBounds(0.95F, 		yOffset, 	0.0F, 	1F, 	yOffset + 0.05F, 	1F);
+		renderblocks.func_83020_a(0.95F, 		yOffset, 	0.0F, 	1F, 	yOffset + 0.05F, 	1F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.9F, 	yOffset, 	0.2F, 	0.95F, 	yOffset + 0.05F, 	0.22F);
+		renderblocks.func_83020_a(0.9F, 	yOffset, 	0.2F, 	0.95F, 	yOffset + 0.05F, 	0.22F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.9F, 	yOffset, 	0.3F, 	0.95F, 	yOffset + 0.05F, 	0.32F);
+		renderblocks.func_83020_a(0.9F, 	yOffset, 	0.3F, 	0.95F, 	yOffset + 0.05F, 	0.32F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 
-		block.setBlockBounds(0.9F, 	yOffset, 	0.68F, 	0.95F, 	yOffset + 0.05F, 	0.7F);
+		renderblocks.func_83020_a(0.9F, 	yOffset, 	0.68F, 	0.95F, 	yOffset + 0.05F, 	0.7F);
 		renderblocks.renderStandardBlock(block, i, j, k);
-		block.setBlockBounds(0.9F, 	yOffset, 	0.78F, 	0.95F, 	yOffset + 0.05F, 	0.8F);
+		renderblocks.func_83020_a(0.9F, 	yOffset, 	0.78F, 	0.95F, 	yOffset + 0.05F, 	0.8F);
 		renderblocks.renderStandardBlock(block, i, j, k);
 	}
 }

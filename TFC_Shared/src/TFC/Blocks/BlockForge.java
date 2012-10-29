@@ -2,8 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Items.ItemFirestarter;
+import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraForge;
 
 import net.minecraft.src.AxisAlignedBB;
@@ -11,11 +14,8 @@ import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockForge extends BlockContainer
 {
@@ -23,18 +23,16 @@ public class BlockForge extends BlockContainer
 	private int meta;
 	private int xCoord;
 	private int yCoord;
-
 	private int zCoord;
-
-
 
 	public BlockForge(int i, int tex)
 	{
 		super(i, Material.sand);
 		this.blockIndexInTexture = tex;
-		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -98,7 +96,7 @@ public class BlockForge extends BlockContainer
 			return true;
 		}
 	}
-
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		return blockIndexInTexture;
@@ -109,12 +107,7 @@ public class BlockForge extends BlockContainer
 		return (i & 1) != 0;
 	}
 
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = "terraForge";
-		return s;
-	}
-
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.terraForgeRenderId;
@@ -126,23 +119,36 @@ public class BlockForge extends BlockContainer
 		return "/bioxx/terrablocks.png";
 	}
 
-
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
-		if((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)!=null)
-		{
-			TileEntityTerraForge tileentityanvil;
-			tileentityanvil = (TileEntityTerraForge)world.getBlockTileEntity(i, j, k);
-			tileentityanvil.ejectContents();
-		}	
+		Eject(world,i,j,k);
 	}
-
+	
+	@Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+    	Eject(par1World,par2,par3,par4);
+    }
+	
+	public void Eject(World par1World, int par2, int par3, int par4)
+    {
+        if((TileEntityTerraForge)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        {
+        	TileEntityTerraForge tileentityanvil;
+            tileentityanvil = (TileEntityTerraForge)par1World.getBlockTileEntity(par2, par3, par4);
+            tileentityanvil.ejectContents();
+            par1World.removeBlockTileEntity(par2, par3, par4);
+        }
+    }
+	
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
-
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int l)
 	{
 		if((world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
@@ -175,6 +181,7 @@ public class BlockForge extends BlockContainer
 			}
 		}
 	}
+	@Override
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
 		if (this.blockID == TFCBlocks.Forge.blockID)
@@ -201,7 +208,7 @@ public class BlockForge extends BlockContainer
 			}
 		}
 	}
-
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -236,6 +243,7 @@ public class BlockForge extends BlockContainer
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
@@ -244,6 +252,7 @@ public class BlockForge extends BlockContainer
 	/**
 	 * Returns the bounding box of the wired rectangular prism to render.
 	 */
+	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);

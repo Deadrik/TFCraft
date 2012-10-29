@@ -2,12 +2,18 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 
 public class BlockFarmland extends BlockContainer

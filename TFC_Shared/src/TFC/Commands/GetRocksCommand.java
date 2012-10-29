@@ -1,5 +1,6 @@
 package TFC.Commands;
 
+import TFC.TFCBlocks;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -10,7 +11,6 @@ import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import net.minecraft.src.PlayerNotFoundException;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.WrongUsageException;
 
 public class GetRocksCommand extends CommandBase{

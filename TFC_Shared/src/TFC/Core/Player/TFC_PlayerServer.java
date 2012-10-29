@@ -16,6 +16,7 @@ import net.minecraft.src.Entity;
 import net.minecraft.src.EntityArrow;
 import net.minecraft.src.EntityDamageSource;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.FoodStats;
 import net.minecraft.src.ItemInWorldManager;
 import net.minecraft.src.MathHelper;
@@ -78,15 +79,6 @@ public class TFC_PlayerServer extends ServerPlayerBase
                     }
                 }
             }
-            if(source == DamageSource.drown)
-            {
-            	damage = 50;
-            }
-            else if(source == DamageSource.lava)
-            {
-            	damage = 100;
-            }
-
             return super.attackEntityFrom(source, damage);
         }
     }
@@ -126,7 +118,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	{
 		//this.player.setFoodStatsField(new FoodStatsTFC());
 		if(this.player.getHealth() == 20 && this.player.ticksExisted == 0)
-			this.player.setHealthField(this.getMaxHealth());
+			this.player.setHealthField(this.getStartingMaxHealth());
 		
 		this.player.capabilities = new PlayerCapabilitiesTFC();
 	}
@@ -136,11 +128,11 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	{
 		oldFood = this.player.getFoodStats();
 
-		if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.25f && player.worldObj.difficultySetting >= 1)
+		if((float)foodstats.waterLevel / (float)foodstats.getMaxWater(this.player) <= 0.25f && player.worldObj.difficultySetting >= 1)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,1,1));
 		}
-		else if((float)foodstats.waterLevel / (float)FoodStatsTFC.getMaxWater() <= 0.5f)
+		else if((float)foodstats.waterLevel / (float)foodstats.getMaxWater(this.player) <= 0.5f)
 		{
 			if(this.player.isSprinting())
 			{
@@ -158,9 +150,9 @@ public class TFC_PlayerServer extends ServerPlayerBase
 			if(spawnProtectionTimer == -1)
 				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
 			
-			if (this.player.worldObj.difficultySetting == 0 && shouldHeal(this.player) && this.player.ticksExisted % 20 * 12 == 0)
+			if (this.player.worldObj.difficultySetting == 0 && shouldHeal() && this.player.ticksExisted % 20 * 12 == 0)
 	        {
-	            this.heal(1);
+	            this.heal((int) ((float)getMaxHealth()*0.01f));
 	        }
 			
 			if(spawnProtectionTimer < TFC_Time.getTotalTicks())
@@ -182,7 +174,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 		}
 	}
 	
-	public static boolean shouldHeal(EntityPlayer player)
+	public boolean shouldHeal()
     {
 		int health = player.getHealth();
         return health > 0 && health < getMaxHealth();
@@ -205,7 +197,12 @@ public class TFC_PlayerServer extends ServerPlayerBase
         }
     }
 	
-	public static int getMaxHealth()
+	public int getMaxHealth()
+    {
+        return 1000+(this.player.experienceLevel*25);
+    }
+	
+	public static int getStartingMaxHealth()
     {
         return 1000;
     }
@@ -213,6 +210,17 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	public FoodStatsTFC getFoodStatsTFC()
 	{
 		return this.foodstats;
+	}
+	
+	public EntityPlayerMP getPlayer()
+	{
+		return this.player;
+	}
+	
+	public static TFC_PlayerServer getFromEntityPlayer(EntityPlayer p)
+	{
+		EntityPlayerMP pmp = (EntityPlayerMP) p;
+		return (TFC_PlayerServer) pmp.getServerPlayerBase("TFC Player Server");
 	}
 	
 	@Override
@@ -238,7 +246,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
             	this.player.worldObj.playSoundAtEntity(this.player, "damage.fallsmall", 1.0F, 1.0F);
             }
 
-            this.attackEntityFrom(DamageSource.fall, var2*50);
+            this.attackEntityFrom(DamageSource.fall, var2);
             int var3 = this.player.worldObj.getBlockId(MathHelper.floor_double(this.player.posX), MathHelper.floor_double(this.player.posY - 0.20000000298023224D - (double)this.player.yOffset), MathHelper.floor_double(this.player.posZ));
 
             if (var3 > 0)
@@ -257,7 +265,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	{
 		if (!var1.hasKey("Health"))
         {
-			this.player.setHealthField(getMaxHealth());
+			this.player.setHealthField(getStartingMaxHealth());
         }
 		this.foodstats.readNBT(var1);
 	}

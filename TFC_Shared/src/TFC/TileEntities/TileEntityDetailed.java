@@ -6,9 +6,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.BitSet;
 
+import TFC.*;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
-import net.minecraft.src.*;
+import net.minecraft.src.Material;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.Packet;
 
 public class TileEntityDetailed extends NetworkTileEntity
 {

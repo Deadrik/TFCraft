@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockOre;
 import TFC.Blocks.BlockOre2;
 import TFC.Blocks.BlockOre3;
@@ -26,8 +28,6 @@ import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StringTranslate;
-import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.World;
 
 public class ItemProPick extends ItemTerra

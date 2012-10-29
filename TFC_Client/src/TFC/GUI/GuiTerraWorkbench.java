@@ -3,9 +3,12 @@ package TFC.GUI;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Containers.ContainerTerraWorkbench;
 import TFC.TileEntities.TileEntityTerraWorkbench;
-import net.minecraft.src.*;
+import net.minecraft.src.GuiContainer;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.World;
 
 public class GuiTerraWorkbench extends GuiContainer
 {

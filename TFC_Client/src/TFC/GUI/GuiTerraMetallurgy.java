@@ -1,9 +1,14 @@
 package TFC.GUI;
 
-import net.minecraft.src.*;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.GuiButton;
+import net.minecraft.src.GuiContainer;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Containers.ContainerTerraMetallurgy;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
 

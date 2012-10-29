@@ -1,7 +1,8 @@
 package TFC.Items;
 
+import TFC.*;
 import TFC.Enums.EnumSize;
-import net.minecraft.src.*;
+import net.minecraft.src.EnumToolMaterial;
 
 public class ItemCustomSword extends ItemWeapon
 {

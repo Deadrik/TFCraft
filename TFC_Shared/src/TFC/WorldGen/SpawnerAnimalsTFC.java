@@ -9,6 +9,7 @@ import java.util.Random;
 
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
+import TFC.Entities.Mobs.*;
 
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
@@ -39,7 +40,7 @@ public class SpawnerAnimalsTFC
 	public static HashMap eligibleChunksForSpawning = new HashMap();
 
     /** An array of entity classes that spawn at night. */
-    public static Class[] nightSpawnEntities = new Class[] {EntitySpider.class, EntityZombie.class, EntitySkeleton.class};
+    public static Class[] nightSpawnEntities = new Class[] {EntitySpiderTFC.class, EntityZombieTFC.class, EntitySkeletonTFC.class};
 
     /**
      * Given a chunk, find a random position in it.
@@ -253,34 +254,12 @@ public class SpawnerAnimalsTFC
      */
     public static void creatureSpecificInit(EntityLiving par0EntityLiving, World par1World, float par2, float par3, float par4)
     {
-        LivingSpecialSpawnEvent event = new LivingSpecialSpawnEvent(par0EntityLiving, par1World, par2, par3, par4);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (event.isHandeled())
+    	if (MinecraftForge.EVENT_BUS.post(new LivingSpecialSpawnEvent(par0EntityLiving, par1World, par2, par3, par4)))
         {
             return;
         }
-        
-        if (par0EntityLiving instanceof EntitySpider && par1World.rand.nextInt(100) == 0)
-        {
-            EntitySkeleton var7 = new EntitySkeleton(par1World);
-            var7.setLocationAndAngles((double)par2, (double)par3, (double)par4, par0EntityLiving.rotationYaw, 0.0F);
-            par1World.spawnEntityInWorld(var7);
-            var7.mountEntity(par0EntityLiving);
-        }
-        else if (par0EntityLiving instanceof EntitySheep)
-        {
-            ((EntitySheep)par0EntityLiving).setFleeceColor(EntitySheep.getRandomFleeceColor(par1World.rand));
-        }
-        else if (par0EntityLiving instanceof EntityOcelot && par1World.rand.nextInt(7) == 0)
-        {
-            for (int var5 = 0; var5 < 2; ++var5)
-            {
-                EntityOcelot var6 = new EntityOcelot(par1World);
-                var6.setLocationAndAngles((double)par2, (double)par3, (double)par4, par0EntityLiving.rotationYaw, 0.0F);
-                var6.setGrowingAge(-24000);
-                par1World.spawnEntityInWorld(var6);
-            }
-        }
+
+        par0EntityLiving.func_82163_bD();
     }
 
     /**

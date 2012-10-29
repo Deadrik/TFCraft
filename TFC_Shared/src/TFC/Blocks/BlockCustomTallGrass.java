@@ -3,11 +3,16 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.TFCItems;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockTallGrass;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 import net.minecraftforge.common.IShearable;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable

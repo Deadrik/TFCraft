@@ -1,6 +1,6 @@
 package TFC.Render;
 
-import TFC.Entities.EntitySheepTFC;
+import TFC.Entities.Mobs.EntitySheepTFC;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.ModelRenderer;
 

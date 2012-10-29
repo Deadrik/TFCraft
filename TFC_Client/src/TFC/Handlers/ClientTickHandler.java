@@ -2,7 +2,10 @@ package TFC.Handlers;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.GuiInventory;
+import net.minecraft.src.World;
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;

@@ -1,12 +1,21 @@
 package TFC.Containers;
 
+import TFC.*;
 import TFC.Core.CraftingManagerTFC;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 import TFC.TileEntities.TileEntityTerraMetallurgy;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.InventoryCraftResult;
+import net.minecraft.src.InventoryCrafting;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.Slot;
+import net.minecraft.src.World;
 
 public class ContainerTerraMetallurgy extends ContainerTFC
 {
@@ -78,7 +87,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 		float temp = terrametallurgy.checkTemps(craftMatrix);
 		if(temp >= 0)
 		{
-			ItemStack stack = CraftingManagerTFC.getInstance().findMatchingRecipe(craftMatrix);
+			ItemStack stack = CraftingManagerTFC.getInstance().findMatchingRecipe(craftMatrix, worldObj);
 			HeatManager manager = HeatManager.getInstance();
 			HeatIndex index = manager.findMatchingIndex(stack);
 			if (stack != null && index != null && index.meltTemp <= temp)
@@ -97,7 +106,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 		}
 	}
 
-	public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
+	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
 		if (j > 1)
@@ -126,7 +135,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 					}
 				}
 			}
-			else if (flag)
+			else if (flag == 1)
 			{
 				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
 				if (itemstack1 != null)
@@ -136,7 +145,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 					Slot slot1 = (Slot)inventorySlots.get(i);
 					if (slot1 != null && slot1.getStack() != null && slot1.getStack().itemID == k)
 					{
-						retrySlotClick(i, j, flag, entityplayer);
+						retrySlotClick(i, j, true, entityplayer);
 					}
 				}
 			}
@@ -181,7 +190,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 						{
 							slot.putStack(null);
 						}
-						slot.onPickupFromSlot(inventoryplayer.getItemStack());
+						slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
@@ -224,7 +233,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 							{
 								slot.putStack(null);
 							}
-							slot.onPickupFromSlot(inventoryplayer.getItemStack());
+							slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
 						}
 					}
 				}

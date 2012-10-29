@@ -1,6 +1,8 @@
 package TFC.Items;
 
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.ItemBlock;
+import net.minecraft.src.ItemStack;
 
 public class ItemCustomWood extends ItemBlock
 {

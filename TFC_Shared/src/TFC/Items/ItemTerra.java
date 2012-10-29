@@ -41,6 +41,7 @@ public class ItemTerra extends Item implements ISize
         return texture;
     }
     
+    @Override
     public int getItemStackLimit()
     {
     	if(canStack())
@@ -54,7 +55,7 @@ public class ItemTerra extends Item implements ISize
         texture = t;
         return this;
     }
-    
+    @Override
     public boolean getShareTag()
     {
         return true;
@@ -79,8 +80,8 @@ public class ItemTerra extends Item implements ISize
     	if(object.getSize()!= null && object.getWeight() != null)
     		arraylist.add("\u2696" + object.getWeight().getName() + " \u21F2" + object.getSize().getName());
     }
-
-    public void addInformation(ItemStack is, List arraylist) 
+    @Override
+    public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
     	ItemTerra.addSizeInformation(this, arraylist);
     	

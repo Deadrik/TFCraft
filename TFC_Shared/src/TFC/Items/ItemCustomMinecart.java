@@ -2,9 +2,14 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Enums.EnumSize;
-import net.minecraft.src.*;
+import net.minecraft.src.BlockRail;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class ItemCustomMinecart extends ItemTerra
 {
@@ -18,18 +23,19 @@ public class ItemCustomMinecart extends ItemTerra
         this.setCreativeTab(CreativeTabs.tabTransport);
     }
 
-    public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
-        int var11 = par3World.getBlockId(par4, par5, par6);
+    @Override
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+        int var11 = world.getBlockId(x, y, z);
 
         if (BlockRail.isRailBlock(var11))
         {
-            if (!par3World.isRemote)
+            if (!world.isRemote)
             {
-                par3World.spawnEntityInWorld(new EntityCustomMinecart(par3World, (double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.minecartType));
+                world.spawnEntityInWorld(new EntityCustomMinecart(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this.minecartType));
             }
 
-            --par1ItemStack.stackSize;
+            --itemstack.stackSize;
             return true;
         }
         else
@@ -38,6 +44,7 @@ public class ItemCustomMinecart extends ItemTerra
         }
     }
     
+    @Override
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         par3List.add(new ItemStack(par1, 1, 0));

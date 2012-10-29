@@ -2,12 +2,14 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-import net.minecraft.src.*;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
 
 public class WorldGenSoilPits implements IWorldGenerator
 {

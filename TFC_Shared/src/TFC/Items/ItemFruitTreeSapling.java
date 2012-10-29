@@ -1,10 +1,15 @@
 package TFC.Items;
 
+import TFC.*;
 import TFC.Core.AnvilReq;
 import TFC.Core.Helper;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityTerraAnvil;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
 
 public class ItemFruitTreeSapling extends ItemTerra
 {

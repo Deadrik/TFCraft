@@ -1,6 +1,10 @@
 package TFC.Entities;
 
-import net.minecraft.src.*;
+import TFC.*;
+import TFC.Entities.AI.EntityAISitTFC;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.World;
 
 public abstract class EntityTameableTFC extends EntityAnimalTFC
 {

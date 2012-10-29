@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
@@ -14,7 +15,6 @@ import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
 {

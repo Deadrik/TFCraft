@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.IBlockAccess;
 
 public class BlockDryGrass extends BlockGrass
 {

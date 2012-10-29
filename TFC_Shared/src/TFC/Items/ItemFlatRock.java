@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
@@ -7,7 +8,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class ItemFlatRock extends ItemTerra
 {

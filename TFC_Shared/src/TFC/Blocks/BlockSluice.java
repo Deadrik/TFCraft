@@ -2,7 +2,9 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.TileEntities.TileEntityTerraSluice;
 
 import net.minecraft.src.BlockContainer;
@@ -11,11 +13,8 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockSluice extends BlockContainer
 {

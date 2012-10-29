@@ -17,13 +17,14 @@ public class TFCWorldType extends WorldType
 	{
 		super(par1, par2Str, par3);
 	}
-	
+	@Override
 	public WorldChunkManager getChunkManager(World world)
     {
         return new TFCWorldChunkManager(world);
     }
 
-    public IChunkProvider getChunkGenerator(World world)
+	@Override
+	public IChunkProvider getChunkGenerator(World world, String generatorOptions)
     {
         return new TFCChunkProviderGenerate(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
     }

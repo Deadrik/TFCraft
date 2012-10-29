@@ -2,12 +2,16 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityPartial;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class ItemCustomKnife extends ItemWeapon
 {
@@ -16,7 +20,7 @@ public class ItemCustomKnife extends ItemWeapon
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = 1 + e.getDamageVsEntity();
+		this.weaponDamage = 100 + e.getDamageVsEntity();
 	}
 
 	public String getTextureFile() {

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.IRecipe;
+import net.minecraft.src.InventoryCrafting;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class ShapelessRecipesTFC implements IRecipe
 {
@@ -44,7 +49,7 @@ public class ShapelessRecipesTFC implements IRecipe
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
-	public boolean matches(InventoryCrafting par1InventoryCrafting)
+	public boolean matches(InventoryCrafting par1InventoryCrafting, World world)
 	{
 		ArrayList var2 = new ArrayList(this.recipeItems);
 

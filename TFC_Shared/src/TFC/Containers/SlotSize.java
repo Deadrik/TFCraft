@@ -3,10 +3,13 @@ package TFC.Containers;
 import java.util.ArrayList;
 import java.util.List;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
-import net.minecraft.src.*;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotSize extends Slot
 {
@@ -19,7 +22,7 @@ public class SlotSize extends Slot
 		super(iinventory, i, j, k);
 		excpetions = new ArrayList<Item>();
 	}
-
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 		boolean except = excpetions.contains(itemstack.getItem());
@@ -32,11 +35,6 @@ public class SlotSize extends Slot
 			return true;
 		
 		return false;
-	}
-
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
 	}
 	
 	public SlotSize setSize(EnumSize s)

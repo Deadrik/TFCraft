@@ -1,8 +1,17 @@
 package TFC.Render;
 
+import TFC.*;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityMinecart;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModelBase;
+import net.minecraft.src.ModelMinecart;
+import net.minecraft.src.Render;
+import net.minecraft.src.RenderBlocks;
+import net.minecraft.src.Vec3;
 
 import org.lwjgl.opengl.GL11;
 

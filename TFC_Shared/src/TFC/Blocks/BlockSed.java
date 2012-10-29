@@ -6,8 +6,9 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.Core.Helper;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
@@ -25,7 +26,6 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class BlockSed extends BlockCollapsable

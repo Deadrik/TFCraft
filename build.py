@@ -35,7 +35,7 @@ def build(build_num=0):
     try:
         os.chdir(mcp_dir)
         reset_logger()
-        recompile(None)
+        recompile(None, False, False)
         reset_logger()
         os.chdir(forge_dir)
     except SystemExit, e:

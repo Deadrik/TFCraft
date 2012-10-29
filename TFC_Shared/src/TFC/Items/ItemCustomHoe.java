@@ -2,15 +2,22 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.ItemHoe;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.UseHoeEvent;
+import net.minecraftforge.event.Event.Result;
+import net.minecraftforge.event.entity.player.UseHoeEvent;
 
 public class ItemCustomHoe extends ItemHoe implements ISize
 {
@@ -40,7 +47,8 @@ public class ItemCustomHoe extends ItemHoe implements ISize
             {
                 return false;
             }
-            if (event.isHandeled())
+
+            if (event.getResult() == Result.ALLOW)
             {
                 stack.damageItem(1, player);
                 return true;

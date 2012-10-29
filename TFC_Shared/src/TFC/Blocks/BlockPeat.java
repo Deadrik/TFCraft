@@ -2,9 +2,14 @@ package TFC.Blocks;
 
 import java.util.List;
 
+import TFC.*;
+
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
-import net.minecraft.src.*;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
 
 public class BlockPeat extends BlockTerra2
 {

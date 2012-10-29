@@ -2,7 +2,10 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
 
 public class MapGenBaseTFC
 {

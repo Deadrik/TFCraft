@@ -1,12 +1,12 @@
 package TFC.Items;
 
+import TFC.TFCBlocks;
 import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class ItemWoodSupport extends ItemTerra

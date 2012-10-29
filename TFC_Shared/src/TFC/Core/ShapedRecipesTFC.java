@@ -1,9 +1,12 @@
 package TFC.Core;
 
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.IRecipe;
+import net.minecraft.src.InventoryCrafting;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
-public class ShapedRecipesTFC
-implements IRecipe
+public class ShapedRecipesTFC implements IRecipe
 {
 	private int recipeWidth;
 	private int recipeHeight;
@@ -78,7 +81,7 @@ implements IRecipe
 		return recipeWidth * recipeHeight;
 	}
 
-	public boolean matches(InventoryCrafting inventorycrafting)
+	public boolean matches(InventoryCrafting inventorycrafting, World world)
 	{
 		for (int i = 0; i <= 5 - recipeWidth; i++)
 		{

@@ -2,6 +2,7 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Blocks.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
@@ -11,7 +12,10 @@ import TFC.WorldGen.TFCWorldChunkManager;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.Block;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
 
 public class WorldGenPlants implements IWorldGenerator
 {

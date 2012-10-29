@@ -1,5 +1,7 @@
 package TFC.Blocks;
 
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraFirepit;
@@ -7,8 +9,6 @@ import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.TFCBlocks;
-import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
@@ -42,6 +42,12 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	}
 	
 	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+	
+	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
     {
         return true;
@@ -54,26 +60,14 @@ public class BlockFoodPrep extends BlockTerraContainer {
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
-	{
-		int id = access.getBlockId(i, j-1, k);
-
-		if(Block.isNormalCube(id))
-			this.setBlockBounds(0F, 0F, 0F, 1F, 0.3F, 1F);
-		else
-		{
-			if(id == TFCBlocks.stoneSlabs.blockID)
-			{
-				int h = BlockSlab.getTopChiselLevel(((TileEntityPartial)access.getBlockTileEntity(i, j-1, k)).extraData);
-				this.setBlockBounds(0F, 0F-(h*0.1F), 0F, 1F, 0.1F-(h*0.1F), 1F);
-			}
-		}
-	}
-	
-	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
+    }
+	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int i, int j, int k)
+    {
+		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.15, k+1);
     }
 
 }

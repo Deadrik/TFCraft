@@ -2,8 +2,8 @@ package TFC.Render;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Entities.EntityCowTFC;
-import TFC.Entities.EntitySheepTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntitySheepTFC;
 
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityCow;

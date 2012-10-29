@@ -1,11 +1,18 @@
 package TFC.Render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.OpenGlHelper;
+import net.minecraft.src.Render;
+import net.minecraft.src.Tessellator;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import TFC.*;
 import TFC.Entities.EntityAnimalTFC;
 
 public class RenderLivingTFC extends Render

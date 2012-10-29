@@ -3,11 +3,20 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.StatList;
+import net.minecraft.src.World;
 
 public class BlockFruitLeaves extends Block
 {

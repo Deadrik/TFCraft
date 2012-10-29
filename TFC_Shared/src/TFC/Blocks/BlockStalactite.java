@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
@@ -23,7 +24,6 @@ import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockStalactite extends BlockSlab
 {

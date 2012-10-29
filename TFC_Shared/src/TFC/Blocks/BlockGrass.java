@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockGrass extends net.minecraft.src.BlockGrass
 {
@@ -28,7 +33,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
     }
 
     @Override
-    protected int damageDropped(int i) {
+    public int damageDropped(int i) {
         return i;
     }
 
@@ -44,6 +49,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
     /**
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
+    @Override
     public int getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
     {
     	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord))];
@@ -92,11 +98,13 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
      * when first determining what to render.
      */
+    @Override
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
+    @Override
     public int getBlockColor()
     {
         double var1 = 0.5D;
@@ -107,6 +115,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
     /**
      * Returns the color this block should be rendered. Used by leaves.
      */
+    @Override
     public int getRenderColor(int par1)
     {
         return this.getBlockColor();
@@ -166,6 +175,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
         }
     }
 
+    @Override
     public void onEntityWalking(World world, int i, int j, int k, Entity par5Entity) 
     {
         if (!world.isRemote)
@@ -179,11 +189,6 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
         }
     }
 
-    //    public boolean renderAsNormalBlock()
-    //    {
-    //        return false;
-    //    }
-
     /**
      * Returns the ID of the items to drop on destruction.
      */
@@ -193,54 +198,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
         return Block.blocksList[TFC_Core.getTypeForDirt(par1)].idDropped(par1, par2Random, par3);
     }
 
-//    public boolean isBlockNormalCube(World world, int i, int j, int k) 
-//    {
-//        if(world.isAirBlock(i, j+1, k))
-//        {
-//            if(world.isAirBlock(i+1, j, k))
-//                return false;
-//            if(world.isAirBlock(i-1, j, k))
-//                return false;
-//            if(world.isAirBlock(i, j, k+1))
-//                return false;
-//            if(world.isAirBlock(i, j, k-1))
-//                return false;
-//        }
-//
-//        return true;
-//    }
-//    @Override
-//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
-//    {
-//        if(world.isRemote && (!world.isBlockOpaqueCube(i+1, j, k) || !world.isBlockOpaqueCube(i-1, j, k) || 
-//                !world.isBlockOpaqueCube(i, j, k+1) || !world.isBlockOpaqueCube(i, j, k-1)) && 
-//                !world.isBlockOpaqueCube(i, j+1, k))
-//        {
-//        	AxisAlignedBB.getAABBPool().clearPool();
-//        	AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(i, j, k,i +1,j + 0.5f,k + 1);
-//
-//            double minX = 0.25;
-//            double minZ = 0.25;
-//            double maxX = 0.75;
-//            double maxZ = 0.75;
-//
-//            if(!world.isBlockOpaqueCube(i+1, j, k))
-//                maxX = 0.5;
-//            if(!world.isBlockOpaqueCube(i-1, j, k))
-//                minX = 0.5;
-//            if(!world.isBlockOpaqueCube(i, j, k+1))
-//                maxZ = 0.5;
-//            if(!world.isBlockOpaqueCube(i, j, k-1))
-//                minZ = 0.5;
-//
-//            return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(i + minX, j + 0.5, k + minZ, i + maxX, j + 1, k + maxZ);
-//
-//        }
-//        else
-//        	return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(i, j, k,i + 1,j + 1,k +1);
-//        
-//    }
-
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         if(!world.blockExists(i, j-1, k))
@@ -249,10 +207,4 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
             	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(meta), meta);
         }
     }
-
-//    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-//    {
-//    	for(int i = 0; i < 16; i++)
-//    		par3List.add(new ItemStack(par1, 1, i));
-//    }
 }

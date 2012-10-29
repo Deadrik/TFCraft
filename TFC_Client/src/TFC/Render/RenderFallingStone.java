@@ -1,9 +1,15 @@
 package TFC.Render;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.Render;
+import net.minecraft.src.RenderBlocks;
+import net.minecraft.src.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Entities.EntityFallingStone;
 
 public class RenderFallingStone extends Render

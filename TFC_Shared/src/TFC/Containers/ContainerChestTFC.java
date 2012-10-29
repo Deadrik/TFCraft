@@ -2,10 +2,16 @@ package TFC.Containers;
 
 import java.util.ArrayList;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityChestTFC;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.InventoryLargeChest;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
+import net.minecraft.src.World;
 
 public class ContainerChestTFC extends ContainerTFC
 {
@@ -77,7 +83,7 @@ public class ContainerChestTFC extends ContainerTFC
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.
      */
     @Override
-    public ItemStack transferStackInSlot(int par1)
+    public ItemStack func_82846_b(EntityPlayer player, int par1)
     {
         ItemStack var2 = null;
         Slot var3 = (Slot)this.inventorySlots.get(par1);

@@ -4,11 +4,14 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import TFC.*;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
 
 public class WorldGenOreSurface implements IWorldGenerator
 {

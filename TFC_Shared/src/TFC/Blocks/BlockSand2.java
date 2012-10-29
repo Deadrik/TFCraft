@@ -7,10 +7,12 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.*;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 
-import net.minecraft.src.*;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.ItemStack;
 
 public class BlockSand2 extends TFC.Blocks.BlockSand
 {

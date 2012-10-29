@@ -2,7 +2,13 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockFlowing;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockCustomFlowing extends BlockFlowing
 {

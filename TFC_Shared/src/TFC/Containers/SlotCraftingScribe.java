@@ -1,8 +1,12 @@
 package TFC.Containers;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import TFC.*;
 import TFC.TileEntities.TileEntityTerraScribe;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 import net.minecraftforge.common.ForgeHooks;
 
 public class SlotCraftingScribe extends Slot
@@ -24,7 +28,8 @@ public class SlotCraftingScribe extends Slot
 		return false;
 	}
 
-	public void onPickupFromSlot(ItemStack itemstack)
+	@Override
+	public void onCrafting(ItemStack itemstack, int par2)
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 

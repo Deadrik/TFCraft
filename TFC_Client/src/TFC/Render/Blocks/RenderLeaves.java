@@ -18,10 +18,16 @@ public class RenderLeaves {
 
 	public static boolean renderLeaves(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, boolean fancy, boolean firstTry)
     {
-        BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(xCoord, zCoord);
         int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
         
         boolean renderAll = true;
+        
+        double blockMinX = block.func_83009_v();
+		double blockMaxX = block.func_83007_w();
+		double blockMinY = block.func_83008_x();
+		double blockMaxY = block.func_83010_y();
+		double blockMinZ = block.func_83005_z();
+		double blockMaxZ = block.func_83006_A();
         
         renderblocks.enableAO = true;
         boolean var8 = false;
@@ -50,32 +56,32 @@ public class RenderLeaves {
         int var24 = var19;
         int var25 = var19;
 
-        if (block.minY <= 0.0D)
+        if (blockMinY <= 0.0D)
         {
             var21 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord);
         }
 
-        if (block.maxY >= 1.0D)
+        if (blockMaxY >= 1.0D)
         {
             var24 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord);
         }
 
-        if (block.minX <= 0.0D)
+        if (blockMinX <= 0.0D)
         {
             var20 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord - 1, yCoord, zCoord);
         }
 
-        if (block.maxX >= 1.0D)
+        if (blockMaxX >= 1.0D)
         {
             var23 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord);
         }
 
-        if (block.minZ <= 0.0D)
+        if (blockMinZ <= 0.0D)
         {
             var22 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord - 1);
         }
 
-        if (block.maxZ >= 1.0D)
+        if (blockMaxZ >= 1.0D)
         {
             var25 = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord, zCoord + 1);
         }
@@ -103,7 +109,7 @@ public class RenderLeaves {
         {
             if (renderblocks.aoType > 0)
             {
-                if (block.minY <= 0.0D)
+                if (blockMinY <= 0.0D)
                 {
                     --yCoord;
                 }
@@ -161,7 +167,7 @@ public class RenderLeaves {
                     renderblocks.aoBrightnessXYZPNP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
                 }
 
-                if (block.minY <= 0.0D)
+                if (blockMinY <= 0.0D)
                 {
                     ++yCoord;
                 }
@@ -197,7 +203,7 @@ public class RenderLeaves {
         {
             if (renderblocks.aoType > 0)
             {
-                if (block.maxY >= 1.0D)
+                if (blockMaxY >= 1.0D)
                 {
                     ++yCoord;
                 }
@@ -255,7 +261,7 @@ public class RenderLeaves {
                     renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord, zCoord + 1);
                 }
 
-                if (block.maxY >= 1.0D)
+                if (blockMaxY >= 1.0D)
                 {
                     --yCoord;
                 }
@@ -295,7 +301,7 @@ public class RenderLeaves {
         {
             if (renderblocks.aoType > 0)
             {
-                if (block.minZ <= 0.0D)
+                if (blockMinZ <= 0.0D)
                 {
                     --zCoord;
                 }
@@ -353,7 +359,7 @@ public class RenderLeaves {
                     renderblocks.aoBrightnessXYZPPN = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
                 }
 
-                if (block.minZ <= 0.0D)
+                if (blockMinZ <= 0.0D)
                 {
                     ++zCoord;
                 }
@@ -393,7 +399,7 @@ public class RenderLeaves {
         {
             if (renderblocks.aoType > 0)
             {
-                if (block.maxZ >= 1.0D)
+                if (blockMaxZ >= 1.0D)
                 {
                     ++zCoord;
                 }
@@ -451,7 +457,7 @@ public class RenderLeaves {
                     renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord + 1, yCoord + 1, zCoord);
                 }
 
-                if (block.maxZ >= 1.0D)
+                if (blockMaxZ >= 1.0D)
                 {
                     --zCoord;
                 }
@@ -489,7 +495,7 @@ public class RenderLeaves {
         {
             if (renderblocks.aoType > 0)
             {
-                if (block.minX <= 0.0D)
+                if (blockMinX <= 0.0D)
                 {
                     --xCoord;
                 }
@@ -547,7 +553,7 @@ public class RenderLeaves {
                     renderblocks.aoBrightnessXYZNPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
                 }
 
-                if (block.minX <= 0.0D)
+                if (blockMinX <= 0.0D)
                 {
                     ++xCoord;
                 }
@@ -587,7 +593,7 @@ public class RenderLeaves {
         {
             if (renderblocks.aoType > 0)
             {
-                if (block.maxX >= 1.0D)
+                if (blockMaxX >= 1.0D)
                 {
                     ++xCoord;
                 }
@@ -645,7 +651,7 @@ public class RenderLeaves {
                     renderblocks.aoBrightnessXYZPPP = block.getMixedBrightnessForBlock(renderblocks.blockAccess, xCoord, yCoord + 1, zCoord + 1);
                 }
 
-                if (block.maxX >= 1.0D)
+                if (blockMaxX >= 1.0D)
                 {
                     --xCoord;
                 }

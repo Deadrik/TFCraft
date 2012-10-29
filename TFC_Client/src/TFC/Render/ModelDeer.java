@@ -7,9 +7,12 @@ package TFC.Render;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Entities.EntityDeer;
+import TFC.*;
+import TFC.Entities.Mobs.EntityDeer;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModelRenderer;
 
 public class ModelDeer extends ModelBaseTFC
 {
@@ -344,7 +347,7 @@ public class ModelDeer extends ModelBaseTFC
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		running = false;
 		running = ((EntityDeer)entity).getRunning();
 		Antler12.showModel = false;
@@ -466,9 +469,9 @@ public class ModelDeer extends ModelBaseTFC
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-	{
-		super.setRotationAngles(f, f1, f2, f3, f4, f5);
+	public void setRotationAngles (float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+    {
+	super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
 		setRotation(Antler21,f4 / (180F / (float)Math.PI), f3 / (180F / (float)Math.PI), 0F);
 		setRotation(head,f4 / (180F / (float)Math.PI)+ 0.1570796F, f3 / (180F / (float)Math.PI), 0F);

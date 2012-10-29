@@ -2,7 +2,8 @@ package TFC.Core;
 
 import java.util.Random;
 
-import net.minecraft.src.TerraFirmaCraft;
+import TFC.TerraFirmaCraft;
+
 
 public class WeatherManager
 {

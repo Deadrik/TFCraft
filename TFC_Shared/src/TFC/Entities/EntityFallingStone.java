@@ -1,9 +1,18 @@
 package TFC.Entities;
 
+import TFC.*;
 import TFC.Blocks.BlockCollapsable;
 import TFC.Blocks.BlockIgInCobble;
 import TFC.Core.TFC_Sounds;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.World;
 
 public class EntityFallingStone extends Entity
 {

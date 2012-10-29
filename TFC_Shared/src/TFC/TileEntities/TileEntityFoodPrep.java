@@ -6,7 +6,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.*;
 import TFC.Handlers.PacketHandler;
@@ -19,7 +20,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
-import net.minecraft.src.TerraFirmaCraft;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
@@ -47,16 +47,21 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 				int id2 = storage[1] != null ? ((ItemTerraFood)storage[1].getItem()).foodID : 1;
 				int id3 = storage[2] != null ? ((ItemTerraFood)storage[2].getItem()).foodID : 1;
 				int id4 = storage[3] != null ? ((ItemTerraFood)storage[3].getItem()).foodID : 1;
+				
+				if((id1 == id2 || id1 == id3 || id1 == id4) || (id2 == id3 || id2 == id4) || id3 == id4)
+				{
+					return;
+				}
 
 				int seed = id1 * id2 * id3 * id4;
-				
+
 				int fill1 = storage[0] != null ? ((ItemTerraFood)storage[0].getItem()).getHealAmount() : 1;
 				int fill2 = storage[1] != null ? ((ItemTerraFood)storage[1].getItem()).getHealAmount() : 1;
 				int fill3 = storage[2] != null ? ((ItemTerraFood)storage[2].getItem()).getHealAmount() : 1;
 				int fill4 = storage[3] != null ? ((ItemTerraFood)storage[3].getItem()).getHealAmount() : 1;
-				
-				int filling = fill1 + fill2 + fill3 + fill4;
-				
+
+				int filling = Math.min(fill1 + fill2 + fill3 + fill4, 100);
+
 				if(count >= 2 && filling > 40)
 				{
 					decrStackSize(0,1);
@@ -67,12 +72,14 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 					Random R = new Random(this.worldObj.getSeed()+seed);
 					if(R.nextInt(5) == 0)
 					{
-					storage[4] = new ItemStack(TFCItems.Meals[R.nextInt(TFCItems.Meals.length)], 1);
-					NBTTagCompound nbt = new NBTTagCompound();
-					nbt.setByte("effectpower", (byte) R.nextInt(100));
-					nbt.setByte("energy", (byte) R.nextInt(100));
-					nbt.setByte("filling", (byte) filling);
-					storage[4].setTagCompound(nbt);
+						byte power = (byte)R.nextInt(25*count);
+						
+						storage[4] = new ItemStack(TFCItems.Meals[R.nextInt(TFCItems.Meals.length)], 1);
+						NBTTagCompound nbt = new NBTTagCompound();
+						nbt.setByte("effectpower", power);
+						nbt.setByte("energy", (byte) R.nextInt(100));
+						nbt.setByte("filling", (byte) filling);
+						storage[4].setTagCompound(nbt);
 					}
 					else
 					{
@@ -90,7 +97,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			TerraFirmaCraft.proxy.sendCustomPacket(createMealPacket());
 		}
 	}
-	
+
 	public Packet createMealPacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -203,68 +210,68 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
 		if(storage[i] != null)
-        {
-            if(storage[i].stackSize <= j)
-            {
-                ItemStack itemstack = storage[i];
-                storage[i] = null;
-                return itemstack;
-            }
-            ItemStack itemstack1 = storage[i].splitStack(j);
-            if(storage[i].stackSize == 0)
-            {
-                storage[i] = null;
-            }
-            return itemstack1;
-        } else
-        {
-            return null;
-        }
-        
-	}
-	
-	public void ejectContents()
-    {
-        float f3 = 0.05F;
-        EntityItem entityitem;
-        Random rand = new Random();
-        float f = rand.nextFloat() * 0.8F + 0.1F;
-        float f1 = rand.nextFloat() * 2.0F + 0.4F;
-        float f2 = rand.nextFloat() * 0.8F + 0.1F;
+		{
+			if(storage[i].stackSize <= j)
+			{
+				ItemStack itemstack = storage[i];
+				storage[i] = null;
+				return itemstack;
+			}
+			ItemStack itemstack1 = storage[i].splitStack(j);
+			if(storage[i].stackSize == 0)
+			{
+				storage[i] = null;
+			}
+			return itemstack1;
+		} else
+		{
+			return null;
+		}
 
-        for (int i = 0; i < getSizeInventory(); i++)
-        {
-            if(storage[i]!= null)
-            {
-                entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
-                        storage[i]);
-                entityitem.motionX = (float)rand.nextGaussian() * f3;
-                entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float)rand.nextGaussian() * f3;
-                worldObj.spawnEntityInWorld(entityitem);
-            }
-        }
-    }
-    
-    public void ejectItem(int index)
-    {
-    	float f3 = 0.05F;
-        EntityItem entityitem;
-        Random rand = new Random();
-        float f = rand.nextFloat() * 0.8F + 0.1F;
-        float f1 = rand.nextFloat() * 2.0F + 0.4F;
-        float f2 = rand.nextFloat() * 0.8F + 0.1F;
-        
-    	if(storage[index]!= null)
-        {
-            entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
-                    storage[index]);
-            entityitem.motionX = (float)rand.nextGaussian() * f3;
-            entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.05F;
-            entityitem.motionZ = (float)rand.nextGaussian() * f3;
-            worldObj.spawnEntityInWorld(entityitem);
-        }
-    }
+	}
+
+	public void ejectContents()
+	{
+		float f3 = 0.05F;
+		EntityItem entityitem;
+		Random rand = new Random();
+		float f = rand.nextFloat() * 0.8F + 0.1F;
+		float f1 = rand.nextFloat() * 2.0F + 0.4F;
+		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+		for (int i = 0; i < getSizeInventory(); i++)
+		{
+			if(storage[i]!= null)
+			{
+				entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+						storage[i]);
+				entityitem.motionX = (float)rand.nextGaussian() * f3;
+				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
+				entityitem.motionZ = (float)rand.nextGaussian() * f3;
+				worldObj.spawnEntityInWorld(entityitem);
+			}
+		}
+	}
+
+	public void ejectItem(int index)
+	{
+		float f3 = 0.05F;
+		EntityItem entityitem;
+		Random rand = new Random();
+		float f = rand.nextFloat() * 0.8F + 0.1F;
+		float f1 = rand.nextFloat() * 2.0F + 0.4F;
+		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+		if(storage[index]!= null)
+		{
+			entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+					storage[index]);
+			entityitem.motionX = (float)rand.nextGaussian() * f3;
+			entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.05F;
+			entityitem.motionZ = (float)rand.nextGaussian() * f3;
+			worldObj.spawnEntityInWorld(entityitem);
+		}
+	}
 
 	public int getSizeInventory()
 	{
@@ -285,6 +292,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		{
 			itemstack.stackSize = getInventoryStackLimit();
 		}
+		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
 	@Override
@@ -296,7 +304,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 64;
 	}
 
 	@Override

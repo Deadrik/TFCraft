@@ -1,8 +1,8 @@
 package TFC.Containers;
 
-import net.minecraft.src.EntityPlayer;
+import TFC.*;
 import net.minecraft.src.IInventory;
-import net.minecraft.src.*;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;
 
 public class SlotBlocked extends Slot
@@ -13,13 +13,10 @@ public class SlotBlocked extends Slot
 
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		return false;
 	}
 
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
-	}
 }

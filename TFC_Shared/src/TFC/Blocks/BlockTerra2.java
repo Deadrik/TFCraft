@@ -1,8 +1,12 @@
 package TFC.Blocks;
 
+import TFC.*;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public abstract class BlockTerra2 extends Block
 {

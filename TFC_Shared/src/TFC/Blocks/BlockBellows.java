@@ -2,9 +2,16 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.TileEntities.TileEntityFireEntity;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockBellows extends Block
 {

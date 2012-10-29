@@ -39,7 +39,7 @@ def main():
         os.chdir(mcp_dir)
         reset_logger()
         print 'reobf start'
-        reobfuscate(None, False, True, True)
+        reobfuscate(None, False, True, True, False, False)
         print 'reobf end'
         reset_logger()
         os.chdir(forge_dir)

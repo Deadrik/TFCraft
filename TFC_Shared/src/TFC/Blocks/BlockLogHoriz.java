@@ -7,14 +7,18 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.*;
 import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
-import net.minecraft.src.*;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
 
 public class BlockLogHoriz extends BlockLogVert
 {
@@ -70,7 +74,7 @@ public class BlockLogHoriz extends BlockLogVert
     }
     
     @Override
-    protected int damageDropped(int j) 
+    public int damageDropped(int j) 
     {
         return (j & 7) + offset;
     }

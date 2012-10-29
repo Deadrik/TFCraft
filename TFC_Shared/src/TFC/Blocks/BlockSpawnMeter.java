@@ -1,8 +1,13 @@
 package TFC.Blocks;
 
+import TFC.*;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.TileEntities.TileEntitySpawnMeter;
-import net.minecraft.src.*;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockSpawnMeter extends BlockTerraContainer
 {

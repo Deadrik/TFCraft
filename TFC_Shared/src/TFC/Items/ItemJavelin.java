@@ -3,9 +3,17 @@ package TFC.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Entities.EntityTerraJavelin;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.Enchantment;
+import net.minecraft.src.EnchantmentHelper;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumAction;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class ItemJavelin extends ItemTerraTool
 {
@@ -14,7 +22,7 @@ public class ItemJavelin extends ItemTerraTool
     {
         super(par1, weaponDamage, TFCItems.SedToolMaterial, new Block[0]);
         this.maxStackSize = 1;
-        this.weaponDamage = 2;
+        this.weaponDamage = 75;
         this.setMaxDamage(50);
 
     }

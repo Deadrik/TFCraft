@@ -2,8 +2,16 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockIce;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumSkyBlock;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockCustomIce extends BlockIce
 {

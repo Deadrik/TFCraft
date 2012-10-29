@@ -6,9 +6,9 @@ import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 

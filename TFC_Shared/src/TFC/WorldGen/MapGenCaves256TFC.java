@@ -2,6 +2,7 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 
 import net.minecraft.src.BiomeGenBase;
@@ -9,7 +10,6 @@ import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class MapGenCaves256TFC extends MapGenBase

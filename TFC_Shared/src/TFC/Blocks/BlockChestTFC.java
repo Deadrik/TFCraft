@@ -3,9 +3,26 @@ package TFC.Blocks;
 import java.util.Iterator;
 import java.util.Random;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityChestTFC;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityOcelot;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.InventoryLargeChest;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class BlockChestTFC extends BlockContainer
@@ -46,6 +63,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         super.onBlockAdded(par1World, par2, par3, par4);
@@ -79,6 +97,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
     {
         int var6 = par1World.getBlockId(par2, par3, par4 - 1);
@@ -259,6 +278,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
+    @Override
     public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         if (par5 == 1)
@@ -385,6 +405,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Returns the block texture based on the side being looked at.  Args: side
      */
+    @Override
     public int getBlockTextureFromSide(int par1)
     {
         return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture - 1 : (par1 == 3 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture));
@@ -393,6 +414,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
         int var5 = 0;
@@ -432,6 +454,7 @@ public class BlockChestTFC extends BlockContainer
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
@@ -446,6 +469,7 @@ public class BlockChestTFC extends BlockContainer
     /**
      * Called whenever the block is removed.
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
         TileEntityChestTFC var5 = (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4);

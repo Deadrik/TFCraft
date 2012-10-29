@@ -4,9 +4,12 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import TFC.*;
 import TFC.WorldGen.TFCBiome;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
 
 public class WorldGenPeatPit implements IWorldGenerator
 {

@@ -6,7 +6,7 @@ import net.minecraft.src.ModelBase;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Entities.EntityDeer;
+import TFC.Entities.Mobs.EntityDeer;
 public class RenderDeer extends RenderLivingTFC
 {
     private float scale = 1.0f;

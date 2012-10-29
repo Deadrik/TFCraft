@@ -4,6 +4,7 @@ import java.util.List;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+import TFC.TFCBlocks;
 import TFC.Items.ItemProPick;
 import TFC.Items.ItemWeapon;
 import TFC.TileEntities.TileEntityToolRack;
@@ -18,7 +19,6 @@ import net.minecraft.src.ItemHoe;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ItemTool;
 import net.minecraft.src.Material;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
@@ -95,76 +95,76 @@ public class BlockToolRack extends BlockContainer
 				{
 					if(hitX < 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 0);
+						handleArea(world, i, j, k, entityplayer, te, 0, 0);
 					}
 					else if(hitX > 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 1);
+						handleArea(world, i, j, k, entityplayer, te, 1, 0);
 					}
 					else if(hitX < 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 2);
+						handleArea(world, i, j, k, entityplayer, te, 2, 0);
 					}
 					else if(hitX > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 3);
+						handleArea(world, i, j, k, entityplayer, te, 3, 0);
 					}
 				}
 				else if(dir == 1)
 				{
 					if(hitZ < 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 0);
+						handleArea(world, i, j, k, entityplayer, te, 0, 1);
 					}
 					else if(hitZ > 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 1);
+						handleArea(world, i, j, k, entityplayer, te, 1, 1);
 					}
 					else if(hitZ < 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 2);
+						handleArea(world, i, j, k, entityplayer, te, 2, 1);
 					}
 					else if(hitZ > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 3);
+						handleArea(world, i, j, k, entityplayer, te, 3, 1);
 					}
 				}
 				else if(dir == 2)
 				{
 					if(hitX < 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 0);
+						handleArea(world, i, j, k, entityplayer, te, 0, 2);
 					}
 					else if(hitX > 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 1);
+						handleArea(world, i, j, k, entityplayer, te, 1, 2);
 					}
 					else if(hitX < 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 2);
+						handleArea(world, i, j, k, entityplayer, te, 2, 2);
 					}
 					else if(hitX > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 3);
+						handleArea(world, i, j, k, entityplayer, te, 3, 2);
 					}
 				}
 				else if(dir == 3)
 				{
 					if(hitZ < 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 0);
+						handleArea(world, i, j, k, entityplayer, te, 0, 3);
 					}
 					else if(hitZ > 0.5 && hitY > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 1);
+						handleArea(world, i, j, k, entityplayer, te, 1, 3);
 					}
 					else if(hitZ < 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 2);
+						handleArea(world, i, j, k, entityplayer, te, 2, 3);
 					}
 					else if(hitZ > 0.5)
 					{
-						handleArea(world, i, j, k, entityplayer, te, 3);
+						handleArea(world, i, j, k, entityplayer, te, 3, 3);
 					}
 				}
 				te.broadcastPacketInRange(te.createUpdatePacket());
@@ -174,7 +174,7 @@ public class BlockToolRack extends BlockContainer
 		return false;
 	}
 
-	private void handleArea(World world, int i, int j, int k,EntityPlayer entityplayer, TileEntityToolRack te, int slot) 
+	private void handleArea(World world, int i, int j, int k,EntityPlayer entityplayer, TileEntityToolRack te, int slot, int dir) 
 	{
 		boolean hasToolInHand = entityplayer.getCurrentEquippedItem() != null && 
 				(entityplayer.getCurrentEquippedItem().getItem() instanceof ItemTool || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemWeapon  || 
@@ -186,7 +186,7 @@ public class BlockToolRack extends BlockContainer
 		}
 		else if(te.storage[slot] != null)
 		{
-			te.ejectItem(slot);
+			te.ejectItem(slot, dir);
 			te.storage[slot] = null;
 		}
 	}
@@ -204,6 +204,7 @@ public class BlockToolRack extends BlockContainer
 		return new TileEntityToolRack();
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess access, int i, int j, int k) 
 	{
 		int dir = access.getBlockMetadata(i, j, k);
@@ -225,6 +226,31 @@ public class BlockToolRack extends BlockContainer
 			this.setBlockBounds(0.85F, 0F, 0.0F, 1F, 1F, 1F);
 		}
 	}
+
+    @Override
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+    {
+    	int dir = world.getBlockMetadata(i, j, k);
+
+		if(dir == 0)
+		{
+			return AxisAlignedBB.getBoundingBox(i+0.0F, j+0F, k+0.85F, i+1F, j+1F, k+1F);
+		}
+		else if(dir == 1)
+		{
+			return AxisAlignedBB.getBoundingBox(i+0.0F, j+0F, k+0.0F, i+0.15F, j+1F, k+1F);
+		}
+		else if(dir == 2)
+		{
+			return AxisAlignedBB.getBoundingBox(i+0.0F, j+0F, k+0.00F, i+1F, j+1F, k+0.15F);
+		}
+		else if(dir == 3)
+		{
+			return AxisAlignedBB.getBoundingBox(i+0.85F, j+0F, k+0.0F, i+1F, j+1F, k+1F);
+		}
+		
+        return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
+    }
 	
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l) 
 	{

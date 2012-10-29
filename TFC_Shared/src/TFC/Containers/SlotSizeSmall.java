@@ -1,9 +1,11 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
-import net.minecraft.src.*;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotSizeSmall extends Slot
 
@@ -14,7 +16,7 @@ public class SlotSizeSmall extends Slot
 		super(iinventory, i, j, k);
 
 	}
-
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize)
@@ -27,8 +29,4 @@ public class SlotSizeSmall extends Slot
 		return false;
 	}
 
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
-	}
 }

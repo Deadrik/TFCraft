@@ -7,15 +7,19 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.*;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Recipes;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
-import net.minecraft.src.*;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockLogVert extends BlockTerra
 {
@@ -25,6 +29,7 @@ public class BlockLogVert extends BlockTerra
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
     
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {		
         //we need to make sure teh palyer has the correct tool out
@@ -62,7 +67,7 @@ public class BlockLogVert extends BlockTerra
     }
 
     @Override
-    protected int damageDropped(int j) {
+    public int damageDropped(int j) {
         return j;
     }	
     

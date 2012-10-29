@@ -2,11 +2,21 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumAction;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.ItemSword;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.World;
 
 public class ItemWeapon extends ItemSword implements ISize
 {
@@ -18,7 +28,7 @@ public class ItemWeapon extends ItemSword implements ISize
 		super(par1, par2EnumToolMaterial);
 		this.toolMaterial = par2EnumToolMaterial;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
-		this.weaponDamage = 4 + par2EnumToolMaterial.getDamageVsEntity();
+		this.weaponDamage = 200 + par2EnumToolMaterial.getDamageVsEntity();
 	}
 	
 	public void addInformation(ItemStack is, List arraylist) 

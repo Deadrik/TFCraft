@@ -2,7 +2,8 @@ package TFC.Core;
 
 import java.io.File;
 
-import net.minecraft.src.TerraFirmaCraft;
+import TFC.TerraFirmaCraft;
+
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -74,7 +75,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.getOrCreateBooleanProperty(item, heading, value);
+			Property prop = config.get(item, heading, value);
 			return new Boolean(prop.value).booleanValue();
 		}
 		catch (Exception e)
@@ -91,7 +92,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.getOrCreateBooleanProperty(item, heading, value);
+			Property prop = config.get(item, heading, value);
 			prop.comment = comment;
 			return new Boolean(prop.value).booleanValue();
 		}
@@ -109,7 +110,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.getOrCreateIntProperty(item, heading, value);
+			Property prop = config.get(item, heading, value);
 			return new Integer(prop.value).intValue();
 		}
 		catch (Exception e)
@@ -126,7 +127,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.getOrCreateIntProperty(item, heading, value);
+			Property prop = config.get(item, heading, value);
 			prop.comment = comment;
 			return new Integer(prop.value).intValue();
 		}

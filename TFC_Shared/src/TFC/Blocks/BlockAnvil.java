@@ -2,8 +2,10 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Core.AnvilReq;
-import TFC.Core.TFCItems;
 import TFC.TileEntities.TileEntityTerraAnvil;
 
 import net.minecraft.src.AxisAlignedBB;
@@ -15,10 +17,8 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockAnvil extends BlockContainer
 {
@@ -35,7 +35,7 @@ public class BlockAnvil extends BlockContainer
 		super(i, Material.iron);
 		this.blockIndexInTexture = tex;
 	}
-
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -74,16 +74,46 @@ public class BlockAnvil extends BlockContainer
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+	@Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         int meta = par1World.getBlockMetadata(par2, par3, par4);
         int direction = getDirectionFromMetadata(meta);
+        TileEntityTerraAnvil te = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
+
+		if(te.AnvilTier != AnvilReq.STONE.Tier)
+		{
         if(direction == 0)
             return AxisAlignedBB.getBoundingBox((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
         else
             return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
+		}
+		else
+		{
+			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
+		}
     }
+	
+	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        int meta = par1World.getBlockMetadata(par2, par3, par4);
+        int direction = getDirectionFromMetadata(meta);
+        TileEntityTerraAnvil te = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
 
+		if(te.AnvilTier != AnvilReq.STONE.Tier)
+		{
+        if(direction == 0)
+            return AxisAlignedBB.getBoundingBox((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
+        else
+            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
+		}
+		else
+		{
+			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
+		}
+    }
+    @Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		int meta = getAnvilTypeFromMeta(j);
@@ -104,12 +134,7 @@ public class BlockAnvil extends BlockContainer
 		}
 	}
 
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = "terraAnvil";
-		return s;
-	}
-
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.terraAnvilRenderId;
@@ -120,6 +145,7 @@ public class BlockAnvil extends BlockContainer
 
 		return "/bioxx/terrablocks.png";
 	}
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
 		int type = BlockAnvil.getAnvilTypeFromMeta(l);
@@ -168,12 +194,12 @@ public class BlockAnvil extends BlockContainer
         }
         }
 	}
-
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
+	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -202,6 +228,7 @@ public class BlockAnvil extends BlockContainer
 		world.setBlockMetadataWithNotify(i, j, k, byte0);
 
 	}
+	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		TileEntityTerraAnvil var5 = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
@@ -247,6 +274,7 @@ public class BlockAnvil extends BlockContainer
 
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -258,6 +286,7 @@ public class BlockAnvil extends BlockContainer
         int k = j & l;
         return k;
     }
+	
     public static int getDirectionFromMetadata(int i)
     {
         int d = i >> 3;

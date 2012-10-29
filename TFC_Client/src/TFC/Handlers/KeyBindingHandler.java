@@ -2,13 +2,13 @@ package TFC.Handlers;
 
 import java.util.EnumSet;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.KeyBindings;
 import TFC.GUI.GuiCalendar;
 import TFC.Items.ItemChisel;
 
 import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.KeyBinding;
-import net.minecraft.src.TerraFirmaCraft;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;

@@ -2,6 +2,7 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
@@ -25,7 +26,6 @@ import net.minecraft.src.MapGenVillage;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NoiseGeneratorOctaves;
 import net.minecraft.src.SpawnerAnimals;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate

@@ -2,10 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.Core.FloraIndex;
 import TFC.Core.FloraManager;
 import TFC.Core.Recipes;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
@@ -21,7 +22,6 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
@@ -35,6 +35,7 @@ public class BlockFruitWood extends BlockContainer
         EntityClass = c;
     }
 
+    @Override
     public void addCreativeItems(java.util.ArrayList list)
     {
         //for(int i = 0; i < 16; i++) {
@@ -53,7 +54,7 @@ public class BlockFruitWood extends BlockContainer
     }
 
     @Override
-    protected int damageDropped(int j) {
+    public int damageDropped(int j) {
         return j;
     }	
 
@@ -69,6 +70,7 @@ public class BlockFruitWood extends BlockContainer
         return "/bioxx/Vegetation.png";
     }
 
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {		
         //we need to make sure teh palyer has the correct tool out
@@ -151,6 +153,7 @@ public class BlockFruitWood extends BlockContainer
         return TFCItems.Logs.shiftedIndex;
     }
 
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         boolean check = false;
@@ -202,21 +205,25 @@ public class BlockFruitWood extends BlockContainer
         }
     }
 
+    @Override
     public int getRenderType()
     {
         return TFCBlocks.woodFruitRenderId;
     }
 
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
 
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
     {
         if(world.getBlockId(i, j-1, k) == this.blockID || world.isBlockOpaqueCube(i, j-1, k))
@@ -226,6 +233,7 @@ public class BlockFruitWood extends BlockContainer
         return null;
     }
 
+    @Override
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
     {
         if(world.getBlockId(i, j-1, k) == this.blockID || world.isBlockOpaqueCube(i, j-1, k))
@@ -235,6 +243,7 @@ public class BlockFruitWood extends BlockContainer
         return AxisAlignedBB.getBoundingBox(i, j+0.4, k, i+1, j+0.6, k+1);
     }
 
+    @Override
     public void updateTick(World world, int i, int j, int k, Random rand)
     {
         FloraManager manager = FloraManager.getInstance();

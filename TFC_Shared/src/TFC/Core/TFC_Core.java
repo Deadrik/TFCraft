@@ -5,6 +5,8 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
+import TFC.*;
+import TFC.Enums.EnumWoodMaterial;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
@@ -18,14 +20,18 @@ import TFC.WorldGen.Generators.WorldGenCustomTallGrass;
 import TFC.WorldGen.Generators.WorldGenLooseRocks;
 import TFC.WorldGen.Generators.WorldGenMinableTFC;
 import TFC.WorldGen.Generators.WorldGenPeatPit;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldInfo;
 import net.minecraftforge.common.MinecraftForge;
 
 public class TFC_Core
 {
 	public enum Direction{PosX,PosZ,NegX,NegZ,None,PosXPosZ,PosXNegZ,NegXPosZ,NegXNegZ,NegY,PosY}
 
-	
+
 
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
@@ -133,7 +139,7 @@ public class TFC_Core
 		}
 		return is;
 	}
-	
+
 
 	public static void SurroundWithLeaves(World world, int i, int j, int k, int meta, Random R)
 	{
@@ -156,7 +162,7 @@ public class TFC_Core
 		long seed = world.getSeed();
 		Random R = new Random(seed);
 		world.provider.registerWorld(world);
-		TFC_Game.registerAnvilRecipes(R, world);
+		Recipes.registerAnvilRecipes(R, world);
 		//TerraFirmaCraft.proxy.registerSkyProvider(world.provider);
 	}
 
@@ -182,14 +188,14 @@ public class TFC_Core
 		return id == TFCBlocks.StoneIgEx.blockID || id == TFCBlocks.StoneIgIn.blockID || 
 				id == TFCBlocks.StoneSed.blockID || id == TFCBlocks.StoneMM.blockID;
 	}
-	
+
 	public static boolean isSmoothStone(World world,int x, int y, int z)
 	{
 		int id = world.getBlockId(x, y, z);
 		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || 
 				id == TFCBlocks.StoneSedSmooth.blockID || id == TFCBlocks.StoneMMSmooth.blockID;
 	}
-	
+
 	public static boolean isSmoothStone(int id)
 	{
 		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || 
@@ -214,7 +220,7 @@ public class TFC_Core
 				id == TFCBlocks.PeatGrass.blockID || id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
 
 	}
-	
+
 	public static boolean isDryGrass(int id)
 	{
 		return (id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
@@ -334,5 +340,80 @@ public class TFC_Core
 			return 0;
 	}
 
+	public static EnumWoodMaterial getWoodMaterial(ItemStack is)
+	{
+		if(is.itemID == TFCBlocks.Peat.blockID)
+		{
+			return EnumWoodMaterial.PEAT;
+		}
+		if(is.getItemDamage() == 0)
+		{
+			return EnumWoodMaterial.ASH;
+		}
+		else if(is.getItemDamage() == 1)
+		{
+			return EnumWoodMaterial.ASPEN;
+		}
+		else if(is.getItemDamage() == 2)
+		{
+			return EnumWoodMaterial.BIRCH;
+		}
+		else if(is.getItemDamage() == 3)
+		{
+			return EnumWoodMaterial.CHESTNUT;
+		}
+		else if(is.getItemDamage() == 4)
+		{
+			return EnumWoodMaterial.DOUGLASFIR;
+		}
+		else if(is.getItemDamage() == 5)
+		{
+			return EnumWoodMaterial.HICKORY;
+		}
+		else if(is.getItemDamage() == 6)
+		{
+			return EnumWoodMaterial.MAPLE;
+		}
+		else if(is.getItemDamage() == 7)
+		{
+			return EnumWoodMaterial.OAK;
+		}
+		else if(is.getItemDamage() == 8)
+		{
+			return EnumWoodMaterial.PINE;
+		}
+		else if(is.getItemDamage() == 9)
+		{
+			return EnumWoodMaterial.REDWOOD;
+		}
+		else if(is.getItemDamage() == 10)
+		{
+			return EnumWoodMaterial.SPRUCE;
+		}
+		else if(is.getItemDamage() == 11)
+		{
+			return EnumWoodMaterial.SYCAMORE;
+		}
+		else if(is.getItemDamage() == 12)
+		{
+			return EnumWoodMaterial.WHITECEDAR;
+		}
+		else if(is.getItemDamage() == 13)
+		{
+			return EnumWoodMaterial.WHITEELM;
+		}
+		else if(is.getItemDamage() == 14)
+		{
+			return EnumWoodMaterial.WILLOW;
+		}
+		else if(is.getItemDamage() == 15)
+		{
+			return EnumWoodMaterial.KAPOK;
+		}
+		else
+		{
+			return EnumWoodMaterial.ASPEN;
+		}
+	}
 
 }

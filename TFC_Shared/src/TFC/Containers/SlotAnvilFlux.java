@@ -1,7 +1,10 @@
 package TFC.Containers;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotAnvilFlux extends Slot
 
@@ -19,10 +22,5 @@ public class SlotAnvilFlux extends Slot
 		} else {
 			return false;
 		}
-	}
-
-	public void onPickupFromSlot(ItemStack itemstack)
-	{
-		super.onPickupFromSlot(itemstack);
 	}
 }

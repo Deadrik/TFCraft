@@ -1,8 +1,14 @@
 package TFC.Containers;
 
+import TFC.*;
 import TFC.Handlers.PacketHandler;
 import TFC.TileEntities.TileEntityBloomery;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ICrafting;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
+import net.minecraft.src.World;
 
 public class ContainerTerraBloomery extends ContainerTFC
 {
@@ -39,7 +45,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 		return true;
 	}
 
-	public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
+	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
 		if (j > 1)
@@ -68,7 +74,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 					}
 				}
 			}
-			else if (flag)
+			else if (flag == 1)
 			{
 				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
 				if (itemstack1 != null)
@@ -78,7 +84,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 					Slot slot1 = (Slot)inventorySlots.get(i);
 					if (slot1 != null && slot1.getStack() != null && slot1.getStack().itemID == k)
 					{
-						retrySlotClick(i, j, flag, entityplayer);
+						retrySlotClick(i, j, true, entityplayer);
 					}
 				}
 			}
@@ -123,7 +129,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 						{
 							slot.putStack(null);
 						}
-						slot.onPickupFromSlot(inventoryplayer.getItemStack());
+						slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
@@ -166,7 +172,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 							{
 								slot.putStack(null);
 							}
-							slot.onPickupFromSlot(inventoryplayer.getItemStack());
+							slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
 						}
 					}
 				}

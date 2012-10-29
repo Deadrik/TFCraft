@@ -2,16 +2,22 @@ package TFC.Food;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+import TFC.*;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerServer;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.FoodStats;
+import net.minecraft.src.ItemFood;
+import net.minecraft.src.NBTTagCompound;
 
 public class FoodStatsTFC extends FoodStats
 {
 	/** The player's food level. This measures how much food the player can handle.*/
 	public int foodLevel = 100;
-	
+
 
 	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
 	private float foodSaturationLevel = 5.0F;
@@ -24,9 +30,9 @@ public class FoodStatsTFC extends FoodStats
 	/** The player's food timer value. */
 	private long foodTimer = 0;
 
-	public int waterLevel = getMaxWater();
+	public int waterLevel = (int) (TFC_Time.dayLength*2/10);
 	private long waterTimer = 0;
-	
+
 	public FoodStatsTFC()
 	{
 		waterTimer = TFC_Time.getTotalTicks();
@@ -39,73 +45,88 @@ public class FoodStatsTFC extends FoodStats
 	@Override
 	public void onUpdate(EntityPlayer player)
 	{
-		int difficulty = player.worldObj.difficultySetting;
-
-		if (this.foodExhaustionLevel > 4.0F)
+		if(!player.worldObj.isRemote)
 		{
-			this.foodExhaustionLevel -= 4.0F;
+			int difficulty = player.worldObj.difficultySetting;
+			EntityPlayerMP playermp = (EntityPlayerMP)player;
+			TFC_PlayerServer playerserver = (TFC_PlayerServer) playermp.getServerPlayerBase("TFC Player Server");
 
-			if (this.foodSaturationLevel > 0.0F)
+			if (this.foodExhaustionLevel > 4.0F)
 			{
-				this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
-			}
-			else if (difficulty > 0)
-			{
-				this.foodLevel = Math.max(this.foodLevel - 4, 0);
-			}
-		}
+				this.foodExhaustionLevel -= 4.0F;
 
-		if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength/2)
-		{
-			this.foodTimer = TFC_Time.getTotalTicks();
-			if (this.foodLevel >= 25 && TFC_PlayerServer.shouldHeal(player))
-			{
-				player.heal(10);
-				
 				if (this.foodSaturationLevel > 0.0F)
 				{
-					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 4.0F, 0.0F);
+					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
 				}
 				else if (difficulty > 0)
 				{
-					this.foodLevel = Math.max(this.foodLevel - 2, 0);
+					this.foodLevel = Math.max(this.foodLevel - 4, 0);
 				}
 			}
-			else if (this.foodLevel <= 0)
+
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength/2)
 			{
-				if (difficulty > 1 || (difficulty == 1 && player.getHealth() > 50))
+				this.foodTimer += TFC_Time.hourLength/2;
+
+				if (this.foodSaturationLevel > 0.0F)
 				{
-				    player.attackEntityFrom(DamageSource.starve, 50);
+					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 2.0F, 0.0F);
+				}
+				else if (difficulty > 0)
+				{
+					this.foodLevel = Math.max(this.foodLevel - 1, 0);
+				}
+
+				if (this.foodLevel >= 25 && playerserver.shouldHeal())
+				{
+					player.heal((int) ((float)playerserver.getMaxHealth()*0.01f));
+
+					if (this.foodSaturationLevel > 0.0F)
+					{
+						this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 4.0F, 0.0F);
+					}
+					else if (difficulty > 0)
+					{
+						this.foodLevel = Math.max(this.foodLevel - 2, 0);
+					}
+				}
+				else if (this.foodLevel <= 0)
+				{
+					if (difficulty > 1 || (difficulty == 1 && player.getHealth() > 50))
+					{
+						player.attackEntityFrom(DamageSource.starve, 50);
+					}
 				}
 			}
-		}
-		
-		//Handle water related ticking
-		if(player.isSprinting())
-		{
-			waterLevel -= 1;
-		}
-		
-		for(;waterTimer <= TFC_Time.getTotalTicks();waterTimer += 20)
-		{
-			/**Reduce the player's water for normal living*/
-			waterLevel -= 1;
-//			if(player.isSprinting())
-//			{
-//				waterLevel -= 3;
-//			}
-			if(player.isInWater())
+
+			//Handle water related ticking
+			if(player.isSprinting())
 			{
-				waterLevel = getMaxWater();
+				waterLevel -= 1;
 			}
-			if(waterLevel < 0)
-				waterLevel = 0;
+
+			for(;waterTimer <= TFC_Time.getTotalTicks();waterTimer += 20)
+			{
+				/**Reduce the player's water for normal living*/
+				waterLevel -= 1;
+				//			if(player.isSprinting())
+				//			{
+				//				waterLevel -= 3;
+				//			}
+				if(player.isInWater())
+				{
+					waterLevel = getMaxWater(player);
+				}
+				if(waterLevel < 0)
+					waterLevel = 0;
+			}
 		}
 	}
-	
-	public static int getMaxWater()
+
+	public int getMaxWater(EntityPlayer player)
 	{
-		return (int) (TFC_Time.dayLength*2/10);
+		return (int) ((TFC_Time.dayLength*2/10)+(200*player.experienceLevel));
 	}
 
 	/**
@@ -124,6 +145,11 @@ public class FoodStatsTFC extends FoodStats
 	public boolean needFood()
 	{
 		return this.foodLevel < 100;
+	}
+	
+	public boolean needFood(int filling)
+	{
+		return needFood() && this.foodLevel + filling < 140;
 	}
 
 	/**
@@ -189,23 +215,28 @@ public class FoodStatsTFC extends FoodStats
 	{
 		this.foodSaturationLevel = par1;
 	}
-	
-	/**
-     * Args: int foodLevel, float foodSaturationModifier
-     */
-	@Override
-    public void addStats(int par1, float par2)
-    {
-        this.foodLevel = Math.min(par1 + this.foodLevel, 100);
-        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 / 3 * par2 * 2.0F, (float)this.foodLevel);
-    }
 
-    /**
-     * Eat some food.
-     */
+	/**
+	 * Args: int foodLevel, float foodSaturationModifier
+	 */
 	@Override
-    public void addStats(ItemFood par1ItemFood)
-    {
-        this.addStats(par1ItemFood.getHealAmount(), par1ItemFood.getSaturationModifier());
-    }
+	public void addStats(int par1, float par2)
+	{
+		this.foodLevel = Math.min(par1 + this.foodLevel, 100);
+		this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 / 3 * par2 * 2.0F, (float)this.foodLevel);
+	}
+
+	/**
+	 * Eat some food.
+	 */
+	@Override
+	public void addStats(ItemFood par1ItemFood)
+	{
+		this.addStats(par1ItemFood.getHealAmount(), par1ItemFood.getSaturationModifier());
+	}
+	
+	public void restoreWater(EntityPlayer player, int w)
+	{
+		Math.min(this.waterLevel += w, this.getMaxWater(player));
+	}
 }

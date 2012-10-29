@@ -1,6 +1,6 @@
 package TFC.Items;
 
-import net.minecraft.src.*;
+import TFC.*;
 
 public class ItemIgEx extends ItemTerraBlock
 {

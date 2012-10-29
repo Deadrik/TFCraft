@@ -28,9 +28,9 @@ public class PlayerTracker implements IPlayerTracker
 	@Override
 	public void onPlayerRespawn(EntityPlayer player) 
 	{
-		player.setEntityHealth(TFC_PlayerServer.getMaxHealth());
-		player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*60, 1));
-		player.addPotionEffect(new PotionEffect(TFCPotion.bleed.id, 20*60, 1));
+		TFC_PlayerServer.getFromEntityPlayer(player).getFoodStatsTFC().setFoodLevel(player.worldObj.rand.nextInt(25)+35);
+		player.setEntityHealth((int) ((float)TFC_PlayerServer.getStartingMaxHealth()*(((float)player.worldObj.rand.nextInt(25)+35)/(float)100)));
+		player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20*(player.worldObj.rand.nextInt(45)+45), player.worldObj.rand.nextInt(1)));
 	}
 
 }

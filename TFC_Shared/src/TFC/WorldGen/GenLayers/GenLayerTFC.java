@@ -1,6 +1,8 @@
 package TFC.WorldGen.GenLayers;
 
-import net.minecraft.src.*;
+import net.minecraft.src.GenLayer;
+import net.minecraft.src.WorldType;
+import TFC.*;
 import TFC.WorldGen.*;
 
 public abstract class GenLayerTFC extends GenLayer

@@ -2,10 +2,15 @@ package TFC.Containers;
 
 import java.util.ArrayList;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.TileEntities.TileEntityTerraFirepit;
 
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ICrafting;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
+import net.minecraft.src.World;
 
 public class ContainerTerraFirepit extends ContainerTFC
 {
@@ -64,7 +69,8 @@ public class ContainerTerraFirepit extends ContainerTFC
         return true;
     }
 
-    public ItemStack slotClick(int i, int j, boolean flag, EntityPlayer entityplayer)
+    @Override
+    public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
     {
         ItemStack itemstack = null;
         if (j > 1)
@@ -93,7 +99,7 @@ public class ContainerTerraFirepit extends ContainerTFC
                     }
                 }
             }
-            else if (flag)
+            else if (flag == 1)
             {
                 ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
                 if (itemstack1 != null)
@@ -103,7 +109,7 @@ public class ContainerTerraFirepit extends ContainerTFC
                     Slot slot1 = (Slot)inventorySlots.get(i);
                     if (slot1 != null && slot1.getStack() != null && slot1.getStack().itemID == k)
                     {
-                        retrySlotClick(i, j, flag, entityplayer);
+                        retrySlotClick(i, j, true, entityplayer);
                     }
                 }
             }
@@ -148,7 +154,7 @@ public class ContainerTerraFirepit extends ContainerTFC
                         {
                             slot.putStack(null);
                         }
-                        slot.onPickupFromSlot(inventoryplayer.getItemStack());
+                        slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
                     }
                     else if (slot.isItemValid(itemstack3))
                     {
@@ -193,7 +199,7 @@ public class ContainerTerraFirepit extends ContainerTFC
                             {
                                 slot.putStack(null);
                             }
-                            slot.onPickupFromSlot(inventoryplayer.getItemStack());
+                            slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
                         }
                     }
                 }

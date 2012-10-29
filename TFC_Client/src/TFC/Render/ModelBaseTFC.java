@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.src.*;
+import TFC.*;
+
+import net.minecraft.src.ModelBase;
 
 public abstract class ModelBaseTFC extends ModelBase
 {

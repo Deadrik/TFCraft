@@ -4,7 +4,7 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
-import net.minecraft.src.TFCBlocks;
+import TFC.TFCBlocks;
 import TFC.Render.TFC_CoreRender;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;

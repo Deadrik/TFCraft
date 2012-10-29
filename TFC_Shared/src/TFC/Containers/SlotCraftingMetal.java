@@ -1,7 +1,11 @@
 package TFC.Containers;
 
+import TFC.*;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 import net.minecraftforge.common.ForgeHooks;
 
 public class SlotCraftingMetal extends Slot
@@ -16,12 +20,14 @@ public class SlotCraftingMetal extends Slot
 		craftMatrix = iinventory;
 	}
 
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		return false;
 	}
 
-	public void onPickupFromSlot(ItemStack itemstack)
+	@Override
+	public void onCrafting(ItemStack itemstack, int par2)
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 

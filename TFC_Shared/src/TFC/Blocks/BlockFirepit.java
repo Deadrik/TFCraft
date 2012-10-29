@@ -2,12 +2,21 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockFirepit extends BlockContainer
 {
@@ -52,7 +61,7 @@ public class BlockFirepit extends BlockContainer
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage();
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
-					world.setBlockMetadata(i, j, k, 2);
+					world.setBlockMetadata(i, j, k, 1);
 					world.markBlockNeedsUpdate(i, j, k);
 				}
 			}
@@ -72,16 +81,16 @@ public class BlockFirepit extends BlockContainer
 		}
 	}
 
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
+		if(j > 0)
+			return blockIndexInTexture+1;
+		
 		return blockIndexInTexture;
 	}
-
-	public boolean getIsFireLit(int i)
-	{
-		return (i & 1) != 0;
-	}
 	
+	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
         if(entity instanceof EntityItem && ((EntityItem)entity).item.getItem() instanceof ItemLogs)
@@ -103,12 +112,7 @@ public class BlockFirepit extends BlockContainer
         }
     }
 
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = "terraFirepit";
-		return s;
-	}
-
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.terraFirepitRenderId;
@@ -120,11 +124,13 @@ public class BlockFirepit extends BlockContainer
 		return "/bioxx/terrablocks.png";
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		if(!world.isBlockOpaqueCube(i, j-1, k))
@@ -135,14 +141,11 @@ public class BlockFirepit extends BlockContainer
 		}
 	}
 
-
+	@Override
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
-		if (this.blockID == TFCBlocks.Firepit.blockID)
-		{
-			return;
-		}
-		else
+		int meta = world.getBlockMetadata(i, j, k);
+		if (meta >= 1)
 		{
 		    if (random.nextInt(24) == 0)
 	        {
@@ -171,23 +174,28 @@ public class BlockFirepit extends BlockContainer
 				{
 					world.spawnParticle("smoke", f+f4 - 0.3F, f1+2.5,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 					world.spawnParticle("smoke", f+f4 - 0.1F, f1+2.5,  f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
-//					world.spawnParticle("smoke", f+f4 - 0.3F-1, f1+2.5,  f2 + f5 + 0.3F+1, 0.0D, 0.0D, 0.0D);
-//					world.spawnParticle("smoke", f+f4 - 0.3F-2, f1+1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
-//					world.spawnParticle("smoke", f+f4 - 0.3F+2, f1+1.5,  f2 + f5 + 0.3F+2, 0.0D, 0.0D, 0.0D);
-//					world.spawnParticle("smoke", f+f4 - 0.3F+1, f1+1.5,  f2 + f5 + 0.3F-2, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
 	}
+	
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
-
-	private void setBurnRate(int i, int j, int k)
-	{
-		Block.setBurnProperties(i, j, k);
-	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) 
+    {
+		int meta = world.getBlockMetadata(x, y, z);
+		if(meta == 0)
+			return 0;
+		else if(meta == 1)
+			return 15;
+		else
+			return 10;
+    }
 	
 	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
     {
@@ -219,22 +227,32 @@ public class BlockFirepit extends BlockContainer
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+	@Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
     }
     
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {       
         Eject(world,i,j,k);
     }
-
+    
+    @Override
     public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) {
         Eject(par1World,par2,par3,par4);
     }
 
+    @Override
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
         Eject(par1World,par2,par3,par4);
+    }
+    
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+    	Eject(par1World,par2,par3,par4);
     }
 
     //public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
@@ -250,6 +268,7 @@ public class BlockFirepit extends BlockContainer
         }
     }
     
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
     {
         return true;

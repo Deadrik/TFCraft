@@ -1,8 +1,12 @@
 package TFC.Containers;
 
+import TFC.*;
 import TFC.Core.HeatManager;
 import TFC.Items.ItemOre;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Slot;
 
 public class SlotForge extends Slot
 

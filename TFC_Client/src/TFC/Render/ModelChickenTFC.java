@@ -1,8 +1,12 @@
 package TFC.Render;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModelRenderer;
 
 import org.lwjgl.opengl.GL11;
+
+import TFC.*;
 
 public class ModelChickenTFC extends ModelBaseTFC
 {

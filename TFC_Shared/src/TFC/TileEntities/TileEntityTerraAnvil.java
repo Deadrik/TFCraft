@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import TFC.TerraFirmaCraft;
 import TFC.Core.AnvilCraftingManagerTFC;
 import TFC.Core.AnvilRecipe;
 import TFC.Core.AnvilReq;
@@ -39,7 +40,6 @@ import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventory
 {

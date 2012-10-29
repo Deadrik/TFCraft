@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import TFC.TerraFirmaCraft;
 import TFC.Handlers.PacketHandler;
 
 import cpw.mods.fml.common.Side;
@@ -12,7 +13,6 @@ import cpw.mods.fml.common.asm.SideOnly;
 
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet250CustomPayload;
-import net.minecraft.src.TerraFirmaCraft;
 import net.minecraft.src.TileEntity;
 
 public abstract class NetworkTileEntity extends TileEntity {

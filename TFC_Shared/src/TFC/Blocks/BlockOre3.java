@@ -2,8 +2,9 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
-import TFC.Core.TFCItems;
 import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 
@@ -16,7 +17,6 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.StatList;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockOre3 extends BlockOre
 {

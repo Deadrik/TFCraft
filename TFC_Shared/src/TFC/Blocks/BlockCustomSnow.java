@@ -2,10 +2,20 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.Core.TFC_Time;
 import TFC.WorldGen.TFCBiome;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumSkyBlock;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.Material;
+import net.minecraft.src.StatList;
+import net.minecraft.src.World;
 
 public class BlockCustomSnow extends Block
 {

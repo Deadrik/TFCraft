@@ -2,9 +2,11 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import TFC.*;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 
-import net.minecraft.src.*;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomFruitTree extends WorldGenerator
 {
@@ -18,6 +20,7 @@ public class WorldGenCustomFruitTree extends WorldGenerator
         metaId = meta;
 
     }
+    
     public boolean generate(World world, Random random, int i, int j, int k)
     {
         if(world.getBlockId(i, j, k) == 0 && j < 250)

@@ -2,10 +2,15 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.TileEntities.*;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockLogPile extends BlockContainer
 {

@@ -1,7 +1,9 @@
 package TFC.Render;
 
-import TFC.Entities.EntitySheepTFC;
-import net.minecraft.src.*;
+import TFC.*;
+import TFC.Entities.Mobs.EntitySheepTFC;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.ModelRenderer;
 
 public class ModelSheep2TFC extends ModelQuadrupedTFC
 {

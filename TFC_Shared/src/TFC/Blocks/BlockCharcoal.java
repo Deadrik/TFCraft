@@ -1,11 +1,16 @@
 package TFC.Blocks;
 
-import TFC.Core.TFCItems;
+import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Items.ItemCustomShovel;
 import TFC.TileEntities.TileEntityPartial;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
 public class BlockCharcoal extends BlockTerra {
 

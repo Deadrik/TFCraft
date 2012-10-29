@@ -53,17 +53,17 @@ public class ContainerTerraLogPile extends ContainerTFC
 	/**
 	 * Called to transfer a stack from one inventory to the other eg. when shift clicking.
 	 */
-	public ItemStack transferStackInSlot(int par1)
+	public ItemStack func_82846_b(EntityPlayer player, int clickedIndex)
 	{
 		ItemStack var2 = null;
-		Slot var3 = (Slot)this.inventorySlots.get(par1);
+		Slot var3 = (Slot)this.inventorySlots.get(clickedIndex);
 
 		if (var3 != null && var3.getHasStack() && var3.getStack().getItem() instanceof ItemLogs)
 		{
 			ItemStack var4 = var3.getStack();
 			var2 = var4.copy();
 
-			if (par1 < 4)
+			if (clickedIndex < 4)
 			{
 				if (!this.mergeItemStack(var4, 4, 40, true))
 				{
@@ -71,7 +71,7 @@ public class ContainerTerraLogPile extends ContainerTFC
 				}
 
 			}
-			else if (par1 >= 4 && par1 < 40)
+			else if (clickedIndex >= 4 && clickedIndex < 40)
 			{
 				if (!this.mergeItemStack(var4, 0, 4, false))
 				{
@@ -97,7 +97,7 @@ public class ContainerTerraLogPile extends ContainerTFC
 				return null;
 			}
 
-			var3.onPickupFromSlot(var4);
+			var3.func_82870_a(player, var2);
 		}
 
 		return var2;

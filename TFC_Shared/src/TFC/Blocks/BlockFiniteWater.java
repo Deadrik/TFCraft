@@ -3,8 +3,16 @@ package TFC.Blocks;
 import java.math.MathContext;
 import java.util.Random;
 
+import TFC.*;
 
-import net.minecraft.src.*;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockFluid;
+import net.minecraft.src.Entity;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
+import net.minecraft.src.Vec3;
+import net.minecraft.src.World;
 
 public class BlockFiniteWater extends BlockFluid
 {

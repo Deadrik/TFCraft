@@ -1,6 +1,8 @@
 package TFC.Render;
 
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.Entity;
+import net.minecraft.src.ModelRenderer;
 
 //Date: 4/11/2012 9:50:15 AM
 //Template version 1.1
@@ -36,7 +38,7 @@ public ModelScribeTable()
 public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 {
  super.render(entity, f, f1, f2, f3, f4, f5);
- setRotationAngles(f, f1, f2, f3, f4, f5);
+ setRotationAngles(f, f1, f2, f3, f4, f5, entity);
  Shape1.render(f5);
  Shape2.render(f5);
 }
@@ -54,9 +56,9 @@ public void renderModel(float f5){
 }
 
 
-public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
+public void setRotationAngles (float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 {
- super.setRotationAngles(f, f1, f2, f3, f4, f5);
+	super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 }
 
 }

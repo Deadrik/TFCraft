@@ -2,8 +2,19 @@ package TFC.Entities;
 
 import java.util.List;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.Vec3;
+import net.minecraft.src.World;
 
 public class EntityTerraJavelin extends Entity
 {
@@ -23,7 +34,7 @@ public class EntityTerraJavelin extends Entity
 	public Entity shootingEntity;
 	private int ticksInGround;
 	private int ticksInAir = 0;
-	private double damage = 3.0D;
+	private double damage = 150.0D;
 	private int field_46027_au;
 
 	/** Is this arrow a critical hit? (Controls particles and damage) */

@@ -2,6 +2,7 @@ package TFC.TileEntities;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
 import TFC.Blocks.BlockFruitLeaves;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
@@ -14,7 +15,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
 
 public class TileEntityFruitTreeWood extends TileEntity implements IInventory

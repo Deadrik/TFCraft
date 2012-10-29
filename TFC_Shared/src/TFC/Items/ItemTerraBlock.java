@@ -2,13 +2,21 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import net.minecraft.src.*;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemBlock;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.World;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
 {
@@ -55,7 +63,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		return i;
 	}
 
-    public void addInformation(ItemStack is, List arraylist) 
+    public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
     	ItemTerra.addSizeInformation(this, arraylist);
     	

@@ -2,12 +2,13 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
+
 
 import net.minecraft.src.Block;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.MapGenBase;
 import net.minecraft.src.MathHelper;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class MapGenRavine256TFC extends MapGenBaseTFC

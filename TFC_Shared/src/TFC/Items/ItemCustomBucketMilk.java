@@ -1,7 +1,10 @@
 package TFC.Items;
 
-import TFC.Core.TFCItems;
-import net.minecraft.src.*;
+import TFC.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumAction;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class ItemCustomBucketMilk extends ItemTerra
 {

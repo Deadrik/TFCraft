@@ -2,10 +2,14 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.*;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumToolMaterial;
+import net.minecraft.src.ItemPickaxe;
+import net.minecraft.src.ItemStack;
 
 public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 {
@@ -18,7 +22,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 		return "/bioxx/terratools.png";
 	}
 
-	public void addInformation(ItemStack is, List arraylist) 
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		ItemTerra.addSizeInformation(this, arraylist);
 		

@@ -1,6 +1,6 @@
 package TFC.WorldGen;
 
-import net.minecraft.src.TFCBlocks;
+import TFC.TFCBlocks;
 
 public class DataLayer 
 {

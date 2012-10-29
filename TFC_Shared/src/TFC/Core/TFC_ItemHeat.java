@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
 
@@ -15,9 +18,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagFloat;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class TFC_ItemHeat 
 {
@@ -325,6 +326,16 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.chickenCooked, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.fishCooked, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, 425,new ItemStack(TFCItems.EggCooked, 1)));
+		
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDigSpeed, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealFireResist, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealJump, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealMoveSpeed, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealNightVision, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealWaterBreathing, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
 		//Other
 		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, -1), 13.0F,210,600F,new ItemStack(Block.torchWood, 2)));
 
@@ -451,7 +462,7 @@ public class TFC_ItemHeat
 			}
 			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
 			{
-				return "\2474Warming";
+				return "\2474Warm";
 			}
 			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
 			{

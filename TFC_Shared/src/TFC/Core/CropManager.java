@@ -3,6 +3,8 @@ package TFC.Core;
 import java.util.ArrayList;
 import java.util.List;
 
+import TFC.TFCItems;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 

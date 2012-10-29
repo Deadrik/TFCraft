@@ -3,11 +3,16 @@ package TFC.GUI;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerTerraLogPile;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityTerraLogPile;
-import net.minecraft.src.*;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.GuiButton;
+import net.minecraft.src.GuiContainer;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.World;
 
 public class GuiFoodPrep extends GuiContainer
 {

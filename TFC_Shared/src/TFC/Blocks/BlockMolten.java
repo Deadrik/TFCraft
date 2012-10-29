@@ -3,6 +3,9 @@ package TFC.Blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import TFC.TerraFirmaCraft;
+import TFC.TerraFirmaCraft.*;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
@@ -17,9 +20,6 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatList;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft.*;
-import net.minecraft.src.TerraFirmaCraft;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockMolten extends Block
 {

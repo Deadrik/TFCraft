@@ -6,8 +6,9 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Core.Direction;
 
@@ -20,7 +21,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class BlockLogNatural extends Block
 {
@@ -53,7 +53,7 @@ public class BlockLogNatural extends Block
     }
 
     @Override
-    protected int damageDropped(int j) {
+    public int damageDropped(int j) {
         return j;
     }	
 
@@ -77,6 +77,7 @@ public class BlockLogNatural extends Block
         return "/bioxx/terrablocks.png";
     }
 
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {		
         //we need to make sure teh palyer has the correct tool out
@@ -113,6 +114,7 @@ public class BlockLogNatural extends Block
         }
     }
 
+    @Override
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
     {
         ProcessTree(world, i, j, k, world.getBlockMetadata(i, j, k));
@@ -153,6 +155,7 @@ public class BlockLogNatural extends Block
         return TFCItems.Logs.shiftedIndex;
     }
 
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         boolean check = false;

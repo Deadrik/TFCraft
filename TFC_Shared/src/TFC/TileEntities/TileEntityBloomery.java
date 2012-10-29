@@ -9,10 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockBloomery;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCItems;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
@@ -32,10 +34,7 @@ import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
 import net.minecraft.src.Packet;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.TerraFirmaCraft;
-import net.minecraft.src.TerraFirmaCraft;
 
 public class TileEntityBloomery extends TileEntityFireEntity implements IInventory
 {

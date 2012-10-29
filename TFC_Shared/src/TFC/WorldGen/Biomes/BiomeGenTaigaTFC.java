@@ -8,6 +8,9 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
 import TFC.Entities.*;
+import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntityDeer;
+import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 

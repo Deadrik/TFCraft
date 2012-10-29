@@ -2,7 +2,8 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.Core.TFCItems;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
@@ -12,7 +13,6 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class BlockWoodSupport extends Block
@@ -41,6 +41,7 @@ public class BlockWoodSupport extends Block
 		return false;
 	}
 	
+	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return true;
@@ -73,7 +74,7 @@ public class BlockWoodSupport extends Block
 	}
 
 	@Override
-	protected int damageDropped(int j) 
+	public int damageDropped(int j) 
 	{
 		return j;
 	}
@@ -90,6 +91,7 @@ public class BlockWoodSupport extends Block
 		return j+96;
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		int hSupportID = TFCBlocks.WoodSupportH.blockID;
@@ -152,36 +154,7 @@ public class BlockWoodSupport extends Block
 		return AxisAlignedBB.getBoundingBox((double)i + minX, (double)j + minY, (double)k + minZ, (double)i + maxX, (double)j + maxY, (double)k + maxZ);
 	}
 
-	public float getHardness(int md)
-	{
-		switch(md)
-		{
-		case 5:
-		{
-			return 3.5F;
-		}
-		case 6:
-		{
-			return 3.0F;
-		}
-		case 0:
-		{
-			return 3.5F;
-		}
-		case 11:
-		{
-			return 2.5F;
-		}
-		case 13:
-		{
-			return 2.5F;
-		}
-		default:
-		{
-			return 2.0F;
-		}
-		}
-	}
+	@Override
 	public int getRenderType()
 	{
 		if(this.blockID == TFCBlocks.WoodSupportV.blockID) {
@@ -191,6 +164,7 @@ public class BlockWoodSupport extends Block
 		}
 	}
 
+	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		int hSupportID = TFCBlocks.WoodSupportH.blockID;
@@ -259,6 +233,7 @@ public class BlockWoodSupport extends Block
 		return "/bioxx/terrablocks2.png";
 	}
 
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
@@ -273,21 +248,25 @@ public class BlockWoodSupport extends Block
 		}
 	}
 
+	@Override
 	public boolean isBlockNormalCube(World world, int i, int j, int k)
 	{
 		return false;
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
-	public void onBlockPlaced(World par1World, int par2, int par3, int par4, int par5) 
-	{
-		onNeighborBlockChange(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4));
-	}
+//	@Override
+//	public void onBlockAdded(World par1World, int par2, int par3, int par4, int par5) 
+//	{
+//		onNeighborBlockChange(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4));
+//	}
 
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 

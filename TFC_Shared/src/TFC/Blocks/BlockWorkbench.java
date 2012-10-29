@@ -1,9 +1,16 @@
 package TFC.Blocks;
 
+import TFC.*;
 import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
 import TFC.TileEntities.TileEntityTerraWorkbench;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockContainer;
+import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.World;
 
 public class BlockWorkbench extends BlockContainer
 {

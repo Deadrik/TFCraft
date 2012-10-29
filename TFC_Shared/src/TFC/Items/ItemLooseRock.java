@@ -2,6 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.TFCBlocks;
 import TFC.Blocks.BlockCollapsable;
 import TFC.Core.Helper;
 import net.minecraft.src.Block;
@@ -11,7 +12,6 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TFCBlocks;
 import net.minecraft.src.World;
 
 public class ItemLooseRock extends ItemTerra

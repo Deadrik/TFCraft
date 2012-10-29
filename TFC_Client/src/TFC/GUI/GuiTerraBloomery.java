@@ -1,9 +1,13 @@
 package TFC.GUI;
 
-import net.minecraft.src.*;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.GuiContainer;
+import net.minecraft.src.InventoryPlayer;
+import net.minecraft.src.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Containers.ContainerTerraBloomery;
 import TFC.TileEntities.TileEntityBloomery;
 
@@ -36,7 +40,8 @@ public class GuiTerraBloomery extends GuiContainer
         drawTexturedModalRect(w + 8, h + 65 - i1, 185, 31, 15, 6);
 	}
 	
-	protected void drawGuiContainerForegroundLayer()
+	@Override
+	protected void drawGuiContainerForegroundLayer(int i, int j)
     {
 		drawCenteredString(this.fontRenderer,"Type:" + ForgeEntity.OreType,88,7,0x000000);
 		this.fontRenderer.drawString("Ore:" + ForgeEntity.oreCount*4.5 + "kg",104, 32, 0x000000);

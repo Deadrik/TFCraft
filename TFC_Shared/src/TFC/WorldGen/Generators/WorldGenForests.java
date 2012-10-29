@@ -4,6 +4,7 @@ import java.util.Random;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
+import TFC.*;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Enums.EnumTree;
@@ -12,7 +13,10 @@ import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BiomeGenBase;
+import net.minecraft.src.IChunkProvider;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldGenerator;
 
 public class WorldGenForests implements IWorldGenerator
 {

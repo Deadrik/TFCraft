@@ -1,9 +1,14 @@
 package TFC.GUI;
 
-import net.minecraft.src.*;
+import net.minecraft.src.GuiContainer;
+import net.minecraft.src.IInventory;
+import net.minecraft.src.InventoryLargeChest;
+import net.minecraft.src.StatCollector;
+import net.minecraft.src.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.*;
 import TFC.Containers.ContainerChestTFC;
 import TFC.TileEntities.TileEntityChestTFC;
 
