@@ -69,7 +69,7 @@ public class BlockCustomIce extends BlockIce
      */
     public void updateTick(World world, int i, int j, int k, Random rand)
     {
-        if (world.getSavedLightValue(EnumSkyBlock.Block, i, j, k) > 11 - Block.lightOpacity[this.blockID] || !world.canBlockFreeze(i, j, k, false))
+        if (!world.canBlockFreeze(i, j, k, false))
         {
             this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
             world.setBlockWithNotify(i, j, k, Block.waterStill.blockID);

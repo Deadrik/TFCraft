@@ -30,11 +30,11 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         this.setTickRandomly(false);
     }
     
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+//    @Override
+//    public boolean renderAsNormalBlock()
+//    {
+//        return false;
+//    }
     
     @Override
     public int getRenderType()

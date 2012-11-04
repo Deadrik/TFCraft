@@ -58,12 +58,12 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 
 		onCraftMatrixChanged(craftMatrix);
 	}
-
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
 	}
-
+	@Override
 	public void onCraftGuiClosed(EntityPlayer entityplayer)
 	{
 		super.onCraftGuiClosed(entityplayer);
@@ -82,7 +82,8 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 		}
 	}
 
-	public void onCraftMatrixChanged(IInventory iinventory)
+	@Override
+	public void onCraftMatrixChanged(IInventory par1IInventory)
 	{
 		float temp = terrametallurgy.checkTemps(craftMatrix);
 		if(temp >= 0)
@@ -104,8 +105,11 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 			}
 			
 		}
+		else
+			craftResult.setInventorySlotContents(0, null);
 	}
-
+	
+	@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
@@ -190,7 +194,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 						{
 							slot.putStack(null);
 						}
-						slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
+						slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
@@ -233,12 +237,13 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 							{
 								slot.putStack(null);
 							}
-							slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
+							slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
 						}
 					}
 				}
 			}
 		}
+		onCraftMatrixChanged(craftMatrix);
 		return itemstack;
 	}
 	
@@ -295,6 +300,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 				slot.onSlotChanged();
 			}
 		}
+		onCraftMatrixChanged(craftMatrix);
 		return null;
 	}
 

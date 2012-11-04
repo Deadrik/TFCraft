@@ -30,6 +30,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
     {
         Entity var3 = par1DamageSource.getEntity();
@@ -69,6 +70,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
     /**
      * Drop 0-2 items of this living's type
      */
+    @Override
     protected void dropFewItems(boolean par1, int par2)
     {
         int var3 = this.rand.nextInt(2 + par2);
@@ -86,7 +88,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
             this.dropItem(Item.goldNugget.shiftedIndex, 1);
         }
     }
-
+    @Override
     protected void dropRareDrop(int par1)
     {
         this.dropItem(Item.ingotGold.shiftedIndex, 1);
@@ -95,17 +97,20 @@ public class EntityPigZombieTFC extends EntityZombieTFC
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected int getDropItemId()
     {
         return Item.rottenFlesh.shiftedIndex;
     }
 
+    @Override
     protected void func_82164_bB()
     {
-        this.func_70062_b(0, new ItemStack(Item.swordGold));
+        this.setCurrentItemOrArmor(0, new ItemStack(Item.swordGold));
     }
-
-    public int func_82193_c(Entity par1Entity)
+    
+    @Override
+    public int getAttackStrength(Entity par1Entity)
     {
         ItemStack var2 = this.getHeldItem();
         int var3 = 250;

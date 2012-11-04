@@ -69,10 +69,12 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
 		EntityPlayerMP player = (EntityPlayerMP)p;
+		TFC_PlayerServer playerserver = (TFC_PlayerServer) player.getServerPlayerBase("TFC Player Server");
 		World world= player.worldObj;
 
 		if(!world.isRemote)
 		{
+			playerserver.getFoodStatsTFC().resetTimers();
 			try
 			{
 				dos.writeByte(Packet_Init_World_Client);
@@ -202,8 +204,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						seed = dis.readLong();
 						TFC_Time.dayLength = dis.readLong();
 						TFC_Time.daysInYear = dis.readInt();
-						playerClient.getFoodStatsTFC().foodLevel = dis.readInt();
-						playerClient.getFoodStatsTFC().waterLevel = dis.readInt();
+						playerClient.getFoodStatsTFC().foodLevel = dis.readFloat();
+						playerClient.getFoodStatsTFC().waterLevel = dis.readFloat();
 
 					} catch (IOException e) 
 					{
@@ -244,8 +246,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				{
 					try 
 					{
-						playerClient.getFoodStatsTFC().foodLevel = dis.readInt();
-						playerClient.getFoodStatsTFC().waterLevel = dis.readInt();
+						playerClient.getFoodStatsTFC().foodLevel = dis.readFloat();
+						playerClient.getFoodStatsTFC().waterLevel = dis.readFloat();
 
 					} catch (IOException e) {}
 				}

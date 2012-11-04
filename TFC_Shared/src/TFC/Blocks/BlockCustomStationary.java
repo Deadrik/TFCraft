@@ -52,7 +52,7 @@ public class BlockCustomStationary extends BlockCustomFluid
     {
         BiomeGenBase biome = par1World.getBiomeGenForCoords(par2, par4);
 
-        boolean finite = true;
+        boolean finite = false;
 
         if(!finite)
         {

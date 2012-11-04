@@ -1,8 +1,8 @@
 package TFC.Containers;
 
 import TFC.*;
+import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemLogs;
-import TFC.Items.ItemTerraFood;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityTerraLogPile;
 import net.minecraft.src.Container;
@@ -86,7 +86,7 @@ public class ContainerFoodPrep extends Container
 	}
 	
 	@Override
-	public ItemStack func_82846_b(EntityPlayer player, int clickedIndex)
+	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
 	{
 		ItemStack returnedStack = null;
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
@@ -130,7 +130,7 @@ public class ContainerFoodPrep extends Container
 				return null;
 			}
 
-			clickedSlot.func_82870_a(player, clickedStack);
+			clickedSlot.onPickupFromSlot(player, clickedStack);
 		}
 
 		return returnedStack;

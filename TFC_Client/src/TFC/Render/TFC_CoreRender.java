@@ -14,13 +14,13 @@ import TFC.Blocks.BlockAnvil;
 import TFC.Blocks.BlockBellows;
 import TFC.Blocks.BlockSluice;
 import TFC.Core.AnvilReq;
-import TFC.Core.CropIndex;
-import TFC.Core.CropManager;
-import TFC.Core.FloraIndex;
-import TFC.Core.FloraManager;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core.Direction;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
+import TFC.Food.FloraIndex;
+import TFC.Food.FloraManager;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
@@ -46,6 +46,7 @@ public class TFC_CoreRender
     {
         TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
         int md = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
+        //renderblocks.renderAllFaces = true;
 
         if(te.TypeID <= 0) return false;
 
@@ -58,8 +59,8 @@ public class TFC_CoreRender
         long extraX2 = (te.extraData >> 12) & 0xf;
         long extraY2 = (te.extraData >> 16) & 0xf;
         long extraZ2 = (te.extraData >> 20) & 0xf;
-
-        renderblocks.func_83020_a(0.0F+ (0.1F * extraX), 0.0F+ (0.1F * extraY), 0.0F+ (0.1F * extraZ), 1.0F-(0.1F * extraX2), 1-(0.1F * extraY2), 1.0F-(0.1F * extraZ2));
+        
+        renderblocks.setRenderMinMax(0.0F+ (0.1F * extraX), 0.0F+ (0.1F * extraY), 0.0F+ (0.1F * extraZ), 1.0F-(0.1F * extraX2), 1-(0.1F * extraY2), 1.0F-(0.1F * extraZ2));
 
         int over = renderblocks.overrideBlockTexture;
         if(over == -1 && (type == TFCBlocks.Ore.blockID || type == TFCBlocks.Ore2.blockID || type == TFCBlocks.Ore3.blockID))
@@ -88,6 +89,7 @@ public class TFC_CoreRender
     public static boolean renderBlockStairs(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
     {
         int var5 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
+        renderblocks.renderAllFaces = true;
         int var6 = var5 & 3;
         float var7 = 0.0F;
         float var8 = 0.5F;
@@ -108,31 +110,31 @@ public class TFC_CoreRender
         int meta = te.MetaID;
         int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
         renderblocks.overrideBlockTexture = tex;
-        renderblocks.func_83020_a(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
         renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
 
         if (var6 == 0)
         {
-            renderblocks.func_83020_a(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
+            renderblocks.setRenderMinMax(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         else if (var6 == 1)
         {
-            renderblocks.func_83020_a(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         else if (var6 == 2)
         {
-            renderblocks.func_83020_a(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         else if (var6 == 3)
         {
-            renderblocks.func_83020_a(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
+            renderblocks.setRenderMinMax(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         renderblocks.overrideBlockTexture = -1;
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         return true;
     }
 
@@ -141,32 +143,32 @@ public class TFC_CoreRender
         IBlockAccess blockAccess = renderblocks.blockAccess;
         if(blockAccess.isBlockNormalCube(i, j, k+1) && blockAccess.getBlockId(i, j, k+1) != block.blockID)
         {
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i, j, k-1) && blockAccess.getBlockId(i, j, k-1) != block.blockID)
         {
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i+1, j, k) && blockAccess.getBlockId(i+1, j, k) != block.blockID)
         {
-            renderblocks.func_83020_a(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i-1, j, k) && blockAccess.getBlockId(i-1, j, k) != block.blockID)
         {
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i, j+1, k) && blockAccess.getBlockId(i, j+1, k) != block.blockID)
         {
-            renderblocks.func_83020_a(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i, j-1, k) && blockAccess.getBlockId(i, j-1, k) != block.blockID)
         {
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
 
@@ -179,7 +181,7 @@ public class TFC_CoreRender
 
         float drift = 0.04F + (meta * 0.06F);
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0F, 1.0F, drift, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0F, 1.0F, drift, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
         return true;
     }
@@ -193,27 +195,27 @@ public class TFC_CoreRender
         {
             if(blockAccess.getBlockTileEntity(i, j, k) != null && (blockAccess.getBlockId(i, j-1, k) == TFCBlocks.fruitTreeWood.blockID || blockAccess.isBlockOpaqueCube(i, j-1, k)))
             {
-                renderblocks.func_83020_a(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
+                renderblocks.setRenderMinMax(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i-1, j, k) == Material.leaves || blockAccess.getBlockId(i-1, j, k) == TFCBlocks.fruitTreeWood.blockID)
             {
-                renderblocks.func_83020_a(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
+                renderblocks.setRenderMinMax(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i+1, j, k) == Material.leaves || blockAccess.getBlockId(i+1, j, k) == TFCBlocks.fruitTreeWood.blockID)
             {
-                renderblocks.func_83020_a(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+                renderblocks.setRenderMinMax(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i, j, k-1) == Material.leaves || blockAccess.getBlockId(i, j, k-1) == TFCBlocks.fruitTreeWood.blockID)
             {
-            	renderblocks.func_83020_a(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
+            	renderblocks.setRenderMinMax(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i, j, k+1) == Material.leaves || blockAccess.getBlockId(i, j, k+1) == TFCBlocks.fruitTreeWood.blockID)
             {
-            	renderblocks.func_83020_a(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
+            	renderblocks.setRenderMinMax(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
         }
@@ -221,16 +223,16 @@ public class TFC_CoreRender
         if(!((TileEntityFruitTreeWood)blockAccess.getBlockTileEntity(i, j, k)).isTrunk && blockAccess.getBlockId(i, j-1, k) != TFCBlocks.fruitTreeWood.blockID && !blockAccess.isBlockOpaqueCube(i, j-1, k))
         {
 
-        	renderblocks.func_83020_a(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
+        	renderblocks.setRenderMinMax(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
-            renderblocks.func_83020_a(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+            renderblocks.setRenderMinMax(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
-            renderblocks.func_83020_a(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
+            renderblocks.setRenderMinMax(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
-            renderblocks.func_83020_a(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
+            renderblocks.setRenderMinMax(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
         }
@@ -244,6 +246,7 @@ public class TFC_CoreRender
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
         World w = ModLoader.getMinecraftInstance().theWorld;
         TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
+        renderblocks.renderAllFaces = true;
         
         int over = renderblocks.overrideBlockTexture;
         
@@ -261,7 +264,7 @@ public class TFC_CoreRender
         float yOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
         float zOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
         
-        renderblocks.func_83020_a(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
+        renderblocks.setRenderMinMax(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
         renderblocks.renderStandardBlock(block, i, j, k);
         //renderblocks.func_83020_a(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
 
@@ -276,6 +279,7 @@ public class TFC_CoreRender
 
         int supportIDv = TFCBlocks.WoodSupportV.blockID;
         int supportIDh = TFCBlocks.WoodSupportH.blockID;
+        renderblocks.renderAllFaces = true;
 
         Boolean hasVerticalBeam = false;
         Boolean hasHorizontalBeamX = false;
@@ -284,7 +288,7 @@ public class TFC_CoreRender
         //if the block directly beneath is a Vertical Support
         if((blockAccess.getBlockId(i, j-1, k) == supportIDv))
         {	
-            renderblocks.func_83020_a(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+            renderblocks.setRenderMinMax(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
             renderblocks.renderStandardBlock(block, i, j, k);
             hasVerticalBeam = true;
         }
@@ -296,14 +300,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.func_83020_a(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -312,12 +316,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -327,12 +331,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.func_83020_a(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.func_83020_a(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
+                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamX = true;
@@ -344,14 +348,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -360,12 +364,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -375,12 +379,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.func_83020_a(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.func_83020_a(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamZ = true;
@@ -434,7 +438,7 @@ public class TFC_CoreRender
             maxY = 1F;
         }
 
-        renderblocks.func_83020_a(minX,minY, minZ, maxX, maxY, maxZ);
+        renderblocks.setRenderMinMax(minX,minY, minZ, maxX, maxY, maxZ);
 
         return true;
     }
@@ -453,7 +457,7 @@ public class TFC_CoreRender
         //if the block directly beneath is a Vertical Support or a solid block
         if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == TFCBlocks.WoodSupportV.blockID)
         {	
-            renderblocks.func_83020_a(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+            renderblocks.setRenderMinMax(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
             renderblocks.renderStandardBlock(block, i, j, k);
             hasVerticalBeam = true;
         }
@@ -465,14 +469,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.func_83020_a(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -481,12 +485,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.func_83020_a(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -496,12 +500,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.func_83020_a(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.func_83020_a(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
+                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamX = true;
@@ -513,14 +517,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -529,12 +533,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.func_83020_a(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -544,12 +548,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.func_83020_a(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.func_83020_a(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamZ = true;
@@ -564,7 +568,7 @@ public class TFC_CoreRender
         float maxZ = 0.75F;
 
 
-        renderblocks.func_83020_a(minX,minY, minZ, maxX, maxY, maxZ);
+        renderblocks.setRenderMinMax(minX,minY, minZ, maxX, maxY, maxZ);
 
         return true;
     }
@@ -627,12 +631,12 @@ public class TFC_CoreRender
     public static void renderBottomFace(Block block, double d, double d1, double d2,
             int i)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator tessellator = Tessellator.instance;
 
         int j = (i & 0xf) << 4;
@@ -672,12 +676,12 @@ public class TFC_CoreRender
     public static void renderTopFace(Block block, double d, double d1, double d2,
             int i)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator tessellator = Tessellator.instance;
 
         int j = (i & 0xf) << 4;
@@ -717,12 +721,12 @@ public class TFC_CoreRender
     public static void renderEastFace(Block block, double d, double d1, double d2,
             int i)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator tessellator = Tessellator.instance;
 
         int j = (i & 0xf) << 4;
@@ -763,12 +767,12 @@ public class TFC_CoreRender
     public static void renderWestFace(Block block, double d, double d1, double d2,
             int i)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator tessellator = Tessellator.instance;
 
         int j = (i & 0xf) << 4;
@@ -809,12 +813,12 @@ public class TFC_CoreRender
     public static void renderNorthFace(Block block, double d, double d1, double d2,
             int i)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator tessellator = Tessellator.instance;
 
         int j = (i & 0xf) << 4;
@@ -855,12 +859,12 @@ public class TFC_CoreRender
     public static void renderSouthFace(Block block, double d, double d1, double d2,
             int i)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator tessellator = Tessellator.instance;
 
         int j = (i & 0xf) << 4;
@@ -900,8 +904,6 @@ public class TFC_CoreRender
 
     public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
     {
-        BiomeGenBase biome = iblockaccess.getBiomeGenForCoords(xCoord, zCoord);
-
         int over = renderblocks.overrideBlockTexture;
 
         if(over == -1)
@@ -938,7 +940,7 @@ public class TFC_CoreRender
 
     public static boolean RenderMolten(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
 
         //renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 0.001F, 0.001F, 0.001F);
@@ -949,10 +951,10 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
         return true;
     }
 
@@ -960,11 +962,11 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
 
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
         return true;
     }
 
@@ -979,15 +981,15 @@ public class TFC_CoreRender
         {
             //forward
             renderblocks.overrideBlockTexture = 86;
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
             renderblocks.overrideBlockTexture = -1;
-            renderblocks.func_83020_a(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
             renderblocks.overrideBlockTexture = 87;
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
         }
@@ -995,17 +997,17 @@ public class TFC_CoreRender
         {
             //forward
             renderblocks.overrideBlockTexture = 86;
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
             renderblocks.overrideBlockTexture = -1;
-            renderblocks.func_83020_a(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
             renderblocks.overrideBlockTexture = 87;
-            renderblocks.func_83020_a(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
 
@@ -1014,15 +1016,15 @@ public class TFC_CoreRender
         {
             //forward
             renderblocks.overrideBlockTexture = 86;
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
             renderblocks.overrideBlockTexture = -1;
-            renderblocks.func_83020_a(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
             renderblocks.overrideBlockTexture = 87;
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
         }
@@ -1030,33 +1032,33 @@ public class TFC_CoreRender
         {
             //forward
             renderblocks.overrideBlockTexture = 86;
-            renderblocks.func_83020_a(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
             renderblocks.overrideBlockTexture = -1;
-            renderblocks.func_83020_a(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
             renderblocks.overrideBlockTexture = 87;
-            renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
+            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
         }
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         return true;
     }
 
     public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         IBlockAccess blockAccess = renderblocks.blockAccess;
         Tessellator tessellator = Tessellator.instance;
         int l = blockAccess.getBlockMetadata(i, j, k);
@@ -1095,9 +1097,9 @@ public class TFC_CoreRender
             if(i1 == 0)
             {
                 //ribs
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.75F, 1F, 0.75F, 0.8F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.75F, 1F, 0.75F, 0.8F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.45F, 1F, 0.9F, 0.5F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.45F, 1F, 0.9F, 0.5F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1130,9 +1132,9 @@ public class TFC_CoreRender
             else if(i1 == 1)
             {
                 //ribs
-                renderblocks.func_83020_a(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
+                renderblocks.setRenderMinMax(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.5F, 0.0F, 0.0F, 0.55F, 0.9F, 1.0F);
+                renderblocks.setRenderMinMax(0.5F, 0.0F, 0.0F, 0.55F, 0.9F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1165,9 +1167,9 @@ public class TFC_CoreRender
             else if(i1 == 2)
             {
                 //ribs
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.5F, 1F, 0.9F, 0.55F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.5F, 1F, 0.9F, 0.55F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1202,9 +1204,9 @@ public class TFC_CoreRender
             else if(i1 == 3)
             {        
                 //ribs
-                renderblocks.func_83020_a(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
+                renderblocks.setRenderMinMax(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.45F, 0.0F, 0.0F, 0.5F, 0.9F, 1.0F);
+                renderblocks.setRenderMinMax(0.45F, 0.0F, 0.0F, 0.5F, 0.9F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1239,11 +1241,11 @@ public class TFC_CoreRender
             if(i1 == 0)
             {
                 //ribs
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.70F, 1F, 0.3F, 0.75F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.70F, 1F, 0.3F, 0.75F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.4F, 1F, 0.45F, 0.45F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.4F, 1F, 0.45F, 0.45F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.1F, 1F, 0.6F, 0.15F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.1F, 1F, 0.6F, 0.15F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1276,11 +1278,11 @@ public class TFC_CoreRender
             if(i1 == 1)
             {
                 //ribs
-                renderblocks.func_83020_a(0.9F, 0.0F, 0.0F, 0.95F, 0.6F, 1.0F);
+                renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 0.95F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.6F, 0.0F, 0.0F, 0.65F, 0.45F, 1.0F);
+                renderblocks.setRenderMinMax(0.6F, 0.0F, 0.0F, 0.65F, 0.45F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.3F, 0.0F, 0.0F, 0.35F, 0.3F, 1.0F);
+                renderblocks.setRenderMinMax(0.3F, 0.0F, 0.0F, 0.35F, 0.3F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1313,11 +1315,11 @@ public class TFC_CoreRender
             if(i1 == 2)
             {               
                 //ribs
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.6F, 1F, 0.45F, 0.65F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.6F, 1F, 0.45F, 0.65F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.0F, 0.0F, 0.9F, 1F, 0.6F, 0.95F);
+                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1F, 0.6F, 0.95F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1350,11 +1352,11 @@ public class TFC_CoreRender
             if(i1 == 3)
             {               
                 //ribs
-                renderblocks.func_83020_a(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
+                renderblocks.setRenderMinMax(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.4F, 0.0F, 0.0F, 0.45F, 0.45F, 1.0F);
+                renderblocks.setRenderMinMax(0.4F, 0.0F, 0.0F, 0.45F, 0.45F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.func_83020_a(0.1F, 0.0F, 0.0F, 0.15F, 0.6F, 1.0F);
+                renderblocks.setRenderMinMax(0.1F, 0.0F, 0.0F, 0.15F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1386,21 +1388,20 @@ public class TFC_CoreRender
 
 
         //set the block collision box
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 
         return true;
     }
 
     public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
 		
-        BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(xCoord, zCoord);
         int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
         if(meta >= 8)
             meta-=8;
@@ -2148,7 +2149,7 @@ public class TFC_CoreRender
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
 
-        renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
+        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
         return true;
     }
 
@@ -2157,12 +2158,12 @@ public class TFC_CoreRender
      */
     public static boolean RenderFiniteWater(Block block, int par2, int par3, int par4, RenderBlocks renderblocks)
     {
-    	double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+    	double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         Tessellator var5 = Tessellator.instance;
         int var6 = block.colorMultiplier(renderblocks.blockAccess, par2, par3, par4);
         float var7 = (float)(var6 >> 16 & 255) / 255.0F;

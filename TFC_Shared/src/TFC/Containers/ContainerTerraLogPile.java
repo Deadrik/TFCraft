@@ -97,7 +97,7 @@ public class ContainerTerraLogPile extends ContainerTFC
 				return null;
 			}
 
-			var3.func_82870_a(player, var2);
+			var3.onPickupFromSlot(player, var2);
 		}
 
 		return var2;
@@ -159,7 +159,7 @@ public class ContainerTerraLogPile extends ContainerTFC
                 var7 = (Slot)this.inventorySlots.get(var6);
                 var8 = var7.getStack();
 
-                if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.func_77970_a(par1ItemStack, var8))
+                if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStacksEqual(par1ItemStack, var8))
                 {
                     int var9 = var8.stackSize + par1ItemStack.stackSize;
 

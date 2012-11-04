@@ -73,7 +73,8 @@ public class ContainerChestTFC extends ContainerTFC
             this.addSlotToContainer(new Slot(playerInv, var4, 8 + var4 * 18, 161 + var3));
         }
     }
-
+    
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
         return this.lowerChestInventory.isUseableByPlayer(par1EntityPlayer);
@@ -83,7 +84,7 @@ public class ContainerChestTFC extends ContainerTFC
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.
      */
     @Override
-    public ItemStack func_82846_b(EntityPlayer player, int par1)
+    public ItemStack transferStackInSlot(EntityPlayer player, int par1)
     {
         ItemStack var2 = null;
         Slot var3 = (Slot)this.inventorySlots.get(par1);

@@ -69,5 +69,53 @@ public class BlockFoodPrep extends BlockTerraContainer {
     {
 		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.15, k+1);
     }
+	
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
+	{
+		if(!world.isRemote)
+		{
+			if(!world.isBlockOpaqueCube(i, j-1, k))
+			{
+				((TileEntityFoodPrep)world.getBlockTileEntity(i, j, k)).ejectContents();
+				world.setBlock(i, j, k, 0);
+				return;
+			}
+		}
+	}
+	
+	@Override
+    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+    {       
+        Eject(world,i,j,k);
+    }
+    
+    @Override
+    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) {
+        Eject(par1World,par2,par3,par4);
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+        Eject(par1World,par2,par3,par4);
+    }
+    
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+    	Eject(par1World,par2,par3,par4);
+    }
+
+    //public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
+    
+    public void Eject(World par1World, int par2, int par3, int par4)
+    {
+        if((TileEntityFoodPrep)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        {
+        	TileEntityFoodPrep te = (TileEntityFoodPrep)par1World.getBlockTileEntity(par2, par3, par4);
+            te.ejectContents();
+            par1World.removeBlockTileEntity(par2, par3, par4);
+        }
+    }
 
 }

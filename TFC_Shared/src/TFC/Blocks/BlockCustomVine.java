@@ -176,7 +176,7 @@ public class BlockCustomVine extends Block implements IShearable
         else
         {
             Block var2 = Block.blocksList[par1];
-            return var2.renderAsNormalBlock() && var2.blockMaterial.blocksMovement();
+            return var2.renderAsNormalBlock();
         }
     }
     

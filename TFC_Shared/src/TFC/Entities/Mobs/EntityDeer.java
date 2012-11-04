@@ -129,7 +129,7 @@ public class EntityDeer extends EntityAnimalTFC
 
     public int getMaxHealth()
     {
-        return 8;
+        return 400;
     }
 
     protected void entityInit()

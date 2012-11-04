@@ -597,7 +597,10 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             //Play the fire sound
             Random R = new Random();
             if(R.nextInt(10) == 0 && fireTemperature > 210)
+            {
+            	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1);
                 worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
+            }
 
             if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
             {
@@ -606,18 +609,11 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
             else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=0)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.Forge.blockID) {
-                    BlockForge.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
-                }
             }
 
             //If the fire is still burning and has fuel
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && (!worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !worldObj.isRaining()))
             {
-                if(worldObj.getBlockId(xCoord, yCoord, zCoord) != TFCBlocks.ForgeOn.blockID) {
-                    BlockForge.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
-                }
-
                 float desiredTemp = handleTemp();
 
                 handleTempFlux(desiredTemp);

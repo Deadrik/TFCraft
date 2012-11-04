@@ -259,7 +259,7 @@ public class SpawnerAnimalsTFC
             return;
         }
 
-        par0EntityLiving.func_82163_bD();
+        par0EntityLiving.initCreature();
     }
 
     /**

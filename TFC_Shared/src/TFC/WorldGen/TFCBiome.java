@@ -209,7 +209,7 @@ public class TFCBiome extends BiomeGenBase
     {
         return new BiomeDecoratorTFC(this);
     }
-    
+    @Override
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {
         this.theBiomeDecorator.decorate(par1World, par2Random, par3, par4);
@@ -218,6 +218,7 @@ public class TFCBiome extends BiomeGenBase
     /**
      * Sets the minimum and maximum height of this biome. Seems to go from -2.0 to 2.0.
      */
+    @Override
     public TFCBiome setMinMaxHeight(float par1, float par2)
     {
         this.minHeight = par1-2.7F;
@@ -225,7 +226,8 @@ public class TFCBiome extends BiomeGenBase
         return this;
     }
     
-    private TFCBiome setTemperatureRainfall(float par1, float par2)
+    @Override
+    public TFCBiome setTemperatureRainfall(float par1, float par2)
     {
             this.temperature = par1;
             this.rainfall = par2;
@@ -243,7 +245,7 @@ public class TFCBiome extends BiomeGenBase
         this.waterColorMultiplier = par1;
         return this;
     }
-    
+    @Override
     public TFCBiome setColor(int par1)
     {
         this.color = par1;
@@ -253,7 +255,7 @@ public class TFCBiome extends BiomeGenBase
     /**
      * Disable the rain for the biome.
      */
-    protected TFCBiome setDisableRain()
+    public TFCBiome setDisableRain()
     {
     	ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
         return this;

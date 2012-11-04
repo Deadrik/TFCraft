@@ -75,7 +75,7 @@ public class ItemFirestarter extends ItemTerra
 
             if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
                     world.getBlockMaterial(x, y, z) != Material.wood && world.getBlockMaterial(x, y, z) != Material.cloth &&
-                    world.getBlockId(x, y+1, z) == 0)
+                    world.getBlockId(x, y+1, z) == 0 && world.getBlockId(x, y, z) != TFCBlocks.Charcoal.blockID)
             {
 
                 List list = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(x, y+1, z, x+1, y+2, z+1));
@@ -109,7 +109,7 @@ public class ItemFirestarter extends ItemTerra
                     itemstack.stackSize = 0;
 
                 int chance = new Random().nextInt(100);
-                if(chance > 80-hasPaper)
+                if(chance > 70-hasPaper)
                 {
                     if(numsticks >= 3)
                     {
@@ -125,11 +125,11 @@ public class ItemFirestarter extends ItemTerra
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.FirepitOn.blockID, 2);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Firepit.blockID, 1);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }
-                    else if(numcoal >= 9 && world.getBlockMaterial(x, y, z) == Material.rock && 
+                    else if(numcoal >= 7 && world.getBlockMaterial(x, y, z) == Material.rock && 
                             world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
                             world.getBlockMaterial(x, y+1, z+1) == Material.rock && world.getBlockMaterial(x, y+1, z-1) == Material.rock &&
                             world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y+1, z) && world.isBlockNormalCube(x-1, y+1, z) && 
@@ -147,13 +147,29 @@ public class ItemFirestarter extends ItemTerra
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.ForgeOn.blockID, 1);
+                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Forge.blockID, 1);
                         if(world.isRemote)
                             world.markBlockNeedsUpdate(x, y+1, z);
                     }
 
                     return true;
                 }
+            }
+            else if(world.getBlockId(x, y, z) == TFCBlocks.Charcoal.blockID && world.getBlockMetadata(x, y, z) > 6)
+            {
+            	if(world.getBlockMaterial(x, y-1, z) == Material.rock && 
+                            world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
+                            world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
+                            world.isBlockNormalCube(x, y-1, z) && ((world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
+                            world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (checkSlabsAround(world, x, y, z))))
+            	{
+            		int chance = new Random().nextInt(100);
+                    if(chance > 70)
+                    {
+                    	world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Forge.blockID, 1);
+                    	world.markBlockNeedsUpdate(x, y, z);
+                    }
+            	}
             }
             return false;
         }

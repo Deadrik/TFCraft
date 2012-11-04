@@ -10,6 +10,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Items.*;
+import TFC.Food.ItemTerraFood;
 import TFC.Handlers.PacketHandler;
 
 import net.minecraft.src.EntityItem;

@@ -20,7 +20,6 @@ import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.Items.ItemTerra;
-import TFC.Items.ItemTerraFood;
 
 public class ItemMeal extends ItemTerra
 {
@@ -168,7 +167,7 @@ public class ItemMeal extends ItemTerra
 		else return false;
 	}
 
-	public int getMealPower(ItemStack is)
+	public static int getMealPower(ItemStack is)
 	{
 		if (is.hasTagCompound())
 		{
@@ -183,7 +182,7 @@ public class ItemMeal extends ItemTerra
 		return -1;
 	}
 
-	public int getMealFilling(ItemStack is)
+	public static int getMealFilling(ItemStack is)
 	{
 		if (is.hasTagCompound())
 		{
@@ -201,7 +200,7 @@ public class ItemMeal extends ItemTerra
 	/**
 	 * Energy is divided by 100 when it is sent to food stats to give a 0.0 - 1.0 float
 	 * */
-	public int getMealEnergy(ItemStack is)
+	public static int getMealEnergy(ItemStack is)
 	{
 		if (is.hasTagCompound())
 		{

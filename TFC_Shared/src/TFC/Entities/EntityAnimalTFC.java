@@ -149,6 +149,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
+	@Override
 	public void onLivingUpdate()
 	{
 		if (hunger > 168000)
@@ -302,9 +303,9 @@ public class EntityAnimalTFC extends EntityAnimal
 		return 0;
 	}
 	@Override
-	public boolean isWheat(ItemStack par1ItemStack)
+	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
-		return par1ItemStack.itemID == TFCItems.WheatGrain.shiftedIndex || par1ItemStack.itemID == TFCItems.WildBarleyWhole.shiftedIndex ||par1ItemStack.itemID == TFCItems.WildOatWhole.shiftedIndex||par1ItemStack.itemID == TFCItems.WildRyeWhole.shiftedIndex;
+		return par1ItemStack.itemID == TFCItems.WheatGrain.shiftedIndex || par1ItemStack.itemID == TFCItems.BarleyGrain.shiftedIndex ||par1ItemStack.itemID == TFCItems.OatGrain.shiftedIndex||par1ItemStack.itemID == TFCItems.RyeGrain.shiftedIndex;
 	}
 
 	/**

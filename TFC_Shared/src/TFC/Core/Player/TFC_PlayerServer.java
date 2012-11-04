@@ -43,7 +43,6 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	private long spawnProtectionTimer = -1;
 	
 	private FoodStatsTFC foodstats;
-	private FoodStats oldFood;
 
 	public TFC_PlayerServer(ServerPlayerAPI var1) {
 		super(var1);
@@ -116,7 +115,6 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	@Override
 	public void afterLocalConstructing(MinecraftServer var1, World var2, String var3, ItemInWorldManager var4) 
 	{
-		//this.player.setFoodStatsField(new FoodStatsTFC());
 		if(this.player.getHealth() == 20 && this.player.ticksExisted == 0)
 			this.player.setHealthField(this.getStartingMaxHealth());
 		
@@ -126,8 +124,6 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	@Override
 	public void beforeOnLivingUpdate() 
 	{
-		oldFood = this.player.getFoodStats();
-
 		if((float)foodstats.waterLevel / (float)foodstats.getMaxWater(this.player) <= 0.25f && player.worldObj.difficultySetting >= 1)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,1,1));
@@ -144,7 +140,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	@Override
 	public void afterOnLivingUpdate() 
 	{
-		this.player.setFoodStatsField(oldFood);
+		this.player.getFoodStats().addStats(10, 0);
 		if(!this.player.worldObj.isRemote)
 		{
 			if(spawnProtectionTimer == -1)
@@ -285,8 +281,8 @@ public class TFC_PlayerServer extends ServerPlayerBase
 		{
 			//The packet type sent determines who is expected to process this packet, the client or the server.
 			dos.writeByte(PacketHandler.Packet_Player_Status);
-			dos.writeInt(this.foodstats.foodLevel);
-			dos.writeInt(this.foodstats.waterLevel);
+			dos.writeFloat(this.foodstats.foodLevel);
+			dos.writeFloat(this.foodstats.waterLevel);
 			
 			pkt.channel="TerraFirmaCraft";
 			pkt.data = bos.toByteArray();

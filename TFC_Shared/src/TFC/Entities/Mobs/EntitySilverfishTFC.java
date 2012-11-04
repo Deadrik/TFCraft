@@ -14,6 +14,7 @@ public class EntitySilverfishTFC extends EntitySilverfish
         super(par1World);
     }
 
+    @Override
     public int getMaxHealth()
     {
         return 400;
@@ -22,17 +23,18 @@ public class EntitySilverfishTFC extends EntitySilverfish
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
+    @Override
     protected void attackEntity(Entity par1Entity, float par2)
     {
         if (this.attackTime <= 0 && par2 < 1.2F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
-            par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), this.func_82193_c(par1Entity));
+            par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), this.getAttackStrength(par1Entity));
         }
     }
 
-
-    public int func_82193_c(Entity par1Entity)
+    @Override
+    public int getAttackStrength(Entity par1Entity)
     {
         return 50;
     }
@@ -40,6 +42,7 @@ public class EntitySilverfishTFC extends EntitySilverfish
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.ARTHROPOD;

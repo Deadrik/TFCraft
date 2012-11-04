@@ -46,7 +46,7 @@ public class EntityAIBegTFC extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.theWolf.func_48150_h(true);
+    	this.theWolf.setLooksWithInterest(true);
         this.field_48347_e = 40 + this.theWolf.getRNG().nextInt(40);
     }
 
@@ -55,7 +55,7 @@ public class EntityAIBegTFC extends EntityAIBase
      */
     public void resetTask()
     {
-        this.theWolf.func_48150_h(false);
+        this.theWolf.setLooksWithInterest(false);
         this.field_48348_b = null;
     }
 
@@ -68,9 +68,10 @@ public class EntityAIBegTFC extends EntityAIBase
         --this.field_48347_e;
     }
 
+  
     private boolean func_48345_a(EntityPlayer par1EntityPlayer)
     {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-        return var2 == null ? false : (!this.theWolf.isTamed() && var2.itemID == Item.bone.shiftedIndex ? true : this.theWolf.isWheat(var2));
+        return var2 == null ? false : (!this.theWolf.isTamed() && var2.itemID == Item.bone.shiftedIndex ? true : this.theWolf.isBreedingItem(var2));
     }
 }

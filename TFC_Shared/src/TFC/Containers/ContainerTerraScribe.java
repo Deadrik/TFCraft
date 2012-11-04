@@ -92,6 +92,7 @@ public class ContainerTerraScribe extends ContainerTFC
 		}
 	}
 	
+	@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
@@ -176,7 +177,7 @@ public class ContainerTerraScribe extends ContainerTFC
 						{
 							slot.putStack(null);
 						}
-						slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
+						slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
@@ -219,7 +220,7 @@ public class ContainerTerraScribe extends ContainerTFC
 							{
 								slot.putStack(null);
 							}
-							slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
+							slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
 						}
 					}
 				}

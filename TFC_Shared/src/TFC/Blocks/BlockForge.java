@@ -12,6 +12,7 @@ import TFC.TileEntities.TileEntityTerraForge;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
@@ -99,7 +100,7 @@ public class BlockForge extends BlockContainer
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
-		return blockIndexInTexture;
+		return blockIndexInTexture+j;
 	}
 
 	public boolean getIsFireLit(int i)
@@ -213,31 +214,18 @@ public class BlockForge extends BlockContainer
 	{
 		return false;
 	}
-
-	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
-	{
-		int var5 = par1World.getBlockMetadata(par2, par3, par4);
-		TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
-
-		if (par0)
-		{
-			par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.ForgeOn.blockID);
-			par1World.markBlockNeedsUpdate(par2, par3, par4);
-		}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) 
+    {
+		int meta = world.getBlockMetadata(x, y, z);
+		if(meta == 0)
+			return 0;
+		else if(meta == 1)
+			return 15;
 		else
-		{
-			par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Forge.blockID);
-			par1World.markBlockNeedsUpdate(par2, par3, par4);
-		}
-
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
-
-		if (var6 != null)
-		{
-			var6.validate();
-			par1World.setBlockTileEntity(par2, par3, par4, var6);
-		}
-	}
+			return 10;
+    }
 
 	/**
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been

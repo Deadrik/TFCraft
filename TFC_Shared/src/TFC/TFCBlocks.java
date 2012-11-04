@@ -45,6 +45,8 @@ public class TFCBlocks
 	public static int leavesRenderId;
 	public static int detailedRenderId;
 	public static int foodPrepRenderId;
+	public static int quernRenderId;
+	public static int fluidRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -87,15 +89,12 @@ public class TFCBlocks
 	public static Block tilledSoil2;
 	public static Block finiteWater;
 	public static Block Firepit;
-	public static Block FirepitOn;
 	public static Block Bellows;
 	public static Block Anvil;
 	public static Block Anvil2;
 	public static Block Scribe;
 	public static Block Forge;
-	public static Block ForgeOn;
 	public static Block Bloomery;
-	public static Block BloomeryOn;
 	public static Block MetalTable;
 	public static Block Molten;
 	public static Block Sluice;
@@ -118,6 +117,40 @@ public class TFCBlocks
 	public static Block ToolRack;
 	public static Block SpawnMeter;
 	public static Block FoodPrep;
+	public static Block Quern;
+	public static Block WallCobbleIgIn;
+	public static Block WallCobbleIgEx;
+	public static Block WallCobbleSed;
+	public static Block WallCobbleMM;
+	public static Block WallRawIgIn;
+	public static Block WallRawIgEx;
+	public static Block WallRawSed;
+	public static Block WallRawMM;
+	public static Block WallBrickIgIn;
+	public static Block WallBrickIgEx;
+	public static Block WallBrickSed;
+	public static Block WallBrickMM;
+	public static Block WallSmoothIgIn;
+	public static Block WallSmoothIgEx;
+	public static Block WallSmoothSed;
+	public static Block WallSmoothMM;
+	
+	public static Block DoorOak;
+	public static Block DoorAspen;
+	public static Block DoorBirch;
+	public static Block DoorChestnut;
+	public static Block DoorDouglasFir;
+	public static Block DoorHickory;
+	public static Block DoorMaple;
+	public static Block DoorAsh;
+	public static Block DoorPine;
+	public static Block DoorSequoia;
+	public static Block DoorSpruce;
+	public static Block DoorSycamore;
+	public static Block DoorWhiteCedar;
+	public static Block DoorWhiteElm;
+	public static Block DoorWillow;
+	public static Block DoorKapok;
 	
 	static Configuration config;
 	
@@ -201,7 +234,40 @@ public class TFCBlocks
 		
 		GameRegistry.registerBlock(ToolRack, TFC.Items.ItemToolRack.class);
 		GameRegistry.registerBlock(SpawnMeter);
-
+		GameRegistry.registerBlock(FoodPrep);
+		GameRegistry.registerBlock(Quern);
+		GameRegistry.registerBlock(WallCobbleIgIn, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(WallCobbleIgEx, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(WallCobbleSed, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(WallCobbleMM, TFC.Items.ItemMM.class);
+		GameRegistry.registerBlock(WallRawIgIn, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(WallRawIgEx, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(WallRawSed, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(WallRawMM, TFC.Items.ItemMM.class);
+		GameRegistry.registerBlock(WallBrickIgIn, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(WallBrickIgEx, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(WallBrickSed, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(WallBrickMM, TFC.Items.ItemMM.class);
+		GameRegistry.registerBlock(WallSmoothIgIn, TFC.Items.ItemIgIn.class);
+		GameRegistry.registerBlock(WallSmoothIgEx, TFC.Items.ItemIgEx.class);
+		GameRegistry.registerBlock(WallSmoothSed, TFC.Items.ItemSed.class);
+		GameRegistry.registerBlock(WallSmoothMM, TFC.Items.ItemMM.class);
+		GameRegistry.registerBlock(DoorOak);
+		GameRegistry.registerBlock(DoorAspen);
+		GameRegistry.registerBlock(DoorBirch);
+		GameRegistry.registerBlock(DoorChestnut);
+		GameRegistry.registerBlock(DoorDouglasFir);
+		GameRegistry.registerBlock(DoorHickory);
+		GameRegistry.registerBlock(DoorMaple);
+		GameRegistry.registerBlock(DoorAsh);
+		GameRegistry.registerBlock(DoorPine);
+		GameRegistry.registerBlock(DoorSequoia);
+		GameRegistry.registerBlock(DoorSpruce);
+		GameRegistry.registerBlock(DoorSycamore);
+		GameRegistry.registerBlock(DoorWhiteCedar);
+		GameRegistry.registerBlock(DoorWhiteElm);
+		GameRegistry.registerBlock(DoorWillow);
+		GameRegistry.registerBlock(DoorKapok);
 	}
 	
 	public static void LoadBlocks()
@@ -276,7 +342,7 @@ public class TFCBlocks
 		Block.blocksList[5] = null;
 		Block.blocksList[6] = null;
 		Block.blocksList[8] = null;
-		//Block.blocksList[9] = null;
+		Block.blocksList[9] = null;
 		Block.blocksList[10] = null;
 		Block.blocksList[17] = null;
 		Block.blocksList[18] = null;
@@ -297,9 +363,9 @@ public class TFCBlocks
 		Block.blocksList[5] = (new TFC.Blocks.BlockPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
 		Block.blocksList[6] = (new BlockCustomSapling(6, 160)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sapling").setRequiresSelfNotify();
 		Block.blocksList[8] = (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setRequiresSelfNotify();
-		//Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").disableStats().setRequiresSelfNotify();
+		Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setRequiresSelfNotify();
 		Block.blocksList[10] = (new BlockCustomFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setLightOpacity(255).setBlockName("lava").setRequiresSelfNotify();
-		Block.blocksList[17] = (new TFC.Blocks.BlockLogNatural(17)).setHardness(100.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
+		Block.blocksList[17] = (new TFC.Blocks.BlockLogNatural(17)).setHardness(50.0F).setStepSound(Block.soundWoodFootstep).setBlockName("log").setRequiresSelfNotify();
 		Block.blocksList[18] = (new BlockCustomLeaves(18, 96)).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setBlockName("leaves").setRequiresSelfNotify();
 		Block.blocksList[31] = (BlockTallGrass)(new BlockCustomTallGrass(31, 39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("tallgrass");
 		Block.blocksList[37] = (BlockFlower)(new BlockCustomFlower(37, 13)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("flower");
@@ -332,9 +398,6 @@ public class TFCBlocks
 		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","Metallurgy", 2009)).setBlockName("Metallurgy").setHardness(3);
 		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setBlockName("Molten").setHardness(20);
 		TFCBlocks.Bloomery = new BlockBloomery(TFC_Settings.getIntFor(config,"block","Bloomery", 2007), 65).setBlockName("Bloomery").setHardness(20).setLightValue(0F);
-		TFCBlocks.BloomeryOn = new BlockBloomery(TFC_Settings.getIntFor(config,"block","BloomeryOn", 2006), 66).setBlockName("BloomeryOn").setHardness(20).setLightValue(1.0F);
-		TFCBlocks.FirepitOn = new BlockFirepit(TFC_Settings.getIntFor(config,"block","FirepitOn", 2005), 81).setBlockName("FirepitOn").setHardness(1).setLightValue(1.0F);
-		TFCBlocks.ForgeOn = new BlockForge(TFC_Settings.getIntFor(config,"block","ForgeOn", 2004), 91).setBlockName("ForgeOn").setHardness(20).setLightValue(1.0F);
 		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","Sluice", 2003)).setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
 		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
@@ -351,9 +414,42 @@ public class TFCBlocks
 		
 		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setBlockName("ToolRack");
 		SpawnMeter = new BlockSpawnMeter(TFC_Settings.getIntFor(config,"block","SpawnMeter", 2022)).setHardness(3F).setBlockName("SpawnMeter");
-		FoodPrep = new BlockFoodPrep(TFC_Settings.getIntFor(config,"block","FoodPrep", 2023)).setHardness(3F).setBlockName("FoodPrep");
+		FoodPrep = new BlockFoodPrep(TFC_Settings.getIntFor(config,"block","FoodPrep", 2023)).setHardness(1F).setBlockName("FoodPrep");
+		Quern = new BlockQuern(TFC_Settings.getIntFor(config,"block","Quern", 2024)).setHardness(3F).setBlockName("Quern");
 		
+		WallCobbleIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleIgIn", 2025), StoneIgInCobble, 3).setBlockName("WallCobble");
+		WallCobbleIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleIgEx", 2026), StoneIgExCobble, 4).setBlockName("WallCobble");
+		WallCobbleSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleSed", 2027), StoneSedCobble, 10).setBlockName("WallCobble");
+		WallCobbleMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleMM", 2028), StoneMMCobble, 6).setBlockName("WallCobble");
+		WallRawIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawIgIn", 2029), StoneIgIn, 3).setBlockName("WallRaw");
+		WallRawIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawIgEx", 2030), StoneIgEx, 4).setBlockName("WallRaw");
+		WallRawSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawSed", 2031), StoneSed, 10).setBlockName("WallRaw");
+		WallRawMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawMM", 2032), StoneMM, 6).setBlockName("WallRaw");
+		WallBrickIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickIgIn", 2033), StoneIgInBrick, 3).setBlockName("WallBrick");
+		WallBrickIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickIgEx", 2034), StoneIgExBrick, 4).setBlockName("WallBrick");
+		WallBrickSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickSed", 2035), StoneSedBrick, 10).setBlockName("WallBrick");
+		WallBrickMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickMM", 2036), StoneMMBrick, 6).setBlockName("WallBrick");
+		WallSmoothIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothIgIn", 2037), StoneIgInSmooth, 3).setBlockName("WallSmooth");
+		WallSmoothIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothIgEx", 2038), StoneIgExSmooth, 4).setBlockName("WallSmooth");
+		WallSmoothSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothSed", 2039), StoneSedSmooth, 10).setBlockName("WallSmooth");
+		WallSmoothMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothMM", 2040), StoneMMSmooth, 6).setBlockName("WallSmooth");
 		
+		DoorOak = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorOak", 2041), Material.wood, 0).setBlockName("Door Oak");
+		DoorAspen = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorAspen", 2042), Material.wood, 1).setBlockName("Door Aspen");
+		DoorBirch = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorBirch", 2043), Material.wood, 2).setBlockName("Door Birch");
+		DoorChestnut = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorChestnut", 2044), Material.wood, 3).setBlockName("Door Chestnut");
+		DoorDouglasFir = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorDouglasFir", 2045), Material.wood, 4).setBlockName("Door Douglas Fir");
+		DoorHickory = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorHickory", 2046), Material.wood, 5).setBlockName("Door Hickory");
+		DoorMaple = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorMaple", 2047), Material.wood, 6).setBlockName("Door Maple");
+		DoorAsh = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorAsh", 2048), Material.wood, 7).setBlockName("Door Ash");
+		DoorPine = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorPine", 2049), Material.wood, 8).setBlockName("Door Pine");
+		DoorSequoia = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorSequoia", 2050), Material.wood, 9).setBlockName("Door Sequoia");
+		DoorSpruce = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorSpruce", 2051), Material.wood, 10).setBlockName("Door Spruce");
+		DoorSycamore = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorSycamore", 2052), Material.wood, 11).setBlockName("Door Sycamore");
+		DoorWhiteCedar = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWhiteCedar", 2053), Material.wood, 12).setBlockName("Door White Cedar");
+		DoorWhiteElm = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWhiteElm", 2054), Material.wood, 13).setBlockName("Door White Elm");
+		DoorWillow = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWillow", 2055), Material.wood, 14).setBlockName("Door Willow");
+		DoorKapok = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorKapok", 2056), Material.wood, 15).setBlockName("Door Kapok");
 		
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
@@ -375,6 +471,11 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.ClayGrass, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.ClayGrass2, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Wood, "axe", 1);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodHoriz, "axe", 1);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodVert, "axe", 1);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Wood, "hammer", 1);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodHoriz, "hammer", 1);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodVert, "hammer", 1);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Peat, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.PeatGrass, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand, "shovel", 0);

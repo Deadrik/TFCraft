@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.Random;
 
 import TFC.*;
-import TFC.Core.CropIndex;
-import TFC.Core.CropManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
 import TFC.WorldGen.TFCBiome;

@@ -16,7 +16,9 @@ import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
 
 import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
@@ -34,6 +36,7 @@ public class BlockLogVert extends BlockTerra
     {		
         //we need to make sure teh palyer has the correct tool out
         boolean isAxeorSaw = false;
+        boolean isHammer = false;
         ItemStack equip = entityplayer.getCurrentEquippedItem();
         if(equip!=null)
         {
@@ -51,6 +54,13 @@ public class BlockLogVert extends BlockTerra
                     isAxeorSaw = true;
                 }
             }
+            for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
+            {
+                if(equip.getItem() == Recipes.Hammers[cnt])
+                {
+                	isHammer = true;
+                }
+            }
             if(!isAxeorSaw && equip.getItem() == TFCItems.FlintPaxel)
             {
                 isAxeorSaw = true;
@@ -59,6 +69,11 @@ public class BlockLogVert extends BlockTerra
         if(isAxeorSaw)
         {
         	super.harvestBlock(world, entityplayer, i, j, k, l);
+        }
+        else if(isHammer)
+        {
+        	EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(Item.stick, 1+world.rand.nextInt(3)));
+        	world.spawnEntityInWorld(item);
         }
         else
         {

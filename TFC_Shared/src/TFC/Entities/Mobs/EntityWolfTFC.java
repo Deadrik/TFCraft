@@ -86,8 +86,8 @@ public class EntityWolfTFC extends EntityTameableTFC
 	}
 	public EntityWolfTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
-    	super(par1World,mother,F_size);
-    	fooditems.add(Item.beefRaw.shiftedIndex);
+		super(par1World,mother,F_size);
+		fooditems.add(Item.beefRaw.shiftedIndex);
 		fooditems.add(Item.porkRaw.shiftedIndex);
 		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
@@ -115,6 +115,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	public boolean isAIEnabled()
 	{
 		return true;
@@ -123,6 +124,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Sets the active target the Task system uses for tracking
 	 */
+	@Override
 	public void setAttackTarget(EntityLiving par1EntityLiving)
 	{
 		super.setAttackTarget(par1EntityLiving);
@@ -136,16 +138,17 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * main AI tick function, replaces updateEntityActionState
 	 */
+	@Override
 	protected void updateAITick()
 	{
 		this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
 	}
-
+	@Override
 	public int getMaxHealth()
 	{
-		return this.isTamed() ? 20 : 8;
+		return this.isTamed() ? 1000 : 400;
 	}
-
+	@Override
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -156,6 +159,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
 	 * prevent them from trampling crops
 	 */
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
@@ -164,6 +168,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns the texture's file path as a String.
 	 */
+	@Override
 	public String getTexture()
 	{
 		return this.isTamed() ? "/mob/wolf_tame.png" : (this.isAngry() ? "/mob/wolf_angry.png" : texture);
@@ -172,6 +177,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
@@ -181,6 +187,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
@@ -190,6 +197,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Determines if an entity can be despawned, used on idle far away entities
 	 */
+	@Override
 	protected boolean canDespawn()
 	{
 		return this.isAngry();
@@ -198,6 +206,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound()
 	{
 		return this.isAngry() ? "mob.wolf.growl" : (this.rand.nextInt(3) == 0 ? (this.isTamed() && this.dataWatcher.getWatchableObjectInt(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
@@ -206,6 +215,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound()
 	{
 		return "mob.wolf.hurt";
@@ -214,6 +224,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound()
 	{
 		return "mob.wolf.death";
@@ -222,6 +233,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns the volume for the sounds this mob makes.
 	 */
+	@Override
 	protected float getSoundVolume()
 	{
 		return 0.4F;
@@ -230,6 +242,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Returns the item ID for the item the mob drops on death.
 	 */
+	@Override
 	protected int getDropItemId()
 	{
 		return -1;
@@ -239,6 +252,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
@@ -254,8 +268,8 @@ public class EntityWolfTFC extends EntityTameableTFC
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(5) + 3;
 				for (int x = 0; x<i;x++){
-				EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);
-				giveBirth(baby);
+					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);
+					giveBirth(baby);
 				}
 				pregnant = false;
 			}
@@ -265,12 +279,13 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
 		this.field_25054_c = this.field_25048_b;
 
-		if (this.looksWithInterest)
+		if (getLooksWithInterest())
 		{
 			this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
 		}
@@ -279,7 +294,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 			this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
 		}
 
-		if (this.looksWithInterest)
+		if (getLooksWithInterest())
 		{
 			this.numTicksToChaseTarget = 10;
 		}
@@ -386,7 +401,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	{
 		return (this.field_25054_c + (this.field_25048_b - this.field_25054_c) * par1) * 0.15F * (float)Math.PI;
 	}
-
+	@Override
 	public float getEyeHeight()
 	{
 		return this.height * 0.8F;
@@ -396,6 +411,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	 * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
 	 * use in wolves.
 	 */
+	@Override
 	public int getVerticalFaceSpeed()
 	{
 		return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
@@ -404,6 +420,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
 	{
 		Entity var3 = par1DamageSource.getEntity();
@@ -417,6 +434,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 		return super.attackEntityFrom(par1DamageSource, par2);
 	}
 
+	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
 		int var2 = 3 + getDamageMod();
@@ -426,6 +444,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
+	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
@@ -491,7 +510,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 				}
 			}
 
-			if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isWheat(var2))
+			if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(var2))
 			{
 				this.aiSit.setIsSitting(!this.isSitting());
 				this.isJumping = false;
@@ -501,7 +520,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 
 		return super.interact(par1EntityPlayer);
 	}
-
+	@Override
 	public void handleHealthUpdate(byte par1)
 	{
 		if (par1 == 8)
@@ -515,7 +534,6 @@ public class EntityWolfTFC extends EntityTameableTFC
 			super.handleHealthUpdate(par1);
 		}
 	}
-
 	public float getTailRotation()
 	{
 		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (float)(20 - this.dataWatcher.getWatchableObjectInt(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
@@ -524,81 +542,91 @@ public class EntityWolfTFC extends EntityTameableTFC
 	/**
 	 * Checks if the parameter is an wheat item.
 	 */
-	 public boolean isWheat(ItemStack par1ItemStack)
-	 {
-		 return par1ItemStack == null ? false : (!(Item.itemsList[par1ItemStack.itemID] instanceof ItemFood) ? false : ((ItemFood)Item.itemsList[par1ItemStack.itemID]).isWolfsFavoriteMeat());
-	 }
+	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return par1ItemStack == null ? false : (!(Item.itemsList[par1ItemStack.itemID] instanceof ItemFood) ? false : ((ItemFood)Item.itemsList[par1ItemStack.itemID]).isWolfsFavoriteMeat());
+	}
 
-	 /**
-	  * Will return how many at most can spawn in a chunk at once.
-	  */
-	 public int getMaxSpawnedInChunk()
-	 {
-		 return 5;
-	 }
+	/**
+	 * Will return how many at most can spawn in a chunk at once.
+	 */
+	@Override
+	public int getMaxSpawnedInChunk()
+	{
+		return 5;
+	}
 
-	 /**
-	  * Determines whether this wolf is angry or not.
-	  */
-	 public boolean isAngry()
-	 {
-		 return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
-	 }
+	/**
+	 * Determines whether this wolf is angry or not.
+	 */
+	public boolean isAngry()
+	{
+		return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
+	}
 
-	 /**
-	  * Sets whether this wolf is angry or not.
-	  */
-	 public void setAngry(boolean par1)
-	 {
-		 byte var2 = this.dataWatcher.getWatchableObjectByte(16);
+	/**
+	 * Sets whether this wolf is angry or not.
+	 */
 
-		 if (par1)
-		 {
-			 this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-		 }
-		 else
-		 {
-			 this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
-		 }
-	 }
+	public void setAngry(boolean par1)
+	{
+		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-	 /**
-	  * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-	  */
-	 public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
-	 {
-		 EntityWolfTFC var2 = new EntityWolfTFC(this.worldObj);
-		 var2.setOwner(this.getOwnerName());
-		 var2.setTamed(true);
-		 return var2;
-	 }
+		if (par1)
+		{
+			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
+		}
+		else
+		{
+			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
+		}
+	}
 
-	 public void func_48150_h(boolean par1)
-	 {
-		 this.looksWithInterest = par1;
-	 }
+	/**
+	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
+	 */
+	@Override
+	public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
+	{
+		EntityWolfTFC var2 = new EntityWolfTFC(this.worldObj);
+		var2.setOwner(this.getOwnerName());
+		var2.setTamed(true);
+		return var2;
+	}
 
-	 /**
-	  * Returns true if the mob is currently able to mate with the specified mob.
-	  */
-	 public boolean canMateWith(EntityAnimal par1EntityAnimal)
-	 {
-		 if (par1EntityAnimal == this)
-		 {
-			 return false;
-		 }
-		 else if (!this.isTamed())
-		 {
-			 return false;
-		 }
-		 else if (!(par1EntityAnimal instanceof EntityWolfTFC))
-		 {
-			 return false;
-		 }
-		 else
-		 {
-			 EntityWolfTFC var2 = (EntityWolfTFC)par1EntityAnimal;
-			 return !var2.isTamed() ? false : (var2.isSitting() ? false : this.isInLove() && var2.isInLove());
-		 }
-	 }
+	public boolean getLooksWithInterest()
+	{
+		return looksWithInterest;
+	}
+	
+	public void setLooksWithInterest(boolean b)
+	{
+		looksWithInterest = b;
+	}
+
+	/**
+	 * Returns true if the mob is currently able to mate with the specified mob.
+	 */
+	@Override
+	public boolean canMateWith(EntityAnimal par1EntityAnimal)
+	{
+		if (par1EntityAnimal == this)
+		{
+			return false;
+		}
+		else if (!this.isTamed())
+		{
+			return false;
+		}
+		else if (!(par1EntityAnimal instanceof EntityWolfTFC))
+		{
+			return false;
+		}
+		else
+		{
+			EntityWolfTFC var2 = (EntityWolfTFC)par1EntityAnimal;
+			return !var2.isTamed() ? false : (var2.isSitting() ? false : this.isInLove() && var2.isInLove());
+		}
+	}
 }

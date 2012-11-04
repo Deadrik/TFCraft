@@ -3,9 +3,10 @@ package TFC.Blocks;
 import java.util.Random;
 
 import TFC.*;
-import TFC.Core.CropIndex;
-import TFC.Core.CropManager;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.Items.ItemCustomScythe;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
@@ -28,17 +29,17 @@ public class BlockCrop extends BlockContainer
     {
         super(par1, Material.plants);
     }
-
+    @Override
     public int getRenderType()
     {
         return TFCBlocks.cropRenderId;
     }
-
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
     {
         return true;
     }
-    
+    @Override
     public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
     {
         TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
@@ -47,12 +48,32 @@ public class BlockCrop extends BlockContainer
         {
             if(crop.cropId == 4 && te.growth >= 7)
             {
-                ItemStack is1 = crop.getOutput1();
+                ItemStack is1 = crop.getOutput1(te.growth);
                 if(is1 != null)
                     world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
                 te.growth = 4;
                 te.broadcastPacketInRange(te.createCropUpdatePacket());
+                return true;
             }
+            else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 5 && te.growth < 6)
+            {
+                ItemStack is1 = crop.getOutput1(te.growth);
+                if(is1 != null)
+                    world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+                te.growth = 3;
+                te.broadcastPacketInRange(te.createCropUpdatePacket());
+                return true;
+            }
+            else if((crop.cropId == 19 || crop.cropId == 20) && te.growth >= 6)
+            {
+                ItemStack is1 = crop.getOutput2(te.growth);
+                if(is1 != null)
+                    world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
+                te.growth = 3;
+                te.broadcastPacketInRange(te.createCropUpdatePacket());
+                return true;
+            }
+            
             if(TFC_Settings.enableDebugMode)
             {
                 System.out.println("Crop ID: " + te.cropId);
@@ -63,7 +84,7 @@ public class BlockCrop extends BlockContainer
         
         return false;
     }
-
+    @Override
     public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
     {
         ItemStack itemstack = player.inventory.getCurrentItem();
@@ -100,15 +121,15 @@ public class BlockCrop extends BlockContainer
         }
 
     }
-    
+    @Override
     public void breakBlock(World world, int i, int j, int k, int l, int m) 
     {
     	TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
         if(crop != null && te.growth >= crop.numGrowthStages-1)
         {
-            ItemStack is1 = crop.getOutput1();
-            ItemStack is2 = crop.getOutput2();
+            ItemStack is1 = crop.getOutput1(te.growth);
+            ItemStack is2 = crop.getOutput2(te.growth);
 
             if(is1 != null)
                 world.spawnEntityInWorld(new EntityItem(world, i, j, k, is1));
@@ -141,28 +162,20 @@ public class BlockCrop extends BlockContainer
         return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.3, k+1);
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return 0;
     }
 
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
     {
         super.onNeighborBlockChange(world, i, j, k, par5);
@@ -174,12 +187,20 @@ public class BlockCrop extends BlockContainer
         
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
+    }
+    @Override
+    public boolean canBlockStay(World world, int i, int j, int k)
+    {
+    	if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID ||
+    			TFC_Core.isSoil(world.getBlockId(i, j-1, k))))
+        {
+    		return false;
+        }
+    	return true;
     }
 
     @Override

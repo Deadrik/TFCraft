@@ -14,13 +14,15 @@ public class EntitySlimeTFC extends EntitySlime
     {
         super(par1World);
     }
-
+    
+    @Override
     public int getMaxHealth()
     {
         int var1 = this.getSlimeSize();
         return 350 * var1;
     }
-
+    
+    @Override
     protected EntitySlimeTFC createInstance()
     {
         return new EntitySlimeTFC(this.worldObj);
@@ -29,6 +31,7 @@ public class EntitySlimeTFC extends EntitySlime
     /**
      * Will get destroyed next tick.
      */
+    @Override
     public void setDead()
     {
         int var1 = this.getSlimeSize();
@@ -54,6 +57,7 @@ public class EntitySlimeTFC extends EntitySlime
     /**
      * Called by a player entity when they collide with an entity
      */
+    @Override
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
     {
         if (this.canDamagePlayer())
@@ -70,6 +74,7 @@ public class EntitySlimeTFC extends EntitySlime
     /**
      * Indicates weather the slime is able to damage the player (based upon the slime's size)
      */
+    @Override
     protected boolean canDamagePlayer()
     {
         return this.getSlimeSize() > 1;
@@ -78,6 +83,7 @@ public class EntitySlimeTFC extends EntitySlime
     /**
      * Gets the amount of damage dealt to the player when "attacked" by the slime.
      */
+    @Override
     protected int getAttackStrength()
     {
         return this.getSlimeSize()*100;

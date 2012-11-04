@@ -51,7 +51,7 @@ public class ContainerTerraSluice extends ContainerTFC
 
 
 	@Override
-	public ItemStack func_82846_b(EntityPlayer player, int i)
+	public ItemStack transferStackInSlot(EntityPlayer player, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotpaper = (Slot)inventorySlots.get(1);

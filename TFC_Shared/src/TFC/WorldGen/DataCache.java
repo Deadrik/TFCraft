@@ -34,17 +34,17 @@ public class DataCache
     /**
      * Returns a biome cache block at location specified.
      */
-    public DataCacheBlockTFC getDataCacheBlock(GenLayerTFC indexLayers, int par1, int par2)
+    public DataCacheBlockTFC getDataCacheBlock(GenLayerTFC indexLayers, int x, int y)
     {
-        par1 >>= 4;
-        par2 >>= 4;
+        x >>= 4;
+        y >>= 4;
         
-        long var3 = (long)par1 & 4294967295L | ((long)par2 & 4294967295L) << 32;
+        long var3 = (long)x & 4294967295L | ((long)y & 4294967295L) << 32;
         DataCacheBlockTFC var5 = (DataCacheBlockTFC)this.cacheMap.getValueByKey(var3);
 
         if (var5 == null)
         {
-            var5 = new DataCacheBlockTFC(this,indexLayers, par1, par2, index);
+            var5 = new DataCacheBlockTFC(this,indexLayers, x, y, index);
             this.cacheMap.add(var3, var5);
             this.cache.add(var5);
         }

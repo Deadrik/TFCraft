@@ -381,7 +381,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             {
                 fireTemperature = 220;
             }
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.Bloomery.blockID) {
+            if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
                 BlockBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
             }
             //updateGui();
@@ -390,7 +390,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
         {
             
             int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            if(worldObj.getBlockId(xCoord, yCoord, zCoord) == TFCBlocks.BloomeryOn.blockID) {
+            if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 1) {
                 BlockBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
             fuelBurnTemp = 0;

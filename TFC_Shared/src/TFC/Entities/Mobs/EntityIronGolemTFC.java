@@ -18,7 +18,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
     {
         super(par1World);
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 100;
@@ -28,6 +28,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -50,7 +51,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
             }
         }
     }
-
+    @Override
     public boolean attackEntityAsMob(Entity par1Entity)
     {
         this.attackTimer = 10;
@@ -67,6 +68,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void handleHealthUpdate(byte par1)
     {
     	super.handleHealthUpdate(par1);
@@ -77,6 +79,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public int getAttackTimer()
     {
         return this.attackTimer;

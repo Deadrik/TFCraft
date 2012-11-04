@@ -1,6 +1,10 @@
 package TFC.Blocks;
 
+import java.util.List;
 import java.util.Random;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.*;
 import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
@@ -10,6 +14,7 @@ import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
 import TFC.WorldGen.Generators.WorldGenDouglasFir;
 
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
@@ -25,12 +30,13 @@ public class BlockCustomSapling extends BlockCustomFlower
 		this.blockIndexInTexture = j;
 	}
 
-	public void addCreativeItems(java.util.ArrayList list)
-	{
-		for(int i = 0; i < 15; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
+	@SideOnly(Side.CLIENT)
+    @Override
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+    	for(int i = 0; i < 16; i++)
+    		par3List.add(new ItemStack(par1, 1, i));
+    }
 	
 	@Override
 	public int damageDropped(int i)
@@ -165,11 +171,11 @@ public class BlockCustomSapling extends BlockCustomFlower
 		super.updateTick(world, i, j, k, random);
 		int meta = world.getBlockMetadata(i, j, k);
 		int growSpeed = 30;
-		if(meta == 1 || meta == 8 || meta == 11 || meta == 14) {
+		if(meta == 1 || meta == 8 || meta == 11) {
 			growSpeed = 20;
 		} else if(meta == 5 || meta == 15 || meta == 0 || meta == 13) {
 			growSpeed = 40;
-		} else if(meta == 9) {
+		} else if(meta == 9 || meta == 14) {
 			growSpeed = 60;
 		}
 

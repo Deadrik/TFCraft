@@ -75,8 +75,10 @@ public class ContainerKnapping extends Container
 
     /**
      * Called to transfer a stack from one inventory to the other eg. when shift clicking.
+     * @return 
      */
-    public ItemStack func_82846_b(EntityPlayer player, int clickedIndex)
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
     {
         ItemStack var2 = null;
         Slot grabbedSlot = (Slot)this.inventorySlots.get(clickedIndex);
@@ -122,7 +124,7 @@ public class ContainerKnapping extends Container
                 return null;
             }
 
-            grabbedSlot.func_82870_a(player, var4);
+            grabbedSlot.onPickupFromSlot(player, var4);
         }
 
         return var2;

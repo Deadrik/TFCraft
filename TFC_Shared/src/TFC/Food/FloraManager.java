@@ -1,9 +1,10 @@
-package TFC.Core;
+package TFC.Food;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import TFC.TFCItems;
+import TFC.Core.TFC_Time;
 
 
 import net.minecraft.src.Item;

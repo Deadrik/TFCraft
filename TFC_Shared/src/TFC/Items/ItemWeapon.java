@@ -20,18 +20,19 @@ import net.minecraft.src.World;
 
 public class ItemWeapon extends ItemSword implements ISize
 {
-	private int weaponDamage;
-	private final EnumToolMaterial toolMaterial;
+	public int weaponDamage;
+	public final EnumToolMaterial toolMaterial;
 
 	public ItemWeapon(int par1, EnumToolMaterial par2EnumToolMaterial)
 	{
 		super(par1, par2EnumToolMaterial);
 		this.toolMaterial = par2EnumToolMaterial;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
-		this.weaponDamage = 200 + par2EnumToolMaterial.getDamageVsEntity();
+		this.weaponDamage = par2EnumToolMaterial.getDamageVsEntity();
 	}
 	
-	public void addInformation(ItemStack is, List arraylist) 
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		ItemTerra.addSizeInformation(this, arraylist);
 		
@@ -42,6 +43,7 @@ public class ItemWeapon extends ItemSword implements ISize
 	/**
 	 * Returns if the item (tool) can harvest results from the block type.
 	 */
+	@Override
 	public boolean canHarvestBlock(Block par1Block)
 	{
 		return par1Block.blockID == Block.web.blockID;
@@ -50,11 +52,12 @@ public class ItemWeapon extends ItemSword implements ISize
 	/**
 	 * Returns the damage against a given entity.
 	 */
+	@Override
 	public int getDamageVsEntity(Entity par1Entity)
 	{
 		return this.weaponDamage;
 	}
-	
+	@Override
 	public int getItemStackLimit()
     {
     	if(canStack())
@@ -66,6 +69,7 @@ public class ItemWeapon extends ItemSword implements ISize
 	/**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+	@Override
     public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
     {
     	 MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
@@ -83,16 +87,17 @@ public class ItemWeapon extends ItemSword implements ISize
 	/**
 	 * Return the enchantability factor of the item, most of the time is based on material.
 	 */
+	@Override
 	public int getItemEnchantability()
 	{
 		return this.toolMaterial.getEnchantability();
 	}
-
+	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.block;
 	}
-
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 72000;
@@ -102,11 +107,12 @@ public class ItemWeapon extends ItemSword implements ISize
 	 * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
 	 * sword
 	 */
+	@Override
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
 	{
 		return par2Block.blockID == Block.web.blockID ? 15.0F : 1.5F;
 	}
-
+	@Override
 	public String getTextureFile() {
 		return "/bioxx/terratools.png";
 	}
@@ -115,6 +121,7 @@ public class ItemWeapon extends ItemSword implements ISize
 	 * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
 	 * the damage on the stack.
 	 */
+	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
 	{
 		par1ItemStack.damageItem(1, par3EntityLiving);
@@ -124,16 +131,22 @@ public class ItemWeapon extends ItemSword implements ISize
 	/**
 	 * Returns True is the item is renderer in full 3D when hold.
 	 */
+	@Override
 	public boolean isFull3D()
 	{
 		return true;
 	}
+	
+	@Override
+	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+    {
+        if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
+        {
+            par1ItemStack.damageItem(2, par7EntityLiving);
+        }
 
-	public boolean onBlockDestroyed(ItemStack par1ItemStack, int par2, int par3, int par4, int par5, EntityLiving par6EntityLiving)
-	{
-		par1ItemStack.damageItem(2, par6EntityLiving);
-		return true;
-	}
+        return true;
+    }
 
 	@Override
 	public EnumSize getSize() {

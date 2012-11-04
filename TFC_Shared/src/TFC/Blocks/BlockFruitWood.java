@@ -4,13 +4,13 @@ import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Core.FloraIndex;
-import TFC.Core.FloraManager;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Core.Direction;
+import TFC.Food.FloraIndex;
+import TFC.Food.FloraManager;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 
 import net.minecraft.src.AxisAlignedBB;

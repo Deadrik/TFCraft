@@ -22,12 +22,12 @@ public class RenderLeaves {
         
         boolean renderAll = true;
         
-        double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+        double blockMinX = block.getBlockBoundsMinX();
+		double blockMaxX = block.getBlockBoundsMaxX();
+		double blockMinY = block.getBlockBoundsMinY();
+		double blockMaxY = block.getBlockBoundsMaxY();
+		double blockMinZ = block.getBlockBoundsMinZ();
+		double blockMaxZ = block.getBlockBoundsMaxZ();
         
         renderblocks.enableAO = true;
         boolean var8 = false;

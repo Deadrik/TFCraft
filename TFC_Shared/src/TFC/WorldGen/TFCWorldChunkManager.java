@@ -246,7 +246,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 
 		for (int var7 = 0; var7 < par4 * par5; ++var7)
 		{
-			par1ArrayOfBiomeGenBase[var7] = BiomeGenBase.biomeList[var6[var7]];
+			int index = Math.max(var6[var7], 0);
+			par1ArrayOfBiomeGenBase[var7] = BiomeGenBase.biomeList[index];
 		}
 
 		return par1ArrayOfBiomeGenBase;
@@ -286,7 +287,15 @@ public class TFCWorldChunkManager extends WorldChunkManager
 
 			for (int var8 = 0; var8 < par4 * par5; ++var8)
 			{
-				par1ArrayOfBiomeGenBase[var8] = BiomeGenBase.biomeList[var7[var8]];
+				int id = var7[var8] != -1 ? var7[var8] : 0;
+				
+				if(var7[var8] == -1)
+					System.out.println("var7[var8] is " + var7[var8]);
+				
+				if(var8 == -1)
+					System.out.println("var8 is " + var8);
+				
+				par1ArrayOfBiomeGenBase[var8] = BiomeGenBase.biomeList[id];
 			}
 
 			return par1ArrayOfBiomeGenBase;
@@ -380,26 +389,26 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		return this.getDataLayerAt(cache, layers, indexLayers, par2, par3, par4, par5, true, layer);
 	}
 
-	public DataLayer[] getDataLayerAt(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int par2, int par3, int par4, int par5, boolean par6, int layer)
+	public DataLayer[] getDataLayerAt(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{
 		IntCache.resetIntCache();
 
-		if (layers == null || layers.length < par4 * par5)
+		if (layers == null || layers.length < width * height)
 		{
-			layers = new DataLayer[par4 * par5];
+			layers = new DataLayer[width * height];
 		}
 
-		if (par6 && par4 == 16 && par5 == 16 && (par2 & 15) == 0 && (par3 & 15) == 0)
+		if (par6 && width == 16 && height == 16 && (x & 15) == 0 && (y & 15) == 0)
 		{
-			DataLayer[] var9 = cache[layer].getCachedData(indexLayers[layer], par2, par3);
-			System.arraycopy(var9, 0, layers, 0, par4 * par5);
+			DataLayer[] var9 = cache[layer].getCachedData(indexLayers[layer], x, y);
+			System.arraycopy(var9, 0, layers, 0, width * height);
 			return layers;
 		}
 		else
 		{
-			int[] var7 = indexLayers[layer].getInts(par2, par3, par4, par5);
+			int[] var7 = indexLayers[layer].getInts(x, y, width, height);
 
-			for (int var8 = 0; var8 < par4 * par5; ++var8)
+			for (int var8 = 0; var8 < width * height; ++var8)
 			{
 				layers[var8] = DataLayer.layers[var7[var8]];
 			}
@@ -408,26 +417,26 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		}
 	}
 
-	public DataLayer[] getDataLayerAt(DataCache cache, DataLayer[] layers, GenLayerTFC indexLayers, int par2, int par3, int par4, int par5, boolean par6, int layer)
+	public DataLayer[] getDataLayerAt(DataCache cache, DataLayer[] layers, GenLayerTFC indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{
 		IntCache.resetIntCache();
 
-		if (layers == null || layers.length < par4 * par5)
+		if (layers == null || layers.length < width * height)
 		{
-			layers = new DataLayer[par4 * par5];
+			layers = new DataLayer[width * height];
 		}
 
-		if (par6 && par4 == 16 && par5 == 16 && (par2 & 15) == 0 && (par3 & 15) == 0)
+		if (par6 && width == 16 && height == 16 && (x & 15) == 0 && (y & 15) == 0)
 		{
-			DataLayer[] var9 = cache.getCachedData(indexLayers, par2, par3);
-			System.arraycopy(var9, 0, layers, 0, par4 * par5);
+			DataLayer[] var9 = cache.getCachedData(indexLayers, x, y);
+			System.arraycopy(var9, 0, layers, 0, width * height);
 			return layers;
 		}
 		else
 		{
-			int[] var7 = indexLayers.getInts(par2, par3, par4, par5);
+			int[] var7 = indexLayers.getInts(x, y, width, height);
 
-			for (int var8 = 0; var8 < par4 * par5; ++var8)
+			for (int var8 = 0; var8 < width * height; ++var8)
 			{
 				layers[var8] = DataLayer.layers[var7[var8]];
 			}
@@ -436,18 +445,18 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		}
 	}
 
-	public DataLayer getRockLayerAt(int par1, int par2, int index)
+	public DataLayer getRockLayerAt(int x, int y, int index)
 	{
-		return this.rockCache[index].getDataLayerAt(rocksIndexLayer[index], par1, par2);
+		return this.rockCache[index].getDataLayerAt(rocksIndexLayer[index], x, y);
 	}
 
 	/**
 	 * Returns biomes to use for the blocks and loads the other data like temperature and humidity onto the
 	 * WorldChunkManager Args: oldBiomeList, x, z, width, depth
 	 */
-	 public DataLayer[] loadRockLayerGeneratorData(DataLayer[] layers, int par2, int par3, int par4, int par5, int layer)
+	 public DataLayer[] loadRockLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height, int layer)
 	{
-		return this.getDataLayerAt(rockCache, layers, rocksIndexLayer, par2, par3, par4, par5, true, layer);
+		return this.getDataLayerAt(rockCache, layers, rocksIndexLayer, x, y, width, height, true, layer);
 	}
 
 	 public DataLayer getTreeLayerAt(int par1, int par2, int index)
@@ -459,9 +468,9 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	  * Returns biomes to use for the blocks and loads the other data like temperature and humidity onto the
 	  * WorldChunkManager Args: oldBiomeList, x, z, width, depth
 	  */
-	 public DataLayer[] loadTreeLayerGeneratorData(DataLayer[] layers, int par2, int par3, int par4, int par5, int layer)
+	 public DataLayer[] loadTreeLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height, int layer)
 	 {    	
-		 return this.getDataLayerAt(treeCache, layers, treesIndexLayer, par2, par3, par4, par5, true, 0);
+		 return this.getDataLayerAt(treeCache, layers, treesIndexLayer, x, y, width, height, true, 0);
 	 }
 
 	 public DataLayer getEVTLayerAt(int par1, int par2)
@@ -470,12 +479,12 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 }
 
 	 /**
-	  * Returns biomes to use for the blocks and loads the other data like temperature and humidity onto the
-	  * WorldChunkManager Args: oldBiomeList, x, z, width, depth
+	  * Returns evt map to use for the blocks
+	  * Args: layers, x, z, width, depth
 	  */
-	 public DataLayer[] loadEVTLayerGeneratorData(DataLayer[] layers, int par2, int par3, int par4, int par5)
+	 public DataLayer[] loadEVTLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	 {    	
-		 return this.getDataLayerAt(evtCache, layers, evtIndexLayer, par2, par3, par4, par5, true, 0);
+		 return this.getDataLayerAt(evtCache, layers, evtIndexLayer, x, y, width, height, true, 0);
 	 }
 
 	 public DataLayer getRainfallLayerAt(int par1, int par2)
@@ -484,12 +493,11 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 }
 
 	 /**
-	  * Returns biomes to use for the blocks and loads the other data like temperature and humidity onto the
-	  * WorldChunkManager Args: oldBiomeList, x, z, width, depth
+	  * Returns rainfall map Args: layers, x, z, width, depth
 	  */
-	 public DataLayer[] loadRainfallLayerGeneratorData(DataLayer[] layers, int par2, int par3, int par4, int par5)
+	 public DataLayer[] loadRainfallLayerGeneratorData(DataLayer[] layers, int x, int y, int width, int height)
 	 {    	
-		 return this.getDataLayerAt(rainfallCache, layers, rainfallIndexLayer, par2, par3, par4, par5, true, 0);
+		 return this.getDataLayerAt(rainfallCache, layers, rainfallIndexLayer, x, y, width, height, true, 0);
 	 }
 
 }

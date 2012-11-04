@@ -33,6 +33,7 @@ public class RenderFoodPrep
 			String tex = "/bioxx/FoodSprites.png";
 			ForgeHooksClient.bindTexture(tex, ModLoader.getMinecraftInstance().renderEngine.getTexture(tex));
 			Tessellator tessellator = Tessellator.instance;
+			tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 			if(te.storage[0] != null)
 			{
 				renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);

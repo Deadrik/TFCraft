@@ -149,7 +149,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
 
     public int getProcessScaled(int i)
     {
-        return processTimeRemaining * i / 200;
+        return processTimeRemaining * i / 100;
     }
 
     @Override
@@ -279,11 +279,11 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
             //This is where we handle the processing of the material
             if(soilAmount > 0 && waterInput && waterOutput)
             {
-                if(processTimeRemaining != 200) {
+                if(processTimeRemaining != 100) {
                     processTimeRemaining++;
                 }
                 processing = true;
-                if(processTimeRemaining == 200)
+                if(processTimeRemaining == 100)
                 {
                     Random random = new Random();
 

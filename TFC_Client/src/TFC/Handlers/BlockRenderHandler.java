@@ -123,6 +123,10 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderFoodPrep.render(block, i, j, k, renderer);
         }
+        else if (modelId == TFCBlocks.fluidRenderId)
+        {
+            return RenderFluids.render(block, i, j, k, renderer);
+        }
 		return false;
 	}
 
@@ -139,9 +143,9 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelId,
-			RenderBlocks renderer) 
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID,
+			RenderBlocks renderer) {
+		// TODO Auto-generated method stub
 		
 	}
 

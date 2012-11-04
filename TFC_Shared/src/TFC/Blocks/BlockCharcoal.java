@@ -5,6 +5,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Items.ItemCustomShovel;
 import TFC.TileEntities.TileEntityPartial;
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Item;
@@ -189,16 +190,16 @@ public class BlockCharcoal extends BlockTerra {
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
-	//    @Override
-	//    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
-	//    {
-	//        int md = world.getBlockMetadata(i, j, k);
-	//
-	//        if (md == 8)
-	//            return super.getCollisionBoundingBoxFromPool(world, i, j, k);
-	//
-	//        return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.125f * md), k + 1);
-	//    }
+	    @Override
+	    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	    {
+	        int md = world.getBlockMetadata(i, j, k);
+	
+	        if (md == 8)
+	        	return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
+	
+	        return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.125f * md), k + 1);
+	    }
 	//    
 	//    /**
 	//     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been

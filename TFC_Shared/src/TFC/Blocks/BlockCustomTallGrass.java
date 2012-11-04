@@ -143,41 +143,31 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
                 case 0:
                     is = new ItemStack(TFCItems.SeedsWheat,1); break;
                 case 1:
-                    is = new ItemStack(TFCItems.SeedsWildWheat,1); break;
-                case 2:
                     is = new ItemStack(TFCItems.SeedsMaize,1); break;
-                case 3:
-                    is = new ItemStack(TFCItems.SeedsWildMaize,1); break;
-                case 4:
+                case 2:
                     is = new ItemStack(TFCItems.SeedsTomato,1); break;
-                case 5:
+                case 3:
                     is = new ItemStack(TFCItems.SeedsBarley,1); break;
-                case 6:
-                    is = new ItemStack(TFCItems.SeedsWildBarley,1); break;
-                case 7:
+                case 4:
                     is = new ItemStack(TFCItems.SeedsRye,1); break;
-                case 8:
-                    is = new ItemStack(TFCItems.SeedsWildRye,1); break;
-                case 9:
+                case 5:
                     is = new ItemStack(TFCItems.SeedsOat,1); break;
-                case 10:
-                    is = new ItemStack(TFCItems.SeedsWildOat,1); break;
-                case 11:
+                case 6:
                     is = new ItemStack(TFCItems.SeedsRice,1); break;
-                case 12:
-                    is = new ItemStack(TFCItems.SeedsWildRice,1); break;
-                case 13:
+                case 7:
                     is = new ItemStack(TFCItems.SeedsPotato,1); break;
-                case 14:
-                    is = new ItemStack(TFCItems.SeedsWildPotato,1); break;
-                case 15:
+                case 8:
                     is = new ItemStack(TFCItems.SeedsOnion,1); break;
-                case 16:
+                case 9:
                     is = new ItemStack(TFCItems.SeedsCabbage,1); break;
-                case 17:
+                case 10:
                     is = new ItemStack(TFCItems.SeedsGarlic,1); break;
-                case 18:
+                case 11:
                     is = new ItemStack(TFCItems.SeedsCarrot,1); break;
+                case 12:
+                    is = new ItemStack(TFCItems.SeedsYellowBellPepper,1); break;
+                case 13:
+                    is = new ItemStack(TFCItems.SeedsRedBellPepper,1); break;
             }
         }
         return is;

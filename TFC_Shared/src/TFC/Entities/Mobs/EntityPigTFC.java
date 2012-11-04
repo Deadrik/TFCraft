@@ -70,7 +70,7 @@ public class EntityPigTFC extends EntityAnimalTFC
 
     public int getMaxHealth()
     {
-        return 10;
+        return 500;
     }
     
     public void onLivingUpdate ()
@@ -120,7 +120,7 @@ public class EntityPigTFC extends EntityAnimalTFC
      */
     protected String getLivingSound()
     {
-        return "mob.pig";
+        return "mob.pig.say";
     }
 
     /**
@@ -128,7 +128,7 @@ public class EntityPigTFC extends EntityAnimalTFC
      */
     protected String getHurtSound()
     {
-        return "mob.pig";
+        return "mob.pig.say";
     }
 
     /**
@@ -136,7 +136,7 @@ public class EntityPigTFC extends EntityAnimalTFC
      */
     protected String getDeathSound()
     {
-        return "mob.pigdeath";
+        return "mob.pig.death";
     }
 
     /**

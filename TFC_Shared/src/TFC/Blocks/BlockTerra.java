@@ -51,7 +51,7 @@ public abstract class BlockTerra extends Block
 	}
 	
 	@Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)  
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)  
     {
 		if(TFC_Settings.enableDebugMode && world.isRemote)
 		{

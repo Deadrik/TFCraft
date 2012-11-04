@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -17,7 +17,7 @@ import bioxx.importers.WavefrontObject;
 import TFC.*;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.CommonProxy;
+import TFC.Core.KeyBindings;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
@@ -32,6 +32,7 @@ import TFC.GUI.*;
 import TFC.Handlers.*;
 import TFC.Items.*;
 import TFC.Render.*;
+import TFC.Render.Blocks.RenderQuern;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCProvider;
@@ -48,6 +49,7 @@ import net.minecraft.src.ModelSlime;
 import net.minecraft.src.ModelSquid;
 import net.minecraft.src.Packet;
 import net.minecraft.src.PlayerAPI;
+import net.minecraft.src.RenderArrow;
 import net.minecraft.src.RenderBlaze;
 import net.minecraft.src.RenderEnderman;
 import net.minecraft.src.RenderGhast;
@@ -122,6 +124,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityEndermanTFC.class, new RenderEnderman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityArrowTFC.class, new RenderArrow());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sulfurRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdH = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -147,6 +151,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.detailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.toolRackRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
@@ -260,6 +266,10 @@ public class ClientProxy extends CommonProxy
 		case 32:
 		{
 			return new GuiFoodPrep(player.inventory, ((TileEntityFoodPrep) te), world, x, y, z);
+		}
+		case 33:
+		{
+			return new GuiQuern(player.inventory, ((TileEntityQuern) te), world, x, y, z);
 		}
 
 		}
@@ -622,6 +632,8 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("tile.SpawnMeter.name", "Protection Meter");
 		LR.addStringLocalization("effect.bleed","Bleeding");
+		LR.addStringLocalization("tile.Quern.name", "Quern Base");
+		LR.addStringLocalization("item.Quern.name", "Handstone");
 		
 		RegisterTerrain();
 		RegisterMetal();
@@ -664,37 +676,43 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.SeedsSoybean.name", "Soybean Seeds");
 		LR.addStringLocalization("item.SeedsGreenbean.name", "Greenbean Seeds");
 		LR.addStringLocalization("item.SeedsYam.name", "Yam Seeds");
-		LR.addStringLocalization("item.SeedsBellPepper.name", "Bell Pepper Seeds");
+		LR.addStringLocalization("item.SeedsYellowBellPepper.name", "Yellow Bell Pepper Seeds");
+		LR.addStringLocalization("item.SeedsRedBellPepper.name", "Red Bell Pepper Seeds");
 		LR.addStringLocalization("item.SeedsSquash.name", "Squash Seeds");
 
 		LR.addStringLocalization("item.Meat.EggCooked.name", "Cooked Egg");
 
 		LR.addStringLocalization("item.WheatGrain.name", "Wheat Grain");
-		LR.addStringLocalization("item.WildWheatGrain.name", "Wild Wheat Grain");
 		LR.addStringLocalization("item.WheatWhole.name", "Wheat");
-		LR.addStringLocalization("item.WildWheatWhole.name", "Wild Wheat");
+		LR.addStringLocalization("item.WheatGround.name", "Wheat Flour");
+		LR.addStringLocalization("item.WheatDough.name", "Wheat Dough");
 		LR.addStringLocalization("item.BarleyGrain.name", "Barley Grain");
-		LR.addStringLocalization("item.WildBarleyGrain.name", "Wild Barley Grain");
 		LR.addStringLocalization("item.BarleyWhole.name", "Barley");
-		LR.addStringLocalization("item.WildBarleyWhole.name", "Wild Barley");
+		LR.addStringLocalization("item.BarleyGround.name", "Barley Flour");
+		LR.addStringLocalization("item.BarleyDough.name", "Barley Dough");
+		LR.addStringLocalization("item.BarleyBread.name", "Barley Bread");
 		LR.addStringLocalization("item.OatGrain.name", "Oat Grain");
-		LR.addStringLocalization("item.WildOatGrain.name", "Wild Oat Grain");
 		LR.addStringLocalization("item.OatWhole.name", "Oat");
-		LR.addStringLocalization("item.WildOatWhole.name", "Wild Oat");
+		LR.addStringLocalization("item.OatDough.name", "Oat Dough");
+		LR.addStringLocalization("item.OatGround.name", "Oat Flour");
+		LR.addStringLocalization("item.OatBread.name", "Oat Bread");
 		LR.addStringLocalization("item.RyeGrain.name", "Rye Grain");
-		LR.addStringLocalization("item.WildRyeGrain.name", "Wild Rye Grain");
 		LR.addStringLocalization("item.RyeWhole.name", "Rye");
-		LR.addStringLocalization("item.WildRyeWhole.name", "Wild Rye");
+		LR.addStringLocalization("item.RyeGround.name", "Rye Flour");
+		LR.addStringLocalization("item.RyeDough.name", "Rye Dough");
+		LR.addStringLocalization("item.RyeBread.name", "Rye Bread");
 		LR.addStringLocalization("item.RiceGrain.name", "Rice Grain");
-		LR.addStringLocalization("item.WildRiceGrain.name", "Wild Rice Grain");
 		LR.addStringLocalization("item.RiceWhole.name", "Rice");
-		LR.addStringLocalization("item.WildRiceWhole.name", "Wild Rice");
+		LR.addStringLocalization("item.RiceGround.name", "Rice Flour");
+		LR.addStringLocalization("item.RiceDough.name", "Rice Dough");
+		LR.addStringLocalization("item.RiceBread.name", "Rice Bread");
+		LR.addStringLocalization("item.CornmealGround.name", "Cornmeal");
+		LR.addStringLocalization("item.CornmealDough.name", "Cornmeal Dough");
+		LR.addStringLocalization("item.CornBread.name", "Corn Bread");
 
 		LR.addStringLocalization("item.MaizeEar.name", "Maize Ear");
-		LR.addStringLocalization("item.WildMaizeEar.name", "Wild Maize Ear");
 		LR.addStringLocalization("item.Tomato.name", "Tomato");
 		LR.addStringLocalization("item.Potato.name", "Potato");
-		LR.addStringLocalization("item.WildPotato.name", "Wild Potato");
 
 		LR.addStringLocalization("item.Onion.name", "Onion");
 		LR.addStringLocalization("item.Cabbage.name", "Cabbage");
@@ -726,7 +744,12 @@ public class ClientProxy extends CommonProxy
 		{
 			LR.addStringLocalization("item.LooseRock."+rockNames[i]+".name", rockNames[i] + " Rock");
 			LR.addStringLocalization("item.FlatRock."+rockNames[i]+".name", rockNames[i] + " Rock");
+			LR.addStringLocalization("tile.WallCobble."+rockNames[i]+".name", rockNames[i] + " Cobblestone Wall");
+			LR.addStringLocalization("tile.WallRaw."+rockNames[i]+".name", rockNames[i] + " Wall");
+			LR.addStringLocalization("tile.WallBrick."+rockNames[i]+".name", rockNames[i] + " Brick Wall");
+			LR.addStringLocalization("tile.WallSmooth."+rockNames[i]+".name", rockNames[i] + " Smooth Wall");
 		}
+		
 		LR.addStringLocalization("tile.IgInRock.Granite.name", "Granite");
 		LR.addStringLocalization("tile.IgInRock.Diorite.name", "Diorite");
 		LR.addStringLocalization("tile.IgInRock.Gabbro.name", "Gabbro");
@@ -1107,6 +1130,8 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
 			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
 			LR.addStringLocalization("tile.ToolRack."+WoodNames[i]+".name", WoodNames[i] + " Tool Rack");
+			LR.addStringLocalization("tile.Door "+WoodNames[i]+".name", WoodNames[i] + " Door");
+			LR.addStringLocalization("item.Door "+WoodNames[i]+".name", WoodNames[i] + " Door");
 		}
 		LR.addStringLocalization("item.Stick.name", "Stick");
 	}

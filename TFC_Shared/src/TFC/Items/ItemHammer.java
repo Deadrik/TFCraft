@@ -11,6 +11,7 @@ import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import net.minecraft.src.Block;
+import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.ItemStack;
@@ -54,4 +55,9 @@ public class ItemHammer extends ItemTerraTool
 		}
 		return false;
 	}
+	
+	public boolean onBlockDestroyed(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int side, EntityLiving entity)
+    {
+        return false;
+    }
 }

@@ -2,8 +2,8 @@ package TFC.Containers;
 
 import TFC.*;
 import TFC.Enums.EnumSize;
+import TFC.Food.ItemTerraFood;
 import TFC.Items.ISize;
-import TFC.Items.ItemTerraFood;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Slot;

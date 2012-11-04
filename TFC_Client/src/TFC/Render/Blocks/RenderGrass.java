@@ -11,12 +11,18 @@ public class RenderGrass
 	public static boolean Render(Block block, int xCoord, int yCoord, int zCoord, 
             float par5, float par6, float par7, RenderBlocks renderblocks)
     {
-		double blockMinX = block.func_83009_v();
-		double blockMaxX = block.func_83007_w();
-		double blockMinY = block.func_83008_x();
-		double blockMaxY = block.func_83010_y();
-		double blockMinZ = block.func_83005_z();
-		double blockMaxZ = block.func_83006_A();
+//		double blockMinX = block.getBlockBoundsMinX();
+//		double blockMaxX = block.getBlockBoundsMaxX();
+//		double blockMinY = block.getBlockBoundsMinY();
+//		double blockMaxY = block.getBlockBoundsMaxY();
+//		double blockMinZ = block.getBlockBoundsMinZ();
+//		double blockMaxZ = block.getBlockBoundsMaxZ();
+		double blockMinX = 0;
+		double blockMaxX = 1;
+		double blockMinY = 0;
+		double blockMaxY = 1;
+		double blockMinZ = 0;
+		double blockMaxZ = 1;
 		
         renderblocks.enableAO = true;
         boolean var8 = false;

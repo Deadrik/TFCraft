@@ -9,6 +9,7 @@ import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
@@ -79,6 +80,19 @@ public class BlockBloomery extends BlockContainer
 			}
 		}
 	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) 
+    {
+		int meta = world.getBlockMetadata(x, y, z) >> 2;
+		if(meta == 0)
+			return 0;
+		else if(meta == 1)
+			return 15;
+		else
+			return 1;
+    }
+	
 	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
 	{
 		int var5 = par1World.getBlockMetadata(par2, par3, par4);
@@ -86,16 +100,14 @@ public class BlockBloomery extends BlockContainer
 
 		if (par0)
 		{
-			par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.BloomeryOn.blockID);
+			par1World.setBlockMetadataWithNotify(par2, par3, par4, 1);
 			par1World.markBlockNeedsUpdate(par2, par3, par4);
 		}
 		else
 		{
-			par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Bloomery.blockID);
+			par1World.setBlockWithNotify(par2, par3, par4, 0);
 			par1World.markBlockNeedsUpdate(par2, par3, par4);
 		}
-
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
 
 		if (var6 != null)
 		{
@@ -103,12 +115,8 @@ public class BlockBloomery extends BlockContainer
 			par1World.setBlockTileEntity(par2, par3, par4, var6);
 		}
 	}
-	public void addCreativeItems(java.util.ArrayList list)
-	{
-		if(this.blockID != TFCBlocks.BloomeryOn.blockID) {
-			list.add(new ItemStack(this,1,0));
-		}
-	}
+	
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -131,12 +139,14 @@ public class BlockBloomery extends BlockContainer
 		}
 		return true;
 	}
-
+	
+	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k)
 	{
 		return world.isBlockOpaqueCube(i, j-1, k) && world.isBlockOpaqueCube(i, j+1, k);
 	}
-
+	
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 0 || i == 1) {

@@ -83,11 +83,12 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     protected boolean isAIEnabled()
     {
         return true;
     }
-
+    @Override
     protected void updateAITasks()
     {
         this.sheepTimer = this.aiEatGrass.eatGrassTick;
@@ -98,6 +99,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate()
     {
         if (this.worldObj.isRemote)
@@ -123,12 +125,12 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
 
         super.onLivingUpdate();
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 400;
     }
-
+    @Override
     protected void entityInit()
     {
         super.entityInit();
@@ -138,6 +140,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * Drop 0-2 items of this living's type
      */
+    @Override
     protected void dropFewItems(boolean par1, int par2)
     {
         if (!this.getSheared())
@@ -149,12 +152,14 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected int getDropItemId()
     {
         return Block.cloth.blockID;
     }
     
     @SideOnly(Side.CLIENT)
+    @Override
     public void handleHealthUpdate(byte par1)
     {
         if (par1 == 10)
@@ -167,11 +172,13 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         }
     }
     
+    @SideOnly(Side.CLIENT)
     public float func_44003_c(float par1)
     {
         return this.sheepTimer <= 0 ? 0.0F : (this.sheepTimer >= 4 && this.sheepTimer <= 36 ? 1.0F : (this.sheepTimer < 4 ? ((float)this.sheepTimer - par1) / 4.0F : -((float)(this.sheepTimer - 40) - par1) / 4.0F));
     }
-
+    
+    @SideOnly(Side.CLIENT)
     public float func_44002_d(float par1)
     {
         if (this.sheepTimer > 4 && this.sheepTimer <= 36)
@@ -188,6 +195,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer par1EntityPlayer)
     {
         return super.interact(par1EntityPlayer);
@@ -196,6 +204,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
@@ -206,42 +215,34 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setSheared(par1NBTTagCompound.getBoolean("Sheared"));
         this.setFleeceColor(par1NBTTagCompound.getByte("Color"));
     }
-
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
+    @Override
     protected String getLivingSound()
     {
-        return "mob.sheep";
+        return "mob.sheep.say";
     }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
+    @Override
     protected String getHurtSound()
     {
-        return "mob.sheep";
+        return "mob.sheep.say";
     }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
+    @Override
     protected String getDeathSound()
     {
-        return "mob.sheep";
+        return "mob.sheep.say";
     }
 
     public int getFleeceColor()
     {
         return this.dataWatcher.getWatchableObjectByte(16) & 15;
     }
-
+    
     public void setFleeceColor(int par1)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
@@ -285,6 +286,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
+    @Override
     public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
     {
         EntitySheepTFC var2 = (EntitySheepTFC)par1EntityAnimal;
@@ -306,6 +308,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
      * This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
      * function is used in the AIEatGrass)
      */
+    @Override
     public void eatGrassBonus()
     {
     	super.eatGrassBonus();

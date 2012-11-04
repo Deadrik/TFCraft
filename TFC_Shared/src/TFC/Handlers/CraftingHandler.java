@@ -7,7 +7,7 @@ import TFC.Core.Recipes;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Items.ItemTerraFood;
+import TFC.Food.ItemTerraFood;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Item;

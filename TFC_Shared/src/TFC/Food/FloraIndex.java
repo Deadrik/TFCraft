@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Food;
 
 import java.util.Random;
 

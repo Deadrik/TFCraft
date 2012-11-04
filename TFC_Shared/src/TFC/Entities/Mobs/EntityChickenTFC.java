@@ -76,7 +76,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
 
     public int getMaxHealth()
     {
-        return 4;
+        return 200;
     }
 
     /**
@@ -130,7 +130,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
 
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
-            this.worldObj.playSoundAtEntity(this, "mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(Item.egg.shiftedIndex, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
@@ -162,7 +162,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
      */
     protected String getLivingSound()
     {
-        return "mob.chicken";
+        return "mob.chicken.say";
     }
 
     /**
@@ -170,7 +170,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
      */
     protected String getHurtSound()
     {
-        return "mob.chickenhurt";
+        return "mob.chicken.hurt";
     }
 
     /**
@@ -178,7 +178,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
      */
     protected String getDeathSound()
     {
-        return "mob.chickenhurt";
+        return "mob.chicken.hurt";
     }
 
     /**

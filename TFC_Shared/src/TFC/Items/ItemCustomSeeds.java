@@ -1,10 +1,10 @@
 package TFC.Items;
 
 import TFC.*;
-import TFC.Core.CropIndex;
-import TFC.Core.CropManager;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.TileEntities.TileEntityCrop;
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;

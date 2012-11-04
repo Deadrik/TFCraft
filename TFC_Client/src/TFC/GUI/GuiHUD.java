@@ -13,6 +13,8 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Food.FoodStatsTFC;
+import TFC.WorldGen.DataLayer;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
@@ -159,7 +161,7 @@ public class GuiHUD extends GuiIngame
 				foodLevel = foodstats.getFoodLevel();
 				preFoodLevel = foodstats.getPrevFoodLevel();
 
-				int waterLevel = foodstats.waterLevel;
+				float waterLevel = foodstats.waterLevel;
 
 				float percentFood = (float)foodLevel/100f;
 				float percentWater = (float)waterLevel/(float)foodstats.getMaxWater(this.mc.thePlayer);
@@ -167,7 +169,17 @@ public class GuiHUD extends GuiIngame
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/bioxx/icons.png"));
 				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 18, 90, 5);
+				if(playerclient.guishowFoodRestoreAmount)
+				{
+					float percentFood2 = Math.min(percentFood + (float)playerclient.guiFoodRestoreAmount/100f, 1);
+					GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
+					GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/bioxx/icons.png"));
+					this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 23, (int) (90*(percentFood2)), 5);
+				}
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/bioxx/icons.png"));
 				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight, 0, 23, (int) (90*percentFood), 5);
+				
 				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight+5, 0, 28, 90, 5);
 				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
 			}
@@ -443,10 +455,15 @@ public class GuiHUD extends GuiIngame
 			}
 
 			this.drawString(fontRenderer, String.format("ws: %.3f, fs: %.3f, g: %b", new Object[] {Float.valueOf(this.mc.thePlayer.capabilities.getWalkSpeed()), Float.valueOf(this.mc.thePlayer.capabilities.getFlySpeed()), Boolean.valueOf(this.mc.thePlayer.onGround)}), 2, 104, 14737632);
+			
+			int xCoord = (int)(mc.thePlayer.posX);
+			int yCoord = (int)(mc.thePlayer.posY);
+			int zCoord = (int)(mc.thePlayer.posZ);
+			
 			this.drawString(fontRenderer, String.format("rain: %.0f, temp: %.2f, evt: %.3f", new Object[] {
-					TFC_Climate.getRainfall((int)mc.thePlayer.posX, (int)mc.thePlayer.posY, (int)mc.thePlayer.posZ), 
-					TFC_Climate.getHeightAdjustedTemp((int)mc.thePlayer.posX, (int)mc.thePlayer.posY, (int)mc.thePlayer.posZ), 
-					TFC_Climate.manager.getEVTLayerAt((int)mc.thePlayer.posX, (int)mc.thePlayer.posZ).floatdata1}), 2, 120, 14737632);
+					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
+					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
+					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}), 2, 120, 14737632);
 			GL11.glPopMatrix();
 			this.mc.mcProfiler.endSection();
 		}

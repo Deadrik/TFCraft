@@ -29,7 +29,7 @@ public class SlotCraftingScribe extends Slot
 	}
 
 	@Override
-	public void onCrafting(ItemStack itemstack, int par2)
+	public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack)
 	{
 		itemstack.onCrafting(thePlayer.worldObj, thePlayer, slotNumber);
 

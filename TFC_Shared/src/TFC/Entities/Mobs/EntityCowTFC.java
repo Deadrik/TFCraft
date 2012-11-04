@@ -82,7 +82,7 @@ public class EntityCowTFC extends EntityAnimalTFC
 
     public int getMaxHealth()
     {
-        return 10;
+        return 500;
     }
 
     /**
@@ -106,7 +106,7 @@ public class EntityCowTFC extends EntityAnimalTFC
      */
     protected String getLivingSound()
     {
-        return "mob.cow";
+        return "mob.cow.say";
     }
 
     /**
@@ -114,7 +114,7 @@ public class EntityCowTFC extends EntityAnimalTFC
      */
     protected String getHurtSound()
     {
-        return "mob.cowhurt";
+        return "mob.cow.hurt";
     }
 
     /**
@@ -122,7 +122,7 @@ public class EntityCowTFC extends EntityAnimalTFC
      */
     protected String getDeathSound()
     {
-        return "mob.cowhurt";
+        return "mob.cow.hurt";
     }
 
     /**

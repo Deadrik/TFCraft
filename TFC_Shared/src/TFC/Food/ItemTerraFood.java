@@ -1,4 +1,4 @@
-package TFC.Items;
+package TFC.Food;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
+import TFC.Items.ISize;
+import TFC.Items.ItemTerra;
 
 import net.minecraft.src.Enchantment;
 import net.minecraft.src.Entity;
@@ -26,6 +28,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 	public int foodID;
 	private EnumSize size = EnumSize.SMALL;
 	private EnumWeight weight = EnumWeight.LIGHT;
+	public int Tier = 0;
 
 	public ItemTerraFood(int id, int healAmt) 
 	{
@@ -43,10 +46,24 @@ public class ItemTerraFood extends ItemFood implements ISize
 		texture = tex;
 		foodID = foodid;
 	}
+	
+	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, String tex, int foodid, int tier)
+	{
+		super(id, healAmt, saturation, wolfFood);
+		texture = tex;
+		foodID = foodid;
+		Tier = tier;
+	}
 
 	public ItemTerraFood setFoodID(int id)
 	{
 		foodID = id;
+		return this;
+	}
+	
+	public ItemTerraFood setFoodTier(int tier)
+	{
+		Tier = tier;
 		return this;
 	}
 

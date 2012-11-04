@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC;
 
 import java.io.File;
 import java.util.Map;
@@ -17,8 +17,6 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetTreesCommand;
 import TFC.Containers.*;
@@ -78,6 +76,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
 		ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
+		ModLoader.registerTileEntity(TileEntityQuern.class, "Quern");
 		
 		if(b)
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
@@ -102,6 +101,7 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "pigzombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolem", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityArrowTFC.class, "arrow", ModLoader.getUniqueEntityId());
 
 		EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);
@@ -128,6 +128,8 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerModEntity(EntityPigZombieTFC.class, "pigzombieTFC", 22,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityIronGolemTFC.class, "irongolemTFC", 23,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityCreeperTFC.class, "creeperTFC", 24,TerraFirmaCraft.instance, 160, 5, true);
+		
+		EntityRegistry.registerModEntity(EntityArrowTFC.class, "deerTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
 	}
 
 	public void registerToolClasses() {
@@ -211,6 +213,21 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.SteelSaw, "axe", 4);
 		MinecraftForge.setToolClass(TFCItems.TinSaw, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.ZincSaw, "axe", 1);
+		
+		MinecraftForge.setToolClass(TFCItems.StoneHammer, "hammer", 1);
+		MinecraftForge.setToolClass(TFCItems.BismuthHammer, "hammer", 1);
+		MinecraftForge.setToolClass(TFCItems.BismuthBronzeHammer, "hammer", 2);
+		MinecraftForge.setToolClass(TFCItems.BlackBronzeHammer, "hammer", 2);
+		MinecraftForge.setToolClass(TFCItems.BlackSteelHammer, "hammer", 5);
+		MinecraftForge.setToolClass(TFCItems.BlueSteelHammer, "hammer", 6);
+		MinecraftForge.setToolClass(TFCItems.BronzeHammer, "hammer", 2);
+		MinecraftForge.setToolClass(TFCItems.CopperHammer, "hammer", 1);
+		MinecraftForge.setToolClass(TFCItems.WroughtIronHammer, "hammer", 3);
+		MinecraftForge.setToolClass(TFCItems.RedSteelHammer, "hammer", 6);
+		MinecraftForge.setToolClass(TFCItems.RoseGoldHammer, "hammer", 2);
+		MinecraftForge.setToolClass(TFCItems.SteelHammer, "hammer", 4);
+		MinecraftForge.setToolClass(TFCItems.TinHammer, "hammer", 1);
+		MinecraftForge.setToolClass(TFCItems.ZincHammer, "hammer", 1);
 	}
 
 	public void RegisterPlayerApiClasses()
@@ -359,6 +376,10 @@ public class CommonProxy implements IGuiHandler
 		case 32:
 		{
 			return new ContainerFoodPrep(player.inventory, (TileEntityFoodPrep) te, world, x, y, z);
+		}
+		case 33:
+		{
+			return new ContainerQuern(player.inventory, (TileEntityQuern) te, world, x, y, z);
 		}
 		default:
 		{

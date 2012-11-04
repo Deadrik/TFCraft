@@ -60,14 +60,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 57")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 59")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
 	@Instance
 	public static TerraFirmaCraft instance;
 
-	@SidedProxy(clientSide = "TFC.Core.ClientProxy", serverSide = "TFC.Core.CommonProxy")
+	@SidedProxy(clientSide = "TFC.ClientProxy", serverSide = "TFC.CommonProxy")
 	public static CommonProxy proxy;
 
 	public TerraFirmaCraft()

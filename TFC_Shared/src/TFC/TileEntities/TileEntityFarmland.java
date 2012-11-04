@@ -2,9 +2,9 @@ package TFC.TileEntities;
 
 import TFC.*;
 import TFC.Blocks.BlockFarmland;
-import TFC.Core.CropIndex;
-import TFC.Core.CropManager;
 import TFC.Core.TFC_Time;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
 import net.minecraft.src.Block;

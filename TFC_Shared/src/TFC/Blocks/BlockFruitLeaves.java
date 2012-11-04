@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.*;
-import TFC.Core.FloraIndex;
-import TFC.Core.FloraManager;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
+import TFC.Food.FloraIndex;
+import TFC.Food.FloraManager;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;

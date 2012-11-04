@@ -15,14 +15,15 @@ public class EntityEndermanTFC extends EntityEnderman
         super(par1World);
 
     }
-
+    
+    @Override
     public int getMaxHealth()
     {
         return 2000;
     }
 
-
-    public int func_82193_c(Entity par1Entity)
+    @Override
+    public int getAttackStrength(Entity par1Entity)
     {
         return 350;
     }

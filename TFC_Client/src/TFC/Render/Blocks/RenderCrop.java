@@ -6,8 +6,8 @@ import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
-import TFC.Core.CropIndex;
-import TFC.Core.CropManager;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.TileEntities.TileEntityCrop;
 
 public class RenderCrop 
@@ -35,6 +35,9 @@ public class RenderCrop
         	renderblocks.clearOverrideBlockTexture();
         	mc.renderEngine.bindTexture(mc.renderEngine.getTexture(block.getTextureFile()));
         }
+        
+        Tessellator var9 = Tessellator.instance;
+        var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
         
         switch(te.cropId)
         {
@@ -117,16 +120,34 @@ public class RenderCrop
                 drawCrossedSquares(block, i, j, k, index, mult, 1.0);
                 break;
             }
-            case 19://Sugarcane
+            case 19://Yellow Bell
             {                
-                byte index = (byte) (218 + stage);
+                byte index = (byte) (137 + stage);
                 drawCrossedSquares(block, i, j, k, index, mult, 1.0);
                 break;
             }
-            case 20://Hemp
+            case 20://Red Bell
             {                
-                byte index = (byte) (192 + stage);
-                drawCrossedSquares(block, i, j, k, index, mult, 3.0);
+                byte index = (byte) (153 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 21://Soybean
+            {                
+                byte index = (byte) (121 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 22://Greenbean
+            {                
+                byte index = (byte) (105 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
+                break;
+            }
+            case 23://Squash
+            {                
+                byte index = (byte) (89 + stage);
+                drawCrossedSquares(block, i, j, k, index, mult, 1.0);
                 break;
             }
             default:

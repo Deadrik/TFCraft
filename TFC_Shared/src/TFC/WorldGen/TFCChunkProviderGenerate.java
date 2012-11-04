@@ -110,14 +110,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.rand.setSeed((long)chunkX * 341873128712L + (long)chunkZ * 132897987541L);
 
 		int[] ids = new int[32768];
-		int[] ids2 = new int[32768];
+		int[] idsTop = new int[32768];
 		int[] meta = new int[32768];
-		int[] meta2 = new int[32768];
+		int[] metaTop = new int[32768];
 
-		int[] ids3 = new int[16*16*256];
-		int[] meta3 = new int[16*16*256];
+		int[] idsBig = new int[16*16*256];
+		int[] metaBig = new int[16*16*256];
 
-		this.generateTerrainHigh(chunkX, chunkZ, ids2);
+		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
 		
 		biomesForGeneration = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadBlockGeneratorData(biomesForGeneration, chunkX * 16, chunkZ * 16, 16, 16);
 		rockLayer1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRockLayerGeneratorData(rockLayer1, chunkX * 16, chunkZ * 16, 16, 16, 0);
@@ -127,15 +127,15 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
 		heightMap = new int[256];
-		replaceBlocksForBiomeHigh(chunkX, chunkZ, ids2, meta2, rand, ids3, meta3);
-		replaceBlocksForBiomeLow(chunkX, chunkZ, ids, meta, rand, ids3, meta3);
+		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, metaTop, rand, idsBig, metaBig);
+		replaceBlocksForBiomeLow(chunkX, chunkZ, ids, meta, rand, idsBig, metaBig);
 
 
-		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
-		new MapGenRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
-		new MapGenRiverRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, ids3, meta3);
+		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		new MapGenRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
+		new MapGenRiverRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
-		Chunk var4 = new ChunkTFC(this.worldObj, ids3, meta3, chunkX, chunkZ);
+		Chunk var4 = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 		
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		String key = data.chunkX + "," + data.chunkZ;
@@ -145,16 +145,16 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		return var4;
 	}
 
-	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)
+	public void populate(IChunkProvider par1IChunkProvider, int chunkX, int chunkZ)
 	{
 		BlockSand.fallInstantly = true;
-		int var4 = par2 * 16;
-		int var5 = par3 * 16;
-		TFCBiome var6 = (TFCBiome)this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
+		int xCoord = chunkX * 16;
+		int zCoord = chunkZ * 16;
+		TFCBiome var6 = (TFCBiome)this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed((long)par2 * var7 + (long)par3 * var9 ^ this.worldObj.getSeed());
+		this.rand.setSeed((long)chunkX * var7 + (long)chunkZ * var9 ^ this.worldObj.getSeed());
 		boolean var11 = false;
 
 		int var12;
@@ -163,17 +163,17 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 		if (!var11 && this.rand.nextInt(4) == 0)
 		{
-			var12 = var4 + this.rand.nextInt(16) + 8;
+			var12 = xCoord + this.rand.nextInt(16) + 8;
 			var13 = this.rand.nextInt(128);
-			var14 = var5 + this.rand.nextInt(16) + 8;
+			var14 = zCoord + this.rand.nextInt(16) + 8;
 			(new WorldGenLakesTFC(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
 		}
 
 		if (!var11 && this.rand.nextInt(8) == 0)
 		{
-			var12 = var4 + this.rand.nextInt(16) + 8;
+			var12 = xCoord + this.rand.nextInt(16) + 8;
 			var13 = this.rand.nextInt(this.rand.nextInt(120) + 8);
-			var14 = var5 + this.rand.nextInt(16) + 8;
+			var14 = zCoord + this.rand.nextInt(16) + 8;
 
 			if (var13 < 40)
 			{
@@ -181,25 +181,25 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			}
 		}
 
-		var6.decorate(this.worldObj, this.rand, var4, var5);
-		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
-		var4 += 8;
-		var5 += 8;
+		var6.decorate(this.worldObj, this.rand, xCoord, zCoord);
+		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, var6, xCoord + 8, zCoord + 8, 16, 16, this.rand);
+		xCoord += 8;
+		zCoord += 8;
 
 		for (var12 = 0; var12 < 16; ++var12)
 		{
 			for (var13 = 0; var13 < 16; ++var13)
 			{
-				var14 = this.worldObj.getPrecipitationHeight(var4 + var12, var5 + var13);
+				var14 = this.worldObj.getPrecipitationHeight(xCoord + var12, zCoord + var13);
 
-				if (this.worldObj.isBlockFreezable(var12 + var4, var14 - 1, var13 + var5))
+				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
 				{
-					this.worldObj.setBlockWithNotify(var12 + var4, var14 - 1, var13 + var5, Block.ice.blockID);
+					this.worldObj.setBlockWithNotify(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID);
 				}
 
-				if (canSnowAt(worldObj, var12 + var4, var14, var13 + var5))
+				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
 				{
-					this.worldObj.setBlockWithNotify(var12 + var4, var14, var13 + var5, Block.snow.blockID);
+					this.worldObj.setBlockWithNotify(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID);
 				}
 			}
 		}
@@ -455,24 +455,24 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		return par1ArrayOfDouble;
 	}
 
-	public void replaceBlocksForBiomeHigh(int par1, int par2, int[] blockArray, int[] metaArray, Random rand, int[] blockArrayBig, int[] metaArrayBig)
+	public void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, int[] blockArray, int[] metaArray, Random rand, int[] blockArrayBig, int[] metaArrayBig)
 	{
 		int var5 = 16;
 		double var6 = 0.03125D;
-		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, par1 * 16, par2 * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
+		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, chunkX * 16, chunkZ * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
 		
 		for (int xCoord = 0; xCoord < 16; ++xCoord)
 		{
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
-				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndex];
-				DataLayer rock1 = rockLayer1[arrayIndex];
-				//rock1 = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).getRockLayerAt(par1 * 16 + xCoord, par2 * 16 + zCoord, 0);
-				DataLayer rock2 = rockLayer2[arrayIndex];
-				DataLayer rock3 = rockLayer3[arrayIndex];
-				DataLayer evt = evtLayer[arrayIndex];
-				DataLayer rainfall = rainfallLayer[arrayIndex];
+				int arrayIndexDL = zCoord + xCoord * 16;
+				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndexDL];
+				DataLayer rock1 = rockLayer1[arrayIndexDL];
+				DataLayer rock2 = rockLayer2[arrayIndexDL];
+				DataLayer rock3 = rockLayer3[arrayIndexDL];
+				DataLayer evt = evtLayer[arrayIndexDL];
+				DataLayer rainfall = rainfallLayer[arrayIndexDL];
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
@@ -481,7 +481,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int subSurfaceBlock = TFC_Core.getTypeForDirt(rock1.data2);
 				int soilMeta = TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
 				
-				float _temp = TFC_Climate.getBioTemperature(par1*16, par2*16);
+				float _temp = TFC_Climate.getBioTemperature(chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
 
 				for (int height = 127; height >= 0; --height)
 				{
@@ -497,6 +497,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					if (var18 == 0)
 					{
+						if(heightMap[arrayIndex] != 0 && height-16 >= 0)
+						{
+							heightMap[arrayIndex] = 0;
+						}
 						var13 = -1;
 					}
 					else if (var18 == Block.stone.blockID)
@@ -532,23 +536,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 								surfaceBlock = 0;
 							}
 
-							if (height < var5 && surfaceBlock == 0)
-							{
-								if (temp < 0.15F)
-								{
-									surfaceBlock = Block.ice.blockID;
-								}
-								else if (rainfall.floatdata1 < 125)
-								{
-									surfaceBlock = 0;
-								}
-								else
-								{
-									surfaceBlock = Block.waterStill.blockID;
-								}
-							}
-
 							var13 = var12;
+							
 
 							if (height >= var5 - 1 && index+1 < blockArray.length && blockArray[index+1] != Block.waterStill.blockID)
 							{
@@ -620,9 +609,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
-				DataLayer rock1 = rockLayer1[arrayIndex];
-				DataLayer rock2 = rockLayer2[arrayIndex];
-				DataLayer rock3 = rockLayer3[arrayIndex];
+				int arrayIndexDL = zCoord + xCoord * 16;
+				DataLayer rock1 = rockLayer1[arrayIndexDL];
+				DataLayer rock2 = rockLayer2[arrayIndexDL];
+				DataLayer rock3 = rockLayer3[arrayIndexDL];
 				
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
 				int var13 = -1;

@@ -23,7 +23,7 @@ public class EntityBlazeTFC extends EntityBlaze
     }
 
     @Override
-    public int func_82193_c(Entity par1Entity)
+    public int getAttackStrength(Entity par1Entity)
     {
         return 60;
     }

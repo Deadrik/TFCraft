@@ -14,6 +14,7 @@ import TFC.Core.TFC_Core.Direction;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Item;
@@ -76,12 +77,15 @@ public class BlockLogNatural extends Block
     {
         return "/bioxx/terrablocks.png";
     }
+    
+    static int damage = 0;
 
     @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {		
-        //we need to make sure teh palyer has the correct tool out
+        //we need to make sure the player has the correct tool out
         boolean isAxeorSaw = false;
+        boolean isHammer = false;
         ItemStack equip = entityplayer.getCurrentEquippedItem();
         if(equip!=null)
         {
@@ -99,6 +103,13 @@ public class BlockLogNatural extends Block
                     isAxeorSaw = true;
                 }
             }
+            for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
+            {
+                if(equip.getItem() == Recipes.Hammers[cnt])
+                {
+                	isHammer = true;
+                }
+            }
             if(!isAxeorSaw && equip.getItem() == TFCItems.FlintPaxel)
             {
                 isAxeorSaw = true;
@@ -106,7 +117,14 @@ public class BlockLogNatural extends Block
         }
         if(isAxeorSaw)
         {
-            ProcessTree(world, i, j, k, l);
+        	damage = 0;
+            ProcessTree(world, i, j, k, l);	
+            equip.damageItem(damage, entityplayer);
+        }
+        else if(isHammer)
+        {
+        	EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(Item.stick, 1+world.rand.nextInt(3)));
+        	world.spawnEntityInWorld(item);
         }
         else
         {
@@ -127,7 +145,6 @@ public class BlockLogNatural extends Block
         int z = k;
         boolean checkArray[][][] = new boolean[11][50][11];
 
-
         boolean reachedTop = false;
         while(!reachedTop)
         {
@@ -147,6 +164,7 @@ public class BlockLogNatural extends Block
 
             y++;
         }
+        
     }
 
     @Override
@@ -206,6 +224,7 @@ public class BlockLogNatural extends Block
             world.setBlockWithNotify(i, j, k, 0);
             world.markBlockNeedsUpdate(i, j, k);
             dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
+            damage++;
         }
     }
 

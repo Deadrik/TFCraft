@@ -13,6 +13,7 @@ import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.ChunkPosition;
 import net.minecraft.src.Entity;
+import net.minecraft.src.Material;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Vec3;
@@ -188,17 +189,19 @@ public class TFCProvider extends WorldProvider
 
 			TFCWorldChunkManager var2 = (TFCWorldChunkManager) worldChunkMgr;
 			List var3 = var2.getBiomesToSpawnIn();
-			Random var4 = new Random(worldObj.getWorldInfo().getSeed());
+			long seed = worldObj.getWorldInfo().getSeed();
+			Random var4 = new Random(seed);
 
 			ChunkPosition var5 = null;
 			int xOffset = 0;
 			int var6 = 0;
 			int var7 = getAverageGroundLevel();
-			int var8 = 15000;
+			int var8 = 10000;
+			int startingZ = 3000 + var4.nextInt(14000);
 
 			while(var5 == null)
 			{
-				var5 = var2.findBiomePosition(xOffset, -(TFC_Climate.getMaxZPos()/2), 64, var3, var4);
+				var5 = var2.findBiomePosition(xOffset, -startingZ, 64, var3, var4);
 
 				if (var5 != null)
 				{
@@ -230,9 +233,10 @@ public class TFCProvider extends WorldProvider
 		}
 	}
 	
+	@Override
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
     {
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0 && (worldObj.getBlockMaterial(x, y, z) == Material.water || worldObj.getBlockMaterial(x, y, z) == Material.ice))
 			return true;
 		return false;
     }

@@ -18,7 +18,7 @@ public enum EnumTree
 	
 	ASH("ASH", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/3, /*maxTemp*/18, /*minEVT*/0, /*maxEVT*/2, false),
 	
-	PINE("PINE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/18, /*minEVT*/0, /*maxEVT*/1, true),
+	PINE("PINE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/14, /*minEVT*/0, /*maxEVT*/1, true),
 	
 	REDWOOD("REDWOOD", /*minRain*/850f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/15, /*minEVT*/0, /*maxEVT*/1, true),
 	
@@ -32,7 +32,7 @@ public enum EnumTree
 	
 	WILLOW("WILLOW", /*minRain*/1000f, /*maxRain*/16000f, /*minTemp*/6, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
 	
-	KAPOK("KAPOK", /*minRain*/4000f, /*maxRain*/16000f, /*minTemp*/15, /*maxTemp*/30, /*minEVT*/0f, /*maxEVT*/0.5f, false);
+	KAPOK("KAPOK", /*minRain*/2000f, /*maxRain*/16000f, /*minTemp*/15, /*maxTemp*/44, /*minEVT*/0f, /*maxEVT*/1f, false);
 
 	public final float minRain;
 	public final float maxRain;

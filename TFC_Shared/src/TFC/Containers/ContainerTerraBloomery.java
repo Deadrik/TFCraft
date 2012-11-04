@@ -129,7 +129,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 						{
 							slot.putStack(null);
 						}
-						slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
+						slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
 					}
 					else if (slot.isItemValid(itemstack3))
 					{
@@ -172,7 +172,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 							{
 								slot.putStack(null);
 							}
-							slot.func_82870_a(entityplayer, inventoryplayer.getItemStack());
+							slot.onPickupFromSlot(entityplayer, inventoryplayer.getItemStack());
 						}
 					}
 				}

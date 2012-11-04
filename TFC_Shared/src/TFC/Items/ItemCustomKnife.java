@@ -15,12 +15,11 @@ import net.minecraft.src.World;
 
 public class ItemCustomKnife extends ItemWeapon
 {
-	private int weaponDamage = 1;
 	public ItemCustomKnife(int i, EnumToolMaterial e)
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = 100 + e.getDamageVsEntity();
+		this.weaponDamage = 50 + e.getDamageVsEntity();
 	}
 
 	public String getTextureFile() {

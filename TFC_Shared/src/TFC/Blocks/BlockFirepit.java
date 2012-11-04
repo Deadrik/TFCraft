@@ -197,32 +197,6 @@ public class BlockFirepit extends BlockContainer
 			return 10;
     }
 	
-	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4)
-    {
-        int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        
-        TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
-
-        if (par0)
-        {
-            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.FirepitOn.blockID);
-            par1World.markBlockNeedsUpdate(par2, par3, par4);
-        }
-        else
-        {
-            par1World.setBlockWithNotify(par2, par3, par4, TFCBlocks.Firepit.blockID);
-            par1World.markBlockNeedsUpdate(par2, par3, par4);
-        }
-
-        par1World.setBlockMetadataWithNotify(par2, par3, par4, var5);
-
-        if (var6 != null)
-        {
-            var6.validate();
-            par1World.setBlockTileEntity(par2, par3, par4, var6);
-        }
-    }
-	
 	/**
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)

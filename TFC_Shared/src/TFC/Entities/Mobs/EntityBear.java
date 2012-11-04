@@ -106,11 +106,12 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
+	@Override
 	public boolean isAIEnabled ()
 	{
 		return true;
 	}
-
+	@Override
 	public int getDegree(){
 		return degreeOfDiversion;
 	}
@@ -118,6 +119,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Sets the active target the Task system uses for tracking
 	 */
+	@Override
 	public void setAttackTarget (EntityLiving par1EntityLiving)
 	{
 		super.setAttackTarget (par1EntityLiving);
@@ -127,18 +129,20 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * main AI tick function, replaces updateEntityActionState
 	 */
+	@Override
 	protected void updateAITick ()
 	{
 		dataWatcher.updateObject (18, Integer.valueOf (getHealth ()));
 	}
 
 
+	@Override
 	public int getMaxHealth ()
 	{
-		return 20;
+		return 1200;
 	}
 
-
+	@Override
 	protected void entityInit ()
 	{
 		super.entityInit ();
@@ -150,6 +154,7 @@ public class EntityBear extends EntityTameableTFC
 	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
 	 * prevent them from trampling crops
 	 */
+	@Override
 	protected boolean canTriggerWalking ()
 	{
 		return true;
@@ -159,6 +164,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT (NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT (par1NBTTagCompound);
@@ -168,6 +174,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT (NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT (par1NBTTagCompound);
@@ -177,6 +184,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Determines if an entity can be despawned, used on idle far away entities
 	 */
+	@Override
 	protected boolean canDespawn ()
 	{
 		return true;
@@ -186,6 +194,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Returns the sound this mob makes while it's alive.
 	 */
+	@Override
 	protected String getLivingSound ()
 	{
 		return "mob.wolf.growl";
@@ -195,6 +204,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Returns the sound this mob makes when it is hurt.
 	 */
+	@Override
 	protected String getHurtSound ()
 	{
 		if(!isChild()){
@@ -209,6 +219,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Returns the sound this mob makes on death.
 	 */
+	@Override
 	protected String getDeathSound ()
 	{
 		return "mob.wolf.death";
@@ -218,6 +229,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Returns the volume for the sounds this mob makes.
 	 */
+	@Override
 	protected float getSoundVolume ()
 	{
 		return 0.4F;
@@ -227,6 +239,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Returns the item ID for the item the mob drops on death.
 	 */
+	@Override
 	protected int getDropItemId ()
 	{
 		return -1;
@@ -237,6 +250,7 @@ public class EntityBear extends EntityTameableTFC
 	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
 	 * use this to react to sunlight and start to burn.
 	 */
+	@Override
 	public void onLivingUpdate ()
 	{
 		super.onLivingUpdate ();
@@ -275,6 +289,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@Override
 	public void onUpdate ()
 	{
 		super.onUpdate ();
@@ -282,7 +297,7 @@ public class EntityBear extends EntityTameableTFC
 		field_25048_b = field_25048_b + (0.0F - field_25048_b) * 0.4F;
 	}
 
-
+	@Override
 	public float getEyeHeight ()
 	{
 		return height * 0.8F;
@@ -292,6 +307,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Called when the entity is attacked.
 	 */
+	@Override
 	public boolean attackEntityFrom (DamageSource par1DamageSource, int par2)
 	{
 		Entity entity = par1DamageSource.getEntity ();
@@ -303,14 +319,14 @@ public class EntityBear extends EntityTameableTFC
 		return super.attackEntityFrom (par1DamageSource, par2);
 	}
 
-
+	@Override
 	public boolean attackEntityAsMob (Entity par1Entity)
 	{
-		byte byte0 = (byte) 5;
+		byte byte0 = (byte) 250;
 		return par1Entity.attackEntityFrom (DamageSource.causeMobDamage (this), byte0);
 	}
 
-
+	@Override
 	public void handleHealthUpdate (byte par1)
 	{
 		if (par1 == 8)
@@ -327,6 +343,7 @@ public class EntityBear extends EntityTameableTFC
 	/**
 	 * Will return how many at most can spawn in a chunk at once.
 	 */
+	@Override
 	public int getMaxSpawnedInChunk ()
 	{
 		return 2;
@@ -343,8 +360,8 @@ public class EntityBear extends EntityTameableTFC
 		return entitybear;
 	}
 
-
-	public boolean func_48135_b (EntityAnimal par1EntityAnimal)
+	@Override
+	public boolean canMateWith (EntityAnimal par1EntityAnimal)
 	{
 		if (par1EntityAnimal == this)
 		{

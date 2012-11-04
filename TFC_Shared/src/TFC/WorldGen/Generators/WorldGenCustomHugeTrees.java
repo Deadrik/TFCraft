@@ -117,8 +117,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 			{
 				blockUnder = world.getBlockId(xCoord, yCoord - 1, zCoord);
 
-				if ((blockUnder == TFCBlocks.Dirt.blockID || blockUnder == TFCBlocks.Dirt2.blockID || blockUnder == TFCBlocks.Grass.blockID || blockUnder == TFCBlocks.Grass2.blockID ||
-						blockUnder == TFCBlocks.ClayGrass.blockID || blockUnder == TFCBlocks.ClayGrass2.blockID) && yCoord < 256 - var6 - 1)
+				if ((TFC_Core.isSoil(blockUnder)) && yCoord < 256 - var6 - 1)
 				{
 					DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 			        

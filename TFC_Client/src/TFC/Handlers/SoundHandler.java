@@ -12,6 +12,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 
 import net.minecraft.src.Entity;
 import net.minecraft.src.SoundManager;
+import net.minecraft.src.SoundPool;
 import net.minecraft.src.SoundPoolEntry;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -32,6 +33,20 @@ public class SoundHandler
             // exception
             catch (Exception e) {
                 FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING,"TFC Failed loading sound file: " + soundFile);
+            }
+        }
+        event.manager.soundPoolMusic = new SoundPool();
+     // For each custom music file we have defined in Sounds
+        for (String soundFile : TFC_Sounds.musicFiles) {
+            // Try to add the custom music file to the pool of sounds
+            try {
+            	URL path = TerraFirmaCraft.instance.getClass().getResource("/" + soundFile);
+                event.manager.soundPoolMusic.addSound(soundFile, path);
+            }
+            // If we cannot add the custom music file to the pool, log the
+            // exception
+            catch (Exception e) {
+                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING,"TFC Failed loading music file: " + soundFile);
             }
         }
 

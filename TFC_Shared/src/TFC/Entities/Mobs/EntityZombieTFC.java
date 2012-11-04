@@ -18,7 +18,7 @@ public class EntityZombieTFC extends EntityZombie
     {
         super(par1World);
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 1000;
@@ -27,6 +27,7 @@ public class EntityZombieTFC extends EntityZombie
     /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */
+    @Override
     public int getTotalArmorValue()
     {
         int var1 = super.getTotalArmorValue() + 2;
@@ -39,8 +40,8 @@ public class EntityZombieTFC extends EntityZombie
         return var1;
     }
 
-
-    public int func_82193_c(Entity par1Entity)
+    @Override
+    public int getAttackStrength(Entity par1Entity)
     {
         ItemStack var2 = this.getHeldItem();
         int var3 = 100;
@@ -52,7 +53,7 @@ public class EntityZombieTFC extends EntityZombie
 
         return var3;
     }
-
+    @Override
     protected void dropRareDrop(int par1)
     {
         switch (this.rand.nextInt(3))
@@ -68,9 +69,14 @@ public class EntityZombieTFC extends EntityZombie
         }
     }
 
+    @Override
     protected void func_82164_bB()
     {
         super.func_82164_bB();
+        this.setCurrentItemOrArmor(1, null); 
+        this.setCurrentItemOrArmor(2, null); 
+        this.setCurrentItemOrArmor(3, null); 
+        this.setCurrentItemOrArmor(4, null); 
 
         if (this.rand.nextFloat() < (this.worldObj.difficultySetting == 3 ? 0.05F : 0.01F))
         {
@@ -78,11 +84,11 @@ public class EntityZombieTFC extends EntityZombie
 
             if (var1 == 0)
             {
-                this.func_70062_b(0, new ItemStack(TFCItems.BronzePick));
+                this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.BronzePick));
             }
             else
             {
-                this.func_70062_b(0, new ItemStack(TFCItems.BronzeShovel));
+                this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.BronzeShovel));
             }
         }
     }

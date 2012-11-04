@@ -3,6 +3,7 @@ package TFC.WorldGen.Generators;
 import java.util.Random;
 
 import TFC.*;
+import TFC.Core.TFC_Core;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.World;
@@ -79,7 +80,7 @@ public class WorldGenDouglasFir extends WorldGenerator
 
         int k = par1World.getBlockId(par3, par4 - 1, par5);
 
-        if (k != Block.grass.blockID && k != Block.dirt.blockID || par4 >= 256 - i - 1)
+        if (!TFC_Core.isSoil(k) || par4 >= 256 - i - 1)
         {
             return false;
         }

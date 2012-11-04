@@ -14,17 +14,17 @@ public class EntityCaveSpiderTFC extends EntitySpider
         super(par1World);
 
     }
-    
-    public int func_82193_c(Entity par1Entity)
+    @Override
+    public int getAttackStrength(Entity par1Entity)
     {
         return 100;
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 600;
     }
 
     @Override
-    public void func_82163_bD() {}
+    public void initCreature() {}
 }

@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Food;
 
 import java.util.Random;
 
@@ -32,7 +32,7 @@ public class CropIndex
     public boolean needsSunlight = true;
     public float waterUsageMult = 1;
 
-    private CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp)
+    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp)
     {
         growthTime = growth;
         cycleType = type;
@@ -87,7 +87,7 @@ public class CropIndex
         chanceForOutput2 = chance;
         return this;
     }  
-    public ItemStack getOutput1()
+    public ItemStack getOutput1(float stage)
     {
         if(Output1 != null)
         {
@@ -105,7 +105,7 @@ public class CropIndex
         }
         return null;
     }
-    public ItemStack getOutput2()
+    public ItemStack getOutput2(float stage)
     {
         if(Output2 != null)
         {
@@ -141,4 +141,6 @@ public class CropIndex
         dormantInFrost = b;
         return this;
     }
+    
+    public void onCropGrow(float stage){}
 }

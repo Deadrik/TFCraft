@@ -50,9 +50,9 @@ public class EntitySkeletonTFC extends EntitySkeleton
     {
         if (super.attackEntityAsMob(par1Entity))
         {
-            if (this.func_82202_m() == 1 && par1Entity instanceof EntityLiving)
+            if (this.getSkeletonType() == 1 && par1Entity instanceof EntityLiving)
             {
-                ((EntityLiving)par1Entity).addPotionEffect(new PotionEffect(Potion.field_82731_v.id, 200));
+                ((EntityLiving)par1Entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
             }
 
             return true;
@@ -64,9 +64,9 @@ public class EntitySkeletonTFC extends EntitySkeleton
     }
 
     @Override
-    public int func_82193_c(Entity par1Entity)
+    public int getAttackStrength(Entity par1Entity)
     {
-        if (this.func_82202_m() == 1)
+        if (this.getSkeletonType() == 1)
         {
             ItemStack var2 = this.getHeldItem();
             int var3 = 200;
@@ -80,7 +80,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
         }
         else
         {
-            return super.func_82193_c(par1Entity);
+            return super.getAttackStrength(par1Entity);
         }
     }
 
@@ -111,7 +111,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
         int var3;
         int var4;
 
-        if (this.func_82202_m() == 1)
+        if (this.getSkeletonType() == 1)
         {
             var3 = this.rand.nextInt(3 + par2) - 1;
 
@@ -140,16 +140,16 @@ public class EntitySkeletonTFC extends EntitySkeleton
     @Override
     protected void dropRareDrop(int par1)
     {
-        if (this.func_82202_m() == 1)
+        if (this.getSkeletonType() == 1)
         {
-            this.entityDropItem(new ItemStack(Item.field_82799_bQ.shiftedIndex, 1, 1), 0.0F);
+            this.entityDropItem(new ItemStack(Item.skull.shiftedIndex, 1, 1), 0.0F);
         }
     }
     @Override
     protected void func_82164_bB()
     {
         super.func_82164_bB();
-        this.func_70062_b(0, new ItemStack(Item.bow));
+        this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
     }
 
     @SideOnly(Side.CLIENT)
@@ -160,16 +160,16 @@ public class EntitySkeletonTFC extends EntitySkeleton
     @Override
     public String getTexture()
     {
-        return this.func_82202_m() == 1 ? "/mob/skeleton_wither.png" : super.getTexture();
+        return this.getSkeletonType() == 1 ? "/mob/skeleton_wither.png" : super.getTexture();
     }
     @Override
-    public void func_82163_bD()
+    public void initCreature()
     {
         if (this.worldObj.provider instanceof WorldProviderHell && this.getRNG().nextInt(5) > 0)
         {
             this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
-            this.func_82201_a(1);
-            this.func_70062_b(0, new ItemStack(TFCItems.StoneKnife));
+            this.setSkeletonType(1);
+            this.setCurrentItemOrArmor(0, new ItemStack(TFCItems.StoneKnife));
         }
         else
         {
@@ -178,21 +178,21 @@ public class EntitySkeletonTFC extends EntitySkeleton
             this.func_82162_bC();
         }
 
-        this.field_82172_bs = this.rand.nextFloat() < field_82181_as[this.worldObj.difficultySetting];
+        this.canPickUpLoot = this.rand.nextFloat() < field_82181_as[this.worldObj.difficultySetting];
 
         if (this.getCurrentItemOrArmor(4) == null)
         {
-            Calendar var1 = this.worldObj.func_83015_S();
+            Calendar var1 = this.worldObj.getCurrentDate();
 
             if (var1.get(2) + 1 == 10 && var1.get(5) == 31 && this.rand.nextFloat() < 0.25F)
             {
-                this.func_70062_b(4, new ItemStack(this.rand.nextFloat() < 0.1F ? Block.pumpkinLantern : Block.pumpkin));
-                this.field_82174_bp[4] = 0.0F;
+                this.setCurrentItemOrArmor(4, new ItemStack(this.rand.nextFloat() < 0.1F ? Block.pumpkinLantern : Block.pumpkin));
+                this.equipmentDropChances[4] = 0.0F;
             }
         }
     }
     @Override
-    public void func_82196_d(EntityLiving par1EntityLiving)
+    public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving)
     {
     	EntityArrowTFC var2 = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
@@ -208,7 +208,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
             var2.setKnockbackStrength(var4);
         }
 
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0 || this.func_82202_m() == 1)
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0 || this.getSkeletonType() == 1)
         {
             var2.setFire(100);
         }

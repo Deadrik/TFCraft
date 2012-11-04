@@ -41,7 +41,7 @@ public class WorldGenForests implements IWorldGenerator
 		int yCoord = 145;
 		int zCoord = chunkZ;
 		
-		int numTreesBase = 6;
+		int numTreesBase = 5;
 		
 		if (random.nextInt(10) == 0)
 		{
@@ -87,23 +87,24 @@ public class WorldGenForests implements IWorldGenerator
 			WorldGenerator gen1 = TFCBiome.getTreeGen(TreeType1, random.nextBoolean());
 			WorldGenerator gen2 = TFCBiome.getTreeGen(TreeType2, random.nextBoolean());
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, world.getHeightValue(xCoord, zCoord), zCoord);
+			float temperatureAvg = TFC_Climate.getBioTemperature(xCoord, zCoord);
 
 			try
 			{
-				if((TreeType0 == 9 || TreeType1 == 9 || TreeType2 == 9) && EVT.floatdata1 <= EnumTree.REDWOOD.maxEVT && 
-						rainfall >= EnumTree.REDWOOD.minRain && rainfall <= EnumTree.REDWOOD.maxRain && 
-						temperature >= EnumTree.REDWOOD.minTemp && temperature <= EnumTree.REDWOOD.maxTemp)
-				{
-					numTrees = 30;
-					gen0 = TFCBiome.getTreeGen(9, random.nextBoolean());
-					gen1 = TFCBiome.getTreeGen(8, random.nextBoolean());
-					gen2 = TFCBiome.getTreeGen(9, random.nextBoolean());
-					
-				}
+//				if((TreeType0 == 9 || TreeType1 == 9 || TreeType2 == 9) && EVT.floatdata1 <= EnumTree.REDWOOD.maxEVT && 
+//						rainfall >= EnumTree.REDWOOD.minRain && rainfall <= EnumTree.REDWOOD.maxRain && 
+//						temperature >= EnumTree.REDWOOD.minTemp && temperature <= EnumTree.REDWOOD.maxTemp)
+//				{
+//					numTrees = 30;
+//					gen0 = TFCBiome.getTreeGen(9, random.nextBoolean());
+//					gen1 = TFCBiome.getTreeGen(8, random.nextBoolean());
+//					gen2 = TFCBiome.getTreeGen(9, random.nextBoolean());
+//					
+//				}
 				
 				if(EVT.floatdata1 <= EnumTree.KAPOK.maxEVT && 
 						rainfall >= EnumTree.KAPOK.minRain && rainfall <= EnumTree.KAPOK.maxRain && 
-						temperature >= EnumTree.KAPOK.minTemp && temperature <= EnumTree.KAPOK.maxTemp)
+								temperatureAvg >= EnumTree.KAPOK.minTemp && temperatureAvg <= EnumTree.KAPOK.maxTemp)
 				{
 					numTrees = 50;
 					gen0 = (WorldGenerator)(random.nextInt(10) == 0 ? new WorldGenCustomShortTrees(false,15) : random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
@@ -143,35 +144,63 @@ public class WorldGenForests implements IWorldGenerator
 					float tree2TempMin = EnumTree.values()[TreeType2].minTemp;
 					float tree2TempMax = EnumTree.values()[TreeType2].maxTemp;
 
-					boolean canSpawn0 = (EVT.floatdata1 >= tree0EVTMin && EVT.floatdata1 <= tree0EVTMax && 
-							rainfall >= tree0RainMin && rainfall <= tree0RainMax && 
-							temperature >= tree0TempMin && temperature <= tree0TempMax);
+					boolean canSpawnTemp0 = (temperature >= tree0TempMin && temperature <= tree0TempMax);
+					int canSpawnEVTRain0 = (EVT.floatdata1 >= tree0EVTMin && EVT.floatdata1 <= tree0EVTMax && 
+							rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 2 : 
+								(EVT.floatdata1 >= tree0EVTMin && EVT.floatdata1 <= tree0EVTMax) || (rainfall >= tree0RainMin && rainfall <= tree0RainMax) ? 1 : 0;
 
-					boolean canSpawn1 = (EVT.floatdata1 >= tree1EVTMin && EVT.floatdata1 <= tree1EVTMax && 
-							rainfall >= tree1RainMin && rainfall <= tree1RainMax && 
-							temperature >= tree1TempMin && temperature <= tree1TempMax);
+					boolean canSpawnTemp1 = (temperature >= tree1TempMin && temperature <= tree1TempMax);
+					int canSpawnEVTRain1 = (EVT.floatdata1 >= tree1EVTMin && EVT.floatdata1 <= tree1EVTMax && 
+							rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 2 : 
+								(EVT.floatdata1 >= tree1EVTMin && EVT.floatdata1 <= tree1EVTMax) || (rainfall >= tree1RainMin && rainfall <= tree1RainMax) ? 1 : 0;
 
-					boolean canSpawn2 = (EVT.floatdata1 >= tree2EVTMin && EVT.floatdata1 <= tree2EVTMax && 
-							rainfall >= tree2RainMin && rainfall <= tree2RainMax && 
-							temperature >= tree2TempMin && temperature <= tree2TempMax);
+					boolean canSpawnTemp2 = (temperature >= tree2TempMin && temperature <= tree2TempMax);
+					int canSpawnEVTRain2 = (EVT.floatdata1 >= tree2EVTMin && EVT.floatdata1 <= tree2EVTMax && 
+							rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 2 : 
+								(EVT.floatdata1 >= tree2EVTMin && EVT.floatdata1 <= tree2EVTMax) || (rainfall >= tree2RainMin && rainfall <= tree2RainMax) ? 1 : 0;
 
+					
 
-					if(!canSpawn2)
+					if(!canSpawnTemp2 || canSpawnEVTRain2 == 0)
 						randomNumber -= 20;
-					if(!canSpawn1)
+					else if(canSpawnTemp2 && canSpawnEVTRain2 == 1)
+						{randomNumber -= 10;}
+					
+					if(!canSpawnTemp1 || canSpawnEVTRain1 == 0)
 						randomNumber -= 30;
+					else if(canSpawnTemp1 && canSpawnEVTRain1 == 1)
+						{randomNumber -= 15;}
+					
+					//if at least one of the trees is within the temperature zone otherewise no trees
+					if(canSpawnTemp0 || canSpawnTemp1 || canSpawnTemp2)
+					{
+						//if the evt makes the location harsh for all of the trees
+						if(canSpawnEVTRain0 <= 1 && canSpawnEVTRain1 <= 1 && canSpawnEVTRain2 <= 1)
+						{
+							//there is a 1 in 10 chance for a tree otherwise no trees
+							if(random.nextInt(10) == 0)
+							{
+								numTrees = 1;
+							}
+							else return;
+						}
+					}
+					else
+					{
+						return;
+					}
 
 					if(randomNumber < 40 && gen0 != null)
 					{
-						if(canSpawn0)
-						{
+						if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
+						{							
 							gen0.setScale(1.0D, 1.0D, 1.0D);
 							gen0.generate(world, random, xCoord, yCoord, zCoord);
 						}
 					}
 					else if(randomNumber < 70 && gen1 != null)
 					{
-						if(canSpawn1)
+						if(canSpawnTemp1)
 						{
 							gen1.setScale(1.0D, 1.0D, 1.0D);
 							gen1.generate(world, random, xCoord, yCoord, zCoord);
@@ -179,7 +208,7 @@ public class WorldGenForests implements IWorldGenerator
 					}
 					else if(randomNumber < 100 && gen2 != null)
 					{
-						if(canSpawn2)
+						if(canSpawnTemp2)
 						{
 							gen2.setScale(1.0D, 1.0D, 1.0D);
 							gen2.generate(world, random, xCoord, yCoord, zCoord);
@@ -196,15 +225,13 @@ public class WorldGenForests implements IWorldGenerator
 	
 	public boolean getNearWater(World world, int x, int y, int z)
 	{
-		BiomeGenBase biome;
-
 		for (int x1 = -4; x1 < 5; ++x1)
 		{
 			for (int z1 = -4; z1 < 5; ++z1)
 			{
 				for (int y1 = -2; y1 < 1; ++y1)
 				{
-					if(TFC_Core.isWater(world.getBlockId(x+x1, y+y1, z+z1)))
+					if(world.blockExists(x+x1, y+y1, z+z1) == true && TFC_Core.isWater(world.getBlockId(x+x1, y+y1, z+z1)))
 					{
 						return true;
 					}

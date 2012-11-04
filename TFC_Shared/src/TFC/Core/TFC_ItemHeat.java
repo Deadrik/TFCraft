@@ -327,6 +327,13 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.fishCooked, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, 425,new ItemStack(TFCItems.EggCooked, 1)));
 		
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, 425,new ItemStack(Item.bread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.BarleyBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.RyeBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.OatBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.RiceBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.CornBread, 1)));
+		
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
@@ -619,7 +626,7 @@ public class TFC_ItemHeat
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
-		float ambient = ((TFCBiome)world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
+		float ambient = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
 
 		for(int i = 0; i < inventory.length; i++)
 		{
