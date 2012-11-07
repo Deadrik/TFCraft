@@ -135,7 +135,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
     public static ItemStack GetSeeds(Random R)
     {
         ItemStack is = null;
-        if(R.nextInt(20) == 0)
+        if(R.nextInt(100) == 0)
         {
             int r = R.nextInt(19);
             switch(r)
@@ -168,6 +168,12 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
                     is = new ItemStack(TFCItems.SeedsYellowBellPepper,1); break;
                 case 13:
                     is = new ItemStack(TFCItems.SeedsRedBellPepper,1); break;
+                case 14:
+                    is = new ItemStack(TFCItems.SeedsSoybean,1); break;
+                case 15:
+                    is = new ItemStack(TFCItems.SeedsGreenbean,1); break;
+                case 16:
+                    is = new ItemStack(TFCItems.SeedsSquash,1); break;
             }
         }
         return is;

@@ -80,7 +80,6 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrablocks.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrablocks2.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terrabedsSprites.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrabeds.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/sluicegui.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/scribegui.png");
@@ -91,7 +90,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture("/bioxx/Firepitgui.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/Bloomerygui.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/anvilgui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/calendargui.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/CalendarGui.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/Vegetation.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/TFC_Plants.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/foodprepgui.png");
@@ -536,6 +535,10 @@ public class ClientProxy extends CommonProxy
 		KeyBindings.addKeyBinding("Key_Calendar", 49);
 		KeyBindings.addIsRepeating(false);
 		KeyBindings.addKeyBinding("Key_ToolMode", 50);
+		KeyBindings.addIsRepeating(false);
+		KeyBindings.addKeyBinding("Key_ChiselDepthIncrease", 13);
+		KeyBindings.addIsRepeating(false);
+		KeyBindings.addKeyBinding("Key_ChiselDepthDecrease", 12);
 		KeyBindings.addIsRepeating(false);
 	}
 

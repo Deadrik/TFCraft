@@ -275,6 +275,19 @@ public class TFC_Core
 		else
 			return inMeta+1;
 	}
+	
+	public static int getItemMetaFromStone(int inType, int inMeta)
+	{
+		if(inType == TFCBlocks.StoneIgIn.blockID)
+			return inMeta;
+		else if(inType == TFCBlocks.StoneSed.blockID)
+			return inMeta+3;
+		else if(inType == TFCBlocks.StoneIgEx.blockID)
+			return inMeta+13;
+		else if(inType == TFCBlocks.StoneMM.blockID)
+			return inMeta+17;
+		else return 0;
+	}
 
 	public static int getTypeForGrassWithRain(int inMeta, float rain)
 	{

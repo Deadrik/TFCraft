@@ -192,6 +192,12 @@ public class BlockToolRack extends BlockContainer
 	}
 	
 	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{
+		
+	}
+	
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int blockId, int metadata)
 	{
 		Eject(world, x, y, z);

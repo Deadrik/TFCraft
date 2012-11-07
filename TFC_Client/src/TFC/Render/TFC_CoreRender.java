@@ -924,7 +924,7 @@ public class TFC_CoreRender
 
     public static int getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
     {
-        int var27;
+        int var27 = 0;
         DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
         DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
         DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);

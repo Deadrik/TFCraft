@@ -154,7 +154,7 @@ public class BlockCharcoal extends BlockTerra {
 			if(m2 > 0)
 				world.setBlockAndMetadata(i, j+1, k, blockID, m2);
 			else
-				world.setBlock(i, j, k, 0);
+				world.setBlock(i, j+1, k, 0);
 
 			world.setBlockAndMetadata(i, j, k, blockID, bottomMeta);
 		}

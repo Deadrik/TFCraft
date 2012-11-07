@@ -1,5 +1,6 @@
 package TFC.Blocks;
 
+import TFC.Core.Recipes;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import java.util.Random;
@@ -377,7 +378,7 @@ public class BlockCustomDoor extends BlockTerra
      */
     public int idDropped(int par1, Random par2Random, int par3)
     {
-        return (par1 & 8) != 0 ? 0 : (this.blockMaterial == Material.iron ? Item.doorSteel.shiftedIndex : Item.doorWood.shiftedIndex);
+        return (par1 & 8) != 0 ? 0 : Recipes.Doors[woodType].shiftedIndex;
     }
 
     /**

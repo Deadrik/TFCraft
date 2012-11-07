@@ -53,7 +53,8 @@ public class ContainerTerraLogPile extends ContainerTFC
 	/**
 	 * Called to transfer a stack from one inventory to the other eg. when shift clicking.
 	 */
-	public ItemStack func_82846_b(EntityPlayer player, int clickedIndex)
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
 	{
 		ItemStack var2 = null;
 		Slot var3 = (Slot)this.inventorySlots.get(clickedIndex);
@@ -135,6 +136,7 @@ public class ContainerTerraLogPile extends ContainerTFC
 		return player;
 	}
 	
+	@Override
     protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
     {
         boolean var5 = false;
@@ -159,7 +161,7 @@ public class ContainerTerraLogPile extends ContainerTFC
                 var7 = (Slot)this.inventorySlots.get(var6);
                 var8 = var7.getStack();
 
-                if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStacksEqual(par1ItemStack, var8))
+                if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8))
                 {
                     int var9 = var8.stackSize + par1ItemStack.stackSize;
 

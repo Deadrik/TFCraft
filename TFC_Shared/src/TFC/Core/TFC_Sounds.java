@@ -23,7 +23,7 @@ public class TFC_Sounds
 	
 	public static String [] musicFiles = {
 		LOCATION_MUSIC + "Through the Willows.ogg",
-		LOCATION_MUSIC + "Firmavista.ogg",
+		LOCATION_MUSIC + "FirmaVista.ogg",
 		LOCATION_MUSIC + "Sycamore Heights.ogg",
 		LOCATION_MUSIC + "Dreams of the Phae.ogg",
 		LOCATION_MUSIC + "TerraFirmaCraft.ogg"

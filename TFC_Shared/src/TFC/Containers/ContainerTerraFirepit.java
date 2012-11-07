@@ -63,7 +63,7 @@ public class ContainerTerraFirepit extends ContainerTFC
         }
 
     }
-
+    @Override
     public boolean canInteractWith(EntityPlayer entityplayer)
     {
         return true;
@@ -101,7 +101,7 @@ public class ContainerTerraFirepit extends ContainerTFC
             }
             else if (flag == 1)
             {
-                ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
+                ItemStack itemstack1 = transferStackInSlot(entityplayer, i);
                 if (itemstack1 != null)
                 {
                     int k = itemstack1.itemID;
@@ -207,8 +207,8 @@ public class ContainerTerraFirepit extends ContainerTFC
         }
         return itemstack;
     }
-
-    public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
     {
         Slot slot = (Slot)inventorySlots.get(i);
         Slot slotinput = (Slot)inventorySlots.get(0);

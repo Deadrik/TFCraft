@@ -22,11 +22,13 @@ public class TileEntityCrop extends NetworkTileEntity
 	public float growth;
 	public int cropId;
 	private long growthTimer;//Tracks the time since the plant was planted
+	private long plantedTime;//Tracks the time when the plant was planted
 	private byte sunLevel;
 
 	public TileEntityCrop()
 	{
 		growth = 0.1f;
+		plantedTime = TFC_Time.getTotalTicks();
 		growthTimer = TFC_Time.getTotalTicks();
 		sunLevel = 5;
 	}
@@ -130,7 +132,7 @@ public class TileEntityCrop extends NetworkTileEntity
 
 	public float getEstimatedGrowth(CropIndex crop)
 	{
-		return ((float)crop.numGrowthStages/(growthTimer/TFC_Time.dayLength))*1.5f;
+		return ((float)crop.numGrowthStages/(growthTimer-plantedTime/TFC_Time.dayLength))*1.5f;
 	}
 
 	/**
@@ -142,6 +144,7 @@ public class TileEntityCrop extends NetworkTileEntity
 		growth = par1NBTTagCompound.getFloat("growth");
 		cropId = par1NBTTagCompound.getInteger("cropId");
 		growthTimer = par1NBTTagCompound.getLong("growthTimer");
+		plantedTime = par1NBTTagCompound.getLong("plantedTime");
 	}
 
 	/**
@@ -153,6 +156,7 @@ public class TileEntityCrop extends NetworkTileEntity
 		nbt.setFloat("growth", growth);
 		nbt.setInteger("cropId", cropId);
 		nbt.setLong("growthTimer", growthTimer);
+		nbt.setLong("plantedTime", plantedTime);
 	}
 
 	@Override

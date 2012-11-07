@@ -31,8 +31,9 @@ public class CropIndex
 
     public boolean needsSunlight = true;
     public float waterUsageMult = 1;
+    public Item seedItem;
 
-    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp)
+    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, Item seed)
     {
         growthTime = growth;
         cycleType = type;
@@ -44,15 +45,16 @@ public class CropIndex
         nutrientExtraRestore = new int[]{0,0,0};
         nutrientUsageMult = 1.0f;
         dormantInFrost = false;
+        seedItem = seed;
     }
-    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier)
+    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed)
     {
-        this(ID,name,type,growth,stages,minGTemp,minATemp);
+        this(ID,name,type,growth,stages,minGTemp,minATemp,seed);
         nutrientUsageMult = nutrientUsageMultiplier;
     }
-    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, int[] nutriRestore)
+    public CropIndex(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed, int[] nutriRestore)
     {
-        this(ID,name,type,growth,stages,minGTemp,minATemp);
+        this(ID,name,type,growth,stages,minGTemp,minATemp,seed);
         nutrientExtraRestore = nutriRestore;
         nutrientUsageMult = nutrientUsageMultiplier;
     }
@@ -140,6 +142,11 @@ public class CropIndex
     {
         dormantInFrost = b;
         return this;
+    }
+    
+    public ItemStack getSeed()
+    {
+    	return new ItemStack(seedItem, 1);
     }
     
     public void onCropGrow(float stage){}

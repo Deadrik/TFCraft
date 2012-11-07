@@ -122,6 +122,7 @@ public class ContainerChestTFC extends ContainerTFC
     /**
      * Callback for when the crafting gui is closed.
      */
+    @Override
     public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
     {
         super.onCraftGuiClosed(par1EntityPlayer);

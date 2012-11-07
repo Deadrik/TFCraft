@@ -7,6 +7,9 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.*;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Time;
+import TFC.TileEntities.TileEntitySapling;
 import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
 import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
 import TFC.WorldGen.Generators.WorldGenCustomRedwoodTrees;
@@ -14,17 +17,20 @@ import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
 import TFC.WorldGen.Generators.WorldGenDouglasFir;
 
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
+import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
-public class BlockCustomSapling extends BlockCustomFlower
+public class BlockCustomSapling extends BlockContainer
 {
 	public BlockCustomSapling(int i, int j)
 	{
-		super(i, j);
+		super(i, Material.plants);
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.blockIndexInTexture = j;
@@ -150,15 +156,17 @@ public class BlockCustomSapling extends BlockCustomFlower
 	}
 	
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
 	{
-		if(par1World.getBlockMaterial(par2, par3-1, par4) != Material.grass)
+		if(world.getBlockMaterial(i, j-1, k) != Material.grass)
 		{
 
-			int meta = par1World.getBlockMetadata(par2, par3, par4);
-			this.dropBlockAsItem_do(par1World, par2, par3, par4, new ItemStack(this,1,meta));
-			par1World.setBlock(par2, par3, par4, 0);
+			int meta = world.getBlockMetadata(i, j, k);
+			this.dropBlockAsItem_do(world, i, j, k, new ItemStack(this,1,meta));
+			world.setBlock(i, j, k, 0);
 		}
+		
+		this.checkChange(world, i, j, k);
 	}
 	
 	@Override
@@ -170,18 +178,98 @@ public class BlockCustomSapling extends BlockCustomFlower
 		}
 		super.updateTick(world, i, j, k, random);
 		int meta = world.getBlockMetadata(i, j, k);
-		int growSpeed = 30;
+		float growSpeed = 1;
 		if(meta == 1 || meta == 8 || meta == 11) {
-			growSpeed = 20;
+			growSpeed = 1.2f;
 		} else if(meta == 5 || meta == 15 || meta == 0 || meta == 13) {
-			growSpeed = 40;
+			growSpeed = 1.4f;
 		} else if(meta == 9 || meta == 14) {
-			growSpeed = 60;
+			growSpeed = 1.6f;
 		}
+		
+		TileEntitySapling te = (TileEntitySapling) world.getBlockTileEntity(i, j, k);
 
-		if (world.getBlockLightValue(i, j + 1, k) >= 9 && random.nextInt(growSpeed) == 0)
+		if (world.getBlockLightValue(i, j + 1, k) >= 9 && TFC_Time.getTotalTicks() > te.growTime)
 		{           
 			growTree(world, i, j, k, random);
 		}
+		
+		this.checkChange(world, i, j, k);
 	}
+	
+	/**
+	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
+	 */
+	@Override
+	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+	{
+		return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || par1World.canBlockSeeTheSky(par2, par3, par4)) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
+	}
+
+	/**
+	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
+	 */
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        int var5 = par1World.getBlockId(par2, par3, par4);
+        return (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
+    }
+
+	/**
+	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
+	 * blockID passed in. Args: blockID
+	 */
+	protected boolean canThisPlantGrowOnThisBlockID(int par1)
+	{
+		return TFC_Core.isSoil(par1);
+	}
+
+	/**
+	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+	 * cleared to be reused)
+	 */
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		return null;
+	}
+
+	/**
+	 * The type of render function that is called for this block
+	 */
+	public int getRenderType()
+	{
+		return 1;
+	}
+
+	/**
+	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+	 */
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	/**
+	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+	 */
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    
+    protected void checkChange(World par1World, int par2, int par3, int par4)
+    {
+        if (!this.canBlockStay(par1World, par2, par3, par4))
+        {
+            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+            par1World.setBlockWithNotify(par2, par3, par4, 0);
+        }
+    }
 }

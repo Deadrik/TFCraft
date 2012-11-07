@@ -35,7 +35,7 @@ public class SoundHandler
                 FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING,"TFC Failed loading sound file: " + soundFile);
             }
         }
-        event.manager.soundPoolMusic = new SoundPool();
+        //event.manager.soundPoolMusic = new SoundPool();
      // For each custom music file we have defined in Sounds
         for (String soundFile : TFC_Sounds.musicFiles) {
             // Try to add the custom music file to the pool of sounds

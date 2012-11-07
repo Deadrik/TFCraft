@@ -20,7 +20,6 @@ import net.minecraft.src.World;
 
 public class BlockLooseRock extends BlockTerra
 {
-
 	public BlockLooseRock(int par1) 
 	{
 		super(par1, Material.wood);
@@ -75,15 +74,11 @@ public class BlockLooseRock extends BlockTerra
 	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord,(ItemStack)coreSampleStacks.toArray()[R.nextInt(coreSampleStacks.toArray().length)]);
 	    }
 	    else
-	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getSoilMetaFromStone(rockLayer.data1, rockLayer.data2)));
+	        dropBlockAsItem_do(world, xCoord, yCoord, zCoord, new ItemStack(TFCItems.LooseRock, 1, TFC_Core.getItemMetaFromStone(rockLayer.data1, rockLayer.data2)));
 	    
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 
-	public int idDropped(int i, Random random, int j)
-	{
-		return TFCItems.LooseRock.shiftedIndex;
-	}
 	@Override
 	public boolean isOpaqueCube()
 	{

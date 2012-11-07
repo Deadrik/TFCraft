@@ -187,6 +187,18 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 							if(pi!=null) pi.switchChiselMode();
 						}
+						else if(change == 1)//Chisel Depth Increase
+						{
+							PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+							if(pi!=null) pi.switchIncreaseDetailZoom();
+						}
+						else if(change == 2)//Chisel Depth Increase
+						{
+							PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+							if(pi!=null) pi.switchDecreaseDetailZoom();
+						}
 					} 
 					catch (IOException e) 
 					{

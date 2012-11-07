@@ -33,31 +33,6 @@ public class GenLayerHillsTFC extends GenLayerTFC
 				{
 					int var10 = var9;
 
-					/*if (var9 == BiomeGenBase.desert.biomeID)
-                    {
-                        var10 = BiomeGenBase.desertHills.biomeID;
-                    }
-                    else if (var9 == BiomeGenBase.forest.biomeID)
-                    {
-                        var10 = BiomeGenBase.forestHills.biomeID;
-                    }
-                    else if (var9 == BiomeGenBase.taiga.biomeID)
-                    {
-                        var10 = BiomeGenBase.taigaHills.biomeID;
-                    }
-                    else*/ if (var9 == TFCBiome.plains.biomeID)
-                    {
-                    	//var10 = TFCBiome.forest.biomeID;
-                    }
-                    else if (var9 == TFCBiome.icePlains.biomeID)
-                    {
-                    	//var10 = TFCBiome.iceMountains.biomeID;
-                    }
-                    else if (var9 == TFCBiome.jungle.biomeID)
-                    {
-                    	//var10 = TFCBiome.jungleHills.biomeID;
-                    }
-
                     if (var10 != var9)
                     {
                     	int var11 = var5[var8 + 1 + (var7 + 1 - 1) * (par3 + 2)];

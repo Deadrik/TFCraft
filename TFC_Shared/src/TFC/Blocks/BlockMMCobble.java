@@ -207,7 +207,7 @@ public class BlockMMCobble extends BlockTerra2
                 if(pi!=null) mode = pi.ChiselMode;
             }
             else
-                mode = ItemChisel.mode;
+                mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
             
             if(mode == 1)
             {

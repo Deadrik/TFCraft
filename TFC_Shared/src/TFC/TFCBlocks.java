@@ -336,7 +336,7 @@ public class TFCBlocks
 		TFCBlocks.Sand = new TFC.Blocks.BlockSand(TFC_Settings.getIntFor(config,"block","Sand", 216), 208).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		TFCBlocks.Sand2 = new BlockSand2(TFC_Settings.getIntFor(config,"block","Sand2", 217), 224).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		
-		TFCBlocks.WIP = (new TFC.Blocks.BlockWIP(TFC_Settings.getIntFor(config,"block","WIP", 2200), 112)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("WIP");
+		TFCBlocks.WIP = (new TFC.Blocks.BlockWIP(TFC_Settings.getIntFor(config,"block","WIP", 2200))).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("WIP");
 		
 		
 		Block.blocksList[5] = null;
@@ -372,7 +372,7 @@ public class TFCBlocks
 		Block.blocksList[38] = (BlockFlower)(new BlockCustomFlower(38, 12)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("rose");
 		Block.blocksList[39] = (BlockFlower)(new BlockCustomMushroom(39, 29)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setLightValue(0.125F).setBlockName("mushroom");
 		Block.blocksList[40] = (BlockFlower)(new BlockCustomMushroom(40, 28)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("mushroom");
-		Block.blocksList[53] = (new BlockCustomStairs(53, Block.planks)).setBlockName("stairsWood").setRequiresSelfNotify();
+		Block.blocksList[53] = (new BlockStair(53, Material.wood)).setBlockName("stairsWood").setRequiresSelfNotify();
 		Block.blocksList[54] = (new BlockChestTFC(54)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("chest").setRequiresSelfNotify();
 		Block.blocksList[58] = (new TFC.Blocks.BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setBlockName("workbench");
 		Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").setRequiresSelfNotify();
@@ -400,7 +400,7 @@ public class TFCBlocks
 		TFCBlocks.Bloomery = new BlockBloomery(TFC_Settings.getIntFor(config,"block","Bloomery", 2007), 65).setBlockName("Bloomery").setHardness(20).setLightValue(0F);
 		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","Sluice", 2003)).setBlockName("Sluice").setHardness(2F).setResistance(20F);
 
-		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000)).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
+		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000), Material.rock).setBlockName("stoneStairs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
 		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setBlockName("stoneSlabs").setRequiresSelfNotify().setHardness(10).setResistance(15F);
 		TFCBlocks.stoneStalac = new BlockStalactite(TFC_Settings.getIntFor(config,"block","stoneStalac", 2002)).setBlockName("stoneStalac").setRequiresSelfNotify().setHardness(5);
 		

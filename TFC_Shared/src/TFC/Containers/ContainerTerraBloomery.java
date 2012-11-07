@@ -39,12 +39,12 @@ public class ContainerTerraBloomery extends ContainerTFC
 			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
 	}
-
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
 	}
-
+	@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
@@ -76,7 +76,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 			}
 			else if (flag == 1)
 			{
-				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
+				ItemStack itemstack1 = transferStackInSlot(entityplayer, i);
 				if (itemstack1 != null)
 				{
 					int k = itemstack1.itemID;
@@ -180,8 +180,8 @@ public class ContainerTerraBloomery extends ContainerTFC
 		}
 		return itemstack;
 	}
-
-	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slot1 = (Slot)inventorySlots.get(0);

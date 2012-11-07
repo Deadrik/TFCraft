@@ -58,7 +58,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 		}
 
 	}
-
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
@@ -97,7 +97,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 			}
 			else if (k == 1)
 			{
-				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
+				ItemStack itemstack1 = transferStackInSlot(entityplayer, i);
 				if (itemstack1 != null)
 				{
 					int id = itemstack1.itemID;
@@ -203,8 +203,8 @@ public class ContainerTerraAnvil extends ContainerTFC
 		this.updateCraftingResults();
 		return itemstack;
 	}
-
-	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slothammer = (Slot)inventorySlots.get(0);
@@ -293,7 +293,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 	}
 
 	private int tier = -1;
-
+	@Override
 	public void updateCraftingResults()
 	{
 		super.updateCraftingResults();
@@ -328,6 +328,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 	 * This is needed to make sure that something is done when 
 	 * the client receives the updated progress bar
 	 * */
+	@Override
 	 public void updateProgressBar(int par1, int par2)
 	{
 		if(anvil != null)
@@ -347,6 +348,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 		}
 
 	}
+	@Override
 	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
 	{
 		super.onCraftGuiClosed(par1EntityPlayer);

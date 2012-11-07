@@ -720,6 +720,9 @@ public class TFCItems
     public static Item SeedsHemp;
     public static Item SeedsYellowBellPepper;
     public static Item SeedsRedBellPepper;
+    public static Item SeedsSoybean;
+    public static Item SeedsGreenbean;
+    public static Item SeedsSquash;
     
     public static Item FruitTreeSapling1;
     public static Item FruitTreeSapling2;
@@ -1690,6 +1693,9 @@ public class TFCItems
         SeedsTomato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsTomato",num++),4).setItemName("SeedsTomato").setIconCoord(4, 9);
         SeedsYellowBellPepper = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsYellowBellPepper",num++),19).setItemName("SeedsYellowBellPepper").setIconCoord(5, 9);
         SeedsRedBellPepper = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRedBellPepper",num++),20).setItemName("SeedsRedBellPepper").setIconCoord(6, 9);
+        SeedsSoybean = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSoybean",num++),21).setItemName("SeedsSoybean").setIconCoord(7, 9);
+        SeedsGreenbean = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsGreenbean",num++),22).setItemName("SeedsGreenbean").setIconCoord(8, 9);
+        SeedsSquash = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSquash",num++),23).setItemName("SeedsSquash").setIconCoord(9, 9);
     }
     
     public static void SetupArmor(int num)

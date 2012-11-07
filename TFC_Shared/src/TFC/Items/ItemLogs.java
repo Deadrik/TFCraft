@@ -37,7 +37,6 @@ public class ItemLogs extends ItemTerra
 	
 	@Override
 	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}
 

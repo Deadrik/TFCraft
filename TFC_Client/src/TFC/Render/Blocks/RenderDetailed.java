@@ -4,6 +4,7 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
+import net.minecraft.src.Tessellator;
 import TFC.TFCBlocks;
 import TFC.Render.TFC_CoreRender;
 import TFC.TileEntities.TileEntityDetailed;
@@ -24,6 +25,7 @@ public class RenderDetailed
         int over = renderblocks.overrideBlockTexture;
         renderblocks.overrideBlockTexture = tex;
 
+
         for(int subX = 0; subX < 10; subX++)
         {
         	for(int subZ = 0; subZ < 10; subZ++)
@@ -33,26 +35,41 @@ public class RenderDetailed
         			boolean subExists = isOpaque(te,subX, subY, subZ);
                 	if(subExists)
                 	{
-                		block.setBlockBounds(0.1f*subX, 0.1f*subY, 0.1f*subZ, 0.1f*subX+0.1f, 0.1f*subY+0.1f, 0.1f*subZ+0.1f);
+                		renderblocks.setRenderMinMax(0.1f*subX, 0.1f*subY, 0.1f*subZ, 0.1f*subX+0.1f, 0.1f*subY+0.1f, 0.1f*subZ+0.1f);
                 		
                 		if(subY-1 == -1 || !isOpaque(te,subX, subY-1, subZ))
+                		{
+                			//Tessellator.instance.setBrightness(block.getMixedBrightnessForBlock(renderblocks.blockAccess, i, j - 1, k));
                 			renderblocks.renderBottomFace(block, i, j, k, tex);
+                		}
                 		if(subY+1 == 10 || !isOpaque(te,subX, subY+1, subZ))
+                		{
+                			//Tessellator.instance.setBrightness(block.getMixedBrightnessForBlock(renderblocks.blockAccess, i, j + 1, k));
                 			renderblocks.renderTopFace(block, i, j, k, tex);
+                		}
                 		if(subZ-1 == -1 || !isOpaque(te,subX, subY, subZ-1))
+                		{
                 			renderblocks.renderEastFace(block, i, j, k, tex);
+                		}
                 		if(subZ+1 == 10 || !isOpaque(te,subX, subY, subZ+1))
+                		{
                 			renderblocks.renderWestFace(block, i, j, k, tex);
+                		}
                 		if(subX+1 == 10 || !isOpaque(te,subX+1, subY, subZ))
+                		{
                 			renderblocks.renderSouthFace(block, i, j, k, tex);
+                		}
                 		if(subX-1 == -1 || !isOpaque(te,subX-1, subY, subZ))
+                		{
                 			renderblocks.renderNorthFace(block, i, j, k, tex);
+                		}
                 		
 
                 	}
                 }
             }
         }
+
         block.setBlockBounds(0,0,0,1,1,1);
 
         

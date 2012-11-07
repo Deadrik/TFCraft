@@ -56,12 +56,12 @@ public class ContainerTerraScribe extends ContainerTFC
 
 		onCraftMatrixChanged(craftMatrix);
 	}
-
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
 	}
-
+	@Override
 	public void onCraftGuiClosed(EntityPlayer entityplayer)
 	{
 		super.onCraftGuiClosed(entityplayer);
@@ -78,7 +78,7 @@ public class ContainerTerraScribe extends ContainerTFC
 			}
 		}
 	}
-
+	@Override
 	public void onCraftMatrixChanged(IInventory iinventory)
 	{
 		//Check if there is paper in the paper slot.
@@ -124,7 +124,7 @@ public class ContainerTerraScribe extends ContainerTFC
 			}
 			else if (flag == 1)
 			{
-				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
+				ItemStack itemstack1 = transferStackInSlot(entityplayer, i);
 				if (itemstack1 != null)
 				{
 					int k = itemstack1.itemID;
@@ -228,8 +228,9 @@ public class ContainerTerraScribe extends ContainerTFC
 		}
 		return itemstack;
 	}
-
-	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
+	
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slotpaper = (Slot)inventorySlots.get(1);

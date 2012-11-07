@@ -8,18 +8,18 @@ import net.minecraft.src.ItemStack;
 public class CropIndexPepper extends CropIndex
 {
 
-    public CropIndexPepper(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp)
+    public CropIndexPepper(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, Item seed)
     {
-        super(ID,name,type,growth,stages,minGTemp,minATemp);
+        super(ID,name,type,growth,stages,minGTemp,minATemp, seed);
     }
-    public CropIndexPepper(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier)
+    public CropIndexPepper(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed)
     {
-    	super(ID,name,type,growth,stages,minGTemp,minATemp);
+    	super(ID,name,type,growth,stages,minGTemp,minATemp, seed);
         nutrientUsageMult = nutrientUsageMultiplier;
     }
-    public CropIndexPepper(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, int[] nutriRestore)
+    public CropIndexPepper(int ID, String name, int type, int growth, int stages, float minGTemp, float minATemp, float nutrientUsageMultiplier, Item seed, int[] nutriRestore)
     {
-    	super(ID,name,type,growth,stages,minGTemp,minATemp);
+    	super(ID,name,type,growth,stages,minGTemp,minATemp, seed);
         nutrientExtraRestore = nutriRestore;
         nutrientUsageMult = nutrientUsageMultiplier;
     }

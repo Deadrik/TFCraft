@@ -185,7 +185,7 @@ public class BlockMM extends BlockCollapsable
                 if(pi!=null) mode = pi.ChiselMode;
             }
             else
-                mode = ItemChisel.mode;
+                mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
             
             if(mode == 0)
             {

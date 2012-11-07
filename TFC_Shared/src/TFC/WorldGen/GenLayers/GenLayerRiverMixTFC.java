@@ -6,14 +6,14 @@ import net.minecraft.src.IntCache;
 
 public class GenLayerRiverMixTFC extends GenLayerTFC
 {
-	private GenLayer field_35512_b;
-	private GenLayer field_35513_c;
+	private GenLayer biomePatternGeneratorChain;
+	private GenLayer riverPatternGeneratorChain;
 
 	public GenLayerRiverMixTFC(long par1, GenLayer par3GenLayer, GenLayer par4GenLayer)
 	{
 		super(par1);
-		this.field_35512_b = par3GenLayer;
-		this.field_35513_c = par4GenLayer;
+		this.biomePatternGeneratorChain = par3GenLayer;
+		this.riverPatternGeneratorChain = par4GenLayer;
 	}
 
 	/**
@@ -22,8 +22,8 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 	 */
 	public int[] getInts(int par1, int par2, int par3, int par4)
 	{
-		int[] layerBiomes = this.field_35512_b.getInts(par1, par2, par3, par4);
-		int[] layerRivers = this.field_35513_c.getInts(par1, par2, par3, par4);
+		int[] layerBiomes = this.biomePatternGeneratorChain.getInts(par1, par2, par3, par4);
+		int[] layerRivers = this.riverPatternGeneratorChain.getInts(par1, par2, par3, par4);
 		int[] layerOut = IntCache.getIntCache(par3 * par4);
 
 		for (int var8 = 0; var8 < par3 * par4; ++var8)
@@ -31,44 +31,13 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 			int b = layerBiomes[var8];
 			int r = layerRivers[var8];
 
-			if (layerBiomes[var8] == TFCBiome.ocean.biomeID)
+			if (layerBiomes[var8] == TFCBiome.ocean.biomeID || layerBiomes[var8] == -1)
             {
-                layerOut[var8] = layerBiomes[var8];
+                layerOut[var8] = TFCBiome.ocean.biomeID;
             }
             else if (layerRivers[var8] >= 0)
             {
-                if (layerBiomes[var8] == TFCBiome.icePlains.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.frozenRiver.biomeID;
-                }
-                else if(layerBiomes[var8] == TFCBiome.swampland.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.river.biomeID;
-                }
-                else if(layerBiomes[var8] == TFCBiome.HighHills.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.HighHills.biomeID;
-                }
-                else if(layerBiomes[var8] == TFCBiome.desert.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.river.biomeID;
-                }
-                else if(layerBiomes[var8] == TFCBiome.HighHillsEdge.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.HighHillsEdge.biomeID;
-                }
-                else if(layerBiomes[var8] == TFCBiome.Mountains.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.Mountains.biomeID;
-                }
-                else if(layerBiomes[var8] == TFCBiome.MountainsEdge.biomeID)
-                {
-                    layerOut[var8] = TFCBiome.MountainsEdge.biomeID;
-                }
-                else
-                {
-                    layerOut[var8] = TFCBiome.river.biomeID;
-                }
+                layerOut[var8] = TFCBiome.river.biomeID;
 			}
 			else
 			{
@@ -88,8 +57,8 @@ public class GenLayerRiverMixTFC extends GenLayerTFC
 	 */
 	public void initWorldGenSeed(long par1)
 	{
-		this.field_35512_b.initWorldGenSeed(par1);
-		this.field_35513_c.initWorldGenSeed(par1);
+		this.biomePatternGeneratorChain.initWorldGenSeed(par1);
+		this.riverPatternGeneratorChain.initWorldGenSeed(par1);
 		super.initWorldGenSeed(par1);
 	}
 }

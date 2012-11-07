@@ -15,6 +15,7 @@ import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockBloomery;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
@@ -313,20 +314,18 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
     public void HandleTemperature()
     {
-        int[] direction = BlockBloomery.headBlockToFootBlockMap[worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3];
+    	int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+    	int[] direction = BlockBloomery.headBlockToFootBlockMap[meta & 3];
+        
         if(ambientTemp == -1000)	
         {
-            BiomeGenBase var25 = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-            float a = var25.getFloatTemperature();
-            a = a / 2.0F;//Normalize the value to between 0 and 1
-            ambientTemp = 62 * a-20;
+            ambientTemp = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
         }
 
         //Now we increase the temperature
         //If the fire is still burning and has fuel
         if(fuelTimeLeft > 0)
         {
-            int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
             float desiredTemp = 0;
 
             fuelTimeLeft--;
@@ -376,24 +375,27 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             charcoalCount--;
             
             fuelTimeLeft = 1875;
-            fuelBurnTemp = 1450;
+            fuelBurnTemp = 1450;	
             if(fireTemperature < 210)
             {
                 fireTemperature = 220;
             }
-            if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
-                BlockBloomery.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
+            
+            if((meta & 4) == 0) {
+                worldObj.setBlockMetadata(xCoord, yCoord, zCoord, meta+4);
+                worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
             }
             //updateGui();
         }
         else
         {
-            
-            int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-            if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 1) {
-                BlockBloomery.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
+            if((meta & 4) == 4) {
+            	worldObj.setBlockMetadata(xCoord, yCoord, zCoord, meta & 3);
+            	worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
             }
+            
             fuelBurnTemp = 0;
+            
             if(fireTemperature > ambientTemp)
             {
                 fireTemperature-=0.425F;
@@ -747,8 +749,6 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
             //Here we make sure that the forge is valid
             isValid = CheckValidity();
-
-
         }
     }
 

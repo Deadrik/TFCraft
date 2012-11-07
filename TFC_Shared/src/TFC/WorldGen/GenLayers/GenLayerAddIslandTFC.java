@@ -66,10 +66,6 @@ public class GenLayerAddIslandTFC extends GenLayerTFC
                     {
                         var10[var12 + var11 * par3] = var19;
                     }
-                    else if (var19 == BiomeGenBase.icePlains.biomeID)
-                    {
-                        var10[var12 + var11 * par3] = BiomeGenBase.frozenOcean.biomeID;
-                    }
                     else
                     {
                         var10[var12 + var11 * par3] = 0;
@@ -79,14 +75,9 @@ public class GenLayerAddIslandTFC extends GenLayerTFC
                 {
                     if (this.nextInt(5) == 0)
                     {
-                        if (var17 == BiomeGenBase.icePlains.biomeID)
-                        {
-                            var10[var12 + var11 * par3] = BiomeGenBase.frozenOcean.biomeID;
-                        }
-                        else
-                        {
-                            var10[var12 + var11 * par3] = 0;
-                        }
+
+                        var10[var12 + var11 * par3] = 0;
+
                     }
                     else
                     {

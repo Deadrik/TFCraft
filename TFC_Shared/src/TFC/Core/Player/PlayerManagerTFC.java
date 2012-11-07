@@ -40,4 +40,9 @@ public class PlayerManagerTFC
         }
         return null;
     }
+    
+    public PlayerInfo getClientPlayer()
+    {
+    	return Players.get(0);
+    }
 }

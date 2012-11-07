@@ -79,25 +79,29 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int zCoord;
 
 		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-		
+
 		if(!(new WorldGenJungle().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld)))
 		{
 			new WorldGenForests().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
 		}
 		new WorldGenLooseRocks().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-		
+
 		new WorldGenPlants().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-		
+
 		new WorldGenSoilPits().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);		
-		
-		if(randomGenerator.nextInt(2) == 0)
+
+		int crop = randomGenerator.nextInt(23);
+		if(randomGenerator.nextInt(4) == 0)
 		{
+			int num = randomGenerator.nextInt(8);
+			boolean grown = false;
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			
-			
-			new WorldGenGrowCrops(randomGenerator.nextInt(23)).generate(currentWorld, randomGenerator, xCoord, yCoord, zCoord);
+			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord)+1;
+			for (int count = 0 ; count < 16 && num > 0; ++count)
+			{
+				num -= new WorldGenGrowCrops(crop).generate(currentWorld, randomGenerator, xCoord, yCoord, zCoord) ? 1 : 0;
+			}
 		}
 
 		for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
@@ -119,7 +123,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 
-
 			this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 
@@ -127,10 +130,10 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		{
 			if(randomGenerator.nextInt(100) < 10)
 			{
-			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
-			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
-			this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+				xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+				zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
+				this.reedGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
 		}
 

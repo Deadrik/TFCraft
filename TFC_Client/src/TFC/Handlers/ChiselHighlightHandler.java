@@ -4,6 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.*;
 import TFC.Core.TFC_Core;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
 import TFC.Render.Blocks.RenderDetailed;
 import TFC.TileEntities.TileEntityDetailed;
@@ -23,33 +25,39 @@ public class ChiselHighlightHandler{
 		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemChisel)
 		{
 			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
-			if(ItemChisel.mode == 3 && (id == TFCBlocks.StoneDetailed.blockID || TFC_Core.isRawStone(id) || TFC_Core.isSmoothStone(id)))
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+			double depth = (double)pi.ChiselDetailZoom/10D;
+			if(pi.ChiselMode == 3 && (id == TFCBlocks.StoneDetailed.blockID || TFC_Core.isRawStone(id) || TFC_Core.isSmoothStone(id)))
 			{				
-				//				double subX = evt.target.hitVec.xCoord - evt.target.blockX - 0.08;
-				//				double subY = evt.target.hitVec.yCoord - evt.target.blockY - 0.08;
-				//				double subZ = evt.target.hitVec.zCoord - evt.target.blockZ - 0.08;
-
-				double hitX = (evt.target.hitVec.xCoord - evt.target.blockX);
-				double hitY = (evt.target.hitVec.yCoord - evt.target.blockY);
-				double hitZ = (evt.target.hitVec.zCoord - evt.target.blockZ);
+				//Get the hit location in local box coords
+				double hitX = Math.round((evt.target.hitVec.xCoord - evt.target.blockX)*100)/100.0d;
+				double hitY = Math.round((evt.target.hitVec.yCoord - evt.target.blockY)*100)/100.0d;
+				double hitZ = Math.round((evt.target.hitVec.zCoord - evt.target.blockZ)*100)/100.0d;
 				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 
-
+				//get the targeted sub block coords
 				double subX = (double)((int)((hitX)*10))/10;
 				double subY = (double)((int)((hitY)*10))/10;
 				double subZ = (double)((int)((hitZ)*10))/10;
+				
 
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.4F);
-				GL11.glLineWidth(6.0F);
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glDepthMask(true);
+				if(evt.target.sideHit == 1)
+				{
+					subY -= 0.1;
+				}
+				else if(evt.target.sideHit == 5)
+				{
+					subX -= 0.1;
+				}
+				else if(evt.target.sideHit == 3)
+				{
+					subZ -= 0.1;
+				}
 
+				//create the box size
 				double minX = evt.target.blockX + subX;
 				double minY = evt.target.blockY + subY;
 				double minZ = evt.target.blockZ + subZ;
-
 				double maxX = minX + 0.1;
 				double maxY = minY + 0.1;
 				double maxZ = minZ + 0.1;
@@ -58,8 +66,20 @@ public class ChiselHighlightHandler{
 				double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
 				double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
 
-				//AxisAlignedBB AABB = Block.blocksList[id].getSelectedBoundingBoxFromPool(world, evt.target.blockX,evt.target.blockY,evt.target.blockZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12);
-				//drawOutlinedBoundingBox(AABB);
+				//Setup GL for the depthbox
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.4F);
+				GL11.glLineWidth(6.0F);
+				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				GL11.glDepthMask(false);
+				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(evt.target.blockX+depth,evt.target.blockY+depth,evt.target.blockZ+depth,evt.target.blockX+1-depth,evt.target.blockY+1-depth,evt.target.blockZ+1-depth).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+				//Setup the GL stuff for the outline
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.4F);
+				GL11.glLineWidth(6.0F);
+				GL11.glDepthMask(true);
+				//Draw the mini Box
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(minX,minY,minZ,maxX,maxY,maxZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 
 				GL11.glDepthMask(true);
@@ -67,7 +87,7 @@ public class ChiselHighlightHandler{
 				GL11.glDisable(GL11.GL_BLEND);
 
 			}
-			if(ItemChisel.mode == 5 && (id == TFCBlocks.stoneSlabs.blockID))
+			else if(pi.ChiselMode == 3 && (id == TFCBlocks.stoneSlabs.blockID))
 			{
 				double hitX = (evt.target.hitVec.xCoord - evt.target.blockX);
 				double hitY = (evt.target.hitVec.yCoord - evt.target.blockY);

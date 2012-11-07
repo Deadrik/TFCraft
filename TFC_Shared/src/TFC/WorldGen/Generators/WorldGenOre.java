@@ -105,11 +105,11 @@ public class WorldGenOre implements IWorldGenerator
                 /*rarity*/110,/*veinSize*/40,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/50,/*hDensity*/90,         world, rand, chunkX, chunkZ, Min, Max, "Gypsum");
 
         //============Satinspar
-        createOreVein(TFCBlocks.Ore2.blockID, 2,new int[]{TFCBlocks.Ore2.blockID,8},//gypsum, small clusters
+        createOreVein(TFCBlocks.Ore2.blockID, 2,new int[]{TFCBlocks.Ore2.blockID,1},//gypsum, small clusters
                 /*rarity*/2,/*veinSize*/6,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Satinspar");
 
         //============Selenite
-        createOreVein(TFCBlocks.Ore2.blockID, 3,new int[]{TFCBlocks.Ore2.blockID,8},//gypsum, small clusters
+        createOreVein(TFCBlocks.Ore2.blockID, 3,new int[]{TFCBlocks.Ore2.blockID,1},//gypsum, small clusters
                 /*rarity*/2,/*veinSize*/6,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Selenite");
 
         //============Graphite
@@ -159,7 +159,7 @@ public class WorldGenOre implements IWorldGenerator
                 /*rarity*/80,/*veinSize*/30,/*veinAmt*/14,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Olivine");
 
         //============Serpentine
-        createOre(TFCBlocks.Ore2.blockID, 14,new int[]{TFCBlocks.Ore3.blockID,8},//Olivine, small clusters 
+        createOre(TFCBlocks.Ore2.blockID, 14,new int[]{TFCBlocks.Ore3.blockID,1},//Olivine, small clusters 
                 /*rarity*/2,/*veinSize*/10,/*veinAmt*/8,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Serpentine");
 
         //============Sylvite
@@ -169,7 +169,7 @@ public class WorldGenOre implements IWorldGenerator
         //============Borax
         createOre(TFCBlocks.Ore3.blockID, 0,new int[]{TFCBlocks.StoneSed.blockID,4},//Rock Salt, large clusters 
                 /*rarity*/50,/*veinSize*/50,/*veinAmt*/24,/*height*/height,/*diameter*/200,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Borax");
-        createOre(TFCBlocks.Ore3.blockID, 0,new int[]{TFCBlocks.Ore2.blockID,8},//Gypsum, small clusters 
+        createOre(TFCBlocks.Ore3.blockID, 0,new int[]{TFCBlocks.Ore2.blockID,1},//Gypsum, small clusters 
                 /*rarity*/3,/*veinSize*/12,/*veinAmt*/22,/*height*/height,/*diameter*/200,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Borax");
         //============Lapis Lazuli
         createOre(TFCBlocks.Ore3.blockID, 2,new int[]{TFCBlocks.StoneMM.blockID,5},//Marble, small clusters 

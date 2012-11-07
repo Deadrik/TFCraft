@@ -74,12 +74,14 @@ public class BlockCrop extends BlockContainer
                 return true;
             }
             
-            if(TFC_Settings.enableDebugMode)
-            {
-                System.out.println("Crop ID: " + te.cropId);
-                System.out.println("Growth: " + te.growth);
-                System.out.println("Est Growth: " + te.getEstimatedGrowth(crop));
-            }
+            
+        }
+        
+        if(TFC_Settings.enableDebugMode)
+        {
+            System.out.println("Crop ID: " + te.cropId);
+            System.out.println("Growth: " + te.growth);
+            System.out.println("Est Growth: " + te.getEstimatedGrowth(crop));
         }
         
         return false;
@@ -136,6 +138,13 @@ public class BlockCrop extends BlockContainer
 
             if(is2 != null)
                 world.spawnEntityInWorld(new EntityItem(world, i, j, k, is2));
+        }
+        else if (crop != null)
+        {
+        	ItemStack is = crop.getSeed();
+
+            if(is != null)
+                world.spawnEntityInWorld(new EntityItem(world, i, j, k, is));
         }
     }
 

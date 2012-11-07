@@ -65,6 +65,13 @@ public class BlockDetailed extends BlockPartial
 				ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, hitX, hitY, hitZ);
 				return true;
 			}
+			else if(mode == 4)
+			{
+				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+				world.setBlock(x, y, z, TFCBlocks.WIP.blockID);
+				world.setBlockTileEntity(x, y, z, te);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -79,20 +86,20 @@ public class BlockDetailed extends BlockPartial
         if (type <= 0)
             return super.getCollisionBoundingBoxFromPool(world, i, j, k);
         
-        AxisAlignedBB AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0.0, 0.0, 0.0);
+        AxisAlignedBB AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 1, 1, 1);
 
-        for(int subX = 0; subX < 10; subX++)
-        {
-        	for(int subZ = 0; subZ < 10; subZ++)
-            {
-        		for(int subY = 0; subY < 10; subY++)
-                {
-        			if (te.data.get((subX * 10 + subZ)*10 + subY))
-        				AABB.getAABBPool().addOrModifyAABBInPool((double)i + subX, (double)j + subY, (double)k + subZ, 
-        						(double)i + subX + 0.1, (double)j + subY + 0.1, (double)k + subZ + 0.1);
-                }
-            }
-        }
+//        for(int subX = 0; subX < 10; subX++)
+//        {
+//        	for(int subZ = 0; subZ < 10; subZ++)
+//            {
+//        		for(int subY = 0; subY < 10; subY++)
+//                {
+//        			if (te.data.get((subX * 10 + subZ)*10 + subY))
+//        				AABB.getAABBPool().addOrModifyAABBInPool((double)i + subX, (double)j + subY, (double)k + subZ, 
+//        						(double)i + subX + 0.1, (double)j + subY + 0.1, (double)k + subZ + 0.1);
+//                }
+//            }
+//        }
 
 
         return AABB;
@@ -101,7 +108,9 @@ public class BlockDetailed extends BlockPartial
 	
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
     {
-        setBlockBounds(0.0F+ (0.1F * ItemChisel.depth), 0.0F+ (0.1F * ItemChisel.depth), 0.0F+ (0.1F * ItemChisel.depth), 1.0F-(0.1F * ItemChisel.depth), 1-(0.1F * ItemChisel.depth), 1.0F-(0.1F * ItemChisel.depth));
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+		int depth = pi.ChiselDetailZoom;
+		setBlockBounds(0.0F+ (0.1F * depth), 0.0F+ (0.1F * depth), 0.0F+ (0.1F * depth), 1.0F-(0.1F * depth), 1-(0.1F * depth), 1.0F-(0.1F * depth));
     }
 
 }

@@ -19,7 +19,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = 2 + e.getDamageVsEntity();
+		this.weaponDamage = 100 + e.getDamageVsEntity();
 	}
 	
 	@Override

@@ -60,7 +60,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 59")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 65")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
@@ -72,15 +72,15 @@ public class TerraFirmaCraft
 
 	public TerraFirmaCraft()
 	{
-		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		
 	}
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		instance = this;
-
+		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
+		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 		//Load Blocks
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();

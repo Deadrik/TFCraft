@@ -1,6 +1,7 @@
 package TFC.WorldGen.GenLayers;
 
 import TFC.*;
+import TFC.WorldGen.TFCBiome;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
@@ -43,7 +44,7 @@ public class GenLayerAddSnowTFC extends GenLayerTFC
 
                     if (var14 == 0)
                     {
-                        var14 = BiomeGenBase.icePlains.biomeID;
+                        var14 = TFCBiome.rollingHills.biomeID;
                     }
                     else
                     {

@@ -42,7 +42,12 @@ public class BlockLogNatural extends Block
             list.add(new ItemStack(this,1,i));
         }
     }
-
+    
+    @Override
+    public float getBlockHardness(World par1World, int par2, int par3, int par4)
+    {
+        return this.blockHardness;
+    }
 
     private boolean checkOut(World world, int i, int j, int k, int l)
     {

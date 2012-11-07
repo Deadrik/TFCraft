@@ -10,6 +10,7 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityPartial;
+import TFC.WorldGen.Generators.WorldGenGrowTrees;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
@@ -130,21 +131,21 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
      * Ticks the block if it's been scheduled
      */
     @Override
-    public void updateTick(World world, int par2, int par3, int par4, Random rand)
+    public void updateTick(World world, int i, int j, int k, Random rand)
     {
         if (!world.isRemote)
         {
-            if (world.getBlockLightValue(par2, par3 + 1, par4) < 4 && Block.lightOpacity[world.getBlockId(par2, par3 + 1, par4)] > 2)
+            if (world.getBlockLightValue(i, j + 1, k) < 4 && Block.lightOpacity[world.getBlockId(i, j + 1, k)] > 2)
             {
-                world.setBlockAndMetadataWithNotify(par2, par3, par4, TFC_Core.getTypeForDirt(world.getBlockMetadata(par2, par3, par4)), world.getBlockMetadata(par2, par3, par4));
+                world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k));
             }
-            else if (world.getBlockLightValue(par2, par3 + 1, par4) >= 9)
+            else if (world.getBlockLightValue(i, j + 1, k) >= 9)
             {            	
                 for (int var6 = 0; var6 < 4; ++var6)
                 {
-                    int x = par2 + rand.nextInt(3) - 1;
-                    int y = par3 + rand.nextInt(5) - 3;
-                    int z = par4 + rand.nextInt(3) - 1;
+                    int x = i + rand.nextInt(3) - 1;
+                    int y = j + rand.nextInt(5) - 3;
+                    int z = k + rand.nextInt(3) - 1;
 
                     float rain = TFC_Climate.getRainfall(x, y + 1, z);
                     
@@ -164,14 +165,24 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
                     {
                         world.setBlockWithNotify(x, y, z, TFCBlocks.PeatGrass.blockID);
                     }
-                    else if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt((int) ((16400-rain)/4)) == 0 && 
-                    		world.getBlockMaterial(x, y + 1, z) != Material.water && world.getBlockId(x, y+1, z) == 0)
-                    {
-                    	world.setBlockAndMetadataWithNotify(x, y+1, z, Block.tallGrass.blockID, 1);
-                    }
+                }
+                
+                float rain = TFC_Climate.getRainfall(i, j + 1, k);
+                int id = world.getBlockId(i, j, k);
+                if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
+                		world.getBlockMaterial(i, j + 1, k) != Material.water && world.getBlockId(i, j + 1, k) == 0)
+                {
+                	if(rand.nextInt((int) ((16800-rain)/4)) == 0)
+                	{
+                		world.setBlockAndMetadataWithNotify(i, j + 1, k, Block.tallGrass.blockID, 1);
+                	}
+                	else if(rand.nextInt(10000) == 0)
+                	{
+                		new WorldGenGrowTrees().generate(world, rand, i, j, k);
+                	}
                 }
             }
-            world.markBlockNeedsUpdate(par2, par3, par4);
+            world.markBlockNeedsUpdate(i, j, k);
         }
     }
 

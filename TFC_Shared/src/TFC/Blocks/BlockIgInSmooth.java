@@ -126,7 +126,7 @@ public class BlockIgInSmooth extends Block
                 if(pi!=null) mode = pi.ChiselMode;
             }
             else
-                mode = ItemChisel.mode;
+                mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
             
             if(mode == 1)
             {

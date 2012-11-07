@@ -43,7 +43,7 @@ public class ContainerTerraSluice extends ContainerTFC
 		}
 
 	}
-
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
@@ -79,6 +79,7 @@ public class ContainerTerraSluice extends ContainerTFC
 	
 	private int soilamt = 0;
 	private int progress = 0;
+	@Override
 	public void updateCraftingResults()
     {
         for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
@@ -113,7 +114,7 @@ public class ContainerTerraSluice extends ContainerTFC
         soilamt = this.sluice.soilAmount;
         progress = this.sluice.processTimeRemaining;
     }
-	
+	@Override
 	public void updateProgressBar(int par1, int par2)
     {
         if (par1 == 0)

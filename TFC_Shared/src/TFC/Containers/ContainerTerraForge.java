@@ -63,12 +63,12 @@ public class ContainerTerraForge extends ContainerTFC
 		}
 
 	}
-
+	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
 	}
-
+	@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
@@ -100,7 +100,7 @@ public class ContainerTerraForge extends ContainerTFC
 			}
 			else if (flag == 1)
 			{
-				ItemStack itemstack1 = playerTransferStackInSlot(i, entityplayer);
+				ItemStack itemstack1 = transferStackInSlot(entityplayer, i);
 				if (itemstack1 != null)
 				{
 					int k = itemstack1.itemID;
@@ -207,8 +207,8 @@ public class ContainerTerraForge extends ContainerTFC
 		}
 		return itemstack;
 	}
-
-	public ItemStack playerTransferStackInSlot(int i, EntityPlayer entityplayer)
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot[] slotinput = {(Slot)inventorySlots.get(2), (Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(0), (Slot)inventorySlots.get(4)};
@@ -368,7 +368,7 @@ public class ContainerTerraForge extends ContainerTFC
         
         firetemp = this.forge.fireTemperature;
 	}
-	
+	@Override
 	public void updateProgressBar(int par1, int par2)
     {
         if (par1 == 0)
