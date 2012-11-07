@@ -536,10 +536,10 @@ public class ClientProxy extends CommonProxy
 		KeyBindings.addIsRepeating(false);
 		KeyBindings.addKeyBinding("Key_ToolMode", 50);
 		KeyBindings.addIsRepeating(false);
-		KeyBindings.addKeyBinding("Key_ChiselDepthIncrease", 13);
-		KeyBindings.addIsRepeating(false);
-		KeyBindings.addKeyBinding("Key_ChiselDepthDecrease", 12);
-		KeyBindings.addIsRepeating(false);
+//		KeyBindings.addKeyBinding("Key_ChiselDepthIncrease", 13);
+//		KeyBindings.addIsRepeating(false);
+//		KeyBindings.addKeyBinding("Key_ChiselDepthDecrease", 12);
+//		KeyBindings.addIsRepeating(false);
 	}
 
 	@Override

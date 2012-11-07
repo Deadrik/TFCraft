@@ -27,8 +27,8 @@ public class PlayerInfo
 
 	public void switchChiselMode()
 	{
-		boolean allowDetailed = true;
-		if(lastChange+10 < TFC_Time.getTotalTicks())
+		boolean allowDetailed = false;
+		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
 			ChiselMode = ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : ChiselMode == 2 && allowDetailed ? 3 : ChiselMode == 3 && allowDetailed ? 4 : 0;
 			lastChange = TFC_Time.getTotalTicks();
@@ -37,7 +37,7 @@ public class PlayerInfo
 
 	public void switchIncreaseDetailZoom()
 	{
-		if(lastChange+10 < TFC_Time.getTotalTicks())
+		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
 			if(ChiselDetailZoom < 4)
 				ChiselDetailZoom++ ;
@@ -49,7 +49,7 @@ public class PlayerInfo
 
 	public void switchDecreaseDetailZoom()
 	{
-		if(lastChange+10 < TFC_Time.getTotalTicks())
+		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
 			if(ChiselDetailZoom > 0)
 				ChiselDetailZoom-- ;
