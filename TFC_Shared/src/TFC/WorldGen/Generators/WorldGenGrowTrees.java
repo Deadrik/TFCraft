@@ -19,11 +19,16 @@ public class WorldGenGrowTrees
 	public void generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
 		boolean hasSpaceToGrow = true;
+		
+		int TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
+		int	TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
+		int	TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
+		
 		for(int y = -3; y < 6 && hasSpaceToGrow; y++)
 		{
-			for(int x = -5; x < 6 && hasSpaceToGrow; x++)
+			for(int x = -7; x < 8 && hasSpaceToGrow; x++)
 			{
-				for(int z = -5; z < 6 && hasSpaceToGrow; z++)
+				for(int z = -7; z < 8 && hasSpaceToGrow; z++)
 				{
 					if(world.getBlockId(xCoord + x, yCoord + y, zCoord + z) == TFCBlocks.Wood.blockID || 
 							world.getBlockId(xCoord + x, yCoord + y, zCoord + z) == TFCBlocks.Sapling.blockID)
@@ -39,9 +44,7 @@ public class WorldGenGrowTrees
 			float rainfall = TFC_Climate.getTerrainAdjustedRainfall(xCoord, yCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, yCoord, zCoord);
 			float evt = TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1;
-			int TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 0);
-			int	TreeType1 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 1);
-			int	TreeType2 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);
+			
 
 			if(TreeType0 < 0 || TreeType0 > 15)
 				TreeType0 = TFC_Climate.getTreeLayer(xCoord, yCoord, zCoord, 2);

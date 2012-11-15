@@ -3,7 +3,6 @@ package TFC.Entities.AI;
 import java.util.List;
 
 import TFC.*;
-import TFC.Core.RandomPositionGeneratorTFC;
 import TFC.Entities.EntityAnimalTFC;
 
 import net.minecraft.src.Entity;
@@ -11,6 +10,7 @@ import net.minecraft.src.EntityAIBase;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.PathEntity;
 import net.minecraft.src.PathNavigate;
+import net.minecraft.src.RandomPositionGenerator;
 import net.minecraft.src.Vec3;
 
 public class EntityAIAvoidEntityTFC extends EntityAIBase
@@ -103,7 +103,7 @@ public class EntityAIAvoidEntityTFC extends EntityAIBase
 					}
 				}
 			}
-			Vec3 var2 = RandomPositionGeneratorTFC.func_48623_b(this.theEntity, 16, 7, Vec3.createVectorHelper(this.field_48240_d.posX, this.field_48240_d.posY, this.field_48240_d.posZ));
+			Vec3 var2 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.field_48240_d.posX, this.field_48240_d.posY, this.field_48240_d.posZ));
 
 			if (var2 == null)
 			{

@@ -96,7 +96,9 @@ public class EntityAIRutt extends EntityAIBase
         }
     }
 
-
+    /**
+     * Removed for having no use. Please delete to clear up the code when confirmed by dunk
+     * 
     private EntityAnimalTFC func_48258_h ()
     {
         float f = 8F;
@@ -107,7 +109,7 @@ public class EntityAIRutt extends EntityAIBase
             Entity entity = (Entity) iterator.next ();
             EntityAnimalTFC entityanimal = (EntityAnimalTFC) entity;
 
-            if (theAnimal.func_48135_b (entityanimal))
+            if (theAnimal.canMateWith (entityanimal))
             {
                 return entityanimal;
             }
@@ -121,4 +123,5 @@ public class EntityAIRutt extends EntityAIBase
     {
        theAnimal.mate(targetMate);
     }
+    */
 }

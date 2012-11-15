@@ -10,6 +10,7 @@ import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.TileEntities.TileEntitySapling;
+import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
 import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
 import TFC.WorldGen.Generators.WorldGenCustomRedwoodTrees;
@@ -34,6 +35,7 @@ public class BlockCustomSapling extends BlockContainer
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.blockIndexInTexture = j;
+		this.setTickRandomly(true);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -65,90 +67,9 @@ public class BlockCustomSapling extends BlockContainer
 	{
 		int l = world.getBlockMetadata(i, j, k);
 		world.setBlock(i, j, k, 0);
-		Object obj = null;
-		switch(l)
-		{
-		case 1:
-		{
-			obj = new WorldGenCustomShortTrees(false,1);
-			break;
-		}
-		case 2:
-		{
-			obj = new WorldGenCustomShortTrees(false,2);
-			break;
-		}
-		case 3:
-		{
-			obj = new WorldGenCustomShortTrees(false,3);
-			break;
-		}
-		case 4:
-		{
-			obj = new WorldGenDouglasFir(false, 4, false);
-			break;
-		}
-		case 5:
-		{
-			obj = new WorldGenCustomShortTrees(false,5);
-			break;
-		}
-		case 6:
-		{
-			obj = new WorldGenCustomShortTrees(false,6);
-			break;
-		}
-		case 7:
-		{
-			obj = new WorldGenCustomShortTrees(false,7);
-			break;
-		}
-		case 8:
-		{
-			obj = new WorldGenCustomShortTrees(false,8);
-			break;
-		}
-		case 9:
-		{
-			obj = new WorldGenCustomRedwoodTrees(false,9);
-			break;
-		}
-		case 10:
-		{
-			obj = new WorldGenCustomShortTrees(false,10);
-			break;
-		}
-		case 11:
-		{
-			obj = new WorldGenCustomShortTrees(false,11);
-			break;
-		}
-		case 12:
-		{
-			obj = new WorldGenCustomCedarTrees(false,12);
-			break;
-		}
-		case 13:
-		{
-			obj = new WorldGenCustomShortTrees(false,13);
-			break;
-		}
-		case 14:
-		{
-			obj = new WorldGenCustomWillowTrees(false,14);
-			break;
-		}
-		case 15:
-		{
-			obj = new WorldGenCustomHugeTrees(false,10 + random.nextInt(20), 15, 15);
-			break;
-		}
-		default:
-		{
-			obj = new WorldGenCustomShortTrees(false,0);
-			break;
-		}
-		}
+		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
+		
+		
 		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
 		{
 			world.setBlockAndMetadata(i, j, k, blockID, l);
@@ -179,17 +100,22 @@ public class BlockCustomSapling extends BlockContainer
 		super.updateTick(world, i, j, k, random);
 		int meta = world.getBlockMetadata(i, j, k);
 		float growSpeed = 1;
-		if(meta == 1 || meta == 8 || meta == 11) {
+		if(meta == 1 || meta == 11) {
 			growSpeed = 1.2f;
-		} else if(meta == 5 || meta == 15 || meta == 0 || meta == 13) {
+		} else if(meta == 5 || meta == 0 || meta == 13) {
 			growSpeed = 1.4f;
-		} else if(meta == 9 || meta == 14) {
+		} else if(meta == 9 || meta == 14|| meta == 15) {
 			growSpeed = 1.6f;
 		}
 		
 		TileEntitySapling te = (TileEntitySapling) world.getBlockTileEntity(i, j, k);
+		
+		if(te != null && te.growTime == 0)
+		{
+			te.growTime = (long) ((TFC_Time.getTotalTicks() + (TFC_Time.dayLength * 7) * growSpeed)+(world.rand.nextFloat()*TFC_Time.dayLength));
+		}
 
-		if (world.getBlockLightValue(i, j + 1, k) >= 9 && TFC_Time.getTotalTicks() > te.growTime)
+		if (world.getBlockLightValue(i, j + 1, k) >= 9 && te!= null && TFC_Time.getTotalTicks() > te.growTime)
 		{           
 			growTree(world, i, j, k, random);
 		}
@@ -261,7 +187,7 @@ public class BlockCustomSapling extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return null;
+		return new TileEntitySapling();
 	}
     
     protected void checkChange(World par1World, int par2, int par3, int par4)

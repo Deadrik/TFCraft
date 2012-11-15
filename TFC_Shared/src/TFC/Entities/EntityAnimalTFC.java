@@ -417,6 +417,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	/**
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */
+	@Override
 	public boolean getCanSpawnHere ()
 	{
 		int i = MathHelper.floor_double (posX);
@@ -424,24 +425,14 @@ public class EntityAnimalTFC extends EntityAnimal
 		int k = MathHelper.floor_double (posZ);
 		return worldObj.getBlockId (i, j - 1, k) == Block.grass.blockID && worldObj.getFullBlockLightValue (i, j, k) > 8 && super.getCanSpawnHere ();
 	}
+	
 
-	public boolean func_48135_b (EntityAnimalTFC par1EntityAnimal)
+	public boolean canMateWith (EntityAnimalTFC par1EntityAnimal)
 	{
-		if (par1EntityAnimal == this)
-		{
-			return false;
-		}
-
-		if (par1EntityAnimal.getClass () != getClass ())
-		{
-			return false;
-		}
-		else
-		{
-			return isInLove () && par1EntityAnimal.isInLove () && par1EntityAnimal.sex != sex;
-		}
+		return super.canMateWith(par1EntityAnimal) && par1EntityAnimal.sex != sex;
 	}
-
+	
+	@Override
 	public EntityAnimal spawnBabyAnimal(EntityAnimal var1){
 		return null;
 	}

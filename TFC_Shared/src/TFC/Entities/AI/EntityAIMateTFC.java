@@ -99,7 +99,7 @@ public class EntityAIMateTFC extends EntityAIBase
             Entity entity = (Entity) iterator.next ();
             EntityAnimalTFC entityanimal = (EntityAnimalTFC) entity;
 
-            if (theAnimal.func_48135_b (entityanimal))
+            if (theAnimal.canMateWith(entityanimal))
             {
                 return entityanimal;
             }

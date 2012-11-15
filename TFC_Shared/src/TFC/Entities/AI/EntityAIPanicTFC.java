@@ -1,24 +1,24 @@
 package TFC.Entities.AI;
 
 import TFC.*;
-import TFC.Core.RandomPositionGeneratorTFC;
 import TFC.Entities.EntityAnimalTFC;
 import net.minecraft.src.EntityAIBase;
+import net.minecraft.src.RandomPositionGenerator;
 import net.minecraft.src.Vec3;
 
 public class EntityAIPanicTFC extends EntityAIBase
 {
-	private EntityAnimalTFC field_48316_a;
+	private EntityAnimalTFC theAnimal;
 	private float speed;
-	private double field_48315_c;
-	private double field_48312_d;
-	private double field_48313_e;
+	private double randPosX;
+	private double randPosY;
+	private double randPosZ;
 	private boolean scared;
 	private boolean group;
 
 	public EntityAIPanicTFC(EntityAnimalTFC par1EntityCreature, float par2, boolean scaredBaby, boolean groupPanic)
 	{
-		this.field_48316_a = par1EntityCreature;
+		this.theAnimal = par1EntityCreature;
 		this.speed = par2;
 		this.setMutexBits(1);
 		scared = scaredBaby;
@@ -31,28 +31,28 @@ public class EntityAIPanicTFC extends EntityAIBase
 	public boolean shouldExecute()
 	{
 
-		if(scared && field_48316_a.fearSource != null){
-			if( field_48316_a.isChild()){
+		if(scared && theAnimal.fearSource != null){
+			if( theAnimal.isChild()){
 				return true;
 			}
 			return false;
 		}
 
-		if(field_48316_a.fearSource == null){
+		if(theAnimal.fearSource == null){
 			return false;
 		}
 		
-		if(field_48316_a.terrified){
+		if(theAnimal.terrified){
 			return true;
 		}
 
-		if (this.field_48316_a.getAITarget() == null)
+		if (this.theAnimal.getAITarget() == null)
 		{
 			return false;
 		}
 		else
 		{
-			Vec3 var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
+			Vec3 var1 = RandomPositionGenerator.findRandomTarget(this.theAnimal, 5, 4);
 
 			if (var1 == null)
 			{
@@ -60,9 +60,9 @@ public class EntityAIPanicTFC extends EntityAIBase
 			}
 			else
 			{
-				this.field_48315_c = field_48316_a.posX + (field_48316_a.fearSource.posX - field_48316_a.posX)*10;
-				this.field_48312_d = field_48316_a.posY;
-				this.field_48313_e = field_48316_a.posZ + (field_48316_a.fearSource.posZ - field_48316_a.posZ)*10;
+				this.randPosX = theAnimal.posX + (theAnimal.fearSource.posX - theAnimal.posX)*10;
+				this.randPosY = theAnimal.posY;
+				this.randPosZ = theAnimal.posZ + (theAnimal.fearSource.posZ - theAnimal.posZ)*10;
 				return true;
 			}
 		}
@@ -73,13 +73,13 @@ public class EntityAIPanicTFC extends EntityAIBase
 	 */
 	public void startExecuting()
 	{
-		Vec3 var1 = RandomPositionGeneratorTFC.func_48622_a(this.field_48316_a, 5, 4);
+		Vec3 var1 = RandomPositionGenerator.findRandomTarget(this.theAnimal, 5, 4);
 
-		this.field_48315_c = field_48316_a.posX + (field_48316_a.fearSource.posX - field_48316_a.posX)*10;
-		this.field_48312_d = field_48316_a.posY;
-		this.field_48313_e = field_48316_a.posZ + (field_48316_a.fearSource.posZ - field_48316_a.posZ)*10;
+		this.randPosX = theAnimal.posX + (theAnimal.fearSource.posX - theAnimal.posX)*10;
+		this.randPosY = theAnimal.posY;
+		this.randPosZ = theAnimal.posZ + (theAnimal.fearSource.posZ - theAnimal.posZ)*10;
 
-		this.field_48316_a.getNavigator().tryMoveToXYZ(this.field_48315_c, this.field_48312_d, this.field_48313_e, this.speed);
+		this.theAnimal.getNavigator().tryMoveToXYZ(this.randPosX, this.randPosY, this.randPosZ, this.speed);
 	}
 
 	/**
@@ -87,10 +87,10 @@ public class EntityAIPanicTFC extends EntityAIBase
 	 */
 	public boolean continueExecuting()
 	{
-		return !this.field_48316_a.getNavigator().noPath();
+		return !this.theAnimal.getNavigator().noPath();
 	}
 	
 	public void resetTask(){
-		field_48316_a.fearSource = null;
+		theAnimal.fearSource = null;
 	}
 }

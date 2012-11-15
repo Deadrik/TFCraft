@@ -60,7 +60,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 65")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 67")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
@@ -119,8 +119,10 @@ public class TerraFirmaCraft
 	@Init
 	public void load(FMLInitializationEvent evt)
 	{
+		//Register all of the recipes
 		Recipes.registerRecipes();	
 
+		//Register the tool classes
 		proxy.registerToolClasses();
 
 		// Register Crafting Handler

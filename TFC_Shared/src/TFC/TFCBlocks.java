@@ -47,6 +47,7 @@ public class TFCBlocks
 	public static int foodPrepRenderId;
 	public static int quernRenderId;
 	public static int fluidRenderId;
+	public static int nestboxRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -151,6 +152,8 @@ public class TFCBlocks
 	public static Block DoorWhiteElm;
 	public static Block DoorWillow;
 	public static Block DoorKapok;
+	
+	public static Block Nestbox;
 	
 	static Configuration config;
 	
@@ -268,6 +271,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorWhiteElm);
 		GameRegistry.registerBlock(DoorWillow);
 		GameRegistry.registerBlock(DoorKapok);
+		GameRegistry.registerBlock(Nestbox);
 	}
 	
 	public static void LoadBlocks()
@@ -450,6 +454,8 @@ public class TFCBlocks
 		DoorWhiteElm = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWhiteElm", 2054), Material.wood, 13).setBlockName("Door White Elm");
 		DoorWillow = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWillow", 2055), Material.wood, 14).setBlockName("Door Willow");
 		DoorKapok = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorKapok", 2056), Material.wood, 15).setBlockName("Door Kapok");
+		
+		Nestbox = new BlockNestBox(TFC_Settings.getIntFor(config,"block","NestBox", 2057)).setBlockName("NestBox");
 		
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);

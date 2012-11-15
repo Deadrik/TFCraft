@@ -26,211 +26,219 @@ import net.minecraft.src.World;
 public class BlockLogNatural extends Block
 {
 
-    public BlockLogNatural(int i) 
-    {
-        super(i, Material.wood);
-    }
+	public BlockLogNatural(int i) 
+	{
+		super(i, Material.wood);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
-    {
-        for(int i = 0; i < 16; i++) {
-            list.add(new ItemStack(this,1,i));
-        }
-    }
-    
-    @Override
-    public float getBlockHardness(World par1World, int par2, int par3, int par4)
-    {
-        return this.blockHardness;
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		for(int i = 0; i < 16; i++) {
+			list.add(new ItemStack(this,1,i));
+		}
+	}
 
-    private boolean checkOut(World world, int i, int j, int k, int l)
-    {
-        if(world.getBlockId(i, j, k) == blockID && world.getBlockMetadata(i, j, k) == l)
-        {
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public float getBlockHardness(World par1World, int par2, int par3, int par4)
+	{
+		return this.blockHardness;
+	}
 
-    @Override
-    public int damageDropped(int j) {
-        return j;
-    }	
+	private boolean checkOut(World world, int i, int j, int k, int l)
+	{
+		if(world.getBlockId(i, j, k) == blockID && world.getBlockMetadata(i, j, k) == l)
+		{
+			return true;
+		}
+		return false;
+	}
 
-    @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
-    {
-        if (i == 1)
-        {
-            return j+144;
-        }
-        if (i == 0)
-        {
-            return j+144;
-        }
-        return j+128;
-    }
+	@Override
+	public int damageDropped(int j) {
+		return j;
+	}	
 
-    @Override
-    public String getTextureFile() 
-    {
-        return "/bioxx/terrablocks.png";
-    }
-    
-    static int damage = 0;
+	@Override
+	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	{
+		if (i == 1)
+		{
+			return j+144;
+		}
+		if (i == 0)
+		{
+			return j+144;
+		}
+		return j+128;
+	}
 
-    @Override
-    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {		
-        //we need to make sure the player has the correct tool out
-        boolean isAxeorSaw = false;
-        boolean isHammer = false;
-        ItemStack equip = entityplayer.getCurrentEquippedItem();
-        if(equip!=null)
-        {
-            for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
-            {
-                if(equip.getItem() == Recipes.Axes[cnt])
-                {
-                    isAxeorSaw = true;
-                }
-            }
-            for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
-            {
-                if(equip.getItem() == Recipes.Saws[cnt])
-                {
-                    isAxeorSaw = true;
-                }
-            }
-            for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
-            {
-                if(equip.getItem() == Recipes.Hammers[cnt])
-                {
-                	isHammer = true;
-                }
-            }
-            if(!isAxeorSaw && equip.getItem() == TFCItems.FlintPaxel)
-            {
-                isAxeorSaw = true;
-            }
-        }
-        if(isAxeorSaw)
-        {
-        	damage = 0;
-            ProcessTree(world, i, j, k, l);	
-            equip.damageItem(damage, entityplayer);
-        }
-        else if(isHammer)
-        {
-        	EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(Item.stick, 1+world.rand.nextInt(3)));
-        	world.spawnEntityInWorld(item);
-        }
-        else
-        {
-            world.setBlockAndMetadata(i, j, k, blockID, l);
-        }
-    }
+	@Override
+	public String getTextureFile() 
+	{
+		return "/bioxx/terrablocks.png";
+	}
 
-    @Override
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
-    {
-        ProcessTree(world, i, j, k, world.getBlockMetadata(i, j, k));
-    }
+	static int damage = 0;
 
-    private void ProcessTree(World world, int i, int j, int k, int l)
-    {
-        int x = i;
-        int y = 0;
-        int z = k;
-        boolean checkArray[][][] = new boolean[11][50][11];
+	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{		
+		//we need to make sure the player has the correct tool out
+		boolean isAxeorSaw = false;
+		boolean isHammer = false;
+		ItemStack equip = entityplayer.getCurrentEquippedItem();
+		if(!world.isRemote)
+		{
+			if(equip!=null)
+			{
+				for(int cnt = 0; cnt < Recipes.Axes.length && !isAxeorSaw; cnt++)
+				{
+					if(equip.getItem() == Recipes.Axes[cnt])
+					{
+						isAxeorSaw = true;
+					}
+				}
+				for(int cnt = 0; cnt < Recipes.Saws.length && !isAxeorSaw; cnt++)
+				{
+					if(equip.getItem() == Recipes.Saws[cnt])
+					{
+						isAxeorSaw = true;
+					}
+				}
+				for(int cnt = 0; cnt < Recipes.Hammers.length && !isAxeorSaw; cnt++)
+				{
+					if(equip.getItem() == Recipes.Hammers[cnt])
+					{
+						isHammer = true;
+					}
+				}
+				if(!isAxeorSaw && equip.getItem() == TFCItems.FlintPaxel)
+				{
+					isAxeorSaw = true;
+				}
+			}
+			if(isAxeorSaw)
+			{
+				damage = -1;
+				ProcessTree(world, i, j, k, l);	
+				equip.damageItem(damage, entityplayer);
+				if(damage > equip.getMaxDamage() - equip.getItemDamage())
+				{
+					int ind = entityplayer.inventory.currentItem;
+					entityplayer.inventory.setInventorySlotContents(ind, null);
+				}
+			}
+			else if(isHammer)
+			{
+				EntityItem item = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(Item.stick, 1+world.rand.nextInt(3)));
+				world.spawnEntityInWorld(item);
+			}
+			else
+			{
+				world.setBlockAndMetadata(i, j, k, blockID, l);
+			}
+		}
+	}
 
-        boolean reachedTop = false;
-        while(!reachedTop)
-        {
-            if(l != 9 && l != 15 && world.getBlockId(x, j+y+1, z) == 0)
-            {
-                reachedTop = true;
-            }
-            else if((l == 9 || l == 15) && world.getBlockId(x, j+y+1, z) == 0
-                    && world.getBlockId(x+1, j+y+1, z) != blockID && world.getBlockId(x-1, j+y+1, z) != blockID && world.getBlockId(x, j+y+1, z+1) != blockID &&
-                    world.getBlockId(x, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z+1) != blockID && 
-                    world.getBlockId(x+1, j+y+1, z+1) != blockID && world.getBlockId(x+1, j+y+1, z-1) != blockID)
-            {
-                reachedTop = true;
-            }
+	@Override
+	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+	{
+		ProcessTree(world, i, j, k, world.getBlockMetadata(i, j, k));
+	}
 
-            scanLogs(world,i,j+y,k,l,checkArray,6,y,6);
+	private void ProcessTree(World world, int i, int j, int k, int l)
+	{
+		int x = i;
+		int y = 0;
+		int z = k;
+		boolean checkArray[][][] = new boolean[11][50][11];
 
-            y++;
-        }
-        
-    }
+		boolean reachedTop = false;
+		while(!reachedTop)
+		{
+			if(l != 9 && l != 15 && world.getBlockId(x, j+y+1, z) == 0)
+			{
+				reachedTop = true;
+			}
+			else if((l == 9 || l == 15) && world.getBlockId(x, j+y+1, z) == 0
+					&& world.getBlockId(x+1, j+y+1, z) != blockID && world.getBlockId(x-1, j+y+1, z) != blockID && world.getBlockId(x, j+y+1, z+1) != blockID &&
+					world.getBlockId(x, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z-1) != blockID && world.getBlockId(x-1, j+y+1, z+1) != blockID && 
+					world.getBlockId(x+1, j+y+1, z+1) != blockID && world.getBlockId(x+1, j+y+1, z-1) != blockID)
+			{
+				reachedTop = true;
+			}
 
-    @Override
-    public int idDropped(int i, Random random, int j)
-    {
-        return TFCItems.Logs.shiftedIndex;
-    }
+			scanLogs(world,i,j+y,k,l,checkArray,6,y,6);
 
-    @Override
-    public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        boolean check = false;
-        for(int h = -1; h <= 1; h++)
-        {
-            for(int g = -1; g <= 1; g++)
-            {
-                for(int f = -1; f <= 1; f++)
-                {
-                    if(world.getBlockId(i+h, j+g, k+f) == blockID && world.getBlockMetadata(i+h, j+g, k+f) == world.getBlockMetadata(i, j, k))
-                    {
-                        check = true;
-                    }
-                }
-            }
-        }
-        if(!check)
-        {
-            world.setBlock(i, j, k, 0);
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
-        }
-    }
+			y++;
+		}
 
-    private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray,int x, int y, int z)
-    {
-        if(y >= 0)
-        {
-            checkArray[x][y][z] = true;
-            int offsetX = 0;int offsetY = 0;int offsetZ = 0;
+	}
 
-            for (offsetY = 0; offsetY <= 1; offsetY++)
-            {
-                for (offsetX = -2; offsetX <= 2; offsetX++)
-                {
-                    for (offsetZ = -2; offsetZ <= 2; offsetZ++)
-                    {
-                        if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0 && y+offsetY < 50 && y+offsetY >= 0)
-                        {
-                            if(checkOut(world, i+offsetX, j+offsetY, k+offsetZ, l) && !checkArray[x+offsetX][y+offsetY][z+offsetZ])
-                            {
-                                scanLogs(world,i+offsetX, j+offsetY, k+offsetZ, l, checkArray,x+offsetX,y+offsetY,z+offsetZ);
-                            }
-                        }
-                    }
-                }
-            }
+	@Override
+	public int idDropped(int i, Random random, int j)
+	{
+		return TFCItems.Logs.shiftedIndex;
+	}
 
-            world.setBlockWithNotify(i, j, k, 0);
-            world.markBlockNeedsUpdate(i, j, k);
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
-            damage++;
-        }
-    }
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
+	{
+		boolean check = false;
+		for(int h = -1; h <= 1; h++)
+		{
+			for(int g = -1; g <= 1; g++)
+			{
+				for(int f = -1; f <= 1; f++)
+				{
+					if(world.getBlockId(i+h, j+g, k+f) == blockID && world.getBlockMetadata(i+h, j+g, k+f) == world.getBlockMetadata(i, j, k))
+					{
+						check = true;
+					}
+				}
+			}
+		}
+		if(!check)
+		{
+			world.setBlock(i, j, k, 0);
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
+		}
+	}
+
+	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray,int x, int y, int z)
+	{
+		if(y >= 0)
+		{
+			checkArray[x][y][z] = true;
+			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
+
+			for (offsetY = 0; offsetY <= 1; offsetY++)
+			{
+				for (offsetX = -2; offsetX <= 2; offsetX++)
+				{
+					for (offsetZ = -2; offsetZ <= 2; offsetZ++)
+					{
+						if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0 && y+offsetY < 50 && y+offsetY >= 0)
+						{
+							if(checkOut(world, i+offsetX, j+offsetY, k+offsetZ, l) && !checkArray[x+offsetX][y+offsetY][z+offsetZ])
+							{
+								scanLogs(world,i+offsetX, j+offsetY, k+offsetZ, l, checkArray,x+offsetX,y+offsetY,z+offsetZ);
+							}
+						}
+					}
+				}
+			}
+
+			world.setBlockWithNotify(i, j, k, 0);
+			world.markBlockNeedsUpdate(i, j, k);
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
+			damage++;
+		}
+	}
 
 }

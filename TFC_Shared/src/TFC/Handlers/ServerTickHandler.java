@@ -39,7 +39,10 @@ public class ServerTickHandler implements ITickHandler
 		{
 			WorldServer world = (WorldServer)tickData[0];
 			world.setAllowedSpawnTypes(false, false);
-			SpawnerAnimalsTFC.findChunksForSpawning(world, true, world.getWorldInfo().getWorldTime() % 400L == 0L);
+			if (world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
+	        {
+				SpawnerAnimalsTFC.findChunksForSpawning(world, true, world.getWorldInfo().getWorldTime() % 400L == 0L);
+	        }
 			
 			//Allow the server to increment time
 			TFC_Time.UpdateTime(world);

@@ -310,8 +310,13 @@ public class EntityWolfTFC extends EntityTameableTFC
 				if (entity instanceof EntityPlayer)
 				{
 					target = true;
-					if(rand.nextInt(20) == 0){
-						this.worldObj.playSoundAtEntity(this, "mob.wolf.growl", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+					if(rand.nextInt(20) == 0)
+					{
+						/**
+						 * Removed to hopefully stop the annoying constant growl at owners
+						 */
+						//this.worldObj.playSoundAtEntity(this, "mob.wolf.growl", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+						
 					}
 					if (warning == -121){
 						warning = TFC_Time.getTotalTicks();

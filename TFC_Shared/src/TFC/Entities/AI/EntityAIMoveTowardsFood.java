@@ -3,11 +3,11 @@ package TFC.Entities.AI;
 import java.util.*;
 
 import TFC.*;
-import TFC.Core.RandomPositionGeneratorTFC;
 import TFC.Entities.EntityAnimalTFC;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityAIBase;
 import net.minecraft.src.EntityItem;
+import net.minecraft.src.RandomPositionGenerator;
 import net.minecraft.src.Vec3;
 
 public class EntityAIMoveTowardsFood extends EntityAIBase
@@ -70,7 +70,7 @@ public class EntityAIMoveTowardsFood extends EntityAIBase
 			}
 		}
 		
-		Vec3 vec3d = RandomPositionGeneratorTFC.func_48620_a (theEntity, 10, 10, Vec3.createVectorHelper(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
+		Vec3 vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(theEntity, 10, 10, Vec3.createVectorHelper(targetEntity.posX, targetEntity.posY, targetEntity.posZ));
 
 		if (vec3d == null)
 		{
