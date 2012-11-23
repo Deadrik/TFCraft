@@ -127,7 +127,7 @@ public class ItemFirestarter extends ItemTerra
                         }
                         world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Firepit.blockID, 1);
                         if(world.isRemote)
-                            world.markBlockNeedsUpdate(x, y+1, z);
+                            world.markBlockForUpdate(x, y+1, z);
                     }
                     else if(numcoal >= 7 && world.getBlockMaterial(x, y, z) == Material.rock && 
                             world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
@@ -149,7 +149,7 @@ public class ItemFirestarter extends ItemTerra
                         }
                         world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Forge.blockID, 1);
                         if(world.isRemote)
-                            world.markBlockNeedsUpdate(x, y+1, z);
+                            world.markBlockForUpdate(x, y+1, z);
                     }
 
                     return true;
@@ -167,7 +167,7 @@ public class ItemFirestarter extends ItemTerra
                     if(chance > 70)
                     {
                     	world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Forge.blockID, 1);
-                    	world.markBlockNeedsUpdate(x, y, z);
+                    	world.markBlockForUpdate(x, y, z);
                     }
             	}
             }

@@ -59,7 +59,7 @@ public class BlockCustomStationary extends BlockCustomFluid
             int var5 = par1World.getBlockMetadata(par2, par3, par4);
             par1World.editingBlocks = true;
             par1World.setBlockAndMetadata(par2, par3, par4, this.blockID - 1, var5);
-            par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+            par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID - 1, this.tickRate());
             par1World.editingBlocks = false;
         }
@@ -72,7 +72,7 @@ public class BlockCustomStationary extends BlockCustomFluid
                 {
                     par1World.editingBlocks = true;
                     par1World.setBlockAndMetadata(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, 0);
-                    par1World.markBlocksDirty(par2+1, par3, par4, par2+1, par3, par4);
+                    par1World.markBlockRangeForRenderUpdate(par2+1, par3, par4, par2+1, par3, par4);
                     par1World.scheduleBlockUpdate(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
@@ -81,7 +81,7 @@ public class BlockCustomStationary extends BlockCustomFluid
                 {
                     par1World.editingBlocks = true;
                     par1World.setBlockAndMetadata(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, 0);
-                    par1World.markBlocksDirty(par2-1, par3, par4, par2-1, par3, par4);
+                    par1World.markBlockRangeForRenderUpdate(par2-1, par3, par4, par2-1, par3, par4);
                     par1World.scheduleBlockUpdate(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
@@ -90,7 +90,7 @@ public class BlockCustomStationary extends BlockCustomFluid
                 {
                     par1World.editingBlocks = true;
                     par1World.setBlockAndMetadata(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, 0);
-                    par1World.markBlocksDirty(par2, par3, par4+1, par2, par3, par4+1);
+                    par1World.markBlockRangeForRenderUpdate(par2, par3, par4+1, par2, par3, par4+1);
                     par1World.scheduleBlockUpdate(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
@@ -99,7 +99,7 @@ public class BlockCustomStationary extends BlockCustomFluid
                 {
                     par1World.editingBlocks = true;
                     par1World.setBlockAndMetadata(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, 0);
-                    par1World.markBlocksDirty(par2, par3, par4-1, par2, par3, par4-1);
+                    par1World.markBlockRangeForRenderUpdate(par2, par3, par4-1, par2, par3, par4-1);
                     par1World.scheduleBlockUpdate(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
@@ -108,7 +108,7 @@ public class BlockCustomStationary extends BlockCustomFluid
                 {
                     par1World.editingBlocks = true;
                     par1World.setBlockAndMetadata(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, 0);
-                    par1World.markBlocksDirty(par2, par3-1, par4, par2, par3-1, par4);
+                    par1World.markBlockRangeForRenderUpdate(par2, par3-1, par4, par2, par3-1, par4);
                     par1World.scheduleBlockUpdate(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                     par1World.editingBlocks = false;
                 }
@@ -117,7 +117,7 @@ public class BlockCustomStationary extends BlockCustomFluid
             {
                 par1World.editingBlocks = true;
                 par1World.setBlockAndMetadata(par2, par3, par4, TFCBlocks.finiteWater.blockID, 0);
-                par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+                par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
                 par1World.scheduleBlockUpdate(par2, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                 par1World.editingBlocks = false;
             }

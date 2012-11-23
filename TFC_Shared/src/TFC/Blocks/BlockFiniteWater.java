@@ -135,12 +135,12 @@ public class BlockFiniteWater extends BlockFluid
                   if(meta > 1)
                   {
                       world.setBlockMetadata(x, y, z, meta-1);
-                      world.markBlockNeedsUpdate(x, y, z);
+                      world.markBlockForUpdate(x, y, z);
                   }
                   else
                   {
                       world.setBlock(x, y, z, 0);
-                      world.markBlockNeedsUpdate(x, y, z);
+                      world.markBlockForUpdate(x, y, z);
                   }
               }
           }

@@ -55,42 +55,42 @@ public class ItemLogs extends ItemTerra
 		{
 			world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.LogPile.blockID, l);
 			if(world.isRemote)
-				world.markBlockNeedsUpdate(x, y-1, z);
+				world.markBlockForUpdate(x, y-1, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y-1, z);
 		}
 		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 		{
 			world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.LogPile.blockID, l);
 			if(world.isRemote)
-				world.markBlockNeedsUpdate(x, y+1, z);
+				world.markBlockForUpdate(x, y+1, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y+1, z);
 		}
 		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 		{
 			world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.LogPile.blockID, l);
 			if(world.isRemote)
-				world.markBlockNeedsUpdate(x, y, z-1);
+				world.markBlockForUpdate(x, y, z-1);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z-1);
 		}
 		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 		{
 			world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.LogPile.blockID, l);
 			if(world.isRemote)
-				world.markBlockNeedsUpdate(x, y, z+1);
+				world.markBlockForUpdate(x, y, z+1);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z+1);
 		}
 		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 		{
 			world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.LogPile.blockID, l);
 			if(world.isRemote)
-				world.markBlockNeedsUpdate(x-1, y, z);
+				world.markBlockForUpdate(x-1, y, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x-1, y, z);
 		}
 		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 		{
 			world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.LogPile.blockID, l);
 			if(world.isRemote)
-				world.markBlockNeedsUpdate(x+1, y, z);
+				world.markBlockForUpdate(x+1, y, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x+1, y, z);
 		}
 		else

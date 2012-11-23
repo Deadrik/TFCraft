@@ -466,7 +466,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 			ejectContents();
 			worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, stonePair[0], stonePair[1]);
 		}
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 	@Override
 	public ItemStack decrStackSize(int i, int j)
@@ -784,7 +784,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		AnvilTier = inStream.readInt();
 		stonePair[0] = inStream.readInt();
 		stonePair[1] = inStream.readInt();
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public Packet createAnvilUsePacket(int id)

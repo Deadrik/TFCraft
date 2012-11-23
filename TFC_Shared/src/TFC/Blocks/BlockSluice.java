@@ -178,7 +178,7 @@ public class BlockSluice extends BlockContainer
         
         boolean stay = (canStay(par1World, par2,par3,par4,false,dir) && 
                 canStay(par1World, par2+offset[0],par3,par4+offset[1],true,dir)) && 
-                (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover());
+                (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable());
         
         return stay;
     }
@@ -191,7 +191,7 @@ public class BlockSluice extends BlockContainer
         
         boolean stay = (canStay(world, i,j,k,false,dir) && 
                 canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
-                (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover());
+                (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable());
         
         return stay;
     }

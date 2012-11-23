@@ -74,7 +74,7 @@ public class ItemWoodDoor extends ItemTerra
             	var11 = TFCBlocks.DoorOak;break;
             }
 
-            if (player.func_82247_a(i, j, k, side, is) && player.func_82247_a(i, j + 1, k, side, is))
+            if (player.canPlayerEdit(i, j, k, side, is) && player.canPlayerEdit(i, j + 1, k, side, is))
             {
                 if (!var11.canPlaceBlockAt(world, i, j, k))
                 {

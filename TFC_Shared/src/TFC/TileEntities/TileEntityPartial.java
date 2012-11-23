@@ -157,7 +157,7 @@ public class TileEntityPartial extends NetworkTileEntity
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
         extraData = inStream.readLong();
-        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class TileEntityPartial extends NetworkTileEntity
         material = inStream.readByte();
         extraData = inStream.readLong();
         
-        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

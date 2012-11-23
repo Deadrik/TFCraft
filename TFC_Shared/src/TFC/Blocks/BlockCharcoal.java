@@ -88,8 +88,8 @@ public class BlockCharcoal extends BlockTerra {
 						world.setBlockAndMetadataWithNotify(i, j, k, blockID, l-1);
 					}
 
-					world.markBlockNeedsUpdate(i, j, k);
-					world.markBlockNeedsUpdate(i, j+top, k);
+					world.markBlockForUpdate(i, j, k);
+					world.markBlockForUpdate(i, j+top, k);
 				}
 				else
 					world.setBlock(i, j, k, 0);

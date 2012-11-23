@@ -61,7 +61,7 @@ public class ItemCustomSeeds extends ItemTerra
 		{
 			return false;
 		}
-		else if (player.func_82247_a(x, y, z, side, stack) && player.func_82247_a(x, y + 1, z, side, stack))
+		else if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack))
 		{
 			int var8 = world.getBlockId(x, y, z);
 
@@ -76,7 +76,7 @@ public class ItemCustomSeeds extends ItemTerra
 				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(x, y+1, z));
 				te.cropId = cropId;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());
-				world.markBlockNeedsUpdate(x, y, z);
+				world.markBlockForUpdate(x, y, z);
 				--stack.stackSize;
 				return true;
 			}

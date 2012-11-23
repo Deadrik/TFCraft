@@ -354,10 +354,10 @@ public class EntityBear extends EntityTameableTFC
 	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
 	 */
 	@Override
-	public EntityAnimal spawnBabyAnimal (EntityAnimal par1EntityAnimal)
+	public void procreate (EntityAnimal par1EntityAnimal)
 	{
 		EntityBear entitybear = new EntityBear (worldObj, parent, ((EntityAnimalTFC)par1EntityAnimal).size_mod);
-		return entitybear;
+		worldObj.spawnEntityInWorld(entitybear);
 	}
 
 	@Override

@@ -219,25 +219,25 @@ public class BlockCollapsable extends BlockTerra
                     world.playSoundAtEntity(ent, "fallingrocklong", 1.0F, 0.8F + (R.nextFloat()/2));
                 
                 world.setBlock(i, j, k, 0);
-                world.markBlockNeedsUpdate(i, j, k);
+                world.markBlockForUpdate(i, j, k);
                 
                 if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
                         ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
                 {
                     world.setBlock(i, j-1, k, 0);
-                    world.markBlockNeedsUpdate(i, j-1, k);
+                    world.markBlockForUpdate(i, j-1, k);
                     
                     if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
                             ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
                     {
                         world.setBlock(i, j-2, k, 0);
-                        world.markBlockNeedsUpdate(i, j-2, k);
+                        world.markBlockForUpdate(i, j-2, k);
                         
                         if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
                                 ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
                         {
                             world.setBlock(i, j-3, k, 0);
-                            world.markBlockNeedsUpdate(i, j-3, k);
+                            world.markBlockForUpdate(i, j-3, k);
                         }
                     }
                 }

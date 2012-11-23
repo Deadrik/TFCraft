@@ -307,15 +307,15 @@ public class ContainerTerraAnvil extends ContainerTFC
 
 			if (this.redIndicator != cv)
 			{
-				var2.updateCraftingInventoryInfo(this, 0, cv);
+				var2.sendProgressBarUpdate(this, 0, cv);
 			}
 			if (this.greenIndicator != icv)
 			{
-				var2.updateCraftingInventoryInfo(this, 1, icv);
+				var2.sendProgressBarUpdate(this, 1, icv);
 			}
 			if (this.tier != t)
 			{
-				var2.updateCraftingInventoryInfo(this, 2, t);
+				var2.sendProgressBarUpdate(this, 2, t);
 			}
 		}
 

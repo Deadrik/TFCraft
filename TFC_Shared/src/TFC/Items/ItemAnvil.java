@@ -80,7 +80,7 @@ public class ItemAnvil extends ItemTerra
 			int id = TFCBlocks.Anvil.blockID;
 			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? TFCBlocks.Anvil2.blockID : TFCBlocks.Anvil.blockID;
 			world.setBlockAndMetadataWithNotify( x, y+1, z, id, byte0+anvilId);
-            world.markBlockNeedsUpdate(x, y+1, z);
+            world.markBlockForUpdate(x, y+1, z);
 			if(world.getBlockTileEntity(x, y+1, z) != null)
 			{
 			    TileEntityTerraAnvil te = (TileEntityTerraAnvil)world.getBlockTileEntity(x, y+1, z);

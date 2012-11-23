@@ -275,7 +275,7 @@ public class EntityTerraJavelin extends Entity
 					{
 						if (var3.entityHit instanceof EntityLiving)
 						{
-							++((EntityLiving)var3.entityHit).arrowHitTempCounter;
+							++((EntityLiving)var3.entityHit).arrowHitTimer;
 
 							if (this.field_46027_au > 0)
 							{

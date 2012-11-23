@@ -397,7 +397,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     if(R.nextInt(100) > 75 && getNearWood((int)vec.X, (int)vec.Y, (int)vec.Z)) 
                     {
                         worldObj.setBlock((int)vec.X, (int)vec.Y, (int)vec.Z, Block.fire.blockID);
-                        worldObj.markBlockNeedsUpdate((int)vec.X, (int)vec.Y, (int)vec.Z);
+                        worldObj.markBlockForUpdate((int)vec.X, (int)vec.Y, (int)vec.Z);
                     }
                 }
             }
@@ -415,7 +415,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 float percent = 25+R.nextInt(25);
 
                 worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-                worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 ProcessPile(worldObj,xCoord,yCoord,zCoord,true);                
             }
         }
@@ -501,7 +501,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             	float percent = 25 + world.rand.nextInt(25);
                 count = (int) (count * (percent/100));
                 world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.Charcoal.blockID, count);
-                world.markBlockNeedsUpdate(i, j, k);
+                world.markBlockForUpdate(i, j, k);
             }
             return true;
         }
@@ -811,12 +811,12 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1);
-                worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
             else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) !=0 )
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
-                worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 //BlockFirepit.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
             }
 
@@ -827,7 +827,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0 ) 
                 {
                 	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2);
-                	worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+                	worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                     //BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 

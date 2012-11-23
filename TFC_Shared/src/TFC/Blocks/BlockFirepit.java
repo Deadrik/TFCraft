@@ -62,7 +62,7 @@ public class BlockFirepit extends BlockContainer
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
 					world.setBlockMetadata(i, j, k, 1);
-					world.markBlockNeedsUpdate(i, j, k);
+					world.markBlockForUpdate(i, j, k);
 				}
 			}
 			return true;

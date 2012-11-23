@@ -44,7 +44,7 @@ public class ItemHammer extends ItemTerraTool
 						te.stonePair[1] = meta2;
 						te.validate();
 					}
-					world.markBlockNeedsUpdate(x, y, z);
+					world.markBlockForUpdate(x, y, z);
 					return true;
 				}
 			}

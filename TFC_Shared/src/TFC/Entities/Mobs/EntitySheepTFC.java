@@ -287,7 +287,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
     @Override
-    public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
+    public void procreate(EntityAnimal par1EntityAnimal)
     {
         EntitySheepTFC var2 = (EntitySheepTFC)par1EntityAnimal;
         EntitySheepTFC var3 = new EntitySheepTFC(this.worldObj);
@@ -301,7 +301,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
             var3.setFleeceColor(var2.getFleeceColor());
         }
 
-        return var3;
+        worldObj.spawnEntityInWorld(var3);
     }
 
     /**

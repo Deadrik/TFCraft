@@ -79,7 +79,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 						else
 						{
 							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil.blockID, meta);
-							world.markBlockNeedsUpdate(x, y, z);
+							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
 							return true;
 						}
@@ -95,7 +95,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 						else
 						{
 							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil2.blockID, meta);
-							world.markBlockNeedsUpdate(x, y, z);
+							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
 							return true;
 						}

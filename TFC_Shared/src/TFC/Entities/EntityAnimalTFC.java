@@ -14,6 +14,7 @@ import TFC.Entities.AI.EntityAITargetTFC;
 import net.minecraft.src.Block;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
+import net.minecraft.src.EntityAgeable;
 import net.minecraft.src.EntityAnimal;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityLiving;
@@ -432,9 +433,9 @@ public class EntityAnimalTFC extends EntityAnimal
 		return super.canMateWith(par1EntityAnimal) && par1EntityAnimal.sex != sex;
 	}
 	
-	@Override
-	public EntityAnimal spawnBabyAnimal(EntityAnimal var1){
-		return null;
+	public void procreate(EntityAnimal var1)
+	{
+
 	}
 
 	public int getDamageMod(){
@@ -488,5 +489,11 @@ public class EntityAnimalTFC extends EntityAnimal
 			}
 		}
 		return super.interact(par1EntityPlayer);
+	}
+
+	@Override
+	public EntityAgeable func_90011_a(EntityAgeable var1) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

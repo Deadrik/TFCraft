@@ -137,30 +137,30 @@ public class BlockBloomery extends BlockContainer
 			if(world.getBlockId(i+dir[0], j, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
 				world.setBlock(i+dir[0], j, k+dir[1], 0);
-				world.markBlockNeedsUpdate(i+dir[0], j, k+dir[1]);
+				world.markBlockForUpdate(i+dir[0], j, k+dir[1]);
 			}
 			if(world.getBlockId(i+dir[0], j+1, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
 				world.setBlock(i+dir[0], j+1, k+dir[1], 0);
-				world.markBlockNeedsUpdate(i+dir[0], j+1, k+dir[1]);
+				world.markBlockForUpdate(i+dir[0], j+1, k+dir[1]);
 			}
 			if(world.getBlockId(i+dir[0], j+2, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
 				world.setBlock(i+dir[0], j+2, k+dir[1], 0);
-				world.markBlockNeedsUpdate(i+dir[0], j+2, k+dir[1]);
+				world.markBlockForUpdate(i+dir[0], j+2, k+dir[1]);
 			}
 			if(world.getBlockId(i+dir[0], j+3, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
 				world.setBlock(i+dir[0], j+3, k+dir[1], 0);
-				world.markBlockNeedsUpdate(i+dir[0], j+3, k+dir[1]);
+				world.markBlockForUpdate(i+dir[0], j+3, k+dir[1]);
 			}
 			if(world.getBlockId(i+dir[0], j+4, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
 				world.setBlock(i+dir[0], j+4, k+dir[1], 0);
-				world.markBlockNeedsUpdate(i+dir[0], j+4, k+dir[1]);
+				world.markBlockForUpdate(i+dir[0], j+4, k+dir[1]);
 			}
 			world.setBlock(i, j, k, 0);
-			world.markBlockNeedsUpdate(i, j, k);
+			world.markBlockForUpdate(i, j, k);
 		}
 		return true;
 	}
@@ -176,7 +176,7 @@ public class BlockBloomery extends BlockContainer
 		{
 			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlock(i, j, k, 0);
-			world.markBlockNeedsUpdate(i,j,k);
+			world.markBlockForUpdate(i,j,k);
 		}
 	}
 

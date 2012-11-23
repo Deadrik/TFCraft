@@ -383,7 +383,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
             
             if((meta & 4) == 0) {
                 worldObj.setBlockMetadata(xCoord, yCoord, zCoord, meta+4);
-                worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
             //updateGui();
         }
@@ -391,7 +391,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
         {
             if((meta & 4) == 4) {
             	worldObj.setBlockMetadata(xCoord, yCoord, zCoord, meta & 3);
-            	worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+            	worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
             
             fuelBurnTemp = 0;
@@ -669,10 +669,10 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
                     //Make sure that the Stack is surrounded by rock
                     if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
                         worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID);
-                        worldObj.markBlockNeedsUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+                        worldObj.markBlockForUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
                     } else {
                         worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0);
-                        worldObj.markBlockNeedsUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+                        worldObj.markBlockForUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
                     }
                 }
             }
@@ -873,7 +873,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
         else
             this.OreType = ItemOre.getItemNameDamage(oreDamage);
 
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public Packet createUpdatePacket()

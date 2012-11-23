@@ -157,7 +157,7 @@ public class TFCProvider extends WorldProvider
 			var12 = var12 * (1.0F - var15) + 1.0F * var15;
 		}
 
-		return Vec3.field_82592_a.getVecFromPool((double)var10, (double)var11, (double)var12);
+		return Vec3.vec3dPool.getVecFromPool((double)var10, (double)var11, (double)var12);
 	}
 
 	@Override

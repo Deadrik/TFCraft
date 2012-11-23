@@ -94,7 +94,7 @@ public class ContainerTerraSluice extends ContainerTFC
 
                 for (int var4 = 0; var4 < this.crafters.size(); ++var4)
                 {
-                    ((ICrafting)this.crafters.get(var4)).updateCraftingInventorySlot(this, var1, var3);
+                    ((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
                 }
             }
         }
@@ -103,11 +103,11 @@ public class ContainerTerraSluice extends ContainerTFC
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
             if (this.soilamt != this.sluice.soilAmount)
             {
-                var2.updateCraftingInventoryInfo(this, 0, this.sluice.soilAmount);
+                var2.sendProgressBarUpdate(this, 0, this.sluice.soilAmount);
             }
             if (this.progress != this.sluice.processTimeRemaining)
             {
-                var2.updateCraftingInventoryInfo(this, 1, this.sluice.processTimeRemaining);
+                var2.sendProgressBarUpdate(this, 1, this.sluice.processTimeRemaining);
             }
         }
 

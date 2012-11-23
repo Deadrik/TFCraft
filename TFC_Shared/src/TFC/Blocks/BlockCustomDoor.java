@@ -272,12 +272,12 @@ public class BlockCustomDoor extends BlockTerra
             if ((var10 & 8) == 0)
             {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, var11);
-                par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+                par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             }
             else
             {
                 par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, var11);
-                par1World.markBlocksDirty(par2, par3 - 1, par4, par2, par3, par4);
+                par1World.markBlockRangeForRenderUpdate(par2, par3 - 1, par4, par2, par3, par4);
             }
 
             par1World.playAuxSFXAtEntity(par5EntityPlayer, 1003, par2, par3, par4, 0);
@@ -301,12 +301,12 @@ public class BlockCustomDoor extends BlockTerra
             if ((var6 & 8) == 0)
             {
                 par1World.setBlockMetadataWithNotify(par2, par3, par4, var8);
-                par1World.markBlocksDirty(par2, par3, par4, par2, par3, par4);
+                par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             }
             else
             {
                 par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, var8);
-                par1World.markBlocksDirty(par2, par3 - 1, par4, par2, par3, par4);
+                par1World.markBlockRangeForRenderUpdate(par2, par3 - 1, par4, par2, par3, par4);
             }
 
             par1World.playAuxSFXAtEntity((EntityPlayer)null, 1003, par2, par3, par4, 0);

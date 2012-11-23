@@ -235,7 +235,7 @@ public class BlockLogNatural extends Block
 			}
 
 			world.setBlockWithNotify(i, j, k, 0);
-			world.markBlockNeedsUpdate(i, j, k);
+			world.markBlockForUpdate(i, j, k);
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
 			damage++;
 		}

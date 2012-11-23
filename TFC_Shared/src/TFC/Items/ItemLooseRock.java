@@ -67,7 +67,7 @@ public class ItemLooseRock extends ItemTerra
 					{
 						if(!world.isRemote)
 						{
-							world.markBlockNeedsUpdate(x, y, z);
+							world.markBlockForUpdate(x, y, z);
 							itemstack.stackSize = itemstack.stackSize-1;   
 						}
 						return true; 
@@ -81,7 +81,7 @@ public class ItemLooseRock extends ItemTerra
 					(itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.StoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
 					(itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.StoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
 					{
-						world.markBlockNeedsUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
+						world.markBlockForUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
 						itemstack.stackSize = itemstack.stackSize-1;   
 						return true; 
 					}

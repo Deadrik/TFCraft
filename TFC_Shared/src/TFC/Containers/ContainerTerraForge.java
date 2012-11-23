@@ -352,7 +352,7 @@ public class ContainerTerraForge extends ContainerTFC
 
                 for (int var4 = 0; var4 < this.crafters.size(); ++var4)
                 {
-                    ((ICrafting)this.crafters.get(var4)).updateCraftingInventorySlot(this, var1, var3);
+                    ((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
                 }
             }
         }
@@ -362,7 +362,7 @@ public class ContainerTerraForge extends ContainerTFC
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
             if (this.firetemp != this.forge.fireTemperature)
             {
-                var2.updateCraftingInventoryInfo(this, 0, (int)this.forge.fireTemperature);
+                var2.sendProgressBarUpdate(this, 0, (int)this.forge.fireTemperature);
             }
         }
         

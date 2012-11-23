@@ -312,7 +312,7 @@ public class EntityArrowTFC extends EntityArrow
                     {
                         if (var4.entityHit instanceof EntityLiving)
                         {
-                            ++((EntityLiving)var4.entityHit).arrowHitTempCounter;
+                            ++((EntityLiving)var4.entityHit).arrowHitTimer;
 
                             if (this.knockbackStrength > 0)
                             {

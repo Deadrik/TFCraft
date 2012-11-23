@@ -73,7 +73,7 @@ public class ItemToolRack extends ItemTerraBlock
 			if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 			{
 				world.setBlockAndMetadataWithNotify(x, y, z-1, id, 0);
-				world.markBlockNeedsUpdate(x, y, z-1);
+				world.markBlockForUpdate(x, y, z-1);
 				if(world.getBlockTileEntity(x, y, z-1) != null)
 				{
 					TileEntityToolRack te = (TileEntityToolRack)world.getBlockTileEntity(x, y, z-1);
@@ -85,7 +85,7 @@ public class ItemToolRack extends ItemTerraBlock
 			else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 			{
 				world.setBlockAndMetadataWithNotify(x, y, z+1, id, 2);
-				world.markBlockNeedsUpdate(x, y, z+1);
+				world.markBlockForUpdate(x, y, z+1);
 				if(world.getBlockTileEntity(x, y, z+1) != null)
 				{
 					TileEntityToolRack te = (TileEntityToolRack)world.getBlockTileEntity(x, y, z+1);
@@ -97,7 +97,7 @@ public class ItemToolRack extends ItemTerraBlock
 			else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 			{
 				world.setBlockAndMetadataWithNotify(x-1, y, z, id, 3);
-				world.markBlockNeedsUpdate(x-1, y, z);
+				world.markBlockForUpdate(x-1, y, z);
 				if(world.getBlockTileEntity(x-1, y, z) != null)
 				{
 					TileEntityToolRack te = (TileEntityToolRack)world.getBlockTileEntity(x-1, y, z);
@@ -109,7 +109,7 @@ public class ItemToolRack extends ItemTerraBlock
 			else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 			{
 				world.setBlockAndMetadataWithNotify(x+1, y, z, id, 1);
-				world.markBlockNeedsUpdate(x+1, y, z);
+				world.markBlockForUpdate(x+1, y, z);
 				if(world.getBlockTileEntity(x+1, y, z) != null)
 				{
 					TileEntityToolRack te = (TileEntityToolRack)world.getBlockTileEntity(x+1, y, z);

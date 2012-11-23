@@ -233,7 +233,7 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
 		handleInitPacket(inStream);
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -264,7 +264,7 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 		storage[1] = s2 != -1 ? new ItemStack(Item.itemsList[s2]) : null;
 		storage[2] = s3 != -1 ? new ItemStack(Item.itemsList[s3]) : null;
 		storage[3] = s4 != -1 ? new ItemStack(Item.itemsList[s4]) : null;
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 	
 	public Packet createUpdatePacket()

@@ -182,7 +182,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
                 	}
                 }
             }
-            world.markBlockNeedsUpdate(i, j, k);
+            world.markBlockForUpdate(i, j, k);
         }
     }
 

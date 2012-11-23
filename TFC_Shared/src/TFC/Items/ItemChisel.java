@@ -73,7 +73,7 @@ public class ItemChisel extends ItemTerraTool
 		te.extraData = 0;
 		te.setMaterial(world.getBlockMaterial(x, y, z));
 		te.validate();
-		world.markBlockNeedsUpdate(x, y, z);
+		world.markBlockForUpdate(x, y, z);
 
 	}
 	public static void CreateSlab(World world, int x, int y, int z, int id, byte meta, int side, int SlabID)
@@ -189,7 +189,7 @@ public class ItemChisel extends ItemTerraTool
 		if(te != null)
 			te.broadcastPacketInRange(te.createUpdatePacket());
 
-		world.markBlockNeedsUpdate(x, y, z);
+		world.markBlockForUpdate(x, y, z);
 	}
 	public static void CreateSlab(World world, int x, int y, int z, int id, byte meta, int side)
 	{

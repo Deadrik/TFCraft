@@ -274,7 +274,7 @@ public class ContainerTerraFirepit extends ContainerTFC
 
                 for (int var4 = 0; var4 < this.crafters.size(); ++var4)
                 {
-                    ((ICrafting)this.crafters.get(var4)).updateCraftingInventorySlot(this, var1, var3);
+                    ((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
                 }
             }
         }
@@ -283,11 +283,11 @@ public class ContainerTerraFirepit extends ContainerTFC
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
             if (this.firetemp != this.firepit.fireTemperature)
             {
-                var2.updateCraftingInventoryInfo(this, 0, (int)this.firepit.fireTemperature);
+                var2.sendProgressBarUpdate(this, 0, (int)this.firepit.fireTemperature);
             }
             if (this.charcoal != this.firepit.charcoalCounter)
             {
-                var2.updateCraftingInventoryInfo(this, 1, (int)this.firepit.charcoalCounter);
+                var2.sendProgressBarUpdate(this, 1, (int)this.firepit.charcoalCounter);
             }
         }
 

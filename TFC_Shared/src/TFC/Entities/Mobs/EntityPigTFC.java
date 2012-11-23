@@ -42,6 +42,7 @@ public class EntityPigTFC extends EntityAnimalTFC
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
+    
     public EntityPigTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
     	super(par1World,mother,F_size);
@@ -63,16 +64,17 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled()
     {
         return true;
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 500;
     }
-    
+    @Override
     public void onLivingUpdate ()
     {
         super.onLivingUpdate ();
@@ -90,7 +92,7 @@ public class EntityPigTFC extends EntityAnimalTFC
 		}
 
     }
-
+    @Override
     protected void entityInit()
     {
         super.entityInit();
@@ -100,6 +102,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
@@ -109,6 +112,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
@@ -118,6 +122,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound()
     {
         return "mob.pig.say";
@@ -126,6 +131,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound()
     {
         return "mob.pig.say";
@@ -134,6 +140,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound()
     {
         return "mob.pig.death";
@@ -142,6 +149,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer par1EntityPlayer)
     {
         if (super.interact(par1EntityPlayer))
@@ -162,11 +170,12 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected int getDropItemId()
     {
         return this.isBurning() ? Item.porkCooked.shiftedIndex : Item.porkRaw.shiftedIndex;
     }
-    
+    @Override
     protected void dropFewItems(boolean par1, int par2)
     {
         int var3 = 1;
@@ -219,6 +228,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Called when a lightning bolt hits the entity.
      */
+    @Override
     public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt)
     {
         if (!this.worldObj.isRemote)
@@ -233,6 +243,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1)
     {
         super.fall(par1);
@@ -246,8 +257,9 @@ public class EntityPigTFC extends EntityAnimalTFC
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
-    public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
+    @Override
+    public void procreate(EntityAnimal par1EntityAnimal)
     {
-        return new EntityPigTFC(this.worldObj);
+        worldObj.spawnEntityInWorld(new EntityPigTFC(this.worldObj));
     }
 }

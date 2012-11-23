@@ -117,17 +117,17 @@ public class BlockBucketWater extends BlockCustomFluid
 				if (originMeta < 7 && destMeta > 0)
 				{
 					world.setBlockMetadata(x, y, z, originMeta + 1);
-					world.markBlockNeedsUpdate(x, y, z);
+					world.markBlockForUpdate(x, y, z);
 					world.setBlockMetadata(x2, y2, z2, destMeta - 1);
-					world.markBlockNeedsUpdate(x2, y2, z2);
+					world.markBlockForUpdate(x2, y2, z2);
 					return true;
 				}
 				else if (destMeta > 0)
 				{
 					world.setBlockWithNotify(x, y, z, 0);
-					world.markBlockNeedsUpdate(x, y, z);
+					world.markBlockForUpdate(x, y, z);
 					world.setBlockMetadata(x2, y2, z2, destMeta - 1);
-					world.markBlockNeedsUpdate(x2, y2, z2);
+					world.markBlockForUpdate(x2, y2, z2);
 					return true;
 				}
 				else
@@ -153,13 +153,13 @@ public class BlockBucketWater extends BlockCustomFluid
                 	if (originMeta < 7)
                 	{
         				world.setBlockMetadataWithNotify(x, y, z, originMeta + 1);
-        				world.markBlockNeedsUpdate(x, y, z);
+        				world.markBlockForUpdate(x, y, z);
                     	return true;
                 	}
         			else
         			{
         				world.setBlockWithNotify(x, y, z, 0);
-        				world.markBlockNeedsUpdate(x, y, z);
+        				world.markBlockForUpdate(x, y, z);
                     	return true;
         			}
                 }
@@ -172,17 +172,17 @@ public class BlockBucketWater extends BlockCustomFluid
             if (y2 < y)
             {
             	world.setBlockWithNotify(x, y, z, 0);
-            	world.markBlockNeedsUpdate(x, y, z);
+            	world.markBlockForUpdate(x, y, z);
     			world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, originMeta);
-    			world.markBlockNeedsUpdate(x2, y2, z2);
+    			world.markBlockForUpdate(x2, y2, z2);
     			return true;
             }
             if (originMeta < 7)
             {
 				world.setBlockMetadataWithNotify(x, y, z, originMeta + 1);
-				world.markBlockNeedsUpdate(x, y, z);
+				world.markBlockForUpdate(x, y, z);
 				world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7);
-				world.markBlockNeedsUpdate(x2, y2, z2);
+				world.markBlockForUpdate(x2, y2, z2);
 	        	return true;
             }
 			else if (world.getBlockId(x - 1, y, z) != this.blockID &&
@@ -197,9 +197,9 @@ public class BlockBucketWater extends BlockCustomFluid
 			else
 			{
 				world.setBlockWithNotify(x, y, z, 0);
-				world.markBlockNeedsUpdate(x, y, z);
+				world.markBlockForUpdate(x, y, z);
 				world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7);
-				world.markBlockNeedsUpdate(x2, y2, z2);
+				world.markBlockForUpdate(x2, y2, z2);
 	        	return true;
 			}
 		}

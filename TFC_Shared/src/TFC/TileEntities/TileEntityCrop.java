@@ -81,14 +81,14 @@ public class TileEntityCrop extends NetworkTileEntity
 				if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
 					worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-					worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 				else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
 					if(growth > 1)
 					{
 						worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-						worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					}
 				}
 
@@ -117,7 +117,7 @@ public class TileEntityCrop extends NetworkTileEntity
 				if((crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2)) || growth < 0)
 				{
 					worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-					worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 
 				growthTimer += (R.nextInt(2)+23)*TFC_Time.hourLength;
@@ -125,7 +125,7 @@ public class TileEntityCrop extends NetworkTileEntity
 			else if(crop.needsSunlight && sunLevel <= 0)
 			{
 				worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-				worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
 	}
@@ -164,7 +164,7 @@ public class TileEntityCrop extends NetworkTileEntity
 
 		cropId = inStream.readInt();
 		growth = inStream.readFloat();
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 		cropId = inStream.readInt();
 		growth = inStream.readFloat();
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 	
 	public Packet createCropUpdatePacket()

@@ -69,7 +69,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 
 				if (this.isFull == 0)
 				{
-					if (!par3EntityPlayer.func_82247_a(i, j, k, var12.sideHit, par1ItemStack))
+					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
 					{
 						return par1ItemStack;
 					}
@@ -144,7 +144,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 						++i;
 					}
 
-					if (!par3EntityPlayer.func_82247_a(i, j, k, var12.sideHit, par1ItemStack))
+					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
 					{
 						return par1ItemStack;
 					}

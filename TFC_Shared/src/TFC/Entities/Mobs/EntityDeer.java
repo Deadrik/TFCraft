@@ -83,11 +83,12 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     protected boolean isAIEnabled()
     {
         return true;
     }
-
+    @Override
     protected void updateAITasks()
     {
         super.updateAITasks();
@@ -105,6 +106,7 @@ public class EntityDeer extends EntityAnimalTFC
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate()
     {
         int g = getGrowingAge();
@@ -126,12 +128,12 @@ public class EntityDeer extends EntityAnimalTFC
 
         super.onLivingUpdate();
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 400;
     }
-
+    @Override
     protected void entityInit()
     {
         super.entityInit();
@@ -141,6 +143,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Drop 0-2 items of this living's type
      */
+    @Override
     protected void dropFewItems(boolean par1, int par2)
     {
     }
@@ -148,6 +151,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected int getDropItemId()
     {
         return Block.cloth.blockID;
@@ -156,6 +160,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer par1EntityPlayer)
     {
         return super.interact(par1EntityPlayer);
@@ -164,6 +169,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
@@ -174,6 +180,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
@@ -184,6 +191,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound()
     {
         return "mob.sheep";
@@ -192,6 +200,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound()
     {
         return "mob.sheep";
@@ -200,6 +209,7 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound()
     {
         return "mob.sheep";
@@ -253,7 +263,8 @@ public class EntityDeer extends EntityAnimalTFC
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
-    public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
+    @Override
+    public void procreate(EntityAnimal par1EntityAnimal)
     {
         EntityDeer var2 = (EntityDeer)par1EntityAnimal;
         EntityDeer var3 = new EntityDeer(this.worldObj);
@@ -267,13 +278,14 @@ public class EntityDeer extends EntityAnimalTFC
             var3.setFleeceColor(var2.getFleeceColor());
         }
 
-        return var3;
+        worldObj.spawnEntityInWorld(var3);
     }
 
     /**
      * This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
      * function is used in the AIEatGrass)
      */
+    @Override
     public void eatGrassBonus()
     {
         this.setSheared(false);

@@ -47,7 +47,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 				{
 					rotation = 0;
 					shouldRotate = false;
-					worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					if(!worldObj.isRemote)
 					{
 						if(storage[0] != null)
@@ -126,7 +126,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 				else 
 				{
 					rotation++;
-					worldObj.markBlockAsNeedsUpdate(xCoord, yCoord, zCoord);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 
 				rotatetimer = 0;
@@ -306,7 +306,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
 		this.hasQuern = inStream.readBoolean();
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public Packet createUpdatePacket()
@@ -341,7 +341,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 
 		this.hasQuern = inStream.readBoolean();
-		worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
 	}
 }

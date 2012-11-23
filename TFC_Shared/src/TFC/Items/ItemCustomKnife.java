@@ -46,7 +46,7 @@ public class ItemCustomKnife extends ItemWeapon
 			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id))
 			{
 				world.setBlock(x, y+1, z, TFCBlocks.FoodPrep.blockID);
-				world.markBlockAsNeedsUpdate(x, y+1, z);
+				world.markBlockForUpdate(x, y+1, z);
 				return true;
 			}
 		}

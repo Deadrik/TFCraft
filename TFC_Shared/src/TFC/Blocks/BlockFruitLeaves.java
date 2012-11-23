@@ -101,7 +101,7 @@ public class BlockFruitLeaves extends Block
             if(!canStay(world,i,j,k,blockID))
             {
                 world.setBlock(i, j, k, 0);
-                world.markBlockNeedsUpdate(i, j, k);
+                world.markBlockForUpdate(i, j, k);
                 return;
             }
 
@@ -124,7 +124,7 @@ public class BlockFruitLeaves extends Block
                                 meta += 8;
                             }
                             world.setBlockMetadata(i, j, k, meta); 
-                            world.markBlockNeedsUpdate(i, j, k);
+                            world.markBlockForUpdate(i, j, k);
                         }
                     }
                 }
@@ -133,7 +133,7 @@ public class BlockFruitLeaves extends Block
                     if(meta >= 8 && rand.nextInt(10) == 0)
                     {
                         world.setBlockMetadata(i, j, k, meta-8); 
-                        world.markBlockNeedsUpdate(i, j, k);
+                        world.markBlockForUpdate(i, j, k);
                     }
                 }
             }
@@ -144,12 +144,12 @@ public class BlockFruitLeaves extends Block
                     if(world.getBlockMetadata(i, j, k) >= 8)
                     {
                         world.setBlockMetadata(i, j, k, meta-8); 
-                        world.markBlockNeedsUpdate(i, j, k);
+                        world.markBlockForUpdate(i, j, k);
                     }
                 }
             }
             if(rand.nextInt(100) > 50)
-                world.markBlockNeedsUpdate(i, j, k);
+                world.markBlockForUpdate(i, j, k);
         }
         return;
     }

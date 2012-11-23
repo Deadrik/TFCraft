@@ -228,7 +228,7 @@ public class ContainerTerraBloomery extends ContainerTFC
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
             if (this.firetemp != this.bloomery.fireTemperature)
             {
-                var2.updateCraftingInventoryInfo(this, 0, (int)this.bloomery.fireTemperature);
+                var2.sendProgressBarUpdate(this, 0, (int)this.bloomery.fireTemperature);
             }
         }
         

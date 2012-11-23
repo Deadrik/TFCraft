@@ -42,7 +42,7 @@ public class BlockPartial extends BlockContainer
     public void onBlockAdded(World world, int par2, int par3, int par4)
     {
         super.onBlockAdded(world, par2, par3, par4);
-        world.markBlockNeedsUpdate(par2, par3, par4);
+        world.markBlockForUpdate(par2, par3, par4);
     }
 
     public void onBlockPlaced(World par1World, int par2, int par3, int par4, int par5)

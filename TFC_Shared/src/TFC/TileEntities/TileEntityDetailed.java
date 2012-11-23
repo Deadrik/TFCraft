@@ -163,7 +163,7 @@ public class TileEntityDetailed extends NetworkTileEntity
         inStream.readFully(b);
         data = new BitSet(1000);
         data.or(fromByteArray(b));
-        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public class TileEntityDetailed extends NetworkTileEntity
         inStream.readFully(b);
         data.or(fromByteArray(b));
         
-        worldObj.markBlockNeedsUpdate(xCoord, yCoord, zCoord);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

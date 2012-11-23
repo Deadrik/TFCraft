@@ -42,7 +42,7 @@ public class BlockCustomFlower extends BlockFlower
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
             int var5 = par1World.getBlockId(par2, par3, par4);
-            return (var5 == 0 || blocksList[var5].blockMaterial.isGroundCover()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
+            return (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
     }
 
 	/**

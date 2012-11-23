@@ -38,7 +38,7 @@ public class GuiInventoryTFC  extends GuiContainer
     private float ySize_lo;
 	
 	public GuiInventoryTFC(EntityPlayer player) {
-		super(player.inventorySlots);
+		super(player.inventoryContainer);
 		this.allowUserInput = true;
 		player.addStat(AchievementList.openInventory, 1);
 	}

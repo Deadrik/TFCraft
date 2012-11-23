@@ -48,6 +48,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
+    
     public EntityChickenTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
     	super(par1World,mother,F_size);
@@ -69,11 +70,12 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled()
     {
         return true;
     }
-
+    @Override
     public int getMaxHealth()
     {
         return 200;
@@ -83,6 +85,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -139,11 +142,13 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1) {}
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeEntityToNBT(par1NBTTagCompound);
@@ -152,6 +157,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readEntityFromNBT(par1NBTTagCompound);
@@ -160,6 +166,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound()
     {
         return "mob.chicken.say";
@@ -168,6 +175,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound()
     {
         return "mob.chicken.hurt";
@@ -176,6 +184,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound()
     {
         return "mob.chicken.hurt";
@@ -184,6 +193,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected int getDropItemId()
     {
         return Item.feather.shiftedIndex;
@@ -192,6 +202,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * Drop 0-2 items of this living's type
      */
+    @Override
     protected void dropFewItems(boolean par1, int par2)
     {
         int var3 = 1;
@@ -214,8 +225,9 @@ public class EntityChickenTFC extends EntityAnimalTFC
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
-    public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
+    @Override
+    public void procreate(EntityAnimal par1EntityAnimal)
     {
-        return new EntityChickenTFC(this.worldObj);
+        worldObj.spawnEntityInWorld( new EntityChickenTFC(this.worldObj));
     }
 }

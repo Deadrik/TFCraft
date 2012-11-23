@@ -592,12 +592,12 @@ public class EntityWolfTFC extends EntityTameableTFC
 	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
 	 */
 	@Override
-	public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal)
+	public void procreate(EntityAnimal par1EntityAnimal)
 	{
 		EntityWolfTFC var2 = new EntityWolfTFC(this.worldObj);
 		var2.setOwner(this.getOwnerName());
 		var2.setTamed(true);
-		return var2;
+		worldObj.spawnEntityInWorld(var2);
 	}
 
 	public boolean getLooksWithInterest()
