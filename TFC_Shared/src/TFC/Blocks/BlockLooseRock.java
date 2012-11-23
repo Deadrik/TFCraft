@@ -5,6 +5,7 @@ import java.util.Random;
 
 import TFC.*;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
@@ -110,7 +111,7 @@ public class BlockLooseRock extends BlockTerra
 	@Override
     public String getTextureFile()
     {
-        return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
     }
 	
 	@Override

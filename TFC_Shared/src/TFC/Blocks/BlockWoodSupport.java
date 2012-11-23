@@ -15,7 +15,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 
-public class BlockWoodSupport extends Block
+public class BlockWoodSupport extends BlockTerra2
 {
 	public static Boolean getSupportInRange(World world, int x, int y, int z, int range, int supportID)
 	{
@@ -225,12 +225,6 @@ public class BlockWoodSupport extends Block
 		}
 
 		return AxisAlignedBB.getBoundingBox((double)i + minX, (double)j + minY, (double)k + minZ, (double)i + maxX, (double)j + maxY, (double)k + maxZ);
-	}
-
-	@Override
-	public String getTextureFile() 
-	{
-		return "/bioxx/terrablocks2.png";
 	}
 
 	@Override

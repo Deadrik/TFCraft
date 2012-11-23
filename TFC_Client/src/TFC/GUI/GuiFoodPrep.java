@@ -38,7 +38,7 @@ public class GuiFoodPrep extends GuiContainer
 
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
-        int k = mc.renderEngine.getTexture("/bioxx/foodprepgui.png");
+        int k = mc.renderEngine.getTexture("/bioxx/gui_foodprep.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(k);
         int l = (width - xSize) / 2;

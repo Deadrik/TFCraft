@@ -16,7 +16,7 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
-public class BlockBloomery extends BlockContainer
+public class BlockBloomery extends BlockTerraContainer
 {
 	private int meta;
 	private int xCoord;
@@ -105,12 +105,6 @@ public class BlockBloomery extends BlockContainer
 			return blockIndexInTexture+lit;
 		}
 		return 64;
-	}
-
-	@Override
-	public String getTextureFile() {
-
-		return "/bioxx/terrablocks.png";
 	}
 
 	@Override

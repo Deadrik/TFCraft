@@ -6,6 +6,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
+import TFC.Core.TFC_Textures;
 import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 
@@ -92,7 +93,7 @@ public class BlockOre extends BlockTerra
 	@Override
     public String getTextureFile()
     {
-        return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
     }
 	
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 

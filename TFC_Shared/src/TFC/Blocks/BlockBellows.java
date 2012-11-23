@@ -13,7 +13,7 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
-public class BlockBellows extends Block
+public class BlockBellows extends BlockTerra
 {
 	private int meta;
 	private int xCoord;
@@ -187,13 +187,6 @@ public class BlockBellows extends Block
 	public int getRenderType()
 	{
 		return TFCBlocks.terraBellowsRenderId;
-	}
-
-
-	@Override
-	public String getTextureFile() 
-	{
-		return "/bioxx/terrablocks.png";
 	}
 
 	public void GiveAir(World world, int i, int j, int k)

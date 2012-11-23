@@ -11,14 +11,15 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.TileEntities.TileEntitySapling;
 import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.Generators.WorldGenCustomCedarTrees;
-import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
-import TFC.WorldGen.Generators.WorldGenCustomRedwoodTrees;
-import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
-import TFC.WorldGen.Generators.WorldGenCustomWillowTrees;
-import TFC.WorldGen.Generators.WorldGenDouglasFir;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomRedwoodTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
 
 import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ItemStack;
@@ -27,7 +28,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
-public class BlockCustomSapling extends BlockContainer
+public class BlockCustomSapling extends BlockTerraContainer
 {
 	public BlockCustomSapling(int i, int j)
 	{
@@ -36,6 +37,7 @@ public class BlockCustomSapling extends BlockContainer
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.blockIndexInTexture = j;
 		this.setTickRandomly(true);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -55,12 +57,6 @@ public class BlockCustomSapling extends BlockContainer
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		return j+blockIndexInTexture;
-	}
-
-	@Override
-	public String getTextureFile() 
-	{
-		return "/bioxx/terrablocks.png";
 	}
 
 	public void growTree(World world, int i, int j, int k, Random random)
@@ -120,7 +116,7 @@ public class BlockCustomSapling extends BlockContainer
 			growTree(world, i, j, k, random);
 		}
 		
-		this.checkChange(world, i, j, k);
+		//this.checkChange(world, i, j, k);
 	}
 	
 	/**
@@ -139,6 +135,11 @@ public class BlockCustomSapling extends BlockContainer
     {
         int var5 = par1World.getBlockId(par2, par3, par4);
         return (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
+    }
+	
+	public boolean canBeReplacedByLeaves(World world, int x, int y, int z)
+    {
+        return true;
     }
 
 	/**

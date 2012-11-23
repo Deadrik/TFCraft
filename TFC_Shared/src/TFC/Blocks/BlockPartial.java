@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import TFC.*;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
@@ -36,7 +37,7 @@ public class BlockPartial extends BlockContainer
     @Override
     public String getTextureFile()
     {
-        return "/bioxx/terraRock.png";
+    	return TFC_Textures.RockSheet;
     }
 
     public void onBlockAdded(World world, int par2, int par3, int par4)

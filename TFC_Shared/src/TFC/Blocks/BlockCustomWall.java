@@ -1,6 +1,7 @@
 package TFC.Blocks;
 
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Textures;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import java.util.List;
@@ -62,7 +63,7 @@ public class BlockCustomWall extends BlockWall
     @Override
 	public String getTextureFile() {
 
-		return "/bioxx/terraRock.png";
+    	return TFC_Textures.RockSheet;
 	}
     
     @SideOnly(Side.CLIENT)

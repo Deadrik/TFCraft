@@ -1,4 +1,4 @@
-package TFC.WorldGen.Generators;
+package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
@@ -12,18 +12,18 @@ import net.minecraft.src.Block;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
-public class WorldGenCustomMapleTallTrees extends WorldGenerator
+public class WorldGenCustomMapleShortTrees extends WorldGenerator
 {
 	private int treeId;
 
-	public WorldGenCustomMapleTallTrees(boolean flag, int id)
+	public WorldGenCustomMapleShortTrees(boolean flag, int id)
 	{
 		super(flag);
 		treeId=id;
 	}
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
-		int l = random.nextInt(3) + 8;
+		int l = random.nextInt(3) + 4;
 		boolean flag = true;
 		if (yCoord < 1 || yCoord + l + 1 > world.getHeight())
 		{
@@ -64,11 +64,11 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 		{
 			return false;
 		}
+		int var3 = world.getBlockId(xCoord, yCoord - 1, zCoord);
 		if (treeId == 15)
 		{
 			int x = 0;
 		}
-		int var3 = world.getBlockId(xCoord, yCoord - 1, zCoord);
 		if (!(var3 == TFCBlocks.Dirt.blockID || var3 == TFCBlocks.Dirt2.blockID || var3 == TFCBlocks.Grass.blockID || var3 == TFCBlocks.Grass2.blockID ||
 				var3 == TFCBlocks.ClayGrass.blockID || var3 == TFCBlocks.ClayGrass2.blockID)|| yCoord >= world.getHeight() - l - 1)
 		{
@@ -98,7 +98,7 @@ public class WorldGenCustomMapleTallTrees extends WorldGenerator
 		for (int l1 = 0; l1 < l; l1++)
 		{
 			int k2 = world.getBlockId(xCoord, yCoord + l1, zCoord);
-			if (k2 == 0 || k2 == TFCBlocks.Leaves.blockID)
+			if (k2 == 0 || k2 == TFCBlocks.Leaves.blockID || Block.blocksList[k2].canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
 			{
 				setBlockAndMetadata(world, xCoord, yCoord + l1, zCoord, TFCBlocks.Wood.blockID, treeId);
 			}

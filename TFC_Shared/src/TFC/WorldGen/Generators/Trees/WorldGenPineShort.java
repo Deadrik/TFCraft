@@ -1,4 +1,4 @@
-package TFC.WorldGen.Generators;
+package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
@@ -141,7 +141,8 @@ public class WorldGenPineShort extends WorldGenerator
 
                         Block block = Block.blocksList[var17];
 
-                        if (var17 == 0 || block == null || block.isLeaves(world, x, y + var16, z))
+                        if (var17 == 0 || block == null || block.isLeaves(world, x, y + var16, z) || 
+                        		block.canBeReplacedByLeaves(world, x, y + var16, z))
                         {
                             this.setBlockAndMetadata(world, x, y + var16, z, blockWood, metaWood);
                         }

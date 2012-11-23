@@ -20,7 +20,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
-public class BlockAnvil extends BlockContainer
+public class BlockAnvil extends BlockTerraContainer
 {
 	private int meta;
 	private int xCoord;
@@ -140,11 +140,6 @@ public class BlockAnvil extends BlockContainer
 		return TFCBlocks.terraAnvilRenderId;
 	}
 
-	@Override
-	public String getTextureFile() {
-
-		return "/bioxx/terrablocks.png";
-	}
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		

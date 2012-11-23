@@ -10,6 +10,7 @@ import TFC.TFCItems;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.EntityFallingStone;
@@ -70,7 +71,7 @@ public class BlockIgInCobble extends BlockTerra2
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
 	}
 
 	@Override

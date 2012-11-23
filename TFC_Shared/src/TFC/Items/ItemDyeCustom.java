@@ -42,9 +42,14 @@ public class ItemDyeCustom extends ItemTerra
         this.setMaxDamage(0);
         this.setCreativeTab(CreativeTabs.tabMaterials);
     }
+    
+    @Override
+    public String getTextureFile()
+    {
+        return "/gui/items.png";
+    }
 
     @SideOnly(Side.CLIENT)
-
     /**
      * Gets an icon index based on an item's damage value
      */

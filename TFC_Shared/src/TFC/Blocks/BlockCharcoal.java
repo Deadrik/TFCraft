@@ -21,12 +21,6 @@ public class BlockCharcoal extends BlockTerra {
 	}
 
 	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrablocks.png";
-	}
-
-	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
 		return 95;

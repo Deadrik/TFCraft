@@ -27,7 +27,7 @@ public class GuiTerraScribe extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int r = mc.renderEngine.getTexture("/bioxx/scribegui.png");
+		int r = mc.renderEngine.getTexture("/bioxx/gui_scribe.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
         mc.renderEngine.bindTexture(r);
         int w = (width - 176) / 2;

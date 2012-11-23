@@ -397,7 +397,7 @@ public class BlockFruitLeaves extends Block
     @Override
     public String getTextureFile() 
     {
-        return "/bioxx/Vegetation.png";
+        return "/bioxx/vegetation.png";
     }
 
     public void addCreativeItems(java.util.ArrayList list)

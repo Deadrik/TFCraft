@@ -5,6 +5,7 @@ import java.util.List;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import TFC.TFCBlocks;
+import TFC.Core.TFC_Textures;
 import TFC.Items.ItemProPick;
 import TFC.Items.ItemWeapon;
 import TFC.TileEntities.TileEntityToolRack;
@@ -34,8 +35,7 @@ public class BlockToolRack extends BlockContainer
 	@Override
 	public String getTextureFile()
 	{
-		// TODO Auto-generated method stub
-		return "/bioxx/terrablocks2.png";
+		return TFC_Textures.BlockSheet2;
 	}
 
 	public boolean isOpaqueCube()

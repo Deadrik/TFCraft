@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Scott Killen and MisterFiber, 2012
  */
-package TFC.WorldGen.Generators;
+package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
@@ -113,8 +113,8 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 			final int j4 = world.getBlockId(x, y + y1, z);
 
 			if (Block.blocksList[j4] == null
-					|| Block.blocksList[j4].isLeaves(world, x, y + y1,
-							z))
+					|| Block.blocksList[j4].isLeaves(world, x, y + y1,z) && 
+					Block.blocksList[j4].canBeReplacedByLeaves(world, x, y + y1, z))
 			{
 				setBlockAndMetadata(world, x, y + y1, z, blockWood,
 						metaWood);

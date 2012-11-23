@@ -5,6 +5,7 @@ import java.util.Random;
 import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Textures;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Items.ItemCustomScythe;
@@ -215,7 +216,7 @@ public class BlockCrop extends BlockContainer
     @Override
     public String getTextureFile()
     {
-        return "/bioxx/TFC_Plants.png";
+        return TFC_Textures.PlantsSheet;
     }
 
 	@Override

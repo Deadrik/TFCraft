@@ -5,6 +5,7 @@ import java.util.Random;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
+import TFC.Core.TFC_Textures;
 import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 
@@ -68,7 +69,7 @@ public class BlockOre3 extends BlockOre
 	@Override
     public String getTextureFile()
     {
-        return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
     }
 	
 	public static String[] blockNames = { "Borax", "Olivine", "LapisLazuli"};

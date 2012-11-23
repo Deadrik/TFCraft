@@ -18,7 +18,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
-public class BlockFirepit extends BlockContainer
+public class BlockFirepit extends BlockTerraContainer
 {
 
 	public BlockFirepit(int i, int tex)
@@ -116,12 +116,6 @@ public class BlockFirepit extends BlockContainer
 	public int getRenderType()
 	{
 		return TFCBlocks.terraFirepitRenderId;
-	}
-
-	@Override
-	public String getTextureFile() {
-
-		return "/bioxx/terrablocks.png";
 	}
 
 	@Override

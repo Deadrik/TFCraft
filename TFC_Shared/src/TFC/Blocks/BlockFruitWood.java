@@ -67,7 +67,7 @@ public class BlockFruitWood extends BlockContainer
     @Override
     public String getTextureFile() 
     {
-        return "/bioxx/Vegetation.png";
+        return "/bioxx/vegetation.png";
     }
 
     @Override

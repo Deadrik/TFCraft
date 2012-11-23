@@ -23,7 +23,7 @@ import net.minecraft.src.World;
 public class TFC_ItemHeat 
 {
 
-	static
+	public static void SetupItemHeat()
 	{
 		HeatManager manager = HeatManager.getInstance();
 

@@ -1,4 +1,4 @@
-package TFC.WorldGen.Generators;
+package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
@@ -60,7 +60,7 @@ public class WorldGenDouglasFir extends WorldGenerator
                     {
                         int j2 = par1World.getBlockId(l, j, j1);
 
-                        if (j2 != 0 && j2 != Block.leaves.blockID && j2 != Block.grass.blockID && j2 != Block.dirt.blockID && j2 != Block.wood.blockID)
+                        if (j2 != 0 && j2 != Block.leaves.blockID && j2 != Block.grass.blockID && j2 != Block.dirt.blockID && j2 != Block.wood.blockID && j2 != Block.sapling.blockID)
                         {
                             flag = false;
                         }
@@ -85,7 +85,6 @@ public class WorldGenDouglasFir extends WorldGenerator
             return false;
         }
 
-        setBlock(par1World, par3, par4 - 1, par5, Block.dirt.blockID);
         byte byte1 = 3;
         int i1 = 0;
 

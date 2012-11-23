@@ -9,6 +9,7 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.Generators.WorldGenGrowTrees;
 
@@ -30,7 +31,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
     @Override
     public String getTextureFile()
     {
-        return "/bioxx/terrablocks2.png";
+    	return TFC_Textures.BlockSheet2;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package TFC.WorldGen.Generators;
+package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 

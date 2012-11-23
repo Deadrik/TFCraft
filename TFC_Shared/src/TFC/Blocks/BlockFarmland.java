@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.*;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityFarmland;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
@@ -138,7 +139,7 @@ public class BlockFarmland extends BlockContainer
 	@Override
     public String getTextureFile()
     {
-        return "/bioxx/terrablocks2.png";
+		return TFC_Textures.BlockSheet2;
     }
 
 	@Override

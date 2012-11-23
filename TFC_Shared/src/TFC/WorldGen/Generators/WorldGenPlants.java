@@ -9,6 +9,8 @@ import TFC.Core.TFC_Core;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree2;
 
 import cpw.mods.fml.common.IWorldGenerator;
 

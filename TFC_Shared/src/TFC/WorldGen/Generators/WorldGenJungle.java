@@ -12,6 +12,8 @@ import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.IChunkProvider;

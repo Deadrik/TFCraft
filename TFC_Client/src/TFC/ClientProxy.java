@@ -73,7 +73,7 @@ public class ClientProxy extends CommonProxy
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
-		MinecraftForgeClient.preloadTexture("/bioxx/terraRock.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/terrarock.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terratools.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terratoolheads.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites.png");
@@ -81,20 +81,20 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture("/bioxx/terrablocks.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrablocks2.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrabeds.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/sluicegui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/scribegui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/metallurgygui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/logpilegui.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_sluice.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_scribe.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_metallurgy.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_logpile.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/javelin.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/Forgegui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/Firepitgui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/Bloomerygui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/anvilgui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/CalendarGui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/Vegetation.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/TFC_Plants.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/foodprepgui.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/FoodSprites.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_forge.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_firepit.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_bloomery.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_anvil.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_calendar.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/vegetation.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/tfcplants.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_foodprep.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/foodsprites.png");
 
 		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
 		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));

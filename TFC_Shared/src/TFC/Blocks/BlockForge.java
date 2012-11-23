@@ -18,7 +18,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
-public class BlockForge extends BlockContainer
+public class BlockForge extends BlockTerraContainer
 {
 
 	private int meta;
@@ -112,12 +112,6 @@ public class BlockForge extends BlockContainer
 	public int getRenderType()
 	{
 		return TFCBlocks.terraForgeRenderId;
-	}
-
-	@Override
-	public String getTextureFile() {
-
-		return "/bioxx/terrablocks.png";
 	}
 
 	@Override

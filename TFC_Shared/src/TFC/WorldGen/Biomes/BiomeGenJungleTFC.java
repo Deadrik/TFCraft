@@ -13,10 +13,10 @@ import net.minecraft.src.WorldGenerator;
 import TFC.Entities.Mobs.EntityChickenTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.Generators.WorldGenCustomHugeTrees;
-import TFC.WorldGen.Generators.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.WorldGenCustomShrub;
 import TFC.WorldGen.Generators.WorldGenCustomTallGrass;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 
 public class BiomeGenJungleTFC extends TFCBiome
 {

@@ -24,7 +24,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 	    bloomery = tileentityforge;
 	    firetemp = 0;
 		//Input slot
-	    addSlotToContainer(new Slot(tileentityforge, 0, 80, 33));
+	    addSlotToContainer(new Slot(tileentityforge, 0, 134, 52));
 
 		for(int i = 0; i < 3; i++)
 		{
@@ -38,6 +38,7 @@ public class ContainerTerraBloomery extends ContainerTFC
 		{
 			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
+		bloomery.updateGui();
 	}
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)

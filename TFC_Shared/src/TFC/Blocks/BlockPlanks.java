@@ -11,7 +11,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
 
-public class BlockPlanks extends Block
+public class BlockPlanks extends BlockTerra
 {
 	public BlockPlanks(int i, Material material) 
 	{
@@ -41,12 +41,6 @@ public class BlockPlanks extends Block
 	public int getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
 		return j+176;
-	}
-
-	@Override
-	public String getTextureFile() 
-	{
-		return "/bioxx/terrablocks.png";
 	}
 
 	@Override

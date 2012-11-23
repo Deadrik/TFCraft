@@ -9,6 +9,7 @@ import cpw.mods.fml.common.asm.SideOnly;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
@@ -32,6 +33,7 @@ public class BlockIgInSmooth extends Block
 	{
 		super(i, Material.rock);
 		this.blockIndexInTexture = tex;
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -62,7 +64,7 @@ public class BlockIgInSmooth extends Block
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
 	}
 
 	/**

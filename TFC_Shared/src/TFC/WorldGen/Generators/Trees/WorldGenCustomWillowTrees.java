@@ -1,4 +1,4 @@
-package TFC.WorldGen.Generators;
+package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
@@ -183,7 +183,8 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		for (int l1 = 0 ; l1 < height ; l1++)
 		{
 			int l2 = world.getBlockId (xCoord, yCoord + l1, zCoord);
-			if (l2 == 0 || l2 == Block.leaves.blockID || l2 == Block.waterMoving.blockID || l2 == Block.waterStill.blockID)
+			if (l2 == 0 || l2 == Block.leaves.blockID || l2 == Block.waterMoving.blockID || l2 == Block.waterStill.blockID  || 
+					Block.blocksList[l2].canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
 			{
 				world.setBlockAndMetadata (xCoord, yCoord + l1, zCoord, Block.wood.blockID, treeId);
 			}

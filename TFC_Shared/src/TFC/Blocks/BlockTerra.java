@@ -3,6 +3,7 @@ package TFC.Blocks;
 import TFC.*;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
@@ -30,7 +31,7 @@ public abstract class BlockTerra extends Block
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks.png";
+		return TFC_Textures.BlockSheet;
 	}
 
 	@Override

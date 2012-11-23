@@ -157,6 +157,8 @@ public class TerraFirmaCraft
 		
 		//Setup custom potion effects
 		TFCPotion.Setup();
+		
+		TFC_ItemHeat.SetupItemHeat();
 
 	}
 
