@@ -71,7 +71,7 @@ public class CropManager
         
         instance.addIndex(new CropIndex(/*ID*/16, /*Name*/"cabbage", /*type*/1, /*time*/110, /*stages*/5, /*minGTemp*/10, /*minATemp*/0, /*nutrientUsage*/0.9f, TFCItems.SeedsCabbage).setWaterUsage(0.9f).setOutput1(TFCItems.Cabbage, 1, 1));
         
-        instance.addIndex(new CropIndex(/*ID*/17, /*Name*/"garlic", /*type*/2, /*time*/95, /*stages*/4, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/0.5f, TFCItems.SeedsGarlic).setOutput1(TFCItems.Garlic, 1, 2).setGoesDormant(true));
+        instance.addIndex(new CropIndex(/*ID*/17, /*Name*/"garlic", /*type*/2, /*time*/95, /*stages*/4, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/0.5f, TFCItems.SeedsGarlic).setOutput1(TFCItems.Garlic, 1, 4).setGoesDormant(true));
         
         instance.addIndex(new CropIndex(/*ID*/18, /*Name*/"carrot", /*type*/2, /*time*/90, /*stages*/4, /*minGTemp*/8, /*minATemp*/0, /*nutrientUsage*/0.75f, TFCItems.SeedsCarrot).setOutput1(TFCItems.Carrot, 2, 4).setGoesDormant(true));
         
