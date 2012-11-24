@@ -551,6 +551,7 @@ public class ClientProxy extends CommonProxy
 	public void registerHighlightHandler()
 	{
 		MinecraftForge.EVENT_BUS.register(new ChiselHighlightHandler());
+		MinecraftForge.EVENT_BUS.register(new FarmlandHighlightHandler());
 	}
 
 	@Override

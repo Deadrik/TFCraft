@@ -100,7 +100,8 @@ public class TileEntityCrop extends NetworkTileEntity
 
 				if(tef != null)
 				{
-					tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
+					if(tef.nutrients[nutriType] > 0)
+						tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
 				}
 
 				float growthRate = ((((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult) * timeMultiplier;

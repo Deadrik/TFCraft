@@ -90,8 +90,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 		new WorldGenSoilPits().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);		
 
-		int crop = randomGenerator.nextInt(23);
-		if(randomGenerator.nextInt(4) == 0)
+		Random rand = new Random((chunk_X-chunk_Z)*chunk_Z);
+		int crop = rand.nextInt(24);
+		if(randomGenerator.nextInt(9) == 0)
 		{
 			int num = randomGenerator.nextInt(8);
 			boolean grown = false;

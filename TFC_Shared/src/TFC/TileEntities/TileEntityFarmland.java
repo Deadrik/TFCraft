@@ -1,5 +1,12 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import TFC.*;
 import TFC.Blocks.BlockFarmland;
 import TFC.Core.TFC_Time;
@@ -9,15 +16,22 @@ import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
 import net.minecraft.src.Block;
 import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.Packet;
 import net.minecraft.src.TileEntity;
 
-public class TileEntityFarmland extends TileEntity
+public class TileEntityFarmland extends NetworkTileEntity
 {
     public long nutrientTimer = -1;
     public int[] nutrients = {18000,18000,18000};
+    
+    /**
+     * Client only
+     * */
+    public long timeSinceUpdate = 0;
 
     public TileEntityFarmland()
     {
+    	this.shouldSendInitData = false;
     }
 
     @Override
@@ -31,7 +45,7 @@ public class TileEntityFarmland extends TileEntity
             if(nutrientTimer < TFC_Time.totalHours())
             {
                 CropIndex crop = null;
-                float timeMultiplier = TFC_Time.daysInYear/360;
+                float timeMultiplier = (float)TFC_Time.daysInYear / 360f;
                 int soilMax = (int) (25000 * timeMultiplier);
                 int restoreAmount = 65;
                 
@@ -63,6 +77,13 @@ public class TileEntityFarmland extends TileEntity
                         nutrients[1] += restoreAmount;
                     if(nutrients[2] < soilMax)
                         nutrients[2] += restoreAmount;
+                    
+                    if(nutrients[0] > soilMax)
+                        nutrients[0] = soilMax;
+                    if(nutrients[1] > soilMax)
+                        nutrients[1] = soilMax;
+                    if(nutrients[2] > soilMax)
+                        nutrients[2] = soilMax;
                 }
 
                 nutrientTimer+=24;
@@ -113,4 +134,74 @@ public class TileEntityFarmland extends TileEntity
         par1NBTTagCompound.setIntArray("nutrients", nutrients);
         par1NBTTagCompound.setLong("nutrientTimer", nutrientTimer);    
     }
+
+	@Override
+	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	{
+		nutrients[0] = inStream.readInt();
+		nutrients[1] = inStream.readInt();
+		nutrients[2] = inStream.readInt();		
+	}
+
+	@Override
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
+		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createNutrientPacket(), 5);
+	}
+
+	@Override
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void requestNutrientData()
+	{
+		if(TFC_Time.getTotalTicks() > timeSinceUpdate + 1000)
+		{
+			timeSinceUpdate = TFC_Time.getTotalTicks();
+			TerraFirmaCraft.proxy.sendCustomPacket(createNutrientRequestPacket());
+		}
+	}
+	
+	public Packet createNutrientRequestPacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Server);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+		} catch (IOException e) {
+		}
+
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+	
+	public Packet createNutrientPacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+			dos.writeInt(nutrients[0]);
+			dos.writeInt(nutrients[1]);
+			dos.writeInt(nutrients[2]);
+		} catch (IOException e) {
+		}
+
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
 }
