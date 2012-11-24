@@ -39,7 +39,7 @@ public class ContainerQuern extends Container
 	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
 	{
 		super.onCraftGuiClosed(par1EntityPlayer);
-		
+
 		if(!world.isRemote)
 		{
 			te.closeChest();
@@ -63,7 +63,7 @@ public class ContainerQuern extends Container
 
 		int row;
 		int col;
-		
+
 		for (row = 0; row < 9; ++row)
 		{
 			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
@@ -77,13 +77,13 @@ public class ContainerQuern extends Container
 			}
 		}
 
-		
+
 	}
-	
+
 	public EntityPlayer getPlayer() {
 		return player;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
 	{
@@ -119,7 +119,7 @@ public class ContainerQuern extends Container
 					return null;
 				}
 			}
-			else if (!this.mergeItemStack(clickedStack, 3, 28, false))
+			else if (clickedIndex >= 3 && clickedIndex < 28)
 			{
 				return null;
 			}
