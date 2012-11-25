@@ -7,29 +7,12 @@ import java.io.IOException;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Time;
+import TFC.Entities.EntityArrowTFC;
+import TFC.Entities.EntityTerraJavelin;
 import TFC.Food.FoodStatsTFC;
 import TFC.Handlers.PacketHandler;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.Block;
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityArrow;
-import net.minecraft.src.EntityDamageSource;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EntityPlayerMP;
-import net.minecraft.src.FoodStats;
-import net.minecraft.src.ItemInWorldManager;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.Packet;
-import net.minecraft.src.Packet250CustomPayload;
-import net.minecraft.src.Packet8UpdateHealth;
-import net.minecraft.src.Potion;
-import net.minecraft.src.PotionEffect;
-import net.minecraft.src.ServerPlayerAPI;
-import net.minecraft.src.ServerPlayerBase;
-import net.minecraft.src.StepSound;
-import net.minecraft.src.World;
+import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeHooks;
 
 public class TFC_PlayerServer extends ServerPlayerBase
@@ -68,9 +51,18 @@ public class TFC_PlayerServer extends ServerPlayerBase
                     return false;
                 }
 
-                if (var3 instanceof EntityArrow)
+                if (var3 instanceof EntityArrowTFC)
                 {
-                    EntityArrow var4 = (EntityArrow)var3;
+                	EntityArrowTFC var4 = (EntityArrowTFC)var3;
+
+                    if (var4.shootingEntity instanceof EntityPlayer)
+                    {
+                        return false;
+                    }
+                }
+                else if (var3 instanceof EntityTerraJavelin)
+                {
+                	EntityTerraJavelin var4 = (EntityTerraJavelin)var3;
 
                     if (var4.shootingEntity instanceof EntityPlayer)
                     {
