@@ -34,7 +34,7 @@ public class EntityTerraJavelin extends Entity
 	public Entity shootingEntity;
 	private int ticksInGround;
 	private int ticksInAir = 0;
-	private double damage = 150.0D;
+	private double damage = 80.0D;
 	private int field_46027_au;
 
 	/** Is this arrow a critical hit? (Controls particles and damage) */

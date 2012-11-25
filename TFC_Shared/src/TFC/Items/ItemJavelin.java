@@ -22,7 +22,7 @@ public class ItemJavelin extends ItemTerraTool
     {
         super(par1, weaponDamage, TFCItems.SedToolMaterial, new Block[0]);
         this.maxStackSize = 1;
-        this.weaponDamage = 75;
+        this.weaponDamage = 55;
         this.setMaxDamage(50);
 
     }

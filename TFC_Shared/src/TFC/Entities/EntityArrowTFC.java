@@ -39,7 +39,7 @@ public class EntityArrowTFC extends EntityArrow
     /** The owner of this arrow. */
     private int ticksInGround;
     private int ticksInAir = 0;
-    private double damage = 50.0D;
+    private double damage = 65.0D;
 
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
