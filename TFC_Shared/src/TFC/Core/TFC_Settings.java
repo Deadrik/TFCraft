@@ -75,7 +75,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.get(item, heading, value);
+			Property prop = config.get(heading, item, value);
 			return new Boolean(prop.value).booleanValue();
 		}
 		catch (Exception e)
@@ -92,7 +92,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.get(item, heading, value);
+			Property prop = config.get(heading, item, value);
 			prop.comment = comment;
 			return new Boolean(prop.value).booleanValue();
 		}
@@ -110,7 +110,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.get(item, heading, value);
+			Property prop = config.get(heading, item, value);
 			return new Integer(prop.value).intValue();
 		}
 		catch (Exception e)
@@ -127,7 +127,7 @@ public class TFC_Settings
 		}
 		try
 		{
-			Property prop = config.get(item, heading, value);
+			Property prop = config.get(heading, item, value);
 			prop.comment = comment;
 			return new Integer(prop.value).intValue();
 		}
