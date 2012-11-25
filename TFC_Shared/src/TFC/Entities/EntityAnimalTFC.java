@@ -486,6 +486,9 @@ public class EntityAnimalTFC extends EntityAnimal
 			}
 			else{
 				par1EntityPlayer.addChatMessage("Female");
+				if(pregnant){
+					par1EntityPlayer.addChatMessage("Pregnant");
+				}
 			}
 		}
 		return super.interact(par1EntityPlayer);
