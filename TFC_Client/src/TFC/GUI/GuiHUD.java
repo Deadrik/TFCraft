@@ -404,25 +404,6 @@ public class GuiHUD extends GuiIngame
 			this.mc.mcProfiler.endSection();
 		}
 
-		if (this.mc.isDemo())
-		{
-			this.mc.mcProfiler.startSection("demo");
-			String var36 = "";
-
-			if (this.mc.theWorld.getWorldTime() >= 120500L)
-			{
-				var36 = StatCollector.translateToLocal("demo.demoExpired");
-			}
-			else
-			{
-				var36 = String.format(StatCollector.translateToLocal("demo.remainingTime"), new Object[] {StringUtils.ticksToElapsedTime((int)(120500L - this.mc.theWorld.getWorldTime()))});
-			}
-
-			var12 = fontRenderer.getStringWidth(var36);
-			fontRenderer.drawStringWithShadow(var36, scaledWidth - var12 - 10, 5, 16777215);
-			this.mc.mcProfiler.endSection();
-		}
-
 		if (this.mc.gameSettings.showDebugInfo)
 		{
 			this.mc.mcProfiler.startSection("debug");
@@ -440,9 +421,14 @@ public class GuiHUD extends GuiIngame
 			this.drawString(fontRenderer, var45, scaledWidth - fontRenderer.getStringWidth(var45) - 2, 2, 14737632);
 			var45 = "Allocated memory: " + var34 * 100L / var41 + "% (" + var34 / 1024L / 1024L + "MB)";
 			this.drawString(fontRenderer, var45, scaledWidth - fontRenderer.getStringWidth(var45) - 2, 12, 14737632);
-			this.drawString(fontRenderer, String.format("x: %.5f", new Object[] {Double.valueOf(this.mc.thePlayer.posX)}), 2, 64, 14737632);
-			this.drawString(fontRenderer, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {Double.valueOf(this.mc.thePlayer.boundingBox.minY), Double.valueOf(this.mc.thePlayer.posY)}), 2, 72, 14737632);
-			this.drawString(fontRenderer, String.format("z: %.5f", new Object[] {Double.valueOf(this.mc.thePlayer.posZ)}), 2, 80, 14737632);
+			
+			int xCoord = MathHelper.floor_double(this.mc.thePlayer.posX);
+			int yCoord = MathHelper.floor_double(this.mc.thePlayer.posY);
+			int zCoord = MathHelper.floor_double(this.mc.thePlayer.posZ);
+			
+			this.drawString(fontRenderer, String.format("x: %.5f (%d) // c: %d (%d)", new Object[] {Double.valueOf(this.mc.thePlayer.posX), Integer.valueOf(xCoord), Integer.valueOf(xCoord >> 4), Integer.valueOf(xCoord & 15)}), 2, 64, 14737632);
+            this.drawString(fontRenderer, String.format("y: %.3f (feet pos, %.3f eyes pos)", new Object[] {Double.valueOf(this.mc.thePlayer.boundingBox.minY), Double.valueOf(this.mc.thePlayer.posY)}), 2, 72, 14737632);
+            this.drawString(fontRenderer, String.format("z: %.5f (%d) // c: %d (%d)", new Object[] {Double.valueOf(this.mc.thePlayer.posZ), Integer.valueOf(zCoord), Integer.valueOf(zCoord >> 4), Integer.valueOf(zCoord & 15)}), 2, 80, 14737632);
 			this.drawString(fontRenderer, "f: " + (MathHelper.floor_double((double)(this.mc.thePlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3), 2, 88, 14737632);
 			healthRowHeight = MathHelper.floor_double(this.mc.thePlayer.posX);
 			armorRowHeight = MathHelper.floor_double(this.mc.thePlayer.posY);
@@ -456,14 +442,12 @@ public class GuiHUD extends GuiIngame
 
 			this.drawString(fontRenderer, String.format("ws: %.3f, fs: %.3f, g: %b", new Object[] {Float.valueOf(this.mc.thePlayer.capabilities.getWalkSpeed()), Float.valueOf(this.mc.thePlayer.capabilities.getFlySpeed()), Boolean.valueOf(this.mc.thePlayer.onGround)}), 2, 104, 14737632);
 			
-			int xCoord = (int)(mc.thePlayer.posX);
-			int yCoord = (int)(mc.thePlayer.posY);
-			int zCoord = (int)(mc.thePlayer.posZ);
-			
+			//Render climate data
 			this.drawString(fontRenderer, String.format("rain: %.0f, temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}), 2, 120, 14737632);
+			
 			GL11.glPopMatrix();
 			this.mc.mcProfiler.endSection();
 		}
