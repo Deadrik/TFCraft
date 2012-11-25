@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityBlaze;
 import net.minecraft.src.World;
@@ -25,6 +26,6 @@ public class EntityBlazeTFC extends EntityBlaze
     @Override
     public int getAttackStrength(Entity par1Entity)
     {
-        return 60;
+        return TFC_MobDamage.BlazeDamage;
     }
 }

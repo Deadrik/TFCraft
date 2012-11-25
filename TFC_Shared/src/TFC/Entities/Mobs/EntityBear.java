@@ -3,6 +3,7 @@ package TFC.Entities.Mobs;
 import java.util.Random;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Entities.EntityAnimalTFC;
@@ -322,8 +323,8 @@ public class EntityBear extends EntityTameableTFC
 	@Override
 	public boolean attackEntityAsMob (Entity par1Entity)
 	{
-		byte byte0 = (byte) 250;
-		return par1Entity.attackEntityFrom (DamageSource.causeMobDamage (this), byte0);
+		int dam =  TFC_MobDamage.BearDamage;
+		return par1Entity.attackEntityFrom (DamageSource.causeMobDamage (this), dam);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntitySlime;
@@ -86,6 +87,6 @@ public class EntitySlimeTFC extends EntitySlime
     @Override
     protected int getAttackStrength()
     {
-        return this.getSlimeSize()*100;
+        return this.getSlimeSize() * TFC_MobDamage.SlimeDamage;
     }
 }

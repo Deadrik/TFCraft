@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntitySilverfish;
@@ -36,7 +37,7 @@ public class EntitySilverfishTFC extends EntitySilverfish
     @Override
     public int getAttackStrength(Entity par1Entity)
     {
-        return 50;
+        return TFC_MobDamage.SilverfishDamage;
     }
 
     /**

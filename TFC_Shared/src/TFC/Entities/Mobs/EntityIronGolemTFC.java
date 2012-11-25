@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityIronGolem;
@@ -56,7 +57,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
     {
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
-        boolean var2 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), 450 + this.rand.nextInt(150));
+        boolean var2 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), TFC_MobDamage.IronGolemDamage + this.rand.nextInt(150));
 
         if (var2)
         {

@@ -441,7 +441,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	public int getDamageMod(){
 		int i = rand.nextInt((int)(size_mod*10));
 		if (i >= 5){
-			return 1;
+			return 10;
 		}
 		return 0;
 	}

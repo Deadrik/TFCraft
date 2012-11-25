@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityEnderman;
 import net.minecraft.src.World;
@@ -25,7 +26,7 @@ public class EntityEndermanTFC extends EntityEnderman
     @Override
     public int getAttackStrength(Entity par1Entity)
     {
-        return 350;
+        return TFC_MobDamage.EndermanDamage;
     }
 
 }

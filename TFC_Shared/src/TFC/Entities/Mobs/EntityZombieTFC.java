@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class EntityZombieTFC extends EntityZombie
     public int getAttackStrength(Entity par1Entity)
     {
         ItemStack var2 = this.getHeldItem();
-        int var3 = 100;
+        int var3 = TFC_MobDamage.ZombieDamage;
 
         if (var2 != null)
         {
@@ -53,6 +54,7 @@ public class EntityZombieTFC extends EntityZombie
 
         return var3;
     }
+    
     @Override
     protected void dropRareDrop(int par1)
     {

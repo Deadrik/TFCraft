@@ -15,6 +15,6 @@ public class EntityGhastTFC extends EntityGhast
     @Override
     public int getMaxHealth()
     {
-        return 10;
+        return 1000;
     }
 }

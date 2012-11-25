@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntitySpider;
 import net.minecraft.src.World;
@@ -17,7 +18,7 @@ public class EntityCaveSpiderTFC extends EntitySpider
     @Override
     public int getAttackStrength(Entity par1Entity)
     {
-        return 100;
+        return TFC_MobDamage.CaveSpiderDamage;
     }
     @Override
     public int getMaxHealth()

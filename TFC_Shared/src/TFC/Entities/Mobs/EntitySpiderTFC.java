@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntitySpider;
 import net.minecraft.src.World;
@@ -17,14 +18,18 @@ public class EntitySpiderTFC extends EntitySpider
         this.moveSpeed = 0.8F;
     }
 
+    @Override
     public int getMaxHealth()
     {
         return 800;
     }
     
-    public int func_82193_c(Entity par1Entity)
+    /**
+     * Returns the amount of damage a mob should deal.
+     */
+    public int getAttackStrength(Entity par1Entity)
     {
-        return 100;
+        return TFC_MobDamage.SpiderDamage;
     }
 
 }

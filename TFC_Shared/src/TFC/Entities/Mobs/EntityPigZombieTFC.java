@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import java.util.Iterator;
@@ -113,7 +114,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
     public int getAttackStrength(Entity par1Entity)
     {
         ItemStack var2 = this.getHeldItem();
-        int var3 = 250;
+        int var3 = TFC_MobDamage.PigZombieDamage;
 
         if (var2 != null)
         {

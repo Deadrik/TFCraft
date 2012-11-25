@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import TFC.*;
+import TFC.Core.TFC_MobDamage;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Entities.EntityAnimalTFC;
@@ -442,7 +443,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		int var2 = 3 + getDamageMod();
+		int var2 = TFC_MobDamage.WolfDamage + getDamageMod();
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 
