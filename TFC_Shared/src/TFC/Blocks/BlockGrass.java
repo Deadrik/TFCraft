@@ -11,6 +11,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityPartial;
+import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.Generators.WorldGenGrowTrees;
 
 import net.minecraft.src.Block;
@@ -170,6 +171,7 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
                 
                 float rain = TFC_Climate.getRainfall(i, j + 1, k);
                 int id = world.getBlockId(i, j, k);
+                
                 if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
                 		world.getBlockMaterial(i, j + 1, k) != Material.water && world.getBlockId(i, j + 1, k) == 0)
                 {
@@ -181,6 +183,34 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
                 	{
                 		new WorldGenGrowTrees().generate(world, rand, i, j, k);
                 	}
+                }
+                
+                boolean nearWater = false;
+                
+                for(int y = 0; y < 2 && !nearWater; y++)
+                {
+                	for(int x = -4; x < 5 && !nearWater; x++)
+                    {
+                		for(int z = -4; z < 5 && !nearWater; z++)
+                        {
+                        	if(world.getBlockMaterial(i+x, j-y, k+z) == Material.water)
+                        	{
+                        		nearWater = true;
+                        	}
+                        }
+                    }
+                }
+                
+                int[] rock1 = TFC_Climate.getRockLayer(i, j, k, 0);
+                if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
+                {
+                	int meta = TFC_Core.getSoilMetaFromStone(rock1[0], rock1[1]);
+                	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta);
+                }
+                else if(TFC_Core.isGrass(id) && TFC_Core.isDryGrass(id) && nearWater)
+                {
+                	int meta = TFC_Core.getSoilMetaFromStone(rock1[0], rock1[1]);
+                	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta);
                 }
             }
             world.markBlockForUpdate(i, j, k);
