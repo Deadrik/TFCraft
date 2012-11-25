@@ -229,7 +229,7 @@ public class TFCProvider extends WorldProvider
 				}
 			}
 
-			worldObj.getWorldInfo().setSpawnPosition(var6, var7, var8);
+			worldObj.getWorldInfo().setSpawnPosition(var6, worldObj.getHeightValue(var6, var8), var8);
 		}
 	}
 	
