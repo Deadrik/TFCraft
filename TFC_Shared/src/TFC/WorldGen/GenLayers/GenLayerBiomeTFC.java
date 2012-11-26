@@ -1,6 +1,7 @@
 package TFC.WorldGen.GenLayers;
 
 import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldType;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
@@ -18,7 +19,7 @@ public class GenLayerBiomeTFC extends GenLayerTFC
 	public GenLayerBiomeTFC(long par1, GenLayer par3GenLayer, WorldType par4WorldType)
 	{
 		super(par1);
-		this.allowedBiomes = biomeArray;
+		this.allowedBiomes = ((TFCWorldType)par4WorldType).overworldBiomeArray;
 		this.parent = (GenLayerTFC) par3GenLayer;
 	}
 

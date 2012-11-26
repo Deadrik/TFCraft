@@ -52,6 +52,7 @@ import TFC.Handlers.*;
 import TFC.Items.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCProvider;
+import TFC.WorldGen.TFCProviderCOTE;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.*;
 
@@ -114,6 +115,7 @@ public class TerraFirmaCraft
 
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
+		DimensionManager.registerProviderType(-2, TFCProviderCOTE.class, true);
 	}
 
 	@Init

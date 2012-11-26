@@ -16,6 +16,7 @@ import TFC.Core.WeatherManager;
 import TFC.Entities.*;
 import TFC.Entities.Mobs.*;
 import TFC.WorldGen.Biomes.BiomeGenBeachTFC;
+import TFC.WorldGen.Biomes.BiomeGenCOTE;
 import TFC.WorldGen.Biomes.BiomeGenDesertTFC;
 import TFC.WorldGen.Biomes.BiomeGenForestTFC;
 import TFC.WorldGen.Biomes.BiomeGenHillsEdgeTFC;
@@ -107,6 +108,11 @@ public class TFCBiome extends BiomeGenBase
     public static final TFCBiome rollingHills = (new TFCBiome(30)).setColor(PlainsColor).setBiomeName("Rolling Hills").setMinMaxHeight(0.1F, 0.4F);
     public static final TFCBiome Mountains = (new TFCBiome(31)).setColor(HillsColor).setBiomeName("Mountains").setMinMaxHeight(0.8F, 1.6F);
     public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
+    
+    
+    public static final TFCBiome COTEOpen = (new BiomeGenCOTE(50)).setColor(HillsColor).setBiomeName("COTE Open").setMinMaxHeight(0.1F, 0.3F);
+    public static final TFCBiome COTEMountain = (new BiomeGenCOTE(51)).setColor(HillsColor).setBiomeName("COTE Mountain").setMinMaxHeight(0.3F, 1.0F);
+    
     
     protected static WorldGenCustomTallTrees worldGenAshTallTrees;
     protected static WorldGenCustomTallTrees worldGenAspenTallTrees;
