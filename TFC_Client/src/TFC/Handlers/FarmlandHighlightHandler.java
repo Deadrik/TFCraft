@@ -28,7 +28,8 @@ public class FarmlandHighlightHandler{
 		{
 			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
-			if(id == Block.crops.blockID)
+			if(id == Block.crops.blockID && (world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil.blockID ||
+					world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2.blockID))
 			{
 				id = TFCBlocks.tilledSoil.blockID;
 				crop = 1;
