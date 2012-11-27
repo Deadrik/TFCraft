@@ -31,38 +31,38 @@ public class ItemChisel extends ItemTerraTool
 		return "/bioxx/terratools.png";
 	}
 
-	public boolean onBlockDestroyed(ItemStack par1ItemStack, int par2, int par3, int par4, int par5, EntityLiving par6EntityLiving)
-	{
-		par1ItemStack.damageItem(1, par6EntityLiving);
-		return true;
-	}
+//	public boolean onBlockDestroyed(ItemStack par1ItemStack, int par2, int par3, int par4, int par5, EntityLiving par6EntityLiving)
+//	{
+//		par1ItemStack.damageItem(1, par6EntityLiving);
+//		return true;
+//	}
 
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.VERYSMALL;
 	}
 
-	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
-	{
-		if(!player.worldObj.isRemote)      
-		{
-			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
-			if(objectMouseOver == null) {
-				return false;
-			}		
-
-			int id = player.worldObj.getBlockId(x, y, z);
-			int meta = player.worldObj.getBlockMetadata(x, y, z);
-
-			itemstack.setItemDamage(itemstack.getItemDamage()+1);
-			if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
-				itemstack.stackSize = 0;
-
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
+//	{
+//		if(!player.worldObj.isRemote)      
+//		{
+//			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
+//			if(objectMouseOver == null) {
+//				return false;
+//			}		
+//
+//			int id = player.worldObj.getBlockId(x, y, z);
+//			int meta = player.worldObj.getBlockMetadata(x, y, z);
+//
+//			itemstack.setItemDamage(itemstack.getItemDamage()+1);
+//			if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
+//				itemstack.stackSize = 0;
+//
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public static void CreateStairs(World world, int x, int y, int z, int id, byte meta, byte m)
 	{

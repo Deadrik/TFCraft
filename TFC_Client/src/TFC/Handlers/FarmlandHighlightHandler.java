@@ -7,7 +7,10 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Food.CropIndex;
+import TFC.Food.CropManager;
 import TFC.Items.ItemCustomHoe;
+import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
@@ -24,7 +27,21 @@ public class FarmlandHighlightHandler{
 	public void DrawBlockHighlightEvent(DrawBlockHighlightEvent evt) 
 	{
 		World world = evt.player.worldObj;		
-		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe)
+		double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
+		double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
+		double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
+		
+		boolean isMetalHoe = false;
+		
+		if(evt.currentItem != null && evt.currentItem.getItem().shiftedIndex != TFCItems.IgInHoe.shiftedIndex &&
+				evt.currentItem.getItem().shiftedIndex != TFCItems.IgExHoe.shiftedIndex &&
+				evt.currentItem.getItem().shiftedIndex != TFCItems.SedHoe.shiftedIndex &&
+				evt.currentItem.getItem().shiftedIndex != TFCItems.MMHoe.shiftedIndex)
+		{
+			isMetalHoe = true;
+		}
+		
+		if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && isMetalHoe && PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 1)
 		{
 			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			int crop = 0;
@@ -34,13 +51,9 @@ public class FarmlandHighlightHandler{
 				id = TFCBlocks.tilledSoil.blockID;
 				crop = 1;
 			}
-
+			
 			if(id == TFCBlocks.tilledSoil.blockID || id == TFCBlocks.tilledSoil2.blockID)
 			{
-				double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
-				double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
-				double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
-
 				TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY - crop, evt.target.blockZ);
 				te.requestNutrientData();
 
@@ -59,7 +72,7 @@ public class FarmlandHighlightHandler{
 				double offset = 0;
 				double nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
 
-				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -71,7 +84,7 @@ public class FarmlandHighlightHandler{
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
 				GL11.glColor4ub((byte)242, (byte)101, (byte)34, (byte)200);
-				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -83,7 +96,7 @@ public class FarmlandHighlightHandler{
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
 				GL11.glColor4ub((byte)247, (byte)148, (byte)29, (byte)200);
-				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -137,9 +150,95 @@ public class FarmlandHighlightHandler{
 						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 			}
 		}
+		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
+				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 2)
+		{
+			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+			int crop = 0;
+			if(id == Block.crops.blockID && (world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil.blockID ||
+					world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2.blockID))
+			{
+				id = TFCBlocks.tilledSoil.blockID;
+				crop = 1;
+			}
+
+			if(id == TFCBlocks.tilledSoil.blockID || id == TFCBlocks.tilledSoil2.blockID)
+			{				
+				boolean water = TFC.Blocks.BlockFarmland.isWaterNearby(world, evt.target.blockX, evt.target.blockY-crop, evt.target.blockZ);
+				
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				if(water)
+					GL11.glColor4ub((byte)14, (byte)23, (byte)212, (byte)200);
+				else
+					GL11.glColor4ub((byte)0, (byte)0, (byte)0, (byte)200);
+				GL11.glDisable(GL11.GL_CULL_FACE);
+				//GL11.glLineWidth(6.0F);
+				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				GL11.glDepthMask(false);
+				
+				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+						evt.target.blockX,
+						evt.target.blockY + 1.01 - crop,
+						evt.target.blockZ,
+						evt.target.blockX+1,
+						evt.target.blockY + 1.02 - crop, 
+						evt.target.blockZ+1
+						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+
+				GL11.glEnable(GL11.GL_CULL_FACE);
+			}
+		}
+		else if(evt.currentItem != null && evt.currentItem.getItem() instanceof ItemCustomHoe && 
+				PlayerManagerTFC.getInstance().getClientPlayer().hoeMode == 3)
+		{
+			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+			if(id == Block.crops.blockID && (world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil.blockID ||
+					world.getBlockId(evt.target.blockX,evt.target.blockY-1,evt.target.blockZ) == TFCBlocks.tilledSoil2.blockID))
+			{
+				TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(evt.target.blockX, evt.target.blockY, evt.target.blockZ);
+				CropIndex index = CropManager.getInstance().getCropFromId(te.cropId);
+				boolean fullyGrown = te.growth >= index.numGrowthStages;
+				
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				if(fullyGrown)
+					GL11.glColor4ub((byte)64, (byte)200, (byte)37, (byte)200);
+				else
+					GL11.glColor4ub((byte)200, (byte)37, (byte)37, (byte)200);
+				GL11.glDisable(GL11.GL_CULL_FACE);
+				//GL11.glLineWidth(6.0F);
+				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				GL11.glDepthMask(false);
+				
+				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+						evt.target.blockX,
+						evt.target.blockY + 0.01,
+						evt.target.blockZ,
+						evt.target.blockX+1,
+						evt.target.blockY + 0.02, 
+						evt.target.blockZ+1
+						).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+
+				GL11.glEnable(GL11.GL_CULL_FACE);
+			}
+		}
 	}
 
 	void drawFace(AxisAlignedBB par1AxisAlignedBB)
+	{
+		Tessellator var2 = Tessellator.instance;
+
+		//Top
+		var2.startDrawing(GL11.GL_QUADS);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.draw();
+	}
+	
+	void drawBox(AxisAlignedBB par1AxisAlignedBB)
 	{
 		Tessellator var2 = Tessellator.instance;
 

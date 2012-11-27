@@ -10,6 +10,8 @@ import org.lwjgl.opengl.GL12;
 import TFC.*;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
+import TFC.Items.*;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Food.FoodStatsTFC;
@@ -182,6 +184,21 @@ public class GuiHUD extends GuiIngame
 				
 				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight+5, 0, 28, 90, 5);
 				this.drawTexturedModalRect(scaledWidth / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
+				
+				//Render Tool Mode
+				//this.drawTexturedModalRect(scaledWidth / 2 + 95, scaledHeight - 21, 0, 38, 20, 20);
+				if(mc.thePlayer.inventory.getCurrentItem() != null && 
+						mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
+				{
+					int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
+					this.drawTexturedModalRect(scaledWidth / 2 + 95, scaledHeight - 21, 0+(20*mode), 38, 20, 20);
+				}
+				else if(mc.thePlayer.inventory.getCurrentItem() != null && 
+						mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
+				{
+					int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
+					this.drawTexturedModalRect(scaledWidth / 2 + 95, scaledHeight - 21, 0+(20*mode), 58, 20, 20);
+				}
 			}
 
 

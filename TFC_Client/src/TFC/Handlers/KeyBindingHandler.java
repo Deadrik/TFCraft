@@ -7,7 +7,7 @@ import TFC.Core.KeyBindings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.GUI.GuiCalendar;
-import TFC.Items.ItemChisel;
+import TFC.Items.*;
 
 import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.KeyBinding;
@@ -37,7 +37,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 	@Override
 	public void keyDown(EnumSet<TickType> types, KeyBinding bind,
 			boolean tickEnd, boolean isRepeat) {
-		
+
 
 	}
 
@@ -55,16 +55,22 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 				player.closeScreen();
 			}
 			else if (bind.keyDescription == Key_ToolMode.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
-					&& player.getCurrentEquippedItem().getItem() instanceof ItemChisel && FMLClientHandler.instance().getClient().currentScreen == null)
+					 && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
 				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-				pi.switchChiselMode();
-				String type = pi.ChiselMode == 0 ? "Smoothing" : pi.ChiselMode == 1 ? "Creating Stairs" : pi.ChiselMode == 3 ? "Detailing" : pi.ChiselMode == 4 ? "Finishing" :"Creating Slabs";
-				player.addChatMessage(type);
-
-				if(player.worldObj.isRemote)
+				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
 				{
+					pi.switchChiselMode();
+					//String type = pi.ChiselMode == 0 ? "Smoothing" : pi.ChiselMode == 1 ? "Creating Stairs" : pi.ChiselMode == 3 ? "Detailing" : pi.ChiselMode == 4 ? "Finishing" :"Creating Slabs";
+					//player.addChatMessage(type);
+
 					PacketHandler.sendKeyPress(0);
+				}
+				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
+				{
+					pi.switchHoeMode();
+
+					//PacketHandler.sendKeyPress(3);
 				}
 			}
 			else if (bind.keyDescription == Key_ChiselDepthIncrease.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 

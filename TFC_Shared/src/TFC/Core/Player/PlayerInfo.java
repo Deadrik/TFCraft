@@ -10,6 +10,7 @@ public class PlayerInfo
 {
 	public String Name;
 	public int ChiselMode;
+	public int hoeMode;
 	public int ChiselDetailZoom;
 	public ItemStack knappingRockType;
 	public INetworkManager networkManager;
@@ -23,6 +24,17 @@ public class PlayerInfo
 		knappingRockType = null;
 		networkManager = nm;
 		lastChange = 0;
+		hoeMode = 0;
+	}
+	
+	public void switchHoeMode()
+	{
+		if(lastChange+3 < TFC_Time.getTotalTicks())
+		{
+			hoeMode = hoeMode == 3 ? 0 : 
+				++hoeMode;
+			lastChange = TFC_Time.getTotalTicks();
+		}
 	}
 
 	public void switchChiselMode()
