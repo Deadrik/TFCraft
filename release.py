@@ -59,7 +59,7 @@ def main():
     zip_folder(client_dir, '', zip)
     zip_add('TFCraft_credits.txt')
     zip_add('license.txt')
-    zip_folder('TFC Resources', '', zip)
+    zip_folder(os.path.join(forge_dir, 'TFC Resources'), '', zip)
     zip_end()
     
     zip_start('TFCraft-src.zip')

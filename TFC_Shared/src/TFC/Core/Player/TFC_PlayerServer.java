@@ -138,10 +138,10 @@ public class TFC_PlayerServer extends ServerPlayerBase
 			if(spawnProtectionTimer == -1)
 				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
 			
-			if (this.player.worldObj.difficultySetting == 0 && shouldHeal() && this.player.ticksExisted % 20 * 12 == 0)
-	        {
-	            this.heal((int) ((float)getMaxHealth()*0.01f));
-	        }
+//			if (this.player.worldObj.difficultySetting == 0 && shouldHeal() && this.player.ticksExisted % 20 * 12 == 0)
+//	        {
+//	            this.heal((int) ((float)getMaxHealth()*0.01f));
+//	        }
 			
 			if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 			{

@@ -31,6 +31,10 @@ public class TFC_Settings
 	//////////////////Features////////////////////
 	public static int RockLayer2Height = 110;
 	public static int RockLayer3Height = 55;
+	
+	public static byte[] cropNutrientAColor = {(byte) 237, (byte) 28, (byte) 36, (byte) 200};
+	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
+	public static byte[] cropNutrientCColor = {(byte) 247, (byte) 148, (byte) 49, (byte) 200};
 
 	static
 	{
@@ -61,6 +65,22 @@ public class TFC_Settings
 		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",35, "This number is the likelyhood for each block to propogate the collapse farther.");
 
+		cropNutrientAColor[0] = getByteFor(config,"ColorNutrientA","Red", (byte) 237);
+		cropNutrientAColor[1] = getByteFor(config,"ColorNutrientA","Green", (byte) 28);
+		cropNutrientAColor[2] = getByteFor(config,"ColorNutrientA","Blue", (byte) 36);
+		cropNutrientAColor[3] = getByteFor(config,"ColorNutrientA","Alpha", (byte) 200);
+		
+		cropNutrientBColor[0] = getByteFor(config,"ColorNutrientB","Red", (byte) 242);
+		cropNutrientBColor[1] = getByteFor(config,"ColorNutrientB","Green", (byte) 101);
+		cropNutrientBColor[2] = getByteFor(config,"ColorNutrientB","Blue", (byte) 34);
+		cropNutrientBColor[3] = getByteFor(config,"ColorNutrientB","Alpha", (byte) 200);
+		
+		cropNutrientCColor[0] = getByteFor(config,"ColorNutrientC","Red", (byte) 247);
+		cropNutrientCColor[1] = getByteFor(config,"ColorNutrientC","Green", (byte) 148);
+		cropNutrientCColor[2] = getByteFor(config,"ColorNutrientC","Blue", (byte) 49);
+		cropNutrientCColor[3] = getByteFor(config,"ColorNutrientC","Alpha", (byte) 200);
+		
+		
 		/**Always end with this*/
 		if (config != null) {
 			config.save();
@@ -134,6 +154,23 @@ public class TFC_Settings
 		catch (Exception e)
 		{
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
+		}return value;
+	}
+	
+	public static byte getByteFor(Configuration config, String heading, String item, byte value)
+	{
+		if (config == null)
+		{
+			return value;
+		}
+		try
+		{
+			Property prop = config.get(heading, item, value);
+			return new Byte(prop.value).byteValue();
+		}
+		catch (Exception e)
+		{
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Byte, config wasn't loaded properly!").toString());
 		}return value;
 	}
 }

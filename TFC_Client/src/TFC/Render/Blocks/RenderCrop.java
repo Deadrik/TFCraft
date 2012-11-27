@@ -1,5 +1,7 @@
 package TFC.Render.Blocks;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.IBlockAccess;
@@ -163,7 +165,11 @@ public class RenderCrop
 	private static void renderBlockCropsImpl(Block par1Block, double par3, double par5, double par7, RenderBlocks renderblocks, byte index, float heightMult, double height)
     {
         Tessellator var9 = Tessellator.instance;
-
+        GL11.glColor3f(1, 1, 1);
+        int brightness = par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, (int)par3, (int)par5, (int)par7);
+        var9.setBrightness(brightness);
+        var9.setColorRGBA_F(1, 1, 1, 1);
+        
         int texX = (index & 15) << 4;
         int texY = (index+(16-(int)(16*height))) & 240;
         
@@ -221,6 +227,8 @@ public class RenderCrop
         Tessellator var9 = Tessellator.instance;
 
         var9.setColorOpaque_F(1.0f, 1.0f, 1.0f);
+        GL11.glColor3f(1, 1, 1);
+        
         int texX = (index & 15) << 4;
         int texY = index & 240;
         int texY2 = (index+(16-(int)(16*height))) & 240;

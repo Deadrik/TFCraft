@@ -38,6 +38,7 @@ public class RenderToolRack
 				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
 				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
+				tessellator.setColorRGBA_F(1, 1, 1, 1);
 				if(te.storage[0] != null)
 				{
 					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
@@ -131,6 +132,8 @@ public class RenderToolRack
 				
 				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
+				tessellator.setColorRGBA_F(1, 1, 1, 1);
 				if(te.storage[0] != null)
 				{
 					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
@@ -224,6 +227,8 @@ public class RenderToolRack
 
 				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
+				tessellator.setColorRGBA_F(1, 1, 1, 1);
 				if(te.storage[0] != null)
 				{
 					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
@@ -320,6 +325,8 @@ public class RenderToolRack
 				
 				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
+				tessellator.setColorRGBA_F(1, 1, 1, 1);
 				if(te.storage[0] != null)
 				{
 					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);

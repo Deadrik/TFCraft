@@ -64,7 +64,7 @@ public class FoodStatsTFC extends FoodStats
 				{
 					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
 				}
-				else if (difficulty > 0)
+				else if (!player.capabilities.isCreativeMode)
 				{
 					this.foodLevel = Math.max(this.foodLevel - 2, 0);
 				}
@@ -77,7 +77,7 @@ public class FoodStatsTFC extends FoodStats
 				{
 					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
 				}
-				else if (difficulty > 0)
+				else if (!player.capabilities.isCreativeMode)
 				{
 					this.foodLevel = Math.max(this.foodLevel - 1, 0);
 				}
@@ -95,14 +95,14 @@ public class FoodStatsTFC extends FoodStats
 					{
 						this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 4.0F, 0.0F);
 					}
-					else if (difficulty > 0)
+					else if (!player.capabilities.isCreativeMode)
 					{
 						this.foodLevel = Math.max(this.foodLevel - 1, 0);
 					}
 				}
 				else if (this.foodLevel <= 0)
 				{
-					if (difficulty > 1 || (difficulty == 1 && player.getHealth() > 50))
+					if (difficulty > 1 || (player.getHealth() > 50))
 					{
 						player.attackEntityFrom(DamageSource.starve, 50);
 					}

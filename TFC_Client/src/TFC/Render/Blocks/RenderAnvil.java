@@ -10,6 +10,7 @@ import net.minecraftforge.client.ForgeHooksClient;
 import TFC.Blocks.BlockAnvil;
 import TFC.Core.AnvilReq;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.WorldGen.DataLayer;
 
@@ -68,7 +69,7 @@ public class RenderAnvil {
 		{
 			if(Block.blocksList[te.stonePair[0]] != null)
 			{
-				ForgeHooksClient.bindTexture("/bioxx/terraRock.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terraRock.png"));
+				ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
 				renderblocks.overrideBlockTexture = Block.blocksList[te.stonePair[0]].getBlockTextureFromSideAndMetadata(0, te.stonePair[1]);
 				renderblocks.setRenderMinMax(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
@@ -80,6 +81,7 @@ public class RenderAnvil {
 					//					renderblocks.renderStandardBlock(block, i, j, k);
 					Tessellator tessellator = Tessellator.instance;
 					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
+					tessellator.setColorRGBA_F(1, 1, 1, 1);
 
 					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
 			        int z = renderblocks.overrideBlockTexture & 0xf0;

@@ -15,6 +15,7 @@ public class BlockCustomDoor extends BlockTerra
     {
         super(par1, par2Material);
         this.blockIndexInTexture = 16+woodId;
+        this.setHardness(3);
 
         float var3 = 0.5F;
         float var4 = 1.0F;

@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.*;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -63,7 +64,7 @@ public class FarmlandHighlightHandler{
 				//Setup GL for the depthbox
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4ub((byte)237, (byte)28, (byte)36, (byte)200);
+				GL11.glColor4ub(TFC_Settings.cropNutrientAColor[0], TFC_Settings.cropNutrientAColor[1], TFC_Settings.cropNutrientAColor[2], TFC_Settings.cropNutrientAColor[3]);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				//GL11.glLineWidth(6.0F);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -83,7 +84,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
-				GL11.glColor4ub((byte)242, (byte)101, (byte)34, (byte)200);
+				GL11.glColor4ub(TFC_Settings.cropNutrientBColor[0], TFC_Settings.cropNutrientBColor[1], TFC_Settings.cropNutrientBColor[2], TFC_Settings.cropNutrientBColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
@@ -95,7 +96,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
-				GL11.glColor4ub((byte)247, (byte)148, (byte)29, (byte)200);
+				GL11.glColor4ub(TFC_Settings.cropNutrientCColor[0], TFC_Settings.cropNutrientCColor[1], TFC_Settings.cropNutrientCColor[2], TFC_Settings.cropNutrientCColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,

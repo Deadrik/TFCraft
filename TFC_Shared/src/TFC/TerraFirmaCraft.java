@@ -61,7 +61,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 67")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 68")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
