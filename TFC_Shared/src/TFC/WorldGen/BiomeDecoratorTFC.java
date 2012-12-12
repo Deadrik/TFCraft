@@ -3,6 +3,7 @@ package TFC.WorldGen;
 import java.util.Random;
 
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Enums.EnumTree;
 import TFC.WorldGen.Generators.*;
 
@@ -78,6 +79,21 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int xCoord;
 		int yCoord;
 		int zCoord;
+		
+		for (var2 = 0; var2 < 1; ++var2)
+		{
+			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord)-1;
+			
+			int x1 = 2+randomGenerator.nextInt(6);
+			int x2 = 2+randomGenerator.nextInt(6);
+			int z1 = 2+randomGenerator.nextInt(6);
+			int z2 = 2+randomGenerator.nextInt(6);
+			
+			if(randomGenerator.nextInt(13) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord)))
+				new WorldGenLargeRock(x1,x2,z1,z2, 3).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+		}
 
 		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
 
@@ -118,6 +134,8 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			if(temperature < 18 && Rainfall.floatdata1 < 250)
 				new WorldGenDeadBush(Block.deadBush.blockID).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
+		
+		
 
 		for (var2 = 0; var2 < this.waterlilyPerChunk; ++var2)
 		{

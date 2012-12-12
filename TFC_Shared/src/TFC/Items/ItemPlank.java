@@ -131,7 +131,8 @@ public class ItemPlank extends ItemTerra
 
 				te.broadcastPacketInRange(te.createUpdatePacket((y+(z*d)), (byte) is.getItemDamage()));
 			}
-
+			is.stackSize--;
+			return true;
 		}
 		//world.markBlockForRenderUpdate(i, j, k);
 		return false;

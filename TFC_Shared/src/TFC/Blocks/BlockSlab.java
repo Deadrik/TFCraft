@@ -41,7 +41,7 @@ public class BlockSlab extends BlockPartial
 	public boolean isLadder(World world, int x, int y, int z) 
 	{
 		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
-		if(10 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
+		if(8 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
 			return true;
 
 		return false;

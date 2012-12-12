@@ -474,7 +474,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				DataLayer evt = evtLayer[arrayIndexDL];
 				DataLayer rainfall = rainfallLayer[arrayIndexDL];
 
-				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);  
+				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
 				
 				int surfaceBlock = TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2), rainfall.floatdata1);
@@ -531,10 +531,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						if (var13 == -1)
 						{
-							if (var12 <= 0)
-							{
-								surfaceBlock = 0;
-							}
+//							if (var12 <= 0)
+//							{
+//								surfaceBlock = 0;
+//							}
 
 							var13 = var12;
 							
@@ -556,11 +556,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							blockArrayBig[indexBig] = (byte) subSurfaceBlock;
 							metaArrayBig[indexBig] = (byte) soilMeta;
 
-							if (var13 == 0 && subSurfaceBlock == TFC_Core.getTypeForSand(soilMeta))
-							{
-								var13 = rand.nextInt(4);
-								subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
-							}
+//							if (var13 == 0 && subSurfaceBlock == TFC_Core.getTypeForSand(soilMeta))
+//							{
+//								var13 = rand.nextInt(4);
+//								subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+//							}
 						}
 
 						if(biomegenbase.biomeID == 0)
