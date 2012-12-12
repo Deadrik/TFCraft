@@ -23,7 +23,7 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldChunkManager;
 import net.minecraft.src.WorldType;
 
-public class TFCWorldChunkManager extends WorldChunkManager 
+public class TFCWorldChunkManager extends net.minecraft.src.WorldChunkManager 
 {
 	private GenLayerTFC genBiomes;
 
@@ -55,7 +55,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	private GenLayerTFC rainfallIndexLayer;
 	private DataCache rainfallCache;
 
-	protected TFCWorldChunkManager()
+	public TFCWorldChunkManager()
 	{
 		super();
 		this.biomeCache = new BiomeCache(this);

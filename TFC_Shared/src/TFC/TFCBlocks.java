@@ -5,6 +5,7 @@ import java.io.File;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.BlockCactus;
 import net.minecraft.src.BlockFlower;
 import net.minecraft.src.BlockGrass;
 import net.minecraft.src.BlockTallGrass;
@@ -48,6 +49,7 @@ public class TFCBlocks
 	public static int quernRenderId;
 	public static int fluidRenderId;
 	public static int nestboxRenderId;
+	public static int woodConstructRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -111,7 +113,7 @@ public class TFCBlocks
 	public static Block DryGrass2;
 	public static Block Charcoal;
 	public static Block StoneDetailed;
-	public static Block WIP;
+	public static Block WoodConstruct;
 	public static Block WoodVert;
 	public static Block WoodHoriz;
 	public static Block WoodHoriz2;
@@ -230,7 +232,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(stoneSlabs);
 		GameRegistry.registerBlock(stoneStalac);
 		
-		GameRegistry.registerBlock(WIP);
+		GameRegistry.registerBlock(WoodConstruct);
 		GameRegistry.registerBlock(WoodVert);
 		GameRegistry.registerBlock(WoodHoriz);
 		GameRegistry.registerBlock(WoodHoriz2);
@@ -340,7 +342,7 @@ public class TFCBlocks
 		TFCBlocks.Sand = new TFC.Blocks.BlockSand(TFC_Settings.getIntFor(config,"block","Sand", 216), 208).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		TFCBlocks.Sand2 = new BlockSand2(TFC_Settings.getIntFor(config,"block","Sand2", 217), 224).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("sand");
 		
-		TFCBlocks.WIP = (new TFC.Blocks.BlockWIP(TFC_Settings.getIntFor(config,"block","WIP", 2200))).setHardness(2F).setStepSound(Block.soundGravelFootstep).setBlockName("WIP");
+		TFCBlocks.WoodConstruct = (new TFC.Blocks.BlockWoodConstruct(TFC_Settings.getIntFor(config,"block","WoodConstruct", 2200))).setHardness(4F).setStepSound(Block.soundWoodFootstep).setBlockName("WoodConstruct");
 		
 		
 		Block.blocksList[5] = null;
@@ -361,10 +363,11 @@ public class TFCBlocks
 		Block.blocksList[59] = null;
 		Block.blocksList[78] = null;
 		Block.blocksList[79] = null;
+		Block.blocksList[81] = null;
 		Block.blocksList[83] = null;
 		Block.blocksList[106] = null;
 
-		Block.blocksList[5] = (new TFC.Blocks.BlockPlanks(5, Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
+		Block.blocksList[5] = (new TFC.Blocks.BlockPlanks(5, Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setBlockName("wood").setRequiresSelfNotify();
 		Block.blocksList[6] = (new BlockCustomSapling(6, 160)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sapling").setRequiresSelfNotify();
 		Block.blocksList[8] = (new BlockCustomFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setRequiresSelfNotify();
 		Block.blocksList[9] = (new BlockCustomStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setBlockName("water").setRequiresSelfNotify();
@@ -382,6 +385,7 @@ public class TFCBlocks
 		Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setBlockName("crops").setRequiresSelfNotify();
 		Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setBlockName("snow").setLightOpacity(1);
 		Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setBlockName("ice");
+		Block.blocksList[81] = (new BlockCustomCactus(81, 70)).setHardness(0.4F).setStepSound(Block.soundClothFootstep).setBlockName("cactus");
 		Block.blocksList[83] = (new BlockCustomReed(83, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("reeds");
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setBlockName("vine").setRequiresSelfNotify();
 

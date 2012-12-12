@@ -10,6 +10,7 @@ import net.minecraft.src.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.*;
+import TFC.Core.TFC_Textures;
 import TFC.Entities.EntityFallingStone;
 
 public class RenderFallingStone extends Render
@@ -29,7 +30,7 @@ public class RenderFallingStone extends Render
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d, (float)d1, (float)d2);
-        loadTexture("/bioxx/terraRock.png");
+        loadTexture(TFC_Textures.RockSheet);
 
         World world = entityfallingstone.getWorld();
         GL11.glDisable(2896 /*GL_LIGHTING*/);

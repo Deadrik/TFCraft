@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.*;
+import TFC.Core.TFC_Textures;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.Food.CropIndex;
@@ -47,7 +48,7 @@ public class ItemCustomSeeds extends ItemTerra
 	@Override
     public String getTextureFile()
     {
-        return "/bioxx/FoodSprites.png";
+        return TFC_Textures.FoodSheet;
     }
 
 	/**

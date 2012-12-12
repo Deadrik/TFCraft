@@ -8,6 +8,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
+import TFC.TileEntities.TileEntityFarmland;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumToolMaterial;
@@ -57,7 +58,9 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 			int var8 = world.getBlockId(x, y, z);
 			int var9 = world.getBlockId(x, y + 1, z);
 
-			if (side != 1 || var9 != 0 || (!TFC_Core.isGrass(var8) && !TFC_Core.isDirt(var8)))
+			boolean isDirt = TFC_Core.isDirt(var8);
+			
+			if (side != 1 || var9 != 0 || (!TFC_Core.isGrass(var8) && !isDirt))
 			{
 				return false;
 			}
@@ -81,6 +84,14 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil.blockID, meta);
 							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
+							
+							if(isDirt)
+							{
+								TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(x, y, z);
+								te.nutrients[0] = 100;
+								te.nutrients[1] = 100;
+								te.nutrients[2] = 100;
+							}
 							return true;
 						}
 					}
@@ -97,6 +108,14 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil2.blockID, meta);
 							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
+							
+							if(isDirt)
+							{
+								TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(x, y, z);
+								te.nutrients[0] = 100;
+								te.nutrients[1] = 100;
+								te.nutrients[2] = 100;
+							}
 							return true;
 						}
 					}

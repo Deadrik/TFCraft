@@ -147,7 +147,9 @@ public class BlockSlab extends BlockPartial
 			 byte extraY2 = (byte) ((te.extraData >> 16) & 0xf);
 			 byte extraZ2 = (byte) ((te.extraData >> 20) & 0xf);
 
-			 return AxisAlignedBB.getBoundingBox(i + (0.1F * extraX), j + (0.1F * extraY),  k + (0.1F * extraZ), i + (1 - (0.1F * extraX2)), j + (1 - (0.1F * extraY2)), k + (1 - (0.1F * extraZ2)));
+			 float div = 1f / 8;
+			 
+			 return AxisAlignedBB.getBoundingBox(i + (div * extraX), j + (div * extraY),  k + (div * extraZ), i + (1 - (div * extraX2)), j + (1 - (div * extraY2)), k + (1 - (div * extraZ2)));
 		 }
 		 return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
 	 }
@@ -172,13 +174,16 @@ public class BlockSlab extends BlockPartial
 		 long extraY2 = (te.extraData >> 16) & 0xf;
 		 long extraZ2 = (te.extraData >> 20) & 0xf;
 
-		 setBlockBounds(0.0F+ (0.1F * extraX), 0.0F+ (0.1F * extraY), 0.0F+ (0.1F * extraZ), 1.0F-(0.1F * extraX2), 1-(0.1F * extraY2), 1.0F-(0.1F * extraZ2));
+		 float div = 1f / 8;
+		 
+		 setBlockBounds(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 	 }
 
 	 public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
 	 {
 		 if(!world.isRemote)
 		 {
+			 
 		 }
 	 }
 

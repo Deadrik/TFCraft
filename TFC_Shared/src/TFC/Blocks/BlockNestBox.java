@@ -23,8 +23,6 @@ public class BlockNestBox extends BlockTerraContainer
     {
 		super.onBlockActivated(world, x, y, z, entityplayer, par6, par7, par8, par9);
 		
-		
-		
 		return false;
     }
 

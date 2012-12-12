@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Core.TFC_Textures;
 import net.minecraft.src.ItemBlock;
 import net.minecraft.src.ItemStack;
 
@@ -30,6 +31,6 @@ public class ItemOre2 extends ItemBlock
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
 	}
 }

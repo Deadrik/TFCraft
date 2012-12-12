@@ -69,12 +69,11 @@ public class WorldGenCustomTallTrees extends WorldGenerator
 			int x = 0;
 		}
 		int var8 = world.getBlockId(xCoord, yCoord - 1, zCoord);
-		if (!(var8 == TFCBlocks.Dirt.blockID || var8 == TFCBlocks.Dirt2.blockID ||var8 == TFCBlocks.Grass.blockID ||var8 == TFCBlocks.Grass2.blockID ||
-				var8 == TFCBlocks.ClayGrass.blockID ||var8 == TFCBlocks.ClayGrass2.blockID) || yCoord >= world.getHeight() - l - 1)
+		if (!(TFC_Core.isSoil(var8)) || yCoord >= world.getHeight() - l - 1)
 		{
 			return false;
 		}
-		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
 		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForDirt(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 		for (int k1 = yCoord - 3 + l; k1 <= yCoord + l; k1++)

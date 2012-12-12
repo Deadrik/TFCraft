@@ -95,8 +95,7 @@ public class WorldGenCustomHugeTrees extends WorldGenerator
 							var12 = world.getBlockId(var10, blockUnder, var11);
 
 							if (var12 != 0 && var12 != Block.leaves.blockID && var12 != Block.grass.blockID && var12 != Block.dirt.blockID && var12 != Block.wood.blockID && var12 != Block.sapling.blockID && 
-									!(var12 == TFCBlocks.Dirt.blockID || var12 == TFCBlocks.Dirt2.blockID ||var12 == TFCBlocks.Grass.blockID ||var12 == TFCBlocks.Grass2.blockID ||
-									var12 == TFCBlocks.ClayGrass.blockID ||var12 == TFCBlocks.ClayGrass2.blockID))
+									!(TFC_Core.isSoil(var12)))
 							{
 								var7 = false;
 							}

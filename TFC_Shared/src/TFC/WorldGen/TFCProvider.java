@@ -30,7 +30,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
-		this.worldChunkMgr = terrainType.getChunkManager(this.worldObj);
+		worldChunkMgr = terrainType.getChunkManager(this.worldObj);
 		//TFC_Core.SetupWorld(this.worldObj);
 		//TFC_Game.registerAnvilRecipes(this.worldObj.rand, this.worldObj);
 		TerraFirmaCraft.proxy.registerSkyProvider(this);

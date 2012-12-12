@@ -6,6 +6,7 @@ import TFC.TFCBlocks;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockSlab;
 import TFC.Blocks.BlockToolRack;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityTerraAnvil;
@@ -29,11 +30,12 @@ public class RenderFoodPrep
 		int dir = blockAccess.getBlockMetadata(i, j, k);
 		if(te != null)
 		{
-			double height = 0.05;
-			String tex = "/bioxx/FoodSprites.png";
+			double height = 0.005;
+			String tex = TFC_Textures.FoodSheet;
 			ForgeHooksClient.bindTexture(tex, ModLoader.getMinecraftInstance().renderEngine.getTexture(tex));
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
+			tessellator.setColorRGBA_F(1, 1, 1, 1);
 			if(te.storage[0] != null)
 			{
 				renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);

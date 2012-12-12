@@ -28,7 +28,8 @@ public class BlockStair extends BlockPartial
     {
         return TFCBlocks.stairRenderId;
     }
-
+    
+    @Override
     /**
      * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
      * axisAlignedBB, arrayList

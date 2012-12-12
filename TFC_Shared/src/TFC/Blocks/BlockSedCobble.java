@@ -226,6 +226,11 @@ public class BlockSedCobble extends BlockTerra2
                 ItemChisel.CreateSlab(world, x, y, z, id, meta, side);
                 return true;
             }
+            else if(mode == 3)
+            {
+                ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, par7, par8, par9);
+                return true;
+            }
         }
         return false;
     }

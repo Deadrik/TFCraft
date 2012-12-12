@@ -16,6 +16,7 @@ import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.World;
 
@@ -31,38 +32,10 @@ public class ItemChisel extends ItemTerraTool
 		return "/bioxx/terratools.png";
 	}
 
-//	public boolean onBlockDestroyed(ItemStack par1ItemStack, int par2, int par3, int par4, int par5, EntityLiving par6EntityLiving)
-//	{
-//		par1ItemStack.damageItem(1, par6EntityLiving);
-//		return true;
-//	}
-
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.VERYSMALL;
 	}
-
-//	@Override
-//	public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) 
-//	{
-//		if(!player.worldObj.isRemote)      
-//		{
-//			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
-//			if(objectMouseOver == null) {
-//				return false;
-//			}		
-//
-//			int id = player.worldObj.getBlockId(x, y, z);
-//			int meta = player.worldObj.getBlockMetadata(x, y, z);
-//
-//			itemstack.setItemDamage(itemstack.getItemDamage()+1);
-//			if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
-//				itemstack.stackSize = 0;
-//
-//			return true;
-//		}
-//		return false;
-//	}
 
 	public static void CreateStairs(World world, int x, int y, int z, int id, byte meta, byte m)
 	{
@@ -113,7 +86,7 @@ public class ItemChisel extends ItemTerraTool
 				long new2 = (e << 4);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getTopChiselLevel(te.extraData) >= 10)
+				if(e + BlockSlab.getTopChiselLevel(te.extraData) >= 8)
 					world.setBlockWithNotify(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -125,7 +98,7 @@ public class ItemChisel extends ItemTerraTool
 				long new2 = (e << 16);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getBottomChiselLevel(te.extraData) >= 10)
+				if(e + BlockSlab.getBottomChiselLevel(te.extraData) >= 8)
 					world.setBlockWithNotify(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -137,7 +110,7 @@ public class ItemChisel extends ItemTerraTool
 				long new2 = (e << 8);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getPosZChiselLevel(te.extraData) >= 10)
+				if(e + BlockSlab.getPosZChiselLevel(te.extraData) >= 8)
 					world.setBlockWithNotify(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -149,7 +122,7 @@ public class ItemChisel extends ItemTerraTool
 				long new2 = (e << 20);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getNegZChiselLevel(te.extraData) >= 10)
+				if(e + BlockSlab.getNegZChiselLevel(te.extraData) >= 8)
 					world.setBlockWithNotify(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -161,7 +134,7 @@ public class ItemChisel extends ItemTerraTool
 				long new2 = (e);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getPosXChiselLevel(te.extraData) >= 10)
+				if(e + BlockSlab.getPosXChiselLevel(te.extraData) >= 8)
 					world.setBlockWithNotify(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -173,7 +146,7 @@ public class ItemChisel extends ItemTerraTool
 				long new2 = (e << 12);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getNegXChiselLevel(te.extraData) >= 10)
+				if(e + BlockSlab.getNegXChiselLevel(te.extraData) >= 8)
 					world.setBlockWithNotify(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -206,90 +179,50 @@ public class ItemChisel extends ItemTerraTool
 			int extraX = (int) ((tep.extraData) & 0xf);
 			int extraY = (int) ((tep.extraData >> 4) & 0xf);
 			int extraZ = (int) ((tep.extraData >> 8) & 0xf);
-			int extraX2 = 10 - (int) ((tep.extraData >> 12) & 0xf);
-			int extraY2 = 10 - (int) ((tep.extraData >> 16) & 0xf);
-			int extraZ2 = 10 - (int) ((tep.extraData >> 20) & 0xf);
+			int extraX2 = 8 - (int) ((tep.extraData >> 12) & 0xf);
+			int extraY2 = 8 - (int) ((tep.extraData >> 16) & 0xf);
+			int extraZ2 = 8 - (int) ((tep.extraData >> 20) & 0xf);
 			world.setBlock(x, y, z, TFCBlocks.StoneDetailed.blockID);
 			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
 			te.TypeID = tep.TypeID;
 			te.MetaID = tep.MetaID;
 			te.setMaterial(tep.getMaterial());
 
-			for(int subX = 0; subX < 10; subX++)
+			for(int subX = 0; subX < 8; subX++)
 			{
-				for(int subZ = 0; subZ < 10; subZ++)
+				for(int subZ = 0; subZ < 8; subZ++)
 				{
-					for(int subY = 0; subY < 10; subY++)
+					for(int subY = 0; subY < 8; subY++)
 					{
 						if(subX >= extraX && subX < extraX2 && subY >= extraY && subY < extraY2 && subZ >= extraZ && subZ < extraZ2)
-							te.data.set((subX * 10 + subZ)*10 + subY);
+						{
+							te.data.set((subX * 8 + subZ)*8 + subY);
+						}
 					}
 				}
 			}
 			return;
 		}
-		else if(TFC_Core.isRawStone(id) || TFC_Core.isSmoothStone(id))
+		else
 		{
+			Material m = world.getBlockMaterial(x, y, z);
 			world.setBlockWithNotify(x, y, z, TFCBlocks.StoneDetailed.blockID);
 
 			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
 			te.TypeID = (short) id;
 			te.MetaID = (byte) meta;
-			te.setMaterial(world.getBlockMaterial(x, y, z));
+			te.setMaterial(m);
 
-			for(int subX = 0; subX < 10; subX++)
+			for(int subX = 0; subX < 8; subX++)
 			{
-				for(int subZ = 0; subZ < 10; subZ++)
+				for(int subZ = 0; subZ < 8; subZ++)
 				{
-					for(int subY = 0; subY < 10; subY++)
+					for(int subY = 0; subY < 8; subY++)
 					{
-						te.data.set((subX * 10 + subZ)*10 + subY);
+						te.data.set((subX * 8 + subZ)*8 + subY);
 					}
 				}
 			}
-		}
-		else if(id == TFCBlocks.StoneDetailed.blockID)
-		{
-			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
-			int depth = PlayerManagerTFC.getInstance().getClientPlayer().ChiselDetailZoom;
-
-
-			int subX = (int) (hitX * 100)/10;
-			int subY = (int) (hitY * 100)/10;
-			int subZ = (int) (hitZ * 100)/10;
-			if(subX > 9)
-				subX = 9;
-			if(subY > 9)
-				subY = 9;
-			if(subZ > 9)
-				subZ = 9;
-
-			//    		if(side == 2)
-				//    			subX -= depth;
-			//    		else if(side == 3)
-				//    			subX += depth;
-			//    		
-			//    		if(side == 1)
-				//    			subY -= depth;
-			//    		else if(side == 0)	a
-			//    			subY += depth;
-			//    		
-			//    		if(side == 4)
-				//    			subZ -= depth;
-			//    		else if(side == 5)
-				//    			subZ += depth;
-
-			int index = (subX * 10 + subZ) * 10 + subY;
-			if(te.data.get(index))
-			{
-				te.data.clear(index);
-				te.broadcastPacketInRange(te.createUpdatePacket());
-			}
-		}
-		else
-		{
-			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
-			world.notifyBlockChange(x, y, z, TFCBlocks.StoneDetailed.blockID);
 		}
 	}
 }

@@ -874,7 +874,8 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 	public void updateGui()
 	{
-		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+		if(!worldObj.isRemote)
+			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
 	}
 
 	@Override

@@ -84,7 +84,7 @@ public class WorldGenPineTall extends WorldGenerator
         		int dirtID =  TFC_Core.getTypeForDirt(meta);
         		int dirtMeta =  TFC_Core.getSoilMetaFromStone(dirtID, meta);
 
-                if (TFC_Core.isGrass(var11) && j < world.getActualHeight() - var6 - 1)
+                if (TFC_Core.isSoil(var11) && j < world.getActualHeight() - var6 - 1)
                 {
                     this.setBlockAndMetadata(world, i, j - 1, k, dirtID, dirtMeta);
                     var18 = 0;

@@ -61,7 +61,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 68")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 69")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
@@ -80,6 +80,9 @@ public class TerraFirmaCraft
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		instance = this;
+		
+		
+		
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 		//Load Blocks
@@ -94,6 +97,10 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
+		
+		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
+		DimensionManager.registerProviderType(0, TFCProvider.class, true);
+		//DimensionManager.registerProviderType(-2, TFCProviderCOTE.class, false);
 
 		//Add Item Name Localizations
 		proxy.registerTranslations();
@@ -113,9 +120,7 @@ public class TerraFirmaCraft
 		//Register Sound Handler (Client only)
 		proxy.registerSoundHandler();
 
-		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
-		DimensionManager.registerProviderType(0, TFCProvider.class, true);
-		DimensionManager.registerProviderType(-2, TFCProviderCOTE.class, true);
+		
 	}
 
 	@Init

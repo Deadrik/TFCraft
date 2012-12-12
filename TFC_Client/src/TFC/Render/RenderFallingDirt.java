@@ -10,6 +10,7 @@ import net.minecraft.src.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.*;
+import TFC.Core.TFC_Textures;
 import TFC.Entities.EntityFallingDirt;
 
 public class RenderFallingDirt extends Render
@@ -27,7 +28,7 @@ public class RenderFallingDirt extends Render
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d, (float)d1, (float)d2);
-        loadTexture("/bioxx/terrablocks2.png");
+        loadTexture(TFC_Textures.BlockSheet2);
 
         World world = entityfallingstone.getWorld();
         GL11.glDisable(2896 /*GL_LIGHTING*/);

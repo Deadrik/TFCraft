@@ -59,6 +59,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
 		looseRocksPerChunk = 10;
+		this.cactiPerChunk = 2;
 
 		this.reedGen = new WorldGenCustomReed();
 		this.sandGen = new WorldGenCustomSand(7, Block.sand.blockID);

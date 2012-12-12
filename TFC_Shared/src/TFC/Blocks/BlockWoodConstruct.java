@@ -6,37 +6,34 @@ import java.util.List;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import TFC.*;
-import TFC.Core.*;
-import TFC.Core.Player.PlayerInfo;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Items.ItemChisel;
-import TFC.Items.ItemHammer;
-import TFC.TileEntities.TileEntityDetailed;
-import TFC.TileEntities.TileEntityPartial;
+import TFC.TFCBlocks;
+import TFC.Core.CollisionRayTracePlanks;
 import TFC.TileEntities.TileEntityWoodConstruct;
-
 import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
-import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.Material;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.Vec3;
 import net.minecraft.src.World;
 
-public class BlockDetailed extends BlockPartial
+public class BlockWoodConstruct extends BlockTerraContainer
 {
-	public BlockDetailed(int par1)
+	public BlockWoodConstruct(int par1) 
 	{
-		super(par1, Material.rock);
+		super(par1);
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		return new TileEntityWoodConstruct();
 	}
 
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.detailedRenderId;
+		return TFCBlocks.woodConstructRenderId;
 	}
 
 	@Override
@@ -46,9 +43,9 @@ public class BlockDetailed extends BlockPartial
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
-		return new TileEntityDetailed();
+	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	{
+		return j+176;
 	}
 
 	@Override
@@ -71,79 +68,71 @@ public class BlockDetailed extends BlockPartial
     }
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) 
-	{
-		boolean hasHammer = false;
-		for(int i = 0; i < 9;i++)
-		{
-			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-				hasHammer = true;
-		}
-		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
-		{
-			int id = world.getBlockId(x, y, z);
-			byte meta = (byte) world.getBlockMetadata(x, y, z);
-
-			int mode = 0;
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-			if(pi!=null) mode = pi.ChiselMode;
-
-			if(mode == 3 && xSelected != -10)
-			{
-				//ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, hitX, hitY, hitZ);
-				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
-				int index = (xSelected * 8 + zSelected)*8 + ySelected;
-
-				if(index >= 0 && !te.isFinished)
-				{
-					System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
-					te.data.clear(index);
-					te.setEdited();
-					te.broadcastPacketInRange(te.createUpdatePacket(index));
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public void addCollidingBlockToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(i, j, k);
-		float div = 1f / 8;
+		TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i, j, k);
 
-		for(int subX = 0; subX < 8; subX++)
+		int d = te.PlankDetailLevel;
+		int dd = te.PlankDetailLevel * te.PlankDetailLevel;
+
+		float div = 1f / d;
+
+		for(int x = 0; x < dd; x++)
 		{
-			for(int subZ = 0; subZ < 8; subZ++)
-			{
-				for(int subY = 0; subY < 8; subY++)
-				{
-					if (te.data.get((subX * 8 + subZ)*8 + subY))
-					{
-						float minX = subX * div;
-						float maxX = minX + div;
-						float minY = subY * div;
-						float maxY = minY + div;
-						float minZ = subZ * div;
-						float maxZ = minZ + div;
+			if(te.data.get(x))
+			{        		
+				float minX = 0;
+				float maxX = 1;
+				float minY = div * (x & 7);
+				float maxY = minY + div;
+				float minZ = div * (x >> 3);
+				float maxZ = minZ + div;
 
-						this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
-					}
-				}
+				this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
+			}
+		}
+
+		for(int y = 0; y < dd; y++)
+		{
+			if(te.data.get(y+dd))
+			{        		
+				float minX = div * (y & 7);
+				float maxX = minX + div;
+				float minY = 0;
+				float maxY = 1;
+				float minZ = div * (y >> 3);
+				float maxZ = minZ + div;
+
+				this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
+			}
+		}
+
+		for(int z = 0; z < dd; z++)
+		{
+			if(te.data.get(z+(dd*2)))
+			{        		
+				float minX = div * (z & 7);
+				float maxX = minX + div;
+				float minY = div * (z >> 3);
+				float maxY = minY + div;
+				float minZ = 0;
+				float maxZ = 1;
+
+				this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+				super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
 			}
 		}
 		setBlockBoundsBasedOnSelection(world, i, j, k);
 	}
 
-
-	public int xSelected = -10, ySelected = -10, zSelected = -10, side = -1;
+	public static int index = -10, side = -1;
 
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 player, Vec3 view) {
 
-		TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+		TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(x, y, z);
 
 		player = player.addVector(-x, -y, -z);
 		view = view.addVector(-x, -y, -z);
@@ -154,7 +143,7 @@ public class BlockDetailed extends BlockPartial
 		List<Object[]> returns = new ArrayList<Object[]>();
 
 		//Creates all possible collisions and returns any that collide
-		returns = CollisionRayTraceDetailed.rayTraceSubBlocks(
+		returns = CollisionRayTracePlanks.rayTracePlanks(
 				this,
 				player,
 				view,
@@ -164,19 +153,17 @@ public class BlockDetailed extends BlockPartial
 				returns,
 				te.data,
 				te);
-		if(te.isFinished)
-		{
-			//Check if the block itself is beign collided with
-			returns = CollisionRayTraceDetailed.collisionRayTracer(
-					this,
-					world,
-					player,
-					view,
-					x,
-					y,
-					z,
-					returns);
-		}
+
+		//Check if the block itself is beign collided with
+		returns = CollisionRayTracePlanks.collisionRayTracer(
+				this,
+				world,
+				player,
+				view,
+				x,
+				y,
+				z,
+				returns);
 
 		if (!returns.isEmpty()) {
 			Object[] min = null;
@@ -192,27 +179,49 @@ public class BlockDetailed extends BlockPartial
 			}
 			if (min != null) {
 				side = (Byte) min[1];
-				xSelected = (Integer) min[3];
-				ySelected = (Integer) min[4];
-				zSelected = (Integer) min[5];
-
-				int index = (xSelected * 8 + zSelected)*8 + ySelected;
-
-				if (index >= 0 && te.data.get(index)) 
+				index = (Integer) min[3];
+				if (te.data.get(index)) 
 				{
 					int d = TileEntityWoodConstruct.PlankDetailLevel;
 					int dd = d*d;
 					float div = 1f / d;
-
-					float minX = x + xSelected * div;
-					float maxX = minX + div;
-					float minY = y + ySelected * div;
-					float maxY = minY + div;
-					float minZ = z + zSelected * div;
-					float maxZ = minZ + div;
-
-					this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-					rayTraceBound(AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ), x, y, z, player, view);
+					
+					if(index < dd)
+					{
+						float minX = x + 0;
+						float maxX = x + 1;
+						float minY = y + div * (index & 7);
+						float maxY = minX + div;
+						float minZ = z + div * (index >> 3);
+						float maxZ = minZ + div;
+						
+						this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+						rayTraceBound(AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ), x, y, z, player, view);
+					}
+					else if(index < dd*2)
+					{
+						float minX = x + div * (index & 7);
+						float maxX = minX + div;
+						float minY = y + 0;
+						float maxY = y + 1;
+						float minZ = z + div * (index >> 3);
+						float maxZ = minZ + div;
+						
+						this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+						rayTraceBound(AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ), x, y, z, player, view);
+					}
+					else
+					{
+						float minX = x + div * (index & 7);
+						float maxX = minX + div;
+						float minY = y + div * (index >> 3);
+						float maxY = minY + div;
+						float minZ = z + 0;
+						float maxZ = z + 1;
+						
+						this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+						rayTraceBound(AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ), x, y, z, player, view);
+					}
 				}
 				setBlockBoundsBasedOnSelection(world, x, y, z);
 
@@ -221,9 +230,7 @@ public class BlockDetailed extends BlockPartial
 						((Vec3) min[0]).addVector(x, y, z));
 			}
 		}
-		xSelected = -10;
-		ySelected = -10;
-		zSelected = -10;
+		index = -10;
 		side = -1;
 		setBlockBoundsBasedOnSelection(world, x, y, z);
 
@@ -232,31 +239,55 @@ public class BlockDetailed extends BlockPartial
 
 	public void setBlockBoundsBasedOnSelection(IBlockAccess access, int x, int y, int z) 
 	{
-		if(xSelected == -10)
+		if(index < 0)
 		{
 			setBlockBounds(0f, 0f, 0f, 0f, 0f, 0f);
 		}
 		else
 		{
-			TileEntityDetailed te = (TileEntityDetailed) access.getBlockTileEntity(x, y, z);
-			int index = (xSelected * 8 + zSelected)*8 + ySelected;
-
-			if(index >= 0 && te.data.get(index))
+			TileEntityWoodConstruct te = (TileEntityWoodConstruct) access.getBlockTileEntity(x, y, z);
+			if(te.data.get(index))
 			{
-				int d = 8;
-				int dd = d * d;
+				int d = te.PlankDetailLevel;
+				int dd = te.PlankDetailLevel * te.PlankDetailLevel;
 				int dd2 = dd*2;
 
-				float div = 1f / d;
+				float div = 1 / d;
 
-				float minX = xSelected * div;
-				float maxX = minX + div;
-				float minY = ySelected * div;
-				float maxY = minY + div;
-				float minZ = zSelected * div;
-				float maxZ = minZ + div;
+				float minX = 0;
+				float maxX = 1;
+				float minY = 0;
+				float maxY = 1;
+				float minZ = 0;
+				float maxZ = 1;
 
-
+				if(index < dd)
+				{
+					minX = 0;
+					maxX = 1;
+					minY = div * (x & 7);
+					maxY = minX + div;
+					minZ = div * (x >> 3);
+					maxZ = minZ + div;
+				}
+				else if(index < dd2)
+				{
+					minX = div * (y & 7);
+					maxX = minX + div;
+					minY = 0;
+					maxY = 1;
+					minZ = div * (y >> 3);
+					maxZ = minZ + div;
+				}
+				else
+				{
+					minX = div * (z & 7);
+					maxX = minX + div;
+					minY = div * (z >> 3);
+					maxY = minY + div;
+					minZ = 0;
+					maxZ = 1;
+				}
 
 				AxisAlignedBB bound = AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 				setBlockBounds(
@@ -368,5 +399,4 @@ public class BlockDetailed extends BlockPartial
 			return Vec3.xCoord >= bound.minX && Vec3.xCoord <= bound.maxX && Vec3.yCoord >= bound.minY && Vec3.yCoord <= bound.maxY;
 		}
 	}
-
 }

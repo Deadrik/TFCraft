@@ -5,6 +5,7 @@ import java.util.List;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Textures;
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Entity;
@@ -24,7 +25,7 @@ public class ItemDirt extends ItemTerraBlock
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terrablocks2.png";
+		return TFC_Textures.BlockSheet2;
 	}
 	
 	public String getItemNameIS(ItemStack par1ItemStack)

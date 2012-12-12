@@ -3,6 +3,7 @@ package TFC.WorldGen.Generators.Trees;
 import java.util.Random;
 
 import TFC.*;
+import TFC.Core.TFC_Core;
 
 
 import net.minecraft.src.MathHelper;
@@ -474,8 +475,7 @@ public class WorldGenCustomBigTree extends WorldGenerator
 		  int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
 		  int var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
-		  if (!(var3 == TFCBlocks.Dirt.blockID || var3 == TFCBlocks.Dirt2.blockID || var3 == TFCBlocks.Grass.blockID || var3 == TFCBlocks.Grass2.blockID ||
-				  var3 == TFCBlocks.ClayGrass.blockID || var3 == TFCBlocks.ClayGrass2.blockID))
+		  if (!(TFC_Core.isSoil(var3)))
 		  {
 			  return false;
 		  }

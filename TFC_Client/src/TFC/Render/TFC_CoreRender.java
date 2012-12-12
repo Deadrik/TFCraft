@@ -14,6 +14,7 @@ import TFC.Blocks.BlockAnvil;
 import TFC.Blocks.BlockBellows;
 import TFC.Blocks.BlockSluice;
 import TFC.Core.AnvilReq;
+import TFC.Core.TFC_Textures;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core.Direction;
@@ -39,6 +40,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.World;
+import net.minecraftforge.client.ForgeHooksClient;
 
 public class TFC_CoreRender 
 {
@@ -53,6 +55,7 @@ public class TFC_CoreRender
         int type = te.TypeID;
         int meta = te.MetaID;
         int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
+        ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
         long extraX = (te.extraData) & 0xf;
         long extraY = (te.extraData >> 4) & 0xf;
         long extraZ = (te.extraData >> 8) & 0xf;
@@ -60,7 +63,9 @@ public class TFC_CoreRender
         long extraY2 = (te.extraData >> 16) & 0xf;
         long extraZ2 = (te.extraData >> 20) & 0xf;
         
-        renderblocks.setRenderMinMax(0.0F+ (0.1F * extraX), 0.0F+ (0.1F * extraY), 0.0F+ (0.1F * extraZ), 1.0F-(0.1F * extraX2), 1-(0.1F * extraY2), 1.0F-(0.1F * extraZ2));
+        float div = 1f / 8;
+        
+        renderblocks.setRenderMinMax(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 
         int over = renderblocks.overrideBlockTexture;
         if(over == -1 && (type == TFCBlocks.Ore.blockID || type == TFCBlocks.Ore2.blockID || type == TFCBlocks.Ore3.blockID))
@@ -109,6 +114,7 @@ public class TFC_CoreRender
         int type = te.TypeID;
         int meta = te.MetaID;
         int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
+        ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
         renderblocks.overrideBlockTexture = tex;
         renderblocks.setRenderMinMax(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
         renderblocks.renderStandardBlock(par1Block, par2, par3, par4);

@@ -20,6 +20,7 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.KeyBindings;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Textures;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -66,20 +67,17 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy 
-{
-	public KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
-	public KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
-	
+{	
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
-		MinecraftForgeClient.preloadTexture("/bioxx/terrarock.png");
+		MinecraftForgeClient.preloadTexture(TFC_Textures.RockSheet);
 		MinecraftForgeClient.preloadTexture("/bioxx/terratools.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terratoolheads.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terrablocks.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terrablocks2.png");
+		MinecraftForgeClient.preloadTexture(TFC_Textures.BlockSheet);
+		MinecraftForgeClient.preloadTexture(TFC_Textures.BlockSheet2);
 		MinecraftForgeClient.preloadTexture("/bioxx/terrabeds.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_sluice.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_scribe.png");
@@ -91,10 +89,10 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_bloomery.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_anvil.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_calendar.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/vegetation.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/tfcplants.png");
+		MinecraftForgeClient.preloadTexture(TFC_Textures.VegetationSheet);
+		MinecraftForgeClient.preloadTexture(TFC_Textures.PlantsSheet);
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_foodprep.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/foodsprites.png");
+		MinecraftForgeClient.preloadTexture(TFC_Textures.FoodSheet);
 
 		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
 		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -152,6 +150,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.foodPrepRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
@@ -536,10 +535,10 @@ public class ClientProxy extends CommonProxy
 		KeyBindings.addIsRepeating(false);
 		KeyBindings.addKeyBinding("Key_ToolMode", 50);
 		KeyBindings.addIsRepeating(false);
-//		KeyBindings.addKeyBinding("Key_ChiselDepthIncrease", 13);
-//		KeyBindings.addIsRepeating(false);
-//		KeyBindings.addKeyBinding("Key_ChiselDepthDecrease", 12);
-//		KeyBindings.addIsRepeating(false);
+		KeyBindings.addKeyBinding("Key_ChiselDepthIncrease", 13);
+		KeyBindings.addIsRepeating(false);
+		KeyBindings.addKeyBinding("Key_ChiselDepthDecrease", 12);
+		KeyBindings.addIsRepeating(false);
 	}
 
 	@Override
@@ -552,6 +551,7 @@ public class ClientProxy extends CommonProxy
 	{
 		MinecraftForge.EVENT_BUS.register(new ChiselHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(new FarmlandHighlightHandler());
+		MinecraftForge.EVENT_BUS.register(new PlankHighlightHandler());
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import TFC.*;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityTerraScribe;
 
 public class TileEntityScribeTableRenderer extends TileEntitySpecialRenderer {
@@ -39,7 +40,7 @@ public class TileEntityScribeTableRenderer extends TileEntitySpecialRenderer {
 			j = 270;
 		}
 
-		bindTextureByName("/bioxx/terrablocks.png"); //texture
+		bindTextureByName(TFC_Textures.BlockSheet); //texture
 		GL11.glPushMatrix(); //start
 		GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.5F, (float)d2 + 0.5F); //size
 		GL11.glRotatef(j, 0.0F, 1.0F, 0.0F); //rotate based on metadata

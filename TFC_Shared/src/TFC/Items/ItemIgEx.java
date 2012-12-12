@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.*;
+import TFC.Core.TFC_Textures;
 
 public class ItemIgEx extends ItemTerraBlock
 {
@@ -16,6 +17,6 @@ public class ItemIgEx extends ItemTerraBlock
 	@Override
 	public String getTextureFile()
 	{
-		return "/bioxx/terraRock.png";
+		return TFC_Textures.RockSheet;
 	}
 }

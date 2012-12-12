@@ -27,8 +27,10 @@ import TFC.WorldGen.Biomes.BiomeGenPlainsTFC;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 import TFC.WorldGen.Biomes.BiomeGenTaigaTFC;
+import TFC.WorldGen.Generators.WorldGenCustomShrub;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomBigTree;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomRedwoodTrees;
@@ -427,8 +429,6 @@ public class TFCBiome extends BiomeGenBase
     public static WorldGenerator getTreeGen(int i, Boolean j)
     {
         Random R = new Random();
-        if(i == 15)
-            i = 1;
         switch(i)
         {
             case 7:
@@ -581,6 +581,10 @@ public class TFCBiome extends BiomeGenBase
             case 14:
             {
                 return worldGenWillowShortTrees;
+            }
+            case 15:
+            {
+                return (WorldGenerator)( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
             }
         }
         return null;

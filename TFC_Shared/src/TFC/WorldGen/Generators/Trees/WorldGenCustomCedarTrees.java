@@ -65,14 +65,13 @@ public class WorldGenCustomCedarTrees extends WorldGenerator
 			return false;
 		}
 		int var3 = world.getBlockId(xCoord, yCoord - 1, zCoord);
-		if (!(var3 == TFCBlocks.Dirt.blockID || var3 == TFCBlocks.Dirt2.blockID || var3 == TFCBlocks.Grass.blockID || var3 == TFCBlocks.Grass2.blockID ||
-				var3 == TFCBlocks.ClayGrass.blockID || var3 == TFCBlocks.ClayGrass2.blockID)|| yCoord >= world.getHeight() - treeHeight - 1)
+		if (!(TFC_Core.isSoil(var3))|| yCoord >= world.getHeight() - treeHeight - 1)
 		{
 			return false;
 		}
-		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
+		//DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 		//set the block below the tree to dirt.
-		world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
+		//world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
 		//Now we create the leaves. generates from the bottom up.
 		for (int treeHeightOffset = yCoord + 1; treeHeightOffset <= yCoord + treeHeight; treeHeightOffset++)
 		{

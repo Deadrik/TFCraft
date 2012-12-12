@@ -23,7 +23,7 @@ import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 
-public class BlockLogNatural extends Block
+public class BlockLogNatural extends BlockTerra
 {
 
 	public BlockLogNatural(int i) 
@@ -75,12 +75,6 @@ public class BlockLogNatural extends Block
 			return j+144;
 		}
 		return j+128;
-	}
-
-	@Override
-	public String getTextureFile() 
-	{
-		return "/bioxx/terrablocks.png";
 	}
 
 	static int damage = 0;
@@ -144,6 +138,12 @@ public class BlockLogNatural extends Block
 			}
 		}
 	}
+	
+	@Override
+	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+    {
+        return true;
+    }
 
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
@@ -190,11 +190,11 @@ public class BlockLogNatural extends Block
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		boolean check = false;
-		for(int h = -1; h <= 1; h++)
+		for(int h = -2; h <= 2; h++)
 		{
-			for(int g = -1; g <= 1; g++)
+			for(int g = -2; g <= 2; g++)
 			{
-				for(int f = -1; f <= 1; f++)
+				for(int f = -2; f <= 2; f++)
 				{
 					if(world.getBlockId(i+h, j+g, k+f) == blockID && world.getBlockMetadata(i+h, j+g, k+f) == world.getBlockMetadata(i, j, k))
 					{

@@ -26,41 +26,40 @@ public class ChiselHighlightHandler{
 		{
 			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-			double depth = (double)pi.ChiselDetailZoom/10D;
-			if(pi.ChiselMode == 3 && (id == TFCBlocks.StoneDetailed.blockID || TFC_Core.isRawStone(id) || TFC_Core.isSmoothStone(id)))
+			//double depth = (double)pi.ChiselDetailZoom/8D;
+			if(pi.ChiselMode == 3 && id == TFCBlocks.StoneDetailed.blockID)
 			{				
 				//Get the hit location in local box coords
 				double hitX = Math.round((evt.target.hitVec.xCoord - evt.target.blockX)*100)/100.0d;
 				double hitY = Math.round((evt.target.hitVec.yCoord - evt.target.blockY)*100)/100.0d;
 				double hitZ = Math.round((evt.target.hitVec.zCoord - evt.target.blockZ)*100)/100.0d;
-				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 
 				//get the targeted sub block coords
-				double subX = (double)((int)((hitX)*10))/10;
-				double subY = (double)((int)((hitY)*10))/10;
-				double subZ = (double)((int)((hitZ)*10))/10;
+				double subX = (double)((int)((hitX)*8))/8;
+				double subY = (double)((int)((hitY)*8))/8;
+				double subZ = (double)((int)((hitZ)*8))/8;
 				
 
 				if(evt.target.sideHit == 1)
 				{
-					subY -= 0.1;
+					subY -= 0.125;
 				}
 				else if(evt.target.sideHit == 5)
 				{
-					subX -= 0.1;
+					subX -= 0.125;
 				}
 				else if(evt.target.sideHit == 3)
 				{
-					subZ -= 0.1;
+					subZ -= 0.125;
 				}
 
 				//create the box size
 				double minX = evt.target.blockX + subX;
 				double minY = evt.target.blockY + subY;
 				double minZ = evt.target.blockZ + subZ;
-				double maxX = minX + 0.1;
-				double maxY = minY + 0.1;
-				double maxZ = minZ + 0.1;
+				double maxX = minX + 0.125;
+				double maxY = minY + 0.125;
+				double maxZ = minZ + 0.125;
 
 				double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
 				double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
@@ -69,15 +68,13 @@ public class ChiselHighlightHandler{
 				//Setup GL for the depthbox
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.4F);
-				GL11.glLineWidth(6.0F);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
-				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(evt.target.blockX+depth,evt.target.blockY+depth,evt.target.blockZ+depth,evt.target.blockX+1-depth,evt.target.blockY+1-depth,evt.target.blockZ+1-depth).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+				//drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(evt.target.blockX+depth,evt.target.blockY+depth,evt.target.blockZ+depth,evt.target.blockX+1-depth,evt.target.blockY+1-depth,evt.target.blockZ+1-depth).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
 				//Setup the GL stuff for the outline
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.4F);
-				GL11.glLineWidth(6.0F);
+				GL11.glLineWidth(4.0F);
 				GL11.glDepthMask(true);
 				//Draw the mini Box
 				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(minX,minY,minZ,maxX,maxY,maxZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
@@ -87,70 +84,70 @@ public class ChiselHighlightHandler{
 				GL11.glDisable(GL11.GL_BLEND);
 
 			}
-			else if(pi.ChiselMode == 3 && (id == TFCBlocks.stoneSlabs.blockID))
-			{
-				double hitX = (evt.target.hitVec.xCoord - evt.target.blockX);
-				double hitY = (evt.target.hitVec.yCoord - evt.target.blockY);
-				double hitZ = (evt.target.hitVec.zCoord - evt.target.blockZ);
-
-				int extraX = 0;
-				int extraY = 0;
-				int extraZ = 0;
-				int extraX2 = 1;
-				int extraY2 = 1;
-				int extraZ2 = 1;
-
-				TileEntityPartial tep = (TileEntityPartial) world.getBlockTileEntity(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
-				if(tep != null)
-				{
-					extraX = (int) ((tep.extraData) & 0xf);
-					extraY = (int) ((tep.extraData >> 4) & 0xf);
-					extraZ = (int) ((tep.extraData >> 8) & 0xf);
-					extraX2 = 10 - (int) ((tep.extraData >> 12) & 0xf);
-					extraY2 = 10 - (int) ((tep.extraData >> 16) & 0xf);
-					extraZ2 = 10 - (int) ((tep.extraData >> 20) & 0xf);
-				}
-
-				double minX = evt.target.blockX + (0.1 * extraX);
-				double minY = evt.target.blockY + (0.1 * extraY);
-				double minZ = evt.target.blockZ + (0.1 * extraZ);
-
-				double maxX = evt.target.blockX + (1 - (0.1 * extraX2));
-				double maxY = evt.target.blockY + (1 - (0.1 * extraY2));
-				double maxZ = evt.target.blockZ + (1 - (0.1 * extraZ2));
-
-				if(evt.target.sideHit == 2)
-					minX = maxX - 0.1;
-				else if(evt.target.sideHit == 3)
-					maxX = minX + 0.1;
-
-				if(evt.target.sideHit == 1)
-					minY = maxY - 0.1;
-				else if(evt.target.sideHit == 0)
-					maxY = minY + 0.1;
-
-				if(evt.target.sideHit == 4)
-					minZ = maxZ - 0.1;
-				else if(evt.target.sideHit == 5)
-					maxZ = minZ + 0.1;
-
-				double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
-				double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
-				double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
-
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.4F);
-				GL11.glLineWidth(6.0F);
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glDepthMask(true);
-
-				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(minX,minY,minZ,maxX,maxY,maxZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
-
-				GL11.glDepthMask(true);
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
-				GL11.glDisable(GL11.GL_BLEND);
-			}
+//			else if(pi.ChiselMode == 3 && (id == TFCBlocks.stoneSlabs.blockID))
+//			{
+//				double hitX = (evt.target.hitVec.xCoord - evt.target.blockX);
+//				double hitY = (evt.target.hitVec.yCoord - evt.target.blockY);
+//				double hitZ = (evt.target.hitVec.zCoord - evt.target.blockZ);
+//
+//				int extraX = 0;
+//				int extraY = 0;
+//				int extraZ = 0;
+//				int extraX2 = 1;
+//				int extraY2 = 1;
+//				int extraZ2 = 1;
+//
+//				TileEntityPartial tep = (TileEntityPartial) world.getBlockTileEntity(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
+//				if(tep != null)
+//				{
+//					extraX = (int) ((tep.extraData) & 0xf);
+//					extraY = (int) ((tep.extraData >> 4) & 0xf);
+//					extraZ = (int) ((tep.extraData >> 8) & 0xf);
+//					extraX2 = 10 - (int) ((tep.extraData >> 12) & 0xf);
+//					extraY2 = 10 - (int) ((tep.extraData >> 16) & 0xf);
+//					extraZ2 = 10 - (int) ((tep.extraData >> 20) & 0xf);
+//				}
+//
+//				double minX = evt.target.blockX + (0.125 * extraX);
+//				double minY = evt.target.blockY + (0.125 * extraY);
+//				double minZ = evt.target.blockZ + (0.125 * extraZ);
+//
+//				double maxX = evt.target.blockX + (1 - (0.125 * extraX2));
+//				double maxY = evt.target.blockY + (1 - (0.125 * extraY2));
+//				double maxZ = evt.target.blockZ + (1 - (0.125 * extraZ2));
+//
+//				if(evt.target.sideHit == 2)
+//					minX = maxX - 0.125;
+//				else if(evt.target.sideHit == 3)
+//					maxX = minX + 0.125;
+//
+//				if(evt.target.sideHit == 1)
+//					minY = maxY - 0.125;
+//				else if(evt.target.sideHit == 0)
+//					maxY = minY + 0.125;
+//
+//				if(evt.target.sideHit == 4)
+//					minZ = maxZ - 0.125;
+//				else if(evt.target.sideHit == 5)
+//					maxZ = minZ + 0.125;
+//
+//				double var8 = evt.player.lastTickPosX + (evt.player.posX - evt.player.lastTickPosX) * (double)evt.partialTicks;
+//				double var10 = evt.player.lastTickPosY + (evt.player.posY - evt.player.lastTickPosY) * (double)evt.partialTicks;
+//				double var12 = evt.player.lastTickPosZ + (evt.player.posZ - evt.player.lastTickPosZ) * (double)evt.partialTicks;
+//
+//				GL11.glEnable(GL11.GL_BLEND);
+//				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+//				GL11.glColor4f(1.0F, 0.0F, 0.0F, 0.4F);
+//				GL11.glLineWidth(6.0F);
+//				GL11.glDisable(GL11.GL_TEXTURE_2D);
+//				GL11.glDepthMask(true);
+//
+//				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(minX,minY,minZ,maxX,maxY,maxZ).expand(0.002F, 0.002F, 0.002F).getOffsetBoundingBox(-var8, -var10, -var12));
+//
+//				GL11.glDepthMask(true);
+//				GL11.glEnable(GL11.GL_TEXTURE_2D);
+//				GL11.glDisable(GL11.GL_BLEND);
+//			}
 		}
 	}
 

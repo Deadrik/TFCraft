@@ -11,10 +11,12 @@ import net.minecraft.src.World;
 
 public abstract class BlockTerra2 extends Block
 {
+	
 	protected BlockTerra2(int par1) 
 	{
 		super(par1, Material.rock);
 	}
+	
 	protected BlockTerra2(int par1,int par2, Material material) 
 	{
 		super(par1,par2, material);

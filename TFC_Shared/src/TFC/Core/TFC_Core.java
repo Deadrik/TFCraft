@@ -201,6 +201,12 @@ public class TFC_Core
 		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || 
 				id == TFCBlocks.StoneSedSmooth.blockID || id == TFCBlocks.StoneMMSmooth.blockID;
 	}
+	
+	public static boolean isBrickStone(int id)
+	{
+		return id == TFCBlocks.StoneIgExBrick.blockID || id == TFCBlocks.StoneIgInBrick.blockID || 
+				id == TFCBlocks.StoneSedBrick.blockID || id == TFCBlocks.StoneMMBrick.blockID;
+	}
 
 	public static boolean isRawStone(int id)
 	{

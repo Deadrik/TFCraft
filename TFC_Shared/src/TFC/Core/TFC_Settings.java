@@ -65,20 +65,20 @@ public class TFC_Settings
 		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
 		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",35, "This number is the likelyhood for each block to propogate the collapse farther.");
 
-		cropNutrientAColor[0] = getByteFor(config,"ColorNutrientA","Red", (byte) 237);
-		cropNutrientAColor[1] = getByteFor(config,"ColorNutrientA","Green", (byte) 28);
-		cropNutrientAColor[2] = getByteFor(config,"ColorNutrientA","Blue", (byte) 36);
-		cropNutrientAColor[3] = getByteFor(config,"ColorNutrientA","Alpha", (byte) 200);
+		cropNutrientAColor[0] = (byte)getIntFor(config,"ColorNutrientA","Red", 237);
+		cropNutrientAColor[1] = (byte)getIntFor(config,"ColorNutrientA","Green", 28);
+		cropNutrientAColor[2] = (byte)getIntFor(config,"ColorNutrientA","Blue", 36);
+		cropNutrientAColor[3] = (byte)getIntFor(config,"ColorNutrientA","Alpha", 200);
 		
-		cropNutrientBColor[0] = getByteFor(config,"ColorNutrientB","Red", (byte) 242);
-		cropNutrientBColor[1] = getByteFor(config,"ColorNutrientB","Green", (byte) 101);
-		cropNutrientBColor[2] = getByteFor(config,"ColorNutrientB","Blue", (byte) 34);
-		cropNutrientBColor[3] = getByteFor(config,"ColorNutrientB","Alpha", (byte) 200);
+		cropNutrientBColor[0] = (byte)getIntFor(config,"ColorNutrientB","Red", 242);
+		cropNutrientBColor[1] = (byte)getIntFor(config,"ColorNutrientB","Green", 101);
+		cropNutrientBColor[2] = (byte)getIntFor(config,"ColorNutrientB","Blue", 34);
+		cropNutrientBColor[3] = (byte)getIntFor(config,"ColorNutrientB","Alpha", 200);
 		
-		cropNutrientCColor[0] = getByteFor(config,"ColorNutrientC","Red", (byte) 247);
-		cropNutrientCColor[1] = getByteFor(config,"ColorNutrientC","Green", (byte) 148);
-		cropNutrientCColor[2] = getByteFor(config,"ColorNutrientC","Blue", (byte) 49);
-		cropNutrientCColor[3] = getByteFor(config,"ColorNutrientC","Alpha", (byte) 200);
+		cropNutrientCColor[0] = (byte)getIntFor(config,"ColorNutrientC","Red", 247);
+		cropNutrientCColor[1] = (byte)getIntFor(config,"ColorNutrientC","Green", 148);
+		cropNutrientCColor[2] = (byte)getIntFor(config,"ColorNutrientC","Blue", 49);
+		cropNutrientCColor[3] = (byte)getIntFor(config,"ColorNutrientC","Alpha", 200);
 		
 		
 		/**Always end with this*/

@@ -17,6 +17,7 @@ public class BlockPeat extends BlockTerra2
 	public BlockPeat(int i, int j)
 	{
 		super(i, j, Material.ground);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
 	@SideOnly(Side.CLIENT)

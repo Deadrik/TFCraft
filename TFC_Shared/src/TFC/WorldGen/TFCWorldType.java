@@ -22,6 +22,7 @@ public class TFCWorldType extends WorldType
 	{
 		super(par1, par2Str, par3);
 	}
+	
 	@Override
 	public WorldChunkManager getChunkManager(World world)
     {

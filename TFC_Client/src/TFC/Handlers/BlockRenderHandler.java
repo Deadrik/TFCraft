@@ -127,6 +127,10 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderFluids.render(block, i, j, k, renderer);
         }
+        else if (modelId == TFCBlocks.woodConstructRenderId)
+        {
+            return RenderWoodConstruct.render(block, i, j, k, renderer);
+        }
 		return false;
 	}
 
