@@ -321,8 +321,10 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void closeChest() {
-		// TODO Auto-generated method stub
+	public void closeChest() 
+	{
+		if(worldObj.isRemote)
+			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 
 	}
 

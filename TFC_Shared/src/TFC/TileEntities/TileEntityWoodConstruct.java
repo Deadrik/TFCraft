@@ -10,6 +10,8 @@ import TFC.*;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.Packet;
@@ -33,6 +35,22 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
     public boolean canUpdate()
     {
         return false;
+    }
+    
+    public void ejectContents()
+    {
+    	for(int i = 0; i < 192; i++)
+    	{
+    		if(data.get(i))
+    		{
+    			data.clear(i);
+    			ItemStack stack = new ItemStack(TFCItems.SinglePlank, 1, woodTypes[i]);
+    			
+    			EntityItem e = new EntityItem(worldObj, xCoord, yCoord, zCoord, stack);
+    			e.delayBeforeCanPickup = 5;
+    			worldObj.spawnEntityInWorld(e);
+    		}
+    	}
     }
 
     /**

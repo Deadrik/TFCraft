@@ -860,38 +860,71 @@ public class TFCItems
     public static int IgExStoneUses = 70;
     public static int SedStoneUses = 50;
     public static int MMStoneUses = 55; 
-    public static int BismuthUses = 420;
-    public static int BismuthBronzeUses = 1160;
-    public static int BlackBronzeUses = 1060;
-    public static int BlackSteelUses = 3000;
-    public static int BlueSteelUses = 4000;
-    public static int BronzeUses = 1200;
-    public static int CopperUses = 820;
-    public static int WroughtIronUses = 1600;
-    public static int RedSteelUses = 4000;
-    public static int RoseGoldUses = 1040;
-    public static int SteelUses = 2200;
-    public static int TinUses = 590;
-    public static int ZincUses = 560;
+    
+    //Tier 0
+    public static int BismuthUses = 300;
+    public static int TinUses = 290;
+    public static int ZincUses = 250;
+    //Tier 1
+    public static int CopperUses = 600;
+    //Tier 2
+    public static int BronzeUses = 1300;
+    public static int RoseGoldUses = 1140;
+    public static int BismuthBronzeUses = 1200;
+    public static int BlackBronzeUses = 1460;
+    //Tier 3
+    public static int WroughtIronUses = 2200;
+    //Tier 4
+    public static int SteelUses = 3300;
+    //Tier 5
+    public static int BlackSteelUses = 4200;
+    //Tier 6
+    public static int BlueSteelUses = 6500;
+    public static int RedSteelUses = 6500;
+    
+    
+  //Tier 0
+    public static float BismuthEff = 11;
+    public static float TinEff = 10.5f;
+    public static float ZincEff = 10;
+    //Tier 1
+    public static float CopperEff = 12;
+    //Tier 2
+    public static float BronzeEff = 15;
+    public static float RoseGoldEff = 13;
+    public static float BismuthBronzeEff = 14;
+    public static float BlackBronzeEff = 16;
+    //Tier 3
+    public static float WroughtIronEff = 16;
+    //Tier 4
+    public static float SteelEff = 17;
+    //Tier 5
+    public static float BlackSteelEff = 18;
+    //Tier 6
+    public static float BlueSteelEff = 21;
+    public static float RedSteelEff = 21;
+    
+    
+    
     
     public static EnumToolMaterial IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 10, 5);
     public static EnumToolMaterial SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 10, 5);
     public static EnumToolMaterial IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 10, 5);
     public static EnumToolMaterial MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 10, 5);
 
-    public static EnumToolMaterial BismuthToolMaterial = EnumHelper.addToolMaterial("Bismuth", 2, BismuthUses, 9.0F, 65, 10);
-    public static EnumToolMaterial BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, BismuthBronzeUses, 11.5F, 85, 10);
-    public static EnumToolMaterial BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, BlackBronzeUses, 11F, 100, 10);
-    public static EnumToolMaterial BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, BlackSteelUses, 18F, 165, 12);
-    public static EnumToolMaterial BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, BlueSteelUses, 21F, 185, 22);
-    public static EnumToolMaterial BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, BronzeUses, 15F, 100, 13);
-    public static EnumToolMaterial CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, CopperUses, 10.0F, 85, 8);
-    public static EnumToolMaterial IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, WroughtIronUses, 16F, 135, 10);
-    public static EnumToolMaterial RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, RedSteelUses, 21F, 185, 22);
-    public static EnumToolMaterial RoseGoldToolMaterial = EnumHelper.addToolMaterial("RoseGold", 2, RoseGoldUses, 11F, 100, 20);
-    public static EnumToolMaterial SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, 17F, 150, 10);
-    public static EnumToolMaterial TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, 9.0F, 65, 8);
-    public static EnumToolMaterial ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, 9.0F, 65, 8);
+    public static EnumToolMaterial BismuthToolMaterial = EnumHelper.addToolMaterial("Bismuth", 2, BismuthUses, BismuthEff, 65, 10);
+    public static EnumToolMaterial BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, BismuthBronzeUses, BismuthBronzeEff, 85, 10);
+    public static EnumToolMaterial BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, BlackBronzeUses, BlackBronzeEff, 100, 10);
+    public static EnumToolMaterial BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, BlackSteelUses, BlackSteelEff, 165, 12);
+    public static EnumToolMaterial BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, BlueSteelUses, BlueSteelEff, 185, 22);
+    public static EnumToolMaterial BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, BronzeUses, BronzeEff, 100, 13);
+    public static EnumToolMaterial CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, CopperUses, CopperEff, 85, 8);
+    public static EnumToolMaterial IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, WroughtIronUses, WroughtIronEff, 135, 10);
+    public static EnumToolMaterial RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, RedSteelUses, RedSteelEff, 185, 22);
+    public static EnumToolMaterial RoseGoldToolMaterial = EnumHelper.addToolMaterial("RoseGold", 2, RoseGoldUses, RoseGoldEff, 100, 20);
+    public static EnumToolMaterial SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, SteelEff, 150, 10);
+    public static EnumToolMaterial TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, TinEff, 65, 8);
+    public static EnumToolMaterial ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, ZincEff, 65, 8);
     
     
     

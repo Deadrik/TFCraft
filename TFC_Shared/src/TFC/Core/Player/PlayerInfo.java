@@ -11,7 +11,7 @@ public class PlayerInfo
 	public String Name;
 	public int ChiselMode;
 	public int hoeMode;
-	public int ChiselDetailZoom;
+
 	public ItemStack knappingRockType;
 	public INetworkManager networkManager;
 	private long lastChange;
@@ -20,7 +20,6 @@ public class PlayerInfo
 	{
 		Name = name;
 		ChiselMode = 0;
-		ChiselDetailZoom = 0;
 		knappingRockType = null;
 		networkManager = nm;
 		lastChange = 0;
@@ -42,33 +41,8 @@ public class PlayerInfo
 		boolean allowDetailed = true;
 		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
-			ChiselMode = ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : ChiselMode == 2 && allowDetailed ? 3 : ChiselMode == 3 && allowDetailed ? 4 : 0;
+			ChiselMode = ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : ChiselMode == 2 && allowDetailed ? 3 : 0;
 			lastChange = TFC_Time.getTotalTicks();
 		}
 	}
-
-	public void switchIncreaseDetailZoom()
-	{
-		if(lastChange+3 < TFC_Time.getTotalTicks())
-		{
-			if(ChiselDetailZoom < 4)
-				ChiselDetailZoom++ ;
-			else
-				ChiselDetailZoom = 0;
-			lastChange = TFC_Time.getTotalTicks();
-		}
-	}
-
-	public void switchDecreaseDetailZoom()
-	{
-		if(lastChange+3 < TFC_Time.getTotalTicks())
-		{
-			if(ChiselDetailZoom > 0)
-				ChiselDetailZoom-- ;
-			else
-				ChiselDetailZoom = 4;
-			lastChange = TFC_Time.getTotalTicks();
-		}
-	}
-
 }

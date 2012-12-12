@@ -19,8 +19,6 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {
 	KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
 	KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
-	KeyBinding Key_ChiselDepthIncrease = new KeyBinding("Key_ChiselDepthIncrease", 13);
-	KeyBinding Key_ChiselDepthDecrease = new KeyBinding("Key_ChiselDepthDecrease", 12);
 
 	private long keyTime = 0;
 
@@ -71,28 +69,6 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 					pi.switchHoeMode();
 
 					//PacketHandler.sendKeyPress(3);
-				}
-			}
-			else if (bind.keyDescription == Key_ChiselDepthIncrease.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
-					&& player.getCurrentEquippedItem().getItem() instanceof ItemChisel && FMLClientHandler.instance().getClient().currentScreen == null)
-			{
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-				pi.switchIncreaseDetailZoom();
-
-				if(player.worldObj.isRemote)
-				{
-					PacketHandler.sendKeyPress(1);
-				}
-			}
-			else if (bind.keyDescription == Key_ChiselDepthDecrease.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
-					&& player.getCurrentEquippedItem().getItem() instanceof ItemChisel && FMLClientHandler.instance().getClient().currentScreen == null)
-			{
-				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-				pi.switchDecreaseDetailZoom();
-
-				if(player.worldObj.isRemote)
-				{
-					PacketHandler.sendKeyPress(2);
 				}
 			}
 		}

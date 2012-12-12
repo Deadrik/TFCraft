@@ -2,16 +2,19 @@ package TFC.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import TFC.TFCBlocks;
 import TFC.Core.CollisionRayTracePlanks;
+import TFC.TileEntities.TileEntityTerraLogPile;
 import TFC.TileEntities.TileEntityWoodConstruct;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TileEntity;
@@ -58,6 +61,37 @@ public class BlockWoodConstruct extends BlockTerraContainer
 	public boolean renderAsNormalBlock()
 	{
 		return false;
+	}
+	
+	public void Eject(World par1World, int par2, int par3, int par4)
+    {
+        if(!par1World.isRemote && (TileEntityWoodConstruct)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        {
+        	TileEntityWoodConstruct te = (TileEntityWoodConstruct)par1World.getBlockTileEntity(par2, par3, par4);
+            te.ejectContents();
+            par1World.setBlock(par2, par3, par4, 0);
+        }
+    }
+	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{		
+		Eject(world,i,j,k);
+	}
+	@Override
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) 
+	{
+		Eject(par1World,par2,par3,par4);
+	}
+	@Override
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) 
+	{
+		Eject(par1World,par2,par3,par4);
+	}
+	@Override
+	public boolean removeBlockByPlayer(World par1World, EntityPlayer player, int par2, int par3, int par4) 
+	{
+		Eject(par1World,par2,par3,par4);
+		return true;
 	}
 	
 	@Override

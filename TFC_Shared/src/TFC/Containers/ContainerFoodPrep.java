@@ -43,10 +43,7 @@ public class ContainerFoodPrep extends Container
 	{
 		super.onCraftGuiClosed(par1EntityPlayer);
 		
-		if(!world.isRemote)
-		{
-			te.closeChest();
-		}
+		te.closeChest();
 	}
 
 	@Override
