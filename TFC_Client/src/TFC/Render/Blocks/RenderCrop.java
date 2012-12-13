@@ -22,6 +22,12 @@ public class RenderCrop
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
         Minecraft mc = ModLoader.getMinecraftInstance();
         
+        boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
+        
         int stage = (int) Math.floor(te.growth);
         if(stage > crop.numGrowthStages)
             stage = crop.numGrowthStages;

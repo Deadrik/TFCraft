@@ -11,6 +11,7 @@ import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Packet;
 import net.minecraft.src.Packet250CustomPayload;
 import net.minecraft.src.TileEntity;
@@ -18,12 +19,23 @@ import net.minecraft.src.TileEntity;
 public abstract class NetworkTileEntity extends TileEntity {
 
 	public boolean shouldSendInitData = true;
+	public EntityPlayer entityplayer;
 	/**
 	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across. Read by the client only.
 	 * @param inStream
 	 */
 	public abstract void handleDataPacket(DataInputStream inStream) throws IOException;
 	
+	/**
+	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across. Read by the server only.
+	 * @param inStream
+	 * @param player
+	 */
+	public void handleDataPacketServer(DataInputStream inStream, EntityPlayer player) throws IOException
+	{
+		entityplayer = player;
+		handleDataPacketServer(inStream);
+	}
 	/**
 	 * The X/Y/Z has already been read from the input stream. Now read out the custom data that you needed to send across. Read by the server only.
 	 * @param inStream

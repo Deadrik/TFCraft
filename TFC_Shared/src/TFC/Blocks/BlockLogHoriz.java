@@ -36,35 +36,31 @@ public class BlockLogHoriz extends BlockLogVert
     	int dir = j >> 3;
     	
     	if(dir == 0)
-    	{
-//    		if(i == 2 || i == 3)
-//    			return 144 + meta;
-//    		else return j+32;
-    		
+    	{    		
     		if(i == 0) {
-				return 32 + meta;
+				return 128 + meta;
 			} else if(i == 1) {
-				return 32 + meta;
+				return 128 + meta;
 			} else if(i == 2) {
 				return 144 + meta;
 			} else if(i == 3) {
 				return 144 + meta;
 			} else if(i == 4) {
-				return 128 + meta;
+				return 32 + meta;
 			} else {
-				return 128 + meta;
+				return 32 + meta;
 			}
     	}
     	else
     	{
     		if(i == 0) {
-				return 128 + meta;
+				return 32 + meta;
 			} else if(i == 1) {
-				return 128 + meta;
+				return 32 + meta;
 			} else if(i == 2) {
-				return 128 + meta;
+				return 32 + meta;
 			} else if(i == 3) {
-				return 128 + meta;
+				return 32 + meta;
 			} else if(i == 4) {
 				return 144 + meta;
 			} else {

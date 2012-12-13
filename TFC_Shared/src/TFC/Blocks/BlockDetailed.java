@@ -28,6 +28,10 @@ import net.minecraft.src.World;
 
 public class BlockDetailed extends BlockPartial
 {
+	public static int lockX = 0;
+	public static int lockY = 0;
+	public static int lockZ = 0;
+	
 	public BlockDetailed(int par1)
 	{
 		super(par1, Material.rock);
@@ -74,13 +78,26 @@ public class BlockDetailed extends BlockPartial
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) 
 	{
 		boolean hasHammer = false;
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 		for(int i = 0; i < 9;i++)
 		{
 			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
 				hasHammer = true;
 		}
-		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
+		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && world.isRemote &&
+				pi.lockMatches(x, y, z))
 		{
+			TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+			
+			lockX = x; lockY = y; lockZ = z;
+			
+			TerraFirmaCraft.proxy.sendCustomPacket(te.createActivatePacket(xSelected, ySelected, zSelected));
+		}
+		return false;
+	}
+	
+	public boolean onBlockActivatedServer(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) 
+	{
 			int id = world.getBlockId(x, y, z);
 			byte meta = (byte) world.getBlockMetadata(x, y, z);
 
@@ -94,7 +111,7 @@ public class BlockDetailed extends BlockPartial
 				TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
 				int index = (xSelected * 8 + zSelected)*8 + ySelected;
 
-				if(index >= 0 && !te.isFinished)
+				if(index >= 0)
 				{
 					System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
 					te.data.clear(index);
@@ -103,7 +120,6 @@ public class BlockDetailed extends BlockPartial
 				}
 				return true;
 			}
-		}
 		return false;
 	}
 
@@ -164,19 +180,17 @@ public class BlockDetailed extends BlockPartial
 				returns,
 				te.data,
 				te);
-		if(te.isFinished)
-		{
+
 			//Check if the block itself is beign collided with
-			returns = CollisionRayTraceDetailed.collisionRayTracer(
-					this,
-					world,
-					player,
-					view,
-					x,
-					y,
-					z,
-					returns);
-		}
+//			returns = CollisionRayTraceDetailed.collisionRayTracer(
+//					this,
+//					world,
+//					player,
+//					view,
+//					x,
+//					y,
+//					z,
+//					returns);
 
 		if (!returns.isEmpty()) {
 			Object[] min = null;

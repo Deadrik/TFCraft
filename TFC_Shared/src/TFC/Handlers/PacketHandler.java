@@ -237,7 +237,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
 					if(te!= null)
-						te.handleDataPacketServer(dis);
+						te.handleDataPacketServer(dis, player);
 				}
 			}
 			else if (type == Packet_Player_Status)

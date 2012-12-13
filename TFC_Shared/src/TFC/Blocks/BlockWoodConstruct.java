@@ -16,16 +16,17 @@ import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Material;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.Vec3;
 import net.minecraft.src.World;
 
 public class BlockWoodConstruct extends BlockTerraContainer
-{
+{	
 	public BlockWoodConstruct(int par1) 
 	{
-		super(par1);
+		super(par1, Material.wood);
 	}
 
 	@Override
@@ -266,7 +267,7 @@ public class BlockWoodConstruct extends BlockTerraContainer
 		}
 		index = -10;
 		side = -1;
-		setBlockBoundsBasedOnSelection(world, x, y, z);
+		//setBlockBoundsBasedOnSelection(world, x, y, z);
 
 		return null;
 	}

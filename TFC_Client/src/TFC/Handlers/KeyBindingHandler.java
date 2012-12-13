@@ -3,6 +3,7 @@ package TFC.Handlers;
 import java.util.EnumSet;
 
 import TFC.TerraFirmaCraft;
+import TFC.Blocks.BlockDetailed;
 import TFC.Core.KeyBindings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -19,6 +20,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 {
 	KeyBinding Key_Calendar = new KeyBinding("Key_Calendar", 49);
 	KeyBinding Key_ToolMode = new KeyBinding("Key_ToolMode", 50);
+	KeyBinding Key_LockTool = new KeyBinding("Key_LockTool", 38);
 
 	private long keyTime = 0;
 
@@ -69,6 +71,26 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 					pi.switchHoeMode();
 
 					//PacketHandler.sendKeyPress(3);
+				}
+			}
+			else if (bind.keyDescription == Key_LockTool.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 
+					 && FMLClientHandler.instance().getClient().currentScreen == null)
+			{
+				PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
+				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
+				{
+					if(pi.lockX == -9999999)
+					{
+						pi.lockX = BlockDetailed.lockX;
+						pi.lockY = BlockDetailed.lockY;
+						pi.lockZ = BlockDetailed.lockZ;
+					}
+					else
+					{
+						pi.lockX = -9999999;
+						pi.lockY = -9999999;
+						pi.lockZ = -9999999;
+					}
 				}
 			}
 		}

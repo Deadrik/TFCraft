@@ -25,8 +25,14 @@ public class RenderDetailed
         int type = te.TypeID;
         int meta = te.MetaID;
 
-        int over = renderblocks.overrideBlockTexture;
-        ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+        boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
+        
+        if(!breaking)
+        	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
 
 
         for(int subX = 0; subX < 8; subX++)
@@ -51,8 +57,6 @@ public class RenderDetailed
                 }
             }
         }
-
-        renderblocks.overrideBlockTexture = over;
 
         return true;
     }

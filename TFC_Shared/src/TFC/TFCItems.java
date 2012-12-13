@@ -570,6 +570,15 @@ public class TFCItems
     public static Item SteelSheet;
     public static Item TinSheet;
     public static Item ZincSheet;
+    
+    public static Item BrassSheet;
+    public static Item GoldSheet;
+    public static Item LeadSheet;
+    public static Item NickelSheet;
+    public static Item PigIronSheet;
+    public static Item PlatinumSheet;
+    public static Item SilverSheet;
+    public static Item SterlingSilverSheet;
 
     public static Item BismuthSheet2x;
     public static Item BismuthBronzeSheet2x;
@@ -584,6 +593,15 @@ public class TFCItems
     public static Item SteelSheet2x;
     public static Item TinSheet2x;
     public static Item ZincSheet2x;
+    
+    public static Item BrassSheet2x;
+    public static Item GoldSheet2x;
+    public static Item LeadSheet2x;
+    public static Item NickelSheet2x;
+    public static Item PigIronSheet2x;
+    public static Item PlatinumSheet2x;
+    public static Item SilverSheet2x;
+    public static Item SterlingSilverSheet2x;
 
     public static Item BismuthUnfinishedChestplate;
     public static Item BismuthBronzeUnfinishedChestplate;
@@ -1749,41 +1767,44 @@ public class TFCItems
 		
     	String[] Names = {"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Rose Gold", "Steel", "Tin", "Zinc"};
     	String[] NamesNS = {"Bismuth", "BismuthBronze", "BlackBronze", "BlackSteel", "BlueSteel", "Bronze", "Copper", "WroughtIron", "RedSteel", "RoseGold", "Steel", "Tin", "Zinc"};
+    	String[] NamesNSO = {"Brass", "Gold", "Lead", "Nickel", "Pig Iron", "Platinum", "Silver", "Sterling Silver"};
     	CommonProxy proxy = TerraFirmaCraft.proxy;
         
         EnumArmorMaterial[] mats = new EnumArmorMaterial[]{TFCItems.BismuthArmorMaterial,TFCItems.BismuthBronzeArmorMaterial,TFCItems.BlackBronzeArmorMaterial,TFCItems.BlackSteelArmorMaterial,TFCItems.BlueSteelArmorMaterial,
                 TFCItems.BronzeArmorMaterial,TFCItems.CopperArmorMaterial,TFCItems.IronArmorMaterial,TFCItems.RedSteelArmorMaterial,TFCItems.RoseGoldArmorMaterial,
                 TFCItems.SteelArmorMaterial,TFCItems.TinArmorMaterial,TFCItems.ZincArmorMaterial};
         
+        
+        
         int i = 0;
-        BismuthSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("BismuthSheet").setIconCoord(0,11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BismuthBronzeSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Bismuth BronzeSheet").setIconCoord(1, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BlackBronzeSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Black BronzeSheet").setIconCoord(2, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BlackSteelSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Black SteelSheet").setIconCoord(3, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BlueSteelSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Blue SteelSheet").setIconCoord(4, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BronzeSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("BronzeSheet").setIconCoord(6, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        CopperSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("CopperSheet").setIconCoord(7, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        WroughtIronSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Wrought IronSheet").setIconCoord(10, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
-        RedSteelSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Red SteelSheet").setIconCoord(3, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
-        RoseGoldSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Rose GoldSheet").setIconCoord(4, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
-        SteelSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("SteelSheet").setIconCoord(6, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
-        TinSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("TinSheet").setIconCoord(8, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
-        ZincSheet = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("ZincSheet").setIconCoord(9, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BismuthSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("BismuthSheet").setIconCoord(0,11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BismuthBronzeSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Bismuth BronzeSheet").setIconCoord(1, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BlackBronzeSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Black BronzeSheet").setIconCoord(2, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BlackSteelSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Black SteelSheet").setIconCoord(3, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BlueSteelSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Blue SteelSheet").setIconCoord(4, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BronzeSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("BronzeSheet").setIconCoord(6, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        CopperSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("CopperSheet").setIconCoord(7, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        WroughtIronSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Wrought IronSheet").setIconCoord(10, 11)).setTexturePath("/bioxx/terrasprites.png");num++;
+        RedSteelSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Red SteelSheet").setIconCoord(3, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
+        RoseGoldSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("Rose GoldSheet").setIconCoord(4, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
+        SteelSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("SteelSheet").setIconCoord(6, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
+        TinSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("TinSheet").setIconCoord(8, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
+        ZincSheet = ((ItemTerra)new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet",num)).setItemName("ZincSheet").setIconCoord(9, 12)).setTexturePath("/bioxx/terrasprites.png");num++;
         
         i = 0;
-        BismuthSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("BismuthSheet2x").setIconCoord(0,13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BismuthBronzeSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Bismuth BronzeSheet2x").setIconCoord(1, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BlackBronzeSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Black BronzeSheet2x").setIconCoord(2, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BlackSteelSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Black SteelSheet2x").setIconCoord(3, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BlueSteelSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Blue SteelSheet2x").setIconCoord(4, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        BronzeSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("BronzeSheet2x").setIconCoord(6, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        CopperSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("CopperSheet2x").setIconCoord(7, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        WroughtIronSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Wrought IronSheet2x").setIconCoord(10, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
-        RedSteelSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Red SteelSheet2x").setIconCoord(3, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
-        RoseGoldSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Rose GoldSheet2x").setIconCoord(4, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
-        SteelSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("SteelSheet2x").setIconCoord(6, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
-        TinSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("TinSheet2x").setIconCoord(8, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
-        ZincSheet2x = ((ItemTerra)new ItemTerra(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("ZincSheet2x").setIconCoord(9, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BismuthSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("BismuthSheet2x").setIconCoord(0,13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BismuthBronzeSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Bismuth BronzeSheet2x").setIconCoord(1, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BlackBronzeSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Black BronzeSheet2x").setIconCoord(2, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BlackSteelSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Black SteelSheet2x").setIconCoord(3, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BlueSteelSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Blue SteelSheet2x").setIconCoord(4, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        BronzeSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("BronzeSheet2x").setIconCoord(6, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        CopperSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("CopperSheet2x").setIconCoord(7, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        WroughtIronSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Wrought IronSheet2x").setIconCoord(10, 13)).setTexturePath("/bioxx/terrasprites.png");num++;
+        RedSteelSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Red SteelSheet2x").setIconCoord(3, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
+        RoseGoldSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("Rose GoldSheet2x").setIconCoord(4, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
+        SteelSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("SteelSheet2x").setIconCoord(6, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
+        TinSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("TinSheet2x").setIconCoord(8, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
+        ZincSheet2x = ((ItemTerra)new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setItemName("ZincSheet2x").setIconCoord(9, 14)).setTexturePath("/bioxx/terrasprites.png");num++;
         
         i = 0;
         TFCItems.BismuthUnfinishedBoots = ((ItemUnfinishedArmor)new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+"UnfinishedBoots",num)).setItemName(Names[i]+"UnfinishedBoots").setIconCoord(1+i,3)).setTexturePath("/bioxx/terraarmor1.png"); num++;i++;
@@ -1897,6 +1918,26 @@ public class TFCItems
         TFCItems.SteelHelmet = ((ItemCustomArmor)new ItemCustomArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
         TFCItems.TinHelmet = ((ItemCustomArmor)new ItemCustomArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
         TFCItems.ZincHelmet = ((ItemCustomArmor)new ItemCustomArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+"Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setItemName(Names[i]+"Helmet").setIconCoord(1+i,0)); num++;i++;
+    
+        i = 0;
+        BrassSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(5,11);
+        GoldSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(8,11);
+        LeadSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(9,11);
+        NickelSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(0,12);
+        PigIronSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(1,12);
+        PlatinumSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(2,12);
+        SilverSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(5,12);
+        SterlingSilverSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet",num++)).setItemName(NamesNSO[i++]+"Sheet").setIconCoord(7,12);
+        
+        i = 0;
+        BrassSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(5,13);
+        GoldSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(8,13);
+        LeadSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(9,13);
+        NickelSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(0,14);
+        PigIronSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(1,14);
+        PlatinumSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(2,14);
+        SilverSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(5,14);
+        SterlingSilverSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setItemName(NamesNSO[i++]+"Sheet2x").setIconCoord(7,14);
     }
     
     public static Item[] Meals;

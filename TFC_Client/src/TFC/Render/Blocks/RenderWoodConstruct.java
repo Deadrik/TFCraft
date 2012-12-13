@@ -9,6 +9,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.Tessellator;
+import net.minecraftforge.client.ForgeHooksClient;
 import TFC.TFCBlocks;
 import TFC.Render.TFC_CoreRender;
 import TFC.TileEntities.*;
@@ -26,7 +27,11 @@ public class RenderWoodConstruct
     	
     	float div = 1f / d;
         
-        int over = renderblocks.overrideBlockTexture;
+        boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
         
         for(int index = 0; index < dd; index++)
         {
@@ -39,16 +44,18 @@ public class RenderWoodConstruct
         		float minZ = div * (index >> 3);
         		float maxZ = minZ + div;
         		
-
-        		renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index]);
+        		if(!breaking)
+        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index]);
         		renderblocks.uvRotateTop = 3;
         		renderblocks.uvRotateBottom = 3;
         		renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
         		renderblocks.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
         	}
         }
+        //Fix the rotations
         renderblocks.uvRotateTop = 0;
 		renderblocks.uvRotateBottom = 0;
+		
         for(int index = 0; index < dd; index++)
         {
         	if(te.data.get(index + dd))
@@ -61,7 +68,8 @@ public class RenderWoodConstruct
         		float maxZ = minZ + div;
         		
 
-        		renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index+dd]);
+        		if(!breaking)
+        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index+dd]);
         		renderblocks.uvRotateNorth = 1;
         		renderblocks.uvRotateSouth = 1;
         		renderblocks.uvRotateEast = 1;
@@ -71,6 +79,7 @@ public class RenderWoodConstruct
         	}
         }
         
+        //Fix the rotations
         renderblocks.uvRotateNorth = 0;
 		renderblocks.uvRotateSouth = 0;
 		renderblocks.uvRotateEast = 0;
@@ -87,7 +96,8 @@ public class RenderWoodConstruct
         		float minZ = 0;
         		float maxZ = 1;
 
-        		renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[z+dd2]);
+        		if(!breaking)
+        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[z+dd2]);
         		renderblocks.uvRotateTop = 1;
         		renderblocks.uvRotateBottom = 1;
                 renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
@@ -96,7 +106,7 @@ public class RenderWoodConstruct
         }
         renderblocks.uvRotateTop = 0;
 		renderblocks.uvRotateBottom = 0;
-        renderblocks.overrideBlockTexture = over;
+		renderblocks.clearOverrideBlockTexture();
         return true;
     }
 }

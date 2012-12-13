@@ -491,6 +491,7 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand2, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(Charcoal, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodConstruct, "axe", 0);
 
 		if (config != null) {
 			config.save();

@@ -48,14 +48,22 @@ public class TFC_CoreRender
     {
         TileEntityPartial te = (TileEntityPartial) renderblocks.blockAccess.getBlockTileEntity(par2, par3, par4);
         int md = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
-        //renderblocks.renderAllFaces = true;
+        
+        boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
 
         if(te.TypeID <= 0) return false;
 
         int type = te.TypeID;
         int meta = te.MetaID;
         int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
-        ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+        
+        if(!breaking)
+        	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+        
         long extraX = (te.extraData) & 0xf;
         long extraY = (te.extraData >> 4) & 0xf;
         long extraZ = (te.extraData >> 8) & 0xf;
@@ -67,8 +75,9 @@ public class TFC_CoreRender
         
         renderblocks.setRenderMinMax(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 
+        //This is the old ore code that I experimented with
         int over = renderblocks.overrideBlockTexture;
-        if(over == -1 && (type == TFCBlocks.Ore.blockID || type == TFCBlocks.Ore2.blockID || type == TFCBlocks.Ore3.blockID))
+        if(!breaking && (type == TFCBlocks.Ore.blockID || type == TFCBlocks.Ore2.blockID || type == TFCBlocks.Ore3.blockID))
         {
             BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
             renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, par2, par3, par4);
@@ -76,8 +85,7 @@ public class TFC_CoreRender
             renderblocks.overrideBlockTexture = over;
         }
 
-
-        if(over == -1)
+        if(!breaking)
             renderblocks.overrideBlockTexture = tex;
 
         renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
@@ -93,6 +101,12 @@ public class TFC_CoreRender
      */
     public static boolean renderBlockStairs(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
     {
+    	boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
+        
         int var5 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
         renderblocks.renderAllFaces = true;
         int var6 = var5 & 3;
@@ -114,8 +128,11 @@ public class TFC_CoreRender
         int type = te.TypeID;
         int meta = te.MetaID;
         int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
-        ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
-        renderblocks.overrideBlockTexture = tex;
+        if(!breaking)
+        {
+        	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+        	renderblocks.overrideBlockTexture = tex;
+        }
         renderblocks.setRenderMinMax(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
         renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
 
@@ -249,15 +266,19 @@ public class TFC_CoreRender
 
     public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)	
     {
+    	boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
+        
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
         World w = ModLoader.getMinecraftInstance().theWorld;
         TFCWorldChunkManager wcm = ((TFCWorldChunkManager)w.getWorldChunkManager());
         renderblocks.renderAllFaces = true;
         
-        int over = renderblocks.overrideBlockTexture;
-        
         DataLayer rockLayer1 = ((TFCWorldChunkManager)w.getWorldChunkManager()).getRockLayerAt(i, k, 0);
-        if(rockLayer1 != null && Block.blocksList[rockLayer1.data1] != null)
+        if(rockLayer1 != null && Block.blocksList[rockLayer1.data1] != null && !breaking)
         	renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(0, rockLayer1.data2);
 
         int seed = i*k+j;
@@ -273,9 +294,8 @@ public class TFC_CoreRender
         renderblocks.setRenderMinMax(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
         renderblocks.renderStandardBlock(block, i, j, k);
         //renderblocks.func_83020_a(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
+        renderblocks.clearOverrideBlockTexture();
 
-
-        renderblocks.overrideBlockTexture = over;
         return true;
     }
 
@@ -910,20 +930,24 @@ public class TFC_CoreRender
 
     public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
     {
-        int over = renderblocks.overrideBlockTexture;
-
-        if(over == -1)
+    	boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
         {
-            renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, xCoord, yCoord, zCoord);
-            renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-            renderblocks.overrideBlockTexture = over;
-
-            renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-
-            renderblocks.overrideBlockTexture = over;
+        	breaking = true;
         }
 
-        renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+        if(!breaking)
+        {
+        	//render the background rock
+            renderblocks.overrideBlockTexture = getRockTexture(ModLoader.getMinecraftInstance().theWorld, xCoord, yCoord, zCoord);
+            renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+            renderblocks.clearOverrideBlockTexture();
+
+            //render the ore overlay
+            renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+        }
+
+        //renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
 
         return true;
     }
@@ -982,19 +1006,25 @@ public class TFC_CoreRender
 
         int meta = blockAccess.getBlockMetadata(i, j, k);
         int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
+        
+        boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
 
         if(direction == 0)
         {
             //forward
-            renderblocks.overrideBlockTexture = 86;
+        	if(!breaking) renderblocks.overrideBlockTexture = 86;
             renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
-            renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.overrideBlockTexture = -1;
             renderblocks.setRenderMinMax(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
-            renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = 87;
             renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
@@ -1002,17 +1032,17 @@ public class TFC_CoreRender
         else if(direction == 1)
         {
             //forward
-            renderblocks.overrideBlockTexture = 86;
+        	if(!breaking) renderblocks.overrideBlockTexture = 86;
             renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
-            renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.overrideBlockTexture = -1;
             renderblocks.setRenderMinMax(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
-            renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = 87;
             renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
@@ -1021,15 +1051,15 @@ public class TFC_CoreRender
         else if(direction == 2)
         {
             //forward
-            renderblocks.overrideBlockTexture = 86;
+        	if(!breaking) renderblocks.overrideBlockTexture = 86;
             renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
-            renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.overrideBlockTexture = -1;
             renderblocks.setRenderMinMax(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
-            renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = 87;
             renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
@@ -1037,17 +1067,17 @@ public class TFC_CoreRender
         else if(direction == 3)
         {
             //forward
-            renderblocks.overrideBlockTexture = 86;
+        	if(!breaking)  renderblocks.overrideBlockTexture = 86;
             renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
-            renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.overrideBlockTexture = -1;
             renderblocks.setRenderMinMax(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
-            renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = 87;
             renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
@@ -1059,6 +1089,12 @@ public class TFC_CoreRender
 
     public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
+    	boolean breaking = false;
+        if(renderblocks.overrideBlockTexture >= 240)
+        {
+        	breaking = true;
+        }
+        
     	double blockMinX = block.getBlockBoundsMinX();
 		double blockMaxX = block.getBlockBoundsMaxX();
 		double blockMinY = block.getBlockBoundsMinY();
@@ -2148,15 +2184,6 @@ public class TFC_CoreRender
             }
         }
         return out;
-    }
-
-    public static boolean RenderToolRack(Block block, int i, int j, int k, RenderBlocks renderblocks)
-    {
-        IBlockAccess blockAccess = renderblocks.blockAccess;
-
-
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
-        return true;
     }
 
     /**

@@ -9,8 +9,12 @@ import net.minecraft.src.ServerPlayerBase;
 public class PlayerInfo
 {
 	public String Name;
-	public int ChiselMode;
+	public byte ChiselMode;
 	public int hoeMode;
+	
+	public int lockX = -9999999;
+	public int lockY = -9999999;
+	public int lockZ = -9999999;
 
 	public ItemStack knappingRockType;
 	public INetworkManager networkManager;
@@ -41,8 +45,16 @@ public class PlayerInfo
 		boolean allowDetailed = true;
 		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
-			ChiselMode = ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : ChiselMode == 2 && allowDetailed ? 3 : 0;
+			ChiselMode = (byte) (ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : ChiselMode == 2 && allowDetailed ? 3 : 0);
 			lastChange = TFC_Time.getTotalTicks();
 		}
+	}
+	
+	public boolean lockMatches(int x, int y, int z)
+	{
+		if((lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z))
+			return true;
+		
+		return false;
 	}
 }

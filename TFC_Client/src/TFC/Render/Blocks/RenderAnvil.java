@@ -24,6 +24,12 @@ public class RenderAnvil {
 		int direction = ((BlockAnvil)block).getDirectionFromMetadata(meta);
 		renderblocks.renderAllFaces = true;
 
+		boolean breaking = false;
+		if(renderblocks.overrideBlockTexture >= 240)
+		{
+			breaking = true;
+		}
+
 		TileEntityTerraAnvil te = (TileEntityTerraAnvil)blockAccess.getBlockTileEntity(i, j, k);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
@@ -69,11 +75,14 @@ public class RenderAnvil {
 		{
 			if(Block.blocksList[te.stonePair[0]] != null)
 			{
-				ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
-				renderblocks.overrideBlockTexture = Block.blocksList[te.stonePair[0]].getBlockTextureFromSideAndMetadata(0, te.stonePair[1]);
+				if(!breaking)
+				{
+					ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
+					renderblocks.overrideBlockTexture = Block.blocksList[te.stonePair[0]].getBlockTextureFromSideAndMetadata(0, te.stonePair[1]);
+				}
 				renderblocks.setRenderMinMax(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				if(te.anvilItemStacks[0] != null)
+				if(te.anvilItemStacks[0] != null && !breaking)
 				{
 					ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 					renderblocks.overrideBlockTexture = Item.itemsList[te.anvilItemStacks[0].itemID].getIconIndex(te.anvilItemStacks[0]);
@@ -84,20 +93,20 @@ public class RenderAnvil {
 					tessellator.setColorRGBA_F(1, 1, 1, 1);
 
 					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-			        int z = renderblocks.overrideBlockTexture & 0xf0;
+					int z = renderblocks.overrideBlockTexture & 0xf0;
 
-			        double minX = ((double)x + 0	) / 256D;
-			        double maxX = ((double)x + 16	) / 256D;
-			        double minZ = ((double)z + 0	) / 256D;
-			        double maxZ = ((double)z + 16	) / 256D;
+					double minX = ((double)x + 0	) / 256D;
+					double maxX = ((double)x + 16	) / 256D;
+					double minZ = ((double)z + 0	) / 256D;
+					double maxZ = ((double)z + 16	) / 256D;
 
-			        tessellator.addTranslation(0.5f, 0f, 0.5f);
+					tessellator.addTranslation(0.5f, 0f, 0.5f);
 
 					tessellator.addVertexWithUV(i, j + 0.901, k + 0.4, minX, maxZ);
 					tessellator.addVertexWithUV(i + 0.4, j + 0.901, k + 0.4, maxX, maxZ);
 					tessellator.addVertexWithUV(i + 0.4, j + 0.901, k, maxX, minZ);
 					tessellator.addVertexWithUV(i, j + 0.901, k, minX, minZ);
-					
+
 					tessellator.addTranslation(-0.5f, 0f, -0.5f);
 
 

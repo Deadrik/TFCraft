@@ -535,9 +535,7 @@ public class ClientProxy extends CommonProxy
 		KeyBindings.addIsRepeating(false);
 		KeyBindings.addKeyBinding("Key_ToolMode", 50);
 		KeyBindings.addIsRepeating(false);
-		KeyBindings.addKeyBinding("Key_ChiselDepthIncrease", 13);
-		KeyBindings.addIsRepeating(false);
-		KeyBindings.addKeyBinding("Key_ChiselDepthDecrease", 12);
+		KeyBindings.addKeyBinding("Key_LockTool", 38);
 		KeyBindings.addIsRepeating(false);
 	}
 
@@ -565,6 +563,9 @@ public class ClientProxy extends CommonProxy
 		LanguageRegistry LR = LanguageRegistry.instance();
 
 		LR.addStringLocalization("Key_Calendar", "Open Calendar");
+		LR.addStringLocalization("Key_ToolMode", "Cycle Tool Mode");
+		LR.addStringLocalization("Key_LockTool", "Lock Tool Location");
+		
 		LR.addStringLocalization("generator.DEFAULT", "TFC Default");
 		//Gems
 		String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
@@ -1194,8 +1195,7 @@ public class ClientProxy extends CommonProxy
 			/**
 			 * Armor Related
 			 * */
-			LR.addStringLocalization("item."+ToolNames[i]+"Sheet.name", ToolNames[i] + " Sheet");
-			LR.addStringLocalization("item."+ToolNames[i]+"Sheet2x.name", ToolNames[i] + " Sheet 2x");
+			
 			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedHelmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
 			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedHelmet2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
 			LR.addStringLocalization("item."+ToolNames[i]+"Helmet.name", ToolNames[i] + " Helmet");
@@ -1216,6 +1216,8 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("item.Unshaped"+Names[i].replace(" ", "")+".name", "Unshaped "+Names[i]);
 			LR.addStringLocalization("item."+Names[i].replace(" ", "")+"Ingot.name", Names[i] + " Ingot");
 			LR.addStringLocalization("item."+Names[i].replace(" ", "")+"Ingot2x.name", Names[i] + " Ingot 2x");
+			LR.addStringLocalization("item."+Names[i]+"Sheet.name", Names[i] + " Sheet");
+			LR.addStringLocalization("item."+Names[i]+"Sheet2x.name", Names[i] + " Sheet 2x");
 		}
 
 		LR.addStringLocalization("item.UnshapedHCBlackSteel.name", "Unshaped High Carbon Black Steel");

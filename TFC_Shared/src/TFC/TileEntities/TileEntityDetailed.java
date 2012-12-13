@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.BitSet;
 
 import TFC.*;
+import TFC.Blocks.BlockDetailed;
 import TFC.Core.TFC_Time;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
 import net.minecraft.src.Material;
@@ -22,7 +24,8 @@ public class TileEntityDetailed extends NetworkTileEntity
 	public BitSet data;
 	public int lastEdited;
 
-	public boolean isFinished = false;
+	public static final byte Packet_Update = 0;
+	public static final byte Packet_Activate = 1;
 
 	public TileEntityDetailed()
 	{
@@ -30,29 +33,13 @@ public class TileEntityDetailed extends NetworkTileEntity
 		lastEdited = (int) (TFC_Time.getTotalTicks()/TFC_Time.hourLength);
 	}
 
-//	@Override
-//	public boolean canUpdate()
-//	{
-//		if(isFinished)
-//		{
-//			return false;
-//		}
-//		return true;
-//	}
-	
-	public void updateEntity()
+	@Override
+	public boolean canUpdate()
 	{
-		if(!worldObj.isRemote)
-		{
-			int hours = (int) (TFC_Time.getTotalTicks()/TFC_Time.hourLength);
-			if(lastEdited + 24 < hours && !isFinished)
-			{
-				isFinished = true;
-			}
-		}
+		return false;
 	}
 
- 	public Material getMaterial()
+	public Material getMaterial()
 	{
 		switch(material)
 		{
@@ -155,11 +142,11 @@ public class TileEntityDetailed extends NetworkTileEntity
 	{
 		lastEdited = (int) (TFC_Time.getTotalTicks()/TFC_Time.hourLength);
 	}
-	
+
 	/**
 	 * Reads a tile entity from NBT.
 	 */
-	 public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readFromNBT(par1NBTTagCompound);
 		MetaID = par1NBTTagCompound.getByte("metaID");
@@ -168,13 +155,12 @@ public class TileEntityDetailed extends NetworkTileEntity
 		data = new BitSet(512);
 		data.or(fromByteArray(par1NBTTagCompound.getByteArray("data")));
 		lastEdited = par1NBTTagCompound.getInteger("lastEdited");
-		isFinished = par1NBTTagCompound.getBoolean("isFinished");
 	}
 
 	/**
 	 * Writes a tile entity to NBT.
 	 */
-	 public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setShort("typeID", (short) TypeID);
@@ -182,19 +168,18 @@ public class TileEntityDetailed extends NetworkTileEntity
 		par1NBTTagCompound.setByte("material", material);
 		par1NBTTagCompound.setByteArray("data", toByteArray(data));
 		par1NBTTagCompound.setInteger("lastEdited", lastEdited);
-		par1NBTTagCompound.setBoolean("isFinished", isFinished);
 	}
 
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
-		isFinished = inStream.readBoolean();
-		if(!isFinished)
+		byte packetType = inStream.readByte();
+		if(packetType == this.Packet_Update)
 		{
 			int index = inStream.readInt();
 			data.clear(index);
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -224,9 +209,22 @@ public class TileEntityDetailed extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream)
-			throws IOException {
-		// TODO Auto-generated method stub
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
+	{
+		byte packetType = inStream.readByte();
+		if(packetType == this.Packet_Activate)
+		{
+			PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer).ChiselMode = inStream.readByte();
+			((BlockDetailed)TFCBlocks.StoneDetailed).xSelected = inStream.readByte();
+			((BlockDetailed)TFCBlocks.StoneDetailed).ySelected = inStream.readByte();
+			((BlockDetailed)TFCBlocks.StoneDetailed).zSelected = inStream.readByte();
+			
+			((BlockDetailed)TFCBlocks.StoneDetailed).onBlockActivatedServer(worldObj, xCoord, yCoord, zCoord, this.entityplayer, 0, 0, 0, 0);
+			
+			((BlockDetailed)TFCBlocks.StoneDetailed).xSelected = -10;
+			((BlockDetailed)TFCBlocks.StoneDetailed).ySelected = -10;
+			((BlockDetailed)TFCBlocks.StoneDetailed).zSelected = -10;
+		}
 
 	}
 
@@ -239,8 +237,27 @@ public class TileEntityDetailed extends NetworkTileEntity
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);
-			outStream.writeBoolean(isFinished);
+			outStream.writeByte(this.Packet_Update);
 			outStream.writeInt(index);
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+	
+	public Packet createActivatePacket(int xSelected, int ySelected, int zSelected)
+	{
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+		DataOutputStream outStream = new DataOutputStream(bos);	
+		try {
+			outStream.writeByte(PacketHandler.Packet_Data_Server);
+			outStream.writeInt(xCoord);
+			outStream.writeInt(yCoord);
+			outStream.writeInt(zCoord);
+			outStream.writeByte(this.Packet_Activate);
+			outStream.writeByte(PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode);
+			outStream.writeByte(xSelected);
+			outStream.writeByte(ySelected);
+			outStream.writeByte(zSelected);
 		} catch (IOException e) {
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());

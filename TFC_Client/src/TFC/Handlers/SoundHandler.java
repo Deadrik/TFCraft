@@ -32,7 +32,7 @@ public class SoundHandler
             // If we cannot add the custom sound file to the pool, log the
             // exception
             catch (Exception e) {
-                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING,"TFC Failed loading sound file: " + soundFile);
+                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING, "TFC Failed loading sound file: " + soundFile);
             }
         }
         //event.manager.soundPoolMusic = new SoundPool();
@@ -46,7 +46,7 @@ public class SoundHandler
             // If we cannot add the custom music file to the pool, log the
             // exception
             catch (Exception e) {
-                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING,"TFC Failed loading music file: " + soundFile);
+                FMLCommonHandler.instance().getFMLLogger().log(Level.WARNING, "TFC Failed loading music file: " + soundFile);
             }
         }
 

@@ -134,9 +134,14 @@ public class AnvilRecipe
     
     public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
     {
+    	this(in, p, req, res);
+        this.flux = flux;
+    }
+    
+    public AnvilRecipe(ItemStack in, ItemStack p, AnvilReq req, ItemStack res)
+    {
         input1 = in;
         input2 = p;
-        this.flux = flux;
         anvilreq = req.Tier;
         this.result = res;
     }

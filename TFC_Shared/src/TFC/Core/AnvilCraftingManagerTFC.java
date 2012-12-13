@@ -30,6 +30,7 @@ public class AnvilCraftingManagerTFC
 	
 	public void addWeldRecipe(AnvilRecipe recipe)
     {
+		recipe.flux = true;
         recipesWeld.add(recipe);
     }
 
