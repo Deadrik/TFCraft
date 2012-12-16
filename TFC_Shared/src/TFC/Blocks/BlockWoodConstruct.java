@@ -190,15 +190,15 @@ public class BlockWoodConstruct extends BlockTerraContainer
 				te);
 
 		//Check if the block itself is beign collided with
-		returns = CollisionRayTracePlanks.collisionRayTracer(
-				this,
-				world,
-				player,
-				view,
-				x,
-				y,
-				z,
-				returns);
+//		returns = CollisionRayTracePlanks.collisionRayTracer(
+//				this,
+//				world,
+//				player,
+//				view,
+//				x,
+//				y,
+//				z,
+//				returns);
 
 		if (!returns.isEmpty()) {
 			Object[] min = null;

@@ -526,7 +526,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			}
 		}
 
-		if(input[0] != null)
+		if(input[0] != null && outMetal1 != null)
 		{
 			if(input[0].itemID == TFCItems.CeramicMold.shiftedIndex)
 			{

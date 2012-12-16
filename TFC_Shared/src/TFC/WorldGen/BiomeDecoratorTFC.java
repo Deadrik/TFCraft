@@ -91,7 +91,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			int z1 = 2+randomGenerator.nextInt(6);
 			int z2 = 2+randomGenerator.nextInt(6);
 			
-			if(randomGenerator.nextInt(13) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord)))
+			if(randomGenerator.nextInt(20) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord)))
 				new WorldGenLargeRock(x1,x2,z1,z2, 3).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 

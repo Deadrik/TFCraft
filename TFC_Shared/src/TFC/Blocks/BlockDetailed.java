@@ -25,6 +25,7 @@ import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.Vec3;
 import net.minecraft.src.World;
+import net.minecraft.src.Block;
 
 public class BlockDetailed extends BlockPartial
 {
