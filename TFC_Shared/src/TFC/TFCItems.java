@@ -869,6 +869,8 @@ public class TFCItems
 	public static Item DoorWhiteElm;
 	public static Item DoorWillow;
 	public static Item DoorKapok;
+	
+	public static Item Blueprint;
     
     
     /**
@@ -1569,6 +1571,8 @@ public class TFCItems
 		DoorWhiteElm = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWhiteElm", num++), 13).setItemName("Door White Elm").setIconCoord(13, 15);
 		DoorWillow = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWillow", num++), 14).setItemName("Door Willow").setIconCoord(14, 15);
 		DoorKapok = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorKapok", num++), 15).setItemName("Door Kapok").setIconCoord(15, 15);
+		
+		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
         
         /**Plans*/
         num = 20000;

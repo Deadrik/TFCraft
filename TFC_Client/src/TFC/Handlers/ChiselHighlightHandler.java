@@ -27,7 +27,7 @@ public class ChiselHighlightHandler{
 			int id = world.getBlockId(evt.target.blockX,evt.target.blockY,evt.target.blockZ);
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 			//double depth = (double)pi.ChiselDetailZoom/8D;
-			if(pi.ChiselMode == 3 && id == TFCBlocks.StoneDetailed.blockID)
+			if(pi.ChiselMode == 3 && id == TFCBlocks.Detailed.blockID)
 			{				
 				//Get the hit location in local box coords
 				double hitX = Math.round((evt.target.hitVec.xCoord - evt.target.blockX)*100)/100.0d;

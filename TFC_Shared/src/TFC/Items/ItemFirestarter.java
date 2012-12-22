@@ -181,7 +181,7 @@ public class ItemFirestarter extends ItemTerra
     	if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
     	{
     		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
-    		if(BlockSlab.getPosXChiselLevel(te.extraData) != 0)
+    		if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
     		{
     			return false;
     		}
@@ -189,7 +189,7 @@ public class ItemFirestarter extends ItemTerra
     	if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
     	{
     		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
-    		if(BlockSlab.getNegXChiselLevel(te.extraData) != 0)
+    		if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
     		{
     			return false;
     		}
@@ -197,7 +197,7 @@ public class ItemFirestarter extends ItemTerra
     	if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
     	{
     		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
-    		if(BlockSlab.getPosZChiselLevel(te.extraData) != 0)
+    		if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
     		{
     			return false;
     		}
@@ -205,7 +205,7 @@ public class ItemFirestarter extends ItemTerra
     	if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
     	{
     		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
-    		if(BlockSlab.getNegZChiselLevel(te.extraData) != 0)
+    		if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
     		{
     			return false;
     		}

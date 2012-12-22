@@ -80,6 +80,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntitySapling.class, "Sapling");
 		
 		ModLoader.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
+		ModLoader.registerTileEntity(TileEntitySuperDetailed.class, "Super Detailed");
 		
 		if(b)
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");

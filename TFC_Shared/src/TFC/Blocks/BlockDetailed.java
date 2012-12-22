@@ -116,7 +116,6 @@ public class BlockDetailed extends BlockPartial
 				{
 					System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
 					te.data.clear(index);
-					te.setEdited();
 					te.broadcastPacketInRange(te.createUpdatePacket(index));
 				}
 				return true;

@@ -7,6 +7,7 @@ import TFC.Blocks.BlockDetailed;
 import TFC.Core.KeyBindings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.Items.*;
 
@@ -61,16 +62,11 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 				if(player.getCurrentEquippedItem().getItem() instanceof ItemChisel)
 				{
 					pi.switchChiselMode();
-					//String type = pi.ChiselMode == 0 ? "Smoothing" : pi.ChiselMode == 1 ? "Creating Stairs" : pi.ChiselMode == 3 ? "Detailing" : pi.ChiselMode == 4 ? "Finishing" :"Creating Slabs";
-					//player.addChatMessage(type);
-
 					PacketHandler.sendKeyPress(0);
 				}
 				else if(player.getCurrentEquippedItem().getItem() instanceof ItemCustomHoe)
 				{
 					pi.switchHoeMode();
-
-					//PacketHandler.sendKeyPress(3);
 				}
 			}
 			else if (bind.keyDescription == Key_LockTool.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().thePlayer.getCurrentEquippedItem() != null 

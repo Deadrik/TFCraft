@@ -140,7 +140,7 @@ public class ItemLooseRock extends ItemTerra
 		case 20:
 		case 21:
 		case 22:
-			return 201+(i-17);//mm
+			return 201+(i-16);//mm
 		}
 		return 176+i;
 	}

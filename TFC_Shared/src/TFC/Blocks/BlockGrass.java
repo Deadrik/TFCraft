@@ -213,6 +213,24 @@ public class BlockGrass extends net.minecraft.src.BlockGrass
                 	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta);
                 }
             }
+            
+//            if(!(this.blockID >= 2080 && this.blockID < 2088))
+//            {
+//            	boolean hasBeenSet = false;
+//            	int meta = world.getBlockMetadata(i, j, k);
+//            	for(int x = i-1; x <= i+1 && !hasBeenSet; x++)
+//            	{
+//            		for(int z = k-1; z <= k+1 && !hasBeenSet; z++)
+//                	{
+//            			if(!world.isBlockNormalCube(x, j, z))
+//            			{
+//            				hasBeenSet = true;
+//            				world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForRaisedGrass(meta), meta);
+//            			}
+//                	}
+//            	}
+//            }
+            
             world.markBlockForUpdate(i, j, k);
         }
     }

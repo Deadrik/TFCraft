@@ -4,13 +4,13 @@ import java.util.List;
 
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
+import TFC.Enums.EnumWeight;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
 public class ItemMiscToolHead extends ItemTerra
 {
-
 	public ItemMiscToolHead(int i) 
 	{
 		super(i);
@@ -26,7 +26,14 @@ public class ItemMiscToolHead extends ItemTerra
 	}
 	
 	@Override
-	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
+	public EnumSize getSize() 
+	{
+		return EnumSize.LARGE;
+	}
+	
+	@Override
+	public EnumWeight getWeight() 
+	{
+		return EnumWeight.HEAVY;
 	}
 }

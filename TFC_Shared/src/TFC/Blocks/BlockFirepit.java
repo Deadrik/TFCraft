@@ -186,9 +186,9 @@ public class BlockFirepit extends BlockTerraContainer
 		if(meta == 0)
 			return 0;
 		else if(meta == 1)
-			return 15;
-		else
 			return 10;
+		else
+			return 15;
     }
 	
 	/**

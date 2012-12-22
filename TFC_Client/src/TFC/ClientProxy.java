@@ -93,6 +93,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture(TFC_Textures.PlantsSheet);
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_foodprep.png");
 		MinecraftForgeClient.preloadTexture(TFC_Textures.FoodSheet);
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_blueprint.png");
 
 		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
 		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -151,6 +152,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.superDetailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
@@ -268,6 +270,10 @@ public class ClientProxy extends CommonProxy
 		case 33:
 		{
 			return new GuiQuern(player.inventory, ((TileEntityQuern) te), world, x, y, z);
+		}
+		case 34:
+		{
+			return new GuiBlueprint(player, world, x, y, z);
 		}
 
 		}
@@ -639,6 +645,8 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("effect.bleed","Bleeding");
 		LR.addStringLocalization("tile.Quern.name", "Quern Base");
 		LR.addStringLocalization("item.Quern.name", "Handstone");
+		
+		LR.addStringLocalization("item.Blueprint.name", "Blueprint");
 		
 		RegisterTerrain();
 		RegisterMetal();

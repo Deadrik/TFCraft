@@ -19,6 +19,7 @@ import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagList;
+import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
 public class ItemPlank extends ItemTerra
@@ -71,9 +72,10 @@ public class ItemPlank extends ItemTerra
 				if((!isConstruct && isAir) || (isConstruct && isEdge && world.getBlockId(i, j-offset, k) == 0))
 					world.setBlock(i, j-1, k, TFCBlocks.WoodConstruct.blockID);
 
-				TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i, j-offset, k);
-				if(te!= null)
+				TileEntity tile = world.getBlockTileEntity(i, j-offset, k);
+				if(tile!= null)
 				{
+					TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 					te.data.set(dd+(x+(z*d)));
 					te.woodTypes[dd+(x+(z*d))] = (byte) is.getItemDamage();
 
@@ -85,9 +87,10 @@ public class ItemPlank extends ItemTerra
 				if((!isConstruct && isAir) || (isConstruct && isEdge && world.getBlockId(i, j+offset, k) == 0))
 					world.setBlock(i, j+1, k, TFCBlocks.WoodConstruct.blockID);
 
-				TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i, j+offset, k);
-				if(te!= null)
+				TileEntity tile = world.getBlockTileEntity(i, j+offset, k);
+				if(tile!= null)
 				{
+					TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 					te.data.set(dd+(x+(z*d)));
 					te.woodTypes[dd+(x+(z*d))] = (byte) is.getItemDamage();
 
@@ -99,9 +102,10 @@ public class ItemPlank extends ItemTerra
 				if((!isConstruct && isAir) || (isConstruct && isEdge && world.getBlockId(i, j, k-offset) == 0))
 					world.setBlock(i, j, k-1, TFCBlocks.WoodConstruct.blockID);
 
-				TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i, j, k-offset);
-				if(te!= null)
+				TileEntity tile = world.getBlockTileEntity(i, j, k-offset);
+				if(tile!= null)
 				{
+					TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 					te.data.set(dd2+(x+(y*d)));
 					te.woodTypes[dd2+(x+(y*d))] = (byte) is.getItemDamage();
 
@@ -113,9 +117,10 @@ public class ItemPlank extends ItemTerra
 				if((!isConstruct && isAir) || (isConstruct && isEdge && world.getBlockId(i, j, k+offset) == 0))
 					world.setBlock(i, j, k+1, TFCBlocks.WoodConstruct.blockID);
 
-				TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i, j, k+offset);
-				if(te!= null)
+				TileEntity tile = world.getBlockTileEntity(i, j, k+offset);
+				if(tile!= null)
 				{
+					TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 					te.data.set(dd2+(x+(y*d)));
 					te.woodTypes[dd2+(x+(y*d))] = (byte) is.getItemDamage();
 
@@ -127,9 +132,10 @@ public class ItemPlank extends ItemTerra
 				if((!isConstruct && isAir) || (isConstruct && isEdge && world.getBlockId(i-offset, j, k) == 0))
 					world.setBlock(i-1, j, k, TFCBlocks.WoodConstruct.blockID);
 
-				TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i-offset, j, k);
-				if(te!= null)
+				TileEntity tile = world.getBlockTileEntity(i-offset, j, k);
+				if(tile!= null)
 				{
+					TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 					te.data.set((y+(z*d)));
 					te.woodTypes[(y+(z*d))] = (byte) is.getItemDamage();
 
@@ -141,9 +147,10 @@ public class ItemPlank extends ItemTerra
 				if((!isConstruct && isAir) || (isConstruct && isEdge && world.getBlockId(i+offset, j, k) == 0))
 					world.setBlock(i+1, j, k, TFCBlocks.WoodConstruct.blockID);
 
-				TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i+offset, j, k);
-				if(te!= null)
+				TileEntity tile = world.getBlockTileEntity(i+offset, j, k);
+				if(tile!= null)
 				{
+					TileEntityWoodConstruct te = (TileEntityWoodConstruct)tile;
 					te.data.set((y+(z*d)));
 					te.woodTypes[(y+(z*d))] = (byte) is.getItemDamage();
 

@@ -5,6 +5,8 @@ import java.util.Random;
 import cpw.mods.fml.common.IWorldGenerator;
 
 import TFC.*;
+import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.WorldGen.TFCBiome;
 
 import net.minecraft.src.BiomeGenBase;
@@ -26,37 +28,35 @@ public class WorldGenPeatPit implements IWorldGenerator
 		this.numberOfBlocks = par1;
 	}
 
-	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+	public boolean generate(World par1World, Random par2Random, int xCoord, int yCoord, int zCoord)
 	{
 		int var6 = par2Random.nextInt(this.numberOfBlocks - 8) + 8;
 		byte var7 = 2;
 
-		if(par2Random.nextInt(30) == 0 && par4 <= 146)
+		if(par2Random.nextInt(30) == 0 && yCoord <= 146)
 		{
-			for (int var8 = par3 - var6; var8 <= par3 + var6; ++var8)
+			for (int x = xCoord - var6; x <= xCoord + var6; ++x)
 			{
-				for (int var9 = par5 - var6; var9 <= par5 + var6; ++var9)
+				for (int z = zCoord - var6; z <= zCoord + var6; ++z)
 				{
-					int var10 = var8 - par3;
-					int var11 = var9 - par5;
+					int var10 = x - xCoord;
+					int var11 = z - zCoord;
 
 					if (var10 * var10 + var11 * var11 <= var6 * var6)
 					{
-						for (int var12 = par4 - var7; var12 <= par4 + var7; ++var12)
+						for (int y = yCoord - var7; y <= yCoord + var7; ++y)
 						{
-							int var13 = par1World.getBlockId(var8, var12, var9);
-							TFCBiome biome = (TFCBiome) par1World.getBiomeGenForCoords(var8, var9);
-							if(biome == BiomeGenBase.swampland)
+							int blockID = par1World.getBlockId(x, y, z);
+
+							if(TFC_Climate.isSwamp(x, y, z))
 							{
-								if (var13 == TFCBlocks.Dirt.blockID || var13 == TFCBlocks.Dirt2.blockID || 
-										var13 == TFCBlocks.Clay.blockID || var13 == TFCBlocks.Clay2.blockID || var13 == TFCBlocks.Peat.blockID)
+								if (TFC_Core.isDirt(blockID) || TFC_Core.isClay(blockID) || TFC_Core.isPeat(blockID))
 								{
-									par1World.setBlock(var8, var12, var9, TFCBlocks.Peat.blockID);
+									par1World.setBlock(x, y, z, TFCBlocks.Peat.blockID);
 								}
-								else if(var13 == TFCBlocks.Grass.blockID || var13 == TFCBlocks.Grass2.blockID ||
-										var13 == TFCBlocks.ClayGrass.blockID || var13 == TFCBlocks.ClayGrass2.blockID || var13 == TFCBlocks.PeatGrass.blockID)
+								else if(TFC_Core.isGrass(blockID))
 								{
-									par1World.setBlock(var8, var12, var9, TFCBlocks.PeatGrass.blockID);
+									par1World.setBlock(x, y, z, TFCBlocks.PeatGrass.blockID);
 								}
 							}
 						}

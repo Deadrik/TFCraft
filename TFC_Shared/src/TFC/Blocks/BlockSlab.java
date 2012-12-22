@@ -42,7 +42,13 @@ public class BlockSlab extends BlockPartial
 	{
 		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z);
 		if(8 - (getTopChiselLevel(te.extraData) + getBottomChiselLevel(te.extraData)) < 3)
-			return true;
+		{
+			if((8 - (getNorthChiselLevel(te.extraData) + getSouthChiselLevel(te.extraData)) < 3) || 
+					(8 - (getEastChiselLevel(te.extraData) + getWestChiselLevel(te.extraData)) < 3))
+			{
+				return true;
+			}
+		}
 
 		return false;
 	}
@@ -57,22 +63,22 @@ public class BlockSlab extends BlockPartial
 		return (int) ((data >> 4) & 0xf);
 	}
 
-	public static int getPosXChiselLevel(long data)
+	public static int getEastChiselLevel(long data)
 	{
 		return (int) ((data >> 12) & 0xf);
 	}
 
-	public static int getNegXChiselLevel(long data)
+	public static int getWestChiselLevel(long data)
 	{
 		return (int) ((data) & 0xf);
 	}
 
-	public static int getPosZChiselLevel(long data)
+	public static int getSouthChiselLevel(long data)
 	{
 		return (int) ((data >> 20) & 0xf);
 	}
 
-	public static int getNegZChiselLevel(long data)
+	public static int getNorthChiselLevel(long data)
 	{
 		return (int) ((data >> 8) & 0xf);
 	}

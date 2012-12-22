@@ -1,40 +1,27 @@
 package TFC.Items;
 
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.Core.StructureBlueprint;
+import TFC.TileEntities.TileEntityDetailed;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.StringTranslate;
 import net.minecraft.src.World;
 
-public class ItemBlueprint extends Item
+public class ItemBlueprint extends ItemTerra
 {
-	public static StructureBlueprint[] blueprints = new StructureBlueprint[64];
-
 	public ItemBlueprint(int i)
 	{
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setItemName("Blueprint");
-		this.setCreativeTab(CreativeTabs.tabMaterials);
-	}
-
-	public void AddBlueprint(StructureBlueprint sb, int id)
-	{
-		blueprints[id] = sb;
-	}
-
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		int d = itemstack.getItemDamage();
-
-		if(blueprints[d] == null)
-		{return "";}
-
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blueprints[d].Name).toString();
-
-		return s;
+		setCreativeTab(CreativeTabs.tabMisc);
+		setIconIndex(0);
 	}
 
 	@Override
@@ -42,31 +29,36 @@ public class ItemBlueprint extends Item
 	{
 		return "/bioxx/terratools.png";
 	}
-
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+    {
+		if(stack.stackTagCompound != null)
+			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, 0, 0, 0);
+        return stack;
+    }
+	
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
-		//		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-		//		if(objectMouseOver == null)
-		//			return itemstack;		
-		//		int x = objectMouseOver.blockX;
-		//		int y = objectMouseOver.blockY;
-		//		int z = objectMouseOver.blockZ;
-		//		int side = objectMouseOver.sideHit;
-		//		
-		//		if((mc.renderViewEntity.rayTrace(20, 1.0F) != null))
-		//		{
-		//	        x = mc.renderViewEntity.rayTrace(200, 1.0F).blockX;
-		//	        y = mc.renderViewEntity.rayTrace(200, 1.0F).blockY;
-		//	        z = mc.renderViewEntity.rayTrace(200, 1.0F).blockZ;
-		//	       // int blockHitSide = mc.renderViewEntity.rayTrace(200, 1.0F).sideHit;
-		//		}
-		//
-		//        if(blueprints[itemstack.getItemDamage()] != null && blueprints[itemstack.getItemDamage()].GetFinished(world, x, y, z))
-		//        {
-		//        	//world.setBlockWithNotify(x, y, z, mod_TFC_Mining.terraSmelter.blockID);
-		//        	return new ItemStack(itemstack.itemID,0,0);
-		//        }
-		//        else
-		return itemstack;
+		if(!world.isRemote && stack.stackTagCompound == null &&
+				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID || world.getBlockId(x, y, z) == TFCBlocks.SuperDetailed.blockID))
+		{
+			TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
+			byte[] data = te.data.toByteArray();
+			
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setByteArray("", data);
+			
+			stack.setTagCompound(nbt);
+			return true;			
+		}
+		//player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, 0, 0, 0);
+		return false;
 	}
+	
+	public String getItemDisplayName(ItemStack par1ItemStack)
+    {
+        return par1ItemStack.stackTagCompound.getString("Name");
+    }
 }

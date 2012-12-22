@@ -398,4 +398,15 @@ public class TFC_Climate
 	{
 		return 20000;
 	}
+
+	public static boolean isSwamp(int x, int y, int z)
+	{
+		float rain = getRainfall(x,y,z);
+		float evt = manager.getEVTLayerAt(x, z).floatdata1;
+		if(rain >= 500 && evt < 0.5 && manager.getBiomeGenAt(x, z).maxHeight < 0.15)
+		{
+			return true;
+		}
+		return false;
+	}
 }

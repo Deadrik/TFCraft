@@ -807,17 +807,16 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             }
             //here we set the various temperatures to range
             this.keepTempToRange();
-
-            if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
-            {
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1);
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            }
-            else if(fireTemperature < 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) !=0 )
+            
+            if(fireTemperature < 100 && fireTemperature != ambientTemp)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                //BlockFirepit.updateFurnaceBlockState(false, worldObj, xCoord, yCoord, zCoord);
+            }
+            else if(fireTemperature < 210)
+            {
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1);
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
             //If the fire is still burning and has fuel
@@ -828,7 +827,6 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 {
                 	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2);
                 	worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                    //BlockFirepit.updateFurnaceBlockState(true, worldObj, xCoord, yCoord, zCoord);
                 }
 
                 float desiredTemp = 0;

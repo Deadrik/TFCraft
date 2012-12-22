@@ -50,6 +50,7 @@ public class TFCBlocks
 	public static int fluidRenderId;
 	public static int nestboxRenderId;
 	public static int woodConstructRenderId;
+	public static int superDetailedRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -112,7 +113,8 @@ public class TFCBlocks
 	public static Block DryGrass;
 	public static Block DryGrass2;
 	public static Block Charcoal;
-	public static Block StoneDetailed;
+	public static Block Detailed;
+	public static Block SuperDetailed;
 	public static Block WoodConstruct;
 	public static Block WoodVert;
 	public static Block WoodHoriz;
@@ -156,7 +158,7 @@ public class TFCBlocks
 	public static Block DoorKapok;
 	
 	public static Block Nestbox;
-	
+
 	static Configuration config;
 	
 	public static void RegisterBlocks()
@@ -199,7 +201,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(LooseRock);
 		GameRegistry.registerBlock(LogPile);
 		GameRegistry.registerBlock(Charcoal);
-		GameRegistry.registerBlock(StoneDetailed);
+		GameRegistry.registerBlock(Detailed);
+		GameRegistry.registerBlock(SuperDetailed);
 		
 		GameRegistry.registerBlock(tilledSoil);
 		GameRegistry.registerBlock(tilledSoil2);
@@ -274,6 +277,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorWillow);
 		GameRegistry.registerBlock(DoorKapok);
 		GameRegistry.registerBlock(Nestbox);
+
 	}
 	
 	public static void LoadBlocks()
@@ -414,7 +418,7 @@ public class TFCBlocks
 		
 		Charcoal = new BlockCharcoal(TFC_Settings.getIntFor(config,"block","Charcoal", 2016)).setHardness(3F).setResistance(10F).setBlockName("Charcoal");
 		
-		StoneDetailed = new BlockDetailed(TFC_Settings.getIntFor(config,"block","StoneDetailed", 2017)).setBlockName("StoneDetailed").setHardness(10).setResistance(15F);
+		Detailed = new BlockDetailed(TFC_Settings.getIntFor(config,"block","StoneDetailed", 2017)).setBlockName("StoneDetailed").setHardness(10).setResistance(15F);
 		
 		WoodVert = new BlockLogVert(TFC_Settings.getIntFor(config,"block","WoodVert", 2018)).setBlockName("WoodVert").setHardness(40).setResistance(15F);
 		WoodHoriz = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz", 2019), 0).setBlockName("WoodHoriz").setHardness(40).setResistance(15F);
@@ -461,6 +465,7 @@ public class TFCBlocks
 		
 		Nestbox = new BlockNestBox(TFC_Settings.getIntFor(config,"block","NestBox", 2057)).setBlockName("NestBox");
 		
+		SuperDetailed = new BlockSuperDetailed(TFC_Settings.getIntFor(config,"block","SuperDetailed", 2058)).setBlockName("SuperDetailed").setHardness(10).setResistance(15F);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
@@ -490,8 +495,12 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.PeatGrass, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Sand2, "shovel", 0);
-		MinecraftForge.setBlockHarvestLevel(Charcoal, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Charcoal, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodConstruct, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "axe", 0);
 
 		if (config != null) {
 			config.save();

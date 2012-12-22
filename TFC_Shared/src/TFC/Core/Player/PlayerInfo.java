@@ -43,9 +43,12 @@ public class PlayerInfo
 	public void switchChiselMode()
 	{
 		boolean allowDetailed = true;
+		boolean allowSuperDetailed = true;
 		if(lastChange+3 < TFC_Time.getTotalTicks())
 		{
-			ChiselMode = (byte) (ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : ChiselMode == 2 && allowDetailed ? 3 : 0);
+			ChiselMode = (byte) (ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : 
+				ChiselMode == 2 && allowDetailed ? 3 : 
+				ChiselMode == 3 && allowSuperDetailed ? 4 : 0);
 			lastChange = TFC_Time.getTotalTicks();
 		}
 	}
