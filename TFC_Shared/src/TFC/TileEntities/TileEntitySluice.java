@@ -9,19 +9,39 @@ import TFC.*;
 import TFC.Blocks.BlockOre;
 import TFC.Blocks.BlockSluice;
 import TFC.Items.ItemOre1;
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagList;
-import net.minecraft.src.TileEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraSluice extends TileEntity implements IInventory
+public class TileEntitySluice extends TileEntity implements IInventory
 {	
     public int soilAmount;
     public int processTimeRemaining;
@@ -36,7 +56,7 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
     private ArrayList coreSample = new ArrayList<Item>();
     private ArrayList coreSampleStacks = new ArrayList<ItemStack>();
 
-    public TileEntityTerraSluice()
+    public TileEntitySluice()
     {
         sluiceItemStacks = new ItemStack[9];
         soilAmount = 0;
@@ -48,16 +68,18 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
     {
         for(int i = 0; i < this.getSizeInventory(); i++)
         {
-            if(this.getStackInSlot(i) != null && this.getStackInSlot(i).itemID != is.itemID) {
+            if(this.getStackInSlot(i) != null && this.getStackInSlot(i).itemID != is.itemID) 
+            {
                 continue;
-            } else if(this.getStackInSlot(i) != null && this.getStackInSlot(i).itemID == is.itemID)//stack is not empty and the items are the same
+            } 
+            else if(this.getStackInSlot(i) != null && this.getStackInSlot(i).itemID == is.itemID)//stack is not empty and the items are the same
             {
                 int s;
                 if(this.getStackInSlot(i).stackSize + is.stackSize > this.getInventoryStackLimit())
                 {
                     int size = getInventoryStackLimit()-this.getStackInSlot(i).stackSize;
                     this.getStackInSlot(i).stackSize += size;
-                    is.stackSize -= size;
+                    //is.stackSize -= size;
                     continue;
                 }
                 else
@@ -78,7 +100,6 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
     @Override
     public void closeChest()
     {
-        // TODO Auto-generated method stub
 
     }
 
@@ -137,7 +158,6 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
     @Override
     public int getInventoryStackLimit()
     {
-        // TODO Auto-generated method stub
         return 64;
     }
 
@@ -264,9 +284,9 @@ public class TileEntityTerraSluice extends TileEntity implements IInventory
             for (Iterator iterator = list.iterator(); iterator.hasNext();)
             {
                 EntityItem entity = (EntityItem)iterator.next();
-                if(entity.item.itemID == Block.gravel.blockID || entity.item.itemID == TFCBlocks.Sand.blockID || entity.item.itemID == TFCBlocks.Sand2.blockID)
+                if(entity.func_92014_d().itemID == Block.gravel.blockID || entity.func_92014_d().itemID == TFCBlocks.Sand.blockID || entity.func_92014_d().itemID == TFCBlocks.Sand2.blockID)
                 {
-                    if(soilAmount < 50 && entity.item.stackSize == 1)
+                    if(soilAmount < 50 && entity.func_92014_d().stackSize == 1)
                     {
                         soilAmount += 20;
                         entity.setDead();

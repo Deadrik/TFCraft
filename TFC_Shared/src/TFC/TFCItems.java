@@ -9,18 +9,37 @@ import TFC.Enums.EnumSize;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.*;
-import TFC.TileEntities.TileEntityTerraSluice;
-
-import net.minecraft.src.Block;
-import net.minecraft.src.EnumArmorMaterial;
-import net.minecraft.src.EnumToolMaterial;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemBow;
-import net.minecraft.src.ItemCoal;
-import net.minecraft.src.ItemPotion;
-import net.minecraft.src.Material;
-import net.minecraft.src.Potion;
-import net.minecraft.src.PotionEffect;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.*;
 
 public class TFCItems
@@ -232,7 +251,6 @@ public class TFCItems
 
     public static Item OreChunk;
     public static Item Logs;
-    public static Item FlintPaxel;
     public static Item Javelin;
 
     public static Item boneIgInPick;
@@ -1217,7 +1235,6 @@ public class TFCItems
 
         OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setItemName("Ore").setIconCoord(0, 3);
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setItemName("Log").setIconCoord(0, 2);
-        FlintPaxel = new ItemCustomPaxel(TFC_Settings.getIntFor(config,"item","flintPaxel",16299)).setItemName("flintPaxel").setIconCoord(10, 0);
 
         WoodSupportItemV = new ItemWoodSupport(TFC_Settings.getIntFor(config,"item","WoodSupportItemV", 16300), true).setItemName("WoodSupportItemV").setIconCoord(0, 0);
         WoodSupportItemH = new ItemWoodSupport(TFC_Settings.getIntFor(config,"item","WoodSupportItemH", 16301), false).setItemName("WoodSupportItemH").setIconCoord(0, 1);

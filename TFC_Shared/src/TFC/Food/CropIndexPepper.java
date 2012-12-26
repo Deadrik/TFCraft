@@ -2,8 +2,7 @@ package TFC.Food;
 
 import java.util.Random;
 
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.*;
 
 public class CropIndexPepper extends CropIndex
 {

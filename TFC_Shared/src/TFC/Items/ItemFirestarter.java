@@ -9,16 +9,37 @@ import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityPartial;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class ItemFirestarter extends ItemTerra
 {
@@ -60,7 +81,7 @@ public class ItemFirestarter extends ItemTerra
     }
     
     @Override
-    public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
+    public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, float hitX, float hitY, float hitZ)
     {
         if(!world.isRemote)
         {
@@ -88,17 +109,17 @@ public class ItemFirestarter extends ItemTerra
                     for (Iterator iterator = list.iterator(); iterator.hasNext();)
                     {
                         EntityItem entity = (EntityItem)iterator.next();
-                        if(entity.item.itemID == Item.paper.shiftedIndex)
+                        if(entity.func_92014_d().itemID == Item.paper.shiftedIndex)
                         {
                             hasPaper = 20;
                         }
-                        else if(entity.item.itemID == Item.stick.shiftedIndex)
+                        else if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
                         {
-                            numsticks+=entity.item.stackSize;
+                            numsticks+=entity.func_92014_d().stackSize;
                         }
-                        else if(entity.item.itemID == Item.coal.shiftedIndex)
+                        else if(entity.func_92014_d().itemID == Item.coal.shiftedIndex)
                         {
-                            numcoal+=entity.item.stackSize;
+                            numcoal+=entity.func_92014_d().stackSize;
                         }
                     }
                 }
@@ -116,11 +137,11 @@ public class ItemFirestarter extends ItemTerra
                         for (Iterator iterator = list.iterator(); iterator.hasNext();)
                         {
                             EntityItem entity = (EntityItem)iterator.next();
-                            if(entity.item.itemID == Item.stick.shiftedIndex)
+                            if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
                             {
                                 entity.setDead();
                             }
-                            if(entity.item.itemID == Item.paper.shiftedIndex)
+                            if(entity.func_92014_d().itemID == Item.paper.shiftedIndex)
                             {
                                 entity.setDead();
                             }
@@ -138,11 +159,11 @@ public class ItemFirestarter extends ItemTerra
                         for (Iterator iterator = list.iterator(); iterator.hasNext();)
                         {
                             EntityItem entity = (EntityItem)iterator.next();
-                            if(entity.item.itemID == Item.stick.shiftedIndex)
+                            if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
                             {
                                 entity.setDead();
                             }
-                            if(entity.item.itemID == Item.coal.shiftedIndex)
+                            if(entity.func_92014_d().itemID == Item.coal.shiftedIndex)
                             {
                                 entity.setDead();
                             }

@@ -1,15 +1,44 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.*;
 import TFC.Core.AnvilReq;
 import TFC.Core.Helper;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityTerraAnvil;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.feature.*;
 
 public class ItemFruitTreeSapling extends ItemTerra
 {
@@ -23,6 +52,7 @@ public class ItemFruitTreeSapling extends ItemTerra
         offset = off;
         setMaxDamage(0);
         setHasSubtypes(true);
+        this.setCreativeTab(CreativeTabs.tabFood);
     }
     
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
@@ -45,6 +75,22 @@ public class ItemFruitTreeSapling extends ItemTerra
 
         return false;
     }
+    
+    @Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+    	if(this.shiftedIndex == TFCItems.FruitTreeSapling1.shiftedIndex)
+    	{
+    		for(int i = 0; i < 8; i++) 
+    		{
+    			list.add(new ItemStack(this,1,i));
+    		}
+    	}
+    	else
+    	{
+    		list.add(new ItemStack(this,1,0));
+    	}
+	}
     
     public int getIconFromDamage(int par1)
     {

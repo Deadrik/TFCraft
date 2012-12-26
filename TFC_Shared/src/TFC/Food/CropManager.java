@@ -5,9 +5,6 @@ import java.util.List;
 
 import TFC.TFCItems;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
-
 public class CropManager
 {
     public List<CropIndex> Crops;

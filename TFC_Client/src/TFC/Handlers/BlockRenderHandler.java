@@ -3,10 +3,38 @@ package TFC.Handlers;
 import TFC.TFCBlocks;
 import TFC.Render.TFC_CoreRender;
 import TFC.Render.Blocks.*;
-import net.minecraft.src.Block;
-import net.minecraft.src.IBlockAccess;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.model.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.RenderBlocks;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BlockRenderHandler implements ISimpleBlockRenderingHandler 
@@ -55,19 +83,19 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return TFC_CoreRender.RenderSnow(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.terraFirepitRenderId)
+        else if (modelId == TFCBlocks.FirepitRenderId)
         {
             return TFC_CoreRender.renderFirepit(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.terraForgeRenderId)
+        else if (modelId == TFCBlocks.ForgeRenderId)
         {
             return TFC_CoreRender.renderForge(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.terraBellowsRenderId)
+        else if (modelId == TFCBlocks.BellowsRenderId)
         {
             return TFC_CoreRender.renderBellows(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.terraAnvilRenderId)
+        else if (modelId == TFCBlocks.AnvilRenderId)
         {
             return RenderAnvil.renderAnvil(block, i, j, k, renderer);
         }

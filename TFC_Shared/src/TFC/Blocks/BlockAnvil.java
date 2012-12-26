@@ -8,17 +8,32 @@ import TFC.TerraFirmaCraft;
 import TFC.Core.AnvilReq;
 import TFC.TileEntities.TileEntityTerraAnvil;
 
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BlockContainer;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.chunk.*;
 
 public class BlockAnvil extends BlockTerraContainer
 {
@@ -137,7 +152,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.terraAnvilRenderId;
+		return TFCBlocks.AnvilRenderId;
 	}
 
 	@Override
@@ -258,7 +273,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 						if (var7.hasTagCompound())
 						{
-							var12.item.setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+							var12.func_92014_d().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 						}
 					}
 				}

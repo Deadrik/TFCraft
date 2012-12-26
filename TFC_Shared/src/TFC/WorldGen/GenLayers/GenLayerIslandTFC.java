@@ -1,7 +1,7 @@
 package TFC.WorldGen.GenLayers;
 
 import TFC.*;
-import net.minecraft.src.IntCache;
+import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerIslandTFC extends GenLayerTFC
 {

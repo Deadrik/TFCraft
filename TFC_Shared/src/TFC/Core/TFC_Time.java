@@ -1,6 +1,7 @@
 package TFC.Core;
 
-import net.minecraft.src.World;
+import net.minecraft.world.World;
+
 
 public class TFC_Time
 {

@@ -11,18 +11,38 @@ import TFC.Entities.AI.EntityAIFollowParentTFC;
 import TFC.Entities.AI.EntityAIMoveTowardsFood;
 import TFC.Entities.AI.EntityAITargetTFC;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityAgeable;
-import net.minecraft.src.EntityAnimal;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class EntityAnimalTFC extends EntityAnimal
 {
@@ -225,7 +245,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		}
 		for(EntityItem ei : this.capturedDrops)
 		{
-			ItemStack item = ei.item;
+			ItemStack item = ei.func_92014_d();
 			if (item != null)
 			{
 				if (hunger < 144000 && fooditems.contains (item.itemID))
@@ -293,7 +313,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	public void applyEntityCollision(Entity par1Entity){
 		super.applyEntityCollision(par1Entity);
 		if (par1Entity instanceof EntityItem){
-			boolean y = wantsItem(((EntityItem)par1Entity).item);
+			boolean y = wantsItem(((EntityItem)par1Entity).func_92014_d());
 		}
 	}
 

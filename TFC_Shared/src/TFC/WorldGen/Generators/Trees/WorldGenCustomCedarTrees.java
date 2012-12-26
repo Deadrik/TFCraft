@@ -2,15 +2,15 @@ package TFC.WorldGen.Generators.Trees;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
 import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-
-import net.minecraft.src.Block;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldGenerator;
 
 public class WorldGenCustomCedarTrees extends WorldGenerator
 {

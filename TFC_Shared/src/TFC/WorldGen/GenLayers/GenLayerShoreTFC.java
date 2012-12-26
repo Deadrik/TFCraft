@@ -1,8 +1,7 @@
 package TFC.WorldGen.GenLayers;
 
 import TFC.WorldGen.TFCBiome;
-import net.minecraft.src.GenLayer;
-import net.minecraft.src.IntCache;
+import net.minecraft.world.gen.layer.*;
 
 public class GenLayerShoreTFC extends GenLayerTFC
 {

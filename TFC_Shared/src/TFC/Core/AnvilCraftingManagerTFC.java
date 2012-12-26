@@ -2,9 +2,9 @@ package TFC.Core;
 
 import java.util.*;
 
-import TFC.*;
+import net.minecraft.item.ItemStack;
 
-import net.minecraft.src.ItemStack;
+import TFC.*;
 
 public class AnvilCraftingManagerTFC
 {

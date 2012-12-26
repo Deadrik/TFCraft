@@ -1,8 +1,8 @@
 package TFC.Items;
 
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import TFC.Core.TFC_Textures;
-import net.minecraft.src.ItemBlock;
-import net.minecraft.src.ItemStack;
 
 public class ItemOre3 extends ItemBlock
 {

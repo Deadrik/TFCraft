@@ -19,23 +19,37 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumSkyBlock;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.NBTBase;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagList;
-import net.minecraft.src.Packet;
-import net.minecraft.src.TileEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class TileEntityBloomery extends TileEntityFireEntity implements IInventory
 {
@@ -705,33 +719,33 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem)iterator.next();
-					if(entity.item.itemID == Item.coal.shiftedIndex && entity.item.getItemDamage() == 1 || entity.item.itemID == TFCItems.Coke.shiftedIndex)
+					if(entity.func_92014_d().itemID == Item.coal.shiftedIndex && entity.func_92014_d().getItemDamage() == 1 || entity.func_92014_d().itemID == TFCItems.Coke.shiftedIndex)
 					{
-						for(int c = 0; c < entity.item.stackSize; c++)
+						for(int c = 0; c < entity.func_92014_d().stackSize; c++)
 						{
 							if(charcoalCount+oreCount < 40 && charcoalCount < 20)
 							{
 								charcoalCount++;
-								entity.item.stackSize--;
+								entity.func_92014_d().stackSize--;
 							}
 						}
-						if(entity.item.stackSize == 0) {
+						if(entity.func_92014_d().stackSize == 0) {
 							entity.setDead();
 						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-					else if(TFC_ItemHeat.getMeltingPoint(entity.item) != -1 && entity.item.getItem() instanceof ItemOre && 
-					(entity.item.getItemDamage() == oreDamage || OreType.contentEquals("")))
+					else if(TFC_ItemHeat.getMeltingPoint(entity.func_92014_d()) != -1 && entity.func_92014_d().getItem() instanceof ItemOre && 
+					(entity.func_92014_d().getItemDamage() == oreDamage || OreType.contentEquals("")))
 					{
-						int c = entity.item.stackSize;
+						int c = entity.func_92014_d().stackSize;
 						for(; c > 0; c--)
 						{
 							if(charcoalCount+oreCount < 40 && oreCount < 20 && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.item.getItem(),1,entity.item.getItemDamage()))) 
+								if(AddOreToFire(new ItemStack(entity.func_92014_d().getItem(),1,entity.func_92014_d().getItemDamage()))) 
 								{
 									oreCount+=1;
-									oreDamage = entity.item.getItemDamage();
+									oreDamage = entity.func_92014_d().getItemDamage();
 								}
 							}
 						}
@@ -739,7 +753,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 							entity.setDead();
 						}
 						else
-							entity.item.stackSize = c; 
+							entity.func_92014_d().stackSize = c; 
 					}
 				}
 			}

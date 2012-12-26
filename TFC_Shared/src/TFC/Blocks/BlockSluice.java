@@ -5,20 +5,42 @@ import java.util.Random;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TileEntityTerraSluice;
-
-import net.minecraft.src.BlockContainer;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import TFC.TileEntities.TileEntitySluice;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class BlockSluice extends BlockContainer
 {
-	TileEntityTerraSluice entity;
+	TileEntitySluice entity;
 	private int meta;
 	private int xCoord;
 	private int yCoord;
@@ -43,6 +65,7 @@ public class BlockSluice extends BlockContainer
 //		entity.canUpdate();
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -59,10 +82,10 @@ public class BlockSluice extends BlockContainer
 		{
 			if(!isBlockFootOfBed(meta))
 			{
-				if((TileEntityTerraSluice)world.getBlockTileEntity(i, j, k)!=null)
+				if((TileEntitySluice)world.getBlockTileEntity(i, j, k)!=null)
 				{
-					TileEntityTerraSluice tileentitysluice;
-					tileentitysluice = (TileEntityTerraSluice)world.getBlockTileEntity(i, j, k);
+					TileEntitySluice tileentitysluice;
+					tileentitysluice = (TileEntitySluice)world.getBlockTileEntity(i, j, k);
 					ItemStack is =entityplayer.getCurrentEquippedItem();
 					if(is!= null && is.itemID == TFCItems.terraGoldPan.shiftedIndex && is.getItemDamage() != 0)
 					{
@@ -86,6 +109,7 @@ public class BlockSluice extends BlockContainer
 		}
 	}
 
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(j == 4) {
@@ -114,7 +138,7 @@ public class BlockSluice extends BlockContainer
 		String s = "Sluice";
 		return s;
 	}
-
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.sluiceRenderId;
@@ -129,11 +153,12 @@ public class BlockSluice extends BlockContainer
 			return 0;
 		}
 	}
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
+	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -168,7 +193,7 @@ public class BlockSluice extends BlockContainer
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		//mc.ingameGUI.addChatMessage("Dir = "+(new StringBuilder()).append(l).toString());
 	}
-	
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockId(par2, par3, par4);
@@ -195,7 +220,7 @@ public class BlockSluice extends BlockContainer
         
         return stay;
     }
-	
+
 	private boolean canStay(World world, int i, int j, int k, boolean foot, int dir)
 	{
 	    int l = dir;
@@ -265,15 +290,17 @@ public class BlockSluice extends BlockContainer
         }
         return true;
 	}
-
-	public void onBlockRemoval(World world, int i, int j, int k)
-	{
-		if((world.getBlockMetadata(i, j, k) & 8) == 0)
-		{
-			world.setBlock(i, j, k, 0);
-		}
-	}
-
+	
+//	@Override
+//	public void onBlockRemoval(World world, int i, int j, int k)
+//	{
+//		if((world.getBlockMetadata(i, j, k) & 8) == 0)
+//		{
+//			world.setBlock(i, j, k, 0);
+//		}
+//	}
+	
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -303,7 +330,7 @@ public class BlockSluice extends BlockContainer
 			}
 		}
 	}
-
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
@@ -321,7 +348,7 @@ public class BlockSluice extends BlockContainer
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
 		if(!isBlockFootOfBed(meta)) {
-			return new TileEntityTerraSluice();
+			return new TileEntitySluice();
 		}
 		return null;
 	}

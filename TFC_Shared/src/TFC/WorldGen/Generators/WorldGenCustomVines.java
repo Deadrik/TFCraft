@@ -2,8 +2,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.src.*;
-import net.minecraft.src.WorldGenerator;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Facing;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenCustomVines extends WorldGenerator
 {

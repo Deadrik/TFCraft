@@ -2,7 +2,8 @@ package TFC.Food;
 
 import java.util.Random;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
+
 
 public class FloraIndex
 {

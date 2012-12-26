@@ -11,8 +11,37 @@ import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityTerraJavelin;
 import TFC.Food.FoodStatsTFC;
 import TFC.Handlers.PacketHandler;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.ForgeHooks;
 
 public class TFC_PlayerServer extends ServerPlayerBase
@@ -97,7 +126,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 			if(currentChunkX != lastChunkX || currentChunkZ != lastChunkZ)
 			{
 				ChunkDataManager.setLastVisted(lastChunkX, lastChunkZ);
-				//Reset the timer since we've entered a new chunk
+				//Reset the timer since we've entered a new chunkww
 				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
 
 			}
@@ -107,10 +136,12 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	@Override
 	public void afterLocalConstructing(MinecraftServer var1, World var2, String var3, ItemInWorldManager var4) 
 	{
+		/*This exists to make sure that if the player spawns into the world with default health, that
+		 * he will instead get the new TFC default health. An issue can occur where the player can force themselves to full
+		 * health if they manage to get exactly 20 health and they relog. There is not currently a lifetime clock to compare against. 
+		*/
 		if(this.player.getHealth() == 20 && this.player.ticksExisted == 0)
 			this.player.setHealthField(this.getStartingMaxHealth());
-		
-		this.player.capabilities = new PlayerCapabilitiesTFC();
 	}
 	
 	@Override
@@ -137,11 +168,6 @@ public class TFC_PlayerServer extends ServerPlayerBase
 		{
 			if(spawnProtectionTimer == -1)
 				spawnProtectionTimer = TFC_Time.getTotalTicks() + TFC_Time.hourLength;
-			
-//			if (this.player.worldObj.difficultySetting == 0 && shouldHeal() && this.player.ticksExisted % 20 * 12 == 0)
-//	        {
-//	            this.heal((int) ((float)getMaxHealth()*0.01f));
-//	        }
 			
 			if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 			{

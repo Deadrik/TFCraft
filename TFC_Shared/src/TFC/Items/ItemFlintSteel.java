@@ -8,7 +8,38 @@ import TFC.TFCBlocks;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.TileEntities.TileEntityPartial;
-import net.minecraft.src.*;
+import net.minecraft.item.ItemFlintAndSteel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class ItemFlintSteel extends ItemFlintAndSteel{
 
@@ -42,17 +73,17 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.item.itemID == Item.paper.shiftedIndex)
+						if(entity.func_92014_d().itemID == Item.paper.shiftedIndex)
 						{
 							hasPaper = 20;
 						}
-						else if(entity.item.itemID == Item.stick.shiftedIndex)
+						else if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
 						{
-							numsticks+=entity.item.stackSize;
+							numsticks+=entity.func_92014_d().stackSize;
 						}
-						else if(entity.item.itemID == Item.coal.shiftedIndex)
+						else if(entity.func_92014_d().itemID == Item.coal.shiftedIndex)
 						{
-							numcoal+=entity.item.stackSize;
+							numcoal+=entity.func_92014_d().stackSize;
 						}
 					}
 				}
@@ -68,11 +99,11 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.item.itemID == Item.stick.shiftedIndex)
+						if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
 						{
 							entity.setDead();
 						}
-						if(entity.item.itemID == Item.paper.shiftedIndex)
+						if(entity.func_92014_d().itemID == Item.paper.shiftedIndex)
 						{
 							entity.setDead();
 						}
@@ -90,11 +121,11 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.item.itemID == Item.stick.shiftedIndex)
+						if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
 						{
 							entity.setDead();
 						}
-						if(entity.item.itemID == Item.coal.shiftedIndex)
+						if(entity.func_92014_d().itemID == Item.coal.shiftedIndex)
 						{
 							entity.setDead();
 						}

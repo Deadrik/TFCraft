@@ -6,8 +6,41 @@ import java.util.Map;
 
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.model.ModelSlime;
+import net.minecraft.client.model.ModelSquid;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.src.ModLoader;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -41,28 +74,6 @@ import TFC.WorldGen.TFCSkyProvider;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.KeyBinding;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.ModelSlime;
-import net.minecraft.src.ModelSquid;
-import net.minecraft.src.Packet;
-import net.minecraft.src.PlayerAPI;
-import net.minecraft.src.RenderArrow;
-import net.minecraft.src.RenderBlaze;
-import net.minecraft.src.RenderEnderman;
-import net.minecraft.src.RenderGhast;
-import net.minecraft.src.RenderIronGolem;
-import net.minecraft.src.RenderSilverfish;
-import net.minecraft.src.RenderSkeleton;
-import net.minecraft.src.RenderSlime;
-import net.minecraft.src.RenderSpider;
-import net.minecraft.src.RenderSquid;
-import net.minecraft.src.RenderZombie;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -132,11 +143,11 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.oreRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.moltenRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.looseRockRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.terraFirepitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.terraAnvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.terraBellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.terraScribeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.terraForgeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.FirepitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.AnvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.BellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.ScribeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.ForgeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sluiceRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodFruitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.leavesFruitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -237,7 +248,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 25:
 		{
-			return new GuiTerraSluice(player.inventory, (TileEntityTerraSluice) te, world, x, y, z);
+			return new GuiTerraSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
 		}
 		case 26:
 		{
@@ -330,15 +341,15 @@ public class ClientProxy extends CommonProxy
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlockId(i, j, k) == TFCBlocks.fruitTreeLeaves.blockID)
 		{
-			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
-			{
-				int var10 = ColorizerFoliageTFC.getFoliageYellow();
-				rgb = applyColor(var10, rgb);
-
-				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-				return x;
-			}
-			else
+//			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
+//			{
+//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
+//				rgb = applyColor(var10, rgb);
+//
+//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+//				return x;
+//			}
+//			else
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{

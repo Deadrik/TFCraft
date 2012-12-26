@@ -1,25 +1,47 @@
 package TFC.WorldGen;
 
 import java.awt.Color;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import net.minecraftforge.client.IRenderHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GLAllocation;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.RenderGlobal;
-import net.minecraft.src.RenderHelper;
-import net.minecraft.src.Tessellator;
-import net.minecraft.src.Vec3;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldClient;
-import net.minecraftforge.client.SkyProvider;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.model.*;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.src.ModLoader;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
 
-public class TFCSkyProvider extends SkyProvider{
+public class TFCSkyProvider extends IRenderHandler
+{
 
 	Minecraft mc;
 

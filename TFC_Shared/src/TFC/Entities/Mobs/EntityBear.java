@@ -11,24 +11,38 @@ import TFC.Entities.EntityTameableTFC;
 import TFC.Entities.AI.EntityAIHurtByTargetTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
 import TFC.Entities.AI.EntityAITargetNonTamedTFC;
-
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityAIAttackOnCollide;
-import net.minecraft.src.EntityAIHurtByTarget;
-import net.minecraft.src.EntityAILeapAtTarget;
-import net.minecraft.src.EntityAILookIdle;
-import net.minecraft.src.EntityAIMate;
-import net.minecraft.src.EntityAISwimming;
-import net.minecraft.src.EntityAIWander;
-import net.minecraft.src.EntityAIWatchClosest;
-import net.minecraft.src.EntityAnimal;
-import net.minecraft.src.EntityArrow;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class EntityBear extends EntityTameableTFC
 {
@@ -60,7 +74,7 @@ public class EntityBear extends EntityTameableTFC
 		}
 		degreeOfDiversion = 4;
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
-		tasks.addTask (8, new EntityAIWatchClosest (this, net.minecraft.src.EntityPlayer.class, 8F));
+		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntitySheepTFC.class, 16F, 200, false));
@@ -89,7 +103,7 @@ public class EntityBear extends EntityTameableTFC
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
 		}
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
-		tasks.addTask (8, new EntityAIWatchClosest (this, net.minecraft.src.EntityPlayer.class, 8F));
+		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
 		targetTasks.addTask (3, new EntityAIHurtByTarget (this, true));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));

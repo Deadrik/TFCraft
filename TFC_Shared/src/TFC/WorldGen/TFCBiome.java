@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import TFC.TFCBlocks;
 import TFC.Core.ColorizerFoliageTFC;
@@ -41,27 +41,37 @@ import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
 import TFC.WorldGen.Generators.Trees.WorldGenPineShort;
 import TFC.WorldGen.Generators.Trees.WorldGenPineTall;
 import TFC.WorldGen.Generators.Trees.WorldGenRedwoodXL;
-import net.minecraft.src.BiomeDecorator;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.BiomeGenDesert;
-import net.minecraft.src.BiomeGenEnd;
-import net.minecraft.src.BiomeGenHell;
-import net.minecraft.src.BiomeGenMushroomIsland;
-import net.minecraft.src.Block;
-import net.minecraft.src.ColorizerFoliage;
-import net.minecraft.src.ColorizerGrass;
-import net.minecraft.src.EntityCreeper;
-import net.minecraft.src.EntityEnderman;
-import net.minecraft.src.EntitySkeleton;
-import net.minecraft.src.EntitySlime;
-import net.minecraft.src.EntitySpider;
-import net.minecraft.src.EntityZombie;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.SpawnListEntry;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldGenerator;
-import net.minecraft.client.*;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.SpawnListEntry;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -213,10 +223,11 @@ public class TFCBiome extends BiomeGenBase
     /**
      * Allocate a new BiomeDecorator for this BiomeGenBase
      */
-    public BiomeDecoratorTFC createBiomeDecorator()
+    public BiomeDecorator createBiomeDecorator()
     {
         return new BiomeDecoratorTFC(this);
     }
+    
     @Override
     public void decorate(World par1World, Random par2Random, int par3, int par4)
     {

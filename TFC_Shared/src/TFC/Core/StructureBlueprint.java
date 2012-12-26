@@ -1,7 +1,8 @@
 package TFC.Core;
 
 import java.util.Arrays;
-import net.minecraft.src.World;
+
+import net.minecraft.world.World;
 
 public class StructureBlueprint
 {

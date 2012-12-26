@@ -6,17 +6,37 @@ import TFC.*;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.BlockContainer;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class BlockFirepit extends BlockTerraContainer
 {
@@ -93,11 +113,11 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
-        if(entity instanceof EntityItem && ((EntityItem)entity).item.getItem() instanceof ItemLogs)
+        if(entity instanceof EntityItem && ((EntityItem)entity).func_92014_d().getItem() instanceof ItemLogs)
         {
             if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)!=null)
             {
-                ItemStack is = ((EntityItem)entity).item;
+                ItemStack is = ((EntityItem)entity).func_92014_d();
                 TileEntityTerraFirepit te;
                 te = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
                 if(te.fireItemStacks[0] == null)
@@ -115,7 +135,7 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return TFCBlocks.terraFirepitRenderId;
+		return TFCBlocks.FirepitRenderId;
 	}
 
 	@Override
@@ -123,6 +143,12 @@ public class BlockFirepit extends BlockTerraContainer
 	{
 		return false;
 	}
+	
+	@Override
+	public int quantityDropped(Random par1Random)
+    {
+        return 0;
+    }
 
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
@@ -243,9 +269,8 @@ public class BlockFirepit extends BlockTerraContainer
     }
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-
-			return new TileEntityTerraFirepit();
-
+	public TileEntity createNewTileEntity(World var1) 
+	{
+		return new TileEntityTerraFirepit();
 	}
 }

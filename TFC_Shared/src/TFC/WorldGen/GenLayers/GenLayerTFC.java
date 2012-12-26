@@ -1,9 +1,11 @@
 package TFC.WorldGen.GenLayers;
 
-import net.minecraft.src.GenLayer;
-import net.minecraft.src.WorldType;
+import net.minecraft.world.gen.layer.GenLayer;
 import TFC.*;
 import TFC.WorldGen.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
 
 public abstract class GenLayerTFC extends GenLayer
 {

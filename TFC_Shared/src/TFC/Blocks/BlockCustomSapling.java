@@ -2,10 +2,6 @@ package TFC.Blocks;
 
 import java.util.List;
 import java.util.Random;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-
 import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
@@ -17,16 +13,37 @@ import TFC.WorldGen.Generators.Trees.WorldGenCustomRedwoodTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
 import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockContainer;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldGenerator;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class BlockCustomSapling extends BlockTerraContainer
 {
@@ -75,15 +92,14 @@ public class BlockCustomSapling extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
 	{
-		if(world.getBlockMaterial(i, j-1, k) != Material.grass)
+		if(!TFC_Core.isGrass(world.getBlockId(i, j, k)) && !TFC_Core.isDirt(world.getBlockId(i, j, k)) && 
+				!this.canBlockStay(world, i, j, k))
 		{
 
 			int meta = world.getBlockMetadata(i, j, k);
 			this.dropBlockAsItem_do(world, i, j, k, new ItemStack(this,1,meta));
 			world.setBlock(i, j, k, 0);
 		}
-		
-		this.checkChange(world, i, j, k);
 	}
 	
 	@Override

@@ -3,7 +3,8 @@ package TFC.Core;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
+
 
 public class HeatManager
 {

@@ -4,11 +4,37 @@ import java.util.*;
 
 import TFC.*;
 import TFC.Entities.EntityAnimalTFC;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityAIBase;
-import net.minecraft.src.EntityItem;
-import net.minecraft.src.RandomPositionGenerator;
-import net.minecraft.src.Vec3;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class EntityAIMoveTowardsFood extends EntityAIBase
 {
@@ -36,14 +62,14 @@ public class EntityAIMoveTowardsFood extends EntityAIBase
 	public boolean shouldExecute ()
 	{
 		targetEntity = null;
-		List <EntityItem> closeItems = theEntity.worldObj.getEntitiesWithinAABB (net.minecraft.src.EntityItem.class, theEntity.boundingBox.expand (10D, 2D, 10D));
+		List <EntityItem> closeItems = theEntity.worldObj.getEntitiesWithinAABB (EntityItem.class, theEntity.boundingBox.expand (10D, 2D, 10D));
 		for (EntityItem first:
 			closeItems)
 		{
 			for (int second:
 				theEntity.fooditems)
 			{
-				if (((int)first.item.itemID) == second)
+				if (((int)first.func_92014_d().itemID) == second)
 				{
 					targetEntity = first;
 				}
@@ -64,7 +90,7 @@ public class EntityAIMoveTowardsFood extends EntityAIBase
 		}
 
 		if (targetEntity.getDistanceSqToEntity(theEntity)<=1D){
-			if(theEntity.wantsItem(((EntityItem)targetEntity).item)){
+			if(theEntity.wantsItem(((EntityItem)targetEntity).func_92014_d())){
 				targetEntity.worldObj.playSoundAtEntity(targetEntity, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				targetEntity.setDead();
 			}

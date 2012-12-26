@@ -8,24 +8,44 @@ import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.ChunkPosition;
-import net.minecraft.src.Entity;
-import net.minecraft.src.Material;
-import net.minecraft.src.MathHelper;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.Vec3;
-import net.minecraft.src.WorldChunkManager;
-import net.minecraft.src.WorldProvider;
-import net.minecraft.src.WorldSettings;
-import net.minecraft.src.WorldType;
-import net.minecraftforge.client.SkyProvider;
+import net.minecraft.world.WorldProvider;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
+import net.minecraftforge.client.IRenderHandler;
 
 public class TFCProvider extends WorldProvider
 {	
-	public SkyProvider skyprovider;
+	public IRenderHandler skyprovider;
 	
 	@Override
 	protected void registerWorldChunkManager()
@@ -110,7 +130,7 @@ public class TFCProvider extends WorldProvider
 		//Adjust to 0-1
 		var8 = (var8+35)/(TFC_Climate.getMaxTemperature() + 35);
 
-		int var9 = ((TFCSkyProvider)this.getSkyProvider()).getSkyColorByTemp(var8);
+		int var9 = ((TFCSkyProvider)this.getSkyRenderer()).getSkyColorByTemp(var8);
 
 		float var10 = (float)(var9 >> 16 & 255) / 255.0F;
 		float var11 = (float)(var9 >> 8 & 255) / 255.0F;
@@ -142,9 +162,9 @@ public class TFCProvider extends WorldProvider
 			var12 = var12 * var16 + var15 * (1.0F - var16);
 		}
 
-		if (worldObj.lightningFlash > 0)
+		if (worldObj.lastLightningBolt > 0)
 		{
-			var15 = (float)worldObj.lightningFlash - par2;
+			var15 = (float)worldObj.lastLightningBolt - par2;
 
 			if (var15 > 1.0F)
 			{
@@ -167,16 +187,16 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@SideOnly(Side.CLIENT)
-	public SkyProvider getSkyProvider()
-	{
-		return skyprovider;
-	}
+    public IRenderHandler getSkyRenderer()
+    {
+        return skyprovider;
+    }
 
-	@SideOnly(Side.CLIENT)
-	public void setSkyProvider(SkyProvider skyProvider)
-	{
-		skyprovider = skyProvider;
-	}
+    @SideOnly(Side.CLIENT)
+    public void setSkyRenderer(IRenderHandler skyRenderer)
+    {
+        skyprovider = skyRenderer;
+    }
 
 	public void createSpawnPosition()
 	{

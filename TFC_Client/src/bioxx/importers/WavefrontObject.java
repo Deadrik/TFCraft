@@ -11,9 +11,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.Tessellator;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 

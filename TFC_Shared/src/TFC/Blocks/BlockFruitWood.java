@@ -5,6 +5,7 @@ import java.util.Random;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Core;
@@ -12,18 +13,37 @@ import TFC.Core.TFC_Core.Direction;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
 import TFC.TileEntities.TileEntityFruitTreeWood;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockContainer;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class BlockFruitWood extends BlockContainer
 {
@@ -33,14 +53,6 @@ public class BlockFruitWood extends BlockContainer
         super(i, Material.wood);
         this.blockIndexInTexture = index;
         EntityClass = c;
-    }
-
-    @Override
-    public void addCreativeItems(java.util.ArrayList list)
-    {
-        //for(int i = 0; i < 16; i++) {
-        list.add(new ItemStack(this, 1, 0));
-        //}
     }
 
 
@@ -91,10 +103,6 @@ public class BlockFruitWood extends BlockContainer
                 {
                     isAxeorSaw = true;
                 }
-            }
-            if(!isAxeorSaw && equip.getItem() == TFCItems.FlintPaxel)
-            {
-                isAxeorSaw = true;
             }
         }
         if(isAxeorSaw)
@@ -248,8 +256,11 @@ public class BlockFruitWood extends BlockContainer
     {
         FloraManager manager = FloraManager.getInstance();
         FloraIndex fi = manager.findMatchingIndex(this.getType(world.getBlockMetadata(i, j, k)));
+        
+        float temp = TFC_Climate.getHeightAdjustedTemp(i, j, k);
+        
         if(!world.isRemote && world.getBlockTileEntity(i, j, k) != null && TFC_Time.currentMonth < 6 && 
-                fi != null && world.getBiomeGenForCoords(i, k).getFloatTemperature() >= fi.minTemp && world.getBiomeGenForCoords(i, k).getFloatTemperature() < fi.maxTemp)
+                fi != null && temp >= fi.minTemp && temp < fi.maxTemp)
         {
             TileEntityFruitTreeWood te = (TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k);
             int t = 1;
@@ -367,12 +378,13 @@ public class BlockFruitWood extends BlockContainer
                 {
                     if(world.getBlockId(i+x, j+y, k+z) == 0 && (world.getBlockId(i+x, j+y+1, k+z) == 0 || world.getBlockId(i+x, j+y+2, k+z) == 0)) 
                     {
-                        int id = TFCBlocks.fruitTreeLeaves.blockID;
+                    	int meta = world.getBlockMetadata(i, j, k);
+                        int id = meta < 8 ? TFCBlocks.fruitTreeLeaves.blockID : TFCBlocks.fruitTreeLeaves2.blockID;
 
                         if(world.getBlockId(i, j, k) != TFCBlocks.fruitTreeWood.blockID)
                             id = 0;
 
-                        world.setBlockAndMetadata(i+x, j+y, k+z, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k));
+                        world.setBlockAndMetadata(i+x, j+y, k+z, id, world.getBlockMetadata(i, j, k));
                     }
                 }
             }

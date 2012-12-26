@@ -31,15 +31,38 @@ import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Block;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.Material;
-import net.minecraft.src.MathHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.RenderBlocks;
-import net.minecraft.src.Tessellator;
-import net.minecraft.src.World;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.ForgeHooksClient;
 
 public class TFC_CoreRender 
@@ -96,9 +119,7 @@ public class TFC_CoreRender
 
         return true;
     }
-    /**
-     * Renders a stair block at the given coordinates
-     */
+
     public static boolean renderBlockStairs(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
     {
     	boolean breaking = false;
@@ -2169,18 +2190,20 @@ public class TFC_CoreRender
     {
         int out = -1;
         int meta = world.getBlockMetadata(x, y, z);
+        int id = world.getBlockId(x, y, z);
+        int offset = id == TFCBlocks.fruitTreeLeaves.blockID ? 0 : 8;
 
         FloraManager manager = FloraManager.getInstance();
-        FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(world.getBlockId(x, y, z), meta & 7));
+        FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(id, meta & 7));
         if(index != null)
         {
             if(index.inBloom(TFC_Time.currentMonth))//blooming
             {
-                out = 96+(meta & 7);
+                out = 96+(meta & 7)+offset;
             }
-            else if(index.inHarvest(TFC_Time.currentMonth) && meta >= 8)//fruit
+            else if(meta >= 8)//fruit
             {
-                out = 80+(meta & 7);
+                out = 80+(meta & 7)+offset;
             }
         }
         return out;
@@ -2386,5 +2409,50 @@ public class TFC_CoreRender
             blockMaxY = var20;
             return var13;
         }
+    }
+
+    private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
+    {
+        Tessellator var9 = Tessellator.instance;
+
+        var9.setColorOpaque_F(1.0f, 1.0f, 1.0f);
+        GL11.glColor3f(1, 1, 1);
+        
+        int index = block.getBlockTexture(renderblocks.blockAccess, x, y, z, 0);
+        
+        
+        
+        int texX = (index & 15) << 4;
+        int texY = index & 240;
+        
+        double minX = (double)((float)texX / 256.0F);
+        double maxX = (double)(((float)texX + 15.99F) / 256.0F);
+        double minY = (double)((float)texY / 256.0F);
+        double maxY = (double)(((float)texY + 15.99F) / 256.0F);
+        
+        double xMin = x + 0.5D - 0.45D;
+        double xMax = x + 0.5D + 0.45D;
+        double zMin = z + 0.5D - 0.45D;
+        double zMax = z + 0.5D + 0.45D;
+        
+        var9.addVertexWithUV(xMin, y + 0, zMin, minX, minY);
+        var9.addVertexWithUV(xMin, y + 0.0D, zMin, minX, maxY);
+        var9.addVertexWithUV(xMax, y + 0.0D, zMax, maxX, maxY);
+        var9.addVertexWithUV(xMax, y + 0, zMax, maxX, minY);
+        
+        var9.addVertexWithUV(xMax, y + 0, zMax, minX, minY);
+        var9.addVertexWithUV(xMax, y + 0.0D, zMax, minX, maxY);
+        var9.addVertexWithUV(xMin, y + 0.0D, zMin, maxX, maxY);
+        var9.addVertexWithUV(xMin, y + 0, zMin, maxX, minY);
+        
+        var9.addVertexWithUV(xMin, y + 0, zMax, minX, minY);
+        var9.addVertexWithUV(xMin, y + 0.0D, zMax, minX, maxY);
+        var9.addVertexWithUV(xMax, y + 0.0D, zMin, maxX, maxY);
+        var9.addVertexWithUV(xMax, y + 0, zMin, maxX, minY);
+        
+        var9.addVertexWithUV(xMax, y + 0, zMin, minX, minY);
+        var9.addVertexWithUV(xMax, y + 0.0D, zMin, minX, maxY);
+        var9.addVertexWithUV(xMin, y + 0.0D, zMax, maxX, maxY);
+        var9.addVertexWithUV(xMin, y + 0, zMax, maxX, minY);
     }
 }

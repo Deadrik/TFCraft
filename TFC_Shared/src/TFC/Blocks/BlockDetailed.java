@@ -2,10 +2,6 @@ package TFC.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-
 import TFC.*;
 import TFC.Core.*;
 import TFC.Core.Player.PlayerInfo;
@@ -15,17 +11,37 @@ import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityWoodConstruct;
-
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
-import net.minecraft.src.Material;
-import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.Vec3;
-import net.minecraft.src.World;
-import net.minecraft.src.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class BlockDetailed extends BlockPartial
 {
@@ -181,7 +197,10 @@ public class BlockDetailed extends BlockPartial
 				te.data,
 				te);
 
-			//Check if the block itself is beign collided with
+			//Check if the block itself is being collided with
+		/*
+		 * With this enabled, the chisel can't chisel past the outer layer
+		 * */
 //			returns = CollisionRayTraceDetailed.collisionRayTracer(
 //					this,
 //					world,
@@ -229,6 +248,8 @@ public class BlockDetailed extends BlockPartial
 					rayTraceBound(AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ), x, y, z, player, view);
 				}
 				setBlockBoundsBasedOnSelection(world, x, y, z);
+				
+				lockX = x; lockY = y; lockZ = z;
 
 				return new MovingObjectPosition(x,y,z,
 						(Byte) min[1],

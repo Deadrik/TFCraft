@@ -2,10 +2,9 @@ package TFC.WorldGen.GenLayers;
 
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldType;
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.GenLayer;
-import net.minecraft.src.IntCache;
-import net.minecraft.src.WorldType;
+import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.layer.*;
 
 public class GenLayerBiomeTFC extends GenLayerTFC
 {

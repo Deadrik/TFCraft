@@ -2,11 +2,9 @@ package TFC.Core;
 
 import java.util.Random;
 
-import TFC.Enums.CraftingRuleEnum;
+import net.minecraft.item.ItemStack;
 
-import net.minecraft.src.InventoryCrafting;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import TFC.Enums.CraftingRuleEnum;
 
 public class AnvilRecipe
 {

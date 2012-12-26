@@ -1,6 +1,6 @@
 package TFC.WorldGen.GenLayers;
 
-import net.minecraft.src.WorldType;
+import net.minecraft.world.WorldType;
 import TFC.*;
 import TFC.WorldGen.*;
 
