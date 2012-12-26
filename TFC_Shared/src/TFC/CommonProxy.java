@@ -23,7 +23,7 @@ import net.minecraft.network.packet.*;
 import net.minecraft.pathfinding.*;
 import net.minecraft.potion.*;
 import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
+import net.minecraft.src.*;
 import net.minecraft.stats.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;

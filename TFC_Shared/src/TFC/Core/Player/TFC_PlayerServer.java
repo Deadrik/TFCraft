@@ -43,6 +43,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraft.src.*;
 
 public class TFC_PlayerServer extends ServerPlayerBase
 {
