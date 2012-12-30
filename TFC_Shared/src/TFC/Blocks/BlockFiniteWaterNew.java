@@ -35,7 +35,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockFiniteWater extends BlockFluid
+public class BlockFiniteWaterNew extends BlockFluid
 {
     /**
      * Indicates whether the flow direction is optimal. Each array index corresponds to one of the four cardinal
@@ -49,7 +49,7 @@ public class BlockFiniteWater extends BlockFluid
      */
     int[] flowCost = new int[4];
 
-    public BlockFiniteWater(int par1)
+    public BlockFiniteWaterNew(int par1)
     {
         super(par1, Material.water);
         this.setTickRandomly(false);
@@ -181,21 +181,9 @@ public class BlockFiniteWater extends BlockFluid
             world.setBlock(x, y, z, 0);
             return true;
         }
-        
-        if (blockID2 == TFCBlocks.finiteWater.blockID)
+        if (this.blockID == TFCBlocks.finiteWater.blockID && blockID2 == TFCBlocks.finiteWater.blockID)
         {
-        	if(blockMeta < blockMeta2)
-        	{
-        		world.setBlockAndMetadataWithNotify(x2, y2, z2, TFCBlocks.finiteWater.blockID, blockMeta2-1);
-        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta+1);
-        	}
-        }
-        if (blockID2 == Block.waterStill.blockID)
-        {
-        	if(blockMeta > 0)
-        	{
-        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta-1);
-        	}
+            world.setBlockAndMetadataWithNotify(x2, y2, z2, TFCBlocks.finiteWater.blockID, blockMeta2);
         }
         
         if (blockID2 == this.blockID)
@@ -485,7 +473,7 @@ public class BlockFiniteWater extends BlockFluid
     public static double func_293_a(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, Material par4Material)
     {
         Vec3 var5 = null;
-        var5 = ((BlockFiniteWater)TFCBlocks.finiteWater).getFlowVector(par0IBlockAccess, par1, par2, par3);
+        var5 = ((BlockFiniteWaterNew)TFCBlocks.finiteWater).getFlowVector(par0IBlockAccess, par1, par2, par3);
         return var5.xCoord == 0.0D && var5.zCoord == 0.0D ? -1000.0D : Math.atan2(var5.zCoord, var5.xCoord) - (Math.PI / 2D);
     }
     
