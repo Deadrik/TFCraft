@@ -398,6 +398,8 @@ public class Recipes
 			ModLoader.addRecipe(new ItemStack(Doors[i], 1), new Object[] {"11","11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 		}
 		
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Blueprint, 1), new Object[] { new ItemStack(TFCItems.Ink,3,-1), new ItemStack(Item.paper, 1)});
+		
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();

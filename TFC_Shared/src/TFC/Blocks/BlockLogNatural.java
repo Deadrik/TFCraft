@@ -45,7 +45,26 @@ public class BlockLogNatural extends BlockTerra
 	public BlockLogNatural(int i) 
 	{
 		super(i, Material.wood);
+		this.setTickRandomly(true);
 	}
+	
+	@Override
+    public void updateTick(World world, int i, int j, int k, Random rand)
+    {
+		if(!world.isRemote)
+		{
+			if(!world.isBlockOpaqueCube(i, j-1, k))
+			{
+				if(world.getBlockId(i+1, j, k) != blockID && world.getBlockId(i-1, j, k) != blockID && 
+						world.getBlockId(i, j, k+1) != blockID && world.getBlockId(i, j, k-1) != blockID && 
+						world.getBlockId(i+1, j, k+1) != blockID && world.getBlockId(i+1, j, k-1) != blockID && 
+						world.getBlockId(i-1, j, k+1) != blockID && world.getBlockId(i-1, j, k-1) != blockID)
+				{
+					world.setBlockWithNotify(i, j, k, 0);
+				}
+			}
+		}
+    }
 
 	@SideOnly(Side.CLIENT)
 	@Override

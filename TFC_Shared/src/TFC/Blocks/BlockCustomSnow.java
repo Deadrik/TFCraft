@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.Random;
 
 import TFC.*;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.WorldGen.TFCBiome;
 import cpw.mods.fml.relauncher.Side;
@@ -202,7 +203,7 @@ public class BlockCustomSnow extends Block
 			}
 		}
 		
-		if(par1World.isRaining() && ((TFCBiome)par1World.getBiomeGenForCoords(par2, par4)).getHeightAdjustedTemperature(par3) < 0)//Raining and Below Freezing
+		if(par1World.isRaining() && TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) <= 0)//Raining and Below Freezing
 		{      
 			if(meta < 3 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) 
 			{
@@ -217,7 +218,7 @@ public class BlockCustomSnow extends Block
 				par1World.setBlockMetadata(par2, par3, par4, meta+1);
 			}
 		}
-		else if(par1World.isRaining() && ((TFCBiome)par1World.getBiomeGenForCoords(par2, par4)).getHeightAdjustedTemperature(par3) >= 0)//Raining and above freezing
+		else if(par1World.isRaining() && TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) >= 0)//Raining and above freezing
         {      
             if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) 
             {
@@ -239,7 +240,7 @@ public class BlockCustomSnow extends Block
                 }
             }
         }
-		else if(((TFCBiome)par1World.getBiomeGenForCoords(par2, par4)).getHeightAdjustedTemperature(par3) >= 0F)//Above fReezing
+		else if(TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) >= 0F)//Above fReezing
 		{
 			if(meta > 1 ) {
 				par1World.setBlockMetadata(par2, par3, par4, meta-1);

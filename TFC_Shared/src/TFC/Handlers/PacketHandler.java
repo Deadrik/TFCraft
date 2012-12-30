@@ -64,9 +64,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public static final byte Packet_Init_Block_Server = 1;
 	public static final byte Packet_Keypress_Server = 2;
 	public static final byte Packet_Init_World_Client = 3;
-	public static final byte Packet_Data_Client = 4;
-	public static final byte Packet_Data_Server = 5;
+	public static final byte Packet_Data_Block_Client = 4;
+	public static final byte Packet_Data_Block_Server = 5;
 	public static final byte Packet_Player_Status = 6;
+	public static final byte Packet_Rename_Item = 7;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -149,7 +150,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				y = dis.readInt();
 				z = dis.readInt();
 
-				if(world != null)
+				if(world != null && world.isRemote)
 				{
 					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
 					if(te!= null)
@@ -230,7 +231,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					TFC_Core.SetupWorld(world, seed);
 				}
 			}
-			else if(type == Packet_Data_Client)
+			else if(type == Packet_Data_Block_Client)
 			{
 				if(world.isRemote)
 				{
@@ -243,7 +244,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						te.handleDataPacket(dis);
 				}
 			}
-			else if(type == Packet_Data_Server)
+			else if(type == Packet_Data_Block_Server)
 			{
 				if(!world.isRemote)
 				{
@@ -266,6 +267,14 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						playerClient.getFoodStatsTFC().waterLevel = dis.readFloat();
 
 					} catch (IOException e) {}
+				}
+			}
+			else if(type == Packet_Rename_Item)
+			{
+				if(!world.isRemote)
+				{
+					String s = dis.readUTF();
+					player.inventory.getCurrentItem().stackTagCompound.setString("Name", s);
 				}
 			}
 		} catch (Exception e) 

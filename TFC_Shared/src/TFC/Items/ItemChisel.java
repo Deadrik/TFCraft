@@ -65,88 +65,117 @@ public class ItemChisel extends ItemTerraTool
 	public static boolean handleActivation(World world, EntityPlayer player, int x, int y, int z, int blockID, int meta, int side, float hitX, float hitY, float hitZ)
 	{
 		byte newMeta = 0;
-        if (side == 0)
-        {
-            newMeta = (byte) (newMeta | 4);
-        }
+		if (side == 0)
+		{
+			newMeta = (byte) (newMeta | 4);
+		}
 
-        int rot = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-        byte flip = (byte) (newMeta & 4);
-        byte rotation = 0;
+		int rot = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		byte flip = (byte) (newMeta & 4);
+		byte rotation = 0;
 
-        if (rot == 0)
-        {
-            rotation = (byte) ( 2 | flip);
-        }
-        else if (rot == 1)
-        {
-            rotation = (byte) ( 1 | flip);
-        }
-        else if (rot == 2)
-        {
-            rotation = (byte) ( 3 | flip);
-        }
-        else if (rot == 3)
-        {
-            rotation = (byte) ( 0 | flip);
-        }
-        
+		if (rot == 0)
+		{
+			rotation = (byte) ( 2 | flip);
+		}
+		else if (rot == 1)
+		{
+			rotation = (byte) ( 1 | flip);
+		}
+		else if (rot == 2)
+		{
+			rotation = (byte) ( 3 | flip);
+		}
+		else if (rot == 3)
+		{
+			rotation = (byte) ( 0 | flip);
+		}
+
 		int mode = 0;
 		PlayerInfo pi = null;
-		
-        if(!world.isRemote)
-        {
-            pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-            
-            if(pi != null) 
-            	mode = pi.ChiselMode;
-        }
-        else
-        {
-            pi = PlayerManagerTFC.getInstance().getClientPlayer();
-        }
-        
-        if(pi != null) 
-        	mode = pi.ChiselMode;
-        
-        if(mode == 0)
-        {
-        	if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
-        		return false;
-        	
-        	CreateSmooth(world, x, y, z, blockID, meta);
-            return true;
-        }
-        else if(mode == 1)
-        {
-        	if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
-        		return false;
-        	
-            ItemChisel.CreateStairs(world, x, y, z, blockID, meta, rotation);
-            return true;
-        }
-        else if(mode == 2)
-        {
-        	if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
-        		return false;
-        	
-            ItemChisel.CreateSlab(world, x, y, z, blockID, meta, side);
-            return true;
-        }
-        else if(mode == 3 && pi.lockMatches(x, y, z))
-        {
-            ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
-            return true;
-        }
-        else if(mode == 4 && pi.lockMatches(x, y, z))
-        {
-            ItemChisel.CreateSuperDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
-            return true;
-        }
-        
+
+		int hasChisel = -1;
+		int hasHammer = -1;
+
+		for(int i = 0; i < 9;i++)
+		{
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+				hasHammer = i;
+		}
+
+		if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel)
+			hasChisel = player.inventory.currentItem;
+
+		if(!world.isRemote)
+		{
+			pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+			if(pi != null) 
+				mode = pi.ChiselMode;
+		}
+		else
+		{
+			pi = PlayerManagerTFC.getInstance().getClientPlayer();
+		}
+
+		if(pi != null) 
+			mode = pi.ChiselMode;
+
+		if(hasChisel >= 0)
+		{
+			if(mode == 0)
+			{
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
+					return false;
+
+				CreateSmooth(world, x, y, z, blockID, meta);
+				
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 1)
+			{
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
+					return false;
+
+				ItemChisel.CreateStairs(world, x, y, z, blockID, meta, rotation);
+
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 2)
+			{
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
+					return false;
+
+				ItemChisel.CreateSlab(world, x, y, z, blockID, meta, side);
+
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 3 && pi.lockMatches(x, y, z))
+			{
+				ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
+
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 4 && pi.lockMatches(x, y, z))
+			{
+				ItemChisel.CreateSuperDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
+
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+		}
 		return true;
 	}
-	
+
 	public static void CreateSmooth(World world, int x, int y, int z, int id, int meta)
 	{
 		if(id == TFCBlocks.StoneIgIn.blockID)
@@ -158,8 +187,8 @@ public class ItemChisel extends ItemTerraTool
 		else if(id == TFCBlocks.StoneMM.blockID)
 			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta);
 	}
-	
-	
+
+
 	public static void CreateStairs(World world, int x, int y, int z, int id, int meta, byte m)
 	{
 		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStairs.blockID, m);
@@ -346,7 +375,7 @@ public class ItemChisel extends ItemTerraTool
 			}
 		}
 	}
-	
+
 	public static void CreateSuperDetailed(World world, int x, int y, int z, int id, int meta, int side, float hitX, float hitY, float hitZ)
 	{
 		TileEntitySuperDetailed te;
@@ -359,13 +388,13 @@ public class ItemChisel extends ItemTerraTool
 			int extraX2 = 8 - (int) ((tep.extraData >> 12) & 0xf);
 			int extraY2 = 8 - (int) ((tep.extraData >> 16) & 0xf);
 			int extraZ2 = 8 - (int) ((tep.extraData >> 20) & 0xf);
-			
+
 			world.setBlock(x, y, z, TFCBlocks.SuperDetailed.blockID);
-			
+
 			te = (TileEntitySuperDetailed)world.getBlockTileEntity(x, y, z);
 			int index = te.setIdAndMeta(tep.TypeID, tep.MetaID);
 			te.blockIndex[0] = index;
-			
+
 			for(int subX = 0; subX < 8; subX++)
 			{
 				for(int subZ = 0; subZ < 8; subZ++)
@@ -384,7 +413,7 @@ public class ItemChisel extends ItemTerraTool
 		{
 			TileEntityDetailed ted = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
 			world.setBlock(x, y, z, TFCBlocks.SuperDetailed.blockID);
-			
+
 			te = (TileEntitySuperDetailed)world.getBlockTileEntity(x, y, z);
 			int index = te.setIdAndMeta(ted.TypeID, ted.MetaID);
 			te.blockIndex[0] = index;

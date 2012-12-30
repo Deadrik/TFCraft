@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import TFC.*;
 import TFC.Core.ColorizerFoliageTFC;
+import TFC.Core.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -43,44 +44,34 @@ public class BlockCustomVine extends Block implements IShearable
     {
         super(par1, 143, Material.vine);
         this.setTickRandomly(true);
+        this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
+    @Override
     public void setBlockBoundsForItemRender()
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
+    @Override
     public int getRenderType()
     {
         return 20;
     }
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-     */
+    @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
+    @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
 
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
-     */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -153,6 +144,7 @@ public class BlockCustomVine extends Block implements IShearable
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
@@ -161,6 +153,7 @@ public class BlockCustomVine extends Block implements IShearable
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
     {
         switch (par5)
@@ -200,7 +193,7 @@ public class BlockCustomVine extends Block implements IShearable
             return var2.renderAsNormalBlock();
         }
     }
-    
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         return canVineStay(par1World, par2, par3, par4);
@@ -242,32 +235,25 @@ public class BlockCustomVine extends Block implements IShearable
         }
     }
 
+    @Override
     public int getBlockColor()
     {
         return ColorizerFoliageTFC.getFoliageColorBasic();
     }
 
-    /**
-     * Returns the color this block should be rendered. Used by leaves.
-     */
+    @Override
     public int getRenderColor(int par1)
     {
         return ColorizerFoliageTFC.getFoliageColorBasic();
     }
 
-    /**
-     * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
-     * when first determining what to render.
-     */
+    @Override
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         if (!par1World.isRemote && !this.canVineStay(par1World, par2, par3, par4))
@@ -277,9 +263,7 @@ public class BlockCustomVine extends Block implements IShearable
         }
     }
 
-    /**
-     * Ticks the block if it's been scheduled
-     */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote && par1World.rand.nextInt(4) == 0)
@@ -418,15 +402,23 @@ public class BlockCustomVine extends Block implements IShearable
         }
     }
 
-    /**
-     * Called when a block is placed using an item. Used often for taking the facing and figuring out how to position
-     * the item. Args: x, y, z, facing
-     */
-    public void onBlockPlaced(World par1World, int par2, int par3, int par4, int par5)
+    @Override
+    public void onBlockPlacedBy(World world, int par2, int par3, int par4, EntityLiving entity)
     {
+    	MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entity, world);
+    	int side;
+        if(objectMouseOver == null) 
+        {
+        	side = -1;
+        }
+        else
+        {
+        	side = objectMouseOver.sideHit;
+        }
+        
         byte var6 = 0;
 
-        switch (par5)
+        switch (side)
         {
             case 2:
                 var6 = 1;
@@ -446,30 +438,23 @@ public class BlockCustomVine extends Block implements IShearable
 
         if (var6 != 0)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, var6);
+        	world.setBlockMetadataWithNotify(par2, par3, par4, var6);
         }
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return 0;
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
+    @Override
     public int quantityDropped(Random par1Random)
     {
         return 0;
     }
 
-    /**
-     * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
-     * block and l is the block's subtype/damage.
-     */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
     {
         super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);

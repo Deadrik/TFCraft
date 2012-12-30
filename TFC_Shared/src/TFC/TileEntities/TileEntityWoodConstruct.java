@@ -151,7 +151,7 @@ public class TileEntityWoodConstruct extends NetworkTileEntity
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(255);
 		DataOutputStream outStream = new DataOutputStream(bos);	
 		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Client);
+			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);

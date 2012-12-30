@@ -113,14 +113,25 @@ public class BlockDetailed extends BlockPartial
 		return false;
 	}
 	
-	public boolean onBlockActivatedServer(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) 
+	public boolean onBlockActivatedServer(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) 
 	{
 			int id = world.getBlockId(x, y, z);
 			byte meta = (byte) world.getBlockMetadata(x, y, z);
 
 			int mode = 0;
-			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 			if(pi!=null) mode = pi.ChiselMode;
+			
+			int hasChisel = -1;
+			int hasHammer = -1;
+
+			for(int i = 0; i < 9;i++)
+			{
+				if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+					hasHammer = i;
+				if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemChisel)
+					hasChisel = i;
+			}
 
 			if(mode == 3 && xSelected != -10)
 			{
@@ -132,6 +143,13 @@ public class BlockDetailed extends BlockPartial
 				{
 					System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
 					te.data.clear(index);
+					
+					if(player.inventory.mainInventory[hasChisel] != null)
+						player.inventory.mainInventory[hasChisel].damageItem(1, player);
+
+					if(player.inventory.mainInventory[hasHammer] != null)
+						player.inventory.mainInventory[hasHammer].damageItem(1, player);
+					
 					te.broadcastPacketInRange(te.createUpdatePacket(index));
 				}
 				return true;

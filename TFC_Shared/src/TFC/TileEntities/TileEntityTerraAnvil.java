@@ -809,7 +809,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		DataOutputStream dos=new DataOutputStream(bos);
 
 		try {
-			dos.writeByte(PacketHandler.Packet_Data_Server);
+			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);

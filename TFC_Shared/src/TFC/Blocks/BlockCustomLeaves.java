@@ -231,13 +231,17 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
     private void destroyLeaves(World world, int par1, int par2, int par3)
     {
-        world.setBlock(par1, par2, par3, 0);
+        world.setBlockWithNotify(par1, par2, par3, 0);
         world.scheduleBlockUpdate(par1 - 1, par2, par3, blockID, 5);
         world.scheduleBlockUpdate(par1 + 1, par2, par3, blockID, 5);
         world.scheduleBlockUpdate(par1, par2 - 1, par3, blockID, 5);
         world.scheduleBlockUpdate(par1, par2 + 1, par3, blockID, 5);
         world.scheduleBlockUpdate(par1, par2, par3 - 1, blockID, 5);
         world.scheduleBlockUpdate(par1, par2, par3 + 1, blockID, 5);
+        world.scheduleBlockUpdate(par1 - 1, par2, par3+1, blockID, 5);
+        world.scheduleBlockUpdate(par1 - 1, par2, par3-1, blockID, 5);
+        world.scheduleBlockUpdate(par1 + 1, par2, par3+1, blockID, 5);
+        world.scheduleBlockUpdate(par1 + 1, par2, par3-1, blockID, 5);
     }
 
     private void removeLeaves(World world, int i, int j, int k)

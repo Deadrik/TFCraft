@@ -87,7 +87,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.chunk.*;
 import net.minecraftforge.common.*;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 73")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 75")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {

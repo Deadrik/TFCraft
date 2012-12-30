@@ -139,11 +139,13 @@ public class BlockSlab extends BlockPartial
 			 if(mode == 2)
 			 {
 				 ItemChisel.CreateSlab(world, x, y, z, id, meta, side);
+				 entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
 				 return true;
 			 }
 			 else if(mode == 3)
 			 {
 				 ItemChisel.CreateDetailed(world, x, y, z, id, meta, side, par7, par8, par9);
+				 entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
 				 return true;
 			 }
 		 }

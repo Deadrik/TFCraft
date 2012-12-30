@@ -294,7 +294,7 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 		DataOutputStream dos=new DataOutputStream(bos);
 
 		try {
-			dos.writeByte(PacketHandler.Packet_Data_Client);
+			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);

@@ -99,7 +99,8 @@ public class WorldGenJungle
 //					WorldGenerator gen0 = (WorldGenerator)(random.nextInt(10) == 0 ? new WorldGenCustomShortTrees(false,15) : random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
 //						random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15));
 					
-					WorldGenerator gen0 = (WorldGenerator)( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+					WorldGenerator gen0 = (WorldGenerator)( (random.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : 
+						(random.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + random.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
 
 					gen0.setScale(1.0D, 1.0D, 1.0D);
 					gen0.generate(world, random, xCoord, yCoord, zCoord);

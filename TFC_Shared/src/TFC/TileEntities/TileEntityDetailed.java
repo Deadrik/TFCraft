@@ -140,9 +140,10 @@ public class TileEntityDetailed extends NetworkTileEntity
 		int length = inStream.readInt();
 		byte[] b = new byte[length];
 		inStream.readFully(b);
-		data.or(fromByteArray(b, 512));
+		BitSet bs = fromByteArray(b, length);
+		data.or(bs);
 
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -164,13 +165,32 @@ public class TileEntityDetailed extends NetworkTileEntity
 		}
 
 	}
+	
+	public Packet createFullPacket()
+	{
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
+		DataOutputStream outStream = new DataOutputStream(bos);	
+		try {
+			outStream.writeByte(PacketHandler.Packet_Init_Block_Client);
+			outStream.writeInt(xCoord);
+			outStream.writeInt(yCoord);
+			outStream.writeInt(zCoord);
+			outStream.writeShort(TypeID);
+			outStream.writeByte(MetaID);
+			byte[] b = toByteArray(data);
+			outStream.writeInt(b.length);
+			outStream.write(b);	
+		} catch (IOException e) {
+		}
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
 
 	public Packet createUpdatePacket(int index)
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
 		DataOutputStream outStream = new DataOutputStream(bos);	
 		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Client);
+			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);
@@ -186,7 +206,7 @@ public class TileEntityDetailed extends NetworkTileEntity
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
 		DataOutputStream outStream = new DataOutputStream(bos);	
 		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Server);
+			outStream.writeByte(PacketHandler.Packet_Data_Block_Server);
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);

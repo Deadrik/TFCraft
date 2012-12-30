@@ -540,8 +540,12 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			}
 		}
 
-		if(input[0] != null && outMetal1 != null)
+		//Make sure that we have an item in the input slot
+		if(input[0] != null)
 		{
+			/**
+			 * First we check if there is an empty mold
+			 * */
 			if(input[0].itemID == TFCItems.CeramicMold.shiftedIndex)
 			{
 				int dam = 0;
@@ -556,8 +560,10 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 					{
 						dam = outMetal1Count;
 						outMetal1Count = 0;
-					}            
-					input[0] = outMetal1.copy();
+					}  
+					
+					if(outMetal1 != null)
+						input[0] = outMetal1.copy();
 				}
 				else if(outMetal2Count > 0)
 				{
@@ -570,8 +576,10 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 					{
 						dam = outMetal2Count;
 						outMetal2Count = 0;
-					}         
-					input[0] = outMetal2.copy();    
+					} 
+					
+					if(outMetal2 != null)
+						input[0] = outMetal2.copy();    
 				}
 
 				if(input[0] != null)
@@ -581,6 +589,10 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 				return true;
 			}
+			/**
+			 * If the input is not an empty mold but instead contains a partial mold matching the first output metal, 
+			 * then we handle the process
+			 * */
 			else if(outMetal1 != null && input[0].itemID == outMetal1.getItem().shiftedIndex && input[0].getItemDamage() > 0)
 			{
 				int i = 100-input[0].getItemDamage();
@@ -603,6 +615,10 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 				return true;
 			}
+			/**
+			 * If the input is not an empty mold but instead contains a partial mold matching the second output metal, 
+			 * then we handle the process
+			 * */
 			else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().shiftedIndex && input[0].getItemDamage() > 0)
 			{
 				int i = 100-input[0].getItemDamage();
@@ -913,7 +929,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);	
 		try {
-			dos.writeByte(PacketHandler.Packet_Data_Client);
+			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);

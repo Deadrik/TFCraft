@@ -400,6 +400,10 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerQuern(player.inventory, (TileEntityQuern) te, world, x, y, z);
 		}
+		case 34:
+		{
+			return null;
+		}
 		default:
 		{
 			return null;

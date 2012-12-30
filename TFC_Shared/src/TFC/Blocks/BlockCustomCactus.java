@@ -162,9 +162,6 @@ public class BlockCustomCactus extends Block implements IPlantable
         }
     }
 
-    /**
-     * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
-     */
     @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
@@ -190,12 +187,13 @@ public class BlockCustomCactus extends Block implements IPlantable
             return canSustainPlant(par1World, par2, par3 - 1, par4, ForgeDirection.UP, this);
         }
     }
+    
     @Override
     public boolean canSustainPlant(World world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
     {
     	int id = world.getBlockId(x, y, z);
         boolean stay = false;
-        if(TFC_Core.isSand(id))
+        if(TFC_Core.isSand(id) || id == blockID)
         		stay = true;
         else if(Block.blocksList[id] != null && Block.blocksList[id].canSustainPlant(world, x, y, z, direction, plant))
         	stay = true;

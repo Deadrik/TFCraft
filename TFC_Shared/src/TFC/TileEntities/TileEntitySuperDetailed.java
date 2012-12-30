@@ -134,7 +134,7 @@ public class TileEntitySuperDetailed extends TileEntityDetailed
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
 		DataOutputStream outStream = new DataOutputStream(bos);	
 		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Client);
+			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);
@@ -151,7 +151,7 @@ public class TileEntitySuperDetailed extends TileEntityDetailed
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
 		DataOutputStream outStream = new DataOutputStream(bos);	
 		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Client);
+			outStream.writeByte(PacketHandler.Packet_Data_Block_Client);
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);
@@ -168,7 +168,7 @@ public class TileEntitySuperDetailed extends TileEntityDetailed
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(140);
 		DataOutputStream outStream = new DataOutputStream(bos);	
 		try {
-			outStream.writeByte(PacketHandler.Packet_Data_Server);
+			outStream.writeByte(PacketHandler.Packet_Data_Block_Server);
 			outStream.writeInt(xCoord);
 			outStream.writeInt(yCoord);
 			outStream.writeInt(zCoord);
