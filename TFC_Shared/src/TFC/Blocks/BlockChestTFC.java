@@ -39,7 +39,7 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockChestTFC extends BlockContainer
+public class BlockChestTFC extends BlockTerraContainer
 {
     private Random random = new Random();
 

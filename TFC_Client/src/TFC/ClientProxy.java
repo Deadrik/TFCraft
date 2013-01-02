@@ -66,6 +66,7 @@ import TFC.GUI.*;
 import TFC.Handlers.*;
 import TFC.Items.*;
 import TFC.Render.*;
+import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCBiome;
@@ -106,6 +107,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_foodprep.png");
 		MinecraftForgeClient.preloadTexture(TFC_Textures.FoodSheet);
 		MinecraftForgeClient.preloadTexture("/bioxx/gui_blueprint.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/gui_crucible.png");
 
 		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
 		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -165,6 +167,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.superDetailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
 	}
 	
 	public void registerTileEntities(boolean b)

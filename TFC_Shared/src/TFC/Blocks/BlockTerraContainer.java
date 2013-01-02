@@ -33,16 +33,16 @@ import net.minecraft.world.chunk.*;
 
 public abstract class BlockTerraContainer extends BlockContainer
 {
-	protected BlockTerraContainer(int par1) 
+	public BlockTerraContainer(int par1) 
 	{
 		super(par1, Material.rock);
 	}
-	protected BlockTerraContainer(int par1,int par2, Material material) 
+	public BlockTerraContainer(int par1,int par2, Material material) 
 	{
 		super(par1,par2, material);
 	}
 
-	protected BlockTerraContainer(int par1, Material material) 
+	public BlockTerraContainer(int par1, Material material) 
 	{
 		super(par1, material);
 	}
@@ -85,5 +85,27 @@ public abstract class BlockTerraContainer extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return null;
+	}
+	
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int blockId, int metadata)
+	{
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if(te != null)
+		{
+			if(te instanceof IInventory)
+			{
+				for(int i = 0; i< ((IInventory)te).getSizeInventory(); i++)
+				{
+					if(((IInventory)te).getStackInSlot(i) != null)
+					{
+						EntityItem ei = new EntityItem(world, x, y, z, ((IInventory)te).getStackInSlot(i));
+						ei.motionY = 0.4;
+						world.spawnEntityInWorld(ei);
+					}
+				}
+			}
+		}
+		super.breakBlock(world, x, y, z, blockId, metadata);
 	}
 }

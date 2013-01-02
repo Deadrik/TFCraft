@@ -242,12 +242,6 @@ public class BlockFirepit extends BlockTerraContainer
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
         Eject(par1World,par2,par3,par4);
     }
-    
-    @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-    	Eject(par1World,par2,par3,par4);
-    }
 
     //public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
     

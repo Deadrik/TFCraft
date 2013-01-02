@@ -38,7 +38,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockToolRack extends BlockContainer
+public class BlockToolRack extends BlockTerraContainer
 {
 	public BlockToolRack(int par1)
 	{
@@ -85,17 +85,6 @@ public class BlockToolRack extends BlockContainer
 	public int getRenderType()
 	{
 		return TFCBlocks.toolRackRenderId;
-	}
-
-	public void Eject(World par1World, int par2, int par3, int par4)
-	{
-		if((TileEntityToolRack)par1World.getBlockTileEntity(par2, par3, par4)!=null)
-		{
-			TileEntityToolRack te;
-			te = (TileEntityToolRack)par1World.getBlockTileEntity(par2, par3, par4);
-			te.ejectContents();
-			par1World.removeBlockTileEntity(par2, par3, par4);
-		}
 	}
 
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
@@ -211,13 +200,6 @@ public class BlockToolRack extends BlockContainer
 	{
 		
 	}
-	
-	@Override
-	public void breakBlock(World world, int x, int y, int z, int blockId, int metadata)
-	{
-		Eject(world, x, y, z);
-		super.breakBlock(world, x, y, z, blockId, metadata);
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
@@ -281,7 +263,7 @@ public class BlockToolRack extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i, j, k+1))
 			{
-				Eject(world,i,j,k);
+				this.breakBlock(world, i, j, k, blockID, dir);
 				world.setBlock(i, j, k, 0);
 			}
 		}
@@ -289,7 +271,7 @@ public class BlockToolRack extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i-1, j, k))
 			{
-				Eject(world,i,j,k);
+				this.breakBlock(world, i, j, k, blockID, dir);
 				world.setBlock(i, j, k, 0);
 			}
 		}
@@ -297,7 +279,7 @@ public class BlockToolRack extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i, j, k-1))
 			{
-				Eject(world,i,j,k);
+				this.breakBlock(world, i, j, k, blockID, dir);
 				world.setBlock(i, j, k, 0);
 			}
 		}
@@ -305,7 +287,7 @@ public class BlockToolRack extends BlockContainer
 		{
 			if(!world.isBlockOpaqueCube(i+1, j, k))
 			{
-				Eject(world,i,j,k);
+				this.breakBlock(world, i, j, k, blockID, dir);
 				world.setBlock(i, j, k, 0);
 			}
 		}

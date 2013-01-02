@@ -72,6 +72,7 @@ public class TFCBlocks
 	public static int nestboxRenderId;
 	public static int woodConstructRenderId;
 	public static int superDetailedRenderId;
+	public static int crucibleRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;

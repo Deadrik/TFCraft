@@ -135,29 +135,6 @@ public class BlockForge extends BlockTerraContainer
 	{
 		return TFCBlocks.ForgeRenderId;
 	}
-
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{		
-		Eject(world,i,j,k);
-	}
-	
-	@Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-    	Eject(par1World,par2,par3,par4);
-    }
-	
-	public void Eject(World par1World, int par2, int par3, int par4)
-    {
-        if((TileEntityTerraForge)par1World.getBlockTileEntity(par2, par3, par4)!=null)
-        {
-        	TileEntityTerraForge tileentityanvil;
-            tileentityanvil = (TileEntityTerraForge)par1World.getBlockTileEntity(par2, par3, par4);
-            tileentityanvil.ejectContents();
-            par1World.removeBlockTileEntity(par2, par3, par4);
-        }
-    }
 	
 	@Override
 	public boolean isOpaqueCube()
