@@ -7,6 +7,8 @@ import java.util.Random;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityPartial;
 import net.minecraft.item.ItemFlintAndSteel;
 import cpw.mods.fml.relauncher.Side;
@@ -45,7 +47,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 
 	public ItemFlintSteel(int par1) {
 		super(par1);
-		this.setCreativeTab(CreativeTabs.tabTools);
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 
 	@Override

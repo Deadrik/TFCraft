@@ -53,6 +53,7 @@ public class ItemPlank extends ItemTerra
 		texture = tex;
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 
 	@Override

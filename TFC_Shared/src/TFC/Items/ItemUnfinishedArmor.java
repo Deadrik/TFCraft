@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.Core.TFCTabs;
 import TFC.Enums.EnumSize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,7 +44,7 @@ public class ItemUnfinishedArmor extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(TFCTabs.TFCUnfinished);
 	}
 	public ItemUnfinishedArmor(int id, String tex) 
 	{

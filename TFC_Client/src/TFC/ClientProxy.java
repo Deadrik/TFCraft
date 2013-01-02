@@ -663,6 +663,10 @@ public class ClientProxy extends CommonProxy
 		
 		LR.addStringLocalization("item.Blueprint.name", "Blueprint");
 		
+		LR.addStringLocalization("itemGroup.TFCTools", "(TFC) Tools");
+		LR.addStringLocalization("itemGroup.TFCUnfinished", "(TFC) Unfinished Items");
+		LR.addStringLocalization("itemGroup.TFCArmor", "(TFC) Armor");
+		
 		RegisterTerrain();
 		RegisterMetal();
 		RegisterFood();

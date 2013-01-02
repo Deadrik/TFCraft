@@ -2,6 +2,8 @@ package TFC.Items;
 
 import TFC.*;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Enums.EnumSize;
 import cpw.mods.fml.relauncher.Side;
@@ -49,6 +51,7 @@ public class ItemCustomBucket extends ItemTerra
     {
         super(par1);
         this.isFull = par2;
+        setCreativeTab(TFCTabs.TFCTools);
     }
     
     @Override

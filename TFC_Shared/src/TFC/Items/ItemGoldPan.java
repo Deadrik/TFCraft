@@ -7,6 +7,7 @@ import java.util.Random;
 import TFC.*;
 import TFC.Blocks.BlockOre;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
@@ -56,6 +57,7 @@ public class ItemGoldPan extends ItemTerra
         setMaxDamage(0);
         setHasSubtypes(true);
         setItemName("GoldPan");
+        setCreativeTab(TFCTabs.TFCTools);
     }
     
     @Override

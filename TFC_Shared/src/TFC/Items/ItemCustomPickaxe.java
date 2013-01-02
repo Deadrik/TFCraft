@@ -3,6 +3,8 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.*;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -43,6 +45,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public ItemCustomPickaxe(int i, EnumToolMaterial e)
 	{
 		super(i, e);
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 
 	public String getTextureFile() {

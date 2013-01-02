@@ -4,6 +4,8 @@ import java.util.List;
 
 import TFC.*;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -50,6 +52,7 @@ public class ItemWeapon extends ItemSword implements ISize
 		this.toolMaterial = par2EnumToolMaterial;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
 		this.weaponDamage = par2EnumToolMaterial.getDamageVsEntity();
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 	
 	@Override

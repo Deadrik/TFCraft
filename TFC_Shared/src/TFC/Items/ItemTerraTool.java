@@ -2,6 +2,8 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -44,7 +46,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 			EnumToolMaterial par3EnumToolMaterial, Block[] par4ArrayOfBlock) 
 	{
 		super(par1, par2, par3EnumToolMaterial, par4ArrayOfBlock);
-
+		this.setCreativeTab(TFCTabs.TFCTools);
 	}
 
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 

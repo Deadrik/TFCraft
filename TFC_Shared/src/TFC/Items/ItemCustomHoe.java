@@ -4,6 +4,7 @@ import java.util.List;
 
 import TFC.*;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
@@ -50,6 +51,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	public ItemCustomHoe(int i, EnumToolMaterial e)
 	{
 		super(i, e);
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 
 	public String getTextureFile() {

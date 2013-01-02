@@ -3,6 +3,8 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.*;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -47,6 +49,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
 		this.weaponDamage = 100 + e.getDamageVsEntity();
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 	
 	@Override

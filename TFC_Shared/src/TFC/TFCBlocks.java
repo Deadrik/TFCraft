@@ -180,6 +180,7 @@ public class TFCBlocks
 	public static Block DoorKapok;
 	
 	public static Block Nestbox;
+	public static Block Crucible;
 
 	static Configuration config;
 	
@@ -299,6 +300,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorWillow, "DoorWillow");
 		GameRegistry.registerBlock(DoorKapok, "DoorKapok");
 		GameRegistry.registerBlock(Nestbox, "Nestbox");
+		GameRegistry.registerBlock(Crucible, "Crucible");
 
 	}
 	
@@ -488,6 +490,8 @@ public class TFCBlocks
 		Nestbox = new BlockNestBox(TFC_Settings.getIntFor(config,"block","NestBox", 2057)).setBlockName("NestBox");
 		
 		SuperDetailed = new BlockSuperDetailed(TFC_Settings.getIntFor(config,"block","SuperDetailed", 2058)).setBlockName("SuperDetailed").setHardness(10).setResistance(15F);
+		
+		Crucible = new BlockCrucible(TFC_Settings.getIntFor(config,"block","Crucible", 2059)).setBlockName("Crucible").setHardness(2);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

@@ -3,7 +3,9 @@ package TFC.Blocks;
 import TFC.TFCBlocks;
 import TFC.TileEntities.TileEntityToolRack;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockCrucible extends BlockTerraContainer
@@ -13,6 +15,8 @@ public class BlockCrucible extends BlockTerraContainer
 		super(par1, Material.rock);
 		this.setBlockBounds(0.0625f, 0f, 0.0625f, 0.9375f, 0.9375f, 0.9375f);
 		this.blockIndexInTexture = 79;
+		this.setBlockName("Crucible");
+		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 	
 	@Override
@@ -50,6 +54,12 @@ public class BlockCrucible extends BlockTerraContainer
 
 		}
 		return false;
+	}
+	
+	@Override
+	public TileEntity createNewTileEntity(World var1)
+	{
+		return null;
 	}
 	
 }

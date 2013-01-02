@@ -6,6 +6,8 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import TFC.Core.StructureBlueprint;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityDetailed;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -48,7 +50,7 @@ public class ItemBlueprint extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setItemName("Blueprint");
-		setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(TFCTabs.TFCTools);
 		setIconIndex(0);
 
 	}

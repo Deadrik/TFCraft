@@ -1,6 +1,8 @@
 package TFC.Items;
 
 import TFC.*;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -40,6 +42,7 @@ public class ItemCustomBucketMilk extends ItemTerra
     {
         super(par1);
         this.setMaxStackSize(1);
+        setCreativeTab(TFCTabs.TFCTools);
     }
 
     public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)

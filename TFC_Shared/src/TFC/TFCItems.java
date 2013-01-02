@@ -1650,6 +1650,10 @@ public class TFCItems
         Meals = new Item[]{MealMoveSpeed, MealDigSpeed, MealDamageBoost, MealJump, MealDamageResist, 
             	MealFireResist, MealWaterBreathing, MealNightVision};
         
+        ((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.RoseGoldHammer.shiftedIndex);
+        ((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.RoseGoldHammerHead.shiftedIndex);
+        ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.shiftedIndex);
+        
         if (config != null) {
             config.save();
         }

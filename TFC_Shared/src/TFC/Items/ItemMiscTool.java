@@ -1,5 +1,7 @@
 package TFC.Items;
 
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Enums.EnumSize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,7 +41,7 @@ public class ItemMiscTool extends ItemTerra
 	public ItemMiscTool(int i) 
 	{
 		super(i);
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 
 	@Override

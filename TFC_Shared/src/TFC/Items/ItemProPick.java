@@ -13,6 +13,7 @@ import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Containers.MessageQue;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Vector3f;
 import TFC.Enums.EnumSize;
@@ -58,7 +59,7 @@ public class ItemProPick extends ItemTerra
     {
         super(i);
         maxStackSize = 1;
-        this.setCreativeTab(CreativeTabs.tabTools);
+        setCreativeTab(TFCTabs.TFCTools);
     }
 
     @Override

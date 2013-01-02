@@ -3,6 +3,8 @@ package TFC.Items;
 import java.util.List;
 
 import TFC.*;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,6 +48,7 @@ public class ItemCustomScythe extends ItemTerraTool
 		this.setMaxDamage(e.getMaxUses()*3);
 		this.weaponDamage = e.getDamageVsEntity();
 		this.efficiencyOnProperMaterial = e.getEfficiencyOnProperMaterial();
+		setCreativeTab(TFCTabs.TFCTools);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.List;
 
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -45,6 +46,7 @@ public class ItemCustomArmor extends ItemArmor implements ISize
     public ItemCustomArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4)
     {
         super(par1,par2EnumArmorMaterial,par3,par4);
+        this.setCreativeTab(TFCTabs.TFCArmor);
     }
     @Override
     public String getTextureFile() 

@@ -47,6 +47,7 @@ public class ItemCustomKnife extends ItemWeapon
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
 		this.weaponDamage = 50 + e.getDamageVsEntity();
+		
 	}
 
 	public String getTextureFile() {

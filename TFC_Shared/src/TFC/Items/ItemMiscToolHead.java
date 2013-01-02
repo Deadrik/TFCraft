@@ -2,6 +2,8 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
@@ -44,7 +46,7 @@ public class ItemMiscToolHead extends ItemTerra
 		super(i);
 		this.setMaxDamage(100);
 		this.setMaxStackSize(4);
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(TFCTabs.TFCUnfinished);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package TFC.Items;
 
 import TFC.*;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Entities.EntityArrowTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,7 +49,7 @@ public class ItemCustomBow extends ItemTerra
         super(par1);
         this.maxStackSize = 1;
         this.setMaxDamage(384);
-        this.setCreativeTab(CreativeTabs.tabCombat);
+        setCreativeTab(TFCTabs.TFCTools);
     }
     
     @Override

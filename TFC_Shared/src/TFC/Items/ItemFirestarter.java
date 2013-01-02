@@ -7,6 +7,8 @@ import java.util.Random;
 import TFC.*;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
+import TFC.Core.TFCTabs;
+import TFC.Core.TFC_Core;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.relauncher.Side;
@@ -49,7 +51,7 @@ public class ItemFirestarter extends ItemTerra
         super(i);
         this.setMaxDamage(8);
         this.hasSubtypes = false;
-        this.setCreativeTab(CreativeTabs.tabTools);
+        setCreativeTab(TFCTabs.TFCTools);
     }
     
     @Override
