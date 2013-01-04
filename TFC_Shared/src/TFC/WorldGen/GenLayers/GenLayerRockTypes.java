@@ -51,7 +51,6 @@ public class GenLayerRockTypes extends GenLayerTFC
 		super(par1);
 
 		this.allowedBiomes = biomeArray1;
-
 		
 		this.parent = (GenLayerTFC) par3GenLayer;
 	}

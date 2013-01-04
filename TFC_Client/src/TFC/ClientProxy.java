@@ -56,9 +56,7 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Textures;
 import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.TFC_PlayerClient;
-import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Core.Player.*;
 import TFC.Entities.*;
 import TFC.Entities.Mobs.*;
 import TFC.Enums.EnumTree;
@@ -69,11 +67,7 @@ import TFC.Render.*;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.TileEntities.*;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.TFCProvider;
-import TFC.WorldGen.TFCSkyProvider;
-import TFC.WorldGen.TFCWorldChunkManager;
-import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
+import TFC.WorldGen.*;
 import net.minecraft.src.*;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -194,11 +188,6 @@ public class ClientProxy extends CommonProxy
 	
 	public boolean isRemote() {
 		return true;
-	}
-	
-	public void registerSkyProvider(TFCProvider P)
-	{
-		P.skyprovider = new TFCSkyProvider(ModLoader.getMinecraftInstance());
 	}
 
 	@Override

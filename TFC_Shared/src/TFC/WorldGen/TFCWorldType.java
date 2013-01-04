@@ -30,11 +30,13 @@ import net.minecraft.village.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.FlatGeneratorInfo;
 import net.minecraft.world.gen.feature.*;
 
 public class TFCWorldType extends WorldType
 {
 	public static TFCWorldType DEFAULT;
+	public static TFCWorldType FLAT;
 	
 	public static BiomeGenBase[] overworldBiomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.plains, 
 		TFCBiome.rollingHills, TFCBiome.Mountains};
@@ -46,10 +48,23 @@ public class TFCWorldType extends WorldType
 		super(par1, par2Str, par3);
 	}
 	
+	public TFCWorldType(int par1, String par2Str) 
+	{
+		super(par1, par2Str);
+	}
+	
 	@Override
 	public WorldChunkManager getChunkManager(World world)
     {
-        return new TFCWorldChunkManager(world);
+		if (this == FLAT)
+        {
+            FlatGeneratorInfo var1 = FlatGeneratorInfo.createFlatGeneratorFromString(world.getWorldInfo().func_82571_y());
+            return new TFCWorldChunkManagerHell(BiomeGenBase.biomeList[var1.getBiome()], 0.5F, 0.5F);
+        }
+        else
+        {
+        	return new TFCWorldChunkManager(world);
+        }
     }
 
 	@Override

@@ -54,6 +54,7 @@ import TFC.Items.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderCOTE;
+import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.*;
 
@@ -125,7 +126,11 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
 		
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
+		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");
+		DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
+		DimensionManager.registerProviderType(1, TFCProvider.class, true);
+		
 		//DimensionManager.registerProviderType(-2, TFCProviderCOTE.class, false);
 
 		//Add Item Name Localizations

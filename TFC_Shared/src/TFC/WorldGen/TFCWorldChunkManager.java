@@ -46,35 +46,35 @@ import net.minecraft.world.gen.layer.*;
 
 public class TFCWorldChunkManager extends WorldChunkManager 
 {
-	private GenLayerTFC genBiomes;
+	protected GenLayerTFC genBiomes;
 
-	private GenLayerTFC biomeIndexLayer;
+	protected GenLayerTFC biomeIndexLayer;
 
 	/** The BiomeCache object for this world. */
-	private BiomeCache biomeCache;
+	protected BiomeCache biomeCache;
 
 	/** A list of biomes that the player can spawn in. */
-	private List biomesToSpawnIn;
+	protected List biomesToSpawnIn;
 
 	//Rocks
-	private GenLayerTFC[] genRocks;
-	private GenLayerTFC[] rocksIndexLayer;
-	private DataCache[] rockCache;
+	protected GenLayerTFC[] genRocks;
+	protected GenLayerTFC[] rocksIndexLayer;
+	protected DataCache[] rockCache;
 
 	//Trees
-	private GenLayerTFC[] genTrees;
-	private GenLayerTFC[] treesIndexLayer;
-	private DataCache[] treeCache;
+	protected GenLayerTFC[] genTrees;
+	protected GenLayerTFC[] treesIndexLayer;
+	protected DataCache[] treeCache;
 
 	//Humidity
-	private GenLayerTFC genEVT;
-	private GenLayerTFC evtIndexLayer;
-	private DataCache evtCache;
+	protected GenLayerTFC genEVT;
+	protected GenLayerTFC evtIndexLayer;
+	protected DataCache evtCache;
 
 	//Rainfall
-	private GenLayerTFC genRainfall;
-	private GenLayerTFC rainfallIndexLayer;
-	private DataCache rainfallCache;
+	protected GenLayerTFC genRainfall;
+	protected GenLayerTFC rainfallIndexLayer;
+	protected DataCache rainfallCache;
 
 	public TFCWorldChunkManager()
 	{

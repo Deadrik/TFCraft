@@ -55,7 +55,7 @@ public class ServerTickHandler implements ITickHandler
 			World world = (World)tickData[0];
 			if(world.provider.dimensionId == 0)
 			{
-				((TFCProvider)world.provider).createSpawnPosition();
+				//((TFCProvider)world.provider).createSpawnPosition();
 				TFC_Core.SetupWorld(world);
 			}
 		}

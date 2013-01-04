@@ -15,32 +15,9 @@ import TFC.Core.TFC_Time;
 import TFC.Core.WeatherManager;
 import TFC.Entities.*;
 import TFC.Entities.Mobs.*;
-import TFC.WorldGen.Biomes.BiomeGenBeachTFC;
-import TFC.WorldGen.Biomes.BiomeGenCOTE;
-import TFC.WorldGen.Biomes.BiomeGenDesertTFC;
-import TFC.WorldGen.Biomes.BiomeGenForestTFC;
-import TFC.WorldGen.Biomes.BiomeGenHillsEdgeTFC;
-import TFC.WorldGen.Biomes.BiomeGenHillsTFC;
-import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
-import TFC.WorldGen.Biomes.BiomeGenOceanTFC;
-import TFC.WorldGen.Biomes.BiomeGenPlainsTFC;
-import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
-import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
-import TFC.WorldGen.Biomes.BiomeGenTaigaTFC;
-import TFC.WorldGen.Generators.WorldGenCustomShrub;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomBigTree;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomRedwoodTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomTallTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
-import TFC.WorldGen.Generators.Trees.WorldGenPineShort;
-import TFC.WorldGen.Generators.Trees.WorldGenPineTall;
-import TFC.WorldGen.Generators.Trees.WorldGenRedwoodXL;
+import TFC.WorldGen.Biomes.*;
+import TFC.WorldGen.Generators.*;
+import TFC.WorldGen.Generators.Trees.*;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.block.*;
@@ -69,6 +46,7 @@ import net.minecraft.village.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenHell;
 import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -96,6 +74,8 @@ public class TFCBiome extends BiomeGenBase
     /** An array of all the biomes, indexed by biome id. */
     public static final TFCBiome ocean = new BiomeGenOceanTFC(0).setBiomeName("Ocean").setMinMaxHeight(-0.9F, 0.1F);
     public static final TFCBiome river = new BiomeGenRiverTFC(7).setColor(ForestColor).setBiomeName("River").setMinMaxHeight(riverDepthMin, riverDepthMax);
+    
+    public static final TFCBiome hell = (new BiomeGenHellTFC(8)).setColor(16711680).setBiomeName("Hell").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
     
     public static final TFCBiome beach = (new BiomeGenBeachTFC(16)).setColor(0xfade55).setBiomeName("Beach").setMinMaxHeight(0.0F, 0.1F);
 

@@ -82,6 +82,8 @@ public class WorldGenOreSurface implements IWorldGenerator
 	private static void createOre(int i, int j, int[] Layers, int rarity, int veinSize, 
             int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
     {
+		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
+		{
         for(int n = 0; n < Layers.length/2;)
         {
             DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
@@ -96,11 +98,14 @@ public class WorldGenOreSurface implements IWorldGenerator
             }
             n+=2;
         }
+		}
     }
 
     private static void createOreVein(int i, int j, int[] Layers, int rarity, int veinSize, 
             int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
     {
+    	if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
+		{
         for(int n = 0; n < Layers.length/2;)
         {
         	DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
@@ -115,5 +120,6 @@ public class WorldGenOreSurface implements IWorldGenerator
             }
             n+=2;
         }
+		}
     }
 }
