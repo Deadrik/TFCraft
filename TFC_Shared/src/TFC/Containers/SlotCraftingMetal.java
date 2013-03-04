@@ -1,6 +1,10 @@
 package TFC.Containers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import TFC.*;
+import TFC.Core.Player.PlayerManagerTFC;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,18 +43,58 @@ public class SlotCraftingMetal extends Slot
 {
 	private final IInventory craftMatrix;
 	private EntityPlayer thePlayer;
+	private List<Item> valids;
+	private Container container;
 
 	public SlotCraftingMetal(EntityPlayer entityplayer, IInventory iinventory, IInventory iinventory1, int i, int j, int k)
 	{
 		super(iinventory1, i, j, k);
 		thePlayer = entityplayer;
 		craftMatrix = iinventory;
+		valids = new ArrayList<Item>();
+	}
+	public SlotCraftingMetal(Container container, EntityPlayer entityplayer, IInventory iinventory, IInventory iinventory1, int i, int j, int k)
+	{
+		super(iinventory1, i, j, k);
+		this.container = container;
+		thePlayer = entityplayer;
+		craftMatrix = iinventory;
+		valids = new ArrayList<Item>();
+	}
+
+	@Override
+	public void onSlotChanged()
+	{
+		super.onSlotChanged();
+		if (inventory.getStackInSlot(0)!=null){
+			System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).knappingRockType);
+			if (valids.contains(getStack().getItem()) && container != null && getStack().getItemDamage()== 
+					PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).knappingRockType.getItemDamage()){
+				container.onCraftMatrixChanged(craftMatrix);
+			}
+		}
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return false;
+		if (valids.contains(itemstack.getItem()) && container != null){
+			container.onCraftMatrixChanged(craftMatrix);
+		}
+		return valids.contains(itemstack.getItem());
+	}
+
+	public void setValidity(Item item,boolean TF){
+		if(TF){
+			if (!valids.contains(item)){
+				valids.add(item);
+			}
+		}
+		else{
+			if (valids.contains(item)){
+				valids.remove(item);
+			}
+		}
 	}
 
 	@Override

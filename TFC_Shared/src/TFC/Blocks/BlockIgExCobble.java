@@ -96,6 +96,12 @@ public class BlockIgExCobble extends BlockTerra2
 	}
 	
 	@Override
+	public int quantityDropped(Random par1Random)
+    {
+        return 4;
+    }
+	
+	@Override
     public int idDropped(int i, Random random, int j)
     {
         return TFCItems.LooseRock.shiftedIndex;

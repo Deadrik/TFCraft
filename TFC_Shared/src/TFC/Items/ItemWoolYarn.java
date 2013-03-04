@@ -1,13 +1,14 @@
-package TFC.Containers;
+package TFC.Items;
 
-import TFC.*;
+import java.util.List;
+
+import TFC.TFCBlocks;
+import TFC.Blocks.BlockCollapsable;
+import TFC.Core.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -32,33 +33,43 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.feature.*;
 
-public class SlotScribePaper extends Slot
+public class ItemWoolYarn extends ItemTerra
 {
-	EntityPlayer player;
-	Container container;
-	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, ContainerTerraScribe scribecontainer, int i, int j, int k)
+	public ItemWoolYarn(int id) 
 	{
-		super(iinventory, i, j, k);
-		player = entityplayer;
-		container = scribecontainer;
+		super(id);
+		this.hasSubtypes = false;
+		this.setMaxDamage(0);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
+	}
+	public ItemWoolYarn(int id, String tex) 
+	{
+		super(id);
+		texture = tex;
 	}
 
-	@Override
-	public boolean isItemValid(ItemStack itemstack)
+	int[][] map = 
+		{   {0,-1,0},
+			{0,1,0},
+			{0,0,-1},
+			{0,0,1},
+			{-1,0,0},
+			{1,0,0},
+		};
+
+	
+
+	
+
+	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
 	{
-		if(itemstack.itemID == Item.paper.shiftedIndex ||itemstack.itemID == TFCItems.writabeBookTFC.shiftedIndex)
-		{
-			return true;
-		}
-		return false;
+
 	}
 
-	@Override
-	public void onSlotChanged()
-	{
-		inventory.onInventoryChanged();
-		//Updates the scribing table. The inventory doesn't matter.
-		container.onCraftMatrixChanged(inventory);
-	}
+	
 }
