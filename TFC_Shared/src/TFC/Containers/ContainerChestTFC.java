@@ -74,7 +74,29 @@ public class ContainerChestTFC extends ContainerTFC
         
         ArrayList exceptions = new ArrayList<Item>();
         exceptions.add(TFCItems.Logs);
-
+        exceptions.add(TFCItems.BismuthIngot);
+        exceptions.add(TFCItems.BismuthBronzeIngot);
+        exceptions.add(TFCItems.BlackBronzeIngot);
+        exceptions.add(TFCItems.BlackSteelIngot);
+        exceptions.add(TFCItems.BlueSteelIngot);
+        exceptions.add(TFCItems.BrassIngot);
+        exceptions.add(TFCItems.BronzeIngot);
+        exceptions.add(TFCItems.CopperIngot);
+        exceptions.add(TFCItems.GoldIngot);
+        exceptions.add(TFCItems.WroughtIronIngot);
+        exceptions.add(TFCItems.LeadIngot);
+        exceptions.add(TFCItems.NickelIngot);
+        exceptions.add(TFCItems.PigIronIngot);
+        exceptions.add(TFCItems.PlatinumIngot);
+        exceptions.add(TFCItems.RedSteelIngot);
+        exceptions.add(TFCItems.RoseGoldIngot);
+        exceptions.add(TFCItems.SilverIngot);
+        exceptions.add(TFCItems.SteelIngot);
+        exceptions.add(TFCItems.BismuthIngot);
+        exceptions.add(TFCItems.SterlingSilverIngot);
+        exceptions.add(TFCItems.TinIngot);
+        exceptions.add(TFCItems.ZincIngot);
+        
         for (var4 = 0; var4 < this.numRows; ++var4)
         {
             for (var5 = 0; var5 < 9; ++var5)

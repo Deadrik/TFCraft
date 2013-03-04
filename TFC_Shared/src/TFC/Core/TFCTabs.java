@@ -9,6 +9,7 @@ public class TFCTabs extends CreativeTabs
 {	
 	public static CreativeTabs TFCTools = new TFCTabs("TFCTools");
 	public static CreativeTabs TFCUnfinished = new TFCTabs("TFCUnfinished");
+	public static CreativeTabs TFCMaterials = new TFCTabs("TFCMaterials");
 	public static CreativeTabs TFCArmor = new TFCTabs("TFCArmor");
 	
 	private int itemIndex;

@@ -76,6 +76,11 @@ public class BlockIgInCobble extends BlockTerra2
     {
         return TFCItems.LooseRock.shiftedIndex;
     }
+	@Override
+	public int quantityDropped(Random par1Random)
+    {
+        return 4;
+    }
 
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata

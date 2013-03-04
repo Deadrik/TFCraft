@@ -112,6 +112,12 @@ public class BlockMMCobble extends BlockTerra2
 	{
 		return TFC_Textures.RockSheet;
 	}
+	
+	@Override
+	public int quantityDropped(Random par1Random)
+    {
+        return 4;
+    }
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)

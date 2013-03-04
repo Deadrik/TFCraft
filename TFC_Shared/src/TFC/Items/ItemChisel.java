@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import java.util.BitSet;
+import java.util.Random;
 
 import TFC.*;
 import TFC.Blocks.BlockSlab;
@@ -47,6 +48,7 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemChisel extends ItemTerraTool
 {
+	static Random random = new Random();
 	public ItemChisel(int i, EnumToolMaterial e)
 	{
 		super(i, 0, e, new Block[] {});
@@ -159,17 +161,17 @@ public class ItemChisel extends ItemTerraTool
 			else if(mode == 3 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
-
+				if (random.nextInt(4)==0){
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
+				}
 				return true;
 			}
 			else if(mode == 4 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateSuperDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
-
+				if (random.nextInt(4)==0){
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
+				}
 				return true;
 			}
 		}

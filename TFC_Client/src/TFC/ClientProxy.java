@@ -81,7 +81,10 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.preloadTexture(TFC_Textures.RockSheet);
 		MinecraftForgeClient.preloadTexture("/bioxx/terratools.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terratoolheads.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/spindle.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/wool.png");
+		MinecraftForgeClient.preloadTexture("/bioxx/Spindle2.png");
 		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
 		MinecraftForgeClient.preloadTexture(TFC_Textures.BlockSheet);
 		MinecraftForgeClient.preloadTexture(TFC_Textures.BlockSheet2);
@@ -162,12 +165,15 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.superDetailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
+		//RenderingRegistry.registerBlockHandler(TFCBlocks.IngotPileRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 	
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
 		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
+		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
+		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityChestRendererTFC());
 	}
 	
 	public void onClientLogin()
@@ -278,6 +284,10 @@ public class ClientProxy extends CommonProxy
 		case 34:
 		{
 			return new GuiBlueprint(player, world, x, y, z);
+		}
+		case 35:
+		{
+			return new GuiBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
 		}
 
 		}
@@ -651,8 +661,23 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.Quern.name", "Handstone");
 		
 		LR.addStringLocalization("item.Blueprint.name", "Blueprint");
+		LR.addStringLocalization("item.Spindle.name", "Spindle");
+		LR.addStringLocalization("item.SpindleHead.name", "Spindle head");
+		LR.addStringLocalization("item.ClaySpindle.name", "Clay spindle");
+		LR.addStringLocalization("item.WoolYarn.name", "Wool yarn");
+		LR.addStringLocalization("item.Wool.name", "Wool");
+		LR.addStringLocalization("item.WoolCloth.name", "Wool cloth");
+		LR.addStringLocalization("item.Mortar.name", "Mortar");
+		LR.addStringLocalization("item.LimeWater.name", "Limewater");
+		LR.addStringLocalization("item.Hide.name","Raw Hide");
+		LR.addStringLocalization("item.SoakedHide.name","Soaked Hide");
+		LR.addStringLocalization("item.ScrapedHide.name","Scraped Hide");
+		LR.addStringLocalization("item.PrepHide.name","Prepared Hide");
+		LR.addStringLocalization("item.TFCLeather.name","Leather");
+		LR.addStringLocalization("item.SheepSkin.name","Sheepskin");
 		
 		LR.addStringLocalization("itemGroup.TFCTools", "(TFC) Tools");
+		LR.addStringLocalization("itemGroup.TFCMaterials", "(TFC) Materials");
 		LR.addStringLocalization("itemGroup.TFCUnfinished", "(TFC) Unfinished Items");
 		LR.addStringLocalization("itemGroup.TFCArmor", "(TFC) Armor");
 		
@@ -764,6 +789,7 @@ public class ClientProxy extends CommonProxy
 		for(int i= 0; i < rockNames.length; i++)
 		{
 			LR.addStringLocalization("item.LooseRock."+rockNames[i]+".name", rockNames[i] + " Rock");
+			LR.addStringLocalization("item.ItemStoneBrick."+rockNames[i]+".name", rockNames[i] + " Brick");
 			LR.addStringLocalization("item.FlatRock."+rockNames[i]+".name", rockNames[i] + " Rock");
 			LR.addStringLocalization("tile.WallCobble."+rockNames[i]+".name", rockNames[i] + " Cobblestone Wall");
 			LR.addStringLocalization("tile.WallRaw."+rockNames[i]+".name", rockNames[i] + " Wall");
@@ -936,29 +962,29 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("tile.MMRockSmooth.Gneiss.name", "Smooth Gneiss");
 		LR.addStringLocalization("tile.MMRockSmooth.Marble.name", "Smooth Marble");
 		//Brick
-		LR.addStringLocalization("tile.IgInRockBrick.Granite.name", "Granite Brick");
-		LR.addStringLocalization("tile.IgInRockBrick.Diorite.name", "Diorite Brick");
-		LR.addStringLocalization("tile.IgInRockBrick.Gabbro.name", "Gabbro Brick");
-		LR.addStringLocalization("tile.IgExRockBrick.Rhyolite.name", "Rhyolite Brick");
-		LR.addStringLocalization("tile.IgExRockBrick.Basalt.name", "Basalt Brick");
-		LR.addStringLocalization("tile.IgExRockBrick.Andesite.name", "Andesite Brick");
-		LR.addStringLocalization("tile.IgExRockBrick.Dacite.name", "Dacite Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Siltstone.name", "Siltstone Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Mudstone.name", "Mudstone Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Shale.name", "Shale Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Claystone.name", "Claystone Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Rock Salt.name", "Rock Salt Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Limestone.name", "Limestone Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Conglomerate.name", "Conglomerate Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Dolomite.name", "Dolomite Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Chert.name", "Chert Brick");
-		LR.addStringLocalization("tile.SedRockBrick.Chalk.name", "Chalk Brick");
-		LR.addStringLocalization("tile.MMRockBrick.Quartzite.name", "Quartzite Brick");
-		LR.addStringLocalization("tile.MMRockBrick.Slate.name", "Slate Brick");
-		LR.addStringLocalization("tile.MMRockBrick.Phyllite.name", "Phyllite Brick");
-		LR.addStringLocalization("tile.MMRockBrick.Schist.name", "Schist Brick");
-		LR.addStringLocalization("tile.MMRockBrick.Gneiss.name", "Gneiss Brick");
-		LR.addStringLocalization("tile.MMRockBrick.Marble.name", "Marble Brick");
+		LR.addStringLocalization("tile.IgInRockBrick.Granite.name", "Granite Bricks");
+		LR.addStringLocalization("tile.IgInRockBrick.Diorite.name", "Diorite Bricks");
+		LR.addStringLocalization("tile.IgInRockBrick.Gabbro.name", "Gabbro Bricks");
+		LR.addStringLocalization("tile.IgExRockBrick.Rhyolite.name", "Rhyolite Bricks");
+		LR.addStringLocalization("tile.IgExRockBrick.Basalt.name", "Basalt Bricks");
+		LR.addStringLocalization("tile.IgExRockBrick.Andesite.name", "Andesite Bricks");
+		LR.addStringLocalization("tile.IgExRockBrick.Dacite.name", "Dacite Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Siltstone.name", "Siltstone Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Mudstone.name", "Mudstone Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Shale.name", "Shale Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Claystone.name", "Claystone Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Rock Salt.name", "Rock Salt Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Limestone.name", "Limestone Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Conglomerate.name", "Conglomerate Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Dolomite.name", "Dolomite Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Chert.name", "Chert Bricks");
+		LR.addStringLocalization("tile.SedRockBrick.Chalk.name", "Chalk Bricks");
+		LR.addStringLocalization("tile.MMRockBrick.Quartzite.name", "Quartzite Bricks");
+		LR.addStringLocalization("tile.MMRockBrick.Slate.name", "Slate Bricks");
+		LR.addStringLocalization("tile.MMRockBrick.Phyllite.name", "Phyllite Bricks");
+		LR.addStringLocalization("tile.MMRockBrick.Schist.name", "Schist Bricks");
+		LR.addStringLocalization("tile.MMRockBrick.Gneiss.name", "Gneiss Bricks");
+		LR.addStringLocalization("tile.MMRockBrick.Marble.name", "Marble Bricks");
 		//Cobble Stairs
 		LR.addStringLocalization("tile.IgInRockCobbleStairs.Granite.name", "Granite Cobblestone Stairs");
 		LR.addStringLocalization("tile.IgInRockCobbleStairs.Diorite.name", "Diorite Cobblestone Stairs");

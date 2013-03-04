@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.GuiScreenBook;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
@@ -40,6 +41,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.*;
 import TFC.Entities.Mobs.*;
+import TFC.GUI.GuiBarrel;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
 import TFC.GUI.GuiHUD;
@@ -73,6 +75,7 @@ public class CommonProxy implements IGuiHandler
 	public void registerTileEntities(boolean b)
 	{
 		ModLoader.registerTileEntity(TileEntityTerraLogPile.class, "TerraLogPile");
+
 		ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
 		ModLoader.registerTileEntity(TileEntityTerraFirepit.class, "TerraFirepit");
 		ModLoader.registerTileEntity(TileEntityTerraAnvil.class, "TerraAnvil");
@@ -96,10 +99,13 @@ public class CommonProxy implements IGuiHandler
 		
 		ModLoader.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
 		ModLoader.registerTileEntity(TileEntitySuperDetailed.class, "Super Detailed");
+		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
+		ModLoader.registerTileEntity(TileEntityBarrel.class, "Barrel");
 		
-		if(b)
+		if(b){
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
-
+			
+		}
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityBear.class, "bear", ModLoader.getUniqueEntityId(), 0xd1d003, 0x101010);
@@ -148,7 +154,7 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerModEntity(EntityIronGolemTFC.class, "irongolemTFC", 23,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityCreeperTFC.class, "creeperTFC", 24,TerraFirmaCraft.instance, 160, 5, true);
 		
-		EntityRegistry.registerModEntity(EntityArrowTFC.class, "deerTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
+		//EntityRegistry.registerModEntity(EntityArrowTFC.class, "deerTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
 	}
 
 	public void registerToolClasses() {
@@ -404,6 +410,11 @@ public class CommonProxy implements IGuiHandler
 		{
 			return null;
 		}
+		case 35:
+		{
+			return new ContainerTerraBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
+		}
+		
 		default:
 		{
 			return null;

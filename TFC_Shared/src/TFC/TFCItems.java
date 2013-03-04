@@ -889,7 +889,22 @@ public class TFCItems
 	public static Item DoorKapok;
 	
 	public static Item Blueprint;
-    
+	public static Item writabeBookTFC;
+    public static Item WoolYarn;
+    public static Item Wool;
+    public static Item WoolCloth;
+    public static Item Spindle;
+    public static Item ClaySpindle;
+    public static Item SpindleHead;
+    public static Item StoneBrick;
+    public static Item Mortar;
+    public static Item Limewater;
+    public static Item Hide;
+    public static Item SoakedHide;
+    public static Item ScrapedHide;
+    public static Item PrepHide;
+    public static Item SheepSkin;
+    public static Item TerraLeather;
     
     /**
      * Item Uses Setup
@@ -985,7 +1000,8 @@ public class TFCItems
         //Replace any vanilla Items here
         Item.itemsList[Item.coal.shiftedIndex] = null; Item.itemsList[Item.coal.shiftedIndex] = (new TFC.Items.ItemCoal(7)).setIconCoord(7, 0).setItemName("coal");
         Item.itemsList[Item.stick.shiftedIndex] = null; Item.itemsList[Item.stick.shiftedIndex] = new ItemStick(24).setIconCoord(5, 3).setFull3D().setItemName("Stick");
-
+        Item.itemsList[Item.leather.shiftedIndex] = null; Item.itemsList[Item.leather.shiftedIndex] = new ItemTerra(Item.leather.shiftedIndex).setIconCoord(0, 0).setFull3D().setItemName("Leather");
+        
         minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setIconCoord(7, 9).setItemName("minecartChest");
         
         Item.itemsList[5+256] = null; Item.itemsList[5+256] = (new ItemCustomBow(5)).setIconCoord(5, 1).setItemName("bow");
@@ -1533,6 +1549,7 @@ public class TFCItems
         ZincKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","ZincKnife",num),ZincToolMaterial).setItemName("Zinc Knife").setMaxDamage(ZincUses).setIconCoord(13, 10);num++;
         
         LooseRock = ((ItemTerra) new ItemLooseRock(TFC_Settings.getIntFor(config,"item","LooseRock",num)).setItemName("LooseRock")).setTexturePath(TFC_Textures.RockSheet);num++;
+        
         FlatRock = ((ItemTerra) new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setItemName("FlatRock")).setTexturePath(TFC_Textures.RockSheet);num++;
         
         IgInStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
@@ -1590,8 +1607,24 @@ public class TFCItems
 		DoorKapok = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorKapok", num++), 15).setItemName("Door Kapok").setIconCoord(15, 15);
 		
 		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
-        
-        /**Plans*/
+		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++)).setTextureFile("/gui/items.png").setIconCoord(11, 3).setItemName("book");
+		WoolYarn = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolYarn", num++),"/bioxx/terrasprites2.png").setIconCoord(0,10).setItemName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
+		Wool = new ItemTerra(TFC_Settings.getIntFor(config,"item","Wool",num++),"/bioxx/terrasprites2.png").setItemName("Wool").setIconCoord(0,11).setCreativeTab(TFCTabs.TFCMaterials);
+		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++),"/bioxx/terrasprites2.png").setIconCoord(0,8).setItemName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
+		Spindle = new ItemSpindle(TFC_Settings.getIntFor(config,"item","Spindle",num++),SedToolMaterial).setIconCoord(15, 3).setItemName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
+		ClaySpindle = new ItemTerra(TFC_Settings.getIntFor(config, "item", "ClaySpindle", num++),"/bioxx/terratools.png").setIconCoord(15,4).setItemName("ClaySpindle").setCreativeTab(TFCTabs.TFCMaterials);
+		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++),"/bioxx/terratoolheads.png").setIconCoord(0,13).setItemName("SpindleHead").setCreativeTab(TFCTabs.TFCMaterials);
+		StoneBrick = ((ItemTerra) new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setItemName("ItemStoneBrick")).setTexturePath(TFC_Textures.RockSheet);
+		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++),"/bioxx/terratools.png").setItemName("Mortar").setIconCoord(1,14).setCreativeTab(TFCTabs.TFCMaterials);
+		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),0).setItemName("LimeWater").setIconCoord(0,14).setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
+		Hide = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hide",num++),"/bioxx/terraitems.png").setItemName("Hide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
+		SoakedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","SoakedHide",num++),"/bioxx/terraitems.png").setItemName("SoakedHide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
+		ScrapedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","ScrapedHide",num++),"/bioxx/terraitems.png").setItemName("ScrapedHide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
+		PrepHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","PrepHide",num++),"/bioxx/terraitems.png").setItemName("PrepHide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
+		TerraLeather = new ItemTerra(TFC_Settings.getIntFor(config,"item","TFCLeather",num++),"/bioxx/terraitems.png").setItemName("TFCLeather").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
+		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++),"/bioxx/terraitems.png").setItemName("SheepSkin").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
+		
+		/**Plans*/
         num = 20000;
         SetupPlans(num);
         
@@ -1644,6 +1677,8 @@ public class TFCItems
                 TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.RoseGoldHammer,TFCItems.SteelHammer,
                 TFCItems.TinHammer,TFCItems.ZincHammer};
         
+       Recipes.Spindle = new Item[]{TFCItems.Spindle};
+        
         Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
         		TFCItems.GemJade, TFCItems.GemJasper, TFCItems.GemOpal,TFCItems.GemRuby,TFCItems.GemSapphire,TFCItems.GemTopaz,TFCItems.GemTourmaline};
         
@@ -1651,6 +1686,7 @@ public class TFCItems
             	MealFireResist, MealWaterBreathing, MealNightVision};
         
         ((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.RoseGoldHammer.shiftedIndex);
+        ((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.Spindle.shiftedIndex);
         ((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.RoseGoldHammerHead.shiftedIndex);
         ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.shiftedIndex);
         

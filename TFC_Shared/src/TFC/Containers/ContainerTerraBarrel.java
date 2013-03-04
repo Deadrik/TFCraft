@@ -1,9 +1,9 @@
 package TFC.Containers;
 
 import TFC.*;
-import TFC.Core.CraftingManagerTFC;
-import TFC.GUI.GuiScreenBookTFC;
-import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.Handlers.PacketHandler;
+import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TileEntityBloomery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -36,97 +36,38 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class ContainerTerraScribe extends ContainerTFC
+public class ContainerTerraBarrel extends ContainerTFC
 {
-	private TileEntityTerraScribe terraScribe;
-	public InventoryCrafting craftMatrix;
-	public IInventory craftResult;
-	private EntityPlayer entityplayer;
-	private World worldObj;
+	private TileEntityBarrel barrel;
+    private float liquidLevel;
 
-	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe scribe, World world, int x, int y, int z)
+
+	public ContainerTerraBarrel(InventoryPlayer inventoryplayer, TileEntityBarrel tileentitybarrel, World world, int x, int y, int z)
 	{
-		terraScribe = scribe;
-		craftMatrix = new InventoryCrafting(this, 5, 5);
-		craftResult = new InventoryCraftResult();
-		worldObj = world;
-		entityplayer = inventoryplayer.player;
-		//output
-		addSlotToContainer(new SlotCraftingScribe(inventoryplayer.player, craftMatrix, craftResult,terraScribe, 0, 128, 35));
-		//paper
-		addSlotToContainer(new SlotScribePaper(inventoryplayer.player,scribe, this, 1, 128, -1));
-
-		for (int l = 0; l < 5; l++)
-		{
-			for (int k1 = 0; k1 < 5; k1++)
-			{
-				addSlotToContainer(new SlotScribeCrafting(inventoryplayer.player,craftMatrix, k1 + l * 5, 8 + k1 * 18, l * 18 - 1));
-			}
-		}
+	    barrel = tileentitybarrel;
+	    liquidLevel = 0;
+		//Input slot
+	    addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
 
 		for(int i = 0; i < 3; i++)
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
 			}
-
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 151));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
-
-
-		onCraftMatrixChanged(craftMatrix);
+		//barrel.updateGui();
 	}
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
 	}
-	@Override
-	public void onCraftGuiClosed(EntityPlayer entityplayer)
-	{
-		super.onCraftGuiClosed(entityplayer);
-		if (worldObj.isRemote)
-		{
-			return;
-		}
-		for (int i = 0; i < 25; i++)
-		{
-			ItemStack itemstack = craftMatrix.getStackInSlot(i);
-			if (itemstack != null)
-			{
-				entityplayer.dropPlayerItem(itemstack);
-			}
-		}
-	}
-	@Override
-	public void onCraftMatrixChanged(IInventory iinventory)
-	{
-		//Check if there is paper in the paper slot.
-		if(terraScribe.scribeItemStacks[1] != null && 
-				terraScribe.scribeItemStacks[1].getItem() == TFCItems.writabeBookTFC){
-			ItemStack temp = terraScribe.scribeItemStacks[1];
-			terraScribe.scribeItemStacks[1]= null;
-			if(entityplayer.worldObj.isRemote){
-				
-			((EntityPlayerSP) entityplayer).getMcField().displayGuiScreen(new GuiScreenBookTFC(entityplayer, temp, true));
-			
-			}
-		}
-		if(terraScribe.scribeItemStacks[1] != null && 
-				terraScribe.scribeItemStacks[1].getItem() == Item.paper) {
-			craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(craftMatrix, worldObj));
-		}
-		else
-		{
-			craftResult.setInventorySlotContents(0, null);
-		}
-	}
-	
 	@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
@@ -263,12 +204,11 @@ public class ContainerTerraScribe extends ContainerTFC
 		}
 		return itemstack;
 	}
-	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
-		Slot slotpaper = (Slot)inventorySlots.get(1);
+		Slot slot1 = (Slot)inventorySlots.get(0);
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
@@ -279,28 +219,16 @@ public class ContainerTerraScribe extends ContainerTFC
 					return null;
 				}
 				slot.putStack(null);
-				for (int j = 1; j <= 25; j++)
-				{
-					((Slot)inventorySlots.get(j)).putStack(null);
-				}
 			}
-			else if(i <= 26)
+			else
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
-				{
-					return null;
-				}
-				slot.putStack(null);
-			}
-			else if(itemstack1.itemID == Item.paper.shiftedIndex)
-			{
-				if(slotpaper.getHasStack())
+				if(slot1.getHasStack())
 				{
 					return null;
 				}
 				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;
-				slotpaper.putStack(stack);
+				stack.stackSize = 1;                            
+				slot1.putStack(stack);                          
 				itemstack1.stackSize--;
 			}
 			if(itemstack1.stackSize == 0)
@@ -314,4 +242,28 @@ public class ContainerTerraScribe extends ContainerTFC
 		return null;
 	}
 
+	private int updatecounter = 0;
+	public void updateCraftingResults()
+    {
+        super.updateCraftingResults();
+        
+        for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+        {
+            ICrafting var2 = (ICrafting)this.crafters.get(var1);
+            if (this.liquidLevel != this.barrel.liquidLevel)
+            {
+                var2.sendProgressBarUpdate(this, 0, (int)this.barrel.liquidLevel);
+            }
+        }
+        
+    }
+	
+	public void updateProgressBar(int par1, int par2)
+    {
+        if (par1 == 0)
+        {
+            this.barrel.liquidLevel = par2;
+        }
+
+    }
 }

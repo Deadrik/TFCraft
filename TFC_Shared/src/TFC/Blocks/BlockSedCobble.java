@@ -107,6 +107,12 @@ public class BlockSedCobble extends BlockTerra2
 	}
 
 	@Override
+	public int quantityDropped(Random par1Random)
+    {
+        return 4;
+    }
+	
+	@Override
 	public String getTextureFile()
 	{
 		return TFC_Textures.RockSheet;

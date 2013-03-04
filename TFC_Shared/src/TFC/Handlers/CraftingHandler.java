@@ -51,8 +51,7 @@ public class CraftingHandler implements ICraftingHandler
 
 		if(iinventory != null)
 		{
-			if(itemstack.itemID == TFCBlocks.StoneSedBrick.blockID || itemstack.itemID == TFCBlocks.StoneIgInBrick.blockID || 
-					itemstack.itemID == TFCBlocks.StoneIgExBrick.blockID || itemstack.itemID == TFCBlocks.StoneMMBrick.blockID)
+			if(itemstack.itemID == TFCItems.StoneBrick.shiftedIndex)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Chisels);
 			}
@@ -74,9 +73,28 @@ public class CraftingHandler implements ICraftingHandler
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Axes);
 			}
+			else if(itemstack.itemID == TFCItems.WoolYarn.shiftedIndex)
+			{
+				HandleItem(entityplayer,iinventory,Recipes.Spindle);
+			}
 			else if(itemstack.itemID == TFCItems.Flux.shiftedIndex)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Hammers);
+			}
+			else if(itemstack.itemID == TFCItems.Mortar.shiftedIndex)
+			{
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{             
+					if(iinventory.getStackInSlot(i) == null) 
+					{
+						continue;
+					}
+					if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.shiftedIndex)
+					{
+						iinventory.getStackInSlot(i).itemID=TFCItems.Limewater.shiftedIndex;
+					}
+				}
+				
 			}
 			else if(itemstack.itemID == TFCItems.LooseRock.shiftedIndex)
 			{
@@ -96,10 +114,12 @@ public class CraftingHandler implements ICraftingHandler
 							ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
 							iinventory.setInventorySlotContents(i, is);
 						}
-						itemstack.stackSize = 1;
+						
+						
 						PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 						pi.knappingRockType = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
 						openGui = true;
+						itemstack.stackSize = -1;
 					}
 				}
 				if(openGui)

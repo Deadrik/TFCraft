@@ -38,29 +38,29 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
 
-public class ItemLooseRock extends ItemTerra
+public class ItemStoneBrick extends ItemTerra
 {
-	public ItemLooseRock(int id) 
+	public ItemStoneBrick(int id) 
 	{
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
-	public ItemLooseRock(int id, String tex) 
+	public ItemStoneBrick(int id, String tex) 
 	{
 		super(id);
 		texture = tex;
 	}
 
-	int[][] map = 
+	/*int[][] map = 
 		{   {0,-1,0},
 			{0,1,0},
 			{0,0,-1},
 			{0,0,1},
 			{-1,0,0},
 			{1,0,0},
-		};
+		};*/
 
 	/*@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -141,7 +141,7 @@ public class ItemLooseRock extends ItemTerra
 		case 0:
 		case 1:
 		case 2:
-			return 176+i;//igin
+			return 208+i;//igin
 		case 3:
 		case 4:
 		case 5:
@@ -152,21 +152,21 @@ public class ItemLooseRock extends ItemTerra
 		case 10:
 		case 11:
 		case 12:
-			return 192+(i-3);//sed
+			return 224+(i-3);//sed
 		case 13:
 		case 14:
 		case 15:
 		case 16:
-			return 179+(i-13);//igex
+			return 211+(i-13);//igex
 		case 17:
 		case 18:
 		case 19:
 		case 20:
 		case 21:
 		case 22:
-			return 201+(i-16);//mm
+			return 233+(i-16);//mm
 		}
-		return 176+i;
+		return 208+i;
 	}
 
 	@Override
