@@ -34,6 +34,7 @@ import net.minecraft.world.chunk.*;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.Blocks.*;
+import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Settings;
 import TFC.TileEntities.*;
 
@@ -53,6 +54,7 @@ public class TFCBlocks
 	public static int snowRenderId;
 	public static int FirepitRenderId;
 	public static int AnvilRenderId;
+	public static int IngotPileRenderId;
 	public static int BellowsRenderId;
 	public static int ScribeRenderId;
 	public static int ForgeRenderId;
@@ -181,6 +183,11 @@ public class TFCBlocks
 	
 	public static Block Nestbox;
 	public static Block Crucible;
+	
+	public static Block IngotPile;
+	public static Block Barrel;
+;
+	
 
 	static Configuration config;
 	
@@ -301,7 +308,9 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorKapok, "DoorKapok");
 		GameRegistry.registerBlock(Nestbox, "Nestbox");
 		GameRegistry.registerBlock(Crucible, "Crucible");
-
+		GameRegistry.registerBlock(IngotPile, "IngotPile");
+		GameRegistry.registerBlock(Barrel, "Barrel");
+		
 	}
 	
 	public static void LoadBlocks()
@@ -492,7 +501,10 @@ public class TFCBlocks
 		SuperDetailed = new BlockSuperDetailed(TFC_Settings.getIntFor(config,"block","SuperDetailed", 2058)).setBlockName("SuperDetailed").setHardness(10).setResistance(15F);
 		
 		Crucible = new BlockCrucible(TFC_Settings.getIntFor(config,"block","Crucible", 2059)).setBlockName("Crucible").setHardness(2);
-
+		
+		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060),224).setBlockName("ingotpile").setHardness(3).setRequiresSelfNotify();
+		Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", 2061)).setBlockName("barrel").setCreativeTab(TFCTabs.TFCMaterials);
+		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneSed, "pickaxe", 0);

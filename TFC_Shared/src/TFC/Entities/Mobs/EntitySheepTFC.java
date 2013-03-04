@@ -158,7 +158,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     {
         if (!this.getSheared())
         {
-            this.entityDropItem(new ItemStack(Block.cloth.blockID, 1, this.getFleeceColor()), 0.0F);
+            this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
         }
     }
 
@@ -168,7 +168,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     protected int getDropItemId()
     {
-        return Block.cloth.blockID;
+        return TFCItems.Wool.shiftedIndex;
     }
     
     @SideOnly(Side.CLIENT)
@@ -338,12 +338,9 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune) 
     {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        setSheared(true);
-        int i = 1 + rand.nextInt(3);
-        for (int j = 0; j < i; j++)
-        {
-            ret.add(new ItemStack(Block.cloth.blockID, 1, getFleeceColor()));
-        }
+        setSheared(true);        
+            ret.add(new ItemStack(TFCItems.Wool));
+        
         return ret;
     }
 

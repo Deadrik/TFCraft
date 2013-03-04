@@ -1,13 +1,23 @@
-package TFC.Containers;
+package TFC.Items;
+
+import java.util.BitSet;
+import java.util.Random;
 
 import TFC.*;
+import TFC.Blocks.BlockSlab;
+import TFC.Core.Helper;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Settings;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Enums.EnumSize;
+import TFC.TileEntities.TileEntityDetailed;
+import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TileEntitySuperDetailed;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -32,33 +42,27 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
-public class SlotScribePaper extends Slot
+public class ItemSpindle extends ItemTerraTool
 {
-	EntityPlayer player;
-	Container container;
-	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, ContainerTerraScribe scribecontainer, int i, int j, int k)
+	static Random random = new Random();
+	public ItemSpindle(int i, EnumToolMaterial e)
 	{
-		super(iinventory, i, j, k);
-		player = entityplayer;
-		container = scribecontainer;
+		super(i, 0, e, new Block[] {});
+		this.setMaxDamage(e.getMaxUses()/2);
 	}
-
+		
 	@Override
-	public boolean isItemValid(ItemStack itemstack)
-	{
-		if(itemstack.itemID == Item.paper.shiftedIndex ||itemstack.itemID == TFCItems.writabeBookTFC.shiftedIndex)
-		{
-			return true;
-		}
-		return false;
+	public EnumSize getSize() {
+		return EnumSize.VERYSMALL;
 	}
+	
 
-	@Override
-	public void onSlotChanged()
+	public static boolean handleActivation(World world, EntityPlayer player, int x, int y, int z, int blockID, int meta, int side, float hitX, float hitY, float hitZ)
 	{
-		inventory.onInventoryChanged();
-		//Updates the scribing table. The inventory doesn't matter.
-		container.onCraftMatrixChanged(inventory);
+		return true;
 	}
 }

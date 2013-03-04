@@ -340,6 +340,7 @@ public class TFC_ItemHeat
 		//Ceramics
 		HeatRaw ClayRaw = new HeatRaw(1.40F, 515.5F);
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ClayMold,1,1), ClayRaw,new ItemStack(TFCItems.CeramicMold, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ClaySpindle,1,1), ClayRaw,new ItemStack(TFCItems.SpindleHead, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, -1), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, -1), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
 		//Food

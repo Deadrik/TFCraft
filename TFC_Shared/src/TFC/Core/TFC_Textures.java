@@ -7,5 +7,6 @@ public class TFC_Textures
 	public static final String BlockSheet2 = "/bioxx/terrablocks2.png";
 	public static final String PlantsSheet = "/bioxx/tfcplants.png";
 	public static final String FoodSheet = "/bioxx/foodsprites.png";
+	public static final String SpindleSheet = "/bioxx/spindle.png";
 	public static final String VegetationSheet = "/bioxx/vegetation.png";
 }

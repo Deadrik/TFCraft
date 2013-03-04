@@ -69,10 +69,6 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
-        return 22;
-    }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
