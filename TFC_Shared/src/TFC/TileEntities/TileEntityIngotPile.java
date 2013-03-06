@@ -57,11 +57,9 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		type = -1;
 	}
 	
-	public void setType(int i){
-		
-		this.type = i;
-		System.out.println("setting type: " +this.type);
-		
+	public void setType(int i)
+	{
+		this.type = i;	
 	}
 	
 	public int getStack(){
@@ -99,7 +97,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			}
 		}
 		if(storage[index].getItem() == is.getItem() && storage[index].getItem().shiftedIndex == is.getItem().shiftedIndex &&
-				storage[index].stackSize < storage[index].getMaxStackSize() && storage[index].stackSize+1 <= this.getInventoryStackLimit())
+				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize+1 <= this.getInventoryStackLimit())
 		{
 			return true;
 		}
@@ -158,7 +156,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public int getInventoryStackLimit()
 	{
 		// TODO Auto-generated method stub
-		return 32;
+		return 64;
 	}
 
 	@Override

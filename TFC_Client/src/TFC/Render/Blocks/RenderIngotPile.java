@@ -1,6 +1,8 @@
 
 package TFC.Render.Blocks;
 
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -74,22 +76,83 @@ public class RenderIngotPile {
 					z = 0.5f;
 				}
 				if (m %2 == 1){
-					renderblocks.setRenderMinMax(0.0F + x, 0.0F + y, 0.0F + z, 0.25F + x, 0.0625F + y, 0.5F + z);
+					/*renderblocks.setRenderMinMax(0.0F + x, 0.0F + y, 0.0F + z, 0.25F + x, 0.0625F + y, 0.5F + z);
 					renderblocks.renderStandardBlock(block, i, j, k);
 
 					renderblocks.setRenderMinMax(0.03125F + x, 0.0625F + y, 0.03125F + z, 0.21875F + x, 0.25F + y, 0.46875F + z);
-					renderblocks.renderStandardBlock(block, i, j, k);
+					renderblocks.renderStandardBlock(block, i, j, k);*/
+					drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+						i + x,
+						j + y,
+						k + z,
+						i + x + 0.25f,
+						j + y + 0.0625f, 
+						k + z + 0.5f
+						));
 				}
 				else{
-					renderblocks.setRenderMinMax(0.0F + z, 0.0F + y, 0.0F + x, 0.5F + z, 0.0625F + y, 0.25F +x);
+					/*renderblocks.setRenderMinMax(0.0F + z, 0.0F + y, 0.0F + x, 0.5F + z, 0.0625F + y, 0.25F +x);
 					renderblocks.renderStandardBlock(block, i, j, k);
 
 					renderblocks.setRenderMinMax(0.03125F + z, 0.0625F + y,  0.03125F + x, 0.46875F + z , 0.25F + y,0.21875F + x);
-					renderblocks.renderStandardBlock(block, i, j, k);
+					renderblocks.renderStandardBlock(block, i, j, k);*/
+					drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+							i + x,
+							j + y,
+							k + z,
+							i + x + 0.25f,
+							j + y + 0.0625f, 
+							k + z + 0.5f
+							));
 				}
 			}
 		}
 		return true;
+	}
+	
+	static void drawBox(AxisAlignedBB par1AxisAlignedBB)
+	{
+		Tessellator var2 = Tessellator.instance;
+
+		//Top
+		var2.startDrawing(GL11.GL_QUADS);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.draw();
+
+		//-x
+		var2.startDrawing(GL11.GL_QUADS);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.minY, par1AxisAlignedBB.maxZ);
+		var2.draw();
+
+		//+x
+		var2.startDrawing(GL11.GL_QUADS);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
+		var2.draw();
+
+		//-z
+		var2.startDrawing(GL11.GL_QUADS);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.minZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.minZ);
+		var2.draw();
+		
+		//+z
+		var2.startDrawing(GL11.GL_QUADS);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.minY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.maxX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.maxY, par1AxisAlignedBB.maxZ);
+		var2.addVertex(par1AxisAlignedBB.minX, par1AxisAlignedBB.minY, par1AxisAlignedBB.maxZ);
+		var2.draw();
 	}
 }
 

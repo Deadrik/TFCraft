@@ -183,7 +183,7 @@ public class BlockIngotPile extends BlockTerraContainer
 
 		if (te.getStackInSlot(0)!=null){
 
-			return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.25, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
 		}
 		//else
 		//{
@@ -192,7 +192,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		//}
 	}
 
-	/*@Override
+	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
@@ -200,11 +200,12 @@ public class BlockIngotPile extends BlockTerraContainer
         TileEntityIngotPile te = (TileEntityIngotPile)par1World.getBlockTileEntity(par2, par3, par4);
 
 		if (te.getStackInSlot(0)!=null){
-            return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + ((te.getStackInSlot(0).stackSize + 7)/8), (double)par4 + 1);
+            return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
 		}
 		else
 			return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 0.25, (double)par4 + 1);
-    }*/
+    }
+	
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
@@ -239,9 +240,14 @@ public class BlockIngotPile extends BlockTerraContainer
 		return Te != null ? Te.getStackInSlot(0) != null ? Te.getStackInSlot(0).stackSize : 0 : 0;
 	}
 
-	public int getDamage(World world,TileEntityIngotPile tt){
-		TileEntityIngotPile Te = ((TileEntityIngotPile)world.getBlockTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
-		return Te != null ? Te.getType() != -1 ? Te.getType() : 0 : 0;
+	public int getDamage(World world,TileEntityIngotPile tt)
+	{
+		if(tt != null)
+		{
+			TileEntityIngotPile Te = ((TileEntityIngotPile)world.getBlockTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
+			return Te != null ? Te.getType() != -1 ? Te.getType() : 0 : 0;
+		}
+		return 0;
 	}
 
 	@Override

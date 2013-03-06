@@ -63,113 +63,23 @@ public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 			Block var10 = par1TileEntityPile.getBlockType();
 			var9 = par1TileEntityPile.getBlockMetadata();
 
-			
-		
-		if (par1TileEntityPile.getStackInSlot(0)!=null){
-			par1TileEntityPile.validate();
-			int i = ((TFC.Blocks.BlockIngotPile)var10).getStack(par1TileEntityPile.worldObj,par1TileEntityPile);
-			int j = par1TileEntityPile.getType() != -1 ? par1TileEntityPile.getType() : 0;//((TFC.Blocks.BlockIngotPile)var10).getDamage(par1TileEntityPile.worldObj,par1TileEntityPile);
-			//System.out.println("rendering " + par1TileEntityPile + " "+ ((TFC.Blocks.BlockIngotPile)var10).stack);
-			bindTextureByName(TFC_Textures.BlockSheet); //texture
-			GL11.glPushMatrix(); //start
-			GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
-			//GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F); //rotate based on metadata
-			//GL11.glScalef(1.0F, -1F, -1F); //if you read this comment out this line and you can see what happens
-			
-			
-			ingotModel.renderIngots(i,j);//renders and yes 0.0625 is a random number
-			GL11.glPopMatrix(); //end
+
+
+			if (par1TileEntityPile.getStackInSlot(0)!=null)
+			{
+				par1TileEntityPile.validate();
+				int i = ((TFC.Blocks.BlockIngotPile)var10).getStack(par1TileEntityPile.worldObj,par1TileEntityPile);
+				int j = par1TileEntityPile.getType() != -1 ? par1TileEntityPile.getType() : 0;
+				bindTextureByName(TFC_Textures.BlockSheet); //texture
+				GL11.glPushMatrix(); //start
+				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
+
+				ingotModel.renderIngots(i,j);
+				GL11.glPopMatrix(); //end
+			}
 		}
-		}
-		
-		/*if (par1TileEntityChest.adjacentChestZNeg == null && par1TileEntityChest.adjacentChestXNeg == null)
-        {
-            ModelChest var14;
-
-            if (par1TileEntityChest.adjacentChestXPos == null && par1TileEntityChest.adjacentChestZPosition == null)
-            {
-                var14 = this.chestModel;
-                this.bindTextureByName("/item/chest.png");
-            }
-            else
-            {
-                var14 = this.largeChestModel;
-                this.bindTextureByName("/item/largechest.png");
-            }
-
-            GL11.glPushMatrix();
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glTranslatef((float)par2, (float)par4 + 1.0F, (float)par6 + 1.0F);
-            GL11.glScalef(1.0F, -1.0F, -1.0F);
-            GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-            short var11 = 0;
-
-            if (var9 == 2)
-            {
-                var11 = 180;
-            }
-
-            if (var9 == 3)
-            {
-                var11 = 0;
-            }
-
-            if (var9 == 4)
-            {
-                var11 = 90;
-            }
-
-            if (var9 == 5)
-            {
-                var11 = -90;
-            }
-
-            if (var9 == 2 && par1TileEntityChest.adjacentChestXPos != null)
-            {
-                GL11.glTranslatef(1.0F, 0.0F, 0.0F);
-            }
-
-            if (var9 == 5 && par1TileEntityChest.adjacentChestZPosition != null)
-            {
-                GL11.glTranslatef(0.0F, 0.0F, -1.0F);
-            }
-
-            GL11.glRotatef((float)var11, 0.0F, 1.0F, 0.0F);
-            GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-            float var12 = par1TileEntityChest.prevLidAngle + (par1TileEntityChest.lidAngle - par1TileEntityChest.prevLidAngle) * par8;
-            float var13;
-
-            if (par1TileEntityChest.adjacentChestZNeg != null)
-            {
-                var13 = par1TileEntityChest.adjacentChestZNeg.prevLidAngle + (par1TileEntityChest.adjacentChestZNeg.lidAngle - par1TileEntityChest.adjacentChestZNeg.prevLidAngle) * par8;
-
-                if (var13 > var12)
-                {
-                    var12 = var13;
-                }
-            }
-
-            if (par1TileEntityChest.adjacentChestXNeg != null)
-            {
-                var13 = par1TileEntityChest.adjacentChestXNeg.prevLidAngle + (par1TileEntityChest.adjacentChestXNeg.lidAngle - par1TileEntityChest.adjacentChestXNeg.prevLidAngle) * par8;
-
-                if (var13 > var12)
-                {
-                    var12 = var13;
-                }
-            }
-
-            var12 = 1.0F - var12;
-            var12 = 1.0F - var12 * var12 * var12;
-            var14.chestLid.rotateAngleX = -(var12 * (float)Math.PI / 2.0F);
-            var14.renderAll();
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            GL11.glPopMatrix();
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        }*/
 	}
-	
+
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
 	{
 		this.renderTileEntityIngotPileAt((TileEntityIngotPile)par1TileEntity, par2, par4, par6, par8);
