@@ -143,6 +143,7 @@ public class BlockDetailed extends BlockPartial
 				{
 					System.out.println("xSelected: " +xSelected + " ySelected: " + ySelected + " zSelected: " + zSelected + " index: " + index);
 					te.data.clear(index);
+					te.clearQuad(xSelected, ySelected, zSelected);
 					
 					if(player.inventory.mainInventory[hasChisel] != null)
 						player.inventory.mainInventory[hasChisel].damageItem(1, player);

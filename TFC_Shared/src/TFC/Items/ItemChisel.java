@@ -350,6 +350,7 @@ public class ItemChisel extends ItemTerraTool
 						if(subX >= extraX && subX < extraX2 && subY >= extraY && subY < extraY2 && subZ >= extraZ && subZ < extraZ2)
 						{
 							te.setBlock(subX, subY, subZ);
+							te.setQuad(subX, subY, subZ);
 						}
 					}
 				}
@@ -372,6 +373,7 @@ public class ItemChisel extends ItemTerraTool
 					for(int subY = 0; subY < 8; subY++)
 					{
 						te.setBlock(subX, subY, subZ);
+						te.setQuad(subX, subY, subZ);
 					}
 				}
 			}

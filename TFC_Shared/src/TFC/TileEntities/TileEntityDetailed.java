@@ -54,10 +54,13 @@ public class TileEntityDetailed extends NetworkTileEntity
 	public static final byte Packet_Activate = 1;
 	
 	protected byte packetType = -1;
+	
+	private BitSet quads;
 
 	public TileEntityDetailed()
 	{
 		data = new BitSet(512);
+		quads = new BitSet(8);
 	}
 
 	@Override
@@ -86,6 +89,31 @@ public class TileEntityDetailed extends NetworkTileEntity
 		data.set((x * 8 + z)*8 + y);
 	}
 	
+	public void setQuad(int x, int y, int z)
+	{
+		int x1 = x >= 4 ? 1 : 0;
+		int y1 = y >= 4 ? 1 : 0;
+		int z1 = z >= 4 ? 1 : 0;
+		
+		int index = (x1 * 2 + z1) * 2 + y1;
+		quads.set(index);
+	}
+	
+	public void clearQuad(int x, int y, int z)
+	{
+		int x1 = x >= 4 ? 1 : 0;
+		int y1 = y >= 4 ? 1 : 0;
+		int z1 = z >= 4 ? 1 : 0;
+		
+		int index = (x1 * 2 + z1) * 2 + y1;
+		quads.clear(index);
+	}
+	
+	public boolean isQuadSolid(int x, int y, int z)
+	{
+		return !quads.get((x * 2 + z)*2 + y);
+	}
+	
 	/**
 	 * Reads a tile entity from NBT.
 	 */
@@ -96,6 +124,7 @@ public class TileEntityDetailed extends NetworkTileEntity
 		TypeID = par1NBTTagCompound.getShort("typeID");
 		data = new BitSet(512);
 		data.or(fromByteArray(par1NBTTagCompound.getByteArray("data"), 512));
+		quads.or(fromByteArray(par1NBTTagCompound.getByteArray("quads"), 8));
 	}
 
 	/**
@@ -107,6 +136,7 @@ public class TileEntityDetailed extends NetworkTileEntity
 		par1NBTTagCompound.setShort("typeID", (short) TypeID);
 		par1NBTTagCompound.setByte("metaID", MetaID);
 		par1NBTTagCompound.setByteArray("data", toByteArray(data));
+		par1NBTTagCompound.setByteArray("quads", toByteArray(quads));
 	}
 
 	@Override
@@ -118,6 +148,18 @@ public class TileEntityDetailed extends NetworkTileEntity
 			int index = inStream.readInt();
 			data.flip(index);
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			
+			for(int subX = 0; subX < 8; subX++)
+			{
+				for(int subZ = 0; subZ < 8; subZ++)
+				{
+					for(int subY = 0; subY < 8; subY++)
+					{
+						if(!getBlockExists(subX, subY, subZ))
+							setQuad(subX, subY, subZ);
+					}
+				}
+			}
 		}
 	}
 
@@ -143,6 +185,18 @@ public class TileEntityDetailed extends NetworkTileEntity
 		BitSet bs = fromByteArray(b, length);
 		data.or(bs);
 
+		for(int subX = 0; subX < 8; subX++)
+		{
+			for(int subZ = 0; subZ < 8; subZ++)
+			{
+				for(int subY = 0; subY < 8; subY++)
+				{
+					if(!getBlockExists(subX, subY, subZ))
+						setQuad(subX, subY, subZ);
+				}
+			}
+		}
+		
 		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
