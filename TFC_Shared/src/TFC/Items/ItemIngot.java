@@ -78,25 +78,27 @@ public class ItemIngot extends ItemTerra
 	}
 
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
-			int z, int side, int l) {
-		System.out.println(x+", "+y+", "+z);
-		System.out.println(world.getBlockId(x,y,z));
+			int z, int side, int l) 
+	{
+
 		boolean fullStack = true;
-		if (world.getBlockId(x,y,z)==TFCBlocks.IngotPile.blockID || world.getBlockId(x,y,z)==TFCBlocks.IngotPile.blockID){
-			System.out.println("There is a block here");
-			if (((TileEntityIngotPile)(world.getBlockTileEntity(x, y, z))).contentsMatch(0,itemstack) &&((TileEntityIngotPile)(world.getBlockTileEntity(x, y, z))).getStackInSlot(0).stackSize<32){
-				System.out.println("Tile Entity Found");
+		
+		TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
+		
+		if (world.getBlockId(x,y,z)==TFCBlocks.IngotPile.blockID || world.getBlockId(x,y,z)==TFCBlocks.IngotPile.blockID)
+		{
+			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit()){
+
 				fullStack = false;
 				((TileEntityIngotPile)(world.getBlockTileEntity(x, y, z))).injectContents(0,1);
-				//((TileEntityIngotPile)(Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z))).injectContents(0,1);
-				//((TileEntityIngotPile)(Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z))).setType(shiftedIndex - 16028 - 256);
 			}
 
 		}
 
-		if(fullStack){
-			TileEntityIngotPile te = null;
-			if (itemstack.getItemDamage() >=16){
+		if(fullStack)
+		{
+			if (itemstack.getItemDamage() >= 16)
+			{
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
 					world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.IngotPile.blockID, l);
@@ -198,14 +200,10 @@ public class ItemIngot extends ItemTerra
 			{
 				te.storage[0] = new ItemStack(this,1,0);
 				te.setType(this.shiftedIndex - 16028 - 256);
-				//if((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z) == null){
-				//	Minecraft.getMinecraft().theWorld.setBlockTileEntity(x,y,z,new TileEntityIngotPile());
-				//}
-				//TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z);
+
 				if(entityplayer.capabilities.isCreativeMode)
 				{
 					te.storage[0] = new ItemStack(this,32,0);
-					//te2.storage[0] = new ItemStack(this,32,0);
 				}
 			}
 		}		

@@ -77,12 +77,7 @@ public class BlockIngotPile extends BlockTerraContainer
 
 		if(world.isRemote)
 		{
-			//TileEntityIngotPile tileentityingotpile;
-			//tileentityingotpile = (TileEntityIngotPile)world.getBlockTileEntity(i, j, k);
-			//tileentityingotpile.setType(4);
-			//System.out.println(tileentityingotpile.getType());
 			((NetworkTileEntity)world.getBlockTileEntity(i,j,k)).validate();
-			//this.world = world;
 			return true;
 		} 
 		else
@@ -114,27 +109,7 @@ public class BlockIngotPile extends BlockTerraContainer
 				damage = tileentityingotpile.getStackInSlot(0).getItem().shiftedIndex - 16028 - 256;
 				//tileentityingotpile.setType(damage);
 				stack = tileentityingotpile.getStackInSlot(0).stackSize;
-				TE = tileentityingotpile;
-				System.out.println(stack);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
-				if(this.world != null){
-					if (this.world.isRemote){
-						if(((TileEntityIngotPile)this.world.getBlockTileEntity(i, j, k)).getType() == -1){
-							if (tileentityingotpile.getType() != -1){
-								//((TileEntityIngotPile)this.world.getBlockTileEntity(i, j, k)).setType(tileentityingotpile.getType());
-							}
-							else if (tileentityingotpile.getStackInSlot(0)!=null){
-								//((TileEntityIngotPile)this.world.getBlockTileEntity(i, j, k)).setType(tileentityingotpile.getStackInSlot(0).getItem().shiftedIndex - 16028 -256);
-							}
-						}
-						if(((TileEntityIngotPile)this.world.getBlockTileEntity(i, j, k)).getStackInSlot(0) != null){
-							//((TileEntityIngotPile)this.world.getBlockTileEntity(i, j, k)).getStackInSlot(0).stackSize = tileentityingotpile.getStackInSlot(0).stackSize;
-						}
-					}
-				}
-				//replacing = true;
-				//world.setBlockAndMetadata( i, j, k, blockID,meta);
-
 
 			}
 
