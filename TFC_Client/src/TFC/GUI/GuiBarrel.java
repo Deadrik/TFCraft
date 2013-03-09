@@ -44,12 +44,13 @@ import TFC.TileEntities.*;
 public class GuiBarrel extends GuiContainer
 {
 	private TileEntityBarrel barrel;
-
+	private EntityPlayer player;
 
 	public GuiBarrel(InventoryPlayer inventoryplayer, TileEntityBarrel tileentitybarrel, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraBarrel(inventoryplayer,tileentitybarrel, world, x, y, z) );
 		barrel = tileentitybarrel;
+		player = inventoryplayer.player;
 		guiLeft = (width - 208) / 2;
 		guiTop = (height - 198) / 2;
 
@@ -74,7 +75,9 @@ public class GuiBarrel extends GuiContainer
 	{
 		if (guibutton.id == 0)
 		{
-			barrel.actionSeal();
+			if(barrel.actionSeal()){
+				player.closeScreen();
+			}
 		}
 		if (guibutton.id == 1)
 		{

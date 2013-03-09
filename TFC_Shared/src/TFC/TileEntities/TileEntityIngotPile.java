@@ -53,7 +53,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
-		storage[0] = new ItemStack(TFCItems.BismuthIngot.shiftedIndex,0,0);
+		//storage[0] = new ItemStack(TFCItems.BismuthIngot.shiftedIndex,0,0);
 		type = -1;
 	}
 	

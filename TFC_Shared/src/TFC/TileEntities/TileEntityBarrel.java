@@ -462,11 +462,13 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		return (int)(((float)liquidLevel/64f)*i);
 	}
 
-	public void actionSeal() {
+	public boolean actionSeal() {
 		if(output==null && liquidLevel > 0 && isItemValid()){
 			sealed = true;
 			TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
+			return true;
 		}
+		return false;
 	}
 
 	private boolean isItemValid() {

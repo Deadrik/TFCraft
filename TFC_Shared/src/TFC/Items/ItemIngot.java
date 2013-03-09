@@ -224,8 +224,8 @@ public class ItemIngot extends ItemTerra
 
 				int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
 				if(Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)!=null && world.getBlockTileEntity(x,y,z)!=null){
-					((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).setType(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).getType());
-					((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).storage[0].stackSize=(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).storage[0].stackSize);
+					//((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).setType(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).getType());
+					//((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).storage[0].stackSize=(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).storage[0].stackSize);
 				}
 				if(entityplayer.isSneaking() && (world.getBlockId(x, Y, z) != TFCBlocks.IngotPile.blockID ||(world.getBlockId(x, Y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0))))
 				{
@@ -235,7 +235,7 @@ public class ItemIngot extends ItemTerra
 						itemstack.stackSize = itemstack.stackSize-1;
 						world.addBlockEvent(x,Y,z,TFCBlocks.IngotPile.blockID,0,0);
 						if (world.getBlockTileEntity(x,Y,z) != null){
-							((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).setType(this.shiftedIndex - 16028 - 256);
+							//((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).setType(this.shiftedIndex - 16028 - 256);
 							TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, Y, z);
 							if(te2.getType() == -1){
 
@@ -263,7 +263,7 @@ public class ItemIngot extends ItemTerra
 					if(te != null)
 					{
 						te.getBlockType().onBlockActivated(world, x, Y, z, entityplayer, side, hitX, hitY, hitZ);
-						((BlockIngotPile)(te.getBlockType())).damage = this.shiftedIndex - 16028 - 256;
+						//((BlockIngotPile)(te.getBlockType())).damage = this.shiftedIndex - 16028 - 256;
 						if(te.storage[0] != null && te.contentsMatch(0,itemstack)) {
 							te.injectContents(0,1);
 							//te2.injectContents(0,1);
