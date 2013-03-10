@@ -60,7 +60,6 @@ public class BlockIngotPile extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		System.out.println("shifty");
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;
 		yCoord = j;
@@ -90,15 +89,12 @@ public class BlockIngotPile extends BlockTerraContainer
 				tileentityingotpile = (TileEntityIngotPile)world.getBlockTileEntity(i, j, k);
 
 				if (tileentityingotpile.getStackInSlot(0)==null){
-					System.out.println("no TE: "+i+", "+j+", "+k);
 					world.setBlock(i, j, k, 0);
 					return false;
 				}
 				if (!entityplayer.isSneaking() && tileentityingotpile.getStackInSlot(0)!=null){
 					if (tileentityingotpile.getStackInSlot(0).stackSize > 0){
-						System.out.println("before: "+stack);
 						tileentityingotpile.injectContents(0,-1);
-						System.out.println("after: "+stack);
 					}
 					world.spawnEntityInWorld(new EntityItem(world,tileentityingotpile.xCoord,
 							tileentityingotpile.yCoord+1,tileentityingotpile.zCoord,new ItemStack(tileentityingotpile.getStackInSlot(0).getItem(),1,tileentityingotpile.getStackInSlot(0).getItemDamage())));
@@ -107,7 +103,6 @@ public class BlockIngotPile extends BlockTerraContainer
 					}
 				}
 				damage = tileentityingotpile.getStackInSlot(0).getItem().shiftedIndex - 16028 - 256;
-				//tileentityingotpile.setType(damage);
 				stack = tileentityingotpile.getStackInSlot(0).stackSize;
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 

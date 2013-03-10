@@ -53,7 +53,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
-		//storage[0] = new ItemStack(TFCItems.BismuthIngot.shiftedIndex,0,0);
 		type = -1;
 	}
 	
@@ -223,7 +222,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
-		System.out.println(storage[0]+": "+xCoord+", "+yCoord+", "+zCoord);
 	}
 
 	@Override
@@ -246,7 +244,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		//type = nbttagcompound.getInteger("type");
 		nbttagcompound.setInteger("type", type);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)

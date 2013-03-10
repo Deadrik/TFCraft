@@ -2,6 +2,7 @@ package TFC.Items;
 
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockIngotPile;
+import TFC.Enums.EnumMetalType;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityIngotPile;
@@ -43,10 +44,13 @@ import net.minecraft.world.gen.feature.*;
 public class ItemIngot extends ItemTerra
 {
 	EnumSize size = EnumSize.SMALL;
-	public ItemIngot(int i) 
+	public EnumMetalType MetalType;
+	
+	public ItemIngot(int i, EnumMetalType metalType) 
 	{
 		super(i);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
+		MetalType = metalType;
 	}
 
 	@Override
@@ -85,7 +89,7 @@ public class ItemIngot extends ItemTerra
 		
 		TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
 		
-		if (world.getBlockId(x,y,z)==TFCBlocks.IngotPile.blockID || world.getBlockId(x,y,z)==TFCBlocks.IngotPile.blockID)
+		if (world.getBlockId(x,y,z) == TFCBlocks.IngotPile.blockID)
 		{
 			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit()){
 
@@ -146,7 +150,8 @@ public class ItemIngot extends ItemTerra
 					return false;
 				}
 			}
-			else{
+			else
+			{
 
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
@@ -199,7 +204,7 @@ public class ItemIngot extends ItemTerra
 			if(te != null)
 			{
 				te.storage[0] = new ItemStack(this,1,0);
-				te.setType(this.shiftedIndex - 16028 - 256);
+				te.setType(this.MetalType.MetalID);
 
 				if(entityplayer.capabilities.isCreativeMode)
 				{
@@ -213,86 +218,65 @@ public class ItemIngot extends ItemTerra
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(shiftedIndex < (16049 + 256)){
 			if(entityplayer.username.equals("capt_slowpoke") && /*(!entityplayer.worldObj.isRemote)||*/ entityplayer instanceof EntityPlayerMP){
 				((EntityPlayerMP)entityplayer).mcServer.getConfigurationManager().func_92027_k(entityplayer.username+" sniffs the ingot");
 
 			}
 			if(entityplayer.isSneaking() &&  !world.isRemote )
 			{
-				int Y = y;
-
 				int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
-				if(Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)!=null && world.getBlockTileEntity(x,y,z)!=null){
-					//((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).setType(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).getType());
-					//((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).storage[0].stackSize=(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).storage[0].stackSize);
-				}
-				if(entityplayer.isSneaking() && (world.getBlockId(x, Y, z) != TFCBlocks.IngotPile.blockID ||(world.getBlockId(x, Y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0))))
+
+				if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
 				{
 					
-					if(CreatePile(itemstack, entityplayer, world, x, Y, z, side, dir)){
+					if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
+					{
 
 						itemstack.stackSize = itemstack.stackSize-1;
-						world.addBlockEvent(x,Y,z,TFCBlocks.IngotPile.blockID,0,0);
-						if (world.getBlockTileEntity(x,Y,z) != null){
-							//((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).setType(this.shiftedIndex - 16028 - 256);
-							TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, Y, z);
-							if(te2.getType() == -1){
-
-								//te2.setType(shiftedIndex - 16028 - 256);
-
-							}
-						}
-						TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, Y, z);
-						if (te2 != null){
-
-
-							if(te2.getType() == -1){
-								//te2.setType(shiftedIndex - 16028 - 256);
-							}
-
-						}
+						world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 						return true;
 
 					}
 				}
-				else if(world.getBlockId(x, Y, z) == TFCBlocks.IngotPile.blockID || (world.getBlockId(x, Y, z) == TFCBlocks.IngotPile.blockID))
+				else if(world.getBlockId(x, y, z) == TFCBlocks.IngotPile.blockID)
 				{
-					TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, Y, z);
-					TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, Y, z);
+					TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
+					TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z);
 					if(te != null)
 					{
-						te.getBlockType().onBlockActivated(world, x, Y, z, entityplayer, side, hitX, hitY, hitZ);
-						//((BlockIngotPile)(te.getBlockType())).damage = this.shiftedIndex - 16028 - 256;
-						if(te.storage[0] != null && te.contentsMatch(0,itemstack)) {
-							te.injectContents(0,1);
-							//te2.injectContents(0,1);
-							if(te2.getType() == -1){
-								//te2.setType(shiftedIndex - 16028 - 256);
-							}
-						} else if(te.storage[0] == null) {
-							te.addContents(0, new ItemStack(this,1, itemstack.getItem().shiftedIndex));
-							//te2.addContents(0, new ItemStack(this,1,itemstack.getItem().shiftedIndex));
-						} else
+						te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
+						if(te.storage[0] != null && te.contentsMatch(0,itemstack)) 
 						{
-							if(CreatePile(itemstack, entityplayer, world, x, Y, z, side, dir)){						
+							te.injectContents(0,1);
+						} 
+						else if(te.storage[0] == null) 
+						{
+							te.addContents(0, new ItemStack(this,1, itemstack.getItem().shiftedIndex));
+						} 
+						else
+						{
+							if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
+							{						
 								itemstack.stackSize = itemstack.stackSize-1;
-								if (world.getBlockTileEntity(x,Y,z) != null){
-									if (((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).getType()==-1){
-										((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).setType(this.shiftedIndex - 16028 - 256);
+								if (world.getBlockTileEntity(x,y,z) != null)
+								{
+									if (((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).getType()==-1)
+									{
+										((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.MetalType.MetalID);
 									}
 								}
-								world.addBlockEvent(x,Y,z,TFCBlocks.IngotPile.blockID,0,0);
-								te.getBlockType().onBlockActivated(world, x, Y, z, entityplayer, side, hitX, hitY, hitZ);
+								world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
+								te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 							}
 							return true;
 
 						}
 						itemstack.stackSize = itemstack.stackSize-1;
-						if (world.getBlockTileEntity(x,Y,z) != null){
-							((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).setType(this.shiftedIndex - 16028 - 256);
+						if (world.getBlockTileEntity(x,y,z) != null)
+						{
+							((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.MetalType.MetalID);
 						}
-						world.addBlockEvent(x,Y,z,TFCBlocks.IngotPile.blockID,0,0);
+						world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 						return true;
 					}
 
@@ -322,31 +306,30 @@ public class ItemIngot extends ItemTerra
 							itemstack.stackSize = itemstack.stackSize-1;
 						}
 					}
-					else if(side == 2 && world.getBlockId(x, Y, z-1) == 0)
+					else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 					{
-						setSide(world, itemstack, m, dir, x, Y, z, 0, 0, -1);
+						setSide(world, itemstack, m, dir, x, y, z, 0, 0, -1);
 					}
-					else if(side == 3 && world.getBlockId(x, Y, z+1) == 0)
+					else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 					{
-						setSide(world, itemstack, m, dir, x, Y, z, 0, 0, 1);
+						setSide(world, itemstack, m, dir, x, y, z, 0, 0, 1);
 					}
-					else if(side == 4 && world.getBlockId(x-1, Y, z) == 0)
+					else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 					{
-						setSide(world, itemstack, m, dir, x, Y, z, -1, 0, 0);
+						setSide(world, itemstack, m, dir, x, y, z, -1, 0, 0);
 					}
-					else if(side == 5 && world.getBlockId(x+1, Y, z) == 0)
+					else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 					{
-						setSide(world, itemstack, m, dir, x, Y, z, 1, 0, 0);
+						setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
 					}
-					if (world.getBlockTileEntity(x,Y,z) != null){
-						((TileEntityIngotPile)world.getBlockTileEntity(x,Y,z)).setType(this.shiftedIndex - 16028 - 256);
+					if (world.getBlockTileEntity(x,y,z) != null){
+						((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.shiftedIndex - 16028 - 256);
 					}
-					world.addBlockEvent(x,Y,z,TFCBlocks.IngotPile.blockID,0,0);
+					world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 					return true;
 				}
 
 			}
-		}
 		return false;
 	}
 
