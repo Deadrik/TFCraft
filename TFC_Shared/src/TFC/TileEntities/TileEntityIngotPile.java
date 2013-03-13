@@ -65,11 +65,12 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	
 	public void setType(int i)
 	{
-		for(int j = 0; j<ingots.length;j++){
+		/*for(int j = 0; j<ingots.length;j++){
 		if(ingots[j] == i){
 			type = j;
 		}
-		}
+		}*/
+		type = i;
 	}
 	
 	public int getStack(){
