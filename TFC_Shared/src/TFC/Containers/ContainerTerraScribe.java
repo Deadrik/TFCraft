@@ -3,10 +3,13 @@ package TFC.Containers;
 import TFC.*;
 import TFC.Core.CraftingManagerTFC;
 import TFC.GUI.GuiScreenBookTFC;
+import TFC.GUI.GuiTerraScribe;
 import TFC.TileEntities.TileEntityTerraScribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.GuiScreenBook;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.*;
@@ -43,6 +46,7 @@ public class ContainerTerraScribe extends ContainerTFC
 	public IInventory craftResult;
 	private EntityPlayer entityplayer;
 	private World worldObj;
+	private GuiTerraScribe te;
 
 	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe scribe, World world, int x, int y, int z)
 	{
@@ -86,6 +90,9 @@ public class ContainerTerraScribe extends ContainerTFC
 	{
 		return true;
 	}
+	public void setGUI(GuiTerraScribe TE){
+		te = TE;
+	}
 	@Override
 	public void onCraftGuiClosed(EntityPlayer entityplayer)
 	{
@@ -96,6 +103,7 @@ public class ContainerTerraScribe extends ContainerTFC
 		}
 		for (int i = 0; i < 25; i++)
 		{
+
 			ItemStack itemstack = craftMatrix.getStackInSlot(i);
 			if (itemstack != null)
 			{
@@ -103,19 +111,31 @@ public class ContainerTerraScribe extends ContainerTFC
 			}
 		}
 	}
+	
+	public void openBook(ItemStack temp2){
+		//ItemStack temp = temp2;
+		terraScribe.scribeItemStacks[1] = null;
+		if(entityplayer.worldObj.isRemote && entityplayer.inventory.getCurrentItem()==null){
+			//if(temp.hasTagCompound())System.out.println(temp.getTagCompound());
+			terraScribe.nullifyBook();
+			((EntityPlayerSP) entityplayer).getMcField().displayGuiScreen(new GuiScreenBookTFC(entityplayer, temp2, true));
+			
+			}
+	}
 	@Override
 	public void onCraftMatrixChanged(IInventory iinventory)
 	{
 		//Check if there is paper in the paper slot.
+		
+		if(te!=null){
+			te.initGui();
+			}
 		if(terraScribe.scribeItemStacks[1] != null && 
 				terraScribe.scribeItemStacks[1].getItem() == TFCItems.writabeBookTFC){
 			ItemStack temp = terraScribe.scribeItemStacks[1];
-			terraScribe.scribeItemStacks[1]= null;
-			if(entityplayer.worldObj.isRemote){
-				
-			((EntityPlayerSP) entityplayer).getMcField().displayGuiScreen(new GuiScreenBookTFC(entityplayer, temp, true));
+			//craftResult.setInventorySlotContents(0,temp); 
+			//if(!worldObj.isRemote)terraScribe.scribeItemStacks[1]= null;
 			
-			}
 		}
 		if(terraScribe.scribeItemStacks[1] != null && 
 				terraScribe.scribeItemStacks[1].getItem() == Item.paper) {

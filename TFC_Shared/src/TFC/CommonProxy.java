@@ -47,6 +47,7 @@ import TFC.GUI.GuiChestTFC;
 import TFC.GUI.GuiHUD;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
+import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiTerraAnvil;
 import TFC.GUI.GuiTerraBloomery;
 import TFC.GUI.GuiTerraFirepit;
@@ -414,7 +415,10 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerTerraBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
 		}
-		
+		case 36:
+		{
+			return new ContainerLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
+		}
 		default:
 		{
 			return null;

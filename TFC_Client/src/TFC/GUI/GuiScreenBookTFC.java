@@ -1,5 +1,7 @@
 package TFC.GUI;
 
+import TFC.TFCItems;
+import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.io.ByteArrayOutputStream;
@@ -38,6 +40,7 @@ public class GuiScreenBookTFC extends GuiScreen
     private int currPage;
     private NBTTagList bookPages;
     private String bookTitle = "";
+    private String preTitle = "";
     private GuiButtonNextPage buttonNextPage;
     private GuiButtonNextPage buttonPreviousPage;
     private GuiButton buttonDone;
@@ -57,7 +60,8 @@ public class GuiScreenBookTFC extends GuiScreen
         {
             NBTTagCompound var4 = par2ItemStack.getTagCompound();
             this.bookPages = var4.getTagList("pages");
-
+            this.bookTitle = var4.getString("title");
+            this.preTitle = bookTitle;
             if (this.bookPages != null)
             {
                 this.bookPages = (NBTTagList)this.bookPages.copy();
@@ -134,25 +138,25 @@ public class GuiScreenBookTFC extends GuiScreen
             this.buttonSign.drawButton = !this.editingTitle;
             this.buttonCancel.drawButton = this.editingTitle;
             this.buttonFinalize.drawButton = this.editingTitle;
-            this.buttonFinalize.enabled = this.bookTitle.trim().length() > 0;
+            this.buttonFinalize.enabled = this.bookTitle.trim().length() > 0 && bookTitle != preTitle;
         }
     }
 
     private void sendBookToServer(boolean par1)
     {
-        if (this.bookIsUnsigned && this.bookModified)
+        if (this.bookIsUnsigned /*&& this.bookModified*/)
         {
             if (this.bookPages != null)
             {
+            	
                 while (this.bookPages.tagCount() > 1)
                 {
                     NBTTagString var2 = (NBTTagString)this.bookPages.tagAt(this.bookPages.tagCount() - 1);
-
                     if (var2.data != null && var2.data.length() != 0)
                     {
                         break;
                     }
-
+                    
                     this.bookPages.removeTag(this.bookPages.tagCount() - 1);
                 }
 
@@ -165,22 +169,21 @@ public class GuiScreenBookTFC extends GuiScreen
                 {
                     this.itemstackBook.setTagInfo("pages", this.bookPages);
                 }
+                String var8 = "TerraFirmaCraft";
 
-                String var8 = "MC|BEdit";
-
-                /*if (par1)
-                {
-                    var8 = "MC|BSign";
+                //if (par1)
+                //{
+                    var8 = "TerraFirmaCraft";
                     this.itemstackBook.setTagInfo("author", new NBTTagString("author", this.editingPlayer.username));
-                    this.itemstackBook.setTagInfo("title", new NBTTagString("title", this.bookTitle.trim()));
-                    this.itemstackBook.itemID = Item.writtenBook.shiftedIndex;
-                }*/
+                    this.itemstackBook.setTagInfo("title", new NBTTagString("title", this.bookTitle.trim().length()>0?this.bookTitle.trim():"Book"));
+                    this.itemstackBook.itemID = TFCItems.writabeBookTFC.shiftedIndex;
+                //}
 
-                ByteArrayOutputStream var3 = new ByteArrayOutputStream();
+                ByteArrayOutputStream var3 = new ByteArrayOutputStream(1000);
                 DataOutputStream var4 = new DataOutputStream(var3);
-
                 try
                 {
+                	var4.writeByte(PacketHandler.Packet_Book_Sign);
                     Packet.writeItemStack(this.itemstackBook, var4);
                     this.mc.getSendQueue().addToSendQueue(new Packet250CustomPayload(var8, var3.toByteArray()));
                 }
@@ -202,7 +205,7 @@ public class GuiScreenBookTFC extends GuiScreen
             if (par1GuiButton.id == 0)
             {
                 this.mc.displayGuiScreen((GuiScreen)null);
-                editingPlayer.entityDropItem(itemstackBook, 0);
+                //editingPlayer.entityDropItem(itemstackBook, 0);
                 this.sendBookToServer(false);
             }
             else if (par1GuiButton.id == 3 && this.bookIsUnsigned)
@@ -267,6 +270,7 @@ public class GuiScreenBookTFC extends GuiScreen
         {
             if (this.editingTitle)
             {
+            	preTitle = "";
                 this.func_74162_c(par1, par2);
             }
             else

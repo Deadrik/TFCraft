@@ -58,11 +58,16 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	public int liquidLevel;
 	public int Type;
+	public int barrelType;
 	private ItemStack itemstack;
 	private ItemStack output;
 	private boolean sealed;
 	private int sealtimecounter;
-	public final int SEALTIME = 1;//(int) ((TFC_Time.hourLength*6)/100);//default 80
+	private static int[] barrels ={(TFCBlocks.BarrelOak.blockID),(TFCBlocks.BarrelAspen.blockID),(TFCBlocks.BarrelBirch.blockID),(TFCBlocks.BarrelChestnut.blockID),
+			(TFCBlocks.BarrelDouglasFir.blockID),(TFCBlocks.BarrelHickory.blockID),(TFCBlocks.BarrelMaple.blockID),(TFCBlocks.BarrelAsh.blockID),
+			(TFCBlocks.BarrelPine.blockID),(TFCBlocks.BarrelSequoia.blockID),(TFCBlocks.BarrelSpruce.blockID),(TFCBlocks.BarrelSycamore.blockID),
+			(TFCBlocks.BarrelWhiteCedar.blockID),(TFCBlocks.BarrelWhiteElm.blockID),(TFCBlocks.BarrelWillow.blockID),(TFCBlocks.BarrelKapok.blockID)};
+	public final int SEALTIME = (int) ((TFC_Time.hourLength*6)/100);//default 80
 
 	public TileEntityBarrel()
 	{
@@ -77,9 +82,21 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	{
 
 	}
+	public static int[] getBarrels(){
+		return barrels;
+	}
 
 	public boolean getSealed(){
 		return sealed;
+	}
+	
+	public int getBarrelType(){
+		for(int i = 0; i < barrels.length;i++){
+			if(worldObj.getBlockId(xCoord,yCoord,zCoord)==barrels[i]){
+				return i;
+			}
+		}
+		return 0;
 	}
 
 	public void externalFireCheck()
@@ -136,7 +153,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				output = itemstack2;
 			}
 		}
-		if(Type ==3&&itemstack.getItem()==TFCItems.PrepHide){
+		if(itemstack!=null &&Type ==3&&itemstack.getItem()==TFCItems.PrepHide){
 			itemstack2 = new ItemStack(TFCItems.TerraLeather,0,0);
 			while(liquidLevel >= 5 && itemstack.stackSize >0){
 				liquidLevel-=5;
@@ -149,6 +166,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		}
 		if (liquidLevel == 0){
 			Type = 0;
+		}
+		if (itemstack!=null&&itemstack.stackSize==0){
+			itemstack = null;
 		}
 	}
 

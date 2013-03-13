@@ -185,8 +185,23 @@ public class TFCBlocks
 	public static Block Crucible;
 	
 	public static Block IngotPile;
-	public static Block Barrel;
-;
+	public static Block BarrelOak;
+	public static Block BarrelAspen;
+	public static Block BarrelBirch;
+	public static Block BarrelChestnut;
+	public static Block BarrelDouglasFir;
+	public static Block BarrelHickory;
+	public static Block BarrelMaple;
+	public static Block BarrelAsh;
+	public static Block BarrelPine;
+	public static Block BarrelSequoia;
+	public static Block BarrelSpruce;
+	public static Block BarrelSycamore;
+	public static Block BarrelWhiteCedar;
+	public static Block BarrelWhiteElm;
+	public static Block BarrelWillow;
+	public static Block BarrelKapok;
+
 	
 
 	static Configuration config;
@@ -309,8 +324,22 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Nestbox, "Nestbox");
 		GameRegistry.registerBlock(Crucible, "Crucible");
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
-		GameRegistry.registerBlock(Barrel, "Barrel");
-		
+		GameRegistry.registerBlock(BarrelOak, "BarrelOak");
+		GameRegistry.registerBlock(BarrelAspen, "BarrelAspen");
+		GameRegistry.registerBlock(BarrelBirch, "BarrelBirch");
+		GameRegistry.registerBlock(BarrelChestnut, "BarrelChestnut");
+		GameRegistry.registerBlock(BarrelDouglasFir, "BarrelDouglasFir");
+		GameRegistry.registerBlock(BarrelHickory, "BarrelHickory");
+		GameRegistry.registerBlock(BarrelMaple, "BarrelMaple");
+		GameRegistry.registerBlock(BarrelAsh, "BarrelAsh");
+		GameRegistry.registerBlock(BarrelPine, "BarrelPine");
+		GameRegistry.registerBlock(BarrelSequoia, "BarrelSequoia");
+		GameRegistry.registerBlock(BarrelSpruce, "BarrelSpruce");
+		GameRegistry.registerBlock(BarrelSycamore, "BarrelSycamore");
+		GameRegistry.registerBlock(BarrelWhiteCedar, "BarrelWhiteCedar");
+		GameRegistry.registerBlock(BarrelWhiteElm, "BarrelWhiteElm");
+		GameRegistry.registerBlock(BarrelWillow, "BarrelWillow");
+		GameRegistry.registerBlock(BarrelKapok, "BarrelKapok");
 	}
 	
 	public static void LoadBlocks()
@@ -503,7 +532,23 @@ public class TFCBlocks
 		Crucible = new BlockCrucible(TFC_Settings.getIntFor(config,"block","Crucible", 2059)).setBlockName("Crucible").setHardness(2);
 		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060),224).setBlockName("ingotpile").setHardness(3).setRequiresSelfNotify();
-		Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", 2061)).setBlockName("barrel").setCreativeTab(TFCTabs.TFCMaterials);
+		int num = 2061;
+		BarrelOak = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelOak", num++)).setBlockName("BarrelOak");
+		BarrelAspen = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelAspen", num++)).setBlockName("BarrelAspen");
+		BarrelBirch = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelBirch", num++)).setBlockName("BarrelBirch");
+		BarrelChestnut = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelChestnut", num++)).setBlockName("BarrelChestnut");
+		BarrelDouglasFir = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelDouglasFir", num++)).setBlockName("BarrelDouglas Fir");
+		BarrelHickory = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelHickory", num++)).setBlockName("BarrelHickory");
+		BarrelMaple = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelMaple", num++)).setBlockName("BarrelMaple");
+		BarrelAsh = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelAsh", num++)).setBlockName("BarrelAsh");
+		BarrelPine = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelPine", num++)).setBlockName("BarrelPine");
+		BarrelSequoia = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSequoia", num++)).setBlockName("BarrelSequoia");
+		BarrelSpruce = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSpruce", num++)).setBlockName("BarrelSpruce");
+		BarrelSycamore = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSycamore", num++)).setBlockName("BarrelSycamore");
+		BarrelWhiteCedar = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteCedar", num++)).setBlockName("BarrelWhite Cedar");
+		BarrelWhiteElm = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteElm", num++)).setBlockName("BarrelWhite Elm");
+		BarrelWillow = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWillow", num++)).setBlockName("BarrelWillow");
+		BarrelKapok = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelKapok", num++)).setBlockName("BarrelKapok");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

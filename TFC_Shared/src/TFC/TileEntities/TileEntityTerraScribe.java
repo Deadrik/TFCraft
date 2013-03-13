@@ -1,8 +1,13 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.HashMap;
+
+import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.block.*;
@@ -153,6 +158,20 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 	{
 
 
+	}
+	public void nullifyBook(){
+		ByteArrayOutputStream var3 = new ByteArrayOutputStream(1000);
+        DataOutputStream var4 = new DataOutputStream(var3);
+        try{
+        var4.writeByte(PacketHandler.Packet_Scribe_Update);
+        var4.writeInt(xCoord);
+        var4.writeInt(yCoord);
+        var4.writeInt(zCoord);
+        Minecraft.getMinecraft().getSendQueue().addToSendQueue(new Packet250CustomPayload("TerraFirmaCraft", var3.toByteArray()));
+        }
+        catch(Exception e){
+        	return;
+        }
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound)

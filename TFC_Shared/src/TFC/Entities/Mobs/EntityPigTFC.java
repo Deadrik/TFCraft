@@ -200,7 +200,7 @@ public class EntityPigTFC extends EntityAnimalTFC
 
         for (var4 = 0; var4 < var3; ++var4)
         {
-            this.dropItem(Item.leather.shiftedIndex, 5+this.rand.nextInt(5));
+            this.dropItem(TFCItems.Hide.shiftedIndex,1);
         }
 
         var3 = 1;

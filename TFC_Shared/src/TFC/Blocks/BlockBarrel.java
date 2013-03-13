@@ -51,6 +51,7 @@ public class BlockBarrel extends BlockTerraContainer
 		this.blockIndexInTexture = 5;
 	}
 
+
 	/**
 	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
@@ -65,13 +66,17 @@ public class BlockBarrel extends BlockTerraContainer
 	 */
 	public boolean renderAsNormalBlock()
 	{
-		return true;//false;
+		return false;
 	}
 
 	/**
 	 * The type of render function that is called for this block
 	 */
-
+	@Override
+	public int getRenderType()
+	{
+		return 22;//TFCBlocks.IngotPileRenderId;//ingotpileId;
+	}
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
@@ -91,133 +96,7 @@ public class BlockBarrel extends BlockTerraContainer
 	}
 
 
-	/**
-	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
-	 */
-	@Override
-	public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-	{
-		if (par5 == 1)
-		{
-			return this.blockIndexInTexture - 1;
-		}
-		else if (par5 == 0)
-		{
-			return this.blockIndexInTexture - 1;
-		}
-		else
-		{
-			int var6 = par1IBlockAccess.getBlockId(par2, par3, par4 - 1);
-			int var7 = par1IBlockAccess.getBlockId(par2, par3, par4 + 1);
-			int var8 = par1IBlockAccess.getBlockId(par2 - 1, par3, par4);
-			int var9 = par1IBlockAccess.getBlockId(par2 + 1, par3, par4);
-			int var10;
-			int var11;
-			int var12;
-			byte var13;
-
-			if (var6 != this.blockID && var7 != this.blockID)
-			{
-				if (var8 != this.blockID && var9 != this.blockID)
-				{
-					byte var14 = 3;
-
-					if (Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var7])
-					{
-						var14 = 3;
-					}
-
-					if (Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var6])
-					{
-						var14 = 2;
-					}
-
-					if (Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var9])
-					{
-						var14 = 5;
-					}
-
-					if (Block.opaqueCubeLookup[var9] && !Block.opaqueCubeLookup[var8])
-					{
-						var14 = 4;
-					}
-
-					return par5 == var14 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture;
-				}
-				else if (par5 != 4 && par5 != 5)
-				{
-					var10 = 0;
-
-					if (var8 == this.blockID)
-					{
-						var10 = -1;
-					}
-
-					var11 = par1IBlockAccess.getBlockId(var8 == this.blockID ? par2 - 1 : par2 + 1, par3, par4 - 1);
-					var12 = par1IBlockAccess.getBlockId(var8 == this.blockID ? par2 - 1 : par2 + 1, par3, par4 + 1);
-
-					if (par5 == 3)
-					{
-						var10 = -1 - var10;
-					}
-
-					var13 = 3;
-
-					if ((Block.opaqueCubeLookup[var6] || Block.opaqueCubeLookup[var11]) && !Block.opaqueCubeLookup[var7] && !Block.opaqueCubeLookup[var12])
-					{
-						var13 = 3;
-					}
-
-					if ((Block.opaqueCubeLookup[var7] || Block.opaqueCubeLookup[var12]) && !Block.opaqueCubeLookup[var6] && !Block.opaqueCubeLookup[var11])
-					{
-						var13 = 2;
-					}
-
-					return (par5 == var13 ? this.blockIndexInTexture + 16 : this.blockIndexInTexture + 32) + var10;
-				}
-				else
-				{
-					return this.blockIndexInTexture;
-				}
-			}
-			else if (par5 != 2 && par5 != 3)
-			{
-				var10 = 0;
-
-				if (var6 == this.blockID)
-				{
-					var10 = -1;
-				}
-
-				var11 = par1IBlockAccess.getBlockId(par2 - 1, par3, var6 == this.blockID ? par4 - 1 : par4 + 1);
-				var12 = par1IBlockAccess.getBlockId(par2 + 1, par3, var6 == this.blockID ? par4 - 1 : par4 + 1);
-
-				if (par5 == 4)
-				{
-					var10 = -1 - var10;
-				}
-
-				var13 = 5;
-
-				if ((Block.opaqueCubeLookup[var8] || Block.opaqueCubeLookup[var11]) && !Block.opaqueCubeLookup[var9] && !Block.opaqueCubeLookup[var12])
-				{
-					var13 = 5;
-				}
-
-				if ((Block.opaqueCubeLookup[var9] || Block.opaqueCubeLookup[var12]) && !Block.opaqueCubeLookup[var8] && !Block.opaqueCubeLookup[var11])
-				{
-					var13 = 4;
-				}
-
-				return (par5 == var13 ? this.blockIndexInTexture + 16 : this.blockIndexInTexture + 32) + var10;
-			}
-			else
-			{
-				return this.blockIndexInTexture;
-			}
-		}
-	}
-
+	
 	/**
 	 * Returns the block texture based on the side being looked at.  Args: side
 	 */
@@ -282,6 +161,16 @@ public class BlockBarrel extends BlockTerraContainer
 		}
 
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+	}
+	
+	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{
+		//super.harvestBlock(world, entityplayer, i, j, k, l);
+		if(blockID == TFCBlocks.WoodSupportH.blockID)
+		{
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.WoodSupportItemH, 1, l));
+		}
 	}
 
 	/**

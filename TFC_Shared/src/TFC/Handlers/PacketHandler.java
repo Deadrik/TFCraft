@@ -17,6 +17,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.GUI.GuiHUD;
+import TFC.Items.ItemWritableBookTFC;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
@@ -24,6 +25,7 @@ import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityTerraFirepit;
 import TFC.TileEntities.TileEntityTerraLogPile;
+import TFC.TileEntities.TileEntityTerraScribe;
 import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -68,6 +70,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public static final byte Packet_Data_Block_Server = 5;
 	public static final byte Packet_Player_Status = 6;
 	public static final byte Packet_Rename_Item = 7;
+	public static final byte Packet_Book_Sign = 8;
+	public static final byte Packet_Scribe_Update = 9;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -120,7 +124,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			Packet250CustomPayload packet, Player p)
 	{
 		DataInputStream dis=new DataInputStream(new ByteArrayInputStream(packet.data));
-		
+
 		byte type = 0;
 		int x = 0;
 		int y = 0;
@@ -146,16 +150,16 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 				try
 				{
-				x = dis.readInt();
-				y = dis.readInt();
-				z = dis.readInt();
+					x = dis.readInt();
+					y = dis.readInt();
+					z = dis.readInt();
 
-				if(world != null && world.isRemote)
-				{
-					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
-					if(te!= null)
-						te.handleInitPacket(dis);
-				}
+					if(world != null && world.isRemote)
+					{
+						NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+						if(te!= null)
+							te.handleInitPacket(dis);
+					}
 				}catch(Exception e)
 				{
 					System.out.println("PacketHandler error in Packet Type: " + type + ", "+x + ", "+y + ", "+z);
@@ -277,6 +281,77 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					player.inventory.getCurrentItem().stackTagCompound.setString("Name", s);
 				}
 			}
+			else if(type == Packet_Book_Sign){
+				DataInputStream var2;
+				ItemStack var3;
+				ItemStack var4;
+
+				/*if (true)
+				{
+					try
+					{
+						var2 = new DataInputStream(new ByteArrayInputStream(packet.data));
+						var3 = Packet.readItemStack(var2);
+
+						if (!ItemWritableBook.validBookTagPages(var3.getTagCompound()))
+						{
+							throw new IOException("Invalid book tag!");
+						}
+
+						var4 = player.inventory.getCurrentItem();
+
+						if (var3 != null && var3.itemID == Item.writableBook.shiftedIndex && var3.itemID == var4.itemID)
+						{
+							var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages"));
+						}
+					}
+					catch (Exception var12)
+					{
+						var12.printStackTrace();
+					}
+				}
+				else */if (true)
+				{
+					try
+					{
+						var2 = dis;//new DataInputStream(new ByteArrayInputStream(packet.data));
+						var3 = Packet.readItemStack(var2);
+
+						if (!ItemWritableBookTFC.validBookTagContents(var3.getTagCompound()))
+						{
+							throw new IOException("Invalid book tag!");
+						}
+
+						var4 = new ItemStack(0,1,0);//player.inventory.getCurrentItem();
+						System.out.println(var3.getTagCompound().getTags());
+						System.out.println(var3);
+						if (var3 != null && var3.itemID == TFCItems.writabeBookTFC.shiftedIndex)
+						{
+							var4.setTagInfo("author", new NBTTagString("author", player.username));
+							var4.setTagInfo("title", new NBTTagString("title", var3.getTagCompound().getString("title")));
+							var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages"));
+							var4.itemID = TFCItems.writabeBookTFC.shiftedIndex;
+						}
+						//player.setCurrentItemOrArmor(0, var4);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, var4);
+					}
+					catch (Exception var11)
+					{
+						var11.printStackTrace();
+					}
+				}
+
+			}
+			else if (type == Packet_Scribe_Update){
+				if(!world.isRemote){
+					System.out.println("?");
+					int X = dis.readInt();
+					int Y = dis.readInt();
+					int Z = dis.readInt();
+					TileEntityTerraScribe te =(TileEntityTerraScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
+					te.scribeItemStacks[1]=null;
+				}
+			}
 		} catch (Exception e) 
 		{
 			return;
@@ -345,10 +420,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				PlayerManagerTFC.getInstance().Players.remove(i);
 			}  
 		}
-		
-//		if(TerraFirmaCraft.proxy.isRemote())
-//			manager.closeConnections();
-//		else
-//			manager.serverShutdown();
+
+		//		if(TerraFirmaCraft.proxy.isRemote())
+		//			manager.closeConnections();
+		//		else
+		//			manager.serverShutdown();
 	}
 }

@@ -188,6 +188,12 @@ public class Recipes
 		{
 			ModLoader.addRecipe(new ItemStack(Item.bowlEmpty, 4, 0), new Object[] { 
 				"2","1", Character.valueOf('1'),new ItemStack(TFCItems.Logs,1,-1), Character.valueOf('2'),new ItemStack(Knives[j], 1, -1)});
+			ModLoader.addRecipe(new ItemStack(TFCItems.ScrapedHide,1,0), new Object[] {				
+			"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SoakedHide,1),Character.valueOf('2'),new ItemStack(Knives[j],1,-1)});
+			ModLoader.addRecipe(new ItemStack(TFCItems.Wool,1,0), new Object[] {				
+				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.SheepSkin,1),Character.valueOf('2'),new ItemStack(Knives[j],1,-1)});
+			ModLoader.addRecipe(new ItemStack(TFCItems.TerraLeather,0,0), new Object[] {				
+				"2","1", Character.valueOf('1'), new ItemStack(TFCItems.TerraLeather,1),Character.valueOf('2'),new ItemStack(Knives[j],1,-1)});
 		}
 
 		//Chest
@@ -246,6 +252,7 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,-1),Character.valueOf('X'),new ItemStack(TFCItems.Flux),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,-1)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand2,1,-1),Character.valueOf('X'),new ItemStack(TFCItems.Flux),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,-1)});
 		
+		
 		//Gold Pan
 		ModLoader.addRecipe(new ItemStack(TFCItems.terraGoldPan, 1, 0), new Object[] { 
 			"1", Character.valueOf('1'),Item.bowlEmpty});
@@ -261,11 +268,15 @@ public class Recipes
 			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 10), new ItemStack(Recipes.Hammers[j], 1, -1)});
 			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 6), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, -1)});
 		}
-
-		//Tool Rack
+		
+		ModLoader.addRecipe(new ItemStack(Item.bow,1), new Object[] {" #$","# $"," #$",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
+		ModLoader.addRecipe(new ItemStack(Item.bow,1), new Object[] {"$# ","$ #","$# ",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
+		
+		//Tool Rack & Barrel
 		for(int j = 0; j < 16; j++)
 		{
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.ToolRack, 1, j), new Object[] { "###","   ","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,j)});
+			ModLoader.addRecipe(new ItemStack(TFCItems.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
 		}
 
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, -1)});
@@ -277,7 +288,7 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(Item.redstone, 8, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.OreChunk,1,27)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(Item.dyePowder,1,0)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 "," 2", Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.BellowsItem, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1), Character.valueOf('?'), Item.leather});
+		ModLoader.addRecipe(new ItemStack(TFCItems.BellowsItem, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,-1), Character.valueOf('?'), TFCItems.TerraLeather});
 		//ModLoader.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgIn});
 		//ModLoader.addRecipe(new ItemStack(TFCItems.terraStoneAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), mod_TFC_Core.terraStoneIgEx});
 		ModLoader.addRecipe(new ItemStack(TFCItems.CopperAnvilItem, 1, 0), new Object[] { "###"," # ","###", Character.valueOf('#'), TFCItems.CopperIngot2x});
@@ -337,6 +348,10 @@ public class Recipes
 			Character.valueOf('P'), TFCBlocks.StoneSedSmooth});
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.Quern, 1), new Object[] { "PPP", 
 			Character.valueOf('P'), TFCBlocks.StoneMMSmooth});
+		ModLoader.addRecipe(new ItemStack(Item.book,1),new Object[]{" P "," P "," PQ",Character.valueOf('P'),new ItemStack(Item.paper,1),		
+			Character.valueOf('Q'),new ItemStack(TFCItems.TerraLeather,1)});
+		ModLoader.addRecipe(new ItemStack(Item.book,1),new Object[]{" P "," P ","QP ",Character.valueOf('P'),new ItemStack(Item.paper,1),		
+			Character.valueOf('Q'),new ItemStack(TFCItems.TerraLeather,1)});
 		
 		//remove wool and book and quill recipes
 		RemoveRecipe(new ItemStack(Item.writableBook));
@@ -349,6 +364,8 @@ public class Recipes
 			new ItemStack(Item.clay,1),Character.valueOf('#'),new ItemStack(Item.stick,1)});
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WoolYarn,8),new Object[]{new ItemStack(TFCItems.Wool,1,-1),new ItemStack(TFCItems.Spindle,1,-1)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.WoolCloth,1), new Object[]{"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.WoolYarn,1)});
+		ModLoader.addRecipe(new ItemStack(Item.bed,1),new Object[]{"PPP","QQQ",Character.valueOf('P'),new ItemStack(TFCItems.WoolCloth,1),Character.valueOf('Q'),
+			new ItemStack(TFCItems.SinglePlank,1,-1)});
 		
 		for(int j = 0; j < 3; j++)
 		{
@@ -457,7 +474,6 @@ public class Recipes
 		
 		for(int i = 0; i < 16; i++)
 		{
-			ModLoader.addRecipe(new ItemStack(Doors[i], 1), new Object[] {"11","11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 		}
 		
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Blueprint, 1), new Object[] { new ItemStack(TFCItems.Ink,3,-1), new ItemStack(Item.paper, 1)});
@@ -486,6 +502,8 @@ public class Recipes
 		}
 		if(TFC_Settings.enableVanillaRecipes == true)
 		{
+			ModLoader.addRecipe(new ItemStack(Item.appleRed,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
+			
 			//Terrastone to Cobblestone
 			ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneSedCobble});
 			ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
@@ -977,7 +995,11 @@ public class Recipes
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i)});
         
         //CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneProPickHead, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, -1)});
-
+        //Leather Working
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.helmetLeather, 1), new Object[] { "#####","#   #","#   #", Character.valueOf('#'), TFCItems.FlatLeather});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.plateLeather, 1), new Object[] { "#   #","#####","#####","#####","#####", Character.valueOf('#'), TFCItems.FlatLeather});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.legsLeather, 1), new Object[] { "#####","#####","## ##","## ##","## ##", Character.valueOf('#'), TFCItems.FlatLeather});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.bootsLeather, 1), new Object[] { "##   ","##   ","##   ","#### ","#####", Character.valueOf('#'), TFCItems.FlatLeather});
         
 
 

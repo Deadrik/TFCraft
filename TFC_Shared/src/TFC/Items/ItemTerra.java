@@ -39,6 +39,7 @@ import net.minecraft.world.chunk.*;
 public class ItemTerra extends Item implements ISize
 {
     protected String texture;
+    protected boolean stackable = true;
 
     public ItemTerra(int id) 
     {
@@ -166,7 +167,7 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public boolean canStack() 
 	{
-		return true;
+		return stackable;
 	}
 	
 	@Override

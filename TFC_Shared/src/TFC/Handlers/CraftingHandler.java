@@ -65,9 +65,38 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(entityplayer, iinventory, Recipes.Saws);
 			}
 			else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex || 
-					itemstack.getItem() instanceof ItemTerraFood)
+					itemstack.getItem() instanceof ItemTerraFood || itemstack.itemID == TFCItems.ScrapedHide.shiftedIndex
+					|| itemstack.itemID == TFCItems.Wool.shiftedIndex||itemstack.itemID == TFCItems.TerraLeather.shiftedIndex)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Knives);
+				if(itemstack.itemID == TFCItems.Wool.shiftedIndex&& !entityplayer.worldObj.isRemote){
+					entityplayer.dropItem(TFCItems.Hide.shiftedIndex, 1);
+				}
+				else if(itemstack.itemID == TFCItems.TerraLeather.shiftedIndex){
+					boolean openGui = false;
+					for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+					{             
+						if(iinventory.getStackInSlot(i) == null) 
+						{
+							continue;
+						}
+						if(true)//iinventory.getStackInSlot(i).itemID == TFCItems.TerraLeather.shiftedIndex)
+						{
+							if(iinventory.getStackInSlot(i).stackSize == 1)
+								iinventory.setInventorySlotContents(i, null);
+							else
+							{
+								ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
+								iinventory.setInventorySlotContents(i, is);
+							}
+							
+							openGui = true;
+							itemstack.stackSize = -1;
+						}
+					}
+					if(openGui)
+					entityplayer.openGui(TerraFirmaCraft.instance, 36, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+				}
 			}
 			else if(itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex)
 			{

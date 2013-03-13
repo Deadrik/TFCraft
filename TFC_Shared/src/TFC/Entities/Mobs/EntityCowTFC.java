@@ -181,7 +181,7 @@ public class EntityCowTFC extends EntityAnimalTFC
         int var4;
 
 
-            this.dropItem(Item.leather.shiftedIndex, 5+this.rand.nextInt(15));
+            this.dropItem(TFCItems.Hide.shiftedIndex,1);
 
             if (this.isBurning())
             {

@@ -1,5 +1,7 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.TerraFirmaCraft;
 import TFC.GUI.GuiScreenBookTFC;
 import net.minecraft.client.Minecraft;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemWritableBook;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.client.entity.*;
 
@@ -18,9 +21,13 @@ public class ItemWritableBookTFC extends ItemTerra
     public ItemWritableBookTFC(int par1)
     {
         super(par1);
-        this.setMaxStackSize(1);
+        stackable = false;
     }
-
+    public ItemWritableBookTFC(int par1,String tex){
+    	super(par1,tex);
+    	stackable = false;
+    }
+    
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
@@ -28,14 +35,16 @@ public class ItemWritableBookTFC extends ItemTerra
     {
         //entityplayer.displayGUIBook(par1ItemStack);
     	if(entityplayer.worldObj.isRemote){
-    	((EntityPlayerSP) entityplayer).getMcField().displayGuiScreen(new GuiScreenBookTFC(entityplayer, par1ItemStack, false));
+    		System.out.println(par1ItemStack.hasTagCompound());
+    		System.out.println(par1ItemStack);
+    	Minecraft.getMinecraft().displayGuiScreen(new GuiScreenBookTFC(entityplayer, par1ItemStack, false));
     	}
     	return par1ItemStack;
     }
     
     public static boolean validBookTagContents(NBTTagCompound par0NBTTagCompound)
     {
-        if (!ItemWritableBook.validBookTagPages(par0NBTTagCompound))
+        if (!ItemWritableBookTFC.validBookTagPages(par0NBTTagCompound))
         {
             return false;
         }
@@ -53,6 +62,7 @@ public class ItemWritableBookTFC extends ItemTerra
     /**
      * If this function returns true (or the item is damageable), the ItemStack's NBT tag will be sent to the client.
      */
+    @Override
     public boolean getShareTag()
     {
         return true;
@@ -64,7 +74,7 @@ public class ItemWritableBookTFC extends ItemTerra
         {
             NBTTagCompound var2 = par1ItemStack.getTagCompound();
             NBTTagString var3 = (NBTTagString)var2.getTag("title");
-
+            NBTTagString var4 = (NBTTagString)var2.getTag("author");
             if (var3 != null)
             {
                 return var3.toString();
@@ -72,6 +82,23 @@ public class ItemWritableBookTFC extends ItemTerra
         }
 
         return super.getItemDisplayName(par1ItemStack);
+    }
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {  	
+        if (par1ItemStack.hasTagCompound())
+        {
+            NBTTagCompound var5 = par1ItemStack.getTagCompound();
+            NBTTagString var6 = (NBTTagString)var5.getTag("author");
+
+            if (var6 != null)
+            {
+                par3List.add("\u00a77" + String.format(StatCollector.translateToLocalFormatted("book.byAuthor", new Object[] {var6.data}), new Object[0]));
+            }
+        }
+        superAddInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+    }
+    private void superAddInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4){
+    	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
     }
     
     public static boolean validBookTagPages(NBTTagCompound par0NBTTagCompound)

@@ -92,7 +92,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		rutting = false;
 		ruttVictor = false;
 		pregnant = false;
-		pregnancyTime = 120;
+		pregnancyTime = 4 * TFC_Time.daysInMonth;
 		conception = 0;
 		mateSizeMod = 0;
 		parent = null;
@@ -104,7 +104,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		size_mod = (float) (((rand.nextInt (degreeOfDiversion) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		birthTime = TFC_Time.getTotalTicks();
 		adultTime = birthTime;
-		adultAge = 90;		
+		adultAge = 3 * TFC_Time.daysInMonth;		
 	}
 
 	public EntityAnimalTFC(World par1World,EntityAnimalTFC mother, float F_size)
@@ -120,7 +120,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		rutting = false;
 		ruttVictor = false;
 		pregnant = false;
-		pregnancyTime = 120;
+		pregnancyTime = 4 * TFC_Time.daysInMonth;
 		conception = 0;
 		mateSizeMod = 0;
 		parent = mother;
@@ -131,7 +131,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (float) (((rand.nextInt (getDegree()+1) - getDegree()/2) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
 		birthTime = TFC_Time.getTotalTicks();
-		adultAge = 90;
+		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime + TFC_Settings.dayLength * adultAge;
 	}
 

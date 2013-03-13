@@ -252,6 +252,7 @@ public class TFCItems
 
     public static Item OreChunk;
     public static Item Logs;
+    public static Item Barrel;
     public static Item Javelin;
 
     public static Item boneIgInPick;
@@ -906,6 +907,9 @@ public class TFCItems
     public static Item PrepHide;
     public static Item SheepSkin;
     public static Item TerraLeather;
+    public static Item muttonRaw;
+    public static Item muttonCooked;
+    public static Item FlatLeather;
     
     /**
      * Item Uses Setup
@@ -1252,7 +1256,8 @@ public class TFCItems
 
         OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setItemName("Ore").setIconCoord(0, 3);
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setItemName("Log").setIconCoord(0, 2);
-
+        Barrel = new ItemBarrels(TFC_Settings.getIntFor(config, "item", "barrels", 16299)).setItemName("Barrel").setIconCoord(0,15);
+        
         WoodSupportItemV = new ItemWoodSupport(TFC_Settings.getIntFor(config,"item","WoodSupportItemV", 16300), true).setItemName("WoodSupportItemV").setIconCoord(0, 0);
         WoodSupportItemH = new ItemWoodSupport(TFC_Settings.getIntFor(config,"item","WoodSupportItemH", 16301), false).setItemName("WoodSupportItemH").setIconCoord(0, 1);
         boneIgInPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","boneIgInPick",16302),IgInToolMaterial).setItemName("Bone IgIn Stone Pick").setMaxDamage(IgInStoneUses).setIconCoord(14, 3);
@@ -1552,6 +1557,7 @@ public class TFCItems
         LooseRock = ((ItemTerra) new ItemLooseRock(TFC_Settings.getIntFor(config,"item","LooseRock",num)).setItemName("LooseRock")).setTexturePath(TFC_Textures.RockSheet);num++;
         
         FlatRock = ((ItemTerra) new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setItemName("FlatRock")).setTexturePath(TFC_Textures.RockSheet);num++;
+
         
         IgInStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
         SedStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStonePickaxeHead",num)).setItemName("Stone Pickaxe Head").setIconCoord(0, 3);num++;
@@ -1608,7 +1614,7 @@ public class TFCItems
 		DoorKapok = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorKapok", num++), 15).setItemName("Door Kapok").setIconCoord(15, 15);
 		
 		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
-		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++)).setTextureFile("/gui/items.png").setIconCoord(11, 3).setItemName("book");
+		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++),Item.book.getTextureFile()).setIconCoord(11, 3).setItemName("book");
 		WoolYarn = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolYarn", num++),"/bioxx/terrasprites2.png").setIconCoord(0,10).setItemName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
 		Wool = new ItemTerra(TFC_Settings.getIntFor(config,"item","Wool",num++),"/bioxx/terrasprites2.png").setItemName("Wool").setIconCoord(0,11).setCreativeTab(TFCTabs.TFCMaterials);
 		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++),"/bioxx/terrasprites2.png").setIconCoord(0,8).setItemName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1618,13 +1624,16 @@ public class TFCItems
 		StoneBrick = ((ItemTerra) new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setItemName("ItemStoneBrick")).setTexturePath(TFC_Textures.RockSheet);
 		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++),"/bioxx/terratools.png").setItemName("Mortar").setIconCoord(1,14).setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),0).setItemName("LimeWater").setIconCoord(0,14).setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Hide = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hide",num++),"/bioxx/terraitems.png").setItemName("Hide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
-		SoakedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","SoakedHide",num++),"/bioxx/terraitems.png").setItemName("SoakedHide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
-		ScrapedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","ScrapedHide",num++),"/bioxx/terraitems.png").setItemName("ScrapedHide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
-		PrepHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","PrepHide",num++),"/bioxx/terraitems.png").setItemName("PrepHide").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
-		TerraLeather = new ItemTerra(TFC_Settings.getIntFor(config,"item","TFCLeather",num++),"/bioxx/terraitems.png").setItemName("TFCLeather").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
-		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++),"/bioxx/terraitems.png").setItemName("SheepSkin").setIconCoord(0, 0).setCreativeTab(TFCTabs.TFCMaterials);
-		
+		Hide = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hide",num++),"/bioxx/terratools.png").setItemName("Hide").setIconCoord(2, 14).setCreativeTab(TFCTabs.TFCMaterials);
+		SoakedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","SoakedHide",num++),"/bioxx/terratools.png").setItemName("SoakedHide").setIconCoord(3,14).setCreativeTab(TFCTabs.TFCMaterials);
+		ScrapedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","ScrapedHide",num++),"/bioxx/terratools.png").setItemName("ScrapedHide").setIconCoord(4, 14).setCreativeTab(TFCTabs.TFCMaterials);
+		PrepHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","PrepHide",num++),"/bioxx/terratools.png").setItemName("PrepHide").setIconCoord(5, 14).setCreativeTab(TFCTabs.TFCMaterials);
+		TerraLeather = new ItemTerra(TFC_Settings.getIntFor(config,"item","TFCLeather",num++),"/bioxx/terratools.png").setItemName("TFCLeather").setIconCoord(7, 14).setCreativeTab(TFCTabs.TFCMaterials);
+		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++),"/bioxx/terratools.png").setItemName("SheepSkin").setIconCoord(6, 14).setCreativeTab(TFCTabs.TFCMaterials);
+		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++),"/bioxx/FoodSprites.png").setItemName("muttonRaw").setIconCoord(0,10);
+		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true,"/bioxx/FoodSprites.png", 48).setItemName("muttonCooked").setIconCoord(1,10);
+        FlatLeather = ((ItemTerra) new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setItemName("FlatLeather")).setTexturePath("/bioxx/terratools.png").setIconCoord(8, 14);
+
 		/**Plans*/
         num = 20000;
         SetupPlans(num);

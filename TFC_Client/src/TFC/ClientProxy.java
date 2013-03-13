@@ -121,7 +121,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderCustomMinecart());
-		
+
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeleton());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderTFC.class, new RenderSpider());
@@ -133,7 +133,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityEndermanTFC.class, new RenderEnderman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
-		
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityArrowTFC.class, new RenderArrow());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sulfurRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -167,20 +167,20 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.IngotPileRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
-	
+
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
 		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
-		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityChestRendererTFC());
+		ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 	}
-	
+
 	public void onClientLogin()
 	{
 		ModLoader.getMinecraftInstance().ingameGUI = new GuiHUD(ModLoader.getMinecraftInstance());
 	}
-	
+
 	public void RegisterPlayerApiClasses()
 	{
 		super.RegisterPlayerApiClasses();
@@ -191,7 +191,7 @@ public class ClientProxy extends CommonProxy
 	public World getCurrentWorld() {
 		return ModLoader.getMinecraftInstance().theWorld;
 	}
-	
+
 	public boolean isRemote() {
 		return true;
 	}
@@ -200,7 +200,7 @@ public class ClientProxy extends CommonProxy
 	public File getMinecraftDir() {
 		return ModLoader.getMinecraftInstance().getMinecraftDir();
 	}
-	
+
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) 
@@ -289,6 +289,10 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
 		}
+		case 36:
+		{
+			return new GuiLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
+		}
 
 		}
 		return null;
@@ -326,8 +330,8 @@ public class ClientProxy extends CommonProxy
 			{
 				int var10 = TFC_Climate.getGrassColor(getCurrentWorld(), i + x, j ,k + z);
 				var5 += (var10 & 16711680) >> 16;
-				var6 += (var10 & 65280) >> 8;
-				var7 += var10 & 255;
+			var6 += (var10 & 65280) >> 8;
+		var7 += var10 & 255;
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
@@ -344,15 +348,15 @@ public class ClientProxy extends CommonProxy
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		if(par1IBlockAccess.getBlockId(i, j, k) == TFCBlocks.fruitTreeLeaves.blockID)
 		{
-//			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
-//			{
-//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
-//				rgb = applyColor(var10, rgb);
-//
-//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
-//				return x;
-//			}
-//			else
+			//			if(TFC_Time.currentMonth >= TFC_Time.September && TFC_Time.currentMonth < TFC_Time.December)
+			//			{
+			//				int var10 = ColorizerFoliageTFC.getFoliageYellow();
+			//				rgb = applyColor(var10, rgb);
+			//
+			//				int x = (rgb[0] / 9 & 255) << 16 | (rgb[1] / 9 & 255) << 8 | rgb[2] / 9 & 255;
+			//				return x;
+			//			}
+			//			else
 			{
 				for (int var8 = -1; var8 <= 1; ++var8)
 				{
@@ -482,8 +486,8 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-				int var10 = ColorizerFoliageTFC.getFoliageOrange();
-				rgb = applyColor(var10, rgb);
+						int var10 = ColorizerFoliageTFC.getFoliageOrange();
+						rgb = applyColor(var10, rgb);
 					}
 				}
 
@@ -564,7 +568,7 @@ public class ClientProxy extends CommonProxy
 	{
 		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
 	}
-	
+
 	public void registerHighlightHandler()
 	{
 		MinecraftForge.EVENT_BUS.register(new ChiselHighlightHandler());
@@ -585,7 +589,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("Key_Calendar", "Open Calendar");
 		LR.addStringLocalization("Key_ToolMode", "Cycle Tool Mode");
 		LR.addStringLocalization("Key_LockTool", "Lock Tool Location");
-		
+
 		LR.addStringLocalization("generator.DEFAULT", "TFC Default");
 		//Gems
 		String[] GemNames = {"Ruby","Emerald","Topaz","Sapphire","Opal","Agate",
@@ -605,10 +609,10 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
 		LR.addStringLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
 		LR.addStringLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");
-		
+
 		LR.addStringLocalization("item.RedSteelBucketEmpty.name", "Red Steel Bucket (Empty)");
 		LR.addStringLocalization("item.RedSteelBucketWater.name", "Red Steel Bucket (Water)");
-		
+
 		LR.addStringLocalization("item.BlueSteelBucketEmpty.name", "Blue Steel Bucket (Empty)");
 		LR.addStringLocalization("item.BlueSteelBucketLava.name", "Blue Steel Bucket (Lava)");
 
@@ -659,7 +663,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("effect.bleed","Bleeding");
 		LR.addStringLocalization("tile.Quern.name", "Quern Base");
 		LR.addStringLocalization("item.Quern.name", "Handstone");
-		
+
 		LR.addStringLocalization("item.Blueprint.name", "Blueprint");
 		LR.addStringLocalization("item.Spindle.name", "Spindle");
 		LR.addStringLocalization("item.SpindleHead.name", "Spindle head");
@@ -675,12 +679,12 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.PrepHide.name","Prepared Hide");
 		LR.addStringLocalization("item.TFCLeather.name","Leather");
 		LR.addStringLocalization("item.SheepSkin.name","Sheepskin");
-		
+
 		LR.addStringLocalization("itemGroup.TFCTools", "(TFC) Tools");
 		LR.addStringLocalization("itemGroup.TFCMaterials", "(TFC) Materials");
 		LR.addStringLocalization("itemGroup.TFCUnfinished", "(TFC) Unfinished Items");
 		LR.addStringLocalization("itemGroup.TFCArmor", "(TFC) Armor");
-		
+
 		RegisterTerrain();
 		RegisterMetal();
 		RegisterFood();
@@ -725,6 +729,10 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.SeedsYellowBellPepper.name", "Yellow Bell Pepper Seeds");
 		LR.addStringLocalization("item.SeedsRedBellPepper.name", "Red Bell Pepper Seeds");
 		LR.addStringLocalization("item.SeedsSquash.name", "Squash Seeds");
+		
+		LR.addStringLocalization("item.muttonRaw.name", "Raw Mutton");
+		LR.addStringLocalization("item.muttonCooked.name", "Cooked Mutton");
+		LR.addStringLocalization("item.FlatLeather.name","Leather");
 
 		LR.addStringLocalization("item.Meat.EggCooked.name", "Cooked Egg");
 
@@ -773,7 +781,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.YellowBellPepper.name", "Yellow Bell Pepper");
 		LR.addStringLocalization("item.RedBellPepper.name", "Red Bell Pepper");
 		LR.addStringLocalization("item.Squash.name", "Squash");
-		
+
 		LR.addStringLocalization("item.MealGeneric.name", "Meal");
 
 	}
@@ -796,7 +804,7 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("tile.WallBrick."+rockNames[i]+".name", rockNames[i] + " Brick Wall");
 			LR.addStringLocalization("tile.WallSmooth."+rockNames[i]+".name", rockNames[i] + " Smooth Wall");
 		}
-		
+
 		LR.addStringLocalization("tile.IgInRock.Granite.name", "Granite");
 		LR.addStringLocalization("tile.IgInRock.Diorite.name", "Diorite");
 		LR.addStringLocalization("tile.IgInRock.Gabbro.name", "Gabbro");
@@ -1170,15 +1178,18 @@ public class ClientProxy extends CommonProxy
 		{
 			LR.addStringLocalization("tile.log."+WoodNames[i]+".name", WoodNames[i]);
 			LR.addStringLocalization("tile.leaves."+WoodNames[i]+".name", WoodNames[i] + " Leaves");
+			LR.addStringLocalization("tile.Barrel"+WoodNames[i]+".name", WoodNames[i] + " Barrel");
 			LR.addStringLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
 			LR.addStringLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
 			LR.addStringLocalization("item.WoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
 			LR.addStringLocalization("item.WoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
 			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
+			LR.addStringLocalization("item.Barrel."+WoodNames[i]+".name", WoodNames[i] +" Barrel");
 			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
 			LR.addStringLocalization("tile.ToolRack."+WoodNames[i]+".name", WoodNames[i] + " Tool Rack");
 			LR.addStringLocalization("tile.Door "+WoodNames[i]+".name", WoodNames[i] + " Door");
 			LR.addStringLocalization("item.Door "+WoodNames[i]+".name", WoodNames[i] + " Door");
+
 		}
 		LR.addStringLocalization("item.Stick.name", "Stick");
 	}
@@ -1237,7 +1248,7 @@ public class ClientProxy extends CommonProxy
 			/**
 			 * Armor Related
 			 * */
-			
+
 			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedHelmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
 			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedHelmet2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
 			LR.addStringLocalization("item."+ToolNames[i]+"Helmet.name", ToolNames[i] + " Helmet");
@@ -1284,5 +1295,5 @@ public class ClientProxy extends CommonProxy
 		// TODO Auto-generated method stub
 		return ModLoader.getMinecraftInstance().isFancyGraphicsEnabled();
 	}
-	
+
 }

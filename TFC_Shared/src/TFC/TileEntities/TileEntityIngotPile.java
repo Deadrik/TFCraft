@@ -48,17 +48,28 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public int type;
-
-
+	private static int[] ingots = {(TFCItems.BismuthIngot.shiftedIndex),(TFCItems.BismuthBronzeIngot.shiftedIndex),(TFCItems.BlackBronzeIngot.shiftedIndex),
+		(TFCItems.BlackSteelIngot.shiftedIndex),(TFCItems.BlueSteelIngot.shiftedIndex),(TFCItems.BrassIngot.shiftedIndex),(TFCItems.BronzeIngot.shiftedIndex),
+		(TFCItems.CopperIngot.shiftedIndex),(TFCItems.GoldIngot.shiftedIndex),(TFCItems.WroughtIronIngot.shiftedIndex),(TFCItems.LeadIngot.shiftedIndex),
+		(TFCItems.NickelIngot.shiftedIndex),(TFCItems.PigIronIngot.shiftedIndex),(TFCItems.PlatinumIngot.shiftedIndex),(TFCItems.RedSteelIngot.shiftedIndex),
+		(TFCItems.RoseGoldIngot.shiftedIndex),(TFCItems.SilverIngot.shiftedIndex),(TFCItems.SteelIngot.shiftedIndex),(TFCItems.SterlingSilverIngot.shiftedIndex),
+		(TFCItems.TinIngot.shiftedIndex),(TFCItems.ZincIngot.shiftedIndex)};
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
 		type = -1;
 	}
+	public static int[] getIngots(){
+		return ingots;
+	}
 	
 	public void setType(int i)
 	{
-		this.type = i;	
+		for(int j = 0; j<ingots.length;j++){
+		if(ingots[j] == i){
+			type = j;
+		}
+		}
 	}
 	
 	public int getStack(){
