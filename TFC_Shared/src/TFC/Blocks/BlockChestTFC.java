@@ -65,6 +65,12 @@ public class BlockChestTFC extends BlockTerraContainer
     {
         return false;
     }
+    
+    @Override
+	public int getRenderType()
+	{
+		return 22;
+	}
 
     /**
      * The type of render function that is called for this block
