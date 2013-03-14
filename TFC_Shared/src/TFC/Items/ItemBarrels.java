@@ -123,7 +123,7 @@ public class ItemBarrels extends ItemTerra
 		{
 			return false;
 		}
-
+		itemstack.stackSize--;
 		return true;
 	}
 
