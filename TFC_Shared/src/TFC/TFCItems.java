@@ -910,6 +910,7 @@ public class TFCItems
     public static Item muttonRaw;
     public static Item muttonCooked;
     public static Item FlatLeather;
+    public static Item Beer;
     
     /**
      * Item Uses Setup
@@ -1633,7 +1634,8 @@ public class TFCItems
 		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++),"/bioxx/FoodSprites.png").setItemName("muttonRaw").setIconCoord(0,10);
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true,"/bioxx/FoodSprites.png", 48).setItemName("muttonCooked").setIconCoord(1,10);
         FlatLeather = ((ItemTerra) new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setItemName("FlatLeather")).setTexturePath("/bioxx/terratools.png").setIconCoord(8, 14);
-
+        
+        
 		/**Plans*/
         num = 20000;
         SetupPlans(num);

@@ -67,7 +67,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			(TFCBlocks.BarrelDouglasFir.blockID),(TFCBlocks.BarrelHickory.blockID),(TFCBlocks.BarrelMaple.blockID),(TFCBlocks.BarrelAsh.blockID),
 			(TFCBlocks.BarrelPine.blockID),(TFCBlocks.BarrelSequoia.blockID),(TFCBlocks.BarrelSpruce.blockID),(TFCBlocks.BarrelSycamore.blockID),
 			(TFCBlocks.BarrelWhiteCedar.blockID),(TFCBlocks.BarrelWhiteElm.blockID),(TFCBlocks.BarrelWillow.blockID),(TFCBlocks.BarrelKapok.blockID)};
-	public final int SEALTIME = (int) ((TFC_Time.hourLength*6)/100);//default 80
+	public final int SEALTIME = (int) 0;//((TFC_Time.hourLength*6)/100);//default 80
 
 	public TileEntityBarrel()
 	{
@@ -141,6 +141,13 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 			Type = 3;
 		}
+		if(Type== 1 && itemstack.getItem() == TFCItems.BarleyGrain){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 5;
+		}
 		if(Type==2&&itemstack.getItem() == TFCItems.Hide){
 			itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
 			while(liquidLevel >= 5 && itemstack.stackSize >0){
@@ -182,6 +189,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			return "Limewater";
 		case 3:
 			return "Tannin";
+		case 4:
+			return "Gunpowder";
 		default:
 			return "";
 		}
@@ -341,6 +350,13 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					liquidLevel = (int)Math.min(liquidLevel + 8, 64);
 					Type = 1;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.shiftedIndex;
+				}
+				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 64){
+					liquidLevel = (int)Math.min(liquidLevel + 1, 64);
+					Type = 4;
+					itemstack.stackSize-=1;
+					if(itemstack.stackSize==0)
+						itemstack=null;
 				}
 			}
 			//Do the funky math to find how many molten blocks should be placed
