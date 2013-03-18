@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -88,7 +89,7 @@ public class BlockSand extends BlockTerra2
     @Override
     public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return this.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
     }
 
     /**
@@ -97,13 +98,24 @@ public class BlockSand extends BlockTerra2
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return this.blockIndexInTexture + par2;
+        return icons[par2];
+    }
+    
+    Icon[] icons = new Icon[16];
+
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("sand/Sand"+i);
+		}
     }
 
     @Override
     public void onBlockAdded(World world, int i, int j, int k)
     {
-        world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+        world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
     }
 
     private void tryToFall(World world, int i, int j, int k)
@@ -120,7 +132,7 @@ public class BlockSand extends BlockTerra2
                     for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta);
+                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta,3);
                     }
                 }
                 else
@@ -230,7 +242,7 @@ public class BlockSand extends BlockTerra2
 				world.setBlockWithNotify(i, j, k, 0);
 
 			}
-			world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+			world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
 		}
 	}
     

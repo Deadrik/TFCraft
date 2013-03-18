@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -40,9 +41,9 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockSand2 extends TFC.Blocks.BlockSand
 {
-    public BlockSand2(int i, int j)
+    public BlockSand2(int i)
     {
-        super(i, j);
+        super(i);
     }
     
     @SideOnly(Side.CLIENT)
@@ -56,5 +57,33 @@ public class BlockSand2 extends TFC.Blocks.BlockSand
     		par3List.add(new ItemStack(par1, 1, i));
     }
 
+    /**
+     * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
+     */
+    @Override
+    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return icons[16+par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+    }
+
+    /**
+     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
+     */
+    @Override
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    {
+        return icons[16+par2];
+    }
+    
+    Icon[] icons = new Icon[7];
+
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 16; i < 23; i++)
+		{
+			icons[i] = registerer.func_94245_a("sand/Sand"+i);
+		}
+    }
 
 }
