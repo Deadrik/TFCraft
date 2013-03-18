@@ -98,13 +98,14 @@ public class EntityAnimalTFC extends EntityAnimal
 		parent = null;
 		mate = null;
 		sex = rand.nextInt (2);
-		tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
+		//tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
 		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
-		tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
+		//tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (float) (((rand.nextInt (degreeOfDiversion) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		birthTime = TFC_Time.getTotalTicks();
+		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime;
-		adultAge = 3 * TFC_Time.daysInMonth;		
+
 	}
 
 	public EntityAnimalTFC(World par1World,EntityAnimalTFC mother, float F_size)
@@ -126,13 +127,15 @@ public class EntityAnimalTFC extends EntityAnimal
 		parent = mother;
 		mate = null;
 		sex = rand.nextInt (2);
-		tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
+		//tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
 		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
-		tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
+		//tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (float) (((rand.nextInt (getDegree()+1) - getDegree()/2) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime + TFC_Settings.dayLength * adultAge;
+		System.out.println(adultTime);
+		System.out.println(TFC_Time.getTotalTicks()-adultTime);
 	}
 
 	@Override
@@ -184,7 +187,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		/**
 		 * This Cancels out the growingAge from EntityAgeable
 		 * */
-		int var1 = this.getGrowingAge();       
+		int var1 = this.getGrowingAge();
 		super.onLivingUpdate();
 		this.setGrowingAge(var1);
 
@@ -193,6 +196,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		}
 		long i = TFC_Time.getTotalTicks() - adultTime;
 
+		
 		if (i < 0)
 		{
 			i++;
@@ -481,16 +485,20 @@ public class EntityAnimalTFC extends EntityAnimal
 	}
 
 	public void giveBirth (EntityAnimalTFC entityanimal){
-		entityanimal.setGrowingAge ((int) (TFC_Time.getYearRatio() * entityanimal.adultAge * -TFC_Settings.dayLength));
+		
+		
 		//System.out.println("yep");
 		//System.out.println(posX);
-		entityanimal.setLocationAndAngles (posX,posY,posZ, 0.0F, 0.0F);
-		if(worldObj.spawnEntityInWorld (entityanimal)){
-			children.add(entityanimal);
-		}
-		if(mateForLife){
-			mate.children.add(entityanimal);
-		}
+		entityanimal.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+		entityanimal.rotationYawHead = entityanimal.rotationYaw;
+		entityanimal.renderYawOffset = entityanimal.rotationYaw;
+		entityanimal.initCreature();
+		worldObj.spawnEntityInWorld(entityanimal);
+		entityanimal.setGrowingAge((int) (entityanimal.adultAge * -TFC_Settings.dayLength));
+		//if(worldObj.spawnEntityInWorld (entityanimal)){
+		//	children.add(entityanimal);
+		//}
+		
 	}
 
 	public void eatGrassBonus()
@@ -510,6 +518,7 @@ public class EntityAnimalTFC extends EntityAnimal
 					par1EntityPlayer.addChatMessage("Pregnant");
 				}
 			}
+			par1EntityPlayer.addChatMessage(getGrowingAge()+"");
 		}
 		return super.interact(par1EntityPlayer);
 	}

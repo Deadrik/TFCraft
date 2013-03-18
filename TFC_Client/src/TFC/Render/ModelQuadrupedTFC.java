@@ -33,6 +33,8 @@ import net.minecraft.village.*;
 import net.minecraft.world.*;
 import org.lwjgl.opengl.GL11;
 import TFC.*;
+import TFC.Core.TFC_Settings;
+import TFC.Entities.EntityAnimalTFC;
 
 public class ModelQuadrupedTFC extends ModelBaseTFC
 {
@@ -72,8 +74,12 @@ public class ModelQuadrupedTFC extends ModelBaseTFC
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
     {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-
-        if (this.isChild)
+        age = 0;
+        if (par1Entity instanceof EntityAnimalTFC){
+        	if(((EntityAnimalTFC)par1Entity).getGrowingAge() < 0)
+        	age = (-1F)*((EntityAnimalTFC)par1Entity).getGrowingAge() / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
+        }
+        if (true)//this.isChild)
         {
             float aa =  2F - (1.0F - age);
             GL11.glPushMatrix ();

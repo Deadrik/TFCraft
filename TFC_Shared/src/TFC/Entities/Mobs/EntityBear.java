@@ -270,7 +270,6 @@ public class EntityBear extends EntityTameableTFC
 	{
 		super.onLivingUpdate ();
 		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
-		setSize(1.2F*t,1.2F*t);
 		if (!worldObj.isRemote && !field_25052_g && !hasPath () && onGround)
 		{
 			field_25052_g = true;

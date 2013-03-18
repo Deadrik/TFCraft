@@ -124,7 +124,6 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         float ratio = TFC_Time.getYearRatio();
         float t = (1.0F-(getGrowingAge()/(ratio * adultAge * negDay)));
         //float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
-        setSize(0.9F*t,0.9F*t);
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(3) + 1;

@@ -111,7 +111,6 @@ public class EntityChickenTFC extends EntityAnimalTFC
         super.onLivingUpdate();
         
         float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
-        setSize(0.7F*t,0.7F*t);
         
         this.field_756_e = this.field_752_b;
         this.field_757_d = this.destPos;
