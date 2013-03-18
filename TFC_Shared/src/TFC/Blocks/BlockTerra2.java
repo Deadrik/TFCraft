@@ -6,6 +6,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -38,31 +39,20 @@ public abstract class BlockTerra2 extends Block
 	{
 		super(par1, Material.rock);
 	}
-	
-	protected BlockTerra2(int par1,int par2, Material material) 
-	{
-		super(par1,par2, material);
-	}
 
 	protected BlockTerra2(int par1, Material material) 
 	{
 		super(par1, material);
 	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.BlockSheet2;
-	}
 	
 	@Override
-    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is) 
     {
         //TODO: Debug Message should go here if debug is toggled on
         if(TFC_Settings.enableDebugMode && world.isRemote)
         {
             int metadata = world.getBlockMetadata(i, j, k);
-            System.out.println("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());
+            System.out.println("Meta="+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
         }
     }
 	
@@ -71,4 +61,15 @@ public abstract class BlockTerra2 extends Block
 	{
 		return false;
 	}
+	
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+
+    }
+    
+    public void func_94332_a(IconRegister iconRegisterer)
+    {
+    	super.func_94332_a(iconRegisterer);
+    	registerIcon(iconRegisterer);
+    }
 }

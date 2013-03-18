@@ -10,6 +10,7 @@ import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -38,7 +39,6 @@ import net.minecraft.world.chunk.*;
 
 public class ItemTerra extends Item implements ISize
 {
-    protected String texture;
     protected boolean stackable = true;
 
     public ItemTerra(int id) 
@@ -49,14 +49,18 @@ public class ItemTerra extends Item implements ISize
     public ItemTerra(int id, String tex) 
     {
         this(id);
-        texture = tex;
     }
 
-    @Override
     public String getTextureFile()
     {
-        return texture;
+        return null;
     }
+    
+    /***
+     * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
+     */
+    public Item setIconCoord(int i, int j)
+    {return this;}
     
     @Override
     public int getItemStackLimit()
@@ -69,9 +73,20 @@ public class ItemTerra extends Item implements ISize
 
     public ItemTerra setTexturePath(String t)
     {
-        texture = t;
         return this;
     }
+    
+    public void registerIcon(IconRegister registerer)
+    {
+
+    }
+    
+    public void func_94581_a(IconRegister registerer)
+    {
+    	super.func_94581_a(registerer);
+    	registerIcon(registerer);
+    }
+
     @Override
     public boolean getShareTag()
     {
@@ -120,7 +135,7 @@ public class ItemTerra extends Item implements ISize
 
                 if(meltTemp != -1)
                 {
-                    if(is.itemID == Item.stick.shiftedIndex)
+                    if(is.itemID == Item.stick.itemID)
                         arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
                     else
                         arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));

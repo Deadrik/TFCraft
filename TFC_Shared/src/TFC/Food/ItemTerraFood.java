@@ -87,11 +87,16 @@ public class ItemTerraFood extends ItemFood implements ISize
 		return this;
 	}
 
-	@Override
 	public String getTextureFile()
 	{
 		return texture;
 	}
+	
+	/***
+     * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
+     */
+    public Item setIconCoord(int i, int j)
+    {return this;}
 
 	public ItemTerraFood setTexturePath(String t)
 	{
@@ -185,7 +190,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 	}
 
 	@Override
-	public ItemStack onFoodEaten(ItemStack is, World world, EntityPlayer player)
+	public void onFoodEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		if(!world.isRemote)
 		{
@@ -194,9 +199,8 @@ public class ItemTerraFood extends ItemFood implements ISize
 			playerServer.getFoodStatsTFC().addStats(this);
 			player.getFoodStats().addStats(this);
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-			this.func_77849_c(is, world, player);
+			this.onFoodEaten(is, world, player);
 		}
-		return is;
 	}
 
 	@Override

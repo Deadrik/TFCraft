@@ -94,7 +94,7 @@ public class TFCProvider extends WorldProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getMoonPhase(long par1, float par3)
+	public int getMoonPhase(long par1)
 	{
 		return (int)(par1 / (long)TFC_Settings.dayLength) % 8;
 	}

@@ -101,7 +101,7 @@ public class BlockSedCobble extends BlockTerra2
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2)
+	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
 	{
 		return this.blockIndexInTexture + par2;
 	}

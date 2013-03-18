@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -36,7 +37,7 @@ import net.minecraft.world.gen.feature.*;
 public class ItemGem extends ItemTerra
 {
 	public static String[] gemNames = {"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
-
+	private Icon[] icons = new Icon[5];
 	public ItemGem(int i) 
 	{
 		super(i);
@@ -53,9 +54,9 @@ public class ItemGem extends ItemTerra
 		list.add(new ItemStack(this,0, 4));
 	}
 
-	public int getIconFromDamage(int i)
+	public Icon getIconFromDamage(int i)
 	{
-		return iconIndex+i;
+		return icons[i];
 	}
 
 	@Override
@@ -64,11 +65,10 @@ public class ItemGem extends ItemTerra
 		String s = new StringBuilder().append(super.getItemName()).append(".").append(gemNames[itemstack.getItemDamage()]).toString();
 		return s;
 	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrasprites.png";
-	}
+	
+	public void registerIcon(IconRegister registerer)
+    {
+		icons[0] = registerer.func_94245_a("gems/"+gemNames[0] + getUnlocalizedName());
+    }
 
 }

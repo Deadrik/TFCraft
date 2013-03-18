@@ -41,9 +41,9 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockSand extends BlockTerra2
 {
-    public BlockSand(int i, int j)
+    public BlockSand(int i)
     {
-        super(i, j, Material.sand);
+        super(i, Material.sand);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
     
@@ -86,7 +86,7 @@ public class BlockSand extends BlockTerra2
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
     @Override
-    public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         return this.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
     }
@@ -95,7 +95,7 @@ public class BlockSand extends BlockTerra2
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     @Override
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
         return this.blockIndexInTexture + par2;
     }

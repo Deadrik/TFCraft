@@ -2,6 +2,9 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
@@ -10,6 +13,7 @@ import TFC.TileEntities.TileEntityTerraAnvil;
 
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -45,10 +49,9 @@ public class BlockAnvil extends BlockTerraContainer
 
 
 	private Random random = new Random();
-	public BlockAnvil(int i,int tex)
+	public BlockAnvil(int i)
 	{
 		super(i, Material.iron);
-		this.blockIndexInTexture = tex;
 	}
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
@@ -129,23 +132,21 @@ public class BlockAnvil extends BlockTerraContainer
 		}
     }
     @Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		int meta = getAnvilTypeFromMeta(j);
-		int offset = meta * 2;
 
-		if(i == 0) {
-			return blockIndexInTexture+ 1 + offset;
-		} else if(i == 1) {
-			return blockIndexInTexture+ 1 + offset;
-		} else if(i == 2) {
-			return blockIndexInTexture + offset;
-		} else if(i == 3) {
-			return blockIndexInTexture + offset;
-		} else if(i == 4) {
-			return blockIndexInTexture + offset;
-		} else {
-			return blockIndexInTexture + offset;
+		if(i == 0) 
+		{
+			return textureMapTop[meta];
+		} 
+		else if(i == 1) 
+		{
+			return textureMapTop[meta];
+		} 
+		else 
+		{
+			return textureMapSide[meta];
 		}
 	}
 
@@ -210,7 +211,7 @@ public class BlockAnvil extends BlockTerraContainer
 		return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;
@@ -235,7 +236,8 @@ public class BlockAnvil extends BlockTerraContainer
 			byte0 = 0;
 		}
 		byte0 += meta;
-		world.setBlockMetadataWithNotify(i, j, k, byte0);
+		
+		world.setBlockMetadataWithNotify(i, j, k, (int)byte0, 3);
 
 	}
 	@Override
@@ -273,7 +275,7 @@ public class BlockAnvil extends BlockTerraContainer
 
 						if (var7.hasTagCompound())
 						{
-							var12.func_92014_d().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 						}
 					}
 				}
@@ -313,4 +315,17 @@ public class BlockAnvil extends BlockTerraContainer
 		// TODO Auto-generated method stub
 		return new TileEntityTerraAnvil();
 	}
+	
+	Icon[] textureMapTop = new Icon[8];
+	Icon[] textureMapSide = new Icon[8];
+
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 8; i++)
+		{
+			textureMapTop[i] = registerer.func_94245_a("Anvil_"+i);
+			textureMapSide[i] = registerer.func_94245_a("Anvil_"+i);
+		}
+    }
 }
