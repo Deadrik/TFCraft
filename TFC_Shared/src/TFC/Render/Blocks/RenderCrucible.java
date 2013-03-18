@@ -57,7 +57,7 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 		
-		renderer.setRenderMinMax(0.0625, 0, 0.0625, 0.9375, 0.9375, 0.9375);
+		renderer.setRenderBounds(0.0625, 0, 0.0625, 0.9375, 0.9375, 0.9375);
 		
 		renderInvBlock(block,renderer);
 		

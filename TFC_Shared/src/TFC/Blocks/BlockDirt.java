@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -41,9 +42,11 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockDirt extends BlockTerra2
 {
-    public BlockDirt(int i, int j, Block Farm)
+	Icon[] icons = new Icon[16];
+	
+    public BlockDirt(int i, Block Farm)
     {
-        super(i, j, Material.ground);
+        super(i, Material.ground);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
     
@@ -82,32 +85,35 @@ public class BlockDirt extends BlockTerra2
         return material == Material.lava;
     }
 
-    /**
-     * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
-     */
     @Override
-    public int getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return this.blockIndexInTexture + par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
     }
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
     @Override
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return this.blockIndexInTexture + par2;
+        return icons[par2];
+    }
+    
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("soil/Dirt"+i);
+		}
     }
 
     @Override
     public void onBlockAdded(World world, int i, int j, int k)
     {
-        world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+        world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
     }
 
     @Override
-    public int tickRate()
+    public int tickRate(World world)
     {
         return 3;
     }

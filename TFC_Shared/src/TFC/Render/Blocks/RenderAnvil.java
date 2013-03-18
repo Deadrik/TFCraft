@@ -63,17 +63,17 @@ public class RenderAnvil {
 			if(direction == 0)//x
 			{
 				//top
-				renderblocks.setRenderMinMax(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
+				renderblocks.setRenderBounds(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				//core
-				renderblocks.setRenderMinMax(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
+				renderblocks.setRenderBounds(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				//feet
-				renderblocks.setRenderMinMax(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
+				renderblocks.setRenderBounds(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderMinMax(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
+				renderblocks.setRenderBounds(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				//block.setBlockBounds(0.2F, 0.0F, 0.0F, 0.80F, 0.6F, 1.0F);
@@ -81,17 +81,17 @@ public class RenderAnvil {
 			else if(direction == 1)//z
 			{
 				//top
-				renderblocks.setRenderMinMax(0.1F, 0.4F, 0.3F, 0.9F, 0.6F, 0.7F);
+				renderblocks.setRenderBounds(0.1F, 0.4F, 0.3F, 0.9F, 0.6F, 0.7F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				//core
-				renderblocks.setRenderMinMax(0.15F, 0.0F, 0.35F, 0.85F, 0.4F, 0.65F);
+				renderblocks.setRenderBounds(0.15F, 0.0F, 0.35F, 0.85F, 0.4F, 0.65F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				//feet
-				renderblocks.setRenderMinMax(0.1F, 0.0F, 0.25F, 0.90F, 0.2F, 0.75F);
+				renderblocks.setRenderBounds(0.1F, 0.0F, 0.25F, 0.90F, 0.2F, 0.75F);
 				renderblocks.renderStandardBlock(block, i, j, k);
-				renderblocks.setRenderMinMax(0.0F, 0.0F, 0.20F, 1.00F, 0.1F, 0.80F);
+				renderblocks.setRenderBounds(0.0F, 0.0F, 0.20F, 1.00F, 0.1F, 0.80F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 
 				//block.setBlockBounds(0.0F, 0.0F, 0.20F, 1.0F, 0.6F, 0.8F);
@@ -106,7 +106,7 @@ public class RenderAnvil {
 					ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
 					renderblocks.overrideBlockTexture = Block.blocksList[te.stonePair[0]].getBlockTextureFromSideAndMetadata(0, te.stonePair[1]);
 				}
-				renderblocks.setRenderMinMax(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
+				renderblocks.setRenderBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 				if(te.anvilItemStacks[0] != null && !breaking)
 				{

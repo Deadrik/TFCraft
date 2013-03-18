@@ -375,18 +375,18 @@ public class TFCBlocks
 		TFCBlocks.StoneMMSmooth = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","StoneMMSmooth", 185), 122).setHardness(10F).setResistance(20F).setUnlocalizedName("MMRockSmooth");
 		TFCBlocks.StoneMMBrick = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","StoneMMBrick", 189), 106).setHardness(10F).setResistance(15F).setUnlocalizedName("MMRockBrick");
 
-		TFCBlocks.Dirt = (new TFC.Blocks.BlockDirt(TFC_Settings.getIntFor(config,"block","Dirt", 190), 112,TFCBlocks.tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
-		TFCBlocks.Dirt2 = (new TFC.Blocks.BlockDirt2(TFC_Settings.getIntFor(config,"block","Dirt2", 191), 128,TFCBlocks.tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
-		TFCBlocks.Clay = (new TFC.Blocks.BlockClay(TFC_Settings.getIntFor(config,"block","Clay", 192), 144)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
-		TFCBlocks.Clay2 = (new TFC.Blocks.BlockClay2(TFC_Settings.getIntFor(config,"block","Clay2", 193), 160)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
-		TFCBlocks.ClayGrass = new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass", 194), 144).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
-		TFCBlocks.ClayGrass2 = new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass2", 195), 160).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
-		TFCBlocks.Grass = new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass", 196), 112).setHardness(2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
-		TFCBlocks.Grass2 = new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass2", 197), 128).setHardness(2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");  
-		TFCBlocks.Peat = new TFC.Blocks.BlockPeat(TFC_Settings.getIntFor(config,"block","Peat", 180), 135).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("peat");
-		TFCBlocks.PeatGrass = new TFC.Blocks.BlockPeatGrass(TFC_Settings.getIntFor(config,"block","PeatGrass", 181), 135).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("PeatGrass");
-		TFCBlocks.DryGrass = new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass", 218), 112).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
-		TFCBlocks.DryGrass2 =new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass2", 219), 128).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");  
+		TFCBlocks.Dirt = (new TFC.Blocks.BlockDirt(TFC_Settings.getIntFor(config,"block","Dirt", 190),TFCBlocks.tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
+		TFCBlocks.Dirt2 = (new TFC.Blocks.BlockDirt2(TFC_Settings.getIntFor(config,"block","Dirt2", 191),TFCBlocks.tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
+		TFCBlocks.Clay = (new TFC.Blocks.BlockClay(TFC_Settings.getIntFor(config,"block","Clay", 192))).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
+		TFCBlocks.Clay2 = (new TFC.Blocks.BlockClay2(TFC_Settings.getIntFor(config,"block","Clay2", 193))).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
+		TFCBlocks.ClayGrass = new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass"), 144).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
+		TFCBlocks.ClayGrass2 = new TFC.Blocks.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass2"), 160).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
+		TFCBlocks.Grass = new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass", 196)).setHardness(2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
+		TFCBlocks.Grass2 = new TFC.Blocks.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass2", 197), 16).setHardness(2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");  
+		TFCBlocks.Peat = new TFC.Blocks.BlockPeat(TFC_Settings.getIntFor(config,"block","Peat", 180)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("peat");
+		TFCBlocks.PeatGrass = new TFC.Blocks.BlockPeatGrass(TFC_Settings.getIntFor(config,"block","PeatGrass"), 135).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("PeatGrass");
+		TFCBlocks.DryGrass = new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass", 218)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
+		TFCBlocks.DryGrass2 =new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass2", 219)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");  
 
 		TFCBlocks.Ore = new TFC.Blocks.BlockOre(TFC_Settings.getIntFor(config,"block","Ore", 213), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
 		TFCBlocks.Ore2 = new BlockOre2(TFC_Settings.getIntFor(config,"block","Ore2", 214), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
@@ -449,7 +449,7 @@ public class TFCBlocks
 		Block.blocksList[54] = (new BlockChestTFC(54)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("chest");
 		Block.blocksList[58] = (new TFC.Blocks.BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("workbench");
 		Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("crops");
-		Block.blocksList[78] = (new BlockCustomSnow(78, 66)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("snow").setLightOpacity(1);
+		Block.blocksList[78] = (new BlockCustomSnow(78)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("snow").setLightOpacity(1);
 		Block.blocksList[79] = (new BlockCustomIce(79, 67)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("ice");
 		Block.blocksList[81] = (new BlockCustomCactus(81, 70)).setHardness(0.4F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("cactus");
 		Block.blocksList[83] = (new BlockCustomReed(83, 73)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reeds");

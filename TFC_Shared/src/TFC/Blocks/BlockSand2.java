@@ -63,7 +63,7 @@ public class BlockSand2 extends TFC.Blocks.BlockSand
     @Override
     public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return icons[16+par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
     }
 
     /**
@@ -72,7 +72,7 @@ public class BlockSand2 extends TFC.Blocks.BlockSand
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return icons[16+par2];
+        return icons[par2];
     }
     
     Icon[] icons = new Icon[7];

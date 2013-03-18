@@ -78,7 +78,7 @@ public class RenderDetailed
 						float minZ = 0.5f * subZ;
 						float maxZ = minZ + 0.5f;
 
-						renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
+						renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
 						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 0.95f, 0.95f, 0.95f, meta);
 					}
 				}
@@ -106,7 +106,7 @@ public class RenderDetailed
 						float minZ = 0.125f*subZ;
 						float maxZ = minZ + 0.125f;
 
-						renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
+						renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
 						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 0.95f, 0.95f, 0.95f, meta);
 					}
 				}

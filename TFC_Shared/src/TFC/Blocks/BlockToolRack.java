@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -40,53 +41,47 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockToolRack extends BlockTerraContainer
 {
+	Icon[] icons = new Icon[16];
 	public BlockToolRack(int par1)
 	{
 		super(par1, Material.wood);
-		this.blockIndexInTexture = 96;
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.BlockSheet2;
-	}
-
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 	
+	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return true;
     }
 	
-	/**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
+	@Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
     }
-
+	
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 
-	public int getBlockTexture(int woodType)
+	public Icon getBlockTexture(int woodType)
 	{
-		return blockIndexInTexture + woodType;
+		return icons[woodType];
 	}
-
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.toolRackRenderId;
 	}
-
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
@@ -304,4 +299,24 @@ public class BlockToolRack extends BlockTerraContainer
     		par3List.add(new ItemStack(par1, 1, i));
     }
 
+	@Override
+    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+    }
+
+    @Override
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    {
+        return icons[par2];
+    }
+    
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("wood/WoodSheet/WoodSheet"+i);
+		}
+    }
 }

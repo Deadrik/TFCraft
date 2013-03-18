@@ -96,7 +96,7 @@ public class TFC_CoreRender
         
         float div = 1f / 8;
         
-        renderblocks.setRenderMinMax(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
+        renderblocks.setRenderBounds(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 
         //This is the old ore code that I experimented with
         int over = renderblocks.overrideBlockTexture;
@@ -154,31 +154,31 @@ public class TFC_CoreRender
         	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
         	renderblocks.overrideBlockTexture = tex;
         }
-        renderblocks.setRenderMinMax(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
+        renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
         renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
 
         if (var6 == 0)
         {
-            renderblocks.setRenderMinMax(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
+            renderblocks.setRenderBounds(0.5F, var9, 0.0F, 1.0F, var10, 1.0F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         else if (var6 == 1)
         {
-            renderblocks.setRenderMinMax(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
+            renderblocks.setRenderBounds(0.0F, var9, 0.0F, 0.5F, var10, 1.0F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         else if (var6 == 2)
         {
-            renderblocks.setRenderMinMax(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
+            renderblocks.setRenderBounds(0.0F, var9, 0.5F, 1.0F, var10, 1.0F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         else if (var6 == 3)
         {
-            renderblocks.setRenderMinMax(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
+            renderblocks.setRenderBounds(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
         renderblocks.overrideBlockTexture = -1;
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         return true;
     }
 
@@ -187,32 +187,32 @@ public class TFC_CoreRender
         IBlockAccess blockAccess = renderblocks.blockAccess;
         if(blockAccess.isBlockNormalCube(i, j, k+1) && blockAccess.getBlockId(i, j, k+1) != block.blockID)
         {
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.99F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i, j, k-1) && blockAccess.getBlockId(i, j, k-1) != block.blockID)
         {
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.01F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i+1, j, k) && blockAccess.getBlockId(i+1, j, k) != block.blockID)
         {
-            renderblocks.setRenderMinMax(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.99F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i-1, j, k) && blockAccess.getBlockId(i-1, j, k) != block.blockID)
         {
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.01F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i, j+1, k) && blockAccess.getBlockId(i, j+1, k) != block.blockID)
         {
-            renderblocks.setRenderMinMax(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.99F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
         if(blockAccess.isBlockNormalCube(i, j-1, k) && blockAccess.getBlockId(i, j-1, k) != block.blockID)
         {
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.01F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
         }
 
@@ -225,7 +225,7 @@ public class TFC_CoreRender
 
         float drift = 0.04F + (meta * 0.06F);
 
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0F, 1.0F, drift, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0F, 1.0F, drift, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
         return true;
     }
@@ -239,27 +239,27 @@ public class TFC_CoreRender
         {
             if(blockAccess.getBlockTileEntity(i, j, k) != null && (blockAccess.getBlockId(i, j-1, k) == TFCBlocks.fruitTreeWood.blockID || blockAccess.isBlockOpaqueCube(i, j-1, k)))
             {
-                renderblocks.setRenderMinMax(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
+                renderblocks.setRenderBounds(0.3F, 0.0F, 0.3F, 0.7F, 1.0F, 0.7F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i-1, j, k) == Material.leaves || blockAccess.getBlockId(i-1, j, k) == TFCBlocks.fruitTreeWood.blockID)
             {
-                renderblocks.setRenderMinMax(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
+                renderblocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i+1, j, k) == Material.leaves || blockAccess.getBlockId(i+1, j, k) == TFCBlocks.fruitTreeWood.blockID)
             {
-                renderblocks.setRenderMinMax(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+                renderblocks.setRenderBounds(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i, j, k-1) == Material.leaves || blockAccess.getBlockId(i, j, k-1) == TFCBlocks.fruitTreeWood.blockID)
             {
-            	renderblocks.setRenderMinMax(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
+            	renderblocks.setRenderBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             if(blockAccess.getBlockMaterial(i, j, k+1) == Material.leaves || blockAccess.getBlockId(i, j, k+1) == TFCBlocks.fruitTreeWood.blockID)
             {
-            	renderblocks.setRenderMinMax(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
+            	renderblocks.setRenderBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
         }
@@ -267,16 +267,16 @@ public class TFC_CoreRender
         if(!((TileEntityFruitTreeWood)blockAccess.getBlockTileEntity(i, j, k)).isTrunk && blockAccess.getBlockId(i, j-1, k) != TFCBlocks.fruitTreeWood.blockID && !blockAccess.isBlockOpaqueCube(i, j-1, k))
         {
 
-        	renderblocks.setRenderMinMax(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
+        	renderblocks.setRenderBounds(0.0F, 0.4F, 0.4F, 0.5F, 0.6F, 0.6F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
-            renderblocks.setRenderMinMax(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+            renderblocks.setRenderBounds(0.5F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
-            renderblocks.setRenderMinMax(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
+            renderblocks.setRenderBounds(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.5F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
-            renderblocks.setRenderMinMax(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
+            renderblocks.setRenderBounds(0.4F, 0.4F, 0.5F, 0.6F, 0.6F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
         }
@@ -312,7 +312,7 @@ public class TFC_CoreRender
         float yOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
         float zOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
         
-        renderblocks.setRenderMinMax(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
+        renderblocks.setRenderBounds(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
         renderblocks.renderStandardBlock(block, i, j, k);
         //renderblocks.func_83020_a(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
         renderblocks.clearOverrideBlockTexture();
@@ -335,7 +335,7 @@ public class TFC_CoreRender
         //if the block directly beneath is a Vertical Support
         if((blockAccess.getBlockId(i, j-1, k) == supportIDv))
         {	
-            renderblocks.setRenderMinMax(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+            renderblocks.setRenderBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
             renderblocks.renderStandardBlock(block, i, j, k);
             hasVerticalBeam = true;
         }
@@ -347,14 +347,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -363,12 +363,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -378,12 +378,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
+                renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamX = true;
@@ -395,14 +395,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -411,12 +411,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -426,12 +426,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamZ = true;
@@ -485,7 +485,7 @@ public class TFC_CoreRender
             maxY = 1F;
         }
 
-        renderblocks.setRenderMinMax(minX,minY, minZ, maxX, maxY, maxZ);
+        renderblocks.setRenderBounds(minX,minY, minZ, maxX, maxY, maxZ);
 
         return true;
     }
@@ -504,7 +504,7 @@ public class TFC_CoreRender
         //if the block directly beneath is a Vertical Support or a solid block
         if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == TFCBlocks.WoodSupportV.blockID)
         {	
-            renderblocks.setRenderMinMax(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
+            renderblocks.setRenderBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
             renderblocks.renderStandardBlock(block, i, j, k);
             hasVerticalBeam = true;
         }
@@ -516,14 +516,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -532,12 +532,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.setRenderMinMax(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamX = true;
@@ -547,12 +547,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.setRenderMinMax(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
+                renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
+                renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamX = true;
@@ -564,14 +564,14 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else if(!hasVerticalBeam)//if the block does not contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -580,12 +580,12 @@ public class TFC_CoreRender
             {
                 if(hasVerticalBeam)//if the block does contain a vertical beam
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 else
                 {
-                    renderblocks.setRenderMinMax(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
+                    renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
                     renderblocks.renderStandardBlock(block, i, j, k);
                 }
                 hasHorizontalBeamZ = true;
@@ -595,12 +595,12 @@ public class TFC_CoreRender
         {
             if(hasVerticalBeam)//if the block does contain a vertical beam
             {
-                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             else
             {
-                renderblocks.setRenderMinMax(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
+                renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
             }
             hasHorizontalBeamZ = true;
@@ -615,7 +615,7 @@ public class TFC_CoreRender
         float maxZ = 0.75F;
 
 
-        renderblocks.setRenderMinMax(minX,minY, minZ, maxX, maxY, maxZ);
+        renderblocks.setRenderBounds(minX,minY, minZ, maxX, maxY, maxZ);
 
         return true;
     }
@@ -991,7 +991,7 @@ public class TFC_CoreRender
 
     public static boolean RenderMolten(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
 
         //renderblocks.func_83020_a(0.0F, 0.0F, 0.0F, 0.001F, 0.001F, 0.001F);
@@ -1002,10 +1002,10 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
 
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.02F, 1.0F);
         return true;
     }
 
@@ -1013,11 +1013,11 @@ public class TFC_CoreRender
     {
         IBlockAccess blockAccess = renderblocks.blockAccess;
 
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
         renderblocks.renderStandardBlock(block, i, j, k);
 
 
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9F, 1.0F);
         return true;
     }
 
@@ -1038,15 +1038,15 @@ public class TFC_CoreRender
         {
             //forward
         	if(!breaking) renderblocks.overrideBlockTexture = 86;
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
             if(!breaking) renderblocks.overrideBlockTexture = -1;
-            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+            renderblocks.setRenderBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
             if(!breaking) renderblocks.overrideBlockTexture = 87;
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
         }
@@ -1054,17 +1054,17 @@ public class TFC_CoreRender
         {
             //forward
         	if(!breaking) renderblocks.overrideBlockTexture = 86;
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
             if(!breaking) renderblocks.overrideBlockTexture = -1;
-            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+            renderblocks.setRenderBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
             if(!breaking) renderblocks.overrideBlockTexture = 87;
-            renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
 
@@ -1073,15 +1073,15 @@ public class TFC_CoreRender
         {
             //forward
         	if(!breaking) renderblocks.overrideBlockTexture = 86;
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
             if(!breaking) renderblocks.overrideBlockTexture = -1;
-            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+            renderblocks.setRenderBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
             if(!breaking) renderblocks.overrideBlockTexture = 87;
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
         }
@@ -1089,22 +1089,22 @@ public class TFC_CoreRender
         {
             //forward
         	if(!breaking)  renderblocks.overrideBlockTexture = 86;
-            renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
             if(!breaking) renderblocks.overrideBlockTexture = -1;
-            renderblocks.setRenderMinMax(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+            renderblocks.setRenderBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
             if(!breaking) renderblocks.overrideBlockTexture = 87;
-            renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
+            renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             renderblocks.overrideBlockTexture = -1;
         }
 
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         return true;
     }
 
@@ -1160,9 +1160,9 @@ public class TFC_CoreRender
             if(i1 == 0)
             {
                 //ribs
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.75F, 1F, 0.75F, 0.8F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.75F, 1F, 0.75F, 0.8F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.45F, 1F, 0.9F, 0.5F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.45F, 1F, 0.9F, 0.5F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1195,9 +1195,9 @@ public class TFC_CoreRender
             else if(i1 == 1)
             {
                 //ribs
-                renderblocks.setRenderMinMax(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
+                renderblocks.setRenderBounds(0.2F, 0.0F, 0.0F, 0.25F, 0.75F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.5F, 0.0F, 0.0F, 0.55F, 0.9F, 1.0F);
+                renderblocks.setRenderBounds(0.5F, 0.0F, 0.0F, 0.55F, 0.9F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1230,9 +1230,9 @@ public class TFC_CoreRender
             else if(i1 == 2)
             {
                 //ribs
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.2F, 1F, 0.75F, 0.25F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.5F, 1F, 0.9F, 0.55F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.5F, 1F, 0.9F, 0.55F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1267,9 +1267,9 @@ public class TFC_CoreRender
             else if(i1 == 3)
             {        
                 //ribs
-                renderblocks.setRenderMinMax(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
+                renderblocks.setRenderBounds(0.75F, 0.0F, 0.0F, 0.8F, 0.75F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.45F, 0.0F, 0.0F, 0.5F, 0.9F, 1.0F);
+                renderblocks.setRenderBounds(0.45F, 0.0F, 0.0F, 0.5F, 0.9F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1304,11 +1304,11 @@ public class TFC_CoreRender
             if(i1 == 0)
             {
                 //ribs
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.70F, 1F, 0.3F, 0.75F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.70F, 1F, 0.3F, 0.75F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.4F, 1F, 0.45F, 0.45F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.4F, 1F, 0.45F, 0.45F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.1F, 1F, 0.6F, 0.15F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.1F, 1F, 0.6F, 0.15F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1341,11 +1341,11 @@ public class TFC_CoreRender
             if(i1 == 1)
             {
                 //ribs
-                renderblocks.setRenderMinMax(0.9F, 0.0F, 0.0F, 0.95F, 0.6F, 1.0F);
+                renderblocks.setRenderBounds(0.9F, 0.0F, 0.0F, 0.95F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.6F, 0.0F, 0.0F, 0.65F, 0.45F, 1.0F);
+                renderblocks.setRenderBounds(0.6F, 0.0F, 0.0F, 0.65F, 0.45F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.3F, 0.0F, 0.0F, 0.35F, 0.3F, 1.0F);
+                renderblocks.setRenderBounds(0.3F, 0.0F, 0.0F, 0.35F, 0.3F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1378,11 +1378,11 @@ public class TFC_CoreRender
             if(i1 == 2)
             {               
                 //ribs
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.3F, 1F, 0.3F, 0.35F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.6F, 1F, 0.45F, 0.65F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.6F, 1F, 0.45F, 0.65F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.0F, 0.0F, 0.9F, 1F, 0.6F, 0.95F);
+                renderblocks.setRenderBounds(0.0F, 0.0F, 0.9F, 1F, 0.6F, 0.95F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1415,11 +1415,11 @@ public class TFC_CoreRender
             if(i1 == 3)
             {               
                 //ribs
-                renderblocks.setRenderMinMax(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
+                renderblocks.setRenderBounds(0.7F, 0.0F, 0.0F, 0.75F, 0.3F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.4F, 0.0F, 0.0F, 0.45F, 0.45F, 1.0F);
+                renderblocks.setRenderBounds(0.4F, 0.0F, 0.0F, 0.45F, 0.45F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
-                renderblocks.setRenderMinMax(0.1F, 0.0F, 0.0F, 0.15F, 0.6F, 1.0F);
+                renderblocks.setRenderBounds(0.1F, 0.0F, 0.0F, 0.15F, 0.6F, 1.0F);
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
@@ -1451,7 +1451,7 @@ public class TFC_CoreRender
 
 
         //set the block collision box
-        renderblocks.setRenderMinMax(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 
         return true;
     }

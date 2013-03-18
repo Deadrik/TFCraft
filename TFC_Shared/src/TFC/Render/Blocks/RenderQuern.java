@@ -57,35 +57,35 @@ public class RenderQuern  implements ISimpleBlockRenderingHandler
 			{
 				if(te.hasQuern)
 				{
-					renderblocks.setRenderMinMax(0.0F, 0F, 0.0F, 1F, 0.825F, 1F);
+					renderblocks.setRenderBounds(0.0F, 0F, 0.0F, 1F, 0.825F, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 
 					renderblocks.overrideBlockTexture = Block.blocksList[5].getBlockTextureFromSideAndMetadata(0, 0);
 					if(te.rotation == 0)
 					{
-						renderblocks.setRenderMinMax(0.8F, 0.8, 0.8F, 0.9F, 1, 0.9F);
+						renderblocks.setRenderBounds(0.8F, 0.8, 0.8F, 0.9F, 1, 0.9F);
 						renderblocks.renderStandardBlock(block, i, j, k);
 					}
 					else if(te.rotation == 1)
 					{
-						renderblocks.setRenderMinMax(0.8F, 0.8, 0.1F, 0.9F, 1, 0.2F);
+						renderblocks.setRenderBounds(0.8F, 0.8, 0.1F, 0.9F, 1, 0.2F);
 						renderblocks.renderStandardBlock(block, i, j, k);
 					}
 					else if(te.rotation == 2)
 					{
-						renderblocks.setRenderMinMax(0.1F, 0.8, 0.1F, 0.2F, 1, 0.2F);
+						renderblocks.setRenderBounds(0.1F, 0.8, 0.1F, 0.2F, 1, 0.2F);
 						renderblocks.renderStandardBlock(block, i, j, k);
 					}
 					else if(te.rotation == 3)
 					{
-						renderblocks.setRenderMinMax(0.1F, 0.8, 0.8F, 0.2F, 1, 0.9F);
+						renderblocks.setRenderBounds(0.1F, 0.8, 0.8F, 0.2F, 1, 0.9F);
 						renderblocks.renderStandardBlock(block, i, j, k);
 					}
 
 				}
 				else
 				{
-					renderblocks.setRenderMinMax(0.0F, 0, 0.0F, 1F, 0.625, 1F);
+					renderblocks.setRenderBounds(0.0F, 0, 0.0F, 1F, 0.625, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
@@ -100,7 +100,7 @@ public class RenderQuern  implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 		
-		renderer.setRenderMinMax(0, 0, 0, 1, 0.625, 1);
+		renderer.setRenderBounds(0, 0, 0, 1, 0.625, 1);
 		
 		Tessellator var14 = Tessellator.instance;
 		var14.startDrawingQuads();

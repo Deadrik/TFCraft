@@ -73,7 +73,7 @@ public class RenderWoodConstruct
         			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index]);
         		renderblocks.uvRotateTop = 3;
         		renderblocks.uvRotateBottom = 3;
-        		renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
+        		renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
         		renderblocks.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
         	}
         }
@@ -99,7 +99,7 @@ public class RenderWoodConstruct
         		renderblocks.uvRotateSouth = 1;
         		renderblocks.uvRotateEast = 1;
         		renderblocks.uvRotateWest = 1;
-                renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
+                renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
         		renderblocks.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
         	}
         }
@@ -125,7 +125,7 @@ public class RenderWoodConstruct
         			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[z+dd2]);
         		renderblocks.uvRotateTop = 1;
         		renderblocks.uvRotateBottom = 1;
-                renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
+                renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
         		renderblocks.renderStandardBlockWithColorMultiplier(block, i, j, k, 1, 1, 1);
         	}
         }

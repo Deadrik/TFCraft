@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -41,12 +42,25 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockDirt2 extends BlockDirt
 {	
-    public BlockDirt2(int i, int j, Block Farm)
+	
+	Icon[] icons = new Icon[7];
+
+	@Override
+    public void registerIcon(IconRegister registerer)
     {
-        super(i, j, Farm);
+		for(int i = 16; i < 23; i++)
+		{
+			icons[i] = registerer.func_94245_a("sand/Sand"+i);
+		}
+    }
+	
+    public BlockDirt2(int i, Block Farm)
+    {
+        super(i, Farm);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
+    
     @Override
     public int damageDropped(int i) {
         return i;

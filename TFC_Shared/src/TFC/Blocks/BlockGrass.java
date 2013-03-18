@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -47,78 +48,85 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockGrass extends net.minecraft.block.BlockGrass
 {
-    public BlockGrass(int par1, int par2)
+	private int textureOffset = 0;
+	
+	Icon GrassTopTexture;
+	Icon[] DirtTexture = new Icon[22];
+	
+	public BlockGrass(int par1)
     {
         super(par1);
         this.setTickRandomly(true);
-        this.blockIndexInTexture = par2;
     }
-
-    @Override
-    public String getTextureFile()
+	
+    public BlockGrass(int par1, int texOff)
     {
-    	return TFC_Textures.BlockSheet2;
+        this(par1);
+        textureOffset = texOff;
     }
-
+    
     @Override
     public int damageDropped(int i) {
         return i;
+    }
+    
+    @Override
+    public void func_94332_a(IconRegister registerer)
+    {
+		for(int i = 0; i < 23; i++)
+		{
+			DirtTexture[i] = registerer.func_94245_a("soil/Dirt"+i);
+		}
+		GrassTopTexture = registerer.func_94245_a("GrassTop");
     }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     @Override
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
     {
-        return par1 == 1 ? 255 : (par1 == 0 ? (this.blockIndexInTexture+16) : (this.blockIndexInTexture + par2));
+        return side == 1 ? GrassTopTexture : DirtTexture[meta+textureOffset];
     }
 
     /**
      * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
      */
     @Override
-    public int getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
+    public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int side)
     {
     	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord))];
     	
-        if (par5 == 1)//top
+        if (side == 1)//top
         {
-            return 255;
+            return GrassTopTexture;
         }
-        else if (par5 == 0)//bottom
+        else if (side == 0)//bottom
         {
-            return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+            return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord)];
         }
-        else if (par5 == 2)//-Z
+        else if (side == 2)//-Z
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
-                return 255;
-            else
-                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return GrassTopTexture;
         }
-        else if (par5 == 3)//+Z
+        else if (side == 3)//+Z
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
-                return 255;
-            else
-                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return GrassTopTexture;
         }
-        else if (par5 == 4)//-X
+        else if (side == 4)//-X
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
-                return 255;
-            else
-                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return GrassTopTexture;
         }
-        else if (par5 == 5)//+X
+        else if (side == 5)//+X
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
-                return 255;
-            else
-                return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+                return GrassTopTexture;
         }
-        return this.blockIndexInTexture;
+        
+        return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord)];
     }
 
 

@@ -79,7 +79,7 @@ public class RenderSuperDetailed
                 			if(!breaking)
                             	ForgeHooksClient.bindTexture(Block.blocksList[index].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[index].getTextureFile()));
                 			
-                			renderblocks.setRenderMinMax(minX, minY, minZ, maxX, maxY, maxZ);
+                			renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
                 			RenderDetailed.renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 0.95f, 0.95f, 0.95f, meta);
                 		}
                 	}
