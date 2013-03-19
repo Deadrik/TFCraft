@@ -148,7 +148,6 @@ public class BlockBloomery extends BlockTerraContainer
 			int l = MathHelper.floor_double((double)(entityliving.rotationYaw * 4F / 360F) + 0.5D) & 3;
 			world.setBlockMetadataWithNotify(i, j, k, l, 3);
 		}
-
 	}
 
 	@Override
