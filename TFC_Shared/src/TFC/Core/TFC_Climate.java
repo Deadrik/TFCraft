@@ -60,7 +60,6 @@ public class TFC_Climate
 			factor = (getMaxZPos()-z)/getMaxZPos();
 		else
 			factor = (-getMaxZPos()-z)/-getMaxZPos();
-
 		return factor;
 	}
 
@@ -72,18 +71,18 @@ public class TFC_Climate
 	protected static float getTemp(int day, int x, int z)
 	{
 		float zMod = getZFactor(z);
-		float zTemp = (zMod * getMaxTemperature())-10;
+		float zTemp = (zMod * getMaxTemperature())-20;
 
 		float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/16000;
 
 		Random R = new Random(day * x + z);
 		
 		int _month = TFC_Time.getMonthFromDayOfYear(day);
-		int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-30);
+		int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
 		
 		float mod = getMonthTempFactor(_month, x, z);
 		float modLast = getMonthTempFactor(_lastmonth, x, z);
-		int day2 = day - ((day/30)*30);
+		int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
 		int hour = (int) TFC_Time.getHour();
 
 		if(hour < 0)
@@ -91,9 +90,9 @@ public class TFC_Climate
 		float hourMod = 0;
 
 		if(hour < 12)
-			hourMod = ((float)hour/11) * 0.2F;
+			hourMod = ((float)hour/11) * 0.3F;
 		else
-			hourMod = 0.2F - (((float)(hour-12)/11) * 0.2F);
+			hourMod = 0.3F - (((float)(hour-12)/11) * 0.3F);
 
 		float monthMod = 0;
 		float temp = 0;
@@ -102,10 +101,10 @@ public class TFC_Climate
 
 		if(modLast > mod)
 		{
-			monthMod = ((modLast-mod)/30)*day2;
+			monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
 			monthMod = (modLast - monthMod);
 
-			temp += ((zTemp + dailyTemp));
+			temp += getMonthTemp(_month,x,z) + dailyTemp;//((zTemp + dailyTemp));
 			if(temp < 0)monthMod = 1 - monthMod;
 			temp *= monthMod;
 			temp += (hourMod*(zTemp + dailyTemp));
@@ -113,10 +112,10 @@ public class TFC_Climate
 		}
 		else
 		{
-			monthMod = ((modLast-mod)/30)*day2;
+			monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
 			monthMod = (modLast + monthMod);
 
-			temp += ((zTemp + dailyTemp));
+			temp += getMonthTemp(_month,x,z) + dailyTemp;//((zTemp + dailyTemp));
 			if(temp < 0)monthMod = 1 - monthMod;
 			temp *= monthMod;
 			temp += (hourMod*(zTemp + dailyTemp));
@@ -129,7 +128,7 @@ public class TFC_Climate
 	protected static float getBioTemp(int day, int x, int z)
 	{
 		float zMod = getZFactor(z);
-		float zTemp = (zMod * getMaxTemperature())-10;
+		float zTemp = (zMod * getMaxTemperature())-20;
 
 		float rain = manager.getRainfallLayerAt(x, z).floatdata1;
 		float rainMod = 1-(rain/4000);
@@ -137,7 +136,7 @@ public class TFC_Climate
 		Random R = new Random(day * x + z);
 		
 		int _month = TFC_Time.getMonthFromDayOfYear(day);
-		int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-30);
+		int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
 		
 		float monthModifier = getMonthTempFactor(_month, x, z);
 		float lastMonthModifier = getMonthTempFactor(_lastmonth, x, z);
@@ -151,10 +150,10 @@ public class TFC_Climate
 
 		if(lastMonthModifier > monthModifier)
 		{
-			monthMod = ((lastMonthModifier-monthModifier)/30)*dayOfMonth;
+			monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
 			monthMod = (lastMonthModifier - monthMod);
 
-			temp += ((zTemp));
+			temp += getMonthTemp(_month,x,z);//((zTemp));
 			if(temp < 0)monthMod = 1 - monthMod;
 			temp *= monthMod;
 			temp += (hourMod*(zTemp));
@@ -162,10 +161,10 @@ public class TFC_Climate
 		}
 		else
 		{
-			monthMod = ((lastMonthModifier-monthModifier)/30)*dayOfMonth;
+			monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
 			monthMod = (lastMonthModifier + monthMod);
 
-			temp += ((zTemp));
+			temp += getMonthTemp(_month,x,z);//((zTemp));
 			if(temp < 0)monthMod = 1 - monthMod;
 			temp *= monthMod;
 			temp += (hourMod*(zTemp));
@@ -174,13 +173,51 @@ public class TFC_Climate
 
 		return temp;
 	}
+	
+	protected static float getMonthTemp(int month, int x, int z)
+	{
+		float factor = getZFactor(z);
+		final float MAXTEMP = 35F;
+		
+		double angle = factor * (Math.PI / 2);
+		
+		switch(month)
+		{
+		case 11:
+			return (float)(MAXTEMP -8.33- (Math.cos(angle)*53));
+		case 0:
+			return (float)(MAXTEMP -6.66- (Math.cos(angle)*46));
+		case 1:
+			return (float)(MAXTEMP -5- (Math.cos(angle)*40));
+		case 2:
+			return (float)(MAXTEMP - 3.33- (Math.cos(angle)*33));
+		case 3:
+			return (float)(MAXTEMP -1.66- (Math.cos(angle)*27)); 
+		case 4:
+			return (float)(MAXTEMP - (Math.cos(angle)*20));
+		case 5:
+			return (float)(MAXTEMP - 1.66 - (Math.cos(angle)*27));
+		case 6:
+			return (float)(MAXTEMP - 3.33 - (Math.cos(angle)*33));
+		case 7:
+			return (float)(MAXTEMP -5 - (Math.cos(angle)*40));
+		case 8:
+			return (float)(MAXTEMP -6.66- (Math.cos(angle)*46));
+		case 9:
+			return (float)(MAXTEMP -8.33 - (Math.cos(angle)*53));
+		case 10:
+			return (float)(MAXTEMP-10 - (Math.cos(angle)*60));
+		default:
+			return 1;
+		}
+	}
 
 	protected static float getMonthTempFactor(int month, int x, int z)
 	{
 		float factor = getZFactor(z);
 
 		float diff = 1-factor;
-
+		
 		switch(month)
 		{
 		case 11:
@@ -264,7 +301,7 @@ public class TFC_Climate
 
 	public static float getMaxTemperature()
 	{
-		return 42;
+		return 52;
 	}
 
 	public static float getBioTemperatureHeight(int x, int y, int z)
@@ -272,7 +309,7 @@ public class TFC_Climate
 		float temp = 0;
 		for(int i = 0; i < 12; i++)
 		{
-			float t = getHeightAdjustedBioTemp(i*30, x, y, z);
+			float t = getHeightAdjustedBioTemp(i*TFC_Time.daysInMonth, x, y, z);
 			if(t < 0)
 				t = 0;
 
@@ -286,7 +323,7 @@ public class TFC_Climate
 		float temp = 0;
 		for(int i = 0; i < 24; i++)
 		{
-			float t = getBioTemp(i*15, x, z);
+			float t = getBioTemp(i*TFC_Time.daysInMonth/2, x, z);
 			if(t < 0)
 				t = 0;
 

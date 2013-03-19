@@ -113,6 +113,15 @@ public class TFCProvider extends WorldProvider
 	}
 	
 	@Override
+	public BiomeGenBase getBiomeGenForCoords(int x, int z)
+    {
+        BiomeGenBase biome = worldObj.getBiomeGenForCoordsBody(x, z);
+        if(canSnowAt(x,145,z)){biome.temperature = 0;}
+        else{biome.temperature = 0.16f;}
+        return biome;
+    }
+	
+	@Override
 	public ChunkCoordinates getSpawnPoint()
     {
 		if (!canRespawnHere())
@@ -177,7 +186,7 @@ public class TFCProvider extends WorldProvider
 			return true;
 		return false;
     }
-
+	@Override
     public boolean canSnowAt(int x, int y, int z)
     {
     	if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
