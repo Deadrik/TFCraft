@@ -118,8 +118,8 @@ public class RenderLivingTFC extends Render
             GL11.glScalef(-1.0F, -1.0F, 1.0F);
             this.preRenderCallback(par1EntityLiving, par9);
             GL11.glTranslatef(0.0F, -24.0F * var14 - 0.0078125F, 0.0F);
-            float var15 = par1EntityLiving.prevLegYaw + (par1EntityLiving.legYaw - par1EntityLiving.prevLegYaw) * par9;
-            float var16 = par1EntityLiving.legSwing - par1EntityLiving.legYaw * (1.0F - par9);
+            float var15 = par1EntityLiving.prevLimbYaw + (par1EntityLiving.limbYaw - par1EntityLiving.prevLimbYaw) * par9;
+            float var16 = par1EntityLiving.limbSwing - par1EntityLiving.limbYaw * (1.0F - par9);
 
             if (par1EntityLiving.isChild())
             {
@@ -363,8 +363,67 @@ public class RenderLivingTFC extends Render
      */
     protected void passSpecialRender (EntityLiving par1EntityLiving, double par2, double par4, double par6)
     {
-	if (!Minecraft.isDebugInfoEnabled ())
-	    ;
+    	if (Minecraft.isGuiEnabled() && par1EntityLiving != this.renderManager.livingPlayer && !par1EntityLiving.func_98034_c(Minecraft.getMinecraft().thePlayer) && (par1EntityLiving.func_94059_bO() || par1EntityLiving.func_94056_bM() && par1EntityLiving == this.renderManager.field_96451_i))
+        {
+            float f = 1.6F;
+            float f1 = 0.016666668F * f;
+            double d3 = par1EntityLiving.getDistanceSqToEntity(this.renderManager.livingPlayer);
+            float f2 = par1EntityLiving.isSneaking() ? 32.0F : 64.0F;
+
+            if (d3 < (double)(f2 * f2))
+            {
+                String s = par1EntityLiving.func_96090_ax();
+
+                if (par1EntityLiving.isSneaking())
+                {
+                    FontRenderer fontrenderer = this.getFontRendererFromRenderManager();
+                    GL11.glPushMatrix();
+                    GL11.glTranslatef((float)par2 + 0.0F, (float)par4 + par1EntityLiving.height + 0.5F, (float)par6);
+                    GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+                    GL11.glScalef(-f1, -f1, f1);
+                    GL11.glDisable(GL11.GL_LIGHTING);
+                    GL11.glTranslatef(0.0F, 0.25F / f1, 0.0F);
+                    GL11.glDepthMask(false);
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    Tessellator tessellator = Tessellator.instance;
+                    GL11.glDisable(GL11.GL_TEXTURE_2D);
+                    tessellator.startDrawingQuads();
+                    int i = fontrenderer.getStringWidth(s) / 2;
+                    tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
+                    tessellator.addVertex((double)(-i - 1), -1.0D, 0.0D);
+                    tessellator.addVertex((double)(-i - 1), 8.0D, 0.0D);
+                    tessellator.addVertex((double)(i + 1), 8.0D, 0.0D);
+                    tessellator.addVertex((double)(i + 1), -1.0D, 0.0D);
+                    tessellator.draw();
+                    GL11.glEnable(GL11.GL_TEXTURE_2D);
+                    GL11.glDepthMask(true);
+                    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, 553648127);
+                    GL11.glEnable(GL11.GL_LIGHTING);
+                    GL11.glDisable(GL11.GL_BLEND);
+                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    GL11.glPopMatrix();
+                }
+                else
+                {
+                    this.func_96449_a(par1EntityLiving, par2, par4, par6, s, f1, d3);
+                }
+            }
+        }
+    }
+    
+    protected void func_96449_a(EntityLiving par1EntityLiving, double par2, double par4, double par6, String par8Str, float par9, double par10)
+    {
+        if (par1EntityLiving.isPlayerSleeping())
+        {
+            this.renderLivingLabel(par1EntityLiving, par8Str, par2, par4 - 1.5D, par6, 64);
+        }
+        else
+        {
+            this.renderLivingLabel(par1EntityLiving, par8Str, par2, par4, par6, 64);
+        }
     }
 
 

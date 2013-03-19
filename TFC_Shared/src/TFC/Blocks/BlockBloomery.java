@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -39,10 +40,10 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockBloomery extends BlockTerraContainer
 {
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
+	Icon textureSide;
+	Icon textureOn;
+	Icon textureOff;
+	
 	public static final int headBlockToFootBlockMap[][] = {
 		{
 			0, 1
@@ -55,10 +56,9 @@ public class BlockBloomery extends BlockTerraContainer
 		}
 	};
 
-	public BlockBloomery(int i, int tex)
+	public BlockBloomery(int i)
 	{
 		super(i, Material.rock);
-		this.blockIndexInTexture = tex;
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
@@ -76,10 +76,10 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
+		int xCoord = i;
+		int yCoord = j;
+		int zCoord = k;
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
 
@@ -104,40 +104,49 @@ public class BlockBloomery extends BlockTerraContainer
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		int lit = (j & 4) == 4 ? 1 : 0;
 		j = j & 3;
-		
-		if(i == 0 || i == 1) {
-			return 64;
-		}
 
 		if(j == 0 && i == 2	) {
-			return blockIndexInTexture+lit;
+			if(lit == 1)
+				return textureOn;
+			return textureOff;
 		}
 		if(j == 1 && i == 5) {
-			return blockIndexInTexture+lit;
+			if(lit == 1)
+				return textureOn;
+			return textureOff;
 		}
 		if(j == 2 && i == 3) {
-			return blockIndexInTexture+lit;
+			if(lit == 1)
+				return textureOn;
+			return textureOff;
 		}
 		if(j == 3 && i == 4) {
-			return blockIndexInTexture+lit;
+			if(lit == 1)
+				return textureOn;
+			return textureOff;
 		}
-		return 64;
+		return textureSide;
 	}
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		textureSide = iconRegisterer.func_94245_a("devices/Bloomery Side");
+		textureOn = iconRegisterer.func_94245_a("devices/Bloomery On");
+		textureOff = iconRegisterer.func_94245_a("devices/Bloomery Off");
+    }
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack par6ItemStack)
 	{
 		if(!world.isRemote)
 		{
-			xCoord = i;
-			yCoord = j;
-			zCoord = k;
 			int l = MathHelper.floor_double((double)(entityliving.rotationYaw * 4F / 360F) + 0.5D) & 3;
-			world.setBlockMetadataWithNotify(i, j, k, l);
+			world.setBlockMetadataWithNotify(i, j, k, l, 3);
 		}
 
 	}
@@ -147,7 +156,7 @@ public class BlockBloomery extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			meta = world.getBlockMetadata(i, j, k);
+			int meta = world.getBlockMetadata(i, j, k);
 			int[] dir = headBlockToFootBlockMap[meta & 3];
 			if(world.getBlockId(i+dir[0], j, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
@@ -183,7 +192,7 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		meta = world.getBlockMetadata(i, j, k) & 3;
+		int meta = world.getBlockMetadata(i, j, k) & 3;
 		int[] dir = headBlockToFootBlockMap[meta];
 
 

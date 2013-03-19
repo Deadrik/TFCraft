@@ -53,7 +53,10 @@ public class RenderToolRack
 		if(te != null)
 		{
 			renderblocks.overrideBlockTexture = ((BlockToolRack)block).getBlockTexture(te.woodType);
-
+			double minX = 0;
+			double maxX = 0.5;
+			double minZ = 0;
+			double maxZ = 0.5;
 			//First we render the rack itself.
 			if(dir == 0)
 			{
@@ -61,22 +64,22 @@ public class RenderToolRack
 
 				renderRackDir0(block, i, j, k, renderblocks, 0.3f);
 				
-				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				int state = tessellator.drawMode;
+				tessellator.draw();
+				tessellator.startDrawingQuads();
 				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 				tessellator.setColorRGBA_F(1, 1, 1, 1);
+
 				if(te.storage[0] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[0].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 					
 					tessellator.addVertexWithUV(i, 			j + 0.8, 	k + 0.94, 	minX, minZ);
@@ -88,16 +91,13 @@ public class RenderToolRack
 				}
 				if(te.storage[1] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[1].itemID].getIconIndex(te.storage[1]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[1].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0.5f, 0.2f, 0.0f);
 
 					tessellator.addVertexWithUV(i, 			j + 0.8, 	k + 0.94, 	minX, minZ);
@@ -109,16 +109,13 @@ public class RenderToolRack
 				}
 				if(te.storage[2] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[2].itemID].getIconIndex(te.storage[2]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[2].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
 					tessellator.addVertexWithUV(i, 			j + 0.8, 	k + 0.94, 	minX, minZ);
@@ -130,16 +127,13 @@ public class RenderToolRack
 				}
 				if(te.storage[3] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[3].itemID].getIconIndex(te.storage[3]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[3].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0.5f, -0.2f, 0.0f);
 
 					tessellator.addVertexWithUV(i, 			j + 0.8, 	k + 0.94, 	minX, minZ);
@@ -149,6 +143,8 @@ public class RenderToolRack
 
 					tessellator.addTranslation(-0.5f, 0.2f, 0f);
 				}
+				tessellator.draw();
+				tessellator.startDrawing(state);
 			}
 			else if(dir == 1)
 			{
@@ -156,22 +152,22 @@ public class RenderToolRack
 
 				renderRackDir1(block, i, j, k, renderblocks, 0.3f);
 				
-				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				int state = tessellator.drawMode;
+				tessellator.draw();
+				tessellator.startDrawingQuads();
 				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 				tessellator.setColorRGBA_F(1, 1, 1, 1);
+				
 				if(te.storage[0] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[0].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 					
 					tessellator.addVertexWithUV(i + 0.06, 	j + 0.8, 	k, 			minX, minZ);
@@ -183,15 +179,12 @@ public class RenderToolRack
 				}
 				if(te.storage[1] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[1].itemID].getIconIndex(te.storage[1]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[1].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
 
 					tessellator.addTranslation(0.0f, 0.2f, 0.5f);
 
@@ -204,15 +197,12 @@ public class RenderToolRack
 				}
 				if(te.storage[2] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[2].itemID].getIconIndex(te.storage[2]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[2].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
 
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
@@ -225,15 +215,12 @@ public class RenderToolRack
 				}
 				if(te.storage[3] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[3].itemID].getIconIndex(te.storage[3]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 16	) / 256D;
-					double maxX = ((double)x + 0	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[3].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
 
 					tessellator.addTranslation(0.0f, -0.2f, 0.5f);
 
@@ -244,6 +231,8 @@ public class RenderToolRack
 
 					tessellator.addTranslation(0.0f, 0.2f, -0.5f);
 				}
+				tessellator.draw();
+				tessellator.startDrawing(state);
 			}
 			else if(dir == 2)
 			{
@@ -251,22 +240,22 @@ public class RenderToolRack
 
 				renderRackDir2(block, i, j, k, renderblocks, 0.3f);
 
-				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				int state = tessellator.drawMode;
+				tessellator.draw();
+				tessellator.startDrawingQuads();
 				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 				tessellator.setColorRGBA_F(1, 1, 1, 1);
+				
 				if(te.storage[0] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[0].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 
 					tessellator.addVertexWithUV(i, 			j + 0.3, 	k + 0.06, 	minX, maxZ);
@@ -279,15 +268,13 @@ public class RenderToolRack
 
 				if(te.storage[1] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[1].itemID].getIconIndex(te.storage[1]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[1].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 
 					tessellator.addTranslation(0.5f, 0.2f, 0.0f);
 
@@ -301,16 +288,13 @@ public class RenderToolRack
 				
 				if(te.storage[2] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[2].itemID].getIconIndex(te.storage[2]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[2].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
 					tessellator.addVertexWithUV(i, 			j + 0.3, 	k + 0.08, 	minX, maxZ);
@@ -323,15 +307,12 @@ public class RenderToolRack
 				
 				if(te.storage[3] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[3].itemID].getIconIndex(te.storage[3]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[3].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
 
 					tessellator.addTranslation(0.5f, -0.2f, 0.0f);
 
@@ -342,6 +323,8 @@ public class RenderToolRack
 
 					tessellator.addTranslation(-0.5f, 0.2f, 0f);
 				}
+				tessellator.draw();
+				tessellator.startDrawing(state);
 			}
 			else if(dir == 3)
 			{
@@ -349,22 +332,21 @@ public class RenderToolRack
 
 				renderRackDir3(block, i, j, k, renderblocks, 0.3f);
 				
-				ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
 				Tessellator tessellator = Tessellator.instance;
+				int state = tessellator.drawMode;
+				tessellator.draw();
+				tessellator.startDrawingQuads();
 				tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 				tessellator.setColorRGBA_F(1, 1, 1, 1);
 				if(te.storage[0] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[0].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 					
 					tessellator.addVertexWithUV(i + 0.92, 	j + 0.3, 	k, 			minX, maxZ);
@@ -376,16 +358,13 @@ public class RenderToolRack
 				}
 				if(te.storage[1] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[1].itemID].getIconIndex(te.storage[1]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
-
+					Icon itemIcon = te.storage[1].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
+					
 					tessellator.addTranslation(0.0f, 0.2f, 0.5f);
 
 					tessellator.addVertexWithUV(i + 0.92, 	j + 0.3, 	k, 			minX, maxZ);
@@ -397,15 +376,12 @@ public class RenderToolRack
 				}
 				if(te.storage[2] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[2].itemID].getIconIndex(te.storage[2]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[2].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
 
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
@@ -418,15 +394,12 @@ public class RenderToolRack
 				}
 				if(te.storage[3] != null)
 				{
-					renderblocks.overrideBlockTexture = Item.itemsList[te.storage[3].itemID].getIconIndex(te.storage[3]);
-
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					Icon itemIcon = te.storage[3].getIconIndex();
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					minX = itemIcon.func_94209_e();
+					maxX = itemIcon.func_94212_f();
+					minZ = itemIcon.func_94206_g();
+					maxZ = itemIcon.func_94210_h();
 
 					tessellator.addTranslation(0f, -0.2f, 0.5f);
 
@@ -437,9 +410,11 @@ public class RenderToolRack
 
 					tessellator.addTranslation(0f, 0.2f, -0.5f);
 				}
+				tessellator.draw();
+				tessellator.startDrawing(state);
 			}
 		}
-
+		ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/terrain.png");
 		renderblocks.clearOverrideBlockTexture();
 		return true;	
 	}

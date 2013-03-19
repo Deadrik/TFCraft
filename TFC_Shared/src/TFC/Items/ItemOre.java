@@ -72,7 +72,7 @@ public class ItemOre extends ItemTerra
 		}
 	}
 
-	public int getIconFromDamage(int par1)
+	public Icon getIconFromDamage(int par1)
 	{
 	    if(par1 == 35)
 	        return this.iconIndex+6;

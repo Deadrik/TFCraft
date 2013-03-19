@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -41,10 +42,12 @@ import net.minecraft.world.gen.feature.*;
 public class BlockFirepit extends BlockTerraContainer
 {
 
-	public BlockFirepit(int i, int tex)
+	Icon textureOn;
+	Icon textureOff;
+	
+	public BlockFirepit(int i)
 	{
 		super(i, Material.ground);
-		this.blockIndexInTexture = tex;
 		this.setBlockBounds(0, 0, 0, 1, 0.1f, 1);
 	}
 
@@ -68,7 +71,7 @@ public class BlockFirepit extends BlockTerraContainer
 		{
 			return true;
 		} 
-		else if(itemid == TFCItems.FireStarter.shiftedIndex)
+		else if(itemid == TFCItems.FireStarter.itemID)
 		{
 			if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k) != null)
 			{
@@ -81,8 +84,7 @@ public class BlockFirepit extends BlockTerraContainer
 					int dam = entityplayer.inventory.getCurrentItem().getItemDamage();
 					entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 							new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
-					world.setBlockMetadata(i, j, k, 1);
-					world.markBlockForUpdate(i, j, k);
+					world.setBlockMetadataWithNotify(i, j, k, 1, 3);
 				}
 			}
 			return true;
@@ -102,22 +104,22 @@ public class BlockFirepit extends BlockTerraContainer
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(j > 0)
-			return blockIndexInTexture+1;
+			return textureOn;
 		
-		return blockIndexInTexture;
+		return textureOff;
 	}
 	
 	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
     {
-        if(entity instanceof EntityItem && ((EntityItem)entity).func_92014_d().getItem() instanceof ItemLogs)
+        if(entity instanceof EntityItem && ((EntityItem)entity).getEntityItem().getItem() instanceof ItemLogs)
         {
             if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)!=null)
             {
-                ItemStack is = ((EntityItem)entity).func_92014_d();
+                ItemStack is = ((EntityItem)entity).getEntityItem();
                 TileEntityTerraFirepit te;
                 te = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
                 if(te.fireItemStacks[0] == null)
@@ -234,7 +236,7 @@ public class BlockFirepit extends BlockTerraContainer
     }
     
     @Override
-    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) {
+    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
         Eject(par1World,par2,par3,par4);
     }
 
@@ -267,4 +269,11 @@ public class BlockFirepit extends BlockTerraContainer
 	{
 		return new TileEntityTerraFirepit();
 	}
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		textureOn = iconRegisterer.func_94245_a("devices/Firepit On");
+		textureOff = iconRegisterer.func_94245_a("devices/Firepit Off");
+    }
 }

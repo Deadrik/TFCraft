@@ -93,7 +93,7 @@ public class RenderCustomMinecart extends Render
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-var24, 0.0F, 0.0F, 1.0F);
-        float var28 = (float)par1EntityMinecart.func_70496_j() - par9;
+        float var28 = (float)par1EntityMinecart.getRollingAmplitude() - par9;
         float var30 = (float)par1EntityMinecart.getDamage() - par9;
 
         if (var30 < 0.0F)
@@ -103,7 +103,7 @@ public class RenderCustomMinecart extends Render
 
         if (var28 > 0.0F)
         {
-            GL11.glRotatef(MathHelper.sin(var28) * var28 * var30 / 10.0F * (float)par1EntityMinecart.func_70493_k(), 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(MathHelper.sin(var28) * var28 * var30 / 10.0F * (float)par1EntityMinecart.getRollingDirection(), 1.0F, 0.0F, 0.0F);
         }
 
 

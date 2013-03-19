@@ -128,7 +128,7 @@ public class BlockSand extends BlockTerra2
                 byte byte0 = 32;
                 if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
                 {
-                    world.setBlockWithNotify(i, j, k, 0);
+                    world.setBlock(i, j, k, 0);
                     for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
@@ -198,28 +198,28 @@ public class BlockSand extends BlockTerra2
 				{
 				case 0:
 				{
-					world.setBlockAndMetadata(i+1, j, k, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i+1, j, k, blockID, meta, 3);
 					tryToFall(world, i+1, j, k);
 					world.setBlock(i, j, k, 0);
 					break;
 				}
 				case 1:
 				{
-					world.setBlockAndMetadata(i, j, k+1, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i, j, k+1, blockID,meta, 3);
 					tryToFall(world, i, j, k+1);
 					world.setBlock(i, j, k, 0);
 					break;
 				}
 				case 2:
 				{
-					world.setBlockAndMetadata(i-1, j, k, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i-1, j, k, blockID,meta, 3);
 					tryToFall(world, i-1, j, k);
 					world.setBlock(i, j, k, 0);
 					break;
 				}
 				case 3:
 				{
-					world.setBlockAndMetadata(i, j, k-1, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i, j, k-1, blockID,meta, 3);
 					tryToFall(world, i, j, k-1);
 					world.setBlock(i, j, k, 0);
 					break;
@@ -238,8 +238,8 @@ public class BlockSand extends BlockTerra2
 			if(world.getBlockId(i, j-1, k) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlockAndMetadata(i, j-1, k, blockID, meta);
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, meta, 3);
+				world.setBlock(i, j, k, 0);
 
 			}
 			world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));

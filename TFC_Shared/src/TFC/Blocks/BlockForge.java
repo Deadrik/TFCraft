@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -42,26 +43,22 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockForge extends BlockTerraContainer
 {
+	Icon textureOn;
+	Icon textureOff;
 
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-
-	public BlockForge(int i, int tex)
+	public BlockForge(int i)
 	{
 		super(i, Material.sand);
-		this.blockIndexInTexture = tex;
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 0.9F, 1F);
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
+		int xCoord = i;
+		int yCoord = j;
+		int zCoord = k;
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
 		if(equippedItem != null)
@@ -97,7 +94,7 @@ public class BlockForge extends BlockTerraContainer
 						entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, 
 								new ItemStack(entityplayer.getCurrentEquippedItem().getItem(),ss,dam));
 					}
-					world.setBlockMetadata(i, j, k, 2);
+					world.setBlockMetadataWithNotify(i, j, k, 2, 3);
 				}
 			}
 			return true;
@@ -119,11 +116,22 @@ public class BlockForge extends BlockTerraContainer
 			return true;
 		}
 	}
+	
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
-		return blockIndexInTexture+j;
+		if(j > 0)
+			return textureOn;
+		
+		return textureOff;
 	}
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		textureOn = iconRegisterer.func_94245_a("devices/Forge On");
+		textureOff = iconRegisterer.func_94245_a("devices/Forge Off");
+    }
 
 	public boolean getIsFireLit(int i)
 	{
@@ -162,7 +170,7 @@ public class BlockForge extends BlockTerraContainer
 				{
 					for (int k = -1; k < 2; k++)
 					{
-						if(world.getBlockId(xCoord+i, yCoord+j, zCoord+k) == 0) {
+						if(world.getBlockId(x+i, y+j, z+k) == 0) {
 							numAirBlocks++;
 						}
 					}

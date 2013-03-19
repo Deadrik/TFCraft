@@ -132,7 +132,7 @@ public class BlockDirt extends BlockTerra2
                     for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta);
+                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta, 3);
                     }
                 }
                 else
@@ -201,14 +201,14 @@ public class BlockDirt extends BlockTerra2
 				case 0:
 				{
 					world.setBlock(i, j, k, 0);
-					world.setBlockAndMetadata(i+1, j, k, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i+1, j, k, blockID, meta, 3);
 					tryToFall(world, i+1, j, k);
 					break;
 				}
 				case 1:
 				{
 					world.setBlock(i, j, k, 0);
-					world.setBlockAndMetadata(i, j, k+1, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i, j, k+1, blockID, meta, 3);
 					tryToFall(world, i, j, k+1);
 					break;
 				}

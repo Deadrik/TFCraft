@@ -116,7 +116,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
     }
     
     @Override
-    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) {
+    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) {
         Eject(par1World,par2,par3,par4);
     }
 
