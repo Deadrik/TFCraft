@@ -69,7 +69,7 @@ public class ItemBarrels extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
+		for(int i = 0; i < blockNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -149,7 +149,7 @@ public class ItemBarrels extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("/wood/"+MetaNames[i]+" Barrel");
+			registerer.func_94245_a("/wood/"+blockNames[i]+" Barrel");
     }
 
 	@Override

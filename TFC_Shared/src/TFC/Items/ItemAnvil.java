@@ -42,7 +42,7 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
 
-public class ItemAnvil extends ItemTerraBlock
+public class ItemAnvil extends ItemTerra
 {
 	public int anvilId;
 	public AnvilReq req;
@@ -85,20 +85,6 @@ public class ItemAnvil extends ItemTerraBlock
 		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
-	}
-	
-	@Override
-	public Icon getIconFromDamage(int meta)
-	{        
-		return icons[meta];
-	}
-	
-	Icon[] icons = new Icon[11];
-	
-	@Override
-	public void registerIcon(IconRegister i_Reg){
-		for(int i = 0; i < 11; i++)
-			i_Reg.func_94245_a("/wood/"+MetaNames[i]+" Plank");
 	}
 
 	@Override

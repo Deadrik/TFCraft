@@ -346,7 +346,7 @@ public class WorldGenMinableTFC extends WorldGenerator
                         if(d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && isCorrectRockType && 
                                 (m == LayerMeta || LayerMeta == -1))
                         {
-                            world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta, 3);
+                            world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta, 0);
                             if(doOnce)
                             {
                             	if(yCoord >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))

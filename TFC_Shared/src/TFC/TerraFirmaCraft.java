@@ -126,8 +126,11 @@ public class TerraFirmaCraft
 		
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");
+		DimensionManager.unregisterProviderType(-1);
 		DimensionManager.registerProviderType(-1, TFCProviderHell.class, true);
+		DimensionManager.unregisterProviderType(0);
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
+		DimensionManager.unregisterProviderType(1);
 		DimensionManager.registerProviderType(1, TFCProvider.class, true);
 		
 		//DimensionManager.registerProviderType(-2, TFCProviderCOTE.class, false);

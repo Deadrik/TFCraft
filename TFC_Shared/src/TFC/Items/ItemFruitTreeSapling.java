@@ -97,8 +97,8 @@ public class ItemFruitTreeSapling extends ItemTerra
 	@Override
 	public void registerIcon(IconRegister registerer)
     {
-		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("/tfcplants/"+Names[i]+" Plank");
+		for(int i = 0; i < Names.length; i++)
+			registerer.func_94245_a("/tfcplants/"+Names[i]+" Fruit Sapling");
     }
     
     @Override

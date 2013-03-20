@@ -1702,6 +1702,7 @@ public class TFCItems
         ((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.RoseGoldHammerHead.itemID);
         ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);
         
+        System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
         if (config != null) {
             config.save();
         }
