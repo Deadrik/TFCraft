@@ -150,7 +150,7 @@ public class WorldGenPlants implements IWorldGenerator
 				if (world.isAirBlock(xCoord, yCoord, zCoord) && 
 						((BlockCustomTallGrass)Block.blocksList[Block.tallGrass.blockID]).canBlockStay(world, xCoord, yCoord, zCoord))
 				{
-					world.setBlockAndMetadata(xCoord, yCoord, zCoord, Block.tallGrass.blockID, 1);
+					world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, Block.tallGrass.blockID, 1, 3);
 				}
 			}
 		}

@@ -52,50 +52,50 @@ public class WorldGenCustomFruitTree2 extends WorldGenerator
     {
         if(world.getBlockId(i, j, k) == 0 && j < 250)
         {
-            world.setBlockAndMetadata(i, j, k, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+            world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setHeight(0);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k)).setBirth();
         }
         if(world.getBlockId(i, j+1, k) == 0)
         {
-            world.setBlockAndMetadata(i, j+1, k, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+            world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setHeight(1);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setBirth();
         }
         if(world.getBlockId(i, j+2, k) == 0)
         {
-            world.setBlockAndMetadata(i, j+2, k, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+            world.setBlockAndMetadataWithNotify(i, j+2, k, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setHeight(2);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+2, k)).setBirth();
 
             if(world.getBlockId(i+1, j+2, k) == 0)
             {
-                world.setBlockAndMetadata(i+1, j+2, k, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+                world.setBlockAndMetadataWithNotify(i+1, j+2, k, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
                 SurroundWithLeaves(world,i+1,j+2,k);
             }
             if(world.getBlockId(i-1, j+2, k) == 0)
             {
-                world.setBlockAndMetadata(i-1, j+2, k, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+                world.setBlockAndMetadataWithNotify(i-1, j+2, k, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
                 SurroundWithLeaves(world,i-1,j+2,k);
             }
             if(world.getBlockId(i, j+2, k+1) == 0)
             {
-                world.setBlockAndMetadata(i, j+2, k+1, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+                world.setBlockAndMetadataWithNotify(i, j+2, k+1, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
                 SurroundWithLeaves(world,i,j+2,k+1);
             }
             if(world.getBlockId(i, j+2, k-1) == 0)
             {
-                world.setBlockAndMetadata(i, j+2, k-1, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+                world.setBlockAndMetadataWithNotify(i, j+2, k-1, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
                 SurroundWithLeaves(world,i,j+2,k-1);
             }
 
         }
         if(world.getBlockId(i, j+3, k) == 0 || world.getBlockId(i, j+3, k) == leavesId)
         {
-            world.setBlockAndMetadata(i, j+3, k, TFCBlocks.fruitTreeWood.blockID, metaId+8);
+            world.setBlockAndMetadataWithNotify(i, j+3, k, TFCBlocks.fruitTreeWood.blockID, metaId+8, 3);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setHeight(3);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+3, k)).setBirth();
@@ -115,7 +115,7 @@ public class WorldGenCustomFruitTree2 extends WorldGenerator
                 for (int z = 1; z >= -1; z--)
                 {
                     if(world.getBlockId(i+x, j+y, k+z) == 0) {
-                        world.setBlockAndMetadata(i+x, j+y, k+z, leavesId, metaId);
+                        world.setBlockAndMetadataWithNotify(i+x, j+y, k+z, leavesId, metaId, 3);
                     }
                 }
             }

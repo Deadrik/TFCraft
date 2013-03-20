@@ -50,7 +50,7 @@ import net.minecraft.src.ModLoader;
 public class BlockSed extends BlockCollapsable
 {
     public BlockSed(int i, Material material, int id) {
-        super(i,64, material, id);
+        super(i, material, id);
     }
 
     @SideOnly(Side.CLIENT)

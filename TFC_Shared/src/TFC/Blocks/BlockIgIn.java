@@ -49,7 +49,7 @@ import net.minecraft.src.ModLoader;
 public class BlockIgIn extends BlockCollapsable
 {
 	public BlockIgIn(int i, Material material,int id) {
-		super(i,0, material, id);
+		super(i, material, id);
 	}
 
 	@SideOnly(Side.CLIENT)

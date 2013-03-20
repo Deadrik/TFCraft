@@ -59,7 +59,7 @@ public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
 		for (int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack is = inv.getStackInSlot(i);
-			if(is != null && is.hasTagCompound() && !is.getItem().getItemNameIS(is).contains("Clay"))
+			if(is != null && is.hasTagCompound() && !is.getItem().getItemDisplayName(is).contains("Clay"))
 			{
 				if(is.getTagCompound().hasKey("temperature"))
 				{
@@ -222,6 +222,18 @@ public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 
 
+	}
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

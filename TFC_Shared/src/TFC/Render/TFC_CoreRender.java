@@ -73,19 +73,19 @@ public class TFC_CoreRender
         int md = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
         
         boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
+        /*if(renderblocks.overrideBlockTexture >= 240)
         {
         	breaking = true;
-        }
+        }*/
 
         if(te.TypeID <= 0) return false;
 
         int type = te.TypeID;
         int meta = te.MetaID;
-        int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
+        Icon tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
         
-        if(!breaking)
-        	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+        //if(!breaking)
+        //	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
         
         long extraX = (te.extraData) & 0xf;
         long extraY = (te.extraData >> 4) & 0xf;
@@ -99,7 +99,7 @@ public class TFC_CoreRender
         renderblocks.setRenderBounds(0.0F+ (div * extraX), 0.0F+ (div * extraY), 0.0F+ (div * extraZ), 1.0F-(div * extraX2), 1-(div * extraY2), 1.0F-(div * extraZ2));
 
         //This is the old ore code that I experimented with
-        int over = renderblocks.overrideBlockTexture;
+        Icon over = renderblocks.overrideBlockTexture;
         if(!breaking && (type == TFCBlocks.Ore.blockID || type == TFCBlocks.Ore2.blockID || type == TFCBlocks.Ore3.blockID))
         {
             BiomeGenBase biome = renderblocks.blockAccess.getBiomeGenForCoords(par2, par4);
@@ -973,9 +973,9 @@ public class TFC_CoreRender
         return true;
     }
 
-    public static int getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
+    public static Icon getRockTexture(World worldObj, int xCoord, int yCoord, int zCoord) 
     {
-        int var27 = 0;
+        Icon var27;
         DataLayer rockLayer1 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
         DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
         DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);

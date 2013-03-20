@@ -168,21 +168,21 @@ public class WorldGenGrowTrees
 			{
 				if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
 				{							
-					world.setBlockAndMetadata(xCoord, yCoord+1, zCoord, Block.sapling.blockID, TreeType0);
+					world.setBlockAndMetadataWithNotify(xCoord, yCoord+1, zCoord, Block.sapling.blockID, TreeType0, 3);
 				}
 			}
 			else if(randomNumber < 70)
 			{
 				if(canSpawnTemp1)
 				{
-					world.setBlockAndMetadata(xCoord, yCoord+1, zCoord, Block.sapling.blockID, TreeType1);
+					world.setBlockAndMetadataWithNotify(xCoord, yCoord+1, zCoord, Block.sapling.blockID, TreeType1, 3);
 				}
 			}
 			else if(randomNumber < 100)
 			{
 				if(canSpawnTemp2)
 				{
-					world.setBlockAndMetadata(xCoord, yCoord+1, zCoord, Block.sapling.blockID, TreeType2);
+					world.setBlockAndMetadataWithNotify(xCoord, yCoord+1, zCoord, Block.sapling.blockID, TreeType2, 3);
 				}
 			}
 		}

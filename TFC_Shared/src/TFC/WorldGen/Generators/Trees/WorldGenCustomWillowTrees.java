@@ -61,7 +61,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			for (int a = 0 ; a < length ; a++)
 			{
 				if(world.getBlockId(X * a / length + x, Y * a / length + y, Z * a / length + z) == 0) {
-					world.setBlockAndMetadata (X * a / length + x, Y * a / length + y, Z * a / length + z, Block.wood.blockID, treeId);
+					world.setBlockAndMetadataWithNotify (X * a / length + x, Y * a / length + y, Z * a / length + z, Block.wood.blockID, treeId, 3);
 				}
 			}
 			createLeafGroup (X + x, Y + y, Z + z, random, world);
@@ -79,14 +79,14 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 				{
 					if (!Block.opaqueCubeLookup [world.getBlockId (x1, y1 + y, z1)])
 					{
-						world.setBlockAndMetadata (x1, y1 + y, z1, Block.leaves.blockID, treeId);
+						world.setBlockAndMetadataWithNotify (x1, y1 + y, z1, Block.leaves.blockID, treeId, 3);
 
 						for (int a = 0 ; a < random.nextInt (2) + 2 ; a++)
 						{
 							int id = world.getBlockId (x1, y1 - 1 - a + y, z1);
 							if (!Block.opaqueCubeLookup [id] && id == 0)
 							{
-								world.setBlockAndMetadata (x1, y1 - 1 - a + y, z1, Block.leaves.blockID, treeId);
+								world.setBlockAndMetadataWithNotify (x1, y1 - 1 - a + y, z1, Block.leaves.blockID, treeId, 3);
 							}
 						}
 					}
@@ -99,12 +99,12 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 	private void func_35265_a (World world, int i, int j, int k, int l)
 	{
 		if(world.getBlockId(i, j, k) == 0 && Block.vine.canBlockStay(world, i, j, k)) {
-			world.setBlockAndMetadataWithNotify (i, j, k, Block.vine.blockID, l);
+			world.setBlockAndMetadataWithNotify (i, j, k, Block.vine.blockID, l, 3);
 		}
 		for (int i1 = 4 ; world.getBlockId (i, --j, k) == 0 && i1 > 0 ; i1--)
 		{
 			if(world.getBlockId(i, j, k) == 0 && Block.vine.canBlockStay(world, i, j, k)) {
-				world.setBlockAndMetadataWithNotify (i, j, k, Block.vine.blockID, l);
+				world.setBlockAndMetadataWithNotify (i, j, k, Block.vine.blockID, l, 3);
 			}
 		}
 	}
@@ -176,7 +176,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 		if(world.getBlockId(xCoord, yCoord - 1, zCoord) == 0) {
 			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 0);
 			//set the block below the tree to dirt.
-			world.setBlockAndMetadata(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2));
+			world.setBlockAndMetadataWithNotify(xCoord, yCoord - 1, zCoord, TFC_Core.getTypeForGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 3);
 		}
 		int z1, x1, y,x,z;
 		y = height+yCoord;
@@ -195,7 +195,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			for (int a = 0 ; a < length ; a++)
 			{
 				if(world.getBlockId(X * a / length + x, Y * a / length + y, Z * a / length + z) == 0) {
-					world.setBlockAndMetadata (X * a / length + x, Y * a / length + y, Z * a / length + z, Block.wood.blockID, treeId);
+					world.setBlockAndMetadataWithNotify (X * a / length + x, Y * a / length + y, Z * a / length + z, Block.wood.blockID, treeId, 3);
 				}
 				addBranch (X * a / length + x, Y * a / length + y, Z * a / length + z, -1, 0, random, world);
 				addBranch (X * a / length + x, Y * a / length + y, Z * a / length + z, 0, -1, random, world);
@@ -211,7 +211,7 @@ public class WorldGenCustomWillowTrees extends WorldGenerator
 			if (l2 == 0 || l2 == Block.leaves.blockID || l2 == Block.waterMoving.blockID || l2 == Block.waterStill.blockID  || 
 					Block.blocksList[l2].canBeReplacedByLeaves(world, xCoord, yCoord + l1, zCoord))
 			{
-				world.setBlockAndMetadata (xCoord, yCoord + l1, zCoord, Block.wood.blockID, treeId);
+				world.setBlockAndMetadataWithNotify (xCoord, yCoord + l1, zCoord, Block.wood.blockID, treeId, 3);
 			}
 		}
 

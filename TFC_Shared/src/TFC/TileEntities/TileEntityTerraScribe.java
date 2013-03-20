@@ -167,7 +167,7 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
         var4.writeInt(xCoord);
         var4.writeInt(yCoord);
         var4.writeInt(zCoord);
-        Minecraft.getMinecraft().getSendQueue().addToSendQueue(new Packet250CustomPayload("TerraFirmaCraft", var3.toByteArray()));
+        Minecraft.getMinecraft().getNetHandler().addToSendQueue(new Packet250CustomPayload("TerraFirmaCraft", var3.toByteArray()));
         }
         catch(Exception e){
         	return;
@@ -194,6 +194,18 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 
 
+	}
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

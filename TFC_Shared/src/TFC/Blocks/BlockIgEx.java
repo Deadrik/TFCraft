@@ -49,7 +49,7 @@ import net.minecraft.world.gen.feature.*;
 public class BlockIgEx extends BlockCollapsable
 {
 	public BlockIgEx(int i, Material material, int id) {
-		super(i,3, material, id);
+		super(i, material, id);
 	}
 
 	/*

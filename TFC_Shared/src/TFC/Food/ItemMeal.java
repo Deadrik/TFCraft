@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -40,7 +41,7 @@ import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.Items.ItemTerra;
 
-public class ItemMeal extends ItemTerra
+public class ItemMeal extends ItemTerraFood
 {
 	PotionEffect foodEffect;
 
@@ -50,15 +51,23 @@ public class ItemMeal extends ItemTerra
 
 	public ItemMeal(int id, String tex) 
 	{
-		super(id);
+		super(id, 0);
 		texture = tex;
 	}
 
 	@Override
-	public String getTextureFile()
-	{
-		return texture;
+	public Icon getIconFromDamage(int meta)
+	{        
+		return icons[meta];
 	}
+	
+	Icon[] icons = new Icon[11];
+	@Override
+	public void func_94581_a(IconRegister registerer)
+    {
+		for(int i = 0; i < 11; i++)
+			registerer.func_94245_a("/food/Meal"+i);
+    }
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
@@ -157,7 +166,7 @@ public class ItemMeal extends ItemTerra
 	}
 
 	@Override
-	public ItemStack onFoodEaten(ItemStack is, World world, EntityPlayer player)
+	public void onFoodEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		
 		if(!world.isRemote)
@@ -176,7 +185,6 @@ public class ItemMeal extends ItemTerra
 			this.addFoodEffect(is, world, player);
 			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
-		return is;
 	}
 	
 	public boolean isWarm(ItemStack is)

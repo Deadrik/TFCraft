@@ -143,13 +143,13 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
             if(fireTemperature > itemTemp)
             {
-                String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
+                String name = fireItemStacks[i].getItem().getItemDisplayName(fireItemStacks[i]);
                 float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i],fireTemperature,MaxFireTemp);
                 itemTemp += increase;
             }
             else if(fireTemperature < itemTemp)
             {
-                String name = fireItemStacks[i].getItem().getItemNameIS(fireItemStacks[i]);
+                String name = fireItemStacks[i].getItem().getItemDisplayName(fireItemStacks[i]);
                 float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
                 itemTemp -= increase;
             }

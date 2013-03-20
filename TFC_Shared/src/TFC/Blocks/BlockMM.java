@@ -50,7 +50,7 @@ public class BlockMM extends BlockCollapsable
     public static boolean fallInstantly = false;
 
     public BlockMM(int i, Material material,int id) {
-        super(i,74, material, id);
+        super(i, material, id);
     }
 
     @SideOnly(Side.CLIENT)

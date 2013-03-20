@@ -46,13 +46,19 @@ import net.minecraft.world.gen.feature.*;
 public class BlockFruitLeaves extends BlockTerra
 {
 	int adjacentTreeBlocks[];
-	Icon[] icons = new Icon[16];
-	Icon[] iconsOpaque = new Icon[16];
 	
-	public BlockFruitLeaves(int i) 
+	Icon[] icons = new Icon[16];
+	Icon[] iconsFruit = new Icon[16];
+	Icon[] iconsOpaque = new Icon[16];
+	Icon[] iconsFruitOpaque = new Icon[16];
+	
+	int Offset = 0;
+	
+	public BlockFruitLeaves(int i, int offset) 
 	{
 		super(i, Material.leaves);
 		this.setTickRandomly(true);
+		Offset = offset;
 	}
 
 	@Override
@@ -78,24 +84,13 @@ public class BlockFruitLeaves extends BlockTerra
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)
 	{
-		int index = baseIndexInPNG;
-
 		if (TerraFirmaCraft.proxy.getGraphicsLevel())
 		{
-			index = baseIndexInPNG+(meta & 7);
+			return icons[(meta & 7)];
 		}
 		else
 		{
-			index = baseIndexInPNG+(meta & 7) + 16;
-		}
-
-		if(TFC_Time.currentMonth >= 3 && TFC_Time.currentMonth < 9)
-		{
-			return index;
-		}
-		else
-		{
-			return index - 32;
+			return iconsOpaque[(meta & 7)];
 		}
 	}
 	
@@ -107,8 +102,10 @@ public class BlockFruitLeaves extends BlockTerra
     {
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves");
-			iconsOpaque[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves Opaque");
+			icons[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Leaves");
+			iconsOpaque[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			iconsFruit[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Fruit Leaves");
+			iconsFruitOpaque[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Fruit Leaves Opaque");
 		}
     }
 

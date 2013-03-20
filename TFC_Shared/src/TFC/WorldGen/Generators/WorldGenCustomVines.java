@@ -23,7 +23,7 @@ public class WorldGenCustomVines extends WorldGenerator
                 {
                     if (Block.blocksList[106].canPlaceBlockOnSide(par1World, par3, par4, par5, var8))
                     {
-                        par1World.setBlockAndMetadata(par3, par4, par5, Block.vine.blockID, 1 << Direction.vineGrowth[Facing.faceToSide[var8]]);
+                        par1World.setBlockAndMetadataWithNotify(par3, par4, par5, Block.vine.blockID, 1 << Direction.vineGrowth[Facing.faceToSide[var8]], 3);
                         break;
                     }
                 }

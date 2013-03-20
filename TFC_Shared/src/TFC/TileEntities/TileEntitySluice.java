@@ -284,9 +284,9 @@ public class TileEntitySluice extends TileEntity implements IInventory
             for (Iterator iterator = list.iterator(); iterator.hasNext();)
             {
                 EntityItem entity = (EntityItem)iterator.next();
-                if(entity.func_92014_d().itemID == Block.gravel.blockID || entity.func_92014_d().itemID == TFCBlocks.Sand.blockID || entity.func_92014_d().itemID == TFCBlocks.Sand2.blockID)
+                if(entity.getEntityItem().itemID == Block.gravel.blockID || entity.getEntityItem().itemID == TFCBlocks.Sand.blockID || entity.getEntityItem().itemID == TFCBlocks.Sand2.blockID)
                 {
-                    if(soilAmount < 50 && entity.func_92014_d().stackSize == 1)
+                    if(soilAmount < 50 && entity.getEntityItem().stackSize == 1)
                     {
                         soilAmount += 20;
                         entity.setDead();
@@ -493,12 +493,12 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
             {
                 //set main block to water on
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
 
                 if((meta2 & 4) == 0)
                 {
                     //set second block to water on
-                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord+1, meta2 + 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord+1, meta2 + 4, 3);
                 }
 
                 //Set output water
@@ -507,11 +507,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
             {
                 //set main block to water off
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
                 if((meta2 & 4) != 0)
                 {
                     //set second block to water off
-                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord+1, meta2 - 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord+1, meta2 - 4, 3);
                 }
                 //Set output water
                 if(!isOutputAir && isOutputWater) {
@@ -530,11 +530,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
             {
                 //set main block to water on
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
                 if((worldObj.getBlockMetadata(xCoord-1, yCoord, zCoord) & 4) == 0)
                 {
                     //set second block to water on
-                    worldObj.setBlockMetadataWithNotify(xCoord-1, yCoord, zCoord, meta2 + 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord-1, yCoord, zCoord, meta2 + 4, 3);
                 }
                 //Set output water
                 worldObj.setBlock(xCoord-2, yCoord-1, zCoord, Block.waterStill.blockID);
@@ -542,11 +542,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
             {
                 //set main block to water off
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
                 if((worldObj.getBlockMetadata(xCoord-1, yCoord, zCoord) & 4) != 0)
                 {
                     //set second block to water off
-                    worldObj.setBlockMetadataWithNotify(xCoord-1, yCoord, zCoord, meta2 - 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord-1, yCoord, zCoord, meta2 - 4, 3);
                 }
                 //Set output water
                 if(!isOutputAir && isOutputWater) {
@@ -566,12 +566,12 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
             {
                 //set main block to water on
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
 
                 if((meta2 & 4) == 0)
                 {
                     //set second block to water on
-                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord-1, meta2 + 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord-1, meta2 + 4, 3);
                 }
 
                 //Set output water
@@ -580,11 +580,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
             {
                 //set main block to water off
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
                 if((meta2 & 4) != 0)
                 {
                     //set second block to water off
-                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord-1, meta2 - 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord-1, meta2 - 4, 3);
                 }
                 //Set output water
                 if(!isOutputAir && isOutputWater) {
@@ -604,11 +604,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if(isInputWater && isWaterDepth7 && !isFlowing && (isOutputAir || isOutputWater))
             {
                 //set main block to water on
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 4, 3);
                 if((worldObj.getBlockMetadata(xCoord+1, yCoord, zCoord) & 4) == 0)
                 {
                     //set second block to water on
-                    worldObj.setBlockMetadataWithNotify(xCoord+1, yCoord, zCoord, meta2 + 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord+1, yCoord, zCoord, meta2 + 4, 3);
                 }
                 //Set output water
                 worldObj.setBlock(xCoord+2, yCoord-1, zCoord, Block.waterStill.blockID);
@@ -616,11 +616,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
             if((!isInputWater || !isWaterDepth7 || !isOutputAir && !isOutputWater)&& isFlowing)
             {
                 //set main block to water off
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta - 4, 3);
                 if((worldObj.getBlockMetadata(xCoord+1, yCoord, zCoord) & 4) != 0)
                 {
                     //set second block to water off
-                    worldObj.setBlockMetadataWithNotify(xCoord+1, yCoord, zCoord, meta2 - 4);
+                    worldObj.setBlockMetadataWithNotify(xCoord+1, yCoord, zCoord, meta2 - 4, 3);
                 }
                 //Set output water
                 if(!isOutputAir && isOutputWater) {
@@ -653,5 +653,17 @@ public class TileEntitySluice extends TileEntity implements IInventory
         nbttagcompound.setTag("Items", nbttaglist);
 
     }
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

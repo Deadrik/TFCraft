@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -35,9 +36,9 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockSulfur extends Block
+public class BlockSulfur extends BlockTerra
 {
-
+	Icon[] icons = new Icon[4];
 	public BlockSulfur(int i, Material material)
 	{
 		super(i, material);
@@ -46,39 +47,49 @@ public class BlockSulfur extends Block
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return 252+j;
+		return icons[j];
 	}
-
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		return null;
 	}
-
+	
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 4; i++)
+		{
+			icons[i] = registerer.func_94245_a("ore/Sulfur"+i);
+		}
+    }
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.sulfurRenderId;
 	}
-
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
 	    dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.SulfurPowder, quantityDropped(new Random())));
 	}
+	@Override
 	public int idDropped(int i, Random random, int j)
 	{
 		return TFCItems.SulfurPowder.itemID;
 	}
-
+	@Override
 	public boolean isBlockNormalCube(World world, int i, int j, int k)
 	{
 		return false;
 	}
-
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
 		int num = 0;
@@ -113,12 +124,12 @@ public class BlockSulfur extends Block
 		}
 	}
 
-
+	@Override
 	public int quantityDropped(Random random)
 	{
 		return 1 + random.nextInt(5);
 	}
-
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k)
 	{
 		int num = 0;

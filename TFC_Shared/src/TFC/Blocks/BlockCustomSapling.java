@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -47,12 +48,12 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockCustomSapling extends BlockTerraContainer
 {
-	public BlockCustomSapling(int i, int j)
+	Icon[] icons = new Icon[16];
+	public BlockCustomSapling(int i)
 	{
 		super(i, Material.plants);
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		this.blockIndexInTexture = j;
 		this.setTickRandomly(true);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
@@ -71,10 +72,22 @@ public class BlockCustomSapling extends BlockTerraContainer
 		return i;
 	}
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
-		return j+blockIndexInTexture;
+		return icons[j];
 	}
+	
+	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("wood/trees/"+WoodNames[i]+" Sapling");
+		}
+    }
 
 	public void growTree(World world, int i, int j, int k, Random random)
 	{
@@ -85,7 +98,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 		
 		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
 		{
-			world.setBlockAndMetadata(i, j, k, blockID, l);
+			world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
 		}
 	}
 	

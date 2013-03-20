@@ -538,7 +538,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Item.shovelWood,1));
 			RemoveRecipe(new ItemStack(Item.hoeWood,1));
 			RemoveRecipe(new ItemStack(Item.swordWood,1));
-			RemoveRecipe(new ItemStack(Block.stoneOvenIdle,1));
+			RemoveRecipe(new ItemStack(Block.furnaceIdle,1));
 			RemoveRecipe(new ItemStack(Block.torchWood,4));
 			RemoveRecipe(new ItemStack(Item.stick,4));
 			RemoveRecipe(new ItemStack(Block.planks,4));

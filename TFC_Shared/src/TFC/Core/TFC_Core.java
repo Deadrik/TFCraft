@@ -175,7 +175,7 @@ public class TFC_Core
 				for (int z = 2; z >= -2; z--)
 				{
 					if(world.getBlockId(i+x, j+y, k+z) == 0) {
-						world.setBlockAndMetadata(i+x, j+y, k+z, Block.leaves.blockID, meta);
+						world.setBlockAndMetadataWithNotify(i+x, j+y, k+z, Block.leaves.blockID, meta, 2);
 					}
 				}
 			}

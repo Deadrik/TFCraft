@@ -79,7 +79,7 @@ public class WorldGenCustomSand extends WorldGenerator
                             boolean notCorrectSoil = !TFC_Core.isSoil(var13) && !TFC_Core.isSand(var13) ;
                             if (!notCorrectSoil)
                             {
-                                world.setBlockAndMetadata(var8, var12, var9, sandID, meta);
+                                world.setBlockAndMetadataWithNotify(var8, var12, var9, sandID, meta, 3);
                             }
                         }
                     }

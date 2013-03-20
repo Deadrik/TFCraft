@@ -480,9 +480,8 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		if(!worldObj.isRemote && anvilItemStacks[0] == null && this.AnvilTier == AnvilReq.STONE.Tier)
 		{
 			ejectContents();
-			worldObj.setBlockAndMetadata(xCoord, yCoord, zCoord, stonePair[0], stonePair[1]);
+			worldObj.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, stonePair[0], stonePair[1], 3);
 		}
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 	@Override
 	public ItemStack decrStackSize(int i, int j)
@@ -872,5 +871,17 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		}
 		}		
 		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+	}
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
