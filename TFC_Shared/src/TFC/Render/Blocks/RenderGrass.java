@@ -79,7 +79,7 @@ public class RenderGrass
         int var24 = var19;
         int var25 = var19;
 
-        int BGTex = renderblocks.blockAccess.getBlockId(xCoord, yCoord+1, zCoord) == Block.snow.blockID ? 253 : block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
+        Icon BGTex = renderblocks.blockAccess.getBlockId(xCoord, yCoord+1, zCoord) == Block.snow.blockID ? Block.snow.getBlockTextureFromSide(0) : block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 1);
 
         if (blockMinY <= 0.0D)//minY
         {

@@ -53,7 +53,6 @@ import TFC.Handlers.*;
 import TFC.Items.*;
 import TFC.TileEntities.*;
 import TFC.WorldGen.TFCProvider;
-import TFC.WorldGen.TFCProviderCOTE;
 import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.*;
@@ -186,7 +185,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
 
 		//Register new Minecarts
-		MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
+		//MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
 		
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

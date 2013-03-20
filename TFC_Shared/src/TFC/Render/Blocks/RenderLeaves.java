@@ -126,7 +126,7 @@ public class RenderLeaves {
         renderblocks.aoGrassXYZCNP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord + 1)];
         renderblocks.aoGrassXYZCNN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord - 1)];
 
-        int texIndex;
+        Icon texIndex;
         float colorMult = 0.78F;
 
         if (renderAll || (!firstTry &&

@@ -123,10 +123,10 @@ public class TFC_CoreRender
     public static boolean renderBlockStairs(Block par1Block, int par2, int par3, int par4, RenderBlocks renderblocks)
     {
     	boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
+        /*if(renderblocks.overrideBlockTexture >= 240)
         {
         	breaking = true;
-        }
+        }*/
         
         int var5 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
         renderblocks.renderAllFaces = true;
@@ -148,10 +148,10 @@ public class TFC_CoreRender
 
         int type = te.TypeID;
         int meta = te.MetaID;
-        int tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
+        Icon tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
         if(!breaking)
         {
-        	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+        	//ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
         	renderblocks.overrideBlockTexture = tex;
         }
         renderblocks.setRenderBounds(0.0F, var7, 0.0F, 1.0F, var8, 1.0F);
@@ -177,7 +177,7 @@ public class TFC_CoreRender
             renderblocks.setRenderBounds(0.0F, var9, 0.0F, 1.0F, var10, 0.5F);
             renderblocks.renderStandardBlock(par1Block, par2, par3, par4);
         }
-        renderblocks.overrideBlockTexture = -1;
+        renderblocks.clearOverrideBlockTexture();
         renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         return true;
     }
@@ -288,10 +288,10 @@ public class TFC_CoreRender
     public static boolean RenderLooseRock(Block block, int i, int j, int k, RenderBlocks renderblocks)	
     {
     	boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
+        /*if(renderblocks.overrideBlockTexture >= 240)
         {
         	breaking = true;
-        }
+        }*/
         
         int meta = renderblocks.blockAccess.getBlockMetadata(i, j, k);
         World w = ModLoader.getMinecraftInstance().theWorld;
@@ -622,7 +622,7 @@ public class TFC_CoreRender
 
     public static void renderBlockFallingSand(Block block,int meta, World world, int i, int j, int k)
     {
-        float f = 0.5F;
+       /* float f = 0.5F;
         float f1 = 1.0F;
         float f2 = 0.8F;
         float f3 = 0.6F;
@@ -636,322 +636,48 @@ public class TFC_CoreRender
             f5 = f4;
         }
         tessellator.setColorOpaque_F(f * f5, f * f5, f * f5);
-        renderBottomFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(0, meta));
+        renderer.renderBottomFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(0, meta));
         f5 = 1.0F;
         if (f5 < f4)
         {
             f5 = f4;
         }
         tessellator.setColorOpaque_F(f1 * f5, f1 * f5, f1 * f5);
-        renderTopFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(1, meta));
+        renderer.renderTopFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(1, meta));
         f5 = 1.0F;
         if (f5 < f4)
         {
             f5 = f4;
         }
         tessellator.setColorOpaque_F(f2 * f5, f2 * f5, f2 * f5);
-        renderEastFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(2, meta));
+        renderer.renderEastFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(2, meta));
         f5 = 1.0F;
         if (f5 < f4)
         {
             f5 = f4;
         }
         tessellator.setColorOpaque_F(f2 * f5, f2 * f5, f2 * f5);
-        renderWestFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(3, meta));
+        renderer.renderWestFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(3, meta));
         f5 = 1.0F;
         if (f5 < f4)
         {
             f5 = f4;
         }
         tessellator.setColorOpaque_F(f3 * f5, f3 * f5, f3 * f5);
-        renderNorthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(4, meta));
+        renderer.renderNorthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(4, meta));
         f5 = 1.0F;
         if (f5 < f4)
         {
             f5 = f4;
         }
         tessellator.setColorOpaque_F(f3 * f5, f3 * f5, f3 * f5);
-        renderSouthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(5, meta));
-        tessellator.draw();
-    }
-
-    public static void renderBottomFace(Block block, double d, double d1, double d2,
-            int i)
-    {
-    	double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-        Tessellator tessellator = Tessellator.instance;
-
-        int j = (i & 0xf) << 4;
-        int k = i & 0xf0;
-        double d3 = ((double)j + blockMinX * 16D) / 256D;
-        double d4 = (((double)j + blockMaxX * 16D) - 0.01D) / 256D;
-        double d5 = ((double)k + blockMinZ * 16D) / 256D;
-        double d6 = (((double)k + blockMaxZ * 16D) - 0.01D) / 256D;
-        if (blockMinX < 0.0D || blockMaxX > 1.0D)
-        {
-            d3 = ((float)j + 0.0F) / 256F;
-            d4 = ((float)j + 15.99F) / 256F;
-        }
-        if (blockMinZ < 0.0D || blockMaxZ > 1.0D)
-        {
-            d5 = ((float)k + 0.0F) / 256F;
-            d6 = ((float)k + 15.99F) / 256F;
-        }
-        double d7 = d4;
-        double d8 = d3;
-        double d9 = d5;
-        double d10 = d6;
-
-        double d11 = d + blockMinX;
-        double d12 = d + blockMaxX;
-        double d13 = d1 + blockMinY;
-        double d14 = d2 + blockMinZ;
-        double d15 = d2 + blockMaxZ;
-
-        tessellator.addVertexWithUV(d11, d13, d15, d8, d10);
-        tessellator.addVertexWithUV(d11, d13, d14, d3, d5);
-        tessellator.addVertexWithUV(d12, d13, d14, d7, d9);
-        tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
-
-    }
-
-    public static void renderTopFace(Block block, double d, double d1, double d2,
-            int i)
-    {
-    	double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-        Tessellator tessellator = Tessellator.instance;
-
-        int j = (i & 0xf) << 4;
-        int k = i & 0xf0;
-        double d3 = ((double)j + blockMinX * 16D) / 256D;
-        double d4 = (((double)j + blockMaxX * 16D) - 0.01D) / 256D;
-        double d5 = ((double)k + blockMinZ * 16D) / 256D;
-        double d6 = (((double)k + blockMaxZ * 16D) - 0.01D) / 256D;
-        if (blockMinX < 0.0D || blockMaxX > 1.0D)
-        {
-            d3 = ((float)j + 0.0F) / 256F;
-            d4 = ((float)j + 15.99F) / 256F;
-        }
-        if (blockMinZ < 0.0D || blockMaxZ > 1.0D)
-        {
-            d5 = ((float)k + 0.0F) / 256F;
-            d6 = ((float)k + 15.99F) / 256F;
-        }
-        double d7 = d4;
-        double d8 = d3;
-        double d9 = d5;
-        double d10 = d6;
-
-        double d11 = d + blockMinX;
-        double d12 = d + blockMaxX;
-        double d13 = d1 + blockMaxY;
-        double d14 = d2 + blockMinZ;
-        double d15 = d2 + blockMaxZ;
-
-        tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
-        tessellator.addVertexWithUV(d12, d13, d14, d7, d9);
-        tessellator.addVertexWithUV(d11, d13, d14, d3, d5);
-        tessellator.addVertexWithUV(d11, d13, d15, d8, d10);
-
-    }
-
-    public static void renderEastFace(Block block, double d, double d1, double d2,
-            int i)
-    {
-    	double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-        Tessellator tessellator = Tessellator.instance;
-
-        int j = (i & 0xf) << 4;
-        int k = i & 0xf0;
-        double d3 = ((double)j + blockMinX * 16D) / 256D;
-        double d4 = (((double)j + blockMaxX * 16D) - 0.01D) / 256D;
-        double d5 = ((double)(k + 16) - blockMaxY * 16D) / 256D;
-        double d6 = ((double)(k + 16) - blockMinY * 16D - 0.01D) / 256D;
-
-        if (blockMinX < 0.0D || blockMaxX > 1.0D)
-        {
-            d3 = ((float)j + 0.0F) / 256F;
-            d4 = ((float)j + 15.99F) / 256F;
-        }
-        if (blockMinY < 0.0D || blockMaxY > 1.0D)
-        {
-            d5 = ((float)k + 0.0F) / 256F;
-            d6 = ((float)k + 15.99F) / 256F;
-        }
-        double d8 = d4;
-        double d9 = d3;
-        double d10 = d5;
-        double d11 = d6;
-
-        double d12 = d + blockMinX;
-        double d13 = d + blockMaxX;
-        double d14 = d1 + blockMinY;
-        double d15 = d1 + blockMaxY;
-        double d16 = d2 + blockMinZ;
-
-        tessellator.addVertexWithUV(d12, d15, d16, d8, d10);
-        tessellator.addVertexWithUV(d13, d15, d16, d3, d5);
-        tessellator.addVertexWithUV(d13, d14, d16, d9, d11);
-        tessellator.addVertexWithUV(d12, d14, d16, d4, d6);
-
-    }
-
-    public static void renderWestFace(Block block, double d, double d1, double d2,
-            int i)
-    {
-    	double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-        Tessellator tessellator = Tessellator.instance;
-
-        int j = (i & 0xf) << 4;
-        int k = i & 0xf0;
-        double d3 = ((double)j + blockMinX * 16D) / 256D;
-        double d4 = (((double)j + blockMaxX * 16D) - 0.01D) / 256D;
-        double d5 = ((double)(k + 16) - blockMaxY * 16D) / 256D;
-        double d6 = ((double)(k + 16) - blockMinY * 16D - 0.01D) / 256D;
-
-        if (blockMinX < 0.0D || blockMaxX > 1.0D)
-        {
-            d3 = ((float)j + 0.0F) / 256F;
-            d4 = ((float)j + 15.99F) / 256F;
-        }
-        if (blockMinY < 0.0D || blockMaxY > 1.0D)
-        {
-            d5 = ((float)k + 0.0F) / 256F;
-            d6 = ((float)k + 15.99F) / 256F;
-        }
-        double d8 = d4;
-        double d9 = d3;
-        double d10 = d5;
-        double d11 = d6;
-
-        double d12 = d + blockMinX;
-        double d13 = d + blockMaxX;
-        double d14 = d1 + blockMinY;
-        double d15 = d1 + blockMaxY;
-        double d16 = d2 + blockMaxZ;
-
-        tessellator.addVertexWithUV(d12, d15, d16, d3, d5);
-        tessellator.addVertexWithUV(d12, d14, d16, d9, d11);
-        tessellator.addVertexWithUV(d13, d14, d16, d4, d6);
-        tessellator.addVertexWithUV(d13, d15, d16, d8, d10);
-
-    }
-
-    public static void renderNorthFace(Block block, double d, double d1, double d2,
-            int i)
-    {
-    	double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-        Tessellator tessellator = Tessellator.instance;
-
-        int j = (i & 0xf) << 4;
-        int k = i & 0xf0;
-        double d3 = ((double)j + blockMinZ * 16D) / 256D;
-        double d4 = (((double)j + blockMaxZ * 16D) - 0.01D) / 256D;
-        double d5 = ((double)(k + 16) - blockMaxY * 16D) / 256D;
-        double d6 = ((double)(k + 16) - blockMinY * 16D - 0.01D) / 256D;
-
-        if (blockMinZ < 0.0D || blockMaxZ > 1.0D)
-        {
-            d3 = ((float)j + 0.0F) / 256F;
-            d4 = ((float)j + 15.99F) / 256F;
-        }
-        if (blockMinY < 0.0D || blockMaxY > 1.0D)
-        {
-            d5 = ((float)k + 0.0F) / 256F;
-            d6 = ((float)k + 15.99F) / 256F;
-        }
-        double d8 = d4;
-        double d9 = d3;
-        double d10 = d5;
-        double d11 = d6;
-
-        double d12 = d + blockMinX;
-        double d13 = d1 + blockMinY;
-        double d14 = d1 + blockMaxY;
-        double d15 = d2 + blockMinZ;
-        double d16 = d2 + blockMaxZ;
-
-        tessellator.addVertexWithUV(d12, d14, d16, d8, d10);
-        tessellator.addVertexWithUV(d12, d14, d15, d3, d5);
-        tessellator.addVertexWithUV(d12, d13, d15, d9, d11);
-        tessellator.addVertexWithUV(d12, d13, d16, d4, d6);
-
-    }
-
-    public static void renderSouthFace(Block block, double d, double d1, double d2,
-            int i)
-    {
-    	double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-        Tessellator tessellator = Tessellator.instance;
-
-        int j = (i & 0xf) << 4;
-        int k = i & 0xf0;
-        double d3 = ((double)j + blockMinZ * 16D) / 256D;
-        double d4 = (((double)j + blockMaxZ * 16D) - 0.01D) / 256D;
-        double d5 = ((double)(k + 16) - blockMaxY * 16D) / 256D;
-        double d6 = ((double)(k + 16) - blockMinY * 16D - 0.01D) / 256D;
-
-        if (blockMinZ < 0.0D || blockMaxZ > 1.0D)
-        {
-            d3 = ((float)j + 0.0F) / 256F;
-            d4 = ((float)j + 15.99F) / 256F;
-        }
-        if (blockMinY < 0.0D || blockMaxY > 1.0D)
-        {
-            d5 = ((float)k + 0.0F) / 256F;
-            d6 = ((float)k + 15.99F) / 256F;
-        }
-        double d8 = d4;
-        double d9 = d3;
-        double d10 = d5;
-        double d11 = d6;
-
-        double d12 = d + blockMaxX;
-        double d13 = d1 + blockMinY;
-        double d14 = d1 + blockMaxY;
-        double d15 = d2 + blockMinZ;
-        double d16 = d2 + blockMaxZ;
-
-        tessellator.addVertexWithUV(d12, d13, d16, d9, d11);
-        tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
-        tessellator.addVertexWithUV(d12, d14, d15, d8, d10);
-        tessellator.addVertexWithUV(d12, d14, d16, d3, d5);
-
+        renderer.renderSouthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(5, meta));
+        tessellator.draw();*/
     }
 
     public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
     {
-    	boolean breaking = false;
+    	/*boolean breaking = false;
         if(renderblocks.overrideBlockTexture >= 240)
         {
         	breaking = true;
@@ -969,7 +695,7 @@ public class TFC_CoreRender
         }
 
         //renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-
+*/
         return true;
     }
 
@@ -1023,7 +749,7 @@ public class TFC_CoreRender
 
     public static boolean renderBellows(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-        IBlockAccess blockAccess = renderblocks.blockAccess;
+        /*IBlockAccess blockAccess = renderblocks.blockAccess;
 
         int meta = blockAccess.getBlockMetadata(i, j, k);
         int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
@@ -1104,17 +830,12 @@ public class TFC_CoreRender
             renderblocks.overrideBlockTexture = -1;
         }
 
-        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);*/
         return true;
     }
 
     public static boolean RenderSluice(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-    	boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
-        {
-        	breaking = true;
-        }
         
     	double blockMinX = block.getBlockBoundsMinX();
 		double blockMaxX = block.getBlockBoundsMaxX();
@@ -1134,13 +855,11 @@ public class TFC_CoreRender
         tessellator.setBrightness(j1);
         tessellator.setColorOpaque_F(f, f, f);
 
-        int k1 = block.getBlockTexture(blockAccess, i, j, k, 0);
-        int l1 = (k1 & 0xf) << 4;
-        int i2 = k1 & 0xf0;
-        double d = (float)l1 / 256F;
-        double d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-        double d2 = (float)i2 / 256F;
-        double d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+        Icon texture = block.getBlockTexture(blockAccess, i, j, k, 0);
+        double texMinX = texture.func_94209_e();
+        double texMaxX = texture.func_94212_f();
+        double texMinY = texture.func_94206_g();
+        double texMaxY = texture.func_94210_h();
 
         double minX = (double)i + blockMinX;
         double maxX = (double)i + blockMaxX;
@@ -1166,30 +885,28 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(minX, maxY, minZ, d1, d2);//d,d3
-                tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, d1, d3);//d,d2
-                tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, d, d3);//d1,d2
-                tessellator.addVertexWithUV(maxX, maxY, minZ, d, d2);//d1,d3
+                tessellator.addVertexWithUV(minX, maxY, minZ, texMaxX, texMinY);//d,d3
+                tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, texMaxX, texMaxY);//d,d2
+                tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, texMinX, texMaxY);//d1,d2
+                tessellator.addVertexWithUV(maxX, maxY, minZ, texMinX, texMinY);//d1,d3
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = block.getBlockTextureFromSideAndMetadata(0, 4);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     //draw water plane
                     //tessellator.setColorOpaque_F(0.8F, 0.8F, 0.8F);
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(minX, maxY, minZ, d1, d2);//d,d3
-                    tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, d1, d3);//d,d2
-                    tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, d, d3);//d1,d2
-                    tessellator.addVertexWithUV(maxX, maxY, minZ, d, d2);//d1,d3
+                    tessellator.addVertexWithUV(minX, maxY, minZ, texMaxX, texMinY);//d,d3
+                    tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, texMaxX, texMaxY);//d,d2
+                    tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, texMinX, texMaxY);//d1,d2
+                    tessellator.addVertexWithUV(maxX, maxY, minZ, texMinX, texMinY);//d1,d3
                 }
             }
             else if(i1 == 1)
@@ -1201,30 +918,28 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, d, d3);
-                tessellator.addVertexWithUV(maxX, maxY, maxZ, d, d2);
-                tessellator.addVertexWithUV(maxX, maxY, minZ, d1, d2);
-                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d1, d3);
+                tessellator.addVertexWithUV(minX, minY+0.5F, maxZ, texMinX, texMaxY);
+                tessellator.addVertexWithUV(maxX, maxY, maxZ, texMinX, texMinY);
+                tessellator.addVertexWithUV(maxX, maxY, minZ, texMaxX, texMinY);
+                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, texMaxX, texMaxY);
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = block.getBlockTextureFromSideAndMetadata(0, 4);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     //draw water plane
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, d, d3);
-                    tessellator.addVertexWithUV(maxX, maxY, maxZ, d, d2);
-                    tessellator.addVertexWithUV(maxX, maxY, minZ, d1, d2);
-                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d1, d3);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, maxZ, texMinX, texMaxY);
+                    tessellator.addVertexWithUV(maxX, maxY, maxZ, texMinX, texMinY);
+                    tessellator.addVertexWithUV(maxX, maxY, minZ, texMaxX, texMinY);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, texMaxX, texMaxY);
                 }
             }
             else if(i1 == 2)
@@ -1236,30 +951,28 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d, d3);
-                tessellator.addVertexWithUV(minX, maxY, maxZ, d, d2);
-                tessellator.addVertexWithUV(maxX, maxY, maxZ, d1, d2);
-                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d1, d3);
+                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, texMinX, texMaxY);
+                tessellator.addVertexWithUV(minX, maxY, maxZ, texMinX, texMinY);
+                tessellator.addVertexWithUV(maxX, maxY, maxZ, texMaxX, texMinY);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, texMaxX, texMaxY);
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = block.getBlockTextureFromSideAndMetadata(0, 4);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     //draw water plane
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d, d3);
-                    tessellator.addVertexWithUV(minX, maxY, maxZ, d, d2);
-                    tessellator.addVertexWithUV(maxX, maxY, maxZ, d1, d2);
-                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d1, d3);
+                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, texMinX, texMaxY);
+                    tessellator.addVertexWithUV(minX, maxY, maxZ, texMinX, texMinY);
+                    tessellator.addVertexWithUV(maxX, maxY, maxZ, texMaxX, texMinY);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, texMaxX, texMaxY);
                 }
 
 
@@ -1273,29 +986,27 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(maxX, minY+0.5f, minZ, d, d3);
-                tessellator.addVertexWithUV(minX, maxY, minZ, d, d2);
-                tessellator.addVertexWithUV(minX, maxY, maxZ, d1, d2);
-                tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, d1, d3);
+                tessellator.addVertexWithUV(maxX, minY+0.5f, minZ, texMinX, texMaxY);
+                tessellator.addVertexWithUV(minX, maxY, minZ, texMinX, texMinY);
+                tessellator.addVertexWithUV(minX, maxY, maxZ, texMaxX, texMinY);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, texMaxX, texMaxY);
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = 223;
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = Block.waterStill.getBlockTextureFromSide(0);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(maxX, minY+0.6f, minZ, d, d3);
-                    tessellator.addVertexWithUV(minX, maxY, minZ, d, d2);
-                    tessellator.addVertexWithUV(minX, maxY, maxZ, d1, d2);
-                    tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, d1, d3);
+                    tessellator.addVertexWithUV(maxX, minY+0.6f, minZ, texMinX, texMaxY);
+                    tessellator.addVertexWithUV(minX, maxY, minZ, texMinX, texMinY);
+                    tessellator.addVertexWithUV(minX, maxY, maxZ, texMaxX, texMinY);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, texMaxX, texMaxY);
                 }
             }
         }
@@ -1312,30 +1023,28 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, d1, d2);//d,d3
-                tessellator.addVertexWithUV(minX, minY, maxZ, d1, d3);//d,d2
-                tessellator.addVertexWithUV(maxX, minY, maxZ, d, d3);//d1,d2
-                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d, d2);//d1,d3
+                tessellator.addVertexWithUV(minX, minY+0.5F, minZ, texMaxX, texMinY);//d,d3
+                tessellator.addVertexWithUV(minX, minY, maxZ, texMaxX, texMaxY);//d,d2
+                tessellator.addVertexWithUV(maxX, minY, maxZ, texMinX, texMaxY);//d1,d2
+                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, texMinX, texMinY);//d1,d3
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = block.getBlockTextureFromSideAndMetadata(0, 4);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     //draw water plane
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, d1, d2);//d,d3
-                    tessellator.addVertexWithUV(minX, minY, maxZ, d1, d3);//d,d2
-                    tessellator.addVertexWithUV(maxX, minY, maxZ, d, d3);//d1,d2
-                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d, d2);//d1,d3
+                    tessellator.addVertexWithUV(minX, minY+0.6F, minZ, texMaxX, texMinY);//d,d3
+                    tessellator.addVertexWithUV(minX, minY, maxZ, texMaxX, texMaxY);//d,d2
+                    tessellator.addVertexWithUV(maxX, minY, maxZ, texMinX, texMaxY);//d1,d2
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, texMinX, texMinY);//d1,d3
                 }
             }
             if(i1 == 1)
@@ -1349,30 +1058,28 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(minX, minY, maxZ, d, d3);
-                tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, d, d2);
-                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, d1, d2);
-                tessellator.addVertexWithUV(minX, minY, minZ, d1, d3);
+                tessellator.addVertexWithUV(minX, minY, maxZ, texMinX, texMaxY);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, maxZ, texMinX, texMinY);
+                tessellator.addVertexWithUV(maxX, minY+0.5F, minZ, texMaxX, texMinY);
+                tessellator.addVertexWithUV(minX, minY, minZ, texMaxX, texMaxY);
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = block.getBlockTextureFromSideAndMetadata(0, 4);
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = block.getBlockTextureFromSideAndMetadata(0, 4);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     //draw water plane
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(minX, minY, maxZ, d, d3);
-                    tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, d, d2);
-                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, d1, d2);
-                    tessellator.addVertexWithUV(minX, minY, minZ, d1, d3);
+                    tessellator.addVertexWithUV(minX, minY, maxZ, texMinX, texMaxY);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, maxZ, texMinX, texMinY);
+                    tessellator.addVertexWithUV(maxX, minY+0.6F, minZ, texMaxX, texMinY);
+                    tessellator.addVertexWithUV(minX, minY, minZ, texMaxX, texMaxY);
                 }
             }
             if(i1 == 2)
@@ -1386,30 +1093,28 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(minX, minY, minZ, d, d3);
-                tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, d, d2);
-                tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, d1, d2);
-                tessellator.addVertexWithUV(maxX, minY, minZ, d1, d3);
+                tessellator.addVertexWithUV(minX, minY, minZ, texMinX, texMaxY);
+                tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, texMinX, texMinY);
+                tessellator.addVertexWithUV(maxX, minY+0.5f, maxZ, texMaxX, texMinY);
+                tessellator.addVertexWithUV(maxX, minY, minZ, texMaxX, texMaxY);
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = 223;
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = Block.waterStill.getBlockTextureFromSide(0);
                     l = block.colorMultiplier(blockAccess, i, j, k);
 
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
 
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(minX, minY, minZ, d, d3);
-                    tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, d, d2);
-                    tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, d1, d2);
-                    tessellator.addVertexWithUV(maxX, minY, minZ, d1, d3);
+                    tessellator.addVertexWithUV(minX, minY, minZ, texMinX, texMaxY);
+                    tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, texMinX, texMinY);
+                    tessellator.addVertexWithUV(maxX, minY+0.6f, maxZ, texMaxX, texMinY);
+                    tessellator.addVertexWithUV(maxX, minY, minZ, texMaxX, texMaxY);
                 }
             }
             if(i1 == 3)
@@ -1423,28 +1128,26 @@ public class TFC_CoreRender
                 renderblocks.renderStandardBlock(block, i, j, k);
 
                 tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
-                tessellator.addVertexWithUV(maxX, minY, minZ, d, d3);
-                tessellator.addVertexWithUV(minX, minY+0.5f, minZ, d, d2);
-                tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, d1, d2);
-                tessellator.addVertexWithUV(maxX, minY, maxZ, d1, d3);
+                tessellator.addVertexWithUV(maxX, minY, minZ, texMinX, texMaxY);
+                tessellator.addVertexWithUV(minX, minY+0.5f, minZ, texMinX, texMinY);
+                tessellator.addVertexWithUV(minX, minY+0.5f, maxZ, texMaxX, texMinY);
+                tessellator.addVertexWithUV(maxX, minY, maxZ, texMaxX, texMaxY);
 
                 if(((BlockSluice)block).getIsRecievingWater(l))
                 {
                     //get water texture
-                    k1 = 223;
-                    l1 = (k1 & 0xf) << 4;
-                    i2 = k1 & 0xf0;
+                    texture = Block.waterStill.getBlockTextureFromSide(0);
                     l = block.colorMultiplier(blockAccess, i, j, k);
                     //reassign the uv coords
-                    d = (float)l1 / 256F;
-                    d1 = ((double)(l1 + 16) - 0.01D) / 256D;
-                    d2 = (float)i2 / 256F;
-                    d3 = ((double)(i2 + 16) - 0.01D) / 256D;
+                    texMinX = texture.func_94209_e();
+                    texMaxX = texture.func_94212_f();
+                    texMinY = texture.func_94206_g();
+                    texMaxY = texture.func_94210_h();
                     tessellator.setColorOpaque(waterR, waterG, waterB);
-                    tessellator.addVertexWithUV(maxX, minY, minZ, d, d3);
-                    tessellator.addVertexWithUV(minX, minY+0.6f, minZ, d, d2);
-                    tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, d1, d2);
-                    tessellator.addVertexWithUV(maxX, minY, maxZ, d1, d3);
+                    tessellator.addVertexWithUV(maxX, minY, minZ, texMinX, texMaxY);
+                    tessellator.addVertexWithUV(minX, minY+0.6f, minZ, texMinX, texMinY);
+                    tessellator.addVertexWithUV(minX, minY+0.6f, maxZ, texMaxX, texMinY);
+                    tessellator.addVertexWithUV(maxX, minY, maxZ, texMaxX, texMaxY);
                 }
             }
         }
@@ -1545,7 +1248,7 @@ public class TFC_CoreRender
         renderblocks.aoGrassXYZCNP = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord + 1)];
         renderblocks.aoGrassXYZCNN = Block.canBlockGrass[renderblocks.blockAccess.getBlockId(xCoord, yCoord - 1, zCoord - 1)];
 
-        int texIndex;
+        Icon texIndex;
         float colorMult = 0.78F;
 
         if (renderblocks.renderAllFaces || block.shouldSideBeRendered(renderblocks.blockAccess, xCoord, yCoord - 1, zCoord, 0))
@@ -1642,7 +1345,7 @@ public class TFC_CoreRender
             if(index.inBloom(TFC_Time.currentMonth))
             {
                 texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-                if(texIndex!= -1)
+                if(texIndex != null)
                 {
                     renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
                     renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
@@ -1748,7 +1451,7 @@ public class TFC_CoreRender
             if(index.inBloom(TFC_Time.currentMonth))
             {
                 texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-                if(texIndex!= -1)
+                if(texIndex != null)
                 {
                     renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
                     renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
@@ -1856,7 +1559,7 @@ public class TFC_CoreRender
             renderblocks.renderEastFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-            if(texIndex != -1)
+            if(texIndex != null)
             {
                 renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
                 renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
@@ -1962,7 +1665,7 @@ public class TFC_CoreRender
             renderblocks.renderWestFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 3));
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-            if(texIndex!= -1)
+            if(texIndex!= null)
             {
                 renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
                 renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
@@ -2067,7 +1770,7 @@ public class TFC_CoreRender
             renderblocks.renderNorthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-            if(texIndex!= -1)
+            if(texIndex!= null)
             {
                 renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
                 renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
@@ -2171,7 +1874,7 @@ public class TFC_CoreRender
             renderblocks.renderSouthFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 
             texIndex = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
-            if(texIndex!= -1)
+            if(texIndex != null)
             {
                 renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
                 renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
@@ -2186,9 +1889,9 @@ public class TFC_CoreRender
         return var8;
     }
 
-    public static int getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)
+    public static Icon getFruitTreeOverlay(IBlockAccess world, int x, int y, int z)
     {
-        int out = -1;
+        Icon out = null;
         int meta = world.getBlockMetadata(x, y, z);
         int id = world.getBlockId(x, y, z);
         int offset = id == TFCBlocks.fruitTreeLeaves.blockID ? 0 : 8;
@@ -2199,11 +1902,11 @@ public class TFC_CoreRender
         {
             if(index.inBloom(TFC_Time.currentMonth))//blooming
             {
-                out = 96+(meta & 7)+offset;
+                out = BlockFruitLeaves.iconsFlowers[(meta & 7)+offset];
             }
             else if(meta >= 8)//fruit
             {
-                out = 80+(meta & 7)+offset;
+                out = BlockFruitLeaves.iconsFruit[(meta & 7)+offset];
             }
         }
         return out;
@@ -2214,7 +1917,7 @@ public class TFC_CoreRender
      */
     public static boolean RenderFiniteWater(Block block, int par2, int par3, int par4, RenderBlocks renderblocks)
     {
-    	double blockMinX = block.getBlockBoundsMinX();
+    	/*double blockMinX = block.getBlockBoundsMinX();
 		double blockMaxX = block.getBlockBoundsMaxX();
 		double blockMinY = block.getBlockBoundsMinY();
 		double blockMaxY = block.getBlockBoundsMaxY();
@@ -2249,7 +1952,7 @@ public class TFC_CoreRender
             double var28 = (double)renderblocks.getFluidHeight(par2 + 1, par3, par4 + 1, var22);
             double var30 = (double)renderblocks.getFluidHeight(par2 + 1, par3, par4, var22);
             double var32 = 0.0010000000474974513D;
-            int var34;
+            Icon var34;
             int var35;
             float var36;
             int var37;
@@ -2408,7 +2111,9 @@ public class TFC_CoreRender
             blockMinY = var18;
             blockMaxY = var20;
             return var13;
-        }
+        }*/
+    	
+    	return true;
     }
 
     private static void drawCrossedSquares(Block block, int x, int y, int z, RenderBlocks renderblocks)
@@ -2418,17 +2123,13 @@ public class TFC_CoreRender
         var9.setColorOpaque_F(1.0f, 1.0f, 1.0f);
         GL11.glColor3f(1, 1, 1);
         
-        int index = block.getBlockTexture(renderblocks.blockAccess, x, y, z, 0);
+        Icon index = block.getBlockTexture(renderblocks.blockAccess, x, y, z, 0);
         
         
-        
-        int texX = (index & 15) << 4;
-        int texY = index & 240;
-        
-        double minX = (double)((float)texX / 256.0F);
-        double maxX = (double)(((float)texX + 15.99F) / 256.0F);
-        double minY = (double)((float)texY / 256.0F);
-        double maxY = (double)(((float)texY + 15.99F) / 256.0F);
+        double minX = index.func_94209_e();
+        double maxX = index.func_94212_f();
+        double minY = index.func_94206_g();
+        double maxY = index.func_94210_h();
         
         double xMin = x + 0.5D - 0.45D;
         double xMax = x + 0.5D + 0.45D;

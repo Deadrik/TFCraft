@@ -51,7 +51,7 @@ public class RenderAnvil {
 		renderblocks.renderAllFaces = true;
 
 		boolean breaking = false;
-		if(renderblocks.overrideBlockTexture >= 240)
+		if(renderblocks.overrideBlockTexture != null)
 		{
 			breaking = true;
 		}
@@ -103,28 +103,28 @@ public class RenderAnvil {
 			{
 				if(!breaking)
 				{
-					ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
+					//ForgeHooksClient.bindTexture(TFC_Textures.RockSheet, ModLoader.getMinecraftInstance().renderEngine.getTexture(TFC_Textures.RockSheet));
 					renderblocks.overrideBlockTexture = Block.blocksList[te.stonePair[0]].getBlockTextureFromSideAndMetadata(0, te.stonePair[1]);
 				}
 				renderblocks.setRenderBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
 				renderblocks.renderStandardBlock(block, i, j, k);
 				if(te.anvilItemStacks[0] != null && !breaking)
 				{
-					ForgeHooksClient.bindTexture("/bioxx/terratools.png", ModLoader.getMinecraftInstance().renderEngine.getTexture("/bioxx/terratools.png"));
+					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
 					renderblocks.overrideBlockTexture = Item.itemsList[te.anvilItemStacks[0].itemID].getIconIndex(te.anvilItemStacks[0]);
 					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
 					//					renderblocks.renderStandardBlock(block, i, j, k);
 					Tessellator tessellator = Tessellator.instance;
+					int state = tessellator.drawMode;
+					tessellator.draw();
+					tessellator.startDrawingQuads();
 					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 					tessellator.setColorRGBA_F(1, 1, 1, 1);
 
-					int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-					int z = renderblocks.overrideBlockTexture & 0xf0;
-
-					double minX = ((double)x + 0	) / 256D;
-					double maxX = ((double)x + 16	) / 256D;
-					double minZ = ((double)z + 0	) / 256D;
-					double maxZ = ((double)z + 16	) / 256D;
+					double minX = renderblocks.overrideBlockTexture.func_94209_e();
+					double maxX = renderblocks.overrideBlockTexture.func_94212_f();
+					double minZ = renderblocks.overrideBlockTexture.func_94206_g();
+					double maxZ = renderblocks.overrideBlockTexture.func_94210_h();
 
 					tessellator.addTranslation(0.5f, 0f, 0.5f);
 
@@ -134,6 +134,8 @@ public class RenderAnvil {
 					tessellator.addVertexWithUV(i, j + 0.901, k, minX, minZ);
 
 					tessellator.addTranslation(-0.5f, 0f, -0.5f);
+					tessellator.draw();
+					tessellator.startDrawing(state);
 
 
 				}

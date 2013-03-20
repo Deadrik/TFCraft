@@ -52,13 +52,13 @@ public class RenderDetailed
 		int meta = te.MetaID;
 
 		boolean breaking = false;
-		if(renderblocks.overrideBlockTexture >= 240)
+		if(renderblocks.overrideBlockTexture != null)
 		{
 			breaking = true;
 		}
 
 		if(!breaking)
-			ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
+			renderblocks.overrideBlockTexture = Block.blocksList[type].getBlockTexture(renderblocks.blockAccess, i, j, k, meta);
 
 
 		for(int subX = 0; subX < 2; subX++)
@@ -161,7 +161,7 @@ public class RenderDetailed
 		renderblocks.renderTopFace(par1Block, (double)par2, (double)par3, (double)par4, par1Block.getBlockTextureFromSideAndMetadata(1, meta));
 
 
-		int var28;
+		Icon var28;
 
 		var8.setBrightness(renderblocks.renderMaxX > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1));
 		var8.setColorOpaque_F(var18, var21, var24);

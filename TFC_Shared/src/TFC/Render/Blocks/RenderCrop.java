@@ -44,7 +44,7 @@ public class RenderCrop
 	
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
-        IBlockAccess blockaccess = renderblocks.blockAccess;
+        /*IBlockAccess blockaccess = renderblocks.blockAccess;
         TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
         Minecraft mc = ModLoader.getMinecraftInstance();
@@ -191,7 +191,7 @@ public class RenderCrop
                 break;
             }
         }
-
+*/
         return true;
     }
 	

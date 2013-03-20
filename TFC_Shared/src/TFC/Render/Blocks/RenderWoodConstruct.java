@@ -53,7 +53,7 @@ public class RenderWoodConstruct
     	float div = 1f / d;
         
         boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
+        if(renderblocks.overrideBlockTexture != null)
         {
         	breaking = true;
         }

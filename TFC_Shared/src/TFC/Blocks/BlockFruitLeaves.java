@@ -48,9 +48,9 @@ public class BlockFruitLeaves extends BlockTerra
 	int adjacentTreeBlocks[];
 	
 	Icon[] icons = new Icon[16];
-	Icon[] iconsFruit = new Icon[16];
+	public static Icon[] iconsFruit = new Icon[16];
 	Icon[] iconsOpaque = new Icon[16];
-	Icon[] iconsFruitOpaque = new Icon[16];
+	public static Icon[] iconsFlowers = new Icon[16];
 	
 	int Offset = 0;
 	
@@ -105,7 +105,7 @@ public class BlockFruitLeaves extends BlockTerra
 			icons[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Leaves");
 			iconsOpaque[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
 			iconsFruit[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Fruit Leaves");
-			iconsFruitOpaque[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Fruit Leaves Opaque");
+			iconsFlowers[i] = iconRegisterer.func_94245_a("/wood/fruit trees/" + WoodNames[i] + " Fruit Leaves Opaque");
 		}
     }
 

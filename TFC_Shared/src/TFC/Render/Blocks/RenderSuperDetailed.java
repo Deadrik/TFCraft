@@ -46,7 +46,7 @@ public class RenderSuperDetailed
         int md = renderblocks.blockAccess.getBlockMetadata(i, j, k);
 
         boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
+        if(renderblocks.overrideBlockTexture != null)
         {
         	breaking = true;
         }
@@ -77,7 +77,7 @@ public class RenderSuperDetailed
                 		{
                 			int index = te.blockIndex[type];
                 			if(!breaking)
-                            	ForgeHooksClient.bindTexture(Block.blocksList[index].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[index].getTextureFile()));
+                				renderblocks.overrideBlockTexture= Block.blocksList[index].getBlockTextureFromSide(0);
                 			
                 			renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
                 			RenderDetailed.renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 0.95f, 0.95f, 0.95f, meta);
