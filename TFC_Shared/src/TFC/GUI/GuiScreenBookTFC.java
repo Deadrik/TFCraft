@@ -185,7 +185,7 @@ public class GuiScreenBookTFC extends GuiScreen
                 {
                 	var4.writeByte(PacketHandler.Packet_Book_Sign);
                     Packet.writeItemStack(this.itemstackBook, var4);
-                    this.mc.getSendQueue().addToSendQueue(new Packet250CustomPayload(var8, var3.toByteArray()));
+                    this.mc.getNetHandler().addToSendQueue(new Packet250CustomPayload(var8, var3.toByteArray()));
                 }
                 catch (Exception var6)
                 {
@@ -384,9 +384,8 @@ public class GuiScreenBookTFC extends GuiScreen
      */
     public void drawScreen(int par1, int par2, float par3)
     {
-        int var4 = this.mc.renderEngine.getTexture("/gui/book.png");
+    	this.mc.renderEngine.func_98187_b("/gui/book.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(var4);
         int var5 = (this.width - this.bookImageWidth) / 2;
         byte var6 = 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.bookImageWidth, this.bookImageHeight);

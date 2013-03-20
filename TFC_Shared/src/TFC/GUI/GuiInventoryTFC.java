@@ -63,9 +63,8 @@ public class GuiInventoryTFC  extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
 			int var3) {
-		int var4 = this.mc.renderEngine.getTexture("/gui/inventory.png");
+		this.mc.renderEngine.func_98187_b("/gui/inventory.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(var4);
         int var5 = this.guiLeft;
         int var6 = this.guiTop;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
@@ -115,7 +114,6 @@ public class GuiInventoryTFC  extends GuiContainer
 
         if (!var4.isEmpty())
         {
-            int var5 = this.mc.renderEngine.getTexture("/gui/inventory.png");
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_LIGHTING);
             int var6 = 33;
@@ -132,7 +130,7 @@ public class GuiInventoryTFC  extends GuiContainer
                 		((TFCPotion) Potion.potionTypes[var8.getPotionID()]) : 
                 			Potion.potionTypes[var8.getPotionID()];
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                this.mc.renderEngine.bindTexture(var5);
+            	this.mc.renderEngine.func_98187_b("/gui/inventory.png");
                 this.drawTexturedModalRect(var1, var2, 0, 166, 140, 32);
 
                 if (var9.hasStatusIcon())

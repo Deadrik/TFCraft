@@ -112,15 +112,14 @@ public class GuiTerraAnvil extends GuiContainer
 		{
 			AnvilEntity.actionWeld();
 		}
-		this.inventorySlots.updateCraftingResults();
+		this.inventorySlots.detectAndSendChanges();
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int r = mc.renderEngine.getTexture("/bioxx/gui_anvil.png");
+		this.mc.renderEngine.func_98187_b("/bioxx/gui_anvil.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-		mc.renderEngine.bindTexture(r);
 		int w = (width - 208) / 2;
 		int h = (height - 198) / 2;
 		drawTexturedModalRect(w, h, 0, 0, 208, 198);

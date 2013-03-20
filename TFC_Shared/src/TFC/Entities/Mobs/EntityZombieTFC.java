@@ -96,9 +96,9 @@ public class EntityZombieTFC extends EntityZombie
     }
 
     @Override
-    protected void func_82164_bB()
+    protected void addRandomArmor()
     {
-        super.func_82164_bB();
+        super.addRandomArmor();
         this.setCurrentItemOrArmor(1, null); 
         this.setCurrentItemOrArmor(2, null); 
         this.setCurrentItemOrArmor(3, null); 

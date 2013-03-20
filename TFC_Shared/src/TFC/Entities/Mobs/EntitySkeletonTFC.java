@@ -159,9 +159,9 @@ public class EntitySkeletonTFC extends EntitySkeleton
         }
     }
     @Override
-    protected void func_82164_bB()
+    protected void addRandomArmor()
     {
-        super.func_82164_bB();
+        super.addRandomArmor();
         this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
     }
 
@@ -187,11 +187,11 @@ public class EntitySkeletonTFC extends EntitySkeleton
         else
         {
             this.tasks.addTask(4, new EntityAIArrowAttack(this, this.moveSpeed, 60, 10.0F));
-            this.func_82164_bB();
+            this.addRandomArmor();
             this.func_82162_bC();
         }
 
-        this.canPickUpLoot = this.rand.nextFloat() < pickUpLootProability[this.worldObj.difficultySetting];
+        this.func_98053_h(this.rand.nextFloat() < pickUpLootProability[this.worldObj.difficultySetting]);
 
         if (this.getCurrentItemOrArmor(4) == null)
         {
@@ -205,12 +205,14 @@ public class EntitySkeletonTFC extends EntitySkeleton
         }
     }
     @Override
-    public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving)
+    public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving,float par2)
     {
     	EntityArrowTFC var2 = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
+        var2.setDamage((double)(par2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting * 0.11F));
 
+        
         if (var3 > 0)
         {
             var2.setDamage(var2.getDamage() + (double)var3 * 0.5D + 0.5D);

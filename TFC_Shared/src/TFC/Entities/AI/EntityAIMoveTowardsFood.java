@@ -69,7 +69,7 @@ public class EntityAIMoveTowardsFood extends EntityAIBase
 			for (int second:
 				theEntity.fooditems)
 			{
-				if (((int)first.func_92014_d().itemID) == second)
+				if (((int)first.getEntityItem().itemID) == second)
 				{
 					targetEntity = first;
 				}
@@ -90,7 +90,7 @@ public class EntityAIMoveTowardsFood extends EntityAIBase
 		}
 
 		if (targetEntity.getDistanceSqToEntity(theEntity)<=1D){
-			if(theEntity.wantsItem(((EntityItem)targetEntity).func_92014_d())){
+			if(theEntity.wantsItem(((EntityItem)targetEntity).getEntityItem())){
 				targetEntity.worldObj.playSoundAtEntity(targetEntity, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				targetEntity.setDead();
 			}

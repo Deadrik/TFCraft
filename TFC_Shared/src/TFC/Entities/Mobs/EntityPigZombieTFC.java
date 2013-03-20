@@ -127,7 +127,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
     }
 
     @Override
-    protected void func_82164_bB()
+    protected void addRandomArmor()
     {
         this.setCurrentItemOrArmor(0, new ItemStack(Item.swordGold));
     }

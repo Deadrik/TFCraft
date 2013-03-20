@@ -145,8 +145,8 @@ public class EntityFallingDirt extends Entity
                 if (worldObj.getBlockId(i, j, k) != Block.pistonMoving.blockID)
                 {
                     setDead();
-                    if (!worldObj.isRemote && ((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this) && BlockCollapsable.canFallBelow(worldObj, i, j - 1, k)) || 
-                            !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID)))
+                    if (!worldObj.isRemote && ((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this, (ItemStack)null) && BlockCollapsable.canFallBelow(worldObj, i, j - 1, k)) || 
+                            !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID,3)))
                     {
                         ItemStack itemstack = new ItemStack(blockID,1,metaID);
                         EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);

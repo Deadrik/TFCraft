@@ -78,9 +78,8 @@ public class GuiTerraMetallurgy extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int r = mc.renderEngine.getTexture("/bioxx/gui_metallurgy.png");
+		this.mc.renderEngine.func_98187_b("/bioxx/gui_metallurgy.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-        mc.renderEngine.bindTexture(r);
         int w = (width - 176) / 2;
         int h = (height - 184) / 2;
         drawTexturedModalRect(w, h, 0, 0, 175, 183);

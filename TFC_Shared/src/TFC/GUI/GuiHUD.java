@@ -136,7 +136,7 @@ public class GuiHUD extends GuiIngame
 		int armorRowHeight;
 		int healthRowHeight;
 
-		if (!this.mc.playerController.func_78747_a())
+		if (!this.mc.playerController.enableEverythingIsScrewedUpMode())
 		{
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/gui/gui.png"));
@@ -566,7 +566,7 @@ public class GuiHUD extends GuiIngame
 				{
 					GuiPlayerInfo var46 = (GuiPlayerInfo)var39.get(var19);
 					fontRenderer.drawStringWithShadow(var46.name, var20, healthRowHeight, 16777215);
-					this.mc.renderEngine.bindTexture(this.mc.renderEngine.getTexture("/gui/icons.png"));
+					this.mc.renderEngine.func_98187_b("/gui/icons.png");
 					byte var51 = 0;
 					boolean var49 = false;
 					byte var50;
@@ -713,11 +713,12 @@ public class GuiHUD extends GuiIngame
 		GL11.glDepthMask(false);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, par1);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/terrain.png"));
-		float var4 = (float)(Block.portal.blockIndexInTexture % 16) / 16.0F;
-		float var5 = (float)(Block.portal.blockIndexInTexture / 16) / 16.0F;
-		float var6 = (float)(Block.portal.blockIndexInTexture % 16 + 1) / 16.0F;
-		float var7 = (float)(Block.portal.blockIndexInTexture / 16 + 1) / 16.0F;
+		this.mc.renderEngine.func_98187_b("/terrain.png");
+		Icon icon = Block.portal.getBlockTextureFromSide(1);
+        float var4 = icon.func_94209_e();
+        float var5 = icon.func_94206_g();
+        float var6 = icon.func_94212_f();
+        float var7 = icon.func_94210_h();
 		Tessellator var8 = Tessellator.instance;
 		var8.startDrawingQuads();
 		var8.addVertexWithUV(0.0D, (double)par3, -90.0D, (double)var4, (double)var7);
