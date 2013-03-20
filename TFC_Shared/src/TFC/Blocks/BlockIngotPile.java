@@ -51,10 +51,9 @@ public class BlockIngotPile extends BlockTerraContainer
 
 
 	private Random random = new Random();
-	public BlockIngotPile(int i,int tex)
+	public BlockIngotPile(int i)
 	{
 		super(i, Material.iron);
-		this.blockIndexInTexture = tex;
 	}
 
 	@Override
@@ -102,20 +101,13 @@ public class BlockIngotPile extends BlockTerraContainer
 						world.setBlock(i, j, k, 0);
 					}
 				}
-				damage = tileentityingotpile.getStackInSlot(0).getItem().shiftedIndex - 16028 - 256;
+				damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
 				stack = tileentityingotpile.getStackInSlot(0).stackSize;
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			}
 
 			return true;
-		}
-	}
-	@Override
-	public void onBlockEventReceived(World world,int i,int j,int k,int event,int param){
-		if(event ==0){
-			TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(i, j, k);
-			TE = (TileEntityIngotPile)world.getBlockTileEntity(i, j, k);
 		}
 	}
 
@@ -231,9 +223,9 @@ public class BlockIngotPile extends BlockTerraContainer
 		return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
-		super.onBlockPlacedBy(world,i,j,k,entityliving);
+		super.onBlockPlacedBy(world,i,j,k,entityliving, is);
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;
 		yCoord = j;
@@ -257,7 +249,7 @@ public class BlockIngotPile extends BlockTerraContainer
 			byte0 = 0;
 		}
 		byte0 += meta;
-		world.setBlockMetadataWithNotify(i, j, k, byte0);
+		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
 		//damage = ((EntityPlayer)entityliving).getItemInUse().getItem().shiftedIndex;
 		//stack = 1;
 		damage = ((TileEntityIngotPile)world.getBlockTileEntity(i,j,k)).type;
@@ -299,7 +291,7 @@ public class BlockIngotPile extends BlockTerraContainer
 
 							if (var7.hasTagCompound())
 							{
-								var12.func_92014_d().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+								var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 							}
 						}
 					}

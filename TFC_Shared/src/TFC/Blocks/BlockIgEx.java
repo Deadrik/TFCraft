@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -60,9 +61,21 @@ public class BlockIgEx extends BlockCollapsable
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return blockIndexInTexture + j;
+		return icons[j];
+	}
+
+	protected Icon[] icons = new Icon[4];
+	protected String[] names = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
+
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Raw");
+		}
 	}
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
@@ -79,9 +92,9 @@ public class BlockIgEx extends BlockCollapsable
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return TFCItems.LooseRock.shiftedIndex;
+		return TFCItems.LooseRock.itemID;
 	}
-	
+
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
 	{
@@ -125,17 +138,11 @@ public class BlockIgEx extends BlockCollapsable
 		DropCarvedStone(world, i, j, k);
 	}
 
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
-	}
-
 	/**
 	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
 	 */
-	 @Override
-	 public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) 
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) 
 	{
 		boolean hasHammer = false;
 		for(int i = 0; i < 9;i++)
@@ -159,11 +166,11 @@ public class BlockIgEx extends BlockCollapsable
 		return false;
 	}
 
-	 @SideOnly(Side.CLIENT)
-	 @Override
-	 public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
-	 {
-		 for(int i = 0; i < 4; i++)
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
+	{
+		for(int i = 0; i < 4; i++)
 			par3List.add(new ItemStack(this, 1, i));
-	 }
+	}
 }

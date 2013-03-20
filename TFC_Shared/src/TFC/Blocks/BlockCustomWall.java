@@ -42,7 +42,7 @@ public class BlockCustomWall extends BlockWall
     public BlockCustomWall(int id, Block blk, int t)
     {
         super(id, blk);
-        this.blockIndexInTexture = blk.blockIndexInTexture;
+
         this.block = blk;
         totalsubTypes = t;
     }
@@ -51,19 +51,19 @@ public class BlockCustomWall extends BlockWall
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     @Override
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
         return block.getBlockTextureFromSideAndMetadata(par1, par2);
     }
     
     @Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is) 
 	{
 		//TODO: Debug Message should go here if debug is toggled on
 		if(TFC_Settings.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(i, j, k);
-			System.out.println("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());
+			System.out.println("Meta="+(new StringBuilder()).append(this.getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 	}
     
@@ -73,7 +73,7 @@ public class BlockCustomWall extends BlockWall
 		if(TFC_Settings.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
-			System.out.println("Meta = "+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());
+			System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
 		}
 		return false;
     }
@@ -86,12 +86,6 @@ public class BlockCustomWall extends BlockWall
     {
         return 32;
     }
-    
-    @Override
-	public String getTextureFile() {
-
-    	return TFC_Textures.RockSheet;
-	}
     
     @SideOnly(Side.CLIENT)
     @Override

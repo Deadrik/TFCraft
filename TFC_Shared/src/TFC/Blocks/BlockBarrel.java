@@ -48,7 +48,6 @@ public class BlockBarrel extends BlockTerraContainer
 	public BlockBarrel(int par1)
 	{
 		super(par1, Material.wood);
-		this.blockIndexInTexture = 5;
 	}
 
 
@@ -75,7 +74,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return 22;//TFCBlocks.IngotPileRenderId;//ingotpileId;
+		return 22;
 	}
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
@@ -90,21 +89,19 @@ public class BlockBarrel extends BlockTerraContainer
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack is)
 	{
 
 	}
 
-
-	
 	/**
 	 * Returns the block texture based on the side being looked at.  Args: side
 	 */
-	@Override
-	public int getBlockTextureFromSide(int par1)
+	/*@Override
+	public Icon getBlockTextureFromSideAndMetadata(int par1)
 	{
 		return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture - 1 : (par1 == 3 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture));
-	}
+	}*/
 
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
@@ -153,7 +150,7 @@ public class BlockBarrel extends BlockTerraContainer
 
 						if (var7.hasTagCompound())
 						{
-							var12.func_92014_d().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 						}
 					}
 				}

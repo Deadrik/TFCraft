@@ -82,9 +82,9 @@ public class EntityBear extends EntityTameableTFC
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, false));
 		targetTasks.addTask(2, new EntityAIPanicTFC(this,moveSpeed*1.5F,true,false));
-		fooditems.add(Item.beefRaw.shiftedIndex);
-		fooditems.add(Item.porkRaw.shiftedIndex);
-		fooditems.add(Item.fishRaw.shiftedIndex);
+		fooditems.add(Item.beefRaw.itemID);
+		fooditems.add(Item.porkRaw.itemID);
+		fooditems.add(Item.fishRaw.itemID);
 	}
 
 
@@ -112,9 +112,9 @@ public class EntityBear extends EntityTameableTFC
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, true));
 		targetTasks.addTask(2, new EntityAIPanicTFC(this,moveSpeed*1.5F,true,false));
-		fooditems.add(Item.beefRaw.shiftedIndex);
-		fooditems.add(Item.porkRaw.shiftedIndex);
-		fooditems.add(Item.fishRaw.shiftedIndex);
+		fooditems.add(Item.beefRaw.itemID);
+		fooditems.add(Item.porkRaw.itemID);
+		fooditems.add(Item.fishRaw.itemID);
 	}
 
 

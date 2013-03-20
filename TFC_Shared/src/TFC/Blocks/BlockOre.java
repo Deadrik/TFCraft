@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -44,8 +45,7 @@ import net.minecraft.world.gen.feature.*;
 public class BlockOre extends BlockTerra
 {
 	public BlockOre(int i, Material material) {
-		super(i,128, material);
-		this.blockIndexInTexture = 128;
+		super(i, material);
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
@@ -62,19 +62,29 @@ public class BlockOre extends BlockTerra
 	}
 
 	@Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
     {
-        return blockIndexInTexture + j;
+        return icons[j];
+    }
+	
+	protected Icon[] icons = new Icon[16];
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/ores/"+blockNames[i] + " Ore");
+		}
     }
 
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.oreRenderId;
 	}
 
-	/*
-	 * Mapping from metadata value to damage value
-	 */
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 	    if(entityplayer != null)
@@ -107,34 +117,10 @@ public class BlockOre extends BlockTerra
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return TFCItems.OreChunk.shiftedIndex;
+		return TFCItems.OreChunk.itemID;
 	}
-	
-	@Override
-    public String getTextureFile()
-    {
-		return TFC_Textures.RockSheet;
-    }
 	
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
         "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
         "Bituminous Coal", "Lignite"};
-    
-    public static String getItemNameDamage(int d) 
-    {
-        String s = blockNames[d];
-        return s;
-    }
-    
-    public static Item getDroppedItem(int meta)
-    {
-        if(meta == 14 || meta == 15) 
-        {
-            return Item.coal;
-        } 
-        else 
-        {
-            return TFCItems.SmallOreChunk;
-        }
-    }
 }

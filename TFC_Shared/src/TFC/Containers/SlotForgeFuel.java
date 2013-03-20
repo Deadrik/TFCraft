@@ -43,7 +43,7 @@ public class SlotForgeFuel extends Slot
 
     public boolean isItemValid(ItemStack itemstack)
     {
-        if(itemstack.itemID == Item.coal.shiftedIndex) {
+        if(itemstack.itemID == Item.coal.itemID) {
             return true;
         }
         return false;

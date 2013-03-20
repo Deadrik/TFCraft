@@ -45,7 +45,7 @@ public class SlotLogPile extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == TFCItems.Logs.shiftedIndex) {
+		if(itemstack.itemID == TFCItems.Logs.itemID) {
 			return true;
 		}
 

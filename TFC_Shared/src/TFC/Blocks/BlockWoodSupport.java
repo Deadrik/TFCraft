@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -36,8 +37,14 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockWoodSupport extends BlockTerra2
+public class BlockWoodSupport extends BlockTerra
 {
+	Icon[] icons = new Icon[16];
+	public BlockWoodSupport(int i, Material material) 
+	{
+		super(i, Material.wood);
+	}
+	
 	public static Boolean getSupportInRange(World world, int x, int y, int z, int range, int supportID)
 	{
 		for(int i = -range; i < range; i++)
@@ -89,11 +96,6 @@ public class BlockWoodSupport extends BlockTerra2
 		return 0;
 	}
 
-	public BlockWoodSupport(int i, Material material) 
-	{
-		super(i, Material.wood);
-	}
-
 	@Override
 	public int damageDropped(int j) 
 	{
@@ -107,10 +109,25 @@ public class BlockWoodSupport extends BlockTerra2
     }
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
-	{
-		return j+96;
-	}
+    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+    }
+
+    @Override
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    {
+        return icons[par2];
+    }
+    
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("wood/WoodSheet/WoodSheet"+i);
+		}
+    }
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
@@ -299,7 +316,7 @@ public class BlockWoodSupport extends BlockTerra2
 			if(!world.isBlockOpaqueCube(i, j-1, k) && world.getBlockId(i, j-1, k) != vSupportID)
 			{	
 				harvestBlock(world, null, i, j, k,  meta);
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlock(i, j, k, 0);
 			}
 		}
 		else if(isHorizontal)//Horizontal Beam
@@ -311,7 +328,7 @@ public class BlockWoodSupport extends BlockTerra2
 			if(support  || b2 || b1 && b2)
 			{
 				harvestBlock(world, null, i, j, k,  meta);
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlock(i, j, k, 0);
 			}
 		}
 	}

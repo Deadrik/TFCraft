@@ -44,7 +44,7 @@ public class SlotAnvilFlux extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == TFCItems.Flux.shiftedIndex) {
+		if(itemstack.itemID == TFCItems.Flux.itemID) {
 			return true;
 		} else {
 			return false;

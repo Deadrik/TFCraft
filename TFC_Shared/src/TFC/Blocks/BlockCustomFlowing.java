@@ -66,18 +66,16 @@ public class BlockCustomFlowing extends BlockFlowing
     private void updateFlow(World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        par1World.setBlockAndMetadata(par2, par3, par4, this.blockID + 1, var5);
-        par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
+        par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID + 1, var5, 3);
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return this.blockMaterial != Material.lava;
     }
 
-    /**
-     * Ticks the block if it's been scheduled
-     */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         int var6 = this.getFlowDecay(par1World, par2, par3, par4);
@@ -151,12 +149,12 @@ public class BlockCustomFlowing extends BlockFlowing
 
                 if (var10 < 0)
                 {
-                    par1World.setBlockWithNotify(par2, par3, par4, 0);
+                    par1World.setBlock(par2, par3, par4, 0);
                 }
                 else
                 {
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var10);
-                    par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var10, 3);
+                    par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
                     par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
                 }
             }
@@ -170,7 +168,7 @@ public class BlockCustomFlowing extends BlockFlowing
         {
             if (this.blockMaterial == Material.lava && par1World.getBlockMaterial(par2, par3 - 1, par4) == Material.water)
             {
-                par1World.setBlockWithNotify(par2, par3 - 1, par4, Block.stone.blockID);
+                par1World.setBlock(par2, par3 - 1, par4, Block.stone.blockID);
                 this.triggerLavaMixEffects(par1World, par2, par3 - 1, par4);
                 return;
             }
@@ -243,7 +241,7 @@ public class BlockCustomFlowing extends BlockFlowing
                 }
             }
 
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par5);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par5, 3);
         }
     }
 
@@ -437,16 +435,14 @@ public class BlockCustomFlowing extends BlockFlowing
         return var5 == this.blockMaterial ? false : (var5 == Material.lava ? false : !this.blockBlocksFlow(par1World, par2, par3, par4));
     }
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         super.onBlockAdded(par1World, par2, par3, par4);
 
         if (par1World.getBlockId(par2, par3, par4) == this.blockID)
         {
-            par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
+            par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
         }
     }
 }

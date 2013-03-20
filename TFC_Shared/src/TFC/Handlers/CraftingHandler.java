@@ -51,28 +51,28 @@ public class CraftingHandler implements ICraftingHandler
 
 		if(iinventory != null)
 		{
-			if(itemstack.itemID == TFCItems.StoneBrick.shiftedIndex)
+			if(itemstack.itemID == TFCItems.StoneBrick.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Chisels);
 			}
-			else if(itemstack.itemID == TFCItems.SinglePlank.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.SinglePlank.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Axes);
 				HandleItem(entityplayer, iinventory, Recipes.Saws);
 			}
-			else if(itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.WoodSupportItemH.itemID || itemstack.itemID == TFCItems.WoodSupportItemV.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Saws);
 			}
-			else if(itemstack.itemID == Item.bowlEmpty.shiftedIndex || 
-					itemstack.getItem() instanceof ItemTerraFood || itemstack.itemID == TFCItems.ScrapedHide.shiftedIndex
-					|| itemstack.itemID == TFCItems.Wool.shiftedIndex||itemstack.itemID == TFCItems.TerraLeather.shiftedIndex)
+			else if(itemstack.itemID == Item.bowlEmpty.itemID || 
+					itemstack.getItem() instanceof ItemTerraFood || itemstack.itemID == TFCItems.ScrapedHide.itemID
+					|| itemstack.itemID == TFCItems.Wool.itemID||itemstack.itemID == TFCItems.TerraLeather.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Knives);
-				if(itemstack.itemID == TFCItems.Wool.shiftedIndex&& !entityplayer.worldObj.isRemote){
-					entityplayer.dropItem(TFCItems.Hide.shiftedIndex, 1);
+				if(itemstack.itemID == TFCItems.Wool.itemID&& !entityplayer.worldObj.isRemote){
+					entityplayer.dropItem(TFCItems.Hide.itemID, 1);
 				}
-				else if(itemstack.itemID == TFCItems.TerraLeather.shiftedIndex){
+				else if(itemstack.itemID == TFCItems.TerraLeather.itemID){
 					boolean openGui = false;
 					for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 					{             
@@ -98,19 +98,19 @@ public class CraftingHandler implements ICraftingHandler
 					entityplayer.openGui(TerraFirmaCraft.instance, 36, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 				}
 			}
-			else if(itemstack.itemID == TFCItems.WoodSupportItemV.shiftedIndex || itemstack.itemID == TFCItems.WoodSupportItemH.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.WoodSupportItemV.itemID || itemstack.itemID == TFCItems.WoodSupportItemH.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Axes);
 			}
-			else if(itemstack.itemID == TFCItems.WoolYarn.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.WoolYarn.itemID)
 			{
 				HandleItem(entityplayer,iinventory,Recipes.Spindle);
 			}
-			else if(itemstack.itemID == TFCItems.Flux.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.Flux.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Hammers);
 			}
-			else if(itemstack.itemID == TFCItems.Mortar.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.Mortar.itemID)
 			{
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{             
@@ -118,14 +118,14 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						continue;
 					}
-					if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.shiftedIndex)
+					if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.itemID)
 					{
-						iinventory.getStackInSlot(i).itemID=TFCItems.Limewater.shiftedIndex;
+						iinventory.getStackInSlot(i).itemID=TFCItems.Limewater.itemID;
 					}
 				}
 				
 			}
-			else if(itemstack.itemID == TFCItems.LooseRock.shiftedIndex)
+			else if(itemstack.itemID == TFCItems.LooseRock.itemID)
 			{
 				boolean openGui = false;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
@@ -134,7 +134,7 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						continue;
 					}
-					if(iinventory.getStackInSlot(i).itemID == TFCItems.LooseRock.shiftedIndex)
+					if(iinventory.getStackInSlot(i).itemID == TFCItems.LooseRock.itemID)
 					{
 						if(iinventory.getStackInSlot(i).stackSize == 1)
 							iinventory.setInventorySlotContents(i, null);
@@ -170,7 +170,7 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			for(int j = 0; j < Items.length; j++) 
 			{  
-				DamageItem(entityplayer,iinventory,i,Items[j].shiftedIndex);
+				DamageItem(entityplayer,iinventory,i,Items[j].itemID);
 			}
 		}
 	}

@@ -92,7 +92,7 @@ public class BlockLogVert extends BlockTerra
         }
         else
         {
-            world.setBlockAndMetadata(i, j, k, blockID, l);
+            world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
         }
     }
 
@@ -104,7 +104,7 @@ public class BlockLogVert extends BlockTerra
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCItems.Logs.shiftedIndex;
+        return TFCItems.Logs.itemID;
     }
 
     @Override
@@ -119,12 +119,6 @@ public class BlockLogVert extends BlockTerra
             return j+144;
         }
         return j+128;
-    }
-
-    @Override
-    public String getTextureFile() 
-    {
-        return "/bioxx/terrablocks.png";
     }
     
     @SideOnly(Side.CLIENT)

@@ -40,11 +40,9 @@ public class BlockLogPile extends BlockContainer
 {
 	private Class EntityClass;
 
-	public BlockLogPile(int i, Class tClass)
+	public BlockLogPile(int i)
 	{
 		super(i, Material.wood);
-		blockIndexInTexture = 92;
-		EntityClass = tClass;
 	}
 	
 	public static int getDirectionFromMetadata(int i)
@@ -67,7 +65,7 @@ public class BlockLogPile extends BlockContainer
 				te = (TileEntityTerraLogPile)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				if(is != null && is.getItem().shiftedIndex == TFCItems.Logs.shiftedIndex)
+				if(is != null && is.getItem().itemID == TFCItems.Logs.itemID)
 				{
 					return false;
 				}
@@ -83,7 +81,7 @@ public class BlockLogPile extends BlockContainer
 		}
 	}
 
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(j == 0 || j == 2)//+z
 		{
@@ -121,12 +119,6 @@ public class BlockLogPile extends BlockContainer
 		return 92;
 
 	}
-
-	@Override
-	public String getTextureFile() 
-	{
-		return "/bioxx/terrablocks.png";
-	}
 	
 	public void Eject(World par1World, int par2, int par3, int par4)
     {
@@ -150,7 +142,7 @@ public class BlockLogPile extends BlockContainer
 		Eject(world,i,j,k);
 	}
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) {
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) {
 		Eject(par1World,par2,par3,par4);
 	}
 	@Override

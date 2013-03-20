@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -72,9 +73,21 @@ public class BlockSed extends BlockCollapsable
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	{
+		return icons[j];
+	}
+
+	Icon[] icons = new Icon[10];
+	String[] names = {"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
     {
-        return blockIndexInTexture + j;
+		for(int i = 0; i < 10; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Raw");
+		}
     }
 
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
@@ -89,7 +102,7 @@ public class BlockSed extends BlockCollapsable
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCItems.LooseRock.shiftedIndex;
+        return TFCItems.LooseRock.itemID;
     }
 
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
@@ -133,12 +146,6 @@ public class BlockSed extends BlockCollapsable
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         DropCarvedStone(world, i, j, k);
-    }
-    
-    @Override
-    public String getTextureFile()
-    {
-    	return TFC_Textures.RockSheet;
     }
     
     /**

@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -42,12 +43,11 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockMMSmooth extends Block
+public class BlockMMSmooth extends BlockTerra
 {
-	public BlockMMSmooth(int i, int tex) 
+	public BlockMMSmooth(int i) 
 	{
 		super(i, Material.rock);
-		this.blockIndexInTexture = tex;
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
@@ -73,16 +73,22 @@ public class BlockMMSmooth extends Block
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
-    {
-        return blockIndexInTexture + j;
-    }
-
-	@Override
-	public String getTextureFile()
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return TFC_Textures.RockSheet;
+		return icons[j];
 	}
+
+	protected Icon[] icons = new Icon[6];
+	protected String[] names = {"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 6; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Smooth");
+		}
+    }
 	
 	/**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer

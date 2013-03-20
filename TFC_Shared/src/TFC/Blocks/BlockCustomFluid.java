@@ -90,14 +90,6 @@ public abstract class BlockCustomFluid extends BlockFluid
     }
 
     /**
-     * Returns the block texture based on the side being looked at.  Args: side
-     */
-    public int getBlockTextureFromSide(int par1)
-    {
-        return par1 != 0 && par1 != 1 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture;
-    }
-
-    /**
      * Returns the amount of fluid decay at the coordinates, or -1 if the block at the coordinates is not the same
      * material as the fluid.
      */

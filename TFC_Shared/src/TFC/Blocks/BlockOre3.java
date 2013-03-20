@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -41,10 +42,10 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 public class BlockOre3 extends BlockOre
 {
-
+	public static String[] blockNames = { "Borax", "Olivine", "Lapis Lazuli"};
+	
 	public BlockOre3(int i, Material material) {
 		super(i, material);
-		this.blockIndexInTexture = 160;
 	}
 
 	public void addCreativeItems(java.util.ArrayList list)
@@ -52,6 +53,15 @@ public class BlockOre3 extends BlockOre
         for(int i = 0; i < 3; i++) {
             list.add(new ItemStack(this,1,i));
         }
+    }
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 3; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/ores/"+blockNames[i] + " Ore");
+		}
     }
 
     @Override
@@ -86,13 +96,7 @@ public class BlockOre3 extends BlockOre
 
 	}
 	
-	@Override
-    public String getTextureFile()
-    {
-		return TFC_Textures.RockSheet;
-    }
 	
-	public static String[] blockNames = { "Borax", "Olivine", "LapisLazuli"};
     
     public static String getItemNameDamage(int d) 
     {

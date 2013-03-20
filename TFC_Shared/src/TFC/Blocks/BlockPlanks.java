@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -67,10 +68,24 @@ public class BlockPlanks extends BlockTerra
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return j+176;
+		return icons[j];
 	}
+	
+	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
+	Icon[] icons = new Icon[16];
+	
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("wood/"+WoodNames[i]+" Plank");
+		}
+    }
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)

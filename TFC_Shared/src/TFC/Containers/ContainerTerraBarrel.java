@@ -243,9 +243,10 @@ public class ContainerTerraBarrel extends ContainerTFC
 	}
 
 	private int updatecounter = 0;
-	public void updateCraftingResults()
+	@Override
+	public void detectAndSendChanges()
     {
-        super.updateCraftingResults();
+        super.detectAndSendChanges();
         
         for (int var1 = 0; var1 < this.crafters.size(); ++var1)
         {

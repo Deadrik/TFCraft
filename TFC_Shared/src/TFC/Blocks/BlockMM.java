@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -73,9 +74,21 @@ public class BlockMM extends BlockCollapsable
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	{
+		return icons[j];
+	}
+
+	protected Icon[] icons = new Icon[6];
+	protected String[] names = {"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
     {
-        return blockIndexInTexture + j;
+		for(int i = 0; i < 6; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Raw");
+		}
     }
 
     @Override
@@ -91,7 +104,7 @@ public class BlockMM extends BlockCollapsable
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCItems.LooseRock.shiftedIndex;
+        return TFCItems.LooseRock.itemID;
     }
 
     public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
@@ -129,7 +142,8 @@ public class BlockMM extends BlockCollapsable
 
         }
     }
-
+    
+    @Override
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving) 
     {
         int metadata = world.getBlockMetadata(i, j, k);
@@ -138,20 +152,13 @@ public class BlockMM extends BlockCollapsable
 
         //mc.ingameGUI.addChatMessage("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());  
     }
+    
+    @Override
     public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         DropCarvedStone(world, i, j, k);
     }
-
-    @Override
-    public String getTextureFile()
-    {
-    	return TFC_Textures.RockSheet;
-    }
     
-    /**
-     * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
-     */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
     {

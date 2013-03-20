@@ -36,7 +36,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockPeat extends BlockTerra2
+public class BlockPeat extends BlockTerra
 {
 
 	public BlockPeat(int i)

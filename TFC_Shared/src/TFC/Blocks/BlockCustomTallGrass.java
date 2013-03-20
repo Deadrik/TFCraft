@@ -40,20 +40,13 @@ import net.minecraftforge.common.IShearable;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 {
-    public BlockCustomTallGrass(int par1, int par2)
+    public BlockCustomTallGrass(int par1)
     {
-        super(par1, par2);
+        super(par1);
         float var3 = 0.4F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
     }
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    public int getBlockTextureFromSideAndMetadata(int par1, int par2)
-    {
-        return par2 == 1 ? this.blockIndexInTexture : (par2 == 2 ? this.blockIndexInTexture + 16 + 1 : (par2 == 0 ? this.blockIndexInTexture + 16 : this.blockIndexInTexture));
-    }
 
     public int getBlockColor()
     {

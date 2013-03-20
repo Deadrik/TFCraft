@@ -44,7 +44,7 @@ public class SlotScribeCrafting extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == TFCItems.Ink.shiftedIndex)
+		if(itemstack.itemID == TFCItems.Ink.itemID)
 		{
 			return true;
 		}

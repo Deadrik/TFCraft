@@ -36,9 +36,9 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 public class BlockCustomMushroom extends BlockCustomFlower
 {
-	public BlockCustomMushroom(int par1, int par2)
+	public BlockCustomMushroom(int par1)
 	{
-		super(par1, par2);
+		super(par1);
 		float var3 = 0.2F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
 		this.setTickRandomly(true);
@@ -101,7 +101,7 @@ public class BlockCustomMushroom extends BlockCustomFlower
 		}
 		else
 		{
-			par1World.setBlockAndMetadata(par2, par3, par4, this.blockID, var6);
+			par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, var6, 3);
 			return false;
 		}
 	}
@@ -158,7 +158,7 @@ public class BlockCustomMushroom extends BlockCustomFlower
 
 			if (par1World.isAirBlock(var8, var9, var10) && this.canBlockStay(par1World, var8, var9, var10))
 			{
-				par1World.setBlockWithNotify(var8, var9, var10, this.blockID);
+				par1World.setBlock(var8, var9, var10, this.blockID);
 			}
 		}
 	}

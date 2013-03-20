@@ -70,31 +70,31 @@ public class SlotCraftingWorkbench extends Slot
 		{
 			this.thePlayer.addStat(AchievementList.buildWorkBench, 1);
 		}
-		else if (par1ItemStack.itemID == Item.pickaxeWood.shiftedIndex)
+		else if (par1ItemStack.itemID == Item.pickaxeWood.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.buildPickaxe, 1);
 		}
-		else if (par1ItemStack.itemID == Block.stoneOvenIdle.blockID)
+		else if (par1ItemStack.itemID == Block.furnaceIdle.blockID)
 		{
 			this.thePlayer.addStat(AchievementList.buildFurnace, 1);
 		}
-		else if (par1ItemStack.itemID == Item.hoeWood.shiftedIndex)
+		else if (par1ItemStack.itemID == Item.hoeWood.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.buildHoe, 1);
 		}
-		else if (par1ItemStack.itemID == Item.bread.shiftedIndex)
+		else if (par1ItemStack.itemID == Item.bread.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.makeBread, 1);
 		}
-		else if (par1ItemStack.itemID == Item.cake.shiftedIndex)
+		else if (par1ItemStack.itemID == Item.cake.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.bakeCake, 1);
 		}
-		else if (par1ItemStack.itemID == Item.pickaxeStone.shiftedIndex)
+		else if (par1ItemStack.itemID == Item.pickaxeStone.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.buildBetterPickaxe, 1);
 		}
-		else if (par1ItemStack.itemID == Item.swordWood.shiftedIndex)
+		else if (par1ItemStack.itemID == Item.swordWood.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.buildSword, 1);
 		}

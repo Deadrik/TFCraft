@@ -76,11 +76,6 @@ public class BlockFruitWood extends BlockContainer
         return j + blockIndexInTexture;
     }
 
-    @Override
-    public String getTextureFile() 
-    {
-        return "/bioxx/vegetation.png";
-    }
 
     @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
@@ -158,7 +153,7 @@ public class BlockFruitWood extends BlockContainer
     @Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCItems.Logs.shiftedIndex;
+        return TFCItems.Logs.itemID;
     }
 
     @Override

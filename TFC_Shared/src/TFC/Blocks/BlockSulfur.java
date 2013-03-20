@@ -44,7 +44,7 @@ public class BlockSulfur extends Block
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
 		return 252+j;
 	}
@@ -59,13 +59,6 @@ public class BlockSulfur extends Block
 		return TFCBlocks.sulfurRenderId;
 	}
 
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrablocks.png";
-
-	}
-
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
@@ -73,7 +66,7 @@ public class BlockSulfur extends Block
 	}
 	public int idDropped(int i, Random random, int j)
 	{
-		return TFCItems.SulfurPowder.shiftedIndex;
+		return TFCItems.SulfurPowder.itemID;
 	}
 
 	public boolean isBlockNormalCube(World world, int i, int j, int k)

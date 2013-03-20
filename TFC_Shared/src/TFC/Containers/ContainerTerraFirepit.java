@@ -250,7 +250,7 @@ public class ContainerTerraFirepit extends ContainerTFC
             }
             else
             {
-                if(itemstack1.itemID == TFCItems.Logs.shiftedIndex)
+                if(itemstack1.itemID == TFCItems.Logs.itemID)
                 {
                     if(slotfuel.getHasStack())
                     {
@@ -283,8 +283,9 @@ public class ContainerTerraFirepit extends ContainerTFC
         }
         return null;
     }
-
-    public void updateCraftingResults()
+    
+    @Override
+    public void detectAndSendChanges()
     {
         for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
         {

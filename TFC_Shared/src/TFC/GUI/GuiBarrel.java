@@ -65,10 +65,10 @@ public class GuiBarrel extends GuiContainer
 		//guiLeft = (width - 208) / 2;
 		//guiTop = (height - 198) / 2;
 
-		controlList.clear();
+		buttonList.clear();
 
-		controlList.add(new GuiButton(0, guiLeft+52, guiTop + 50, 36, 20, "Seal"));
-		controlList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 36, 20, "Empty"));
+		buttonList.add(new GuiButton(0, guiLeft+52, guiTop + 50, 36, 20, "Seal"));
+		buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 36, 20, "Empty"));
 	}
 
 	protected void actionPerformed(GuiButton guibutton)

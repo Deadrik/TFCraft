@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -65,10 +66,24 @@ public class BlockWoodConstruct extends BlockTerraContainer
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return j+176;
+		return icons[j];
 	}
+	
+	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
+	Icon[] icons = new Icon[16];
+	
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = registerer.func_94245_a("wood/"+WoodNames[i]+" Plank");
+		}
+    }
 
 	@Override
 	public boolean isOpaqueCube()
@@ -97,7 +112,7 @@ public class BlockWoodConstruct extends BlockTerraContainer
 		Eject(world,i,j,k);
 	}
 	@Override
-	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) 
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) 
 	{
 		Eject(par1World,par2,par3,par4);
 	}
@@ -121,7 +136,7 @@ public class BlockWoodConstruct extends BlockTerraContainer
     }
 
 	@Override
-	public void addCollidingBlockToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{
 		TileEntityWoodConstruct te = (TileEntityWoodConstruct) world.getBlockTileEntity(i, j, k);
 
@@ -142,7 +157,7 @@ public class BlockWoodConstruct extends BlockTerraContainer
 				float maxZ = minZ + div;
 
 				this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
+				super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
 			}
 		}
 
@@ -158,7 +173,7 @@ public class BlockWoodConstruct extends BlockTerraContainer
 				float maxZ = minZ + div;
 
 				this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
+				super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
 			}
 		}
 
@@ -174,7 +189,7 @@ public class BlockWoodConstruct extends BlockTerraContainer
 				float maxZ = 1;
 
 				this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-				super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
+				super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
 			}
 		}
 		setBlockBoundsBasedOnSelection(world, i, j, k);

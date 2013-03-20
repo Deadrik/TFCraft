@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -36,29 +37,19 @@ import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
-public class BlockMolten extends Block
+public class BlockMolten extends BlockTerra
 {
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-
 	public BlockMolten(int i)
 	{
 		super(i, Material.iron);
 		this.setLightValue(1.0F);
 	}
-
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
-	{
-		return 67;
-	}
-
+	
 	@Override
-	public String getTextureFile() {
-
-		return "/bioxx/terrablocks.png";
-	}
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		this.field_94336_cN = iconRegisterer.func_94245_a("/devices/Molten Rock");
+    }
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		

@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -44,38 +45,48 @@ import net.minecraft.world.gen.feature.*;
 public class BlockFarmland extends BlockContainer
 {
 	int dirtID;
-
+	Icon[] DirtTexture = new Icon[23];
+	int textureOffset = 0;
+	
 	public BlockFarmland(int par1, int id, int tex)
 	{
 		super(par1, Material.ground);
-		this.blockIndexInTexture = tex;
 		this.setTickRandomly(true);
-		//this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.9375F, 1.0F);
 		dirtID = id;
-		//this.setLightOpacity(255);
+		textureOffset = tex;
 	}
 
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2)
-	{
-		int tex = par1 == 1 ? this.blockIndexInTexture+par2 : this.blockIndexInTexture+par2 - 64;
-		return tex;
-	}
+	@Override
+    public void func_94332_a(IconRegister registerer)
+    {
+		for(int i = 0; i < 23; i++)
+		{
+			DirtTexture[i] = registerer.func_94245_a("farmland/Farmland"+(i+dirtID));
+		}
+    }
+    
+    @Override
+    public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
+    {
+    	Block blk = Block.blocksList[dirtID];
+    	
+        if (par5 == 1)//top
+        {
+            return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord)+textureOffset];
+        }
+        else
+        {
+            return blk.getBlockTextureFromSideAndMetadata(0, access.getBlockMetadata(xCoord, yCoord, zCoord));
+        }
+    }
 
-	/**
-	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-	 * cleared to be reused)
-	 */
+    @Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return AxisAlignedBB.getBoundingBox((double)(par2 + 0), (double)(par3 + 0), (double)(par4 + 0), (double)(par2 + 1), (double)(par3 + 1), (double)(par4 + 1));
 	}
 
-	/**
-	 * Returns the ID of the items to drop on destruction.
-	 */
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
 		return 0;
@@ -126,45 +137,17 @@ public class BlockFarmland extends BlockContainer
         return false;
     }
 
-	/**
-	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-	 */
+    @Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-	 * their own) Args: x, y, z, neighbor blockID
-	 */
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-	{
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-//		Material var6 = par1World.getBlockMaterial(par2, par3 + 1, par4);
-//
-//		if (var6.isSolid())
-//		{
-//			DataLayer rockLayer = ((TFCWorldChunkManager)par1World.getWorldChunkManager()).getRockLayerAt(par2, par4, 0);
-//			int id = TFC_Core.getTypeForDirt(rockLayer.data2);
-//			par1World.setBlockWithNotify(par2, par3, par4, id);
-//		}
-	}
-
-	/**
-	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-	 */
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return true;
 	}
-	
-	@Override
-    public String getTextureFile()
-    {
-		return TFC_Textures.BlockSheet2;
-    }
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

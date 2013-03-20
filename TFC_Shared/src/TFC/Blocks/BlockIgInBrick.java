@@ -1,15 +1,24 @@
 package TFC.Blocks;
 
-import TFC.*;
-import TFC.Core.TFC_Settings;
+import java.util.List;
+import java.util.Random;
+import TFC.TerraFirmaCraft;
+import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Items.ItemChisel;
+import TFC.Items.ItemHammer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.*;
@@ -30,46 +39,26 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.src.ModLoader;
 
-public abstract class BlockTerra2 extends Block
+
+public class BlockIgInBrick extends BlockIgInSmooth
 {
 	
-	protected BlockTerra2(int par1) 
-	{
-		super(par1, Material.rock);
+	public BlockIgInBrick(int i) {
+		super(i);
+		// TODO Auto-generated constructor stub
 	}
 
-	protected BlockTerra2(int par1, Material material) 
-	{
-		super(par1, material);
-	}
-	
 	@Override
-    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is) 
-    {
-        //TODO: Debug Message should go here if debug is toggled on
-        if(TFC_Settings.enableDebugMode && world.isRemote)
-        {
-            int metadata = world.getBlockMetadata(i, j, k);
-            System.out.println("Meta="+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
-        }
-    }
-	
-	@Override
-	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
-	{
-		return false;
-	}
-	
 	public void registerIcon(IconRegister iconRegisterer)
-    {
-
-    }
-    
-    public void func_94332_a(IconRegister iconRegisterer)
-    {
-    	super.func_94332_a(iconRegisterer);
-    	registerIcon(iconRegisterer);
-    }
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Brick");
+		}
+	}
 }

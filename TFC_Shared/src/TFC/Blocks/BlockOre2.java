@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -42,12 +43,24 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockOre2 extends BlockOre
 {
-
-	public BlockOre2(int i, Material material) {
+	public static String[] blockNames = { "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
+        "Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite"};
+	
+	public BlockOre2(int i, Material material) 
+	{
 		super(i, material);
-		this.blockIndexInTexture = 144;
 	}
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/ores/"+blockNames[i] + " Ore");
+		}
+    }
 
+	@Override
 	public void addCreativeItems(java.util.ArrayList list)
     {
         for(int i = 0; i <16; i++) {
@@ -128,16 +141,7 @@ public class BlockOre2 extends BlockOre
 			return null;
 		}
 	}
-	
-	@Override
-    public String getTextureFile()
-    {
-		return TFC_Textures.RockSheet;
-    }
-	
-	public static String[] blockNames = { "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
-        "Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite"};
-    
+
     public static String getItemNameDamage(int d) 
     {
         String s = blockNames[d-16];

@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -49,21 +50,28 @@ public class BlockDryGrass extends BlockGrass
         super(par1, par2);
     }
 
-    /**
-     * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
-     */
     @Override
-    public int getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
+    public void func_94332_a(IconRegister registerer)
     {
-    	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord))];
+		for(int i = 0; i < 23; i++)
+		{
+			DirtTexture[i] = registerer.func_94245_a("soil/Dirt"+i);
+			GrassTopTexture = registerer.func_94245_a("GrassSparseOverlay");
+		}
+    }
+    
+    @Override
+    public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
+    {
+    	Block blk = Block.blocksList[TFC_Core.getTypeForDirt(access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset)];
     	
         if (par5 == 1)//top
         {
-            return 252;
+            return GrassTopTexture;
         }
         else
         {
-            return this.blockIndexInTexture + access.getBlockMetadata(xCoord, yCoord, zCoord);
+            return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset];
         }
     }
 }

@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -45,14 +46,14 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockIgExCobble extends BlockTerra2
+public class BlockIgExCobble extends BlockTerra
 {
 
 	public static boolean fallInstantly = false;
 
 	public BlockIgExCobble(int i, Material material) 
 	{
-        super(i,19, material);
+        super(i, material);
     }
 	
 	public static boolean canFallBelow(World world, int i, int j, int k)
@@ -104,28 +105,31 @@ public class BlockIgExCobble extends BlockTerra2
 	@Override
     public int idDropped(int i, Random random, int j)
     {
-        return TFCItems.LooseRock.shiftedIndex;
+        return TFCItems.LooseRock.itemID;
     }
 
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2)
-	{
-		return this.blockIndexInTexture + par2;
-	}
+	 @Override
+		public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+		{
+			return icons[j];
+		}
 
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
-	}
+		protected Icon[] icons = new Icon[4];
+		protected String[] names = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
+		
+		@Override
+		public void registerIcon(IconRegister iconRegisterer)
+	    {
+			for(int i = 0; i < 4; i++)
+			{
+				icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Cobble");
+			}
+	    }
 
 	@Override
 	public void onBlockAdded(World world, int i, int j, int k)
 	{
-		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+		world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
 	}
 
 	@Override
@@ -137,11 +141,11 @@ public class BlockIgExCobble extends BlockTerra2
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+		world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
 	}
 
 	@Override
-	public int tickRate()
+	public int tickRate(World world)
 	{
 		return 3;
 	}
@@ -154,11 +158,11 @@ public class BlockIgExCobble extends BlockTerra2
 			byte byte0 = 32;
 			if (fallInstantly || !world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
 			{
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlock(i, j, k, 0);
 				for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
 				if (j > 0)
 				{
-					world.setBlockWithNotify(i, j, k, blockID);
+					world.setBlock(i, j, k, blockID);
 				}
 			}
 			else if (!world.isRemote)

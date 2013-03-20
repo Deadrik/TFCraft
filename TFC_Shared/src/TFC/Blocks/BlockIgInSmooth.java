@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -44,12 +45,11 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.src.ModLoader;
 
 
-public class BlockIgInSmooth extends Block
+public class BlockIgInSmooth extends BlockTerra
 {
-	public BlockIgInSmooth(int i, int tex) 
+	public BlockIgInSmooth(int i) 
 	{
 		super(i, Material.rock);
-		this.blockIndexInTexture = tex;
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
@@ -74,14 +74,21 @@ public class BlockIgInSmooth extends Block
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) {
-		return blockIndexInTexture+j;
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	{
+		return icons[j];
 	}
 
+	protected Icon[] icons = new Icon[3];
+	protected String[] names = {"Granite", "Diorite", "Gabbro"};
+
 	@Override
-	public String getTextureFile()
+	public void registerIcon(IconRegister iconRegisterer)
 	{
-		return TFC_Textures.RockSheet;
+		for(int i = 0; i < 3; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Smooth");
+		}
 	}
 
 	/**

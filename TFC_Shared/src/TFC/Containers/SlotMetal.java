@@ -46,21 +46,21 @@ public class SlotMetal extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 
-		if(itemstack.itemID == TFCItems.BismuthUnshaped.shiftedIndex || itemstack.itemID == TFCItems.BismuthBronzeUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.BlackBronzeUnshaped.shiftedIndex || itemstack.itemID == TFCItems.BlackSteelUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.BlueSteelUnshaped.shiftedIndex || itemstack.itemID == TFCItems.BrassUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.BronzeUnshaped.shiftedIndex || itemstack.itemID == TFCItems.CopperUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.GoldUnshaped.shiftedIndex || itemstack.itemID == TFCItems.WroughtIronUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.LeadUnshaped.shiftedIndex || itemstack.itemID == TFCItems.NickelUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.PigIronUnshaped.shiftedIndex || itemstack.itemID == TFCItems.PlatinumUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.RedSteelUnshaped.shiftedIndex || itemstack.itemID == TFCItems.RoseGoldUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.SilverUnshaped.shiftedIndex|| itemstack.itemID == TFCItems.SteelUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.SterlingSilverUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.TinUnshaped.shiftedIndex || itemstack.itemID == TFCItems.ZincUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.HCBlueSteelUnshaped.shiftedIndex || itemstack.itemID == TFCItems.WeakBlueSteelUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.HCRedSteelUnshaped.shiftedIndex || itemstack.itemID == TFCItems.WeakRedSteelUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.HCSteelUnshaped.shiftedIndex || itemstack.itemID == TFCItems.WeakSteelUnshaped.shiftedIndex || 
-				itemstack.itemID == TFCItems.HCBlackSteelUnshaped.shiftedIndex || itemstack.itemID == TFCItems.CeramicMold.shiftedIndex)
+		if(itemstack.itemID == TFCItems.BismuthUnshaped.itemID || itemstack.itemID == TFCItems.BismuthBronzeUnshaped.itemID || 
+				itemstack.itemID == TFCItems.BlackBronzeUnshaped.itemID || itemstack.itemID == TFCItems.BlackSteelUnshaped.itemID || 
+				itemstack.itemID == TFCItems.BlueSteelUnshaped.itemID || itemstack.itemID == TFCItems.BrassUnshaped.itemID || 
+				itemstack.itemID == TFCItems.BronzeUnshaped.itemID || itemstack.itemID == TFCItems.CopperUnshaped.itemID || 
+				itemstack.itemID == TFCItems.GoldUnshaped.itemID || itemstack.itemID == TFCItems.WroughtIronUnshaped.itemID || 
+				itemstack.itemID == TFCItems.LeadUnshaped.itemID || itemstack.itemID == TFCItems.NickelUnshaped.itemID || 
+				itemstack.itemID == TFCItems.PigIronUnshaped.itemID || itemstack.itemID == TFCItems.PlatinumUnshaped.itemID || 
+				itemstack.itemID == TFCItems.RedSteelUnshaped.itemID || itemstack.itemID == TFCItems.RoseGoldUnshaped.itemID || 
+				itemstack.itemID == TFCItems.SilverUnshaped.itemID|| itemstack.itemID == TFCItems.SteelUnshaped.itemID || 
+				itemstack.itemID == TFCItems.SterlingSilverUnshaped.itemID || 
+				itemstack.itemID == TFCItems.TinUnshaped.itemID || itemstack.itemID == TFCItems.ZincUnshaped.itemID || 
+				itemstack.itemID == TFCItems.HCBlueSteelUnshaped.itemID || itemstack.itemID == TFCItems.WeakBlueSteelUnshaped.itemID || 
+				itemstack.itemID == TFCItems.HCRedSteelUnshaped.itemID || itemstack.itemID == TFCItems.WeakRedSteelUnshaped.itemID || 
+				itemstack.itemID == TFCItems.HCSteelUnshaped.itemID || itemstack.itemID == TFCItems.WeakSteelUnshaped.itemID || 
+				itemstack.itemID == TFCItems.HCBlackSteelUnshaped.itemID || itemstack.itemID == TFCItems.CeramicMold.itemID)
 		{
 			return true;
 		}

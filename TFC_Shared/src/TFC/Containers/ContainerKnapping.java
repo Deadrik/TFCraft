@@ -112,10 +112,10 @@ public class ContainerKnapping extends Container
 				SCM.setValidity(TFCItems.LooseRock,newKnapp);
 			}
 			if(craftResult.getStackInSlot(0) != null){
-				if (craftResult.getStackInSlot(0).getItem().shiftedIndex == TFCItems.LooseRock.shiftedIndex ){
+				if (craftResult.getStackInSlot(0).getItem().itemID == TFCItems.LooseRock.itemID ){
 					EP.inventory.addItemStackToInventory(EP.inventory.getItemStack());
 					if(craftResult.getStackInSlot(0).stackSize > 1){
-						EP.inventory.addItemStackToInventory(new ItemStack(craftResult.getStackInSlot(0).getItem().shiftedIndex,craftResult.getStackInSlot(0).stackSize-1,craftResult.getStackInSlot(0).getItemDamage()));
+						EP.inventory.addItemStackToInventory(new ItemStack(craftResult.getStackInSlot(0).getItem().itemID,craftResult.getStackInSlot(0).stackSize-1,craftResult.getStackInSlot(0).getItemDamage()));
 					}
 					isFinal = false;
 					EP.openGui(TerraFirmaCraft.instance, 28, EP.worldObj, (int)EP.posX, (int)EP.posY, (int)EP.posZ);

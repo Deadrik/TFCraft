@@ -41,22 +41,10 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
 public class BlockDirt2 extends BlockDirt
-{	
-	
-	Icon[] icons = new Icon[7];
-
-	@Override
-    public void registerIcon(IconRegister registerer)
+{		
+    public BlockDirt2(int i, int texOff, Block Farm)
     {
-		for(int i = 16; i < 23; i++)
-		{
-			icons[i] = registerer.func_94245_a("sand/Sand"+i);
-		}
-    }
-	
-    public BlockDirt2(int i, Block Farm)
-    {
-        super(i, Farm);
+        super(i, texOff, Farm);
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
@@ -83,11 +71,11 @@ public class BlockDirt2 extends BlockDirt
                 byte byte0 = 32;
                 if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
                 {
-                    world.setBlockWithNotify(i, j, k, 0);
+                    world.setBlock(i, j, k, 0);
                     for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta);
+                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta, 3);
                     }
                 }
                 else

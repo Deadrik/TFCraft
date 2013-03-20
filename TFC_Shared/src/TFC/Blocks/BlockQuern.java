@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -69,14 +70,27 @@ public class BlockQuern extends BlockTerraContainer {
 		return true;
 	}
 
+
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
 		if(i == 0 || (i == 1 && j == 1))
-			return 72;
+			return QuernTop1;
 		else if (i == 1 && j == 0)
-			return 70;
-		return 71;
+			return QuernTop2;
+		return QuernBase;
+	}
+
+	Icon QuernBase;
+	Icon QuernTop1;
+	Icon QuernTop2;
+
+	@Override
+	public void registerIcon(IconRegister registerer)
+	{
+		QuernBase = registerer.func_94245_a("/devices/Quern Base");
+		QuernTop1 = registerer.func_94245_a("/devices/Quern Top 1");
+		QuernTop2 = registerer.func_94245_a("/devices/Quern Top 2");
 	}
 
 	@Override
@@ -100,17 +114,17 @@ public class BlockQuern extends BlockTerraContainer {
 	{
 		return TFCBlocks.quernRenderId;
 	}
-	
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int i, int j, int k)
-    {
+	{
 		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.825, k+1);
-    }
+	}
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int i, int j, int k)
-    {
+	{
 		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.825, k+1);
-    }
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

@@ -2,6 +2,7 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 
 import TFC.*;
@@ -11,10 +12,17 @@ import TFC.Core.TFC_Settings;
 public class BlockPeatGrass extends BlockGrass
 {
 	
-    public BlockPeatGrass(int par1, int par2)
+    public BlockPeatGrass(int par1)
     {
-        super(par1, par2);
+        super(par1);
 
+    }
+    
+    @Override
+    public void func_94332_a(IconRegister registerer)
+    {
+		DirtTexture[0] = registerer.func_94245_a("soil/Peat");
+		GrassTopTexture = registerer.func_94245_a("GrassTop");
     }
 
     /**

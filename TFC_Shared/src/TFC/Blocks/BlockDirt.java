@@ -40,14 +40,16 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockDirt extends BlockTerra2
+public class BlockDirt extends BlockTerra
 {
-	Icon[] icons = new Icon[16];
+	protected Icon[] icons = new Icon[23];
+	protected int textureOffset = 0;
 	
-    public BlockDirt(int i, Block Farm)
+    public BlockDirt(int i, int texOff, Block Farm)
     {
         super(i, Material.ground);
         this.setCreativeTab(CreativeTabs.tabBlock);
+        textureOffset = texOff;
     }
     
     @SideOnly(Side.CLIENT)
@@ -88,19 +90,19 @@ public class BlockDirt extends BlockTerra2
     @Override
     public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)+textureOffset];
     }
 
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return icons[par2];
+        return icons[par2+textureOffset];
     }
     
 	@Override
     public void registerIcon(IconRegister registerer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < 23; i++)
 		{
 			icons[i] = registerer.func_94245_a("soil/Dirt"+i);
 		}
@@ -215,14 +217,14 @@ public class BlockDirt extends BlockTerra2
 				case 2:
 				{
 					world.setBlock(i, j, k, 0);
-					world.setBlockAndMetadata(i-1, j, k, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i-1, j, k, blockID, meta, 3);
 					tryToFall(world, i-1, j, k);
 					break;
 				}
 				case 3:
 				{
 					world.setBlock(i, j, k, 0);
-					world.setBlockAndMetadata(i, j, k-1, blockID,meta);
+					world.setBlockAndMetadataWithNotify(i, j, k-1, blockID, meta, 3);
 					tryToFall(world, i, j, k-1);
 					break;
 				}
@@ -242,7 +244,7 @@ public class BlockDirt extends BlockTerra2
 		if(!world.isRemote)
 		{
 			tryToFall(world, i, j, k);
-			world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+			world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
 		}
 	}
     

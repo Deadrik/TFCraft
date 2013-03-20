@@ -312,7 +312,7 @@ public class ContainerTerraScribe extends ContainerTFC
 				}
 				slot.putStack(null);
 			}
-			else if(itemstack1.itemID == Item.paper.shiftedIndex)
+			else if(itemstack1.itemID == Item.paper.itemID)
 			{
 				if(slotpaper.getHasStack())
 				{

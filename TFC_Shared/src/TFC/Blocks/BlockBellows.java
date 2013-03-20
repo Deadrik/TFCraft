@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -83,128 +84,143 @@ public class BlockBellows extends BlockTerra
 		}
 	}
 
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 0)//bottom
 		{
 			if(j == 0)
 			{
-				return 82;
+				return Sides[0];
 			}
 			else if(j == 1)
 			{
-				return 83;
+				return Sides[1];
 			}
 			else if(j == 2)
 			{
-				return 85;
+				return Sides[3];
 			}
 			else if(j == 3)
 			{
-				return 84;
+				return Sides[2];
 			}
 		}
 		else if(i == 1)//top
 		{
 			if(j == 0)
 			{
-				return 82;
+				return Sides[0];
 			}
 			else if(j == 1)
 			{
-				return 83;
+				return Sides[1];
 			}
 			else if(j == 2)
 			{
-				return 85;
+				return Sides[3];
 			}
 			else if(j == 3)
 			{
-				return 84;
+				return Sides[2];
 			}
 		}
 		else if(i == 2)//-z
 		{
 			if(j == 0)
 			{
-				return 0;
+				return BellowsBack;
 			}
 			else if(j == 1)//-z
 			{
-				return 84;
+				return Sides[2];
 			}
 			else if(j == 2)
 			{
-				return 0;
+				return BellowsBack;
 			}
 			else if(j == 3)//-z
 			{
-				return 83;
+				return Sides[1];
 			}
 		}
 		else if(i == 3)//-z
 		{
 			if(j == 0)
 			{
-				return 0;
+				return BellowsBack;
 			}
 			else if(j == 1)//-z
 			{
-				return 83;
+				return Sides[1];
 			}
 			else if(j == 2)
 			{
-				return 0;
+				return BellowsBack;
 			}
 			else if(j == 3)//-z
 			{
-				return 84;
+				return Sides[2];
 			}
 		}
 		else if(i == 4)//+x
 		{
 			if(j == 0)
 			{
-				return 84;
+				return Sides[2];
 			}
 			else if(j == 1)//-z
 			{
-				return 0;
+				return BellowsBack;
 			}
 			else if(j == 2)
 			{
-				return 83;
+				return Sides[1];
 			}
 			else if(j == 3)//-z
 			{
-				return 0;
+				return BellowsBack;
 			}
 		}
 		else if(i == 5)//-z
 		{
 			if(j == 0)
 			{
-				return 83;
+				return Sides[1];
 			}
 			else if(j == 1)//-z
 			{
-				return 0;
+				return BellowsBack;
 			}
 			else if(j == 2)
 			{
-				return 84;
+				return Sides[2];
 			}
 			else if(j == 3)//-z
 			{
-				return 0;
+				return BellowsBack;
 			}
 		}
 		else
 		{
-			return 83;
+			return Sides[1];
 		}
 
-		return 82;
+		return Sides[0];
+	}
+	
+	Icon[] Sides = new Icon[4];
+	Icon BellowsFront;
+	Icon BellowsBack;
+
+	@Override
+	public void registerIcon(IconRegister registerer)
+	{
+		Sides[0] = registerer.func_94245_a("/devices/Bellows82");
+		Sides[1] = registerer.func_94245_a("/devices/Bellows83");
+		Sides[2] = registerer.func_94245_a("/devices/Bellows84");
+		Sides[3] = registerer.func_94245_a("/devices/Bellows85");
+		BellowsFront = registerer.func_94245_a("/devices/Bellows Front");
+		BellowsBack = registerer.func_94245_a("/devices/Bellows Back");
 	}
 
 	public int getRenderType()
@@ -246,17 +262,19 @@ public class BlockBellows extends BlockTerra
 			tileentityfirepit.receiveAirFromBellows();
 		}
 	}
+	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
 		dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BellowsItem, 1));
 	}
-
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+	
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;
@@ -281,15 +299,11 @@ public class BlockBellows extends BlockTerra
 		{
 			byte0 = 1;
 		}
-		world.setBlockMetadataWithNotify(i, j, k, l);
+		world.setBlockMetadataWithNotify(i, j, k, l, 3);
 
 	}
 
-	public void powerBlock(World world, int i, int j, int k, int par5, int par6)
-	{
-		GiveAir(world,i, j, k);
-	}
-
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;

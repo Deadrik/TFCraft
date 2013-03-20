@@ -71,21 +71,16 @@ public class BlockFiniteWater extends BlockFluid
         return TFCBlocks.finiteWaterRenderId;
     }
     
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         if (par1World.getBlockId(par2, par3, par4) == this.blockID)
         {
-            par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
+            par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, tickRate(par1World));
         }
     }
     
-    /**
-     * Ticks the block if it's been scheduled
-     */
+    @Override
     public void updateTick(World world, int x, int y, int z, Random random)
     {       
         //Try to freeze
@@ -93,12 +88,12 @@ public class BlockFiniteWater extends BlockFluid
         {
             if (y == 145 && world.getBlockMetadata(x, y, z) == 0)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z));
+                world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 3);
                 return;
             }
             else if (random.nextInt(200) == 0 && world.canBlockSeeTheSky(x, y, z) && world.getBlockMetadata(x, y, z) == 0)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z));
+                world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 3);
                 return;
             }
         }
@@ -155,13 +150,11 @@ public class BlockFiniteWater extends BlockFluid
               {
                   if(meta > 1)
                   {
-                      world.setBlockMetadata(x, y, z, meta-1);
-                      world.markBlockForUpdate(x, y, z);
+                      world.setBlockMetadataWithNotify(x, y, z, meta-1, 3);
                   }
                   else
                   {
                       world.setBlock(x, y, z, 0);
-                      world.markBlockForUpdate(x, y, z);
                   }
               }
           }
@@ -186,15 +179,15 @@ public class BlockFiniteWater extends BlockFluid
         {
         	if(blockMeta < blockMeta2)
         	{
-        		world.setBlockAndMetadataWithNotify(x2, y2, z2, TFCBlocks.finiteWater.blockID, blockMeta2-1);
-        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta+1);
+        		world.setBlockAndMetadataWithNotify(x2, y2, z2, TFCBlocks.finiteWater.blockID, blockMeta2-1, 3);
+        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta+1, 3);
         	}
         }
         if (blockID2 == Block.waterStill.blockID)
         {
         	if(blockMeta > 0)
         	{
-        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta-1);
+        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta-1, 3);
         	}
         }
         
@@ -204,14 +197,14 @@ public class BlockFiniteWater extends BlockFluid
             {
                 if (blockMeta < 7 && blockMeta2 > 0)
                 {
-                    world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1);
-                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1);
+                    world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1, 3);
+                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1, 3);
                     return true;
                 }
                 else if (blockMeta2 > 0)
                 {
-                    world.setBlockWithNotify(x, y, z, 0);
-                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1);
+                    world.setBlock(x, y, z, 0);
+                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1, 3);
                     return true;
                 }
                 else
@@ -223,14 +216,14 @@ public class BlockFiniteWater extends BlockFluid
             {
                 if (blockMeta2 < blockMeta && blockMeta < blockMeta3)
                 {
-                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta);
-                    world.setBlockMetadataWithNotify(x + (x - x2), y + (y - y2), z + (z - z2), blockMeta);
+                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta,3);
+                    world.setBlockMetadataWithNotify(x + (x - x2), y + (y - y2), z + (z - z2), blockMeta,3);
                     return true;
                 }
                 else if (blockMeta3 < blockMeta && blockMeta < blockMeta2)
                 {
-                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta);
-                    world.setBlockMetadataWithNotify(x + (x - x2), y + (y - y2), z + (z - z2), blockMeta);
+                    world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta,3);
+                    world.setBlockMetadataWithNotify(x + (x - x2), y + (y - y2), z + (z - z2), blockMeta,3);
                     return true;
                 }
                 else
@@ -251,12 +244,12 @@ public class BlockFiniteWater extends BlockFluid
                 {
                     if (blockMeta < 7)
                     {
-                        world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1);
+                        world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1,3);
                         return true;
                     }
                     else
                     {
-                        world.setBlockWithNotify(x, y, z, 0);
+                        world.setBlock(x, y, z, 0);
                         return true;
                     }
                 }
@@ -267,14 +260,14 @@ public class BlockFiniteWater extends BlockFluid
             }
             if (y2 < y)
             {
-                world.setBlockWithNotify(x, y, z, 0);
-                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, blockMeta);
+                world.setBlock(x, y, z, 0);
+                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, blockMeta,3);
                 return true;
             }
             if (blockMeta < 7)
             {
-                world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1);
-                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7);
+                world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1,3);
+                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7,3);
                 return true;
             }
             else if (world.getBlockId(x - 1, y, z) != this.blockID &&
@@ -283,13 +276,13 @@ public class BlockFiniteWater extends BlockFluid
                     world.getBlockId(x, y, z - 1) != this.blockID &&
                     world.getBlockId(x, y, z + 1) != this.blockID)
             {
-                world.setBlockWithNotify(x, y, z, 0);
+                world.setBlock(x, y, z, 0);
                 return true;
             }
             else
             {
-                world.setBlockWithNotify(x, y, z, 0);
-                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7);
+                world.setBlock(x, y, z, 0);
+                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7,3);
                 return true;
             }
         }
@@ -460,20 +453,16 @@ public class BlockFiniteWater extends BlockFluid
         return material == Material.water ? false : (material == Material.lava ? false : !this.blockBlocksFlow(par1World, par2, par3, par4));
     }
     
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         if (par1World.getBlockId(par2, par3, par4) == this.blockID)
         {
-            par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate());
+            par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
         }
     }
     
-    /**
-     * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
-     */
+    @Override
     public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3D)
     {
         Vec3 var7 = this.getFlowVector(par1World, par2, par3, par4);
@@ -481,42 +470,112 @@ public class BlockFiniteWater extends BlockFluid
         par6Vec3D.yCoord += var7.yCoord;
         par6Vec3D.zCoord += var7.zCoord;
     }
-    
-    public static double func_293_a(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, Material par4Material)
-    {
-        Vec3 var5 = null;
-        var5 = ((BlockFiniteWater)TFCBlocks.finiteWater).getFlowVector(par0IBlockAccess, par1, par2, par3);
-        return var5.xCoord == 0.0D && var5.zCoord == 0.0D ? -1000.0D : Math.atan2(var5.zCoord, var5.xCoord) - (Math.PI / 2D);
-    }
-    
-    /**
-     * Returns a vector indicating the direction and intensity of fluid flow.
-     */
+
     private Vec3 getFlowVector(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
-        Vec3 var5 = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
-        if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 7 && par1IBlockAccess.getBlockId(par2, par3 - 1, par4) != this.blockID)
+    	Vec3 vec3 = par1IBlockAccess.getWorldVec3Pool().getVecFromPool(0.0D, 0.0D, 0.0D);
+        int l = this.getEffectiveFlowDecay(par1IBlockAccess, par2, par3, par4);
+
+        for (int i1 = 0; i1 < 4; ++i1)
         {
-            boolean[] optimal = getOptimalFlowDirections(par1IBlockAccess, par2, par3, par4);
-            if (optimal[0])
+            int j1 = par2;
+            int k1 = par4;
+
+            if (i1 == 0)
             {
-                var5 = var5.addVector(-1.0D, 0.0D, 0.0D);
+                j1 = par2 - 1;
             }
-            else if (optimal[1])
+
+            if (i1 == 1)
             {
-                var5 = var5.addVector(1.0D, 0.0D, 0.0D);
+                k1 = par4 - 1;
             }
-            else if (optimal[2])
+
+            if (i1 == 2)
             {
-                var5 = var5.addVector(0.0D, 0.0D, -1.0D);
+                ++j1;
             }
-            else if (optimal[3])
+
+            if (i1 == 3)
             {
-                var5 = var5.addVector(0.0D, 0.0D, 1.0D);
+                ++k1;
+            }
+
+            int l1 = this.getEffectiveFlowDecay(par1IBlockAccess, j1, par3, k1);
+            int i2;
+
+            if (l1 < 0)
+            {
+                if (!par1IBlockAccess.getBlockMaterial(j1, par3, k1).blocksMovement())
+                {
+                    l1 = this.getEffectiveFlowDecay(par1IBlockAccess, j1, par3 - 1, k1);
+
+                    if (l1 >= 0)
+                    {
+                        i2 = l1 - (l - 8);
+                        vec3 = vec3.addVector((double)((j1 - par2) * i2), (double)((par3 - par3) * i2), (double)((k1 - par4) * i2));
+                    }
+                }
+            }
+            else if (l1 >= 0)
+            {
+                i2 = l1 - l;
+                vec3 = vec3.addVector((double)((j1 - par2) * i2), (double)((par3 - par3) * i2), (double)((k1 - par4) * i2));
             }
         }
-        var5 = var5.normalize();
-        return var5;
+
+        if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) >= 8)
+        {
+            boolean flag = false;
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3, par4 - 1, 2))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3, par4 + 1, 3))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2 - 1, par3, par4, 4))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2 + 1, par3, par4, 5))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3 + 1, par4 - 1, 2))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2, par3 + 1, par4 + 1, 3))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2 - 1, par3 + 1, par4, 4))
+            {
+                flag = true;
+            }
+
+            if (flag || this.isBlockSolid(par1IBlockAccess, par2 + 1, par3 + 1, par4, 5))
+            {
+                flag = true;
+            }
+
+            if (flag)
+            {
+                vec3 = vec3.normalize().addVector(0.0D, -6.0D, 0.0D);
+            }
+        }
+
+        vec3 = vec3.normalize();
+        return vec3;
     }
     
     /**

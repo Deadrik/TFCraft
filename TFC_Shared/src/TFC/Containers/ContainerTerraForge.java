@@ -252,7 +252,7 @@ public class ContainerTerraForge extends ContainerTFC
 			}
 			else
 			{
-				if(itemstack1.itemID == Item.coal.shiftedIndex)
+				if(itemstack1.itemID == Item.coal.itemID)
 				{
 					int j = 0;
 					while(j < 5)
@@ -362,7 +362,7 @@ public class ContainerTerraForge extends ContainerTFC
 	}
 
 	@Override
-	public void updateCraftingResults()
+	public void detectAndSendChanges()
 	{
 	    for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
         {

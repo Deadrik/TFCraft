@@ -40,7 +40,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockSand extends BlockTerra2
+public class BlockSand extends BlockTerra
 {
     public BlockSand(int i)
     {

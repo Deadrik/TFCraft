@@ -35,52 +35,30 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.IMinecartCollisionHandler;
-import net.minecraftforge.common.MinecartRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartCollisionEvent;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
 import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
 
-public class EntityCustomMinecart extends EntityMinecart
+public class EntityCustomMinecart extends EntityMinecartChest
 {
 
-    public EntityCustomMinecart(World par1World)
+	public EntityCustomMinecart(World par1World)
     {
         super(par1World);
-        this.cargoItems = new ItemStack[18];
-        this.fuel = 0;
-        this.field_70499_f = false;
-        this.preventEntitySpawning = true;
-        this.setSize(0.98F, 0.7F);
-        this.yOffset = this.height / 2.0F;
-
-        maxSpeedRail = defaultMaxSpeedRail;
-        maxSpeedGround = defaultMaxSpeedGround;
-        maxSpeedAirLateral = defaultMaxSpeedAirLateral;
-        maxSpeedAirVertical = defaultMaxSpeedAirVertical;
-        dragAir = defaultDragAir;
     }
 
-    public EntityCustomMinecart(World world, int type)
+    public EntityCustomMinecart(World par1, double par2, double par4, double par6)
     {
-    	this(world);
-    	minecartType = type;
+        super(par1, par2, par4, par6);
     }
 
-    public EntityCustomMinecart(World par1World, double par2, double par4, double par6, int par8)
+    public void func_94095_a(DamageSource par1DamageSource)
     {
-        this(par1World);
-        this.setPosition(par2, par4 + (double)this.yOffset, par6);
-        this.motionX = 0.0D;
-        this.motionY = 0.0D;
-        this.motionZ = 0.0D;
-        this.prevPosX = par2;
-        this.prevPosY = par4;
-        this.prevPosZ = par6;
-        this.minecartType = par8;
+        super.func_94095_a(par1DamageSource);
+        this.dropItemWithOffset(Block.chest.blockID, 1, 0.0F);
     }
 
-    @Override
     /**
      * Returns the number of slots in the inventory.
      */
@@ -88,9 +66,19 @@ public class EntityCustomMinecart extends EntityMinecart
     {
         return 18;
     }
-    
-    public boolean isStorageCart()
+
+    public int func_94087_l()
     {
-        return true;
+        return 1;
+    }
+
+    public Block func_94093_n()
+    {
+        return Block.chest;
+    }
+
+    public int func_94085_r()
+    {
+        return 8;
     }
 }

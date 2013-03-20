@@ -58,35 +58,22 @@ public class BlockPartial extends BlockTerraContainer
     {
         return false;
     }
-
     @Override
-    public String getTextureFile()
-    {
-    	return TFC_Textures.RockSheet;
-    }
-
     public void onBlockAdded(World world, int par2, int par3, int par4)
     {
         super.onBlockAdded(world, par2, par3, par4);
         world.markBlockForUpdate(par2, par3, par4);
     }
 
-    public void onBlockPlaced(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (par5 == 0)
-        {
-            int var6 = par1World.getBlockMetadata(par2, par3, par4);
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, var6 | 4);
-        }
-    }
-    
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+    @Override
+    public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
     {
         if(!world.isRemote)
         {
         }
     }
     
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {   
 

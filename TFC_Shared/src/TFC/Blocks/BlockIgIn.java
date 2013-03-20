@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -47,117 +48,126 @@ import net.minecraft.src.ModLoader;
 
 public class BlockIgIn extends BlockCollapsable
 {
-    public BlockIgIn(int i, Material material,int id) {
-        super(i,0, material, id);
-    }
+	public BlockIgIn(int i, Material material,int id) {
+		super(i,0, material, id);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-    	for(int i = 0; i < 3; i++)
-    		par3List.add(new ItemStack(par1, 1, i));
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+	{
+		for(int i = 0; i < 3; i++)
+			par3List.add(new ItemStack(par1, 1, i));
+	}
 
-    /*
-     * Mapping from metadata value to damage value
-     */
-    @Override
-    public int damageDropped(int i) {
-        return i;
-    }
+	/*
+	 * Mapping from metadata value to damage value
+	 */
+	@Override
+	public int damageDropped(int i) {
+		return i;
+	}
 
-    @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
-    {
-        return blockIndexInTexture + j;
-    }
+	@Override
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	{
+		return icons[j];
+	}
 
-    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {	
-        Random R = new Random();
-        if(R.nextBoolean())
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1+R.nextInt(4), l));
-        super.harvestBlock(world, entityplayer, i, j, k, l);
-    }
+	protected Icon[] icons = new Icon[3];
+	protected String[] names = {"Granite", "Diorite", "Gabbro"};
 
-    @Override
-    public int idDropped(int i, Random random, int j)
-    {
-        return TFCItems.LooseRock.shiftedIndex;
-    }
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
-    {if(!world.isRemote)
-    {
-        super.onBlockDestroyedByExplosion(world, i, j, k);
-        Random random = new Random();
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Raw");
+		}
+	}
 
-        ItemStack is = null;
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{	
+		Random R = new Random();
+		if(R.nextBoolean())
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1+R.nextInt(4), l));
+		super.harvestBlock(world, entityplayer, i, j, k, l);
+	}
 
-        is = TFC_Core.RandomGem(random, 0);
+	@Override
+	public int idDropped(int i, Random random, int j)
+	{
+		return TFCItems.LooseRock.itemID;
+	}
 
-        if(is != null)
-        {
-            EntityItem item = new EntityItem(world, i, j, k, is);
-            world.spawnEntityInWorld(item);
-        }
-    }
-    }
+	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+	{
+		if(!world.isRemote)
+		{
+			super.onBlockDestroyedByExplosion(world, i, j, k);
+			Random random = new Random();
 
-    public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
-    {
-        if(!world.isRemote)
-        {
-            Random random = new Random();
-            if(true)
-            {
-                ItemStack is = null;
+			ItemStack is = null;
 
-                is = TFC_Core.RandomGem(random,2);
+			is = TFC_Core.RandomGem(random, 0);
 
-                if(is != null)
-                {
-                    EntityItem item = new EntityItem(world, i, j, k, is);
-                    world.spawnEntityInWorld(item);
-                }
+			if(is != null)
+			{
+				EntityItem item = new EntityItem(world, i, j, k, is);
+				world.spawnEntityInWorld(item);
+			}
+		}
+	}
 
-            }
-        }
-    }
+	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
+	{
+		if(!world.isRemote)
+		{
+			Random random = new Random();
+			if(true)
+			{
+				ItemStack is = null;
 
-    public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        DropCarvedStone(world, i, j, k);
-    }
+				is = TFC_Core.RandomGem(random,2);
 
-    @Override
-    public String getTextureFile()
-    {
-        return TFC_Textures.RockSheet;
-    }
-    
-    /**
-     * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
-     */
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
-    {
-        boolean hasHammer = false;
-        for(int i = 0; i < 9;i++)
-        {
-            if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-                hasHammer = true;
-        }
-        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
-        {
-            int id = world.getBlockId(x, y, z);
-            byte meta = (byte) world.getBlockMetadata(x, y, z);
-            
-            return ItemChisel.handleActivation(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
-        }
-        return false;
-    }
+				if(is != null)
+				{
+					EntityItem item = new EntityItem(world, i, j, k, is);
+					world.spawnEntityInWorld(item);
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
+	{
+		DropCarvedStone(world, i, j, k);
+	}
+
+	/**
+	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
+	 */
+	 @Override
+	 public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
+	{
+		 boolean hasHammer = false;
+		 for(int i = 0; i < 9;i++)
+		 {
+			 if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+				 hasHammer = true;
+		 }
+		 if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
+		 {
+			 int id = world.getBlockId(x, y, z);
+			 byte meta = (byte) world.getBlockMetadata(x, y, z);
+
+			 return ItemChisel.handleActivation(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
+		 }
+		 return false;
+	}
 }

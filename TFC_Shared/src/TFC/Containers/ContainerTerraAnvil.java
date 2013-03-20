@@ -225,7 +225,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 				}
 			}
 		}
-		this.updateCraftingResults();
+		this.detectAndSendChanges();
 		return itemstack;
 	}
 	@Override
@@ -249,7 +249,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 			}
 			else
 			{
-				if(itemstack1.itemID == TFCItems.Flux.shiftedIndex)
+				if(itemstack1.itemID == TFCItems.Flux.itemID)
 				{
 					if(slotflux.getHasStack())
 					{
@@ -271,11 +271,11 @@ public class ContainerTerraAnvil extends ContainerTFC
 					slothammer.putStack(stack);
 					itemstack1.stackSize--;
 				}
-				else if(itemstack1.itemID == TFCItems.HammerHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.SawBladePlan.shiftedIndex ||
-						itemstack1.itemID == TFCItems.PickaxeHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.ProPickHeadPlan.shiftedIndex ||
-						itemstack1.itemID == TFCItems.ChiselHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.AxeHeadPlan.shiftedIndex ||
-						itemstack1.itemID == TFCItems.SwordBladePlan.shiftedIndex || itemstack1.itemID == TFCItems.HoeHeadPlan.shiftedIndex ||
-						itemstack1.itemID == TFCItems.ShovelHeadPlan.shiftedIndex || itemstack1.itemID == TFCItems.MaceHeadPlan.shiftedIndex)
+				else if(itemstack1.itemID == TFCItems.HammerHeadPlan.itemID || itemstack1.itemID == TFCItems.SawBladePlan.itemID ||
+						itemstack1.itemID == TFCItems.PickaxeHeadPlan.itemID || itemstack1.itemID == TFCItems.ProPickHeadPlan.itemID ||
+						itemstack1.itemID == TFCItems.ChiselHeadPlan.itemID || itemstack1.itemID == TFCItems.AxeHeadPlan.itemID ||
+						itemstack1.itemID == TFCItems.SwordBladePlan.itemID || itemstack1.itemID == TFCItems.HoeHeadPlan.itemID ||
+						itemstack1.itemID == TFCItems.ShovelHeadPlan.itemID || itemstack1.itemID == TFCItems.MaceHeadPlan.itemID)
 				{
 					if(slotblueprint.getHasStack())
 					{
@@ -318,10 +318,11 @@ public class ContainerTerraAnvil extends ContainerTFC
 	}
 
 	private int tier = -1;
+	
 	@Override
-	public void updateCraftingResults()
+	public void detectAndSendChanges()
 	{
-		super.updateCraftingResults();
+		super.detectAndSendChanges();
 
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
 		{

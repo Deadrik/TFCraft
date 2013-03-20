@@ -105,7 +105,7 @@ public class ContainerTerraSluice extends ContainerTFC
 	private int soilamt = 0;
 	private int progress = 0;
 	@Override
-	public void updateCraftingResults()
+	public void detectAndSendChanges()
     {
         for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
         {

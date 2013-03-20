@@ -249,7 +249,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		}
 		for(EntityItem ei : this.capturedDrops)
 		{
-			ItemStack item = ei.func_92014_d();
+			ItemStack item = ei.getEntityItem();
 			if (item != null)
 			{
 				if (hunger < 144000 && fooditems.contains (item.itemID))
@@ -317,7 +317,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	public void applyEntityCollision(Entity par1Entity){
 		super.applyEntityCollision(par1Entity);
 		if (par1Entity instanceof EntityItem){
-			boolean y = wantsItem(((EntityItem)par1Entity).func_92014_d());
+			boolean y = wantsItem(((EntityItem)par1Entity).getEntityItem());
 		}
 	}
 
@@ -330,7 +330,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
-		return par1ItemStack.itemID == TFCItems.WheatGrain.shiftedIndex || par1ItemStack.itemID == TFCItems.BarleyGrain.shiftedIndex ||par1ItemStack.itemID == TFCItems.OatGrain.shiftedIndex||par1ItemStack.itemID == TFCItems.RyeGrain.shiftedIndex;
+		return par1ItemStack.itemID == TFCItems.WheatGrain.itemID || par1ItemStack.itemID == TFCItems.BarleyGrain.itemID ||par1ItemStack.itemID == TFCItems.OatGrain.itemID||par1ItemStack.itemID == TFCItems.RyeGrain.itemID;
 	}
 
 	/**
@@ -524,7 +524,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	}
 
 	@Override
-	public EntityAgeable func_90011_a(EntityAgeable var1) {
+	public EntityAgeable createChild(EntityAgeable entityageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}

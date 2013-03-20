@@ -38,15 +38,14 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockCustomFlower extends BlockFlower
 {
-	public BlockCustomFlower(int par1, int par2)
+	public BlockCustomFlower(int par1)
 	{
-		this(par1, par2, Material.plants);
+		this(par1, Material.plants);
 	}
 
-	public BlockCustomFlower(int par1, int par2, Material par3Material)
+	public BlockCustomFlower(int par1, Material par3Material)
 	{
-		super(par1, par2, par3Material);
-		this.blockIndexInTexture = par2;
+		super(par1, par3Material);
 		this.setTickRandomly(true);
 		float var4 = 0.2F;
 		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
@@ -61,14 +60,12 @@ public class BlockCustomFlower extends BlockFlower
 		return (par1World.getFullBlockLightValue(par2, par3, par4) >= 8 || par1World.canBlockSeeTheSky(par2, par3, par4)) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
 	}
 
-	/**
-	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
-	 */
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
-            int var5 = par1World.getBlockId(par2, par3, par4);
-            return (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
-    }
+	{
+		int var5 = par1World.getBlockId(par2, par3, par4);
+		return (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
+	}
 
 	/**
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
@@ -80,64 +77,39 @@ public class BlockCustomFlower extends BlockFlower
 		return TFC_Core.isSoil(par1);
 	}
 
-	/**
-	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-	 * cleared to be reused)
-	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
 	}
 
-	/**
-	 * The type of render function that is called for this block
-	 */
+	@Override
 	public int getRenderType()
 	{
 		return 1;
 	}
 
-	/**
-	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-	 */
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
-	/**
-	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-	 */
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
-
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
-		this.checkChange(par1World, par2, par3, par4);
+		this.checkFlowerChange(par1World, par2, par3, par4);
 	}
-	
-	/**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-    {
-            this.checkChange(par1World, par2, par3, par4);
-    }
-    
-    protected void checkChange(World par1World, int par2, int par3, int par4)
-    {
-        if (!this.canBlockStay(par1World, par2, par3, par4))
-        {
-            this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
-        }
-    }
+
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+	{
+		this.checkFlowerChange(par1World, par2, par3, par4);
+	}
 }

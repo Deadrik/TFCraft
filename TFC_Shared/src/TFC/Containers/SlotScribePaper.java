@@ -47,7 +47,7 @@ public class SlotScribePaper extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		if(itemstack.itemID == Item.paper.shiftedIndex ||itemstack.itemID == TFCItems.writabeBookTFC.shiftedIndex)
+		if(itemstack.itemID == Item.paper.itemID ||itemstack.itemID == TFCItems.writabeBookTFC.itemID)
 		{
 			return true;
 		}

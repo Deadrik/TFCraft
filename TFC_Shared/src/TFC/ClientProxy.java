@@ -790,8 +790,8 @@ public class ClientProxy extends CommonProxy
 	{
 		LanguageRegistry LR = LanguageRegistry.instance();
 		String[] rockNames = {"Granite", "Diorite", "Gabbro", 
-				"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-				"Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
+				"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk", 
+				"Rhyolite", "Basalt", "Andesite", "Dacite", 
 				"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
 
 		for(int i= 0; i < rockNames.length; i++)

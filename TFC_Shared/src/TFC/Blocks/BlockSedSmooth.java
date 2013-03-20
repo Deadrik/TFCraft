@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -42,13 +43,12 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockSedSmooth extends Block
+public class BlockSedSmooth extends BlockTerra
 {
 
-	public BlockSedSmooth(int i, int tex) 
+	public BlockSedSmooth(int i) 
 	{
 		super(i, Material.rock);
-		this.blockIndexInTexture = tex;
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
@@ -73,16 +73,22 @@ public class BlockSedSmooth extends Block
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return blockIndexInTexture+j;
+		return icons[j];
 	}
 
+	protected Icon[] icons = new Icon[10];
+	protected String[] names = {"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};
+	
 	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
-	}
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 10; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Smooth");
+		}
+    }
 	
 	/**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer

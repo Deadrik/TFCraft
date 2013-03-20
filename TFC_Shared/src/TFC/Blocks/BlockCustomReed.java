@@ -2,6 +2,9 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import TFC.*;
 import TFC.Core.TFC_Core;
 import net.minecraft.client.entity.*;
@@ -32,30 +35,27 @@ import net.minecraft.village.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
 
 
-public class BlockCustomReed extends Block
+public class BlockCustomReed extends Block implements IPlantable
 {
-	public BlockCustomReed(int par1, int par2)
+	public BlockCustomReed(int par1)
 	{
 		super(par1, Material.plants);
-		this.blockIndexInTexture = par2;
 		float var3 = 0.375F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1.0F, 0.5F + var3);
 		this.setTickRandomly(true);
 	}
 
-	/**
-	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
-	 */
+	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
 	{
 		return this.canPlaceBlockAt(par1World, par2, par3, par4);
 	}
 
-	/**
-	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
-	 */
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		int var5 = par1World.getBlockId(par2, par3 - 1, par4);
@@ -71,89 +71,97 @@ public class BlockCustomReed extends Block
 		if (!this.canBlockStay(par1World, par2, par3, par4))
 		{
 			this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-			par1World.setBlockWithNotify(par2, par3, par4, 0);
+			par1World.setBlock(par2, par3, par4, 0);
 		}
 	}
 
-	/**
-	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-	 * cleared to be reused)
-	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
 	}
 
-	/**
-	 * The type of render function that is called for this block
-	 */
+	@Override
 	public int getRenderType()
 	{
 		return 1;
 	}
 
-	/**
-	 * Returns the ID of the items to drop on destruction.
-	 */
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
-		return Item.reed.shiftedIndex;
+		return Item.reed.itemID;
 	}
 
-	/**
-	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-	 */
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-	 * their own) Args: x, y, z, neighbor blockID
-	 */
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{
 		this.checkBlockCoordValid(par1World, par2, par3, par4);
 	}
 
-	/**
-	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-	 */
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-	{
-		if (par1World.isAirBlock(par2, par3 + 1, par4))
-		{
-			int var6;
+    {
+        if (par1World.isAirBlock(par2, par3 + 1, par4))
+        {
+            int l;
 
-			for (var6 = 1; par1World.getBlockId(par2, par3 - var6, par4) == this.blockID; ++var6)
-			{
-				;
-			}
+            for (l = 1; par1World.getBlockId(par2, par3 - l, par4) == this.blockID; ++l)
+            {
+                ;
+            }
 
-			if (var6 < 3)
-			{
-				int var7 = par1World.getBlockMetadata(par2, par3, par4);
+            if (l < 3)
+            {
+                int i1 = par1World.getBlockMetadata(par2, par3, par4);
 
-				if (var7 == 15)
-				{
-					par1World.setBlockWithNotify(par2, par3 + 1, par4, this.blockID);
-					par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
-				}
-				else
-				{
-					par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + 1);
-				}
-			}
-		}
-	}
+                if (i1 == 15)
+                {
+                    par1World.setBlock(par2, par3 + 1, par4, this.blockID);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 4);
+                }
+                else
+                {
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, i1 + 1, 4);
+                }
+            }
+        }
+    }
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+    public int idPicked(World par1World, int par2, int par3, int par4)
+    {
+        return Item.reed.itemID;
+    }
+
+    @Override
+    public EnumPlantType getPlantType(World world, int x, int y, int z)
+    {
+        return EnumPlantType.Beach;
+    }
+
+    @Override
+    public int getPlantID(World world, int x, int y, int z)
+    {
+        return blockID;
+    }
+
+    @Override
+    public int getPlantMetadata(World world, int x, int y, int z)
+    {
+        return world.getBlockMetadata(x, y, z);
+    }
 }

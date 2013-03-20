@@ -68,10 +68,10 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
+		int xCoord = i;
+		int yCoord = j;
+		int zCoord = k;
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		TileEntity te = world.getBlockTileEntity(i, j, k);
 
@@ -87,7 +87,7 @@ public class BlockSluice extends BlockContainer
 					TileEntitySluice tileentitysluice;
 					tileentitysluice = (TileEntitySluice)world.getBlockTileEntity(i, j, k);
 					ItemStack is =entityplayer.getCurrentEquippedItem();
-					if(is!= null && is.itemID == TFCItems.terraGoldPan.shiftedIndex && is.getItemDamage() != 0)
+					if(is!= null && is.itemID == TFCItems.terraGoldPan.itemID && is.getItemDamage() != 0)
 					{
 						tileentitysluice.soilAmount+=7;
 						tileentitysluice.soilType = (byte) is.getItemDamage();
@@ -110,12 +110,12 @@ public class BlockSluice extends BlockContainer
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(j == 4) {
-			return 223;
+			return Block.waterMoving.getBlockTextureFromSideAndMetadata(i, 0);
 		} else {
-			return 4;
+			return Block.planks.getBlockTextureFromSideAndMetadata(i, 0);
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class BlockSluice extends BlockContainer
 	public int idDropped(int i, Random random, int j)
 	{
 		if(!isBlockFootOfBed(i)) {
-			return TFCItems.terraSluiceItem.shiftedIndex;
+			return TFCItems.terraSluiceItem.itemID;
 		} else {
 			return 0;
 		}
@@ -159,7 +159,7 @@ public class BlockSluice extends BlockContainer
 		return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
 		meta = world.getBlockMetadata(i, j, k);
 		xCoord = i;
@@ -184,10 +184,10 @@ public class BlockSluice extends BlockContainer
 		{
 			byte0 = 1;
 		}
-		world.setBlockMetadataWithNotify(i, j, k, l);
+		world.setBlockMetadataWithNotify(i, j, k, l, 3);
 		if(world.getBlockId(i, j, k) == this.blockID)
 		{
-			world.setBlockAndMetadataWithNotify(i + byte0, j, k + byte1, this.blockID, l + 8);
+			world.setBlockAndMetadataWithNotify(i + byte0, j, k + byte1, this.blockID, l + 8, 3);
 		}
 		
 		//Minecraft mc = ModLoader.getMinecraftInstance();
@@ -315,14 +315,14 @@ public class BlockSluice extends BlockContainer
 		{
 			if(world.getBlockId(i - headBlockToFootBlockMap[j1][0], j, k - headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,true,j1))
 			{
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlock(i, j, k, 0);
 			}
 		}
 		else
 		{
 			if(world.getBlockId(i + headBlockToFootBlockMap[j1][0], j, k + headBlockToFootBlockMap[j1][1]) != blockID || !canStay(world, i, j, k,false,j1))
 			{
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlock(i, j, k, 0);
 				if(!world.isRemote)
 				{
 					dropBlockAsItem(world, i, j, k, i1, 0);
