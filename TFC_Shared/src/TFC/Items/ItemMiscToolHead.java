@@ -64,6 +64,6 @@ public class ItemMiscToolHead extends ItemTerra
 	
 	public void registerIcon(IconRegister registerer)
     {
-		this.iconIndex = registerer.func_94245_a(getUnlocalizedName());
+		this.iconIndex = registerer.func_94245_a("toolheads/"+getUnlocalizedName());
     }
 }

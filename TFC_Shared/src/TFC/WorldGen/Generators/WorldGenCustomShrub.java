@@ -60,7 +60,7 @@ public class WorldGenCustomShrub extends WorldGenerator
 				var7 == TFCBlocks.ClayGrass.blockID ||var7 == TFCBlocks.ClayGrass2.blockID)
 		{
 			++par4;
-			par1World.setBlockAndMetadataWithNotify(par3, par4, par5, Block.wood.blockID, this.field_48196_b, 3);
+			par1World.setBlockAndMetadataWithNotify(par3, par4, par5, Block.wood.blockID, this.field_48196_b, 0);
 
 			for (int var8 = par4; var8 <= par4 + 2; ++var8)
 			{

@@ -71,8 +71,8 @@ public class ItemWoodSupport extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++){
-			registerer.func_94245_a("/wood/"+WoodNames[i]+"Vertical Support");
-			registerer.func_94245_a("/wood/"+WoodNames[i]+"Horizontal Support");
+			registerer.func_94245_a("wood/"+WoodNames[i]+"Vertical Support");
+			registerer.func_94245_a("wood/"+WoodNames[i]+"Horizontal Support");
 		}
     }
 

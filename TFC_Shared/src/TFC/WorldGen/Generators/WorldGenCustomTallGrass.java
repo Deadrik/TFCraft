@@ -65,7 +65,7 @@ public class WorldGenCustomTallGrass extends WorldGenerator
 
 			if (par1World.isAirBlock(var8, var9, var10) && ((BlockCustomTallGrass)Block.blocksList[this.tallGrassID]).canBlockStay(par1World, var8, var9, var10))
 			{
-				par1World.setBlockAndMetadataWithNotify(var8, var9, var10, this.tallGrassID, this.tallGrassMetadata, 3);
+				par1World.setBlockAndMetadataWithNotify(var8, var9, var10, this.tallGrassID, this.tallGrassMetadata, 0);
 			}
 		}
 

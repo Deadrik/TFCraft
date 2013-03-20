@@ -112,7 +112,7 @@ public class WorldGenLargeRock implements IWorldGenerator
 						
 						if(rand.nextInt(10) != 0 && canPlaceX && canPlaceZ)
 						{
-							world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, rockLayer1.data1, rockLayer1.data2, 3);
+							world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, rockLayer1.data1, rockLayer1.data2, 0);
 						}
 					}
 				}

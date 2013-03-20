@@ -66,7 +66,7 @@ public class BlockCustomFlowing extends BlockFlowing
     private void updateFlow(World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID + 1, var5, 3);
+        par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID + 1, var5, 2);
     }
 
     @Override
@@ -227,9 +227,9 @@ public class BlockCustomFlowing extends BlockFlowing
     {
         if (this.liquidCanDisplaceBlock(par1World, par2, par3, par4))
         {
-            int var6 = par1World.getBlockId(par2, par3, par4);
+            int i1 = par1World.getBlockId(par2, par3, par4);
 
-            if (var6 > 0)
+            if (i1 > 0)
             {
                 if (this.blockMaterial == Material.lava)
                 {
@@ -237,7 +237,7 @@ public class BlockCustomFlowing extends BlockFlowing
                 }
                 else
                 {
-                    Block.blocksList[var6].dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+                    Block.blocksList[i1].dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
                 }
             }
 

@@ -49,7 +49,7 @@ public class WorldGenCustomPumpkin extends WorldGenerator
 					var5 == TFCBlocks.ClayGrass.blockID || var5 == TFCBlocks.ClayGrass2.blockID ||
 					var5 == TFCBlocks.PeatGrass.blockID || var5 == TFCBlocks.Peat.blockID) && Block.pumpkin.canPlaceBlockAt(par1World, var7, var8, var9))
 			{
-				par1World.setBlockAndMetadataWithNotify(var7, var8, var9, Block.pumpkin.blockID, par2Random.nextInt(4), 3);
+				par1World.setBlockAndMetadataWithNotify(var7, var8, var9, Block.pumpkin.blockID, par2Random.nextInt(4), 0);
 			}
 		}
 

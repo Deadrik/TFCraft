@@ -139,7 +139,7 @@ public class ItemStoneBrick extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < 23; i++)
-			registerer.func_94245_a("/rocks/"+MetaNames[i]+" Brick");
+			registerer.func_94245_a("rocks/"+MetaNames[i]+" Brick");
     }
 
 	@Override

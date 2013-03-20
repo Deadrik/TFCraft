@@ -131,7 +131,7 @@ public class EntityFallingDirt extends Entity
             int k = MathHelper.floor_double(posZ);
             if (fallTime == 1 && worldObj.getBlockId(i, j, k) == blockID)
             {
-                worldObj.setBlock(i, j, k, 0);
+                worldObj.func_94571_i(i, j, k);
             }
             else if (!worldObj.isRemote && fallTime == 1)
             {
