@@ -61,7 +61,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, var2));
@@ -79,7 +79,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, var2));
@@ -153,7 +153,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
             this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(Item.egg.shiftedIndex, 1);
+            this.dropItem(Item.egg.itemID, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
     }
@@ -215,7 +215,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     @Override
     protected int getDropItemId()
     {
-        return Item.feather.shiftedIndex;
+        return Item.feather.itemID;
     }
 
     /**
@@ -228,16 +228,16 @@ public class EntityChickenTFC extends EntityAnimalTFC
 
         for (int var4 = 0; var4 < var3; ++var4)
         {
-            this.dropItem(Item.feather.shiftedIndex,(int) (this.size_mod * (5+this.rand.nextInt(10))));
+            this.dropItem(Item.feather.itemID,(int) (this.size_mod * (5+this.rand.nextInt(10))));
         }
 
         if (this.isBurning())
         {
-            this.dropItem(Item.chickenCooked.shiftedIndex, 1);
+            this.dropItem(Item.chickenCooked.itemID, 1);
         }
         else
         {
-            this.dropItem(Item.chickenRaw.shiftedIndex, 1);
+            this.dropItem(Item.chickenRaw.itemID, 1);
         }
     }
 

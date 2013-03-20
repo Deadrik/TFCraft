@@ -58,10 +58,10 @@ public class GuiTerraScribe extends GuiContainer
 		//guiLeft = (width - 208) / 2;
 		//guiTop = (height - 198) / 2;
 
-		controlList.clear();
+		buttonList.clear();
 		if(FirepitEntity.scribeItemStacks[1]!=null){
 			if(FirepitEntity.scribeItemStacks[1].getItem() == TFCItems.writabeBookTFC){
-				controlList.add(new GuiButton(0, guiLeft+118, guiTop + 60, 36, 20, "write"));
+				buttonList.add(new GuiButton(0, guiLeft+118, guiTop + 60, 36, 20, "write"));
 			}
 		}
 	}

@@ -63,12 +63,6 @@ public class ItemProPick extends ItemTerra
     }
 
     @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
-    }
-
-    @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
     {
         if(!world.isRemote && world.getBlockId(x, y, z) != TFCBlocks.ToolRack.blockID)

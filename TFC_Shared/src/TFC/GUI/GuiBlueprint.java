@@ -113,8 +113,8 @@ public class GuiBlueprint extends GuiScreen
 
 		StringTranslate var1 = StringTranslate.getInstance();
 		Keyboard.enableRepeatEvents(true);
-		this.controlList.clear();
-		this.controlList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 180, var1.translateKey("gui.done")));
+		this.buttonList.clear();
+		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, guiTop + 180, var1.translateKey("gui.done")));
 		//this.controlList.add(new GuiButton(1, this.width / 2 - 100, guiTop + 210, var1.translateKey("gui.cancel")));
 
 		this.theGuiTextField = new GuiTextField(this.fontRenderer, this.width / 2 - 90, guiTop + 150, 180, 20);
@@ -135,11 +135,11 @@ public class GuiBlueprint extends GuiScreen
 	protected void keyTyped(char par1, int par2)
 	{
 		this.theGuiTextField.textboxKeyTyped(par1, par2);
-		((GuiButton)this.controlList.get(0)).enabled = this.theGuiTextField.getText().trim().length() > 0;
+		((GuiButton)this.buttonList.get(0)).enabled = this.theGuiTextField.getText().trim().length() > 0;
 
 		if (par1 == 13)
 		{
-			this.actionPerformed((GuiButton)this.controlList.get(0));
+			this.actionPerformed((GuiButton)this.buttonList.get(0));
 		}
 	}
 

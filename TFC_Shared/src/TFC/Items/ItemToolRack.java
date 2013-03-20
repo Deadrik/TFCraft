@@ -41,15 +41,13 @@ import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.TileEntities.TileEntityToolRack;
 
 public class ItemToolRack extends ItemTerraBlock
-{
-	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-            "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-	
+{	
 	public ItemToolRack(int id) {
 		super(id);
-		this.setIconIndex(16);
 		this.hasSubtypes = true;
         this.setMaxDamage(0);
+        this.MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+                "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
 
 	@Override
@@ -67,24 +65,6 @@ public class ItemToolRack extends ItemTerraBlock
 	{		
 		return i;
 	}
-	@Override
-	public int getIconFromDamage(int i)
-    {
-		return 16+i;
-    }
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrasprites.png";
-	}
-	
-	@Override
-    public String getItemNameIS(ItemStack itemstack) 
-    {
-        String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
-        return s;
-    }
 
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -95,7 +75,7 @@ public class ItemToolRack extends ItemTerraBlock
 			int id = TFCBlocks.ToolRack.blockID;
 			if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 			{
-				world.setBlockAndMetadataWithNotify(x, y, z-1, id, 0);
+				world.setBlockAndMetadataWithNotify(x, y, z-1, id, 0, 3);
 				world.markBlockForUpdate(x, y, z-1);
 				if(world.getBlockTileEntity(x, y, z-1) != null)
 				{
@@ -107,7 +87,7 @@ public class ItemToolRack extends ItemTerraBlock
 			}
 			else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 			{
-				world.setBlockAndMetadataWithNotify(x, y, z+1, id, 2);
+				world.setBlockAndMetadataWithNotify(x, y, z+1, id, 2, 3);
 				world.markBlockForUpdate(x, y, z+1);
 				if(world.getBlockTileEntity(x, y, z+1) != null)
 				{
@@ -119,7 +99,7 @@ public class ItemToolRack extends ItemTerraBlock
 			}
 			else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify(x-1, y, z, id, 3);
+				world.setBlockAndMetadataWithNotify(x-1, y, z, id, 3, 3);
 				world.markBlockForUpdate(x-1, y, z);
 				if(world.getBlockTileEntity(x-1, y, z) != null)
 				{
@@ -131,7 +111,7 @@ public class ItemToolRack extends ItemTerraBlock
 			}
 			else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify(x+1, y, z, id, 1);
+				world.setBlockAndMetadataWithNotify(x+1, y, z, id, 1, 3);
 				world.markBlockForUpdate(x+1, y, z);
 				if(world.getBlockTileEntity(x+1, y, z) != null)
 				{

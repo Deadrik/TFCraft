@@ -97,25 +97,25 @@ public class GuiScreenBookTFC extends GuiScreen
      */
     public void initGui()
     {
-        this.controlList.clear();
+        this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
 
         if (this.bookIsUnsigned)
         {
-            this.controlList.add(this.buttonSign = new GuiButton(3, this.width / 2 - 100, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("book.signButton")));
-            this.controlList.add(this.buttonDone = new GuiButton(0, this.width / 2 + 2, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("gui.done")));
-            this.controlList.add(this.buttonFinalize = new GuiButton(5, this.width / 2 - 100, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("book.finalizeButton")));
-            this.controlList.add(this.buttonCancel = new GuiButton(4, this.width / 2 + 2, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("gui.cancel")));
+            this.buttonList.add(this.buttonSign = new GuiButton(3, this.width / 2 - 100, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("book.signButton")));
+            this.buttonList.add(this.buttonDone = new GuiButton(0, this.width / 2 + 2, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("gui.done")));
+            this.buttonList.add(this.buttonFinalize = new GuiButton(5, this.width / 2 - 100, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("book.finalizeButton")));
+            this.buttonList.add(this.buttonCancel = new GuiButton(4, this.width / 2 + 2, 4 + this.bookImageHeight, 98, 20, StatCollector.translateToLocal("gui.cancel")));
         }
         else
         {
-            this.controlList.add(this.buttonDone = new GuiButton(0, this.width / 2 - 100, 4 + this.bookImageHeight, 200, 20, StatCollector.translateToLocal("gui.done")));
+            this.buttonList.add(this.buttonDone = new GuiButton(0, this.width / 2 - 100, 4 + this.bookImageHeight, 200, 20, StatCollector.translateToLocal("gui.done")));
         }
 
         int var1 = (this.width - this.bookImageWidth) / 2;
         byte var2 = 2;
-        this.controlList.add(this.buttonNextPage = new GuiButtonNextPage(1, var1 + 120, var2 + 154, true));
-        this.controlList.add(this.buttonPreviousPage = new GuiButtonNextPage(2, var1 + 38, var2 + 154, false));
+        this.buttonList.add(this.buttonNextPage = new GuiButtonNextPage(1, var1 + 120, var2 + 154, true));
+        this.buttonList.add(this.buttonPreviousPage = new GuiButtonNextPage(2, var1 + 38, var2 + 154, false));
         this.updateButtons();
     }
 
@@ -176,7 +176,7 @@ public class GuiScreenBookTFC extends GuiScreen
                     var8 = "TerraFirmaCraft";
                     this.itemstackBook.setTagInfo("author", new NBTTagString("author", this.editingPlayer.username));
                     this.itemstackBook.setTagInfo("title", new NBTTagString("title", this.bookTitle.trim().length()>0?this.bookTitle.trim():"Book"));
-                    this.itemstackBook.itemID = TFCItems.writabeBookTFC.shiftedIndex;
+                    this.itemstackBook.itemID = TFCItems.writabeBookTFC.itemID;
                 //}
 
                 ByteArrayOutputStream var3 = new ByteArrayOutputStream(1000);

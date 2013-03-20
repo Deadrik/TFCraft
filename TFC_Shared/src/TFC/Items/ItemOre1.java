@@ -4,34 +4,28 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import TFC.Core.TFC_Textures;
 
-public class ItemOre1 extends ItemBlock
+public class ItemOre1 extends ItemTerraBlock
 {
-	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
-		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
-		"Bituminous Coal", "Lignite"};
-
-
 	public ItemOre1(int i) 
 	{
 		super(i);
 		setHasSubtypes(true);
+		this.MetaNames = new String[]{"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
+				"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
+				"Bituminous Coal", "Lignite"};
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
+    	if(MetaNames != null)
+    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
+		return super.getItemDisplayName(itemstack);
 	}
+	
 	@Override
 	public int getMetadata(int i) 
 	{		
 		return i;
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
 	}
 }

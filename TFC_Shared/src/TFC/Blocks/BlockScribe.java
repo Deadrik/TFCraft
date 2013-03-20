@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -35,13 +36,11 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockScribe extends BlockContainer
+public class BlockScribe extends BlockTerraContainer
 {
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-
+	Icon iconTop;
+	Icon iconSide;
+	
 	public BlockScribe(int i)
 	{
 		super(i, Material.wood);
@@ -51,20 +50,15 @@ public class BlockScribe extends BlockContainer
 
 	@SideOnly(Side.CLIENT)
     @Override
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
 	}
-
+	
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
@@ -93,31 +87,27 @@ public class BlockScribe extends BlockContainer
 			return true;
 		}
 	}
-
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	@Override
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 1) {
-			return 88;
+			return iconTop;
 		}
-		return 89;
+		return iconSide;
 	}
-
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = "terraScribe";
-		return s;
-	}
-
+	
 	@Override
-	public String getTextureFile() {
-
-		return "/bioxx/terrablocks.png";
-	}
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		iconTop = iconRegisterer.func_94245_a("/devices/Scribing Table Top");
+		iconSide = iconRegisterer.func_94245_a("/devices/Scribing Table Side");
+    }
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;

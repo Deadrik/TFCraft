@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -40,10 +41,14 @@ import net.minecraftforge.common.IPlantable;
 
 public class BlockCustomCactus extends Block implements IPlantable
 {
-	
-    public BlockCustomCactus(int par1, int par2)
+	@SideOnly(Side.CLIENT)
+    private Icon field_94380_a;
+    @SideOnly(Side.CLIENT)
+    private Icon field_94379_b;
+    
+    public BlockCustomCactus(int par1)
     {
-        super(par1, par2, Material.cactus);
+        super(par1, Material.cactus);
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
@@ -69,12 +74,12 @@ public class BlockCustomCactus extends Block implements IPlantable
 
                 if (var7 == 15)
                 {
-                    par1World.setBlockWithNotify(par2, par3 + 1, par4, this.blockID);
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, 0);
+                    par1World.setBlock(par2, par3 + 1, par4, this.blockID);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 3);
                 }
                 else
                 {
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + 1);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + 1, 3);
                 }
             }
         }
@@ -88,7 +93,7 @@ public class BlockCustomCactus extends Block implements IPlantable
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         float var5 = 0.0625F;
-        return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)((float)par2 + var5), (double)par3, (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
+        return AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + var5), (double)par3, (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)((float)(par3 + 1) - var5), (double)((float)(par4 + 1) - var5));
     }
 
     @SideOnly(Side.CLIENT)
@@ -99,16 +104,16 @@ public class BlockCustomCactus extends Block implements IPlantable
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         float var5 = 0.0625F;
-        return AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)((float)par2 + var5), (double)par3, (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)(par3 + 1), (double)((float)(par4 + 1) - var5));
+        return AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + var5), (double)par3, (double)((float)par4 + var5), (double)((float)(par2 + 1) - var5), (double)(par3 + 1), (double)((float)(par4 + 1) - var5));
     }
 
     /**
      * Returns the block texture based on the side being looked at.  Args: side
      */
     @Override
-    public int getBlockTextureFromSide(int par1)
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture);
+        return par1 == 1 ? this.field_94380_a : (par1 == 0 ? this.field_94379_b : this.field_94336_cN);
     }
 
     /**
@@ -158,7 +163,7 @@ public class BlockCustomCactus extends Block implements IPlantable
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0);
         }
     }
 
@@ -209,6 +214,14 @@ public class BlockCustomCactus extends Block implements IPlantable
         par5Entity.attackEntityFrom(DamageSource.cactus, 25);
     }
 
+    @SideOnly(Side.CLIENT)
+    public void func_94332_a(IconRegister par1IconRegister)
+    {
+        this.field_94336_cN = par1IconRegister.func_94245_a("cactus_side");
+        this.field_94380_a = par1IconRegister.func_94245_a("cactus_top");
+        this.field_94379_b = par1IconRegister.func_94245_a("cactus_bottom");
+    }
+
     @Override
     public EnumPlantType getPlantType(World world, int x, int y, int z)
     {
@@ -226,4 +239,5 @@ public class BlockCustomCactus extends Block implements IPlantable
     {
         return -1;
     }
+    
 }

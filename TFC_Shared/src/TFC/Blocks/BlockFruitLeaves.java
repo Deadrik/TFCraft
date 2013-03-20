@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -42,25 +43,22 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockFruitLeaves extends Block
+public class BlockFruitLeaves extends BlockTerra
 {
-	private int baseIndexInPNG;
 	int adjacentTreeBlocks[];
-
-	public BlockFruitLeaves(int i, int j) 
+	Icon[] icons = new Icon[16];
+	Icon[] iconsOpaque = new Icon[16];
+	
+	public BlockFruitLeaves(int i) 
 	{
 		super(i, Material.leaves);
-		baseIndexInPNG = j;
 		this.setTickRandomly(true);
 	}
 
 	@Override
 	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-
-			return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
-
-		//return 0xFFFFFF;
+		return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
 	}
 	@Override
 	public int getRenderType()
@@ -78,7 +76,7 @@ public class BlockFruitLeaves extends Block
 		return false;
 	}
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int meta)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)
 	{
 		int index = baseIndexInPNG;
 
@@ -100,6 +98,19 @@ public class BlockFruitLeaves extends Block
 			return index - 32;
 		}
 	}
+	
+	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 9; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves");
+			iconsOpaque[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves Opaque");
+		}
+    }
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
@@ -144,8 +155,7 @@ public class BlockFruitLeaves extends Block
 							{
 								meta += 8;
 							}
-							world.setBlockMetadata(i, j, k, meta); 
-							world.markBlockForUpdate(i, j, k);
+							world.setBlockMetadataWithNotify(i, j, k, meta, 3); 
 						}
 					}
 				}
@@ -153,8 +163,7 @@ public class BlockFruitLeaves extends Block
 				{
 					if(meta >= 8 && rand.nextInt(10) == 0)
 					{
-						world.setBlockMetadata(i, j, k, meta-8); 
-						world.markBlockForUpdate(i, j, k);
+						world.setBlockMetadataWithNotify(i, j, k, meta-8, 3); 
 					}
 				}
 			}
@@ -164,8 +173,7 @@ public class BlockFruitLeaves extends Block
 				{
 					if(world.getBlockMetadata(i, j, k) >= 8)
 					{
-						world.setBlockMetadata(i, j, k, meta-8); 
-						world.markBlockForUpdate(i, j, k);
+						world.setBlockMetadataWithNotify(i, j, k, meta-8, 3); 
 					}
 				}
 			}
@@ -358,7 +366,7 @@ public class BlockFruitLeaves extends Block
 
 	private void destroyLeaves(World world, int i, int j, int k)
 	{
-		world.setBlockWithNotify(i, j, k, 0);
+		world.setBlock(i, j, k, 0);
 	}
 
 	private void removeLeaves(World world, int i, int j, int k)
@@ -366,7 +374,7 @@ public class BlockFruitLeaves extends Block
 		//        dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
 		//        if(new Random().nextInt(100) < 30)
 		//            dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
-		world.setBlockWithNotify(i, j, k, 0);
+		world.setBlock(i, j, k, 0);
 	}
 
 	public int quantityDropped(Random random)
@@ -398,7 +406,7 @@ public class BlockFruitLeaves extends Block
 
 			if(fi != null && (fi.inHarvest(TFC_Time.currentMonth) || fi.inHarvest(TFC_Time.lastMonth)) && (meta & 8) == 8)
 			{
-				world.setBlockMetadata(i, j, k, meta - 8);
+				world.setBlockMetadataWithNotify(i, j, k, meta - 8, 3);
 				dropBlockAsItem_do(world, i, j, k, fi.getOutput());
 				return true;
 			}
@@ -410,11 +418,4 @@ public class BlockFruitLeaves extends Block
 	{
 		super.onEntityWalking(world, i, j, k, entity);
 	}
-
-	@Override
-	public String getTextureFile() 
-	{
-		return TFC_Textures.VegetationSheet;
-	}
-
 }

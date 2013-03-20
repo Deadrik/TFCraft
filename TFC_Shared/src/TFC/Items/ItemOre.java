@@ -44,6 +44,8 @@ public class ItemOre extends ItemTerra
 		"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
 		/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
 		/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
+	
+	public Icon[] icons = new Icon[35];
 
 
 	public ItemOre(int i) 
@@ -67,34 +69,30 @@ public class ItemOre extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < blockNames.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
-
-	public Icon getIconFromDamage(int par1)
-	{
-	    if(par1 == 35)
-	        return this.iconIndex+6;
-	    else if(par1 == 36)
-            return this.iconIndex+13;
-	    else if(par1 == 37)
-            return this.iconIndex+10;
-	    
-		return this.iconIndex+par1;
-	}
-
-	@Override
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
-	}
 	
 	@Override
-	public String getTextureFile()
+	public Icon getIconFromDamage(int meta)
 	{
-		return "/bioxx/terrasprites2.png";
+	    if(meta == 35)
+	        return icons[meta + 6];
+	    else if(meta == 36)
+            return icons[meta + 13];
+	    else if(meta == 37)
+            return icons[meta + 10];
+	    
+		return icons[meta];
+	}
+
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+    	if(MetaNames != null)
+    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
+		return super.getItemDisplayName(itemstack);
 	}
 	
     public static String getItemNameDamage(int d) 

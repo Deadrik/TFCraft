@@ -85,13 +85,13 @@ public class EntityZombieTFC extends EntityZombie
         switch (this.rand.nextInt(3))
         {
             case 0:
-                this.dropItem(TFCItems.WroughtIronIngot.shiftedIndex, 1);
+                this.dropItem(TFCItems.WroughtIronIngot.itemID, 1);
                 break;
             case 1:
-                this.dropItem(TFCItems.Carrot.shiftedIndex, 1);
+                this.dropItem(TFCItems.Carrot.itemID, 1);
                 break;
             case 2:
-                this.dropItem(TFCItems.Potato.shiftedIndex, 1);
+                this.dropItem(TFCItems.Potato.itemID, 1);
         }
     }
 

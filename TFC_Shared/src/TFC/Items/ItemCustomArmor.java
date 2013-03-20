@@ -48,11 +48,7 @@ public class ItemCustomArmor extends ItemArmor implements ISize
         super(par1,par2EnumArmorMaterial,par3,par4);
         this.setCreativeTab(TFCTabs.TFCArmor);
     }
-    @Override
-    public String getTextureFile() 
-    {
-        return "/bioxx/terraarmor1.png";
-    }
+
     @Override
     public int getItemStackLimit()
     {
@@ -96,7 +92,7 @@ public class ItemCustomArmor extends ItemArmor implements ISize
 
                 if(meltTemp != -1)
                 {
-                    if(is.itemID == Item.stick.shiftedIndex)
+                    if(is.itemID == Item.stick.itemID)
                         arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
                     else
                         arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));

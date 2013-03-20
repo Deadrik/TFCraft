@@ -157,7 +157,7 @@ public class ItemJavelin extends ItemTerraTool
         }
 
         par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
-        par3EntityPlayer.inventory.consumeInventoryItem(TFCItems.Javelin.shiftedIndex);
+        par3EntityPlayer.inventory.consumeInventoryItem(TFCItems.Javelin.itemID);
         var8.setDamageTaken(par1ItemStack.getItemDamage());
         if (!par2World.isRemote)
         {

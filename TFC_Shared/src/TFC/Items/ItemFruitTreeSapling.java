@@ -63,7 +63,7 @@ public class ItemFruitTreeSapling extends ItemTerra
                 world.getBlockId(x, y+1, z) == 0 && !world.isRemote)
         {
             
-            world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset);
+            world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset, 3);
             world.markBlockForUpdate(x, y+1, z);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setHeight(0);
@@ -79,7 +79,7 @@ public class ItemFruitTreeSapling extends ItemTerra
     @Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-    	if(this.shiftedIndex == TFCItems.FruitTreeSapling1.shiftedIndex)
+    	if(this.itemID == TFCItems.FruitTreeSapling1.itemID)
     	{
     		for(int i = 0; i < 8; i++) 
     		{

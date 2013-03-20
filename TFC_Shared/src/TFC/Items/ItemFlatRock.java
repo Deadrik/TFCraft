@@ -45,24 +45,11 @@ public class ItemFlatRock extends ItemTerra
         this.setMaxDamage(0);
         this.maxStackSize = 25;
     }
-    public ItemFlatRock(int id, String tex) 
-    {
-        super(id);
-        texture = tex;
-
-    }
 
     public static String[] blockNames = {"Granite", "Diorite", "Gabbro", 
         "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
         "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
         "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-
-    @Override
-    public String getItemNameIS(ItemStack itemstack) 
-    {
-        String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-        return s;
-    }
     
     @Override
     public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
@@ -76,7 +63,7 @@ public class ItemFlatRock extends ItemTerra
         return false;
     }
 
-    public int getIconFromDamage(int i)
+    public Icon getIconFromDamage(int i)
     {
         switch(i)
         {

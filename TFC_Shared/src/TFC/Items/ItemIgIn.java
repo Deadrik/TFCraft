@@ -36,17 +36,9 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemIgIn extends ItemTerraBlock
 {
-	{blockNames = new String[]{"Granite", "Diorite", "Gabbro"};}
-
-
 	public ItemIgIn(int i) 
 	{
 		super(i);
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
+		MetaNames = new String[]{"Granite", "Diorite", "Gabbro"};
 	}
 }

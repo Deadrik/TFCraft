@@ -344,12 +344,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 64){
 					liquidLevel = (int)Math.min(liquidLevel + 8, 64);
 					Type = 2;
-					itemstack.itemID = TFCItems.WoodenBucketEmpty.shiftedIndex;
+					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
 				if ((Type == 0||Type == 1) && itemstack.getItem() == TFCItems.WoodenBucketWater && liquidLevel < 64){
 					liquidLevel = (int)Math.min(liquidLevel + 8, 64);
 					Type = 1;
-					itemstack.itemID = TFCItems.WoodenBucketEmpty.shiftedIndex;
+					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
 				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 64){
 					liquidLevel = (int)Math.min(liquidLevel + 1, 64);
@@ -512,19 +512,19 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			return false;
 		}
 		else{
-			int id = itemstack.getItem().shiftedIndex;
+			int id = itemstack.getItem().itemID;
 			if(Type == 1){
-				if(id == TFCItems.ScrapedHide.shiftedIndex){
+				if(id == TFCItems.ScrapedHide.itemID){
 					return true;
 				}
-				if(id == TFCItems.Logs.shiftedIndex){
+				if(id == TFCItems.Logs.itemID){
 					return true;
 				}
 			}
-			if(id == TFCItems.Hide.shiftedIndex && Type == 2){
+			if(id == TFCItems.Hide.itemID && Type == 2){
 				return true;
 			}
-			if(id == TFCItems.PrepHide.shiftedIndex && Type == 3){
+			if(id == TFCItems.PrepHide.itemID && Type == 3){
 				return true;
 			}
 		}
@@ -537,5 +537,17 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
 		}
 		
+	}
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

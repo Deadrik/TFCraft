@@ -58,19 +58,19 @@ public class GuiTerraAnvil extends GuiContainer
 		guiLeft = (width - 208) / 2;
 		guiTop = (height - 198) / 2;
 
-		controlList.clear();
+		buttonList.clear();
 
-		controlList.add(new GuiButton(0, guiLeft+5, guiTop + 5, 66, 20, "\2474Light Hit"));
-		controlList.add(new GuiButton(1, guiLeft+5, guiTop + 24, 66, 20, "\2474Heavy Hit"));
-		controlList.add(new GuiButton(2, guiLeft+5, guiTop + 43, 66, 20, "\2474Draw"));
-		controlList.add(new GuiButton(3, guiLeft+5, guiTop + 62, 66, 20, "\2474Quench"));
+		buttonList.add(new GuiButton(0, guiLeft+5, guiTop + 5, 66, 20, "\2474Light Hit"));
+		buttonList.add(new GuiButton(1, guiLeft+5, guiTop + 24, 66, 20, "\2474Heavy Hit"));
+		buttonList.add(new GuiButton(2, guiLeft+5, guiTop + 43, 66, 20, "\2474Draw"));
+		buttonList.add(new GuiButton(3, guiLeft+5, guiTop + 62, 66, 20, "\2474Quench"));
 
-		controlList.add(new GuiButton(4, guiLeft+137, guiTop + 5, 66, 20, "\2472Punch"));
-		controlList.add(new GuiButton(5, guiLeft+137, guiTop + 24, 66, 20, "\2472Bend"));
-		controlList.add(new GuiButton(6, guiLeft+137, guiTop + 43, 66, 20, "\2472Upset"));
-		controlList.add(new GuiButton(7, guiLeft+137, guiTop + 62, 66, 20, "\2472Shrink"));
+		buttonList.add(new GuiButton(4, guiLeft+137, guiTop + 5, 66, 20, "\2472Punch"));
+		buttonList.add(new GuiButton(5, guiLeft+137, guiTop + 24, 66, 20, "\2472Bend"));
+		buttonList.add(new GuiButton(6, guiLeft+137, guiTop + 43, 66, 20, "\2472Upset"));
+		buttonList.add(new GuiButton(7, guiLeft+137, guiTop + 62, 66, 20, "\2472Shrink"));
 
-		controlList.add(new GuiButton(8, guiLeft+86, guiTop + 74, 36, 20, "\2474Weld"));
+		buttonList.add(new GuiButton(8, guiLeft+86, guiTop + 74, 36, 20, "\2474Weld"));
 
 	}
 
@@ -202,7 +202,7 @@ public class GuiTerraAnvil extends GuiContainer
 
 	protected void drawGuiContainerForegroundLayer()
 	{
-		((GuiButton)controlList.get(3)).enabled = false;
+		((GuiButton)buttonList.get(3)).enabled = false;
 	}
 
 	private boolean getIsMouseOverSlot(Slot slot, int i, int j)

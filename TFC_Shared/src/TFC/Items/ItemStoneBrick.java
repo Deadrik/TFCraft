@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -46,11 +47,14 @@ public class ItemStoneBrick extends ItemTerra
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.MetaNames = new String[]{"Granite", "Diorite", "Gabbro", 
+				"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
+				"Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
+				"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
 	}
 	public ItemStoneBrick(int id, String tex) 
 	{
 		super(id);
-		texture = tex;
 	}
 
 	/*int[][] map = 
@@ -117,57 +121,26 @@ public class ItemStoneBrick extends ItemTerra
 		return false;
 	}*/
 
-	public static String[] blockNames = {"Granite", "Diorite", "Gabbro", 
-		"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-		"Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
-		"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-
+	
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
-	}
-
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
 	{
 
 	}
 
-	public int getIconFromDamage(int i)
+	@Override
+	public Icon getIconFromDamage(int meta)
 	{
-		switch(i)
-		{
-		case 0:
-		case 1:
-		case 2:
-			return 208+i;//igin
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-		case 10:
-		case 11:
-		case 12:
-			return 224+(i-3);//sed
-		case 13:
-		case 14:
-		case 15:
-		case 16:
-			return 211+(i-13);//igex
-		case 17:
-		case 18:
-		case 19:
-		case 20:
-		case 21:
-		case 22:
-			return 233+(i-16);//mm
-		}
-		return 208+i;
+		return icons[meta];
 	}
+	
+	Icon[] icons = new Icon[23];
+	@Override
+	public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 23; i++)
+			registerer.func_94245_a("/rocks/"+MetaNames[i]+" Brick");
+    }
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)

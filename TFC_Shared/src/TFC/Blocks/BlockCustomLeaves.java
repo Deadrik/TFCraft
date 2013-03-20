@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -41,21 +42,16 @@ import net.minecraftforge.common.IShearable;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
-    private int baseIndexInPNG;
     int adjacentTreeBlocks[];
+    
+    Icon[] icons = new Icon[16];
+	Icon[] iconsOpaque = new Icon[16];
 
-    public BlockCustomLeaves(int i, int j) 
+    public BlockCustomLeaves(int i) 
     {
-        super(i, j);
-        baseIndexInPNG = j;
+        super(i);
         this.setTickRandomly(false);
     }
-    
-//    @Override
-//    public boolean renderAsNormalBlock()
-//    {
-//        return false;
-//    }
     
     @Override
     public int getRenderType()
@@ -231,7 +227,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
     private void destroyLeaves(World world, int par1, int par2, int par3)
     {
-        world.setBlockWithNotify(par1, par2, par3, 0);
+        world.setBlock(par1, par2, par3, 0);
         world.scheduleBlockUpdate(par1 - 1, par2, par3, blockID, 5);
         world.scheduleBlockUpdate(par1 + 1, par2, par3, blockID, 5);
         world.scheduleBlockUpdate(par1, par2 - 1, par3, blockID, 5);
@@ -249,7 +245,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
         dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
         if(new Random().nextInt(100) < 30)
             dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.stick, 1));
-        world.setBlockWithNotify(i, j, k, 0);
+        world.setBlock(i, j, k, 0);
     }
 
     public int quantityDropped(Random random)
@@ -339,28 +335,35 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j)
+    public Icon getBlockTextureFromSideAndMetadata(int i, int j)
     {
         if (TerraFirmaCraft.proxy.getGraphicsLevel())
         {
-            return baseIndexInPNG + j;
+        	return icons[j];
         }
         else
         {
-            return baseIndexInPNG + j + 16;
+            return iconsOpaque[j];
         }
+    }
+    
+    String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
+	@Override
+	public void func_94332_a(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves");
+			iconsOpaque[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves Opaque");
+		}
     }
 
     @Override
     public void onEntityWalking(World world, int i, int j, int k, Entity entity)
     {
         super.onEntityWalking(world, i, j, k, entity);
-    }
-
-    @Override
-    public String getTextureFile() 
-    {
-        return "/bioxx/terrablocks.png";
     }
 
     @Override

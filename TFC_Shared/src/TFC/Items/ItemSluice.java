@@ -45,23 +45,12 @@ public class ItemSluice extends ItemTerra
 		super(i);
 	}
 
-	@Override
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		return super.getItemName();
-	}
 
 	public int getPlacedBlockMetadata(int i) {
 
 		//System.out.println(new StringBuilder().append(this.getItemDisplayName(new ItemStack(this,1,i))).toString());
 
 		return i;
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratools.png";
 	}
 
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ)
@@ -92,10 +81,10 @@ public class ItemSluice extends ItemTerra
 			}
 			if(((BlockSluice)TFCBlocks.Sluice).canPlace(world, i, j+1, k,r))
 			{
-				world.setBlockAndMetadata(i, j+1, k, TFCBlocks.Sluice.blockID, r);
+				world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.Sluice.blockID, r, 3);
 				if(world.getBlockId(i, j+1, k) == TFCBlocks.Sluice.blockID)
 				{
-					world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, TFCBlocks.Sluice.blockID, r + 8);
+					world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, TFCBlocks.Sluice.blockID, r + 8, 3);
 					entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
 				}
 				return true;

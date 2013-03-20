@@ -35,23 +35,15 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemPlankBlock extends ItemTerraBlock
 {
-	{blockNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};}
-
-
 	public ItemPlankBlock(int i) 
 	{
 		super(i);
+		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
 	
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.MEDIUM;
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrablocks.png";
 	}
 }

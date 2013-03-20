@@ -35,19 +35,10 @@ import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
 
 public class ItemMM extends ItemTerraBlock
-{
-	{
-		blockNames = new String[]{ "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-	}
-	
+{	
 	public ItemMM(int i) 
 	{
 		super(i);
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
+		MetaNames = new String[]{ "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
 	}
 }

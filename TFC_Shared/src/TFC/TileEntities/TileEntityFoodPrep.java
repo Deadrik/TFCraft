@@ -57,7 +57,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
-			if(storage[4] == null && storage[5].getItem().shiftedIndex == Item.bowlEmpty.shiftedIndex)
+			if(storage[4] == null && storage[5].getItem().itemID == Item.bowlEmpty.itemID)
 			{
 				int count = (storage[0] != null ? 1 : 0) + 
 						(storage[1] != null ? 1 : 0) + 
@@ -351,6 +351,18 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	public ItemStack getStackInSlotOnClosing(int var1) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

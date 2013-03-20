@@ -50,7 +50,7 @@ public class BlockLogHoriz extends BlockLogVert
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
     {
     	int meta = (j & 7) + offset;
     	int dir = j >> 3;
@@ -58,33 +58,33 @@ public class BlockLogHoriz extends BlockLogVert
     	if(dir == 0)
     	{    		
     		if(i == 0) {
-				return 128 + meta;
+				return BlockLogNatural.sideIcons[meta];
 			} else if(i == 1) {
-				return 128 + meta;
+				return BlockLogNatural.sideIcons[meta];
 			} else if(i == 2) {
-				return 144 + meta;
+				return BlockLogNatural.innerIcons[meta];
 			} else if(i == 3) {
-				return 144 + meta;
+				return BlockLogNatural.innerIcons[meta];
 			} else if(i == 4) {
-				return 32 + meta;
+				return BlockLogNatural.rotatedSideIcons[meta];
 			} else {
-				return 32 + meta;
+				return BlockLogNatural.rotatedSideIcons[meta];
 			}
     	}
     	else
     	{
     		if(i == 0) {
-				return 32 + meta;
+				return BlockLogNatural.rotatedSideIcons[meta];
 			} else if(i == 1) {
-				return 32 + meta;
+				return BlockLogNatural.rotatedSideIcons[meta];
 			} else if(i == 2) {
-				return 32 + meta;
+				return BlockLogNatural.rotatedSideIcons[meta];
 			} else if(i == 3) {
-				return 32 + meta;
+				return BlockLogNatural.rotatedSideIcons[meta];
 			} else if(i == 4) {
-				return 144 + meta;
+				return BlockLogNatural.innerIcons[meta];
 			} else {
-				return 144 + meta;
+				return BlockLogNatural.innerIcons[meta];
 			}
     	}
     }
@@ -115,14 +115,8 @@ public class BlockLogHoriz extends BlockLogVert
     	int metadata = world.getBlockMetadata(i, j, k);
     	
     	if(dir == 1 || dir == 3)
-    	world.setBlockMetadata(i, j, k, metadata+8);
+    	world.setBlockMetadataWithNotify(i, j, k, metadata+8, 3);
     	
     	metadata = world.getBlockMetadata(i, j, k);
-    	
-		//TODO: Debug Message should go here if debug is toggled on
-		if(TFC_Settings.enableDebugMode && world.isRemote)
-		{
-			System.out.println("Dir = "+(new StringBuilder()).append(getBlockName()).append(":").append(metadata >> 3).toString());
-		}
 	}
 }

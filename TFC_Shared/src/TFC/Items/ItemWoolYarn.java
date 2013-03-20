@@ -47,11 +47,6 @@ public class ItemWoolYarn extends ItemTerra
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
-	public ItemWoolYarn(int id, String tex) 
-	{
-		super(id);
-		texture = tex;
-	}
 
 	int[][] map = 
 		{   {0,-1,0},

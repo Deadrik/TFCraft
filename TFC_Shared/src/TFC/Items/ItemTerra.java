@@ -40,27 +40,18 @@ import net.minecraft.world.chunk.*;
 public class ItemTerra extends Item implements ISize
 {
     protected boolean stackable = true;
+    public String[] MetaNames;
 
     public ItemTerra(int id) 
     {
         super(id);
         this.setCreativeTab(CreativeTabs.tabMisc);
     }
+    
     public ItemTerra(int id, String tex) 
     {
         this(id);
     }
-
-    public String getTextureFile()
-    {
-        return null;
-    }
-    
-    /***
-     * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
-     */
-    public Item setIconCoord(int i, int j)
-    {return this;}
     
     @Override
     public int getItemStackLimit()
@@ -70,22 +61,25 @@ public class ItemTerra extends Item implements ISize
     	else
     		return 1;
     }
-
-    public ItemTerra setTexturePath(String t)
-    {
-        return this;
-    }
     
     public void registerIcon(IconRegister registerer)
     {
 
     }
-    
+    @Override
     public void func_94581_a(IconRegister registerer)
     {
     	super.func_94581_a(registerer);
     	registerIcon(registerer);
     }
+    
+    @Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+    	if(MetaNames != null)
+    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
+		return super.getItemDisplayName(itemstack);
+	}
 
     @Override
     public boolean getShareTag()

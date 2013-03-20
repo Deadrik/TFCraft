@@ -45,14 +45,4 @@ public class ItemSand extends ItemTerraBlock
 	{
 		super(i);
 	}
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.BlockSheet2;
-	}
-	
-	public String getItemNameIS(ItemStack par1ItemStack)
-    {
-        return Block.blocksList[this.getBlockID()].getBlockName();
-    }
 }

@@ -60,10 +60,10 @@ public class FarmlandHighlightHandler{
 		
 		boolean isMetalHoe = false;
 		
-		if(evt.currentItem != null && evt.currentItem.getItem().shiftedIndex != TFCItems.IgInHoe.shiftedIndex &&
-				evt.currentItem.getItem().shiftedIndex != TFCItems.IgExHoe.shiftedIndex &&
-				evt.currentItem.getItem().shiftedIndex != TFCItems.SedHoe.shiftedIndex &&
-				evt.currentItem.getItem().shiftedIndex != TFCItems.MMHoe.shiftedIndex)
+		if(evt.currentItem != null && evt.currentItem.getItem().itemID != TFCItems.IgInHoe.itemID &&
+				evt.currentItem.getItem().itemID != TFCItems.IgExHoe.itemID &&
+				evt.currentItem.getItem().itemID != TFCItems.SedHoe.itemID &&
+				evt.currentItem.getItem().itemID != TFCItems.MMHoe.itemID)
 		{
 			isMetalHoe = true;
 		}
@@ -99,7 +99,7 @@ public class FarmlandHighlightHandler{
 				double offset = 0;
 				double nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
 
-				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -111,7 +111,7 @@ public class FarmlandHighlightHandler{
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
 				GL11.glColor4ub(TFC_Settings.cropNutrientBColor[0], TFC_Settings.cropNutrientBColor[1], TFC_Settings.cropNutrientBColor[2], TFC_Settings.cropNutrientBColor[3]);
-				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -123,7 +123,7 @@ public class FarmlandHighlightHandler{
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
 				GL11.glColor4ub(TFC_Settings.cropNutrientCColor[0], TFC_Settings.cropNutrientCColor[1], TFC_Settings.cropNutrientCColor[2], TFC_Settings.cropNutrientCColor[3]);
-				drawBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -145,7 +145,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0;
 				nutrient = 1.02 + ((double)te.nutrients[0] / (double)soilMax)*0.5;
-				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -156,7 +156,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
-				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -167,7 +167,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
-				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawOutlinedBoundingBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -204,7 +204,7 @@ public class FarmlandHighlightHandler{
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
 				
-				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawFace(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX,
 						evt.target.blockY + 1.01 - crop,
 						evt.target.blockZ,
@@ -238,7 +238,7 @@ public class FarmlandHighlightHandler{
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
 				
-				drawFace(AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(
+				drawFace(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX,
 						evt.target.blockY + 0.01,
 						evt.target.blockZ,

@@ -168,7 +168,7 @@ public class BlockIngotPile extends BlockTerraContainer
 			return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 0.25, (double)par4 + 1);
     }
 	
-	@Override
+	/*@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		int meta = getAnvilTypeFromMeta(j);
@@ -187,8 +187,8 @@ public class BlockIngotPile extends BlockTerraContainer
 			return blockIndexInTexture + offset;
 		} else {
 			return blockIndexInTexture + offset;
-		}*/
-	}
+		}
+	}*/
 
 	@Override
 	public int getRenderType()

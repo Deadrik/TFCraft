@@ -35,12 +35,12 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.living.LivingSpecialSpawnEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
 public class EntitySpawnHandler
 {
 	@ForgeSubscribe
-	public void onEntityLivingUpdate(LivingSpecialSpawnEvent event) 
+	public void onEntityLivingUpdate(LivingSpawnEvent event) 
 	{
 		EntityLiving entity = event.entityLiving;
 		

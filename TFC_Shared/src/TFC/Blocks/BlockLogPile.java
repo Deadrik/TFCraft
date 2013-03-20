@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -38,7 +39,7 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockLogPile extends BlockContainer
 {
-	private Class EntityClass;
+	Icon[] icons = new Icon[3];
 
 	public BlockLogPile(int i)
 	{
@@ -86,39 +87,46 @@ public class BlockLogPile extends BlockContainer
 		if(j == 0 || j == 2)//+z
 		{
 			if(i == 0) {
-				return 93;
+				return icons[1];
 			} else if(i == 1) {
-				return 93;
+				return icons[1];
 			} else if(i == 2) {
-				return 94;
+				return icons[2];
 			} else if(i == 3) {
-				return 94;
+				return icons[2];
 			} else if(i == 4) {
-				return 92;
+				return icons[0];
 			} else if(i == 5) {
-				return 92;
+				return icons[0];
 			}
 		}
 		else if(j == 1 || j == 3)//-x
 		{
 			if(i == 0) {
-				return 92;
+				return icons[0];
 			} else if(i == 1) {
-				return 92;
+				return icons[0];
 			} else if(i == 2) {
-				return 92;
+				return icons[0];
 			} else if(i == 3) {
-				return 92;
+				return icons[0];
 			} else if(i == 4) {
-				return 94;
+				return icons[2];
 			} else if(i == 5) {
-				return 94;
+				return icons[2];
 			}
 		}
 
-		return 92;
+		return icons[0];
 
 	}
+	
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		icons[0] = iconRegisterer.func_94245_a("Log Pile Side 0");
+		icons[1] = iconRegisterer.func_94245_a("Log Pile Side 1");
+		icons[2] = iconRegisterer.func_94245_a("Log Pile End");
+    }
 	
 	public void Eject(World par1World, int par2, int par3, int par4)
     {

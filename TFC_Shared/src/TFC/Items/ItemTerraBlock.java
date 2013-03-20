@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -43,7 +44,8 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
 {
-	public String[] blockNames;
+	public static String[] MetaNames;
+	public Icon[] icons;
 	
 	public ItemTerraBlock(int par1) 
 	{
@@ -53,17 +55,11 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 	
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		if(blockNames != null)
-		{
-			String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-			return s;
-		}
-		else
-		{
-			return itemstack.getItem().getItemName();
-		}
+    	if(MetaNames != null)
+    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
+		return super.getItemDisplayName(itemstack);
 	}
 	
 	@Override
@@ -108,7 +104,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
                 if(meltTemp != -1)
                 {
-                    if(is.itemID == Item.stick.shiftedIndex)
+                    if(is.itemID == Item.stick.itemID)
                         arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
                     else
                         arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));
@@ -147,5 +143,19 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
+	
+	public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < MetaNames.length; i++)
+		{
+			icons[i] = registerer.func_94245_a(MetaNames[i]);
+		}
+    }
+    @Override
+    public void func_94581_a(IconRegister registerer)
+    {
+    	super.func_94581_a(registerer);
+    	registerIcon(registerer);
+    }
 
 }

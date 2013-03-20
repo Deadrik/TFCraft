@@ -120,6 +120,24 @@ public class BlockOre extends BlockTerra
 		return TFCItems.OreChunk.itemID;
 	}
 	
+	public static Item getDroppedItem(int meta)
+    {
+        if(meta == 14 || meta == 15) 
+        {
+            return Item.coal;
+        } 
+        else 
+        {
+            return TFCItems.SmallOreChunk;
+        }
+    }
+	
+	public static String getItemNameDamage(int d) 
+    {
+        String s = blockNames[d];
+        return s;
+    }
+	
 	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
         "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
         "Bituminous Coal", "Lignite"};

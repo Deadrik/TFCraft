@@ -231,12 +231,12 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 				if(outMetal1 == null)
 					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().shiftedIndex != output.getItem().shiftedIndex)
+				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
 					outMetal2 = output;
 
-				if(outMetal1.getItem().shiftedIndex == output.getItem().shiftedIndex)
+				if(outMetal1.getItem().itemID == output.getItem().itemID)
 					outMetal1Count += 100-output.getItemDamage();
-				else if(outMetal2.getItem().shiftedIndex == output.getItem().shiftedIndex)
+				else if(outMetal2.getItem().itemID == output.getItem().itemID)
 					outMetal2Count += 100-output.getItemDamage();
 			}
 		}
@@ -396,16 +396,14 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			}
 
 			if((meta & 4) == 0) {
-				worldObj.setBlockMetadata(xCoord, yCoord, zCoord, meta+4);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta+4, 3);
 			}
 			//updateGui();
 		}
 		else
 		{
 			if((meta & 4) == 4) {
-				worldObj.setBlockMetadata(xCoord, yCoord, zCoord, meta & 3);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta & 3, 3);
 			}
 
 			fuelBurnTemp = 0;
@@ -535,7 +533,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 				if(outMetal1 == null)
 					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().shiftedIndex != output.getItem().shiftedIndex)
+				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
 					outMetal2 = output;
 			}
 		}
@@ -546,7 +544,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			/**
 			 * First we check if there is an empty mold
 			 * */
-			if(input[0].itemID == TFCItems.CeramicMold.shiftedIndex)
+			if(input[0].itemID == TFCItems.CeramicMold.itemID)
 			{
 				int dam = 0;
 				if(outMetal1Count > 0)
@@ -593,7 +591,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			 * If the input is not an empty mold but instead contains a partial mold matching the first output metal, 
 			 * then we handle the process
 			 * */
-			else if(outMetal1 != null && input[0].itemID == outMetal1.getItem().shiftedIndex && input[0].getItemDamage() > 0)
+			else if(outMetal1 != null && input[0].itemID == outMetal1.getItem().itemID && input[0].getItemDamage() > 0)
 			{
 				int i = 100-input[0].getItemDamage();
 				if(i + outMetal1Count < 100)
@@ -619,7 +617,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			 * If the input is not an empty mold but instead contains a partial mold matching the second output metal, 
 			 * then we handle the process
 			 * */
-			else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().shiftedIndex && input[0].getItemDamage() > 0)
+			else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().itemID && input[0].getItemDamage() > 0)
 			{
 				int i = 100-input[0].getItemDamage();
 				if(i + outMetal2Count < 100)
@@ -735,33 +733,33 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
 				{
 					EntityItem entity = (EntityItem)iterator.next();
-					if(entity.func_92014_d().itemID == Item.coal.shiftedIndex && entity.func_92014_d().getItemDamage() == 1 || entity.func_92014_d().itemID == TFCItems.Coke.shiftedIndex)
+					if(entity.getEntityItem().itemID == Item.coal.itemID && entity.getEntityItem().getItemDamage() == 1 || entity.getEntityItem().itemID == TFCItems.Coke.itemID)
 					{
-						for(int c = 0; c < entity.func_92014_d().stackSize; c++)
+						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
 						{
 							if(charcoalCount+oreCount < 40 && charcoalCount < 20)
 							{
 								charcoalCount++;
-								entity.func_92014_d().stackSize--;
+								entity.getEntityItem().stackSize--;
 							}
 						}
-						if(entity.func_92014_d().stackSize == 0) {
+						if(entity.getEntityItem().stackSize == 0) {
 							entity.setDead();
 						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-					else if(TFC_ItemHeat.getMeltingPoint(entity.func_92014_d()) != -1 && entity.func_92014_d().getItem() instanceof ItemOre && 
-					(entity.func_92014_d().getItemDamage() == oreDamage || OreType.contentEquals("")))
+					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && 
+					(entity.getEntityItem().getItemDamage() == oreDamage || OreType.contentEquals("")))
 					{
-						int c = entity.func_92014_d().stackSize;
+						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; c--)
 						{
 							if(charcoalCount+oreCount < 40 && oreCount < 20 && outCount < 1000)
 							{
-								if(AddOreToFire(new ItemStack(entity.func_92014_d().getItem(),1,entity.func_92014_d().getItemDamage()))) 
+								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
 								{
 									oreCount+=1;
-									oreDamage = entity.func_92014_d().getItemDamage();
+									oreDamage = entity.getEntityItem().getItemDamage();
 								}
 							}
 						}
@@ -769,7 +767,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 							entity.setDead();
 						}
 						else
-							entity.func_92014_d().stackSize = c; 
+							entity.getEntityItem().stackSize = c; 
 					}
 				}
 			}

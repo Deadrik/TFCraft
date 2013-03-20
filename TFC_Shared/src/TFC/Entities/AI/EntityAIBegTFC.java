@@ -98,6 +98,6 @@ public class EntityAIBegTFC extends EntityAIBase
     private boolean func_48345_a(EntityPlayer par1EntityPlayer)
     {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-        return var2 == null ? false : (!this.theWolf.isTamed() && var2.itemID == Item.bone.shiftedIndex ? true : this.theWolf.isBreedingItem(var2));
+        return var2 == null ? false : (!this.theWolf.isTamed() && var2.itemID == Item.bone.itemID ? true : this.theWolf.isBreedingItem(var2));
     }
 }

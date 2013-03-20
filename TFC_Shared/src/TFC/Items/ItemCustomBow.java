@@ -75,7 +75,7 @@ public class ItemCustomBow extends ItemTerra
         
         boolean var5 = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
 
-        if (var5 || par3EntityPlayer.inventory.hasItem(Item.arrow.shiftedIndex))
+        if (var5 || par3EntityPlayer.inventory.hasItem(Item.arrow.itemID))
         {
             float var7 = (float)var6 / 20.0F;
             var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
@@ -125,7 +125,7 @@ public class ItemCustomBow extends ItemTerra
             }
             else
             {
-                par3EntityPlayer.inventory.consumeInventoryItem(Item.arrow.shiftedIndex);
+                par3EntityPlayer.inventory.consumeInventoryItem(Item.arrow.itemID);
             }
 
             if (!par2World.isRemote)
@@ -168,7 +168,7 @@ public class ItemCustomBow extends ItemTerra
             return event.result;
         }
         
-        if (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItem(Item.arrow.shiftedIndex))
+        if (par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.hasItem(Item.arrow.itemID))
         {
             par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }

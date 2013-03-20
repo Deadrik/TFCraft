@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -37,9 +38,12 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockSpawnMeter extends BlockTerraContainer
 {
-	public BlockSpawnMeter(int par1) {
+	Icon iconTop;
+	Icon[] icons = new Icon[9];
+	
+	public BlockSpawnMeter(int par1) 
+	{
 		super(par1, Material.rock);
-		this.blockIndexInTexture = 48;
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setLightValue(1F);
 	}
@@ -62,12 +66,21 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	}
 
 	@Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
     {
 		if(i < 2)
-			return blockIndexInTexture+9;
+			return iconTop;
 		
-		return blockIndexInTexture+j;
+		return icons[j];
+    }
+	
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		iconTop = iconRegisterer.func_94245_a("/devices/meterTop");
+		for(int i = 0; i < 9; i++)
+		{
+			icons[i] = iconRegisterer.func_94245_a("/devices/meter"+i);
+		}
     }
 
 	@Override

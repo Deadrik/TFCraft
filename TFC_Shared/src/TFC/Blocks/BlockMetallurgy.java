@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -35,13 +36,11 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class BlockMetallurgy extends BlockContainer
+public class BlockMetallurgy extends BlockTerraContainer
 {
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-
+	Icon iconTop;
+	Icon iconSide;
+	
 	public BlockMetallurgy(int i)
 	{
 		super(i, Material.rock);
@@ -60,10 +59,6 @@ public class BlockMetallurgy extends BlockContainer
 
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
@@ -93,25 +88,22 @@ public class BlockMetallurgy extends BlockContainer
 		}
 	}
 
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	@Override
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 1) {
-			return 68;
+			return iconTop;
 		}
-		return 69;
+		return iconSide;
 	}
-
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = "terraMetallurgy";
-		return s;
-	}
-
+	
 	@Override
-	public String getTextureFile() {
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		iconTop = iconRegisterer.func_94245_a("/devices/Scribing Table Top");
+		iconSide = iconRegisterer.func_94245_a("/devices/Scribing Table Side");
+    }
 
-		return "/bioxx/terrablocks.png";
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

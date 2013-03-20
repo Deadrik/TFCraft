@@ -48,12 +48,13 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public int type;
-	private static int[] ingots = {(TFCItems.BismuthIngot.shiftedIndex),(TFCItems.BismuthBronzeIngot.shiftedIndex),(TFCItems.BlackBronzeIngot.shiftedIndex),
-		(TFCItems.BlackSteelIngot.shiftedIndex),(TFCItems.BlueSteelIngot.shiftedIndex),(TFCItems.BrassIngot.shiftedIndex),(TFCItems.BronzeIngot.shiftedIndex),
-		(TFCItems.CopperIngot.shiftedIndex),(TFCItems.GoldIngot.shiftedIndex),(TFCItems.WroughtIronIngot.shiftedIndex),(TFCItems.LeadIngot.shiftedIndex),
-		(TFCItems.NickelIngot.shiftedIndex),(TFCItems.PigIronIngot.shiftedIndex),(TFCItems.PlatinumIngot.shiftedIndex),(TFCItems.RedSteelIngot.shiftedIndex),
-		(TFCItems.RoseGoldIngot.shiftedIndex),(TFCItems.SilverIngot.shiftedIndex),(TFCItems.SteelIngot.shiftedIndex),(TFCItems.SterlingSilverIngot.shiftedIndex),
-		(TFCItems.TinIngot.shiftedIndex),(TFCItems.ZincIngot.shiftedIndex)};
+	private static int[] ingots = {(TFCItems.BismuthIngot.itemID),(TFCItems.BismuthBronzeIngot.itemID),(TFCItems.BlackBronzeIngot.itemID),
+		(TFCItems.BlackSteelIngot.itemID),(TFCItems.BlueSteelIngot.itemID),(TFCItems.BrassIngot.itemID),(TFCItems.BronzeIngot.itemID),
+		(TFCItems.CopperIngot.itemID),(TFCItems.GoldIngot.itemID),(TFCItems.WroughtIronIngot.itemID),(TFCItems.LeadIngot.itemID),
+		(TFCItems.NickelIngot.itemID),(TFCItems.PigIronIngot.itemID),(TFCItems.PlatinumIngot.itemID),(TFCItems.RedSteelIngot.itemID),
+		(TFCItems.RoseGoldIngot.itemID),(TFCItems.SilverIngot.itemID),(TFCItems.SteelIngot.itemID),(TFCItems.SterlingSilverIngot.itemID),
+		(TFCItems.TinIngot.itemID),(TFCItems.ZincIngot.itemID)};
+	
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
@@ -107,7 +108,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 				return true;
 			}
 		}
-		if(storage[index].getItem() == is.getItem() && storage[index].getItem().shiftedIndex == is.getItem().shiftedIndex &&
+		if(storage[index].getItem() == is.getItem() && storage[index].getItem().itemID == is.getItem().itemID &&
 				/*storage[index].stackSize < storage[index].getMaxStackSize() &&*/ storage[index].stackSize+1 <= this.getInventoryStackLimit())
 		{
 			return true;
@@ -318,5 +319,15 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		}
 
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+	}
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

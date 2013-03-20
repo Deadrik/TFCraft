@@ -82,11 +82,9 @@ public class BlockCustomStationary extends BlockCustomFluid
         if(!finite)
         {
             int var5 = par1World.getBlockMetadata(par2, par3, par4);
-            par1World.editingBlocks = true;
-            par1World.setBlockAndMetadata(par2, par3, par4, this.blockID - 1, var5);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID - 1, var5, 3);
             par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID - 1, this.tickRate());
-            par1World.editingBlocks = false;
         }
         else
         {
@@ -95,42 +93,42 @@ public class BlockCustomStationary extends BlockCustomFluid
                 if(par1World.getBlockId(par2+1, par3, par4) == 0 || 
                         (par1World.getBlockId(par2+1, par3, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2+1, par3, par4) != 0))
                 {
-                    par1World.setBlockAndMetadata(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, 0, 3);
                     par1World.markBlockRangeForRenderUpdate(par2+1, par3, par4, par2+1, par3, par4);
                     par1World.scheduleBlockUpdate(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                 }
                 else if(par1World.getBlockId(par2-1, par3, par4) == 0 || 
                         (par1World.getBlockId(par2-1, par3, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2-1, par3, par4) != 0))
                 {
-                    par1World.setBlockAndMetadata(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, 0, 3);
                     par1World.markBlockRangeForRenderUpdate(par2-1, par3, par4, par2-1, par3, par4);
                     par1World.scheduleBlockUpdate(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                 }
                 else if(par1World.getBlockId(par2, par3, par4+1) == 0 || 
                         (par1World.getBlockId(par2, par3, par4+1) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4+1) != 0))
                 {
-                    par1World.setBlockAndMetadata(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, 0, 3);
                     par1World.markBlockRangeForRenderUpdate(par2, par3, par4+1, par2, par3, par4+1);
                     par1World.scheduleBlockUpdate(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, this.tickRate());
                 }
                 else if(par1World.getBlockId(par2, par3, par4-1) == 0 || 
                         (par1World.getBlockId(par2, par3, par4-1) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4-1) != 0))
                 {
-                    par1World.setBlockAndMetadata(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, 0, 3);
                     par1World.markBlockRangeForRenderUpdate(par2, par3, par4-1, par2, par3, par4-1);
                     par1World.scheduleBlockUpdate(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, this.tickRate());
                 }
                 else if(par1World.getBlockId(par2, par3-1, par4) == 0 || 
                         (par1World.getBlockId(par2, par3-1, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3-1, par4) != 0))
                 {
-                    par1World.setBlockAndMetadata(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, 0, 3);
                     par1World.markBlockRangeForRenderUpdate(par2, par3-1, par4, par2, par3-1, par4);
                     par1World.scheduleBlockUpdate(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
                 }
             }
             else
             {
-                par1World.setBlockAndMetadata(par2, par3, par4, TFCBlocks.finiteWater.blockID, 0);
+                par1World.setBlockAndMetadataWithNotify(par2, par3, par4, TFCBlocks.finiteWater.blockID, 0, 3);
                 par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
                 par1World.scheduleBlockUpdate(par2, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate());
             }
@@ -159,7 +157,7 @@ public class BlockCustomStationary extends BlockCustomFluid
                 {
                     if (this.isFlammable(par1World, par2 - 1, par3, par4) || this.isFlammable(par1World, par2 + 1, par3, par4) || this.isFlammable(par1World, par2, par3, par4 - 1) || this.isFlammable(par1World, par2, par3, par4 + 1) || this.isFlammable(par1World, par2, par3 - 1, par4) || this.isFlammable(par1World, par2, par3 + 1, par4))
                     {
-                        par1World.setBlockWithNotify(par2, par3, par4, Block.fire.blockID);
+                        par1World.setBlock(par2, par3, par4, Block.fire.blockID);
                         return;
                     }
                 }
@@ -181,7 +179,7 @@ public class BlockCustomStationary extends BlockCustomFluid
 
                     if (par1World.isAirBlock(par2, par3 + 1, par4) && this.isFlammable(par1World, par2, par3, par4))
                     {
-                        par1World.setBlockWithNotify(par2, par3 + 1, par4, Block.fire.blockID);
+                        par1World.setBlock(par2, par3 + 1, par4, Block.fire.blockID);
                     }
                 }
             }

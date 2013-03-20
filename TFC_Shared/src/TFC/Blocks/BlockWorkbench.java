@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -35,15 +36,19 @@ import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
-public class BlockWorkbench extends BlockContainer
+public class BlockWorkbench extends BlockTerraContainer
 {
+	@SideOnly(Side.CLIENT)
+    private Icon field_94385_a;
+    @SideOnly(Side.CLIENT)
+    private Icon field_94384_b;
+    
 	public BlockWorkbench(int i)
 	{
 		super(i, Material.wood);
-		blockIndexInTexture = 59;
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
-
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		if (!world.isRemote)
@@ -53,25 +58,21 @@ public class BlockWorkbench extends BlockContainer
 		return true;
 	}
 
-	public int getBlockTextureFromSide(int i)
-	{
-		if (i == 1)
-		{
-			return blockIndexInTexture - 16;
-		}
-		if (i == 0)
-		{
-			return Block.planks.getBlockTextureFromSide(0);
-		}
-		if (i == 2 || i == 4)
-		{
-			return blockIndexInTexture + 1;
-		}
-		else
-		{
-			return blockIndexInTexture;
-		}
-	}
+	@SideOnly(Side.CLIENT)
+	@Override
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    {
+        return par1 == 1 ? this.field_94385_a : (par1 == 0 ? Block.planks.getBlockTextureFromSide(par1) : (par1 != 2 && par1 != 4 ? this.field_94336_cN : this.field_94384_b));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void func_94332_a(IconRegister par1IconRegister)
+    {
+        this.field_94336_cN = par1IconRegister.func_94245_a("workbench_side");
+        this.field_94385_a = par1IconRegister.func_94245_a("workbench_top");
+        this.field_94384_b = par1IconRegister.func_94245_a("workbench_front");
+    }
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

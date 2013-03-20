@@ -61,8 +61,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		if (!this.canPlaceBlockAt(par1World, par2, par3, par4))
 		{
-			par1World.setBlockWithNotify(par2, par3, par4, 0);
-			par1World.markBlockForUpdate(par2, par3, par4);
+			par1World.setBlock(par2, par3, par4, 0);
 			return false;
 		}
 		else
@@ -153,9 +152,9 @@ public class BlockCustomSnow extends BlockTerra
 		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
 		{
 			if(meta > 1 && par5Random.nextInt(5) == 0) {
-				par1World.setBlockMetadata(par2, par3, par4, meta-1);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
 			} else if(meta == 1 && par5Random.nextInt(5) == 0) {
-				par1World.setBlockWithNotify(par2, par3, par4, 0);
+				par1World.setBlock(par2, par3, par4, 0);
 			}
 		}
 		
@@ -163,15 +162,15 @@ public class BlockCustomSnow extends BlockTerra
 		{      
 			if(meta < 3 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) 
 			{
-				par1World.setBlockMetadata(par2, par3, par4, meta+1);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 3);
 			} 
 			else if(meta < 15 && par5Random.nextInt(8) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves)
             {
-                par1World.setBlockMetadata(par2, par3, par4, meta+1);
+                par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 3);
             }
 			else if(meta < 3 && par5Random.nextInt(3) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
 			{
-				par1World.setBlockMetadata(par2, par3, par4, meta+1);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 3);
 			}
 		}
 		else if(par1World.isRaining() && TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) >= 0)//Raining and above freezing
@@ -180,39 +179,39 @@ public class BlockCustomSnow extends BlockTerra
             {
                 if(meta > 1) 
                 {
-                    par1World.setBlockMetadata(par2, par3, par4, meta-1);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
                 } 
                 else 
                 {
-                    par1World.setBlockWithNotify(par2, par3, par4, 0);
+                    par1World.setBlock(par2, par3, par4, 0);
                 }
             } 
             else if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
             {
                 if(meta > 1) {
-                    par1World.setBlockMetadata(par2, par3, par4, meta-1);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
                 } else {
-                    par1World.setBlockWithNotify(par2, par3, par4, 0);
+                    par1World.setBlock(par2, par3, par4, 0);
                 }
             }
         }
 		else if(TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) >= 0F)//Above fReezing
 		{
 			if(meta > 1 ) {
-				par1World.setBlockMetadata(par2, par3, par4, meta-1);
+				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
 			} else if(meta == 1) {
-				par1World.setBlockWithNotify(par2, par3, par4, 0);
+				par1World.setBlock(par2, par3, par4, 0);
 			}
 		}
 		else//Below Freezing
 		{
 		    if(meta > 1 && par5Random.nextInt(5) == 0) 
 		    {
-                par1World.setBlockMetadata(par2, par3, par4, meta-1);
+                par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
             } 
 		    else if(meta == 1 && par5Random.nextInt(5) == 0)
             {
-                par1World.setBlockWithNotify(par2, par3, par4, 0);
+                par1World.setBlock(par2, par3, par4, 0);
             }
 		}
 		par1World.markBlockForUpdate(par2, par3, par4);

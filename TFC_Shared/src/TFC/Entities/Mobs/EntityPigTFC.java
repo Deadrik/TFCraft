@@ -52,7 +52,7 @@ public class EntityPigTFC extends EntityAnimalTFC
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(6, new EntityAIWander(this, var2));
         this.tasks.addTask(5, this.aiEatGrass);
@@ -70,7 +70,7 @@ public class EntityPigTFC extends EntityAnimalTFC
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
         this.tasks.addTask(6, new EntityAIWander(this, var2));
         this.tasks.addTask(5, this.aiEatGrass);
@@ -189,7 +189,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     @Override
     protected int getDropItemId()
     {
-        return this.isBurning() ? Item.porkCooked.shiftedIndex : Item.porkRaw.shiftedIndex;
+        return this.isBurning() ? Item.porkCooked.itemID : Item.porkRaw.itemID;
     }
     @Override
     protected void dropFewItems(boolean par1, int par2)
@@ -199,7 +199,7 @@ public class EntityPigTFC extends EntityAnimalTFC
 
         for (var4 = 0; var4 < var3; ++var4)
         {
-            this.dropItem(TFCItems.Hide.shiftedIndex,1);
+            this.dropItem(TFCItems.Hide.itemID,1);
         }
 
         var3 = 1;
@@ -209,11 +209,11 @@ public class EntityPigTFC extends EntityAnimalTFC
             if (this.isBurning())
             {
                 
-                this.dropItem(Item.porkCooked.shiftedIndex, (int) (this.size_mod *(10+this.rand.nextInt(8))));
+                this.dropItem(Item.porkCooked.itemID, (int) (this.size_mod *(10+this.rand.nextInt(8))));
             }
             else
             {
-                this.dropItem(Item.porkRaw.shiftedIndex, (int) (this.size_mod *(10+this.rand.nextInt(8))));
+                this.dropItem(Item.porkRaw.itemID, (int) (this.size_mod *(10+this.rand.nextInt(8))));
             }
         }
     }

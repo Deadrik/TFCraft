@@ -33,43 +33,14 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class ItemCustomLeaves extends ItemBlock
+public class ItemCustomLeaves extends ItemTerraBlock
 {
-	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-
 	public ItemCustomLeaves(int i)
 	{
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
-
-	@Override
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
-		return s;
-	}
-
-	public int getMetadata(int i)
-	{
-		return i;
-	}
-
-	//    public int getColorFromDamage(int i, int j)
-	//    {
-	//        if (i == 12 || i == 7)
-	//        {
-	//            return ColorizerFoliage.getFoliageColorPine();
-	//        }
-	//        if (i == 2)
-	//        {
-	//            return ColorizerFoliage.getFoliageColorBirch();
-	//        }
-	//        else
-	//        {
-	//            return ColorizerFoliage.getFoliageColorBasic();
-	//        }
-	//    }
 }

@@ -201,7 +201,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
                 ItemStack output = index.getOutput(R);
                 int damage = output.getItemDamage();
-                if(output.getItem().shiftedIndex == fireItemStacks[1].getItem().shiftedIndex)
+                if(output.getItem().itemID == fireItemStacks[1].getItem().itemID)
                     damage = fireItemStacks[1].getItemDamage();
                 ItemStack mold = null;
 
@@ -246,7 +246,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 {
                     int leftover = 0;
                     boolean addLeftover = false;
-                    if(fireItemStacks[7] != null && output != null && output.getItem().shiftedIndex == fireItemStacks[7].getItem().shiftedIndex && fireItemStacks[7].getItemDamage() > 0)
+                    if(fireItemStacks[7] != null && output != null && output.getItem().itemID == fireItemStacks[7].getItem().itemID && fireItemStacks[7].getItemDamage() > 0)
                     {
                         int amt1 = 100-damage;//the percentage of the output
                         int amt2 = 100-fireItemStacks[7].getItemDamage();//the percentage currently in the out slot
@@ -267,7 +267,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                             fireItemStacks[1] = mold;
                         }
                     }
-                    else if(fireItemStacks[8] != null && output != null && output.getItem().shiftedIndex == fireItemStacks[8].getItem().shiftedIndex && fireItemStacks[8].getItemDamage() > 0)
+                    else if(fireItemStacks[8] != null && output != null && output.getItem().itemID == fireItemStacks[8].getItem().itemID && fireItemStacks[8].getItemDamage() > 0)
                     {
                         int amt1 = 100-damage;//the percentage of the output
                         int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
@@ -307,7 +307,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                     if(addLeftover)
                     {
-                        if(fireItemStacks[8] != null && output.getItem().shiftedIndex == fireItemStacks[8].getItem().shiftedIndex && fireItemStacks[8].getItemDamage() > 0)
+                        if(fireItemStacks[8] != null && output.getItem().itemID == fireItemStacks[8].getItem().itemID && fireItemStacks[8].getItemDamage() > 0)
                         {
                             int amt1 = 100-leftover;//the percentage of the output
                             int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
@@ -334,13 +334,13 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 else
                 {
                     if(fireItemStacks[7] != null && 
-                            fireItemStacks[7].getItem().shiftedIndex == output.getItem().shiftedIndex && 
+                            fireItemStacks[7].getItem().itemID == output.getItem().itemID && 
                             fireItemStacks[7].stackSize + output.stackSize <= fireItemStacks[7].getMaxStackSize())
                     {
                         fireItemStacks[7].stackSize += output.stackSize; 
                     }
                     else if(fireItemStacks[8] != null && 
-                            fireItemStacks[8].getItem().shiftedIndex == output.getItem().shiftedIndex && 
+                            fireItemStacks[8].getItem().itemID == output.getItem().itemID && 
                             fireItemStacks[8].stackSize + output.stackSize <= fireItemStacks[8].getMaxStackSize())
                     {
                         fireItemStacks[8].stackSize += output.stackSize; 
@@ -530,7 +530,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
             	float percent = 25 + world.rand.nextInt(25);
                 count = (int) (count * (percent/100));
-                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.Charcoal.blockID, count);
+                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.Charcoal.blockID, count, 3);
                 world.markBlockForUpdate(i, j, k);
             }
             return true;
@@ -840,12 +840,12 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             
             if(fireTemperature < 100 && fireTemperature != ambientTemp)
             {
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
             else if(fireTemperature < 210)
             {
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
 
@@ -855,7 +855,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                 if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0 ) 
                 {
-                	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2);
+                	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 3);
                 	worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
 
@@ -949,4 +949,16 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         nbttagcompound.setTag("Items", nbttaglist);
 
     }
+
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

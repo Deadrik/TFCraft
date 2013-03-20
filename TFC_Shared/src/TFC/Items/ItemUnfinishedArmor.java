@@ -46,16 +46,11 @@ public class ItemUnfinishedArmor extends ItemTerra
 		this.setMaxDamage(0);
 		setCreativeTab(TFCTabs.TFCUnfinished);
 	}
+	
 	public ItemUnfinishedArmor(int id, String tex) 
 	{
 		super(id);
 		texture = tex;
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return texture;
 	}
 
 	public ItemUnfinishedArmor setTexturePath(String t)
@@ -65,14 +60,14 @@ public class ItemUnfinishedArmor extends ItemTerra
 	}
 	
 	@Override
-    public String getItemNameIS(ItemStack itemstack) 
+    public String getItemDisplayName(ItemStack itemstack) 
     {
 	    String s = "";
 	    
 	    if(itemstack.getItemDamage() == 1)
-	        s = new StringBuilder().append(super.getItemName()).append("2").toString();
+	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append("2").toString();
 	    else
-	        s = new StringBuilder().append(super.getItemName()).toString();
+	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).toString();
 	    
         return s;
     }

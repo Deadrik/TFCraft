@@ -114,13 +114,13 @@ public class BlockLooseRock extends BlockTerra
 		if (world.getBlockId(i, j-1, k) == 0)
 		{
 		    this.harvestBlock(world,null,i,j,k,par5);
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0);
 			return;
 		}
 		if (!Block.blocksList[world.getBlockId(i, j-1, k)].isOpaqueCube())
 		{
 		    this.harvestBlock(world,null,i,j,k,par5);
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0);
 			return;
 		}
 	}
@@ -130,12 +130,6 @@ public class BlockLooseRock extends BlockTerra
 	{
 		return false;
 	}
-	
-	@Override
-    public String getTextureFile()
-    {
-		return TFC_Textures.RockSheet;
-    }
 	
 	@Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)

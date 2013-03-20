@@ -47,11 +47,6 @@ public class ItemLooseRock extends ItemTerra
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
-	public ItemLooseRock(int id, String tex) 
-	{
-		super(id);
-		texture = tex;
-	}
 
 	int[][] map = 
 		{   {0,-1,0},
@@ -122,19 +117,13 @@ public class ItemLooseRock extends ItemTerra
 		"Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
 		"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
 
-	@Override
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
-	}
 
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
 	{
 
 	}
 
-	public int getIconFromDamage(int i)
+	public Icon getIconFromDamage(int i)
 	{
 		switch(i)
 		{

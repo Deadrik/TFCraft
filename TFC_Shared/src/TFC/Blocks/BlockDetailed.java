@@ -159,7 +159,7 @@ public class BlockDetailed extends BlockPartial
 	}
 
 	@Override
-	public void addCollidingBlockToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB aabb, List list, Entity entity)
 	{
 		TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(i, j, k);
 		float div = 1f / 8;
@@ -180,7 +180,7 @@ public class BlockDetailed extends BlockPartial
 						float maxZ = minZ + div;
 
 						this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						super.addCollidingBlockToList(world, i, j, k, aabb, list, entity);
+						super.addCollisionBoxesToList(world, i, j, k, aabb, list, entity);
 					}
 				}
 			}

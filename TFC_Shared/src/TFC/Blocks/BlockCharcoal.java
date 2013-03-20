@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -45,27 +46,32 @@ public class BlockCharcoal extends BlockTerra {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return 95;
+		return field_94336_cN;
 	}
+	@Override
+	public void registerIcon(IconRegister iconRegisterer)
+    {
+		this.field_94336_cN = iconRegisterer.func_94245_a("/devices/Charcoal");
+    }
 
 	@Override
 	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
 	{
 		return false;
 	}
-
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
-
+	@Override
 	public void onBlockHarvested(World world, int i, int j, int k, int l, EntityPlayer entityplayer) 
 	{
 		if(!world.isRemote)
@@ -94,16 +100,16 @@ public class BlockCharcoal extends BlockTerra {
 						int m1 = world.getBlockMetadata(i, j+top, k);
 						if(m1-1 > 0)
 						{
-							world.setBlockMetadataWithNotify(i, j+top, k, m1-1);
+							world.setBlockMetadataWithNotify(i, j+top, k, m1-1, 3);
 						}
 						else
 							world.setBlock(i, j+top, k, 0);
 
-						world.setBlockAndMetadataWithNotify(i, j, k, blockID, 8);
+						world.setBlockAndMetadataWithNotify(i, j, k, blockID, 8, 3);
 					}
 					else
 					{
-						world.setBlockAndMetadataWithNotify(i, j, k, blockID, l-1);
+						world.setBlockAndMetadataWithNotify(i, j, k, blockID, l-1, 3);
 					}
 
 					world.markBlockForUpdate(i, j, k);
@@ -114,20 +120,21 @@ public class BlockCharcoal extends BlockTerra {
 			}
 			else
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, blockID, l);
+				world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
 			}
 
 			if(l == 0)
 				world.setBlock(i, j, k, 0);
 		}
 	}
-
+	
+	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) 
 	{
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
 
-		return world.setBlockWithNotify(x, y, z, 0);
+		return world.setBlock(x, y, z, 0);
 	}
 
 	public void combineCharcoalDown(World world, int i, int j, int k)
@@ -146,11 +153,11 @@ public class BlockCharcoal extends BlockTerra {
 
 
 			if(m2 > 0)
-				world.setBlockAndMetadata(i, j, k, blockID, m2);
+				world.setBlockAndMetadataWithNotify(i, j, k, blockID, m2, 0);
 			else
 				world.setBlock(i, j, k, 0);
 
-			world.setBlockAndMetadata(i, j-1, k, blockID, bottomMeta);
+			world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, bottomMeta, 0);
 		}
 	}
 
@@ -170,11 +177,11 @@ public class BlockCharcoal extends BlockTerra {
 
 
 			if(m2 > 0)
-				world.setBlockAndMetadata(i, j+1, k, blockID, m2);
+				world.setBlockAndMetadataWithNotify(i, j+1, k, blockID, m2, 0);
 			else
 				world.setBlock(i, j+1, k, 0);
 
-			world.setBlockAndMetadata(i, j, k, blockID, bottomMeta);
+			world.setBlockAndMetadataWithNotify(i, j, k, blockID, bottomMeta, 0);
 		}
 	}
 
@@ -186,8 +193,8 @@ public class BlockCharcoal extends BlockTerra {
 			if(world.getBlockId(i, j-1, k) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlockAndMetadata(i, j-1, k, blockID, meta);
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, meta, 0);
+				world.setBlock(i, j, k, 0);
 			}
 			else
 			{
@@ -218,15 +225,6 @@ public class BlockCharcoal extends BlockTerra {
 	
 	        return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + (0.125f * md), k + 1);
 	    }
-	//    
-	//    /**
-	//     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-	//     * cleared to be reused)
-	//     */
-	//    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
-	//    {
-	//        return getCollisionBoundingBoxFromPool(world,i,j,k);
-	//    }
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
@@ -234,8 +232,9 @@ public class BlockCharcoal extends BlockTerra {
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, (0.125f * meta), 1.0F);
 	}
-
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+	
+	@Override
+	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
 	{
 		if(!world.isRemote)
 		{

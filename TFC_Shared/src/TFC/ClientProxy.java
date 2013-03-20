@@ -898,7 +898,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.Ore.Sylvite.name", "Sylvite");
 		LR.addStringLocalization("item.Ore.Borax.name", "Borax");
 		LR.addStringLocalization("item.Ore.Olivine.name", "Olivine");
-		LR.addStringLocalization("item.Ore.LapisLazuli.name", "Lapis Lazuli");
+		LR.addStringLocalization("item.Ore.Lapis Lazuli.name", "Lapis Lazuli");
 		LR.addStringLocalization("item.Ore.GalenaPartial.name", "Partially Smelted Galena");
 		LR.addStringLocalization("item.Ore.TetrahedritePartial.name", "Partially Smelted Tetrahedrite");
 		LR.addStringLocalization("item.Ore.MagnetitePartial.name", "Partially Smelted Magnetite");

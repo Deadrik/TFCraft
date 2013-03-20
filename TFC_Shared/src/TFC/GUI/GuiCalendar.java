@@ -95,14 +95,14 @@ public class GuiCalendar extends GuiScreen
 
         if(TFC_Settings.enableDebugMode)
         {
-            controlList.clear();
+            buttonList.clear();
             int l = (width - xSize) / 2;
             int i1 = (height - ySize) / 2;
-            controlList.add(new GuiButton(0, l+20, i1 + 118, 66, 20, "1 Hour"));
-            controlList.add(new GuiButton(1, l+20, i1 + 137, 66, 20, "1 Day"));
-            controlList.add(new GuiButton(2, l+20, i1 + 156, 66, 20, "1 Week"));
-            controlList.add(new GuiButton(3, l+85, i1 + 118, 66, 20, "1 Month"));
-            controlList.add(new GuiButton(4, l+85, i1 + 137, 66, 20, "1 Year"));
+            buttonList.add(new GuiButton(0, l+20, i1 + 118, 66, 20, "1 Hour"));
+            buttonList.add(new GuiButton(1, l+20, i1 + 137, 66, 20, "1 Day"));
+            buttonList.add(new GuiButton(2, l+20, i1 + 156, 66, 20, "1 Week"));
+            buttonList.add(new GuiButton(3, l+85, i1 + 118, 66, 20, "1 Month"));
+            buttonList.add(new GuiButton(4, l+85, i1 + 137, 66, 20, "1 Year"));
         }
 
     }
@@ -151,9 +151,9 @@ public class GuiCalendar extends GuiScreen
         //int rain = (int) TFC_Climate.getRainfall((int) player.posX,(int) player.posY, (int) player.posZ);
         //drawCenteredString(fontRenderer,"Rain : " + rain, l + 87, i1+86, 0x000000);
         
-        for (int var6 = 0; var6 < this.controlList.size(); ++var6)
+        for (int var6 = 0; var6 < this.buttonList.size(); ++var6)
         {
-            GuiButton var7 = (GuiButton)this.controlList.get(var6);
+            GuiButton var7 = (GuiButton)this.buttonList.get(var6);
             var7.drawButton(this.mc, par1, par2);
         }
 

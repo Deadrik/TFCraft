@@ -96,7 +96,7 @@ public class TFC_Settings
 		try
 		{
 			Property prop = config.get(heading, item, value);
-			return new Boolean(prop.value).booleanValue();
+			return prop.getBoolean(value);
 		}
 		catch (Exception e)
 		{
@@ -114,7 +114,7 @@ public class TFC_Settings
 		{
 			Property prop = config.get(heading, item, value);
 			prop.comment = comment;
-			return new Boolean(prop.value).booleanValue();
+			return prop.getBoolean(value);
 		}
 		catch (Exception e)
 		{
@@ -131,7 +131,7 @@ public class TFC_Settings
 		try
 		{
 			Property prop = config.get(heading, item, value);
-			return new Integer(prop.value).intValue();
+			return prop.getInt(value);
 		}
 		catch (Exception e)
 		{
@@ -149,28 +149,11 @@ public class TFC_Settings
 		{
 			Property prop = config.get(heading, item, value);
 			prop.comment = comment;
-			return new Integer(prop.value).intValue();
+			return prop.getInt(value);
 		}
 		catch (Exception e)
 		{
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Integer, config wasn't loaded properly!").toString());
-		}return value;
-	}
-	
-	public static byte getByteFor(Configuration config, String heading, String item, byte value)
-	{
-		if (config == null)
-		{
-			return value;
-		}
-		try
-		{
-			Property prop = config.get(heading, item, value);
-			return new Byte(prop.value).byteValue();
-		}
-		catch (Exception e)
-		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to add Byte, config wasn't loaded properly!").toString());
 		}return value;
 	}
 }

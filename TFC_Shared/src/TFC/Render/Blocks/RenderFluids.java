@@ -221,8 +221,8 @@ public class RenderFluids
                 }
             }
 
-            renderblocks.customMinY = var18;
-            renderblocks.customMaxY = var20;
+            renderblocks.renderMinY = var18;
+            renderblocks.renderMaxY = var20;
             return var13;
         }
     }

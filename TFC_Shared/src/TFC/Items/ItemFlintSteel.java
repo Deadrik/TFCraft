@@ -75,17 +75,17 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.func_92014_d().itemID == Item.paper.shiftedIndex)
+						if(entity.getEntityItem().itemID == Item.paper.itemID)
 						{
 							hasPaper = 20;
 						}
-						else if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
+						else if(entity.getEntityItem().itemID == Item.stick.itemID)
 						{
-							numsticks+=entity.func_92014_d().stackSize;
+							numsticks+=entity.getEntityItem().stackSize;
 						}
-						else if(entity.func_92014_d().itemID == Item.coal.shiftedIndex)
+						else if(entity.getEntityItem().itemID == Item.coal.itemID)
 						{
-							numcoal+=entity.func_92014_d().stackSize;
+							numcoal+=entity.getEntityItem().stackSize;
 						}
 					}
 				}
@@ -101,16 +101,16 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
+						if(entity.getEntityItem().itemID == Item.stick.itemID)
 						{
 							entity.setDead();
 						}
-						if(entity.func_92014_d().itemID == Item.paper.shiftedIndex)
+						if(entity.getEntityItem().itemID == Item.paper.itemID)
 						{
 							entity.setDead();
 						}
 					}
-					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Firepit.blockID, 1);
+					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 3);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y+1, z);
 				}
@@ -123,16 +123,16 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					for (Iterator iterator = list.iterator(); iterator.hasNext();)
 					{
 						EntityItem entity = (EntityItem)iterator.next();
-						if(entity.func_92014_d().itemID == Item.stick.shiftedIndex)
+						if(entity.getEntityItem().itemID == Item.stick.itemID)
 						{
 							entity.setDead();
 						}
-						if(entity.func_92014_d().itemID == Item.coal.shiftedIndex)
+						if(entity.getEntityItem().itemID == Item.coal.itemID)
 						{
 							entity.setDead();
 						}
 					}
-					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Forge.blockID, 1);
+					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Forge.blockID, 1, 3);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y+1, z);
 				}
@@ -148,7 +148,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 								world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (checkSlabsAround(world, x, y, z))))
 				{
 
-					world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Forge.blockID, 1);
+					world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Forge.blockID, 1, 3);
 					world.markBlockForUpdate(x, y, z);
 
 				}

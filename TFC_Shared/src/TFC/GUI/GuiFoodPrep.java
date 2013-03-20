@@ -80,9 +80,9 @@ public class GuiFoodPrep extends GuiContainer
     public void initGui()
 	{
 		super.initGui();
-		controlList.clear();
+		buttonList.clear();
 
-		controlList.add(new GuiButton(0, guiLeft+105, guiTop + 52, 66, 20, "Create Meal"));
+		buttonList.add(new GuiButton(0, guiLeft+105, guiTop + 52, 66, 20, "Create Meal"));
 
 	}
 

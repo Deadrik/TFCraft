@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -40,8 +41,7 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
 public class BlockLogNatural extends BlockTerra
-{
-
+{	
 	public BlockLogNatural(int i) 
 	{
 		super(i, Material.wood);
@@ -60,7 +60,7 @@ public class BlockLogNatural extends BlockTerra
 						world.getBlockId(i+1, j, k+1) != blockID && world.getBlockId(i+1, j, k-1) != blockID && 
 						world.getBlockId(i-1, j, k+1) != blockID && world.getBlockId(i-1, j, k-1) != blockID)
 				{
-					world.setBlockWithNotify(i, j, k, 0);
+					world.setBlock(i, j, k, 0);
 				}
 			}
 		}
@@ -99,18 +99,36 @@ public class BlockLogNatural extends BlockTerra
 	}	
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
 		if (i == 1)
 		{
-			return j+144;
+			return innerIcons[j];
 		}
 		if (i == 0)
 		{
-			return j+144;
+			return innerIcons[j];
 		}
-		return j+128;
+		return sideIcons[j];
 	}
+	
+	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	
+	public static Icon[] sideIcons = new Icon[16];
+	public static Icon[] innerIcons = new Icon[16];
+	public static Icon[] rotatedSideIcons = new Icon[16];
+	
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+		{
+			sideIcons[i] = registerer.func_94245_a("/wood/" + WoodNames[i] + " Log");
+			innerIcons[i] = registerer.func_94245_a("/wood/" + WoodNames[i] + " Log Top");
+			rotatedSideIcons[i] = registerer.func_94245_a("/wood/" + WoodNames[i] + " Log Side");
+		}
+    }
 
 	static int damage = 0;
 	boolean isStone = false;
@@ -159,7 +177,7 @@ public class BlockLogNatural extends BlockTerra
 				{
 					int ind = entityplayer.inventory.currentItem;
 					entityplayer.inventory.setInventorySlotContents(ind, null);
-					world.setBlockAndMetadata(i, j, k, blockID, l);
+					world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
 				}
 				else
 				{
@@ -173,7 +191,7 @@ public class BlockLogNatural extends BlockTerra
 			}
 			else
 			{
-				world.setBlockAndMetadata(i, j, k, blockID, l);
+				world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
 			}
 		}
 	}
@@ -185,7 +203,7 @@ public class BlockLogNatural extends BlockTerra
     }
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
 	{
 		ProcessTree(world, i, j, k, world.getBlockMetadata(i, j, k), null);
 	}
@@ -222,7 +240,7 @@ public class BlockLogNatural extends BlockTerra
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return TFCItems.Logs.shiftedIndex;
+		return TFCItems.Logs.itemID;
 	}
 
 	@Override
@@ -245,7 +263,7 @@ public class BlockLogNatural extends BlockTerra
 		if(!check)
 		{
 			world.setBlock(i, j, k, 0);
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,l));
 		}
 	}
 
@@ -279,17 +297,17 @@ public class BlockLogNatural extends BlockTerra
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
-					world.setBlockWithNotify(i, j, k, 0);
+					world.setBlock(i, j, k, 0);
 					world.markBlockForUpdate(i, j, k);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
-						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
+						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,l));
 				}
 			}
 			else
 			{
-				world.setBlockWithNotify(i, j, k, 0);
+				world.setBlock(i, j, k, 0);
 				world.markBlockForUpdate(i, j, k);
-				dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.shiftedIndex],1,l));
+				dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,l));
 			}
 		}
 	}

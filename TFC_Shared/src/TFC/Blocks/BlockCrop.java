@@ -216,7 +216,7 @@ public class BlockCrop extends BlockContainer
 
 		if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID))
 		{
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0);
 		}
 
 	}
@@ -235,12 +235,6 @@ public class BlockCrop extends BlockContainer
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.PlantsSheet;
 	}
 
 	@Override

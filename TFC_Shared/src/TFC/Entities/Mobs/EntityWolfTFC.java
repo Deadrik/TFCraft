@@ -73,8 +73,8 @@ public class EntityWolfTFC extends EntityTameableTFC
 	public EntityWolfTFC(World par1World)
 	{
 		super(par1World);
-		fooditems.add(Item.beefRaw.shiftedIndex);
-		fooditems.add(Item.porkRaw.shiftedIndex);
+		fooditems.add(Item.beefRaw.itemID);
+		fooditems.add(Item.porkRaw.itemID);
 		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
 		this.moveSpeed = 0.4F;
@@ -100,8 +100,8 @@ public class EntityWolfTFC extends EntityTameableTFC
 	public EntityWolfTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
 		super(par1World,mother,F_size);
-		fooditems.add(Item.beefRaw.shiftedIndex);
-		fooditems.add(Item.porkRaw.shiftedIndex);
+		fooditems.add(Item.beefRaw.itemID);
+		fooditems.add(Item.porkRaw.itemID);
 		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
 		this.moveSpeed = 0.4F;
@@ -469,7 +469,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 
 		if (!this.isTamed())
 		{
-			if (var2 != null && var2.itemID == Item.bone.shiftedIndex && !this.isAngry())
+			if (var2 != null && var2.itemID == Item.bone.itemID && !this.isAngry())
 			{
 				if (!par1EntityPlayer.capabilities.isCreativeMode)
 				{

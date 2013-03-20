@@ -42,7 +42,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingSpecialSpawnEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
 public class SpawnerAnimalsTFC
 {
@@ -264,7 +264,7 @@ public class SpawnerAnimalsTFC
      */
     public static void creatureSpecificInit(EntityLiving par0EntityLiving, World par1World, float par2, float par3, float par4)
     {
-    	if (MinecraftForge.EVENT_BUS.post(new LivingSpecialSpawnEvent(par0EntityLiving, par1World, par2, par3, par4)))
+    	if (MinecraftForge.EVENT_BUS.post(new LivingSpawnEvent(par0EntityLiving, par1World, par2, par3, par4)))
         {
             return;
         }

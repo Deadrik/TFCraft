@@ -151,39 +151,39 @@ public class RenderDetailed
 
 		int var26 = par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4);
 
-		var8.setBrightness(renderblocks.customMinY > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
+		var8.setBrightness(renderblocks.renderMinY > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
 		var8.setColorOpaque_F(var17, var20, var23);
 		renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3, (double)par4, par1Block.getBlockTextureFromSideAndMetadata(0, meta));
 
 
-		var8.setBrightness(renderblocks.customMaxY < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4));
+		var8.setBrightness(renderblocks.renderMaxY < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4));
 		var8.setColorOpaque_F(var14, var15, var16);
 		renderblocks.renderTopFace(par1Block, (double)par2, (double)par3, (double)par4, par1Block.getBlockTextureFromSideAndMetadata(1, meta));
 
 
 		int var28;
 
-		var8.setBrightness(renderblocks.customMaxX > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1));
+		var8.setBrightness(renderblocks.renderMaxX > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 - 1));
 		var8.setColorOpaque_F(var18, var21, var24);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(2, meta);
 
 		renderblocks.renderEastFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
 
-		var8.setBrightness(renderblocks.customMinX < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1));
+		var8.setBrightness(renderblocks.renderMinX < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1));
 		var8.setColorOpaque_F(var18, var21, var24);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(3, meta);
 
 		renderblocks.renderWestFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
 
 
-		var8.setBrightness(renderblocks.customMinZ > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4));
+		var8.setBrightness(renderblocks.renderMinZ > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4));
 		var8.setColorOpaque_F(var19, var22, var25);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(4, meta);
 
 		renderblocks.renderNorthFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
 
 
-		var8.setBrightness(renderblocks.customMaxZ < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4));
+		var8.setBrightness(renderblocks.renderMaxZ < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4));
 		var8.setColorOpaque_F(var19, var22, var25);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(5, meta);
 

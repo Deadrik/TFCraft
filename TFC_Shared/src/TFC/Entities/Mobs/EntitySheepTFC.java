@@ -68,7 +68,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, var2));
@@ -85,7 +85,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, var2));
@@ -159,7 +159,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         {
             this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
         }
-        this.dropItem(TFCItems.muttonRaw.shiftedIndex,(5+rand.nextInt(5)));
+        this.dropItem(TFCItems.muttonRaw.itemID,(5+rand.nextInt(5)));
     }
 
     /**
@@ -168,7 +168,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     protected int getDropItemId()
     {
-        return TFCItems.Wool.shiftedIndex;
+        return TFCItems.Wool.itemID;
     }
     
     @SideOnly(Side.CLIENT)

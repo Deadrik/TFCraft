@@ -325,12 +325,12 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						var4 = new ItemStack(0,1,0);//player.inventory.getCurrentItem();
 						System.out.println(var3.getTagCompound().getTags());
 						System.out.println(var3);
-						if (var3 != null && var3.itemID == TFCItems.writabeBookTFC.shiftedIndex)
+						if (var3 != null && var3.itemID == TFCItems.writabeBookTFC.itemID)
 						{
 							var4.setTagInfo("author", new NBTTagString("author", player.username));
 							var4.setTagInfo("title", new NBTTagString("title", var3.getTagCompound().getString("title")));
 							var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages"));
-							var4.itemID = TFCItems.writabeBookTFC.shiftedIndex;
+							var4.itemID = TFCItems.writabeBookTFC.itemID;
 						}
 						//player.setCurrentItemOrArmor(0, var4);
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, var4);

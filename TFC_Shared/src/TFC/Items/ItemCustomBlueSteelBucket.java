@@ -112,7 +112,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 
 					if (world.getBlockMaterial(i, j, k) == Material.lava && world.getBlockMetadata(i, j, k) == 0)
                     {
-                        world.setBlockWithNotify(i, j, k, 0);
+                        world.setBlock(i, j, k, 0);
 
                         if (par3EntityPlayer.capabilities.isCreativeMode)
                         {
@@ -126,7 +126,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 
                         if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.BlueSteelBucketLava)))
                         {
-                            par3EntityPlayer.dropPlayerItem(new ItemStack(TFCItems.BlueSteelBucketLava.shiftedIndex, 1, 0));
+                            par3EntityPlayer.dropPlayerItem(new ItemStack(TFCItems.BlueSteelBucketLava.itemID, 1, 0));
                         }
 
                         return par1ItemStack;
@@ -207,7 +207,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 			}
 			else
 			{
-				par1World.setBlockAndMetadataWithNotify(par8, par9, par10, this.isFull, 0);
+				par1World.setBlockAndMetadataWithNotify(par8, par9, par10, this.isFull, 0, 3);
 			}
 
 			return true;

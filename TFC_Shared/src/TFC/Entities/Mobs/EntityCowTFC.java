@@ -52,7 +52,7 @@ public class EntityCowTFC extends EntityAnimalTFC
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, 0.2F));
@@ -69,7 +69,7 @@ public class EntityCowTFC extends EntityAnimalTFC
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.shiftedIndex, false));
+        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
         this.tasks.addTask(5, this.aiEatGrass);
         this.tasks.addTask(6, new EntityAIWander(this, 0.2F));
@@ -167,7 +167,7 @@ public class EntityCowTFC extends EntityAnimalTFC
     @Override
     protected int getDropItemId()
     {
-        return Item.leather.shiftedIndex;
+        return Item.leather.itemID;
     }
 
     /**
@@ -180,16 +180,16 @@ public class EntityCowTFC extends EntityAnimalTFC
         int var4;
 
 
-            this.dropItem(TFCItems.Hide.shiftedIndex,1);
+            this.dropItem(TFCItems.Hide.itemID,1);
 
             if (this.isBurning())
             {
                 
-                this.dropItem(Item.beefCooked.shiftedIndex, (int) (this.size_mod *(15+this.rand.nextInt(10))));
+                this.dropItem(Item.beefCooked.itemID, (int) (this.size_mod *(15+this.rand.nextInt(10))));
             }
             else
             {
-                this.dropItem(Item.beefRaw.shiftedIndex, (int) (this.size_mod *(15+this.rand.nextInt(10))));
+                this.dropItem(Item.beefRaw.itemID, (int) (this.size_mod *(15+this.rand.nextInt(10))));
             }
 
     }
@@ -202,7 +202,7 @@ public class EntityCowTFC extends EntityAnimalTFC
     {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
-        if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.shiftedIndex)
+        if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID)
         {
             par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
             return true;

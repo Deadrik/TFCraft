@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -44,16 +45,14 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemPlank extends ItemTerra
 {
-	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-
-	public ItemPlank(int id, String tex) 
+	public ItemPlank(int id) 
 	{
 		super(id);
-		texture = tex;
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
+		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
 
 	@Override
@@ -195,28 +194,31 @@ public class ItemPlank extends ItemTerra
 		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
-
-	@Override
-	public String getItemNameIS(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
-		return s;
-	}
+	
 	@Override
 	public int getMetadata(int i) 
 	{       
 		return i;
 	}
-
-	public int getIconFromDamage(int par1)
+	
+	@Override
+	public Icon getIconFromDamage(int meta)
 	{        
-		return this.iconIndex+par1;
+		return icons[meta];
 	}
+	
+	Icon[] icons = new Icon[16];
+	@Override
+	public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+			registerer.func_94245_a("/wood/"+MetaNames[i]+" Plank");
+    }
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < Names.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

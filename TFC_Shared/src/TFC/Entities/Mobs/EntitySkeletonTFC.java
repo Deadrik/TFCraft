@@ -112,7 +112,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
     @Override
     protected int getDropItemId()
     {
-        return Item.arrow.shiftedIndex;
+        return Item.arrow.itemID;
     }
 
     /**
@@ -130,7 +130,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
 
             for (var4 = 0; var4 < var3; ++var4)
             {
-                this.dropItem(Item.coal.shiftedIndex, 1);
+                this.dropItem(Item.coal.itemID, 1);
             }
         }
         else
@@ -139,7 +139,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
 
             for (var4 = 0; var4 < var3; ++var4)
             {
-                this.dropItem(Item.arrow.shiftedIndex, 1);
+                this.dropItem(Item.arrow.itemID, 1);
             }
         }
 
@@ -147,7 +147,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
 
         for (var4 = 0; var4 < var3; ++var4)
         {
-            this.dropItem(Item.bone.shiftedIndex, 1);
+            this.dropItem(Item.bone.itemID, 1);
         }
     }
     @Override
@@ -155,7 +155,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
     {
         if (this.getSkeletonType() == 1)
         {
-            this.entityDropItem(new ItemStack(Item.skull.shiftedIndex, 1, 1), 0.0F);
+            this.entityDropItem(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
         }
     }
     @Override

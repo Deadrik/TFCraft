@@ -108,17 +108,17 @@ public class BlockLogVert extends BlockTerra
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j) 
+    public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
     {
-        if (i == 1)
-        {
-            return j+144;
-        }
-        if (i == 0)
-        {
-            return j+144;
-        }
-        return j+128;
+    	if (i == 1)
+		{
+			return BlockLogNatural.innerIcons[j];
+		}
+		if (i == 0)
+		{
+			return BlockLogNatural.innerIcons[j];
+		}
+		return BlockLogNatural.sideIcons[j];
     }
     
     @SideOnly(Side.CLIENT)

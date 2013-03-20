@@ -46,9 +46,9 @@ public class BlockCollapsable extends BlockTerra
 {
     public int dropBlock;
 
-    protected BlockCollapsable(int par1,int par2, Material material, int d)
+    protected BlockCollapsable(int par1, Material material, int d)
     {
-        super(par1, par2, material);
+        super(par1, material);
         dropBlock = d;
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
@@ -102,7 +102,7 @@ public class BlockCollapsable extends BlockTerra
         }
 
         dropBlockAsItem_do(world, i, j, k, new ItemStack(blockID, 1, world.getBlockMetadata(i, j, k)));
-        world.setBlockWithNotify(i, j, k, 0);
+        world.setBlock(i, j, k, 0);
 
     }
 

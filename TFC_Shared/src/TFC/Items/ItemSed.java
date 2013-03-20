@@ -36,16 +36,10 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemSed extends ItemTerraBlock
 {
-	{blockNames = new String[]{"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};}
+	{MetaNames = new String[]{"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};}
 
 	public ItemSed(int i) 
 	{
 		super(i);
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return TFC_Textures.RockSheet;
 	}
 }
