@@ -99,7 +99,7 @@ public class WorldGenLiquidsTFC extends WorldGenerator
 		}
 		if (l == 3 && i1 == 1)
 		{
-			world.setBlockWithNotify(i, j, k, liquidBlockId);
+			world.setBlock(i, j, k, liquidBlockId);
 			world.scheduledUpdatesAreImmediate = true;
 			Block.blocksList[liquidBlockId].updateTick(world, i, j, k, random);
 			world.scheduledUpdatesAreImmediate = false;

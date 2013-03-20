@@ -55,9 +55,7 @@ public class ItemChisel extends ItemTerraTool
 		this.setMaxDamage(e.getMaxUses()/2);
 	}
 
-	public String getTextureFile() {
-		return "/bioxx/terratools.png";
-	}
+	
 
 	@Override
 	public EnumSize getSize() {
@@ -181,19 +179,19 @@ public class ItemChisel extends ItemTerraTool
 	public static void CreateSmooth(World world, int x, int y, int z, int id, int meta)
 	{
 		if(id == TFCBlocks.StoneIgIn.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneIgInSmooth.blockID, meta);
+			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneIgInSmooth.blockID, meta,3);
 		else if(id == TFCBlocks.StoneIgEx.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneIgExSmooth.blockID, meta);
+			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneIgExSmooth.blockID, meta,3);
 		else if(id == TFCBlocks.StoneSed.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneSedSmooth.blockID, meta);
+			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneSedSmooth.blockID, meta,3);
 		else if(id == TFCBlocks.StoneMM.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta);
+			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta,3);
 	}
 
 
 	public static void CreateStairs(World world, int x, int y, int z, int id, int meta, byte m)
 	{
-		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStairs.blockID, m);
+		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStairs.blockID, m,3);
 		TileEntityPartial te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
 		te.TypeID = (short) id;
 		te.MetaID = (byte) meta;
@@ -210,7 +208,7 @@ public class ItemChisel extends ItemTerraTool
 		{
 			if(world.getBlockId(x, y, z) != SlabID)
 			{
-				world.setBlockAndMetadataWithNotify(x, y, z, SlabID, side);
+				world.setBlockAndMetadataWithNotify(x, y, z, SlabID, side,3);
 
 				te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
 				te.TypeID = (short) id;
@@ -241,7 +239,7 @@ public class ItemChisel extends ItemTerraTool
 				long old2 = new2 | (te.extraData - new1);
 
 				if(e + BlockSlab.getTopChiselLevel(te.extraData) >= 8)
-					world.setBlockWithNotify(x, y, z, 0);
+					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
 			}
@@ -253,7 +251,7 @@ public class ItemChisel extends ItemTerraTool
 				long old2 = new2 | (te.extraData - new1);
 
 				if(e + BlockSlab.getBottomChiselLevel(te.extraData) >= 8)
-					world.setBlockWithNotify(x, y, z, 0);
+					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
 			}
@@ -265,7 +263,7 @@ public class ItemChisel extends ItemTerraTool
 				long old2 = new2 | (te.extraData - new1);
 
 				if(e + BlockSlab.getSouthChiselLevel(te.extraData) >= 8)
-					world.setBlockWithNotify(x, y, z, 0);
+					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
 			}
@@ -277,7 +275,7 @@ public class ItemChisel extends ItemTerraTool
 				long old2 = new2 | (te.extraData - new1);
 
 				if(e + BlockSlab.getNorthChiselLevel(te.extraData) >= 8)
-					world.setBlockWithNotify(x, y, z, 0);
+					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
 			}
@@ -289,7 +287,7 @@ public class ItemChisel extends ItemTerraTool
 				long old2 = new2 | (te.extraData - new1);
 
 				if(e + BlockSlab.getEastChiselLevel(te.extraData) >= 8)
-					world.setBlockWithNotify(x, y, z, 0);
+					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
 			}
@@ -301,7 +299,7 @@ public class ItemChisel extends ItemTerraTool
 				long old2 = new2 | (te.extraData - new1);
 
 				if(e + BlockSlab.getWestChiselLevel(te.extraData) >= 8)
-					world.setBlockWithNotify(x, y, z, 0);
+					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
 			}
@@ -360,7 +358,7 @@ public class ItemChisel extends ItemTerraTool
 		else
 		{
 			Material m = world.getBlockMaterial(x, y, z);
-			world.setBlockWithNotify(x, y, z, TFCBlocks.Detailed.blockID);
+			world.setBlock(x, y, z, TFCBlocks.Detailed.blockID);
 
 			te = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
 			te.TypeID = (short) id;
@@ -425,7 +423,7 @@ public class ItemChisel extends ItemTerraTool
 		else
 		{
 			Material m = world.getBlockMaterial(x, y, z);
-			world.setBlockWithNotify(x, y, z, TFCBlocks.SuperDetailed.blockID);
+			world.setBlock(x, y, z, TFCBlocks.SuperDetailed.blockID);
 
 			te = (TileEntitySuperDetailed)world.getBlockTileEntity(x, y, z);
 			int index = te.setIdAndMeta(id, meta);

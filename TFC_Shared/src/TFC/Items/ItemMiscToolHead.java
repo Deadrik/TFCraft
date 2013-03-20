@@ -49,12 +49,6 @@ public class ItemMiscToolHead extends ItemTerra
 		this.setMaxStackSize(4);
 		setCreativeTab(TFCTabs.TFCUnfinished);
 	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratoolheads.png";
-	}
 	
 	@Override
 	public EnumSize getSize() 

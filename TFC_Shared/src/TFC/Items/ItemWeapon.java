@@ -133,10 +133,7 @@ public class ItemWeapon extends ItemSword implements ISize
 	{
 		return par2Block.blockID == Block.web.blockID ? 15.0F : 1.5F;
 	}
-	@Override
-	public String getTextureFile() {
-		return "/bioxx/terratools.png";
-	}
+
 
 	/**
 	 * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise

@@ -60,9 +60,9 @@ public class ItemFirestarter extends ItemTerra
 	}
 
     @Override
-    public String getItemNameIS(ItemStack itemstack) 
+    public String getItemDisplayName(ItemStack itemstack) 
     {
-        return super.getItemName();
+        return super.getUnlocalizedName();
     }
 
     public int getPlacedBlockMetadata(int i) 
@@ -76,11 +76,6 @@ public class ItemFirestarter extends ItemTerra
 		return false;
 	}
 
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
-    }
     
     @Override
     public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, float hitX, float hitY, float hitZ)

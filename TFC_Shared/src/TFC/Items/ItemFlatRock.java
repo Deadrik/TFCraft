@@ -63,7 +63,7 @@ public class ItemFlatRock extends ItemTerra
         return false;
     }
 
-    public Icon getIconFromDamage(int i)
+    /*public Icon getIconFromDamage(int i)
     {
         switch(i)
         {
@@ -96,5 +96,5 @@ public class ItemFlatRock extends ItemTerra
                 return 74+(i-17);//mm
         }
         return i;
-    }
+    }*/
 }

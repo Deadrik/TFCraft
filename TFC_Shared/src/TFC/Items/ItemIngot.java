@@ -75,11 +75,6 @@ public class ItemIngot extends ItemTerra
 		list.add(new ItemStack(this));
 	}
 
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrasprites.png";
-	}
 
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
 			int z, int side, int l) 

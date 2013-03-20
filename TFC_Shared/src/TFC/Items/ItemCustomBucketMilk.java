@@ -82,9 +82,4 @@ public class ItemCustomBucketMilk extends ItemTerra
         return par1ItemStack;
     }
 
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
-    }
 }

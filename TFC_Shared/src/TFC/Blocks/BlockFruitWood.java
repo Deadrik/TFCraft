@@ -203,7 +203,7 @@ public class BlockFruitWood extends BlockContainer
                 }
             }
 
-            world.setBlockWithNotify(i, j, k, 0);
+            world.setBlock(i, j, k, 0);
             world.markBlockForUpdate(i, j, k);
         }
     }

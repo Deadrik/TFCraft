@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -47,7 +48,10 @@ public class ItemDyeCustom extends ItemTerra
     /** List of dye color names */
     public static final String[] dyeColorNames = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white"};
     public static final int[] dyeColors = new int[] {1973019, 11743532, 3887386, 5320730, 2437522, 8073150, 2651799, 2651799, 4408131, 14188952, 4312372, 14602026, 6719955, 12801229, 15435844, 15790320};
-
+    public static final String[] field_94595_b = new String[] {"dyePowder_black", "dyePowder_red", "dyePowder_green", "dyePowder_brown", "dyePowder_blue", "dyePowder_purple", "dyePowder_cyan", "dyePowder_silver", "dyePowder_gray", "dyePowder_pink", "dyePowder_lime", "dyePowder_yellow", "dyePowder_lightBlue", "dyePowder_magenta", "dyePowder_orange", "dyePowder_white"};
+    @SideOnly(Side.CLIENT)
+    private Icon[] field_94594_d;
+    
     public ItemDyeCustom(int par1)
     {
         super(par1);
@@ -56,26 +60,37 @@ public class ItemDyeCustom extends ItemTerra
         this.setCreativeTab(CreativeTabs.tabMaterials);
     }
     
-    @Override
-    public String getTextureFile()
+    public Icon getIconFromDamage(int par1)
     {
-        return "/gui/items.png";
+        int j = MathHelper.clamp_int(par1, 0, 15);
+        return this.field_94594_d[j];
     }
 
     @SideOnly(Side.CLIENT)
-    /**
-     * Gets an icon index based on an item's damage value
-     */
-    public int getIconFromDamage(int par1)
+    public void func_94581_a(IconRegister par1IconRegister)
     {
-        int var2 = MathHelper.clamp_int(par1, 0, 15);
-        return this.iconIndex + var2 % 8 * 16 + var2 / 8;
+        this.field_94594_d = new Icon[field_94595_b.length];
+
+        for (int i = 0; i < field_94595_b.length; ++i)
+        {
+            this.field_94594_d[i] = par1IconRegister.func_94245_a(field_94595_b[i]);
+        }
     }
 
-    public String getItemNameIS(ItemStack par1ItemStack)
+	
+	Icon[] icons = new Icon[16];
+	@Override
+	public void registerIcon(IconRegister registerer)
     {
-        int var2 = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
-        return super.getItemName() + "." + dyeColorNames[var2];
+		for(int i = 0; i < 16; i++)
+			registerer.func_94245_a("/wood/"+MetaNames[i]+" Plank");
+    }
+    
+    
+	public String getUnlocalizedName(ItemStack par1ItemStack)
+    {
+        int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
+        return super.getUnlocalizedName() + "." + dyeColorNames[i];
     }
 
     /**

@@ -46,7 +46,7 @@ public class ItemMetalSheet extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		setTexturePath("/bioxx/terrasprites.png");
+		
 	}
 
 	@Override

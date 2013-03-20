@@ -44,9 +44,9 @@ public class ItemCustomWood extends ItemBlock
 		setHasSubtypes(true);
 	}
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()]).toString();
+		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(Names[itemstack.getItemDamage()]).toString();
 		return s;
 	}
 
@@ -56,9 +56,4 @@ public class ItemCustomWood extends ItemBlock
 		return i;
 	}
 
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrablocks.png";
-	}
 }

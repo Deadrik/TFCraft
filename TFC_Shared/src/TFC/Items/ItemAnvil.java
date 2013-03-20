@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -41,7 +42,7 @@ import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
 
-public class ItemAnvil extends ItemTerra
+public class ItemAnvil extends ItemTerraBlock
 {
 	public int anvilId;
 	public AnvilReq req;
@@ -72,10 +73,32 @@ public class ItemAnvil extends ItemTerra
 		return i;
 	}
 
-	@Override
+	/*@Override
 	public String getTextureFile()
 	{
 		return "/bioxx/terratools.png";
+	}*/
+	
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		for(int i = 0; i < MetaNames.length; i++) {
+			list.add(new ItemStack(this,1,i));
+		}
+	}
+	
+	@Override
+	public Icon getIconFromDamage(int meta)
+	{        
+		return icons[meta];
+	}
+	
+	Icon[] icons = new Icon[11];
+	
+	@Override
+	public void registerIcon(IconRegister i_Reg){
+		for(int i = 0; i < 11; i++)
+			i_Reg.func_94245_a("/wood/"+MetaNames[i]+" Plank");
 	}
 
 	@Override
@@ -104,7 +127,7 @@ public class ItemAnvil extends ItemTerra
 			}
 			int id = TFCBlocks.Anvil.blockID;
 			id = req == AnvilReq.BISMUTHBRONZE || req == AnvilReq.BLACKBRONZE || req == AnvilReq.ROSEGOLD ? TFCBlocks.Anvil2.blockID : TFCBlocks.Anvil.blockID;
-			world.setBlockAndMetadataWithNotify( x, y+1, z, id, byte0+anvilId);
+			world.setBlockAndMetadataWithNotify( x, y+1, z, id, byte0+anvilId,3);
             world.markBlockForUpdate(x, y+1, z);
 			if(world.getBlockTileEntity(x, y+1, z) != null)
 			{

@@ -61,7 +61,7 @@ public class ItemHammer extends ItemTerraTool
 			{
 				if(side == 1)
 				{
-					world.setBlockWithNotify(x, y, z, TFCBlocks.Anvil.blockID);
+					world.setBlock(x, y, z, TFCBlocks.Anvil.blockID);
 					TileEntityTerraAnvil te = (TileEntityTerraAnvil) world.getBlockTileEntity(x, y, z);
 					if(te != null)
 					{

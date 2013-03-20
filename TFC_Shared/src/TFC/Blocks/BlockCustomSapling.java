@@ -212,7 +212,7 @@ public class BlockCustomSapling extends BlockTerraContainer
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0);
         }
     }
 }

@@ -69,7 +69,7 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
     	if(logPileOpeners == 0 && storage[0] == null && storage[1] == null &&
 				storage[2] == null && storage[3] == null)
 		{
-			worldObj.setBlockWithNotify(xCoord, yCoord, zCoord, 0);
+			worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 		}
 
     }

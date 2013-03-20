@@ -43,12 +43,6 @@ public class ItemMiscTool extends ItemTerra
 		super(i);
 		setCreativeTab(TFCTabs.TFCTools);
 	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratools.png";
-	}	
 	
 	@Override
 	public EnumSize getSize() {

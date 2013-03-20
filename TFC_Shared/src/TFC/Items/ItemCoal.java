@@ -93,13 +93,13 @@ public class ItemCoal extends ItemTerra {
 				int meta = world.getBlockMetadata(i, j, k);
 				if(meta < 8)
 				{
-					world.setBlockMetadata(i, j, k, meta+1);
+					world.setBlockMetadataWithNotify(i, j, k, meta+1,3);
 					is.stackSize--;
 					return true;
 				}
 				else if(side == 1)
 				{
-					world.setBlockAndMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1);
+					world.setBlockAndMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1,3);
 					is.stackSize--;
 					return true;
 				}
@@ -111,14 +111,14 @@ public class ItemCoal extends ItemTerra {
 				int meta = world.getBlockMetadata(i + map[side][0], j + map[side][1], k + map[side][2]);
 				if(meta < 8)
 				{
-					world.setBlockMetadata(i + map[side][0], j + map[side][1], k + map[side][2], meta+1);
+					world.setBlockMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], meta+1,3);
 					is.stackSize--;
 					return true;
 				}
 			}
 
 
-			world.setBlockAndMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1);
+			world.setBlockAndMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1,3);
 			is.stackSize--;
 			TFCBlocks.Charcoal.onNeighborBlockChange(world, i + map[side][0], j + map[side][1], k + map[side][2], 0);
 			return true;

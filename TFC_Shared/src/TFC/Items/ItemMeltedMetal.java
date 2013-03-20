@@ -42,12 +42,6 @@ public class ItemMeltedMetal extends ItemTerra
 		super(i);
 		setMaxDamage(100);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-	}
-
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrasprites.png";
 	}	
 	
 	@Override

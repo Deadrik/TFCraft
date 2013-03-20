@@ -115,7 +115,7 @@ public class ItemCustomBucket extends ItemTerra
 
                     if (world.getBlockMaterial(i, j, k) == Material.water && world.getBlockMetadata(i, j, k) <=2)
                     {
-                        world.setBlockWithNotify(i, j, k, 0);
+                        world.setBlock(i, j, k, 0);
 
                         if (par3EntityPlayer.capabilities.isCreativeMode)
                         {
@@ -182,17 +182,17 @@ public class ItemCustomBucket extends ItemTerra
                                 if(blockMeta > 0)
                                 {
                                     bucketMeta = bucketMeta + blockMeta;
-                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0);
-                                    world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.finiteWater.blockID, bucketMeta);
+                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0,3);
+                                    world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.finiteWater.blockID, bucketMeta,3);
                                 }
                                 else
                                 {
-                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0);
+                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0,3);
                                 }
                             }
                             else
                             {
-                                world.setBlockAndMetadataWithNotify(i, j, k, this.isFull, 0);
+                                world.setBlockAndMetadataWithNotify(i, j, k, this.isFull, 0,3);
                             }
                         }
 
@@ -212,11 +212,5 @@ public class ItemCustomBucket extends ItemTerra
 
             return par1ItemStack;
         }
-    }
-    
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
     }
 }

@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -92,15 +93,24 @@ public class ItemFruitTreeSapling extends ItemTerra
     	}
 	}
     
-    public int getIconFromDamage(int par1)
+    Icon[] icons = new Icon[Names.length];
+	@Override
+	public void registerIcon(IconRegister registerer)
     {
-        return this.iconIndex + par1;
+		for(int i = 0; i < 16; i++)
+			registerer.func_94245_a("/tfcplants/"+Names[i]+" Plank");
     }
     
     @Override
-    public String getItemNameIS(ItemStack itemstack) 
+	public Icon getIconFromDamage(int meta)
+	{        
+		return icons[meta];
+	}
+    
+    @Override
+    public String getItemDisplayName(ItemStack itemstack) 
     {
-        String s = new StringBuilder().append(super.getItemName()).append(".").append(Names[itemstack.getItemDamage()+offset]).toString();
+        String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(Names[itemstack.getItemDamage()+offset]).toString();
         return s;
     }
 

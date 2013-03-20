@@ -48,8 +48,6 @@ public class ItemFlatLeather extends ItemTerra
     public ItemFlatLeather(int id, String tex) 
     {
         super(id);
-        texture = tex;
-
     }
     
     @Override

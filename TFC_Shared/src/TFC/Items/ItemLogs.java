@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -77,42 +78,42 @@ public class ItemLogs extends ItemTerra
 		TileEntityTerraLogPile te = null;
 		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.LogPile.blockID, l);
+			world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.LogPile.blockID, l,3);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y-1, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y-1, z);
 		}
 		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.LogPile.blockID, l);
+			world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.LogPile.blockID, l,3);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y+1, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y+1, z);
 		}
 		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.LogPile.blockID, l);
+			world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.LogPile.blockID, l,3);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y, z-1);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z-1);
 		}
 		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.LogPile.blockID, l);
+			world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.LogPile.blockID, l,3);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y, z+1);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z+1);
 		}
 		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.LogPile.blockID, l);
+			world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.LogPile.blockID, l,3);
 			if(world.isRemote)
 				world.markBlockForUpdate(x-1, y, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x-1, y, z);
 		}
 		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.LogPile.blockID, l);
+			world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.LogPile.blockID, l,3);
 			if(world.isRemote)
 				world.markBlockForUpdate(x+1, y, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x+1, y, z);
@@ -137,23 +138,27 @@ public class ItemLogs extends ItemTerra
 		return true;
 	}
 
-	public int getIconFromDamage(int par1)
-	{
-		return this.iconIndex+par1;
+	@Override
+	public Icon getIconFromDamage(int meta)
+	{        
+		return icons[meta];
 	}
+	
+	Icon[] icons = new Icon[16];
+	@Override
+	public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+			registerer.func_94245_a("/wood/"+blockNames[i]+"");
+    }
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
+		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
 		return s;
 	}
 
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terrasprites2.png";
-	}
 
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -207,12 +212,12 @@ public class ItemLogs extends ItemTerra
 				int m = itemstack.getItemDamage();
 				if(side == 1)
 				{
-					world.setBlockAndMetadata(x, y+1, z, TFCBlocks.WoodVert.blockID, m);
+					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.WoodVert.blockID, m,3);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
 				else if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlockAndMetadata(x, y-1, z, TFCBlocks.WoodVert.blockID, m);
+					world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.WoodVert.blockID, m,3);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
@@ -242,17 +247,17 @@ public class ItemLogs extends ItemTerra
 		if(m < 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m,3);
 			else
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8,3);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8,3);
 			else
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8,3);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 	}

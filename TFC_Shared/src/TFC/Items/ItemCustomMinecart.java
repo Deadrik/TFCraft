@@ -59,7 +59,7 @@ public class ItemCustomMinecart extends ItemTerra
         {
             if (!world.isRemote)
             {
-                world.spawnEntityInWorld(new EntityCustomMinecart(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this.minecartType));
+                world.spawnEntityInWorld(new EntityCustomMinecart(world, (double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F)));
             }
 
             --itemstack.stackSize;

@@ -60,9 +60,9 @@ public class ItemGem extends ItemTerra
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
+	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(gemNames[itemstack.getItemDamage()]).toString();
+		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(gemNames[itemstack.getItemDamage()]).toString();
 		return s;
 	}
 	

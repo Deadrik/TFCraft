@@ -45,12 +45,7 @@ public class ItemWoodDoor extends ItemTerra
         this.setCreativeTab(CreativeTabs.tabRedstone);
         woodType = woodID;
     }
-    
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terrasprites2.png";
-    }
+
 
     /**
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -166,10 +161,8 @@ public class ItemWoodDoor extends ItemTerra
             var12 = true;
         }
 
-        par0World.editingBlocks = true;
-        par0World.setBlockAndMetadataWithNotify(par1, par2, par3, par5Block.blockID, par4);
-        par0World.setBlockAndMetadataWithNotify(par1, par2 + 1, par3, par5Block.blockID, 8 | (var12 ? 1 : 0));
-        par0World.editingBlocks = false;
+        par0World.setBlockAndMetadataWithNotify(par1, par2, par3, par5Block.blockID, par4,3);
+        par0World.setBlockAndMetadataWithNotify(par1, par2 + 1, par3, par5Block.blockID, 8 | (var12 ? 1 : 0),3);
         par0World.notifyBlocksOfNeighborChange(par1, par2, par3, par5Block.blockID);
         par0World.notifyBlocksOfNeighborChange(par1, par2 + 1, par3, par5Block.blockID);
     }

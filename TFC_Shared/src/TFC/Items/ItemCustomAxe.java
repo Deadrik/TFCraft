@@ -52,11 +52,6 @@ public class ItemCustomAxe extends ItemAxe implements ISize
 		setCreativeTab(TFCTabs.TFCTools);
 	}
 	
-	@Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
-    }
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 

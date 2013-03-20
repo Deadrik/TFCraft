@@ -71,12 +71,7 @@ public class ItemCustomSeeds extends ItemTerra
 		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
-	
-	@Override
-    public String getTextureFile()
-    {
-        return TFC_Textures.FoodSheet;
-    }
+
 
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -100,7 +95,7 @@ public class ItemCustomSeeds extends ItemTerra
 				if(crop.needsSunlight && !world.canBlockSeeTheSky(x, y+1, z))
 					return false;
 				
-				world.setBlockWithNotify(x, y+1, z, Block.crops.blockID);
+				world.setBlock(x, y+1, z, Block.crops.blockID);
 				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(x, y+1, z));
 				te.cropId = cropId;
 				te.broadcastPacketInRange(te.createCropUpdatePacket());

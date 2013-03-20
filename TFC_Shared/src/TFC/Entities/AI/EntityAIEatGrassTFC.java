@@ -86,13 +86,13 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
             if (this.theWorld.getBlockId(var1, var2, var3) == Block.tallGrass.blockID)
             {
                 this.theWorld.playAuxSFX(2001, var1, var2, var3, Block.tallGrass.blockID + 4096);
-                this.theWorld.setBlockWithNotify(var1, var2, var3, 0);
+                this.theWorld.setBlock(var1, var2, var3, 0);
                 this.theEntity.eatGrassBonus();
             }
             else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == Block.grass.blockID)
             {
                 this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, Block.grass.blockID);
-                this.theWorld.setBlockWithNotify(var1, var2 - 1, var3, Block.dirt.blockID);
+                this.theWorld.setBlock(var1, var2 - 1, var3, Block.dirt.blockID);
                 this.theEntity.eatGrassBonus();
             }
             else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == TFCBlocks.Grass.blockID)
@@ -140,7 +140,7 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
             else if (this.theWorld.getBlockId(var1, var2 - 1, var3) == TFCBlocks.PeatGrass.blockID)
             {
                 this.theWorld.playAuxSFX(2001, var1, var2 - 1, var3, TFCBlocks.PeatGrass.blockID);
-                this.theWorld.setBlockWithNotify(var1, var2 - 1, var3, TFCBlocks.Peat.blockID);
+                this.theWorld.setBlock(var1, var2 - 1, var3, TFCBlocks.Peat.blockID);
                 this.theEntity.eatGrassBonus();
             }
         }

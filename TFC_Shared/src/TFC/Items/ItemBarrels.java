@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -68,7 +69,7 @@ public class ItemBarrels extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -126,24 +127,30 @@ public class ItemBarrels extends ItemTerra
 		itemstack.stackSize--;
 		return true;
 	}
-
-	public int getIconFromDamage(int par1)
-	{
-		return this.iconIndex+par1;
-	}
+	
+	
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack) 
+	public Icon getIconFromDamage(int meta)
+	{        
+		return icons[meta];
+	}
+	
+	Icon[] icons = new Icon[16];
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
+		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
 		return s;
 	}
 
 	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratools.png";
-	}
+	public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < 16; i++)
+			registerer.func_94245_a("/wood/"+MetaNames[i]+" Barrel");
+    }
 
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -160,17 +167,17 @@ public class ItemBarrels extends ItemTerra
 		if(m < 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m,3);
 			else
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8,3);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8,3);
 			else
-				world.setBlockAndMetadata(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8);
+				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8,3);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 	}

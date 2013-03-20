@@ -56,7 +56,7 @@ public class ItemGoldPan extends ItemTerra
         super(i);
         setMaxDamage(0);
         setHasSubtypes(true);
-        setItemName("GoldPan");
+        setUnlocalizedName("GoldPan");
         setCreativeTab(TFCTabs.TFCTools);
     }
     
@@ -70,7 +70,7 @@ public class ItemGoldPan extends ItemTerra
     	return 1;
     }
 
-    public int getIconFromDamage(int i)
+    /*public int getIconFromDamage(int i)
     {
         int j = 1;
         if(i == 1) {
@@ -87,20 +87,15 @@ public class ItemGoldPan extends ItemTerra
         }
 
         return j;
-    }
+    }*/
 
     @Override
-    public String getItemNameIS(ItemStack itemstack) 
+    public String getItemDisplayName(ItemStack itemstack) 
     {
-        String s = new StringBuilder().append(super.getItemName()).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
+        String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
         return s;
     }
 
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
-    }
 
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l, float par8, float par9, float par10)
@@ -146,7 +141,7 @@ public class ItemGoldPan extends ItemTerra
                 if(TFC_Core.isSand(world.getBlockId(x, y-1, z)) && isBiomeRiver)
                 {
                     if(R.nextInt(10) == 0) {
-                        world.setBlockWithNotify(x, y-1, z, 0);
+                        world.setBlock(x, y-1, z, 0);
                     }
                     itemstack.setItemDamage(1);
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
@@ -155,7 +150,7 @@ public class ItemGoldPan extends ItemTerra
                 else if(world.getBlockId(x, y-1, z) == Block.gravel.blockID)
                 {
                     if(R.nextInt(10) == 0) {
-                        world.setBlockWithNotify(x, y-1, z, 0);
+                        world.setBlock(x, y-1, z, 0);
                     }
                     itemstack.setItemDamage(2);
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
@@ -164,7 +159,7 @@ public class ItemGoldPan extends ItemTerra
                 else if(TFC_Core.isSand(world.getBlockId(x, y-2, z)) && isBiomeRiver)
                 {
                     if(R.nextInt(10) == 0) {
-                        world.setBlockWithNotify(x, y-2, z, 0);
+                        world.setBlock(x, y-2, z, 0);
                     }
                     itemstack.setItemDamage(1);
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
@@ -173,7 +168,7 @@ public class ItemGoldPan extends ItemTerra
                 else if(world.getBlockId(x, y-2, z) == Block.gravel.blockID)
                 {
                     if(R.nextInt(10) == 0) {
-                        world.setBlockWithNotify(x, y-2, z, 0);
+                        world.setBlock(x, y-2, z, 0);
                     }
                     itemstack.setItemDamage(2);
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);

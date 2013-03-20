@@ -140,10 +140,10 @@ public class BlockOre3 extends BlockOre
 //                long extraZ2 = (te.extraData >> 20) & 0xf;
 //
 //                if(extraX+extraY+extraZ+extraX2+extraY2+extraZ2 > 8)
-//                    return world.setBlockWithNotify(i, j, k, 0);
+//                    return world.setBlock(i, j, k, 0);
 //            }
 //            else
-//                return world.setBlockWithNotify(i, j, k, 0);
+//                return world.setBlock(i, j, k, 0);
 //        }
 //
 //        return false;

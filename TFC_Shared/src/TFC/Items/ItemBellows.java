@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -56,10 +57,10 @@ public class ItemBellows extends ItemTerra
 	}
 
 	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratools.png";
-	}
+	public void registerIcon(IconRegister registerer)
+    {
+			registerer.func_94245_a("/tools/"+"BellowsItem");
+    }
 	
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -70,7 +71,7 @@ public class ItemBellows extends ItemTerra
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockId(x, y+1, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.Bellows.blockID, l);
+				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.Bellows.blockID, l,3);
 				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 				return true;
 			}

@@ -214,9 +214,4 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 		}
 	}
 
-	@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratools.png";
-	}
 }

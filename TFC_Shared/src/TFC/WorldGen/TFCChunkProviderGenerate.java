@@ -208,12 +208,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 				if (this.worldObj.isBlockFreezable(var12 + xCoord, var14 - 1, var13 + zCoord))
 				{
-					this.worldObj.setBlockWithNotify(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID);
+					this.worldObj.setBlock(var12 + xCoord, var14 - 1, var13 + zCoord, Block.ice.blockID);
 				}
 
 				if (canSnowAt(worldObj, var12 + xCoord, var14, var13 + zCoord))
 				{
-					this.worldObj.setBlockWithNotify(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID);
+					this.worldObj.setBlock(var12 + xCoord, var14, var13 + zCoord, Block.snow.blockID);
 				}
 			}
 		}

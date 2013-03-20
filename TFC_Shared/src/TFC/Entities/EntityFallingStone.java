@@ -130,7 +130,7 @@ public class EntityFallingStone extends Entity
 
             if (fallTime == 1 && worldObj.getBlockId(i, j, k) == blockID)
             {
-                worldObj.setBlockWithNotify(i, j, k, 0);
+                worldObj.setBlock(i, j, k, 0);
 
             }
             else if (!worldObj.isRemote && fallTime == 1)

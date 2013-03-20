@@ -51,12 +51,7 @@ public class ItemCustomBow extends ItemTerra
         this.setMaxDamage(384);
         setCreativeTab(TFCTabs.TFCTools);
     }
-    
-    @Override
-	public String getTextureFile()
-	{
-		return "/gui/items.png";
-	}
+
 
     /**
      * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
