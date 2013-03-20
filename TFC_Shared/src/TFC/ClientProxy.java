@@ -78,33 +78,6 @@ public class ClientProxy extends CommonProxy
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
-		MinecraftForgeClient.preloadTexture(TFC_Textures.RockSheet);
-		MinecraftForgeClient.preloadTexture("/bioxx/terratools.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terratoolheads.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/spindle.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/wool.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/Spindle2.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/terrasprites2.png");
-		MinecraftForgeClient.preloadTexture(TFC_Textures.BlockSheet);
-		MinecraftForgeClient.preloadTexture(TFC_Textures.BlockSheet2);
-		MinecraftForgeClient.preloadTexture("/bioxx/terrabeds.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_sluice.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_scribe.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_metallurgy.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_logpile.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/javelin.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_forge.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_firepit.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_bloomery.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_anvil.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_calendar.png");
-		MinecraftForgeClient.preloadTexture(TFC_Textures.VegetationSheet);
-		MinecraftForgeClient.preloadTexture(TFC_Textures.PlantsSheet);
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_foodprep.png");
-		MinecraftForgeClient.preloadTexture(TFC_Textures.FoodSheet);
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_blueprint.png");
-		MinecraftForgeClient.preloadTexture("/bioxx/gui_crucible.png");
 
 		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
 		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -139,7 +112,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sulfurRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdH = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdV = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.grassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.oreRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.moltenRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.looseRockRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());

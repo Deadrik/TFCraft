@@ -146,6 +146,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	
 	public void registerIcon(IconRegister registerer)
     {
+		icons = new Icon[MetaNames.length];
 		for(int i = 0; i < MetaNames.length; i++)
 		{
 			icons[i] = registerer.func_94245_a(MetaNames[i]);

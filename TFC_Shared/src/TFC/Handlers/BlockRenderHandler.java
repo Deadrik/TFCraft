@@ -60,14 +60,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return TFC_CoreRender.RenderWoodSupportBeamV(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.grassRenderId)
-        {
-            int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return RenderGrass.Render(block, i, j, k, var6, var7, var8, renderer);
-        }
         else if (modelId == TFCBlocks.oreRenderId)
         {
             int var5 = block.colorMultiplier(world, i, j, k);

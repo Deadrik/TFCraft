@@ -156,11 +156,6 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     {
         return this.getBlockColor();
     }
-    @Override
-    public int getRenderType()
-    {
-        return TFCBlocks.grassRenderId;
-    }
 
     /**
      * Ticks the block if it's been scheduled

@@ -58,21 +58,19 @@ public class RenderFoodPrep
 		{
 			double height = 0.005;
 			String tex = TFC_Textures.FoodSheet;
-			ForgeHooksClient.bindTexture(tex, ModLoader.getMinecraftInstance().renderEngine.getTexture(tex));
+			
+			ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 			tessellator.setColorRGBA_F(1, 1, 1, 1);
 			if(te.storage[0] != null)
 			{
-				renderblocks.overrideBlockTexture = Item.itemsList[te.storage[0].itemID].getIconIndex(te.storage[0]);
+				renderblocks.overrideBlockTexture = te.storage[0].getIconIndex();
 
-				int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-				int z = renderblocks.overrideBlockTexture & 0xf0;
-
-				double minX = ((double)x + 16	) / 256D;
-				double maxX = ((double)x + 0	) / 256D;
-				double minZ = ((double)z + 0	) / 256D;
-				double maxZ = ((double)z + 16	) / 256D;
+				double minX = renderblocks.overrideBlockTexture.func_94209_e();
+				double maxX = renderblocks.overrideBlockTexture.func_94212_f();
+				double minZ = renderblocks.overrideBlockTexture.func_94206_g();
+				double maxZ = renderblocks.overrideBlockTexture.func_94210_h();
 
 				tessellator.addTranslation(0f, 0.0f, 0.0f);
 
@@ -85,15 +83,12 @@ public class RenderFoodPrep
 			}
 			if(te.storage[1] != null)
 			{
-				renderblocks.overrideBlockTexture = Item.itemsList[te.storage[1].itemID].getIconIndex(te.storage[1]);
+				renderblocks.overrideBlockTexture = te.storage[1].getIconIndex();
 
-				int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-				int z = renderblocks.overrideBlockTexture & 0xf0;
-
-				double minX = ((double)x + 16	) / 256D;
-				double maxX = ((double)x + 0	) / 256D;
-				double minZ = ((double)z + 0	) / 256D;
-				double maxZ = ((double)z + 16	) / 256D;
+				double minX = renderblocks.overrideBlockTexture.func_94209_e();
+				double maxX = renderblocks.overrideBlockTexture.func_94212_f();
+				double minZ = renderblocks.overrideBlockTexture.func_94206_g();
+				double maxZ = renderblocks.overrideBlockTexture.func_94210_h();
 
 				tessellator.addTranslation(0f, 0.0f, 0.5f);
 
@@ -106,15 +101,12 @@ public class RenderFoodPrep
 			}
 			if(te.storage[2] != null)
 			{
-				renderblocks.overrideBlockTexture = Item.itemsList[te.storage[2].itemID].getIconIndex(te.storage[2]);
+				renderblocks.overrideBlockTexture = te.storage[2].getIconIndex();
 
-				int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-				int z = renderblocks.overrideBlockTexture & 0xf0;
-
-				double minX = ((double)x + 16	) / 256D;
-				double maxX = ((double)x + 0	) / 256D;
-				double minZ = ((double)z + 0	) / 256D;
-				double maxZ = ((double)z + 16	) / 256D;
+				double minX = renderblocks.overrideBlockTexture.func_94209_e();
+				double maxX = renderblocks.overrideBlockTexture.func_94212_f();
+				double minZ = renderblocks.overrideBlockTexture.func_94206_g();
+				double maxZ = renderblocks.overrideBlockTexture.func_94210_h();
 
 				tessellator.addTranslation(0.5f, 0.0f, 0.0f);
 
@@ -127,15 +119,12 @@ public class RenderFoodPrep
 			}
 			if(te.storage[3] != null)
 			{
-				renderblocks.overrideBlockTexture = Item.itemsList[te.storage[3].itemID].getIconIndex(te.storage[3]);
+				renderblocks.overrideBlockTexture = te.storage[3].getIconIndex();
 
-				int x = (renderblocks.overrideBlockTexture & 0xf) << 4;
-				int z = renderblocks.overrideBlockTexture & 0xf0;
-
-				double minX = ((double)x + 16	) / 256D;
-				double maxX = ((double)x + 0	) / 256D;
-				double minZ = ((double)z + 0	) / 256D;
-				double maxZ = ((double)z + 16	) / 256D;
+				double minX = renderblocks.overrideBlockTexture.func_94209_e();
+				double maxX = renderblocks.overrideBlockTexture.func_94212_f();
+				double minZ = renderblocks.overrideBlockTexture.func_94206_g();
+				double maxZ = renderblocks.overrideBlockTexture.func_94210_h();
 
 				tessellator.addTranslation(0.5f, 0.0f, 0.5f);
 
