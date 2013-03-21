@@ -149,11 +149,11 @@ public class BlockCustomFlowing extends BlockFlowing
 
                 if (var10 < 0)
                 {
-                    par1World.setBlock(par2, par3, par4, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
                 }
                 else
                 {
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var10, 3);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var10, 2);
                     par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
                     par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
                 }
@@ -168,7 +168,7 @@ public class BlockCustomFlowing extends BlockFlowing
         {
             if (this.blockMaterial == Material.lava && par1World.getBlockMaterial(par2, par3 - 1, par4) == Material.water)
             {
-                par1World.setBlock(par2, par3 - 1, par4, Block.stone.blockID);
+                par1World.setBlockAndMetadataWithNotify(par2, par3 - 1, par4, Block.stone.blockID, 0, 2);
                 this.triggerLavaMixEffects(par1World, par2, par3 - 1, par4);
                 return;
             }
@@ -241,7 +241,7 @@ public class BlockCustomFlowing extends BlockFlowing
                 }
             }
 
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par5, 3);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par5, 2);
         }
     }
 

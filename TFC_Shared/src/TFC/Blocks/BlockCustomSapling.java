@@ -92,7 +92,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	public void growTree(World world, int i, int j, int k, Random random)
 	{
 		int l = world.getBlockMetadata(i, j, k);
-		world.setBlock(i, j, k, 0);
+		world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
 		
 		
@@ -111,7 +111,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 
 			int meta = world.getBlockMetadata(i, j, k);
 			this.dropBlockAsItem_do(world, i, j, k, new ItemStack(this,1,meta));
-			world.setBlock(i, j, k, 0);
+			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		}
 	}
 	
@@ -225,7 +225,7 @@ public class BlockCustomSapling extends BlockTerraContainer
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
         }
     }
 }

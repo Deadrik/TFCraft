@@ -124,7 +124,7 @@ public class BlockCrop extends BlockContainer
 						player.addExhaustion(0.045F);
 
 						//breakBlock(world, i+x, j, k+z, l, 0);
-						world.setBlock(i+x, j, k+z, 0);
+						world.setBlockAndMetadataWithNotify(i+x, j, k+z, 0, 0, 2);
 
 						int ss = itemstack.stackSize;
 						int dam = itemstack.getItemDamage()+2;
@@ -216,7 +216,7 @@ public class BlockCrop extends BlockContainer
 
 		if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID))
 		{
-			world.setBlock(i, j, k, 0);
+			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		}
 
 	}

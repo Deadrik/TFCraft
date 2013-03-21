@@ -159,31 +159,25 @@ public class BlockBloomery extends BlockTerraContainer
 			int[] dir = headBlockToFootBlockMap[meta & 3];
 			if(world.getBlockId(i+dir[0], j, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j, k+dir[1], 0);
-				world.markBlockForUpdate(i+dir[0], j, k+dir[1]);
+				world.setBlockAndMetadataWithNotify(i+dir[0], j, k+dir[1], 0, 0, 2);
 			}
 			if(world.getBlockId(i+dir[0], j+1, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+1, k+dir[1], 0);
-				world.markBlockForUpdate(i+dir[0], j+1, k+dir[1]);
+				world.setBlockAndMetadataWithNotify(i+dir[0], j+1, k+dir[1], 0, 0, 2);
 			}
 			if(world.getBlockId(i+dir[0], j+2, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+2, k+dir[1], 0);
-				world.markBlockForUpdate(i+dir[0], j+2, k+dir[1]);
+				world.setBlockAndMetadataWithNotify(i+dir[0], j+2, k+dir[1], 0, 0, 2);
 			}
 			if(world.getBlockId(i+dir[0], j+3, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+3, k+dir[1], 0);
-				world.markBlockForUpdate(i+dir[0], j+3, k+dir[1]);
+				world.setBlockAndMetadataWithNotify(i+dir[0], j+3, k+dir[1], 0, 0, 2);
 			}
 			if(world.getBlockId(i+dir[0], j+4, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+4, k+dir[1], 0);
-				world.markBlockForUpdate(i+dir[0], j+4, k+dir[1]);
+				world.setBlockAndMetadataWithNotify(i+dir[0], j+4, k+dir[1], 0, 0, 2);
 			}
-			world.setBlock(i, j, k, 0);
-			world.markBlockForUpdate(i, j, k);
+			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		}
 		return true;
 	}
@@ -198,8 +192,7 @@ public class BlockBloomery extends BlockTerraContainer
 		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
 			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlock(i, j, k, 0);
-			world.markBlockForUpdate(i,j,k);
+			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		}
 	}
 

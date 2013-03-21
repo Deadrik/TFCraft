@@ -74,7 +74,7 @@ public class BlockCustomIce extends BlockIce
 
         if (var7.blocksMovement() || var7.isLiquid())
         {
-            par1World.setBlock(par3, par4, par5, Block.waterMoving.blockID);
+            par1World.setBlockAndMetadataWithNotify(par3, par4, par5, Block.waterMoving.blockID, 0, 2);
         }
     }
 
@@ -94,7 +94,7 @@ public class BlockCustomIce extends BlockIce
         if (!world.canBlockFreeze(i, j, k, false))
         {
             this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-            world.setBlock(i, j, k, Block.waterStill.blockID);
+            world.setBlockAndMetadataWithNotify(i, j, k, Block.waterStill.blockID, 0, 2);
         }
     }
 

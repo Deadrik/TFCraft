@@ -85,7 +85,7 @@ public class WorldGenFixGrass implements IWorldGenerator
 					
 					if(rainfall >= 500)
 					{
-						world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)));
+						world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)), 0, 2);
 						converted = true;
 					}
 					for (int x1 = -4; x1 < 5 && !converted; ++x1)
@@ -96,7 +96,7 @@ public class WorldGenFixGrass implements IWorldGenerator
 							{
 								if(TFC_Core.isWater(world.getBlockId(xCoord+x1, yCoord+y1, zCoord+z1)))
 								{
-									world.setBlock(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)));
+									world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, TFC_Core.getTypeForGrass(world.getBlockMetadata(xCoord, yCoord, zCoord)), 0, 2);
 									converted = true;
 									int numX = x1;
 									int numZ = z1;
@@ -106,7 +106,7 @@ public class WorldGenFixGrass implements IWorldGenerator
 										numZ = -numZ;
 
 									if(random.nextInt(1+((numX+numZ)/2)) == 0)
-										world.setBlock(xCoord, yCoord+1, zCoord,Block.tallGrass.blockID);
+										world.setBlockAndMetadataWithNotify(xCoord, yCoord+1, zCoord,Block.tallGrass.blockID, 0, 2);
 								}
 							}
 						}

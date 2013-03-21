@@ -90,12 +90,6 @@ public class ItemJavelin extends ItemTerraTool
         return 72000;
     }
 
-    @Override
-    public String getTextureFile()
-    {
-        return "/bioxx/terratools.png";
-    }
-
     public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         return par1ItemStack;

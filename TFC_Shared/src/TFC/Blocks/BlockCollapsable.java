@@ -102,7 +102,7 @@ public class BlockCollapsable extends BlockTerra
         }
 
         dropBlockAsItem_do(world, i, j, k, new ItemStack(blockID, 1, world.getBlockMetadata(i, j, k)));
-        world.setBlock(i, j, k, 0);
+        world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 
     }
 
@@ -238,26 +238,22 @@ public class BlockCollapsable extends BlockTerra
                 if(R.nextInt(100) > 90)
                     world.playSoundAtEntity(ent, "fallingrocklong", 1.0F, 0.8F + (R.nextFloat()/2));
                 
-                world.setBlock(i, j, k, 0);
-                world.markBlockForUpdate(i, j, k);
+                world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
                 
                 if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
                         ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
                 {
-                    world.setBlock(i, j-1, k, 0);
-                    world.markBlockForUpdate(i, j-1, k);
+                    world.setBlockAndMetadataWithNotify(i, j-1, k, 0, 0, 2);
                     
                     if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
                             ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
                     {
-                        world.setBlock(i, j-2, k, 0);
-                        world.markBlockForUpdate(i, j-2, k);
+                        world.setBlockAndMetadataWithNotify(i, j-2, k, 0, 0, 2);
                         
                         if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
                                 ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
                         {
-                            world.setBlock(i, j-3, k, 0);
-                            world.markBlockForUpdate(i, j-3, k);
+                            world.setBlockAndMetadataWithNotify(i, j-3, k, 0, 0, 2);
                         }
                     }
                 }

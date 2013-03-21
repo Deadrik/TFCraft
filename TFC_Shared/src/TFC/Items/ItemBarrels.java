@@ -149,7 +149,7 @@ public class ItemBarrels extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("/wood/"+blockNames[i]+" Barrel");
+			registerer.func_94245_a("wood/"+blockNames[i]+" Barrel");
     }
 
 	@Override

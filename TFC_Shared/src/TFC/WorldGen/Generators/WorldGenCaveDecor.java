@@ -77,15 +77,15 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                 {
                                     case 0:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929 + 16777216L; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 2105858 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-2, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 3158787 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -93,11 +93,11 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 1:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158851 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -105,11 +105,11 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 2:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4211779 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -117,15 +117,15 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 3:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 2101505 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4203010 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-2, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -133,11 +133,11 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 4:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-2, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -145,11 +145,11 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 5:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1057026 + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
-                                        world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.stoneStalac.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158531L + 16777216L;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
@@ -172,15 +172,15 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                 {
                                     case 0:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1057026; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 3158531;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y+2, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4207363;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
@@ -188,15 +188,15 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 1:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052930; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 3158274;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y+2, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4407811;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
@@ -204,15 +204,15 @@ public class WorldGenCaveDecor implements IWorldGenerator
                                     }
                                     case 2:
                                     {
-                                        world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929; 
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 2105858;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
-                                        world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID);
+                                        world.setBlockAndMetadataWithNotify(x, y+2, z, TFCBlocks.stoneSlabs.blockID, 0, 0);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 3552003;
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
                                         ((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);

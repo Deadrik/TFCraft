@@ -61,7 +61,7 @@ public class BlockCustomSnow extends BlockTerra
 	{
 		if (!this.canPlaceBlockAt(par1World, par2, par3, par4))
 		{
-			par1World.setBlock(par2, par3, par4, 0);
+			par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 			return false;
 		}
 		else
@@ -154,7 +154,7 @@ public class BlockCustomSnow extends BlockTerra
 			if(meta > 1 && par5Random.nextInt(5) == 0) {
 				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
 			} else if(meta == 1 && par5Random.nextInt(5) == 0) {
-				par1World.setBlock(par2, par3, par4, 0);
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 			}
 		}
 		
@@ -183,7 +183,7 @@ public class BlockCustomSnow extends BlockTerra
                 } 
                 else 
                 {
-                    par1World.setBlock(par2, par3, par4, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
                 }
             } 
             else if(meta <= 15 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
@@ -191,7 +191,7 @@ public class BlockCustomSnow extends BlockTerra
                 if(meta > 1) {
                     par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
                 } else {
-                    par1World.setBlock(par2, par3, par4, 0);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
                 }
             }
         }
@@ -200,7 +200,7 @@ public class BlockCustomSnow extends BlockTerra
 			if(meta > 1 ) {
 				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 3);
 			} else if(meta == 1) {
-				par1World.setBlock(par2, par3, par4, 0);
+				par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 			}
 		}
 		else//Below Freezing
@@ -211,7 +211,7 @@ public class BlockCustomSnow extends BlockTerra
             } 
 		    else if(meta == 1 && par5Random.nextInt(5) == 0)
             {
-                par1World.setBlock(par2, par3, par4, 0);
+                par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
             }
 		}
 		par1World.markBlockForUpdate(par2, par3, par4);

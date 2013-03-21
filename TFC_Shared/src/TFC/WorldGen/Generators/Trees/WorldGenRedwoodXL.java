@@ -89,10 +89,10 @@ public class WorldGenRedwoodXL extends WorldGenerator {
 		int meta = TFCBiome.getSurfaceRockLayer(world, x, z);
 		int dirtID =  TFC_Core.getTypeForDirt(meta);
 		int dirtMeta =  TFC_Core.getSoilMetaFromStone(dirtID, meta);
-		world.setBlockAndMetadataWithNotify(x, y - 1, z, dirtID, meta, 3);
-		world.setBlockAndMetadataWithNotify(x - 1, y - 1, z, dirtID, meta, 3);
-		world.setBlockAndMetadataWithNotify(x, y - 1, z - 1, dirtID, meta, 3);
-		world.setBlockAndMetadataWithNotify(x - 1, y - 1, z - 1, dirtID, meta, 3);
+		world.setBlockAndMetadataWithNotify(x, y - 1, z, dirtID, meta, 0);
+		world.setBlockAndMetadataWithNotify(x - 1, y - 1, z, dirtID, meta, 0);
+		world.setBlockAndMetadataWithNotify(x, y - 1, z - 1, dirtID, meta, 0);
+		world.setBlockAndMetadataWithNotify(x - 1, y - 1, z - 1, dirtID, meta, 0);
 		int l1 = rand.nextInt(2);
 		int j2 = 1;
 		boolean flag1 = false;

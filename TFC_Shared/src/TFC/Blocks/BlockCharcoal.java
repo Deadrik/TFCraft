@@ -103,7 +103,7 @@ public class BlockCharcoal extends BlockTerra {
 							world.setBlockMetadataWithNotify(i, j+top, k, m1-1, 3);
 						}
 						else
-							world.setBlock(i, j+top, k, 0);
+							world.setBlockAndMetadataWithNotify(i, j+top, k, 0, 0, 2);
 
 						world.setBlockAndMetadataWithNotify(i, j, k, blockID, 8, 3);
 					}
@@ -116,7 +116,7 @@ public class BlockCharcoal extends BlockTerra {
 					world.markBlockForUpdate(i, j+top, k);
 				}
 				else
-					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 			}
 			else
 			{
@@ -124,7 +124,7 @@ public class BlockCharcoal extends BlockTerra {
 			}
 
 			if(l == 0)
-				world.setBlock(i, j, k, 0);
+				world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class BlockCharcoal extends BlockTerra {
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
 
-		return world.setBlock(x, y, z, 0);
+		return world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
 	}
 
 	public void combineCharcoalDown(World world, int i, int j, int k)
@@ -155,7 +155,7 @@ public class BlockCharcoal extends BlockTerra {
 			if(m2 > 0)
 				world.setBlockAndMetadataWithNotify(i, j, k, blockID, m2, 0);
 			else
-				world.setBlock(i, j, k, 0);
+				world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 
 			world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, bottomMeta, 0);
 		}
@@ -179,7 +179,7 @@ public class BlockCharcoal extends BlockTerra {
 			if(m2 > 0)
 				world.setBlockAndMetadataWithNotify(i, j+1, k, blockID, m2, 0);
 			else
-				world.setBlock(i, j+1, k, 0);
+				world.setBlockAndMetadataWithNotify(i, j+1, k, 0, 0, 2);
 
 			world.setBlockAndMetadataWithNotify(i, j, k, blockID, bottomMeta, 0);
 		}
@@ -194,7 +194,7 @@ public class BlockCharcoal extends BlockTerra {
 			{
 				int meta = world.getBlockMetadata(i, j, k);
 				world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, meta, 0);
-				world.setBlock(i, j, k, 0);
+				world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 			}
 			else
 			{

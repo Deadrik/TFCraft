@@ -74,7 +74,7 @@ public class BlockCustomCactus extends Block implements IPlantable
 
                 if (var7 == 15)
                 {
-                    par1World.setBlock(par2, par3 + 1, par4, this.blockID);
+                    par1World.setBlockAndMetadataWithNotify(par2, par3 + 1, par4, this.blockID, 0, 2);
                     par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 3);
                 }
                 else
@@ -163,7 +163,7 @@ public class BlockCustomCactus extends Block implements IPlantable
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlock(par2, par3, par4, 0);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
         }
     }
 

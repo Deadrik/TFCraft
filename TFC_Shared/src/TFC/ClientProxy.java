@@ -1205,7 +1205,7 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("item."+ToolNames[i]+" Scythe.name", ToolNames[i] + " Scythe");
 			LR.addStringLocalization("item."+ToolNames[i]+" Knife.name", ToolNames[i] + " Knife");
 			LR.addStringLocalization("item."+ToolNames[i]+" ProPick.name", ToolNames[i] + " Prospector's Pick");
-			LR.addStringLocalization("item."+ToolNames[i]+" Pickaxe Head.name", ToolNames[i] + " Pickaxe Head");
+			LR.addStringLocalization("item."+ToolNames[i]+" Pick Head.name", ToolNames[i] + " Pickaxe Head");
 			LR.addStringLocalization("item."+ToolNames[i]+" Shovel Head.name", ToolNames[i] + " Shovel Head");
 			LR.addStringLocalization("item."+ToolNames[i]+" Axe Head.name", ToolNames[i] + " Axe Head");
 			LR.addStringLocalization("item."+ToolNames[i]+" Hoe Head.name", ToolNames[i] + " Hoe Head");

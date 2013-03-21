@@ -83,7 +83,7 @@ public class BlockCustomMushroom extends BlockCustomFlower
 	public boolean fertilizeMushroom(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		int var6 = par1World.getBlockMetadata(par2, par3, par4);
-		par1World.setBlock(par2, par3, par4, 0);
+		par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 		WorldGenBigMushroom var7 = null;
 
 		if (this.blockID == Block.mushroomBrown.blockID)
@@ -158,7 +158,7 @@ public class BlockCustomMushroom extends BlockCustomFlower
 
 			if (par1World.isAirBlock(var8, var9, var10) && this.canBlockStay(par1World, var8, var9, var10))
 			{
-				par1World.setBlock(var8, var9, var10, this.blockID);
+				par1World.setBlockAndMetadataWithNotify(var8, var9, var10, this.blockID, 0, 2);
 			}
 		}
 	}

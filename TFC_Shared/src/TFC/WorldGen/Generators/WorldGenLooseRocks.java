@@ -54,7 +54,7 @@ public class WorldGenLooseRocks implements IWorldGenerator
 				(world.getBlockMaterial(var8, var9, var10) == Material.grass || 
 				world.getBlockMaterial(var8, var9, var10) == Material.rock) && world.isBlockOpaqueCube(var8, var9, var10))
 		{
-			world.setBlock(var8, var9+1, var10, TFCBlocks.LooseRock.blockID);
+			world.setBlockAndMetadataWithNotify(var8, var9+1, var10, TFCBlocks.LooseRock.blockID, 0, 2);
 
 		}
 

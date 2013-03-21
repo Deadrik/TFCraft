@@ -61,9 +61,4 @@ public class ItemMiscToolHead extends ItemTerra
 	{
 		return EnumWeight.HEAVY;
 	}
-	
-	public void registerIcon(IconRegister registerer)
-    {
-		this.iconIndex = registerer.func_94245_a("toolheads/"+getUnlocalizedName());
-    }
 }

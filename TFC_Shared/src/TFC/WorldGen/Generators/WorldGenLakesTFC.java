@@ -136,7 +136,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 					{
 						if (var6[(i2 * 16 + j3) * 8 + k4])
 						{
-							world.setBlock(xCoord + i2, yCoord + k4, zCoord + j3, k4 >= 4 ? 0 : this.blockIndex);
+							world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4, zCoord + j3, k4 >= 4 ? 0 : this.blockIndex, 0, 0);
 						}
 					}
 				}
@@ -160,12 +160,12 @@ public class WorldGenLakesTFC extends WorldGenerator
 
 							if (var35.topBlock == Block.mycelium.blockID)
 							{
-								world.setBlock(xCoord + i2, yCoord + k4 - 1, zCoord + j3, Block.mycelium.blockID);
+								world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 - 1, zCoord + j3, Block.mycelium.blockID, 0, 0);
 							}
 							else
 							{
 								DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(xCoord + i2, zCoord + j3, 0);
-								world.setBlock(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFC_Core.getTypeForGrass(rockLayer1.data2));
+								world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + k4 - 1, zCoord + j3, TFC_Core.getTypeForGrass(rockLayer1.data2), 0, 0);
 							}
 						}
 					}
@@ -228,7 +228,7 @@ public class WorldGenLakesTFC extends WorldGenerator
 
 						if (world.isBlockFreezable(xCoord + i2, yCoord + var34, zCoord + j3))
 						{
-							world.setBlock(xCoord + i2, yCoord + var34, zCoord + j3, Block.ice.blockID);
+							world.setBlockAndMetadataWithNotify(xCoord + i2, yCoord + var34, zCoord + j3, Block.ice.blockID, 0, 2);
 						}
 					}
 				}

@@ -130,7 +130,7 @@ public class BlockDirt extends BlockTerra
                 byte byte0 = 32;
                 if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
                 {
-                    world.setBlock(i, j, k, 0);
+                    world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
                     for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
@@ -202,28 +202,28 @@ public class BlockDirt extends BlockTerra
 				{
 				case 0:
 				{
-					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 					world.setBlockAndMetadataWithNotify(i+1, j, k, blockID, meta, 3);
 					tryToFall(world, i+1, j, k);
 					break;
 				}
 				case 1:
 				{
-					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 					world.setBlockAndMetadataWithNotify(i, j, k+1, blockID, meta, 3);
 					tryToFall(world, i, j, k+1);
 					break;
 				}
 				case 2:
 				{
-					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 					world.setBlockAndMetadataWithNotify(i-1, j, k, blockID, meta, 3);
 					tryToFall(world, i-1, j, k);
 					break;
 				}
 				case 3:
 				{
-					world.setBlock(i, j, k, 0);
+					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 					world.setBlockAndMetadataWithNotify(i, j, k-1, blockID, meta, 3);
 					tryToFall(world, i, j, k-1);
 					break;

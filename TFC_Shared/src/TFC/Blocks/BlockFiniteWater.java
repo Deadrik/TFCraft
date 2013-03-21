@@ -154,7 +154,7 @@ public class BlockFiniteWater extends BlockFluid
                   }
                   else
                   {
-                      world.setBlock(x, y, z, 0);
+                      world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
                   }
               }
           }
@@ -171,7 +171,7 @@ public class BlockFiniteWater extends BlockFluid
         //if it runs into vanilla style water, let it be absorbed.
         if(world.getBlockId(x, y-1, z) == Block.waterStill.blockID || world.getBlockId(x, y-1, z) == Block.waterMoving.blockID)
         {
-            world.setBlock(x, y, z, 0);
+            world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
             return true;
         }
         
@@ -203,7 +203,7 @@ public class BlockFiniteWater extends BlockFluid
                 }
                 else if (blockMeta2 > 0)
                 {
-                    world.setBlock(x, y, z, 0);
+                    world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
                     world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1, 3);
                     return true;
                 }
@@ -249,7 +249,7 @@ public class BlockFiniteWater extends BlockFluid
                     }
                     else
                     {
-                        world.setBlock(x, y, z, 0);
+                        world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
                         return true;
                     }
                 }
@@ -260,7 +260,7 @@ public class BlockFiniteWater extends BlockFluid
             }
             if (y2 < y)
             {
-                world.setBlock(x, y, z, 0);
+                world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
                 world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, blockMeta,3);
                 return true;
             }
@@ -276,12 +276,12 @@ public class BlockFiniteWater extends BlockFluid
                     world.getBlockId(x, y, z - 1) != this.blockID &&
                     world.getBlockId(x, y, z + 1) != this.blockID)
             {
-                world.setBlock(x, y, z, 0);
+                world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
                 return true;
             }
             else
             {
-                world.setBlock(x, y, z, 0);
+                world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
                 world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7,3);
                 return true;
             }

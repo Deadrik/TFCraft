@@ -358,18 +358,18 @@ public class BlockCustomDoor extends BlockTerra
 
 			 if (par1World.getBlockId(par2, par3 + 1, par4) != this.blockID)
 			 {
-				 par1World.setBlock(par2, par3, par4, 0);
+				 par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 				 var7 = true;
 			 }
 
 			 if (!par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4))
 			 {
-				 par1World.setBlock(par2, par3, par4, 0);
+				 par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 				 var7 = true;
 
 				 if (par1World.getBlockId(par2, par3 + 1, par4) == this.blockID)
 				 {
-					 par1World.setBlock(par2, par3 + 1, par4, 0);
+					 par1World.setBlockAndMetadataWithNotify(par2, par3 + 1, par4, 0, 0, 2);
 				 }
 			 }
 
@@ -394,7 +394,7 @@ public class BlockCustomDoor extends BlockTerra
 		 {
 			 if (par1World.getBlockId(par2, par3 - 1, par4) != this.blockID)
 			 {
-				 par1World.setBlock(par2, par3, par4, 0);
+				 par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
 			 }
 
 			 if (par5 > 0 && par5 != this.blockID)

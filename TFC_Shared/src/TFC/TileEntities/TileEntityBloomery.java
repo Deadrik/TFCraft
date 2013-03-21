@@ -711,11 +711,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 				{
 					//Make sure that the Stack is surrounded by rock
 					if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
-						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID);
-						worldObj.markBlockForUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+						worldObj.setBlockAndMetadataWithNotify(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 2);
 					} else {
-						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0);
-						worldObj.markBlockForUpdate(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+						worldObj.setBlockAndMetadataWithNotify(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0, 0, 2);
 					}
 				}
 			}
