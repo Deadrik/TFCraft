@@ -82,7 +82,7 @@ public class BlockCustomStationary extends BlockCustomFluid
         if(!finite)
         {
             int var5 = par1World.getBlockMetadata(par2, par3, par4);
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID - 1, var5, 3);
+            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID - 1, var5, 0);
             par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID - 1, this.tickRate());
         }

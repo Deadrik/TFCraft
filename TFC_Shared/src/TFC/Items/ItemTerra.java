@@ -82,18 +82,21 @@ public class ItemTerra extends Item implements ISize
     	registerIcon(registerer);
     }
     
+    @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return getUnlocalizedName().concat("."+MetaNames[itemstack.getItemDamage()]);
+    	if(MetaNames != null)
+    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+    	return super.getUnlocalizedName(itemstack);
     }
     
-    @Override
+    /*@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
     	if(MetaNames != null)
     		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
 		return super.getItemDisplayName(itemstack);
-	}
+	}*/
 
     @Override
     public boolean getShareTag()

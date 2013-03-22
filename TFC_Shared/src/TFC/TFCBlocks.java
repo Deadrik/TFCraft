@@ -411,7 +411,6 @@ public class TFCBlocks
 		
 		TFCBlocks.WoodConstruct = (new TFC.Blocks.BlockWoodConstruct(TFC_Settings.getIntFor(config,"block","WoodConstruct", 2200))).setHardness(4F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("WoodConstruct");
 		
-		
 		Block.blocksList[5] = null;
 		Block.blocksList[6] = null;
 		Block.blocksList[8] = null;
@@ -434,6 +433,7 @@ public class TFCBlocks
 		Block.blocksList[81] = null;
 		Block.blocksList[83] = null;
 		Block.blocksList[106] = null;
+		Block.blocksList[107] = null;
 		Block.blocksList[125].setCreativeTab(null);
 		Block.blocksList[126].setCreativeTab(null);
 		Block.blocksList[134].setCreativeTab(null);
@@ -462,6 +462,7 @@ public class TFCBlocks
 		Block.blocksList[81] = (new BlockCustomCactus(81)).setHardness(0.4F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("cactus");
 		Block.blocksList[83] = (new BlockCustomReed(83)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("reeds");
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine");
+		Block.blocksList[107] = (new BlockCustomFenceGate(107)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("fenceGate");
 
 
 		TFCBlocks.Planks = Block.blocksList[5];

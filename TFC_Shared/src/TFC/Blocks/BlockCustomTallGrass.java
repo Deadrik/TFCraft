@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -47,7 +48,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
     }
 
-
+    @Override
     public int getBlockColor()
     {
         double var1 = 0.5D;
@@ -55,43 +56,31 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
         return ColorizerGrassTFC.getGrassColor(var1, var3);
     }
 
-    /**
-     * Returns the color this block should be rendered. Used by leaves.
-     */
+    @Override
     public int getRenderColor(int par1)
     {
         return par1 == 0 ? 16777215 : ColorizerFoliageTFC.getFoliageColorBasic();
     }
 
-    /**
-     * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
-     * when first determining what to render.
-     */
+    @Override
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return -1;
     }
 
-    /**
-     * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
-     */
+    @Override
     public int quantityDroppedWithBonus(int par1, Random par2Random)
     {
         return 1 + par2Random.nextInt(par1 * 2 + 1);
     }
 
-    /**
-     * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
-     * block and l is the block's subtype/damage.
-     */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
     {
         super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
@@ -193,5 +182,33 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
             }
         }
         return is;
+    }
+    
+    private static final String[] field_94367_a = new String[] {"deadbush", "tallgrass", "fern"};
+    @SideOnly(Side.CLIENT)
+    private Icon[] field_94366_b;
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void func_94332_a(IconRegister par1IconRegister)
+    {
+        this.field_94366_b = new Icon[field_94367_a.length];
+
+        for (int i = 0; i < this.field_94366_b.length; ++i)
+        {
+            this.field_94366_b[i] = par1IconRegister.func_94245_a(field_94367_a[i]);
+        }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    {
+        if (par2 >= this.field_94366_b.length)
+        {
+            par2 = 0;
+        }
+
+        return this.field_94366_b[par2];
     }
 }

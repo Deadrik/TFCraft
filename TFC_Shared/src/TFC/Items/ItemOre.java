@@ -77,11 +77,11 @@ public class ItemOre extends ItemTerra
 	public Icon getIconFromDamage(int meta)
 	{
 	    if(meta == 35)
-	        return icons[meta + 6];
+	        return icons[6];
 	    else if(meta == 36)
-            return icons[meta + 13];
+            return icons[13];
 	    else if(meta == 37)
-            return icons[meta + 10];
+            return icons[10];
 	    
 		return icons[meta];
 	}

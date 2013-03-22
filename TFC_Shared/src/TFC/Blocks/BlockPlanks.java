@@ -85,6 +85,8 @@ public class BlockPlanks extends BlockTerra
 		{
 			icons[i] = registerer.func_94245_a("wood/"+WoodNames[i]+" Plank");
 		}
+		
+		Block.planks.func_94332_a(registerer);
     }
 
 	@Override

@@ -1023,6 +1023,8 @@ public class TFCItems
         Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder");
         Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (ItemCustomPotion)(new ItemCustomPotion(117)).setUnlocalizedName("potion");
         
+        Item.itemsList[Block.tallGrass.blockID] = null; Item.itemsList[Block.tallGrass.blockID] = (new ItemColored(Block.tallGrass.blockID - 256, true)).setBlockNames(new String[] {"shrub", "grass", "fern"});
+        
         
         
 		
