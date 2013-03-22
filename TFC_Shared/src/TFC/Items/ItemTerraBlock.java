@@ -44,87 +44,87 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
 {
-	public static String[] MetaNames;
+	public String[] MetaNames;
 	public Icon[] icons;
-	
+
 	public ItemTerraBlock(int par1) 
 	{
 		super(par1);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
-	
+
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-    	if(MetaNames != null)
-    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
+		if(MetaNames != null)
+			return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
 		return super.getItemDisplayName(itemstack);
 	}
-	
-	@Override
-    public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
-    {
-        if (!world.isRemote && is.hasTagCompound())
-        {
-            NBTTagCompound stackTagCompound = is.getTagCompound();
 
-            if(stackTagCompound.hasKey("temperature"))
-            {
-            	TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
-            }
-        }
-    }
-	
+	@Override
+	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
+	{
+		if (!world.isRemote && is.hasTagCompound())
+		{
+			NBTTagCompound stackTagCompound = is.getTagCompound();
+
+			if(stackTagCompound.hasKey("temperature"))
+			{
+				TFC_ItemHeat.HandleItemHeat(is, (int)entity.posX, (int)entity.posY, (int)entity.posZ);
+			}
+		}
+	}
+
 	@Override
 	public int getMetadata(int i) 
 	{		
 		return i;
 	}
 
-    public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
-    {
-    	ItemTerra.addSizeInformation(this, arraylist);
-    	
-        if (is.hasTagCompound())
-        {
-            NBTTagCompound stackTagCompound = is.getTagCompound();
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	{
+		ItemTerra.addSizeInformation(this, arraylist);
 
-            if(stackTagCompound.hasKey("temperature"))
-            {
-                float temp = stackTagCompound.getFloat("temperature");
-                float meltTemp = -1;
-                float boilTemp = 10000;
-                HeatIndex hi = HeatManager.getInstance().findMatchingIndex(is);
-                if(hi != null)
-                {
-                    meltTemp = hi.meltTemp;
-                    boilTemp = hi.boilTemp;
-                }
+		if (is.hasTagCompound())
+		{
+			NBTTagCompound stackTagCompound = is.getTagCompound();
 
-                if(meltTemp != -1)
-                {
-                    if(is.itemID == Item.stick.itemID)
-                        arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-                    else
-                        arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));
-                }
-            }
-        }
-    }
-    
-    public boolean getShareTag()
-    {
-        return true;
-    }
-    
-    public int getItemStackLimit()
-    {
-    	if(canStack())
-    		return this.getSize().stackSize * getWeight().multiplier;
-    	else
-    		return 1;
-    }
+			if(stackTagCompound.hasKey("temperature"))
+			{
+				float temp = stackTagCompound.getFloat("temperature");
+				float meltTemp = -1;
+				float boilTemp = 10000;
+				HeatIndex hi = HeatManager.getInstance().findMatchingIndex(is);
+				if(hi != null)
+				{
+					meltTemp = hi.meltTemp;
+					boilTemp = hi.boilTemp;
+				}
+
+				if(meltTemp != -1)
+				{
+					if(is.itemID == Item.stick.itemID)
+						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
+					else
+						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));
+				}
+			}
+		}
+	}
+
+	public boolean getShareTag()
+	{
+		return true;
+	}
+
+	public int getItemStackLimit()
+	{
+		if(canStack())
+			return this.getSize().stackSize * getWeight().multiplier;
+		else
+			return 1;
+	}
 
 	@Override
 	public EnumSize getSize() {
@@ -137,26 +137,29 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
 	@Override
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
-	
+
 	public void registerIcon(IconRegister registerer)
-    {
-		icons = new Icon[MetaNames.length];
-		for(int i = 0; i < MetaNames.length; i++)
+	{
+		if(MetaNames != null)
 		{
-			icons[i] = registerer.func_94245_a(MetaNames[i]);
+			icons = new Icon[MetaNames.length];
+			for(int i = 0; i < MetaNames.length; i++)
+			{
+				icons[i] = registerer.func_94245_a(MetaNames[i]);
+			}
 		}
-    }
-    @Override
-    public void func_94581_a(IconRegister registerer)
-    {
-    	super.func_94581_a(registerer);
-    	registerIcon(registerer);
-    }
+	}
+	@Override
+	public void func_94581_a(IconRegister registerer)
+	{
+		super.func_94581_a(registerer);
+		registerIcon(registerer);
+	}
 
 }

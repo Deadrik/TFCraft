@@ -1176,23 +1176,11 @@ public class ClientProxy extends CommonProxy
 				,"Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver", "Steel", "Sterling Silver",
 				"Tin", "Zinc"};
 
-		LR.addStringLocalization("item.StoneProPick.name", "Stone Prospector's Pick");
-
 		LR.addStringLocalization("tile.Anvil.name", "Anvil");
-		LR.addStringLocalization("item.StoneAnvilItem.name", "Stone Anvil");
-		LR.addStringLocalization("item.CopperAnvilItem.name", "Copper Anvil");
-		LR.addStringLocalization("item.BronzeAnvilItem.name", "Bronze Anvil");
-		LR.addStringLocalization("item.WroughtIronAnvilItem.name", "Wrought Iron Anvil");
-		LR.addStringLocalization("item.SteelAnvilItem.name", "Steel Anvil");
-		LR.addStringLocalization("item.BlackSteelAnvilItem.name", "Black Steel  Anvil");
-		LR.addStringLocalization("item.BlueSteelAnvilItem.name", "Blue Steel Anvil");
-		LR.addStringLocalization("item.RedSteelAnvilItem.name", "Red Steel Anvil");
-		LR.addStringLocalization("item.BismuthBronzeAnvilItem.name", "Bismuth Bronze Anvil");
-		LR.addStringLocalization("item.BlackBronzeAnvilItem.name", "Black Bronze Anvil");
-		LR.addStringLocalization("item.RoseGoldAnvilItem.name", "Rose Gold Anvil");
 
 		for(int i= 0; i < ToolNames.length; i++)
 		{
+			LR.addStringLocalization("item."+ToolNames[i]+" Anvil Item.name", ToolNames[i]+" Anvil");
 			LR.addStringLocalization("item."+ToolNames[i]+" Pick.name", ToolNames[i] + " Pickaxe");
 			LR.addStringLocalization("item."+ToolNames[i]+" Shovel.name", ToolNames[i] + " Shovel");
 			LR.addStringLocalization("item."+ToolNames[i]+" Axe.name", ToolNames[i] + " Axe");
@@ -1238,11 +1226,11 @@ public class ClientProxy extends CommonProxy
 		//meltedmetal
 		for(int i= 0; i < Names.length; i++)
 		{
-			LR.addStringLocalization("item.Unshaped"+Names[i].replace(" ", "")+".name", "Unshaped "+Names[i]);
-			LR.addStringLocalization("item."+Names[i].replace(" ", "")+"Ingot.name", Names[i] + " Ingot");
-			LR.addStringLocalization("item."+Names[i].replace(" ", "")+"Ingot2x.name", Names[i] + " Ingot 2x");
-			LR.addStringLocalization("item."+Names[i]+"Sheet.name", Names[i] + " Sheet");
-			LR.addStringLocalization("item."+Names[i]+"Sheet2x.name", Names[i] + " Sheet 2x");
+			LR.addStringLocalization("item.Unshaped"+Names[i]+".name", Names[i] + " Unshaped");
+			LR.addStringLocalization("item."+Names[i]+" Ingot.name", Names[i] + " Ingot");
+			LR.addStringLocalization("item."+Names[i]+" Double Ingot.name", Names[i] + " Double Ingot");
+			LR.addStringLocalization("item."+Names[i]+" Sheet.name", Names[i] + " Sheet");
+			LR.addStringLocalization("item."+Names[i]+" Double Sheet.name", Names[i] + " Double Sheet");
 		}
 
 		LR.addStringLocalization("item.UnshapedHCBlackSteel.name", "Unshaped High Carbon Black Steel");
