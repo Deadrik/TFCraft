@@ -124,9 +124,9 @@ public class BlockLogNatural extends BlockTerra
     {
 		for(int i = 0; i < 16; i++)
 		{
-			sideIcons[i] = registerer.func_94245_a("wood/" + WoodNames[i] + " Log");
-			innerIcons[i] = registerer.func_94245_a("wood/" + WoodNames[i] + " Log Top");
-			rotatedSideIcons[i] = registerer.func_94245_a("wood/" + WoodNames[i] + " Log Side");
+			sideIcons[i] = registerer.func_94245_a("wood/trees/" + WoodNames[i] + " Log");
+			innerIcons[i] = registerer.func_94245_a("wood/trees/" + WoodNames[i] + " Log Top");
+			rotatedSideIcons[i] = registerer.func_94245_a("wood/trees/" + WoodNames[i] + " Log Side");
 		}
     }
 

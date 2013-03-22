@@ -200,28 +200,28 @@ public class BlockSand extends BlockTerra
 				{
 					world.setBlockAndMetadataWithNotify(i+1, j, k, blockID, meta, 3);
 					tryToFall(world, i+1, j, k);
-					world.func_94571_i(i, j, k);
+					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
 					break;
 				}
 				case 1:
 				{
 					world.setBlockAndMetadataWithNotify(i, j, k+1, blockID,meta, 3);
 					tryToFall(world, i, j, k+1);
-					world.func_94571_i(i, j, k);
+					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
 					break;
 				}
 				case 2:
 				{
 					world.setBlockAndMetadataWithNotify(i-1, j, k, blockID,meta, 3);
 					tryToFall(world, i-1, j, k);
-					world.func_94571_i(i, j, k);
+					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
 					break;
 				}
 				case 3:
 				{
 					world.setBlockAndMetadataWithNotify(i, j, k-1, blockID,meta, 3);
 					tryToFall(world, i, j, k-1);
-					world.func_94571_i(i, j, k);
+					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
 					break;
 				}
 				}
