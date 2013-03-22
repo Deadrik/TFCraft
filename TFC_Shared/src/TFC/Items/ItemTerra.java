@@ -90,7 +90,7 @@ public class ItemTerra extends Item implements ISize
     	return super.getUnlocalizedName(itemstack);
     }
     
-    /*@Override
+   /* @Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
     	if(MetaNames != null)

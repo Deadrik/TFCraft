@@ -43,16 +43,14 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemLogs extends ItemTerra
 {
-	public static String[] blockNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-		"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-
-
 	public ItemLogs(int i) 
 	{
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
+		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
 
 	@Override
@@ -149,15 +147,8 @@ public class ItemLogs extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("wood/"+blockNames[i]+" Log");
+			registerer.func_94245_a("wood/"+MetaNames[i]+" Log");
     }
-
-	@Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
-	}
 
 
 	@Override

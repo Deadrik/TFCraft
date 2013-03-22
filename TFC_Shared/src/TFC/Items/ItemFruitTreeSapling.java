@@ -108,10 +108,11 @@ public class ItemFruitTreeSapling extends ItemTerra
 	}
     
     @Override
-    public String getItemDisplayName(ItemStack itemstack) 
+    public String getUnlocalizedName(ItemStack itemstack)
     {
-        String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(Names[itemstack.getItemDamage()+offset]).toString();
-        return s;
+    	if(MetaNames != null)
+    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()+offset]);
+    	return super.getUnlocalizedName(itemstack);
     }
 
     public int getMetadata(int i)

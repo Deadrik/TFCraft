@@ -55,7 +55,7 @@ public class ItemUnfinishedArmor extends ItemTerra
 	@Override
 	public void func_94581_a(IconRegister registerer)
     {
-		this.iconIndex = registerer.func_94245_a(textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", ""));
+		this.iconIndex = registerer.func_94245_a(textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", "").replace("Stage2 ", ""));
     }
 	
 	@Override
@@ -64,11 +64,19 @@ public class ItemUnfinishedArmor extends ItemTerra
 	    String s = "";
 	    
 	    if(itemstack.getItemDamage() == 1)
-	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append("2").toString();
+	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append("Stage2").toString();
 	    else
 	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).toString();
 	    
         return s;
+    }
+	
+	@Override
+    public String getUnlocalizedName(ItemStack itemstack)
+    {
+		 if(itemstack.getItemDamage() == 1)
+    		return getUnlocalizedName().concat("Stage2");
+    	return super.getUnlocalizedName(itemstack);
     }
 	
 	public int getItemStackLimit()

@@ -59,7 +59,7 @@ public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
 		for (int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack is = inv.getStackInSlot(i);
-			if(is != null && is.hasTagCompound() && !is.getItem().getItemDisplayName(is).contains("Clay"))
+			if(is != null && is.hasTagCompound() && !is.getItem().getUnlocalizedName(is).contains("Clay"))
 			{
 				if(is.getTagCompound().hasKey("temperature"))
 				{

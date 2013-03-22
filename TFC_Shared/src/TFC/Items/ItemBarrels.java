@@ -44,16 +44,14 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemBarrels extends ItemTerra
 {
-	public static String[] blockNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-		"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-
-
 	public ItemBarrels(int i) 
 	{
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
 
 	@Override
@@ -69,7 +67,7 @@ public class ItemBarrels extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < blockNames.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -137,13 +135,6 @@ public class ItemBarrels extends ItemTerra
 	}
 	
 	Icon[] icons = new Icon[16];
-	
-	@Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return s;
-	}
 
 	@Override
 	public void registerIcon(IconRegister registerer)

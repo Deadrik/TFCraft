@@ -161,13 +161,11 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
 
             if(fireTemperature*mod > inputItemTemps[i])
             {
-                String name = fireItemStacks[i].getItem().getItemDisplayName(fireItemStacks[i]);
                 float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i], fireTemperature*mod, MaxFireTemp);
                 inputItemTemps[i] += increase;
             }
             else if(fireTemperature*mod < inputItemTemps[i])
             {
-                String name = fireItemStacks[i].getItem().getItemDisplayName(fireItemStacks[i]);
                 float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
                 inputItemTemps[i] -= increase;
             }

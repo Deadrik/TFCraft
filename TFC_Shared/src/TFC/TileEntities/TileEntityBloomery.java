@@ -129,13 +129,11 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 			if(fireTemperature*mod > inputItemTemps[i])
 			{
-				String name = fireItemStacks[i].getItem().getItemDisplayName(fireItemStacks[i]);
 				float increase = TFC_ItemHeat.getTempIncrease(fireItemStacks[i], fireTemperature*mod, MaxFireTemp);
 				inputItemTemps[i] += increase;
 			}
 			else if(fireTemperature*mod < inputItemTemps[i])
 			{
-				String name = fireItemStacks[i].getItem().getItemDisplayName(fireItemStacks[i]);
 				float increase = TFC_ItemHeat.getTempDecrease(fireItemStacks[i]);
 				inputItemTemps[i] -= increase;
 			}
@@ -491,7 +489,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		/* First we check to see if there are any mergeable items*/
 		for (int i = 0; i < outputItemStacks.length; i++)
 		{
-			if(outputItemStacks[i] != null && outputItemStacks[i].getItem().getItemDisplayName(outputItemStacks[i]) == work.getItem().getItemDisplayName(work))
+			if(outputItemStacks[i] != null && outputItemStacks[i].getItem().getUnlocalizedName(outputItemStacks[i]) == work.getItem().getUnlocalizedName(work))
 			{
 				if(outputItemStacks[i].getItemDamage() > 0 && work.getItemDamage() > 0)
 				{
