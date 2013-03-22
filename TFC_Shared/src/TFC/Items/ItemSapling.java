@@ -1,10 +1,12 @@
 package TFC.Items;
 
 import TFC.*;
+import TFC.Enums.EnumWeight;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -42,5 +44,30 @@ public class ItemSapling extends ItemTerraBlock
 		setHasSubtypes(true);
 		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	}
+	public Icon getIconFromDamage(int par1)
+    {
+        return Icons[par1];
+    }
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		if(MetaNames != null)
+			return new StringBuilder().append(MetaNames[itemstack.getItemDamage()]+" Sapling").toString();
+		return super.getItemDisplayName(itemstack);
+	}
+	public static Icon[] Icons = new Icon[16];
+
+	@Override
+    public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < MetaNames.length; i++)
+		{
+			Icons[i] = registerer.func_94245_a("wood/trees/" + MetaNames[i] + " Sapling");
+		}
+    }
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.MEDIUM;
 	}
 }
