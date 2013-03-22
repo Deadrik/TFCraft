@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -54,14 +55,13 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 		setCreativeTab(TFCTabs.TFCTools);
 	}
 
-	public String getTextureFile() {
-		return "/bioxx/terratools.png";
-	}
-
-	/**
-	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
-	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS !
-	 */
+	@Override
+    public void func_94581_a(IconRegister registerer)
+    {
+    	this.iconIndex = registerer.func_94245_a("tools/"+this.getUnlocalizedName().replace("item.", ""));
+    }
+	
+	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
 		if (world.isRemote || world.getBlockId(x, y, z) == TFCBlocks.ToolRack.blockID)
@@ -152,14 +152,15 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 		}
 	}
 	
-	public void addInformation(ItemStack is, List arraylist) 
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		ItemTerra.addSizeInformation(this, arraylist);
 		
         if(TFC_Settings.enableDebugMode)
             arraylist.add("Damage: " + is.getItemDamage());
     }
-	
+	@Override
 	public int getItemStackLimit()
     {
     	if(canStack())

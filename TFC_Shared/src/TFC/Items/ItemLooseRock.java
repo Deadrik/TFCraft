@@ -135,7 +135,7 @@ public class ItemLooseRock extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < blockNames.length; i++)
-			registerer.func_94245_a("/rocks/"+blockNames[i]+" Rock");
+			registerer.func_94245_a("rocks/"+blockNames[i]+" Rock");
     }
 
 	/*public Icon getIconFromDamage(int i)

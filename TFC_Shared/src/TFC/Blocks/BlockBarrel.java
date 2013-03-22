@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -50,27 +51,23 @@ public class BlockBarrel extends BlockTerraContainer
 		super(par1, Material.wood);
 	}
 
+	@Override
+    public void func_94332_a(IconRegister iconRegisterer)
+    {
+    }
 
-	/**
-	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
-	 */
+    @Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
-	/**
-	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-	 */
+    @Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 
-	/**
-	 * The type of render function that is called for this block
-	 */
 	@Override
 	public int getRenderType()
 	{
@@ -170,10 +167,7 @@ public class BlockBarrel extends BlockTerraContainer
 		}
 	}
 
-	/**
-	 * Called upon block activation (left or right click on the block.). The three integers represent x,y,z of the
-	 * block.
-	 */
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
@@ -195,19 +189,6 @@ public class BlockBarrel extends BlockTerraContainer
 		return false;
 
 	}
-
-	/**
-	 * Returns the TileEntity used by this block.
-	 */
-	public TileEntity getBlockEntity()
-	{
-		return new TileEntityBarrel();
-	}
-
-	/**
-	 * Looks for a sitting ocelot within certain bounds. Such an ocelot is considered to be blocking access to the
-	 * chest.
-	 */
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

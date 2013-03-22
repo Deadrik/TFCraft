@@ -533,22 +533,22 @@ public class TFCBlocks
 		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
 		int num = 2061;
-		BarrelOak = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelOak", num++)).setUnlocalizedName("BarrelOak");
-		BarrelAspen = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelAspen", num++)).setUnlocalizedName("BarrelAspen");
-		BarrelBirch = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelBirch", num++)).setUnlocalizedName("BarrelBirch");
-		BarrelChestnut = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelChestnut", num++)).setUnlocalizedName("BarrelChestnut");
-		BarrelDouglasFir = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelDouglasFir", num++)).setUnlocalizedName("BarrelDouglas Fir");
-		BarrelHickory = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelHickory", num++)).setUnlocalizedName("BarrelHickory");
-		BarrelMaple = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelMaple", num++)).setUnlocalizedName("BarrelMaple");
-		BarrelAsh = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelAsh", num++)).setUnlocalizedName("BarrelAsh");
-		BarrelPine = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelPine", num++)).setUnlocalizedName("BarrelPine");
-		BarrelSequoia = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSequoia", num++)).setUnlocalizedName("BarrelSequoia");
-		BarrelSpruce = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSpruce", num++)).setUnlocalizedName("BarrelSpruce");
-		BarrelSycamore = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSycamore", num++)).setUnlocalizedName("BarrelSycamore");
-		BarrelWhiteCedar = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteCedar", num++)).setUnlocalizedName("BarrelWhite Cedar");
-		BarrelWhiteElm = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteElm", num++)).setUnlocalizedName("BarrelWhite Elm");
-		BarrelWillow = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWillow", num++)).setUnlocalizedName("BarrelWillow");
-		BarrelKapok = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelKapok", num++)).setUnlocalizedName("BarrelKapok");
+		BarrelOak = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelOak", num++)).setUnlocalizedName("Oak Barrel");
+		BarrelAspen = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelAspen", num++)).setUnlocalizedName("Aspen Barrel");
+		BarrelBirch = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelBirch", num++)).setUnlocalizedName("Birch Barrel");
+		BarrelChestnut = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelChestnut", num++)).setUnlocalizedName("Chestnut Barrel");
+		BarrelDouglasFir = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelDouglasFir", num++)).setUnlocalizedName("Douglas Fir Barrel");
+		BarrelHickory = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelHickory", num++)).setUnlocalizedName("Hickory Barrel");
+		BarrelMaple = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelMaple", num++)).setUnlocalizedName("Maple Barrel");
+		BarrelAsh = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelAsh", num++)).setUnlocalizedName("Ash Barrel");
+		BarrelPine = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelPine", num++)).setUnlocalizedName("Pine Barrel");
+		BarrelSequoia = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSequoia", num++)).setUnlocalizedName("Sequoia Barrel");
+		BarrelSpruce = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSpruce", num++)).setUnlocalizedName("Spruce Barrel");
+		BarrelSycamore = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelSycamore", num++)).setUnlocalizedName("Sycamore Barrel");
+		BarrelWhiteCedar = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteCedar", num++)).setUnlocalizedName("White Cedar Barrel");
+		BarrelWhiteElm = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteElm", num++)).setUnlocalizedName("White Elm Barrel");
+		BarrelWillow = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWillow", num++)).setUnlocalizedName("Willow Barrel");
+		BarrelKapok = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelKapok", num++)).setUnlocalizedName("Kapok Barrel");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

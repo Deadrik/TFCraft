@@ -45,14 +45,11 @@ public class ItemMeal extends ItemTerraFood
 {
 	PotionEffect foodEffect;
 
-	String texture;
-
 	private boolean alwaysEdible = false;
 
-	public ItemMeal(int id, String tex) 
+	public ItemMeal(int id) 
 	{
 		super(id, 0);
-		texture = tex;
 	}
 
 	@Override

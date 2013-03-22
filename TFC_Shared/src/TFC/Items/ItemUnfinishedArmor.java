@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -37,27 +38,25 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemUnfinishedArmor extends ItemTerra
 {
-	String texture;
-
 	public ItemUnfinishedArmor(int id) 
 	{
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		setCreativeTab(TFCTabs.TFCUnfinished);
+		this.setFolder("armor/");
 	}
 	
 	public ItemUnfinishedArmor(int id, String tex) 
 	{
 		super(id);
-		texture = tex;
 	}
-
-	public ItemUnfinishedArmor setTexturePath(String t)
-	{
-		texture = t;
-		return this;
-	}
+	
+	@Override
+	public void func_94581_a(IconRegister registerer)
+    {
+		this.iconIndex = registerer.func_94245_a(textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", ""));
+    }
 	
 	@Override
     public String getItemDisplayName(ItemStack itemstack) 

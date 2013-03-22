@@ -44,6 +44,7 @@ public class ItemWoodDoor extends ItemTerra
         this.maxStackSize = 1;
         this.setCreativeTab(CreativeTabs.tabRedstone);
         woodType = woodID;
+        setFolder("wood/");
     }
 
 

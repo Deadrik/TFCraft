@@ -68,9 +68,8 @@ public class BlockFruitWood extends BlockTerraContainer
         return j;
     }	
 
-    String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-    Icon[] icons = new Icon[16];
+    String[] WoodNames = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
+    Icon[] icons = new Icon[9];
     
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
@@ -81,7 +80,7 @@ public class BlockFruitWood extends BlockTerraContainer
     @Override
     public void registerIcon(IconRegister registerer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < 9; i++)
 		{
 			icons[i] = registerer.func_94245_a("wood/trees/"+WoodNames[i]+" Wood");
 		}

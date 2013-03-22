@@ -48,6 +48,7 @@ public class ItemMiscToolHead extends ItemTerra
 		this.setMaxDamage(100);
 		this.setMaxStackSize(4);
 		setCreativeTab(TFCTabs.TFCUnfinished);
+		this.setFolder("toolheads/");
 	}
 	
 	@Override

@@ -68,7 +68,11 @@ public class ItemGem extends ItemTerra
 	
 	public void registerIcon(IconRegister registerer)
     {
-		icons[0] = registerer.func_94245_a("gems/"+gemNames[0] + getUnlocalizedName());
+		icons[0] = registerer.func_94245_a("gems/"+gemNames[0] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[1] = registerer.func_94245_a("gems/"+gemNames[1] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[2] = registerer.func_94245_a("gems/"+gemNames[2] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[3] = registerer.func_94245_a("gems/"+gemNames[3] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[4] = registerer.func_94245_a("gems/"+gemNames[4] + " " + getUnlocalizedName().replace("item.", ""));
     }
 
 }

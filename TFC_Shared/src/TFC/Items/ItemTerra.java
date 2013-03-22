@@ -41,11 +41,13 @@ public class ItemTerra extends Item implements ISize
 {
     protected boolean stackable = true;
     public String[] MetaNames;
+    public String textureFolder;
 
     public ItemTerra(int id) 
     {
         super(id);
         this.setCreativeTab(CreativeTabs.tabMisc);
+        textureFolder = "";
     }
     
     public ItemTerra(int id, String tex) 
@@ -62,14 +64,21 @@ public class ItemTerra extends Item implements ISize
     		return 1;
     }
     
-    public void registerIcon(IconRegister registerer)
+    public ItemTerra setFolder(String s)
     {
-
+    	this.textureFolder = s;
+    	return this;
     }
+    
+	public void registerIcon(IconRegister registerer)
+    {
+		this.iconIndex = registerer.func_94245_a(textureFolder+this.getUnlocalizedName().replace("item.", ""));
+    }
+    
     @Override
     public void func_94581_a(IconRegister registerer)
     {
-    	super.func_94581_a(registerer);
+    	//super.func_94581_a(registerer);
     	registerIcon(registerer);
     }
     

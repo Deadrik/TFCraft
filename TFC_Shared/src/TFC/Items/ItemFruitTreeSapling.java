@@ -47,9 +47,9 @@ public class ItemFruitTreeSapling extends ItemTerra
     String[] Names = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
     int offset;
 
-    public ItemFruitTreeSapling(int id, String tex, int off)
+    public ItemFruitTreeSapling(int id, int off)
     {
-        super(id, tex);
+        super(id);
         offset = off;
         setMaxDamage(0);
         setHasSubtypes(true);
@@ -98,7 +98,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 	public void registerIcon(IconRegister registerer)
     {
 		for(int i = 0; i < Names.length; i++)
-			registerer.func_94245_a("tfcplants/"+Names[i]+" Fruit Sapling");
+			registerer.func_94245_a("wood/fruit trees/"+Names[i]+" Fruit Sapling");
     }
     
     @Override

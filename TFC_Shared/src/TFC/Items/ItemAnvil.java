@@ -55,6 +55,7 @@ public class ItemAnvil extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setFolder("tools/");
 	}
 	
 	@Override
@@ -72,12 +73,6 @@ public class ItemAnvil extends ItemTerra
 	{		
 		return i;
 	}
-
-	/*@Override
-	public String getTextureFile()
-	{
-		return "/bioxx/terratools.png";
-	}*/
 	
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)

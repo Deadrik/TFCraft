@@ -22,6 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -60,6 +61,12 @@ public class ItemProPick extends ItemTerra
         super(i);
         maxStackSize = 1;
         setCreativeTab(TFCTabs.TFCTools);
+    }
+    
+    @Override
+    public void func_94581_a(IconRegister registerer)
+    {
+    	this.iconIndex = registerer.func_94245_a("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
     @Override

@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -44,7 +45,6 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemTerraFood extends ItemFood implements ISize
 {
-	String texture;
 	public int foodID;
 	private EnumSize size = EnumSize.SMALL;
 	private EnumWeight weight = EnumWeight.LIGHT;
@@ -54,23 +54,16 @@ public class ItemTerraFood extends ItemFood implements ISize
 	{
 		super(id, healAmt, true);
 	}
-	public ItemTerraFood(int id, int healAmt, String tex) 
-	{
-		this(id, healAmt);
-		texture = tex;
-	}
 
-	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, String tex, int foodid)
+	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid)
 	{
 		super(id, healAmt, saturation, wolfFood);
-		texture = tex;
 		foodID = foodid;
 	}
 	
-	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, String tex, int foodid, int tier)
+	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid, int tier)
 	{
 		super(id, healAmt, saturation, wolfFood);
-		texture = tex;
 		foodID = foodid;
 		Tier = tier;
 	}
@@ -87,10 +80,6 @@ public class ItemTerraFood extends ItemFood implements ISize
 		return this;
 	}
 
-	public String getTextureFile()
-	{
-		return texture;
-	}
 	
 	/***
      * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
@@ -98,11 +87,11 @@ public class ItemTerraFood extends ItemFood implements ISize
     public Item setIconCoord(int i, int j)
     {return this;}
 
-	public ItemTerraFood setTexturePath(String t)
-	{
-		texture = t;
-		return this;
-	}
+    @Override
+    public void func_94581_a(IconRegister registerer)
+    {
+		this.iconIndex = registerer.func_94245_a("food/"+this.getUnlocalizedName().replace("item.", ""));
+    }
 
 	public static void addFoodTempInformation(ItemStack is, List arraylist)
     {

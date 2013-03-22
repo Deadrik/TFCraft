@@ -355,8 +355,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves");
-			iconsOpaque[i] = iconRegisterer.func_94245_a("/wood/trees/" + WoodNames[i] + " Leaves Opaque");
+			icons[i] = iconRegisterer.func_94245_a("wood/trees/" + WoodNames[i] + " Leaves Fancy");
+			iconsOpaque[i] = iconRegisterer.func_94245_a("wood/trees/" + WoodNames[i] + " Leaves");
 		}
     }
 

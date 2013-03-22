@@ -123,8 +123,8 @@ public class BlockCustomDoor extends BlockTerra
     {
 		for(int i = 0, j = 0; i < 16; i++, j+=2)
 		{
-			icons[j] = registerer.func_94245_a("wood/"+WoodNames[i]+" Door Upper");
-			icons[j+1] = registerer.func_94245_a("wood/"+WoodNames[i]+" Door Lower");
+			icons[j] = registerer.func_94245_a("wood/doors/"+WoodNames[i]+" Door Upper");
+			icons[j+1] = registerer.func_94245_a("wood/doors/"+WoodNames[i]+" Door Lower");
 		}
     }
 
