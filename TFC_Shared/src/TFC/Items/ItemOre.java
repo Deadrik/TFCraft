@@ -38,13 +38,7 @@ import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
 
 public class ItemOre extends ItemTerra
-{
-	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
-		"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
-		"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
-		/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
-		/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
-	
+{	
 	public Icon[] icons = new Icon[35];
 
 
@@ -53,6 +47,11 @@ public class ItemOre extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		MetaNames = new String[]{"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
+				"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
+				"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
+				/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
+				/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
 	}
 	
 	@Override
@@ -69,7 +68,7 @@ public class ItemOre extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < blockNames.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -87,18 +86,18 @@ public class ItemOre extends ItemTerra
 		return icons[meta];
 	}
 
-	@Override
+	/*@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
     	if(blockNames != null)
     		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
 		return super.getItemDisplayName(itemstack);
-	}
+	}*/
 	
-    public static String getItemNameDamage(int d) 
+    /*public static String getItemNameDamage(int d) 
     {
         String s = blockNames[d];
         return s;
-    }
+    }*/
 
 }

@@ -478,7 +478,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			if(fireItemStacks[i] == null)
 			{
 				fireItemStacks[i] = is;
-				OreType = ItemOre.getItemNameDamage(is.getItemDamage());
+				OreType = is.getDisplayName();
 				return true;
 			}
 		}
@@ -915,7 +915,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		if(oreDamage == -1)
 			this.OreType = "";
 		else
-			this.OreType = ItemOre.getItemNameDamage(oreDamage);
+			this.OreType = new ItemStack(TFCItems.OreChunk, 1, oreDamage).getDisplayName();
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}

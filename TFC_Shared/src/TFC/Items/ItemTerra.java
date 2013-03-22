@@ -82,6 +82,11 @@ public class ItemTerra extends Item implements ISize
     	registerIcon(registerer);
     }
     
+    public String getUnlocalizedName(ItemStack itemstack)
+    {
+        return getUnlocalizedName().concat("."+MetaNames[itemstack.getItemDamage()]);
+    }
+    
     @Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{

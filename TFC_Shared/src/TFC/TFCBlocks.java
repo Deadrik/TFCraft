@@ -97,6 +97,7 @@ public class TFCBlocks
 	public static Block Ore3;
 	public static Block Sulfur;
 	public static Block Wood;
+	public static Block Planks;
 	public static Block Leaves;
 	public static Block Sapling;
 	public static Block WoodSupportV;
@@ -423,6 +424,7 @@ public class TFCBlocks
 		Block.blocksList[38] = null;
 		Block.blocksList[39] = null;
 		Block.blocksList[40] = null;
+		Block.blocksList[47] = null;
 		Block.blocksList[53] = null;
 		Block.blocksList[54] = null;
 		Block.blocksList[58] = null;
@@ -432,6 +434,11 @@ public class TFCBlocks
 		Block.blocksList[81] = null;
 		Block.blocksList[83] = null;
 		Block.blocksList[106] = null;
+		Block.blocksList[125].setCreativeTab(null);
+		Block.blocksList[126].setCreativeTab(null);
+		Block.blocksList[134].setCreativeTab(null);
+		Block.blocksList[135].setCreativeTab(null);
+		Block.blocksList[136].setCreativeTab(null);
 
 		Block.blocksList[5] = (new TFC.Blocks.BlockPlanks(5, Material.wood)).setHardness(4.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("wood");
 		Block.blocksList[6] = (new BlockCustomSapling(6)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling");
@@ -445,6 +452,7 @@ public class TFCBlocks
 		Block.blocksList[38] = (BlockFlower)(new BlockCustomFlower(38)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("rose");
 		Block.blocksList[39] = (BlockFlower)(new BlockCustomMushroom(39)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setLightValue(0.125F).setUnlocalizedName("mushroom");
 		Block.blocksList[40] = (BlockFlower)(new BlockCustomMushroom(40)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("mushroom");
+		Block.blocksList[47] = (new BlockCustomBookshelf(47)).setHardness(1.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bookshelf");
 		Block.blocksList[53] = (new BlockStair(53, Material.wood)).setUnlocalizedName("stairsWood");
 		Block.blocksList[54] = (new BlockChestTFC(54, 0)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("chest");
 		Block.blocksList[58] = (new TFC.Blocks.BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("workbench");
@@ -456,6 +464,7 @@ public class TFCBlocks
 		Block.blocksList[106] = (new BlockCustomVine(106)).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("vine");
 
 
+		TFCBlocks.Planks = Block.blocksList[5];
 		TFCBlocks.Wood = Block.blocksList[17];
 		TFCBlocks.Leaves = Block.blocksList[18];
 		TFCBlocks.Sapling = Block.blocksList[6];
