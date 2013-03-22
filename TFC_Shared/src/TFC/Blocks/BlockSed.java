@@ -86,7 +86,7 @@ public class BlockSed extends BlockCollapsable
     {
 		for(int i = 0; i < 10; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Raw");
+			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Raw");
 		}
     }
 

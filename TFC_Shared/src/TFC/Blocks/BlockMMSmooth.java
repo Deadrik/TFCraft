@@ -86,7 +86,7 @@ public class BlockMMSmooth extends BlockTerra
     {
 		for(int i = 0; i < 6; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Smooth");
+			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Smooth");
 		}
     }
 	

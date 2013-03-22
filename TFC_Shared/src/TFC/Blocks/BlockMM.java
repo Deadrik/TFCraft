@@ -87,7 +87,7 @@ public class BlockMM extends BlockCollapsable
     {
 		for(int i = 0; i < 6; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Raw");
+			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Raw");
 		}
     }
 

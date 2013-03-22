@@ -58,7 +58,7 @@ public class BlockIgInBrick extends BlockIgInSmooth
 	{
 		for(int i = 0; i < 3; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Brick");
+			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Brick");
 		}
 	}
 }

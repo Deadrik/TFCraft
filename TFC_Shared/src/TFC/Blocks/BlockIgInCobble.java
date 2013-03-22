@@ -97,7 +97,7 @@ public class BlockIgInCobble extends BlockTerra
 	{
 		for(int i = 0; i < 3; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/rocks/"+names[i]+" Cobble");
+			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Cobble");
 		}
 	}
 
