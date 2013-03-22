@@ -53,7 +53,7 @@ public class ItemAnvil extends ItemTerra
 		anvilId = id;
 		req = Areq;
 		setMaxDamage(0);
-		setHasSubtypes(true);
+		//setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMisc);
 		this.setFolder("tools/");
 	}
@@ -74,14 +74,13 @@ public class ItemAnvil extends ItemTerra
 		return i;
 	}
 	
-	@Override
+	/*@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
-	}
-
+	}*/
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
