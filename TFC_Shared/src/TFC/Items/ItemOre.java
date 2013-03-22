@@ -69,7 +69,7 @@ public class ItemOre extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
+		for(int i = 0; i < blockNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -90,8 +90,8 @@ public class ItemOre extends ItemTerra
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-    	if(MetaNames != null)
-    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
+    	if(blockNames != null)
+    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
 		return super.getItemDisplayName(itemstack);
 	}
 	
