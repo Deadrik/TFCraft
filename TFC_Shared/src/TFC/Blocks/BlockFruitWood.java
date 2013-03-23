@@ -82,7 +82,7 @@ public class BlockFruitWood extends BlockTerraContainer
     {
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = registerer.func_94245_a("wood/trees/"+WoodNames[i]+" Wood");
+			icons[i] = registerer.func_94245_a("wood/fruit trees/"+WoodNames[i]+" Wood");
 		}
     }
 

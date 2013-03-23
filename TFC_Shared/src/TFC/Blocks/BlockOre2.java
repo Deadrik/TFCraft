@@ -56,7 +56,7 @@ public class BlockOre2 extends BlockOre
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/ores/"+blockNames[i] + " Ore");
+			icons[i] = iconRegisterer.func_94245_a("ores/"+blockNames[i] + " Ore");
 		}
     }
 
@@ -141,12 +141,6 @@ public class BlockOre2 extends BlockOre
 			return null;
 		}
 	}
-
-    public static String getItemNameDamage(int d) 
-    {
-        String s = blockNames[d-16];
-        return s;
-    }
     
 //    public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) 
 //    {

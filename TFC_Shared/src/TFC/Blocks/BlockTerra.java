@@ -80,7 +80,7 @@ public abstract class BlockTerra extends Block
 	@Override
     public void func_94332_a(IconRegister iconRegisterer)
     {
-    	super.func_94332_a(iconRegisterer);
+    	//super.func_94332_a(iconRegisterer);
     	registerIcon(iconRegisterer);
     }
 	

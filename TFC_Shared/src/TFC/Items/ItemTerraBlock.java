@@ -55,12 +55,12 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-		if(MetaNames != null)
-			return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
-		return super.getItemDisplayName(itemstack);
-	}
+    public String getUnlocalizedName(ItemStack itemstack)
+    {
+    	if(MetaNames != null)
+    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+    	return super.getUnlocalizedName(itemstack);
+    }
 
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 

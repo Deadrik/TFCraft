@@ -103,10 +103,6 @@ public class TFCBiome extends BiomeGenBase
 	public static final TFCBiome MountainsEdge = (new TFCBiome(32)).setColor(HillsColor).setBiomeName("Mountains Edge").setMinMaxHeight(0.4F, 0.8F);
 
 
-	public static final TFCBiome COTEOpen = (new BiomeGenCOTE(50)).setColor(HillsColor).setBiomeName("COTE Open").setMinMaxHeight(0.1F, 0.3F);
-	public static final TFCBiome COTEMountain = (new BiomeGenCOTE(51)).setColor(HillsColor).setBiomeName("COTE Mountain").setMinMaxHeight(0.3F, 1.0F);
-
-
 	protected static WorldGenCustomTallTrees worldGenAshTallTrees;
 	protected static WorldGenCustomTallTrees worldGenAspenTallTrees;
 	protected static WorldGenCustomTallTrees worldGenBirchTallTrees;

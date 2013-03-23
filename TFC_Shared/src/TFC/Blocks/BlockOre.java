@@ -44,6 +44,10 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockOre extends BlockTerra
 {
+	public String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
+	        "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
+	        "Bituminous Coal", "Lignite"};
+	
 	public BlockOre(int i, Material material) {
 		super(i, material);
 	}
@@ -74,7 +78,7 @@ public class BlockOre extends BlockTerra
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("/ores/"+blockNames[i] + " Ore");
+			icons[i] = iconRegisterer.func_94245_a("ores/"+blockNames[i] + " Ore");
 		}
     }
 
@@ -132,13 +136,5 @@ public class BlockOre extends BlockTerra
         }
     }
 	
-	public static String getItemNameDamage(int d) 
-    {
-        String s = blockNames[d];
-        return s;
-    }
 	
-	public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
-        "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
-        "Bituminous Coal", "Lignite"};
 }

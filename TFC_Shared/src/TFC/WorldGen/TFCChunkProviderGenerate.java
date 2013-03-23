@@ -196,7 +196,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 
 		var6.decorate(this.worldObj, this.rand, xCoord, zCoord);
-		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, var6, xCoord + 8, zCoord + 8, 16, 16, this.rand);
+		SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, xCoord + 8, zCoord + 8, 16, 16, this.rand);
 		xCoord += 8;
 		zCoord += 8;
 

@@ -60,7 +60,7 @@ public class BlockSulfur extends BlockTerra
     {
 		for(int i = 0; i < 4; i++)
 		{
-			icons[i] = registerer.func_94245_a("ore/Sulfur Ore"+i);
+			icons[i] = registerer.func_94245_a("ores/Sulfur"+i);
 		}
     }
 	@Override

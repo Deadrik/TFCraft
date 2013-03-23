@@ -41,26 +41,25 @@ import net.minecraft.world.chunk.*;
 
 public class BlockAnvil extends BlockTerraContainer
 {
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-	private int anvilId;
+	private int anvilId = 0;
 
 
 	private Random random = new Random();
+	
 	public BlockAnvil(int i)
 	{
 		super(i, Material.iron);
 	}
+	
+	public BlockAnvil(int i, int offset)
+	{
+		this(i);
+		anvilId = offset;
+	}
+	
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
-
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
 		if(equippedItem != null)
@@ -213,10 +212,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
 		int l = MathHelper.floor_double((double)(entityliving.rotationYaw * 4F / 360F) + 0.5D) & 3;
 		byte byte0 = 0;
 		if(l == 0)//+z
@@ -322,10 +318,10 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
     public void registerIcon(IconRegister registerer)
     {
-		for(int i = 0; i < 8; i++)
+		for(int i = 0; i < (anvilId == 0 ? 8 : 3); i++)
 		{
-			textureMapTop[i] = registerer.func_94245_a("Anvil_"+i);
-			textureMapSide[i] = registerer.func_94245_a("Anvil_"+i);
+			textureMapTop[i] = registerer.func_94245_a("devices/Anvil_" + (i+anvilId) + "_Top");
+			textureMapSide[i] = registerer.func_94245_a("devices/Anvil_" + (i+anvilId) + "_Side");
 		}
     }
 }

@@ -98,7 +98,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	@Override
 	protected void decorate()
 	{
-		this.generateOres();
+		/*this.generateOres();
 		int var1;
 		int var2;
 		int xCoord;
@@ -219,7 +219,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 				new WorldGenLiquidsTFC(Block.lavaMoving.blockID).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
-		}
+		}*/
 	}
 
 	/**

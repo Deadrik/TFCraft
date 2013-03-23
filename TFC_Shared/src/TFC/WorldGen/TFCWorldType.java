@@ -41,8 +41,6 @@ public class TFCWorldType extends WorldType
 	public static BiomeGenBase[] overworldBiomeArray = new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.plains, 
 		TFCBiome.rollingHills, TFCBiome.Mountains};
 	
-	public static BiomeGenBase[] coteBiomeArray = new BiomeGenBase[] {TFCBiome.COTEOpen, TFCBiome.COTEMountain};
-	
 	public TFCWorldType(int par1, String par2Str, int par3) 
 	{
 		super(par1, par2Str, par3);

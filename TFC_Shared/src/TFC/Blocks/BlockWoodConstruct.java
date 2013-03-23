@@ -68,22 +68,8 @@ public class BlockWoodConstruct extends BlockTerraContainer
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return icons[j];
+		return TFCBlocks.Planks.getBlockTextureFromSideAndMetadata(i, j);
 	}
-	
-	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-	
-	Icon[] icons = new Icon[16];
-	
-	@Override
-    public void registerIcon(IconRegister registerer)
-    {
-		for(int i = 0; i < 16; i++)
-		{
-			icons[i] = registerer.func_94245_a("wood/"+WoodNames[i]+" Plank");
-		}
-    }
 
 	@Override
 	public boolean isOpaqueCube()

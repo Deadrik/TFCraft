@@ -1256,7 +1256,7 @@ public class TFCItems
         HCRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCRedSteelIngot",16295), EnumMetalType.REDSTEEL).setUnlocalizedName("HC Red Steel Ingot");
         HCSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCSteelIngot",16296), EnumMetalType.STEEL).setUnlocalizedName("HC Steel Ingot");
 
-        OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setUnlocalizedName("Ore");
+        OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setFolder("ores/").setUnlocalizedName("Ore");
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
         Barrel = new ItemBarrels(TFC_Settings.getIntFor(config, "item", "barrels", 16299)).setUnlocalizedName("Barrel");
         

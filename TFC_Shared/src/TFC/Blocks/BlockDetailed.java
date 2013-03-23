@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -65,6 +66,11 @@ public class BlockDetailed extends BlockPartial
 	{
 		return true;
 	}
+	
+	@Override
+    public void func_94332_a(IconRegister iconRegisterer)
+    {
+    }
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {

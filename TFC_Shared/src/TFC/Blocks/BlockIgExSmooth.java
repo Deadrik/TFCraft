@@ -45,6 +45,7 @@ import net.minecraft.world.gen.feature.*;
 
 public class BlockIgExSmooth extends BlockTerra
 {
+	protected String[] names = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
 	public BlockIgExSmooth(int i) 
 	{
 		super(i, Material.rock);
@@ -79,7 +80,6 @@ public class BlockIgExSmooth extends BlockTerra
 	}
 
 	protected Icon[] icons = new Icon[4];
-	protected String[] names = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
 	
 	@Override
 	public void registerIcon(IconRegister iconRegisterer)

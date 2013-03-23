@@ -99,19 +99,19 @@ public class ItemProPick extends ItemTerra
             {
                 isOre = true;
                 int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
-                oreArray.add(BlockOre.getItemNameDamage(((BlockOre)TFCBlocks.Ore).damageDropped(meta)));
+                oreArray.add(new ItemStack(id,1,meta).getItemName());
             }
             else if(id == TFCBlocks.Ore2.blockID)
             {
                 isOre = true;
                 int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
-                oreArray.add(BlockOre2.getItemNameDamage(((BlockOre2)TFCBlocks.Ore2).damageDropped(meta)));
+                oreArray.add(new ItemStack(id,1,meta).getItemName());
             }
             else if(id == TFCBlocks.Ore3.blockID)
             {
                 isOre = true;
                 int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
-                oreArray.add(BlockOre3.getItemNameDamage(((BlockOre3)TFCBlocks.Ore3).damageDropped(meta)));
+                oreArray.add(new ItemStack(id,1,meta).getItemName());
             }
             //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);          
             for (int i = -12; i < 12 && !isOre; i++)
@@ -127,14 +127,14 @@ public class ItemProPick extends ItemTerra
                         {
                             int meta = world.getBlockMetadata((int)x+i, (int)y+k, (int)z+j);
 
-                            if(!oreArray.contains(BlockOre.getItemNameDamage(((BlockOre)TFCBlocks.Ore).damageDropped(meta))))
+                            if(!oreArray.contains(new ItemStack(oreid,1,meta).getItemName()))
                             {
-                                oreArray.add(BlockOre.getItemNameDamage(((BlockOre)TFCBlocks.Ore).damageDropped(meta)));
+                                oreArray.add(new ItemStack(oreid,1,meta).getItemName());
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(BlockOre.getItemNameDamage(((BlockOre)TFCBlocks.Ore).damageDropped(meta)));
+                                int index = oreArray.indexOf(new ItemStack(oreid,1,meta).getItemName());
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
 
@@ -146,14 +146,14 @@ public class ItemProPick extends ItemTerra
 
                             if(meta != 6)
                             {
-                                if(!oreArray.contains(BlockOre2.getItemNameDamage(((BlockOre2)TFCBlocks.Ore2).damageDropped(meta))))
+                                if(!oreArray.contains(new ItemStack(oreid,1,meta).getItemName()))
                                 {
-                                    oreArray.add(BlockOre2.getItemNameDamage(((BlockOre2)TFCBlocks.Ore2).damageDropped(meta)));
+                                    oreArray.add(new ItemStack(oreid,1,meta).getItemName());
                                     oreNumArray.add(1);
                                 }
                                 else
                                 {
-                                    int index = oreArray.indexOf(BlockOre2.getItemNameDamage(((BlockOre2)TFCBlocks.Ore2).damageDropped(meta)));
+                                    int index = oreArray.indexOf(new ItemStack(oreid,1,meta).getItemName());
                                     oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                                 }
                             }
@@ -162,14 +162,14 @@ public class ItemProPick extends ItemTerra
                         {
                             int meta = world.getBlockMetadata((int)x+i, (int)y+k, (int)z+j);
 
-                            if(!oreArray.contains(BlockOre3.getItemNameDamage(((BlockOre3)TFCBlocks.Ore3).damageDropped(meta))))
+                            if(!oreArray.contains(new ItemStack(oreid,1,meta).getItemName()))
                             {
-                                oreArray.add(BlockOre3.getItemNameDamage(((BlockOre3)TFCBlocks.Ore3).damageDropped(meta)));
+                                oreArray.add(new ItemStack(oreid,1,meta).getItemName());
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(BlockOre3.getItemNameDamage(((BlockOre3)TFCBlocks.Ore3).damageDropped(meta)));
+                                int index = oreArray.indexOf(new ItemStack(oreid,1,meta).getItemName());
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
                         }

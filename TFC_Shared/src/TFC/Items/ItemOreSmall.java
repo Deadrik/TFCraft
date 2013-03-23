@@ -2,6 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.TFCItems;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import cpw.mods.fml.relauncher.Side;
@@ -39,12 +40,6 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemOreSmall extends ItemOre
 {
-    public static String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
-        "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
-        "Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
-        /*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
-        /*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
-
     public ItemOreSmall(int i)
     {
         super(i);
@@ -70,5 +65,11 @@ public class ItemOreSmall extends ItemOre
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
+	}
+	
+	@Override
+	public Icon getIconFromDamage(int meta)
+	{	    
+		return TFCItems.OreChunk.getIconFromDamage(meta);
 	}
 }

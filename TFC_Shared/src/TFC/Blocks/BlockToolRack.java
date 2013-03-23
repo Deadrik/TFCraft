@@ -302,21 +302,12 @@ public class BlockToolRack extends BlockTerraContainer
 	@Override
     public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
+		return TFCBlocks.WoodSupportH.getBlockTexture(par1IBlockAccess, par2, par3, par4, par5);
     }
 
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return icons[par2];
-    }
-    
-	@Override
-    public void registerIcon(IconRegister registerer)
-    {
-		for(int i = 0; i < 16; i++)
-		{
-			icons[i] = registerer.func_94245_a("wood/WoodSheet/WoodSheet"+i);
-		}
+    	return TFCBlocks.WoodSupportH.getBlockTextureFromSideAndMetadata(par1, par2);
     }
 }

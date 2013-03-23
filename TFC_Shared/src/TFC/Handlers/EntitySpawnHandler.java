@@ -2,7 +2,9 @@ package TFC.Handlers;
 
 import java.util.ArrayList;
 
-import TFC.Entities.Mobs.EntitySheepTFC;
+import TFC.Chunkdata.ChunkData;
+import TFC.Chunkdata.ChunkDataManager;
+import TFC.Entities.Mobs.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -34,6 +36,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
+import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
@@ -43,10 +46,25 @@ public class EntitySpawnHandler
 	public void onEntityLivingUpdate(LivingSpawnEvent event) 
 	{
 		EntityLiving entity = event.entityLiving;
-		
+
 		if (entity instanceof EntitySheepTFC)
 		{
 			((EntitySheepTFC)entity).setFleeceColor(EntitySheepTFC.getRandomFleeceColor(entity.worldObj.rand));
+		}
+	}
+
+	@ForgeSubscribe
+	public void onCheckSpawn(LivingSpawnEvent.CheckSpawn event) 
+	{
+		EntityLiving entity = event.entityLiving;
+
+		int x = (int)entity.posX >> 4;
+		int z = (int)entity.posZ >> 4;
+
+		ChunkData data = (ChunkData) ChunkDataManager.chunkmap.get(x + "," + z);
+		if(!(data == null || data.getSpawnProtectionWithUpdate() <= 0))
+		{
+			event.setResult(Result.DENY);
 		}
 	}
 }
