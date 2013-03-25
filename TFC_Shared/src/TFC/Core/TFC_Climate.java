@@ -180,33 +180,33 @@ public class TFC_Climate
 		final float MAXTEMP = 35F;
 		
 		double angle = factor * (Math.PI / 2);
-		
+		double latitudeFactor = Math.cos(angle);
 		switch(month)
 		{
 		case 11:
-			return (float)(MAXTEMP -8.33- (Math.cos(angle)*53));
+			return (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
 		case 0:
-			return (float)(MAXTEMP -6.66- (Math.cos(angle)*46));
+			return (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
 		case 1:
-			return (float)(MAXTEMP -5- (Math.cos(angle)*40));
+			return (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
 		case 2:
-			return (float)(MAXTEMP - 3.33- (Math.cos(angle)*33));
+			return (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
 		case 3:
-			return (float)(MAXTEMP -1.66- (Math.cos(angle)*27)); 
+			return (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
 		case 4:
-			return (float)(MAXTEMP - (Math.cos(angle)*20));
+			return (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
 		case 5:
-			return (float)(MAXTEMP - 1.66 - (Math.cos(angle)*27));
+			return (float)(MAXTEMP - 2.5*latitudeFactor - (latitudeFactor*27));
 		case 6:
-			return (float)(MAXTEMP - 3.33 - (Math.cos(angle)*33));
+			return (float)(MAXTEMP - 5*latitudeFactor - (latitudeFactor*33));
 		case 7:
-			return (float)(MAXTEMP -5 - (Math.cos(angle)*40));
+			return (float)(MAXTEMP -7.5*latitudeFactor - (latitudeFactor*40));
 		case 8:
-			return (float)(MAXTEMP -6.66- (Math.cos(angle)*46));
+			return (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
 		case 9:
-			return (float)(MAXTEMP -8.33 - (Math.cos(angle)*53));
+			return (float)(MAXTEMP -12.5*latitudeFactor - (latitudeFactor*53));
 		case 10:
-			return (float)(MAXTEMP-10 - (Math.cos(angle)*60));
+			return (float)(MAXTEMP-15*latitudeFactor - (latitudeFactor*60));
 		default:
 			return 1;
 		}
