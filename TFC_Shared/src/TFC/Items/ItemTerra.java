@@ -50,11 +50,6 @@ public class ItemTerra extends Item implements ISize
         textureFolder = "";
     }
     
-    public ItemTerra(int id, String tex) 
-    {
-        this(id);
-    }
-    
     @Override
     public int getItemStackLimit()
     {

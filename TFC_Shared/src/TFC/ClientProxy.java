@@ -604,8 +604,8 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("tile.Bellows.name", "Bellows");
 		LR.addStringLocalization("tile.Scribe.name", "Scribing Table");
 		LR.addStringLocalization("item.Ink.name", "Marking");
-		LR.addStringLocalization("item.ClayMold.name", "Clay Mold");
-		LR.addStringLocalization("item.FiredClayMold.name", "Ceramic Mold");
+		LR.addStringLocalization("item.Clay Mold.name", "Clay Mold");
+		LR.addStringLocalization("item.CeramicMold.name", "Ceramic Mold");
 		LR.addStringLocalization("tile.Forge.name", "Forge");
 		LR.addStringLocalization("tile.Bloomery.name", "Bloomery");
 		LR.addStringLocalization("tile.Metallurgy.name", "Metallurgy Table");
@@ -628,8 +628,8 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.KnifePlan.name", "Plan: Knife Blade");
 		LR.addStringLocalization("item.BucketPlan.name", "Plan: Bucket");
 
-		LR.addStringLocalization("item.coke.name", "Coke");
-		LR.addStringLocalization("item.flux.name", "Flux");
+		LR.addStringLocalization("item.Coke.name", "Coke");
+		LR.addStringLocalization("item.Flux.name", "Flux");
 
 		LR.addStringLocalization("tile.SpawnMeter.name", "Protection Meter");
 		LR.addStringLocalization("effect.bleed","Bleeding");
@@ -644,13 +644,13 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.Wool.name", "Wool");
 		LR.addStringLocalization("item.WoolCloth.name", "Wool cloth");
 		LR.addStringLocalization("item.Mortar.name", "Mortar");
-		LR.addStringLocalization("item.LimeWater.name", "Limewater");
+		LR.addStringLocalization("item.Lime Water.name", "Limewater");
 		LR.addStringLocalization("item.Hide.name","Raw Hide");
-		LR.addStringLocalization("item.SoakedHide.name","Soaked Hide");
-		LR.addStringLocalization("item.ScrapedHide.name","Scraped Hide");
-		LR.addStringLocalization("item.PrepHide.name","Prepared Hide");
-		LR.addStringLocalization("item.TFCLeather.name","Leather");
-		LR.addStringLocalization("item.SheepSkin.name","Sheepskin");
+		LR.addStringLocalization("item.Soaked Hide.name","Soaked Hide");
+		LR.addStringLocalization("item.Scraped Hide.name","Scraped Hide");
+		LR.addStringLocalization("item.Prep Hide.name","Prepared Hide");
+		LR.addStringLocalization("item.TFC Leather.name","Leather");
+		LR.addStringLocalization("item.Sheep Skin.name","Sheepskin");
 
 		LR.addStringLocalization("itemGroup.TFCTools", "(TFC) Tools");
 		LR.addStringLocalization("itemGroup.TFCMaterials", "(TFC) Materials");
@@ -1087,11 +1087,10 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("tile.ClayGrass.Gneiss.name", "Clay Grass");
 		LR.addStringLocalization("tile.ClayGrass.Marble.name", "Clay Grass");
 		//peat
-		LR.addStringLocalization("tile.peat.name", "Peat");
+		LR.addStringLocalization("tile.Peat.name", "Peat");
 		LR.addStringLocalization("tile.PeatGrass.name", "Peat Grass");
-		LR.addStringLocalization("item.SulfurPowder.name", "Sulfur Powder");
-		LR.addStringLocalization("item.SaltpeterPowder.name", "Saltpeter");
-		LR.addStringLocalization("item.flintPaxel.name", "Flint Tool");
+		LR.addStringLocalization("item.Sulfur Powder.name", "Sulfur Powder");
+		LR.addStringLocalization("item.Saltpeter Powder.name", "Saltpeter");
 
 		LR.addStringLocalization("item.IgIn Stone Pick.name", "Stone Pickaxe");
 		LR.addStringLocalization("item.IgIn Stone Shovel.name", "Stone Shovel");
@@ -1226,28 +1225,28 @@ public class ClientProxy extends CommonProxy
 		//meltedmetal
 		for(int i= 0; i < Names.length; i++)
 		{
-			LR.addStringLocalization("item.Unshaped"+Names[i]+".name", Names[i] + " Unshaped");
+			LR.addStringLocalization("item.Unshaped "+Names[i]+".name", Names[i] + " Unshaped");
 			LR.addStringLocalization("item."+Names[i]+" Ingot.name", Names[i] + " Ingot");
 			LR.addStringLocalization("item."+Names[i]+" Double Ingot.name", Names[i] + " Double Ingot");
 			LR.addStringLocalization("item."+Names[i]+" Sheet.name", Names[i] + " Sheet");
 			LR.addStringLocalization("item."+Names[i]+" Double Sheet.name", Names[i] + " Double Sheet");
 		}
 
-		LR.addStringLocalization("item.UnshapedHCBlackSteel.name", "Unshaped High Carbon Black Steel");
-		LR.addStringLocalization("item.UnshapedHCBlueSteel.name", "Unshaped High Carbon Blue Steel");
-		LR.addStringLocalization("item.UnshapedHCRedSteel.name", "Unshaped High Carbon Red Steel");
-		LR.addStringLocalization("item.UnshapedHCSteel.name", "Unshaped High Carbon Steel");
-		LR.addStringLocalization("item.UnshapedWeakSteel.name", "Unshaped Weak Steel");
-		LR.addStringLocalization("item.UnshapedWeakBlueSteel.name", "Unshaped Weak Blue Steel");
-		LR.addStringLocalization("item.UnshapedWeakRedSteel.name", "Unshaped Weak Red Steel");
+		LR.addStringLocalization("item.Unshaped HC Black Steel.name", "Unshaped High Carbon Black Steel");
+		LR.addStringLocalization("item.Unshaped HC Blue Steel.name", "Unshaped High Carbon Blue Steel");
+		LR.addStringLocalization("item.Unshaped HC Red Steel.name", "Unshaped High Carbon Red Steel");
+		LR.addStringLocalization("item.Unshaped HC Steel.name", "Unshaped High Carbon Steel");
+		LR.addStringLocalization("item.Unshaped Weak Steel.name", "Unshaped Weak Steel");
+		LR.addStringLocalization("item.Unshaped Weak Blue Steel.name", "Unshaped Weak Blue Steel");
+		LR.addStringLocalization("item.Unshaped Weak Red Steel.name", "Unshaped Weak Red Steel");
 
-		LR.addStringLocalization("item.HCBlackSteelIngot.name", "High Carbon Black Steel Ingot");
-		LR.addStringLocalization("item.HCBlueSteelIngot.name", "High Carbon Blue Steel Ingot");
-		LR.addStringLocalization("item.HCRedSteelIngot.name", "High Carbon Red Steel Ingot");
-		LR.addStringLocalization("item.HCSteelIngot.name", "High Carbon Steel Ingot");
-		LR.addStringLocalization("item.WeakSteelIngot.name", "Weak Steel Ingot");
-		LR.addStringLocalization("item.WeakBlueSteelIngot.name", "Weak Blue Steel Ingot");
-		LR.addStringLocalization("item.WeakRedSteelIngot.name", "Weak Red Steel Ingot");
+		LR.addStringLocalization("item.HC Black Steel Ingot.name", "High Carbon Black Steel Ingot");
+		LR.addStringLocalization("item.HC Blue Steel Ingot.name", "High Carbon Blue Steel Ingot");
+		LR.addStringLocalization("item.HC Red Steel Ingot.name", "High Carbon Red Steel Ingot");
+		LR.addStringLocalization("item.HC Steel Ingot.name", "High Carbon Steel Ingot");
+		LR.addStringLocalization("item.Weak Steel Ingot.name", "Weak Steel Ingot");
+		LR.addStringLocalization("item.Weak Blue Steel Ingot.name", "Weak Blue Steel Ingot");
+		LR.addStringLocalization("item.Weak Red Steel Ingot.name", "Weak Red Steel Ingot");
 	}
 
 	public boolean getGraphicsLevel()

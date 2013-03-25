@@ -55,6 +55,7 @@ public class ItemIngot extends ItemTerra
 		this.setFolder("ingots/");
 	}
 	
+	@Override
 	public void registerIcon(IconRegister registerer)
     {
 		this.iconIndex = registerer.func_94245_a(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
@@ -70,7 +71,7 @@ public class ItemIngot extends ItemTerra
 	{
 		return EnumWeight.MEDIUM;
 	}
-
+	
 	public ItemIngot setSize(EnumSize s)
 	{
 		size = s;

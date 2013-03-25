@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -44,6 +45,12 @@ public class ItemMeltedMetal extends ItemTerra
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 		this.setFolder("ingots/");
 	}	
+	
+	@Override
+	public void registerIcon(IconRegister registerer)
+    {
+		this.iconIndex = registerer.func_94245_a(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+    }
 	
 	@Override
 	public EnumWeight getWeight() 

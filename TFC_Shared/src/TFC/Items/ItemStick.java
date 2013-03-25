@@ -43,7 +43,7 @@ public class ItemStick extends ItemTerra
 
     public ItemStick(int i)
     {
-        super(i, "/gui/items.png");
+        super(i);
         setMaxDamage(0);
         setHasSubtypes(true);
         this.setCreativeTab(CreativeTabs.tabMaterials);

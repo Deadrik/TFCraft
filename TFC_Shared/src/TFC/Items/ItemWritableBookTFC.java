@@ -24,7 +24,7 @@ public class ItemWritableBookTFC extends ItemTerra
         stackable = false;
     }
     public ItemWritableBookTFC(int par1,String tex){
-    	super(par1,tex);
+    	super(par1);
     	stackable = false;
     }
     

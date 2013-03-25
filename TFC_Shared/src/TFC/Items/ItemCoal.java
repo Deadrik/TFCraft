@@ -40,7 +40,7 @@ import TFC.Enums.EnumWeight;
 public class ItemCoal extends ItemTerra {
 
 	public ItemCoal(int id) {
-		super(id, "/gui/items.png");
+		super(id);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);

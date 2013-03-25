@@ -49,6 +49,8 @@ public class ItemTerraFood extends ItemFood implements ISize
 	private EnumSize size = EnumSize.SMALL;
 	private EnumWeight weight = EnumWeight.LIGHT;
 	public int Tier = 0;
+	
+	public String folder = "food/";
 
 	public ItemTerraFood(int id, int healAmt) 
 	{
@@ -79,6 +81,12 @@ public class ItemTerraFood extends ItemFood implements ISize
 		Tier = tier;
 		return this;
 	}
+	
+	public ItemTerraFood setFolder(String s)
+	{
+		folder = s;
+		return this;
+	}
 
 	
 	/***
@@ -90,7 +98,7 @@ public class ItemTerraFood extends ItemFood implements ISize
     @Override
     public void func_94581_a(IconRegister registerer)
     {
-		this.iconIndex = registerer.func_94245_a("food/"+this.getUnlocalizedName().replace("item.", ""));
+		this.iconIndex = registerer.func_94245_a(folder+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	public static void addFoodTempInformation(ItemStack is, List arraylist)

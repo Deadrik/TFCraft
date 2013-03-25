@@ -38,7 +38,7 @@ public class ItemBackpack extends ItemTerra
 {
 	public ItemBackpack(int id) 
 	{
-		super(id, "/bioxx/terrasprites.png");
+		super(id);
 	}
 	
 	@Override

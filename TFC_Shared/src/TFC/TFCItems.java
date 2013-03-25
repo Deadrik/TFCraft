@@ -1010,16 +1010,16 @@ public class TFCItems
         minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setUnlocalizedName("minecartChest");
         
         Item.itemsList[5+256] = null; Item.itemsList[5+256] = (new ItemCustomBow(5)).setUnlocalizedName("bow");
-        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerra(63,"/gui/items.png").setUnlocalizedName("porkchopRaw");
-        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 35, 0.8F, true, 38).setUnlocalizedName("porkchopCooked");
-        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerra(93, "/gui/items.png").setUnlocalizedName("fishRaw");
+        Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
+        Item.itemsList[64+256] = null; Item.itemsList[64+256] = new ItemTerraFood(64, 35, 0.8F, true, 38).setFolder("").setUnlocalizedName("porkchopCooked");
+        Item.itemsList[93+256] = null; Item.itemsList[93+256] = new ItemTerra(93).setUnlocalizedName("fishRaw");
         Item.itemsList[94+256] = null; Item.itemsList[94+256] = new ItemTerraFood(94, 30, 0.6F, true, 39).setUnlocalizedName("fishCooked");
-        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerra(107, "/gui/items.png").setUnlocalizedName("beefRaw");
+        Item.itemsList[107+256] = null; Item.itemsList[107+256] = new ItemTerra(107).setUnlocalizedName("beefRaw");
         Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 40, 0.8F, true, 40).setUnlocalizedName("beefCooked");
-        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerra(109,"/gui/items.png").setUnlocalizedName("chickenRaw");
+        Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
         Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 35, 0.6F, true, 41).setUnlocalizedName("chickenCooked");
         Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setUnlocalizedName("bread");
-        Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88,"/gui/items.png")).setUnlocalizedName("egg");
+        Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88)).setUnlocalizedName("egg");
         Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder");
         Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (ItemCustomPotion)(new ItemCustomPotion(117)).setUnlocalizedName("potion");
         
@@ -1280,8 +1280,6 @@ public class TFCItems
         boneMMHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","boneMMHoe",16317),MMToolMaterial).setUnlocalizedName("Bone MM Stone Hoe").setMaxDamage(MMStoneUses);
         Javelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","javelin",16318)).setUnlocalizedName("javelin");
 
-        terraSlag = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraSlag",16349),"/bioxx/terrasprites.png").setUnlocalizedName("terraSlag");
-
         BismuthUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBismuth",16350)).setUnlocalizedName("Bismuth Unshaped");
         BismuthBronzeUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBismuthBronze",16351)).setUnlocalizedName("Bismuth Bronze Unshaped");
         BlackBronzeUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBlackBronze",16352)).setUnlocalizedName("Black Bronze Unshaped");
@@ -1320,7 +1318,7 @@ public class TFCItems
         TinHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraTinHammer",16383),TFCItems.TinToolMaterial).setUnlocalizedName("Tin Hammer").setMaxDamage(TFCItems.TinUses);
         ZincHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraZincHammer",16384),TFCItems.ZincToolMaterial).setUnlocalizedName("Zinc Hammer").setMaxDamage(TFCItems.ZincUses);
 
-        Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391),"/bioxx/terrasprites.png").setUnlocalizedName("Ink");
+        Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391)).setUnlocalizedName("Ink");
 
         BlackSteelAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBlackSteelAnvilItem",16399), 5, AnvilReq.BLACKSTEEL).setUnlocalizedName("Black Steel Anvil Item");
         BlueSteelAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBlueSteelAnvilItem",16400), 7, AnvilReq.BLUESTEEL).setUnlocalizedName("Blue Steel Anvil Item");
@@ -1333,8 +1331,8 @@ public class TFCItems
         BellowsItem = new ItemBellows(TFC_Settings.getIntFor(config,"item","terraBellowsItem",16406)).setUnlocalizedName("Bellows");
 
         FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","terraFireStarter",16407)).setUnlocalizedName("Firestarter");
-        ClayMold = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraClayMold",16408),"/bioxx/terrasprites.png").setUnlocalizedName("Clay Mold");
-        CeramicMold = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraFiredClayMold",16409),"/bioxx/terrasprites.png").setUnlocalizedName("Ceramic Mold");
+        ClayMold = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraClayMold",16408)).setUnlocalizedName("Clay Mold");
+        CeramicMold = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraFiredClayMold",16409)).setUnlocalizedName("Ceramic Mold");
         //Tool heads
         BismuthPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthPickaxeHead",16500)).setUnlocalizedName("Bismuth Pick Head");
         BismuthBronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzePickaxeHead",16501)).setUnlocalizedName("Bismuth Bronze Pick Head");
@@ -1470,7 +1468,7 @@ public class TFCItems
         HCRedSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCRedSteel",16622)).setUnlocalizedName("HC Red Steel Unshaped");
         WeakSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedWeakSteel",16623)).setUnlocalizedName("Weak Steel Unshaped");
         HCSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCSteel",16624)).setUnlocalizedName("HC Steel Unshaped");
-        Coke = ((ItemTerra) new ItemTerra(TFC_Settings.getIntFor(config,"item","Coke",16625)).setUnlocalizedName("coke"));
+        Coke = ((ItemTerra) new ItemTerra(TFC_Settings.getIntFor(config,"item","Coke",16625)).setUnlocalizedName("Coke"));
 
         BismuthProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthProPickHead",16626)).setUnlocalizedName("Bismuth ProPick Head");
         BismuthBronzeProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeProPickHead",16627)).setUnlocalizedName("Bismuth Bronze ProPick Head");
@@ -1486,10 +1484,10 @@ public class TFCItems
         TinProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinProPickHead",16637)).setUnlocalizedName("Tin ProPick Head");
         ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setUnlocalizedName("Zinc ProPick Head");
         
-        Flux = ((ItemTerra) new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setUnlocalizedName("flux"));
-        BismuthBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setUnlocalizedName("BismuthBronzeAnvilItem");
-        BlackBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setUnlocalizedName("BlackBronzeAnvilItem");
-        RoseGoldAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","RoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setUnlocalizedName("RoseGoldAnvilItem");
+        Flux = ((ItemTerra) new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setUnlocalizedName("Flux"));
+        BismuthBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setUnlocalizedName("Bismuth Bronze Anvil Item");
+        BlackBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setUnlocalizedName("Black Bronze Anvil Item");
+        RoseGoldAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","RoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setUnlocalizedName("Rose Gold Anvil Item");
 
         /**
          * Scythe
@@ -1588,13 +1586,13 @@ public class TFCItems
         SmallOreChunk = new ItemOreSmall(TFC_Settings.getIntFor(config,"item","SmallOreChunk",num++)).setUnlocalizedName("Small Ore");
         SinglePlank = new ItemPlank(TFC_Settings.getIntFor(config,"item","SinglePlank",num++)).setUnlocalizedName("SinglePlank");
         
-        RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketEmpty",num++), 0)).setUnlocalizedName("RedSteelBucketEmpty");
-        RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketWater",num++), Block.waterMoving.blockID)).setUnlocalizedName("RedSteelBucketWater");
+        RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketEmpty",num++), 0)).setUnlocalizedName("Red Steel Bucket Empty");
+        RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketWater",num++), Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Water");
         
-        BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketEmpty",num++), 0)).setUnlocalizedName("BlueSteelBucketEmpty");
-        BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketLava",num++), Block.lavaMoving.blockID)).setUnlocalizedName("BlueSteelBucketLava");
+        BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketEmpty",num++), 0)).setUnlocalizedName("Blue Steel Bucket Empty");
+        BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketLava",num++), Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava");
         
-        Quern = new ItemTerra(TFC_Settings.getIntFor(config,"item","Quern",num++),"/bioxx/terrasprites.png").setUnlocalizedName("Quern").setMaxDamage(250);
+        Quern = new ItemTerra(TFC_Settings.getIntFor(config,"item","Quern",num++)).setUnlocalizedName("Quern").setMaxDamage(250);
         FlintSteel = new ItemFlintSteel(TFC_Settings.getIntFor(config,"item","FlintSteel",num++)).setUnlocalizedName("flintAndSteel").setMaxDamage(200);
         
         DoorOak = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorOak", num++), 0).setUnlocalizedName("Oak Door");
@@ -1616,12 +1614,12 @@ public class TFCItems
 		
 		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
 		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++),"Fix Me I'm Broken").setUnlocalizedName("book");
-		WoolYarn = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolYarn", num++),"/bioxx/terrasprites2.png").setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
-		Wool = new ItemTerra(TFC_Settings.getIntFor(config,"item","Wool",num++),"/bioxx/terrasprites2.png").setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
-		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++),"/bioxx/terrasprites2.png").setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
+		WoolYarn = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolYarn", num++)).setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
+		Wool = new ItemTerra(TFC_Settings.getIntFor(config,"item","Wool",num++)).setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
+		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++)).setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
 		Spindle = new ItemSpindle(TFC_Settings.getIntFor(config,"item","Spindle",num++),SedToolMaterial).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
 		ClaySpindle = new ItemTerra(TFC_Settings.getIntFor(config, "item", "ClaySpindle", num++)).setFolder("tools/").setUnlocalizedName("Clay Spindle").setCreativeTab(TFCTabs.TFCMaterials);
-		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++),"/bioxx/terratoolheads.png").setFolder("tools/").setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCMaterials);
+		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setFolder("tools/").setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCMaterials);
 		StoneBrick = ((ItemTerra) new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++)).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),0).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
@@ -1631,7 +1629,7 @@ public class TFCItems
 		PrepHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","PrepHide",num++)).setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		TerraLeather = new ItemTerra(TFC_Settings.getIntFor(config,"item","TFCLeather",num++)).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
 		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++)).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
-		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++),"/bioxx/FoodSprites.png").setFolder("food/").setUnlocalizedName("Mutton Raw");
+		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++)).setFolder("food/").setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
         FlatLeather = ((ItemTerra) new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         
