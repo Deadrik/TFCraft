@@ -1,11 +1,14 @@
 package TFC.Items;
 
+import java.util.List;
+
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -62,6 +65,28 @@ public class ItemFlatRock extends ItemTerra
     {
         return false;
     }
+    
+    @Override
+	public Icon getIconFromDamage(int meta)
+	{        
+		return icons[meta];
+	}
+	
+	Icon[] icons = new Icon[blockNames.length];
+	@Override
+	public void registerIcon(IconRegister registerer)
+    {
+		for(int i = 0; i < blockNames.length; i++)
+			registerer.func_94245_a("rocks/"+blockNames[i]+" Raw");
+    }
+
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		for(int i = 0; i < blockNames.length; i++) {
+			list.add(new ItemStack(this,1,i));
+		}
+	}
 
     /*public Icon getIconFromDamage(int i)
     {
