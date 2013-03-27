@@ -4,13 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import TFC.TFCBlocks;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityTerraJavelin;
 import TFC.Food.FoodStatsTFC;
 import TFC.Handlers.PacketHandler;
+import TFC.TileEntities.TileEntityFireEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -51,6 +54,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	public int lastChunkX;
 	public int lastChunkY;
 	public int lastChunkZ;
+	public double bodyTemp;
 	
 	//Last time the spawn protection was updated
 	private long spawnProtectionTimer = -1;
@@ -60,6 +64,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	public TFC_PlayerServer(ServerPlayerAPI var1) {
 		super(var1);
 		foodstats = new FoodStatsTFC();
+		bodyTemp = 37;
 	}
 	
 	@Override
@@ -159,6 +164,26 @@ public class TFC_PlayerServer extends ServerPlayerBase
 				this.player.setSprinting(false);
 			}
 		}
+		TileEntityFireEntity te = null;
+		for (int i = -10;i<10;i++){
+			for(int j = -2; j < 3;j++){
+				for(int k = -10;k<10;k++){
+					if(player.worldObj.getBlockId((int)player.posX+i,(int)player.posY+j,(int)player.posZ+k)==TFCBlocks.Firepit.blockID){
+						te = (TileEntityFireEntity)player.worldObj.getBlockTileEntity((int)player.posX+i, (int)player.posY+j, (int)player.posZ+k);
+					}
+				}
+			}
+		}
+		double netBodyTemp = 0;
+		double distanceTE = 0;
+		if (te!=null)distanceTE = Math.sqrt(Math.pow(player.posX-te.xCoord,2)+Math.pow(player.posY-te.yCoord,2)+Math.pow(player.posZ-te.zCoord,2));
+		float temp =TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
+		if(temp<25)netBodyTemp-= (12*(te!=null&&te.fireTemperature>100?Math.pow(1d/(11-distanceTE),3):1))/(60*20*10*(Math.pow(5, (double)temp/10)));
+		else if(temp>=30)netBodyTemp+=((temp+7)/bodyTemp)/(60*3*20);
+		netBodyTemp+=0.000017889*(player.isSprinting()?12:1)*(player.inventory.armorInventory[3]!=null &&player.inventory.armorInventory[3].getItem() ==Item.helmetLeather?2.24:1)*(player.inventory.armorInventory[2]!=null &&player.inventory.armorInventory[2].getItem() ==Item.plateLeather?2.24:1)
+				*(player.inventory.armorInventory[1]!=null &&player.inventory.armorInventory[1].getItem() ==Item.legsLeather?2.24:1)*(player.inventory.armorInventory[0]!=null &&player.inventory.armorInventory[0].getItem() ==Item.bootsLeather?2.24:1);
+		bodyTemp+=netBodyTemp;
+		if(temp<25)bodyTemp=Math.max(temp, bodyTemp);
 	}
 
 	@Override
