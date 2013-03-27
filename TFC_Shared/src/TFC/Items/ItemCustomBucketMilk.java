@@ -43,6 +43,7 @@ public class ItemCustomBucketMilk extends ItemTerra
         super(par1);
         this.setMaxStackSize(1);
         setCreativeTab(TFCTabs.TFCTools);
+        this.setFolder("tools/");
     }
 
     public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)

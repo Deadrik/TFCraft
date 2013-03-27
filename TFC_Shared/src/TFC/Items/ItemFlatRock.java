@@ -40,19 +40,19 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemFlatRock extends ItemTerra
 {
-
+	Icon[] icons;
     public ItemFlatRock(int id) 
     {
         super(id);
         this.hasSubtypes = true;
         this.setMaxDamage(0);
         this.maxStackSize = 25;
+        MetaNames = new String[]{"Granite", "Diorite", "Gabbro", 
+                "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
+                "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
+                "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+        icons = new Icon[MetaNames.length];
     }
-
-    public static String[] blockNames = {"Granite", "Diorite", "Gabbro", 
-        "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-        "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
-        "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
     
     @Override
     public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
@@ -72,18 +72,18 @@ public class ItemFlatRock extends ItemTerra
 		return icons[meta];
 	}
 	
-	Icon[] icons = new Icon[blockNames.length];
+	
 	@Override
 	public void registerIcon(IconRegister registerer)
     {
-		for(int i = 0; i < blockNames.length; i++)
-			registerer.func_94245_a("rocks/"+blockNames[i]+" Raw");
+		for(int i = 0; i < MetaNames.length; i++)
+			registerer.func_94245_a("../blocks/rocks/"+MetaNames[i]+" Raw");
     }
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < blockNames.length; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

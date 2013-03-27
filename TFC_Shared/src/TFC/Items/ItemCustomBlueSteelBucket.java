@@ -49,6 +49,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 	{
 		super(par1);
 		this.isFull = par2;
+		this.setFolder("tools/");
 	}
 
 	@Override

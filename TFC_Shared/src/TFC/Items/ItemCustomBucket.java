@@ -52,6 +52,7 @@ public class ItemCustomBucket extends ItemTerra
         super(par1);
         this.isFull = par2;
         setCreativeTab(TFCTabs.TFCTools);
+        this.setFolder("tools/");
     }
     
     @Override
