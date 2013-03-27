@@ -165,7 +165,10 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     {
         if (!world.isRemote)
         {
-            if (world.getBlockLightValue(i, j + 1, k) < 4 && Block.lightOpacity[world.getBlockId(i, j + 1, k)] > 2)
+        	if(world.getBlockId(i, j+1, k)==Block.snow.blockID){
+        		world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDryGrass(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 2);
+        	}
+        	else if (world.getBlockLightValue(i, j + 1, k) < 4 && Block.lightOpacity[world.getBlockId(i, j + 1, k)] > 2)
             {
                 world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 2);
             }
@@ -235,7 +238,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
                 	int meta = TFC_Core.getSoilMetaFromStone(rock1[0], rock1[1]);
                 	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 2);
                 }
-                else if(TFC_Core.isGrass(id) && TFC_Core.isDryGrass(id) && nearWater)
+                else if(TFC_Core.isGrass(id) && TFC_Core.isDryGrass(id) && (nearWater||rain>=500)&&world.getBlockId(i, j+1, k)!=Block.snow.blockID)
                 {
                 	int meta = TFC_Core.getSoilMetaFromStone(rock1[0], rock1[1]);
                 	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 2);

@@ -1823,19 +1823,19 @@ public class TFCItems
     
     public static void SetupArmor(int num)
     {
-    	BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 20, new int[] {2,4,3,2}, 1);
-		BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 40, new int[] {4,6,5,4}, 1);
-		BlackBronzeArmorMaterial = EnumHelper.addArmorMaterial("BlackBronze", 40, new int[] {4,6,5,4}, 1);
-		BlackSteelArmorMaterial = EnumHelper.addArmorMaterial("BlackSteel", 70, new int[] {6,8,7,6}, 1);
-		BlueSteelArmorMaterial = EnumHelper.addArmorMaterial("BlueSteel", 80, new int[] {7,8,8,7}, 1);
-		BronzeArmorMaterial = EnumHelper.addArmorMaterial("Bronze", 42, new int[] {4,6,5,4}, 1);
-		CopperArmorMaterial = EnumHelper.addArmorMaterial("Copper", 30, new int[] {3,5,4,3}, 1);
-		IronArmorMaterial = EnumHelper.addArmorMaterial("Iron", 50, new int[] {5,7,6,5}, 1);
-		RedSteelArmorMaterial = EnumHelper.addArmorMaterial("RedSteel", 80, new int[] {7,8,8,7}, 1);
-		RoseGoldArmorMaterial = EnumHelper.addArmorMaterial("RoseGold", 40, new int[] {4,6,5,4}, 1);
-		SteelArmorMaterial = EnumHelper.addArmorMaterial("Steel", 60, new int[] {6,8,7,6}, 1);
-		TinArmorMaterial = EnumHelper.addArmorMaterial("Tin", 20, new int[] {2,4,3,2}, 1);
-		ZincArmorMaterial = EnumHelper.addArmorMaterial("Zinc", 20, new int[] {2,4,3,2}, 1);
+    	BismuthArmorMaterial = EnumHelper.addArmorMaterial("Bismuth", 200, new int[] {2,4,3,2}, 1);
+		BismuthBronzeArmorMaterial = EnumHelper.addArmorMaterial("BismuthBronze", 400, new int[] {4,6,5,4}, 1);
+		BlackBronzeArmorMaterial = EnumHelper.addArmorMaterial("BlackBronze", 400, new int[] {4,6,5,4}, 1);
+		BlackSteelArmorMaterial = EnumHelper.addArmorMaterial("BlackSteel", 700, new int[] {6,8,7,6}, 1);
+		BlueSteelArmorMaterial = EnumHelper.addArmorMaterial("BlueSteel", 800, new int[] {7,8,8,7}, 1);
+		BronzeArmorMaterial = EnumHelper.addArmorMaterial("Bronze", 420, new int[] {4,6,5,4}, 1);
+		CopperArmorMaterial = EnumHelper.addArmorMaterial("Copper", 300, new int[] {3,5,4,3}, 1);
+		IronArmorMaterial = EnumHelper.addArmorMaterial("Iron", 500, new int[] {5,7,6,5}, 1);
+		RedSteelArmorMaterial = EnumHelper.addArmorMaterial("RedSteel", 800, new int[] {7,8,8,7}, 1);
+		RoseGoldArmorMaterial = EnumHelper.addArmorMaterial("RoseGold", 400, new int[] {4,6,5,4}, 1);
+		SteelArmorMaterial = EnumHelper.addArmorMaterial("Steel", 600, new int[] {6,8,7,6}, 1);
+		TinArmorMaterial = EnumHelper.addArmorMaterial("Tin", 200, new int[] {2,4,3,2}, 1);
+		ZincArmorMaterial = EnumHelper.addArmorMaterial("Zinc", 200, new int[] {2,4,3,2}, 1);
 		
     	String[] Names = {"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Rose Gold", "Steel", "Tin", "Zinc"};
     	String[] NamesNS = {"Bismuth", "BismuthBronze", "BlackBronze", "BlackSteel", "BlueSteel", "Bronze", "Copper", "WroughtIron", "RedSteel", "RoseGold", "Steel", "Tin", "Zinc"};
