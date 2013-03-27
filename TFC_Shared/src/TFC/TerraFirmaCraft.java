@@ -213,5 +213,6 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new GetTreesCommand());
 		evt.registerServerCommand(new GetRocksCommand());
 		evt.registerServerCommand(new GetSpawnProtectionCommand());
+		evt.registerServerCommand(new SetPlayerStatsCommand());
 	}	
 }
