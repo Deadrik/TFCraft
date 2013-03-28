@@ -1,48 +1,18 @@
 package TFC.WorldGen;
 
-import java.util.List;
-import java.util.Random;
-
-import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Core;
-import net.minecraft.src.ModLoader;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
+import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Settings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCProvider extends WorldProvider
 {	
@@ -73,8 +43,8 @@ public class TFCProvider extends WorldProvider
 	 */
 	public float calculateCelestialAngle(long par1, float par3)
 	{
-		int var4 = (int)(par1 % (long)TFC_Settings.dayLength);
-		float var5 = ((float)var4 + par3) / (float)TFC_Settings.dayLength - 0.25F;
+		int var4 = (int)(par1 % TFC_Settings.dayLength);
+		float var5 = (var4 + par3) / TFC_Settings.dayLength - 0.25F;
 
 		if (var5 < 0.0F)
 		{
@@ -87,7 +57,7 @@ public class TFCProvider extends WorldProvider
 		}
 
 		float var6 = var5;
-		var5 = 1.0F - (float)((Math.cos((double)var5 * Math.PI) + 1.0D) / 2.0D);
+		var5 = 1.0F - (float)((Math.cos(var5 * Math.PI) + 1.0D) / 2.0D);
 		var5 = var6 + (var5 - var6) / 3.0F;
 		return var5;
 	}
@@ -96,7 +66,7 @@ public class TFCProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public int getMoonPhase(long par1)
 	{
-		return (int)(par1 / (long)TFC_Settings.dayLength) % 8;
+		return (int)(par1 / TFC_Settings.dayLength) % 8;
 	}
 
 	@Override
@@ -124,7 +94,7 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public ChunkCoordinates getSpawnPoint()
     {
-		if (!canRespawnHere())
+		/*if (!canRespawnHere())
 		{
 			return new ChunkCoordinates(0, worldObj.getHeightValue(0, 0), 0);
 		}
@@ -176,7 +146,9 @@ public class TFCProvider extends WorldProvider
 			worldObj.getWorldInfo().setSpawnPosition(var6, worldObj.getHeightValue(var6, var8), var8);
 			
 			return new ChunkCoordinates(var6, worldObj.getHeightValue(var6, var8), var8);
-		}
+		}*/
+		WorldInfo info = worldObj.getWorldInfo();
+        return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
     }
 	
 	@Override

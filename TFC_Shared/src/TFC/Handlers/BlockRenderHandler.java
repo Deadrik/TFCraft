@@ -1,41 +1,19 @@
 package TFC.Handlers;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
-import TFC.Blocks.BlockIngotPile;
 import TFC.Render.TFC_CoreRender;
-import TFC.Render.Blocks.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import TFC.Render.Blocks.RenderAnvil;
+import TFC.Render.Blocks.RenderCrop;
+import TFC.Render.Blocks.RenderDetailed;
+import TFC.Render.Blocks.RenderFluids;
+import TFC.Render.Blocks.RenderFoodPrep;
+import TFC.Render.Blocks.RenderGrass;
+import TFC.Render.Blocks.RenderSuperDetailed;
+import TFC.Render.Blocks.RenderToolRack;
+import TFC.Render.Blocks.RenderWoodConstruct;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BlockRenderHandler implements ISimpleBlockRenderingHandler 
@@ -60,12 +38,16 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return TFC_CoreRender.RenderWoodSupportBeamV(block, i, j, k, renderer);
         }
+        else if (modelId == TFCBlocks.grassRenderId)
+        {
+            return RenderGrass.Render(block, i, j, k, renderer);
+        }
         else if (modelId == TFCBlocks.oreRenderId)
         {
             int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
+            float var6 = (var5 >> 16 & 255) / 255.0F;
+            float var7 = (var5 >> 8 & 255) / 255.0F;
+            float var8 = (var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderOre(block, i, j, k,  var6, var7, var8, renderer, world);
         }
         else if (modelId == TFCBlocks.looseRockRenderId)
@@ -111,9 +93,9 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         else if (modelId == TFCBlocks.leavesFruitRenderId)
         {
             int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
+            float var6 = (var5 >> 16 & 255) / 255.0F;
+            float var7 = (var5 >> 8 & 255) / 255.0F;
+            float var8 = (var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, renderer);
         }
         else if (modelId == TFCBlocks.toolRackRenderId)
@@ -136,6 +118,14 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderCrop.render(block, i, j, k, renderer);
         }
+        /*else if (modelId == TFCBlocks.leavesRenderId)
+        {
+            int var5 = block.colorMultiplier(world, i, j, k);
+            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
+            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
+            float var8 = (float)(var5 & 255) / 255.0F;
+            return RenderLeaves.renderLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderer, ModLoader.getMinecraftInstance().isFancyGraphicsEnabled(), true);
+        }*/
         else if (modelId == TFCBlocks.detailedRenderId)
         {
             return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);

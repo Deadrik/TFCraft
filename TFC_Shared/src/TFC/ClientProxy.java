@@ -1,80 +1,136 @@
 package TFC;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.model.ModelSquid;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
+import net.minecraft.client.renderer.entity.RenderArrow;
+import net.minecraft.client.renderer.entity.RenderBlaze;
+import net.minecraft.client.renderer.entity.RenderEnderman;
+import net.minecraft.client.renderer.entity.RenderGhast;
+import net.minecraft.client.renderer.entity.RenderIronGolem;
+import net.minecraft.client.renderer.entity.RenderSilverfish;
+import net.minecraft.client.renderer.entity.RenderSkeleton;
+import net.minecraft.client.renderer.entity.RenderSlime;
+import net.minecraft.client.renderer.entity.RenderSpider;
+import net.minecraft.client.renderer.entity.RenderSquid;
+import net.minecraft.client.renderer.entity.RenderZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
-import bioxx.importers.WavefrontObject;
-
-import TFC.*;
+import net.minecraft.src.PlayerAPI;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.KeyBindings;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Textures;
 import TFC.Core.TFC_Time;
-import TFC.Core.TFC_Settings;
-import TFC.Core.Player.*;
-import TFC.Entities.*;
-import TFC.Entities.Mobs.*;
+import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Player.TFC_PlayerClient;
+import TFC.Entities.EntityArrowTFC;
+import TFC.Entities.EntityCustomMinecart;
+import TFC.Entities.EntityFallingDirt;
+import TFC.Entities.EntityFallingStone;
+import TFC.Entities.EntityTerraJavelin;
+import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntityBlazeTFC;
+import TFC.Entities.Mobs.EntityCaveSpiderTFC;
+import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntityDeer;
+import TFC.Entities.Mobs.EntityEndermanTFC;
+import TFC.Entities.Mobs.EntityGhastTFC;
+import TFC.Entities.Mobs.EntityIronGolemTFC;
+import TFC.Entities.Mobs.EntityPigTFC;
+import TFC.Entities.Mobs.EntityPigZombieTFC;
+import TFC.Entities.Mobs.EntitySheepTFC;
+import TFC.Entities.Mobs.EntitySilverfishTFC;
+import TFC.Entities.Mobs.EntitySkeletonTFC;
+import TFC.Entities.Mobs.EntitySlimeTFC;
+import TFC.Entities.Mobs.EntitySpiderTFC;
+import TFC.Entities.Mobs.EntitySquidTFC;
+import TFC.Entities.Mobs.EntityWolfTFC;
+import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.Enums.EnumTree;
-import TFC.GUI.*;
-import TFC.Handlers.*;
-import TFC.Items.*;
-import TFC.Render.*;
+import TFC.GUI.GuiBarrel;
+import TFC.GUI.GuiBlueprint;
+import TFC.GUI.GuiCalendar;
+import TFC.GUI.GuiChestTFC;
+import TFC.GUI.GuiFoodPrep;
+import TFC.GUI.GuiHUD;
+import TFC.GUI.GuiInventoryTFC;
+import TFC.GUI.GuiKnapping;
+import TFC.GUI.GuiLeatherWorking;
+import TFC.GUI.GuiQuern;
+import TFC.GUI.GuiTerraAnvil;
+import TFC.GUI.GuiTerraBloomery;
+import TFC.GUI.GuiTerraFirepit;
+import TFC.GUI.GuiTerraForge;
+import TFC.GUI.GuiTerraLogPile;
+import TFC.GUI.GuiTerraMetallurgy;
+import TFC.GUI.GuiTerraScribe;
+import TFC.GUI.GuiTerraSluice;
+import TFC.GUI.GuiTerraWorkbench;
+import TFC.Handlers.BlockRenderHandler;
+import TFC.Handlers.ChiselHighlightHandler;
+import TFC.Handlers.FarmlandHighlightHandler;
+import TFC.Handlers.KeyBindingHandler;
+import TFC.Handlers.PlankHighlightHandler;
+import TFC.Handlers.SoundHandler;
+import TFC.Render.ModelBear;
+import TFC.Render.ModelChickenTFC;
+import TFC.Render.ModelCowTFC;
+import TFC.Render.ModelDeer;
+import TFC.Render.ModelPigTFC;
+import TFC.Render.ModelSheep1TFC;
+import TFC.Render.ModelSheep2TFC;
+import TFC.Render.ModelWolfTFC;
+import TFC.Render.RenderBear;
+import TFC.Render.RenderChickenTFC;
+import TFC.Render.RenderCowTFC;
+import TFC.Render.RenderCustomMinecart;
+import TFC.Render.RenderDeer;
+import TFC.Render.RenderFallingDirt;
+import TFC.Render.RenderFallingStone;
+import TFC.Render.RenderPigTFC;
+import TFC.Render.RenderSheepTFC;
+import TFC.Render.RenderTerraJavelin;
+import TFC.Render.RenderWolfTFC;
+import TFC.Render.TileEntityBarrelRendererTFC;
+import TFC.Render.TileEntityChestRendererTFC;
+import TFC.Render.TileEntityIngotPileRenderer;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderQuern;
-import TFC.TileEntities.*;
-import TFC.WorldGen.*;
-import net.minecraft.src.*;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
+import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TileEntityChestTFC;
+import TFC.TileEntities.TileEntityFoodPrep;
+import TFC.TileEntities.TileEntityIngotPile;
+import TFC.TileEntities.TileEntityQuern;
+import TFC.TileEntities.TileEntitySluice;
+import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.TileEntities.TileEntityTerraFirepit;
+import TFC.TileEntities.TileEntityTerraForge;
+import TFC.TileEntities.TileEntityTerraLogPile;
+import TFC.TileEntities.TileEntityTerraMetallurgy;
+import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.WorldGen.TFCBiome;
+import TFC.WorldGen.TFCWorldChunkManager;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy 
 {	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
@@ -112,6 +168,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sulfurRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdH = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdV = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.grassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.oreRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.moltenRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.looseRockRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -140,6 +197,7 @@ public class ClientProxy extends CommonProxy
 		//RenderingRegistry.registerBlockHandler(TFCBlocks.IngotPileRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 	}
 
+	@Override
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
@@ -148,11 +206,13 @@ public class ClientProxy extends CommonProxy
 		ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 	}
 
+	@Override
 	public void onClientLogin()
 	{
 		ModLoader.getMinecraftInstance().ingameGUI = new GuiHUD(ModLoader.getMinecraftInstance());
 	}
 
+	@Override
 	public void RegisterPlayerApiClasses()
 	{
 		super.RegisterPlayerApiClasses();
@@ -164,6 +224,7 @@ public class ClientProxy extends CommonProxy
 		return ModLoader.getMinecraftInstance().theWorld;
 	}
 
+	@Override
 	public boolean isRemote() {
 		return true;
 	}
@@ -290,6 +351,7 @@ public class ClientProxy extends CommonProxy
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
 	}
 
+	@Override
 	public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
 		int var5 = 0;
@@ -309,6 +371,7 @@ public class ClientProxy extends CommonProxy
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
 	}
 
+	@Override
 	public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
 		int var5 = 0;
@@ -353,7 +416,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
+						color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -368,7 +431,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
+						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -398,7 +461,7 @@ public class ClientProxy extends CommonProxy
 				{
 					for (int var9 = -1; var9 <= 1; ++var9)
 					{
-						int color = (int) (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
+						int color = (TFC_Climate.getFoliageColor(getCurrentWorld(), i + var8, j ,k + var9));
 						rgb = applyColor(color, rgb);
 					}
 				}
@@ -541,6 +604,7 @@ public class ClientProxy extends CommonProxy
 		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
 	}
 
+	@Override
 	public void registerHighlightHandler()
 	{
 		MinecraftForge.EVENT_BUS.register(new ChiselHighlightHandler());
@@ -1249,6 +1313,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.Weak Red Steel Ingot.name", "Weak Red Steel Ingot");
 	}
 
+	@Override
 	public boolean getGraphicsLevel()
 	{
 		// TODO Auto-generated method stub

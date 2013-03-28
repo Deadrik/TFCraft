@@ -2,41 +2,25 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Core;
-import TFC.Enums.EnumTree;
-import TFC.WorldGen.Generators.*;
-
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.feature.WorldGenDeadBush;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
+import TFC.WorldGen.Generators.WorldGenCustomCactus;
+import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
+import TFC.WorldGen.Generators.WorldGenCustomReed;
+import TFC.WorldGen.Generators.WorldGenCustomSand;
+import TFC.WorldGen.Generators.WorldGenForests;
+import TFC.WorldGen.Generators.WorldGenGrowCrops;
+import TFC.WorldGen.Generators.WorldGenJungle;
+import TFC.WorldGen.Generators.WorldGenLargeRock;
+import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
+import TFC.WorldGen.Generators.WorldGenLooseRocks;
+import TFC.WorldGen.Generators.WorldGenPlants;
+import TFC.WorldGen.Generators.WorldGenSoilPits;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
@@ -98,7 +82,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	@Override
 	protected void decorate()
 	{
-		/*this.generateOres();
+		this.generateOres();
 		int var1;
 		int var2;
 		int xCoord;
@@ -219,12 +203,13 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 				new WorldGenLiquidsTFC(Block.lavaMoving.blockID).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
-		}*/
+		}
 	}
 
 	/**
 	 * Decorates the world. Calls code that was formerly (pre-1.8) in ChunkProviderGenerate.populate
 	 */
+	@Override
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		if (this.currentWorld != null)
@@ -246,6 +231,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	/**
 	 * Generates ores in the current chunk
 	 */
+	@Override
 	protected void generateOres()
 	{
 
@@ -254,6 +240,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	/**
 	 * Standard ore generation helper. Generates most ores.
 	 */
+	@Override
 	protected void genStandardOre1(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
 	{
 		for (int var5 = 0; var5 < par1; ++var5)
@@ -268,6 +255,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	/**
 	 * Standard ore generation helper. Generates Lapis Lazuli.
 	 */
+	@Override
 	protected void genStandardOre2(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
 	{
 		for (int var5 = 0; var5 < par1; ++var5)

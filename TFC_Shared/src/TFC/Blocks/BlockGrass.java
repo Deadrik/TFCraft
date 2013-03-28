@@ -1,56 +1,36 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Textures;
-import TFC.TileEntities.TileEntityPartial;
-import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.Generators.WorldGenGrowTrees;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockGrass extends net.minecraft.block.BlockGrass
 {
 	protected int textureOffset = 0;
 	
-	Icon GrassTopTexture;
+	@SideOnly(Side.CLIENT)
+	public Icon GrassTopTexture;
+	@SideOnly(Side.CLIENT)
+	public Icon iconSnowSide;
+	@SideOnly(Side.CLIENT)
+    public Icon iconGrassSideOverlay;
+	
+	@SideOnly(Side.CLIENT)
 	Icon[] DirtTexture = new Icon[23];
 	
 	public BlockGrass(int par1)
@@ -78,6 +58,15 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 			DirtTexture[i] = registerer.registerIcon("soil/Dirt"+i);
 		}
 		GrassTopTexture = registerer.registerIcon("GrassTop");
+
+		iconSnowSide = registerer.registerIcon("snow");
+		iconGrassSideOverlay = registerer.registerIcon("grass_side");
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static Icon getIconSideOverlay()
+    {
+        return TFCBlocks.Grass.iconGrassSideOverlay;
     }
 
     /**
@@ -108,25 +97,31 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
         else if (side == 2)//-Z
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
-                return GrassTopTexture;
+                return isSnow(access, xCoord, yCoord-1, zCoord-1) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         else if (side == 3)//+Z
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
-                return GrassTopTexture;
+                return isSnow(access, xCoord, yCoord-1, zCoord+1) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         else if (side == 4)//-X
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
-                return GrassTopTexture;
+                return isSnow(access, xCoord-1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         else if (side == 5)//+X
         {
             if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
-                return GrassTopTexture;
+                return isSnow(access, xCoord+1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         
         return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset];
+    }
+    
+    private boolean isSnow(IBlockAccess access, int i, int j, int k)
+    {
+    	Material material = access.getBlockMaterial(i, j, k);
+        return material == Material.snow || material == Material.craftedSnow;
     }
 
 
@@ -139,6 +134,12 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     {
         return TerraFirmaCraft.proxy.grassColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
+    
+    @Override
+	public int getRenderType()
+	{
+		return TFCBlocks.grassRenderId;
+	}
 
     @Override
     public int getBlockColor()
