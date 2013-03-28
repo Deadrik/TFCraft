@@ -191,7 +191,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
             this.func_82162_bC();
         }
 
-        this.func_98053_h(this.rand.nextFloat() < pickUpLootProability[this.worldObj.difficultySetting]);
+        this.func_94061_f(this.rand.nextFloat() < pickUpLootProability[this.worldObj.difficultySetting]);
 
         if (this.getCurrentItemOrArmor(4) == null)
         {

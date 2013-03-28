@@ -136,10 +136,10 @@ public class ItemStoneBrick extends ItemTerra
 	
 	Icon[] icons = new Icon[23];
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 23; i++)
-			registerer.func_94245_a("rocks/"+MetaNames[i]+" Brick");
+			registerer.registerIcon("rocks/"+MetaNames[i]+" Brick");
     }
 
 	@Override

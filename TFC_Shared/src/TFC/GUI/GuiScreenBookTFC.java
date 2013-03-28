@@ -384,7 +384,7 @@ public class GuiScreenBookTFC extends GuiScreen
      */
     public void drawScreen(int par1, int par2, float par3)
     {
-    	this.mc.renderEngine.func_98187_b("/gui/book.png");
+    	this.mc.renderEngine.bindTexture("/gui/book.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int var5 = (this.width - this.bookImageWidth) / 2;
         byte var6 = 2;

@@ -120,13 +120,13 @@ public class BlockLogNatural extends BlockTerra
 	public static Icon[] rotatedSideIcons = new Icon[16];
 	
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
 		{
-			sideIcons[i] = registerer.func_94245_a("wood/trees/" + WoodNames[i] + " Log");
-			innerIcons[i] = registerer.func_94245_a("wood/trees/" + WoodNames[i] + " Log Top");
-			rotatedSideIcons[i] = registerer.func_94245_a("wood/trees/" + WoodNames[i] + " Log Side");
+			sideIcons[i] = registerer.registerIcon("wood/trees/" + WoodNames[i] + " Log");
+			innerIcons[i] = registerer.registerIcon("wood/trees/" + WoodNames[i] + " Log Top");
+			rotatedSideIcons[i] = registerer.registerIcon("wood/trees/" + WoodNames[i] + " Log Side");
 		}
     }
 
@@ -177,7 +177,7 @@ public class BlockLogNatural extends BlockTerra
 				{
 					int ind = entityplayer.inventory.currentItem;
 					entityplayer.inventory.setInventorySlotContents(ind, null);
-					world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
+					world.setBlock(i, j, k, blockID, l, 0x2);
 				}
 				else
 				{
@@ -191,7 +191,7 @@ public class BlockLogNatural extends BlockTerra
 			}
 			else
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
+				world.setBlock(i, j, k, blockID, l, 0x2);
 			}
 		}
 	}

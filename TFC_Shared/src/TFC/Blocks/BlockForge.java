@@ -127,10 +127,10 @@ public class BlockForge extends BlockTerraContainer
 	}
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
-		textureOn = iconRegisterer.func_94245_a("devices/Forge On");
-		textureOff = iconRegisterer.func_94245_a("devices/Forge Off");
+		textureOn = iconRegisterer.registerIcon("devices/Forge On");
+		textureOff = iconRegisterer.registerIcon("devices/Forge Off");
     }
 
 	public boolean getIsFireLit(int i)

@@ -52,7 +52,7 @@ public class BlockBarrel extends BlockTerraContainer
 	}
 
 	@Override
-    public void func_94332_a(IconRegister iconRegisterer)
+    public void registerIcons(IconRegister iconRegisterer)
     {
     }
 

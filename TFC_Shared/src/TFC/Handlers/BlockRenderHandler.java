@@ -136,14 +136,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderCrop.render(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.leavesRenderId)
-        {
-            int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (float)(var5 >> 16 & 255) / 255.0F;
-            float var7 = (float)(var5 >> 8 & 255) / 255.0F;
-            float var8 = (float)(var5 & 255) / 255.0F;
-            return RenderLeaves.renderLeaves(block, i, j, k, var6, var7, var8, (RenderBlocks)renderer, ModLoader.getMinecraftInstance().isFancyGraphicsEnabled(), true);
-        }
         else if (modelId == TFCBlocks.detailedRenderId)
         {
             return RenderDetailed.renderBlockDetailed(block, i, j, k, renderer);

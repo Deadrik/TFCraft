@@ -68,11 +68,11 @@ public class ItemWoodSupport extends ItemTerra
 	
 	Icon[] icons = new Icon[16];
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++){
-			registerer.func_94245_a("wood/"+WoodNames[i]+" Vertical Support");
-			registerer.func_94245_a("wood/"+WoodNames[i]+" Horizontal Support");
+			registerer.registerIcon("wood/"+WoodNames[i]+" Vertical Support");
+			registerer.registerIcon("wood/"+WoodNames[i]+" Horizontal Support");
 		}
     }
 
@@ -185,7 +185,7 @@ public class ItemWoodSupport extends ItemTerra
 				boolean SupportRange2 = getSupportInRange(world, x,y-2,z,5,TFCBlocks.WoodSupportV.blockID);
 				if(nextToSupport && (SupportRange1 || SupportRange2) || world.getBlockId(x, y-2, z) == TFCBlocks.WoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.WoodSupportH.blockID, metaID,3);
+					world.setBlock( x, y-1, z, TFCBlocks.WoodSupportH.blockID, metaID, 0x2);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
@@ -196,7 +196,7 @@ public class ItemWoodSupport extends ItemTerra
 								getSupportInRange(world, x,y-1,z-1,5,TFCBlocks.WoodSupportV.blockID)) || 
 								world.getBlockId(x, y-1, z-1) == TFCBlocks.WoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.WoodSupportH.blockID, metaID,3);
+					world.setBlock( x, y, z-1, TFCBlocks.WoodSupportH.blockID, metaID, 0x2);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
@@ -207,7 +207,7 @@ public class ItemWoodSupport extends ItemTerra
 								getSupportInRange(world, x,y-1,z+1,5,TFCBlocks.WoodSupportV.blockID)) || 
 								world.getBlockId(x, y-1, z+1) == TFCBlocks.WoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.WoodSupportH.blockID, metaID,3);
+					world.setBlock( x, y, z+1, TFCBlocks.WoodSupportH.blockID, metaID, 0x2);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
@@ -218,7 +218,7 @@ public class ItemWoodSupport extends ItemTerra
 								getSupportInRange(world, x-1,y-1,z,5,TFCBlocks.WoodSupportV.blockID)) || 
 								world.getBlockId(x-1, y-1, z) == TFCBlocks.WoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.WoodSupportH.blockID, metaID,3);
+					world.setBlock( x-1, y, z, TFCBlocks.WoodSupportH.blockID, metaID, 0x2);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
@@ -229,7 +229,7 @@ public class ItemWoodSupport extends ItemTerra
 								getSupportInRange(world, x+1,y-1,z,5,TFCBlocks.WoodSupportV.blockID)) || 
 								world.getBlockId(x+1, y-1, z) == TFCBlocks.WoodSupportV.blockID)
 				{
-					world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.WoodSupportH.blockID, metaID,3);
+					world.setBlock( x+1, y, z, TFCBlocks.WoodSupportH.blockID, metaID, 0x2);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
@@ -241,38 +241,38 @@ public class ItemWoodSupport extends ItemTerra
 				//if the block beneath is opaque or is another support
 				if(vSupport || b1 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.WoodSupportH.blockID, metaID,3);
+					world.setBlock( x, y-1, z, TFCBlocks.WoodSupportH.blockID, metaID, 0x2);
 					return new ItemStack(this,itemstack.stackSize-1, metaID);
 				}
 			}
 			//top
 			else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.WoodSupportV.blockID, metaID,3);
+				world.setBlock( x, y+1, z, TFCBlocks.WoodSupportV.blockID, metaID, 0x2);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
 			else if(side == 2 && (world.getBlockId(x, y-1, z-1) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z-1)) &&
 					world.getBlockId(x, y, z-1) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.WoodSupportV.blockID, metaID,3);
+				world.setBlock( x, y, z-1, TFCBlocks.WoodSupportV.blockID, metaID, 0x2);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
 			else if(side == 3 && (world.getBlockId(x, y-1, z+1) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x, y-1, z+1)) &&
 					world.getBlockId(x, y, z+1) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.WoodSupportV.blockID, metaID,3);
+				world.setBlock( x, y, z+1, TFCBlocks.WoodSupportV.blockID, metaID, 0x2);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
 			else if(side == 4 && (world.getBlockId(x-1, y-1, z) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x-1, y-1, z)) &&
 					world.getBlockId(x-1, y, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.WoodSupportV.blockID, metaID,3);
+				world.setBlock( x-1, y, z, TFCBlocks.WoodSupportV.blockID, metaID, 0x2);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
 			else if(side == 5 && (world.getBlockId(x+1, y-1, z) == TFCBlocks.WoodSupportV.blockID || world.isBlockOpaqueCube(x+1, y-1, z)) &&
 					world.getBlockId(x+1, y, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.WoodSupportV.blockID, metaID,3);
+				world.setBlock( x+1, y, z, TFCBlocks.WoodSupportV.blockID, metaID, 0x2);
 				return new ItemStack(this,itemstack.stackSize-1, metaID);
 			}
 		}

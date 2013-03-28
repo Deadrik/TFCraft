@@ -67,7 +67,7 @@ public class WorldGenGrowCrops extends WorldGenerator
 			{
 				if (world.isAirBlock(i, j, k) && ((BlockCrop)Block.blocksList[Block.crops.blockID]).canBlockStay(world, i, j, k))
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k, Block.crops.blockID, 0, 2);
+					world.setBlock(i, j, k, Block.crops.blockID, 0, 0x2);
 					TileEntityCrop te = (TileEntityCrop)world.getBlockTileEntity(i, j, k);
 					te.cropId = cropBlockId;
 					te.growth = growth;

@@ -137,10 +137,10 @@ public class ItemBarrels extends ItemTerra
 	Icon[] icons = new Icon[16];
 
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("tools/Barrel_"+i);
+			registerer.registerIcon("tools/Barrel_"+i);
     }
 
 	@Override
@@ -158,17 +158,17 @@ public class ItemBarrels extends ItemTerra
 		if(m < 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m, 2);
 			else
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8, 2);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8, 2);
 			else
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8, 2);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 	}

@@ -101,15 +101,4 @@ public abstract class BlockTerraContainer extends BlockContainer
 		}
 		super.breakBlock(world, x, y, z, blockId, metadata);
 	}
-	
-    public void registerIcon(IconRegister iconRegisterer)
-    {
-
-    }
-    
-    public void func_94332_a(IconRegister iconRegisterer)
-    {
-    	super.func_94332_a(iconRegisterer);
-    	registerIcon(iconRegisterer);
-    }
 }

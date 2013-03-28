@@ -19,10 +19,10 @@ public class BlockPeatGrass extends BlockGrass
     }
     
     @Override
-    public void func_94332_a(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
-		DirtTexture[0] = registerer.func_94245_a("soil/Peat");
-		GrassTopTexture = registerer.func_94245_a("GrassTop");
+		DirtTexture[0] = registerer.registerIcon("soil/Peat");
+		GrassTopTexture = registerer.registerIcon("GrassTop");
     }
 
     /**

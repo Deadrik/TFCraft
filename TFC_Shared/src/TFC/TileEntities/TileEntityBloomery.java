@@ -709,9 +709,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 				{
 					//Make sure that the Stack is surrounded by rock
 					if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
-						worldObj.setBlockAndMetadataWithNotify(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 2);
+						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 0x2);
 					} else {
-						worldObj.setBlockAndMetadataWithNotify(xCoord+direction[0], yCoord+i, zCoord+direction[1], 0, 0, 2);
+						worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 					}
 				}
 			}
@@ -962,14 +962,14 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	}
 
 	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
+	public boolean isInvNameLocalized() 
+	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	{
 		return false;
 	}
 }

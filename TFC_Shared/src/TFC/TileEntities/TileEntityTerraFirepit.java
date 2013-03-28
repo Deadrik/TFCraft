@@ -528,7 +528,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             {
             	float percent = 25 + world.rand.nextInt(25);
                 count = (int) (count * (percent/100));
-                world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.Charcoal.blockID, count, 3);
+                world.setBlock(i, j, k, TFCBlocks.Charcoal.blockID, count, 0x2);
                 world.markBlockForUpdate(i, j, k);
             }
             return true;
@@ -948,15 +948,15 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     }
 
-	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
+    @Override
+	public boolean isInvNameLocalized() 
+	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	{
 		return false;
 	}
 }

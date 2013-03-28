@@ -51,7 +51,7 @@ public class WorldGenCustomCactus extends WorldGenerator
                 {
                     if (TFC_Core.isSand(world.getBlockId(xCoord, yCoord-1, zCoord)) || Block.cactus.canBlockStay(world, xCoord, yCoord + var11, zCoord))
                     {
-                        world.setBlockAndMetadataWithNotify(xCoord, yCoord + var11, zCoord, Block.cactus.blockID, 0, 2);
+                        world.setBlock(xCoord, yCoord + var11, zCoord, Block.cactus.blockID, 0, 0x2);
                     }
                 }
             }

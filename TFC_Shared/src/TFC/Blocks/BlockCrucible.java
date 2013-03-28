@@ -51,10 +51,10 @@ public class BlockCrucible extends BlockTerraContainer
 	}
 	
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
-		textureTop = registerer.func_94245_a("/devices/Crucible Top");
-		textureSide = registerer.func_94245_a("/devices/Crucible Side");
+		textureTop = registerer.registerIcon("/devices/Crucible Top");
+		textureSide = registerer.registerIcon("/devices/Crucible Side");
     }
 	
 	@Override

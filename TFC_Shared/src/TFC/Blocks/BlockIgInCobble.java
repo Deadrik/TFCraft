@@ -93,11 +93,11 @@ public class BlockIgInCobble extends BlockTerra
 	protected String[] names = {"Granite", "Diorite", "Gabbro"};
 
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
 	{
 		for(int i = 0; i < 3; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Cobble");
+			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Cobble");
 		}
 	}
 

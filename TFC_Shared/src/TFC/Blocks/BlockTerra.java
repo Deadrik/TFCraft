@@ -72,18 +72,6 @@ public abstract class BlockTerra extends Block
 		return false;
     }
 	
-	public void registerIcon(IconRegister iconRegisterer)
-    {
-
-    }
-    
-	@Override
-    public void func_94332_a(IconRegister iconRegisterer)
-    {
-    	//super.func_94332_a(iconRegisterer);
-    	registerIcon(iconRegisterer);
-    }
-	
     public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
 	{
     	onBlockPlacedBy(world, i, j, k, entityliving, null);

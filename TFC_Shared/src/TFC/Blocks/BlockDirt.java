@@ -100,11 +100,11 @@ public class BlockDirt extends BlockTerra
     }
     
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 23; i++)
 		{
-			icons[i] = registerer.func_94245_a("soil/Dirt"+i);
+			icons[i] = registerer.registerIcon("soil/Dirt"+i);
 		}
     }
 
@@ -130,11 +130,11 @@ public class BlockDirt extends BlockTerra
                 byte byte0 = 32;
                 if (!world.checkChunksExist(i - byte0, j - byte0, k - byte0, i + byte0, j + byte0, k + byte0))
                 {
-                    world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+                    world.setBlockToAir(i, j, k);
                     for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta, 3);
+                        world.setBlock(i, j, k, blockID, meta, 0x2);
                     }
                 }
                 else
@@ -202,29 +202,29 @@ public class BlockDirt extends BlockTerra
 				{
 				case 0:
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
-					world.setBlockAndMetadataWithNotify(i+1, j, k, blockID, meta, 3);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i+1, j, k, blockID, meta, 0x2);
 					tryToFall(world, i+1, j, k);
 					break;
 				}
 				case 1:
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
-					world.setBlockAndMetadataWithNotify(i, j, k+1, blockID, meta, 3);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k+1, blockID, meta, 0x2);
 					tryToFall(world, i, j, k+1);
 					break;
 				}
 				case 2:
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
-					world.setBlockAndMetadataWithNotify(i-1, j, k, blockID, meta, 3);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i-1, j, k, blockID, meta, 3);
 					tryToFall(world, i-1, j, k);
 					break;
 				}
 				case 3:
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
-					world.setBlockAndMetadataWithNotify(i, j, k-1, blockID, meta, 3);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k-1, blockID, meta, 3);
 					tryToFall(world, i, j, k-1);
 					break;
 				}

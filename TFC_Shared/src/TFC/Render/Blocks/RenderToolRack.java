@@ -74,11 +74,11 @@ public class RenderToolRack
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 					
@@ -92,11 +92,11 @@ public class RenderToolRack
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0.5f, 0.2f, 0.0f);
 
@@ -110,11 +110,11 @@ public class RenderToolRack
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
@@ -128,11 +128,11 @@ public class RenderToolRack
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0.5f, -0.2f, 0.0f);
 
@@ -162,11 +162,11 @@ public class RenderToolRack
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 					
@@ -180,11 +180,11 @@ public class RenderToolRack
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 
 					tessellator.addTranslation(0.0f, 0.2f, 0.5f);
 
@@ -198,11 +198,11 @@ public class RenderToolRack
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
@@ -216,11 +216,11 @@ public class RenderToolRack
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 
 					tessellator.addTranslation(0.0f, -0.2f, 0.5f);
 
@@ -250,11 +250,11 @@ public class RenderToolRack
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 
@@ -269,11 +269,11 @@ public class RenderToolRack
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 
 					tessellator.addTranslation(0.5f, 0.2f, 0.0f);
@@ -289,11 +289,11 @@ public class RenderToolRack
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
@@ -308,11 +308,11 @@ public class RenderToolRack
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 
 					tessellator.addTranslation(0.5f, -0.2f, 0.0f);
 
@@ -341,11 +341,11 @@ public class RenderToolRack
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0f, 0.2f, 0.0f);
 					
@@ -359,11 +359,11 @@ public class RenderToolRack
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 					
 					tessellator.addTranslation(0.0f, 0.2f, 0.5f);
 
@@ -377,11 +377,11 @@ public class RenderToolRack
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 
 					tessellator.addTranslation(0.0f, -0.2f, 0.0f);
 
@@ -395,11 +395,11 @@ public class RenderToolRack
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
-					minX = itemIcon.func_94209_e();
-					maxX = itemIcon.func_94212_f();
-					minZ = itemIcon.func_94206_g();
-					maxZ = itemIcon.func_94210_h();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					minX = itemIcon.getMinU();
+					maxX = itemIcon.getMaxU();
+					minZ = itemIcon.getMinV();
+					maxZ = itemIcon.getMaxV();
 
 					tessellator.addTranslation(0f, -0.2f, 0.5f);
 
@@ -414,7 +414,7 @@ public class RenderToolRack
 				tessellator.startDrawing(state);
 			}
 		}
-		ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/terrain.png");
+		ModLoader.getMinecraftInstance().renderEngine.bindTexture("/terrain.png");
 		renderblocks.clearOverrideBlockTexture();
 		return true;	
 	}

@@ -569,7 +569,7 @@ public class GuiHUD extends GuiIngame
 				{
 					GuiPlayerInfo var46 = (GuiPlayerInfo)var39.get(var19);
 					fontRenderer.drawStringWithShadow(var46.name, var20, healthRowHeight, 16777215);
-					this.mc.renderEngine.func_98187_b("/gui/icons.png");
+					this.mc.renderEngine.bindTexture("/gui/icons.png");
 					byte var51 = 0;
 					boolean var49 = false;
 					byte var50;
@@ -716,12 +716,12 @@ public class GuiHUD extends GuiIngame
 		GL11.glDepthMask(false);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, par1);
-		this.mc.renderEngine.func_98187_b("/terrain.png");
+		this.mc.renderEngine.bindTexture("/terrain.png");
 		Icon icon = Block.portal.getBlockTextureFromSide(1);
-        float var4 = icon.func_94209_e();
-        float var5 = icon.func_94206_g();
-        float var6 = icon.func_94212_f();
-        float var7 = icon.func_94210_h();
+        float var4 = icon.getMinU();
+        float var5 = icon.getMaxU();
+        float var6 = icon.getMinV();
+        float var7 = icon.getMaxV();
 		Tessellator var8 = Tessellator.instance;
 		var8.startDrawingQuads();
 		var8.addVertexWithUV(0.0D, (double)par3, -90.0D, (double)var4, (double)var7);

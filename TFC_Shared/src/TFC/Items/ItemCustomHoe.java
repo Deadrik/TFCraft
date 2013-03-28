@@ -56,9 +56,9 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-    public void func_94581_a(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
-    	this.iconIndex = registerer.func_94245_a("tools/"+this.getUnlocalizedName().replace("item.", ""));
+    	this.iconIndex = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 	
 	@Override
@@ -108,7 +108,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 						}
 						else
 						{
-							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil.blockID, meta,3);
+							world.setBlock(x, y, z, TFCBlocks.tilledSoil.blockID, meta, 0x2);
 							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
 							
@@ -132,7 +132,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 						}
 						else
 						{
-							world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.tilledSoil2.blockID, meta,3);
+							world.setBlock(x, y, z, TFCBlocks.tilledSoil2.blockID, meta, 0x2);
 							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
 							

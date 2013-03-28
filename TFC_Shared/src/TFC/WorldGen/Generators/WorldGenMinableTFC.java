@@ -226,7 +226,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 
                         if(isCorrectRockType && isCorrectMeta)
                         {
-                            world.setBlockAndMetadataWithNotify(posX, posY, posZ, MPBlockID, MPBlockMeta, 0);
+                            world.setBlock(posX, posY, posZ, MPBlockID, MPBlockMeta, 0x2);
                             if(doOnce)
                             {
                             	if(posY >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
@@ -258,7 +258,7 @@ public class WorldGenMinableTFC extends WorldGenerator
 
                 if(isCorrectRockType && isCorrectMeta)
                 {
-                    world.setBlockAndMetadataWithNotify(posX, posY, posZ, MPBlockID, MPBlockMeta, 0);
+                    world.setBlock(posX, posY, posZ, MPBlockID, MPBlockMeta, 0x2);
                     if(doOnce)
                     {
                     	if(posY >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
@@ -346,7 +346,7 @@ public class WorldGenMinableTFC extends WorldGenerator
                         if(d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && isCorrectRockType && 
                                 (m == LayerMeta || LayerMeta == -1))
                         {
-                            world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta, 0);
+                            world.setBlock(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta, 0x2);
                             if(doOnce)
                             {
                             	if(yCoord >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))

@@ -45,10 +45,12 @@ public class ItemSapling extends ItemTerraBlock
 		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	}
+	@Override
 	public Icon getIconFromDamage(int par1)
     {
         return Icons[par1];
     }
+	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		if(MetaNames != null)
@@ -58,11 +60,11 @@ public class ItemSapling extends ItemTerraBlock
 	public static Icon[] Icons = new Icon[16];
 
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
 		{
-			Icons[i] = registerer.func_94245_a("wood/trees/" + MetaNames[i] + " Sapling");
+			Icons[i] = registerer.registerIcon("wood/trees/" + MetaNames[i] + " Sapling");
 		}
     }
 	@Override

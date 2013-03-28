@@ -104,11 +104,11 @@ public class BlockSand extends BlockTerra
     Icon[] icons = new Icon[16];
 
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = registerer.func_94245_a("sand/Sand"+i);
+			icons[i] = registerer.registerIcon("sand/Sand"+i);
 		}
     }
 
@@ -132,7 +132,7 @@ public class BlockSand extends BlockTerra
                     for (; canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta,3);
+                        world.setBlock(i, j, k, blockID, meta, 2);
                     }
                 }
                 else
@@ -198,30 +198,30 @@ public class BlockSand extends BlockTerra
 				{
 				case 0:
 				{
-					world.setBlockAndMetadataWithNotify(i+1, j, k, blockID, meta, 3);
+					world.setBlock(i+1, j, k, blockID, meta, 0x2);
 					tryToFall(world, i+1, j, k);
-					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
+					world.setBlockToAir(i,j,k);//world.func_94571_i(i, j, k);
 					break;
 				}
 				case 1:
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k+1, blockID,meta, 3);
+					world.setBlock(i, j, k+1, blockID,meta, 0x2);
 					tryToFall(world, i, j, k+1);
-					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
+					world.setBlockToAir(i,j,k);
 					break;
 				}
 				case 2:
 				{
-					world.setBlockAndMetadataWithNotify(i-1, j, k, blockID,meta, 3);
+					world.setBlock(i-1, j, k, blockID,meta, 0x2);
 					tryToFall(world, i-1, j, k);
-					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
+					world.setBlockToAir(i,j,k);
 					break;
 				}
 				case 3:
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k-1, blockID,meta, 3);
+					world.setBlock(i, j, k-1, blockID,meta, 0x2);
 					tryToFall(world, i, j, k-1);
-					world.setBlockAndMetadataWithNotify(i,j,k,0,0,2);//world.func_94571_i(i, j, k);
+					world.setBlockToAir(i,j,k);
 					break;
 				}
 				}
@@ -238,9 +238,7 @@ public class BlockSand extends BlockTerra
 			if(world.getBlockId(i, j-1, k) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, meta, 3);
-				world.func_94571_i(i, j, k);
-
+				world.setBlock(i, j-1, k, blockID, meta, 0x2);
 			}
 			world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
 		}

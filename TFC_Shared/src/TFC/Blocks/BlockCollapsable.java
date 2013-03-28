@@ -102,7 +102,7 @@ public class BlockCollapsable extends BlockTerra
         }
 
         dropBlockAsItem_do(world, i, j, k, new ItemStack(blockID, 1, world.getBlockMetadata(i, j, k)));
-        world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+        world.setBlockToAir(i, j, k);
 
     }
 
@@ -238,22 +238,22 @@ public class BlockCollapsable extends BlockTerra
                 if(R.nextInt(100) > 90)
                     world.playSoundAtEntity(ent, "fallingrocklong", 1.0F, 0.8F + (R.nextFloat()/2));
                 
-                world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+                world.setBlockToAir(i, j, k);
                 
                 if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
                         ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
                 {
-                    world.setBlockAndMetadataWithNotify(i, j-1, k, 0, 0, 2);
+                	world.setBlockToAir(i, j-1, k);
                     
                     if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
                             ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j-2, k, 0, 0, 2);
+                    	world.setBlockToAir(i, j-2, k);
                         
                         if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
                                 ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
                         {
-                            world.setBlockAndMetadataWithNotify(i, j-3, k, 0, 0, 2);
+                        	world.setBlockToAir(i, j-3, k);
                         }
                     }
                 }

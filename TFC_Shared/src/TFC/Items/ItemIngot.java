@@ -56,9 +56,9 @@ public class ItemIngot extends ItemTerra
 	}
 	
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.func_94245_a(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		this.iconIndex = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
     }
 
 	@Override
@@ -108,42 +108,42 @@ public class ItemIngot extends ItemTerra
 			{
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y-1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y-1, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y-1, z);
 				}
 				else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y+1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y+1, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y+1, z);
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y, z-1, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y, z-1);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z-1);
 				}
 				else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y, z+1, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y, z+1);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z+1);
 				}
 				else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x-1, y, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x-1, y, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x-1, y, z);
 				}
 				else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x+1, y, z, TFCBlocks.IngotPile.blockID, l, 3);
 					if(world.isRemote)
 						world.markBlockForUpdate(x+1, y, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x+1, y, z);
@@ -158,42 +158,42 @@ public class ItemIngot extends ItemTerra
 
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y-1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y-1, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y-1, z);
 				}
 				else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y+1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y+1, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y+1, z);
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y, z-1, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y, z-1);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z-1);
 				}
 				else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x, y, z+1, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y, z+1);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z+1);
 				}
 				else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x-1, y, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x-1, y, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x-1, y, z);
 				}
 				else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.IngotPile.blockID, l, 3);
+					world.setBlock( x+1, y, z, TFCBlocks.IngotPile.blockID, l, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x+1, y, z);
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x+1, y, z);
@@ -290,22 +290,22 @@ public class ItemIngot extends ItemTerra
 					if(side == 1)
 					{
 						if (m>=16){
-							world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.IngotPile.blockID, m, 3);
+							world.setBlock(x, y+1, z, TFCBlocks.IngotPile.blockID, m, 0x2);
 							itemstack.stackSize = itemstack.stackSize-1;
 						}
 						else{
-							world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.IngotPile.blockID, m, 3);
+							world.setBlock(x, y+1, z, TFCBlocks.IngotPile.blockID, m, 0x2);
 							itemstack.stackSize = itemstack.stackSize-1;
 						}
 					}
 					else if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 					{
 						if(m >=16){
-							world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.IngotPile.blockID, m, 3);
+							world.setBlock(x, y-1, z, TFCBlocks.IngotPile.blockID, m, 0x2);
 							itemstack.stackSize = itemstack.stackSize-1;
 						}
 						else{
-							world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.IngotPile.blockID, m, 3);
+							world.setBlock(x, y-1, z, TFCBlocks.IngotPile.blockID, m, 0x2);
 							itemstack.stackSize = itemstack.stackSize-1;
 						}
 					}
@@ -341,17 +341,17 @@ public class ItemIngot extends ItemTerra
 		if(m < 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m, 3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m, 0x2);
 			else
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m | 8, 3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m | 8, 0x2);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 16)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m-8, 3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m-8, 0x2);
 			else
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m-8 | 8, 3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m-8 | 8, 0x2);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 

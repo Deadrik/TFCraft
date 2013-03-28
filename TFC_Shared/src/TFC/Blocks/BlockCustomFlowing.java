@@ -66,7 +66,7 @@ public class BlockCustomFlowing extends BlockFlowing
     private void updateFlow(World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID + 1, var5, 2);
+        par1World.setBlock(par2, par3, par4, this.blockID + 1, var5, 2);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class BlockCustomFlowing extends BlockFlowing
 
                 if (var10 < 0)
                 {
-                    par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
+                    par1World.setBlockToAir(par2, par3, par4);
                 }
                 else
                 {
@@ -168,7 +168,7 @@ public class BlockCustomFlowing extends BlockFlowing
         {
             if (this.blockMaterial == Material.lava && par1World.getBlockMaterial(par2, par3 - 1, par4) == Material.water)
             {
-                par1World.setBlockAndMetadataWithNotify(par2, par3 - 1, par4, Block.stone.blockID, 0, 2);
+                par1World.setBlock(par2, par3 - 1, par4, Block.stone.blockID, 0, 2);
                 this.triggerLavaMixEffects(par1World, par2, par3 - 1, par4);
                 return;
             }
@@ -241,7 +241,7 @@ public class BlockCustomFlowing extends BlockFlowing
                 }
             }
 
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, this.blockID, par5, 2);
+            par1World.setBlock(par2, par3, par4, this.blockID, par5, 2);
         }
     }
 

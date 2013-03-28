@@ -179,19 +179,19 @@ public class ItemChisel extends ItemTerraTool
 	public static void CreateSmooth(World world, int x, int y, int z, int id, int meta)
 	{
 		if(id == TFCBlocks.StoneIgIn.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneIgInSmooth.blockID, meta,3);
+			world.setBlock(x, y, z, TFCBlocks.StoneIgInSmooth.blockID, meta, 0x2);
 		else if(id == TFCBlocks.StoneIgEx.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneIgExSmooth.blockID, meta,3);
+			world.setBlock(x, y, z, TFCBlocks.StoneIgExSmooth.blockID, meta, 0x2);
 		else if(id == TFCBlocks.StoneSed.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneSedSmooth.blockID, meta,3);
+			world.setBlock(x, y, z, TFCBlocks.StoneSedSmooth.blockID, meta, 0x2);
 		else if(id == TFCBlocks.StoneMM.blockID)
-			world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta,3);
+			world.setBlock(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta, 0x2);
 	}
 
 
 	public static void CreateStairs(World world, int x, int y, int z, int id, int meta, byte m)
 	{
-		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.stoneStairs.blockID, m,3);
+		world.setBlock(x, y, z, TFCBlocks.stoneStairs.blockID, m, 0x2);
 		TileEntityPartial te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
 		te.TypeID = (short) id;
 		te.MetaID = (byte) meta;
@@ -208,7 +208,7 @@ public class ItemChisel extends ItemTerraTool
 		{
 			if(world.getBlockId(x, y, z) != SlabID)
 			{
-				world.setBlockAndMetadataWithNotify(x, y, z, SlabID, side,3);
+				world.setBlock(x, y, z, SlabID, side, 0x2);
 
 				te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
 				te.TypeID = (short) id;

@@ -187,7 +187,7 @@ public class BlockSluice extends BlockContainer
 		world.setBlockMetadataWithNotify(i, j, k, l, 3);
 		if(world.getBlockId(i, j, k) == this.blockID)
 		{
-			world.setBlockAndMetadataWithNotify(i + byte0, j, k + byte1, this.blockID, l + 8, 3);
+			world.setBlock(i + byte0, j, k + byte1, this.blockID, l + 8, 3);
 		}
 		
 		//Minecraft mc = ModLoader.getMinecraftInstance();

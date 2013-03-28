@@ -75,7 +75,7 @@ public class BlockDirt2 extends BlockDirt
                     for (; BlockCollapsable.canFallBelow(world, i, j - 1, k) && j > 0; j--) { }
                     if (j > 0)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k, blockID, meta, 3);
+                        world.setBlock(i, j, k, blockID, meta, 0x2);
                     }
                 }
                 else

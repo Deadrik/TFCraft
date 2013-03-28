@@ -64,7 +64,7 @@ public class GuiQuern extends GuiContainer
 
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
-    	this.mc.renderEngine.func_98187_b("/bioxx/gui_quern.png");
+    	this.mc.renderEngine.bindTexture("/bioxx/gui_quern.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;

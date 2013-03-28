@@ -110,7 +110,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 							entity.setDead();
 						}
 					}
-					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 3);
+					world.setBlock(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y+1, z);
 				}
@@ -132,9 +132,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 							entity.setDead();
 						}
 					}
-					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Forge.blockID, 1, 3);
-					if(world.isRemote)
-						world.markBlockForUpdate(x, y+1, z);
+					world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 
 				return true;
@@ -147,10 +145,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 						world.isBlockNormalCube(x, y-1, z) && ((world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
 								world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (checkSlabsAround(world, x, y, z))))
 				{
-
-					world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Forge.blockID, 1, 3);
-					world.markBlockForUpdate(x, y, z);
-
+					world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 			}
 			else

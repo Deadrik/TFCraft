@@ -131,7 +131,7 @@ public class EntityFallingDirt extends Entity
             int k = MathHelper.floor_double(posZ);
             if (fallTime == 1 && worldObj.getBlockId(i, j, k) == blockID)
             {
-                worldObj.func_94571_i(i, j, k);
+                worldObj.setBlockToAir(i, j, k);
             }
             else if (!worldObj.isRemote && fallTime == 1)
             {
@@ -146,7 +146,7 @@ public class EntityFallingDirt extends Entity
                 {
                     setDead();
                     if (!worldObj.isRemote && ((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this, (ItemStack)null) && BlockCollapsable.canFallBelow(worldObj, i, j - 1, k)) || 
-                            !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID,3)))
+                            !worldObj.setBlock(i, j, k, blockID, metaID,2)))
                     {
                         ItemStack itemstack = new ItemStack(blockID,1,metaID);
                         EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);

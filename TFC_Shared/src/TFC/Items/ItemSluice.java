@@ -81,10 +81,10 @@ public class ItemSluice extends ItemTerra
 			}
 			if(((BlockSluice)TFCBlocks.Sluice).canPlace(world, i, j+1, k,r))
 			{
-				world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.Sluice.blockID, r, 3);
+				world.setBlock(i, j+1, k, TFCBlocks.Sluice.blockID, r, 0x2);
 				if(world.getBlockId(i, j+1, k) == TFCBlocks.Sluice.blockID)
 				{
-					world.setBlockAndMetadataWithNotify(i + byte0, j+1, k + byte1, TFCBlocks.Sluice.blockID, r + 8, 3);
+					world.setBlock(i + byte0, j+1, k + byte1, TFCBlocks.Sluice.blockID, r + 8, 0x2);
 					entityplayer.inventory.decrStackSize(entityplayer.inventory.currentItem, 1);
 				}
 				return true;

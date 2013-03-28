@@ -118,7 +118,7 @@ public class GuiTerraAnvil extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.func_98187_b("/bioxx/gui_anvil.png");
+		this.mc.renderEngine.bindTexture("/bioxx/gui_anvil.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - 208) / 2;
 		int h = (height - 198) / 2;

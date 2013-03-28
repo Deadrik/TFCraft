@@ -51,11 +51,11 @@ public class BlockSedBrick extends BlockSedSmooth
 	}
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
 		for(int i = 0; i < 10; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Brick");
+			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Brick");
 		}
     }
 }

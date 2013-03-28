@@ -147,7 +147,7 @@ public class EntityFallingStone extends Entity
                     setDead();
                     if (((!worldObj.canPlaceEntityOnSide(blockID, i, j, k, true, 1, this, (ItemStack)null) && 
                             BlockCollapsable.canFallBelow(worldObj, i, j - 1, k)) || 
-                            !worldObj.setBlockAndMetadataWithNotify(i, j, k, blockID, metaID,3)) && !worldObj.isRemote)
+                            !worldObj.setBlock(i, j, k, blockID, metaID, 0x2)) && !worldObj.isRemote)
                     {
                         ItemStack itemstack = new ItemStack(blockID,1,metaID);
                         EntityItem entityitem = new EntityItem(worldObj, posX, posY+0.5, posZ, itemstack);

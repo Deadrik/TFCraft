@@ -57,9 +57,9 @@ public class ItemBellows extends ItemTerra
 	}
 
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
-			registerer.func_94245_a("/tools/"+"BellowsItem");
+			registerer.registerIcon("/tools/"+"BellowsItem");
     }
 	
 	@Override
@@ -71,7 +71,7 @@ public class ItemBellows extends ItemTerra
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockId(x, y+1, z) == 0)
 			{
-				world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.Bellows.blockID, l,3);
+				world.setBlock( x, y+1, z, TFCBlocks.Bellows.blockID, l, 0x2);
 				player.inventory.mainInventory[player.inventory.currentItem].stackSize--;
 				return true;
 			}

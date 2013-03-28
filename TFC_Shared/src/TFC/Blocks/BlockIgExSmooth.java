@@ -82,11 +82,11 @@ public class BlockIgExSmooth extends BlockTerra
 	protected Icon[] icons = new Icon[4];
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
 		for(int i = 0; i < 4; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Smooth");
+			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Smooth");
 		}
     }
 	

@@ -47,9 +47,9 @@ public class ItemMeltedMetal extends ItemTerra
 	}	
 	
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.func_94245_a(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		this.iconIndex = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
     }
 	
 	@Override

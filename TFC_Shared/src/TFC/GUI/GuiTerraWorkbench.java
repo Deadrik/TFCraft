@@ -60,7 +60,7 @@ public class GuiTerraWorkbench extends GuiContainer
 
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
-    	this.mc.renderEngine.func_98187_b("/gui/crafting.png");
+    	this.mc.renderEngine.bindTexture("/gui/crafting.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;

@@ -57,11 +57,11 @@ public class BlockFarmland extends BlockContainer
 	}
 
 	@Override
-    public void func_94332_a(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = textureOffset; i < (textureOffset == 0 ? 16 : 23); i++)
 		{
-			DirtTexture[i] = registerer.func_94245_a("farmland/Farmland"+(i));
+			DirtTexture[i] = registerer.registerIcon("farmland/Farmland"+(i));
 		}
     }
     

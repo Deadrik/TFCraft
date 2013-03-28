@@ -66,9 +66,9 @@ public class ItemWeapon extends ItemSword implements ISize
     }
 	
 	@Override
-    public void func_94581_a(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.func_94245_a("tools/"+this.getUnlocalizedName().replace("item.", ""));
+		this.iconIndex = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	/**

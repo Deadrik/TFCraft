@@ -74,12 +74,12 @@ public class BlockCustomCactus extends Block implements IPlantable
 
                 if (var7 == 15)
                 {
-                    par1World.setBlockAndMetadataWithNotify(par2, par3 + 1, par4, this.blockID, 0, 2);
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 3);
+                    par1World.setBlock(par2, par3 + 1, par4, this.blockID, 0, 0x2);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, 0, 0x2);
                 }
                 else
                 {
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + 1, 3);
+                    par1World.setBlockMetadataWithNotify(par2, par3, par4, var7 + 1, 0x2);
                 }
             }
         }
@@ -113,7 +113,7 @@ public class BlockCustomCactus extends Block implements IPlantable
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return par1 == 1 ? this.field_94380_a : (par1 == 0 ? this.field_94379_b : this.field_94336_cN);
+        return par1 == 1 ? this.field_94380_a : (par1 == 0 ? this.field_94379_b : this.blockIcon);
     }
 
     /**
@@ -163,7 +163,7 @@ public class BlockCustomCactus extends Block implements IPlantable
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
+            par1World.setBlockToAir(par2, par3, par4);
         }
     }
 
@@ -215,11 +215,11 @@ public class BlockCustomCactus extends Block implements IPlantable
     }
 
     @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        this.field_94336_cN = par1IconRegister.func_94245_a("cactus_side");
-        this.field_94380_a = par1IconRegister.func_94245_a("cactus_top");
-        this.field_94379_b = par1IconRegister.func_94245_a("cactus_bottom");
+        this.blockIcon = par1IconRegister.registerIcon("cactus_side");
+        this.field_94380_a = par1IconRegister.registerIcon("cactus_top");
+        this.field_94379_b = par1IconRegister.registerIcon("cactus_bottom");
     }
 
     @Override

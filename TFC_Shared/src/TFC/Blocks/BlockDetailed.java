@@ -68,7 +68,7 @@ public class BlockDetailed extends BlockPartial
 	}
 	
 	@Override
-    public void func_94332_a(IconRegister iconRegisterer)
+    public void registerIcons(IconRegister iconRegisterer)
     {
     }
 

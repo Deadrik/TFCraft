@@ -143,23 +143,18 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
-
-	public void registerIcon(IconRegister registerer)
+	
+	@Override
+	public void updateIcons(IconRegister registerer)
 	{
 		if(MetaNames != null)
 		{
 			icons = new Icon[MetaNames.length];
 			for(int i = 0; i < MetaNames.length; i++)
 			{
-				icons[i] = registerer.func_94245_a(MetaNames[i]);
+				icons[i] = registerer.registerIcon(MetaNames[i]);
 			}
 		}
-	}
-	@Override
-	public void func_94581_a(IconRegister registerer)
-	{
-		super.func_94581_a(registerer);
-		registerIcon(registerer);
 	}
 
 }

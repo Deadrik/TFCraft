@@ -480,7 +480,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 		if(!worldObj.isRemote && anvilItemStacks[0] == null && this.AnvilTier == AnvilReq.STONE.Tier)
 		{
 			ejectContents();
-			worldObj.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, stonePair[0], stonePair[1], 3);
+			worldObj.setBlock(xCoord, yCoord, zCoord, stonePair[0], stonePair[1], 0x2);
 		}
 	}
 	@Override
@@ -874,14 +874,14 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 	}
 
 	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
+	public boolean isInvNameLocalized() 
+	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	{
 		return false;
 	}
 }

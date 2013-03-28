@@ -86,11 +86,11 @@ public class BlockQuern extends BlockTerraContainer {
 	Icon QuernTop2;
 
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
 	{
-		QuernBase = registerer.func_94245_a("/devices/Quern Base");
-		QuernTop1 = registerer.func_94245_a("/devices/Quern Top 1");
-		QuernTop2 = registerer.func_94245_a("/devices/Quern Top 2");
+		QuernBase = registerer.registerIcon("/devices/Quern Base");
+		QuernTop1 = registerer.registerIcon("/devices/Quern Top 1");
+		QuernTop2 = registerer.registerIcon("/devices/Quern Top 2");
 	}
 
 	@Override

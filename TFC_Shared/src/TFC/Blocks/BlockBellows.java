@@ -213,14 +213,14 @@ public class BlockBellows extends BlockTerra
 	Icon BellowsBack;
 
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
 	{
-		Sides[0] = registerer.func_94245_a("/devices/Bellows82");
-		Sides[1] = registerer.func_94245_a("/devices/Bellows83");
-		Sides[2] = registerer.func_94245_a("/devices/Bellows84");
-		Sides[3] = registerer.func_94245_a("/devices/Bellows85");
-		BellowsFront = registerer.func_94245_a("/devices/Bellows Front");
-		BellowsBack = registerer.func_94245_a("/devices/Bellows Back");
+		Sides[0] = registerer.registerIcon("/devices/Bellows82");
+		Sides[1] = registerer.registerIcon("/devices/Bellows83");
+		Sides[2] = registerer.registerIcon("/devices/Bellows84");
+		Sides[3] = registerer.registerIcon("/devices/Bellows85");
+		BellowsFront = registerer.registerIcon("/devices/Bellows Front");
+		BellowsBack = registerer.registerIcon("/devices/Bellows Back");
 	}
 
 	public int getRenderType()

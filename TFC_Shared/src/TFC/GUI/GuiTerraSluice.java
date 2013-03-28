@@ -55,7 +55,7 @@ public class GuiTerraSluice extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.func_98187_b("/bioxx/gui_sluice.png");
+		this.mc.renderEngine.bindTexture("/bioxx/gui_sluice.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
         int s = (width - xSize) / 2;
         int t = (height - ySize) / 2;

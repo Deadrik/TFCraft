@@ -78,7 +78,7 @@ public class GuiTerraMetallurgy extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.func_98187_b("/bioxx/gui_metallurgy.png");
+		this.mc.renderEngine.bindTexture("/bioxx/gui_metallurgy.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
         int w = (width - 176) / 2;
         int h = (height - 184) / 2;

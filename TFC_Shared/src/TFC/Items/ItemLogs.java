@@ -76,42 +76,42 @@ public class ItemLogs extends ItemTerra
 		TileEntityTerraLogPile te = null;
 		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y-1, z, TFCBlocks.LogPile.blockID, l,3);
+			world.setBlock( x, y-1, z, TFCBlocks.LogPile.blockID, l, 0x2);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y-1, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y-1, z);
 		}
 		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y+1, z, TFCBlocks.LogPile.blockID, l,3);
+			world.setBlock( x, y+1, z, TFCBlocks.LogPile.blockID, l,0x2);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y+1, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y+1, z);
 		}
 		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y, z-1, TFCBlocks.LogPile.blockID, l,3);
+			world.setBlock( x, y, z-1, TFCBlocks.LogPile.blockID, l,0x2);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y, z-1);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z-1);
 		}
 		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x, y, z+1, TFCBlocks.LogPile.blockID, l,3);
+			world.setBlock( x, y, z+1, TFCBlocks.LogPile.blockID, l,0x2);
 			if(world.isRemote)
 				world.markBlockForUpdate(x, y, z+1);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x, y, z+1);
 		}
 		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x-1, y, z, TFCBlocks.LogPile.blockID, l,3);
+			world.setBlock( x-1, y, z, TFCBlocks.LogPile.blockID, l,0x2);
 			if(world.isRemote)
 				world.markBlockForUpdate(x-1, y, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x-1, y, z);
 		}
 		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 		{
-			world.setBlockAndMetadataWithNotify( x+1, y, z, TFCBlocks.LogPile.blockID, l,3);
+			world.setBlock( x+1, y, z, TFCBlocks.LogPile.blockID, l,0x2);
 			if(world.isRemote)
 				world.markBlockForUpdate(x+1, y, z);
 			te = (TileEntityTerraLogPile)world.getBlockTileEntity(x+1, y, z);
@@ -144,10 +144,10 @@ public class ItemLogs extends ItemTerra
 	
 	Icon[] icons = new Icon[16];
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("wood/"+MetaNames[i]+" Log");
+			registerer.registerIcon("wood/"+MetaNames[i]+" Log");
     }
 
 
@@ -203,12 +203,12 @@ public class ItemLogs extends ItemTerra
 				int m = itemstack.getItemDamage();
 				if(side == 1)
 				{
-					world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.WoodVert.blockID, m,3);
+					world.setBlock(x, y+1, z, TFCBlocks.WoodVert.blockID, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
 				else if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
-					world.setBlockAndMetadataWithNotify(x, y-1, z, TFCBlocks.WoodVert.blockID, m,3);
+					world.setBlock(x, y-1, z, TFCBlocks.WoodVert.blockID, m,0x2);
 					itemstack.stackSize = itemstack.stackSize-1;
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
@@ -238,17 +238,17 @@ public class ItemLogs extends ItemTerra
 		if(m < 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m, 0x2);
 			else
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8, 0x2);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 8)
 		{
 			if(dir == 0 || dir == 2)
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8, 0x2);
 			else
-				world.setBlockAndMetadataWithNotify(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8,3);
+				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8, 0x2);
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 	}

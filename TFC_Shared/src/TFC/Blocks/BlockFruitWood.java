@@ -78,11 +78,11 @@ public class BlockFruitWood extends BlockTerraContainer
     }
     
     @Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = registerer.func_94245_a("wood/fruit trees/"+WoodNames[i]+" Wood");
+			icons[i] = registerer.registerIcon("wood/fruit trees/"+WoodNames[i]+" Wood");
 		}
     }
 
@@ -156,7 +156,7 @@ public class BlockFruitWood extends BlockTerraContainer
         }
         else
         {
-            world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
+            world.setBlock(i, j, k, blockID, l, 0x2);
         }
     }
 
@@ -279,7 +279,7 @@ public class BlockFruitWood extends BlockTerraContainer
             if(te.birthTimeWood + trunkGrowTime < TFC_Time.totalDays() && te.height < 3 && te.isTrunk && rand.nextInt(16/t) == 0 &&
                     (world.getBlockId(i, j+1, k) == 0 || world.getBlockId(i, j+1, k) == TFCBlocks.fruitTreeLeaves.blockID))
             {
-                    world.setBlockAndMetadataWithNotify(i, j+1, k, this.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i, j+1, k, this.blockID, world.getBlockMetadata(i, j, k), 0x2);
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setTrunk(true);
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setHeight(te.height+1);
                     ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j+1, k)).setBirth();
@@ -292,28 +292,28 @@ public class BlockFruitWood extends BlockTerraContainer
                     int r = rand.nextInt(4);
                     if(r == 0 && world.getBlockId(i+1, j, k) == 0 || world.getBlockId(i+1, j, k) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                        world.setBlockAndMetadataWithNotify(i+1, j, k, this.blockID, world.getBlockMetadata(i, j, k), 3);
+                        world.setBlock(i+1, j, k, this.blockID, world.getBlockMetadata(i, j, k), 0x2);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i+1, j, k)).setTrunk(false);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i+1, j, k)).setHeight(te.height);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i+1, j, k)).setBirth();
                     }
                     else if(r == 1 && world.getBlockId(i, j, k-1) == 0 || world.getBlockId(i, j, k-1) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k-1, this.blockID, world.getBlockMetadata(i, j, k), 3);
+                        world.setBlock(i, j, k-1, this.blockID, world.getBlockMetadata(i, j, k), 0x2);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k-1)).setTrunk(false);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k-1)).setHeight(te.height);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k-1)).setBirth();
                     }
                     else if(r == 2 && world.getBlockId(i-1, j, k) == 0 || world.getBlockId(i-1, j, k) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                        world.setBlockAndMetadataWithNotify(i-1, j, k, this.blockID, world.getBlockMetadata(i, j, k), 3);
+                        world.setBlock(i-1, j, k, this.blockID, world.getBlockMetadata(i, j, k), 0x2);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i-1, j, k)).setTrunk(false);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i-1, j, k)).setHeight(te.height);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i-1, j, k)).setBirth();
                     }
                     else if(r == 3 && world.getBlockId(i, j, k+1) == 0 || world.getBlockId(i, j, k+1) == TFCBlocks.fruitTreeLeaves.blockID)
                     {
-                        world.setBlockAndMetadataWithNotify(i, j, k+1, this.blockID, world.getBlockMetadata(i, j, k), 3);
+                        world.setBlock(i, j, k+1, this.blockID, world.getBlockMetadata(i, j, k), 0x2);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k+1)).setTrunk(false);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k+1)).setHeight(te.height);
                         ((TileEntityFruitTreeWood)world.getBlockTileEntity(i, j, k+1)).setBirth();
@@ -325,39 +325,39 @@ public class BlockFruitWood extends BlockTerraContainer
             {
                 if(world.getBlockId(i, j+1, k) == 0 && world.getBlockId(i, j+2, k) == 0 && BlockFruitLeaves.canStay(world, i, j+1, k, TFCBlocks.fruitTreeLeaves.blockID))//above
                 {
-                    world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i, j+1, k, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i+1, j, k) == 0 && world.getBlockId(i+1, j+1, k) == 0 && BlockFruitLeaves.canStay(world, i+1, j, k, TFCBlocks.fruitTreeLeaves.blockID))//+x
                 {
-                    world.setBlockAndMetadataWithNotify(i+1, j, k, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i+1, j, k, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i-1, j, k) == 0 && world.getBlockId(i-1, j+1, k) == 0 && BlockFruitLeaves.canStay(world, i-1, j, k, TFCBlocks.fruitTreeLeaves.blockID))//-x
                 {
-                    world.setBlockAndMetadataWithNotify(i-1, j, k, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i-1, j, k, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i, j, k+1) == 0 && world.getBlockId(i, j+1, k+1) == 0 && BlockFruitLeaves.canStay(world, i, j, k+1, TFCBlocks.fruitTreeLeaves.blockID))//+z
                 {
-                    world.setBlockAndMetadataWithNotify(i, j, k+1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i, j, k+1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i, j, k-1) == 0 && world.getBlockId(i, j+1, k-1) == 0 && BlockFruitLeaves.canStay(world, i, j, k-1, TFCBlocks.fruitTreeLeaves.blockID))//-z
                 {
-                    world.setBlockAndMetadataWithNotify(i, j, k-1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i, j, k-1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i+1, j, k-1) == 0 && world.getBlockId(i+1, j+1, k-1) == 0 && BlockFruitLeaves.canStay(world, i+1, j, k-1, TFCBlocks.fruitTreeLeaves.blockID))//+x/-z
                 {
-                    world.setBlockAndMetadataWithNotify(i+1, j, k-1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i+1, j, k-1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i+1, j, k+1) == 0 && world.getBlockId(i+1, j+1, k+1) == 0 && BlockFruitLeaves.canStay(world, i+1, j, k+1, TFCBlocks.fruitTreeLeaves.blockID))//+x/+z
                 {
-                    world.setBlockAndMetadataWithNotify(i+1, j, k+1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i+1, j, k+1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i-1, j, k-1) == 0 && world.getBlockId(i-1, j+1, k-1) == 0 && BlockFruitLeaves.canStay(world, i-1, j, k-1, TFCBlocks.fruitTreeLeaves.blockID))//-x/-z
                 {
-                    world.setBlockAndMetadataWithNotify(i-1, j, k-1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i-1, j, k-1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
                 else if(world.getBlockId(i-1, j, k+1) == 0 && world.getBlockId(i-1, j+1, k+1) == 0 && BlockFruitLeaves.canStay(world, i-1, j, k+1, TFCBlocks.fruitTreeLeaves.blockID))//-x/+z
                 {
-                    world.setBlockAndMetadataWithNotify(i-1, j, k+1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 3);
+                    world.setBlock(i-1, j, k+1, TFCBlocks.fruitTreeLeaves.blockID, world.getBlockMetadata(i, j, k), 0x2);
                 }
             }
         }
@@ -379,7 +379,7 @@ public class BlockFruitWood extends BlockTerraContainer
                         if(world.getBlockId(i, j, k) != TFCBlocks.fruitTreeWood.blockID)
                             id = 0;
 
-                        world.setBlockAndMetadataWithNotify(i+x, j+y, k+z, id, world.getBlockMetadata(i, j, k), 3);
+                        world.setBlock(i+x, j+y, k+z, id, world.getBlockMetadata(i, j, k), 0x2);
                     }
                 }
             }

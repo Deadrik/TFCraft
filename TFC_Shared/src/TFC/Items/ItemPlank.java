@@ -209,10 +209,10 @@ public class ItemPlank extends ItemTerra
 	
 	Icon[] icons = new Icon[16];
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("wood/"+MetaNames[i]+" Plank");
+			registerer.registerIcon("wood/"+MetaNames[i]+" Plank");
     }
 
 	@Override

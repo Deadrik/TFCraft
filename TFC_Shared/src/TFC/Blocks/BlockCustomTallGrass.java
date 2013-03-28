@@ -190,13 +190,13 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
     
     @SideOnly(Side.CLIENT)
     @Override
-    public void func_94332_a(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
         this.field_94366_b = new Icon[field_94367_a.length];
 
         for (int i = 0; i < this.field_94366_b.length; ++i)
         {
-            this.field_94366_b[i] = par1IconRegister.func_94245_a(field_94367_a[i]);
+            this.field_94366_b[i] = par1IconRegister.registerIcon(field_94367_a[i]);
         }
     }
     

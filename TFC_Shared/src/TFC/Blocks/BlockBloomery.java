@@ -133,11 +133,11 @@ public class BlockBloomery extends BlockTerraContainer
 	}
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
-		textureSide = iconRegisterer.func_94245_a("devices/Bloomery Side");
-		textureOn = iconRegisterer.func_94245_a("devices/Bloomery On");
-		textureOff = iconRegisterer.func_94245_a("devices/Bloomery Off");
+		textureSide = iconRegisterer.registerIcon("devices/Bloomery Side");
+		textureOn = iconRegisterer.registerIcon("devices/Bloomery On");
+		textureOff = iconRegisterer.registerIcon("devices/Bloomery Off");
     }
 
 	@Override
@@ -159,25 +159,25 @@ public class BlockBloomery extends BlockTerraContainer
 			int[] dir = headBlockToFootBlockMap[meta & 3];
 			if(world.getBlockId(i+dir[0], j, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlockAndMetadataWithNotify(i+dir[0], j, k+dir[1], 0, 0, 2);
+				world.setBlock(i+dir[0], j, k+dir[1], 0, 0, 0x2);
 			}
 			if(world.getBlockId(i+dir[0], j+1, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlockAndMetadataWithNotify(i+dir[0], j+1, k+dir[1], 0, 0, 2);
+				world.setBlock(i+dir[0], j+1, k+dir[1], 0, 0, 0x2);
 			}
 			if(world.getBlockId(i+dir[0], j+2, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlockAndMetadataWithNotify(i+dir[0], j+2, k+dir[1], 0, 0, 2);
+				world.setBlock(i+dir[0], j+2, k+dir[1], 0, 0, 0x2);
 			}
 			if(world.getBlockId(i+dir[0], j+3, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlockAndMetadataWithNotify(i+dir[0], j+3, k+dir[1], 0, 0, 2);
+				world.setBlock(i+dir[0], j+3, k+dir[1], 0, 0, 0x2);
 			}
 			if(world.getBlockId(i+dir[0], j+4, k+dir[1]) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlockAndMetadataWithNotify(i+dir[0], j+4, k+dir[1], 0, 0, 2);
+				world.setBlock(i+dir[0], j+4, k+dir[1], 0, 0, 0x2);
 			}
-			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+			world.setBlockToAir(i, j, k);
 		}
 		return true;
 	}
@@ -192,7 +192,7 @@ public class BlockBloomery extends BlockTerraContainer
 		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
 			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
-			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+			world.setBlockToAir(i, j, k);
 		}
 	}
 

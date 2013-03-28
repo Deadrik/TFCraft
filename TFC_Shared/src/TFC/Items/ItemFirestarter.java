@@ -143,7 +143,7 @@ public class ItemFirestarter extends ItemTerra
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 3);
+                        world.setBlock(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 2);
                         if(world.isRemote)
                             world.markBlockForUpdate(x, y+1, z);
                     }
@@ -165,7 +165,7 @@ public class ItemFirestarter extends ItemTerra
                                 entity.setDead();
                             }
                         }
-                        world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.Forge.blockID, 1, 3);
+                        world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 2);
                         if(world.isRemote)
                             world.markBlockForUpdate(x, y+1, z);
                     }
@@ -184,7 +184,7 @@ public class ItemFirestarter extends ItemTerra
             		int chance = new Random().nextInt(100);
                     if(chance > 70)
                     {
-                    	world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Forge.blockID, 1, 3);
+                    	world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 2);
                     	world.markBlockForUpdate(x, y, z);
                     }
             	}

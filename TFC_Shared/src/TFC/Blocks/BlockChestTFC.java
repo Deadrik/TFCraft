@@ -506,15 +506,6 @@ public class BlockChestTFC extends BlockTerraContainer
     }
 
     /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
-    public TileEntity createNewTileEntity(World par1World)
-    {
-        TileEntityChest tileentitychest = new TileEntityChest();
-        return tileentitychest;
-    }
-
-    /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
     public boolean canProvidePower()
@@ -572,27 +563,27 @@ public class BlockChestTFC extends BlockTerraContainer
 
         return true;
     }
-
-    public boolean func_96468_q_()
+    
+    @Override
+    public boolean hasComparatorInputOverride()
     {
         return true;
     }
-
-    public int func_94328_b_(World par1World, int par2, int par3, int par4, int par5)
+    
+    @Override
+    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
     {
         return Container.func_94526_b(this.func_94442_h_(par1World, par2, par3, par4));
     }
 
-    @SideOnly(Side.CLIENT)
-    public void func_94332_a(IconRegister par1IconRegister)
+    @Override
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        this.field_94336_cN = par1IconRegister.func_94245_a("wood");
+        this.blockIcon = par1IconRegister.registerIcon("wood");
     }
 
-    /**
-     * Returns the TileEntity used by this block.
-     */
-    public TileEntity getBlockEntity()
+    @Override
+    public TileEntity createNewTileEntity(World world)
     {
         return new TileEntityChestTFC();
     }

@@ -110,7 +110,7 @@ public class RenderAnvil {
 				renderblocks.renderStandardBlock(block, i, j, k);
 				if(te.anvilItemStacks[0] != null && !breaking)
 				{
-					ModLoader.getMinecraftInstance().renderEngine.func_98187_b("/gui/items.png");
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
 					renderblocks.overrideBlockTexture = Item.itemsList[te.anvilItemStacks[0].itemID].getIconIndex(te.anvilItemStacks[0]);
 					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
 					//					renderblocks.renderStandardBlock(block, i, j, k);
@@ -121,10 +121,10 @@ public class RenderAnvil {
 					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 					tessellator.setColorRGBA_F(1, 1, 1, 1);
 
-					double minX = renderblocks.overrideBlockTexture.func_94209_e();
-					double maxX = renderblocks.overrideBlockTexture.func_94212_f();
-					double minZ = renderblocks.overrideBlockTexture.func_94206_g();
-					double maxZ = renderblocks.overrideBlockTexture.func_94210_h();
+					double minX = renderblocks.overrideBlockTexture.getMinU();
+					double maxX = renderblocks.overrideBlockTexture.getMaxU();
+					double minZ = renderblocks.overrideBlockTexture.getMinV();
+					double maxZ = renderblocks.overrideBlockTexture.getMaxV();
 
 					tessellator.addTranslation(0.5f, 0f, 0.5f);
 

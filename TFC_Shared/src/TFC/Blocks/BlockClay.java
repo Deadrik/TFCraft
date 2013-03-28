@@ -54,11 +54,11 @@ public class BlockClay extends BlockTerra
 	}
 	
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 22; i++)
 		{
-			DirtTexture[i] = registerer.func_94245_a("clay/Clay"+i);
+			DirtTexture[i] = registerer.registerIcon("clay/Clay"+i);
 		}
     }
 	/**

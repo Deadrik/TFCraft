@@ -99,16 +99,16 @@ public class BlockFruitLeaves extends BlockTerra
 	String[] WoodNames = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("wood/fruit trees/" + WoodNames[i] + " Leaves");
-			iconsOpaque[i] = iconRegisterer.func_94245_a("wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsDead[i] = iconRegisterer.func_94245_a("wood/fruit trees/" + WoodNames[i] + " Leaves");
-			iconsDeadOpaque[i] = iconRegisterer.func_94245_a("wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsFruit[i] = iconRegisterer.func_94245_a("wood/fruit trees/" + WoodNames[i] + " Fruit");
-			iconsFlowers[i] = iconRegisterer.func_94245_a("wood/fruit trees/" + WoodNames[i] + " Flowers");
+			icons[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves");
+			iconsOpaque[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			iconsDead[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves");
+			iconsDeadOpaque[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			iconsFruit[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Fruit");
+			iconsFlowers[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Flowers");
 		}
     }
 

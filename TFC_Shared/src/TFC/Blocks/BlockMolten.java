@@ -46,9 +46,9 @@ public class BlockMolten extends BlockTerra
 	}
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
-		this.field_94336_cN = iconRegisterer.func_94245_a("/devices/Molten Rock");
+		this.blockIcon = iconRegisterer.registerIcon("/devices/Molten Rock");
     }
 
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)

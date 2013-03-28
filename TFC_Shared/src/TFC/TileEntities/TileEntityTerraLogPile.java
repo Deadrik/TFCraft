@@ -240,15 +240,15 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
         TileEntityTerraLogPile pile = this;
     }
 
-	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
+    @Override
+	public boolean isInvNameLocalized() 
+	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	{
 		return false;
 	}
 }

@@ -271,9 +271,9 @@ public class BlockFirepit extends BlockTerraContainer
 	}
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
-		textureOn = iconRegisterer.func_94245_a("devices/Firepit On");
-		textureOff = iconRegisterer.func_94245_a("devices/Firepit Off");
+		textureOn = iconRegisterer.registerIcon("devices/Firepit On");
+		textureOff = iconRegisterer.registerIcon("devices/Firepit Off");
     }
 }

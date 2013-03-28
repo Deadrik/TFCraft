@@ -79,14 +79,14 @@ public class BlockPlanks extends BlockTerra
 	Icon[] icons = new Icon[16];
 	
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = registerer.func_94245_a("wood/"+WoodNames[i]+" Plank");
+			icons[i] = registerer.registerIcon("wood/"+WoodNames[i]+" Plank");
 		}
 		
-		Block.planks.func_94332_a(registerer);
+		Block.planks.registerIcons(registerer);
     }
 
 	@Override

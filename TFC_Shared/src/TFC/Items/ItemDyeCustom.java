@@ -60,6 +60,7 @@ public class ItemDyeCustom extends ItemTerra
         this.setCreativeTab(CreativeTabs.tabMaterials);
     }
     
+    @Override
     public Icon getIconFromDamage(int par1)
     {
         int j = MathHelper.clamp_int(par1, 0, 15);
@@ -67,36 +68,25 @@ public class ItemDyeCustom extends ItemTerra
     }
 
     @SideOnly(Side.CLIENT)
-    public void func_94581_a(IconRegister par1IconRegister)
+    @Override
+    public void updateIcons(IconRegister par1IconRegister)
     {
         this.field_94594_d = new Icon[field_94595_b.length];
 
         for (int i = 0; i < field_94595_b.length; ++i)
         {
-            this.field_94594_d[i] = par1IconRegister.func_94245_a(field_94595_b[i]);
+            this.field_94594_d[i] = par1IconRegister.registerIcon(field_94595_b[i]);
         }
     }
-
-	
-	Icon[] icons = new Icon[16];
-	@Override
-	public void registerIcon(IconRegister registerer)
-    {
-		for(int i = 0; i < 16; i++)
-			registerer.func_94245_a("/wood/"+MetaNames[i]+" Plank");
-    }
     
-    
+    @Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
     {
         int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
         return super.getUnlocalizedName() + "." + dyeColorNames[i];
     }
 
-    /**
-     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
-     * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
-     */
+    @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
     {
         if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
@@ -132,9 +122,7 @@ public class ItemDyeCustom extends ItemTerra
         }
     }
 
-    /**
-     * dye sheep, place saddles, etc ...
-     */
+    @Override
     public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
     {
         if (par2EntityLiving instanceof EntitySheep)
@@ -157,10 +145,7 @@ public class ItemDyeCustom extends ItemTerra
     }
 
     @SideOnly(Side.CLIENT)
-
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
+    @Override
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (int var4 = 0; var4 < 16; ++var4)

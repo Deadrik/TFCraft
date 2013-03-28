@@ -54,7 +54,7 @@ public class WorldGenCustomFlowers extends WorldGenerator
 
 			if (par1World.isAirBlock(var7, var8, var9) && ((BlockFlower)Block.blocksList[this.plantBlockId]).canBlockStay(par1World, var7, var8, var9))
 			{
-				par1World.setBlockAndMetadataWithNotify(var7, var8, var9, this.plantBlockId, 0, 0);
+				par1World.setBlock(var7, var8, var9, this.plantBlockId);
 			}
 		}
 

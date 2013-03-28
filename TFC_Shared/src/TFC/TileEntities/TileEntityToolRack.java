@@ -310,14 +310,14 @@ public class TileEntityToolRack extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
+	public boolean isInvNameLocalized() 
+	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	{
 		return false;
 	}
 }

@@ -89,7 +89,7 @@ public class TileEntitySpawnMeter extends TileEntity
 					
 					meta = protection > 384 ? 8 : protection / 48;
 					
-					worldObj.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, TFCBlocks.SpawnMeter.blockID, meta, 3);
+					worldObj.setBlock(xCoord, yCoord, zCoord, TFCBlocks.SpawnMeter.blockID, meta, 0x2);
 				}
 			}
 		}

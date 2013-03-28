@@ -92,7 +92,7 @@ public class BlockLogVert extends BlockTerra
         }
         else
         {
-            world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
+            world.setBlock(i, j, k, blockID, l, 0x2);
         }
     }
 

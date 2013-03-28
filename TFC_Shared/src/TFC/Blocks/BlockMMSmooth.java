@@ -82,11 +82,11 @@ public class BlockMMSmooth extends BlockTerra
 	protected String[] names = {"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
 		for(int i = 0; i < 6; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Smooth");
+			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Smooth");
 		}
     }
 	

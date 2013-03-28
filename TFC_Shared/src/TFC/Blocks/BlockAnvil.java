@@ -316,12 +316,12 @@ public class BlockAnvil extends BlockTerraContainer
 	Icon[] textureMapSide = new Icon[8];
 
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < (anvilId == 0 ? 8 : 3); i++)
 		{
-			textureMapTop[i] = registerer.func_94245_a("devices/Anvil_" + (i+anvilId) + "_Top");
-			textureMapSide[i] = registerer.func_94245_a("devices/Anvil_" + (i+anvilId) + "_Side");
+			textureMapTop[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Top");
+			textureMapSide[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Side");
 		}
     }
 }

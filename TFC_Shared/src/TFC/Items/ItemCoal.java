@@ -99,7 +99,7 @@ public class ItemCoal extends ItemTerra {
 				}
 				else if(side == 1)
 				{
-					world.setBlockAndMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1,3);
+					world.setBlock(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1, 0x2);
 					is.stackSize--;
 					return true;
 				}
@@ -118,7 +118,7 @@ public class ItemCoal extends ItemTerra {
 			}
 
 
-			world.setBlockAndMetadataWithNotify(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1,3);
+			world.setBlock(i + map[side][0], j + map[side][1], k + map[side][2], TFCBlocks.Charcoal.blockID, 1, 0x2);
 			is.stackSize--;
 			TFCBlocks.Charcoal.onNeighborBlockChange(world, i + map[side][0], j + map[side][1], k + map[side][2], 0);
 			return true;

@@ -207,7 +207,7 @@ public class GuiBlueprint extends GuiScreen
 //	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
 //			int var3) 
 //	{
-		this.mc.renderEngine.func_98187_b("/bioxx/gui_blueprint.png");
+		this.mc.renderEngine.bindTexture("/bioxx/gui_blueprint.png");
 
 		int var4 = this.guiLeft;
 		int var5 = this.guiTop;

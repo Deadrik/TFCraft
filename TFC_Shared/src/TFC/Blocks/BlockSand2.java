@@ -78,11 +78,11 @@ public class BlockSand2 extends TFC.Blocks.BlockSand
     Icon[] icons = new Icon[7];
 
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 7; i++)
 		{
-			icons[i] = registerer.func_94245_a("sand/Sand"+(i+16));
+			icons[i] = registerer.registerIcon("sand/Sand"+(i+16));
 		}
     }
 

@@ -110,7 +110,7 @@ public class GuiCalendar extends GuiScreen
     @Override
     public void drawScreen(int par1, int par2, float par3)
     {
-    	this.mc.renderEngine.func_98187_b("/bioxx/gui_calendar.png");
+    	this.mc.renderEngine.bindTexture("/bioxx/gui_calendar.png");
 
         int var4 = this.guiLeft;
         int var5 = this.guiTop;

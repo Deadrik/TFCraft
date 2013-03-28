@@ -62,16 +62,16 @@ public class BlockWorkbench extends BlockTerraContainer
 	@Override
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return par1 == 1 ? this.field_94385_a : (par1 == 0 ? TFCBlocks.Planks.getBlockTextureFromSide(par1) : (par1 != 2 && par1 != 4 ? this.field_94336_cN : this.field_94384_b));
+        return par1 == 1 ? this.field_94385_a : (par1 == 0 ? TFCBlocks.Planks.getBlockTextureFromSide(par1) : (par1 != 2 && par1 != 4 ? this.blockIcon : this.field_94384_b));
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void func_94332_a(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        this.field_94336_cN = par1IconRegister.func_94245_a("workbench_side");
-        this.field_94385_a = par1IconRegister.func_94245_a("workbench_top");
-        this.field_94384_b = par1IconRegister.func_94245_a("workbench_front");
+        this.blockIcon = par1IconRegister.registerIcon("workbench_side");
+        this.field_94385_a = par1IconRegister.registerIcon("workbench_top");
+        this.field_94384_b = par1IconRegister.registerIcon("workbench_front");
     }
 
 	@Override

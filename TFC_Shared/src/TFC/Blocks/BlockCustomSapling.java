@@ -81,24 +81,24 @@ public class BlockCustomSapling extends BlockTerraContainer
 			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = registerer.func_94245_a("wood/trees/"+WoodNames[i]+" Sapling");
+			icons[i] = registerer.registerIcon("wood/trees/"+WoodNames[i]+" Sapling");
 		}
     }
 
 	public void growTree(World world, int i, int j, int k, Random random)
 	{
 		int l = world.getBlockMetadata(i, j, k);
-		world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+		world.setBlockToAir(i, j, k);
 		Object obj = TFCBiome.getTreeGen(l, random.nextBoolean());
 		
 		
 		if (obj!= null && !((WorldGenerator) obj).generate(world, random, i, j, k))
 		{
-			world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
+			world.setBlock(i, j, k, blockID, l, 3);
 		}
 	}
 	
@@ -111,7 +111,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 
 			int meta = world.getBlockMetadata(i, j, k);
 			this.dropBlockAsItem_do(world, i, j, k, new ItemStack(this,1,meta));
-			world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+			world.setBlockToAir(i, j, k);
 		}
 	}
 	
@@ -225,7 +225,7 @@ public class BlockCustomSapling extends BlockTerraContainer
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockAndMetadataWithNotify(par2, par3, par4, 0, 0, 2);
+            par1World.setBlockToAir(par2, par3, par4);
         }
     }
 }

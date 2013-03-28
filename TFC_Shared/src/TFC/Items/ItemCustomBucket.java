@@ -183,17 +183,17 @@ public class ItemCustomBucket extends ItemTerra
                                 if(blockMeta > 0)
                                 {
                                     bucketMeta = bucketMeta + blockMeta;
-                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0,3);
-                                    world.setBlockAndMetadataWithNotify(i, j+1, k, TFCBlocks.finiteWater.blockID, bucketMeta,3);
+                                    world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID);
+                                    world.setBlock(i, j+1, k, TFCBlocks.finiteWater.blockID, bucketMeta, 0x02);
                                 }
                                 else
                                 {
-                                    world.setBlockAndMetadataWithNotify(i, j, k, TFCBlocks.finiteWater.blockID, 0,3);
+                                    world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID, 0, 0x02);
                                 }
                             }
                             else
                             {
-                                world.setBlockAndMetadataWithNotify(i, j, k, this.isFull, 0,3);
+                                world.setBlock(i, j, k, this.isFull);
                             }
                         }
 

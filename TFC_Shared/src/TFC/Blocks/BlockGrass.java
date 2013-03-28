@@ -71,13 +71,13 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     }
     
     @Override
-    public void func_94332_a(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 23; i++)
 		{
-			DirtTexture[i] = registerer.func_94245_a("soil/Dirt"+i);
+			DirtTexture[i] = registerer.registerIcon("soil/Dirt"+i);
 		}
-		GrassTopTexture = registerer.func_94245_a("GrassTop");
+		GrassTopTexture = registerer.registerIcon("GrassTop");
     }
 
     /**
@@ -166,11 +166,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
         if (!world.isRemote)
         {
         	if(world.getBlockId(i, j+1, k)==Block.snow.blockID){
-        		world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDryGrass(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 2);
+        		world.setBlock(i, j, k, TFC_Core.getTypeForDryGrass(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
         	}
         	else if (world.getBlockLightValue(i, j + 1, k) < 4 && Block.lightOpacity[world.getBlockId(i, j + 1, k)] > 2)
             {
-                world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 2);
+                world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
             }
             else if (world.getBlockLightValue(i, j + 1, k) >= 9)
             {            	
@@ -188,11 +188,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
                     if (TFC_Core.isDirt(id) && rand.nextInt(10) == 0 &&
                     		world.getBlockLightValue(x, y + 1, z) >= 4 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
-                        world.setBlockAndMetadataWithNotify(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta, 2);
+                        world.setBlock(x, y, z, TFC_Core.getTypeForGrassWithRain(meta, rain), meta, 0x2);
                     }
                     else if (TFC_Core.isClay(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
-                        world.setBlockAndMetadataWithNotify(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 2);
+                        world.setBlock(x, y, z, TFC_Core.getTypeForClayGrass(meta), meta, 0x2);
                     }
                     else if (TFC_Core.isPeat(id) && world.getBlockLightValue(x, y + 1, z) >= 4 && rand.nextInt(10) == 0 && world.getBlockMaterial(x, y + 1, z) != Material.water)
                     {
@@ -208,7 +208,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
                 {
                 	if(rand.nextInt((int) ((16800-rain)/4)) == 0)
                 	{
-                		world.setBlockAndMetadataWithNotify(i, j + 1, k, Block.tallGrass.blockID, 1, 2);
+                		world.setBlock(i, j + 1, k, Block.tallGrass.blockID, 1, 0x2);
                 	}
                 	else if(rand.nextInt(10000) == 0)
                 	{
@@ -236,12 +236,12 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
                 if(TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && !nearWater && rain < 500)
                 {
                 	int meta = TFC_Core.getSoilMetaFromStone(rock1[0], rock1[1]);
-                	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 2);
+                	world.setBlock(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 0x2);
                 }
                 else if(TFC_Core.isGrass(id) && TFC_Core.isDryGrass(id) && (nearWater||rain>=500)&&world.getBlockId(i, j+1, k)!=Block.snow.blockID)
                 {
                 	int meta = TFC_Core.getSoilMetaFromStone(rock1[0], rock1[1]);
-                	world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 2);
+                	world.setBlock(i, j, k, TFC_Core.getTypeForGrass(meta), meta, 0x2);
                 }
             }
             
@@ -275,7 +275,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
             if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)
             {
                 int meta = world.getBlockMetadata(i, j, k);
-                world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 2);
+                world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);
             }
         }
     }
@@ -295,7 +295,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
         if(!world.blockExists(i, j-1, k))
         {
             int meta = world.getBlockMetadata(i, j, k);
-            world.setBlockAndMetadataWithNotify(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 2);
+            world.setBlock(i, j, k, TFC_Core.getTypeForDirt(meta), meta, 0x2);
         }
     }
 }

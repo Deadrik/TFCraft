@@ -79,11 +79,11 @@ public class WorldGenPeatPit implements IWorldGenerator
 							{
 								if (TFC_Core.isDirt(blockID) || TFC_Core.isClay(blockID) || TFC_Core.isPeat(blockID))
 								{
-									par1World.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.Peat.blockID, 0, 0);
+									par1World.setBlock(x, y, z, TFCBlocks.Peat.blockID);
 								}
 								else if(TFC_Core.isGrass(blockID))
 								{
-									par1World.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.PeatGrass.blockID, 0, 0);
+									par1World.setBlock(x, y, z, TFCBlocks.PeatGrass.blockID);
 								}
 							}
 						}

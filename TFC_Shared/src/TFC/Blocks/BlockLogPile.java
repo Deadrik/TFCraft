@@ -123,9 +123,9 @@ public class BlockLogPile extends BlockContainer
 	
 	public void registerIcon(IconRegister iconRegisterer)
     {
-		icons[0] = iconRegisterer.func_94245_a("Log Pile Side 0");
-		icons[1] = iconRegisterer.func_94245_a("Log Pile Side 1");
-		icons[2] = iconRegisterer.func_94245_a("Log Pile End");
+		icons[0] = iconRegisterer.registerIcon("Log Pile Side 0");
+		icons[1] = iconRegisterer.registerIcon("Log Pile Side 1");
+		icons[2] = iconRegisterer.registerIcon("Log Pile End");
     }
 	
 	public void Eject(World par1World, int par2, int par3, int par4)

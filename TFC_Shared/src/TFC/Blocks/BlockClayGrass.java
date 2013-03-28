@@ -20,13 +20,13 @@ public class BlockClayGrass extends BlockGrass
     }
 
     @Override
-    public void func_94332_a(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 23; i++)
 		{
-			DirtTexture[i] = registerer.func_94245_a("clay/Clay"+i);
+			DirtTexture[i] = registerer.registerIcon("clay/Clay"+i);
 		}
-		GrassTopTexture = registerer.func_94245_a("GrassTop");
+		GrassTopTexture = registerer.registerIcon("GrassTop");
     }
     
     @Override

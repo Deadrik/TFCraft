@@ -88,12 +88,12 @@ public class BlockFiniteWater extends BlockFluid
         {
             if (y == 145 && world.getBlockMetadata(x, y, z) == 0)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 3);
+                world.setBlock(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 0x2);
                 return;
             }
             else if (random.nextInt(200) == 0 && world.canBlockSeeTheSky(x, y, z) && world.getBlockMetadata(x, y, z) == 0)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 3);
+                world.setBlock(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 0x2);
                 return;
             }
         }
@@ -154,7 +154,7 @@ public class BlockFiniteWater extends BlockFluid
                   }
                   else
                   {
-                      world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
+                      world.setBlockToAir(x, y, z);
                   }
               }
           }
@@ -171,7 +171,7 @@ public class BlockFiniteWater extends BlockFluid
         //if it runs into vanilla style water, let it be absorbed.
         if(world.getBlockId(x, y-1, z) == Block.waterStill.blockID || world.getBlockId(x, y-1, z) == Block.waterMoving.blockID)
         {
-            world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
+            world.setBlockToAir(x, y, z);
             return true;
         }
         
@@ -179,15 +179,15 @@ public class BlockFiniteWater extends BlockFluid
         {
         	if(blockMeta < blockMeta2)
         	{
-        		world.setBlockAndMetadataWithNotify(x2, y2, z2, TFCBlocks.finiteWater.blockID, blockMeta2-1, 3);
-        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta+1, 3);
+        		world.setBlock(x2, y2, z2, TFCBlocks.finiteWater.blockID, blockMeta2-1, 0x2);
+        		world.setBlock(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta+1, 0x2);
         	}
         }
         if (blockID2 == Block.waterStill.blockID)
         {
         	if(blockMeta > 0)
         	{
-        		world.setBlockAndMetadataWithNotify(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta-1, 3);
+        		world.setBlock(x, y, z, TFCBlocks.finiteWater.blockID, blockMeta-1, 0x2);
         	}
         }
         
@@ -203,7 +203,7 @@ public class BlockFiniteWater extends BlockFluid
                 }
                 else if (blockMeta2 > 0)
                 {
-                    world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
+                    world.setBlockToAir(x, y, z);
                     world.setBlockMetadataWithNotify(x2, y2, z2, blockMeta2 - 1, 3);
                     return true;
                 }
@@ -249,7 +249,7 @@ public class BlockFiniteWater extends BlockFluid
                     }
                     else
                     {
-                        world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
+                        world.setBlockToAir(x, y, z);
                         return true;
                     }
                 }
@@ -260,14 +260,14 @@ public class BlockFiniteWater extends BlockFluid
             }
             if (y2 < y)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
-                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, blockMeta,3);
+                world.setBlockToAir(x, y, z);
+                world.setBlock(x2, y2, z2, blockID, blockMeta, 0x2);
                 return true;
             }
             if (blockMeta < 7)
             {
                 world.setBlockMetadataWithNotify(x, y, z, blockMeta + 1,3);
-                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7,3);
+                world.setBlock(x2, y2, z2, blockID, 7,0x2);
                 return true;
             }
             else if (world.getBlockId(x - 1, y, z) != this.blockID &&
@@ -276,13 +276,13 @@ public class BlockFiniteWater extends BlockFluid
                     world.getBlockId(x, y, z - 1) != this.blockID &&
                     world.getBlockId(x, y, z + 1) != this.blockID)
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
+                world.setBlockToAir(x, y, z);
                 return true;
             }
             else
             {
-                world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
-                world.setBlockAndMetadataWithNotify(x2, y2, z2, blockID, 7,3);
+                world.setBlockToAir(x, y, z);
+                world.setBlock(x2, y2, z2, blockID, 7, 0x2);
                 return true;
             }
         }

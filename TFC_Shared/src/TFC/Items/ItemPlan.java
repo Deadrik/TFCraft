@@ -47,9 +47,9 @@ public class ItemPlan extends ItemTerra
 	}
 	
 	@Override
-    public void func_94581_a(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
-		registerer.func_94245_a(this.textureFolder+"Plan");
+		registerer.registerIcon(this.textureFolder+"Plan");
     }
 	
 	@Override

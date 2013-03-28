@@ -48,12 +48,12 @@ public class BlockCharcoal extends BlockTerra {
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
 	{
-		return field_94336_cN;
+		return blockIcon;
 	}
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
-		this.field_94336_cN = iconRegisterer.func_94245_a("/devices/Charcoal");
+		this.blockIcon = iconRegisterer.registerIcon("/devices/Charcoal");
     }
 
 	@Override
@@ -100,31 +100,31 @@ public class BlockCharcoal extends BlockTerra {
 						int m1 = world.getBlockMetadata(i, j+top, k);
 						if(m1-1 > 0)
 						{
-							world.setBlockMetadataWithNotify(i, j+top, k, m1-1, 3);
+							world.setBlockMetadataWithNotify(i, j+top, k, m1-1, 2);
 						}
 						else
-							world.setBlockAndMetadataWithNotify(i, j+top, k, 0, 0, 2);
+							world.setBlockToAir(i, j+top, k);
 
-						world.setBlockAndMetadataWithNotify(i, j, k, blockID, 8, 3);
+						world.setBlock(i, j, k, blockID, 8, 2);
 					}
 					else
 					{
-						world.setBlockAndMetadataWithNotify(i, j, k, blockID, l-1, 3);
+						world.setBlock(i, j, k, blockID, l-1, 2);
 					}
 
 					world.markBlockForUpdate(i, j, k);
 					world.markBlockForUpdate(i, j+top, k);
 				}
 				else
-					world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+					world.setBlock(i, j, k, 0, 0, 2);
 			}
 			else
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, blockID, l, 3);
+				world.setBlock(i, j, k, blockID, l, 2);
 			}
 
 			if(l == 0)
-				world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+				world.setBlockToAir(i, j, k);
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class BlockCharcoal extends BlockTerra {
 		if(world.getBlockMetadata(x, y, z) > 0)
 			return false;
 
-		return world.setBlockAndMetadataWithNotify(x, y, z, 0, 0, 2);
+		return world.setBlockToAir(x, y, z);
 	}
 
 	public void combineCharcoalDown(World world, int i, int j, int k)
@@ -153,11 +153,11 @@ public class BlockCharcoal extends BlockTerra {
 
 
 			if(m2 > 0)
-				world.setBlockAndMetadataWithNotify(i, j, k, blockID, m2, 0);
+				world.setBlock(i, j, k, blockID, m2, 0);
 			else
-				world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+				world.setBlockToAir(i, j, k);
 
-			world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, bottomMeta, 0);
+			world.setBlock(i, j-1, k, blockID, bottomMeta, 0x3);
 		}
 	}
 
@@ -177,11 +177,11 @@ public class BlockCharcoal extends BlockTerra {
 
 
 			if(m2 > 0)
-				world.setBlockAndMetadataWithNotify(i, j+1, k, blockID, m2, 0);
+				world.setBlock(i, j+1, k, blockID, m2, 0x3);
 			else
-				world.setBlockAndMetadataWithNotify(i, j+1, k, 0, 0, 2);
+				world.setBlockToAir(i, j+1, k);
 
-			world.setBlockAndMetadataWithNotify(i, j, k, blockID, bottomMeta, 0);
+			world.setBlock(i, j, k, blockID, bottomMeta, 0x3);
 		}
 	}
 
@@ -193,8 +193,8 @@ public class BlockCharcoal extends BlockTerra {
 			if(world.getBlockId(i, j-1, k) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlockAndMetadataWithNotify(i, j-1, k, blockID, meta, 0);
-				world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+				world.setBlock(i, j-1, k, blockID, meta, 0);
+				world.setBlockToAir(i, j, k);
 			}
 			else
 			{

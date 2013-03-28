@@ -64,8 +64,8 @@ public class ItemFruitTreeSapling extends ItemTerra
                 world.getBlockId(x, y+1, z) == 0 && !world.isRemote)
         {
             
-            world.setBlockAndMetadataWithNotify(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset, 3);
-            world.markBlockForUpdate(x, y+1, z);
+            world.setBlock(x, y+1, z, TFCBlocks.fruitTreeWood.blockID, stack.getItemDamage()+offset, 0x2);
+
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setTrunk(true);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setHeight(0);
             ((TileEntityFruitTreeWood)world.getBlockTileEntity(x, y+1, z)).setBirth();
@@ -95,10 +95,10 @@ public class ItemFruitTreeSapling extends ItemTerra
     
     Icon[] icons = new Icon[Names.length];
 	@Override
-	public void registerIcon(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < Names.length; i++)
-			registerer.func_94245_a("wood/fruit trees/"+Names[i]+" Fruit Sapling");
+			registerer.registerIcon("wood/fruit trees/"+Names[i]+" Fruit Sapling");
     }
     
     @Override

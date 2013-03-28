@@ -52,11 +52,11 @@ public class BlockOre2 extends BlockOre
 	}
 	
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("ores/"+blockNames[i] + " Ore");
+			icons[i] = iconRegisterer.registerIcon("ores/"+blockNames[i] + " Ore");
 		}
     }
 

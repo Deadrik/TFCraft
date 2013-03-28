@@ -71,12 +71,12 @@ public class RenderFluids
             if (renderblocks.renderAllFaces || flag)
             {
                 flag2 = true;
-                Icon icon = renderblocks.func_94165_a(par1Block, 1, i1);
+                Icon icon = renderblocks.getBlockIconFromSideAndMetadata(par1Block, 1, i1);
                 float f8 = (float)BlockFluid.getFlowDirection(renderblocks.blockAccess, par2, par3, par4, material);
 
                 if (f8 > -999.0F)
                 {
-                    icon = renderblocks.func_94165_a(par1Block, 2, i1);
+                    icon = renderblocks.getBlockIconFromSideAndMetadata(par1Block, 2, i1);
                 }
 
                 d2 -= d6;
@@ -94,11 +94,11 @@ public class RenderFluids
 
                 if (f8 < -999.0F)
                 {
-                    d8 = (double)icon.func_94214_a(0.0D);
-                    d12 = (double)icon.func_94207_b(0.0D);
+                    d8 = (double)icon.getInterpolatedU(0.0D);
+                    d12 = (double)icon.getInterpolatedV(0.0D);
                     d7 = d8;
-                    d11 = (double)icon.func_94207_b(16.0D);
-                    d10 = (double)icon.func_94214_a(16.0D);
+                    d11 = (double)icon.getInterpolatedV(16.0D);
+                    d10 = (double)icon.getInterpolatedU(16.0D);
                     d14 = d11;
                     d9 = d10;
                     d13 = d12;
@@ -107,14 +107,14 @@ public class RenderFluids
                 {
                     f7 = MathHelper.sin(f8) * 0.25F;
                     float f9 = MathHelper.cos(f8) * 0.25F;
-                    d8 = (double)icon.func_94214_a((double)(8.0F + (-f9 - f7) * 16.0F));
-                    d12 = (double)icon.func_94207_b((double)(8.0F + (-f9 + f7) * 16.0F));
-                    d7 = (double)icon.func_94214_a((double)(8.0F + (-f9 + f7) * 16.0F));
-                    d11 = (double)icon.func_94207_b((double)(8.0F + (f9 + f7) * 16.0F));
-                    d10 = (double)icon.func_94214_a((double)(8.0F + (f9 + f7) * 16.0F));
-                    d14 = (double)icon.func_94207_b((double)(8.0F + (f9 - f7) * 16.0F));
-                    d9 = (double)icon.func_94214_a((double)(8.0F + (f9 - f7) * 16.0F));
-                    d13 = (double)icon.func_94207_b((double)(8.0F + (-f9 - f7) * 16.0F));
+                    d8 = (double)icon.getInterpolatedU((double)(8.0F + (-f9 - f7) * 16.0F));
+                    d12 = (double)icon.getInterpolatedV((double)(8.0F + (-f9 + f7) * 16.0F));
+                    d7 = (double)icon.getInterpolatedU((double)(8.0F + (-f9 + f7) * 16.0F));
+                    d11 = (double)icon.getInterpolatedV((double)(8.0F + (f9 + f7) * 16.0F));
+                    d10 = (double)icon.getInterpolatedU((double)(8.0F + (f9 + f7) * 16.0F));
+                    d14 = (double)icon.getInterpolatedV((double)(8.0F + (f9 - f7) * 16.0F));
+                    d9 = (double)icon.getInterpolatedU((double)(8.0F + (f9 - f7) * 16.0F));
+                    d13 = (double)icon.getInterpolatedV((double)(8.0F + (-f9 - f7) * 16.0F));
                 }
 
                 tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4));
@@ -131,7 +131,7 @@ public class RenderFluids
                 tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
                 float f10 = 1.0F;
                 tessellator.setColorOpaque_F(f3 * f10, f3 * f10, f3 * f10);
-                renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3 + d6, (double)par4, renderblocks.func_94173_a(par1Block, 0));
+                renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3 + d6, (double)par4, renderblocks.getBlockIconFromSide(par1Block, 0));
                 flag2 = true;
             }
 
@@ -160,7 +160,7 @@ public class RenderFluids
                     ++k1;
                 }
 
-                Icon icon1 = renderblocks.func_94165_a(par1Block, j1 + 2, i1);
+                Icon icon1 = renderblocks.getBlockIconFromSideAndMetadata(par1Block, j1 + 2, i1);
 
                 if (renderblocks.renderAllFaces || aboolean[j1])
                 {
@@ -209,12 +209,11 @@ public class RenderFluids
                     }
 
                     flag2 = true;
-                    float f11 = icon1.func_94214_a(0.0D);
-                    f7 = icon1.func_94214_a(8.0D);
-                    int i2 = icon1.func_94216_b();
-                    float f12 = icon1.func_94207_b((1.0D - d15) * 16.0D * 0.5D);
-                    float f13 = icon1.func_94207_b((1.0D - d17) * 16.0D * 0.5D);
-                    float f14 = icon1.func_94207_b(8.0D);
+                    float f11 = icon1.getInterpolatedU(0.0D);
+                    f7 = icon1.getInterpolatedU(8.0D);
+                    float f12 = icon1.getInterpolatedV((1.0D - d15) * 16.0D * 0.5D);
+                    float f13 = icon1.getInterpolatedV((1.0D - d17) * 16.0D * 0.5D);
+                    float f14 = icon1.getInterpolatedV(8.0D);
                     tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, k1, par3, l1));
                     float f15 = 1.0F;
 

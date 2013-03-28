@@ -52,6 +52,7 @@ public class ItemWoodDoor extends ItemTerra
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
+    @Override
     public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ)
     {
         if (side != 1)
@@ -162,8 +163,8 @@ public class ItemWoodDoor extends ItemTerra
             var12 = true;
         }
 
-        par0World.setBlockAndMetadataWithNotify(par1, par2, par3, par5Block.blockID, par4,3);
-        par0World.setBlockAndMetadataWithNotify(par1, par2 + 1, par3, par5Block.blockID, 8 | (var12 ? 1 : 0),3);
+        par0World.setBlock(par1, par2, par3, par5Block.blockID, par4, 0x2);
+        par0World.setBlock(par1, par2 + 1, par3, par5Block.blockID, 8 | (var12 ? 1 : 0), 0x2);
         par0World.notifyBlocksOfNeighborChange(par1, par2, par3, par5Block.blockID);
         par0World.notifyBlocksOfNeighborChange(par1, par2 + 1, par3, par5Block.blockID);
     }

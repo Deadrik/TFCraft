@@ -39,6 +39,8 @@ import net.minecraft.world.gen.feature.*;
 public class BlockPeat extends BlockTerra
 {
 
+	private Icon field_94336_cN;
+
 	public BlockPeat(int i)
 	{
 		super(i, Material.ground);
@@ -56,8 +58,8 @@ public class BlockPeat extends BlockTerra
 	}
 
 	@Override
-    public void registerIcon(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
-		this.field_94336_cN = registerer.func_94245_a("soil/Peat");
+		this.field_94336_cN = registerer.registerIcon("soil/Peat");
     }
 }

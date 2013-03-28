@@ -70,11 +70,11 @@ public class BlockIgEx extends BlockCollapsable
 	protected String[] names = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
 
 	@Override
-	public void registerIcon(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("rocks/"+names[i]+" Raw");
+			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Raw");
 		}
 	}
 

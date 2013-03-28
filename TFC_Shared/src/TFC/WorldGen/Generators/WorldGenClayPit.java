@@ -82,13 +82,13 @@ public class WorldGenClayPit implements IWorldGenerator
 
 							if (ID == TFCBlocks.Dirt.blockID || ID == TFCBlocks.Dirt2.blockID)
 							{
-								world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, 
-										TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0);
+								world.setBlock(xCoord, yCoord, zCoord, 
+										TFC_Core.getTypeForClay(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0x2);
 							}
 							else if(ID == TFCBlocks.Grass.blockID || ID == TFCBlocks.Grass2.blockID)
 							{
-								world.setBlockAndMetadataWithNotify(xCoord, yCoord, zCoord, 
-										TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0);
+								world.setBlock(xCoord, yCoord, zCoord, 
+										TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0x2);
 							}
 						}
 					}

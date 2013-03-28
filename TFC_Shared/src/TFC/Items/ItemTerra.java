@@ -65,16 +65,10 @@ public class ItemTerra extends Item implements ISize
     	return this;
     }
     
-	public void registerIcon(IconRegister registerer)
-    {
-		this.iconIndex = registerer.func_94245_a(textureFolder+this.getUnlocalizedName().replace("item.", ""));
-    }
-    
     @Override
-    public void func_94581_a(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
-    	//super.func_94581_a(registerer);
-    	registerIcon(registerer);
+		this.iconIndex = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", ""));
     }
     
     @Override

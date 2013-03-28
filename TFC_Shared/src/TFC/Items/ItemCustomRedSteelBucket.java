@@ -208,7 +208,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 			}
 			else
 			{
-				par1World.setBlockAndMetadataWithNotify(par8, par9, par10, this.isFull, 0, 3);
+				par1World.setBlock(par8, par9, par10, this.isFull);
 			}
 
 			return true;

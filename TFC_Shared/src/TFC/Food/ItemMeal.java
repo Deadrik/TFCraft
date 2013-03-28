@@ -60,10 +60,10 @@ public class ItemMeal extends ItemTerraFood
 	
 	Icon[] icons = new Icon[11];
 	@Override
-	public void func_94581_a(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 11; i++)
-			registerer.func_94245_a("/food/Meal"+i);
+			registerer.registerIcon("/food/Meal"+i);
     }
 
 	@Override

@@ -54,48 +54,37 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     }
     
     @Override
-    public int getRenderType()
-    {
-        return TFCBlocks.leavesRenderId;
-    }
-    
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         return true;
     }
     
-    /**
-     * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
-     * when first determining what to render.
-     */
+    @Override
     public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
          return TerraFirmaCraft.proxy.foliageColorMultiplier(par1IBlockAccess, par2, par3, par4);
     }
 
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
     }
 
-    /**
-     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-     */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
         par5Entity.motionX *= 0.8D;
         par5Entity.motionZ *= 0.8D;
     }
-
+    
+    @Override
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
         return TFC_Settings.enableInnerGrassFix;
     }
 
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
     	onNeighborBlockChange(par1World,par2,par3,par4,0);
@@ -252,11 +241,13 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     {
         return random.nextInt(20) != 0 ? 0 : 1;
     }
+    
     @Override
     public int idDropped(int i, Random random, int j)
     {
         return TFCBlocks.Sapling.blockID;
     }
+    
     @Override
     public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
     {
@@ -265,7 +256,8 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 
         }
     }
-
+    
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {
         ItemStack itemstack = entityplayer.inventory.getCurrentItem();
@@ -351,12 +343,12 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
 			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegisterer)
+	public void registerIcons(IconRegister iconRegisterer)
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = iconRegisterer.func_94245_a("wood/trees/" + WoodNames[i] + " Leaves Fancy");
-			iconsOpaque[i] = iconRegisterer.func_94245_a("wood/trees/" + WoodNames[i] + " Leaves");
+			icons[i] = iconRegisterer.registerIcon("wood/trees/" + WoodNames[i] + " Leaves Fancy");
+			iconsOpaque[i] = iconRegisterer.registerIcon("wood/trees/" + WoodNames[i] + " Leaves");
 		}
     }
 
