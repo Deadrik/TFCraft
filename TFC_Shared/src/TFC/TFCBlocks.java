@@ -33,6 +33,7 @@ import TFC.Blocks.BlockDetailed;
 import TFC.Blocks.BlockDryGrass;
 import TFC.Blocks.BlockFiniteWater;
 import TFC.Blocks.BlockFirepit;
+import TFC.Blocks.BlockFlora;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockForge;
 import TFC.Blocks.BlockFruitLeaves;
@@ -81,6 +82,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCBlocks 
 {
+	public static int clayGrassRenderId;
+	public static int peatGrassRenderId;
 	//////////////////////////////////////////////
 	public static int sulfurRenderId;
 	public static int woodFruitRenderId;
@@ -244,6 +247,8 @@ public class TFCBlocks
 	public static Block BarrelWillow;
 	public static Block BarrelKapok;
 
+	public static Block Flora;
+	
 	static Configuration config;
 	
 	public static void RegisterBlocks()
@@ -380,6 +385,8 @@ public class TFCBlocks
 		GameRegistry.registerBlock(BarrelWhiteElm, "BarrelWhiteElm");
 		GameRegistry.registerBlock(BarrelWillow, "BarrelWillow");
 		GameRegistry.registerBlock(BarrelKapok, "BarrelKapok");
+		
+		GameRegistry.registerBlock(Flora, "Flora");
 	}
 	
 	public static void LoadBlocks()
@@ -598,6 +605,8 @@ public class TFCBlocks
 		BarrelWhiteElm = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWhiteElm", num++)).setUnlocalizedName("White Elm Barrel");
 		BarrelWillow = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelWillow", num++)).setUnlocalizedName("Willow Barrel");
 		BarrelKapok = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "BarrelKapok", num++)).setUnlocalizedName("Kapok Barrel");
+		
+		Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", num++)).setUnlocalizedName("Flora");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

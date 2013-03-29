@@ -23,7 +23,7 @@ public class ItemOre extends ItemTerra
 				"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
 				"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
 				/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
-				/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
+				/*32*/"Borax", "Olivine", "Lapis Lazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
 		setFolder("ore/");
 	}
 	

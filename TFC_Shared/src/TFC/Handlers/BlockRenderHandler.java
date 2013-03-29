@@ -42,6 +42,14 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return RenderGrass.render(block, i, j, k, renderer);
         }
+        else if (modelId == TFCBlocks.clayGrassRenderId)
+        {
+        	return RenderGrass.renderClay(block, i, j, k, renderer);
+        }
+        else if (modelId == TFCBlocks.peatGrassRenderId)
+        {
+        	return RenderGrass.renderPeat(block, i, j, k, renderer);
+        }
         else if (modelId == TFCBlocks.oreRenderId)
         {
             int var5 = block.colorMultiplier(world, i, j, k);

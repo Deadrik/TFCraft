@@ -144,7 +144,23 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 				new WorldGenDeadBush(Block.deadBush.blockID).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 		}
 		
-		
+		/*int catTailsNum = 10;
+		for (var2 = 0; var2 < catTailsNum; ++var2)
+		{
+			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
+
+			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord))
+				catTailsNum = 20;
+			
+			if(currentWorld.getBlockId(xCoord, yCoord, zCoord) == Block.waterStill.blockID && 
+					currentWorld.isBlockOpaqueCube(xCoord, yCoord-1, zCoord))
+			{
+				currentWorld.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.Flora.blockID, 1, 0x2);
+			}
+			
+		}*/
 
 		for (var2 = 0; var2 < this.waterlilyPerChunk; ++var2)
 		{

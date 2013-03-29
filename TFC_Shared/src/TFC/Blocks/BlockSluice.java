@@ -67,7 +67,7 @@ public class BlockSluice extends BlockContainer
 					TileEntitySluice tileentitysluice;
 					tileentitysluice = (TileEntitySluice)world.getBlockTileEntity(i, j, k);
 					ItemStack is =entityplayer.getCurrentEquippedItem();
-					if(is!= null && is.itemID == TFCItems.terraGoldPan.itemID && is.getItemDamage() != 0)
+					if(is!= null && is.itemID == TFCItems.GoldPan.itemID && is.getItemDamage() != 0)
 					{
 						tileentitysluice.soilAmount+=7;
 						tileentitysluice.soilType = (byte) is.getItemDamage();
@@ -128,7 +128,7 @@ public class BlockSluice extends BlockContainer
 	public int idDropped(int i, Random random, int j)
 	{
 		if(!isBlockFootOfBed(i)) {
-			return TFCItems.terraSluiceItem.itemID;
+			return TFCItems.SluiceItem.itemID;
 		} else {
 			return 0;
 		}

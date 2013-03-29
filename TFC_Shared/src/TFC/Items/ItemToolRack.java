@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -14,21 +15,28 @@ public class ItemToolRack extends ItemTerra
 	public ItemToolRack(int id) {
 		super(id);
 		this.hasSubtypes = true;
-        this.setMaxDamage(0);
-        this.MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-                "Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-        this.setFolder("devices/toolrack/");
+		this.setMaxDamage(0);
+		this.MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
+				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+		this.setFolder("devices/toolrack/");
+	}
+
+	@Override
+	public void updateIcons(IconRegister registerer)
+	{
+		for(int i = 0; i < 16; i++)
+			this.iconIndex = registerer.registerIcon(textureFolder+MetaNames[i]);
 	}
 
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.HUGE;
 	}
-	
-	 @Override
-		public EnumWeight getWeight() {
-			return EnumWeight.LIGHT;
-		}
+
+	@Override
+	public EnumWeight getWeight() {
+		return EnumWeight.LIGHT;
+	}
 
 	@Override
 	public int getMetadata(int i) 
@@ -96,7 +104,7 @@ public class ItemToolRack extends ItemTerra
 
 		return false;
 	}
-	
-	
+
+
 
 }

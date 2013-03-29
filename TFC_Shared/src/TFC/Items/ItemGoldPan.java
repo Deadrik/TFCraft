@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
@@ -23,6 +25,7 @@ import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 public class ItemGoldPan extends ItemTerra
 {
     public static String[] blockNames = {"GoldPan", "GoldPanSand", "GoldPanGravel", "GoldPanClay", "GoldPanDirt"};
+    public Icon[] icons = new Icon[blockNames.length];
 
     private int useTimer = 0;
     public ItemGoldPan(int i) 
@@ -45,30 +48,39 @@ public class ItemGoldPan extends ItemTerra
     	return 1;
     }
 
-    /*public int getIconFromDamage(int i)
+    @Override
+    public Icon getIconFromDamage(int i)
     {
-        int j = 1;
         if(i == 1) {
-            return 2;
+            return icons[1];
         }
         if(i == 2) {
-            return 3;
+        	return icons[2];
         }
         if(i == 3) {
-            return 4;
+        	return icons[3];
         }
         if(i == 4) {
-            return 5;
+        	return icons[4];
         }
 
-        return j;
-    }*/
+        return icons[0];
+    }
+    
+    @Override
+	public void updateIcons(IconRegister registerer)
+    {
+    	icons[0] = registerer.registerIcon("tools/GoldPan_0");
+    	icons[1] = registerer.registerIcon("tools/GoldPan_1");
+    	icons[2] = registerer.registerIcon("tools/GoldPan_2");
+    	icons[3] = registerer.registerIcon("tools/GoldPan_3");
+    	icons[4] = registerer.registerIcon("tools/GoldPan_4");
+    }
 
     @Override
-    public String getItemDisplayName(ItemStack itemstack) 
+    public String getUnlocalizedName(ItemStack itemstack) 
     {
-        String s = new StringBuilder().append(this.getUnlocalizedName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-        return s;
+        return blockNames[itemstack.getItemDamage()];
     }
 
 

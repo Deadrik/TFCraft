@@ -31,9 +31,6 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 	@SideOnly(Side.CLIENT)
     public Icon iconGrassSideOverlay;
 	
-	@SideOnly(Side.CLIENT)
-	Icon[] DirtTexture = new Icon[23];
-	
 	public BlockGrass(int par1)
     {
         super(par1);
@@ -54,21 +51,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     @Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < 23; i++)
-		{
-			DirtTexture[i] = registerer.registerIcon("soil/Dirt"+i);
-		}
 		GrassTopTexture = registerer.registerIcon("GrassTop");
 
 		iconSnowSide = registerer.registerIcon("snow");
 		iconGrassSideOverlay = registerer.registerIcon("GrassSide");
 		TFC_Textures.InvisibleTexture = registerer.registerIcon("Invisible");
-    }
-    
-    @SideOnly(Side.CLIENT)
-    public static Icon getIconSideOverlay()
-    {
-        return TFCBlocks.Grass.iconGrassSideOverlay;
     }
 
     /**
@@ -282,7 +269,8 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     @Override
     public void onEntityWalking(World world, int i, int j, int k, Entity par5Entity) 
     {
-        if (!world.isRemote)
+        if (!world.isRemote && blockID != TFCBlocks.ClayGrass2.blockID && 
+        		blockID != TFCBlocks.ClayGrass.blockID && blockID != TFCBlocks.PeatGrass.blockID)
         {
             Random R = new Random();
             if(!BlockCollapsable.isNearSupport(world, i, j, k) && BlockDirt.canFallBelow(world, i, j - 1, k) && R.nextInt(10) == 0)

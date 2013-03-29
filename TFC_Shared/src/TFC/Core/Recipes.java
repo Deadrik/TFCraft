@@ -3,43 +3,16 @@ package TFC.Core;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.src.ModLoader;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Enums.CraftingRuleEnum;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class Recipes 
 {
@@ -79,15 +52,6 @@ public class Recipes
 			new ItemStack(Item.feather,1,-1)});
 		
 		
-		//stone picks
-		ModLoader.addRecipe(new ItemStack(TFCItems.IgInPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgInStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.SedPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.SedStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.IgExPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgExStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.MMPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.MMStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
 		//stone shovels
 		ModLoader.addRecipe(new ItemStack(TFCItems.IgInShovel, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.IgInStoneShovelHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
@@ -115,15 +79,7 @@ public class Recipes
 			"1","2", Character.valueOf('1'), TFCItems.IgExStoneHoeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.MMHoe, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.MMStoneHoeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,-1)});
-		//bone pick
-		ModLoader.addRecipe(new ItemStack(TFCItems.IgInPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgInStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.bone,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.SedPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.SedStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.bone,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.IgExPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.IgExStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.bone,1,-1)});
-		ModLoader.addRecipe(new ItemStack(TFCItems.MMPick, 1, 0), new Object[] { 
-			"1","2", Character.valueOf('1'), TFCItems.MMStonePickaxeHead,Character.valueOf('2'), new ItemStack(Item.bone,1,-1)});
+
 		//bone shovels
 		ModLoader.addRecipe(new ItemStack(TFCItems.IgInShovel, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.IgInStoneShovelHead,Character.valueOf('2'), new ItemStack(Item.bone,1,-1)});
@@ -257,10 +213,10 @@ public class Recipes
 		
 		
 		//Gold Pan
-		ModLoader.addRecipe(new ItemStack(TFCItems.terraGoldPan, 1, 0), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.GoldPan, 1, 0), new Object[] { 
 			"1", Character.valueOf('1'),Item.bowlEmpty});
 		//Sluice
-		ModLoader.addRecipe(new ItemStack(TFCItems.terraSluiceItem, 1), new Object[] { 
+		ModLoader.addRecipe(new ItemStack(TFCItems.SluiceItem, 1), new Object[] { 
 			"  1"," 12","122", Character.valueOf('1'),new ItemStack(Item.stick,1,-1), Character.valueOf('2'),new ItemStack(TFCItems.SinglePlank,1,-1)});
 
 		for(int j = 0; j < Recipes.Hammers.length; j++)
@@ -514,10 +470,6 @@ public class Recipes
 			ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
 
 			//Conversion to vanilla tools for recipes in other mods
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInPick});
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExPick});
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedPick});
-			ModLoader.addRecipe(new ItemStack(Item.pickaxeStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.MMPick});
 			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInShovel});
 			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExShovel});
 			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.SedShovel});
@@ -1612,7 +1564,7 @@ public class Recipes
 		{
 			IRecipe tmpRecipe = recipes.get(i);
 			if (tmpRecipe instanceof IRecipe) {
-				IRecipe recipe = (IRecipe)tmpRecipe;
+				IRecipe recipe = tmpRecipe;
 				ItemStack recipeResult = recipe.getRecipeOutput();
 
 				if (ItemStack.areItemStacksEqual(resultItem, recipeResult)) {

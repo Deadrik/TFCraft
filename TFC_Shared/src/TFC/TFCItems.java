@@ -146,19 +146,19 @@ public class TFCItems
     public static Item TinIngot2x;
     public static Item ZincIngot2x;
 
-    public static Item IgInPick;
+
     public static Item IgInShovel;
     public static Item IgInAxe;
     public static Item IgInHoe;
-    public static Item SedPick;
+
     public static Item SedShovel;
     public static Item SedAxe;
     public static Item SedHoe;
-    public static Item IgExPick;
+
     public static Item IgExShovel;
     public static Item IgExAxe;
     public static Item IgExHoe;
-    public static Item MMPick;
+
     public static Item MMShovel;
     public static Item MMAxe;
     public static Item MMHoe;
@@ -571,8 +571,8 @@ public class TFCItems
 
     //Formerly TFC_Mining
     
-    public static Item terraGoldPan;
-    public static Item terraSluiceItem;
+    public static Item GoldPan;
+    public static Item SluiceItem;
 
     public static Item ProPickStone;
     public static Item ProPickBismuth; 
@@ -840,10 +840,7 @@ public class TFCItems
     public static Item LooseRock;
     public static Item FlatRock;
     
-    public static Item IgInStonePickaxeHead;
-    public static Item SedStonePickaxeHead;
-    public static Item IgExStonePickaxeHead;
-    public static Item MMStonePickaxeHead;
+
     public static Item IgInStoneShovelHead;
     public static Item SedStoneShovelHead;
     public static Item IgExStoneShovelHead;
@@ -1038,8 +1035,8 @@ public class TFCItems
         
         //Replace any vanilla Items here
         Item.itemsList[Item.coal.itemID] = null; Item.itemsList[Item.coal.itemID] = (new TFC.Items.ItemCoal(7)).setUnlocalizedName("coal");
-        Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("Stick");
-        Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("Leather");
+        Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
+        Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");
         
         minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setUnlocalizedName("minecartChest");
         
@@ -1062,8 +1059,8 @@ public class TFCItems
         
         
 		
-        terraGoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setUnlocalizedName("GoldPan");
-        terraSluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setUnlocalizedName("SluiceItem");
+        GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setUnlocalizedName("GoldPan");
+        SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setUnlocalizedName("SluiceItem");
         
         ProPickStone = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickStone",16003)).setUnlocalizedName("Stone ProPick").setMaxDamage(64);
         ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setUnlocalizedName("Bismuth ProPick").setMaxDamage(BismuthUses);
@@ -1142,19 +1139,19 @@ public class TFCItems
         GemDiamond = new ItemGem(TFC_Settings.getIntFor(config,"item","GemDiamond",16092)).setUnlocalizedName("Diamond");
 
         //Tools
-        IgInPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","IgInPick",16100),IgInToolMaterial).setUnlocalizedName("Stone Pick").setMaxDamage(IgInStoneUses);
+
         IgInShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","IgInShovel",16101),IgInToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgInStoneUses);
         IgInAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","IgInAxe",16102),IgInToolMaterial).setUnlocalizedName("Stone Axe").setMaxDamage(IgInStoneUses);
         IgInHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","IgInHoe",16103),IgInToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgInStoneUses);
-        SedPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","SedPick",16104),SedToolMaterial).setUnlocalizedName("Stone Pick").setMaxDamage(SedStoneUses);
+
         SedShovel= new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","SedShovel",16105),SedToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(SedStoneUses);
         SedAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","SedAxe",16106),SedToolMaterial).setUnlocalizedName("Stone Axe").setMaxDamage(SedStoneUses);
         SedHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","SedHoe",16107),SedToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(SedStoneUses);
-        IgExPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","IgExPick",16108),IgExToolMaterial).setUnlocalizedName("Stone Pick").setMaxDamage(IgExStoneUses);
+ 
         IgExShovel= new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","IgExShovel",16109),IgExToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgExStoneUses);
         IgExAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","IgExAxe",16110),IgExToolMaterial).setUnlocalizedName("Stone Axe").setMaxDamage(IgExStoneUses);
         IgExHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","IgExHoe",16111),IgExToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgExStoneUses);
-        MMPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","MMPick",16112),MMToolMaterial).setUnlocalizedName("Stone Pick").setMaxDamage(MMStoneUses);
+ 
         MMShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","MMShovel",16113),MMToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(MMStoneUses);
         MMAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","MMAxe",16114),MMToolMaterial).setUnlocalizedName("Stone Axe").setMaxDamage(MMStoneUses);
         MMHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","MMHoe",16115),MMToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(MMStoneUses);
@@ -1575,11 +1572,6 @@ public class TFCItems
         
         FlatRock = (new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setUnlocalizedName("FlatRock"));num++;
 
-        
-        IgInStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStonePickaxeHead",num)).setUnlocalizedName("Stone Pickaxe Head");num++;
-        SedStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStonePickaxeHead",num)).setUnlocalizedName("Stone Pickaxe Head");num++;
-        IgExStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgExStonePickaxeHead",num)).setUnlocalizedName("Stone Pickaxe Head");num++;
-        MMStonePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","MMStonePickaxeHead",num)).setUnlocalizedName("Stone Pickaxe Head");num++;
         
         IgInStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
         SedStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;

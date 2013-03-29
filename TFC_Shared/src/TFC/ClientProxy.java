@@ -165,6 +165,8 @@ public class ClientProxy extends CommonProxy
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityArrowTFC.class, new RenderArrow());
 
+		RenderingRegistry.registerBlockHandler(TFCBlocks.clayGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.peatGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sulfurRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdH = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodSupportRenderIdV = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -654,11 +656,11 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("item.SluiceItem.name", "Sluice");
 
-		LR.addStringLocalization("item.GoldPan.GoldPan.name", "Gold Pan - Empty");
-		LR.addStringLocalization("item.GoldPan.GoldPanSand.name", "Gold Pan - Sand");
-		LR.addStringLocalization("item.GoldPan.GoldPanGravel.name", "Gold Pan - Gravel");
-		LR.addStringLocalization("item.GoldPan.GoldPanClay.name", "Gold Pan - Clay");
-		LR.addStringLocalization("item.GoldPan.GoldPanDirt.name", "Gold Pan - Dirt");
+		LR.addStringLocalization("item.GoldPan.name", "Gold Pan - Empty");
+		LR.addStringLocalization("item.GoldPanSand.name", "Gold Pan - Sand");
+		LR.addStringLocalization("item.GoldPanGravel.name", "Gold Pan - Gravel");
+		LR.addStringLocalization("item.GoldPanClay.name", "Gold Pan - Clay");
+		LR.addStringLocalization("item.GoldPanDirt.name", "Gold Pan - Dirt");
 
 		LR.addStringLocalization("item.FireStarter.name", "Firestarter");
 

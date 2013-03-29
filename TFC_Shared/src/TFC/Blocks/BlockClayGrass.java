@@ -1,15 +1,9 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
-
-import TFC.*;
-import TFC.Core.ColorizerGrassTFC;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Settings;
+import TFC.TFCBlocks;
 
 public class BlockClayGrass extends BlockGrass
 {
@@ -20,14 +14,10 @@ public class BlockClayGrass extends BlockGrass
     }
 
     @Override
-    public void registerIcons(IconRegister registerer)
-    {
-		for(int i = 0; i < 23; i++)
-		{
-			DirtTexture[i] = registerer.registerIcon("clay/Clay"+i);
-		}
-		GrassTopTexture = registerer.registerIcon("GrassTop");
-    }
+	public int getRenderType()
+	{
+		return TFCBlocks.clayGrassRenderId;
+	}
     
     @Override
     public int idDropped(int par1, Random par2Random, int par3)

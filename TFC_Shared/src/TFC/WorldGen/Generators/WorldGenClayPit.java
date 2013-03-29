@@ -2,46 +2,15 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import TFC.*;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenClayPit implements IWorldGenerator
 {
@@ -58,23 +27,23 @@ public class WorldGenClayPit implements IWorldGenerator
 		this.numberOfBlocks = par1;
 	}
 
-	public boolean generate(World world, Random par2Random, int i, int j, int k)
+	public boolean generate(World world, Random rand, int i, int j, int k)
 	{
-		int var6 = par2Random.nextInt(this.numberOfBlocks - 2) + 2;
-		byte var7 = 2;
+		int radius = rand.nextInt(this.numberOfBlocks - 2) + 2;
+		byte depth = 2;
 
-		if(par2Random.nextInt(30) == 0 && j <= 147)
+		if(rand.nextInt(30) == 0 && j <= 150)
 		{
-			for (int xCoord = i - var6; xCoord <= i + var6; ++xCoord)
+			for (int xCoord = i - radius; xCoord <= i + radius; ++xCoord)
 			{
-				for (int zCoord = k - var6; zCoord <= k + var6; ++zCoord)
+				for (int zCoord = k - radius; zCoord <= k + radius; ++zCoord)
 				{
-					int var10 = xCoord - i;
-					int var11 = zCoord - k;
+					int x = xCoord - i;
+					int z = zCoord - k;
 
-					if (var10 * var10 + var11 * var11 <= var6 * var6 && TFC_Climate.getRainfall(xCoord, 145, zCoord) >= 1000)
+					if (x * x + z * z <= radius * radius && TFC_Climate.getRainfall(xCoord, 145, zCoord) >= 500)
 					{
-						for (int yCoord = j - var7; yCoord <= j + var7; ++yCoord)
+						for (int yCoord = j - depth; yCoord <= j + depth; ++yCoord)
 						{
 							int ID = world.getBlockId(xCoord, yCoord, zCoord);
 
@@ -89,6 +58,8 @@ public class WorldGenClayPit implements IWorldGenerator
 							{
 								world.setBlock(xCoord, yCoord, zCoord, 
 										TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0x2);
+								if(rand.nextInt(9) == 0 && world.getBlockId(xCoord, yCoord+1, zCoord) == 0)
+									world.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.Flora.blockID, 0, 2);
 							}
 						}
 					}

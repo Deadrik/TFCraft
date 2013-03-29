@@ -2,46 +2,16 @@ package TFC.Items;
 
 import java.util.BitSet;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
-import TFC.Core.StructureBlueprint;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityDetailed;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemBlueprint extends ItemTerra
 {
@@ -52,7 +22,7 @@ public class ItemBlueprint extends ItemTerra
 		setHasSubtypes(true);
 		setUnlocalizedName("Blueprint");
 		setCreativeTab(TFCTabs.TFCTools);
-
+		setFolder("tools/");
 	}
 
 	@Override
@@ -144,6 +114,7 @@ public class ItemBlueprint extends ItemTerra
 		return false;
 	}
 
+	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack)
 	{
 		if(par1ItemStack.stackTagCompound != null)

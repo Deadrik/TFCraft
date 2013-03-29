@@ -179,10 +179,6 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerToolClasses() {
 		//pickaxes
-		MinecraftForge.setToolClass(TFCItems.IgInPick, "pickaxe", 1);
-		MinecraftForge.setToolClass(TFCItems.IgExPick, "pickaxe", 1);
-		MinecraftForge.setToolClass(TFCItems.SedPick, "pickaxe", 1);
-		MinecraftForge.setToolClass(TFCItems.MMPick, "pickaxe", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthPick, "pickaxe", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzePick, "pickaxe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackBronzePick, "pickaxe", 2);
