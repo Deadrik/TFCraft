@@ -859,7 +859,6 @@ public class TFCItems
     public static Item StoneKnife;
     public static Item StoneKnifeHead;
     public static Item StoneHammerHead;
-    public static Item StoneProPickHead;
     public static Item SmallOreChunk;
     public static Item SinglePlank;
     
@@ -1289,7 +1288,7 @@ public class TFCItems
         HCRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCRedSteelIngot",16295), EnumMetalType.REDSTEEL).setUnlocalizedName("HC Red Steel Ingot");
         HCSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCSteelIngot",16296), EnumMetalType.STEEL).setUnlocalizedName("HC Steel Ingot");
 
-        OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setFolder("ores/").setUnlocalizedName("Ore");
+        OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setFolder("ore/").setUnlocalizedName("Ore");
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
         Barrel = new ItemBarrels(TFC_Settings.getIntFor(config, "item", "barrels", 16299)).setUnlocalizedName("Barrel");
         
@@ -1597,7 +1596,6 @@ public class TFCItems
         
         StoneKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","StoneKnifeHead",num)).setUnlocalizedName("Stone Knife Blade");num++;
         StoneHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","StoneHammerHead",num)).setUnlocalizedName("Stone Hammer Head");num++;
-        StoneProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","StoneProPickHead",num)).setUnlocalizedName("Stone ProPick Head");num++;
         
         StoneKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","StoneKnife",num),IgExToolMaterial).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);num++;
         SmallOreChunk = new ItemOreSmall(TFC_Settings.getIntFor(config,"item","SmallOreChunk",num++)).setUnlocalizedName("Small Ore");
