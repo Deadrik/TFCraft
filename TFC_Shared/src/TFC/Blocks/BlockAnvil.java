@@ -2,42 +2,23 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.AnvilReq;
 import TFC.TileEntities.TileEntityTerraAnvil;
-
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
 
 public class BlockAnvil extends BlockTerraContainer
 {
@@ -101,9 +82,9 @@ public class BlockAnvil extends BlockTerraContainer
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
         if(direction == 0)
-            return AxisAlignedBB.getBoundingBox((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
+            return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
         else
-            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
+            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
 		}
 		else
 		{
@@ -121,9 +102,9 @@ public class BlockAnvil extends BlockTerraContainer
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
         if(direction == 0)
-            return AxisAlignedBB.getBoundingBox((double)par2 + 0.2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 0.8, (double)par3 + 0.6, (double)par4 + 1);
+            return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
         else
-            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0.2, (double)par2 + 1, (double)par3 + 0.6, (double)par4 + 0.8);
+            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
 		}
 		else
 		{
@@ -213,7 +194,7 @@ public class BlockAnvil extends BlockTerraContainer
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
-		int l = MathHelper.floor_double((double)(entityliving.rotationYaw * 4F / 360F) + 0.5D) & 3;
+		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
 		if(l == 0)//+z
 		{
@@ -233,7 +214,7 @@ public class BlockAnvil extends BlockTerraContainer
 		}
 		byte0 += meta;
 		
-		world.setBlockMetadataWithNotify(i, j, k, (int)byte0, 3);
+		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
 
 	}
 	@Override
@@ -263,11 +244,11 @@ public class BlockAnvil extends BlockTerraContainer
 						}
 
 						var7.stackSize -= var11;
-						var12 = new EntityItem(par1World, (double)((float)par2 + var8), (double)((float)par3 + var9), (double)((float)par4 + var10), new ItemStack(var7.itemID, var11, var7.getItemDamage()));
+						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
 						float var13 = 0.05F;
-						var12.motionX = (double)((float)this.random.nextGaussian() * var13);
-						var12.motionY = (double)((float)this.random.nextGaussian() * var13 + 0.2F);
-						var12.motionZ = (double)((float)this.random.nextGaussian() * var13);
+						var12.motionX = (float)this.random.nextGaussian() * var13;
+						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
+						var12.motionZ = (float)this.random.nextGaussian() * var13;
 
 						if (var7.hasTagCompound())
 						{
@@ -318,7 +299,7 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < (anvilId == 0 ? 8 : 3); i++)
+		for(int i = 1; i < (anvilId == 0 ? 8 : 3); i++)
 		{
 			textureMapTop[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Top");
 			textureMapSide[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Side");

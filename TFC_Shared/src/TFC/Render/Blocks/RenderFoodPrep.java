@@ -1,49 +1,11 @@
 package TFC.Render.Blocks;
 
-import org.lwjgl.opengl.GL11;
-
-import TFC.TFCBlocks;
-import TFC.Blocks.BlockFoodPrep;
-import TFC.Blocks.BlockSlab;
-import TFC.Blocks.BlockToolRack;
-import TFC.Core.TFC_Textures;
-import TFC.TileEntities.TileEntityFoodPrep;
-import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityToolRack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraft.world.IBlockAccess;
+import TFC.TileEntities.TileEntityFoodPrep;
 
 public class RenderFoodPrep 
 {
@@ -57,7 +19,6 @@ public class RenderFoodPrep
 		if(te != null)
 		{
 			double height = 0.005;
-			String tex = TFC_Textures.FoodSheet;
 			
 			ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
 			Tessellator tessellator = Tessellator.instance;

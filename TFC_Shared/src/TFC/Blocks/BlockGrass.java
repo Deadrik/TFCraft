@@ -15,6 +15,7 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Textures;
 import TFC.WorldGen.Generators.WorldGenGrowTrees;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -60,7 +61,8 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
 		GrassTopTexture = registerer.registerIcon("GrassTop");
 
 		iconSnowSide = registerer.registerIcon("snow");
-		iconGrassSideOverlay = registerer.registerIcon("grass_side");
+		iconGrassSideOverlay = registerer.registerIcon("GrassSide");
+		TFC_Textures.InvisibleTexture = registerer.registerIcon("Invisible");
     }
     
     @SideOnly(Side.CLIENT)
@@ -75,7 +77,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
     {
-        return side == 1 ? GrassTopTexture : DirtTexture[meta+textureOffset];
+        return side == 1 ? GrassTopTexture : (side == 0 ? TFC_Textures.InvisibleTexture : iconGrassSideOverlay);
     }
 
     /**
@@ -90,9 +92,9 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
         {
             return GrassTopTexture;
         }
-        else if (side == 0)//bottom
+        else if (side == 0)//Bottom
         {
-            return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset];
+        	return TFC_Textures.InvisibleTexture;
         }
         else if (side == 2)//-Z
         {
@@ -115,7 +117,17 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
                 return isSnow(access, xCoord+1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         
-        return DirtTexture[access.getBlockMetadata(xCoord, yCoord, zCoord) + textureOffset];
+        return iconGrassSideOverlay;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side)
+    {
+        if(side == 0)
+        	return false;
+        else return super.shouldSideBeRendered(access, x, y, z, side);
+        		
     }
     
     private boolean isSnow(IBlockAccess access, int i, int j, int k)

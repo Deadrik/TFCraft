@@ -24,6 +24,7 @@ public class ItemOre extends ItemTerra
 				"Bituminous Coal", "Lignite", "Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
 				/*22*/"Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite", 
 				/*32*/"Borax", "Olivine", "LapisLazuli", "GalenaPartial", "TetrahedritePartial", "MagnetitePartial"};
+		setFolder("ore/");
 	}
 	
 	@Override
@@ -64,14 +65,14 @@ public class ItemOre extends ItemTerra
 		for(int i = 0; i < MetaNames.length-3; i++)
 			icons[i] = registerer.registerIcon(textureFolder+MetaNames[i]+" Ore");
     }
-
-	/*@Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-    	if(blockNames != null)
-    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
-		return super.getItemDisplayName(itemstack);
-	}*/
+	
+	@Override
+    public String getUnlocalizedName(ItemStack itemstack)
+    {
+    	if(MetaNames != null)
+    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+    	return super.getUnlocalizedName(itemstack);
+    }
 	
     /*public static String getItemNameDamage(int d) 
     {

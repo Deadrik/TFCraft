@@ -1,8 +1,6 @@
 package TFC.Items;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import TFC.Core.TFC_Textures;
 
 public class ItemOre2 extends ItemTerraBlock
 {
@@ -12,6 +10,7 @@ public class ItemOre2 extends ItemTerraBlock
 		setHasSubtypes(true);
 		this.MetaNames = new String[]{"Kaolinite", "Gypsum", "Satinspar", "Selenite", "Graphite", "Kimberlite", 
 		        "Petrified Wood", "Sulfur", "Jet", "Microcline", "Pitchblende", "Cinnabar", "Cryolite", "Saltpeter", "Serpentine", "Sylvite"};
+		this.setFolder("ore/");
 	}
 
 	@Override

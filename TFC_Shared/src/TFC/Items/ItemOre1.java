@@ -1,8 +1,6 @@
 package TFC.Items;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import TFC.Core.TFC_Textures;
 
 public class ItemOre1 extends ItemTerraBlock
 {
@@ -13,6 +11,7 @@ public class ItemOre1 extends ItemTerraBlock
 		this.MetaNames = new String[]{"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
 				"Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
 				"Bituminous Coal", "Lignite"};
+		this.setFolder("ore/");
 	}
 
 	@Override

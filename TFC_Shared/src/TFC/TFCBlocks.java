@@ -57,6 +57,7 @@ import TFC.Blocks.BlockMMSmooth;
 import TFC.Blocks.BlockMetallurgy;
 import TFC.Blocks.BlockMolten;
 import TFC.Blocks.BlockNestBox;
+import TFC.Blocks.BlockOre;
 import TFC.Blocks.BlockOre2;
 import TFC.Blocks.BlockOre3;
 import TFC.Blocks.BlockQuern;
@@ -243,15 +244,13 @@ public class TFCBlocks
 	public static Block BarrelWillow;
 	public static Block BarrelKapok;
 
-	
-
 	static Configuration config;
 	
 	public static void RegisterBlocks()
 	{
-		GameRegistry.registerBlock(Ore, TFC.Items.ItemOre1.class, "Ore1");
-		GameRegistry.registerBlock(Ore2, TFC.Items.ItemOre2.class, "Ore2");
-		GameRegistry.registerBlock(Ore3, TFC.Items.ItemOre3.class, "Ore3");
+		GameRegistry.registerBlock(Ore, "Ore1");
+		GameRegistry.registerBlock(Ore2, "Ore2");
+		GameRegistry.registerBlock(Ore3, "Ore3");
 		GameRegistry.registerBlock(StoneIgIn, TFC.Items.ItemIgIn.class, "StoneIgIn");
 		GameRegistry.registerBlock(StoneIgEx, TFC.Items.ItemIgEx.class, "StoneIgEx");
 		GameRegistry.registerBlock(StoneSed, TFC.Items.ItemSed.class, "StoneSed");
@@ -326,7 +325,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
 		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
 		
-		GameRegistry.registerBlock(ToolRack, TFC.Items.ItemToolRack.class, "ToolRack");
+		GameRegistry.registerBlock(ToolRack, "ToolRack");
 		GameRegistry.registerBlock(SpawnMeter, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
 		GameRegistry.registerBlock(Quern, "Quern");
@@ -429,7 +428,7 @@ public class TFCBlocks
 		TFCBlocks.DryGrass = new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass", 218), 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
 		TFCBlocks.DryGrass2 =new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass2", 219), 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");  
 
-		TFCBlocks.Ore = new TFC.Blocks.BlockOre(TFC_Settings.getIntFor(config,"block","Ore", 213), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
+		TFCBlocks.Ore = new BlockOre(TFC_Settings.getIntFor(config,"block","Ore", 213), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
 		TFCBlocks.Ore2 = new BlockOre2(TFC_Settings.getIntFor(config,"block","Ore2", 214), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
 		TFCBlocks.Ore3 = new BlockOre3(TFC_Settings.getIntFor(config,"block","Ore3", 215), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
 		TFCBlocks.LooseRock = new BlockLooseRock(TFC_Settings.getIntFor(config,"block","LooseRock", 179)).setHardness(0.05F).setResistance(1F).setUnlocalizedName("LooseRock");

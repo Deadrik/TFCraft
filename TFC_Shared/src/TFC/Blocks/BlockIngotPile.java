@@ -2,39 +2,21 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.TFCBlocks;
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
-import TFC.Core.AnvilReq;
-import TFC.TileEntities.*;
-
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TileEntities.NetworkTileEntity;
+import TFC.TileEntities.TileEntityIngotPile;
 
 public class BlockIngotPile extends BlockTerraContainer
 {
@@ -55,6 +37,12 @@ public class BlockIngotPile extends BlockTerraContainer
 	{
 		super(i, Material.iron);
 	}
+	
+	@Override
+	public void registerIcons(IconRegister iconRegisterer)
+    {
+
+    }
 
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
@@ -145,12 +133,12 @@ public class BlockIngotPile extends BlockTerraContainer
 
 		if (te.getStackInSlot(0)!=null){
 
-			return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
 		}
 		//else
 		//{
 
-		return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 0.25, (double)par4 + 1);
+		return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
 		//}
 	}
 
@@ -162,10 +150,10 @@ public class BlockIngotPile extends BlockTerraContainer
         TileEntityIngotPile te = (TileEntityIngotPile)par1World.getBlockTileEntity(par2, par3, par4);
 
 		if (te.getStackInSlot(0)!=null){
-            return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
+            return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
 		}
 		else
-			return AxisAlignedBB.getBoundingBox((double)par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 0.25, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
     }
 	
 	/*@Override
@@ -230,7 +218,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		xCoord = i;
 		yCoord = j;
 		zCoord = k;
-		int l = MathHelper.floor_double((double)(entityliving.rotationYaw * 4F / 360F) + 0.5D) & 3;
+		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
 		if(l == 0)//+z
 		{
@@ -283,11 +271,11 @@ public class BlockIngotPile extends BlockTerraContainer
 							}
 
 							var7.stackSize -= var11;
-							var12 = new EntityItem(par1World, (double)((float)par2 + var8), (double)((float)par3 + var9), (double)((float)par4 + var10), new ItemStack(var7.itemID, var11, var7.getItemDamage()));
+							var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
 							float var13 = 0.05F;
-							var12.motionX = (double)((float)this.random.nextGaussian() * var13);
-							var12.motionY = (double)((float)this.random.nextGaussian() * var13 + 0.2F);
-							var12.motionZ = (double)((float)this.random.nextGaussian() * var13);
+							var12.motionX = (float)this.random.nextGaussian() * var13;
+							var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
+							var12.motionZ = (float)this.random.nextGaussian() * var13;
 
 							if (var7.hasTagCompound())
 							{

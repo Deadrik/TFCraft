@@ -1,47 +1,18 @@
 package TFC.Items;
 
-import TFC.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.ItemStack;
 
-public class ItemCustomWood extends ItemBlock
+public class ItemCustomWood extends ItemTerraBlock
 {
-	String[] Names = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	String[] Names = {"Oak Log","Aspen Log","Birch Log","Chestnut Log","Douglas Fir Log","Hickory Log","Maple Log","Ash Log","Pine Log",
+			"Sequoia Log","Spruce Log","Sycamore Log","White Cedar Log","White Elm Log","Willow Log","Kapok Log"};
 	public ItemCustomWood(int i)
 	{
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		setFolder("wood/trees");
 	}
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
@@ -56,4 +27,9 @@ public class ItemCustomWood extends ItemBlock
 		return i;
 	}
 
+	@Override
+	public void updateIcons(IconRegister registerer)
+    {
+
+    }
 }

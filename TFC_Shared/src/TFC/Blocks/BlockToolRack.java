@@ -1,47 +1,30 @@
 package TFC.Blocks;
 
 import java.util.List;
+import java.util.Random;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.Core.TFC_Textures;
+import TFC.TFCItems;
 import TFC.Items.ItemProPick;
 import TFC.Items.ItemWeapon;
 import TFC.TileEntities.TileEntityToolRack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockToolRack extends BlockTerraContainer
 {
-	Icon[] icons = new Icon[16];
 	public BlockToolRack(int par1)
 	{
 		super(par1, Material.wood);
@@ -74,7 +57,7 @@ public class BlockToolRack extends BlockTerraContainer
 
 	public Icon getBlockTexture(int woodType)
 	{
-		return icons[woodType];
+		return TFCBlocks.WoodSupportH.getBlockTextureFromSideAndMetadata(0, woodType);
 	}
 	@Override
 	public int getRenderType()
@@ -191,9 +174,18 @@ public class BlockToolRack extends BlockTerraContainer
 	}
 	
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
 	{
-		
+		if(!world.isRemote)
+		{
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.Toolrack, 1, meta));
+		}
+	}
+	
+	@Override
+	public int idDropped(int i, Random random, int j)
+	{
+		return TFCItems.LooseRock.itemID;
 	}
 
 	@Override
@@ -250,6 +242,7 @@ public class BlockToolRack extends BlockTerraContainer
         return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
     }
 	
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l) 
 	{
 		int dir = world.getBlockMetadata(i, j, k);
@@ -309,5 +302,11 @@ public class BlockToolRack extends BlockTerraContainer
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
     	return TFCBlocks.WoodSupportH.getBlockTextureFromSideAndMetadata(par1, par2);
+    }
+    
+    @Override
+	public void registerIcons(IconRegister iconRegisterer)
+    {
+    	//Empty On Purpose
     }
 }

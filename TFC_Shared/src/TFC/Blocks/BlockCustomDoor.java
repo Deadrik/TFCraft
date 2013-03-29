@@ -1,40 +1,21 @@
 package TFC.Blocks;
 
-import TFC.Core.Recipes;
 import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import static net.minecraftforge.common.ForgeDirection.*;
 
 public class BlockCustomDoor extends BlockTerra
 {
@@ -110,7 +91,7 @@ public class BlockCustomDoor extends BlockTerra
 				}
 			}
 
-			return icons[woodType*2 + (flag1 ? icons.length : 0) + (flag2 ? 1 : 0)];
+			return icons[woodType*2 + (flag1 ? 0/*icons.length*/ : 0) + (flag2 ? 1 : 0)];
 		}
 		else
 		{
@@ -123,8 +104,8 @@ public class BlockCustomDoor extends BlockTerra
 	{
 		for(int i = 0, j = 0; i < 16; i++, j+=2)
 		{
-			icons[j] = registerer.registerIcon("wood/doors/"+WoodNames[i]+" Door Upper");
-			icons[j+1] = registerer.registerIcon("wood/doors/"+WoodNames[i]+" Door Lower");
+			icons[j] = registerer.registerIcon("wood/doors/"+WoodNames[i]+" Door Lower");
+			icons[j+1] = registerer.registerIcon("wood/doors/"+WoodNames[i]+" Door Upper");
 		}
 	}
 
@@ -389,6 +370,7 @@ public class BlockCustomDoor extends BlockTerra
 	/**
 	 * Returns the ID of the items to drop on destruction.
 	 */
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
 		return (par1 & 8) != 0 ? 0 : Recipes.Doors[woodType].itemID;
@@ -398,6 +380,7 @@ public class BlockCustomDoor extends BlockTerra
 	 * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
 	 * x, y, z, startVec, endVec
 	 */
+	@Override
 	public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
 	{
 		this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
@@ -407,6 +390,7 @@ public class BlockCustomDoor extends BlockTerra
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		return par3 >= 255 ? false : par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && super.canPlaceBlockAt(par1World, par2, par3, par4) && super.canPlaceBlockAt(par1World, par2, par3 + 1, par4);
@@ -416,6 +400,7 @@ public class BlockCustomDoor extends BlockTerra
 	 * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
 	 * and stop pistons
 	 */
+	@Override
 	public int getMobilityFlag()
 	{
 		return 1;
@@ -446,6 +431,7 @@ public class BlockCustomDoor extends BlockTerra
 		return var7 & 7 | (var6 ? 8 : 0) | (var9 ? 16 : 0);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 
 	/**

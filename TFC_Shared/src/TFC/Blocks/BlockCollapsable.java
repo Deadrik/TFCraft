@@ -1,46 +1,18 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityFallingSand;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
-import TFC.Entities.EntityFallingStone;
-import TFC.Entities.EntityFallingStone;
-import TFC.Items.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockCollapsable extends BlockTerra
 {
@@ -212,7 +184,7 @@ public class BlockCollapsable extends BlockTerra
         return true;
     }
 
-    public Boolean tryToFall(World world, int i, int j, int k, int l)
+    public Boolean tryToFall(World world, int i, int j, int k, int meta)
     {
         int xCoord = i;
         int yCoord = j;
@@ -232,7 +204,7 @@ public class BlockCollapsable extends BlockTerra
         {
             if (!world.isRemote && fallingBlockID != -1)
             {
-                EntityFallingStone ent = new EntityFallingStone(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, fallingBlockID, l, 5);
+            	EntityFallingSand ent = new EntityFallingSand(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlockID, meta);
                 world.spawnEntityInWorld(ent);
                 Random R = new Random(i*j+k);
                 if(R.nextInt(100) > 90)
@@ -241,17 +213,17 @@ public class BlockCollapsable extends BlockTerra
                 world.setBlockToAir(i, j, k);
                 
                 if(world.getBlockId(i, j-1, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).TypeID == this.blockID && 
-                        ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == l)
+                        ((TileEntityPartial)world.getBlockTileEntity(i, j-1, k)).MetaID == meta)
                 {
                 	world.setBlockToAir(i, j-1, k);
                     
                     if(world.getBlockId(i, j-2, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).TypeID == this.blockID && 
-                            ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == l)
+                            ((TileEntityPartial)world.getBlockTileEntity(i, j-2, k)).MetaID == meta)
                     {
                     	world.setBlockToAir(i, j-2, k);
                         
                         if(world.getBlockId(i, j-3, k) == TFCBlocks.stoneSlabs.blockID && ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).TypeID == this.blockID && 
-                                ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == l)
+                                ((TileEntityPartial)world.getBlockTileEntity(i, j-3, k)).MetaID == meta)
                         {
                         	world.setBlockToAir(i, j-3, k);
                         }
@@ -264,7 +236,8 @@ public class BlockCollapsable extends BlockTerra
         return false;
     }
 
-    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+    @Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {   
         //super.harvestBlock(world, entityplayer, i, j, k, l);
         if(entityplayer != null)

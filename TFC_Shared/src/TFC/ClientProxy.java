@@ -661,7 +661,6 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.GoldPan.GoldPanDirt.name", "Gold Pan - Dirt");
 
 		LR.addStringLocalization("item.FireStarter.name", "Firestarter");
-		LR.addStringLocalization("item.Slag.name", "Slag");
 
 
 		LR.addStringLocalization("item.BellowsItem.name", "Bellows");
@@ -669,7 +668,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("tile.Scribe.name", "Scribing Table");
 		LR.addStringLocalization("item.Ink.name", "Marking");
 		LR.addStringLocalization("item.Clay Mold.name", "Clay Mold");
-		LR.addStringLocalization("item.CeramicMold.name", "Ceramic Mold");
+		LR.addStringLocalization("item.Ceramic Mold.name", "Ceramic Mold");
 		LR.addStringLocalization("tile.Forge.name", "Forge");
 		LR.addStringLocalization("tile.Bloomery.name", "Bloomery");
 		LR.addStringLocalization("tile.Metallurgy.name", "Metallurgy Table");
@@ -1216,14 +1215,14 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("tile.Barrel"+WoodNames[i]+".name", WoodNames[i] + " Barrel");
 			LR.addStringLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
 			LR.addStringLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
-			LR.addStringLocalization("item.WoodSupportItemV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
-			LR.addStringLocalization("item.WoodSupportItemH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
+			LR.addStringLocalization("item.WoodSupportItemV."+WoodNames[i],"V. " + WoodNames[i] + " Support Beam");
+			LR.addStringLocalization("item.WoodSupportItemH."+WoodNames[i],"H. " + WoodNames[i] + " Support Beam");
 			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
 			LR.addStringLocalization("item.Barrel."+WoodNames[i]+".name", WoodNames[i] +" Barrel");
 			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
-			LR.addStringLocalization("tile.ToolRack."+WoodNames[i]+".name", WoodNames[i] + " Tool Rack");
-			LR.addStringLocalization("tile.Door "+WoodNames[i]+".name", WoodNames[i] + " Door");
-			LR.addStringLocalization("item.Door "+WoodNames[i]+".name", WoodNames[i] + " Door");
+			LR.addStringLocalization("item.Toolrack."+WoodNames[i]+".name", WoodNames[i] + " Tool Rack");
+			LR.addStringLocalization("tile."+WoodNames[i]+" Door.name", WoodNames[i] + " Door");
+			LR.addStringLocalization("item."+WoodNames[i]+" Door.name", WoodNames[i] + " Door");
 
 		}
 		LR.addStringLocalization("item.Stick.name", "Stick");

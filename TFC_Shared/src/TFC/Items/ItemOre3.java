@@ -1,8 +1,6 @@
 package TFC.Items;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import TFC.Core.TFC_Textures;
 
 public class ItemOre3 extends ItemTerraBlock
 {
@@ -11,6 +9,7 @@ public class ItemOre3 extends ItemTerraBlock
 		super(i);
 		setHasSubtypes(true);
 		this.MetaNames = new String[]{"Borax", "Olivine", "Lapis Lazuli"};
+		this.setFolder("ore/");
 	}
 
 	@Override

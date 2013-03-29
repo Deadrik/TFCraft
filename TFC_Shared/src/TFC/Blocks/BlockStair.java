@@ -1,41 +1,16 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.TileEntities.TileEntityPartial;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockStair extends BlockPartial
 {
@@ -53,10 +28,12 @@ public class BlockStair extends BlockPartial
     }
     
     @Override
-    /**
-     * Adds to the supplied array any colliding bounding boxes with the passed in bounding box. Args: world, x, y, z,
-     * axisAlignedBB, arrayList
-     */
+	public void registerIcons(IconRegister iconRegisterer)
+    {
+
+    }
+    
+    @Override
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
     {
         int var7 = par1World.getBlockMetadata(par2, par3, par4);
@@ -101,38 +78,31 @@ public class BlockStair extends BlockPartial
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
     }
-    
-    public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+    @Override
+    public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
     {
         if(!world.isRemote)
         {
         }
     }
     
-    /**
-     * Returns the bounding box of the wired rectangular prism to render.
-     */
+    @Override
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
     {
         return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
     }
     
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
-     */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k)
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
-    
+    @Override
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {   
 

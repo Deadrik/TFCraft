@@ -1,42 +1,11 @@
 package TFC.Items;
 
-import java.util.List;
-
-import TFC.TerraFirmaCraft;
-import TFC.Core.Helper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class ItemFlatRock extends ItemTerra
 {
@@ -61,7 +30,8 @@ public class ItemFlatRock extends ItemTerra
         ((EntityPlayer)par3Entity).inventory.setInventorySlotContents(par4, null);
     }
     
-    public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player)
+    @Override
+	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player)
     {
         return false;
     }
@@ -77,16 +47,8 @@ public class ItemFlatRock extends ItemTerra
 	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
-			registerer.registerIcon("../blocks/rocks/"+MetaNames[i]+" Raw");
+			registerer.registerIcon("rocks/flatrocks/"+MetaNames[i]+" Raw");
     }
-
-	@Override
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
-	{
-		for(int i = 0; i < MetaNames.length; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
 
     /*public Icon getIconFromDamage(int i)
     {

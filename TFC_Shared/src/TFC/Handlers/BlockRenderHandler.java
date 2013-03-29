@@ -40,7 +40,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         }
         else if (modelId == TFCBlocks.grassRenderId)
         {
-            return RenderGrass.Render(block, i, j, k, renderer);
+            return RenderGrass.render(block, i, j, k, renderer);
         }
         else if (modelId == TFCBlocks.oreRenderId)
         {

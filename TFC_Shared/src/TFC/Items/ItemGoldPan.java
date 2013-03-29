@@ -4,47 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.Blocks.BlockOre;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
-import TFC.TileEntities.TileEntitySluice;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemGoldPan extends ItemTerra
 {
@@ -65,7 +39,8 @@ public class ItemGoldPan extends ItemTerra
 		return EnumSize.SMALL;
 	}
     
-    public int getItemStackLimit()
+    @Override
+	public int getItemStackLimit()
     {
     	return 1;
     }
@@ -92,7 +67,7 @@ public class ItemGoldPan extends ItemTerra
     @Override
     public String getItemDisplayName(ItemStack itemstack) 
     {
-        String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
+        String s = new StringBuilder().append(this.getUnlocalizedName(itemstack)).append(".").append(blockNames[itemstack.getItemDamage()]).toString();
         return s;
     }
 

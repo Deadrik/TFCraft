@@ -1,48 +1,19 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.Core.Helper;
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityPartial;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockSlab extends BlockPartial
 {
@@ -56,6 +27,12 @@ public class BlockSlab extends BlockPartial
 	{
 		return TFCBlocks.slabRenderId;
 	}
+	
+	@Override
+	public void registerIcons(IconRegister iconRegisterer)
+    {
+
+    }
 
 	@Override
 	public boolean isLadder(World world, int x, int y, int z) 
@@ -186,12 +163,14 @@ public class BlockSlab extends BlockPartial
 	  * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	  * cleared to be reused)
 	  */
-	 public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+	 @Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
 	 {
 		 return getCollisionBoundingBoxFromPool(world,i,j,k);
 	 }
 
-	 public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
+	 @Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
 	 {
 		 TileEntityPartial te = (TileEntityPartial) par1IBlockAccess.getBlockTileEntity(i, j, k);
 
@@ -215,12 +194,14 @@ public class BlockSlab extends BlockPartial
 		 }
 	 }
 
-	 public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	 @Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	 {   
 
 	 }
 
-	 public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+	 @Override
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	 {
 		 return true;
 	 }

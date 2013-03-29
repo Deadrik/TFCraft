@@ -1,7 +1,6 @@
 package TFC.Items;
 
-import TFC.*;
-import TFC.Core.TFC_Textures;
+import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemIgEx extends ItemTerraBlock
 {
@@ -10,4 +9,10 @@ public class ItemIgEx extends ItemTerraBlock
 		super(i);
 		MetaNames = new String[]{"Rhyolite", "Basalt", "Andesite", "Dacite"};
 	}
+	
+	@Override
+	public void updateIcons(IconRegister registerer)
+    {
+
+    }
 }
