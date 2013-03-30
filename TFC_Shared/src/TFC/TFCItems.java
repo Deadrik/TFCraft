@@ -1060,7 +1060,7 @@ public class TFCItems
         
 		
         GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setUnlocalizedName("GoldPan");
-        SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setUnlocalizedName("SluiceItem");
+        SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
         
         ProPickStone = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickStone",16003)).setUnlocalizedName("Stone ProPick").setMaxDamage(64);
         ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setUnlocalizedName("Bismuth ProPick").setMaxDamage(BismuthUses);
@@ -1628,7 +1628,7 @@ public class TFCItems
 		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++)).setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
 		Spindle = new ItemSpindle(TFC_Settings.getIntFor(config,"item","Spindle",num++),SedToolMaterial).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
 		ClaySpindle = new ItemTerra(TFC_Settings.getIntFor(config, "item", "ClaySpindle", num++)).setFolder("tools/").setUnlocalizedName("Clay Spindle").setCreativeTab(TFCTabs.TFCMaterials);
-		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setFolder("tools/").setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCMaterials);
+		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setFolder("toolheads/").setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCMaterials);
 		StoneBrick = (new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++)).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),0).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
@@ -1762,8 +1762,8 @@ public class TFCItems
         Cabbage = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Cabbage",num++), 20, 0.4F, false, 28).setUnlocalizedName("Cabbage");
         Garlic = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Garlic",num++), 10, 0.4F, false, 29).setUnlocalizedName("Garlic");
         Carrot = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Carrot",num++), 5, 0.4F, false, 30).setUnlocalizedName("Carrot");
-        Sugarcane = new ItemTerra(TFC_Settings.getIntFor(config,"item","Sugarcane",num++)).setUnlocalizedName("Sugarcane");
-        Hemp = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hemp",num++)).setUnlocalizedName("Hemp");
+        Sugarcane = new ItemTerra(TFC_Settings.getIntFor(config,"item","Sugarcane",num++)).setFolder("plants/").setUnlocalizedName("Sugarcane");
+        Hemp = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hemp",num++)).setFolder("plants/").setUnlocalizedName("Hemp");
         Soybean = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Soybeans",num++), 10, 0.4F, false, 31).setUnlocalizedName("Soybeans");
         Greenbeans = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Greenbeans",num++), 10, 0.4F, false, 32).setUnlocalizedName("Greenbeans");
         GreenBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","GreenBellPepper",num++), 10, 0.4F, false, 34).setUnlocalizedName("Green Bell Pepper");

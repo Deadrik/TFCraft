@@ -17,7 +17,7 @@ import TFC.TileEntities.TileEntityFruitTreeWood;
 public class ItemFruitTreeSapling extends ItemTerra
 {
     
-    String[] Names = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum","Cacao"};
+    String[] Names = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
     int offset;
 
     public ItemFruitTreeSapling(int id, int off)
@@ -78,7 +78,7 @@ public class ItemFruitTreeSapling extends ItemTerra
     @Override
 	public Icon getIconFromDamage(int meta)
 	{        
-		return icons[meta];
+		return icons[meta+offset];
 	}
     
     @Override
