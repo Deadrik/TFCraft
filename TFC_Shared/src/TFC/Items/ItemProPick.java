@@ -6,9 +6,9 @@ import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
-import TFC.Blocks.BlockOre;
-import TFC.Blocks.BlockOre2;
-import TFC.Blocks.BlockOre3;
+import TFC.Blocks.Terrain.BlockOre;
+import TFC.Blocks.Terrain.BlockOre2;
+import TFC.Blocks.Terrain.BlockOre3;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Containers.MessageQue;

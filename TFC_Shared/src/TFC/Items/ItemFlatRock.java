@@ -21,6 +21,7 @@ public class ItemFlatRock extends ItemTerra
                 "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
                 "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
         icons = new Icon[MetaNames.length];
+        this.setCreativeTab(null);
     }
     
     @Override

@@ -47,4 +47,41 @@ public enum AnvilReq
         
         return false;
     }
+    
+    public static AnvilReq getReqFromInt(int i)
+    {
+    	switch(i)
+    	{
+    	case 1:
+    		return COPPER;
+    	case 2:
+    		return BRONZE;
+    	case 3:
+    		return WROUGHTIRON;
+    	case 4:
+    		return STEEL;
+    	case 5:
+    		return BLACKSTEEL;
+    	case 6:
+    		return REDSTEEL;
+    	case 7:
+    		return BLUESTEEL;
+    	default:
+    		return COPPER;
+    	}
+    }
+    public static AnvilReq getReqFromInt2(int i)
+    {
+    	switch(i)
+    	{
+    	case 0:
+    		return BISMUTHBRONZE;
+    	case 1:
+    		return BLACKBRONZE;
+    	case 2:
+    		return ROSEGOLD;
+    	default:
+    		return BISMUTHBRONZE;
+    	}
+    }
 }

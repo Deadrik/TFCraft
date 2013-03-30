@@ -1,8 +1,8 @@
 package TFC.Entities;
 
 import TFC.*;
-import TFC.Blocks.BlockCollapsable;
-import TFC.Blocks.BlockIgInCobble;
+import TFC.Blocks.Terrain.BlockCollapsable;
+import TFC.Blocks.Terrain.BlockIgInCobble;
 import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

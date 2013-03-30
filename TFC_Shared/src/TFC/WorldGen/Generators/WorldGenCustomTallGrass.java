@@ -3,7 +3,7 @@ package TFC.WorldGen.Generators;
 import java.util.Random;
 
 import TFC.*;
-import TFC.Blocks.BlockCustomTallGrass;
+import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

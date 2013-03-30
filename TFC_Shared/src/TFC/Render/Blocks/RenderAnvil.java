@@ -1,46 +1,18 @@
 package TFC.Render.Blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.item.Item;
 import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraft.world.IBlockAccess;
+import TFC.TFCBlocks;
 import TFC.Blocks.BlockAnvil;
 import TFC.Core.AnvilReq;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.WorldGen.DataLayer;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class RenderAnvil {
+public class RenderAnvil implements ISimpleBlockRenderingHandler{
 
 	public static boolean renderAnvil(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
@@ -144,6 +116,78 @@ public class RenderAnvil {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelId,
+			RenderBlocks renderer) 
+	{
+		if(modelId == TFCBlocks.AnvilRenderId)
+		{
+			renderer.setRenderBounds(0.3F, 0.4F, 0.1F, 0.7F, 0.6F, 0.9F);
+			renderInvBlock(block, metadata, renderer);
+
+			//core
+			renderer.setRenderBounds(0.35F, 0.0F, 0.15F, 0.65F, 0.4F, 0.85F);
+			renderInvBlock(block, metadata, renderer);
+
+			//feet
+			renderer.setRenderBounds(0.25F, 0.0F, 0.1F, 0.75F, 0.2F, 0.90F);
+			renderInvBlock(block, metadata, renderer);
+			renderer.setRenderBounds(0.20F, 0.0F, 0.0F, 0.80F, 0.1F, 1.0F);
+			renderInvBlock(block, metadata, renderer);
+		}
+	}
+
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
+			Block block, int modelId, RenderBlocks renderer) 
+	{
+		if(modelId == TFCBlocks.AnvilRenderId)
+		{
+			return renderAnvil(block,x,y,z,renderer);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory() {
+		return true;
+	}
+
+	@Override
+	public int getRenderId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public static void renderInvBlock(Block block, int meta, RenderBlocks renderer)
+	{
+		Tessellator var14 = Tessellator.instance;
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, -1.0F, 0.0F);
+		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(0, meta));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 1.0F, 0.0F);
+		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(1, meta));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 0.0F, -1.0F);
+		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(2, meta));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 0.0F, 1.0F);
+		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(3, meta));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(4, meta));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(1.0F, 0.0F, 0.0F);
+		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(5, meta));
+		var14.draw();
 	}
 }
 

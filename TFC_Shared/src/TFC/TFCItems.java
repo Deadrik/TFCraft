@@ -11,7 +11,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
-import TFC.Core.AnvilReq;
 import TFC.Core.Recipes;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Settings;
@@ -19,7 +18,6 @@ import TFC.Enums.EnumMetalType;
 import TFC.Enums.EnumSize;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
-import TFC.Items.ItemAnvil;
 import TFC.Items.ItemBarrels;
 import TFC.Items.ItemBellows;
 import TFC.Items.ItemBlueprint;
@@ -312,16 +310,6 @@ public class TFCItems
     
     public static Item FireStarter;
     public static Item BellowsItem;
-    public static Item BismuthBronzeAnvilItem;
-    public static Item BlackBronzeAnvilItem;
-    public static Item BlackSteelAnvilItem;
-    public static Item BlueSteelAnvilItem;
-    public static Item BronzeAnvilItem;
-    public static Item CopperAnvilItem;
-    public static Item WroughtIronAnvilItem;
-    public static Item RedSteelAnvilItem;
-    public static Item RoseGoldAnvilItem;
-    public static Item SteelAnvilItem;
 
     public static Item StoneHammer;
     public static Item BismuthHammer;
@@ -1329,14 +1317,6 @@ public class TFCItems
 
         Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391)).setUnlocalizedName("Ink");
 
-        BlackSteelAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBlackSteelAnvilItem",16399), 5, AnvilReq.BLACKSTEEL).setUnlocalizedName("Black Steel Anvil Item");
-        BlueSteelAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBlueSteelAnvilItem",16400), 7, AnvilReq.BLUESTEEL).setUnlocalizedName("Blue Steel Anvil Item");
-        BronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraBronzeAnvilItem",16401), 2, AnvilReq.BRONZE).setUnlocalizedName("Bronze Anvil Item");
-        CopperAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraCopperAnvilItem",16402), 1, AnvilReq.COPPER).setUnlocalizedName("Copper Anvil Item");
-        WroughtIronAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraWroughtIronAnvilItem",16403), 3, AnvilReq.WROUGHTIRON).setUnlocalizedName("Wrought Iron Anvil Item");
-        RedSteelAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraRedSteelAnvilItem",16404), 6, AnvilReq.REDSTEEL).setUnlocalizedName("Red Steel Anvil Item");
-        SteelAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","terraSteelAnvilItem",16405), 4, AnvilReq.STEEL).setUnlocalizedName("Steel Anvil Item");
-
         BellowsItem = new ItemBellows(TFC_Settings.getIntFor(config,"item","terraBellowsItem",16406)).setUnlocalizedName("Bellows");
 
         FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","terraFireStarter",16407)).setFolder("tools/").setUnlocalizedName("Firestarter");
@@ -1494,9 +1474,6 @@ public class TFCItems
         ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setUnlocalizedName("Zinc ProPick Head");
         
         Flux = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setUnlocalizedName("Flux"));
-        BismuthBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BismuthBronzeAnvilItem",16640), 0, AnvilReq.BISMUTHBRONZE).setUnlocalizedName("Bismuth Bronze Anvil Item");
-        BlackBronzeAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","BlackBronzeAnvilItem",16641), 1, AnvilReq.BLACKBRONZE).setUnlocalizedName("Black Bronze Anvil Item");
-        RoseGoldAnvilItem = new ItemAnvil(TFC_Settings.getIntFor(config,"item","RoseGoldAnvilItem",16642), 2, AnvilReq.ROSEGOLD).setUnlocalizedName("Rose Gold Anvil Item");
 
         /**
          * Scythe

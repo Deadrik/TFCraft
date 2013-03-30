@@ -1,9 +1,11 @@
 package TFC.Blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,10 +17,11 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.AnvilReq;
 import TFC.TileEntities.TileEntityTerraAnvil;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAnvil extends BlockTerraContainer
 {
@@ -26,18 +29,31 @@ public class BlockAnvil extends BlockTerraContainer
 
 
 	private Random random = new Random();
-	
+
 	public BlockAnvil(int i)
 	{
 		super(i, Material.iron);
+		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
-	
+
 	public BlockAnvil(int i, int offset)
 	{
 		this(i);
 		anvilId = offset;
 	}
-	
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
+	{
+		if(this.blockID == TFCBlocks.Anvil.blockID)
+			for(int i = 1; i < 8; i++)
+				par3List.add(new ItemStack(this, 1, i));
+		if(this.blockID == TFCBlocks.Anvil2.blockID)
+			for(int i = 0; i < 3; i++)
+				par3List.add(new ItemStack(this, 1, i));
+	}
+
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
@@ -67,60 +83,55 @@ public class BlockAnvil extends BlockTerraContainer
 			return true;
 		}
 	}
-	
-	/**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
-	@Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        int meta = par1World.getBlockMetadata(par2, par3, par4);
-        int direction = getDirectionFromMetadata(meta);
-        TileEntityTerraAnvil te = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
 
-		if(te.AnvilTier != AnvilReq.STONE.Tier)
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityTerraAnvil te = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
+		if(te!= null)
 		{
-        if(direction == 0)
-            return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
-        else
-            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
+			if(te.AnvilTier != AnvilReq.STONE.Tier || this.blockID == TFCBlocks.Anvil2.blockID)
+			{
+				if(direction == 0)
+					return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
+				else
+					return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
+			}
+			else
+			{
+				return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
+			}
 		}
-		else
-		{
-			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
-		}
-    }
-	
+		return null;
+	}
+
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        int meta = par1World.getBlockMetadata(par2, par3, par4);
-        int direction = getDirectionFromMetadata(meta);
-        TileEntityTerraAnvil te = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
+	{
+		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityTerraAnvil te = (TileEntityTerraAnvil)par1World.getBlockTileEntity(par2, par3, par4);
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
-        if(direction == 0)
-            return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
-        else
-            return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
+			if(direction == 0)
+				return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
+			else
+				return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
 		}
 		else
 		{
 			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
 		}
-    }
-    @Override
+	}
+	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		int meta = getAnvilTypeFromMeta(j);
 
-		if(i == 0) 
-		{
-			return textureMapTop[meta];
-		} 
-		else if(i == 1) 
+		if(i == 0 || i == 1) 
 		{
 			return textureMapTop[meta];
 		} 
@@ -143,47 +154,10 @@ public class BlockAnvil extends BlockTerraContainer
 
 		if(blockID == TFCBlocks.Anvil.blockID)
 		{
-		switch (type)
-		{
-		case 1:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.CopperAnvilItem, 1));
-			break;
-		case 2:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BronzeAnvilItem, 1));
-			break;
-		case 3:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.WroughtIronAnvilItem, 1));
-			break;
-		case 4:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.SteelAnvilItem, 1));
-			break;
-		case 5:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BlackSteelAnvilItem, 1));
-			break;
-		case 6:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.RedSteelAnvilItem, 1));
-			break;
-		case 7:
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BlueSteelAnvilItem, 1));
-			break;
-		default:
-			break;
+			if(type == 0)
+				return;
 		}
-		}
-		else if(blockID == TFCBlocks.Anvil2.blockID)
-        {
-        switch (type)
-        {
-        case 1:
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BlackBronzeAnvilItem, 1));
-            break;
-        case 2:
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.RoseGoldAnvilItem, 1));
-            break;
-        default:
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BismuthBronzeAnvilItem, 1));
-        }
-        }
+		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 	@Override
 	public boolean isOpaqueCube()
@@ -213,8 +187,15 @@ public class BlockAnvil extends BlockTerraContainer
 			byte0 = 0;
 		}
 		byte0 += meta;
-		
+
 		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
+
+		TileEntityTerraAnvil te = (TileEntityTerraAnvil)world.getBlockTileEntity(i, j, k);
+		if(blockID == TFCBlocks.Anvil.blockID)
+			te.AnvilTier = AnvilReq.getReqFromInt(meta).Tier;
+		else if(blockID == TFCBlocks.Anvil2.blockID)
+			te.AnvilTier = AnvilReq.getReqFromInt2(meta).Tier;
+
 
 	}
 	@Override
@@ -258,8 +239,8 @@ public class BlockAnvil extends BlockTerraContainer
 				}
 			}
 		}
-		
-		
+
+
 
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
@@ -268,41 +249,43 @@ public class BlockAnvil extends BlockTerraContainer
 	{
 		return false;
 	}
-	
-	public static int getAnvilTypeFromMeta(int j)
-    {
-        int l = 7;
-        int k = j & l;
-        return k;
-    }
-	
-    public static int getDirectionFromMetadata(int i)
-    {
-        int d = i >> 3;
 
-        if (d == 1) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+	public static int getAnvilTypeFromMeta(int j)
+	{
+		int l = 7;
+		int k = j & l;
+		return k;
+	}
+
+	public static int getDirectionFromMetadata(int i)
+	{
+		int d = i >> 3;
+
+			if (d == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
 		return new TileEntityTerraAnvil();
 	}
-	
-	Icon[] textureMapTop = new Icon[8];
-	Icon[] textureMapSide = new Icon[8];
+
+	Icon[] textureMapTop;
+	Icon[] textureMapSide;
 
 	@Override
-    public void registerIcons(IconRegister registerer)
-    {
-		for(int i = 1; i < (anvilId == 0 ? 8 : 3); i++)
+	public void registerIcons(IconRegister registerer)
+	{
+		textureMapTop = new Icon[anvilId == 0 ? 8 : 3];
+		textureMapSide = new Icon[anvilId == 0 ? 8 : 3];
+		for(int i = (anvilId == 0 ? 1 : 0); i < (anvilId == 0 ? 8 : 3); i++)
 		{
 			textureMapTop[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Top");
 			textureMapSide[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Side");
 		}
-    }
+	}
 }

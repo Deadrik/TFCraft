@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import TFC.*;
-import TFC.Blocks.BlockCustomReed;
+import TFC.Blocks.Vanilla.BlockCustomReed;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.block.*;

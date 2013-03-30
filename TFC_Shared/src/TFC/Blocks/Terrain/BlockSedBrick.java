@@ -1,14 +1,20 @@
-package TFC.Items;
+package TFC.Blocks.Terrain;
 
 import java.util.List;
-
-import TFC.TFCBlocks;
-import TFC.Blocks.Terrain.BlockCollapsable;
+import java.util.Random;
+import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Textures;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Items.ItemChisel;
+import TFC.Items.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -35,36 +41,22 @@ import net.minecraft.village.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
 
-public class ItemWoolYarn extends ItemTerra
+public class BlockSedBrick extends BlockSedSmooth
 {
-	public ItemWoolYarn(int id) 
-	{
-		super(id);
-		this.hasSubtypes = false;
-		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+
+	public BlockSedBrick(int i) {
+		super(i);
 	}
-
-	int[][] map = 
-		{   {0,-1,0},
-			{0,1,0},
-			{0,0,-1},
-			{0,0,1},
-			{-1,0,0},
-			{1,0,0},
-		};
-
 	
-
-	
-
-	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
-	{
-
-	}
-
-	
+	@Override
+	public void registerIcons(IconRegister iconRegisterer)
+    {
+		for(int i = 0; i < 10; i++)
+		{
+			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Brick");
+		}
+    }
 }
+

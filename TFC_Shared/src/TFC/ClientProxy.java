@@ -100,6 +100,7 @@ import TFC.Render.RenderWolfTFC;
 import TFC.Render.TileEntityBarrelRendererTFC;
 import TFC.Render.TileEntityChestRendererTFC;
 import TFC.Render.TileEntityIngotPileRenderer;
+import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.Render.Blocks.RenderSupportBeam;
@@ -170,7 +171,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.moltenRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.looseRockRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FirepitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.AnvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.AnvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderAnvil());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.BellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.ScribeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.ForgeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -639,15 +640,15 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("item.javelin.name", "Javelin");
 
-		LR.addStringLocalization("item.WoodenBucketEmpty.name", "Wooden Bucket (Empty)");
-		LR.addStringLocalization("item.WoodenBucketWater.name", "Wooden Bucket (Water)");
-		LR.addStringLocalization("item.WoodenBucketMilk.name", "Wooden Bucket (Milk)");
+		LR.addStringLocalization("item.Wooden Bucket Empty.name", "Wooden Bucket (Empty)");
+		LR.addStringLocalization("item.Wooden Bucket Water.name", "Wooden Bucket (Water)");
+		LR.addStringLocalization("item.Wooden Bucket Milk.name", "Wooden Bucket (Milk)");
 
-		LR.addStringLocalization("item.RedSteelBucketEmpty.name", "Red Steel Bucket (Empty)");
-		LR.addStringLocalization("item.RedSteelBucketWater.name", "Red Steel Bucket (Water)");
+		LR.addStringLocalization("item.Red Steel Bucket Empty.name", "Red Steel Bucket (Empty)");
+		LR.addStringLocalization("item.Red Steel Bucket Water.name", "Red Steel Bucket (Water)");
 
-		LR.addStringLocalization("item.BlueSteelBucketEmpty.name", "Blue Steel Bucket (Empty)");
-		LR.addStringLocalization("item.BlueSteelBucketLava.name", "Blue Steel Bucket (Lava)");
+		LR.addStringLocalization("item.Blue Steel Bucket Empty.name", "Blue Steel Bucket (Empty)");
+		LR.addStringLocalization("item.Blue Steel Bucket Lava.name", "Blue Steel Bucket (Lava)");
 
 		LR.addStringLocalization("item.SluiceItem.name", "Sluice");
 
@@ -660,7 +661,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.FireStarter.name", "Firestarter");
 
 
-		LR.addStringLocalization("item.BellowsItem.name", "Bellows");
+		LR.addStringLocalization("item.Bellows.name", "Bellows");
 		LR.addStringLocalization("tile.Bellows.name", "Bellows");
 		LR.addStringLocalization("tile.Scribe.name", "Scribing Table");
 		LR.addStringLocalization("item.Ink.name", "Marking");
@@ -1236,11 +1237,12 @@ public class ClientProxy extends CommonProxy
 				,"Wrought Iron","Lead","Nickel","Pig Iron","Platinum","Red Steel","Rose Gold","Silver", "Steel", "Sterling Silver",
 				"Tin", "Zinc"};
 
-		LR.addStringLocalization("tile.Anvil.name", "Anvil");
-
+		LR.addStringLocalization("tile.Anvil.Stone.name", "Stone Anvil");
+		
 		for(int i= 0; i < ToolNames.length; i++)
 		{
-			LR.addStringLocalization("item."+ToolNames[i]+" Anvil Item.name", ToolNames[i]+" Anvil");
+			LR.addStringLocalization("tile.Anvil."+ToolNames[i]+".name", ToolNames[i]+" Anvil");
+			LR.addStringLocalization("tile.Anvil2."+ToolNames[i]+".name", ToolNames[i]+" Anvil");
 			LR.addStringLocalization("item."+ToolNames[i]+" Pick.name", ToolNames[i] + " Pickaxe");
 			LR.addStringLocalization("item."+ToolNames[i]+" Shovel.name", ToolNames[i] + " Shovel");
 			LR.addStringLocalization("item."+ToolNames[i]+" Axe.name", ToolNames[i] + " Axe");
@@ -1286,7 +1288,7 @@ public class ClientProxy extends CommonProxy
 		//meltedmetal
 		for(int i= 0; i < Names.length; i++)
 		{
-			LR.addStringLocalization("item.Unshaped "+Names[i]+".name", Names[i] + " Unshaped");
+			LR.addStringLocalization("item."+Names[i]+" Unshaped.name", Names[i] + " Unshaped");
 			LR.addStringLocalization("item."+Names[i]+" Ingot.name", Names[i] + " Ingot");
 			LR.addStringLocalization("item."+Names[i]+" Double Ingot.name", Names[i] + " Double Ingot");
 			LR.addStringLocalization("item."+Names[i]+" Sheet.name", Names[i] + " Sheet");

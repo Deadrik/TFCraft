@@ -14,7 +14,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Blocks.BlockOre;
+import TFC.Blocks.Terrain.BlockOre;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;

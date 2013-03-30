@@ -3,12 +3,12 @@ package TFC.Items;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 
-public class ItemAnvil extends ItemTerraBlock
+public class ItemAnvil2 extends ItemTerraBlock
 {
-	public ItemAnvil(int i) 
+	public ItemAnvil2(int i) 
 	{
 		super(i);
-		this.MetaNames = new String[]{"Stone", "Copper", "Bronze", "Wrought Iron", "Steel", "Steel", "Black Steel", "Red Steel", "Blue Steel"};
+		this.MetaNames = new String[]{"Bismuth Bronze", "Black Bronze", "Rose Gold"};
 	}
 	
 	@Override

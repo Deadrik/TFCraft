@@ -3,7 +3,7 @@ package TFC.WorldGen.Generators;
 import java.util.Random;
 
 import TFC.*;
-import TFC.Blocks.BlockCustomTallGrass;
+import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.BiomeDecoratorTFC;
