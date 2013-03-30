@@ -19,6 +19,12 @@ public class BlockPeatGrass extends BlockGrass
     {
         return TFCBlocks.Peat.blockID;
     }
+    
+    @Override
+	public int getRenderType()
+	{
+		return TFCBlocks.peatGrassRenderId;
+	}
 
     /**
      * Returns the quantity of items to drop on block destruction.

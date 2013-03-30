@@ -30,14 +30,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return TFC_CoreRender.RenderMolten(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.woodSupportRenderIdH)
-        {
-            return TFC_CoreRender.RenderWoodSupportBeamH(block, i, j, k, renderer);
-        }
-        else if (modelId == TFCBlocks.woodSupportRenderIdV)
-        {
-            return TFC_CoreRender.RenderWoodSupportBeamV(block, i, j, k, renderer);
-        }
         else if (modelId == TFCBlocks.grassRenderId)
         {
             return RenderGrass.render(block, i, j, k, renderer);

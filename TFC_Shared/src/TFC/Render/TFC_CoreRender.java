@@ -2,68 +2,29 @@ package TFC.Render;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.src.ModLoader;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+
 import org.lwjgl.opengl.GL11;
 
-import bioxx.importers.WavefrontObject;
-
 import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
-import TFC.Blocks.BlockFiniteWater;
 import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.BlockAnvil;
-import TFC.Blocks.BlockBellows;
 import TFC.Blocks.BlockSluice;
-import TFC.Core.AnvilReq;
-import TFC.Core.TFC_Textures;
-import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Core.Direction;
-import TFC.Food.CropIndex;
-import TFC.Food.CropManager;
+import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
-import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFruitTreeWood;
 import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityTerraAnvil;
 import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-
-import net.minecraft.client.Minecraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.client.ForgeHooksClient;
 
 public class TFC_CoreRender 
 {
@@ -305,12 +266,12 @@ public class TFC_CoreRender
 		int seed = i*k+j;
 		Random R = new Random(seed);
 
-		float xOffset = (float)(R.nextInt(5) - 2) * 0.05f;
-		float zOffset = (float)(R.nextInt(5) - 2) * 0.05f;
+		float xOffset = (R.nextInt(5) - 2) * 0.05f;
+		float zOffset = (R.nextInt(5) - 2) * 0.05f;
 
-		float xOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
-		float yOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
-		float zOffset2 = (float)(R.nextInt(5) - 2) * 0.05f;
+		float xOffset2 = (R.nextInt(5) - 2) * 0.05f;
+		float yOffset2 = (R.nextInt(5) - 2) * 0.05f;
+		float zOffset2 = (R.nextInt(5) - 2) * 0.05f;
 
 		renderblocks.setRenderBounds(0.35F + xOffset, 0.00F, 0.35F + zOffset, 0.65F + xOffset2, 0.15F + yOffset2, 0.65F + zOffset2);
 		renderblocks.renderStandardBlock(block, i, j, k);
@@ -320,360 +281,7 @@ public class TFC_CoreRender
 		return true;
 	}
 
-	public static boolean RenderWoodSupportBeamH(Block block, int i, int j, int k, RenderBlocks renderblocks)
-	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
-
-		int supportIDv = TFCBlocks.WoodSupportV.blockID;
-		int supportIDh = TFCBlocks.WoodSupportH.blockID;
-		renderblocks.renderAllFaces = true;
-
-		Boolean hasVerticalBeam = false;
-		Boolean hasHorizontalBeamX = false;
-		Boolean hasHorizontalBeamZ = false;
-
-		//if the block directly beneath is a Vertical Support
-		if((blockAccess.getBlockId(i, j-1, k) == supportIDv))
-		{	
-			renderblocks.setRenderBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
-			renderblocks.renderStandardBlock(block, i, j, k);
-			hasVerticalBeam = true;
-		}
-
-		//X
-		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
-		{
-			if((blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-					renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else if(!hasVerticalBeam)//if the block does not contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamX = true;
-			}
-			else//if there is only a beam at the negative x and not the positive x
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamX = true;
-			}
-		}
-		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
-		{
-			if(hasVerticalBeam)//if the block does contain a vertical beam
-			{
-				renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			else
-			{
-				renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			hasHorizontalBeamX = true;
-		}
-		//Z
-		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
-		{
-			if((blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else if(!hasVerticalBeam)//if the block does not contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamZ = true;
-			}
-			else//if there is only a beam at the negative x and not the positive x
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamZ = true;
-			}
-		}
-		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
-		{
-			if(hasVerticalBeam)//if the block does contain a vertical beam
-			{
-				renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			else
-			{
-				renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			hasHorizontalBeamZ = true;
-		}
-
-		float minX = -1;
-		float minY = -1;
-		float minZ = -1;
-
-		float maxX = -1;
-		float maxY = -1;
-		float maxZ = -1;
-
-		if(hasHorizontalBeamX)
-		{
-			minX = 0F;
-			maxX = 1F;
-			minZ = 0.25F;
-			maxZ = 0.75F;
-		}
-		if(hasHorizontalBeamZ)
-		{
-			if(maxX == -1)
-			{
-				minX = 0.25F;
-				maxX = 0.75F;
-			}
-
-			minZ = 0F;
-			maxZ = 1F;
-
-		}
-		if(hasVerticalBeam)
-		{
-			minY = 0F;
-			maxY = 1F;
-			if(maxX == -1)
-			{
-				minX = 0.25F;
-				maxX = 0.75F;
-			}
-			if(maxZ == -1)
-			{
-				minZ = 0.25F;
-				maxZ = 0.75F;
-			}
-		}
-		else
-		{
-			minY = 0.5F;
-			maxY = 1F;
-		}
-
-		renderblocks.setRenderBounds(minX,minY, minZ, maxX, maxY, maxZ);
-
-		return true;
-	}
-
-	public static boolean RenderWoodSupportBeamV(Block block, int i, int j, int k, RenderBlocks renderblocks)
-	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
-
-		int supportIDv = TFCBlocks.WoodSupportV.blockID;
-		int supportIDh = TFCBlocks.WoodSupportH.blockID;
-
-		Boolean hasVerticalBeam = false;
-		Boolean hasHorizontalBeamX = false;
-		Boolean hasHorizontalBeamZ = false;
-
-		//if the block directly beneath is a Vertical Support or a solid block
-		if((blockAccess.isBlockOpaqueCube(i, j-1, k) || blockAccess.getBlockId(i, j-1, k) == supportIDv) && block.blockID == TFCBlocks.WoodSupportV.blockID)
-		{	
-			renderblocks.setRenderBounds(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
-			renderblocks.renderStandardBlock(block, i, j, k);
-			hasVerticalBeam = true;
-		}
-
-		//X
-		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) &&*/ (blockAccess.getBlockId(i-1, j, k) == supportIDv || blockAccess.getBlockId(i-1, j, k) == supportIDh))//if the block above is solid and the block at -x is a support beam
-		{
-			if((blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))//if the block above is solid and the block at +x is a support beam
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-					renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else if(!hasVerticalBeam)//if the block does not contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamX = true;
-			}
-			else//if there is only a beam at the negative x and not the positive x
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.25F, 1.0F, 0.75F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else
-				{
-					renderblocks.setRenderBounds(0.0F, 0.50F, 0.25F, 0.75F, 1.0F, 0.75F);// 3/4 block
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamX = true;
-			}
-		}
-		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i+1, j, k) == supportIDv || blockAccess.getBlockId(i+1, j, k) == supportIDh))
-		{
-			if(hasVerticalBeam)//if the block does contain a vertical beam
-			{
-				renderblocks.setRenderBounds(0.75F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			else
-			{
-				renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 1.0F, 1.0F, 0.75F);// 3/4 block
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			hasHorizontalBeamX = true;
-		}
-		//Z
-		if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k-1) == supportIDv || blockAccess.getBlockId(i, j, k-1) == supportIDh))
-		{
-			if((blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//if the block above is solid and the block at +x is a support beam
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else if(!hasVerticalBeam)//if the block does not contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 1.0F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamZ = true;
-			}
-			else//if there is only a beam at the negative x and not the positive x
-			{
-				if(hasVerticalBeam)//if the block does contain a vertical beam
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.25F);
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				else
-				{
-					renderblocks.setRenderBounds(0.25F, 0.50F, 0.0F, 0.75F, 1.0F, 0.75F);// 3/4 block
-					renderblocks.renderStandardBlock(block, i, j, k);
-				}
-				hasHorizontalBeamZ = true;
-			}
-		}
-		else if(/*TFC_Core.isBlockAboveSolid(blockAccess, i, j, k) && */(blockAccess.getBlockId(i, j, k+1) == supportIDv || blockAccess.getBlockId(i, j, k+1) == supportIDh))//Top is solid and positive Z is support
-		{
-			if(hasVerticalBeam)//if the block does contain a vertical beam
-			{
-				renderblocks.setRenderBounds(0.25F, 0.50F, 0.75F, 0.75F, 1.0F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			else
-			{
-				renderblocks.setRenderBounds(0.25F, 0.50F, 0.25F, 0.75F, 1.0F, 1.0F);
-				renderblocks.renderStandardBlock(block, i, j, k);
-			}
-			hasHorizontalBeamZ = true;
-		}
-
-		float minX = 0.25F;
-		float minY = 0;
-		float minZ = 0.25F;
-
-		float maxX = 0.75F;
-		float maxY = 1;
-		float maxZ = 0.75F;
-
-
-		renderblocks.setRenderBounds(minX,minY, minZ, maxX, maxY, maxZ);
-
-		return true;
-	}
-
-	public static void renderBlockFallingSand(Block block,int meta, World world, int i, int j, int k)
-	{
-		/* float f = 0.5F;
-        float f1 = 1.0F;
-        float f2 = 0.8F;
-        float f3 = 0.6F;
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.startDrawingQuads();
-        tessellator.setBrightness(block.getMixedBrightnessForBlock(world, i, j, k));
-        float f4 = 1.0F;
-        float f5 = 1.0F;
-        if (f5 < f4)
-        {
-            f5 = f4;
-        }
-        tessellator.setColorOpaque_F(f * f5, f * f5, f * f5);
-        renderer.renderBottomFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(0, meta));
-        f5 = 1.0F;
-        if (f5 < f4)
-        {
-            f5 = f4;
-        }
-        tessellator.setColorOpaque_F(f1 * f5, f1 * f5, f1 * f5);
-        renderer.renderTopFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(1, meta));
-        f5 = 1.0F;
-        if (f5 < f4)
-        {
-            f5 = f4;
-        }
-        tessellator.setColorOpaque_F(f2 * f5, f2 * f5, f2 * f5);
-        renderer.renderEastFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(2, meta));
-        f5 = 1.0F;
-        if (f5 < f4)
-        {
-            f5 = f4;
-        }
-        tessellator.setColorOpaque_F(f2 * f5, f2 * f5, f2 * f5);
-        renderer.renderWestFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(3, meta));
-        f5 = 1.0F;
-        if (f5 < f4)
-        {
-            f5 = f4;
-        }
-        tessellator.setColorOpaque_F(f3 * f5, f3 * f5, f3 * f5);
-        renderer.renderNorthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(4, meta));
-        f5 = 1.0F;
-        if (f5 < f4)
-        {
-            f5 = f4;
-        }
-        tessellator.setColorOpaque_F(f3 * f5, f3 * f5, f3 * f5);
-        renderer.renderSouthFace(block, -0.5D, -0.5D, -0.5D, block.getBlockTextureFromSideAndMetadata(5, meta));
-        tessellator.draw();*/
-	}
+	
 
 	public static boolean RenderOre(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks, IBlockAccess iblockaccess)
 	{
@@ -861,12 +469,12 @@ public class TFC_CoreRender
 		double texMinY = texture.getMinV();
 		double texMaxY = texture.getMaxV();
 
-		double minX = (double)i + blockMinX;
-		double maxX = (double)i + blockMaxX;
-		double minY = (double)j + blockMinY;
-		double minZ = (double)k + blockMinZ;
-		double maxZ = (double)k + blockMaxZ;
-		double maxY = (double)j + blockMaxY;
+		double minX = i + blockMinX;
+		double maxX = i + blockMaxX;
+		double minY = j + blockMinY;
+		double minZ = k + blockMinZ;
+		double maxZ = k + blockMaxZ;
+		double maxY = j + blockMaxY;
 
 		int var10 = blockAccess.getBiomeGenForCoords(i, k).waterColorMultiplier;
 		int waterR = (var10 & 16711680) >> 16;

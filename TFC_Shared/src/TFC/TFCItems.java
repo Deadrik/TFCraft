@@ -71,14 +71,10 @@ import TFC.Items.ItemTerra;
 import TFC.Items.ItemToolRack;
 import TFC.Items.ItemUnfinishedArmor;
 import TFC.Items.ItemWoodDoor;
-import TFC.Items.ItemWoodSupport;
 import TFC.Items.ItemWritableBookTFC;
 
 public class TFCItems
 {
-    public static Item WoodSupportItemH;
-    public static Item WoodSupportItemV;
-
     public static Item GemRuby;
     public static Item GemSapphire;
     public static Item GemEmerald;
@@ -1291,8 +1287,6 @@ public class TFCItems
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
         Barrel = new ItemBarrels(TFC_Settings.getIntFor(config, "item", "barrels", 16299)).setUnlocalizedName("Barrel");
         
-        WoodSupportItemV = new ItemWoodSupport(TFC_Settings.getIntFor(config,"item","WoodSupportItemV", 16300), true).setUnlocalizedName("WoodSupportItemV");
-        WoodSupportItemH = new ItemWoodSupport(TFC_Settings.getIntFor(config,"item","WoodSupportItemH", 16301), false).setUnlocalizedName("WoodSupportItemH");
         Javelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","javelin",16318)).setUnlocalizedName("javelin");
 
         BismuthUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBismuth",16350)).setUnlocalizedName("Bismuth Unshaped");

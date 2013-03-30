@@ -134,14 +134,14 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public void updateIcons(IconRegister registerer)
 	{
-		if(MetaNames != null)
+		/*if(MetaNames != null)
 		{
 			icons = new Icon[MetaNames.length];
 			for(int i = 0; i < MetaNames.length; i++)
 			{
 				icons[i] = registerer.registerIcon(folder+MetaNames[i]);
 			}
-		}
+		}*/
 	}
 
 }

@@ -1,46 +1,19 @@
 package TFC.Blocks;
 
-import java.util.Iterator;
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import TFC.TerraFirmaCraft;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityBarrel;
-import TFC.TileEntities.TileEntityChestTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.common.ForgeDirection;
 
 public class BlockBarrel extends BlockTerraContainer
 {
@@ -139,11 +112,11 @@ public class BlockBarrel extends BlockTerraContainer
 						}
 
 						var7.stackSize -= var11;
-						var12 = new EntityItem(par1World, (double)((float)par2 + var8), (double)((float)par3 + var9), (double)((float)par4 + var10), new ItemStack(var7.itemID, var11, var7.getItemDamage()));
+						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
 						float var13 = 0.05F;
-						var12.motionX = (double)((float)this.random.nextGaussian() * var13);
-						var12.motionY = (double)((float)this.random.nextGaussian() * var13 + 0.2F);
-						var12.motionZ = (double)((float)this.random.nextGaussian() * var13);
+						var12.motionX = (float)this.random.nextGaussian() * var13;
+						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
+						var12.motionZ = (float)this.random.nextGaussian() * var13;
 
 						if (var7.hasTagCompound())
 						{
@@ -161,10 +134,10 @@ public class BlockBarrel extends BlockTerraContainer
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		if(blockID == TFCBlocks.WoodSupportH.blockID)
+		/*if(blockID == TFCBlocks.WoodSupportH.blockID)
 		{
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.WoodSupportItemH, 1, l));
-		}
+		}*/
 	}
 
 	@Override
