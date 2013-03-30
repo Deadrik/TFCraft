@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -107,12 +108,6 @@ public class BlockWoodSupport extends BlockTerra
 	{
 		return j;
 	}
-
-	/*@Override
-    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        return icons[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
-    }*/
 
     @Override
     public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
@@ -282,6 +277,16 @@ public class BlockWoodSupport extends BlockTerra
 	{
 		return false;
 	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entity, ItemStack is) 
+	{
+		super.onBlockPlacedBy(world, i, j, k, entity, is);
+		if(!world.isRemote)
+		{
+			onNeighborBlockChange(world, i, j, k, is.getItemDamage());
+		}
+	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
@@ -382,14 +387,13 @@ public class BlockWoodSupport extends BlockTerra
     		}
     		else if(blockID == TFCBlocks.WoodSupportV.blockID)
     		{
-    			if(side == 0)
-    			{
+
     				//if the block beneath is opaque or is another support
-    				if(vSupport || b1 && world.getBlockId(x, y-1, z) == 0)
+    				if(!vSupport && !b1)
     				{
-    					return true;
+    					return false;
     				}
-    			}
+
     			//top
     			else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
     			{

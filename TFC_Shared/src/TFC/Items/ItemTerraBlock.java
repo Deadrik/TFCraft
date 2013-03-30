@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Settings;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 
@@ -70,7 +71,10 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
-
+		
+		if(TFC_Settings.enableDebugMode)
+			arraylist.add(getUnlocalizedName(is));
+		
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();

@@ -1205,6 +1205,7 @@ public class ClientProxy extends CommonProxy
 		LanguageRegistry LR = LanguageRegistry.instance();
 		String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
 				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+
 		for(int i= 0; i < WoodNames.length; i++)
 		{
 			LR.addStringLocalization("tile.log."+WoodNames[i]+".name", WoodNames[i]);
@@ -1212,8 +1213,8 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("tile.Barrel"+WoodNames[i]+".name", WoodNames[i] + " Barrel");
 			LR.addStringLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
 			LR.addStringLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
-			LR.addStringLocalization("item.WoodSupportItemV."+WoodNames[i],"V. " + WoodNames[i] + " Support Beam");
-			LR.addStringLocalization("item.WoodSupportItemH."+WoodNames[i],"H. " + WoodNames[i] + " Support Beam");
+			LR.addStringLocalization("tile.WoodSupportV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
+			LR.addStringLocalization("tile.WoodSupportH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
 			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
 			LR.addStringLocalization("item.Barrel."+WoodNames[i]+".name", WoodNames[i] +" Barrel");
 			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
