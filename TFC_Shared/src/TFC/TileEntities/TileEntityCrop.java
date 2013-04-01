@@ -6,45 +6,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemOre;
-import TFC.WorldGen.TFCBiome;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TileEntityCrop extends NetworkTileEntity
 {
@@ -109,15 +77,13 @@ public class TileEntityCrop extends NetworkTileEntity
 
 				if(!crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
-					worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}
 				else if(crop.dormantInFrost && ambientTemp < crop.minAliveTemp)
 				{
 					if(growth > 1)
 					{
-						worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+						worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 					}
 				}
 
@@ -146,16 +112,14 @@ public class TileEntityCrop extends NetworkTileEntity
 
 				if((crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2)) || growth < 0)
 				{
-					worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}
 
 				growthTimer += (R.nextInt(2)+23)*TFC_Time.hourLength;
 			}
 			else if(crop.needsSunlight && sunLevel <= 0)
 			{
-				worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 			}
 		}
 	}
@@ -168,7 +132,8 @@ public class TileEntityCrop extends NetworkTileEntity
 	/**
 	 * Reads a tile entity from NBT.
 	 */
-	 public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+	 @Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readFromNBT(par1NBTTagCompound);
 		growth = par1NBTTagCompound.getFloat("growth");
@@ -180,7 +145,8 @@ public class TileEntityCrop extends NetworkTileEntity
 	/**
 	 * Writes a tile entity to NBT.
 	 */
-	 public void writeToNBT(NBTTagCompound nbt)
+	 @Override
+	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 		nbt.setFloat("growth", growth);

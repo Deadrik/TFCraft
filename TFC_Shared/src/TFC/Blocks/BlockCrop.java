@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
@@ -20,10 +21,30 @@ import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Items.ItemCustomScythe;
 import TFC.TileEntities.TileEntityCrop;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class BlockCrop extends BlockContainer
 {
+	Icon[] iconsCarrots = new Icon[5];
+	Icon[] iconsGarlic = new Icon[5];
+	Icon[] iconsCorn = new Icon[6];
+	Icon[] iconsCabbage = new Icon[6];
+	Icon[] iconsTomato = new Icon[8];
+	Icon[] iconsPepperRed = new Icon[7];
+	Icon[] iconsPepperYellow = new Icon[7];
+	Icon[] iconsWheat = new Icon[8];
+	Icon[] iconsRye = new Icon[8];
+	Icon[] iconsBarley = new Icon[8];
+	Icon[] iconsOat = new Icon[8];
+	Icon[] iconsRice = new Icon[8];
+	Icon[] iconsGreenbean = new Icon[8];
+	Icon[] iconsOnion = new Icon[8];
+	Icon[] iconsPotato = new Icon[8];
+	Icon[] iconsSoybean = new Icon[8];
+	Icon[] iconsSquash = new Icon[8];
+
 	public BlockCrop(int par1, int id)
 	{
 		super(par1, Material.plants);
@@ -33,13 +54,127 @@ public class BlockCrop extends BlockContainer
 	{
 		return TFCBlocks.cropRenderId;
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
-    	//Empty On Purpose
-    }
-	
+	{
+		for(int i = 1; i < 6; i++)
+		{
+			iconsCarrots[i-1] = iconRegisterer.registerIcon("plants/crops/Carrots ("+i+")");
+			iconsGarlic[i-1] = iconRegisterer.registerIcon("plants/crops/Garlic ("+i+")");
+		}
+		for(int i = 1; i < 7; i++)
+		{
+			iconsCorn[i-1] = iconRegisterer.registerIcon("plants/crops/Corn ("+i+")");
+			iconsCabbage[i-1] = iconRegisterer.registerIcon("plants/crops/Cabbage ("+i+")");
+		}
+		for(int i = 1; i < 9; i++)
+		{
+			iconsTomato[i-1] = iconRegisterer.registerIcon("plants/crops/Tomato ("+i+")");
+		}
+		for(int i = 1; i < 8; i++)
+		{
+			iconsPepperRed[i-1] = iconRegisterer.registerIcon("plants/crops/PepperRed ("+i+")");
+			iconsPepperYellow[i-1] = iconRegisterer.registerIcon("plants/crops/PepperYellow ("+i+")");
+			iconsWheat[i-1] = iconRegisterer.registerIcon("plants/crops/Wheat ("+i+")");
+			iconsRye[i-1] = iconRegisterer.registerIcon("plants/crops/Rye ("+i+")");
+			iconsBarley[i-1] = iconRegisterer.registerIcon("plants/crops/Barley ("+i+")");
+			iconsOat[i-1] = iconRegisterer.registerIcon("plants/crops/Oat ("+i+")");
+			iconsRice[i-1] = iconRegisterer.registerIcon("plants/crops/Rice ("+i+")");
+			iconsGreenbean[i-1] = iconRegisterer.registerIcon("plants/crops/Greenbean ("+i+")");
+			iconsOnion[i-1] = iconRegisterer.registerIcon("plants/crops/Onion ("+i+")");
+			iconsPotato[i-1] = iconRegisterer.registerIcon("plants/crops/Potato ("+i+")");
+			iconsSquash[i-1] = iconRegisterer.registerIcon("plants/crops/Squash ("+i+")");
+			iconsSoybean[i-1] = iconRegisterer.registerIcon("plants/crops/Soybean ("+i+")");
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess access, int i, int j, int k, int meta)
+	{
+		TileEntityCrop te = (TileEntityCrop) access.getBlockTileEntity(i, j, k);
+		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+
+		int stage = (int) Math.floor(te.growth);
+		if(stage > crop.numGrowthStages)
+			stage = crop.numGrowthStages;
+
+		switch(te.cropId)
+		{
+		case 0:
+		case 1:
+			return iconsWheat[stage];
+		case 2:
+		case 3:
+			return iconsCorn[stage];
+		case 4:
+			return iconsTomato[stage];
+		case 5://Barley
+		case 6://Wild Barley
+		{
+			return iconsBarley[stage];
+		}
+		case 7://Rye
+		case 8://Wild Rye
+		{
+			return iconsRye[stage];
+		}
+		case 9://Oat
+		case 10://Wild Oat
+		{
+			return iconsOat[stage];
+		}
+		case 11://Rice
+		case 12://Wild Rice
+		{
+			return iconsRice[stage];
+		}
+		case 13://Potato
+		case 14://Wild Potato
+		{                
+			return iconsPotato[stage];
+		}
+		case 15://Onion
+		{                
+			return iconsOnion[stage];
+		}
+		case 16://Cabbage
+		{                
+			return iconsCabbage[stage];
+		}
+		case 17://Garlic
+		{                
+			return iconsGarlic[stage];
+		}
+		case 18://Carrots
+		{                
+			return iconsCarrots[stage];
+		}
+		case 19://Yellow Bell
+		{                
+			return iconsPepperYellow[stage];
+		}
+		case 20://Red Bell
+		{                
+			return iconsPepperRed[stage];
+		}
+		case 21://Soybean
+		{                
+			return iconsSoybean[stage];
+		}
+		case 22://Greenbean
+		{                
+			return iconsGreenbean[stage];
+		}
+		case 23://Squash
+		{                
+			return iconsSquash[stage];
+		}
+		}
+		return iconsCorn[6];
+	}
+
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
@@ -130,7 +265,7 @@ public class BlockCrop extends BlockContainer
 
 	}
 	@Override
-	public void breakBlock(World world, int i, int j, int k, int l, int m) 
+	public void breakBlock(World world, int i, int j, int k, int blockID, int metadata) 
 	{
 		TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
 		if(te!= null)
@@ -170,13 +305,6 @@ public class BlockCrop extends BlockContainer
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
 	{
-		TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
-		int meta = world.getBlockMetadata(i, j, k); 
-		int type = 0;
-		if(te != null)
-		{
-			type = te.cropId;
-		}
 		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.3, k+1);
 	}
 
@@ -214,7 +342,7 @@ public class BlockCrop extends BlockContainer
 	public boolean canBlockStay(World world, int i, int j, int k)
 	{
 		if (!(world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil.blockID || world.getBlockId(i, j-1, k) == TFCBlocks.tilledSoil2.blockID ||
-				TFC_Core.isSoil(world.getBlockId(i, j-1, k))))
+				TFC_Core.isSoil(world.getBlockId(i, j-1, k)) || world.getBlockId(i, j-1, k) == this.blockID))
 		{
 			return false;
 		}

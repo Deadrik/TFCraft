@@ -1,40 +1,13 @@
 package TFC.Render.Blocks;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.Minecraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.TileEntities.TileEntityCrop;
@@ -44,6 +17,111 @@ public class RenderCrop
 	
 	public static boolean render(Block block, int i, int j, int k, RenderBlocks renderblocks)
     {
+		IBlockAccess blockaccess = renderblocks.blockAccess;
+		TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
+        CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+        
+        switch(te.cropId)
+        {
+        case 0://Wheat
+        case 1://Wild Wheat
+        {
+            renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+            break;
+        }
+        case 2://Corn
+        case 3://Wild Corn
+        {
+            renderBlockCropsImpl(block, i, j, k, renderblocks, 1.0, 2.0);
+            break;
+        }
+        case 4://Tomatoes
+        {
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.9, 2.0);
+            break;
+        }
+        case 5://Barley
+        case 6://Wild Barley
+        {
+        	renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+            break;
+        }
+        case 7://Rye
+        case 8://Wild Rye
+        {
+        	renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+            break;
+        }
+        case 9://Oat
+        case 10://Wild Oat
+        {
+        	renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+            break;
+        }
+        case 11://Rice
+        case 12://Wild Rice
+        {
+        	renderBlockCropsImpl(block, i, j, k, renderblocks, 0.5, 1.0);
+            break;
+        }
+        case 13://Potato
+        case 14://Wild Potato
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 15://Onion
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 16://Cabbage
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 17://Garlic
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 18://Carrots
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 19://Yellow Bell
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 20://Red Bell
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 21://Soybean
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 22://Greenbean
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        case 23://Squash
+        {                
+        	drawCrossedSquares(block, i, j, k, renderblocks, 0.45, 1.0);
+            break;
+        }
+        default:
+        {
+            renderblocks.renderBlockCrops(block, i, j, k);
+            break;
+        }
+        }
+		
         /*IBlockAccess blockaccess = renderblocks.blockAccess;
         TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
         CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
@@ -195,108 +273,114 @@ public class RenderCrop
         return true;
     }
 	
-	private static void renderBlockCropsImpl(Block par1Block, double par3, double par5, double par7, RenderBlocks renderblocks, byte index, float heightMult, double height)
+	private static void renderBlockCropsImpl(Block block, double i, double j, double k, RenderBlocks renderblocks, double width, double height)
     {
-        Tessellator var9 = Tessellator.instance;
+        Tessellator tess = Tessellator.instance;
         GL11.glColor3f(1, 1, 1);
-        int brightness = par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, (int)par3, (int)par5, (int)par7);
-        var9.setBrightness(brightness);
-        var9.setColorRGBA_F(1, 1, 1, 1);
+        int brightness = block.getMixedBrightnessForBlock(renderblocks.blockAccess, (int)i, (int)j, (int)k);
+        tess.setBrightness(brightness);
+        tess.setColorRGBA_F(1, 1, 1, 1);
         
-        int texX = (index & 15) << 4;
-        int texY = (index+(16-(int)(16*height))) & 240;
+        Icon icon = block.getBlockTexture(renderblocks.blockAccess, (int)i, (int)j, (int)k, renderblocks.blockAccess.getBlockMetadata((int)i, (int)j, (int)k));
+
+        if (renderblocks.hasOverrideBlockTexture())
+        {
+            icon = renderblocks.overrideBlockTexture;
+        }
         
-        double var13 = (double)((float)texX / 256.0F);
-        double var15 = (double)(((float)texX + 15.99F) / 256.0F);
-        double var17 = (double)((float)texY / 256.0F);
-        double var19 = (double)(((float)texY + 15.99F) / 256.0F);
-        double var21 = par3 + 0.5D - 0.25D;
-        double var23 = par3 + 0.5D + 0.25D;
-        double var25 = par7 + 0.5D - 0.5D;
-        double var27 = par7 + 0.5D + 0.5D;
+        double minU = icon.getMinU();
+        double maxU = icon.getMaxU();
+        double minV = icon.getMinV();
+        double maxV = icon.getMaxV();
+        double minX = i + 0.5D - 0.25D;
+        double maxX = i + 0.5D + 0.25D;
+        double minZ = k + 0.5D - width;
+        double maxZ = k + 0.5D + width;
         
-        double y = par5;        
+        double y = j;        
         
-        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var13, var17);
-        var9.addVertexWithUV(var21, y + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, y + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var15, var17);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var13, var17);
-        var9.addVertexWithUV(var21, y + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, y + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var15, var17);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var13, var17);
-        var9.addVertexWithUV(var23, y + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, y + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var15, var17);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var13, var17);
-        var9.addVertexWithUV(var23, y + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, y + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var15, var17);
-        var21 = par3 + 0.5D - 0.5D;
-        var23 = par3 + 0.5D + 0.5D;
-        var25 = par7 + 0.5D - 0.25D;
-        var27 = par7 + 0.5D + 0.25D;
-        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var13, var17);
-        var9.addVertexWithUV(var21, y + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var23, y + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var15, var17);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var25, var13, var17);
-        var9.addVertexWithUV(var23, y + 0.0D, var25, var13, var19);
-        var9.addVertexWithUV(var21, y + 0.0D, var25, var15, var19);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var25, var15, var17);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var13, var17);
-        var9.addVertexWithUV(var23, y + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var21, y + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var15, var17);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var27, var13, var17);
-        var9.addVertexWithUV(var21, y + 0.0D, var27, var13, var19);
-        var9.addVertexWithUV(var23, y + 0.0D, var27, var15, var19);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var27, var15, var17);
+        tess.addVertexWithUV(minX, y+height, minZ, minU, minV);
+        tess.addVertexWithUV(minX, y, minZ, minU, maxV);
+        tess.addVertexWithUV(minX, y, maxZ, maxU, maxV);
+        tess.addVertexWithUV(minX, y+height, maxZ, maxU, minV);
+        tess.addVertexWithUV(minX, y+height, maxZ, minU, minV);
+        tess.addVertexWithUV(minX, y, maxZ, minU, maxV);
+        tess.addVertexWithUV(minX, y, minZ, maxU, maxV);
+        tess.addVertexWithUV(minX, y+height, minZ, maxU, minV);
+        tess.addVertexWithUV(maxX, y+height, maxZ, minU, minV);
+        tess.addVertexWithUV(maxX, y, maxZ, minU, maxV);
+        tess.addVertexWithUV(maxX, y, minZ, maxU, maxV);
+        tess.addVertexWithUV(maxX, y+height, minZ, maxU, minV);
+        tess.addVertexWithUV(maxX, y+height, minZ, minU, minV);
+        tess.addVertexWithUV(maxX, y, minZ, minU, maxV);
+        tess.addVertexWithUV(maxX, y, maxZ, maxU, maxV);
+        tess.addVertexWithUV(maxX, y+height, maxZ, maxU, minV);
+        minX = i + 0.5D - width;
+        maxX = i + 0.5D + width;
+        minZ = k + 0.5D - 0.25D;
+        maxZ = k + 0.5D + 0.25D;
+        tess.addVertexWithUV(minX, y+height, minZ, minU, minV);
+        tess.addVertexWithUV(minX, y, minZ, minU, maxV);
+        tess.addVertexWithUV(maxX, y, minZ, maxU, maxV);
+        tess.addVertexWithUV(maxX, y+height, minZ, maxU, minV);
+        tess.addVertexWithUV(maxX, y+height, minZ, minU, minV);
+        tess.addVertexWithUV(maxX, y, minZ, minU, maxV);
+        tess.addVertexWithUV(minX, y, minZ, maxU, maxV);
+        tess.addVertexWithUV(minX, y+height, minZ, maxU, minV);
+        tess.addVertexWithUV(maxX, y+height, maxZ, minU, minV);
+        tess.addVertexWithUV(maxX, y, maxZ, minU, maxV);
+        tess.addVertexWithUV(minX, y, maxZ, maxU, maxV);
+        tess.addVertexWithUV(minX, y+height, maxZ, maxU, minV);
+        tess.addVertexWithUV(minX, y+height, maxZ, minU, minV);
+        tess.addVertexWithUV(minX, y, maxZ, minU, maxV);
+        tess.addVertexWithUV(maxX, y, maxZ, maxU, maxV);
+        tess.addVertexWithUV(maxX, y+height, maxZ, maxU, minV);
     }
 
-    private static void drawCrossedSquares(Block par1Block, double par3, double par5, double par7, byte index, float heightMult, double height)
+    private static void drawCrossedSquares(Block block, double x, double y, double z, RenderBlocks renderblocks, double width, double height)
     {
         Tessellator var9 = Tessellator.instance;
 
         var9.setColorOpaque_F(1.0f, 1.0f, 1.0f);
         GL11.glColor3f(1, 1, 1);
         
-        int texX = (index & 15) << 4;
-        int texY = index & 240;
-        int texY2 = (index+(16-(int)(16*height))) & 240;
+        Icon icon = block.getBlockTexture(renderblocks.blockAccess, (int)x, (int)y, (int)z, renderblocks.blockAccess.getBlockMetadata((int)x, (int)y, (int)z));
+
+        if (renderblocks.hasOverrideBlockTexture())
+        {
+            icon = renderblocks.overrideBlockTexture;
+        }
         
-        double minX = (double)((float)texX / 256.0F);
-        double maxX = (double)(((float)texX + 15.99F) / 256.0F);
-        double minY = (double)((float)texY2 / 256.0F);
-        double maxY = (double)(((float)texY + 15.99F) / 256.0F);
+        double minU = icon.getMinU();
+        double maxU = icon.getMaxU();
+        double minV = icon.getMinV();
+        double maxV = icon.getMaxV();
         
-        double var21 = par3 + 0.5D - 0.45D;
-        double var23 = par3 + 0.5D + 0.45D;
-        double var25 = par7 + 0.5D - 0.45D;
-        double var27 = par7 + 0.5D + 0.45D;
+        double minX = x + 0.5D - width;
+        double maxX = x + 0.5D + width;
+        double minZ = z + 0.5D - width;
+        double maxZ = z + 0.5D + width;
+          
         
-        double y = par5;    
+        var9.addVertexWithUV(minX, y + height, minZ, minU, minV);
+        var9.addVertexWithUV(minX, y + 0.0D, minZ, minU, maxV);
+        var9.addVertexWithUV(maxX, y + 0.0D, maxZ, maxU, maxV);
+        var9.addVertexWithUV(maxX, y + height, maxZ, maxU, minV);
         
-        var9.addVertexWithUV(var21, y + (height*heightMult), var25, minX, minY);
-        var9.addVertexWithUV(var21, y + 0.0D, var25, minX, maxY);
-        var9.addVertexWithUV(var23, y + 0.0D, var27, maxX, maxY);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var27, maxX, minY);
+        var9.addVertexWithUV(maxX, y + height, maxZ, minU, minV);
+        var9.addVertexWithUV(maxX, y + 0.0D, maxZ, minU, maxV);
+        var9.addVertexWithUV(minX, y + 0.0D, minZ, maxU, maxV);
+        var9.addVertexWithUV(minX, y + height, minZ, maxU, minV);
         
-        var9.addVertexWithUV(var23, y + (height*heightMult), var27, minX, minY);
-        var9.addVertexWithUV(var23, y + 0.0D, var27, minX, maxY);
-        var9.addVertexWithUV(var21, y + 0.0D, var25, maxX, maxY);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var25, maxX, minY);
+        var9.addVertexWithUV(minX, y + height, maxZ, minU, minV);
+        var9.addVertexWithUV(minX, y + 0.0D, maxZ, minU, maxV);
+        var9.addVertexWithUV(maxX, y + 0.0D, minZ, maxU, maxV);
+        var9.addVertexWithUV(maxX, y + height, minZ, maxU, minV);
         
-        var9.addVertexWithUV(var21, y + (height*heightMult), var27, minX, minY);
-        var9.addVertexWithUV(var21, y + 0.0D, var27, minX, maxY);
-        var9.addVertexWithUV(var23, y + 0.0D, var25, maxX, maxY);
-        var9.addVertexWithUV(var23, y + (height*heightMult), var25, maxX, minY);
-        
-        var9.addVertexWithUV(var23, y + (height*heightMult), var25, minX, minY);
-        var9.addVertexWithUV(var23, y + 0.0D, var25, minX, maxY);
-        var9.addVertexWithUV(var21, y + 0.0D, var27, maxX, maxY);
-        var9.addVertexWithUV(var21, y + (height*heightMult), var27, maxX, minY);
+        var9.addVertexWithUV(maxX, y + height, minZ, minU, minV);
+        var9.addVertexWithUV(maxX, y + 0.0D, minZ, minU, maxV);
+        var9.addVertexWithUV(minX, y + 0.0D, maxZ, maxU, maxV);
+        var9.addVertexWithUV(minX, y + height, maxZ, maxU, minV);
     }
 
 }
