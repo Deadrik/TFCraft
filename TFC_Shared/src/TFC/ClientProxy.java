@@ -94,6 +94,7 @@ import TFC.Render.RenderCowTFC;
 import TFC.Render.RenderCustomMinecart;
 import TFC.Render.RenderDeer;
 import TFC.Render.RenderPigTFC;
+import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
@@ -158,6 +159,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityEndermanTFC.class, new RenderEnderman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityArrowTFC.class, new RenderArrow());
 
@@ -652,11 +654,11 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("item.SluiceItem.name", "Sluice");
 
-		LR.addStringLocalization("item.GoldPan.name", "Gold Pan - Empty");
-		LR.addStringLocalization("item.GoldPanSand.name", "Gold Pan - Sand");
-		LR.addStringLocalization("item.GoldPanGravel.name", "Gold Pan - Gravel");
-		LR.addStringLocalization("item.GoldPanClay.name", "Gold Pan - Clay");
-		LR.addStringLocalization("item.GoldPanDirt.name", "Gold Pan - Dirt");
+		LR.addStringLocalization("item.Gold Pan.name", "Gold Pan - Empty");
+		LR.addStringLocalization("item.Gold Pan Sand.name", "Gold Pan - Sand");
+		LR.addStringLocalization("item.Gold Pan Gravel.name", "Gold Pan - Gravel");
+		LR.addStringLocalization("item.Gold Pan Clay.name", "Gold Pan - Clay");
+		LR.addStringLocalization("item.Gold Pan Dirt.name", "Gold Pan - Dirt");
 
 		LR.addStringLocalization("item.FireStarter.name", "Firestarter");
 
