@@ -9,6 +9,7 @@ import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -52,6 +53,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
+		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 		ItemTerra.addSizeInformation(this, arraylist);
 		
         if(TFC_Settings.enableDebugMode)

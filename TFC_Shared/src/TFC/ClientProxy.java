@@ -699,8 +699,8 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("item.Blueprint.name", "Blueprint");
 		LR.addStringLocalization("item.Spindle.name", "Spindle");
-		LR.addStringLocalization("item.SpindleHead.name", "Spindle head");
-		LR.addStringLocalization("item.ClaySpindle.name", "Clay spindle");
+		LR.addStringLocalization("item.Clay Spindle.name", "Clay spindle");
+		LR.addStringLocalization("item.Spindle Head.name", "Spindle head");
 		LR.addStringLocalization("item.WoolYarn.name", "Wool yarn");
 		LR.addStringLocalization("item.Wool.name", "Wool");
 		LR.addStringLocalization("item.WoolCloth.name", "Wool cloth");
@@ -1271,18 +1271,18 @@ public class ClientProxy extends CommonProxy
 			 * Armor Related
 			 * */
 
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedHelmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedHelmet2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
-			LR.addStringLocalization("item."+ToolNames[i]+"Helmet.name", ToolNames[i] + " Helmet");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedChestplate.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedChestplate2.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 2");
-			LR.addStringLocalization("item."+ToolNames[i]+"Chestplate.name", ToolNames[i] + " Chestplate");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedGreaves.name", "Unfinished " + ToolNames[i] + " Greaves Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedGreaves2.name", "Unfinished " + ToolNames[i] + " Greaves Stage 2");
-			LR.addStringLocalization("item."+ToolNames[i]+"Greaves.name", ToolNames[i] + " Greaves");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedBoots.name", "Unfinished " + ToolNames[i] + " Boots Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+"UnfinishedBoots2.name", "Unfinished " + ToolNames[i] + " Boots Stage 2");
-			LR.addStringLocalization("item."+ToolNames[i]+"Boots.name", ToolNames[i] + " Boots");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedHelmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedHelmet2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Helmet.name", ToolNames[i] + " Helmet");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedChestplate.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedChestplate2.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Chestplate.name", ToolNames[i] + " Chestplate");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedGreaves.name", "Unfinished " + ToolNames[i] + " Greaves Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedGreaves2.name", "Unfinished " + ToolNames[i] + " Greaves Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Greaves.name", ToolNames[i] + " Greaves");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedBoots.name", "Unfinished " + ToolNames[i] + " Boots Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedBoots2.name", "Unfinished " + ToolNames[i] + " Boots Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Boots.name", ToolNames[i] + " Boots");
 		}
 
 		//meltedmetal
