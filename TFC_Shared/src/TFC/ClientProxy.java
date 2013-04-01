@@ -732,72 +732,72 @@ public class ClientProxy extends CommonProxy
 		{
 			LR.addStringLocalization("item.FruitSapling1."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
 			LR.addStringLocalization("item.FruitSapling2."+FruitTreeNames[i]+".name", FruitTreeNames[i] + " Tree Sapling");
-			LR.addStringLocalization("item.Fruit."+FruitTreeNames[i]+".name", FruitTreeNames[i]);
+			LR.addStringLocalization("item."+FruitTreeNames[i]+".name", FruitTreeNames[i]);
 		}
 
-		LR.addStringLocalization("item.SeedsWheat.name", "Wheat Seeds");
-		LR.addStringLocalization("item.SeedsWildWheat.name", "Wild Wheat Seeds");
-		LR.addStringLocalization("item.SeedsMaize.name", "Maize Seeds");
-		LR.addStringLocalization("item.SeedsWildMaize.name", "Wild Maize Seeds");
-		LR.addStringLocalization("item.SeedsTomato.name", "Tomato Seeds");
-		LR.addStringLocalization("item.SeedsBarley.name", "Barley Seeds");
-		LR.addStringLocalization("item.SeedsWildBarley.name", "Wild Barley Seeds");
-		LR.addStringLocalization("item.SeedsRye.name", "Rye Seeds");
-		LR.addStringLocalization("item.SeedsWildRye.name", "Wild Rye Seeds");
-		LR.addStringLocalization("item.SeedsOat.name", "Oat Seeds");
-		LR.addStringLocalization("item.SeedsWildOat.name", "Wild Oat Seeds");
-		LR.addStringLocalization("item.SeedsRice.name", "Rice Seeds");
-		LR.addStringLocalization("item.SeedsWildRice.name", "Wild Rice Seeds");
-		LR.addStringLocalization("item.SeedsPotato.name", "Potato Seeds");
-		LR.addStringLocalization("item.SeedsWildPotato.name", "Wild Potato Seeds");
-		LR.addStringLocalization("item.SeedsOnion.name", "Onion Seeds");
-		LR.addStringLocalization("item.SeedsCabbage.name", "Cabbage Seeds");
-		LR.addStringLocalization("item.SeedsGarlic.name", "Garlic Seeds");
-		LR.addStringLocalization("item.SeedsCarrot.name", "Carrot Seeds");
-		LR.addStringLocalization("item.SeedsSugarcane.name", "Sugarcane Seeds");
-		LR.addStringLocalization("item.SeedsHemp.name", "Hemp Seeds");
-		LR.addStringLocalization("item.SeedsSoybean.name", "Soybean Seeds");
-		LR.addStringLocalization("item.SeedsGreenbean.name", "Greenbean Seeds");
-		LR.addStringLocalization("item.SeedsYam.name", "Yam Seeds");
-		LR.addStringLocalization("item.SeedsYellowBellPepper.name", "Yellow Bell Pepper Seeds");
-		LR.addStringLocalization("item.SeedsRedBellPepper.name", "Red Bell Pepper Seeds");
-		LR.addStringLocalization("item.SeedsSquash.name", "Squash Seeds");
+		LR.addStringLocalization("item.Seeds Wheat.name", "Wheat Seeds");
+		LR.addStringLocalization("item.Seeds Wild Wheat.name", "Wild Wheat Seeds");
+		LR.addStringLocalization("item.Seeds Maize.name", "Maize Seeds");
+		LR.addStringLocalization("item.Seeds Wild Maize.name", "Wild Maize Seeds");
+		LR.addStringLocalization("item.Seeds Tomato.name", "Tomato Seeds");
+		LR.addStringLocalization("item.Seeds Barley.name", "Barley Seeds");
+		LR.addStringLocalization("item.Seeds Wild Barley.name", "Wild Barley Seeds");
+		LR.addStringLocalization("item.Seeds Rye.name", "Rye Seeds");
+		LR.addStringLocalization("item.Seeds Wild Rye.name", "Wild Rye Seeds");
+		LR.addStringLocalization("item.Seeds Oat.name", "Oat Seeds");
+		LR.addStringLocalization("item.Seeds Wild Oat.name", "Wild Oat Seeds");
+		LR.addStringLocalization("item.Seeds Rice.name", "Rice Seeds");
+		LR.addStringLocalization("item.Seeds Wild Rice.name", "Wild Rice Seeds");
+		LR.addStringLocalization("item.Seeds Potato.name", "Potato Seeds");
+		LR.addStringLocalization("item.Seeds Wild Potato.name", "Wild Potato Seeds");
+		LR.addStringLocalization("item.Seeds Onion.name", "Onion Seeds");
+		LR.addStringLocalization("item.Seeds Cabbage.name", "Cabbage Seeds");
+		LR.addStringLocalization("item.Seeds Garlic.name", "Garlic Seeds");
+		LR.addStringLocalization("item.Seeds Carrot.name", "Carrot Seeds");
+		LR.addStringLocalization("item.Seeds Sugarcane.name", "Sugarcane Seeds");
+		LR.addStringLocalization("item.Seeds Hemp.name", "Hemp Seeds");
+		LR.addStringLocalization("item.Seeds Soybean.name", "Soybean Seeds");
+		LR.addStringLocalization("item.Seeds Greenbean.name", "Greenbean Seeds");
+		LR.addStringLocalization("item.Seeds Yam.name", "Yam Seeds");
+		LR.addStringLocalization("item.Seeds Yellow Bell Pepper.name", "Yellow Bell Pepper Seeds");
+		LR.addStringLocalization("item.Seeds Red Bell Pepper.name", "Red Bell Pepper Seeds");
+		LR.addStringLocalization("item.Seeds Squash.name", "Squash Seeds");
 		
-		LR.addStringLocalization("item.muttonRaw.name", "Raw Mutton");
-		LR.addStringLocalization("item.muttonCooked.name", "Cooked Mutton");
-		LR.addStringLocalization("item.FlatLeather.name","Leather");
+		LR.addStringLocalization("item.Mutton Raw.name", "Raw Mutton");
+		LR.addStringLocalization("item.Mutton Cooked.name", "Cooked Mutton");
+		LR.addStringLocalization("item.Flat Leather.name","Leather");
 
-		LR.addStringLocalization("item.Meat.EggCooked.name", "Cooked Egg");
+		LR.addStringLocalization("item.Egg Cooked.name", "Cooked Egg");
 
-		LR.addStringLocalization("item.WheatGrain.name", "Wheat Grain");
-		LR.addStringLocalization("item.WheatWhole.name", "Wheat");
-		LR.addStringLocalization("item.WheatGround.name", "Wheat Flour");
-		LR.addStringLocalization("item.WheatDough.name", "Wheat Dough");
-		LR.addStringLocalization("item.BarleyGrain.name", "Barley Grain");
-		LR.addStringLocalization("item.BarleyWhole.name", "Barley");
-		LR.addStringLocalization("item.BarleyGround.name", "Barley Flour");
-		LR.addStringLocalization("item.BarleyDough.name", "Barley Dough");
-		LR.addStringLocalization("item.BarleyBread.name", "Barley Bread");
-		LR.addStringLocalization("item.OatGrain.name", "Oat Grain");
-		LR.addStringLocalization("item.OatWhole.name", "Oat");
-		LR.addStringLocalization("item.OatDough.name", "Oat Dough");
-		LR.addStringLocalization("item.OatGround.name", "Oat Flour");
-		LR.addStringLocalization("item.OatBread.name", "Oat Bread");
-		LR.addStringLocalization("item.RyeGrain.name", "Rye Grain");
-		LR.addStringLocalization("item.RyeWhole.name", "Rye");
-		LR.addStringLocalization("item.RyeGround.name", "Rye Flour");
-		LR.addStringLocalization("item.RyeDough.name", "Rye Dough");
-		LR.addStringLocalization("item.RyeBread.name", "Rye Bread");
-		LR.addStringLocalization("item.RiceGrain.name", "Rice Grain");
-		LR.addStringLocalization("item.RiceWhole.name", "Rice");
-		LR.addStringLocalization("item.RiceGround.name", "Rice Flour");
-		LR.addStringLocalization("item.RiceDough.name", "Rice Dough");
-		LR.addStringLocalization("item.RiceBread.name", "Rice Bread");
-		LR.addStringLocalization("item.CornmealGround.name", "Cornmeal");
-		LR.addStringLocalization("item.CornmealDough.name", "Cornmeal Dough");
-		LR.addStringLocalization("item.CornBread.name", "Corn Bread");
+		LR.addStringLocalization("item.Wheat Grain.name", "Wheat Grain");
+		LR.addStringLocalization("item.Wheat Whole.name", "Wheat");
+		LR.addStringLocalization("item.Wheat Ground.name", "Wheat Flour");
+		LR.addStringLocalization("item.Wheat Dough.name", "Wheat Dough");
+		LR.addStringLocalization("item.Barley Grain.name", "Barley Grain");
+		LR.addStringLocalization("item.Barley Whole.name", "Barley");
+		LR.addStringLocalization("item.Barley Ground.name", "Barley Flour");
+		LR.addStringLocalization("item.Barley Dough.name", "Barley Dough");
+		LR.addStringLocalization("item.Barley Bread.name", "Barley Bread");
+		LR.addStringLocalization("item.Oat Grain.name", "Oat Grain");
+		LR.addStringLocalization("item.Oat Whole.name", "Oat");
+		LR.addStringLocalization("item.Oat Dough.name", "Oat Dough");
+		LR.addStringLocalization("item.Oat Ground.name", "Oat Flour");
+		LR.addStringLocalization("item.Oat Bread.name", "Oat Bread");
+		LR.addStringLocalization("item.Rye Grain.name", "Rye Grain");
+		LR.addStringLocalization("item.Rye Whole.name", "Rye");
+		LR.addStringLocalization("item.Rye Ground.name", "Rye Flour");
+		LR.addStringLocalization("item.Rye Dough.name", "Rye Dough");
+		LR.addStringLocalization("item.Rye Bread.name", "Rye Bread");
+		LR.addStringLocalization("item.Rice Grain.name", "Rice Grain");
+		LR.addStringLocalization("item.Rice Whole.name", "Rice");
+		LR.addStringLocalization("item.Rice Ground.name", "Rice Flour");
+		LR.addStringLocalization("item.Rice Dough.name", "Rice Dough");
+		LR.addStringLocalization("item.Rice Bread.name", "Rice Bread");
+		LR.addStringLocalization("item.Cornmeal Ground.name", "Cornmeal");
+		LR.addStringLocalization("item.Cornmeal Dough.name", "Cornmeal Dough");
+		LR.addStringLocalization("item.Corn Bread.name", "Corn Bread");
 
-		LR.addStringLocalization("item.MaizeEar.name", "Maize Ear");
+		LR.addStringLocalization("item.Maize Ear.name", "Maize Ear");
 		LR.addStringLocalization("item.Tomato.name", "Tomato");
 		LR.addStringLocalization("item.Potato.name", "Potato");
 
@@ -810,9 +810,9 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.Soybeans.name", "Soybeans");
 		LR.addStringLocalization("item.Greenbeans.name", "Greenbeans");
 		LR.addStringLocalization("item.Yam.name", "Yam");
-		LR.addStringLocalization("item.GreenBellPepper.name", "Green Bell Pepper");
-		LR.addStringLocalization("item.YellowBellPepper.name", "Yellow Bell Pepper");
-		LR.addStringLocalization("item.RedBellPepper.name", "Red Bell Pepper");
+		LR.addStringLocalization("item.Green Bell Pepper.name", "Green Bell Pepper");
+		LR.addStringLocalization("item.Yellow Bell Pepper.name", "Yellow Bell Pepper");
+		LR.addStringLocalization("item.Red Bell Pepper.name", "Red Bell Pepper");
 		LR.addStringLocalization("item.Squash.name", "Squash");
 
 		LR.addStringLocalization("item.MealGeneric.name", "Meal");
@@ -1271,17 +1271,17 @@ public class ClientProxy extends CommonProxy
 			 * Armor Related
 			 * */
 
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedHelmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedHelmet2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Helmet.name", "Unfinished " + ToolNames[i] + " Helmet Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Helmet 2.name", "Unfinished " + ToolNames[i] + " Helmet Stage 2");
 			LR.addStringLocalization("item."+ToolNames[i]+" Helmet.name", ToolNames[i] + " Helmet");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedChestplate.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedChestplate2.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Chestplate.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Chestplate 2.name", "Unfinished " + ToolNames[i] + " Chestplate Stage 2");
 			LR.addStringLocalization("item."+ToolNames[i]+" Chestplate.name", ToolNames[i] + " Chestplate");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedGreaves.name", "Unfinished " + ToolNames[i] + " Greaves Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedGreaves2.name", "Unfinished " + ToolNames[i] + " Greaves Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Greaves.name", "Unfinished " + ToolNames[i] + " Greaves Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Greaves 2.name", "Unfinished " + ToolNames[i] + " Greaves Stage 2");
 			LR.addStringLocalization("item."+ToolNames[i]+" Greaves.name", ToolNames[i] + " Greaves");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedBoots.name", "Unfinished " + ToolNames[i] + " Boots Stage 1");
-			LR.addStringLocalization("item."+ToolNames[i]+" UnfinishedBoots2.name", "Unfinished " + ToolNames[i] + " Boots Stage 2");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Boots.name", "Unfinished " + ToolNames[i] + " Boots Stage 1");
+			LR.addStringLocalization("item."+ToolNames[i]+" Unfinished Boots 2.name", "Unfinished " + ToolNames[i] + " Boots Stage 2");
 			LR.addStringLocalization("item."+ToolNames[i]+" Boots.name", ToolNames[i] + " Boots");
 		}
 

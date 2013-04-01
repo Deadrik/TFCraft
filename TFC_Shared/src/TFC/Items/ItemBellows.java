@@ -39,10 +39,12 @@ import net.minecraft.world.gen.feature.*;
 
 public class ItemBellows extends ItemTerra
 {
+	public Icon icon;
 	public ItemBellows(int i) 
 	{
 		super(i);
 		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.hasSubtypes = true;
 	}
 	
 	@Override
@@ -55,11 +57,16 @@ public class ItemBellows extends ItemTerra
 	{		
 		return i;
 	}
+	@Override
+    public Icon getIconFromDamage(int i)
+    {
+        return icon;
+    }
 
 	@Override
 	public void updateIcons(IconRegister registerer)
     {
-			registerer.registerIcon("/tools/"+"BellowsItem");
+			icon = registerer.registerIcon("tools/"+"BellowsItem");
     }
 	
 	@Override

@@ -50,6 +50,7 @@ public class ItemMeal extends ItemTerraFood
 	public ItemMeal(int id) 
 	{
 		super(id, 0);
+		this.hasSubtypes = true;
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class ItemMeal extends ItemTerraFood
 	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 11; i++)
-			registerer.registerIcon("/food/Meal"+i);
+			icons[i]= registerer.registerIcon("food/Meal"+i);
     }
 
 	@Override
