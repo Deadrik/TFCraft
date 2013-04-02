@@ -48,6 +48,7 @@ public class BlockCrop extends BlockContainer
 	public BlockCrop(int par1, int id)
 	{
 		super(par1, Material.plants);
+		this.setBlockBounds(0, 0, 0, 1, 0.2f, 1);
 	}
 	@Override
 	public int getRenderType()
