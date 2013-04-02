@@ -44,7 +44,7 @@ public class TileEntityFarmland extends NetworkTileEntity
                 CropIndex crop = null;
                 float timeMultiplier = TFC_Time.daysInYear / 360f;
                 int soilMax = (int) (25000 * timeMultiplier);
-                int restoreAmount = 65;
+                int restoreAmount = 139;
                 
                 if((worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.crops.blockID))
                 {
@@ -74,14 +74,14 @@ public class TileEntityFarmland extends NetworkTileEntity
                         nutrients[1] += restoreAmount;
                     if(nutrients[2] < soilMax)
                         nutrients[2] += restoreAmount;
-                    
-                    if(nutrients[0] > soilMax)
-                        nutrients[0] = soilMax;
-                    if(nutrients[1] > soilMax)
-                        nutrients[1] = soilMax;
-                    if(nutrients[2] > soilMax)
-                        nutrients[2] = soilMax;
                 }
+                
+                if(nutrients[0] > soilMax)
+                    nutrients[0] = soilMax;
+                if(nutrients[1] > soilMax)
+                    nutrients[1] = soilMax;
+                if(nutrients[2] > soilMax)
+                    nutrients[2] = soilMax;
 
                 nutrientTimer+=24;
                 
