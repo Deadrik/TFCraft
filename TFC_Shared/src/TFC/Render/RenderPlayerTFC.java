@@ -1,10 +1,8 @@
 package TFC.Render;
 
-import TFC.TFCItems;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
+import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D;
 import net.minecraft.block.Block;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -17,6 +15,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -25,10 +24,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
+
 import org.lwjgl.opengl.GL11;
-import net.minecraft.item.ItemBlock;
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
-import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D;
+
+import TFC.TFCItems;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.RenderPlayer
@@ -90,7 +91,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         HornL1.addChild(HornL2);
     }
 
-    protected void func_98191_a(EntityPlayer par1EntityPlayer)
+    @Override
+	protected void func_98191_a(EntityPlayer par1EntityPlayer)
     {
         this.loadDownloadableImageTexture(par1EntityPlayer.skinUrl, par1EntityPlayer.getTexture());
     }
@@ -98,7 +100,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     /**
      * Set the specified armor model as the player model. Args: player, armorSlot, partialTick
      */
-    protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3)
+    @Override
+	protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3)
     {
         ItemStack itemstack = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
         RenderPlayerTFC.armorFilenamePrefix = RenderPlayer.armorFilenamePrefix;
@@ -145,9 +148,9 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
                 if (itemarmor.getArmorMaterial() == EnumArmorMaterial.CLOTH)
                 {
                     int j = itemarmor.getColor(itemstack);
-                    float f2 = (float)(j >> 16 & 255) / 255.0F;
-                    float f3 = (float)(j >> 8 & 255) / 255.0F;
-                    float f4 = (float)(j & 255) / 255.0F;
+                    float f2 = (j >> 16 & 255) / 255.0F;
+                    float f3 = (j >> 8 & 255) / 255.0F;
+                    float f4 = (j & 255) / 255.0F;
                     GL11.glColor3f(f1 * f2, f1 * f3, f1 * f4);
 
                     if (itemstack.isItemEnchanted())
@@ -172,7 +175,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         return -1;
     }
 
-    protected void func_82439_b(EntityPlayer par1EntityPlayer, int par2, float par3)
+    @Override
+	protected void func_82439_b(EntityPlayer par1EntityPlayer, int par2, float par3)
     {
         ItemStack itemstack = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
 
@@ -190,7 +194,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         }
     }
 
-    public void renderPlayer(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void renderPlayer(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, float par8, float par9)
     {
     	super.renderPlayer(par1EntityPlayer, par2, par4, par6, par8, par9);
         }
@@ -198,11 +203,12 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     /**
      * Method for adding special render rules
      */
-    protected void renderSpecials(EntityPlayer par1EntityPlayer, float par2)
+    @Override
+	protected void renderSpecials(EntityPlayer par1EntityPlayer, float par2)
     {
         float f1 = 1.0F;
         GL11.glColor3f(f1, f1, f1);
-        super.renderEquippedItems(par1EntityPlayer, par2);
+        //super.renderEquippedItems(par1EntityPlayer, par2);
         super.renderArrowsStuckInEntity(par1EntityPlayer, par2);
         ItemStack itemstack = par1EntityPlayer.inventory.armorItemInSlot(3);
 
@@ -256,7 +262,7 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
                 GL11.glPushMatrix();
                 GL11.glRotatef(f5, 0.0F, 1.0F, 0.0F);
                 GL11.glRotatef(f3, 1.0F, 0.0F, 0.0F);
-                GL11.glTranslatef(0.375F * (float)(i * 2 - 1), 0.0F, 0.0F);
+                GL11.glTranslatef(0.375F * (i * 2 - 1), 0.0F, 0.0F);
                 GL11.glTranslatef(0.0F, -0.375F, 0.0F);
                 GL11.glRotatef(-f3, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(-f5, 0.0F, 1.0F, 0.0F);
@@ -273,12 +279,12 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 0.0F, 0.125F);
-            double d0 = par1EntityPlayer.field_71091_bM + (par1EntityPlayer.field_71094_bP - par1EntityPlayer.field_71091_bM) * (double)par2 - (par1EntityPlayer.prevPosX + (par1EntityPlayer.posX - par1EntityPlayer.prevPosX) * (double)par2);
-            double d1 = par1EntityPlayer.field_71096_bN + (par1EntityPlayer.field_71095_bQ - par1EntityPlayer.field_71096_bN) * (double)par2 - (par1EntityPlayer.prevPosY + (par1EntityPlayer.posY - par1EntityPlayer.prevPosY) * (double)par2);
-            double d2 = par1EntityPlayer.field_71097_bO + (par1EntityPlayer.field_71085_bR - par1EntityPlayer.field_71097_bO) * (double)par2 - (par1EntityPlayer.prevPosZ + (par1EntityPlayer.posZ - par1EntityPlayer.prevPosZ) * (double)par2);
+            double d0 = par1EntityPlayer.field_71091_bM + (par1EntityPlayer.field_71094_bP - par1EntityPlayer.field_71091_bM) * par2 - (par1EntityPlayer.prevPosX + (par1EntityPlayer.posX - par1EntityPlayer.prevPosX) * par2);
+            double d1 = par1EntityPlayer.field_71096_bN + (par1EntityPlayer.field_71095_bQ - par1EntityPlayer.field_71096_bN) * par2 - (par1EntityPlayer.prevPosY + (par1EntityPlayer.posY - par1EntityPlayer.prevPosY) * par2);
+            double d2 = par1EntityPlayer.field_71097_bO + (par1EntityPlayer.field_71085_bR - par1EntityPlayer.field_71097_bO) * par2 - (par1EntityPlayer.prevPosZ + (par1EntityPlayer.posZ - par1EntityPlayer.prevPosZ) * par2);
             f6 = par1EntityPlayer.prevRenderYawOffset + (par1EntityPlayer.renderYawOffset - par1EntityPlayer.prevRenderYawOffset) * par2;
-            double d3 = (double)MathHelper.sin(f6 * (float)Math.PI / 180.0F);
-            double d4 = (double)(-MathHelper.cos(f6 * (float)Math.PI / 180.0F));
+            double d3 = MathHelper.sin(f6 * (float)Math.PI / 180.0F);
+            double d4 = (-MathHelper.cos(f6 * (float)Math.PI / 180.0F));
             float f7 = (float)d1 * 10.0F;
 
             if (f7 < -6.0F)
@@ -398,9 +404,9 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
                 for (j = 0; j < itemstack1.getItem().getRenderPasses(itemstack1.getItemDamage()); ++j)
                 {
                     int k = itemstack1.getItem().getColorFromItemStack(itemstack1, j);
-                    f12 = (float)(k >> 16 & 255) / 255.0F;
-                    f11 = (float)(k >> 8 & 255) / 255.0F;
-                    f6 = (float)(k & 255) / 255.0F;
+                    f12 = (k >> 16 & 255) / 255.0F;
+                    f11 = (k >> 8 & 255) / 255.0F;
+                    f6 = (k & 255) / 255.0F;
                     GL11.glColor4f(f12, f11, f6, 1.0F);
                     this.renderManager.itemRenderer.renderItem(par1EntityPlayer, itemstack1, j);
                 }
@@ -408,9 +414,9 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
             else
             {
                 j = itemstack1.getItem().getColorFromItemStack(itemstack1, 0);
-                f4 = (float)(j >> 16 & 255) / 255.0F;
-                f12 = (float)(j >> 8 & 255) / 255.0F;
-                f11 = (float)(j & 255) / 255.0F;
+                f4 = (j >> 16 & 255) / 255.0F;
+                f12 = (j >> 8 & 255) / 255.0F;
+                f11 = (j & 255) / 255.0F;
                 GL11.glColor4f(f4, f12, f11, 1.0F);
                 this.renderManager.itemRenderer.renderItem(par1EntityPlayer, itemstack1, 0);
             }
@@ -419,13 +425,15 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         }
     }
 
-    protected void renderPlayerScale(EntityPlayer par1EntityPlayer, float par2)
+    @Override
+	protected void renderPlayerScale(EntityPlayer par1EntityPlayer, float par2)
     {
         float f1 = 0.9375F;
         GL11.glScalef(f1, f1, f1);
     }
 
-    protected void func_96450_a(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, String par8Str, float par9, double par10)
+    @Override
+	protected void func_96450_a(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, String par8Str, float par9, double par10)
     {
         if (par10 < 100.0D)
         {
@@ -445,14 +453,15 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
                     this.renderLivingLabel(par1EntityPlayer, score.func_96652_c() + " " + scoreobjective.func_96678_d(), par2, par4, par6, 64);
                 }
 
-                par4 += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par9);
+                par4 += this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * par9;
             }
         }
 
         super.func_96449_a(par1EntityPlayer, par2, par4, par6, par8Str, par9, par10);
     }
 
-    public void renderFirstPersonArm(EntityPlayer par1EntityPlayer)
+    @Override
+	public void renderFirstPersonArm(EntityPlayer par1EntityPlayer)
     {
         float f = 1.0F;
         GL11.glColor3f(f, f, f);
@@ -464,7 +473,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     /**
      * Renders player with sleeping offset if sleeping
      */
-    protected void renderPlayerSleep(EntityPlayer par1EntityPlayer, double par2, double par4, double par6)
+    @Override
+	protected void renderPlayerSleep(EntityPlayer par1EntityPlayer, double par2, double par4, double par6)
     {
     	super.renderPlayerSleep(par1EntityPlayer, par2, par4, par6);
     }
@@ -472,12 +482,14 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     /**
      * Rotates the player if the player is sleeping. This method is called in rotateCorpse.
      */
-    protected void rotatePlayer(EntityPlayer par1EntityPlayer, float par2, float par3, float par4)
+    @Override
+	protected void rotatePlayer(EntityPlayer par1EntityPlayer, float par2, float par3, float par4)
     {
     	super.rotatePlayer(par1EntityPlayer, par2, par3, par4);
     }
 
-    protected void func_96449_a(EntityLiving par1EntityLiving, double par2, double par4, double par6, String par8Str, float par9, double par10)
+    @Override
+	protected void func_96449_a(EntityLiving par1EntityLiving, double par2, double par4, double par6, String par8Str, float par9, double par10)
     {
         this.func_96450_a((EntityPlayer)par1EntityLiving, par2, par4, par6, par8Str, par9, par10);
     }
@@ -486,12 +498,14 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLiving par1EntityLiving, float par2)
+    @Override
+	protected void preRenderCallback(EntityLiving par1EntityLiving, float par2)
     {
         this.renderPlayerScale((EntityPlayer)par1EntityLiving, par2);
     }
 
-    protected void func_82408_c(EntityLiving par1EntityLiving, int par2, float par3)
+    @Override
+	protected void func_82408_c(EntityLiving par1EntityLiving, int par2, float par3)
     {
         this.func_82439_b((EntityPlayer)par1EntityLiving, par2, par3);
     }
@@ -499,17 +513,20 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
+    @Override
+	protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
     {
         return this.setArmorModel((EntityPlayer)par1EntityLiving, par2, par3);
     }
 
-    protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2)
+    @Override
+	protected void renderEquippedItems(EntityLiving par1EntityLiving, float par2)
     {
         this.renderSpecials((EntityPlayer)par1EntityLiving, par2);
     }
 
-    protected void rotateCorpse(EntityLiving par1EntityLiving, float par2, float par3, float par4)
+    @Override
+	protected void rotateCorpse(EntityLiving par1EntityLiving, float par2, float par3, float par4)
     {
         this.rotatePlayer((EntityPlayer)par1EntityLiving, par2, par3, par4);
     }
@@ -517,17 +534,20 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
     /**
      * Sets a simple glTranslate on a LivingEntity.
      */
-    protected void renderLivingAt(EntityLiving par1EntityLiving, double par2, double par4, double par6)
+    @Override
+	protected void renderLivingAt(EntityLiving par1EntityLiving, double par2, double par4, double par6)
     {
         this.renderPlayerSleep((EntityPlayer)par1EntityLiving, par2, par4, par6);
     }
 
-    protected void func_98190_a(EntityLiving par1EntityLiving)
+    @Override
+	protected void func_98190_a(EntityLiving par1EntityLiving)
     {
         this.func_98191_a((EntityPlayer)par1EntityLiving);
     }
 
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
     {
         this.renderPlayer((EntityPlayer)par1EntityLiving, par2, par4, par6, par8, par9);
     }
@@ -538,7 +558,8 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         this.renderPlayer((EntityPlayer)par1Entity, par2, par4, par6, par8, par9);
     }

@@ -2,10 +2,9 @@ package TFC.Core;
 
 import java.io.File;
 
-import TFC.TerraFirmaCraft;
-
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
+import TFC.TerraFirmaCraft;
 
 public class TFC_Settings 
 {
@@ -19,7 +18,8 @@ public class TFC_Settings
 	public static boolean enableBetterGrass;
 	public static boolean enableInnerGrassFix;
 	public static boolean enableDebugMode;
-	public static boolean sendAllNBT;
+	
+	public static boolean enableCropsDie;
 
 	public static int minimumRockLoad;
 	public static int initialCollapseRatio;
@@ -57,7 +57,6 @@ public class TFC_Settings
 		enableVanillaRecipes = getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
 		enableInnerGrassFix = getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		enableDebugMode = getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
-		sendAllNBT = getBooleanFor(config,"General","sendAllNBT",true, "Setting this to false can cause alot of issues when used in SMP. Leave this set to true to prevent issues.");
 		dayLength = getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days.");
 		yearLength = getIntFor(config,"General","yearLength",96, "This is how many days are in a year. Keep this to multiples of 12.");
 		//Caveins
@@ -80,7 +79,7 @@ public class TFC_Settings
 		cropNutrientCColor[2] = (byte)getIntFor(config,"ColorNutrientC","Blue", 49);
 		cropNutrientCColor[3] = (byte)getIntFor(config,"ColorNutrientC","Alpha", 200);
 		
-		
+		enableCropsDie = getBooleanFor(config, "Crops","enableCropsDie",false);
 		/**Always end with this*/
 		if (config != null) {
 			config.save();

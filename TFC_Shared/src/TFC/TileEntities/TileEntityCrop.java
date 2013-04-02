@@ -9,6 +9,7 @@ import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
@@ -35,7 +36,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	public void updateEntity()
 	{
 		Random R = new Random();
-		if(!worldObj.isRemote && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0)
+		if(!worldObj.isRemote)
 		{
 			float timeMultiplier = 360/TFC_Time.daysInYear;
 			
@@ -99,7 +100,7 @@ public class TileEntityCrop extends NetworkTileEntity
 						tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
 				}
 
-				float growthRate = ((((float)crop.numGrowthStages/(float)crop.growthTime)+tempAdded)*nutriMult) * timeMultiplier;
+				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio))+tempAdded)*nutriMult) * timeMultiplier;
 
 				int oldGrowth = (int) Math.floor(growth);
 
@@ -110,7 +111,7 @@ public class TileEntityCrop extends NetworkTileEntity
 					this.broadcastPacketInRange(createCropUpdatePacket());
 				}
 
-				if((crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2)) || growth < 0)
+				if((TFC_Settings.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}
@@ -120,6 +121,12 @@ public class TileEntityCrop extends NetworkTileEntity
 			else if(crop.needsSunlight && sunLevel <= 0)
 			{
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+			}
+			
+			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord) < 0)
+			{
+				if(!crop.dormantInFrost || growth > 1)
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 			}
 		}
 	}

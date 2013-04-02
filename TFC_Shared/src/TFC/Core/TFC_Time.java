@@ -33,6 +33,7 @@ public class TFC_Time
     public static final long hourLength = TFC_Settings.dayLength/24;
     public static long dayLength = TFC_Settings.dayLength;
     
+    public static float timeRatio = TFC_Settings.yearLength/360f;
     public static int daysInYear = TFC_Settings.yearLength;
     public static int daysInMonth = daysInYear/12;
     public static long ticksInYear = daysInYear * dayLength;
@@ -208,7 +209,7 @@ public class TFC_Time
     
     public static float getYearRatio()
     {
-    	return (float)daysInYear / 360f;
+    	return daysInYear / 360f;
     }
 
     

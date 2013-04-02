@@ -4,44 +4,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import TFC.*;
-import TFC.Blocks.BlockFarmland;
+
+import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemOre;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TileEntityFarmland extends NetworkTileEntity
 {
@@ -69,7 +42,7 @@ public class TileEntityFarmland extends NetworkTileEntity
             if(nutrientTimer < TFC_Time.totalHours())
             {
                 CropIndex crop = null;
-                float timeMultiplier = (float)TFC_Time.daysInYear / 360f;
+                float timeMultiplier = TFC_Time.daysInYear / 360f;
                 int soilMax = (int) (25000 * timeMultiplier);
                 int restoreAmount = 65;
                 
@@ -135,13 +108,15 @@ public class TileEntityFarmland extends NetworkTileEntity
 
     public void DrainNutrients(int type, float multiplier)
     {
-        nutrients[type] -= 100*multiplier;
+    	float timeMultiplier = 360f / TFC_Time.daysInYear;
+        nutrients[type] -= (100*multiplier)*timeMultiplier;
     }
 
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    @Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readFromNBT(par1NBTTagCompound);
         
@@ -152,7 +127,8 @@ public class TileEntityFarmland extends NetworkTileEntity
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    @Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setIntArray("nutrients", nutrients);

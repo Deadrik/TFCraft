@@ -268,7 +268,7 @@ public class BlockCrop extends BlockContainer
 	public void breakBlock(World world, int i, int j, int k, int blockID, int metadata) 
 	{
 		TileEntityCrop te = (TileEntityCrop) world.getBlockTileEntity(i, j, k);
-		if(te!= null)
+		if(te!= null && !world.isRemote)
 		{
 			CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
 			if(crop != null && te.growth >= crop.numGrowthStages-1)
@@ -290,6 +290,7 @@ public class BlockCrop extends BlockContainer
 					world.spawnEntityInWorld(new EntityItem(world, i, j, k, is));
 			}
 		}
+		super.breakBlock(world, i, j, k, blockID, metadata);
 	}
 
 	/**
