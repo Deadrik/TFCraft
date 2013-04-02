@@ -42,14 +42,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
         	return RenderGrass.renderPeat(block, i, j, k, renderer);
         }
-        else if (modelId == TFCBlocks.oreRenderId)
-        {
-            int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (var5 >> 16 & 255) / 255.0F;
-            float var7 = (var5 >> 8 & 255) / 255.0F;
-            float var8 = (var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderOre(block, i, j, k,  var6, var7, var8, renderer, world);
-        }
         else if (modelId == TFCBlocks.looseRockRenderId)
         {
             return TFC_CoreRender.RenderLooseRock(block, i, j, k, renderer);
