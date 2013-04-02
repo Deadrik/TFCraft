@@ -769,19 +769,22 @@ public class TFC_CoreRender
 
 	public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks)
 	{
-		double blockMinX = block.getBlockBoundsMinX();
-		double blockMaxX = block.getBlockBoundsMaxX();
-		double blockMinY = block.getBlockBoundsMinY();
-		double blockMaxY = block.getBlockBoundsMaxY();
-		double blockMinZ = block.getBlockBoundsMinZ();
-		double blockMaxZ = block.getBlockBoundsMaxZ();
-
 		int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
 		if(meta >= 8)
 			meta-=8;
 		FloraManager manager = FloraManager.getInstance();
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block.blockID, meta));
-
+		
+		renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+		if(index.inBloom(TFC_Time.currentMonth))
+		{
+			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
+			if(renderblocks.overrideBlockTexture != null)
+			{
+				renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+			}
+			renderblocks.clearOverrideBlockTexture();
+		}
 
 /*
 		renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));

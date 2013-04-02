@@ -16,10 +16,8 @@ import TFC.TileEntities.TileEntityFruitTreeWood;
 
 public class ItemFruitTreeSapling extends ItemTerra
 {
-    
-    String[] Names = {"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
     int offset;
-
+    Icon[] icons;
     public ItemFruitTreeSapling(int id, int off)
     {
         super(id);
@@ -27,6 +25,8 @@ public class ItemFruitTreeSapling extends ItemTerra
         setMaxDamage(0);
         setHasSubtypes(true);
         this.setCreativeTab(CreativeTabs.tabFood);
+        this.MetaNames = new String[]{"Red Apple","Banana","Orange","Green Apple","Lemon","Olive","Cherry","Peach","Plum"};
+        icons = new Icon[MetaNames.length];
     }
     
     @Override
@@ -67,12 +67,12 @@ public class ItemFruitTreeSapling extends ItemTerra
     	}
 	}
     
-    Icon[] icons = new Icon[Names.length];
+    
 	@Override
 	public void updateIcons(IconRegister registerer)
     {
-		for(int i = 0; i < Names.length; i++)
-			registerer.registerIcon("wood/fruit trees/"+Names[i]+" Sapling");
+		for(int i = 0; i < MetaNames.length; i++)
+			icons[i] = registerer.registerIcon("wood/fruit trees/"+MetaNames[i]+" Sapling");
     }
     
     @Override
@@ -80,14 +80,6 @@ public class ItemFruitTreeSapling extends ItemTerra
 	{        
 		return icons[meta+offset];
 	}
-    
-    @Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
-    	if(MetaNames != null)
-    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()+offset]);
-    	return super.getUnlocalizedName(itemstack);
-    }
 
     @Override
 	public int getMetadata(int i)

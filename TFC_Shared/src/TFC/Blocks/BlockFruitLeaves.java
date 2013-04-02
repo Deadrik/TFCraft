@@ -1,47 +1,22 @@
 package TFC.Blocks;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Textures;
-import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockFruitLeaves extends BlockTerra
 {
@@ -129,8 +104,7 @@ public class BlockFruitLeaves extends BlockTerra
 		{
 			if(!canStay(world,i,j,k,blockID))
 			{
-				world.setBlock(i, j, k, 0);
-				world.markBlockForUpdate(i, j, k);
+				world.setBlockToAir(i, j, k);
 				return;
 			}
 
@@ -155,7 +129,7 @@ public class BlockFruitLeaves extends BlockTerra
 							{
 								meta += 8;
 							}
-							world.setBlockMetadataWithNotify(i, j, k, meta, 3); 
+							world.setBlockMetadataWithNotify(i, j, k, meta, 0x2); 
 						}
 					}
 				}
@@ -163,7 +137,7 @@ public class BlockFruitLeaves extends BlockTerra
 				{
 					if(meta >= 8 && rand.nextInt(10) == 0)
 					{
-						world.setBlockMetadataWithNotify(i, j, k, meta-8, 3); 
+						world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
 					}
 				}
 			}
@@ -173,7 +147,7 @@ public class BlockFruitLeaves extends BlockTerra
 				{
 					if(world.getBlockMetadata(i, j, k) >= 8)
 					{
-						world.setBlockMetadataWithNotify(i, j, k, meta-8, 3); 
+						world.setBlockMetadataWithNotify(i, j, k, meta-8, 0x2); 
 					}
 				}
 			}
@@ -377,6 +351,7 @@ public class BlockFruitLeaves extends BlockTerra
 		world.setBlock(i, j, k, 0);
 	}
 
+	@Override
 	public int quantityDropped(Random random)
 	{
 		return random.nextInt(20) != 0 ? 0 : 1;
@@ -414,6 +389,7 @@ public class BlockFruitLeaves extends BlockTerra
 		return false;
 	}
 
+	@Override
 	public void onEntityWalking(World world, int i, int j, int k, Entity entity)
 	{
 		super.onEntityWalking(world, i, j, k, entity);
