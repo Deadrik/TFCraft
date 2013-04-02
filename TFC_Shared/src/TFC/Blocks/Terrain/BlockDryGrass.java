@@ -15,6 +15,7 @@ public class BlockDryGrass extends BlockGrass
     {
     	super.registerIcons(registerer);
     	GrassTopTexture = registerer.registerIcon("GrassSparseOverlay");
+    	iconGrassSideOverlay = registerer.registerIcon("GrassSideSparse");
     }
     
     @Override
