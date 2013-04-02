@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
@@ -280,6 +281,50 @@ public class BlockToolRack extends BlockTerraContainer
 			}
 		}
 	}
+	
+	@Override
+	public int onBlockPlaced(World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ, int meta)
+	{
+		if(side == 4) return 3;
+		if(side == 5) return 1;
+		if(side == 2) return 0;
+		if(side == 3) return 2;
+		
+		return 5;
+	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entity, ItemStack is) 
+	{
+		if(!world.isRemote)
+		{
+			int side = world.getBlockMetadata(i, j, k);
+			int id = TFCBlocks.ToolRack.blockID;
+			if(world.getBlockTileEntity(i, j, k) != null)
+			{
+				TileEntityToolRack te = (TileEntityToolRack)world.getBlockTileEntity(i, j, k);
+				te.woodType = (byte)is.getItemDamage();
+				te.broadcastPacketInRange(te.createUpdatePacket());
+			}
+		}
+	}
+	
+	@Override
+	public boolean canPlaceBlockOnSide(World world, int i, int j, int k, int side)
+    {
+        if(this.canPlaceBlockAt(world, i, j, k))
+        {
+        	if(side == 5 && world.isBlockNormalCube(i-1, j, k))
+        		return true;
+        	if(side == 4 && world.isBlockNormalCube(i+1, j, k))
+        		return true;
+        	if(side == 2 && world.isBlockNormalCube(i, j, k+1))
+        		return true;
+        	if(side == 3 && world.isBlockNormalCube(i, j, k-1))
+        		return true;
+        }        
+        return false;
+    }
 	
 	@SideOnly(Side.CLIENT)
 	@Override

@@ -12,7 +12,6 @@ import TFC.Render.Blocks.RenderFluids;
 import TFC.Render.Blocks.RenderFoodPrep;
 import TFC.Render.Blocks.RenderGrass;
 import TFC.Render.Blocks.RenderSuperDetailed;
-import TFC.Render.Blocks.RenderToolRack;
 import TFC.Render.Blocks.RenderWoodConstruct;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -89,10 +88,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
             float var7 = (var5 >> 8 & 255) / 255.0F;
             float var8 = (var5 & 255) / 255.0F;
             return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, renderer);
-        }
-        else if (modelId == TFCBlocks.toolRackRenderId)
-        {
-            return RenderToolRack.renderToolRack(block, i, j, k, renderer);
         }
         else if (modelId == TFCBlocks.finiteWaterRenderId)
         {

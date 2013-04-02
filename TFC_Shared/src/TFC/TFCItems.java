@@ -66,7 +66,6 @@ import TFC.Items.ItemSpindle;
 import TFC.Items.ItemStick;
 import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTerra;
-import TFC.Items.ItemToolRack;
 import TFC.Items.ItemUnfinishedArmor;
 import TFC.Items.ItemWoodDoor;
 import TFC.Items.ItemWritableBookTFC;
@@ -1612,7 +1611,6 @@ public class TFCItems
 		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++)).setFolder("food/").setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
-        Toolrack = new ItemToolRack(TFC_Settings.getIntFor(config,"items","ToolRack",num++)).setUnlocalizedName("Toolrack");
         
 		/**Plans*/
         num = 20000;
