@@ -24,7 +24,7 @@ import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 
 public class ItemGoldPan extends ItemTerra
 {
-    public static String[] blockNames = {"GoldPan", "GoldPanSand", "GoldPanGravel", "GoldPanClay", "GoldPanDirt"};
+    public static String[] blockNames = {"(Empty)", "(Sand)", "(Gravel)", "(Clay)", "(Dirt)"};
     public Icon[] icons = new Icon[blockNames.length];
 
     private int useTimer = 0;
@@ -46,6 +46,13 @@ public class ItemGoldPan extends ItemTerra
 	public int getItemStackLimit()
     {
     	return 1;
+    }
+    
+    @Override
+    public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+    {
+    	arraylist.add(getName(is));
+    super.addInformation(is, player, arraylist, flag);
     }
 
     @Override
@@ -80,9 +87,13 @@ public class ItemGoldPan extends ItemTerra
     @Override
     public String getUnlocalizedName(ItemStack itemstack) 
     {
-        return blockNames[itemstack.getItemDamage()];
+        return this.getUnlocalizedName();//"GoldPan";//blockNames[itemstack.getItemDamage()];
     }
 
+    public String getName(ItemStack itemstack) 
+    {
+        return blockNames[itemstack.getItemDamage()];
+    }
 
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x0, int y0, int z0, int l, float par8, float par9, float par10)

@@ -185,8 +185,6 @@ public class TFCBiome extends BiomeGenBase
 
 		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 4, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 5, 2, 5));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 4, 1, 1));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 4, 4));
 		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
