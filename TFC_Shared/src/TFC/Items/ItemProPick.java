@@ -4,53 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
-import TFC.Blocks.Terrain.BlockOre;
-import TFC.Blocks.Terrain.BlockOre2;
-import TFC.Blocks.Terrain.BlockOre3;
-import TFC.Chunkdata.ChunkData;
-import TFC.Chunkdata.ChunkDataManager;
-import TFC.Containers.MessageQue;
-import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Settings;
-import TFC.Core.Vector3f;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemProPick extends ItemTerra
 {
@@ -94,24 +55,24 @@ public class ItemProPick extends ItemTerra
             
             boolean isOre = false;
             
-            int id = world.getBlockId((int)x, (int)y, (int)z);
+            int id = world.getBlockId(x, y, z);
             if(id == TFCBlocks.Ore.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
-                oreArray.add(new ItemStack(id,1,meta).getItemName());
+                int meta = world.getBlockMetadata(x, y, z);
+                oreArray.add(new ItemStack(id,1,meta).getItem().getItemDisplayName(new ItemStack(id,1,meta)));
             }
             else if(id == TFCBlocks.Ore2.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
-                oreArray.add(new ItemStack(id,1,meta).getItemName());
+                int meta = world.getBlockMetadata(x, y, z);
+                oreArray.add(new ItemStack(id,1,meta).getItem().getItemDisplayName(new ItemStack(id,1,meta)));
             }
             else if(id == TFCBlocks.Ore3.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata((int)x, (int)y, (int)z);
-                oreArray.add(new ItemStack(id,1,meta).getItemName());
+                int meta = world.getBlockMetadata(x, y, z);
+                oreArray.add(new ItemStack(id,1,meta).getItem().getItemDisplayName(new ItemStack(id,1,meta)));
             }
             //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);          
             for (int i = -12; i < 12 && !isOre; i++)
@@ -120,21 +81,22 @@ public class ItemProPick extends ItemTerra
                 {
                     for (int k = -12; k < 12; k++)
                     {
-                        int oreid = world.getBlockId((int)x+i, (int)y+k, (int)z+j);
+                    	int meta = world.getBlockMetadata(x+i, y+k, z+j);
+                        int oreid = world.getBlockId(x+i, y+k, z+j);
 
-                        ItemStack is;
+                        
                         if(oreid == TFCBlocks.Ore.blockID)
-                        {
-                            int meta = world.getBlockMetadata((int)x+i, (int)y+k, (int)z+j);
-
-                            if(!oreArray.contains(new ItemStack(oreid,1,meta).getItemName()))
+                        {                   
+                        	ItemStack is = new ItemStack(oreid,1,meta);
+                            String itemName = is.getItem().getItemDisplayName(is);
+                            if(!oreArray.contains(itemName))
                             {
-                                oreArray.add(new ItemStack(oreid,1,meta).getItemName());
+                                oreArray.add(itemName);
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(new ItemStack(oreid,1,meta).getItemName());
+                                int index = oreArray.indexOf(itemName);
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
 
@@ -142,34 +104,34 @@ public class ItemProPick extends ItemTerra
                         }
                         else if(oreid == TFCBlocks.Ore2.blockID)
                         {
-                            int meta = world.getBlockMetadata((int)x+i, (int)y+k, (int)z+j);
-
+                        	ItemStack is = new ItemStack(oreid,1,meta);
+                            String itemName = is.getItem().getItemDisplayName(is);
                             if(meta != 6)
                             {
-                                if(!oreArray.contains(new ItemStack(oreid,1,meta).getItemName()))
+                                if(!oreArray.contains(itemName))
                                 {
-                                    oreArray.add(new ItemStack(oreid,1,meta).getItemName());
+                                    oreArray.add(itemName);
                                     oreNumArray.add(1);
                                 }
                                 else
                                 {
-                                    int index = oreArray.indexOf(new ItemStack(oreid,1,meta).getItemName());
+                                    int index = oreArray.indexOf(itemName);
                                     oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                                 }
                             }
                         }
                         else if(oreid == TFCBlocks.Ore3.blockID)
                         {
-                            int meta = world.getBlockMetadata((int)x+i, (int)y+k, (int)z+j);
-
-                            if(!oreArray.contains(new ItemStack(oreid,1,meta).getItemName()))
+                        	ItemStack is = new ItemStack(oreid,1,meta);
+                            String itemName = is.getItem().getItemDisplayName(is);
+                            if(!oreArray.contains(itemName))
                             {
-                                oreArray.add(new ItemStack(oreid,1,meta).getItemName());
+                                oreArray.add(itemName);
                                 oreNumArray.add(1);
                             }
                             else
                             {
-                                int index = oreArray.indexOf(new ItemStack(oreid,1,meta).getItemName());
+                                int index = oreArray.indexOf(itemName);
                                 oreNumArray.set(index, (Integer)oreNumArray.toArray()[index]+1);
                             }
                         }
@@ -177,7 +139,7 @@ public class ItemProPick extends ItemTerra
                 }
             }
 
-            Random random = new Random((long) ((x*z)+y));
+            Random random = new Random((x*z)+y);
             if(oreArray.toArray().length > 0 && !isOre && random.nextInt(100) < 60)
             {
                 int rand = random.nextInt(oreArray.toArray().length);
