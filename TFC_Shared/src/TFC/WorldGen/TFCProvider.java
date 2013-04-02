@@ -1,9 +1,13 @@
 package TFC.WorldGen;
 
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
@@ -92,61 +96,56 @@ public class TFCProvider extends WorldProvider
     }
 	
 	@Override
+	public ChunkCoordinates getRandomizedSpawnPoint()
+    {
+		TFCWorldChunkManager var2 = (TFCWorldChunkManager) worldChunkMgr;
+		List var3 = var2.getBiomesToSpawnIn();
+		long seed = worldObj.getWorldInfo().getSeed();
+		Random var4 = new Random(seed);
+
+		ChunkPosition chunkcoordinates = null;
+		int xOffset = 0;
+		int var6 = 0;
+		int var7 = getAverageGroundLevel();
+		int var8 = 10000;
+		int startingZ = 3000 + var4.nextInt(12000);
+
+		while(chunkcoordinates == null)
+		{
+			chunkcoordinates = var2.findBiomePosition(xOffset, -startingZ, 64, var3, var4);
+
+			if (chunkcoordinates != null)
+			{
+				var6 = chunkcoordinates.x;
+				var8 = chunkcoordinates.z;
+			}
+			else
+			{
+				xOffset += 512;
+				//System.out.println("Unable to find spawn biome");
+			}
+		}
+
+		int var9 = 0;
+
+		while (!canCoordinateBeSpawn(var6, var8))
+		{
+			var6 += var4.nextInt(64) - var4.nextInt(64);
+			var8 += var4.nextInt(64) - var4.nextInt(64);
+			++var9;
+
+			if (var9 == 1000)
+			{
+				break;
+			}
+		}
+
+        return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
+    }
+	
+	@Override
 	public ChunkCoordinates getSpawnPoint()
     {
-		/*if (!canRespawnHere())
-		{
-			return new ChunkCoordinates(0, worldObj.getHeightValue(0, 0), 0);
-		}
-		else
-		{
-
-			TFCWorldChunkManager var2 = (TFCWorldChunkManager) worldChunkMgr;
-			List var3 = var2.getBiomesToSpawnIn();
-			long seed = worldObj.getWorldInfo().getSeed();
-			Random var4 = new Random(seed);
-
-			ChunkPosition var5 = null;
-			int xOffset = 0;
-			int var6 = 0;
-			int var7 = getAverageGroundLevel();
-			int var8 = 10000;
-			int startingZ = 3000 + var4.nextInt(12000);
-
-			while(var5 == null)
-			{
-				var5 = var2.findBiomePosition(xOffset, -startingZ, 64, var3, var4);
-
-				if (var5 != null)
-				{
-					var6 = var5.x;
-					var8 = var5.z;
-				}
-				else
-				{
-					xOffset += 512;
-					//System.out.println("Unable to find spawn biome");
-				}
-			}
-
-			int var9 = 0;
-
-			while (!canCoordinateBeSpawn(var6, var8))
-			{
-				var6 += var4.nextInt(64) - var4.nextInt(64);
-				var8 += var4.nextInt(64) - var4.nextInt(64);
-				++var9;
-
-				if (var9 == 1000)
-				{
-					break;
-				}
-			}
-
-			worldObj.getWorldInfo().setSpawnPosition(var6, worldObj.getHeightValue(var6, var8), var8);
-			
-			return new ChunkCoordinates(var6, worldObj.getHeightValue(var6, var8), var8);
-		}*/
 		WorldInfo info = worldObj.getWorldInfo();
         return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
     }
