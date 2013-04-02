@@ -2,62 +2,30 @@ package TFC.Blocks.Vanilla;
 
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.BlockFluid;
+import net.minecraft.block.material.Material;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.TerraFirmaCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public abstract class BlockCustomFluid extends BlockFluid
 {
     protected BlockCustomFluid(int par1, Material par2Material)
     {
         super(par1, par2Material);
-        float var3 = 0.0F;
-        float var4 = 0.0F;
-        this.setBlockBounds(0.0F + var4, 0.0F + var3, 0.0F + var4, 1.0F + var4, 1.0F + var3, 1.0F + var4);
-        this.setTickRandomly(true);
     }
 
-    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-        return this.blockMaterial != Material.lava;
-    }
-
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
         return 16777215;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     /**
      * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
      * when first determining what to render.
@@ -85,7 +53,7 @@ public abstract class BlockCustomFluid extends BlockFluid
             par0 = 0;
         }
 
-        float var1 = (float)(par0 + 1) / 9.0F;
+        float var1 = (par0 + 1) / 9.0F;
         return var1;
     }
 
@@ -93,7 +61,8 @@ public abstract class BlockCustomFluid extends BlockFluid
      * Returns the amount of fluid decay at the coordinates, or -1 if the block at the coordinates is not the same
      * material as the fluid.
      */
-    protected int getFlowDecay(World par1World, int par2, int par3, int par4)
+    @Override
+	protected int getFlowDecay(World par1World, int par2, int par3, int par4)
     {
         return par1World.getBlockMaterial(par2, par3, par4) != this.blockMaterial ? -1 : par1World.getBlockMetadata(par2, par3, par4);
     }
@@ -102,7 +71,8 @@ public abstract class BlockCustomFluid extends BlockFluid
      * Returns the flow decay but converts values indicating falling liquid (values >=8) to their effective source block
      * value of zero.
      */
-    protected int getEffectiveFlowDecay(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    @Override
+	protected int getEffectiveFlowDecay(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         if (par1IBlockAccess.getBlockMaterial(par2, par3, par4) != this.blockMaterial)
         {
@@ -124,15 +94,13 @@ public abstract class BlockCustomFluid extends BlockFluid
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
+    /*public int getRenderType()
     {
         return TFCBlocks.fluidRenderId;
-    }
+    }*/
     
-    /**
-     * How many world ticks before ticking
-     */
-    public int tickRate()
+    @Override
+	public int tickRate(World world)
     {
         return this.blockMaterial == Material.water ? 5 : (this.blockMaterial == Material.lava ? 30 : 0);
     }
@@ -140,7 +108,8 @@ public abstract class BlockCustomFluid extends BlockFluid
     /**
      * Goes straight to getLightBrightnessForSkyBlocks for Blocks, does some fancy computing for Fluids
      */
-    public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    @Override
+	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int var5 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3, par4, 0);
         int var6 = par1IBlockAccess.getLightBrightnessForSkyBlocks(par2, par3+1, par4, 0);
@@ -154,7 +123,8 @@ public abstract class BlockCustomFluid extends BlockFluid
     /**
      * How bright to render this block based on the light its receiving. Args: iBlockAccess, x, y, z
      */
-    public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    @Override
+	public float getBlockBrightness(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         float var5 = par1IBlockAccess.getLightBrightness(par2, par3, par4);
         float var6 = par1IBlockAccess.getLightBrightness(par2, par3+1, par4);
@@ -164,16 +134,9 @@ public abstract class BlockCustomFluid extends BlockFluid
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    @Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         super.updateTick(par1World, par2, par3, par4, par5Random);
-    }
-
-    /**
-     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-     */
-    public int getRenderBlockPass()
-    {
-        return this.blockMaterial == Material.water ? 1 : 0;
     }
 }
