@@ -146,7 +146,7 @@ public class TFCBlocks
 	public static Block Sapling;
 	public static Block WoodSupportV;
 	public static Block WoodSupportH;
-	public static TFC.Blocks.Terrain.BlockGrass Grass;
+	public static Block Grass;
 	public static Block Grass2;
 	public static Block Dirt;
 	public static Block Dirt2;
@@ -429,8 +429,8 @@ public class TFCBlocks
 		TFCBlocks.Clay2 = (new TFC.Blocks.Terrain.BlockClay2(TFC_Settings.getIntFor(config,"block","Clay2", 193))).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
 		TFCBlocks.ClayGrass = new TFC.Blocks.Terrain.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass", 194), 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
 		TFCBlocks.ClayGrass2 = new TFC.Blocks.Terrain.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass2", 195), 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
-		TFCBlocks.Grass = new TFC.Blocks.Terrain.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass", 196));
-		TFCBlocks.Grass2 = new TFC.Blocks.Terrain.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass2", 197), 16);  
+		TFCBlocks.Grass = (new TFC.Blocks.Terrain.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass", 196))).setHardness(3F).setStepSound(Block.soundGrassFootstep);
+		TFCBlocks.Grass2 = new TFC.Blocks.Terrain.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass2", 197), 16).setHardness(3F).setStepSound(Block.soundGrassFootstep);  
 		TFCBlocks.Peat = new TFC.Blocks.Terrain.BlockPeat(TFC_Settings.getIntFor(config,"block","Peat", 180)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("Peat");
 		TFCBlocks.PeatGrass = new TFC.Blocks.Terrain.BlockPeatGrass(TFC_Settings.getIntFor(config,"block","PeatGrass", 181)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("PeatGrass");
 		TFCBlocks.DryGrass = new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass", 218), 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
