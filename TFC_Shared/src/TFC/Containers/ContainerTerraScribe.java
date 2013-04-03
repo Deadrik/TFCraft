@@ -1,43 +1,18 @@
 package TFC.Containers;
 
-import TFC.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.Core.CraftingManagerTFC;
-import TFC.GUI.GuiScreenBookTFC;
 import TFC.GUI.GuiTerraScribe;
 import TFC.TileEntities.TileEntityTerraScribe;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.GuiScreenBook;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 
 public class ContainerTerraScribe extends ContainerTFC
 {
@@ -112,7 +87,7 @@ public class ContainerTerraScribe extends ContainerTFC
 		}
 	}
 	
-	public void openBook(ItemStack temp2){
+	/*public void openBook(ItemStack temp2){
 		//ItemStack temp = temp2;
 		terraScribe.scribeItemStacks[1] = null;
 		if(entityplayer.worldObj.isRemote && entityplayer.inventory.getCurrentItem()==null){
@@ -121,7 +96,7 @@ public class ContainerTerraScribe extends ContainerTFC
 			((EntityPlayerSP) entityplayer).getMcField().displayGuiScreen(new GuiScreenBookTFC(entityplayer, temp2, true));
 			
 			}
-	}
+	}*/
 	@Override
 	public void onCraftMatrixChanged(IInventory iinventory)
 	{
