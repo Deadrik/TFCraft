@@ -170,7 +170,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
         	}
         	else if (world.getBlockLightValue(i, j + 1, k) < 4 && Block.lightOpacity[world.getBlockId(i, j + 1, k)] > 2)
             {
-                world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k)), world.getBlockMetadata(i, j, k), 0x2);
+                world.setBlock(i, j, k, TFC_Core.getTypeForDirt(world.getBlockMetadata(i, j, k) + textureOffset), world.getBlockMetadata(i, j, k), 0x2);
             }
             else if (world.getBlockLightValue(i, j + 1, k) >= 9)
             {            	
