@@ -123,7 +123,7 @@ public class BlockFruitLeaves extends BlockTerra
 				{
 					if(fi2.inHarvest(TFC_Time.currentMonth))
 					{
-						if(rand.nextInt(10) == 0)
+						if(rand.nextInt(50) == 0)
 						{
 							if(meta < 8)
 							{

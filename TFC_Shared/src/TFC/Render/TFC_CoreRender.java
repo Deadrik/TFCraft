@@ -776,7 +776,7 @@ public class TFC_CoreRender
 		FloraIndex index = manager.findMatchingIndex(BlockFruitLeaves.getType(block.blockID, meta));
 		
 		renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
-		if(index.inBloom(TFC_Time.currentMonth))
+		if(index.inBloom(TFC_Time.currentMonth) || index.inHarvest(TFC_Time.currentMonth))
 		{
 			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
 			if(renderblocks.overrideBlockTexture != null)
