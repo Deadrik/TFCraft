@@ -646,6 +646,8 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("item."+GemNames[i]+".Exquisite.name", "Exquisite "+GemNames[i]);
 		}
 
+		LR.addStringLocalization("item.coal.coal.name", "Coal");
+		LR.addStringLocalization("item.coal.charcoal.name", "Charcoal");
 		LR.addStringLocalization("item.javelin.name", "Javelin");
 
 		LR.addStringLocalization("item.Wooden Bucket Empty.name", "Wooden Bucket (Empty)");
