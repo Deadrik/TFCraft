@@ -20,11 +20,6 @@ import TFC.TileEntities.TileEntitySluice;
 
 public class BlockSluice extends BlockContainer
 {
-	TileEntitySluice entity;
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
 	public static final int headBlockToFootBlockMap[][] = {
 		{
 			0, 1
@@ -141,10 +136,6 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
 		byte byte1 = 0;
@@ -283,10 +274,6 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		int i1 = world.getBlockMetadata(i, j, k);
 		int j1 = getDirectionFromMetadata(i1);
@@ -317,20 +304,9 @@ public class BlockSluice extends BlockContainer
 	}
 
 	@Override
-	public void updateTick(World world, int i, int j, int k, Random random)
+	public TileEntity createNewTileEntity(World var1) 
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
-	}
-	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
-		if(!isBlockFootOfBed(meta)) {
 			return new TileEntitySluice();
-		}
-		return null;
 	}
 	
 	@Override
