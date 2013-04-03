@@ -17,7 +17,7 @@ import TFC.TileEntities.TileEntityBarrel;
 
 public class BlockBarrel extends BlockTerraContainer
 {
-	private Random random = new Random();
+	private final Random random = new Random();
 
 	public BlockBarrel(int par1)
 	{

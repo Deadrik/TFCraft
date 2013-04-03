@@ -34,6 +34,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityCustomMinecart;
+import TFC.Entities.EntityStand;
 import TFC.Entities.EntityTerraJavelin;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityBlazeTFC;
@@ -149,6 +150,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderCustomMinecart());
+		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class,new RenderPlayerTFC());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeleton());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieTFC.class, new RenderZombie());

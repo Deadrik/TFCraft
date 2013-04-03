@@ -17,6 +17,7 @@ import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
 
@@ -34,7 +35,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		(TFCBlocks.BarrelDouglasFir.blockID),(TFCBlocks.BarrelHickory.blockID),(TFCBlocks.BarrelMaple.blockID),(TFCBlocks.BarrelAsh.blockID),
 		(TFCBlocks.BarrelPine.blockID),(TFCBlocks.BarrelSequoia.blockID),(TFCBlocks.BarrelSpruce.blockID),(TFCBlocks.BarrelSycamore.blockID),
 		(TFCBlocks.BarrelWhiteCedar.blockID),(TFCBlocks.BarrelWhiteElm.blockID),(TFCBlocks.BarrelWillow.blockID),(TFCBlocks.BarrelKapok.blockID)};
-	public final int SEALTIME = (int)((TFC_Time.hourLength*6)/100);//default 80
+	public final int SEALTIME = TFC_Settings.enableDebugMode?0:(int)((TFC_Time.hourLength*6)/100);//default 80
 
 	public TileEntityBarrel()
 	{
