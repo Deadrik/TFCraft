@@ -1,42 +1,17 @@
 package TFC.Containers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.CraftingManagerTFC;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.TileEntities.TileEntityTerraWorkbench;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.server.management.PlayerManager;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 
 public class ContainerKnapping extends Container
 {
@@ -46,7 +21,6 @@ public class ContainerKnapping extends Container
 	private EntityPlayer EP;
 	private SlotCraftingMetal SCM;
 	private boolean firstTime = true;
-	private boolean isFinal = true;
 
 	/** The crafting result, size 1. */
 	public IInventory craftResult = new InventoryCraftResult();
@@ -117,26 +91,12 @@ public class ContainerKnapping extends Container
 					if(craftResult.getStackInSlot(0).stackSize > 1){
 						EP.inventory.addItemStackToInventory(new ItemStack(craftResult.getStackInSlot(0).getItem().itemID,craftResult.getStackInSlot(0).stackSize-1,craftResult.getStackInSlot(0).getItemDamage()));
 					}
-					isFinal = false;
 					EP.openGui(TerraFirmaCraft.instance, 28, EP.worldObj, (int)EP.posX, (int)EP.posY, (int)EP.posZ);
 				}
 			}
 		}
 		firstTime = false;
 		this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
-	}
-	@Override
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
-	{
-		super.onCraftGuiClosed(par1EntityPlayer);
-		if (isFinal){
-			par1EntityPlayer.worldObj.spawnEntityInWorld((new EntityItem(par1EntityPlayer.worldObj,par1EntityPlayer.posX,
-					par1EntityPlayer.posY+1,par1EntityPlayer.posZ,new ItemStack(TFCItems.LooseRock,1,PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(par1EntityPlayer).knappingRockType.getItemDamage()))));
-		}
-	}
-
-	public void createNew(){
-
 	}
 
 	/**

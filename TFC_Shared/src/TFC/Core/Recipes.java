@@ -164,12 +164,6 @@ public class Recipes
 		//Lapis Lazuli	
 		ModLoader.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 34)});
 
-		//knapping
-		for(int i = 0; i < 23; i++)
-		{
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock, 1, i), new Object[] {new ItemStack(TFCItems.LooseRock, 1, i), new ItemStack(TFCItems.LooseRock, 1, i)});
-		}
-
 		for(int i = 0; i < 13; i++)
 		{			
 			for(int j = 0; j < 3; j++)

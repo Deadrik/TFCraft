@@ -5,9 +5,14 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 
 public class ItemLooseRock extends ItemTerra
 {
@@ -34,60 +39,19 @@ public class ItemLooseRock extends ItemTerra
 			{1,0,0},
 		};
 
-	/*@Override
+	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-		if(objectMouseOver == null) {
-			return false;
-		}
-
-		int dir = MathHelper.floor_double((double)(entityplayer.rotationYaw * 4F / 360F) + 0.5D) & 3;
-
-		double xCoord = x + map[side][0];
-		double yCoord = y + map[side][1];
-		double zCoord = z + map[side][2];
-
-		if((entityplayer.posX > xCoord+1  || entityplayer.posX < xCoord) || 
-				(entityplayer.posZ > zCoord+1 || entityplayer.posZ < zCoord) || 
-				(entityplayer.posY > yCoord+1.63 || entityplayer.posY < yCoord-1))
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+		pi.knappingRockType = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
+		if(itemstack.stackSize > 1)
 		{
-			if(!world.isRemote)
-			{
-				if(world.getBlockId(x, y, z) == Block.snow.blockID || BlockCollapsable.canFallBelow(world, x, y, z))
-				{
-					if(     (itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x, y, z, TFCBlocks.StoneIgInCobble.blockID, itemstack.getItemDamage())) || 
-							(itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x, y, z, TFCBlocks.StoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
-							(itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x, y, z, TFCBlocks.StoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
-							(itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x, y, z, TFCBlocks.StoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
-					{
-						if(!world.isRemote)
-						{
-							world.markBlockForUpdate(x, y, z);
-							itemstack.stackSize = itemstack.stackSize-1;   
-						}
-						return true; 
-					}
-				}
-				else if((world.getBlockId(x + map[side][0], y + map[side][1], z + map[side][2]) == 0 || 
-						world.getBlockId(x + map[side][0], y + map[side][1], z + map[side][2]) == Block.snow.blockID  || BlockCollapsable.canFallBelow(world, x, y, z)))
-				{
-					if((itemstack.getItemDamage() < 3 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.StoneIgInCobble.blockID, itemstack.getItemDamage())) || 
-					(itemstack.getItemDamage() < 13 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.StoneSedCobble.blockID, itemstack.getItemDamage() - 3))|| 
-					(itemstack.getItemDamage() < 17 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.StoneIgExCobble.blockID, itemstack.getItemDamage() - 13))|| 
-					(itemstack.getItemDamage() < 23 && world.setBlockAndMetadata(x + map[side][0], y + map[side][1], z + map[side][2], TFCBlocks.StoneMMCobble.blockID, itemstack.getItemDamage() - 17)))
-					{
-						world.markBlockForUpdate(x + map[side][0], y + map[side][1], z + map[side][2]);
-						itemstack.stackSize = itemstack.stackSize-1;   
-						return true; 
-					}
-				}
-			}
-
+			itemstack.stackSize--;
+			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
+		return true;
 
-		return false;
-	}*/
+	}
 
 
 	@Override

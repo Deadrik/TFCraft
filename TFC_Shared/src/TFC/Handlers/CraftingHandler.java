@@ -8,8 +8,6 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
-import TFC.Core.Player.PlayerInfo;
-import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
 import cpw.mods.fml.common.ICraftingHandler;
 
@@ -21,7 +19,7 @@ public class CraftingHandler implements ICraftingHandler
 	{
 		int index = 0;
 
-		if(iinventory != null)
+		if(iinventory != null && !entityplayer.worldObj.isRemote)
 		{
 			if(itemstack.itemID == TFCItems.StoneBrick.itemID)
 			{
@@ -60,11 +58,12 @@ public class CraftingHandler implements ICraftingHandler
 							else
 							{
 								ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
-								iinventory.setInventorySlotContents(i, is);
+								if(is.stackSize > 0)
+									iinventory.setInventorySlotContents(i, is);
 							}
 							
 							openGui = true;
-							itemstack.stackSize = -1;
+							//itemstack.stackSize = -1;
 						}
 					}
 					if(openGui)
@@ -93,37 +92,6 @@ public class CraftingHandler implements ICraftingHandler
 					}
 				}
 				
-			}
-			else if(itemstack.itemID == TFCItems.LooseRock.itemID)
-			{
-				boolean openGui = false;
-				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
-				{             
-					if(iinventory.getStackInSlot(i) == null) 
-					{
-						continue;
-					}
-					if(iinventory.getStackInSlot(i).itemID == TFCItems.LooseRock.itemID)
-					{
-						if(iinventory.getStackInSlot(i).stackSize == 1)
-							iinventory.setInventorySlotContents(i, null);
-						else
-						{
-							ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
-							iinventory.setInventorySlotContents(i, is);
-						}
-						
-						
-						PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-						pi.knappingRockType = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
-						openGui = true;
-						itemstack.stackSize = -1;
-					}
-				}
-				if(openGui)
-					entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-
-				//itemstack = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
 			}
 		}
 	}
