@@ -52,14 +52,14 @@ public class TFC_Climate
 		float z = zCoord;
 
 		//Clamp Z
-		if(z > getMaxZPos()) z = getMaxZPos();
-		if(z < -getMaxZPos()) z = -getMaxZPos();
+		if(z > getMaxZPos()) z = (getMaxZPos()+10000);
+		if(z < -getMaxZPos()) z = -(getMaxZPos()+10000);
 
 		//Get the factor
 		if(z > 0)
-			factor = (getMaxZPos()-z)/getMaxZPos();
+			factor = (getMaxZPos()-z)/(getMaxZPos()+10000);
 		else
-			factor = (-getMaxZPos()-z)/-getMaxZPos();
+			factor = (-getMaxZPos()-z)/-(getMaxZPos()+10000);
 		return factor;
 	}
 
