@@ -216,6 +216,7 @@ public class BlockBloomery extends BlockTerraContainer
 		{
 			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlockToAir(i, j, k);
+			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}
 	}
 
