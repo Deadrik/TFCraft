@@ -52,14 +52,14 @@ public class TFC_Climate
 		float z = zCoord;
 
 		//Clamp Z
-		if(z > getMaxZPos()) z = (getMaxZPos()+10000);
-		if(z < -getMaxZPos()) z = -(getMaxZPos()+10000);
+		if(z > getMaxZPos()) z = (getMaxZPos());
+		if(z < -getMaxZPos()) z = -(getMaxZPos());
 
 		//Get the factor
 		if(z > 0)
-			factor = (getMaxZPos()-z)/(getMaxZPos()+10000);
+			factor = (getMaxZPos()-z)/(getMaxZPos());
 		else
-			factor = (-getMaxZPos()-z)/-(getMaxZPos()+10000);
+			factor = (-getMaxZPos()-z)/-(getMaxZPos());
 		return factor;
 	}
 
@@ -266,7 +266,7 @@ public class TFC_Climate
 		temp/= 5;
 
 		if(y > 180)
-			temp -= temp * (y-180)/90;
+			temp -= Math.abs(temp) * (y-180)/90;
 
 		return temp;
 	}
@@ -274,7 +274,7 @@ public class TFC_Climate
 	public static float adjustHeightToTemp(int y, float temp)
 	{
 		if(y > 180)
-			temp -= temp * (y-180)/90;
+			temp -= Math.abs(temp) * (y-180)/90;
 
 		return temp;
 	}
@@ -284,7 +284,7 @@ public class TFC_Climate
 		float temp = getTempSpecificDay(day, x, z);
 
 		if(y > 180)
-			temp -= temp * (y-180)/90;
+			temp -= Math.abs(temp) * (y-180)/90;
 
 		return temp;
 	}
@@ -294,7 +294,7 @@ public class TFC_Climate
 		float temp = getBioTemp(day, x, z);
 
 		if(y > 180)
-			temp -= temp * (y-180)/90;
+			temp -= Math.abs(temp) * (y-180)/90;
 
 		return temp;
 	}
@@ -457,7 +457,7 @@ public class TFC_Climate
 
 	public static int getMaxZPos()
 	{
-		return 20000;
+		return 30000;
 	}
 
 	public static boolean isSwamp(int x, int y, int z)
