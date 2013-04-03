@@ -28,9 +28,6 @@ public class BlockMetallurgy extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
     @Override
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
