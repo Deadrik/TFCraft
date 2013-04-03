@@ -27,7 +27,7 @@ public class BlockLooseRock extends BlockTerra
 	public BlockLooseRock(int par1) 
 	{
 		super(par1, Material.wood);
-		//this.setBlockBounds(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
+		this.setBlockBounds(0.20F, 0.00F, 0.2F, 0.8F, 0.25F, 0.8F);
 	}
 	@Override
 	public int getRenderType()
@@ -127,6 +127,6 @@ public class BlockLooseRock extends BlockTerra
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-
+    	this.blockIcon = par1IconRegister.registerIcon("rocks/Granite Raw");
     }
 }

@@ -328,6 +328,10 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
 		}
+		case 37:
+		{
+			//return new GuiScreenBookTFC(player.inventory, world, x, y, z);
+		}
 
 		}
 		return null;

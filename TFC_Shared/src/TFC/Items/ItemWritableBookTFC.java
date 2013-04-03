@@ -2,135 +2,130 @@ package TFC.Items;
 
 import java.util.List;
 
-import TFC.TerraFirmaCraft;
-import TFC.GUI.GuiScreenBookTFC;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreenBook;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemWritableBook;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraft.client.entity.*;
 
 public class ItemWritableBookTFC extends ItemTerra
 {
-    public ItemWritableBookTFC(int par1)
-    {
-        super(par1);
-        stackable = false;
-    }
-    public ItemWritableBookTFC(int par1,String tex){
-    	super(par1);
-    	stackable = false;
-    }
-    
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer entityplayer)
-    {
-        //entityplayer.displayGUIBook(par1ItemStack);
-    	if(entityplayer.worldObj.isRemote){
-    		System.out.println(par1ItemStack.hasTagCompound());
-    		System.out.println(par1ItemStack);
-    	Minecraft.getMinecraft().displayGuiScreen(new GuiScreenBookTFC(entityplayer, par1ItemStack, false));
-    	}
-    	return par1ItemStack;
-    }
-    
-    public static boolean validBookTagContents(NBTTagCompound par0NBTTagCompound)
-    {
-        if (!ItemWritableBookTFC.validBookTagPages(par0NBTTagCompound))
-        {
-            return false;
-        }
-        else if (!par0NBTTagCompound.hasKey("title"))
-        {
-            return false;
-        }
-        else
-        {
-            String var1 = par0NBTTagCompound.getString("title");
-            return var1 != null && var1.length() <= 16 ? par0NBTTagCompound.hasKey("author") : false;
-        }
-    }
+	public ItemWritableBookTFC(int par1)
+	{
+		super(par1);
+		stackable = false;
+	}
+	public ItemWritableBookTFC(int par1,String tex){
+		super(par1);
+		stackable = false;
+	}
 
-    /**
-     * If this function returns true (or the item is damageable), the ItemStack's NBT tag will be sent to the client.
-     */
-    @Override
-    public boolean getShareTag()
-    {
-        return true;
-    }
+	/**
+	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+	 */
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer entityplayer)
+	{
+		if(entityplayer.worldObj.isRemote)
+		{
+			System.out.println(par1ItemStack.hasTagCompound());
+			System.out.println(par1ItemStack);
+			//Can't do this
+			//Minecraft.getMinecraft().displayGuiScreen(new GuiScreenBookTFC(entityplayer, par1ItemStack, false));
+		}
+		return par1ItemStack;
+	}
 
-    public String getItemDisplayName(ItemStack par1ItemStack)
-    {
-        if (par1ItemStack.hasTagCompound())
-        {
-            NBTTagCompound var2 = par1ItemStack.getTagCompound();
-            NBTTagString var3 = (NBTTagString)var2.getTag("title");
-            NBTTagString var4 = (NBTTagString)var2.getTag("author");
-            if (var3 != null)
-            {
-                return var3.toString();
-            }
-        }
+	public static boolean validBookTagContents(NBTTagCompound par0NBTTagCompound)
+	{
+		if (!ItemWritableBookTFC.validBookTagPages(par0NBTTagCompound))
+		{
+			return false;
+		}
+		else if (!par0NBTTagCompound.hasKey("title"))
+		{
+			return false;
+		}
+		else
+		{
+			String var1 = par0NBTTagCompound.getString("title");
+			return var1 != null && var1.length() <= 16 ? par0NBTTagCompound.hasKey("author") : false;
+		}
+	}
 
-        return super.getItemDisplayName(par1ItemStack);
-    }
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
-    {  	
-        if (par1ItemStack.hasTagCompound())
-        {
-            NBTTagCompound var5 = par1ItemStack.getTagCompound();
-            NBTTagString var6 = (NBTTagString)var5.getTag("author");
+	/**
+	 * If this function returns true (or the item is damageable), the ItemStack's NBT tag will be sent to the client.
+	 */
+	@Override
+	public boolean getShareTag()
+	{
+		return true;
+	}
 
-            if (var6 != null)
-            {
-                par3List.add("\u00a77" + String.format(StatCollector.translateToLocalFormatted("book.byAuthor", new Object[] {var6.data}), new Object[0]));
-            }
-        }
-        superAddInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-    }
-    private void superAddInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4){
-    	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-    }
-    
-    public static boolean validBookTagPages(NBTTagCompound par0NBTTagCompound)
-    {
-        if (par0NBTTagCompound == null)
-        {
-            return false;
-        }
-        else if (!par0NBTTagCompound.hasKey("pages"))
-        {
-            return false;
-        }
-        else
-        {
-            NBTTagList var1 = (NBTTagList)par0NBTTagCompound.getTag("pages");
+	@Override
+	public String getItemDisplayName(ItemStack par1ItemStack)
+	{
+		if (par1ItemStack.hasTagCompound())
+		{
+			NBTTagCompound var2 = par1ItemStack.getTagCompound();
+			NBTTagString var3 = (NBTTagString)var2.getTag("title");
+			NBTTagString var4 = (NBTTagString)var2.getTag("author");
+			if (var3 != null)
+			{
+				return var3.toString();
+			}
+		}
 
-            for (int var2 = 0; var2 < var1.tagCount(); ++var2)
-            {
-                NBTTagString var3 = (NBTTagString)var1.tagAt(var2);
+		return super.getItemDisplayName(par1ItemStack);
+	}
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{  	
+		if (par1ItemStack.hasTagCompound())
+		{
+			NBTTagCompound var5 = par1ItemStack.getTagCompound();
+			NBTTagString var6 = (NBTTagString)var5.getTag("author");
 
-                if (var3.data == null)
-                {
-                    return false;
-                }
+			if (var6 != null)
+			{
+				par3List.add("\u00a77" + String.format(StatCollector.translateToLocalFormatted("book.byAuthor", new Object[] {var6.data}), new Object[0]));
+			}
+		}
+		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+	}
 
-                if (var3.data.length() > 256)
-                {
-                    return false;
-                }
-            }
+	public static boolean validBookTagPages(NBTTagCompound par0NBTTagCompound)
+	{
+		if (par0NBTTagCompound == null)
+		{
+			return false;
+		}
+		else if (!par0NBTTagCompound.hasKey("pages"))
+		{
+			return false;
+		}
+		else
+		{
+			NBTTagList var1 = (NBTTagList)par0NBTTagCompound.getTag("pages");
 
-            return true;
-        }
-    }
+			for (int var2 = 0; var2 < var1.tagCount(); ++var2)
+			{
+				NBTTagString var3 = (NBTTagString)var1.tagAt(var2);
+
+				if (var3.data == null)
+				{
+					return false;
+				}
+
+				if (var3.data.length() > 256)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+	}
 }

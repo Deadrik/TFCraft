@@ -48,7 +48,7 @@ public class ItemFlatRock extends ItemTerra
 	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
-			registerer.registerIcon("rocks/flatrocks/"+MetaNames[i]+" Raw");
+			icons[i] = registerer.registerIcon("rocks/flatrocks/"+MetaNames[i]+" Raw");
     }
 
     /*public Icon getIconFromDamage(int i)

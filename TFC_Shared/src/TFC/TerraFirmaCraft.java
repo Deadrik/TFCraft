@@ -3,89 +3,48 @@
 //=======================================================
 package TFC;
 
-import java.io.File;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.ArrayDeque;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
-
-import com.google.common.eventbus.Subscribe;
-
-import cpw.mods.fml.common.*;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import TFC.Commands.GetBioTempCommand;
+import TFC.Commands.GetBodyTemp;
+import TFC.Commands.GetRocksCommand;
+import TFC.Commands.GetSpawnProtectionCommand;
+import TFC.Commands.GetTreesCommand;
+import TFC.Commands.SetPlayerStatsCommand;
+import TFC.Core.Recipes;
+import TFC.Core.TFC_ItemHeat;
+import TFC.Core.Player.PlayerTracker;
+import TFC.Food.TFCPotion;
+import TFC.Handlers.ChunkDataEventHandler;
+import TFC.Handlers.ChunkEventHandler;
+import TFC.Handlers.ClientTickHandler;
+import TFC.Handlers.CraftingHandler;
+import TFC.Handlers.EntityHurtHandler;
+import TFC.Handlers.EntitySpawnHandler;
+import TFC.Handlers.PacketHandler;
+import TFC.Handlers.ServerTickHandler;
+import TFC.WorldGen.TFCProvider;
+import TFC.WorldGen.TFCProviderHell;
+import TFC.WorldGen.TFCWorldType;
+import TFC.WorldGen.Generators.WorldGenCaveDecor;
+import TFC.WorldGen.Generators.WorldGenOre;
+import TFC.WorldGen.Generators.WorldGenOreSurface;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStarting;
-import cpw.mods.fml.common.Mod.ServerStopping;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import cpw.mods.fml.common.modloader.BaseModProxy;
-import cpw.mods.fml.common.network.IConnectionHandler;
-import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-
-import TFC.*;
-import TFC.Blocks.*;
-import TFC.Commands.*;
-import TFC.Core.*;
-import TFC.Core.Player.PlayerTracker;
-import TFC.Core.Player.TFC_PlayerClient;
-import TFC.Core.Player.TFC_PlayerServer;
-import TFC.Entities.*;
-import TFC.Food.TFCPotion;
-import TFC.Handlers.*;
-import TFC.Items.*;
-import TFC.TileEntities.*;
-import TFC.WorldGen.TFCProvider;
-import TFC.WorldGen.TFCProviderHell;
-import TFC.WorldGen.TFCWorldType;
-import TFC.WorldGen.Generators.*;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
-import net.minecraftforge.common.*;
 
 @Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 75")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
@@ -133,7 +92,6 @@ public class TerraFirmaCraft
 		DimensionManager.unregisterProviderType(1);
 		DimensionManager.registerProviderType(1, TFCProvider.class, true);
 		
-		//DimensionManager.registerProviderType(-2, TFCProviderCOTE.class, false);
 
 		//Add Item Name Localizations
 		proxy.registerTranslations();

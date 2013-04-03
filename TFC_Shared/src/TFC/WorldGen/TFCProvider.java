@@ -10,6 +10,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
 import TFC.Core.TFC_Climate;
@@ -25,15 +26,18 @@ public class TFCProvider extends WorldProvider
 	@Override
 	protected void registerWorldChunkManager()
 	{
-		worldChunkMgr = terrainType.getChunkManager(this.worldObj);
+		worldChunkMgr = new TFCWorldChunkManager(this.worldObj);
 		TFC_Climate.manager = (TFCWorldChunkManager) worldChunkMgr;
 		TFC_Climate.worldObj = worldObj;
 	}
+	
+	@Override
+	public IChunkProvider createChunkGenerator()
+    {
+        return new TFCChunkProviderGenerate(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+    }
 
 	@Override
-	/**
-	 * Will check if the x, z position specified is alright to be set as the map spawn point
-	 */
 	public boolean canCoordinateBeSpawn(int par1, int par2)
 	{
 		int var3 = this.worldObj.getFirstUncoveredBlock(par1, par2);
@@ -42,9 +46,6 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@Override
-	/**
-	 * Calculates the angle of sun and moon in the sky relative to a specified time (usually worldTime)
-	 */
 	public float calculateCelestialAngle(long par1, float par3)
 	{
 		int var4 = (int)(par1 % TFC_Settings.dayLength);
