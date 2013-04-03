@@ -4,45 +4,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.BitSet;
 import java.util.Random;
 
-import TFC.TFCBlocks;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
-import TFC.Blocks.BlockIngotPile;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 {
@@ -87,13 +61,11 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		if(storage[index] == null) {
 			storage[index] = is;
 		}
-		((BlockIngotPile)(this.getBlockType())).stack = storage[0].stackSize;
 	}
 
 	public void clearContents()
 	{
 		storage[0] = null;
-		((BlockIngotPile)(this.getBlockType())).stack = 0;
 	}
 
 	@Override
@@ -154,7 +126,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
 						storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
@@ -245,13 +217,12 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		{
 			itemstack.stackSize = getInventoryStackLimit();
 		}
-		((BlockIngotPile)(this.getBlockType())).stack = storage[0].stackSize;
 	}
 
 	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)

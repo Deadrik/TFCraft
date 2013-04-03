@@ -3,7 +3,6 @@ package TFC.Blocks;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -14,44 +13,26 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import TFC.TFCBlocks;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
 
 public class BlockIngotPile extends BlockTerraContainer
 {
-	private int meta;
-	public int damage;
-	public int stack;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-	private World world;
-	private int ingotpileId = TFCBlocks.IngotPileRenderId;
-	public TileEntity TE;
-	public boolean replacing = false;
-
-
 	private Random random = new Random();
 	public BlockIngotPile(int i)
 	{
 		super(i, Material.iron);
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 
-    }
+	}
 
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
-
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
 		if(equippedItem != null)
@@ -89,34 +70,13 @@ public class BlockIngotPile extends BlockTerraContainer
 						world.setBlock(i, j, k, 0);
 					}
 				}
-				damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
-				stack = tileentityingotpile.getStackInSlot(0).stackSize;
+				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
+				//stack = tileentityingotpile.getStackInSlot(0).stackSize;
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			}
 
 			return true;
-		}
-	}
-
-	@Override
-	public void onBlockAdded(World world, int i, int j, int k)
-	{
-		super.onBlockAdded(world, i, j, k);
-		this.world = Minecraft.getMinecraft().theWorld;
-		TE = world.getBlockTileEntity(i,j,k);
-		int x = i;
-		int y = j;
-		int z = k;
-		if(Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)!=null && world.getBlockTileEntity(x,y,z)!=null){
-			//((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).setType(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).getType());
-			//((TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z)).storage[0].stackSize=(((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).storage[0].stackSize);
-		}
-		
-		if (((TileEntityIngotPile)world.getBlockTileEntity(i,j,k)).getType() != -1){
-			//damage = ((EntityPlayer)entityliving).getItemInUse().getItem().shiftedIndex;
-			//stack = 1;
-			damage = ((TileEntityIngotPile)world.getBlockTileEntity(i,j,k)).getType();
 		}
 	}
 
@@ -144,18 +104,18 @@ public class BlockIngotPile extends BlockTerraContainer
 
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
+	{
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
-        int direction = getDirectionFromMetadata(meta);
-        TileEntityIngotPile te = (TileEntityIngotPile)par1World.getBlockTileEntity(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityIngotPile te = (TileEntityIngotPile)par1World.getBlockTileEntity(par2, par3, par4);
 
 		if (te.getStackInSlot(0)!=null){
-            return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
+			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
 		}
 		else
 			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
-    }
-	
+	}
+
 	/*@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
@@ -214,10 +174,8 @@ public class BlockIngotPile extends BlockTerraContainer
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
 		super.onBlockPlacedBy(world,i,j,k,entityliving, is);
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
+		int meta = world.getBlockMetadata(i, j, k);
+
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
 		if(l == 0)//+z
@@ -237,57 +195,47 @@ public class BlockIngotPile extends BlockTerraContainer
 			byte0 = 0;
 		}
 		byte0 += meta;
-		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
-		//damage = ((EntityPlayer)entityliving).getItemInUse().getItem().shiftedIndex;
-		//stack = 1;
-		damage = ((TileEntityIngotPile)world.getBlockTileEntity(i,j,k)).type;
-		//damage = ((TileEntityIngotPile)(world.getBlockTileEntity(i,j,k))).getStackInSlot(0).getItem().shiftedIndex - 16028 - 256;
-		//this.createTileEntity(world, meta);
+		world.setBlockMetadataWithNotify(i, j, k, byte0, 0x2);;
 	}
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		TileEntityIngotPile var5 = (TileEntityIngotPile)par1World.getBlockTileEntity(par2, par3, par4);
-		if(!replacing){
-			if (var5 != null)
+		if (var5 != null)
+		{
+			for (int var6 = 0; var6 < var5.getSizeInventory(); ++var6)
 			{
-				for (int var6 = 0; var6 < var5.getSizeInventory(); ++var6)
+				ItemStack var7 = var5.getStackInSlot(var6);
+
+				if (var7 != null)
 				{
-					ItemStack var7 = var5.getStackInSlot(var6);
+					float var8 = this.random.nextFloat() * 0.8F + 0.1F;
+					float var9 = this.random.nextFloat() * 0.8F + 0.1F;
+					EntityItem var12;
 
-					if (var7 != null)
+					for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; par1World.spawnEntityInWorld(var12))
 					{
-						float var8 = this.random.nextFloat() * 0.8F + 0.1F;
-						float var9 = this.random.nextFloat() * 0.8F + 0.1F;
-						EntityItem var12;
+						int var11 = this.random.nextInt(21) + 10;
 
-						for (float var10 = this.random.nextFloat() * 0.8F + 0.1F; var7.stackSize > 0; par1World.spawnEntityInWorld(var12))
+						if (var11 > var7.stackSize)
 						{
-							int var11 = this.random.nextInt(21) + 10;
+							var11 = var7.stackSize;
+						}
 
-							if (var11 > var7.stackSize)
-							{
-								var11 = var7.stackSize;
-							}
+						var7.stackSize -= var11;
+						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
+						float var13 = 0.05F;
+						var12.motionX = (float)this.random.nextGaussian() * var13;
+						var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
+						var12.motionZ = (float)this.random.nextGaussian() * var13;
 
-							var7.stackSize -= var11;
-							var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
-							float var13 = 0.05F;
-							var12.motionX = (float)this.random.nextGaussian() * var13;
-							var12.motionY = (float)this.random.nextGaussian() * var13 + 0.2F;
-							var12.motionZ = (float)this.random.nextGaussian() * var13;
-
-							if (var7.hasTagCompound())
-							{
-								var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
-							}
+						if (var7.hasTagCompound())
+						{
+							var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
 						}
 					}
 				}
 			}
-
-
-
 			super.breakBlock(par1World, par2, par3, par4, par5, par6);}
 	}
 	@Override
@@ -315,9 +263,8 @@ public class BlockIngotPile extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
-		TileEntityIngotPile tE = new TileEntityIngotPile();
-		return tE;
+	public TileEntity createNewTileEntity(World var1) 
+	{
+		return new TileEntityIngotPile();
 	}
 }
