@@ -16,6 +16,7 @@ import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -119,7 +120,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 						}
 						
 						if(storage[2] != null)
-							storage[2].damageItem(1, null);
+							storage[2].damageItem(1, new EntityCowTFC(worldObj));
 					}
 				}
 				else 

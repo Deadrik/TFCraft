@@ -5,46 +5,30 @@ import static net.minecraftforge.common.ForgeDirection.DOWN;
 import java.util.Iterator;
 import java.util.Random;
 
-import TFC.*;
-import TFC.TileEntities.TileEntityChestTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryLargeChest;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.TileEntities.TileEntityChestTFC;
 
 public class BlockChestTFC extends BlockTerraContainer
 {
-    private Random random = new Random();
+    private final Random random = new Random();
     public final int field_94443_a;
 
     public BlockChestTFC(int par1, int par2)
@@ -59,7 +43,8 @@ public class BlockChestTFC extends BlockTerraContainer
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
+    @Override
+	public boolean isOpaqueCube()
     {
         return false;
     }
@@ -67,7 +52,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock()
+    @Override
+	public boolean renderAsNormalBlock()
     {
         return false;
     }
@@ -75,7 +61,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
+    @Override
+	public int getRenderType()
     {
         return 22;
     }
@@ -83,7 +70,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    @Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         if (par1IBlockAccess.getBlockId(par2, par3, par4 - 1) == this.blockID)
         {
@@ -110,7 +98,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    @Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.unifyAdjacentChests(par1World, par2, par3, par4);
@@ -143,14 +132,15 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    @Override
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
     {
         int l = par1World.getBlockId(par2, par3, par4 - 1);
         int i1 = par1World.getBlockId(par2, par3, par4 + 1);
         int j1 = par1World.getBlockId(par2 - 1, par3, par4);
         int k1 = par1World.getBlockId(par2 + 1, par3, par4);
         byte b0 = 0;
-        int l1 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int l1 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
         if (l1 == 0)
         {
@@ -328,7 +318,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    @Override
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
         int l = 0;
 
@@ -367,7 +358,8 @@ public class BlockChestTFC extends BlockTerraContainer
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    @Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
         TileEntityChest tileentitychest = (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4);
@@ -381,9 +373,10 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    @Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
     {
-        TileEntityChest tileentitychest = (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntityChestTFC tileentitychest = (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4);
 
         if (tileentitychest != null)
         {
@@ -407,11 +400,11 @@ public class BlockChestTFC extends BlockTerraContainer
                         }
 
                         itemstack.stackSize -= k1;
-                        entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+                        entityitem = new EntityItem(par1World, par2 + f, par3 + f1, par4 + f2, new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (double)((float)this.random.nextGaussian() * f3);
-                        entityitem.motionY = (double)((float)this.random.nextGaussian() * f3 + 0.2F);
-                        entityitem.motionZ = (double)((float)this.random.nextGaussian() * f3);
+                        entityitem.motionX = (float)this.random.nextGaussian() * f3;
+                        entityitem.motionY = (float)this.random.nextGaussian() * f3 + 0.2F;
+                        entityitem.motionZ = (float)this.random.nextGaussian() * f3;
 
                         if (itemstack.hasTagCompound())
                         {
@@ -428,7 +421,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    @Override
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
         if (par1World.isRemote)
         {
@@ -449,7 +443,7 @@ public class BlockChestTFC extends BlockTerraContainer
 
     public IInventory func_94442_h_(World par1World, int par2, int par3, int par4)
     {
-        Object object = (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4);
+        Object object = par1World.getBlockTileEntity(par2, par3, par4);
 
         if (object == null)
         {
@@ -508,7 +502,8 @@ public class BlockChestTFC extends BlockTerraContainer
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    public boolean canProvidePower()
+    @Override
+	public boolean canProvidePower()
     {
         return this.field_94443_a == 1;
     }
@@ -518,7 +513,8 @@ public class BlockChestTFC extends BlockTerraContainer
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    @Override
+	public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         if (!this.canProvidePower())
         {
@@ -535,7 +531,8 @@ public class BlockChestTFC extends BlockTerraContainer
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    @Override
+	public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         return par5 == 1 ? this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5) : 0;
     }
@@ -546,7 +543,7 @@ public class BlockChestTFC extends BlockTerraContainer
      */
     public static boolean isOcelotBlockingChest(World par0World, int par1, int par2, int par3)
     {
-        Iterator iterator = par0World.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getAABBPool().getAABB((double)par1, (double)(par2 + 1), (double)par3, (double)(par1 + 1), (double)(par2 + 2), (double)(par3 + 1))).iterator();
+        Iterator iterator = par0World.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getAABBPool().getAABB(par1, par2 + 1, par3, par1 + 1, par2 + 2, par3 + 1)).iterator();
         EntityOcelot entityocelot;
 
         do
@@ -557,7 +554,7 @@ public class BlockChestTFC extends BlockTerraContainer
             }
 
             EntityOcelot entityocelot1 = (EntityOcelot)iterator.next();
-            entityocelot = (EntityOcelot)entityocelot1;
+            entityocelot = entityocelot1;
         }
         while (!entityocelot.isSitting());
 
