@@ -4,54 +4,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.Blocks.BlockBloomery;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
-import TFC.Core.Vector3f;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemOre;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 {
@@ -64,10 +31,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	private boolean sealed;
 	private int sealtimecounter;
 	private static int[] barrels ={(TFCBlocks.BarrelOak.blockID),(TFCBlocks.BarrelAspen.blockID),(TFCBlocks.BarrelBirch.blockID),(TFCBlocks.BarrelChestnut.blockID),
-			(TFCBlocks.BarrelDouglasFir.blockID),(TFCBlocks.BarrelHickory.blockID),(TFCBlocks.BarrelMaple.blockID),(TFCBlocks.BarrelAsh.blockID),
-			(TFCBlocks.BarrelPine.blockID),(TFCBlocks.BarrelSequoia.blockID),(TFCBlocks.BarrelSpruce.blockID),(TFCBlocks.BarrelSycamore.blockID),
-			(TFCBlocks.BarrelWhiteCedar.blockID),(TFCBlocks.BarrelWhiteElm.blockID),(TFCBlocks.BarrelWillow.blockID),(TFCBlocks.BarrelKapok.blockID)};
-	public final int SEALTIME = (int) 0;//((TFC_Time.hourLength*6)/100);//default 80
+		(TFCBlocks.BarrelDouglasFir.blockID),(TFCBlocks.BarrelHickory.blockID),(TFCBlocks.BarrelMaple.blockID),(TFCBlocks.BarrelAsh.blockID),
+		(TFCBlocks.BarrelPine.blockID),(TFCBlocks.BarrelSequoia.blockID),(TFCBlocks.BarrelSpruce.blockID),(TFCBlocks.BarrelSycamore.blockID),
+		(TFCBlocks.BarrelWhiteCedar.blockID),(TFCBlocks.BarrelWhiteElm.blockID),(TFCBlocks.BarrelWillow.blockID),(TFCBlocks.BarrelKapok.blockID)};
+	public final int SEALTIME = (int)((TFC_Time.hourLength*6)/100);//default 80
 
 	public TileEntityBarrel()
 	{
@@ -89,7 +56,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public boolean getSealed(){
 		return sealed;
 	}
-	
+
 	public int getBarrelType(){
 		for(int i = 0; i < barrels.length;i++){
 			if(worldObj.getBlockId(xCoord,yCoord,zCoord)==barrels[i]){
@@ -148,6 +115,41 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 			Type = 5;
 		}
+		if(Type== 1 && (itemstack.getItem() == TFCItems.RedApple||itemstack.getItem()==TFCItems.GreenApple)){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 6;
+		}
+		if(Type== 1 && itemstack.getItem() == TFCItems.Potato){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 7;
+		}
+		if(Type== 1 && itemstack.getItem() == TFCItems.WheatGrain){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 8;
+		}
+		if(Type== 1 && itemstack.getItem() == TFCItems.RyeGrain){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 9;
+		}
+		if(Type== 1 && itemstack.getItem() == TFCItems.RiceGrain){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 10;
+		}
 		if(Type==2&&itemstack.getItem() == TFCItems.Hide){
 			itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
 			while(liquidLevel >= 5 && itemstack.stackSize >0){
@@ -190,7 +192,19 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		case 3:
 			return "Tannin";
 		case 4:
-			return "Gunpowder";
+			return "Gunpowder (no use)";
+		case 5:
+			return "Beer (no use)";
+		case 6:
+			return "Cider (no use)";
+		case 7:
+			return "Vodka (no use)";
+		case 8:
+			return "Whiskey (no use)";
+		case 9:
+			return "Rye (no use)";
+		case 10:
+			return "Sake (no use)";
 		default:
 			return "";
 		}
@@ -241,7 +255,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		{
 			if(itemstack != null)
 			{
-				entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
 						itemstack);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
@@ -309,6 +323,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 
+	@Override
 	public void updateEntity()
 	{
 		if(!worldObj.isRemote)
@@ -342,17 +357,17 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 			if (itemstack != null){
 				if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 64){
-					liquidLevel = (int)Math.min(liquidLevel + 8, 64);
+					liquidLevel = Math.min(liquidLevel + 8, 64);
 					Type = 2;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
 				if ((Type == 0||Type == 1) && itemstack.getItem() == TFCItems.WoodenBucketWater && liquidLevel < 64){
-					liquidLevel = (int)Math.min(liquidLevel + 8, 64);
+					liquidLevel = Math.min(liquidLevel + 8, 64);
 					Type = 1;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
 				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 64){
-					liquidLevel = (int)Math.min(liquidLevel + 1, 64);
+					liquidLevel = Math.min(liquidLevel + 1, 64);
 					Type = 4;
 					itemstack.stackSize-=1;
 					if(itemstack.stackSize==0)
@@ -370,6 +385,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		validate();
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
@@ -387,6 +403,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		nbttagcompound.setTag("Items", nbttaglist);
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
@@ -495,7 +512,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	public int getLiquidScaled(int i) {
-		return (int)(((float)liquidLevel/64f)*i);
+		return (int)((liquidLevel/64f)*i);
 	}
 
 	public boolean actionSeal() {
@@ -520,6 +537,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				if(id == TFCItems.Logs.itemID){
 					return true;
 				}
+				if(id == TFCItems.WheatGrain.itemID||id == TFCItems.BarleyGrain.itemID||id == TFCItems.RyeGrain.itemID||id == TFCItems.RiceGrain.itemID||
+						id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID){
+					return true;
+				}
 			}
 			if(id == TFCItems.Hide.itemID && Type == 2){
 				return true;
@@ -527,6 +548,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			if(id == TFCItems.PrepHide.itemID && Type == 3){
 				return true;
 			}
+
 		}
 		return false;
 	}
@@ -536,7 +558,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			liquidLevel =0;
 			TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
 		}
-		
+
 	}
 
 	@Override
