@@ -3,7 +3,6 @@ package TFC.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.item.Item;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
@@ -82,14 +81,15 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 				renderblocks.renderStandardBlock(block, i, j, k);
 				if(te.anvilItemStacks[0] != null && !breaking)
 				{
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
-					renderblocks.overrideBlockTexture = Item.itemsList[te.anvilItemStacks[0].itemID].getIconIndex(te.anvilItemStacks[0]);
+					
 					//					block.setBlockBounds(0.0F, 0.9F, 0.0F, 1F, 0.901F, 1F);
 					//					renderblocks.renderStandardBlock(block, i, j, k);
 					Tessellator tessellator = Tessellator.instance;
 					int state = tessellator.drawMode;
 					tessellator.draw();
 					tessellator.startDrawingQuads();
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					renderblocks.overrideBlockTexture = te.anvilItemStacks[0].getIconIndex();
 					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 					tessellator.setColorRGBA_F(1, 1, 1, 1);
 
@@ -106,12 +106,11 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 					tessellator.addVertexWithUV(i, j + 0.901, k, minX, minZ);
 
 					tessellator.addTranslation(-0.5f, 0f, -0.5f);
-					tessellator.draw();
+					tessellator.draw();				
 					tessellator.startDrawing(state);
 
-
 				}
-				//block.setBlockBounds(0.0F, 0.0F, 0.00F, 1.0F, 0.9F, 1.0F);
+				ModLoader.getMinecraftInstance().renderEngine.bindTexture("/terrain.png");
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}
