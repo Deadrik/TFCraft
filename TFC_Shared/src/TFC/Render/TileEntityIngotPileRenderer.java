@@ -11,7 +11,7 @@ import TFC.TileEntities.TileEntityIngotPile;
 public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 {
 	/** The normal small chest model. */
-	private ModelIngotPile ingotModel = new ModelIngotPile();
+	private final ModelIngotPile ingotModel = new ModelIngotPile();
 	private static String[] metalTypes =  new String[]{"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", 
 		"Bronze", "Copper", "Gold", "Wrought Iron", "Lead", "Nickel", "Pig Iron", "Platinum", "Red Steel", "Rose Gold", "Silver", "Steel",
 		"Sterlign Silver", "Tin", "Zinc" };
@@ -38,7 +38,7 @@ public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 				par1TileEntityPile.validate();
 				int i = ((TFC.Blocks.BlockIngotPile)var10).getStack(par1TileEntityPile.worldObj,par1TileEntityPile);
 				int j = par1TileEntityPile.getType() != -1 ? par1TileEntityPile.getType() : 0;
-				bindTextureByName("textures/blocks/metal/"+metalTypes[par1TileEntityPile.type]); //texture
+				bindTextureByName("/textures/blocks/metal/"+metalTypes[par1TileEntityPile.type]+".png"); //texture
 				GL11.glPushMatrix(); //start
 				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
 

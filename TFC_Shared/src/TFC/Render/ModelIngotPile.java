@@ -1,12 +1,6 @@
 package TFC.Render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.TextureOffset;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,7 +13,7 @@ public class ModelIngotPile extends ModelBase
 	{
 		for (int a = 0; a < 21; a++){
 			for (int n = 0; n < 64; n++){
-				this.ingots[a][n] = (ModelRendererTFC) new ModelRendererTFC(this,64*a,932+((a/16)*64)).setTextureSize(1024,1024);
+				this.ingots[a][n] = new ModelRendererTFC(this,0,0);
 				int m = (n+8)/8;
 				float x = (n %4)*8f;
 				float y = (m -1)*4f;

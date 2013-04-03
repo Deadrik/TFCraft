@@ -661,10 +661,10 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.SluiceItem.name", "Sluice");
 
 		LR.addStringLocalization("item.GoldPan.name", "Gold Pan");
-		LR.addStringLocalization("item.GoldPanSand.name", "Gold Pan - Sand");
-		LR.addStringLocalization("item.GoldPanGravel.name", "Gold Pan - Gravel");
-		LR.addStringLocalization("item.GoldPanClay.name", "Gold Pan - Clay");
-		LR.addStringLocalization("item.GoldPanDirt.name", "Gold Pan - Dirt");
+		LR.addStringLocalization("item.GoldPan.Sand.name", "Gold Pan - Sand");
+		LR.addStringLocalization("item.GoldPan.Gravel.name", "Gold Pan - Gravel");
+		LR.addStringLocalization("item.GoldPan.Clay.name", "Gold Pan - Clay");
+		LR.addStringLocalization("item.GoldPan.Dirt.name", "Gold Pan - Dirt");
 
 		LR.addStringLocalization("item.FireStarter.name", "Firestarter");
 
