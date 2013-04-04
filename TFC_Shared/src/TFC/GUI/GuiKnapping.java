@@ -1,63 +1,88 @@
 package TFC.GUI;
 
-import net.minecraft.client.Minecraft;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
-import TFC.*;
-import TFC.Containers.*;
-import TFC.TileEntities.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import TFC.TerraFirmaCraft;
+import TFC.Containers.ContainerKnapping;
+import TFC.Handlers.PacketHandler;
 
 public class GuiKnapping extends GuiContainer
 {
+	public boolean[] craftingArea;
+	
     public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
     {
         super(new ContainerKnapping(inventoryplayer, is, world, x, y, z));
+        craftingArea = new boolean[25];
     }
 
-    public void onGuiClosed()
+    @Override
+	public void onGuiClosed()
     {
         super.onGuiClosed();
     }
+    
+    @Override
+	public void initGui()
+	{
+		super.initGui();
+		//guiLeft = (width - 208) / 2;
+		//guiTop = (height - 198) / 2;
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+		buttonList.clear();
+		
+		for (int x = 0; x < 5; x++)
+		{
+			for (int y = 0; y < 5; y++)
+			{
+				buttonList.add(new GuiKnappingButton(x*5+y, guiLeft+(x*16)+5, guiTop + (y*16)-5, 16, 16));
+				//addSlotToContainer(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
+			}
+		}
+	}
+    
+    @Override
+	protected void actionPerformed(GuiButton guibutton)
+	{
+    	craftingArea[guibutton.id] = true;
+    	((GuiKnappingButton) this.buttonList.get(guibutton.id)).drawButton = false;
+    	((GuiKnappingButton) this.buttonList.get(guibutton.id)).enabled = false;
+    	TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket(guibutton.id));
+	}
 
-    }
+    public Packet createUpdatePacket(int id)
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
 
-    protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+		try {
+			dos.writeByte(PacketHandler.Packet_Update_Knapping);
+			dos.writeByte(id);
+		} catch (IOException e) {
+		}
+		
+		Packet250CustomPayload pkt=new Packet250CustomPayload();
+		pkt.channel="TerraFirmaCraft";
+		pkt.data = bos.toByteArray();
+		pkt.length= bos.size();
+		pkt.isChunkDataPacket=false;
+		return pkt;
+	}
+    
+    @Override
+	protected void drawGuiContainerBackgroundLayer(float f, int p, int j)
     {
     	this.mc.renderEngine.bindTexture("/bioxx/gui_knapping.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);

@@ -4,39 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.HashMap;
 
-import TFC.Handlers.PacketHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTerraScribe extends TileEntity implements IInventory
 {
@@ -96,6 +69,7 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 		return "Scribe";
 	}
 
+	@Override
 	public int getSizeInventory()
 	{
 		return scribeItemStacks.length;
@@ -126,6 +100,7 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
@@ -154,6 +129,7 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 		}
 	}
 
+	@Override
 	public void updateEntity()
 	{
 
@@ -162,7 +138,8 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 	public void nullifyBook(){
 		ByteArrayOutputStream var3 = new ByteArrayOutputStream(1000);
         DataOutputStream var4 = new DataOutputStream(var3);
-        try{
+        //Commented out for being incorrect. See Packethandler for more information.
+        /*try{
         var4.writeByte(PacketHandler.Packet_Scribe_Update);
         var4.writeInt(xCoord);
         var4.writeInt(yCoord);
@@ -171,9 +148,10 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
         }
         catch(Exception e){
         	return;
-        }
+        }*/
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
