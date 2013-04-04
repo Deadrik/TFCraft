@@ -9,8 +9,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.Core.CraftingManagerTFC;
 
 public class ContainerKnapping extends Container
@@ -73,7 +71,7 @@ public class ContainerKnapping extends Container
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory)
 	{
-		if (!firstTime){
+		/*if (!firstTime){
 			boolean newKnapp = true;
 			for (int i = 0; i < craftMatrix.getSizeInventory();i++){
 				if (craftMatrix.getStackInSlot(i)!=null){
@@ -93,7 +91,7 @@ public class ContainerKnapping extends Container
 				}
 			}
 		}
-		firstTime = false;
+		firstTime = false;*/
 		this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
 	}
 
