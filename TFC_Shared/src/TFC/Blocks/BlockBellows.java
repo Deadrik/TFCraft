@@ -2,40 +2,18 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import TFC.*;
-import TFC.TileEntities.TileEntityFireEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TileEntities.TileEntityFireEntity;
 
 public class BlockBellows extends BlockTerra
 {
@@ -66,6 +44,7 @@ public class BlockBellows extends BlockTerra
 		super(i, material);
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		meta = world.getBlockMetadata(i, j, k);
@@ -84,6 +63,7 @@ public class BlockBellows extends BlockTerra
 		}
 	}
 
+	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(i == 0)//bottom
@@ -215,14 +195,15 @@ public class BlockBellows extends BlockTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		Sides[0] = registerer.registerIcon("/devices/Bellows82");
-		Sides[1] = registerer.registerIcon("/devices/Bellows83");
-		Sides[2] = registerer.registerIcon("/devices/Bellows84");
-		Sides[3] = registerer.registerIcon("/devices/Bellows85");
-		BellowsFront = registerer.registerIcon("/devices/Bellows Front");
-		BellowsBack = registerer.registerIcon("/devices/Bellows Back");
+		Sides[0] = registerer.registerIcon("devices/Bellows82");
+		Sides[1] = registerer.registerIcon("devices/Bellows83");
+		Sides[2] = registerer.registerIcon("devices/Bellows84");
+		Sides[3] = registerer.registerIcon("devices/Bellows85");
+		BellowsFront = registerer.registerIcon("devices/Bellows Front");
+		BellowsBack = registerer.registerIcon("devices/Bellows Back");
 	}
 
+	@Override
 	public int getRenderType()
 	{
 		return TFCBlocks.BellowsRenderId;
@@ -237,7 +218,7 @@ public class BlockBellows extends BlockTerra
 
 		Random random = new Random();
 		float f = (float)i +x+ 0.5F;
-		float f1 = (float)j + 0.1F + random.nextFloat() * 6F / 16F;
+		float f1 = j + 0.1F + random.nextFloat() * 6F / 16F;
 		float f2 = (float)k +z+ 0.5F;
 		float f3 = 0.82F;
 		float f4 = random.nextFloat() * 0.6F;
@@ -280,7 +261,7 @@ public class BlockBellows extends BlockTerra
 		xCoord = i;
 		yCoord = j;
 		zCoord = k;
-		int l = MathHelper.floor_double((double)(entityliving.rotationYaw * 4F / 360F) + 0.5D) & 3;
+		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
 		byte byte1 = 0;
 		if(l == 0)//+z

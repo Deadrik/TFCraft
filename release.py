@@ -39,7 +39,7 @@ def main():
         os.chdir(mcp_dir)
         reset_logger()
         print 'reobf start'
-        reobfuscate(None, False, True, True, False, False)
+        reobfuscate(None, False, True, True, True, False, False)
         print 'reobf end'
         reset_logger()
         os.chdir(forge_dir)
@@ -63,7 +63,6 @@ def main():
     zip_end()
     
     zip_start('TFCraft-src.zip')
-    zip_add('tfc_client/src', 'src/minecraft')
     zip_add('tfc_shared/src',     'src/minecraft')
     zip_add('patches',          'patches')
     zip_add('tfc_credits.txt')

@@ -52,10 +52,10 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		iconTop = iconRegisterer.registerIcon("/devices/meterTop");
+		iconTop = iconRegisterer.registerIcon("devices/meterTop");
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("/devices/meter"+i);
+			icons[i] = iconRegisterer.registerIcon("devices/meter"+i);
 		}
     }
 

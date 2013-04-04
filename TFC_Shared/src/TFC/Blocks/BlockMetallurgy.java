@@ -77,8 +77,8 @@ public class BlockMetallurgy extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		iconTop = iconRegisterer.registerIcon("/devices/Metallurgy Table Top");
-		iconSide = iconRegisterer.registerIcon("/devices/Metallurgy Table Side");
+		iconTop = iconRegisterer.registerIcon("devices/Metallurgy Table Top");
+		iconSide = iconRegisterer.registerIcon("devices/Metallurgy Table Side");
     }
 
 
