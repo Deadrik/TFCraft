@@ -21,7 +21,6 @@ import TFC.Handlers.PacketHandler;
 
 public class GuiKnapping extends GuiContainer
 {
-	public boolean[] craftingArea;
 	private EntityPlayer player;
 	
     public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
@@ -54,10 +53,15 @@ public class GuiKnapping extends GuiContainer
     @Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
-    	((GuiKnappingButton) this.buttonList.get(guibutton.id)).drawButton = false;
-    	((GuiKnappingButton) this.buttonList.get(guibutton.id)).enabled = false;
+    	resetButton(guibutton.id);
     	TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket(guibutton.id));
 	}
+    
+    public void resetButton(int id)
+    {
+    	((GuiKnappingButton) this.buttonList.get(id)).drawButton = false;
+    	((GuiKnappingButton) this.buttonList.get(id)).enabled = false;
+    }
 
     public Packet createUpdatePacket(int id)
 	{
