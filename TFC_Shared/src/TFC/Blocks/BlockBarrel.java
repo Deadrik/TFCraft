@@ -2,7 +2,11 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -168,4 +172,12 @@ public class BlockBarrel extends BlockTerraContainer
 		// TODO Auto-generated method stub
 		return new TileEntityBarrel();
 	}
+
+	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+    {
+		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
+        return true;
+    }
 }

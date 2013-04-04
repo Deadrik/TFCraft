@@ -2,6 +2,10 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -121,4 +125,11 @@ public class BlockCropMultiBlock extends BlockTerraContainer
 		return new TileEntityCrop();
 	}
 
+	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+    {
+		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
+        return true;
+    }
 }

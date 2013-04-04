@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
@@ -61,6 +62,13 @@ public class BlockDetailed extends BlockPartial
 		return TFCBlocks.detailedRenderId;
 	}
 
+	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+    {
+		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
+        return true;
+    }
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{

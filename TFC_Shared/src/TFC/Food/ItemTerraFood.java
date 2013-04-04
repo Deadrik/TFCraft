@@ -167,12 +167,10 @@ public class ItemTerraFood extends ItemFood implements ISize
 	{
 		if(!world.isRemote)
 		{
-			--is.stackSize;
 			TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
 			playerServer.getFoodStatsTFC().addStats(this);
 			player.getFoodStats().addStats(this);
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-			//this.onFoodEaten(is, world, player);
 		}
 	}
 
