@@ -3,43 +3,20 @@ package TFC.Blocks.Terrain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import TFC.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityFallingSand;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Sounds;
-import TFC.Entities.EntityFallingDirt;
-import TFC.Entities.EntityFallingStone;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockSand extends BlockTerra
 {
@@ -138,7 +115,7 @@ public class BlockSand extends BlockTerra
                 }
                 else
                 {
-                    EntityFallingDirt ent = new EntityFallingDirt(world, (float)i + 0.5F, (float)j + 0.5F, (float)k + 0.5F, blockID, meta, 0);
+                	EntityFallingSand ent = new EntityFallingSand(world, i + 0.5F, j + 0.5F, k + 0.5F, blockID, meta);
                     world.spawnEntityInWorld(ent);
                     Random R = new Random(i*j+k);
                     world.playSoundAtEntity(ent, TFC_Sounds.FALLININGDIRTSHORT, 1.0F, 0.8F + (R.nextFloat()/2));
@@ -160,7 +137,9 @@ public class BlockSand extends BlockTerra
 			boolean PosXAir2 = false;
 			boolean NegXAir2 = false;
 			boolean PosZAir2 = false;
-			boolean NegZAir2 = false;
+			boolean NegZAir2 = false;	
+			
+			boolean isBelowAir = world.getBlockId(i, j-1, k) == 0;
 			byte count = 0;
 			List sides = new ArrayList<Integer>();
 
@@ -193,40 +172,44 @@ public class BlockSand extends BlockTerra
 					sides.add(3);
 			}
 
-			if((random.nextInt(5) == 0 || count > 2) && sides.size() >= 1)
+			if(!isBelowAir && (count > 2) && sides.size() >= 1)
 			{
 				switch((Integer)sides.get(random.nextInt(sides.size())))
 				{
 				case 0:
 				{
+					world.setBlockToAir(i, j, k);
 					world.setBlock(i+1, j, k, blockID, meta, 0x2);
 					tryToFall(world, i+1, j, k);
-					world.setBlockToAir(i,j,k);//world.func_94571_i(i, j, k);
 					break;
 				}
 				case 1:
 				{
-					world.setBlock(i, j, k+1, blockID,meta, 0x2);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k+1, blockID, meta, 0x2);
 					tryToFall(world, i, j, k+1);
-					world.setBlockToAir(i,j,k);
 					break;
 				}
 				case 2:
 				{
-					world.setBlock(i-1, j, k, blockID,meta, 0x2);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i-1, j, k, blockID, meta, 3);
 					tryToFall(world, i-1, j, k);
-					world.setBlockToAir(i,j,k);
 					break;
 				}
 				case 3:
 				{
-					world.setBlock(i, j, k-1, blockID,meta, 0x2);
+					world.setBlockToAir(i, j, k);
+					world.setBlock(i, j, k-1, blockID, meta, 3);
 					tryToFall(world, i, j, k-1);
-					world.setBlockToAir(i,j,k);
 					break;
 				}
 				}
 
+			}
+			else if(isBelowAir)
+			{
+				tryToFall(world, i, j, k);
 			}
 		}
 	}
@@ -236,11 +219,7 @@ public class BlockSand extends BlockTerra
 	{
 		if(!world.isRemote)
 		{
-			if(world.getBlockId(i, j-1, k) == 0)
-			{
-				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlock(i, j-1, k, blockID, meta, 0x2);
-			}
+			tryToFall(world, i, j, k);
 			world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
 		}
 	}

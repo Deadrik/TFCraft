@@ -53,7 +53,9 @@ public class TileEntityCrop extends NetworkTileEntity
 					if(sunLevel > 30) sunLevel = 30;
 				}
 				
-				TileEntityFarmland tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+				TileEntityFarmland tef = null;
+				if(worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) != null)
+					tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
 
 				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
 				float tempAdded = 0;
