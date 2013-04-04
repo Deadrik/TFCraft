@@ -15,6 +15,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import org.lwjgl.opengl.GL11;
 
 import TFC.TFCBlocks;
+import TFC.Blocks.BlockBellows;
 import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.BlockSluice;
 import TFC.Core.TFC_Settings;
@@ -357,13 +358,13 @@ public class TFC_CoreRender
 
 	public static boolean renderBellows(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		/*IBlockAccess blockAccess = renderblocks.blockAccess;
+		IBlockAccess blockAccess = renderblocks.blockAccess;
 
         int meta = blockAccess.getBlockMetadata(i, j, k);
         int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
 
         boolean breaking = false;
-        if(renderblocks.overrideBlockTexture >= 240)
+        if(renderblocks.overrideBlockTexture != null)
         {
         	breaking = true;
         }
@@ -371,74 +372,74 @@ public class TFC_CoreRender
         if(direction == 0)
         {
             //forward
-        	if(!breaking) renderblocks.overrideBlockTexture = 86;
+        	if(!breaking) renderblocks.overrideBlockTexture = BlockBellows.BellowsFront;
             renderblocks.setRenderBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
-            if(!breaking) renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.clearOverrideBlockTexture();
             renderblocks.setRenderBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
-            if(!breaking) renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = BlockBellows.BellowsBack;
             renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
-            renderblocks.overrideBlockTexture = -1;
+            renderblocks.clearOverrideBlockTexture();
         }
         else if(direction == 1)
         {
             //forward
-        	if(!breaking) renderblocks.overrideBlockTexture = 86;
+        	if(!breaking) renderblocks.overrideBlockTexture = BlockBellows.BellowsFront;
             renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
-            if(!breaking) renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.clearOverrideBlockTexture();
             renderblocks.setRenderBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
-            if(!breaking) renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = BlockBellows.BellowsBack;
             renderblocks.setRenderBounds(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
-            renderblocks.overrideBlockTexture = -1;
+            renderblocks.clearOverrideBlockTexture();
 
         }
         else if(direction == 2)
         {
             //forward
-        	if(!breaking) renderblocks.overrideBlockTexture = 86;
+        	if(!breaking) renderblocks.overrideBlockTexture = BlockBellows.BellowsFront;
             renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.1F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //mid
-            if(!breaking) renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.clearOverrideBlockTexture();
             renderblocks.setRenderBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
             renderblocks.renderStandardBlock(block, i, j, k);
             //back
-            if(!breaking) renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture =BlockBellows.BellowsBack;
             renderblocks.setRenderBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
-            renderblocks.overrideBlockTexture = -1;
+            renderblocks.clearOverrideBlockTexture();
         }
         else if(direction == 3)
         {
             //forward
-        	if(!breaking)  renderblocks.overrideBlockTexture = 86;
+        	if(!breaking)  renderblocks.overrideBlockTexture = BlockBellows.BellowsFront;
             renderblocks.setRenderBounds(0.9F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //mid
-            if(!breaking) renderblocks.overrideBlockTexture = -1;
+            if(!breaking) renderblocks.clearOverrideBlockTexture();
             renderblocks.setRenderBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
             renderblocks.renderStandardBlock(block, i, j, k);
 
             //back
-            if(!breaking) renderblocks.overrideBlockTexture = 87;
+            if(!breaking) renderblocks.overrideBlockTexture = BlockBellows.BellowsBack;
             renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 0.1F, 1.0F, 1.0F);
             renderblocks.renderStandardBlock(block, i, j, k);
-            renderblocks.overrideBlockTexture = -1;
+            renderblocks.clearOverrideBlockTexture();
         }
 
-        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);*/
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		return true;
 	}
 

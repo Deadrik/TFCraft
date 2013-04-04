@@ -17,11 +17,6 @@ import TFC.TileEntities.TileEntityFireEntity;
 
 public class BlockBellows extends BlockTerra
 {
-	private int meta;
-	private int xCoord;
-	private int yCoord;
-	private int zCoord;
-
 	public static final int blockMap[][] = {
 		{
 			0, 1
@@ -47,11 +42,6 @@ public class BlockBellows extends BlockTerra
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
-
 		if(world.isRemote)
 		{
 			return true;
@@ -188,9 +178,9 @@ public class BlockBellows extends BlockTerra
 		return Sides[0];
 	}
 	
-	Icon[] Sides = new Icon[4];
-	Icon BellowsFront;
-	Icon BellowsBack;
+	public static Icon[] Sides = new Icon[4];
+	public static Icon BellowsFront;
+	public static Icon BellowsBack;
 
 	@Override
 	public void registerIcons(IconRegister registerer)
@@ -257,31 +247,8 @@ public class BlockBellows extends BlockTerra
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
 	{
-		meta = world.getBlockMetadata(i, j, k);
-		xCoord = i;
-		yCoord = j;
-		zCoord = k;
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
-		byte byte0 = 0;
-		byte byte1 = 0;
-		if(l == 0)//+z
-		{
-			byte1 = 1;
-		}
-		if(l == 1)//-x
-		{
-			byte0 = -1;
-		}
-		if(l == 2)//-z
-		{
-			byte1 = -1;
-		}
-		if(l == 3)//+x
-		{
-			byte0 = 1;
-		}
-		world.setBlockMetadataWithNotify(i, j, k, l, 3);
-
+		world.setBlockMetadataWithNotify(i, j, k, l, 0x2);
 	}
 
 	@Override

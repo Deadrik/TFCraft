@@ -1,39 +1,15 @@
 package TFC.Blocks;
 
-import java.math.MathContext;
 import java.util.Random;
-import TFC.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFluid;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
 
 public class BlockFiniteWater extends BlockFluid
 {
@@ -58,7 +34,8 @@ public class BlockFiniteWater extends BlockFluid
     /**
      * Returns whether this block is collideable based on the arguments passed in Args: blockMetaData, unknownFlag
      */
-    public boolean canCollideCheck(int par1, boolean par2)
+    @Override
+	public boolean canCollideCheck(int par1, boolean par2)
     {
         return par2;
     }
@@ -66,9 +43,10 @@ public class BlockFiniteWater extends BlockFluid
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
+    @Override
+	public int getRenderType()
     {
-        return TFCBlocks.finiteWaterRenderId;
+        return 4;//TFCBlocks.finiteWaterRenderId;
     }
     
     @Override
@@ -513,14 +491,14 @@ public class BlockFiniteWater extends BlockFluid
                     if (l1 >= 0)
                     {
                         i2 = l1 - (l - 8);
-                        vec3 = vec3.addVector((double)((j1 - par2) * i2), (double)((par3 - par3) * i2), (double)((k1 - par4) * i2));
+                        vec3 = vec3.addVector((j1 - par2) * i2, (par3 - par3) * i2, (k1 - par4) * i2);
                     }
                 }
             }
             else if (l1 >= 0)
             {
                 i2 = l1 - l;
-                vec3 = vec3.addVector((double)((j1 - par2) * i2), (double)((par3 - par3) * i2), (double)((k1 - par4) * i2));
+                vec3 = vec3.addVector((j1 - par2) * i2, (par3 - par3) * i2, (k1 - par4) * i2);
             }
         }
 
@@ -581,7 +559,8 @@ public class BlockFiniteWater extends BlockFluid
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
-    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    @Override
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         int var6;
         if (par5Random.nextInt(10) == 0)
@@ -590,7 +569,7 @@ public class BlockFiniteWater extends BlockFluid
 
             if (var6 <= 0 || var6 >= 8)
             {
-                par1World.spawnParticle("suspended", (double)((float)par2 + par5Random.nextFloat()), (double)((float)par3 + par5Random.nextFloat()), (double)((float)par4 + par5Random.nextFloat()), 0.0D, 0.0D, 0.0D);
+                par1World.spawnParticle("suspended", par2 + par5Random.nextFloat(), par3 + par5Random.nextFloat(), par4 + par5Random.nextFloat(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -623,28 +602,28 @@ public class BlockFiniteWater extends BlockFluid
             if (par1World.getBlockMaterial(var8, par3, var9) == Material.air && (par1World.getBlockMaterial(var8, par3 - 1, var9).blocksMovement() || par1World.getBlockMaterial(var8, par3 - 1, var9).isLiquid()))
             {
                 float var10 = 0.0625F;
-                double var11 = (double)((float)par2 + par5Random.nextFloat());
-                double var13 = (double)((float)par3 + par5Random.nextFloat());
-                double var15 = (double)((float)par4 + par5Random.nextFloat());
+                double var11 = par2 + par5Random.nextFloat();
+                double var13 = par3 + par5Random.nextFloat();
+                double var15 = par4 + par5Random.nextFloat();
 
                 if (var7 == 0)
                 {
-                    var11 = (double)((float)par2 - var10);
+                    var11 = par2 - var10;
                 }
 
                 if (var7 == 1)
                 {
-                    var11 = (double)((float)(par2 + 1) + var10);
+                    var11 = par2 + 1 + var10;
                 }
 
                 if (var7 == 2)
                 {
-                    var15 = (double)((float)par4 - var10);
+                    var15 = par4 - var10;
                 }
 
                 if (var7 == 3)
                 {
-                    var15 = (double)((float)(par4 + 1) + var10);
+                    var15 = par4 + 1 + var10;
                 }
 
                 double var17 = 0.0D;
@@ -652,22 +631,22 @@ public class BlockFiniteWater extends BlockFluid
 
                 if (var7 == 0)
                 {
-                    var17 = (double)(-var10);
+                    var17 = (-var10);
                 }
 
                 if (var7 == 1)
                 {
-                    var17 = (double)var10;
+                    var17 = var10;
                 }
 
                 if (var7 == 2)
                 {
-                    var19 = (double)(-var10);
+                    var19 = (-var10);
                 }
 
                 if (var7 == 3)
                 {
-                    var19 = (double)var10;
+                    var19 = var10;
                 }
 
                 par1World.spawnParticle("splash", var11, var13, var15, var17, 0.0D, var19);
@@ -680,7 +659,7 @@ public class BlockFiniteWater extends BlockFluid
 
             if (var6 == 7)
             {
-                par1World.playSoundEffect((double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), "liquid.water", par5Random.nextFloat() * 0.25F + 0.75F, par5Random.nextFloat() * 1.0F + 0.5F);
+                par1World.playSoundEffect(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "liquid.water", par5Random.nextFloat() * 0.25F + 0.75F, par5Random.nextFloat() * 1.0F + 0.5F);
             }
         }
 
@@ -690,9 +669,9 @@ public class BlockFiniteWater extends BlockFluid
 
         if (par5Random.nextInt(10) == 0 && par1World.isBlockNormalCube(par2, par3 - 1, par4) && !par1World.getBlockMaterial(par2, par3 - 2, par4).blocksMovement())
         {
-            var21 = (double)((float)par2 + par5Random.nextFloat());
-            var22 = (double)par3 - 1.05D;
-            var23 = (double)((float)par4 + par5Random.nextFloat());
+            var21 = par2 + par5Random.nextFloat();
+            var22 = par3 - 1.05D;
+            var23 = par4 + par5Random.nextFloat();
             par1World.spawnParticle("dripWater", var21, var22, var23, 0.0D, 0.0D, 0.0D);
         }
     }

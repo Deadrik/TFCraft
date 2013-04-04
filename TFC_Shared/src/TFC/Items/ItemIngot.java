@@ -115,17 +115,18 @@ public class ItemIngot extends ItemTerra
 
 		boolean fullStack = true;
 
-		TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
+		TileEntityIngotPile te = null;
 
-		if (world.getBlockId(x,y,z) == TFCBlocks.IngotPile.blockID)
+		if (world.getBlockTileEntity(x, y, z) instanceof TileEntityIngotPile && world.getBlockId(x,y,z) == TFCBlocks.IngotPile.blockID)
 		{
+			te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
 			if (te.contentsMatch(0,itemstack) && te.getStackInSlot(0).stackSize < te.getInventoryStackLimit()){
 
 				fullStack = false;
-				((TileEntityIngotPile)(world.getBlockTileEntity(x, y, z))).injectContents(0,1);
+				te.injectContents(0,1);
 			}
-
 		}
+		else{fullStack = true;}
 
 		if(fullStack)
 		{
@@ -253,7 +254,6 @@ public class ItemIngot extends ItemTerra
 		if(entityplayer.isSneaking() &&  !world.isRemote )
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-
 			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
 			{
 

@@ -22,7 +22,7 @@ public class BlockFlora extends BlockTerra
 		super(id, Material.plants);
 		MetaNames = new String[]{"Golden Rod", "Cat Tails"};
 		icons = new Icon[MetaNames.length];
-		this.setBlockBounds(0.3f, 0.3f, 0.3f, 0.7f, 0.7f, 0.7f);
+		this.setBlockBounds(0.3f, 0.0f, 0.3f, 0.7f, 0.7f, 0.7f);
 	}
 	
 	@Override
@@ -78,6 +78,14 @@ public class BlockFlora extends BlockTerra
         		par1World.canBlockSeeTheSky(par2, par3, par4)) && 
         		this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
     }
+    
+    @Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
+	{
+		super.onNeighborBlockChange(world, i, j, k, par5);
+		if(!canBlockStay(world,i,j,k))
+			world.setBlock(i, j, k, 0);
+	}
     
     protected boolean canThisPlantGrowOnThisBlockID(int par1)
     {
