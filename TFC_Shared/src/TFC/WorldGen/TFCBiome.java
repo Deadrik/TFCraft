@@ -3,53 +3,56 @@ package TFC.WorldGen;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import TFC.TFCBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.SpawnListEntry;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Time;
 import TFC.Core.WeatherManager;
-import TFC.Entities.*;
-import TFC.Entities.Mobs.*;
-import TFC.WorldGen.Biomes.*;
-import TFC.WorldGen.Generators.*;
-import TFC.WorldGen.Generators.Trees.*;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenHell;
-import net.minecraft.world.biome.SpawnListEntry;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntityCreeperTFC;
+import TFC.Entities.Mobs.EntityEndermanTFC;
+import TFC.Entities.Mobs.EntityPigTFC;
+import TFC.Entities.Mobs.EntitySheepTFC;
+import TFC.Entities.Mobs.EntitySkeletonTFC;
+import TFC.Entities.Mobs.EntitySlimeTFC;
+import TFC.Entities.Mobs.EntitySpiderTFC;
+import TFC.Entities.Mobs.EntitySquidTFC;
+import TFC.Entities.Mobs.EntityZombieTFC;
+import TFC.WorldGen.Biomes.BiomeGenBeachTFC;
+import TFC.WorldGen.Biomes.BiomeGenDesertTFC;
+import TFC.WorldGen.Biomes.BiomeGenForestTFC;
+import TFC.WorldGen.Biomes.BiomeGenHellTFC;
+import TFC.WorldGen.Biomes.BiomeGenHillsEdgeTFC;
+import TFC.WorldGen.Biomes.BiomeGenHillsTFC;
+import TFC.WorldGen.Biomes.BiomeGenJungleTFC;
+import TFC.WorldGen.Biomes.BiomeGenOceanTFC;
+import TFC.WorldGen.Biomes.BiomeGenPlainsTFC;
+import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
+import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
+import TFC.WorldGen.Biomes.BiomeGenTaigaTFC;
+import TFC.WorldGen.Generators.WorldGenCustomShrub;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomBigTree;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomMapleShortTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomMapleTallTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomTallTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
+import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
+import TFC.WorldGen.Generators.Trees.WorldGenPineShort;
+import TFC.WorldGen.Generators.Trees.WorldGenPineTall;
+import TFC.WorldGen.Generators.Trees.WorldGenRedwoodXL;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFCBiome extends BiomeGenBase
 {
@@ -189,6 +192,7 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 4, 4));
 		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
 
+		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 4, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityZombieTFC.class, 10, 4, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonTFC.class, 10, 4, 4));
@@ -200,6 +204,7 @@ public class TFCBiome extends BiomeGenBase
 	/**
 	 * Allocate a new BiomeDecorator for this BiomeGenBase
 	 */
+	@Override
 	public BiomeDecorator createBiomeDecorator()
 	{
 		return new BiomeDecoratorTFC(this);
@@ -230,6 +235,7 @@ public class TFCBiome extends BiomeGenBase
 		return this;
 	}
 
+	@Override
 	public TFCBiome setBiomeName(String par1Str)
 	{
 		this.biomeName = par1Str;
@@ -251,6 +257,7 @@ public class TFCBiome extends BiomeGenBase
 	/**
 	 * Disable the rain for the biome.
 	 */
+	@Override
 	public TFCBiome setDisableRain()
 	{
 		ObfuscationReflectionHelper.setPrivateValue(BiomeGenBase.class, this, false, 39);
@@ -345,6 +352,7 @@ public class TFCBiome extends BiomeGenBase
 			return this.rainfall;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Provides the basic grass color based on the biome temperature and rainfall
@@ -353,14 +361,15 @@ public class TFCBiome extends BiomeGenBase
 	{
 		if(TFC_Time.currentMonth < 6)
 		{
-			double var1 = (double)Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
-			double var3 = (double)Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
+			double var1 = Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
+			double var3 = Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
 			return ColorizerGrassTFC.getGrassColor(var1, var3);
 		}
 		else
 			return ColorizerGrassTFC.getGrassDead();
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * Provides the basic foliage color based on the biome temperature and rainfall
@@ -369,8 +378,8 @@ public class TFCBiome extends BiomeGenBase
 	{
 		if(TFC_Time.currentMonth < 9)
 		{
-			double var1 = (double)Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
-			double var3 = (double)Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
+			double var1 = Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
+			double var3 = Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
 		}
 		else
@@ -571,7 +580,7 @@ public class TFCBiome extends BiomeGenBase
 		}
 		case 15:
 		{
-			return (WorldGenerator)( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
+			return ( (R.nextInt(2) == 0 ? new WorldGenCustomShrub(15, 15) : (R.nextInt(3) == 0 ? new WorldGenCustomHugeTrees(false, 10 + R.nextInt(20), 15, 15) : new WorldGenCustomShortTrees(false, 15))));
 		}
 		}
 		return null;
@@ -579,7 +588,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public WorldGenerator getRandomWorldGenForTrees(Random randomGenerator,World currentWorld) 
 	{
-		return (WorldGenerator)(randomGenerator.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);
+		return randomGenerator.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees;
 	}
 
 	public TFCBiome GetBiomeByName(String name)

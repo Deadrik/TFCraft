@@ -126,26 +126,26 @@ public class CommonProxy implements IGuiHandler
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
 			
 		}
-		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
-		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
-		EntityRegistry.registerGlobalEntityID(EntityBear.class, "bear", ModLoader.getUniqueEntityId(), 0xd1d003, 0x101010);
-		EntityRegistry.registerGlobalEntityID(EntityChickenTFC.class, "chicken", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
-		EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "pig", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
-		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "squid", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
-		EntityRegistry.registerGlobalEntityID(EntityDeer.class, "deer", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "skeleton", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityZombieTFC.class, "zombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntitySpiderTFC.class, "spider", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntitySlimeTFC.class, "slime", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntitySilverfishTFC.class, "silverfish", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityGhastTFC.class, "ghast", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityCaveSpiderTFC.class, "cavespider", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityBlazeTFC.class, "blaze", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityEndermanTFC.class, "enderman", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "pigzombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "Cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
+		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "Sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
+		EntityRegistry.registerGlobalEntityID(EntityBear.class, "Bear", ModLoader.getUniqueEntityId(), 0xd1d003, 0x101010);
+		EntityRegistry.registerGlobalEntityID(EntityChickenTFC.class, "Chicken", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
+		EntityRegistry.registerGlobalEntityID(EntityPigTFC.class, "Pig", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
+		EntityRegistry.registerGlobalEntityID(EntitySquidTFC.class, "Squid", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
+		EntityRegistry.registerGlobalEntityID(EntityDeer.class, "Deer", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityCustomMinecart.class, "minecart", ModLoader.getUniqueEntityId());
+		EntityRegistry.registerGlobalEntityID(EntitySkeletonTFC.class, "Skeleton", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityZombieTFC.class, "Zombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySpiderTFC.class, "Spider", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySlimeTFC.class, "Slime", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntitySilverfishTFC.class, "Silverfish", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityGhastTFC.class, "Ghast", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityCaveSpiderTFC.class, "CaveSpider", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityBlazeTFC.class, "Blaze", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityEndermanTFC.class, "Enderman", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityPigZombieTFC.class, "PigZombie", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityIronGolemTFC.class, "irongolem", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
-		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
+		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "Creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityArrowTFC.class, "arrow", ModLoader.getUniqueEntityId());
 
 		EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);

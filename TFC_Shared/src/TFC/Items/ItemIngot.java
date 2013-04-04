@@ -1,12 +1,9 @@
 package TFC.Items;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -34,14 +31,21 @@ public class ItemIngot extends ItemTerra
 		super(i);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 		MetalType = metalType;
-		try {
+		/*try {
 			bi= ImageIO.read(new File("/textures/blocks/metal/"+metalTypes[MetalType.MetalID]+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		this.setFolder("ingots/");
 
 	}
+	
+	@Override
+	public void updateIcons(IconRegister registerer)
+    {
+		this.iconIndex = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+    }
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean requiresMultipleRenderPasses()

@@ -1,43 +1,10 @@
 package TFC.Render.Blocks;
 
-import org.lwjgl.opengl.GL11;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraftforge.client.ForgeHooksClient;
-import TFC.TFCBlocks;
-import TFC.Render.TFC_CoreRender;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import TFC.TileEntities.TileEntityDetailed;
-import TFC.TileEntities.TileEntityPartial;
 
 public class RenderDetailed 
 {
@@ -149,12 +116,12 @@ public class RenderDetailed
 
 		var8.setBrightness(renderblocks.renderMinY > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
 		var8.setColorOpaque_F(var17, var20, var23);
-		renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3, (double)par4, par1Block.getBlockTextureFromSideAndMetadata(0, meta));
+		renderblocks.renderBottomFace(par1Block, par2, par3, par4, par1Block.getBlockTextureFromSideAndMetadata(0, meta));
 
 
 		var8.setBrightness(renderblocks.renderMaxY < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 + 1, par4));
 		var8.setColorOpaque_F(var14, var15, var16);
-		renderblocks.renderTopFace(par1Block, (double)par2, (double)par3, (double)par4, par1Block.getBlockTextureFromSideAndMetadata(1, meta));
+		renderblocks.renderTopFace(par1Block, par2, par3, par4, par1Block.getBlockTextureFromSideAndMetadata(1, meta));
 
 
 		Icon var28;
@@ -163,27 +130,27 @@ public class RenderDetailed
 		var8.setColorOpaque_F(var18, var21, var24);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(2, meta);
 
-		renderblocks.renderEastFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
+		renderblocks.renderEastFace(par1Block, par2, par3, par4, var28);
 
 		var8.setBrightness(renderblocks.renderMinX < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4 + 1));
 		var8.setColorOpaque_F(var18, var21, var24);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(3, meta);
 
-		renderblocks.renderWestFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
+		renderblocks.renderWestFace(par1Block, par2, par3, par4, var28);
 
 
 		var8.setBrightness(renderblocks.renderMinZ > 0.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 - 1, par3, par4));
 		var8.setColorOpaque_F(var19, var22, var25);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(4, meta);
 
-		renderblocks.renderNorthFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
+		renderblocks.renderNorthFace(par1Block, par2, par3, par4, var28);
 
 
 		var8.setBrightness(renderblocks.renderMaxZ < 1.0D ? var26 : par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2 + 1, par3, par4));
 		var8.setColorOpaque_F(var19, var22, var25);
 		var28 = par1Block.getBlockTextureFromSideAndMetadata(5, meta);
 
-		renderblocks.renderSouthFace(par1Block, (double)par2, (double)par3, (double)par4, var28);
+		renderblocks.renderSouthFace(par1Block, par2, par3, par4, var28);
 
 		return true;
 	}

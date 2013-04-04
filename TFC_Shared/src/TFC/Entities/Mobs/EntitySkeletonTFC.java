@@ -1,53 +1,58 @@
 package TFC.Entities.Mobs;
 
-import TFC.*;
-import TFC.Entities.EntityArrowTFC;
 import java.util.Calendar;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
+
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderHell;
+import TFC.TFCItems;
+import TFC.Entities.EntityArrowTFC;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySkeletonTFC extends EntitySkeleton
 {
     public EntitySkeletonTFC(World par1World)
     {
         super(par1World);
+        this.func_94058_c("");
+        this.func_94061_f(false);
+    }
+    
+    @Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+    	super.writeEntityToNBT(par1NBTTagCompound);
+    	par1NBTTagCompound.setBoolean("CustomNameVisible", false);
+    	
     }
     @Override
     public int getMaxHealth()
     {
         return 1000;
     }
+    
+    @Override
+	public String getEntityName()
+    {
+        return "";
+    }
+    
     @Override
     public void onEntityUpdate()
     {
@@ -210,12 +215,12 @@ public class EntitySkeletonTFC extends EntitySkeleton
     	EntityArrowTFC var2 = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
-        var2.setDamage((double)(par2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting * 0.11F));
+        var2.setDamage(par2 * 2.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
 
         
         if (var3 > 0)
         {
-            var2.setDamage(var2.getDamage() + (double)var3 * 0.5D + 0.5D);
+            var2.setDamage(var2.getDamage() + var3 * 0.5D + 0.5D);
         }
 
         if (var4 > 0)
