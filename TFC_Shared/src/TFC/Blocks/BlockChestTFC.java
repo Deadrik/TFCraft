@@ -362,7 +362,7 @@ public class BlockChestTFC extends BlockTerraContainer
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-        TileEntityChest tileentitychest = (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4);
+        TileEntityChestTFC tileentitychest = (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4);
 
         if (tileentitychest != null)
         {
@@ -477,22 +477,22 @@ public class BlockChestTFC extends BlockTerraContainer
         {
             if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID)
             {
-                object = new InventoryLargeChest("container.chestDouble", (TileEntityChest)par1World.getBlockTileEntity(par2 - 1, par3, par4), (IInventory)object);
+                object = new InventoryLargeChest("container.chestDouble", (TileEntityChestTFC)par1World.getBlockTileEntity(par2 - 1, par3, par4), (IInventory)object);
             }
 
             if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID)
             {
-                object = new InventoryLargeChest("container.chestDouble", (IInventory)object, (TileEntityChest)par1World.getBlockTileEntity(par2 + 1, par3, par4));
+                object = new InventoryLargeChest("container.chestDouble", (IInventory)object, (TileEntityChestTFC)par1World.getBlockTileEntity(par2 + 1, par3, par4));
             }
 
             if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID)
             {
-                object = new InventoryLargeChest("container.chestDouble", (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4 - 1), (IInventory)object);
+                object = new InventoryLargeChest("container.chestDouble", (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4 - 1), (IInventory)object);
             }
 
             if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID)
             {
-                object = new InventoryLargeChest("container.chestDouble", (IInventory)object, (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4 + 1));
+                object = new InventoryLargeChest("container.chestDouble", (IInventory)object, (TileEntityChestTFC)par1World.getBlockTileEntity(par2, par3, par4 + 1));
             }
 
             return (IInventory)object;

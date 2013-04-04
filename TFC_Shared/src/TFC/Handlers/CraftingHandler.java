@@ -19,7 +19,7 @@ public class CraftingHandler implements ICraftingHandler
 	{
 		int index = 0;
 
-		if(iinventory != null && !entityplayer.worldObj.isRemote)
+		if(iinventory != null)
 		{
 			if(itemstack.itemID == TFCItems.StoneBrick.itemID)
 			{
@@ -40,7 +40,7 @@ public class CraftingHandler implements ICraftingHandler
 					|| itemstack.itemID == TFCItems.Wool.itemID||itemstack.itemID == TFCItems.TerraLeather.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Knives);
-				if(itemstack.itemID == TFCItems.Wool.itemID&& !entityplayer.worldObj.isRemote){
+				if (itemstack.itemID == TFCItems.Wool.itemID && !entityplayer.worldObj.isRemote){
 					entityplayer.dropItem(TFCItems.Hide.itemID, 1);
 				}
 				else if(itemstack.itemID == TFCItems.TerraLeather.itemID){

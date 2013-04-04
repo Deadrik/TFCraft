@@ -57,10 +57,6 @@ public class RenderDetailed
 			breaking = true;
 		}
 
-		if(!breaking)
-			renderblocks.overrideBlockTexture = Block.blocksList[type].getBlockTexture(renderblocks.blockAccess, i, j, k, meta);
-
-
 		for(int subX = 0; subX < 2; subX++)
 		{
 			for(int subZ = 0; subZ < 2; subZ++)
@@ -79,7 +75,7 @@ public class RenderDetailed
 						float maxZ = minZ + 0.5f;
 
 						renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 0.95f, 0.95f, 0.95f, meta);
+						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 1f, 1f, 1f, meta);
 					}
 				}
 			}
@@ -107,7 +103,7 @@ public class RenderDetailed
 						float maxZ = minZ + 0.125f;
 
 						renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
-						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 0.95f, 0.95f, 0.95f, meta);
+						renderStandardBlockWithColorMultiplier(Block.blocksList[type], renderblocks, i, j, k, 1f, 1f, 1f, meta);
 					}
 				}
 			}
