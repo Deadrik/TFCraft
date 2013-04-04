@@ -40,17 +40,13 @@ public class GuiKnapping extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		//guiLeft = (width - 208) / 2;
-		//guiTop = (height - 198) / 2;
-
 		buttonList.clear();
 		
-		for (int x = 0; x < 5; x++)
+		for (int y = 0; y < 5; y++)
 		{
-			for (int y = 0; y < 5; y++)
+			for (int x = 0; x < 5; x++)
 			{
-				buttonList.add(new GuiKnappingButton(x*5+y, guiLeft+(x*16)+5, guiTop + (y*16)-5, 16, 16));
-				//addSlotToContainer(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
+				buttonList.add(new GuiKnappingButton(x+(y*5), guiLeft+(x*16)+5, guiTop + (y*16)-5, 16, 16));
 			}
 		}
 	}
@@ -61,8 +57,6 @@ public class GuiKnapping extends GuiContainer
     	((GuiKnappingButton) this.buttonList.get(guibutton.id)).drawButton = false;
     	((GuiKnappingButton) this.buttonList.get(guibutton.id)).enabled = false;
     	TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket(guibutton.id));
-    	((ContainerKnapping)player.openContainer).craftMatrix.setInventorySlotContents(guibutton.id, null);
-		((ContainerKnapping)player.openContainer).onCraftMatrixChanged(((ContainerKnapping)player.openContainer).craftMatrix);
 	}
 
     public Packet createUpdatePacket(int id)
