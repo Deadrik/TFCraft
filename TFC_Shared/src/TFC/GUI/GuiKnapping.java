@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
@@ -21,12 +20,12 @@ import TFC.Handlers.PacketHandler;
 
 public class GuiKnapping extends GuiContainer
 {
-	private EntityPlayer player;
+	public boolean[] craftingArea;
 	
     public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
     {
         super(new ContainerKnapping(inventoryplayer, is, world, x, y, z));
-        player = inventoryplayer.player;
+        craftingArea = new boolean[25];
     }
 
     @Override
@@ -39,13 +38,17 @@ public class GuiKnapping extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
+		//guiLeft = (width - 208) / 2;
+		//guiTop = (height - 198) / 2;
+
 		buttonList.clear();
 		
-		for (int y = 0; y < 5; y++)
+		for (int x = 0; x < 5; x++)
 		{
-			for (int x = 0; x < 5; x++)
+			for (int y = 0; y < 5; y++)
 			{
-				buttonList.add(new GuiKnappingButton(x+(y*5), guiLeft+(x*16)+5, guiTop + (y*16)-5, 16, 16));
+				buttonList.add(new GuiKnappingButton(x*5+y, guiLeft+(x*16)+5, guiTop + (y*16)-5, 16, 16));
+				//addSlotToContainer(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
 			}
 		}
 	}
@@ -53,15 +56,11 @@ public class GuiKnapping extends GuiContainer
     @Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
-    	resetButton(guibutton.id);
+    	craftingArea[guibutton.id] = true;
+    	((GuiKnappingButton) this.buttonList.get(guibutton.id)).drawButton = false;
+    	((GuiKnappingButton) this.buttonList.get(guibutton.id)).enabled = false;
     	TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket(guibutton.id));
 	}
-    
-    public void resetButton(int id)
-    {
-    	((GuiKnappingButton) this.buttonList.get(id)).drawButton = false;
-    	((GuiKnappingButton) this.buttonList.get(id)).enabled = false;
-    }
 
     public Packet createUpdatePacket(int id)
 	{
