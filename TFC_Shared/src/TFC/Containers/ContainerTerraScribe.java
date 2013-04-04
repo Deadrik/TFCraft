@@ -9,7 +9,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TFC.TFCItems;
 import TFC.Core.CraftingManagerTFC;
 import TFC.GUI.GuiTerraScribe;
 import TFC.TileEntities.TileEntityTerraScribe;
@@ -102,7 +101,7 @@ public class ContainerTerraScribe extends ContainerTFC
 	{
 		//Check if there is paper in the paper slot.
 		
-		if(te!=null){
+		/*if(te!=null){
 			te.initGui();
 			}
 		if(terraScribe.scribeItemStacks[1] != null && 
@@ -111,7 +110,7 @@ public class ContainerTerraScribe extends ContainerTFC
 			//craftResult.setInventorySlotContents(0,temp); 
 			//if(!worldObj.isRemote)terraScribe.scribeItemStacks[1]= null;
 			
-		}
+		}*/
 		if(terraScribe.scribeItemStacks[1] != null && 
 				terraScribe.scribeItemStacks[1].getItem() == Item.paper) {
 			craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(craftMatrix, worldObj));
@@ -122,7 +121,7 @@ public class ContainerTerraScribe extends ContainerTFC
 		}
 	}
 	
-	@Override
+	/*@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
@@ -257,7 +256,7 @@ public class ContainerTerraScribe extends ContainerTFC
 			}
 		}
 		return itemstack;
-	}
+	}*/
 	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
