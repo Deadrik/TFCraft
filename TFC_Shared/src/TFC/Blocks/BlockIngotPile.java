@@ -2,9 +2,6 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -19,6 +16,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockIngotPile extends BlockTerraContainer
 {
@@ -95,7 +94,8 @@ public class BlockIngotPile extends BlockTerraContainer
 		int direction = getDirectionFromMetadata(meta);
 		TileEntityIngotPile te = (TileEntityIngotPile)par1World.getBlockTileEntity(par2, par3, par4);
 
-		if (te.getStackInSlot(0)!=null){
+		if (te != null && te.getStackInSlot(0) != null)
+		{
 
 			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
 		}
