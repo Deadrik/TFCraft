@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
@@ -21,11 +22,12 @@ import TFC.Handlers.PacketHandler;
 public class GuiKnapping extends GuiContainer
 {
 	public boolean[] craftingArea;
+	private EntityPlayer player;
 	
     public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
     {
         super(new ContainerKnapping(inventoryplayer, is, world, x, y, z));
-        craftingArea = new boolean[25];
+        player = inventoryplayer.player;
     }
 
     @Override
@@ -56,10 +58,11 @@ public class GuiKnapping extends GuiContainer
     @Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
-    	craftingArea[guibutton.id] = true;
     	((GuiKnappingButton) this.buttonList.get(guibutton.id)).drawButton = false;
     	((GuiKnappingButton) this.buttonList.get(guibutton.id)).enabled = false;
     	TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket(guibutton.id));
+    	((ContainerKnapping)player.openContainer).craftMatrix.setInventorySlotContents(guibutton.id, null);
+		((ContainerKnapping)player.openContainer).onCraftMatrixChanged(((ContainerKnapping)player.openContainer).craftMatrix);
 	}
 
     public Packet createUpdatePacket(int id)
