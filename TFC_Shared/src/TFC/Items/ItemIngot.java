@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
@@ -251,7 +252,8 @@ public class ItemIngot extends ItemTerra
 			((EntityPlayerMP)entityplayer).mcServer.getConfigurationManager().sendChatMsg(entityplayer.username+" sniffs the ingot");
 
 		}
-		if(entityplayer.isSneaking() &&  !world.isRemote )
+		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
+		if(entityplayer.isSneaking() &&  !world.isRemote && !(stackTagCompound.hasKey("temperature")||stackTagCompound.hasKey("itemCraftingValue")) )
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
