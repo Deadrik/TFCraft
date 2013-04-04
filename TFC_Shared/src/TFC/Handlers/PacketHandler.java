@@ -342,7 +342,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					int X = dis.readInt();
 					int Y = dis.readInt();
 					int Z = dis.readInt();
-					TileEntityScribe te =(TileEntityScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
+					TileEntityTerraScribe te =(TileEntityTerraScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
 					te.scribeItemStacks[1]=null;
 				}
 			}*/
