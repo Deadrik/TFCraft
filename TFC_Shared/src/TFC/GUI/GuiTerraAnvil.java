@@ -1,43 +1,17 @@
 package TFC.GUI;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
-import TFC.*;
+
+import TFC.Containers.ContainerTerraAnvil;
 import TFC.Enums.CraftingRuleEnum;
-import TFC.Containers.*;
-import TFC.TileEntities.*;
+import TFC.TileEntities.TileEntityTerraAnvil;
 
 
 public class GuiTerraAnvil extends GuiContainer
@@ -52,6 +26,7 @@ public class GuiTerraAnvil extends GuiContainer
 
 	}
 
+	@Override
 	public void initGui()
 	{
 		super.initGui();
@@ -74,6 +49,7 @@ public class GuiTerraAnvil extends GuiContainer
 
 	}
 
+	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		if (guibutton.id == 0)
@@ -213,6 +189,7 @@ public class GuiTerraAnvil extends GuiContainer
 		return i >= slot.xDisplayPosition - 1 && i < slot.xDisplayPosition + 16 + 1 && j >= slot.yDisplayPosition - 1 && j < slot.yDisplayPosition + 16 + 1;
 	}
 
+	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
 	{
 		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
