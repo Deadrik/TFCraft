@@ -20,8 +20,15 @@ public class RenderFoodPrep
 		{
 			double height = 0.005;
 			
-			ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+			
 			Tessellator tessellator = Tessellator.instance;
+			
+			int state = tessellator.drawMode;
+			tessellator.draw();
+			tessellator.startDrawingQuads();
+			
+			ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+			
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 			tessellator.setColorRGBA_F(1, 1, 1, 1);
 			if(te.storage[0] != null)
@@ -96,6 +103,9 @@ public class RenderFoodPrep
 
 				tessellator.addTranslation(-0.5f, 0.0f, -0.5f);
 			}
+			tessellator.draw();				
+			tessellator.startDrawing(state);
+			ModLoader.getMinecraftInstance().renderEngine.bindTexture("/terrain.png");
 		}
 
 		renderblocks.clearOverrideBlockTexture();
