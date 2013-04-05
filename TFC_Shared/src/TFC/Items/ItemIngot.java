@@ -253,9 +253,8 @@ public class ItemIngot extends ItemTerra
 
 		}
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
-		if(entityplayer.isSneaking() &&  !world.isRemote && !(stackTagCompound.hasKey("temperature")||stackTagCompound.hasKey("itemCraftingValue")) )
-		if(entityplayer.isSneaking() &&  !world.isRemote && (stackTagCompound == null || 
-				(stackTagCompound != null && !(stackTagCompound.hasKey("temperature")||stackTagCompound.hasKey("itemCraftingValue")))) )
+
+		if(entityplayer.isSneaking() &&  !world.isRemote && stackTagCompound == null)
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
