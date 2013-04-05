@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -12,14 +14,17 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
+import TFC.Items.ItemTerra;
 
 public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 {
@@ -45,10 +50,38 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
 	}
+	
 
-	public void careForInventorySlot(int i, float startTemp)
+	public void careForInventorySlot()
 	{
-
+		
+		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra ){
+			if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("temperature")){
+				NBTTagCompound comp = itemstack.getTagCompound();
+				float temp = comp.getFloat("temperature");
+				while(liquidLevel >= 3 && temp >20){
+					temp-=100;
+					liquidLevel-=3;
+					if(temp>20){
+					comp.setFloat("temperature",temp);
+					itemstack.setTagCompound(comp);
+					}
+					if(temp < 20f){
+						Collection C = comp.getTags();
+						Iterator itr = C.iterator();
+						while(itr.hasNext())
+						{
+							Object tag = itr.next();
+							if(TFC_ItemHeat.canRemoveTag(tag, "temperature", NBTTagFloat.class))
+							{
+								itr.remove();
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	public static int[] getBarrels(){
 		return barrels;
@@ -69,10 +102,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	public void externalFireCheck()
 	{
+		
 		Random R = new Random();
+		careForInventorySlot();
 		if(sealed)
 		{
-
+			
 			//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
 			if(sealtimecounter == 0)
 			{
@@ -151,6 +186,13 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 			Type = 10;
 		}
+		if(Type==1 && itemstack.getItem() == Item.sugar){
+			itemstack.stackSize--;
+			if(itemstack.stackSize ==0){
+				itemstack=null;
+			}
+			Type = 11;
+		}
 		if(Type==2&&itemstack.getItem() == TFCItems.Hide){
 			itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
 			while(liquidLevel >= 5 && itemstack.stackSize >0){
@@ -206,6 +248,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			return "Rye (no use)";
 		case 10:
 			return "Sake (no use)";
+		case 11:
+			return "Rum (no use)";
 		default:
 			return "";
 		}
@@ -329,6 +373,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	{
 		if(!worldObj.isRemote)
 		{
+			careForInventorySlot();
 			if(sealed){
 				//entityplayer.closeScreen();
 				//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
@@ -539,7 +584,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					return true;
 				}
 				if(id == TFCItems.WheatGrain.itemID||id == TFCItems.BarleyGrain.itemID||id == TFCItems.RyeGrain.itemID||id == TFCItems.RiceGrain.itemID||
-						id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID){
+						id == TFCItems.Potato.itemID||id == TFCItems.RedApple.itemID||id == TFCItems.GreenApple.itemID||id == Item.sugar.itemID){
 					return true;
 				}
 			}
