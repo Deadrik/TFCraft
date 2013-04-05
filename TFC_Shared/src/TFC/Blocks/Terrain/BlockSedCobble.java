@@ -71,7 +71,7 @@ public class BlockSedCobble extends BlockTerra
 	 */
 	@Override
 	public int damageDropped(int i) {
-		return i+3;
+		return i;
 	}
 
 	@Override

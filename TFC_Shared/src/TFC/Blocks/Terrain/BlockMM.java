@@ -44,7 +44,7 @@ public class BlockMM extends BlockCollapsable
     @Override
     public int damageDropped(int i) 
     {
-        return i+17;
+        return i;
     }
 
     @Override

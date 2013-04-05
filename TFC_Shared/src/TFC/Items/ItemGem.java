@@ -3,6 +3,8 @@ package TFC.Items;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.StringTranslate;
 
 public class ItemGem extends ItemTerra
 {
@@ -33,8 +35,8 @@ public class ItemGem extends ItemTerra
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
-		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(gemNames[itemstack.getItemDamage()]).toString();
-		return s;
+		String s = new StringBuilder().append(getUnlocalizedName()).append(".").append(gemNames[itemstack.getItemDamage()]).toString();
+        return  s == null ? "" : StringTranslate.getInstance().translateNamedKey(StatCollector.translateToLocal(s)).trim();
 	}
 	
 	@Override

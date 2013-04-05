@@ -25,4 +25,8 @@ public class BlockClayGrass extends BlockGrass
         return Item.clay.itemID;
     }
 
+	public int quantityDropped(Random par1Random)
+	{
+		return par1Random.nextInt(4);
+	}
 }
