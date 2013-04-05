@@ -78,6 +78,7 @@ import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Blocks.Vanilla.BlockCustomVine;
 import TFC.Blocks.Vanilla.BlockCustomWall;
 import TFC.Core.TFC_Settings;
+import TFC.Items.ItemToolRack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class TFCBlocks 
@@ -331,7 +332,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
 		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
 		
-		GameRegistry.registerBlock(ToolRack, "ToolRack");
+		GameRegistry.registerBlock(ToolRack, ItemToolRack.class,"ToolRack");
 		GameRegistry.registerBlock(SpawnMeter, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
 		GameRegistry.registerBlock(Quern, "Quern");
@@ -543,7 +544,7 @@ public class TFCBlocks
 		WoodHoriz = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz", 2019), 0).setUnlocalizedName("WoodHoriz").setHardness(40).setResistance(15F);
 		WoodHoriz2 = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz2", 2020), 8).setUnlocalizedName("WoodHoriz2").setHardness(40).setResistance(15F);
 		
-		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setUnlocalizedName("ToolRack");
+		ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setUnlocalizedName("Toolrack");
 		SpawnMeter = new BlockSpawnMeter(TFC_Settings.getIntFor(config,"block","SpawnMeter", 2022)).setHardness(3F).setUnlocalizedName("SpawnMeter");
 		FoodPrep = new BlockFoodPrep(TFC_Settings.getIntFor(config,"block","FoodPrep", 2023)).setHardness(1F).setUnlocalizedName("FoodPrep");
 		Quern = new BlockQuern(TFC_Settings.getIntFor(config,"block","Quern", 2024)).setHardness(3F).setUnlocalizedName("Quern");
