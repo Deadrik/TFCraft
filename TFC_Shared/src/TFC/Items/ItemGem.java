@@ -1,27 +1,31 @@
 package TFC.Items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 public class ItemGem extends ItemTerra
 {
-	public static String[] gemNames = {"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
 	private Icon[] icons = new Icon[5];
 	public ItemGem(int i) 
 	{
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		this.MetaNames = new String[]{"Chipped", "Flawed", "Normal", "Flawless", "Exquisite"};
 	}
 
-	public void addCreativeItems(java.util.ArrayList list)
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		list.add(new ItemStack(this,0, 0));
-		list.add(new ItemStack(this,0, 1));
-		list.add(new ItemStack(this,0, 2));
-		list.add(new ItemStack(this,0, 3));
-		list.add(new ItemStack(this,0, 4));
+		list.add(new ItemStack(this,1, 0));
+		list.add(new ItemStack(this,1, 1));
+		list.add(new ItemStack(this,1, 2));
+		list.add(new ItemStack(this,1, 3));
+		list.add(new ItemStack(this,1, 4));
 	}
 
 	@Override
@@ -29,22 +33,15 @@ public class ItemGem extends ItemTerra
 	{
 		return icons[i];
 	}
-
-	@Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(gemNames[itemstack.getItemDamage()]).toString();
-		return s;
-	}
 	
 	@Override
 	public void updateIcons(IconRegister registerer)
     {
-		icons[0] = registerer.registerIcon("gems/"+gemNames[0] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[1] = registerer.registerIcon("gems/"+gemNames[1] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[2] = registerer.registerIcon("gems/"+gemNames[2] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[3] = registerer.registerIcon("gems/"+gemNames[3] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[4] = registerer.registerIcon("gems/"+gemNames[4] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[0] = registerer.registerIcon("gems/"+MetaNames[0] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[1] = registerer.registerIcon("gems/"+MetaNames[1] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[2] = registerer.registerIcon("gems/"+MetaNames[2] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[3] = registerer.registerIcon("gems/"+MetaNames[3] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[4] = registerer.registerIcon("gems/"+MetaNames[4] + " " + getUnlocalizedName().replace("item.", ""));
     }
 
 }
