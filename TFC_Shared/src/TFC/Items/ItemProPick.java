@@ -33,7 +33,7 @@ public class ItemProPick extends ItemTerra
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
     {
-        if(!world.isRemote && world.getBlockId(x, y, z) != TFCBlocks.ToolRack.blockID)
+        if(world.isRemote && world.getBlockId(x, y, z) != TFCBlocks.ToolRack.blockID)
         {
 //        	Random rand = new Random(x*z+y);
 //        	ChunkData data = ChunkDataManager.getData(x >> 4, z >> 4);
