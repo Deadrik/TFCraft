@@ -244,6 +244,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 {
                     int leftover = 0;
                     boolean addLeftover = false;
+                    int fromSide = 0;
                     if(fireItemStacks[7] != null && output != null && output.getItem().itemID == fireItemStacks[7].getItem().itemID && fireItemStacks[7].getItemDamage() > 0)
                     {
                         int amt1 = 100-damage;//the percentage of the output
@@ -270,6 +271,9 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                         int amt1 = 100-damage;//the percentage of the output
                         int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
                         int amt3 = amt1 + amt2;//combined amount
+                        leftover = amt3 - 100;//assign the leftover so that we can add to the other slot if applicable
+                        if(leftover > 0) addLeftover = true;
+                        fromSide = 1;
                         int amt4 = 100-amt3;//convert the percent back to mc damage
                         if(amt4 < 0) amt4 = 0;//stop the infinite glitch
                         fireItemStacks[8] = output.copy();
@@ -305,27 +309,28 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
                     if(addLeftover)
                     {
-                        if(fireItemStacks[8] != null && output.getItem().itemID == fireItemStacks[8].getItem().itemID && fireItemStacks[8].getItemDamage() > 0)
+                    	int dest = fromSide == 1 ? 7 : 8;
+                        if(fireItemStacks[dest] != null && output.getItem().itemID == fireItemStacks[dest].getItem().itemID && fireItemStacks[dest].getItemDamage() > 0)
                         {
                             int amt1 = 100-leftover;//the percentage of the output
-                            int amt2 = 100-fireItemStacks[8].getItemDamage();//the percentage currently in the out slot
+                            int amt2 = 100-fireItemStacks[dest].getItemDamage();//the percentage currently in the out slot
                             int amt3 = amt1 + amt2;//combined amount
                             int amt4 = 100-amt3;//convert the percent back to mc damage
                             if(amt4 < 0) amt4 = 0;//stop the infinite glitch
-                            fireItemStacks[8] = output.copy();
-                            fireItemStacks[8].setItemDamage(amt4);
+                            fireItemStacks[dest] = output.copy();
+                            fireItemStacks[dest].setItemDamage(amt4);
 
                             NBTTagCompound nbt = new NBTTagCompound();
                             nbt.setFloat("temperature", inputItemTemp);
-                            fireItemStacks[8].stackTagCompound = nbt;
+                            fireItemStacks[dest].stackTagCompound = nbt;
                         }
-                        else if(fireItemStacks[8] != null && fireItemStacks[8].getItem() == TFCItems.CeramicMold)
+                        else if(fireItemStacks[dest] != null && fireItemStacks[dest].getItem() == TFCItems.CeramicMold)
                         {
-                            fireItemStacks[8] = output.copy();
-                            fireItemStacks[8].setItemDamage(100-leftover);
+                            fireItemStacks[dest] = output.copy();
+                            fireItemStacks[dest].setItemDamage(100-leftover);
                             NBTTagCompound nbt = new NBTTagCompound();
                             nbt.setFloat("temperature", inputItemTemp);
-                            fireItemStacks[8].stackTagCompound = nbt;
+                            fireItemStacks[dest].stackTagCompound = nbt;
                         }
                     }
                 }
