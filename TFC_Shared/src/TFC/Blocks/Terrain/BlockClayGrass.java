@@ -18,6 +18,10 @@ public class BlockClayGrass extends BlockGrass
 	{
 		return TFCBlocks.clayGrassRenderId;
 	}
+    @Override
+    public int damageDropped(int i) {
+        return 0;
+    }
     
     @Override
     public int idDropped(int par1, Random par2Random, int par3)
@@ -25,6 +29,7 @@ public class BlockClayGrass extends BlockGrass
         return Item.clay.itemID;
     }
 
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return par1Random.nextInt(4);

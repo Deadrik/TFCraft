@@ -1,41 +1,14 @@
 package TFC.Blocks.Terrain;
 
-import java.util.ArrayList;
 import java.util.Random;
-import TFC.*;
-import TFC.Blocks.BlockTerra;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
+
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import TFC.Blocks.BlockTerra;
 
 public class BlockClay extends BlockTerra
 {
@@ -65,6 +38,7 @@ public class BlockClay extends BlockTerra
 	/**
 	 * Retrieves the block texture to use based on the display side. Args: iBlockAccess, x, y, z, side
 	 */
+	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		return DirtTexture[par1IBlockAccess.getBlockMetadata(par2, par3, par4)];
@@ -73,6 +47,7 @@ public class BlockClay extends BlockTerra
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
+	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
 	{
 		return DirtTexture[par2];
@@ -81,6 +56,7 @@ public class BlockClay extends BlockTerra
 	/**
 	 * Returns the ID of the items to drop on destruction.
 	 */
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
 		return Item.clay.itemID;
@@ -89,10 +65,16 @@ public class BlockClay extends BlockTerra
 	/**
 	 * Returns the quantity of items to drop on block destruction.
 	 */
+	@Override
 	public int quantityDropped(Random par1Random)
 	{
 		return par1Random.nextInt(4);
 	}
+	
+	@Override
+    public int damageDropped(int i) {
+        return 0;
+    }
 	
 //	public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB par5AxisAlignedBB, ArrayList par6ArrayList)
 //    {
