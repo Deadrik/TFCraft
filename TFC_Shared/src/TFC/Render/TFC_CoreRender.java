@@ -603,7 +603,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.blocksList[Block.waterStill.blockID].waterStill.getBlockTextureFromSide(0);
+					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSide(0);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -745,7 +745,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.waterStill.getBlockTextureFromSide(0);
+					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSide(0);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();

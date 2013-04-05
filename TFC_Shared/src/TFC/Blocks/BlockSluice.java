@@ -88,7 +88,7 @@ public class BlockSluice extends BlockContainer
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		if(j == 4) {
-			return Block.waterMoving.getBlockTextureFromSideAndMetadata(i, 0);
+			return Block.blocksList[Block.waterMoving.blockID].getBlockTextureFromSideAndMetadata(i, 0);
 		} else {
 			return Block.planks.getBlockTextureFromSideAndMetadata(i, 0);
 		}
