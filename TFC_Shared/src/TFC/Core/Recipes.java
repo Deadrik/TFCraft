@@ -314,7 +314,7 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
 			new ItemStack(TFCItems.SpindleHead,1),Character.valueOf('#'),new ItemStack(Item.stick,1)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.ClaySpindle,1), new Object[] { "P","#",Character.valueOf('P'),
-			new ItemStack(Item.clay,1),Character.valueOf('#'),new ItemStack(Item.stick,1)});
+			new ItemStack(Item.clay,32767),Character.valueOf('#'),new ItemStack(Item.stick,1)});
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WoolYarn,8),new Object[]{new ItemStack(TFCItems.Wool,1,32767),new ItemStack(TFCItems.Spindle,1,32767)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.WoolCloth,1), new Object[]{"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.WoolYarn,1)});
 		ModLoader.addRecipe(new ItemStack(Item.bed,1),new Object[]{"PPP","QQQ",Character.valueOf('P'),new ItemStack(TFCItems.WoolCloth,1),Character.valueOf('Q'),
