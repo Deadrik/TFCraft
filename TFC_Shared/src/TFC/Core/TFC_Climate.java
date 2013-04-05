@@ -3,39 +3,12 @@ package TFC.Core;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TFC_Climate 
 {
@@ -70,115 +43,124 @@ public class TFC_Climate
 
 	protected static float getTemp(int day, int x, int z)
 	{
-		float zMod = getZFactor(z);
-		float zTemp = (zMod * getMaxTemperature())-20;
-
-		float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/16000;
-
-		Random R = new Random(day * x + z);
-		
-		int _month = TFC_Time.getMonthFromDayOfYear(day);
-		int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
-		
-		float mod = getMonthTempFactor(_month, x, z);
-		float modLast = getMonthTempFactor(_lastmonth, x, z);
-		int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
-		int hour = (int) TFC_Time.getHour();
-
-		if(hour < 0)
-			hour = 23 + hour;
-		float hourMod = 0;
-
-		if(hour < 12)
-			hourMod = ((float)hour/11) * 0.3F;
-		else
-			hourMod = 0.3F - (((float)(hour-12)/11) * 0.3F);
-
-		float monthMod = 0;
-		float temp = 0;
-
-		float dailyTemp = WeatherManager.getInstance().getDailyTemp(day);
-
-		if(modLast > mod)
+		if(manager!= null)
 		{
-			monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
-			monthMod = (modLast - monthMod);
+			float zMod = getZFactor(z);
+			float zTemp = (zMod * getMaxTemperature())-20;
 
-			temp += getMonthTemp(_month,x,z) + dailyTemp;//((zTemp + dailyTemp));
-			if(temp < 0)monthMod = 1 - monthMod;
-			temp *= monthMod;
-			temp += (hourMod*(zTemp + dailyTemp));
-			temp += (8*rainMod)*zMod;
+			float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/16000;
+
+			Random R = new Random(day * x + z);
+
+			int _month = TFC_Time.getMonthFromDayOfYear(day);
+			int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
+
+			float mod = getMonthTempFactor(_month, x, z);
+			float modLast = getMonthTempFactor(_lastmonth, x, z);
+			int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
+			int hour = (int) TFC_Time.getHour();
+
+			if(hour < 0)
+				hour = 23 + hour;
+			float hourMod = 0;
+
+			if(hour < 12)
+				hourMod = ((float)hour/11) * 0.3F;
+			else
+				hourMod = 0.3F - (((float)(hour-12)/11) * 0.3F);
+
+			float monthMod = 0;
+			float temp = 0;
+
+			float dailyTemp = WeatherManager.getInstance().getDailyTemp(day);
+
+			if(modLast > mod)
+			{
+				monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
+				monthMod = (modLast - monthMod);
+
+				temp += getMonthTemp(_month,x,z) + dailyTemp;//((zTemp + dailyTemp));
+				if(temp < 0)monthMod = 1 - monthMod;
+				temp *= monthMod;
+				temp += (hourMod*(zTemp + dailyTemp));
+				temp += (8*rainMod)*zMod;
+			}
+			else
+			{
+				monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
+				monthMod = (modLast + monthMod);
+
+				temp += getMonthTemp(_month,x,z) + dailyTemp;//((zTemp + dailyTemp));
+				if(temp < 0)monthMod = 1 - monthMod;
+				temp *= monthMod;
+				temp += (hourMod*(zTemp + dailyTemp));
+				temp += (8*rainMod)*zMod;
+			}
+
+			return temp;
 		}
-		else
-		{
-			monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
-			monthMod = (modLast + monthMod);
-
-			temp += getMonthTemp(_month,x,z) + dailyTemp;//((zTemp + dailyTemp));
-			if(temp < 0)monthMod = 1 - monthMod;
-			temp *= monthMod;
-			temp += (hourMod*(zTemp + dailyTemp));
-			temp += (8*rainMod)*zMod;
-		}
-
-		return temp;
+		return -10;
 	}
 
 	protected static float getBioTemp(int day, int x, int z)
 	{
-		float zMod = getZFactor(z);
-		float zTemp = (zMod * getMaxTemperature())-20;
-
-		float rain = manager.getRainfallLayerAt(x, z).floatdata1;
-		float rainMod = 1-(rain/4000);
-
-		Random R = new Random(day * x + z);
-		
-		int _month = TFC_Time.getMonthFromDayOfYear(day);
-		int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
-		
-		float monthModifier = getMonthTempFactor(_month, x, z);
-		float lastMonthModifier = getMonthTempFactor(_lastmonth, x, z);
-		
-		int dayOfMonth =  TFC_Time.getDayOfMonthFromDayOfYear(day);
-
-		float hourMod = 0.2f;
-
-		float monthMod = 0;
-		float temp = 0;
-
-		if(lastMonthModifier > monthModifier)
+		if(manager!= null)
 		{
-			monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
-			monthMod = (lastMonthModifier - monthMod);
+			float zMod = getZFactor(z);
+			float zTemp = (zMod * getMaxTemperature())-20;
 
-			temp += getMonthTemp(_month,x,z);//((zTemp));
-			if(temp < 0)monthMod = 1 - monthMod;
-			temp *= monthMod;
-			temp += (hourMod*(zTemp));
-			temp += (8*rainMod)*zMod;
+
+			float rain = manager.getRainfallLayerAt(x, z).floatdata1;
+			float rainMod = 1-(rain/4000);
+
+			Random R = new Random(day * x + z);
+
+			int _month = TFC_Time.getMonthFromDayOfYear(day);
+			int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
+
+			float monthModifier = getMonthTempFactor(_month, x, z);
+			float lastMonthModifier = getMonthTempFactor(_lastmonth, x, z);
+
+			int dayOfMonth =  TFC_Time.getDayOfMonthFromDayOfYear(day);
+
+			float hourMod = 0.2f;
+
+			float monthMod = 0;
+			float temp = 0;
+
+			if(lastMonthModifier > monthModifier)
+			{
+				monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
+				monthMod = (lastMonthModifier - monthMod);
+
+				temp += getMonthTemp(_month,x,z);//((zTemp));
+				if(temp < 0)monthMod = 1 - monthMod;
+				temp *= monthMod;
+				temp += (hourMod*(zTemp));
+				temp += (8*rainMod)*zMod;
+			}
+			else
+			{
+				monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
+				monthMod = (lastMonthModifier + monthMod);
+
+				temp += getMonthTemp(_month,x,z);//((zTemp));
+				if(temp < 0)monthMod = 1 - monthMod;
+				temp *= monthMod;
+				temp += (hourMod*(zTemp));
+				temp += (8*rainMod)*zMod;
+			}
+
+			return temp;
 		}
-		else
-		{
-			monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
-			monthMod = (lastMonthModifier + monthMod);
-
-			temp += getMonthTemp(_month,x,z);//((zTemp));
-			if(temp < 0)monthMod = 1 - monthMod;
-			temp *= monthMod;
-			temp += (hourMod*(zTemp));
-			temp += (8*rainMod)*zMod;
-		}
-
-		return temp;
+		return -10;
 	}
-	
+
 	protected static float getMonthTemp(int month, int x, int z)
 	{
 		float factor = getZFactor(z);
 		final float MAXTEMP = 35F;
-		
+
 		double angle = factor * (Math.PI / 2);
 		double latitudeFactor = Math.cos(angle);
 		switch(month)
@@ -217,7 +199,7 @@ public class TFC_Climate
 		float factor = getZFactor(z);
 
 		float diff = 1-factor;
-		
+
 		switch(month)
 		{
 		case 11:
@@ -342,8 +324,8 @@ public class TFC_Climate
 
 		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
 
-		double var1 = (double)Helper.clamp_float(temp, 0.0F, 1.0F);
-		double var3 = (double)Helper.clamp_float(rain, 0.0F, 1.0F);
+		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
+		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
 
 		return ColorizerGrassTFC.getGrassColor(var1, var3);
 	}
@@ -360,8 +342,8 @@ public class TFC_Climate
 			//float evt = (1 - (((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(x, z).floatdata1 / 16))*0.5f;
 			float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
 
-			double var1 = (double)Helper.clamp_float(temp, 0.0F, 1.0F);
-			double var3 = (double)Helper.clamp_float(rain, 0.0F, 1.0F);
+			double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
+			double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
 		}
 		else
@@ -449,7 +431,7 @@ public class TFC_Climate
 	{
 		return manager.getTreeLayerAt(x, z, index).data1;
 	}
-	
+
 	public static int[] getRockLayer(int x, int y, int z, int index)
 	{
 		return new int[] {manager.getRockLayerAt(x, z, index).data1, manager.getRockLayerAt(x, z, index).data2};
