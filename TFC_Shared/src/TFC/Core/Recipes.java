@@ -343,7 +343,7 @@ public class Recipes
 		for(int j = 17; j < 23; j++)
 		{
 			
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgInCobble,1,j-17), 
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMCobble,1,j-17), 
 					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
 		}
 		
