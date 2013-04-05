@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import TFC.TFCItems;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Sounds;
@@ -93,12 +92,6 @@ public class BlockSedCobble extends BlockTerra
     }
 
 	@Override
-	public int quantityDropped(Random par1Random)
-    {
-        return 4;
-    }
-
-	@Override
 	public void onBlockAdded(World world, int i, int j, int k)
 	{
 		world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
@@ -121,12 +114,6 @@ public class BlockSedCobble extends BlockTerra
 	{
 		return 3;
 	}
-	
-	@Override
-    public int idDropped(int i, Random random, int j)
-    {
-        return TFCItems.LooseRock.itemID;
-    }
 
 	private void tryToFall(World world, int i, int j, int k)
 	{

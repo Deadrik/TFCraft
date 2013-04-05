@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import TFC.TFCItems;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Sounds;
@@ -71,12 +70,6 @@ public class BlockMMCobble extends BlockTerra
 	{
 		return i;
 	}
-	
-	@Override
-    public int idDropped(int i, Random random, int j)
-    {
-        return TFCItems.LooseRock.itemID;
-    }
 
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
@@ -94,12 +87,6 @@ public class BlockMMCobble extends BlockTerra
 		{
 			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Cobble");
 		}
-    }
-	
-	@Override
-	public int quantityDropped(Random par1Random)
-    {
-        return 4;
     }
 
 	@Override
