@@ -711,11 +711,11 @@ public class ClientProxy extends CommonProxy
 
 		LR.addStringLocalization("item.Blueprint.name", "Blueprint");
 		LR.addStringLocalization("item.Spindle.name", "Spindle");
-		LR.addStringLocalization("item.Clay Spindle.name", "Clay spindle");
-		LR.addStringLocalization("item.Spindle Head.name", "Spindle head");
-		LR.addStringLocalization("item.WoolYarn.name", "Wool yarn");
+		LR.addStringLocalization("item.Clay Spindle.name", "Clay Spindle");
+		LR.addStringLocalization("item.Spindle Head.name", "Spindle Head");
+		LR.addStringLocalization("item.WoolYarn.name", "Wool Yarn");
 		LR.addStringLocalization("item.Wool.name", "Wool");
-		LR.addStringLocalization("item.WoolCloth.name", "Wool cloth");
+		LR.addStringLocalization("item.WoolCloth.name", "Wool Cloth");
 		LR.addStringLocalization("item.Mortar.name", "Mortar");
 		LR.addStringLocalization("item.Lime Water.name", "Limewater");
 		LR.addStringLocalization("item.Hide.name","Raw Hide");
