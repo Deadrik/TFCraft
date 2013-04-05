@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -171,6 +172,16 @@ public class ItemCustomBow extends ItemTerra
         return par1ItemStack;
     }
 
+    /**
+     * Workaround for the fact that Item.bow.itemId is hardcoded in EntityPlayer.getItemIcon
+     */
+    @SideOnly(Side.CLIENT)
+    public void updateIcons(IconRegister par1IconRegister)
+    {
+    	super.updateIcons(par1IconRegister);
+        Item.bow.updateIcons(par1IconRegister);
+    }
+    
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
