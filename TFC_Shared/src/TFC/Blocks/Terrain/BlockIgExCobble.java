@@ -69,7 +69,7 @@ public class BlockIgExCobble extends BlockTerra
 	@Override
 	public int damageDropped(int i) {
 
-			return i+13;
+			return i;
 	}
 	
 	@Override

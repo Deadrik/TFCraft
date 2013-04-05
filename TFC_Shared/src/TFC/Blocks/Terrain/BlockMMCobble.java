@@ -69,7 +69,7 @@ public class BlockMMCobble extends BlockTerra
 	@Override
 	public int damageDropped(int i) 
 	{
-		return i+17;
+		return i;
 	}
 	
 	@Override
