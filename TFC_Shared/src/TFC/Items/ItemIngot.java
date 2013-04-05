@@ -253,6 +253,7 @@ public class ItemIngot extends ItemTerra
 
 		}
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
+		if(entityplayer.isSneaking() &&  !world.isRemote && !(stackTagCompound.hasKey("temperature")||stackTagCompound.hasKey("itemCraftingValue")) )
 		if(entityplayer.isSneaking() &&  !world.isRemote && (stackTagCompound == null || 
 				(stackTagCompound != null && !(stackTagCompound.hasKey("temperature")||stackTagCompound.hasKey("itemCraftingValue")))) )
 		{

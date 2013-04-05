@@ -31,7 +31,7 @@ public class BlockIgEx extends BlockCollapsable
 	 */
 	@Override
 	public int damageDropped(int i) {
-		return i+13;
+		return i;
 	}
 
 	@Override

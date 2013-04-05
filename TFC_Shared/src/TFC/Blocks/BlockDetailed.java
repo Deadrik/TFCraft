@@ -70,6 +70,13 @@ public class BlockDetailed extends BlockPartial
         return true;
     }
 	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+    {
+		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
+        return true;
+    }
+	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
 	{
 		return true;

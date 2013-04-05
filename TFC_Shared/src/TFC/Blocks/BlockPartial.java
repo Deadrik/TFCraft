@@ -66,6 +66,13 @@ public class BlockPartial extends BlockTerraContainer
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
         return true;
     }
+	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+    {
+		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
+        return true;
+    }
     @Override
     public void onBlockAdded(World world, int par2, int par3, int par4)
     {
