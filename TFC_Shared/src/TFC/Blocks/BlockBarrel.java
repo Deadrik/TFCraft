@@ -2,9 +2,6 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,10 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityBarrel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBarrel extends BlockTerraContainer
 {
@@ -59,7 +59,12 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
-
+	
+	@Override
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		
+		
+	}
 	/**
 	 * Called when the block is placed in the world.
 	 */

@@ -437,6 +437,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("liqLev", liquidLevel);
 		nbttagcompound.setInteger("Type", Type);
+		nbttagcompound.setInteger("SealTime", sealtimecounter);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
@@ -455,6 +456,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		super.readFromNBT(nbttagcompound);
 		liquidLevel = nbttagcompound.getInteger("liqLev");
 		Type = nbttagcompound.getInteger("Type");
+		sealtimecounter = nbttagcompound.getInteger("SealTime");
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(0);
