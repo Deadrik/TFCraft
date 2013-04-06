@@ -1,38 +1,14 @@
 package TFC.TileEntities;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import TFC.Core.TFC_ItemHeat;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 public class TileEntityChestTFC extends TileEntity implements IInventory
 {
     private ItemStack[] chestContents = new ItemStack[18];
@@ -191,7 +167,7 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
     @Override
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -273,8 +249,8 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
 
         if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
         {
-            double var2 = (double)this.xCoord + 0.5D;
-            var4 = (double)this.zCoord + 0.5D;
+            double var2 = this.xCoord + 0.5D;
+            var4 = this.zCoord + 0.5D;
 
             if (this.adjacentChestZPosition != null)
             {
@@ -286,7 +262,7 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
                 var2 += 0.5D;
             }
 
-            this.worldObj.playSoundEffect(var2, (double)this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+            this.worldObj.playSoundEffect(var2, this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
         }
 
         if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F)
@@ -311,8 +287,8 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
 
             if (this.lidAngle < var3 && var8 >= var3 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
             {
-                var4 = (double)this.xCoord + 0.5D;
-                double var6 = (double)this.zCoord + 0.5D;
+                var4 = this.xCoord + 0.5D;
+                double var6 = this.zCoord + 0.5D;
 
                 if (this.adjacentChestZPosition != null)
                 {
@@ -324,7 +300,7 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
                     var4 += 0.5D;
                 }
 
-                this.worldObj.playSoundEffect(var4, (double)this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                this.worldObj.playSoundEffect(var4, this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
 
             if (this.lidAngle < 0.0F)
@@ -375,4 +351,11 @@ public class TileEntityChestTFC extends TileEntity implements IInventory
 	{
 		return false;
 	}
+	
+	@Override
+	public AxisAlignedBB getRenderBoundingBox()
+    {
+        Block type = getBlockType();
+        return AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
+    }
 }
