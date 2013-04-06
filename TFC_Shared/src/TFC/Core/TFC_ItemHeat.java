@@ -1,46 +1,19 @@
 package TFC.Core;
 
 import java.util.Collection;
-import java.util.Hashtable;
 import java.util.Iterator;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TFC_ItemHeat 
 {
@@ -341,8 +314,8 @@ public class TFC_ItemHeat
 		HeatRaw ClayRaw = new HeatRaw(1.40F, 515.5F);
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ClayMold,1,1), ClayRaw,new ItemStack(TFCItems.CeramicMold, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ClaySpindle,1,1), ClayRaw,new ItemStack(TFCItems.SpindleHead, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, -1), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, -1), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
 		//Food
 		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, 385, new ItemStack(Item.porkCooked, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, 425, new ItemStack(Item.beefCooked, 1)));
@@ -368,7 +341,7 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealNightVision, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealWaterBreathing, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
 		//Other
-		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, -1), 13.0F,210,600F,new ItemStack(Block.torchWood, 2)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F,210,600F,new ItemStack(Block.torchWood, 2)));
 
 	}
 	public static Boolean canRemoveTag(Object tag, String key, Class c)
