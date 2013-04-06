@@ -190,11 +190,7 @@ public class BlockCollapsable extends BlockTerra
         int xCoord = i;
         int yCoord = j;
         int zCoord = k;
-        int fallingBlockID = -1;
-        
-        Block B = Block.blocksList[world.getBlockId(i, j, k)];
-        if(B instanceof BlockIgIn || B instanceof BlockIgEx || B instanceof BlockMM || B instanceof BlockSed)
-            fallingBlockID = ((BlockCollapsable)Block.blocksList[world.getBlockId(i, j, k)]).dropBlock;
+        int fallingBlockID = dropBlock;
 
         if(world.getBlockId(xCoord, yCoord, zCoord) == Block.bedrock.blockID || world.getBlockId(xCoord, yCoord, zCoord) == fallingBlockID)
         {
@@ -206,6 +202,8 @@ public class BlockCollapsable extends BlockTerra
             if (!world.isRemote && fallingBlockID != -1)
             {
             	EntityFallingSand ent = new EntityFallingSand(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlockID, meta);
+            	ent.setIsAnvil(true);
+            	ent.fallTime = -5000;
                 world.spawnEntityInWorld(ent);
                 Random R = new Random(i*j+k);
                 if(R.nextInt(100) > 90)
@@ -253,7 +251,8 @@ public class BlockCollapsable extends BlockTerra
             {
                 for(int z1 = -1; z1 < 2; z1++)
                 {
-                    if(tryToFall(world, i+x1, j, k+z1,l))
+                    if(Block.blocksList[world.getBlockId(i+x1, j, k+z1)] instanceof BlockCollapsable && 
+                    		((BlockCollapsable)Block.blocksList[world.getBlockId(i+x1, j, k+z1)]).tryToFall(world, i+x1, j, k+z1, world.getBlockMetadata( i+x1, j, k+z1)))
                     {
                         int height = 4;
                         int range = 5+R.nextInt(30);
@@ -267,14 +266,15 @@ public class BlockCollapsable extends BlockTerra
                                     
                                     if(R.nextInt(100) < TFC_Settings.propogateCollapseChance && distance < 35)
                                     {
-                                        if(tryToFall(world, i+x, j+y, k+z,world.getBlockMetadata( i+x, j+y, k+z)))
+                                        if(Block.blocksList[world.getBlockId(i+x, j+y, k+z)] instanceof BlockCollapsable && 
+                                        		((BlockCollapsable)Block.blocksList[world.getBlockId(i+x, j+y, k+z)]).tryToFall(world, i+x, j+y, k+z, world.getBlockMetadata( i+x, j+y, k+z)))
                                         {
                                             int done = 0;
                                             while(done < height)
                                             {
                                                 done++;
-                                                if(R.nextInt(100) < TFC_Settings.propogateCollapseChance) {
-                                                    tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
+                                                if(Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)] instanceof BlockCollapsable && R.nextInt(100) < TFC_Settings.propogateCollapseChance) {
+                                                	((BlockCollapsable)Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)]).tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
                                                 } else {
                                                     done = height;
                                                 }

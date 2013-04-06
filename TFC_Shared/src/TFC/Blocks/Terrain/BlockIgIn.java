@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemChisel;
@@ -22,6 +23,7 @@ public class BlockIgIn extends BlockCollapsable
 {
 	public BlockIgIn(int i, Material material,int id) {
 		super(i, material, id);
+		this.dropBlock = TFCBlocks.StoneIgInCobble.blockID;
 	}
 
 	@SideOnly(Side.CLIENT)

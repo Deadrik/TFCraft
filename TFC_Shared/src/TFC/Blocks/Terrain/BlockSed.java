@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
@@ -25,6 +26,7 @@ public class BlockSed extends BlockCollapsable
 {
     public BlockSed(int i, Material material, int id) {
         super(i, material, id);
+        this.dropBlock = TFCBlocks.StoneSedCobble.blockID;
     }
 
     @SideOnly(Side.CLIENT)
