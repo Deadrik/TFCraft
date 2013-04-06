@@ -56,22 +56,21 @@ public class ItemProPick extends ItemTerra
             boolean isOre = false;
             
             int id = world.getBlockId(x, y, z);
+            int meta = world.getBlockMetadata(x, y, z);
             if(id == TFCBlocks.Ore.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata(x, y, z);
+                
                 oreArray.add(new ItemStack(id,1,meta).getItem().getItemDisplayName(new ItemStack(id,1,meta)));
             }
             else if(id == TFCBlocks.Ore2.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata(x, y, z);
                 oreArray.add(new ItemStack(id,1,meta).getItem().getItemDisplayName(new ItemStack(id,1,meta)));
             }
             else if(id == TFCBlocks.Ore3.blockID)
             {
                 isOre = true;
-                int meta = world.getBlockMetadata(x, y, z);
                 oreArray.add(new ItemStack(id,1,meta).getItem().getItemDisplayName(new ItemStack(id,1,meta)));
             }
             //sides XN(0), XP(1), YN(2), YP(3), ZN(4), ZP(5);          
@@ -81,7 +80,7 @@ public class ItemProPick extends ItemTerra
                 {
                     for (int k = -12; k < 12; k++)
                     {
-                    	int meta = world.getBlockMetadata(x+i, y+k, z+j);
+                    	meta = world.getBlockMetadata(x+i, y+k, z+j);
                         int oreid = world.getBlockId(x+i, y+k, z+j);
 
                         
@@ -163,14 +162,11 @@ public class ItemProPick extends ItemTerra
             {
                 entityplayer.addChatMessage("Found nothing of interest.");
             }
-
-            itemstack.setItemDamage(itemstack.getItemDamage()+1);
-            if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
-                itemstack.stackSize = 0;
-
-            return true;
         }
-        return false;
+        itemstack.setItemDamage(itemstack.getItemDamage()+1);
+        if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
+            itemstack.stackSize = 0;
+        return true;
     }
     
     @Override
