@@ -1,45 +1,24 @@
 package TFC.Food;
 
 import java.util.List;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
+
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import TFC.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.Icon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import TFC.Items.ItemTerra;
 
 public class ItemMeal extends ItemTerraFood
 {
@@ -164,12 +143,13 @@ public class ItemMeal extends ItemTerraFood
 	}
 
 	@Override
-	public void onFoodEaten(ItemStack is, World world, EntityPlayer player)
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
-		
+		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		this.addFoodEffect(is, world, player);
 		if(!world.isRemote)
 		{
-			--is.stackSize;
+			
 			int energy = getMealEnergy(is);
 			int filling = getMealFilling(is);
 			if(!isWarm(is))
@@ -178,11 +158,11 @@ public class ItemMeal extends ItemTerraFood
 				filling /= 2;
 			}
 			TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
-			playerServer.getFoodStatsTFC().addStats(getMealFilling(is), (float)getMealEnergy(is)/100f);
-			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-			this.addFoodEffect(is, world, player);
+			playerServer.getFoodStatsTFC().addStats(getMealFilling(is), getMealEnergy(is)/100f);
 			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
+		is.stackSize--;
+		return is;
 	}
 	
 	public boolean isWarm(ItemStack is)
@@ -244,7 +224,7 @@ public class ItemMeal extends ItemTerraFood
 	{
 		if (!world.isRemote && this.foodEffect != null)
 		{
-			float Power = ((float)getMealPower(is)/100f);
+			float Power = (getMealPower(is)/100f);
 			if(!isWarm(is))
 			{
 				Power /= 2;
@@ -285,12 +265,24 @@ public class ItemMeal extends ItemTerraFood
 	{
 		if(!world.isRemote)
 		{
-			TFC_PlayerServer playerserver = ((TFC.Core.Player.TFC_PlayerServer)((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server"));
+			TFC_PlayerServer playerserver = TFC_PlayerServer.getFromEntityPlayer(player);
 
 			int energy = getMealEnergy(is)/100;
 			int filling = getMealFilling(is);
 
 			if (playerserver.getFoodStatsTFC().needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
+			{
+				player.setItemInUse(is, this.getMaxItemUseDuration(is));
+			}
+		}
+		else if(world.isRemote)
+		{
+			TFC_PlayerClient playerclient = TFC_PlayerClient.getFromEntityPlayer(player);
+
+			int energy = getMealEnergy(is)/100;
+			int filling = getMealFilling(is);
+
+			if (playerclient.getFoodStatsTFC().needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
 			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
@@ -312,6 +304,7 @@ public class ItemMeal extends ItemTerraFood
 	/**
 	 * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
 	 */
+	@Override
 	public ItemMeal setAlwaysEdible()
 	{
 		this.alwaysEdible = true;

@@ -163,15 +163,17 @@ public class ItemTerraFood extends ItemFood implements ISize
 	}
 
 	@Override
-	public void onFoodEaten(ItemStack is, World world, EntityPlayer player)
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
+		is.stackSize--;
+		player.getFoodStats().addStats(this);
+		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(!world.isRemote)
 		{
 			TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
 			playerServer.getFoodStatsTFC().addStats(this);
-			player.getFoodStats().addStats(this);
-			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		}
+		return is;
 	}
 
 	@Override
