@@ -1300,13 +1300,13 @@ public class ClientProxy extends CommonProxy
 			LR.addStringLocalization("item."+Names[i]+" Double Sheet.name", Names[i] + " Double Sheet");
 		}
 
-		LR.addStringLocalization("item.Unshaped HC Black Steel.name", "Unshaped High Carbon Black Steel");
-		LR.addStringLocalization("item.Unshaped HC Blue Steel.name", "Unshaped High Carbon Blue Steel");
-		LR.addStringLocalization("item.Unshaped HC Red Steel.name", "Unshaped High Carbon Red Steel");
-		LR.addStringLocalization("item.Unshaped HC Steel.name", "Unshaped High Carbon Steel");
-		LR.addStringLocalization("item.Unshaped Weak Steel.name", "Unshaped Weak Steel");
-		LR.addStringLocalization("item.Unshaped Weak Blue Steel.name", "Unshaped Weak Blue Steel");
-		LR.addStringLocalization("item.Unshaped Weak Red Steel.name", "Unshaped Weak Red Steel");
+		LR.addStringLocalization("item.HC Black Steel Unshaped.name", "Unshaped High Carbon Black Steel");
+		LR.addStringLocalization("item.HC Blue Steel Unshaped.name", "Unshaped High Carbon Blue Steel");
+		LR.addStringLocalization("item.HC Red Steel Unshaped.name", "Unshaped High Carbon Red Steel");
+		LR.addStringLocalization("item.HC Steel Unshaped.name", "Unshaped High Carbon Steel");
+		LR.addStringLocalization("item.Weak Steel Unshaped.name", "Unshaped Weak Steel");
+		LR.addStringLocalization("item.Weak Blue Steel Unshaped.name", "Unshaped Weak Blue Steel");
+		LR.addStringLocalization("item.Weak Red Steel Unshaped.name", "Unshaped Weak Red Steel");
 
 		LR.addStringLocalization("item.HC Black Steel Ingot.name", "High Carbon Black Steel Ingot");
 		LR.addStringLocalization("item.HC Blue Steel Ingot.name", "High Carbon Blue Steel Ingot");
