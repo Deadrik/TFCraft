@@ -254,7 +254,7 @@ public class ItemIngot extends ItemTerra
 		}
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
 
-		if(entityplayer.isSneaking() &&  !world.isRemote && stackTagCompound == null)
+		if(entityplayer.isSneaking() &&  !world.isRemote && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1))
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
