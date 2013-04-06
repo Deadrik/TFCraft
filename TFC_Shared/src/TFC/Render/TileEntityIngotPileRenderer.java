@@ -14,7 +14,7 @@ public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 	private final ModelIngotPile ingotModel = new ModelIngotPile();
 	private static String[] metalTypes =  new String[]{"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", 
 		"Bronze", "Copper", "Gold", "Wrought Iron", "Lead", "Nickel", "Pig Iron", "Platinum", "Red Steel", "Rose Gold", "Silver", "Steel",
-		"Sterlign Silver", "Tin", "Zinc" };
+		"Sterling Silver", "Tin", "Zinc" };
 	/**
 	 * Renders the TileEntity for the chest at a position.
 	 */
