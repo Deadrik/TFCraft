@@ -4,8 +4,27 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.StepSound;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemInWorldManager;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.ServerPlayerAPI;
+import net.minecraft.src.ServerPlayerBase;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import TFC.TFCBlocks;
-import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
@@ -14,39 +33,6 @@ import TFC.Entities.EntityTerraJavelin;
 import TFC.Food.FoodStatsTFC;
 import TFC.Handlers.PacketHandler;
 import TFC.TileEntities.TileEntityFireEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraft.src.*;
 
 public class TFC_PlayerServer extends ServerPlayerBase
 {
@@ -59,7 +45,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	//Last time the spawn protection was updated
 	private long spawnProtectionTimer = -1;
 	
-	private FoodStatsTFC foodstats;
+	private final FoodStatsTFC foodstats;
 
 	public TFC_PlayerServer(ServerPlayerAPI var1) {
 		super(var1);
@@ -153,11 +139,11 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	@Override
 	public void beforeOnLivingUpdate() 
 	{
-		if((float)foodstats.waterLevel / (float)foodstats.getMaxWater(this.player) <= 0.25f && player.worldObj.difficultySetting >= 1)
+		if(foodstats.waterLevel / foodstats.getMaxWater(this.player) <= 0.25f && player.worldObj.difficultySetting >= 1)
 		{
 			player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,1,1));
 		}
-		else if((float)foodstats.waterLevel / (float)foodstats.getMaxWater(this.player) <= 0.5f)
+		else if(foodstats.waterLevel / foodstats.getMaxWater(this.player) <= 0.5f)
 		{
 			if(this.player.isSprinting())
 			{
@@ -178,7 +164,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 		double distanceTE = 0;
 		if (te!=null)distanceTE = Math.sqrt(Math.pow(player.posX-te.xCoord,2)+Math.pow(player.posY-te.yCoord,2)+Math.pow(player.posZ-te.zCoord,2));
 		float temp =TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
-		if(temp<25)netBodyTemp-= (12*(te!=null&&te.fireTemperature>100?Math.pow(1d/(11-distanceTE),3):1))/(60*20*5*10*(Math.pow(5, (double)temp/10)));
+		if(temp<25)netBodyTemp-= (12*(te!=null&&te.fireTemperature>100?Math.pow(1d/(11-distanceTE),3):1))/(60*20*5*10*(Math.pow(5, temp<0?0:temp/10d)/temp<0?Math.abs(temp)/10d:1d));
 		else if(temp>=30)netBodyTemp+=((temp+7)/bodyTemp)/(60*15*20);
 		netBodyTemp+=0.000017889*0.2D*(player.isSprinting()?12:1)*(player.inventory.armorInventory[3]!=null &&player.inventory.armorInventory[3].getItem() ==Item.helmetLeather?2.24:1)*(player.inventory.armorInventory[2]!=null &&player.inventory.armorInventory[2].getItem() ==Item.plateLeather?2.24:1)
 				*(player.inventory.armorInventory[1]!=null &&player.inventory.armorInventory[1].getItem() ==Item.legsLeather?2.24:1)*(player.inventory.armorInventory[0]!=null &&player.inventory.armorInventory[0].getItem() ==Item.bootsLeather?2.24:1);
@@ -237,6 +223,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
         }
     }
 	
+	@Override
 	public int getMaxHealth()
     {
         return 1000+(this.player.experienceLevel*25);
@@ -287,7 +274,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
             }
 
             this.attackEntityFrom(DamageSource.fall, var2);
-            int var3 = this.player.worldObj.getBlockId(MathHelper.floor_double(this.player.posX), MathHelper.floor_double(this.player.posY - 0.20000000298023224D - (double)this.player.yOffset), MathHelper.floor_double(this.player.posZ));
+            int var3 = this.player.worldObj.getBlockId(MathHelper.floor_double(this.player.posX), MathHelper.floor_double(this.player.posY - 0.20000000298023224D - this.player.yOffset), MathHelper.floor_double(this.player.posZ));
 
             if (var3 > 0)
             {
