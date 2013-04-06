@@ -41,11 +41,11 @@ public class BlockCrop extends BlockContainer
 	Icon[] iconsBarley = new Icon[8];
 	Icon[] iconsOat = new Icon[8];
 	Icon[] iconsRice = new Icon[8];
-	Icon[] iconsGreenbean = new Icon[8];
-	Icon[] iconsOnion = new Icon[8];
-	Icon[] iconsPotato = new Icon[8];
-	Icon[] iconsSoybean = new Icon[8];
-	Icon[] iconsSquash = new Icon[8];
+	Icon[] iconsGreenbean = new Icon[7];
+	Icon[] iconsOnion = new Icon[7];
+	Icon[] iconsPotato = new Icon[7];
+	Icon[] iconsSoybean = new Icon[7];
+	Icon[] iconsSquash = new Icon[7];
 
 	public BlockCrop(int par1, int id)
 	{
@@ -75,6 +75,11 @@ public class BlockCrop extends BlockContainer
 		{
 			iconsPepperRed[i-1] = iconRegisterer.registerIcon("plants/crops/PepperRed ("+i+")");
 			iconsPepperYellow[i-1] = iconRegisterer.registerIcon("plants/crops/PepperYellow ("+i+")");
+			iconsGreenbean[i-1] = iconRegisterer.registerIcon("plants/crops/Greenbean ("+i+")");
+			iconsOnion[i-1] = iconRegisterer.registerIcon("plants/crops/Onion ("+i+")");
+			iconsPotato[i-1] = iconRegisterer.registerIcon("plants/crops/Potato ("+i+")");
+			iconsSquash[i-1] = iconRegisterer.registerIcon("plants/crops/Squash ("+i+")");
+			iconsSoybean[i-1] = iconRegisterer.registerIcon("plants/crops/Soybean ("+i+")");
 		}
 		for(int i = 1; i < 9; i++)
 		{
@@ -84,11 +89,7 @@ public class BlockCrop extends BlockContainer
 			iconsBarley[i-1] = iconRegisterer.registerIcon("plants/crops/Barley ("+i+")");
 			iconsOat[i-1] = iconRegisterer.registerIcon("plants/crops/Oat ("+i+")");
 			iconsRice[i-1] = iconRegisterer.registerIcon("plants/crops/Rice ("+i+")");
-			iconsGreenbean[i-1] = iconRegisterer.registerIcon("plants/crops/Greenbean ("+i+")");
-			iconsOnion[i-1] = iconRegisterer.registerIcon("plants/crops/Onion ("+i+")");
-			iconsPotato[i-1] = iconRegisterer.registerIcon("plants/crops/Potato ("+i+")");
-			iconsSquash[i-1] = iconRegisterer.registerIcon("plants/crops/Squash ("+i+")");
-			iconsSoybean[i-1] = iconRegisterer.registerIcon("plants/crops/Soybean ("+i+")");
+			
 		}
 	}
 
