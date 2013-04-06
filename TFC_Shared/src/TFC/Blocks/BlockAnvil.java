@@ -159,6 +159,27 @@ public class BlockAnvil extends BlockTerraContainer
 		}
 		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
+	
+	@Override
+	protected void dropBlockAsItem_do(World par1World, int par2, int par3, int par4, ItemStack is)
+    {
+        if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+        {
+        	if(is.getItemDamage() == 0 && this.blockID == TFCBlocks.Anvil.blockID)
+        	{
+        		is.setItemDamage(1);
+        	}
+            float f = 0.7F;
+            double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            EntityItem entityitem = new EntityItem(par1World, par2 + d0, par3 + d1, par4 + d2, is);
+            entityitem.delayBeforeCanPickup = 10;
+            par1World.spawnEntityInWorld(entityitem);
+        }
+    }
+
+	
 	@Override
 	public boolean isOpaqueCube()
 	{

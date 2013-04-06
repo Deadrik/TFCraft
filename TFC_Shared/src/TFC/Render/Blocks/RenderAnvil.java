@@ -160,9 +160,12 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 		return 0;
 	}
 	
-	public static void renderInvBlock(Block block, int meta, RenderBlocks renderer)
+	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
 		Tessellator var14 = Tessellator.instance;
+		int meta = m;
+		if(meta >=8)
+			meta-=8;
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, -1.0F, 0.0F);
 		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(0, meta));
