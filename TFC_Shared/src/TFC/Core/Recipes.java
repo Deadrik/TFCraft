@@ -466,7 +466,8 @@ public class Recipes
 			ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneIgInCobble});
 			ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneIgExCobble});
 			ModLoader.addRecipe(new ItemStack(Block.cobblestone, 1), new Object[] {"1", Character.valueOf('1'),TFCBlocks.StoneMMCobble});
-
+			ModLoader.addShapelessRecipe(new ItemStack(Item.leather,1),new Object[]{new ItemStack(TFCItems.TerraLeather,1)});
+			
 			//Conversion to vanilla tools for recipes in other mods
 			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgInShovel});
 			ModLoader.addRecipe(new ItemStack(Item.shovelStone, 1, 0), new Object[] { "2","2", Character.valueOf('2'), TFCItems.IgExShovel});
@@ -949,6 +950,10 @@ public class Recipes
         
         //CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneProPickHead, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, -1)});
         //Leather Working
+        RemoveRecipe(new ItemStack(Item.helmetLeather));
+        RemoveRecipe(new ItemStack(Item.plateLeather));
+        RemoveRecipe(new ItemStack(Item.legsLeather));
+        RemoveRecipe(new ItemStack(Item.bootsLeather));
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.helmetLeather, 1), new Object[] { "#####","#   #","#   #", Character.valueOf('#'), TFCItems.FlatLeather});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.plateLeather, 1), new Object[] { "#   #","#####","#####","#####","#####", Character.valueOf('#'), TFCItems.FlatLeather});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.legsLeather, 1), new Object[] { "#####","#####","## ##","## ##","## ##", Character.valueOf('#'), TFCItems.FlatLeather});
