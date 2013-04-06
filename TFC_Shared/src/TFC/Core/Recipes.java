@@ -324,6 +324,7 @@ public class Recipes
 		{
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgInCobble,1,j), 
 					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneIgInCobble,1,j));
 		}
 
 		for(int j = 3; j < 13; j++)
@@ -331,6 +332,7 @@ public class Recipes
 			
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedCobble,1,j-3), 
 					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneSedCobble,1,j-3));
 		}
 
 		for(int j = 13; j < 17; j++)
@@ -338,6 +340,7 @@ public class Recipes
 			
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExCobble,1,j-13), 
 					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneIgExCobble,1,j-13));
 		}
 
 		for(int j = 17; j < 23; j++)
@@ -345,6 +348,7 @@ public class Recipes
 			
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMCobble,1,j-17), 
 					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneMMCobble,1,j-17));
 		}
 		
 		ModLoader.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP",
