@@ -14,7 +14,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Items.ItemBarrels;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityBarrel;
 import cpw.mods.fml.relauncher.Side;
@@ -51,6 +53,7 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		return 22;
 	}
+
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
@@ -91,6 +94,19 @@ public class BlockBarrel extends BlockTerraContainer
 	{
 		return true;
 	}
+	
+	@Override
+	protected ItemStack createStackedBlock(int par1)
+    {
+		int j = 0;
+		String s = this.getUnlocalizedName();
+        for(int i = 0; i < ((ItemBarrels)(TFCItems.Barrel)).MetaNames.length;i++){
+        	j = s.substring(s.indexOf("l",s.length()))==((ItemBarrels)(TFCItems.Barrel)).MetaNames[i]?i:0;
+        }
+        
+
+        return new ItemStack(TFCItems.Barrel, 1, j);
+    }
 
 	/**
 	 * Called whenever the block is removed.
@@ -120,7 +136,6 @@ public class BlockBarrel extends BlockTerraContainer
 						{
 							var11 = var7.stackSize;
 						}
-
 						var7.stackSize -= var11;
 						var12 = new EntityItem(par1World, par2 + var8, par3 + var9, par4 + var10, new ItemStack(var7.itemID, var11, var7.getItemDamage()));
 						float var13 = 0.05F;
