@@ -71,14 +71,14 @@ public class BlockCrop extends BlockContainer
 			iconsCorn[i-1] = iconRegisterer.registerIcon("plants/crops/Corn ("+i+")");
 			iconsCabbage[i-1] = iconRegisterer.registerIcon("plants/crops/Cabbage ("+i+")");
 		}
-		for(int i = 1; i < 9; i++)
-		{
-			iconsTomato[i-1] = iconRegisterer.registerIcon("plants/crops/Tomato ("+i+")");
-		}
 		for(int i = 1; i < 8; i++)
 		{
 			iconsPepperRed[i-1] = iconRegisterer.registerIcon("plants/crops/PepperRed ("+i+")");
 			iconsPepperYellow[i-1] = iconRegisterer.registerIcon("plants/crops/PepperYellow ("+i+")");
+		}
+		for(int i = 1; i < 9; i++)
+		{
+			iconsTomato[i-1] = iconRegisterer.registerIcon("plants/crops/Tomato ("+i+")");
 			iconsWheat[i-1] = iconRegisterer.registerIcon("plants/crops/Wheat ("+i+")");
 			iconsRye[i-1] = iconRegisterer.registerIcon("plants/crops/Rye ("+i+")");
 			iconsBarley[i-1] = iconRegisterer.registerIcon("plants/crops/Barley ("+i+")");
