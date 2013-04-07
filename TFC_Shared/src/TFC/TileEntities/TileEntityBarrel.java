@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
@@ -14,7 +12,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
@@ -54,31 +51,21 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	public void careForInventorySlot()
 	{
-		
-		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra ){
-			if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("temperature")){
+		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
+		{
+			if(itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("temperature"))
+			{
 				NBTTagCompound comp = itemstack.getTagCompound();
 				float temp = comp.getFloat("temperature");
-				while(liquidLevel >= 3 && temp >20){
+				if(liquidLevel >= 3 && temp >20)
+				{
 					temp-=100;
 					liquidLevel-=3;
-					if(temp>20){
+
 					comp.setFloat("temperature",temp);
 					itemstack.setTagCompound(comp);
-					}
-					if(temp < 20f){
-						Collection C = comp.getTags();
-						Iterator itr = C.iterator();
-						while(itr.hasNext())
-						{
-							Object tag = itr.next();
-							if(TFC_ItemHeat.canRemoveTag(tag, "temperature", NBTTagFloat.class))
-							{
-								itr.remove();
-								break;
-							}
-						}
-					}
+
+					TFC_ItemHeat.HandleItemHeat(itemstack, xCoord, yCoord, zCoord);
 				}
 			}
 		}
@@ -407,7 +394,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					Type = 2;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 1) && itemstack.getItem() == TFCItems.WoodenBucketWater && liquidLevel < 64){
+				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater || 
+						itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 64){
 					liquidLevel = Math.min(liquidLevel + 8, 64);
 					Type = 1;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
