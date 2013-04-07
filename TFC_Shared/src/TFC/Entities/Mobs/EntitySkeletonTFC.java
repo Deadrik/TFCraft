@@ -166,15 +166,149 @@ public class EntitySkeletonTFC extends EntitySkeleton
     @Override
     protected void addRandomArmor()
     {
-        super.addRandomArmor();
-        this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
+    	superAddRandomArmor();
+        this.setCurrentItemOrArmor(0, new ItemStack(Item.itemsList[Item.bow.itemID]));
+    }
+    
+    public static Item getArmorItemForSlot(int par0, int par1)
+    {
+        switch (par0)
+        {
+            case 4:
+                if (par1 == 0)
+                {
+                    return Item.itemsList[Item.helmetLeather.itemID];
+                }
+                else if (par1 == 1)
+                {
+                    return TFCItems.CopperHelmet;
+                }
+                else if (par1 == 2)
+                {
+                    return TFCItems.BronzeHelmet;
+                }
+                else if (par1 == 3)
+                {
+                    return TFCItems.WroughtIronHelmet;
+                }
+                else if (par1 == 4)
+                {
+                    return TFCItems.SteelHelmet;
+                }
+            case 3:
+                if (par1 == 0)
+                {
+                	return Item.itemsList[Item.plateLeather.itemID];
+                }
+                else if (par1 == 1)
+                {
+                    return TFCItems.CopperChestplate;
+                }
+                else if (par1 == 2)
+                {
+                    return TFCItems.BronzeChestplate;
+                }
+                else if (par1 == 3)
+                {
+                    return TFCItems.WroughtIronChestplate;
+                }
+                else if (par1 == 4)
+                {
+                    return TFCItems.SteelChestplate;
+                }
+            case 2:
+                if (par1 == 0)
+                {
+                	return Item.itemsList[Item.legsLeather.itemID];
+                }
+                else if (par1 == 1)
+                {
+                    return TFCItems.CopperGreaves;
+                }
+                else if (par1 == 2)
+                {
+                    return TFCItems.BronzeGreaves;
+                }
+                else if (par1 == 3)
+                {
+                    return TFCItems.WroughtIronGreaves;
+                }
+                else if (par1 == 4)
+                {
+                    return TFCItems.SteelGreaves;
+                }
+            case 1:
+                if (par1 == 0)
+                {
+                	return Item.itemsList[Item.bootsLeather.itemID];
+                }
+                else if (par1 == 1)
+                {
+                    return TFCItems.CopperBoots;
+                }
+                else if (par1 == 2)
+                {
+                    return TFCItems.BronzeBoots;
+                }
+                else if (par1 == 3)
+                {
+                    return TFCItems.WroughtIronBoots;
+                }
+                else if (par1 == 4)
+                {
+                    return TFCItems.SteelBoots;
+                }
+            default:
+                return null;
+        }
+    }
+    
+    private static final float[] armorProbability = new float[] {0.0F, 0.5F, 0.10F, 0.15F};
+    private void superAddRandomArmor()
+    {
+        if (this.rand.nextFloat() < armorProbability[this.worldObj.difficultySetting])
+        {
+            int i = this.rand.nextInt(2);
+            float f = this.worldObj.difficultySetting == 3 ? 0.1F : 0.25F;
+
+            if (this.rand.nextFloat() < 0.095F)
+            {
+                ++i;
+            }
+
+            if (this.rand.nextFloat() < 0.095F)
+            {
+                ++i;
+            }
+
+            if (this.rand.nextFloat() < 0.095F)
+            {
+                ++i;
+            }
+
+            for (int j = 3; j >= 0; --j)
+            {
+                ItemStack itemstack = this.getCurrentArmor(j);
+
+                if (j < 3 && this.rand.nextFloat() < f)
+                {
+                    break;
+                }
+
+                if (itemstack == null)
+                {
+                    Item item = getArmorItemForSlot(j + 1, i);
+
+                    if (item != null)
+                    {
+                        this.setCurrentItemOrArmor(j + 1, new ItemStack(item));
+                    }
+                }
+            }
+        }
     }
 
     @SideOnly(Side.CLIENT)
-
-    /**
-     * Returns the texture's file path as a String.
-     */
     @Override
     public String getTexture()
     {
@@ -215,7 +349,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
     	EntityArrowTFC var2 = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
-        var2.setDamage(par2 * 2.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
+        var2.setDamage(100 * 2.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
 
         
         if (var3 > 0)
