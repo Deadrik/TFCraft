@@ -179,7 +179,7 @@ public class BlockToolRack extends BlockTerraContainer
 	{
 		if(!world.isRemote)
 		{
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.Toolrack, 1, meta));
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCBlocks.ToolRack, 1, meta));
 		}
 	}
 	
