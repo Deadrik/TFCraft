@@ -176,7 +176,7 @@ public class Recipes
 
 			for(int j = 3; j < 13; j++)
 			{
-				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedBrick,1,j-3), 
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedBrick,4,j-3), 
 						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
 				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
@@ -184,7 +184,7 @@ public class Recipes
 
 			for(int j = 13; j < 17; j++)
 			{
-				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExBrick,1,j-13), 
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExBrick,4,j-13), 
 						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
 				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
@@ -192,7 +192,7 @@ public class Recipes
 
 			for(int j = 17; j < 23; j++)
 			{
-				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMBrick,1,j-17), 
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMBrick,4,j-17), 
 						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
 				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
                         new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
@@ -1543,7 +1543,12 @@ public class Recipes
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 2), new Object[] {TFCItems.OatGround,TFCItems.OatGround,TFCItems.WoodenBucketWater});
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 2), new Object[] {TFCItems.RiceGround,TFCItems.RiceGround,TFCItems.WoodenBucketWater});
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.WoodenBucketWater});
-
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.WheatDough, 2), new Object[] {TFCItems.WheatGround,TFCItems.WheatGround,TFCItems.RedSteelBucketWater});
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.BarleyDough, 2), new Object[] {TFCItems.BarleyGround,TFCItems.BarleyGround,TFCItems.RedSteelBucketWater});
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.RyeDough, 2), new Object[] {TFCItems.RyeGround,TFCItems.RyeGround,TFCItems.RedSteelBucketWater});
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.OatDough, 2), new Object[] {TFCItems.OatGround,TFCItems.OatGround,TFCItems.RedSteelBucketWater});
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.RiceDough, 2), new Object[] {TFCItems.RiceGround,TFCItems.RiceGround,TFCItems.RedSteelBucketWater});
+		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
 	}
 	
     public static int valueOfString(String s)
