@@ -93,6 +93,23 @@ public class CraftingHandler implements ICraftingHandler
 				}
 				
 			}
+			
+			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+			{             
+				if(iinventory.getStackInSlot(i) == null) 
+				{
+					continue;
+				}
+				if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.itemID)
+				{
+					entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1));
+				}
+				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
+				{
+					entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1));
+				}
+						
+			}
 		}
 	}
 	
