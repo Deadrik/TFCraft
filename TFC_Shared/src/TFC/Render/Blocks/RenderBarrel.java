@@ -9,6 +9,11 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderBarrel  implements ISimpleBlockRenderingHandler 
 {
+	static float pixel3 = 3f/16f;
+	static float pixel5 = 5f/16f;
+	static float pixel12 = 12f/16f;
+	static float pixel14 = 14f/16f;
+	
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int i, int j, int k,
 			Block block, int modelId, RenderBlocks renderer) 
@@ -60,25 +65,25 @@ public class RenderBarrel  implements ISimpleBlockRenderingHandler
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		
-		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.15F, 1F, 0.9F);
+		renderer.setRenderBounds(0.1F, 0F, 0.15F, 0.15F, 1F, 0.85F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 		
-		renderer.setRenderBounds(0.85F, 0F, 0.1F, 0.9F, 1F, 0.9F);
+		renderer.setRenderBounds(0.85F, 0F, 0.15F, 0.9F, 1F, 0.85F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 		
-		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.15F, 1F, 0.9F);
+		renderer.setRenderBounds(0.1F, 0F, 0.1F, 0.9F, 1F, 0.15F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
 		renderInvBlock(block, metadata, renderer);
 		
-		renderer.setRenderBounds(0.85F, 0F, 0.1F, 0.9F, 1F, 0.9F);
+		renderer.setRenderBounds(0.1F, 0F, 0.85F, 0.9F, 1F, 0.9F);
 		rotate(renderer, 1);
 		renderInvBlock(TFCBlocks.Planks, metadata, renderer);
 		rotate(renderer, 0);
