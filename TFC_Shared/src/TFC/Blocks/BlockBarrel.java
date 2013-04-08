@@ -1,21 +1,26 @@
 package TFC.Blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Core.TFC_Textures;
 import TFC.Items.ItemBarrels;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityBarrel;
@@ -29,12 +34,36 @@ public class BlockBarrel extends BlockTerraContainer
 	public BlockBarrel(int par1)
 	{
 		super(par1, Material.wood);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setBlockBounds(0.1f, 0, 0.1f, 0.9f, 1, 0.9f);
 	}
 
 	@Override
     public void registerIcons(IconRegister iconRegisterer)
     {
+		this.blockIcon = iconRegisterer.registerIcon("wood/BarrelHoop");
     }
+	
+	@Override
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	{
+		if(side == 0 || side == 1) 
+		{
+			return TFC_Textures.InvisibleTexture;
+		} 
+		else 
+		{
+			return this.blockIcon;
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
+	{
+			for(int i = 0; i < 16; i++)
+				par3List.add(new ItemStack(this, 1, i));
+	}
 
     @Override
 	public boolean isOpaqueCube()
@@ -51,7 +80,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public int getRenderType()
 	{
-		return 22;
+		return TFCBlocks.barrelRenderId;
 	}
 
 	/**

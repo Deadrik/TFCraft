@@ -99,28 +99,28 @@ import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
-import TFC.Render.TileEntityBarrelRendererTFC;
 import TFC.Render.TileEntityChestRendererTFC;
 import TFC.Render.TileEntityIngotPileRenderer;
 import TFC.Render.Blocks.RenderAnvil;
+import TFC.Render.Blocks.RenderBarrel;
 import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.Render.Blocks.RenderSupportBeam;
 import TFC.Render.Blocks.RenderToolRack;
+import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityChestTFC;
-import TFC.TileEntities.TileEntityFoodPrep;
-import TFC.TileEntities.TileEntityIngotPile;
-import TFC.TileEntities.TileEntityQuern;
-import TFC.TileEntities.TileEntitySluice;
-import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityFirepit;
+import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityMetallurgy;
+import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntityScribe;
+import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -198,7 +198,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.superDetailedRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
-		//RenderingRegistry.registerBlockHandler(TFCBlocks.IngotPileRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public class ClientProxy extends CommonProxy
 		super.registerTileEntities(false);
 		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
-		ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
+		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 	}
 
 	@Override

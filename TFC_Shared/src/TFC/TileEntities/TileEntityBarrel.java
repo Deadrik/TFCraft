@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
-import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
@@ -33,10 +32,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	private ItemStack output;
 	private boolean sealed;
 	private int sealtimecounter;
-	private static int[] barrels ={(TFCBlocks.BarrelOak.blockID),(TFCBlocks.BarrelAspen.blockID),(TFCBlocks.BarrelBirch.blockID),(TFCBlocks.BarrelChestnut.blockID),
-		(TFCBlocks.BarrelDouglasFir.blockID),(TFCBlocks.BarrelHickory.blockID),(TFCBlocks.BarrelMaple.blockID),(TFCBlocks.BarrelAsh.blockID),
-		(TFCBlocks.BarrelPine.blockID),(TFCBlocks.BarrelSequoia.blockID),(TFCBlocks.BarrelSpruce.blockID),(TFCBlocks.BarrelSycamore.blockID),
-		(TFCBlocks.BarrelWhiteCedar.blockID),(TFCBlocks.BarrelWhiteElm.blockID),(TFCBlocks.BarrelWillow.blockID),(TFCBlocks.BarrelKapok.blockID)};
 	public final int SEALTIME = TFC_Settings.enableDebugMode?0:(int)((TFC_Time.hourLength*6)/100);//default 80
 
 	public TileEntityBarrel()
@@ -48,7 +43,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		sealtimecounter = 0;
 	}
 	
-
 	public void careForInventorySlot()
 	{
 		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
@@ -70,32 +64,18 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 		}
 	}
-	public static int[] getBarrels(){
-		return barrels;
-	}
 
-	public boolean getSealed(){
+	public boolean getSealed()
+	{
 		return sealed;
-	}
-
-	public int getBarrelType(){
-		for(int i = 0; i < barrels.length;i++){
-			if(worldObj.getBlockId(xCoord,yCoord,zCoord)==barrels[i]){
-				return i;
-			}
-		}
-		return 0;
 	}
 
 	public void externalFireCheck()
 	{
-		
 		Random R = new Random();
-		careForInventorySlot();
+		//careForInventorySlot();
 		if(sealed)
 		{
-			
-			//This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
 			if(sealtimecounter == 0)
 			{
 				sealtimecounter = (int) TFC_Time.getTotalTicks();
@@ -110,9 +90,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	private void ProcessItems(){
+	private void ProcessItems()
+	{
 		ItemStack itemstack2;
-		System.out.println(liquidLevel +", "+ Type);
+		//System.out.println(liquidLevel +", "+ Type);
 		if (Type== 1&&itemstack.getItem() == TFCItems.ScrapedHide){
 			itemstack2 = new ItemStack(TFCItems.PrepHide,0,0);
 			while(liquidLevel >= 5 && itemstack.stackSize >0){
@@ -180,39 +161,49 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			}
 			Type = 11;
 		}
-		if(Type==2&&itemstack.getItem() == TFCItems.Hide){
+		if(Type == 2 && itemstack.getItem() == TFCItems.Hide)
+		{
 			itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
-			while(liquidLevel >= 5 && itemstack.stackSize >0){
+			while(liquidLevel >= 5 && itemstack.stackSize >0)
+			{
 				System.out.println(liquidLevel);
 				liquidLevel-=5;
 				itemstack2.stackSize++;
 				itemstack.stackSize--;
 			}
-			if(itemstack2.stackSize > 0){
+			if(itemstack2.stackSize > 0)
+			{
 				output = itemstack2;
 			}
 		}
-		if(itemstack!=null &&Type ==3&&itemstack.getItem()==TFCItems.PrepHide){
+		if(itemstack!=null &&Type ==3&&itemstack.getItem()==TFCItems.PrepHide)
+		{
 			itemstack2 = new ItemStack(TFCItems.TerraLeather,0,0);
-			while(liquidLevel >= 5 && itemstack.stackSize >0){
+			while(liquidLevel >= 5 && itemstack.stackSize >0)
+			{
 				liquidLevel-=5;
 				itemstack2.stackSize++;
 				itemstack.stackSize--;
 			}
-			if(itemstack2.stackSize > 0){
+			if(itemstack2.stackSize > 0)
+			{
 				output = itemstack2;
 			}
 		}
-		if (liquidLevel == 0){
+		if (liquidLevel == 0)
+		{
 			Type = 0;
 		}
-		if (itemstack!=null&&itemstack.stackSize==0){
+		if (itemstack!=null&&itemstack.stackSize==0)
+		{
 			itemstack = null;
 		}
 	}
 
-	public String getType(){
-		switch (Type){
+	public String getType()
+	{
+		switch (Type)
+		{
 		case 0:
 			return "";
 		case 1:
@@ -247,8 +238,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		// TODO Auto-generated method stub
 
 	}
-
-
 
 	@Override
 	public ItemStack decrStackSize(int i, int j)
@@ -341,7 +330,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	}
 
-
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
@@ -353,7 +341,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 
 	}
-
 
 	@Override
 	public void updateEntity()
@@ -394,11 +381,15 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					Type = 2;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater || 
-						itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 64){
+				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 64){
 					liquidLevel = Math.min(liquidLevel + 8, 64);
 					Type = 1;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+				}
+				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 64){
+					liquidLevel = Math.min(liquidLevel + 8, 64);
+					Type = 1;
+					itemstack.itemID = TFCItems.RedSteelBucketEmpty.itemID;
 				}
 				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 64){
 					liquidLevel = Math.min(liquidLevel + 1, 64);
@@ -408,15 +399,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 						itemstack=null;
 				}
 			}
-			//Do the funky math to find how many molten blocks should be placed
-
-
-			//get the direction that the bloomery is facing so that we know where the stack should be
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-
-
 		}
-		validate();
 	}
 
 	@Override
@@ -460,22 +443,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
-		/*
-		oreCount = inStream.readInt();
-		charcoalCount = inStream.readInt();
-		oreDamage = inStream.readInt();
-		outCount = inStream.readInt();
-
-		if(oreDamage == -1)
-			this.OreType = "";
-		else
-			this.OreType = ItemOre.getItemNameDamage(oreDamage);
-		 */
 		Type = inStream.readInt();
 		liquidLevel = inStream.readInt();
 		sealed = inStream.readBoolean();
 		sealtimecounter = inStream.readInt();
-		//handleInitPacket(inStream);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -501,10 +472,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public void createInitPacket(DataOutputStream outStream) throws IOException {
 		outStream.writeInt(Type);
 		outStream.writeInt(liquidLevel);
-		//outStream.writeInt(itemstack != null ? itemstack.itemID : -1);
-		//outStream.writeInt(itemstack != null ? itemstack.stackSize : 0);
-		//outStream.writeInt(output != null ? output.itemID : -1);
-		//outStream.writeInt(output != null ? output.stackSize : 0);
 		outStream.writeBoolean(sealed);
 		outStream.writeInt(sealtimecounter);
 	}
@@ -531,10 +498,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public void handleInitPacket(DataInputStream inStream) throws IOException {
 		Type = inStream.readInt();
 		liquidLevel = inStream.readInt();
-		//itemstack.itemID = inStream.readInt();
-		//itemstack.stackSize = inStream.readInt();
-		//output.itemID = inStream.readInt();
-		//output.stackSize = inStream.readInt();
 		sealed = inStream.readBoolean();
 		sealtimecounter = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

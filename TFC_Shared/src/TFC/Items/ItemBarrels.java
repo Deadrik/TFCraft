@@ -2,18 +2,12 @@ package TFC.Items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
-import TFC.TFCBlocks;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import TFC.TileEntities.TileEntityBarrel;
 
-public class ItemBarrels extends ItemTerra
+public class ItemBarrels extends ItemTerraBlock
 {
 	public ItemBarrels(int i) 
 	{
@@ -42,106 +36,4 @@ public class ItemBarrels extends ItemTerra
 			list.add(new ItemStack(this,1,i));
 		}
 	}
-
-	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
-			int z, int side) {
-		TileEntityBarrel te = null;
-
-		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
-		{
-			world.setBlock(x, y-1, z, te.getBarrels()[itemstack.getItemDamage()]);
-			if(world.isRemote)
-				world.markBlockForUpdate(x, y-1, z);
-			
-		}
-		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
-		{
-			world.setBlock(x, y+1, z, te.getBarrels()[itemstack.getItemDamage()]);
-			if(world.isRemote)
-				world.markBlockForUpdate(x, y+1, z);
-			
-		}
-		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
-		{
-			world.setBlock(x, y, z-1, te.getBarrels()[itemstack.getItemDamage()]);
-			if(world.isRemote)
-				world.markBlockForUpdate(x, y, z-1);
-			
-		}
-		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
-		{
-			world.setBlock(x, y, z+1, te.getBarrels()[itemstack.getItemDamage()]);
-			if(world.isRemote)
-				world.markBlockForUpdate(x, y, z+1);
-			
-		}
-		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
-		{
-			world.setBlock(x-1, y, z, te.getBarrels()[itemstack.getItemDamage()]);
-			if(world.isRemote)
-				world.markBlockForUpdate(x-1, y, z);
-			
-		}
-		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
-		{
-			world.setBlock(x+1, y, z, te.getBarrels()[itemstack.getItemDamage()]);
-			if(world.isRemote)
-				world.markBlockForUpdate(x+1, y, z);
-			
-		}
-		else
-		{
-			return false;
-		}
-		itemstack.stackSize--;
-		return true;
-	}
-	
-	
-
-	@Override
-	public Icon getIconFromDamage(int meta)
-	{        
-		return icons[meta];
-	}
-	
-	Icon[] icons = new Icon[16];
-
-	@Override
-	public void updateIcons(IconRegister registerer)
-    {
-		for(int i = 0; i < 16; i++)
-			icons[i] = registerer.registerIcon("tools/Barrel_"+i);
-    }
-
-	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
-		if(!world.isRemote)
-		{
-			CreatePile(itemstack,entityplayer,world,x,y,z,side);
-		}
-		return false;
-	}
-	
-	public void setSide(World world, ItemStack itemstack, int m, int dir, int x, int y, int z, int i, int j, int k)
-	{
-		if(m < 8)
-		{
-			if(dir == 0 || dir == 2)
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m, 2);
-			else
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8, 2);
-			itemstack.stackSize = itemstack.stackSize-1;
-		}
-		else if(m >= 8)
-		{
-			if(dir == 0 || dir == 2)
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8, 2);
-			else
-				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8, 2);
-			itemstack.stackSize = itemstack.stackSize-1;
-		}
-	}
-
 }

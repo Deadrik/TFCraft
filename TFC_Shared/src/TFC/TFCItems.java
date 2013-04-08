@@ -18,7 +18,6 @@ import TFC.Enums.EnumMetalType;
 import TFC.Enums.EnumSize;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
-import TFC.Items.ItemBarrels;
 import TFC.Items.ItemBellows;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemChisel;
@@ -1273,7 +1272,6 @@ public class TFCItems
 
         OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setFolder("ore/").setUnlocalizedName("Ore");
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
-        Barrel = new ItemBarrels(TFC_Settings.getIntFor(config, "item", "barrels", 16299)).setUnlocalizedName("Barrel");
         
         Javelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","javelin",16318)).setUnlocalizedName("javelin");
 
