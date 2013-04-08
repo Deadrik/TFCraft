@@ -80,20 +80,37 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.itemID == TFCItems.Mortar.itemID)
 			{
+				System.out.println("Checked");
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
-				{             
+				{       
+					System.out.println("Checked");
 					if(iinventory.getStackInSlot(i) == null) 
 					{
 						continue;
 					}
-					if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.itemID)
+					System.out.println(iinventory.getStackInSlot(i).getItem());
+					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
 					{
-						iinventory.getStackInSlot(i).itemID=TFCItems.Limewater.itemID;
+						iinventory.getStackInSlot(i).itemID = TFCItems.Limewater.itemID;
 					}
 				}
 				
 			}
-			
+			else if(itemstack.itemID == TFCItems.Limewater.itemID)
+			{
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{       
+					if(iinventory.getStackInSlot(i) == null) 
+					{
+						continue;
+					}
+					if(iinventory.getStackInSlot(i).getItem() == TFCItems.WoodenBucketWater)
+					{
+						iinventory.getStackInSlot(i).itemID = TFCItems.Mortar.itemID;
+					}
+				}
+				
+			}
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 			{             
 				if(iinventory.getStackInSlot(i) == null) 
