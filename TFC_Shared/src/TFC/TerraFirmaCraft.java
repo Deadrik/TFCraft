@@ -46,7 +46,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 76 Hotfix 9")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 76 Hotfix 10")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
