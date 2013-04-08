@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Containers.ContainerTerraAnvil;
 import TFC.Enums.CraftingRuleEnum;
-import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.TileEntities.TileEntityAnvil;
 
 
 public class GuiTerraAnvil extends GuiContainer
