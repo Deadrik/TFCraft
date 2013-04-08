@@ -158,7 +158,7 @@ public class WorldGenCaveDecor implements IWorldGenerator
 							}
 						}
 					}
-					else if(y <128 && id == 0 && world.getBlockLightValue(x, y-1, z) < 10 && (world.getBlockId(x, y-1, z) == TFCBlocks.StoneIgEx.blockID || world.getBlockId(x, y-1, z) == TFCBlocks.StoneIgIn.blockID || 
+					else if(!world.isRemote && y <128 && id == 0 && world.getBlockLightValue(x, y-1, z) < 10 && (world.getBlockId(x, y-1, z) == TFCBlocks.StoneIgEx.blockID || world.getBlockId(x, y-1, z) == TFCBlocks.StoneIgIn.blockID || 
 							world.getBlockId(x, y-1, z) == TFCBlocks.StoneSed.blockID || world.getBlockId(x, y-1, z) == TFCBlocks.StoneMM.blockID))
 					{
 						if(world.getBlockId(x, y+1, z) == 0 && world.getBlockId(x, y+2, z) == 0 && world.getBlockId(x, y+3, z) == 0)
