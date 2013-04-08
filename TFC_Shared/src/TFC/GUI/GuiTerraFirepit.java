@@ -43,10 +43,10 @@ import TFC.TileEntities.*;
 
 public class GuiTerraFirepit extends GuiContainer
 {
-	private TileEntityTerraFirepit FirepitEntity;
+	private TileEntityFirepit FirepitEntity;
 
 
-	public GuiTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit, World world, int x, int y, int z)
+	public GuiTerraFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraFirepit(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;

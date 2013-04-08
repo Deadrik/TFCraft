@@ -37,7 +37,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
+public class TileEntityMetallurgy extends TileEntity implements IInventory
 {
 	public ItemStack metalItemStacks[];
 	public Boolean AllMelted = false;
@@ -47,7 +47,7 @@ public class TileEntityTerraMetallurgy extends TileEntity implements IInventory
 
 	}
 
-	public TileEntityTerraMetallurgy()
+	public TileEntityMetallurgy()
 	{
 		metalItemStacks = new ItemStack[0];
 	}

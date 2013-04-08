@@ -47,7 +47,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraForge extends TileEntityFireEntity implements IInventory
+public class TileEntityForge extends TileEntityFireEntity implements IInventory
 {
     public boolean isValid;
 
@@ -63,7 +63,7 @@ public class TileEntityTerraForge extends TileEntityFireEntity implements IInven
     private int externalWoodCount;
     private int charcoalCounter;
 
-    public TileEntityTerraForge()
+    public TileEntityForge()
     {
         super();
         fuelTimeLeft = 900;

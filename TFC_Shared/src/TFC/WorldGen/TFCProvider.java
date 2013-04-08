@@ -90,7 +90,15 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public BiomeGenBase getBiomeGenForCoords(int x, int z)
     {
-        BiomeGenBase biome = worldObj.getBiomeGenForCoordsBody(x, z);
+		BiomeGenBase biome = null;
+		try
+		{
+			biome = worldObj.getBiomeGenForCoordsBody(x, z);
+		}
+		catch(Exception Ex)
+		{
+			biome = worldObj.getBiomeGenForCoordsBody(x, z);
+		}
         if(canSnowAt(x,145,z)){biome.temperature = 0;}
         else{biome.temperature = 0.16f;}
         return biome;

@@ -57,7 +57,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventory
+public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 {
 	public ItemStack anvilItemStacks[];
 
@@ -79,7 +79,7 @@ public class TileEntityTerraAnvil extends NetworkTileEntity implements IInventor
 	private AnvilRecipe workWeldRecipe;
 	public int AnvilTier;
 
-	public TileEntityTerraAnvil()
+	public TileEntityAnvil()
 	{
 		anvilItemStacks = new ItemStack[7];
 		itemCraftingValue = 0;

@@ -38,7 +38,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraScribe extends TileEntity implements IInventory
+public class TileEntityScribe extends TileEntity implements IInventory
 {
 	public static HashMap Recipes;
 	public ItemStack scribeItemStacks[];
@@ -48,7 +48,7 @@ public class TileEntityTerraScribe extends TileEntity implements IInventory
 
 	}
 
-	public TileEntityTerraScribe()
+	public TileEntityScribe()
 	{
 		scribeItemStacks = new ItemStack[2];
 	}

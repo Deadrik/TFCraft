@@ -26,7 +26,6 @@ import TFC.Handlers.ServerTickHandler;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
-import TFC.WorldGen.Generators.WorldGenCaveDecor;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenOreSurface;
 import cpw.mods.fml.common.Mod;
@@ -81,7 +80,7 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
+		//GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
 		
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");

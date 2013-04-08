@@ -6,8 +6,8 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Items.ItemFirestarter;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraForge;
+import TFC.TileEntities.TileEntityFirepit;
+import TFC.TileEntities.TileEntityForge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -74,10 +74,10 @@ public class BlockForge extends BlockTerraContainer
 		} 
 		else if(equippedItem != null && equippedItem.getItem() instanceof ItemFirestarter)
 		{
-			if((TileEntityTerraForge)world.getBlockTileEntity(i, j, k) != null)
+			if((TileEntityForge)world.getBlockTileEntity(i, j, k) != null)
 			{
-				TileEntityTerraForge tileentityforge;
-				tileentityforge = (TileEntityTerraForge)world.getBlockTileEntity(i, j, k);
+				TileEntityForge tileentityforge;
+				tileentityforge = (TileEntityForge)world.getBlockTileEntity(i, j, k);
 				if(tileentityforge.fireTemperature < 210 && tileentityforge.fireItemStacks[7] != null && tileentityforge.isValid)
 				{
 					tileentityforge.fireTemperature = 300;
@@ -101,10 +101,10 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)!=null)
+			if((TileEntityForge)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityTerraForge tileentityforge;
-				tileentityforge = (TileEntityTerraForge)world.getBlockTileEntity(i, j, k);
+				TileEntityForge tileentityforge;
+				tileentityforge = (TileEntityForge)world.getBlockTileEntity(i, j, k);
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
 				if(tileentityforge.isValid)
@@ -158,7 +158,7 @@ public class BlockForge extends BlockTerraContainer
 				world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
 						world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (ItemFirestarter.checkSlabsAround(world, x, y, z)))))
 		{
-			((TileEntityTerraForge)world.getBlockTileEntity(x, y, z)).ejectContents();
+			((TileEntityForge)world.getBlockTileEntity(x, y, z)).ejectContents();
 			world.setBlock(x, y, z, 0);
 		}
 		else
@@ -178,8 +178,8 @@ public class BlockForge extends BlockTerraContainer
 			}
 			if(world.getBlockTileEntity(x, y, z) != null)
 			{
-				((TileEntityTerraForge)world.getBlockTileEntity(x, y, z)).setNumAirBlocks(numAirBlocks);
-				((TileEntityTerraForge)world.getBlockTileEntity(x, y, z)).isValid = false;
+				((TileEntityForge)world.getBlockTileEntity(x, y, z)).setNumAirBlocks(numAirBlocks);
+				((TileEntityForge)world.getBlockTileEntity(x, y, z)).isValid = false;
 			}
 		}
 	}
@@ -203,7 +203,7 @@ public class BlockForge extends BlockTerraContainer
 			world.spawnParticle("flame", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
-			if (((TileEntityTerraForge)world.getBlockTileEntity(i, j, k)).fireTemperature > 550)
+			if (((TileEntityForge)world.getBlockTileEntity(i, j, k)).fireTemperature > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f+f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);
@@ -250,7 +250,7 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityTerraForge();
+		return new TileEntityForge();
 	}
 
 

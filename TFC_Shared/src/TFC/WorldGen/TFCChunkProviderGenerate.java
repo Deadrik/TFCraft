@@ -2,45 +2,22 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
-import TFC.TFCBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSand;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.SpawnerAnimals;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.ChunkProviderGenerate;
+import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 import TFC.WorldGen.Generators.WorldGenLakesTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -119,9 +96,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
 	}
 
+	@Override
 	public Chunk provideChunk(int chunkX, int chunkZ)
 	{
-		this.rand.setSeed((long)chunkX * 341873128712L + (long)chunkZ * 132897987541L);
+		this.rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 
 		int[] ids = new int[32768];
 		int[] idsTop = new int[32768];
@@ -153,12 +131,14 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		String key = data.chunkX + "," + data.chunkZ;
-		ChunkDataManager.chunkmap.put(key, data);
+		if(!this.worldObj.isRemote)
+			ChunkDataManager.chunkmap.put(key, data);
 		
 		var4.generateSkylightMap();
 		return var4;
 	}
 
+	@Override
 	public void populate(IChunkProvider par1IChunkProvider, int chunkX, int chunkZ)
 	{
 		BlockSand.fallInstantly = true;
@@ -168,7 +148,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed((long)chunkX * var7 + (long)chunkZ * var9 ^ this.worldObj.getSeed());
+		this.rand.setSeed(chunkX * var7 + chunkZ * var9 ^ this.worldObj.getSeed());
 		boolean var11 = false;
 
 		int var12;
@@ -337,7 +317,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			{
 				for (int var9 = -2; var9 <= 2; ++var9)
 				{
-					float var10 = 10.0F / MathHelper.sqrt_float((float)(var8 * var8 + var9 * var9) + 0.2F);
+					float var10 = 10.0F / MathHelper.sqrt_float(var8 * var8 + var9 * var9 + 0.2F);
 					this.parabolicField[var8 + 2 + (var9 + 2) * 5] = var10;
 				}
 			}
@@ -422,13 +402,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 				for (int var46 = 0; var46 < par6; ++var46)
 				{
-					double var48 = (double)var17;
-					double var26 = (double)var16;
+					double var48 = var17;
+					double var26 = var16;
 					var48 += var47 * 0.2D;
-					var48 = var48 * (double)par6 / 16.0D;
-					double var28 = (double)par6 / 2.0D + var48 * 4.0D;
+					var48 = var48 * par6 / 16.0D;
+					double var28 = par6 / 2.0D + var48 * 4.0D;
 					double var30 = 0.0D;
-					double var32 = ((double)var46 - var28) * 12.0D * 256.0D / 256.0D / (2.70 + var26);
+					double var32 = (var46 - var28) * 12.0D * 256.0D / 256.0D / (2.70 + var26);
 
 					if (var32 < 0.0D)
 					{
@@ -456,7 +436,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					if (var46 > par6 - 4)
 					{
-						double var40 = (double)((float)(var46 - (par6 - 4)) / 3.0F);
+						double var40 = (var46 - (par6 - 4)) / 3.0F;
 						var30 = var30 * (1.0D - var40) + -10.0D * var40;
 					}
 
@@ -726,6 +706,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			metaArrayBig[indexBig] = (byte) rock1.data2;
 		}
 	}
+	
+	@Override
+	public boolean unloadQueuedChunks()
+    {
+        return true;
+    }
 }
 
 

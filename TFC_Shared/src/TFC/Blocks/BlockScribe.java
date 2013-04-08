@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.TileEntities.TileEntityScribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -54,10 +54,10 @@ public class BlockScribe extends BlockTerraContainer
 		} 
 		else
 		{
-			if((TileEntityTerraScribe)world.getBlockTileEntity(i, j, k)!=null)
+			if((TileEntityScribe)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityTerraScribe tileentityanvil;
-				tileentityanvil = (TileEntityTerraScribe)world.getBlockTileEntity(i, j, k);
+				TileEntityScribe tileentityanvil;
+				tileentityanvil = (TileEntityScribe)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				entityplayer.openGui(TerraFirmaCraft.instance, 22, world, i, j, k);
@@ -95,7 +95,7 @@ public class BlockScribe extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityTerraScribe();
+		return new TileEntityScribe();
 	}
 
 }

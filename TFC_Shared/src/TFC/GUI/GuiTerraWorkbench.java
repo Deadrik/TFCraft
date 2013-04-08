@@ -42,7 +42,7 @@ import net.minecraft.world.*;
 
 public class GuiTerraWorkbench extends GuiContainer
 {
-    public GuiTerraWorkbench(InventoryPlayer inventoryplayer, TileEntityTerraWorkbench wb, World world, int i, int j, int k)
+    public GuiTerraWorkbench(InventoryPlayer inventoryplayer, TileEntityWorkbench wb, World world, int i, int j, int k)
     {
         super(new ContainerTerraWorkbench(inventoryplayer, wb,world, i, j, k));
     }

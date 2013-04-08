@@ -2,7 +2,7 @@ package TFC.Containers;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import TFC.*;
-import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.TileEntities.TileEntityScribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -62,10 +62,10 @@ public class SlotCraftingScribe extends Slot
 
 		TerraFirmaCraft.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
 		GameRegistry.onItemCrafted(thePlayer, itemstack, craftMatrix);
-		((TileEntityTerraScribe)paperSlot).scribeItemStacks[1].stackSize--;
-		if(((TileEntityTerraScribe)paperSlot).scribeItemStacks[1].stackSize <= 0)
+		((TileEntityScribe)paperSlot).scribeItemStacks[1].stackSize--;
+		if(((TileEntityScribe)paperSlot).scribeItemStacks[1].stackSize <= 0)
 		{
-			((TileEntityTerraScribe)paperSlot).scribeItemStacks[1] = null;
+			((TileEntityScribe)paperSlot).scribeItemStacks[1] = null;
 		}
 		for (int i = 0; i < craftMatrix.getSizeInventory(); i++)
 		{

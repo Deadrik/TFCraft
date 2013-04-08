@@ -36,12 +36,12 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraLogPile extends TileEntity implements IInventory
+public class TileEntityLogPile extends TileEntity implements IInventory
 {
     public ItemStack[] storage;
     private int logPileOpeners;
 
-    public TileEntityTerraLogPile()
+    public TileEntityLogPile()
     {
         storage = new ItemStack[4];
         logPileOpeners = 0;
@@ -237,7 +237,7 @@ public class TileEntityTerraLogPile extends TileEntity implements IInventory
 
     public void handlePacketData() 
     {
-        TileEntityTerraLogPile pile = this;
+        TileEntityLogPile pile = this;
     }
 
     @Override

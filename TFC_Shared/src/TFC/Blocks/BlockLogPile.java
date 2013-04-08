@@ -13,7 +13,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TileEntityTerraLogPile;
+import TFC.TileEntities.TileEntityLogPile;
 
 public class BlockLogPile extends BlockContainer
 {
@@ -38,10 +38,10 @@ public class BlockLogPile extends BlockContainer
 		}
 		else
 		{
-			if((TileEntityTerraLogPile)world.getBlockTileEntity(i, j, k)!=null)
+			if((TileEntityLogPile)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityTerraLogPile te;
-				te = (TileEntityTerraLogPile)world.getBlockTileEntity(i, j, k);
+				TileEntityLogPile te;
+				te = (TileEntityLogPile)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				if(is != null && is.getItem().itemID == TFCItems.Logs.itemID)
@@ -110,10 +110,10 @@ public class BlockLogPile extends BlockContainer
 	
 	public void Eject(World par1World, int par2, int par3, int par4)
     {
-        if((TileEntityTerraLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        if((TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
         {
-            TileEntityTerraLogPile tileentityanvil;
-            tileentityanvil = (TileEntityTerraLogPile)par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntityLogPile tileentityanvil;
+            tileentityanvil = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
             tileentityanvil.ejectContents();
             par1World.removeBlockTileEntity(par2, par3, par4);
         }
@@ -148,6 +148,6 @@ public class BlockLogPile extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityTerraLogPile();
+		return new TileEntityLogPile();
 	}
 }

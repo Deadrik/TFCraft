@@ -71,13 +71,13 @@ import TFC.TileEntities.TileEntitySapling;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntitySpawnMeter;
 import TFC.TileEntities.TileEntitySuperDetailed;
-import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraForge;
-import TFC.TileEntities.TileEntityTerraLogPile;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
-import TFC.TileEntities.TileEntityTerraScribe;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TileEntityFirepit;
+import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TileEntityMetallurgy;
+import TFC.TileEntities.TileEntityScribe;
+import TFC.TileEntities.TileEntityWorkbench;
 import TFC.TileEntities.TileEntityToolRack;
 import TFC.TileEntities.TileEntityWoodConstruct;
 import TFC.WorldGen.TFCProvider;
@@ -94,14 +94,14 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerTileEntities(boolean b)
 	{
-		ModLoader.registerTileEntity(TileEntityTerraLogPile.class, "TerraLogPile");
+		ModLoader.registerTileEntity(TileEntityLogPile.class, "TerraLogPile");
 
-		ModLoader.registerTileEntity(TileEntityTerraWorkbench.class, "TerraWorkbench");
-		ModLoader.registerTileEntity(TileEntityTerraFirepit.class, "TerraFirepit");
-		ModLoader.registerTileEntity(TileEntityTerraAnvil.class, "TerraAnvil");
-		ModLoader.registerTileEntity(TileEntityTerraScribe.class, "TerraScribe");
-		ModLoader.registerTileEntity(TileEntityTerraForge.class, "TerraForge");
-		ModLoader.registerTileEntity(TileEntityTerraMetallurgy.class, "TerraMetallurgy");
+		ModLoader.registerTileEntity(TileEntityWorkbench.class, "TerraWorkbench");
+		ModLoader.registerTileEntity(TileEntityFirepit.class, "TerraFirepit");
+		ModLoader.registerTileEntity(TileEntityAnvil.class, "TerraAnvil");
+		ModLoader.registerTileEntity(TileEntityScribe.class, "TerraScribe");
+		ModLoader.registerTileEntity(TileEntityForge.class, "TerraForge");
+		ModLoader.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
 		ModLoader.registerTileEntity(TileEntityBloomery.class, "TerraBloomery");
 		ModLoader.registerTileEntity(TileEntitySluice.class, "TerraSluice");
 		ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
@@ -356,31 +356,31 @@ public class CommonProxy implements IGuiHandler
 		{
 		case 0:
 		{
-			return new ContainerTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
+			return new ContainerTerraLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
 		}
 		case 1:
 		{
-			return new ContainerTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
+			return new ContainerTerraWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		}
 		case 20:
 		{
-			return new ContainerTerraFirepit(player.inventory, (TileEntityTerraFirepit) te, world, x, y, z);
+			return new ContainerTerraFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
 		}
 		case 21:
 		{
-			return new ContainerTerraAnvil(player.inventory, (TileEntityTerraAnvil) te, world, x, y, z);
+			return new ContainerTerraAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{
-			return new ContainerTerraScribe(player.inventory, (TileEntityTerraScribe) te, world, x, y, z);
+			return new ContainerTerraScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
 		}
 		case 23:
 		{
-			return new ContainerTerraForge(player.inventory, (TileEntityTerraForge) te, world, x, y, z);
+			return new ContainerTerraForge(player.inventory, (TileEntityForge) te, world, x, y, z);
 		}
 		case 24:
 		{
-			return new ContainerTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world, x, y, z);
+			return new ContainerTerraMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
 		}
 		case 25:
 		{

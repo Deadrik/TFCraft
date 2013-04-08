@@ -4,7 +4,7 @@ import TFC.*;
 import TFC.Core.AnvilReq;
 import TFC.Core.TFC_Core;
 import TFC.Items.ItemHammer;
-import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.TileEntities.TileEntityAnvil;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -42,11 +42,11 @@ import net.minecraft.world.*;
 
 public class ContainerTerraAnvil extends ContainerTFC
 {
-	private TileEntityTerraAnvil anvil;
+	private TileEntityAnvil anvil;
 	private int greenIndicator;
 	private int redIndicator;
 
-	public ContainerTerraAnvil(InventoryPlayer inventoryplayer, TileEntityTerraAnvil anvil, World world, int x, int y, int z)
+	public ContainerTerraAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil anvil, World world, int x, int y, int z)
 	{
 		this.anvil = anvil;
 

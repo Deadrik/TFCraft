@@ -42,10 +42,10 @@ import TFC.TileEntities.*;
 
 public class GuiTerraMetallurgy extends GuiContainer
 {
-	private TileEntityTerraMetallurgy entityMetallurgy;
+	private TileEntityMetallurgy entityMetallurgy;
 
 
-	public GuiTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityTerraMetallurgy tileentityMetallurgy, World world, int x, int y, int z)
+	public GuiTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityMetallurgy tileentityMetallurgy, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraMetallurgy(inventoryplayer,tileentityMetallurgy, world, x, y, z) );
 		entityMetallurgy = tileentityMetallurgy;

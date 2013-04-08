@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
+import TFC.TileEntities.TileEntityMetallurgy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,10 +52,10 @@ public class BlockMetallurgy extends BlockTerraContainer
 		} 
 		else
 		{
-			if((TileEntityTerraMetallurgy)world.getBlockTileEntity(i, j, k)!=null)
+			if((TileEntityMetallurgy)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityTerraMetallurgy tileentityanvil;
-				tileentityanvil = (TileEntityTerraMetallurgy)world.getBlockTileEntity(i, j, k);
+				TileEntityMetallurgy tileentityanvil;
+				tileentityanvil = (TileEntityMetallurgy)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
 				entityplayer.openGui(TerraFirmaCraft.instance, 24, world, i, j, k);
@@ -85,6 +85,6 @@ public class BlockMetallurgy extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityTerraMetallurgy();
+		return new TileEntityMetallurgy();
 	}
 }

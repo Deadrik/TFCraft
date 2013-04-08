@@ -10,15 +10,15 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.TFCItems;
 import TFC.Containers.ContainerTerraScribe;
-import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.TileEntities.TileEntityScribe;
 
 
 public class GuiTerraScribe extends GuiContainer
 {
-	private TileEntityTerraScribe FirepitEntity;
+	private TileEntityScribe FirepitEntity;
 
 
-	public GuiTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe tileentityfirepit, World world, int x, int y, int z)
+	public GuiTerraScribe(InventoryPlayer inventoryplayer, TileEntityScribe tileentityfirepit, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraScribe(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;

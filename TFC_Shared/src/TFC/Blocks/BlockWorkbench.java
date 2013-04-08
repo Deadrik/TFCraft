@@ -3,7 +3,7 @@ package TFC.Blocks;
 import TFC.*;
 import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.TileEntities.TileEntityWorkbench;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -77,6 +77,6 @@ public class BlockWorkbench extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityTerraWorkbench();
+		return new TileEntityWorkbench();
 	}
 }

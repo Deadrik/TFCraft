@@ -41,7 +41,7 @@ import net.minecraft.world.*;
 
 public class GuiTerraLogPile extends GuiContainer
 {
-    public GuiTerraLogPile(InventoryPlayer inventoryplayer, TileEntityTerraLogPile wb, World world, int i, int j, int k)
+    public GuiTerraLogPile(InventoryPlayer inventoryplayer, TileEntityLogPile wb, World world, int i, int j, int k)
     {
         super(new ContainerTerraLogPile(inventoryplayer, wb,world, i, j, k));
     }

@@ -13,16 +13,16 @@ import TFC.Core.CraftingManagerTFC;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Items.ItemMeltedMetal;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
+import TFC.TileEntities.TileEntityMetallurgy;
 
 public class ContainerTerraMetallurgy extends ContainerTFC
 {
-	private TileEntityTerraMetallurgy terrametallurgy;
+	private TileEntityMetallurgy terrametallurgy;
 	public InventoryCrafting craftMatrix;
 	public IInventory craftResult;
 	private World worldObj;
 
-	public ContainerTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityTerraMetallurgy scribe, World world, int x, int y, int z)
+	public ContainerTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityMetallurgy scribe, World world, int x, int y, int z)
 	{
 		terrametallurgy = scribe;
 		craftMatrix = new InventoryCrafting(this, 5, 5);

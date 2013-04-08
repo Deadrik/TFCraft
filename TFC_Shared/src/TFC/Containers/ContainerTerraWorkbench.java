@@ -1,6 +1,6 @@
 package TFC.Containers;
 
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.TileEntities.TileEntityWorkbench;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -45,9 +45,9 @@ public class ContainerTerraWorkbench extends ContainerTFC
     private int posX;
     private int posY;
     private int posZ;
-    private TileEntityTerraWorkbench workbench;
+    private TileEntityWorkbench workbench;
 
-    public ContainerTerraWorkbench(InventoryPlayer par1InventoryPlayer, TileEntityTerraWorkbench wb, World par2World, int par3, int par4, int par5)
+    public ContainerTerraWorkbench(InventoryPlayer par1InventoryPlayer, TileEntityWorkbench wb, World par2World, int par3, int par4, int par5)
     {
     	this.worldObj = par2World;
         this.posX = par3;

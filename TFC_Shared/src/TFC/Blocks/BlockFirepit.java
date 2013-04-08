@@ -4,8 +4,8 @@ import java.util.Random;
 
 import TFC.*;
 import TFC.Items.ItemLogs;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraLogPile;
+import TFC.TileEntities.TileEntityFirepit;
+import TFC.TileEntities.TileEntityLogPile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -73,10 +73,10 @@ public class BlockFirepit extends BlockTerraContainer
 		} 
 		else if(itemid == TFCItems.FireStarter.itemID)
 		{
-			if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k) != null)
+			if((TileEntityFirepit)world.getBlockTileEntity(i, j, k) != null)
 			{
-				TileEntityTerraFirepit tileentityfirepit;
-				tileentityfirepit = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
+				TileEntityFirepit tileentityfirepit;
+				tileentityfirepit = (TileEntityFirepit)world.getBlockTileEntity(i, j, k);
 				if(tileentityfirepit.fireTemperature < 210 && tileentityfirepit.fireItemStacks[5] != null)
 				{
 					tileentityfirepit.fireTemperature = 300;
@@ -91,10 +91,10 @@ public class BlockFirepit extends BlockTerraContainer
 		}
 		else
 		{
-			if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)!=null)
+			if((TileEntityFirepit)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityTerraFirepit tileentityfirepit;
-				tileentityfirepit = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
+				TileEntityFirepit tileentityfirepit;
+				tileentityfirepit = (TileEntityFirepit)world.getBlockTileEntity(i, j, k);
 				ItemStack is =entityplayer.getCurrentEquippedItem();
 
 				entityplayer.openGui(TerraFirmaCraft.instance, 20, world, i, j, k);
@@ -117,11 +117,11 @@ public class BlockFirepit extends BlockTerraContainer
     {
         if(entity instanceof EntityItem && ((EntityItem)entity).getEntityItem().getItem() instanceof ItemLogs)
         {
-            if((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)!=null)
+            if((TileEntityFirepit)world.getBlockTileEntity(i, j, k)!=null)
             {
                 ItemStack is = ((EntityItem)entity).getEntityItem();
-                TileEntityTerraFirepit te;
-                te = (TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k);
+                TileEntityFirepit te;
+                te = (TileEntityFirepit)world.getBlockTileEntity(i, j, k);
                 if(te.fireItemStacks[0] == null)
                 {
                     if(is.stackSize == 1)
@@ -157,7 +157,7 @@ public class BlockFirepit extends BlockTerraContainer
 	{
 		if(!world.isBlockOpaqueCube(i, j-1, k))
 		{
-			((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).ejectContents();
+			((TileEntityFirepit)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlock(i, j, k, 0);
 			return;
 		}
@@ -185,14 +185,14 @@ public class BlockFirepit extends BlockTerraContainer
 			world.spawnParticle("flame", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("smoke", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
 			world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f4 - 0.3F, 0.0D, 0.0D, 0.0D);
-			if (((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).fireTemperature > 550)
+			if (((TileEntityFirepit)world.getBlockTileEntity(i, j, k)).fireTemperature > 550)
 			{
 				world.spawnParticle("flame", f+f5 + 0.3F , f1, f2 + f6 + 0.2F, 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", f+f4 - 0.3F , f1, f2 + f6 + 0.1F, 0.0D, 0.0D, 0.0D);
 			}
 			if(world.getBlockTileEntity(i, j, k) != null)
 			{
-				if(((TileEntityTerraFirepit)world.getBlockTileEntity(i, j, k)).charcoalCounter != 0)
+				if(((TileEntityFirepit)world.getBlockTileEntity(i, j, k)).charcoalCounter != 0)
 				{
 					world.spawnParticle("smoke", f+f4 - 0.3F, f1+2.5,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 					world.spawnParticle("smoke", f+f4 - 0.1F, f1+2.5,  f2 + f5 + 0.1F, 0.0D, 0.0D, 0.0D);
@@ -249,10 +249,10 @@ public class BlockFirepit extends BlockTerraContainer
     
     public void Eject(World par1World, int par2, int par3, int par4)
     {
-        if((TileEntityTerraFirepit)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        if((TileEntityFirepit)par1World.getBlockTileEntity(par2, par3, par4)!=null)
         {
-            TileEntityTerraFirepit tileentityanvil;
-            tileentityanvil = (TileEntityTerraFirepit)par1World.getBlockTileEntity(par2, par3, par4);
+            TileEntityFirepit tileentityanvil;
+            tileentityanvil = (TileEntityFirepit)par1World.getBlockTileEntity(par2, par3, par4);
             tileentityanvil.ejectContents();
             par1World.removeBlockTileEntity(par2, par3, par4);
         }
@@ -267,7 +267,7 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) 
 	{
-		return new TileEntityTerraFirepit();
+		return new TileEntityFirepit();
 	}
 	
 	@Override

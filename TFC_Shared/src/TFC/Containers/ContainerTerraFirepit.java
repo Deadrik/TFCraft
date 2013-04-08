@@ -3,7 +3,7 @@ package TFC.Containers;
 import java.util.ArrayList;
 
 import TFC.*;
-import TFC.TileEntities.TileEntityTerraFirepit;
+import TFC.TileEntities.TileEntityFirepit;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -38,13 +38,13 @@ import net.minecraft.world.*;
 
 public class ContainerTerraFirepit extends ContainerTFC
 {
-    private TileEntityTerraFirepit firepit;
+    private TileEntityFirepit firepit;
 
     private float firetemp;
     private int charcoal;
 
 
-    public ContainerTerraFirepit(InventoryPlayer inventoryplayer, TileEntityTerraFirepit tileentityfirepit, World world, int x, int y, int z)
+    public ContainerTerraFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
     {
         firepit = tileentityfirepit;
         firetemp = -1111;

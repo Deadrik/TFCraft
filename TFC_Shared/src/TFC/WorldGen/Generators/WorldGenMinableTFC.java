@@ -2,41 +2,10 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import TFC.*;
-import TFC.Chunkdata.ChunkData;
-import TFC.Chunkdata.ChunkDataManager;
-import TFC.Core.TFC_Settings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.TFCBlocks;
 
 public class WorldGenMinableTFC extends WorldGenerator
 {
@@ -69,7 +38,6 @@ public class WorldGenMinableTFC extends WorldGenerator
     private int vDens = 2;
     private int hDens = 2;
     
-    private ChunkData chunkdata;
     private String name;
 
     public WorldGenMinableTFC(int i, int j)
@@ -227,23 +195,6 @@ public class WorldGenMinableTFC extends WorldGenerator
                         if(isCorrectRockType && isCorrectMeta)
                         {
                             world.setBlock(posX, posY, posZ, MPBlockID, MPBlockMeta, 0x2);
-                            if(doOnce)
-                            {
-                            	if(posY >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
-                            	{
-                            		chunkdata.oreList1.add(name);
-                            	}
-                            	else if(posY >= TFC_Settings.RockLayer3Height && !chunkdata.oreList2.contains(name))
-                            	{
-                            		chunkdata.oreList2.add(name);
-                            	}
-                            	else if (!chunkdata.oreList3.contains(name))
-                            	{
-                            		chunkdata.oreList3.add(name);
-                            		
-                            	}
-                            	doOnce = false;
-                            }
                         }
 
                         blocksMade++;
@@ -259,22 +210,6 @@ public class WorldGenMinableTFC extends WorldGenerator
                 if(isCorrectRockType && isCorrectMeta)
                 {
                     world.setBlock(posX, posY, posZ, MPBlockID, MPBlockMeta, 0x2);
-                    if(doOnce)
-                    {
-                    	if(posY >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
-                    	{
-                    		chunkdata.oreList1.add(name);
-                    	}
-                    	else if(posY >= TFC_Settings.RockLayer3Height && !chunkdata.oreList2.contains(name))
-                    	{
-                    		chunkdata.oreList2.add(name);
-                    	}
-                    	else if (!chunkdata.oreList3.contains(name))
-                    	{
-                    		chunkdata.oreList3.add(name);
-                    	}
-                    	doOnce = false;
-                    }
                 }                      
 
                 blocksMade++;
@@ -302,20 +237,20 @@ public class WorldGenMinableTFC extends WorldGenerator
         numberOfBlocks = xyz; 
 
         float f = rand.nextFloat() * (float)Math.PI;
-        double d = (float)(x + 8) + MathHelper.sin(f) * (float)numberOfBlocks / 8F;
-        double d1 = (float)(x + 8) - MathHelper.sin(f) * (float)numberOfBlocks / 8F;
-        double d2 = (float)(z + 8) + MathHelper.cos(f) * (float)numberOfBlocks / 8F;
-        double d3 = (float)(z + 8) - MathHelper.cos(f) * (float)numberOfBlocks / 8F;
+        double d = x + 8 + MathHelper.sin(f) * numberOfBlocks / 8F;
+        double d1 = x + 8 - MathHelper.sin(f) * numberOfBlocks / 8F;
+        double d2 = z + 8 + MathHelper.cos(f) * numberOfBlocks / 8F;
+        double d3 = z + 8 - MathHelper.cos(f) * numberOfBlocks / 8F;
         double d4 = y + rand.nextInt(3) - 2;
         double d5 = y + rand.nextInt(3) - 2;
         for(int l = 0; l <= numberOfBlocks; l++)
         {
-            double d6 = d + (d1 - d) * (double)l / (double)numberOfBlocks;
-            double d7 = d4 + (d5 - d4) * (double)l / (double)numberOfBlocks;
-            double d8 = d2 + (d3 - d2) * (double)l / (double)numberOfBlocks;
-            double d9 = rand.nextDouble() * (double)numberOfBlocks / 16D;
-            double d10 = (double)(MathHelper.sin((float)l * (float)Math.PI / (float)numberOfBlocks) + 1.0F) * d9 + 1.0D;
-            double d11 = (double)(MathHelper.sin((float)l * (float)Math.PI / (float)numberOfBlocks) + 1.0F) * d9 + 1.0D;
+            double d6 = d + (d1 - d) * l / numberOfBlocks;
+            double d7 = d4 + (d5 - d4) * l / numberOfBlocks;
+            double d8 = d2 + (d3 - d2) * l / numberOfBlocks;
+            double d9 = rand.nextDouble() * numberOfBlocks / 16D;
+            double d10 = (MathHelper.sin(l * (float)Math.PI / numberOfBlocks) + 1.0F) * d9 + 1.0D;
+            double d11 = (MathHelper.sin(l * (float)Math.PI / numberOfBlocks) + 1.0F) * d9 + 1.0D;
             int i1 = MathHelper.floor_double(d6 - d10 / 2D);
             int j1 = MathHelper.floor_double(d7 - d11 / 2D);
             int k1 = MathHelper.floor_double(d8 - d10 / 2D);
@@ -324,21 +259,21 @@ public class WorldGenMinableTFC extends WorldGenerator
             int j2 = MathHelper.floor_double(d8 + d10 / 2D);
             for(int xCoord = i1; xCoord <= l1; xCoord++)
             {
-                double d12 = ((double)xCoord + 0.5D - d6) / (d10 / 2D);
+                double d12 = (xCoord + 0.5D - d6) / (d10 / 2D);
                 if(d12 * d12 >= 1.0D)
                 {
                     continue;
                 }
                 for(int yCoord = j1; yCoord <= i2; yCoord++)
                 {
-                    double d13 = ((double)yCoord + 0.5D - d7) / (d11 / 2D);
+                    double d13 = (yCoord + 0.5D - d7) / (d11 / 2D);
                     if(d12 * d12 + d13 * d13 >= 1.0D)
                     {
                         continue;
                     }
                     for(int zCoord = k1; zCoord <= j2; zCoord++)
                     {
-                        double d14 = ((double)zCoord + 0.5D - d8) / (d10 / 2D);
+                        double d14 = (zCoord + 0.5D - d8) / (d10 / 2D);
                         int m = world.getBlockMetadata(xCoord, yCoord, zCoord);
                         boolean isCorrectRockType = world.getBlockId(xCoord, yCoord, zCoord) == LayerID;
                         boolean isCorrectMeta = (m == LayerMeta || LayerMeta == -1);
@@ -347,22 +282,6 @@ public class WorldGenMinableTFC extends WorldGenerator
                                 (m == LayerMeta || LayerMeta == -1))
                         {
                             world.setBlock(xCoord, yCoord, zCoord, MPBlockID, MPBlockMeta, 0x2);
-                            if(doOnce)
-                            {
-                            	if(yCoord >= TFC_Settings.RockLayer2Height && !chunkdata.oreList1.contains(name))
-                            	{
-                            		chunkdata.oreList1.add(name);
-                            	}
-                            	else if(yCoord >= TFC_Settings.RockLayer3Height && !chunkdata.oreList2.contains(name))
-                            	{
-                            		chunkdata.oreList2.add(name);
-                            	}
-                            	else if (!chunkdata.oreList3.contains(name))
-                            	{
-                            		chunkdata.oreList3.add(name);
-                            	}
-                            	doOnce = false;
-                            }
                         }
                     }
                 }
@@ -375,8 +294,6 @@ public class WorldGenMinableTFC extends WorldGenerator
     {
         MPChunk_X = x >> 4;// set output chunk x
         MPChunk_Z = z >> 4;// set output chunk z
-        
-        chunkdata = ChunkDataManager.getData(MPChunk_X, MPChunk_Z);
         
         MPBlockID = minableBlockId;// set output block ID
         MPBlockMeta = minableBlockMeta;
@@ -401,8 +318,6 @@ public class WorldGenMinableTFC extends WorldGenerator
         MPChunk_X = x >> 4;// set output chunk x
         MPChunk_Z = z >> 4;// set output chunk z
             
-        chunkdata = ChunkDataManager.getData(MPChunk_X, MPChunk_Z);
-            
         MPBlockID = minableBlockId;// set output block ID
         MPBlockMeta = minableBlockMeta;
         worldObj = world;
@@ -422,7 +337,8 @@ public class WorldGenMinableTFC extends WorldGenerator
     }
     
     
-    public boolean generate(World world, Random random, int i, int j, int k)
+    @Override
+	public boolean generate(World world, Random random, int i, int j, int k)
     {
         return true;
     }

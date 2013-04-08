@@ -6,7 +6,7 @@ import TFC.*;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
-import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.TileEntities.TileEntityAnvil;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
@@ -62,7 +62,7 @@ public class ItemHammer extends ItemTerraTool
 				if(side == 1)
 				{
 					world.setBlock(x, y, z, TFCBlocks.Anvil.blockID);
-					TileEntityTerraAnvil te = (TileEntityTerraAnvil) world.getBlockTileEntity(x, y, z);
+					TileEntityAnvil te = (TileEntityAnvil) world.getBlockTileEntity(x, y, z);
 					if(te != null)
 					{
 						te.stonePair[0] = id2;

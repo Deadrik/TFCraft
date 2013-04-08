@@ -4,7 +4,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.CraftingManagerTFC;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.TileEntities.TileEntityWorkbench;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

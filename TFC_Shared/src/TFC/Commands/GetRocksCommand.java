@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Items.ItemLooseRock;
 
@@ -39,21 +38,7 @@ public class GetRocksCommand extends CommandBase{
 		String t1s = ((ItemLooseRock)TFCItems.LooseRock).MetaNames[t1[1]];
 		String t2s = ((ItemLooseRock)TFCItems.LooseRock).MetaNames[t2[1]];
 		
-		String ore1 = "Empty";
-		String ore2 = "Empty";
-		String ore3 = "Empty";
-		
-		if(ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList1.size() > 0)
-			ore1 = ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList1.get(0);
-		if(ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList2.size() > 0)
-			ore2 = ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList2.get(0);
-		if(ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList3.size() > 0)
-			ore3 = ChunkDataManager.getData((int)var4.posX >> 4, (int)var4.posZ >> 4).oreList3.get(0);
-		
-		throw new PlayerNotFoundException("Rock Layer 1: "+ t0s + "   Rock Layer 2: "+ t1s + "   Rock Layer 3: "+ t2s + 
-				"   Ore1: " + ore1+ 
-				"   Ore2: " + ore2+ 
-				"   Ore3: " + ore3);
+		throw new PlayerNotFoundException("Rock Layer 1: "+ t0s + "   Rock Layer 2: "+ t1s + "   Rock Layer 3: "+ t2s);
 
 	}
 	

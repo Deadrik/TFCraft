@@ -21,11 +21,11 @@ import TFC.Items.ItemWritableBookTFC;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityTerraAnvil;
+import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBloomery;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraLogPile;
-import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.TileEntities.TileEntityFirepit;
+import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TileEntityScribe;
 import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -348,7 +348,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					int X = dis.readInt();
 					int Y = dis.readInt();
 					int Z = dis.readInt();
-					TileEntityTerraScribe te =(TileEntityTerraScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
+					TileEntityScribe te =(TileEntityScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
 					te.scribeItemStacks[1]=null;
 				}
 			}

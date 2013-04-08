@@ -11,18 +11,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Core.CraftingManagerTFC;
 import TFC.GUI.GuiTerraScribe;
-import TFC.TileEntities.TileEntityTerraScribe;
+import TFC.TileEntities.TileEntityScribe;
 
 public class ContainerTerraScribe extends ContainerTFC
 {
-	private TileEntityTerraScribe terraScribe;
+	private TileEntityScribe terraScribe;
 	public InventoryCrafting craftMatrix;
 	public IInventory craftResult;
 	private EntityPlayer entityplayer;
 	private World worldObj;
 	private GuiTerraScribe te;
 
-	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityTerraScribe scribe, World world, int x, int y, int z)
+	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityScribe scribe, World world, int x, int y, int z)
 	{
 		terraScribe = scribe;
 		craftMatrix = new InventoryCrafting(this, 5, 5);

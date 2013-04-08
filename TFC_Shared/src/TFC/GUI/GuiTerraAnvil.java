@@ -42,10 +42,10 @@ import TFC.TileEntities.*;
 
 public class GuiTerraAnvil extends GuiContainer
 {
-	private TileEntityTerraAnvil AnvilEntity;
+	private TileEntityAnvil AnvilEntity;
 
 
-	public GuiTerraAnvil(InventoryPlayer inventoryplayer, TileEntityTerraAnvil tileentityanvil, World world, int x, int y, int z)
+	public GuiTerraAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil tileentityanvil, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraAnvil(inventoryplayer,tileentityanvil, world, x, y, z) );
 		AnvilEntity = tileentityanvil;

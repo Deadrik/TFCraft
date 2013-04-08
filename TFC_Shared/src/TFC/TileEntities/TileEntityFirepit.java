@@ -4,48 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
-import TFC.Blocks.BlockFirepit;
-import TFC.Core.*;
+import TFC.Core.HeatIndex;
+import TFC.Core.HeatManager;
+import TFC.Core.TFC_Core;
+import TFC.Core.TFC_ItemHeat;
+import TFC.Core.TFC_Time;
+import TFC.Core.Vector3f;
 import TFC.Enums.EnumWoodMaterial;
-import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInventory
+public class TileEntityFirepit extends TileEntityFireEntity implements IInventory
 {
     
 
@@ -62,7 +42,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     public final int FIREBURNTIME = (int) ((TFC_Time.hourLength*18)/100);//default 240
 
-    public TileEntityTerraFirepit()
+    public TileEntityFirepit()
     {
         fuelTimeLeft = 375;
         fuelBurnTemp =  613;
@@ -204,14 +184,17 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                 ItemStack mold = null;
 
 
+                //If the input is unshaped metal
                 if(fireItemStacks[1].getItem() instanceof ItemMeltedMetal)
                 {
+                	//if both output slots are empty then just lower the input item into the first output slot
                     if(fireItemStacks[7] == null && fireItemStacks[8] == null)
                     {
                         fireItemStacks[7] = fireItemStacks[1].copy();
                         fireItemStacks[1] = null;
                         return;
                     }
+                    //Otherwise if the first output has an item that doesnt match the input item then put the item in the second output slot
                     else if(fireItemStacks[7] != null && fireItemStacks[7].getItem() != TFCItems.CeramicMold && 
                             (fireItemStacks[7].getItem() != fireItemStacks[1].getItem() || fireItemStacks[7].getItemDamage() == 0))
                     {
@@ -398,7 +381,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
         {
             if(fireItemStacks[i]!= null)
             {
-                entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+                entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
                         fireItemStacks[i]);
                 entityitem.motionX = (float)rand.nextGaussian() * f3;
                 entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
@@ -496,7 +479,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
                     vecArray.add(new Vector3f(i, j-1, k));
             }
 
-            TileEntityTerraLogPile te = (TileEntityTerraLogPile)worldObj.getBlockTileEntity(i, j, k);
+            TileEntityLogPile te = (TileEntityLogPile)worldObj.getBlockTileEntity(i, j, k);
             int count = 0;
             if(te != null)
             {
@@ -713,7 +696,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     }
 
-    public void readFromNBT(NBTTagCompound nbttagcompound)
+    @Override
+	public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
         fireTemperature = nbttagcompound.getFloat("temperature");
@@ -748,7 +732,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     }
 
-    public void updateEntity()
+    @Override
+	public void updateEntity()
     {
         int Surrounded = getSurroundedByWood(xCoord,yCoord,zCoord);
         if(fireTemperature > 210 && worldObj.getBlockId(xCoord, yCoord+1, zCoord) == TFCBlocks.LogPile.blockID)
@@ -901,7 +886,7 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
             if(airFromBellowsTime > 0)
             {
                 airFromBellowsTime--;
-                airFromBellows = (float)airFromBellowsTime/120*10;
+                airFromBellows = airFromBellowsTime/120*10;
             }
 
             //do a last minute check to verify stack size
@@ -926,7 +911,8 @@ public class TileEntityTerraFirepit extends TileEntityFireEntity implements IInv
 
     }
 
-    public void writeToNBT(NBTTagCompound nbttagcompound)
+    @Override
+	public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
         nbttagcompound.setFloat("temperature", fireTemperature);

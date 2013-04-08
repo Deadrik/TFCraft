@@ -42,10 +42,10 @@ import TFC.TileEntities.*;
 
 public class GuiTerraForge extends GuiContainer
 {
-	private TileEntityTerraForge ForgeEntity;
+	private TileEntityForge ForgeEntity;
 
 
-	public GuiTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge, World world, int x, int y, int z)
+	public GuiTerraForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
 	{
 		super(new ContainerTerraForge(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;

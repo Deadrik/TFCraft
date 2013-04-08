@@ -12,7 +12,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemChisel;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityTerraFirepit;
+import TFC.TileEntities.TileEntityFirepit;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

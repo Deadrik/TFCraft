@@ -33,11 +33,11 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 
-public class TileEntityTerraWorkbench extends TileEntity implements IInventory
+public class TileEntityWorkbench extends TileEntity implements IInventory
 {
 	public ItemStack[] craftingMatrix;
 
-	public TileEntityTerraWorkbench()
+	public TileEntityWorkbench()
 	{
 		craftingMatrix = new ItemStack[9];
 	}

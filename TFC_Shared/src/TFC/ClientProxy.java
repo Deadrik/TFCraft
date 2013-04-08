@@ -115,13 +115,13 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntitySluice;
-import TFC.TileEntities.TileEntityTerraAnvil;
-import TFC.TileEntities.TileEntityTerraFirepit;
-import TFC.TileEntities.TileEntityTerraForge;
-import TFC.TileEntities.TileEntityTerraLogPile;
-import TFC.TileEntities.TileEntityTerraMetallurgy;
-import TFC.TileEntities.TileEntityTerraScribe;
-import TFC.TileEntities.TileEntityTerraWorkbench;
+import TFC.TileEntities.TileEntityAnvil;
+import TFC.TileEntities.TileEntityFirepit;
+import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TileEntityLogPile;
+import TFC.TileEntities.TileEntityMetallurgy;
+import TFC.TileEntities.TileEntityScribe;
+import TFC.TileEntities.TileEntityWorkbench;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -256,31 +256,31 @@ public class ClientProxy extends CommonProxy
 		{
 		case 0:
 		{
-			return new GuiTerraLogPile(player.inventory, (TileEntityTerraLogPile) te, world, x, y, z);
+			return new GuiTerraLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
 		}
 		case 1:
 		{
-			return new GuiTerraWorkbench(player.inventory, (TileEntityTerraWorkbench) te, world, x, y, z);
+			return new GuiTerraWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		}
 		case 20:
 		{
-			return new GuiTerraFirepit(player.inventory, (TileEntityTerraFirepit) te, world, x, y, z);
+			return new GuiTerraFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
 		}
 		case 21:
 		{
-			return new GuiTerraAnvil(player.inventory, (TileEntityTerraAnvil) te, world, x, y, z);
+			return new GuiTerraAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{
-			return new GuiTerraScribe(player.inventory, (TileEntityTerraScribe) te, world, x, y, z);
+			return new GuiTerraScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
 		}
 		case 23:
 		{
-			return new GuiTerraForge(player.inventory, (TileEntityTerraForge) te, world, x, y, z);
+			return new GuiTerraForge(player.inventory, (TileEntityForge) te, world, x, y, z);
 		}
 		case 24:
 		{
-			return new GuiTerraMetallurgy(player.inventory, (TileEntityTerraMetallurgy) te, world, x, y, z);
+			return new GuiTerraMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
 		}
 		case 25:
 		{

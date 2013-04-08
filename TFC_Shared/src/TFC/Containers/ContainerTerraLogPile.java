@@ -1,7 +1,7 @@
 package TFC.Containers;
 
 import TFC.Items.ItemLogs;
-import TFC.TileEntities.TileEntityTerraLogPile;
+import TFC.TileEntities.TileEntityLogPile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -40,10 +40,10 @@ public class ContainerTerraLogPile extends ContainerTFC
 	private int posX;
 	private int posY;
 	private int posZ;
-	private TileEntityTerraLogPile logpile;
+	private TileEntityLogPile logpile;
 	private EntityPlayer player;
 
-	public ContainerTerraLogPile(InventoryPlayer playerinv, TileEntityTerraLogPile pile, World world, int x, int y, int z)
+	public ContainerTerraLogPile(InventoryPlayer playerinv, TileEntityLogPile pile, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.logpile = pile;

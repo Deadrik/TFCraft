@@ -4,7 +4,7 @@ import TFC.*;
 import TFC.Core.HeatManager;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
-import TFC.TileEntities.TileEntityTerraForge;
+import TFC.TileEntities.TileEntityForge;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -39,14 +39,14 @@ import net.minecraft.world.*;
 
 public class ContainerTerraForge extends ContainerTFC
 {
-	private TileEntityTerraForge forge;
+	private TileEntityForge forge;
 	private int coolTime;
 	private int freezeTime;
 	private int itemFreezeTime;
     private float firetemp;
 
 
-	public ContainerTerraForge(InventoryPlayer inventoryplayer, TileEntityTerraForge tileentityforge, World world, int x, int y, int z)
+	public ContainerTerraForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
 
