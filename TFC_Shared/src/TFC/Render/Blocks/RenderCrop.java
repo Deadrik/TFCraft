@@ -19,7 +19,12 @@ public class RenderCrop
 	{
 		IBlockAccess blockaccess = renderblocks.blockAccess;
 		TileEntityCrop te = (TileEntityCrop)blockaccess.getBlockTileEntity(i, j, k);
-		CropIndex crop = CropManager.getInstance().getCropFromId(te.cropId);
+		
+		CropIndex crop = null;
+		if(te != null)
+			crop = CropManager.getInstance().getCropFromId(te.cropId);
+		else
+			return false;
 		
 		Tessellator var9 = Tessellator.instance;
         var9.setBrightness(block.getMixedBrightnessForBlock(blockaccess, i, j, k));
