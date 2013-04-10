@@ -1,47 +1,30 @@
 package TFC.Entities.Mobs;
 
-import TFC.*;
-import TFC.Core.TFC_Time;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.AchievementList;
+import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class EntityPigTFC extends EntityAnimalTFC
 {
-	private EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
     public EntityPigTFC(World par1World)
     {
         super(par1World);
@@ -54,8 +37,8 @@ public class EntityPigTFC extends EntityAnimalTFC
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-        this.tasks.addTask(6, new EntityAIWander(this, var2));
-        this.tasks.addTask(5, this.aiEatGrass);
+        this.tasks.addTask(5, new EntityAIWander(this, var2));
+        this.tasks.addTask(6, this.aiEatGrass);
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
@@ -72,8 +55,8 @@ public class EntityPigTFC extends EntityAnimalTFC
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-        this.tasks.addTask(6, new EntityAIWander(this, var2));
-        this.tasks.addTask(5, this.aiEatGrass);
+        this.tasks.addTask(5, new EntityAIWander(this, var2));
+        this.tasks.addTask(6, this.aiEatGrass);
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
 	}
