@@ -1,78 +1,57 @@
 package TFC.Entities.Mobs;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import TFC.*;
-import TFC.Core.TFC_Time;
+import net.minecraft.block.Block;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.AI.EntityAIAvoidEntityTFC;
 import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class EntityDeer extends EntityAnimalTFC
 {    
 
     /** The eat grass AI task for this mob. */
-    private EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+    private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
     private boolean running;
 
     public EntityDeer(World par1World)
     {
         super(par1World);
         running = false;
-        this.texture = "/mob/deer.png";
+        this.texture = "/mob/blah.png";
         this.setSize(0.9F, 1.3F);
         float var2 = 0.23F / 1.1F;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-        this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
-        this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
+        //this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
+        //this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
+        //this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
         this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8.0F, 0.5F, 0.7F));
         this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16.0F, 0.25F, 0.3F));
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
-        this.tasks.addTask(5, this.aiEatGrass);
+        //this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
+        //this.tasks.addTask(5, this.aiEatGrass);
         //this.tasks.addTask(5, new EntityAIRutt(this, var2));
-        this.tasks.addTask(6, new EntityAIWander(this, var2));
+        this.tasks.addTask(1, new EntityAIWander(this, var2));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        //this.tasks.addTask(8, new EntityAILookIdle(this));
     }
     public EntityDeer(World par1World,EntityAnimalTFC mother, float F_size)
 	{
@@ -86,7 +65,7 @@ public class EntityDeer extends EntityAnimalTFC
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
         this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
-        this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
+        //this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
         this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8.0F, 0.5F, 0.7F));
         this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16.0F, 0.25F, 0.3F));
         this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
@@ -133,7 +112,7 @@ public class EntityDeer extends EntityAnimalTFC
         	this.texture = "/mob/deer_fawn.png";
         }
         else{
-        	this.texture = "/mob/deer.png";
+        	this.texture = "/mob/blah.png";
         }
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + TFC_Time.getYearRatio() * pregnancyTime * TFC_Settings.dayLength){
