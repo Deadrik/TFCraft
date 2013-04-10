@@ -248,11 +248,11 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
   
   public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
   {
-	  float FRL = par3*10 + (float)(Math.PI*0.75F);
-	  float FLL = par3*10 + (float)(Math.PI*2.25F);
-	  float BRL = par3;
-	  float BLL = par3;
-	  float speedMod = 0.1F;
+	  float FRL = par1 + (float)(Math.PI*0.75F);
+	  float FLL = par1 + (float)(Math.PI*2.25F);
+	  float BRL = par1;
+	  float BLL = par1;
+	  float speedMod = Math.min(Math.abs(Math.max(Math.abs(par2),0.001F)),1F)*(par2!=0?par2/Math.abs(par2):1);
 	  float rightArmInitAngle =  -2*0.52359877559829887307710723054658F;
 	  float leftArmInitAngle =  -2*0.52359877559829887307710723054658F;
 	  float leftThighInitAngle = -0.52359877559829887307710723054658F;
@@ -262,23 +262,25 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  float rightFootInitAngle = 3*-0.2617994F;
 	  float leftFootInitAngle = 3*-0.2617994F;
 	  RightWrist.rotateAngleX = Math.max(0,-MathHelper.cos(FRL*0.6662F)*1.8F*speedMod);
-	  LeftFoot.rotateAngleX = Math.max(0,-MathHelper.cos(FRL*0.6662F)*1.8F*speedMod)+leftFootInitAngle;
+	  //LeftFoot.rotateAngleX = Math.max(0,-MathHelper.cos(FRL*0.6662F)*1.8F*speedMod)+leftFootInitAngle;
 	  LeftWrist.rotateAngleX = Math.max(0,-MathHelper.cos(FLL*0.6662F)*1.8F*speedMod);
-	  RightFoot.rotateAngleX = Math.max(0,-MathHelper.cos(FLL*0.6662F)*1.8F*speedMod)+rightFootInitAngle;
+	  //RightFoot.rotateAngleX = Math.max(0,-MathHelper.cos(FLL*0.6662F)*1.8F*speedMod)+rightFootInitAngle;
 	  //RightArm.rotateAngleX = MathHelper.sin(FRL*0.6662F)*1.4F*par2 + rightArmInitAngle;
 	  RightShoulder.rotateAngleX = MathHelper.sin(FRL*0.6662F)*1.4F*speedMod - rightArmInitAngle;
 	  LeftShoulder.rotateAngleX = MathHelper.sin(FLL*0.6662F)*1.4F*speedMod - leftArmInitAngle;
 	  if(MathHelper.cos(FRL*0.6662F+(float)Math.PI/2F)*1.4F*speedMod > 0){
 		  RightArm.rotateAngleX = MathHelper.cos(FRL*0.6662F+(float)Math.PI/2F)*1.4F*speedMod + rightArmInitAngle;
-		  LeftCalf.rotateAngleX = MathHelper.cos(FRL*0.6662F+(float)Math.PI/2F)*1.4F*speedMod + leftCalfInitAngle;
+		  LeftCalf.rotateAngleX = MathHelper.cos(FRL*0.6662F+(float)Math.PI/2F)*0.7F*(MathHelper.sin(FLL*0.6662F)*speedMod>0?1.5F:1)*speedMod + leftCalfInitAngle;
+	  }
+	  if(MathHelper.cos(FLL*0.6662F + (float)Math.PI/2F)*1.4F*speedMod  > 0){
+		  LeftArm.rotateAngleX = MathHelper.cos(FLL*0.6662F+(float)Math.PI/2F)*1.4F*speedMod + leftArmInitAngle;
+		  RightCalf.rotateAngleX = MathHelper.cos(FLL*0.6662F+(float)Math.PI/2F)*0.7F*(MathHelper.sin(FRL*0.6662F)*speedMod>0?1.5F:1)*speedMod + rightCalfInitAngle;
 		  
 	  }
-	  if(MathHelper.cos(FLL*0.6662F + (float)Math.PI/2F)*1.4F*par2  > 0){
-		  LeftArm.rotateAngleX = MathHelper.cos(FLL*0.6662F+(float)Math.PI/2F)*1.4F*par2 + leftArmInitAngle;
-		  RightCalf.rotateAngleX = MathHelper.cos(FLL*0.6662F+(float)Math.PI/2F)*1.4F*par2 + rightCalfInitAngle;
-	  }
-	  RightThigh.rotateAngleX = MathHelper.sin(FLL*0.6662F)*1.4F*par2 + rightThighInitAngle;
-	  LeftThigh.rotateAngleX = MathHelper.sin(FRL*0.6662F)*1.4F*par2 +leftThighInitAngle;
+	  RightThigh.rotateAngleX = MathHelper.sin(FLL*0.6662F)*0.7F*speedMod + rightThighInitAngle;
+	  RightFoot.rotateAngleX = MathHelper.sin(FLL*0.6662F)*0.7F*(MathHelper.sin(FRL*0.6662F)*speedMod>0?2:1)*speedMod + rightFootInitAngle;
+	  LeftThigh.rotateAngleX = MathHelper.sin(FRL*0.6662F)*0.7F*speedMod +leftThighInitAngle;
+	  LeftFoot.rotateAngleX = MathHelper.sin(FRL * 0.6662F)*0.7F*(MathHelper.sin(FLL*0.6662F)*speedMod>0?2:1)*speedMod + rightFootInitAngle;
 	  /*
 	  else if(MathHelper.cos(FRL*0.6662F)*1.4F*par2 + rightArmInitAngle < RightArm.rotateAngleX){
 		  //System.out.println("Check2");
