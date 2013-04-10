@@ -2,7 +2,6 @@ package TFC.Items;
 
 import java.awt.image.BufferedImage;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -272,7 +271,7 @@ public class ItemIngot extends ItemTerra
 			else if(world.getBlockId(x, y, z) == TFCBlocks.IngotPile.blockID)
 			{
 				TileEntityIngotPile te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z);
-				TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z);
+				//TileEntityIngotPile te2 = (TileEntityIngotPile)Minecraft.getMinecraft().theWorld.getBlockTileEntity(x, y, z);
 				if(te != null)
 				{
 					te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
