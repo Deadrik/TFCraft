@@ -1,44 +1,18 @@
 package TFC.Entities.AI;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 import TFC.Entities.EntityAnimalTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class EntityAIEatGrassTFC extends EntityAIEatGrass
 {
-    private EntityLiving theEntity;
-    private World theWorld;
+    private final EntityLiving theEntity;
+    private final World theWorld;
 
     /** A decrementing tick used for the sheep's head offset and animation. */
     public int eatGrassTick = 0;
@@ -54,9 +28,10 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
+    @Override
+	public boolean shouldExecute()
     {
-        if (((EntityAnimalTFC)theEntity).hunger > 160000 || theEntity.getRNG().nextInt(20)!=0)
+        if (((EntityAnimalTFC)theEntity).hunger > 160000 || theEntity.getRNG().nextInt(1000)!=0)
         {
             return false;
         }
@@ -65,7 +40,7 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
             int var1 = MathHelper.floor_double(this.theEntity.posX);
             int var2 = MathHelper.floor_double(this.theEntity.posY);
             int var3 = MathHelper.floor_double(this.theEntity.posZ);
-            eatGrassTick = 5;
+            eatGrassTick = 40;
             return this.theWorld.getBlockId(var1, var2, var3) == Block.tallGrass.blockID && this.theWorld.getBlockMetadata(var1, var2, var3) == 1 ? true : TFC_Core.isGrass(theWorld.getBlockId(var1, var2-1, var3) );
         }
     }
@@ -73,7 +48,8 @@ public class EntityAIEatGrassTFC extends EntityAIEatGrass
     /**
      * Updates the task
      */
-    public void updateTask()
+    @Override
+	public void updateTask()
     {
         this.eatGrassTick = Math.max(0, this.eatGrassTick - 1);
 
