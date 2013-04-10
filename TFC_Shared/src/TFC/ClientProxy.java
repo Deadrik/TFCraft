@@ -147,7 +147,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderUngulate(new ModelUngulate(),0.9f)); //new RenderDeer(new ModelDeer(), 0.9F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderUngulate(new ModelUngulate(),0.5f)); //new RenderDeer(new ModelDeer(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderCustomMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class,new RenderPlayerTFC());
 

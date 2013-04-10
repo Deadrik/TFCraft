@@ -44,7 +44,7 @@ public class RenderUngulate extends RenderLivingTFC
 
     protected void preRenderScale (EntityAnimalTFC par1EntityAnimal, float par2)
     {
-	GL11.glScalef (par1EntityAnimal.size_mod,par1EntityAnimal.size_mod,par1EntityAnimal.size_mod);
+	GL11.glScalef (2*par1EntityAnimal.size_mod,2*par1EntityAnimal.size_mod,2*par1EntityAnimal.size_mod);
     }
 
 
