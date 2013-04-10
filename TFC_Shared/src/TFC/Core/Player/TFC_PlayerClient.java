@@ -55,7 +55,7 @@ public class TFC_PlayerClient extends PlayerBase
 	@Override
 	public void afterOnLivingUpdate() 
 	{
-		player.worldObj.setRainStrength(1F);
+		//player.worldObj.setRainStrength(1F);
 		this.player.setFoodStatsField(oldFood);			
 		//this.foodstats.onUpdate(player);
 	}
