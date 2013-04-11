@@ -9,8 +9,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
 import TFC.Core.CraftingManagerTFC;
 
 public class ContainerKnapping extends Container
@@ -74,27 +72,6 @@ public class ContainerKnapping extends Container
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory)
 	{
-		if (!firstTime){
-			boolean newKnapp = true;
-			for (int i = 0; i < craftMatrix.getSizeInventory();i++){
-				if (craftMatrix.getStackInSlot(i)!=null){
-					newKnapp = false;
-					break;
-				}
-			}
-			if(SCM != null){
-				SCM.setValidity(TFCItems.LooseRock,newKnapp);
-			}
-			if(craftResult.getStackInSlot(0) != null){
-				if (craftResult.getStackInSlot(0).getItem().itemID == TFCItems.LooseRock.itemID ){
-					ItemStack leftOvers = craftResult.decrStackSize(0, 0);
-					if (leftOvers.stackSize > 1)
-						EP.inventory.addItemStackToInventory(new ItemStack(leftOvers.getItem(), leftOvers.stackSize - 1, leftOvers.getItemDamage()));
-					EP.openGui(TerraFirmaCraft.instance, 28, EP.worldObj, (int)EP.posX, (int)EP.posY, (int)EP.posZ);
-				}
-			}
-		}
-		firstTime = false;
 		this.craftResult.setInventorySlotContents(0, CraftingManagerTFC.getInstance().findMatchingRecipe(this.craftMatrix, worldObj));
 	}
 
@@ -151,7 +128,7 @@ public class ContainerKnapping extends Container
 
 			grabbedSlot.onPickupFromSlot(player, var4);
 		}
-
+		this.onCraftMatrixChanged(this.craftMatrix);
 		return var2;
 	}
 
