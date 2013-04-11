@@ -9,6 +9,7 @@ import net.minecraft.entity.item.EntityFallingSand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerra;
@@ -290,7 +291,8 @@ public class BlockCollapsable extends BlockTerra
         }
     }
     
-    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4) 
+    @Override
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) 
     {
         harvestBlock(par1World, null, par2,par3,par4,par1World.getBlockMetadata(par2, par3, par4));
     }

@@ -10,6 +10,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -79,11 +80,11 @@ public class BlockIgIn extends BlockCollapsable
 	}
 
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k) 
+	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
 	{
 		if(!world.isRemote)
 		{
-			super.onBlockDestroyedByExplosion(world, i, j, k);
+			//super.onBlockDestroyedByExplosion(world, i, j, k, ex);
 			Random random = new Random();
 
 			ItemStack is = null;
