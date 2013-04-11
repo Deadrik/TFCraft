@@ -175,6 +175,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 						new ItemStack(storage[index].getItem(),
 								storage[index].stackSize+count,
 								storage[index].getItemDamage());
+				
 			}
 		}
 	}

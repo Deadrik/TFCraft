@@ -31,11 +31,8 @@ public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 			Block var10 = par1TileEntityPile.getBlockType();
 			var9 = par1TileEntityPile.getBlockMetadata();
 
-
-
 			if (par1TileEntityPile.getStackInSlot(0)!=null)
 			{
-				par1TileEntityPile.validate();
 				int i = ((TFC.Blocks.BlockIngotPile)var10).getStack(par1TileEntityPile.worldObj,par1TileEntityPile);
 				int j = par1TileEntityPile.getType() != -1 ? par1TileEntityPile.getType() : 0;
 				bindTextureByName("/textures/blocks/metal/"+metalTypes[par1TileEntityPile.type]+".png"); //texture

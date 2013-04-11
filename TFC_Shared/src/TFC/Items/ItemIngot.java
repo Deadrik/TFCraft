@@ -253,10 +253,10 @@ public class ItemIngot extends ItemTerra
 		}
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
 
-		if(entityplayer.isSneaking() &&  !world.isRemote && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1))
+		if(entityplayer.isSneaking() && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1))
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
-			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
+			if(!world.isRemote && entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
 			{
 
 				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
@@ -275,9 +275,10 @@ public class ItemIngot extends ItemTerra
 				if(te != null)
 				{
 					te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
-					if(te.storage[0] != null && te.contentsMatch(0,itemstack)) 
+					if(te.storage[0] != null && te.contentsMatch(0,itemstack) && te.storage[0].stackSize < 64) 
 					{
 						te.injectContents(0,1);
+						te.validate();
 					} 
 					else if(te.storage[0] == null) 
 					{
