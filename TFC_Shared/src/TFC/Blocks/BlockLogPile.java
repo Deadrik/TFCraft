@@ -110,7 +110,7 @@ public class BlockLogPile extends BlockContainer
 	
 	public void Eject(World par1World, int par2, int par3, int par4)
     {
-        if((TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+        if(!par1World.isRemote && (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
         {
             TileEntityLogPile tileentityanvil;
             tileentityanvil = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
