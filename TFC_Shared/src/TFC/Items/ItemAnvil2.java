@@ -8,7 +8,7 @@ public class ItemAnvil2 extends ItemTerraBlock
 	public ItemAnvil2(int i) 
 	{
 		super(i);
-		this.MetaNames = new String[]{"Bismuth Bronze", "Black Bronze", "Rose Gold"};
+		this.MetaNames = new String[]{ "Rose Gold", "Bismuth Bronze", "Black Bronze"};
 	}
 	
 	@Override
