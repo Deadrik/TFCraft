@@ -430,8 +430,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
                 charcoalCounter = 0;
                 float percent = 25+R.nextInt(25);
 
-                worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                worldObj.setBlockToAir(xCoord, yCoord, zCoord);
                 ProcessPile(worldObj,xCoord,yCoord,zCoord,true);                
             }
         }
@@ -516,7 +515,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
             {
             	float percent = 25 + world.rand.nextInt(25);
                 count = (int) (count * (percent/100));
-                world.setBlock(i, j, k, TFCBlocks.Charcoal.blockID, count, 0x2);
+                world.setBlock(i, j, k, TFCBlocks.Charcoal.blockID, count, 0x0);
                 world.markBlockForUpdate(i, j, k);
             }
             return true;
