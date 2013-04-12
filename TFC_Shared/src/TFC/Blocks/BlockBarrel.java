@@ -187,11 +187,10 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
-		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		/*if(blockID == TFCBlocks.WoodSupportH.blockID)
-		{
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.WoodSupportItemH, 1, l));
-		}*/
+		//Random R = new Random();
+		//dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), 1, l+13));
+
+		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}
 
 	@Override

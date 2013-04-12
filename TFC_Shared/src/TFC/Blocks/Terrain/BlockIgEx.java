@@ -59,8 +59,8 @@ public class BlockIgEx extends BlockCollapsable
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{	
 		Random R = new Random();
-		if(R.nextBoolean())
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), 1+R.nextInt(4), l+13));
+		//if(R.nextBoolean())
+			dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), R.nextInt(4), l+13));
 
 		super.harvestBlock(world, entityplayer, i, j, k, l);
 	}

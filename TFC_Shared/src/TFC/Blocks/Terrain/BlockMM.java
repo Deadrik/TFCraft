@@ -72,8 +72,8 @@ public class BlockMM extends BlockCollapsable
     public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
     {	
         Random R = new Random();
-        if(R.nextBoolean())
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, 1+R.nextInt(4), l+17));
+        //if(R.nextBoolean())
+            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(4), l+17));
 
         super.harvestBlock(world, entityplayer, i, j, k, l);
     }
