@@ -10,8 +10,10 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -36,8 +38,8 @@ public class BlockSluice extends BlockContainer
 	{
 		super(i, Material.wood);
 		needsRandomTick = true;
-//		entity = new TileEntityTerraSluice();
-//		entity.canUpdate();
+		//		entity = new TileEntityTerraSluice();
+		//		entity.canUpdate();
 	}
 
 	@Override
@@ -93,7 +95,7 @@ public class BlockSluice extends BlockContainer
 			return Block.planks.getBlockTextureFromSideAndMetadata(i, 0);
 		}
 	}
-	
+
 	public static int getDirectionFromMetadata(int i)
 	{
 		return i & 3;
@@ -160,117 +162,135 @@ public class BlockSluice extends BlockContainer
 		{
 			world.setBlock(i + byte0, j, k + byte1, this.blockID, l + 8, 3);
 		}
-		
+
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		//mc.ingameGUI.addChatMessage("Dir = "+(new StringBuilder()).append(l).toString());
 	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
+	{
+		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
+		if(this.isBlockFootOfBed(meta)) setBlockBounds(0,0,0,1,0.5f,1);
+		else setBlockBounds(0,0,0,1,1,1);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
+	{
+		int meta = world.getBlockMetadata(i, j, k);
+		if(this.isBlockFootOfBed(meta)) 
+			return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.5f, k+1);
+		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
+	}
+
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
-        int var5 = par1World.getBlockId(par2, par3, par4);
-        
-        int dir = getDirectionFromMetadata(par1World.getBlockMetadata(par2, par3, par4));
-        int[] offset = headBlockToFootBlockMap[dir];
-        
-        boolean stay = (canStay(par1World, par2,par3,par4,false,dir) && 
-                canStay(par1World, par2+offset[0],par3,par4+offset[1],true,dir)) && 
-                (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable());
-        
-        return stay;
-    }
-	
+	{
+		int var5 = par1World.getBlockId(par2, par3, par4);
+
+		int dir = getDirectionFromMetadata(par1World.getBlockMetadata(par2, par3, par4));
+		int[] offset = headBlockToFootBlockMap[dir];
+
+		boolean stay = (canStay(par1World, par2,par3,par4,false,dir) && 
+				canStay(par1World, par2+offset[0],par3,par4+offset[1],true,dir)) && 
+				(var5 == 0 || blocksList[var5].blockMaterial.isReplaceable());
+
+		return stay;
+	}
+
 	public boolean canPlace(World world, int i, int j, int k,int dir)
-    {
-	    int var5 = world.getBlockId(i, j, k);
-        
-        int[] offset = headBlockToFootBlockMap[dir];
-        
-        boolean stay = (canStay(world, i,j,k,false,dir) && 
-                canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
-                (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable());
-        
-        return stay;
-    }
+	{
+		int var5 = world.getBlockId(i, j, k);
+
+		int[] offset = headBlockToFootBlockMap[dir];
+
+		boolean stay = (canStay(world, i,j,k,false,dir) && 
+				canStay(world, i+offset[0],j,k+offset[1],true,dir)) && 
+				(var5 == 0 || blocksList[var5].blockMaterial.isReplaceable());
+
+		return stay;
+	}
 
 	private boolean canStay(World world, int i, int j, int k, boolean foot, int dir)
 	{
-	    int l = dir;
-        if(l == 0)//+z
-        {
-            if(!foot && 
-                    (!world.isBlockNormalCube(i+1, j, k) || 
-                    !world.isBlockNormalCube(i-1, j, k) || 
-                    !world.isBlockNormalCube(i, j, k-1) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-            else if(foot && 
-                    (!world.isBlockNormalCube(i+1, j, k) || 
-                    !world.isBlockNormalCube(i-1, j, k) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-        }
-        if(l == 1)//-x
-        {
-            if(!foot && 
-                    (!world.isBlockNormalCube(i, j, k+1) || 
-                    !world.isBlockNormalCube(i, j, k-1) || 
-                    !world.isBlockNormalCube(i+1, j, k)  ||
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-            else if(foot && 
-                    (!world.isBlockNormalCube(i, j, k+1) || 
-                     !world.isBlockNormalCube(i, j, k-1) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-        }
-        if(l == 2)//-z
-        {
-            if(!foot && 
-                    (!world.isBlockNormalCube(i+1, j, k) || 
-                    !world.isBlockNormalCube(i-1, j, k) || 
-                    !world.isBlockNormalCube(i, j, k+1) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-            else if(foot && 
-                    (!world.isBlockNormalCube(i+1, j, k) || 
-                    !world.isBlockNormalCube(i-1, j, k) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-        }
-        if(l == 3)//+x
-        {
-            if(!foot && 
-                    (!world.isBlockNormalCube(i, j, k+1) || 
-                    !world.isBlockNormalCube(i, j, k-1) || 
-                    !world.isBlockNormalCube(i-1, j, k)  ||
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-            else if(foot && 
-                    (!world.isBlockNormalCube(i, j, k+1) || 
-                     !world.isBlockNormalCube(i, j, k-1) || 
-                    !world.isBlockNormalCube(i, j-1, k)  || 
-                    world.isBlockNormalCube(i, j+2, k)))
-                return false;
-        }
-        return true;
+		int l = dir;
+		if(l == 0)//+z
+		{
+			if(!foot && 
+					(!world.isBlockNormalCube(i+1, j, k) || 
+							!world.isBlockNormalCube(i-1, j, k) || 
+							!world.isBlockNormalCube(i, j, k-1) || 
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+			else if(foot && 
+					(!world.isBlockNormalCube(i+1, j, k) || 
+							!world.isBlockNormalCube(i-1, j, k) || 
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+		}
+		if(l == 1)//-x
+		{
+			if(!foot && 
+					(!world.isBlockNormalCube(i, j, k+1) || 
+							!world.isBlockNormalCube(i, j, k-1) || 
+							!world.isBlockNormalCube(i+1, j, k)  ||
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+			else if(foot && 
+					(!world.isBlockNormalCube(i, j, k+1) || 
+							!world.isBlockNormalCube(i, j, k-1) || 
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+		}
+		if(l == 2)//-z
+		{
+			if(!foot && 
+					(!world.isBlockNormalCube(i+1, j, k) || 
+							!world.isBlockNormalCube(i-1, j, k) || 
+							!world.isBlockNormalCube(i, j, k+1) || 
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+			else if(foot && 
+					(!world.isBlockNormalCube(i+1, j, k) || 
+							!world.isBlockNormalCube(i-1, j, k) || 
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+		}
+		if(l == 3)//+x
+		{
+			if(!foot && 
+					(!world.isBlockNormalCube(i, j, k+1) || 
+							!world.isBlockNormalCube(i, j, k-1) || 
+							!world.isBlockNormalCube(i-1, j, k)  ||
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+			else if(foot && 
+					(!world.isBlockNormalCube(i, j, k+1) || 
+							!world.isBlockNormalCube(i, j, k-1) || 
+							!world.isBlockNormalCube(i, j-1, k)  || 
+							world.isBlockNormalCube(i, j+2, k)))
+				return false;
+		}
+		return true;
 	}
-	
-//	@Override
-//	public void onBlockRemoval(World world, int i, int j, int k)
-//	{
-//		if((world.getBlockMetadata(i, j, k) & 8) == 0)
-//		{
-//			world.setBlock(i, j, k, 0);
-//		}
-//	}
-	
+
+	//	@Override
+	//	public void onBlockRemoval(World world, int i, int j, int k)
+	//	{
+	//		if((world.getBlockMetadata(i, j, k) & 8) == 0)
+	//		{
+	//			world.setBlock(i, j, k, 0);
+	//		}
+	//	}
+
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
@@ -306,12 +326,12 @@ public class BlockSluice extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) 
 	{
-			return new TileEntitySluice();
+		return new TileEntitySluice();
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
-    	
-    }
+	{
+
+	}
 }
