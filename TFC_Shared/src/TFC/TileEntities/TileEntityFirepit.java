@@ -562,7 +562,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     public int getInventoryStackLimit()
     {
         // TODO Auto-generated method stub
-        return 64;
+        return 1;
     }
 
     @Override

@@ -109,7 +109,7 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 			craftResult.setInventorySlotContents(0, null);
 	}
 	
-	@Override
+	/*@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
 		ItemStack itemstack = null;
@@ -245,7 +245,15 @@ public class ContainerTerraMetallurgy extends ContainerTFC
 		}
 		onCraftMatrixChanged(craftMatrix);
 		return itemstack;
-	}
+	}*/
+	
+	/*@Override
+	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
+    {
+        ItemStack is = super.slotClick(par1, par2, par3, par4EntityPlayer);
+        this.onCraftMatrixChanged(this.craftMatrix);
+        return is;
+    }*/
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{

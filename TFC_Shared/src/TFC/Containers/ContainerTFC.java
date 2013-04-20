@@ -1,36 +1,9 @@
 package TFC.Containers;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerTFC extends Container
 {
@@ -42,94 +15,109 @@ public class ContainerTFC extends Container
 	}
 	
 	@Override
-	protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	protected boolean mergeItemStack(ItemStack is, int slotStart, int slotFinish, boolean par4)
     {
         boolean var5 = false;
-        int var6 = par2;
+        int slotIndex = slotStart;
 
         if (par4)
         {
-            var6 = par3 - 1;
+            slotIndex = slotFinish - 1;
         }
 
-        Slot var7;
-        ItemStack var8;
+        Slot slot;
+        ItemStack slotstack;
 
-        if (par1ItemStack.isStackable())
+        if (is.isStackable())
         {
-            while (par1ItemStack.stackSize > 0 && (!par4 && var6 < par3 || par4 && var6 >= par2))
+            while (is.stackSize > 0 && (!par4 && slotIndex < slotFinish || par4 && slotIndex >= slotStart))
             {
-                var7 = (Slot)this.inventorySlots.get(var6);
-                var8 = var7.getStack();
+                slot = (Slot)this.inventorySlots.get(slotIndex);
+                slotstack = slot.getStack();
 
-                if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8))
+                if (slotstack != null && slotstack.itemID == is.itemID && (!is.getHasSubtypes() || is.getItemDamage() == slotstack.getItemDamage()) && ItemStack.areItemStackTagsEqual(is, slotstack) && 
+                		slotstack.stackSize < slot.getSlotStackLimit())
                 {
-                    int var9 = var8.stackSize + par1ItemStack.stackSize;
+                    int mergedStackSize = is.stackSize + getSmaller(slotstack.stackSize, slot.getSlotStackLimit());
 
-                    if (var9 <= par1ItemStack.getMaxStackSize())
+                    //First we check if we can add the two stacks together and the resulting stack is smaller than the maximum size for the slot or the stack
+                    if (mergedStackSize <= is.getMaxStackSize() && mergedStackSize <= slot.getSlotStackLimit())
                     {
-                        par1ItemStack.stackSize = 0;
-                        var8.stackSize = var9;
-                        var7.onSlotChanged();
+                        is.stackSize = 0;
+                        slotstack.stackSize = mergedStackSize;
+                        slot.onSlotChanged();
                         var5 = true;
                     }
-                    else if (var8.stackSize < par1ItemStack.getMaxStackSize())
+                    else if (slotstack.stackSize < is.getMaxStackSize())
                     {
-                        par1ItemStack.stackSize -= par1ItemStack.getMaxStackSize() - var8.stackSize;
-                        var8.stackSize = par1ItemStack.getMaxStackSize();
-                        var7.onSlotChanged();
+                        is.stackSize -= is.getMaxStackSize() - slotstack.stackSize;
+                        slotstack.stackSize = is.getMaxStackSize();
+                        slot.onSlotChanged();
                         var5 = true;
                     }
                 }
 
                 if (par4)
                 {
-                    --var6;
+                    --slotIndex;
                 }
                 else
                 {
-                    ++var6;
+                    ++slotIndex;
                 }
             }
         }
 
-        if (par1ItemStack.stackSize > 0)
+        if (is.stackSize > 0)
         {
             if (par4)
             {
-                var6 = par3 - 1;
+                slotIndex = slotFinish - 1;
             }
             else
             {
-                var6 = par2;
+                slotIndex = slotStart;
             }
 
-            while (!par4 && var6 < par3 || par4 && var6 >= par2)
+            while (!par4 && slotIndex < slotFinish || par4 && slotIndex >= slotStart)
             {
-                var7 = (Slot)this.inventorySlots.get(var6);
-                var8 = var7.getStack();
-
-                if (var8 == null && var7.isItemValid(par1ItemStack))
+                slot = (Slot)this.inventorySlots.get(slotIndex);
+                slotstack = slot.getStack();
+                if (slotstack == null && slot.isItemValid(is) && slot.getSlotStackLimit() < is.stackSize)
                 {
-                    var7.putStack(par1ItemStack.copy());
-                    var7.onSlotChanged();
-                    par1ItemStack.stackSize = 0;
+                    slot.putStack(is.copy());
+                    slot.onSlotChanged();
+                    is.stackSize -= slot.getSlotStackLimit();
+                    var5 = true;
+                    break;
+                }
+                else if (slotstack == null && slot.isItemValid(is))
+                {
+                    slot.putStack(is.copy());
+                    slot.onSlotChanged();
+                    is.stackSize = 0;
                     var5 = true;
                     break;
                 }
 
                 if (par4)
                 {
-                    --var6;
+                    --slotIndex;
                 }
                 else
                 {
-                    ++var6;
+                    ++slotIndex;
                 }
             }
         }
 
         return var5;
     }
+	
+	protected int getSmaller(int i, int j)
+	{
+		if(i < j) return i;
+		else return j;
+	}
 	
 }
