@@ -223,7 +223,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		case 8:
 			return "Whiskey (no use)";
 		case 9:
-			return "Rye (no use)";
+			return "Rye Whiskey (no use)";
 		case 10:
 			return "Sake (no use)";
 		case 11:
