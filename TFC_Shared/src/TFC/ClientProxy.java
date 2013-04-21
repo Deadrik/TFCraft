@@ -122,7 +122,6 @@ import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntityScribe;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -350,10 +349,10 @@ public class ClientProxy extends CommonProxy
 		{
 			for (int var9 = -1; var9 <= 1; ++var9)
 			{
-				int var10 = ((TFCBiome)par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8)).waterColorMultiplier;
+				int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).waterColorMultiplier;
 				var5 += (var10 & 16711680) >> 16;
-			var6 += (var10 & 65280) >> 8;
-			var7 += var10 & 255;
+				var6 += (var10 & 65280) >> 8;
+				var7 += var10 & 255;
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
