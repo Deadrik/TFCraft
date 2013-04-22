@@ -32,6 +32,7 @@ public class ClientTickHandler implements ITickHandler
 			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory &&
 					!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventoryTFC))
 			{
+				player.closeScreen();
 				player.openGui(TerraFirmaCraft.instance, 31, player.worldObj, 0, 0, 0);
 			}
 			//Allow the client to increment time

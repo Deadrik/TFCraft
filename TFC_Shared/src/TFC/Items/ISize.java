@@ -9,5 +9,9 @@ public interface ISize
 	
 	public EnumWeight getWeight();
 	
+	/**
+	 * Allows setting weather or not this item can stack regardless of the size/weight values
+	 * @return Can stacksize exceed 1
+	 */
 	public boolean canStack();
 }

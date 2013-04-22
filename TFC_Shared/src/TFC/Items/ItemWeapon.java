@@ -2,50 +2,30 @@ package TFC.Items;
 
 import java.util.List;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Enums.EnumDamageType;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemWeapon extends ItemSword implements ISize
 {
 	public int weaponDamage;
 	public final EnumToolMaterial toolMaterial;
+	public final EnumDamageType damageType = EnumDamageType.PIERCING;
 
 	public ItemWeapon(int par1, EnumToolMaterial par2EnumToolMaterial)
 	{
@@ -165,7 +145,7 @@ public class ItemWeapon extends ItemSword implements ISize
 	@Override
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
     {
-        if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
+        if (Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
         {
             par1ItemStack.damageItem(2, par7EntityLiving);
         }
