@@ -19,7 +19,7 @@ import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.ClientTickHandler;
 import TFC.Handlers.CraftingHandler;
-import TFC.Handlers.EntityHurtHandler;
+import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.ServerTickHandler;
@@ -127,7 +127,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 		
 		// Register the Entity Hurt Handler
-		MinecraftForge.EVENT_BUS.register(new EntityHurtHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
 
 		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);

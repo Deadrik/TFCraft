@@ -29,6 +29,7 @@ public class ClientTickHandler implements ITickHandler
 
 			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory)
 			{
+				player.closeScreen();
 				player.openGui(TerraFirmaCraft.instance, 31, player.worldObj, 0, 0, 0);
 			}
 
