@@ -3,105 +3,22 @@ package TFC.GUI;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import TFC.Food.TFCPotion;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.achievement.GuiAchievements;
-import net.minecraft.client.gui.achievement.GuiStats;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
-
-public class GuiInventoryTFC  extends GuiContainer
-{
-	private boolean hasEffects;
-	/**
-     * x size of the inventory window in pixels. Defined as float, passed as int
-     */
-    private float xSize_lo;
-
-    /**
-     * y size of the inventory window in pixels. Defined as float, passed as int.
-     */
-    private float ySize_lo;
-	
-	public GuiInventoryTFC(EntityPlayer player) {
-		super(player.inventoryContainer);
-		this.allowUserInput = true;
-		player.addStat(AchievementList.openInventory, 1);
+public class GuiInventoryTFC  extends GuiInventory
+{	
+	public GuiInventoryTFC(EntityPlayer player) 
+	{
+		super(player);
 	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
-			int var3) {
-		this.mc.renderEngine.bindTexture("/gui/inventory.png");
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int var5 = this.guiLeft;
-        int var6 = this.guiTop;
-        this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
-        renderPlayerInInventory(this.mc, var5 + 51, var6 + 75, 30, (float)(var5 + 51) - this.xSize_lo, (float)(var6 + 75 - 50) - this.ySize_lo);
-		
-	}
-	@Override
-	public void initGui()
-    {
-		if (this.mc.playerController.isInCreativeMode())
-        {
-            this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
-        }
-        else
-        {
-            super.initGui();
-        }
-		
-        if (!this.mc.thePlayer.getActivePotionEffects().isEmpty())
-        {
-            this.guiLeft = 160 + (this.width - this.xSize - 200) / 2;
-            this.hasEffects = true;
-        }
-    }
-	@Override
-	public void drawScreen(int par1, int par2, float par3)
-    {
-        super.drawScreen(par1, par2, par3);
-
-        if (this.hasEffects)
-        {
-            this.displayDebuffEffects();
-        }
-        
-        this.xSize_lo = (float)par1;
-        this.ySize_lo = (float)par2;
-    }
 	
     /**
      * Displays debuff/potion effects that are currently being applied to the player
@@ -160,51 +77,4 @@ public class GuiInventoryTFC  extends GuiContainer
             }
         }
     }
-    
-    public static void renderPlayerInInventory(Minecraft par0Minecraft, int par1, int par2, int par3, float par4, float par5)
-    {
-        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float)par1, (float)par2, 50.0F);
-        GL11.glScalef((float)(-par3), (float)par3, (float)par3);
-        GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        float var6 = par0Minecraft.thePlayer.renderYawOffset;
-        float var7 = par0Minecraft.thePlayer.rotationYaw;
-        float var8 = par0Minecraft.thePlayer.rotationPitch;
-        GL11.glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
-        RenderHelper.enableStandardItemLighting();
-        GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-((float)Math.atan((double)(par5 / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-        par0Minecraft.thePlayer.renderYawOffset = (float)Math.atan((double)(par4 / 40.0F)) * 20.0F;
-        par0Minecraft.thePlayer.rotationYaw = (float)Math.atan((double)(par4 / 40.0F)) * 40.0F;
-        par0Minecraft.thePlayer.rotationPitch = -((float)Math.atan((double)(par5 / 40.0F))) * 20.0F;
-        par0Minecraft.thePlayer.rotationYawHead = par0Minecraft.thePlayer.rotationYaw;
-        GL11.glTranslatef(0.0F, par0Minecraft.thePlayer.yOffset, 0.0F);
-        RenderManager.instance.playerViewY = 180.0F;
-        RenderManager.instance.renderEntityWithPosYaw(par0Minecraft.thePlayer, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-        par0Minecraft.thePlayer.renderYawOffset = var6;
-        par0Minecraft.thePlayer.rotationYaw = var7;
-        par0Minecraft.thePlayer.rotationPitch = var8;
-        GL11.glPopMatrix();
-        RenderHelper.disableStandardItemLighting();
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-    }
-    
-    /**
-     * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
-     */
-    @Override
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.id == 0)
-        {
-            this.mc.displayGuiScreen(new GuiAchievements(this.mc.statFileWriter));
-        }
-
-        if (par1GuiButton.id == 1)
-        {
-            this.mc.displayGuiScreen(new GuiStats(this, this.mc.statFileWriter));
-        }
-    }
-
 }
