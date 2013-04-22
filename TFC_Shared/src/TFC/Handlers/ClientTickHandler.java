@@ -2,10 +2,10 @@ package TFC.Handlers;
 
 import java.util.EnumSet;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Time;
 import TFC.GUI.GuiInventoryTFC;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -18,17 +18,7 @@ public class ClientTickHandler implements ITickHandler
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) 
 	{
-		if(type.contains(TickType.PLAYER))
-		{
-			EntityPlayer player = (EntityPlayer)tickData[0];
-			World world = player.worldObj;
 
-			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory &&
-					!FMLClientHandler.instance().getClient().currentScreen.getClass().isAssignableFrom(GuiInventoryTFC.class))
-			{
-				Minecraft.getMinecraft().displayGuiScreen(new GuiInventoryTFC(Minecraft.getMinecraft().thePlayer));
-			}
-		}
 	}
 
 	@Override
@@ -39,6 +29,11 @@ public class ClientTickHandler implements ITickHandler
 			EntityPlayer player = (EntityPlayer)tickData[0];
 			World world = player.worldObj;
 
+			if(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventory &&
+					!(FMLClientHandler.instance().getClient().currentScreen instanceof GuiInventoryTFC))
+			{
+				player.openGui(TerraFirmaCraft.instance, 31, player.worldObj, 0, 0, 0);
+			}
 			//Allow the client to increment time
 			TFC_Time.UpdateTime(world);
 		}
