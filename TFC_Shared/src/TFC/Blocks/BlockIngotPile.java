@@ -73,6 +73,7 @@ public class BlockIngotPile extends BlockTerraContainer
 					if(tileentityingotpile.getStackInSlot(0).stackSize < 1){
 						world.setBlock(i, j, k, 0);
 					}
+					tileentityingotpile.broadcastPacketInRange(tileentityingotpile.createUpdatePacket());
 				}
 				//damage = tileentityingotpile.getStackInSlot(0).getItem().itemID - 16028 - 256;
 				//stack = tileentityingotpile.getStackInSlot(0).stackSize;
