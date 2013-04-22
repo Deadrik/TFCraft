@@ -23,14 +23,14 @@ public class GuiTerraScribe extends GuiContainer
 		super(new ContainerTerraScribe(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
 		((ContainerTerraScribe)inventorySlots).setGUI(this);
+		this.xSize = 176;
+		this.ySize = 184;
 	}
 
 	@Override
 	public void initGui()
 	{
 		super.initGui();
-		//guiLeft = (width - 208) / 2;
-		//guiTop = (height - 198) / 2;
 
 		buttonList.clear();
 		if(FirepitEntity.scribeItemStacks[1]!=null){
@@ -57,21 +57,9 @@ public class GuiTerraScribe extends GuiContainer
 	{
 		this.mc.renderEngine.bindTexture("/bioxx/gui_scribe.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-		int w = (width - 176) / 2;
-		int h = (height - 184) / 2;
+		int w = (width - xSize) / 2;
+        int h = (height - ySize) / 2;
 		drawTexturedModalRect(w, h, 0, 0, 175, 183);
-		//        if(sluiceInventory.waterInput && sluiceInventory.waterOutput)
-		//        {
-		//            int l = 12;//sluiceInventory.getProcessScaled(12); 
-		//            drawTexturedModalRect(s + 62, (t + 36 + 12) - l, 176, 12 - l, 14, l + 2);
-		//        }
-		//        int i1 = sluiceInventory.getProcessScaled(24);
-		//       drawTexturedModalRect(s + 79, t + 34, 176, 14, i1+1, 16);
-		int i1;// = FirepitEntity.getMaterialScaled(50);
-		//(guiX,guiY,sourceMinX,sourceMinY,sourceMaxX,sourceMaxY
-		//drawTexturedModalRect(w + 34, h + 16 + i1, 176, 31+i1, 9, 50);
-		//i1 = FirepitEntity.getTemperatureScaled(49);
-		//drawTexturedModalRect(w + 125, h + 63 - i1, 185, 31, 15, 6);
 
 	}
 

@@ -1,43 +1,15 @@
 package TFC.GUI;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
-import TFC.*;
-import TFC.Containers.*;
-import TFC.TileEntities.*;
+import TFC.Containers.ContainerTerraMetallurgy;
+import TFC.TileEntities.TileEntityMetallurgy;
 
 
 public class GuiTerraMetallurgy extends GuiContainer
@@ -49,9 +21,11 @@ public class GuiTerraMetallurgy extends GuiContainer
 	{
 		super(new ContainerTerraMetallurgy(inventoryplayer,tileentityMetallurgy, world, x, y, z) );
 		entityMetallurgy = tileentityMetallurgy;
-		
+		this.xSize = 176;
+		this.ySize = 184;
 	}
 	
+	@Override
 	public void initGui()
     {
 		super.initGui();
@@ -64,6 +38,7 @@ public class GuiTerraMetallurgy extends GuiContainer
         
     }
 	
+	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
 		if(true)
@@ -80,8 +55,8 @@ public class GuiTerraMetallurgy extends GuiContainer
 	{
 		this.mc.renderEngine.bindTexture("/bioxx/gui_metallurgy.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
-        int w = (width - 176) / 2;
-        int h = (height - 184) / 2;
+        int w = (width - xSize) / 2;
+        int h = (height - ySize) / 2;
         drawTexturedModalRect(w, h, 0, 0, 175, 183);
 		
 	}
@@ -103,6 +78,7 @@ public class GuiTerraMetallurgy extends GuiContainer
 //		fontRenderer.drawString(Data5 + entityMetallurgy.MetalNames[5], 81, 69, 0x404040);
     }
 	
+	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
     {
         fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);

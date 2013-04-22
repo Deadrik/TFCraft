@@ -15,6 +15,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 	private TileEntityAnvil anvil;
 	private int greenIndicator;
 	private int redIndicator;
+	private int tier = -1;
 
 	public ContainerTerraAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil anvil, World world, int x, int y, int z)
 	{
@@ -52,11 +53,6 @@ public class ContainerTerraAnvil extends ContainerTFC
 			addSlotToContainer(new Slot(inventoryplayer, j, 24 + j * 18, 174));
 		}
 
-	}
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer)
-	{
-		return true;
 	}
 
 	@Override
@@ -147,8 +143,6 @@ public class ContainerTerraAnvil extends ContainerTFC
 		}
 		return null;
 	}
-
-	private int tier = -1;
 	
 	@Override
 	public void detectAndSendChanges()
@@ -211,5 +205,4 @@ public class ContainerTerraAnvil extends ContainerTFC
 		super.onCraftGuiClosed(par1EntityPlayer);
 		anvil.closeChest();
 	}
-
 }
