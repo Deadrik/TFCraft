@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import TFC.Blocks.BlockToolRack;
+import TFC.Blocks.Devices.BlockToolRack;
 import TFC.TileEntities.TileEntityToolRack;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 

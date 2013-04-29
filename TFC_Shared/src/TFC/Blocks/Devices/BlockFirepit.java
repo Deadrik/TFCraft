@@ -1,8 +1,9 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import java.util.Random;
 
 import TFC.*;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityLogPile;

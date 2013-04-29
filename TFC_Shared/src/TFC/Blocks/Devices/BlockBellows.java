@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import java.util.Random;
 
@@ -13,6 +13,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.Blocks.BlockTerra;
 import TFC.TileEntities.TileEntityFireEntity;
 
 public class BlockBellows extends BlockTerra

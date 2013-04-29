@@ -6,16 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import TFC.Blocks.BlockBarrel;
-import TFC.Blocks.BlockBellows;
-import TFC.Blocks.BlockBloomery;
 import TFC.Blocks.BlockCharcoal;
-import TFC.Blocks.BlockChestTFC;
 import TFC.Blocks.BlockCrop;
-import TFC.Blocks.BlockCrucible;
 import TFC.Blocks.BlockDetailed;
 import TFC.Blocks.BlockFiniteWater;
-import TFC.Blocks.BlockFirepit;
 import TFC.Blocks.BlockFlora;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockForge;
@@ -26,20 +20,24 @@ import TFC.Blocks.BlockLogHoriz;
 import TFC.Blocks.BlockLogPile;
 import TFC.Blocks.BlockLogVert;
 import TFC.Blocks.BlockLooseRock;
-import TFC.Blocks.BlockMetallurgy;
 import TFC.Blocks.BlockMolten;
-import TFC.Blocks.BlockNestBox;
-import TFC.Blocks.BlockQuern;
-import TFC.Blocks.BlockScribe;
 import TFC.Blocks.BlockSlab;
 import TFC.Blocks.BlockSluice;
-import TFC.Blocks.BlockSpawnMeter;
 import TFC.Blocks.BlockStair;
 import TFC.Blocks.BlockStalactite;
 import TFC.Blocks.BlockSulfur;
 import TFC.Blocks.BlockSuperDetailed;
-import TFC.Blocks.BlockToolRack;
 import TFC.Blocks.BlockWoodSupport;
+import TFC.Blocks.Devices.BlockBarrel;
+import TFC.Blocks.Devices.BlockBellows;
+import TFC.Blocks.Devices.BlockBloomery;
+import TFC.Blocks.Devices.BlockChestTFC;
+import TFC.Blocks.Devices.BlockFirepit;
+import TFC.Blocks.Devices.BlockMetallurgy;
+import TFC.Blocks.Devices.BlockQuern;
+import TFC.Blocks.Devices.BlockScribe;
+import TFC.Blocks.Devices.BlockSpawnMeter;
+import TFC.Blocks.Devices.BlockToolRack;
 import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockIgEx;
 import TFC.Blocks.Terrain.BlockIgExBrick;
@@ -228,9 +226,6 @@ public class TFCBlocks
 	public static Block DoorWillow;
 	public static Block DoorKapok;
 	
-	public static Block Nestbox;
-	public static Block Crucible;
-	
 	public static Block IngotPile;
 	public static Block Barrel;
 	public static Block BarrelAspen;
@@ -369,8 +364,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorWhiteElm, "DoorWhiteElm");
 		GameRegistry.registerBlock(DoorWillow, "DoorWillow");
 		GameRegistry.registerBlock(DoorKapok, "DoorKapok");
-		GameRegistry.registerBlock(Nestbox, "Nestbox");
-		GameRegistry.registerBlock(Crucible, "Crucible");
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
 		
@@ -489,7 +482,7 @@ public class TFCBlocks
 		Block.blocksList[47] = (new BlockCustomBookshelf(47)).setHardness(1.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bookshelf");
 		Block.blocksList[53] = (new BlockStair(53, Material.wood)).setUnlocalizedName("stairsWood");
 		Block.blocksList[54] = (new BlockChestTFC(54, 0)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("chest");
-		Block.blocksList[58] = (new TFC.Blocks.BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("workbench");
+		Block.blocksList[58] = (new TFC.Blocks.Devices.BlockWorkbench(58)).setHardness(2.5F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("workbench");
 		Block.blocksList[59] = (new BlockCrop(59, 88)).setHardness(0.3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("crops");
 		Block.blocksList[78] = (new BlockCustomSnow(78)).setHardness(0.1F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("snow").setLightOpacity(1);
 		Block.blocksList[79] = (new BlockCustomIce(79)).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("ice");
@@ -510,8 +503,8 @@ public class TFCBlocks
 		TFCBlocks.Bellows = new BlockBellows(TFC_Settings.getIntFor(config,"block","Bellows", 2014),Material.wood).setUnlocalizedName("Bellows").setHardness(2);
 		TFCBlocks.Forge= new BlockForge(TFC_Settings.getIntFor(config,"block","Forge", 2013)).setUnlocalizedName("Forge").setHardness(20).setLightValue(0F);
 		TFCBlocks.Scribe = new BlockScribe(TFC_Settings.getIntFor(config,"block","Scribe", 2012)).setUnlocalizedName("Scribe").setHardness(2);
-		TFCBlocks.Anvil = new TFC.Blocks.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil", 2011)).setUnlocalizedName("Anvil").setHardness(3).setResistance(100F);
-		TFCBlocks.Anvil2 = new TFC.Blocks.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil2", 2010), 8).setUnlocalizedName("Anvil2").setHardness(3).setResistance(100F);
+		TFCBlocks.Anvil = new TFC.Blocks.Devices.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil", 2011)).setUnlocalizedName("Anvil").setHardness(3).setResistance(100F);
+		TFCBlocks.Anvil2 = new TFC.Blocks.Devices.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil2", 2010), 8).setUnlocalizedName("Anvil2").setHardness(3).setResistance(100F);
 
 		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","Metallurgy", 2009)).setUnlocalizedName("Metallurgy").setHardness(3);
 		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setUnlocalizedName("Molten").setHardness(20);
@@ -569,12 +562,8 @@ public class TFCBlocks
 		DoorWillow = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWillow", 2055), 14).setUnlocalizedName("Door Willow");
 		DoorKapok = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorKapok", 2056), 15).setUnlocalizedName("Door Kapok");
 		
-		Nestbox = new BlockNestBox(TFC_Settings.getIntFor(config,"block","NestBox", 2057)).setUnlocalizedName("NestBox");
-		
 		SuperDetailed = new BlockSuperDetailed(TFC_Settings.getIntFor(config,"block","SuperDetailed", 2058)).setUnlocalizedName("SuperDetailed").setHardness(10).setResistance(15F);
-		
-		Crucible = new BlockCrucible(TFC_Settings.getIntFor(config,"block","Crucible", 2059)).setUnlocalizedName("Crucible").setHardness(2);
-		
+				
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
 		int num = 2061;
 		Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", num++)).setUnlocalizedName("Barrel").setHardness(2);

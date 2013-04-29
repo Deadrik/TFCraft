@@ -1045,7 +1045,6 @@ public class TFCItems
         GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setUnlocalizedName("GoldPan");
         SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
         
-        ProPickStone = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickStone",16003)).setUnlocalizedName("Stone ProPick").setMaxDamage(64);
         ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setUnlocalizedName("Bismuth ProPick").setMaxDamage(BismuthUses);
         ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
         ProPickBlackBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackBronze",16006)).setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);

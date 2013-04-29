@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import TFC.TFCBlocks;
-import TFC.Blocks.BlockToolRack;
+import TFC.Blocks.Devices.BlockToolRack;
 import TFC.Render.TFC_CoreRender;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityQuern;

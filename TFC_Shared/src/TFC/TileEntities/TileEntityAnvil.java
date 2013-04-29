@@ -4,58 +4,26 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import TFC.TerraFirmaCraft;
 import TFC.Core.AnvilCraftingManagerTFC;
 import TFC.Core.AnvilRecipe;
 import TFC.Core.AnvilReq;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Enums.CraftingRuleEnum;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 {
@@ -67,7 +35,6 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public int craftingRange;
 	public int craftingReq;
 	public int[] craftingRules;
-	private ItemStack result;
 	public int[] stonePair;
 
 	private boolean isDone = false;
@@ -90,6 +57,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		stonePair = new int[]{0,0};
 	}
 
+	@Override
 	public void updateEntity()
 	{        
 		if(anvilItemStacks[1] == null)
@@ -520,7 +488,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		{
 			if(anvilItemStacks[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
 						anvilItemStacks[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
@@ -671,6 +639,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		// TODO Auto-generated method stub
 	}
 
+	@Override
 	public int getSizeInventory()
 	{
 		return anvilItemStacks.length;
@@ -689,6 +658,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		return null;
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
@@ -711,6 +681,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);

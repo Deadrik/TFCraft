@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import static net.minecraftforge.common.ForgeDirection.DOWN;
 
@@ -25,6 +25,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TileEntityChestTFC;
 
 public class BlockChestTFC extends BlockTerraContainer
