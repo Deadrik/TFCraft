@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import java.util.List;
 import java.util.Random;
@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
 import TFC.Items.ItemBarrels;
 import TFC.TileEntities.NetworkTileEntity;

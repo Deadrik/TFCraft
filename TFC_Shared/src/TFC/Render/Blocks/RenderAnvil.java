@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
-import TFC.Blocks.BlockAnvil;
+import TFC.Blocks.Devices.BlockAnvil;
 import TFC.Core.AnvilReq;
 import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;

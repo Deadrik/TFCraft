@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import java.util.List;
 
@@ -11,18 +11,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
-import TFC.TileEntities.TileEntityMetallurgy;
+import TFC.Blocks.BlockTerraContainer;
+import TFC.TileEntities.TileEntityScribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMetallurgy extends BlockTerraContainer
+public class BlockScribe extends BlockTerraContainer
 {
 	Icon iconTop;
 	Icon iconSide;
 	
-	public BlockMetallurgy(int i)
+	public BlockScribe(int i)
 	{
-		super(i, Material.rock);
+		super(i, Material.wood);
+		needsRandomTick = true;
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
@@ -32,10 +34,11 @@ public class BlockMetallurgy extends BlockTerraContainer
 	{
 		list.add(new ItemStack(this,1,0));
 	}
-
+	
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
 	{
+		int meta = world.getBlockMetadata(i, j, k);
 		//Minecraft mc = ModLoader.getMinecraftInstance();
 		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
 		int itemid;
@@ -52,19 +55,18 @@ public class BlockMetallurgy extends BlockTerraContainer
 		} 
 		else
 		{
-			if((TileEntityMetallurgy)world.getBlockTileEntity(i, j, k)!=null)
+			if((TileEntityScribe)world.getBlockTileEntity(i, j, k)!=null)
 			{
-				TileEntityMetallurgy tileentityanvil;
-				tileentityanvil = (TileEntityMetallurgy)world.getBlockTileEntity(i, j, k);
+				TileEntityScribe tileentityanvil;
+				tileentityanvil = (TileEntityScribe)world.getBlockTileEntity(i, j, k);
 				ItemStack is = entityplayer.getCurrentEquippedItem();
 
-				entityplayer.openGui(TerraFirmaCraft.instance, 24, world, i, j, k);
-				//ModLoader.openGUI(entityplayer, new GuiTerraMetallurgy(entityplayer.inventory, tileentityanvil, world));
+				entityplayer.openGui(TerraFirmaCraft.instance, 22, world, i, j, k);
+				//ModLoader.openGUI(entityplayer, new GuiTerraScribe(entityplayer.inventory, tileentityanvil, world));
 			}
 			return true;
 		}
 	}
-
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
@@ -77,14 +79,24 @@ public class BlockMetallurgy extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		iconTop = iconRegisterer.registerIcon("devices/Metallurgy Table Top");
-		iconSide = iconRegisterer.registerIcon("devices/Metallurgy Table Side");
+		iconTop = iconRegisterer.registerIcon("devices/Scribing Table Top");
+		iconSide = iconRegisterer.registerIcon("devices/Scribing Table Side");
     }
-
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityMetallurgy();
+		return new TileEntityScribe();
 	}
+
 }

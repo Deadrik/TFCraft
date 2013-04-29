@@ -1,6 +1,7 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import TFC.*;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Enums.EnumSize;
 import TFC.Items.ISize;
 import TFC.TileEntities.TileEntityWorkbench;
