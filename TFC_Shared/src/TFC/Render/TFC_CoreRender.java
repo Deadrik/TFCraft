@@ -15,9 +15,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import org.lwjgl.opengl.GL11;
 
 import TFC.TFCBlocks;
-import TFC.Blocks.BlockBellows;
 import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.BlockSluice;
+import TFC.Blocks.Devices.BlockBellows;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
