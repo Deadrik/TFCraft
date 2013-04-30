@@ -44,7 +44,7 @@ import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemUnfinishedArmor;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
-import TFC.Items.Pottery.ItemPotteryBase;
+import TFC.Items.Pottery.ItemPotteryJug;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomAxe;
 import TFC.Items.Tools.ItemCustomBlueSteelBucket;
@@ -904,7 +904,11 @@ public class TFCItems
     public static Item FlatLeather;
     public static Item Beer;
 
-    public static Item Pottery;
+    public static Item PotteryJug;
+    public static Item PotteryPot;
+    public static Item PotteryAmphora;
+    public static Item PotterySmallVessel;
+    public static Item PotteryLargeVessel;
     
     /**
      * Item Uses Setup
@@ -1612,7 +1616,7 @@ public class TFCItems
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         
-        Pottery = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","Pottery",num++)).setFolder("tools/").setUnlocalizedName("Pottery");
+        PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"items","PotteryJug",num++)).setUnlocalizedName("Jug");
 		/**Plans*/
         num = 20000;
         SetupPlans(num);

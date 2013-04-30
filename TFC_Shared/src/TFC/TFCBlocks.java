@@ -29,7 +29,7 @@ import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBellows;
 import TFC.Blocks.Devices.BlockBloomery;
 import TFC.Blocks.Devices.BlockChestTFC;
-import TFC.Blocks.Devices.BlockClayPottery;
+import TFC.Blocks.Devices.BlockPottery;
 import TFC.Blocks.Devices.BlockFirepit;
 import TFC.Blocks.Devices.BlockForge;
 import TFC.Blocks.Devices.BlockMetallurgy;
@@ -551,7 +551,7 @@ public class TFCBlocks
 		TFCBlocks.Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", num++)).setUnlocalizedName("Barrel").setHardness(2);
 		
 		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", num++)).setUnlocalizedName("Flora");
-		TFCBlocks.ClayPottery = new BlockClayPottery(TFC_Settings.getIntFor(config, "block", "Pottery", num++)).setUnlocalizedName("Pottery");
+		TFCBlocks.ClayPottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", num++)).setUnlocalizedName("Pottery");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
