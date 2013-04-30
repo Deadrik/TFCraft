@@ -10,12 +10,12 @@ import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TileEntityForge;
 
-public class BlockClayPottery extends BlockTerraContainer
+public class BlockPottery extends BlockTerraContainer
 {
 	public Icon Clay;
 	public Icon Ceramic;
 	
-	public BlockClayPottery(int i)
+	public BlockPottery(int i)
 	{
 		super(i, Material.iron);
 		this.setLightValue(1.0F);

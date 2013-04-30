@@ -1,6 +1,5 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,18 +9,18 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
-import TFC.Handlers.PacketHandler;
 
 public class TileEntityPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public byte[] placementGrid;
+	public boolean hasRack;
 
 	public TileEntityPottery()
 	{
-		inventory = new ItemStack[16];
-		placementGrid = new byte[16];
+		inventory = new ItemStack[4];
+		placementGrid = new byte[4];
+		hasRack = false;
 	}
 
 	@Override
@@ -113,33 +112,18 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	public void createInitPacket(DataOutputStream outStream) throws IOException  
 	{
 		outStream.write(placementGrid);
+		outStream.writeBoolean(hasRack);
 	}
 
 	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException 
 	{
-		inStream.read(placementGrid, 0, 16);
+		inStream.read(placementGrid, 0, 4);
+		hasRack = inStream.readBoolean();
 		/*AnvilTier = inStream.readInt();
 		stonePair[0] = inStream.readInt();
 		stonePair[1] = inStream.readInt();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);*/
-	}
-
-	public Packet createAnvilUsePacket(int id)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(id);
-		} catch (IOException e) {
-		}
-
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
 	@Override
