@@ -10,6 +10,8 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.Items.*;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemCustomHoe;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

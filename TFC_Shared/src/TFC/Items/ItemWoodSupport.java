@@ -1,6 +1,7 @@
 package TFC.Items;
 
 import TFC.Enums.EnumSize;
+import TFC.Items.ItemBlocks.ItemTerraBlock;
 
 public class ItemWoodSupport extends ItemTerraBlock
 {

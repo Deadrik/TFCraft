@@ -21,7 +21,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.Items.ItemCustomScythe;
+import TFC.Items.Tools.ItemCustomScythe;
 import TFC.TileEntities.TileEntityCrop;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
