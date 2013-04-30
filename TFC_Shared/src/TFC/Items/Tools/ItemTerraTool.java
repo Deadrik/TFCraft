@@ -2,46 +2,20 @@ package TFC.Items.Tools;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.StringUtil;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.Items.ISize;
 import TFC.Items.ItemTerra;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemTerraTool extends ItemTool implements ISize
 {
@@ -53,6 +27,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 		this.setCreativeTab(TFCTabs.TFCTools);
 	}
 
+	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
@@ -62,6 +37,7 @@ public class ItemTerraTool extends ItemTool implements ISize
             arraylist.add("Damage: "+is.getItemDamage());
     }
 	
+	@Override
 	public int getItemStackLimit()
     {
     	if(canStack())
@@ -70,10 +46,17 @@ public class ItemTerraTool extends ItemTool implements ISize
     		return 1;
     }
 	
+	@Override
 	public void updateIcons(IconRegister registerer)
     {
 		this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
 
 	@Override
 	public EnumSize getSize() {

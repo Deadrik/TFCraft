@@ -14,6 +14,7 @@ import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
+import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
@@ -113,7 +114,7 @@ public class TerraFirmaCraft
 	}
 
 	@Init
-	public void load(FMLInitializationEvent evt)
+	public void initialize(FMLInitializationEvent evt)
 	{
 		//Register all of the recipes
 		Recipes.registerRecipes();	
@@ -156,6 +157,7 @@ public class TerraFirmaCraft
 		
 		TFC_ItemHeat.SetupItemHeat();
 
+		Localization.addLocalization("/lang/tfc/", "en_US");
 	}
 
 	@PostInit
