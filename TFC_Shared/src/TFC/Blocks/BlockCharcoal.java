@@ -20,7 +20,7 @@ public class BlockCharcoal extends BlockTerra {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getIcon(int i, int j) 
 	{
 		return blockIcon;
 	}

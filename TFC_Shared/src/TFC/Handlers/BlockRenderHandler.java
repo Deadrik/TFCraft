@@ -11,7 +11,6 @@ import TFC.Render.Blocks.RenderDetailed;
 import TFC.Render.Blocks.RenderFluids;
 import TFC.Render.Blocks.RenderFoodPrep;
 import TFC.Render.Blocks.RenderGrass;
-import TFC.Render.Blocks.RenderSuperDetailed;
 import TFC.Render.Blocks.RenderWoodConstruct;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -128,10 +127,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         else if (modelId == TFCBlocks.woodConstructRenderId)
         {
             return RenderWoodConstruct.render(block, i, j, k, renderer);
-        }
-        else if (modelId == TFCBlocks.superDetailedRenderId)
-        {
-            return RenderSuperDetailed.render(block, i, j, k, renderer);
         }
 		return false;
 	}

@@ -52,7 +52,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	@Override
     public void updateIcons(IconRegister registerer)
     {
-    	this.iconIndex = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
+    	this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	@Override

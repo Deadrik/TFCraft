@@ -18,9 +18,9 @@ public class BlockCustomBookshelf extends BlockTerra {
 	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+	public Icon getIcon(int par1, int par2)
     {
-        return par1 != 1 && par1 != 0 ? super.getBlockTextureFromSideAndMetadata(par1, par2) : TFCBlocks.Planks.getBlockTextureFromSide(par1);
+        return par1 != 1 && par1 != 0 ? super.getIcon(par1, par2) : TFCBlocks.Planks.getBlockTextureFromSide(par1);
     }
 	
 	@Override

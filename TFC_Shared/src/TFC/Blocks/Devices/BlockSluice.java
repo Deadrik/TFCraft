@@ -1,4 +1,4 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import java.util.Random;
 
@@ -87,12 +87,12 @@ public class BlockSluice extends BlockContainer
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		if(j == 4) {
-			return Block.blocksList[Block.waterMoving.blockID].getBlockTextureFromSideAndMetadata(i, 0);
+			return Block.blocksList[Block.waterMoving.blockID].getIcon(i, 0);
 		} else {
-			return Block.planks.getBlockTextureFromSideAndMetadata(i, 0);
+			return Block.planks.getIcon(i, 0);
 		}
 	}
 

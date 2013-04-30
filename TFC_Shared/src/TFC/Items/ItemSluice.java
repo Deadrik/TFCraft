@@ -1,7 +1,7 @@
 package TFC.Items;
 
 import TFC.*;
-import TFC.Blocks.BlockSluice;
+import TFC.Blocks.Devices.BlockSluice;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import cpw.mods.fml.relauncher.Side;

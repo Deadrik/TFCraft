@@ -59,6 +59,7 @@ import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
 import TFC.Items.ItemPlan;
 import TFC.Items.ItemPlank;
+import TFC.Items.ItemPotteryBase;
 import TFC.Items.ItemProPick;
 import TFC.Items.ItemSluice;
 import TFC.Items.ItemSpindle;
@@ -902,7 +903,8 @@ public class TFCItems
     public static Item muttonCooked;
     public static Item FlatLeather;
     public static Item Beer;
-    public static Item Toolrack;
+
+    public static Item Pottery;
     
     /**
      * Item Uses Setup
@@ -1610,6 +1612,7 @@ public class TFCItems
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         
+        Pottery = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","Pottery",num++)).setFolder("tools/").setUnlocalizedName("Pottery");
 		/**Plans*/
         num = 20000;
         SetupPlans(num);

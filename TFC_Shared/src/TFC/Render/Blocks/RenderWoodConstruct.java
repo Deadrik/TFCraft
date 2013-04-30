@@ -70,7 +70,7 @@ public class RenderWoodConstruct
         		float maxZ = minZ + div;
         		
         		if(!breaking)
-        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index]);
+        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index]);
         		renderblocks.uvRotateTop = 3;
         		renderblocks.uvRotateBottom = 3;
         		renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);
@@ -94,7 +94,7 @@ public class RenderWoodConstruct
         		
 
         		if(!breaking)
-        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[index+dd]);
+        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[index+dd]);
         		renderblocks.uvRotateNorth = 1;
         		renderblocks.uvRotateSouth = 1;
         		renderblocks.uvRotateEast = 1;
@@ -122,7 +122,7 @@ public class RenderWoodConstruct
         		float maxZ = 1;
 
         		if(!breaking)
-        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getBlockTextureFromSideAndMetadata(0, te.woodTypes[z+dd2]);
+        			renderblocks.overrideBlockTexture = TFCBlocks.WoodConstruct.getIcon(0, te.woodTypes[z+dd2]);
         		renderblocks.uvRotateTop = 1;
         		renderblocks.uvRotateBottom = 1;
                 renderblocks.setRenderBounds(minX, minY, minZ, maxX, maxY, maxZ);

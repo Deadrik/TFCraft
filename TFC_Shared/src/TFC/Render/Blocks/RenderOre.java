@@ -55,11 +55,11 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
 
 		if(yCoord <= TFC_Settings.RockLayer3Height)
-			var27 = Block.blocksList[rockLayer3.data1].getBlockTextureFromSideAndMetadata(5, rockLayer3.data2);
+			var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
 		else if(yCoord <= TFC_Settings.RockLayer2Height)
-			var27 = Block.blocksList[rockLayer2.data1].getBlockTextureFromSideAndMetadata(5, rockLayer2.data2);
+			var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
 		else
-			var27 = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(5, rockLayer1.data2);
+			var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);
 		return var27;
 	}
 
@@ -79,27 +79,27 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 		Tessellator var14 = Tessellator.instance;
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, -1.0F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(0, meta));
+		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, meta));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(1, meta));
+		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, meta));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, -1.0F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(2, meta));
+		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, meta));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(3, meta));
+		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, meta));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(-1.0F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(4, meta));
+		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, meta));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(5, meta));
+		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, meta));
 		var14.draw();
 	}
 }

@@ -55,7 +55,7 @@ public class ItemUnfinishedArmor extends ItemTerra
 	@Override
 	public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.registerIcon(textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", "").replace("Stage2 ", ""));
+		this.itemIcon = registerer.registerIcon(textureFolder + this.getUnlocalizedName().replace("item.", "").replace("Unfinished ", "").replace("Stage2 ", ""));
     }
 	
 	@Override

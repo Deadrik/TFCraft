@@ -642,7 +642,7 @@ public class GuiHUD extends GuiIngame
 	//		}
 	//	}
 
-	private void renderPumpkinBlur(int par1, int par2)
+	public void renderPumpkinBlur(int par1, int par2)
 	{
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
@@ -666,7 +666,7 @@ public class GuiHUD extends GuiIngame
 	/**
 	 * Renders the vignette. Args: vignetteBrightness, width, height
 	 */
-	private void renderVignette(float par1, int par2, int par3)
+	public void renderVignette(float par1, int par2, int par3)
 	{
 		par1 = 1.0F - par1;
 
@@ -702,7 +702,7 @@ public class GuiHUD extends GuiIngame
 	/**
 	 * Renders the portal overlay. Args: portalStrength, width, height
 	 */
-	private void renderPortalOverlay(float par1, int par2, int par3)
+	public void renderPortalOverlay(float par1, int par2, int par3)
 	{
 		if (par1 < 1.0F)
 		{
@@ -738,7 +738,7 @@ public class GuiHUD extends GuiIngame
 	/**
 	 * Renders the specified item of the inventory slot at the specified location. Args: slot, x, y, partialTick
 	 */
-	private void renderInventorySlot(int par1, int par2, int par3, float par4)
+	public void renderInventorySlot(int par1, int par2, int par3, float par4)
 	{
 		ItemStack var5 = this.mc.thePlayer.inventory.mainInventory[par1];
 

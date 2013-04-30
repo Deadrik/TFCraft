@@ -1,50 +1,21 @@
 package TFC.Items;
 
-import java.util.BitSet;
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
 import TFC.Blocks.BlockSlab;
-import TFC.Core.Helper;
-import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntitySuperDetailed;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class ItemChisel extends ItemTerraTool
 {
@@ -70,7 +41,7 @@ public class ItemChisel extends ItemTerraTool
 			newMeta = (byte) (newMeta | 4);
 		}
 
-		int rot = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		int rot = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 		byte flip = (byte) (newMeta & 4);
 		byte rotation = 0;
 
@@ -159,14 +130,6 @@ public class ItemChisel extends ItemTerraTool
 			else if(mode == 3 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
-				if (random.nextInt(4)==0){
-				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				}
-				return true;
-			}
-			else if(mode == 4 && pi.lockMatches(x, y, z))
-			{
-				ItemChisel.CreateSuperDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
 				if (random.nextInt(4)==0){
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
 				}
@@ -372,72 +335,6 @@ public class ItemChisel extends ItemTerraTool
 					{
 						te.setBlock(subX, subY, subZ);
 						te.setQuad(subX, subY, subZ);
-					}
-				}
-			}
-		}
-	}
-
-	public static void CreateSuperDetailed(World world, int x, int y, int z, int id, int meta, int side, float hitX, float hitY, float hitZ)
-	{
-		TileEntitySuperDetailed te;
-		if(id == TFCBlocks.stoneSlabs.blockID)
-		{
-			TileEntityPartial tep = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
-			int extraX = (int) ((tep.extraData) & 0xf);
-			int extraY = (int) ((tep.extraData >> 4) & 0xf);
-			int extraZ = (int) ((tep.extraData >> 8) & 0xf);
-			int extraX2 = 8 - (int) ((tep.extraData >> 12) & 0xf);
-			int extraY2 = 8 - (int) ((tep.extraData >> 16) & 0xf);
-			int extraZ2 = 8 - (int) ((tep.extraData >> 20) & 0xf);
-
-			world.setBlock(x, y, z, TFCBlocks.SuperDetailed.blockID);
-
-			te = (TileEntitySuperDetailed)world.getBlockTileEntity(x, y, z);
-			int index = te.setIdAndMeta(tep.TypeID, tep.MetaID);
-			te.blockIndex[0] = index;
-
-			for(int subX = 0; subX < 8; subX++)
-			{
-				for(int subZ = 0; subZ < 8; subZ++)
-				{
-					for(int subY = 0; subY < 8; subY++)
-					{
-						if(subX >= extraX && subX < extraX2 && subY >= extraY && subY < extraY2 && subZ >= extraZ && subZ < extraZ2)
-						{
-							te.setBlock(subX, subY, subZ);
-						}
-					}
-				}
-			}			
-		}
-		else if(id == TFCBlocks.Detailed.blockID)
-		{
-			TileEntityDetailed ted = (TileEntityDetailed)world.getBlockTileEntity(x, y, z);
-			world.setBlock(x, y, z, TFCBlocks.SuperDetailed.blockID);
-
-			te = (TileEntitySuperDetailed)world.getBlockTileEntity(x, y, z);
-			int index = te.setIdAndMeta(ted.TypeID, ted.MetaID);
-			te.blockIndex[0] = index;
-		}
-		else
-		{
-			Material m = world.getBlockMaterial(x, y, z);
-			world.setBlock(x, y, z, TFCBlocks.SuperDetailed.blockID);
-
-			te = (TileEntitySuperDetailed)world.getBlockTileEntity(x, y, z);
-			int index = te.setIdAndMeta(id, meta);
-			te.blockIndex[0] = index;
-
-			for(int subX = 0; subX < 8; subX++)
-			{
-				for(int subZ = 0; subZ < 8; subZ++)
-				{
-					for(int subY = 0; subY < 8; subY++)
-					{
-						te.setBlock(subX, subY, subZ);
-						byte ind = te.createIndex(x, y, z, (short) te.setIdAndMeta(id, meta));
-						te.setIndex(subX, subY, subZ, ind);
 					}
 				}
 			}

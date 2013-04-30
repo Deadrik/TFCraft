@@ -111,7 +111,7 @@ public class BlockCustomCactus extends Block implements IPlantable
      * Returns the block texture based on the side being looked at.  Args: side
      */
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getIcon(int par1, int par2)
     {
         return par1 == 1 ? this.field_94380_a : (par1 == 0 ? this.field_94379_b : this.blockIcon);
     }

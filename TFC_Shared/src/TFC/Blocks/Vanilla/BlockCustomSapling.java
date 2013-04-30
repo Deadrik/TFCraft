@@ -73,7 +73,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 		return i;
 	}
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		return icons[j];
 	}

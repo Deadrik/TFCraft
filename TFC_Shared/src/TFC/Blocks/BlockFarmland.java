@@ -76,7 +76,7 @@ public class BlockFarmland extends BlockContainer
         }
         else
         {
-            return blk.getBlockTextureFromSideAndMetadata(0, access.getBlockMetadata(xCoord, yCoord, zCoord));
+            return blk.getIcon(0, access.getBlockMetadata(xCoord, yCoord, zCoord));
         }
     }
 

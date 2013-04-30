@@ -378,7 +378,7 @@ public class BlockCustomFlowing extends BlockFlowing
     {
         int var5 = par1World.getBlockId(par2, par3, par4);
 
-        if (var5 != Block.doorWood.blockID && var5 != Block.doorSteel.blockID && var5 != Block.signPost.blockID && var5 != Block.ladder.blockID && var5 != Block.reed.blockID)
+        if (var5 != Block.doorWood.blockID && var5 != Block.doorIron.blockID && var5 != Block.signPost.blockID && var5 != Block.ladder.blockID && var5 != Block.reed.blockID)
         {
             if (var5 == 0)
             {

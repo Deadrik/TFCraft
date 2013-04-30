@@ -1,10 +1,11 @@
-package TFC.Blocks;
+package TFC.Blocks.Devices;
 
 import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemFirestarter;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityForge;
@@ -118,7 +119,7 @@ public class BlockForge extends BlockTerraContainer
 	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		if(j > 0)
 			return textureOn;

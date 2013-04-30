@@ -160,7 +160,7 @@ public class BlockAnvil extends BlockTerraContainer
     }
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		int meta = getAnvilTypeFromMeta(j);
 
