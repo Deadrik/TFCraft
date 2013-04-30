@@ -104,7 +104,7 @@ public class BlockFirepit extends BlockTerraContainer
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		if(j > 0)
 			return textureOn;

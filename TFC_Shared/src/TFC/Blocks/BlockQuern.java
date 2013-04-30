@@ -47,7 +47,7 @@ public class BlockQuern extends BlockTerraContainer {
 
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getIcon(int i, int j) 
 	{
 		if(i == 0 || (i == 1 && j == 1))
 			return QuernTop1;

@@ -62,7 +62,7 @@ public class ItemCustomArmor extends ItemArmor implements ISize
     @Override
 	public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.registerIcon("armor/"+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon("armor/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	@Override

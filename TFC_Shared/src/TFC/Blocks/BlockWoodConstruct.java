@@ -52,9 +52,9 @@ public class BlockWoodConstruct extends BlockTerraContainer
     }
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+	public Icon getIcon(int i, int j) 
 	{
-		return TFCBlocks.Planks.getBlockTextureFromSideAndMetadata(i, j);
+		return TFCBlocks.Planks.getIcon(i, j);
 	}
 
 	@Override

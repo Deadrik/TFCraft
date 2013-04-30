@@ -45,7 +45,7 @@ public class BlockBarrel extends BlockTerraContainer
     }
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getIcon(int side, int meta)
 	{
 		if(side == 0 || side == 1) 
 		{

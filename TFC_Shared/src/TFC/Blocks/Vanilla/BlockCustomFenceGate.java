@@ -13,7 +13,7 @@ public class BlockCustomFenceGate extends BlockFenceGate {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+	public Icon getIcon(int par1, int par2)
     {
         return TFCBlocks.Planks.getBlockTextureFromSide(par1);
     }

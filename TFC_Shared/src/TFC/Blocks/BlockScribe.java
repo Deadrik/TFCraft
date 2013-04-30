@@ -67,7 +67,7 @@ public class BlockScribe extends BlockTerraContainer
 		}
 	}
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		if(i == 1) {
 			return iconTop;

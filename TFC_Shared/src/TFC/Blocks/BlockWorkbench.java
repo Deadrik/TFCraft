@@ -60,7 +60,7 @@ public class BlockWorkbench extends BlockTerraContainer
 
 	@SideOnly(Side.CLIENT)
 	@Override
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getIcon(int par1, int par2)
     {
         return par1 == 1 ? this.field_94385_a : (par1 == 0 ? TFCBlocks.Planks.getBlockTextureFromSide(par1) : (par1 != 2 && par1 != 4 ? this.blockIcon : this.field_94384_b));
     }

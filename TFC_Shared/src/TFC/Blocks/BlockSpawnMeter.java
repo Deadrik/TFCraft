@@ -41,7 +41,7 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	}
 
 	@Override
-    public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+    public Icon getIcon(int i, int j) 
     {
 		if(i < 2)
 			return iconTop;

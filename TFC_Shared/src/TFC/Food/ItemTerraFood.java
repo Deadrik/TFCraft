@@ -74,7 +74,7 @@ public class ItemTerraFood extends ItemFood implements ISize
     @Override
     public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.registerIcon(folder+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(folder+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	public static void addFoodTempInformation(ItemStack is, List arraylist)

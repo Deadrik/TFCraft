@@ -58,7 +58,7 @@ public class BlockToolRack extends BlockTerraContainer
 
 	public Icon getBlockTexture(int woodType)
 	{
-		return TFCBlocks.WoodSupportH.getBlockTextureFromSideAndMetadata(0, woodType);
+		return TFCBlocks.WoodSupportH.getIcon(0, woodType);
 	}
 	@Override
 	public int getRenderType()
@@ -344,9 +344,9 @@ public class BlockToolRack extends BlockTerraContainer
     }
 
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
+    public Icon getIcon(int par1, int par2)
     {
-    	return TFCBlocks.WoodSupportH.getBlockTextureFromSideAndMetadata(par1, par2);
+    	return TFCBlocks.WoodSupportH.getIcon(par1, par2);
     }
     
     @Override

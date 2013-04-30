@@ -327,7 +327,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     }
 
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+    public Icon getIcon(int i, int j)
     {
         if (TerraFirmaCraft.proxy.getGraphicsLevel())
         {

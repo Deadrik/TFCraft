@@ -340,7 +340,7 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) 
 	{
-		renderer.setOverrideBlockTexture(block.getBlockTextureFromSideAndMetadata(0, metadata));
+		renderer.setOverrideBlockTexture(block.getIcon(0, metadata));
 		if (modelID == TFCBlocks.woodSupportRenderIdH)
         {
 			renderer.setRenderBounds(0.25f, 0.25f, 0f, 0.75f, 0.75f, 1f);
@@ -386,27 +386,27 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 		Tessellator var14 = Tessellator.instance;
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, -1.0F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(0, 0));
+		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(1, 0));
+		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, -1.0F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(2, 0));
+		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(3, 0));
+		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(-1.0F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(4, 0));
+		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSideAndMetadata(5, 0));
+		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, 0));
 		var14.draw();
 	}
 }
