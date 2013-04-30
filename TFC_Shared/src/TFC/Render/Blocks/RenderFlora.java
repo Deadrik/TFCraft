@@ -28,7 +28,7 @@ public class RenderFlora
 	{
 		Tessellator tessellator = Tessellator.instance;
 		int meta = renderer.blockAccess.getBlockMetadata(x, y, z);
-        Icon icon = block.getBlockTextureFromSideAndMetadata(0, meta);
+        Icon icon = block.getIcon(0, meta);
         
         double minU = icon.getMinU();
         double minV = icon.getMinV();

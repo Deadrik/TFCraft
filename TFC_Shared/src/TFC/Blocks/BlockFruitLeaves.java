@@ -59,7 +59,7 @@ public class BlockFruitLeaves extends BlockTerra
 		return false;
 	}
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)
+	public Icon getIcon(int i, int meta)
 	{
 		if (TerraFirmaCraft.proxy.getGraphicsLevel())
 		{

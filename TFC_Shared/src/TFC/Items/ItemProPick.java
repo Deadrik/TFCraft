@@ -27,7 +27,7 @@ public class ItemProPick extends ItemTerra
     @Override
     public void updateIcons(IconRegister registerer)
     {
-    	this.iconIndex = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
+    	this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
     @Override

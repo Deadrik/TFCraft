@@ -437,7 +437,7 @@ public class BlockCustomDoor extends BlockTerra
 	@SideOnly(Side.CLIENT)
 	public int idPicked(World par1World, int par2, int par3, int par4)
 	{
-		return this.blockMaterial == Material.iron ? Item.doorSteel.itemID : Item.doorWood.itemID;
+		return this.blockMaterial == Material.iron ? Item.doorIron.itemID : Item.doorWood.itemID;
 	}
 	
 	@Override

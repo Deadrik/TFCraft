@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import TFC.*;
-import TFC.Blocks.BlockSluice;
+import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Terrain.BlockOre;
 import TFC.Items.ItemOre1;
 import cpw.mods.fml.relauncher.Side;

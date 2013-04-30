@@ -62,7 +62,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+    public Icon getIcon(int side, int meta)
     {
         return side == 1 ? GrassTopTexture : (side == 0 ? TFC_Textures.InvisibleTexture : iconGrassSideOverlay);
     }

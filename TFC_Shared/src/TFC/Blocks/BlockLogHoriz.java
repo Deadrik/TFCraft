@@ -28,7 +28,7 @@ public class BlockLogHoriz extends BlockLogVert
     }
 
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int i, int j) 
+    public Icon getIcon(int i, int j) 
     {
     	int meta = (j & 7) + offset;
     	int dir = j >> 3;

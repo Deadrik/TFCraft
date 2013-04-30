@@ -49,7 +49,7 @@ public class ItemTerra extends Item implements ISize
     @Override
 	public void updateIcons(IconRegister registerer)
     {
-		this.iconIndex = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", ""));
     }
     
     @Override

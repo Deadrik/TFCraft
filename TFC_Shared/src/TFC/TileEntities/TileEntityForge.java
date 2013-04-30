@@ -8,7 +8,7 @@ import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Blocks.BlockForge;
+import TFC.Blocks.Devices.BlockForge;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
