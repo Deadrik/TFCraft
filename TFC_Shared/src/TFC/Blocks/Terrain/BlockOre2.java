@@ -6,7 +6,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Textures;
-import TFC.Items.ItemChisel;
+import TFC.Items.Tools.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

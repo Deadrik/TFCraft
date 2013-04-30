@@ -30,7 +30,7 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
-import TFC.Items.ItemWritableBookTFC;
+import TFC.Items.Tools.ItemWritableBookTFC;
 import TFC.TileEntities.NetworkTileEntity;
 import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;

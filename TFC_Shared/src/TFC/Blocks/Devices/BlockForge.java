@@ -6,7 +6,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Items.ItemFirestarter;
+import TFC.Items.Tools.ItemFirestarter;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityForge;
 import cpw.mods.fml.relauncher.Side;

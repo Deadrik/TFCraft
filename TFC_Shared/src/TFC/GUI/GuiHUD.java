@@ -11,6 +11,8 @@ import TFC.*;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Items.*;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemCustomHoe;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;

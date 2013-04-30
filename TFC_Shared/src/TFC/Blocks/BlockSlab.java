@@ -11,8 +11,8 @@ import TFC.TFCBlocks;
 import TFC.Core.Helper;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Items.ItemChisel;
-import TFC.Items.ItemHammer;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityPartial;
 
 public class BlockSlab extends BlockPartial

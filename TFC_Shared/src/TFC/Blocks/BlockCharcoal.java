@@ -10,7 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import TFC.Items.ItemCustomShovel;
+import TFC.Items.Tools.ItemCustomShovel;
 
 public class BlockCharcoal extends BlockTerra {
 
