@@ -22,6 +22,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.PlayerAPI;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StringTranslate;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -623,6 +624,12 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new SoundHandler());
 	}
 
+	@Override
+	public String getCurrentLanguage()
+	{
+		return StringTranslate.getInstance().getCurrentLanguage();
+	}
+	
 	@Override
 	public void registerTranslations() 
 	{

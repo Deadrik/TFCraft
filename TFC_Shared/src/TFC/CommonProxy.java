@@ -90,6 +90,11 @@ public class CommonProxy implements IGuiHandler
 	public void registerRenderInformation() {
 		// NOOP on server
 	}
+	
+	public String getCurrentLanguage()
+	{
+		return null;
+	}
 
 	public void registerTileEntities(boolean b)
 	{
