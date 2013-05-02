@@ -1,4 +1,4 @@
-package TFC.Render;
+package TFC.Render.Models;
 
 public class ModelPigTFC extends ModelQuadrupedTFC
 {

@@ -8,7 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.TileEntities.TileEntityForge;
+import TFC.TileEntities.TileEntityPottery;
 
 public class BlockPottery extends BlockTerraContainer
 {
@@ -19,14 +19,24 @@ public class BlockPottery extends BlockTerraContainer
 	{
 		super(i, Material.iron);
 		this.setLightValue(1.0F);
+		this.setBlockBounds(0, 0, 0, 1, 0.05f, 1);
 	}
 	
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		this.Clay = iconRegisterer.registerIcon("devices/ClayPottery");
-		this.Ceramic = iconRegisterer.registerIcon("devices/CeramicPottery");
+		this.Clay = iconRegisterer.registerIcon("devices/Clay Pottery");
+		this.Ceramic = iconRegisterer.registerIcon("devices/Ceramic Pottery");
     }
+	
+	@Override
+	public Icon getIcon(int side, int meta)
+	{
+		if (meta == 0)
+			return Clay;
+		else
+			return Ceramic;
+	}
 
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
@@ -55,6 +65,6 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityForge();
+		return new TileEntityPottery();
 	}
 }

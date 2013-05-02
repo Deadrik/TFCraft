@@ -3,8 +3,12 @@
 //=======================================================
 package TFC;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -158,6 +162,12 @@ public class TerraFirmaCraft
 		TFC_ItemHeat.SetupItemHeat();
 
 		Localization.addLocalization("/lang/tfc/", "en_US");
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
+				LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), 
+				new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty)));
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
+				LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), 
+				new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty)));
 	}
 
 	@PostInit

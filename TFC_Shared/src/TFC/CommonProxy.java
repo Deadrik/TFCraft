@@ -71,6 +71,7 @@ import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityMetallurgy;
 import TFC.TileEntities.TileEntityPartial;
+import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntitySapling;
 import TFC.TileEntities.TileEntityScribe;
@@ -125,7 +126,10 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 		ModLoader.registerTileEntity(TileEntityBarrel.class, "Barrel");
 		
+		
+		
 		if(b){
+			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
 			
 		}

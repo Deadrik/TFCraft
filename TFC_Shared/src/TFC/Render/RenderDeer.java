@@ -34,6 +34,8 @@ import net.minecraft.world.*;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Entities.Mobs.EntityDeer;
+import TFC.Render.Models.ModelBaseTFC;
+import TFC.Render.Models.ModelDeer;
 public class RenderDeer extends RenderLivingTFC
 {
     private float scale = 1.0f;

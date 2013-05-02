@@ -1,4 +1,4 @@
-package TFC.Render;
+package TFC.Render.Models;
 
 import TFC.*;
 import cpw.mods.fml.relauncher.Side;

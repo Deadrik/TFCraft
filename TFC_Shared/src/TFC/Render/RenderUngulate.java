@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.Mobs.EntityDeer;
+import TFC.Render.Models.ModelBaseTFC;
+import TFC.Render.Models.ModelUngulate;
 public class RenderUngulate extends RenderLivingTFC
 {
     private float scale = 1.0f;

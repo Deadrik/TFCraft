@@ -1,4 +1,4 @@
-package TFC.Render;
+package TFC.Render.Models;
 
 import org.lwjgl.opengl.GL11;
 

@@ -279,8 +279,8 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(finiteWater, "finiteWater");
 
-		GameRegistry.registerBlock(WoodSupportV, TFC.Items.ItemWoodSupport.class,"WoodSupportV");
-		GameRegistry.registerBlock(WoodSupportH, TFC.Items.ItemWoodSupport.class, "WoodSupportH");
+		GameRegistry.registerBlock(WoodSupportV, TFC.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV");
+		GameRegistry.registerBlock(WoodSupportH, TFC.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH");
 		GameRegistry.registerBlock(Sulfur, "Sulfur");
 		GameRegistry.registerBlock(Block.wood, TFC.Items.ItemBlocks.ItemCustomWood.class, "wood");
 		GameRegistry.registerBlock(Block.leaves, TFC.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");

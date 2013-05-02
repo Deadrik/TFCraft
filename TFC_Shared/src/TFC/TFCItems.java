@@ -44,7 +44,10 @@ import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemUnfinishedArmor;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
+import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
+import TFC.Items.Pottery.ItemPotteryLargeVessel;
+import TFC.Items.Pottery.ItemPotteryPot;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomAxe;
 import TFC.Items.Tools.ItemCustomBlueSteelBucket;
@@ -909,6 +912,7 @@ public class TFCItems
     public static Item PotteryAmphora;
     public static Item PotterySmallVessel;
     public static Item PotteryLargeVessel;
+    public static Item KilnRack;
     
     /**
      * Item Uses Setup
@@ -1617,6 +1621,9 @@ public class TFCItems
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         
         PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"items","PotteryJug",num++)).setUnlocalizedName("Jug");
+        PotterySmallVessel = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
+        PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
+        PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"items","PotteryPot",num++)).setUnlocalizedName("Pot");
 		/**Plans*/
         num = 20000;
         SetupPlans(num);

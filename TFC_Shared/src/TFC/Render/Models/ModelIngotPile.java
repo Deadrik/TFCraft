@@ -1,4 +1,4 @@
-package TFC.Render;
+package TFC.Render.Models;
 
 import net.minecraft.client.model.ModelBase;
 import cpw.mods.fml.relauncher.Side;
