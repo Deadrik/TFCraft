@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Render.Models.ModelIngotPile;
 import TFC.TileEntities.TileEntityIngotPile;
 
 public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer

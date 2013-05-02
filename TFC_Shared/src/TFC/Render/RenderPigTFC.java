@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.*;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityPigTFC;
+import TFC.Render.Models.ModelBaseTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

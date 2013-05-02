@@ -1,4 +1,4 @@
-package TFC.Render;
+package TFC.Render.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;

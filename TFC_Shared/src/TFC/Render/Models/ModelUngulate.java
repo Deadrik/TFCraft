@@ -1,5 +1,5 @@
 
-package TFC.Render;
+package TFC.Render.Models;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

@@ -13,20 +13,18 @@ import net.minecraft.nbt.NBTTagList;
 public class TileEntityPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
-	public byte[] placementGrid;
 	public boolean hasRack;
 
 	public TileEntityPottery()
 	{
 		inventory = new ItemStack[4];
-		placementGrid = new byte[4];
 		hasRack = false;
 	}
 
 	@Override
 	public void updateEntity()
 	{        
-		
+
 	}	
 
 	@Override
@@ -111,19 +109,68 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException  
 	{
-		outStream.write(placementGrid);
+		if(inventory[0] != null)
+		{
+			outStream.writeInt(inventory[0].itemID);
+			outStream.writeInt(inventory[0].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		if(inventory[1] != null)
+		{
+			outStream.writeInt(inventory[1].itemID);
+			outStream.writeInt(inventory[1].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		if(inventory[2] != null)
+		{
+			outStream.writeInt(inventory[2].itemID);
+			outStream.writeInt(inventory[2].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		if(inventory[3] != null)
+		{
+			outStream.writeInt(inventory[3].itemID);
+			outStream.writeInt(inventory[3].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
 		outStream.writeBoolean(hasRack);
 	}
 
 	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException 
 	{
-		inStream.read(placementGrid, 0, 4);
+		int inv0 = inStream.readInt();
+		int inv0d = inStream.readInt();
+		int inv1 = inStream.readInt();
+		int inv1d = inStream.readInt();
+		int inv2 = inStream.readInt();
+		int inv2d = inStream.readInt();
+		int inv3 = inStream.readInt();
+		int inv3d = inStream.readInt();
+		
 		hasRack = inStream.readBoolean();
-		/*AnvilTier = inStream.readInt();
-		stonePair[0] = inStream.readInt();
-		stonePair[1] = inStream.readInt();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);*/
+		
+		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
+		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
