@@ -23,8 +23,8 @@ public class GuiTerraScribe extends GuiContainer
 		super(new ContainerTerraScribe(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
 		((ContainerTerraScribe)inventorySlots).setGUI(this);
-		this.xSize = 176;
-		this.ySize = 184;
+		this.xSize = 175;
+		this.ySize = 183;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class GuiTerraScribe extends GuiContainer
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - xSize) / 2;
         int h = (height - ySize) / 2;
-		drawTexturedModalRect(w, h, 0, 0, 175, 183);
+        drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
 	}
 

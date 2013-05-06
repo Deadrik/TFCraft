@@ -30,15 +30,15 @@ public class ContainerTerraScribe extends ContainerTFC
 		worldObj = world;
 		entityplayer = inventoryplayer.player;
 		//output
-		addSlotToContainer(new SlotCraftingScribe(inventoryplayer.player, craftMatrix, craftResult,terraScribe, 0, 128, 35));
+		addSlotToContainer(new SlotCraftingScribe(inventoryplayer.player, craftMatrix, craftResult,terraScribe, 0, 128, 44));
 		//paper
-		addSlotToContainer(new SlotScribePaper(inventoryplayer.player,scribe, this, 1, 128, -1));
+		addSlotToContainer(new SlotScribePaper(inventoryplayer.player,scribe, this, 1, 128, 8));
 
 		for (int l = 0; l < 5; l++)
 		{
 			for (int k1 = 0; k1 < 5; k1++)
 			{
-				addSlotToContainer(new SlotScribeCrafting(inventoryplayer.player,craftMatrix, k1 + l * 5, 8 + k1 * 18, l * 18 - 1));
+				addSlotToContainer(new SlotScribeCrafting(inventoryplayer.player,craftMatrix, k1 + l * 5, 8 + k1 * 18, 8 + l * 18));
 			}
 		}
 
@@ -46,14 +46,14 @@ public class ContainerTerraScribe extends ContainerTFC
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 93 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 102 + i * 18));
 			}
 
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 151));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 160));
 		}
 
 
