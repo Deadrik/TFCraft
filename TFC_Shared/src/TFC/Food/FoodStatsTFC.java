@@ -270,7 +270,7 @@ public class FoodStatsTFC extends FoodStats
 	
 	public void restoreWater(EntityPlayer player, int w)
 	{
-		this.waterLevel = Math.min(this.waterLevel += w, this.getMaxWater(player));
+		this.waterLevel = Math.min(this.waterLevel + w, this.getMaxWater(player));
 	}
 	
 	public void resetTimers()
