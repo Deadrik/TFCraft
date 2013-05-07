@@ -21,8 +21,8 @@ public class GuiTerraMetallurgy extends GuiContainer
 	{
 		super(new ContainerTerraMetallurgy(inventoryplayer,tileentityMetallurgy, world, x, y, z) );
 		entityMetallurgy = tileentityMetallurgy;
-		this.xSize = 176;
-		this.ySize = 184;
+		this.xSize = 175;
+		this.ySize = 183;
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class GuiTerraMetallurgy extends GuiContainer
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
         int w = (width - xSize) / 2;
         int h = (height - ySize) / 2;
-        drawTexturedModalRect(w, h, 0, 0, 175, 183);
+        drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 		
 	}
 	
