@@ -60,7 +60,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slothammer = (Slot)inventorySlots.get(0);
-		Slot[] slotinput = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4)};
+		Slot[] slotinput = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(2), (Slot)inventorySlots.get(3)};
 		Slot slotblueprint = (Slot)inventorySlots.get(2);
 		Slot slotflux = (Slot)inventorySlots.get(6);
 		if(slot != null && slot.getHasStack())
@@ -116,7 +116,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 				else
 				{
 					int j = 0;
-					while(j < 3)
+					while(j < slotinput.length)
 					{
 						if(slotinput[j].getHasStack())
 						{
