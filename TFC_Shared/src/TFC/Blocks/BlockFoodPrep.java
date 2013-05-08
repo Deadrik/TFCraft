@@ -15,6 +15,7 @@ public class BlockFoodPrep extends BlockTerraContainer {
 
 	public BlockFoodPrep(int par1) {
 		super(par1);
+		this.setBlockBounds(0, 0, 0, 1, 0.15f, 1);
 	}
 	
 	@Override

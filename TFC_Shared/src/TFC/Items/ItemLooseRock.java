@@ -40,7 +40,7 @@ public class ItemLooseRock extends ItemTerra
 		};
 
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
 	{
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 		pi.knappingRockType = new ItemStack(TFCItems.FlatRock, 1, itemstack.getItemDamage());
@@ -49,7 +49,7 @@ public class ItemLooseRock extends ItemTerra
 			itemstack.stackSize--;
 			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
-		return true;
+		return itemstack;
 
 	}
 

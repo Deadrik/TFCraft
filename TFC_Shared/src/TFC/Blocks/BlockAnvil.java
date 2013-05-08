@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
@@ -116,16 +117,47 @@ public class BlockAnvil extends BlockTerraContainer
 
 		if(te.AnvilTier != AnvilReq.STONE.Tier)
 		{
-			if(direction == 0)
+			if(direction == 0) {
+				this.setBlockBounds(0.2f, 0, 0, 0.8f, 0.6f, 1);
 				return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
-			else
+			}
+			else {
+				this.setBlockBounds(0, 0, 0.2f, 1, 0.6f, 0.8f);
 				return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
+			}
 		}
 		else
 		{
-			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 1, (double)par4 + 1);
+			this.setBlockBounds(0, 0, 0, 1, 0.9F, 1);
+			return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, (double)par3 + 0.9F, (double)par4 + 1);
 		}
 	}
+
+    /**
+     * Updates the blocks bounds based on its current state. Args: world, x, y, z
+     */
+	@Override
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityAnvil te = (TileEntityAnvil)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
+
+		if(te.AnvilTier != AnvilReq.STONE.Tier)
+		{
+			if(direction == 0) {
+				this.setBlockBounds(0.2f, 0, 0, 0.8f, 0.6f, 1);
+			}
+			else {
+				this.setBlockBounds(0, 0, 0.2f, 1, 0.6f, 0.8f);
+			}
+		}
+		else
+		{
+			this.setBlockBounds(0, 0, 0, 1, 0.9F, 1);
+		}
+    }
+
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
 	{
