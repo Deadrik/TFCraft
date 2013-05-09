@@ -1,5 +1,6 @@
 package TFC.Render;
 
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -22,6 +23,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 	private RenderBlocks renderBlocks;
 	private ModelUrn urnModel;
     private RenderItem itemRenderer;
+    private ModelRenderer modelRenderer;
 
     public TileEntityPotteryRenderer()
     {
