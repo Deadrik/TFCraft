@@ -201,6 +201,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
                 inputCompound = new NBTTagCompound();
                 inputCompound.setFloat("temperature", startTemp);
                 fireItemStacks[i].setTagCompound(inputCompound);
+                inputItemTemps[i] = startTemp;
             }
         }
         else if(fireItemStacks[i] == null)
