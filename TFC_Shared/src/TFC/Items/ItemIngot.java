@@ -353,7 +353,8 @@ public class ItemIngot extends ItemTerra
 				{
 					setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
 				}
-				if (world.getBlockTileEntity(x,y,z) != null){
+				if (world.getBlockTileEntity(x,y,z) != null && world.getBlockTileEntity(x,y,z) instanceof TileEntityIngotPile)
+            {
 					((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.itemID - 16028 - 256);
 				}
 				world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
