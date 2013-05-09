@@ -14,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityIngotPile;
@@ -122,6 +123,19 @@ public class BlockIngotPile extends BlockTerraContainer
 			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
 	}
 
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    {
+		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+		int direction = getDirectionFromMetadata(meta);
+		TileEntityIngotPile te = (TileEntityIngotPile)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
+
+		if (te.getStackInSlot(0)!=null){
+			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getStackInSlot(0).stackSize + 7)/8)*0.125), 1f);
+		}
+		else
+			this.setBlockBounds(0f, 0f, 0f, 0f, 0.25f, 0f);
+
+    }
 	/*@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
