@@ -25,8 +25,8 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		this.Clay = iconRegisterer.registerIcon("devices/Clay Pottery");
-		this.Ceramic = iconRegisterer.registerIcon("devices/Ceramic Pottery");
+		this.Clay = iconRegisterer.registerIcon("clay/Clay");
+		this.Ceramic = iconRegisterer.registerIcon("clay/Ceramic");
     }
 	
 	@Override

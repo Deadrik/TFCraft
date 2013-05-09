@@ -33,6 +33,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		this.hasSubtypes = true;
 		this.setFolder("pottery/");
 		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.MetaNames = new String[]{"",""};
 	}
 
 	@Override
