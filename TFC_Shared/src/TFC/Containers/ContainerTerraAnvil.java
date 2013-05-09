@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.Items.ItemPlan;
 import TFC.Items.ItemHammer;
 import TFC.TileEntities.TileEntityAnvil;
 
@@ -60,8 +61,8 @@ public class ContainerTerraAnvil extends ContainerTFC
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
 		Slot slothammer = (Slot)inventorySlots.get(0);
-		Slot[] slotinput = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(4)};
-		Slot slotblueprint = (Slot)inventorySlots.get(2);
+		Slot[] slotinput = {(Slot)inventorySlots.get(1), (Slot)inventorySlots.get(2), (Slot)inventorySlots.get(3)};
+		Slot slotblueprint = (Slot)inventorySlots.get(5);
 		Slot slotflux = (Slot)inventorySlots.get(6);
 		if(slot != null && slot.getHasStack())
 		{
@@ -98,11 +99,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 					slothammer.putStack(stack);
 					itemstack1.stackSize--;
 				}
-				else if(itemstack1.itemID == TFCItems.HammerHeadPlan.itemID || itemstack1.itemID == TFCItems.SawBladePlan.itemID ||
-						itemstack1.itemID == TFCItems.PickaxeHeadPlan.itemID || itemstack1.itemID == TFCItems.ProPickHeadPlan.itemID ||
-						itemstack1.itemID == TFCItems.ChiselHeadPlan.itemID || itemstack1.itemID == TFCItems.AxeHeadPlan.itemID ||
-						itemstack1.itemID == TFCItems.SwordBladePlan.itemID || itemstack1.itemID == TFCItems.HoeHeadPlan.itemID ||
-						itemstack1.itemID == TFCItems.ShovelHeadPlan.itemID || itemstack1.itemID == TFCItems.MaceHeadPlan.itemID)
+				else if(itemstack1.getItem() instanceof ItemPlan)
 				{
 					if(slotblueprint.getHasStack())
 					{
@@ -116,7 +113,7 @@ public class ContainerTerraAnvil extends ContainerTFC
 				else
 				{
 					int j = 0;
-					while(j < 3)
+					while(j < slotinput.length)
 					{
 						if(slotinput[j].getHasStack())
 						{

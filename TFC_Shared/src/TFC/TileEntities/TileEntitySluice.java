@@ -1,6 +1,7 @@
 package TFC.TileEntities;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -53,8 +54,8 @@ public class TileEntitySluice extends TileEntity implements IInventory
 
     private boolean initialized = false;
 
-    private ArrayList coreSample = new ArrayList<Item>();
-    private ArrayList coreSampleStacks = new ArrayList<ItemStack>();
+    private TreeSet<Integer> coreSampleTypes = new TreeSet<Integer>();
+    private ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
 
     public TileEntitySluice()
     {
@@ -68,30 +69,39 @@ public class TileEntitySluice extends TileEntity implements IInventory
     {
         for(int i = 0; i < this.getSizeInventory(); i++)
         {
-            if(this.getStackInSlot(i) != null && this.getStackInSlot(i).itemID != is.itemID) 
+            ItemStack stackInSlot = this.getStackInSlot(i);
+            if(stackInSlot == null)
             {
-                continue;
-            } 
-            else if(this.getStackInSlot(i) != null && this.getStackInSlot(i).itemID == is.itemID)//stack is not empty and the items are the same
+                // slot is empty
+                this.setInventorySlotContents(i, is);
+                return;
+            }
+            else
             {
-                int s;
-                if(this.getStackInSlot(i).stackSize + is.stackSize > this.getInventoryStackLimit())
+                // slot has something, does it match the type and subtype?
+                if((stackInSlot.itemID == is.itemID) && (stackInSlot.getItemDamage() == is.getItemDamage()))
                 {
-                    int size = getInventoryStackLimit()-this.getStackInSlot(i).stackSize;
-                    this.getStackInSlot(i).stackSize += size;
-                    //is.stackSize -= size;
-                    continue;
+                    // match, add to this slot but make sure it fits
+                    if(stackInSlot.stackSize + is.stackSize > this.getInventoryStackLimit())
+                    {
+                        // doesn't fit, add as much as possible then leave the remaining for the next slot
+                        int size = getInventoryStackLimit() - stackInSlot.stackSize;
+                        stackInSlot.stackSize += size;
+                        is.stackSize -= size;
+                        continue;
+                    }
+                    else
+                    {
+                        // it fits, add it
+                        stackInSlot.stackSize += is.stackSize;
+                    }
+                    return;
                 }
                 else
                 {
-                    this.getStackInSlot(i).stackSize += is.stackSize;
+                    // not the same item, try the next slot
+                    continue;
                 }
-                return;
-            }
-            else//stack is empty
-            {
-                this.setInventorySlotContents(i, is);
-                return;
             }
         }
         ejectItem(is);
@@ -244,6 +254,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
     public void updateEntity()
     {
         int meta = getBlockMetadata();
+        boolean isFoot = BlockSluice.isBlockFootOfBed(meta);
 
         /*********************************************************
          ********************* Server Only Begin
@@ -261,12 +272,11 @@ public class TileEntitySluice extends TileEntity implements IInventory
                             if(worldObj.getBlockId(x+xCoord, y, z+zCoord) == TFCBlocks.Ore.blockID)
                             {
                                 int m = worldObj.getBlockMetadata(x+xCoord, y, z+zCoord);
-                                if(!coreSample.contains(BlockOre.getDroppedItem(m)))
+                                if(m != 14 && m != 15)
                                 {
-                                    //coreSample.add(BlockTerraOre.getItemNameDamage(((BlockTerraOre)mod_TFC_Core.terraOre).damageDropped(meta)));
-                                    if(m!= 14 && m != 15)
+                                    if(!coreSampleTypes.contains(m))
                                     {
-                                        coreSample.add(BlockOre.getDroppedItem(m));
+                                        coreSampleTypes.add(m);
                                         coreSampleStacks.add(new ItemStack(BlockOre.getDroppedItem(m), 1, m));
                                     }
                                 }
@@ -276,22 +286,35 @@ public class TileEntitySluice extends TileEntity implements IInventory
                 }
                 initialized = true;
             }
-            int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
-            List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-                    xCoord, yCoord, zCoord, 
-                    xCoord+1, yCoord+1.1f, zCoord+1));
-            
-            for (Iterator iterator = list.iterator(); iterator.hasNext();)
+
+            // don't eat blocks on top of foot block, only the head block
+            if(!isFoot)
             {
-                EntityItem entity = (EntityItem)iterator.next();
-                if(entity.getEntityItem().itemID == Block.gravel.blockID || entity.getEntityItem().itemID == TFCBlocks.Sand.blockID || entity.getEntityItem().itemID == TFCBlocks.Sand2.blockID)
+                int[] dir = BlockSluice.headBlockToFootBlockMap[BlockSluice.getDirectionFromMetadata(meta)];
+                List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
+                        xCoord, yCoord, zCoord, 
+                        xCoord+1, yCoord+1.1f, zCoord+1));
+            
+                for (Iterator iterator = list.iterator(); iterator.hasNext();)
                 {
-                    if(soilAmount < 50 && entity.getEntityItem().stackSize == 1)
+                    EntityItem entity = (EntityItem)iterator.next();
+                    if(entity.getEntityItem().itemID == Block.gravel.blockID || entity.getEntityItem().itemID == TFCBlocks.Sand.blockID || entity.getEntityItem().itemID == TFCBlocks.Sand2.blockID)
                     {
-                        soilAmount += 20;
-                        entity.setDead();
-                        if(soilAmount > 50)
-                            soilAmount = 50;
+                        if(soilAmount < 50 && entity.getEntityItem().stackSize == 1)
+                        {
+                            soilAmount += 20;
+                            entity.setDead();
+                            if(soilAmount > 50)
+                                soilAmount = 50;
+                            if(entity.getEntityItem().itemID == Block.gravel.blockID)
+                            {
+                                soilType = 2;
+                            }
+                            else
+                            {
+                                soilType = 1;
+                            }
+                        }
                     }
                 }
             }
@@ -326,7 +349,7 @@ public class TileEntitySluice extends TileEntity implements IInventory
                     ArrayList items = new ArrayList<ItemStack>();
                     if(random.nextInt((int) (200*oreMod)) == 0 && !coreSampleStacks.isEmpty())
                     {
-                        addToInventory((ItemStack)coreSampleStacks.toArray()[random.nextInt(coreSampleStacks.toArray().length)]);
+                        addToInventory(coreSampleStacks.get(random.nextInt(coreSampleStacks.size())).copy());
                     }
                     else if(random.nextInt((int) (400*gemMod)) == 0)
                     {
@@ -480,7 +503,6 @@ public class TileEntitySluice extends TileEntity implements IInventory
         ///////////This is where we handle the water flow
         ////////////////////////////////////////////////////////
         boolean isFlowing = (meta & 4) == 4;
-        boolean isFoot = BlockSluice.isBlockFootOfBed(meta);
 
         if((meta & 3) == 0 && !isFoot)
         {

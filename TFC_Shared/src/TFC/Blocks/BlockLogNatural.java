@@ -275,7 +275,7 @@ public class BlockLogNatural extends BlockTerra
 			{
 				if(damage+stack.getItemDamage() <= stack.getMaxDamage())
 				{
-					world.setBlock(i, j, k, 0, 0, 0x2);
+					world.setBlock(i, j, k, 0, 0, 0x3);
 					if((isStone && world.rand.nextInt(10) != 0) || !isStone)
 						dropBlockAsItem_do(world, i, j, k, new ItemStack(Item.itemsList[TFCItems.Logs.itemID],1,l));
 				}
