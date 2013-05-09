@@ -339,6 +339,13 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
                     {
                         fireItemStacks[8] = output.copy(); 
                     }
+                    else if((fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize())
+                    		|| (fireItemStacks[7].getItem().itemID != output.getItem().itemID && fireItemStacks[8].getItem().itemID != output.getItem().itemID)
+                    		|| (fireItemStacks[7].stackSize == fireItemStacks[7].getMaxStackSize() && fireItemStacks[8].getItem().itemID != output.getItem().itemID)
+                    		|| (fireItemStacks[7].getItem().itemID != output.getItem().itemID && fireItemStacks[8].stackSize == fireItemStacks[8].getMaxStackSize()))
+                    {
+                    	fireItemStacks[1] = output.copy();
+                    }
                 }
             }
         }
@@ -561,8 +568,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     @Override
     public int getInventoryStackLimit()
     {
-        // TODO Auto-generated method stub
-        return 1;
+        return 64;
     }
 
     @Override
