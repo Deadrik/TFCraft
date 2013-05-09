@@ -25,24 +25,15 @@ public class SlotFirepitFuel extends Slot
 		return false;
 	}
 
-//	public void onPickupFromSlot(ItemStack itemstack)
-//	{
-//		super.onPickupFromSlot(itemstack);
-//	}
-//	
 	@Override
 	public int getSlotStackLimit()
     {
         return 1;
     }
-//    
-//    public void putStack(ItemStack par1ItemStack)
-//    {
-//        if(par1ItemStack != null){
-//        ItemStack is = par1ItemStack;
-//        par1ItemStack.stackSize -= 1;
-//        is.stackSize = 1;
-//        super.putStack(is);
-//        }
-//    }
+
+	@Override
+	public void putStack(ItemStack par1ItemStack) {
+		if (par1ItemStack != null) par1ItemStack.stackSize = 1;
+		super.putStack(par1ItemStack);
+	}
 }
