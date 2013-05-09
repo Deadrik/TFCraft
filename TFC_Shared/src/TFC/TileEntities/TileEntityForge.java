@@ -612,11 +612,10 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
             Random R = new Random();
             if(R.nextInt(10) == 0 && fireTemperature > 210)
             {
-            	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
                 worldObj.playSoundEffect(xCoord,yCoord,zCoord, "fire.fire", 0.4F + (R.nextFloat()/2), 0.7F + R.nextFloat());
             }
 
-            if(fireTemperature < 210 && fireTemperature != ambientTemp && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
+            if(fireTemperature >= 100 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord)!=1)
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
             }

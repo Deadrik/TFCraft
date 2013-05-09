@@ -825,12 +825,12 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
             //here we set the various temperatures to range
             this.keepTempToRange();
             
-            if(fireTemperature < 100 && fireTemperature != ambientTemp)
+            if((fireTemperature < 100) && (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 0))
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
-            else if(fireTemperature < 210)
+            else if((fireTemperature >= 100) && (fireTemperature < 210) && (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 1))
             {
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -840,7 +840,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
             if(fuelTimeLeft > 0 && fireTemperature >= 210 && Surrounded != 5)
             {
 
-                if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0 ) 
+                if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord) != 2)
                 {
                 	worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 3);
                 	worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
