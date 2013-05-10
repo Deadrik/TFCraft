@@ -61,7 +61,6 @@ import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
 import TFC.GUI.GuiFoodPrep;
-import TFC.GUI.GuiHUD;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
@@ -211,7 +210,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onClientLogin()
 	{
-		ModLoader.getMinecraftInstance().ingameGUI = new GuiHUD(ModLoader.getMinecraftInstance());
+
 	}
 
 	@Override
@@ -299,10 +298,6 @@ public class ClientProxy extends CommonProxy
 		case 29:
 		{
 			return new GuiChestTFC(player.inventory, ((TileEntityChestTFC) te), world, x, y, z);
-		}
-		case 30:
-		{
-			return new GuiHUD(ModLoader.getMinecraftInstance());
 		}
 		case 31:
 		{
