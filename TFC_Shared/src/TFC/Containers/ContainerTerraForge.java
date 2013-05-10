@@ -79,11 +79,10 @@ public class ContainerTerraForge extends ContainerTFC
 			ItemStack itemstack1 = slot.getStack();
 			if(i <= 13)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if(!this.mergeItemStack(itemstack1, 14, this.inventorySlots.size(), true))
 				{
 					return null;
 				}
-				slot.putStack(null);
 			}
 			else
 			{
