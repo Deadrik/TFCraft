@@ -27,16 +27,10 @@ import TFC.WorldGen.TFCBiome;
 
 public class TileEntityFirepit extends TileEntityFireEntity implements IInventory
 {
-    
-
     public ItemStack fireItemStacks[];
     public float inputItemTemp;
 
-    private int prevStackSize;
-    private ItemStack prevWorkItemStack;
-
     private int externalFireCheckTimer;
-    public Boolean canCreateFire;
     private int externalWoodCount;
     public int charcoalCounter;
 
