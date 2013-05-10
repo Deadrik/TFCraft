@@ -27,6 +27,7 @@ import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.RenderOverlayHandler;
 import TFC.Handlers.ServerTickHandler;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
@@ -155,6 +156,9 @@ public class TerraFirmaCraft
 		
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
+		
+		//Register our overlay changes
+		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 		
 		//Setup custom potion effects
 		TFCPotion.Setup();
