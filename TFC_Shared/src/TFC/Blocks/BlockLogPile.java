@@ -2,7 +2,6 @@ package TFC.Blocks;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,13 +14,14 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.TileEntities.TileEntityLogPile;
 
-public class BlockLogPile extends BlockContainer
+public class BlockLogPile extends BlockTerraContainer
 {
 	Icon[] icons = new Icon[3];
 
 	public BlockLogPile(int i)
 	{
 		super(i, Material.wood);
+		this.setBurnProperties(blockID, 5, 30);
 	}
 	
 	public static int getDirectionFromMetadata(int i)
