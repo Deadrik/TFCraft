@@ -131,7 +131,7 @@ public class RenderFluids
                 tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
                 float f10 = 1.0F;
                 tessellator.setColorOpaque_F(f3 * f10, f3 * f10, f3 * f10);
-                renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3 + d6, (double)par4, renderblocks.getBlockIconFromSide(par1Block, 0));
+                renderblocks.renderFaceYNeg(par1Block, (double)par2, (double)par3 + d6, (double)par4, renderblocks.getBlockIconFromSide(par1Block, 0));
                 flag2 = true;
             }
 

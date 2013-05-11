@@ -68,9 +68,9 @@ public class ItemCustomPotion extends ItemPotion
     }
     
     @Override
-	public void updateIcons(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
     {
-        super.updateIcons(par1IconRegister);
-        Item.potion.updateIcons(par1IconRegister);
+        super.registerIcons(par1IconRegister);
+        Item.potion.registerIcons(par1IconRegister);
     }
 }

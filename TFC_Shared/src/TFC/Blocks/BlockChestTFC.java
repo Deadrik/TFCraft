@@ -431,7 +431,7 @@ public class BlockChestTFC extends BlockTerraContainer
         }
         else
         {
-            IInventory iinventory = this.func_94442_h_(world, i, j, k);
+            IInventory iinventory = this.getInventory(world, i, j, k);
 
             if (iinventory != null)
             {
@@ -442,7 +442,7 @@ public class BlockChestTFC extends BlockTerraContainer
         }
     }
 
-    public IInventory func_94442_h_(World par1World, int par2, int par3, int par4)
+    public IInventory getInventory(World par1World, int par2, int par3, int par4)
     {
         Object object = par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -571,7 +571,7 @@ public class BlockChestTFC extends BlockTerraContainer
     @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
     {
-        return Container.func_94526_b(this.func_94442_h_(par1World, par2, par3, par4));
+        return Container.calcRedstoneFromInventory(this.getInventory(par1World, par2, par3, par4));
     }
 
     @Override

@@ -292,7 +292,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(LogPile, "LogPile");
 		GameRegistry.registerBlock(Charcoal, "Charcoal");
 		GameRegistry.registerBlock(Detailed, "Detailed");
-		GameRegistry.registerBlock(SuperDetailed, "SuperDetailed");
 		
 		GameRegistry.registerBlock(tilledSoil, "tilledSoil");
 		GameRegistry.registerBlock(tilledSoil2, "tilledSoil2");
@@ -368,7 +367,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorWillow, "DoorWillow");
 		GameRegistry.registerBlock(DoorKapok, "DoorKapok");
 		GameRegistry.registerBlock(Nestbox, "Nestbox");
-		GameRegistry.registerBlock(Crucible, "Crucible");
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
 		
@@ -606,9 +604,7 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Charcoal, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodConstruct, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "axe", 0);
-		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "axe", 0);
 
 		if (config != null) {
 			config.save();

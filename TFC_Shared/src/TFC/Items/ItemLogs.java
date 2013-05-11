@@ -117,7 +117,7 @@ public class ItemLogs extends ItemTerra
 	
 	Icon[] icons = new Icon[16];
 	@Override
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
 			icons[i] = registerer.registerIcon("wood/"+MetaNames[i]+" Log");

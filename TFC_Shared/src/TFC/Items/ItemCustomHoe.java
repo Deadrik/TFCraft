@@ -56,7 +56,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-    public void updateIcons(IconRegister registerer)
+    public void registerIcons(IconRegister registerer)
     {
     	this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }

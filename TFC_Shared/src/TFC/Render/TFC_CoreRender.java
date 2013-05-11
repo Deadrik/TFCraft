@@ -788,7 +788,7 @@ public class TFC_CoreRender
 		}
 
 /*
-		renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
+		renderblocks.renderFaceYNeg(block, (double)xCoord, (double)yCoord, (double)zCoord, block.getBlockTexture(renderblocks.blockAccess, xCoord, yCoord, zCoord, 0));
 
 		if(index.inBloom(TFC_Time.currentMonth))
 		{
@@ -798,7 +798,7 @@ public class TFC_CoreRender
 				renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = ( 1.0F) * colorMult;
 				renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = ( 1.0F) * colorMult;
 				renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = ( 1.0F) * colorMult;
-				renderblocks.renderBottomFace(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
+				renderblocks.renderFaceYNeg(block, (double)xCoord, (double)yCoord, (double)zCoord, texIndex);
 			}
 		}
 */
@@ -922,7 +922,7 @@ public class TFC_CoreRender
                 var5.setBrightness(block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
                 var36 = 1.0F;
                 var5.setColorOpaque_F(var14 * var36, var14 * var36, var14 * var36);
-                renderblocks.renderBottomFace(block, (double)par2, (double)par3 + var32, (double)par4, block.getBlockTextureFromSide(0));
+                renderblocks.renderFaceYNeg(block, (double)par2, (double)par3 + var32, (double)par4, block.getBlockTextureFromSide(0));
                 var13 = true;
             }
 
