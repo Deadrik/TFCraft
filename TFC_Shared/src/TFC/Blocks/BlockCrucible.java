@@ -40,7 +40,7 @@ public class BlockCrucible extends BlockTerraContainer
 //	}
 	
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j)
+	public Icon getIcon(int i, int j)
 	{
 		if(i == 0 || i == 1)
 			return textureTop;
