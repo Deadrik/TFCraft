@@ -186,11 +186,10 @@ public class ContainerTerraBarrel extends ContainerTFC
 			ItemStack itemstack1 = slot.getStack();
 			if(i == 0)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if(!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true))
 				{
 					return null;
 				}
-				slot.putStack(null);
 			}
 			else
 			{
@@ -199,8 +198,8 @@ public class ContainerTerraBarrel extends ContainerTFC
 					return null;
 				}
 				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;                            
-				slot1.putStack(stack);                          
+				stack.stackSize = 1;
+				slot1.putStack(stack);
 				itemstack1.stackSize--;
 			}
 			if(itemstack1.stackSize == 0)

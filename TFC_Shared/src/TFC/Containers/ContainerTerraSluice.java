@@ -85,11 +85,10 @@ public class ContainerTerraSluice extends ContainerTFC
 			ItemStack itemstack1 = slot.getStack();
 			if(i <= 8)
 			{
-				if(!player.inventory.addItemStackToInventory(itemstack1.copy()))
+				if(!this.mergeItemStack(itemstack1, 9, this.inventorySlots.size(), true))
 				{
 					return null;
 				}
-				slot.putStack(null);
 			}
 			if(itemstack1.stackSize == 0)
 			{
