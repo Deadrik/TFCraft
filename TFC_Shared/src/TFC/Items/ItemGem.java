@@ -35,7 +35,7 @@ public class ItemGem extends ItemTerra
 	}
 	
 	@Override
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
     {
 		icons[0] = registerer.registerIcon("gems/"+MetaNames[0] + " " + getUnlocalizedName().replace("item.", ""));
 		icons[1] = registerer.registerIcon("gems/"+MetaNames[1] + " " + getUnlocalizedName().replace("item.", ""));
