@@ -12,13 +12,11 @@ import TFC.Blocks.BlockBloomery;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockChestTFC;
 import TFC.Blocks.BlockCrop;
-import TFC.Blocks.BlockCrucible;
 import TFC.Blocks.BlockDetailed;
 import TFC.Blocks.BlockFiniteWater;
 import TFC.Blocks.BlockFirepit;
 import TFC.Blocks.BlockFlora;
 import TFC.Blocks.BlockFoodPrep;
-import TFC.Blocks.BlockForge;
 import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.BlockFruitWood;
 import TFC.Blocks.BlockIngotPile;
@@ -32,14 +30,14 @@ import TFC.Blocks.BlockNestBox;
 import TFC.Blocks.BlockQuern;
 import TFC.Blocks.BlockScribe;
 import TFC.Blocks.BlockSlab;
-import TFC.Blocks.BlockSluice;
 import TFC.Blocks.BlockSpawnMeter;
 import TFC.Blocks.BlockStair;
 import TFC.Blocks.BlockStalactite;
 import TFC.Blocks.BlockSulfur;
-import TFC.Blocks.BlockSuperDetailed;
 import TFC.Blocks.BlockToolRack;
 import TFC.Blocks.BlockWoodSupport;
+import TFC.Blocks.Devices.BlockForge;
+import TFC.Blocks.Devices.BlockSluice;
 import TFC.Blocks.Terrain.BlockDryGrass;
 import TFC.Blocks.Terrain.BlockIgEx;
 import TFC.Blocks.Terrain.BlockIgExBrick;
@@ -570,10 +568,6 @@ public class TFCBlocks
 		DoorKapok = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorKapok", 2056), 15).setUnlocalizedName("Door Kapok");
 		
 		Nestbox = new BlockNestBox(TFC_Settings.getIntFor(config,"block","NestBox", 2057)).setUnlocalizedName("NestBox");
-		
-		SuperDetailed = new BlockSuperDetailed(TFC_Settings.getIntFor(config,"block","SuperDetailed", 2058)).setUnlocalizedName("SuperDetailed").setHardness(10).setResistance(15F);
-		
-		Crucible = new BlockCrucible(TFC_Settings.getIntFor(config,"block","Crucible", 2059)).setUnlocalizedName("Crucible").setHardness(2);
 		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
 		int num = 2061;
