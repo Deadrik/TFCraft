@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockBellows;
 import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.BlockSluice;
+import TFC.Blocks.Devices.BlockSluice;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
@@ -44,7 +44,7 @@ public class TFC_CoreRender
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
-		Icon tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
+		Icon tex = Block.blocksList[type].getIcon(0, meta);
 
 		//if(!breaking)
 		//	ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
@@ -110,7 +110,7 @@ public class TFC_CoreRender
 
 		int type = te.TypeID;
 		int meta = te.MetaID;
-		Icon tex = Block.blocksList[type].getBlockTextureFromSideAndMetadata(0, meta);
+		Icon tex = Block.blocksList[type].getIcon(0, meta);
 		if(!breaking)
 		{
 			//ForgeHooksClient.bindTexture(Block.blocksList[type].getTextureFile(), ModLoader.getMinecraftInstance().renderEngine.getTexture(Block.blocksList[type].getTextureFile()));
@@ -262,7 +262,7 @@ public class TFC_CoreRender
 
 		DataLayer rockLayer1 = ((TFCWorldChunkManager)w.getWorldChunkManager()).getRockLayerAt(i, k, 0);
 		if(rockLayer1 != null && Block.blocksList[rockLayer1.data1] != null && !breaking)
-			renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(0, rockLayer1.data2);
+			renderblocks.overrideBlockTexture = Block.blocksList[rockLayer1.data1].getIcon(0, rockLayer1.data2);
 
 		int seed = i*k+j;
 		Random R = new Random(seed);
@@ -316,11 +316,11 @@ public class TFC_CoreRender
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
 
 		if(yCoord <= TFC_Settings.RockLayer3Height)
-			var27 = Block.blocksList[rockLayer3.data1].getBlockTextureFromSideAndMetadata(5, rockLayer3.data2);
+			var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
 		else if(yCoord <= TFC_Settings.RockLayer2Height)
-			var27 = Block.blocksList[rockLayer2.data1].getBlockTextureFromSideAndMetadata(5, rockLayer2.data2);
+			var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
 		else
-			var27 = Block.blocksList[rockLayer1.data1].getBlockTextureFromSideAndMetadata(5, rockLayer1.data2);
+			var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);
 		return var27;
 	}
 
@@ -501,7 +501,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSideAndMetadata(0, 4);
+					texture = Block.blocksList[Block.waterStill.blockID].getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -535,7 +535,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSideAndMetadata(0, 4);
+					texture = Block.blocksList[Block.waterStill.blockID].getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -568,7 +568,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSideAndMetadata(0, 4);
+					texture = Block.blocksList[Block.waterStill.blockID].getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -640,7 +640,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSideAndMetadata(0, 4);
+					texture = Block.blocksList[Block.waterStill.blockID].getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -675,7 +675,7 @@ public class TFC_CoreRender
 				if(((BlockSluice)block).getIsRecievingWater(l))
 				{
 					//get water texture
-					texture = Block.blocksList[Block.waterStill.blockID].getBlockTextureFromSideAndMetadata(0, 4);
+					texture = Block.blocksList[Block.waterStill.blockID].getIcon(0, 4);
 					l = block.colorMultiplier(blockAccess, i, j, k);
 					//reassign the uv coords
 					texMinX = texture.getMinU();
@@ -879,12 +879,12 @@ public class TFC_CoreRender
             if (renderblocks.renderAllFaces || var10)
             {
                 var13 = true;
-                var34 = block.getBlockTextureFromSideAndMetadata(1, var23);
+                var34 = block.getIcon(1, var23);
                 var36 = (float)BlockFiniteWater.func_293_a(renderblocks.blockAccess, par2, par3, par4, var22);
 
                 if (var36 > -999.0F)
                 {
-                    var34 = block.getBlockTextureFromSideAndMetadata(2, var23);
+                    var34 = block.getIcon(2, var23);
                 }
 
                 var24 -= var32;
@@ -951,7 +951,7 @@ public class TFC_CoreRender
                     ++var64;
                 }
 
-                var37 = block.getBlockTextureFromSideAndMetadata(var34 + 2, var23);
+                var37 = block.getIcon(var34 + 2, var23);
                 int var63 = (var37 & 15) << 4;
                 int var39 = var37 & 240;
 

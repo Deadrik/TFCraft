@@ -68,7 +68,7 @@ public class ItemTerraTool extends ItemTool implements ISize
     		return 1;
     }
 	
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
     {
 		this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
