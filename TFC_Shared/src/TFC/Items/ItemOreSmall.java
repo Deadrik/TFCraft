@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -55,6 +56,13 @@ public class ItemOreSmall extends ItemOre
             list.add(new ItemStack(this,1,36));
             list.add(new ItemStack(this,1,37));
     }
+
+	@Override
+	public void updateIcons(IconRegister registerer)
+    {
+		for(int i = 0; i < 14; i++)
+			icons[i] = registerer.registerIcon(textureFolder+MetaNames[i]+" Small Ore");
+    }
     
     @Override
 	public EnumSize getSize() {
@@ -65,11 +73,5 @@ public class ItemOreSmall extends ItemOre
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
-	}
-	
-	@Override
-	public Icon getIconFromDamage(int meta)
-	{	    
-		return TFCItems.OreChunk.getIconFromDamage(meta);
 	}
 }
