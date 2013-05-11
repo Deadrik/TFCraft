@@ -26,7 +26,7 @@ public class TFC_Sounds
 		LOCATION_MUSIC + "FirmaVista.ogg",
 		LOCATION_MUSIC + "Sycamore Heights.ogg",
 		LOCATION_MUSIC + "Dreams of the Phae.ogg",
-		LOCATION_MUSIC + "TerraFirmaCraft.ogg"
+		LOCATION_MUSIC + "Terrafirmacraft.ogg"
 	};
 	
 	public static final String FALLININGROCKSHORT = PREFIX + "fallingrockshort";
