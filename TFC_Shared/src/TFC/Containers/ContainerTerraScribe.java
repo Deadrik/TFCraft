@@ -132,23 +132,24 @@ public class ContainerTerraScribe extends ContainerTFC
 			ItemStack itemstack1 = slot.getStack();
 			if(i == 0)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if(this.mergeItemStack(itemstack1, 27, this.inventorySlots.size(), true))
+				{
+					for (int j = 1; j <= 25; j++)
+					{
+						((Slot)inventorySlots.get(j)).decrStackSize(1);
+					}
+				}
+				else
 				{
 					return null;
-				}
-				slot.putStack(null);
-				for (int j = 1; j <= 25; j++)
-				{
-					((Slot)inventorySlots.get(j)).putStack(null);
 				}
 			}
 			else if(i <= 26)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				if(!this.mergeItemStack(itemstack1, 27, this.inventorySlots.size(), true))
 				{
 					return null;
 				}
-				slot.putStack(null);
 			}
 			else if(itemstack1.itemID == Item.paper.itemID)
 			{
