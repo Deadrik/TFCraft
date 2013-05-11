@@ -10,6 +10,7 @@ import TFC.*;
 import TFC.Blocks.BlockSluice;
 import TFC.Blocks.Terrain.BlockOre;
 import TFC.Items.ItemOre1;
+import TFC.Core.TFC_Time;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -45,14 +46,15 @@ import net.minecraft.world.gen.feature.*;
 public class TileEntitySluice extends TileEntity implements IInventory
 {	
     public int soilAmount;
+    public long lastUpdateTicks;
     public int processTimeRemaining;
     private ItemStack sluiceItemStacks[];
-    public boolean processing;
     public boolean waterInput;
     public boolean waterOutput;
     public byte soilType;
 
     private boolean initialized = false;
+    private Random random = new Random();
 
     private TreeSet<Integer> coreSampleTypes = new TreeSet<Integer>();
     private ArrayList<ItemStack> coreSampleStacks = new ArrayList<ItemStack>();
@@ -61,7 +63,10 @@ public class TileEntitySluice extends TileEntity implements IInventory
     {
         sluiceItemStacks = new ItemStack[9];
         soilAmount = 0;
+        lastUpdateTicks = 0;
         processTimeRemaining = 0;
+        waterInput = false;
+        waterOutput = false;
         soilType = 1;
     }
 
@@ -139,17 +144,16 @@ public class TileEntitySluice extends TileEntity implements IInventory
 
     private void ejectItem(ItemStack is)
     {
-        Random rand = new Random();
-        float f = rand.nextFloat() * 0.8F + 0.1F;
-        float f1 = rand.nextFloat() * 2.0F + 0.4F;
-        float f2 = rand.nextFloat() * 0.8F + 0.1F;
+        float f = random.nextFloat() * 0.8F + 0.1F;
+        float f1 = random.nextFloat() * 2.0F + 0.4F;
+        float f2 = random.nextFloat() * 0.8F + 0.1F;
         int x = xCoord;
 
         EntityItem entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, new ItemStack(is.itemID, is.stackSize, is.getItemDamage()));
         float f3 = 0.05F;
-        entityitem.motionX = (float)rand.nextGaussian() * f3;
-        entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
-        entityitem.motionZ = (float)rand.nextGaussian() * f3;
+        entityitem.motionX = (float)random.nextGaussian() * f3;
+        entityitem.motionY = (float)random.nextGaussian() * f3 + 0.2F;
+        entityitem.motionZ = (float)random.nextGaussian() * f3;
         worldObj.spawnEntityInWorld(entityitem);
     }
 
@@ -237,6 +241,9 @@ public class TileEntitySluice extends TileEntity implements IInventory
         soilType = nbttagcompound.getByte("soilType");
         soilAmount = nbttagcompound.getInteger("soilAmount");
         processTimeRemaining = nbttagcompound.getInteger("processTimeRemaining");
+        lastUpdateTicks = nbttagcompound.getLong("lastUpdateTicks");
+        waterInput = nbttagcompound.getBoolean("waterInput");
+        waterOutput = nbttagcompound.getBoolean("waterOutput");
     }
 
     @Override
@@ -319,17 +326,28 @@ public class TileEntitySluice extends TileEntity implements IInventory
                 }
             }
 
+            // time since last update
+            long tickDiff = TFC_Time.getTotalTicks() - lastUpdateTicks;
+            if(lastUpdateTicks == 0)
+            {
+                // first update
+                tickDiff = 0;
+            }
+            lastUpdateTicks = TFC_Time.getTotalTicks();
+
             //This is where we handle the processing of the material
             if(soilAmount > 0 && waterInput && waterOutput)
             {
-                if(processTimeRemaining != 100) {
-                    processTimeRemaining++;
-                }
-                processing = true;
-                if(processTimeRemaining == 100)
+                // note that the input & output flags were checked last update, so it should be ok to use the
+                // diff if sluice was just re-loaded
+                processTimeRemaining += tickDiff;
+                if(processTimeRemaining < 0)
                 {
-                    Random random = new Random();
-
+                    // overflow?
+                    processTimeRemaining = 0;
+                }
+                while(processTimeRemaining > 100 && soilAmount > 0)
+                {
                     //items.add(mod_TFCraft.terraSmallOre);
                     //items.add(mod_TFCraft.terraTinyOre);
 
@@ -460,9 +478,13 @@ public class TileEntitySluice extends TileEntity implements IInventory
                             addToInventory(new ItemStack(TFCItems.GemDiamond,1,0));
                         }
                     }
-                    processTimeRemaining = 0;
+                    processTimeRemaining -= 100;
                     soilAmount--;
                 }
+            }
+            if(soilAmount == 0)
+            {
+                processTimeRemaining = 0;
             }
         }
         /*********************************************************
@@ -659,6 +681,9 @@ public class TileEntitySluice extends TileEntity implements IInventory
         nbttagcompound.setByte("soilType", soilType);
         nbttagcompound.setInteger("soilAmount", soilAmount);
         nbttagcompound.setInteger("processTimeRemaining", processTimeRemaining);
+        nbttagcompound.setLong("lastUpdateTicks", lastUpdateTicks);
+        nbttagcompound.setBoolean("waterInput", waterInput);
+        nbttagcompound.setBoolean("waterOutput", waterOutput);
 
         NBTTagList nbttaglist = new NBTTagList();
         for(int i = 0; i < sluiceItemStacks.length; i++)
