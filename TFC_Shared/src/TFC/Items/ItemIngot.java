@@ -41,7 +41,7 @@ public class ItemIngot extends ItemTerra
 	}
 	
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		this.itemIcon = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
     }

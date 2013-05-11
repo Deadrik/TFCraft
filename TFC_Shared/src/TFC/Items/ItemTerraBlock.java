@@ -136,7 +136,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 	
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
 	{
 		/*if(MetaNames != null)
 		{

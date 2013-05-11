@@ -22,7 +22,7 @@ public class ItemPlan extends ItemTerra
     }
 	
 	@Override
-    public void registerIcons(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
 		//registerer.registerIcon(textureFolder+"Blueprint");
 		icons = registerer.registerIcon("tools/Blueprint");

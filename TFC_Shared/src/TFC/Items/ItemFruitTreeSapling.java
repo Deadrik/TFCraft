@@ -69,7 +69,7 @@ public class ItemFruitTreeSapling extends ItemTerra
     
     
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
 			icons[i] = registerer.registerIcon("wood/fruit trees/"+MetaNames[i]+" Sapling");

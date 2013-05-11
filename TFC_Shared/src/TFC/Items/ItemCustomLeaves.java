@@ -14,7 +14,7 @@ public class ItemCustomLeaves extends ItemTerraBlock
 	}
 	
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 
     }

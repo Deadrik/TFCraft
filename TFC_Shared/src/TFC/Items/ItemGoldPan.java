@@ -68,7 +68,7 @@ public class ItemGoldPan extends ItemTerra
     }
     
     @Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
     	icons[0] = registerer.registerIcon("tools/GoldPan_0");
     	icons[1] = registerer.registerIcon("tools/GoldPan_1");

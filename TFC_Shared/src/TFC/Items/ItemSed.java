@@ -10,7 +10,7 @@ public class ItemSed extends ItemTerraBlock
 		MetaNames = new String[]{"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};
 	}
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 
     }

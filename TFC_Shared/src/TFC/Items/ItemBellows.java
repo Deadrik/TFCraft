@@ -64,7 +64,7 @@ public class ItemBellows extends ItemTerra
     }
 
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 			icon = registerer.registerIcon("tools/"+"BellowsItem");
     }

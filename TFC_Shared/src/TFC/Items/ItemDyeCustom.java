@@ -69,7 +69,7 @@ public class ItemDyeCustom extends ItemTerra
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerIcons(IconRegister par1IconRegister)
+    public void updateIcons(IconRegister par1IconRegister)
     {
         this.field_94594_d = new Icon[field_94595_b.length];
 

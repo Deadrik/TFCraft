@@ -58,7 +58,7 @@ public class ItemOreSmall extends ItemOre
     }
 
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 14; i++)
 			icons[i] = registerer.registerIcon(textureFolder+MetaNames[i]+" Small Ore");

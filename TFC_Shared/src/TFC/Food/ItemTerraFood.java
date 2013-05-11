@@ -72,7 +72,7 @@ public class ItemTerraFood extends ItemFood implements ISize
     {return this;}
 
     @Override
-    public void registerIcons(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
 		this.itemIcon = registerer.registerIcon(folder+this.getUnlocalizedName().replace("item.", ""));
     }

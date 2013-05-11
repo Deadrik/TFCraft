@@ -60,7 +60,7 @@ public class ItemSapling extends ItemTerraBlock
 	public static Icon[] Icons = new Icon[16];
 
 	@Override
-    public void registerIcons(IconRegister registerer)
+    public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
 		{

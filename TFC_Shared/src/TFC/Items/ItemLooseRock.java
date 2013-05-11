@@ -68,7 +68,7 @@ public class ItemLooseRock extends ItemTerra
 	
 	
 	@Override
-	public void registerIcons(IconRegister registerer)
+	public void updateIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
 			icons[i] = registerer.registerIcon("rocks/" + MetaNames[i] + " Rock");
