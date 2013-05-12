@@ -166,16 +166,16 @@ public class ItemCustomBow extends ItemTerra
     
     @Override
 	@SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        super.updateIcons(par1IconRegister);
+        super.registerIcons(par1IconRegister);
         this.iconArray = new Icon[bowPullIconNameArray.length];
 
         for (int i = 0; i < this.iconArray.length; ++i)
         {
             this.iconArray[i] = par1IconRegister.registerIcon(bowPullIconNameArray[i]);
         }
-        Item.bow.updateIcons(par1IconRegister);
+        Item.bow.registerIcons(par1IconRegister);
     }
     
     @SideOnly(Side.CLIENT)

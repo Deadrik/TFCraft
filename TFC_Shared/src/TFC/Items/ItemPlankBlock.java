@@ -13,7 +13,7 @@ public class ItemPlankBlock extends ItemTerraBlock
 	}
 	
 	@Override
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
     {
 
     }

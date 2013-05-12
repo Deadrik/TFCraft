@@ -60,7 +60,7 @@ public class ItemOre extends ItemTerra
 	}
 	
 	@Override
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length-3; i++)
 			icons[i] = registerer.registerIcon(textureFolder+MetaNames[i]+" Ore");

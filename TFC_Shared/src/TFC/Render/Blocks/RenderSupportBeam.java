@@ -386,27 +386,27 @@ public class RenderSupportBeam implements ISimpleBlockRenderingHandler
 		Tessellator var14 = Tessellator.instance;
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, -1.0F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 0));
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, 0));
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, -1.0F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, 0));
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, 0));
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(-1.0F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, 0));
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, 0));
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, 0));
 		var14.draw();
 	}
 }

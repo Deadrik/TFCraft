@@ -372,7 +372,7 @@ public class RenderLivingTFC extends Render
 
             if (d3 < (double)(f2 * f2))
             {
-                String s = par1EntityLiving.func_96090_ax();
+                String s = par1EntityLiving.getTranslatedEntityName();
 
                 if (par1EntityLiving.isSneaking())
                 {
