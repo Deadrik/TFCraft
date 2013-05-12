@@ -292,7 +292,6 @@ public class TFCBlocks
 		GameRegistry.registerBlock(LogPile, "LogPile");
 		GameRegistry.registerBlock(Charcoal, "Charcoal");
 		GameRegistry.registerBlock(Detailed, "Detailed");
-		GameRegistry.registerBlock(SuperDetailed, "SuperDetailed");
 		
 		GameRegistry.registerBlock(tilledSoil, "tilledSoil");
 		GameRegistry.registerBlock(tilledSoil2, "tilledSoil2");
@@ -368,7 +367,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(DoorWillow, "DoorWillow");
 		GameRegistry.registerBlock(DoorKapok, "DoorKapok");
 		GameRegistry.registerBlock(Nestbox, "Nestbox");
-		GameRegistry.registerBlock(Crucible, "Crucible");
+
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
 		
