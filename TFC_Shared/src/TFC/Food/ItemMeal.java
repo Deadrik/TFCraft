@@ -64,13 +64,6 @@ public class ItemMeal extends ItemTerraFood
 			int power = getMealPower(is)/10;
 			int filling = getMealFilling(is)/10;
 			
-			if(!isWarm(is))
-			{
-				energy /= 2;
-				power /= 2;
-				filling /= 2;
-			}
-
 			if(energy > 0)
 			{
 				String stars = "";
@@ -152,20 +145,15 @@ public class ItemMeal extends ItemTerraFood
 			
 			int energy = getMealEnergy(is);
 			int filling = getMealFilling(is);
-			if(!isWarm(is))
-			{
-				energy /= 2;
-				filling /= 2;
-			}
 			TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
-			playerServer.getFoodStatsTFC().addStats(getMealFilling(is), getMealEnergy(is)/100f);
+			playerServer.getFoodStatsTFC().addStats(filling, energy/100f);
 			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
 		is.stackSize--;
 		return is;
 	}
 	
-	public boolean isWarm(ItemStack is)
+	public static boolean isWarm(ItemStack is)
 	{
 		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1)
 			return true;
@@ -180,7 +168,12 @@ public class ItemMeal extends ItemTerraFood
 
 			if(stackTagCompound.hasKey("effectpower"))
 			{
-				return stackTagCompound.getByte("effectpower");
+				int power = stackTagCompound.getByte("effectpower");
+				if(!isWarm(is))
+				{
+					power /= 2;
+				}
+				return power;
 			}
 			else return -1;
 		}
@@ -195,7 +188,12 @@ public class ItemMeal extends ItemTerraFood
 
 			if(stackTagCompound.hasKey("filling"))
 			{
-				return stackTagCompound.getByte("filling");
+				int filling = stackTagCompound.getByte("filling");
+				if(!isWarm(is))
+				{
+					filling /= 2;
+				}
+				return filling;
 			}
 			else return -1;
 		}
@@ -213,7 +211,12 @@ public class ItemMeal extends ItemTerraFood
 
 			if(stackTagCompound.hasKey("energy"))
 			{
-				return stackTagCompound.getByte("energy");
+				int energy = stackTagCompound.getByte("energy");
+				if(!isWarm(is))
+				{
+					energy /= 2;
+				}
+				return energy;
 			}
 			else return -1;
 		}
@@ -225,10 +228,6 @@ public class ItemMeal extends ItemTerraFood
 		if (!world.isRemote && this.foodEffect != null)
 		{
 			float Power = (getMealPower(is)/100f);
-			if(!isWarm(is))
-			{
-				Power /= 2;
-			}
 
 			player.addPotionEffect(new PotionEffect(foodEffect.getPotionID(), (int)(foodEffect.getDuration()*Power), (int)(foodEffect.getAmplifier()*Power)));
 		}
