@@ -64,15 +64,15 @@ public class TFC_PlayerClient extends PlayerBase
 		oldFood = this.player.getFoodStats();
 		if(this.player.inventory.getCurrentItem() != null)
 		{
-			if(this.player.inventory.getCurrentItem().getItem() instanceof ItemTerraFood)
-			{
-				guishowFoodRestoreAmount = true;
-				guiFoodRestoreAmount = ((ItemTerraFood)this.player.inventory.getCurrentItem().getItem()).getHealAmount();
-			}
-			else if(this.player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
+			if(this.player.inventory.getCurrentItem().getItem() instanceof ItemMeal)
 			{
 				guishowFoodRestoreAmount = true;
 				guiFoodRestoreAmount = ItemMeal.getMealFilling(this.player.inventory.getCurrentItem());
+			}
+			else if(this.player.inventory.getCurrentItem().getItem() instanceof ItemTerraFood)
+			{
+				guishowFoodRestoreAmount = true;
+				guiFoodRestoreAmount = ((ItemTerraFood)this.player.inventory.getCurrentItem().getItem()).getHealAmount();
 			}
 			else
 			{
