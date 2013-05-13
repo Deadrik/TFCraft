@@ -1,4 +1,4 @@
-package TFC.Items;
+package TFC.Items.Tools;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
@@ -7,6 +7,7 @@ import net.minecraft.util.Icon;
 import TFC.Core.TFCTabs;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
+import TFC.Items.ISize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
