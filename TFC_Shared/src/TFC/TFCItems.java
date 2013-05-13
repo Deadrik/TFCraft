@@ -20,55 +20,58 @@ import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemBellows;
 import TFC.Items.ItemBlueprint;
-import TFC.Items.ItemChisel;
 import TFC.Items.ItemCustomArmor;
-import TFC.Items.ItemCustomAxe;
-import TFC.Items.ItemCustomBlueSteelBucket;
-import TFC.Items.ItemCustomBow;
-import TFC.Items.ItemCustomBucket;
-import TFC.Items.ItemCustomBucketMilk;
-import TFC.Items.ItemCustomHoe;
-import TFC.Items.ItemCustomKnife;
 import TFC.Items.ItemCustomMinecart;
-import TFC.Items.ItemCustomPickaxe;
 import TFC.Items.ItemCustomPotion;
-import TFC.Items.ItemCustomRedSteelBucket;
-import TFC.Items.ItemCustomSaw;
-import TFC.Items.ItemCustomScythe;
 import TFC.Items.ItemCustomSeeds;
-import TFC.Items.ItemCustomShovel;
-import TFC.Items.ItemCustomSword;
 import TFC.Items.ItemDyeCustom;
-import TFC.Items.ItemFirestarter;
 import TFC.Items.ItemFlatLeather;
 import TFC.Items.ItemFlatRock;
-import TFC.Items.ItemFlintSteel;
 import TFC.Items.ItemFruitTreeSapling;
 import TFC.Items.ItemGem;
-import TFC.Items.ItemGoldPan;
-import TFC.Items.ItemHammer;
 import TFC.Items.ItemIngot;
-import TFC.Items.ItemJavelin;
 import TFC.Items.ItemLogs;
 import TFC.Items.ItemLooseRock;
 import TFC.Items.ItemMeltedMetal;
 import TFC.Items.ItemMetalSheet;
 import TFC.Items.ItemMetalSheet2x;
-import TFC.Items.ItemMiscToolHead;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemOreSmall;
-import TFC.Items.ItemPlan;
 import TFC.Items.ItemPlank;
-import TFC.Items.ItemPotteryBase;
-import TFC.Items.ItemProPick;
 import TFC.Items.ItemSluice;
-import TFC.Items.ItemSpindle;
 import TFC.Items.ItemStick;
 import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemUnfinishedArmor;
-import TFC.Items.ItemWoodDoor;
-import TFC.Items.ItemWritableBookTFC;
+import TFC.Items.ItemBlocks.ItemWoodDoor;
+import TFC.Items.Pottery.ItemPotteryBase;
+import TFC.Items.Pottery.ItemPotteryJug;
+import TFC.Items.Pottery.ItemPotteryLargeVessel;
+import TFC.Items.Pottery.ItemPotteryPot;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemCustomAxe;
+import TFC.Items.Tools.ItemCustomBlueSteelBucket;
+import TFC.Items.Tools.ItemCustomBow;
+import TFC.Items.Tools.ItemCustomBucket;
+import TFC.Items.Tools.ItemCustomBucketMilk;
+import TFC.Items.Tools.ItemCustomHoe;
+import TFC.Items.Tools.ItemCustomKnife;
+import TFC.Items.Tools.ItemCustomPickaxe;
+import TFC.Items.Tools.ItemCustomRedSteelBucket;
+import TFC.Items.Tools.ItemCustomSaw;
+import TFC.Items.Tools.ItemCustomScythe;
+import TFC.Items.Tools.ItemCustomShovel;
+import TFC.Items.Tools.ItemCustomSword;
+import TFC.Items.Tools.ItemFirestarter;
+import TFC.Items.Tools.ItemFlintSteel;
+import TFC.Items.Tools.ItemGoldPan;
+import TFC.Items.Tools.ItemHammer;
+import TFC.Items.Tools.ItemJavelin;
+import TFC.Items.Tools.ItemMiscToolHead;
+import TFC.Items.Tools.ItemPlan;
+import TFC.Items.Tools.ItemProPick;
+import TFC.Items.Tools.ItemSpindle;
+import TFC.Items.Tools.ItemWritableBookTFC;
 
 public class TFCItems
 {
@@ -904,7 +907,12 @@ public class TFCItems
     public static Item FlatLeather;
     public static Item Beer;
 
-    public static Item Pottery;
+    public static Item PotteryJug;
+    public static Item PotteryPot;
+    public static Item PotteryAmphora;
+    public static Item PotterySmallVessel;
+    public static Item PotteryLargeVessel;
+    public static Item KilnRack;
     
     /**
      * Item Uses Setup
@@ -1047,7 +1055,6 @@ public class TFCItems
         GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setUnlocalizedName("GoldPan");
         SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
         
-        ProPickStone = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickStone",16003)).setUnlocalizedName("Stone ProPick").setMaxDamage(64);
         ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setUnlocalizedName("Bismuth ProPick").setMaxDamage(BismuthUses);
         ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
         ProPickBlackBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackBronze",16006)).setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
@@ -1613,7 +1620,10 @@ public class TFCItems
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         
-        Pottery = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","Pottery",num++)).setFolder("tools/").setUnlocalizedName("Pottery");
+        PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"items","PotteryJug",num++)).setUnlocalizedName("Jug");
+        PotterySmallVessel = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
+        PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
+        PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"items","PotteryPot",num++)).setUnlocalizedName("Pot");
 		/**Plans*/
         num = 20000;
         SetupPlans(num);
@@ -1828,34 +1838,34 @@ public class TFCItems
         
         
         int i = 0;
-        BismuthSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bismuth Sheet"));num++;
-        BismuthBronzeSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bismuth Bronze Sheet"));num++;
-        BlackBronzeSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Black Bronze Sheet"));num++;
-        BlackSteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Black Steel Sheet"));num++;
-        BlueSteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Blue Steel Sheet"));num++;
-        BronzeSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bronze Sheet"));num++;
-        CopperSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Copper Sheet"));num++;
-        WroughtIronSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Wrought Iron Sheet"));num++;
-        RedSteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Red Steel Sheet"));num++;
-        RoseGoldSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Rose Gold Sheet"));num++;
-        SteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Steel Sheet"));num++;
-        TinSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Tin Sheet"));num++;
-        ZincSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Zinc Sheet"));num++;
+        TFCItems.BismuthSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bismuth Sheet"));num++;
+        TFCItems.BismuthBronzeSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bismuth Bronze Sheet"));num++;
+        TFCItems.BlackBronzeSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Black Bronze Sheet"));num++;
+        TFCItems.BlackSteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Black Steel Sheet"));num++;
+        TFCItems.BlueSteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Blue Steel Sheet"));num++;
+        TFCItems.BronzeSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bronze Sheet"));num++;
+        TFCItems.CopperSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Copper Sheet"));num++;
+        TFCItems.WroughtIronSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Wrought Iron Sheet"));num++;
+        TFCItems.RedSteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Red Steel Sheet"));num++;
+        TFCItems.RoseGoldSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Rose Gold Sheet"));num++;
+        TFCItems.SteelSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Steel Sheet"));num++;
+        TFCItems.TinSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Tin Sheet"));num++;
+        TFCItems.ZincSheet = (new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Zinc Sheet"));num++;
         
         i = 0;
-        BismuthSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bismuth Double Sheet"));num++;
-        BismuthBronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bismuth Bronze Double Sheet"));num++;
-        BlackBronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Black Bronze Double Sheet"));num++;
-        BlackSteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Black Steel Double Sheet"));num++;
-        BlueSteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Blue Steel Double Sheet"));num++;
-        BronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bronze Double Sheet"));num++;
-        CopperSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Copper Double Sheet"));num++;
-        WroughtIronSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Wrought Iron Double Sheet"));num++;
-        RedSteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Red Steel Double Sheet"));num++;
-        RoseGoldSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Rose Gold Double Sheet"));num++;
-        SteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Steel Double Sheet"));num++;
-        TinSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Tin Double Sheet"));num++;
-        ZincSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Zinc Double Sheet"));num++;
+        TFCItems.BismuthSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bismuth Double Sheet"));num++;
+        TFCItems.BismuthBronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bismuth Bronze Double Sheet"));num++;
+        TFCItems.BlackBronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Black Bronze Double Sheet"));num++;
+        TFCItems.BlackSteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Black Steel Double Sheet"));num++;
+        TFCItems.BlueSteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Blue Steel Double Sheet"));num++;
+        TFCItems.BronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bronze Double Sheet"));num++;
+        TFCItems.CopperSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Copper Double Sheet"));num++;
+        TFCItems.WroughtIronSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Wrought Iron Double Sheet"));num++;
+        TFCItems.RedSteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Red Steel Double Sheet"));num++;
+        TFCItems.RoseGoldSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Rose Gold Double Sheet"));num++;
+        TFCItems.SteelSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Steel Double Sheet"));num++;
+        TFCItems.TinSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Tin Double Sheet"));num++;
+        TFCItems.ZincSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Zinc Double Sheet"));num++;
         
         i = 0;
         TFCItems.BismuthUnfinishedBoots = (new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
@@ -1971,24 +1981,24 @@ public class TFCItems
         TFCItems.ZincHelmet = (new ItemCustomArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num),mats[i], proxy.getArmorRenderID(i), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
     
         i = 0;
-        BrassSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        GoldSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        LeadSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        NickelSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        PigIronSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        PlatinumSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        SilverSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-        SterlingSilverSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.BrassSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.GoldSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.LeadSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.NickelSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.PigIronSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.PlatinumSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.SilverSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+        TFCItems.SterlingSilverSheet = new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
         
         i = 0;
-        BrassSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        GoldSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        LeadSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        NickelSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        PigIronSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        PlatinumSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        SilverSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-        SterlingSilverSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.BrassSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.GoldSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.LeadSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.NickelSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.PigIronSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.PlatinumSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.SilverSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+        TFCItems.SterlingSilverSheet2x = new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
     }
     
     public static Item[] Meals;

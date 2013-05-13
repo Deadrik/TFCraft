@@ -1,7 +1,7 @@
 package TFC.Containers;
 
 import TFC.*;
-import TFC.Items.ItemHammer;
+import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

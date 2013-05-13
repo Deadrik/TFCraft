@@ -12,7 +12,7 @@ import java.util.Random;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.Blocks.BlockBloomery;
+import TFC.Blocks.Devices.BlockBloomery;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_Climate;

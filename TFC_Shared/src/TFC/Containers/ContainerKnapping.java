@@ -53,16 +53,6 @@ public class ContainerKnapping extends Container
 
 		}
 
-		for (int l = 0; l < 5; l++)
-		{
-			for (int k1 = 0; k1 < 5; k1++)
-			{
-				addSlotToContainer(new SlotBlocked(craftMatrix, k1 + l * 5, 8 + k1 * 16, l * 16 - 1));
-			}
-		}
-
-
-
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}
 

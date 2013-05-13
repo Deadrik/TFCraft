@@ -5,60 +5,38 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Proxy;
-import cpw.mods.fml.common.network.IConnectionHandler;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
-import TFC.*;
-import TFC.Core.TFC_Time;
+
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagString;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.NetLoginHandler;
+import net.minecraft.network.NetServerHandler;
+import net.minecraft.network.packet.NetHandler;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet1Login;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.ModLoader;
+import net.minecraft.world.World;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
+import TFC.Containers.ContainerKnapping;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
-import TFC.GUI.GuiHUD;
-import TFC.Items.ItemWritableBookTFC;
+import TFC.Items.Tools.ItemWritableBookTFC;
 import TFC.TileEntities.NetworkTileEntity;
-import TFC.TileEntities.TileEntityCrop;
-import TFC.TileEntities.TileEntityPartial;
-import TFC.TileEntities.TileEntityAnvil;
-import TFC.TileEntities.TileEntityBloomery;
-import TFC.TileEntities.TileEntityFirepit;
-import TFC.TileEntities.TileEntityLogPile;
-import TFC.TileEntities.TileEntityScribe;
-import net.minecraft.server.MinecraftServer;
+import cpw.mods.fml.common.network.IConnectionHandler;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
@@ -71,7 +49,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	public static final byte Packet_Player_Status = 6;
 	public static final byte Packet_Rename_Item = 7;
 	public static final byte Packet_Book_Sign = 8;
-	public static final byte Packet_Scribe_Update = 9;
+	public static final byte Packet_Update_Knapping = 9;
 
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler,
@@ -342,16 +320,32 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				}
 
 			}
-			else if (type == Packet_Scribe_Update){
+			else if (type == Packet_Update_Knapping)
+			{
+				
+				if(!world.isRemote)
+				{
+					if(player.openContainer != null && player.openContainer instanceof ContainerKnapping)
+					{
+						byte index = dis.readByte();
+						((ContainerKnapping)player.openContainer).craftMatrix.setInventorySlotContents(index, null);
+						((ContainerKnapping)player.openContainer).onCraftMatrixChanged(((ContainerKnapping)player.openContainer).craftMatrix);
+					}
+				}
+			}
+			//This is commented out for being incorrect. This functionality can be performed without a separate packet.
+			/*else if (type == Packet_Scribe_Update)
+			{
+				
 				if(!world.isRemote){
 					System.out.println("?");
 					int X = dis.readInt();
 					int Y = dis.readInt();
 					int Z = dis.readInt();
-					TileEntityScribe te =(TileEntityScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
+					TileEntityTerraScribe te =(TileEntityTerraScribe)player.worldObj.getBlockTileEntity(X, Y, Z);
 					te.scribeItemStacks[1]=null;
 				}
-			}
+			}*/
 		} catch (Exception e) 
 		{
 			return;

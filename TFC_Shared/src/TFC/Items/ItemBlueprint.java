@@ -11,6 +11,8 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;
 
 public class ItemBlueprint extends ItemTerra

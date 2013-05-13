@@ -15,6 +15,12 @@ public class GetBodyTemp extends CommandBase{
 	public String getCommandName() {
 		return "bodytemp";
 	}
+	
+	@Override
+	public int getRequiredPermissionLevel()
+    {
+        return 0;
+    }
 
 	@Override
 	public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)

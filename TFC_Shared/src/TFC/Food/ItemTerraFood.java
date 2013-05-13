@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Core.Util.StringUtil;
 import TFC.Enums.EnumSize;
 import TFC.Enums.EnumWeight;
 import TFC.Items.ISize;
@@ -25,7 +26,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 	private EnumSize size = EnumSize.SMALL;
 	private EnumWeight weight = EnumWeight.LIGHT;
 	public int Tier = 0;
-	
+
 	public String folder = "food/";
 
 	public ItemTerraFood(int id, int healAmt) 
@@ -38,7 +39,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 		super(id, healAmt, saturation, wolfFood);
 		foodID = foodid;
 	}
-	
+
 	public ItemTerraFood(int id, int healAmt, float saturation, boolean wolfFood, int foodid, int tier)
 	{
 		super(id, healAmt, saturation, wolfFood);
@@ -51,25 +52,31 @@ public class ItemTerraFood extends ItemFood implements ISize
 		foodID = id;
 		return this;
 	}
-	
+
 	public ItemTerraFood setFoodTier(int tier)
 	{
 		Tier = tier;
 		return this;
 	}
-	
+
 	public ItemTerraFood setFolder(String s)
 	{
 		folder = s;
 		return this;
 	}
 
-	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+
+
 	/***
-     * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
-     */
-    public Item setIconCoord(int i, int j)
-    {return this;}
+	 * This Method is a dummy to prevent the need to fix every single line in the TFCItems.java file
+	 */
+	public Item setIconCoord(int i, int j)
+	{return this;}
 
     @Override
     public void updateIcons(IconRegister registerer)
@@ -78,7 +85,7 @@ public class ItemTerraFood extends ItemFood implements ISize
     }
 
 	public static void addFoodTempInformation(ItemStack is, List arraylist)
-    {
+	{
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
@@ -96,15 +103,15 @@ public class ItemTerraFood extends ItemFood implements ISize
 				}
 			}
 		}
-    }
-	
+	}
+
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
 
 		this.addFoodTempInformation(is, arraylist);
-		
+
 		int filling = this.getHealAmount() / 10;
 		if(filling > 0)
 		{
@@ -190,7 +197,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 			else
 				return 1;
 	}
-	
+
 	public boolean isHot(ItemStack is)
 	{
 		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8)

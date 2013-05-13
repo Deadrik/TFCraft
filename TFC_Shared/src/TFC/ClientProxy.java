@@ -22,6 +22,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.PlayerAPI;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StringTranslate;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -80,33 +81,34 @@ import TFC.Handlers.FarmlandHighlightHandler;
 import TFC.Handlers.KeyBindingHandler;
 import TFC.Handlers.PlankHighlightHandler;
 import TFC.Handlers.SoundHandler;
-import TFC.Render.ModelBear;
-import TFC.Render.ModelChickenTFC;
-import TFC.Render.ModelCowTFC;
-import TFC.Render.ModelDeer;
-import TFC.Render.ModelPigTFC;
-import TFC.Render.ModelSheep1TFC;
-import TFC.Render.ModelSheep2TFC;
-import TFC.Render.ModelWolfTFC;
 import TFC.Render.RenderBear;
 import TFC.Render.RenderChickenTFC;
 import TFC.Render.RenderCowTFC;
 import TFC.Render.RenderCustomMinecart;
-import TFC.Render.RenderDeer;
 import TFC.Render.RenderPigTFC;
 import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderTerraJavelin;
+import TFC.Render.RenderUngulate;
 import TFC.Render.RenderWolfTFC;
 import TFC.Render.TileEntityChestRendererTFC;
 import TFC.Render.TileEntityIngotPileRenderer;
+import TFC.Render.TileEntityPotteryRenderer;
 import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
-import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderOre;
+import TFC.Render.Blocks.RenderPottery;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.Render.Blocks.RenderSupportBeam;
 import TFC.Render.Blocks.RenderToolRack;
+import TFC.Render.Models.ModelBear;
+import TFC.Render.Models.ModelChickenTFC;
+import TFC.Render.Models.ModelCowTFC;
+import TFC.Render.Models.ModelPigTFC;
+import TFC.Render.Models.ModelSheep1TFC;
+import TFC.Render.Models.ModelSheep2TFC;
+import TFC.Render.Models.ModelUngulate;
+import TFC.Render.Models.ModelWolfTFC;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBloomery;
@@ -117,11 +119,13 @@ import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
 import TFC.TileEntities.TileEntityMetallurgy;
+import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntityScribe;
 import TFC.TileEntities.TileEntitySluice;
 import TFC.TileEntities.TileEntityWorkbench;
 import TFC.WorldGen.TFCWorldChunkManager;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -146,7 +150,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderUngulate(new ModelUngulate(),0.5f)); //new RenderDeer(new ModelDeer(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderCustomMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class,new RenderPlayerTFC());
 
@@ -194,8 +198,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.quernRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderQuern());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.fluidRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.clayPotteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 	}
 
 	@Override
@@ -205,6 +209,7 @@ public class ClientProxy extends CommonProxy
 		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
+		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
 	}
 
 	@Override
@@ -619,6 +624,12 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
+	public String getCurrentLanguage()
+	{
+		return StringTranslate.getInstance().getCurrentLanguage();
+	}
+	
+	@Override
 	public void registerTranslations() 
 	{
 		LanguageRegistry LR = LanguageRegistry.instance();
@@ -893,7 +904,7 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("tile.Ore.Sylvite.name", "Sylvite");
 		LR.addStringLocalization("tile.Ore.Borax.name", "Borax");
 		LR.addStringLocalization("tile.Ore.Olivine.name", "Olivine");
-		LR.addStringLocalization("tile.Ore.Lapis Lazuli.name", "Lapis Lazuli");
+		LR.addStringLocalization("tile.Ore.LapisLazuli.name", "Lapis Lazuli");
 
 		LR.addStringLocalization("item.Ore.Native Copper.name", "Native Copper");
 		LR.addStringLocalization("item.Ore.Native Gold.name", "Native Gold");

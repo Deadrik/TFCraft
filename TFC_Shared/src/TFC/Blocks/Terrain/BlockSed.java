@@ -17,8 +17,8 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
-import TFC.Items.ItemChisel;
-import TFC.Items.ItemHammer;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

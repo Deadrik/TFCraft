@@ -2,6 +2,7 @@ package TFC.Render;
 
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
+import TFC.Render.Models.ModelBaseTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

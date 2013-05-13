@@ -1,46 +1,13 @@
 package TFC.Core.Player;
 
-import TFC.Chunkdata.ChunkData;
-import TFC.Chunkdata.ChunkDataManager;
-import TFC.Core.TFC_Time;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.src.PlayerAPI;
+import net.minecraft.src.PlayerBase;
+import net.minecraft.util.FoodStats;
 import TFC.Food.FoodStatsTFC;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraft.src.*;
 
 public class TFC_PlayerClient extends PlayerBase
 {
@@ -48,9 +15,9 @@ public class TFC_PlayerClient extends PlayerBase
 	public int guiFoodRestoreAmount = 0;
 
 	//Last time the spawn protection was updated
-	private long spawnProtectionTimer = -1;
+	private final long spawnProtectionTimer = -1;
 
-	private FoodStatsTFC foodstats;
+	private final FoodStatsTFC foodstats;
 	private FoodStats oldFood;
 
 	public TFC_PlayerClient(PlayerAPI var1) {
@@ -88,6 +55,7 @@ public class TFC_PlayerClient extends PlayerBase
 	@Override
 	public void afterOnLivingUpdate() 
 	{
+		//player.worldObj.setRainStrength(1F);
 		this.player.setFoodStatsField(oldFood);			
 		//this.foodstats.onUpdate(player);
 	}
@@ -103,6 +71,7 @@ public class TFC_PlayerClient extends PlayerBase
 		return (TFC_PlayerClient) pmp.getPlayerBase("TFC Player Client");
 	}
 
+	@Override
 	public int getMaxHealth()
 	{
 		return 1000+(this.player.experienceLevel*25);

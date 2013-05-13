@@ -3,8 +3,12 @@
 //=======================================================
 package TFC;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -14,12 +18,13 @@ import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
+import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.ClientTickHandler;
 import TFC.Handlers.CraftingHandler;
-import TFC.Handlers.EntityHurtHandler;
+import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.RenderOverlayHandler;
@@ -47,7 +52,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 76 Hotfix 17")
+@Mod(modid = "TerraFirmaCraft", name = "TerraFirmaCraft", version = "Build 77")
 @NetworkMod(channels = { "TerraFirmaCraft" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
@@ -114,7 +119,7 @@ public class TerraFirmaCraft
 	}
 
 	@Init
-	public void load(FMLInitializationEvent evt)
+	public void initialize(FMLInitializationEvent evt)
 	{
 		//Register all of the recipes
 		Recipes.registerRecipes();	
@@ -129,7 +134,7 @@ public class TerraFirmaCraft
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 		
 		// Register the Entity Hurt Handler
-		MinecraftForge.EVENT_BUS.register(new EntityHurtHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
 
 		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
@@ -160,6 +165,13 @@ public class TerraFirmaCraft
 		
 		TFC_ItemHeat.SetupItemHeat();
 
+		Localization.addLocalization("/lang/tfc/", "en_US");
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
+				LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), 
+				new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty)));
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
+				LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), 
+				new ItemStack(TFCItems.RedSteelBucketWater), new ItemStack(TFCItems.RedSteelBucketEmpty)));
 	}
 
 	@PostInit

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Items.ItemFirestarter;
+import TFC.Items.Tools.ItemFirestarter;
 import TFC.TileEntities.TileEntityForge;
 
 public class BlockForge extends BlockTerraContainer
