@@ -1,46 +1,22 @@
 package TFC.Blocks.Devices;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemFirestarter;
-import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityForge;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockForge extends BlockTerraContainer
 {
@@ -184,6 +160,14 @@ public class BlockForge extends BlockTerraContainer
 			}
 		}
 	}
+	
+	@Override
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+    {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        return ret;
+    }
+	
 	@Override
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
@@ -193,9 +177,9 @@ public class BlockForge extends BlockTerraContainer
 		}
 		else
 		{
-			float f = (float)i + 0.5F;
-			float f1 = (float)j + 0.9F + random.nextFloat() * 6F / 16F;
-			float f2 = (float)k + 0.5F;
+			float f = i + 0.5F;
+			float f1 = j + 0.9F + random.nextFloat() * 6F / 16F;
+			float f2 = k + 0.5F;
 			float f3 = 0.52F;
 			float f4 = random.nextFloat() * 0.6F;
 			float f5 = random.nextFloat() * -0.6F;
@@ -236,7 +220,7 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
+		return AxisAlignedBB.getBoundingBox(par2 + this.minX, par3 + this.minY, par4 + this.minZ, par2 + this.maxX, par3 + this.maxY, par4 + this.maxZ);
 	}
 
 	/**
@@ -245,7 +229,7 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		return AxisAlignedBB.getBoundingBox((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
+		return AxisAlignedBB.getBoundingBox(par2 + this.minX, par3 + this.minY, par4 + this.minZ, par2 + this.maxX, par3 + this.maxY, par4 + this.maxZ);
 	}
 
 	@Override
