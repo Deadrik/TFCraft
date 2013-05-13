@@ -25,12 +25,21 @@ public class RenderOverlayHandler
 		{
 			event.setCanceled(true);
 		}
-		
+	}
+
+	@ForgeSubscribe
+	public void render(RenderGameOverlayEvent.Post event)
+	{
+		if(event.type == ElementType.HEALTH || event.type == ElementType.FOOD)
+		{
+			event.setCanceled(true);
+		}
+
 		ScaledResolution sr = event.resolution;
-		
+
 		int healthRowHeight = sr.getScaledHeight() - 39;
 		int armorRowHeight = healthRowHeight - 10;
-		
+
 		TFC_PlayerClient playerclient = ((TFC.Core.Player.TFC_PlayerClient)Minecraft.getMinecraft().thePlayer.getPlayerBase("TFC Player Client"));
 		if(playerclient != null)
 		{
@@ -53,22 +62,22 @@ public class RenderOverlayHandler
 			float percentWater = waterLevel/foodstats.getMaxWater(Minecraft.getMinecraft().thePlayer);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
+			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 18, 90, 5);
 			if(playerclient.guishowFoodRestoreAmount)
 			{
 				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount/100f, 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
+				//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 23, (int) (90*(percentFood2)), 5);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
+			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 23, (int) (90*percentFood), 5);
-			
+
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 28, 90, 5);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
-			
+
 			//Render Tool Mode
 			if(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null && 
 					Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
@@ -84,29 +93,32 @@ public class RenderOverlayHandler
 			}
 		}
 	}
-	
+
 	@ForgeSubscribe
 	public void renderText(RenderGameOverlayEvent.Text event)
 	{
-		int xCoord = (int)Minecraft.getMinecraft().thePlayer.posX;
-		int yCoord = (int)Minecraft.getMinecraft().thePlayer.posY;
-		int zCoord = (int)Minecraft.getMinecraft().thePlayer.posZ;
-		event.left.add(String.format("rain: %.0f, temp: %.2f, evt: %.3f", new Object[] {
-				TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
-				TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
-				TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
+		if(Minecraft.getMinecraft().gameSettings.showDebugInfo)
+		{
+			int xCoord = (int)Minecraft.getMinecraft().thePlayer.posX;
+			int yCoord = (int)Minecraft.getMinecraft().thePlayer.posY;
+			int zCoord = (int)Minecraft.getMinecraft().thePlayer.posZ;
+			event.left.add(String.format("rain: %.0f, temp: %.2f, evt: %.3f", new Object[] {
+					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
+					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
+					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
+		}
 	}
-	
+
 	public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6)
-    {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(par1 + 0, par2 + par6, 0.0, (par3 + 0) * f, (par4 + par6) * f1);
-        tessellator.addVertexWithUV(par1 + par5, par2 + par6, 0.0, (par3 + par5) * f, (par4 + par6) * f1);
-        tessellator.addVertexWithUV(par1 + par5, par2 + 0, 0.0, (par3 + par5) * f, (par4 + 0) * f1);
-        tessellator.addVertexWithUV(par1 + 0, par2 + 0, 0.0, (par3 + 0) * f, (par4 + 0) * f1);
-        tessellator.draw();
-    }
+	{
+		float f = 0.00390625F;
+		float f1 = 0.00390625F;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(par1 + 0, par2 + par6, 0.0, (par3 + 0) * f, (par4 + par6) * f1);
+		tessellator.addVertexWithUV(par1 + par5, par2 + par6, 0.0, (par3 + par5) * f, (par4 + par6) * f1);
+		tessellator.addVertexWithUV(par1 + par5, par2 + 0, 0.0, (par3 + par5) * f, (par4 + 0) * f1);
+		tessellator.addVertexWithUV(par1 + 0, par2 + 0, 0.0, (par3 + 0) * f, (par4 + 0) * f1);
+		tessellator.draw();
+	}
 }
