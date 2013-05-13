@@ -8,8 +8,13 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -161,7 +166,10 @@ public class BlockToolRack extends BlockTerraContainer
 	{
 		boolean hasToolInHand = entityplayer.getCurrentEquippedItem() != null && 
 				(entityplayer.getCurrentEquippedItem().getItem() instanceof ItemTool || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemWeapon  || 
-						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemHoe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemProPick);
+						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemHoe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemProPick || 
+						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemBow || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSword || 
+						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemAxe || entityplayer.getCurrentEquippedItem().getItem() instanceof ItemSpade  || 
+						entityplayer.getCurrentEquippedItem().getItem() instanceof ItemShears);
 		if(te.storage[slot] == null && hasToolInHand)
 		{
 			te.storage[slot] = entityplayer.getCurrentEquippedItem().copy();
