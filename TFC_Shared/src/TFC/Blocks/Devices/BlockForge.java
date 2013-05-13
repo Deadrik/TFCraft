@@ -93,22 +93,22 @@ public class BlockForge extends BlockTerraContainer
 			return true;
 		}
 	}
-	
+
 	@Override
 	public Icon getIcon(int i, int j)
 	{
 		if(j > 0)
 			return textureOn;
-		
+
 		return textureOff;
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		textureOn = iconRegisterer.registerIcon("devices/Forge On");
 		textureOff = iconRegisterer.registerIcon("devices/Forge Off");
-    }
+	}
 
 	public boolean getIsFireLit(int i)
 	{
@@ -120,7 +120,7 @@ public class BlockForge extends BlockTerraContainer
 	{
 		return TFCBlocks.ForgeRenderId;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -130,44 +130,61 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int l)
 	{
-		if((world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
-				world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
-				world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
-						world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (ItemFirestarter.checkSlabsAround(world, x, y, z)))))
+		if(!world.isRemote)
 		{
-			((TileEntityForge)world.getBlockTileEntity(x, y, z)).ejectContents();
-			world.setBlock(x, y, z, 0);
-		}
-		else
-		{
-			int numAirBlocks = 0;
-			for (int i = -1; i < 2; i++)
+			boolean surroundSolids = (world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
+					world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
+					world.isBlockNormalCube(x, y-1, z) && (world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
+							world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)));
+			
+			boolean rockXP = world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID || 
+					(world.getBlockMaterial(x+1, y, z) == Material.rock && world.isBlockNormalCube(x+1, y, z));
+			boolean rockXN = world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID || 
+					(world.getBlockMaterial(x-1, y, z) == Material.rock && world.isBlockNormalCube(x-1, y, z));
+			boolean rockZP = world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID || 
+					(world.getBlockMaterial(x, y, z+1) == Material.rock && world.isBlockNormalCube(x, y, z+1));
+			boolean rockZN = world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID || 
+					(world.getBlockMaterial(x, y, z-1) == Material.rock && world.isBlockNormalCube(x, y, z-1));
+			
+			
+			boolean validSlabs = ItemFirestarter.checkIfSlabsAroundAreValid(world, x, y, z);	
+					
+			if(!(rockXP && rockXN && rockZP && rockZN) || !validSlabs)	
 			{
-				for (int j = 0; j < 2; j++)
+				((TileEntityForge)world.getBlockTileEntity(x, y, z)).ejectContents();
+				world.setBlock(x, y, z, 0);
+			}
+			else
+			{
+				int numAirBlocks = 0;
+				for (int i = -1; i < 2; i++)
 				{
-					for (int k = -1; k < 2; k++)
+					for (int j = 0; j < 2; j++)
 					{
-						if(world.getBlockId(x+i, y+j, z+k) == 0) {
-							numAirBlocks++;
+						for (int k = -1; k < 2; k++)
+						{
+							if(world.getBlockId(x+i, y+j, z+k) == 0) {
+								numAirBlocks++;
+							}
 						}
 					}
 				}
-			}
-			if(world.getBlockTileEntity(x, y, z) != null)
-			{
-				((TileEntityForge)world.getBlockTileEntity(x, y, z)).setNumAirBlocks(numAirBlocks);
-				((TileEntityForge)world.getBlockTileEntity(x, y, z)).isValid = false;
+				if(world.getBlockTileEntity(x, y, z) != null)
+				{
+					((TileEntityForge)world.getBlockTileEntity(x, y, z)).setNumAirBlocks(numAirBlocks);
+					((TileEntityForge)world.getBlockTileEntity(x, y, z)).isValid = false;
+				}
 			}
 		}
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
-    {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        return ret;
-    }
-	
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		return ret;
+	}
+
 	@Override
 	public void randomDisplayTick(World world, int i, int j, int k, Random random)
 	{
@@ -200,10 +217,10 @@ public class BlockForge extends BlockTerraContainer
 	{
 		return false;
 	}
-	
+
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) 
-    {
+	{
 		int meta = world.getBlockMetadata(x, y, z);
 		if(meta == 0)
 			return 0;
@@ -211,7 +228,7 @@ public class BlockForge extends BlockTerraContainer
 			return 15;
 		else
 			return 10;
-    }
+	}
 
 	/**
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been

@@ -122,7 +122,7 @@ public class ItemFirestarter extends ItemTerra
                             world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
                             world.getBlockMaterial(x, y+1, z+1) == Material.rock && world.getBlockMaterial(x, y+1, z-1) == Material.rock &&
                             world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y+1, z) && world.isBlockNormalCube(x-1, y+1, z) && 
-                            world.isBlockNormalCube(x, y+1, z+1) && world.isBlockNormalCube(x, y+1, z-1)) || (checkSlabsAround(world, x, y+1, z))))
+                            world.isBlockNormalCube(x, y+1, z+1) && world.isBlockNormalCube(x, y+1, z-1)) || (checkIfSlabsAroundAreValid(world, x, y+1, z))))
                     {
                         for (Iterator iterator = list.iterator(); iterator.hasNext();)
                         {
@@ -150,7 +150,7 @@ public class ItemFirestarter extends ItemTerra
                             world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
                             world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
                             world.isBlockNormalCube(x, y-1, z) && ((world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
-                            world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (checkSlabsAround(world, x, y, z))))
+                            world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)) || (checkIfSlabsAroundAreValid(world, x, y, z))))
             	{
             		int chance = new Random().nextInt(100);
                     if(chance > 70)
@@ -165,7 +165,7 @@ public class ItemFirestarter extends ItemTerra
         return false;
     }
     
-    public static boolean checkSlabsAround(World world, int x, int y, int z)
+    public static boolean checkIfSlabsAroundAreValid(World world, int x, int y, int z)
     {
     	if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
     	{
@@ -191,9 +191,9 @@ public class ItemFirestarter extends ItemTerra
     			return false;
     		}
     	}
-    	if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
+    	if(world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID)
     	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
     		if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
     		{
     			return false;
