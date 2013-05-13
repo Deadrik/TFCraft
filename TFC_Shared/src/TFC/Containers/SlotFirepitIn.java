@@ -24,7 +24,7 @@ public class SlotFirepitIn extends Slot
 	@Override
 	public boolean isItemValid(ItemStack is)
     {
-		if(is.itemID == TFCItems.Logs.itemID || is.itemID == TFCBlocks.Peat.blockID)
+		if(is.itemID == TFCItems.Logs.itemID || is.itemID == TFCBlocks.Peat.blockID || is.itemID == TFCItems.CeramicMold.itemID)
 			return false;
         return true;
     }
