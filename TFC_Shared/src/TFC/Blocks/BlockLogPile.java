@@ -142,7 +142,7 @@ public class BlockLogPile extends BlockTerraContainer
 	public boolean removeBlockByPlayer(World par1World, EntityPlayer player, int par2, int par3, int par4) 
 	{
 		Eject(par1World,par2,par3,par4);
-		return true;
+		return par1World.setBlockToAir(par2,par3,par4);
 	}
 
 	@Override
