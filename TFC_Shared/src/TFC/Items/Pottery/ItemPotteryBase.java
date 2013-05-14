@@ -37,7 +37,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	}
 
 	@Override
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
 	{
 		this.ClayIcon = registerer.registerIcon(textureFolder + MetaNames[0]);
 		this.CeramicIcon = registerer.registerIcon(textureFolder + MetaNames[1]);
