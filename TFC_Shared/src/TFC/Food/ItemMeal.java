@@ -40,7 +40,7 @@ public class ItemMeal extends ItemTerraFood
 	
 	Icon[] icons = new Icon[11];
 	@Override
-	public void updateIcons(IconRegister registerer)
+	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 11; i++)
 			icons[i]= registerer.registerIcon("food/Meal"+i);
