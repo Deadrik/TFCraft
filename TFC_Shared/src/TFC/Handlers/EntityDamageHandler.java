@@ -48,6 +48,10 @@ public class EntityDamageHandler
 		{
 			event.ammount = 100;
 		}
+		else if(event.source.isExplosion())
+		{
+			event.ammount *= 30;
+		}
 		else if(event.source.damageType == "player" || event.source.damageType == "mob")
 		{
 			applyArmorCalculations(entity, event.source, event.ammount);
