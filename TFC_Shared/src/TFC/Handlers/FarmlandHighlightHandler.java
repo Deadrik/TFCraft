@@ -10,7 +10,7 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
-import TFC.Items.ItemCustomHoe;
+import TFC.Items.Tools.ItemCustomHoe;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityFarmland;
 import cpw.mods.fml.relauncher.Side;

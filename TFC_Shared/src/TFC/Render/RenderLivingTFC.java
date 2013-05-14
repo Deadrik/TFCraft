@@ -39,6 +39,7 @@ import org.lwjgl.opengl.GL12;
 
 import TFC.*;
 import TFC.Entities.EntityAnimalTFC;
+import TFC.Render.Models.ModelBaseTFC;
 
 public class RenderLivingTFC extends Render
 {

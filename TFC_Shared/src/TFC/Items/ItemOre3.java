@@ -1,5 +1,7 @@
 package TFC.Items;
 
+import TFC.Items.ItemBlocks.ItemTerraBlock;
+
 
 public class ItemOre3 extends ItemTerraBlock
 {

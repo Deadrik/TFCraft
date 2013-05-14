@@ -66,7 +66,7 @@ public class TileEntityChestRendererTFC extends TileEntitySpecialRenderer
 
             if (var10 != null && var9 == 0)
             {
-                ((TFC.Blocks.BlockChestTFC)var10).unifyAdjacentChests(par1TileEntityChest.worldObj, par1TileEntityChest.xCoord, par1TileEntityChest.yCoord, par1TileEntityChest.zCoord);
+                ((TFC.Blocks.Devices.BlockChestTFC)var10).unifyAdjacentChests(par1TileEntityChest.worldObj, par1TileEntityChest.xCoord, par1TileEntityChest.yCoord, par1TileEntityChest.zCoord);
                 var9 = par1TileEntityChest.getBlockMetadata();
             }
 

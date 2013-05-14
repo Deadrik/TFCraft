@@ -5,7 +5,7 @@ import java.util.Random;
 
 import TFC.*;
 import TFC.Core.TFC_Settings;
-import TFC.Items.ItemCustomScythe;
+import TFC.Items.Tools.ItemCustomScythe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

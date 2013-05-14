@@ -6,7 +6,7 @@ import TFC.*;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Items.ItemChisel;
+import TFC.Items.Tools.ItemChisel;
 import TFC.Render.Blocks.RenderDetailed;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;

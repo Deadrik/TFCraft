@@ -34,6 +34,8 @@ import net.minecraft.world.*;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Entities.Mobs.EntityBear;
+import TFC.Render.Models.ModelBaseTFC;
+import TFC.Render.Models.ModelBear;
 public class RenderBear extends RenderLivingTFC
 {
     private float scale = 1.1f;

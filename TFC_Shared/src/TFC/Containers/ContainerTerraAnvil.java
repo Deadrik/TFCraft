@@ -7,8 +7,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
-import TFC.Items.ItemPlan;
-import TFC.Items.ItemHammer;
+import TFC.Items.Tools.ItemHammer;
+import TFC.Items.Tools.ItemPlan;
 import TFC.TileEntities.TileEntityAnvil;
 
 public class ContainerTerraAnvil extends ContainerTFC

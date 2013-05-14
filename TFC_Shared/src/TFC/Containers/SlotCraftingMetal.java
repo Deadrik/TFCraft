@@ -3,41 +3,17 @@ package TFC.Containers;
 import java.util.ArrayList;
 import java.util.List;
 
-import TFC.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import TFC.TerraFirmaCraft;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.GUI.GuiKnapping;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraftforge.common.ForgeHooks;
 
 public class SlotCraftingMetal extends Slot
 {
@@ -104,6 +80,8 @@ public class SlotCraftingMetal extends Slot
 
 		TerraFirmaCraft.proxy.takenFromCrafting(thePlayer, itemstack, craftMatrix);
 		GameRegistry.onItemCrafted(thePlayer, itemstack, craftMatrix);
+		
+		
 
 		for (int i = 0; i < craftMatrix.getSizeInventory(); i++)
 		{
@@ -111,6 +89,8 @@ public class SlotCraftingMetal extends Slot
 			if (itemstack1 != null)
 			{
 				craftMatrix.decrStackSize(i, 1);
+				if(player.worldObj.isRemote && player.openContainer instanceof ContainerKnapping)
+					((GuiKnapping) Minecraft.getMinecraft().currentScreen).resetButton(i);
 
 				if (itemstack1.getItem().hasContainerItem())
 				{
