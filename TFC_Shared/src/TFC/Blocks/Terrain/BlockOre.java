@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.Icon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -108,6 +109,32 @@ public class BlockOre extends BlockTerra
             return TFCItems.SmallOreChunk;
         }
     }
+
+	@Override
+	public boolean canDropFromExplosion(Explosion par1Explosion) {
+		return false;
+	}
 	
-	
+	@Override
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		par1World.setBlockToAir(par2, par3, par4);
+	}
+
+	@Override
+	public void onBlockExploded(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		Random random = new Random();
+		ItemStack itemstack;
+		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		
+		if(meta == 14 || meta == 15) {
+			itemstack  = new ItemStack(Item.coal,1+random.nextInt(2));
+		} else {
+			itemstack  = new ItemStack(TFCItems.OreChunk, 1, meta);
+		}
+		if (itemstack != null) {
+			dropBlockAsItem_do(par1World, par2, par3, par4, itemstack);
+		}
+		onBlockDestroyedByExplosion(par1World, par2, par3, par4, par5Explosion);
+	}
+
 }
