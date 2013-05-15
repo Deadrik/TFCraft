@@ -143,7 +143,11 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         {
             this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
         }
-        this.dropItem(TFCItems.muttonRaw.itemID,(5+rand.nextInt(5)));
+        if (this.isBurning()) {
+        	this.dropItem(TFCItems.muttonCooked.itemID,(5+rand.nextInt(5)));
+        } else {
+        	this.dropItem(TFCItems.muttonRaw.itemID,(5+rand.nextInt(5)));
+        }
     }
 
     /**
