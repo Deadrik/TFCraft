@@ -913,6 +913,7 @@ public class TFCItems
     public static Item PotterySmallVessel;
     public static Item PotteryLargeVessel;
     public static Item KilnRack;
+    public static Item Straw;
     
     /**
      * Item Uses Setup
@@ -1624,6 +1625,8 @@ public class TFCItems
         PotterySmallVessel = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
         PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
         PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"items","PotteryPot",num++)).setUnlocalizedName("Pot");
+        
+        Straw = new ItemTerra(TFC_Settings.getIntFor(config,"items","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
 		/**Plans*/
         num = 20000;
         SetupPlans(num);

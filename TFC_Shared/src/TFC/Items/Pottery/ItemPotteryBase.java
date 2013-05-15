@@ -71,9 +71,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			TileEntityPottery te;
 			if(side == 1)
 			{
-				if(world.getBlockId(x, y, z) != TFCBlocks.ClayPottery.blockID)
+				if(world.getBlockId(x, y, z) != TFCBlocks.Pottery.blockID)
 				{
-					world.setBlock(x, y+1, z, TFCBlocks.ClayPottery.blockID);
+					world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
 					te = (TileEntityPottery) world.getBlockTileEntity(x, y+1, z);
 				}
 				else

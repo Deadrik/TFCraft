@@ -35,6 +35,8 @@ public class TFC_Settings
 	public static byte[] cropNutrientAColor = {(byte) 237, (byte) 28, (byte) 36, (byte) 200};
 	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
 	public static byte[] cropNutrientCColor = {(byte) 247, (byte) 148, (byte) 49, (byte) 200};
+	
+	public static int pitKilnBurnTime = 8;
 
 	static
 	{
@@ -80,6 +82,8 @@ public class TFC_Settings
 		cropNutrientCColor[3] = (byte)getIntFor(config,"ColorNutrientC","Alpha", 200);
 		
 		enableCropsDie = getBooleanFor(config, "Crops","enableCropsDie",false);
+		
+		pitKilnBurnTime = getIntFor(config,"General","pitKilnBurnTime", 10, "This is the number of hours that the pit kiln should burn before being completed.");
 		/**Always end with this*/
 		if (config != null) {
 			config.save();

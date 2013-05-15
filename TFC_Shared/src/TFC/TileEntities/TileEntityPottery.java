@@ -1,33 +1,62 @@
 package TFC.TileEntities;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
-import TFC.Handlers.PacketHandler;
+import TFC.Core.TFC_Time;
 
 public class TileEntityPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
-	public byte[] placementGrid;
+	public boolean hasRack;
+	public boolean isBurning;
+	public long burnCompleteTime;
 
 	public TileEntityPottery()
 	{
-		inventory = new ItemStack[16];
-		placementGrid = new byte[16];
+		inventory = new ItemStack[4];
+		hasRack = false;
+		isBurning = false;
 	}
 
 	@Override
 	public void updateEntity()
 	{        
-		
+		if(!worldObj.isRemote && isBurning)
+		{
+			int blockAboveID = worldObj.getBlockId(xCoord, yCoord+1, zCoord);
+			if(blockAboveID != Block.fire.blockID && (blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn()))
+			{
+				worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
+			}
+			else
+			{
+				isBurning = false;
+			}
+			
+
+			if(TFC_Time.getTotalTicks() >= burnCompleteTime)
+			{
+				isBurning = false;
+				if(inventory[0] != null)
+					inventory[0].setItemDamage(1);
+				if(inventory[1] != null)
+					inventory[1].setItemDamage(1);
+				if(inventory[2] != null)
+					inventory[2].setItemDamage(1);
+				if(inventory[3] != null)
+					inventory[3].setItemDamage(1);
+			}
+			
+			
+		}
 	}	
 
 	@Override
@@ -112,34 +141,68 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException  
 	{
-		outStream.write(placementGrid);
+		if(inventory[0] != null)
+		{
+			outStream.writeInt(inventory[0].itemID);
+			outStream.writeInt(inventory[0].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		if(inventory[1] != null)
+		{
+			outStream.writeInt(inventory[1].itemID);
+			outStream.writeInt(inventory[1].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		if(inventory[2] != null)
+		{
+			outStream.writeInt(inventory[2].itemID);
+			outStream.writeInt(inventory[2].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		if(inventory[3] != null)
+		{
+			outStream.writeInt(inventory[3].itemID);
+			outStream.writeInt(inventory[3].getItemDamage());
+		}
+		else
+		{
+			outStream.writeInt(0);
+			outStream.writeInt(0);
+		}
+		outStream.writeBoolean(hasRack);
 	}
 
 	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException 
 	{
-		inStream.read(placementGrid, 0, 16);
-		/*AnvilTier = inStream.readInt();
-		stonePair[0] = inStream.readInt();
-		stonePair[1] = inStream.readInt();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);*/
-	}
-
-	public Packet createAnvilUsePacket(int id)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-
-		try {
-			dos.writeByte(PacketHandler.Packet_Data_Block_Server);
-			dos.writeInt(xCoord);
-			dos.writeInt(yCoord);
-			dos.writeInt(zCoord);
-			dos.writeInt(id);
-		} catch (IOException e) {
-		}
-
-		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
+		int inv0 = inStream.readInt();
+		int inv0d = inStream.readInt();
+		int inv1 = inStream.readInt();
+		int inv1d = inStream.readInt();
+		int inv2 = inStream.readInt();
+		int inv2d = inStream.readInt();
+		int inv3 = inStream.readInt();
+		int inv3d = inStream.readInt();
+		
+		hasRack = inStream.readBoolean();
+		
+		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
+		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override

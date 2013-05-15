@@ -4,44 +4,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemFlintAndSteel;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
 import TFC.TileEntities.TileEntityPartial;
-import net.minecraft.item.ItemFlintAndSteel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import TFC.TileEntities.TileEntityPottery;
 
 public class ItemFlintSteel extends ItemFlintAndSteel{
 
@@ -59,6 +39,9 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 			if(objectMouseOver == null) {
 				return false;
 			}       
+			
+			boolean surroundSolids = world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
+					world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1);
 
 			if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
 					world.getBlockMaterial(x, y, z) != Material.wood && world.getBlockMaterial(x, y, z) != Material.cloth &&
@@ -148,6 +131,21 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 			}
+			else if(world.getBlockId(x, y, z) == TFCBlocks.LogPile.blockID)
+            {
+            	if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && 
+            			(surroundSolids || (ItemFirestarter.checkIfSlabsAroundAreValid(world, x, y, z))))
+            	{
+            		int chance = new Random().nextInt(100);
+                    if(chance > 70)
+                    {
+                    	world.setBlock(x, y, z, Block.fire.blockID);
+                    	TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
+                    	te.isBurning = true;
+                    	te.burnCompleteTime = TFC_Time.getTotalTicks()+(TFC_Time.hourLength * TFC_Settings.pitKilnBurnTime);
+                    }
+            	}
+            }
 			else
 			{
 				super.onItemUse(itemstack, entityplayer, world, x, y, z, side, hitX, hitY, hitZ);

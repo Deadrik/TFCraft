@@ -2,7 +2,6 @@ package TFC.Render.Blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import TFC.TileEntities.TileEntityPottery;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -23,29 +22,12 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 		IBlockAccess blockAccess = renderer.blockAccess;
 		TileEntityPottery te = (TileEntityPottery) blockAccess.getBlockTileEntity(x, y, z);
 		
-		for(int i = 0; i < 16; i++)
+		int meta = world.getBlockMetadata(x, y, z);
+		if(meta > 0)
 		{
-			ItemStack is = te.inventory[i];
-			if(is != null)
-			{
-				if(is.getItemDamage() < 5)
-				{
-					
-				}
-				else
-				{
-					
-				}
-			}
+			renderer.setRenderBounds(0, 0, 0, 1, meta/15, 1);
 		}
-		
 		return true;
-	}
-	
-	public void renderJug(int x, int y, int z, float offsetX, float offsetY, float offsetZ, Block block, RenderBlocks renderer)
-	{
-		renderer.setRenderBounds(0, 0, 0, 1, 1, 1);
-		renderer.renderStandardBlock(block, x, y, z);
 	}
 
 	@Override

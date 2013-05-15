@@ -12,6 +12,8 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Items.Tools.ItemFirestarter;
+import TFC.Items.Tools.ItemFlintSteel;
 import TFC.TileEntities.TileEntityLogPile;
 
 public class BlockLogPile extends BlockTerraContainer
@@ -36,7 +38,8 @@ public class BlockLogPile extends BlockTerraContainer
 		{
 			return true;
 		}
-		else
+		else if(!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFirestarter) && 
+				!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFlintSteel))
 		{
 			if((TileEntityLogPile)world.getBlockTileEntity(i, j, k)!=null)
 			{
@@ -58,6 +61,7 @@ public class BlockLogPile extends BlockTerraContainer
 			}
 
 		}
+		else return false;
 	}
 
 	@Override
