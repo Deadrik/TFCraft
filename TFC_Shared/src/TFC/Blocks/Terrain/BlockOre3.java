@@ -141,4 +141,17 @@ public class BlockOre3 extends BlockOre
 //
 //        return false;
 //    }
+	
+	@Override
+	public void onBlockExploded(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		Random random = new Random();
+		ItemStack itemstack;
+		int meta = par1World.getBlockMetadata(par2, par3, par4);
+		itemstack  = new ItemStack(TFCItems.OreChunk, 1, meta + 32);
+		
+		if (itemstack != null) {
+			dropBlockAsItem_do(par1World, par2, par3, par4, itemstack);
+		}
+		onBlockDestroyedByExplosion(par1World, par2, par3, par4, par5Explosion);
+	}
 }
