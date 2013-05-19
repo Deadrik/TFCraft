@@ -80,6 +80,7 @@ import TFC.Handlers.ChiselHighlightHandler;
 import TFC.Handlers.FarmlandHighlightHandler;
 import TFC.Handlers.KeyBindingHandler;
 import TFC.Handlers.PlankHighlightHandler;
+import TFC.Handlers.RenderOverlayHandler;
 import TFC.Handlers.SoundHandler;
 import TFC.Render.RenderBear;
 import TFC.Render.RenderChickenTFC;
@@ -200,6 +201,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
+
+		//Register our overlay changes
+		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
 
 	@Override
