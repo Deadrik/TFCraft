@@ -1575,10 +1575,10 @@ public class TFCItems
         SinglePlank = new ItemPlank(TFC_Settings.getIntFor(config,"item","SinglePlank",num++)).setUnlocalizedName("SinglePlank");
         
         RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketEmpty",num++), 0)).setUnlocalizedName("Red Steel Bucket Empty");
-        RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketWater",num++), Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Water");
+        RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketWater",num++), Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
         
         BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketEmpty",num++), 0)).setUnlocalizedName("Blue Steel Bucket Empty");
-        BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketLava",num++), Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava");
+        BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketLava",num++), Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
         
         Quern = new ItemTerra(TFC_Settings.getIntFor(config,"item","Quern",num++)).setUnlocalizedName("Quern").setMaxDamage(250);
         FlintSteel = new ItemFlintSteel(TFC_Settings.getIntFor(config,"item","FlintSteel",num++)).setUnlocalizedName("flintAndSteel").setMaxDamage(200);
