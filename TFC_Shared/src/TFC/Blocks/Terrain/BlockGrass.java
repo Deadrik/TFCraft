@@ -201,16 +201,17 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
                 }
                 
                 float rain = TFC_Climate.getRainfall(i, j + 1, k);
+                float temp = TFC_Climate.getHeightAdjustedTemp(i, j+1, k);
                 int id = world.getBlockId(i, j, k);
                 
                 if (TFC_Core.isGrass(id) && !TFC_Core.isDryGrass(id) && world.getBlockLightValue(i, j + 1, k) >= 4 && 
                 		world.getBlockMaterial(i, j + 1, k) != Material.water && world.getBlockId(i, j + 1, k) == 0)
                 {
-                	if(rand.nextInt((int) ((16800-rain)/4)) == 0)
+                	if(rand.nextInt((int) ((16800-rain)/4)) == 0 && temp > 20)
                 	{
                 		world.setBlock(i, j + 1, k, Block.tallGrass.blockID, 1, 0x2);
                 	}
-                	else if(rand.nextInt(10000) == 0)
+                	else if(rand.nextInt(15000) == 0 && temp > 20)
                 	{
                 		new WorldGenGrowTrees().generate(world, rand, i, j, k);
                 	}
