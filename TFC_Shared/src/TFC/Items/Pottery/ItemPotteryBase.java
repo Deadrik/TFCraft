@@ -71,15 +71,14 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			TileEntityPottery te;
 			if(side == 1)
 			{
+				int offset = 0;
 				if(world.getBlockId(x, y, z) != TFCBlocks.Pottery.blockID)
 				{
 					world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
-					te = (TileEntityPottery) world.getBlockTileEntity(x, y+1, z);
+					offset = 1;
 				}
-				else
-				{
-					te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
-				}
+				
+				te = (TileEntityPottery) world.getBlockTileEntity(x, y+offset, z);
 				
 				if(hitX < 0.5 && hitZ < 0.5)
 				{
@@ -89,7 +88,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
 						itemstack.stackSize--;
 						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y, z));
+							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 						} catch (IOException e) {}
 					}
 				}
@@ -101,7 +100,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
 						itemstack.stackSize--;
 						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y, z));
+							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 						} catch (IOException e) {}
 					}
 				}
@@ -113,7 +112,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
 						itemstack.stackSize--;
 						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y, z));
+							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 						} catch (IOException e) {}
 					}
 				}
@@ -125,7 +124,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
 						itemstack.stackSize--;
 						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y, z));
+							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
 						} catch (IOException e) {}
 					}
 				}
@@ -142,7 +141,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		try 
 		{
 			//The packet type sent determines who is expected to process this packet, the client or the server.
-			dos.writeByte(PacketHandler.Packet_Init_Block_Server);
+			dos.writeByte(PacketHandler.Packet_Init_Block_Client);
 			dos.writeInt(x);
 			dos.writeInt(y);
 			dos.writeInt(z);

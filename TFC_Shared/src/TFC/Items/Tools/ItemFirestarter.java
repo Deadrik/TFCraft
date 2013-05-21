@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,8 +16,6 @@ import TFC.TFCBlocks;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
 import TFC.Enums.EnumSize;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityPartial;
@@ -178,11 +175,8 @@ public class ItemFirestarter extends ItemTerra
             		int chance = new Random().nextInt(100);
                     if(chance > 70)
                     {
-                    	world.setBlock(x, y, z, Block.fire.blockID);
                     	TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
-                    	te.isBurning = true;
-                    	long burnLength = TFC_Time.hourLength * TFC_Settings.pitKilnBurnTime;
-                    	te.burnCompleteTime = TFC_Time.getTotalTicks() + burnLength;
+                    	te.StartPitFire();
                     }
             	}
             }

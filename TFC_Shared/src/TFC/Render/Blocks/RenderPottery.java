@@ -26,6 +26,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 		if(meta > 0)
 		{
 			renderer.setRenderBounds(0, 0, 0, 1, meta/15, 1);
+			renderer.renderStandardBlock(block, x, y, z);
 		}
 		return true;
 	}
