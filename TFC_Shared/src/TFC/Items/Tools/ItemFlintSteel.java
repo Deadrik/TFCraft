@@ -2,9 +2,7 @@ package TFC.Items.Tools;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,8 +16,6 @@ import TFC.TFCBlocks;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
 import TFC.Core.TFCTabs;
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityPottery;
 
@@ -39,7 +35,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 			if(objectMouseOver == null) {
 				return false;
 			}       
-			
+
 			boolean surroundSolids = world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
 					world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1);
 
@@ -132,20 +128,14 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 				}
 			}
 			else if(world.getBlockId(x, y, z) == TFCBlocks.LogPile.blockID)
-            {
-            	if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && 
-            			(surroundSolids || (ItemFirestarter.checkIfSlabsAroundAreValid(world, x, y, z))))
-            	{
-            		int chance = new Random().nextInt(100);
-                    if(chance > 70)
-                    {
-                    	world.setBlock(x, y, z, Block.fire.blockID);
-                    	TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y, z);
-                    	te.isBurning = true;
-                    	te.burnCompleteTime = TFC_Time.getTotalTicks()+(TFC_Time.hourLength * TFC_Settings.pitKilnBurnTime);
-                    }
-            	}
-            }
+			{
+				if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && 
+						(surroundSolids || (ItemFirestarter.checkIfSlabsAroundAreValid(world, x, y, z))))
+				{
+					TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
+					te.StartPitFire();					
+				}
+			}
 			else
 			{
 				super.onItemUse(itemstack, entityplayer, world, x, y, z, side, hitX, hitY, hitZ);

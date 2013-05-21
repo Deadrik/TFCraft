@@ -27,6 +27,7 @@ import net.minecraftforge.common.ForgeHooks;
 import TFC.TFCBlocks;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityTerraJavelin;
@@ -188,7 +189,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 				{
 					for(int k = -1; k < 2; k++)
 					{
-						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, 6);
+						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFC_Settings.protectionGain);
 					}
 				}
 				

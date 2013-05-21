@@ -27,7 +27,8 @@ public class TFC_Settings
 	
 	public static int dayLength;
 	public static int yearLength;
-	
+	public static int maxProtectionMonths;
+	public static int protectionGain;
 	//////////////////Features////////////////////
 	public static int RockLayer2Height = 110;
 	public static int RockLayer3Height = 55;
@@ -84,6 +85,8 @@ public class TFC_Settings
 		enableCropsDie = getBooleanFor(config, "Crops","enableCropsDie",false);
 		
 		pitKilnBurnTime = getIntFor(config,"General","pitKilnBurnTime", 10, "This is the number of hours that the pit kiln should burn before being completed.");
+		maxProtectionMonths = getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
+		protectionGain = getIntFor(config,"Protection","protectionGain", 8, "The number of hours of protection gained in the 3x3 chunk area for spending 1 hour in that chunk.");
 		/**Always end with this*/
 		if (config != null) {
 			config.save();

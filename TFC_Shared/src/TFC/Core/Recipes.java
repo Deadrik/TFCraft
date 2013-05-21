@@ -257,7 +257,7 @@ public class Recipes
 
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.Scribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),
 			Character.valueOf('P'), Item.paper,Character.valueOf('L'), Item.feather});
-		ModLoader.addRecipe(new ItemStack(TFCItems.ClayMold, 4), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,32767)});
+		ModLoader.addRecipe(new ItemStack(TFCItems.CeramicMold, 4, 0), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,32767)});
 
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.MetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.StoneIgEx});
 		ModLoader.addRecipe(new ItemStack(TFCBlocks.MetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.StoneIgIn});
@@ -438,6 +438,7 @@ public class Recipes
 		RegisterToolRecipes();
 		registerFoodRecipes();
 		VanillaRecipes();
+		registerKilnRecipes();
 	}
 
 	private static void VanillaRecipes()
@@ -1554,7 +1555,42 @@ public class Recipes
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.CornmealDough, 2), new Object[] {TFCItems.CornmealGround,TFCItems.CornmealGround, TFCItems.RedSteelBucketWater});
 	}
 	
-    public static int valueOfString(String s)
+    public static void registerKilnRecipes()
+    {
+    	KilnCraftingManager manager = KilnCraftingManager.getInstance();
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.CeramicMold,1,0),
+    					0, 
+    					new ItemStack(TFCItems.CeramicMold,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.PotteryJug,1,0),
+    					0, 
+    					new ItemStack(TFCItems.PotteryJug,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.PotterySmallVessel,1,0),
+    					0, 
+    					new ItemStack(TFCItems.PotterySmallVessel,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.PotteryPot,1,0),
+    					0, 
+    					new ItemStack(TFCItems.PotteryPot,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.PotteryLargeVessel,1,0),
+    					0, 
+    					new ItemStack(TFCItems.PotteryLargeVessel,1,1)));
+    }
+	
+	public static int valueOfString(String s)
     {
         if(s.length() > 0)
         {

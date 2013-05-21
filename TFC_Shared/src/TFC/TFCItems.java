@@ -48,6 +48,7 @@ import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
 import TFC.Items.Pottery.ItemPotteryLargeVessel;
 import TFC.Items.Pottery.ItemPotteryPot;
+import TFC.Items.Pottery.ItemPotterySmallVessel;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomAxe;
 import TFC.Items.Tools.ItemCustomBlueSteelBucket;
@@ -356,11 +357,7 @@ public class TFCItems
     public static Item SterlingSilverUnshaped;
     public static Item TinUnshaped;
     public static Item ZincUnshaped;
-    public static Item ClayMold;
     public static Item CeramicMold;
-    public static Item terraMeltedUnknown;
-
-    public static Item terraSlag;
     public static Item Ink;
 
     //Plans
@@ -1053,8 +1050,8 @@ public class TFCItems
         
         
 		
-        GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","terraGoldPan",16001)).setUnlocalizedName("GoldPan");
-        SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","terraSluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
+        GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","GoldPan",16001)).setUnlocalizedName("GoldPan");
+        SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","SluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
         
         ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setUnlocalizedName("Bismuth ProPick").setMaxDamage(BismuthUses);
         ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
@@ -1308,28 +1305,27 @@ public class TFCItems
         ZincUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedZinc",16370)).setUnlocalizedName("Zinc Unshaped");
 
         //Hammers
-        StoneHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraStoneHammer",16371),TFCItems.IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
-        BismuthHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraBismuthHammer",16372),TFCItems.BismuthToolMaterial).setUnlocalizedName("Bismuth Hammer").setMaxDamage(TFCItems.BismuthUses);
-        BismuthBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraBismuthBronzeHammer",16373),TFCItems.BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
-        BlackBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraBlackBronzeHammer",16374),TFCItems.BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
-        BlackSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraBlackSteelHammer",16375),TFCItems.BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
-        BlueSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraBlueSteelHammer",16376),TFCItems.BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(TFCItems.BlueSteelUses);
-        BronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraBronzeHammer",16377),TFCItems.BronzeToolMaterial).setUnlocalizedName("Bronze Hammer").setMaxDamage(TFCItems.BronzeUses);
-        CopperHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraCopperHammer",16378),TFCItems.CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
-        WroughtIronHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraWroughtIronHammer",16379),TFCItems.IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
-        RedSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraRedSteelHammer",16380),TFCItems.RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
-        RoseGoldHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraRoseGoldHammer",16381),TFCItems.RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Hammer").setMaxDamage(TFCItems.RoseGoldUses);
-        SteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraSteelHammer",16382),TFCItems.SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
-        TinHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraTinHammer",16383),TFCItems.TinToolMaterial).setUnlocalizedName("Tin Hammer").setMaxDamage(TFCItems.TinUses);
-        ZincHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","terraZincHammer",16384),TFCItems.ZincToolMaterial).setUnlocalizedName("Zinc Hammer").setMaxDamage(TFCItems.ZincUses);
+        StoneHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","StoneHammer",16371),TFCItems.IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
+        BismuthHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BismuthHammer",16372),TFCItems.BismuthToolMaterial).setUnlocalizedName("Bismuth Hammer").setMaxDamage(TFCItems.BismuthUses);
+        BismuthBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BismuthBronzeHammer",16373),TFCItems.BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
+        BlackBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlackBronzeHammer",16374),TFCItems.BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
+        BlackSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlackSteelHammer",16375),TFCItems.BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
+        BlueSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlueSteelHammer",16376),TFCItems.BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(TFCItems.BlueSteelUses);
+        BronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BronzeHammer",16377),TFCItems.BronzeToolMaterial).setUnlocalizedName("Bronze Hammer").setMaxDamage(TFCItems.BronzeUses);
+        CopperHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","CopperHammer",16378),TFCItems.CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
+        WroughtIronHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","WroughtIronHammer",16379),TFCItems.IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
+        RedSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","RedSteelHammer",16380),TFCItems.RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
+        RoseGoldHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","RoseGoldHammer",16381),TFCItems.RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Hammer").setMaxDamage(TFCItems.RoseGoldUses);
+        SteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","SteelHammer",16382),TFCItems.SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
+        TinHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","TinHammer",16383),TFCItems.TinToolMaterial).setUnlocalizedName("Tin Hammer").setMaxDamage(TFCItems.TinUses);
+        ZincHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","ZincHammer",16384),TFCItems.ZincToolMaterial).setUnlocalizedName("Zinc Hammer").setMaxDamage(TFCItems.ZincUses);
 
         Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391)).setUnlocalizedName("Ink");
 
-        BellowsItem = new ItemBellows(TFC_Settings.getIntFor(config,"item","terraBellowsItem",16406)).setUnlocalizedName("Bellows");
+        BellowsItem = new ItemBellows(TFC_Settings.getIntFor(config,"item","BellowsItem",16406)).setUnlocalizedName("Bellows");
 
-        FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","terraFireStarter",16407)).setFolder("tools/").setUnlocalizedName("Firestarter");
-        ClayMold = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraClayMold",16408)).setUnlocalizedName("Clay Mold");
-        CeramicMold = new ItemTerra(TFC_Settings.getIntFor(config,"item","terraFiredClayMold",16409)).setUnlocalizedName("Ceramic Mold");
+        FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","FireStarter",16407)).setFolder("tools/").setUnlocalizedName("Firestarter");
+        
         //Tool heads
         BismuthPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthPickaxeHead",16500)).setUnlocalizedName("Bismuth Pick Head");
         BismuthBronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzePickaxeHead",16501)).setUnlocalizedName("Bismuth Bronze Pick Head");
@@ -1622,9 +1618,10 @@ public class TFCItems
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         
         PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"items","PotteryJug",num++)).setUnlocalizedName("Jug");
-        PotterySmallVessel = new ItemPotteryBase(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
+        PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
         PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
         PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"items","PotteryPot",num++)).setUnlocalizedName("Pot");
+        CeramicMold = new ItemPotteryBase(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
         
         Straw = new ItemTerra(TFC_Settings.getIntFor(config,"items","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
 		/**Plans*/

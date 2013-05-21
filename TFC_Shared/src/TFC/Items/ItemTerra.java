@@ -32,6 +32,12 @@ public class ItemTerra extends Item implements ISize
         textureFolder = "";
     }
     
+    public ItemTerra setMetaNames(String[] metanames)
+    {
+    	MetaNames = metanames;
+    	return this;
+    }
+    
     @Override
     public int getItemStackLimit()
     {

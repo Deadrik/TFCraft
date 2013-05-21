@@ -1,16 +1,28 @@
 package TFC.TileEntities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.util.AxisAlignedBB;
+import TFC.TFCItems;
+import TFC.Core.KilnCraftingManager;
+import TFC.Core.KilnRecipe;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
+import TFC.Handlers.PacketHandler;
 
 public class TileEntityPottery extends NetworkTileEntity implements IInventory
 {
@@ -31,33 +43,65 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	{        
 		if(!worldObj.isRemote && isBurning)
 		{
-			int blockAboveID = worldObj.getBlockId(xCoord, yCoord+1, zCoord);
-			if(blockAboveID != Block.fire.blockID && (blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn()))
+			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord+1, zCoord, xCoord+1, yCoord+2, zCoord+1));
+			if(list != null && !list.isEmpty())
 			{
-				worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
-			}
-			else
-			{
-				isBurning = false;
+				for (Iterator iterator = list.iterator(); iterator.hasNext();)
+                {
+                    EntityItem entity = (EntityItem)iterator.next();
+                    if(entity.getEntityItem().itemID == TFCItems.Logs.itemID)
+                    {
+                    	int ratio = TFC_Settings.pitKilnBurnTime / 16;
+                    	burnCompleteTime += ratio;
+                    }
+                }
 			}
 			
+			int blockAboveID = worldObj.getBlockId(xCoord, yCoord+1, zCoord);
+			//First we make sure to keep the fire going throughout the length of the burn
+			if(blockAboveID != Block.fire.blockID)
+			{
+				if(blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn())
+					worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
+				else
+					isBurning = false;
+			}
 
+			//If the total time passes then we complete the burn and turn the clay into ceramic
 			if(TFC_Time.getTotalTicks() >= burnCompleteTime)
 			{
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 				isBurning = false;
 				if(inventory[0] != null)
-					inventory[0].setItemDamage(1);
+					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0));
 				if(inventory[1] != null)
-					inventory[1].setItemDamage(1);
+					inventory[1] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[1], 0));
 				if(inventory[2] != null)
-					inventory[2].setItemDamage(1);
+					inventory[2] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[2], 0));
 				if(inventory[3] != null)
-					inventory[3].setItemDamage(1);
+					inventory[3] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[3], 0));
+				
+				broadcastPacketInRange(createUpdatePacket());
 			}
 			
 			
 		}
 	}	
+	
+	public void StartPitFire()
+	{
+		TileEntityLogPile telp = (TileEntityLogPile) worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
+		int count = telp.getNumberOfLogs();
+		telp.clearContents();
+		worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
+		
+		isBurning = true;
+		
+		int ratio = TFC_Settings.pitKilnBurnTime / 16;
+		
+		int burnLength = (int) (TFC_Time.hourLength * (count == 16 ? TFC_Settings.pitKilnBurnTime : ratio*count));
+    	burnCompleteTime = TFC_Time.getTotalTicks() + burnLength;
+	}
 
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
@@ -67,6 +111,89 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		{
 			itemstack.stackSize = getInventoryStackLimit();
 		}
+	}
+	
+	public void ejectItem(int index)
+    {
+    	float f3 = 0.05F;
+        EntityItem entityitem;
+        Random rand = new Random();
+        float f = rand.nextFloat() * 0.8F + 0.1F;
+        float f1 = rand.nextFloat() * 0.2F + 0.1F;
+        float f2 = rand.nextFloat() * 0.8F + 0.1F;
+        
+    	if(inventory[index] != null)
+        {
+            entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
+            		inventory[index]);
+            entityitem.motionX = (float)rand.nextGaussian() * f3;
+            entityitem.motionY = 0;
+            entityitem.motionZ = (float)rand.nextGaussian() * f3;
+            worldObj.spawnEntityInWorld(entityitem);
+            inventory[index] = null;
+        }
+    	
+    	if(inventory[0] == null && inventory[1] == null && inventory[2] == null && inventory[3] == null)
+    	{
+    		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+    	}
+    }
+	
+	public Packet createUpdatePacket()
+	{
+		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
+		DataOutputStream dos=new DataOutputStream(bos);
+
+		try {
+			dos.writeByte(PacketHandler.Packet_Data_Block_Client);
+			dos.writeInt(xCoord);
+			dos.writeInt(yCoord);
+			dos.writeInt(zCoord);
+			if(inventory[0] != null)
+			{
+				dos.writeInt(inventory[0].itemID);
+				dos.writeInt(inventory[0].getItemDamage());
+			}
+			else
+			{
+				dos.writeInt(0);
+				dos.writeInt(0);
+			}
+			if(inventory[1] != null)
+			{
+				dos.writeInt(inventory[1].itemID);
+				dos.writeInt(inventory[1].getItemDamage());
+			}
+			else
+			{
+				dos.writeInt(0);
+				dos.writeInt(0);
+			}
+			if(inventory[2] != null)
+			{
+				dos.writeInt(inventory[2].itemID);
+				dos.writeInt(inventory[2].getItemDamage());
+			}
+			else
+			{
+				dos.writeInt(0);
+				dos.writeInt(0);
+			}
+			if(inventory[3] != null)
+			{
+				dos.writeInt(inventory[3].itemID);
+				dos.writeInt(inventory[3].getItemDamage());
+			}
+			else
+			{
+				dos.writeInt(0);
+				dos.writeInt(0);
+			}
+			dos.writeBoolean(hasRack);
+		} catch (IOException e) {
+		}
+
+		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
 	@Override
@@ -117,15 +244,18 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		}
 
 		nbttagcompound.setTag("Items", nbttaglist);
-
+		
+		nbttagcompound.setLong("burnCompleteTime", burnCompleteTime);
+		nbttagcompound.setBoolean("hasRack", hasRack);
+		nbttagcompound.setBoolean("isBurning", isBurning);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
+		super.readFromNBT(nbt);
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+		NBTTagList nbttaglist = nbt.getTagList("Items");
 		inventory = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
@@ -136,6 +266,9 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
+		burnCompleteTime = nbt.getLong("burnCompleteTime");
+		isBurning = nbt.getBoolean("isBurning");
+		hasRack = nbt.getBoolean("hasRack");
 	}
 
 	@Override
@@ -244,6 +377,23 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException {
+	public void handleDataPacket(DataInputStream inStream) throws IOException 
+	{
+		int inv0 = inStream.readInt();
+		int inv0d = inStream.readInt();
+		int inv1 = inStream.readInt();
+		int inv1d = inStream.readInt();
+		int inv2 = inStream.readInt();
+		int inv2d = inStream.readInt();
+		int inv3 = inStream.readInt();
+		int inv3d = inStream.readInt();
+		
+		hasRack = inStream.readBoolean();
+		
+		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
+		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
+		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
+		inventory[3] = inv3 != 0 ? new ItemStack(inv3, 1, inv3d) : null;
+		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 }

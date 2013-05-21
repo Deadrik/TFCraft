@@ -98,6 +98,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 	@Override
 	public void registerIcons(IconRegister registerer)
     {
+		super.registerIcons(registerer);
 		this.WaterIcon = registerer.registerIcon(textureFolder + "Water Jug");
     }
 

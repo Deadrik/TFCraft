@@ -38,8 +38,8 @@ public class BlockLogPile extends BlockTerraContainer
 		{
 			return true;
 		}
-		else if(!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFirestarter) && 
-				!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFlintSteel))
+		else if(entityplayer.inventory.getCurrentItem() == null || (!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFirestarter) && 
+				!(entityplayer.inventory.getCurrentItem().getItem() instanceof ItemFlintSteel)))
 		{
 			if((TileEntityLogPile)world.getBlockTileEntity(i, j, k)!=null)
 			{
