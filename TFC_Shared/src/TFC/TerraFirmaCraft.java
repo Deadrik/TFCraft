@@ -157,9 +157,6 @@ public class TerraFirmaCraft
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
 		
-		//Register our overlay changes
-		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
-		
 		//Setup custom potion effects
 		TFCPotion.Setup();
 		
