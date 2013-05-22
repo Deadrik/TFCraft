@@ -1,6 +1,7 @@
 package TFC.Blocks.Devices;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
@@ -184,20 +185,43 @@ public class BlockToolRack extends BlockTerraContainer
 	}
 	
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
 		if(!world.isRemote)
 		{
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCBlocks.ToolRack, 1, meta));
+			// tile entity should still be valid at this point, so get the wood type and drop the rack
+			TileEntity te = world.getBlockTileEntity(x, y, z);
+			if((te != null) && (te instanceof TileEntityToolRack))
+			{
+				TileEntityToolRack rack = (TileEntityToolRack) te;
+				dropBlockAsItem_do(world, x, y, z, new ItemStack(TFCBlocks.ToolRack, 1, rack.woodType));
+			}
 		}
-	}
-	
-	@Override
-	public int idDropped(int i, Random random, int j)
-	{
-		return TFCItems.LooseRock.itemID;
+
+		return super.removeBlockByPlayer(world, player, x, y, z);
 	}
 
+	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int meta)
+	{
+		// don't drop here, we dropped in removeBlockByPlayer instead
+	}
+
+	// this method should end up being used when the block is dropped by an explosion
+	// note that the block can still sometimes be destroyed and this won't be called
+	@Override
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if((te != null) && (te instanceof TileEntityToolRack))
+		{
+			TileEntityToolRack rack = (TileEntityToolRack) te;
+			ret.add(new ItemStack(this, 1, rack.woodType));
+		}
+		return ret;
+	}
+	
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
@@ -261,32 +285,28 @@ public class BlockToolRack extends BlockTerraContainer
 		{
 			if(!world.isBlockOpaqueCube(i, j, k+1))
 			{
-				this.breakBlock(world, i, j, k, blockID, dir);
-				world.setBlock(i, j, k, 0);
+				removeBlockByPlayer(world, null, i, j, k);
 			}
 		}
 		else if(dir == 1)
 		{
 			if(!world.isBlockOpaqueCube(i-1, j, k))
 			{
-				this.breakBlock(world, i, j, k, blockID, dir);
-				world.setBlock(i, j, k, 0);
+				removeBlockByPlayer(world, null, i, j, k);
 			}
 		}
 		else if(dir == 2)
 		{
 			if(!world.isBlockOpaqueCube(i, j, k-1))
 			{
-				this.breakBlock(world, i, j, k, blockID, dir);
-				world.setBlock(i, j, k, 0);
+				removeBlockByPlayer(world, null, i, j, k);
 			}
 		}
 		else if(dir == 3)
 		{
 			if(!world.isBlockOpaqueCube(i+1, j, k))
 			{
-				this.breakBlock(world, i, j, k, blockID, dir);
-				world.setBlock(i, j, k, 0);
+				removeBlockByPlayer(world, null, i, j, k);
 			}
 		}
 	}
