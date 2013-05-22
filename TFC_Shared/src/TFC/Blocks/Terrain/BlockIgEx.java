@@ -22,37 +22,14 @@ import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockIgEx extends BlockCollapsable
+public class BlockIgEx extends BlockStone
 {
 	public BlockIgEx(int i, Material material, int id) {
 		super(i, material, id);
 		this.dropBlock = TFCBlocks.StoneIgExCobble.blockID;
-	}
 
-	/*
-	 * Mapping from metadata value to damage value
-	 */
-	@Override
-	public int damageDropped(int i) {
-		return i;
-	}
-
-	@Override
-	public Icon getIcon(int i, int j) 
-	{
-		return icons[j];
-	}
-
-	public static Icon[] icons = new Icon[4];
-	protected String[] names = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
-
-	@Override
-	public void registerIcons(IconRegister iconRegisterer)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Raw");
-		}
+        names = new String[] {"Rhyolite", "Basalt", "Andesite", "Dacite"};
+        icons = new Icon[names.length];
 	}
 
 	@Override
@@ -63,34 +40,6 @@ public class BlockIgEx extends BlockCollapsable
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), R.nextInt(4), l+13));
 
 		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
-
-
-
-	@Override
-	public int idDropped(int i, Random random, int j)
-	{
-		return TFCItems.LooseRock.itemID;
-	}
-
-	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
-	{
-		if(!world.isRemote)
-		{
-			//super.onBlockDestroyedByExplosion(world, i, j, k, ex);
-			Random random = new Random();
-
-			ItemStack is = null;
-
-			is = TFC_Core.RandomGem(random, 0);
-
-			if(is != null)
-			{
-				EntityItem item = new EntityItem(world, i, j, k, is);
-				world.spawnEntityInWorld(item);
-			}
-		}
 	}
 
 	@Override
@@ -110,12 +59,6 @@ public class BlockIgEx extends BlockCollapsable
 				world.spawnEntityInWorld(item);
 			}
 		}
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-	{
-		DropCarvedStone(world, i, j, k);
 	}
 
 	/**
@@ -144,13 +87,5 @@ public class BlockIgEx extends BlockCollapsable
 			return ItemChisel.handleActivation(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
 		}
 		return false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
-	{
-		for(int i = 0; i < 4; i++)
-			par3List.add(new ItemStack(this, 1, i));
 	}
 }
