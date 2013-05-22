@@ -841,7 +841,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			break;
 		}
 		}		
-		worldObj.playSoundEffect(xCoord,yCoord,zCoord, "metalimpact", 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
+		worldObj.playSoundEffect(xCoord,yCoord,zCoord, TFC_Sounds.METALIMPACT, 1.0F, 0.5F + (worldObj.rand.nextFloat()/2));
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityPartial;
 
 public class BlockCollapsable extends BlockTerra
@@ -208,7 +209,7 @@ public class BlockCollapsable extends BlockTerra
                 world.spawnEntityInWorld(ent);
                 Random R = new Random(i*j+k);
                 if(R.nextInt(100) > 90)
-                    world.playSoundAtEntity(ent, "fallingrocklong", 1.0F, 0.8F + (R.nextFloat()/2));
+                    world.playSoundAtEntity(ent, TFC_Sounds.FALLININGROCKLONG, 1.0F, 0.8F + (R.nextFloat()/2));
                 
                 world.setBlockToAir(i, j, k);
                 
