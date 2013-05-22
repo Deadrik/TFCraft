@@ -42,7 +42,7 @@ import net.minecraftforge.common.IShearable;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
 {
-    int adjacentTreeBlocks[];
+    int adjacentTreeBlocks[][][];
     
     Icon[] icons = new Icon[16];
 	Icon[] iconsOpaque = new Icon[16];
@@ -99,116 +99,106 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     }
 
     @Override
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int l)
+    public void onNeighborBlockChange(World par1World, int xOrig, int yOrig, int zOrig, int l)
     {
         Random R = new Random();
         if (!par1World.isRemote)
         {
-            int var6 = par1World.getBlockMetadata(par2, par3, par4);
+            int var6 = par1World.getBlockMetadata(xOrig, yOrig, zOrig);
 
-            if (true)
+            byte searchRadius = 4;
+            int maxDist = searchRadius + 1;
+            byte searchDistance = 11;
+            int center = searchDistance / 2;
+            adjacentTreeBlocks = null;
+            if (this.adjacentTreeBlocks == null)
             {
-                byte var7 = 4;
-                int var8 = var7 + 1;
-                byte var9 = 32;
-                int var10 = var9 * var9;
-                int var11 = var9 / 2;
-                adjacentTreeBlocks = null;
-                if (this.adjacentTreeBlocks == null)
+                this.adjacentTreeBlocks = new int[searchDistance][searchDistance][searchDistance];
+            }
+
+            if (par1World.checkChunksExist(xOrig - maxDist, yOrig - maxDist, zOrig - maxDist, xOrig + maxDist, yOrig + maxDist, zOrig + maxDist))
+            {
+                for (int xd = -searchRadius; xd <= searchRadius; ++xd)
                 {
-                    this.adjacentTreeBlocks = new int[var9 * var9 * var9];
-                }
-
-                int var12;
-
-                if (par1World.checkChunksExist(par2 - var8, par3 - var8, par4 - var8, par2 + var8, par3 + var8, par4 + var8))
-                {
-                    int var13;
-                    int var14;
-                    int var15;
-
-                    for (var12 = -var7; var12 <= var7; ++var12)
+                	int searchY = searchRadius - Math.abs(xd);
+                    for (int yd = -searchY; yd <= searchY; ++yd)
                     {
-                        for (var13 = -var7; var13 <= var7; ++var13)
+                    	int searchZ = searchY - Math.abs(yd);
+                        for (int zd = -searchZ; zd <= searchZ; ++zd)
                         {
-                            for (var14 = -var7; var14 <= var7; ++var14)
-                            {
-                                var15 = par1World.getBlockId(par2 + var12, par3 + var13, par4 + var14);
+                            int testID = par1World.getBlockId(xOrig + xd, yOrig + yd, zOrig + zd);
 
-                                if (var15 == TFCBlocks.Wood.blockID)
-                                {
-                                    this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = 0;
-                                }
-                                else if (var15 == TFCBlocks.Leaves.blockID && var6 == par1World.getBlockMetadata(par2 + var12, par3 + var13, par4 + var14))
-                                {
-                                    this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -2;
-                                }
-                                else
-                                {
-                                    this.adjacentTreeBlocks[(var12 + var11) * var10 + (var13 + var11) * var9 + var14 + var11] = -1;
-                                }
+                            if (testID == TFCBlocks.Wood.blockID)
+                            {
+                                this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = 0;
+                            }
+                            else if (testID == TFCBlocks.Leaves.blockID && var6 == par1World.getBlockMetadata(xOrig + xd, yOrig + yd, zOrig + zd))
+                            {
+                                this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -2;
+                            }
+                            else
+                            {
+                                this.adjacentTreeBlocks[xd + center][yd + center][zd + center] = -1;
                             }
                         }
                     }
+                }
 
-                    for (var12 = 1; var12 <= 4; ++var12)
+                for (int pass = 1; pass <= 4; ++pass)
+                {
+                    for (int xd = -searchRadius; xd <= searchRadius; ++xd)
                     {
-                        for (var13 = -var7; var13 <= var7; ++var13)
+                    	int searchY = searchRadius - Math.abs(xd);
+                        for (int yd = -searchY; yd <= searchY; ++yd)
                         {
-                            for (var14 = -var7; var14 <= var7; ++var14)
+                        	int searchZ = searchY - Math.abs(yd);
+                            for (int zd = -searchZ; zd <= searchZ; ++zd)
                             {
-                                for (var15 = -var7; var15 <= var7; ++var15)
+                                if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center] == pass - 1)
                                 {
-                                    if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11] == var12 - 1)
+                                    if (this.adjacentTreeBlocks[xd + center - 1][yd + center][zd + center] == -2)
                                     {
-                                        if (this.adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(var13 + var11 - 1) * var10 + (var14 + var11) * var9 + var15 + var11] = var12;
-                                        }
+                                        this.adjacentTreeBlocks[xd + center - 1][yd + center][zd + center] = pass;
+                                    }
 
-                                        if (this.adjacentTreeBlocks[(var13 + var11 + 1) * var10 + (var14 + var11) * var9 + var15 + var11] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(var13 + var11 + 1) * var10 + (var14 + var11) * var9 + var15 + var11] = var12;
-                                        }
+                                    if (this.adjacentTreeBlocks[xd + center + 1][yd + center][zd + center] == -2)
+                                    {
+                                        this.adjacentTreeBlocks[xd + center + 1][yd + center][zd + center] = pass;
+                                    }
 
-                                        if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 - 1) * var9 + var15 + var11] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 - 1) * var9 + var15 + var11] = var12;
-                                        }
+                                    if (this.adjacentTreeBlocks[xd + center][yd + center - 1][zd + center] == -2)
+                                    {
+                                        this.adjacentTreeBlocks[xd + center][yd + center - 1][zd + center] = pass;
+                                    }
 
-                                        if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 + 1) * var9 + var15 + var11] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11 + 1) * var9 + var15 + var11] = var12;
-                                        }
+                                    if (this.adjacentTreeBlocks[xd + center][yd + center + 1][zd + center] == -2)
+                                    {
+                                        this.adjacentTreeBlocks[xd + center][yd + center + 1][zd + center] = pass;
+                                    }
 
-                                        if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + (var15 + var11 - 1)] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + (var15 + var11 - 1)] = var12;
-                                        }
+                                    if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center - 1] == -2)
+                                    {
+                                        this.adjacentTreeBlocks[xd + center][yd + center][zd + center - 1] = pass;
+                                    }
 
-                                        if (this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(var13 + var11) * var10 + (var14 + var11) * var9 + var15 + var11 + 1] = var12;
-                                        }
+                                    if (this.adjacentTreeBlocks[xd + center][yd + center][zd + center + 1] == -2)
+                                    {
+                                        this.adjacentTreeBlocks[xd + center][yd + center][zd + center + 1] = pass;
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
 
-                var12 = this.adjacentTreeBlocks[var11 * var10 + var11 * var9 + var11];
+            int res = this.adjacentTreeBlocks[center][center][center];
 
-                if (var12 >= 0)
+            if (res < 0)
+            {
+                if(par1World.getChunkFromBlockCoords(xOrig, zOrig) != null)
                 {
-                    //par1World.setBlockMetadata(par2, par3, par4, var6 & -9);
-                }
-                else
-                {
-                    if(par1World.getChunkFromBlockCoords(par2, par4) != null)
-                    {
-                        this.destroyLeaves(par1World, par2, par3, par4);
-                    }
+                    this.destroyLeaves(par1World, xOrig, yOrig, zOrig);
                 }
             }
         }

@@ -208,9 +208,10 @@ public class BlockLogNatural extends BlockTerra
 				reachedTop = true;
 			}
 
-			scanLogs(world,i,j+y,k,l,checkArray,6,y,6, stack);
-
 			y++;
+		}
+		while (y >= 0) {
+			scanLogs(world,i,j+y,k,l,checkArray,6,y--,6, stack);
 		}
 
 	}
