@@ -943,25 +943,25 @@ public class TFCItems
     
     
   //Tier 0
-    public static float BismuthEff = 11;
-    public static float TinEff = 10.5f;
-    public static float ZincEff = 10;
+    public static float BismuthEff = 4;
+    public static float TinEff = 3.5f;
+    public static float ZincEff = 3;
     //Tier 1
-    public static float CopperEff = 12;
+    public static float CopperEff = 5;
     //Tier 2
-    public static float BronzeEff = 15;
-    public static float RoseGoldEff = 13;
-    public static float BismuthBronzeEff = 14;
-    public static float BlackBronzeEff = 16;
+    public static float BronzeEff = 8;
+    public static float RoseGoldEff = 6;
+    public static float BismuthBronzeEff = 8;
+    public static float BlackBronzeEff = 8;
     //Tier 3
-    public static float WroughtIronEff = 16;
+    public static float WroughtIronEff = 10;
     //Tier 4
-    public static float SteelEff = 17;
+    public static float SteelEff = 14;
     //Tier 5
-    public static float BlackSteelEff = 18;
+    public static float BlackSteelEff = 16;
     //Tier 6
-    public static float BlueSteelEff = 21;
-    public static float RedSteelEff = 21;
+    public static float BlueSteelEff = 18;
+    public static float RedSteelEff = 18;
     
     
     
