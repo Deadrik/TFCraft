@@ -28,13 +28,11 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 
 	@Override
 	public EnumSize getSize() {
-		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}
 
 	@Override
 	public boolean canStack() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -86,7 +84,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 						return event.result;
 					}
 
-					if (world.getBlockMaterial(i, j, k) == Material.lava && world.getBlockMetadata(i, j, k) == 0)
+					if (world.getBlockId(i, j, k) == Block.lavaStill.blockID && world.getBlockMetadata(i, j, k) == 0)
                     {
                         world.setBlock(i, j, k, 0);
 
@@ -150,7 +148,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 						return par1ItemStack;
 					}
 
-					if (this.handleWaterInHell(world, var5, var7, var9, i, j, k) && !par3EntityPlayer.capabilities.isCreativeMode)
+					if (this.handleLava(world, var5, var7, var9, i, j, k) && !par3EntityPlayer.capabilities.isCreativeMode)
 					{
 						return new ItemStack(TFCItems.BlueSteelBucketEmpty);
 					}
@@ -160,32 +158,16 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 		return par1ItemStack;
 	}
 
-	public boolean handleWaterInHell(World par1World, double par2, double par4, double par6, int par8, int par9, int par10)
+	public boolean handleLava(World par1World, double par2, double par4, double par6, int par8, int par9, int par10)
 	{
-		if (this.isFull <= 0)
-		{
+		if (this.isFull <= 0) {
 			return false;
 		}
-		else if (!par1World.isAirBlock(par8, par9, par10) && par1World.getBlockMaterial(par8, par9, par10).isSolid())
-		{
+		else if (!par1World.isAirBlock(par8, par9, par10) && par1World.getBlockMaterial(par8, par9, par10).isSolid()) {
 			return false;
 		}
-		else
-		{
-			if (par1World.provider.isHellWorld && this.isFull == Block.waterMoving.blockID)
-			{
-				par1World.playSoundEffect(par2 + 0.5D, par4 + 0.5D, par6 + 0.5D, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
-
-				for (int var11 = 0; var11 < 8; ++var11)
-				{
-					par1World.spawnParticle("largesmoke", par8 + Math.random(), par9 + Math.random(), par10 + Math.random(), 0.0D, 0.0D, 0.0D);
-				}
-			}
-			else
-			{
-				par1World.setBlock(par8, par9, par10, this.isFull);
-			}
-
+		else {
+			par1World.setBlock(par8, par9, par10, this.isFull);
 			return true;
 		}
 	}

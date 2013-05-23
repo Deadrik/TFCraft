@@ -112,7 +112,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 						return event.result;
 					}
 
-					if (world.getBlockMaterial(i, j, k) == Material.water && world.getBlockMetadata(i, j, k) == 0)
+					if ((world.getBlockId(i, j, k) == Block.waterStill.blockID || world.getBlockId(i, j, k) == TFCBlocks.finiteWater.blockID) && world.getBlockMetadata(i, j, k) == 0)
                     {
                         world.setBlock(i, j, k, 0);
 
