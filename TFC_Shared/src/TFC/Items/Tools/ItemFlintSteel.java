@@ -13,9 +13,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.TFCTabs;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
-import TFC.Core.TFCTabs;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityPottery;
 

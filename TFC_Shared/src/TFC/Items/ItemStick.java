@@ -1,8 +1,8 @@
 package TFC.Items;
 
 import net.minecraft.creativetab.CreativeTabs;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 
 public class ItemStick extends ItemTerra
 {

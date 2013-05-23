@@ -9,12 +9,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import TFC.Core.TFCTabs;
+import TFC.API.ISize;
+import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
-import TFC.Items.ISize;
 import TFC.Items.ItemTerra;
 
 public class ItemTerraTool extends ItemTool implements ISize

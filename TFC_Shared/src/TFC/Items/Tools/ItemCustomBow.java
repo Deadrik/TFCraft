@@ -11,11 +11,11 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import TFC.Core.TFCTabs;
+import TFC.API.ISize;
+import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Entities.EntityArrowTFC;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
-import TFC.Items.ISize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

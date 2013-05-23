@@ -5,9 +5,9 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Enums.EnumTree;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Enums.EnumTree;
 
 public class WorldGenGrowTrees 
 {

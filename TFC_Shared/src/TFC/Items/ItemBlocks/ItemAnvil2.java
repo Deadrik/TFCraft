@@ -1,7 +1,7 @@
 package TFC.Items.ItemBlocks;
 
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 
 public class ItemAnvil2 extends ItemTerraBlock
 {

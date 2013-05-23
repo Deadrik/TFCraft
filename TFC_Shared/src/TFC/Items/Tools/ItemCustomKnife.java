@@ -5,8 +5,8 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Core;
-import TFC.Enums.EnumSize;
 
 public class ItemCustomKnife extends ItemWeapon
 {

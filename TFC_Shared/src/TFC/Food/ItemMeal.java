@@ -14,11 +14,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
 
 public class ItemMeal extends ItemTerraFood
 {

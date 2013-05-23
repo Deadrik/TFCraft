@@ -3,7 +3,7 @@ package TFC.Items.Tools;
 import java.util.List;
 
 import TFC.*;
-import TFC.Core.TFCTabs;
+import TFC.API.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import cpw.mods.fml.relauncher.Side;

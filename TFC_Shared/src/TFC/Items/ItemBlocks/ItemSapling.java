@@ -1,7 +1,7 @@
 package TFC.Items.ItemBlocks;
 
 import TFC.*;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumWeight;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

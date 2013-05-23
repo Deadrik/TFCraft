@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API;
 
 import TFC.TFCItems;
 import cpw.mods.fml.relauncher.Side;

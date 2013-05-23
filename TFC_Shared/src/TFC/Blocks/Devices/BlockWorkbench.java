@@ -1,9 +1,9 @@
 package TFC.Blocks.Devices;
 
 import TFC.*;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumSize;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Enums.EnumSize;
-import TFC.Items.ISize;
 import TFC.TileEntities.TileEntityWorkbench;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

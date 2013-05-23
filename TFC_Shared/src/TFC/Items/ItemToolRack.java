@@ -1,7 +1,7 @@
 package TFC.Items;
 
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Items.ItemBlocks.ItemTerraBlock;
 
 public class ItemToolRack extends ItemTerraBlock

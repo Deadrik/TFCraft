@@ -22,6 +22,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import TFC.API.ICausesDamage;
+import TFC.API.Enums.EnumDamageType;
 import TFC.Items.ItemCustomArmor;
 
 public class EntityDamageHandler
@@ -70,21 +72,52 @@ public class EntityDamageHandler
 		{
 			//1. Get Random Hit Location
 			int location = entity.getRNG().nextInt(4);
+			
 			//2. Get Armor Rating for armor in hit Location
 			if(armor[location] != null && armor[location].getItem() instanceof ItemCustomArmor)
 			{
 				pierceRating = ((ItemCustomArmor)armor[location].getItem()).ArmorType.getPiercingAR();
 				slashRating = ((ItemCustomArmor)armor[location].getItem()).ArmorType.getSlashingAR();
 				crushRating = ((ItemCustomArmor)armor[location].getItem()).ArmorType.getCrushingAR();
-				//3. Convert the armor rating to % damage reduction
-				float pierceMult = (int) getDamageReduction(pierceRating);
-				float slashMult = (int) getDamageReduction(slashRating);
-				float crushMult = (int) getDamageReduction(crushRating);
-				//4. Reduce incoming damage
 				
+				//3. Convert the armor rating to % damage reduction
+				float pierceMult = getDamageReduction(pierceRating);
+				float slashMult = getDamageReduction(slashRating);
+				float crushMult = getDamageReduction(crushRating);
+				
+				//4. Reduce incoming damage
+				EnumDamageType damageType = null;
+				//4.1 Determine the source of the damage and get the appropriate Damage Type
+				if(source.getSourceOfDamage() instanceof EntityPlayer)
+				{
+					EntityPlayer player = (EntityPlayer)source.getSourceOfDamage();
+					if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ICausesDamage)
+					{
+						damageType = ((ICausesDamage)player.getCurrentEquippedItem().getItem()).GetDamageType();
+					}
+				}
+				else if(source.getSourceOfDamage() instanceof ICausesDamage)
+				{
+					damageType = ((ICausesDamage)source.getSourceOfDamage()).GetDamageType();
+				}
+				//4.2 Reduce the damage based upon the incoming Damage Type
+				if(damageType == EnumDamageType.PIERCING)
+				{
+					damage *= pierceMult;
+				}
+				else if(damageType == EnumDamageType.SLASHING)
+				{
+					damage *= slashMult;
+				}
+				else if(damageType == EnumDamageType.CRUSHING)
+				{
+					damage *= crushMult;
+				}
 			}
 			//5. Apply the damage to the player
+			entity.setEntityHealth(entity.getHealth()-damage);
 			//6. Damage the armor that was hit
+			armor[location].damageItem(damage, entity);
 
 
 		}
@@ -98,7 +131,7 @@ public class EntityDamageHandler
 	 */
 	protected float getDamageReduction(int AR)
 	{
-		return 1f-(1000f / (1000f + AR));
+		return (1000f / (1000f + AR));
 	}
 	
 	@ForgeSubscribe
@@ -244,6 +277,7 @@ public class EntityDamageHandler
                 }
             }
         }
+        event.setCanceled(true);
 	}
 	
 	protected void alertWolves(EntityPlayer player, EntityLiving par1EntityLiving, boolean par2)

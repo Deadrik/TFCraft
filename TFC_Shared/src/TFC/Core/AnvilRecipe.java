@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.item.ItemStack;
 
-import TFC.Enums.CraftingRuleEnum;
+import TFC.API.Enums.CraftingRuleEnum;
 
 public class AnvilRecipe
 {

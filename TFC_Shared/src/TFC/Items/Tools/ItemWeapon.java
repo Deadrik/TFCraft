@@ -14,16 +14,17 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.ICausesDamage;
+import TFC.API.ISize;
+import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumDamageType;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.Helper;
-import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Settings;
-import TFC.Enums.EnumDamageType;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
-import TFC.Items.ISize;
 import TFC.Items.ItemTerra;
 
-public class ItemWeapon extends ItemSword implements ISize
+public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 {
 	public int weaponDamage;
 	public final EnumToolMaterial toolMaterial;
@@ -171,5 +172,11 @@ public class ItemWeapon extends ItemSword implements ISize
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
+	}
+
+	@Override
+	public EnumDamageType GetDamageType() 
+	{
+		return damageType;
 	}
 }

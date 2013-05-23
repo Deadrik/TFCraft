@@ -1,41 +1,17 @@
 package TFC.Entities.Mobs;
 
-import TFC.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import TFC.TFCItems;
+import TFC.API.ICausesDamage;
+import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobDamage;
-import java.util.Calendar;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public class EntityZombieTFC extends EntityZombie
+public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 {
     private int field_82234_d = 0;
 
@@ -120,7 +96,8 @@ public class EntityZombieTFC extends EntityZombie
     }
 
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte par1)
     {
         if (par1 == 16)
@@ -132,4 +109,9 @@ public class EntityZombieTFC extends EntityZombie
             super.handleHealthUpdate(par1);
         }
     }
+	@Override
+	public EnumDamageType GetDamageType() 
+	{
+		return EnumDamageType.SLASHING;
+	}
 }

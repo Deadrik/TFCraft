@@ -10,9 +10,9 @@ import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Enums.EnumSize;
 import TFC.Core.Helper;
 import TFC.Entities.Mobs.EntityCowTFC;
-import TFC.Enums.EnumSize;
 import TFC.Items.ItemTerra;
 
 public class ItemCustomBucket extends ItemTerra

@@ -1,11 +1,11 @@
-package TFC.Enums;
+package TFC.API.Enums;
 
 public enum EnumTFCArmor 
 {
 	CopperPlate			(200, 200, 200, EnumMetalType.COPPER),//Tier 0
 	BismuthBronzePlate	(200, 200, 200, EnumMetalType.BISMUTHBRONZE),//Tier 1
 	BlackBronzePlate	(200, 200, 200, EnumMetalType.BLACKBRONZE),//Tier 1
-	BronzePlate			(200, 200, 200, EnumMetalType.BRONZE),//Tier 1
+	BronzePlate			(500, 500, 500, EnumMetalType.BRONZE),//Tier 1
 	WroughtIronPlate	(200, 200, 200, EnumMetalType.WROUGHTIRON),//Tier 2
 	SteelPlate			(200, 200, 200, EnumMetalType.STEEL),//Tier 3
 	BlackSteelPlate		(200, 200, 200, EnumMetalType.BLACKSTEEL),//Tier 4

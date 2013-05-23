@@ -9,11 +9,11 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Enums.EnumSize;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Enums.EnumSize;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 

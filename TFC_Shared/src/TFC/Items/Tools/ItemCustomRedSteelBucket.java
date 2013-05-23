@@ -1,9 +1,9 @@
 package TFC.Items.Tools;
 
 import TFC.*;
+import TFC.API.Enums.EnumSize;
 import TFC.Core.Helper;
 import TFC.Entities.Mobs.EntityCowTFC;
-import TFC.Enums.EnumSize;
 import TFC.Items.ItemTerra;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
