@@ -3,13 +3,13 @@ package TFC.Items.Tools;
 import java.util.List;
 
 import TFC.*;
+import TFC.API.ISize;
+import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.Helper;
-import TFC.Core.TFCTabs;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
-import TFC.Items.ISize;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityFarmland;
 import cpw.mods.fml.relauncher.Side;

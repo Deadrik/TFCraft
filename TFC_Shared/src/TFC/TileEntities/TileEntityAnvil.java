@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TerraFirmaCraft;
+import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Core.AnvilCraftingManagerTFC;
 import TFC.Core.AnvilRecipe;
 import TFC.Core.AnvilReq;
@@ -21,7 +22,6 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
-import TFC.Enums.CraftingRuleEnum;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
 

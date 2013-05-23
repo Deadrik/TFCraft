@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Containers.ContainerTerraAnvil;
-import TFC.Enums.CraftingRuleEnum;
 import TFC.TileEntities.TileEntityAnvil;
 
 

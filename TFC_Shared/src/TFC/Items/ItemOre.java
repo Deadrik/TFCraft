@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 
 public class ItemOre extends ItemTerra
 {	

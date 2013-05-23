@@ -1,7 +1,7 @@
 package TFC.Items.ItemBlocks;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import TFC.Enums.EnumSize;
+import TFC.API.Enums.EnumSize;
 
 public class ItemPlankBlock extends ItemTerraBlock
 {

@@ -1,7 +1,7 @@
 package TFC.Commands;
 
+import TFC.API.Enums.EnumTree;
 import TFC.Core.TFC_Climate;
-import TFC.Enums.EnumTree;
 import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

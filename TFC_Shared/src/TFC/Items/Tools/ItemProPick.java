@@ -9,9 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.Core.TFCTabs;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Items.ItemTerra;
 
 public class ItemProPick extends ItemTerra

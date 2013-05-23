@@ -12,13 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
-import TFC.Items.ISize;
 import TFC.Items.ItemTerra;
 
 public class ItemTerraBlock extends ItemBlock implements ISize

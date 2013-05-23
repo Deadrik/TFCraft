@@ -9,13 +9,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import TFC.API.ISize;
+import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumTFCArmor;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
-import TFC.Core.TFCTabs;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumTFCArmor;
-import TFC.Enums.EnumWeight;
 
 public class ItemCustomArmor extends ItemArmor implements ISize
 {

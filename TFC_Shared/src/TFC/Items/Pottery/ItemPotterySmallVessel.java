@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 
 public class ItemPotterySmallVessel extends ItemPotteryBase
 {

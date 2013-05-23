@@ -15,13 +15,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Enums.EnumWoodMaterial;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
 import TFC.Core.Vector3f;
-import TFC.Enums.EnumWoodMaterial;
 import TFC.Items.ItemMeltedMetal;
 import TFC.WorldGen.TFCBiome;
 

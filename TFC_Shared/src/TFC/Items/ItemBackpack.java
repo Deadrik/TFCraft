@@ -32,7 +32,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.*;
-import TFC.Enums.EnumSize;
+import TFC.API.Enums.EnumSize;
 
 public class ItemBackpack extends ItemTerra
 {

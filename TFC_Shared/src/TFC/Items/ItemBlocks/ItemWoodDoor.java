@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Items.ItemTerra;
 
 public class ItemWoodDoor extends ItemTerra

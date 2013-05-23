@@ -1,8 +1,8 @@
 package TFC.Containers;
 
 import TFC.*;
-import TFC.Enums.EnumSize;
-import TFC.Items.ISize;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumSize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

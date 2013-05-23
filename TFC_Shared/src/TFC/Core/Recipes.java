@@ -12,7 +12,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Enums.CraftingRuleEnum;
+import TFC.API.Enums.CraftingRuleEnum;
 
 public class Recipes 
 {

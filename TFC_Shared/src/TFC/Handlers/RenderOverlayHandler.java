@@ -3,6 +3,7 @@ package TFC.Handlers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -10,6 +11,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Food.FoodStatsTFC;
@@ -45,7 +47,9 @@ public class RenderOverlayHandler
 		{
 			//Draw Health
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
+			
+			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
+			Minecraft.getMinecraft().renderEngine.bindTexture("/bioxx/icons.png");
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = playerclient.getMaxHealth();
 			float percentHealth = Minecraft.getMinecraft().thePlayer.getHealth()/maxHealth;
@@ -92,20 +96,24 @@ public class RenderOverlayHandler
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 			}
 		}
+		Minecraft.getMinecraft().renderEngine.resetBoundTexture();
 	}
 
 	@ForgeSubscribe
 	public void renderText(RenderGameOverlayEvent.Text event)
 	{
-		if(Minecraft.getMinecraft().gameSettings.showDebugInfo)
+		if(Minecraft.getMinecraft().gameSettings.showDebugInfo || TFC_Settings.enableDebugMode)
 		{
-			int xCoord = (int)Minecraft.getMinecraft().thePlayer.posX;
-			int yCoord = (int)Minecraft.getMinecraft().thePlayer.posY;
-			int zCoord = (int)Minecraft.getMinecraft().thePlayer.posZ;
+			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			int xCoord = (int)player.posX;
+			int yCoord = (int)player.posY;
+			int zCoord = (int)player.posZ;
 			event.left.add(String.format("rain: %.0f, temp: %.2f, evt: %.3f", new Object[] {
 					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
+			
+			event.left.add("Health: " + player.getHealth());
 		}
 	}
 

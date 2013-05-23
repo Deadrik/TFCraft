@@ -9,9 +9,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.Player.TFC_PlayerServer;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
 
 public class ItemPotteryJug extends ItemPotteryBase
 {

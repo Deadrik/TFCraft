@@ -1,9 +1,9 @@
 package TFC.Containers;
 
 import TFC.*;
-import TFC.Enums.EnumSize;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumSize;
 import TFC.Food.ItemTerraFood;
-import TFC.Items.ISize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

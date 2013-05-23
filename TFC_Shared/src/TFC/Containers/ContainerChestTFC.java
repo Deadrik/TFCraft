@@ -2,7 +2,7 @@ package TFC.Containers;
 
 import java.util.ArrayList;
 import TFC.*;
-import TFC.Enums.EnumSize;
+import TFC.API.Enums.EnumSize;
 import TFC.TileEntities.TileEntityChestTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

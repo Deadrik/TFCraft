@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import TFC.Enums.EnumSize;
-import TFC.Enums.EnumWeight;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 
 public class ItemMeltedMetal extends ItemTerra
 {

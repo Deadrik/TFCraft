@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.world.World;
-import TFC.Enums.EnumSize;
+import TFC.API.Enums.EnumSize;
 
 public class ItemSpindle extends ItemTerraTool
 {

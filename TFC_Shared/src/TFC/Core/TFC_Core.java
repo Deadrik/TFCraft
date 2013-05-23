@@ -6,7 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 import TFC.*;
-import TFC.Enums.EnumWoodMaterial;
+import TFC.API.Enums.EnumWoodMaterial;
 import TFC.TileEntities.TileEntityPartial;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
