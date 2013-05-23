@@ -14,6 +14,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.BlockTypes;
 import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
@@ -26,7 +27,7 @@ public class BlockIgIn extends BlockStone
 		super(i, material, id);
 		this.dropBlock = TFCBlocks.StoneIgInCobble.blockID;
 
-        names = new String[] {"Granite", "Diorite", "Gabbro"};
+        names = BlockTypes.STONE_IGIN;
         icons = new Icon[names.length];
 	}
 
@@ -59,27 +60,5 @@ public class BlockIgIn extends BlockStone
 
 			}
 		}
-	}
-
-	/**
-	 * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
-	 */
-	 @Override
-	 public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
-	{
-		 boolean hasHammer = false;
-		 for(int i = 0; i < 9;i++)
-		 {
-			 if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-				 hasHammer = true;
-		 }
-		 if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
-		 {
-			 int id = world.getBlockId(x, y, z);
-			 byte meta = (byte) world.getBlockMetadata(x, y, z);
-
-			 return ItemChisel.handleActivation(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
-		 }
-		 return false;
 	}
 }

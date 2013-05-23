@@ -53,7 +53,7 @@ public class BlockSedBrick extends BlockSedSmooth
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < names.length; i++)
 		{
 			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Brick");
 		}
