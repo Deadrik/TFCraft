@@ -20,48 +20,14 @@ import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockIgIn extends BlockCollapsable
+public class BlockIgIn extends BlockStone
 {
 	public BlockIgIn(int i, Material material,int id) {
 		super(i, material, id);
 		this.dropBlock = TFCBlocks.StoneIgInCobble.blockID;
-	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	/**
-	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-	 */
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-	{
-		for(int i = 0; i < 3; i++)
-			par3List.add(new ItemStack(par1, 1, i));
-	}
-
-	/*
-	 * Mapping from metadata value to damage value
-	 */
-	@Override
-	public int damageDropped(int i) {
-		return i;
-	}
-
-	@Override
-	public Icon getIcon(int i, int j) 
-	{
-		return icons[j];
-	}
-
-	public static Icon[] icons = new Icon[3];
-	protected String[] names = {"Granite", "Diorite", "Gabbro"};
-
-	@Override
-	public void registerIcons(IconRegister iconRegisterer)
-	{
-		for(int i = 0; i < 3; i++)
-		{
-			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Raw");
-		}
+        names = new String[] {"Granite", "Diorite", "Gabbro"};
+        icons = new Icon[names.length];
 	}
 
 	@Override
@@ -71,32 +37,6 @@ public class BlockIgIn extends BlockCollapsable
 		//if(R.nextBoolean())
 			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(4), l));
 		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
-
-	@Override
-	public int idDropped(int i, Random random, int j)
-	{
-		return TFCItems.LooseRock.itemID;
-	}
-
-	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
-	{
-		if(!world.isRemote)
-		{
-			//super.onBlockDestroyedByExplosion(world, i, j, k, ex);
-			Random random = new Random();
-
-			ItemStack is = null;
-
-			is = TFC_Core.RandomGem(random, 0);
-
-			if(is != null)
-			{
-				EntityItem item = new EntityItem(world, i, j, k, is);
-				world.spawnEntityInWorld(item);
-			}
-		}
 	}
 
 	@Override
@@ -119,12 +59,6 @@ public class BlockIgIn extends BlockCollapsable
 
 			}
 		}
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-	{
-		DropCarvedStone(world, i, j, k);
 	}
 
 	/**

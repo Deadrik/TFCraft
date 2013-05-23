@@ -21,51 +21,16 @@ import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMM extends BlockCollapsable
+public class BlockMM extends BlockStone
 {
     public static boolean fallInstantly = false;
 
     public BlockMM(int i, Material material,int id) {
         super(i, material, id);
         this.dropBlock = TFCBlocks.StoneMMCobble.blockID;
-    }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-    	for(int i = 0; i < 6; i++)
-    		par3List.add(new ItemStack(par1, 1, i));
-    }
-
-    /*
-     * Mapping from metadata value to damage value
-     */
-    @Override
-    public int damageDropped(int i) 
-    {
-        return i;
-    }
-
-    @Override
-	public Icon getIcon(int i, int j) 
-	{
-		return icons[j];
-	}
-
-    public static Icon[] icons = new Icon[6];
-	protected String[] names = {"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-	
-	@Override
-	public void registerIcons(IconRegister iconRegisterer)
-    {
-		for(int i = 0; i < 6; i++)
-		{
-			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Raw");
-		}
+        names = new String[] {"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+        icons = new Icon[names.length];
     }
 
     @Override
@@ -78,31 +43,6 @@ public class BlockMM extends BlockCollapsable
         super.harvestBlock(world, entityplayer, i, j, k, l);
     }
 
-    @Override
-    public int idDropped(int i, Random random, int j)
-    {
-        return TFCItems.LooseRock.itemID;
-    }
-
-    @Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
-    {
-        if(!world.isRemote)
-        {
-            //super.onBlockDestroyedByExplosion(world, i, j, k, ex);
-            Random random = new Random();
-
-            ItemStack is = null;
-
-            is = TFC_Core.RandomGem(random, 0);
-
-            if(is != null)
-            {
-                EntityItem item = new EntityItem(world, i, j, k, is);
-                world.spawnEntityInWorld(item);
-            }
-        }
-    }
     @Override
 	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
     {
@@ -130,12 +70,6 @@ public class BlockMM extends BlockCollapsable
         //Minecraft mc = ModLoader.getMinecraftInstance();
 
         //mc.ingameGUI.addChatMessage("Meta="+(new StringBuilder()).append(getBlockName()).append(":").append(metadata).toString());  
-    }
-    
-    @Override
-    public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        DropCarvedStone(world, i, j, k);
     }
     
     @Override
