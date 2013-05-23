@@ -61,12 +61,13 @@ public class EntityDamageHandler
 		}
 	}
 
-	protected int applyArmorCalculations(EntityLiving entity, DamageSource source, int damage)
+	protected int applyArmorCalculations(EntityLiving entity, DamageSource source, int originalDamage)
 	{
 		ItemStack[] armor = entity.getLastActiveItems();
 		int pierceRating = 0;
 		int slashRating = 0;
 		int crushRating = 0;
+		int damage = originalDamage;
 		
 		if (!source.isUnblockable() && armor != null)
 		{
@@ -117,7 +118,7 @@ public class EntityDamageHandler
 			//5. Apply the damage to the player
 			entity.setEntityHealth(entity.getHealth()-damage);
 			//6. Damage the armor that was hit
-			armor[location].damageItem(damage, entity);
+			armor[location].damageItem(originalDamage, entity);
 
 
 		}
