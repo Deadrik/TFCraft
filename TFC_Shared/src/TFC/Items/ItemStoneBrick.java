@@ -2,6 +2,10 @@ package TFC.Items;
 
 import java.util.List;
 
+import TFC.API.Constant.Global;
+
+import com.google.common.collect.ObjectArrays;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -11,16 +15,15 @@ import net.minecraft.world.World;
 
 public class ItemStoneBrick extends ItemTerra
 {
+	Icon[] icons;
 	public ItemStoneBrick(int id) 
 	{
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = new String[]{"Granite", "Diorite", "Gabbro", 
-				"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-				"Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
-				"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+		this.MetaNames = Global.STONE_ALL;
+		this.icons = new Icon[MetaNames.length];
 	}
 	public ItemStoneBrick(int id, String tex) 
 	{
@@ -104,18 +107,17 @@ public class ItemStoneBrick extends ItemTerra
 		return icons[meta];
 	}
 	
-	Icon[] icons = new Icon[23];
 	@Override
 	public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < 23; i++)
+		for(int i = 0; i < MetaNames.length; i++)
 			icons[i] = registerer.registerIcon("rocks/"+MetaNames[i]+" Brick");
     }
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 23; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}

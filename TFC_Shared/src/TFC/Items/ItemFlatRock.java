@@ -1,5 +1,9 @@
 package TFC.Items;
 
+import TFC.API.Constant.Global;
+
+import com.google.common.collect.ObjectArrays;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,11 +20,8 @@ public class ItemFlatRock extends ItemTerra
         this.hasSubtypes = true;
         this.setMaxDamage(0);
         this.maxStackSize = 25;
-        MetaNames = new String[]{"Granite", "Diorite", "Gabbro", 
-                "Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-                "Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
-                "Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-        icons = new Icon[MetaNames.length];
+		this.MetaNames = Global.STONE_ALL;
+        this.icons = new Icon[MetaNames.length];
         this.setCreativeTab(null);
     }
     

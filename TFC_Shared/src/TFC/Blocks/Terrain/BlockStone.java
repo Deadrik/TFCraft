@@ -5,6 +5,8 @@ import java.util.Random;
 
 import TFC.TFCItems;
 import TFC.Core.TFC_Core;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemHammer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,6 +14,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
@@ -92,5 +95,24 @@ public class BlockStone extends BlockCollapsable
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
     {
         DropCarvedStone(world, i, j, k);
+    }
+    
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
+    {
+        boolean hasHammer = false;
+        for(int i = 0; i < 9; i++)
+        {
+            if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+                hasHammer = true;
+        }
+        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
+        {
+            int id = world.getBlockId(x, y, z);
+            byte meta = (byte) world.getBlockMetadata(x, y, z);
+
+            return ItemChisel.handleActivation(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
+        }
+        return false;
     }
 }
