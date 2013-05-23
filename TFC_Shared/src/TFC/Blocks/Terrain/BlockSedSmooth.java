@@ -3,7 +3,7 @@ package TFC.Blocks.Terrain;
 import java.util.List;
 import java.util.Random;
 import TFC.TerraFirmaCraft;
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
@@ -53,7 +53,7 @@ public class BlockSedSmooth extends BlockSmooth
 		super(i, Material.rock);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 
-        names = BlockTypes.STONE_SED;
+        names = Global.STONE_SED;
 		icons = new Icon[names.length];
 	}
 }

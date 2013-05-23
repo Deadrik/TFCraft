@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Sounds;
@@ -28,7 +28,7 @@ public class BlockSedCobble extends BlockCobble
 	public BlockSedCobble(int i, Material material) {
 		super(i, material);
 
-        names = BlockTypes.STONE_SED;
+        names = Global.STONE_SED;
 		icons = new Icon[names.length];
 
 		fallInstantly = false;

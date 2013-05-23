@@ -13,7 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 
@@ -26,7 +26,7 @@ public class ItemLooseRock extends ItemTerra
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = ObjectArrays.concat(ObjectArrays.concat(BlockTypes.STONE_IGEX, BlockTypes.STONE_IGIN, String.class), ObjectArrays.concat(BlockTypes.STONE_MM, BlockTypes.STONE_SED, String.class), String.class);
+		this.MetaNames = Global.STONE_ALL;
 		icons = new Icon[MetaNames.length];
 	}
 

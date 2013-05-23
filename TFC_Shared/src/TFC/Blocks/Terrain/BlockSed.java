@@ -15,7 +15,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemChisel;
@@ -30,7 +30,7 @@ public class BlockSed extends BlockStone
         super(i, material, id);
         this.dropBlock = TFCBlocks.StoneSedCobble.blockID;
 
-        names = BlockTypes.STONE_SED;
+        names = Global.STONE_SED;
         icons = new Icon[names.length];
     }
 

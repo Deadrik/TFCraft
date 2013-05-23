@@ -14,7 +14,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
@@ -27,7 +27,7 @@ public class BlockIgIn extends BlockStone
 		super(i, material, id);
 		this.dropBlock = TFCBlocks.StoneIgInCobble.blockID;
 
-        names = BlockTypes.STONE_IGIN;
+        names = Global.STONE_IGIN;
         icons = new Icon[names.length];
 	}
 

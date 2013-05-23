@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Sounds;
@@ -27,7 +27,7 @@ public class BlockIgInCobble extends BlockCobble
 	public BlockIgInCobble(int i, Material material) {
 		super(i, material);
 
-        names = BlockTypes.STONE_IGIN;
+        names = Global.STONE_IGIN;
 		icons = new Icon[names.length];
 	}
 }

@@ -1,6 +1,6 @@
 package TFC.Items;
 
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 
 import com.google.common.collect.ObjectArrays;
 
@@ -20,8 +20,8 @@ public class ItemFlatRock extends ItemTerra
         this.hasSubtypes = true;
         this.setMaxDamage(0);
         this.maxStackSize = 25;
-        MetaNames = ObjectArrays.concat(ObjectArrays.concat(BlockTypes.STONE_IGEX, BlockTypes.STONE_IGIN, String.class), ObjectArrays.concat(BlockTypes.STONE_MM, BlockTypes.STONE_SED, String.class), String.class);
-        icons = new Icon[MetaNames.length];
+		this.MetaNames = Global.STONE_ALL;
+        this.icons = new Icon[MetaNames.length];
         this.setCreativeTab(null);
     }
     

@@ -2,7 +2,7 @@ package TFC.Items;
 
 import java.util.List;
 
-import TFC.API.BlockTypes;
+import TFC.API.Constant.Global;
 
 import com.google.common.collect.ObjectArrays;
 
@@ -22,7 +22,7 @@ public class ItemStoneBrick extends ItemTerra
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = ObjectArrays.concat(ObjectArrays.concat(BlockTypes.STONE_IGEX, BlockTypes.STONE_IGIN, String.class), ObjectArrays.concat(BlockTypes.STONE_MM, BlockTypes.STONE_SED, String.class), String.class);
+		this.MetaNames = Global.STONE_ALL;
 		this.icons = new Icon[MetaNames.length];
 	}
 	public ItemStoneBrick(int id, String tex) 
