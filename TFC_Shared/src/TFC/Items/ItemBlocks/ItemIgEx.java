@@ -1,5 +1,6 @@
 package TFC.Items.ItemBlocks;
 
+import TFC.API.BlockTypes;
 import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemIgEx extends ItemTerraBlock
@@ -7,7 +8,7 @@ public class ItemIgEx extends ItemTerraBlock
 	public ItemIgEx(int i) 
 	{
 		super(i);
-		MetaNames = new String[]{"Rhyolite", "Basalt", "Andesite", "Dacite"};
+		MetaNames = BlockTypes.STONE_IGEX;
 	}
 	
 	@Override

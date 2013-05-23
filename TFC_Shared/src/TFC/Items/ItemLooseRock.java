@@ -2,6 +2,8 @@ package TFC.Items;
 
 import java.util.List;
 
+import com.google.common.collect.ObjectArrays;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -11,6 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.BlockTypes;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 
@@ -23,10 +26,7 @@ public class ItemLooseRock extends ItemTerra
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = new String[] {"Granite", "Diorite", "Gabbro", 
-				"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", 
-				"Chalk", "Rhyolite", "Basalt", "Andesite", "Dacite", 
-				"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
+		this.MetaNames = ObjectArrays.concat(ObjectArrays.concat(BlockTypes.STONE_IGEX, BlockTypes.STONE_IGIN, String.class), ObjectArrays.concat(BlockTypes.STONE_MM, BlockTypes.STONE_SED, String.class), String.class);
 		icons = new Icon[MetaNames.length];
 	}
 
@@ -77,7 +77,7 @@ public class ItemLooseRock extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 23; i++) {
+		for(int i = 0; i < MetaNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
