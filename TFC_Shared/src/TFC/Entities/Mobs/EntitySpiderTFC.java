@@ -1,46 +1,19 @@
 package TFC.Entities.Mobs;
 
-import TFC.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.world.World;
+import TFC.API.ICausesDamage;
+import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobDamage;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public class EntitySpiderTFC extends EntitySpider
+public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 {
     public EntitySpiderTFC(World par1World)
     {
         super(par1World);
         this.texture = "/mob/spider.png";
-        this.setSize(1.4F, 0.9F);
+        this.setSize(0.5F, 0.3F);
         this.moveSpeed = 0.8F;
     }
 
@@ -53,9 +26,15 @@ public class EntitySpiderTFC extends EntitySpider
     /**
      * Returns the amount of damage a mob should deal.
      */
-    public int getAttackStrength(Entity par1Entity)
+    @Override
+	public int getAttackStrength(Entity par1Entity)
     {
         return TFC_MobDamage.SpiderDamage;
     }
+    
+    @Override
+	public EnumDamageType GetDamageType() {
+		return EnumDamageType.PIERCING;
+	}
 
 }

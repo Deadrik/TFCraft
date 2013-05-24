@@ -9,11 +9,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumChatFormatting;
+import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -33,8 +34,11 @@ public class ItemTerraTool extends ItemTool implements ISize
 		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 		ItemTerra.addSizeInformation(this, arraylist);
 		
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: "+is.getItemDamage());
+		if(is.getItem() instanceof ICausesDamage)
+		{
+			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
+		}
+		
     }
 	
 	@Override

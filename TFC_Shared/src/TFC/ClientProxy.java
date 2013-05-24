@@ -591,10 +591,9 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public int getArmorRenderID(int i)
+	public int getArmorRenderID(String name)
 	{
-		String[] Names = {"bismuth", "bismuthbronze", "blackbronze", "blacksteel", "bluesteel", "bronze", "copper", "wroughtiron", "redsteel", "rosegold", "steel", "tin", "zinc"};
-		return ModLoader.addArmor(Names[i]);
+		return RenderingRegistry.addNewArmourRendererPrefix(name);
 	}
 
 	@Override

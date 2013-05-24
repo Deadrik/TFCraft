@@ -317,7 +317,7 @@ public class CommonProxy implements IGuiHandler
 		GameRegistry.onItemCrafted(entityplayer, itemstack, iinventory);  
 	}
 
-	public int getArmorRenderID(int i)
+	public int getArmorRenderID(String name)
 	{
 		return 0;
 	}

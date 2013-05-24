@@ -1,41 +1,28 @@
 package TFC.Entities;
 
-import TFC.*;
 import java.util.Iterator;
 import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import TFC.API.ICausesDamage;
+import TFC.API.Enums.EnumDamageType;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public class EntityArrowTFC extends EntityArrow
+public class EntityArrowTFC extends EntityArrow implements ICausesDamage
 {
     private int xTile = -1;
     private int yTile = -1;
@@ -82,11 +69,11 @@ public class EntityArrowTFC extends EntityArrow
             this.canBePickedUp = 1;
         }
 
-        this.posY = par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight() - 0.10000000149011612D;
+        this.posY = par2EntityLiving.posY + par2EntityLiving.getEyeHeight() - 0.10000000149011612D;
         double var6 = par3EntityLiving.posX - par2EntityLiving.posX;
-        double var8 = par3EntityLiving.posY + (double)par3EntityLiving.getEyeHeight() - 0.699999988079071D - this.posY;
+        double var8 = par3EntityLiving.posY + par3EntityLiving.getEyeHeight() - 0.699999988079071D - this.posY;
         double var10 = par3EntityLiving.posZ - par2EntityLiving.posZ;
-        double var12 = (double)MathHelper.sqrt_double(var6 * var6 + var10 * var10);
+        double var12 = MathHelper.sqrt_double(var6 * var6 + var10 * var10);
 
         if (var12 >= 1.0E-7D)
         {
@@ -97,7 +84,7 @@ public class EntityArrowTFC extends EntityArrow
             this.setLocationAndAngles(par2EntityLiving.posX + var16, this.posY, par2EntityLiving.posZ + var18, var14, var15);
             this.yOffset = 0.0F;
             float var20 = (float)var12 * 0.2F;
-            this.setThrowableHeading(var6, var8 + (double)var20, var10, par4, par5);
+            this.setThrowableHeading(var6, var8 + var20, var10, par4, par5);
         }
     }
 
@@ -112,19 +99,20 @@ public class EntityArrowTFC extends EntityArrow
         }
 
         this.setSize(0.5F, 0.5F);
-        this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
-        this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+        this.setLocationAndAngles(par2EntityLiving.posX, par2EntityLiving.posY + par2EntityLiving.getEyeHeight(), par2EntityLiving.posZ, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
+        this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
         this.posY -= 0.10000000149011612D;
-        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+        this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
         this.setPosition(this.posX, this.posY, this.posZ);
         this.yOffset = 0.0F;
-        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+        this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI);
+        this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI);
+        this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, par3 * 1.5F, 1.0F);
     }
 
-    protected void entityInit()
+    @Override
+	protected void entityInit()
     {
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
     }
@@ -132,28 +120,30 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
      */
-    public void setThrowableHeading(double var1, double var3, double var5, float var7, float var8)
+    @Override
+	public void setThrowableHeading(double var1, double var3, double var5, float var7, float var8)
     {
         float var9 = MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5);
-        var1 /= (double)var9;
-        var3 /= (double)var9;
-        var5 /= (double)var9;
-        var1 += this.rand.nextGaussian() * 0.007499999832361937D * (double)var8;
-        var3 += this.rand.nextGaussian() * 0.007499999832361937D * (double)var8;
-        var5 += this.rand.nextGaussian() * 0.007499999832361937D * (double)var8;
-        var1 *= (double)var7;
-        var3 *= (double)var7;
-        var5 *= (double)var7;
+        var1 /= var9;
+        var3 /= var9;
+        var5 /= var9;
+        var1 += this.rand.nextGaussian() * 0.007499999832361937D * var8;
+        var3 += this.rand.nextGaussian() * 0.007499999832361937D * var8;
+        var5 += this.rand.nextGaussian() * 0.007499999832361937D * var8;
+        var1 *= var7;
+        var3 *= var7;
+        var5 *= var7;
         this.motionX = var1;
         this.motionY = var3;
         this.motionZ = var5;
         float var10 = MathHelper.sqrt_double(var1 * var1 + var5 * var5);
         this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(var1, var5) * 180.0D / Math.PI);
-        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(var3, (double)var10) * 180.0D / Math.PI);
+        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(var3, var10) * 180.0D / Math.PI);
         this.ticksInGround = 0;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
 
     /**
      * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
@@ -165,7 +155,8 @@ public class EntityArrowTFC extends EntityArrow
         this.setRotation(par7, par8);
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
 
     /**
      * Sets the velocity to the args. Args: x, y, z
@@ -180,7 +171,7 @@ public class EntityArrowTFC extends EntityArrow
         {
             float var7 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
             this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, (double)var7) * 180.0D / Math.PI);
+            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, var7) * 180.0D / Math.PI);
             this.prevRotationPitch = this.rotationPitch;
             this.prevRotationYaw = this.rotationYaw;
             this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -191,7 +182,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
         super.onUpdate();
 
@@ -199,7 +191,7 @@ public class EntityArrowTFC extends EntityArrow
         {
             float var1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var1) * 180.0D / Math.PI);
+            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, var1) * 180.0D / Math.PI);
         }
 
         int var16 = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
@@ -237,9 +229,9 @@ public class EntityArrowTFC extends EntityArrow
             else
             {
                 this.inGround = false;
-                this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+                this.motionX *= this.rand.nextFloat() * 0.2F;
+                this.motionY *= this.rand.nextFloat() * 0.2F;
+                this.motionZ *= this.rand.nextFloat() * 0.2F;
                 this.ticksInGround = 0;
                 this.ticksInAir = 0;
             }
@@ -271,7 +263,7 @@ public class EntityArrowTFC extends EntityArrow
                 if (var10.canBeCollidedWith() && (var10 != this.shootingEntity || this.ticksInAir >= 5))
                 {
                     var11 = 0.3F;
-                    AxisAlignedBB var12 = var10.boundingBox.expand((double)var11, (double)var11, (double)var11);
+                    AxisAlignedBB var12 = var10.boundingBox.expand(var11, var11, var11);
                     MovingObjectPosition var13 = var12.calculateIntercept(var17, var3);
 
                     if (var13 != null)
@@ -299,7 +291,7 @@ public class EntityArrowTFC extends EntityArrow
                 if (var4.entityHit != null)
                 {
                     var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    int var24 = MathHelper.ceiling_double_int((double)var20 * this.damage);
+                    int var24 = MathHelper.ceiling_double_int(var20 * this.damage);
 
                     if (this.getIsCritical())
                     {
@@ -334,7 +326,7 @@ public class EntityArrowTFC extends EntityArrow
 
                                 if (var25 > 0.0F)
                                 {
-                                    var4.entityHit.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)var25, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)var25);
+                                    var4.entityHit.addVelocity(this.motionX * this.knockbackStrength * 0.6000000238418579D / var25, 0.1D, this.motionZ * this.knockbackStrength * 0.6000000238418579D / var25);
                                 }
                             }
                         }
@@ -359,13 +351,13 @@ public class EntityArrowTFC extends EntityArrow
                     this.zTile = var4.blockZ;
                     this.inTile = this.worldObj.getBlockId(this.xTile, this.yTile, this.zTile);
                     this.inData = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-                    this.motionX = (double)((float)(var4.hitVec.xCoord - this.posX));
-                    this.motionY = (double)((float)(var4.hitVec.yCoord - this.posY));
-                    this.motionZ = (double)((float)(var4.hitVec.zCoord - this.posZ));
+                    this.motionX = ((float)(var4.hitVec.xCoord - this.posX));
+                    this.motionY = ((float)(var4.hitVec.yCoord - this.posY));
+                    this.motionZ = ((float)(var4.hitVec.zCoord - this.posZ));
                     var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    this.posX -= this.motionX / (double)var20 * 0.05000000074505806D;
-                    this.posY -= this.motionY / (double)var20 * 0.05000000074505806D;
-                    this.posZ -= this.motionZ / (double)var20 * 0.05000000074505806D;
+                    this.posX -= this.motionX / var20 * 0.05000000074505806D;
+                    this.posY -= this.motionY / var20 * 0.05000000074505806D;
+                    this.posZ -= this.motionZ / var20 * 0.05000000074505806D;
                     this.worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
                     this.inGround = true;
                     this.arrowShake = 7;
@@ -377,7 +369,7 @@ public class EntityArrowTFC extends EntityArrow
             {
                 for (int var21 = 0; var21 < 4; ++var21)
                 {
-                    this.worldObj.spawnParticle("crit", this.posX + this.motionX * (double)var21 / 4.0D, this.posY + this.motionY * (double)var21 / 4.0D, this.posZ + this.motionZ * (double)var21 / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+                    this.worldObj.spawnParticle("crit", this.posX + this.motionX * var21 / 4.0D, this.posY + this.motionY * var21 / 4.0D, this.posZ + this.motionZ * var21 / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
                 }
             }
 
@@ -387,7 +379,7 @@ public class EntityArrowTFC extends EntityArrow
             var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-            for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+            for (this.rotationPitch = (float)(Math.atan2(this.motionY, var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
             {
                 ;
             }
@@ -417,16 +409,16 @@ public class EntityArrowTFC extends EntityArrow
                 for (int var26 = 0; var26 < 4; ++var26)
                 {
                     float var27 = 0.25F;
-                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)var27, this.posY - this.motionY * (double)var27, this.posZ - this.motionZ * (double)var27, this.motionX, this.motionY, this.motionZ);
+                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * var27, this.posY - this.motionY * var27, this.posZ - this.motionZ * var27, this.motionX, this.motionY, this.motionZ);
                 }
 
                 var23 = 0.8F;
             }
 
-            this.motionX *= (double)var23;
-            this.motionY *= (double)var23;
-            this.motionZ *= (double)var23;
-            this.motionY -= (double)var11;
+            this.motionX *= var23;
+            this.motionY *= var23;
+            this.motionZ *= var23;
+            this.motionY -= var11;
             this.setPosition(this.posX, this.posY, this.posZ);
             this.doBlockCollisions();
         }
@@ -435,7 +427,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    @Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
         par1NBTTagCompound.setShort("xTile", (short)this.xTile);
         par1NBTTagCompound.setShort("yTile", (short)this.yTile);
@@ -451,7 +444,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    @Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         this.xTile = par1NBTTagCompound.getShort("xTile");
         this.yTile = par1NBTTagCompound.getShort("yTile");
@@ -479,7 +473,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * Called by a player entity when they collide with an entity
      */
-    public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
+    @Override
+	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
     {
         if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
         {
@@ -503,23 +498,27 @@ public class EntityArrowTFC extends EntityArrow
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
+    @Override
+	protected boolean canTriggerWalking()
     {
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public float getShadowSize()
     {
         return 0.0F;
     }
 
-    public void setDamage(double par1)
+    @Override
+	public void setDamage(double par1)
     {
         this.damage = par1;
     }
 
-    public double getDamage()
+    @Override
+	public double getDamage()
     {
         return this.damage;
     }
@@ -527,7 +526,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * Sets the amount of knockback the arrow applies when it hits a mob.
      */
-    public void setKnockbackStrength(int par1)
+    @Override
+	public void setKnockbackStrength(int par1)
     {
         this.knockbackStrength = par1;
     }
@@ -535,7 +535,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * If returns false, the item will not inflict any damage against entities.
      */
-    public boolean canAttackWithItem()
+    @Override
+	public boolean canAttackWithItem()
     {
         return false;
     }
@@ -543,7 +544,8 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
-    public void setIsCritical(boolean par1)
+    @Override
+	public void setIsCritical(boolean par1)
     {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
@@ -560,9 +562,15 @@ public class EntityArrowTFC extends EntityArrow
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
-    public boolean getIsCritical()
+    @Override
+	public boolean getIsCritical()
     {
         byte var1 = this.dataWatcher.getWatchableObjectByte(16);
         return (var1 & 1) != 0;
     }
+
+	@Override
+	public EnumDamageType GetDamageType() {
+		return EnumDamageType.PIERCING;
+	}
 }

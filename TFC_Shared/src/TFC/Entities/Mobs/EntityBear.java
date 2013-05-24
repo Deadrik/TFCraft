@@ -2,49 +2,35 @@ package TFC.Entities.Mobs;
 
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+import TFC.API.ICausesDamage;
+import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobDamage;
-import TFC.Core.TFC_Time;
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.EntityTameableTFC;
 import TFC.Entities.AI.EntityAIHurtByTargetTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
 import TFC.Entities.AI.EntityAITargetNonTamedTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public class EntityBear extends EntityTameableTFC
+public class EntityBear extends EntityTameableTFC implements ICausesDamage
 {
 	/**
 	 * This flag is set when the bear is looking at a player with interest, i.e. with tilted head. This happens when
@@ -291,7 +277,7 @@ public class EntityBear extends EntityTameableTFC
 		if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
 			int i = rand.nextInt(3);
 			if (mateSizeMod == 0){
-				this.mateSizeMod = (float) (((rand.nextInt (5) - 2) / 10f) + 1F);
+				this.mateSizeMod = ((rand.nextInt (5) - 2) / 10f) + 1F;
 			}
 			for (int x = 0; x<i;x++){
 				giveBirth(new EntityBear(this.worldObj,this,this.mateSizeMod));
@@ -387,5 +373,10 @@ public class EntityBear extends EntityTameableTFC
 		}
 		EntityBear entitybear = (EntityBear) par1EntityAnimal;
 		return isInLove () && entitybear.isInLove ();
+	}
+
+	@Override
+	public EnumDamageType GetDamageType() {
+		return EnumDamageType.SLASHING;
 	}
 }

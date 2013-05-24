@@ -5,6 +5,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.TFC_Core;
 
@@ -14,8 +15,8 @@ public class ItemCustomKnife extends ItemWeapon
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = 50 + e.getDamageVsEntity();
-		
+		this.weaponDamage = 75 + e.getDamageVsEntity();
+		this.damageType = EnumDamageType.PIERCING;
 	}
 
 	public String getTextureFile() {

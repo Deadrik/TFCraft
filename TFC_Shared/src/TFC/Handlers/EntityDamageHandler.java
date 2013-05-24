@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
@@ -24,7 +25,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
-import TFC.Items.ItemCustomArmor;
+import TFC.Items.ItemTFCArmor;
 
 public class EntityDamageHandler
 {
@@ -75,11 +76,11 @@ public class EntityDamageHandler
 			int location = entity.getRNG().nextInt(4);
 			
 			//2. Get Armor Rating for armor in hit Location
-			if(armor[location] != null && armor[location].getItem() instanceof ItemCustomArmor)
+			if(armor[location] != null && armor[location].getItem() instanceof ItemTFCArmor)
 			{
-				pierceRating = ((ItemCustomArmor)armor[location].getItem()).ArmorType.getPiercingAR();
-				slashRating = ((ItemCustomArmor)armor[location].getItem()).ArmorType.getSlashingAR();
-				crushRating = ((ItemCustomArmor)armor[location].getItem()).ArmorType.getCrushingAR();
+				pierceRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getPiercingAR();
+				slashRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getSlashingAR();
+				crushRating = ((ItemTFCArmor)armor[location].getItem()).ArmorType.getCrushingAR();
 				
 				//3. Convert the armor rating to % damage reduction
 				float pierceMult = getDamageReduction(pierceRating);
@@ -118,12 +119,27 @@ public class EntityDamageHandler
 			//5. Apply the damage to the player
 			entity.setEntityHealth(entity.getHealth()-damage);
 			//6. Damage the armor that was hit
-			armor[location].damageItem(originalDamage, entity);
+			armor[location].damageItem(processArmorDamage(armor[location], originalDamage), entity);
 
 
 		}
 
 		return 0;
+	}
+	
+	private int processArmorDamage(ItemStack armor, int baseDamage)
+	{
+		if(armor.hasTagCompound())
+		{
+			NBTTagCompound nbt = armor.getTagCompound();
+			if(nbt.hasKey("armorDuraBuff"))
+			{
+				float duraBuff = nbt.getByte("armorDuraBuff")/100f;
+				return baseDamage - (int)(baseDamage * duraBuff);
+			}
+		}
+		
+		return baseDamage;
 	}
 
 	/**

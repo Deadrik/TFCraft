@@ -27,11 +27,15 @@ public class TFC_Settings
 	
 	public static int dayLength;
 	public static int yearLength;
+	
 	public static int maxProtectionMonths;
 	public static int protectionGain;
 	//////////////////Features////////////////////
 	public static int RockLayer2Height = 110;
 	public static int RockLayer3Height = 55;
+	
+	public static int HealthGainRate = 20;
+	public static int HealthGainCap = 3000;
 	
 	public static byte[] cropNutrientAColor = {(byte) 237, (byte) 28, (byte) 36, (byte) 200};
 	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
@@ -87,6 +91,10 @@ public class TFC_Settings
 		pitKilnBurnTime = getIntFor(config,"General","pitKilnBurnTime", 10, "This is the number of hours that the pit kiln should burn before being completed.");
 		maxProtectionMonths = getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
 		protectionGain = getIntFor(config,"Protection","protectionGain", 8, "The number of hours of protection gained in the 3x3 chunk area for spending 1 hour in that chunk.");
+		
+		HealthGainRate = getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experiance level. Set to 0 to turn off.");
+		HealthGainCap = getIntFor(config,"Player","HealthGainCap", 3000, "The maximum achievable health pool total.");
+		
 		/**Always end with this*/
 		if (config != null) {
 			config.save();

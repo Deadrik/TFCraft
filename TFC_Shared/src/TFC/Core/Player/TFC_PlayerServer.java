@@ -227,7 +227,7 @@ public class TFC_PlayerServer extends ServerPlayerBase
 	@Override
 	public int getMaxHealth()
     {
-        return 1000+(this.player.experienceLevel*25);
+		return Math.min(1000+(this.player.experienceLevel * TFC_Settings.HealthGainRate), TFC_Settings.HealthGainCap);
     }
 	
 	public static int getStartingMaxHealth()

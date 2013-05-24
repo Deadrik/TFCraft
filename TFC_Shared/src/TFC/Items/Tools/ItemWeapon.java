@@ -11,6 +11,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
@@ -21,14 +22,13 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Helper;
-import TFC.Core.TFC_Settings;
 import TFC.Items.ItemTerra;
 
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 {
 	public int weaponDamage;
 	public final EnumToolMaterial toolMaterial;
-	public final EnumDamageType damageType = EnumDamageType.PIERCING;
+	public EnumDamageType damageType = EnumDamageType.SLASHING;
 
 	public ItemWeapon(int par1, EnumToolMaterial par2EnumToolMaterial)
 	{
@@ -44,8 +44,10 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
     {
 		ItemTerra.addSizeInformation(this, arraylist);
 		
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: "+is.getItemDamage());
+		if(is.getItem() instanceof ICausesDamage)
+		{
+			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
+		}
     }
 	
 	@Override

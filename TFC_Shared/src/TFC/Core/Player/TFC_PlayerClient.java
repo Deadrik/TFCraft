@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.src.PlayerAPI;
 import net.minecraft.src.PlayerBase;
 import net.minecraft.util.FoodStats;
+import TFC.Core.TFC_Settings;
 import TFC.Food.FoodStatsTFC;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
@@ -74,7 +75,7 @@ public class TFC_PlayerClient extends PlayerBase
 	@Override
 	public int getMaxHealth()
 	{
-		return 1000+(this.player.experienceLevel*25);
+		return Math.min(1000+(this.player.experienceLevel * TFC_Settings.HealthGainRate), TFC_Settings.HealthGainCap);
 	}
 
 	public static int getStartingMaxHealth()

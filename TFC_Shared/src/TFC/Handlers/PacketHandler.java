@@ -25,6 +25,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Containers.ContainerKnapping;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -80,6 +81,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeLong(world.getSeed());
 				dos.writeLong(TFC_Time.dayLength);
 				dos.writeInt(TFC_Time.daysInYear);
+				dos.writeFloat(playerserver.getFoodStatsTFC().foodLevel);
+				dos.writeFloat(playerserver.getFoodStatsTFC().waterLevel);
+				dos.writeInt(TFC_Settings.HealthGainRate);
+				dos.writeInt(TFC_Settings.HealthGainCap);
 			} 
 			catch (IOException e)
 			{
@@ -205,6 +210,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						TFC_Time.daysInYear = dis.readInt();
 						playerClient.getFoodStatsTFC().foodLevel = dis.readFloat();
 						playerClient.getFoodStatsTFC().waterLevel = dis.readFloat();
+						TFC_Settings.HealthGainRate = dis.readInt();
+						TFC_Settings.HealthGainCap = dis.readInt();
 
 					} catch (IOException e) 
 					{

@@ -7,10 +7,22 @@ public enum EnumDamageType
 	SLASHING(1), 
 	CRUSHING(2);
 
-	public int MetalID;
+	public int DamageID;
 	
 	private EnumDamageType(int id)
 	{
-		MetalID = id;
+		DamageID = id;
+	}
+	
+	@Override
+	public String toString()
+	{
+		switch(this)
+		{
+		case PIERCING: return "Piercing";
+		case SLASHING: return "Slashing";
+		case CRUSHING: return "Crushing";
+		default: return "Error: Bad Damage Type";
+		}
 	}
 }
