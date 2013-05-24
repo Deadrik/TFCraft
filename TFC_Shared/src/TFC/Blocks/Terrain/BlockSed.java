@@ -23,7 +23,6 @@ import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-
 public class BlockSed extends BlockStone
 {
     public BlockSed(int i, Material material, int id) {
@@ -32,34 +31,7 @@ public class BlockSed extends BlockStone
 
         names = Global.STONE_SED;
         icons = new Icon[names.length];
-    }
-
-    @Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {			
-        Random R = new Random();
-        //if(R.nextBoolean())
-            dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(4), l+3));
-
-        super.harvestBlock(world, entityplayer, i, j, k, l);
-    }
-
-    @Override
-	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
-    {
-        if(!world.isRemote)
-        {
-            Random random = new Random();
-            ItemStack is = null;
-
-            is = TFC_Core.RandomGem(random,1);
-
-            if(is != null)
-            {
-                EntityItem item = new EntityItem(world, i, j, k, is);
-                world.spawnEntityInWorld(item);
-            }
-
-        }
+        looseStart = Global.STONE_SED_START;
+        gemChance = 1;
     }
 }

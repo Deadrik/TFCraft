@@ -29,36 +29,7 @@ public class BlockIgIn extends BlockStone
 
         names = Global.STONE_IGIN;
         icons = new Icon[names.length];
-	}
-
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{	
-		Random R = new Random();
-		//if(R.nextBoolean())
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(4), l));
-		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
-	{
-		if(!world.isRemote)
-		{
-			Random random = new Random();
-			if(true)
-			{
-				ItemStack is = null;
-
-				is = TFC_Core.RandomGem(random,2);
-
-				if(is != null)
-				{
-					EntityItem item = new EntityItem(world, i, j, k, is);
-					world.spawnEntityInWorld(item);
-				}
-
-			}
-		}
+        looseStart = Global.STONE_IGIN_START;
+        gemChance = 2;
 	}
 }

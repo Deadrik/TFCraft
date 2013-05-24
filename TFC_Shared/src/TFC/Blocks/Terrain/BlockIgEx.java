@@ -31,33 +31,7 @@ public class BlockIgEx extends BlockStone
 
         names = Global.STONE_IGEX;
         icons = new Icon[names.length];
-	}
-
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{	
-		Random R = new Random();
-		//if(R.nextBoolean())
-			dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), R.nextInt(4), l+13));
-
-		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
-	{
-		if(!world.isRemote)
-		{
-			Random random = new Random();
-			ItemStack is = null;
-
-			is = TFC_Core.RandomGem(random, 0);
-
-			if(is != null)
-			{
-				EntityItem item = new EntityItem(world, i, j, k, is);
-				world.spawnEntityInWorld(item);
-			}
-		}
+        looseStart = Global.STONE_IGEX_START;
+        gemChance = 0;
 	}
 }

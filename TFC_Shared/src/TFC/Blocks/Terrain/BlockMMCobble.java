@@ -34,10 +34,4 @@ public class BlockMMCobble extends BlockCobble
         names = Global.STONE_MM;
     	icons = new Icon[names.length];
     }
-
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{	
-		super.harvestBlock(world, entityplayer, i, j, k, l);
-	}
 }

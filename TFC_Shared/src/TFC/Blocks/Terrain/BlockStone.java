@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import TFC.TFCItems;
+import TFC.API.Constant.Global;
 import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
@@ -28,7 +29,8 @@ public class BlockStone extends BlockCollapsable
     
 	protected String[] names;
     public Icon[] icons;
-	
+    protected int looseStart = 0;
+    protected int gemChance = 0;
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -115,4 +117,31 @@ public class BlockStone extends BlockCollapsable
         }
         return false;
     }
+    
+	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{	
+		Random R = new Random();
+		dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.LooseRock, R.nextInt(4), l+looseStart));
+
+		super.harvestBlock(world, entityplayer, i, j, k, l);
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l)
+	{
+		if(!world.isRemote)
+		{
+			Random random = new Random();
+			ItemStack is = null;
+
+			is = TFC_Core.RandomGem(random, gemChance);
+
+			if(is != null)
+			{
+				EntityItem item = new EntityItem(world, i, j, k, is);
+				world.spawnEntityInWorld(item);
+			}
+		}
+	}
 }
