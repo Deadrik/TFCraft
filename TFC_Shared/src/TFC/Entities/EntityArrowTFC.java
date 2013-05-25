@@ -19,8 +19,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityArrowTFC extends EntityArrow implements ICausesDamage
 {
@@ -40,7 +38,6 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
     /** The owner of this arrow. */
     private int ticksInGround;
     private int ticksInAir = 0;
-    private double damage = 65.0D;
 
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
@@ -48,12 +45,12 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
     public EntityArrowTFC(World par1World)
     {
         super(par1World);
-        this.setSize(0.5F, 0.5F);
+        this.setDamage(65.0);
     }
 
     public EntityArrowTFC(World par1World, double par2, double par4, double par6)
     {
-        super(par1World);
+        this(par1World);
         this.setSize(0.5F, 0.5F);
         this.setPosition(par2, par4, par6);
         this.yOffset = 0.0F;
@@ -61,7 +58,7 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
 
     public EntityArrowTFC(World par1World, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving, float par4, float par5)
     {
-        super(par1World);
+        this(par1World);
         this.shootingEntity = par2EntityLiving;
 
         if (par2EntityLiving instanceof EntityPlayer)
@@ -90,7 +87,7 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
 
     public EntityArrowTFC(World par1World, EntityLiving par2EntityLiving, float par3)
     {
-        super(par1World);
+        this(par1World);
         this.shootingEntity = par2EntityLiving;
 
         if (par2EntityLiving instanceof EntityPlayer)
@@ -111,73 +108,6 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, par3 * 1.5F, 1.0F);
     }
 
-    @Override
-	protected void entityInit()
-    {
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-    }
-
-    /**
-     * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
-     */
-    @Override
-	public void setThrowableHeading(double var1, double var3, double var5, float var7, float var8)
-    {
-        float var9 = MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5);
-        var1 /= var9;
-        var3 /= var9;
-        var5 /= var9;
-        var1 += this.rand.nextGaussian() * 0.007499999832361937D * var8;
-        var3 += this.rand.nextGaussian() * 0.007499999832361937D * var8;
-        var5 += this.rand.nextGaussian() * 0.007499999832361937D * var8;
-        var1 *= var7;
-        var3 *= var7;
-        var5 *= var7;
-        this.motionX = var1;
-        this.motionY = var3;
-        this.motionZ = var5;
-        float var10 = MathHelper.sqrt_double(var1 * var1 + var5 * var5);
-        this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(var1, var5) * 180.0D / Math.PI);
-        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(var3, var10) * 180.0D / Math.PI);
-        this.ticksInGround = 0;
-    }
-
-    @Override
-	@SideOnly(Side.CLIENT)
-
-    /**
-     * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-     * posY, posZ, yaw, pitch
-     */
-    public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
-    {
-        this.setPosition(par1, par3, par5);
-        this.setRotation(par7, par8);
-    }
-
-    @Override
-	@SideOnly(Side.CLIENT)
-
-    /**
-     * Sets the velocity to the args. Args: x, y, z
-     */
-    public void setVelocity(double par1, double par3, double par5)
-    {
-        this.motionX = par1;
-        this.motionY = par3;
-        this.motionZ = par5;
-
-        if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
-        {
-            float var7 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-            this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, var7) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch;
-            this.prevRotationYaw = this.rotationYaw;
-            this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-            this.ticksInGround = 0;
-        }
-    }
 
     /**
      * Called to update the entity's position/logic.
@@ -291,7 +221,7 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
                 if (var4.entityHit != null)
                 {
                     var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    int var24 = MathHelper.ceiling_double_int(var20 * this.damage);
+                    int var24 = MathHelper.ceiling_double_int(var20 * this.getDamage());
 
                     if (this.getIsCritical())
                     {
@@ -428,46 +358,18 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     @Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
     {
-        par1NBTTagCompound.setShort("xTile", (short)this.xTile);
-        par1NBTTagCompound.setShort("yTile", (short)this.yTile);
-        par1NBTTagCompound.setShort("zTile", (short)this.zTile);
-        par1NBTTagCompound.setByte("inTile", (byte)this.inTile);
-        par1NBTTagCompound.setByte("inData", (byte)this.inData);
-        par1NBTTagCompound.setByte("shake", (byte)this.arrowShake);
-        par1NBTTagCompound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
-        par1NBTTagCompound.setByte("pickup", (byte)this.canBePickedUp);
-        par1NBTTagCompound.setDouble("damage", this.damage);
+    	super.writeEntityToNBT(nbt);
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
     {
-        this.xTile = par1NBTTagCompound.getShort("xTile");
-        this.yTile = par1NBTTagCompound.getShort("yTile");
-        this.zTile = par1NBTTagCompound.getShort("zTile");
-        this.inTile = par1NBTTagCompound.getByte("inTile") & 255;
-        this.inData = par1NBTTagCompound.getByte("inData") & 255;
-        this.arrowShake = par1NBTTagCompound.getByte("shake") & 255;
-        this.inGround = par1NBTTagCompound.getByte("inGround") == 1;
-
-        if (par1NBTTagCompound.hasKey("damage"))
-        {
-            this.damage = par1NBTTagCompound.getDouble("damage");
-        }
-
-        if (par1NBTTagCompound.hasKey("pickup"))
-        {
-            this.canBePickedUp = par1NBTTagCompound.getByte("pickup");
-        }
-        else if (par1NBTTagCompound.hasKey("player"))
-        {
-            this.canBePickedUp = par1NBTTagCompound.getBoolean("player") ? 1 : 0;
-        }
+    	super.readEntityFromNBT(nbt);
     }
 
     /**
@@ -492,81 +394,6 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
                 this.setDead();
             }
         }
-    }
-
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    @Override
-	protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-
-    @Override
-	@SideOnly(Side.CLIENT)
-    public float getShadowSize()
-    {
-        return 0.0F;
-    }
-
-    @Override
-	public void setDamage(double par1)
-    {
-        this.damage = par1;
-    }
-
-    @Override
-	public double getDamage()
-    {
-        return this.damage;
-    }
-
-    /**
-     * Sets the amount of knockback the arrow applies when it hits a mob.
-     */
-    @Override
-	public void setKnockbackStrength(int par1)
-    {
-        this.knockbackStrength = par1;
-    }
-
-    /**
-     * If returns false, the item will not inflict any damage against entities.
-     */
-    @Override
-	public boolean canAttackWithItem()
-    {
-        return false;
-    }
-
-    /**
-     * Whether the arrow has a stream of critical hit particles flying behind it.
-     */
-    @Override
-	public void setIsCritical(boolean par1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
-        if (par1)
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -2)));
-        }
-    }
-
-    /**
-     * Whether the arrow has a stream of critical hit particles flying behind it.
-     */
-    @Override
-	public boolean getIsCritical()
-    {
-        byte var1 = this.dataWatcher.getWatchableObjectByte(16);
-        return (var1 & 1) != 0;
     }
 
 	@Override

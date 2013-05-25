@@ -56,7 +56,7 @@ public class BlockIgInBrick extends BlockIgInSmooth
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < names.length; i++)
 		{
 			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Brick");
 		}
