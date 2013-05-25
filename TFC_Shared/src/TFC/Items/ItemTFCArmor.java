@@ -95,6 +95,20 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		arraylist.add(EnumChatFormatting.ITALIC + "Crush: " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
 
 	}
+	
+	@Override
+	public int getItemMaxDamageFromStack(ItemStack stack)
+    {
+		if(stack.hasTagCompound())
+		{
+			NBTTagCompound nbt = stack.getTagCompound();
+			if(nbt.hasKey("armorDuraBuff"))
+			{
+				return super.getItemMaxDamageFromStack(stack) + nbt.getShort("armorDuraBuff");
+			}
+		}
+        return super.getItemMaxDamageFromStack(stack);
+    }
 
 	@Override
 	public EnumWeight getWeight() {

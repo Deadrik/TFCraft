@@ -132,10 +132,10 @@ public class EntityDamageHandler
 		if(armor.hasTagCompound())
 		{
 			NBTTagCompound nbt = armor.getTagCompound();
-			if(nbt.hasKey("armorDuraBuff"))
+			if(nbt.hasKey("armorReductionBuff"))
 			{
-				float duraBuff = nbt.getByte("armorDuraBuff")/100f;
-				return baseDamage - (int)(baseDamage * duraBuff);
+				float reductBuff = nbt.getByte("armorReductionBuff")/100f;
+				return baseDamage - (int)(baseDamage * reductBuff);
 			}
 		}
 		
