@@ -12,6 +12,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.CraftingRuleEnum;
 
 public class Recipes 
@@ -320,37 +321,6 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(Item.bed,1),new Object[]{"PPP","QQQ",Character.valueOf('P'),new ItemStack(TFCItems.WoolCloth,1),Character.valueOf('Q'),
 			new ItemStack(TFCItems.SinglePlank,1,32767)});
 		
-		for(int j = 0; j < 3; j++)
-		{
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgInCobble,1,j), 
-					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneIgInCobble,1,j));
-		}
-
-		for(int j = 3; j < 13; j++)
-		{
-			
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedCobble,1,j-3), 
-					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneSedCobble,1,j-3));
-		}
-
-		for(int j = 13; j < 17; j++)
-		{
-			
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExCobble,1,j-13), 
-					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneIgExCobble,1,j-13));
-		}
-
-		for(int j = 17; j < 23; j++)
-		{
-			
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMCobble,1,j-17), 
-					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j),new ItemStack(TFCBlocks.StoneMMCobble,1,j-17));
-		}
-		
 		ModLoader.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP",
 			Character.valueOf('P'), TFCBlocks.StoneIgEx, Character.valueOf('W'), Item.stick});
 		ModLoader.addRecipe(new ItemStack(TFCItems.Quern, 1), new Object[] { "  W", "PPP", 
@@ -365,66 +335,74 @@ public class Recipes
 		ModLoader.addRecipe(new ItemStack(TFCItems.FlintSteel, 1), new Object[] { "W ", " P", 
 			Character.valueOf('P'), Item.flint, Character.valueOf('W'), TFCItems.SteelIngot});
 		
-		//Walls
-		for(int j = 0; j < 3; j++)
+		// Walls & cobble blocks
+		for(int j = 0; j < Global.STONE_IGIN.length; j++)
 		{
+			// cobble <-> cobble block
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgInCobble,1,j), 
+					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_IGIN_START)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j + Global.STONE_IGIN_START),new ItemStack(TFCBlocks.StoneIgInCobble,1,j));
+
+			// walls
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleIgIn, 4, j), 
-					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j)});
-		}
-
-		for(int j = 3; j < 13; j++)
-		{
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleSed, 4, j-3), 
-					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j)});
-		}
-
-		for(int j = 13; j < 17; j++)
-		{
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleIgEx, 4, j-13), 
-					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j)});
-		}
-
-		for(int j = 17; j < 23; j++)
-		{
-			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleMM, 4, j-17), 
-					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j)});
-		}
-		
-		for(int j = 0; j < 3; j++)
-		{
+					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_IGIN_START)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallRawIgIn, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneIgIn,1,j)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallBrickIgIn, 3, j), 
-					new Object[] {"BMB", "MBM", Character.valueOf('B'), new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
+					new Object[] {"BMB", "MBM", Character.valueOf('B'), new ItemStack(TFCItems.StoneBrick,1,j + Global.STONE_IGIN_START),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallSmoothIgIn, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneIgInSmooth,1,j)});
 		}
-		for(int j = 0; j < 10; j++)
+		for(int j = 0; j < Global.STONE_SED.length; j++)
 		{
+			// cobble <-> cobble block
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedCobble,1,j), 
+					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_SED_START)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j + Global.STONE_SED_START),new ItemStack(TFCBlocks.StoneSedCobble,1,j));
+			
+			// walls
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleSed, 4, j), 
+					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_SED_START)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallRawSed, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneSed,1,j)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallBrickSed, 3, j), 
-					new Object[] {"BMB", "MBM", Character.valueOf('B'), new ItemStack(TFCItems.StoneBrick,1,j+3),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
+					new Object[] {"BMB", "MBM", Character.valueOf('B'), new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_SED_START),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallSmoothSed, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneSedSmooth,1,j)});
 		}
 
-		for(int j = 0; j < 4; j++)
+		for(int j = 0; j < Global.STONE_IGEX.length; j++)
 		{
+			// cobble <-> cobble block
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExCobble,1,j), 
+					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_IGEX_START)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j + Global.STONE_IGEX_START),new ItemStack(TFCBlocks.StoneIgExCobble,1,j));
+			
+			//walls
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleIgEx, 4, j), 
+					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_IGEX_START)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallRawIgEx, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneIgEx,1,j)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallBrickIgEx, 3, j), 
-					new Object[] {"BMB", "MBM", Character.valueOf('B'),new ItemStack(TFCItems.StoneBrick,1,j+13),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
+					new Object[] {"BMB", "MBM", Character.valueOf('B'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_IGEX_START),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallSmoothIgEx, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneIgExSmooth,1,j)});
 		}
 
-		for(int j = 0; j < 5; j++)
+		for(int j = 0; j < Global.STONE_MM.length; j++)
 		{
+			// cobble <-> cobble block
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMCobble,1,j), 
+					new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_MM_START)});
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.LooseRock,4,j + Global.STONE_MM_START),new ItemStack(TFCBlocks.StoneMMCobble,1,j));
+			
+			//walls
+			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallCobbleMM, 4, j), 
+					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCItems.LooseRock,1,j + Global.STONE_MM_START)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallRawMM, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneMM,1,j)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallBrickMM, 3, j), 
-					new Object[] {"BMB", "MBM", Character.valueOf('B'),new ItemStack(TFCItems.StoneBrick,1,j+17),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
+					new Object[] {"BMB", "MBM", Character.valueOf('B'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_MM_START),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallSmoothMM, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneMMSmooth,1,j)});
 		}
