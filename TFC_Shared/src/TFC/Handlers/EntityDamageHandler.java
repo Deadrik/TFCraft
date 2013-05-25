@@ -63,7 +63,7 @@ public class EntityDamageHandler
 		{
 			event.ammount *= 30;
 		}
-		else if(event.source.damageType == "player" || event.source.damageType == "mob")
+		else if(event.source.damageType == "player" || event.source.damageType == "mob" || event.source.damageType == "arrow")
 		{
 			applyArmorCalculations(entity, event.source, event.ammount);
 			event.ammount = 0;
@@ -96,7 +96,7 @@ public class EntityDamageHandler
 				float crushMult = getDamageReduction(crushRating);
 				
 				//4. Reduce incoming damage
-				EnumDamageType damageType = null;
+				EnumDamageType damageType = EnumDamageType.GENERIC;
 				//4.1 Determine the source of the damage and get the appropriate Damage Type
 				if(source.getSourceOfDamage() instanceof EntityPlayer)
 				{
@@ -123,12 +123,12 @@ public class EntityDamageHandler
 				{
 					damage *= crushMult;
 				}
+				
+				//5. Damage the armor that was hit
+				armor[location].damageItem(processArmorDamage(armor[location], originalDamage), entity);
 			}
-			//5. Apply the damage to the player
+			//6. Apply the damage to the player
 			entity.setEntityHealth(entity.getHealth()-damage);
-			//6. Damage the armor that was hit
-			armor[location].damageItem(processArmorDamage(armor[location], originalDamage), entity);
-
 
 		}
 

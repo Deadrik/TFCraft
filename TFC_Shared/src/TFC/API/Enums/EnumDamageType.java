@@ -3,6 +3,7 @@ package TFC.API.Enums;
 
 public enum EnumDamageType 
 {
+	GENERIC(-1), 
 	PIERCING(0), 
 	SLASHING(1), 
 	CRUSHING(2);

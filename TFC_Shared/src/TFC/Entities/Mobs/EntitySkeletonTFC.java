@@ -346,28 +346,28 @@ public class EntitySkeletonTFC extends EntitySkeleton
     @Override
     public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving,float par2)
     {
-    	EntityArrowTFC var2 = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
+    	EntityArrowTFC arrow = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
         int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
-        var2.setDamage(100 * 2.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
+        arrow.setDamage(arrow.getDamage() * 1.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
 
         
         if (var3 > 0)
         {
-            var2.setDamage(var2.getDamage() + var3 * 0.5D + 0.5D);
+            arrow.setDamage(arrow.getDamage() + var3 * 0.5D + 0.5D);
         }
 
         if (var4 > 0)
         {
-            var2.setKnockbackStrength(var4);
+            arrow.setKnockbackStrength(var4);
         }
 
         if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0 || this.getSkeletonType() == 1)
         {
-            var2.setFire(100);
+            arrow.setFire(100);
         }
 
         this.worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-        this.worldObj.spawnEntityInWorld(var2);
+        this.worldObj.spawnEntityInWorld(arrow);
     }
 }
