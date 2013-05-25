@@ -51,6 +51,14 @@ public class EntityDamageHandler
 		{
 			event.ammount = 100;
 		}
+		else if(event.source == DamageSource.starve)
+		{
+			event.ammount *= 10;
+		}
+		else if(event.source == DamageSource.inWall)
+		{
+			event.ammount = 100;
+		}
 		else if(event.source.isExplosion())
 		{
 			event.ammount *= 30;
