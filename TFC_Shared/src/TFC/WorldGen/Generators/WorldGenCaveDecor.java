@@ -46,19 +46,19 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								{
 								case 0:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929 + 16777216L; 
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 2105858 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-2, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 3158787 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
@@ -69,13 +69,13 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								case 1:
 								{
 
-									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158851 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
@@ -86,13 +86,13 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								case 2:
 								{
 
-									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4211779 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
@@ -102,19 +102,19 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 3:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 2101505 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 4203010 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-2, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-2, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).extraData = 5255683 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-2, z)).TypeID = (short) world.getBlockId(x, y+1, z);
@@ -124,13 +124,13 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 4:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 3158785 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 5255683 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
@@ -140,13 +140,13 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 5:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1057026 + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y+1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y+1, z);
 									}
-									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID))
+									if(world.setBlock(x, y-1, z, TFCBlocks.stoneStalac.blockID) && world.getBlockTileEntity(x, y-1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).extraData = 3158531L + 16777216L;
 										((TileEntityPartial)world.getBlockTileEntity(x, y-1, z)).TypeID = (short) world.getBlockId(x, y+1, z);
@@ -171,20 +171,20 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								{
 								case 0:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1057026; 
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
 									}
-									if(world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y+1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 3158531;
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
 									}
-									if(world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y+2, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4207363;
 										((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
@@ -194,19 +194,19 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 1:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052930; 
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
 									}
-									if(world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y+1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 3158274;
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
 									}
-									if(world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y+2, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 4407811;
 										((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
@@ -216,19 +216,19 @@ public class WorldGenCaveDecor implements IWorldGenerator
 								}
 								case 2:
 								{
-									if(world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).extraData = 1052929; 
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).TypeID = (short) world.getBlockId(x, y-1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
 									}
-									if(world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y+1, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y+1, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).extraData = 2105858;
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).TypeID = (short) world.getBlockId(x, y-1, z);
 										((TileEntityPartial)world.getBlockTileEntity(x, y+1, z)).MetaID =  (byte) world.getBlockMetadata(x, y-1, z);
 									}
-									if(world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID))
+									if(world.setBlock(x, y+2, z, TFCBlocks.stoneSlabs.blockID) && world.getBlockTileEntity(x, y+2, z) != null)
 									{
 										((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).extraData = 3552003;
 										((TileEntityPartial)world.getBlockTileEntity(x, y+2, z)).TypeID = (short) world.getBlockId(x, y-1, z);
