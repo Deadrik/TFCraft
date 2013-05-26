@@ -2,6 +2,7 @@ package TFC.Handlers;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
@@ -81,7 +83,7 @@ public class EntityDamageHandler
 		if (!source.isUnblockable() && armor != null)
 		{
 			//1. Get Random Hit Location
-			int location = entity.getRNG().nextInt(4);
+			int location = getRandomSlot(entity.getRNG());
 			
 			//2. Get Armor Rating for armor in hit Location
 			if(armor[location] != null && armor[location].getItem() instanceof ItemTFCArmor)
@@ -127,12 +129,39 @@ public class EntityDamageHandler
 				//5. Damage the armor that was hit
 				armor[location].damageItem(processArmorDamage(armor[location], originalDamage), entity);
 			}
+			else if(armor[location] == null || (armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor)))
+			{
+				//a. If the attack hits an unprotected head, it does 75% more damage
+				//b. If the attack hits unprotected feet, it applies a slow to the player
+				if(location == 0)
+				{
+					damage *= 1.75f;
+				}
+				else if(location == 3)
+				{
+					entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 600, 1));
+				}
+			}
 			//6. Apply the damage to the player
 			entity.setEntityHealth(entity.getHealth()-damage);
 
 		}
 
 		return 0;
+	}
+	
+	private int getRandomSlot(Random rand)
+	{
+		int chance = rand.nextInt(100);
+		
+		if(chance < 10)
+			return 0;//Helm
+		else if(chance < 20)
+			return 3;//Feet
+		else if(chance < 80)
+			return 1;//Chest
+		else
+			return 2;//Legs
 	}
 	
 	private int processArmorDamage(ItemStack armor, int baseDamage)
