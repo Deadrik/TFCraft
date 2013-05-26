@@ -1,5 +1,6 @@
 package TFC.Items.Tools;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -87,7 +88,7 @@ public class ItemCustomBucket extends ItemTerra
                         return event.result;
                     }
 
-                    if (world.getBlockMaterial(i, j, k) == Material.water && world.getBlockMetadata(i, j, k) <=2)
+                    if ((world.getBlockId(i, j, k) == Block.waterStill.blockID || world.getBlockId(i, j, k) == TFCBlocks.finiteWater.blockID) && world.getBlockMetadata(i, j, k) <=2)
                     {
                         world.setBlock(i, j, k, 0);
 
