@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.boss.EntityDragonPart;
@@ -191,17 +192,18 @@ public class EntityDamageHandler
 	@ForgeSubscribe
 	public void onAttackEntity(AttackEntityEvent event)
 	{
-		EntityLiving par1Entity = event.entityLiving;
-		ItemStack stack = par1Entity.getCurrentItemOrArmor(0);
+		EntityLiving attacker = event.entityLiving;
+		Entity target = event.target;
+		ItemStack stack = attacker.getCurrentItemOrArmor(0);
         if (stack != null && stack.getItem().onLeftClickEntity(stack, event.entityPlayer, event.target))
         {
             return;
         }
-        if (par1Entity.canAttackWithItem())
+        if (target.canAttackWithItem())
         {
-            if (!event.entity.func_85031_j(event.entityPlayer))
+            if (!target.func_85031_j(target))
             {
-                int i = event.entityPlayer.inventory.getDamageVsEntity(par1Entity);
+                int i = event.entityPlayer.inventory.getDamageVsEntity(target);
 
                 if (event.entityPlayer.isPotionActive(Potion.damageBoost))
                 {
@@ -216,10 +218,10 @@ public class EntityDamageHandler
                 int j = 0;
                 int k = 0;
 
-                if (par1Entity instanceof EntityLiving)
+                if (target instanceof EntityLiving)
                 {
-                    k = EnchantmentHelper.getEnchantmentModifierLiving(event.entityPlayer, par1Entity);
-                    j += EnchantmentHelper.getKnockbackModifier(event.entityPlayer, par1Entity);
+                    k = EnchantmentHelper.getEnchantmentModifierLiving(event.entityPlayer, (EntityLiving) target);
+                    j += EnchantmentHelper.getKnockbackModifier(event.entityPlayer, (EntityLiving) target);
                 }
 
                 if (event.entityPlayer.isSprinting())
@@ -232,7 +234,7 @@ public class EntityDamageHandler
                     boolean flag = event.entityPlayer.fallDistance > 0.0F && !event.entityPlayer.onGround && 
                     		!event.entityPlayer.isOnLadder() && !event.entityPlayer.isInWater() && 
                     		!event.entityPlayer.isPotionActive(Potion.blindness) && event.entityPlayer.ridingEntity == null && 
-                    		par1Entity instanceof EntityLiving;
+                    				target instanceof EntityLiving;
 
                     if (flag && i > 0)
                     {
@@ -243,19 +245,19 @@ public class EntityDamageHandler
                     boolean flag1 = false;
                     int l = EnchantmentHelper.getFireAspectModifier(event.entityPlayer);
 
-                    if (par1Entity instanceof EntityLiving && l > 0 && !par1Entity.isBurning())
+                    if (target instanceof EntityLiving && l > 0 && !target.isBurning())
                     {
                         flag1 = true;
-                        par1Entity.setFire(1);
+                        target.setFire(1);
                     }
 
-                    boolean flag2 = par1Entity.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), i);
+                    boolean flag2 = target.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), i);
 
                     if (flag2)
                     {
                         if (j > 0)
                         {
-                            par1Entity.addVelocity(-MathHelper.sin(event.entityPlayer.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F, 0.1D, 
+                        	target.addVelocity(-MathHelper.sin(event.entityPlayer.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F, 0.1D, 
                             		MathHelper.cos(event.entityPlayer.rotationYaw * (float)Math.PI / 180.0F) * j * 0.5F);
                             event.entityPlayer.motionX *= 0.6D;
                             event.entityPlayer.motionZ *= 0.6D;
@@ -264,12 +266,12 @@ public class EntityDamageHandler
 
                         if (flag)
                         {
-                        	event.entityPlayer.onCriticalHit(par1Entity);
+                        	event.entityPlayer.onCriticalHit(target);
                         }
 
                         if (k > 0)
                         {
-                        	event.entityPlayer.onEnchantmentCritical(par1Entity);
+                        	event.entityPlayer.onEnchantmentCritical(target);
                         }
 
                         if (i >= 18)
@@ -277,20 +279,20 @@ public class EntityDamageHandler
                         	event.entityPlayer.triggerAchievement(AchievementList.overkill);
                         }
 
-                        event.entityPlayer.setLastAttackingEntity(par1Entity);
+                        event.entityPlayer.setLastAttackingEntity(target);
 
-                        if (par1Entity instanceof EntityLiving)
+                        if (target instanceof EntityLiving)
                         {
-                            EnchantmentThorns.func_92096_a(event.entityPlayer, par1Entity, event.entity.worldObj.rand);
+                            EnchantmentThorns.func_92096_a(event.entityPlayer, (EntityLiving) target, event.entity.worldObj.rand);
                         }
                     }
 
                     ItemStack itemstack = event.entityPlayer.getCurrentEquippedItem();
-                    Object object = par1Entity;
+                    Object object = target;
 
-                    if (event.entity instanceof EntityDragonPart)
+                    if (target instanceof EntityDragonPart)
                     {
-                        IEntityMultiPart ientitymultipart = ((EntityDragonPart)event.entity).entityDragonObj;
+                        IEntityMultiPart ientitymultipart = ((EntityDragonPart)target).entityDragonObj;
 
                         if (ientitymultipart != null && ientitymultipart instanceof EntityLiving)
                         {
@@ -308,22 +310,22 @@ public class EntityDamageHandler
                         }
                     }
 
-                    if (par1Entity instanceof EntityLiving)
+                    if (target instanceof EntityLiving)
                     {
-                        if (par1Entity.isEntityAlive())
+                        if (target.isEntityAlive())
                         {
-                        	alertWolves(event.entityPlayer,par1Entity, true);
+                        	alertWolves(event.entityPlayer,(EntityLiving) target, true);
                         }
 
                         event.entityPlayer.addStat(StatList.damageDealtStat, i);
 
                         if (l > 0 && flag2)
                         {
-                            par1Entity.setFire(l * 4);
+                        	target.setFire(l * 4);
                         }
                         else if (flag1)
                         {
-                            par1Entity.extinguish();
+                        	target.extinguish();
                         }
                     }
 
