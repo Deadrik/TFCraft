@@ -165,38 +165,39 @@ public class Recipes
 		//Lapis Lazuli	
 		ModLoader.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 34)});
 
+		// Stone Bricks
 		for(int i = 0; i < 13; i++)
 		{			
-			for(int j = 0; j < 3; j++)
+			for(int j = 0; j < Global.STONE_IGIN.length; j++)
 			{
 				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgInBrick,4,j), 
-						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
-				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
-                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
+						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_IGIN_START),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
+				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_IGIN_START), 
+                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j+Global.STONE_IGIN_START),new ItemStack(Chisels[i],1,32767)});
 			}
 
-			for(int j = 3; j < 13; j++)
+			for(int j = 0; j < Global.STONE_SED.length; j++)
 			{
-				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedBrick,4,j-3), 
-						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
-				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
-                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneSedBrick,4,j), 
+						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_SED_START),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
+				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_SED_START), 
+                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j+Global.STONE_SED_START),new ItemStack(Chisels[i],1,32767)});
 			}
 
-			for(int j = 13; j < 17; j++)
+			for(int j = 0; j < Global.STONE_IGEX.length; j++)
 			{
-				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExBrick,4,j-13), 
-						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
-				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
-                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneIgExBrick,4,j), 
+						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_IGEX_START),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
+				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_IGEX_START), 
+                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j+Global.STONE_IGEX_START),new ItemStack(Chisels[i],1,32767)});
 			}
 
-			for(int j = 17; j < 23; j++)
+			for(int j = 0; j < Global.STONE_MM.length; j++)
 			{
-				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMBrick,4,j-17), 
-						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
-				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j), 
-                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j),new ItemStack(Chisels[i],1,32767)});
+				ModLoader.addRecipe(new ItemStack(TFCBlocks.StoneMMBrick,4,j), 
+						new Object[] {"PXP","XPX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_MM_START),Character.valueOf('X'),new ItemStack(TFCItems.Mortar,1)});
+				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_MM_START), 
+                        new Object[] {new ItemStack(TFCItems.LooseRock,1,j+Global.STONE_MM_START),new ItemStack(Chisels[i],1,32767)});
 			}
 		}
 		
@@ -216,10 +217,9 @@ public class Recipes
 
 		for(int j = 0; j < Recipes.Hammers.length; j++)
 		{
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 8), new ItemStack(Recipes.Hammers[j], 1, 32767)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 12), new ItemStack(Recipes.Hammers[j], 1, 32767)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 22), new ItemStack(Recipes.Hammers[j], 1, 32767)});
-			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 10), new ItemStack(Recipes.Hammers[j], 1, 32767)});
+			for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
+				ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(Recipes.Hammers[j], 1, 32767)});
+			}
 			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 6), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, 32767)});
 		}
 		
@@ -233,11 +233,10 @@ public class Recipes
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.Barrel,1,j), new Object[] { "# #","# #","###",Character.valueOf('#'),new ItemStack(TFCItems.SinglePlank,1,j)});
 		}
 
+		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
+			ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 1), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
+		}
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 1), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 8), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 1), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 12), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 1), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 22), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
-		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Flux, 1), new Object[] {new ItemStack(TFCItems.LooseRock, 1, 10), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
 
 		ModLoader.addRecipe(new ItemStack(Item.redstone, 8, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.OreChunk,1,27)});
 		ModLoader.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(Item.dyePowder,1,0)});
@@ -405,10 +404,6 @@ public class Recipes
 					new Object[] {"BMB", "MBM", Character.valueOf('B'),new ItemStack(TFCItems.StoneBrick,1,j+Global.STONE_MM_START),Character.valueOf('M'),new ItemStack(TFCItems.Mortar,1)});
 			ModLoader.addRecipe(new ItemStack(TFCBlocks.WallSmoothMM, 3, j), 
 					new Object[] {"RRR", "RRR", Character.valueOf('R'), new ItemStack(TFCBlocks.StoneMMSmooth,1,j)});
-		}
-		
-		for(int i = 0; i < 16; i++)
-		{
 		}
 		
 		ModLoader.addShapelessRecipe(new ItemStack(TFCItems.Blueprint, 1), new Object[] { new ItemStack(TFCItems.Ink,3,32767), new ItemStack(Item.paper, 1)});
