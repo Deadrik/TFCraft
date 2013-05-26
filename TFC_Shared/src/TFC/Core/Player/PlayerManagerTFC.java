@@ -2,6 +2,7 @@ package TFC.Core.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 public class PlayerManagerTFC
@@ -42,6 +43,8 @@ public class PlayerManagerTFC
     
     public PlayerInfo getClientPlayer()
     {
-    	return Players.get(0);
+    	if(Players.size() > 0)
+    		return Players.get(0);
+    	return null;
     }
 }

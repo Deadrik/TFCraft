@@ -46,7 +46,8 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 		if(tickEnd)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-			pi.shiftPressed = false;;
+			if(pi != null)
+				pi.shiftPressed = false;
 			EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
 			if (bind.keyDescription == Key_Calendar.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
