@@ -47,7 +47,7 @@ public class ItemCustomBucketMilk extends ItemTerra
         this.setFolder("tools/");
     }
 
-    public ItemStack onFoodEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
         --par1ItemStack.stackSize;
 
