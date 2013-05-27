@@ -23,11 +23,13 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
+import TFC.API.Events.EntityArmorCalcEvent;
 import TFC.Items.ItemTFCArmor;
 
 public class EntityDamageHandler
@@ -79,7 +81,10 @@ public class EntityDamageHandler
 		int pierceRating = 0;
 		int slashRating = 0;
 		int crushRating = 0;
-		int damage = originalDamage;
+		
+		EntityArmorCalcEvent eventPre = new EntityArmorCalcEvent(entity, originalDamage, EntityArmorCalcEvent.EventType.PRE);
+		MinecraftForge.EVENT_BUS.post(eventPre);
+		int damage = eventPre.incomingDamage;
 		
 		if (!source.isUnblockable() && armor != null)
 		{
@@ -144,7 +149,9 @@ public class EntityDamageHandler
 				}
 			}
 			//6. Apply the damage to the player
-			entity.setEntityHealth(entity.getHealth()-damage);
+			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, originalDamage, EntityArmorCalcEvent.EventType.POST);
+			MinecraftForge.EVENT_BUS.post(eventPost);
+			entity.setEntityHealth(entity.getHealth()-eventPost.incomingDamage);
 
 		}
 
