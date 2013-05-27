@@ -18,8 +18,6 @@ public class PlayerInfo
 	
 	public INetworkManager networkManager;
 	private long lastChange;
-	
-	public boolean shiftPressed = false;
 
 	public PlayerInfo(String name, INetworkManager nm)
 	{

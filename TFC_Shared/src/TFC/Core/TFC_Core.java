@@ -3,56 +3,21 @@ package TFC.Core;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
-
-import TFC.*;
-import TFC.API.Enums.EnumWoodMaterial;
-import TFC.TileEntities.TileEntityPartial;
-import TFC.WorldGen.BiomeDecoratorTFC;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.Biomes.BiomeGenHillsEdgeTFC;
-import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
-import TFC.WorldGen.Generators.WorldGenClayPit;
-import TFC.WorldGen.Generators.WorldGenCustomFlowers;
-import TFC.WorldGen.Generators.WorldGenCustomTallGrass;
-import TFC.WorldGen.Generators.WorldGenLooseRocks;
-import TFC.WorldGen.Generators.WorldGenMinableTFC;
-import TFC.WorldGen.Generators.WorldGenPeatPit;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree2;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
-import net.minecraftforge.common.MinecraftForge;
+
+import org.lwjgl.input.Keyboard;
+
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
+import TFC.API.Enums.EnumWoodMaterial;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
 
 public class TFC_Core
 {
@@ -165,7 +130,6 @@ public class TFC_Core
 		return is;
 	}
 
-
 	public static void SurroundWithLeaves(World world, int i, int j, int k, int meta, Random R)
 	{
 		for (int y = 2; y >= -2; y--)
@@ -226,7 +190,7 @@ public class TFC_Core
 		return id == TFCBlocks.StoneIgExSmooth.blockID || id == TFCBlocks.StoneIgInSmooth.blockID || 
 				id == TFCBlocks.StoneSedSmooth.blockID || id == TFCBlocks.StoneMMSmooth.blockID;
 	}
-	
+
 	public static boolean isBrickStone(int id)
 	{
 		return id == TFCBlocks.StoneIgExBrick.blockID || id == TFCBlocks.StoneIgInBrick.blockID || 
@@ -306,7 +270,7 @@ public class TFC_Core
 		else
 			return inMeta+1;
 	}
-	
+
 	public static int getItemMetaFromStone(int inType, int inMeta)
 	{
 		if(inType == TFCBlocks.StoneIgIn.blockID)
@@ -460,4 +424,13 @@ public class TFC_Core
 		}
 	}
 
+	public static boolean showExtraInformation()
+	{
+		if ((FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) && 
+				(Keyboard.isKeyDown(42))) 
+		{
+			return true;
+		}
+		return false;
+	}
 }

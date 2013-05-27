@@ -47,8 +47,7 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 		if(tickEnd)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
-			if(pi != null)
-				pi.shiftPressed = false;
+
 			EntityClientPlayerMP player = FMLClientHandler.instance().getClient().thePlayer;
 			if (bind.keyDescription == Key_Calendar.keyDescription && FMLClientHandler.instance().getClient().inGameHasFocus && FMLClientHandler.instance().getClient().currentScreen == null)
 			{
@@ -89,10 +88,6 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 						pi.lockZ = -9999999;
 					}
 				}
-			}
-			else if (bind.keyCode == 42)
-			{
-				pi.shiftPressed = true;
 			}
 			
 		}

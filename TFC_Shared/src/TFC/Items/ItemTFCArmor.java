@@ -17,6 +17,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -88,17 +89,26 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 				}
 			}
 		}
+		
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 
-		arraylist.add(EnumChatFormatting.ITALIC + "Pierce: " + EnumChatFormatting.AQUA +ArmorType.getPiercingAR());
-		arraylist.add(EnumChatFormatting.ITALIC + "Slash: " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
-		arraylist.add(EnumChatFormatting.ITALIC + "Crush: " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+		if (TFC_Core.showExtraInformation()) 
+		{
+			arraylist.add(EnumChatFormatting.WHITE + "Advanced:");
+			arraylist.add(EnumChatFormatting.ITALIC + "Pierce: " + EnumChatFormatting.AQUA +ArmorType.getPiercingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + "Slash: " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + "Crush: " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+		}
+		else
+		{
+			arraylist.add(EnumChatFormatting.WHITE + "Advanced: (Hold " + EnumChatFormatting.AQUA + "Shift" + EnumChatFormatting.WHITE + ")");
+		}
 
 	}
-	
+
 	@Override
 	public int getItemMaxDamageFromStack(ItemStack stack)
-    {
+	{
 		if(stack.hasTagCompound())
 		{
 			NBTTagCompound nbt = stack.getTagCompound();
@@ -107,8 +117,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 				return super.getItemMaxDamageFromStack(stack) + nbt.getShort("armorDuraBuff");
 			}
 		}
-        return super.getItemMaxDamageFromStack(stack);
-    }
+		return super.getItemMaxDamageFromStack(stack);
+	}
 
 	@Override
 	public EnumWeight getWeight() {
