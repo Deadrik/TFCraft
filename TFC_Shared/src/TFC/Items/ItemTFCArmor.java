@@ -19,8 +19,6 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.Player.PlayerInfo;
-import TFC.Core.Player.PlayerManagerTFC;
 
 public class ItemTFCArmor extends ItemArmor implements ISize
 {
@@ -89,15 +87,23 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 				}
 			}
 		}
-		
-		PlayerInfo pi = PlayerManagerTFC.getInstance().getClientPlayer();
 
 		if (TFC_Core.showExtraInformation()) 
 		{
 			arraylist.add(EnumChatFormatting.WHITE + "Advanced:");
-			arraylist.add(EnumChatFormatting.ITALIC + "Pierce: " + EnumChatFormatting.AQUA +ArmorType.getPiercingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + "Pierce: " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
 			arraylist.add(EnumChatFormatting.ITALIC + "Slash: " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
 			arraylist.add(EnumChatFormatting.ITALIC + "Crush: " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+			arraylist.add("");
+			if (is.hasTagCompound())
+			{
+				NBTTagCompound stackTagCompound = is.getTagCompound();
+
+				if(stackTagCompound.hasKey("creator"))
+				{
+					arraylist.add(EnumChatFormatting.ITALIC + "Forged By " + stackTagCompound.getString("creator"));
+				}
+			}
 		}
 		else
 		{
