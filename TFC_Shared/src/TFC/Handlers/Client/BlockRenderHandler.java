@@ -1,4 +1,4 @@
-package TFC.Handlers;
+package TFC.Handlers.Client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

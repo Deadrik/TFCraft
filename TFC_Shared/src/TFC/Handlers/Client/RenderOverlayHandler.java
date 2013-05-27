@@ -1,4 +1,4 @@
-package TFC.Handlers;
+package TFC.Handlers.Client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;

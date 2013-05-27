@@ -1,4 +1,4 @@
-package TFC.Handlers;
+package TFC.Handlers.Client;
 
 import org.lwjgl.opengl.GL11;
 

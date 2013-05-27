@@ -1,4 +1,4 @@
-package TFC.Handlers;
+package TFC.Handlers.Client;
 
 import java.io.File;
 import java.net.URISyntaxException;

@@ -1,4 +1,4 @@
-package TFC.Handlers;
+package TFC.Handlers.Client;
 
 import java.util.EnumSet;
 
@@ -10,6 +10,7 @@ import TFC.Core.KeyBindings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.GUI.GuiCalendar;
+import TFC.Handlers.PacketHandler;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
 import cpw.mods.fml.client.FMLClientHandler;
