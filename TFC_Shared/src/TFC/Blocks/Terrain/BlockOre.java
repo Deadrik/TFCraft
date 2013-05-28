@@ -13,13 +13,12 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerra;
 
 public class BlockOre extends BlockTerra
 {
-	public String[] blockNames = {"Native Copper", "Native Gold", "Native Platinum", "Hematite", "Native Silver", "Cassiterite", "Galena", "Bismuthinite", "Garnierite", 
-	        "Malachite", "Magnetite", "Limonite", "Sphalerite", "Tetrahedrite", 
-	        "Bituminous Coal", "Lignite"};
+	public String[] blockNames = Global.ORE_METAL;
 	
 	public BlockOre(int i, Material material) {
 		super(i, material);
@@ -28,7 +27,7 @@ public class BlockOre extends BlockTerra
 	@Override
 	public void addCreativeItems(java.util.ArrayList list)
 	{
-		for(int i = 0; i <16; i++) {
+		for(int i = 0; i < blockNames.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -45,12 +44,12 @@ public class BlockOre extends BlockTerra
         return icons[j];
     }
 	
-	protected Icon[] icons = new Icon[16];
+	protected Icon[] icons = new Icon[blockNames.length];
 	
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < blockNames.length; i++)
 		{
 			icons[i] = iconRegisterer.registerIcon("ores/"+ blockNames[i] + " Ore");
 		}

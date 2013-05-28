@@ -26,4 +26,19 @@ public interface Global
 		Arrays.asList(STONE_ALL).indexOf("Chalk"),
 		Arrays.asList(STONE_ALL).indexOf("Marble")
 	};
+	
+	/* Ore Types */
+	public static final String[] ORE_METAL = {
+		"Native Copper", "Native Gold", "Native Platinum", "Hematite",
+		"Native Silver", "Cassiterite", "Galena", "Bismuthinite",
+		"Garnierite", "Malachite", "Magnetite", "Limonite",
+		"Sphalerite", "Tetrahedrite", "Bituminous Coal", "Lignite"
+		};
+	public static final String[] ORE_MINERAL = {
+		"Kaolinite", "Gypsum", "Satinspar", "Selenite",
+		"Graphite", "Kimberlite", "Petrified Wood", "Sulfur",
+		"Jet", "Microcline", "Pitchblende", "Cinnabar",
+		"Cryolite", "Saltpeter", "Serpentine", "Sylvite"
+		};
+	public static final String[] ORE_MINERAL2 = {"Borax", "Olivine", "Lapis Lazuli"};
 }
