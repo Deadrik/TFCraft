@@ -6,10 +6,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import TFC.Core.TFC_ItemHeat;
-public class TileEntityChestTFC extends TileEntity implements IInventory
+public class TileEntityChestTFC extends TileEntityChest implements IInventory
 {
     private ItemStack[] chestContents = new ItemStack[18];
 
