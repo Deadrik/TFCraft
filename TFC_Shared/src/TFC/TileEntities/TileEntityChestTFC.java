@@ -177,6 +177,7 @@ public class TileEntityChestTFC extends TileEntityChest implements IInventory
         this.adjacentChestChecked = false;
     }
 
+    @Override
     public void checkForAdjacentChests()
     {
         if (!this.adjacentChestChecked)
