@@ -322,7 +322,7 @@ public class TFCBlocks
 		
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
-			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replace(' ', '\0'));
+			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
 		}
 
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
@@ -510,7 +510,7 @@ public class TFCBlocks
 		
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
-			TFCBlocks.Doors[i] = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replace(' ', '\0'), 2041+i), i).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
+			TFCBlocks.Doors[i] = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), 2041+i), i).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
 		}
 		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
