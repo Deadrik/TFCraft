@@ -3,6 +3,7 @@ package TFC.Blocks;
 import java.util.List;
 
 import TFC.TFCBlocks;
+import TFC.API.Constant.Global;
 import TFC.Core.Helper;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -56,7 +57,7 @@ public class BlockPlanks extends BlockTerra
      */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -73,17 +74,14 @@ public class BlockPlanks extends BlockTerra
 		return icons[j];
 	}
 	
-	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-	
-	Icon[] icons = new Icon[16];
+	Icon[] icons = new Icon[Global.WOOD_ALL.length];
 	
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			icons[i] = registerer.registerIcon("wood/"+WoodNames[i]+" Plank");
+			icons[i] = registerer.registerIcon("wood/"+Global.WOOD_ALL[i]+" Plank");
 		}
 		
 		Block.planks.registerIcons(registerer);

@@ -1,11 +1,13 @@
 package TFC;
 
 import java.io.File;
+import java.lang.reflect.Array;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
@@ -207,22 +209,7 @@ public class TFCBlocks
 	public static Block WallSmoothSed;
 	public static Block WallSmoothMM;
 	
-	public static Block DoorOak;
-	public static Block DoorAspen;
-	public static Block DoorBirch;
-	public static Block DoorChestnut;
-	public static Block DoorDouglasFir;
-	public static Block DoorHickory;
-	public static Block DoorMaple;
-	public static Block DoorAsh;
-	public static Block DoorPine;
-	public static Block DoorSequoia;
-	public static Block DoorSpruce;
-	public static Block DoorSycamore;
-	public static Block DoorWhiteCedar;
-	public static Block DoorWhiteElm;
-	public static Block DoorWillow;
-	public static Block DoorKapok;
+	public static Block[] Doors = new Block[Global.WOOD_ALL.length];
 	
 	public static Block IngotPile;
 	public static Block Barrel;
@@ -332,22 +319,12 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WallSmoothIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallSmoothIgEx");
 		GameRegistry.registerBlock(WallSmoothSed, TFC.Items.ItemBlocks.ItemSed.class, "WallSmoothSed");
 		GameRegistry.registerBlock(WallSmoothMM, TFC.Items.ItemBlocks.ItemMM.class, "WallSmoothMM");
-		GameRegistry.registerBlock(DoorOak, "DoorOak");
-		GameRegistry.registerBlock(DoorAspen, "DoorAspen");
-		GameRegistry.registerBlock(DoorBirch, "DoorBirch");
-		GameRegistry.registerBlock(DoorChestnut, "DoorChestnut");
-		GameRegistry.registerBlock(DoorDouglasFir, "DoorDouglasFir");
-		GameRegistry.registerBlock(DoorHickory, "DoorHickory");
-		GameRegistry.registerBlock(DoorMaple, "DoorMaple");
-		GameRegistry.registerBlock(DoorAsh, "DoorAsh");
-		GameRegistry.registerBlock(DoorPine, "DoorPine");
-		GameRegistry.registerBlock(DoorSequoia, "DoorSequoia");
-		GameRegistry.registerBlock(DoorSpruce, "DoorSpruce");
-		GameRegistry.registerBlock(DoorSycamore, "DoorSycamore");
-		GameRegistry.registerBlock(DoorWhiteCedar, "DoorWhiteCedar");
-		GameRegistry.registerBlock(DoorWhiteElm, "DoorWhiteElm");
-		GameRegistry.registerBlock(DoorWillow, "DoorWillow");
-		GameRegistry.registerBlock(DoorKapok, "DoorKapok");
+		
+		// Wooden Doors
+		for (int i=0; i < Global.WOOD_ALL.length; i++) {
+			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replace(' ', '\0'));
+		}
+
 		GameRegistry.registerBlock(IngotPile, "IngotPile");
 		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
 		
@@ -531,23 +508,11 @@ public class TFCBlocks
 		TFCBlocks.WallSmoothSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothSed", 2039), StoneSedSmooth, 10).setUnlocalizedName("WallSmooth");
 		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothMM", 2040), StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 		
-		TFCBlocks.DoorOak = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorOak", 2041), 0).setUnlocalizedName("Door Oak");
-		TFCBlocks.DoorAspen = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorAspen", 2042), 1).setUnlocalizedName("Door Aspen");
-		TFCBlocks.DoorBirch = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorBirch", 2043), 2).setUnlocalizedName("Door Birch");
-		TFCBlocks.DoorChestnut = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorChestnut", 2044), 3).setUnlocalizedName("Door Chestnut");
-		TFCBlocks.DoorDouglasFir = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorDouglasFir", 2045), 4).setUnlocalizedName("Door Douglas Fir");
-		TFCBlocks.DoorHickory = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorHickory", 2046), 5).setUnlocalizedName("Door Hickory");
-		TFCBlocks.DoorMaple = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorMaple", 2047), 6).setUnlocalizedName("Door Maple");
-		TFCBlocks.DoorAsh = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorAsh", 2048), 7).setUnlocalizedName("Door Ash");
-		TFCBlocks.DoorPine = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorPine", 2049), 8).setUnlocalizedName("Door Pine");
-		TFCBlocks.DoorSequoia = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorSequoia", 2050), 9).setUnlocalizedName("Door Sequoia");
-		TFCBlocks.DoorSpruce = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorSpruce", 2051), 10).setUnlocalizedName("Door Spruce");
-		TFCBlocks.DoorSycamore = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorSycamore", 2052), 11).setUnlocalizedName("Door Sycamore");
-		TFCBlocks.DoorWhiteCedar = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWhiteCedar", 2053), 12).setUnlocalizedName("Door White Cedar");
-		TFCBlocks.DoorWhiteElm = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWhiteElm", 2054), 13).setUnlocalizedName("Door White Elm");
-		TFCBlocks.DoorWillow = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorWillow", 2055), 14).setUnlocalizedName("Door Willow");
-		TFCBlocks.DoorKapok = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","DoorKapok", 2056), 15).setUnlocalizedName("Door Kapok");
-				
+		// Wooden Doors
+		for (int i=0; i < Global.WOOD_ALL.length; i++) {
+			TFCBlocks.Doors[i] = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replace(' ', '\0'), 2041+i), i).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
+		}
+		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
 		int num = 2061;
 		TFCBlocks.Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", num++)).setUnlocalizedName("Barrel").setHardness(2);

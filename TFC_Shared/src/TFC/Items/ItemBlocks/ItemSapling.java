@@ -1,6 +1,7 @@
 package TFC.Items.ItemBlocks;
 
 import TFC.*;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumWeight;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -42,8 +43,7 @@ public class ItemSapling extends ItemTerraBlock
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+		MetaNames = Global.WOOD_ALL;
 	}
 	@Override
 	public Icon getIconFromDamage(int par1)
@@ -54,17 +54,17 @@ public class ItemSapling extends ItemTerraBlock
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		if(MetaNames != null)
-			return new StringBuilder().append(MetaNames[itemstack.getItemDamage()]+" Sapling").toString();
+			return new StringBuilder().append(Global.WOOD_ALL[itemstack.getItemDamage()]+" Sapling").toString();
 		return super.getItemDisplayName(itemstack);
 	}
-	public static Icon[] Icons = new Icon[16];
+	public static Icon[] Icons = new Icon[Global.WOOD_ALL.length];
 
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < MetaNames.length; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			Icons[i] = registerer.registerIcon("wood/trees/" + MetaNames[i] + " Sapling");
+			Icons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Sapling");
 		}
     }
 	@Override
