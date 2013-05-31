@@ -4,6 +4,7 @@ import java.util.Random;
 
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.Constant.Global;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Textures;
 import TFC.Items.Tools.ItemChisel;
@@ -40,9 +41,10 @@ import net.minecraft.world.*;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
+
 public class BlockOre3 extends BlockOre
 {
-	public static String[] blockNames = { "Borax", "Olivine", "Lapis Lazuli"};
+	public static String[] blockNames = Global.ORE_MINERAL2;
 	
 	public BlockOre3(int i, Material material) {
 		super(i, material);
@@ -50,7 +52,7 @@ public class BlockOre3 extends BlockOre
 
 	public void addCreativeItems(java.util.ArrayList list)
     {
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < blockNames.length; i++) {
             list.add(new ItemStack(this,1,i));
         }
     }
@@ -58,7 +60,7 @@ public class BlockOre3 extends BlockOre
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < blockNames.length; i++)
 		{
 			icons[i] = iconRegisterer.registerIcon("ores/"+blockNames[i] + " Ore");
 		}
@@ -67,7 +69,7 @@ public class BlockOre3 extends BlockOre
     @Override
     public int damageDropped(int j) 
     {
-        return j+32;
+        return j + Global.ORE_METAL.length+Global.ORE_MINERAL.length;
     }
 
 	/*
