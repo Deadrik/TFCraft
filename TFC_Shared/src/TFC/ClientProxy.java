@@ -26,6 +26,7 @@ import net.minecraft.util.StringTranslate;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumTree;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
@@ -1216,24 +1217,22 @@ public class ClientProxy extends CommonProxy
 	private void RegisterWood()
 	{
 		LanguageRegistry LR = LanguageRegistry.instance();
-		String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
 
-		for(int i= 0; i < WoodNames.length; i++)
+		for(int i= 0; i < Global.WOOD_ALL.length; i++)
 		{
-			LR.addStringLocalization("tile.log."+WoodNames[i]+".name", WoodNames[i]);
-			LR.addStringLocalization("tile.leaves."+WoodNames[i]+".name", WoodNames[i] + " Leaves");
-			LR.addStringLocalization("tile.Barrel"+WoodNames[i]+".name", WoodNames[i] + " Barrel");
-			LR.addStringLocalization("tile.sapling."+WoodNames[i]+".name", WoodNames[i] + " Sapling");
-			LR.addStringLocalization("tile.wood."+WoodNames[i]+".name", WoodNames[i] + " Planks");
-			LR.addStringLocalization("tile.WoodSupportV."+WoodNames[i]+".name","V. " + WoodNames[i] + " Support Beam");
-			LR.addStringLocalization("tile.WoodSupportH."+WoodNames[i]+".name","H. " + WoodNames[i] + " Support Beam");
-			LR.addStringLocalization("item.Log."+WoodNames[i]+".name", WoodNames[i]);
-			LR.addStringLocalization("tile.Barrel."+WoodNames[i]+".name", WoodNames[i] +" Barrel");
-			LR.addStringLocalization("item.SinglePlank."+WoodNames[i]+".name", WoodNames[i] + " Plank");
-			LR.addStringLocalization("tile.Toolrack."+WoodNames[i]+".name", WoodNames[i] + " Tool Rack");
-			LR.addStringLocalization("tile."+WoodNames[i]+" Door.name", WoodNames[i] + " Door");
-			LR.addStringLocalization("item."+WoodNames[i]+" Door.name", WoodNames[i] + " Door");
+			LR.addStringLocalization("tile.log."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i]);
+			LR.addStringLocalization("tile.leaves."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] + " Leaves");
+			LR.addStringLocalization("tile.Barrel"+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] + " Barrel");
+			LR.addStringLocalization("tile.sapling."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] + " Sapling");
+			LR.addStringLocalization("tile.wood."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] + " Planks");
+			LR.addStringLocalization("tile.WoodSupportV."+Global.WOOD_ALL[i]+".name","V. " + Global.WOOD_ALL[i] + " Support Beam");
+			LR.addStringLocalization("tile.WoodSupportH."+Global.WOOD_ALL[i]+".name","H. " + Global.WOOD_ALL[i] + " Support Beam");
+			LR.addStringLocalization("item.Log."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i]);
+			LR.addStringLocalization("tile.Barrel."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] +" Barrel");
+			LR.addStringLocalization("item.SinglePlank."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] + " Plank");
+			LR.addStringLocalization("tile.Toolrack."+Global.WOOD_ALL[i]+".name", Global.WOOD_ALL[i] + " Tool Rack");
+			LR.addStringLocalization("tile."+Global.WOOD_ALL[i]+" Door.name", Global.WOOD_ALL[i] + " Door");
+			LR.addStringLocalization("item."+Global.WOOD_ALL[i]+" Door.name", Global.WOOD_ALL[i] + " Door");
 
 		}
 		LR.addStringLocalization("item.Stick.name", "Stick");

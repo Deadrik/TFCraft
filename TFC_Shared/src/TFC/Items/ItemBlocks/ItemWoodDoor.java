@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Items.ItemTerra;
@@ -41,43 +42,8 @@ public class ItemWoodDoor extends ItemTerra
             ++j;
             Block var11;
 
-            switch(woodType)
-            {
-            case 0:
-            	var11 = TFCBlocks.DoorOak;break;
-            case 1:
-            	var11 = TFCBlocks.DoorAspen;break;
-            case 2:
-            	var11 = TFCBlocks.DoorBirch;break;
-            case 3:
-            	var11 = TFCBlocks.DoorChestnut;break;
-            case 4:
-            	var11 = TFCBlocks.DoorDouglasFir;break;
-            case 5:
-            	var11 = TFCBlocks.DoorHickory;break;
-            case 6:
-            	var11 = TFCBlocks.DoorMaple;break;
-            case 7:
-            	var11 = TFCBlocks.DoorAsh;break;
-            case 8:
-            	var11 = TFCBlocks.DoorPine;break;
-            case 9:
-            	var11 = TFCBlocks.DoorSequoia;break;
-            case 10:
-            	var11 = TFCBlocks.DoorSpruce;break;
-            case 11:
-            	var11 = TFCBlocks.DoorSycamore;break;
-            case 12:
-            	var11 = TFCBlocks.DoorWhiteCedar;break;
-            case 13:
-            	var11 = TFCBlocks.DoorWhiteElm;break;
-            case 14:
-            	var11 = TFCBlocks.DoorWillow;break;
-            case 15:
-            	var11 = TFCBlocks.DoorKapok;break;
-            default :
-            	var11 = TFCBlocks.DoorOak;break;
-            }
+            // No more clunky switch statement
+            var11 = TFCBlocks.Doors[woodType];
 
             if (player.canPlayerEdit(i, j, k, side, is) && player.canPlayerEdit(i, j + 1, k, side, is))
             {
