@@ -120,7 +120,7 @@ public class Recipes
 		
 		ModLoader.addShapelessRecipe(new ItemStack(Item.gunpowder,2,0),new Object[] {new ItemStack(Item.coal,1,32767),new ItemStack(TFCItems.SaltpeterPowder,1,32767),new ItemStack(TFCItems.SulfurPowder)});
 		
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
 			for(int j = 0; j < Axes.length; j++)
 			{
@@ -136,7 +136,7 @@ public class Recipes
 			ModLoader.addRecipe(new ItemStack(Block.planks.blockID, 1, i), new Object[] {"11","11", Character.valueOf('1'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 		}
 		
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
 			ModLoader.addRecipe(new ItemStack(Doors[i], 1, i), new Object[] { "WW","WW","WW", Character.valueOf('W'), new ItemStack(TFCItems.SinglePlank, 1, i)});
 		}

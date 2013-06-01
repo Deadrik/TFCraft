@@ -1,5 +1,6 @@
 package TFC.Items.ItemBlocks;
 
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 
 public class ItemWoodSupport extends ItemTerraBlock
@@ -9,8 +10,7 @@ public class ItemWoodSupport extends ItemTerraBlock
 		super(i);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+		this.MetaNames = Global.WOOD_ALL;
 	}
 	
 	@Override

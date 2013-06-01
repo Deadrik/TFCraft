@@ -14,6 +14,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.Constant.Global;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -51,7 +52,7 @@ public class BlockLogNatural extends BlockTerra
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -90,21 +91,18 @@ public class BlockLogNatural extends BlockTerra
 		return sideIcons[j];
 	}
 	
-	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
-	
-	public static Icon[] sideIcons = new Icon[16];
-	public static Icon[] innerIcons = new Icon[16];
-	public static Icon[] rotatedSideIcons = new Icon[16];
+	public static Icon[] sideIcons = new Icon[Global.WOOD_ALL.length];
+	public static Icon[] innerIcons = new Icon[Global.WOOD_ALL.length];
+	public static Icon[] rotatedSideIcons = new Icon[Global.WOOD_ALL.length];
 	
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			sideIcons[i] = registerer.registerIcon("wood/trees/" + WoodNames[i] + " Log");
-			innerIcons[i] = registerer.registerIcon("wood/trees/" + WoodNames[i] + " Log Top");
-			rotatedSideIcons[i] = registerer.registerIcon("wood/trees/" + WoodNames[i] + " Log Side");
+			sideIcons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Log");
+			innerIcons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Log Top");
+			rotatedSideIcons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Log Side");
 		}
     }
 

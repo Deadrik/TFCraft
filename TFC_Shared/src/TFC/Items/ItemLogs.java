@@ -10,6 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityLogPile;
@@ -22,8 +23,7 @@ public class ItemLogs extends ItemTerra
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+		this.MetaNames = Global.WOOD_ALL;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ItemLogs extends ItemTerra
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < 16; i++) {
+		for(int i = 0; i < Global.WOOD_ALL.length; i++) {
 			list.add(new ItemStack(this,1,i));
 		}
 	}
@@ -115,12 +115,12 @@ public class ItemLogs extends ItemTerra
 		return icons[meta];
 	}
 	
-	Icon[] icons = new Icon[16];
+	Icon[] icons = new Icon[Global.WOOD_ALL.length];
 	@Override
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			icons[i] = registerer.registerIcon("wood/"+MetaNames[i]+" Log");
+			icons[i] = registerer.registerIcon("wood/"+Global.WOOD_ALL[i]+" Log");
     }
 
 

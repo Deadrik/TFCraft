@@ -13,12 +13,13 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.Constant.Global;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWoodSupport extends BlockTerra
 {
-	Icon[] icons = new Icon[16];
+	Icon[] icons = new Icon[Global.WOOD_ALL.length];
 	public BlockWoodSupport(int i, Material material) 
 	{
 		super(i, Material.wood);
@@ -29,7 +30,7 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 			par3List.add(new ItemStack(this, 1, i));
 	}
 	
@@ -118,7 +119,7 @@ public class BlockWoodSupport extends BlockTerra
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < 16; i++)
+		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
 			icons[i] = registerer.registerIcon("wood/WoodSheet/WoodSheet"+i);
 		}

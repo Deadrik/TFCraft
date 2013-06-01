@@ -41,4 +41,11 @@ public interface Global
 		"Cryolite", "Saltpeter", "Serpentine", "Sylvite"
 		};
 	public static final String[] ORE_MINERAL2 = {"Borax", "Olivine", "Lapis Lazuli"};
+	
+	public static final String[] WOOD_ALL = {
+		"Oak","Aspen","Birch","Chestnut",
+		"Douglas Fir","Hickory","Maple","Ash",
+		"Pine","Sequoia","Spruce","Sycamore",
+		"White Cedar","White Elm","Willow","Kapok"
+		};
 }

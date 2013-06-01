@@ -1,5 +1,6 @@
 package TFC.Items.ItemBlocks;
 
+import TFC.API.Constant.Global;
 import net.minecraft.client.renderer.texture.IconRegister;
 
 public class ItemCustomLeaves extends ItemTerraBlock
@@ -9,8 +10,7 @@ public class ItemCustomLeaves extends ItemTerraBlock
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		MetaNames = new String[]{"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-				"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+		MetaNames = Global.WOOD_ALL;
 	}
 	
 	@Override
