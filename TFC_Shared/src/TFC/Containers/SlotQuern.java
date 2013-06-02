@@ -30,4 +30,10 @@ public class SlotQuern extends Slot
     {
 	    return 1;
     }
+	
+	@Override
+	public void putStack(ItemStack par1ItemStack) {
+		if (par1ItemStack != null) par1ItemStack.stackSize = 1;
+		super.putStack(par1ItemStack);
+	}
 }

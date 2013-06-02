@@ -1,40 +1,15 @@
 package TFC.Containers;
 
-import TFC.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.TileEntities.TileEntityQuern;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 
-public class ContainerQuern extends Container
+public class ContainerQuern extends ContainerTFC
 {
 	private World world;
 	private int posX;
@@ -121,13 +96,13 @@ public class ContainerQuern extends Container
 
 			if (clickedIndex < 3)
 			{
-				if (!this.mergeItemStack(clickedStack, 3, 28, true))
+				if (!this.mergeItemStack(clickedStack, 3, inventorySlots.size(), true))
 				{
 					return null;
 				}
 
 			}
-			else if (clickedIndex >= 3 && clickedIndex < 28 && clickedStack.getItem() == TFCItems.WheatGrain || clickedStack.getItem() == TFCItems.BarleyGrain || 
+			else if (clickedIndex >= 3 && clickedIndex < inventorySlots.size() && clickedStack.getItem() == TFCItems.WheatGrain || clickedStack.getItem() == TFCItems.BarleyGrain || 
 					clickedStack.getItem() == TFCItems.RyeGrain || clickedStack.getItem() == TFCItems.OatGrain || 
 					clickedStack.getItem() == TFCItems.RiceGrain || clickedStack.getItem() == TFCItems.MaizeEar)
 			{
@@ -136,14 +111,14 @@ public class ContainerQuern extends Container
 					return null;
 				}
 			}
-			else if (clickedIndex >= 3 && clickedIndex < 28 && clickedStack.getItem() == TFCItems.Quern)
+			else if (clickedIndex >= 3 && clickedIndex < inventorySlots.size() && clickedStack.getItem() == TFCItems.Quern)
 			{
 				if (!this.mergeItemStack(clickedStack, 2, 3, false))
 				{
 					return null;
 				}
 			}
-			else if (clickedIndex >= 3 && clickedIndex < 28)
+			else if (clickedIndex >= 3 && clickedIndex < inventorySlots.size())
 			{
 				return null;
 			}

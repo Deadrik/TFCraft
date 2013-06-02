@@ -1,47 +1,12 @@
 package TFC.Render.Blocks;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
-import TFC.Blocks.Devices.BlockToolRack;
-import TFC.Render.TFC_CoreRender;
-import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityQuern;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraftforge.client.ForgeHooksClient;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderQuern  implements ISimpleBlockRenderingHandler 
 {
@@ -53,43 +18,34 @@ public class RenderQuern  implements ISimpleBlockRenderingHandler
 		{
 			IBlockAccess blockAccess = renderblocks.blockAccess;
 			TileEntityQuern te = (TileEntityQuern)blockAccess.getBlockTileEntity(i, j, k);
-			if(te != null)
-			{
-				if(te.hasQuern)
-				{
+			if(te != null) {
+				if(te.hasQuern) {
 					renderblocks.setRenderBounds(0.0F, 0F, 0.0F, 1F, 0.825F, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
-
 					renderblocks.overrideBlockTexture = Block.blocksList[5].getIcon(0, 0);
-					if(te.rotation == 0)
-					{
-						renderblocks.setRenderBounds(0.8F, 0.8, 0.8F, 0.9F, 1, 0.9F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
-					else if(te.rotation == 1)
-					{
-						renderblocks.setRenderBounds(0.8F, 0.8, 0.1F, 0.9F, 1, 0.2F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
-					else if(te.rotation == 2)
-					{
-						renderblocks.setRenderBounds(0.1F, 0.8, 0.1F, 0.2F, 1, 0.2F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
-					else if(te.rotation == 3)
-					{
-						renderblocks.setRenderBounds(0.1F, 0.8, 0.8F, 0.2F, 1, 0.9F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
+					float pos = te.rotatetimer * 0.035F;
 
-				}
-				else
-				{
+					if(te.rotation == 0) {
+						renderblocks.setRenderBounds(0.8F, 0.8, 0.8F-pos, 0.9F, 1, 0.9F-pos);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+					else if(te.rotation == 1) {
+						renderblocks.setRenderBounds(0.8F-pos, 0.8, 0.1F, 0.9F-pos, 1, 0.2F);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+					else if(te.rotation == 2) {
+						renderblocks.setRenderBounds(0.1F, 0.8, 0.1F+pos, 0.2F, 1, 0.2F+pos);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+					else if(te.rotation == 3) {
+						renderblocks.setRenderBounds(0.1F+pos, 0.8, 0.8F, 0.2F+pos, 1, 0.9F);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+				} else {
 					renderblocks.setRenderBounds(0.0F, 0, 0.0F, 1F, 0.625, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
-
 			renderblocks.clearOverrideBlockTexture();
 			return true;
 		}

@@ -39,13 +39,13 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 		if(shouldRotate)
 		{
 			rotatetimer++;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			if(rotatetimer == 20)
 			{
 				if(rotation == 3)
 				{
 					rotation = 0;
 					shouldRotate = false;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					if(!worldObj.isRemote)
 					{
 						if(storage[0] != null)
@@ -118,15 +118,19 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 									storage[1].stackSize++;
 							}
 						}
-						
+
 						if(storage[2] != null)
 							storage[2].damageItem(1, new EntityCowTFC(worldObj));
+							if(storage[2].getItemDamage() == storage[2].getMaxDamage()){
+								storage[2] = null;
+								hasQuern = false;
+								worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+							}
 					}
 				}
 				else 
 				{
 					rotation++;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 
 				rotatetimer = 0;
