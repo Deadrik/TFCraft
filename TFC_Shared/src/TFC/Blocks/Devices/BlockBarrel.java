@@ -191,7 +191,8 @@ public class BlockBarrel extends BlockTerraContainer
 		//Random R = new Random();
 		//dropBlockAsItem_do(world, i, j, k, new ItemStack(idDropped(0,R,l), 1, l+13));
 
-		super.harvestBlock(world, entityplayer, i, j, k, l);
+		//super.harvestBlock(world, entityplayer, i, j, k, l);
+		dropBlockAsItem_do(world, i, j, k, new ItemStack(this, 1, l));
 	}
 
 	@Override
