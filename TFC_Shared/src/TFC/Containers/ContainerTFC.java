@@ -35,8 +35,12 @@ public class ContainerTFC extends Container
                 slot = (Slot)this.inventorySlots.get(slotIndex);
                 slotstack = slot.getStack();
 
-                if (slotstack != null && slotstack.itemID == is.itemID && (!is.getHasSubtypes() || is.getItemDamage() == slotstack.getItemDamage()) && ItemStack.areItemStackTagsEqual(is, slotstack) && 
-                		slotstack.stackSize < slot.getSlotStackLimit())
+                if (slotstack != null
+                	&& slotstack.itemID == is.itemID
+                	&& !is.getHasSubtypes()
+                	&& is.getItemDamage() == slotstack.getItemDamage()
+                	&& ItemStack.areItemStackTagsEqual(is, slotstack)
+                	&& slotstack.stackSize < slot.getSlotStackLimit())
                 {
                     int mergedStackSize = is.stackSize + getSmaller(slotstack.stackSize, slot.getSlotStackLimit());
 
