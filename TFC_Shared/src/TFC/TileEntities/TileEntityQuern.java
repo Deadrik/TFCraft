@@ -122,9 +122,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory
 						if(storage[2] != null)
 							storage[2].damageItem(1, new EntityCowTFC(worldObj));
 							if(storage[2].getItemDamage() == storage[2].getMaxDamage()){
-								storage[2] = null;
-								hasQuern = false;
-								worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+								setInventorySlotContents(2, null);
 							}
 					}
 				}
