@@ -200,6 +200,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			itemstack = null;
 		}
 	}
+	
+	public void setSealed(){
+		sealed = true;
+	}
 
 	public String getType()
 	{
@@ -214,7 +218,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		case 3:
 			return "Tannin";
 		case 4:
-			return "Gunpowder (no use)";
+			return "Gunpowder";
 		case 5:
 			return "Beer (no use)";
 		case 6:
