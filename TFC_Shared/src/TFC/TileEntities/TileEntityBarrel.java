@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
@@ -51,10 +52,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			{
 				NBTTagCompound comp = itemstack.getTagCompound();
 				float temp = comp.getFloat("temperature");
-				if(liquidLevel >= 3 && temp >20)
+				if(liquidLevel >= 12 && temp >20)
 				{
 					temp-=100;
-					liquidLevel-=3;
+					liquidLevel-=12;
 
 					comp.setFloat("temperature",temp);
 					itemstack.setTagCompound(comp);
@@ -96,8 +97,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		//System.out.println(liquidLevel +", "+ Type);
 		if (Type== 1&&itemstack.getItem() == TFCItems.ScrapedHide){
 			itemstack2 = new ItemStack(TFCItems.PrepHide,0,0);
-			while(liquidLevel >= 5 && itemstack.stackSize >0){
-				liquidLevel-=5;
+			while(liquidLevel >= 20 && itemstack.stackSize >0){
+				liquidLevel-=20;
 				itemstack2.stackSize++;
 				itemstack.stackSize--;
 			}
@@ -164,10 +165,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		if(Type == 2 && itemstack.getItem() == TFCItems.Hide)
 		{
 			itemstack2 = new ItemStack(TFCItems.SoakedHide,0,0);
-			while(liquidLevel >= 5 && itemstack.stackSize >0)
+			while(liquidLevel >= 20 && itemstack.stackSize >0)
 			{
 				System.out.println(liquidLevel);
-				liquidLevel-=5;
+				liquidLevel-=20;
 				itemstack2.stackSize++;
 				itemstack.stackSize--;
 			}
@@ -179,9 +180,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		if(itemstack!=null &&Type ==3&&itemstack.getItem()==TFCItems.PrepHide)
 		{
 			itemstack2 = new ItemStack(TFCItems.TerraLeather,0,0);
-			while(liquidLevel >= 5 && itemstack.stackSize >0)
+			while(liquidLevel >= 20 && itemstack.stackSize >0)
 			{
-				liquidLevel-=5;
+				liquidLevel-=20;
 				itemstack2.stackSize++;
 				itemstack.stackSize--;
 			}
@@ -341,6 +342,20 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 
 	}
+	
+	public boolean checkValidAddition(int i){
+		if(((i == Type)||(i==TFCBlocks.finiteWater.blockID && Type == 1)||(Type == 0)) && !sealed && liquidLevel < 256){
+			liquidLevel = Math.min(liquidLevel+32, 256);
+			if(i == 2){
+				Type = 2;
+			}
+			if(i == TFCBlocks.finiteWater.blockID){
+				Type = 1;
+			}
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void updateEntity()
@@ -376,23 +391,23 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 			if (itemstack != null){
-				if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 64){
-					liquidLevel = Math.min(liquidLevel + 8, 64);
+				if ((Type ==0||Type == 2) && itemstack.getItem() == TFCItems.Limewater && liquidLevel < 256){
+					liquidLevel = Math.min(liquidLevel + 32, 256);
 					Type = 2;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 64){
-					liquidLevel = Math.min(liquidLevel + 8, 64);
+				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256){
+					liquidLevel = Math.min(liquidLevel + 32, 256);
 					Type = 1;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 64){
-					liquidLevel = Math.min(liquidLevel + 8, 64);
+				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256){
+					liquidLevel = Math.min(liquidLevel + 32, 256);
 					Type = 1;
 					itemstack.itemID = TFCItems.RedSteelBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 64){
-					liquidLevel = Math.min(liquidLevel + 1, 64);
+				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 256){
+					liquidLevel = Math.min(liquidLevel + 1, 256);
 					Type = 4;
 					itemstack.stackSize-=1;
 					if(itemstack.stackSize==0)
@@ -511,7 +526,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	public int getLiquidScaled(int i) {
-		return (int)((liquidLevel/64f)*i);
+		return (int)((liquidLevel/256f)*i);
 	}
 
 	public boolean actionSeal() {

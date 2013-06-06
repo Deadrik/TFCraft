@@ -207,7 +207,7 @@ public class BlockBarrel extends BlockTerraContainer
 		{
 			if(world.getBlockTileEntity(x, y, z) != null){
 				TileEntityBarrel TeBarrel = (TileEntityBarrel)(world.getBlockTileEntity(x, y, z));
-				if (TeBarrel.getSealed()){
+				if (TeBarrel.getSealed()||entityplayer.isSneaking()){
 					return false;
 				}
 				entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
