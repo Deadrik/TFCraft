@@ -23,6 +23,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.INetworkTE;
 import TFC.Containers.ContainerKnapping;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
@@ -32,7 +33,6 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Items.Tools.ItemWritableBookTFC;
-import TFC.TileEntities.NetworkTileEntity;
 import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
@@ -139,7 +139,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 					if(world != null && world.isRemote)
 					{
-						NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+						INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
 						if(te!= null)
 							te.handleInitPacket(dis);
 					}
@@ -157,7 +157,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 
 				ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 				DataOutputStream dos=new DataOutputStream(bos);
-				NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+				INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
 				if(te != null)
 				{
 
@@ -228,7 +228,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					y = dis.readInt();
 					z = dis.readInt();
 
-					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+					INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
 					if(te!= null)
 						te.handleDataPacket(dis);
 				}
@@ -241,7 +241,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					y = dis.readInt();
 					z = dis.readInt();
 
-					NetworkTileEntity te = (NetworkTileEntity) world.getBlockTileEntity(x, y, z);
+					INetworkTE te = (INetworkTE) world.getBlockTileEntity(x, y, z);
 					if(te!= null)
 						te.handleDataPacketServer(dis, player);
 				}
