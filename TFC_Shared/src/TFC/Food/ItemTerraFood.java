@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -14,9 +13,8 @@ import net.minecraft.world.World;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.Player.TFC_PlayerClient;
-import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -149,18 +147,17 @@ public class ItemTerraFood extends ItemFood implements ISize
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
 		{
-			TFC_PlayerServer playerserver = TFC_PlayerServer.getFromEntityPlayer(player);
-			if ((playerserver.getFoodStatsTFC().needFood()))
+			if (foodstats.needFood())
 			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
 		}
 		else
 		{
-			TFC_PlayerClient playerclient = TFC_PlayerClient.getFromEntityPlayer(player);
-			if ((playerclient.getFoodStatsTFC().needFood()))
+			if (foodstats.needFood())
 			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
@@ -173,12 +170,13 @@ public class ItemTerraFood extends ItemFood implements ISize
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
 	{
 		is.stackSize--;
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		player.getFoodStats().addStats(this);
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		if(!world.isRemote)
 		{
-			TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
-			playerServer.getFoodStatsTFC().addStats(this);
+			foodstats.addStats(this);
+			TFC_Core.setPlayerFoodStats(player, foodstats);
 		}
 		return is;
 	}

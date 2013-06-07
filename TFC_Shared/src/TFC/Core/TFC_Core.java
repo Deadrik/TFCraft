@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -15,6 +16,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Enums.EnumWoodMaterial;
+import TFC.Food.FoodStatsTFC;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -432,5 +434,17 @@ public class TFC_Core
 			return true;
 		}
 		return false;
+	}
+
+	public static FoodStatsTFC getPlayerFoodStats(EntityPlayer player)
+	{
+		FoodStatsTFC foodstats = new FoodStatsTFC();
+		foodstats.readNBT(player.getEntityData());
+		return foodstats;
+	}
+	
+	public static void setPlayerFoodStats(EntityPlayer player, FoodStatsTFC foodstats)
+	{
+		foodstats.writeNBT(player.getEntityData());
 	}
 }

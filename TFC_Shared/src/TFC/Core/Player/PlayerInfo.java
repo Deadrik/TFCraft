@@ -18,6 +18,9 @@ public class PlayerInfo
 	
 	public INetworkManager networkManager;
 	private long lastChange;
+	
+	public boolean guishowFoodRestoreAmount = false;
+	public int guiFoodRestoreAmount = 0;
 
 	public PlayerInfo(String name, INetworkManager nm)
 	{

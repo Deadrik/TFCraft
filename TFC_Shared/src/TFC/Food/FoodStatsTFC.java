@@ -1,43 +1,16 @@
 package TFC.Food;
 
-import TFC.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemFood;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
-import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.TFC_PlayerServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public class FoodStatsTFC extends FoodStats
+public class FoodStatsTFC
 {
 	/** The player's food level. This measures how much food the player can handle.*/
 	public float foodLevel = 100;
@@ -55,8 +28,11 @@ public class FoodStatsTFC extends FoodStats
 	private long foodTimer = 0;
 	private long foodHealTimer = 0;
 
-	public float waterLevel = (float) (TFC_Time.dayLength*2/10);
+	public float waterLevel = TFC_Time.dayLength*2/10;
 	private long waterTimer = 0;
+
+
+	private int prevFoodLevel = 100;
 
 	public FoodStatsTFC()
 	{
@@ -68,14 +44,12 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Handles the food game logic.
 	 */
-	@Override
 	public void onUpdate(EntityPlayer player)
 	{
 		if(!player.worldObj.isRemote)
 		{
 			int difficulty = player.worldObj.difficultySetting;
 			EntityPlayerMP playermp = (EntityPlayerMP)player;
-			TFC_PlayerServer playerserver = (TFC_PlayerServer) playermp.getServerPlayerBase("TFC Player Server");
 			
 			float temp = TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
 
@@ -110,9 +84,9 @@ public class FoodStatsTFC extends FoodStats
 			{
 				this.foodHealTimer += TFC_Time.hourLength/2;
 
-				if (this.foodLevel >= 25 && playerserver.shouldHeal())
+				if (this.foodLevel >= 25 && player.shouldHeal())
 				{
-					player.heal((int) ((float)playerserver.getMaxHealth()*0.01f));
+					player.heal((int) (player.getMaxHealth()*0.01f));
 
 					if (this.foodSaturationLevel > 0.0F)
 					{
@@ -167,16 +141,20 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Get the player's food level.
 	 */
-	@Override
 	public int getFoodLevel()
 	{
 		return (int) this.foodLevel;
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public int getPrevFoodLevel()
+    {
+        return this.prevFoodLevel ;
+    }
 
 	/**
 	 * If foodLevel is not max.
 	 */
-	@Override
 	public boolean needFood()
 	{
 		return this.foodLevel < 100;
@@ -190,7 +168,6 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Reads food stats from an NBT object.
 	 */
-	@Override
 	public void readNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		if (par1NBTTagCompound.hasKey("foodCompound"))
@@ -207,7 +184,6 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Writes food stats to an NBT object.
 	 */
-	@Override
 	public void writeNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		NBTTagCompound foodCompound = new NBTTagCompound();
@@ -222,7 +198,6 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * adds input to foodExhaustionLevel to a max of 40
 	 */
-	@Override
 	public void addExhaustion(float par1)
 	{
 		this.foodExhaustionLevel = Math.min(this.foodExhaustionLevel + par1, 40.0F);
@@ -231,19 +206,16 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Get the player's food saturation level.
 	 */
-	@Override
 	public float getSaturationLevel()
 	{
 		return this.foodSaturationLevel;
 	}
 
-	@Override
 	public void setFoodLevel(int par1)
 	{
 		this.foodLevel = par1;
 	}
 	
-	@Override
 	public void setFoodSaturationLevel(float par1)
 	{
 		this.foodSaturationLevel = par1;
@@ -252,17 +224,15 @@ public class FoodStatsTFC extends FoodStats
 	/**
 	 * Args: int foodLevel, float foodSaturationModifier
 	 */
-	@Override
 	public void addStats(int par1, float par2)
 	{
 		this.foodLevel = Math.min(par1 + this.foodLevel, 100);
-		this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 / 3 * par2 * 2.0F, (float)this.foodLevel);
+		this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float)par1 / 3 * par2 * 2.0F, this.foodLevel);
 	}
 
 	/**
 	 * Eat some food.
 	 */
-	@Override
 	public void addStats(ItemFood par1ItemFood)
 	{
 		this.addStats(par1ItemFood.getHealAmount(), par1ItemFood.getSaturationModifier());

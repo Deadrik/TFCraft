@@ -11,7 +11,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Core.TFC_Core;
 
 public class ItemPotteryJug extends ItemPotteryBase
 {
@@ -29,7 +29,7 @@ public class ItemPotteryJug extends ItemPotteryBase
         if (!par2World.isRemote)
         {
             if(par1ItemStack.getItemDamage() == 2)
-            	TFC_PlayerServer.getFromEntityPlayer(par3EntityPlayer).getFoodStatsTFC().restoreWater(par3EntityPlayer, 2400);
+            	TFC_Core.getPlayerFoodStats(par3EntityPlayer).restoreWater(par3EntityPlayer, 2400);
         }
 
         if (!par3EntityPlayer.capabilities.isCreativeMode && par1ItemStack.getItemDamage() > 1)

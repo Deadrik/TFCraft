@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,9 +15,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.Player.TFC_PlayerClient;
-import TFC.Core.Player.TFC_PlayerServer;
 
 public class ItemMeal extends ItemTerraFood
 {
@@ -145,8 +143,9 @@ public class ItemMeal extends ItemTerraFood
 			
 			int energy = getMealEnergy(is);
 			int filling = getMealFilling(is);
-			TFC_PlayerServer playerServer = (TFC_PlayerServer) ((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
-			playerServer.getFoodStatsTFC().addStats(filling, energy/100f);
+			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+			foodstats.addStats(filling, energy/100f);
+			TFC_Core.setPlayerFoodStats(player, foodstats);
 			player.inventory.addItemStackToInventory(new ItemStack(Item.bowlEmpty,1));
 		}
 		is.stackSize--;
@@ -262,26 +261,24 @@ public class ItemMeal extends ItemTerraFood
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
 	{
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		if(!world.isRemote)
 		{
-			TFC_PlayerServer playerserver = TFC_PlayerServer.getFromEntityPlayer(player);
-
 			int energy = getMealEnergy(is)/100;
 			int filling = getMealFilling(is);
 
-			if (playerserver.getFoodStatsTFC().needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
+			if (foodstats.needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
 			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}
 		}
 		else if(world.isRemote)
 		{
-			TFC_PlayerClient playerclient = TFC_PlayerClient.getFromEntityPlayer(player);
 
 			int energy = getMealEnergy(is)/100;
 			int filling = getMealFilling(is);
 
-			if (playerclient.getFoodStatsTFC().needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
+			if (foodstats.needFood() && filling+(filling / 3 * energy * 2.0F) <= 140)
 			{
 				player.setItemInUse(is, this.getMaxItemUseDuration(is));
 			}

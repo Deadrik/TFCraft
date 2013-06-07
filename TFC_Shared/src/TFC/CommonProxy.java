@@ -9,17 +9,16 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.ServerPlayerAPI;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import TFC.Containers.ContainerAnvil;
 import TFC.Containers.ContainerChestTFC;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerKnapping;
 import TFC.Containers.ContainerLeatherWorking;
 import TFC.Containers.ContainerQuern;
-import TFC.Containers.ContainerAnvil;
 import TFC.Containers.ContainerTerraBarrel;
 import TFC.Containers.ContainerTerraBloomery;
 import TFC.Containers.ContainerTerraFirepit;
@@ -30,7 +29,6 @@ import TFC.Containers.ContainerTerraScribe;
 import TFC.Containers.ContainerTerraSluice;
 import TFC.Containers.ContainerTerraWorkbench;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.TFC_PlayerServer;
 import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingDirt;
@@ -264,11 +262,6 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.SteelHammer, "hammer", 4);
 		MinecraftForge.setToolClass(TFCItems.TinHammer, "hammer", 1);
 		MinecraftForge.setToolClass(TFCItems.ZincHammer, "hammer", 1);
-	}
-
-	public void RegisterPlayerApiClasses()
-	{
-		ServerPlayerAPI.register("TFC Player Server", TFC_PlayerServer.class);
 	}
 	
 	public void onClientLogin()

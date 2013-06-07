@@ -13,7 +13,7 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Core.TFC_Core;
 
 public class ItemCustomPotion extends ItemPotion
 {
@@ -27,9 +27,9 @@ public class ItemCustomPotion extends ItemPotion
     }
     
     @Override
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
     {
-        if (!par3EntityPlayer.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             --par1ItemStack.stackSize;
         }
@@ -45,23 +45,23 @@ public class ItemCustomPotion extends ItemPotion
                 while (var5.hasNext())
                 {
                     PotionEffect var6 = (PotionEffect)var5.next();
-                    par3EntityPlayer.addPotionEffect(new PotionEffect(var6));
+                    player.addPotionEffect(new PotionEffect(var6));
                 }
             }
             else
             {
-            	TFC_PlayerServer.getFromEntityPlayer(par3EntityPlayer).getFoodStatsTFC().restoreWater(par3EntityPlayer, 2400);
+            	TFC_Core.getPlayerFoodStats(player).restoreWater(player, 2400);
             }
         }
 
-        if (!par3EntityPlayer.capabilities.isCreativeMode)
+        if (!player.capabilities.isCreativeMode)
         {
             if (par1ItemStack.stackSize <= 0)
             {
                 return new ItemStack(Item.glassBottle);
             }
 
-            par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle));
+            player.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle));
         }
 
         return par1ItemStack;

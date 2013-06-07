@@ -20,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.PlayerAPI;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StringTranslate;
 import net.minecraft.world.IBlockAccess;
@@ -34,7 +33,6 @@ import TFC.Core.KeyBindings;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityStand;
@@ -58,6 +56,7 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
+import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiBarrel;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
@@ -67,7 +66,6 @@ import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiQuern;
-import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiTerraBloomery;
 import TFC.GUI.GuiTerraFirepit;
 import TFC.GUI.GuiTerraForge;
@@ -221,13 +219,6 @@ public class ClientProxy extends CommonProxy
 	public void onClientLogin()
 	{
 
-	}
-
-	@Override
-	public void RegisterPlayerApiClasses()
-	{
-		super.RegisterPlayerApiClasses();
-		PlayerAPI.register("TFC Player Client", TFC_PlayerClient.class);
 	}
 
 	@Override

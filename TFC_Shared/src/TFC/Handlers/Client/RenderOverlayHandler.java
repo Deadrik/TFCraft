@@ -11,9 +11,10 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.TFC_PlayerClient;
 import TFC.Food.FoodStatsTFC;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemCustomHoe;
@@ -42,7 +43,8 @@ public class RenderOverlayHandler
 		int healthRowHeight = sr.getScaledHeight() - 39;
 		int armorRowHeight = healthRowHeight - 10;
 
-		TFC_PlayerClient playerclient = ((TFC.Core.Player.TFC_PlayerClient)Minecraft.getMinecraft().thePlayer.getPlayerBase("TFC Player Client"));
+		//TFC_PlayerClient playerclient = ((TFC.Core.Player.TFC_PlayerClient)Minecraft.getMinecraft().thePlayer.getPlayerBase("TFC Player Client"));
+		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
 		if(playerclient != null)
 		{
 			//Draw Health
@@ -51,12 +53,12 @@ public class RenderOverlayHandler
 			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 			Minecraft.getMinecraft().renderEngine.bindTexture("/bioxx/icons.png");
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
-			float maxHealth = playerclient.getMaxHealth();
+			float maxHealth = Minecraft.getMinecraft().thePlayer.getMaxHealth();
 			float percentHealth = Minecraft.getMinecraft().thePlayer.getHealth()/maxHealth;
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
 			//Draw Food and Water
-			FoodStatsTFC foodstats = playerclient.getFoodStatsTFC();
+			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(Minecraft.getMinecraft().thePlayer);
 			int foodLevel = foodstats.getFoodLevel();
 			int preFoodLevel = foodstats.getPrevFoodLevel();
 

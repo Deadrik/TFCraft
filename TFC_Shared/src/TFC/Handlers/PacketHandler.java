@@ -6,7 +6,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -30,8 +29,7 @@ import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Player.TFC_PlayerClient;
-import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Food.FoodStatsTFC;
 import TFC.Items.Tools.ItemWritableBookTFC;
 import cpw.mods.fml.common.network.IConnectionHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -69,20 +67,22 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
 		DataOutputStream dos=new DataOutputStream(bos);
 		EntityPlayerMP player = (EntityPlayerMP)p;
-		TFC_PlayerServer playerserver = (TFC_PlayerServer) player.getServerPlayerBase("TFC Player Server");
+		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 		World world= player.worldObj;
 
 		if(!world.isRemote)
 		{
-			playerserver.getFoodStatsTFC().resetTimers();
+			foodstats.resetTimers();
 			try
 			{
 				dos.writeByte(Packet_Init_World_Client);
 				dos.writeLong(world.getSeed());
 				dos.writeLong(TFC_Time.dayLength);
 				dos.writeInt(TFC_Time.daysInYear);
-				dos.writeFloat(playerserver.getFoodStatsTFC().foodLevel);
-				dos.writeFloat(playerserver.getFoodStatsTFC().waterLevel);
+				
+				dos.writeFloat(foodstats.foodLevel);
+				dos.writeFloat(foodstats.waterLevel);
+
 				dos.writeInt(TFC_Settings.HealthGainRate);
 				dos.writeInt(TFC_Settings.HealthGainCap);
 			} 
@@ -116,17 +116,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			type = dis.readByte();
 
 			EntityPlayer player = (EntityPlayer)p;
-			TFC_PlayerClient playerClient = null;
-			TFC_PlayerServer playerServer = null;;
 			World world= player.worldObj;
-			if(world.isRemote)
-			{
-				playerClient = (TFC_PlayerClient)((EntityPlayerSP)player).getPlayerBase("TFC Player Client");
-			}
-			else
-			{	
-				playerServer = (TFC_PlayerServer)((EntityPlayerMP)player).getServerPlayerBase("TFC Player Server");
-			}
 
 			if(type == Packet_Init_Block_Client)//Client recieves the init packet from the server and assigns the data
 			{
@@ -208,8 +198,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						seed = dis.readLong();
 						TFC_Time.dayLength = dis.readLong();
 						TFC_Time.daysInYear = dis.readInt();
-						playerClient.getFoodStatsTFC().foodLevel = dis.readFloat();
-						playerClient.getFoodStatsTFC().waterLevel = dis.readFloat();
+						FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+						foodstats.foodLevel = dis.readFloat();
+						foodstats.waterLevel = dis.readFloat();
+						TFC_Core.setPlayerFoodStats(player, foodstats);
 						TFC_Settings.HealthGainRate = dis.readInt();
 						TFC_Settings.HealthGainCap = dis.readInt();
 
@@ -252,8 +244,10 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				{
 					try 
 					{
-						playerClient.getFoodStatsTFC().foodLevel = dis.readFloat();
-						playerClient.getFoodStatsTFC().waterLevel = dis.readFloat();
+						FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+						foodstats.foodLevel = dis.readFloat();
+						foodstats.waterLevel = dis.readFloat();
+						TFC_Core.setPlayerFoodStats(player, foodstats);
 
 					} catch (IOException e) {}
 				}

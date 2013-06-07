@@ -23,7 +23,9 @@ import TFC.Food.TFCPotion;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
+import TFC.Handlers.EnteringChunkHandler;
 import TFC.Handlers.EntityDamageHandler;
+import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.ServerTickHandler;
@@ -132,6 +134,9 @@ public class TerraFirmaCraft
 		// Register the Entity Spawn Handler
 		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 		
+		// Register the Entity Living Update Handler
+		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
+		
 		// Register the Entity Hurt Handler
 		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
 
@@ -149,6 +154,9 @@ public class TerraFirmaCraft
 		
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
+		
+		// Register the Chunk Load/Save Handler
+		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
 
 		//Register new Minecarts
 		//MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
@@ -176,7 +184,7 @@ public class TerraFirmaCraft
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
-		this.proxy.RegisterPlayerApiClasses();
+
 	}
 
 	@ServerStarting

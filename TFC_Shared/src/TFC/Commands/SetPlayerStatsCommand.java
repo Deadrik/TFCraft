@@ -7,7 +7,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import TFC.Core.Player.TFC_PlayerServer;
+import TFC.Core.TFC_Core;
 import TFC.Food.FoodStatsTFC;
 
 public class SetPlayerStatsCommand extends CommandBase{
@@ -28,7 +28,7 @@ public class SetPlayerStatsCommand extends CommandBase{
 
             MinecraftServer var3 = MinecraftServer.getServer();
             EntityPlayerMP var4;
-            EntityPlayerMP var5;
+            EntityPlayerMP player;
             double[] values = new double[3];
             var4 = getCommandSenderAsPlayer(sender);
             if(params.length == 4 || params.length == 3){
@@ -43,20 +43,19 @@ public class SetPlayerStatsCommand extends CommandBase{
             		}
             	}
             }
-            var5 = var4;     
+            player = var4;     
             if(params.length == 4){
             	try{
-            	var5  = func_82359_c(sender, params[0]);
+            	player  = func_82359_c(sender, params[0]);
             	}catch(PlayerNotFoundException e){
             		throw new PlayerNotFoundException("Unkown Player");
             	}
             }
-            if(var5 == null)throw new PlayerNotFoundException("Invalid");
-            TFC_PlayerServer var6 = TFC_PlayerServer.getFromEntityPlayer(var5);
-            FoodStatsTFC fs = var6.getFoodStatsTFC();
-            var6.getPlayer().setHealthField((int)((values[0]/100d)*var6.getMaxHealth()));
+            if(player == null)throw new PlayerNotFoundException("Invalid");
+            FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
+            player.setHealthField((int)((values[0]/100d)*player.getMaxHealth()));
             fs.setFoodLevel((int)values[1]);
-            fs.waterLevel = ((int)((values[2]/100d)*fs.getMaxWater(var6.getPlayer())));
+            fs.waterLevel = ((int)((values[2]/100d)*fs.getMaxWater(player)));
             throw new PlayerNotFoundException(values[0]+" "+values[1]+" "+values[2]);
 		
 	}
