@@ -1,7 +1,6 @@
 package TFC.Items.Tools;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
@@ -15,6 +14,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.Core.Helper;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Items.ItemTerra;
+import TFC.TileEntities.TileEntityBarrel;
 
 public class ItemCustomBucket extends ItemTerra
 {
@@ -106,6 +106,13 @@ public class ItemCustomBucket extends ItemTerra
                     {
                         return new ItemStack(TFCItems.WoodenBucketEmpty);
                     }
+                    
+                    if(world.getBlockId(i,j,k)==TFCBlocks.Barrel.blockID){
+                    	TileEntityBarrel te = (TileEntityBarrel)world.getBlockTileEntity(i, j, k);
+                    	if(te.checkValidAddition(this.isFull)){
+                    		return new ItemStack(TFCItems.WoodenBucketEmpty);
+                    	}
+                    }
 
                     if (var12.sideHit == 0)
                     {
@@ -131,6 +138,8 @@ public class ItemCustomBucket extends ItemTerra
                     {
                         ++i;
                     }
+                    
+                    
 
                     if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
                     {
@@ -165,7 +174,7 @@ public class ItemCustomBucket extends ItemTerra
                                     world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID, 0, 0x02);
                                 }
                             }
-                            else
+                            else if(this.isFull != 1)
                             {
                                 world.setBlock(i, j, k, this.isFull);
                             }

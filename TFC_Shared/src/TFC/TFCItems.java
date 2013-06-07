@@ -1575,7 +1575,7 @@ public class TFCItems
 		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setFolder("toolheads/").setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCMaterials);
 		StoneBrick = (new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++)).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
-		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),0).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
+		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
 		Hide = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hide",num++)).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","SoakedHide",num++)).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","ScrapedHide",num++)).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
