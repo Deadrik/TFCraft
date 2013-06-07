@@ -11,14 +11,14 @@ import TFC.Items.Tools.ItemHammer;
 import TFC.Items.Tools.ItemPlan;
 import TFC.TileEntities.TileEntityAnvil;
 
-public class ContainerTerraAnvil extends ContainerTFC
+public class ContainerAnvil extends ContainerTFC
 {
 	private TileEntityAnvil anvil;
 	private int greenIndicator;
 	private int redIndicator;
 	private int tier = -1;
 
-	public ContainerTerraAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil anvil, World world, int x, int y, int z)
+	public ContainerAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil anvil, World world, int x, int y, int z)
 	{
 		this.anvil = anvil;
 

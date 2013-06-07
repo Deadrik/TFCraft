@@ -3,6 +3,7 @@ package TFC.GUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.world.World;
@@ -10,20 +11,21 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.API.Enums.CraftingRuleEnum;
-import TFC.Containers.ContainerTerraAnvil;
+import TFC.Containers.ContainerAnvil;
 import TFC.TileEntities.TileEntityAnvil;
 
 
-public class GuiTerraAnvil extends GuiContainer
+public class GuiAnvil extends GuiContainer
 {
 	private TileEntityAnvil AnvilEntity;
 
-	public GuiTerraAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil tileentityanvil, World world, int x, int y, int z)
+	public GuiAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil te, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraAnvil(inventoryplayer,tileentityanvil, world, x, y, z) );
-		AnvilEntity = tileentityanvil;
+		super(new ContainerAnvil(inventoryplayer,te, world, x, y, z) );
+		AnvilEntity = te;
 		this.xSize = 208;
 		this.ySize = 198;
+		
 	}
 
 	@Override
@@ -108,10 +110,45 @@ public class GuiTerraAnvil extends GuiContainer
 			drawTexturedModalRect(w + 76 + i1, h + 108, 208, 10, 5, 6);
 
 			drawRules(w,h);
+			//drawRulesImages(w,h);
 		}
 
 	}
+	
+	public void drawRulesImages(int w, int h)
+	{
+		this.mc.renderEngine.bindTexture("/bioxx/processes.png");
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+		if(AnvilEntity.workRecipe != null)
+		{
+			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
+			int[] ItemRules = AnvilEntity.getItemRules();
+			
+			if(Rules[0] == CraftingRuleEnum.HITLAST)
+			{
+				drawTexturedModalRect(w + 209, h + 80, 16, 16, 0, 0, 64, 64);
+			}
+			if(Rules[1] == CraftingRuleEnum.HITSECONDFROMLAST)
+			{
+				drawTexturedModalRect(w + 225, h + 80, 16, 16, 0, 0, 64, 64);
+			}
+			if(Rules[2] == CraftingRuleEnum.HITTHIRDFROMLAST)
+			{
+				drawTexturedModalRect(w + 241, h + 80, 16, 16, 0, 0, 64, 64);
+			}
+			
+			int r0Min = Math.min((Rules[0].Min + 1), 2) * 16;
+			int r0Max = (Rules[0].Max + 1) * 16;
+			
+			//drawTexturedModalRect(w + 209, h + 80, 16, 16, 0, 0, 64, 64);
+		}
+	}
 
+	public void DrawRule()
+	{
+		
+	}
+	
 	public void drawRules(int w, int h)
 	{
 		fontRenderer.drawString("Rules:", w + 209, h+30-8, 0x404040);
@@ -203,5 +240,19 @@ public class GuiTerraAnvil extends GuiContainer
 		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
 	}
 
-
+	/**
+     * Draws a textured rectangle at the stored z-value. Args: x, y, u, v, width, height
+     */
+    public void drawTexturedModalRect(int drawX, int drawY, int drawWidth, int drawHeight, int u, int v, int width, int height)
+    {
+        float f = 0.00390625F;
+        float f1 = 0.00390625F;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(drawX + 0, drawY + drawHeight, this.zLevel, (u + 0) * f, (v + height) * f1);
+        tessellator.addVertexWithUV(drawX + drawWidth, drawY + drawHeight, this.zLevel, (u + width) * f, (v + height) * f1);
+        tessellator.addVertexWithUV(drawX + drawWidth, drawY + 0, this.zLevel, (u + width) * f, (v + 0) * f1);
+        tessellator.addVertexWithUV(drawX + 0, drawY + 0, this.zLevel, (u + 0) * f, (v + 0) * f1);
+        tessellator.draw();
+    }
 }

@@ -19,7 +19,7 @@ import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerKnapping;
 import TFC.Containers.ContainerLeatherWorking;
 import TFC.Containers.ContainerQuern;
-import TFC.Containers.ContainerTerraAnvil;
+import TFC.Containers.ContainerAnvil;
 import TFC.Containers.ContainerTerraBarrel;
 import TFC.Containers.ContainerTerraBloomery;
 import TFC.Containers.ContainerTerraFirepit;
@@ -375,7 +375,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 21:
 		{
-			return new ContainerTerraAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
+			return new ContainerAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{

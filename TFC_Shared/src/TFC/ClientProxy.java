@@ -67,7 +67,7 @@ import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiQuern;
-import TFC.GUI.GuiTerraAnvil;
+import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiTerraBloomery;
 import TFC.GUI.GuiTerraFirepit;
 import TFC.GUI.GuiTerraForge;
@@ -275,7 +275,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 21:
 		{
-			return new GuiTerraAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
+			return new GuiAnvil(player.inventory, (TileEntityAnvil) te, world, x, y, z);
 		}
 		case 22:
 		{
