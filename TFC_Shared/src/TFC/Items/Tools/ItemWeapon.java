@@ -14,6 +14,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
@@ -53,7 +54,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	/**

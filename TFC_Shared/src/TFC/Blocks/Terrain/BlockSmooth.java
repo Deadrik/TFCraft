@@ -2,8 +2,6 @@ package TFC.Blocks.Terrain;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,10 +10,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSmooth extends BlockTerra
 {
@@ -59,7 +60,7 @@ public class BlockSmooth extends BlockTerra
     {
 		for(int i = 0; i < names.length; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Smooth");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/"+names[i]+" Smooth");
 		}
     }
 

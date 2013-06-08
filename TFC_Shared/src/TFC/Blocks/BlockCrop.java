@@ -16,6 +16,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
@@ -63,32 +64,32 @@ public class BlockCrop extends BlockContainer
 	{
 		for(int i = 1; i < 6; i++)
 		{
-			iconsCarrots[i-1] = iconRegisterer.registerIcon("plants/crops/Carrots ("+i+")");
-			iconsGarlic[i-1] = iconRegisterer.registerIcon("plants/crops/Garlic ("+i+")");
+			iconsCarrots[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Carrots ("+i+")");
+			iconsGarlic[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Garlic ("+i+")");
 		}
 		for(int i = 1; i < 7; i++)
 		{
-			iconsCorn[i-1] = iconRegisterer.registerIcon("plants/crops/Corn ("+i+")");
-			iconsCabbage[i-1] = iconRegisterer.registerIcon("plants/crops/Cabbage ("+i+")");
+			iconsCorn[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Corn ("+i+")");
+			iconsCabbage[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Cabbage ("+i+")");
 		}
 		for(int i = 1; i < 8; i++)
 		{
-			iconsPepperRed[i-1] = iconRegisterer.registerIcon("plants/crops/PepperRed ("+i+")");
-			iconsPepperYellow[i-1] = iconRegisterer.registerIcon("plants/crops/PepperYellow ("+i+")");
-			iconsGreenbean[i-1] = iconRegisterer.registerIcon("plants/crops/Greenbean ("+i+")");
-			iconsOnion[i-1] = iconRegisterer.registerIcon("plants/crops/Onion ("+i+")");
-			iconsPotato[i-1] = iconRegisterer.registerIcon("plants/crops/Potato ("+i+")");
-			iconsSquash[i-1] = iconRegisterer.registerIcon("plants/crops/Squash ("+i+")");
-			iconsSoybean[i-1] = iconRegisterer.registerIcon("plants/crops/Soybean ("+i+")");
+			iconsPepperRed[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/PepperRed ("+i+")");
+			iconsPepperYellow[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/PepperYellow ("+i+")");
+			iconsGreenbean[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Greenbean ("+i+")");
+			iconsOnion[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Onion ("+i+")");
+			iconsPotato[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Potato ("+i+")");
+			iconsSquash[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Squash ("+i+")");
+			iconsSoybean[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Soybean ("+i+")");
 		}
 		for(int i = 1; i < 9; i++)
 		{
-			iconsTomato[i-1] = iconRegisterer.registerIcon("plants/crops/Tomato ("+i+")");
-			iconsWheat[i-1] = iconRegisterer.registerIcon("plants/crops/Wheat ("+i+")");
-			iconsRye[i-1] = iconRegisterer.registerIcon("plants/crops/Rye ("+i+")");
-			iconsBarley[i-1] = iconRegisterer.registerIcon("plants/crops/Barley ("+i+")");
-			iconsOat[i-1] = iconRegisterer.registerIcon("plants/crops/Oat ("+i+")");
-			iconsRice[i-1] = iconRegisterer.registerIcon("plants/crops/Rice ("+i+")");
+			iconsTomato[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Tomato ("+i+")");
+			iconsWheat[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Wheat ("+i+")");
+			iconsRye[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Rye ("+i+")");
+			iconsBarley[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Barley ("+i+")");
+			iconsOat[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Oat ("+i+")");
+			iconsRice[i-1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/crops/Rice ("+i+")");
 			
 		}
 	}

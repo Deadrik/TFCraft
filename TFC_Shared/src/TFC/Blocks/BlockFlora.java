@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -55,7 +56,7 @@ public class BlockFlora extends BlockTerra
     {
         for (int i = 0; i < icons.length; ++i)
         {
-            icons[i] = par1IconRegister.registerIcon("plants/"+MetaNames[i]);
+            icons[i] = par1IconRegister.registerIcon(Reference.ModID + ":" + "plants/"+MetaNames[i]);
         }
     }
     

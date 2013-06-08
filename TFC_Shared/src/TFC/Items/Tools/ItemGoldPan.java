@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCTabs;
@@ -71,11 +72,11 @@ public class ItemGoldPan extends ItemTerra
     @Override
 	public void registerIcons(IconRegister registerer)
     {
-    	icons[0] = registerer.registerIcon("tools/GoldPan_0");
-    	icons[1] = registerer.registerIcon("tools/GoldPan_1");
-    	icons[2] = registerer.registerIcon("tools/GoldPan_2");
-    	icons[3] = registerer.registerIcon("tools/GoldPan_3");
-    	icons[4] = registerer.registerIcon("tools/GoldPan_4");
+    	icons[0] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_0");
+    	icons[1] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_1");
+    	icons[2] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_2");
+    	icons[3] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_3");
+    	icons[4] = registerer.registerIcon(Reference.ModID + ":" + "tools/GoldPan_4");
     }
 
     @Override

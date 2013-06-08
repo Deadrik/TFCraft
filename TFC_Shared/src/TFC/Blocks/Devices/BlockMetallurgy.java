@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TileEntityMetallurgy;
@@ -78,8 +79,8 @@ public class BlockMetallurgy extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		iconTop = iconRegisterer.registerIcon("devices/Metallurgy Table Top");
-		iconSide = iconRegisterer.registerIcon("devices/Metallurgy Table Side");
+		iconTop = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Metallurgy Table Top");
+		iconSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Metallurgy Table Side");
     }
 
 

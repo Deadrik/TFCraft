@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
@@ -28,7 +29,7 @@ public class ItemProPick extends ItemTerra
     @Override
     public void registerIcons(IconRegister registerer)
     {
-    	this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
+    	this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
     @Override

@@ -19,10 +19,6 @@ public class ItemCustomKnife extends ItemWeapon
 		this.damageType = EnumDamageType.PIERCING;
 	}
 
-	public String getTextureFile() {
-		return "/bioxx/terratools.png";
-	}
-
 	@Override
 	public EnumSize getSize()
 	{

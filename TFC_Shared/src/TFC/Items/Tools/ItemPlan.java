@@ -2,6 +2,7 @@ package TFC.Items.Tools;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
+import TFC.Reference;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.Items.ItemTerra;
@@ -26,7 +27,7 @@ public class ItemPlan extends ItemTerra
     public void registerIcons(IconRegister registerer)
     {
 		//registerer.registerIcon(textureFolder+"Blueprint");
-		icons = registerer.registerIcon("tools/Blueprint");
+		icons = registerer.registerIcon(Reference.ModID + ":" + "tools/Blueprint");
     }
 	
 	@Override

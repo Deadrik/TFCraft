@@ -2,12 +2,12 @@ package TFC.Blocks.Terrain;
 
 import java.util.List;
 
-import TFC.Blocks.BlockTerra;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import TFC.Reference;
+import TFC.Blocks.BlockTerra;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -32,6 +32,6 @@ public class BlockPeat extends BlockTerra
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		blockIcon = registerer.registerIcon("soil/Peat");
+		blockIcon = registerer.registerIcon(Reference.ModID + ":" + "soil/Peat");
     }
 }

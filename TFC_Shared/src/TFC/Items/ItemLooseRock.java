@@ -2,8 +2,6 @@ package TFC.Items;
 
 import java.util.List;
 
-import com.google.common.collect.ObjectArrays;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -11,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Constant.Global;
@@ -71,7 +70,7 @@ public class ItemLooseRock extends ItemTerra
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
-			icons[i] = registerer.registerIcon("rocks/" + MetaNames[i] + " Rock");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "rocks/" + MetaNames[i] + " Rock");
     }
 
 	@Override

@@ -12,6 +12,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
@@ -154,9 +155,9 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		textureSide = iconRegisterer.registerIcon("devices/Bloomery Side");
-		textureOn = iconRegisterer.registerIcon("devices/Bloomery On");
-		textureOff = iconRegisterer.registerIcon("devices/Bloomery Off");
+		textureSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Side");
+		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery On");
+		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Off");
     }
 
 	@Override

@@ -18,6 +18,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
@@ -43,7 +44,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon("wood/BarrelHoop");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
 	}
 
 	@Override

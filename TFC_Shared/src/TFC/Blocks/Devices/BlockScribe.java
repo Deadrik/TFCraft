@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TileEntityScribe;
@@ -79,8 +80,8 @@ public class BlockScribe extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		iconTop = iconRegisterer.registerIcon("devices/Scribing Table Top");
-		iconSide = iconRegisterer.registerIcon("devices/Scribing Table Side");
+		iconTop = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Scribing Table Top");
+		iconSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Scribing Table Side");
     }
 	@Override
 	public boolean isOpaqueCube()

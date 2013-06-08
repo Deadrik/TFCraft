@@ -2,43 +2,25 @@ package TFC.Blocks.Devices;
 
 import java.util.Random;
 
-import TFC.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import TFC.Reference;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityFirepit;
-import TFC.TileEntities.TileEntityLogPile;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockFirepit extends BlockTerraContainer
 {
@@ -175,9 +157,9 @@ public class BlockFirepit extends BlockTerraContainer
 		        world.playSoundEffect(i,j,k, "fire.fire", 0.4F + (random.nextFloat()/2), 0.7F + random.nextFloat());
 	        }
 		    
-			float f = (float)i + 0.5F;
-			float f1 = (float)j + 0.1F + random.nextFloat() * 6F / 16F;
-			float f2 = (float)k + 0.5F;
+			float f = i + 0.5F;
+			float f1 = j + 0.1F + random.nextFloat() * 6F / 16F;
+			float f2 = k + 0.5F;
 			float f3 = 0.52F;
 			float f4 = random.nextFloat() * 0.6F;
 			float f5 = random.nextFloat() * -0.6F;
@@ -274,7 +256,7 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		textureOn = iconRegisterer.registerIcon("devices/Firepit On");
-		textureOff = iconRegisterer.registerIcon("devices/Firepit Off");
+		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Firepit On");
+		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Firepit Off");
     }
 }

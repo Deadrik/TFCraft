@@ -2,50 +2,24 @@ package TFC.Blocks.Vanilla;
 
 import java.util.List;
 import java.util.Random;
-import TFC.*;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.Reference;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.TileEntities.TileEntitySapling;
 import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomCedarTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomHugeTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomRedwoodTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenCustomWillowTrees;
-import TFC.WorldGen.Generators.Trees.WorldGenDouglasFir;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class BlockCustomSapling extends BlockTerraContainer
 {
@@ -86,7 +60,7 @@ public class BlockCustomSapling extends BlockTerraContainer
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = registerer.registerIcon("wood/trees/"+WoodNames[i]+" Sapling");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/"+WoodNames[i]+" Sapling");
 		}
     }
 
@@ -161,12 +135,14 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockId(par2, par3, par4);
         return (var5 == 0 || blocksList[var5].blockMaterial.isReplaceable()) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
     }
 	
+	@Override
 	public boolean canBeReplacedByLeaves(World world, int x, int y, int z)
     {
         return true;
@@ -185,6 +161,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
 		return null;
@@ -193,6 +170,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * The type of render function that is called for this block
 	 */
+	@Override
 	public int getRenderType()
 	{
 		return 1;
@@ -202,6 +180,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	 */
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
@@ -210,6 +189,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
 	 */
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;

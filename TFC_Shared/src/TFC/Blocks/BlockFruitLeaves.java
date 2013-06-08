@@ -10,6 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_Climate;
@@ -78,12 +79,12 @@ public class BlockFruitLeaves extends BlockTerra
     {
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves");
-			iconsOpaque[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsDead[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves");
-			iconsDeadOpaque[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
-			iconsFruit[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Fruit");
-			iconsFlowers[i] = iconRegisterer.registerIcon("wood/fruit trees/" + WoodNames[i] + " Flowers");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
+			iconsOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			iconsDead[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves");
+			iconsDeadOpaque[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Leaves Opaque");
+			iconsFruit[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Fruit");
+			iconsFlowers[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/" + WoodNames[i] + " Flowers");
 		}
     }
 

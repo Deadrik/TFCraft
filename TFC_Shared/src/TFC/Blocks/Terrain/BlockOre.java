@@ -11,6 +11,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.Constant.Global;
@@ -51,7 +52,7 @@ public class BlockOre extends BlockTerra
     {
 		for(int i = 0; i < blockNames.length; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("ores/"+ blockNames[i] + " Ore");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "ores/"+ blockNames[i] + " Ore");
 		}
     }
 

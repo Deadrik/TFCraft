@@ -10,6 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import TFC.Reference;
 import TFC.API.Armor;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
@@ -43,7 +44,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon("armor/"+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
 	}
 
 	@Override

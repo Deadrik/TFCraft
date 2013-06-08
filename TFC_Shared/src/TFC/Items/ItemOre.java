@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 
@@ -63,7 +64,7 @@ public class ItemOre extends ItemTerra
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length-3; i++)
-			icons[i] = registerer.registerIcon(textureFolder+MetaNames[i]+" Ore");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i]+" Ore");
     }
 	
 	@Override

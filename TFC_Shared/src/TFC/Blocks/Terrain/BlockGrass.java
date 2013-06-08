@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Core.ColorizerGrassTFC;
@@ -51,11 +52,11 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     @Override
     public void registerIcons(IconRegister registerer)
     {
-		GrassTopTexture = registerer.registerIcon("GrassTop");
+		GrassTopTexture = registerer.registerIcon(Reference.ModID + ":" + "GrassTop");
 
-		iconSnowSide = registerer.registerIcon("snow");
-		iconGrassSideOverlay = registerer.registerIcon("GrassSide");
-		TFC_Textures.InvisibleTexture = registerer.registerIcon("Invisible");
+		iconSnowSide = registerer.registerIcon(Reference.ModID + ":" + "snow");
+		iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSide");
+		TFC_Textures.InvisibleTexture = registerer.registerIcon(Reference.ModID + ":" + "Invisible");
     }
 
     /**

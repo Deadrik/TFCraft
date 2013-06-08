@@ -14,6 +14,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
@@ -106,8 +107,8 @@ public class BlockCustomDoor extends BlockTerra
 	{
 		for(int i = 0, j = 0; i < 16; i++, j+=2)
 		{
-			icons[j] = registerer.registerIcon("wood/doors/"+WoodNames[i]+" Door Lower");
-			icons[j+1] = registerer.registerIcon("wood/doors/"+WoodNames[i]+" Door Upper");
+			icons[j] = registerer.registerIcon(Reference.ModID + ":" + "wood/doors/"+WoodNames[i]+" Door Lower");
+			icons[j+1] = registerer.registerIcon(Reference.ModID + ":" + "wood/doors/"+WoodNames[i]+" Door Upper");
 		}
 	}
 

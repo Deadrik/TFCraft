@@ -10,6 +10,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -79,7 +80,7 @@ public class ItemTerraFood extends ItemFood implements ISize
     @Override
     public void registerIcons(IconRegister registerer)
     {
-		this.itemIcon = registerer.registerIcon(folder+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + folder + this.getUnlocalizedName().replace("item.", ""));
     }
 
 	public static void addFoodTempInformation(ItemStack is, List arraylist)

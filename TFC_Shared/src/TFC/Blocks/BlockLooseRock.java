@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.Terrain.BlockOre;
@@ -127,6 +128,6 @@ public class BlockLooseRock extends BlockTerra
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-    	this.blockIcon = par1IconRegister.registerIcon("rocks/Granite Raw");
+    	this.blockIcon = par1IconRegister.registerIcon(Reference.ModID + ":" + "rocks/Granite Raw");
     }
 }

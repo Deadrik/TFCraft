@@ -12,6 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
@@ -106,8 +107,8 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		textureOn = iconRegisterer.registerIcon("devices/Forge On");
-		textureOff = iconRegisterer.registerIcon("devices/Forge Off");
+		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Forge On");
+		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Forge Off");
 	}
 
 	public boolean getIsFireLit(int i)

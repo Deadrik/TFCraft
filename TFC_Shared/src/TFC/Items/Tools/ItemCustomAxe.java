@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
@@ -31,7 +32,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
     @Override
     public void registerIcons(IconRegister registerer)
     {
-    	this.itemIcon = registerer.registerIcon("tools/"+this.getUnlocalizedName().replace("item.", ""));
+    	this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
 	@Override

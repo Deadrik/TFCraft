@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
@@ -120,7 +121,7 @@ public class ItemLogs extends ItemTerra
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 16; i++)
-			icons[i] = registerer.registerIcon("wood/"+Global.WOOD_ALL[i]+" Log");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+Global.WOOD_ALL[i]+" Log");
     }
 
 

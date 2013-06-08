@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
@@ -82,7 +83,7 @@ public class BlockDirt extends BlockTerra
     {
 		for(int i = 0; i < 23; i++)
 		{
-			icons[i] = registerer.registerIcon("soil/Dirt"+i);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "soil/Dirt"+i);
 		}
     }
 

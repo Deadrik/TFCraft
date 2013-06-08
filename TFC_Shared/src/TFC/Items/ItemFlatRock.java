@@ -1,15 +1,13 @@
 package TFC.Items;
 
-import TFC.API.Constant.Global;
-
-import com.google.common.collect.ObjectArrays;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
+import TFC.API.Constant.Global;
 
 public class ItemFlatRock extends ItemTerra
 {
@@ -49,7 +47,7 @@ public class ItemFlatRock extends ItemTerra
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
-			icons[i] = registerer.registerIcon("rocks/flatrocks/"+MetaNames[i]+" Raw");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "rocks/flatrocks/"+MetaNames[i]+" Raw");
     }
 
     /*public Icon getIconFromDamage(int i)

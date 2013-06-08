@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
@@ -64,9 +65,9 @@ public class BlockQuern extends BlockTerraContainer {
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		QuernBase = registerer.registerIcon("devices/Quern Base");
-		QuernTop1 = registerer.registerIcon("devices/Quern Top 1");
-		QuernTop2 = registerer.registerIcon("devices/Quern Top 2");
+		QuernBase = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Base");
+		QuernTop1 = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Top 1");
+		QuernTop2 = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Top 2");
 	}
 
 	@Override

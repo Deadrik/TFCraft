@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TileEntities.TileEntityFruitTreeWood;
@@ -72,7 +73,7 @@ public class ItemFruitTreeSapling extends ItemTerra
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < MetaNames.length; i++)
-			icons[i] = registerer.registerIcon("wood/fruit trees/"+MetaNames[i]+" Sapling");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/fruit trees/"+MetaNames[i]+" Sapling");
     }
     
     @Override

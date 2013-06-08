@@ -18,9 +18,4 @@ public class ItemCustomSword extends ItemWeapon
 		this.weaponDamage = 150 + par2EnumToolMaterial.getDamageVsEntity();
 		this.damageType = EnumDamageType.SLASHING;
 	}
-
-	public String getTextureFile() 
-	{
-		return "/bioxx/terratools.png";
-	}
 }

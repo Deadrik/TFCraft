@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Items.Tools.ItemFirestarter;
@@ -107,9 +108,9 @@ public class BlockLogPile extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		icons[0] = iconRegisterer.registerIcon("devices/Log Pile Side 0");
-		icons[1] = iconRegisterer.registerIcon("devices/Log Pile Side 1");
-		icons[2] = iconRegisterer.registerIcon("devices/Log Pile End");
+		icons[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile Side 0");
+		icons[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile Side 1");
+		icons[2] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Log Pile End");
     }
 	
 	public void Eject(World par1World, int par2, int par3, int par4)

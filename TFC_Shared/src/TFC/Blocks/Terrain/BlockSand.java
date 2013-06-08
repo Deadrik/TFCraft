@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Sounds;
 import cpw.mods.fml.relauncher.Side;
@@ -86,7 +87,7 @@ public class BlockSand extends BlockTerra
     {
 		for(int i = 0; i < 16; i++)
 		{
-			icons[i] = registerer.registerIcon("sand/Sand"+i);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "sand/Sand"+i);
 		}
     }
 

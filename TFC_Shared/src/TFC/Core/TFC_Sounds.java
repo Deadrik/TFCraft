@@ -2,10 +2,10 @@ package TFC.Core;
 
 public class TFC_Sounds 
 {
-	private static final String LOCATION = "sounds/tfc/";
-	private static final String PREFIX = "sounds.tfc.";
-	private static final String LOCATION_MUSIC = "sounds/tfc/music/";
-	private static final String PREFIX_MUSIC = "sounds.tfc.music.";
+	private static final String LOCATION = "mods/TerraFirmaCraft/sounds/tfc/";
+	private static final String PREFIX = "mods.TerraFirmaCraft.sounds.tfc.";
+	private static final String LOCATION_MUSIC = "mods/TerraFirmaCraft/sounds/tfc/music/";
+	private static final String PREFIX_MUSIC = "mods.TerraFirmaCraft.sounds.tfc.music.";
 	
 	public static String [] soundFiles = {
 			LOCATION + "fallingrockshort1.ogg",

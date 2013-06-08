@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.API.Constant.Global;
 import TFC.Core.Recipes;
@@ -100,9 +101,9 @@ public class BlockLogNatural extends BlockTerra
     {
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			sideIcons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Log");
-			innerIcons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Log Top");
-			rotatedSideIcons[i] = registerer.registerIcon("wood/trees/" + Global.WOOD_ALL[i] + " Log Side");
+			sideIcons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Log");
+			innerIcons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Log Top");
+			rotatedSideIcons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Log Side");
 		}
     }
 

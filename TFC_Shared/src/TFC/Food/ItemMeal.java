@@ -13,6 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
@@ -41,7 +42,7 @@ public class ItemMeal extends ItemTerraFood
 	public void registerIcons(IconRegister registerer)
     {
 		for(int i = 0; i < 11; i++)
-			icons[i]= registerer.registerIcon("food/Meal"+i);
+			icons[i]= registerer.registerIcon(Reference.ModID + ":" + "food/Meal"+i);
     }
 
 	@Override

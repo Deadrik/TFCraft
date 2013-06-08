@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TileEntitySpawnMeter;
 
@@ -53,10 +54,10 @@ public class BlockSpawnMeter extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		iconTop = iconRegisterer.registerIcon("devices/MeterTop");
+		iconTop = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/MeterTop");
 		for(int i = 0; i < 9; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("devices/Meter"+i);
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Meter"+i);
 		}
     }
 

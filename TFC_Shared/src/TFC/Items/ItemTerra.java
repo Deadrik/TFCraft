@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -57,7 +58,7 @@ public class ItemTerra extends Item implements ISize
     @Override
 	public void registerIcons(IconRegister registerer)
     {
-		this.itemIcon = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", ""));
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", ""));
     }
     
     @Override

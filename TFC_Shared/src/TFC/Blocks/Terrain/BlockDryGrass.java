@@ -1,6 +1,7 @@
 package TFC.Blocks.Terrain;
 
 import net.minecraft.client.renderer.texture.IconRegister;
+import TFC.Reference;
 import TFC.TFCBlocks;
 
 public class BlockDryGrass extends BlockGrass
@@ -14,8 +15,8 @@ public class BlockDryGrass extends BlockGrass
     public void registerIcons(IconRegister registerer)
     {
     	super.registerIcons(registerer);
-    	GrassTopTexture = registerer.registerIcon("GrassSparseOverlay");
-    	iconGrassSideOverlay = registerer.registerIcon("GrassSideSparse");
+    	GrassTopTexture = registerer.registerIcon(Reference.ModID + ":" + "GrassSparseOverlay");
+    	iconGrassSideOverlay = registerer.registerIcon(Reference.ModID + ":" + "GrassSideSparse");
     }
     
     @Override

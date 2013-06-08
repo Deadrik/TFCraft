@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerra;
@@ -186,12 +187,12 @@ public class BlockBellows extends BlockTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		Sides[0] = registerer.registerIcon("devices/Bellows82");
-		Sides[1] = registerer.registerIcon("devices/Bellows83");
-		Sides[2] = registerer.registerIcon("devices/Bellows84");
-		Sides[3] = registerer.registerIcon("devices/Bellows85");
-		BellowsFront = registerer.registerIcon("devices/Bellows Front");
-		BellowsBack = registerer.registerIcon("devices/Bellows Back");
+		Sides[0] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows82");
+		Sides[1] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows83");
+		Sides[2] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows84");
+		Sides[3] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows85");
+		BellowsFront = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows Front");
+		BellowsBack = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows Back");
 	}
 
 	@Override

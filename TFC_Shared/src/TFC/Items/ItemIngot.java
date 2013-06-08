@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumMetalType;
 import TFC.API.Enums.EnumSize;
@@ -43,7 +44,7 @@ public class ItemIngot extends ItemTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
     {
-		this.itemIcon = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
     }
 	
 	@Override

@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import TFC.Reference;
 public class BlockMolten extends BlockTerra
 {
 	public BlockMolten(int i)
@@ -15,7 +16,7 @@ public class BlockMolten extends BlockTerra
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		this.blockIcon = iconRegisterer.registerIcon("devices/Molten Rock");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Molten Rock");
     }
 
 	@Override

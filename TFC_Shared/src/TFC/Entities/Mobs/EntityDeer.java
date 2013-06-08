@@ -34,7 +34,7 @@ public class EntityDeer extends EntityAnimalTFC
     {
         super(par1World);
         running = false;
-        this.texture = "/mob/blah.png";
+        this.texture = "/mods/TerraFirmaCraft/mob/blah.png";
         this.setSize(0.9F, 1.3F);
         float var2 = 0.23F / 1.1F;
         this.getNavigator().setAvoidsWater(true);
@@ -57,7 +57,7 @@ public class EntityDeer extends EntityAnimalTFC
 	{
     	super(par1World,mother,F_size);
     	running = false;
-        this.texture = "/mob/deer.png";
+        this.texture = "/mods/TerraFirmaCraft/mob/deer.png";
         this.setSize(0.9F, 1.3F);
         float var2 = 0.23F / 1.1F;
         this.getNavigator().setAvoidsWater(true);
@@ -109,10 +109,10 @@ public class EntityDeer extends EntityAnimalTFC
         int g = getGrowingAge();
         float t = (1.0F-(g/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
         if(g <= (-12000*adultAge)){
-        	this.texture = "/mob/deer_fawn.png";
+        	this.texture = "/mods/TerraFirmaCraft/mob/deer_fawn.png";
         }
         else{
-        	this.texture = "/mob/blah.png";
+        	this.texture = "/mods/TerraFirmaCraft/mob/blah.png";
         }
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + TFC_Time.getYearRatio() * pregnancyTime * TFC_Settings.dayLength){

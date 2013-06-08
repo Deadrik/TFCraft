@@ -11,6 +11,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
@@ -32,9 +33,9 @@ public class BlockPottery extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		this.Clay = iconRegisterer.registerIcon("clay/Clay");
-		this.Ceramic = iconRegisterer.registerIcon("clay/Ceramic");
-		this.Straw = iconRegisterer.registerIcon("plants/Straw");
+		this.Clay = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Clay");
+		this.Ceramic = iconRegisterer.registerIcon(Reference.ModID + ":" + "clay/Ceramic");
+		this.Straw = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/Straw");
 	}
 
 	@Override

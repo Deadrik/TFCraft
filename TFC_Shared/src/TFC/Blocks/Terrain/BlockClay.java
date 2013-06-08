@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+import TFC.Reference;
 import TFC.Blocks.BlockTerra;
 
 public class BlockClay extends BlockTerra
@@ -32,7 +33,7 @@ public class BlockClay extends BlockTerra
     {
 		for(int i = 0; i < 22; i++)
 		{
-			DirtTexture[i] = registerer.registerIcon("clay/Clay"+i);
+			DirtTexture[i] = registerer.registerIcon(Reference.ModID + ":" + "clay/Clay"+i);
 		}
     }
 	/**

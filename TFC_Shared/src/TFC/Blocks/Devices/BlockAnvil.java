@@ -17,6 +17,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
@@ -347,8 +348,8 @@ public class BlockAnvil extends BlockTerraContainer
 		textureMapSide = new Icon[anvilId == 0 ? 8 : 3];
 		for(int i = (anvilId == 0 ? 1 : 0); i < (anvilId == 0 ? 8 : 3); i++)
 		{
-			textureMapTop[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Top");
-			textureMapSide[i] = registerer.registerIcon("devices/Anvil_" + (i+anvilId) + "_Side");
+			textureMapTop[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
+			textureMapSide[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
 		}
 	}
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.TFC_Climate;
@@ -197,6 +198,6 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
     public void registerIcons(IconRegister registerer)
     {
-		this.blockIcon = registerer.registerIcon("snow");
+		this.blockIcon = registerer.registerIcon(Reference.ModID + ":"+"snow");
     }
 }

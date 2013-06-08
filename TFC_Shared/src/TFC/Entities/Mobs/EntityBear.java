@@ -48,7 +48,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public EntityBear (World par1World)
 	{
 		super (par1World);
-		texture = "/mob/Bear.png";
+		texture = "/mods/TerraFirmaCraft/mob/Bear.png";
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.2F;
 		getNavigator ().setAvoidsWater (true);
@@ -77,7 +77,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public EntityBear (World par1World, EntityAnimalTFC mother, float father_size)
 	{
 		super (par1World,mother,father_size);
-		texture = "/mob/Bear.png";
+		texture = "/mods/TerraFirmaCraft/mob/Bear.png";
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.2F;
 		degreeOfDiversion = 4;

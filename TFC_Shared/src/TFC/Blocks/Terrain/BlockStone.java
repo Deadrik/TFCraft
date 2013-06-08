@@ -3,14 +3,6 @@ package TFC.Blocks.Terrain;
 import java.util.List;
 import java.util.Random;
 
-import TFC.TFCItems;
-import TFC.API.Constant.Global;
-import TFC.Core.TFC_Core;
-import TFC.Items.Tools.ItemChisel;
-import TFC.Items.Tools.ItemHammer;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,6 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import TFC.Reference;
+import TFC.TFCItems;
+import TFC.Core.TFC_Core;
+import TFC.Items.Tools.ItemChisel;
+import TFC.Items.Tools.ItemHammer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockStone extends BlockCollapsable
 {
@@ -62,7 +61,7 @@ public class BlockStone extends BlockCollapsable
     {
 		for(int i = 0; i < names.length; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("rocks/"+names[i]+" Raw");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/"+names[i]+" Raw");
 		}
     }
 

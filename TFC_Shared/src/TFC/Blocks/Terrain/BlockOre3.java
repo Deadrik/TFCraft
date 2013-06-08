@@ -2,45 +2,16 @@ package TFC.Blocks.Terrain;
 
 import java.util.Random;
 
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
-import TFC.API.Constant.Global;
-import TFC.Core.Helper;
-import TFC.Core.TFC_Textures;
-import TFC.Items.Tools.ItemChisel;
-import TFC.TileEntities.TileEntityPartial;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
+import TFC.Reference;
+import TFC.TFCItems;
+import TFC.API.Constant.Global;
 
 public class BlockOre3 extends BlockOre
 {
@@ -50,6 +21,7 @@ public class BlockOre3 extends BlockOre
 		super(i, material);
 	}
 
+	@Override
 	public void addCreativeItems(java.util.ArrayList list)
     {
         for(int i = 0; i < blockNames.length; i++) {
@@ -62,7 +34,7 @@ public class BlockOre3 extends BlockOre
     {
 		for(int i = 0; i < blockNames.length; i++)
 		{
-			icons[i] = iconRegisterer.registerIcon("ores/"+blockNames[i] + " Ore");
+			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "ores/"+blockNames[i] + " Ore");
 		}
     }
 

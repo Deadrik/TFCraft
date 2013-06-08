@@ -10,6 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.Items.Tools.ItemCustomShovel;
 
 public class BlockCharcoal extends BlockTerra {
@@ -27,7 +28,7 @@ public class BlockCharcoal extends BlockTerra {
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		this.blockIcon = iconRegisterer.registerIcon("devices/Charcoal");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Charcoal");
     }
 
 	@Override

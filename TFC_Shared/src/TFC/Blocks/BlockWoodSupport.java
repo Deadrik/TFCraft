@@ -12,6 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.Constant.Global;
 import cpw.mods.fml.relauncher.Side;
@@ -121,7 +122,7 @@ public class BlockWoodSupport extends BlockTerra
     {
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			icons[i] = registerer.registerIcon("wood/WoodSheet/WoodSheet"+i);
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/WoodSheet/WoodSheet"+i);
 		}
     }
 

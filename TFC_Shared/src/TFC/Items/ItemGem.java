@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import TFC.Reference;
 
 public class ItemGem extends ItemTerra
 {
@@ -37,11 +38,11 @@ public class ItemGem extends ItemTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
     {
-		icons[0] = registerer.registerIcon("gems/"+MetaNames[0] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[1] = registerer.registerIcon("gems/"+MetaNames[1] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[2] = registerer.registerIcon("gems/"+MetaNames[2] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[3] = registerer.registerIcon("gems/"+MetaNames[3] + " " + getUnlocalizedName().replace("item.", ""));
-		icons[4] = registerer.registerIcon("gems/"+MetaNames[4] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[0] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[1] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[2] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[2] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[3] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[3] + " " + getUnlocalizedName().replace("item.", ""));
+		icons[4] = registerer.registerIcon(Reference.ModID + ":" + "gems/"+MetaNames[4] + " " + getUnlocalizedName().replace("item.", ""));
     }
 
 }

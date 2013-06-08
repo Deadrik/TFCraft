@@ -39,8 +39,8 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		this.ClayIcon = registerer.registerIcon(textureFolder + MetaNames[0]);
-		this.CeramicIcon = registerer.registerIcon(textureFolder + MetaNames[1]);
+		this.ClayIcon = registerer.registerIcon("TerraFirmaCraft:"+textureFolder + MetaNames[0]);
+		this.CeramicIcon = registerer.registerIcon("TerraFirmaCraft:"+textureFolder + MetaNames[1]);
 	}
 
 	@Override
