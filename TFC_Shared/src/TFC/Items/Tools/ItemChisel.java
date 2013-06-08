@@ -10,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
+import TFC.API.Tools.IToolChisel;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerInfo;
@@ -17,7 +18,7 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 
-public class ItemChisel extends ItemTerraTool
+public class ItemChisel extends ItemTerraTool implements IToolChisel
 {
 	static Random random = new Random();
 	public ItemChisel(int i, EnumToolMaterial e)
@@ -26,117 +27,9 @@ public class ItemChisel extends ItemTerraTool
 		this.setMaxDamage(e.getMaxUses()/2);
 	}
 
-	
-
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.VERYSMALL;
-	}
-
-	public static boolean handleActivation(World world, EntityPlayer player, int x, int y, int z, int blockID, int meta, int side, float hitX, float hitY, float hitZ)
-	{
-		byte newMeta = 0;
-		if (side == 0)
-		{
-			newMeta = (byte) (newMeta | 4);
-		}
-
-		int rot = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		byte flip = (byte) (newMeta & 4);
-		byte rotation = 0;
-
-		if (rot == 0)
-		{
-			rotation = (byte) ( 2 | flip);
-		}
-		else if (rot == 1)
-		{
-			rotation = (byte) ( 1 | flip);
-		}
-		else if (rot == 2)
-		{
-			rotation = (byte) ( 3 | flip);
-		}
-		else if (rot == 3)
-		{
-			rotation = (byte) ( 0 | flip);
-		}
-
-		int mode = 0;
-		PlayerInfo pi = null;
-
-		int hasChisel = -1;
-		int hasHammer = -1;
-
-		for(int i = 0; i < 9;i++)
-		{
-			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-				hasHammer = i;
-		}
-
-		if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel)
-			hasChisel = player.inventory.currentItem;
-
-		if(!world.isRemote)
-		{
-			pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-
-			if(pi != null) 
-				mode = pi.ChiselMode;
-		}
-		else
-		{
-			pi = PlayerManagerTFC.getInstance().getClientPlayer();
-		}
-
-		if(pi != null) 
-			mode = pi.ChiselMode;
-
-		if(hasChisel >= 0)
-		{
-			if(mode == 0)
-			{
-				if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
-					return false;
-
-				CreateSmooth(world, x, y, z, blockID, meta);
-				
-				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
-				return true;
-			}
-			else if(mode == 1)
-			{
-				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
-					return false;
-
-				ItemChisel.CreateStairs(world, x, y, z, blockID, meta, rotation);
-
-				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
-				return true;
-			}
-			else if(mode == 2)
-			{
-				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
-					return false;
-
-				ItemChisel.CreateSlab(world, x, y, z, blockID, meta, side);
-
-				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
-				return true;
-			}
-			else if(mode == 3 && pi.lockMatches(x, y, z))
-			{
-				ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
-				if (random.nextInt(4)==0){
-				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				}
-				return true;
-			}
-		}
-		return true;
 	}
 
 	public static void CreateSmooth(World world, int x, int y, int z, int id, int meta)
@@ -150,8 +43,6 @@ public class ItemChisel extends ItemTerraTool
 		else if(id == TFCBlocks.StoneMM.blockID)
 			world.setBlock(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta, 0x2);
 	}
-
-
 	public static void CreateStairs(World world, int x, int y, int z, int id, int meta, byte m)
 	{
 		world.setBlock(x, y, z, TFCBlocks.stoneStairs.blockID, m, 0x2);
@@ -283,7 +174,6 @@ public class ItemChisel extends ItemTerraTool
 	{
 		CreateSlab(world,x,y,z,id,meta,side, TFCBlocks.stoneSlabs.blockID);
 	}
-
 	public static void CreateDetailed(World world, int x, int y, int z, int id, int meta, int side, float hitX, float hitY, float hitZ)
 	{
 		TileEntityDetailed te;
@@ -339,5 +229,119 @@ public class ItemChisel extends ItemTerraTool
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean onUsed(World world, EntityPlayer player, int x, int y, int z,
+			int blockID, int meta, int side, float hitX, float hitY, float hitZ) 
+	{
+		byte newMeta = 0;
+		if (side == 0)
+		{
+			newMeta = (byte) (newMeta | 4);
+		}
+
+		int rot = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		byte flip = (byte) (newMeta & 4);
+		byte rotation = 0;
+
+		if (rot == 0)
+		{
+			rotation = (byte) ( 2 | flip);
+		}
+		else if (rot == 1)
+		{
+			rotation = (byte) ( 1 | flip);
+		}
+		else if (rot == 2)
+		{
+			rotation = (byte) ( 3 | flip);
+		}
+		else if (rot == 3)
+		{
+			rotation = (byte) ( 0 | flip);
+		}
+
+		int mode = 0;
+		PlayerInfo pi = null;
+
+		int hasChisel = -1;
+		int hasHammer = -1;
+
+		for(int i = 0; i < 9;i++)
+		{
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+				hasHammer = i;
+		}
+
+		if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel)
+			hasChisel = player.inventory.currentItem;
+
+		if(!world.isRemote)
+		{
+			pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+			if(pi != null) 
+				mode = pi.ChiselMode;
+		}
+		else
+		{
+			pi = PlayerManagerTFC.getInstance().getClientPlayer();
+		}
+
+		if(pi != null) 
+			mode = pi.ChiselMode;
+
+		if(hasChisel >= 0)
+		{
+			if(mode == 0)
+			{
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
+					return false;
+
+				CreateSmooth(world, x, y, z, blockID, meta);
+				
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 1)
+			{
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
+					return false;
+
+				ItemChisel.CreateStairs(world, x, y, z, blockID, meta, rotation);
+
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 2)
+			{
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
+					return false;
+
+				ItemChisel.CreateSlab(world, x, y, z, blockID, meta, side);
+
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				
+				return true;
+			}
+			else if(mode == 3 && pi.lockMatches(x, y, z))
+			{
+				ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
+				if (random.nextInt(4)==0){
+				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+				}
+				return true;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean canChisel(EntityPlayer player, int x, int y, int z) 
+	{
+		return true;
 	}
 }

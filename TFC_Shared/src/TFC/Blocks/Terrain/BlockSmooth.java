@@ -11,9 +11,9 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.Tools.IToolChisel;
 import TFC.Blocks.BlockTerra;
 import TFC.Core.Helper;
-import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -76,7 +76,8 @@ public class BlockSmooth extends BlockTerra
             if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
                 hasHammer = true;
         }
-        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemChisel && hasHammer && !world.isRemote)
+        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
+        		hasHammer && !world.isRemote && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
         {
             MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
             if(objectMouseOver == null) {
@@ -87,7 +88,7 @@ public class BlockSmooth extends BlockTerra
             int id = world.getBlockId(x, y, z);
             byte meta = (byte) world.getBlockMetadata(x, y, z);
 
-            return ItemChisel.handleActivation(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
+            return ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).onUsed(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
         }
         return false;
     }
