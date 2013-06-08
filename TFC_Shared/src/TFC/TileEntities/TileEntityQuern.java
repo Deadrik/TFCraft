@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -112,10 +113,10 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 						}
 						
 						if(storage[2] != null)
-							storage[2].damageItem(1, new EntityCowTFC(worldObj));
+							damageStackInSlot(2);
 						
-						if(storage[2].getItemDamage() == storage[2].getMaxDamage())
-							setInventorySlotContents(2, null);
+						/*if(storage[2].getItemDamage() == storage[2].getMaxDamage())
+							setInventorySlotContents(2, null);*/
 					}
 				} else {
 					rotation++;
@@ -156,17 +157,27 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		nbttagcompound.setBoolean("hasQuern", hasQuern);
 	}
 
+	public void damageStackInSlot(int i)
+	{
+		if(storage[i] != null) 
+		{
+			storage[i].damageItem(i, new EntityCowTFC(this.worldObj));
+			if(storage[i].stackSize == 0 || storage[i].getItemDamage() == storage[i].getMaxDamage())
+				setInventorySlotContents(i, null);
+		}
+	}
+	
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
 		if(storage[i] != null) {
 			if(storage[i].stackSize <= j) {
 				ItemStack itemstack = storage[i];
-				storage[i] = null;
+				setInventorySlotContents(i, null);
 				return itemstack;
 			}
 			ItemStack itemstack1 = storage[i].splitStack(j);
 			if(storage[i].stackSize == 0) {
-				storage[i] = null;
+				setInventorySlotContents(i, null);
 			}
 			return itemstack1;
 		} else {
@@ -226,7 +237,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
 			itemstack.stackSize = getInventoryStackLimit();
 		}
-		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
+		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 160);
 	}
 
 	@Override
