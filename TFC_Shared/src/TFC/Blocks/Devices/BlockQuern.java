@@ -32,6 +32,7 @@ public class BlockQuern extends BlockTerraContainer {
 		if(!world.isRemote) {
 			if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.storage[2] != null) {
 				te.shouldRotate = true;
+				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(x, y, z, te.createUpdatePacket(), 50);
 				world.playSoundEffect(x, y, z, TFC_Sounds.STONEDRAG, 1, 1);
 			}	
 			else if((!te.shouldRotate && (hitX < 0.65 || hitZ < 0.65)) || te.storage[2] == null) {

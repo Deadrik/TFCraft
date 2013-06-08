@@ -267,6 +267,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
 		this.hasQuern = inStream.readBoolean();
+		this.shouldRotate = inStream.readBoolean();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -279,6 +280,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
 			dos.writeBoolean(storage[2] != null);
+			dos.writeBoolean(shouldRotate);
 		} catch (IOException e) {
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
