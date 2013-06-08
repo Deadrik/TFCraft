@@ -162,8 +162,10 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		if(storage[i] != null) 
 		{
 			storage[i].damageItem(i, new EntityCowTFC(this.worldObj));
-			if(storage[i].stackSize == 0 || storage[i].getItemDamage() == storage[i].getMaxDamage())
+			if(storage[i].stackSize == 0 || storage[i].getItemDamage() == storage[i].getMaxDamage()) {
 				setInventorySlotContents(i, null);
+				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 160);
+			}
 		}
 	}
 	
@@ -237,7 +239,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
 			itemstack.stackSize = getInventoryStackLimit();
 		}
-		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 160);
+		TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
 	@Override
@@ -278,6 +280,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	@Override
 	public void handleDataPacket(DataInputStream inStream) throws IOException {
 		this.hasQuern = inStream.readBoolean();
+		this.shouldRotate = inStream.readBoolean();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -290,6 +293,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
 			dos.writeBoolean(storage[2] != null);
+			dos.writeBoolean(shouldRotate);
 		} catch (IOException e) {
 		}
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
