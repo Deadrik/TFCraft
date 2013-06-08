@@ -1,37 +1,13 @@
 package TFC.Render.Blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFluid;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 
 public class RenderFluids 
 {
@@ -39,9 +15,9 @@ public class RenderFluids
     {
 		Tessellator tessellator = Tessellator.instance;
         int l = par1Block.colorMultiplier(renderblocks.blockAccess, par2, par3, par4);
-        float f = (float)(l >> 16 & 255) / 255.0F;
-        float f1 = (float)(l >> 8 & 255) / 255.0F;
-        float f2 = (float)(l & 255) / 255.0F;
+        float f = (l >> 16 & 255) / 255.0F;
+        float f1 = (l >> 8 & 255) / 255.0F;
+        float f2 = (l & 255) / 255.0F;
         boolean flag = par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 + 1, par4, 1);
         boolean flag1 = par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3 - 1, par4, 0);
         boolean[] aboolean = new boolean[] {par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 - 1, 2), par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2, par3, par4 + 1, 3), par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2 - 1, par3, par4, 4), par1Block.shouldSideBeRendered(renderblocks.blockAccess, par2 + 1, par3, par4, 5)};
@@ -61,10 +37,10 @@ public class RenderFluids
             double d1 = 1.0D;
             Material material = par1Block.blockMaterial;
             int i1 = renderblocks.blockAccess.getBlockMetadata(par2, par3, par4);
-            double d2 = (double)renderblocks.getFluidHeight(par2, par3, par4, material);
-            double d3 = (double)renderblocks.getFluidHeight(par2, par3, par4 + 1, material);
-            double d4 = (double)renderblocks.getFluidHeight(par2 + 1, par3, par4 + 1, material);
-            double d5 = (double)renderblocks.getFluidHeight(par2 + 1, par3, par4, material);
+            double d2 = renderblocks.getFluidHeight(par2, par3, par4, material);
+            double d3 = renderblocks.getFluidHeight(par2, par3, par4 + 1, material);
+            double d4 = renderblocks.getFluidHeight(par2 + 1, par3, par4 + 1, material);
+            double d5 = renderblocks.getFluidHeight(par2 + 1, par3, par4, material);
             double d6 = 0.0010000000474974513D;
             float f7;
 
@@ -94,11 +70,11 @@ public class RenderFluids
 
                 if (f8 < -999.0F)
                 {
-                    d8 = (double)icon.getInterpolatedU(0.0D);
-                    d12 = (double)icon.getInterpolatedV(0.0D);
+                    d8 = icon.getInterpolatedU(0.0D);
+                    d12 = icon.getInterpolatedV(0.0D);
                     d7 = d8;
-                    d11 = (double)icon.getInterpolatedV(16.0D);
-                    d10 = (double)icon.getInterpolatedU(16.0D);
+                    d11 = icon.getInterpolatedV(16.0D);
+                    d10 = icon.getInterpolatedU(16.0D);
                     d14 = d11;
                     d9 = d10;
                     d13 = d12;
@@ -107,23 +83,23 @@ public class RenderFluids
                 {
                     f7 = MathHelper.sin(f8) * 0.25F;
                     float f9 = MathHelper.cos(f8) * 0.25F;
-                    d8 = (double)icon.getInterpolatedU((double)(8.0F + (-f9 - f7) * 16.0F));
-                    d12 = (double)icon.getInterpolatedV((double)(8.0F + (-f9 + f7) * 16.0F));
-                    d7 = (double)icon.getInterpolatedU((double)(8.0F + (-f9 + f7) * 16.0F));
-                    d11 = (double)icon.getInterpolatedV((double)(8.0F + (f9 + f7) * 16.0F));
-                    d10 = (double)icon.getInterpolatedU((double)(8.0F + (f9 + f7) * 16.0F));
-                    d14 = (double)icon.getInterpolatedV((double)(8.0F + (f9 - f7) * 16.0F));
-                    d9 = (double)icon.getInterpolatedU((double)(8.0F + (f9 - f7) * 16.0F));
-                    d13 = (double)icon.getInterpolatedV((double)(8.0F + (-f9 - f7) * 16.0F));
+                    d8 = icon.getInterpolatedU(8.0F + (-f9 - f7) * 16.0F);
+                    d12 = icon.getInterpolatedV(8.0F + (-f9 + f7) * 16.0F);
+                    d7 = icon.getInterpolatedU(8.0F + (-f9 + f7) * 16.0F);
+                    d11 = icon.getInterpolatedV(8.0F + (f9 + f7) * 16.0F);
+                    d10 = icon.getInterpolatedU(8.0F + (f9 + f7) * 16.0F);
+                    d14 = icon.getInterpolatedV(8.0F + (f9 - f7) * 16.0F);
+                    d9 = icon.getInterpolatedU(8.0F + (f9 - f7) * 16.0F);
+                    d13 = icon.getInterpolatedV(8.0F + (-f9 - f7) * 16.0F);
                 }
 
                 tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3, par4));
                 f7 = 1.0F;
                 tessellator.setColorOpaque_F(f4 * f7 * f, f4 * f7 * f1, f4 * f7 * f2);
-                tessellator.addVertexWithUV((double)(par2 + 0), (double)par3 + d2, (double)(par4 + 0), d8, d12);
-                tessellator.addVertexWithUV((double)(par2 + 0), (double)par3 + d3, (double)(par4 + 1), d7, d11);
-                tessellator.addVertexWithUV((double)(par2 + 1), (double)par3 + d4, (double)(par4 + 1), d10, d14);
-                tessellator.addVertexWithUV((double)(par2 + 1), (double)par3 + d5, (double)(par4 + 0), d9, d13);
+                tessellator.addVertexWithUV(par2 + 0, par3 + d2, par4 + 0, d8, d12);
+                tessellator.addVertexWithUV(par2 + 0, par3 + d3, par4 + 1, d7, d11);
+                tessellator.addVertexWithUV(par2 + 1, par3 + d4, par4 + 1, d10, d14);
+                tessellator.addVertexWithUV(par2 + 1, par3 + d5, par4 + 0, d9, d13);
             }
 
             if (renderblocks.renderAllFaces || flag1)
@@ -131,7 +107,7 @@ public class RenderFluids
                 tessellator.setBrightness(par1Block.getMixedBrightnessForBlock(renderblocks.blockAccess, par2, par3 - 1, par4));
                 float f10 = 1.0F;
                 tessellator.setColorOpaque_F(f3 * f10, f3 * f10, f3 * f10);
-                renderblocks.renderBottomFace(par1Block, (double)par2, (double)par3 + d6, (double)par4, renderblocks.getBlockIconFromSide(par1Block, 0));
+                renderblocks.renderFaceYNeg(par1Block, par2, par3 + d6, par4, renderblocks.getBlockIconFromSide(par1Block, 0));
                 flag2 = true;
             }
 
@@ -175,37 +151,37 @@ public class RenderFluids
                     {
                         d15 = d2;
                         d17 = d5;
-                        d16 = (double)par2;
-                        d18 = (double)(par2 + 1);
-                        d19 = (double)par4 + d6;
-                        d20 = (double)par4 + d6;
+                        d16 = par2;
+                        d18 = par2 + 1;
+                        d19 = par4 + d6;
+                        d20 = par4 + d6;
                     }
                     else if (j1 == 1)
                     {
                         d15 = d4;
                         d17 = d3;
-                        d16 = (double)(par2 + 1);
-                        d18 = (double)par2;
-                        d19 = (double)(par4 + 1) - d6;
-                        d20 = (double)(par4 + 1) - d6;
+                        d16 = par2 + 1;
+                        d18 = par2;
+                        d19 = par4 + 1 - d6;
+                        d20 = par4 + 1 - d6;
                     }
                     else if (j1 == 2)
                     {
                         d15 = d3;
                         d17 = d2;
-                        d16 = (double)par2 + d6;
-                        d18 = (double)par2 + d6;
-                        d19 = (double)(par4 + 1);
-                        d20 = (double)par4;
+                        d16 = par2 + d6;
+                        d18 = par2 + d6;
+                        d19 = par4 + 1;
+                        d20 = par4;
                     }
                     else
                     {
                         d15 = d5;
                         d17 = d4;
-                        d16 = (double)(par2 + 1) - d6;
-                        d18 = (double)(par2 + 1) - d6;
-                        d19 = (double)par4;
-                        d20 = (double)(par4 + 1);
+                        d16 = par2 + 1 - d6;
+                        d18 = par2 + 1 - d6;
+                        d19 = par4;
+                        d20 = par4 + 1;
                     }
 
                     flag2 = true;
@@ -227,10 +203,10 @@ public class RenderFluids
                     }
 
                     tessellator.setColorOpaque_F(f4 * f15 * f, f4 * f15 * f1, f4 * f15 * f2);
-                    tessellator.addVertexWithUV(d16, (double)par3 + d15, d19, (double)f11, (double)f12);
-                    tessellator.addVertexWithUV(d18, (double)par3 + d17, d20, (double)f7, (double)f13);
-                    tessellator.addVertexWithUV(d18, (double)(par3 + 0), d20, (double)f7, (double)f14);
-                    tessellator.addVertexWithUV(d16, (double)(par3 + 0), d19, (double)f11, (double)f14);
+                    tessellator.addVertexWithUV(d16, par3 + d15, d19, f11, f12);
+                    tessellator.addVertexWithUV(d18, par3 + d17, d20, f7, f13);
+                    tessellator.addVertexWithUV(d18, par3 + 0, d20, f7, f14);
+                    tessellator.addVertexWithUV(d16, par3 + 0, d19, f11, f14);
                 }
             }
 
@@ -280,6 +256,6 @@ public class RenderFluids
             }
         }
 
-        return 1.0F - var6 / (float)var5;
+        return 1.0F - var6 / var5;
     }
 }

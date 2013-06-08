@@ -1,44 +1,17 @@
 package TFC.Render;
 
 import net.minecraft.client.Minecraft;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import TFC.*;
-import TFC.Entities.EntityAnimalTFC;
 import TFC.Render.Models.ModelBaseTFC;
 
 public class RenderLivingTFC extends Render
@@ -151,7 +124,7 @@ public class RenderLivingTFC extends Render
 
                     if (var18 == 15)
                     {
-                        var19 = (float)par1EntityLiving.ticksExisted + par9;
+                        var19 = par1EntityLiving.ticksExisted + par9;
                         this.loadTexture("%blur%/misc/glint.png");
                         GL11.glEnable(GL11.GL_BLEND);
                         var20 = 0.5F;
@@ -167,10 +140,10 @@ public class RenderLivingTFC extends Render
                             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
                             GL11.glMatrixMode(GL11.GL_TEXTURE);
                             GL11.glLoadIdentity();
-                            float var23 = var19 * (0.001F + (float)var21 * 0.003F) * 20.0F;
+                            float var23 = var19 * (0.001F + var21 * 0.003F) * 20.0F;
                             float var24 = 0.33333334F;
                             GL11.glScalef(var24, var24, var24);
-                            GL11.glRotatef(30.0F - (float)var21 * 60.0F, 0.0F, 0.0F, 1.0F);
+                            GL11.glRotatef(30.0F - var21 * 60.0F, 0.0F, 0.0F, 1.0F);
                             GL11.glTranslatef(0.0F, var23, 0.0F);
                             GL11.glMatrixMode(GL11.GL_MODELVIEW);
                             this.renderPassModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
@@ -223,10 +196,10 @@ public class RenderLivingTFC extends Render
 
                 if ((var18 >> 24 & 255) > 0)
                 {
-                    var19 = (float)(var18 >> 16 & 255) / 255.0F;
-                    var20 = (float)(var18 >> 8 & 255) / 255.0F;
-                    float var29 = (float)(var18 & 255) / 255.0F;
-                    var22 = (float)(var18 >> 24 & 255) / 255.0F;
+                    var19 = (var18 >> 16 & 255) / 255.0F;
+                    var20 = (var18 >> 8 & 255) / 255.0F;
+                    float var29 = (var18 & 255) / 255.0F;
+                    var22 = (var18 >> 24 & 255) / 255.0F;
                     GL11.glColor4f(var19, var20, var29, var22);
                     this.mainModel.render(par1EntityLiving, var16, var15, var13, var11 - var10, var12, var14);
 
@@ -287,7 +260,7 @@ public class RenderLivingTFC extends Render
 
 	if (par1EntityLiving.deathTime > 0)
 	{
-	    float f = ((((float) par1EntityLiving.deathTime + par4) - 1.0F) / 20F) * 1.6F;
+	    float f = (((par1EntityLiving.deathTime + par4) - 1.0F) / 20F) * 1.6F;
 	    f = MathHelper.sqrt_float (f);
 
 	    if (f > 1.0F)
@@ -311,7 +284,7 @@ public class RenderLivingTFC extends Render
      */
     protected float handleRotationFloat (EntityLiving par1EntityLiving, float par2)
     {
-	return (float) par1EntityLiving.ticksExisted + par2;
+	return par1EntityLiving.ticksExisted + par2;
     }
 
 
@@ -371,9 +344,9 @@ public class RenderLivingTFC extends Render
             double d3 = par1EntityLiving.getDistanceSqToEntity(this.renderManager.livingPlayer);
             float f2 = par1EntityLiving.isSneaking() ? 32.0F : 64.0F;
 
-            if (d3 < (double)(f2 * f2))
+            if (d3 < f2 * f2)
             {
-                String s = par1EntityLiving.func_96090_ax();
+                String s = par1EntityLiving.getEntityName();
 
                 if (par1EntityLiving.isSneaking())
                 {
@@ -394,10 +367,10 @@ public class RenderLivingTFC extends Render
                     tessellator.startDrawingQuads();
                     int i = fontrenderer.getStringWidth(s) / 2;
                     tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-                    tessellator.addVertex((double)(-i - 1), -1.0D, 0.0D);
-                    tessellator.addVertex((double)(-i - 1), 8.0D, 0.0D);
-                    tessellator.addVertex((double)(i + 1), 8.0D, 0.0D);
-                    tessellator.addVertex((double)(i + 1), -1.0D, 0.0D);
+                    tessellator.addVertex(-i - 1, -1.0D, 0.0D);
+                    tessellator.addVertex(-i - 1, 8.0D, 0.0D);
+                    tessellator.addVertex(i + 1, 8.0D, 0.0D);
+                    tessellator.addVertex(i + 1, -1.0D, 0.0D);
                     tessellator.draw();
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                     GL11.glDepthMask(true);
@@ -435,7 +408,7 @@ public class RenderLivingTFC extends Render
     {
 	float f = par1EntityLiving.getDistanceToEntity (renderManager.livingPlayer);
 
-	if (f > (float) par9)
+	if (f > par9)
 	{
 	    return;
 	}
@@ -489,7 +462,8 @@ public class RenderLivingTFC extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender (Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void doRender (Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
 	doRenderLiving ((EntityLiving) par1Entity, par2, par4, par6, par8, par9);
     }

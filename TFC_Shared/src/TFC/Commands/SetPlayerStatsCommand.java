@@ -53,7 +53,7 @@ public class SetPlayerStatsCommand extends CommandBase{
             }
             if(player == null)throw new PlayerNotFoundException("Invalid");
             FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(player);
-            player.setHealthField((int)((values[0]/100d)*player.getMaxHealth()));
+            player.setEntityHealth((int)((values[0]/100d)*player.getMaxHealth()));
             fs.setFoodLevel((int)values[1]);
             fs.waterLevel = ((int)((values[2]/100d)*fs.getMaxWater(player)));
             throw new PlayerNotFoundException(values[0]+" "+values[1]+" "+values[2]);
