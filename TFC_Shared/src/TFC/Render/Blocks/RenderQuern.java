@@ -18,43 +18,34 @@ public class RenderQuern  implements ISimpleBlockRenderingHandler
 		{
 			IBlockAccess blockAccess = renderblocks.blockAccess;
 			TileEntityQuern te = (TileEntityQuern)blockAccess.getBlockTileEntity(i, j, k);
-			if(te != null)
-			{
-				if(te.hasQuern)
-				{
+			if(te != null) {
+				if(te.hasQuern) {
 					renderblocks.setRenderBounds(0.0F, 0F, 0.0F, 1F, 0.825F, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
-
 					renderblocks.overrideBlockTexture = Block.blocksList[5].getIcon(0, 0);
-					if(te.rotation == 0)
-					{
-						renderblocks.setRenderBounds(0.8F, 0.8, 0.8F, 0.9F, 1, 0.9F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
-					else if(te.rotation == 1)
-					{
-						renderblocks.setRenderBounds(0.8F, 0.8, 0.1F, 0.9F, 1, 0.2F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
-					else if(te.rotation == 2)
-					{
-						renderblocks.setRenderBounds(0.1F, 0.8, 0.1F, 0.2F, 1, 0.2F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
-					else if(te.rotation == 3)
-					{
-						renderblocks.setRenderBounds(0.1F, 0.8, 0.8F, 0.2F, 1, 0.9F);
-						renderblocks.renderStandardBlock(block, i, j, k);
-					}
+					float pos = te.rotatetimer * 0.035F;
 
-				}
-				else
-				{
+					if(te.rotation == 0) {
+						renderblocks.setRenderBounds(0.8F, 0.8, 0.8F-pos, 0.9F, 1, 0.9F-pos);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+					else if(te.rotation == 1) {
+						renderblocks.setRenderBounds(0.8F-pos, 0.8, 0.1F, 0.9F-pos, 1, 0.2F);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+					else if(te.rotation == 2) {
+						renderblocks.setRenderBounds(0.1F, 0.8, 0.1F+pos, 0.2F, 1, 0.2F+pos);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+					else if(te.rotation == 3) {
+						renderblocks.setRenderBounds(0.1F+pos, 0.8, 0.8F, 0.2F+pos, 1, 0.9F);
+						renderblocks.renderStandardBlock(block, i, j, k);
+					}
+				} else {
 					renderblocks.setRenderBounds(0.0F, 0, 0.0F, 1F, 0.625, 1F);
 					renderblocks.renderStandardBlock(block, i, j, k);
 				}
 			}
-
 			renderblocks.clearOverrideBlockTexture();
 			return true;
 		}
