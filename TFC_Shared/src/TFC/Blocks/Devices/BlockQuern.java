@@ -7,12 +7,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityQuern;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockQuern extends BlockTerraContainer {
 
@@ -22,34 +26,26 @@ public class BlockQuern extends BlockTerraContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)  
-	{
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ) {
 		super.onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
 		TileEntityQuern te = (TileEntityQuern) world.getBlockTileEntity(x, y, z);
-		if(!world.isRemote)
-		{
-			if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.storage[2] != null)
-			{
+		if(!world.isRemote) {
+			if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.storage[2] != null) {
 				te.shouldRotate = true;
 				world.playSoundEffect(x, y, z, TFC_Sounds.STONEDRAG, 1, 1);
 			}	
-			else if((!te.shouldRotate && (hitX < 0.65 || hitZ < 0.65)) || te.storage[2] == null)
-			{
+			else if((!te.shouldRotate && (hitX < 0.65 || hitZ < 0.65)) || te.storage[2] == null) {
 				entityplayer.openGui(TerraFirmaCraft.instance, 33, world, x, y, z);
 			}
 		}
-		else if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.hasQuern)
-		{
+		else if(!te.shouldRotate && hitX >= 0.65 && hitZ >= 0.65 && te.hasQuern) {
 			te.shouldRotate = true;
 		}	
-
 		return true;
 	}
 
-
 	@Override
-	public Icon getIcon(int i, int j) 
-	{
+	public Icon getIcon(int i, int j) {
 		if(i == 0 || (i == 1 && j == 1))
 			return QuernTop1;
 		else if (i == 1 && j == 0)
@@ -62,43 +58,45 @@ public class BlockQuern extends BlockTerraContainer {
 	Icon QuernTop2;
 
 	@Override
-	public void registerIcons(IconRegister registerer)
-	{
-		QuernBase = registerer.registerIcon("devices/Quern Base");
-		QuernTop1 = registerer.registerIcon("devices/Quern Top 1");
-		QuernTop2 = registerer.registerIcon("devices/Quern Top 2");
+	public void registerIcons(IconRegister registerer) {
+		QuernBase = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Base");
+		QuernTop1 = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Top 1");
+		QuernTop2 = registerer.registerIcon(Reference.ModID + ":" + "devices/Quern Top 2");
 	}
 
 	@Override
-	public boolean canBeReplacedByLeaves(World w, int x, int y, int z)
-	{
+	public boolean canBeReplacedByLeaves(World w, int x, int y, int z) {
 		return false;
 	}
+	
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
+	
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return TFCBlocks.quernRenderId;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int i, int j, int k)
-	{
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+	
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int i, int j, int k) {
 		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.825, k+1);
 	}
+	
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int i, int j, int k)
-	{
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World par1World, int i, int j, int k) {
 		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.825, k+1);
 	}
 
