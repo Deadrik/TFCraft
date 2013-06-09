@@ -1,13 +1,13 @@
 package TFC.GUI;
 
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.Containers.ContainerTerraMetallurgy;
 import TFC.TileEntities.TileEntityMetallurgy;
 
@@ -29,31 +29,13 @@ public class GuiTerraMetallurgy extends GuiContainer
 	public void initGui()
     {
 		super.initGui();
-		//guiLeft = (width - 208) / 2;
-        //guiTop = guiTop - 9;
-		
-        //controlList.clear();
         
-        //controlList.add(new GuiButton(0, guiLeft+22, guiTop+54, 42, 20, "Combine"));
-        
-    }
-	
-	@Override
-	protected void actionPerformed(GuiButton guibutton)
-	{
-		if(true)
-		{
-			if (guibutton.id == 0)
-			{
-				//AnvilEntity.actionLightHammer();
-			}
-		}
     }
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.bindTexture("/bioxx/gui_metallurgy.png");
+		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_metallurgy.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
         int w = (width - xSize) / 2;
         int h = (height - ySize) / 2;

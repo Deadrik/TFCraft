@@ -7,7 +7,7 @@
     "Bioxx"
   ],
   "description": "TerraFirmaCraft is a total conversion for minecraft that tries to bring hardcore believability to minecraft.",
-  "logoFile" : "/bioxx/TFCLogo.png",
+  "logoFile" : "/mods/TFC/textures/gui/TFCLogo.png",
   "updateUrl" : "http://www.terrafirmacraft.com/download/change-log/",
   "parent" : "",
   "screenshots": [

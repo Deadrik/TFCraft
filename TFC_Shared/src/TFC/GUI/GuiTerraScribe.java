@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.Containers.ContainerTerraScribe;
 import TFC.TileEntities.TileEntityScribe;
@@ -55,7 +56,7 @@ public class GuiTerraScribe extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.bindTexture("/bioxx/gui_scribe.png");
+		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_scribe.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - xSize) / 2;
         int h = (height - ySize) / 2;

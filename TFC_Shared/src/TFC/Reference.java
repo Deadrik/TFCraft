@@ -9,4 +9,8 @@ public class Reference
 	public static final String ModChannel = "TerraFirmaCraft";
 	public static final String SERVER_PROXY_CLASS = "TFC.CommonProxy";
     public static final String CLIENT_PROXY_CLASS = "TFC.ClientProxy";
+    
+    public static final String AssetPath = "/mods/TFC/";
+    public static final String AssetPathPrefix = "mods.TFC.";
+    public static final String AssetPathGui = "/mods/TFC/textures/gui/";
 }

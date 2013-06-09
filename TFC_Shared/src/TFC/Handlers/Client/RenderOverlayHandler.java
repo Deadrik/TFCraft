@@ -10,6 +10,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
@@ -51,7 +52,7 @@ public class RenderOverlayHandler
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			
 			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
-			Minecraft.getMinecraft().renderEngine.bindTexture("/bioxx/icons.png");
+			Minecraft.getMinecraft().renderEngine.bindTexture(Reference.AssetPathGui + "icons.png");
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = Minecraft.getMinecraft().thePlayer.getMaxHealth();
 			float percentHealth = Minecraft.getMinecraft().thePlayer.getHealth()/maxHealth;

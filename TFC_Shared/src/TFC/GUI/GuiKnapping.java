@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Containers.ContainerKnapping;
 import TFC.Handlers.PacketHandler;
@@ -85,7 +86,7 @@ public class GuiKnapping extends GuiContainer
     @Override
 	protected void drawGuiContainerBackgroundLayer(float f, int p, int j)
     {
-    	this.mc.renderEngine.bindTexture("/bioxx/gui_knapping.png");
+    	this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_knapping.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
         int w = (width - 176) / 2;
         int h = (height - 184) / 2;

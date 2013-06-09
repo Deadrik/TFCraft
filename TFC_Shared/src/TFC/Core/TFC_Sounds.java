@@ -1,11 +1,13 @@
 package TFC.Core;
 
+import TFC.Reference;
+
 public class TFC_Sounds 
 {
-	private static final String LOCATION = "mods/TFC/sounds/";
-	private static final String PREFIX = "mods.TFC.sounds.";
-	private static final String LOCATION_MUSIC = "mods/TFC/sounds/m/";
-	private static final String PREFIX_MUSIC = "mods.TFC.sounds.m.";
+	private static final String LOCATION = Reference.AssetPath + "sounds/";
+	private static final String PREFIX = Reference.AssetPathPrefix + "sounds.";
+	private static final String LOCATION_MUSIC = Reference.AssetPath + "sounds/m/";
+	private static final String PREFIX_MUSIC = Reference.AssetPathPrefix + "sounds.m.";
 	
 	public static String [] soundFiles = {
 			LOCATION + "fRockS1.ogg",

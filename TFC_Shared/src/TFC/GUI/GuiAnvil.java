@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Containers.ContainerAnvil;
 import TFC.TileEntities.TileEntityAnvil;
@@ -35,7 +36,7 @@ public class GuiAnvil extends GuiContainer
 
 		buttonList.clear();
 
-		buttonList.add(new GuiButton(0, guiLeft+5, guiTop + 5, 66, 20, "\2474Light Hit"));
+		/*buttonList.add(new GuiButton(0, guiLeft+5, guiTop + 5, 66, 20, "\2474Light Hit"));
 		buttonList.add(new GuiButton(1, guiLeft+5, guiTop + 24, 66, 20, "\2474Heavy Hit"));
 		buttonList.add(new GuiButton(2, guiLeft+5, guiTop + 43, 66, 20, "\2474Draw"));
 		buttonList.add(new GuiButton(3, guiLeft+5, guiTop + 62, 66, 20, "\2474Quench"));
@@ -45,7 +46,7 @@ public class GuiAnvil extends GuiContainer
 		buttonList.add(new GuiButton(6, guiLeft+137, guiTop + 43, 66, 20, "\2472Upset"));
 		buttonList.add(new GuiButton(7, guiLeft+137, guiTop + 62, 66, 20, "\2472Shrink"));
 
-		buttonList.add(new GuiButton(8, guiLeft+86, guiTop + 74, 36, 20, "\2474Weld"));
+		buttonList.add(new GuiButton(8, guiLeft+86, guiTop + 74, 36, 20, "\2474Weld"));*/
 
 	}
 
@@ -94,7 +95,7 @@ public class GuiAnvil extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.bindTexture("/bioxx/gui_anvil.png");
+		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - this.xSize) / 2;
 		int h = (height - this.ySize) / 2;
@@ -117,7 +118,7 @@ public class GuiAnvil extends GuiContainer
 	
 	public void drawRulesImages(int w, int h)
 	{
-		this.mc.renderEngine.bindTexture("/bioxx/processes.png");
+		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "anvilicons.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		if(AnvilEntity.workRecipe != null)
 		{

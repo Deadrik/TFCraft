@@ -1,54 +1,21 @@
 package TFC.GUI;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
-import net.minecraft.client.Minecraft;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import TFC.*;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Time;
-import TFC.Core.TFC_Settings;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
+import TFC.Reference;
+import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
+import TFC.WorldGen.TFCWorldChunkManager;
 
 public class GuiMessage extends GuiScreen
 {
@@ -82,12 +49,14 @@ public class GuiMessage extends GuiScreen
         player = p;
     }
 
-    public void onGuiClosed()
+    @Override
+	public void onGuiClosed()
     {
         super.onGuiClosed();
     }
 
-    public void initGui()
+    @Override
+	public void initGui()
     {
         super.initGui();
 
@@ -108,7 +77,7 @@ public class GuiMessage extends GuiScreen
     @Override
     public void drawScreen(int par1, int par2, float par3)
     {
-    	this.mc.renderEngine.bindTexture("/bioxx/gui_calendar.png");
+    	this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_calendar.png");
 
         int var4 = this.guiLeft;
         int var5 = this.guiTop;
@@ -158,17 +127,20 @@ public class GuiMessage extends GuiScreen
 
     }
     
-    public boolean doesGuiPauseGame()
+    @Override
+	public boolean doesGuiPauseGame()
     {
         return false;
     }
 
-    public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
+    @Override
+	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
     {
         fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
     }
 
-    protected void actionPerformed(GuiButton guibutton)
+    @Override
+	protected void actionPerformed(GuiButton guibutton)
     {
         if(world.isRemote)
         {

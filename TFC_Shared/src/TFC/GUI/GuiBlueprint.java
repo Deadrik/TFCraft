@@ -3,62 +3,25 @@ package TFC.GUI;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
-import net.minecraft.client.Minecraft;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import TFC.*;
-import TFC.Containers.*;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Time;
-import TFC.Core.TFC_Settings;
-import TFC.Handlers.PacketHandler;
-import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
-import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.util.StringTranslate;
+import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import TFC.Reference;
+import TFC.TerraFirmaCraft;
+import TFC.Handlers.PacketHandler;
 
 public class GuiBlueprint extends GuiScreen
 {
@@ -207,7 +170,7 @@ public class GuiBlueprint extends GuiScreen
 //	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
 //			int var3) 
 //	{
-		this.mc.renderEngine.bindTexture("/bioxx/gui_blueprint.png");
+		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_blueprint.png");
 
 		int var4 = this.guiLeft;
 		int var5 = this.guiTop;
