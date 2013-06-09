@@ -8,18 +8,18 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraFirepit;
+import TFC.Containers.ContainerFirepit;
 import TFC.TileEntities.TileEntityFirepit;
 
 
-public class GuiTerraFirepit extends GuiContainer
+public class GuiFirepit extends GuiContainer
 {
 	private TileEntityFirepit FirepitEntity;
 
 
-	public GuiTerraFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
+	public GuiFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraFirepit(inventoryplayer,tileentityfirepit, world, x, y, z) );
+		super(new ContainerFirepit(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
 		
 	}

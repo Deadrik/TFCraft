@@ -8,18 +8,18 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraSluice;
+import TFC.Containers.ContainerSluice;
 import TFC.TileEntities.TileEntitySluice;
 
 
-public class GuiTerraSluice extends GuiContainer
+public class GuiSluice extends GuiContainer
 {
 	private TileEntitySluice sluiceInventory;
 
 
-	public GuiTerraSluice(InventoryPlayer inventoryplayer, TileEntitySluice tileEntitySluice, World world, int x, int y, int z)
+	public GuiSluice(InventoryPlayer inventoryplayer, TileEntitySluice tileEntitySluice, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraSluice(inventoryplayer,tileEntitySluice, world, x, y, z) );
+		super(new ContainerSluice(inventoryplayer,tileEntitySluice, world, x, y, z) );
 		sluiceInventory = tileEntitySluice;
 		
 	}

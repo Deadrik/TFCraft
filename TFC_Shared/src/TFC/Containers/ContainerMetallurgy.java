@@ -2,47 +2,113 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.Core.CraftingManagerTFC;
+import TFC.Core.HeatIndex;
+import TFC.Core.HeatManager;
+import TFC.Items.ItemMeltedMetal;
+import TFC.TileEntities.TileEntityMetallurgy;
 
-public class ContainerTerraBloomery extends ContainerTFC
+public class ContainerMetallurgy extends ContainerTFC
 {
-	private TileEntityBloomery bloomery;
-    private float firetemp;
-    private int orecount;
-    private int coalcount;
-    private float outcount;
+	private TileEntityMetallurgy terrametallurgy;
+	public InventoryCrafting craftMatrix;
+	public IInventory craftResult;
+	private World worldObj;
 
-
-	public ContainerTerraBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
+	public ContainerMetallurgy(InventoryPlayer inventoryplayer, TileEntityMetallurgy scribe, World world, int x, int y, int z)
 	{
-	    bloomery = tileentityforge;
-	    firetemp = 0;
-		//Input slot
-	    addSlotToContainer(new Slot(tileentityforge, 0, 134, 52));
+		terrametallurgy = scribe;
+		craftMatrix = new InventoryCrafting(this, 5, 5);
+		craftResult = new InventoryCraftResult();
+		worldObj = world;
+		//output
+		addSlotToContainer(new SlotCraftingMetal(inventoryplayer.player, craftMatrix, craftResult,0, 128, 44));
+
+		for (int l = 0; l < 5; l++)
+		{
+			for (int k1 = 0; k1 < 5; k1++)
+			{
+				addSlotToContainer(new SlotMetal(craftMatrix, k1 + l * 5, 8 + k1 * 18, l * 18 + 8));
+			}
+		}
 
 		for(int i = 0; i < 3; i++)
 		{
 			for(int k = 0; k < 9; k++)
 			{
-				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventoryplayer, k + i * 9 + 9, 8 + k * 18, 102 + i * 18));
 			}
+
 		}
 
 		for(int j = 0; j < 9; j++)
 		{
-			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
+			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 160));
 		}
-		bloomery.updateGui();
+
+
+		onCraftMatrixChanged(craftMatrix);
 	}
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return true;
 	}
+	@Override
+	public void onCraftGuiClosed(EntityPlayer entityplayer)
+	{
+		super.onCraftGuiClosed(entityplayer);
+		if (worldObj.isRemote)
+		{
+			return;
+		}
+		for (int i = 0; i < 25; i++)
+		{
+			ItemStack itemstack = craftMatrix.getStackInSlot(i);
+			if (itemstack != null)
+			{
+			    if(itemstack.stackSize > 0)
+			        entityplayer.dropPlayerItem(itemstack);
+			}
+		}
+	}
+
+	@Override
+	public void onCraftMatrixChanged(IInventory par1IInventory)
+	{
+		float temp = terrametallurgy.checkTemps(craftMatrix);
+		if(temp >= 0)
+		{
+			ItemStack stack = CraftingManagerTFC.getInstance().findMatchingRecipe(craftMatrix, worldObj);
+			HeatManager manager = HeatManager.getInstance();
+			HeatIndex index = manager.findMatchingIndex(stack);
+			if (stack != null && index != null && index.meltTemp <= temp)
+			{
+				if(!stack.hasTagCompound()) {
+					stack.setTagCompound(new NBTTagCompound());
+				}
+
+				stack.stackTagCompound.setFloat("temperature", temp);
+				if(stack.stackSize <= 0) {
+					stack.stackSize = 1;
+				}
+				craftResult.setInventorySlotContents(0, stack);
+			}
+			else
+				craftResult.setInventorySlotContents(0, null);
+			
+		}
+		else
+			craftResult.setInventorySlotContents(0, null);
+	}
+	
 	/*@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
@@ -177,13 +243,21 @@ public class ContainerTerraBloomery extends ContainerTFC
 				}
 			}
 		}
+		onCraftMatrixChanged(craftMatrix);
 		return itemstack;
 	}*/
+	
+	/*@Override
+	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
+    {
+        ItemStack is = super.slotClick(par1, par2, par3, par4EntityPlayer);
+        this.onCraftMatrixChanged(this.craftMatrix);
+        return is;
+    }*/
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{
 		Slot slot = (Slot)inventorySlots.get(i);
-		Slot slot1 = (Slot)inventorySlots.get(0);
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
@@ -194,17 +268,37 @@ public class ContainerTerraBloomery extends ContainerTFC
 					return null;
 				}
 				slot.putStack(null);
+				for (int j = 1; j <= 25; j++)
+				{
+					((Slot)inventorySlots.get(j)).putStack(null);
+				}
 			}
-			else
+			else if(i <= 25)
 			{
-				if(slot1.getHasStack())
+				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
 				{
 					return null;
 				}
-				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;                            
-				slot1.putStack(stack);                          
-				itemstack1.stackSize--;
+				slot.putStack(null);
+			}
+			else if(itemstack1.getItem() instanceof ItemMeltedMetal)
+			{
+				int j = 0;
+				while(j < 25)
+				{
+					if(((Slot)inventorySlots.get(j + 1)).getHasStack())
+					{
+						j++;
+					}
+					else
+					{
+						ItemStack stack = itemstack1.copy();
+						stack.stackSize = 1;
+						((Slot)inventorySlots.get(j + 1)).putStack(stack);
+						itemstack1.stackSize--;
+						break;
+					}
+				}
 			}
 			if(itemstack1.stackSize == 0)
 			{
@@ -214,44 +308,8 @@ public class ContainerTerraBloomery extends ContainerTFC
 				slot.onSlotChanged();
 			}
 		}
+		onCraftMatrixChanged(craftMatrix);
 		return null;
 	}
 
-	private int updatecounter = 0;
-	@Override
-	public void detectAndSendChanges()
-    {
-        super.detectAndSendChanges();
-        
-        for (int var1 = 0; var1 < this.crafters.size(); ++var1)
-        {
-            ICrafting var2 = (ICrafting)this.crafters.get(var1);
-            if (this.firetemp != this.bloomery.fireTemperature)
-            {
-                var2.sendProgressBarUpdate(this, 0, (int)this.bloomery.fireTemperature);
-            }
-        }
-        
-        if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
-        {
-        	bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
-            updatecounter = 0;
-        }
-        
-        outcount = this.bloomery.outCount;
-        orecount = this.bloomery.oreCount;
-        coalcount = this.bloomery.charcoalCount;
-        firetemp = this.bloomery.fireTemperature;
-        updatecounter += 1;
-    }
-	
-	@Override
-	public void updateProgressBar(int par1, int par2)
-    {
-        if (par1 == 0)
-        {
-            this.bloomery.fireTemperature = par2;
-        }
-
-    }
 }

@@ -34,7 +34,7 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class ContainerTerraWorkbench extends ContainerTFC
+public class ContainerWorkbench extends ContainerTFC
 {
     /** The crafting matrix inventory (3x3). */
     public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
@@ -47,7 +47,7 @@ public class ContainerTerraWorkbench extends ContainerTFC
     private int posZ;
     private TileEntityWorkbench workbench;
 
-    public ContainerTerraWorkbench(InventoryPlayer par1InventoryPlayer, TileEntityWorkbench wb, World par2World, int par3, int par4, int par5)
+    public ContainerWorkbench(InventoryPlayer par1InventoryPlayer, TileEntityWorkbench wb, World par2World, int par3, int par4, int par5)
     {
     	this.worldObj = par2World;
         this.posX = par3;

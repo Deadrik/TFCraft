@@ -66,14 +66,14 @@ import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiQuern;
-import TFC.GUI.GuiTerraBloomery;
-import TFC.GUI.GuiTerraFirepit;
-import TFC.GUI.GuiTerraForge;
-import TFC.GUI.GuiTerraLogPile;
-import TFC.GUI.GuiTerraMetallurgy;
-import TFC.GUI.GuiTerraScribe;
-import TFC.GUI.GuiTerraSluice;
-import TFC.GUI.GuiTerraWorkbench;
+import TFC.GUI.GuiBloomery;
+import TFC.GUI.GuiFirepit;
+import TFC.GUI.GuiForge;
+import TFC.GUI.GuiLogPile;
+import TFC.GUI.GuiMetallurgy;
+import TFC.GUI.GuiScribe;
+import TFC.GUI.GuiSluice;
+import TFC.GUI.GuiWorkbench;
 import TFC.Handlers.Client.BlockRenderHandler;
 import TFC.Handlers.Client.ChiselHighlightHandler;
 import TFC.Handlers.Client.FarmlandHighlightHandler;
@@ -254,15 +254,15 @@ public class ClientProxy extends CommonProxy
 		{
 		case 0:
 		{
-			return new GuiTerraLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
+			return new GuiLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
 		}
 		case 1:
 		{
-			return new GuiTerraWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
+			return new GuiWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		}
 		case 20:
 		{
-			return new GuiTerraFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
+			return new GuiFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
 		}
 		case 21:
 		{
@@ -270,23 +270,23 @@ public class ClientProxy extends CommonProxy
 		}
 		case 22:
 		{
-			return new GuiTerraScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
+			return new GuiScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
 		}
 		case 23:
 		{
-			return new GuiTerraForge(player.inventory, (TileEntityForge) te, world, x, y, z);
+			return new GuiForge(player.inventory, (TileEntityForge) te, world, x, y, z);
 		}
 		case 24:
 		{
-			return new GuiTerraMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
+			return new GuiMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
 		}
 		case 25:
 		{
-			return new GuiTerraSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
+			return new GuiSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
 		}
 		case 26:
 		{
-			return new GuiTerraBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
+			return new GuiBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
 		}
 		case 27:
 		{

@@ -34,7 +34,7 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class ContainerTerraLogPile extends ContainerTFC
+public class ContainerLogPile extends ContainerTFC
 {
 	private World world;
 	private int posX;
@@ -43,7 +43,7 @@ public class ContainerTerraLogPile extends ContainerTFC
 	private TileEntityLogPile logpile;
 	private EntityPlayer player;
 
-	public ContainerTerraLogPile(InventoryPlayer playerinv, TileEntityLogPile pile, World world, int x, int y, int z)
+	public ContainerLogPile(InventoryPlayer playerinv, TileEntityLogPile pile, World world, int x, int y, int z)
 	{
 		this.player = playerinv.player;
 		this.logpile = pile;

@@ -34,13 +34,13 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class ContainerTerraSluice extends ContainerTFC
+public class ContainerSluice extends ContainerTFC
 {
 	private TileEntitySluice sluice;
 	private EntityPlayer player;
 
 
-	public ContainerTerraSluice(InventoryPlayer inventoryplayer, TileEntitySluice tileentitysluice, World world, int x, int y, int z)
+	public ContainerSluice(InventoryPlayer inventoryplayer, TileEntitySluice tileentitysluice, World world, int x, int y, int z)
 	{
 		sluice = tileentitysluice;
 		player = inventoryplayer.player;

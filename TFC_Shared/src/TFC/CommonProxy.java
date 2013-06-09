@@ -19,15 +19,15 @@ import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerKnapping;
 import TFC.Containers.ContainerLeatherWorking;
 import TFC.Containers.ContainerQuern;
-import TFC.Containers.ContainerTerraBarrel;
-import TFC.Containers.ContainerTerraBloomery;
-import TFC.Containers.ContainerTerraFirepit;
-import TFC.Containers.ContainerTerraForge;
-import TFC.Containers.ContainerTerraLogPile;
-import TFC.Containers.ContainerTerraMetallurgy;
-import TFC.Containers.ContainerTerraScribe;
-import TFC.Containers.ContainerTerraSluice;
-import TFC.Containers.ContainerTerraWorkbench;
+import TFC.Containers.ContainerBarrel;
+import TFC.Containers.ContainerBloomery;
+import TFC.Containers.ContainerFirepit;
+import TFC.Containers.ContainerForge;
+import TFC.Containers.ContainerLogPile;
+import TFC.Containers.ContainerMetallurgy;
+import TFC.Containers.ContainerScribe;
+import TFC.Containers.ContainerSluice;
+import TFC.Containers.ContainerWorkbench;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.EntityArrowTFC;
 import TFC.Entities.EntityCustomMinecart;
@@ -356,15 +356,15 @@ public class CommonProxy implements IGuiHandler
 		{
 		case 0:
 		{
-			return new ContainerTerraLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
+			return new ContainerLogPile(player.inventory, (TileEntityLogPile) te, world, x, y, z);
 		}
 		case 1:
 		{
-			return new ContainerTerraWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
+			return new ContainerWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		}
 		case 20:
 		{
-			return new ContainerTerraFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
+			return new ContainerFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
 		}
 		case 21:
 		{
@@ -372,23 +372,23 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 22:
 		{
-			return new ContainerTerraScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
+			return new ContainerScribe(player.inventory, (TileEntityScribe) te, world, x, y, z);
 		}
 		case 23:
 		{
-			return new ContainerTerraForge(player.inventory, (TileEntityForge) te, world, x, y, z);
+			return new ContainerForge(player.inventory, (TileEntityForge) te, world, x, y, z);
 		}
 		case 24:
 		{
-			return new ContainerTerraMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
+			return new ContainerMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
 		}
 		case 25:
 		{
-			return new ContainerTerraSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
+			return new ContainerSluice(player.inventory, (TileEntitySluice) te, world, x, y, z);
 		}
 		case 26:
 		{
-			return new ContainerTerraBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
+			return new ContainerBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
 		}
 		case 28:
 		{
@@ -416,7 +416,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 35:
 		{
-			return new ContainerTerraBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
+			return new ContainerBarrel(player.inventory,((TileEntityBarrel)te),world,x,y,z);
 		}
 		case 36:
 		{

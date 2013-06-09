@@ -8,18 +8,18 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraBloomery;
+import TFC.Containers.ContainerBloomery;
 import TFC.TileEntities.TileEntityBloomery;
 
 
-public class GuiTerraBloomery extends GuiContainer
+public class GuiBloomery extends GuiContainer
 {
 	private TileEntityBloomery bloomery;
 
 
-	public GuiTerraBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
+	public GuiBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraBloomery(inventoryplayer,tileentityforge, world, x, y, z) );
+		super(new ContainerBloomery(inventoryplayer,tileentityforge, world, x, y, z) );
 		bloomery = tileentityforge;
 	}
 

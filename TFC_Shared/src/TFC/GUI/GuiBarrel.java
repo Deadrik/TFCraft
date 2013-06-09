@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraBarrel;
+import TFC.Containers.ContainerBarrel;
 import TFC.TileEntities.TileEntityBarrel;
 
 
@@ -21,7 +21,7 @@ public class GuiBarrel extends GuiContainer
 
 	public GuiBarrel(InventoryPlayer inventoryplayer, TileEntityBarrel tileentitybarrel, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraBarrel(inventoryplayer,tileentitybarrel, world, x, y, z) );
+		super(new ContainerBarrel(inventoryplayer,tileentitybarrel, world, x, y, z) );
 		barrel = tileentitybarrel;
 		player = inventoryplayer.player;
 		guiLeft = (width - 208) / 2;

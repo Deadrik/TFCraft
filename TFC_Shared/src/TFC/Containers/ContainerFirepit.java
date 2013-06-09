@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TileEntities.TileEntityFirepit;
 
-public class ContainerTerraFirepit extends ContainerTFC
+public class ContainerFirepit extends ContainerTFC
 {
     private TileEntityFirepit firepit;
 
@@ -16,7 +16,7 @@ public class ContainerTerraFirepit extends ContainerTFC
     private int charcoal;
 
 
-    public ContainerTerraFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
+    public ContainerFirepit(InventoryPlayer inventoryplayer, TileEntityFirepit tileentityfirepit, World world, int x, int y, int z)
     {
         firepit = tileentityfirepit;
         firetemp = -1111;

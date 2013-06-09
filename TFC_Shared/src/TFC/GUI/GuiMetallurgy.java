@@ -8,18 +8,18 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraMetallurgy;
+import TFC.Containers.ContainerMetallurgy;
 import TFC.TileEntities.TileEntityMetallurgy;
 
 
-public class GuiTerraMetallurgy extends GuiContainer
+public class GuiMetallurgy extends GuiContainer
 {
 	private TileEntityMetallurgy entityMetallurgy;
 
 
-	public GuiTerraMetallurgy(InventoryPlayer inventoryplayer, TileEntityMetallurgy tileentityMetallurgy, World world, int x, int y, int z)
+	public GuiMetallurgy(InventoryPlayer inventoryplayer, TileEntityMetallurgy tileentityMetallurgy, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraMetallurgy(inventoryplayer,tileentityMetallurgy, world, x, y, z) );
+		super(new ContainerMetallurgy(inventoryplayer,tileentityMetallurgy, world, x, y, z) );
 		entityMetallurgy = tileentityMetallurgy;
 		this.xSize = 176;
 		this.ySize = 184;

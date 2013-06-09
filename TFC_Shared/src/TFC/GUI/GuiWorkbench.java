@@ -7,14 +7,14 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraWorkbench;
+import TFC.Containers.ContainerWorkbench;
 import TFC.TileEntities.TileEntityWorkbench;
 
-public class GuiTerraWorkbench extends GuiContainer
+public class GuiWorkbench extends GuiContainer
 {
-    public GuiTerraWorkbench(InventoryPlayer inventoryplayer, TileEntityWorkbench wb, World world, int i, int j, int k)
+    public GuiWorkbench(InventoryPlayer inventoryplayer, TileEntityWorkbench wb, World world, int i, int j, int k)
     {
-        super(new ContainerTerraWorkbench(inventoryplayer, wb,world, i, j, k));
+        super(new ContainerWorkbench(inventoryplayer, wb,world, i, j, k));
     }
 
     @Override

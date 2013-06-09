@@ -10,20 +10,20 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.TFCItems;
-import TFC.Containers.ContainerTerraScribe;
+import TFC.Containers.ContainerScribe;
 import TFC.TileEntities.TileEntityScribe;
 
 
-public class GuiTerraScribe extends GuiContainer
+public class GuiScribe extends GuiContainer
 {
 	private TileEntityScribe FirepitEntity;
 
 
-	public GuiTerraScribe(InventoryPlayer inventoryplayer, TileEntityScribe tileentityfirepit, World world, int x, int y, int z)
+	public GuiScribe(InventoryPlayer inventoryplayer, TileEntityScribe tileentityfirepit, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraScribe(inventoryplayer,tileentityfirepit, world, x, y, z) );
+		super(new ContainerScribe(inventoryplayer,tileentityfirepit, world, x, y, z) );
 		FirepitEntity = tileentityfirepit;
-		((ContainerTerraScribe)inventorySlots).setGUI(this);
+		((ContainerScribe)inventorySlots).setGUI(this);
 		this.xSize = 176;
 		this.ySize = 184;
 	}

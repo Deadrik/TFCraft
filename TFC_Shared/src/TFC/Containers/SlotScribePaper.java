@@ -37,7 +37,7 @@ public class SlotScribePaper extends Slot
 {
 	EntityPlayer player;
 	Container container;
-	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, ContainerTerraScribe scribecontainer, int i, int j, int k)
+	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, ContainerScribe scribecontainer, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 		player = entityplayer;

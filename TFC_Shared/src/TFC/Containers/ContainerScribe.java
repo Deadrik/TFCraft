@@ -10,19 +10,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Core.CraftingManagerTFC;
-import TFC.GUI.GuiTerraScribe;
+import TFC.GUI.GuiScribe;
 import TFC.TileEntities.TileEntityScribe;
 
-public class ContainerTerraScribe extends ContainerTFC
+public class ContainerScribe extends ContainerTFC
 {
 	private TileEntityScribe terraScribe;
 	public InventoryCrafting craftMatrix;
 	public IInventory craftResult;
 	private EntityPlayer entityplayer;
 	private World worldObj;
-	private GuiTerraScribe te;
+	private GuiScribe te;
 
-	public ContainerTerraScribe(InventoryPlayer inventoryplayer, TileEntityScribe scribe, World world, int x, int y, int z)
+	public ContainerScribe(InventoryPlayer inventoryplayer, TileEntityScribe scribe, World world, int x, int y, int z)
 	{
 		terraScribe = scribe;
 		craftMatrix = new InventoryCrafting(this, 5, 5);
@@ -64,7 +64,7 @@ public class ContainerTerraScribe extends ContainerTFC
 	{
 		return true;
 	}
-	public void setGUI(GuiTerraScribe TE){
+	public void setGUI(GuiScribe TE){
 		te = TE;
 	}
 	@Override

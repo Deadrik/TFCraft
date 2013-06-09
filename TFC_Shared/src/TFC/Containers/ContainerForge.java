@@ -11,7 +11,7 @@ import TFC.Core.HeatManager;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityForge;
 
-public class ContainerTerraForge extends ContainerTFC
+public class ContainerForge extends ContainerTFC
 {
 	private TileEntityForge forge;
 	private int coolTime;
@@ -20,7 +20,7 @@ public class ContainerTerraForge extends ContainerTFC
     private float firetemp;
 
 
-	public ContainerTerraForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
+	public ContainerForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
 	{
 		forge = tileentityforge;
 

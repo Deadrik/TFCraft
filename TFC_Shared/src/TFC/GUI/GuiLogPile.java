@@ -8,14 +8,14 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraLogPile;
+import TFC.Containers.ContainerLogPile;
 import TFC.TileEntities.TileEntityLogPile;
 
-public class GuiTerraLogPile extends GuiContainer
+public class GuiLogPile extends GuiContainer
 {
-    public GuiTerraLogPile(InventoryPlayer inventoryplayer, TileEntityLogPile wb, World world, int i, int j, int k)
+    public GuiLogPile(InventoryPlayer inventoryplayer, TileEntityLogPile wb, World world, int i, int j, int k)
     {
-        super(new ContainerTerraLogPile(inventoryplayer, wb,world, i, j, k));
+        super(new ContainerLogPile(inventoryplayer, wb,world, i, j, k));
     }
 
     @Override

@@ -8,18 +8,18 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerTerraForge;
+import TFC.Containers.ContainerForge;
 import TFC.TileEntities.TileEntityForge;
 
 
-public class GuiTerraForge extends GuiContainer
+public class GuiForge extends GuiContainer
 {
 	private TileEntityForge ForgeEntity;
 
 
-	public GuiTerraForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
+	public GuiForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
 	{
-		super(new ContainerTerraForge(inventoryplayer,tileentityforge, world, x, y, z) );
+		super(new ContainerForge(inventoryplayer,tileentityforge, world, x, y, z) );
 		ForgeEntity = tileentityforge;
 		
 	}

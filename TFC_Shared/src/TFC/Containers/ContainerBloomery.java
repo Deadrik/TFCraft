@@ -6,20 +6,23 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TileEntityBloomery;
 
-public class ContainerTerraBarrel extends ContainerTFC
+public class ContainerBloomery extends ContainerTFC
 {
-	private TileEntityBarrel barrel;
-    private float liquidLevel;
+	private TileEntityBloomery bloomery;
+    private float firetemp;
+    private int orecount;
+    private int coalcount;
+    private float outcount;
 
 
-	public ContainerTerraBarrel(InventoryPlayer inventoryplayer, TileEntityBarrel tileentitybarrel, World world, int x, int y, int z)
+	public ContainerBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
 	{
-	    barrel = tileentitybarrel;
-	    liquidLevel = 0;
+	    bloomery = tileentityforge;
+	    firetemp = 0;
 		//Input slot
-	    addSlotToContainer(new Slot(tileentitybarrel, 0, 80, 29));
+	    addSlotToContainer(new Slot(tileentityforge, 0, 134, 52));
 
 		for(int i = 0; i < 3; i++)
 		{
@@ -33,7 +36,7 @@ public class ContainerTerraBarrel extends ContainerTFC
 		{
 			addSlotToContainer(new Slot(inventoryplayer, j, 8 + j * 18, 142));
 		}
-		//barrel.updateGui();
+		bloomery.updateGui();
 	}
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
@@ -186,10 +189,11 @@ public class ContainerTerraBarrel extends ContainerTFC
 			ItemStack itemstack1 = slot.getStack();
 			if(i == 0)
 			{
-				if(!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true))
+				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
 				{
 					return null;
 				}
+				slot.putStack(null);
 			}
 			else
 			{
@@ -198,8 +202,8 @@ public class ContainerTerraBarrel extends ContainerTFC
 					return null;
 				}
 				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;
-				slot1.putStack(stack);
+				stack.stackSize = 1;                            
+				slot1.putStack(stack);                          
 				itemstack1.stackSize--;
 			}
 			if(itemstack1.stackSize == 0)
@@ -222,12 +226,23 @@ public class ContainerTerraBarrel extends ContainerTFC
         for (int var1 = 0; var1 < this.crafters.size(); ++var1)
         {
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
-            if (this.liquidLevel != this.barrel.liquidLevel)
+            if (this.firetemp != this.bloomery.fireTemperature)
             {
-                var2.sendProgressBarUpdate(this, 0, this.barrel.liquidLevel);
+                var2.sendProgressBarUpdate(this, 0, (int)this.bloomery.fireTemperature);
             }
         }
         
+        if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
+        {
+        	bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
+            updatecounter = 0;
+        }
+        
+        outcount = this.bloomery.outCount;
+        orecount = this.bloomery.oreCount;
+        coalcount = this.bloomery.charcoalCount;
+        firetemp = this.bloomery.fireTemperature;
+        updatecounter += 1;
     }
 	
 	@Override
@@ -235,7 +250,7 @@ public class ContainerTerraBarrel extends ContainerTFC
     {
         if (par1 == 0)
         {
-            this.barrel.liquidLevel = par2;
+            this.bloomery.fireTemperature = par2;
         }
 
     }
