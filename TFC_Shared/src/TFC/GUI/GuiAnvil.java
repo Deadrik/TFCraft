@@ -66,7 +66,7 @@ public class GuiAnvil extends GuiContainer
 		}
 		else if (guibutton.id == 3)
 		{
-			AnvilEntity.actionQuench();
+			AnvilEntity.actionHammer();
 		}
 		else if (guibutton.id == 4)
 		{

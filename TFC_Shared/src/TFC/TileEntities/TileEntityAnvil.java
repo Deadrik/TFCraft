@@ -278,15 +278,15 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	public void actionQuench()
+	public void actionHammer()
 	{
 		if(!worldObj.isRemote)
 		{
 			if(isTemperatureWorkable(1) && anvilItemStacks[0] != null && (anvilItemStacks[1].getItemDamage() == 0 || anvilItemStacks[1].getItem().getHasSubtypes() == true) && getAnvilType() >= craftingReq && workedRecently == 0)
 			{
 				workedRecently = lagFixDelay;
-				setItemCraftingValue(-49);
-				updateRules(2,1);
+				setItemCraftingValue(6);
+				updateRules(0,1);
 				anvilItemStacks[0].setItemDamage(anvilItemStacks[0].getItemDamage()+1);
 
 				if(anvilItemStacks[0].getItemDamage() == anvilItemStacks[0].getMaxDamage()) {
@@ -724,7 +724,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		}
 		case 2:
 		{
-			actionQuench();
+			actionHammer();
 			break;
 		}
 		case 3:
@@ -812,7 +812,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		}
 		case 2:
 		{
-			actionQuench();
+			actionHammer();
 			break;
 		}
 		case 3:
