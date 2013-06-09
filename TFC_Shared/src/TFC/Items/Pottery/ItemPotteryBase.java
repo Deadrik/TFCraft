@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
@@ -39,8 +40,8 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		this.ClayIcon = registerer.registerIcon("TerraFirmaCraft:"+textureFolder + MetaNames[0]);
-		this.CeramicIcon = registerer.registerIcon("TerraFirmaCraft:"+textureFolder + MetaNames[1]);
+		this.ClayIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[0]);
+		this.CeramicIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[1]);
 	}
 
 	@Override

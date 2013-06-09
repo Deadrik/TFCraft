@@ -169,7 +169,7 @@ public class TerraFirmaCraft
 		
 		TFC_ItemHeat.SetupItemHeat();
 
-		Localization.addLocalization("/mods/TerraFirmaCraft/lang/", "en_US");
+		Localization.addLocalization("/mods/TFC/lang/", "en_US");
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), 
 				new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty)));

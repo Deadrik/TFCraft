@@ -2,18 +2,18 @@ package TFC.Core;
 
 public class TFC_Sounds 
 {
-	private static final String LOCATION = "mods/TerraFirmaCraft/sounds/tfc/";
-	private static final String PREFIX = "mods.TerraFirmaCraft.sounds.tfc.";
-	private static final String LOCATION_MUSIC = "mods/TerraFirmaCraft/sounds/tfc/music/";
-	private static final String PREFIX_MUSIC = "mods.TerraFirmaCraft.sounds.tfc.music.";
+	private static final String LOCATION = "mods/TFC/sounds/";
+	private static final String PREFIX = "mods.TFC.sounds.";
+	private static final String LOCATION_MUSIC = "mods/TFC/sounds/m/";
+	private static final String PREFIX_MUSIC = "mods.TFC.sounds.m.";
 	
 	public static String [] soundFiles = {
-			LOCATION + "fallingrockshort1.ogg",
-			LOCATION + "fallingrockshort2.ogg",
-			LOCATION + "fallingrocklong1.ogg",
-			LOCATION + "fallingrocklong2.ogg",
-			LOCATION + "fallingdirtshort1.ogg",
-			LOCATION + "fallingdirtshort2.ogg",
+			LOCATION + "fRockS1.ogg",
+			LOCATION + "fRockS2.ogg",
+			LOCATION + "fRockL1.ogg",
+			LOCATION + "fRockL2.ogg",
+			LOCATION + "fDirtS1.ogg",
+			LOCATION + "fDirtS2.ogg",
 			LOCATION + "metalimpact1.ogg",
 			LOCATION + "metalimpact2.ogg",
 			LOCATION + "metalimpact3.ogg",
@@ -22,16 +22,16 @@ public class TFC_Sounds
 			LOCATION + "stonedrag2.ogg"};
 	
 	public static String [] musicFiles = {
-		LOCATION_MUSIC + "Through the Willows.ogg",
-		LOCATION_MUSIC + "FirmaVista.ogg",
-		LOCATION_MUSIC + "Sycamore Heights.ogg",
-		LOCATION_MUSIC + "Dreams of the Phae.ogg",
-		LOCATION_MUSIC + "Terrafirmacraft.ogg"
+		LOCATION_MUSIC + "m0.ogg",
+		LOCATION_MUSIC + "m1.ogg",
+		LOCATION_MUSIC + "m2.ogg",
+		LOCATION_MUSIC + "m3.ogg",
+		LOCATION_MUSIC + "m4.ogg"
 	};
 	
-	public static final String FALLININGROCKSHORT = PREFIX + "fallingrockshort";
-	public static final String FALLININGROCKLONG = PREFIX + "fallingrocklong";
-	public static final String FALLININGDIRTSHORT = PREFIX + "fallingdirtshort";
+	public static final String FALLININGROCKSHORT = PREFIX + "fRockS";
+	public static final String FALLININGROCKLONG = PREFIX + "fRockL";
+	public static final String FALLININGDIRTSHORT = PREFIX + "fDirtS";
 	public static final String METALIMPACT = PREFIX + "metalimpact";
 	public static final String STONEDRAG = PREFIX + "stonedrag";
 }

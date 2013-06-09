@@ -9,6 +9,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
@@ -99,7 +100,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 	public void registerIcons(IconRegister registerer)
     {
 		super.registerIcons(registerer);
-		this.WaterIcon = registerer.registerIcon("TerraFirmaCraft:"+textureFolder + "Water Jug");
+		this.WaterIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + "Water Jug");
     }
 
     @Override
