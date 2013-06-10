@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import TFC.*;

@@ -1,5 +1,6 @@
 package TFC.Containers;
 
+import TFC.Containers.Slots.SlotLogPile;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityLogPile;
 import cpw.mods.fml.relauncher.Side;

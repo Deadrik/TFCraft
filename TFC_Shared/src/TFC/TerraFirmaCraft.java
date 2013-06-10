@@ -157,9 +157,6 @@ public class TerraFirmaCraft
 		
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
-
-		//Register new Minecarts
-		//MinecartRegistry.registerMinecart(EntityCustomMinecart.class, 1, new ItemStack(TFCItems.minecartCrate));
 		
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

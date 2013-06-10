@@ -1,11 +1,15 @@
 package TFC.GUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -13,12 +17,14 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Containers.ContainerAnvil;
+import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityAnvil;
 
 
 public class GuiAnvil extends GuiContainer
 {
-	private TileEntityAnvil AnvilEntity;
+	TileEntityAnvil AnvilEntity;
 
 	public GuiAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil te, World world, int x, int y, int z)
 	{
@@ -35,19 +41,18 @@ public class GuiAnvil extends GuiContainer
 		super.initGui();
 
 		buttonList.clear();
-
-		/*buttonList.add(new GuiButton(0, guiLeft+5, guiTop + 5, 66, 20, "\2474Light Hit"));
-		buttonList.add(new GuiButton(1, guiLeft+5, guiTop + 24, 66, 20, "\2474Heavy Hit"));
-		buttonList.add(new GuiButton(2, guiLeft+5, guiTop + 43, 66, 20, "\2474Draw"));
-		buttonList.add(new GuiButton(3, guiLeft+5, guiTop + 62, 66, 20, "\2474Quench"));
-
-		buttonList.add(new GuiButton(4, guiLeft+137, guiTop + 5, 66, 20, "\2472Punch"));
-		buttonList.add(new GuiButton(5, guiLeft+137, guiTop + 24, 66, 20, "\2472Bend"));
-		buttonList.add(new GuiButton(6, guiLeft+137, guiTop + 43, 66, 20, "\2472Upset"));
-		buttonList.add(new GuiButton(7, guiLeft+137, guiTop + 62, 66, 20, "\2472Shrink"));
-
-		buttonList.add(new GuiButton(8, guiLeft+86, guiTop + 74, 36, 20, "\2474Weld"));*/
-
+		buttonList.add(new GuiAnvilButton(7, guiLeft+123, guiTop + 82, 16, 16, TFC_Textures.AnvilShrink, 	208, 17, 16, 16, this, "Shrink"));
+		buttonList.add(new GuiAnvilButton(6, guiLeft+105, guiTop + 82, 16, 16, TFC_Textures.AnvilUpset, 	208, 17, 16, 16, this, "Upset"));
+		buttonList.add(new GuiAnvilButton(5, guiLeft+123, guiTop + 64, 16, 16, TFC_Textures.AnvilBend, 		208, 17, 16, 16, this, "Bend"));
+		buttonList.add(new GuiAnvilButton(4, guiLeft+105, guiTop + 64, 16, 16, TFC_Textures.AnvilPunch, 	208, 17, 16, 16, this, "Punch"));		
+		buttonList.add(new GuiAnvilButton(3, guiLeft+87, guiTop + 82, 16, 16, TFC_Textures.AnvilDraw, 		208, 33, 16, 16, this, "Draw"));
+		buttonList.add(new GuiAnvilButton(2, guiLeft+69, guiTop + 82, 16, 16, TFC_Textures.AnvilHitHeavy, 	208, 33, 16, 16, this, "Heavy Hit"));
+		buttonList.add(new GuiAnvilButton(1, guiLeft+87, guiTop + 64, 16, 16, TFC_Textures.AnvilHitMedium, 	208, 33, 16, 16, this, "Medium Hit"));
+		buttonList.add(new GuiAnvilButton(0, guiLeft+69, guiTop + 64, 16, 16, TFC_Textures.AnvilHitLight, 	208, 33, 16, 16, this, "Light Hit"));		
+		buttonList.add(new GuiButton(8, guiLeft + 13, guiTop + 53, 36, 20, "Weld"));
+		buttonList.add(new GuiAnvilButton(9, guiLeft+113, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 2, TFC_Settings.anvilRuleColor2[0], TFC_Settings.anvilRuleColor2[1], TFC_Settings.anvilRuleColor2[2]));
+		buttonList.add(new GuiAnvilButton(10, guiLeft+94, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 1, TFC_Settings.anvilRuleColor1[0], TFC_Settings.anvilRuleColor1[1], TFC_Settings.anvilRuleColor1[2]));
+		buttonList.add(new GuiAnvilButton(11, guiLeft+75, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 0, TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2]));
 	}
 
 	@Override
@@ -63,11 +68,11 @@ public class GuiAnvil extends GuiContainer
 		}
 		else if (guibutton.id == 2)
 		{
-			AnvilEntity.actionDraw();
+			AnvilEntity.actionHammer();
 		}
 		else if (guibutton.id == 3)
 		{
-			AnvilEntity.actionHammer();
+			AnvilEntity.actionDraw();
 		}
 		else if (guibutton.id == 4)
 		{
@@ -104,50 +109,113 @@ public class GuiAnvil extends GuiContainer
 		if(AnvilEntity != null)
 		{
 			int i1 = AnvilEntity.getCraftingValue();
-			//(guiX,guiY,sourceMinX,sourceMinY,sourceMaxX,sourceMaxY
 			drawTexturedModalRect(w + 73 + i1, h + 103, 219, 9, 11, 6);
 
 			i1 = AnvilEntity.getItemCraftingValue();
 			drawTexturedModalRect(w + 76 + i1, h + 108, 208, 10, 5, 6);
 
-			drawRules(w,h);
-			//drawRulesImages(w,h);
+			drawItemRulesImages(w, h);
+			drawRulesImages(w,h);
 		}
 
 	}
+
+	public void drawTooltip(int mx, int my, String text) {
+		List list = new ArrayList();
+		list.add(text);
+		this.zLevel = 1;
+		this.drawHoveringText(list, mx, my+15, this.fontRenderer);
+		RenderHelper.disableStandardItemLighting();
+        GL11.glDisable(GL11.GL_LIGHTING);
+	}
+	
+	public void drawItemRulesImages(int w, int h)
+	{		
+		if(AnvilEntity != null && AnvilEntity.itemCraftingRules != null)
+		{
+			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe != null ? AnvilEntity.workRecipe.getRules() : null;
+			int[] ItemRules = AnvilEntity.getItemRules();
+			
+			this.mc.renderEngine.bindTexture("/terrain.png");
+			this.drawTexturedModelRectFromIcon(w + 80, h + 31, getIconFromRule(ItemRules[0]), 10, 10);
+			this.drawTexturedModelRectFromIcon(w + 99, h + 31, getIconFromRule(ItemRules[1]), 10, 10);
+			this.drawTexturedModelRectFromIcon(w + 118, h + 31, getIconFromRule(ItemRules[2]), 10, 10);
+			
+			this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
+			
+			if(Rules != null && Rules[0].matches(ItemRules, 0))
+				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
+			drawTexturedModalRect(w + 77, h + 28, 210, 115, 15, 15);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			
+			if(Rules != null && Rules[1].matches(ItemRules, 1))
+				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
+			drawTexturedModalRect(w + 96, h + 28, 210, 115, 15, 15);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			
+			if(Rules != null && Rules[2].matches(ItemRules, 2))
+				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
+			drawTexturedModalRect(w + 115, h + 28, 210, 115, 15, 15);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		}
+		
+		//GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
+		//drawTexturedModalRect(w + 75, h + 7, 208, 49, 19, 21);
+	}
 	
 	public void drawRulesImages(int w, int h)
-	{
-		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "anvilicons.png");
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
+	{		
 		if(AnvilEntity.workRecipe != null)
 		{
 			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
 			int[] ItemRules = AnvilEntity.getItemRules();
-			
-			if(Rules[0] == CraftingRuleEnum.HITLAST)
-			{
-				drawTexturedModalRect(w + 209, h + 80, 16, 16, 0, 0, 64, 64);
-			}
-			if(Rules[1] == CraftingRuleEnum.HITSECONDFROMLAST)
-			{
-				drawTexturedModalRect(w + 225, h + 80, 16, 16, 0, 0, 64, 64);
-			}
-			if(Rules[2] == CraftingRuleEnum.HITTHIRDFROMLAST)
-			{
-				drawTexturedModalRect(w + 241, h + 80, 16, 16, 0, 0, 64, 64);
-			}
-			
-			int r0Min = Math.min((Rules[0].Min + 1), 2) * 16;
-			int r0Max = (Rules[0].Max + 1) * 16;
-			
-			//drawTexturedModalRect(w + 209, h + 80, 16, 16, 0, 0, 64, 64);
+			this.mc.renderEngine.bindTexture("/terrain.png");
+			this.drawTexturedModelRectFromIcon(w + 80, h + 10, getIconFromRule(Rules[0].Action), 10, 10);
+			this.drawTexturedModelRectFromIcon(w + 99, h + 10, getIconFromRule(Rules[1].Action), 10, 10);
+			this.drawTexturedModelRectFromIcon(w + 118, h + 10, getIconFromRule(Rules[2].Action), 10, 10);
+			this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
+			//Bottom Row
+			GL11.glColor4ub(TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2], (byte)255);
+			if(Rules[0].Min == 0)
+				drawTexturedModalRect(w + 75, h + 26, 228, 68, 19, 3);
+			if(Rules[0].Min <= 1 || Rules[0].Max == 1)
+				drawTexturedModalRect(w + 94, h + 26, 228, 68, 19, 3);
+			if(Rules[0].Min <= 2 || Rules[0].Max == 2)
+				drawTexturedModalRect(w + 113, h + 26, 228, 68, 19, 3);
+			//Middle Row
+			GL11.glColor4ub(TFC_Settings.anvilRuleColor1[0], TFC_Settings.anvilRuleColor1[1], TFC_Settings.anvilRuleColor1[2], (byte)255);
+			if(Rules[1].Min == 0)
+				drawTexturedModalRect(w + 75, h + 24, 228, 68, 19, 3);
+			if(Rules[1].Min <= 1 || Rules[1].Max == 1)
+				drawTexturedModalRect(w + 94, h + 24, 228, 68, 19, 3);
+			if(Rules[1].Min <= 2 || Rules[1].Max == 2)
+				drawTexturedModalRect(w + 113, h + 24, 228, 68, 19, 3);
+			//Top Row
+			GL11.glColor4ub(TFC_Settings.anvilRuleColor2[0], TFC_Settings.anvilRuleColor2[1], TFC_Settings.anvilRuleColor2[2], (byte)255);
+			if(Rules[2].Min == 0)
+				drawTexturedModalRect(w + 75, h + 22, 228, 68, 19, 3);
+			if(Rules[2].Min <= 1 || Rules[2].Max == 1)
+				drawTexturedModalRect(w + 94, h + 22, 228, 68, 19, 3);
+			if(Rules[2].Min <= 2 || Rules[2].Max == 2)
+				drawTexturedModalRect(w + 113, h + 22, 228, 68, 19, 3);
 		}
-	}
-
-	public void DrawRule()
-	{
 		
+		//GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
+		//drawTexturedModalRect(w + 75, h + 7, 208, 49, 19, 21);
+	}
+	
+	public Icon getIconFromRule(int Action)
+	{
+		switch(Action)
+		{
+		case 0: return TFC_Textures.AnvilHit;
+		case 1: return TFC_Textures.AnvilDraw;
+		case 3: return TFC_Textures.AnvilPunch;
+		case 4: return TFC_Textures.AnvilBend;
+		case 5: return TFC_Textures.AnvilUpset;
+		case 6: return TFC_Textures.AnvilShrink;
+		default:return TFC_Textures.InvisibleTexture;
+		}
 	}
 	
 	public void drawRules(int w, int h)
@@ -211,9 +279,14 @@ public class GuiAnvil extends GuiContainer
 		}
 	}
 
-	protected void drawGuiContainerForegroundLayer()
+	public int getGuiLeft()
 	{
-		((GuiButton)buttonList.get(3)).enabled = false;
+		return this.guiLeft;
+	}
+	
+	public int getGuiTop()
+	{
+		return this.guiTop;
 	}
 	
 	@Override
@@ -225,15 +298,6 @@ public class GuiAnvil extends GuiContainer
         clickY -= l1;
         return clickX >= slotX - 1 && clickX < slotX + sizeX + 1 && clickY >= slotY - 1 && clickY < slotY + sizeY + 1;
     }
-
-	private boolean getIsMouseOverSlot(Slot slot, int i, int j)
-	{
-		int k = guiLeft;
-		int l = guiTop;
-		i -= k;
-		j -= l;
-		return i >= slot.xDisplayPosition - 1 && i < slot.xDisplayPosition + 16 + 1 && j >= slot.yDisplayPosition - 1 && j < slot.yDisplayPosition + 16 + 1;
-	}
 
 	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
@@ -254,6 +318,18 @@ public class GuiAnvil extends GuiContainer
         tessellator.addVertexWithUV(drawX + drawWidth, drawY + drawHeight, this.zLevel, (u + width) * f, (v + height) * f1);
         tessellator.addVertexWithUV(drawX + drawWidth, drawY + 0, this.zLevel, (u + width) * f, (v + 0) * f1);
         tessellator.addVertexWithUV(drawX + 0, drawY + 0, this.zLevel, (u + 0) * f, (v + 0) * f1);
+        tessellator.draw();
+    }
+    
+    @Override
+	public void drawTexturedModelRectFromIcon(int x, int y, Icon par3Icon, int width, int height)
+    {
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x + 0, y + height, this.zLevel, par3Icon.getMinU(), par3Icon.getMaxV());
+        tessellator.addVertexWithUV(x + width, y + height, this.zLevel, par3Icon.getMaxU(), par3Icon.getMaxV());
+        tessellator.addVertexWithUV(x + width, y + 0, this.zLevel, par3Icon.getMaxU(), par3Icon.getMinV());
+        tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, par3Icon.getMinU(), par3Icon.getMinV());
         tessellator.draw();
     }
 }

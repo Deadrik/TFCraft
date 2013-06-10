@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -11,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import TFC.TFCBlocks;
 import TFC.TFCItems;
@@ -20,11 +23,34 @@ import TFC.Food.FoodStatsTFC;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TFC_Core
 {
 	public enum Direction{PosX,PosZ,NegX,NegZ,None,PosXPosZ,PosXNegZ,NegXPosZ,NegXNegZ,NegY,PosY}
 
+	@SideOnly(Side.CLIENT)
+	public static int getMouseX()
+	{
+		ScaledResolution scaledresolution = new ScaledResolution(
+				Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		int i = scaledresolution.getScaledWidth();
+		int k = Mouse.getX() * i / Minecraft.getMinecraft().displayWidth;
+		
+		return k;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static int getMouseY()
+	{
+		ScaledResolution scaledresolution = new ScaledResolution(
+				Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		int j = scaledresolution.getScaledHeight();
+        int l = j - Mouse.getY() * j / Minecraft.getMinecraft().displayHeight - 1;
+        
+        return l;
+	}
+	
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
 		if(TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k)) {

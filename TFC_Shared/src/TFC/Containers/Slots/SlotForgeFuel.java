@@ -1,9 +1,6 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
-import TFC.API.ISize;
-import TFC.API.Enums.EnumSize;
-import TFC.Food.ItemTerraFood;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -36,23 +33,24 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class SlotFoodOnly extends Slot
-
+public class SlotForgeFuel extends Slot
 {
-	EnumSize size = EnumSize.MEDIUM;
-	public SlotFoodOnly(IInventory iinventory, int i, int j, int k)
-	{
-		super(iinventory, i, j, k);
+    public SlotForgeFuel(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+    {
+        super(iinventory, i, j, k);
 
-	}
+    }
 
-	public boolean isItemValid(ItemStack itemstack)
-	{    	
-		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize && itemstack.getItem() instanceof ItemTerraFood)
-		{
-			return true;
-		}
-		
-		return false;
-	}
+    public boolean isItemValid(ItemStack itemstack)
+    {
+        if(itemstack.itemID == Item.coal.itemID) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getSlotStackLimit()
+    {
+        return 1;
+    }
 }

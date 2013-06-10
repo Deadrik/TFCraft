@@ -9,6 +9,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.Containers.Slots.SlotCraftingMetal;
 import TFC.Core.CraftingManagerTFC;
 
 public class ContainerKnapping extends Container

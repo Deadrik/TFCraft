@@ -7,6 +7,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.Containers.Slots.SlotBlocked;
+import TFC.Containers.Slots.SlotFoodBowl;
+import TFC.Containers.Slots.SlotFoodOnly;
 import TFC.Food.ItemTerraFood;
 import TFC.TileEntities.TileEntityFoodPrep;
 

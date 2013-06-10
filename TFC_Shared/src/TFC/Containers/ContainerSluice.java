@@ -1,6 +1,7 @@
 package TFC.Containers;
 
 import TFC.*;
+import TFC.Containers.Slots.SlotSluice;
 import TFC.TileEntities.TileEntitySluice;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

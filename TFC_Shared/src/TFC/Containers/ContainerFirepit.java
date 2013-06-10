@@ -6,6 +6,10 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.Containers.Slots.SlotFirepit;
+import TFC.Containers.Slots.SlotFirepitFuel;
+import TFC.Containers.Slots.SlotFirepitIn;
+import TFC.Containers.Slots.SlotFirepitOut;
 import TFC.TileEntities.TileEntityFirepit;
 
 public class ContainerFirepit extends ContainerTFC

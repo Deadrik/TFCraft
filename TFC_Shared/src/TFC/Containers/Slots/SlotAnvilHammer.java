@@ -1,13 +1,11 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
+import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -32,19 +30,24 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
-public class SlotBlocked extends Slot
+public class SlotAnvilHammer extends Slot
+
 {
-	public SlotBlocked(IInventory iinventory, int i, int j, int k)
+	public SlotAnvilHammer(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
-
 	}
 
-	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
-		return false;
+		if(itemstack.getItem() instanceof ItemHammer) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-
 }

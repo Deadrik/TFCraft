@@ -1,6 +1,8 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumSize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -33,17 +35,26 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class SlotSluice extends Slot
+public class SlotSizeSmall extends Slot
 
 {
-	public SlotSluice(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+	EnumSize size = EnumSize.MEDIUM;
+	public SlotSizeSmall(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 
 	}
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
-	{
+	{    	
+		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize)
+		{
+			return true;
+		}
+		else if (!(itemstack.getItem() instanceof ISize))
+			return true;
+		
 		return false;
 	}
+
 }

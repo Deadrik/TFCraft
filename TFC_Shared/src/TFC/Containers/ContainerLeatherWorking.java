@@ -2,6 +2,8 @@ package TFC.Containers;
 
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.Containers.Slots.SlotBlocked;
+import TFC.Containers.Slots.SlotCraftingMetal;
 import TFC.Core.CraftingManagerTFC;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.TileEntities.TileEntityWorkbench;

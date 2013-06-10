@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
 import net.minecraft.client.entity.*;

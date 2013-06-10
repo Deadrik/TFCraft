@@ -22,6 +22,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.AnvilReq;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -351,5 +352,15 @@ public class BlockAnvil extends BlockTerraContainer
 			textureMapTop[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
 			textureMapSide[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
 		}
+		
+		TFC_Textures.AnvilHit = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit");
+		TFC_Textures.AnvilHitHeavy = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Heavy");
+		TFC_Textures.AnvilHitMedium = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Medium");
+		TFC_Textures.AnvilHitLight = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Light");
+		TFC_Textures.AnvilDraw = registerer.registerIcon(Reference.ModID + ":" + "Anvil Draw");
+		TFC_Textures.AnvilPunch = registerer.registerIcon(Reference.ModID + ":" + "Anvil Punch");
+		TFC_Textures.AnvilBend = registerer.registerIcon(Reference.ModID + ":" + "Anvil Bend");
+		TFC_Textures.AnvilUpset = registerer.registerIcon(Reference.ModID + ":" + "Anvil Upset");
+		TFC_Textures.AnvilShrink = registerer.registerIcon(Reference.ModID + ":" + "Anvil Shrink");
 	}
 }

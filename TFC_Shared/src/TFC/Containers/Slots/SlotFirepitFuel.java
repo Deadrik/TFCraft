@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

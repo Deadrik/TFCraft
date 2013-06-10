@@ -1,15 +1,15 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import TFC.*;
-import TFC.Core.HeatManager;
-import TFC.Items.ItemOre;
+import TFC.API.ISize;
+import TFC.API.Enums.EnumSize;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
 import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.crash.*;
@@ -34,32 +34,45 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
-public class SlotForge extends Slot
-
+public class SlotSize extends Slot
 {
-	public SlotForge(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+	EnumSize size = EnumSize.MEDIUM;
+	
+	List excpetions;
+	
+	public SlotSize(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
-
+		excpetions = new ArrayList<Item>();
 	}
-
+	@Override
 	public boolean isItemValid(ItemStack itemstack)
-	{
-	    HeatManager manager = HeatManager.getInstance();
-	    if(manager.findMatchingIndex(itemstack) == null)
-	    {
-	        return false;
-	    }
-		if(!(itemstack.getItem() instanceof ItemOre))
+	{    	
+		boolean except = excpetions.contains(itemstack.getItem());
+		
+		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize && !except)
 		{
 			return true;
 		}
+		else if (!(itemstack.getItem() instanceof ISize) && !except)
+			return true;
+		
 		return false;
 	}
 	
-	public int getSlotStackLimit()
+	public SlotSize setSize(EnumSize s)
 	{
-	    return 1;
+		size = s;
+		return this;
+	}
+	
+	public SlotSize addItemException(ArrayList<Item> ex)
+	{
+		excpetions = ex;
+		return this;
 	}
 }

@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
 import TFC.API.ISize;
@@ -35,15 +35,13 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class SlotSizeSmall extends Slot
-
+public class SlotSizeMedium extends SlotSize
 {
-	EnumSize size = EnumSize.MEDIUM;
-	public SlotSizeSmall(IInventory iinventory, int i, int j, int k)
+	public SlotSizeMedium(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
-
 	}
+	
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
@@ -56,5 +54,4 @@ public class SlotSizeSmall extends Slot
 		
 		return false;
 	}
-
 }

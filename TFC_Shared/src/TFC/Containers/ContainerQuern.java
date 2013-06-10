@@ -7,6 +7,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.Containers.Slots.SlotBlocked;
+import TFC.Containers.Slots.SlotQuern;
+import TFC.Containers.Slots.SlotQuernGrain;
 import TFC.TileEntities.TileEntityQuern;
 
 public class ContainerQuern extends ContainerTFC {

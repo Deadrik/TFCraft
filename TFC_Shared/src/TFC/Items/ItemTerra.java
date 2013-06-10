@@ -144,12 +144,12 @@ public class ItemTerra extends Item implements ISize
             if(stackTagCompound.hasKey("itemCraftingValue") && stackTagCompound.getByte("itemCraftingValue") != 0)
             {
                 arraylist.add("This Item Has Been Worked");
-                if(stackTagCompound.hasKey("itemCraftingRule1"))
+                /*if(stackTagCompound.hasKey("itemCraftingRule1"))
                     arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule1")));
                 if(stackTagCompound.hasKey("itemCraftingRule2"))
                     arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule2")));
                 if(stackTagCompound.hasKey("itemCraftingRule3"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule3")));
+                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule3")));*/
             }
         }
     }

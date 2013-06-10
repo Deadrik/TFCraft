@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
 import cpw.mods.fml.relauncher.Side;
@@ -33,18 +33,27 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class SlotAnvilWeldOut extends Slot
-
+public class SlotScribeCrafting extends Slot
 {
-	public SlotAnvilWeldOut(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
+	EntityPlayer player;
+	public SlotScribeCrafting(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
-
+		player = entityplayer;
 	}
-
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
+		if(itemstack.itemID == TFCItems.Ink.itemID)
+		{
+			return true;
+		}
 		return false;
+	}
+
+	@Override
+	public void onSlotChanged()
+	{
+		inventory.onInventoryChanged();
 	}
 }

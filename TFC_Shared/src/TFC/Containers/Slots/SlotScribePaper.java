@@ -1,6 +1,7 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
+import TFC.Containers.ContainerScribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;
@@ -33,24 +34,32 @@ import net.minecraft.util.*;
 import net.minecraft.village.*;
 import net.minecraft.world.*;
 
-public class SlotForgeFuel extends Slot
+public class SlotScribePaper extends Slot
 {
-    public SlotForgeFuel(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k)
-    {
-        super(iinventory, i, j, k);
+	EntityPlayer player;
+	Container container;
+	public SlotScribePaper(EntityPlayer entityplayer, IInventory iinventory, ContainerScribe scribecontainer, int i, int j, int k)
+	{
+		super(iinventory, i, j, k);
+		player = entityplayer;
+		container = scribecontainer;
+	}
 
-    }
+	@Override
+	public boolean isItemValid(ItemStack itemstack)
+	{
+		if(itemstack.itemID == Item.paper.itemID ||itemstack.itemID == TFCItems.writabeBookTFC.itemID)
+		{
+			return true;
+		}
+		return false;
+	}
 
-    public boolean isItemValid(ItemStack itemstack)
-    {
-        if(itemstack.itemID == Item.coal.itemID) {
-            return true;
-        }
-        return false;
-    }
-
-    public int getSlotStackLimit()
-    {
-        return 1;
-    }
+	@Override
+	public void onSlotChanged()
+	{
+		inventory.onInventoryChanged();
+		//Updates the scribing table. The inventory doesn't matter.
+		container.onCraftMatrixChanged(inventory);
+	}
 }

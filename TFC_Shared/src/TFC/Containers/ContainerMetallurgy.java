@@ -9,6 +9,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TFC.Containers.Slots.SlotCraftingMetal;
+import TFC.Containers.Slots.SlotMetal;
 import TFC.Core.CraftingManagerTFC;
 import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;

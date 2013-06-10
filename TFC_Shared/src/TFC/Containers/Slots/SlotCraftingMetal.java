@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import TFC.TerraFirmaCraft;
+import TFC.Containers.ContainerKnapping;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.GUI.GuiKnapping;
 import cpw.mods.fml.common.registry.GameRegistry;

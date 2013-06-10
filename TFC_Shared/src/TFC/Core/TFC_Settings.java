@@ -41,6 +41,10 @@ public class TFC_Settings
 	public static byte[] cropNutrientBColor = {(byte) 242, (byte) 101, (byte) 34, (byte) 200};
 	public static byte[] cropNutrientCColor = {(byte) 247, (byte) 148, (byte) 49, (byte) 200};
 	
+	public static byte[] anvilRuleColor0 = {(byte) 237, (byte) 28, (byte) 36, (byte) 255};
+	public static byte[] anvilRuleColor1 = {(byte) 242, (byte) 101, (byte) 34, (byte) 255};
+	public static byte[] anvilRuleColor2 = {(byte) 247, (byte) 148, (byte) 49, (byte) 255};
+	
 	public static int pitKilnBurnTime = 8;
 
 	static
@@ -85,6 +89,18 @@ public class TFC_Settings
 		cropNutrientCColor[1] = (byte)getIntFor(config,"ColorNutrientC","Green", 148);
 		cropNutrientCColor[2] = (byte)getIntFor(config,"ColorNutrientC","Blue", 49);
 		cropNutrientCColor[3] = (byte)getIntFor(config,"ColorNutrientC","Alpha", 200);
+		
+		anvilRuleColor0[0] = (byte)getIntFor(config,"anvilRuleColor0","Red", 237);
+		anvilRuleColor0[1] = (byte)getIntFor(config,"anvilRuleColor0","Green", 28);
+		anvilRuleColor0[2] = (byte)getIntFor(config,"anvilRuleColor0","Blue", 36);
+		
+		anvilRuleColor1[0] = (byte)getIntFor(config,"anvilRuleColor1","Red", 242);
+		anvilRuleColor1[1] = (byte)getIntFor(config,"anvilRuleColor1","Green", 101);
+		anvilRuleColor1[2] = (byte)getIntFor(config,"anvilRuleColor1","Blue", 34);
+		
+		anvilRuleColor2[0] = (byte)getIntFor(config,"anvilRuleColor2","Red", 247);
+		anvilRuleColor2[1] = (byte)getIntFor(config,"anvilRuleColor2","Green", 148);
+		anvilRuleColor2[2] = (byte)getIntFor(config,"anvilRuleColor2","Blue", 49);
 		
 		enableCropsDie = getBooleanFor(config, "Crops","enableCropsDie",false);
 		

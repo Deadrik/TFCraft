@@ -48,7 +48,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	public TileEntityAnvil()
 	{
-		anvilItemStacks = new ItemStack[7];
+		anvilItemStacks = new ItemStack[19];
 		itemCraftingValue = 0;
 		itemCraftingRules = new int[]{-1,-1,-1};
 		craftingValue = 0;

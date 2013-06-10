@@ -1,4 +1,4 @@
-package TFC.Containers;
+package TFC.Containers.Slots;
 
 import TFC.*;
 import cpw.mods.fml.relauncher.Side;

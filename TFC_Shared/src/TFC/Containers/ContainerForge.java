@@ -7,6 +7,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.Containers.Slots.SlotForge;
+import TFC.Containers.Slots.SlotForgeFuel;
 import TFC.Core.HeatManager;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityForge;
