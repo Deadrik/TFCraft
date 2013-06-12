@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.ContainerBarrel;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityBarrel;
-
 
 public class GuiBarrel extends GuiContainer
 {
@@ -41,8 +41,8 @@ public class GuiBarrel extends GuiContainer
 
 		buttonList.clear();
 
-		buttonList.add(new GuiButton(0, guiLeft+52, guiTop + 50, 36, 20, "Seal"));
-		buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 36, 20, "Empty"));
+		buttonList.add(new GuiButton(0, guiLeft+38, guiTop + 50, 50, 20, StringUtil.localize("gui.Barrel.Seal")));
+		buttonList.add(new GuiButton(1, guiLeft+88, guiTop + 50, 50, 20, StringUtil.localize("gui.Barrel.Empty")));
 	}
 
 	@Override

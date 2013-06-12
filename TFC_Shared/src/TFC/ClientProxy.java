@@ -58,19 +58,19 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiBarrel;
+import TFC.GUI.GuiBloomery;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
+import TFC.GUI.GuiFirepit;
 import TFC.GUI.GuiFoodPrep;
+import TFC.GUI.GuiForge;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
-import TFC.GUI.GuiQuern;
-import TFC.GUI.GuiBloomery;
-import TFC.GUI.GuiFirepit;
-import TFC.GUI.GuiForge;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMetallurgy;
+import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiWorkbench;
@@ -733,6 +733,8 @@ public class ClientProxy extends CommonProxy
 		RegisterMetal();
 		RegisterFood();
 		RegisterWood();
+		RegisterGUI();
+		RegisterEntity();
 	}
 
 	private void RegisterFood()
@@ -1314,6 +1316,38 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("item.Weak Red Steel Ingot.name", "Weak Red Steel Ingot");
 	}
 
+	private void RegisterGUI()
+	{
+		LanguageRegistry LR = LanguageRegistry.instance();
+		
+		// Barrel
+		LR.addStringLocalization("gui.Barrel.Seal", "Seal");
+		LR.addStringLocalization("gui.Barrel.Empty", "Empty");
+		LR.addStringLocalization("gui.Barrel.Water", "Water");
+		LR.addStringLocalization("gui.Barrel.Limewater", "Limewater");
+		LR.addStringLocalization("gui.Barrel.Tannin", "Tannin");
+		LR.addStringLocalization("gui.Barrel.Gunpowder", "Gunpowder");
+		LR.addStringLocalization("gui.Barrel.Beer", "Beer");
+		LR.addStringLocalization("gui.Barrel.Cider", "Cider");
+		LR.addStringLocalization("gui.Barrel.Vodka", "Vodka");
+		LR.addStringLocalization("gui.Barrel.Whiskey", "Whiskey");
+		LR.addStringLocalization("gui.Barrel.RyeWhiskey", "Rye Whiskey");
+		LR.addStringLocalization("gui.Barrel.Sake", "Sake");
+		LR.addStringLocalization("gui.Barrel.Rum", "Rum");
+		
+		// Anvil
+		
+	}
+	
+	private void RegisterEntity()
+	{
+		LanguageRegistry LR = LanguageRegistry.instance();
+		
+		LR.addStringLocalization("entity.Bear.name", "Bear");
+		LR.addStringLocalization("entity.Deer.name", "Deer");
+		LR.addStringLocalization("entity.irongolem.name", "Irongolem");
+	}
+	
 	@Override
 	public boolean getGraphicsLevel()
 	{
