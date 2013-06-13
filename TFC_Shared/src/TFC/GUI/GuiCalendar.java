@@ -13,6 +13,7 @@ import TFC.Reference;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
+import TFC.Core.Util.StringUtil;
 
 public class GuiCalendar extends GuiScreen
 {
@@ -62,11 +63,11 @@ public class GuiCalendar extends GuiScreen
             buttonList.clear();
             int l = (width - xSize) / 2;
             int i1 = (height - ySize) / 2;
-            buttonList.add(new GuiButton(0, l+20, i1 + 118, 66, 20, "1 Hour"));
-            buttonList.add(new GuiButton(1, l+20, i1 + 137, 66, 20, "1 Day"));
-            buttonList.add(new GuiButton(2, l+20, i1 + 156, 66, 20, "1 Week"));
-            buttonList.add(new GuiButton(3, l+85, i1 + 118, 66, 20, "1 Month"));
-            buttonList.add(new GuiButton(4, l+85, i1 + 137, 66, 20, "1 Year"));
+            buttonList.add(new GuiButton(0, l+20, i1 + 118, 66, 20, StringUtil.localize("gui.Calendar.1Hour")));
+            buttonList.add(new GuiButton(1, l+20, i1 + 137, 66, 20, StringUtil.localize("gui.Calendar.1Day")));
+            buttonList.add(new GuiButton(2, l+20, i1 + 156, 66, 20, StringUtil.localize("gui.Calendar.1Week")));
+            buttonList.add(new GuiButton(3, l+85, i1 + 118, 66, 20, StringUtil.localize("gui.Calendar.1Month")));
+            buttonList.add(new GuiButton(4, l+85, i1 + 137, 66, 20, StringUtil.localize("gui.Calendar.1Year")));
         }
 
     }
@@ -84,17 +85,17 @@ public class GuiCalendar extends GuiScreen
         int i1 = (height - ySize) / 2;
         drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-        drawCenteredString(fontRenderer,"Calendar", l+87, i1+16, 0xFFFFFF);
-        drawCenteredString(fontRenderer,"Season : " + TFC_Time.seasons[TFC_Time.getMonth()], l + 87, i1+26, 0x000000);
+        drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Calendar"), l+87, i1+16, 0xFFFFFF);
+        drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Season") + " : " + TFC_Time.seasons[TFC_Time.getMonth()], l + 87, i1+26, 0x000000);
         
-        drawCenteredString(fontRenderer,"Day : " + TFC_Time.Days[TFC_Time.getDayOfWeek()], l + 87, i1+36, 0x000000);
+        drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Day") + " : " + TFC_Time.Days[TFC_Time.getDayOfWeek()], l + 87, i1+36, 0x000000);
         int dom = TFC_Time.getDayOfMonth();
         int month = TFC_Time.currentMonth;
         
         if(dom == 7 && month == 4)
-            drawCenteredString(fontRenderer,"Date : Bioxx's Birthday!, " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
+            drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.DateBioxx") + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
         else
-            drawCenteredString(fontRenderer,"Date : " + dom + " " + TFC_Time.months[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
+            drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Date") + " : " + dom + " " + TFC_Time.months[month] + ", " +(1000+TFC_Time.getYear()), l + 87, i1+46, 0x000000);
 
         float temp = Math.round((TFC_Climate.getHeightAdjustedTemp((int) player.posX, (int) player.posY, (int) player.posZ)));
 
@@ -105,10 +106,10 @@ public class GuiCalendar extends GuiScreen
         long h = TFC_Time.getHour();
         String hour = "";
         if(h == 0)
-            hour = "The Witching Hour";
+            hour = StringUtil.localize("gui.Calendar.WitchHour");
         else
             hour+=h;
-        drawCenteredString(fontRenderer,"Hour : " + hour, l + 87, i1+56, 0x000000);
+        drawCenteredString(fontRenderer,StringUtil.localize("gui.Calendar.Hour") + " : " + hour, l + 87, i1+56, 0x000000);
         //drawCenteredString(fontRenderer,"EVT : " + ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt((int) player.posX, (int) player.posZ).floatdata1, l + 87, i1+76, 0x000000);
         
         //int rain = (int) TFC_Climate.getRainfall((int) player.posX,(int) player.posY, (int) player.posZ);
