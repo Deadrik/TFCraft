@@ -554,6 +554,7 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(Block.blocksList[53], "axe", 0);
 
 		if (config != null) {
 			config.save();
