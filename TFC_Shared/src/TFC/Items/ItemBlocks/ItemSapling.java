@@ -6,6 +6,7 @@ import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.Util.StringUtil;
 
 public class ItemSapling extends ItemTerraBlock
 {
@@ -25,7 +26,7 @@ public class ItemSapling extends ItemTerraBlock
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		if(MetaNames != null)
-			return new StringBuilder().append(Global.WOOD_ALL[itemstack.getItemDamage()]+" Sapling").toString();
+			return StringUtil.localize("tile.sapling." + Global.WOOD_ALL[itemstack.getItemDamage()].replace(" ", ""));
 		return super.getItemDisplayName(itemstack);
 	}
 	public static Icon[] Icons = new Icon[Global.WOOD_ALL.length];

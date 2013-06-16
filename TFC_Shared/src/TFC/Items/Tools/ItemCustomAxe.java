@@ -15,6 +15,7 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
@@ -74,5 +75,11 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public EnumDamageType GetDamageType() {
 		// TODO Auto-generated method stub
 		return EnumDamageType.SLASHING;
+	}
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 }

@@ -13,6 +13,7 @@ import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemCustomPickaxe extends ItemPickaxe implements ISize
@@ -63,5 +64,11 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
+	}
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 }

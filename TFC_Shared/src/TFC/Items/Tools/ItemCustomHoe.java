@@ -20,6 +20,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityFarmland;
 
@@ -160,5 +161,11 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
+	}
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 }
