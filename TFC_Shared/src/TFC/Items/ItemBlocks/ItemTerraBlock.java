@@ -19,6 +19,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemTerraBlock extends ItemBlock implements ISize
@@ -48,6 +49,12 @@ public class ItemTerraBlock extends ItemBlock implements ISize
     		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
     	return super.getUnlocalizedName(itemstack);
     }
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
 
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 

@@ -19,6 +19,7 @@ import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Containers.ContainerAnvil;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Textures;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityAnvil;
 
 
@@ -41,15 +42,15 @@ public class GuiAnvil extends GuiContainer
 		super.initGui();
 
 		buttonList.clear();
-		buttonList.add(new GuiAnvilButton(7, guiLeft+123, guiTop + 82, 16, 16, TFC_Textures.AnvilShrink, 	208, 17, 16, 16, this, "Shrink"));
-		buttonList.add(new GuiAnvilButton(6, guiLeft+105, guiTop + 82, 16, 16, TFC_Textures.AnvilUpset, 	208, 17, 16, 16, this, "Upset"));
-		buttonList.add(new GuiAnvilButton(5, guiLeft+123, guiTop + 64, 16, 16, TFC_Textures.AnvilBend, 		208, 17, 16, 16, this, "Bend"));
-		buttonList.add(new GuiAnvilButton(4, guiLeft+105, guiTop + 64, 16, 16, TFC_Textures.AnvilPunch, 	208, 17, 16, 16, this, "Punch"));		
-		buttonList.add(new GuiAnvilButton(3, guiLeft+87, guiTop + 82, 16, 16, TFC_Textures.AnvilDraw, 		208, 33, 16, 16, this, "Draw"));
-		buttonList.add(new GuiAnvilButton(2, guiLeft+69, guiTop + 82, 16, 16, TFC_Textures.AnvilHitHeavy, 	208, 33, 16, 16, this, "Heavy Hit"));
-		buttonList.add(new GuiAnvilButton(1, guiLeft+87, guiTop + 64, 16, 16, TFC_Textures.AnvilHitMedium, 	208, 33, 16, 16, this, "Medium Hit"));
-		buttonList.add(new GuiAnvilButton(0, guiLeft+69, guiTop + 64, 16, 16, TFC_Textures.AnvilHitLight, 	208, 33, 16, 16, this, "Light Hit"));		
-		buttonList.add(new GuiButton(8, guiLeft + 13, guiTop + 53, 36, 20, "Weld"));
+		buttonList.add(new GuiAnvilButton(7, guiLeft+123, guiTop + 82, 16, 16, TFC_Textures.AnvilShrink, 	208, 17, 16, 16, this, StringUtil.localize("gui.Anvil.Shrink")));
+		buttonList.add(new GuiAnvilButton(6, guiLeft+105, guiTop + 82, 16, 16, TFC_Textures.AnvilUpset, 	208, 17, 16, 16, this, StringUtil.localize("gui.Anvil.Upset")));
+		buttonList.add(new GuiAnvilButton(5, guiLeft+123, guiTop + 64, 16, 16, TFC_Textures.AnvilBend, 		208, 17, 16, 16, this, StringUtil.localize("gui.Anvil.Bend")));
+		buttonList.add(new GuiAnvilButton(4, guiLeft+105, guiTop + 64, 16, 16, TFC_Textures.AnvilPunch, 	208, 17, 16, 16, this, StringUtil.localize("gui.Anvil.Punch")));		
+		buttonList.add(new GuiAnvilButton(3, guiLeft+87, guiTop + 82, 16, 16, TFC_Textures.AnvilDraw, 		208, 33, 16, 16, this, StringUtil.localize("gui.Anvil.Draw")));
+		buttonList.add(new GuiAnvilButton(2, guiLeft+69, guiTop + 82, 16, 16, TFC_Textures.AnvilHitHeavy, 	208, 33, 16, 16, this, StringUtil.localize("gui.Anvil.HeavyHit")));
+		buttonList.add(new GuiAnvilButton(1, guiLeft+87, guiTop + 64, 16, 16, TFC_Textures.AnvilHitMedium, 	208, 33, 16, 16, this, StringUtil.localize("gui.Anvil.MediumHit")));
+		buttonList.add(new GuiAnvilButton(0, guiLeft+69, guiTop + 64, 16, 16, TFC_Textures.AnvilHitLight, 	208, 33, 16, 16, this, StringUtil.localize("gui.Anvil.LightHit")));		
+		buttonList.add(new GuiButton(8, guiLeft + 13, guiTop + 53, 36, 20, StringUtil.localize("gui.Anvil.Weld")));
 		buttonList.add(new GuiAnvilButton(9, guiLeft+113, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 2, TFC_Settings.anvilRuleColor2[0], TFC_Settings.anvilRuleColor2[1], TFC_Settings.anvilRuleColor2[2]));
 		buttonList.add(new GuiAnvilButton(10, guiLeft+94, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 1, TFC_Settings.anvilRuleColor1[0], TFC_Settings.anvilRuleColor1[1], TFC_Settings.anvilRuleColor1[2]));
 		buttonList.add(new GuiAnvilButton(11, guiLeft+75, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 0, TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2]));
@@ -220,7 +221,7 @@ public class GuiAnvil extends GuiContainer
 	
 	public void drawRules(int w, int h)
 	{
-		fontRenderer.drawString("Rules:", w + 209, h+30-8, 0x404040);
+		fontRenderer.drawString(StringUtil.localize("gui.Anvil.Rules") + ":", w + 209, h+30-8, 0x404040);
 		if(AnvilEntity.workRecipe != null)
 		{
 			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
