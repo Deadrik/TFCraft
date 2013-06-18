@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotCraftingMetal;
 import TFC.Core.CraftingManagerTFC;
 
-public class ContainerKnapping extends Container
+public class ContainerSpecialCrafting extends Container
 {
 	/** The crafting matrix inventory (3x3). */
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 5);
@@ -25,7 +25,7 @@ public class ContainerKnapping extends Container
 	public IInventory craftResult = new InventoryCraftResult();
 	private World worldObj;
 
-	public ContainerKnapping(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
+	public ContainerSpecialCrafting(InventoryPlayer inventoryplayer, ItemStack is, World world, int x, int y, int z)
 	{
 		for (int j1 = 0; j1 < 25; j1++)
 		{

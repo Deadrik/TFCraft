@@ -6,60 +6,38 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
-import TFC.API.Constant.Global;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Items.Tools.ItemCustomKnife;
 
-public class ItemLooseRock extends ItemTerra
+public class ItemLeather extends ItemLooseRock
 {
-	Icon[] icons;
-	Item specialCraftingType;
-	public ItemLooseRock(int id) 
+	public ItemLeather(int id) 
 	{
 		super(id);
-		this.hasSubtypes = true;
-		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.MetaNames = Global.STONE_ALL;
-		icons = new Icon[MetaNames.length];
 	}
 
-	int[][] map = 
-		{   {0,-1,0},
-			{0,1,0},
-			{0,0,-1},
-			{0,0,1},
-			{-1,0,0},
-			{1,0,0},
-		};
-	
-	@Override
-	public ItemTerra setMetaNames(String[] metanames)
-    {
-    	MetaNames = metanames;
-    	if(metanames != null)
-    		icons = new Icon[MetaNames.length];
-    	return this;
-    }
-	
-	public ItemTerra setSpecialCraftingType(Item i)
-    {
-		specialCraftingType = i;
-    	return this;
-    }
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
 	{
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 		pi.specialCraftingType = new ItemStack(specialCraftingType, 1, itemstack.getItemDamage());
-		if(itemstack.stackSize > 1)
+		
+		boolean hasKnife = false;
+        for(int i = 0; i < entityplayer.inventory.mainInventory.length; i++)
+        {
+            if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemCustomKnife)
+                hasKnife = true;
+        }
+        
+		if(hasKnife)
 		{
 			itemstack.stackSize--;
 			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
@@ -78,22 +56,19 @@ public class ItemLooseRock extends ItemTerra
 	@Override
 	public Icon getIconFromDamage(int meta)
 	{        
-		return icons[meta];
+		return this.itemIcon;
 	}
 	
 	
 	@Override
 	public void registerIcons(IconRegister registerer)
     {
-		for(int i = 0; i < MetaNames.length; i++)
-			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "rocks/" + MetaNames[i] + " Rock");
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
     }
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
-		for(int i = 0; i < MetaNames.length; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
+		list.add(new ItemStack(this,1,0));
 	}
 }

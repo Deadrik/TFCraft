@@ -14,7 +14,7 @@ public class PlayerInfo
 	public int lockY = -9999999;
 	public int lockZ = -9999999;
 
-	public ItemStack knappingRockType;
+	public ItemStack specialCraftingType;
 	
 	public INetworkManager networkManager;
 	private long lastChange;
@@ -26,7 +26,7 @@ public class PlayerInfo
 	{
 		Name = name;
 		ChiselMode = 0;
-		knappingRockType = null;
+		specialCraftingType = null;
 		networkManager = nm;
 		lastChange = 0;
 		hoeMode = 0;

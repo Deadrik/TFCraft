@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.INetworkTE;
-import TFC.Containers.ContainerKnapping;
+import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
@@ -326,11 +326,11 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				
 				if(!world.isRemote)
 				{
-					if(player.openContainer != null && player.openContainer instanceof ContainerKnapping)
+					if(player.openContainer != null && player.openContainer instanceof ContainerSpecialCrafting)
 					{
 						byte index = dis.readByte();
-						((ContainerKnapping)player.openContainer).craftMatrix.setInventorySlotContents(index, null);
-						((ContainerKnapping)player.openContainer).onCraftMatrixChanged(((ContainerKnapping)player.openContainer).craftMatrix);
+						((ContainerSpecialCrafting)player.openContainer).craftMatrix.setInventorySlotContents(index, null);
+						((ContainerSpecialCrafting)player.openContainer).onCraftMatrixChanged(((ContainerSpecialCrafting)player.openContainer).craftMatrix);
 					}
 				}
 			}

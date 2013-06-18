@@ -58,19 +58,19 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiBarrel;
+import TFC.GUI.GuiBloomery;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
+import TFC.GUI.GuiFirepit;
 import TFC.GUI.GuiFoodPrep;
+import TFC.GUI.GuiForge;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
-import TFC.GUI.GuiQuern;
-import TFC.GUI.GuiBloomery;
-import TFC.GUI.GuiFirepit;
-import TFC.GUI.GuiForge;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMetallurgy;
+import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiWorkbench;
@@ -294,7 +294,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 28:
 		{
-			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType , world, x, y, z);
+			return new GuiKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingType , world, x, y, z);
 		}
 		case 29:
 		{

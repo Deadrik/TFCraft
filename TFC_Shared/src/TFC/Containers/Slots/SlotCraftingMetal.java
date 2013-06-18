@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import TFC.TerraFirmaCraft;
-import TFC.Containers.ContainerKnapping;
+import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.GUI.GuiKnapping;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -44,9 +44,9 @@ public class SlotCraftingMetal extends Slot
 	{
 		super.onSlotChanged();
 		if (inventory.getStackInSlot(0)!=null){
-			System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).knappingRockType);
+			System.out.println(getStack()+", "+PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).specialCraftingType);
 			if (valids.contains(getStack().getItem()) && container != null && getStack().getItemDamage()== 
-					PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).knappingRockType.getItemDamage()){
+					PlayerManagerTFC.getInstance().getPlayerInfoFromName(thePlayer.username).specialCraftingType.getItemDamage()){
 				container.onCraftMatrixChanged(craftMatrix);
 			}
 		}
@@ -90,7 +90,7 @@ public class SlotCraftingMetal extends Slot
 			if (itemstack1 != null)
 			{
 				craftMatrix.decrStackSize(i, 1);
-				if(player.worldObj.isRemote && player.openContainer instanceof ContainerKnapping)
+				if(player.worldObj.isRemote && player.openContainer instanceof ContainerSpecialCrafting)
 					((GuiKnapping) Minecraft.getMinecraft().currentScreen).resetButton(i);
 
 				if (itemstack1.getItem().hasContainerItem())

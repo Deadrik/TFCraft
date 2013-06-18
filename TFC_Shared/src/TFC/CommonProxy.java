@@ -14,19 +14,19 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.Containers.ContainerAnvil;
-import TFC.Containers.ContainerChestTFC;
-import TFC.Containers.ContainerFoodPrep;
-import TFC.Containers.ContainerKnapping;
-import TFC.Containers.ContainerLeatherWorking;
-import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerBarrel;
 import TFC.Containers.ContainerBloomery;
+import TFC.Containers.ContainerChestTFC;
 import TFC.Containers.ContainerFirepit;
+import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerForge;
+import TFC.Containers.ContainerLeatherWorking;
 import TFC.Containers.ContainerLogPile;
 import TFC.Containers.ContainerMetallurgy;
+import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerScribe;
 import TFC.Containers.ContainerSluice;
+import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Containers.ContainerWorkbench;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.EntityArrowTFC;
@@ -392,7 +392,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 28:
 		{
-			return new ContainerKnapping(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).knappingRockType, world, x, y, z);
+			return new ContainerSpecialCrafting(player.inventory, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingType, world, x, y, z);
 		}
 		case 29:
 		{

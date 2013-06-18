@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
-import TFC.Containers.ContainerKnapping;
+import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Handlers.PacketHandler;
 
 public class GuiKnapping extends GuiContainer
@@ -26,7 +26,7 @@ public class GuiKnapping extends GuiContainer
 	
     public GuiKnapping(InventoryPlayer inventoryplayer,ItemStack is, World world, int x, int y, int z)
     {
-        super(new ContainerKnapping(inventoryplayer, is, world, x, y, z));
+        super(new ContainerSpecialCrafting(inventoryplayer, is, world, x, y, z));
         player = inventoryplayer.player;
     }
 

@@ -12,6 +12,7 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.TFCTabs;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumMetalType;
 import TFC.API.Enums.EnumSize;
@@ -30,6 +31,7 @@ import TFC.Items.ItemFlatRock;
 import TFC.Items.ItemFruitTreeSapling;
 import TFC.Items.ItemGem;
 import TFC.Items.ItemIngot;
+import TFC.Items.ItemLeather;
 import TFC.Items.ItemLogs;
 import TFC.Items.ItemLooseRock;
 import TFC.Items.ItemMeltedMetal;
@@ -881,6 +883,19 @@ public class TFCItems
     public static Item KilnRack;
     public static Item Straw;
     
+    public static Item ClayMoldAxe;
+    public static Item ClayMoldChisel;
+    public static Item ClayMoldHammer;
+    public static Item ClayMoldHoe;
+    public static Item ClayMoldKnife;
+    public static Item ClayMoldMace;
+    public static Item ClayMoldPick;
+    public static Item ClayMoldProPick;
+    public static Item ClayMoldSaw;
+    public static Item ClayMoldScythe;
+    public static Item ClayMoldShovel;
+    public static Item ClayMoldSword;
+    
     /**
      * Item Uses Setup
      * */
@@ -1512,10 +1527,8 @@ public class TFCItems
         TinKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","TinKnife",num),TinToolMaterial).setUnlocalizedName("Tin Knife").setMaxDamage(TinUses);num++;
         ZincKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","ZincKnife",num),ZincToolMaterial).setUnlocalizedName("Zinc Knife").setMaxDamage(ZincUses);num++;
         
-        LooseRock = (new ItemLooseRock(TFC_Settings.getIntFor(config,"item","LooseRock",num)).setUnlocalizedName("LooseRock"));num++;
-        
-        FlatRock = (new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setUnlocalizedName("FlatRock"));num++;
-
+        FlatRock = (new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setFolder("rocks/flatrocks/").setUnlocalizedName("FlatRock"));num++;
+        LooseRock = (new ItemLooseRock(TFC_Settings.getIntFor(config,"item","LooseRock",num)).setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));num++;
         
         IgInStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
         SedStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
@@ -1580,11 +1593,12 @@ public class TFCItems
 		SoakedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","SoakedHide",num++)).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","ScrapedHide",num++)).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		PrepHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","PrepHide",num++)).setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		TerraLeather = new ItemTerra(TFC_Settings.getIntFor(config,"item","TFCLeather",num++)).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
+		
 		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++)).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
 		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++)).setFolder("food/").setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
         FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
+        TerraLeather = new ItemLeather(TFC_Settings.getIntFor(config,"item","TFCLeather",num++)).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
         
         PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"items","PotteryJug",num++)).setUnlocalizedName("Jug");
         PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
