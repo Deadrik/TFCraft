@@ -23,6 +23,7 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Helper;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
@@ -181,5 +182,11 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	public EnumDamageType GetDamageType() 
 	{
 		return damageType;
+	}
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 }

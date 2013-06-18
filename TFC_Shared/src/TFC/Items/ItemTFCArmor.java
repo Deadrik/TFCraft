@@ -20,6 +20,7 @@ import TFC.Core.HeatIndex;
 import TFC.Core.HeatManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.Util.StringUtil;
 
 public class ItemTFCArmor extends ItemArmor implements ISize
 {
@@ -131,6 +132,12 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
+	}
+	
+	@Override
+	public String getItemDisplayName(ItemStack itemstack) 
+	{
+		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 }
 

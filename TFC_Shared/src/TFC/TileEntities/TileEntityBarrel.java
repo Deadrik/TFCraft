@@ -20,6 +20,7 @@ import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
+import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 
@@ -212,27 +213,27 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		case 0:
 			return "";
 		case 1:
-			return "Water";
+			return StringUtil.localize("gui.Barrel.Water");
 		case 2:
-			return "Limewater";
+			return StringUtil.localize("gui.Barrel.Limewater");
 		case 3:
-			return "Tannin";
+			return StringUtil.localize("gui.Barrel.Tannin");
 		case 4:
-			return "Gunpowder";
+			return StringUtil.localize("gui.Barrel.Gunpowder");
 		case 5:
-			return "Beer (no use)";
+			return StringUtil.localize("gui.Barrel.Beer");
 		case 6:
-			return "Cider (no use)";
+			return StringUtil.localize("gui.Barrel.Cider");
 		case 7:
-			return "Vodka (no use)";
+			return StringUtil.localize("gui.Barrel.Vodka");
 		case 8:
-			return "Whiskey (no use)";
+			return StringUtil.localize("gui.Barrel.Whiskey");
 		case 9:
-			return "Rye Whiskey (no use)";
+			return StringUtil.localize("gui.Barrel.RyeWhiskey");
 		case 10:
-			return "Sake (no use)";
+			return StringUtil.localize("gui.Barrel.Sake");
 		case 11:
-			return "Rum (no use)";
+			return StringUtil.localize("gui.Barrel.Rum");
 		default:
 			return "";
 		}
@@ -417,6 +418,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					if(itemstack.stackSize==0)
 						itemstack=null;
 				}
+				updateGui();
 			}
 		}
 	}
@@ -427,6 +429,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		super.writeToNBT(nbttagcompound);
 		nbttagcompound.setInteger("liqLev", liquidLevel);
 		nbttagcompound.setInteger("Type", Type);
+		nbttagcompound.setBoolean("Sealed", sealed);
 		nbttagcompound.setInteger("SealTime", sealtimecounter);
 		NBTTagList nbttaglist = new NBTTagList();
 
@@ -446,6 +449,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		super.readFromNBT(nbttagcompound);
 		liquidLevel = nbttagcompound.getInteger("liqLev");
 		Type = nbttagcompound.getInteger("Type");
+		sealed = nbttagcompound.getBoolean("Sealed");
 		sealtimecounter = nbttagcompound.getInteger("SealTime");
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 
@@ -574,6 +578,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public void actionEmpty() {
 		if(liquidLevel >0){
 			liquidLevel =0;
+			Type = 0;
+			updateGui();
 			TerraFirmaCraft.proxy.sendCustomPacket(createSealPacket());
 		}
 

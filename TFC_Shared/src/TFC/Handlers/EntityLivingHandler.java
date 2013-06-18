@@ -44,7 +44,7 @@ public class EntityLivingHandler
 			if(!player.worldObj.isRemote)
 			{
 				//Nullify the Old Food
-				player.getFoodStats().setFoodLevel(20);
+				player.getFoodStats().addStats(20 - player.getFoodStats().getFoodLevel(), 0.0F);
 				//Handle Food
 				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 				foodstats.onUpdate(player);

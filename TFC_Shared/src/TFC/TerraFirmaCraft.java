@@ -100,9 +100,6 @@ public class TerraFirmaCraft
 		DimensionManager.registerProviderType(1, TFCProvider.class, true);
 		
 
-		//Add Item Name Localizations
-		proxy.registerTranslations();
-
 		//Register Key Bindings(Client only)
 		proxy.registerKeys();
 
@@ -166,7 +163,10 @@ public class TerraFirmaCraft
 		
 		TFC_ItemHeat.SetupItemHeat();
 
+		//Add Item Name Localizations
 		Localization.addLocalization("/mods/TFC/lang/", "en_US");
+		proxy.registerTranslations();
+		
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), 
 				new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty)));
