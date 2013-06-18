@@ -2,6 +2,9 @@ package TFC.Blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -9,8 +12,11 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
+import net.minecraft.util.Vec3Pool;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TileEntities.TileEntityFarmland;
 
@@ -28,6 +34,7 @@ public class BlockFarmland extends BlockContainer
 		textureOffset = tex;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
     public void registerIcons(IconRegister registerer)
     {
@@ -37,6 +44,7 @@ public class BlockFarmland extends BlockContainer
 		}
     }
     
+	@SideOnly(Side.CLIENT)
     @Override
     public Icon getBlockTexture(IBlockAccess access, int xCoord, int yCoord, int zCoord, int par5)
     {
@@ -51,7 +59,23 @@ public class BlockFarmland extends BlockContainer
             return blk.getIcon(0, access.getBlockMetadata(xCoord, yCoord, zCoord));
         }
     }
-
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Icon getIcon(int side, int meta)
+    {
+        Block blk = Block.blocksList[dirtID];
+        
+        if (side == ForgeDirection.UP.ordinal())
+        {
+            return DirtTexture[meta + textureOffset];
+        }
+        else
+        {
+            return blk.getIcon(0, meta);
+        }
+    }
+    
     @Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
