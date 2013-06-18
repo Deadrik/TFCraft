@@ -27,6 +27,8 @@ def build(build_num=0):
     copytree(src_dir, backup_dir, 0)    
     print '\ntfc_shared -> minecraft'
     copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft'), 0)
+    print '\ntfc api -> minecraft'
+    copytree(os.path.join(forge_dir, 'tfc api'), os.path.join(src_dir, 'minecraft'), 0)
     print
     
     error_level = 0
