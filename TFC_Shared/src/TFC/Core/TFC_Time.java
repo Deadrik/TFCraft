@@ -1,5 +1,6 @@
 package TFC.Core;
 
+import TFC.Core.Util.StringUtil;
 import net.minecraft.world.World;
 
 
@@ -7,9 +8,24 @@ public class TFC_Time
 {
 	private static World worldObj;
 	
-    public static String[] seasons = { "Early Spring","Spring","Late Spring", "Early Summer", "Summer", "Late Summer", "Early Autumn", "Autumn", "Late Autumn", "Early Winter", "Winter", "Late Winter"};
-    public static String[] months  = { "March","April","May", "June", "July", "August", "September", "October", "November", "December", "January", "February"};
-    public static String[] Days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	public static String[] seasons = { StringUtil.localize("gui.Calendar.EarlySpring"),
+		StringUtil.localize("gui.Calendar.Spring"), StringUtil.localize("gui.Calendar.LateSpring"),
+    	StringUtil.localize("gui.Calendar.EarlySummer"), StringUtil.localize("gui.Calendar.Summer"),
+    	StringUtil.localize("gui.Calendar.LateSummer"), StringUtil.localize("gui.Calendar.EarlyAutumn"),
+    	StringUtil.localize("gui.Calendar.Autumn"), StringUtil.localize("gui.Calendar.LateAutumn"),
+    	StringUtil.localize("gui.Calendar.EarlyWinter"), StringUtil.localize("gui.Calendar.Winter"),
+    	StringUtil.localize("gui.Calendar.LateWinter")};
+    public static String[] months  = { StringUtil.localize("gui.Calendar.March"),
+    	StringUtil.localize("gui.Calendar.April"),StringUtil.localize("gui.Calendar.May"),
+    	StringUtil.localize("gui.Calendar.June"), StringUtil.localize("gui.Calendar.July"),
+    	StringUtil.localize("gui.Calendar.August"), StringUtil.localize("gui.Calendar.September"),
+    	StringUtil.localize("gui.Calendar.October"), StringUtil.localize("gui.Calendar.November"),
+    	StringUtil.localize("gui.Calendar.December"), StringUtil.localize("gui.Calendar.January"),
+    	StringUtil.localize("gui.Calendar.February")};
+    public static String[] Days = { StringUtil.localize("gui.Calendar.Sunday"),
+    	StringUtil.localize("gui.Calendar.Monday"), StringUtil.localize("gui.Calendar.Tuesday"),
+    	StringUtil.localize("gui.Calendar.Wednesday"), StringUtil.localize("gui.Calendar.Thursday"),
+    	StringUtil.localize("gui.Calendar.Friday"), StringUtil.localize("gui.Calendar.Saturday")};
     
     public static int currentDay = 0;
     public static int lastMonth = 11;

@@ -1,6 +1,7 @@
 package TFC.API;
 
 import net.minecraft.creativetab.CreativeTabs;
+import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -33,5 +34,11 @@ public class TFCTabs extends CreativeTabs
     {
         itemIndex = i;
     }
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getTranslatedTabLabel() {
+		return StringUtil.localize("itemGroup." + this.getTabLabel());
+	}
 
 }
