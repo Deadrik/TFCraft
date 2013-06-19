@@ -21,6 +21,7 @@ import TFC.Blocks.Terrain.BlockOre;
 import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
 
@@ -167,7 +168,7 @@ public class ItemGoldPan extends ItemTerra
                     entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, itemstack);
                     return true;
                 }
-                entityplayer.addChatMessage("Must use on sand in or near a river. Or gravel from under a water source.");
+                entityplayer.addChatMessage(StringUtil.localize("gui.GoldPan.UseEmpty"));
             }
             else
             {
@@ -188,7 +189,8 @@ public class ItemGoldPan extends ItemTerra
 
                 if(blockAboveId == Block.waterStill.blockID && blockAboveMeta > 0)
                 {
-                    System.out.println(new StringBuilder().append("True").toString());
+                	if(TFC_Settings.enableDebugMode)
+                		System.out.println(new StringBuilder().append("True").toString());
                     useTimer = 20;
                     Random random = new Random();
 
@@ -330,7 +332,7 @@ public class ItemGoldPan extends ItemTerra
                 }
                 else
                 {
-                    entityplayer.addChatMessage("Must use under flowing water.");
+                    entityplayer.addChatMessage(StringUtil.localize("gui.GoldPan.UseFull"));
                 }
             }
         }

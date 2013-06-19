@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
 
@@ -329,7 +330,7 @@ public class TFC_ItemHeat
 		String phrase = "";
 		if(temp < 80)
 		{
-			phrase = "Warming";
+			phrase = StringUtil.localize("gui.ItemHeat.Warming");
 			if(temp>(80 * 0.2)) phrase = phrase + "\u2605";
 			if(temp>(80 * 0.4)) phrase = phrase + "\u2605";
 			if(temp>(80 * 0.6)) phrase = phrase + "\u2605";
@@ -337,7 +338,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 80 && temp < 210)
 		{
-			phrase = "Hot";
+			phrase = StringUtil.localize("gui.ItemHeat.Hot");
 			if(temp>80+((210-80) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>80+((210-80) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>80+((210-80) * 0.6)) phrase = phrase + "\u2605";
@@ -345,7 +346,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 210 &&  temp < 480)
 		{
-			phrase = "Very Hot";
+			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
 			if(temp>210+((480-210) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>210+((480-210) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>210+((480-210) * 0.6)) phrase = phrase + "\u2605";
@@ -353,7 +354,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 480 &&  temp < 580)
 		{
-			phrase = "\2474Faint Red";
+			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
 			if(temp>480+((580-480) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>480+((580-480) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>480+((580-480) * 0.6)) phrase = phrase + "\u2605";
@@ -361,7 +362,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 580 &&  temp < 730)
 		{
-			phrase = "\2474Dark Red";
+			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
 			if(temp>580+((730-580) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>580+((730-580) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>580+((730-580) * 0.6)) phrase = phrase + "\u2605";
@@ -369,7 +370,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 730 &&  temp < 930)
 		{
-			phrase = "\247cBright Red";
+			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
 			if(temp>730+((930-730) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>730+((930-730) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>730+((930-730) * 0.6)) phrase = phrase + "\u2605";
@@ -377,7 +378,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 930 &&  temp < 1100)
 		{
-			phrase = "\2476Orange";
+			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
 			if(temp>930+((1100-930) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>930+((1100-930) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>930+((1100-930) * 0.6)) phrase = phrase + "\u2605";
@@ -385,7 +386,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1100 &&  temp < 1300)
 		{
-			phrase = "\247eYellow";
+			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
 			if(temp>1100+((1300-1100) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>1100+((1300-1100) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>1100+((1300-1100) * 0.6)) phrase = phrase + "\u2605";
@@ -393,7 +394,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1300 &&  temp < 1400)
 		{
-			phrase = "\247eYellow White";
+			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
 			if(temp>1300+((1400-1300) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>1300+((1400-1300) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>1300+((1400-1300) * 0.6)) phrase = phrase + "\u2605";
@@ -401,7 +402,7 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1400 &&  temp < 1500)
 		{
-			phrase = "\247fWhite";
+			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
 			if(temp>1400+((1500-1400) * 0.2)) phrase = phrase + "\u2605";
 			if(temp>1400+((1500-1400) * 0.4)) phrase = phrase + "\u2605";
 			if(temp>1400+((1500-1400) * 0.6)) phrase = phrase + "\u2605";
@@ -409,16 +410,16 @@ public class TFC_ItemHeat
 		}
 		else if(temp >= 1500)
 		{
-			phrase = "\247fBrilliant White";
+			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
 		}
 
 		if(temp > meltTemp && temp > boilTemp - (boilTemp*0.1F)) 
 		{
-			phrase = phrase + "\247f - Liquid \247c!Caution!";
+			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid") + "\247c!" + StringUtil.localize("gui.ItemHeat.Caution") + "!";
 		}
 		else if(temp > meltTemp)
 		{
-			phrase = phrase + "\247f - Liquid";
+			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid");
 		}
 
 		return phrase;
@@ -430,23 +431,23 @@ public class TFC_ItemHeat
 		{
 			if(temp < meltTemp*0.1F)
 			{
-				return "Cold";
+				return StringUtil.localize("gui.FoodHeat.Cold");
 			}
 			else if(temp >= meltTemp*0.1F && temp < meltTemp*0.4F)
 			{
-				return "\2474Warm";
+				return "\2474" + StringUtil.localize("gui.FoodHeat.Warm");
 			}
 			else if(temp >= meltTemp*0.4F && temp < meltTemp*0.8F)
 			{
-				return "\2474Hot";
+				return "\2474" + StringUtil.localize("gui.ItemHeat.Hot");
 			}
 			else
 			{
-				return "\2474Very Hot";
+				return "\2474" + StringUtil.localize("gui.ItemHeat.VeryHot");
 			}
 		}
 
-		return "Clear an output slot.";
+		return StringUtil.localize("gui.ClearSlot");
 	}
 
 	public static String getHeatColorTorch(float temp, float meltTemp)
@@ -455,15 +456,15 @@ public class TFC_ItemHeat
 		{
 			if(temp > 0 && temp < meltTemp*0.8F)
 			{
-				return "Catching Fire";
+				return StringUtil.localize("gui.Torch.CatchingFire");
 			}
 			else if(temp >= meltTemp*0.8F)
 			{
-				return "\2474Lit";
+				return "\2474" + StringUtil.localize("gui.Torch.Lit");
 			}
 		}
 
-		return "Clear an output slot.";
+		return StringUtil.localize("gui.ClearSlot");
 	}
 
 	public static Boolean getIsBoiling(ItemStack is)

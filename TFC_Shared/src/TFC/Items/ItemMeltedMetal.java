@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.Util.StringUtil;
 
 public class ItemMeltedMetal extends ItemTerra
 {
@@ -47,7 +48,7 @@ public class ItemMeltedMetal extends ItemTerra
     public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
 		if(is.getItemDamage() != 0)
-			arraylist.add("Not Full");
+			arraylist.add(StringUtil.localize("gui.MeltedMetal.NotFull"));
 		super.addInformation(is, player, arraylist, flag);
     }
 }

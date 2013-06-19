@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.ContainerBloomery;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityBloomery;
 
 
@@ -51,10 +52,10 @@ public class GuiBloomery extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j)
     {
-		drawCenteredString(this.fontRenderer,bloomery.OreType,88,7,0x555555);
-		this.fontRenderer.drawString("Ore" ,40, 17, 0x000000);
-		this.fontRenderer.drawString("Charcoal" ,40, 35, 0x000000);
-		this.fontRenderer.drawString("Output",40, 53, 0x000000);
+		drawCenteredString(this.fontRenderer,StringUtil.localize("tile.Ore.") + bloomery.OreType.replace(" ", ""),88,7,0x555555);
+		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Ore") ,40, 17, 0x000000);
+		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Charcoal") ,40, 35, 0x000000);
+		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Output"),40, 53, 0x000000);
     }
 	
 	@Override

@@ -127,7 +127,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 				stars += "\u2729";
 			}
 
-			arraylist.add("Filling: " + stars);
+			arraylist.add(StringUtil.localize("gui.FoodPrep.Filling") + ": " + stars);
 		}
 	}
 

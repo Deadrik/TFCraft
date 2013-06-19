@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.ContainerSluice;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntitySluice;
 
 
@@ -45,9 +46,9 @@ public class GuiSluice extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.drawCenteredString(fontRenderer, "Sluice", 89, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
-        fontRenderer.drawString("Soil: " + sluiceInventory.soilAmount + "/50", 8, 20, 0x404040);
+        this.drawCenteredString(fontRenderer, StringUtil.localize("gui.Sluice"), 89, 6, 0x404040);
+        fontRenderer.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
+        fontRenderer.drawString(StringUtil.localize("gui.Sluice.Soil") + ": " + sluiceInventory.soilAmount + "/50", 8, 20, 0x404040);
     }
 	
 	@Override
