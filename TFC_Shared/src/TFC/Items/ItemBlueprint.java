@@ -11,6 +11,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCTabs;
 import TFC.Core.Helper;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityDetailed;
@@ -121,6 +122,6 @@ public class ItemBlueprint extends ItemTerra
 	{
 		if(par1ItemStack.stackTagCompound != null)
 			return par1ItemStack.stackTagCompound.getString("Name");
-		else return "Blueprint";
+		else return StringUtil.localize("gui.Blueprint");
 	}
 }

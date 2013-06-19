@@ -181,7 +181,7 @@ public class GuiBlueprint extends GuiScreen
 		int i1 = (height - ySize) / 2;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-		drawCenteredString(fontRenderer,StringUtil.localize("gui.Blueprint.Blueprint"), this.width / 2, i1+8, 0x000000);
+		drawCenteredString(fontRenderer,StringUtil.localize("gui.Blueprint"), this.width / 2, i1+8, 0x000000);
 		this.theGuiTextField.drawTextBox();
 		
 		super.drawScreen(par1, par2, par3);

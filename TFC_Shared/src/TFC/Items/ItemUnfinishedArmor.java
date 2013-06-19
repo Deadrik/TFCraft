@@ -29,23 +29,17 @@ public class ItemUnfinishedArmor extends ItemTerra
     }
 	
 	@Override
-    public String getItemDisplayName(ItemStack itemstack) 
+    public String getItemDisplayName(ItemStack itemstack)
     {
-	    String s = "";
-	    
-	    if(itemstack.getItemDamage() == 1)
-	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).append("Stage2").toString();
-	    else
-	        s = new StringBuilder().append(super.getItemDisplayName(itemstack)).toString();
-	    
+		String s = new StringBuilder().append(super.getItemDisplayName(itemstack)).toString();
         return s;
     }
 	
 	@Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-		 if(itemstack.getItemDamage() == 1)
-    		return getUnlocalizedName().concat("Stage2");
+		if(itemstack.getItemDamage() == 1)
+    		return getUnlocalizedName().concat("2");
     	return super.getUnlocalizedName(itemstack);
     }
 	

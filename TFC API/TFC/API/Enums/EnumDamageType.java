@@ -1,5 +1,6 @@
 package TFC.API.Enums;
 
+import TFC.Core.Util.StringUtil;
 
 public enum EnumDamageType 
 {
@@ -20,10 +21,10 @@ public enum EnumDamageType
 	{
 		switch(this)
 		{
-		case PIERCING: return "Piercing";
-		case SLASHING: return "Slashing";
-		case CRUSHING: return "Crushing";
-		default: return "Error: Bad Damage Type";
+		case PIERCING: return StringUtil.localize("gui.DamageType.Piercing");
+		case SLASHING: return StringUtil.localize("gui.DamageType.Slashing");
+		case CRUSHING: return StringUtil.localize("gui.DamageType.Crushing");
+		default: return StringUtil.localize("gui.DamageType.Error");
 		}
 	}
 }

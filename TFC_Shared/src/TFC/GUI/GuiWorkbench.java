@@ -6,8 +6,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Reference;
 import TFC.Containers.ContainerWorkbench;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityWorkbench;
 
 public class GuiWorkbench extends GuiContainer
@@ -25,14 +25,16 @@ public class GuiWorkbench extends GuiContainer
 
     protected void drawGuiContainerForegroundLayer()
     {
-        fontRenderer.drawString("Crafting", 28, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+        fontRenderer.drawString(StringUtil.localize("gui.Workbench.Crafting"), 28, 6, 0x404040);
+        fontRenderer.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
     }
 
     @Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
-    	this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "crafting.png");
+//    	this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "crafting.png");
+    	this.mc.renderEngine.bindTexture("/gui/crafting.png");
+
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;

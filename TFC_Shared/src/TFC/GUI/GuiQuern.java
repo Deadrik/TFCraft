@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.Containers.ContainerQuern;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityQuern;
 
 public class GuiQuern extends GuiContainer
@@ -31,7 +32,7 @@ public class GuiQuern extends GuiContainer
     {
     	//drawCenteredString(fontRenderer,"Log Pile", 87, 6, 0x000000);
         //fontRenderer.drawString("Log Pile", 28, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+        fontRenderer.drawString(StringUtil.localize("gui.Inventory"), 8, (ySize - 96) + 2, 0x404040);
     }
 
     @Override
