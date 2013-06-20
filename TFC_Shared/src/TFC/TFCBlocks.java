@@ -1,7 +1,6 @@
 package TFC;
 
 import java.io.File;
-import java.lang.reflect.Array;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -510,7 +509,7 @@ public class TFCBlocks
 		
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
-			TFCBlocks.Doors[i] = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), 2041+i), i).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
+			TFCBlocks.Doors[i] = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), 2041+i), i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
 		}
 		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);

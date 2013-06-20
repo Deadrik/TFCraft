@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.renderer.IconFlipped;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -23,8 +24,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockCustomDoor extends BlockTerra
 {
 	int woodType;
-	String[] WoodNames = {"Oak","Aspen","Birch","Chestnut","Douglas Fir","Hickory","Maple","Ash","Pine",
-			"Sequoia","Spruce","Sycamore","White Cedar","White Elm","Willow","Kapok"};
+	String[] WoodNames = {"Oak Door Lower","Oak Door Upper","Aspen Door Lower","Aspen Door Upper","Birch Door Lower","Pirch Door Upper",
+			"Chestnut Door Lower","Chestnut Door Upper","Douglas Fir Door Lower","Douglas Fir Door Upper","Hickory Door Lower","Hickory Door Upper",
+			"Maple Door Lower","Maple Door Upper","Ash Door Lower","Ash Door Upper","Pine Door Lower","Pine Door Upper",
+			"Sequoia Door Lower","Sequoia Door Upper","Spruce Door Lower","Spruce Door Upper","Sycamore Door Lower","Sycamore Door Upper",
+			"White Cedar Door Lower","White Cedar Door Upper","White Elm Door Lower","White Elm Door Upper","Willow Door Lower","Willow Door Upper",
+			"Kapok Door Lower","Kapok Door Upper"};
 
 	Icon[] icons = new Icon[32];
 	public BlockCustomDoor(int par1, int woodId)
@@ -38,6 +43,13 @@ public class BlockCustomDoor extends BlockTerra
 		woodType = woodId;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+    public Icon getIcon(int par1, int par2)
+    {
+		return this.icons[woodType];
+    }
+	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
@@ -94,21 +106,22 @@ public class BlockCustomDoor extends BlockTerra
 				}
 			}
 
-			return icons[woodType*2 + (flag1 ? 0/*icons.length*/ : 0) + (flag2 ? 1 : 0)];
+			return icons[woodType + (flag1 ? WoodNames.length : 0) + (flag2 ? 1 : 0)];
 		}
 		else
 		{
-			return icons[woodType*2];
+			return icons[woodType];
 		}
 	}
 
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		for(int i = 0, j = 0; i < 16; i++, j+=2)
+		this.icons = new Icon[WoodNames.length * 2];
+		for(int i = 0; i < WoodNames.length; i++)
 		{
-			icons[j] = registerer.registerIcon(Reference.ModID + ":" + "wood/doors/"+WoodNames[i]+" Door Lower");
-			icons[j+1] = registerer.registerIcon(Reference.ModID + ":" + "wood/doors/"+WoodNames[i]+" Door Upper");
+			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/doors/"+WoodNames[i]);
+			this.icons[i + WoodNames.length] = new IconFlipped(this.icons[i], true, false);
 		}
 	}
 
