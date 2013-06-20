@@ -57,7 +57,7 @@ import cpw.mods.fml.relauncher.Side;
 @NetworkMod(channels = { Reference.ModChannel }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class TerraFirmaCraft
 {
-	@Instance
+	@Instance("TerraFirmaCraft")
 	public static TerraFirmaCraft instance;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -73,17 +73,17 @@ public class TerraFirmaCraft
 	{
 		instance = this;
 		
-		
-		
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+
 		//Load Blocks
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();
+
 		//Load Items
 		TFCItems.Setup();
 
-		//Register Generators		
+		//Register Generators
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(100,150));
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
@@ -119,6 +119,10 @@ public class TerraFirmaCraft
 	@Init
 	public void initialize(FMLInitializationEvent evt)
 	{
+		//Add Item Name Localizations
+		Localization.addLocalization("/mods/TFC/lang/", "en_US");
+		proxy.registerTranslations();
+
 		//Register all of the recipes
 		Recipes.registerRecipes();	
 
@@ -163,10 +167,6 @@ public class TerraFirmaCraft
 		
 		TFC_ItemHeat.SetupItemHeat();
 
-		//Add Item Name Localizations
-		Localization.addLocalization("/mods/TFC/lang/", "en_US");
-		proxy.registerTranslations();
-		
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Lava", LiquidContainerRegistry.BUCKET_VOLUME), 
 				new ItemStack(TFCItems.BlueSteelBucketLava), new ItemStack(TFCItems.BlueSteelBucketEmpty)));

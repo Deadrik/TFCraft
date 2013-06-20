@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.TFCItems;
 import TFC.Containers.ContainerScribe;
+import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityScribe;
 
 
@@ -36,7 +37,7 @@ public class GuiScribe extends GuiContainer
 		buttonList.clear();
 		if(FirepitEntity.scribeItemStacks[1]!=null){
 			if(FirepitEntity.scribeItemStacks[1].getItem() == TFCItems.writabeBookTFC){
-				buttonList.add(new GuiButton(0, guiLeft+118, guiTop + 60, 36, 20, "write"));
+				buttonList.add(new GuiButton(0, guiLeft+118, guiTop + 60, 36, 20, StringUtil.localize("gui.Scribe.Write")));
 			}
 		}
 	}

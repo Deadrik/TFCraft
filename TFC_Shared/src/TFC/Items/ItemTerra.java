@@ -109,7 +109,7 @@ public class ItemTerra extends Item implements ISize
     public static void addSizeInformation(ISize object, List arraylist)
     {
     	if(object.getSize()!= null && object.getWeight() != null)
-    		arraylist.add("\u2696" + object.getWeight().getName() + " \u21F2" + object.getSize().getName());
+    		arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + object.getWeight().getName()) + " \u21F2" + StringUtil.localize("gui.Size." + object.getSize().getName().replace(" ", "")));
     }
     @Override
     public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 

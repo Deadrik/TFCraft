@@ -13,6 +13,7 @@ import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemProPick extends ItemTerra
@@ -145,24 +146,24 @@ public class ItemProPick extends ItemTerra
             {
                 int rand = random.nextInt(oreArray.toArray().length);
                 if((Integer)oreNumArray.toArray()[rand] < 10) {
-                    entityplayer.addChatMessage("Found Traces of " + oreArray.toArray()[rand]);
+                    entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.FoundTraces") + " " + oreArray.toArray()[rand]);
                 } else if((Integer)oreNumArray.toArray()[rand] < 20) {
-                    entityplayer.addChatMessage("Found a small sample of " + oreArray.toArray()[rand]);
+                    entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.FoundSmall") + " " + oreArray.toArray()[rand]);
                 } else if((Integer)oreNumArray.toArray()[rand] < 40) {
-                    entityplayer.addChatMessage("Found a medium sample of " + oreArray.toArray()[rand]);
+                    entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.FoundMedium") + " " + oreArray.toArray()[rand]);
                 } else if((Integer)oreNumArray.toArray()[rand] < 80) {
-                    entityplayer.addChatMessage("Found a large sample of " + oreArray.toArray()[rand]);
+                    entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.FoundLarge") + " " + oreArray.toArray()[rand]);
                 } else {
-                    entityplayer.addChatMessage("Found a very large sample of " + oreArray.toArray()[rand]);
+                    entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.FoundVeryLarge") + " " + oreArray.toArray()[rand]);
                 }
             }
             else if(isOre)
             {
-                entityplayer.addChatMessage("Found " + oreArray.toArray()[0]);
+                entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.Found") + " " + oreArray.toArray()[0]);
             }
             else 
             {
-                entityplayer.addChatMessage("Found nothing of interest.");
+                entityplayer.addChatMessage(StringUtil.localize("gui.ProPick.FoundNothing"));
             }
         }
         itemstack.setItemDamage(itemstack.getItemDamage()+1);

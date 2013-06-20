@@ -92,10 +92,10 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(EnumChatFormatting.WHITE + "Advanced:");
-			arraylist.add(EnumChatFormatting.ITALIC + "Pierce: " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
-			arraylist.add(EnumChatFormatting.ITALIC + "Slash: " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
-			arraylist.add(EnumChatFormatting.ITALIC + "Crush: " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
+			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Armor.Advanced") + ":");
+			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Pierce") + ": " + EnumChatFormatting.AQUA + ArmorType.getPiercingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Slash") + ": " + EnumChatFormatting.AQUA + ArmorType.getSlashingAR());
+			arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.Crush") + ": " + EnumChatFormatting.AQUA + ArmorType.getCrushingAR());
 			arraylist.add("");
 			if (is.hasTagCompound())
 			{
@@ -103,13 +103,13 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 
 				if(stackTagCompound.hasKey("creator"))
 				{
-					arraylist.add(EnumChatFormatting.ITALIC + "Forged By " + stackTagCompound.getString("creator"));
+					arraylist.add(EnumChatFormatting.ITALIC + StringUtil.localize("gui.Armor.ForgedBy") + " " + stackTagCompound.getString("creator"));
 				}
 			}
 		}
 		else
 		{
-			arraylist.add(EnumChatFormatting.WHITE + "Advanced: (Hold " + EnumChatFormatting.AQUA + "Shift" + EnumChatFormatting.WHITE + ")");
+			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + EnumChatFormatting.AQUA + StringUtil.localize("gui.Armor.Shift") + EnumChatFormatting.WHITE + ")");
 		}
 
 	}
