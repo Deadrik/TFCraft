@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API;
 
 import java.util.Random;
 

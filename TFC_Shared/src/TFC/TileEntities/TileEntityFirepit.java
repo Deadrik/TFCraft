@@ -15,9 +15,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.API.Enums.EnumWoodMaterial;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Time;
@@ -106,7 +106,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     public void careForInventorySlot(int i, float startTemp)
     {
         NBTTagCompound inputCompound;
-        HeatManager manager = HeatManager.getInstance();
+        HeatRegistry manager = HeatRegistry.getInstance();
         HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 
         if( index!= null && fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
@@ -164,7 +164,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
     public void CookItemNew()
     {
-        HeatManager manager = HeatManager.getInstance();
+        HeatRegistry manager = HeatRegistry.getInstance();
         Random R = new Random();
         if(fireItemStacks[1] != null)
         {
@@ -756,7 +756,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
         if(!worldObj.isRemote)
         {
-            HeatManager manager = HeatManager.getInstance();
+            HeatRegistry manager = HeatRegistry.getInstance();
             //Here we take care of the item that we are cooking in the fire
             NBTTagCompound inputCompound;
             HeatIndex index;

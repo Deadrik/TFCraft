@@ -8,9 +8,9 @@ import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.Blocks.Devices.BlockForge;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
@@ -145,7 +145,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
             }
         }
 
-        HeatManager manager = HeatManager.getInstance();
+        HeatRegistry manager = HeatRegistry.getInstance();
 
         if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
         {
@@ -273,7 +273,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
 
     public void CookItemsNew(int i)
     {
-        HeatManager manager = HeatManager.getInstance();
+        HeatRegistry manager = HeatRegistry.getInstance();
         Random R = new Random();
         if(fireItemStacks[i] != null)
         {

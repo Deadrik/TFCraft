@@ -12,9 +12,9 @@ import java.util.Random;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.Blocks.Devices.BlockBloomery;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
@@ -205,7 +205,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 	public void CookItemsNew(int i)
 	{
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		Random R = new Random();
 		if(fireItemStacks[i] != null)
 		{
@@ -523,7 +523,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	{
 		if(outMetal1 == null && outMetal1Count > 0 && oreDamage > 0)
 		{
-			HeatManager manager = HeatManager.getInstance();
+			HeatRegistry manager = HeatRegistry.getInstance();
 			HeatIndex index = manager.findMatchingIndex(new ItemStack(TFCItems.OreChunk, 1, oreDamage));
 			if(index != null)
 			{

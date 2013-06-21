@@ -2,8 +2,8 @@ package TFC.Items.ItemBlocks;
 
 import java.util.List;
 
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Textures;
 import cpw.mods.fml.relauncher.Side;

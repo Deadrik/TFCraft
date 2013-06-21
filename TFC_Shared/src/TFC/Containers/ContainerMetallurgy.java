@@ -9,11 +9,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.Containers.Slots.SlotCraftingMetal;
 import TFC.Containers.Slots.SlotMetal;
 import TFC.Core.CraftingManagerTFC;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
 import TFC.Items.ItemMeltedMetal;
 import TFC.TileEntities.TileEntityMetallurgy;
 
@@ -89,7 +89,7 @@ public class ContainerMetallurgy extends ContainerTFC
 		if(temp >= 0)
 		{
 			ItemStack stack = CraftingManagerTFC.getInstance().findMatchingRecipe(craftMatrix, worldObj);
-			HeatManager manager = HeatManager.getInstance();
+			HeatRegistry manager = HeatRegistry.getInstance();
 			HeatIndex index = manager.findMatchingIndex(stack);
 			if (stack != null && index != null && index.meltTemp <= temp)
 			{

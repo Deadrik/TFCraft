@@ -14,12 +14,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TerraFirmaCraft;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Core.AnvilCraftingManagerTFC;
 import TFC.Core.AnvilRecipe;
 import TFC.Core.AnvilReq;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Handlers.PacketHandler;
@@ -583,7 +583,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 
 	public Boolean isTemperatureWeldable(int i)
 	{
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
 		{
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);
@@ -602,7 +602,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public Boolean isTemperatureWorkable(int i)
 	{
 
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		if(anvilItemStacks[i] != null && anvilItemStacks[i].hasTagCompound() && anvilItemStacks[i].getTagCompound().hasKey("temperature"))
 		{
 			HeatIndex index = manager.findMatchingIndex(anvilItemStacks[i]);

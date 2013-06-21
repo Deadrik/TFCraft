@@ -12,11 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.HeatIndex;
-import TFC.Core.HeatManager;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
@@ -129,7 +129,7 @@ public class ItemTerra extends Item implements ISize
                 float temp = stackTagCompound.getFloat("temperature");
                 float meltTemp = -1;
                 float boilTemp = 10000;
-                HeatIndex hi = HeatManager.getInstance().findMatchingIndex(is);
+                HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
                 if(hi != null)
                 {
                     meltTemp = hi.meltTemp;

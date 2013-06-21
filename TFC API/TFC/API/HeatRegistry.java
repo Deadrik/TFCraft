@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,17 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 
 
-public class HeatManager
+public class HeatRegistry
 {
-    private static final HeatManager instance = new HeatManager();
-    public static final HeatManager getInstance()
+    private static final HeatRegistry instance = new HeatRegistry();
+    public static final HeatRegistry getInstance()
     {
         return instance;
     }
 
     private List heatList;
     
-    private HeatManager()
+    private HeatRegistry()
     {
         heatList = new ArrayList();
     }

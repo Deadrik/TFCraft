@@ -7,9 +7,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.HeatRegistry;
 import TFC.Containers.Slots.SlotForge;
 import TFC.Containers.Slots.SlotForgeFuel;
-import TFC.Core.HeatManager;
 import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityForge;
 
@@ -75,7 +75,7 @@ public class ContainerForge extends ContainerTFC
 		Slot[] slotinput = {(Slot)inventorySlots.get(2), (Slot)inventorySlots.get(1), (Slot)inventorySlots.get(3), (Slot)inventorySlots.get(0), (Slot)inventorySlots.get(4)};
 		Slot[] slotstorage = {(Slot)inventorySlots.get(10), (Slot)inventorySlots.get(11), (Slot)inventorySlots.get(12), (Slot)inventorySlots.get(13)};
 		Slot[] slotfuel = {(Slot)inventorySlots.get(7), (Slot)inventorySlots.get(6), (Slot)inventorySlots.get(8), (Slot)inventorySlots.get(5), (Slot)inventorySlots.get(9)};
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();

@@ -12,6 +12,9 @@ import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.HeatIndex;
+import TFC.API.HeatRegistry;
+import TFC.API.HeatRaw;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
@@ -21,7 +24,7 @@ public class TFC_ItemHeat
 
 	public static void SetupItemHeat()
 	{
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 
 		HeatRaw BismuthRaw = new HeatRaw(0.70F, 271, 1564);
 		HeatRaw BismuthBronzeRaw = new HeatRaw(0.65F, 985, 1941);
@@ -469,7 +472,7 @@ public class TFC_ItemHeat
 
 	public static Boolean getIsBoiling(ItemStack is)
 	{       
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager != null && is != null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
@@ -490,7 +493,7 @@ public class TFC_ItemHeat
 
 	public static float getMeltingPoint(ItemStack is)
 	{       
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager!=null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
@@ -508,7 +511,7 @@ public class TFC_ItemHeat
 
 	public static float getSpecificHeat(ItemStack is)
 	{       
-		HeatManager manager = HeatManager.getInstance();
+		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager!=null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);

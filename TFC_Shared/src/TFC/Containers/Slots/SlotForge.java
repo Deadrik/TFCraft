@@ -1,7 +1,7 @@
 package TFC.Containers.Slots;
 
 import TFC.*;
-import TFC.Core.HeatManager;
+import TFC.API.HeatRegistry;
 import TFC.Items.ItemOre;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,7 +46,7 @@ public class SlotForge extends Slot
 
 	public boolean isItemValid(ItemStack itemstack)
 	{
-	    HeatManager manager = HeatManager.getInstance();
+	    HeatRegistry manager = HeatRegistry.getInstance();
 	    if(manager.findMatchingIndex(itemstack) == null)
 	    {
 	        return false;
