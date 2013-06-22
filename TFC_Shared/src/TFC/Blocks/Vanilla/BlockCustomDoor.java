@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockCustomDoor extends BlockTerra
 {
 	int woodType;
-	String[] WoodNames = {"Oak Door Lower","Oak Door Upper","Aspen Door Lower","Aspen Door Upper","Birch Door Lower","Pirch Door Upper",
+	String[] WoodNames = {"Oak Door Lower","Oak Door Upper","Aspen Door Lower","Aspen Door Upper","Birch Door Lower","Birch Door Upper",
 			"Chestnut Door Lower","Chestnut Door Upper","Douglas Fir Door Lower","Douglas Fir Door Upper","Hickory Door Lower","Hickory Door Upper",
 			"Maple Door Lower","Maple Door Upper","Ash Door Lower","Ash Door Upper","Pine Door Lower","Pine Door Upper",
 			"Sequoia Door Lower","Sequoia Door Upper","Spruce Door Lower","Spruce Door Upper","Sycamore Door Lower","Sycamore Door Upper",
