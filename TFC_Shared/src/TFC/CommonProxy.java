@@ -23,6 +23,7 @@ import TFC.Containers.ContainerForge;
 import TFC.Containers.ContainerLeatherWorking;
 import TFC.Containers.ContainerLogPile;
 import TFC.Containers.ContainerMetallurgy;
+import TFC.Containers.ContainerMold;
 import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerScribe;
 import TFC.Containers.ContainerSluice;
@@ -412,7 +413,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 34:
 		{
-			return null;
+			return null;//Blueprint gui doesnt need a container
 		}
 		case 35:
 		{
@@ -421,6 +422,14 @@ public class CommonProxy implements IGuiHandler
 		case 36:
 		{
 			return new ContainerLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
+		}
+		case 37:
+		{
+			return null;//book gui
+		}
+		case 38:
+		{
+			return new ContainerMold(player.inventory, world, x, y, z);
 		}
 		default:
 		{

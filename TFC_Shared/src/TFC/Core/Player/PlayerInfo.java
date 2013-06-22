@@ -21,6 +21,8 @@ public class PlayerInfo
 	
 	public boolean guishowFoodRestoreAmount = false;
 	public int guiFoodRestoreAmount = 0;
+	
+	public short moldTransferTimer = 1000;
 
 	public PlayerInfo(String name, INetworkManager nm)
 	{

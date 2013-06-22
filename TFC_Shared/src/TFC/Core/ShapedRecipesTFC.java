@@ -4,6 +4,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
+import TFC.Items.ItemMeltedMetal;
 
 public class ShapedRecipesTFC implements IRecipe
 {
@@ -30,32 +31,37 @@ public class ShapedRecipesTFC implements IRecipe
 			{
 				int i1 = k - i;
 				int j1 = l - j;
-				ItemStack itemstack = null;
+				ItemStack recipeIS = null;
 				if (i1 >= 0 && j1 >= 0 && i1 < recipeWidth && j1 < recipeHeight)
 				{
 					if (flag)
 					{
-						itemstack = recipeItems[recipeWidth - i1 - 1 + j1 * recipeWidth];
+						recipeIS = recipeItems[recipeWidth - i1 - 1 + j1 * recipeWidth];
 					}
 					else
 					{
-						itemstack = recipeItems[i1 + j1 * recipeWidth];
+						recipeIS = recipeItems[i1 + j1 * recipeWidth];
 					}
 				}
-				ItemStack itemstack1 = inventorycrafting.getStackInRowAndColumn(k, l);
-				if (itemstack1 == null && itemstack == null)
+				ItemStack inputIS = inventorycrafting.getStackInRowAndColumn(k, l);
+				if (inputIS == null && recipeIS == null)
 				{
 					continue;
 				}
-				if (itemstack1 == null && itemstack != null || itemstack1 != null && itemstack == null)
+				if (inputIS == null && recipeIS != null || inputIS != null && recipeIS == null)
 				{
 					return false;
 				}
-				if (itemstack.itemID != itemstack1.itemID)
+				if (recipeIS.itemID != inputIS.itemID)
 				{
 					return false;
 				}
-				if (itemstack.getItemDamage() != 32767 && itemstack.getItemDamage() != itemstack1.getItemDamage())
+				if (recipeIS.getItemDamage() != 32767 && recipeIS.getItemDamage() != inputIS.getItemDamage())
+				{
+					return false;
+				}
+				if(recipeIS.getItem() instanceof ItemMeltedMetal && recipeIS.hasTagCompound() && 
+						recipeIS.getTagCompound().hasKey("temperature") && !TFC_ItemHeat.getIsLiquid(inputIS))
 				{
 					return false;
 				}

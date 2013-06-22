@@ -3,39 +3,13 @@ package TFC.Core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import TFC.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class ShapelessRecipesTFC implements IRecipe
 {
@@ -54,11 +28,13 @@ public class ShapelessRecipesTFC implements IRecipe
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
+	@Override
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
 	{
 		return this.recipeOutput.copy();
 	}
 
+	@Override
 	public ItemStack getRecipeOutput()
 	{
 		return this.recipeOutput;
@@ -67,6 +43,7 @@ public class ShapelessRecipesTFC implements IRecipe
 	/**
 	 * Returns the size of the recipe area
 	 */
+	@Override
 	public int getRecipeSize()
 	{
 		return this.recipeItems.size();
@@ -75,6 +52,7 @@ public class ShapelessRecipesTFC implements IRecipe
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
+	@Override
 	public boolean matches(InventoryCrafting par1InventoryCrafting, World world)
 	{
 		ArrayList var2 = new ArrayList(this.recipeItems);
@@ -83,9 +61,9 @@ public class ShapelessRecipesTFC implements IRecipe
 		{
 			for (int var4 = 0; var4 < 5; ++var4)
 			{
-				ItemStack var5 = par1InventoryCrafting.getStackInRowAndColumn(var4, var3);
+				ItemStack inputIS = par1InventoryCrafting.getStackInRowAndColumn(var4, var3);
 
-				if (var5 != null)
+				if (inputIS != null)
 				{
 					boolean var6 = false;
 					Iterator var7 = var2.iterator();
@@ -94,7 +72,10 @@ public class ShapelessRecipesTFC implements IRecipe
 					{
 						ItemStack var8 = (ItemStack)var7.next();
 
-						if (var5.itemID == var8.itemID && (var8.getItemDamage() == -1 || var5.getItemDamage() == var8.getItemDamage()))
+						if (inputIS.itemID == var8.itemID && (var8.getItemDamage() == -1 || inputIS.getItemDamage() == var8.getItemDamage()) &&
+								(var8.hasTagCompound() && var8.getTagCompound().hasKey("noTemp") && 
+										(!inputIS.hasTagCompound() || (inputIS.hasTagCompound() && !var8.getTagCompound().hasKey("temperature"))))/*&& 
+								((!var8.hasTagCompound() && !inputIS.hasTagCompound()) || (var8.hasTagCompound() && NBTMatches(var8, inputIS)))*/)
 						{
 							var6 = true;
 							var2.remove(var8);
@@ -111,5 +92,24 @@ public class ShapelessRecipesTFC implements IRecipe
 		}
 
 		return var2.isEmpty();
+	}
+	
+	private boolean NBTMatches(ItemStack recipeIS, ItemStack inputIS)
+	{
+		NBTTagCompound nbt = recipeIS.getTagCompound();
+		NBTTagCompound inbt = inputIS.getTagCompound();
+		Iterator i = nbt.getTags().iterator();
+		
+		if(inbt == null)
+			return false;
+		
+		while(i.hasNext())
+		{
+			NBTBase tag = (NBTBase)i.next();
+			if(inbt.hasKey(tag.getName()))
+				if(!inbt.getTag(tag.getName()).equals(tag))
+					return false;
+		}
+		return true;
 	}
 }

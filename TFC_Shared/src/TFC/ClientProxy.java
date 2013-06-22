@@ -25,7 +25,6 @@ import net.minecraft.util.StringTranslate;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumTree;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
@@ -71,6 +70,7 @@ import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMetallurgy;
+import TFC.GUI.GuiMold;
 import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
@@ -329,7 +329,10 @@ public class ClientProxy extends CommonProxy
 		{
 			//return new GuiScreenBookTFC(player.inventory, world, x, y, z);
 		}
-
+		case 38:
+		{
+			return new GuiMold(player.inventory, world, x, y, z);
+		}
 		}
 		return null;
 	}

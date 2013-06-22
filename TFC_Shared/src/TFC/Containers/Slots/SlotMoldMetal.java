@@ -3,13 +3,13 @@ package TFC.Containers.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import TFC.TFCItems;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Items.ItemMeltedMetal;
 
-public class SlotMetal extends Slot
+public class SlotMoldMetal extends Slot
 
 {
-	public SlotMetal(IInventory iinventory, int i, int j, int k)
+	public SlotMoldMetal(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 
@@ -18,7 +18,7 @@ public class SlotMetal extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
-		if(itemstack.getItem() instanceof ItemMeltedMetal || itemstack.itemID == TFCItems.CeramicMold.itemID)
+		if(itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack))
 		{
 			return true;
 		}
