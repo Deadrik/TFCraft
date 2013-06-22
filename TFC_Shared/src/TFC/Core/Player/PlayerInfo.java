@@ -15,6 +15,7 @@ public class PlayerInfo
 	public int lockZ = -9999999;
 
 	public ItemStack specialCraftingType;
+	public ItemStack specialCraftingTypeAlternate;
 	
 	public INetworkManager networkManager;
 	private long lastChange;
@@ -29,6 +30,7 @@ public class PlayerInfo
 		Name = name;
 		ChiselMode = 0;
 		specialCraftingType = null;
+		specialCraftingTypeAlternate = null;
 		networkManager = nm;
 		lastChange = 0;
 		hoeMode = 0;

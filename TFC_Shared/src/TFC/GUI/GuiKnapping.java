@@ -18,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.Containers.ContainerSpecialCrafting;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Handlers.PacketHandler;
 
 public class GuiKnapping extends GuiContainer
@@ -60,7 +61,8 @@ public class GuiKnapping extends GuiContainer
     
     public void resetButton(int id)
     {
-    	((GuiKnappingButton) this.buttonList.get(id)).drawButton = false;
+    	if(PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate == null)
+    		((GuiKnappingButton) this.buttonList.get(id)).drawButton = false;
     	((GuiKnappingButton) this.buttonList.get(id)).enabled = false;
     }
 

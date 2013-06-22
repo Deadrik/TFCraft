@@ -329,7 +329,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					if(player.openContainer != null && player.openContainer instanceof ContainerSpecialCrafting)
 					{
 						byte index = dis.readByte();
-						((ContainerSpecialCrafting)player.openContainer).craftMatrix.setInventorySlotContents(index, null);
+						((ContainerSpecialCrafting)player.openContainer).craftMatrix.setInventorySlotContents(index, PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player).specialCraftingTypeAlternate);
 						((ContainerSpecialCrafting)player.openContainer).onCraftMatrixChanged(((ContainerSpecialCrafting)player.openContainer).craftMatrix);
 					}
 				}

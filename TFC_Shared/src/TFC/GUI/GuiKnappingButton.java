@@ -22,7 +22,8 @@ public class GuiKnappingButton extends GuiButton
         if (this.drawButton)
         {
         	Icon icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingType.getIconIndex();
-
+        	if(!this.enabled && PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate != null)
+        		icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate.getIconIndex();
             par1Minecraft.renderEngine.bindTexture("/gui/items.png");
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_82253_i = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;

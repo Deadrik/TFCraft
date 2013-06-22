@@ -840,6 +840,20 @@ public class Recipes
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.KnifePlan, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), TFCItems.Ink});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.BucketPlan, 1), new Object[] { "#   #","#   #","#   #","#   #"," ### ", Character.valueOf('#'), TFCItems.Ink});
         
+        //clay molds
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldShovel, 1), new Object[] { " ### "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHoe, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldAxe, 1), new Object[] { " #   ","#### ","#####","#### "," # ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHammer, 1), new Object[] { "#####","#####","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldChisel, 1), new Object[] { "#","#","#","#","#", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSword, 1), new Object[] { "   ##","  ###"," ### "," ##  ","#    ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1), new Object[] { "  #  "," ### "," ### "," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSaw, 1), new Object[] { "##   ","###  "," ### "," ####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldProPick, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1), new Object[] { "#### "," ####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        
         registerAlloys();
         
         registerKnapping();
@@ -953,6 +967,104 @@ public class Recipes
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldAxe, 1, 5), 
                 new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldAxe, 1, 1)});
         
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldChisel, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldChisel, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldChisel, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldChisel, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldChisel, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldChisel, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldChisel, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldChisel, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHammer, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHammer, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHammer, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHammer, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHammer, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHammer, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHammer, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHammer, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHoe, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHoe, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHoe, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHoe, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHoe, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHoe, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldHoe, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldHoe, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldKnife, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldKnife, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldKnife, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldKnife, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldMace, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldMace, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldMace, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldMace, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldPick, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldPick, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldPick, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldPick, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldProPick, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldProPick, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldProPick, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldProPick, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldProPick, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldProPick, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldProPick, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldProPick, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSaw, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSaw, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSaw, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSaw, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSaw, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSaw, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSaw, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSaw, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldScythe, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldScythe, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldScythe, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldScythe, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldShovel, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldShovel, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldShovel, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldShovel, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldShovel, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldShovel, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldShovel, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldShovel, 1, 1)});
+        
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSword, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSword, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSword, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSword, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSword, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSword, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldSword, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldSword, 1, 1)});
         ////////////////////////////////////////////////////////////////
         //Actual Tools
         ////////////////////////////////////////////////////////////////
@@ -964,6 +1076,105 @@ public class Recipes
                 new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldAxe, 1, 4))});
         GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeAxeHead), 
                 new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldAxe, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperChiselHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldChisel, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeChiselHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldChisel, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeChiselHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldChisel, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeChiselHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldChisel, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperHammerHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHammer, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeHammerHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHammer, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeHammerHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHammer, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeHammerHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHammer, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperHoeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHoe, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeHoeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHoe, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeHoeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHoe, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeHoeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldHoe, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperKnifeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldKnife, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeKnifeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldKnife, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeKnifeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldKnife, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeKnifeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldKnife, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperMaceHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldMace, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeMaceHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldMace, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeMaceHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldMace, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeMaceHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldMace, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperPickaxeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldPick, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzePickaxeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldPick, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzePickaxeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldPick, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzePickaxeHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldPick, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperProPickHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldProPick, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeProPickHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldProPick, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeProPickHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldProPick, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeProPickHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldProPick, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperSawHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSaw, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeSawHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSaw, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeSawHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSaw, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeSawHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSaw, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperScytheHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldScythe, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeScytheHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldScythe, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeScytheHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldScythe, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeScytheHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldScythe, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperShovelHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldShovel, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeShovelHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldShovel, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeShovelHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldShovel, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeShovelHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldShovel, 1, 5))});
+        
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperSwordHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSword, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeSwordHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSword, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeSwordHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSword, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeSwordHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldSword, 1, 5))});
 	}
 	
 	public static ItemStack	getStackTemp(ItemStack is)
@@ -1559,6 +1770,78 @@ public class Recipes
     					new ItemStack(TFCItems.ClayMoldAxe,1,0),
     					0, 
     					new ItemStack(TFCItems.ClayMoldAxe,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldAxe,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldAxe,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldChisel,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldChisel,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldHammer,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldHammer,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldHoe,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldHoe,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldKnife,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldKnife,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldMace,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldMace,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldPick,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldPick,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldProPick,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldProPick,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldSaw,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldSaw,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldScythe,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldScythe,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldShovel,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldShovel,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.ClayMoldSword,1,0),
+    					0, 
+    					new ItemStack(TFCItems.ClayMoldSword,1,1)));
     }
 	
 	public static int valueOfString(String s)

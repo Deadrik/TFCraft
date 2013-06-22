@@ -20,6 +20,7 @@ public class ItemLooseRock extends ItemTerra
 {
 	Icon[] icons;
 	Item specialCraftingType;
+	ItemStack specialCraftingTypeAlternate;
 	public ItemLooseRock(int id) 
 	{
 		super(id);
@@ -53,12 +54,31 @@ public class ItemLooseRock extends ItemTerra
 		specialCraftingType = i;
     	return this;
     }
+	
+	public ItemTerra setSpecialCraftingType(Item i, Item j)
+    {
+		specialCraftingType = i;
+		specialCraftingTypeAlternate = new ItemStack(j);
+    	return this;
+    }
+	
+	public ItemTerra setSpecialCraftingType(Item i, ItemStack j)
+    {
+		specialCraftingType = i;
+		specialCraftingTypeAlternate = j;
+    	return this;
+    }
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
 	{
 		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 		pi.specialCraftingType = new ItemStack(specialCraftingType, 1, itemstack.getItemDamage());
+		if(specialCraftingTypeAlternate != null)
+			pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
+		else
+			pi.specialCraftingTypeAlternate = null;
+		
 		if(itemstack.stackSize > 1)
 		{
 			itemstack.stackSize--;

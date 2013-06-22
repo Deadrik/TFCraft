@@ -29,7 +29,8 @@ public class ContainerSpecialCrafting extends Container
 	{
 		for (int j1 = 0; j1 < 25; j1++)
 		{
-			craftMatrix.setInventorySlotContents(j1, is.copy());
+			if(is != null)
+				craftMatrix.setInventorySlotContents(j1, is.copy());
 		}
 		this.worldObj = world;
 

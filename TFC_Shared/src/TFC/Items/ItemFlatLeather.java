@@ -1,13 +1,16 @@
 package TFC.Items;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.Reference;
 
 public class ItemFlatLeather extends ItemTerra
 {
-
+	public Icon[] icons;
     public ItemFlatLeather(int id) 
     {
         super(id);
@@ -33,4 +36,28 @@ public class ItemFlatLeather extends ItemTerra
     {
         return false;
     }
+    
+    @Override
+	public void registerIcons(IconRegister registerer)
+    {
+    	if(this.MetaNames == null)
+    		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
+    	else
+    	{
+    		icons = new Icon[this.MetaNames.length];
+    		for(int i = 0; i < this.MetaNames.length; i++)
+    		{
+    			this.icons[i] = registerer.registerIcon(Reference.ModID + ":" + this.textureFolder + MetaNames[i]);
+    		}
+    	}
+    }
+    
+    @Override
+	public Icon getIconFromDamage(int damage)
+	{
+    	if(this.MetaNames == null)
+    		return this.itemIcon; 
+    	else
+    		return icons[damage];
+	}
 }
