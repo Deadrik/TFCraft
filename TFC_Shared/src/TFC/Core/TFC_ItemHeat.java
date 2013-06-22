@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
-import TFC.API.HeatRegistry;
 import TFC.API.HeatRaw;
+import TFC.API.HeatRegistry;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
@@ -26,27 +26,27 @@ public class TFC_ItemHeat
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 
-		HeatRaw BismuthRaw = new HeatRaw(0.70F, 271, 1564);
-		HeatRaw BismuthBronzeRaw = new HeatRaw(0.65F, 985, 1941);
-		HeatRaw BlackBronzeRaw = new HeatRaw(0.7F, 1070, 2219);
-		HeatRaw BlackSteelRaw = new HeatRaw(0.66F, 1485, 2726);
-		HeatRaw BlueSteelRaw = new HeatRaw(0.63F, 1540, 3460);
-		HeatRaw BrassRaw = new HeatRaw(0.68F, 930, 1760);
-		HeatRaw BronzeRaw = new HeatRaw(0.68F, 950, 2380);
+		HeatRaw BismuthRaw = new HeatRaw(0.70F, 271);
+		HeatRaw BismuthBronzeRaw = new HeatRaw(0.65F, 985);
+		HeatRaw BlackBronzeRaw = new HeatRaw(0.7F, 1070);
+		HeatRaw BlackSteelRaw = new HeatRaw(0.66F, 1485);
+		HeatRaw BlueSteelRaw = new HeatRaw(0.63F, 1540);
+		HeatRaw BrassRaw = new HeatRaw(0.68F, 930);
+		HeatRaw BronzeRaw = new HeatRaw(0.68F, 950);
 		HeatRaw CopperRaw = new HeatRaw(0.70F, 1084);
 		HeatRaw GoldRaw = new HeatRaw(0.75F, 1063);
 		HeatRaw IronRaw = new HeatRaw(0.67F, 1536);
 		HeatRaw LeadRaw = new HeatRaw(0.75F, 328);
 		HeatRaw NickelRaw = new HeatRaw(0.68F, 1453);
-		HeatRaw PigIronRaw = new HeatRaw(0.64F, 1500, 3150);
+		HeatRaw PigIronRaw = new HeatRaw(0.64F, 1500);
 		HeatRaw PlatinumRaw = new HeatRaw(0.82F, 1770);
-		HeatRaw RedSteelRaw = new HeatRaw(0.63F, 1540, 3589);
-		HeatRaw RoseGoldRaw = new HeatRaw(0.69F, 960, 2650);
+		HeatRaw RedSteelRaw = new HeatRaw(0.63F, 1540);
+		HeatRaw RoseGoldRaw = new HeatRaw(0.69F, 960);
 		HeatRaw SilverRaw = new HeatRaw(0.72F, 961);
-		HeatRaw SteelRaw = new HeatRaw(0.66F, 1540, 3500);//sh = 0.63F; boil = 3500; melt = 1540;
-		HeatRaw SterlingSilverRaw = new HeatRaw(0.72F, 893, 2212);//sh = 0.72F; boil = 2212; melt = 893;
+		HeatRaw SteelRaw = new HeatRaw(0.66F, 1540);//sh = 0.63F; boil = 3500; melt = 1540;
+		HeatRaw SterlingSilverRaw = new HeatRaw(0.72F, 893);//sh = 0.72F; boil = 2212; melt = 893;
 		HeatRaw TinRaw = new HeatRaw(0.69F, 232);
-		HeatRaw ZincRaw = new HeatRaw(0.66F, 420, 907);//sh = 0.66F; boil = 907; melt = 420;
+		HeatRaw ZincRaw = new HeatRaw(0.66F, 420);//sh = 0.66F; boil = 907; melt = 420;
 
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(20, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMinMax(20, 40));
@@ -286,34 +286,34 @@ public class TFC_ItemHeat
 		HeatRaw ClayRaw = new HeatRaw(1.40F, 515.5F);
 		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CeramicMold,1,0), ClayRaw,new ItemStack(TFCItems.CeramicMold, 1)));
 		//manager.addIndex(new HeatIndex(new ItemStack(TFCItems.ClaySpindle,1,1), ClayRaw,new ItemStack(TFCItems.SpindleHead, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 0.95F, 800, 1200.5F,new ItemStack(Block.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand, 1, 32767), 0.95F, 800F, new ItemStack(Block.glass, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCBlocks.Sand2, 1, 32767), 0.95F, 800F, new ItemStack(Block.glass, 1)));
 		//Food
-		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, 385, new ItemStack(Item.porkCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, 425, new ItemStack(Item.beefCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),0.85F,135.5F,425,new ItemStack(TFCItems.muttonCooked,1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.chickenCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, 425,new ItemStack(Item.fishCooked, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, 425,new ItemStack(TFCItems.EggCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.porkRaw, 1), 0.85F, 130.5F, new ItemStack(Item.porkCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.beefRaw, 1), 0.85F, 135.5F, new ItemStack(Item.beefCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.muttonRaw,1),0.85F,135.5F, new ItemStack(TFCItems.muttonCooked,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, new ItemStack(Item.chickenCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, new ItemStack(Item.fishCooked, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, new ItemStack(TFCItems.EggCooked, 1)));
 		
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, 425,new ItemStack(Item.bread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.BarleyBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.RyeBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.OatBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.RiceBread, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, 425,new ItemStack(TFCItems.CornBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, new ItemStack(Item.bread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.BarleyBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RyeBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.OatBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RiceBread, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
 		
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDigSpeed, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealFireResist, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealJump, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealMoveSpeed, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealNightVision, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealWaterBreathing, 1), 0.85F, 135.5F, 425, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDigSpeed, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealFireResist, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealJump, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealMoveSpeed, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealNightVision, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealWaterBreathing, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
 		//Other
-		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F,210,600F,new ItemStack(Block.torchWood, 2)));
+		manager.addIndex(new HeatIndex(new ItemStack(Item.stick, 1, 32767), 13.0F, 210F, new ItemStack(Block.torchWood, 2)));
 
 	}
 	public static Boolean canRemoveTag(Object tag, String key, Class c)
@@ -328,7 +328,7 @@ public class TFC_ItemHeat
 		return false;
 	}
 
-	public static String getHeatColor(float temp, float meltTemp, float boilTemp)
+	public static String getHeatColor(float temp, float meltTemp)
 	{
 		String phrase = "";
 		if(temp < 80)
@@ -415,12 +415,8 @@ public class TFC_ItemHeat
 		{
 			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
 		}
-
-		if(temp > meltTemp && temp > boilTemp - (boilTemp*0.1F)) 
-		{
-			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid") + "\247c!" + StringUtil.localize("gui.ItemHeat.Caution") + "!";
-		}
-		else if(temp > meltTemp)
+		
+		if(temp > meltTemp)
 		{
 			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid");
 		}
@@ -469,8 +465,8 @@ public class TFC_ItemHeat
 
 		return StringUtil.localize("gui.ClearSlot");
 	}
-
-	public static Boolean getIsBoiling(ItemStack is)
+	
+	public static Boolean getIsLiquid(ItemStack is)
 	{       
 		HeatRegistry manager = HeatRegistry.getInstance();
 		if(manager != null && is != null)
@@ -481,7 +477,7 @@ public class TFC_ItemHeat
 				float temp = 0;
 				if(is.getTagCompound().hasKey("temperature"))
 					temp = is.getTagCompound().getFloat("temperature");
-				return temp >= hi.boilTemp;
+				return temp >= hi.meltTemp;
 			}
 			else return false;
 		} 

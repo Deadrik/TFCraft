@@ -92,12 +92,10 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 			{
 				float temp = stackTagCompound.getFloat("temperature");
 				float meltTemp = -1;
-				float boilTemp = 10000;
 				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
 				if(hi != null)
 				{
 					meltTemp = hi.meltTemp;
-					boilTemp = hi.boilTemp;
 				}
 
 				if(meltTemp != -1)
@@ -105,7 +103,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 					if(is.itemID == Item.stick.itemID)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
-						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));
+						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
 				}
 			}
 		}

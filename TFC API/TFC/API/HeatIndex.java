@@ -9,7 +9,6 @@ public class HeatIndex
 {
     public float specificHeat;
     public float meltTemp;
-    public float boilTemp;
 
     private ItemStack output;
     private int outputMin;
@@ -18,12 +17,11 @@ public class HeatIndex
     private ItemStack morph;
     public ItemStack input;
 
-    public HeatIndex(ItemStack in, float sh, float melt, float boil, ItemStack out)
+    public HeatIndex(ItemStack in, float sh, float melt, ItemStack out)
     {
         input = in;
         specificHeat = sh;
         meltTemp = melt;
-        boilTemp = boil;
         outputMin = 0;
         outputMax = 0;
         output = out;
@@ -34,7 +32,6 @@ public class HeatIndex
         input = in;
         specificHeat = raw.specificHeat;
         meltTemp = raw.meltTemp;
-        boilTemp = raw.boilTemp;
         outputMin = 0;
         outputMax = 0;
         output = out;

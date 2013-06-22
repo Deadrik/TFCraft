@@ -133,11 +133,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
                 fireItemStacks[i].stackTagCompound = null;
             }
 
-            if(index.boilTemp <= itemTemp)
-            {
-                fireItemStacks[i] = null;
-            }
-
         }
         else if(fireItemStacks[i] != null && !fireItemStacks[i].hasTagCompound())
         {
@@ -779,10 +774,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
                 inputCompound.setFloat("temperature", inputItemTemp);
                 fireItemStacks[1].setTagCompound(inputCompound);
-                if(index != null && index.boilTemp <= inputItemTemp)
-                {
-                    fireItemStacks[1] = null;
-                }
             }
             else if(fireItemStacks[1] != null && !fireItemStacks[1].hasTagCompound())
             {

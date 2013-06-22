@@ -77,7 +77,6 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 				if(hi != null)
 				{
 					meltTemp = hi.meltTemp;
-					boilTemp = hi.boilTemp;
 				}
 
 				if(meltTemp != -1)
@@ -85,7 +84,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 					if(is.itemID == Item.stick.itemID)
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
 					else
-						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp, boilTemp));
+						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
 				}
 			}
 		}
