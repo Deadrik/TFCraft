@@ -3,7 +3,6 @@ package TFC.Containers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotForShowOnly;
-import TFC.Containers.Slots.SlotSizeMedium;
+import TFC.Containers.Slots.SlotSizeSmallVessel;
 
 public class ContainerVessel extends ContainerTFC {
 	private World world;
@@ -20,7 +19,6 @@ public class ContainerVessel extends ContainerTFC {
 	private int posZ;
 	private EntityPlayer player;
 	public InventoryCrafting containerInv = new InventoryCrafting(this, 2, 2);
-	public IInventory bagslot = new InventoryCraftResult();
 
 	public int bagsSlotNum = 0;
 
@@ -30,22 +28,21 @@ public class ContainerVessel extends ContainerTFC {
 		this.posX = x;
 		this.posY = y;
 		this.posZ = z;
+		bagsSlotNum = player.inventory.currentItem;
 		layoutContainer(playerinv, 0, 0);
 
 		if(!world.isRemote)
 		{
-			this.bagslot.setInventorySlotContents(0, player.inventory.getCurrentItem().copy());
-			bagsSlotNum = player.inventory.currentItem;
-			player.inventory.setInventorySlotContents(bagsSlotNum, null);
 			loadBagInventory();
 		}
 	}
 
 	public void loadBagInventory()
 	{
-		if(bagslot.getStackInSlot(0).hasTagCompound())
+		if(containerInv.getStackInSlot(bagsSlotNum) != null && 
+				containerInv.getStackInSlot(bagsSlotNum).hasTagCompound())
 		{
-			NBTTagList nbttaglist = bagslot.getStackInSlot(0).getTagCompound().getTagList("Items");
+			NBTTagList nbttaglist = containerInv.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
 
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
@@ -78,16 +75,30 @@ public class ContainerVessel extends ContainerTFC {
 					nbttaglist.appendTag(nbttagcompound1);
 				}
 			}
-
-			if(!bagslot.getStackInSlot(0).hasTagCompound())
-				bagslot.getStackInSlot(0).setTagCompound(new NBTTagCompound());
-			bagslot.getStackInSlot(0).getTagCompound().setTag("Items", nbttaglist);
-
-			if(player.inventory.getStackInSlot(bagsSlotNum) == null)
-				player.inventory.setInventorySlotContents(bagsSlotNum, bagslot.getStackInSlot(0));
-			else if(!player.inventory.addItemStackToInventory(bagslot.getStackInSlot(0)))
+			if(containerInv.getStackInSlot(bagsSlotNum) != null)
 			{
-				player.dropPlayerItem(bagslot.getStackInSlot(0));
+				if(!containerInv.getStackInSlot(bagsSlotNum).hasTagCompound())
+					containerInv.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
+				containerInv.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
+
+				/*if(player.inventory.getStackInSlot(bagsSlotNum) == null)
+					player.inventory.setInventorySlotContents(bagsSlotNum, bagslot.getStackInSlot(0));
+				else if(!player.inventory.addItemStackToInventory(bagslot.getStackInSlot(0)))
+				{
+					EntityItem entityitem;
+					Random rand = new Random();
+					float f = rand.nextFloat() * 0.8F + 0.1F;
+					float f1 = rand.nextFloat() * 2.0F + 0.4F;
+					float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+					if(bagslot.getStackInSlot(0)!= null)
+					{
+						entityitem = new EntityItem(world, player.posX, player.posY, player.posZ, 
+								bagslot.getStackInSlot(0));
+						entityitem.motionY = (float)rand.nextGaussian() + 0.2F;
+						world.spawnEntityInWorld(entityitem);
+					}
+				}*/
 			}
 		}
 	}
@@ -99,21 +110,26 @@ public class ContainerVessel extends ContainerTFC {
 
 	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize) {
 
-		this.addSlotToContainer(new SlotSizeMedium(containerInv, 0, 71, 25));
-		this.addSlotToContainer(new SlotSizeMedium(containerInv, 1, 89, 25));
-		this.addSlotToContainer(new SlotSizeMedium(containerInv, 2, 71, 43));
-		this.addSlotToContainer(new SlotSizeMedium(containerInv, 3, 89, 43));
-		this.addSlotToContainer(new SlotForShowOnly(bagslot, 0, 80, 64));
+		this.addSlotToContainer(new SlotSizeSmallVessel(containerInv, 0, 71, 25));
+		this.addSlotToContainer(new SlotSizeSmallVessel(containerInv, 1, 89, 25));
+		this.addSlotToContainer(new SlotSizeSmallVessel(containerInv, 2, 71, 43));
+		this.addSlotToContainer(new SlotSizeSmallVessel(containerInv, 3, 89, 43));
 
 		int row;
 		int col;
 
-		for (row = 0; row < 9; ++row) {
-			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
+		for (row = 0; row < 9; ++row) 
+		{
+			if(row == bagsSlotNum)
+				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 142));
+			else
+				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
 		}
 
-		for (row = 0; row < 3; ++row) {
-			for (col = 0; col < 9; ++col) {
+		for (row = 0; row < 3; ++row) 
+		{
+			for (col = 0; col < 9; ++col) 
+			{
 				this.addSlotToContainer(new Slot(playerInventory, col + row * 9+9, 8 + col * 18, 84 + row * 18));
 			}
 		}

@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
@@ -17,6 +18,8 @@ import TFC.TFCBlocks;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_Core;
+import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.NetworkTileEntity;
@@ -72,11 +75,30 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 		return EnumWeight.MEDIUM;
 	}
+	
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+    {
+		if (TFC_Core.showExtraInformation()) 
+		{
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ":");
+			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.PotteryBase.Inst0") + " " + 
+					EnumChatFormatting.AQUA + StringUtil.localize("gui.RightClick") + " " + 
+					EnumChatFormatting.WHITE + StringUtil.localize("gui.PotteryBase.Inst1"));
+		}
+		else
+		{
+			arraylist.add(
+					EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
+							EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+							EnumChatFormatting.DARK_GRAY + ")");
+		}
+    }
 
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote)
+		if(!world.isRemote && entityplayer.isSneaking())
 		{
 			TileEntityPottery te;
 			if(side == 1)
@@ -140,8 +162,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 				}
 				
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException

@@ -30,7 +30,7 @@ public class ItemOre extends ItemTerra
 	
 	@Override
 	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
+		return EnumSize.SMALL;
 	}
 	
 	@Override

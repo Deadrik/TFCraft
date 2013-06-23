@@ -36,7 +36,7 @@ public class ItemOreSmall extends ItemOre
     
     @Override
 	public EnumSize getSize() {
-		return EnumSize.SMALL;
+		return EnumSize.TINY;
 	}
 	
 	@Override
