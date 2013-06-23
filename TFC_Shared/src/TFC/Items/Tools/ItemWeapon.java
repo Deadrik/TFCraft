@@ -3,6 +3,7 @@ package TFC.Items.Tools;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -44,12 +45,30 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
+		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
+		
 		ItemTerra.addSizeInformation(this, arraylist);
+		
+		ItemTerra.addHeatInformation(is, arraylist);
 		
 		if(is.getItem() instanceof ICausesDamage)
 		{
 			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
 		}
+		
+		addItemInformation(is, player, arraylist);
+		
+		addExtraInformation(is, player, arraylist);
+    }
+	
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+    {
+    	
+    }
+	
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+    {
+
     }
 	
 	@Override

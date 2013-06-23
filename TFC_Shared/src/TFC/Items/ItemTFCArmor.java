@@ -59,7 +59,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
-		ItemTerra.addHeatInformation(is, player, arraylist);
+		ItemTerra.addHeatInformation(is, arraylist);
 
 		if (TFC_Core.showExtraInformation()) 
 		{

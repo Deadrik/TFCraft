@@ -880,7 +880,6 @@ public class TFCItems
 
     public static Item PotteryJug;
     public static Item PotteryPot;
-    public static Item PotteryAmphora;
     public static Item PotterySmallVessel;
     public static Item PotteryLargeVessel;
     public static Item KilnRack;

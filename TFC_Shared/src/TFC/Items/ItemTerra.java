@@ -120,7 +120,7 @@ public class ItemTerra extends Item implements ISize
     	if(TFC_Settings.enableDebugMode)
 			arraylist.add(getUnlocalizedName(is));
     	
-    	addHeatInformation(is, player, arraylist);
+    	addHeatInformation(is, arraylist);
         
     	
     	if (is.hasTagCompound())
@@ -141,7 +141,7 @@ public class ItemTerra extends Item implements ISize
     	
     }
     
-    public static void addHeatInformation(ItemStack is, EntityPlayer player, List arraylist)
+    public static void addHeatInformation(ItemStack is, List arraylist)
     {
     	if (is.hasTagCompound())
         {
