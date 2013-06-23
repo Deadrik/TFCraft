@@ -2,7 +2,12 @@ package TFC.Handlers.Client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.TFCBlocks;
 import TFC.Render.TFC_CoreRender;
 import TFC.Render.Blocks.RenderAnvil;
@@ -134,7 +139,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean shouldRender3DInInventory() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -144,10 +149,67 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID,
-			RenderBlocks renderer) {
-		// TODO Auto-generated method stub
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		Icon[] icons = new Icon[6];
 		
+		if (modelID == TFCBlocks.peatGrassRenderId) {
+			for(int i = 0; i < 6; i++) {
+				icons[i] = TFCBlocks.Peat.getBlockTextureFromSide(i);
+			}
+			renderInvBlock(block, renderer, icons);
+		} else if (modelID == TFCBlocks.grassRenderId) {
+			for(int i = 0; i < 6; i++) {
+				if (block.blockID == TFCBlocks.Dirt.blockID) {
+					icons[i] = TFCBlocks.Dirt.getBlockTextureFromSide(i);
+				} else {
+					icons[i] = TFCBlocks.Dirt2.getBlockTextureFromSide(i);
+				}
+			}
+			renderInvBlock(block, renderer, icons);
+		} else if (modelID == TFCBlocks.clayGrassRenderId) {
+			for(int i = 0; i < 6; i++) {
+				if (block.blockID == TFCBlocks.Clay.blockID) {
+					icons[i] = TFCBlocks.Clay.getBlockTextureFromSide(i);
+				} else {
+					icons[i] = TFCBlocks.Clay2.getBlockTextureFromSide(i);
+				}
+			}
+			renderInvBlock(block, renderer, icons);
+		}
 	}
 
+	private void renderInvBlock(Block block, RenderBlocks renderer, Icon[] icons){
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, -1F, 0.0F);
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icons[0]);
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 1.0F, 0.0F);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icons[1]);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(1));
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 0.0F, -1F);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, icons[2]);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(2));
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 0.0F, 1.0F);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, icons[3]);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(3));
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(-1F, 0.0F, 0.0F);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, icons[4]);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(4));
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(1.0F, 0.0F, 0.0F);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, icons[5]);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(5));
+		tessellator.draw();
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+	}
 }
