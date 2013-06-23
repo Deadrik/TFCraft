@@ -64,7 +64,7 @@ public class TileEntityFoodPrepRenderer extends TileEntitySpecialRenderer
 			 if (te.getStackInSlot(0) != null)
 			 {
 				 GL11.glPushMatrix(); //start
-				 GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0F, (float)d2 + 0.25F);
+				 GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0.1F, (float)d2 + 0.25F);
 				 GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 				 GL11.glScalef(blockScale, blockScale, blockScale);
 				 customitem.setEntityItemStack(te.getStackInSlot(0));
@@ -74,7 +74,7 @@ public class TileEntityFoodPrepRenderer extends TileEntitySpecialRenderer
 			 if (te.getStackInSlot(1) != null)
 			 {
 				 GL11.glPushMatrix(); //start
-				 GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0F, (float)d2 + 0.25F);
+				 GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.1F, (float)d2 + 0.25F);
 				 GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 				 GL11.glScalef(blockScale, blockScale, blockScale);
 				 customitem.setEntityItemStack(te.getStackInSlot(1));
@@ -84,7 +84,7 @@ public class TileEntityFoodPrepRenderer extends TileEntitySpecialRenderer
 			 if (te.getStackInSlot(2) != null)
 			 {
 				 GL11.glPushMatrix(); //start
-				 GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0F, (float)d2 + 0.75F);
+				 GL11.glTranslatef((float)d + 0.25F, (float)d1 + 0.1F, (float)d2 + 0.75F);
 				 GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 				 GL11.glScalef(blockScale, blockScale, blockScale);
 				 customitem.setEntityItemStack(te.getStackInSlot(2));
@@ -94,7 +94,7 @@ public class TileEntityFoodPrepRenderer extends TileEntitySpecialRenderer
 			 if (te.getStackInSlot(3) != null)
 			 {
 				 GL11.glPushMatrix(); //start
-				 GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0F, (float)d2 + 0.75F);
+				 GL11.glTranslatef((float)d + 0.75F, (float)d1 + 0.1F, (float)d2 + 0.75F);
 				 GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 				 GL11.glScalef(blockScale, blockScale, blockScale);
 				 customitem.setEntityItemStack(te.getStackInSlot(3));
@@ -104,7 +104,7 @@ public class TileEntityFoodPrepRenderer extends TileEntitySpecialRenderer
 			 if (te.getStackInSlot(5) != null)
 			 {
 				 GL11.glPushMatrix(); //start
-				 GL11.glTranslatef((float)d + 0.50F, (float)d1 + 0F, (float)d2 + 0.50F);
+				 GL11.glTranslatef((float)d + 0.50F, (float)d1 + 0.1F, (float)d2 + 0.50F);
 				 GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 				 GL11.glScalef(blockScale, blockScale, blockScale);
 				 customitem.setEntityItemStack(te.getStackInSlot(5));

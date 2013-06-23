@@ -39,7 +39,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
             }
             @Override
             public boolean shouldBob() {
-                return false;
+                return true;
             }
             @Override
             public boolean shouldSpreadItems() {
@@ -60,16 +60,14 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 		}
 		else
 		{
-			
-			
 			EntityItem customitem = new EntityItem(tileEntityRenderer.worldObj);			
 			customitem.hoverStart = 0f;
-			float blockScale = 1.60F;
+			float blockScale = 1.0F;
             float timeD = (float) (360.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 			for(int i = 0; i < 4; i++)
 			{
 				float offsetX = 0.25f; 
-				float offsetY = 0; 
+				float offsetY = 0.1f; 
 				float offsetZ = 0.25f;
 				if(i == 1)
 				{
@@ -91,7 +89,7 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 				{
 					GL11.glPushMatrix(); //start
 					GL11.glTranslatef((float)d + offsetX, (float)d1 + offsetY, (float)d2 + offsetZ);
-					//GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
 					GL11.glScalef(blockScale, blockScale, blockScale);
 					customitem.setEntityItemStack(te.getStackInSlot(i));
 					itemRenderer.doRenderItem(customitem, 0, 0, 0, 0, 0);
