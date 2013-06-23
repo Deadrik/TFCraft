@@ -6,51 +6,30 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Items.*;
 import TFC.Food.ItemTerraFood;
 import TFC.Handlers.PacketHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage = new ItemStack[6];
 
+	@Override
 	public void updateEntity()
 	{
-		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, (int)xCoord,(int)yCoord,(int)zCoord);
+		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
 	}
 
 	public void actionCreate()
@@ -134,6 +113,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
 		super.readFromNBT(nbttagcompound);
@@ -151,6 +131,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
@@ -189,6 +170,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		outStream.writeInt(storage[1] != null ? storage[1].itemID : -1);
 		outStream.writeInt(storage[2] != null ? storage[2].itemID : -1);
 		outStream.writeInt(storage[3] != null ? storage[3].itemID : -1);
+		outStream.writeInt(storage[5] != null ? storage[5].itemID : -1);
 	}
 
 	@Override
@@ -198,10 +180,12 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		int s2 = inStream.readInt();
 		int s3 = inStream.readInt();
 		int s4 = inStream.readInt();
+		int s5 = inStream.readInt();
 		storage[0] = s1 != -1 ? new ItemStack(Item.itemsList[s1]) : null;
 		storage[1] = s2 != -1 ? new ItemStack(Item.itemsList[s2]) : null;
 		storage[2] = s3 != -1 ? new ItemStack(Item.itemsList[s3]) : null;
 		storage[3] = s4 != -1 ? new ItemStack(Item.itemsList[s4]) : null;
+		storage[5] = s5 != -1 ? new ItemStack(Item.itemsList[s5]) : null;
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
 	}
@@ -221,6 +205,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 			dos.writeInt(storage[1] != null ? storage[1].itemID : -1);
 			dos.writeInt(storage[2] != null ? storage[2].itemID : -1);
 			dos.writeInt(storage[3] != null ? storage[3].itemID : -1);
+			dos.writeInt(storage[5] != null ? storage[5].itemID : -1);
 		} catch (IOException e) {
 		}
 
@@ -263,7 +248,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		{
 			if(storage[i]!= null)
 			{
-				entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
 						storage[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
@@ -284,7 +269,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 
 		if(storage[index]!= null)
 		{
-			entityitem = new EntityItem(worldObj, (float)xCoord + f, (float)yCoord + f1, (float)zCoord + f2, 
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
 					storage[index]);
 			entityitem.motionX = (float)rand.nextGaussian() * f3;
 			entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.05F;
@@ -293,6 +278,7 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 		}
 	}
 
+	@Override
 	public int getSizeInventory()
 	{
 		return storage.length;
@@ -344,7 +330,16 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	{
 		if(worldObj.isRemote)
 			worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-
+		else
+		{
+			if(storage[0] == null && storage[1] == null && storage[2] == null && storage[3] == null && storage[5] == null)
+			{
+				if(storage[4] != null)
+					this.ejectItem(4);
+				
+				this.worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+			}
+		}
 	}
 
 	@Override

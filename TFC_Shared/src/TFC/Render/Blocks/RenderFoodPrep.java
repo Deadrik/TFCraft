@@ -31,6 +31,24 @@ public class RenderFoodPrep
 			
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 			tessellator.setColorRGBA_F(1, 1, 1, 1);
+			if(te.storage[5] != null)
+			{
+				renderblocks.overrideBlockTexture = te.storage[5].getIconIndex();
+
+				double minX = renderblocks.overrideBlockTexture.getMinU();
+				double maxX = renderblocks.overrideBlockTexture.getMaxU();
+				double minZ = renderblocks.overrideBlockTexture.getMinV();
+				double maxZ = renderblocks.overrideBlockTexture.getMaxV();
+
+				tessellator.addTranslation(0f, 0.0f, 0.0f);
+
+				tessellator.addVertexWithUV(i + 0.30, 	j + height, 	k + 0.30, 	minX, minZ);
+				tessellator.addVertexWithUV(i + 0.30, 	j + height, 	k + 0.70, 	maxX, minZ);
+				tessellator.addVertexWithUV(i + 0.70, 	j + height, 	k + 0.70, 	maxX, maxZ);
+				tessellator.addVertexWithUV(i + 0.70, 	j + height, 	k + 0.30, 	minX, maxZ);
+
+				tessellator.addTranslation(0f, 0.0f, 0f);
+			}
 			if(te.storage[0] != null)
 			{
 				renderblocks.overrideBlockTexture = te.storage[0].getIconIndex();

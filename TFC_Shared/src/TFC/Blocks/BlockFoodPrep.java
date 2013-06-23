@@ -4,12 +4,16 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.Core.TFC_Textures;
 import TFC.TileEntities.TileEntityFoodPrep;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFoodPrep extends BlockTerraContainer {
 
@@ -52,6 +56,13 @@ public class BlockFoodPrep extends BlockTerraContainer {
     {
 
     }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess access, int i, int j, int k, int meta)
+	{
+		return TFC_Textures.InvisibleTexture;
+	}
 	
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)

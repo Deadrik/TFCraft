@@ -118,7 +118,7 @@ public class CommonProxy implements IGuiHandler
 		
 		ModLoader.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
-		ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
+		
 		ModLoader.registerTileEntity(TileEntityQuern.class, "Quern");
 		ModLoader.registerTileEntity(TileEntitySapling.class, "Sapling");
 		
@@ -131,7 +131,7 @@ public class CommonProxy implements IGuiHandler
 		if(b){
 			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
-			
+			ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
 		}
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "Cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "Sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
