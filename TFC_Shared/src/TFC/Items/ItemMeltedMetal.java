@@ -12,6 +12,7 @@ import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -53,14 +54,38 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
+
+		super.addInformation(is, player, arraylist, flag);
+
+	}
+
+	@Override
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{		
 		if(is.getItemDamage() != 0)
 			arraylist.add(StringUtil.localize("gui.MeltedMetal.NotFull"));
-		super.addInformation(is, player, arraylist, flag);
-		//Right Click to pour into a tool mold
+	}
+
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{	
 		if(TFC_ItemHeat.getIsLiquid(is))
 		{
-			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize("gui.MeltedMetal.Inst0") + " " + 
-					EnumChatFormatting.WHITE + StringUtil.localize("gui.MeltedMetal.Inst1"));
+			if (TFC_Core.showExtraInformation()) 
+			{
+				arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ":");
+				//Right Click to pour into a tool mold
+
+				arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize("gui.RightClick") + " " + 
+						EnumChatFormatting.WHITE + StringUtil.localize("gui.MeltedMetal.Inst0"));
+			}
+			else
+			{
+				arraylist.add(
+						EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
+								EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+								EnumChatFormatting.DARK_GRAY + ")");
+			}
 		}
 	}
 

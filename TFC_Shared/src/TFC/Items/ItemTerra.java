@@ -120,7 +120,30 @@ public class ItemTerra extends Item implements ISize
     	if(TFC_Settings.enableDebugMode)
 			arraylist.add(getUnlocalizedName(is));
     	
-        if (is.hasTagCompound())
+    	addHeatInformation(is, player, arraylist);
+        
+    	
+    	if (is.hasTagCompound())
+        {
+            if(is.getTagCompound().hasKey("itemCraftingValue") && is.getTagCompound().getByte("itemCraftingValue") != 0)
+            {
+                arraylist.add("This Item Has Been Worked");
+            }
+        }
+    	
+        addItemInformation(is, player, arraylist);
+        
+        addExtraInformation(is, player, arraylist);
+    }
+    
+    public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+    {
+    	
+    }
+    
+    public static void addHeatInformation(ItemStack is, EntityPlayer player, List arraylist)
+    {
+    	if (is.hasTagCompound())
         {
             NBTTagCompound stackTagCompound = is.getTagCompound();
 
@@ -142,17 +165,12 @@ public class ItemTerra extends Item implements ISize
                         arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
                 }
             }
-            if(stackTagCompound.hasKey("itemCraftingValue") && stackTagCompound.getByte("itemCraftingValue") != 0)
-            {
-                arraylist.add("This Item Has Been Worked");
-                /*if(stackTagCompound.hasKey("itemCraftingRule1"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule1")));
-                if(stackTagCompound.hasKey("itemCraftingRule2"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule2")));
-                if(stackTagCompound.hasKey("itemCraftingRule3"))
-                    arraylist.add("  \u2022" + getRuleFromId(stackTagCompound.getByte("itemCraftingRule3")));*/
-            }
         }
+    }
+    
+    public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+    {
+
     }
 
     public static String getRuleFromId(int id)

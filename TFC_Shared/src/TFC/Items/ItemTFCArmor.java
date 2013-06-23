@@ -5,21 +5,17 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import TFC.Reference;
 import TFC.API.Armor;
-import TFC.API.HeatIndex;
-import TFC.API.HeatRegistry;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Util.StringUtil;
 
 public class ItemTFCArmor extends ItemArmor implements ISize
@@ -63,31 +59,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
-
-		if (is.hasTagCompound())
-		{
-			NBTTagCompound stackTagCompound = is.getTagCompound();
-
-			if(stackTagCompound.hasKey("temperature"))
-			{
-				float temp = stackTagCompound.getFloat("temperature");
-				float meltTemp = -1;
-				float boilTemp = 10000;
-				HeatIndex hi = HeatRegistry.getInstance().findMatchingIndex(is);
-				if(hi != null)
-				{
-					meltTemp = hi.meltTemp;
-				}
-
-				if(meltTemp != -1)
-				{
-					if(is.itemID == Item.stick.itemID)
-						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-					else
-						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
-				}
-			}
-		}
+		ItemTerra.addHeatInformation(is, player, arraylist);
 
 		if (TFC_Core.showExtraInformation()) 
 		{
@@ -108,7 +80,9 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		}
 		else
 		{
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + EnumChatFormatting.AQUA + StringUtil.localize("gui.Armor.Shift") + EnumChatFormatting.WHITE + ")");
+			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
+		EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+		EnumChatFormatting.DARK_GRAY + ")");
 		}
 
 	}
