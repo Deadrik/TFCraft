@@ -44,10 +44,19 @@ public class ContainerMold extends ContainerTFC {
 		if (!this.world.isRemote)
         {
             ItemStack itemstack = this.craftResult.getStackInSlotOnClosing(0);
-
+            ItemStack itemstack2 = this.containerInv.getStackInSlotOnClosing(0);
+            ItemStack itemstack3 = this.containerInv.getStackInSlotOnClosing(1);
             if (itemstack != null)
             {
                 player.dropPlayerItem(itemstack);
+            }
+            if (itemstack2 != null)
+            {
+                player.dropPlayerItem(itemstack2);
+            }
+            if (itemstack3 != null)
+            {
+                player.dropPlayerItem(itemstack3);
             }
         }
 	}

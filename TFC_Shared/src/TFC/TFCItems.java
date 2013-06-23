@@ -50,6 +50,7 @@ import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemUnfinishedArmor;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
+import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
 import TFC.Items.Pottery.ItemPotteryLargeVessel;
 import TFC.Items.Pottery.ItemPotteryMold;
@@ -1610,7 +1611,7 @@ public class TFCItems
         PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
         PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
         PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"items","PotteryPot",num++)).setUnlocalizedName("Pot");
-        CeramicMold = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
+        CeramicMold = new ItemPotteryBase(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
         
         ClayMoldAxe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldAxe",num++)).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
         		"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");

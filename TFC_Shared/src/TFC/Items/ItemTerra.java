@@ -67,7 +67,7 @@ public class ItemTerra extends Item implements ISize
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-    	if(MetaNames != null)
+    	if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length)
     		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
     	return super.getUnlocalizedName(itemstack);
     }

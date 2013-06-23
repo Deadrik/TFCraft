@@ -28,6 +28,7 @@ import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerScribe;
 import TFC.Containers.ContainerSluice;
 import TFC.Containers.ContainerSpecialCrafting;
+import TFC.Containers.ContainerVessel;
 import TFC.Containers.ContainerWorkbench;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -432,6 +433,10 @@ public class CommonProxy implements IGuiHandler
 		case 38:
 		{
 			return new ContainerMold(player.inventory, world, x, y, z);
+		}
+		case 39:
+		{
+			return new ContainerVessel(player.inventory, world, x, y, z);
 		}
 		default:
 		{
