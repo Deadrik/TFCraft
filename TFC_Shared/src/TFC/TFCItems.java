@@ -1616,7 +1616,7 @@ public class TFCItems
         ClayMoldAxe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldAxe",num++)).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
         		"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");
         ClayMoldChisel = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldChisel",num++)).setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
-        		"Ceramic Mold Chisel Copper","Ceramic Mold Chisel Bronze","Ceramic Mold Chisel Bismuth Bronze","Ceramic Mold Chisel Black Bronze"}).setUnlocalizedName("Axe Chisel");
+        		"Ceramic Mold Chisel Copper","Ceramic Mold Chisel Bronze","Ceramic Mold Chisel Bismuth Bronze","Ceramic Mold Chisel Black Bronze"}).setUnlocalizedName("Chisel Mold");
         ClayMoldHammer = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldHammer",num++)).setMetaNames(new String[]{"Clay Mold Hammer","Ceramic Mold Hammer",
         		"Ceramic Mold Hammer Copper","Ceramic Mold Hammer Bronze","Ceramic Mold Hammer Bismuth Bronze","Ceramic Mold Hammer Black Bronze"}).setUnlocalizedName("Hammer Mold");
         ClayMoldHoe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldHoe",num++)).setMetaNames(new String[]{"Clay Mold Hoe","Ceramic Mold Hoe",
