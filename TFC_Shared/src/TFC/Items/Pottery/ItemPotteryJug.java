@@ -3,7 +3,6 @@ package TFC.Items.Pottery;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -77,15 +76,7 @@ public class ItemPotteryJug extends ItemPotteryBase
     		entity.setItemInUse(is, this.getMaxItemUseDuration(is));
         return is;
     }
-    
-    @Override
-	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
-	{
-		for(int i = 0; i < MetaNames.length; i++) {
-			list.add(new ItemStack(this,1,i));
-		}
-	}
-	
+
 	@Override
 	public Icon getIconFromDamage(int damage)
 	{

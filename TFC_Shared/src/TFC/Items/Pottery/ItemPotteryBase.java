@@ -3,6 +3,7 @@ package TFC.Items.Pottery;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -44,6 +45,14 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		this.CeramicIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + MetaNames[1]);
 	}
 
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
+	{
+		for(int i = 0; i < MetaNames.length; i++) {
+			list.add(new ItemStack(this,1,i));
+		}
+	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage)
