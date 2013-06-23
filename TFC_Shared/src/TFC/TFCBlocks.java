@@ -299,9 +299,9 @@ public class TFCBlocks
 		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
 		
 		GameRegistry.registerBlock(ToolRack, ItemToolRack.class,"ToolRack");
-		GameRegistry.registerBlock(SpawnMeter, "SpawnMeter");
+		GameRegistry.registerBlock(SpawnMeter, TFC.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
 		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
-		GameRegistry.registerBlock(Quern, "Quern");
+		GameRegistry.registerBlock(Quern, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
 		GameRegistry.registerBlock(WallCobbleIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallCobbleIgIn");
 		GameRegistry.registerBlock(WallCobbleIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallCobbleIgEx");
 		GameRegistry.registerBlock(WallCobbleSed, TFC.Items.ItemBlocks.ItemSed.class, "WallCobbleSed");
