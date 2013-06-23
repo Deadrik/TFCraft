@@ -550,7 +550,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 						input[0] = outMetal2.copy();    
 				}
 
-				if(input[0] != null)
+				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID)
 					input[0].setItemDamage(100-dam);
 
 				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
