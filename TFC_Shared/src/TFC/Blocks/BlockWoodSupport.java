@@ -281,6 +281,12 @@ public class BlockWoodSupport extends BlockTerra
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+	
+	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entity, ItemStack is) 
 	{
 		super.onBlockPlacedBy(world, i, j, k, entity, is);
