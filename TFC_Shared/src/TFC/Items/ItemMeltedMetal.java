@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -69,7 +70,8 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	
-		if(TFC_ItemHeat.getIsLiquid(is))
+		if(TFC_ItemHeat.getIsLiquid(is) && (is.getItem().itemID == TFCItems.CopperUnshaped.itemID || is.getItem().itemID == TFCItems.BronzeUnshaped.itemID ||
+				is.getItem().itemID == TFCItems.BlackBronzeUnshaped.itemID || is.getItem().itemID == TFCItems.BismuthBronzeUnshaped.itemID ))
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{
