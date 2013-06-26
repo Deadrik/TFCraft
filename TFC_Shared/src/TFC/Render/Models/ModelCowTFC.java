@@ -1,49 +1,30 @@
 package TFC.Render.Models;
 
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import TFC.Core.TFC_Settings;
+import TFC.Entities.EntityAnimalTFC;
 public class ModelCowTFC extends ModelQuadrupedTFC
 {
 	 public ModelRenderer udders;
+	 ModelRenderer horn1;
+	 ModelRenderer horn2;
     public ModelCowTFC()
     {
         super(12, 0.0F);
         this.head = new ModelRenderer(this, 0, 0);
         this.head.addBox(-4.0F, -4.0F, -6.0F, 8, 8, 6, 0.0F);
         this.head.setRotationPoint(0.0F, 4.0F, -8.0F);
-        this.head.setTextureOffset(22, 0).addBox(-5.0F, -5.0F, -4.0F, 1, 3, 1, 0.0F);
-        this.head.setTextureOffset(22, 0).addBox(4.0F, -5.0F, -4.0F, 1, 3, 1, 0.0F);
+        horn1 = new ModelRenderer(this,22,0);
+        horn1.addBox(-5.0F, -5.0F, -4.0F, 1, 3, 1, 0.0F);
+        this.head.addChild(horn1);
+        horn2 = new ModelRenderer(this,22,0);
+        horn2.addBox(4.0F, -5.0F, -4.0F, 1, 3, 1, 0.0F);
+        this.head.addChild(horn2);
         this.body = new ModelRenderer(this, 18, 4);
         this.body.addBox(-6.0F, -10.0F, -7.0F, 12, 18, 10, 0.0F);
         this.body.setRotationPoint(0.0F, 5.0F, 2.0F);
@@ -62,17 +43,30 @@ public class ModelCowTFC extends ModelQuadrupedTFC
         this.field_40332_n += 2.0F;
     }
     
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+    @Override
+	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
     {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7);
 
-        if (this.isChild)
+        age = 0;
+        if (par1Entity instanceof EntityAnimalTFC){
+        	if(((EntityAnimalTFC)par1Entity).getGrowingAge() <= 0){
+        	age = (-1F)*((EntityAnimalTFC)par1Entity).getGrowingAge() / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
+        	System.out.print("completed; "+age+", "+((EntityAnimalTFC)par1Entity).getGrowingAge());
+        	}
+        	}
+        if (true)
         {
             float aa =  2F - (1.0F - age);
             GL11.glPushMatrix ();
             float ab = (float)Math.sqrt(1.0F / aa);
             GL11.glScalef(ab, ab, ab);
-            GL11.glTranslatef (0.0F, 24F * par7 * age/aa,2F*par7*age/ab);            
+            GL11.glTranslatef (0.0F, 32F * par7 * age/aa,2F*par7*age/ab);
+            System.out.println(ab);
+            if(aa>1.5F){
+            	horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
+            	horn2.isHidden = true;//rotateAngleX = -(float)Math.PI;
+            }
             head.render(par7);
             GL11.glPopMatrix();
             GL11.glPushMatrix();
@@ -105,7 +99,8 @@ public class ModelCowTFC extends ModelQuadrupedTFC
     /**
      * Sets the models various rotation angles.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
+    @Override
+	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
     {
         this.head.rotateAngleX = par5 / (180F / (float)Math.PI);
         this.head.rotateAngleY = par4 / (180F / (float)Math.PI);
@@ -115,5 +110,9 @@ public class ModelCowTFC extends ModelQuadrupedTFC
         this.leg2.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
         this.leg3.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 1.4F * par2;
         this.leg4.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+        horn1.rotateAngleX = 0F;
+        horn2.rotateAngleX = 0F;
+        horn1.isHidden = false;
+        horn2.isHidden = false;
     }
 }
