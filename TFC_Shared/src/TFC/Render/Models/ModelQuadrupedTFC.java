@@ -7,6 +7,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
 import TFC.Entities.EntityAnimalTFC;
 
 public class ModelQuadrupedTFC extends ModelBaseTFC
@@ -49,9 +50,11 @@ public class ModelQuadrupedTFC extends ModelBaseTFC
     {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7);
         age = 0;
+        long tempAge = 0;
         if (par1Entity instanceof EntityAnimalTFC){
-        	if(((EntityAnimalTFC)par1Entity).getGrowingAge() <= 0)
-        	age = (-1F)*((EntityAnimalTFC)par1Entity).getGrowingAge() / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
+        	tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
+        	if(tempAge < 0)
+        	age = (-1F)*tempAge / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
         }
         if (true)//this.isChild)
         {
