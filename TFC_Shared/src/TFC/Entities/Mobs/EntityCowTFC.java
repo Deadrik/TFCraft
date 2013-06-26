@@ -62,6 +62,12 @@ public class EntityCowTFC extends EntityAnimalTFC
 	{
 		super.onLivingUpdate();
 
+		if(sex == 0){
+        	this.texture = "/mods/TFC/mob/bull.png";
+        }
+        else{
+        	this.texture = "/mob/cow.png";
+        }
 		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
 		if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
