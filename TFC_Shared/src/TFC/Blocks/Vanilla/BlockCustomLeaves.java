@@ -293,10 +293,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public boolean isOpaqueCube()
     {
-        if(TerraFirmaCraft.proxy != null)
-            return !TerraFirmaCraft.proxy.getGraphicsLevel();
-        else
-            return false;
+        return false;
     }
 
     @Override
