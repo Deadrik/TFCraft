@@ -1,4 +1,4 @@
-package TFC.Blocks.Devices;
+package TFC.Blocks;
 
 import java.util.List;
 import java.util.Random;
@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,23 +17,17 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import TFC.Reference;
-import TFC.TFCBlocks;
-import TFC.TFCItems;
-import TFC.TerraFirmaCraft;
-import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Textures;
-import TFC.Items.ItemBarrels;
-import TFC.TileEntities.NetworkTileEntity;
 import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TileEntityThatch;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBarrel extends BlockTerraContainer
+public class BlockThatch extends BlockTerraContainer
 {
 	private final Random random = new Random();
 
-	public BlockBarrel(int par1)
+	public BlockThatch(int par1)
 	{
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
@@ -44,7 +37,7 @@ public class BlockBarrel extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		//this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
 	}
 
 	@Override
@@ -78,12 +71,6 @@ public class BlockBarrel extends BlockTerraContainer
 	public boolean renderAsNormalBlock()
 	{
 		return false;
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return TFCBlocks.barrelRenderId;
 	}
 
 	/**
@@ -125,92 +112,6 @@ public class BlockBarrel extends BlockTerraContainer
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		return true;
-	}
-
-	@Override
-	protected ItemStack createStackedBlock(int par1)
-	{
-		int j = 0;
-		String s = this.getUnlocalizedName();
-		for(int i = 0; i < ((ItemBarrels)(TFCItems.Barrel)).MetaNames.length;i++){
-			j = s.substring(s.indexOf("l",s.length()))==((ItemBarrels)(TFCItems.Barrel)).MetaNames[i]?i:0;
-		}
-
-
-		return new ItemStack(TFCItems.Barrel, 1, j);
-	}
-
-	public class BarrelEntity extends Entity{
-		public int fuse;
-		public BarrelEntity(World par1World)
-		{
-			super(par1World);
-			this.fuse = 15;
-			this.preventEntitySpawning = true;
-			this.setSize(0.98F, 0.98F);
-			this.yOffset = this.height / 2.0F;
-		}
-
-		public BarrelEntity(World par1World, double par2, double par4, double par6)
-		{
-			this(par1World);
-			this.setPosition(par2, par4, par6);
-			float f = (float)(Math.random() * Math.PI * 2.0D);
-			this.motionX = -((float)Math.sin(f)) * 0.02F;
-			this.motionY = 0.20000000298023224D;
-			this.motionZ = -((float)Math.cos(f)) * 0.02F;
-			this.prevPosX = par2;
-			this.prevPosY = par4;
-			this.prevPosZ = par6;
-		}
-
-		@Override
-		public void onUpdate(){
-			fuse--;
-			if(fuse == 0){
-				explode();
-			}
-			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, new Random().nextFloat(), 1.0D, new Random().nextFloat());
-		}
-		private void explode()
-		{
-			float f = 16.0F;
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
-			setDead();
-		}
-		@Override
-		protected void entityInit() {
-			// TODO Auto-generated method stub
-
-		}
-		@Override
-		protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-			this.fuse = par1NBTTagCompound.getByte("Fuse");
-
-		}
-		@Override
-		protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-			par1NBTTagCompound.setByte("Fuse", (byte)this.fuse);
-
-		}
-	}
-
-	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-	{
-		if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-		{
-			TileEntityBarrel TE = (TileEntityBarrel)par1World.getBlockTileEntity(par2,par3,par4);
-			if(TE.liquidLevel == 256 && TE.Type == 4 && !TE.getSealed()){
-				TE.setSealed();
-				BarrelEntity BE = new BarrelEntity(par1World,par2,par3,par4);
-				par1World.spawnEntityInWorld(BE);
-				par1World.playSoundAtEntity(BE, "random.fuse", 1.0F, 1.0F);
-				//float f = 16.0F;
-				//EI.worldObj.createExplosion(EI, EI.posX, EI.posY, EI.posZ, f, true);
-				//par1World.setBlockToAir(par2, par3, par4);
-			}
-		}
 	}
 
 	/**
@@ -271,32 +172,9 @@ public class BlockBarrel extends BlockTerraContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float hitX, float hitY, float hitZ)
-	{
-		if (world.isRemote)
-		{
-			((NetworkTileEntity)world.getBlockTileEntity(x,y,z)).validate();
-			return true;
-		}
-		else
-		{
-			if(world.getBlockTileEntity(x, y, z) != null){
-				TileEntityBarrel TeBarrel = (TileEntityBarrel)(world.getBlockTileEntity(x, y, z));
-				if (TeBarrel.getSealed()||entityplayer.isSneaking()){
-					return false;
-				}
-				entityplayer.openGui(TerraFirmaCraft.instance, 35, world, x, y, z);
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityBarrel();
+		return new TileEntityThatch();
 	}
 
 	@Override
