@@ -35,7 +35,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	private boolean sealed;
 	private int sealtimecounter;
 	public int[] alcohols;
-	public final int SEALTIME = TFC_Settings.enableDebugMode?0:(int)((TFC_Time.hourLength*6)/100);//default 80
+	public final int SEALTIME = TFC_Settings.enableDebugMode?0:(int)((TFC_Time.hourLength*12)/100);//default 80
 
 	public TileEntityBarrel()
 	{

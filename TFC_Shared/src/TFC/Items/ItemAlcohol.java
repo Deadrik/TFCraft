@@ -116,24 +116,43 @@ public class ItemAlcohol extends ItemTerra
             	int time = rand.nextInt(1000) + 400;
             	System.out.println(soberTime);
             	soberTime +=time;
-            	if(soberTime >3000){
+            	if(rand.nextInt(100)==0){
+            		player.addPotionEffect(new PotionEffect(8,time,4));
+            	}
+            	if(rand.nextInt(100)==0){
+            		player.addPotionEffect(new PotionEffect(5,time,4));
+            	}
+            	if(rand.nextInt(100)==0){
+            		player.addPotionEffect(new PotionEffect(8,time,4));
+            	}
+            	if(rand.nextInt(200)==0){
+            		player.addPotionEffect(new PotionEffect(10,time,4));
+            	}
+            	if(rand.nextInt(150)==0){
+            		player.addPotionEffect(new PotionEffect(12,time,4));
+            	}
+            	if(rand.nextInt(180)==0){
+            		player.addPotionEffect(new PotionEffect(13,time,4));
+            	}
+            	int levelMod = 250*player.experienceLevel;
+            	if(soberTime >3000+levelMod){
             		if(rand.nextInt(4)==0){
             			player.addPotionEffect(new PotionEffect(9,time,4));
             		}
-            		if(soberTime >5000){
+            		if(soberTime >5000+levelMod){
             			if(rand.nextInt(4)==0){
                 			player.addPotionEffect(new PotionEffect(18,time,4));
                 		}
-            			if(soberTime >7000){
+            			if(soberTime >7000+levelMod){
                 			if(rand.nextInt(2)==0){
                     			player.addPotionEffect(new PotionEffect(15,time,4));
                     		}
-                			if(soberTime >8000){
+                			if(soberTime >8000+levelMod){
                     			if(rand.nextInt(10)==0){
                         			player.addPotionEffect(new PotionEffect(20,time,4));
                         		}
                 			}
-                			if(soberTime > 10000){
+                			if(soberTime > 10000+levelMod){
                 				soberTime = 0;
                 				((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
                 				player.setEntityHealth(0);
