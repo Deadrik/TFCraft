@@ -128,6 +128,11 @@ public class ItemAlcohol extends ItemTerra
                 			if(rand.nextInt(2)==0){
                     			player.addPotionEffect(new PotionEffect(15,time,4));
                     		}
+                			if(soberTime >8000){
+                    			if(rand.nextInt(10)==0){
+                        			player.addPotionEffect(new PotionEffect(20,time,4));
+                        		}
+                			}
                 			if(soberTime > 10000){
                 				soberTime = 0;
                 				((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
