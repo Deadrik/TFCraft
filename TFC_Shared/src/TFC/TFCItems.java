@@ -22,6 +22,7 @@ import TFC.Core.Recipes;
 import TFC.Core.TFC_Settings;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
+import TFC.Items.ItemAlcohol;
 import TFC.Items.ItemBellows;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemClay;
@@ -878,6 +879,12 @@ public class TFCItems
     public static Item muttonCooked;
     public static Item FlatLeather;
     public static Item Beer;
+    public static Item Cider;
+    public static Item Rum;
+    public static Item RyeWhiskey;
+    public static Item Sake;
+    public static Item Vodka;
+    public static Item Whiskey;
 
     public static Item PotteryJug;
     public static Item PotteryPot;
@@ -1582,6 +1589,14 @@ public class TFCItems
 		DoorWillow = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWillow", num++), 14).setUnlocalizedName("Willow Door");
 		DoorKapok = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorKapok", num++), 15).setUnlocalizedName("Kapok Door");
 		
+		Beer = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Beer",num++)).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
+        Cider = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Cider",num++)).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);
+        Rum = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Rum",num++)).setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);
+        RyeWhiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","RyeWhiskey",num++)).setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);
+        Sake = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Sake",num++)).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
+        Vodka = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Vodka",num++)).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
+        Whiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Whiskey",num++)).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
+		
 		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
 		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++),"Fix Me I'm Broken").setUnlocalizedName("book");
 		WoolYarn = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolYarn", num++)).setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1601,16 +1616,17 @@ public class TFCItems
 		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++)).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
 		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++)).setFolder("food/").setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
-        FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
+        FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
         TerraLeather = new ItemLeather(TFC_Settings.getIntFor(config,"item","TFCLeather",num++)).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
-        Straw = new ItemTerra(TFC_Settings.getIntFor(config,"items","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
-        FlatClay = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"items","FlatClay",num++)).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark"}).setUnlocalizedName(""));
+        
+        Straw = new ItemTerra(TFC_Settings.getIntFor(config,"item","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
+        FlatClay = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatClay",num++)).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark"}).setUnlocalizedName(""));
         Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setUnlocalizedName("clay").setCreativeTab(CreativeTabs.tabMaterials);
         
-        PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"items","PotteryJug",num++)).setUnlocalizedName("Jug");
+        PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"item","PotteryJug",num++)).setUnlocalizedName("Jug");
         PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
         PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
-        PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"items","PotteryPot",num++)).setUnlocalizedName("Pot");
+        PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"item","PotteryPot",num++)).setUnlocalizedName("Pot");
         CeramicMold = new ItemPotteryBase(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
         
         ClayMoldAxe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldAxe",num++)).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
@@ -1638,7 +1654,8 @@ public class TFCItems
         ClayMoldSword = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldSword",num++)).setMetaNames(new String[]{"Clay Mold Sword","Ceramic Mold Sword",
         		"Ceramic Mold Sword Copper","Ceramic Mold Sword Bronze","Ceramic Mold Sword Bismuth Bronze","Ceramic Mold Sword Black Bronze"}).setUnlocalizedName("Sword Mold");
         
-		/**Plans*/
+		
+        /**Plans*/
         num = 20000;
         SetupPlans(num);
         

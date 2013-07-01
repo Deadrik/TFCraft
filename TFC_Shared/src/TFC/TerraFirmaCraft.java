@@ -20,6 +20,7 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
+import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
@@ -143,6 +144,9 @@ public class TerraFirmaCraft
 
 		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
+		
+		// Register Chat Listener
+		NetworkRegistry.instance().registerChatListener(new ChatListenerTFC());
 
 		// Register Packet Handler
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());

@@ -34,6 +34,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	private ItemStack output;
 	private boolean sealed;
 	private int sealtimecounter;
+	public int[] alcohols;
 	public final int SEALTIME = TFC_Settings.enableDebugMode?0:(int)((TFC_Time.hourLength*6)/100);//default 80
 
 	public TileEntityBarrel()
@@ -43,6 +44,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		sealed = false;
 		//itemstack = new ItemStack(1,0,0);
 		sealtimecounter = 0;
+		alcohols = new int[]{TFCItems.Beer.itemID,TFCItems.Cider.itemID,TFCItems.Vodka.itemID,TFCItems.Whiskey.itemID,
+				TFCItems.RyeWhiskey.itemID,TFCItems.Sake.itemID,TFCItems.Rum.itemID};
 	}
 	
 	public void careForInventorySlot()
@@ -417,6 +420,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack.stackSize-=1;
 					if(itemstack.stackSize==0)
 						itemstack=null;
+				}
+				if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize){
+					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+					itemstack.itemID = alcohols[Type-5];
 				}
 				updateGui();
 			}

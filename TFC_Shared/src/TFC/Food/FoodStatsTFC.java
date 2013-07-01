@@ -14,6 +14,7 @@ public class FoodStatsTFC
 {
 	/** The player's food level. This measures how much food the player can handle.*/
 	public float foodLevel = 100;
+	public long soberTime = 0;
 
 
 	/** The player's food saturation. This is how full the player is from the food that they've eaten.*/
@@ -66,7 +67,11 @@ public class FoodStatsTFC
 					this.foodLevel = Math.max(this.foodLevel - 2, 0);
 				}
 			}
-			
+			soberTime = player.getEntityData().hasKey("soberTime") ? player.getEntityData().getLong("soberTime") : 0;
+			if(soberTime > 0){
+				soberTime--;
+			}
+			player.getEntityData().setLong("soberTime", soberTime);
 			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
 			{
 				this.foodTimer += TFC_Time.hourLength;
