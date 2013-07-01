@@ -116,15 +116,15 @@ public class ItemAlcohol extends ItemTerra
             	int time = rand.nextInt(1000) + 400;
             	System.out.println(soberTime);
             	soberTime +=time;
-            	if(soberTime >2400){
+            	if(soberTime >3000){
             		if(rand.nextInt(4)==0){
             			player.addPotionEffect(new PotionEffect(9,time,4));
             		}
-            		if(soberTime >3000){
+            		if(soberTime >5000){
             			if(rand.nextInt(4)==0){
                 			player.addPotionEffect(new PotionEffect(18,time,4));
                 		}
-            			if(soberTime >4000){
+            			if(soberTime >7000){
                 			if(rand.nextInt(2)==0){
                     			player.addPotionEffect(new PotionEffect(15,time,4));
                     		}
