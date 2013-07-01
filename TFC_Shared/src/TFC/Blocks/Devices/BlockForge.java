@@ -16,6 +16,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemFirestarter;
 import TFC.TileEntities.TileEntityForge;
 
@@ -148,7 +149,8 @@ public class BlockForge extends BlockTerraContainer
 					(world.getBlockMaterial(x, y, z-1) == Material.rock && world.isBlockNormalCube(x, y, z-1));
 			
 			
-			boolean validSlabs = ItemFirestarter.checkIfSlabsAroundAreValid(world, x, y, z);	
+			boolean validSlabs = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
+					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);	
 					
 			if(!(rockXP && rockXN && rockZP && rockZN) || !validSlabs)	
 			{

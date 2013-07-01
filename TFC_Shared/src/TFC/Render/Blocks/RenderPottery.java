@@ -22,7 +22,7 @@ public class RenderPottery implements ISimpleBlockRenderingHandler
 		IBlockAccess blockAccess = renderer.blockAccess;
 		TileEntityPottery te = (TileEntityPottery) blockAccess.getBlockTileEntity(x, y, z);
 		
-		int meta = world.getBlockMetadata(x, y, z);
+		float meta = world.getBlockMetadata(x, y, z);
 		if(meta > 0)
 		{
 			renderer.setRenderBounds(0, 0, 0, 1, meta/15, 1);

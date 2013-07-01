@@ -116,7 +116,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 8);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getSouthChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getNorthChiselLevel(te.extraData) >= 8)
 					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;
@@ -128,7 +128,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 20);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getNorthChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getSouthChiselLevel(te.extraData) >= 8)
 					world.setBlock(x, y, z, 0);
 				else
 					te.extraData =  old2;

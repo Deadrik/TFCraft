@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
+import TFC.Reference;
 import TFC.TerraFirmaCraft;
 import TFC.API.INetworkTE;
 import TFC.Handlers.PacketHandler;
@@ -148,7 +149,7 @@ public abstract class NetworkTileEntity extends TileEntity implements INetworkTE
 	public Packet setupCustomPacketData(byte[] data, int length)
 	{
 		Packet250CustomPayload pkt=new Packet250CustomPayload();
-		pkt.channel="TerraFirmaCraft";
+		pkt.channel=Reference.ModChannel;
 		pkt.data = data;
 		pkt.length= length;
 		pkt.isChunkDataPacket=true;

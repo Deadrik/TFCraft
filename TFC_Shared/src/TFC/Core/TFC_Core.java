@@ -19,7 +19,9 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Enums.EnumWoodMaterial;
+import TFC.Blocks.BlockSlab;
 import TFC.Food.FoodStatsTFC;
+import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
@@ -472,5 +474,77 @@ public class TFC_Core
 	public static void setPlayerFoodStats(EntityPlayer player, FoodStatsTFC foodstats)
 	{
 		foodstats.writeNBT(player.getEntityData());
+	}
+	
+	public static boolean isNorthSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z-1))
+		{
+			return true;
+		}
+		else if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
+    		if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    		return true;
+    	}
+		return false;
+	}
+	
+	public static boolean isSouthSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x, y, z+1))
+		{
+			return true;
+		}
+		else if(world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
+    		if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    		return true;
+    	}
+		return false;
+	}
+	
+	public static boolean isEastSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x-1, y, z))
+		{
+			return true;
+		}
+		else if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
+    		if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    		return true;
+    	}
+		return false;
+	}
+	
+	public static boolean isWestSolid(World world, int x, int y, int z)
+	{
+		if(world.isBlockNormalCube(x+1, y, z))
+		{
+			return true;
+		}
+		else if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
+    	{
+    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
+    		if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
+    		{
+    			return false;
+    		}
+    		return true;
+    	}
+		return false;
 	}
 }

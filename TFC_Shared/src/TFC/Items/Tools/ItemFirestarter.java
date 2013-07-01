@@ -15,10 +15,9 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
-import TFC.Blocks.BlockSlab;
 import TFC.Core.Helper;
+import TFC.Core.TFC_Core;
 import TFC.Items.ItemTerra;
-import TFC.TileEntities.TileEntityPartial;
 import TFC.TileEntities.TileEntityPottery;
 
 public class ItemFirestarter extends ItemTerra
@@ -63,17 +62,12 @@ public class ItemFirestarter extends ItemTerra
             int z = objectMouseOver.blockZ;
             int side = objectMouseOver.sideHit;
             
-            boolean surroundSolids = world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
-							world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1);
-			
-			boolean rockXP = world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID || 
-					world.isBlockNormalCube(x+1, y, z);
-			boolean rockXN = world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID || 
-					world.isBlockNormalCube(x-1, y, z);
-			boolean rockZP = world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID || 
-					world.isBlockNormalCube(x, y, z+1);
-			boolean rockZN = world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID || 
-					world.isBlockNormalCube(x, y, z-1);
+            boolean surroundSolids = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
+					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);
+            boolean surroundSolidsUp1 = TFC_Core.isNorthSolid(world, x, y+1, z) && TFC_Core.isSouthSolid(world, x, y+1, z) && 
+					TFC_Core.isEastSolid(world, x, y+1, z) && TFC_Core.isWestSolid(world, x, y+1, z);
+			boolean surroundSolids2 = TFC_Core.isNorthSolid(world, x, y-1, z) && TFC_Core.isSouthSolid(world, x, y-1, z) && 
+					TFC_Core.isEastSolid(world, x, y-1, z) && TFC_Core.isWestSolid(world, x, y-1, z);
 
             if(side == 1 && world.isBlockNormalCube(x, y, z) && world.isBlockOpaqueCube(x, y, z) && 
                     world.getBlockMaterial(x, y, z) != Material.wood && world.getBlockMaterial(x, y, z) != Material.cloth &&
@@ -132,8 +126,7 @@ public class ItemFirestarter extends ItemTerra
                     else if(numcoal >= 7 && world.getBlockMaterial(x, y, z) == Material.rock && 
                             world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
                             world.getBlockMaterial(x, y+1, z+1) == Material.rock && world.getBlockMaterial(x, y+1, z-1) == Material.rock &&
-                            world.isBlockNormalCube(x, y, z) && ((world.isBlockNormalCube(x+1, y+1, z) && world.isBlockNormalCube(x-1, y+1, z) && 
-                            world.isBlockNormalCube(x, y+1, z+1) && world.isBlockNormalCube(x, y+1, z-1)) || (checkIfSlabsAroundAreValid(world, x, y+1, z))))
+                            world.isBlockNormalCube(x, y, z) && surroundSolidsUp1)
                     {
                         for (Iterator iterator = list.iterator(); iterator.hasNext();)
                         {
@@ -158,7 +151,7 @@ public class ItemFirestarter extends ItemTerra
             	if(world.getBlockMaterial(x, y-1, z) == Material.rock && 
                             world.getBlockMaterial(x+1, y, z) == Material.rock && world.getBlockMaterial(x-1, y, z) == Material.rock && 
                             world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
-                            world.isBlockNormalCube(x, y-1, z) && (surroundSolids || (checkIfSlabsAroundAreValid(world, x, y, z))))
+                            world.isBlockNormalCube(x, y-1, z) && surroundSolids)
             	{
             		int chance = new Random().nextInt(100);
                     if(chance > 70)
@@ -170,7 +163,7 @@ public class ItemFirestarter extends ItemTerra
             }
             else if(world.getBlockId(x, y, z) == TFCBlocks.LogPile.blockID)
             {
-            	if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && (surroundSolids || (checkIfSlabsAroundAreValid(world, x, y, z))))
+            	if(world.getBlockId(x, y-1, z) == TFCBlocks.Pottery.blockID && surroundSolids && surroundSolids2)
             	{
             		int chance = new Random().nextInt(100);
                     if(chance > 70)
@@ -183,42 +176,5 @@ public class ItemFirestarter extends ItemTerra
             return false;
         }
         return false;
-    }
-    
-    public static boolean checkIfSlabsAroundAreValid(World world, int x, int y, int z)
-    {
-    	if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
-    		if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    	}
-    	if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
-    		if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    	}
-    	if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
-    		if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    	}
-    	if(world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
-    		if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    	}
-    	return true;
     }
 }

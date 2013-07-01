@@ -20,6 +20,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
+import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.INetworkTE;
@@ -370,7 +371,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeByte(type);
 				dos.close();
 
-				pkt.channel="TerraFirmaCraft";
+				pkt.channel=Reference.ModChannel;
 				pkt.data=bos.toByteArray();
 				pkt.length=bos.size();
 				pkt.isChunkDataPacket=false;

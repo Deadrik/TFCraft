@@ -28,50 +28,52 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 {
 	public ItemStack inventory[];
 	public boolean hasRack;
-	public boolean isBurning;
-	public long burnCompleteTime;
+	public int logsForBurn;
+	public long burnStart;
 
 	public TileEntityPottery()
 	{
 		inventory = new ItemStack[4];
 		hasRack = false;
-		isBurning = false;
+		logsForBurn = 0;
 	}
 
 	@Override
 	public void updateEntity()
 	{        
-		if(!worldObj.isRemote && isBurning)
-		{
+		//If there are no logs for burning then we dont need to tick at all
+		if(!worldObj.isRemote && logsForBurn > 0)
+		{			
+			//Check for any Logs that may have been thrown in the fire and add them to the fuel supply
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord+1, zCoord, xCoord+1, yCoord+2, zCoord+1));
 			if(list != null && !list.isEmpty())
 			{
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
-                {
-                    EntityItem entity = (EntityItem)iterator.next();
-                    if(entity.getEntityItem().itemID == TFCItems.Logs.itemID)
-                    {
-                    	int ratio = TFC_Settings.pitKilnBurnTime / 16;
-                    	burnCompleteTime += ratio;
-                    }
-                }
+				{
+					EntityItem entity = (EntityItem)iterator.next();
+					if(entity.getEntityItem().itemID == TFCItems.Logs.itemID)
+					{
+						logsForBurn += entity.getEntityItem().stackSize;
+					}
+				}
 			}
-			
+
 			int blockAboveID = worldObj.getBlockId(xCoord, yCoord+1, zCoord);
-			//First we make sure to keep the fire going throughout the length of the burn
-			if(blockAboveID != Block.fire.blockID)
+			//Make sure to keep the fire going throughout the length of the burn
+			if(blockAboveID != Block.fire.blockID && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFC_Settings.pitKilnBurnTime)
 			{
 				if(blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn())
 					worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
 				else
-					isBurning = false;
+					logsForBurn = 0;
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
-			if(TFC_Time.getTotalTicks() >= burnCompleteTime)
+			if(logsForBurn > 0 && blockAboveID == Block.fire.blockID && 
+					TFC_Time.getTotalTicks() > burnStart + (TFC_Settings.pitKilnBurnTime * TFC_Time.hourLength))
 			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
-				isBurning = false;
+				worldObj.setBlock(xCoord, yCoord+1, zCoord, 0);
 				if(inventory[0] != null)
 					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0));
 				if(inventory[1] != null)
@@ -80,27 +82,31 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 					inventory[2] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[2], 0));
 				if(inventory[3] != null)
 					inventory[3] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[3], 0));
+
+				logsForBurn = 0;
 				
 				broadcastPacketInRange(createUpdatePacket());
 			}
-			
-			
+
+
 		}
 	}	
-	
+
 	public void StartPitFire()
 	{
-		TileEntityLogPile telp = (TileEntityLogPile) worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
-		int count = telp.getNumberOfLogs();
-		telp.clearContents();
-		worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
-		
-		isBurning = true;
-		
-		int ratio = TFC_Settings.pitKilnBurnTime / 16;
-		
-		int burnLength = (int) (TFC_Time.hourLength * (count == 16 ? TFC_Settings.pitKilnBurnTime : ratio*count));
-    	burnCompleteTime = TFC_Time.getTotalTicks() + burnLength;
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		if(meta == 15)
+		{
+			TileEntityLogPile telp = (TileEntityLogPile) worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
+			logsForBurn = telp.getNumberOfLogs();
+			telp.clearContents();
+			worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
+
+			int ratio = TFC_Settings.pitKilnBurnTime / 16;
+
+			int burnLength = (int) (TFC_Time.hourLength * (logsForBurn == 16 ? TFC_Settings.pitKilnBurnTime : ratio * logsForBurn));
+			burnStart = TFC_Time.getTotalTicks();
+		}
 	}
 
 	@Override
@@ -112,33 +118,33 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			itemstack.stackSize = getInventoryStackLimit();
 		}
 	}
-	
+
 	public void ejectItem(int index)
-    {
-    	float f3 = 0.05F;
-        EntityItem entityitem;
-        Random rand = new Random();
-        float f = rand.nextFloat() * 0.8F + 0.1F;
-        float f1 = rand.nextFloat() * 0.2F + 0.1F;
-        float f2 = rand.nextFloat() * 0.8F + 0.1F;
-        
-    	if(inventory[index] != null)
-        {
-            entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-            		inventory[index]);
-            entityitem.motionX = (float)rand.nextGaussian() * f3;
-            entityitem.motionY = 0;
-            entityitem.motionZ = (float)rand.nextGaussian() * f3;
-            worldObj.spawnEntityInWorld(entityitem);
-            inventory[index] = null;
-        }
-    	
-    	if(inventory[0] == null && inventory[1] == null && inventory[2] == null && inventory[3] == null)
-    	{
-    		worldObj.setBlock(xCoord, yCoord, zCoord, 0);
-    	}
-    }
-	
+	{
+		float f3 = 0.05F;
+		EntityItem entityitem;
+		Random rand = new Random();
+		float f = rand.nextFloat() * 0.8F + 0.1F;
+		float f1 = rand.nextFloat() * 0.2F + 0.1F;
+		float f2 = rand.nextFloat() * 0.8F + 0.1F;
+
+		if(inventory[index] != null)
+		{
+			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
+					inventory[index]);
+			entityitem.motionX = (float)rand.nextGaussian() * f3;
+			entityitem.motionY = 0;
+			entityitem.motionZ = (float)rand.nextGaussian() * f3;
+			worldObj.spawnEntityInWorld(entityitem);
+			inventory[index] = null;
+		}
+
+		if(inventory[0] == null && inventory[1] == null && inventory[2] == null && inventory[3] == null)
+		{
+			worldObj.setBlock(xCoord, yCoord, zCoord, 0);
+		}
+	}
+
 	public Packet createUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -244,10 +250,10 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		}
 
 		nbttagcompound.setTag("Items", nbttaglist);
-		
-		nbttagcompound.setLong("burnCompleteTime", burnCompleteTime);
+
+		nbttagcompound.setLong("burnStart", burnStart);
 		nbttagcompound.setBoolean("hasRack", hasRack);
-		nbttagcompound.setBoolean("isBurning", isBurning);
+		nbttagcompound.setInteger("logsForBurn", logsForBurn);
 	}
 
 	@Override
@@ -266,8 +272,8 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				inventory[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
-		burnCompleteTime = nbt.getLong("burnCompleteTime");
-		isBurning = nbt.getBoolean("isBurning");
+		burnStart = nbt.getLong("burnStart");
+		logsForBurn = nbt.getInteger("logsForBurn");
 		hasRack = nbt.getBoolean("hasRack");
 	}
 
@@ -328,9 +334,9 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		int inv2d = inStream.readInt();
 		int inv3 = inStream.readInt();
 		int inv3d = inStream.readInt();
-		
+
 		hasRack = inStream.readBoolean();
-		
+
 		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
 		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
 		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
@@ -387,9 +393,9 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		int inv2d = inStream.readInt();
 		int inv3 = inStream.readInt();
 		int inv3d = inStream.readInt();
-		
+
 		hasRack = inStream.readBoolean();
-		
+
 		inventory[0] = inv0 != 0 ? new ItemStack(inv0, 1, inv0d) : null;
 		inventory[1] = inv1 != 0 ? new ItemStack(inv1, 1, inv1d) : null;
 		inventory[2] = inv2 != 0 ? new ItemStack(inv2, 1, inv2d) : null;
