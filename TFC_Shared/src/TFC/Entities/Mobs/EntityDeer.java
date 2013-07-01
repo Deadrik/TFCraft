@@ -34,13 +34,13 @@ public class EntityDeer extends EntityAnimalTFC
     {
         super(par1World);
         running = false;
-        this.texture = "/mods/TerraFirmaCraft/mob/blah.png";
+        this.texture = "/mods/TFC/mob/deer.png";
         this.setSize(0.9F, 1.3F);
         float var2 = 0.23F / 1.1F;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        //this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
+        this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
         //this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
         //this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
         this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8.0F, 0.5F, 0.7F));
@@ -57,7 +57,7 @@ public class EntityDeer extends EntityAnimalTFC
 	{
     	super(par1World,mother,F_size);
     	running = false;
-        this.texture = "/mods/TerraFirmaCraft/mob/deer.png";
+        this.texture = "/mods/TFC/mob/deer.png";
         this.setSize(0.9F, 1.3F);
         float var2 = 0.23F / 1.1F;
         this.getNavigator().setAvoidsWater(true);
@@ -107,15 +107,15 @@ public class EntityDeer extends EntityAnimalTFC
     public void onLivingUpdate()
     {
         int g = getGrowingAge();
-        float t = (1.0F-(g/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+        float t = (1.0F-(g/(adultAge * -TFC_Settings.dayLength)));
         if(g <= (-12000*adultAge)){
-        	this.texture = "/mods/TerraFirmaCraft/mob/deer_fawn.png";
+        	this.texture = "/mods/TFC/mob/deer_fawn.png";
         }
         else{
-        	this.texture = "/mods/TerraFirmaCraft/mob/blah.png";
+        	this.texture = "/mods/TFC/mob/deer.png";
         }
         if(pregnant){
-			if(TFC_Time.getTotalTicks() >= conception + TFC_Time.getYearRatio() * pregnancyTime * TFC_Settings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime * TFC_Settings.dayLength){
 				EntityDeer baby = new EntityDeer(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;

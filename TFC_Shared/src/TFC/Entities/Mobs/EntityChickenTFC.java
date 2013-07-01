@@ -90,11 +90,21 @@ public class EntityChickenTFC extends EntityAnimalTFC
     {
         super.onLivingUpdate();
         
+        float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
         float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
         
         this.field_756_e = this.field_752_b;
         this.field_757_d = this.destPos;
         this.destPos = (float)(this.destPos + (this.onGround ? -1 : 4) * 0.3D);
+        if(getGrowingAge() <= (-12000*adultAge)){
+        	this.texture = "/mods/TFC/mob/chick.png";
+        }
+        else if(sex == 0){
+        	this.texture = "/mods/TFC/mob/rooster.png";
+        }
+        else{
+        	this.texture = "/mob/chicken.png";
+        }
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(4) + 9;
@@ -130,7 +140,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
 
         this.field_752_b += this.field_755_h * 2.0F;
 
-        if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
+        if (ageMod==1&&sex==1 && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
             this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(Item.egg.itemID, 1);
@@ -205,12 +215,15 @@ public class EntityChickenTFC extends EntityAnimalTFC
     protected void dropFewItems(boolean par1, int par2)
     {
         int var3 = 1;
+        
+        float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
 
         for (int var4 = 0; var4 < var3; ++var4)
         {
-            this.dropItem(Item.feather.itemID,(int) (this.size_mod * (5+this.rand.nextInt(10))));
+            this.dropItem(Item.feather.itemID,(int) (ageMod*this.size_mod * (5+this.rand.nextInt(10))));
         }
 
+        if(ageMod > 0.9){
         if (this.isBurning())
         {
             this.dropItem(Item.chickenCooked.itemID, 1);
@@ -218,6 +231,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
         else
         {
             this.dropItem(Item.chickenRaw.itemID, 1);
+        }
         }
     }
 

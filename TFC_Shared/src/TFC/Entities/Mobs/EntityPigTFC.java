@@ -28,7 +28,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     public EntityPigTFC(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/pig.png";
+        this.texture = "/mods/TFC/mob/pig.png";
         this.setSize(0.9F, 0.9F);
         this.getNavigator().setAvoidsWater(true);
         float var2 = 0.25F;
@@ -46,7 +46,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     public EntityPigTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
     	super(par1World,mother,F_size);
-    	this.texture = "/mob/pig.png";
+    	this.texture = "/mods/TFC/mob/pig.png";
         this.setSize(0.9F, 0.9F);
         this.getNavigator().setAvoidsWater(true);
         float var2 = 0.25F;
@@ -78,7 +78,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     public void onLivingUpdate ()
     {
         super.onLivingUpdate ();
-        float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+        float t = (1.0F-(getGrowingAge()/(adultAge * -TFC_Settings.dayLength)));
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(5) + 8;
@@ -179,10 +179,13 @@ public class EntityPigTFC extends EntityAnimalTFC
     {
         int var3 = 1;
         int var4;
-
+        float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+        
         for (var4 = 0; var4 < var3; ++var4)
         {
+        	if(ageMod > 0.9){
             this.dropItem(TFCItems.Hide.itemID,1);
+        	}
         }
 
         var3 = 1;
@@ -192,11 +195,11 @@ public class EntityPigTFC extends EntityAnimalTFC
             if (this.isBurning())
             {
                 
-                this.dropItem(Item.porkCooked.itemID, (int) (this.size_mod *(10+this.rand.nextInt(8))));
+                this.dropItem(Item.porkCooked.itemID, (int) (ageMod*this.size_mod *(10+this.rand.nextInt(8))));
             }
             else
             {
-                this.dropItem(Item.porkRaw.itemID, (int) (this.size_mod *(10+this.rand.nextInt(8))));
+                this.dropItem(Item.porkRaw.itemID, (int) (ageMod*this.size_mod *(10+this.rand.nextInt(8))));
             }
         }
     }

@@ -174,7 +174,7 @@ public class BlockBarrel extends BlockTerraContainer
 		}
 		private void explode()
 		{
-			float f = 8.0F;
+			float f = 16.0F;
 			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
 			setDead();
 		}

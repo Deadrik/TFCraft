@@ -1,36 +1,8 @@
 package TFC.Render;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+
 import org.lwjgl.opengl.GL11;
 
 import TFC.Entities.Mobs.EntityDeer;
@@ -51,7 +23,7 @@ public class RenderDeer extends RenderLivingTFC
     public void renderDeer (EntityDeer par1EntityDeer, double par2, double par4, double par6, float par8, float par9)
     {
 	super.doRenderLiving (par1EntityDeer, par2, par4, par6, par8, par9);
-	scale = 0.5F + par1EntityDeer.size_mod;
+	scale = par1EntityDeer.size_mod;
     }
 
 
@@ -64,7 +36,8 @@ public class RenderDeer extends RenderLivingTFC
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback (EntityLiving par1EntityLiving, float par2)
+    @Override
+	protected void preRenderCallback (EntityLiving par1EntityLiving, float par2)
     {
 	preRenderScale ((EntityDeer) par1EntityLiving, par2);
 	func_25006_b ((EntityDeer) par1EntityLiving, par2);
@@ -72,20 +45,22 @@ public class RenderDeer extends RenderLivingTFC
 
     protected void preRenderScale (EntityDeer par1EntityDeer, float par2)
     {
-	GL11.glScalef (par1EntityDeer.size_mod,par1EntityDeer.size_mod,par1EntityDeer.size_mod);
+	GL11.glScalef (par1EntityDeer.size_mod-0.3f,par1EntityDeer.size_mod-0.3f,par1EntityDeer.size_mod-0.3f);
     }
 
 
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    protected float handleRotationFloat (EntityLiving par1EntityLiving, float par2)
+    @Override
+	protected float handleRotationFloat (EntityLiving par1EntityLiving, float par2)
     {
 	return 1.0f;
     }
 
 
-    public void doRenderLiving (EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void doRenderLiving (EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
     {
 	renderDeer ((EntityDeer) par1EntityLiving, par2, par4, par6, par8, par9);
     }
@@ -97,7 +72,8 @@ public class RenderDeer extends RenderLivingTFC
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender (Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void doRender (Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
 	renderDeer ((EntityDeer) par1Entity, par2, par4, par6, par8, par9);
     }

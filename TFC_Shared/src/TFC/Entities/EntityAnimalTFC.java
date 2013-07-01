@@ -2,47 +2,23 @@ package TFC.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import TFC.*;
-import TFC.Core.TFC_Time;
-import TFC.Core.TFC_Settings;
-import TFC.Entities.AI.EntityAIFollowParentTFC;
-import TFC.Entities.AI.EntityAIMoveTowardsFood;
-import TFC.Entities.AI.EntityAITargetTFC;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import TFC.TFCItems;
+import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
+import TFC.Entities.AI.EntityAITargetTFC;
 
 public class EntityAnimalTFC extends EntityAnimal
 {
@@ -52,7 +28,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	public long animalID;
 	public boolean mateForLife;
 	public int panic;
-	public int degreeOfDiversion = 2;
+	public int degreeOfDiversion = 1;
 	public EntityAnimalTFC mate;
 	public EntityAnimalTFC parent;
 	public int pregnancyTime;
@@ -75,7 +51,7 @@ public class EntityAnimalTFC extends EntityAnimal
 
 	public int breeding;
 
-	protected long adultTime;
+	public long adultTime;
 	protected long birthTime;
 
 	public EntityAnimalTFC(World par1World)
@@ -101,7 +77,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		//tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
 		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
 		//tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
-		size_mod = (float) (((rand.nextInt (degreeOfDiversion) - 2) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime;
@@ -130,12 +106,27 @@ public class EntityAnimalTFC extends EntityAnimal
 		//tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
 		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
 		//tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
-		size_mod = (float) (((rand.nextInt (getDegree()+1) - getDegree()/2) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
+		size_mod = (((rand.nextInt (getDegree()+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
+		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime + TFC_Settings.dayLength * adultAge;
-		System.out.println(adultTime);
-		System.out.println(TFC_Time.getTotalTicks()-adultTime);
+	}
+	
+	@Override
+	protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(30, new Integer(0));
+        this.dataWatcher.addObject(31, new Integer(0));
+    }
+	
+	public int getSex(){
+		return this.dataWatcher.getWatchableObjectInt(30);
+	}
+	
+	public float getSize(){
+		return this.dataWatcher.getWatchableObjectInt(31)/10f;
 	}
 
 	@Override
@@ -145,6 +136,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
 
+	@Override
 	public void setDead(){
 		for (int i = 0; i < children.size();i++){
 			children.get(i).parent = null;
@@ -167,7 +159,7 @@ public class EntityAnimalTFC extends EntityAnimal
 				((EntityAnimalTFC)getAttackTarget()).ruttVictor = true;
 			}
 		}
-		if (isChild() && parent.children.contains(this) && par1DamageSource.getEntity() instanceof EntityLiving){
+		if (getGrowingAge()<0 && parent.children.contains(this) && par1DamageSource.getEntity() instanceof EntityLiving){
 			parent.setAttackTarget((EntityLiving)par1DamageSource.getEntity());
 		}
 		return super.attackEntityFrom(par1DamageSource, par2);
@@ -183,6 +175,15 @@ public class EntityAnimalTFC extends EntityAnimal
 		if (hunger > 0)
 		{
 			hunger--;
+		}
+		
+		if(!this.worldObj.isRemote){
+			this.dataWatcher.updateObject(30, Integer.valueOf(sex));
+			this.dataWatcher.updateObject(31, Integer.valueOf((int)(size_mod*10)));
+		}
+		else{
+			sex = this.dataWatcher.getWatchableObjectInt(30);
+			size_mod = this.dataWatcher.getWatchableObjectInt(31)/10f;
 		}
 		/**
 		 * This Cancels out the growingAge from EntityAgeable
@@ -232,7 +233,7 @@ public class EntityAnimalTFC extends EntityAnimal
 				double var2 = this.rand.nextGaussian() * 0.02D;
 				double var4 = this.rand.nextGaussian() * 0.02D;
 				double var6 = this.rand.nextGaussian() * 0.02D;
-				this.worldObj.spawnParticle(heart, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var2, var4, var6);
+				this.worldObj.spawnParticle(heart, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var2, var4, var6);
 			}
 		}
 		else
@@ -257,7 +258,7 @@ public class EntityAnimalTFC extends EntityAnimal
 					renderBrokenItemStack (item);
 					item = null;
 					hunger += 24000;
-					worldObj.playSoundAtEntity (this, "random.eat", 0.5F + 0.5F * (float) rand.nextInt (2), (rand.nextFloat () - rand.nextFloat ()) * 0.2F + 1.0F);
+					worldObj.playSoundAtEntity (this, "random.eat", 0.5F + 0.5F * rand.nextInt (2), (rand.nextFloat () - rand.nextFloat ()) * 0.2F + 1.0F);
 				}
 			}
 		}
@@ -279,11 +280,11 @@ public class EntityAnimalTFC extends EntityAnimal
 			}
 		}
 
-		if(TFC_Time.getTotalTicks() > (birthTime + TFC_Time.getYearRatio()*adultAge*TFC_Settings.dayLength)){
+		if(TFC_Time.getTotalTicks() > (birthTime + adultAge*TFC_Settings.dayLength)){
 			setGrowingAge(0);
 		}
-		else if (isChild()){
-			setGrowingAge((int)(TFC_Time.getTotalTicks() - (birthTime + TFC_Time.getYearRatio()*adultAge*TFC_Settings.dayLength)));
+		else if (getGrowingAge()<0F){
+			setGrowingAge((int)(TFC_Time.getTotalTicks() - (birthTime + adultAge*TFC_Settings.dayLength)));
 		}
 	}
 
@@ -314,11 +315,17 @@ public class EntityAnimalTFC extends EntityAnimal
 		return false;
 	}
 
+	@Override
 	public void applyEntityCollision(Entity par1Entity){
 		super.applyEntityCollision(par1Entity);
 		if (par1Entity instanceof EntityItem){
 			boolean y = wantsItem(((EntityItem)par1Entity).getEntityItem());
 		}
+	}
+	
+	@Override
+	public boolean isChild(){
+		return false;
 	}
 
 	@Override
@@ -336,6 +343,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
+	@Override
 	public void writeEntityToNBT (NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT (par1NBTTagCompound);
@@ -358,7 +366,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		{
 			par1NBTTagCompound.setLong ("Mate number", -1);
 		}
-		if (isChild ()&& parent != null)
+		if (getGrowingAge()<0&& parent != null)
 		{
 			par1NBTTagCompound.setLong ("Parent", parent.animalID);
 		}
@@ -374,6 +382,7 @@ public class EntityAnimalTFC extends EntityAnimal
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
+	@Override
 	public void readEntityFromNBT (NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT (par1NBTTagCompound);
@@ -419,7 +428,7 @@ public class EntityAnimalTFC extends EntityAnimal
 				}
 			}
 		}
-		if (isChild () && par1NBTTagCompound.getLong ("Parent") != -1)
+		if (getGrowingAge()<0 && par1NBTTagCompound.getLong ("Parent") != -1)
 		{
 			i = par1NBTTagCompound.getLong ("Parent");
 			for (int j = 0 ; j < worldObj.loadedEntityList.size () ; j++)
@@ -494,18 +503,20 @@ public class EntityAnimalTFC extends EntityAnimal
 		entityanimal.renderYawOffset = entityanimal.rotationYaw;
 		entityanimal.initCreature();
 		worldObj.spawnEntityInWorld(entityanimal);
-		entityanimal.setGrowingAge((int) (entityanimal.adultAge * -TFC_Settings.dayLength));
+		entityanimal.setGrowingAge(entityanimal.adultAge * -TFC_Settings.dayLength);
 		//if(worldObj.spawnEntityInWorld (entityanimal)){
 		//	children.add(entityanimal);
 		//}
 		
 	}
 
+	@Override
 	public void eatGrassBonus()
 	{
 		hunger+=24000;
 	}
 
+	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
 		if(!par1EntityPlayer.worldObj.isRemote){
@@ -518,7 +529,6 @@ public class EntityAnimalTFC extends EntityAnimal
 					par1EntityPlayer.addChatMessage("Pregnant");
 				}
 			}
-			par1EntityPlayer.addChatMessage(getGrowingAge()+"");
 		}
 		return super.interact(par1EntityPlayer);
 	}

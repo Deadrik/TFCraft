@@ -139,14 +139,20 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     protected void dropFewItems(boolean par1, int par2)
     {
+    	float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+    	if(ageMod > 0.9){
         if (!this.getSheared())
         {
             this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
         }
+        else{
+        	this.dropItem(TFCItems.Hide.itemID,1);
+        }
+    	}
         if (this.isBurning()) {
-        	this.dropItem(TFCItems.muttonCooked.itemID,(5+rand.nextInt(5)));
+        	this.dropItem(TFCItems.muttonCooked.itemID,(int)(size_mod*ageMod*(5+rand.nextInt(5))));
         } else {
-        	this.dropItem(TFCItems.muttonRaw.itemID,(5+rand.nextInt(5)));
+        	this.dropItem(TFCItems.muttonRaw.itemID,(int)(size_mod*ageMod*(5+rand.nextInt(5))));
         }
     }
 
@@ -319,7 +325,8 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     public boolean isShearable(ItemStack item, World world, int X, int Y, int Z) 
     {
-        return !getSheared() && !isChild();
+    	float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+        return !getSheared() && ageMod > 0.9;
     }
 
     @Override

@@ -5,42 +5,16 @@
 // - ZeuX
 package TFC.Render.Models;
 
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
 import org.lwjgl.opengl.GL11;
 
-import TFC.*;
+import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Time;
+import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.Mobs.EntityDeer;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 public class ModelDeer extends ModelBaseTFC
 {
 	//fields
@@ -363,66 +337,74 @@ public class ModelDeer extends ModelBaseTFC
 		Antler21.addChild(Antler23);
 		Antler11.addChild(Antler14);
 		Antler21.addChild(Antler24);
-		Antler12.showModel = false;
-		Antler22.showModel = false;
-		Antler13.showModel = false;
-		Antler23.showModel = false;
-		Antler14.showModel = false;
-		Antler24.showModel = false;
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		running = false;
 		running = ((EntityDeer)entity).getRunning();
-		Antler12.showModel = false;
-		Antler22.showModel = false;
-		Antler13.showModel = false;
-		Antler23.showModel = false;
-		Antler14.showModel = false;
-		Antler24.showModel = false;
-		if (this.isChild)
+		age = 0;
+        long tempAge = 0;
+        if (entity instanceof EntityAnimalTFC){
+        	tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
+        	if(tempAge < 0)
+        	age = (-1F)*tempAge / (((EntityAnimalTFC)entity).adultAge * TFC_Settings.dayLength);
+        }
+		if (true)
 		{
-			float aa =  2F - (1.0F - age);			
+			float aa =  2F - (1.0F - age);
+			GL11.glTranslatef (0.0F, -6F * f5 * age/(float)Math.pow(aa,0.4),0);
 			GL11.glPushMatrix ();
 			float ab = (float)Math.sqrt(1.0F / aa);
 			GL11.glScalef(ab, ab, ab);
-			GL11.glTranslatef (0.0F, 24F * f5 * age/(float)Math.pow(aa,0.4),2F*f5*age/ab);
-			if (sex == 0){
-				if ((1.0F - age)>=0.7F){
-					Antler11.render(f5);					
-					Antler21.render(f5);
-					if ((1.0F - age)>=0.8F){
-						Antler12.showModel = true;
-						Antler22.showModel = true;
-						if ((1.0F - age)>=0.9F){
-							Antler13.showModel = true;
-							Antler23.showModel = true;
-							if ((1.0F - age)>=0.99F){
-								Antler14.showModel = true;
-								Antler24.showModel = true;
+			GL11.glTranslatef (0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4),2F*f5*age/ab);
+			if(((EntityAnimalTFC)entity).sex == 0){
+				if(aa <=1.75){
+					Antler11.isHidden = false;
+					Antler21.isHidden = false;
+					if(aa <=1.5){
+						Antler12.isHidden = false;
+						Antler22.isHidden = false;
+						if(aa <= 1.3){
+							Antler13.isHidden = false;
+							Antler23.isHidden = false;
+							if(aa <= 1.1){
+								Antler14.isHidden = false;
+								Antler24.isHidden = false;
 							}
 						}
 					}
 				}
 			}
+			Antler11.render(f5);
+			Antler21.render(f5);
 			head.render(f5);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			GL11.glScalef(1.0F / aa, ab, 1.0F / aa);
+			GL11.glTranslatef(0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4), 0.0F);
+			Thigh1.render(f5);
+			UpperLeg4.render(f5);
+			UpperLeg3.render(f5);
+			Thigh2.render(f5);
+			
 			//snout.render(f5);
 			//Ear2.render(f5);
 			//Ear1.render(f5);
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-			GL11.glTranslatef(0.0F, 24F * f5 * age, 0.0F);
+			GL11.glTranslatef(0.0F, 22F * f5 * age, 0.0F);
 			//hoof2.render(f5);
 			//Toes3.render(f5);
-			Thigh1.render(f5);
+			///Thigh1.render(f5);
 			//Calf2.render(f5);
 			Tail.render(f5);
 			Collar.render(f5);
-			UpperLeg4.render(f5);
+			///UpperLeg4.render(f5);
 			Neck.render(f5);
 			Rump.render(f5);
 			body.render(f5);
@@ -431,11 +413,11 @@ public class ModelDeer extends ModelBaseTFC
 			//leg3.render(f5);
 			//leg4.render(f5);
 			Torso.render(f5);
-			UpperLeg3.render(f5);
+			///UpperLeg3.render(f5);
 			//Calf1.render(f5);
 			//lowerleg3.render(f5);
 			//lowerleg4.render(f5);
-			Thigh2.render(f5);
+			///Thigh2.render(f5);
 			//Toes4.render(f5);
 			//Toes2.render(f5);
 			//Toes1.render(f5);
@@ -496,10 +478,19 @@ public class ModelDeer extends ModelBaseTFC
 		model.rotateAngleZ = z;
 	}
 
+	@Override
 	public void setRotationAngles (float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
 	super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
+	Antler11.isHidden = true;
+	Antler12.isHidden = true;
+	Antler13.isHidden = true;
+	Antler14.isHidden = true;
+	Antler21.isHidden = true;
+	Antler22.isHidden = true;
+	Antler23.isHidden = true;
+	Antler24.isHidden = true;
 		setRotation(Antler21,f4 / (180F / (float)Math.PI), f3 / (180F / (float)Math.PI), 0F);
 		setRotation(head,f4 / (180F / (float)Math.PI)+ 0.1570796F, f3 / (180F / (float)Math.PI), 0F);
 		setRotation(Antler11,f4 / (180F / (float)Math.PI), f3 / (180F / (float)Math.PI), 0F);

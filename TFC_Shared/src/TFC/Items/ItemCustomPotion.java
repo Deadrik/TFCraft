@@ -25,6 +25,7 @@ public class ItemCustomPotion extends ItemPotion
     {
         super(par1);
     }
+
     
     @Override
     public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)

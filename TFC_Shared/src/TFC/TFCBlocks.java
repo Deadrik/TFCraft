@@ -25,6 +25,7 @@ import TFC.Blocks.BlockSlab;
 import TFC.Blocks.BlockStair;
 import TFC.Blocks.BlockStalactite;
 import TFC.Blocks.BlockSulfur;
+import TFC.Blocks.BlockThatch;
 import TFC.Blocks.BlockWoodSupport;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBellows;
@@ -329,7 +330,7 @@ public class TFCBlocks
 		
 		GameRegistry.registerBlock(Flora, "Flora");
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
-		//GameRegistry.registerBlock(Thatch, "Thatch");
+		GameRegistry.registerBlock(Thatch, "thatch");
 	}
 	
 	public static void LoadBlocks()
@@ -513,8 +514,11 @@ public class TFCBlocks
 		}
 		
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
+		
+
 		int num = 2061;
 		TFCBlocks.Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", num++)).setUnlocalizedName("Barrel").setHardness(2);
+		TFCBlocks.Thatch =  new BlockThatch(TFC_Settings.getIntFor(config, "block", "thatch", num++)).setUnlocalizedName("Thatch").setHardness(1);
 		
 		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", num++)).setUnlocalizedName("Flora");
 		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", num++)).setUnlocalizedName("Pottery");
