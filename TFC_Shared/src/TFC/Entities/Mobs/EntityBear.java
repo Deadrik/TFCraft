@@ -26,7 +26,6 @@ import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.EntityTameableTFC;
-import TFC.Entities.AI.EntityAIHurtByTargetTFC;
 import TFC.Entities.AI.EntityAIPanicTFC;
 import TFC.Entities.AI.EntityAITargetNonTamedTFC;
 
@@ -48,7 +47,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public EntityBear (World par1World)
 	{
 		super (par1World);
-		texture = "/mods/TerraFirmaCraft/mob/Bear.png";
+		texture = "/mods/TFC/mob/Bear.png";
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.2F;
 		getNavigator ().setAvoidsWater (true);
@@ -66,7 +65,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntitySheepTFC.class, 16F, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPigTFC.class, 16F, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
-		targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, false));
+		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(2, new EntityAIPanicTFC(this,moveSpeed*1.5F,true,false));
 		fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
@@ -77,7 +76,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public EntityBear (World par1World, EntityAnimalTFC mother, float father_size)
 	{
 		super (par1World,mother,father_size);
-		texture = "/mods/TerraFirmaCraft/mob/Bear.png";
+		texture = "/mods/TFC/mob/Bear.png";
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.2F;
 		degreeOfDiversion = 4;
@@ -91,12 +90,12 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
-		targetTasks.addTask (3, new EntityAIHurtByTarget (this, true));
+		//targetTasks.addTask (3, new EntityAIHurtByTarget (this, true));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntitySheepTFC.class, 16F, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPigTFC.class, 16F, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
-		targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, true));
+		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(2, new EntityAIPanicTFC(this,moveSpeed*1.5F,true,false));
 		fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);

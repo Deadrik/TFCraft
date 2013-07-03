@@ -13,7 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import TFC.Core.TFC_Textures;
+import TFC.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,25 +26,21 @@ public class BlockThatch extends BlockTerra
 		super(par1, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
+		
 	}
 
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		//this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "wood/BarrelHoop");
+		this.blockIcon = iconRegisterer.registerIcon(Reference.ModID + ":" + "plants/Thatch");
 	}
 
 	@Override
 	public Icon getIcon(int side, int meta)
 	{
-		if(side == 0 || side == 1) 
-		{
-			return TFC_Textures.InvisibleTexture;
-		} 
-		else 
-		{
+		
 			return this.blockIcon;
-		}
+		
 	}
 
 	@Override

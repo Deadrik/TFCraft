@@ -2,44 +2,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import TFC.*;
-import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Core;
-import TFC.WorldGen.BiomeDecoratorTFC;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenLargeRock implements IWorldGenerator
 {
@@ -67,6 +35,7 @@ public class WorldGenLargeRock implements IWorldGenerator
 		height = h;
 	}
 
+	/*
 	public boolean generate(World world, Random rand, int i, int j, int k)
 	{
 		int yOffset = 0;
@@ -120,6 +89,105 @@ public class WorldGenLargeRock implements IWorldGenerator
 		}
 
 		return true;
+	}*/
+	public boolean generate(World world, Random rand, int i, int j, int k)
+	{
+		
+		int yOffset = 0;
+
+		boolean isFlatEnough = false;
+
+		for(; yOffset > -2 && !isFlatEnough; yOffset--)
+		{
+			if(world.isBlockNormalCube(i, j+yOffset, k))
+			{
+				if(world.isBlockNormalCube(i+1, j+yOffset, k) && world.isBlockNormalCube(i-1, j+yOffset, k) && 
+						world.isBlockNormalCube(i-1, j+yOffset, k) && world.isBlockNormalCube(i, j+yOffset, k+1))
+				{
+					isFlatEnough = true;
+				}
+			}
+		}
+
+		if(j <= 155)
+		{
+			int i2,j2,k2;
+			i2 = i+(rand.nextInt(2)+1)*(rand.nextBoolean()?1:-1);
+			j2 = j+(rand.nextInt(2)+1)*(rand.nextBoolean()?1:-1);
+			k2 = k+(rand.nextInt(2)+1)*(rand.nextBoolean()?1:-1);
+			genFromPoint(world,rand,i,j,k,yOffset);
+			genFromPoint(world,rand,i2,j2,k2,yOffset);
+			/*
+			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, 0);
+			Vec3 center = Vec3.createVectorHelper(i, j + yOffset, k);
+			for (int xCoord = i - xWidth; xCoord <= i + xWidth2; ++xCoord)
+			{
+				for (int zCoord = k - zWidth; zCoord <= k + zWidth2; ++zCoord)
+				{
+					for (int yCoord = j + yOffset - height; yCoord <= j + yOffset + height; ++yCoord)
+					{
+						Vec3 point = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
+						double distance = center.squareDistanceTo(point);
+						
+						boolean canPlaceX = true;
+						boolean canPlaceZ = true;
+						
+						if(xCoord < i && distance > xWidth * 3)
+							canPlaceX = false;
+						if(xCoord > i && distance > xWidth2 * 3)
+							canPlaceX = false;
+						if(zCoord < i && distance > zWidth * 3)
+							canPlaceZ = false;
+						if(zCoord > i && distance > zWidth2 * 3)
+							canPlaceZ = false;
+						
+						if(rand.nextInt(10) != 0 && canPlaceX && canPlaceZ)
+						{
+							world.setBlock(xCoord, yCoord, zCoord, rockLayer1.data1, rockLayer1.data2, 0x2);
+						}
+					}
+				}
+			}*/
+		}
+
+		return true;
+	}
+	
+	public void genFromPoint(World world, Random rand, int i, int j, int k,int yOffset){
+		DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(i, k, 0);
+		Vec3 center = Vec3.createVectorHelper(i, j + yOffset, k);
+		xWidth = 3;
+		xWidth2 = 3;
+		zWidth = 3;
+		zWidth2 = 3;
+		for (int xCoord = i - xWidth; xCoord <= i + xWidth2; ++xCoord)
+		{
+			for (int zCoord = k - zWidth; zCoord <= k + zWidth2; ++zCoord)
+			{
+				for (int yCoord = j + yOffset - height; yCoord <= j + yOffset + height; ++yCoord)
+				{
+					Vec3 point = Vec3.createVectorHelper(xCoord, yCoord, zCoord);
+					double distance = center.squareDistanceTo(point);
+					
+					boolean canPlaceX = true;
+					boolean canPlaceZ = true;
+					
+					if(xCoord < i && distance > xWidth * 4)
+						canPlaceX = false;
+					if(xCoord > i && distance > xWidth2 * 4)
+						canPlaceX = false;
+					if(zCoord < i && distance > zWidth * 4)
+						canPlaceZ = false;
+					if(zCoord > i && distance > zWidth2 * 4)
+						canPlaceZ = false;
+					
+					if(rand.nextInt(10)+1 != 0 && canPlaceX && canPlaceZ)
+					{
+						world.setBlock(xCoord, yCoord, zCoord, rockLayer1.data1, rockLayer1.data2, 0x2);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
