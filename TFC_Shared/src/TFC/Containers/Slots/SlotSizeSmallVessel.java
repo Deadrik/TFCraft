@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import TFC.API.IBag;
 import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
+import TFC.Items.ItemMeltedMetal;
+import TFC.Items.Pottery.ItemPotteryBase;
 
 public class SlotSizeSmallVessel extends Slot
 
@@ -19,7 +21,8 @@ public class SlotSizeSmallVessel extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
-		if(itemstack.getItem() instanceof IBag)
+		if(itemstack.getItem() instanceof IBag || itemstack.getItem() instanceof ItemMeltedMetal || 
+				itemstack.getItem() instanceof ItemPotteryBase)
 			return false;
 		
 		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize)
