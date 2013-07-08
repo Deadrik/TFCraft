@@ -26,7 +26,7 @@ public class BlockIgInCobble extends BlockCobble
 {
 	public BlockIgInCobble(int i, Material material) {
 		super(i, material);
-
+		fallInstantly = false;
         names = Global.STONE_IGIN;
 		icons = new Icon[names.length];
 	}

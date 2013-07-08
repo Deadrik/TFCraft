@@ -22,22 +22,17 @@ import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockIgExCobble extends BlockCobble
-{
-
-	public static boolean fallInstantly = false;
-
-	public BlockIgExCobble(int i, Material material) 
-	{
-        super(i, material);
-    	
-        names = Global.STONE_IGEX;
-    	icons = new Icon[names.length];
-    }
+public class BlockIgExCobble extends BlockCobble {
 	
+	public BlockIgExCobble(int i, Material material) {
+		super(i, material);
+		fallInstantly = false;
+		names = Global.STONE_IGEX;
+		icons = new Icon[names.length];
+	}
+
 	@Override
-	public int tickRate(World world)
-	{
+	public int tickRate(World world) {
 		return 3;
 	}
 }
