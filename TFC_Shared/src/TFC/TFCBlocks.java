@@ -519,14 +519,13 @@ public class TFCBlocks
 		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
 		
 
-		int num = 2061;
-		TFCBlocks.Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", num++)).setUnlocalizedName("Barrel").setHardness(2);
-		TFCBlocks.Thatch =  new BlockThatch(TFC_Settings.getIntFor(config, "block", "Thatch", num++)).setUnlocalizedName("Thatch").setHardness(1);
-		TFCBlocks.Moss =  new BlockMoss(TFC_Settings.getIntFor(config, "block", "Moss", num++)).setUnlocalizedName("Moss").setHardness(1);
+		TFCBlocks.Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", 2061)).setUnlocalizedName("Barrel").setHardness(2);
+		TFCBlocks.Thatch =  new BlockThatch(TFC_Settings.getIntFor(config, "block", "Thatch", 2062)).setUnlocalizedName("Thatch").setHardness(1);
+		TFCBlocks.Moss =  new BlockMoss(TFC_Settings.getIntFor(config, "block", "Moss", 2063)).setUnlocalizedName("Moss").setHardness(1);
 		
 		
-		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", num++)).setUnlocalizedName("Flora");
-		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", num++)).setUnlocalizedName("Pottery");
+		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", 2064)).setUnlocalizedName("Flora");
+		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

@@ -50,7 +50,7 @@ public class KilnCraftingManager
             }
         }
 
-        return null;
+        return recipe.input1;
     }
 
 	public List getRecipeList()

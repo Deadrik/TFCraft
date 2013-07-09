@@ -32,4 +32,9 @@ public enum EnumMetalType
 	{
 		MetalID = id;
 	}
+	
+	public static EnumMetalType fromID(int id)
+	{
+		return EnumMetalType.values()[id];
+	}
 }

@@ -57,6 +57,13 @@ public class HeatIndex
         outputMax = max;
         return this;
     }
+    
+    public HeatIndex setMinMax(int amt)
+    {
+        outputMin = amt;
+        outputMax = amt;
+        return this;
+    }
 
     public HeatIndex setMorph(ItemStack is)
     {
@@ -77,7 +84,7 @@ public class HeatIndex
             rand = outputMin + R.nextInt(outputMax - outputMin);
             return new ItemStack(getOutputItem(),output.stackSize, 100-rand);
         }
-        return new ItemStack(getOutputItem(),output.stackSize, 0);
+        else return new ItemStack(getOutputItem(),output.stackSize, outputMin);
     }
 
     public boolean matches(ItemStack is)

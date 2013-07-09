@@ -9,8 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.Reference;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.IMadeOfMetal;
+import TFC.API.Enums.EnumMetalType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
@@ -19,15 +20,24 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Util.StringUtil;
 
-public class ItemMeltedMetal extends ItemTerra
+public class ItemMeltedMetal extends ItemTerra implements IMadeOfMetal
 {
+	EnumMetalType metalType;
+	
 	public ItemMeltedMetal(int i) 
 	{
 		super(i);
 		setMaxDamage(100);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 		this.setFolder("ingots/");
+		metalType = EnumMetalType.WROUGHTIRON;
 	}	
+	
+	public ItemTerra setMetalType(EnumMetalType e)
+	{
+		metalType = e;
+		return this;
+	}
 
 	@Override
 	public void registerIcons(IconRegister registerer)
@@ -70,8 +80,8 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	
-		if(TFC_ItemHeat.getIsLiquid(is) && (is.getItem().itemID == TFCItems.CopperUnshaped.itemID || is.getItem().itemID == TFCItems.BronzeUnshaped.itemID ||
-				is.getItem().itemID == TFCItems.BlackBronzeUnshaped.itemID || is.getItem().itemID == TFCItems.BismuthBronzeUnshaped.itemID ))
+		if(TFC_ItemHeat.getIsLiquid(is) /*&& (is.getItem().itemID == TFCItems.CopperUnshaped.itemID || is.getItem().itemID == TFCItems.BronzeUnshaped.itemID ||
+				is.getItem().itemID == TFCItems.BlackBronzeUnshaped.itemID || is.getItem().itemID == TFCItems.BismuthBronzeUnshaped.itemID )*/)
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{
@@ -103,5 +113,17 @@ public class ItemMeltedMetal extends ItemTerra
 			entityplayer.openGui(TerraFirmaCraft.instance, 38, world, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
 		return itemstack;
+	}
+
+	@Override
+	public EnumMetalType GetMetalType(ItemStack is) {
+		// TODO Auto-generated method stub
+		return this.metalType;
+	}
+
+	@Override
+	public int GetMetalReturnAmount(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 100-is.getItemDamage();
 	}
 }

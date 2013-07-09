@@ -81,24 +81,6 @@ public class ContainerVessel extends ContainerTFC {
 					containerInv.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
 				containerInv.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
 
-				/*if(player.inventory.getStackInSlot(bagsSlotNum) == null)
-					player.inventory.setInventorySlotContents(bagsSlotNum, bagslot.getStackInSlot(0));
-				else if(!player.inventory.addItemStackToInventory(bagslot.getStackInSlot(0)))
-				{
-					EntityItem entityitem;
-					Random rand = new Random();
-					float f = rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = rand.nextFloat() * 2.0F + 0.4F;
-					float f2 = rand.nextFloat() * 0.8F + 0.1F;
-
-					if(bagslot.getStackInSlot(0)!= null)
-					{
-						entityitem = new EntityItem(world, player.posX, player.posY, player.posZ, 
-								bagslot.getStackInSlot(0));
-						entityitem.motionY = (float)rand.nextGaussian() + 0.2F;
-						world.spawnEntityInWorld(entityitem);
-					}
-				}*/
 			}
 		}
 	}
@@ -141,32 +123,27 @@ public class ContainerVessel extends ContainerTFC {
 		super.detectAndSendChanges();
 	}
 
-	//Removed because I don't write shift click code. This needs to be worked on. -Bioxx
-	/*@Override
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex) {
 		ItemStack returnedStack = null;
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
 		if (clickedSlot != null
-			&& clickedSlot.getHasStack()
-			&& (clickedSlot.getStack().getItem() instanceof ItemTerraFood || clickedSlot.getStack().itemID == Item.bowlEmpty.itemID))
+			&& clickedSlot.getHasStack())
 		{
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();
 
-			if (clickedIndex < 6)
+			if (clickedIndex < 4)
 			{
-				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true)) {
+				if (!this.mergeItemStack(clickedStack, 4, inventorySlots.size(), true)) {
 					return null;
 				}
 			}
-			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size()) {
-				if (!this.mergeItemStack(clickedStack, 0, 6, false)) {
+			else if (clickedIndex >= 4 && clickedIndex < inventorySlots.size()) {
+				if (!this.mergeItemStack(clickedStack, 0, 4, false)) {
 					return null;
 				}
-			}
-			else if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), false)) {
-				return null;
 			}
 
 			if (clickedStack.stackSize == 0) {
@@ -181,5 +158,5 @@ public class ContainerVessel extends ContainerTFC {
 			clickedSlot.onPickupFromSlot(player, clickedStack);
 		}
 		return returnedStack;
-	}*/
+	}
 }

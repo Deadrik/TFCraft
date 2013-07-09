@@ -23,6 +23,7 @@ import TFC.Core.KilnRecipe;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Handlers.PacketHandler;
+import TFC.Items.Pottery.ItemPotteryBase;
 
 public class TileEntityPottery extends NetworkTileEntity implements IInventory
 {
@@ -75,13 +76,37 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 				worldObj.setBlock(xCoord, yCoord+1, zCoord, 0);
 				if(inventory[0] != null)
+				{
 					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0));
+					if(inventory[0].getItem() instanceof ItemPotteryBase)
+					{
+						((ItemPotteryBase)inventory[0].getItem()).onDoneCooking(worldObj, inventory[0]);
+					}
+				}
 				if(inventory[1] != null)
+				{
 					inventory[1] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[1], 0));
+					if(inventory[1].getItem() instanceof ItemPotteryBase)
+					{
+						((ItemPotteryBase)inventory[1].getItem()).onDoneCooking(worldObj, inventory[1]);
+					}
+				}
 				if(inventory[2] != null)
+				{
 					inventory[2] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[2], 0));
+					if(inventory[2].getItem() instanceof ItemPotteryBase)
+					{
+						((ItemPotteryBase)inventory[2].getItem()).onDoneCooking(worldObj, inventory[2]);
+					}
+				}
 				if(inventory[3] != null)
+				{
 					inventory[3] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[3], 0));
+					if(inventory[3].getItem() instanceof ItemPotteryBase)
+					{
+						((ItemPotteryBase)inventory[3].getItem()).onDoneCooking(worldObj, inventory[3]);
+					}
+				}
 
 				logsForBurn = 0;
 				

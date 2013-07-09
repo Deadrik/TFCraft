@@ -167,6 +167,14 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		return false;
 	}
 	
+	/**
+	 * Called when the pottery object is done being cooked in a kiln.
+	 */
+	public void onDoneCooking(World world, ItemStack is)
+	{
+		
+	}
+	
 	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);

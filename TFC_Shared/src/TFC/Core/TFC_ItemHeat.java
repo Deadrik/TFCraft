@@ -48,7 +48,7 @@ public class TFC_ItemHeat
 		HeatRaw TinRaw = new HeatRaw(0.69F, 232);
 		HeatRaw ZincRaw = new HeatRaw(0.66F, 420);//sh = 0.66F; boil = 907; melt = 420;
 
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(20, 40));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,0), CopperRaw,new ItemStack(TFCItems.CopperUnshaped,1)).setMinMax(25));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMinMax(20, 40));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,2), PlatinumRaw,new ItemStack(TFCItems.PlatinumUnshaped,1)).setMinMax(5, 10));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OreChunk,1,3), IronRaw,new ItemStack(TFCItems.PigIronUnshaped,1)).setMinMax(20, 40));
@@ -566,20 +566,10 @@ public class TFC_ItemHeat
 					temp -= TFC_ItemHeat.getTempDecrease(is);
 					comp.setFloat("temperature",temp);
 				}
-				is.setTagCompound(comp);
+				//is.setTagCompound(comp);
 				if(temp <= ambient)
 				{
-					Collection C = comp.getTags();
-					Iterator itr = C.iterator();
-					while(itr.hasNext())
-					{
-						Object tag = itr.next();
-						if(canRemoveTag(tag, "temperature", NBTTagFloat.class))
-						{
-							itr.remove();
-							break;
-						}
-					}
+					comp.removeTag("temperature");
 				}
 				if(comp.getTags().size() == 0)
 				{
