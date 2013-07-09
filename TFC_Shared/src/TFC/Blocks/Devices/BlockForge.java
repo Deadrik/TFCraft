@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -51,7 +52,7 @@ public class BlockForge extends BlockTerraContainer
 		{
 			return true;
 		} 
-		else if(equippedItem != null && equippedItem.getItem() instanceof ItemFirestarter)
+		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintAndSteel))
 		{
 			if((TileEntityForge)world.getBlockTileEntity(i, j, k) != null)
 			{
