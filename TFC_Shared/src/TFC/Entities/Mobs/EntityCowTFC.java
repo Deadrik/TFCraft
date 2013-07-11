@@ -165,7 +165,7 @@ public class EntityCowTFC extends EntityAnimalTFC
 	{
 		int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
 		int var4;
-		float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+		float ageMod = getGrowingAge()!=0?1-(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
 
 		if(ageMod >0.9){
 			this.dropItem(TFCItems.Hide.itemID,1);
