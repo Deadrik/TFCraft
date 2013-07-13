@@ -265,6 +265,10 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		}
+		case 19:
+		{
+			return new GuiVesselLiquid(player.inventory, world, x, y, z);
+		}
 		case 20:
 		{
 			return new GuiFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
@@ -341,10 +345,7 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiVessel(player.inventory, world, x, y, z);
 		}
-		case 40:
-		{
-			return new GuiVesselLiquid(player.inventory, world, x, y, z);
-		}
+		
 		default:
 		{
 			return null;

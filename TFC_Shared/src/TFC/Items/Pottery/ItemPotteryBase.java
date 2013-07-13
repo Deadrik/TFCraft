@@ -19,6 +19,7 @@ import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
+import TFC.Core.Metal.Alloy;
 import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemTerra;
@@ -170,7 +171,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	/**
 	 * Called when the pottery object is done being cooked in a kiln.
 	 */
-	public void onDoneCooking(World world, ItemStack is)
+	public void onDoneCooking(World world, ItemStack is, Alloy.EnumTier furnaceTier)
 	{
 		
 	}

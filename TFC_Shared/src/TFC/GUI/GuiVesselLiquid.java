@@ -2,20 +2,26 @@ package TFC.GUI;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Containers.ContainerVessel;
+import TFC.Containers.ContainerLiquidVessel;
 import TFC.Core.Util.StringUtil;
 
 public class GuiVesselLiquid extends GuiContainer
 {
+	EntityPlayer player;
+	private int bagsSlotNum;
+	
     public GuiVesselLiquid(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
     {
-        super(new ContainerVessel(inventoryplayer, world, i, j, k));
+        super(new ContainerLiquidVessel(inventoryplayer, world, i, j, k));
+        player = inventoryplayer.player;
+        bagsSlotNum = player.inventory.currentItem;
     }
 
     @Override
@@ -37,6 +43,8 @@ public class GuiVesselLiquid extends GuiContainer
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;
         drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+        drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getString("MetalType"), l+87, i1+13, 0);
+        drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getInteger("MetalAmount")+" Units", l+87, i1+23, 0);
     }
     
     @Override

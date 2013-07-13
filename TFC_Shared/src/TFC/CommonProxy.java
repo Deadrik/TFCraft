@@ -29,7 +29,7 @@ import TFC.Containers.ContainerScribe;
 import TFC.Containers.ContainerSluice;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Containers.ContainerVessel;
-import TFC.Containers.ContainerVesselLiquid;
+import TFC.Containers.ContainerLiquidVessel;
 import TFC.Containers.ContainerWorkbench;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -366,6 +366,10 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerWorkbench(player.inventory, (TileEntityWorkbench) te, world, x, y, z);
 		}
+		case 19:
+		{
+			return new ContainerLiquidVessel(player.inventory, world, x, y, z);
+		}
 		case 20:
 		{
 			return new ContainerFirepit(player.inventory, (TileEntityFirepit) te, world, x, y, z);
@@ -439,10 +443,7 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerVessel(player.inventory, world, x, y, z);
 		}
-		case 40:
-		{
-			return new ContainerVesselLiquid(player.inventory, world, x, y, z);
-		}
+		
 		default:
 		{
 			return null;

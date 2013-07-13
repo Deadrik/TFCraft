@@ -35,15 +35,18 @@ public class AlloyManager
 		return match != null;
 	}
 	
-	public Metal matchesAlloy(List<AlloyMetal> ingred)
+	public Metal matchesAlloy(List<AlloyMetal> ingred, Alloy.EnumTier furnaceTier)
 	{
 		Iterator<Alloy> iter = Alloys.iterator();
 		Alloy match = null;
 		while(iter.hasNext() && match == null)
 		{
 			match = iter.next();
-			match = match.matches(ingred);
+			if(furnaceTier.tier >= match.tierMn.tier && furnaceTier.tier <= match.tierMx.tier)
+				match = match.matches(ingred);
 		}
-		return match.outputType;
+		if(match != null)
+			return match.outputType;
+		else return null;
 	}
 }
