@@ -216,7 +216,7 @@ public class EntityChickenTFC extends EntityAnimalTFC
     {
         int var3 = 1;
         
-        float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+        float ageMod = getGrowingAge()!=0?1+(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
 
         for (int var4 = 0; var4 < var3; ++var4)
         {

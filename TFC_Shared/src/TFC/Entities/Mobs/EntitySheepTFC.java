@@ -139,7 +139,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     protected void dropFewItems(boolean par1, int par2)
     {
-    	float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+    	float ageMod = getGrowingAge()!=0?1+(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
     	if(ageMod > 0.9){
         if (!this.getSheared())
         {
