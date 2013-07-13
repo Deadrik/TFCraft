@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.Render.Models.ModelIngotPile;
 import TFC.TileEntities.TileEntityIngotPile;
 
@@ -35,12 +36,11 @@ public class TileEntityIngotPileRenderer extends TileEntitySpecialRenderer
 			if (par1TileEntityPile.getStackInSlot(0)!=null)
 			{
 				int i = ((TFC.Blocks.BlockIngotPile)var10).getStack(par1TileEntityPile.worldObj,par1TileEntityPile);
-				int j = par1TileEntityPile.getType() != -1 ? par1TileEntityPile.getType() : 0;
-				bindTextureByName("/textures/blocks/metal/"+metalTypes[par1TileEntityPile.type]+".png"); //texture
+				bindTextureByName(Reference.AssetPath + "/textures/blocks/metal/"+par1TileEntityPile.type+".png"); //texture
 				GL11.glPushMatrix(); //start
 				GL11.glTranslatef((float)d + 0.0F, (float)d1 + 0F, (float)d2 + 0.0F); //size
 
-				ingotModel.renderIngots(i,j);
+				ingotModel.renderIngots(i);
 				GL11.glPopMatrix(); //end
 			}
 		}

@@ -12,9 +12,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.API.Enums.EnumMetalType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.Metal.MetalRegistry;
 import TFC.TileEntities.TileEntityIngotPile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,21 +22,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemIngot extends ItemTerra
 {
 	EnumSize size = EnumSize.SMALL;
-	public EnumMetalType MetalType;
-	private static String[] metalTypes =  new String[]{"Bismuth", "Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Brass", 
-		"Bronze", "Copper", "Gold", "Wrought Iron", "Lead", "Nickel", "Pig Iron", "Platinum", "Red Steel", "Rose Gold", "Silver", "Steel",
-		"Sterlign Silver", "Tin", "Zinc" };
 	BufferedImage bi;
-	public ItemIngot(int i, EnumMetalType metalType) 
+	public ItemIngot(int i) 
 	{
 		super(i);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		MetalType = metalType;
-		/*try {
-			bi= ImageIO.read(new File("/textures/blocks/metal/"+metalTypes[MetalType.MetalID]+".png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 		this.setFolder("ingots/");
 
 	}
@@ -234,7 +224,7 @@ public class ItemIngot extends ItemTerra
 			if(te != null)
 			{
 				te.storage[0] = new ItemStack(this,1,0);
-				te.setType(this.MetalType.MetalID);
+				te.setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 
 				if(entityplayer.capabilities.isCreativeMode)
 				{
@@ -292,10 +282,7 @@ public class ItemIngot extends ItemTerra
 							itemstack.stackSize = itemstack.stackSize-1;
 							if (world.getBlockTileEntity(x,y,z) != null)
 							{
-								if (((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).getType()==-1)
-								{
-									((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.MetalType.MetalID);
-								}
+									((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 							}
 							world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 							te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
@@ -306,7 +293,7 @@ public class ItemIngot extends ItemTerra
 					itemstack.stackSize = itemstack.stackSize-1;
 					if (world.getBlockTileEntity(x,y,z) != null)
 					{
-						((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.MetalType.MetalID);
+						((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 					}
 					world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 					return true;
@@ -355,8 +342,8 @@ public class ItemIngot extends ItemTerra
 					setSide(world, itemstack, m, dir, x, y, z, 1, 0, 0);
 				}
 				if (world.getBlockTileEntity(x,y,z) != null && world.getBlockTileEntity(x,y,z) instanceof TileEntityIngotPile)
-            {
-					((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.itemID - 16028 - 256);
+				{
+					//((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(this.itemID - 16028 - 256);
 				}
 				world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 				return true;

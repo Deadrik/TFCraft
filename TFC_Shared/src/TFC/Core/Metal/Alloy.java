@@ -1,25 +1,25 @@
-package TFC.Core.Alloy;
+package TFC.Core.Metal;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import TFC.API.Enums.EnumMetalType;
+import TFC.API.Metal;
 
 public class Alloy 
 {
 	public List<AlloyMetal> AlloyIngred;
-	public EnumMetalType outputType;
+	public Metal outputType;
 	public int outputAmount;
 	
-	public Alloy(EnumMetalType type)
+	public Alloy(Metal type)
 	{
 		AlloyIngred = new ArrayList<AlloyMetal>();
 		outputType = type;
 		outputAmount = 0;
 	}
 	
-	public Alloy(EnumMetalType type, int am)
+	public Alloy(Metal type, int am)
 	{
 		AlloyIngred = new ArrayList<AlloyMetal>();
 		outputType = type;
@@ -31,12 +31,12 @@ public class Alloy
 		AlloyIngred.add(am);
 	}
 	
-	public void addIngred(EnumMetalType e, int m)
+	public void addIngred(Metal e, int m)
 	{
 		AlloyIngred.add(new AlloyMetal(e, m));
 	}
 
-	public void addIngred(EnumMetalType e, int min, int max)
+	public void addIngred(Metal e, int min, int max)
 	{
 		AlloyIngred.add(new AlloyMetalCompare(e, min, max));
 	}

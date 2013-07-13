@@ -73,6 +73,7 @@ import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiVessel;
+import TFC.GUI.GuiVesselLiquid;
 import TFC.GUI.GuiWorkbench;
 import TFC.Handlers.Client.BlockRenderHandler;
 import TFC.Handlers.Client.ChiselHighlightHandler;
@@ -340,8 +341,15 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiVessel(player.inventory, world, x, y, z);
 		}
+		case 40:
+		{
+			return new GuiVesselLiquid(player.inventory, world, x, y, z);
 		}
-		return null;
+		default:
+		{
+			return null;
+		}
+		}
 	}
 
 	@Override

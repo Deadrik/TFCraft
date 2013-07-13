@@ -2,9 +2,11 @@ package TFC.API.Constant;
 
 import java.util.Arrays;
 
+import TFC.API.Metal;
+
 import com.google.common.collect.ObjectArrays;
 
-public interface Global
+public class Global
 {
 	/* Stone Types */
 	public static final String[] STONE_IGIN = {"Granite", "Diorite", "Gabbro"};
@@ -48,4 +50,27 @@ public interface Global
 		"Pine","Sequoia","Spruce","Sycamore",
 		"White Cedar","White Elm","Willow","Kapok"
 		};
+	
+	
+	public static Metal BISMUTH;
+	public static Metal BISMUTHBRONZE;
+	public static Metal BLACKBRONZE; 
+	public static Metal BLACKSTEEL; 
+	public static Metal BLUESTEEL; 
+	public static Metal BRASS; 
+	public static Metal BRONZE; 
+	public static Metal COPPER; 
+	public static Metal GOLD; 
+	public static Metal WROUGHTIRON; 
+	public static Metal LEAD; 
+	public static Metal NICKEL; 
+	public static Metal PIGIRON; 
+	public static Metal PLATINUM; 
+	public static Metal REDSTEEL; 
+	public static Metal ROSEGOLD; 
+	public static Metal SILVER; 
+	public static Metal STEEL; 
+	public static Metal STERLINGSILVER; 
+	public static Metal TIN; 
+	public static Metal ZINC;
 }

@@ -123,7 +123,8 @@ public class BlockIngotPile extends BlockTerraContainer
 			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
 	}
 
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+    @Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
 		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 		int direction = getDirectionFromMetadata(meta);
@@ -184,16 +185,6 @@ public class BlockIngotPile extends BlockTerraContainer
 		TileEntityIngotPile Te = ((TileEntityIngotPile)world.getBlockTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
 
 		return Te != null ? Te.getStackInSlot(0) != null ? Te.getStackInSlot(0).stackSize : 0 : 0;
-	}
-
-	public int getDamage(World world,TileEntityIngotPile tt)
-	{
-		if(tt != null)
-		{
-			TileEntityIngotPile Te = ((TileEntityIngotPile)world.getBlockTileEntity(tt.xCoord, tt.yCoord, tt.zCoord));
-			return Te != null ? Te.getType() != -1 ? Te.getType() : 0 : 0;
-		}
-		return 0;
 	}
 
 	@Override

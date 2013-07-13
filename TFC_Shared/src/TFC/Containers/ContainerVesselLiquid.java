@@ -2,6 +2,7 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
@@ -9,10 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
-import TFC.API.Enums.EnumMetalType;
+import TFC.API.Metal;
 import TFC.Containers.Slots.SlotForShowOnly;
+import TFC.Core.Metal.MetalRegistry;
 
-public class ContainerVesselLiquid extends ContainerTFC {
+public class ContainerVesselLiquid extends Container 
+{
 	private World world;
 	private int posX;
 	private int posY;
@@ -30,7 +33,7 @@ public class ContainerVesselLiquid extends ContainerTFC {
 		this.posY = y;
 		this.posZ = z;
 		bagsSlotNum = player.inventory.currentItem;
-		layoutContainer(playerinv, 0, 0);
+		layoutContainer(playerinv);
 
 	}
 
@@ -39,9 +42,9 @@ public class ContainerVesselLiquid extends ContainerTFC {
 		return true;
 	}
 
-	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize) {
+	private void layoutContainer(IInventory playerInventory) {
 
-		this.addSlotToContainer(new Slot(containerInv, 0, 71, 25));
+		this.addSlotToContainer(new Slot(containerInv, 0, 80, 34));
 
 		int row;
 		int col;
@@ -67,16 +70,26 @@ public class ContainerVesselLiquid extends ContainerTFC {
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
-		if(containerInv.getStackInSlot(0).getItem().itemID == TFCItems.CeramicMold.itemID && 
+		if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(0).getItem().itemID == TFCItems.CeramicMold.itemID && 
 				containerInv.getStackInSlot(0).getItemDamage() == 1)
 		{
 			//Load the metal info from the liquid container
-			NBTTagCompound nbt = player.inventory.getCurrentItem().getTagCompound();
-			EnumMetalType m = EnumMetalType.fromID(nbt.getInteger("MetalType"));
+			NBTTagCompound nbt = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound();
+			Metal m = MetalRegistry.instance.getMetalFromString((nbt.getString("MetalType")));
 			metalAmount = nbt.getInteger("MetalAmount");
 			
 			//TODO: create a meltedmetal itemstack for the metal and apply the proper damage value
+			containerInv.setInventorySlotContents(0, new ItemStack(m.MeltedItemID, 1, metalAmount > 100 ? 0 : 100-metalAmount));
+			if(metalAmount <= 100)
+			{
+				nbt.removeTag("MetalType");
+				nbt.removeTag("MetalAmount");
+				player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
+			}
+			else
+				nbt.setInteger("MetalAmount", metalAmount-100);
 			
+			player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(nbt);
 		}
 		
 	}

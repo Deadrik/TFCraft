@@ -21,7 +21,7 @@ import TFC.Handlers.PacketHandler;
 public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
-	public int type;
+	public String type;
 	private static int[] ingots = {(TFCItems.BismuthIngot.itemID),(TFCItems.BismuthBronzeIngot.itemID),(TFCItems.BlackBronzeIngot.itemID),
 		(TFCItems.BlackSteelIngot.itemID),(TFCItems.BlueSteelIngot.itemID),(TFCItems.BrassIngot.itemID),(TFCItems.BronzeIngot.itemID),
 		(TFCItems.CopperIngot.itemID),(TFCItems.GoldIngot.itemID),(TFCItems.WroughtIronIngot.itemID),(TFCItems.LeadIngot.itemID),
@@ -32,13 +32,13 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
-		type = -1;
+		type = "Copper";
 	}
 	public static int[] getIngots(){
 		return ingots;
 	}
 	
-	public void setType(int i)
+	public void setType(String i)
 	{
 		/*for(int j = 0; j<ingots.length;j++){
 		if(ingots[j] == i){
@@ -52,7 +52,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 		return storage[0].stackSize;
 	}
 
-	public int getType(){
+	public String getType(){
 		return this.type;
 	}
 
@@ -196,7 +196,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	{
 		super.readFromNBT(nbttagcompound);
 		//nbttagcompound.setInteger("type", type);
-		type = nbttagcompound.getInteger("type");
+		type = nbttagcompound.getString("type");
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -229,7 +229,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
 		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setInteger("type", type);
+		nbttagcompound.setString("type", type);
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
 		{
@@ -260,7 +260,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 
 	@Override
 	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		outStream.writeInt(type);
+		outStream.writeUTF(type);
 		outStream.writeInt(storage[0] != null ? storage[0].itemID : -1);
 		outStream.writeInt(storage[0] != null ? storage[0].stackSize : 0);
 	}
@@ -268,7 +268,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	@Override
 	public void handleInitPacket(DataInputStream inStream) throws IOException 
 	{
-		type = inStream.readInt();
+		type = inStream.readUTF();
 		int s1 = inStream.readInt();
 		int size = inStream.readInt();
 		storage[0] = s1 != -1 ? new ItemStack(Item.itemsList[s1],size) : null;
@@ -284,7 +284,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
-			dos.writeInt(type);
+			dos.writeUTF(type);
 			dos.writeInt(storage[0] != null ? storage[0].itemID : -1);
 			dos.writeInt(storage[0] != null ? storage[0].stackSize : 0);
 		} catch (IOException e) {

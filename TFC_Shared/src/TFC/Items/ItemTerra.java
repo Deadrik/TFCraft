@@ -2,7 +2,6 @@ package TFC.Items;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -114,7 +113,7 @@ public class ItemTerra extends Item implements ISize
     @Override
     public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
     {
-    	Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
+    	//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
     	ItemTerra.addSizeInformation(this, arraylist);
     	
     	if(TFC_Settings.enableDebugMode)

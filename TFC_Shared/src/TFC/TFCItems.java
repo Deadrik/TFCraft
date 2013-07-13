@@ -13,13 +13,16 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
+import TFC.API.Metal;
 import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumDamageType;
-import TFC.API.Enums.EnumMetalType;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.Recipes;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Metal.Alloy;
+import TFC.Core.Metal.AlloyManager;
+import TFC.Core.Metal.MetalRegistry;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemAlcohol;
@@ -1062,49 +1065,49 @@ public class TFCItems
         ProPickTin = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickTin",16021)).setUnlocalizedName("Tin ProPick").setMaxDamage(TinUses);
         ProPickZinc = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickZinc",16022)).setUnlocalizedName("Zinc ProPick").setMaxDamage(ZincUses);
         
-        BismuthIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot",16028), EnumMetalType.BISMUTH).setUnlocalizedName("Bismuth Ingot");
-        BismuthBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot",16029), EnumMetalType.BISMUTHBRONZE).setUnlocalizedName("Bismuth Bronze Ingot");
-        BlackBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot",16030), EnumMetalType.BLACKBRONZE).setUnlocalizedName("Black Bronze Ingot");
-        BlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot",16031), EnumMetalType.BLACKSTEEL).setUnlocalizedName("Black Steel Ingot");
-        BlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot",16032), EnumMetalType.BLUESTEEL).setUnlocalizedName("Blue Steel Ingot");
-        BrassIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot",16033), EnumMetalType.BRASS).setUnlocalizedName("Brass Ingot");
-        BronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot",16034), EnumMetalType.BRONZE).setUnlocalizedName("Bronze Ingot");
-        CopperIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot",16035), EnumMetalType.COPPER).setUnlocalizedName("Copper Ingot");
-        GoldIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot",16036), EnumMetalType.GOLD).setUnlocalizedName("Gold Ingot");
-        WroughtIronIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot",16037), EnumMetalType.WROUGHTIRON).setUnlocalizedName("Wrought Iron Ingot");
-        LeadIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot",16038), EnumMetalType.LEAD).setUnlocalizedName("Lead Ingot");
-        NickelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot",16039), EnumMetalType.NICKEL).setUnlocalizedName("Nickel Ingot");
-        PigIronIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot",16040), EnumMetalType.PIGIRON).setUnlocalizedName("Pig Iron Ingot");
-        PlatinumIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot",16041), EnumMetalType.PLATINUM).setUnlocalizedName("Platinum Ingot");
-        RedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot",16042), EnumMetalType.REDSTEEL).setUnlocalizedName("Red Steel Ingot");
-        RoseGoldIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot",16043), EnumMetalType.ROSEGOLD).setUnlocalizedName("Rose Gold Ingot");
-        SilverIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot",16044), EnumMetalType.SILVER).setUnlocalizedName("Silver Ingot");
-        SteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot",16045), EnumMetalType.STEEL).setUnlocalizedName("Steel Ingot");
-        SterlingSilverIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot",16046), EnumMetalType.STERLINGSILVER).setUnlocalizedName("Sterling Silver Ingot");
-        TinIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot",16047), EnumMetalType.TIN).setUnlocalizedName("Tin Ingot");
-        ZincIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot",16048), EnumMetalType.ZINC).setUnlocalizedName("Zinc Ingot");
+        BismuthIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot",16028)).setUnlocalizedName("Bismuth Ingot");
+        BismuthBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot",16029)).setUnlocalizedName("Bismuth Bronze Ingot");
+        BlackBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot",16030)).setUnlocalizedName("Black Bronze Ingot");
+        BlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot",16031)).setUnlocalizedName("Black Steel Ingot");
+        BlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot",16032)).setUnlocalizedName("Blue Steel Ingot");
+        BrassIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot",16033)).setUnlocalizedName("Brass Ingot");
+        BronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot",16034)).setUnlocalizedName("Bronze Ingot");
+        CopperIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot",16035)).setUnlocalizedName("Copper Ingot");
+        GoldIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot",16036)).setUnlocalizedName("Gold Ingot");
+        WroughtIronIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot",16037)).setUnlocalizedName("Wrought Iron Ingot");
+        LeadIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot",16038)).setUnlocalizedName("Lead Ingot");
+        NickelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot",16039)).setUnlocalizedName("Nickel Ingot");
+        PigIronIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot",16040)).setUnlocalizedName("Pig Iron Ingot");
+        PlatinumIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot",16041)).setUnlocalizedName("Platinum Ingot");
+        RedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot",16042)).setUnlocalizedName("Red Steel Ingot");
+        RoseGoldIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot",16043)).setUnlocalizedName("Rose Gold Ingot");
+        SilverIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot",16044)).setUnlocalizedName("Silver Ingot");
+        SteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot",16045)).setUnlocalizedName("Steel Ingot");
+        SterlingSilverIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot",16046)).setUnlocalizedName("Sterling Silver Ingot");
+        TinIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot",16047)).setUnlocalizedName("Tin Ingot");
+        ZincIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot",16048)).setUnlocalizedName("Zinc Ingot");
 
-        BismuthIngot2x = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot2x",16049), EnumMetalType.BISMUTH).setUnlocalizedName("Bismuth Double Ingot")).setSize(EnumSize.LARGE);
-        BismuthBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot2x",16050), EnumMetalType.BISMUTHBRONZE).setUnlocalizedName("Bismuth Bronze Double Ingot")).setSize(EnumSize.LARGE);
-        BlackBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot2x",16051), EnumMetalType.BLACKBRONZE).setUnlocalizedName("Black Bronze Double Ingot")).setSize(EnumSize.LARGE);
-        BlackSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot2x",16052), EnumMetalType.BLACKSTEEL).setUnlocalizedName("Black Steel Double Ingot")).setSize(EnumSize.LARGE);
-        BlueSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot2x",16053), EnumMetalType.BLUESTEEL).setUnlocalizedName("Blue Steel Double Ingot")).setSize(EnumSize.LARGE);
-        BrassIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot2x",16054), EnumMetalType.BRASS).setUnlocalizedName("Brass Double Ingot")).setSize(EnumSize.LARGE);
-        BronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot2x",16055), EnumMetalType.BRONZE).setUnlocalizedName("Bronze Double Ingot")).setSize(EnumSize.LARGE);
-        CopperIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot2x",16056), EnumMetalType.COPPER).setUnlocalizedName("Copper Double Ingot")).setSize(EnumSize.LARGE);
-        GoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot2x",16057), EnumMetalType.GOLD).setUnlocalizedName("Gold Double Ingot")).setSize(EnumSize.LARGE);
-        WroughtIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot2x",16058), EnumMetalType.WROUGHTIRON).setUnlocalizedName("Wrought Iron Double Ingot")).setSize(EnumSize.LARGE);
-        LeadIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot2x",16059), EnumMetalType.LEAD).setUnlocalizedName("Lead Double Ingot")).setSize(EnumSize.LARGE);
-        NickelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot2x",16060), EnumMetalType.NICKEL).setUnlocalizedName("Nickel Double Ingot")).setSize(EnumSize.LARGE);
-        PigIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot2x",16061), EnumMetalType.PIGIRON).setUnlocalizedName("Pig Iron Double Ingot")).setSize(EnumSize.LARGE);
-        PlatinumIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot2x",16062), EnumMetalType.PLATINUM).setUnlocalizedName("Platinum Double Ingot")).setSize(EnumSize.LARGE);
-        RedSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot2x",16063), EnumMetalType.REDSTEEL).setUnlocalizedName("Red Steel Double Ingot")).setSize(EnumSize.LARGE);
-        RoseGoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot2x",16064), EnumMetalType.ROSEGOLD).setUnlocalizedName("Rose Gold Double Ingot")).setSize(EnumSize.LARGE);
-        SilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot2x",16065), EnumMetalType.SILVER).setUnlocalizedName("Silver Double Ingot")).setSize(EnumSize.LARGE);
-        SteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot2x",16066), EnumMetalType.STEEL).setUnlocalizedName("Steel Double Ingot")).setSize(EnumSize.LARGE);
-        SterlingSilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot2x",16067), EnumMetalType.STERLINGSILVER).setUnlocalizedName("Sterling Silver Double Ingot")).setSize(EnumSize.LARGE);
-        TinIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot2x",16068), EnumMetalType.TIN).setUnlocalizedName("Tin Double Ingot")).setSize(EnumSize.LARGE);
-        ZincIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot2x",16069), EnumMetalType.ZINC).setUnlocalizedName("Zinc Double Ingot")).setSize(EnumSize.LARGE);
+        BismuthIngot2x = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot2x",16049)).setUnlocalizedName("Bismuth Double Ingot")).setSize(EnumSize.LARGE);
+        BismuthBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot2x",16050)).setUnlocalizedName("Bismuth Bronze Double Ingot")).setSize(EnumSize.LARGE);
+        BlackBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot2x",16051)).setUnlocalizedName("Black Bronze Double Ingot")).setSize(EnumSize.LARGE);
+        BlackSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot2x",16052)).setUnlocalizedName("Black Steel Double Ingot")).setSize(EnumSize.LARGE);
+        BlueSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot2x",16053)).setUnlocalizedName("Blue Steel Double Ingot")).setSize(EnumSize.LARGE);
+        BrassIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot2x",16054)).setUnlocalizedName("Brass Double Ingot")).setSize(EnumSize.LARGE);
+        BronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot2x",16055)).setUnlocalizedName("Bronze Double Ingot")).setSize(EnumSize.LARGE);
+        CopperIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot2x",16056)).setUnlocalizedName("Copper Double Ingot")).setSize(EnumSize.LARGE);
+        GoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot2x",16057)).setUnlocalizedName("Gold Double Ingot")).setSize(EnumSize.LARGE);
+        WroughtIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot2x",16058)).setUnlocalizedName("Wrought Iron Double Ingot")).setSize(EnumSize.LARGE);
+        LeadIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot2x",16059)).setUnlocalizedName("Lead Double Ingot")).setSize(EnumSize.LARGE);
+        NickelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot2x",16060)).setUnlocalizedName("Nickel Double Ingot")).setSize(EnumSize.LARGE);
+        PigIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot2x",16061)).setUnlocalizedName("Pig Iron Double Ingot")).setSize(EnumSize.LARGE);
+        PlatinumIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot2x",16062)).setUnlocalizedName("Platinum Double Ingot")).setSize(EnumSize.LARGE);
+        RedSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot2x",16063)).setUnlocalizedName("Red Steel Double Ingot")).setSize(EnumSize.LARGE);
+        RoseGoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot2x",16064)).setUnlocalizedName("Rose Gold Double Ingot")).setSize(EnumSize.LARGE);
+        SilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot2x",16065)).setUnlocalizedName("Silver Double Ingot")).setSize(EnumSize.LARGE);
+        SteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot2x",16066)).setUnlocalizedName("Steel Double Ingot")).setSize(EnumSize.LARGE);
+        SterlingSilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot2x",16067)).setUnlocalizedName("Sterling Silver Double Ingot")).setSize(EnumSize.LARGE);
+        TinIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot2x",16068)).setUnlocalizedName("Tin Double Ingot")).setSize(EnumSize.LARGE);
+        ZincIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot2x",16069)).setUnlocalizedName("Zinc Double Ingot")).setSize(EnumSize.LARGE);
 
         SulfurPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SulfurPowder",16070)).setUnlocalizedName("Sulfur Powder");
         SaltpeterPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SaltpeterPowder",16071)).setUnlocalizedName("Saltpeter Powder");
@@ -1264,13 +1267,13 @@ public class TFCItems
         TinSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","TinSaw",16286),TinToolMaterial).setUnlocalizedName("Tin Saw").setMaxDamage(TinUses);
         ZincSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","ZincSaw",16287),ZincToolMaterial).setUnlocalizedName("Zinc Saw").setMaxDamage(ZincUses);
 
-        HCBlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlackSteelIngot",16290), EnumMetalType.BLACKSTEEL).setUnlocalizedName("HC Black Steel Ingot");
-        WeakBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakBlueSteelIngot",16291),EnumMetalType.BLUESTEEL).setUnlocalizedName("Weak Blue Steel Ingot");
-        WeakRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakRedSteelIngot",16292),EnumMetalType.REDSTEEL).setUnlocalizedName("Weak Red Steel Ingot");
-        WeakSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakSteelIngot",16293),EnumMetalType.STEEL).setUnlocalizedName("Weak Steel Ingot");
-        HCBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlueSteelIngot",16294), EnumMetalType.BLUESTEEL).setUnlocalizedName("HC Blue Steel Ingot");
-        HCRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCRedSteelIngot",16295), EnumMetalType.REDSTEEL).setUnlocalizedName("HC Red Steel Ingot");
-        HCSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCSteelIngot",16296), EnumMetalType.STEEL).setUnlocalizedName("HC Steel Ingot");
+        HCBlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlackSteelIngot",16290)).setUnlocalizedName("HC Black Steel Ingot");
+        WeakBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakBlueSteelIngot",16291)).setUnlocalizedName("Weak Blue Steel Ingot");
+        WeakRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakRedSteelIngot",16292)).setUnlocalizedName("Weak Red Steel Ingot");
+        WeakSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakSteelIngot",16293)).setUnlocalizedName("Weak Steel Ingot");
+        HCBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlueSteelIngot",16294)).setUnlocalizedName("HC Blue Steel Ingot");
+        HCRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCRedSteelIngot",16295)).setUnlocalizedName("HC Red Steel Ingot");
+        HCSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCSteelIngot",16296)).setUnlocalizedName("HC Steel Ingot");
 
         OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setFolder("ore/").setUnlocalizedName("Ore");
         Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
@@ -1707,7 +1710,7 @@ public class TFCItems
                 TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.RoseGoldHammer,TFCItems.SteelHammer,
                 TFCItems.TinHammer,TFCItems.ZincHammer};
         
-       Recipes.Spindle = new Item[]{TFCItems.Spindle};
+        Recipes.Spindle = new Item[]{TFCItems.Spindle};
         
         Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
         		TFCItems.GemJade, TFCItems.GemJasper, TFCItems.GemOpal,TFCItems.GemRuby,TFCItems.GemSapphire,TFCItems.GemTopaz,TFCItems.GemTourmaline};
@@ -1719,6 +1722,59 @@ public class TFCItems
         ((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.Spindle.itemID);
         ((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
         ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);
+        
+        
+        
+        
+        
+        Global.BISMUTH = new Metal("Bismuth", BismuthUnshaped.itemID, BismuthIngot.itemID);
+        Global.BISMUTHBRONZE = new Metal("Bismuth Bronze", BismuthBronzeUnshaped.itemID, BismuthBronzeIngot.itemID);
+        Global.BLACKBRONZE = new Metal("Black Bronze", BlackBronzeUnshaped.itemID, BlackBronzeIngot.itemID); 
+        Global.BLACKSTEEL = new Metal("Black Steel", BlackSteelUnshaped.itemID, BlackSteelIngot.itemID); 
+        Global.BLUESTEEL = new Metal("Blue Steel", BlueSteelUnshaped.itemID, BlueSteelIngot.itemID); 
+        Global.BRASS = new Metal("Brass", BrassUnshaped.itemID, BrassIngot.itemID); 
+    	Global.BRONZE = new Metal("Bronze", BronzeUnshaped.itemID, BronzeIngot.itemID);
+    	Global.COPPER = new Metal("Copper", CopperUnshaped.itemID, CopperIngot.itemID);
+    	Global.GOLD = new Metal("Gold", GoldUnshaped.itemID, GoldIngot.itemID); 
+    	Global.WROUGHTIRON = new Metal("Iron", WroughtIronUnshaped.itemID, WroughtIronIngot.itemID); 
+    	Global.LEAD = new Metal("Lead", LeadUnshaped.itemID, LeadIngot.itemID); 
+    	Global.NICKEL = new Metal("Nickel", NickelUnshaped.itemID, NickelIngot.itemID); 
+    	Global.PIGIRON = new Metal("Pig Iron", PigIronUnshaped.itemID, PigIronIngot.itemID); 
+    	Global.PLATINUM = new Metal("Platinum", PlatinumUnshaped.itemID, PlatinumIngot.itemID); 
+    	Global.REDSTEEL = new Metal("Red Steel", RedSteelUnshaped.itemID, RedSteelIngot.itemID); 
+    	Global.ROSEGOLD = new Metal("Rose Gold", RoseGoldUnshaped.itemID, RoseGoldIngot.itemID); 
+    	Global.SILVER = new Metal("Silver", SilverUnshaped.itemID, SilverIngot.itemID); 
+    	Global.STEEL = new Metal("Steel", SteelUnshaped.itemID, SteelIngot.itemID); 
+    	Global.STERLINGSILVER = new Metal("Sterling Silver", SterlingSilverUnshaped.itemID, SterlingSilverIngot.itemID); 
+    	Global.TIN = new Metal("Tin", TinUnshaped.itemID, TinIngot.itemID);
+    	Global.ZINC = new Metal("Zinc", ZincUnshaped.itemID, ZincIngot.itemID);
+        
+        MetalRegistry.instance.addMetal(Global.BISMUTH);
+        MetalRegistry.instance.addMetal(Global.BISMUTHBRONZE);
+        MetalRegistry.instance.addMetal(Global.BLACKBRONZE); 
+        MetalRegistry.instance.addMetal(Global.BLACKSTEEL); 
+        MetalRegistry.instance.addMetal(Global.BLUESTEEL); 
+        MetalRegistry.instance.addMetal(Global.BRASS); 
+        MetalRegistry.instance.addMetal(Global.BRONZE);
+        MetalRegistry.instance.addMetal(Global.COPPER);
+        MetalRegistry.instance.addMetal(Global.GOLD); 
+        MetalRegistry.instance.addMetal(Global.WROUGHTIRON); 
+        MetalRegistry.instance.addMetal(Global.LEAD); 
+        MetalRegistry.instance.addMetal(Global.NICKEL); 
+        MetalRegistry.instance.addMetal(Global.PIGIRON); 
+    	MetalRegistry.instance.addMetal(Global.PLATINUM); 
+    	MetalRegistry.instance.addMetal(Global.REDSTEEL); 
+    	MetalRegistry.instance.addMetal(Global.ROSEGOLD); 
+    	MetalRegistry.instance.addMetal(Global.SILVER); 
+    	MetalRegistry.instance.addMetal(Global.STEEL); 
+    	MetalRegistry.instance.addMetal(Global.STERLINGSILVER); 
+    	MetalRegistry.instance.addMetal(Global.TIN);
+    	MetalRegistry.instance.addMetal(Global.ZINC);
+    	
+		Alloy Bronze = new Alloy(Global.BRONZE);
+		Bronze.addIngred(Global.COPPER, 88, 92);
+		Bronze.addIngred(Global.TIN, 8, 12);
+		AlloyManager.instance.addAlloy(Bronze);
         
         System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
         if (config != null) {

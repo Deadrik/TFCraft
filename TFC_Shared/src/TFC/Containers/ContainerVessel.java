@@ -39,10 +39,10 @@ public class ContainerVessel extends ContainerTFC {
 
 	public void loadBagInventory()
 	{
-		if(containerInv.getStackInSlot(bagsSlotNum) != null && 
-				containerInv.getStackInSlot(bagsSlotNum).hasTagCompound())
+		if(player.inventory.getStackInSlot(bagsSlotNum) != null && 
+				player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
 		{
-			NBTTagList nbttaglist = containerInv.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
+			NBTTagList nbttaglist = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().getTagList("Items");
 
 			for(int i = 0; i < nbttaglist.tagCount(); i++)
 			{
@@ -75,11 +75,11 @@ public class ContainerVessel extends ContainerTFC {
 					nbttaglist.appendTag(nbttagcompound1);
 				}
 			}
-			if(containerInv.getStackInSlot(bagsSlotNum) != null)
+			if(player.inventory.getStackInSlot(bagsSlotNum) != null)
 			{
-				if(!containerInv.getStackInSlot(bagsSlotNum).hasTagCompound())
-					containerInv.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
-				containerInv.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
+				if(!player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
+					player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
+				player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
 
 			}
 		}

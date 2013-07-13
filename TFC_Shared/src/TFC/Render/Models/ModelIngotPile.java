@@ -37,7 +37,7 @@ public class ModelIngotPile extends ModelBase
 		}
 	}
 
-	public void renderIngots(int i,int a)
+	public void renderIngots(int i)
 	{
 		for (int n = 0; n < i; n++)
 		{

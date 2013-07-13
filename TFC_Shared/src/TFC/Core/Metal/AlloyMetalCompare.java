@@ -1,18 +1,18 @@
-package TFC.Core.Alloy;
+package TFC.Core.Metal;
 
-import TFC.API.Enums.EnumMetalType;
+import TFC.API.Metal;
 
 public class AlloyMetalCompare extends AlloyMetal
 {
 	float metalMin;
 	float metalMax;
 	
-	public AlloyMetalCompare(EnumMetalType e, int min)
+	public AlloyMetalCompare(Metal e, int min)
 	{
 		super(e, min);
 	}
 	
-	public AlloyMetalCompare(EnumMetalType e, int min, int max)
+	public AlloyMetalCompare(Metal e, int min, int max)
 	{
 		super(e, min);
 		metalType = e;

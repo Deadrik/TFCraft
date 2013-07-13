@@ -7,10 +7,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import TFC.Reference;
+import TFC.API.IMadeOfMetal;
+import TFC.API.Metal;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 
-public class ItemOre extends ItemTerra
+public class ItemOre extends ItemTerra implements IMadeOfMetal
 {	
 	public Icon[] icons = new Icon[35];
 
@@ -74,6 +77,55 @@ public class ItemOre extends ItemTerra
     		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
     	return super.getUnlocalizedName(itemstack);
     }
+
+	@Override
+	public Metal GetMetalType(ItemStack is) 
+	{
+		int dam = is.getItemDamage();
+		switch(dam)
+		{
+		case 0: return Global.COPPER;
+		case 1: return Global.GOLD;
+		case 2: return Global.PLATINUM;
+		case 3: return Global.PIGIRON;
+		case 4: return Global.SILVER;
+		case 5: return Global.TIN;
+		case 6: return Global.LEAD;
+		case 7: return Global.BISMUTH;
+		case 8: return Global.NICKEL;
+		case 9: return Global.COPPER;
+		case 10: return Global.PIGIRON;
+		case 11: return Global.PIGIRON;
+		case 12: return Global.ZINC;
+		case 13: return Global.COPPER;
+		}
+		return null;
+	}
+
+	@Override
+	public int GetMetalReturnAmount(ItemStack is) 
+	{
+		int dam = is.getItemDamage();
+		switch(dam)
+		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+			return 25;
+		}
+		return 0;
+	}
 	
     /*public static String getItemNameDamage(int d) 
     {

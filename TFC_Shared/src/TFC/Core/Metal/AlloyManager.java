@@ -1,25 +1,17 @@
-package TFC.Core.Alloy;
+package TFC.Core.Metal;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import TFC.API.Enums.EnumMetalType;
+import TFC.API.Metal;
 
 public class AlloyManager 
 {
-	public static AlloyManager instance;;
+	public static AlloyManager instance = new AlloyManager();
 	
 	public List<Alloy> Alloys;
 	
-	static
-	{
-		instance = new AlloyManager();
-		Alloy Bronze = new Alloy(EnumMetalType.BRONZE);
-		Bronze.addIngred(EnumMetalType.COPPER, 88, 92);
-		Bronze.addIngred(EnumMetalType.TIN, 8, 12);
-		instance.addAlloy(Bronze);
-	}
 	
 	public AlloyManager()
 	{
@@ -43,7 +35,7 @@ public class AlloyManager
 		return match != null;
 	}
 	
-	public EnumMetalType matchesAlloy(List<AlloyMetal> ingred)
+	public Metal matchesAlloy(List<AlloyMetal> ingred)
 	{
 		Iterator<Alloy> iter = Alloys.iterator();
 		Alloy match = null;
