@@ -53,6 +53,8 @@ public class EntityAnimalTFC extends EntityAnimal
 
 	public long adultTime;
 	protected long birthTime;
+	
+	protected long hasMilkTime;
 
 	public EntityAnimalTFC(World par1World)
 	{
@@ -81,7 +83,8 @@ public class EntityAnimalTFC extends EntityAnimal
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime;
-
+		
+		hasMilkTime = 0;
 	}
 
 	public EntityAnimalTFC(World par1World,EntityAnimalTFC mother, float F_size)
@@ -111,6 +114,8 @@ public class EntityAnimalTFC extends EntityAnimal
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime + TFC_Settings.dayLength * adultAge;
+		
+		hasMilkTime = 0;
 	}
 	
 	@Override
@@ -377,6 +382,7 @@ public class EntityAnimalTFC extends EntityAnimal
 
 		par1NBTTagCompound.setLong("AdultTime",adultTime);
 		par1NBTTagCompound.setLong("BirthTime",birthTime);
+		par1NBTTagCompound.setLong("HasMilkTime", hasMilkTime);
 	}
 
 	/**
@@ -446,6 +452,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		}
 		adultTime = par1NBTTagCompound.getLong("AdultTime");
 		birthTime = par1NBTTagCompound.getLong("BirthTime");
+		hasMilkTime = par1NBTTagCompound.getLong("HasMilkTime");
 	}
 
 	/**

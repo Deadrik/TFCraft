@@ -106,7 +106,7 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         
         float negDay = -TFC_Settings.dayLength;
         float ratio = TFC_Time.getYearRatio();
-        float t = (1.0F-(getGrowingAge()/(ratio * adultAge * negDay)));
+        //float t = (1.0F-(getGrowingAge()/(ratio * adultAge * negDay)));
         //float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
@@ -133,27 +133,28 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
         this.dataWatcher.addObject(16, new Byte((byte)0));
     }
 
-    /**
-     * Drop 0-2 items of this living's type
-     */
-    @Override
-    protected void dropFewItems(boolean par1, int par2)
-    {
-    	float ageMod = getGrowingAge()!=0?1+(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
-    	if(ageMod > 0.9){
-        if (!this.getSheared())
-        {
-            this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
-        }
-        else{
-        	this.dropItem(TFCItems.Hide.itemID,1);
-        }
-    	}
-        if (this.isBurning()) {
-        	this.dropItem(TFCItems.muttonCooked.itemID,(int)(size_mod*ageMod*(5+rand.nextInt(5))));
-        } else {
-        	this.dropItem(TFCItems.muttonRaw.itemID,(int)(size_mod*ageMod*(5+rand.nextInt(5))));
-        }
+	/**
+	 * Drop 0-2 items of this living's type
+	 */
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+
+		if(ageMod > 0.9){
+			if(!this.getSheared()) {
+				this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
+			} else {
+				this.dropItem(TFCItems.Hide.itemID,1);
+			}
+		}
+		
+		if (this.isBurning()) {
+			this.dropItem(TFCItems.muttonCooked.itemID,(int)(size_mod*ageMod*(5+rand.nextInt(5))));
+		} else {
+			this.dropItem(TFCItems.muttonRaw.itemID,(int)(size_mod*ageMod*(5+rand.nextInt(5))));
+		}
     }
 
     /**
@@ -205,6 +206,17 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     public boolean interact(EntityPlayer par1EntityPlayer)
     {
+    	float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+		
+		if(sex==1 && ageMod>0.95 && hasMilkTime < TFC_Time.getTotalTicks()){
+			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) {
+				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
+				hasMilkTime = TFC_Time.getTotalTicks() + (3*TFC_Time.dayLength); //Can be milked ones every 3 days
+				return true;
+			}
+		}
         return super.interact(par1EntityPlayer);
     }
 
@@ -325,7 +337,8 @@ public class EntitySheepTFC extends EntityAnimalTFC implements IShearable
     @Override
     public boolean isShearable(ItemStack item, World world, int X, int Y, int Z) 
     {
-    	float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
+    	float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
         return !getSheared() && ageMod > 0.9;
     }
 

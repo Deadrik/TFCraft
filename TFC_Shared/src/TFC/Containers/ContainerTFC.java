@@ -37,7 +37,7 @@ public class ContainerTFC extends Container
 
                 if (slotstack != null
                 	&& slotstack.itemID == is.itemID
-                	&& !is.getHasSubtypes()
+//                	&& !is.getHasSubtypes()
                 	&& is.getItemDamage() == slotstack.getItemDamage()
                 	&& ItemStack.areItemStackTagsEqual(is, slotstack)
                 	&& slotstack.stackSize < slot.getSlotStackLimit())
