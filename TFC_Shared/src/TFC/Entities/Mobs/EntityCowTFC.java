@@ -57,26 +57,25 @@ public class EntityCowTFC extends EntityAnimalTFC
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 	}
+
 	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
 
-		if(sex == 0){
-        	this.texture = "/mods/TFC/mob/bull.png";
-        }
-        else{
-        	this.texture = "/mob/cow.png";
-        }
-		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
-		if(pregnant){
+		if(sex == 0) {
+			this.texture = "/mods/TFC/mob/bull.png";
+		} else {
+			this.texture = "/mob/cow.png";
+		}
+//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+		if(pregnant) {
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				EntityCowTFC baby = new EntityCowTFC(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;
 			}
 		}
-
 	}
 
 	/**
@@ -165,20 +164,18 @@ public class EntityCowTFC extends EntityAnimalTFC
 	{
 		int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
 		int var4;
-		float ageMod = getGrowingAge()!=0?1+(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
 
-		if(ageMod >0.9){
+		float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+
+		if(ageMod > 0.9){
 			this.dropItem(TFCItems.Hide.itemID,1);
 		}
 
-		if (this.isBurning())
-		{
-
-			this.dropItem(Item.beefCooked.itemID, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
-		}
-		else
-		{
-			this.dropItem(Item.beefRaw.itemID, (int) (ageMod * this.size_mod *(15+this.rand.nextInt(10))));
+		if (this.isBurning()) {
+			this.dropItem(Item.beefCooked.itemID, (int) (ageMod * this.size_mod * (15+this.rand.nextInt(10))));
+		} else {
+			this.dropItem(Item.beefRaw.itemID, (int) (ageMod * this.size_mod * (15+this.rand.nextInt(10))));
 		}
 
 	}
@@ -189,17 +186,18 @@ public class EntityCowTFC extends EntityAnimalTFC
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
-		if(sex==1&&ageMod>0.95){
+		float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+		
+		if(sex==1 && ageMod>0.95 && hasMilkTime < TFC_Time.getTotalTicks()){
 			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-
-			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID)
-			{
+			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) {
 				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
+				hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked ones every day
 				return true;
 			}
-		}      
-		return super.interact(par1EntityPlayer);   	
+		}
+		return super.interact(par1EntityPlayer);
 	}
 
 	/**

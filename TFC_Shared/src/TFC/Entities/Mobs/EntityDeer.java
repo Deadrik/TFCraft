@@ -107,7 +107,7 @@ public class EntityDeer extends EntityAnimalTFC
     public void onLivingUpdate()
     {
         int g = getGrowingAge();
-        float t = (1.0F-(g/(adultAge * -TFC_Settings.dayLength)));
+//        float t = (1.0F-(g/(adultAge * -TFC_Settings.dayLength)));
         if(g <= (-12000*adultAge)){
         	this.texture = "/mods/TFC/mob/deer_fawn.png";
         }
