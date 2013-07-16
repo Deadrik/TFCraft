@@ -78,7 +78,7 @@ public class EntityPigTFC extends EntityAnimalTFC
     public void onLivingUpdate ()
     {
         super.onLivingUpdate ();
-        float t = (1.0F-(getGrowingAge()/(adultAge * -TFC_Settings.dayLength)));
+//        float t = (1.0F-(getGrowingAge()/(adultAge * -TFC_Settings.dayLength)));
         if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(5) + 8;
@@ -179,8 +179,9 @@ public class EntityPigTFC extends EntityAnimalTFC
     {
         int var3 = 1;
         int var4;
-        float ageMod = getGrowingAge()!=0?1+(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
-        
+        float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+
         for (var4 = 0; var4 < var3; ++var4)
         {
         	if(ageMod > 0.9){

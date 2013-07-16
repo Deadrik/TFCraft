@@ -254,7 +254,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public void onLivingUpdate ()
 	{
 		super.onLivingUpdate ();
-		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
 		if (!worldObj.isRemote && !field_25052_g && !hasPath () && onGround)
 		{
 			field_25052_g = true;

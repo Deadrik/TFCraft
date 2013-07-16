@@ -90,8 +90,9 @@ public class EntityChickenTFC extends EntityAnimalTFC
     {
         super.onLivingUpdate();
         
-        float ageMod = getGrowingAge()<1?-getGrowingAge()/adultAge:1;
-        float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+        float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+//        float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
         
         this.field_756_e = this.field_752_b;
         this.field_757_d = this.destPos;
@@ -216,8 +217,9 @@ public class EntityChickenTFC extends EntityAnimalTFC
     {
         int var3 = 1;
         
-        float ageMod = getGrowingAge()!=0?1+(getGrowingAge()/(adultAge*TFC_Time.dayLength)):1;
-
+        float ga = getGrowingAge();
+		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
+		
         for (int var4 = 0; var4 < var3; ++var4)
         {
             this.dropItem(Item.feather.itemID,(int) (ageMod*this.size_mod * (5+this.rand.nextInt(10))));
