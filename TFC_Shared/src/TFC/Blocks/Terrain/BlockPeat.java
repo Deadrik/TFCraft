@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.Blocks.BlockTerra;
 import cpw.mods.fml.relauncher.Side;
@@ -33,5 +34,11 @@ public class BlockPeat extends BlockTerra
     public void registerIcons(IconRegister registerer)
     {
 		blockIcon = registerer.registerIcon(Reference.ModID + ":" + "soil/Peat");
+    }
+	
+	@Override
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return false;
     }
 }
