@@ -3,7 +3,6 @@ package TFC.Items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -14,6 +13,7 @@ import TFC.Reference;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.ISize;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_ItemHeat;
@@ -29,7 +29,7 @@ public class ItemTerra extends Item implements ISize
     public ItemTerra(int id) 
     {
         super(id);
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(TFCTabs.TFCMaterials);
         textureFolder = "";
     }
     
