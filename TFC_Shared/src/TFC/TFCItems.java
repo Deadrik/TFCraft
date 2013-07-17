@@ -1721,11 +1721,7 @@ public class TFCItems
         ((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.SteelHammer.itemID);
         ((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.Spindle.itemID);
         ((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
-        ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);
-        
-        
-        
-        
+        ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);        
         
         Global.BISMUTH = new Metal("Bismuth", BismuthUnshaped.itemID, BismuthIngot.itemID);
         Global.BISMUTHBRONZE = new Metal("Bismuth Bronze", BismuthBronzeUnshaped.itemID, BismuthBronzeIngot.itemID);
@@ -1783,52 +1779,52 @@ public class TFCItems
     	MetalRegistry.instance.addMetal(Global.WEAKBLUESTEEL);
     	MetalRegistry.instance.addMetal(Global.HCBLUESTEEL);
     	
-		Alloy Bronze = new Alloy(Global.BRONZE, Alloy.EnumTier.TierI, Alloy.EnumTier.TierII);
+		Alloy Bronze = new Alloy(Global.BRONZE, Alloy.EnumTier.TierI);
 		Bronze.addIngred(Global.COPPER, 88, 92);
 		Bronze.addIngred(Global.TIN, 8, 12);
 		AlloyManager.instance.addAlloy(Bronze);
 		
-		Alloy Brass = new Alloy(Global.BRASS, Alloy.EnumTier.TierI, Alloy.EnumTier.TierII);
+		Alloy Brass = new Alloy(Global.BRASS, Alloy.EnumTier.TierI);
 		Brass.addIngred(Global.COPPER, 88, 92);
 		Brass.addIngred(Global.ZINC, 8, 12);
 		AlloyManager.instance.addAlloy(Brass);
 		
-		Alloy RoseGold = new Alloy(Global.ROSEGOLD, Alloy.EnumTier.TierI, Alloy.EnumTier.TierII);
+		Alloy RoseGold = new Alloy(Global.ROSEGOLD, Alloy.EnumTier.TierI);
 		RoseGold.addIngred(Global.GOLD, 70, 85);
 		RoseGold.addIngred(Global.COPPER, 15, 30);
 		AlloyManager.instance.addAlloy(RoseGold);
 		
-		Alloy BlackBronze = new Alloy(Global.BLACKBRONZE, Alloy.EnumTier.TierI, Alloy.EnumTier.TierII);
+		Alloy BlackBronze = new Alloy(Global.BLACKBRONZE, Alloy.EnumTier.TierI);
 		BlackBronze.addIngred(Global.GOLD, 10, 20);
 		BlackBronze.addIngred(Global.COPPER, 50, 70);
 		BlackBronze.addIngred(Global.SILVER, 10, 20);
 		AlloyManager.instance.addAlloy(BlackBronze);
 		
-		Alloy BismuthBronze = new Alloy(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI, Alloy.EnumTier.TierII);
+		Alloy BismuthBronze = new Alloy(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);
 		BismuthBronze.addIngred(Global.ZINC, 20, 30);
 		BismuthBronze.addIngred(Global.COPPER, 50, 70);
 		BismuthBronze.addIngred(Global.BISMUTH, 10, 20);
 		AlloyManager.instance.addAlloy(BismuthBronze);
 		
-		Alloy SterlingSilver = new Alloy(Global.STERLINGSILVER, Alloy.EnumTier.TierI, Alloy.EnumTier.TierII);
+		Alloy SterlingSilver = new Alloy(Global.STERLINGSILVER, Alloy.EnumTier.TierI);
 		SterlingSilver.addIngred(Global.SILVER, 60, 80);
 		SterlingSilver.addIngred(Global.COPPER, 20, 40);
 		AlloyManager.instance.addAlloy(SterlingSilver);
 		
-		Alloy WeakSteel = new Alloy(Global.WEAKSTEEL, Alloy.EnumTier.TierIII, Alloy.EnumTier.TierIV);
+		Alloy WeakSteel = new Alloy(Global.WEAKSTEEL, Alloy.EnumTier.TierIII);
 		WeakSteel.addIngred(Global.STEEL, 50, 70);
 		WeakSteel.addIngred(Global.NICKEL, 15, 25);
 		WeakSteel.addIngred(Global.BLACKBRONZE, 15, 25);
 		AlloyManager.instance.addAlloy(WeakSteel);
 		
-		Alloy WeakRedSteel = new Alloy(Global.WEAKREDSTEEL, Alloy.EnumTier.TierIII, Alloy.EnumTier.TierIV);
+		Alloy WeakRedSteel = new Alloy(Global.WEAKREDSTEEL, Alloy.EnumTier.TierIII);
 		WeakRedSteel.addIngred(Global.BLACKSTEEL, 50, 60);
 		WeakRedSteel.addIngred(Global.ROSEGOLD, 10, 15);
 		WeakRedSteel.addIngred(Global.BRASS, 10, 15);
 		WeakRedSteel.addIngred(Global.STEEL, 20, 25);
 		AlloyManager.instance.addAlloy(WeakRedSteel);
 		
-		Alloy WeakBlueSteel = new Alloy(Global.WEAKBLUESTEEL, Alloy.EnumTier.TierIII, Alloy.EnumTier.TierIV);
+		Alloy WeakBlueSteel = new Alloy(Global.WEAKBLUESTEEL, Alloy.EnumTier.TierIII);
 		WeakBlueSteel.addIngred(Global.BLACKSTEEL, 50, 60);
 		WeakBlueSteel.addIngred(Global.BISMUTHBRONZE, 10, 15);
 		WeakBlueSteel.addIngred(Global.STERLINGSILVER, 10, 15);

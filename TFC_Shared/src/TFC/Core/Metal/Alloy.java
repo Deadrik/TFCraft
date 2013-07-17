@@ -11,16 +11,14 @@ public class Alloy
 	public List<AlloyMetal> AlloyIngred;
 	public Metal outputType;
 	public int outputAmount;
-	EnumTier tierMn; 
-	EnumTier tierMx;
+	EnumTier furnaceTier;
 	
-	public Alloy(Metal type, EnumTier tierMin, EnumTier tierMax)
+	public Alloy(Metal type, EnumTier tier)
 	{
 		AlloyIngred = new ArrayList<AlloyMetal>();
 		outputType = type;
 		outputAmount = 0;
-		tierMn = tierMin;
-		tierMx = tierMax;
+		furnaceTier = tier;
 	}
 	
 	public Alloy(Metal type, int am)
@@ -91,7 +89,11 @@ public class Alloy
 	
 	public enum EnumTier
 	{
-		TierI(1),TierII(2),TierIII(3),TierIV(4), TierV(5), TierVI(6), TierVII(7), TierVIII(8), TierIX(9), TierX(10);
+		TierI(1),//Pit Kiln
+		TierII(2),//Beehive Kiln
+		TierIII(3),//Bloomery
+		TierIV(4),//Blast Furnace
+		TierV(5), TierVI(6), TierVII(7), TierVIII(8), TierIX(9), TierX(10);
 		
 		public int tier;
 		
