@@ -75,7 +75,11 @@ public class BlockPottery extends BlockTerraContainer
 				int meta = world.getBlockMetadata(x, y, z);
 				if(world.getBlockMetadata(x, y, z) < 15)
 				{
-					world.setBlockMetadataWithNotify(x, y, z, meta+1, 2);
+					if(player.capabilities.isCreativeMode)
+						world.setBlockMetadataWithNotify(x, y, z, 15, 2);
+					else
+						world.setBlockMetadataWithNotify(x, y, z, meta+1, 2);
+					
 					player.inventory.consumeInventoryItem(player.inventory.currentItem);
 					return true;
 				}
