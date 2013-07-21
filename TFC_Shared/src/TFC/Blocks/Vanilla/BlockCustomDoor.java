@@ -389,7 +389,7 @@ public class BlockCustomDoor extends BlockTerra
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
-		return (par1 & 8) != 0 ? 0 : Recipes.Doors[woodType].itemID;
+		return (par1 & 8) != 0 ? 0 : Recipes.Doors[woodType/2].itemID;
 	}
 
 	/**
