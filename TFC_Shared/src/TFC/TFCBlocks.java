@@ -26,6 +26,7 @@ import TFC.Blocks.BlockStair;
 import TFC.Blocks.BlockStalactite;
 import TFC.Blocks.BlockSulfur;
 import TFC.Blocks.BlockThatch;
+import TFC.Blocks.BlockTuyere;
 import TFC.Blocks.BlockWoodSupport;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBellows;
@@ -120,6 +121,7 @@ public class TFCBlocks
 	public static int fluidRenderId;
 	public static int woodConstructRenderId;	
 	public static int potteryRenderId;
+	public static int tuyereRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -219,6 +221,7 @@ public class TFCBlocks
 	public static Block Moss;
 
 	public static Block Flora;
+	public static Block Tuyere;
 	
 	static Configuration config;
 	
@@ -334,6 +337,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Flora, "Flora");
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
 		GameRegistry.registerBlock(Thatch, "Thatch");
+		GameRegistry.registerBlock(Tuyere, "Tuyere");
 	}
 	
 	public static void LoadBlocks()
@@ -526,6 +530,8 @@ public class TFCBlocks
 		
 		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", 2064)).setUnlocalizedName("Flora");
 		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery");
+		
+		TFCBlocks.Tuyere = new BlockTuyere(TFC_Settings.getIntFor(config, "block", "Tuyere", 2066)).setUnlocalizedName("Tuyere");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

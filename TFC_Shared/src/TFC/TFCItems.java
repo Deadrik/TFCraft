@@ -53,6 +53,7 @@ import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemUnfinishedArmor;
+import TFC.Items.ItemBlocks.ItemTuyere;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -910,6 +911,14 @@ public class TFCItems
     public static Item ClayMoldShovel;
     public static Item ClayMoldSword;
     
+    public static Item TuyereCopper;
+    public static Item TuyereBronze;
+    public static Item TuyereWroughtIron;
+    public static Item TuyereSteel;
+    public static Item TuyereBlackSteel;
+    public static Item TuyereBlueSteel;
+    public static Item TuyereRedSteel;
+    
     /**
      * Item Uses Setup
      * */
@@ -1657,7 +1666,13 @@ public class TFCItems
         ClayMoldSword = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldSword",num++)).setMetaNames(new String[]{"Clay Mold Sword","Ceramic Mold Sword",
         		"Ceramic Mold Sword Copper","Ceramic Mold Sword Bronze","Ceramic Mold Sword Bismuth Bronze","Ceramic Mold Sword Black Bronze"}).setUnlocalizedName("Sword Mold");
         
-		
+        TuyereCopper = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereCopper",num++), 1000, 0).setUnlocalizedName("Copper Tuyere");
+        TuyereBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBronze",num++), 1000, 1).setUnlocalizedName("Bronze Tuyere");
+        TuyereWroughtIron = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereWroughtIron",num++), 1000, 2).setUnlocalizedName("Wrought Iron Tuyere");
+        TuyereSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereSteel",num++), 1000, 3).setUnlocalizedName("Steel Tuyere");
+        TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 1000, 4).setUnlocalizedName("Black Steel Tuyere");
+        TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 1000, 5).setUnlocalizedName("Red Steel Tuyere");
+        TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 1000, 6).setUnlocalizedName("Blue Steel Tuyere");
         /**Plans*/
         num = 20000;
         SetupPlans(num);

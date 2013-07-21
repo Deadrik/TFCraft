@@ -28,6 +28,7 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
+import TFC.Items.ItemBlocks.ItemTuyere;
 
 public class TileEntityBloomery extends TileEntityFireEntity implements IInventory
 {
@@ -75,7 +76,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		OreType = "";
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
-		input = new ItemStack[1];
+		input = new ItemStack[2];
 		inputItemTemps = new float[80];
 		ambientTemp = -1000;
 		numAirBlocks = 0;
@@ -529,7 +530,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 						dam = outMetal1Count;
 						outMetal1Count = 0;
 					}  
-					
+
 					if(outMetal1 != null)
 						input[0] = outMetal1.copy();
 				}
@@ -545,7 +546,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 						dam = outMetal2Count;
 						outMetal2Count = 0;
 					} 
-					
+
 					if(outMetal2 != null)
 						input[0] = outMetal2.copy();    
 				}
@@ -641,6 +642,38 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	{
 		if(!worldObj.isRemote)
 		{
+			//get the direction that the bloomery is facing so that we know where the stack should be
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
+			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
+
+			if(input[1] != null)
+			{
+				if(meta == 0 || meta == 2)
+				{
+					if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
+					{
+						worldObj.setBlock(xCoord+1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
+					}
+					else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
+					{
+						worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
+					}
+					
+				}
+				else if(meta == 1 || meta == 3)
+				{
+					if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
+					{
+						worldObj.setBlock(xCoord+1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
+					}
+					else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
+					{
+						worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
+					}
+					
+				}
+			}
+
 			outCount = getOutputCount();
 			if(outCount < 0)
 				outCount = 0;
@@ -667,10 +700,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			else if(count > 24 && count <= 32) {moltenCount = 4;} 
 			else if(count > 32 && count <= 40) {moltenCount = 5;} 
 
-			//get the direction that the bloomery is facing so that we know where the stack should be
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
 
-			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
+
+
 
 			/*Fill the bloomery stack with molten ore. */
 			for (int i = 0; i < 5; i++)
@@ -718,7 +750,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
 					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && 
-					(entity.getEntityItem().getItemDamage() == oreDamage || OreType.contentEquals("")))
+							(entity.getEntityItem().getItemDamage() == oreDamage || OreType.contentEquals("")))
 					{
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; c--)

@@ -104,6 +104,7 @@ import TFC.Render.Blocks.RenderPottery;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.Render.Blocks.RenderSupportBeam;
 import TFC.Render.Blocks.RenderToolRack;
+import TFC.Render.Blocks.RenderTuyere;
 import TFC.Render.Models.ModelBear;
 import TFC.Render.Models.ModelChickenTFC;
 import TFC.Render.Models.ModelCowTFC;
@@ -204,6 +205,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
