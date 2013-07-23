@@ -34,7 +34,7 @@ public class BlockTuyere extends BlockTerra
 	@Override
 	public Icon getIcon(int side, int meta)
 	{
-		int m = meta & 8;
+		int m = meta & 7;
 		
 		switch(m)
 		{

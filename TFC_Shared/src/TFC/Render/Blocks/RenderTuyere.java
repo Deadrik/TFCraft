@@ -13,9 +13,12 @@ public class RenderTuyere  implements ISimpleBlockRenderingHandler
 			Block block, int modelId, RenderBlocks renderblocks) 
 	{
 		if((world.getBlockMetadata(i, j, k) & 8) > 0)//Render East/West
-			block.setBlockBounds(0f, 0.4f, 0.4f, 1f, 0.6f, 0.6f);
+			renderblocks.setRenderBounds(0, 0.4, 0.4, 1, 0.6, 0.6);
 		else//Render North/South
-			block.setBlockBounds(0.4f, 0.4f, 0f, 0.6f, 0.6f, 1f);
+			renderblocks.setRenderBounds(0.4, 0.4, 0, 0.6, 0.6, 1);
+		
+		renderblocks.renderStandardBlock(block, i, j, k);
+		
 		return false;
 	}
 
