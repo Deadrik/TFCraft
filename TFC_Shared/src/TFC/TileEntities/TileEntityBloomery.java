@@ -648,7 +648,8 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 			if(input[1] != null)
 			{
-				if(meta == 0 || meta == 2)
+				if((meta == 0 || meta == 2) && worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && 
+						worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID)
 				{
 					if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
 					{
@@ -658,19 +659,39 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 					{
 						worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
 					}
-					
+
 				}
-				else if(meta == 1 || meta == 3)
+				else if((meta == 1 || meta == 3) && worldObj.getBlockId(xCoord, yCoord, zCoord+1) != TFCBlocks.Tuyere.blockID && 
+						worldObj.getBlockId(xCoord, yCoord, zCoord-1) != TFCBlocks.Tuyere.blockID)
 				{
-					if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
+					if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord, yCoord, zCoord+1))
 					{
-						worldObj.setBlock(xCoord+1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
+						worldObj.setBlock(xCoord, yCoord, zCoord+1, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
 					}
-					else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
+					else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord, yCoord, zCoord-1))
 					{
-						worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
+						worldObj.setBlock(xCoord, yCoord, zCoord-1, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
 					}
-					
+
+				}
+			}
+			else
+			{
+				if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == TFCBlocks.Tuyere.blockID)
+				{
+					worldObj.setBlockToAir(xCoord+1, yCoord, zCoord);
+				}
+				else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == TFCBlocks.Tuyere.blockID )
+				{
+					worldObj.setBlockToAir(xCoord-1, yCoord, zCoord);
+				}
+				else if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == TFCBlocks.Tuyere.blockID)
+				{
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord+1);
+				}
+				else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == TFCBlocks.Tuyere.blockID)
+				{
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord-1);
 				}
 			}
 
@@ -879,7 +900,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		}
 
 		NBTTagList nbttaglist2 = nbttagcompound.getTagList("Input");
-		input = new ItemStack[1];
+		input = new ItemStack[2];
 		for(int i = 0; i < nbttaglist2.tagCount(); i++)
 		{
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist2.tagAt(i);
