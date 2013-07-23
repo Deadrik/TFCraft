@@ -15,7 +15,9 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerra;
+import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityFireEntity;
+import TFC.TileEntities.TileEntityForge;
 
 public class BlockBellows extends BlockTerra
 {
@@ -28,6 +30,17 @@ public class BlockBellows extends BlockTerra
 			0, -1
 		}, {
 			1, 0
+		}
+	};
+	public static final int blockMap2[][] = {
+		{
+			0, 2
+		}, {
+			-2, 0
+		}, {
+			0, -2
+		}, {
+			2, 0
 		}
 	};
 
@@ -220,12 +233,17 @@ public class BlockBellows extends BlockTerra
 
 		TileEntity te = world.getBlockTileEntity(i+x, j, k+z);
 		TileEntity te2 = world.getBlockTileEntity(i+x, j-1, k+z);
+		TileEntity te3 = world.getBlockTileEntity(i + x + blockMap2[meta][0], j, k + z + blockMap2[meta][1]);
 		TileEntityFireEntity tileentityfirepit = null;;
-		if(te != null && te instanceof TileEntityFireEntity)
+		if(te3 != null && te3 instanceof TileEntityBloomery && world.getBlockId(i+x, j, k+z) == TFCBlocks.Tuyere.blockID)
+		{
+			tileentityfirepit = (TileEntityFireEntity)te3;
+		}
+		else if(te != null && te instanceof TileEntityFireEntity && !(te instanceof TileEntityBloomery))
 		{
 			tileentityfirepit = (TileEntityFireEntity)te;
 		}
-		else if(te2 != null && te2 instanceof TileEntityFireEntity)
+		else if(te2 != null && te2 instanceof TileEntityForge)
 		{
 			tileentityfirepit = (TileEntityFireEntity)te2;
 		}
