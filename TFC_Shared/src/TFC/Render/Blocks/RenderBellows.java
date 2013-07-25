@@ -27,7 +27,8 @@ public class RenderBellows implements ISimpleBlockRenderingHandler {
 			int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
 			TileEntityBellows te = (TileEntityBellows)blockAccess.getBlockTileEntity(x, y, z);
 			float pos = te.blowTimer * 0.1F;
-
+			if(pos < 0) { pos = 0; }
+			
 			if(te != null) {
 				boolean breaking = false;
 				if(renderer.overrideBlockTexture != null) {

@@ -16,6 +16,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityFireEntity;
@@ -37,14 +38,13 @@ public class BlockBellows extends BlockTerraContainer {
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
 		super.onBlockActivated(world, i, j, k, entityplayer, par6, par7, par8, par9);
 		TileEntityBellows te = (TileEntityBellows) world.getBlockTileEntity(i, j, k);
-		if (world.isRemote) {
+		if (!world.isRemote) {
 			if (!te.shouldBlow) {
 				te.shouldBlow = true;
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
-				// Play blow sound
+				world.playSoundEffect(i, j, k, TFC_Sounds.BELLOWS, 0.3F, 1);
+				GiveAir(world, i, j, k);
 			}
-		} else {
-			GiveAir(world, i, j, k);
 		}
 		return true;
 	}
@@ -137,11 +137,12 @@ public class BlockBellows extends BlockTerraContainer {
 
 		TileEntity te = world.getBlockTileEntity(i + x, j, k + z);
 		TileEntity te2 = world.getBlockTileEntity(i + x, j - 1, k + z);
-		TileEntity te3 = world.getBlockTileEntity(i + x + blockMap2[meta][0], j, k + z + blockMap2[meta][1]);
+		TileEntity te3 = world.getBlockTileEntity(i + blockMap2[meta][0], j, k + blockMap2[meta][1]);
 		TileEntityFireEntity tileentityfirepit = null;
 
 		if (te3 != null && te3 instanceof TileEntityBloomery && world.getBlockId(i + x, j, k + z) == TFCBlocks.Tuyere.blockID) {
 			tileentityfirepit = (TileEntityFireEntity) te3;
+			System.out.println("Bloom!");
 		} else if (te != null && te instanceof TileEntityFireEntity && !(te instanceof TileEntityBloomery)) {
 			tileentityfirepit = (TileEntityFireEntity) te;
 		} else if (te2 != null && te2 instanceof TileEntityForge) {

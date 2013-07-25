@@ -5,10 +5,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import TFC.Handlers.PacketHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.tileentity.TileEntity;
+import TFC.Handlers.PacketHandler;
 
 public class TileEntityBellows extends NetworkTileEntity {
 
@@ -24,7 +23,7 @@ public class TileEntityBellows extends NetworkTileEntity {
 				if(blowTimer == 5) { blowDirection = 1; }
 			} else {
 				blowTimer--;
-				if(blowTimer == 0) {
+				if(blowTimer == -3) {
 					blowDirection = 0;
 					shouldBlow = false;
 				}

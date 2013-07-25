@@ -21,7 +21,8 @@ public class TFC_Sounds
 			LOCATION + "metalimpact3.ogg",
 			LOCATION + "metalimpact4.ogg",
 			LOCATION + "stonedrag1.ogg",
-			LOCATION + "stonedrag2.ogg"};
+			LOCATION + "stonedrag2.ogg",
+			LOCATION + "bellows1.ogg"};
 	
 	public static String [] musicFiles = {
 		LOCATION_MUSIC + "m0.ogg",
@@ -36,4 +37,5 @@ public class TFC_Sounds
 	public static final String FALLININGDIRTSHORT = PREFIX + "fDirtS";
 	public static final String METALIMPACT = PREFIX + "metalimpact";
 	public static final String STONEDRAG = PREFIX + "stonedrag";
+	public static final String BELLOWS = PREFIX + "bellows";
 }
