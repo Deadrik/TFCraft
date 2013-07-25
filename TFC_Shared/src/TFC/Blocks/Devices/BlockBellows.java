@@ -14,192 +14,98 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Blocks.BlockTerra;
+import TFC.TerraFirmaCraft;
+import TFC.Blocks.BlockTerraContainer;
+import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityFireEntity;
 import TFC.TileEntities.TileEntityForge;
 
-public class BlockBellows extends BlockTerra
-{
-	public static final int blockMap[][] = {
-		{
-			0, 1
-		}, {
-			-1, 0
-		}, {
-			0, -1
-		}, {
-			1, 0
-		}
-	};
-	public static final int blockMap2[][] = {
-		{
-			0, 2
-		}, {
-			-2, 0
-		}, {
-			0, -2
-		}, {
-			2, 0
-		}
-	};
+public class BlockBellows extends BlockTerraContainer {
+	public static final int blockMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
+	public static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
 
-	public static int getDirectionFromMetadata(int i)
-	{
+	public static int getDirectionFromMetadata(int i) {
 		return i & 3;
 	}
 
-	public BlockBellows(int i, Material material) 
-	{
+	public BlockBellows(int i, Material material) {
 		super(i, material);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
-	{
-		if(world.isRemote)
-		{
-			return true;
-		} 
-		else
-		{
-			GiveAir(world,i, j, k);
-			return true;
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
+		super.onBlockActivated(world, i, j, k, entityplayer, par6, par7, par8, par9);
+		TileEntityBellows te = (TileEntityBellows) world.getBlockTileEntity(i, j, k);
+		if (world.isRemote) {
+			if (!te.shouldBlow) {
+				te.shouldBlow = true;
+				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
+				// Play blow sound
+			}
+		} else {
+			GiveAir(world, i, j, k);
 		}
+		return true;
 	}
 
 	@Override
-	public Icon getIcon(int i, int j)
-	{
-		if(i == 0)//bottom
+	public Icon getIcon(int i, int j) {
+		if (i == 0)// bottom
 		{
-			if(j == 0)
-			{
-				return Sides[0];
-			}
-			else if(j == 1)
-			{
-				return Sides[1];
-			}
-			else if(j == 2)
-			{
-				return Sides[3];
-			}
-			else if(j == 3)
-			{
-				return Sides[2];
-			}
+			if (j == 0) { return Sides[0]; }
+			else if (j == 1) { return Sides[1]; }
+			else if (j == 2) { return Sides[3]; }
+			else if (j == 3) { return Sides[2]; }
 		}
-		else if(i == 1)//top
+		else if (i == 1)// top
 		{
-			if(j == 0)
-			{
-				return Sides[0];
-			}
-			else if(j == 1)
-			{
-				return Sides[1];
-			}
-			else if(j == 2)
-			{
-				return Sides[3];
-			}
-			else if(j == 3)
-			{
-				return Sides[2];
-			}
+			if (j == 0) { return Sides[0]; }
+			else if (j == 1) { return Sides[1]; }
+			else if (j == 2) { return Sides[3]; }
+			else if (j == 3) { return Sides[2]; }
 		}
-		else if(i == 2)//-z
+		else if (i == 2)// -z
 		{
-			if(j == 0)
-			{
-				return BellowsBack;
-			}
-			else if(j == 1)//-z
-			{
-				return Sides[2];
-			}
-			else if(j == 2)
-			{
-				return BellowsBack;
-			}
-			else if(j == 3)//-z
-			{
-				return Sides[1];
-			}
+			if (j == 0) { return BellowsBack; }
+			else if (j == 1) { return Sides[2]; } // -z
+			else if (j == 2) { return BellowsBack; }
+			else if (j == 3) { return Sides[1]; } // -z
 		}
-		else if(i == 3)//-z
+		else if (i == 3)// -z
 		{
-			if(j == 0)
-			{
-				return BellowsBack;
-			}
-			else if(j == 1)//-z
-			{
-				return Sides[1];
-			}
-			else if(j == 2)
-			{
-				return BellowsBack;
-			}
-			else if(j == 3)//-z
-			{
-				return Sides[2];
-			}
+			if (j == 0) { return BellowsBack; }
+			else if (j == 1) { return Sides[1]; } // -z
+			else if (j == 2) { return BellowsBack; }
+			else if (j == 3) { return Sides[2]; } // -z
 		}
-		else if(i == 4)//+x
+		else if (i == 4)// +x
 		{
-			if(j == 0)
-			{
-				return Sides[2];
-			}
-			else if(j == 1)//-z
-			{
-				return BellowsBack;
-			}
-			else if(j == 2)
-			{
-				return Sides[1];
-			}
-			else if(j == 3)//-z
-			{
-				return BellowsBack;
-			}
+			if (j == 0) { return Sides[2]; }
+			else if (j == 1) { return BellowsBack; } // -z
+			else if (j == 2) { return Sides[1]; }
+			else if (j == 3) { return BellowsBack; } // -z
 		}
-		else if(i == 5)//-z
+		else if (i == 5)// -z
 		{
-			if(j == 0)
-			{
-				return Sides[1];
-			}
-			else if(j == 1)//-z
-			{
-				return BellowsBack;
-			}
-			else if(j == 2)
-			{
-				return Sides[2];
-			}
-			else if(j == 3)//-z
-			{
-				return BellowsBack;
-			}
+			if (j == 0) { return Sides[1]; }
+			else if (j == 1) { return BellowsBack; } // -z
+			else if (j == 2) { return Sides[2]; }
+			else if (j == 3) { return BellowsBack; } // -z
 		}
 		else
 		{
 			return Sides[1];
 		}
-
 		return Sides[0];
 	}
-	
+
 	public static Icon[] Sides = new Icon[4];
 	public static Icon BellowsFront;
 	public static Icon BellowsBack;
 
 	@Override
-	public void registerIcons(IconRegister registerer)
-	{
+	public void registerIcons(IconRegister registerer) {
 		Sides[0] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows82");
 		Sides[1] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows83");
 		Sides[2] = registerer.registerIcon(Reference.ModID + ":" + "devices/Bellows84");
@@ -209,71 +115,68 @@ public class BlockBellows extends BlockTerra
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return TFCBlocks.BellowsRenderId;
 	}
 
-	public void GiveAir(World world, int i, int j, int k)
-	{
+	public void GiveAir(World world, int i, int j, int k) {
 		int meta = world.getBlockMetadata(i, j, k);
 
 		int x = blockMap[meta][0];
 		int z = blockMap[meta][1];
 
 		Random random = new Random();
-		float f = (float)i +x+ 0.5F;
+		float f = (float) i + x + 0.5F;
 		float f1 = j + 0.1F + random.nextFloat() * 6F / 16F;
-		float f2 = (float)k +z+ 0.5F;
+		float f2 = (float) k + z + 0.5F;
 		float f3 = 0.82F;
 		float f4 = random.nextFloat() * 0.6F;
 		float f5 = random.nextFloat() * -0.6F;
 		float f6 = random.nextFloat() * -0.6F;
-		world.spawnParticle("smoke", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
+		world.spawnParticle("smoke", f + f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
 
-		TileEntity te = world.getBlockTileEntity(i+x, j, k+z);
-		TileEntity te2 = world.getBlockTileEntity(i+x, j-1, k+z);
+		TileEntity te = world.getBlockTileEntity(i + x, j, k + z);
+		TileEntity te2 = world.getBlockTileEntity(i + x, j - 1, k + z);
 		TileEntity te3 = world.getBlockTileEntity(i + x + blockMap2[meta][0], j, k + z + blockMap2[meta][1]);
-		TileEntityFireEntity tileentityfirepit = null;;
-		if(te3 != null && te3 instanceof TileEntityBloomery && world.getBlockId(i+x, j, k+z) == TFCBlocks.Tuyere.blockID)
-		{
-			tileentityfirepit = (TileEntityFireEntity)te3;
+		TileEntityFireEntity tileentityfirepit = null;
+
+		if (te3 != null && te3 instanceof TileEntityBloomery && world.getBlockId(i + x, j, k + z) == TFCBlocks.Tuyere.blockID) {
+			tileentityfirepit = (TileEntityFireEntity) te3;
+		} else if (te != null && te instanceof TileEntityFireEntity && !(te instanceof TileEntityBloomery)) {
+			tileentityfirepit = (TileEntityFireEntity) te;
+		} else if (te2 != null && te2 instanceof TileEntityForge) {
+			tileentityfirepit = (TileEntityFireEntity) te2;
 		}
-		else if(te != null && te instanceof TileEntityFireEntity && !(te instanceof TileEntityBloomery))
-		{
-			tileentityfirepit = (TileEntityFireEntity)te;
-		}
-		else if(te2 != null && te2 instanceof TileEntityForge)
-		{
-			tileentityfirepit = (TileEntityFireEntity)te2;
-		}
-		
-		if(tileentityfirepit != null)
-		{
+
+		if (tileentityfirepit != null) {
 			tileentityfirepit.receiveAirFromBellows();
 		}
 	}
+
 	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{		
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l) {
 		dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BellowsItem, 1));
 	}
+
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
-	{
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is) {
+		super.onBlockPlacedBy(world, i, j, k, entityliving, is);
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(i, j, k, l, 0x2);
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1) {
+		return new TileEntityBellows();
 	}
 }

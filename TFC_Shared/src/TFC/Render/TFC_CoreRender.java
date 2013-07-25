@@ -358,7 +358,7 @@ public class TFC_CoreRender
 
 	public static boolean renderBellows(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
+/*		IBlockAccess blockAccess = renderblocks.blockAccess;
 
         int meta = blockAccess.getBlockMetadata(i, j, k);
         int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
@@ -439,7 +439,7 @@ public class TFC_CoreRender
             renderblocks.clearOverrideBlockTexture();
         }
 
-        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);*/
 		return true;
 	}
 
