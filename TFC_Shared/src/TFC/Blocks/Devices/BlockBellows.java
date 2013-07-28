@@ -1,7 +1,5 @@
 package TFC.Blocks.Devices;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
@@ -18,13 +16,8 @@ import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityBellows;
-import TFC.TileEntities.TileEntityBloomery;
-import TFC.TileEntities.TileEntityFireEntity;
-import TFC.TileEntities.TileEntityForge;
 
 public class BlockBellows extends BlockTerraContainer {
-	public static final int blockMap[][] = { { 0, 1 }, { -1, 0 }, { 0, -1 }, { 1, 0 } };
-	public static final int blockMap2[][] = { { 0, 2 }, { -2, 0 }, { 0, -2 }, { 2, 0 } };
 
 	public static int getDirectionFromMetadata(int i) {
 		return i & 3;
@@ -43,7 +36,6 @@ public class BlockBellows extends BlockTerraContainer {
 				te.shouldBlow = true;
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
 				world.playSoundEffect(i, j, k, TFC_Sounds.BELLOWS, 0.3F, 1);
-				GiveAir(world, i, j, k);
 			}
 		}
 		return true;
@@ -117,41 +109,6 @@ public class BlockBellows extends BlockTerraContainer {
 	@Override
 	public int getRenderType() {
 		return TFCBlocks.BellowsRenderId;
-	}
-
-	public void GiveAir(World world, int i, int j, int k) {
-		int meta = world.getBlockMetadata(i, j, k);
-
-		int x = blockMap[meta][0];
-		int z = blockMap[meta][1];
-
-		Random random = new Random();
-		float f = (float) i + x + 0.5F;
-		float f1 = j + 0.1F + random.nextFloat() * 6F / 16F;
-		float f2 = (float) k + z + 0.5F;
-		float f3 = 0.82F;
-		float f4 = random.nextFloat() * 0.6F;
-		float f5 = random.nextFloat() * -0.6F;
-		float f6 = random.nextFloat() * -0.6F;
-		world.spawnParticle("smoke", f + f4 - 0.3F, f1, f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
-
-		TileEntity te = world.getBlockTileEntity(i + x, j, k + z);
-		TileEntity te2 = world.getBlockTileEntity(i + x, j - 1, k + z);
-		TileEntity te3 = world.getBlockTileEntity(i + blockMap2[meta][0], j, k + blockMap2[meta][1]);
-		TileEntityFireEntity tileentityfirepit = null;
-
-		if (te3 != null && te3 instanceof TileEntityBloomery && world.getBlockId(i + x, j, k + z) == TFCBlocks.Tuyere.blockID) {
-			tileentityfirepit = (TileEntityFireEntity) te3;
-			System.out.println("Bloom!");
-		} else if (te != null && te instanceof TileEntityFireEntity && !(te instanceof TileEntityBloomery)) {
-			tileentityfirepit = (TileEntityFireEntity) te;
-		} else if (te2 != null && te2 instanceof TileEntityForge) {
-			tileentityfirepit = (TileEntityFireEntity) te2;
-		}
-
-		if (tileentityfirepit != null) {
-			tileentityfirepit.receiveAirFromBellows();
-		}
 	}
 
 	@Override
