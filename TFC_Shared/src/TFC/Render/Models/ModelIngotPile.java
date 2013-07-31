@@ -28,11 +28,14 @@ public class ModelIngotPile extends ModelBase
 			{
 				renderer[n].cubeList.add(
 						new ModelIngot(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, 0.5F + x, y, z + 0.5f, ingotWidth, ingotHeight, ingotDepth, 0f));
+						//new ModelFrond(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, 0.5F + x, y, z + 0.5f, ingotWidth, ingotHeight, ingotDepth, 0f));
+
 			}
 			else
 			{
 				renderer[n].cubeList.add(
 						new ModelIngot(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, z + 0.5f, y, 0.5f + x, ingotDepth, ingotHeight, ingotWidth, 0f));
+						//new ModelFrond(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, z + 0.5f, y, 0.5f + x, ingotDepth, ingotHeight, ingotWidth, 0f));
 			}
 		}
 	}
