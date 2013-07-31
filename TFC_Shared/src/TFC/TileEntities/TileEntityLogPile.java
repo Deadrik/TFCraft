@@ -1,7 +1,9 @@
 package TFC.TileEntities;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -10,11 +12,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import TFC.Core.TFC_ItemHeat;
+import TFC.Core.Vector3f;
 
 public class TileEntityLogPile extends TileEntity implements IInventory
 {
     public ItemStack[] storage;
     private int logPileOpeners;
+    private TileEntityFirepit charcoalFirepit;
+    private boolean isOnFire;
 
     public TileEntityLogPile()
     {
@@ -26,6 +31,14 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     {
         if(storage[index] == null) {
             storage[index] = is;
+            
+            if(charcoalFirepit != null)
+            {
+            	if(charcoalFirepit.isInactiveCharcoalFirepit())
+            		charcoalFirepit.logPileUpdate(is.stackSize);
+            	else 
+            		setCharcoalFirepit(null);
+            }
         }
     }
 
@@ -43,7 +56,8 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     	
     	if(logPileOpeners == 0 && storage[0] == null && storage[1] == null &&
 				storage[2] == null && storage[3] == null)
-		{
+		{	
+    		extinguishFire();
 			worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 		}
 
@@ -80,6 +94,15 @@ public class TileEntityLogPile extends TileEntity implements IInventory
             {
                 ItemStack itemstack = storage[i];
                 storage[i] = null;
+                
+                if(charcoalFirepit != null)
+                {
+                	if(charcoalFirepit.isInactiveCharcoalFirepit())
+                		charcoalFirepit.logPileUpdate(-j);
+                	else
+                		setCharcoalFirepit(null);
+                }
+                
                 return itemstack;
             }
             ItemStack itemstack1 = storage[i].splitStack(j);
@@ -87,6 +110,15 @@ public class TileEntityLogPile extends TileEntity implements IInventory
             {
                 storage[i] = null;
             }
+            
+            if(charcoalFirepit != null)
+            {
+            	if(charcoalFirepit.isInactiveCharcoalFirepit())
+            		charcoalFirepit.logPileUpdate(-j);
+            	else
+            		setCharcoalFirepit(null);
+            }
+            
             return itemstack1;
         } else
         {
@@ -102,6 +134,14 @@ public class TileEntityLogPile extends TileEntity implements IInventory
         float f = rand.nextFloat() * 0.8F + 0.1F;
         float f1 = rand.nextFloat() * 2.0F + 0.4F;
         float f2 = rand.nextFloat() * 0.8F + 0.1F;
+        
+        if(charcoalFirepit != null)
+        {
+        	if(charcoalFirepit.isInactiveCharcoalFirepit())
+        		charcoalFirepit.logPileUpdate(-getNumberOfLogs());
+        	else
+        		setCharcoalFirepit(null);
+        }
 
         for (int i = 0; i < getSizeInventory(); i++)
         {
@@ -115,6 +155,8 @@ public class TileEntityLogPile extends TileEntity implements IInventory
                 worldObj.spawnEntityInWorld(entityitem);
             }
         }
+        
+        extinguishFire();
     }
 
     @Override
@@ -151,6 +193,14 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     public void injectContents(int index, int count)
     {
         if(storage[index] != null) {
+        	if(charcoalFirepit != null)
+            {
+            	if(charcoalFirepit.isInactiveCharcoalFirepit())
+            		charcoalFirepit.logPileUpdate(count);
+            	else
+            		setCharcoalFirepit(null);
+            }
+            			
             storage[index] = 
                     new ItemStack(storage[index].getItem(),
                             storage[index].stackSize+count,
@@ -236,5 +286,96 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
+	}
+	
+	public TileEntityFirepit getCharcoalFirepit()
+	{
+		return charcoalFirepit;
+	}
+	
+	public void setCharcoalFirepit(TileEntityFirepit firepit)
+	{
+		charcoalFirepit = firepit;
+	}
+	
+	public void neighborChanged()
+	{
+		if(charcoalFirepit != null)
+		{	
+			if(!charcoalFirepit.isInactiveCharcoalFirepit())
+			{
+				ArrayList<Vector3f> blocksOnFire = new ArrayList<Vector3f>();
+				
+				if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == 0)
+		        	blocksOnFire.add(new Vector3f(xCoord+1, yCoord, zCoord));
+		        if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == 0)
+		        	blocksOnFire.add(new Vector3f(xCoord-1, yCoord, zCoord));
+		        if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == 0)
+		        	blocksOnFire.add(new Vector3f(xCoord, yCoord, zCoord+1));
+		        if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == 0)
+		        	blocksOnFire.add(new Vector3f(xCoord, yCoord, zCoord-1));
+		        if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == 0)
+		        	blocksOnFire.add(new Vector3f(xCoord, yCoord+1, zCoord));
+		        if(worldObj.getBlockId(xCoord, yCoord-1, zCoord) == 0)
+		        	blocksOnFire.add(new Vector3f(xCoord, yCoord-1, zCoord));
+		
+				if(blocksOnFire.size() > 0)
+		    		setOnFire(blocksOnFire);
+			}
+			else
+			{			
+				setCharcoalFirepit(null);
+				extinguishFire();
+			}
+		}
+	}
+	
+	public void setOnFire(ArrayList<Vector3f> blocksOnFire)
+	{
+		for(int i = 0; i < blocksOnFire.size(); ++i)
+		{
+			Vector3f blockOnFire = blocksOnFire.get(i); 
+			worldObj.setBlock((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z, Block.fire.blockID);
+            worldObj.markBlockForUpdate((int)blockOnFire.X, (int)blockOnFire.Y, (int)blockOnFire.Z);          
+		}
+		isOnFire = true;
+	}
+	
+	public void extinguishFire()
+	{
+		if(isOnFire)
+		{
+			if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == Block.fire.blockID)
+			{
+				worldObj.setBlock(xCoord+1, yCoord, zCoord, 0);
+	            worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord); 
+			}
+	        if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == Block.fire.blockID)
+	        {
+				worldObj.setBlock(xCoord-1, yCoord, zCoord, 0);
+	            worldObj.markBlockForUpdate(xCoord+1, yCoord, zCoord); 
+			}
+	        if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == Block.fire.blockID)
+	        {
+				worldObj.setBlock(xCoord, yCoord, zCoord+1, 0);
+	            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord+1); 
+			}
+	        if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == Block.fire.blockID)
+	        {
+				worldObj.setBlock(xCoord+1, yCoord, zCoord-1, 0);
+	            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord-1); 
+			}
+	        if(worldObj.getBlockId(xCoord, yCoord+1, zCoord) == Block.fire.blockID)
+	        {
+				worldObj.setBlock(xCoord, yCoord+1, zCoord, 0);
+	            worldObj.markBlockForUpdate(xCoord, yCoord+1, zCoord); 
+			}
+	        if(worldObj.getBlockId(xCoord, yCoord-1, zCoord) == Block.fire.blockID)
+	        {
+				worldObj.setBlock(xCoord, yCoord-1, zCoord, 0);
+	            worldObj.markBlockForUpdate(xCoord, yCoord-1, zCoord); 
+			}
+	        isOnFire = false;
+		}
 	}
 }

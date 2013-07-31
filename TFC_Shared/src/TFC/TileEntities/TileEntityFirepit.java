@@ -32,6 +32,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
     private int externalFireCheckTimer;
     private int externalWoodCount;
+    private int oldWoodCount;
+    private boolean logPileChecked;
     public int charcoalCounter;
 
     public final int FIREBURNTIME = (int) ((TFC_Time.hourLength*18)/100);//default 240
@@ -51,8 +53,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
         externalFireCheckTimer = 0;
         externalWoodCount = 0;
+        oldWoodCount = 0;
         charcoalCounter = 0;
-
     }
 
     public Boolean addByproduct(ItemStack is)
@@ -388,51 +390,42 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
         }
     }
 
-    private List vecArray = new ArrayList<Vector3f>();
     public void externalFireCheck()
     {
         Random R = new Random();
         if(externalFireCheckTimer == 0)
         {
-            int oldWoodCount = externalWoodCount;
-            externalWoodCount = 0;
-            
-            vecArray = new ArrayList<Vector3f>();
-            ProcessPile(worldObj,xCoord,yCoord,zCoord,false);
-
-            //Now we actually set fire to the air blocks
-            if(vecArray.size() > 0)
+            if(!logPileChecked)
             {
-                for(int i = 0; i < vecArray.size(); i++)
-                {
-                    Vector3f vec = (Vector3f)vecArray.toArray()[i];
-                    if(R.nextInt(100) > 75 && getNearWood((int)vec.X, (int)vec.Y, (int)vec.Z)) 
-                    {
-                        worldObj.setBlock((int)vec.X, (int)vec.Y, (int)vec.Z, Block.fire.blockID);
-                        worldObj.markBlockForUpdate((int)vec.X, (int)vec.Y, (int)vec.Z);
-                    }
+            	logPileChecked = true;
+            	oldWoodCount = externalWoodCount;
+                externalWoodCount = 0;
+                
+            	ProcessPile(xCoord,yCoord,zCoord,false);
+            	
+            	if(oldWoodCount != externalWoodCount) {
+                    charcoalCounter = 0;
                 }
             }
+
             //This is where we handle the counter for producing charcoal. Once it reaches 24hours, we add charcoal to the fire and remove the wood.
-            if(oldWoodCount != externalWoodCount) {
-                charcoalCounter = 0;
-            } else if(charcoalCounter == 0)
+            if(charcoalCounter == 0)
             {
                 charcoalCounter = (int) TFC_Time.getTotalTicks();
             }
 
             if(charcoalCounter > 0 && charcoalCounter + (FIREBURNTIME*100) < TFC_Time.getTotalTicks() )
             {
+            	logPileChecked = false;
                 charcoalCounter = 0;
-                float percent = 25+R.nextInt(25);
-
+                
+                ProcessPile(xCoord,yCoord,zCoord,true);
                 worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-                ProcessPile(worldObj,xCoord,yCoord,zCoord,true);                
             }
         }
     }
 
-    private void ProcessPile(World world, int i, int j, int k, boolean empty)
+    private void ProcessPile(int i, int j, int k, boolean empty)
     {
         int x = i;
         int y = 0;
@@ -442,42 +435,49 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 
         while(!reachedTop && j+y >= 0)
         {
-            if(world.getBlockId(x, j+y+1, z) != TFCBlocks.LogPile.blockID)
+            if(worldObj.getBlockId(x, j+y+1, z) != TFCBlocks.LogPile.blockID)
             {
                 reachedTop = true;
             }
-            scanLogs(world,i,j+y,k,checkArray,12,y,12, empty);
+            checkOut(i, j+y, k, empty);
+            scanLogs(i,j+y,k,checkArray,(byte)12,(byte)y,(byte)12, empty);
             y++;
         }
     }
 
-    private boolean checkOut(World world, int i, int j, int k, boolean empty)
-    {
-        if(world.getBlockId(i, j, k) == 0)
-            vecArray.add(new Vector3f(i, j, k));        
-
-        else if(world.getBlockId(i, j, k) == TFCBlocks.LogPile.blockID)
+    private boolean checkOut(int i, int j, int k, boolean empty)
+    {       
+        if(worldObj.getBlockId(i, j, k) == TFCBlocks.LogPile.blockID)
         {
+        	ArrayList<Vector3f> blocksOnFire = new ArrayList<Vector3f>();
             if(!empty)
             {
-                if(world.getBlockId(i+1, j, k) == 0)
-                    vecArray.add(new Vector3f(i+1, j, k));
-                else if(world.getBlockId(i-1, j, k) == 0)
-                    vecArray.add(new Vector3f(i-1, j, k));
-                else if(world.getBlockId(i, j, k+1) == 0)
-                    vecArray.add(new Vector3f(i, j, k+1));
-                else if(world.getBlockId(i, j, k-1) == 0)
-                    vecArray.add(new Vector3f(i, j, k-1));
-                else if(world.getBlockId(i, j+1, k) == 0)
-                    vecArray.add(new Vector3f(i, j+1, k));
-                else if(world.getBlockId(i, j-1, k) == 0)
-                    vecArray.add(new Vector3f(i, j-1, k));
+                if(worldObj.getBlockId(i+1, j, k) == 0)
+                	blocksOnFire.add(new Vector3f(i+1, j, k));
+                if(worldObj.getBlockId(i-1, j, k) == 0)
+                	blocksOnFire.add(new Vector3f(i-1, j, k));
+                if(worldObj.getBlockId(i, j, k+1) == 0)
+                	blocksOnFire.add(new Vector3f(i, j, k+1));
+                if(worldObj.getBlockId(i, j, k-1) == 0)
+                	blocksOnFire.add(new Vector3f(i, j, k-1));
+                if(worldObj.getBlockId(i, j+1, k) == 0)
+                	blocksOnFire.add(new Vector3f(i, j+1, k));
+                if(worldObj.getBlockId(i, j-1, k) == 0)
+                	blocksOnFire.add(new Vector3f(i, j-1, k));
             }
 
             TileEntityLogPile te = (TileEntityLogPile)worldObj.getBlockTileEntity(i, j, k);
             int count = 0;
             if(te != null)
             {
+            	if(!empty)
+            		te.setCharcoalFirepit(this);
+            	else 
+            		te.setCharcoalFirepit(null);
+            	
+            	if(blocksOnFire.size() > 0)
+            		te.setOnFire(blocksOnFire);
+            	
                 if(te.storage[0] != null) 
                 {
                     if(!empty)
@@ -509,40 +509,49 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
             }
             if(empty)
             {
-            	float percent = 25 + world.rand.nextInt(25);
+            	float percent = 25 + worldObj.rand.nextInt(25);
                 count = (int) (count * (percent/100));
-                world.setBlock(i, j, k, TFCBlocks.Charcoal.blockID, count, 0x0);
-                world.markBlockForUpdate(i, j, k);
+                
+                worldObj.setBlock(i, j, k, TFCBlocks.Charcoal.blockID, count, 0x2);
+                /* Trick to make the block fall or start the combining "chain" with other blocks.
+                 * We don't notify the bottom block because it may be air so this block won't fall */
+                worldObj.notifyBlockOfNeighborChange(i, j, k, TFCBlocks.Charcoal.blockID); 
             }
             return true;
         }
         return false;
     }
 
-    private void scanLogs(World world, int i, int j, int k, boolean[][][] checkArray,int x, int y, int z, boolean empty)
+    private void scanLogs(int i, int j, int k, boolean[][][] checkArray, byte x, byte y, byte z, boolean empty)
     {
         if(y >= 0)
         {
             checkArray[x][y][z] = true;
-            int offsetX = 0;int offsetY = 0;int offsetZ = 0;
+            int offsetX = 0;int offsetZ = 0;
 
-            for (offsetY = 0; offsetY <= 1; offsetY++)
+            for (offsetX = -1; offsetX <= 1; offsetX++)
             {
-                for (offsetX = -1; offsetX <= 1; offsetX++)
+                for (offsetZ = -1; offsetZ <= 1; offsetZ++)
                 {
-                    for (offsetZ = -1; offsetZ <= 1; offsetZ++)
+                    if(x+offsetX < 25 && x+offsetX >= 0 && z+offsetZ < 25 && z+offsetZ >= 0 && y < 13 && y >= 0)
                     {
-                        if(x+offsetX < 25 && x+offsetX >= 0 && z+offsetZ < 25 && z+offsetZ >= 0 && y+offsetY < 13 && y+offsetY >= 0)
+                        if(!checkArray[x+offsetX][y][z+offsetZ] && checkOut(i+offsetX, j, k+offsetZ, empty))
                         {
-                            if(!checkArray[x+offsetX][y+offsetY][z+offsetZ] && checkOut(world, i+offsetX, j+offsetY, k+offsetZ, empty))
-                            {
-                                scanLogs(world,i+offsetX, j+offsetY, k+offsetZ, checkArray,x+offsetX,y+offsetY,z+offsetZ, empty);
-                            }
+                            scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),(byte)y,(byte)(z+offsetZ), empty);
                         }
                     }
                 }
             }
         }
+    }
+    
+    public void logPileUpdate(int woodChanges)
+    {
+    	oldWoodCount = externalWoodCount;
+    	externalWoodCount += woodChanges;
+    	
+    	if(oldWoodCount != externalWoodCount)
+    		charcoalCounter = 0;
     }
 
     public float getInputTemp()
@@ -564,39 +573,6 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     public String getInvName()
     {
         return "Firepit";
-    }
-
-    public Boolean getNearWood(int x, int y, int z)
-    {
-        if(worldObj.getBlockMaterial(x+1, y, z) == Material.wood)
-        {
-            return true;
-        }
-        if(worldObj.getBlockMaterial(x-1, y, z) == Material.wood)
-        {
-            return true;
-        }
-        if(worldObj.getBlockMaterial(x, y+1, z) == Material.wood)
-        {
-            return true;
-        }
-        if(worldObj.getBlockMaterial(x, y-1, z) == Material.wood)
-        {
-            return true;
-        }
-        if(worldObj.getBlockMaterial(x, y, z+1) == Material.wood)
-        {
-            return true;
-        }
-        if(worldObj.getBlockMaterial(x, y, z-1) == Material.wood)
-        {
-            return true;
-        }
-        if(worldObj.getBlockMaterial(x, y, z-1) == Material.wood)
-        {
-            return true;
-        }
-        return false;
     }
     public float getOutput1Temp()
     {
@@ -745,6 +721,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
         else
         {
             charcoalCounter = 0;
+            logPileChecked = false;
         }
 
         Random R = new Random();            
@@ -939,5 +916,10 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
+	}
+	
+	public boolean isInactiveCharcoalFirepit()
+	{
+		return logPileChecked == false && charcoalCounter == 0;
 	}
 }
