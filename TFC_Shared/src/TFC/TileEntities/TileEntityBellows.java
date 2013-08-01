@@ -111,9 +111,9 @@ public class TileEntityBellows extends NetworkTileEntity {
 		TileEntity te3 = worldObj.getBlockTileEntity(xCoord + x2, yCoord, zCoord + z2);
 		TileEntityFireEntity tileentityfirepit = null;
 
-		if (te3 != null && te3 instanceof TileEntityBloomery && worldObj.getBlockId(xCoord + x, yCoord, zCoord + z) == TFCBlocks.Tuyere.blockID) {
+		if (te3 != null && te3 instanceof TEBlastFurnace && worldObj.getBlockId(xCoord + x, yCoord, zCoord + z) == TFCBlocks.Tuyere.blockID) {
 			tileentityfirepit = (TileEntityFireEntity) te3;
-		} else if (te != null && te instanceof TileEntityFireEntity && !(te instanceof TileEntityBloomery)) {
+		} else if (te != null && te instanceof TileEntityFireEntity && !(te instanceof TEBlastFurnace)) {
 			tileentityfirepit = (TileEntityFireEntity) te;
 		} else if (te2 != null && te2 instanceof TileEntityForge) {
 			tileentityfirepit = (TileEntityFireEntity) te2;

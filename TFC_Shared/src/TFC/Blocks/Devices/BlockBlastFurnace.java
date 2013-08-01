@@ -16,9 +16,9 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TEBlastFurnace;
 
-public class BlockBloomery extends BlockTerraContainer
+public class BlockBlastFurnace extends BlockTerraContainer
 {
 	Icon textureSide;
 	Icon textureOn;
@@ -36,7 +36,7 @@ public class BlockBloomery extends BlockTerraContainer
 		}
 	};
 
-	public BlockBloomery(int i)
+	public BlockBlastFurnace(int i)
 	{
 		super(i, Material.rock);
 		this.setCreativeTab(CreativeTabs.tabRedstone);
@@ -68,10 +68,10 @@ public class BlockBloomery extends BlockTerraContainer
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}
-		else if((TileEntityBloomery)world.getBlockTileEntity(i, j, k)!=null)
+		else if((TEBlastFurnace)world.getBlockTileEntity(i, j, k)!=null)
 		{
-			TileEntityBloomery te;
-			te = (TileEntityBloomery)world.getBlockTileEntity(i, j, k);
+			TEBlastFurnace te;
+			te = (TEBlastFurnace)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			if(te.isValid)
@@ -155,9 +155,9 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
     {
-		textureSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Side");
-		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery On");
-		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Off");
+		textureSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Side");
+		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace On");
+		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Off");
     }
 
 	@Override
@@ -216,7 +216,7 @@ public class BlockBloomery extends BlockTerraContainer
 
 		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
-			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
+			((TEBlastFurnace)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}
@@ -225,6 +225,6 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityBloomery();
+		return new TEBlastFurnace();
 	}
 }

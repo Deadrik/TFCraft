@@ -7,18 +7,18 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotTuyere;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TEBlastFurnace;
 
-public class ContainerBloomery extends ContainerTFC
+public class ContainerBlastFurnace extends ContainerTFC
 {
-	private TileEntityBloomery bloomery;
+	private TEBlastFurnace bloomery;
     private float firetemp;
     private int orecount;
     private int coalcount;
     private float outcount;
 
 
-	public ContainerBloomery(InventoryPlayer inventoryplayer, TileEntityBloomery tileentityforge, World world, int x, int y, int z)
+	public ContainerBlastFurnace(InventoryPlayer inventoryplayer, TEBlastFurnace tileentityforge, World world, int x, int y, int z)
 	{
 	    bloomery = tileentityforge;
 	    firetemp = 0;

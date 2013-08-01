@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.Containers.ContainerAnvil;
 import TFC.Containers.ContainerBarrel;
-import TFC.Containers.ContainerBloomery;
+import TFC.Containers.ContainerBlastFurnace;
 import TFC.Containers.ContainerChestTFC;
 import TFC.Containers.ContainerFirepit;
 import TFC.Containers.ContainerFoodPrep;
@@ -61,7 +61,7 @@ import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityDetailed;
@@ -110,7 +110,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityScribe.class, "TerraScribe");
 		ModLoader.registerTileEntity(TileEntityForge.class, "TerraForge");
 		ModLoader.registerTileEntity(TileEntityMetallurgy.class, "TerraMetallurgy");
-		ModLoader.registerTileEntity(TileEntityBloomery.class, "TerraBloomery");
+		ModLoader.registerTileEntity(TEBlastFurnace.class, "TerraBloomery");
 		ModLoader.registerTileEntity(TileEntitySluice.class, "TerraSluice");
 		ModLoader.registerTileEntity(TileEntityFarmland.class, "TileEntityFarmland");
 		ModLoader.registerTileEntity(TileEntityCrop.class, "TileEntityCrop");
@@ -398,7 +398,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 26:
 		{
-			return new ContainerBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
+			return new ContainerBlastFurnace(player.inventory, (TEBlastFurnace) te, world, x, y, z);
 		}
 		case 28:
 		{

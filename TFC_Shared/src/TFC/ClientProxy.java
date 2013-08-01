@@ -56,7 +56,7 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiBarrel;
-import TFC.GUI.GuiBloomery;
+import TFC.GUI.GuiBlastFurnace;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
@@ -117,7 +117,7 @@ import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityFoodPrep;
@@ -298,7 +298,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 26:
 		{
-			return new GuiBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
+			return new GuiBlastFurnace(player.inventory, (TEBlastFurnace) te, world, x, y, z);
 		}
 		case 27:
 		{

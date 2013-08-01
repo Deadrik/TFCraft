@@ -23,14 +23,15 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
-import TFC.Blocks.Devices.BlockBloomery;
+import TFC.API.Constant.Global;
+import TFC.Blocks.Devices.BlockBlastFurnace;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
 import TFC.Items.ItemBlocks.ItemTuyere;
 
-public class TileEntityBloomery extends TileEntityFireEntity implements IInventory
+public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
 	public float fuelTimeLeft;
 	public float fuelBurnTemp;
@@ -65,7 +66,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	ItemStack outMetal2;
 	int outMetal2Count;
 
-	public TileEntityBloomery()
+	public TEBlastFurnace()
 	{
 		fuelTimeLeft = 0;
 		fuelBurnTemp =  0;
@@ -300,7 +301,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	public void HandleTemperature()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		int[] direction = BlockBloomery.headBlockToFootBlockMap[meta & 3];
+		int[] direction = BlockBlastFurnace.headBlockToFootBlockMap[meta & 3];
 
 		if(ambientTemp == -1000)	
 		{
@@ -644,8 +645,11 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		{
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
+			int[] direction = BlockBlastFurnace.headBlockToFootBlockMap[meta];
 
+			/**
+			 * Create a tuyere block if the tuyere slot is not empty.
+			 */
 			if(input[1] != null)
 			{
 				if((meta == 0 || meta == 2) && worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && 
@@ -770,7 +774,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && 
+					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && ((ItemOre)entity.getEntityItem().getItem()).GetMetalType(entity.getEntityItem()) == Global.PIGIRON && 
 							(entity.getEntityItem().getItemDamage() == oreDamage || OreType.contentEquals("")))
 					{
 						int c = entity.getEntityItem().stackSize;

@@ -265,7 +265,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.MetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.StoneSed});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.MetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.StoneMM});
 
-		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), new ItemStack(TFCItems.StoneBrick, 1, 32767), Character.valueOf('K'), new ItemStack(Item.itemsList[Item.coal.itemID],1,1)});
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), new ItemStack(TFCItems.StoneBrick, 1, 32767), Character.valueOf('K'), new ItemStack(Item.itemsList[Item.coal.itemID],1,1)});
 		//GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.StoneIgInBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
 		//GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.StoneSedBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
 		//GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bloomery, 1), new Object[] { "PPP","PKP","PPP", Character.valueOf('P'), TFCBlocks.StoneMMBrick, Character.valueOf('K'), new ItemStack(Item.coal,1,1)});
