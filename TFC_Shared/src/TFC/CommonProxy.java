@@ -60,6 +60,7 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
+import TFC.TileEntities.TileEntityBellows;
 import TFC.TileEntities.TileEntityBloomery;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityCrop;
@@ -122,6 +123,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
 		
 		ModLoader.registerTileEntity(TileEntityQuern.class, "Quern");
+		ModLoader.registerTileEntity(TileEntityBellows.class, "Bellows");
 		ModLoader.registerTileEntity(TileEntitySapling.class, "Sapling");
 		
 		ModLoader.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");

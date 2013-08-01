@@ -16,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.TFCBlocks;
 import TFC.Blocks.BlockFruitLeaves;
-import TFC.Blocks.Devices.BlockBellows;
 import TFC.Blocks.Devices.BlockSluice;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
@@ -358,7 +357,7 @@ public class TFC_CoreRender
 
 	public static boolean renderBellows(Block block, int i, int j, int k, RenderBlocks renderblocks)
 	{
-		IBlockAccess blockAccess = renderblocks.blockAccess;
+/*		IBlockAccess blockAccess = renderblocks.blockAccess;
 
         int meta = blockAccess.getBlockMetadata(i, j, k);
         int direction = ((BlockBellows)block).getDirectionFromMetadata(meta);
@@ -439,7 +438,7 @@ public class TFC_CoreRender
             renderblocks.clearOverrideBlockTexture();
         }
 
-        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        renderblocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);*/
 		return true;
 	}
 
