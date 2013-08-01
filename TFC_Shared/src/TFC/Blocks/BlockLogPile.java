@@ -117,9 +117,9 @@ public class BlockLogPile extends BlockTerraContainer
     {
         if(!par1World.isRemote && (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4)!=null)
         {
-            TileEntityLogPile tileentityanvil;
-            tileentityanvil = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
-            tileentityanvil.ejectContents();
+            TileEntityLogPile tileentitylogpile;
+            tileentitylogpile = (TileEntityLogPile)par1World.getBlockTileEntity(par2, par3, par4);
+            tileentitylogpile.ejectContents();
             par1World.removeBlockTileEntity(par2, par3, par4);
         }
     }
@@ -154,5 +154,16 @@ public class BlockLogPile extends BlockTerraContainer
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
 		return new TileEntityLogPile();
+	}
+	
+	@Override
+	public void onNeighborBlockChange(World par1World, int x, int y, int z, int blockId)
+	{	
+		if(!par1World.isRemote)
+		{
+			TileEntityLogPile teLogPile = (TileEntityLogPile)par1World.getBlockTileEntity(x, y, z);
+			if(teLogPile != null)
+				teLogPile.neighborChanged();
+		}
 	}
 }
