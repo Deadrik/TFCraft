@@ -116,6 +116,7 @@ public class BlockCharcoal extends BlockTerra {
 	{
 		int meta = world.getBlockMetadata(i, j, k);
 		int bottomMeta = world.getBlockMetadata(i, j-1, k);
+		
 		if(bottomMeta < 8)
 		{
 			bottomMeta = bottomMeta + meta;
@@ -125,14 +126,16 @@ public class BlockCharcoal extends BlockTerra {
 				m2 = bottomMeta - 8;
 				bottomMeta = 8;
 			}
-
+			
+			world.setBlock(i, j-1, k, blockID, bottomMeta, 0x2);
 
 			if(m2 > 0)
-				world.setBlock(i, j, k, blockID, m2, 0);
+			{
+				world.setBlock(i, j, k, blockID, m2, 0x2);
+				world.notifyBlockOfNeighborChange(i, j+1, k, blockID);
+			}
 			else
 				world.setBlockToAir(i, j, k);
-
-			world.setBlock(i, j-1, k, blockID, bottomMeta, 0x3);
 		}
 	}
 
@@ -140,6 +143,7 @@ public class BlockCharcoal extends BlockTerra {
 	{
 		int meta = world.getBlockMetadata(i, j+1, k);
 		int bottomMeta = world.getBlockMetadata(i, j, k);
+
 		if(bottomMeta < 8)
 		{
 			bottomMeta = bottomMeta + meta;
@@ -149,17 +153,19 @@ public class BlockCharcoal extends BlockTerra {
 				m2 = bottomMeta - 8;
 				bottomMeta = 8;
 			}
-
+			
+			world.setBlock(i, j, k, blockID, bottomMeta, 0x2);
 
 			if(m2 > 0)
-				world.setBlock(i, j+1, k, blockID, m2, 0x3);
+			{
+				world.setBlock(i, j+1, k, blockID, m2, 0x2);
+				world.notifyBlockOfNeighborChange(i, j+2, k, blockID);
+			}
 			else
 				world.setBlockToAir(i, j+1, k);
-
-			world.setBlock(i, j, k, blockID, bottomMeta, 0x3);
 		}
 	}
-
+	
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int id)
 	{
@@ -168,7 +174,7 @@ public class BlockCharcoal extends BlockTerra {
 			if(world.getBlockId(i, j-1, k) == 0)
 			{
 				int meta = world.getBlockMetadata(i, j, k);
-				world.setBlock(i, j-1, k, blockID, meta, 0);
+				world.setBlock(i, j-1, k, blockID, meta, 0x2);
 				world.setBlockToAir(i, j, k);
 			}
 			else
