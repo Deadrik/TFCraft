@@ -27,6 +27,7 @@ import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemAlcohol;
 import TFC.Items.ItemBellows;
+import TFC.Items.ItemBloom;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemClay;
 import TFC.Items.ItemCustomMinecart;
@@ -919,6 +920,9 @@ public class TFCItems
     public static Item TuyereBlueSteel;
     public static Item TuyereRedSteel;
     
+    public static Item Bloom;
+    public static Item RawBloom;
+    
     /**
      * Item Uses Setup
      * */
@@ -1673,6 +1677,9 @@ public class TFCItems
         TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 1000, 4).setUnlocalizedName("Black Steel Tuyere");
         TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 1000, 5).setUnlocalizedName("Red Steel Tuyere");
         TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 1000, 6).setUnlocalizedName("Blue Steel Tuyere");
+        
+        Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setUnlocalizedName("Bloom");
+        RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setUnlocalizedName("RawBloom");
         /**Plans*/
         num = 20000;
         SetupPlans(num);
