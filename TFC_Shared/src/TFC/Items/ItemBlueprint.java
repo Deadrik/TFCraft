@@ -50,7 +50,7 @@ public class ItemBlueprint extends ItemTerra
 		int z = objectMouseOver.blockZ;
 
 		if(stack.stackTagCompound != null && !stack.stackTagCompound.hasKey("Name") &&
-				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID || world.getBlockId(x, y, z) == TFCBlocks.SuperDetailed.blockID))
+				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID))
 		{
 			player.openGui(TerraFirmaCraft.instance, 34, player.worldObj, x, y, z);
 		}
@@ -62,7 +62,7 @@ public class ItemBlueprint extends ItemTerra
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
 		if(stack.stackTagCompound == null &&
-				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID || world.getBlockId(x, y, z) == TFCBlocks.SuperDetailed.blockID))
+				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID))
 		{
 			TileEntityDetailed te = (TileEntityDetailed) world.getBlockTileEntity(x, y, z);
 
@@ -74,7 +74,7 @@ public class ItemBlueprint extends ItemTerra
 			stack.setTagCompound(nbt);		
 		}
 		else if(stack.stackTagCompound != null &&
-				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID || world.getBlockId(x, y, z) == TFCBlocks.SuperDetailed.blockID))
+				(world.getBlockId(x, y, z) == TFCBlocks.Detailed.blockID))
 		{
 			int hasChisel = -1;
 			int hasHammer = -1;

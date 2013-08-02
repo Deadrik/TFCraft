@@ -186,7 +186,7 @@ public class TFCBlocks
 	public static Block DryGrass2;
 	public static Block Charcoal;
 	public static Block Detailed;
-	public static Block SuperDetailed;
+
 	public static Block WoodConstruct;
 	public static Block WoodVert;
 	public static Block WoodHoriz;
@@ -569,9 +569,7 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Charcoal, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodConstruct, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "axe", 0);
-		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(Block.blocksList[53], "axe", 0);
 
 		if (config != null) {
