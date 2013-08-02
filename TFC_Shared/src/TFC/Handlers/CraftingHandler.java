@@ -9,6 +9,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
 import TFC.Food.ItemTerraFood;
+import TFC.Items.ItemIngot;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler
@@ -111,6 +112,11 @@ public class CraftingHandler implements ICraftingHandler
 				}
 				
 			}
+			else if(itemstack.getItem() instanceof ItemIngot)
+			{
+				entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1));
+			}
+			
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 			{             
 				if(iinventory.getStackInSlot(i) == null) 
