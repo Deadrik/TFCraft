@@ -23,18 +23,6 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	Icon textureSide;
 	Icon textureOn;
 	Icon textureOff;
-	
-	public static final int headBlockToFootBlockMap[][] = {
-		{
-			0, 1
-		}, {
-			-1, 0
-		}, {
-			0, -1
-		}, {
-			1, 0
-		}
-	};
 
 	public BlockBlastFurnace(int i)
 	{
@@ -50,7 +38,6 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			return 0;
 		else
 			return 15;
-
 	}
 
 	@Override
@@ -81,46 +68,35 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
-    {
+	{
 		int meta = world.getBlockMetadata(i, j, k) & 3;
-		int[] dir = headBlockToFootBlockMap[meta];
-		
-		if(world.isBlockOpaqueCube(i, j-1, k) && world.isBlockOpaqueCube(i, j+1, k))
+
+		int y = j+1;
+
+		if(world.getBlockMaterial(i+1, y, k) == Material.rock || world.getBlockMaterial(i+1, y, k) == Material.iron)
 		{
-			int centerX = i + dir[0];
-			int centerY = j;
-			int centerZ = k + dir[1];
-			if((world.getBlockMaterial(centerX+1, centerY, centerZ) == Material.rock || world.getBlockMaterial(centerX+1, centerY, centerZ) == Material.iron || (centerX== i && centerZ == k)) 
-					&& (world.getBlockId(centerX+1, centerY, centerZ) != this.blockID || (centerX+1 == i && centerZ == k)))
+			if(world.getBlockMaterial(i-1, y, k) == Material.rock || world.getBlockMaterial(i-1, y, k) == Material.iron)
 			{
-				if((world.getBlockMaterial(centerX-1, centerY, centerZ) == Material.rock || world.getBlockMaterial(centerX-1, centerY, centerZ) == Material.iron || (centerX== i && centerZ == k)) 
-						&& (world.getBlockId(centerX-1, centerY, centerZ) != this.blockID || (centerX-1 == i && centerZ == k)))
+				if(world.getBlockMaterial(i, y, k+1) == Material.rock || world.getBlockMaterial(i, y, k+1) == Material.iron)
 				{
-					if((world.getBlockMaterial(centerX, centerY, centerZ+1) == Material.rock || world.getBlockMaterial(centerX, centerY, centerZ+1) == Material.iron || (centerX== i && centerZ == k)) 
-							&& (world.getBlockId(centerX, centerY, centerZ+1) != this.blockID || (centerX == i && centerZ+1 == k)))
+					if(world.getBlockMaterial(i, y, k-1) == Material.rock || world.getBlockMaterial(i, y, k-1) == Material.iron)
 					{
-						if((world.getBlockMaterial(centerX, centerY, centerZ-1) == Material.rock || world.getBlockMaterial(centerX, centerY, centerZ-1) == Material.iron || (centerX== i && centerZ == k)) 
-								&& (world.getBlockId(centerX, centerY, centerZ-1) != this.blockID || (centerX == i && centerZ-1 == k)))
-						{
-							return true;
-						}
+						return true;
 					}
 				}
 			}
 		}
-        return false;
-    }
+
+		return false;
+	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k)
 	{
-		return ((world.getBlockMaterial(i, j+1, k) == Material.rock || world.getBlockMaterial(i, j+1, k) == Material.iron) 
-				&& world.getBlockId(i, j+1, k) != this.blockID) && 
-				((world.getBlockMaterial(i, j-1, k) == Material.rock || world.getBlockMaterial(i, j-1, k) == Material.iron) 
-						&& world.getBlockId(i, j-1, k) != this.blockID);
+		return true;
 	}
 
 	@Override
@@ -129,36 +105,26 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		int lit = (j & 4) == 4 ? 1 : 0;
 		j = j & 3;
 
-		if(j == 0 && i == 2	) {
+		if(i == 0 || i == 1) 
+		{
+			return textureSide;
+		}
+		else
+		{
 			if(lit == 1)
 				return textureOn;
-			return textureOff;
+			else 
+				return textureOff;
 		}
-		if(j == 1 && i == 5) {
-			if(lit == 1)
-				return textureOn;
-			return textureOff;
-		}
-		if(j == 2 && i == 3) {
-			if(lit == 1)
-				return textureOn;
-			return textureOff;
-		}
-		if(j == 3 && i == 4) {
-			if(lit == 1)
-				return textureOn;
-			return textureOff;
-		}
-		return textureSide;
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		textureSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Side");
 		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace On");
 		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Off");
-    }
+	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack par6ItemStack)
@@ -181,26 +147,26 @@ public class BlockBlastFurnace extends BlockTerraContainer
 		if(!world.isRemote)
 		{
 			int meta = world.getBlockMetadata(i, j, k);
-			int[] dir = headBlockToFootBlockMap[meta & 3];
-			if(world.getBlockId(i+dir[0], j, k+dir[1]) == TFCBlocks.Molten.blockID)
+
+			if(world.getBlockId(i, j, k) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j, k+dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i, j, k);
 			}
-			if(world.getBlockId(i+dir[0], j+1, k+dir[1]) == TFCBlocks.Molten.blockID)
+			if(world.getBlockId(i, j+1, k) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+1, k+dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i, j+1, k);
 			}
-			if(world.getBlockId(i+dir[0], j+2, k+dir[1]) == TFCBlocks.Molten.blockID)
+			if(world.getBlockId(i, j+2, k) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+2, k+dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i, j+2, k);
 			}
-			if(world.getBlockId(i+dir[0], j+3, k+dir[1]) == TFCBlocks.Molten.blockID)
+			if(world.getBlockId(i, j+3, k) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+3, k+dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i, j+3, k);
 			}
-			if(world.getBlockId(i+dir[0], j+4, k+dir[1]) == TFCBlocks.Molten.blockID)
+			if(world.getBlockId(i, j+4, k) == TFCBlocks.Molten.blockID)
 			{
-				world.setBlock(i+dir[0], j+4, k+dir[1], 0, 0, 0x2);
+				world.setBlockToAir(i, j+4, k);
 			}
 			world.setBlockToAir(i, j, k);
 		}
@@ -210,16 +176,12 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		int meta = world.getBlockMetadata(i, j, k) & 3;
-		int[] dir = headBlockToFootBlockMap[meta];
-
-
-		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
+		/*if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
 			((TEBlastFurnace)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
-		}
+		}*/
 	}
 
 	@Override
