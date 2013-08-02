@@ -23,7 +23,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
-import TFC.Blocks.Devices.BlockBloomery;
+import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
@@ -219,7 +219,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		if(!worldObj.isRemote)
 		{
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
+			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
 			if((worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID)){
 				int m1 = worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]);
 				if(m1-1 >= 0)
@@ -321,7 +321,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 	public void HandleTemperature()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		int[] direction = BlockBloomery.headBlockToFootBlockMap[meta & 3];
+		int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta & 3];
 
 		if(ambientTemp == -1000)	
 		{
@@ -518,7 +518,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		{
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
+			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
 
 			if(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID && !bloomeryLit){
 				bloomeryLit = true;
@@ -682,7 +682,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 			boolean flag = false;
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
+			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
 			if(bloomeryLit){
 				if(!(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID)){
 					bloomeryLit = false;
