@@ -9,7 +9,6 @@ import java.util.Random;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
-import TFC.TFCBlocks;
 import TFC.Handlers.PacketHandler;
 
 public class TileEntityBellows extends NetworkTileEntity {
@@ -104,16 +103,11 @@ public class TileEntityBellows extends NetworkTileEntity {
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		int x = blockMap[meta][0];
 		int z = blockMap[meta][1];
-		int x2 = blockMap2[meta][0];
-		int z2 = blockMap2[meta][1];
 		TileEntity te = worldObj.getBlockTileEntity(xCoord + x, yCoord, zCoord + z);
 		TileEntity te2 = worldObj.getBlockTileEntity(xCoord + x, yCoord - 1, zCoord + z);
-		TileEntity te3 = worldObj.getBlockTileEntity(xCoord + x2, yCoord, zCoord + z2);
 		TileEntityFireEntity tileentityfirepit = null;
 
-		if (te3 != null && te3 instanceof TEBlastFurnace && worldObj.getBlockId(xCoord + x, yCoord, zCoord + z) == TFCBlocks.Tuyere.blockID) {
-			tileentityfirepit = (TileEntityFireEntity) te3;
-		} else if (te != null && te instanceof TileEntityFireEntity && !(te instanceof TEBlastFurnace)) {
+		if (te != null && te instanceof TileEntityFireEntity) {
 			tileentityfirepit = (TileEntityFireEntity) te;
 		} else if (te2 != null && te2 instanceof TileEntityForge) {
 			tileentityfirepit = (TileEntityFireEntity) te2;

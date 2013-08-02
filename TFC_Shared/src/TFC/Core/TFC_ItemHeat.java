@@ -39,7 +39,7 @@ public class TFC_ItemHeat
 		HeatRaw LeadRaw = new HeatRaw(0.75F, 328);
 		HeatRaw NickelRaw = new HeatRaw(0.68F, 1453);
 		HeatRaw PigIronRaw = new HeatRaw(0.64F, 1500);
-		HeatRaw PlatinumRaw = new HeatRaw(0.82F, 1770);
+		HeatRaw PlatinumRaw = new HeatRaw(0.82F, 1730);
 		HeatRaw RedSteelRaw = new HeatRaw(0.63F, 1540);
 		HeatRaw RoseGoldRaw = new HeatRaw(0.69F, 960);
 		HeatRaw SilverRaw = new HeatRaw(0.72F, 961);

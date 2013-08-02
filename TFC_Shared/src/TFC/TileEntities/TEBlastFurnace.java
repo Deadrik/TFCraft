@@ -28,7 +28,6 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
-import TFC.Items.ItemBlocks.ItemTuyere;
 
 public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
@@ -367,7 +366,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			charcoalCount--;
 
 			fuelTimeLeft = 1875;
-			fuelBurnTemp = 1450;	
+			fuelBurnTemp = 1350;	
 			if(fireTemperature < 210)
 			{
 				fireTemperature = 220;
@@ -655,8 +654,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 			/**
 			 * Create a tuyere block if the tuyere slot is not empty.
+			 * REMOVED: Code remains for a potential revisit later. For now the tuyere will not be a rendered block.
 			 */
-			if(input[1] != null)
+			/*if(input[1] != null)
 			{
 				if((meta == 0 || meta == 2) && worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && 
 						worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID)
@@ -703,7 +703,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord-1);
 				}
-			}
+			}*/
 
 			outCount = getOutputCount();
 			if(outCount < 0)
