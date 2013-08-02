@@ -16,6 +16,7 @@ import TFC.Commands.GetSpawnProtectionCommand;
 import TFC.Commands.GetTreesCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
@@ -180,6 +181,8 @@ public class TerraFirmaCraft
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), 
 				new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty)));
+		
+		TFC_Climate.initCache();
 	}
 
 	@PostInit
