@@ -1,7 +1,9 @@
 package TFC.Blocks.Vanilla;
 
+import java.io.Console;
 import java.util.Random;
 
+import scala.util.logging.ConsoleLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -27,14 +29,17 @@ public class BlockCustomSnow extends BlockTerra
 		this.setTickRandomly(true);
 	}
 
-
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
 		int var5 = par1World.getBlockId(par2, par3 - 1, par4);
-		return var5 != 0 && (var5 == Block.leaves.blockID || Block.blocksList[var5].isOpaqueCube()) ? true : false;
+		if (var5 == Block.ice.blockID
+				|| var5 != TFCBlocks.LooseRock.blockID
+				|| var5 == Block.leaves.blockID
+				|| Block.blocksList[var5].isOpaqueCube())
+			return true;
+		return false;
 	}
-
 	
 	private boolean canSnowStay(World par1World, int par2, int par3, int par4)
 	{
@@ -52,7 +57,9 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
-		return null;
+        int l = par1World.getBlockMetadata(par2, par3, par4) & 7;
+        float f = 0.125F;
+        return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)((float)par3 + (float)l * f), (double)par4 + this.maxZ);
 	}
 	@Override
 	public int getRenderType()
@@ -127,6 +134,10 @@ public class BlockCustomSnow extends BlockTerra
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
+		if (!this.canSnowStay(par1World, par2, par3, par4))
+		{
+			return;
+		}
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
 		if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11)
 		{
@@ -136,20 +147,25 @@ public class BlockCustomSnow extends BlockTerra
 				par1World.setBlockToAir(par2, par3, par4);
 			}
 		}
-		
 		if(par1World.isRaining() && TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) <= 0)//Raining and Below Freezing
 		{      
 			if(meta < 3 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves) 
 			{
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 2);
+				if (canAddSnow(par1World, par2, par3, par4, meta)) {
+					par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 2);
+				}
 			} 
 			else if(meta < 15 && par5Random.nextInt(8) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) != Material.leaves)
             {
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 2);
+				if (canAddSnow(par1World, par2, par3, par4, meta)) {
+					par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 2);
+				}
             }
 			else if(meta < 3 && par5Random.nextInt(3) == 0 && par1World.getBlockMaterial(par2, par3-1, par4) == Material.leaves)
 			{
-				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 2);
+				if (canAddSnow(par1World, par2, par3, par4, meta)) {
+					par1World.setBlockMetadataWithNotify(par2, par3, par4, meta+1, 2);
+				}
 			}
 		}
 		else if(par1World.isRaining() && TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) >= 0)//Raining and above freezing
@@ -176,23 +192,23 @@ public class BlockCustomSnow extends BlockTerra
         }
 		else if(TFC_Climate.getHeightAdjustedTemp(par2, par3, par4) >= 0F)//Above fReezing
 		{
-			if(meta > 1 ) {
+			if(meta > 0 ) {
 				par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 2);
-			} else if(meta == 1) {
+			} else {
 				par1World.setBlockToAir(par2, par3, par4);
 			}
 		}
-		else//Below Freezing
-		{
-		    if(meta > 1 && par5Random.nextInt(5) == 0) 
-		    {
-                par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 2);
-            } 
-		    else if(meta == 1 && par5Random.nextInt(5) == 0)
-            {
-                par1World.setBlockToAir(par2, par3, par4);
-            }
-		}
+//		else//Below Freezing
+//		{
+//		    if(meta > 1 && par5Random.nextInt(5) == 0)
+//		    {
+//              par1World.setBlockMetadataWithNotify(par2, par3, par4, meta-1, 2);
+//          }
+//		    else if(meta == 1 && par5Random.nextInt(5) == 0)
+//          {
+//          	par1World.setBlockToAir(par2, par3, par4);
+//          }
+//		}
 	}
 	
 	@Override
@@ -200,4 +216,41 @@ public class BlockCustomSnow extends BlockTerra
     {
 		this.blockIcon = registerer.registerIcon(Reference.ModID + ":"+"snow");
     }
+
+	private boolean canAddSnowCheckNeighbors(World world, int x, int y, int z, int meta)
+	{
+		if (!this.canPlaceBlockAt(world, x, y, z))
+		{
+			return true;
+		}
+		if (world.getBlockMaterial(x, y, z) != Material.snow) {
+			return false;
+		}
+		if ( world.getBlockMaterial(x, y, z) == Material.snow
+				&& meta > world.getBlockMetadata(x, y, z)) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean canAddSnow(World world, int x, int y, int z, int meta)
+	{
+		if (!canAddSnowCheckNeighbors(world, x+1, y, z, meta))
+		{
+			return false;
+		}
+		if (!canAddSnowCheckNeighbors(world, x-1, y, z, meta))
+		{
+			return false;
+		}
+		if (!canAddSnowCheckNeighbors(world, x, y, z+1, meta))
+		{
+			return false;
+		}
+		if (!canAddSnowCheckNeighbors(world, x, y, z-1, meta))
+		{
+			return false;
+		}
+		return true;
+	}
 }

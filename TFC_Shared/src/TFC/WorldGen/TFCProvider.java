@@ -3,6 +3,7 @@ package TFC.WorldGen;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
@@ -99,7 +100,7 @@ public class TFCProvider extends WorldProvider
 		{
 			biome = worldObj.getBiomeGenForCoordsBody(x, z);
 		}
-        if(canSnowAt(x,145,z)){biome.temperature = 0;}
+        if(canSnowAtTemp(x,145,z)){biome.temperature = 0;}
         else{biome.temperature = 0.16f;}
         return biome;
     }
@@ -166,10 +167,19 @@ public class TFCProvider extends WorldProvider
 			return true;
 		return false;
     }
-	@Override
+
+    @Override
     public boolean canSnowAt(int x, int y, int z)
     {
-    	if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+    	if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0
+				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z))
+			return true;
+		return false;
+    }
+
+    private boolean canSnowAtTemp(int x, int y, int z)
+    {
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
 			return true;
 		return false;
     }
