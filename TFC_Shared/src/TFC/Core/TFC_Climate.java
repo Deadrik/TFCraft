@@ -285,6 +285,8 @@ public class TFC_Climate
 		if(z < 0)
 			z = -z;
 		
+		if(z > getMaxZPos()) z = (getMaxZPos());
+		
 		return monthTempCache[month][z];
 	}
 
@@ -292,6 +294,8 @@ public class TFC_Climate
 	{
 		if(z < 0)
 			z = -z;
+		
+		if(z > getMaxZPos()) z = (getMaxZPos());
 		
 		return monthTempFactorCache[month][z];
 	}
