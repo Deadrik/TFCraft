@@ -31,25 +31,18 @@ import TFC.Items.ItemOre;
 
 public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
-	public float fuelTimeLeft;
-	public float fuelBurnTemp;
-	public float fireTemperature;
-
-	public float AddedAir;
 	public boolean isValid;
 
 	public ItemStack input[];
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
-	public float ambientTemp;
+
 	public float inputItemTemps[];
 
 	private int prevStackSize;
 	private int numAirBlocks;
 
 	public String OreType;
-
-	private final int MaxFireTemp = 2500;
 	
 	//We dont save this since its purpose is to just mkae certain parts of the code not run every single tick
 	private int slowCounter = 0;
@@ -301,7 +294,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public int getTemperatureScaled(int s)
 	{
-		return (int)(fireTemperature * s) / MaxFireTemp;
+		return (int)((fireTemperature * s) / MaxFireTemp);
 	}
 
 	public void HandleTemperature()
@@ -336,7 +329,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				t*= 0.05F;
 				t = 1 - t;
 			}
-
+			if(this.input[1] == null && airFromBellows > 0)
+				airFromBellows = 0;
+			
 			float bAir = airFromBellows*(1+airFromBellowsTime/120);
 
 			AddedAir = (numAirBlocks+bAir)/25/16;
@@ -752,8 +747,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			}
 			/*Create a list of all the items that are falling into the stack */
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord, yCoord+1+moltenCount, zCoord, 
-					xCoord+1, yCoord+1+moltenCount+0.1, zCoord+1));
+					xCoord, yCoord+moltenCount, zCoord, 
+					xCoord+1, yCoord+moltenCount+1.1, zCoord+1));
 
 			if(moltenCount == 0)
 				moltenCount = 1;
@@ -825,6 +820,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			{
 				//Here we make sure that the forge is valid
 				isValid = CheckValidity();
+				if(input[1] != null)
+				{
+					RemoveOre();
+					input[1].damageItem(1, null);
+				}
 			}
 			slowCounter++;
 		}

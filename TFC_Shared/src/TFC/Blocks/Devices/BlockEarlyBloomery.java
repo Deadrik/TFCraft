@@ -16,6 +16,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 
 public class BlockEarlyBloomery extends BlockTerraContainer
@@ -56,13 +57,6 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
-		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-		int itemid;
-
 		if(!canBlockStay(world,i,j,k))
 		{
 			world.setBlockToAir(i, j, k);
@@ -70,15 +64,15 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 		}
 		else if((TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k)!=null)
 		{
-			TileEntityEarlyBloomery te;
-			te = (TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k);
+			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 			
-			if(te.inputItemTemps!=null){
-			entityplayer.sendChatToPlayer(te.inputItemTemps[0]+"");
+			if(TFC_Settings.enableDebugMode && te.inputItemTemps != null)
+			{
+				entityplayer.sendChatToPlayer(te.inputItemTemps[0]+"");
 			}
 
-			if(te.isValid && is!=null&&is.getItem()==TFCItems.FireStarter)
+			if(te.isValid && is != null && is.getItem() == TFCItems.FireStarter)
 			{
 				if(te.canLight()){
 					entityplayer.getCurrentEquippedItem().damageItem(1,entityplayer);

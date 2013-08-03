@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Constant.Global;
+import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
@@ -32,6 +33,7 @@ import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBellows;
 import TFC.Blocks.Devices.BlockBlastFurnace;
 import TFC.Blocks.Devices.BlockChestTFC;
+import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Blocks.Devices.BlockFirepit;
 import TFC.Blocks.Devices.BlockForge;
 import TFC.Blocks.Devices.BlockMetallurgy;
@@ -482,8 +484,8 @@ public class TFCBlocks
 		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","Metallurgy", 2009)).setUnlocalizedName("Metallurgy").setHardness(3);
 		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setUnlocalizedName("Molten").setHardness(20);
 		TFCBlocks.BlastFurnace = new BlockBlastFurnace(TFC_Settings.getIntFor(config,"block","BlastFurnace", 2007)).setUnlocalizedName("BlastFurnace").setHardness(20).setLightValue(0F);
-		TFCBlocks.EarlyBloomery = new BlockBlastFurnace(TFC_Settings.getIntFor(config,"block","EarlyBloomery", 2006)).setUnlocalizedName("EarlyBloomery").setHardness(20).setLightValue(0F);
-		TFCBlocks.Bloom = new BlockBlastFurnace(TFC_Settings.getIntFor(config,"block","Bloom", 2005)).setUnlocalizedName("Bloom").setHardness(20).setLightValue(0F);
+		TFCBlocks.EarlyBloomery = new BlockEarlyBloomery(TFC_Settings.getIntFor(config,"block","EarlyBloomery", 2006)).setUnlocalizedName("EarlyBloomery").setHardness(20).setLightValue(0F);
+		TFCBlocks.Bloom = new BlockBloom(TFC_Settings.getIntFor(config,"block","Bloom", 2005)).setUnlocalizedName("Bloom").setHardness(20).setLightValue(0F);
 		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","Sluice", 2003)).setUnlocalizedName("Sluice").setHardness(2F).setResistance(20F);
 
 		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000), Material.rock).setUnlocalizedName("stoneStairs").setHardness(10).setResistance(15F);

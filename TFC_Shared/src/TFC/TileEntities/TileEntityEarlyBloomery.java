@@ -23,37 +23,29 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
+import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
-import TFC.Items.ItemBlocks.ItemTuyere;
 
 public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IInventory
 {
-	public float fuelTimeLeft;
-	public float fuelBurnTemp;
-	public float fireTemperature;
-
-	public float AddedAir;
 	public boolean isValid;
 	public boolean bloomeryLit;
 
 	public ItemStack input[];
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
-	public float ambientTemp;
+
 	Boolean Item1Melted = false;
-	public float inputItemTemps[];
+	public float[] inputItemTemps;
 
 	private int prevStackSize;
 	private int numAirBlocks;
 
 	public String OreType;
-
-	private final int MaxFireTemp = 2500;
-
 
 	//Bloomery
 	public int charcoalCount;
@@ -80,7 +72,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
 		input = new ItemStack[2];
-		inputItemTemps = new float[80];
+		inputItemTemps = new float[1];
 		ambientTemp = -1000;
 		numAirBlocks = 0;
 		airFromBellows = 0F;
@@ -89,6 +81,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		oreCount = 0;
 		outCount = 0;
 		shouldSendInitData = false;
+		MaxFireTemp = 2500;
 	}
 
 	public void careForInventorySlot(int i, float startTemp)
@@ -176,43 +169,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		}
 
 		return 0;//returns false if there is no metal left over to combine
-	}
-
-	public void CookItemsNew(int i)
-	{
-		HeatRegistry manager = HeatRegistry.getInstance();
-		Random R = new Random();
-		if(fireItemStacks[i] != null)
-		{
-			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
-			if(index != null && inputItemTemps[i] >= index.meltTemp)
-			{
-				fireItemStacks[i] = index.getMorph();
-				if(fireItemStacks[i] != null)
-				{
-					NBTTagCompound nbt = new NBTTagCompound();
-					nbt.setFloat("temperature", inputItemTemps[i]);
-					fireItemStacks[i].stackTagCompound = nbt;
-				}
-				else
-				{
-					oreCount--;
-					charcoalCount--;
-				}
-
-				ItemStack output = index.getOutput(R);
-
-				if(outMetal1 == null)
-					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
-					outMetal2 = output;
-
-				if(outMetal1.getItem().itemID == output.getItem().itemID)
-					outMetal1Count += 100-output.getItemDamage();
-				else if(outMetal2.getItem().itemID == output.getItem().itemID)
-					outMetal2Count += 100-output.getItemDamage();
-			}
-		}
 	}
 
 	public void subtractFuel(){
@@ -315,7 +271,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 	@Override
 	public int getTemperatureScaled(int s)
 	{
-		return (int)(fireTemperature * s) / MaxFireTemp;
+		return (int)((fireTemperature * s) / MaxFireTemp);
 	}
 
 	public void HandleTemperature()
@@ -695,55 +651,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 				}
 			}
 
-			if(input[1] != null)
-			{
-				if((meta == 0 || meta == 2) && worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && 
-						worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID)
-				{
-					if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
-					{
-						worldObj.setBlock(xCoord+1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
-					}
-					else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
-					{
-						worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
-					}
-
-				}
-				else if((meta == 1 || meta == 3) && worldObj.getBlockId(xCoord, yCoord, zCoord+1) != TFCBlocks.Tuyere.blockID && 
-						worldObj.getBlockId(xCoord, yCoord, zCoord-1) != TFCBlocks.Tuyere.blockID)
-				{
-					if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord, yCoord, zCoord+1))
-					{
-						worldObj.setBlock(xCoord, yCoord, zCoord+1, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
-					}
-					else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord, yCoord, zCoord-1))
-					{
-						worldObj.setBlock(xCoord, yCoord, zCoord-1, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
-					}
-
-				}
-			}
-			else
-			{
-				if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == TFCBlocks.Tuyere.blockID)
-				{
-					worldObj.setBlockToAir(xCoord+1, yCoord, zCoord);
-				}
-				else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == TFCBlocks.Tuyere.blockID )
-				{
-					worldObj.setBlockToAir(xCoord-1, yCoord, zCoord);
-				}
-				else if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == TFCBlocks.Tuyere.blockID)
-				{
-					worldObj.setBlockToAir(xCoord, yCoord, zCoord+1);
-				}
-				else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == TFCBlocks.Tuyere.blockID)
-				{
-					worldObj.setBlockToAir(xCoord, yCoord, zCoord-1);
-				}
-			}
-
 			outCount = getOutputCount();
 			if(outCount < 0)
 				outCount = 0;
@@ -821,9 +728,8 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre&&
-							(entity.getEntityItem().getItemDamage() == 3||entity.getEntityItem().getItemDamage() == 10||entity.getEntityItem().getItemDamage() == 11)
-							&& (entity.getEntityItem().getItemDamage() == oreDamage || OreType.contentEquals("")))
+					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && 
+							((ItemOre)entity.getEntityItem().getItem()).GetMetalType(entity.getEntityItem()) == Global.PIGIRON)
 					{
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; c--)
@@ -849,22 +755,16 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 			/*Handle the temperature of the Bloomery*/
 			HandleTemperature();
 
-			for(int i = 0; i < fireItemStacks.length; i++)
+			if(flag)
 			{
-				/*Handle temperature for each item in the stack*/
-				careForInventorySlot(i,100);
-				/*Cook each input item */
-				CookItemsNew(i);
-			}
-			if(flag){
-				if((outMetal1Count+outMetal2Count)>=100){
+
 				worldObj.setBlock(xCoord+direction[0], yCoord, zCoord+direction[1], TFCBlocks.Bloom.blockID);
-				worldObj.setBlockMetadataWithNotify(xCoord+direction[0], yCoord, zCoord+direction[1],Math.min((outMetal1Count+outMetal2Count)/100,5),2);
-				}
+				//worldObj.setBlockMetadataWithNotify(xCoord+direction[0], yCoord, zCoord+direction[1],Math.min((outMetal1Count+outMetal2Count)/100,5),2);
+
 				oreCount = 0;
 				charcoalCount = 0;
 				fuelCount = 0;
-				//((TileEntityBloom)(worldObj.getBlockTileEntity(xCoord+direction[0], yCoord, zCoord+direction[1]))).setSize(outCount);
+				((TileEntityBloom)(worldObj.getBlockTileEntity(xCoord+direction[0], yCoord, zCoord+direction[1]))).setSize(outCount);
 			}
 
 			if(input[0]!= null)
