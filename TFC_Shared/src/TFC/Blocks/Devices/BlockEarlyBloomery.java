@@ -66,7 +66,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
-			if(te.isValid && is != null && is.getItem() == TFCItems.FireStarter)
+			if(te.isValid && is != null && (is.getItem() == TFCItems.FireStarter || is.getItem() == TFCItems.FlintSteel))
 			{
 				if(te.canLight()){
 					entityplayer.getCurrentEquippedItem().damageItem(1,entityplayer);
