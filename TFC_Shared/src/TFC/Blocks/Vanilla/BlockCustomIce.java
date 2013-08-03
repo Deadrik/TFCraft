@@ -2,6 +2,7 @@ package TFC.Blocks.Vanilla;
 
 import java.util.Random;
 
+import TFC.TFCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.material.Material;
@@ -49,6 +50,12 @@ public class BlockCustomIce extends BlockIce
             	}
             } else {
             	this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+            	world.setBlock(i, j, k, Block.waterStill.blockID, 0, 2);
+            }
+            this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+            if(j > 143){
+            	world.setBlock(i, j, k, Block.waterMoving.blockID, 0, 2);
+            } else {
             	world.setBlock(i, j, k, Block.waterStill.blockID, 0, 2);
             }
         }
