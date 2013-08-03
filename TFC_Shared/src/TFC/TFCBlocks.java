@@ -341,7 +341,7 @@ public class TFCBlocks
 		
 		GameRegistry.registerBlock(Flora, "Flora");
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
-		GameRegistry.registerBlock(Thatch, "Thatch");
+		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
 	}
 	
