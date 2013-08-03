@@ -1,10 +1,8 @@
 package TFC.TileEntities;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +10,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.HeatIndex;
@@ -168,7 +165,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
             HeatIndex index = manager.findMatchingIndex(fireItemStacks[1]);
             if(index != null && inputItemTemp > index.meltTemp)
             {
-                ItemStack output = index.getOutput(R);
+                ItemStack output = index.getOutput(fireItemStacks[1], R);
                 int damage = output.getItemDamage();
                 if(output.getItem().itemID == fireItemStacks[1].getItem().itemID)
                     damage = fireItemStacks[1].getItemDamage();
@@ -537,7 +534,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
                     {
                         if(!checkArray[x+offsetX][y][z+offsetZ] && checkOut(i+offsetX, j, k+offsetZ, empty))
                         {
-                            scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),(byte)y,(byte)(z+offsetZ), empty);
+                            scanLogs(i+offsetX, j, k+offsetZ, checkArray,(byte)(x+offsetX),y,(byte)(z+offsetZ), empty);
                         }
                     }
                 }

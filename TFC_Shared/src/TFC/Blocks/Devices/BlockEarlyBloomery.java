@@ -16,7 +16,6 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Core.TFC_Settings;
 import TFC.TileEntities.TileEntityEarlyBloomery;
 
 public class BlockEarlyBloomery extends BlockTerraContainer
@@ -66,11 +65,6 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 		{
 			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
-			
-			if(TFC_Settings.enableDebugMode && te.inputItemTemps != null)
-			{
-				entityplayer.sendChatToPlayer(te.inputItemTemps[0]+"");
-			}
 
 			if(te.isValid && is != null && is.getItem() == TFCItems.FireStarter)
 			{
@@ -214,13 +208,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		int meta = world.getBlockMetadata(i, j, k) & 3;
-		int[] dir = headBlockToFootBlockMap[meta];
-
-
 		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
-			((TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}

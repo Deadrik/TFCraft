@@ -1,19 +1,20 @@
 package TFC.Items;
 
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import TFC.API.ISmeltable;
+import TFC.API.Metal;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 
-public class ItemBloom extends ItemTerra
+public class ItemBloom extends ItemTerra implements ISmeltable
 {
 	EnumSize size = EnumSize.LARGE;
-	BufferedImage bi;
 	public ItemBloom(int i) 
 	{
 		super(i);
@@ -40,22 +41,40 @@ public class ItemBloom extends ItemTerra
 	{
 		return EnumWeight.HEAVY;
 	}
-
-	public ItemBloom setSize(EnumSize s)
-	{
-		size = s;
-		return this;
-	}
 	
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
     {
-		arraylist.add(is.getItemDamage()+"");
+		arraylist.add(is.getItemDamage()+"%");
     }
 
 	public void addCreativeItems(java.util.ArrayList list)
 	{
 		list.add(new ItemStack(this));
+	}
+
+	@Override
+	public Metal GetMetalType(ItemStack is) {
+		// TODO Auto-generated method stub
+		return Global.WROUGHTIRON;
+	}
+
+	@Override
+	public int GetMetalReturnAmount(ItemStack is) {
+		// TODO Auto-generated method stub
+		return is.getItemDamage();
+	}
+
+	@Override
+	public boolean isSmeltable(ItemStack is) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public EnumTier GetSmeltTier(ItemStack is) {
+		// TODO Auto-generated method stub
+		return EnumTier.TierIII;
 	}
 
 }

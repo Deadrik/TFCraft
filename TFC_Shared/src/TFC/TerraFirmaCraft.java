@@ -21,6 +21,7 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
+import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
@@ -163,6 +164,9 @@ public class TerraFirmaCraft
 		
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
+		
+		// Register Anvil Crafting Handler
+		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
 		
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());

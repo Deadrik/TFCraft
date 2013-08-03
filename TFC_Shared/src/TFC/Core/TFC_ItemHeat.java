@@ -200,10 +200,10 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.GoldUnshaped,1), GoldRaw,new ItemStack(TFCItems.GoldUnshaped,1)).setMorph(new ItemStack(TFCItems.CeramicMold)));
 		//Wrought Iron
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)));
-		for(int i = 1; i < 6; i++){
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Bloom,1,i), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,i)));
-		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RawBloom,1,i), IronRaw,null));
-		}
+
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.Bloom, 1, 32767), IronRaw, new ItemStack(TFCItems.WroughtIronUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RawBloom, 1, 32767), IronRaw, new ItemStack(TFCItems.WroughtIronUnshaped,1)));
+
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronIngot2x,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronUnshaped,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,1)).setMorph(new ItemStack(TFCItems.CeramicMold)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WroughtIronSheet,1), IronRaw,new ItemStack(TFCItems.WroughtIronUnshaped,2,0)));
@@ -552,7 +552,10 @@ public class TFC_ItemHeat
 
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
-		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is);
+		byte debugBump = 0;
+		if(TFC_Settings.enableDebugMode)
+			debugBump = 5;
+		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;
 	}
 
 	public static void HandleItemHeat(ItemStack is, int xCoord, int yCoord, int zCoord)

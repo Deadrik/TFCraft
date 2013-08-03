@@ -62,6 +62,7 @@ import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
+import TFC.TileEntities.TileEntityBloom;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityCrop;
 import TFC.TileEntities.TileEntityDetailed;
@@ -132,13 +133,15 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 		ModLoader.registerTileEntity(TileEntityBarrel.class, "Barrel");
 		
-		
+		ModLoader.registerTileEntity(TileEntityBloom.class, "IronBloom");
 		
 		if(b){
 			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
 			ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
 		}
+		
+		
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "Cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "Sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityBear.class, "Bear", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
