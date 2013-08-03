@@ -56,8 +56,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 	ItemStack outMetal1;
 	int outMetal1Count;
-	ItemStack outMetal2;
-	int outMetal2Count;
 
 	public TEBlastFurnace()
 	{
@@ -201,13 +199,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 				if(outMetal1 == null)
 					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
-					outMetal2 = output;
 
 				if(outMetal1.getItem().itemID == output.getItem().itemID)
 					outMetal1Count += 100-output.getItemDamage();
-				else if(outMetal2.getItem().itemID == output.getItem().itemID)
-					outMetal2Count += 100-output.getItemDamage();
 			}
 		}
 	}
@@ -506,8 +500,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 				if(outMetal1 == null)
 					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
-					outMetal2 = output;
 			}
 		}
 
@@ -535,22 +527,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 					if(outMetal1 != null)
 						input[0] = outMetal1.copy();
-				}
-				else if(outMetal2Count > 0)
-				{
-					if(outMetal2Count > 100)
-					{
-						dam = 100;
-						outMetal2Count -= 100;
-					}
-					else
-					{
-						dam = outMetal2Count;
-						outMetal2Count = 0;
-					} 
-
-					if(outMetal2 != null)
-						input[0] = outMetal2.copy();    
 				}
 
 				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID)
@@ -586,32 +562,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 				return true;
 			}
-			/**
-			 * If the input is not an empty mold but instead contains a partial mold matching the second output metal, 
-			 * then we handle the process
-			 * */
-			else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().itemID && input[0].getItemDamage() > 0)
-			{
-				int i = 100-input[0].getItemDamage();
-				if(i + outMetal2Count < 100)
-				{
-					input[0].setItemDamage(100-(i + outMetal2Count));
-					outMetal2Count = 0;
-				}
-				else
-				{
-					int j = 100 - i;
-					input[0].setItemDamage(0);
-					outMetal2Count -= j;
-				}
-
-				if(outMetal2Count == 0)
-					outMetal2 = null; 
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
 		}
 		return false;
 	}
@@ -635,8 +585,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 	public int getOutputCount()
 	{
-		int out = outMetal1Count + outMetal2Count;
-		return out;
+		return outMetal1Count;
 	}
 
 	@Override
@@ -713,7 +662,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				OreType = "";
 				oreDamage = -1;
 				outMetal1 = null;
-				outMetal2 = null; 
 			}
 
 			//Do the funky math to find how many molten blocks should be placed
@@ -841,7 +789,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		nbttagcompound.setFloat("airFromBellows", airFromBellows);
 		nbttagcompound.setInteger("charcoalCount", charcoalCount);
 		nbttagcompound.setInteger("outMetal1Count", outMetal1Count);
-		nbttagcompound.setInteger("outMetal2Count", outMetal2Count);
 		nbttagcompound.setInteger("oreDamage", oreDamage);
 		nbttagcompound.setByte("oreCount", (byte)oreCount);
 
@@ -896,7 +843,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		airFromBellows = nbttagcompound.getFloat("airFromBellows");
 		charcoalCount = nbttagcompound.getInteger("charcoalCount");
 		outMetal1Count = nbttagcompound.getInteger("outMetal1Count");
-		outMetal2Count = nbttagcompound.getInteger("outMetal2Count");
 		oreDamage = nbttagcompound.getInteger("oreDamage");
 		oreCount = nbttagcompound.getByte("oreCount");
 
