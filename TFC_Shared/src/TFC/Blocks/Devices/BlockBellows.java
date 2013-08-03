@@ -2,6 +2,7 @@ package TFC.Blocks.Devices;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Sounds;
@@ -25,6 +25,7 @@ public class BlockBellows extends BlockTerraContainer {
 
 	public BlockBellows(int i, Material material) {
 		super(i, material);
+		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class BlockBellows extends BlockTerraContainer {
 			else if (j == 2) { return Sides[3]; }
 			else if (j == 3) { return Sides[2]; }
 		}
-		else if (i == 2)// -z
+		else if (i == 2)// -x
 		{
 			if (j == 0) { return BellowsBack; }
 			else if (j == 1) { return Sides[2]; } // -z
@@ -111,10 +112,10 @@ public class BlockBellows extends BlockTerraContainer {
 		return TFCBlocks.BellowsRenderId;
 	}
 
-	@Override
+	/*@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l) {
 		dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.BellowsItem, 1));
-	}
+	}*/
 
 	@Override
 	public boolean isOpaqueCube() {

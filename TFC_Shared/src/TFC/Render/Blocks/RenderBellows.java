@@ -2,7 +2,11 @@ package TFC.Render.Blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
+
 import TFC.TFCBlocks;
 import TFC.Blocks.Devices.BlockBellows;
 import TFC.TileEntities.TileEntityBellows;
@@ -12,11 +16,26 @@ public class RenderBellows implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean shouldRender3DInInventory() {
-		return false;
+		return true;
 	}
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) 
+	{
+		//forward
+		renderer.overrideBlockTexture = BlockBellows.BellowsFront;
+		renderer.setRenderBounds(0.0F, 0.0F, 0.9F, 1.0F, 1.0F, 1.0F);
+		renderInvBlock(block, metadata, renderer);
+		//mid
+		renderer.clearOverrideBlockTexture();
+		renderer.setRenderBounds(0.1F, 0.1F, 0.05F, 0.9F, 0.9F, 0.95F);
+		renderInvBlock(block, 0, renderer);
+		//back
+		renderer.overrideBlockTexture = BlockBellows.BellowsBack;
+		renderer.setRenderBounds(0.0F, 0.0F, 0, 1.0F, 1.0F, 0.1F);
+		renderInvBlock(block, metadata, renderer);
+		
+		renderer.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -107,5 +126,37 @@ public class RenderBellows implements ISimpleBlockRenderingHandler {
 	@Override
 	public int getRenderId() {
 		return 0;
+	}
+	
+	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
+	{
+		m = 0;
+		Tessellator var14 = Tessellator.instance;
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, -1.0F, 0.0F);
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 1.0F, 0.0F);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 0.0F, -1.0F);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, m));
+		var14.draw();
+		var14.startDrawingQuads();
+		var14.setNormal(0.0F, 0.0F, 1.0F);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, m));
+		var14.draw();
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 }
