@@ -21,8 +21,6 @@ import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
-import TFC.API.HeatIndex;
-import TFC.API.HeatRegistry;
 import TFC.API.Constant.Global;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Core.TFC_Climate;
@@ -35,7 +33,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 	public boolean isValid;
 	public boolean bloomeryLit;
 
-	public ItemStack input[];
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
 
@@ -56,8 +53,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 
 	ItemStack outMetal1;
 	int outMetal1Count;
-	ItemStack outMetal2;
-	int outMetal2Count;
 
 	public TileEntityEarlyBloomery()
 	{
@@ -71,7 +66,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		OreType = "";
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
-		input = new ItemStack[2];
 		inputItemTemps = new float[1];
 		ambientTemp = -1000;
 		numAirBlocks = 0;
@@ -192,25 +186,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
-		if(input[i] != null)
-		{
-			if(input[i].stackSize <= j)
-			{
-				ItemStack itemstack = input[i];
-				input[i] = null;
-				return itemstack;
-			}
-			ItemStack itemstack1 = input[i].splitStack(j);
-			if(input[i].stackSize == 0)
-			{
-				input[i] = null;
-			}
-			return itemstack1;
-		} else
-		{
-			return null;
-		}
-
+		return null;
 	}
 
 	public void ejectContents()
@@ -252,14 +228,14 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 	@Override
 	public int getSizeInventory()
 	{
-		return input.length;
+		return fireItemStacks.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
 		// TODO Auto-generated method stub
-		return input[i];
+		return fireItemStacks[i];
 	}
 
 	@Override
@@ -484,132 +460,10 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		return false;
 	}
 
-	public boolean RemoveOre()
-	{
-		if(outMetal1 == null && outMetal1Count > 0 && oreDamage > 0)
-		{
-			HeatRegistry manager = HeatRegistry.getInstance();
-			HeatIndex index = manager.findMatchingIndex(new ItemStack(TFCItems.OreChunk, 1, oreDamage));
-			if(index != null)
-			{
-				ItemStack output = index.getOutput(worldObj.rand);
-
-				if(outMetal1 == null)
-					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
-					outMetal2 = output;
-			}
-		}
-
-		//Make sure that we have an item in the input slot
-		if(input[0] != null)
-		{
-			/**
-			 * First we check if there is an empty mold
-			 * */
-			if(input[0].itemID == TFCItems.CeramicMold.itemID)
-			{
-				int dam = 0;
-				if(outMetal1Count > 0)
-				{
-					if(outMetal1Count > 100)
-					{
-						dam = 100;
-						outMetal1Count -= 100;
-					}
-					else
-					{
-						dam = outMetal1Count;
-						outMetal1Count = 0;
-					}  
-
-					if(outMetal1 != null)
-						input[0] = outMetal1.copy();
-				}
-				else if(outMetal2Count > 0)
-				{
-					if(outMetal2Count > 100)
-					{
-						dam = 100;
-						outMetal2Count -= 100;
-					}
-					else
-					{
-						dam = outMetal2Count;
-						outMetal2Count = 0;
-					} 
-
-					if(outMetal2 != null)
-						input[0] = outMetal2.copy();    
-				}
-
-				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID)
-					input[0].setItemDamage(100-dam);
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
-			/**
-			 * If the input is not an empty mold but instead contains a partial mold matching the first output metal, 
-			 * then we handle the process
-			 * */
-			else if(outMetal1 != null && input[0].itemID == outMetal1.getItem().itemID && input[0].getItemDamage() > 0)
-			{
-				int i = 100-input[0].getItemDamage();
-				if(i + outMetal1Count < 100)
-				{
-					input[0].setItemDamage(100-(i + outMetal1Count));
-					outMetal1Count = 0;
-				}
-				else
-				{
-					int j = 100 - i;
-					input[0].setItemDamage(0);
-					outMetal1Count -= j;
-				}
-
-				if(outMetal1Count == 0)
-					outMetal1 = null; 
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
-			/**
-			 * If the input is not an empty mold but instead contains a partial mold matching the second output metal, 
-			 * then we handle the process
-			 * */
-			else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().itemID && input[0].getItemDamage() > 0)
-			{
-				int i = 100-input[0].getItemDamage();
-				if(i + outMetal2Count < 100)
-				{
-					input[0].setItemDamage(100-(i + outMetal2Count));
-					outMetal2Count = 0;
-				}
-				else
-				{
-					int j = 100 - i;
-					input[0].setItemDamage(0);
-					outMetal2Count -= j;
-				}
-
-				if(outMetal2Count == 0)
-					outMetal2 = null; 
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		input[i] = itemstack;
+		fireItemStacks[i] = itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 		{
 			itemstack.stackSize = getInventoryStackLimit();
@@ -625,8 +479,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 
 	public int getOutputCount()
 	{
-		int out = outMetal1Count + outMetal2Count;
-		return out;
+		return outMetal1Count;
 	}
 
 	@Override
@@ -639,13 +492,16 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 			//get the direction that the bloomery is facing so that we know where the stack should be
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
 			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
-			if(bloomeryLit){
-				if(!(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID)){
+			if(bloomeryLit)
+			{
+				if(!(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID))
+				{
 					bloomeryLit = false;
 					System.out.println("unlighting");
 					flag = true;
 				}
-				else{
+				else
+				{
 					fuelCount = worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1])+1;
 					System.out.println(fuelCount);
 				}
@@ -666,7 +522,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 				OreType = "";
 				oreDamage = -1;
 				outMetal1 = null;
-				outMetal2 = null; 
 			}
 
 			//Do the funky math to find how many molten blocks should be placed
@@ -684,7 +539,7 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 
 
 			/*Fill the bloomery stack with molten ore. */
-			for (int i = 1; i < 3  && (bloomeryLit||fuelCount>0); i++)
+			for (int i = 1; i < 3  && (bloomeryLit || fuelCount > 0); i++)
 			{
 				/*The stack must be air or already be molten rock*/
 				if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
@@ -692,9 +547,12 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 						worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
 				{
 					//Make sure that the Stack is surrounded by rock
-					if(i-1 < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
+					if(i-1 < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) 
+					{
 						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 0x2);
-					} else {
+					} 
+					else 
+					{
 						worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
 					}
 				}
@@ -767,13 +625,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 				((TileEntityBloom)(worldObj.getBlockTileEntity(xCoord+direction[0], yCoord, zCoord+direction[1]))).setSize(outCount);
 			}
 
-			if(input[0]!= null)
-			{
-				//RemoveOre();
-				if(input[0].stackSize < 1)
-					input[0].stackSize = 1;
-			}
-
 			//Here we make sure that the forge is valid
 			isValid = CheckValidity();
 		}
@@ -793,7 +644,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		nbttagcompound.setInteger("fuelCount", fuelCount);
 		nbttagcompound.setBoolean("isLit",bloomeryLit);
 		nbttagcompound.setInteger("outMetal1Count", outMetal1Count);
-		nbttagcompound.setInteger("outMetal2Count", outMetal2Count);
 		nbttagcompound.setInteger("oreDamage", oreDamage);
 
 		NBTTagList nbttaglist = new NBTTagList();
@@ -808,19 +658,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 			}
 		}
 		nbttagcompound.setTag("Items", nbttaglist);
-
-		NBTTagList nbttaglist2 = new NBTTagList();
-		for(int i = 0; i < input.length; i++)
-		{
-			if(input[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				input[i].writeToNBT(nbttagcompound1);
-				nbttaglist2.appendTag(nbttagcompound1);
-			}
-		}
-		nbttagcompound.setTag("Input", nbttaglist2);
 
 		NBTTagList nbttaglist3 = new NBTTagList();
 		for(int i = 0; i < outputItemStacks.length; i++)
@@ -850,7 +687,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 		fuelCount = nbttagcompound.getInteger("fuelCount");
 		bloomeryLit = nbttagcompound.getBoolean("isLit");
 		outMetal1Count = nbttagcompound.getInteger("outMetal1Count");
-		outMetal2Count = nbttagcompound.getInteger("outMetal2Count");
 		oreDamage = nbttagcompound.getInteger("oreDamage");
 
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
@@ -862,18 +698,6 @@ public class TileEntityEarlyBloomery extends TileEntityFireEntity implements IIn
 			if(byte0 >= 0 && byte0 < fireItemStacks.length)
 			{
 				fireItemStacks[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
-		NBTTagList nbttaglist2 = nbttagcompound.getTagList("Input");
-		input = new ItemStack[2];
-		for(int i = 0; i < nbttaglist2.tagCount(); i++)
-		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist2.tagAt(i);
-			byte byte0 = nbttagcompound1.getByte("Slot");
-			if(byte0 >= 0 && byte0 < input.length)
-			{
-				input[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
 
