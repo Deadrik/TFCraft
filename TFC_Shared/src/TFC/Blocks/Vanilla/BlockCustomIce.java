@@ -42,7 +42,7 @@ public class BlockCustomIce extends BlockIce
         {
             this.dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
             if(j > 143){
-            	world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID, 0, 2);
+            	world.setBlock(i, j, k, Block.waterMoving.blockID, 0, 2);
             } else {
             	world.setBlock(i, j, k, Block.waterStill.blockID, 0, 2);
             }
