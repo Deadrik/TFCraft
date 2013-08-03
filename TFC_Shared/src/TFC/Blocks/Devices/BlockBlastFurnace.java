@@ -20,7 +20,7 @@ import TFC.TileEntities.TEBlastFurnace;
 
 public class BlockBlastFurnace extends BlockTerraContainer
 {
-	Icon textureSide;
+	Icon[] textureSide;
 	Icon textureOn;
 	Icon textureOff;
 
@@ -107,7 +107,10 @@ public class BlockBlastFurnace extends BlockTerraContainer
 
 		if(i == 0 || i == 1) 
 		{
-			return textureSide;
+			if(lit == 1)
+				return textureSide[1];
+			else 
+				return textureSide[0];
 		}
 		else
 		{
@@ -121,7 +124,9 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
 	{
-		textureSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Side");
+		textureSide = new Icon[2];
+		textureSide[0] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Bottom Off");
+		textureSide[1] = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Bottom On");
 		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace On");
 		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Blast Furnace Off");
 	}

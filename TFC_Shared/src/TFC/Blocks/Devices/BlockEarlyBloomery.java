@@ -129,22 +129,26 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 		int lit = (j & 4) == 4 ? 1 : 0;
 		j = j & 3;
 
-		if(j == 0 && i == 2	) {
+		if(j == 0 && i == 2	) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
 		}
-		if(j == 1 && i == 5) {
+		else if(j == 1 && i == 5) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
 		}
-		if(j == 2 && i == 3) {
+		else if(j == 2 && i == 3) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
 		}
-		if(j == 3 && i == 4) {
+		else if(j == 3 && i == 4) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
