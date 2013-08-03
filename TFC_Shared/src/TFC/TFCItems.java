@@ -914,6 +914,8 @@ public class TFCItems
     
     public static Item TuyereCopper;
     public static Item TuyereBronze;
+    public static Item TuyereBlackBronze;
+    public static Item TuyereBismuthBronze;
     public static Item TuyereWroughtIron;
     public static Item TuyereSteel;
     public static Item TuyereBlackSteel;
@@ -1672,6 +1674,8 @@ public class TFCItems
         
         TuyereCopper = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereCopper",num++), 1000, 0).setUnlocalizedName("Copper Tuyere");
         TuyereBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBronze",num++), 1000, 1).setUnlocalizedName("Bronze Tuyere");
+        TuyereBlackBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackBronze",num++), 1000, 1).setUnlocalizedName("Black Bronze Tuyere");
+        TuyereBismuthBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBismuthBronze",num++), 1000, 1).setUnlocalizedName("Bismuth Bronze Tuyere");
         TuyereWroughtIron = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereWroughtIron",num++), 1000, 2).setUnlocalizedName("Wrought Iron Tuyere");
         TuyereSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereSteel",num++), 1000, 3).setUnlocalizedName("Steel Tuyere");
         TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 1000, 4).setUnlocalizedName("Black Steel Tuyere");
