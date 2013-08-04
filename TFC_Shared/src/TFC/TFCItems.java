@@ -1682,8 +1682,8 @@ public class TFCItems
         TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 1000, 5).setUnlocalizedName("Red Steel Tuyere");
         TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 1000, 6).setUnlocalizedName("Blue Steel Tuyere");
         
-        Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setUnlocalizedName("Bloom");
-        RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setUnlocalizedName("RawBloom");
+        Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setFolder("ingots/").setUnlocalizedName("Iron Bloom");
+        RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setFolder("ingots/").setUnlocalizedName("Raw Iron Bloom");
         /**Plans*/
         num = 20000;
         SetupPlans(num);
@@ -1749,7 +1749,17 @@ public class TFCItems
         ((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
         ((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);        
         
-        Global.BISMUTH = new Metal("Bismuth", BismuthUnshaped.itemID, BismuthIngot.itemID);
+        registerMetals();
+        
+        System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
+        if (config != null) {
+            config.save();
+        }
+    }
+
+	private static void registerMetals() 
+	{
+		Global.BISMUTH = new Metal("Bismuth", BismuthUnshaped.itemID, BismuthIngot.itemID);
         Global.BISMUTHBRONZE = new Metal("Bismuth Bronze", BismuthBronzeUnshaped.itemID, BismuthBronzeIngot.itemID);
         Global.BLACKBRONZE = new Metal("Black Bronze", BlackBronzeUnshaped.itemID, BlackBronzeIngot.itemID); 
         Global.BLACKSTEEL = new Metal("Black Steel", BlackSteelUnshaped.itemID, BlackSteelIngot.itemID); 
@@ -1777,33 +1787,33 @@ public class TFCItems
     	Global.WEAKBLUESTEEL = new Metal("Weak Blue Steel", WeakBlueSteelUnshaped.itemID, WeakBlueSteelIngot.itemID);
     	Global.HCBLUESTEEL = new Metal("HC Blue Steel", HCBlueSteelUnshaped.itemID, HCBlueSteelIngot.itemID); 
         
-        MetalRegistry.instance.addMetal(Global.BISMUTH);
-        MetalRegistry.instance.addMetal(Global.BISMUTHBRONZE);
-        MetalRegistry.instance.addMetal(Global.BLACKBRONZE); 
-        MetalRegistry.instance.addMetal(Global.BLACKSTEEL); 
-        MetalRegistry.instance.addMetal(Global.BLUESTEEL); 
-        MetalRegistry.instance.addMetal(Global.BRASS); 
-        MetalRegistry.instance.addMetal(Global.BRONZE);
-        MetalRegistry.instance.addMetal(Global.COPPER);
-        MetalRegistry.instance.addMetal(Global.GOLD); 
-        MetalRegistry.instance.addMetal(Global.WROUGHTIRON); 
-        MetalRegistry.instance.addMetal(Global.LEAD); 
-        MetalRegistry.instance.addMetal(Global.NICKEL); 
-        MetalRegistry.instance.addMetal(Global.PIGIRON); 
-    	MetalRegistry.instance.addMetal(Global.PLATINUM); 
-    	MetalRegistry.instance.addMetal(Global.REDSTEEL); 
-    	MetalRegistry.instance.addMetal(Global.ROSEGOLD); 
-    	MetalRegistry.instance.addMetal(Global.SILVER); 
-    	MetalRegistry.instance.addMetal(Global.STEEL); 
-    	MetalRegistry.instance.addMetal(Global.STERLINGSILVER); 
-    	MetalRegistry.instance.addMetal(Global.TIN);
-    	MetalRegistry.instance.addMetal(Global.ZINC);
-    	MetalRegistry.instance.addMetal(Global.WEAKSTEEL);
-    	MetalRegistry.instance.addMetal(Global.HCBLACKSTEEL);
-    	MetalRegistry.instance.addMetal(Global.WEAKREDSTEEL);
-    	MetalRegistry.instance.addMetal(Global.HCREDSTEEL);
-    	MetalRegistry.instance.addMetal(Global.WEAKBLUESTEEL);
-    	MetalRegistry.instance.addMetal(Global.HCBLUESTEEL);
+        MetalRegistry.instance.addMetal(Global.BISMUTH, Alloy.EnumTier.TierI);
+        MetalRegistry.instance.addMetal(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);
+        MetalRegistry.instance.addMetal(Global.BLACKBRONZE, Alloy.EnumTier.TierI); 
+        MetalRegistry.instance.addMetal(Global.BLACKSTEEL, Alloy.EnumTier.TierV); 
+        MetalRegistry.instance.addMetal(Global.BLUESTEEL, Alloy.EnumTier.TierV); 
+        MetalRegistry.instance.addMetal(Global.BRASS, Alloy.EnumTier.TierI); 
+        MetalRegistry.instance.addMetal(Global.BRONZE, Alloy.EnumTier.TierI);
+        MetalRegistry.instance.addMetal(Global.COPPER, Alloy.EnumTier.TierI);
+        MetalRegistry.instance.addMetal(Global.GOLD, Alloy.EnumTier.TierI); 
+        MetalRegistry.instance.addMetal(Global.WROUGHTIRON, Alloy.EnumTier.TierIII); 
+        MetalRegistry.instance.addMetal(Global.LEAD, Alloy.EnumTier.TierI); 
+        MetalRegistry.instance.addMetal(Global.NICKEL, Alloy.EnumTier.TierI); 
+        MetalRegistry.instance.addMetal(Global.PIGIRON, Alloy.EnumTier.TierIV); 
+    	MetalRegistry.instance.addMetal(Global.PLATINUM, Alloy.EnumTier.TierV); 
+    	MetalRegistry.instance.addMetal(Global.REDSTEEL, Alloy.EnumTier.TierV); 
+    	MetalRegistry.instance.addMetal(Global.ROSEGOLD, Alloy.EnumTier.TierI); 
+    	MetalRegistry.instance.addMetal(Global.SILVER, Alloy.EnumTier.TierI); 
+    	MetalRegistry.instance.addMetal(Global.STEEL, Alloy.EnumTier.TierIV); 
+    	MetalRegistry.instance.addMetal(Global.STERLINGSILVER, Alloy.EnumTier.TierI); 
+    	MetalRegistry.instance.addMetal(Global.TIN, Alloy.EnumTier.TierI);
+    	MetalRegistry.instance.addMetal(Global.ZINC, Alloy.EnumTier.TierI);
+    	MetalRegistry.instance.addMetal(Global.WEAKSTEEL, Alloy.EnumTier.TierV);
+    	MetalRegistry.instance.addMetal(Global.HCBLACKSTEEL, Alloy.EnumTier.TierV);
+    	MetalRegistry.instance.addMetal(Global.WEAKREDSTEEL, Alloy.EnumTier.TierV);
+    	MetalRegistry.instance.addMetal(Global.HCREDSTEEL, Alloy.EnumTier.TierV);
+    	MetalRegistry.instance.addMetal(Global.WEAKBLUESTEEL, Alloy.EnumTier.TierV);
+    	MetalRegistry.instance.addMetal(Global.HCBLUESTEEL, Alloy.EnumTier.TierV);
     	
 		Alloy Bronze = new Alloy(Global.BRONZE, Alloy.EnumTier.TierI);
 		Bronze.addIngred(Global.COPPER, 88, 92);
@@ -1856,12 +1866,7 @@ public class TFCItems
 		WeakBlueSteel.addIngred(Global.STERLINGSILVER, 10, 15);
 		WeakBlueSteel.addIngred(Global.STEEL, 20, 25);
 		AlloyManager.instance.addAlloy(WeakBlueSteel);
-        
-        System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
-        if (config != null) {
-            config.save();
-        }
-    }
+	}
     
     public static void SetupPlans(int num)
     {

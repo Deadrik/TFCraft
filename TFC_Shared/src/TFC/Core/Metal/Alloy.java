@@ -93,7 +93,8 @@ public class Alloy
 		TierII(2),//Beehive Kiln
 		TierIII(3),//Bloomery
 		TierIV(4),//Blast Furnace
-		TierV(5), TierVI(6), TierVII(7), TierVIII(8), TierIX(9), TierX(10);
+		TierV(5), //Crucible
+		TierVI(6), TierVII(7), TierVIII(8), TierIX(9), TierX(10);
 		
 		public int tier;
 		

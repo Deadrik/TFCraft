@@ -130,7 +130,6 @@ public class RenderBellows implements ISimpleBlockRenderingHandler {
 	
 	public static void renderInvBlock(Block block, int m, RenderBlocks renderer)
 	{
-		m = 0;
 		Tessellator var14 = Tessellator.instance;
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		var14.startDrawingQuads();

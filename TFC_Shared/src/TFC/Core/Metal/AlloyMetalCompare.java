@@ -22,7 +22,7 @@ public class AlloyMetalCompare extends AlloyMetal
 	
 	public boolean compare(AlloyMetal b)
 	{
-		if(this.metalType == b.metalType && b.metal > this.metalMin && b.metal < this.metalMax)
+		if(this.metalType == b.metalType && b.metal >= this.metalMin && b.metal <= this.metalMax)
 			return true;
 			
 		return false;

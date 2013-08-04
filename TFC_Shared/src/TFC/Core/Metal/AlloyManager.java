@@ -44,9 +44,12 @@ public class AlloyManager
 			match = iter.next();
 			if(furnaceTier.tier >= match.furnaceTier.tier)
 				match = match.matches(ingred);
+			else
+				match = null;
+			
+			if(match != null)
+				return match.outputType;
 		}
-		if(match != null)
-			return match.outputType;
-		else return null;
+		return null;
 	}
 }

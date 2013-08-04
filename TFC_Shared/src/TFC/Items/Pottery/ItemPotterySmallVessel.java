@@ -30,6 +30,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		super(id);
 		this.MetaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
+		this.setMaxStackSize(1);
 	}
 
 	@Override
@@ -134,7 +135,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				if(types[1] != null) a.add(new AlloyMetal(types[1], metalPercent[1]));
 				if(types[2] != null) a.add(new AlloyMetal(types[2], metalPercent[2]));
 				if(types[3] != null) a.add(new AlloyMetal(types[3], metalPercent[3]));
-				
+
 				Metal match = AlloyManager.instance.matchesAlloy(a, furnaceTier);
 				if(match != null)
 				{
@@ -203,10 +204,13 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if(itemstack.getItemDamage() == 2)
-			entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-		else if(itemstack.getItemDamage() == 1)
-			entityplayer.openGui(TerraFirmaCraft.instance, 39, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+		if(!entityplayer.isSneaking())
+		{
+			if(itemstack.getItemDamage() == 2)
+				entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+			else if(itemstack.getItemDamage() == 1)
+				entityplayer.openGui(TerraFirmaCraft.instance, 39, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+		}
 		return itemstack;
 	}
 
