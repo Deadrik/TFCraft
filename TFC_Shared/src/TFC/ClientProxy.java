@@ -56,7 +56,7 @@ import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.GUI.GuiAnvil;
 import TFC.GUI.GuiBarrel;
-import TFC.GUI.GuiBloomery;
+import TFC.GUI.GuiBlastFurnace;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
@@ -99,11 +99,13 @@ import TFC.Render.TileEntityIngotPileRenderer;
 import TFC.Render.TileEntityPotteryRenderer;
 import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
+import TFC.Render.Blocks.RenderBellows;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderPottery;
 import TFC.Render.Blocks.RenderQuern;
 import TFC.Render.Blocks.RenderSupportBeam;
 import TFC.Render.Blocks.RenderToolRack;
+import TFC.Render.Blocks.RenderTuyere;
 import TFC.Render.Models.ModelBear;
 import TFC.Render.Models.ModelChickenTFC;
 import TFC.Render.Models.ModelCowTFC;
@@ -115,7 +117,7 @@ import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityFoodPrep;
@@ -184,7 +186,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.looseRockRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.FirepitRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.AnvilRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderAnvil());
-		RenderingRegistry.registerBlockHandler(TFCBlocks.BellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.BellowsRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBellows());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.ScribeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.ForgeRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.sluiceRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -204,6 +206,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.woodConstructRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
@@ -295,7 +298,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 26:
 		{
-			return new GuiBloomery(player.inventory, (TileEntityBloomery) te, world, x, y, z);
+			return new GuiBlastFurnace(player.inventory, (TEBlastFurnace) te, world, x, y, z);
 		}
 		case 27:
 		{

@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Constant.Global;
+import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
@@ -26,11 +27,13 @@ import TFC.Blocks.BlockStair;
 import TFC.Blocks.BlockStalactite;
 import TFC.Blocks.BlockSulfur;
 import TFC.Blocks.BlockThatch;
+import TFC.Blocks.BlockTuyere;
 import TFC.Blocks.BlockWoodSupport;
 import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBellows;
-import TFC.Blocks.Devices.BlockBloomery;
+import TFC.Blocks.Devices.BlockBlastFurnace;
 import TFC.Blocks.Devices.BlockChestTFC;
+import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Blocks.Devices.BlockFirepit;
 import TFC.Blocks.Devices.BlockForge;
 import TFC.Blocks.Devices.BlockMetallurgy;
@@ -120,6 +123,7 @@ public class TFCBlocks
 	public static int fluidRenderId;
 	public static int woodConstructRenderId;	
 	public static int potteryRenderId;
+	public static int tuyereRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -168,7 +172,7 @@ public class TFCBlocks
 	public static Block Anvil2;
 	public static Block Scribe;
 	public static Block Forge;
-	public static Block Bloomery;
+	public static Block BlastFurnace;
 	public static Block MetalTable;
 	public static Block Molten;
 	public static Block Sluice;
@@ -184,7 +188,7 @@ public class TFCBlocks
 	public static Block DryGrass2;
 	public static Block Charcoal;
 	public static Block Detailed;
-	public static Block SuperDetailed;
+
 	public static Block WoodConstruct;
 	public static Block WoodVert;
 	public static Block WoodHoriz;
@@ -219,6 +223,9 @@ public class TFCBlocks
 	public static Block Moss;
 
 	public static Block Flora;
+	public static Block Tuyere;
+	public static Block EarlyBloomery;
+	public static Block Bloom;
 	
 	static Configuration config;
 	
@@ -278,14 +285,15 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
 
 		GameRegistry.registerBlock(Firepit, "Firepit");
-		GameRegistry.registerBlock(Bellows, "Bellows");
+		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bellows");
 		GameRegistry.registerBlock(Anvil, TFC.Items.ItemBlocks.ItemAnvil.class, "Anvil");
 		GameRegistry.registerBlock(Anvil2, TFC.Items.ItemBlocks.ItemAnvil2.class, "Anvil2");
 		GameRegistry.registerBlock(Scribe, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Scribe");
 		GameRegistry.registerBlock(Forge, "Forge");
 		GameRegistry.registerBlock(MetalTable, TFC.Items.ItemBlocks.ItemTerraBlock.class, "MetalTable");
 		GameRegistry.registerBlock(Molten, "Molten");
-		GameRegistry.registerBlock(Bloomery, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bloomery");
+		GameRegistry.registerBlock(BlastFurnace, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bloomery");
+		GameRegistry.registerBlock(EarlyBloomery, TFC.Items.ItemBlocks.ItemTerraBlock.class, "EarlyBloomery");
 		GameRegistry.registerBlock(Sluice, "Sluice");
 
 		GameRegistry.registerBlock(fruitTreeWood, "fruitTreeWood");
@@ -333,7 +341,8 @@ public class TFCBlocks
 		
 		GameRegistry.registerBlock(Flora, "Flora");
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
-		GameRegistry.registerBlock(Thatch, "Thatch");
+		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
+		GameRegistry.registerBlock(Tuyere, "Tuyere");
 	}
 	
 	public static void LoadBlocks()
@@ -474,7 +483,9 @@ public class TFCBlocks
 
 		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","Metallurgy", 2009)).setUnlocalizedName("Metallurgy").setHardness(3);
 		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setUnlocalizedName("Molten").setHardness(20);
-		TFCBlocks.Bloomery = new BlockBloomery(TFC_Settings.getIntFor(config,"block","Bloomery", 2007)).setUnlocalizedName("Bloomery").setHardness(20).setLightValue(0F);
+		TFCBlocks.BlastFurnace = new BlockBlastFurnace(TFC_Settings.getIntFor(config,"block","BlastFurnace", 2007)).setUnlocalizedName("BlastFurnace").setHardness(20).setLightValue(0F);
+		TFCBlocks.EarlyBloomery = new BlockEarlyBloomery(TFC_Settings.getIntFor(config,"block","EarlyBloomery", 2006)).setUnlocalizedName("EarlyBloomery").setHardness(20).setLightValue(0F);
+		TFCBlocks.Bloom = new BlockBloom(TFC_Settings.getIntFor(config,"block","Bloom", 2005)).setUnlocalizedName("Bloom").setHardness(20).setLightValue(0F);
 		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","Sluice", 2003)).setUnlocalizedName("Sluice").setHardness(2F).setResistance(20F);
 
 		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000), Material.rock).setUnlocalizedName("stoneStairs").setHardness(10).setResistance(15F);
@@ -527,6 +538,8 @@ public class TFCBlocks
 		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", 2064)).setUnlocalizedName("Flora");
 		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery");
 		
+		TFCBlocks.Tuyere = new BlockTuyere(TFC_Settings.getIntFor(config, "block", "Tuyere", 2066)).setUnlocalizedName("Tuyere");
+		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneSed, "pickaxe", 0);
@@ -558,9 +571,7 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Charcoal, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.WoodConstruct, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "axe", 0);
-		MinecraftForge.setBlockHarvestLevel(TFCBlocks.SuperDetailed, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(Block.blocksList[53], "axe", 0);
 
 		if (config != null) {

@@ -8,7 +8,10 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
+import TFC.Items.ItemIngot;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler
@@ -29,6 +32,14 @@ public class CraftingHandler implements ICraftingHandler
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Axes);
 				HandleItem(entityplayer, iinventory, Recipes.Saws);
+			}
+			else if(itemstack.itemID == TFCItems.WheatGrain.itemID || itemstack.itemID == TFCItems.RyeGrain.itemID || 
+					itemstack.itemID == TFCItems.OatGrain.itemID || itemstack.itemID == TFCItems.BarleyGrain.itemID || 
+					itemstack.itemID == TFCItems.RiceGrain.itemID)
+			{
+				HandleItem(entityplayer, iinventory, Recipes.Knives);
+				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
+					entityplayer.dropItem(TFCItems.Straw.itemID,4);
 			}
 			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID)
 			{
@@ -67,7 +78,11 @@ public class CraftingHandler implements ICraftingHandler
 						}
 					}
 					if(openGui)
-					entityplayer.openGui(TerraFirmaCraft.instance, 36, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+					{
+						PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+						pi.specialCraftingType = new ItemStack(TFCItems.FlatLeather, 1, itemstack.getItemDamage());
+						entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+					}
 				}
 			}
 			else if(itemstack.itemID == TFCItems.WoolYarn.itemID)
@@ -80,10 +95,8 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.itemID == TFCItems.Mortar.itemID)
 			{
-				System.out.println("Checked");
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
-					System.out.println("Checked");
 					if(iinventory.getStackInSlot(i) == null) 
 					{
 						continue;
@@ -111,6 +124,12 @@ public class CraftingHandler implements ICraftingHandler
 				}
 				
 			}
+			else if(itemstack.getItem() instanceof ItemIngot)
+			{
+				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
+					entityplayer.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
+			}
+			
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 			{             
 				if(iinventory.getStackInSlot(i) == null) 
@@ -119,11 +138,13 @@ public class CraftingHandler implements ICraftingHandler
 				}
 				if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.itemID)
 				{
-					entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1));
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
+						entityplayer.dropItem(TFCItems.WoodenBucketEmpty.itemID, 1);
 				}
 				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
 				{
-					entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1));
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+						entityplayer.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
 				}
 						
 			}

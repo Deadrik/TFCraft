@@ -4,6 +4,8 @@ import java.util.Random;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import TFC.API.Events.ItemMeltEvent;
 
 public class HeatIndex
 {
@@ -84,7 +86,18 @@ public class HeatIndex
             rand = outputMin + R.nextInt(outputMax - outputMin);
             return new ItemStack(getOutputItem(),output.stackSize, 100-rand);
         }
-        else return new ItemStack(getOutputItem(),output.stackSize, outputMin);
+        else 
+        {
+        	return new ItemStack(getOutputItem(),output.stackSize, outputMin);
+        }
+    }
+    
+    public ItemStack getOutput(ItemStack in, Random R)
+    {
+    	ItemStack is = getOutput(R);
+        ItemMeltEvent eventMelt = new ItemMeltEvent(in, is);
+		MinecraftForge.EVENT_BUS.post(eventMelt);
+        return eventMelt.result;
     }
 
     public boolean matches(ItemStack is)

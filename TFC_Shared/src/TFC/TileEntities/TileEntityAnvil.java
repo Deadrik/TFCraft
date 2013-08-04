@@ -13,10 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import net.minecraftforge.common.MinecraftForge;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
 import TFC.API.Enums.CraftingRuleEnum;
+import TFC.API.Events.AnvilCraftEvent;
 import TFC.Core.AnvilCraftingManagerTFC;
 import TFC.Core.AnvilRecipe;
 import TFC.Core.AnvilReq;
@@ -46,6 +48,8 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	private AnvilRecipe workWeldRecipe;
 	public int AnvilTier;
 
+	private EntityPlayer lastWorker;
+
 	public TileEntityAnvil()
 	{
 		anvilItemStacks = new ItemStack[19];
@@ -64,6 +68,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 		{
 			workRecipe = null;
 			craftingValue = 0;
+			craftingRules = new int[]{-1,-1,-1};
 		}
 		else if(anvilItemStacks[1] != null && workRecipe == null)
 		{
@@ -119,16 +124,27 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 					}
 				}
 
-				if(result != null)
+				//This is where the crafting is completed and the result is added to the anvil
+				if(result != null && entityplayer != null)
 				{
-					NBTTagCompound Tag = new NBTTagCompound();
-					Tag.setFloat("temperature", TFC_ItemHeat.GetTemperature(anvilItemStacks[1]));
-					anvilItemStacks[1] = result; 
-					anvilItemStacks[1].setTagCompound(Tag);
-					float pct = (offset*5);
-					if(anvilItemStacks[1].getItem().getMaxDamage() > 0 && !anvilItemStacks[1].getItem().getHasSubtypes())
-						anvilItemStacks[1].setItemDamage((int)(pct));
-
+					AnvilCraftEvent eventCraft = new AnvilCraftEvent(this.entityplayer, this, anvilItemStacks[1], result);
+					MinecraftForge.EVENT_BUS.post(eventCraft);
+					if(!eventCraft.isCanceled())
+					{
+						NBTTagCompound Tag = new NBTTagCompound();
+						Tag.setFloat("temperature", TFC_ItemHeat.GetTemperature(anvilItemStacks[1]));
+						this.setInventorySlotContents(1, eventCraft.result);
+						if(anvilItemStacks[1] != null)
+						{
+							anvilItemStacks[1].setTagCompound(Tag);
+							float pct = (offset*5);
+							if(anvilItemStacks[1].getItem().getMaxDamage() > 0 && !anvilItemStacks[1].getItem().getHasSubtypes())
+								anvilItemStacks[1].setItemDamage((int)(pct));
+						}
+					}
+					workRecipe = null;
+					craftingValue = 0;
+					craftingRules = new int[]{-1,-1,-1};
 				}
 			}
 		}

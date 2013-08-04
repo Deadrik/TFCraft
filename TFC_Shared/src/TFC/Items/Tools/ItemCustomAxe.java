@@ -19,14 +19,12 @@ import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
-{
-	private int weaponDamage = 1;
-	
+{	
 	public ItemCustomAxe(int i, EnumToolMaterial e)
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = 100 + e.getDamageVsEntity();
+		this.damageVsEntity = 100 + e.getDamageVsEntity();
 		setCreativeTab(TFCTabs.TFCTools);
 	}
     

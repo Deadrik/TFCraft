@@ -244,6 +244,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
         if(fireItemStacks[i] != null)
         {
             HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
+            ItemStack inputCopy = fireItemStacks[i].copy();
             if(index != null && inputItemTemps[i] > index.meltTemp)
             {
                 int dam = fireItemStacks[i].getItemDamage();
@@ -265,7 +266,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
                 }
                 else
                 {
-                    ItemStack output = index.getOutput(R);
+                    ItemStack output = index.getOutput(inputCopy, R);
                     int count = 1;
                     Boolean useCount = false;
                     if(output.getItem() instanceof ItemMeltedMetal)
@@ -312,7 +313,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
                         }
                         useCount = true;
                     }
-                    fireItemStacks[i] = index.getOutput(R);
+                    fireItemStacks[i] = output;
                     if(useCount)
                     {
                         if(count > 0)

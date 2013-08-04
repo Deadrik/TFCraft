@@ -23,7 +23,7 @@ public class BlockThatch extends BlockTerra
 
 	public BlockThatch(int par1)
 	{
-		super(par1, Material.wood);
+		super(par1, Material.grass);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
 		

@@ -76,14 +76,6 @@ public class ItemTerra extends Item implements ISize
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
-    
-   /* @Override
-	public String getItemDisplayName(ItemStack itemstack) 
-	{
-    	if(MetaNames != null)
-    		return new StringBuilder().append(super.getItemDisplayName(itemstack)).append(".").append(MetaNames[itemstack.getItemDamage()]).toString();
-		return super.getItemDisplayName(itemstack);
-	}*/
 
     @Override
     public boolean getShareTag()

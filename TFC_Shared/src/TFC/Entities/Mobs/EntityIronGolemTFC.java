@@ -1,38 +1,17 @@
 package TFC.Entities.Mobs;
 
-import TFC.*;
+import java.util.Random;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.Core.TFC_MobDamage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
 public class EntityIronGolemTFC extends EntityIronGolem
 {
@@ -43,10 +22,11 @@ public class EntityIronGolemTFC extends EntityIronGolem
     {
         super(par1World);
     }
+
     @Override
     public int getMaxHealth()
     {
-        return 100;
+        return 5000;
     }
 
     /**
@@ -69,13 +49,24 @@ public class EntityIronGolemTFC extends EntityIronGolem
             int var2 = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double)this.yOffset);
             int var3 = MathHelper.floor_double(this.posZ);
             int var4 = this.worldObj.getBlockId(var1, var2, var3);
+            int meta = this.worldObj.getBlockMetadata(var1, var2, var3);
+			// Fix for invisible grass texture
+            if(var4 == TFCBlocks.Grass.blockID || var4 == TFCBlocks.Grass2.blockID
+            	|| var4 == TFCBlocks.ClayGrass.blockID || var4 == TFCBlocks.ClayGrass2.blockID
+            	|| var4 == TFCBlocks.PeatGrass.blockID
+            	|| var4 == TFCBlocks.DryGrass.blockID || var4 == TFCBlocks.DryGrass2.blockID)
+            {
+            	var4 = TFCBlocks.Dirt.blockID;
+            	meta = 1;
+            }
 
             if (var4 > 0)
             {
-                this.worldObj.spawnParticle("tilecrack_" + var4, this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+                this.worldObj.spawnParticle("tilecrack_" + var4 + "_" + meta, this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
             }
         }
     }
+
     @Override
     public boolean attackEntityAsMob(Entity par1Entity)
     {
@@ -109,5 +100,14 @@ public class EntityIronGolemTFC extends EntityIronGolem
     {
         return this.attackTimer;
     }
+
+	@Override
+	protected void dropFewItems(boolean par1, int par2) {
+		Random ran = new Random();
+		int k = 3 + ran.nextInt(3);
+		for (int l = 0; l < k; ++l) {
+			this.dropItem(TFCItems.WroughtIronIngot.itemID, 1);
+		}
+	}
 
 }

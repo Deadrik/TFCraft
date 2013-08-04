@@ -6,10 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.Core.TFC_Climate;
 
 public class BlockFiniteWater extends BlockFluid
 {
@@ -62,9 +64,9 @@ public class BlockFiniteWater extends BlockFluid
     public void updateTick(World world, int x, int y, int z, Random random)
     {       
         //Try to freeze
-        if (world.getBiomeGenForCoords(x, z).temperature < 0.2)
+        if (TFC_Climate.getHeightAdjustedTemp(x, y, z) < 0.1)
         {
-            if (y == 145 && world.getBlockMetadata(x, y, z) == 0)
+            if (y > 142 && world.getBlockMetadata(x, y, z) == 0)
             {
                 world.setBlock(x, y, z, Block.ice.blockID, world.getBlockMetadata(x, y, z), 0x2);
                 return;

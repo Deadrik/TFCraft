@@ -2,43 +2,12 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import TFC.*;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import TFC.TFCBlocks;
 import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenOreSurface implements IWorldGenerator
 {
@@ -58,16 +27,12 @@ public class WorldGenOreSurface implements IWorldGenerator
 		chunkZ *= 16;
 		int height = Min-Max;
         //============Copper
-        createOre(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1,Block.sandStone.blockID,-1},//IgEx and Sandstone, veins
+        createOre(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1},//IgEx veins
                 /*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Native Copper");
 
         //============Cassiterite
         createOre(TFCBlocks.Ore.blockID, 5,new int[]{TFCBlocks.StoneIgIn.blockID,0},//Granite Veins
                 /*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, Min, Max, "Cassiterite");
-
-        //============Cassiterite2
-        createOre(TFCBlocks.Ore.blockID, 5,new int[]{TFCBlocks.StoneIgEx.blockID,-1},//IgEx Veins
-                /*rarity*/20,/*veinSize*/10,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Cassiterite");
 
         //============Bismuthinite
         createOre(TFCBlocks.Ore.blockID, 7,new int[]{TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//Granite Veins
@@ -76,6 +41,11 @@ public class WorldGenOreSurface implements IWorldGenerator
         //============Sphalerite
         createOre(TFCBlocks.Ore.blockID, 12,new int[]{TFCBlocks.StoneMM.blockID,-1},//mm, veins
                 /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Sphalerite");
+        
+      //============Tetrahedrite
+      		createOreVein(TFCBlocks.Ore.blockID, 13,new int[]{TFCBlocks.StoneIgEx.blockID,-1,TFCBlocks.StoneMM.blockID,-1,
+      				TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//everything, veins
+      				/*rarity*/50,/*veinSize*/85,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, Min, Max, "Tetrahedrite");
 		
 	}
 	

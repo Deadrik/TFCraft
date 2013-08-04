@@ -1,9 +1,6 @@
 package TFC.Core;
 
-import java.util.Random;
-
 import net.minecraft.item.ItemStack;
-
 import TFC.API.Enums.CraftingRuleEnum;
 
 public class AnvilRecipe
@@ -17,6 +14,7 @@ public class AnvilRecipe
     boolean flux;
     int craftingValue;
     int anvilreq;
+    boolean inheritsDamage;
     
     
     /**
@@ -74,7 +72,7 @@ public class AnvilRecipe
         if(is1.itemID != is2.itemID)
             return false;
         
-        if(is1.getItemDamage() != -1 && is1.getItemDamage() != is2.getItemDamage())
+        if(is1.getItemDamage() != 32767 && is1.getItemDamage() != is2.getItemDamage())
             return false;
         
         return true;
@@ -88,6 +86,17 @@ public class AnvilRecipe
         return result;
     }
     
+    /**
+     * Returns an Item that is the result of this recipe
+     */
+    public ItemStack getCraftingResult(ItemStack input)
+    {
+    	ItemStack is = result;
+    	if(this.inheritsDamage)
+    		is.setItemDamage(input.getItemDamage());
+        return is;
+    }
+    
     public AnvilRecipe(ItemStack in, ItemStack p, int cv, CraftingRuleEnum rule0, CraftingRuleEnum rule1, CraftingRuleEnum rule2, boolean flux, AnvilReq req, ItemStack result)
     {
         input1 = in;
@@ -99,6 +108,7 @@ public class AnvilRecipe
         this.craftingValue = cv;
         anvilreq = req.Tier;
         this.result = result;
+        inheritsDamage = false;
     }
     
     public AnvilRecipe(ItemStack in, ItemStack p, int cv, CraftingRuleEnum rule0, CraftingRuleEnum rule1, CraftingRuleEnum rule2, boolean flux, int req, ItemStack result)
@@ -112,6 +122,7 @@ public class AnvilRecipe
         this.craftingValue = cv;
         anvilreq = req;
         this.result = result;
+        inheritsDamage = false;
     }
     
     public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req)
@@ -120,6 +131,7 @@ public class AnvilRecipe
         input2 = p;
         this.flux = flux;
         anvilreq = req.Tier;
+        inheritsDamage = false;
     }
     
     public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, int req)
@@ -128,6 +140,7 @@ public class AnvilRecipe
         input2 = p;
         this.flux = flux;
         anvilreq = req;
+        inheritsDamage = false;
     }
     
     public AnvilRecipe(ItemStack in, ItemStack p, boolean flux, AnvilReq req, ItemStack res)
@@ -142,6 +155,13 @@ public class AnvilRecipe
         input2 = p;
         anvilreq = req.Tier;
         this.result = res;
+        inheritsDamage = false;
+    }
+    
+    public AnvilRecipe setInheritsDamage()
+    {
+    	inheritsDamage = true;
+    	return this;
     }
 
     public int getCraftingValue()

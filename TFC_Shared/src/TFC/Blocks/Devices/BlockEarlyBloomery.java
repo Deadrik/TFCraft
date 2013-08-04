@@ -14,11 +14,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.TerraFirmaCraft;
+import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.TileEntities.TileEntityBloomery;
+import TFC.TileEntities.TileEntityEarlyBloomery;
 
-public class BlockBloomery extends BlockTerraContainer
+public class BlockEarlyBloomery extends BlockTerraContainer
 {
 	Icon textureSide;
 	Icon textureOn;
@@ -36,7 +36,7 @@ public class BlockBloomery extends BlockTerraContainer
 		}
 	};
 
-	public BlockBloomery(int i)
+	public BlockEarlyBloomery(int i)
 	{
 		super(i, Material.rock);
 		this.setCreativeTab(CreativeTabs.tabRedstone);
@@ -56,27 +56,21 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
-		int xCoord = i;
-		int yCoord = j;
-		int zCoord = k;
-		ItemStack equippedItem = entityplayer.getCurrentEquippedItem();
-		int itemid;
-
 		if(!canBlockStay(world,i,j,k))
 		{
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}
-		else if((TileEntityBloomery)world.getBlockTileEntity(i, j, k)!=null)
+		else if((TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k)!=null)
 		{
-			TileEntityBloomery te;
-			te = (TileEntityBloomery)world.getBlockTileEntity(i, j, k);
+			TileEntityEarlyBloomery te = (TileEntityEarlyBloomery)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
-			if(te.isValid)
+			if(te.isValid && is != null && (is.getItem() == TFCItems.FireStarter || is.getItem() == TFCItems.FlintSteel))
 			{
-				entityplayer.openGui(TerraFirmaCraft.instance, 26, world, i, j, k);
+				if(te.canLight()){
+					entityplayer.getCurrentEquippedItem().damageItem(1,entityplayer);
+				}
 			}
 		}
 		return true;
@@ -129,22 +123,26 @@ public class BlockBloomery extends BlockTerraContainer
 		int lit = (j & 4) == 4 ? 1 : 0;
 		j = j & 3;
 
-		if(j == 0 && i == 2	) {
+		if(j == 0 && i == 2	) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
 		}
-		if(j == 1 && i == 5) {
+		else if(j == 1 && i == 5) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
 		}
-		if(j == 2 && i == 3) {
+		else if(j == 2 && i == 3) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
 		}
-		if(j == 3 && i == 4) {
+		else if(j == 3 && i == 4) 
+		{
 			if(lit == 1)
 				return textureOn;
 			return textureOff;
@@ -210,13 +208,8 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
 	{
-		int meta = world.getBlockMetadata(i, j, k) & 3;
-		int[] dir = headBlockToFootBlockMap[meta];
-
-
 		if(!world.isBlockOpaqueCube(i, j-1, k) || !world.isBlockOpaqueCube(i, j+1, k))
 		{
-			((TileEntityBloomery)world.getBlockTileEntity(i, j, k)).ejectContents();
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}
@@ -225,6 +218,6 @@ public class BlockBloomery extends BlockTerraContainer
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
-		return new TileEntityBloomery();
+		return new TileEntityEarlyBloomery();
 	}
 }

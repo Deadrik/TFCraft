@@ -23,48 +23,40 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
-import TFC.Blocks.Devices.BlockBloomery;
+import TFC.API.Constant.Global;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemOre;
 
-public class TileEntityBloomery extends TileEntityFireEntity implements IInventory
+public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
-	public float fuelTimeLeft;
-	public float fuelBurnTemp;
-	public float fireTemperature;
-
-	public float AddedAir;
 	public boolean isValid;
 
 	public ItemStack input[];
 	public ItemStack fireItemStacks[];
 	public ItemStack outputItemStacks[];
-	public float ambientTemp;
-	Boolean Item1Melted = false;
+
 	public float inputItemTemps[];
 
 	private int prevStackSize;
 	private int numAirBlocks;
 
 	public String OreType;
-
-	private final int MaxFireTemp = 2500;
+	
+	//We dont save this since its purpose is to just mkae certain parts of the code not run every single tick
+	private int slowCounter = 0;
 
 
 	//Bloomery
 	public int charcoalCount;
 	public int oreCount;
 	public int outCount;
-	public int oreDamage = -1;
 
 	ItemStack outMetal1;
 	int outMetal1Count;
-	ItemStack outMetal2;
-	int outMetal2Count;
 
-	public TileEntityBloomery()
+	public TEBlastFurnace()
 	{
 		fuelTimeLeft = 0;
 		fuelBurnTemp =  0;
@@ -72,10 +64,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		fireTemperature = 0;
 		AddedAir = 0F;
 		isValid = false;
-		OreType = "";
 		fireItemStacks = new ItemStack[20];
 		outputItemStacks = new ItemStack[20];
-		input = new ItemStack[1];
+		input = new ItemStack[2];
 		inputItemTemps = new float[80];
 		ambientTemp = -1000;
 		numAirBlocks = 0;
@@ -141,15 +132,21 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 	private Boolean CheckValidity() 
 	{
-		if(!worldObj.isBlockNormalCube(xCoord, yCoord+1, zCoord))
-		{
-			return false;
-		}
-		if(!worldObj.isBlockNormalCube(xCoord, yCoord-1, zCoord))
-		{
-			return false;
-		}
+		int y = yCoord+1;
 
+		if(worldObj.getBlockMaterial(xCoord+1, y, zCoord) == Material.rock || worldObj.getBlockMaterial(xCoord+1, y, zCoord) == Material.iron)
+		{
+			if(worldObj.getBlockMaterial(xCoord-1, y, zCoord) == Material.rock || worldObj.getBlockMaterial(xCoord-1, y, zCoord) == Material.iron)
+			{
+				if(worldObj.getBlockMaterial(xCoord, y, zCoord+1) == Material.rock || worldObj.getBlockMaterial(xCoord, y, zCoord+1) == Material.iron)
+				{
+					if(worldObj.getBlockMaterial(xCoord, y, zCoord-1) == Material.rock || worldObj.getBlockMaterial(xCoord, y, zCoord-1) == Material.iron)
+					{
+						return true;
+					}
+				}
+			}
+		}
 		return true;
 	}
 
@@ -200,13 +197,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 				if(outMetal1 == null)
 					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
-					outMetal2 = output;
 
 				if(outMetal1.getItem().itemID == output.getItem().itemID)
 					outMetal1Count += 100-output.getItemDamage();
-				else if(outMetal2.getItem().itemID == output.getItem().itemID)
-					outMetal2Count += 100-output.getItemDamage();
 			}
 		}
 	}
@@ -293,13 +286,12 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	@Override
 	public int getTemperatureScaled(int s)
 	{
-		return (int)(fireTemperature * s) / MaxFireTemp;
+		return (int)((fireTemperature * s) / MaxFireTemp);
 	}
 
 	public void HandleTemperature()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		int[] direction = BlockBloomery.headBlockToFootBlockMap[meta & 3];
 
 		if(ambientTemp == -1000)	
 		{
@@ -329,7 +321,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 				t*= 0.05F;
 				t = 1 - t;
 			}
-
+			if(this.input[1] == null && airFromBellows > 0)
+				airFromBellows = 0;
+			
 			float bAir = airFromBellows*(1+airFromBellowsTime/120);
 
 			AddedAir = (numAirBlocks+bAir)/25/16;
@@ -359,7 +353,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			charcoalCount--;
 
 			fuelTimeLeft = 1875;
-			fuelBurnTemp = 1450;	
+			fuelBurnTemp = 1350;	
 			if(fireTemperature < 210)
 			{
 				fireTemperature = 220;
@@ -405,7 +399,8 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 	public boolean isStackValid(int i, int j, int k)
 	{
-		if((worldObj.getBlockId(i, j-1, k) != TFCBlocks.Molten.blockID && worldObj.getBlockMaterial(i, j-1, k) != Material.rock) || !worldObj.isBlockNormalCube(i, j-1, k))
+		if((worldObj.getBlockId(i, j-1, k) != TFCBlocks.Molten.blockID && 
+				worldObj.getBlockMaterial(i, j-1, k) != Material.rock && worldObj.getBlockId(i, j-1, k) != TFCBlocks.BlastFurnace.blockID))
 		{
 			return false;
 		}
@@ -448,7 +443,6 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			if(fireItemStacks[i] == null)
 			{
 				fireItemStacks[i] = is;
-				OreType = is.getDisplayName();
 				return true;
 			}
 		}
@@ -493,18 +487,16 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 	public boolean RemoveOre()
 	{
-		if(outMetal1 == null && outMetal1Count > 0 && oreDamage > 0)
+		if(outMetal1 == null && outMetal1Count > 0)
 		{
 			HeatRegistry manager = HeatRegistry.getInstance();
-			HeatIndex index = manager.findMatchingIndex(new ItemStack(TFCItems.OreChunk, 1, oreDamage));
+			HeatIndex index = manager.findMatchingIndex(new ItemStack(TFCItems.OreChunk, 1, 3));
 			if(index != null)
 			{
 				ItemStack output = index.getOutput(worldObj.rand);
 
 				if(outMetal1 == null)
 					outMetal1 = output;
-				else if(outMetal2 == null && outMetal1.getItem().itemID != output.getItem().itemID)
-					outMetal2 = output;
 			}
 		}
 
@@ -529,25 +521,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 						dam = outMetal1Count;
 						outMetal1Count = 0;
 					}  
-					
+
 					if(outMetal1 != null)
 						input[0] = outMetal1.copy();
-				}
-				else if(outMetal2Count > 0)
-				{
-					if(outMetal2Count > 100)
-					{
-						dam = 100;
-						outMetal2Count -= 100;
-					}
-					else
-					{
-						dam = outMetal2Count;
-						outMetal2Count = 0;
-					} 
-					
-					if(outMetal2 != null)
-						input[0] = outMetal2.copy();    
 				}
 
 				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID)
@@ -583,32 +559,6 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 				return true;
 			}
-			/**
-			 * If the input is not an empty mold but instead contains a partial mold matching the second output metal, 
-			 * then we handle the process
-			 * */
-			else if(outMetal2 != null && input[0].itemID == outMetal2.getItem().itemID && input[0].getItemDamage() > 0)
-			{
-				int i = 100-input[0].getItemDamage();
-				if(i + outMetal2Count < 100)
-				{
-					input[0].setItemDamage(100-(i + outMetal2Count));
-					outMetal2Count = 0;
-				}
-				else
-				{
-					int j = 100 - i;
-					input[0].setItemDamage(0);
-					outMetal2Count -= j;
-				}
-
-				if(outMetal2Count == 0)
-					outMetal2 = null; 
-
-				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
-
-				return true;
-			}
 		}
 		return false;
 	}
@@ -629,11 +579,64 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	{
 		numAirBlocks = n;
 	}
-
-	public int getOutputCount()
+	
+	public void CreateTuyereBlock()
 	{
-		int out = outMetal1Count + outMetal2Count;
-		return out;
+		/**
+		 * Create a tuyere block if the tuyere slot is not empty.
+		 * REMOVED: Code remains for a potential revisit later. For now the tuyere will not be a rendered block.
+		 */
+		/*if(input[1] != null)
+		{
+			//get the direction that the bloomery is facing
+			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
+			
+			if((meta == 0 || meta == 2) && worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && 
+					worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID)
+			{
+				if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord+1, yCoord, zCoord))
+				{
+					worldObj.setBlock(xCoord+1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
+				}
+				else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord-1, yCoord, zCoord))
+				{
+					worldObj.setBlock(xCoord-1, yCoord, zCoord, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta+8, 2);
+				}
+
+			}
+			else if((meta == 1 || meta == 3) && worldObj.getBlockId(xCoord, yCoord, zCoord+1) != TFCBlocks.Tuyere.blockID && 
+					worldObj.getBlockId(xCoord, yCoord, zCoord-1) != TFCBlocks.Tuyere.blockID)
+			{
+				if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord, yCoord, zCoord+1))
+				{
+					worldObj.setBlock(xCoord, yCoord, zCoord+1, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
+				}
+				else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) != TFCBlocks.Tuyere.blockID && worldObj.isAirBlock(xCoord, yCoord, zCoord-1))
+				{
+					worldObj.setBlock(xCoord, yCoord, zCoord-1, TFCBlocks.Tuyere.blockID, ((ItemTuyere)input[1].getItem()).BlockMeta, 2);
+				}
+
+			}
+		}
+		else
+		{
+			if(worldObj.getBlockId(xCoord+1, yCoord, zCoord) == TFCBlocks.Tuyere.blockID)
+			{
+				worldObj.setBlockToAir(xCoord+1, yCoord, zCoord);
+			}
+			else if(worldObj.getBlockId(xCoord-1, yCoord, zCoord) == TFCBlocks.Tuyere.blockID )
+			{
+				worldObj.setBlockToAir(xCoord-1, yCoord, zCoord);
+			}
+			else if(worldObj.getBlockId(xCoord, yCoord, zCoord+1) == TFCBlocks.Tuyere.blockID)
+			{
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord+1);
+			}
+			else if(worldObj.getBlockId(xCoord, yCoord, zCoord-1) == TFCBlocks.Tuyere.blockID)
+			{
+				worldObj.setBlockToAir(xCoord, yCoord, zCoord-1);
+			}
+		}*/
 	}
 
 	@Override
@@ -641,7 +644,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 	{
 		if(!worldObj.isRemote)
 		{
-			outCount = getOutputCount();
+			CreateTuyereBlock();
+
+			outCount = outMetal1Count;
 			if(outCount < 0)
 				outCount = 0;
 			if(oreCount < 0)
@@ -651,10 +656,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 			if(oreCount == 0 && outCount == 0)
 			{
-				OreType = "";
-				oreDamage = -1;
 				outMetal1 = null;
-				outMetal2 = null; 
 			}
 
 			//Do the funky math to find how many molten blocks should be placed
@@ -667,36 +669,30 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			else if(count > 24 && count <= 32) {moltenCount = 4;} 
 			else if(count > 32 && count <= 40) {moltenCount = 5;} 
 
-			//get the direction that the bloomery is facing so that we know where the stack should be
-			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-
-			int[] direction = BlockBloomery.headBlockToFootBlockMap[meta];
-
 			/*Fill the bloomery stack with molten ore. */
-			for (int i = 0; i < 5; i++)
+			for (int i = 1; i < 5; i++)
 			{
 				/*The stack must be air or already be molten rock*/
-				if((worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == 0 ||
-						worldObj.getBlockId(xCoord+direction[0], yCoord+i, zCoord+direction[1]) == TFCBlocks.Molten.blockID) &&
-						worldObj.getBlockMaterial(xCoord+direction[0], yCoord-1, zCoord+direction[1]) == Material.rock)
+				if((worldObj.getBlockId(xCoord, yCoord+i, zCoord) == 0 ||
+						worldObj.getBlockId(xCoord, yCoord+i, zCoord) == TFCBlocks.Molten.blockID))
 				{
 					//Make sure that the Stack is surrounded by rock
-					if(i < moltenCount && isStackValid(xCoord+direction[0], yCoord+i, zCoord+direction[1])) {
-						worldObj.setBlock(xCoord+direction[0], yCoord+i, zCoord+direction[1], TFCBlocks.Molten.blockID, 0, 0x2);
+					if(i < moltenCount && isStackValid(xCoord, yCoord+i, zCoord)) {
+						worldObj.setBlock(xCoord, yCoord+i, zCoord, TFCBlocks.Molten.blockID, 0, 0x2);
 					} else {
-						worldObj.setBlockToAir(xCoord+direction[0], yCoord+i, zCoord+direction[1]);
+						worldObj.setBlockToAir(xCoord, yCoord+i, zCoord);
 					}
 				}
 			}
 			/*Create a list of all the items that are falling into the stack */
 			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
-					xCoord+direction[0]+1, yCoord+moltenCount+0.1, zCoord+direction[1]+1));
+					xCoord, yCoord+moltenCount, zCoord, 
+					xCoord+1, yCoord+moltenCount+1.1, zCoord+1));
 
 			if(moltenCount == 0)
 				moltenCount = 1;
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
-			if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount-1, zCoord+direction[1]))
+			if (list != null && !list.isEmpty() && isStackValid(xCoord, yCoord+moltenCount, zCoord))
 			{
 				/*Iterate through the list and check for charcoal, coke, and ore*/
 				for (Iterator iterator = list.iterator(); iterator.hasNext();)
@@ -718,7 +714,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
 					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && 
-					(entity.getEntityItem().getItemDamage() == oreDamage || OreType.contentEquals("")))
+							((ItemOre)entity.getEntityItem().getItem()).GetMetalType(entity.getEntityItem()) == Global.PIGIRON)
 					{
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; c--)
@@ -728,7 +724,6 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
 								{
 									oreCount+=1;
-									oreDamage = entity.getEntityItem().getItemDamage();
 								}
 							}
 						}
@@ -759,8 +754,17 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 					input[0].stackSize = 1;
 			}
 
-			//Here we make sure that the forge is valid
-			isValid = CheckValidity();
+			if(slowCounter > 200)
+			{
+				//Here we make sure that the forge is valid
+				isValid = CheckValidity();
+				if(input[1] != null)
+				{
+					RemoveOre();
+					input[1].damageItem(1, null);
+				}
+			}
+			slowCounter++;
 		}
 	}
 
@@ -773,11 +777,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		nbttagcompound.setFloat("fuelBurnTemp", fuelBurnTemp);
 		nbttagcompound.setFloat("airFromBellowsTime", airFromBellowsTime);
 		nbttagcompound.setFloat("airFromBellows", airFromBellows);
-		nbttagcompound.setBoolean("isValid", isValid);
 		nbttagcompound.setInteger("charcoalCount", charcoalCount);
 		nbttagcompound.setInteger("outMetal1Count", outMetal1Count);
-		nbttagcompound.setInteger("outMetal2Count", outMetal2Count);
-		nbttagcompound.setInteger("oreDamage", oreDamage);
+		nbttagcompound.setByte("oreCount", (byte)oreCount);
 
 		NBTTagList nbttaglist = new NBTTagList();
 		for(int i = 0; i < fireItemStacks.length; i++)
@@ -828,11 +830,9 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
 		airFromBellowsTime = nbttagcompound.getFloat("airFromBellowsTime");
 		airFromBellows = nbttagcompound.getFloat("airFromBellows");
-		isValid = nbttagcompound.getBoolean("isValid");
 		charcoalCount = nbttagcompound.getInteger("charcoalCount");
 		outMetal1Count = nbttagcompound.getInteger("outMetal1Count");
-		outMetal2Count = nbttagcompound.getInteger("outMetal2Count");
-		oreDamage = nbttagcompound.getInteger("oreDamage");
+		oreCount = nbttagcompound.getByte("oreCount");
 
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 		fireItemStacks = new ItemStack[20];
@@ -847,7 +847,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 		}
 
 		NBTTagList nbttaglist2 = nbttagcompound.getTagList("Input");
-		input = new ItemStack[1];
+		input = new ItemStack[2];
 		for(int i = 0; i < nbttaglist2.tagCount(); i++)
 		{
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist2.tagAt(i);
@@ -882,13 +882,7 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 		oreCount = inStream.readInt();
 		charcoalCount = inStream.readInt();
-		oreDamage = inStream.readInt();
 		outCount = inStream.readInt();
-
-		if(oreDamage == -1)
-			this.OreType = "";
-		else
-			this.OreType = new ItemStack(TFCItems.OreChunk, 1, oreDamage).getDisplayName();
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -904,7 +898,6 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 			dos.writeInt(zCoord);
 			dos.writeInt(oreCount);
 			dos.writeInt(charcoalCount);
-			dos.writeInt(oreDamage);
 			dos.writeInt(outCount);
 		} catch (IOException e) {
 		}
@@ -923,12 +916,12 @@ public class TileEntityBloomery extends TileEntityFireEntity implements IInvento
 
 	public int getOreCountScaled(int l)
 	{
-		return (this.oreCount * l)/40;
+		return (this.oreCount * l)/20;
 	}
 
 	public int getCharcoalCountScaled(int l)
 	{
-		return (this.charcoalCount * l)/40;
+		return (this.charcoalCount * l)/20;
 	}
 
 	public int getOutCountScaled(int l)

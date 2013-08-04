@@ -27,6 +27,7 @@ import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemAlcohol;
 import TFC.Items.ItemBellows;
+import TFC.Items.ItemBloom;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemClay;
 import TFC.Items.ItemCustomMinecart;
@@ -53,6 +54,7 @@ import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
 import TFC.Items.ItemUnfinishedArmor;
+import TFC.Items.ItemBlocks.ItemTuyere;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -949,6 +951,19 @@ public class TFCItems
     public static Item ClayMoldSword;
     public static Item ClayMoldJavelin;
     
+    public static Item TuyereCopper;
+    public static Item TuyereBronze;
+    public static Item TuyereBlackBronze;
+    public static Item TuyereBismuthBronze;
+    public static Item TuyereWroughtIron;
+    public static Item TuyereSteel;
+    public static Item TuyereBlackSteel;
+    public static Item TuyereBlueSteel;
+    public static Item TuyereRedSteel;
+    
+    public static Item Bloom;
+    public static Item RawBloom;
+    
     /**
      * Item Uses Setup
      * */
@@ -1734,6 +1749,18 @@ public class TFCItems
         ClayMoldJavelin = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldJavelin",num++)).setMetaNames(new String[]{"Clay Mold Javelin","Ceramic Mold Javelin",
         		"Ceramic Mold Javelin Copper","Ceramic Mold Javelin Bronze","Ceramic Mold Javelin Bismuth Bronze","Ceramic Mold Javelin Black Bronze"}).setUnlocalizedName("Javelin Mold");
 		
+        TuyereCopper = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereCopper",num++), 1000, 0).setUnlocalizedName("Copper Tuyere");
+        TuyereBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBronze",num++), 1000, 1).setUnlocalizedName("Bronze Tuyere");
+        TuyereBlackBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackBronze",num++), 1000, 1).setUnlocalizedName("Black Bronze Tuyere");
+        TuyereBismuthBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBismuthBronze",num++), 1000, 1).setUnlocalizedName("Bismuth Bronze Tuyere");
+        TuyereWroughtIron = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereWroughtIron",num++), 1000, 2).setUnlocalizedName("Wrought Iron Tuyere");
+        TuyereSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereSteel",num++), 1000, 3).setUnlocalizedName("Steel Tuyere");
+        TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 1000, 4).setUnlocalizedName("Black Steel Tuyere");
+        TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 1000, 5).setUnlocalizedName("Red Steel Tuyere");
+        TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 1000, 6).setUnlocalizedName("Blue Steel Tuyere");
+        
+        Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setUnlocalizedName("Bloom");
+        RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setUnlocalizedName("RawBloom");
         /**Plans*/
         num = 20000;
         SetupPlans(num);

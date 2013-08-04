@@ -16,10 +16,12 @@ import TFC.Commands.GetSpawnProtectionCommand;
 import TFC.Commands.GetTreesCommand;
 import TFC.Commands.SetPlayerStatsCommand;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
+import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
@@ -163,6 +165,9 @@ public class TerraFirmaCraft
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
 		
+		// Register Anvil Crafting Handler
+		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
+		
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
 		
@@ -180,6 +185,8 @@ public class TerraFirmaCraft
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), 
 				new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty)));
+		
+		TFC_Climate.initCache();
 	}
 
 	@PostInit

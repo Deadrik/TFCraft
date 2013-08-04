@@ -1,10 +1,9 @@
 package TFC.Core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
-
-import TFC.*;
 
 public class AnvilCraftingManagerTFC
 {
@@ -69,7 +68,7 @@ public class AnvilCraftingManagerTFC
             AnvilRecipe irecipe = (AnvilRecipe)recipes.get(k);
             if (irecipe.isComplete(recipe, rules))
             {
-                return irecipe.getCraftingResult();
+                return irecipe.getCraftingResult(recipe.input1);
             }
         }
 
@@ -83,7 +82,7 @@ public class AnvilCraftingManagerTFC
             AnvilRecipe irecipe = (AnvilRecipe)recipesWeld.get(k);
             if (irecipe.matches(recipe))
             {
-                return irecipe.getCraftingResult();
+                return irecipe.getCraftingResult(recipe.input1);
             }
         }
 
