@@ -950,11 +950,6 @@ public class Recipes
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1), new Object[] { "#### "," ####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         
-        //clay containers
-        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryJug, 1), new Object[] { " # # ","#   #","#   #","#   #"," ### ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
-        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryPot, 1), new Object[] { "#   #","#   #"," ### ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
-        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotterySmallVessel, 1), new Object[] { "#  #","#  #","#  #"," ## ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
-        
         registerAlloys();
         
         registerKnapping();
