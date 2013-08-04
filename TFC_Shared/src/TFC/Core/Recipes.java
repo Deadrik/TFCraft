@@ -1001,19 +1001,19 @@ public class Recipes
         	"#  #",
         	"#  #",
         	"#  #",
-        	"####", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1)});
+        	"####", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryJug, 1, 0), new Object[] { 
         	" #   ",
         	"#### ",
         	"### #",
         	"#### ",
-        	"###  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1)});
+        	"###  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotterySmallVessel, 1, 0), new Object[] { 
         	" ### ",
         	"#####",
         	"#####",
         	"#####",
-        	" ### ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1)});
+        	" ### ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
 	}
 
 	private static void registerAlloys() {
