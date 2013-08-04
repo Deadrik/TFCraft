@@ -12,6 +12,7 @@ import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Tools.IToolChisel;
 import TFC.Blocks.BlockSlab;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -307,7 +308,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			}
 			else if(mode == 1)
 			{
-				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
+				if ((side == 0) && TFC_Core.isRawStone(blockID) && TFC_Core.isRawStone(world.getBlockId(x, y+1, z)))
 					return false;
 
 				ItemChisel.CreateStairs(world, x, y, z, blockID, meta, rotation);
@@ -318,7 +319,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 			}
 			else if(mode == 2)
 			{
-				if(side == 0 && world.getBlockId(x, y+1, z) == blockID && blockID != Block.planks.blockID)
+				if ((side == 0) && TFC_Core.isRawStone(blockID) && TFC_Core.isRawStone(world.getBlockId(x, y+1, z)))
 					return false;
 
 				ItemChisel.CreateSlab(world, x, y, z, blockID, meta, side);
