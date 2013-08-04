@@ -8,6 +8,8 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
+import TFC.Core.Player.PlayerInfo;
+import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemIngot;
 import cpw.mods.fml.common.ICraftingHandler;
@@ -76,7 +78,11 @@ public class CraftingHandler implements ICraftingHandler
 						}
 					}
 					if(openGui)
-					entityplayer.openGui(TerraFirmaCraft.instance, 36, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+					{
+						PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+						pi.specialCraftingType = new ItemStack(TFCItems.FlatLeather, 1, itemstack.getItemDamage());
+						entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+					}
 				}
 			}
 			else if(itemstack.itemID == TFCItems.WoolYarn.itemID)
