@@ -31,6 +31,14 @@ public class CraftingHandler implements ICraftingHandler
 				HandleItem(entityplayer, iinventory, Recipes.Axes);
 				HandleItem(entityplayer, iinventory, Recipes.Saws);
 			}
+			else if(itemstack.itemID == TFCItems.WheatGrain.itemID || itemstack.itemID == TFCItems.RyeGrain.itemID || 
+					itemstack.itemID == TFCItems.OatGrain.itemID || itemstack.itemID == TFCItems.BarleyGrain.itemID || 
+					itemstack.itemID == TFCItems.RiceGrain.itemID)
+			{
+				HandleItem(entityplayer, iinventory, Recipes.Knives);
+				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
+					entityplayer.dropItem(TFCItems.Straw.itemID,4);
+			}
 			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Saws);
@@ -81,10 +89,8 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.itemID == TFCItems.Mortar.itemID)
 			{
-				System.out.println("Checked");
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 				{       
-					System.out.println("Checked");
 					if(iinventory.getStackInSlot(i) == null) 
 					{
 						continue;
@@ -114,7 +120,8 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.getItem() instanceof ItemIngot)
 			{
-				entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1));
+				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
+					entityplayer.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
 			}
 			
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
@@ -125,11 +132,13 @@ public class CraftingHandler implements ICraftingHandler
 				}
 				if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.itemID)
 				{
-					entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1));
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
+						entityplayer.dropItem(TFCItems.WoodenBucketEmpty.itemID, 1);
 				}
 				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
 				{
-					entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1));
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+						entityplayer.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
 				}
 						
 			}
