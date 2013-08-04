@@ -258,7 +258,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Scribe, 1), new Object[] { " L ","#P#","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767),
 			Character.valueOf('P'), Item.paper,Character.valueOf('L'), Item.feather});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.CeramicMold, 4, 0), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,32767)});
+		//GameRegistry.addRecipe(new ItemStack(TFCItems.CeramicMold, 4, 0), new Object[] { "# #","###", Character.valueOf('#'), new ItemStack(Item.clay,1,32767)});
 
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.MetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.StoneIgEx});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.MetalTable, 1), new Object[] { "P P","PPP","PPP", Character.valueOf('P'), TFCBlocks.StoneIgIn});
@@ -993,6 +993,27 @@ public class Recipes
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_MM_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_MM_START)});
         }        
+	
+        
+        //Inverse Clay Knapping
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.CeramicMold, 2, 0), new Object[] { 
+        	"####",
+        	"#  #",
+        	"#  #",
+        	"#  #",
+        	"####", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotteryJug, 1, 0), new Object[] { 
+        	" #   ",
+        	"#### ",
+        	"### #",
+        	"#### ",
+        	"###  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.PotterySmallVessel, 1, 0), new Object[] { 
+        	" ### ",
+        	"#####",
+        	"#####",
+        	"#####",
+        	" ### ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1)});
 	}
 
 	private static void registerAlloys() {
