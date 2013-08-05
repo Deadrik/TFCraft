@@ -53,8 +53,8 @@ import TFC.Items.ItemStick;
 import TFC.Items.ItemStoneBrick;
 import TFC.Items.ItemTFCArmor;
 import TFC.Items.ItemTerra;
+import TFC.Items.ItemTuyere;
 import TFC.Items.ItemUnfinishedArmor;
-import TFC.Items.ItemBlocks.ItemTuyere;
 import TFC.Items.ItemBlocks.ItemWoodDoor;
 import TFC.Items.Pottery.ItemPotteryBase;
 import TFC.Items.Pottery.ItemPotteryJug;
@@ -1672,15 +1672,15 @@ public class TFCItems
         ClayMoldSword = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldSword",num++)).setMetaNames(new String[]{"Clay Mold Sword","Ceramic Mold Sword",
         		"Ceramic Mold Sword Copper","Ceramic Mold Sword Bronze","Ceramic Mold Sword Bismuth Bronze","Ceramic Mold Sword Black Bronze"}).setUnlocalizedName("Sword Mold");
         
-        TuyereCopper = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereCopper",num++), 1000, 0).setUnlocalizedName("Copper Tuyere");
-        TuyereBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBronze",num++), 1000, 1).setUnlocalizedName("Bronze Tuyere");
-        TuyereBlackBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackBronze",num++), 1000, 1).setUnlocalizedName("Black Bronze Tuyere");
-        TuyereBismuthBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBismuthBronze",num++), 1000, 1).setUnlocalizedName("Bismuth Bronze Tuyere");
-        TuyereWroughtIron = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereWroughtIron",num++), 1000, 2).setUnlocalizedName("Wrought Iron Tuyere");
-        TuyereSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereSteel",num++), 1000, 3).setUnlocalizedName("Steel Tuyere");
-        TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 1000, 4).setUnlocalizedName("Black Steel Tuyere");
-        TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 1000, 5).setUnlocalizedName("Red Steel Tuyere");
-        TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 1000, 6).setUnlocalizedName("Blue Steel Tuyere");
+        TuyereCopper = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereCopper",num++), 40, 0).setUnlocalizedName("Copper Tuyere");
+        TuyereBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBronze",num++), 80, 1).setUnlocalizedName("Bronze Tuyere");
+        TuyereBlackBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackBronze",num++), 80, 1).setUnlocalizedName("Black Bronze Tuyere");
+        TuyereBismuthBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBismuthBronze",num++), 80, 1).setUnlocalizedName("Bismuth Bronze Tuyere");
+        TuyereWroughtIron = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereWroughtIron",num++), 120, 2).setUnlocalizedName("Wrought Iron Tuyere");
+        TuyereSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereSteel",num++), 180, 3).setUnlocalizedName("Steel Tuyere");
+        TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 260, 4).setUnlocalizedName("Black Steel Tuyere");
+        TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 400, 5).setUnlocalizedName("Red Steel Tuyere");
+        TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 500, 6).setUnlocalizedName("Blue Steel Tuyere");
         
         Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setFolder("ingots/").setUnlocalizedName("Iron Bloom");
         RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setFolder("ingots/").setUnlocalizedName("Raw Iron Bloom");
