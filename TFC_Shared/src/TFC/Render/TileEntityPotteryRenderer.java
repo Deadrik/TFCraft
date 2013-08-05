@@ -2,7 +2,6 @@ package TFC.Render;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -96,13 +95,17 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 					GL11.glPopMatrix(); //end
 					
 				}
+				/**
+				 * Commented out until Large Vessels are implemented
+				 */
+				/*
 				else if (te.getStackInSlot(i) != null && te.getStackInSlot(i).itemID == TFCItems.PotteryLargeVessel.itemID)
 				{
 					GL11.glPushMatrix(); //start
 					GL11.glTranslatef((float)d, (float)d1, (float)d2);
 					urnModel.render(Tessellator.instance, 1);
 					GL11.glPopMatrix(); //end
-				}
+				}*/
 			}
 			
 		}
