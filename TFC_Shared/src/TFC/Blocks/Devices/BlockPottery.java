@@ -1,5 +1,6 @@
 package TFC.Blocks.Devices;
 
+import java.util.ArrayList;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
@@ -54,15 +55,15 @@ public class BlockPottery extends BlockTerraContainer
 		return false;
     }
 
-	@Override
-	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-	{		
-		//super.harvestBlock(world, entityplayer, i, j, k, l);
-		int meta = world.getBlockMetadata(i, j, k);
-		if(world.getBlockMetadata(i, j, k) > 0)
+   @Override
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		if(metadata > 0)
 		{
-			world.spawnEntityInWorld(new EntityItem(world, i, j, k, new ItemStack(TFCItems.Straw, meta)));
+			ret.add(new ItemStack(TFCItems.Straw, metadata));
 		}
+		return ret;
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class BlockPottery extends BlockTerraContainer
 					else
 						world.setBlockMetadataWithNotify(x, y, z, meta+1, 2);
 					
-					player.inventory.consumeInventoryItem(player.inventory.currentItem);
+					player.inventory.decrStackSize(player.inventory.currentItem, 1);
 					return true;
 				}
 			}
