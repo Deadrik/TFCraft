@@ -2,38 +2,20 @@ package TFC.Entities;
 
 import java.util.List;
 
-import TFC.*;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import TFC.TFCItems;
+import TFC.Items.Tools.ItemJavelin;
 
 public class EntityTerraJavelin extends Entity
 {
@@ -55,6 +37,7 @@ public class EntityTerraJavelin extends Entity
 	private int ticksInAir = 0;
 	private double damage = 80.0D;
 	private int field_46027_au;
+	private int itemID = TFCItems.IgExStoneJavelin.itemID;
 
 	/** Is this arrow a critical hit? (Controls particles and damage) */
 	public boolean arrowCritical = false;
@@ -97,9 +80,11 @@ public class EntityTerraJavelin extends Entity
 		}
 	}
 
-	public EntityTerraJavelin(World par1World, EntityLiving par2EntityLiving, float par3)
+	public EntityTerraJavelin(World par1World, EntityLiving par2EntityLiving, float par3, double damage, int itemID)
 	{
 		super(par1World);
+		this.itemID = itemID;
+		this.damage = damage;
 		this.shootingEntity = par2EntityLiving;
 		this.doesArrowBelongToPlayer = par2EntityLiving instanceof EntityPlayer;
 		this.setSize(0.5F, 0.5F);
@@ -147,7 +132,7 @@ public class EntityTerraJavelin extends Entity
 	{
 		if (!this.worldObj.isRemote)
 		{
-			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0 && par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Javelin, 1, damageTaken)))
+			if (this.inGround && this.doesArrowBelongToPlayer && this.arrowShake <= 0 && par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(itemID, 1, damageTaken)))
 			{
 				this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				par1EntityPlayer.onItemPickup(this, 1);
@@ -420,6 +405,10 @@ public class EntityTerraJavelin extends Entity
 		{
 			this.damage = par1NBTTagCompound.getDouble("damage");
 		}
+		if (par1NBTTagCompound.hasKey("itemID"))
+		{
+			this.itemID = par1NBTTagCompound.getInteger("itemID");
+		}
 	}
 
 	/**
@@ -492,5 +481,6 @@ public class EntityTerraJavelin extends Entity
 		par1NBTTagCompound.setBoolean("player", this.doesArrowBelongToPlayer);
 		par1NBTTagCompound.setDouble("damage", this.damage);
 		par1NBTTagCompound.setShort("damageTaken", (short)this.damageTaken);
+		par1NBTTagCompound.setInteger("itemID", itemID);
 	}
 }
