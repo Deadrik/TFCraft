@@ -2,43 +2,13 @@ package TFC.WorldGen.Generators;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
-
-import TFC.*;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import TFC.TFCBlocks;
 import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenOre implements IWorldGenerator
 {
@@ -123,9 +93,9 @@ public class WorldGenOre implements IWorldGenerator
 		createOre(TFCBlocks.Ore.blockID, 15,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, veins
 				/*rarity*/80,/*veinSize*/80,/*veinAmt*/60,/*height*/height,/*diameter*/200,/*vDensity*/10,/*hDensity*/80,         world, rand, chunkX, chunkZ, Min, Max, "Lignite");
 
-		//        //============Kaolinite
-		//        createOre(mod_TFC_Core.terraOre2.blockID, 0,new int[]{mod_TFC_Core.terraStoneSed.blockID,-1},//sedimentary, large clusters
-		//                /*rarity*/60,/*veinSize*/40,/*veinAmt*/2,/*height*/height,/*diameter*/40,/*vDensity*/50,/*hDensity*/90,         world, rand, chunkX, chunkZ, Min, Max);
+		//============Kaolinite
+		createOre(TFCBlocks.Ore2.blockID, 0,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, large clusters
+				/*rarity*/90,/*veinSize*/20,/*veinAmt*/2,/*height*/height,/*diameter*/40,/*vDensity*/80,/*hDensity*/90,         world, rand, chunkX, chunkZ, Min, Max, "Kaolinite");
 
 		//============Gypsum
 		createOre(TFCBlocks.Ore2.blockID, 1,new int[]{TFCBlocks.StoneSed.blockID,-1},//sedimentary, large clusters
@@ -142,7 +112,7 @@ public class WorldGenOre implements IWorldGenerator
 		//============Graphite
 		createOreVein(TFCBlocks.Ore2.blockID, 4,new int[]{TFCBlocks.StoneMM.blockID,4,TFCBlocks.StoneMM.blockID,0,
 				TFCBlocks.StoneMM.blockID,5, TFCBlocks.StoneMM.blockID,3},//gneiss, quartzite, marble, schist, small clusters
-				/*rarity*/80,/*veinSize*/6,/*veinAmt*/24,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Graphite");
+				/*rarity*/100,/*veinSize*/6,/*veinAmt*/24,/*height*/height,/*diameter*/40,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Graphite");
 
 		//============Kimberlite
 		createOreVein(TFCBlocks.Ore2.blockID, 5,new int[]{TFCBlocks.StoneIgIn.blockID,2},//Gabbro, large clusters
