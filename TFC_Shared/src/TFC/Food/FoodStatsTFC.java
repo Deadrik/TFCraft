@@ -29,7 +29,7 @@ public class FoodStatsTFC
 	private long foodTimer = 0;
 	private long foodHealTimer = 0;
 
-	public float waterLevel = TFC_Time.dayLength*2/10;
+	public float waterLevel = TFC_Time.dayLength;
 	private long waterTimer = 0;
 
 
