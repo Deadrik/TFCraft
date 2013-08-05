@@ -131,7 +131,7 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public int GetMetalReturnAmount(ItemStack is) 
+	public short GetMetalReturnAmount(ItemStack is) 
 	{
 		int dam = is.getItemDamage();
 		switch(dam)

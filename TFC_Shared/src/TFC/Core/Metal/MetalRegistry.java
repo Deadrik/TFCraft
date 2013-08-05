@@ -18,12 +18,17 @@ public class MetalRegistry
 	}
 	
 	//Returns true if the metal was added or false if a metal with a similar name already exists;
-	public boolean addMetal(Metal m)
+	public boolean addMetal(Metal m, Alloy.EnumTier soloTier)
 	{
 		if(hash.containsKey(m.Name))
 			return false;
 
 		hash.put(m.Name, m);
+		
+		Alloy alloy = new Alloy(m, soloTier);
+		alloy.addIngred(m, 99, 100);
+		AlloyManager.instance.addAlloy(alloy);
+		
 		return true;
 	}
 	
@@ -33,7 +38,7 @@ public class MetalRegistry
 		while(iter.hasNext())
 		{
 			Metal m = iter.next();
-			if(m.IngotID == i.itemID)
+			if(m.IngotID == i.itemID || m.MeltedItemID == i.itemID)
 				return m;
 		}
 		

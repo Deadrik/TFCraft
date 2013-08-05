@@ -9,7 +9,7 @@ public interface ISmeltable
 	/**
 	 * @return Percent of a full Unshaped Mold 0-100. Beyond 100 will give more than one mold worth of metal.
 	 */
-	public int GetMetalReturnAmount(ItemStack is);
+	public short GetMetalReturnAmount(ItemStack is);
 	
 	public boolean isSmeltable(ItemStack is);
 	

@@ -100,6 +100,7 @@ import TFC.Render.TileEntityPotteryRenderer;
 import TFC.Render.Blocks.RenderAnvil;
 import TFC.Render.Blocks.RenderBarrel;
 import TFC.Render.Blocks.RenderBellows;
+import TFC.Render.Blocks.RenderCrucible;
 import TFC.Render.Blocks.RenderOre;
 import TFC.Render.Blocks.RenderPottery;
 import TFC.Render.Blocks.RenderQuern;
@@ -115,9 +116,9 @@ import TFC.Render.Models.ModelSheep1TFC;
 import TFC.Render.Models.ModelSheep2TFC;
 import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
+import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
-import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TileEntityChestTFC;
 import TFC.TileEntities.TileEntityFirepit;
 import TFC.TileEntities.TileEntityFoodPrep;
@@ -207,6 +208,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(TFCBlocks.barrelRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderBarrel());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.potteryRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderPottery());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.tuyereRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderTuyere());
+		RenderingRegistry.registerBlockHandler(TFCBlocks.crucibleRenderId = RenderingRegistry.getNextAvailableRenderId(), new RenderCrucible());
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());

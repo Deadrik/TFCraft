@@ -33,6 +33,7 @@ import TFC.Blocks.Devices.BlockBarrel;
 import TFC.Blocks.Devices.BlockBellows;
 import TFC.Blocks.Devices.BlockBlastFurnace;
 import TFC.Blocks.Devices.BlockChestTFC;
+import TFC.Blocks.Devices.BlockCrucible;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Blocks.Devices.BlockFirepit;
 import TFC.Blocks.Devices.BlockForge;
@@ -124,6 +125,7 @@ public class TFCBlocks
 	public static int woodConstructRenderId;	
 	public static int potteryRenderId;
 	public static int tuyereRenderId;
+	public static int crucibleRenderId;
 	
 	public static Block StoneIgIn;
 	public static Block StoneIgEx;
@@ -226,6 +228,7 @@ public class TFCBlocks
 	public static Block Tuyere;
 	public static Block EarlyBloomery;
 	public static Block Bloom;
+	public static Block Crucible;
 	
 	static Configuration config;
 	
@@ -343,6 +346,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
 		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
+		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Crucible");
 	}
 	
 	public static void LoadBlocks()
@@ -539,6 +543,7 @@ public class TFCBlocks
 		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery");
 		
 		TFCBlocks.Tuyere = new BlockTuyere(TFC_Settings.getIntFor(config, "block", "Tuyere", 2066)).setUnlocalizedName("Tuyere");
+		TFCBlocks.Crucible = new BlockCrucible(TFC_Settings.getIntFor(config, "block", "Crucible", 2067)).setUnlocalizedName("Crucible");
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

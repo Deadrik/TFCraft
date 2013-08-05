@@ -161,9 +161,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 						} catch (IOException e) {}
 					}
 				}
-				
+				return true;
 			}
-			return true;
+			return false;
 		}
 		return false;
 	}

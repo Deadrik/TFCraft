@@ -43,8 +43,10 @@ public class GuiVesselLiquid extends GuiContainer
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;
         drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-        drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getString("MetalType"), l+87, i1+13, 0);
-        drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getInteger("MetalAmount")+" Units", l+87, i1+23, 0);
+        if(player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().hasKey("MetalType"))
+        	drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getString("MetalType"), l+87, i1+13, 0);
+        if(player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().hasKey("MetalAmount"))
+        	drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getInteger("MetalAmount")+" Units", l+87, i1+23, 0);
     }
     
     @Override

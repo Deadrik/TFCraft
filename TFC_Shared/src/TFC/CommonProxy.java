@@ -59,6 +59,7 @@ import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
 import TFC.TileEntities.TEBlastFurnace;
+import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityBellows;
@@ -134,6 +135,7 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityBarrel.class, "Barrel");
 		
 		ModLoader.registerTileEntity(TileEntityBloom.class, "IronBloom");
+		ModLoader.registerTileEntity(TECrucible.class, "Crucible");
 		
 		if(b){
 			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");

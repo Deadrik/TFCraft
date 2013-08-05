@@ -4,8 +4,11 @@ import TFC.API.Metal;
 
 public class AlloyMetal 
 {
-	protected Metal metalType;
-	float metal;
+	public Metal metalType;
+	/**
+	 * Value represented as a percentage.
+	 */
+	public float metal;
 	
 	public AlloyMetal(Metal e, float m)
 	{

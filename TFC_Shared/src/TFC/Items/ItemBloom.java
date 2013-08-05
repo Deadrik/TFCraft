@@ -2,7 +2,6 @@ package TFC.Items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,16 +19,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 		super(i);
 		setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
-		this.setFolder("/");
-
 	}
-	
-	@Override
-	public void registerIcons(IconRegister registerer)
-    {
-		this.itemIcon = null;
-    }
-
 
 	@Override
 	public EnumSize getSize() {
@@ -60,9 +50,9 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public int GetMetalReturnAmount(ItemStack is) {
+	public short GetMetalReturnAmount(ItemStack is) {
 		// TODO Auto-generated method stub
-		return is.getItemDamage();
+		return (short) is.getItemDamage();
 	}
 
 	@Override

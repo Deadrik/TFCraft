@@ -12,6 +12,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.API.ISmeltable;
+import TFC.API.Metal;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Metal.MetalRegistry;
@@ -19,7 +21,7 @@ import TFC.TileEntities.TileEntityIngotPile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemIngot extends ItemTerra
+public class ItemIngot extends ItemTerra implements ISmeltable
 {
 	EnumSize size = EnumSize.SMALL;
 	BufferedImage bi;
@@ -43,39 +45,6 @@ public class ItemIngot extends ItemTerra
 	{
 		return true;
 	}
-
-	/*@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
-	{
-		NBTTagCompound stackTagCompound = par1ItemStack.getTagCompound();
-	
-		if(stackTagCompound!=null&&stackTagCompound.hasKey("temperature")&&par2!=0)
-		{
-			float temp = stackTagCompound.getFloat("temperature");
-			
-			int red = (int)((Math.min(Math.max(0, temp-600),350)/350)*255);
-			int yellow = (int)((Math.min(Math.max(50,temp-850),350)/350)*255);
-			int white = (int)((Math.min(Math.max(50, temp-1000),600)/600)*255);
-			int result = 0;
-			
-			//int pixel = bi.getRGB(2,2);
-			int originalR = 169;//pixel >> 24;
-			int originalG = 183;//pixel >> 16;
-			int originalB = 203;//pixel >> 8;
-			int tempRed = originalR - Math.min((yellow + white)/2,originalR);
-			int tempGreen = red<200?originalG - ((white + red)/2):0;
-			int tempBlue = red<200?originalB - ((yellow + red)/2):0;
-			
-			float mod = Math.max(0, (120-red)/120);
-			result+=(Math.min(red + (int)(originalR*mod), 255))<<16;
-			result+=(Math.min(yellow+(int)(originalG*mod), 255))<<8;
-			result+=Math.min(white+(int)(originalB*mod), 255);
-			System.out.println((result>>16 & 255) + ", " + (result>>8 & 255)+", "+(result & 255));
-			return result;
-		}
-		return 16777215;
-	}*/
 
 	@Override
 	public EnumSize getSize() {
@@ -372,5 +341,29 @@ public class ItemIngot extends ItemTerra
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 
+	}
+
+	@Override
+	public Metal GetMetalType(ItemStack is) {
+		// TODO Auto-generated method stub
+		return MetalRegistry.instance.getMetalFromItem(this);
+	}
+
+	@Override
+	public short GetMetalReturnAmount(ItemStack is) {
+		// TODO Auto-generated method stub
+		return 100;
+	}
+
+	@Override
+	public boolean isSmeltable(ItemStack is) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public EnumTier GetSmeltTier(ItemStack is) {
+		// TODO Auto-generated method stub
+		return EnumTier.TierI;
 	}
 }
