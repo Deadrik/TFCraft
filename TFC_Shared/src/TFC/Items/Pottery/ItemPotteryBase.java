@@ -10,7 +10,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
@@ -82,17 +81,12 @@ public class ItemPotteryBase extends ItemTerra implements ISize
     {
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ":");
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.PotteryBase.Inst0") + " " + 
-					EnumChatFormatting.AQUA + StringUtil.localize("gui.RightClick") + " " + 
-					EnumChatFormatting.WHITE + StringUtil.localize("gui.PotteryBase.Inst1"));
+			arraylist.add(StringUtil.localize("gui.Help"));
+			arraylist.add(StringUtil.localize("gui.PotteryBase.Inst0"));
 		}
 		else
 		{
-			arraylist.add(
-					EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-							EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
-							EnumChatFormatting.DARK_GRAY + ")");
+			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
     }
 

@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumDamageType;
@@ -71,18 +70,14 @@ public class ItemCustomKnife extends ItemWeapon
 	{
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ":");
-			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize("gui.RightClick") + " " + 
-					EnumChatFormatting.WHITE + StringUtil.localize("gui.Knife.Inst0"));
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Knife.Inst1"));
-			arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.Knife.Inst2"));
+			arraylist.add(StringUtil.localize("gui.Help"));
+			arraylist.add(StringUtil.localize("gui.Knife.Inst0"));
+			arraylist.add(StringUtil.localize("gui.Knife.Inst1"));
+			arraylist.add(StringUtil.localize("gui.Knife.Inst2"));
 		}
 		else
 		{
-			arraylist.add(
-					EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-							EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
-							EnumChatFormatting.DARK_GRAY + ")");
+			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
 	}
 

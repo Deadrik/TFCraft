@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
@@ -87,16 +86,12 @@ public class ItemLooseRock extends ItemTerra
 	{
 		if (TFC_Core.showExtraInformation()) 
 		{
-			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ":");
-			arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize("gui.RightClick") + " " + 
-					EnumChatFormatting.WHITE + StringUtil.localize("gui.LooseRock.Inst0"));
+			arraylist.add(StringUtil.localize("gui.Help"));
+			arraylist.add(StringUtil.localize("gui.LooseRock.Inst0"));
 		}
 		else
 		{
-			arraylist.add(
-					EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-							EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
-							EnumChatFormatting.DARK_GRAY + ")");
+			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
 	}
 
