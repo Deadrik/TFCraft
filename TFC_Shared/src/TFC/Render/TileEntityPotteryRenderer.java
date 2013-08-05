@@ -89,7 +89,10 @@ public class TileEntityPotteryRenderer extends TileEntitySpecialRenderer
 				{
 					GL11.glPushMatrix(); //start
 					GL11.glTranslatef((float)d + offsetX, (float)d1 + offsetY, (float)d2 + offsetZ);
-					GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					if (RenderManager.instance.options.fancyGraphics)
+					{
+						GL11.glRotatef(timeD, 0.0F, 1.0F, 0.0F);
+					}
 					GL11.glScalef(blockScale, blockScale, blockScale);
 					customitem.setEntityItemStack(te.getStackInSlot(i));
 					itemRenderer.doRenderItem(customitem, 0, 0, 0, 0, 0);
