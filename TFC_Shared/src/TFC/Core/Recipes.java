@@ -45,15 +45,20 @@ public class Recipes
 				TFCItems.RoseGoldIngot,TFCItems.SilverIngot,TFCItems.SteelIngot,TFCItems.SterlingSilverIngot
 				,TFCItems.TinIngot,TFCItems.ZincIngot};
 
-
-		//jimmynator's javelin
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Javelin, 1), new Object[] { 
-			"1","2", Character.valueOf('1'), new ItemStack(TFCItems.LooseRock, 1, 32767),Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.arrow, 8), new Object[] { 
 			new ItemStack(TFCItems.LooseRock, 1, 32767), new ItemStack(Item.stick,1,32767),
 			new ItemStack(Item.feather,1,32767)});
 		
-		
+		//stone javelins
+		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgInStoneJavelinHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.SedStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.SedStoneJavelinHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.IgExStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.IgExStoneJavelinHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.MMStoneJavelin, 1, 0), new Object[] { 
+			"1","2", Character.valueOf('1'), TFCItems.MMStoneJavelinHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
+
 		//stone shovels
 		GameRegistry.addRecipe(new ItemStack(TFCItems.IgInShovel, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.IgInStoneShovelHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
@@ -906,6 +911,35 @@ public class Recipes
                 new ItemStack(TFCItems.TinKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});                
             GameRegistry.addRecipe(new ItemStack(TFCItems.ZincKnife, 1,(int)(TFCItems.ZincUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
                 new ItemStack(TFCItems.ZincKnifeHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+
+            //javelins
+            GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthJavelin, 1,(int)(TFCItems.BismuthUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BismuthJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.BismuthBronzeJavelin, 1,(int)(TFCItems.BismuthBronzeUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BismuthBronzeJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.BlackBronzeJavelin, 1,(int)(TFCItems.BlackBronzeUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BlackBronzeJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.BlackSteelJavelin, 1,(int)(TFCItems.BlackSteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BlackSteelJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.BlueSteelJavelin, 1,(int)(TFCItems.BlueSteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BlueSteelJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.BronzeJavelin, 1,(int)(TFCItems.BronzeUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.BronzeJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.CopperJavelin, 1,(int)(TFCItems.CopperUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.CopperJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.WroughtIronJavelin, 1,(int)(TFCItems.WroughtIronUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.WroughtIronJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.RedSteelJavelin, 1,(int)(TFCItems.RedSteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.RedSteelJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.RoseGoldJavelin, 1,(int)(TFCItems.RoseGoldUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.RoseGoldJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.SteelJavelin, 1,(int)(TFCItems.SteelUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.SteelJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+            GameRegistry.addRecipe(new ItemStack(TFCItems.TinJavelin, 1,(int)(TFCItems.TinUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.TinJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});                
+            GameRegistry.addRecipe(new ItemStack(TFCItems.ZincJavelin, 1,(int)(TFCItems.ZincUses*j)), new Object[] { "#","I", Character.valueOf('#'), 
+                new ItemStack(TFCItems.ZincJavelinHead, 1, i), Character.valueOf('I'), new ItemStack(Item.stick,1,32767)});
+
         }
 
         //stone prospecting pick
@@ -935,6 +969,7 @@ public class Recipes
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ScythePlan, 1), new Object[] { "#### "," ####","   ##", Character.valueOf('#'), TFCItems.Ink});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.KnifePlan, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), TFCItems.Ink});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.BucketPlan, 1), new Object[] { "#   #","#   #","#   #","#   #"," ### ", Character.valueOf('#'), TFCItems.Ink});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.JavelinHeadPlan, 1), new Object[] { "###  ","#### ","#####"," ### ","  #  ", Character.valueOf('#'), TFCItems.Ink});
         
         //clay molds
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldPick, 1), new Object[] { " ### ","#   #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
@@ -949,6 +984,7 @@ public class Recipes
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldProPick, 1), new Object[] { " ####","#   #","    #", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldScythe, 1), new Object[] { "#### "," ####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldJavelin, 1), new Object[] { "###  ","#### ","#####"," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatClay, 1, 1)});
         
         registerAlloys();
         
@@ -977,21 +1013,25 @@ public class Recipes
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneShovelHead, 1), new Object[] { "###","###","###","###"," # ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGIN_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGIN_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGIN_START)});
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgInStoneJavelinHead, 1), new Object[] { "###  ","#### ","#####"," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGIN_START)});
         }
         for(int i = 0; i < Global.STONE_SED.length; i++) {
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneShovelHead, 1), new Object[] { "###","###","###","###"," # ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_SED_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_SED_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_SED_START)});
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.SedStoneJavelinHead, 1), new Object[] { "###  ","#### ","#####"," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_SED_START)});
         }
         for(int i = 0; i < Global.STONE_IGEX.length; i++) {
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneShovelHead, 1), new Object[] { "###","###","###","###"," # ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGEX_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGEX_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGEX_START)});
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.IgExStoneJavelinHead, 1), new Object[] { "###  ","#### ","#####"," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_IGEX_START)});
         }
         for(int i = 0; i < Global.STONE_MM.length; i++) {
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneShovelHead, 1), new Object[] { "###","###","###","###"," # ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_MM_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneAxeHead, 1), new Object[] { " #   ","#### ","#####","#### "," #   ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_MM_START)});
             CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneHoeHead, 1), new Object[] { "#####","   ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_MM_START)});
+            CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.MMStoneJavelinHead, 1), new Object[] { "###  ","#### ","#####"," ### ","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, i + Global.STONE_MM_START)});
         }        
 	
         
@@ -1112,7 +1152,16 @@ public class Recipes
                 new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldKnife, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldKnife, 1, 5), 
                 new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldKnife, 1, 1)});
-        
+
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldJavelin, 1, 2), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldJavelin, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldJavelin, 1, 3), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldJavelin, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldJavelin, 1, 4), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BismuthBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldJavelin, 1, 1)});
+        CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldJavelin, 1, 5), 
+                new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.BlackBronzeUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldJavelin, 1, 1)});
+
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1, 2), 
                 new Object[] {"12", Character.valueOf('1'), getStackTemp(new ItemStack(TFCItems.CopperUnshaped, 1, 0)), Character.valueOf('2'), new ItemStack(TFCItems.ClayMoldMace, 1, 1)});
         CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.ClayMoldMace, 1, 3), 
@@ -1222,6 +1271,15 @@ public class Recipes
                 new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldKnife, 1, 4))});
         GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeKnifeHead), 
                 new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldKnife, 1, 5))});
+
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperJavelinHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldJavelin, 1, 2))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BronzeJavelinHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldJavelin, 1, 3))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BismuthBronzeJavelinHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldJavelin, 1, 4))});
+        GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.BlackBronzeJavelinHead), 
+                new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldJavelin, 1, 5))});
         
         GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.CopperMaceHead), 
                 new Object[] {getStackNoTemp(new ItemStack(TFCItems.ClayMoldMace, 1, 2))});
@@ -1687,6 +1745,26 @@ public class Recipes
             manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelKnifeHead, 1, dam)));
             //manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldKnifeHead, 1, dam)));       
             manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.KnifePlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.DRAWSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelKnifeHead, 1, dam)));
+        }
+
+        //javelin heads
+        R = new Random (valueOfString("Javelins") + world.getSeed());
+        for(int i = 0; i < 5; i++)
+        {
+            int dam = i * 5;
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthBronzeIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BISMUTHBRONZE, new ItemStack(TFCItems.BismuthBronzeJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackBronzeIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLACKBRONZE, new ItemStack(TFCItems.BlackBronzeJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BronzeIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BRONZE, new ItemStack(TFCItems.BronzeJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlackSteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLACKSTEEL, new ItemStack(TFCItems.BlackSteelJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BlueSteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.BLUESTEEL, new ItemStack(TFCItems.BlueSteelJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RedSteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.REDSTEEL, new ItemStack(TFCItems.RedSteelJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.SteelIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STEEL, new ItemStack(TFCItems.SteelJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.WroughtIronIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.WROUGHTIRON, new ItemStack(TFCItems.WroughtIronJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.CopperIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.COPPER, new ItemStack(TFCItems.CopperJavelinHead, 1, dam)));
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.RoseGoldIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.ROSEGOLD, new ItemStack(TFCItems.RoseGoldJavelinHead, 1, dam)));       
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.BismuthIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.BismuthJavelinHead, 1, dam)));       
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.TinIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.TinJavelinHead, 1, dam)));       
+            manager.addRecipe(new AnvilRecipe(new ItemStack(TFCItems.ZincIngot), new ItemStack(TFCItems.JavelinHeadPlan),20 + R.nextInt(55),CraftingRuleEnum.HITLAST, CraftingRuleEnum.HITSECONDFROMLAST, CraftingRuleEnum.DRAWTHIRDFROMLAST, false, AnvilReq.STONE, new ItemStack(TFCItems.ZincJavelinHead, 1, dam)));       
         }
         
         R = new Random (valueOfString("Helmet") + world.getSeed());

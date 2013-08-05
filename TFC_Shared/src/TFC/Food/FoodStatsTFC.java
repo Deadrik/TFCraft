@@ -121,7 +121,7 @@ public class FoodStatsTFC
 				waterLevel -= 1+(tempWaterMod);
 			}
 
-			for(;waterTimer <= TFC_Time.getTotalTicks() && !player.capabilities.isCreativeMode;waterTimer += 20)
+			for(;waterTimer <= TFC_Time.getTotalTicks() && !player.capabilities.isCreativeMode; waterTimer += 20)
 			{
 				
 				/**Reduce the player's water for normal living*/
@@ -140,7 +140,7 @@ public class FoodStatsTFC
 
 	public int getMaxWater(EntityPlayer player)
 	{
-		return (int) ((TFC_Time.dayLength*2/10)+(200*player.experienceLevel));
+		return (int) ((TFC_Time.dayLength)+(200*player.experienceLevel));
 	}
 
 	/**

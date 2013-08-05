@@ -3,7 +3,7 @@ package TFC.Containers.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import TFC.Items.ItemBlocks.ItemTuyere;
+import TFC.Items.ItemTuyere;
 
 public class SlotTuyere extends Slot
 

@@ -59,6 +59,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	public TEBlastFurnace()
 	{
 		fuelTimeLeft = 0;
+		MaxFireTemp = 2500;
 		fuelBurnTemp =  0;
 
 		fireTemperature = 0;
@@ -420,6 +421,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		{
 			return false;
 		}
+		if(input[1] == null)
+			return false;
 
 		return true;
 	}
@@ -758,10 +761,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			{
 				//Here we make sure that the forge is valid
 				isValid = CheckValidity();
+				//Only allow the ore to smelt if there is a valid Tuyere associated with the furnace
 				if(input[1] != null)
 				{
-					RemoveOre();
-					input[1].damageItem(1, null);
+					if(RemoveOre())
+						input[1].setItemDamage(input[1].getItemDamage()+1);
 				}
 			}
 			slowCounter++;
