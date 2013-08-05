@@ -43,13 +43,15 @@ import net.minecraft.world.gen.feature.*;
 public class ItemJavelin extends ItemTerraTool
 {
     private static int weaponDamage;
-    public ItemJavelin(int par1)
-    {
-        super(par1, weaponDamage, TFCItems.SedToolMaterial, new Block[0]);
-        this.maxStackSize = 1;
-        this.weaponDamage = 55;
-        this.setMaxDamage(50);
+    private static double weaponRangeDamage;
 
+    public ItemJavelin(int par1, EnumToolMaterial par2EnumToolMaterial)
+    {
+        super(par1, weaponDamage, par2EnumToolMaterial, new Block[0]);
+        this.maxStackSize = 1;
+        this.weaponDamage = Math.round(par2EnumToolMaterial.getDamageVsEntity()*0.625f);
+        this.weaponRangeDamage = par2EnumToolMaterial.getDamageVsEntity()*0.8D;
+        this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
     }
 
     @Override
@@ -124,7 +126,7 @@ public class ItemJavelin extends ItemTerraTool
             var7 = 1.0F;
         }
 
-        EntityTerraJavelin var8 = new EntityTerraJavelin(par2World, par3EntityPlayer, var7 * 2.0F);
+        EntityTerraJavelin var8 = new EntityTerraJavelin(par2World, par3EntityPlayer, var7 * 2.0F, weaponRangeDamage, this.itemID);
 
         if (var7 == 1.0F)
         {
@@ -151,7 +153,7 @@ public class ItemJavelin extends ItemTerraTool
         }
 
         par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
-        par3EntityPlayer.inventory.consumeInventoryItem(TFCItems.Javelin.itemID);
+        par3EntityPlayer.inventory.consumeInventoryItem(this.itemID);
         var8.setDamageTaken(par1ItemStack.getItemDamage());
         if (!par2World.isRemote)
         {
