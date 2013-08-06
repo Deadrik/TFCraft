@@ -31,6 +31,12 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.MetaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
 		this.setMaxStackSize(1);
 	}
+	
+	@Override
+	public boolean canStack()
+	{
+		return false;
+	}
 
 	@Override
 	public void onDoneCooking(World world, ItemStack is, Alloy.EnumTier furnaceTier)

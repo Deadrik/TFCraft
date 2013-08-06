@@ -78,7 +78,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				worldObj.setBlock(xCoord, yCoord+1, zCoord, 0);
 				if(inventory[0] != null)
 				{
-					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0));
+					inventory[0] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[0], 0)).copy();
 					if(inventory[0].getItem() instanceof ItemPotteryBase)
 					{
 						((ItemPotteryBase)inventory[0].getItem()).onDoneCooking(worldObj, inventory[0], Alloy.EnumTier.TierI);
@@ -86,7 +86,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				}
 				if(inventory[1] != null)
 				{
-					inventory[1] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[1], 0));
+					inventory[1] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[1], 0)).copy();
 					if(inventory[1].getItem() instanceof ItemPotteryBase)
 					{
 						((ItemPotteryBase)inventory[1].getItem()).onDoneCooking(worldObj, inventory[1], Alloy.EnumTier.TierI);
@@ -94,7 +94,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				}
 				if(inventory[2] != null)
 				{
-					inventory[2] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[2], 0));
+					inventory[2] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[2], 0)).copy();
 					if(inventory[2].getItem() instanceof ItemPotteryBase)
 					{
 						((ItemPotteryBase)inventory[2].getItem()).onDoneCooking(worldObj, inventory[2], Alloy.EnumTier.TierI);
@@ -102,7 +102,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				}
 				if(inventory[3] != null)
 				{
-					inventory[3] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[3], 0));
+					inventory[3] = KilnCraftingManager.getInstance().findCompleteRecipe(new KilnRecipe(inventory[3], 0)).copy();
 					if(inventory[3].getItem() instanceof ItemPotteryBase)
 					{
 						((ItemPotteryBase)inventory[3].getItem()).onDoneCooking(worldObj, inventory[3], Alloy.EnumTier.TierI);
@@ -147,20 +147,14 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 	public void ejectItem(int index)
 	{
-		float f3 = 0.05F;
+		float f3 = 0.01F;
 		EntityItem entityitem;
 		Random rand = new Random();
-		float f = rand.nextFloat() * 0.8F + 0.1F;
-		float f1 = rand.nextFloat() * 0.2F + 0.1F;
-		float f2 = rand.nextFloat() * 0.8F + 0.1F;
 
 		if(inventory[index] != null)
 		{
-			entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-					inventory[index]);
-			entityitem.motionX = (float)rand.nextGaussian() * f3;
-			entityitem.motionY = 0;
-			entityitem.motionZ = (float)rand.nextGaussian() * f3;
+			entityitem = new EntityItem(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, inventory[index]);
+			entityitem.lifespan = 48000;
 			worldObj.spawnEntityInWorld(entityitem);
 			inventory[index] = null;
 		}
