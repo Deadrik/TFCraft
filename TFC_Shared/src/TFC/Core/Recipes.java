@@ -124,7 +124,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, 32767) });
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.gunpowder,2,0),new Object[] {new ItemStack(Item.coal,1,32767),new ItemStack(TFCItems.SaltpeterPowder,1,32767),new ItemStack(TFCItems.SulfurPowder)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.gunpowder,2,0),new Object[] {new ItemStack(Item.coal,1,32767),new ItemStack(TFCItems.Powder, 1, 4),new ItemStack(TFCItems.Powder, 1, 3)});
 		
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{

@@ -50,12 +50,12 @@ public class BlockSulfur extends BlockTerra
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{
 		//super.harvestBlock(world, entityplayer, i, j, k, l);
-	    dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.SulfurPowder, quantityDropped(new Random())));
+	    dropBlockAsItem_do(world, i, j, k, new ItemStack(TFCItems.Powder, quantityDropped(new Random()), 3));
 	}
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return TFCItems.SulfurPowder.itemID;
+		return TFCItems.Powder.itemID;
 	}
 	@Override
 	public boolean isBlockNormalCube(World world, int i, int j, int k)

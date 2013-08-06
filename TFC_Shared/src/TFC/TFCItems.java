@@ -102,8 +102,6 @@ public class TFCItems
     public static Item GemJade;
     public static Item GemAgate;
     public static Item GemDiamond;
-    public static Item SulfurPowder;
-    public static Item SaltpeterPowder;
 
     public static Item BismuthIngot;
     public static Item BismuthBronzeIngot;
@@ -1161,9 +1159,6 @@ public class TFCItems
         TinIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot2x",16068)).setUnlocalizedName("Tin Double Ingot")).setSize(EnumSize.LARGE);
         ZincIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot2x",16069)).setUnlocalizedName("Zinc Double Ingot")).setSize(EnumSize.LARGE);
 
-        SulfurPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SulfurPowder",16070)).setUnlocalizedName("Sulfur Powder");
-        SaltpeterPowder = new ItemTerra(TFC_Settings.getIntFor(config,"item","SaltpeterPowder",16071)).setUnlocalizedName("Saltpeter Powder");
-
         GemRuby = new ItemGem(TFC_Settings.getIntFor(config,"item","GemRuby",16080)).setUnlocalizedName("Ruby");
         GemSapphire = new ItemGem(TFC_Settings.getIntFor(config,"item","GemSapphire",16081)).setUnlocalizedName("Sapphire");
         GemEmerald = new ItemGem(TFC_Settings.getIntFor(config,"item","GemEmerald",16082)).setUnlocalizedName("Emerald");
@@ -1563,7 +1558,8 @@ public class TFCItems
         TinProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinProPickHead",16637)).setUnlocalizedName("Tin ProPick Head");
         ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setUnlocalizedName("Zinc ProPick Head");
         
-        Powder = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]{"Flux", "Kaolinite Powder", "Graphite Powder"}));
+        Powder = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]
+        		{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}));
 
         /**
          * Scythe

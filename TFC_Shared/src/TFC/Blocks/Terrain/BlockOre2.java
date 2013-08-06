@@ -65,7 +65,7 @@ public class BlockOre2 extends BlockOre
 		}
 		else if(l == 13)
 		{
-		    itemstack = new ItemStack(TFCItems.SaltpeterPowder, 1 + random.nextInt(3));
+		    itemstack = new ItemStack(TFCItems.Powder, 1 + random.nextInt(3), 4);
 		} 
 		
 		if (itemstack != null)
@@ -169,7 +169,7 @@ public class BlockOre2 extends BlockOre
 		if(meta == 5) {
 			itemstack = KimberliteGemSpawn();
 		} else if (meta == 13) {
-			itemstack = new ItemStack(TFCItems.SaltpeterPowder, 1 + random.nextInt(3));
+			itemstack = new ItemStack(TFCItems.Powder, 1 + random.nextInt(3), 4);
 		}
 		if (itemstack != null) {
 			dropBlockAsItem_do(par1World, par2, par3, par4, itemstack);
