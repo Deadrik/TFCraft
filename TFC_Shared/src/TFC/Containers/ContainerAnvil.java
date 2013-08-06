@@ -94,7 +94,7 @@ public class ContainerAnvil extends ContainerTFC
 			}
 			else
 			{
-				if(itemstack1.itemID == TFCItems.Flux.itemID)
+				if(itemstack1.itemID == TFCItems.Powder.itemID && itemstack1.getItemDamage() == 0)
 				{
 					if(slotflux.getHasStack())
 					{

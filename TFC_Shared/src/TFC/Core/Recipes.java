@@ -209,9 +209,9 @@ public class Recipes
 		
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Limewater,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand2,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Limewater,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Limewater,1), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCItems.Flux),Character.valueOf('X'),new ItemStack(TFCItems.WoodenBucketWater.setContainerItem(null))});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Flux),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand2,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Flux),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.Limewater,1), new Object[]{"P","X",Character.valueOf('P'),new ItemStack(TFCItems.Powder, 1, 0),Character.valueOf('X'),new ItemStack(TFCItems.WoodenBucketWater.setContainerItem(null))});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Powder, 1, 0),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.Mortar,16), new Object[]{"P","X","Y",Character.valueOf('P'),new ItemStack(TFCBlocks.Sand2,1,32767),Character.valueOf('X'),new ItemStack(TFCItems.Powder, 1, 0),Character.valueOf('Y'),new ItemStack(TFCItems.WoodenBucketWater,1,32767)});
 		
 		
 		//Gold Pan
@@ -224,9 +224,9 @@ public class Recipes
 		for(int j = 0; j < Recipes.Hammers.length; j++)
 		{
 			for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
-				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Flux, 2), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(Recipes.Hammers[j], 1, 32767)});
+				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 2, 0), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(Recipes.Hammers[j], 1, 32767)});
 			}
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Flux, 6), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 6, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(Recipes.Hammers[j], 1, 32767)});
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(Item.bow,1), new Object[] {" #$","# $"," #$",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolYarn,1)});
@@ -240,9 +240,9 @@ public class Recipes
 		}
 
 		for (int i=0; i < Global.STONE_FLUXINDEX.length; i++) {
-			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Flux, 1), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
+			GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 1, 0), new Object[] {new ItemStack(TFCItems.LooseRock, 1, Global.STONE_FLUXINDEX[i]), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
 		}
-		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Flux, 4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
+		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 4, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
 
 		GameRegistry.addRecipe(new ItemStack(Item.redstone, 8, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.OreChunk,1,27)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(Item.dyePowder,1,0)});

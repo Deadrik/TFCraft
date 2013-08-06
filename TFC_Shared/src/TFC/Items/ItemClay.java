@@ -64,11 +64,13 @@ public class ItemClay extends ItemLooseRock
 	public void registerIcons(IconRegister registerer)
     {
 		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "Clay");
+		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "Fire Clay");
     }
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
 	{
 		list.add(new ItemStack(this,1,0));
+		list.add(new ItemStack(this,1,1));
 	}
 }

@@ -89,7 +89,7 @@ public class CraftingHandler implements ICraftingHandler
 			{
 				HandleItem(entityplayer,iinventory,Recipes.Spindle);
 			}
-			else if(itemstack.itemID == TFCItems.Flux.itemID)
+			else if(itemstack.itemID == TFCItems.Powder.itemID && itemstack.getItemDamage() == 0)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Hammers);
 			}

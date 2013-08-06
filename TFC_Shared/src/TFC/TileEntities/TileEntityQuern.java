@@ -110,6 +110,30 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 								else if(storage[1].stackSize < 64)
 									storage[1].stackSize++;
 							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 16 && 
+									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 1)))
+							{
+								if(storage[0].stackSize == 1)
+									storage[0] = null;
+								else
+									storage[0].stackSize--;
+								if(storage[1] == null)
+									storage[1] = new ItemStack(TFCItems.Powder, 1, 1);
+								else if(storage[1].stackSize < 64)
+									storage[1].stackSize++;
+							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 20 && 
+									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 2)))
+							{
+								if(storage[0].stackSize == 1)
+									storage[0] = null;
+								else
+									storage[0].stackSize--;
+								if(storage[1] == null)
+									storage[1] = new ItemStack(TFCItems.Powder, 1, 2);
+								else if(storage[1].stackSize < 64)
+									storage[1].stackSize++;
+							}
 						}
 						
 						if(storage[2] != null)

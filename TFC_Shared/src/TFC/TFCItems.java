@@ -601,7 +601,7 @@ public class TFCItems
     public static Item ZincKnifeHead;
 
     public static Item Coke;
-    public static Item Flux;
+    public static Item Powder;
 
     //Formerly TFC_Mining
     
@@ -1099,8 +1099,6 @@ public class TFCItems
         
         Item.itemsList[Block.tallGrass.blockID] = null; Item.itemsList[Block.tallGrass.blockID] = (new ItemColored(Block.tallGrass.blockID - 256, true)).setBlockNames(new String[] {"shrub", "grass", "fern"});
         
-        
-        
 		
         GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","GoldPan",16001)).setUnlocalizedName("GoldPan");
         SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","SluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
@@ -1565,7 +1563,7 @@ public class TFCItems
         TinProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinProPickHead",16637)).setUnlocalizedName("Tin ProPick Head");
         ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setUnlocalizedName("Zinc ProPick Head");
         
-        Flux = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setUnlocalizedName("Flux"));
+        Powder = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]{"Flux", "Kaolinite Powder", "Graphite Powder"}));
 
         /**
          * Scythe
@@ -1714,14 +1712,13 @@ public class TFCItems
         
         Straw = new ItemTerra(TFC_Settings.getIntFor(config,"item","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
         FlatClay = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatClay",num++)).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark"}).setUnlocalizedName(""));
-        Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setUnlocalizedName("clay").setCreativeTab(CreativeTabs.tabMaterials);
-        
+
         PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"item","PotteryJug",num++)).setUnlocalizedName("Jug");
         PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
         PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
         PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"item","PotteryPot",num++)).setUnlocalizedName("Pot");
         CeramicMold = new ItemPotteryBase(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
-        
+        Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setUnlocalizedName("clay").setCreativeTab(CreativeTabs.tabMaterials);
         ClayMoldAxe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldAxe",num++)).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
         		"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");
         ClayMoldChisel = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldChisel",num++)).setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
