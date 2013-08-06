@@ -11,8 +11,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
+import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemCustomKnife;
 
 public class ItemLeather extends ItemLooseRock
@@ -45,6 +47,20 @@ public class ItemLeather extends ItemLooseRock
 		}
 		return itemstack;
 
+	}
+	
+	@Override
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		if (TFC_Core.showExtraInformation()) 
+		{
+			arraylist.add(StringUtil.localize("gui.Help"));
+			arraylist.add(StringUtil.localize("gui.Leather.Inst0"));
+		}
+		else
+		{
+			arraylist.add(StringUtil.localize("gui.ShowHelp"));
+		}
 	}
 
 
