@@ -30,27 +30,18 @@ public class EntitySkeletonTFC extends EntitySkeleton
     public EntitySkeletonTFC(World par1World)
     {
         super(par1World);
-        this.func_94058_c("");
-        this.func_94061_f(false);
     }
     
     @Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
     {
     	super.writeEntityToNBT(par1NBTTagCompound);
-    	par1NBTTagCompound.setBoolean("CustomNameVisible", false);
     	
     }
     @Override
     public int getMaxHealth()
     {
         return 1000;
-    }
-    
-    @Override
-	public String getEntityName()
-    {
-        return "";
     }
     
     @Override
