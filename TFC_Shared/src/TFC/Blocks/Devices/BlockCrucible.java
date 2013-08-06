@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
@@ -16,6 +17,8 @@ import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.Metal.AlloyMetal;
 import TFC.TileEntities.TECrucible;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCrucible extends BlockTerraContainer 
 {
@@ -70,6 +73,12 @@ public class BlockCrucible extends BlockTerraContainer
 				}
 			}
 		}
+		return true;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
 		return true;
 	}
 
