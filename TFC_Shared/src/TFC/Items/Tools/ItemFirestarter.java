@@ -140,6 +140,7 @@ public class ItemFirestarter extends ItemTerra
                                 entity.setDead();
                             }
                         }
+                        itemstack.setItemDamage(itemstack.getItemDamage()+1);
                         world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 2);
                     }
 
@@ -156,6 +157,7 @@ public class ItemFirestarter extends ItemTerra
             		int chance = new Random().nextInt(100);
                     if(chance > 70)
                     {
+                    	itemstack.setItemDamage(itemstack.getItemDamage()+1);
                     	world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 2);
                     }
                     return true;
@@ -170,6 +172,7 @@ public class ItemFirestarter extends ItemTerra
                     {
                     	TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
                     	te.StartPitFire();
+                    	itemstack.setItemDamage(itemstack.getItemDamage()+1);
                     }
             	}
             }

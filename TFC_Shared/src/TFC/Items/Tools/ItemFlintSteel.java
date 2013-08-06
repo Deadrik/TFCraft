@@ -10,11 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
-import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityPottery;
 
@@ -29,11 +27,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		if(!world.isRemote)
-		{
-			MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(entityplayer, world);
-			if(objectMouseOver == null) {
-				return false;
-			}       
+		{ 
 
 			boolean surroundSolids = TFC_Core.isNorthSolid(world, x, y, z) && 
 					TFC_Core.isSouthSolid(world, x, y, z) && 
@@ -94,6 +88,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 							entity.setDead();
 						}
 					}
+					itemstack.setItemDamage(itemstack.getItemDamage()+1);
 					world.setBlock(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 0x2);
 					if(world.isRemote)
 						world.markBlockForUpdate(x, y+1, z);
@@ -115,6 +110,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 							entity.setDead();
 						}
 					}
+					itemstack.setItemDamage(itemstack.getItemDamage()+1);
 					world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 
@@ -127,6 +123,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 						world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
 						surroundSolids)
 				{
+					itemstack.setItemDamage(itemstack.getItemDamage()+1);
 					world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 			}
@@ -138,6 +135,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 				{
 					TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
 					te.StartPitFire();					
+					itemstack.setItemDamage(itemstack.getItemDamage()+1);
 				}
 			}
 			else
