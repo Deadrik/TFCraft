@@ -316,8 +316,8 @@ public class Recipes
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC,1), new Object[]{new ItemStack(Item.book,1)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Spindle,1), new Object[] { "P","#",Character.valueOf('P'),
-			new ItemStack(TFCItems.SpindleHead,1),Character.valueOf('#'),new ItemStack(Item.stick,1)});
-		GameRegistry.addRecipe(new ItemStack(TFCItems.ClaySpindle,1), new Object[] { "P","#",Character.valueOf('P'),
+			new ItemStack(TFCItems.SpindleHead,1, 1),Character.valueOf('#'),new ItemStack(Item.stick,1)});
+		GameRegistry.addRecipe(new ItemStack(TFCItems.SpindleHead,1,0), new Object[] { "P","#",Character.valueOf('P'),
 			new ItemStack(Item.clay,32767),Character.valueOf('#'),new ItemStack(Item.stick,1)});
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.WoolYarn,8),new Object[]{new ItemStack(TFCItems.Wool,1,32767),new ItemStack(TFCItems.Spindle,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.WoolCloth,1), new Object[]{"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.WoolYarn,1)});
@@ -1931,6 +1931,12 @@ public class Recipes
     					new ItemStack(TFCItems.CeramicMold,1,0),
     					0, 
     					new ItemStack(TFCItems.CeramicMold,1,1)));
+    	
+    	manager.addRecipe(
+    			new KilnRecipe(
+    					new ItemStack(TFCItems.SpindleHead,1,0),
+    					0, 
+    					new ItemStack(TFCItems.SpindleHead,1,1)));
     	
     	manager.addRecipe(
     			new KilnRecipe(

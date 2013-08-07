@@ -905,7 +905,7 @@ public class TFCItems
     public static Item Wool;
     public static Item WoolCloth;
     public static Item Spindle;
-    public static Item ClaySpindle;
+
     public static Item SpindleHead;
     public static Item StoneBrick;
     public static Item Mortar;
@@ -1690,8 +1690,8 @@ public class TFCItems
 		Wool = new ItemTerra(TFC_Settings.getIntFor(config,"item","Wool",num++)).setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
 		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++)).setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
 		Spindle = new ItemSpindle(TFC_Settings.getIntFor(config,"item","Spindle",num++),SedToolMaterial).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
-		ClaySpindle = new ItemTerra(TFC_Settings.getIntFor(config, "item", "ClaySpindle", num++)).setFolder("tools/").setUnlocalizedName("Clay Spindle").setCreativeTab(TFCTabs.TFCMaterials);
-		SpindleHead = new ItemTerra(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setFolder("toolheads/").setUnlocalizedName("Spindle Head").setCreativeTab(TFCTabs.TFCMaterials);
+
+		SpindleHead = new ItemPotteryBase(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
 		StoneBrick = (new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++)).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
