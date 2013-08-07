@@ -87,11 +87,7 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         }
         else if (modelId == TFCBlocks.leavesFruitRenderId)
         {
-            int var5 = block.colorMultiplier(world, i, j, k);
-            float var6 = (var5 >> 16 & 255) / 255.0F;
-            float var7 = (var5 >> 8 & 255) / 255.0F;
-            float var8 = (var5 & 255) / 255.0F;
-            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, var6, var7, var8, renderer);
+            return TFC_CoreRender.RenderFruitLeaves(block, i, j, k, renderer);
         }
         else if (modelId == TFCBlocks.finiteWaterRenderId)
         {

@@ -4,6 +4,8 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
@@ -766,8 +768,28 @@ public class TFC_CoreRender
 
 		return true;
 	}
+	
+	public static boolean RenderBlockWithCustomColorMultiplier(Block block, RenderBlocks renderBlocks, int xCoord, int yCoord, int zCoord, int colorMultiplier)
+	{
+		int l = colorMultiplier;
+        float f = (float)(l >> 16 & 255) / 255.0F;
+        float f1 = (float)(l >> 8 & 255) / 255.0F;
+        float f2 = (float)(l & 255) / 255.0F;
 
-	public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord,float par5, float par6, float par7, RenderBlocks renderblocks)
+        if (EntityRenderer.anaglyphEnable)
+        {
+            float f3 = (f * 30.0F + f1 * 59.0F + f2 * 11.0F) / 100.0F;
+            float f4 = (f * 30.0F + f1 * 70.0F) / 100.0F;
+            float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
+            f = f3;
+            f1 = f4;
+            f2 = f5;
+        }
+
+        return Minecraft.isAmbientOcclusionEnabled() && Block.lightValue[block.blockID] == 0 ? (renderBlocks.partialRenderBounds ? renderBlocks.func_102027_b(block, xCoord, yCoord, zCoord, f, f1, f2) : renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) : renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
+	}
+
+	public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord, RenderBlocks renderblocks)
 	{
 		int meta = renderblocks.blockAccess.getBlockMetadata(xCoord, yCoord, zCoord);
 		if(meta >= 8)
@@ -781,7 +803,7 @@ public class TFC_CoreRender
 			renderblocks.overrideBlockTexture = getFruitTreeOverlay(renderblocks.blockAccess,xCoord,yCoord,zCoord);
 			if(renderblocks.overrideBlockTexture != null)
 			{
-				renderblocks.renderStandardBlock(block, xCoord, yCoord, zCoord);
+				RenderBlockWithCustomColorMultiplier(block, renderblocks, xCoord, yCoord, zCoord, 16777215);
 			}
 			renderblocks.clearOverrideBlockTexture();
 		}
