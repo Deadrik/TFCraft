@@ -128,10 +128,6 @@ public class Recipes
 		
 		for(int i = 0; i < Global.WOOD_ALL.length; i++)
 		{
-			for(int j = 0; j < Axes.length; j++)
-			{
-				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 3, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Axes[j], 1, 32767)});
-			}
 			for(int j = 0; j < Saws.length; j++)
 			{
 				GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.SinglePlank, 8, i), new Object[] {new ItemStack(TFCItems.Logs, 1, i), new ItemStack(Saws[j], 1, 32767)});
