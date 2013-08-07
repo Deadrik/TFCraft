@@ -111,7 +111,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[1].stackSize++;
 							}
 							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 16 && 
-									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 1)))
+									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 1)))//Kaolinite
 							{
 								if(storage[0].stackSize == 1)
 									storage[0] = null;
@@ -123,7 +123,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[1].stackSize++;
 							}
 							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 20 && 
-									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 2)))
+									(storage[1] == null || (storage[1].getItem() == TFCItems.Powder && storage[1].getItemDamage() == 2)))//Graphite
 							{
 								if(storage[0].stackSize == 1)
 									storage[0] = null;
