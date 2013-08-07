@@ -23,6 +23,8 @@ public class Recipes
 	public static Item[] Chisels;
 
 	public static Item[] Saws;
+	
+	public static Item[] Scythes;
 
 	public static Item[] Knives;
 

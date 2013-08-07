@@ -1806,6 +1806,11 @@ public class TFCItems
                 TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.RoseGoldHammer,TFCItems.SteelHammer,
                 TFCItems.TinHammer,TFCItems.ZincHammer};
         
+        Recipes.Scythes = new Item[]{TFCItems.BismuthScythe,TFCItems.BismuthBronzeScythe,TFCItems.BlackBronzeScythe,
+                TFCItems.BlackSteelScythe,TFCItems.BlueSteelScythe,TFCItems.BronzeScythe,TFCItems.CopperScythe,
+                TFCItems.WroughtIronScythe,TFCItems.RedSteelScythe,TFCItems.RoseGoldScythe,TFCItems.SteelScythe,
+                TFCItems.TinScythe,TFCItems.ZincScythe};
+        
         Recipes.Spindle = new Item[]{TFCItems.Spindle};
         
         Recipes.Gems  = new Item[]{TFCItems.GemAgate, TFCItems.GemAmethyst, TFCItems.GemBeryl, TFCItems.GemDiamond, TFCItems.GemEmerald, TFCItems.GemGarnet, 
