@@ -1558,8 +1558,8 @@ public class TFCItems
         TinProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinProPickHead",16637)).setUnlocalizedName("Tin ProPick Head");
         ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setUnlocalizedName("Zinc ProPick Head");
         
-        Powder = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]
-        		{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}));
+        Powder = new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]
+        		{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}).setUnlocalizedName("Powder");
 
         /**
          * Scythe
@@ -1714,7 +1714,7 @@ public class TFCItems
         PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
         PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"item","PotteryPot",num++)).setUnlocalizedName("Pot");
         CeramicMold = new ItemPotteryBase(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
-        Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setUnlocalizedName("clay").setCreativeTab(CreativeTabs.tabMaterials);
+        Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay").setCreativeTab(CreativeTabs.tabMaterials);
         ClayMoldAxe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldAxe",num++)).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
         		"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");
         ClayMoldChisel = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldChisel",num++)).setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
