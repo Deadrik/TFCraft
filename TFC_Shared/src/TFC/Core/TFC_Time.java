@@ -108,9 +108,8 @@ public class TFC_Time
     
     public static int getDayOfYearFromTick(long tick)
     {
-        long year = getYear();
         long years = (tick / (ticksInYear));
-        long years2 = tick - years;
+        long years2 = tick - (ticksInYear * years);
         return (int) (years2/dayLength);
     }
     

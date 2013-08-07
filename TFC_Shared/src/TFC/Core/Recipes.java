@@ -566,6 +566,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Block.torchWood,4));
 			RemoveRecipe(new ItemStack(Item.stick,4));
 			RemoveRecipe(new ItemStack(Block.planks,4));
+			RemoveRecipe(new ItemStack(Item.minecartCrate, 1));
 		}
 	}
 

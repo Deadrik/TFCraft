@@ -302,7 +302,7 @@ public class TFC_Climate
 
 	protected static float getTempSpecificDay(int day, int x, int z)
 	{
-		return getTemp(day+1, x, z);
+		return getTemp(day, x, z);
 	}
 
 	public static float getHeightAdjustedTemp(int x, int y, int z)
