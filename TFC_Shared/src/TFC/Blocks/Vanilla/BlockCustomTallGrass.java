@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -17,6 +18,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.ColorizerFoliageTFC;
 import TFC.Core.ColorizerGrassTFC;
+import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -62,9 +64,19 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
     }
 
     @Override
-    public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
+    public void harvestBlock(World world, EntityPlayer player, int i, int j, int k, int l)
     {
-        super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+        super.harvestBlock(world, player, i, j, k, l);
+        ItemStack is = player.inventory.getCurrentItem();
+        for(int c = 0; c < Recipes.Knives.length && is != null; c++) 
+		{  
+			if(is.getItem().itemID == Recipes.Knives[c].itemID)
+			{
+				EntityItem ei = new EntityItem(world, i+0.5, j+0.5, k+0.5, new ItemStack(TFCItems.Straw, 1));
+				world.spawnEntityInWorld(ei);
+				is.damageItem(1, player);
+			}
+		}
     }
 
     @Override
