@@ -47,6 +47,8 @@ public class MetalRegistry
 	
 	public Metal getMetalFromString(String s)
 	{
-		return (Metal) hash.get(s);
+		if(hash.containsKey(s))
+			return (Metal) hash.get(s);
+		else return null;
 	}
 }

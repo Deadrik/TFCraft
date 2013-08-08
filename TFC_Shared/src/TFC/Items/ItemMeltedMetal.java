@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
@@ -75,18 +74,12 @@ public class ItemMeltedMetal extends ItemTerra
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{
-				arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ":");
-				//Right Click to pour into a tool mold
-
-				arraylist.add(EnumChatFormatting.AQUA + StringUtil.localize("gui.RightClick") + " " + 
-						EnumChatFormatting.WHITE + StringUtil.localize("gui.MeltedMetal.Inst0"));
+				arraylist.add(StringUtil.localize("gui.Help"));
+				arraylist.add(StringUtil.localize("gui.MeltedMetal.Inst0"));
 			}
 			else
 			{
-				arraylist.add(
-						EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Help") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-								EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
-								EnumChatFormatting.DARK_GRAY + ")");
+				arraylist.add(StringUtil.localize("gui.ShowHelp"));
 			}
 		}
 	}
@@ -94,12 +87,15 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
+		if(itemstack.stackSize <= 0)
+			itemstack.stackSize = 1;
+		
 		if(TFC_ItemHeat.getIsLiquid(itemstack))
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 			pi.specialCraftingType = itemstack.copy();
 
-			itemstack.stackSize--;
+			entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
 			entityplayer.openGui(TerraFirmaCraft.instance, 38, world, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
 		return itemstack;

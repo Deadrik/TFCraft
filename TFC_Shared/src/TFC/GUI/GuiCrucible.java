@@ -39,7 +39,7 @@ public class GuiCrucible extends GuiContainer
         int scale = 0;
 
         scale = te.getTemperatureScaled(49);
-        drawTexturedModalRect(w + 153, h + 65 - scale, 185, 0, 15, 6);
+        drawTexturedModalRect(w + 153, h + 82 - scale, 185, 0, 15, 6);
         
         scale = te.getOutCountScaled(100);
         drawTexturedModalRect(w + 129, h + 106 - scale, 177, 6, 8, scale);
@@ -51,12 +51,23 @@ public class GuiCrucible extends GuiContainer
     {
 		if(te.currentAlloy != null)
 		{
-			this.fontRenderer.drawString(StringUtil.localize("gui.metal." + te.currentAlloy.outputType.Name.replace(" ", "")),4,4,0x000000);
+			if(te.currentAlloy.outputType != null)
+				this.fontRenderer.drawString("§n"+StringUtil.localize("gui.metal." + te.currentAlloy.outputType.Name.replace(" ", "")),7,7,0x000000);
+			else 
+				this.fontRenderer.drawString("§n"+StringUtil.localize("gui.metal.Unknown"),7,7,0x000000);
 			
+			for(int c = 0; c < te.currentAlloy.AlloyIngred.size(); c++)
+			{
+				double m = te.currentAlloy.AlloyIngred.get(c).metal;
+				m = Math.round(m * 100d)/100d;
+				if(te.currentAlloy.AlloyIngred.get(c).metalType != null)
+					this.fontRenderer.drawString("§8"+StringUtil.localize("gui.metal." + te.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + 
+						": §2" + m + "%", 7,18 + 10 * (c),0x000000);
+			}
 		}
 
 		if(TFC_Settings.enableDebugMode)
-			this.fontRenderer.drawString("Temp: " + te.temperature ,77, 8, 0xffffff);
+			this.fontRenderer.drawString("Temp: " + te.temperature ,178, 8, 0xffffff);
     }
 	
 	@Override

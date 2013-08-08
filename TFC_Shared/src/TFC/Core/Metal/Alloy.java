@@ -116,7 +116,10 @@ public class Alloy
 	{
 		try 
 		{
-			dos.writeUTF(outputType.Name);
+			if(outputType != null)
+				dos.writeUTF(outputType.Name);
+			else
+				dos.writeUTF("Unknown");
 			dos.writeInt(outputAmount);
 			dos.writeInt(AlloyIngred.size());
 			for(int i = 0; i < AlloyIngred.size(); i++)
@@ -140,7 +143,7 @@ public class Alloy
 			int size = dis.readInt();
 			for(int i = 0; i < size; i++)
 			{
-				AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(dis.readUTF()), dis.readInt());
+				AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(dis.readUTF()), dis.readFloat());
 				this.AlloyIngred.add(am);
 			}
 		} 

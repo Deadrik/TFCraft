@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -17,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
@@ -48,10 +46,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbttagcompound)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbttagcompound);
+		super.writeToNBT(nbt);
 
+		nbt.setInteger("temperature", temperature);
+		
 		NBTTagList nbttaglist = new NBTTagList();
 		Iterator iter = metals.values().iterator();
 		while(iter.hasNext())
@@ -65,7 +65,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbttagcompound.setTag("Metals", nbttaglist);
+		nbt.setTag("Metals", nbttaglist);
 
 		nbttaglist = new NBTTagList();
 		for(int i = 0; i < storage.length; i++)
@@ -79,15 +79,17 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			}
 		}
 
-		nbttagcompound.setTag("Items", nbttaglist);
+		nbt.setTag("Items", nbttaglist);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbttagcompound)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbttagcompound);
+		super.readFromNBT(nbt);
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Metals");
+		temperature = nbt.getInteger("temperature");
+		
+		NBTTagList nbttaglist = nbt.getTagList("Metals");
 
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
@@ -99,7 +101,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			addMetal(MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]), amount);
 		}
 
-		nbttaglist = nbttagcompound.getTagList("Items");
+		nbttaglist = nbt.getTagList("Items");
 		storage = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
@@ -126,37 +128,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				TileEntityForge te = (TileEntityForge) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
 				if(te.fireTemperature > temperature)
 					temperature++;
-			}
-			
-			/*Create a list of all the items that are falling into the stack */
-			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
-					xCoord+0.0625, yCoord, zCoord+0.0625, xCoord+0.9375, yCoord+1, zCoord+0.9375));
-
-			if (list != null && !list.isEmpty())
-			{
-				/*Iterate through the list and check for charcoal, coke, and ore*/
-				for (Iterator iterator = list.iterator(); iterator.hasNext();)
-				{
-					EntityItem entity = (EntityItem)iterator.next();
-					if(entity.getEntityItem().getItem() instanceof ISmeltable)
-					{
-						ISmeltable obj = (ISmeltable)entity.getEntityItem().getItem();
-						for(int c = 0; c < entity.getEntityItem().stackSize; c++)
-						{
-
-							if(addMetal(obj.GetMetalType(entity.getEntityItem()), obj.GetMetalReturnAmount(entity.getEntityItem())))
-							{
-								entity.getEntityItem().stackSize--;
-							}
-							else break;
-						}
-
-						if(entity.getEntityItem().stackSize == 0) 
-						{
-							entity.setDead();
-						}
-					}
-				}
+				else
+					temperature--;
 			}
 
 			if(storage[0] != null && storage[0].getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
@@ -173,11 +146,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					}
 					else
 					{
+						this.addMetal(MetalRegistry.instance.getMetalFromItem(storage[0].getItem()), (short) 1);
 						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage())
 							storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
 						else
 							storage[0].setItemDamage(storage[0].getItemDamage() + 1);
-						this.addMetal(MetalRegistry.instance.getMetalFromItem(storage[0].getItem()), (short) 1);
 					}
 					inputTick = 0;
 					updateGui((byte) 0);
@@ -216,6 +189,13 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				}
 				outputTick = 0;
 			}
+			
+			if(storage[1] != null && storage[1].stackSize <= 0)
+				storage[1].stackSize = 1;
+			if(inputTick > 5)
+				inputTick = 0;
+			if(outputTick >= 3)
+				outputTick = 0;
 		}
 	}
 

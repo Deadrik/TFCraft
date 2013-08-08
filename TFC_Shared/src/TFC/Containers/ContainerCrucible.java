@@ -19,7 +19,7 @@ public class ContainerCrucible extends ContainerTFC
 	    te = tileentityforge;
 	    firetemp = 0;
 		//Input slot
-	    addSlotToContainer(new Slot(tileentityforge, 0, 98, 5));
+	    addSlotToContainer(new Slot(tileentityforge, 0, 152, 7));
 	    
 	    addSlotToContainer(new Slot(tileentityforge, 1, 152, 92));
 
@@ -92,7 +92,7 @@ public class ContainerCrucible extends ContainerTFC
             ICrafting var2 = (ICrafting)this.crafters.get(var1);
             if (this.firetemp != this.te.temperature)
             {
-                var2.sendProgressBarUpdate(this, 0, (int)this.te.temperature);
+                var2.sendProgressBarUpdate(this, 0, this.te.temperature);
             }
         }
     }
