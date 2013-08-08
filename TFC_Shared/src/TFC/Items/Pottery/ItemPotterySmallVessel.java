@@ -156,18 +156,18 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				Metal m = null;
 				if(types[0] != null) m = types[0];
-				else if(types[1] != null) m = types[0];
-				else if(types[2] != null) m = types[0];
-				else if(types[3] != null) m = types[0];
+				else if(types[1] != null) m = types[1];
+				else if(types[2] != null) m = types[2];
+				else if(types[3] != null) m = types[3];
 
 				if(m != null)
 				{
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", m.Name);
 					tag.setInteger("MetalAmount", total);
+					is.getTagCompound().removeTag("Items");
+					is.setItemDamage(2);
 				}
-				is.getTagCompound().removeTag("Items");
-				is.setItemDamage(2);
 			}
 		}
 	}
