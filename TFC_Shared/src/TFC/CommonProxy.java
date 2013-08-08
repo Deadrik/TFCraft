@@ -17,6 +17,7 @@ import TFC.Containers.ContainerAnvil;
 import TFC.Containers.ContainerBarrel;
 import TFC.Containers.ContainerBlastFurnace;
 import TFC.Containers.ContainerChestTFC;
+import TFC.Containers.ContainerCrucible;
 import TFC.Containers.ContainerFirepit;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerForge;
@@ -430,7 +431,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 34:
 		{
-			return null;//Blueprint gui doesnt need a container
+			return null;
 		}
 		case 35:
 		{
@@ -442,7 +443,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 37:
 		{
-			return null;//book gui
+			return new ContainerCrucible(player.inventory,((TECrucible)te),world,x,y,z);
 		}
 		case 38:
 		{

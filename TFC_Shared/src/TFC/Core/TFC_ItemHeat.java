@@ -15,6 +15,7 @@ import TFC.TFCItems;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRaw;
 import TFC.API.HeatRegistry;
+import TFC.API.Metal;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.WorldGen.TFCBiome;
@@ -497,6 +498,24 @@ public class TFC_ItemHeat
 		if(manager!=null)
 		{
 			HeatIndex hi = manager.findMatchingIndex(is);
+			if(hi != null)
+			{
+				return hi.meltTemp;
+			}
+			else return -1;
+		} 
+		else 
+		{
+			return -1;
+		}
+	}
+	
+	public static float getMeltingPoint(Metal m)
+	{       
+		HeatRegistry manager = HeatRegistry.getInstance();
+		if(manager!=null)
+		{
+			HeatIndex hi = manager.findMatchingIndex(new ItemStack(Item.itemsList[m.MeltedItemID]));
 			if(hi != null)
 			{
 				return hi.meltTemp;

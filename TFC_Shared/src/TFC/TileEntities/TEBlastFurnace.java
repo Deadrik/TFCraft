@@ -23,11 +23,10 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.HeatIndex;
 import TFC.API.HeatRegistry;
-import TFC.API.Constant.Global;
 import TFC.Core.TFC_Climate;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Handlers.PacketHandler;
-import TFC.Items.ItemOre;
 
 public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 {
@@ -716,8 +715,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						}
 					}
 					/*If the item that's been tossed in is a type of Ore and it can melt down into something then add the ore to the list of items in the fire.*/
-					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && entity.getEntityItem().getItem() instanceof ItemOre && 
-							((ItemOre)entity.getEntityItem().getItem()).GetMetalType(entity.getEntityItem()) == Global.PIGIRON)
+					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && TFC_Core.isOreIron(entity.getEntityItem()))
 					{
 						int c = entity.getEntityItem().stackSize;
 						for(; c > 0; c--)

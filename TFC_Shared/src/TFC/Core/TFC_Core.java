@@ -18,9 +18,11 @@ import org.lwjgl.input.Mouse;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumWoodMaterial;
 import TFC.Blocks.BlockSlab;
 import TFC.Food.FoodStatsTFC;
+import TFC.Items.ItemOre;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -545,6 +547,15 @@ public class TFC_Core
     		}
     		return true;
     	}
+		return false;
+	}
+	
+	public static boolean isOreIron(ItemStack is)
+	{
+		if(is.getItem() instanceof ItemOre && ((ItemOre)is.getItem()).GetMetalType(is) == Global.PIGIRON)
+		{
+			return true;
+		}
 		return false;
 	}
 }

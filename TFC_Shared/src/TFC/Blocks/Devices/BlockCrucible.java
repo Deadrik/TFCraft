@@ -1,11 +1,8 @@
 package TFC.Blocks.Devices;
 
-import java.util.Iterator;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -13,9 +10,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
-import TFC.TFCItems;
+import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
-import TFC.Core.Metal.AlloyMetal;
 import TFC.TileEntities.TECrucible;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,7 +35,7 @@ public class BlockCrucible extends BlockTerraContainer
 			TECrucible te = (TECrucible)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
-			if(is != null && is.getItem().itemID == TFCItems.CeramicMold.itemID && is.getItemDamage() == 1)
+			/*if(is != null && is.getItem().itemID == TFCItems.CeramicMold.itemID && is.getItemDamage() == 1)
 			{
 				if(te.currentAlloy != null && te.currentAlloy.outputType != null)
 				{
@@ -71,7 +67,9 @@ public class BlockCrucible extends BlockTerraContainer
 						entityplayer.sendChatToPlayer(am.metalType.Name + ": " + Math.round(am.metal * 100d)/100d + "%");
 					}
 				}
-			}
+			}*/
+			
+			entityplayer.openGui(TerraFirmaCraft.instance, 37, world, i, j, k);
 		}
 		return true;
 	}

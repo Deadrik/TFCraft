@@ -1,5 +1,8 @@
 package TFC.Core.Metal;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +18,7 @@ public class Alloy
 	
 	public Alloy(Metal type, EnumTier tier)
 	{
-		AlloyIngred = new ArrayList<AlloyMetal>();
+		this();
 		outputType = type;
 		outputAmount = 0;
 		furnaceTier = tier;
@@ -23,9 +26,14 @@ public class Alloy
 	
 	public Alloy(Metal type, int am)
 	{
-		AlloyIngred = new ArrayList<AlloyMetal>();
+		this();
 		outputType = type;
 		outputAmount = am;
+	}
+	
+	public Alloy()
+	{
+		AlloyIngred = new ArrayList<AlloyMetal>();
 	}
 	
 	public void addIngred(AlloyMetal am)
@@ -102,5 +110,44 @@ public class Alloy
 		{
 			tier = t;
 		}
+	}
+	
+	public void toPacket(DataOutputStream dos)
+	{
+		try 
+		{
+			dos.writeUTF(outputType.Name);
+			dos.writeInt(outputAmount);
+			dos.writeInt(AlloyIngred.size());
+			for(int i = 0; i < AlloyIngred.size(); i++)
+			{
+				AlloyMetal am = AlloyIngred.get(i);
+				dos.writeUTF(am.metalType.Name);
+				dos.writeFloat(am.metal);
+			}
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public Alloy fromPacket(DataInputStream dis)
+	{
+		try 
+		{
+			outputType = MetalRegistry.instance.getMetalFromString(dis.readUTF());
+			outputAmount = dis.readInt();
+			int size = dis.readInt();
+			for(int i = 0; i < size; i++)
+			{
+				AlloyMetal am = new AlloyMetal(MetalRegistry.instance.getMetalFromString(dis.readUTF()), dis.readInt());
+				this.AlloyIngred.add(am);
+			}
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return this;
 	}
 }

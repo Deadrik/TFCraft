@@ -60,6 +60,7 @@ import TFC.GUI.GuiBlastFurnace;
 import TFC.GUI.GuiBlueprint;
 import TFC.GUI.GuiCalendar;
 import TFC.GUI.GuiChestTFC;
+import TFC.GUI.GuiCrucible;
 import TFC.GUI.GuiFirepit;
 import TFC.GUI.GuiFoodPrep;
 import TFC.GUI.GuiForge;
@@ -117,6 +118,7 @@ import TFC.Render.Models.ModelSheep2TFC;
 import TFC.Render.Models.ModelSquidTFC;
 import TFC.Render.Models.ModelWolfTFC;
 import TFC.TileEntities.TEBlastFurnace;
+import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TileEntityAnvil;
 import TFC.TileEntities.TileEntityBarrel;
 import TFC.TileEntities.TileEntityChestTFC;
@@ -340,7 +342,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 37:
 		{
-			//return new GuiScreenBookTFC(player.inventory, world, x, y, z);
+			return new GuiCrucible(player.inventory,((TECrucible)te), world, x, y, z);
 		}
 		case 38:
 		{
