@@ -3,6 +3,7 @@ package TFC.GUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -52,17 +53,17 @@ public class GuiCrucible extends GuiContainer
 		if(te.currentAlloy != null)
 		{
 			if(te.currentAlloy.outputType != null)
-				this.fontRenderer.drawString("§n"+StringUtil.localize("gui.metal." + te.currentAlloy.outputType.Name.replace(" ", "")),7,7,0x000000);
+				this.fontRenderer.drawString(EnumChatFormatting.UNDERLINE+StringUtil.localize("gui.metal." + te.currentAlloy.outputType.Name.replace(" ", "")),7,7,0x000000);
 			else 
-				this.fontRenderer.drawString("§n"+StringUtil.localize("gui.metal.Unknown"),7,7,0x000000);
+				this.fontRenderer.drawString(EnumChatFormatting.UNDERLINE+StringUtil.localize("gui.metal.Unknown"),7,7,0x000000);
 			
 			for(int c = 0; c < te.currentAlloy.AlloyIngred.size(); c++)
 			{
 				double m = te.currentAlloy.AlloyIngred.get(c).metal;
 				m = Math.round(m * 100d)/100d;
 				if(te.currentAlloy.AlloyIngred.get(c).metalType != null)
-					this.fontRenderer.drawString("§8"+StringUtil.localize("gui.metal." + te.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + 
-						": §2" + m + "%", 7,18 + 10 * (c),0x000000);
+					this.fontRenderer.drawString(EnumChatFormatting.DARK_GRAY+StringUtil.localize("gui.metal." + te.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + 
+						": "+ EnumChatFormatting.GREEN + m + "%", 7,18 + 10 * (c),0x000000);
 			}
 		}
 
