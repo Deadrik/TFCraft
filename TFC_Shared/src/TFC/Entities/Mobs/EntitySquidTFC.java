@@ -1,6 +1,9 @@
 package TFC.Entities.Mobs;
 
+import TFC.TFCItems;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntitySquidTFC extends EntitySquid
@@ -24,5 +27,21 @@ public class EntitySquidTFC extends EntitySquid
     public int getMaxHealth()
     {
         return 400;
+    }
+
+    /**
+     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
+     * par2 - Level of Looting used to kill this mob.
+     */
+    @Override
+    protected void dropFewItems(boolean par1, int par2)
+    {
+        int j = this.rand.nextInt(3 + par2) + 1;
+
+        for (int k = 0; k < j; ++k)
+        {
+            this.entityDropItem(new ItemStack(Item.dyePowder, 1, 0), 0.0F);
+        }
+        this.dropItem(TFCItems.CalamariRaw.itemID,(int)((2+rand.nextInt(5))));
     }
 }

@@ -918,6 +918,8 @@ public class TFCItems
     public static Item TerraLeather;
     public static Item muttonRaw;
     public static Item muttonCooked;
+    public static Item CalamariRaw;
+    public static Item CalamariCooked;
     public static Item FlatLeather;
     public static Item Beer;
     public static Item Cider;
@@ -1759,6 +1761,10 @@ public class TFCItems
         
         UnknownIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","UnknownIngot",num++)).setUnlocalizedName("Unknown Ingot");
         UnknownUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnknownUnshaped",num++)).setUnlocalizedName("Unknown Unshaped");
+
+        CalamariRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","CalamariRaw",num++)).setFolder("").setUnlocalizedName("Calamari Raw");
+        CalamariCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CalamariCooked",num++), 29, 0.6F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
+
         /**Plans*/
         num = 20000;
         SetupPlans(num);
