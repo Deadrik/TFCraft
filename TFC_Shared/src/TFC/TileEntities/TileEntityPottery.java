@@ -161,6 +161,15 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 		if(inventory[0] == null && inventory[1] == null && inventory[2] == null && inventory[3] == null)
 		{
+			// eject straw before destroying block
+			int m = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+			if(m > 0)
+			{
+				entityitem = new EntityItem(
+					worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.Straw, m));
+				entityitem.lifespan = 48000;
+				worldObj.spawnEntityInWorld(entityitem);
+			}
 			worldObj.setBlock(xCoord, yCoord, zCoord, 0);
 		}
 	}
