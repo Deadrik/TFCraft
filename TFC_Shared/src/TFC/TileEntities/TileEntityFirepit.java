@@ -430,7 +430,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
         boolean checkArray[][][] = new boolean[25][13][25];
         boolean reachedTop = false;
 
-        while(!reachedTop && j+y >= 0)
+        while(!reachedTop && j+y >= 0 && y < 13)
         {
             if(worldObj.getBlockId(x, j+y+1, z) != TFCBlocks.LogPile.blockID)
             {
