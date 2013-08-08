@@ -17,7 +17,7 @@ import TFC.Core.Util.StringUtil;
 
 public class ItemClay extends ItemLooseRock
 {
-	
+
 	public ItemClay(int id) 
 	{
 		super(id);
@@ -29,19 +29,30 @@ public class ItemClay extends ItemLooseRock
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World par2World, EntityPlayer entityplayer)
 	{
-		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
-		pi.specialCraftingType = new ItemStack(specialCraftingType, 1, itemstack.getItemDamage());
-		if(specialCraftingTypeAlternate != null)
-			pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
-		itemstack.stackSize--;
-		entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+		if(itemstack.stackSize >= 5)
+		{
+			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
+			pi.specialCraftingType = new ItemStack(specialCraftingType, 1, 0);
+
+			if(specialCraftingTypeAlternate != null)
+				pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
+
+			if(itemstack.getItemDamage() == 1)
+			{
+				pi.specialCraftingType = new ItemStack(specialCraftingType, 1, 2);
+				pi.specialCraftingTypeAlternate = new ItemStack(specialCraftingType, 1, 3);
+			}
+
+			itemstack.stackSize-=5;
+			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+		}
 		return itemstack;
 
 	}
-	
+
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
-    {		
+	{		
 		if (TFC_Core.showExtraInformation()) 
 		{
 			arraylist.add(StringUtil.localize("gui.Help"));
@@ -51,18 +62,18 @@ public class ItemClay extends ItemLooseRock
 		{
 			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
-    }
+	}
 
 	@Override
 	public Icon getIconFromDamage(int meta)
 	{        
 		return icons[meta];
 	}	
-	
+
 	@Override
 	public void registerIcons(IconRegister registerer)
-    {
+	{
 		icons[0] = registerer.registerIcon(Reference.ModID + ":" + "Clay");
 		icons[1] = registerer.registerIcon(Reference.ModID + ":" + "Fire Clay");
-    }
+	}
 }

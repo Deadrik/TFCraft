@@ -7,7 +7,6 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Core.TFC_Textures;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderCrucible  implements ISimpleBlockRenderingHandler 
@@ -26,7 +25,7 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 		float s14 = 14f/16f;
 		float s15 = 15f/16f;
 		float s16 = 1f;
-		renderer.overrideBlockTexture = TFC_Textures.SheetWroughtIron;
+		/*renderer.overrideBlockTexture = TFC_Textures.SheetWroughtIron;
 		renderer.setRenderBounds(s0, s12, s0, s1, s13, s16);
 		renderer.renderStandardBlock(block, i, j, k);
 		renderer.setRenderBounds(s15, s12, s0, s16, s13, s16);
@@ -43,7 +42,7 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(s15, s0, s15, s16, s12, s16);
 		renderer.renderStandardBlock(block, i, j, k);
 		renderer.setRenderBounds(s15, s0, s0, s16, s12, s1);
-		renderer.renderStandardBlock(block, i, j, k);
+		renderer.renderStandardBlock(block, i, j, k);*/
 
 		renderer.clearOverrideBlockTexture();
 		renderer.setRenderBounds(s1, s0, s1, s15, s1, s15);

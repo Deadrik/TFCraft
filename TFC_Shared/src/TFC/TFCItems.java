@@ -1709,7 +1709,7 @@ public class TFCItems
         TerraLeather = new ItemLeather(TFC_Settings.getIntFor(config,"item","TFCLeather",num++)).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
         
         Straw = new ItemTerra(TFC_Settings.getIntFor(config,"item","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
-        FlatClay = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatClay",num++)).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark"}).setUnlocalizedName(""));
+        FlatClay = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatClay",num++)).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
 
         PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"item","PotteryJug",num++)).setUnlocalizedName("Jug");
         PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
