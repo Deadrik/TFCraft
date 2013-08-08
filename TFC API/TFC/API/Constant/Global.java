@@ -79,4 +79,5 @@ public class Global
 	public static Metal HCREDSTEEL; 
 	public static Metal WEAKBLUESTEEL; 
 	public static Metal HCBLUESTEEL; 
+	public static Metal UNKNOWN; 
 }

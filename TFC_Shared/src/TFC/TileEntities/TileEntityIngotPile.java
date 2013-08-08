@@ -22,29 +22,25 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 {
 	public ItemStack[] storage;
 	public String type;
-	private static int[] ingots = {(TFCItems.BismuthIngot.itemID),(TFCItems.BismuthBronzeIngot.itemID),(TFCItems.BlackBronzeIngot.itemID),
-		(TFCItems.BlackSteelIngot.itemID),(TFCItems.BlueSteelIngot.itemID),(TFCItems.BrassIngot.itemID),(TFCItems.BronzeIngot.itemID),
-		(TFCItems.CopperIngot.itemID),(TFCItems.GoldIngot.itemID),(TFCItems.WroughtIronIngot.itemID),(TFCItems.LeadIngot.itemID),
-		(TFCItems.NickelIngot.itemID),(TFCItems.PigIronIngot.itemID),(TFCItems.PlatinumIngot.itemID),(TFCItems.RedSteelIngot.itemID),
-		(TFCItems.RoseGoldIngot.itemID),(TFCItems.SilverIngot.itemID),(TFCItems.SteelIngot.itemID),(TFCItems.SterlingSilverIngot.itemID),
-		(TFCItems.TinIngot.itemID),(TFCItems.ZincIngot.itemID)};
+	public static int[] INGOTS;
 	
 	public TileEntityIngotPile()
 	{
 		storage = new ItemStack[1];
 		type = "Copper";
+		INGOTS = new int[]{(TFCItems.BismuthIngot.itemID),(TFCItems.BismuthBronzeIngot.itemID),(TFCItems.BlackBronzeIngot.itemID),
+				(TFCItems.BlackSteelIngot.itemID),(TFCItems.BlueSteelIngot.itemID),(TFCItems.BrassIngot.itemID),(TFCItems.BronzeIngot.itemID),
+				(TFCItems.CopperIngot.itemID),(TFCItems.GoldIngot.itemID),(TFCItems.WroughtIronIngot.itemID),(TFCItems.LeadIngot.itemID),
+				(TFCItems.NickelIngot.itemID),(TFCItems.PigIronIngot.itemID),(TFCItems.PlatinumIngot.itemID),(TFCItems.RedSteelIngot.itemID),
+				(TFCItems.RoseGoldIngot.itemID),(TFCItems.SilverIngot.itemID),(TFCItems.SteelIngot.itemID),(TFCItems.SterlingSilverIngot.itemID),
+				(TFCItems.TinIngot.itemID),(TFCItems.ZincIngot.itemID), TFCItems.UnknownIngot.itemID};
 	}
 	public static int[] getIngots(){
-		return ingots;
+		return INGOTS;
 	}
 	
 	public void setType(String i)
 	{
-		/*for(int j = 0; j<ingots.length;j++){
-		if(ingots[j] == i){
-			type = j;
-		}
-		}*/
 		type = i;
 	}
 	

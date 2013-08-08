@@ -961,6 +961,8 @@ public class TFCItems
     
     public static Item Bloom;
     public static Item RawBloom;
+    public static Item UnknownIngot;
+    public static Item UnknownUnshaped;
     
     /**
      * Item Uses Setup
@@ -1754,6 +1756,9 @@ public class TFCItems
         
         Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setFolder("ingots/").setUnlocalizedName("Iron Bloom");
         RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setFolder("ingots/").setUnlocalizedName("Raw Iron Bloom");
+        
+        UnknownIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","UnknownIngot",num++)).setUnlocalizedName("Unknown Ingot");
+        UnknownUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnknownUnshaped",num++)).setUnlocalizedName("Unknown Unshaped");
         /**Plans*/
         num = 20000;
         SetupPlans(num);
@@ -1861,6 +1866,7 @@ public class TFCItems
     	Global.HCREDSTEEL = new Metal("HC Red Steel", HCRedSteelUnshaped.itemID, HCRedSteelIngot.itemID); 
     	Global.WEAKBLUESTEEL = new Metal("Weak Blue Steel", WeakBlueSteelUnshaped.itemID, WeakBlueSteelIngot.itemID);
     	Global.HCBLUESTEEL = new Metal("HC Blue Steel", HCBlueSteelUnshaped.itemID, HCBlueSteelIngot.itemID); 
+    	Global.UNKNOWN = new Metal("Unknown", UnknownUnshaped.itemID, UnknownIngot.itemID); 
         
         MetalRegistry.instance.addMetal(Global.BISMUTH, Alloy.EnumTier.TierI);
         MetalRegistry.instance.addMetal(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);
@@ -1889,6 +1895,7 @@ public class TFCItems
     	MetalRegistry.instance.addMetal(Global.HCREDSTEEL, Alloy.EnumTier.TierV);
     	MetalRegistry.instance.addMetal(Global.WEAKBLUESTEEL, Alloy.EnumTier.TierV);
     	MetalRegistry.instance.addMetal(Global.HCBLUESTEEL, Alloy.EnumTier.TierV);
+    	MetalRegistry.instance.addMetal(Global.UNKNOWN, Alloy.EnumTier.TierI);
     	
 		Alloy Bronze = new Alloy(Global.BRONZE, Alloy.EnumTier.TierI);
 		Bronze.addIngred(Global.COPPER, 88, 92);

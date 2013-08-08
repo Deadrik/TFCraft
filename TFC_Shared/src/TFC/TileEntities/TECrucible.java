@@ -21,6 +21,7 @@ import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.Constant.Global;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.Alloy;
@@ -165,8 +166,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					
 					if(storage[0].stackSize <= 1)
 						storage[0] = null;
-					else
-						storage[0].stackSize--;
 					
 					updateGui((byte) 0);
 				}
@@ -185,6 +184,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
 					currentAlloy.outputAmount--;
+					storage[1].stackSize = 1;
 					updateGui((byte) 1);
 				}
 				outputTick = 0;
@@ -201,7 +201,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	private boolean addMetal(Metal m, short amt)
 	{
-		if(getTotalMetal()+amt <= 3000)
+		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
 			if(metals.containsKey(m.Name))
 				((MetalPair)metals.get(m.Name)).amount += amt;
@@ -255,7 +255,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		}
 		else 
 		{
-			currentAlloy = new Alloy(null, totalAmount);
+			currentAlloy = new Alloy(Global.UNKNOWN, totalAmount);
 			currentAlloy.AlloyIngred = a;
 		}
 	}

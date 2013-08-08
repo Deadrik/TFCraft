@@ -100,6 +100,9 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCBlueSteelIngot,1), BlueSteelRaw,new ItemStack(TFCItems.HCBlueSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCRedSteelIngot,1), RedSteelRaw,new ItemStack(TFCItems.HCRedSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCSteelIngot,1), SteelRaw,new ItemStack(TFCItems.HCSteelUnshaped,1)));
+		
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.UnknownIngot,1), CopperRaw,new ItemStack(TFCItems.UnknownUnshaped,1)));
+		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.UnknownUnshaped,1), CopperRaw,new ItemStack(TFCItems.UnknownUnshaped,1)).setMorph(new ItemStack(TFCItems.CeramicMold)));
 
 		//Bismuth
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BismuthIngot,1), BismuthRaw,new ItemStack(TFCItems.BismuthUnshaped,1)));

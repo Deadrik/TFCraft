@@ -2,13 +2,14 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TileEntities.TECrucible;
 
-public class ContainerCrucible extends ContainerTFC
+public class ContainerCrucible extends Container
 {
 	private TECrucible te;
     private float firetemp;
@@ -21,7 +22,7 @@ public class ContainerCrucible extends ContainerTFC
 		//Input slot
 	    addSlotToContainer(new Slot(tileentityforge, 0, 152, 7));
 	    
-	    addSlotToContainer(new Slot(tileentityforge, 1, 152, 92));
+	    addSlotToContainer(new Slot(tileentityforge, 1, 152, 90));
 
 		for(int i = 0; i < 3; i++)
 		{
@@ -37,6 +38,7 @@ public class ContainerCrucible extends ContainerTFC
 		}
 		te.updateGui((byte) 0);
 	}
+	
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
@@ -44,14 +46,14 @@ public class ContainerCrucible extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int clickedSlot)
 	{
-		Slot slot = (Slot)inventorySlots.get(i);
+		Slot slot = (Slot)inventorySlots.get(clickedSlot);
 		Slot slot1 = (Slot)inventorySlots.get(0);
 		if(slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
-			if(i == 0)
+			if(clickedSlot <= 1)
 			{
 				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
 				{
@@ -64,10 +66,8 @@ public class ContainerCrucible extends ContainerTFC
 				if(slot1.getHasStack())
 				{
 					return null;
-				}
-				ItemStack stack = itemstack1.copy();
-				stack.stackSize = 1;                            
-				slot1.putStack(stack);                          
+				}                     
+				slot1.putStack(itemstack1.copy());                          
 				itemstack1.stackSize--;
 			}
 			if(itemstack1.stackSize == 0)
@@ -81,7 +81,6 @@ public class ContainerCrucible extends ContainerTFC
 		return null;
 	}
 
-	private int updatecounter = 0;
 	@Override
 	public void detectAndSendChanges()
     {

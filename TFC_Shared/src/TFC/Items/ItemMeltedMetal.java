@@ -69,8 +69,7 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	
-		if(TFC_ItemHeat.getIsLiquid(is) /*&& (is.getItem().itemID == TFCItems.CopperUnshaped.itemID || is.getItem().itemID == TFCItems.BronzeUnshaped.itemID ||
-				is.getItem().itemID == TFCItems.BlackBronzeUnshaped.itemID || is.getItem().itemID == TFCItems.BismuthBronzeUnshaped.itemID )*/)
+		if(TFC_ItemHeat.getIsLiquid(is))
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{

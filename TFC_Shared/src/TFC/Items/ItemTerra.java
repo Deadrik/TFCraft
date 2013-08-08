@@ -120,6 +120,8 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
+		if(is.stackSize == 0)
+			is.stackSize = 1;
 		if (!world.isRemote && is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
