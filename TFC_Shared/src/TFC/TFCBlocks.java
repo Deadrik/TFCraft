@@ -540,10 +540,10 @@ public class TFCBlocks
 		
 		
 		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", 2064)).setUnlocalizedName("Flora");
-		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery");
+		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery").setHardness(1.0f);
 		
 		TFCBlocks.Tuyere = new BlockTuyere(TFC_Settings.getIntFor(config, "block", "Tuyere", 2066)).setUnlocalizedName("Tuyere");
-		TFCBlocks.Crucible = new BlockCrucible(TFC_Settings.getIntFor(config, "block", "Crucible", 2067)).setUnlocalizedName("Crucible");
+		TFCBlocks.Crucible = new BlockCrucible(TFC_Settings.getIntFor(config, "block", "Crucible", 2067)).setUnlocalizedName("Crucible").setHardness(4.0f);
 		
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);

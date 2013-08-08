@@ -22,6 +22,7 @@ import TFC.TerraFirmaCraft;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.Constant.Global;
+import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.Alloy;
@@ -41,6 +42,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public ItemStack[] storage;
 	public byte inputTick = 0;
 	public byte outputTick = 0;
+	public byte tempTick = 0;
 	public TECrucible()
 	{
 		storage = new ItemStack[2];
@@ -51,7 +53,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	{
 		super.writeToNBT(nbt);
 
-		nbt.setInteger("temperature", temperature);
+		nbt.setInteger("temp", temperature);
 		
 		NBTTagList nbttaglist = new NBTTagList();
 		Iterator iter = metals.values().iterator();
@@ -88,7 +90,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	{
 		super.readFromNBT(nbt);
 
-		temperature = nbt.getInteger("temperature");
+		readFromItemNBT(nbt);
+	}
+	
+	public void readFromItemNBT(NBTTagCompound nbt)
+	{
+		temperature = nbt.getInteger("temp");
 		
 		NBTTagList nbttaglist = nbt.getTagList("Metals");
 
@@ -122,14 +129,18 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		{
 			inputTick++;
 			outputTick++;
-			
+			tempTick++;
 			/*Heat the crucible based on the Forge beneath it*/
 			if(worldObj.getBlockId(xCoord,yCoord-1,zCoord) == TFCBlocks.Forge.blockID)
 			{
 				TileEntityForge te = (TileEntityForge) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
 				if(te.fireTemperature > temperature)
 					temperature++;
-				else
+			}
+			if(tempTick > 22)
+			{
+				tempTick = 0;
+				if(temperature > TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord))
 					temperature--;
 			}
 
@@ -199,7 +210,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		}
 	}
 
-	private boolean addMetal(Metal m, short amt)
+	public boolean addMetal(Metal m, short amt)
 	{
 		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
@@ -292,7 +303,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	}
 
-	private class MetalPair
+	public class MetalPair
 	{
 		public Metal type;
 		public short amount;

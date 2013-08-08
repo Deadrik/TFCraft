@@ -1,9 +1,16 @@
 package TFC.Blocks.Devices;
 
+import java.util.Iterator;
+
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -13,6 +20,7 @@ import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.TileEntities.TECrucible;
+import TFC.TileEntities.TECrucible.MetalPair;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,45 +43,98 @@ public class BlockCrucible extends BlockTerraContainer
 			TECrucible te = (TECrucible)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
-			/*if(is != null && is.getItem().itemID == TFCItems.CeramicMold.itemID && is.getItemDamage() == 1)
-			{
-				if(te.currentAlloy != null && te.currentAlloy.outputType != null)
-				{
-					if(te.currentAlloy.outputAmount >= 100)
-					{
-						entityplayer.inventory.addItemStackToInventory(new ItemStack(Item.itemsList[te.currentAlloy.outputType.MeltedItemID], 1));
-						te.currentAlloy.outputAmount -= 100;
-					}
-					else
-					{
-						entityplayer.inventory.addItemStackToInventory(new ItemStack(Item.itemsList[te.currentAlloy.outputType.MeltedItemID], 1, 100-te.currentAlloy.outputAmount));
-						te.currentAlloy.outputAmount = 0;
-					}
-					is.stackSize--;
-				}
-			}
-			else
-			{
-				if(te.currentAlloy != null)
-				{
-					Iterator iter = te.currentAlloy.AlloyIngred.iterator();
-					if(te.currentAlloy.outputType != null)
-						entityplayer.sendChatToPlayer(te.currentAlloy.outputType.Name + ":");
-					else
-						entityplayer.sendChatToPlayer("Unknown:");
-					while(iter.hasNext())
-					{
-						AlloyMetal am = (AlloyMetal)iter.next();
-						entityplayer.sendChatToPlayer(am.metalType.Name + ": " + Math.round(am.metal * 100d)/100d + "%");
-					}
-				}
-			}*/
-			
 			entityplayer.openGui(TerraFirmaCraft.instance, 37, world, i, j, k);
 		}
 		return true;
 	}
+
+	@Override
+	public void breakBlock(World world, int i, int j, int k, int par5, int par6)
+	{
+		TECrucible te = (TECrucible)world.getBlockTileEntity(i, j, k);
+
+		if (te != null)
+		{
+			ItemStack is = new ItemStack(Block.blocksList[par5], 1);
+			NBTTagCompound nbt = writeCrucibleToNBT(te);
+			is.setTagCompound(nbt);
+			EntityItem ei = new EntityItem(world,i,j,k,is);
+			world.spawnEntityInWorld(ei);
+		}
+		super.breakBlock(world, i, j, k, par5, par6);
+	}
 	
+	@Override
+	protected void dropBlockAsItem_do(World par1World, int par2, int par3, int par4, ItemStack par5ItemStack)
+    {
+        /*if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+        {
+        	TECrucible te = (TECrucible)par1World.getBlockTileEntity(par2, par3, par4);
+
+    		if (te != null)
+    		{
+    			NBTTagCompound nbt = writeCrucibleToNBT(te);
+    			par5ItemStack.setTagCompound(nbt);
+    		}
+            float f = 0.7F;
+            double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+            EntityItem entityitem = new EntityItem(par1World, par2 + d0, par3 + d1, par4 + d2, par5ItemStack);
+            entityitem.delayBeforeCanPickup = 10;
+            par1World.spawnEntityInWorld(entityitem);
+        }*/
+    }
+
+	public NBTTagCompound writeCrucibleToNBT(TECrucible te)
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+
+		nbt.setInteger("temp", te.temperature);
+
+		NBTTagList nbttaglist = new NBTTagList();
+		Iterator iter = te.metals.values().iterator();
+		while(iter.hasNext())
+		{
+			MetalPair m = (MetalPair) iter.next();
+			if(m != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setInteger("ID", m.type.IngotID);
+				nbttagcompound1.setShort("Amount", m.amount);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbt.setTag("Metals", nbttaglist);
+
+		nbttaglist = new NBTTagList();
+		for(int i = 0; i < te.storage.length; i++)
+		{
+			if(te.storage[i] != null)
+			{
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte)i);
+				te.storage[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+
+		nbt.setTag("Items", nbttaglist);
+		return nbt;
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving player, ItemStack is)
+	{
+		super.onBlockPlacedBy(world, i, j, k, player, is);
+		TECrucible te = (TECrucible)world.getBlockTileEntity(i, j, k);
+
+		if (te != null && is.hasTagCompound())
+		{
+			te.readFromItemNBT(is.getTagCompound());
+		}
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {

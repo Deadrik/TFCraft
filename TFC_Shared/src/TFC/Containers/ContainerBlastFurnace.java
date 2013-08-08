@@ -15,7 +15,6 @@ public class ContainerBlastFurnace extends ContainerTFC
     private float firetemp;
     private int orecount;
     private int coalcount;
-    private float outcount;
 
 
 	public ContainerBlastFurnace(InventoryPlayer inventoryplayer, TEBlastFurnace tileentityforge, World world, int x, int y, int z)
@@ -23,7 +22,7 @@ public class ContainerBlastFurnace extends ContainerTFC
 	    bloomery = tileentityforge;
 	    firetemp = 0;
 		//Input slot
-	    addSlotToContainer(new Slot(tileentityforge, 0, 134, 52));
+	    //addSlotToContainer(new Slot(tileentityforge, 0, 134, 52));
 	    
 	    addSlotToContainer(new SlotTuyere(tileentityforge, 1, 153, 7));
 
@@ -100,13 +99,11 @@ public class ContainerBlastFurnace extends ContainerTFC
             }
         }
         
-        if(outcount != this.bloomery.outCount || orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
+        if(orecount != this.bloomery.oreCount || coalcount != this.bloomery.charcoalCount || updatecounter == 1000)
         {
         	bloomery.broadcastPacketInRange(bloomery.createUpdatePacket());
             updatecounter = 0;
         }
-        
-        outcount = this.bloomery.outCount;
         orecount = this.bloomery.oreCount;
         coalcount = this.bloomery.charcoalCount;
         firetemp = this.bloomery.fireTemperature;

@@ -45,9 +45,9 @@ public class GuiBlastFurnace extends GuiContainer
         scale = bloomery.getCharcoalCountScaled(80);
         drawTexturedModalRect(w + 40, h + 43, 176, 0, scale+1, 8);
         
-        scale = bloomery.getOutCountScaled(80);
+        /*scale = bloomery.getOutCountScaled(80);
         drawTexturedModalRect(w + 40, h + 61, 176, 0, scale+1, 8);
-        drawTexturedModalRect(w + 40, h + 61, 176, 8, scale+1, 8);
+        drawTexturedModalRect(w + 40, h + 61, 176, 8, scale+1, 8);*/
 	}
 	
 	@Override

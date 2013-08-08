@@ -55,10 +55,9 @@ public class BlockBlastFurnace extends BlockTerraContainer
 			world.setBlockToAir(i, j, k);
 			world.spawnEntityInWorld(new EntityItem(world,i,j,k, new ItemStack(this, 1)));
 		}
-		else if((TEBlastFurnace)world.getBlockTileEntity(i, j, k)!=null)
+		else if(world.getBlockTileEntity(i, j, k) != null)
 		{
-			TEBlastFurnace te;
-			te = (TEBlastFurnace)world.getBlockTileEntity(i, j, k);
+			TEBlastFurnace te = (TEBlastFurnace)world.getBlockTileEntity(i, j, k);
 			ItemStack is = entityplayer.getCurrentEquippedItem();
 
 			if(te.isValid)
