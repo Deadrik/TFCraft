@@ -1,16 +1,10 @@
 package TFC.Handlers;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -49,7 +43,7 @@ public class EntityLivingHandler
 				FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
-				TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, getStatusPacket(foodstats));
+				TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
 				
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f && player.worldObj.difficultySetting >= 1)
 				{
@@ -147,28 +141,4 @@ public class EntityLivingHandler
     {
 		return Math.min(1000+(player.experienceLevel * TFC_Settings.HealthGainRate), TFC_Settings.HealthGainCap);
     }
-	
-	private Packet getStatusPacket(FoodStatsTFC foodstats)
-	{
-		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
-		DataOutputStream dos=new DataOutputStream(bos);
-		Packet250CustomPayload pkt=new Packet250CustomPayload();
-		try 
-		{
-			//The packet type sent determines who is expected to process this packet, the client or the server.
-			dos.writeByte(PacketHandler.Packet_Player_Status);
-			dos.writeFloat(foodstats.foodLevel);
-			dos.writeFloat(foodstats.waterLevel);
-			
-			pkt.channel="TerraFirmaCraft";
-			pkt.data = bos.toByteArray();
-			pkt.length= pkt.data.length;
-			pkt.isChunkDataPacket=false;
-		} 
-		catch (IOException e) 
-		{
-
-		}
-		return pkt;
-	}
 }

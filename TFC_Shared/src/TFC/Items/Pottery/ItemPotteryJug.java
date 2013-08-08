@@ -2,6 +2,7 @@ package TFC.Items.Pottery;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -29,20 +30,17 @@ public class ItemPotteryJug extends ItemPotteryBase
         if (!par2World.isRemote)
         {
             if(par1ItemStack.getItemDamage() == 2)
-            	TFC_Core.getPlayerFoodStats(par3EntityPlayer).restoreWater(par3EntityPlayer, 2400);
-        }
-
-        if (!par3EntityPlayer.capabilities.isCreativeMode && par1ItemStack.getItemDamage() > 1)
-        {
-        	--par1ItemStack.stackSize;
-        	ItemStack is = par1ItemStack.copy();
-        	is.setItemDamage(1);
-            if (par1ItemStack.stackSize <= 0)
+            	TFC_Core.getPlayerFoodStats(par3EntityPlayer).restoreWater(par3EntityPlayer, 8000);
+            
+            if (par1ItemStack.getItemDamage() > 1)
             {
-                return is;
+            	if(par2World.rand.nextInt(25) == 0)
+            		par1ItemStack = null;
+            	else
+            	{
+            		par1ItemStack.setItemDamage(1);
+            	}
             }
-
-            par3EntityPlayer.inventory.addItemStackToInventory(is);
         }
 
         return par1ItemStack;
@@ -76,6 +74,18 @@ public class ItemPotteryJug extends ItemPotteryBase
     		entity.setItemInUse(is, this.getMaxItemUseDuration(is));
         return is;
     }
+    
+    @Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
+	{
+		int id = world.getBlockId(x, y+1, z);
+		if(!world.isRemote && (id == Block.waterStill.blockID || id == Block.waterMoving.blockID))
+		{
+			if(itemstack.getItemDamage() == 1)
+				itemstack.setItemDamage(2);
+		}
+		return false;
+	}
 
 	@Override
 	public Icon getIconFromDamage(int damage)

@@ -404,26 +404,33 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					Type = 2;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256){
+				else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.WoodenBucketWater) && liquidLevel < 256){
 					liquidLevel = Math.min(liquidLevel + 32, 256);
 					Type = 1;
 					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256){
+				else if ((Type == 0||Type == 1) && (itemstack.getItem() == TFCItems.RedSteelBucketWater) && liquidLevel < 256){
 					liquidLevel = Math.min(liquidLevel + 32, 256);
 					Type = 1;
 					itemstack.itemID = TFCItems.RedSteelBucketEmpty.itemID;
 				}
-				if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 256){
+				else if ((Type == 0||Type == 4) && itemstack.getItem() == Item.gunpowder && liquidLevel < 256){
 					liquidLevel = Math.min(liquidLevel + 1, 256);
 					Type = 4;
 					itemstack.stackSize-=1;
 					if(itemstack.stackSize==0)
 						itemstack=null;
 				}
-				if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize){
+				else if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize){
 					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
 					itemstack.itemID = alcohols[Type-5];
+				}
+				/*Fill pottery jug*/
+				else if (Type == 1 && (itemstack.getItem() == TFCItems.PotteryJug && itemstack.getItemDamage() == 1) && liquidLevel >= 16)
+				{
+					liquidLevel = Math.max(liquidLevel - 16, 0);
+					Type = 1;
+					itemstack.setItemDamage(2);
 				}
 				updateGui();
 			}
