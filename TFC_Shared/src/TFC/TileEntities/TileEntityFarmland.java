@@ -37,9 +37,9 @@ public class TileEntityFarmland extends NetworkTileEntity
         if(!worldObj.isRemote)
         {
             if(nutrientTimer <= 0)
-                nutrientTimer = TFC_Time.totalHours();
+                nutrientTimer = TFC_Time.getTotalHours();
             
-            if(nutrientTimer < TFC_Time.totalHours())
+            if(nutrientTimer < TFC_Time.getTotalHours())
             {
                 CropIndex crop = null;
                 float timeMultiplier = TFC_Time.daysInYear / 360f;

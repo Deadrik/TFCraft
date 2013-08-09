@@ -1,5 +1,7 @@
 package TFC.Entities.Mobs;
 
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -14,44 +16,41 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 
-public class EntityCowTFC extends EntityAnimalTFC
+public class EntityCowTFC extends EntityAnimal implements IAnimal
 {
 	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	protected int sex;
+	protected long hasMilkTime;
+	protected int age;
+	protected boolean pregnant;
+	protected int pregnancyTime;
+	protected int conception;
+	protected int mateSizeMod;
 
 	public EntityCowTFC(World par1World)
 	{
 		super(par1World);
+
+		pregnant = false;
+		pregnancyTime = 4 * TFC_Time.daysInMonth;
+		conception = 0;
+		mateSizeMod = 0;
+
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
+		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 0.2F));
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		this.tasks.addTask(6, this.aiEatGrass);
 		this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
-	}
-
-	public EntityCowTFC(World par1World,EntityAnimalTFC mother, float F_size)
-	{
-		super(par1World,mother,F_size);
-		this.setSize(0.9F, 1.3F);
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, 0.2F));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
-		this.tasks.addTask(5, this.aiEatGrass);
-		this.tasks.addTask(6, new EntityAIWander(this, 0.2F));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 	}
@@ -65,8 +64,13 @@ public class EntityCowTFC extends EntityAnimalTFC
 		{
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength)
 			{
-				EntityCowTFC baby = new EntityCowTFC(worldObj, this,mateSizeMod);
-				giveBirth(baby);
+				EntityCowTFC baby = (EntityCowTFC) createChild(this);
+				baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+				baby.rotationYawHead = baby.rotationYaw;
+				baby.renderYawOffset = baby.rotationYaw;
+				//entityanimal.initCreature();
+				worldObj.spawnEntityInWorld(baby);
+				baby.setGrowingAge( (int)TFC_Time.getTotalDays() + this.getNumberOfDaysToAdult());
 				pregnant = false;
 			}
 		}
@@ -94,6 +98,7 @@ public class EntityCowTFC extends EntityAnimalTFC
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger ("Sex", sex);
 	}
 
 	/**
@@ -103,6 +108,7 @@ public class EntityCowTFC extends EntityAnimalTFC
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readEntityFromNBT(par1NBTTagCompound);
+		sex = par1NBTTagCompound.getInteger("Sex");
 	}
 
 	/**
@@ -156,20 +162,15 @@ public class EntityCowTFC extends EntityAnimalTFC
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
-		int var4;
-
-		float ga = getGrowingAge();
-		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
-
-		if(ageMod > 0.9){
+		if(isAdult())
+		{
 			this.dropItem(TFCItems.Hide.itemID,1);
 		}
 
 		if (this.isBurning()) {
-			this.dropItem(Item.beefCooked.itemID, (int) (ageMod * this.size_mod * (15+this.rand.nextInt(10))));
+			this.dropItem(Item.beefCooked.itemID, (int) (getSize() * (15+this.rand.nextInt(10))));
 		} else {
-			this.dropItem(Item.beefRaw.itemID, (int) (ageMod * this.size_mod * (15+this.rand.nextInt(10))));
+			this.dropItem(Item.beefRaw.itemID, (int) (getSize() * (15+this.rand.nextInt(10))));
 		}
 
 	}
@@ -180,12 +181,11 @@ public class EntityCowTFC extends EntityAnimalTFC
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		float ga = getGrowingAge();
-		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
-
-		if(sex==1 && ageMod>0.95 && hasMilkTime < TFC_Time.getTotalTicks()){
+		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
+		{
 			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) {
+			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) 
+			{
 				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
 				hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked ones every day
 				return true;
@@ -194,12 +194,87 @@ public class EntityCowTFC extends EntityAnimalTFC
 		return super.interact(par1EntityPlayer);
 	}
 
-	/**
-	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-	 */
 	@Override
-	public void procreate(EntityAnimal par1EntityAnimal)
+	public GenderEnum getGender() 
 	{
-		worldObj.spawnEntityInWorld(new EntityCowTFC(this.worldObj));
+		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
+	}
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable entityageable) 
+	{
+		return new EntityCowTFC(worldObj);
+	}
+
+	@Override
+	public int getAge() 
+	{
+		return this.dataWatcher.getWatchableObjectInt(12);
+	}
+
+	@Override
+	public int getNumberOfDaysToAdult() 
+	{
+		return TFC_Time.daysInMonth * 3;
+	}
+
+	@Override
+	public boolean isAdult() 
+	{
+		return getAge() > getNumberOfDaysToAdult();
+	}
+
+	@Override
+	public float getSize() 
+	{
+		return 0.5f;
+	}
+
+	@Override
+	public boolean matesForLife() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isRutting() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isPregnant() 
+	{
+		return pregnant;
+	}
+
+	@Override
+	public EntityLiving getEntity() 
+	{
+		return this;
+	}
+
+	@Override
+	public boolean canMateWith(IAnimal animal) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void mate(IAnimal animal) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public IAnimal getMate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMate(IAnimal mate) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -62,8 +62,8 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 
 	public void setBirth()
 	{
-		birthTimeWood = TFC_Time.totalDays();
-		birthTimeLeaves = TFC_Time.totalDays();
+		birthTimeWood = TFC_Time.getTotalDays();
+		birthTimeLeaves = TFC_Time.getTotalDays();
 	}
 	public void setBirthWood(long t)
 	{
@@ -104,7 +104,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 		{
 			int blockID = TFCBlocks.fruitTreeWood.blockID;
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			if(birthTimeWood + GrowTime < TFC_Time.totalDays() && height < 3)
+			if(birthTimeWood + GrowTime < TFC_Time.getTotalDays() && height < 3)
 			{
 				float temp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromDays(birthTimeWood + GrowTime), xCoord, yCoord, zCoord);
 				int t = 1;
@@ -150,7 +150,7 @@ public class TileEntityFruitTreeWood extends TileEntity implements IInventory
 	            }
 			}
 			
-			if(birthTimeLeaves + 2 < TFC_Time.totalDays() && worldObj.rand.nextInt((int) leafGrowthRate) == 0 && worldObj.getBlockId(xCoord, yCoord+2, zCoord) != TFCBlocks.fruitTreeWood.blockID)
+			if(birthTimeLeaves + 2 < TFC_Time.getTotalDays() && worldObj.rand.nextInt((int) leafGrowthRate) == 0 && worldObj.getBlockId(xCoord, yCoord+2, zCoord) != TFCBlocks.fruitTreeWood.blockID)
             {
 				int m = meta & 7;
 				int bid = meta < 8 ? TFCBlocks.fruitTreeLeaves.blockID : TFCBlocks.fruitTreeLeaves2.blockID;

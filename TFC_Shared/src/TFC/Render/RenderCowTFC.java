@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import TFC.Reference;
-import TFC.Entities.EntityAnimalTFC;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Entities.Mobs.EntityCowTFC;
 
 public class RenderCowTFC extends RenderCow
@@ -42,9 +42,9 @@ public class RenderCowTFC extends RenderCow
 		this.renderCow((EntityCowTFC)par1Entity, par2, par4, par6, par8, par9);
 	}
 
-	protected ResourceLocation getTexture(EntityAnimalTFC entity)
+	protected ResourceLocation getTexture(EntityCowTFC entity)
 	{
-		if(entity.sex == 0) {
+		if(entity.getGender() == GenderEnum.MALE) {
 			return BullTex;
 		} else {
 			return CowTex;
