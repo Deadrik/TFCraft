@@ -334,7 +334,6 @@ public class EntityAnimalTFC extends EntityAnimal
 		return false;
 	}
 
-	@Override
 	public int getMaxHealth()
 	{
 		// TODO Auto-generated method stub

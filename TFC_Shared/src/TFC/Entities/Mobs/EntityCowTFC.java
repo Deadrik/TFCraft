@@ -2,6 +2,7 @@ package TFC.Entities.Mobs;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -98,9 +99,10 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public int getMaxHealth()
+	protected void func_110147_ax()
 	{
-		return 500;
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(500);//MaxHealth
 	}
 
 	@Override

@@ -98,7 +98,7 @@ public class FoodStatsTFC
 
 				if (this.foodLevel >= 25 && player.shouldHeal())
 				{
-					player.heal((int) (player.getMaxHealth()*0.01f));
+					player.heal((int) (player.func_110138_aP()*0.01f));
 
 					if (this.foodSaturationLevel > 0.0F)
 					{

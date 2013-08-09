@@ -51,11 +51,11 @@ public class RenderOverlayHandler
 		{
 			//Draw Health
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			
+
 			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 			Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png"));
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
-			float maxHealth = Minecraft.getMinecraft().thePlayer.getMaxHealth();
+			float maxHealth = Minecraft.getMinecraft().thePlayer.func_110138_aP();
 			float percentHealth = Minecraft.getMinecraft().thePlayer.func_110143_aJ()/maxHealth;
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
@@ -116,7 +116,7 @@ public class RenderOverlayHandler
 					TFC_Climate.getRainfall(xCoord, yCoord, zCoord), 
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
-			
+
 			event.left.add("Health: " + player.func_110143_aJ());
 		}
 	}

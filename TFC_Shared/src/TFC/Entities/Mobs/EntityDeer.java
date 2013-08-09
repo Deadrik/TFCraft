@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -108,11 +109,14 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 
 		super.onLivingUpdate();
 	}
+
 	@Override
-	public int getMaxHealth()
+	protected void func_110147_ax()
 	{
-		return 400;
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(400);//MaxHealth
 	}
+
 	@Override
 	protected void entityInit()
 	{

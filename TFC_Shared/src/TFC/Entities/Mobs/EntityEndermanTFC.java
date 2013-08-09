@@ -19,12 +19,6 @@ public class EntityEndermanTFC extends EntityEnderman implements ICausesDamage
 	}
 
 	@Override
-	public int getMaxHealth()
-	{
-		return 2000;
-	}
-
-	@Override
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();

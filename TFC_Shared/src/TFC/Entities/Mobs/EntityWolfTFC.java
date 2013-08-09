@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -116,10 +117,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
 	}
 	@Override
-	public int getMaxHealth()
+	protected void func_110147_ax()
 	{
-		return this.isTamed() ? 1000 : 400;
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.WolfDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);//MaxHealth
 	}
+
 	@Override
 	protected void entityInit()
 	{

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -108,18 +109,19 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		dataWatcher.updateObject (18, func_110143_aJ());
 	}
 
-
-	@Override
-	public int getMaxHealth ()
-	{
-		return 1200;
-	}
-
 	@Override
 	protected void entityInit ()
 	{
 		super.entityInit ();
 		dataWatcher.addObject (18,func_110143_aJ());
+	}
+
+	@Override
+	protected void func_110147_ax()
+	{
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.BearDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1200);//MaxHealth
 	}
 
 

@@ -43,9 +43,10 @@ public class EntitySkeletonTFC extends EntitySkeleton
 
 	}
 	@Override
-	public int getMaxHealth()
+	protected void func_110147_ax()
 	{
-		return 1000;
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);//MaxHealth
 	}
 
 	@Override

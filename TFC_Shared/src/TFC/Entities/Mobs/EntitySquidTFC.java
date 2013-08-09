@@ -1,47 +1,49 @@
 package TFC.Entities.Mobs;
 
-import TFC.TFCItems;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 
 public class EntitySquidTFC extends EntitySquid
 {
-    public EntitySquidTFC(World par1World)
-    {
-        super(par1World);
-        this.setSize(0.75F, 0.75F);
-    }
+	public EntitySquidTFC(World par1World)
+	{
+		super(par1World);
+		this.setSize(0.75F, 0.75F);
+	}
 
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere()
-    {
-        return this.posY > 128.0D && this.posY < 145.0D && this.worldObj.checkNoEntityCollision(this.boundingBox);
-    }
-    
-    @Override
-    public int getMaxHealth()
-    {
-        return 400;
-    }
+	/**
+	 * Checks if the entity's current position is a valid location to spawn this entity.
+	 */
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		return this.posY > 128.0D && this.posY < 145.0D && this.worldObj.checkNoEntityCollision(this.boundingBox);
+	}
 
-    /**
-     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
-     * par2 - Level of Looting used to kill this mob.
-     */
-    @Override
-    protected void dropFewItems(boolean par1, int par2)
-    {
-        int j = this.rand.nextInt(3 + par2) + 1;
+	@Override
+	protected void func_110147_ax()
+	{
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(400);//MaxHealth
+	}
 
-        for (int k = 0; k < j; ++k)
-        {
-            this.entityDropItem(new ItemStack(Item.dyePowder, 1, 0), 0.0F);
-        }
-        this.dropItem(TFCItems.CalamariRaw.itemID,(int)((2+rand.nextInt(5))));
-    }
+	/**
+	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
+	 * par2 - Level of Looting used to kill this mob.
+	 */
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		int j = this.rand.nextInt(3 + par2) + 1;
+
+		for (int k = 0; k < j; ++k)
+		{
+			this.entityDropItem(new ItemStack(Item.dyePowder, 1, 0), 0.0F);
+		}
+		this.dropItem(TFCItems.CalamariRaw.itemID,((2+rand.nextInt(5))));
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -79,6 +80,13 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 	}
 
+	@Override
+	protected void func_110147_ax()
+	{
+		super.func_110147_ax();
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(400);//MaxHealth
+	}
+
 	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
@@ -123,11 +131,7 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 
 		super.onLivingUpdate();
 	}
-	@Override
-	public int getMaxHealth()
-	{
-		return 400;
-	}
+
 	@Override
 	protected void entityInit()
 	{
