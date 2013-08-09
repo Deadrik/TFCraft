@@ -17,11 +17,11 @@ public class TFC_Climate
 	private static final float[] zFactorCache = new float[30001];
 	private static final float[][] monthTempCache = new float[12][30001];
 	private static final float[][] monthTempFactorCache = new float[12][30001];
-	
+
 	/**
 	 * All Temperature related code
 	 */
-	
+
 	public static void initCache()
 	{
 		for(int zCoord = 0; zCoord < getMaxZPos() + 1; ++zCoord)
@@ -30,124 +30,124 @@ public class TFC_Climate
 			float z = zCoord;
 
 			factor = (getMaxZPos()-z)/(getMaxZPos());
-			
+
 			zFactorCache[zCoord] = factor;
-			
+
 			for(int month = 0; month < 12; ++month)
 			{
 				final float MAXTEMP = 35F;
 
 				double angle = factor * (Math.PI / 2);
 				double latitudeFactor = Math.cos(angle);
-				
+
 				switch(month)
 				{
-					case 9:
-					case 11:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
-						break;
-					}
-					case 0:
-					case 8:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
-						break;
-					}
-					case 1:
-					case 7:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
-						break;
-					}
-					case 2:
-					case 6:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
-						break;
-					}
-					case 3:
-					case 5:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
-						break;
-					}
-					case 4:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
-						break;
-					}
-					case 10:
-					{
-						monthTempCache[month][zCoord] = (float)(MAXTEMP-15*latitudeFactor - (latitudeFactor*60));
-						break;
-					}
+				case 9:
+				case 11:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -12.5*latitudeFactor- (latitudeFactor*53));
+					break;
 				}
-				
+				case 0:
+				case 8:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -10*latitudeFactor- (latitudeFactor*46));
+					break;
+				}
+				case 1:
+				case 7:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -7.5*latitudeFactor- (latitudeFactor*40));
+					break;
+				}
+				case 2:
+				case 6:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP - 5*latitudeFactor- (latitudeFactor*33));
+					break;
+				}
+				case 3:
+				case 5:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -2.5*latitudeFactor- (latitudeFactor*27)); 
+					break;
+				}
+				case 4:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP -1.5*latitudeFactor- (latitudeFactor*27));
+					break;
+				}
+				case 10:
+				{
+					monthTempCache[month][zCoord] = (float)(MAXTEMP-15*latitudeFactor - (latitudeFactor*60));
+					break;
+				}
+				}
+
 				float diff = (1-factor) / 6;
-				
+
 				switch(month)
 				{
-					case 11:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*4);
-						break;
-					}
-					case 0:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*3);
-						break;
-					}
-					case 1:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*2);
-						break;
-					}
-					case 2:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*1);
-						break;
-					}
-					case 3:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff);
-						break;
-					}
-					case 4:
-					{
-						monthTempFactorCache[month][zCoord] = 1F;
-						break;
-					}
-					case 5:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*1.2f);
-						break;
-					}
-					case 6:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*2.4f);
-						break;
-					}
-					case 7:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*3.6f);
-						break;
-					}
-					case 8:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*4.8f);
-						break;
-					}
-					case 9:
-					{
-						monthTempFactorCache[month][zCoord] = factor;
-						break;
-					}
-					case 10:
-					{
-						monthTempFactorCache[month][zCoord] = 1-(diff*5);
-						break;
-					}
+				case 11:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*4);
+					break;
+				}
+				case 0:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*3);
+					break;
+				}
+				case 1:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*2);
+					break;
+				}
+				case 2:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*1);
+					break;
+				}
+				case 3:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff);
+					break;
+				}
+				case 4:
+				{
+					monthTempFactorCache[month][zCoord] = 1F;
+					break;
+				}
+				case 5:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*1.2f);
+					break;
+				}
+				case 6:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*2.4f);
+					break;
+				}
+				case 7:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*3.6f);
+					break;
+				}
+				case 8:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*4.8f);
+					break;
+				}
+				case 9:
+				{
+					monthTempFactorCache[month][zCoord] = factor;
+					break;
+				}
+				case 10:
+				{
+					monthTempFactorCache[month][zCoord] = 1-(diff*5);
+					break;
+				}
 				}
 			}
 		}
@@ -157,9 +157,9 @@ public class TFC_Climate
 	{
 		if(zCoord < 0)
 			zCoord = -zCoord;
-		
+
 		if(zCoord > getMaxZPos()) zCoord = (getMaxZPos());
-		
+
 		return zFactorCache[zCoord];
 	}
 
@@ -167,61 +167,51 @@ public class TFC_Climate
 	{
 		return getTemp(TFC_Time.currentDay, x, z);
 	}
+	//new method to generate temperature; basically, it calculates the tilt of the earth to find out the temperature for a given day
+	protected static float getTemperature(int day, int x, int z){
+		float latitude = 90 * (Helper.clamp_float(z, -30000, 30000))/-30000;
+		float adjustedDayOfYear = (day + (TFC_Time.daysInMonth * 2))% TFC_Time.daysInYear;
+		float adjustedLatitude = (float) ((Math.cos(day/TFC_Time.daysInYear)*25)+latitude);
+		float calculatedTemperature = (float) ((Math.cos(adjustedLatitude*(Math.PI/90f))*29.5f)+4.5f);
+		//-25 is the default temperature for 90 degrees N/S
+		if(adjustedLatitude >90 || adjustedLatitude < 90){
+			calculatedTemperature = -25 - (calculatedTemperature + 25); 
+		}
+
+		return calculatedTemperature;
+	}
 
 	protected static float getTemp(int day, int x, int z)
 	{
 		if(manager!= null)
 		{
-			
-			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-20;
 
-			float rainMod = 1-manager.getRainfallLayerAt(x, z).floatdata1/16000;
+			float zTemp = getTemperature(day,x,z);
 
-			int _month = TFC_Time.getMonthFromDayOfYear(day);
-			int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
-
-			float mod = getMonthTempFactor(_month, z);
-			float modLast = getMonthTempFactor(_lastmonth, z);
+			float rainMod = 1-getRainfall(x,150,z)/16000;
 			int day2 = day - ((day/TFC_Time.daysInMonth)*TFC_Time.daysInMonth);
 			int hour = (int) TFC_Time.getHour();
+			float hourMod = 1;
+			float dailyTemp = 0;
 
-			if(hour < 0)
-				hour = 23 + hour;
-			float hourMod = 0;
+			if(day == TFC_Time.currentDay){
+				dailyTemp = WeatherManager.getInstance().getDailyTemp(day);
+				if(hour < 0)
+					hour = 23 + hour;
+				
 
-			if(hour < 12)
-				hourMod = ((float)hour/11) * 0.3F;
-			else
-				hourMod = 0.3F - (((float)(hour-12)/11) * 0.3F);
+				if(hour < 12)
+					hourMod = ((float)hour/11) * 0.3F;
+				else
+					hourMod = 0.3F - (((float)(hour-12)/11) * 0.3F);
+			}
 
-			float monthMod = 0;
 			float temp = 0;
 
-			float dailyTemp = WeatherManager.getInstance().getDailyTemp(day);
+			
+			temp += (hourMod*(zTemp + dailyTemp));
+			temp += (8*rainMod);
 
-			if(modLast > mod)
-			{
-				monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
-				monthMod = (modLast - monthMod);
-
-				temp += getMonthTemp(_month,z) + dailyTemp;//((zTemp + dailyTemp));
-				if(temp < 0)monthMod = 1 - monthMod;
-				temp *= monthMod;
-				temp += (hourMod*(zTemp + dailyTemp));
-				temp += (8*rainMod)*zMod;
-			}
-			else
-			{
-				monthMod = ((modLast-mod)/TFC_Time.daysInMonth)*day2;
-				monthMod = (modLast + monthMod);
-
-				temp += getMonthTemp(_month,z) + dailyTemp;//((zTemp + dailyTemp));
-				if(temp < 0)monthMod = 1 - monthMod;
-				temp *= monthMod;
-				temp += (hourMod*(zTemp + dailyTemp));
-				temp += (8*rainMod)*zMod;
-			}
 
 			return temp;
 		}
@@ -232,50 +222,7 @@ public class TFC_Climate
 	{
 		if(manager!= null)
 		{
-			float zMod = getZFactor(z);
-			float zTemp = (zMod * getMaxTemperature())-20;
-
-
-			float rain = manager.getRainfallLayerAt(x, z).floatdata1;
-			float rainMod = 1-(rain/4000);
-
-			int _month = TFC_Time.getMonthFromDayOfYear(day);
-			int _lastmonth = TFC_Time.getMonthFromDayOfYear(day-TFC_Time.daysInMonth);
-
-			float monthModifier = getMonthTempFactor(_month, z);
-			float lastMonthModifier = getMonthTempFactor(_lastmonth, z);
-
-			int dayOfMonth =  TFC_Time.getDayOfMonthFromDayOfYear(day);
-
-			float hourMod = 0.2f;
-
-			float monthMod = 0;
-			float temp = 0;
-
-			if(lastMonthModifier > monthModifier)
-			{
-				monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
-				monthMod = (lastMonthModifier - monthMod);
-
-				temp += getMonthTemp(_month,z);//((zTemp));
-				if(temp < 0)monthMod = 1 - monthMod;
-				temp *= monthMod;
-				temp += (hourMod*(zTemp));
-				temp += (8*rainMod)*zMod;
-			}
-			else
-			{
-				monthMod = ((lastMonthModifier-monthModifier)/TFC_Time.daysInMonth)*dayOfMonth;
-				monthMod = (lastMonthModifier + monthMod);
-
-				temp += getMonthTemp(_month,z);//((zTemp));
-				if(temp < 0)monthMod = 1 - monthMod;
-				temp *= monthMod;
-				temp += (hourMod*(zTemp));
-				temp += (8*rainMod)*zMod;
-			}
-
-			return temp;
+			return getTemp(TFC_Time.daysInYear/2,x,z);
 		}
 		return -10;
 	}
@@ -284,9 +231,9 @@ public class TFC_Climate
 	{
 		if(z < 0)
 			z = -z;
-		
+
 		if(z > getMaxZPos()) z = (getMaxZPos());
-		
+
 		return monthTempCache[month][z];
 	}
 
@@ -294,9 +241,9 @@ public class TFC_Climate
 	{
 		if(z < 0)
 			z = -z;
-		
+
 		if(z > getMaxZPos()) z = (getMaxZPos());
-		
+
 		return monthTempFactorCache[month][z];
 	}
 
@@ -389,14 +336,131 @@ public class TFC_Climate
 	 */
 	public static int getGrassColor(World world, int x, int y, int z)
 	{
+		float average;
 		float temp = (getTemp(x, z)/getMaxTemperature());
+		
 
 		float rain = (TFC_Climate.getRainfall(x, y, z) / 8000);
 
-		double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
-		double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
+		//double var1 = Helper.clamp_float(temp, 0.0F, 1.0F);
+		//double var3 = Helper.clamp_float(rain, 0.0F, 1.0F);
 
-		return ColorizerGrassTFC.getGrassColor(var1, var3);
+		double var0 = Helper.clamp_float(temp, 0.0F, 1.0F);
+		double var2 = Helper.clamp_float(rain, 0.0F, 1.0F);
+
+		int g = (int)(var0 < 0.3 ? 100*(1.3+var0):(var0*50)+160);		
+
+		average = getAverageRedGrass(rain,temp);		
+		int r = (int) Math.min(g*average,255);
+		average = getAverageBlueGrass(rain,temp);
+		int b = (int) Math.min(g*average,255);
+		
+		int finalColour = (r *65536) + (g*256) + b;
+		int color = manager.getBiomeGenAt(x, z).color;
+		return finalColour;//(r *65536) + (g*256) + b;
+		//return ColorizerGrassTFC.getGrassColor(var1, var3);
+	}
+	
+	public static float getAverageRedGrass(float rain, float temp){
+		//for calculating R and B values, temporary variables
+				float tempTemp = temp*2;
+				float rainTemp = rain*2;
+				
+				//the red ratio is calculated from a 3x3 table of ratios obtained from real-life images based on temperature and humidity. The in-game
+				// temp and rain is used to find an average red ratio from the table
+				// four of the 9 levels are used for any calculation, the following variables representing them
+				float bottomLeft;
+				float bottomRight;
+				float topLeft;
+				float topRight;
+				
+				if(tempTemp > 1 && rainTemp > 1){
+					tempTemp--;
+					rainTemp--;
+					bottomLeft = 1;
+					bottomRight = 0.56f;
+					topLeft = 1;
+					topRight = 0.722f;
+				}
+				else if(tempTemp > 1 && rainTemp <= 1){
+					tempTemp--;
+					bottomLeft = 1;
+					bottomRight = 1;
+					topLeft = 1.2425f;
+					topRight = 1;
+				}
+				else if(tempTemp <= 1 && rainTemp > 1){
+					rainTemp--;
+					bottomLeft = 0.7f;
+					bottomRight = 0.1f;
+					topLeft = 1;
+					topRight = 0.56f;
+				}
+				else{
+					bottomLeft = 1.25f;
+					bottomRight = 0.7f;
+					topLeft = 1;
+					topRight = 1;
+				}
+				
+				//Now for the calculations that determine what the final red ratio will be.
+				float point1 = (bottomLeft - bottomRight)*rainTemp + bottomRight;
+				float point2 = (topLeft - topRight)*rainTemp + topRight;
+				float point3 = (topRight - bottomRight)*tempTemp + bottomRight;
+				float point4 = (topLeft - bottomLeft)*tempTemp + bottomLeft;
+				
+				return (((point1 - point2)*tempTemp + point2)+((point3 - point4)*rainTemp + point4))/2f;
+	}
+	
+	public static float getAverageBlueGrass(float rain, float temp){
+		//for calculating R and B values, temporary variables
+				float tempTemp = temp*2;
+				float rainTemp = rain*2;
+				
+				//the blue ratio is calculated from a 3x3 table of ratios obtained from real-life images based on temperature and humidity. The in-game
+				// temp and rain is used to find an average red ratio from the table
+				// four of the 9 levels are used for any calculation, the following variables representing them
+				float bottomLeft;
+				float bottomRight;
+				float topLeft;
+				float topRight;
+				
+				if(tempTemp > 1 && rainTemp > 1){
+					tempTemp--;
+					rainTemp--;
+					bottomLeft = 0.5f;
+					bottomRight = 0.63f;
+					topLeft = 0.5f;
+					topRight = 0.42f;
+				}
+				else if(tempTemp > 1 && rainTemp <= 1){
+					tempTemp--;
+					bottomLeft = 0.54f;
+					bottomRight = 0.5f;
+					topLeft = 0.6425f;
+					topRight = 0.5f;
+				}
+				else if(tempTemp <= 1 && rainTemp > 1){
+					rainTemp--;
+					bottomLeft = 0.1f;
+					bottomRight = 0f;
+					topLeft = 0.5f;
+					topRight = 0.63f;
+				}
+				else{
+					bottomLeft = 0.65f;
+					bottomRight = 0.1f;
+					topLeft = 0.54f;
+					topRight = 0.5f;
+				}
+				
+				//Now for the calculations that determine what the final red ratio will be.
+				float point1 = (bottomLeft - bottomRight)*rainTemp + bottomRight;
+				float point2 = (topLeft - topRight)*rainTemp + topRight;
+				float point3 = (topRight - bottomRight)*tempTemp + bottomRight;
+				float point4 = (topLeft - bottomLeft)*tempTemp + bottomLeft;
+				
+				return (((point1 - point2)*tempTemp + point2)+((point3 - point4)*rainTemp + point4))/2f;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -425,61 +489,53 @@ public class TFC_Climate
 
 	public static float getRainfall(int x, int y, int z)
 	{
-		return manager.getRainfallLayerAt(x, z).floatdata1;
+		return /*(Helper.clamp_float(getTemp(x,z), 0, 25)/25f)**/8000*(float)Math.abs(Math.sin((((Math.min(Math.abs(z+0d),30000)/30000d)*(float)Math.PI/2f)+Math.PI/6f)*3));//manager.getRainfallLayerAt(x, z).floatdata1;
 	}
 
 	public static float getTerrainAdjustedRainfall(int x, int y, int z)
 	{
-		float rain = manager.getRainfallLayerAt(x, z).floatdata1;
+		//float rain = manager.getRainfallLayerAt(x, z).floatdata1;
+		float rain = (Helper.clamp_float(getTemp(x,z), 0, 25)/25f)*8000*(float)Math.abs(Math.sin((((Math.min(Math.abs(z+0d),30000)/30000d)*(float)Math.PI/2f)+Math.PI/6f)*3));
 		ArrayList biomes = new ArrayList<TFCBiome>();
 		biomes.add(TFCBiome.river);
 		biomes.add(TFCBiome.ocean);
 		biomes.add(TFCBiome.swampland);
 
-		float rainModWest = 1;
-		float rainModNorth = 1;
-		float rainModSouth = 1;
-		float rainModEast = 1;
+		float rainMod = 1;
+
+		float latitude = (float) ((Math.min(Math.abs(z+0d),30000)/30000d)*90);
 
 		BiomeGenBase biome = null;
 
 
-		for(int i = 0; i < 8; i++)
-		{
-			biome = worldObj.getBiomeGenForCoords((x-512)+(64*i), z);
+		if((latitude >=0 && latitude < 30)||latitude > 60){
 
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
-				rainModWest = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModWest = 1 + (i * 0.125f);
+			for(int i = 0; i < 16; i++)
+			{
+				biome = worldObj.getBiomeGenForCoords((x+1024)-(64*i), z);				
+				if(biome.biomeID == TFCBiome.Mountains.biomeID)
+					rainMod -= (i * 18);
+				else if(biome.biomeID == TFCBiome.ocean.biomeID)
+					rainMod += (i * 25);
 
+			}
 		}
-		for(int i = 0; i < 8; i++)
-		{
-			biome =  worldObj.getBiomeGenForCoords(x, (z+512)-(64*i));
 
-			if(biome.biomeID == TFCBiome.Mountains.biomeID)
-				rainModSouth = 1 - (i * 0.0625f);
-			else if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModSouth = 1 + (i * 0.125f);
+		if(latitude >=30 && latitude <= 60){
 
+			for(int i = 0; i < 16; i++)
+			{
+				biome = worldObj.getBiomeGenForCoords((x-1024)+(64*i), z);
+
+				if(biome.biomeID == TFCBiome.Mountains.biomeID)
+					rainMod -= (i * 18);
+				else if(biome.biomeID == TFCBiome.ocean.biomeID)
+					rainMod += (i * 25);
+
+			}
 		}
-		for(int i = 0; i < 2; i++)
-		{
-			biome = worldObj.getBiomeGenForCoords(x, (z-128)+(64*i));
 
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModNorth +=  0.35f;
-
-		}
-		for(int i = 0; i < 2; i++)
-		{
-			biome = worldObj.getBiomeGenForCoords((x+128)-(64*i), z);
-
-			if(biome.biomeID == TFCBiome.ocean.biomeID)
-				rainModEast += 0.35f;
-
-		}
+		
 
 		float addMoisture = 1;
 		for(int i = -2; i <= 2 && addMoisture == 1; i++)
@@ -493,7 +549,7 @@ public class TFC_Climate
 		}
 
 
-		return rain*((rainModEast + rainModWest + rainModNorth + rainModSouth + addMoisture)/5);
+		return (rain + (rainMod * addMoisture))/2f;
 	}
 
 	public static int getTreeLayer(int x, int y, int z, int index)
