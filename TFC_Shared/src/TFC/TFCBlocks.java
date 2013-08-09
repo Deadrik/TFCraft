@@ -346,7 +346,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Pottery, "ClayPottery");
 		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
-		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Crucible");
+		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 	}
 	
 	public static void LoadBlocks()

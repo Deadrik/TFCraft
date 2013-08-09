@@ -63,7 +63,7 @@ public class GuiCrucible extends GuiContainer
 				m = Math.round(m * 100d)/100d;
 				if(te.currentAlloy.AlloyIngred.get(c).metalType != null)
 					this.fontRenderer.drawString(EnumChatFormatting.DARK_GRAY+StringUtil.localize("gui.metal." + te.currentAlloy.AlloyIngred.get(c).metalType.Name.replace(" ", "")) + 
-						": "+ EnumChatFormatting.GREEN + m + "%", 7,18 + 10 * (c),0x000000);
+						": "+ EnumChatFormatting.DARK_GREEN + m + "%", 7,18 + 10 * (c),0x000000);
 			}
 		}
 

@@ -19,8 +19,8 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
+import TFC.Core.Metal.MetalPair;
 import TFC.TileEntities.TECrucible;
-import TFC.TileEntities.TECrucible.MetalPair;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -19,7 +19,6 @@ import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 
 public class ItemTerra extends Item implements ISize
@@ -143,9 +142,6 @@ public class ItemTerra extends Item implements ISize
 	{
 		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 		ItemTerra.addSizeInformation(this, arraylist);
-
-		if(TFC_Settings.enableDebugMode)
-			arraylist.add(getUnlocalizedName(is));
 
 		addHeatInformation(is, arraylist);
 

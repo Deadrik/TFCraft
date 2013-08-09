@@ -18,7 +18,6 @@ import TFC.API.ISize;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -80,9 +79,6 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
-		
-		if(TFC_Settings.enableDebugMode)
-			arraylist.add(getUnlocalizedName(is));
 		
 		if (is.hasTagCompound())
 		{

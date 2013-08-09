@@ -28,6 +28,7 @@ import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
+import TFC.Core.Metal.MetalPair;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.Handlers.PacketHandler;
 import TFC.Items.ItemMeltedMetal;
@@ -254,7 +255,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			MetalPair m = (MetalPair) iter.next();
 			if(m != null)
 			{
-				a.add(new AlloyMetal(m.type, ((float)m.amount/(float)totalAmount) * 100f));
+				a.add(new AlloyMetal(m.type, ((float)m.amount/totalAmount) * 100f));
 			}
 		}
 
@@ -303,16 +304,6 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	}
 
-	public class MetalPair
-	{
-		public Metal type;
-		public short amount;
-		public MetalPair(Metal t, short amnt)
-		{
-			type = t;
-			amount = amnt;
-		}
-	}
 
 	@Override
 	public int getSizeInventory() {
