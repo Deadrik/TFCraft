@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;
+import net.minecraft.network.NetServerHandler;
 import net.minecraft.network.packet.NetHandler;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet1Login;
@@ -100,7 +101,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			pkt.length=bos.size();
 			pkt.isChunkDataPacket=false;
 
-			//((NetServerHandler)netHandler).sendPacketToPlayer(pkt);
+			((NetServerHandler)netHandler).sendPacketToPlayer(pkt);
 		}
 	}
 

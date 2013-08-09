@@ -1,14 +1,13 @@
 package TFC.Entities.Mobs;
 
-import java.util.Iterator;
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIBeg;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -26,14 +25,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_MobDamage;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAIBegTFC;
-import TFC.Entities.AI.EntityAIHurtByTargetTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 
 public class EntityWolfTFC extends EntityWolf implements IAnimal
@@ -60,7 +56,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	protected long animalID;
 	protected int sex;
 	protected int hunger;
-	protected long hasMilkTime;
 	protected int age;
 	protected boolean pregnant;
 	protected int pregnancyTime;
@@ -82,12 +77,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1, 10.0F, 2.0F));
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
 		this.tasks.addTask(7, new EntityAIWander(this, 1));
-		this.tasks.addTask(8, new EntityAIBegTFC(this, 8.0F));
+		this.tasks.addTask(8, new EntityAIBeg(this, 8.0F));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
-		this.targetTasks.addTask(3, new EntityAIHurtByTargetTFC(this, true));
+		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
@@ -120,98 +115,44 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.WolfDamage);
 		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);//MaxHealth
 	}
 
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-	}
-
-	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-	 * prevent them from trampling crops
-	 */
-	@Override
-	protected boolean canTriggerWalking()
-	{
-		return false;
-	}
 
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setBoolean("Angry", this.isAngry());
+		super.writeEntityToNBT(nbt);
+		nbt.setBoolean("Angry", this.isAngry());
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setLong("ConceptionTime",conception);
+		nbt.setInteger("Age", getAge());
 	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		this.setAngry(par1NBTTagCompound.getBoolean("Angry"));
-	}
-
-	/**
-	 * Determines if an entity can be despawned, used on idle far away entities
-	 */
-	@Override
-	protected boolean canDespawn()
-	{
-		return this.isAngry();
-	}
-
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound()
-	{
-		return this.isAngry() ? "mob.wolf.growl" : (this.rand.nextInt(3) == 0 ? (this.isTamed() && this.dataWatcher.getWatchableObjectInt(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound()
-	{
-		return "mob.wolf.hurt";
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	@Override
-	protected String getDeathSound()
-	{
-		return "mob.wolf.death";
-	}
-
-	/**
-	 * Returns the volume for the sounds this mob makes.
-	 */
-	@Override
-	protected float getSoundVolume()
-	{
-		return 0.4F;
-	}
-
-	/**
-	 * Returns the item ID for the item the mob drops on death.
-	 */
-	@Override
-	protected int getDropItemId()
-	{
-		return -1;
+		super.readEntityFromNBT(nbt);
+		this.setAngry(nbt.getBoolean("Angry"));
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		conception = nbt.getLong("ConceptionTime");
+		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -243,157 +184,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 			}
 		}
 	}
-
-	/**
-	 * Called to update the entity's position/logic.
-	 */
-	@Override
-	public void onUpdate()
-	{
-		super.onUpdate();
-		this.field_25054_c = this.field_25048_b;
-
-		if (getLooksWithInterest())
-		{
-			this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
-		}
-		else
-		{
-			this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
-		}
-
-		if (getLooksWithInterest())
-		{
-			this.numTicksToChaseTarget = 10;
-		}
-		if (!isAngry() && getOwner() != null){
-			float f = 8F;
-			List list = worldObj.getEntitiesWithinAABB (EntityPlayer.class, boundingBox.expand (f, f, f));
-			boolean target = false;
-			for (Iterator iterator = list.iterator () ; iterator.hasNext () ;)
-			{
-
-				Entity entity = (Entity) iterator.next ();
-
-				if (entity instanceof EntityPlayer)
-				{
-					target = true;
-					if(rand.nextInt(20) == 0)
-					{
-						/**
-						 * Removed to hopefully stop the annoying constant growl at owners
-						 */
-						//this.worldObj.playSoundAtEntity(this, "mob.wolf.growl", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-
-					}
-					if (warning == -121){
-						warning = TFC_Time.getTotalTicks();
-					}
-					//getLookHelper().setLookPosition(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, 10.0F, (float)getVerticalFaceSpeed());
-				}
-			}
-			if (target == false){
-				warning = -61;
-			}
-		}
-		if (TFC_Time.getTotalTicks() == warning + 120){
-			this.worldObj.playSoundAtEntity(this, "mob.wolf.bark", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-			setAngry(true);
-		}
-
-		if (this.isWet())
-		{
-			this.isShaking = true;
-			this.field_25052_g = false;
-			this.timeWolfIsShaking = 0.0F;
-			this.prevTimeWolfIsShaking = 0.0F;
-		}
-		else if ((this.isShaking || this.field_25052_g) && this.field_25052_g)
-		{
-			if (this.timeWolfIsShaking == 0.0F)
-			{
-				this.worldObj.playSoundAtEntity(this, "mob.wolf.shake", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-			}
-
-			this.prevTimeWolfIsShaking = this.timeWolfIsShaking;
-			this.timeWolfIsShaking += 0.05F;
-
-			if (this.prevTimeWolfIsShaking >= 2.0F)
-			{
-				this.isShaking = false;
-				this.field_25052_g = false;
-				this.prevTimeWolfIsShaking = 0.0F;
-				this.timeWolfIsShaking = 0.0F;
-			}
-
-			if (this.timeWolfIsShaking > 0.4F)
-			{
-				float var1 = (float)this.boundingBox.minY;
-				int var2 = (int)(MathHelper.sin((this.timeWolfIsShaking - 0.4F) * (float)Math.PI) * 7.0F);
-
-				for (int var3 = 0; var3 < var2; ++var3)
-				{
-					float var4 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-					float var5 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-					this.worldObj.spawnParticle("splash", this.posX + var4, var1 + 0.8F, this.posZ + var5, this.motionX, this.motionY, this.motionZ);
-				}
-			}
-		}
-	}
-
-	@Override
-	public boolean getWolfShaking()
-	{
-		return this.isShaking;
-	}
-
-	/**
-	 * Used when calculating the amount of shading to apply while the wolf is shaking.
-	 */
-	@Override
-	public float getShadingWhileShaking(float par1)
-	{
-		return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * par1) / 2.0F * 0.25F;
-	}
-
-	@Override
-	public float getShakeAngle(float par1, float par2)
-	{
-		float var3 = (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * par1 + par2) / 1.8F;
-
-		if (var3 < 0.0F)
-		{
-			var3 = 0.0F;
-		}
-		else if (var3 > 1.0F)
-		{
-			var3 = 1.0F;
-		}
-
-		return MathHelper.sin(var3 * (float)Math.PI) * MathHelper.sin(var3 * (float)Math.PI * 11.0F) * 0.15F * (float)Math.PI;
-	}
-
-	@Override
-	public float getInterestedAngle(float par1)
-	{
-		return (this.field_25054_c + (this.field_25048_b - this.field_25054_c) * par1) * 0.15F * (float)Math.PI;
-	}
-	@Override
-	public float getEyeHeight()
-	{
-		return this.height * 0.8F;
-	}
-
-	/**
-	 * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
-	 * use in wolves.
-	 */
-	@Override
-	public int getVerticalFaceSpeed()
-	{
-		return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
-	}
-
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
@@ -432,7 +222,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 						this.setPathToEntity((PathEntity)null);
 						this.setAttackTarget((EntityLiving)null);
 						this.aiSit.setSitting(true);
-						this.setEntityHealth(20);
+						this.setEntityHealth(1000);
 						this.setOwner(par1EntityPlayer.username);
 						this.playTameEffect(true);
 						this.worldObj.setEntityState(this, (byte)7);
@@ -480,90 +270,6 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		}
 
 		return super.interact(par1EntityPlayer);
-	}
-	@Override
-	public void handleHealthUpdate(byte par1)
-	{
-		if (par1 == 8)
-		{
-			this.field_25052_g = true;
-			this.timeWolfIsShaking = 0.0F;
-			this.prevTimeWolfIsShaking = 0.0F;
-		}
-		else
-		{
-			super.handleHealthUpdate(par1);
-		}
-	}
-	@Override
-	public float getTailRotation()
-	{
-		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (20 - this.dataWatcher.getWatchableObjectInt(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
-	}
-
-	/**
-	 * Checks if the parameter is an wheat item.
-	 */
-	@Override
-	public boolean isBreedingItem(ItemStack par1ItemStack)
-	{
-		return par1ItemStack == null ? false : (!(Item.itemsList[par1ItemStack.itemID] instanceof ItemFood) ? false : ((ItemFood)Item.itemsList[par1ItemStack.itemID]).isWolfsFavoriteMeat());
-	}
-
-	/**
-	 * Will return how many at most can spawn in a chunk at once.
-	 */
-	@Override
-	public int getMaxSpawnedInChunk()
-	{
-		return 5;
-	}
-
-	/**
-	 * Determines whether this wolf is angry or not.
-	 */
-	@Override
-	public boolean isAngry()
-	{
-		return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
-	}
-
-	/**
-	 * Sets whether this wolf is angry or not.
-	 */
-
-	@Override
-	public void setAngry(boolean par1)
-	{
-		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
-		if (par1)
-		{
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 2)));
-		}
-		else
-		{
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -3)));
-		}
-	}
-
-	/*@Override
-	public void procreate(EntityAnimal par1EntityAnimal)
-	{
-		EntityWolfTFC var2 = new EntityWolfTFC(this.worldObj);
-		var2.setOwner(this.getOwnerName());
-		var2.setTamed(true);
-		worldObj.spawnEntityInWorld(var2);
-	}*/
-
-	public boolean getLooksWithInterest()
-	{
-		return looksWithInterest;
-	}
-
-	public void setLooksWithInterest(boolean b)
-	{
-		looksWithInterest = b;
 	}
 
 	/**

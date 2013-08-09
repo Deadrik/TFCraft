@@ -46,7 +46,6 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected long animalID;
 	protected int sex;
 	protected int hunger;
-	protected long hasMilkTime;
 	protected int age;
 	protected boolean pregnant;
 	protected int pregnancyTime;
@@ -120,7 +119,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.BearDamage);
+		//this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.BearDamage);
 		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1200);//MaxHealth
 	}
 
@@ -140,9 +139,17 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	public void writeEntityToNBT (NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT (NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT (par1NBTTagCompound);
+		super.writeEntityToNBT (nbt);
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setLong("ConceptionTime",conception);
+		nbt.setInteger("Age", getAge());
 	}
 
 
@@ -150,9 +157,17 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readEntityFromNBT (NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		super.readEntityFromNBT (par1NBTTagCompound);
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		conception = nbt.getLong("ConceptionTime");
+		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
 	}
 
 
