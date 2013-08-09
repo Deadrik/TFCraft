@@ -22,7 +22,7 @@ import TFC.Items.ItemTerra;
 public class ItemTerraTool extends ItemTool implements ISize
 {
 
-	public ItemTerraTool(int par1, int par2,
+	public ItemTerraTool(int par1, float par2,
 			EnumToolMaterial par3EnumToolMaterial, Block[] par4ArrayOfBlock) 
 	{
 		super(par1, par2, par3EnumToolMaterial, par4ArrayOfBlock);

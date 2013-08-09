@@ -38,12 +38,12 @@ import net.minecraft.world.gen.feature.*;
 
 public class Helper {
 
-	public static MovingObjectPosition getMouseOverObject(EntityLiving entity, World world )
+	public static MovingObjectPosition getMouseOverObject(EntityLivingBase player, World world )
 	{
-		return getMovingObjectPositionFromPlayer(world, entity, true);
+		return getMovingObjectPositionFromPlayer(world, player, true);
 	}
 
-	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityLiving entity, boolean par3)
+	public static MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityLivingBase entity, boolean par3)
 	{
 		float var4 = 1.0F;
 		float var5 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * var4;

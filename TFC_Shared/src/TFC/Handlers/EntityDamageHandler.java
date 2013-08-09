@@ -8,6 +8,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -37,7 +38,7 @@ public class EntityDamageHandler
 	@ForgeSubscribe
 	public void onEntityHurt(LivingHurtEvent event) 
 	{
-		EntityLiving entity = event.entityLiving;
+		EntityLiving entity = (EntityLiving) event.entityLiving;
 
 
 		if(event.source == DamageSource.onFire)
@@ -75,7 +76,7 @@ public class EntityDamageHandler
 		}
 	}
 
-	protected int applyArmorCalculations(EntityLiving entity, DamageSource source, int originalDamage)
+	protected int applyArmorCalculations(EntityLiving entity, DamageSource source, float originalDamage)
 	{
 		ItemStack[] armor = entity.getLastActiveItems();
 		int pierceRating = 0;
@@ -84,7 +85,7 @@ public class EntityDamageHandler
 		
 		EntityArmorCalcEvent eventPre = new EntityArmorCalcEvent(entity, originalDamage, EntityArmorCalcEvent.EventType.PRE);
 		MinecraftForge.EVENT_BUS.post(eventPre);
-		int damage = eventPre.incomingDamage;
+		float damage = eventPre.incomingDamage;
 		
 		if (!source.isUnblockable() && armor != null)
 		{
@@ -133,7 +134,7 @@ public class EntityDamageHandler
 				}
 				
 				//5. Damage the armor that was hit
-				armor[location].damageItem(processArmorDamage(armor[location], originalDamage), entity);
+				armor[location].damageItem((int) processArmorDamage(armor[location], originalDamage), entity);
 			}
 			else if(armor[location] == null || (armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor)))
 			{
@@ -151,7 +152,7 @@ public class EntityDamageHandler
 			//6. Apply the damage to the player
 			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, originalDamage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
-			entity.setEntityHealth(entity.getHealth()-eventPost.incomingDamage);
+			entity.setEntityHealth(entity.func_110143_aJ()-eventPost.incomingDamage);
 
 		}
 
@@ -172,7 +173,7 @@ public class EntityDamageHandler
 			return 2;//Legs
 	}
 	
-	private int processArmorDamage(ItemStack armor, int baseDamage)
+	private float processArmorDamage(ItemStack armor, float baseDamage)
 	{
 		if(armor.hasTagCompound())
 		{
@@ -199,7 +200,7 @@ public class EntityDamageHandler
 	@ForgeSubscribe
 	public void onAttackEntity(AttackEntityEvent event)
 	{
-		EntityLiving attacker = event.entityLiving;
+		EntityLiving attacker = (EntityLiving) event.entityLiving;
 		Entity target = event.target;
 		ItemStack stack = attacker.getCurrentItemOrArmor(0);
         if (stack != null && stack.getItem().onLeftClickEntity(stack, event.entityPlayer, event.target))
@@ -210,7 +211,7 @@ public class EntityDamageHandler
         {
             if (!target.func_85031_j(target))
             {
-                int i = event.entityPlayer.inventory.getDamageVsEntity(target);
+                float i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
 
                 if (event.entityPlayer.isPotionActive(Potion.damageBoost))
                 {
@@ -223,7 +224,7 @@ public class EntityDamageHandler
                 }
 
                 int j = 0;
-                int k = 0;
+                float k = 0;
 
                 if (target instanceof EntityLiving)
                 {
@@ -245,7 +246,7 @@ public class EntityDamageHandler
 
                     if (flag && i > 0)
                     {
-                        i += event.entity.worldObj.rand.nextInt(i / 2 + 2);
+                        i += event.entity.worldObj.rand.nextInt((int) (i / 2 + 2));
                     }
 
                     i += k;
@@ -286,7 +287,7 @@ public class EntityDamageHandler
                         	event.entityPlayer.triggerAchievement(AchievementList.overkill);
                         }
 
-                        event.entityPlayer.setLastAttackingEntity(target);
+                        event.entityPlayer.func_130011_c(target);
 
                         if (target instanceof EntityLiving)
                         {
@@ -317,14 +318,9 @@ public class EntityDamageHandler
                         }
                     }
 
-                    if (target instanceof EntityLiving)
+                    if (target instanceof EntityLivingBase)
                     {
-                        if (target.isEntityAlive())
-                        {
-                        	alertWolves(event.entityPlayer,(EntityLiving) target, true);
-                        }
-
-                        event.entityPlayer.addStat(StatList.damageDealtStat, i);
+                        event.entityPlayer.addStat(StatList.damageDealtStat,Math.round(i * 10.0f));
 
                         if (l > 0 && flag2)
                         {
@@ -342,37 +338,4 @@ public class EntityDamageHandler
         }
         event.setCanceled(true);
 	}
-	
-	protected void alertWolves(EntityPlayer player, EntityLiving par1EntityLiving, boolean par2)
-    {
-        if (!(par1EntityLiving instanceof EntityCreeper) && !(par1EntityLiving instanceof EntityGhast))
-        {
-            if (par1EntityLiving instanceof EntityWolf)
-            {
-                EntityWolf entitywolf = (EntityWolf)par1EntityLiving;
-
-                if (entitywolf.isTamed() && player.username.equals(entitywolf.getOwnerName()))
-                {
-                    return;
-                }
-            }
-
-            if (!(par1EntityLiving instanceof EntityPlayer) || player.func_96122_a((EntityPlayer)par1EntityLiving))
-            {
-                List list = player.worldObj.getEntitiesWithinAABB(EntityWolf.class, AxisAlignedBB.getAABBPool().getAABB(player.posX, player.posY, player.posZ, player.posX + 1.0D, player.posY + 1.0D, player.posZ + 1.0D).expand(16.0D, 4.0D, 16.0D));
-                Iterator iterator = list.iterator();
-
-                while (iterator.hasNext())
-                {
-                    EntityWolf entitywolf1 = (EntityWolf)iterator.next();
-
-                    if (entitywolf1.isTamed() && entitywolf1.getEntityToAttack() == null && player.username.equals(entitywolf1.getOwnerName()) && (!par2 || !entitywolf1.isSitting()))
-                    {
-                        entitywolf1.setSitting(false);
-                        entitywolf1.setTarget(par1EntityLiving);
-                    }
-                }
-            }
-        }
-    }
 }

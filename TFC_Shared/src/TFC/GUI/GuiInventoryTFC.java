@@ -47,7 +47,7 @@ public class GuiInventoryTFC  extends GuiInventory
                 		((TFCPotion) Potion.potionTypes[var8.getPotionID()]) : 
                 			Potion.potionTypes[var8.getPotionID()];
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            	this.mc.renderEngine.bindTexture("/gui/inventory.png");
+                this.mc.func_110434_K().func_110577_a(field_110408_a);
                 this.drawTexturedModalRect(var1, var2, 0, 166, 140, 32);
 
                 if (var9.hasStatusIcon())

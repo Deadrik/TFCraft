@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -56,7 +57,7 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
         this.yOffset = 0.0F;
     }
 
-    public EntityArrowTFC(World par1World, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving, float par4, float par5)
+    public EntityArrowTFC(World par1World, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving, float par4, float par5)
     {
         this(par1World);
         this.shootingEntity = par2EntityLiving;
@@ -85,7 +86,7 @@ public class EntityArrowTFC extends EntityArrow implements ICausesDamage
         }
     }
 
-    public EntityArrowTFC(World par1World, EntityLiving par2EntityLiving, float par3)
+    public EntityArrowTFC(World par1World, EntityLivingBase par2EntityLiving, float par3)
     {
         this(par1World);
         this.shootingEntity = par2EntityLiving;

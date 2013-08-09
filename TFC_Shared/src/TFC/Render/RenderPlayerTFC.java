@@ -91,16 +91,16 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         HornL1.addChild(HornL2);
     }
 
-    @Override
+    /*@Override
 	protected void func_98191_a(EntityPlayer par1EntityPlayer)
     {
         this.loadDownloadableImageTexture(par1EntityPlayer.skinUrl, par1EntityPlayer.getTexture());
-    }
+    }*
 
     /**
      * Set the specified armor model as the player model. Args: player, armorSlot, partialTick
      */
-    @Override
+   /* @Override
 	protected int setArmorModel(EntityPlayer par1EntityPlayer, int par2, float par3)
     {
         ItemStack itemstack = par1EntityPlayer.inventory.armorItemInSlot(3 - par2);
@@ -113,7 +113,7 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
             if (item instanceof ItemArmor)
             {
                 ItemArmor itemarmor = (ItemArmor)item;
-                this.loadTexture(ForgeHooksClient.getArmorTexture(itemstack, "/armor/" + armorFilenamePrefix[itemarmor.renderIndex] + "_" + (par2 == 2 ? 2 : 1) + ".png"));
+                this.loadTexture(ForgeHooksClient.getArmorTexture(par1EntityPlayer, itemstack, "/armor/" + armorFilenamePrefix[itemarmor.renderIndex] + "_" + (par2 == 2 ? 2 : 1) + ".png"));
                 ModelBiped modelbiped = par2 == 2 ? this.modelArmor : this.modelArmorChestplate;
                 modelbiped.bipedHead.showModel = par2 == 0;
                 plume.showModel = false;//(itemstack.getItem() == TFCItems.BronzeHelmet);
@@ -173,6 +173,6 @@ public class RenderPlayerTFC extends net.minecraft.client.renderer.entity.Render
         }
 
         return -1;
-    }
+    }*/
 
 }

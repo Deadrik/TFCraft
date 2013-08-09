@@ -2,8 +2,6 @@ package TFC.Blocks.Vanilla;
 
 import java.io.Console;
 import java.util.Random;
-
-import scala.util.logging.ConsoleLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

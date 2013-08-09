@@ -1,186 +1,164 @@
 package TFC.Entities;
 
-import TFC.*;
+import net.minecraft.entity.EntityOwnable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import TFC.Entities.AI.EntityAISitTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
 
-public abstract class EntityTameableTFC extends EntityAnimalTFC
+public abstract class EntityTameableTFC extends EntityAnimalTFC implements EntityOwnable
 {
-    protected EntityAISitTFC aiSit = new EntityAISitTFC(this);
+	protected EntityAISitTFC aiSit = new EntityAISitTFC(this);
 
-    public EntityTameableTFC(World par1World)
-    {
-        super(par1World);
-    }
-    public EntityTameableTFC(World par1World,EntityAnimalTFC mother,float father_size){
-    	super(par1World,mother,father_size);
-    }
+	public EntityTameableTFC(World par1World)
+	{
+		super(par1World);
+	}
+	public EntityTameableTFC(World par1World,EntityAnimalTFC mother,float father_size){
+		super(par1World,mother,father_size);
+	}
 
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(17, "");
-    }
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+		this.dataWatcher.addObject(17, "");
+	}
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        super.writeEntityToNBT(par1NBTTagCompound);
+	/**
+	 * (abstract) Protected helper method to write subclass entity data to NBT.
+	 */
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.writeEntityToNBT(par1NBTTagCompound);
 
-        if (this.getOwnerName() == null)
-        {
-            par1NBTTagCompound.setString("Owner", "");
-        }
-        else
-        {
-            par1NBTTagCompound.setString("Owner", this.getOwnerName());
-        }
+		if (this.getOwnerName() == null)
+		{
+			par1NBTTagCompound.setString("Owner", "");
+		}
+		else
+		{
+			par1NBTTagCompound.setString("Owner", this.getOwnerName());
+		}
 
-        par1NBTTagCompound.setBoolean("Sitting", this.isSitting());
-    }
+		par1NBTTagCompound.setBoolean("Sitting", this.isSitting());
+	}
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        String var2 = par1NBTTagCompound.getString("Owner");
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	{
+		super.readEntityFromNBT(par1NBTTagCompound);
+		String var2 = par1NBTTagCompound.getString("Owner");
 
-        if (var2.length() > 0)
-        {
-            this.setOwner(var2);
-            this.setTamed(true);
-        }
+		if (var2.length() > 0)
+		{
+			this.setOwner(var2);
+			this.setTamed(true);
+		}
 
-        this.aiSit.setIsSitting(par1NBTTagCompound.getBoolean("Sitting"));
-    }
+		this.aiSit.setIsSitting(par1NBTTagCompound.getBoolean("Sitting"));
+	}
 
-    /**
-     * Play the taming effect, will either be hearts or smoke depending on status
-     */
-    protected void playTameEffect(boolean par1)
-    {
-        String var2 = "heart";
+	/**
+	 * Play the taming effect, will either be hearts or smoke depending on status
+	 */
+	protected void playTameEffect(boolean par1)
+	{
+		String var2 = "heart";
 
-        if (!par1)
-        {
-            var2 = "smoke";
-        }
+		if (!par1)
+		{
+			var2 = "smoke";
+		}
 
-        for (int var3 = 0; var3 < 7; ++var3)
-        {
-            double var4 = this.rand.nextGaussian() * 0.02D;
-            double var6 = this.rand.nextGaussian() * 0.02D;
-            double var8 = this.rand.nextGaussian() * 0.02D;
-            this.worldObj.spawnParticle(var2, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var4, var6, var8);
-        }
-    }
+		for (int var3 = 0; var3 < 7; ++var3)
+		{
+			double var4 = this.rand.nextGaussian() * 0.02D;
+			double var6 = this.rand.nextGaussian() * 0.02D;
+			double var8 = this.rand.nextGaussian() * 0.02D;
+			this.worldObj.spawnParticle(var2, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var4, var6, var8);
+		}
+	}
 
-    public void handleHealthUpdate(byte par1)
-    {
-        if (par1 == 7)
-        {
-            this.playTameEffect(true);
-        }
-        else if (par1 == 6)
-        {
-            this.playTameEffect(false);
-        }
-        else
-        {
-        	super.handleHealthUpdate(par1);
-        }
-    }
+	@Override
+	public void handleHealthUpdate(byte par1)
+	{
+		if (par1 == 7)
+		{
+			this.playTameEffect(true);
+		}
+		else if (par1 == 6)
+		{
+			this.playTameEffect(false);
+		}
+		else
+		{
+			super.handleHealthUpdate(par1);
+		}
+	}
 
-    public boolean isTamed()
-    {
-        return (this.dataWatcher.getWatchableObjectByte(16) & 4) != 0;
-    }
+	public boolean isTamed()
+	{
+		return (this.dataWatcher.getWatchableObjectByte(16) & 4) != 0;
+	}
 
-    public void setTamed(boolean par1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
+	public void setTamed(boolean par1)
+	{
+		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 4)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -5)));
-        }
-    }
+		if (par1)
+		{
+			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 4)));
+		}
+		else
+		{
+			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -5)));
+		}
+	}
 
-    public boolean isSitting()
-    {
-        return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
-    }
+	public boolean isSitting()
+	{
+		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+	}
 
-    public void setSitting(boolean par1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(16);
+	public void setSitting(boolean par1)
+	{
+		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (par1)
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -2)));
-        }
-    }
+		if (par1)
+		{
+			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 1)));
+		}
+		else
+		{
+			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -2)));
+		}
+	}
 
-    public String getOwnerName()
-    {
-        return this.dataWatcher.getWatchableObjectString(17);
-    }
+	@Override
+	public String getOwnerName()
+	{
+		return this.dataWatcher.getWatchableObjectString(17);
+	}
 
-    public void setOwner(String par1Str)
-    {
-        this.dataWatcher.updateObject(17, par1Str);
-    }
+	public void setOwner(String par1Str)
+	{
+		this.dataWatcher.updateObject(17, par1Str);
+	}
 
-    public EntityLiving getOwner()
-    {
-        return this.worldObj.getPlayerEntityByName(this.getOwnerName());
-    }
+	@Override
+	public EntityPlayer getOwner()
+	{
+		return this.worldObj.getPlayerEntityByName(this.getOwnerName());
+	}
 
-    public EntityAISitTFC func_50008_ai()
-    {
-        return this.aiSit;
-    }
+	public EntityAISitTFC func_50008_ai()
+	{
+		return this.aiSit;
+	}
 }

@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.src.ModLoader;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -75,7 +76,7 @@ public class GuiCalendar extends GuiScreen
     @Override
     public void drawScreen(int par1, int par2, float par3)
     {
-    	this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_calendar.png");
+    	this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_calendar.png"));
 
         int var4 = this.guiLeft;
         int var5 = this.guiTop;

@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
+import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
@@ -66,7 +67,6 @@ import TFC.GUI.GuiFoodPrep;
 import TFC.GUI.GuiForge;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
-import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMetallurgy;
 import TFC.GUI.GuiMold;
@@ -148,8 +148,8 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderInformation() 
 	{
 
-		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
-		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
+		//ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
+		//ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTerraJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
@@ -220,7 +220,7 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
+		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRenderer());
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
@@ -245,7 +245,7 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public File getMinecraftDir() {
-		return ModLoader.getMinecraftInstance().getMinecraftDir();
+		return ModLoader.getMinecraftInstance().mcDataDir;
 	}
 
 	@Override
@@ -338,7 +338,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 36:
 		{
-			return new GuiLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
+			return null;
 		}
 		case 37:
 		{
@@ -648,7 +648,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public String getCurrentLanguage()
 	{
-		return StringTranslate.getInstance().getCurrentLanguage();
+		return null;
 	}
 	
 	@Override

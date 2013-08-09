@@ -127,7 +127,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 				//This is where the crafting is completed and the result is added to the anvil
 				if(result != null && entityplayer != null)
 				{
-					AnvilCraftEvent eventCraft = new AnvilCraftEvent(this.entityplayer, this, anvilItemStacks[1], result);
+					AnvilCraftEvent eventCraft = new AnvilCraftEvent(entityplayer, this, anvilItemStacks[1], result);
 					MinecraftForge.EVENT_BUS.post(eventCraft);
 					if(!eventCraft.isCanceled())
 					{
@@ -867,7 +867,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
 	}

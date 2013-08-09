@@ -910,7 +910,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
 	}

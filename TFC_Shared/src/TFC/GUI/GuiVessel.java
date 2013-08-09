@@ -3,6 +3,7 @@ package TFC.GUI;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -34,7 +35,7 @@ public class GuiVessel extends GuiContainer
     @Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
-    	this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_vessel.png");
+    	this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_vessel.png"));
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;

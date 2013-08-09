@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -56,7 +57,7 @@ public class EntityTerraJavelin extends Entity
 		this.yOffset = 0.0F;
 	}
 
-	public EntityTerraJavelin(World par1World, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving, float par4, float par5)
+	public EntityTerraJavelin(World par1World, EntityLivingBase par2EntityLiving, EntityLivingBase par3EntityLiving, float par4, float par5)
 	{
 		super(par1World);
 		this.shootingEntity = par2EntityLiving;
@@ -80,7 +81,7 @@ public class EntityTerraJavelin extends Entity
 		}
 	}
 
-	public EntityTerraJavelin(World par1World, EntityLiving par2EntityLiving, float par3, double damage, int itemID)
+	public EntityTerraJavelin(World par1World, EntityLivingBase par2EntityLiving, float par3, double damage, int itemID)
 	{
 		super(par1World);
 		this.itemID = itemID;

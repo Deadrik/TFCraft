@@ -38,30 +38,22 @@ import net.minecraft.world.gen.feature.*;
 
 public class EntityAITargetTFC extends EntityAITarget
 {
-    protected float targetDistance;
-    protected boolean field_48380_e;
-    private boolean field_48383_a;
-    private int field_48381_b;
-    private int field_48377_f;
-    private int field_48378_g;
-
-    public EntityAITargetTFC(EntityAnimalTFC par1EntityLiving, float par2, boolean par3)
+    public EntityAITargetTFC(EntityLiving par1EntityLiving, boolean par3)
     {
-        this((EntityLiving)par1EntityLiving, par2, par3, false);
+    	super((EntityCreature)par1EntityLiving, par3);
     }
 
-    public EntityAITargetTFC(EntityLiving par1EntityLiving, float par2, boolean par3, boolean par4)
-    {
-    	super(par1EntityLiving, par2, par3,par4);
-        taskOwner = par1EntityLiving;
-    }
+	@Override
+	public boolean shouldExecute() 
+	{
+		return taskOwner.getAttackTarget() != null;
+	}
 
-    public boolean shouldExecute(){
-    	return taskOwner.getAttackTarget() != null;
-    }
+	/**Removed during the update to 1.6.2*/
+    /*
     public boolean continueExecuting()
     {
-        EntityLiving var1 = this.taskOwner.getAttackTarget();
+        Entity var1 = this.taskOwner.getEntityToAttack();
 
         if (var1 == null)
         {
@@ -96,9 +88,6 @@ public class EntityAITargetTFC extends EntityAITarget
         }
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
     public void startExecuting()
     {
         this.field_48381_b = 0;
@@ -106,9 +95,6 @@ public class EntityAITargetTFC extends EntityAITarget
         this.field_48378_g = 0;
     }
 
-    /**
-     * Resets the task
-     */
     public void resetTask()
     {
         this.taskOwner.setAttackTarget((EntityLiving)null);
@@ -215,5 +201,5 @@ public class EntityAITargetTFC extends EntityAITarget
                 return (double)(var4 * var4 + var5 * var5) <= 2.25D;
             }
         }
-    }
+    }*/
 }

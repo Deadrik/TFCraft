@@ -786,7 +786,11 @@ public class TFC_CoreRender
             f2 = f5;
         }
 
-        return Minecraft.isAmbientOcclusionEnabled() && Block.lightValue[block.blockID] == 0 ? (renderBlocks.partialRenderBounds ? renderBlocks.func_102027_b(block, xCoord, yCoord, zCoord, f, f1, f2) : renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) : renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
+        return Minecraft.isAmbientOcclusionEnabled() && Block.lightValue[block.blockID] == 0 ? 
+        		(renderBlocks.partialRenderBounds ? 
+        				renderBlocks.renderBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2) : 
+        					renderBlocks.renderStandardBlockWithAmbientOcclusion(block, xCoord, yCoord, zCoord, f, f1, f2)) : 
+        						renderBlocks.renderStandardBlockWithColorMultiplier(block, xCoord, yCoord, zCoord, f, f1, f2);
 	}
 
 	public static boolean RenderFruitLeaves(Block block, int xCoord, int yCoord, int zCoord, RenderBlocks renderblocks)

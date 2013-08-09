@@ -80,12 +80,12 @@ public class TileEntityChestRendererTFC extends TileEntitySpecialRenderer
             if (par1TileEntityChest.adjacentChestXPos == null && par1TileEntityChest.adjacentChestZPosition == null)
             {
                 var14 = this.chestModel;
-                this.bindTextureByName("/item/chest.png");
+                //this.bindTextureByName("/item/chest.png");
             }
             else
             {
                 var14 = this.largeChestModel;
-                this.bindTextureByName("/item/largechest.png");
+                //this.bindTextureByName("/item/largechest.png");
             }
 
             GL11.glPushMatrix();

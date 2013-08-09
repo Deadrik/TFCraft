@@ -123,12 +123,12 @@ public class ItemDyeCustom extends ItemTerra
     }
 
     @Override
-    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
+    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
     {
-        if (par2EntityLiving instanceof EntitySheep)
+        if (par3EntityLivingBase instanceof EntitySheep)
         {
-            EntitySheep var3 = (EntitySheep)par2EntityLiving;
-            int var4 = BlockCloth.getBlockFromDye(par1ItemStack.getItemDamage());
+            EntitySheep var3 = (EntitySheep)par3EntityLivingBase;
+            int var4 = BlockColored.getBlockFromDye(par1ItemStack.getItemDamage());
 
             if (!var3.getSheared() && var3.getFleeceColor() != var4)
             {

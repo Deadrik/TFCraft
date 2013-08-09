@@ -23,7 +23,7 @@ public class SoundHandler {
             // Try to add the custom sound file to the pool of sounds
             try {
                 //URL path = TerraFirmaCraft.instance.getClass().getResource("/" + soundFile);
-                event.manager.soundPoolSounds.addSound(soundFile.substring(1), this.getClass().getResource(soundFile));
+                event.manager.soundPoolSounds.addSound(soundFile);
             }
             // If we cannot add the custom sound file to the pool, log the exception
             catch (Exception e) {
@@ -54,8 +54,8 @@ public class SoundHandler {
 	@ForgeSubscribe
 	public void onBackgroundMusic(PlayBackgroundMusicEvent event) {
 		int m = new Random().nextInt(TFCMusic.size());
-		if(TFC_Settings.enableDebugMode)
-			System.out.println("Playing " + TFCMusic.get(m).soundName);
+		/*if(TFC_Settings.enableDebugMode)
+			System.out.println("Playing " + TFCMusic.get(m).soundName);*/
 		event.result = TFCMusic.get(m);
 	}
 }

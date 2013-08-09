@@ -201,7 +201,7 @@ public class BlockChestTFC extends BlockTerraContainer
 
         if (par6ItemStack.hasDisplayName())
         {
-            ((TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4)).func_94043_a(par6ItemStack.getDisplayName());
+            ((TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4)).setChestGuiName(par6ItemStack.getDisplayName());
         }
     }
 

@@ -3,6 +3,7 @@ package TFC.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.src.ModLoader;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -59,7 +60,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -77,7 +78,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -95,7 +96,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -113,7 +114,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -147,7 +148,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -165,7 +166,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -183,7 +184,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -201,7 +202,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -235,7 +236,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -254,7 +255,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -274,7 +275,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -293,7 +294,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -326,7 +327,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[0] != null)
 				{
 					Icon itemIcon = te.storage[0].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -344,7 +345,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[1] != null)
 				{
 					Icon itemIcon = te.storage[1].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -362,7 +363,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[2] != null)
 				{
 					Icon itemIcon = te.storage[2].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -380,7 +381,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				if(te.storage[3] != null)
 				{
 					Icon itemIcon = te.storage[3].getIconIndex();
-					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
+					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
 					minX = itemIcon.getMinU();
 					maxX = itemIcon.getMaxU();
 					minZ = itemIcon.getMinV();
@@ -399,7 +400,7 @@ public class RenderToolRack implements ISimpleBlockRenderingHandler
 				tessellator.startDrawing(state);
 			}
 		}
-		ModLoader.getMinecraftInstance().renderEngine.bindTexture("/terrain.png");
+		ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110575_b);
 		renderblocks.clearOverrideBlockTexture();
 		return true;
 	}
