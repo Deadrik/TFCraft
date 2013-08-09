@@ -1,17 +1,17 @@
 package TFC.Entities.AI;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
-import TFC.Entities.EntityTameableTFC;
 
 public class EntityAIOwnerHurtByTargetTFC extends EntityAITarget
 {
-	EntityTameableTFC field_48394_a;
+	EntityCreature field_48394_a;
 	EntityLivingBase field_48393_b;
 
-	public EntityAIOwnerHurtByTargetTFC(EntityTameableTFC par1EntityTameable)
+	public EntityAIOwnerHurtByTargetTFC(EntityCreature par1EntityTameable)
 	{
-		super(par1EntityTameable, 32.0F, false);
+		super(par1EntityTameable, false);
 		this.field_48394_a = par1EntityTameable;
 		this.setMutexBits(1);
 	}

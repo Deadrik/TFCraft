@@ -43,12 +43,14 @@ public class ModelPigTFC extends ModelQuadrupedTFC
 	@Override
 	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
+		float age = 0;
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-		if(par1Entity instanceof EntityAnimalTFC){
-			float tempAge;
+		if(par1Entity instanceof EntityAnimalTFC)
+		{
+			float tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
 
-			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
-			if(tempAge <= 0){
+			if(tempAge <= 0)
+			{
 				age = (-1F)*tempAge / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
 				if(((EntityAnimalTFC)par1Entity).sex==0){
 					if((1-age) > 0.75){

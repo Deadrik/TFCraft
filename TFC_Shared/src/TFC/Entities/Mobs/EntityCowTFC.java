@@ -27,7 +27,6 @@ public class EntityCowTFC extends EntityAnimalTFC
 	public EntityCowTFC(World par1World)
 	{
 		super(par1World);
-		this.texture = "/mob/cow.png";
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
@@ -44,7 +43,6 @@ public class EntityCowTFC extends EntityAnimalTFC
 	public EntityCowTFC(World par1World,EntityAnimalTFC mother, float F_size)
 	{
 		super(par1World,mother,F_size);
-		this.texture = "/mob/cow.png";
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
@@ -63,14 +61,10 @@ public class EntityCowTFC extends EntityAnimalTFC
 	{
 		super.onLivingUpdate();
 
-		if(sex == 0) {
-			this.texture = "/mods/TFC/mob/bull.png";
-		} else {
-			this.texture = "/mob/cow.png";
-		}
-//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
-		if(pregnant) {
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
+		if(pregnant) 
+		{
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength)
+			{
 				EntityCowTFC baby = new EntityCowTFC(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;
@@ -188,7 +182,7 @@ public class EntityCowTFC extends EntityAnimalTFC
 	{
 		float ga = getGrowingAge();
 		float ageMod = ga<0 ? 1+(ga/(adultAge*TFC_Time.dayLength)) : 1;
-		
+
 		if(sex==1 && ageMod>0.95 && hasMilkTime < TFC_Time.getTotalTicks()){
 			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) {
