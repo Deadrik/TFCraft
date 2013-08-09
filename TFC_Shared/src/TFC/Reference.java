@@ -2,7 +2,7 @@ package TFC;
 
 public class Reference 
 {
-	public static final String ModID = "tfc";
+	public static final String ModID = "TerraFirmaCraft";
 	public static final String ModName = "TerraFirmaCraft";
 	public static final String ModVersion = "0.77.0";
 	public static final String ModDependencies = "required-after:Forge@[7.0,);required-after:FML@[5.0.5,)";
