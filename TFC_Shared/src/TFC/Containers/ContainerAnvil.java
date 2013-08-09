@@ -157,7 +157,7 @@ public class ContainerAnvil extends ContainerTFC
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void detectAndSendChanges()
 	{
@@ -194,7 +194,7 @@ public class ContainerAnvil extends ContainerTFC
 	 * the client receives the updated progress bar
 	 * */
 	@Override
-	 public void updateProgressBar(int par1, int par2)
+	public void updateProgressBar(int par1, int par2)
 	{
 		if(anvil != null)
 		{
@@ -214,9 +214,9 @@ public class ContainerAnvil extends ContainerTFC
 
 	}
 	@Override
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
+	public void onContainerClosed(EntityPlayer par1EntityPlayer)
 	{
-		super.onCraftGuiClosed(par1EntityPlayer);
+		super.onContainerClosed(par1EntityPlayer);
 		anvil.closeChest();
 	}
 }

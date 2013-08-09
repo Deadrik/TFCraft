@@ -1,13 +1,12 @@
 package TFC.Blocks.Devices;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
@@ -23,7 +22,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
-import TFC.TFCItems;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Items.Tools.ItemProPick;
 import TFC.Items.Tools.ItemWeapon;
@@ -44,19 +42,19 @@ public class BlockToolRack extends BlockTerraContainer
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-        return true;
-    }
-	
+	{
+		return true;
+	}
+
 	@Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        return null;
-    }
-	
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		return null;
+	}
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
@@ -183,7 +181,7 @@ public class BlockToolRack extends BlockTerraContainer
 			te.storage[slot] = null;
 		}
 	}
-	
+
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z)
 	{
@@ -221,7 +219,7 @@ public class BlockToolRack extends BlockTerraContainer
 		}
 		return ret;
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		// TODO Auto-generated method stub
@@ -251,10 +249,10 @@ public class BlockToolRack extends BlockTerraContainer
 		}
 	}
 
-    @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
-    {
-    	int dir = world.getBlockMetadata(i, j, k);
+	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k)
+	{
+		int dir = world.getBlockMetadata(i, j, k);
 
 		if(dir == 0)
 		{
@@ -272,10 +270,10 @@ public class BlockToolRack extends BlockTerraContainer
 		{
 			return AxisAlignedBB.getBoundingBox(i+0.85F, j+0F, k+0.0F, i+1F, j+1F, k+1F);
 		}
-		
-        return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
-    }
-	
+
+		return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+1, k+1);
+	}
+
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l) 
 	{
@@ -310,20 +308,28 @@ public class BlockToolRack extends BlockTerraContainer
 			}
 		}
 	}
-	
+
 	@Override
 	public int onBlockPlaced(World world, int i, int j, int k, int side, float hitX, float hitY, float hitZ, int meta)
 	{
-		if(side == 4) return 3;
-		if(side == 5) return 1;
-		if(side == 2) return 0;
-		if(side == 3) return 2;
-		
+		if(side == 4) {
+			return 3;
+		}
+		if(side == 5) {
+			return 1;
+		}
+		if(side == 2) {
+			return 0;
+		}
+		if(side == 3) {
+			return 2;
+		}
+
 		return 5;
 	}
-	
+
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entity, ItemStack is) 
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entity, ItemStack is) 
 	{
 		if(!world.isRemote)
 		{
@@ -337,50 +343,55 @@ public class BlockToolRack extends BlockTerraContainer
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockOnSide(World world, int i, int j, int k, int side)
-    {
-        if(this.canPlaceBlockAt(world, i, j, k))
-        {
-        	if(side == 5 && world.isBlockNormalCube(i-1, j, k))
-        		return true;
-        	if(side == 4 && world.isBlockNormalCube(i+1, j, k))
-        		return true;
-        	if(side == 2 && world.isBlockNormalCube(i, j, k+1))
-        		return true;
-        	if(side == 3 && world.isBlockNormalCube(i, j, k-1))
-        		return true;
-        }        
-        return false;
-    }
-	
+	{
+		if(this.canPlaceBlockAt(world, i, j, k))
+		{
+			if(side == 5 && world.isBlockNormalCube(i-1, j, k)) {
+				return true;
+			}
+			if(side == 4 && world.isBlockNormalCube(i+1, j, k)) {
+				return true;
+			}
+			if(side == 2 && world.isBlockNormalCube(i, j, k+1)) {
+				return true;
+			}
+			if(side == 3 && world.isBlockNormalCube(i, j, k-1)) {
+				return true;
+			}
+		}        
+		return false;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
+	/**
+	 * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
+	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-    	for(int i = 0; i < 16; i++)
-    		par3List.add(new ItemStack(par1, 1, i));
-    }
+	{
+		for(int i = 0; i < 16; i++) {
+			par3List.add(new ItemStack(par1, 1, i));
+		}
+	}
 
 	@Override
-    public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	{
 		return TFCBlocks.WoodSupportH.getBlockTexture(par1IBlockAccess, par2, par3, par4, par5);
-    }
+	}
 
-    @Override
-    public Icon getIcon(int par1, int par2)
-    {
-    	return TFCBlocks.WoodSupportH.getIcon(par1, par2);
-    }
-    
-    @Override
+	@Override
+	public Icon getIcon(int par1, int par2)
+	{
+		return TFCBlocks.WoodSupportH.getIcon(par1, par2);
+	}
+
+	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
-    	//Empty On Purpose
-    }
+	{
+		//Empty On Purpose
+	}
 }

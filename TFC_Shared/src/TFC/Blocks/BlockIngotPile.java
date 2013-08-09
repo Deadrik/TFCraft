@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -118,25 +118,25 @@ public class BlockIngotPile extends BlockTerraContainer
 
 		if (te.getStackInSlot(0)!=null){
 			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + ((te.getStackInSlot(0).stackSize + 7)/8)*0.125, (double)par4 + 1);
-		}
-		else
+		} else {
 			return AxisAlignedBB.getBoundingBox(par2, (double)par3 + 0, (double)par4 + 0, (double)par2 + 1, par3 + 0.25, (double)par4 + 1);
+		}
 	}
 
-    @Override
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+	{
 		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 		int direction = getDirectionFromMetadata(meta);
 		TileEntityIngotPile te = (TileEntityIngotPile)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
 
 		if (te.getStackInSlot(0)!=null){
 			this.setBlockBounds(0f, 0f, 0f, 1f, (float) (((te.getStackInSlot(0).stackSize + 7)/8)*0.125), 1f);
-		}
-		else
+		} else {
 			this.setBlockBounds(0f, 0f, 0f, 0f, 0.25f, 0f);
+		}
 
-    }
+	}
 	/*@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
@@ -160,20 +160,20 @@ public class BlockIngotPile extends BlockTerraContainer
 	}*/
 
 	@Override
-    @SideOnly(Side.CLIENT)
-    public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
+	@SideOnly(Side.CLIENT)
+	public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+	{
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
-        return true;
-    }
+		return true;
+	}
 
 	@Override
-    @SideOnly(Side.CLIENT)
-    public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
-    {
+	@SideOnly(Side.CLIENT)
+	public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
+	{
 		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
-        return true;
-    }
+		return true;
+	}
 
 	@Override
 	public int getRenderType()
@@ -198,7 +198,7 @@ public class BlockIngotPile extends BlockTerraContainer
 		return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is)
 	{
 		super.onBlockPlacedBy(world,i,j,k,entityliving, is);
 		int meta = world.getBlockMetadata(i, j, k);

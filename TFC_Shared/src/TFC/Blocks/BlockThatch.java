@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -26,7 +26,7 @@ public class BlockThatch extends BlockTerra
 		super(par1, Material.grass);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 		this.setBlockBounds(0f, 0, 0f, 1f, 1, 1f);
-		
+
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class BlockThatch extends BlockTerra
 	@Override
 	public Icon getIcon(int side, int meta)
 	{
-		
-			return this.blockIcon;
-		
+
+		return this.blockIcon;
+
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BlockThatch extends BlockTerra
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack is)
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack is)
 	{
 
 	}

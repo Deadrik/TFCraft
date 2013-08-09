@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -32,13 +31,13 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		this.setFolder("ingots/");
 
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister registerer)
-    {
+	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
-    }
-	
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean requiresMultipleRenderPasses()
@@ -95,43 +94,49 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
 					world.setBlock( x, y-1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y-1, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y-1, z);
 				}
 				else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 				{
 					world.setBlock( x, y+1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y+1, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y+1, z);
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 				{
 					world.setBlock( x, y, z-1, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y, z-1);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z-1);
 				}
 				else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 				{
 					world.setBlock( x, y, z+1, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y, z+1);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z+1);
 				}
 				else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 				{
 					world.setBlock( x-1, y, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x-1, y, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x-1, y, z);
 				}
 				else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 				{
 					world.setBlock( x+1, y, z, TFCBlocks.IngotPile.blockID, l, 3);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x+1, y, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x+1, y, z);
 				}
 				else
@@ -145,43 +150,49 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 				if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 				{
 					world.setBlock( x, y-1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y-1, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y-1, z);
 				}
 				else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 				{
 					world.setBlock( x, y+1, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y+1, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y+1, z);
 				}
 				else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 				{
 					world.setBlock( x, y, z-1, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y, z-1);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z-1);
 				}
 				else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 				{
 					world.setBlock( x, y, z+1, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y, z+1);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x, y, z+1);
 				}
 				else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 				{
 					world.setBlock( x-1, y, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x-1, y, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x-1, y, z);
 				}
 				else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 				{
 					world.setBlock( x+1, y, z, TFCBlocks.IngotPile.blockID, l, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x+1, y, z);
+					}
 					te = (TileEntityIngotPile)world.getBlockTileEntity(x+1, y, z);
 				}
 				else
@@ -207,10 +218,6 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if(entityplayer.username.equals("capt_slowpoke") && /*(!entityplayer.worldObj.isRemote)||*/ entityplayer instanceof EntityPlayerMP){
-			((EntityPlayerMP)entityplayer).mcServer.getConfigurationManager().sendChatMsg(entityplayer.username+" sniffs the ingot");
-
-		}
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
 
 		if(entityplayer.isSneaking() && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1))
@@ -251,7 +258,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 							itemstack.stackSize = itemstack.stackSize-1;
 							if (world.getBlockTileEntity(x,y,z) != null)
 							{
-									((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
+								((TileEntityIngotPile)world.getBlockTileEntity(x,y,z)).setType(MetalRegistry.instance.getMetalFromItem(this).Name);
 							}
 							world.addBlockEvent(x,y,z,TFCBlocks.IngotPile.blockID,0,0);
 							te.getBlockType().onBlockActivated(world, x, y, z, entityplayer, side, hitX, hitY, hitZ);
@@ -326,18 +333,20 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		if(m < 8)
 		{
-			if(dir == 0 || dir == 2)
+			if(dir == 0 || dir == 2) {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m, 0x2);
-			else
+			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m | 8, 0x2);
+			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 16)
 		{
-			if(dir == 0 || dir == 2)
+			if(dir == 0 || dir == 2) {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m-8, 0x2);
-			else
+			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.IngotPile.blockID, m-8 | 8, 0x2);
+			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 

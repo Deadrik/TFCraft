@@ -35,8 +35,8 @@ public class ContainerQuern extends ContainerTFC {
 	 * Callback for when the crafting gui is closed.
 	 */
 	@Override
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-		super.onCraftGuiClosed(par1EntityPlayer);
+	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+		super.onContainerClosed(par1EntityPlayer);
 		if(!world.isRemote) {
 			te.closeChest();
 		} else {
@@ -87,21 +87,21 @@ public class ContainerQuern extends ContainerTFC {
 				}
 			}
 			else if (clickedIndex >= 3
-				&& clickedIndex < inventorySlots.size()
-				&& clickedStack.getItem() == TFCItems.WheatGrain
-				|| clickedStack.getItem() == TFCItems.BarleyGrain
-				|| clickedStack.getItem() == TFCItems.RyeGrain
-				|| clickedStack.getItem() == TFCItems.OatGrain
-				|| clickedStack.getItem() == TFCItems.RiceGrain
-				|| clickedStack.getItem() == TFCItems.MaizeEar)
+					&& clickedIndex < inventorySlots.size()
+					&& clickedStack.getItem() == TFCItems.WheatGrain
+					|| clickedStack.getItem() == TFCItems.BarleyGrain
+					|| clickedStack.getItem() == TFCItems.RyeGrain
+					|| clickedStack.getItem() == TFCItems.OatGrain
+					|| clickedStack.getItem() == TFCItems.RiceGrain
+					|| clickedStack.getItem() == TFCItems.MaizeEar)
 			{
 				if (!this.mergeItemStack(clickedStack, 0, 1, false)) {
 					return null;
 				}
 			}
 			else if (clickedIndex >= 3
-				&& clickedIndex < inventorySlots.size()
-				&& clickedStack.getItem() == TFCItems.Quern)
+					&& clickedIndex < inventorySlots.size()
+					&& clickedStack.getItem() == TFCItems.Quern)
 			{
 				if (!this.mergeItemStack(clickedStack, 2, 3, false)) {
 					return null;

@@ -6,7 +6,7 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -50,12 +50,16 @@ public class BlockAnvil extends BlockTerraContainer
 	@Override
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) 
 	{
-		if(this.blockID == TFCBlocks.Anvil.blockID)
-			for(int i = 1; i < 8; i++)
+		if(this.blockID == TFCBlocks.Anvil.blockID) {
+			for(int i = 1; i < 8; i++) {
 				par3List.add(new ItemStack(this, 1, i));
-		if(this.blockID == TFCBlocks.Anvil2.blockID)
-			for(int i = 0; i < 3; i++)
+			}
+		}
+		if(this.blockID == TFCBlocks.Anvil2.blockID) {
+			for(int i = 0; i < 3; i++) {
 				par3List.add(new ItemStack(this, 1, i));
+			}
+		}
 	}
 
 	@Override
@@ -98,10 +102,11 @@ public class BlockAnvil extends BlockTerraContainer
 		{
 			if(te.AnvilTier != AnvilReq.STONE.Tier || this.blockID == TFCBlocks.Anvil2.blockID)
 			{
-				if(direction == 0)
+				if(direction == 0) {
 					return AxisAlignedBB.getBoundingBox(par2 + 0.2, (double)par3 + 0, (double)par4 + 0, par2 + 0.8, par3 + 0.6, (double)par4 + 1);
-				else
+				} else {
 					return AxisAlignedBB.getBoundingBox((double)par2 + 0, (double)par3 + 0, par4 + 0.2, (double)par2 + 1, par3 + 0.6, par4 + 0.8);
+				}
 			}
 			else
 			{
@@ -136,12 +141,12 @@ public class BlockAnvil extends BlockTerraContainer
 		}
 	}
 
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y, z
-     */
+	/**
+	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
+	 */
 	@Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
 		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 		int direction = getDirectionFromMetadata(meta);
 		TileEntityAnvil te = (TileEntityAnvil)par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
@@ -159,7 +164,7 @@ public class BlockAnvil extends BlockTerraContainer
 		{
 			this.setBlockBounds(0, 0, 0, 1, 0.9F, 1);
 		}
-    }
+	}
 
 	@Override
 	public Icon getIcon(int i, int j)
@@ -189,48 +194,49 @@ public class BlockAnvil extends BlockTerraContainer
 
 		if(blockID == TFCBlocks.Anvil.blockID)
 		{
-			if(type == 0)
+			if(type == 0) {
 				return;
+			}
 		}
 		super.harvestBlock(world, entityplayer, i, j, k, type);
 	}
-	
+
 	@Override
 	public void dropBlockAsItemWithChance(World par1World, int x, int y, int z, int meta, float par6, int par7)
-    {
-        if (!par1World.isRemote)
-        {
-            this.dropBlockAsItem_do(par1World, x, y, z, new ItemStack(this, 1, meta));
-        }
-    }
-	
+	{
+		if (!par1World.isRemote)
+		{
+			this.dropBlockAsItem_do(par1World, x, y, z, new ItemStack(this, 1, meta));
+		}
+	}
+
 	@Override
 	protected void dropBlockAsItem_do(World par1World, int par2, int par3, int par4, ItemStack is)
-    {
-        if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
-        {
-        	if(is.getItemDamage() == 0 && this.blockID == TFCBlocks.Anvil.blockID)
-        	{
-        		is.setItemDamage(1);
-        	}
-            float f = 0.7F;
-            double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-            double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-            double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-            EntityItem entityitem = new EntityItem(par1World, par2 + d0, par3 + d1, par4 + d2, is);
-            entityitem.delayBeforeCanPickup = 10;
-            par1World.spawnEntityInWorld(entityitem);
-        }
-    }
+	{
+		if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+		{
+			if(is.getItemDamage() == 0 && this.blockID == TFCBlocks.Anvil.blockID)
+			{
+				is.setItemDamage(1);
+			}
+			float f = 0.7F;
+			double d0 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+			double d1 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+			double d2 = par1World.rand.nextFloat() * f + (1.0F - f) * 0.5D;
+			EntityItem entityitem = new EntityItem(par1World, par2 + d0, par3 + d1, par4 + d2, is);
+			entityitem.delayBeforeCanPickup = 10;
+			par1World.spawnEntityInWorld(entityitem);
+		}
+	}
 
-	
+
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
@@ -256,10 +262,11 @@ public class BlockAnvil extends BlockTerraContainer
 		world.setBlockMetadataWithNotify(i, j, k, byte0, 3);
 
 		TileEntityAnvil te = (TileEntityAnvil)world.getBlockTileEntity(i, j, k);
-		if(blockID == TFCBlocks.Anvil.blockID)
+		if(blockID == TFCBlocks.Anvil.blockID) {
 			te.AnvilTier = AnvilReq.getReqFromInt(meta).Tier;
-		else if(blockID == TFCBlocks.Anvil2.blockID)
+		} else if(blockID == TFCBlocks.Anvil2.blockID) {
 			te.AnvilTier = AnvilReq.getReqFromInt2(meta).Tier;
+		}
 
 
 	}
@@ -352,7 +359,7 @@ public class BlockAnvil extends BlockTerraContainer
 			textureMapTop[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Top");
 			textureMapSide[i] = registerer.registerIcon(Reference.ModID + ":" + "devices/Anvil_" + (i+anvilId) + "_Side");
 		}
-		
+
 		TFC_Textures.AnvilHit = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit");
 		TFC_Textures.AnvilHitHeavy = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Heavy");
 		TFC_Textures.AnvilHitMedium = registerer.registerIcon(Reference.ModID + ":" + "Anvil Hit Medium");

@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -136,7 +136,7 @@ public class BlockSluice extends BlockContainer
 		return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is)
 	{
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		byte byte0 = 0;
@@ -171,16 +171,20 @@ public class BlockSluice extends BlockContainer
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int i, int j, int k) 
 	{
 		int meta = par1IBlockAccess.getBlockMetadata(i, j, k);
-		if(this.isBlockFootOfBed(meta)) setBlockBounds(0,0,0,1,0.5f,1);
-		else setBlockBounds(0,0,0,1,1,1);
+		if(this.isBlockFootOfBed(meta)) {
+			setBlockBounds(0,0,0,1,0.5f,1);
+		} else {
+			setBlockBounds(0,0,0,1,1,1);
+		}
 	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		int meta = world.getBlockMetadata(i, j, k);
-		if(this.isBlockFootOfBed(meta)) 
+		if(this.isBlockFootOfBed(meta)) {
 			return AxisAlignedBB.getBoundingBox(i, j, k, i+1, j+0.5f, k+1);
+		}
 		return AxisAlignedBB.getBoundingBox(i, j, k, i + 1, j + 1, k + 1);
 	}
 
@@ -222,14 +226,15 @@ public class BlockSluice extends BlockContainer
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
-			else if(foot && 
+			} else if(foot && 
 					(!world.isBlockNormalCube(i+1, j, k) || 
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
+			}
 		}
 		if(l == 1)//-x
 		{
@@ -238,14 +243,15 @@ public class BlockSluice extends BlockContainer
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i+1, j, k)  ||
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
-			else if(foot && 
+			} else if(foot && 
 					(!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
+			}
 		}
 		if(l == 2)//-z
 		{
@@ -254,14 +260,15 @@ public class BlockSluice extends BlockContainer
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
-			else if(foot && 
+			} else if(foot && 
 					(!world.isBlockNormalCube(i+1, j, k) || 
 							!world.isBlockNormalCube(i-1, j, k) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
+			}
 		}
 		if(l == 3)//+x
 		{
@@ -270,14 +277,15 @@ public class BlockSluice extends BlockContainer
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i-1, j, k)  ||
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
-			else if(foot && 
+			} else if(foot && 
 					(!world.isBlockNormalCube(i, j, k+1) || 
 							!world.isBlockNormalCube(i, j, k-1) || 
 							!world.isBlockNormalCube(i, j-1, k)  || 
-							world.isBlockNormalCube(i, j+2, k)))
+							world.isBlockNormalCube(i, j+2, k))) {
 				return false;
+			}
 		}
 		return true;
 	}

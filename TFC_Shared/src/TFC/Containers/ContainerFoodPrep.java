@@ -36,8 +36,8 @@ public class ContainerFoodPrep extends ContainerTFC {
 	 * Callback for when the crafting gui is closed.
 	 */
 	@Override
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-		super.onCraftGuiClosed(par1EntityPlayer);
+	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+		super.onContainerClosed(par1EntityPlayer);
 		te.closeChest();
 	}
 
@@ -56,7 +56,7 @@ public class ContainerFoodPrep extends ContainerTFC {
 
 		int row;
 		int col;
-		
+
 		for (row = 0; row < 9; ++row) {
 			this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
 		}
@@ -67,19 +67,19 @@ public class ContainerFoodPrep extends ContainerTFC {
 			}
 		}
 	}
-	
+
 	public EntityPlayer getPlayer() {
 		return player;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex) {
 		ItemStack returnedStack = null;
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
 		if (clickedSlot != null
-			&& clickedSlot.getHasStack()
-			&& (clickedSlot.getStack().getItem() instanceof ItemTerraFood || clickedSlot.getStack().itemID == Item.bowlEmpty.itemID))
+				&& clickedSlot.getHasStack()
+				&& (clickedSlot.getStack().getItem() instanceof ItemTerraFood || clickedSlot.getStack().itemID == Item.bowlEmpty.itemID))
 		{
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();

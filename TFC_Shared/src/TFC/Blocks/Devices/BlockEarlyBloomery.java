@@ -3,7 +3,7 @@ package TFC.Blocks.Devices;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 	Icon textureSide;
 	Icon textureOn;
 	Icon textureOff;
-	
+
 	public static final int headBlockToFootBlockMap[][] = {
 		{
 			0, 1
@@ -46,10 +46,11 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 	public int getLightValue(IBlockAccess world, int x, int y, int z) 
 	{
 		int meta = world.getBlockMetadata(x, y, z) & 4;
-		if(meta == 0)
+		if(meta == 0) {
 			return 0;
-		else
+		} else {
 			return 15;
+		}
 
 	}
 
@@ -75,13 +76,13 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k)
-    {
+	{
 		int meta = world.getBlockMetadata(i, j, k) & 3;
 		int[] dir = headBlockToFootBlockMap[meta];
-		
+
 		if(world.isBlockOpaqueCube(i, j-1, k) && world.isBlockOpaqueCube(i, j+1, k))
 		{
 			int centerX = i + dir[0];
@@ -105,8 +106,8 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 				}
 			}
 		}
-        return false;
-    }
+		return false;
+	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k)
@@ -125,41 +126,45 @@ public class BlockEarlyBloomery extends BlockTerraContainer
 
 		if(j == 0 && i == 2	) 
 		{
-			if(lit == 1)
+			if(lit == 1) {
 				return textureOn;
+			}
 			return textureOff;
 		}
 		else if(j == 1 && i == 5) 
 		{
-			if(lit == 1)
+			if(lit == 1) {
 				return textureOn;
+			}
 			return textureOff;
 		}
 		else if(j == 2 && i == 3) 
 		{
-			if(lit == 1)
+			if(lit == 1) {
 				return textureOn;
+			}
 			return textureOff;
 		}
 		else if(j == 3 && i == 4) 
 		{
-			if(lit == 1)
+			if(lit == 1) {
 				return textureOn;
+			}
 			return textureOff;
 		}
 		return textureSide;
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		textureSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Side");
 		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery On");
 		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Bloomery Off");
-    }
+	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack par6ItemStack)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack par6ItemStack)
 	{
 		if(!world.isRemote)
 		{

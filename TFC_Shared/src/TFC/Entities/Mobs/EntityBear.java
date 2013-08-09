@@ -3,7 +3,6 @@ package TFC.Entities.Mobs;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -14,7 +13,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -38,7 +36,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	private float field_25048_b;
 	private float field_25054_c;
 	private Random rand = new Random ();
-
+	private float moveSpeed = 0;
 
 	/** true is the wolf is wet else false */
 	private boolean field_25052_g;
@@ -47,7 +45,6 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public EntityBear (World par1World)
 	{
 		super (par1World);
-		texture = "/mods/TFC/mob/Bear.png";
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.2F;
 		getNavigator ().setAvoidsWater (true);
@@ -76,7 +73,6 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public EntityBear (World par1World, EntityAnimalTFC mother, float father_size)
 	{
 		super (par1World,mother,father_size);
-		texture = "/mods/TFC/mob/Bear.png";
 		setSize (1.2F, 1.2F);
 		moveSpeed = 0.2F;
 		degreeOfDiversion = 4;
@@ -117,22 +113,12 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	}
 
 	/**
-	 * Sets the active target the Task system uses for tracking
-	 */
-	@Override
-	public void setAttackTarget (EntityLiving par1EntityLiving)
-	{
-		super.setAttackTarget (par1EntityLiving);
-	}
-
-
-	/**
 	 * main AI tick function, replaces updateEntityActionState
 	 */
 	@Override
 	protected void updateAITick ()
 	{
-		dataWatcher.updateObject (18, Integer.valueOf (getHealth ()));
+		dataWatcher.updateObject (18, func_110143_aJ());
 	}
 
 
@@ -146,7 +132,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	protected void entityInit ()
 	{
 		super.entityInit ();
-		dataWatcher.addObject (18, new Integer (getHealth ()));
+		dataWatcher.addObject (18,func_110143_aJ());
 	}
 
 
@@ -208,7 +194,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	protected String getHurtSound ()
 	{
 		if(!isChild()){
-		return "mob.wolf.growl";
+			return "mob.wolf.growl";
 		}
 		else{
 			return "mob.wolf.whine";
@@ -254,7 +240,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public void onLivingUpdate ()
 	{
 		super.onLivingUpdate ();
-//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
+		//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
 		if (!worldObj.isRemote && !field_25052_g && !hasPath () && onGround)
 		{
 			field_25052_g = true;
@@ -264,8 +250,8 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x<i;x++){
-				EntityBear baby = new EntityBear(worldObj, this,mateSizeMod);
-				giveBirth(baby);
+					EntityBear baby = new EntityBear(worldObj, this,mateSizeMod);
+					giveBirth(baby);
 				}
 				pregnant = false;
 			}
@@ -300,22 +286,6 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public float getEyeHeight ()
 	{
 		return height * 0.8F;
-	}
-
-
-	/**
-	 * Called when the entity is attacked.
-	 */
-	@Override
-	public boolean attackEntityFrom (DamageSource par1DamageSource, int par2)
-	{
-		Entity entity = par1DamageSource.getEntity ();
-
-		if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
-		{
-			par2 = (par2 + 1) / 2;
-		}
-		return super.attackEntityFrom (par1DamageSource, par2);
 	}
 
 	@Override

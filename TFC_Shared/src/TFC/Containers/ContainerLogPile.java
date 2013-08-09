@@ -1,39 +1,14 @@
 package TFC.Containers;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotLogPile;
 import TFC.Items.ItemLogs;
 import TFC.TileEntities.TileEntityLogPile;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 
 public class ContainerLogPile extends ContainerTFC
 {
@@ -60,10 +35,11 @@ public class ContainerLogPile extends ContainerTFC
 	/**
 	 * Callback for when the crafting gui is closed.
 	 */
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
+	@Override
+	public void onContainerClosed(EntityPlayer par1EntityPlayer)
 	{
-		super.onCraftGuiClosed(par1EntityPlayer);
-		
+		super.onContainerClosed(par1EntityPlayer);
+
 		if(!world.isRemote)
 		{
 			logpile.closeChest();
@@ -155,109 +131,114 @@ public class ContainerLogPile extends ContainerTFC
 	public EntityPlayer getPlayer() {
 		return player;
 	}
-	
+
 	@Override
-    protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
-    {
-        boolean var5 = false;
-        int var6 = par2;
+	protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	{
+		boolean var5 = false;
+		int var6 = par2;
 
-        if (par4)
-        {
-            var6 = par3 - 1;
-        }
+		if (par4)
+		{
+			var6 = par3 - 1;
+		}
 
-        Slot var7;
-        ItemStack var8;
-        int stackSize = par1ItemStack.getMaxStackSize();
+		Slot var7;
+		ItemStack var8;
+		int stackSize = par1ItemStack.getMaxStackSize();
 
-        if (par1ItemStack.isStackable())
-        {
-            while (par1ItemStack.stackSize > 0 && (!par4 && var6 < par3 || par4 && var6 >= par2))
-            {
-            	if(var6 < 4)
-            		stackSize = 4;
-            	else stackSize = par1ItemStack.getMaxStackSize();
-                var7 = (Slot)this.inventorySlots.get(var6);
-                var8 = var7.getStack();
+		if (par1ItemStack.isStackable())
+		{
+			while (par1ItemStack.stackSize > 0 && (!par4 && var6 < par3 || par4 && var6 >= par2))
+			{
+				if(var6 < 4) {
+					stackSize = 4;
+				} else {
+					stackSize = par1ItemStack.getMaxStackSize();
+				}
+				var7 = (Slot)this.inventorySlots.get(var6);
+				var8 = var7.getStack();
 
-                if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8))
-                {
-                    int var9 = var8.stackSize + par1ItemStack.stackSize;
+				if (var8 != null && var8.itemID == par1ItemStack.itemID && (!par1ItemStack.getHasSubtypes() || par1ItemStack.getItemDamage() == var8.getItemDamage()) && ItemStack.areItemStackTagsEqual(par1ItemStack, var8))
+				{
+					int var9 = var8.stackSize + par1ItemStack.stackSize;
 
-                    if (var9 <= stackSize)
-                    {
-                        par1ItemStack.stackSize = 0;
-                        var8.stackSize = var9;
-                        var7.onSlotChanged();
-                        var5 = true;
-                    }
-                    else if (var8.stackSize < stackSize)
-                    {
-                        par1ItemStack.stackSize -= stackSize - var8.stackSize;
-                        if(par1ItemStack.stackSize < 0)
-                        	par1ItemStack.stackSize = 0;
-                        var8.stackSize = stackSize;
-                        var7.onSlotChanged();
-                        var5 = true;
-                    }
-                }
+					if (var9 <= stackSize)
+					{
+						par1ItemStack.stackSize = 0;
+						var8.stackSize = var9;
+						var7.onSlotChanged();
+						var5 = true;
+					}
+					else if (var8.stackSize < stackSize)
+					{
+						par1ItemStack.stackSize -= stackSize - var8.stackSize;
+						if(par1ItemStack.stackSize < 0) {
+							par1ItemStack.stackSize = 0;
+						}
+						var8.stackSize = stackSize;
+						var7.onSlotChanged();
+						var5 = true;
+					}
+				}
 
-                if (par4)
-                {
-                    --var6;
-                }
-                else
-                {
-                    ++var6;
-                }
-            }
-        }
+				if (par4)
+				{
+					--var6;
+				}
+				else
+				{
+					++var6;
+				}
+			}
+		}
 
-        if (par1ItemStack.stackSize > 0)
-        {
-            if (par4)
-            {
-                var6 = par3 - 1;
-            }
-            else
-            {
-                var6 = par2;
-            }
+		if (par1ItemStack.stackSize > 0)
+		{
+			if (par4)
+			{
+				var6 = par3 - 1;
+			}
+			else
+			{
+				var6 = par2;
+			}
 
-            while (!par4 && var6 < par3 || par4 && var6 >= par2)
-            {
-            	if(var6 < 4)
-            		stackSize = 4;
-            	else stackSize = par1ItemStack.getMaxStackSize();
-            	
-                var7 = (Slot)this.inventorySlots.get(var6);
-                var8 = var7.getStack();
+			while (!par4 && var6 < par3 || par4 && var6 >= par2)
+			{
+				if(var6 < 4) {
+					stackSize = 4;
+				} else {
+					stackSize = par1ItemStack.getMaxStackSize();
+				}
 
-                if (var8 == null)
-                {
-                    var7.putStack(par1ItemStack.copy());
-                    var7.onSlotChanged();
-                    par1ItemStack.stackSize -= stackSize;
-                    var5 = true;
-                    if(par1ItemStack.stackSize <= 0)
-                    {
-                    	par1ItemStack.stackSize = 0;
-                    	break;
-                    }
-                }
+				var7 = (Slot)this.inventorySlots.get(var6);
+				var8 = var7.getStack();
 
-                if (par4)
-                {
-                    --var6;
-                }
-                else
-                {
-                    ++var6;
-                }
-            }
-        }
+				if (var8 == null)
+				{
+					var7.putStack(par1ItemStack.copy());
+					var7.onSlotChanged();
+					par1ItemStack.stackSize -= stackSize;
+					var5 = true;
+					if(par1ItemStack.stackSize <= 0)
+					{
+						par1ItemStack.stackSize = 0;
+						break;
+					}
+				}
 
-        return var5;
-    }
+				if (par4)
+				{
+					--var6;
+				}
+				else
+				{
+					++var6;
+				}
+			}
+		}
+
+		return var5;
+	}
 }

@@ -71,9 +71,9 @@ public class ContainerScribe extends ContainerTFC
 		te = TE;
 	}
 	@Override
-	public void onCraftGuiClosed(EntityPlayer entityplayer)
+	public void onContainerClosed(EntityPlayer entityplayer)
 	{
-		super.onCraftGuiClosed(entityplayer);
+		super.onContainerClosed(entityplayer);
 		if (worldObj.isRemote)
 		{
 			return;
@@ -88,7 +88,7 @@ public class ContainerScribe extends ContainerTFC
 			}
 		}
 	}
-	
+
 	/*public void openBook(ItemStack temp2){
 		//ItemStack temp = temp2;
 		terraScribe.scribeItemStacks[1] = null;
@@ -96,14 +96,14 @@ public class ContainerScribe extends ContainerTFC
 			//if(temp.hasTagCompound())System.out.println(temp.getTagCompound());
 			terraScribe.nullifyBook();
 			((EntityPlayerSP) entityplayer).getMcField().displayGuiScreen(new GuiScreenBookTFC(entityplayer, temp2, true));
-			
+
 			}
 	}*/
 	@Override
 	public void onCraftMatrixChanged(IInventory iinventory)
 	{
 		//Check if there is paper in the paper slot.
-		
+
 		/*if(te!=null){
 			te.initGui();
 			}
@@ -112,7 +112,7 @@ public class ContainerScribe extends ContainerTFC
 			ItemStack temp = terraScribe.scribeItemStacks[1];
 			//craftResult.setInventorySlotContents(0,temp); 
 			//if(!worldObj.isRemote)terraScribe.scribeItemStacks[1]= null;
-			
+
 		}*/
 		if(terraScribe.scribeItemStacks[1] != null && 
 				terraScribe.scribeItemStacks[1].getItem() == Item.paper) {
@@ -123,8 +123,8 @@ public class ContainerScribe extends ContainerTFC
 			craftResult.setInventorySlotContents(0, null);
 		}
 	}
-	
-	
+
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int i)
 	{

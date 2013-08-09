@@ -64,9 +64,9 @@ public class ContainerMetallurgy extends ContainerTFC
 		return true;
 	}
 	@Override
-	public void onCraftGuiClosed(EntityPlayer entityplayer)
+	public void onContainerClosed(EntityPlayer entityplayer)
 	{
-		super.onCraftGuiClosed(entityplayer);
+		super.onContainerClosed(entityplayer);
 		if (worldObj.isRemote)
 		{
 			return;
@@ -76,8 +76,9 @@ public class ContainerMetallurgy extends ContainerTFC
 			ItemStack itemstack = craftMatrix.getStackInSlot(i);
 			if (itemstack != null)
 			{
-			    if(itemstack.stackSize > 0)
-			        entityplayer.dropPlayerItem(itemstack);
+				if(itemstack.stackSize > 0) {
+					entityplayer.dropPlayerItem(itemstack);
+				}
 			}
 		}
 	}
@@ -102,15 +103,15 @@ public class ContainerMetallurgy extends ContainerTFC
 					stack.stackSize = 1;
 				}
 				craftResult.setInventorySlotContents(0, stack);
-			}
-			else
+			} else {
 				craftResult.setInventorySlotContents(0, null);
-			
-		}
-		else
+			}
+
+		} else {
 			craftResult.setInventorySlotContents(0, null);
+		}
 	}
-	
+
 	/*@Override
 	public ItemStack slotClick(int i, int j, int flag, EntityPlayer entityplayer)
 	{
@@ -248,7 +249,7 @@ public class ContainerMetallurgy extends ContainerTFC
 		onCraftMatrixChanged(craftMatrix);
 		return itemstack;
 	}*/
-	
+
 	/*@Override
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
     {

@@ -14,7 +14,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -87,18 +86,16 @@ public class EntityWolfTFC extends EntityTameableTFC
 		super(par1World,mother,F_size);
 		fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
-		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
-		this.moveSpeed = 0.4F;
 		warning = -121;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
-		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, this.moveSpeed, 10.0F, 2.0F));
-		this.tasks.addTask(6, new EntityAIMateTFC(this, this.moveSpeed));
-		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0, true));
+		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, 1.0f, 10.0F, 2.0F));
+		this.tasks.addTask(6, new EntityAIMateTFC(this, 1.0f));
+		this.tasks.addTask(7, new EntityAIWander(this, 1f));
 		this.tasks.addTask(8, new EntityAIBegTFC(this, 8.0F));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -117,20 +114,6 @@ public class EntityWolfTFC extends EntityTameableTFC
 	public boolean isAIEnabled()
 	{
 		return true;
-	}
-
-	/**
-	 * Sets the active target the Task system uses for tracking
-	 */
-	@Override
-	public void setAttackTarget(EntityLiving par1EntityLiving)
-	{
-		super.setAttackTarget(par1EntityLiving);
-
-		if (par1EntityLiving instanceof EntityPlayer)
-		{
-			this.setAngry(true);
-		}
 	}
 
 	/**
@@ -163,15 +146,6 @@ public class EntityWolfTFC extends EntityTameableTFC
 	protected boolean canTriggerWalking()
 	{
 		return false;
-	}
-
-	/**
-	 * Returns the texture's file path as a String.
-	 */
-	@Override
-	public String getTexture()
-	{
-		return this.isTamed() ? "/mob/wolf_tame.png" : (this.isAngry() ? "/mob/wolf_angry.png" : texture);
 	}
 
 	/**
@@ -422,22 +396,6 @@ public class EntityWolfTFC extends EntityTameableTFC
 		return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
 	}
 
-	/**
-	 * Called when the entity is attacked.
-	 */
-	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
-	{
-		Entity var3 = par1DamageSource.getEntity();
-		this.aiSit.setIsSitting(false);
-
-		if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
-		{
-			par2 = (par2 + 1) / 2;
-		}
-
-		return super.attackEntityFrom(par1DamageSource, par2);
-	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
