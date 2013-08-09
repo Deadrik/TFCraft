@@ -82,9 +82,12 @@ public class ItemPotteryJug extends ItemPotteryBase
 		if(!world.isRemote && (id == Block.waterStill.blockID || id == Block.waterMoving.blockID))
 		{
 			if(itemstack.getItemDamage() == 1)
+			{
 				itemstack.setItemDamage(2);
+				return true;
+			}
 		}
-		return false;
+		return super.onItemUse(itemstack, entityplayer, world, x, y, z, side, HitX, HitY, HitZ);
 	}
 
 	@Override
