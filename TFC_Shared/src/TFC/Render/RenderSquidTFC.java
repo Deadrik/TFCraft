@@ -3,7 +3,6 @@ package TFC.Render;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderSquid;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySquid;
 
@@ -22,16 +21,9 @@ public class RenderSquidTFC extends RenderSquid
 	}
 
 	/**
-	 * Renders the Living Squid.
-	 */
-	public void renderLivingSquid(EntitySquid par1EntitySquid, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRenderLiving(par1EntitySquid, par2, par4, par6, par8, par9);
-	}
-
-	/**
 	 * Rotates the Squid's corpse.
 	 */
+	@Override
 	protected void rotateSquidsCorpse(EntitySquid par1EntitySquid, float par2, float par3, float par4)
 	{
 		float f3 = par1EntitySquid.prevSquidPitch + (par1EntitySquid.squidPitch - par1EntitySquid.prevSquidPitch) * par4;
@@ -43,6 +35,7 @@ public class RenderSquidTFC extends RenderSquid
 		GL11.glTranslatef(0.0F, -1.2F, 0.0F);
 	}
 
+	@Override
 	protected float handleRotationFloat(EntitySquid par1EntitySquid, float par2)
 	{
 		return par1EntitySquid.prevTentacleAngle + (par1EntitySquid.tentacleAngle - par1EntitySquid.prevTentacleAngle) * par2;
@@ -72,12 +65,6 @@ public class RenderSquidTFC extends RenderSquid
 	protected void rotateCorpse(EntityLivingBase par1EntityLiving, float par2, float par3, float par4)
 	{
 		this.rotateSquidsCorpse((EntitySquid)par1EntityLiving, par2, par3, par4);
-	}
-
-	@Override
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-	{
-		this.renderLivingSquid((EntitySquid)par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 
 	/**

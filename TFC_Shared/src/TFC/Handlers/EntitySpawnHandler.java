@@ -58,8 +58,8 @@ public class EntitySpawnHandler
 		if (event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer entity = (EntityPlayer) event.entity;
-			entity.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
-			entity.setEntityHealth(1000);
+			//entity.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
+			//entity.setEntityHealth(1000);
 		}
 
 

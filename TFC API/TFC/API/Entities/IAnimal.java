@@ -24,13 +24,11 @@ public interface IAnimal
 	 */
 	public float getSize();
 
-	public boolean matesForLife();
-
-	public boolean isRutting();
-
 	public boolean isPregnant();
 
 	public boolean isInLove();
+
+	public void setInLove(boolean b);
 
 	public EntityLiving getEntity();
 
@@ -38,8 +36,12 @@ public interface IAnimal
 
 	public void mate(IAnimal animal);
 
-	public IAnimal getMate();
+	public long getAnimalID();
 
-	public void setMate(IAnimal mate);
+	public void setAnimalID(long id);
+
+	public int getHunger();
+
+	public void setHunger(int h);
 
 }

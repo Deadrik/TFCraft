@@ -14,12 +14,12 @@ public class EntityAIMateTFC extends EntityAIBase
 	private IAnimal theAnimal;
 	World theWorld;
 	private IAnimal targetMate;
-	int field_48261_b;
+	int matingCounter;
 	float field_48262_c;
 
 	public EntityAIMateTFC (IAnimal par1EntityAnimal, World world, float par2)
 	{
-		field_48261_b = 0;
+		matingCounter = 0;
 		theAnimal = par1EntityAnimal;
 		theWorld = world;
 		field_48262_c = par2;
@@ -39,7 +39,7 @@ public class EntityAIMateTFC extends EntityAIBase
 		}
 		else
 		{
-			targetMate = func_48258_h();
+			targetMate = getLocalMate();
 			if (targetMate != null){
 				if ((targetMate.getGender() == GenderEnum.MALE && theAnimal.getGender() == GenderEnum.MALE) 
 						|| (theAnimal.isPregnant() || targetMate.isPregnant())){
@@ -57,7 +57,7 @@ public class EntityAIMateTFC extends EntityAIBase
 	@Override
 	public boolean continueExecuting ()
 	{
-		return targetMate.getEntity().isEntityAlive() && targetMate.isInLove() && field_48261_b < 60 && 
+		return targetMate.getEntity().isEntityAlive() && targetMate.isInLove() && matingCounter < 60 && 
 				((targetMate.getGender() == GenderEnum.FEMALE && theAnimal.getGender() == GenderEnum.MALE) || 
 						(targetMate.getGender() == GenderEnum.MALE && theAnimal.getGender() == GenderEnum.FEMALE));
 	}
@@ -69,13 +69,8 @@ public class EntityAIMateTFC extends EntityAIBase
 	@Override
 	public void resetTask ()
 	{
-		if (!theAnimal.matesForLife())
-		{
-			targetMate.setMate(null);
-			targetMate = null;
-			theAnimal.setMate(null);
-			field_48261_b = 0;
-		}
+		targetMate = null;
+		matingCounter = 0;
 	}
 
 
@@ -88,16 +83,16 @@ public class EntityAIMateTFC extends EntityAIBase
 		theAnimal.getEntity().getLookHelper().setLookPositionWithEntity(targetMate.getEntity(), 10F, 
 				theAnimal.getEntity().getVerticalFaceSpeed());
 		theAnimal.getEntity().getNavigator().tryMoveToEntityLiving(targetMate.getEntity(), field_48262_c);
-		field_48261_b++;
+		matingCounter++;
 
-		if (field_48261_b == 60)
+		if (matingCounter == 60)
 		{
 			theAnimal.mate(targetMate);
 		}
 	}
 
 
-	private IAnimal func_48258_h ()
+	private IAnimal getLocalMate()
 	{
 		float f = 8F;
 		List list = theWorld.getEntitiesWithinAABB (theAnimal.getClass (), theAnimal.getEntity().boundingBox.expand (f, f, f));

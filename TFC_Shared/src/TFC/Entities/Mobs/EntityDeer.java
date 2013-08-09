@@ -3,8 +3,9 @@ package TFC.Entities.Mobs;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
@@ -15,20 +16,29 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TFC.Core.TFC_Settings;
+import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
-import TFC.Entities.AI.EntityAIAvoidEntityTFC;
 import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
-import TFC.Entities.AI.EntityAIPanicTFC;
 
-public class EntityDeer extends EntityAnimalTFC
+public class EntityDeer extends EntityAnimal implements IAnimal
 {    
 
 	/** The eat grass AI task for this mob. */
 	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
 	private boolean running;
+
+	protected long animalID;
+	protected int sex;
+	protected int hunger;
+	protected long hasMilkTime;
+	protected int age;
+	protected boolean pregnant;
+	protected int pregnancyTime;
+	protected long conception;
+	protected float mateSizeMod;
+	public float size_mod;
+	public boolean inLove;
 
 	public EntityDeer(World par1World)
 	{
@@ -39,11 +49,11 @@ public class EntityDeer extends EntityAnimalTFC
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
+		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, var2));
 		//this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
 		//this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8.0F, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16.0F, 0.25F, 0.3F));
+		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityBear.class, 16f, 0.25F, 0.3F));
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
 		//this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		//this.tasks.addTask(5, this.aiEatGrass);
@@ -52,27 +62,11 @@ public class EntityDeer extends EntityAnimalTFC
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		//this.tasks.addTask(8, new EntityAILookIdle(this));
 	}
-	public EntityDeer(World par1World,EntityAnimalTFC mother, float F_size)
+	public EntityDeer(World par1World, IAnimal mother, float F_size)
 	{
-		super(par1World,mother,F_size);
-		running = false;
-		this.setSize(0.9F, 1.3F);
-		float var2 = 0.23F / 1.1F;
-		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, var2));
-		this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
-		//this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityWolfTFC.class, 8.0F, 0.5F, 0.7F));
-		this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityBear.class, 16.0F, 0.25F, 0.3F));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
-		this.tasks.addTask(5, this.aiEatGrass);
-		//this.tasks.addTask(5, new EntityAIRutt(this, var2));
-		this.tasks.addTask(6, new EntityAIWander(this, var2));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		this(par1World);
+		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + F_size)/1.9F);
+		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 	}
 
 	/**
@@ -104,13 +98,13 @@ public class EntityDeer extends EntityAnimalTFC
 	@Override
 	public void onLivingUpdate()
 	{
-		if(pregnant){
+		/*if(pregnant){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime * TFC_Settings.dayLength){
 				EntityDeer baby = new EntityDeer(worldObj, this,mateSizeMod);
 				giveBirth(baby);
 				pregnant = false;
 			}
-		}
+		}*/
 
 		super.onLivingUpdate();
 	}
@@ -247,27 +241,6 @@ public class EntityDeer extends EntityAnimalTFC
 	}
 
 	/**
-	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-	 */
-	@Override
-	public void procreate(EntityAnimal par1EntityAnimal)
-	{
-		EntityDeer var2 = (EntityDeer)par1EntityAnimal;
-		EntityDeer var3 = new EntityDeer(this.worldObj);
-
-		if (this.rand.nextBoolean())
-		{
-			var3.setFleeceColor(this.getFleeceColor());
-		}
-		else
-		{
-			var3.setFleeceColor(var2.getFleeceColor());
-		}
-
-		worldObj.spawnEntityInWorld(var3);
-	}
-
-	/**
 	 * This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
 	 * function is used in the AIEatGrass)
 	 */
@@ -287,6 +260,109 @@ public class EntityDeer extends EntityAnimalTFC
 
 			this.setGrowingAge(var1);
 		}
+	}
+
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
+	}
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable entityageable) 
+	{
+		return new EntityChickenTFC(worldObj, this);
+	}
+
+	@Override
+	public int getAge() 
+	{
+		return this.dataWatcher.getWatchableObjectInt(12);
+	}
+
+	@Override
+	public int getNumberOfDaysToAdult() 
+	{
+		return TFC_Time.daysInMonth * 3;
+	}
+
+	@Override
+	public boolean isAdult() 
+	{
+		return getAge() >= getNumberOfDaysToAdult();
+	}
+
+	@Override
+	public float getSize() 
+	{
+		return 0.5f;
+	}
+
+	@Override
+	public boolean isPregnant() 
+	{
+		return pregnant;
+	}
+
+	@Override
+	public EntityLiving getEntity() 
+	{
+		return this;
+	}
+
+	@Override
+	public boolean canMateWith(IAnimal animal) 
+	{
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityChickenTFC) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void mate(IAnimal otherAnimal) 
+	{
+		if (sex == 0)
+		{
+			otherAnimal.mate(this);
+			return;
+		}
+		conception = TFC_Time.getTotalTicks();
+		pregnant = true;
+		//targetMate.setGrowingAge (TFC_Settings.dayLength);
+		resetInLove();
+		otherAnimal.setInLove(false);
+		mateSizeMod = otherAnimal.getSize();
+	}
+
+	@Override
+	public void setInLove(boolean b) 
+	{
+		this.inLove = b;
+	}
+
+	@Override
+	public long getAnimalID() 
+	{
+		return animalID;
+	}
+
+	@Override
+	public void setAnimalID(long id) 
+	{
+		animalID = id;
+	}
+
+	@Override
+	public int getHunger() {
+		return hunger;
+	}
+
+	@Override
+	public void setHunger(int h) 
+	{
+		hunger = h;
 	}
 
 }

@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAITargetTFC;
 
 public class EntityAnimalTFC extends EntityAnimal
 {
@@ -53,7 +52,7 @@ public class EntityAnimalTFC extends EntityAnimal
 
 	public long adultTime;
 	protected long birthTime;
-	
+
 	protected long hasMilkTime;
 
 	public EntityAnimalTFC(World par1World)
@@ -84,7 +83,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime;
-		
+
 		hasMilkTime = 0;
 	}
 
@@ -116,22 +115,22 @@ public class EntityAnimalTFC extends EntityAnimal
 		birthTime = TFC_Time.getTotalTicks();
 		adultAge = 3 * TFC_Time.daysInMonth;
 		adultTime = birthTime + TFC_Settings.dayLength * adultAge;
-		
+
 		hasMilkTime = 0;
 	}
-	
+
 	@Override
 	protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(30, new Integer(0));
-        this.dataWatcher.addObject(31, new Integer(0));
-    }
-	
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(30, new Integer(0));
+		this.dataWatcher.addObject(31, new Integer(0));
+	}
+
 	public int getSex(){
 		return this.dataWatcher.getWatchableObjectInt(30);
 	}
-	
+
 	public float getSize(){
 		return this.dataWatcher.getWatchableObjectInt(31)/10f;
 	}
@@ -183,7 +182,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		{
 			hunger--;
 		}
-		
+
 		if(!this.worldObj.isRemote){
 			this.dataWatcher.updateObject(30, Integer.valueOf(sex));
 			this.dataWatcher.updateObject(31, Integer.valueOf((int)(size_mod*10)));
@@ -204,7 +203,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		}
 		long i = TFC_Time.getTotalTicks() - adultTime;
 
-		
+
 		if (i < 0)
 		{
 			i++;
@@ -329,7 +328,7 @@ public class EntityAnimalTFC extends EntityAnimal
 			boolean y = wantsItem(((EntityItem)par1Entity).getEntityItem());
 		}
 	}
-	
+
 	@Override
 	public boolean isChild(){
 		return false;
@@ -468,13 +467,13 @@ public class EntityAnimalTFC extends EntityAnimal
 		int k = MathHelper.floor_double (posZ);
 		return worldObj.getBlockId (i, j - 1, k) == Block.grass.blockID && worldObj.getFullBlockLightValue (i, j, k) > 8 && super.getCanSpawnHere ();
 	}
-	
+
 
 	public boolean canMateWith (EntityAnimalTFC par1EntityAnimal)
 	{
 		return super.canMateWith(par1EntityAnimal) && par1EntityAnimal.sex != sex;
 	}
-	
+
 	public void procreate(EntityAnimal var1)
 	{
 
@@ -490,7 +489,8 @@ public class EntityAnimalTFC extends EntityAnimal
 
 	public void mate(EntityAnimalTFC targetMate)
 	{
-		if (sex == 0){
+		if (sex == 0)
+		{
 			targetMate.mate(this);
 			return;
 		}
@@ -504,14 +504,14 @@ public class EntityAnimalTFC extends EntityAnimal
 
 	public void giveBirth (EntityAnimalTFC entityanimal)
 	{
-		
+
 		entityanimal.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
 		entityanimal.rotationYawHead = entityanimal.rotationYaw;
 		entityanimal.renderYawOffset = entityanimal.rotationYaw;
 		//entityanimal.initCreature();
 		worldObj.spawnEntityInWorld(entityanimal);
 		entityanimal.setGrowingAge(entityanimal.adultAge * -TFC_Settings.dayLength);
-		
+
 	}
 
 	@Override

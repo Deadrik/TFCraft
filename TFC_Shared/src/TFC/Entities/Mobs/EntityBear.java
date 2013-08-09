@@ -3,31 +3,32 @@ package TFC.Entities.Mobs;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
+import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_MobDamage;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
-import TFC.Entities.EntityTameableTFC;
-import TFC.Entities.AI.EntityAIPanicTFC;
-import TFC.Entities.AI.EntityAITargetNonTamedTFC;
 
-public class EntityBear extends EntityTameableTFC implements ICausesDamage
+public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 {
 	/**
 	 * This flag is set when the bear is looking at a player with interest, i.e. with tilted head. This happens when
@@ -41,6 +42,18 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	/** true is the wolf is wet else false */
 	private boolean field_25052_g;
 
+	protected long animalID;
+	protected int sex;
+	protected int hunger;
+	protected long hasMilkTime;
+	protected int age;
+	protected boolean pregnant;
+	protected int pregnancyTime;
+	protected long conception;
+	protected float mateSizeMod;
+	public float size_mod;
+	public boolean inLove;
+
 
 	public EntityBear (World par1World)
 	{
@@ -50,52 +63,30 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		tasks.addTask (4, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
-		if (sex == 0)
+		if (getGender() == GenderEnum.MALE)
 		{
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
 		}
-		degreeOfDiversion = 4;
 		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
 		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
 		tasks.addTask (9, new EntityAILookIdle (this));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntitySheepTFC.class, 16F, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPigTFC.class, 16F, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
+		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntitySheepTFC.class,200, false));
+		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
+		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPlayer.class, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAIPanicTFC(this,moveSpeed*1.5F,true,false));
-		fooditems.add(Item.beefRaw.itemID);
+		targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
+		/*fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
-		fooditems.add(Item.fishRaw.itemID);
+		fooditems.add(Item.fishRaw.itemID);*/
 	}
 
 
-	public EntityBear (World par1World, EntityAnimalTFC mother, float father_size)
+	public EntityBear (World par1World, IAnimal mother, float father_size)
 	{
-		super (par1World,mother,father_size);
-		setSize (1.2F, 1.2F);
-		moveSpeed = 0.2F;
-		degreeOfDiversion = 4;
-		getNavigator ().setAvoidsWater (true);
-		tasks.addTask (1, new EntityAISwimming (this));
-		tasks.addTask (3, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
-		if (sex == 0)
-		{
-			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
-		}
-		tasks.addTask (7, new EntityAIWander (this, moveSpeed));
-		tasks.addTask (8, new EntityAIWatchClosest (this, EntityPlayer.class, 8F));
-		tasks.addTask (9, new EntityAILookIdle (this));
-		//targetTasks.addTask (3, new EntityAIHurtByTarget (this, true));
-		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntitySheepTFC.class, 16F, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPigTFC.class, 16F, 200, false));
-		targetTasks.addTask (4, new EntityAITargetNonTamedTFC (this, EntityPlayer.class, 16F, 200, false));
-		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAIPanicTFC(this,moveSpeed*1.5F,true,false));
-		fooditems.add(Item.beefRaw.itemID);
-		fooditems.add(Item.porkRaw.itemID);
-		fooditems.add(Item.fishRaw.itemID);
+		this(par1World);
+		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
+		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 	}
 
 
@@ -106,10 +97,6 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	public boolean isAIEnabled ()
 	{
 		return true;
-	}
-	@Override
-	public int getDegree(){
-		return degreeOfDiversion;
 	}
 
 	/**
@@ -246,12 +233,12 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 			field_25052_g = true;
 			worldObj.setEntityState (this, (byte) 8);
 		}
-		if(pregnant){
+		if(this.isPregnant()){
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x<i;x++){
 					EntityBear baby = new EntityBear(worldObj, this,mateSizeMod);
-					giveBirth(baby);
+					worldObj.spawnEntityInWorld(baby);
 				}
 				pregnant = false;
 			}
@@ -259,7 +246,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 
 
 
-		if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
+		/*if (TFC_Time.getTotalTicks() == birthTime + 60 && this instanceof EntityBear && this.sex == 1&& rand.nextInt(10) == 0 && getGrowingAge() >= 0){
 			int i = rand.nextInt(3);
 			if (mateSizeMod == 0){
 				this.mateSizeMod = ((rand.nextInt (5) - 2) / 10f) + 1F;
@@ -267,7 +254,7 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 			for (int x = 0; x<i;x++){
 				giveBirth(new EntityBear(this.worldObj,this,this.mateSizeMod));
 			}
-		}
+		}*/
 	}
 
 
@@ -318,17 +305,6 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 		return 2;
 	}
 
-
-	/**
-	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-	 */
-	@Override
-	public void procreate (EntityAnimal par1EntityAnimal)
-	{
-		EntityBear entitybear = new EntityBear (worldObj, parent, ((EntityAnimalTFC)par1EntityAnimal).size_mod);
-		worldObj.spawnEntityInWorld(entitybear);
-	}
-
 	@Override
 	public boolean canMateWith (EntityAnimal par1EntityAnimal)
 	{
@@ -347,5 +323,108 @@ public class EntityBear extends EntityTameableTFC implements ICausesDamage
 	@Override
 	public EnumDamageType GetDamageType() {
 		return EnumDamageType.SLASHING;
+	}
+
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
+	}
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable entityageable) 
+	{
+		return new EntityChickenTFC(worldObj, this);
+	}
+
+	@Override
+	public int getAge() 
+	{
+		return this.dataWatcher.getWatchableObjectInt(12);
+	}
+
+	@Override
+	public int getNumberOfDaysToAdult() 
+	{
+		return TFC_Time.daysInMonth * 3;
+	}
+
+	@Override
+	public boolean isAdult() 
+	{
+		return getAge() >= getNumberOfDaysToAdult();
+	}
+
+	@Override
+	public float getSize() 
+	{
+		return 0.5f;
+	}
+
+	@Override
+	public boolean isPregnant() 
+	{
+		return pregnant;
+	}
+
+	@Override
+	public EntityLiving getEntity() 
+	{
+		return this;
+	}
+
+	@Override
+	public boolean canMateWith(IAnimal animal) 
+	{
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityWolfTFC) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public void mate(IAnimal otherAnimal) 
+	{
+		if (sex == 0)
+		{
+			otherAnimal.mate(this);
+			return;
+		}
+		conception = TFC_Time.getTotalTicks();
+		pregnant = true;
+		//targetMate.setGrowingAge (TFC_Settings.dayLength);
+		resetInLove();
+		otherAnimal.setInLove(false);
+		mateSizeMod = otherAnimal.getSize();
+	}
+
+	@Override
+	public void setInLove(boolean b) 
+	{
+		this.inLove = b;
+	}
+
+	@Override
+	public long getAnimalID() 
+	{
+		return animalID;
+	}
+
+	@Override
+	public void setAnimalID(long id) 
+	{
+		animalID = id;
+	}
+
+	@Override
+	public int getHunger() {
+		return hunger;
+	}
+
+	@Override
+	public void setHunger(int h) 
+	{
+		hunger = h;
 	}
 }

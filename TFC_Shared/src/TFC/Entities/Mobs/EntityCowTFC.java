@@ -25,23 +25,28 @@ import TFC.Entities.AI.EntityAIMateTFC;
 public class EntityCowTFC extends EntityAnimal implements IAnimal
 {
 	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	protected long animalID;
 	protected int sex;
+	protected int hunger;
 	protected long hasMilkTime;
-	protected int age;
 	protected boolean pregnant;
 	protected int pregnancyTime;
-	protected int conception;
-	protected int mateSizeMod;
+	protected long conception;
+	protected float mateSizeMod;
+	public float size_mod;
+	public boolean inLove;
 
 	public EntityCowTFC(World par1World)
 	{
 		super(par1World);
-
+		animalID = TFC_Time.getTotalTicks() + entityId;
+		hunger = 168000;
 		pregnant = false;
 		pregnancyTime = 4 * TFC_Time.daysInMonth;
 		conception = 0;
 		mateSizeMod = 0;
-
+		int degreeOfDiversion = 1;
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
@@ -53,6 +58,13 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 		this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
+	}
+
+	public EntityCowTFC(World par1World, IAnimal mother, float father_size)
+	{
+		this(par1World);
+		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
+		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 	}
 
 	@Override
@@ -91,24 +103,34 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 		return 500;
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.writeEntityToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setInteger ("Sex", sex);
+		par1NBTTagCompound.setLong ("Animal ID", animalID);
+		par1NBTTagCompound.setFloat ("Size Modifier", size_mod);
+		par1NBTTagCompound.setInteger ("Hunger", hunger);
+		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
+		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
+		par1NBTTagCompound.setLong("ConceptionTime",conception);
+		par1NBTTagCompound.setInteger("Age", getAge());
+		par1NBTTagCompound.setLong("HasMilkTime", hasMilkTime);
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		sex = par1NBTTagCompound.getInteger("Sex");
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		conception = nbt.getLong("ConceptionTime");
+		hasMilkTime = nbt.getLong("HasMilkTime");
+		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -179,19 +201,19 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer)
+	public boolean interact(EntityPlayer player)
 	{
 		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
 		{
-			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+			ItemStack var2 = player.inventory.getCurrentItem();
 			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) 
 			{
-				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
-				hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked ones every day
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
+				hasMilkTime = TFC_Time.getTotalTicks() + TFC_Time.dayLength;//Can be milked once every day
 				return true;
 			}
 		}
-		return super.interact(par1EntityPlayer);
+		return super.interact(player);
 	}
 
 	@Override
@@ -221,25 +243,13 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() > getNumberOfDaysToAdult();
+		return getAge() >= getNumberOfDaysToAdult();
 	}
 
 	@Override
 	public float getSize() 
 	{
 		return 0.5f;
-	}
-
-	@Override
-	public boolean matesForLife() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isRutting() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -255,26 +265,57 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public boolean canMateWith(IAnimal animal) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean canMateWith(IAnimal animal) 
+	{
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityCowTFC) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public void mate(IAnimal animal) {
-		// TODO Auto-generated method stub
-
+	public void mate(IAnimal otherAnimal) 
+	{
+		if (sex == 0)
+		{
+			otherAnimal.mate(this);
+			return;
+		}
+		conception = TFC_Time.getTotalTicks();
+		pregnant = true;
+		//targetMate.setGrowingAge (TFC_Settings.dayLength);
+		resetInLove();
+		otherAnimal.setInLove(false);
+		mateSizeMod = otherAnimal.getSize();
 	}
 
 	@Override
-	public IAnimal getMate() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setInLove(boolean b) 
+	{
+		this.inLove = b;
 	}
 
 	@Override
-	public void setMate(IAnimal mate) {
-		// TODO Auto-generated method stub
+	public long getAnimalID() 
+	{
+		return animalID;
+	}
 
+	@Override
+	public void setAnimalID(long id) 
+	{
+		animalID = id;
+	}
+
+	@Override
+	public int getHunger() {
+		return hunger;
+	}
+
+	@Override
+	public void setHunger(int h) 
+	{
+		hunger = h;
 	}
 }
