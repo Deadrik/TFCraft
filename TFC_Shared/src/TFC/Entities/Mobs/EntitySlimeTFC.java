@@ -21,7 +21,13 @@ public class EntitySlimeTFC extends EntitySlime
 	{
 		super.func_110147_ax();
 		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.SlimeDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(this.getSlimeSize()*350);//MaxHealth
+	}
+
+	@Override
+	protected void setSlimeSize(int par1)
+	{
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(par1*350);
+		this.setEntityHealth(this.func_110138_aP());
 	}
 
 	@Override

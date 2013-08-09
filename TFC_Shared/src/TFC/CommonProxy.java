@@ -98,7 +98,7 @@ public class CommonProxy implements IGuiHandler
 	public void registerRenderInformation() {
 		// NOOP on server
 	}
-	
+
 	public String getCurrentLanguage()
 	{
 		return null;
@@ -123,28 +123,28 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntityFruitTreeWood.class, "FruitTreeWood");
 		ModLoader.registerTileEntity(TileEntityPartial.class, "Partial");
 		ModLoader.registerTileEntity(TileEntityDetailed.class, "Detailed");
-		
+
 		ModLoader.registerTileEntity(TileEntityToolRack.class, "ToolRack");
 		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
-		
+
 		ModLoader.registerTileEntity(TileEntityQuern.class, "Quern");
 		ModLoader.registerTileEntity(TileEntityBellows.class, "Bellows");
 		ModLoader.registerTileEntity(TileEntitySapling.class, "Sapling");
-		
+
 		ModLoader.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile");
 		ModLoader.registerTileEntity(TileEntityBarrel.class, "Barrel");
-		
+
 		ModLoader.registerTileEntity(TileEntityBloom.class, "IronBloom");
 		ModLoader.registerTileEntity(TECrucible.class, "Crucible");
-		
+
 		if(b){
 			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
 			ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
 		}
-		
-		
+
+
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "Cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "Sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityBear.class, "Bear", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
@@ -177,9 +177,9 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerModEntity(EntityChickenTFC.class, "chickenTFC", 9,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityPigTFC.class, "pigTFC", 10,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityDeer.class, "deerTFC", 11,TerraFirmaCraft.instance, 160, 5, true);
-		
+
 		EntityRegistry.registerModEntity(EntityCustomMinecart.class, "TFC minecart", 12,TerraFirmaCraft.instance, 160, 5, true);
-		
+
 		EntityRegistry.registerModEntity(EntitySkeletonTFC.class, "skeletonTFC", 13,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityZombieTFC.class, "zombieTFC", 14,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySpiderTFC.class, "spiderTFC", 15,TerraFirmaCraft.instance, 160, 5, true);
@@ -192,7 +192,7 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerModEntity(EntityPigZombieTFC.class, "pigzombieTFC", 22,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityIronGolemTFC.class, "irongolemTFC", 23,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityCreeperTFC.class, "creeperTFC", 24,TerraFirmaCraft.instance, 160, 5, true);
-		
+
 		//EntityRegistry.registerModEntity(EntityArrowTFC.class, "deerTFC", 25,TerraFirmaCraft.instance, 160, 5, true);
 	}
 
@@ -261,7 +261,7 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.SteelSaw, "axe", 4);
 		MinecraftForge.setToolClass(TFCItems.TinSaw, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.ZincSaw, "axe", 1);
-		
+
 		MinecraftForge.setToolClass(TFCItems.StoneHammer, "hammer", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthHammer, "hammer", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzeHammer, "hammer", 2);
@@ -277,22 +277,22 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.TinHammer, "hammer", 1);
 		MinecraftForge.setToolClass(TFCItems.ZincHammer, "hammer", 1);
 	}
-	
+
 	public void onClientLogin()
 	{
-		
+
 	}
-	
+
 	public void registerTranslations() {
 	}
 
 	public File getMinecraftDir() {
 		return ModLoader.getMinecraftServerInstance().getFile("");/*new File(".");*/
 	}
-	
+
 	public void registerSkyProvider(TFCProvider P)
 	{
-		
+
 	}
 
 	public boolean isRemote() {
@@ -340,7 +340,7 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerKeyBindingHandler(){ 
 	}
-	
+
 	public void registerHighlightHandler(){ 
 	}
 
@@ -351,17 +351,17 @@ public class CommonProxy implements IGuiHandler
 	{
 		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendPacketToAllPlayers(packet);
 	}
-	
+
 	public void sendCustomPacketToPlayer(EntityPlayerMP player, Packet packet)
 	{ 
-		player.playerNetServerHandler.sendPacketToPlayer(packet);
+		//player.playerNetServerHandler.sendPacketToPlayer(packet);
 	}
-	
+
 	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)
 	{ 
 		ModLoader.getMinecraftServerInstance().getConfigurationManager().sendToAllNear(X, Y, Z, range, 0, packet);
 	}
-	
+
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) 
 	{
@@ -453,7 +453,7 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new ContainerVessel(player.inventory, world, x, y, z);
 		}
-		
+
 		default:
 		{
 			return null;
