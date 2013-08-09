@@ -22,23 +22,16 @@ import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
-import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EnteringChunkHandler;
-import TFC.Handlers.EntityDamageHandler;
-import TFC.Handlers.EntityLivingHandler;
-import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.ServerTickHandler;
 import TFC.Handlers.Client.ClientTickHandler;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
-import TFC.WorldGen.Generators.WorldGenCaveDecor;
-import TFC.WorldGen.Generators.WorldGenOre;
-import TFC.WorldGen.Generators.WorldGenOreSurface;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -68,14 +61,14 @@ public class TerraFirmaCraft
 
 	public TerraFirmaCraft()
 	{
-		
+
 	}
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		instance = this;
-		
+
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
@@ -87,12 +80,12 @@ public class TerraFirmaCraft
 		TFCItems.Setup();
 
 		//Register Generators
-		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(100,150));
+		/*GameRegistry.registerWorldGenerator(new WorldGenOreSurface(100,150));
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
-		
+		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());*/
+
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");
 		DimensionManager.unregisterProviderType(-1);
@@ -101,22 +94,22 @@ public class TerraFirmaCraft
 		DimensionManager.registerProviderType(0, TFCProvider.class, true);
 		DimensionManager.unregisterProviderType(1);
 		DimensionManager.registerProviderType(1, TFCProvider.class, true);
-		
+
 
 		//Register Key Bindings(Client only)
-		proxy.registerKeys();
+		/*proxy.registerKeys();
 
 		//Register KeyBinding Handler (Client only)
 		proxy.registerKeyBindingHandler();
 
 		//Register Block Highlight Handler (Client only)
-		proxy.registerHighlightHandler();
+		proxy.registerHighlightHandler();*/
 
 		//Register Tile Entites
 		proxy.registerTileEntities(true);
 
 		//Register Sound Handler (Client only)
-		proxy.registerSoundHandler();
+		/*proxy.registerSoundHandler();*/
 	}
 
 	@Init
@@ -136,44 +129,44 @@ public class TerraFirmaCraft
 		GameRegistry.registerCraftingHandler(new CraftingHandler());
 
 		// Register the Entity Spawn Handler
-		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
-		
+		/*MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
+
 		// Register the Entity Living Update Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
-		
+
 		// Register the Entity Hurt Handler
-		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());*/
 
 		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
-		
+
 		// Register Chat Listener
-		NetworkRegistry.instance().registerChatListener(new ChatListenerTFC());
+		//NetworkRegistry.instance().registerChatListener(new ChatListenerTFC());
 
 		// Register Packet Handler
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());
 
 		// Register all the render stuff for the client
-		proxy.registerRenderInformation();
-		
+		//proxy.registerRenderInformation();
+
 		// Register the Chunk Data Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());
-		
+
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkEventHandler());
-		
+
 		// Register the Chunk Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new EnteringChunkHandler());
-		
+
 		// Register Anvil Crafting Handler
 		MinecraftForge.EVENT_BUS.register(new AnvilCraftingHandler());
-		
+
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
-		
+
 		//Setup custom potion effects
 		TFCPotion.Setup();
-		
+
 		TFC_ItemHeat.SetupItemHeat();
 
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
@@ -185,7 +178,7 @@ public class TerraFirmaCraft
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(
 				LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), 
 				new ItemStack(TFCItems.WoodenBucketWater), new ItemStack(TFCItems.WoodenBucketEmpty)));
-		
+
 		TFC_Climate.initCache();
 	}
 

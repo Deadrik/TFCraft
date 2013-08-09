@@ -8,7 +8,6 @@ import TFC.TFCBlocks;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
 import TFC.WorldGen.DataLayer;
-import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -16,14 +15,12 @@ public class WorldGenClayPit implements IWorldGenerator
 {
 	/** The block ID for clay. */
 	private int clayBlockId;
-	private TFCBiome biome;
 
 	/** The number of blocks to generate. */
 	private int numberOfBlocks;
 
-	public WorldGenClayPit(int par1, TFCBiome b)
+	public WorldGenClayPit(int par1)
 	{
-		biome = b;
 		this.numberOfBlocks = par1;
 	}
 
@@ -58,8 +55,9 @@ public class WorldGenClayPit implements IWorldGenerator
 							{
 								world.setBlock(xCoord, yCoord, zCoord, 
 										TFC_Core.getTypeForClayGrass(rockLayer1.data2), TFC_Core.getSoilMetaFromStone(rockLayer1.data1, rockLayer1.data2), 0x2);
-								if(rand.nextInt(9) == 0 && world.getBlockId(xCoord, yCoord+1, zCoord) == 0)
+								if(rand.nextInt(9) == 0 && world.getBlockId(xCoord, yCoord+1, zCoord) == 0) {
 									world.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.Flora.blockID, 0, 2);
+								}
 							}
 						}
 					}

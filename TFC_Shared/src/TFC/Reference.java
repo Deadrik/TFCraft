@@ -12,5 +12,5 @@ public class Reference
 
 	public static final String AssetPath = "TFC/";
 	public static final String AssetPathPrefix = "mods.TFC.";
-	public static final String AssetPathGui = "TFC/textures/gui/";
+	public static final String AssetPathGui = "textures/gui/";
 }
