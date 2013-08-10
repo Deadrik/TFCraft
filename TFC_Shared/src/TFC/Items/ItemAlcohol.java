@@ -68,8 +68,8 @@ public class ItemAlcohol extends ItemTerra
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94590_d = par1IconRegister.registerIcon("potion");
-		this.field_94592_ct = par1IconRegister.registerIcon("potion_contents");
+		this.field_94590_d = par1IconRegister.registerIcon("potion_bottle_drinkable");
+		this.field_94592_ct = par1IconRegister.registerIcon("potion_overlay");
 	}
 
 	@Override

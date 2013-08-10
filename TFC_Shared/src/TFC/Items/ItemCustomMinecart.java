@@ -13,50 +13,50 @@ import TFC.Entities.EntityCustomMinecart;
 
 public class ItemCustomMinecart extends ItemTerra
 {
-    public int minecartType;
+	public int minecartType;
 
-    public ItemCustomMinecart(int par1, int par2)
-    {
-        super(par1);
-        this.maxStackSize = 1;
-        this.minecartType = par2;
-        this.setCreativeTab(CreativeTabs.tabTransport);
-    }
-    
-    @Override
-	public void registerIcons(IconRegister registerer)
-    {
-		this.itemIcon = registerer.registerIcon(textureFolder+this.getUnlocalizedName().replace("item.", ""));
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public ItemCustomMinecart(int par1, int par2)
 	{
-        int var11 = world.getBlockId(x, y, z);
+		super(par1);
+		this.maxStackSize = 1;
+		this.minecartType = par2;
+		this.setCreativeTab(CreativeTabs.tabTransport);
+	}
 
-        if (BlockRail.isRailBlock(var11))
-        {
-            if (!world.isRemote)
-            {
-                world.spawnEntityInWorld(new EntityCustomMinecart(world, x + 0.5F, y + 0.5F, z + 0.5F));
-            }
+	@Override
+	public void registerIcons(IconRegister registerer)
+	{
+		this.itemIcon = registerer.registerIcon("minecart_chest");
+	}
 
-            --itemstack.stackSize;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    @Override
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-        par3List.add(new ItemStack(par1, 1, 0));
-    }
-    
-    @Override
+	@Override
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+		int var11 = world.getBlockId(x, y, z);
+
+		if (BlockRail.isRailBlock(var11))
+		{
+			if (!world.isRemote)
+			{
+				world.spawnEntityInWorld(new EntityCustomMinecart(world, x + 0.5F, y + 0.5F, z + 0.5F));
+			}
+
+			--itemstack.stackSize;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
+	{
+		par3List.add(new ItemStack(par1, 1, 0));
+	}
+
+	@Override
 	public EnumSize getSize() {
 		// TODO Auto-generated method stub
 		return EnumSize.MEDIUM;
