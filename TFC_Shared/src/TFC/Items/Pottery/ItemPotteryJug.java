@@ -35,7 +35,7 @@ public class ItemPotteryJug extends ItemPotteryBase
             if (par1ItemStack.getItemDamage() > 1)
             {
             	if(par2World.rand.nextInt(25) == 0)
-            		par1ItemStack = null;
+            		par1ItemStack.stackSize--;
             	else
             	{
             		par1ItemStack.setItemDamage(1);
