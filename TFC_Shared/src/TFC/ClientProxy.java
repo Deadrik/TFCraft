@@ -650,7 +650,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerTranslations() {
 		LanguageRegistry LR = LanguageRegistry.instance();
-
 		LR.addStringLocalization("entity.Bear.name", StringUtil.localize("entity.Bear"));
 		LR.addStringLocalization("entity.Deer.name", StringUtil.localize("entity.Deer"));
 		LR.addStringLocalization("entity.irongolem.name", StringUtil.localize("entity.irongolem"));

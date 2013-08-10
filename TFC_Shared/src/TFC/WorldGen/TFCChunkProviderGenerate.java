@@ -3,10 +3,8 @@ package TFC.WorldGen;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -17,7 +15,6 @@ import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.WorldGen.Generators.WorldGenLakesTFC;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -101,13 +98,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		this.rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 
-		int[] ids = new int[32768];
-		int[] idsTop = new int[32768];
-		int[] meta = new int[32768];
-		int[] metaTop = new int[32768];
+		short[] ids = new short[32768];
+		short[] idsTop = new short[32768];
+		byte[] meta = new byte[32768];
+		byte[] metaTop = new byte[32768];
 
-		int[] idsBig = new int[16*16*256];
-		int[] metaBig = new int[16*16*256];
+		short[] idsBig = new short[16*16*256];
+		byte[] metaBig = new byte[16*16*256];
 
 		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
 
@@ -127,7 +124,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		new MapGenRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 		new MapGenRiverRavine256TFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
 
-		Chunk var4 = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
+		ChunkTFC var4 = new ChunkTFC(this.worldObj, idsBig, metaBig, chunkX, chunkZ);
 
 		ChunkData data = new ChunkData().CreateNew(chunkX, chunkZ);
 		String key = data.chunkX + "," + data.chunkZ;
@@ -142,7 +139,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	@Override
 	public void populate(IChunkProvider par1IChunkProvider, int chunkX, int chunkZ)
 	{
-		BlockSand.fallInstantly = true;
+		/*BlockSand.fallInstantly = true;
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
 		BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
@@ -199,7 +196,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			}
 		}
 
-		BlockSand.fallInstantly = false;
+		BlockSand.fallInstantly = false;*/
 	}
 
 	public boolean canSnowAt(World world, int par1, int par2, int par3)
@@ -227,7 +224,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 	}
 
-	public void generateTerrainHigh(int par1, int par2, int[] blockArray)
+	public void generateTerrainHigh(int par1, int par2, short[] idsTop)
 	{
 		byte var4 = 4;
 		byte var5 = 16;
@@ -275,15 +272,15 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							{
 								if ((var47 += var49) > 0.0D)
 								{
-									blockArray[var43 += var44] = (byte)Block.stone.blockID;
+									idsTop[var43 += var44] = (short)Block.stone.blockID;
 								}
 								else if (var12 * 8 + var31 < seaLevel)
 								{
-									blockArray[var43 += var44] = (byte)Block.waterStill.blockID;
+									idsTop[var43 += var44] = (short)Block.waterStill.blockID;
 								}
 								else
 								{
-									blockArray[var43 += var44] = 0;
+									idsTop[var43 += var44] = 0;
 								}
 							}
 							var34 += var38;
@@ -450,7 +447,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		return par1ArrayOfDouble;
 	}
 
-	public void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, int[] blockArray, int[] metaArray, Random rand, int[] blockArrayBig, int[] metaArrayBig)
+	public void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, short[] idsTop, byte[] metaTop, Random rand, short[] idsBig, byte[] metaBig)
 	{
 		int var5 = 16;
 		double var6 = 0.03125D;
@@ -472,9 +469,9 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;
 
-				int surfaceBlock = TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2), rainfall.floatdata1);
-				int subSurfaceBlock = TFC_Core.getTypeForDirt(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2));
-				int soilMeta = TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
+				short surfaceBlock = (short) TFC_Core.getTypeForGrassWithRain(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2), rainfall.floatdata1);
+				short subSurfaceBlock = (short)TFC_Core.getTypeForDirt(TFC_Core.getItemMetaFromStone(rock1.data1, rock1.data2));
+				byte soilMeta = (byte) TFC_Core.getSoilMetaFromStone(rock1.data1, rock1.data2);
 
 				float _temp = TFC_Climate.getBioTemperature(chunkX * 16 + xCoord, chunkZ * 16 + zCoord);
 
@@ -482,13 +479,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				{
 					int indexBig = ((arrayIndex) * 256 + height + 128);
 					int index = ((arrayIndex) * 128 + height);
-					metaArrayBig[indexBig] = 0;
+					metaBig[indexBig] = 0;
 
 					float temp = TFC_Climate.adjustHeightToTemp(height, _temp);
 
-					int var18 = blockArray[index];
-					blockArrayBig[indexBig] = blockArray[index];
-					metaArrayBig[indexBig] = metaArray[index];
+					int var18 = idsTop[index];
+					idsBig[indexBig] = idsTop[index];
+					metaBig[indexBig] = metaTop[index];
 
 					if (var18 == 0)
 					{
@@ -505,22 +502,22 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							heightMap[arrayIndex] = height-16;
 						}
 
-						convertStone(128+height, arrayIndex, indexBig, blockArrayBig, metaArrayBig, rock1, rock2, rock3);       
+						convertStone(128+height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);       
 
 
 						//First we check to see if its a cold desert
 						if(rainfall.floatdata1 < 125 && 
 								temp < 1.5f)
 						{
-							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
-							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+							surfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);
+							subSurfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);
 						}
 						//Next we check for all other warm deserts
 						else if(rainfall.floatdata1 < 125 && biomegenbase.maxHeight < 0.5f && 
 								temp > 20f)
 						{
-							surfaceBlock = TFC_Core.getTypeForSand(soilMeta);
-							subSurfaceBlock = TFC_Core.getTypeForSand(soilMeta);
+							surfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);
+							subSurfaceBlock = (short) TFC_Core.getTypeForSand(soilMeta);
 						}				        
 
 
@@ -534,22 +531,22 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 							var13 = var12;
 
 
-							if (height >= var5 - 1 && index+1 < blockArray.length && blockArray[index+1] != Block.waterStill.blockID)
+							if (height >= var5 - 1 && index+1 < idsTop.length && idsTop[index+1] != Block.waterStill.blockID)
 							{
-								blockArrayBig[indexBig] = (byte) surfaceBlock;
-								metaArrayBig[indexBig] = (byte) soilMeta;
+								idsBig[indexBig] = surfaceBlock;
+								metaBig[indexBig] = soilMeta;
 							}
 							else
 							{
-								blockArrayBig[indexBig] = (byte) subSurfaceBlock;
-								metaArrayBig[indexBig] = (byte) soilMeta;
+								idsBig[indexBig] = subSurfaceBlock;
+								metaBig[indexBig] = soilMeta;
 							}
 						}
 						else if (var13 > 0)
 						{
 							--var13;
-							blockArrayBig[indexBig] = (byte) subSurfaceBlock;
-							metaArrayBig[indexBig] = (byte) soilMeta;
+							idsBig[indexBig] = subSurfaceBlock;
+							metaBig[indexBig] = soilMeta;
 
 							//							if (var13 == 0 && subSurfaceBlock == TFC_Core.getTypeForSand(soilMeta))
 							//							{
@@ -560,11 +557,11 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 						if(biomegenbase.biomeID == 0)
 						{
-							if(((height > var5-2 && height <= var5+1) || (height < var5 && blockArray[index+2] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
+							if(((height > var5-2 && height <= var5+1) || (height < var5 && idsTop[index+2] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
 							{
 
-								blockArrayBig[indexBig] = (byte) TFC_Core.getTypeForSand(soilMeta);
-								metaArrayBig[indexBig] = (byte) soilMeta;
+								idsBig[indexBig] = (short) TFC_Core.getTypeForSand(soilMeta);
+								metaBig[indexBig] = soilMeta;
 							}
 						}
 						//						else if(biomegenbase.biomeID == BiomeGenBase.beach.biomeID)
@@ -577,12 +574,12 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 						//						}
 						else if(!(biomegenbase.biomeID == TFCBiome.swampland.biomeID))
 						{
-							if(((height > var5-2 && height < var5 && blockArray[index+1] == Block.waterStill.blockID) || (height < var5 && blockArray[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
+							if(((height > var5-2 && height < var5 && idsTop[index+1] == Block.waterStill.blockID) || (height < var5 && idsTop[index+1] == Block.waterStill.blockID)))//If its an ocean give it a sandy bottom
 							{
-								if(blockArrayBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
+								if(idsBig[indexBig] != TFC_Core.getTypeForSand(soilMeta) && rand.nextInt(5) != 0)
 								{
-									blockArrayBig[indexBig] = (byte) Block.gravel.blockID;
-									metaArrayBig[indexBig] = 0;
+									idsBig[indexBig] = (short) Block.gravel.blockID;
+									metaBig[indexBig] = 0;
 								}
 							}
 						}
@@ -593,7 +590,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	}
 
 	private double[] layer2Noise = new double[256];
-	public void replaceBlocksForBiomeLow(int par1, int par2, int[] blockArray, int[] metaArray,  Random rand, int[] blockArrayBig, int[] metaArrayBig)
+	public void replaceBlocksForBiomeLow(int par1, int par2, short[] blockArray, byte[] metaArray,  Random rand, short[] idsBig, byte[] metaBig)
 	{
 		int var5 = 63;
 		double var6 = 0.03125D;
@@ -619,26 +616,26 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 					int index = ((arrayIndex) * 128 + height);
 					int indexBig = ((arrayIndex) * 256 + height);
 
-					metaArrayBig[indexBig] = 0;
+					metaBig[indexBig] = 0;
 
 					if (height >= 2 && height <= 6)
 					{
-						blockArrayBig[indexBig] = (byte) Block.lavaStill.blockID;
-						metaArrayBig[indexBig] = 0; 
+						idsBig[indexBig] = (short) Block.lavaStill.blockID;
+						metaBig[indexBig] = 0; 
 
-						if(blockArrayBig[indexBig+1] != (byte) Block.lavaStill.blockID && rand.nextBoolean())
+						if(idsBig[indexBig+1] != (short) Block.lavaStill.blockID && rand.nextBoolean())
 						{
-							blockArrayBig[indexBig+1] = (byte) Block.lavaStill.blockID;
-							metaArrayBig[indexBig+1] = 0; 
+							idsBig[indexBig+1] = (short) Block.lavaStill.blockID;
+							metaBig[indexBig+1] = 0; 
 						}
 					}
 					else if (height <= 1)
 					{
-						blockArrayBig[indexBig] = (byte) Block.bedrock.blockID;
+						idsBig[indexBig] = (byte) Block.bedrock.blockID;
 					}
 					else
 					{
-						convertStone(height, arrayIndex, indexBig, blockArrayBig, metaArrayBig, rock1, rock2, rock3);      
+						convertStone(height, arrayIndex, indexBig, idsBig, metaBig, rock1, rock2, rock3);      
 
 						if (var13 == -1)
 						{
@@ -653,26 +650,26 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 	}
 
-	public void convertStone(int height, int indexArray, int indexBig, int[] blockArrayBig, int[] metaArrayBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
+	public void convertStone(int height, int indexArray, int indexBig, short[] idsBig, byte[] metaBig, DataLayer rock1, DataLayer rock2, DataLayer rock3)
 	{
 		if(height <= 55+heightMap[indexArray])
 		{
-			blockArrayBig[indexBig] = (byte) rock3.data1; 
-			metaArrayBig[indexBig] = (byte) rock3.data2;
+			idsBig[indexBig] = (short) rock3.data1; 
+			metaBig[indexBig] = (byte) rock3.data2;
 			if(height == 55+heightMap[indexArray])
 			{
 				if(rand.nextBoolean())
 				{
-					blockArrayBig[indexBig+1] = (byte) rock3.data1; 
-					metaArrayBig[indexBig+1] = (byte) rock3.data2;
+					idsBig[indexBig+1] = (short) rock3.data1; 
+					metaBig[indexBig+1] = (byte) rock3.data2;
 					if(rand.nextBoolean())
 					{
-						blockArrayBig[indexBig+2] = (byte) rock3.data1; 
-						metaArrayBig[indexBig+2] = (byte) rock3.data2;
+						idsBig[indexBig+2] = (short) rock3.data1; 
+						metaBig[indexBig+2] = (byte) rock3.data2;
 						if(rand.nextBoolean())
 						{
-							blockArrayBig[indexBig+3] = (byte) rock3.data1; 
-							metaArrayBig[indexBig+3] = (byte) rock3.data2;
+							idsBig[indexBig+3] = (short) rock3.data1; 
+							metaBig[indexBig+3] = (byte) rock3.data2;
 						}
 					}
 				}
@@ -680,22 +677,22 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 		else if(height <= 110+heightMap[indexArray] && height > 55+heightMap[indexArray])
 		{
-			blockArrayBig[indexBig] = (byte) rock2.data1; 
-			metaArrayBig[indexBig] = (byte) rock2.data2;
+			idsBig[indexBig] = (short) rock2.data1; 
+			metaBig[indexBig] = (byte) rock2.data2;
 			if(height == 110+heightMap[indexArray])
 			{
 				if(rand.nextBoolean())
 				{
-					blockArrayBig[indexBig+1] = (byte) rock2.data1; 
-					metaArrayBig[indexBig+1] = (byte) rock2.data2;
+					idsBig[indexBig+1] = (short) rock2.data1; 
+					metaBig[indexBig+1] = (byte) rock2.data2;
 					if(rand.nextBoolean())
 					{
-						blockArrayBig[indexBig+2] = (byte) rock2.data1; 
-						metaArrayBig[indexBig+2] = (byte) rock2.data2;
+						idsBig[indexBig+2] = (short) rock2.data1; 
+						metaBig[indexBig+2] = (byte) rock2.data2;
 						if(rand.nextBoolean())
 						{
-							blockArrayBig[indexBig+3] = (byte) rock2.data1; 
-							metaArrayBig[indexBig+3] = (byte) rock2.data2;
+							idsBig[indexBig+3] = (short) rock2.data1; 
+							metaBig[indexBig+3] = (byte) rock2.data2;
 						}
 					}
 				}
@@ -703,8 +700,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 		else
 		{
-			blockArrayBig[indexBig] = (byte) rock1.data1; 
-			metaArrayBig[indexBig] = (byte) rock1.data2;
+			idsBig[indexBig] = (short) rock1.data1; 
+			metaBig[indexBig] = (byte) rock1.data2;
 		}
 	}
 

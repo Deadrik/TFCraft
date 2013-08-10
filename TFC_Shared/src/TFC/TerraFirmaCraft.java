@@ -26,12 +26,18 @@ import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
 import TFC.Handlers.EnteringChunkHandler;
+import TFC.Handlers.EntityDamageHandler;
+import TFC.Handlers.EntityLivingHandler;
+import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
 import TFC.Handlers.ServerTickHandler;
 import TFC.Handlers.Client.ClientTickHandler;
 import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
+import TFC.WorldGen.Generators.WorldGenCaveDecor;
+import TFC.WorldGen.Generators.WorldGenOre;
+import TFC.WorldGen.Generators.WorldGenOreSurface;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -80,11 +86,11 @@ public class TerraFirmaCraft
 		TFCItems.Setup();
 
 		//Register Generators
-		/*GameRegistry.registerWorldGenerator(new WorldGenOreSurface(100,150));
+		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(100,150));
 		GameRegistry.registerWorldGenerator(new WorldGenOreSurface(130,200));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
-		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());*/
+		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
 
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");
@@ -97,26 +103,27 @@ public class TerraFirmaCraft
 
 
 		//Register Key Bindings(Client only)
-		/*proxy.registerKeys();
+		proxy.registerKeys();
 
 		//Register KeyBinding Handler (Client only)
 		proxy.registerKeyBindingHandler();
 
 		//Register Block Highlight Handler (Client only)
-		proxy.registerHighlightHandler();*/
+		proxy.registerHighlightHandler();
 
 		//Register Tile Entites
 		proxy.registerTileEntities(true);
 
 		//Register Sound Handler (Client only)
-		/*proxy.registerSoundHandler();*/
+		proxy.registerSoundHandler();
 	}
 
 	@Init
 	public void initialize(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
-		Localization.addLocalization("/mods/TFC/lang/", "en_US");
+		Localization.addLocalization("assets/terrafirmacraft/lang/", "en_US");
+		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
 		proxy.registerTranslations();
 
 		//Register all of the recipes
@@ -129,13 +136,13 @@ public class TerraFirmaCraft
 		GameRegistry.registerCraftingHandler(new CraftingHandler());
 
 		// Register the Entity Spawn Handler
-		/*MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
+		MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
 
 		// Register the Entity Living Update Handler
 		MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
 
 		// Register the Entity Hurt Handler
-		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());*/
+		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
 
 		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
@@ -147,7 +154,7 @@ public class TerraFirmaCraft
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());
 
 		// Register all the render stuff for the client
-		//proxy.registerRenderInformation();
+		proxy.registerRenderInformation();
 
 		// Register the Chunk Data Load/Save Handler
 		MinecraftForge.EVENT_BUS.register(new ChunkDataEventHandler());

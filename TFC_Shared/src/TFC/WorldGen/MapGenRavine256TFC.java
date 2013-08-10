@@ -2,57 +2,30 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
+import TFC.Core.TFC_Core;
 
 public class MapGenRavine256TFC extends MapGenBaseTFC
 {
 	private float[] field_35627_a = new float[1024];
 
-	private int[] metaArray;
-    
-    public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, int[] id, int[] meta)
-    {
-        metaArray = meta;
-        super.generate(par1IChunkProvider, par2World, par3, par4, id);
-    }
-    
+	private byte[] metaArray;
+
+	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, short[] idsBig, byte[] metaBig)
+	{
+		metaArray = metaBig;
+		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
+	}
+
 	protected void generateRavine(long par1, int par3, int par4, int[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17)
 	{
 		Random var19 = new Random(par1);
-		double var20 = (double)(par3 * 16 + 8);
-		double var22 = (double)(par4 * 16 + 8);
+		double var20 = par3 * 16 + 8;
+		double var22 = par4 * 16 + 8;
 		float var24 = 0.0F;
 		float var25 = 0.0F;
 
@@ -84,15 +57,15 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 
 		for (; par15 < par16; ++par15)
 		{
-			double var53 = 1.5D + (double)(MathHelper.sin((float)par15 * (float)Math.PI / (float)par16) * par12 * 1.0F);
+			double var53 = 1.5D + MathHelper.sin(par15 * (float)Math.PI / par16) * par12 * 1.0F;
 			double var30 = var53 * par17;
-			var53 *= (double)var19.nextFloat() * 0.25D + 0.75D;
-			var30 *= (double)var19.nextFloat() * 0.25D + 0.75D;
+			var53 *= var19.nextFloat() * 0.25D + 0.75D;
+			var30 *= var19.nextFloat() * 0.25D + 0.75D;
 			float var32 = MathHelper.cos(par14);
 			float var33 = MathHelper.sin(par14);
-			par6 += (double)(MathHelper.cos(par13) * var32);
-			par8 += (double)var33;
-			par10 += (double)(MathHelper.sin(par13) * var32);
+			par6 += MathHelper.cos(par13) * var32;
+			par8 += var33;
+			par10 += MathHelper.sin(par13) * var32;
 			par14 *= 0.7F;
 			par14 += var25 * 0.05F;
 			par13 += var24 * 0.05F;
@@ -105,8 +78,8 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 			{
 				double var34 = par6 - var20;
 				double var36 = par10 - var22;
-				double var38 = (double)(par16 - par15);
-				double var40 = (double)(par12 + 2.0F + 16.0F);
+				double var38 = par16 - par15;
+				double var40 = par12 + 2.0F + 16.0F;
 
 				if (var34 * var34 + var36 * var36 - var38 * var38 > var40 * var40)
 				{
@@ -184,11 +157,11 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 					{
 						for (var41 = var56; var41 < var35; ++var41)
 						{
-							double var59 = ((double)(var41 + par3 * 16) + 0.5D - par6) / var53;
+							double var59 = (var41 + par3 * 16 + 0.5D - par6) / var53;
 
 							for (var44 = var57; var44 < var39; ++var44)
 							{
-								double var45 = ((double)(var44 + par4 * 16) + 0.5D - par10) / var53;
+								double var45 = (var44 + par4 * 16 + 0.5D - par10) / var53;
 								int var47 = (var41 * 16 + var44) * 256 + var37;
 								boolean var48 = false;
 
@@ -196,24 +169,18 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 								{
 									for (int var49 = var37 - 1; var49 >= var55; --var49)
 									{
-										double var50 = ((double)var49 + 0.5D - par8) / var30;
+										double var50 = (var49 + 0.5D - par8) / var30;
 
-										if ((var59 * var59 + var45 * var45) * (double)this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
+										if ((var59 * var59 + var45 * var45) * this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D)
 										{
 											int var52 = blockArray[var47];
 
-											if (var52 == TFCBlocks.Grass.blockID || var52 == TFCBlocks.Grass2.blockID)
+											if (TFC_Core.isGrass(var52))
 											{
 												var48 = true;
 											}
 
-											if (var52 == (byte)TFCBlocks.StoneIgIn.blockID || var52 == (byte)TFCBlocks.StoneIgEx.blockID || 
-											        var52 == (byte)TFCBlocks.StoneSed.blockID || var52 == (byte)TFCBlocks.StoneMM.blockID || 
-											                var52 == (byte)Block.stone.blockID || var52 == (byte)Block.dirt.blockID || (byte)var52 == Block.grass.blockID ||
-											                        var52 == (byte)TFCBlocks.Grass.blockID || var52 == (byte)TFCBlocks.Grass2.blockID||
-											                                var52 == (byte)TFCBlocks.Dirt.blockID || var52 == (byte)TFCBlocks.Dirt2.blockID||
-											                                        var52 == (byte)TFCBlocks.ClayGrass.blockID || var52 == (byte)TFCBlocks.ClayGrass2.blockID||
-											                                                var52 == (byte)TFCBlocks.Clay.blockID || var52 == (byte)TFCBlocks.Clay2.blockID)
+											if (TFC_Core.isRawStone(var52) || TFC_Core.isSoil(var52))
 											{
 												if (var49 < 10)
 												{
@@ -221,23 +188,23 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 												}
 												else
 												{
-												    int meta = 0;
-												    if(var48)
-												    {
-												        meta = metaArray[var47];
-												    }
+													int meta = 0;
+													if(var48)
+													{
+														meta = metaArray[var47];
+													}
 													blockArray[var47] = 0;
 
-//													if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
-//													{
-//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
-//														metaArray[var47-1] = meta;
-//													}
-//													else if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
-//													{
-//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
-//														metaArray[var47-1] = meta;
-//													}
+													//													if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
+													//													{
+													//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
+													//														metaArray[var47-1] = meta;
+													//													}
+													//													else if (var48 && blockArray[var47 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
+													//													{
+													//														blockArray[var47 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var41 + par3 * 16, var44 + par4 * 16).GrassID;
+													//														metaArray[var47-1] = meta;
+													//													}
 
 												}
 											}
@@ -262,13 +229,13 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	 protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, int[] par6ArrayOfByte)
+	protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, int[] par6ArrayOfByte)
 	{
 		if (this.rand.nextInt(50) == 0)
 		{
-			double var7 = (double)(par2 * 16 + this.rand.nextInt(16));
-			double var9 = (double)(this.rand.nextInt(this.rand.nextInt(220) + 8) + 20);
-			double var11 = (double)(par3 * 16 + this.rand.nextInt(16));
+			double var7 = par2 * 16 + this.rand.nextInt(16);
+			double var9 = this.rand.nextInt(this.rand.nextInt(220) + 8) + 20;
+			double var11 = par3 * 16 + this.rand.nextInt(16);
 			byte var13 = 1;
 
 			for (int var14 = 0; var14 < var13; ++var14)
