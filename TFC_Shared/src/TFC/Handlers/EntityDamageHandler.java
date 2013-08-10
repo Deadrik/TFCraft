@@ -196,7 +196,7 @@ public class EntityDamageHandler
 	@ForgeSubscribe
 	public void onAttackEntity(AttackEntityEvent event)
 	{
-		EntityLiving attacker = (EntityLiving) event.entityLiving;
+		EntityLivingBase attacker = event.entityLiving;
 		Entity target = event.target;
 		ItemStack stack = attacker.getCurrentItemOrArmor(0);
 		if (stack != null && stack.getItem().onLeftClickEntity(stack, event.entityPlayer, event.target))
@@ -207,7 +207,10 @@ public class EntityDamageHandler
 		{
 			if (!target.func_85031_j(target))
 			{
-				float i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
+				float i = 10f;
+				if(stack != null) {
+					i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
+				}
 
 				if (event.entityPlayer.isPotionActive(Potion.damageBoost))
 				{
