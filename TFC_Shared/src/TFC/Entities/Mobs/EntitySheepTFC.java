@@ -132,13 +132,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		super.onLivingUpdate();
 	}
 
-	@Override
-	protected void entityInit()
-	{
-		super.entityInit();
-		this.dataWatcher.addObject(16, new Byte((byte)0));
-	}
-
 	/**
 	 * Drop 0-2 items of this living's type
 	 */

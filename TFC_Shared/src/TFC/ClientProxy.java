@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
+import net.minecraft.client.resources.ReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
@@ -82,6 +83,8 @@ import TFC.Handlers.Client.KeyBindingHandler;
 import TFC.Handlers.Client.PlankHighlightHandler;
 import TFC.Handlers.Client.RenderOverlayHandler;
 import TFC.Handlers.Client.SoundHandler;
+import TFC.Render.FoliageColorReloadListener;
+import TFC.Render.GrassColorReloadListener;
 import TFC.Render.RenderBear;
 import TFC.Render.RenderChickenTFC;
 import TFC.Render.RenderCowTFC;
@@ -144,9 +147,8 @@ public class ClientProxy extends CommonProxy
 	@SideOnly(Side.CLIENT)
 	public void registerRenderInformation() 
 	{
-
-		//ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
-		//ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
+		((ReloadableResourceManager)Minecraft.getMinecraft().func_110442_L()).func_110542_a(new GrassColorReloadListener());
+		((ReloadableResourceManager)Minecraft.getMinecraft().func_110442_L()).func_110542_a(new FoliageColorReloadListener());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTerraJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));

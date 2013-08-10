@@ -28,14 +28,14 @@ import TFC.TileEntities.TileEntityAnvil;
 public class GuiAnvil extends GuiContainer
 {
 	TileEntityAnvil AnvilEntity;
-
+	public static ResourceLocation texture = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png");
 	public GuiAnvil(InventoryPlayer inventoryplayer, TileEntityAnvil te, World world, int x, int y, int z)
 	{
 		super(new ContainerAnvil(inventoryplayer,te, world, x, y, z) );
 		AnvilEntity = te;
 		this.xSize = 208;
 		this.ySize = 198;
-		
+
 	}
 
 	@Override
@@ -103,8 +103,7 @@ public class GuiAnvil extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png"));
-		//this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
+		this.mc.renderEngine.func_110577_a(texture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - this.xSize) / 2;
 		int h = (height - this.ySize) / 2;
@@ -130,84 +129,98 @@ public class GuiAnvil extends GuiContainer
 		this.zLevel = 1;
 		this.drawHoveringText(list, mx, my+15, this.fontRenderer);
 		RenderHelper.disableStandardItemLighting();
-        GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_LIGHTING);
 	}
-	
+
 	public void drawItemRulesImages(int w, int h)
 	{		
 		if(AnvilEntity != null && AnvilEntity.itemCraftingRules != null)
 		{
 			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe != null ? AnvilEntity.workRecipe.getRules() : null;
 			int[] ItemRules = AnvilEntity.getItemRules();
-			
+
 			this.mc.func_110434_K().func_110577_a(TextureMap.field_110575_b);
 			this.drawTexturedModelRectFromIcon(w + 80, h + 31, getIconFromRule(ItemRules[0]), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 99, h + 31, getIconFromRule(ItemRules[1]), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 118, h + 31, getIconFromRule(ItemRules[2]), 10, 10);
-			
-			this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png"));
-			
-			if(Rules != null && Rules[0].matches(ItemRules, 0))
+
+			this.mc.func_110434_K().func_110577_a(texture);
+
+			if(Rules != null && Rules[0].matches(ItemRules, 0)) {
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
+			}
 			drawTexturedModalRect(w + 77, h + 28, 210, 115, 15, 15);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			
-			if(Rules != null && Rules[1].matches(ItemRules, 1))
+
+			if(Rules != null && Rules[1].matches(ItemRules, 1)) {
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
+			}
 			drawTexturedModalRect(w + 96, h + 28, 210, 115, 15, 15);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			
-			if(Rules != null && Rules[2].matches(ItemRules, 2))
+
+			if(Rules != null && Rules[2].matches(ItemRules, 2)) {
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
+			}
 			drawTexturedModalRect(w + 115, h + 28, 210, 115, 15, 15);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
-		
+
 		//GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
 		//drawTexturedModalRect(w + 75, h + 7, 208, 49, 19, 21);
 	}
-	
+
 	public void drawRulesImages(int w, int h)
 	{		
 		if(AnvilEntity.workRecipe != null)
 		{
 			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
 			int[] ItemRules = AnvilEntity.getItemRules();
+
 			this.mc.func_110434_K().func_110577_a(TextureMap.field_110575_b);
 			this.drawTexturedModelRectFromIcon(w + 80, h + 10, getIconFromRule(Rules[0].Action), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 99, h + 10, getIconFromRule(Rules[1].Action), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 118, h + 10, getIconFromRule(Rules[2].Action), 10, 10);
-			this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png"));
+
+			this.mc.func_110434_K().func_110577_a(texture);
 			//Bottom Row
 			GL11.glColor4ub(TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2], (byte)255);
-			if(Rules[0].Min == 0)
+			if(Rules[0].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 26, 228, 68, 19, 3);
-			if(Rules[0].Min <= 1 || Rules[0].Max == 1)
+			}
+			if(Rules[0].Min <= 1 || Rules[0].Max == 1) {
 				drawTexturedModalRect(w + 94, h + 26, 228, 68, 19, 3);
-			if(Rules[0].Min <= 2 || Rules[0].Max == 2)
+			}
+			if(Rules[0].Min <= 2 || Rules[0].Max == 2) {
 				drawTexturedModalRect(w + 113, h + 26, 228, 68, 19, 3);
+			}
 			//Middle Row
 			GL11.glColor4ub(TFC_Settings.anvilRuleColor1[0], TFC_Settings.anvilRuleColor1[1], TFC_Settings.anvilRuleColor1[2], (byte)255);
-			if(Rules[1].Min == 0)
+			if(Rules[1].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 24, 228, 68, 19, 3);
-			if(Rules[1].Min <= 1 || Rules[1].Max == 1)
+			}
+			if(Rules[1].Min <= 1 || Rules[1].Max == 1) {
 				drawTexturedModalRect(w + 94, h + 24, 228, 68, 19, 3);
-			if(Rules[1].Min <= 2 || Rules[1].Max == 2)
+			}
+			if(Rules[1].Min <= 2 || Rules[1].Max == 2) {
 				drawTexturedModalRect(w + 113, h + 24, 228, 68, 19, 3);
+			}
 			//Top Row
 			GL11.glColor4ub(TFC_Settings.anvilRuleColor2[0], TFC_Settings.anvilRuleColor2[1], TFC_Settings.anvilRuleColor2[2], (byte)255);
-			if(Rules[2].Min == 0)
+			if(Rules[2].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 22, 228, 68, 19, 3);
-			if(Rules[2].Min <= 1 || Rules[2].Max == 1)
+			}
+			if(Rules[2].Min <= 1 || Rules[2].Max == 1) {
 				drawTexturedModalRect(w + 94, h + 22, 228, 68, 19, 3);
-			if(Rules[2].Min <= 2 || Rules[2].Max == 2)
+			}
+			if(Rules[2].Min <= 2 || Rules[2].Max == 2) {
 				drawTexturedModalRect(w + 113, h + 22, 228, 68, 19, 3);
+			}
 		}
-		
+
 		//GL11.glColor4f(1.0F, 0.0F, 0.0F, 1.0F);
 		//drawTexturedModalRect(w + 75, h + 7, 208, 49, 19, 21);
 	}
-	
+
 	public Icon getIconFromRule(int Action)
 	{
 		switch(Action)
@@ -221,87 +234,26 @@ public class GuiAnvil extends GuiContainer
 		default:return TFC_Textures.InvisibleTexture;
 		}
 	}
-	
-	public void drawRules(int w, int h)
-	{
-		fontRenderer.drawString(StringUtil.localize("gui.Anvil.Rules") + ":", w + 209, h+30-8, 0x404040);
-		if(AnvilEntity.workRecipe != null)
-		{
-			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
-			int[] ItemRules = AnvilEntity.getItemRules();
-			for(int i = 0; i < 3; i++)
-			{
-				int yOffset = 8 * i;
-				String s = "\u2022";	
-				boolean match = false;
-
-				if(i == 0)
-				{
-					if(Rules[0].matches(ItemRules, 0))
-						match = true;
-					
-					if(match)
-						s += "\2472";
-					else
-						s += "\2474";
-
-					s += Rules[0].Name;
-
-				}
-				else if(i == 1)
-				{
-					if(Rules[1].matches(ItemRules, 1))
-						match = true;
-					
-					if(match)
-						s += "\2472";
-					else
-						s += "\2474";
-
-					s += Rules[1].Name;
-				}
-				else if(i == 2)
-				{
-					if(Rules[2].matches(ItemRules, 2))
-						match = true;
-					
-					if(match)
-						s += "\2472";
-					else
-						s += "\2474";
-
-					s += Rules[2].Name;
-				}
-				
-				if(match)
-					s += "\u2714";
-				else
-					s += "\u2718";
-				
-				fontRenderer.drawString(s, w + 209, h+30+yOffset, 0x404040);
-			}
-		}
-	}
 
 	public int getGuiLeft()
 	{
 		return this.guiLeft;
 	}
-	
+
 	public int getGuiTop()
 	{
 		return this.guiTop;
 	}
-	
+
 	@Override
 	protected boolean isPointInRegion(int slotX, int slotY, int sizeX, int sizeY, int clickX, int clickY)
-    {
-        int k1 = this.guiLeft;
-        int l1 = this.guiTop;
-        clickX -= k1;
-        clickY -= l1;
-        return clickX >= slotX - 1 && clickX < slotX + sizeX + 1 && clickY >= slotY - 1 && clickY < slotY + sizeY + 1;
-    }
+	{
+		int k1 = this.guiLeft;
+		int l1 = this.guiTop;
+		clickX -= k1;
+		clickY -= l1;
+		return clickX >= slotX - 1 && clickX < slotX + sizeX + 1 && clickY >= slotY - 1 && clickY < slotY + sizeY + 1;
+	}
 
 	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
@@ -310,30 +262,30 @@ public class GuiAnvil extends GuiContainer
 	}
 
 	/**
-     * Draws a textured rectangle at the stored z-value. Args: x, y, u, v, width, height
-     */
-    public void drawTexturedModalRect(int drawX, int drawY, int drawWidth, int drawHeight, int u, int v, int width, int height)
-    {
-        float f = 0.00390625F;
-        float f1 = 0.00390625F;
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(drawX + 0, drawY + drawHeight, this.zLevel, (u + 0) * f, (v + height) * f1);
-        tessellator.addVertexWithUV(drawX + drawWidth, drawY + drawHeight, this.zLevel, (u + width) * f, (v + height) * f1);
-        tessellator.addVertexWithUV(drawX + drawWidth, drawY + 0, this.zLevel, (u + width) * f, (v + 0) * f1);
-        tessellator.addVertexWithUV(drawX + 0, drawY + 0, this.zLevel, (u + 0) * f, (v + 0) * f1);
-        tessellator.draw();
-    }
-    
-    @Override
+	 * Draws a textured rectangle at the stored z-value. Args: x, y, u, v, width, height
+	 */
+	public void drawTexturedModalRect(int drawX, int drawY, int drawWidth, int drawHeight, int u, int v, int width, int height)
+	{
+		float f = 0.00390625F;
+		float f1 = 0.00390625F;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(drawX + 0, drawY + drawHeight, this.zLevel, (u + 0) * f, (v + height) * f1);
+		tessellator.addVertexWithUV(drawX + drawWidth, drawY + drawHeight, this.zLevel, (u + width) * f, (v + height) * f1);
+		tessellator.addVertexWithUV(drawX + drawWidth, drawY + 0, this.zLevel, (u + width) * f, (v + 0) * f1);
+		tessellator.addVertexWithUV(drawX + 0, drawY + 0, this.zLevel, (u + 0) * f, (v + 0) * f1);
+		tessellator.draw();
+	}
+
+	@Override
 	public void drawTexturedModelRectFromIcon(int x, int y, Icon par3Icon, int width, int height)
-    {
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x + 0, y + height, this.zLevel, par3Icon.getMinU(), par3Icon.getMaxV());
-        tessellator.addVertexWithUV(x + width, y + height, this.zLevel, par3Icon.getMaxU(), par3Icon.getMaxV());
-        tessellator.addVertexWithUV(x + width, y + 0, this.zLevel, par3Icon.getMaxU(), par3Icon.getMinV());
-        tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, par3Icon.getMinU(), par3Icon.getMinV());
-        tessellator.draw();
-    }
+	{
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(x + 0, y + height, this.zLevel, par3Icon.getMinU(), par3Icon.getMaxV());
+		tessellator.addVertexWithUV(x + width, y + height, this.zLevel, par3Icon.getMaxU(), par3Icon.getMaxV());
+		tessellator.addVertexWithUV(x + width, y + 0, this.zLevel, par3Icon.getMaxU(), par3Icon.getMinV());
+		tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, par3Icon.getMinU(), par3Icon.getMinV());
+		tessellator.draw();
+	}
 }
