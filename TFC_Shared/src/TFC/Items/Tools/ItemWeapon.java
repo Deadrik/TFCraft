@@ -2,14 +2,12 @@ package TFC.Items.Tools;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -28,6 +26,8 @@ import TFC.Core.Helper;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
+import com.google.common.collect.Multimap;
+
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 {
 	public float weaponDamage;
@@ -42,65 +42,73 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		this.weaponDamage = par2EnumToolMaterial.getDamageVsEntity();
 		setCreativeTab(TFCTabs.TFCTools);
 	}
-	
+
+	@Override
+	public float getDamageVsEntity(Entity par1Entity, ItemStack itemStack)
+	{
+		return weaponDamage;
+	}
+
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
-    {
+	{
 		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
-		
+
 		ItemTerra.addSizeInformation(this, arraylist);
-		
+
 		ItemTerra.addHeatInformation(is, arraylist);
-		
+
 		if(is.getItem() instanceof ICausesDamage)
 		{
 			arraylist.add(EnumChatFormatting.AQUA + ((ICausesDamage)this).GetDamageType().toString());
 		}
-		
-		addItemInformation(is, player, arraylist);
-		
-		addExtraInformation(is, player, arraylist);
-    }
-	
-	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
-    {
-    	
-    }
-	
-	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
-    {
 
-    }
-	
+		addItemInformation(is, player, arraylist);
+
+		addExtraInformation(is, player, arraylist);
+	}
+
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+
+	}
+
+	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+
+	}
+
 	@Override
-    public void registerIcons(IconRegister registerer)
-    {
+	public void registerIcons(IconRegister registerer)
+	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
-    }
+	}
 
 	@Override
 	public int getItemStackLimit()
-    {
-    	if(canStack())
-    		return this.getSize().stackSize * getWeight().multiplier;
-    	else
-    		return 1;
-    }
-	
+	{
+		if(canStack()) {
+			return this.getSize().stackSize * getWeight().multiplier;
+		} else {
+			return 1;
+		}
+	}
+
 	/**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
+	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+	 */
 	@Override
-    public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
-    {
-    	 MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
-         
-         if(objectMouseOver != null && world.getBlockId(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack.blockID)
-        	 return is;
-         
-         player.setItemInUse(is, this.getMaxItemUseDuration(is));
-        return is;
-    }
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+	{
+		MovingObjectPosition objectMouseOver = Helper.getMouseOverObject(player, player.worldObj);
+
+		if(objectMouseOver != null && world.getBlockId(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ) == TFCBlocks.ToolRack.blockID) {
+			return is;
+		}
+
+		player.setItemInUse(is, this.getMaxItemUseDuration(is));
+		return is;
+	}
 
 	@Override
 	public EnumSize getSize() {
@@ -113,7 +121,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
@@ -125,10 +133,18 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		return damageType;
 	}
-	
+
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+
+	@Override
+	public Multimap func_111205_h()
+	{
+		Multimap multimap = super.func_111205_h();
+		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		return multimap;
 	}
 }
