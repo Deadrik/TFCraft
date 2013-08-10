@@ -72,7 +72,7 @@ public class ModelCowTFC extends ModelQuadruped
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
 
-		float age = 1;
+		float age = 0;
 		long tempAge = 0;
 		int sex = 0;
 		/*if (par1Entity instanceof EntityAnimalTFC)
@@ -84,7 +84,7 @@ public class ModelCowTFC extends ModelQuadruped
 			}
 			sex = ((EntityAnimalTFC)par1Entity).sex;
 		}*/
-		float aa =  2;//2F - (1.0F - age);
+		float aa =  1;//2F - (1.0F - age);
 		GL11.glPushMatrix ();
 		float ab = (float)Math.sqrt(1.0F / aa);
 		GL11.glScalef(ab, ab, ab);

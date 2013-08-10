@@ -42,10 +42,11 @@ public class EntitySpawnHandler
 	@ForgeSubscribe
 	public void onJoinWorld(EntityJoinWorldEvent event)
 	{
-		if (event.entity instanceof EntityPlayer)
+		if (event.entity instanceof EntityPlayer && !event.entity.getEntityData().hasKey("hasSpawned"))
 		{
 			((EntityPlayer)event.entity).func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
 			((EntityPlayer)event.entity).setEntityHealth(1000);
+			event.entity.getEntityData().setBoolean("hasSpawned", true);
 		}
 	}
 }
