@@ -21,7 +21,6 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.Recipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import TFC.Reference;
 
 public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 {
@@ -207,7 +206,7 @@ public class BlockCustomTallGrass extends BlockTallGrass implements IShearable
 		return is;
 	}
 
-	private static final String[] field_94367_a = new String[] {"deadbush",Reference.ModID + ":" +"tallgrass", "fern"};
+	private static final String[] field_94367_a = new String[] {"deadbush", "tallgrass", "fern"};
 	@SideOnly(Side.CLIENT)
 	private Icon[] field_94366_b;
 
