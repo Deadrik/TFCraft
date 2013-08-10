@@ -7,9 +7,8 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
+import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 public class ModelCowTFC extends ModelQuadruped
 {
 	public ModelRenderer udders;
@@ -73,10 +72,10 @@ public class ModelCowTFC extends ModelQuadruped
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
 
-		float age = 0;
+		float age = 1;
 		long tempAge = 0;
 		int sex = 0;
-		if (par1Entity instanceof EntityAnimalTFC)
+		/*if (par1Entity instanceof EntityAnimalTFC)
 		{
 			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
 			if(tempAge < 0){
@@ -84,57 +83,39 @@ public class ModelCowTFC extends ModelQuadruped
 				//System.out.print("completed; "+age+", "+tempAge);
 			}
 			sex = ((EntityAnimalTFC)par1Entity).sex;
-		}
-		if (true)
-		{
-			float aa =  2F - (1.0F - age);
-			GL11.glPushMatrix ();
-			float ab = (float)Math.sqrt(1.0F / aa);
-			GL11.glScalef(ab, ab, ab);
-			GL11.glTranslatef (0.0F, 32F * par7 * age/aa,2F*par7*age/ab);
-			if(aa>1.5F){
-				horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
-				horn2.isHidden = true;//rotateAngleX = -(float)Math.PI;
-				if(aa>1.25F){
-					horn1b.isHidden = true;
-					horn2b.isHidden = true;
-				}
-			}
-			if(((EntityAnimalTFC)par1Entity).sex==0){
-				udders.isHidden = true;
-			}
-			else{
+		}*/
+		float aa =  2F - (1.0F - age);
+		GL11.glPushMatrix ();
+		float ab = (float)Math.sqrt(1.0F / aa);
+		GL11.glScalef(ab, ab, ab);
+		GL11.glTranslatef (0.0F, 32F * par7 * age/aa,2F*par7*age/ab);
+		if(aa>1.5F){
+			horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
+			horn2.isHidden = true;//rotateAngleX = -(float)Math.PI;
+			if(aa>1.25F){
 				horn1b.isHidden = true;
 				horn2b.isHidden = true;
 			}
-			if(((EntityAnimalTFC)par1Entity).sex==1&&aa>1.25F){
-				udders.isHidden = true;
-			}
-			head.render(par7);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-			GL11.glTranslatef(0.0F, 24F * par7 * age, 0.0F);
-			body.render(par7);			
-			udders.render(par7);
-			leg1.render(par7);
-			leg2.render(par7);
-			leg3.render(par7);
-			leg4.render(par7);
-			GL11.glPopMatrix();
 		}
-		else
-		{
-			this.head.render(par7);
-			this.body.render(par7);
-			if(sex == 1){
-				udders.render(par7);
-			}
-			this.leg1.render(par7);
-			this.leg2.render(par7);
-			this.leg3.render(par7);
-			this.leg4.render(par7);
+		if(((IAnimal)par1Entity).getGender()==GenderEnum.MALE){
+			udders.isHidden = true;
 		}
+		else{
+			horn1b.isHidden = true;
+			horn2b.isHidden = true;
+		}
+		head.render(par7);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
+		GL11.glTranslatef(0.0F, 24F * par7 * age, 0.0F);
+		body.render(par7);			
+		udders.render(par7);
+		leg1.render(par7);
+		leg2.render(par7);
+		leg3.render(par7);
+		leg4.render(par7);
+		GL11.glPopMatrix();
 	}
 
 	/**

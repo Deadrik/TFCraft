@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -13,7 +14,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,12 +25,11 @@ import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
+public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 {
 	/**
 	 * Holds the RGB table of the sheep colors - in OpenGL glColor3f values - used to render the sheep colored fleece.
@@ -43,7 +43,7 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 	private int sheepTimer;
 
 	/** The eat grass AI task for this mob. */
-	public EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	public EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 
 	protected long animalID;
 	protected int sex;
@@ -98,7 +98,7 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 	@Override
 	protected void updateAITasks()
 	{
-		this.sheepTimer = this.aiEatGrass.eatGrassTick;
+		this.sheepTimer = this.aiEatGrass.getEatGrassTick();
 		super.updateAITasks();
 	}
 
@@ -258,11 +258,13 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 		return "mob.sheep.say";
 	}
 
+	@Override
 	public int getFleeceColor()
 	{
 		return this.dataWatcher.getWatchableObjectByte(16) & 15;
 	}
 
+	@Override
 	public void setFleeceColor(int par1)
 	{
 		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
@@ -272,6 +274,7 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 	/**
 	 * returns true if a sheeps wool has been sheared
 	 */
+	@Override
 	public boolean getSheared()
 	{
 		return (this.dataWatcher.getWatchableObjectByte(16) & 16) != 0;
@@ -280,6 +283,7 @@ public class EntitySheepTFC extends EntityAnimal implements IShearable, IAnimal
 	/**
 	 * make a sheep sheared if set to true
 	 */
+	@Override
 	public void setSheared(boolean par1)
 	{
 		byte var2 = this.dataWatcher.getWatchableObjectByte(16);

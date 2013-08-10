@@ -13,10 +13,6 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
-
 public class ModelBear extends ModelBase
 {
 	//fields
@@ -119,10 +115,10 @@ public class ModelBear extends ModelBase
 		super.render (entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
-		float age = 0;
+		float age = 1;
 		long tempAge = 0;
 		int sex = 0;
-		if (entity instanceof EntityAnimalTFC)
+		/*if (entity instanceof EntityAnimalTFC)
 		{
 			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
 			if(tempAge < 0){
@@ -130,7 +126,7 @@ public class ModelBear extends ModelBase
 				//System.out.print("completed; "+age+", "+tempAge);
 			}
 			sex = ((EntityAnimalTFC)entity).sex;
-		}
+		}*/
 
 		if (isChild)
 		{

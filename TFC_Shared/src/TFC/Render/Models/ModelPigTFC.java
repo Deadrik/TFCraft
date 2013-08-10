@@ -1,16 +1,16 @@
 package TFC.Render.Models;
 
+import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
+import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 
-public class ModelPigTFC extends ModelQuadrupedTFC
+public class ModelPigTFC extends ModelPig
 {
 	public ModelPigTFC()
 	{
@@ -22,7 +22,7 @@ public class ModelPigTFC extends ModelQuadrupedTFC
 
 	public ModelPigTFC(float par1)
 	{
-		super(6, par1);
+		super(par1);
 		tusk1 = new ModelRenderer(this,32,0);
 		tusk1.addBox(0F, 0F, 0F, 1, 2, 1, 0F);
 		tusk1.setRotationPoint(-3f,0.5f,-9f);
@@ -38,48 +38,47 @@ public class ModelPigTFC extends ModelQuadrupedTFC
 		snout.addChild(tusk1);
 		snout.addChild(tusk2);
 		this.head.addChild(snout);
-		this.field_40331_g = 4.0F;
 	}
 	@Override
-	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		float age = 0;
-		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-		if(par1Entity instanceof EntityAnimalTFC)
+		float age = 1;
+		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
+		if(entity instanceof IAnimal)
 		{
-			float tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
+			/*float tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
 
 			if(tempAge <= 0)
+			{*/
+			//age = (-1F)*tempAge / (((EntityAnimalTFC)entity).adultAge * TFC_Settings.dayLength);
+			if(((IAnimal)entity).getGender() == GenderEnum.MALE)
 			{
-				age = (-1F)*tempAge / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
-				if(((EntityAnimalTFC)par1Entity).sex==0){
-					if((1-age) > 0.75){
-						tusk1.isHidden = false;
-						tusk2.isHidden = false;
-					}
+				if(((IAnimal)entity).isAdult()){
+					tusk1.isHidden = false;
+					tusk2.isHidden = false;
 				}
-				float aa =  2F - (1.0F - age);
-				GL11.glPushMatrix ();
-				float ab = (float)Math.sqrt(1.0F / aa);
-				GL11.glScalef(ab, ab, ab);
-				GL11.glTranslatef (0.0F, 24F * par7 * age/aa,2F*par7*age/ab);            
-				head.render(par7);
-				GL11.glPopMatrix();
-				GL11.glPushMatrix();
-				GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-				GL11.glTranslatef(0.0F, 24F * par7 * age, 0.0F);
-				body.render(par7);
-				leg1.render(par7);
-				leg2.render(par7);
-				leg3.render(par7);
-				leg4.render(par7);
-				GL11.glPopMatrix();
-
 			}
+			float aa =  2F - (1.0F - age);
+			GL11.glPushMatrix ();
+			float ab = (float)Math.sqrt(1.0F / aa);
+			GL11.glScalef(ab, ab, ab);
+			GL11.glTranslatef (0.0F, 24F * par7 * age/aa,2F*par7*age/ab);            
+			head.render(par7);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
+			GL11.glTranslatef(0.0F, 24F * par7 * age, 0.0F);
+			body.render(par7);
+			leg1.render(par7);
+			leg2.render(par7);
+			leg3.render(par7);
+			leg4.render(par7);
+			GL11.glPopMatrix();
+
 		}
 	}
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
+	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
 	{
 		//super.setRotationAngles(par1, par2, par3, par4, par5, par6);
 		tusk1.isHidden = true;

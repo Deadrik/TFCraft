@@ -3,6 +3,7 @@ package TFC.Entities.Mobs;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -10,7 +11,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,10 +20,9 @@ import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 
-public class EntityChickenTFC extends EntityAnimal implements IAnimal
+public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
 	public boolean field_753_a = false;
 	public float field_752_b = 0.0F;
@@ -33,7 +33,7 @@ public class EntityChickenTFC extends EntityAnimal implements IAnimal
 
 	/** The time until the next egg is spawned. */
 	public int timeUntilNextEgg;
-	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 
 	protected long animalID;
 	protected int sex;

@@ -12,9 +12,8 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
+import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Entities.Mobs.EntityDeer;
 public class ModelDeer extends ModelBase
 {
@@ -350,13 +349,13 @@ public class ModelDeer extends ModelBase
 		float age = 0;
 		int sex = 0;
 		long tempAge = 0;
-		if (entity instanceof EntityAnimalTFC){
+		/*if (entity instanceof EntityAnimalTFC){
 			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
 			if(tempAge < 0) {
 				age = (-1F)*tempAge / (((EntityAnimalTFC)entity).adultAge * TFC_Settings.dayLength);
 			}
 			sex = ((EntityAnimalTFC)entity).sex;
-		}
+		}*/
 		if (true)
 		{
 			float aa =  2F - (1.0F - age);
@@ -365,7 +364,7 @@ public class ModelDeer extends ModelBase
 			float ab = (float)Math.sqrt(1.0F / aa);
 			GL11.glScalef(ab, ab, ab);
 			GL11.glTranslatef (0.0F, 22F * f5 * age/(float)Math.pow(aa,0.4),2F*f5*age/ab);
-			if(((EntityAnimalTFC)entity).sex == 0){
+			if(((IAnimal)entity).getGender() == GenderEnum.MALE){
 				if(aa <=1.75){
 					Antler11.isHidden = false;
 					Antler21.isHidden = false;

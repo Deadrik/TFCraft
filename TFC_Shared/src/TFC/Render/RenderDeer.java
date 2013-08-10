@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
-import TFC.Entities.EntityAnimalTFC;
+import TFC.API.Entities.IAnimal;
 import TFC.Entities.Mobs.EntityDeer;
 import TFC.Render.Models.ModelDeer;
 public class RenderDeer extends RenderLiving
@@ -85,9 +85,9 @@ public class RenderDeer extends RenderLiving
 		renderDeer ((EntityDeer) par1Entity, par2, par4, par6, par8, par9);
 	}
 
-	protected ResourceLocation getTexture(EntityAnimalTFC entity)
+	protected ResourceLocation getTexture(IAnimal entity)
 	{
-		if(entity.getGrowingAge() <= (-12000*entity.adultAge))
+		if(!entity.isAdult())
 		{
 			return FawnTexture;
 		}
@@ -100,6 +100,6 @@ public class RenderDeer extends RenderLiving
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
 		// TODO Auto-generated method stub
-		return getTexture((EntityAnimalTFC)entity);
+		return getTexture((IAnimal)entity);
 	}
 }

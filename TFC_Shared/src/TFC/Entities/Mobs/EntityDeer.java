@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
@@ -19,14 +20,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
 {    
 
 	/** The eat grass AI task for this mob. */
-	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private boolean running;
 
 	protected long animalID;

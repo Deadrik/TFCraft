@@ -3,6 +3,7 @@ package TFC.Entities.Mobs;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -20,12 +21,11 @@ import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAIEatGrassTFC;
 import TFC.Entities.AI.EntityAIMateTFC;
 
 public class EntityCowTFC extends EntityAnimal implements IAnimal
 {
-	private final EntityAIEatGrassTFC aiEatGrass = new EntityAIEatGrassTFC(this);
+	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	protected long animalID;
 	protected int sex;
 	protected int hunger;

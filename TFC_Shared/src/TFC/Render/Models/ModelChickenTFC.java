@@ -7,9 +7,8 @@ import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
-import TFC.Core.TFC_Settings;
-import TFC.Core.TFC_Time;
-import TFC.Entities.EntityAnimalTFC;
+import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 
 public class ModelChickenTFC extends ModelBase
 {
@@ -72,70 +71,54 @@ public class ModelChickenTFC extends ModelBase
 	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-		float age = 0;
+		float age = 1;
 		long tempAge = 0;
-		int sex = 0;
-		if (par1Entity instanceof EntityAnimalTFC){
+		/*if (par1Entity instanceof IAnimal){
 			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
 			if(tempAge < 0) {
 				age = (-1F)*tempAge / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
 			}
-			sex = ((EntityAnimalTFC)par1Entity).sex;
+		}*/
+		float aa =  2F - (1.0F - age);
+		float var8 = 2.0F;
+		GL11.glPushMatrix();
+		float ab = 1.0F / aa;
+		GL11.glScalef(ab, ab, ab);
+		GL11.glTranslatef(0.0F, 44.0F * par7* age/aa, 1.0F * par7*age/ab);
+		if(aa <= 1.25 && ((IAnimal)par1Entity).getGender() == GenderEnum.MALE){
+			crown.isHidden = false;
+			this.body.rotateAngleX = ((float)Math.PI / 4F);
+			this.rightWing.rotateAngleX = ((float)Math.PI / 4F);
+			rightWing.setRotationPoint(-4.0F,13.5f, -2.5F);
+			this.leftWing.rotateAngleX = ((float)Math.PI / 4F);
+			leftWing.setRotationPoint(4.0F,13.5f, -2.5F);
+			this.head.setRotationPoint(0.0F, 13, -1.0F);
+			this.bill.setRotationPoint(0.0F, 13, -1.0F);
+			this.chin.setRotationPoint(0.0F, 13, -1.0F);
 		}
-		if (true)//this.isChild)
-		{
-			float aa =  2F - (1.0F - age);
-			float var8 = 2.0F;
-			GL11.glPushMatrix();
-			float ab = 1.0F / aa;
-			GL11.glScalef(ab, ab, ab);
-			GL11.glTranslatef(0.0F, 44.0F * par7* age/aa, 1.0F * par7*age/ab);
-			if(aa <= 1.25 && ((EntityAnimalTFC)par1Entity).sex == 0){
-				crown.isHidden = false;
-				this.body.rotateAngleX = ((float)Math.PI / 4F);
-				this.rightWing.rotateAngleX = ((float)Math.PI / 4F);
-				rightWing.setRotationPoint(-4.0F,13.5f, -2.5F);
-				this.leftWing.rotateAngleX = ((float)Math.PI / 4F);
-				leftWing.setRotationPoint(4.0F,13.5f, -2.5F);
-				this.head.setRotationPoint(0.0F, 13, -1.0F);
-				this.bill.setRotationPoint(0.0F, 13, -1.0F);
-				this.chin.setRotationPoint(0.0F, 13, -1.0F);
-			}
-			this.head.render(par7);
-			this.bill.render(par7);
-			this.chin.render(par7);
-			GL11.glPushMatrix();
-			GL11.glScalef(0.75f, 0.75f, 0.75f);
-			this.crown.render(par7);
-			GL11.glPopMatrix();
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-			GL11.glTranslatef(0.0F, 24.0F * par7* age, 0.0F);
-			this.body.render(par7);
-			this.rightLeg.render(par7);
-			this.leftLeg.render(par7);
-			this.rightWing.render(par7);
-			this.leftWing.render(par7);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(0.25F / aa, 0.5F / aa, 0.25F / aa);
-			for(int i = 0;i<32;i++){
-				tails[i].render(par7);
-			}
-			GL11.glPopMatrix();
+		this.head.render(par7);
+		this.bill.render(par7);
+		this.chin.render(par7);
+		GL11.glPushMatrix();
+		GL11.glScalef(0.75f, 0.75f, 0.75f);
+		this.crown.render(par7);
+		GL11.glPopMatrix();
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
+		GL11.glTranslatef(0.0F, 24.0F * par7* age, 0.0F);
+		this.body.render(par7);
+		this.rightLeg.render(par7);
+		this.leftLeg.render(par7);
+		this.rightWing.render(par7);
+		this.leftWing.render(par7);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		GL11.glScalef(0.25F / aa, 0.5F / aa, 0.25F / aa);
+		for(int i = 0;i<32;i++){
+			tails[i].render(par7);
 		}
-		else
-		{
-			this.head.render(par7);
-			this.bill.render(par7);
-			this.chin.render(par7);
-			this.body.render(par7);
-			this.rightLeg.render(par7);
-			this.leftLeg.render(par7);
-			this.rightWing.render(par7);
-			this.leftWing.render(par7);
-		}
+		GL11.glPopMatrix();
 	}
 
 	/**
