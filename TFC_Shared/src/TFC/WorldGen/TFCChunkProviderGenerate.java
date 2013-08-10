@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
@@ -15,6 +16,7 @@ import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
+import TFC.WorldGen.Generators.WorldGenLakesTFC;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 {
@@ -139,7 +141,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	@Override
 	public void populate(IChunkProvider par1IChunkProvider, int chunkX, int chunkZ)
 	{
-		/*BlockSand.fallInstantly = true;
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
 		BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
@@ -195,8 +196,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				}
 			}
 		}
-
-		BlockSand.fallInstantly = false;*/
 	}
 
 	public boolean canSnowAt(World world, int par1, int par2, int par3)

@@ -93,7 +93,7 @@ public class TFCBiome extends BiomeGenBase
 
 	public static final TFCBiome forest = (new BiomeGenForestTFC(4)).setColor(ForestColor).setBiomeName("Forest").setMinMaxHeight(0.1F, 0.3F);
 
-	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setColor(PlainsColor).setBiomeName("Plains").setMinMaxHeight(0.1F, 0.2F);
+	public static final TFCBiome plains = (new BiomeGenPlainsTFC(1)).setColor(PlainsColor).setBiomeName("TFC Plains").setMinMaxHeight(0.1F, 0.2F);
 
 	public static final TFCBiome taiga = (new BiomeGenTaigaTFC(5)).setColor(TaigaColor).setBiomeName("Taiga").setMinMaxHeight(0.2F, 0.5F);
 
@@ -183,7 +183,6 @@ public class TFCBiome extends BiomeGenBase
 		worldGenWhiteElmShortTrees = new WorldGenCustomShortTrees(false,13);
 		worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
 
-		this.theBiomeDecorator = this.createBiomeDecorator();
 		this.waterColorMultiplier = ForestWater;
 
 		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 4));
@@ -266,10 +265,11 @@ public class TFCBiome extends BiomeGenBase
 
 	public int getIntRain()
 	{
-		if(TFC_Time.getMonth() < 3 || TFC_Time.currentMonth >= 10)
+		if(TFC_Time.getMonth() < 3 || TFC_Time.currentMonth >= 10) {
 			return (int)((this.rainfall+0.1F) * 65536.0F);
-		else
+		} else {
 			return (int)(this.rainfall * 65536.0F);
+		}
 	}
 
 	/**
@@ -289,9 +289,9 @@ public class TFCBiome extends BiomeGenBase
 		if(temp <= 0)
 		{
 			return 0;
-		}
-		else
+		} else {
 			return 0.3f+temp/40;
+		}
 	}
 
 	private float getTemp(float day)
@@ -301,13 +301,15 @@ public class TFCBiome extends BiomeGenBase
 		float modLast = getMonthTemp(TFC_Time.lastMonth);
 		int day2 = TFC_Time.getDayOfMonth();
 		int hour = (int) TFC_Time.getHour()-3;
-		if(hour < 0)
+		if(hour < 0) {
 			hour = 23 + hour;
+		}
 		float hourMod = 0;
-		if(hour < 12)
+		if(hour < 12) {
 			hourMod = ((float)hour/11) * 0.2F;
-		else
+		} else {
 			hourMod = 0.2F - (((float)(hour-12)/11) * 0.2F);
+		}
 
 		float m = 0;
 		float temp = 0;
@@ -336,8 +338,9 @@ public class TFCBiome extends BiomeGenBase
 	{
 		float temp = getTemp();
 
-		if(y > 180)
+		if(y > 180) {
 			temp -= temp * (y-180)/90;
+		}
 		return temp;
 	}
 
@@ -346,10 +349,11 @@ public class TFCBiome extends BiomeGenBase
 	 */
 	public float getFloatRain()
 	{
-		if(TFC_Time.currentMonth < 3 || TFC_Time.currentMonth >= 9)
+		if(TFC_Time.currentMonth < 3 || TFC_Time.currentMonth >= 9) {
 			return this.rainfall+0.1F;
-		else
+		} else {
 			return this.rainfall;
+		}
 	}
 
 	@Override
@@ -364,9 +368,9 @@ public class TFCBiome extends BiomeGenBase
 			double var1 = Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
 			return ColorizerGrassTFC.getGrassColor(var1, var3);
-		}
-		else
+		} else {
 			return ColorizerGrassTFC.getGrassDead();
+		}
 	}
 
 	@Override
@@ -381,9 +385,9 @@ public class TFCBiome extends BiomeGenBase
 			double var1 = Helper.clamp_float(this.getFloatTemp(), 0.0F, 1.0F);
 			double var3 = Helper.clamp_float(this.getFloatRain(), 0.0F, 1.0F);
 			return ColorizerFoliageTFC.getFoliageColor(var1, var3);
-		}
-		else
+		} else {
 			return ColorizerFoliageTFC.getFoliageDead();
+		}
 	}
 
 	/**
@@ -598,8 +602,9 @@ public class TFCBiome extends BiomeGenBase
 			if(biomeList[i] != null)
 			{
 				String n = biomeList[i].biomeName.toLowerCase();
-				if(n.equalsIgnoreCase(name))
+				if(n.equalsIgnoreCase(name)) {
 					return (TFCBiome) biomeList[i];
+				}
 			}
 		}
 		return null;

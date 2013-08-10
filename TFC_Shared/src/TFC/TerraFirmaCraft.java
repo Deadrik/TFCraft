@@ -22,6 +22,7 @@ import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
+import TFC.Handlers.BiomeEventHandler;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
@@ -170,6 +171,9 @@ public class TerraFirmaCraft
 
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
+
+		// Register the Biome Event Handler
+		MinecraftForge.EVENT_BUS.register(new BiomeEventHandler());
 
 		//Setup custom potion effects
 		TFCPotion.Setup();

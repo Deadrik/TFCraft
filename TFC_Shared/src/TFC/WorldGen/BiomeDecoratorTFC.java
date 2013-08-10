@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenDeadBush;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Core.TFC_Climate;
@@ -33,7 +34,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	/** The amount of tall grass to generate per chunk. */
 	public int grassPerChunk;
 
-	public TFCBiome biome;
+	public BiomeGenBase biome;
 
 	/**
 	 * The number of extra mushroom patches per chunk. It generates 1/4 this number in brown mushroom patches, and 1/8
@@ -61,7 +62,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 	public int looseRocksPerChunk;
 	public int looseRocksChancePerChunk;
 
-	public BiomeDecoratorTFC(TFCBiome par1BiomeGenBase)
+	public BiomeDecoratorTFC(BiomeGenBase par1BiomeGenBase)
 	{
 		super(par1BiomeGenBase);
 		this.flowersPerChunk = 2;
@@ -88,20 +89,21 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int xCoord;
 		int yCoord;
 		int zCoord;
-		
+
 		for (var2 = 0; var2 < 1; ++var2)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord)-1;
-			
+
 			int x1 = 2+randomGenerator.nextInt(6);
 			int x2 = 2+randomGenerator.nextInt(6);
 			int z1 = 2+randomGenerator.nextInt(6);
 			int z2 = 2+randomGenerator.nextInt(6);
-			
-			if(randomGenerator.nextInt(20) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord)))
+
+			if(randomGenerator.nextInt(20) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord))) {
 				new WorldGenLargeRock(x1,x2,z1,z2, 3).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			}
 		}
 
 		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
@@ -140,10 +142,11 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			DataLayer Rainfall = ((TFCWorldChunkManager)currentWorld.provider.worldChunkMgr).getRainfallLayerAt(xCoord, zCoord);
 
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
-			if(temperature < 18 && Rainfall.floatdata1 < 250)
+			if(temperature < 18 && Rainfall.floatdata1 < 250) {
 				new WorldGenDeadBush(Block.deadBush.blockID).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			}
 		}
-		
+
 		/*int catTailsNum = 10;
 		for (var2 = 0; var2 < catTailsNum; ++var2)
 		{
@@ -153,13 +156,13 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord))
 				catTailsNum = 20;
-			
+
 			if(currentWorld.getBlockId(xCoord, yCoord, zCoord) == Block.waterStill.blockID && 
 					currentWorld.isBlockOpaqueCube(xCoord, yCoord-1, zCoord))
 			{
 				currentWorld.setBlock(xCoord, yCoord+1, zCoord, TFCBlocks.Flora.blockID, 1, 0x2);
 			}
-			
+
 		}*/
 
 		for (var2 = 0; var2 < this.waterlilyPerChunk; ++var2)
@@ -168,8 +171,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 
-			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord))
+			if(TFC_Climate.isSwamp(xCoord, yCoord, zCoord)) {
 				this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			}
 		}
 
 		for (var2 = 0; var2 < 10; ++var2)
@@ -198,8 +202,9 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			yCoord = this.currentWorld.getHeightValue(xCoord, zCoord);
 			float temperature = TFC_Climate.getBioTemperatureHeight(xCoord, this.currentWorld.getHeightValue(xCoord, zCoord), zCoord);
 			float rainfall = TFC_Climate.getRainfall(xCoord, yCoord, zCoord);
-			if(temperature > 12 && rainfall < 125)
+			if(temperature > 12 && rainfall < 125) {
 				new WorldGenCustomCactus().generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
+			}
 		}
 
 		if (this.generateLakes)
