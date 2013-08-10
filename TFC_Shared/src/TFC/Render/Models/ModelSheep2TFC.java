@@ -21,11 +21,15 @@ public class ModelSheep2TFC extends ModelSheep2
 
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
-		float offset = -1 - percent;
-		GL11.glPushMatrix();
+		float offset = 1.4f - percent;
 
+		if(((IAnimal)entity).isAdult()) {
+			offset = 0;
+		}
+
+		GL11.glPushMatrix();
 		GL11.glScalef(1.0F / ageScale, 1.0F / ageScale, 1.0F / ageScale);
-		GL11.glTranslatef(0.0F, offset, 0f);
+		GL11.glTranslatef(0.0F, offset / ageScale, 0f);
 		this.head.render(par7);
 		this.body.render(par7);
 		this.leg1.render(par7);
