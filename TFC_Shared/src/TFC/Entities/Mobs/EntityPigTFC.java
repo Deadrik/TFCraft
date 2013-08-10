@@ -13,7 +13,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,7 +25,7 @@ import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
 
-public class EntityPigTFC extends EntityAnimal implements IAnimal
+public class EntityPigTFC extends EntityPig implements IAnimal
 {
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	protected long animalID;
@@ -105,7 +105,6 @@ public class EntityPigTFC extends EntityAnimal implements IAnimal
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -230,6 +229,7 @@ public class EntityPigTFC extends EntityAnimal implements IAnimal
 	/**
 	 * Returns true if the pig is saddled.
 	 */
+	@Override
 	public boolean getSaddled()
 	{
 		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
@@ -238,6 +238,7 @@ public class EntityPigTFC extends EntityAnimal implements IAnimal
 	/**
 	 * Set or remove the saddle of the pig.
 	 */
+	@Override
 	public void setSaddled(boolean par1)
 	{
 		if (par1)

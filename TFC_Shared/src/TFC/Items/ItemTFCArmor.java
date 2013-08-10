@@ -3,6 +3,7 @@ package TFC.Items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
@@ -112,6 +113,13 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	{
+		return Reference.ModID+String.format(":textures/models/armor/%s_%d%s.png",
+				ArmorType.metaltype, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
 	}
 }
 
