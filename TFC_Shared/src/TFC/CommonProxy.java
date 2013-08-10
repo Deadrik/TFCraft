@@ -354,7 +354,7 @@ public class CommonProxy implements IGuiHandler
 
 	public void sendCustomPacketToPlayer(EntityPlayerMP player, Packet packet)
 	{ 
-		//player.playerNetServerHandler.sendPacketToPlayer(packet);
+		player.playerNetServerHandler.sendPacketToPlayer(packet);
 	}
 
 	public void sendCustomPacketToPlayersInRange(double X, double Y, double Z, Packet packet, double range)
