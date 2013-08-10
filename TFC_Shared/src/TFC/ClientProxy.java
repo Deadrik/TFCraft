@@ -3,6 +3,7 @@ package TFC;
 import java.io.File;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.client.renderer.entity.RenderBlaze;
@@ -644,7 +645,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public String getCurrentLanguage()
 	{
-		return null;
+		return Minecraft.getMinecraft().func_135016_M().func_135041_c().func_135034_a();
 	}
 
 	@Override

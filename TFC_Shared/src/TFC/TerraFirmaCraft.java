@@ -23,6 +23,7 @@ import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.BiomeEventHandler;
+import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
 import TFC.Handlers.CraftingHandler;
@@ -116,14 +117,14 @@ public class TerraFirmaCraft
 		proxy.registerTileEntities(true);
 
 		//Register Sound Handler (Client only)
-		proxy.registerSoundHandler();
+		//proxy.registerSoundHandler();
 	}
 
 	@Init
 	public void initialize(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
-		Localization.addLocalization("assets/terrafirmacraft/lang/", "en_US");
+		Localization.addLocalization("/lang/", "en_US");
 		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
 		proxy.registerTranslations();
 
@@ -149,7 +150,7 @@ public class TerraFirmaCraft
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
 
 		// Register Chat Listener
-		//NetworkRegistry.instance().registerChatListener(new ChatListenerTFC());
+		NetworkRegistry.instance().registerChatListener(new ChatListenerTFC());
 
 		// Register Packet Handler
 		NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());

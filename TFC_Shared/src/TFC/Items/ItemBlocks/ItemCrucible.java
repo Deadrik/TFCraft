@@ -44,7 +44,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 	{
 		currentAlloy = null;
 		metals = new HashMap();
-		if(nbt.hasKey("Metals"))
+		if(nbt != null && nbt.hasKey("Metals"))
 		{
 			NBTTagList nbttaglist = nbt.getTagList("Metals");
 
@@ -56,30 +56,32 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 
 				Metal m = MetalRegistry.instance.getMetalFromItem(Item.itemsList[id]);
 				addMetal(m, amount);
-				
+
 			}
 		}
-		
+
 		if(currentAlloy != null)
 		{
 			for(int c = 0; c < currentAlloy.AlloyIngred.size(); c++)
 			{
 				double m = currentAlloy.AlloyIngred.get(c).metal;
 				m = Math.round(m * 100d)/100d;
-				if(currentAlloy.AlloyIngred.get(c).metalType != null)
+				if(currentAlloy.AlloyIngred.get(c).metalType != null) {
 					arraylist.add(EnumChatFormatting.DARK_GRAY + currentAlloy.AlloyIngred.get(c).metalType.Name + " " + EnumChatFormatting.DARK_GREEN + m + "%");
+				}
 			}
 		}
 	}
-	
+
 	public boolean addMetal(Metal m, short amt)
 	{
 		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
-			if(metals.containsKey(m.Name))
+			if(metals.containsKey(m.Name)) {
 				((MetalPair)metals.get(m.Name)).amount += amt;
-			else
+			} else {
 				metals.put(m.Name, new MetalPair(m, amt));
+			}
 
 			updateCurrentAlloy();
 
@@ -87,7 +89,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 		}
 		return false;
 	}
-	
+
 	public int getTotalMetal()
 	{
 		Iterator iter = metals.values().iterator();

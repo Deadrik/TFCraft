@@ -72,6 +72,6 @@ public class RenderTerraJavelin extends Render
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) 
 	{
-		return new ResourceLocation(Reference.ModID, Reference.AssetPath + "/mob/javelin.png");
+		return new ResourceLocation(Reference.ModID, "textures/mob/javelin.png");
 	}
 }
