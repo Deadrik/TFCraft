@@ -1,8 +1,5 @@
 package TFC.Entities.Mobs;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,7 +15,6 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
@@ -26,8 +22,6 @@ import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 {
@@ -54,7 +48,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	protected int pregnancyTime;
 	protected long conception;
 	protected float mateSizeMod;
-	public float size_mod;
+	public float size_mod = 1f;
 	public boolean inLove;
 
 	public EntitySheepTFC(World par1World)
@@ -162,40 +156,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return TFCItems.Wool.itemID;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void handleHealthUpdate(byte par1)
-	{
-		if (par1 == 10)
-		{
-			this.sheepTimer = 40;
-		}
-		else
-		{
-			super.handleHealthUpdate(par1);
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public float func_44003_c(float par1)
-	{
-		return this.sheepTimer <= 0 ? 0.0F : (this.sheepTimer >= 4 && this.sheepTimer <= 36 ? 1.0F : (this.sheepTimer < 4 ? (this.sheepTimer - par1) / 4.0F : -(this.sheepTimer - 40 - par1) / 4.0F));
-	}
-
-	@SideOnly(Side.CLIENT)
-	public float func_44002_d(float par1)
-	{
-		if (this.sheepTimer > 4 && this.sheepTimer <= 36)
-		{
-			float var2 = (this.sheepTimer - 4 - par1) / 32.0F;
-			return ((float)Math.PI / 5F) + ((float)Math.PI * 7F / 100F) * MathHelper.sin(var2 * 28.7F);
-		}
-		else
-		{
-			return this.sheepTimer > 0 ? ((float)Math.PI / 5F) : this.rotationPitch / (180F / (float)Math.PI);
-		}
-	}
-
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
@@ -218,134 +178,44 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setBoolean("Sheared", this.getSheared());
-		par1NBTTagCompound.setByte("Color", (byte)this.getFleeceColor());
+		super.writeEntityToNBT(nbt);
+		nbt.setBoolean("Sheared", this.getSheared());
+		nbt.setByte("Color", (byte)this.getFleeceColor());
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setLong("ConceptionTime",conception);
+		nbt.setInteger("Age", getAge());
 	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		this.setSheared(par1NBTTagCompound.getBoolean("Sheared"));
-		this.setFleeceColor(par1NBTTagCompound.getByte("Color"));
-	}
-	@Override
-	protected String getLivingSound()
-	{
-		return "mob.sheep.say";
-	}
-	@Override
-	protected String getHurtSound()
-	{
-		return "mob.sheep.say";
-	}
-	@Override
-	protected String getDeathSound()
-	{
-		return "mob.sheep.say";
+		super.readEntityFromNBT(nbt);
+		this.setSheared(nbt.getBoolean("Sheared"));
+		this.setFleeceColor(nbt.getByte("Color"));
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		conception = nbt.getLong("ConceptionTime");
 	}
 
-	@Override
-	public int getFleeceColor()
-	{
-		return this.dataWatcher.getWatchableObjectByte(16) & 15;
-	}
-
-	@Override
-	public void setFleeceColor(int par1)
-	{
-		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-		this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & 240 | par1 & 15)));
-	}
-
-	/**
-	 * returns true if a sheeps wool has been sheared
-	 */
-	@Override
-	public boolean getSheared()
-	{
-		return (this.dataWatcher.getWatchableObjectByte(16) & 16) != 0;
-	}
-
-	/**
-	 * make a sheep sheared if set to true
-	 */
-	@Override
-	public void setSheared(boolean par1)
-	{
-		byte var2 = this.dataWatcher.getWatchableObjectByte(16);
-
-		if (par1)
-		{
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 | 16)));
-		}
-		else
-		{
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var2 & -17)));
-		}
-	}
-
-	/**
-	 * This method is called when a sheep spawns in the world to select the color of sheep fleece.
-	 */
-	public static int getRandomFleeceColor(Random par0Random)
-	{
-		int var1 = par0Random.nextInt(100);
-		return var1 < 5 ? 15 : (var1 < 10 ? 7 : (var1 < 15 ? 8 : (var1 < 18 ? 12 : (par0Random.nextInt(500) == 0 ? 6 : 0))));
-	}
-
-	/**
-	 * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-	 */
-	/*@Override
-	public void procreate(EntityAnimal par1EntityAnimal)
-	{
-		EntitySheepTFC var2 = (EntitySheepTFC)par1EntityAnimal;
-		EntitySheepTFC var3 = new EntitySheepTFC(this.worldObj);
-
-		if (this.rand.nextBoolean())
-		{
-			var3.setFleeceColor(this.getFleeceColor());
-		}
-		else
-		{
-			var3.setFleeceColor(var2.getFleeceColor());
-		}
-
-		worldObj.spawnEntityInWorld(var3);
-	}*/
-
-	/**
-	 * This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
-	 * function is used in the AIEatGrass)
-	 */
-	@Override
-	public void eatGrassBonus()
-	{
-		super.eatGrassBonus();
-		this.setSheared(false);
-	}
 
 	@Override
 	public boolean isShearable(ItemStack item, World world, int X, int Y, int Z) 
 	{
 		return !getSheared() && isAdult();
-	}
-
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune) 
-	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		setSheared(true);        
-		ret.add(new ItemStack(TFCItems.Wool));
-
-		return ret;
 	}
 
 	@Override
@@ -357,7 +227,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityChickenTFC(worldObj, this);
+		return new EntitySheepTFC(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
 	}
 
 	@Override
@@ -381,7 +251,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override

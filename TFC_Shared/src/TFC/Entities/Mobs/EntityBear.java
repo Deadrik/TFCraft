@@ -375,7 +375,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override

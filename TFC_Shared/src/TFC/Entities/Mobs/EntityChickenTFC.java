@@ -18,21 +18,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
 
 public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
-	public boolean field_753_a = false;
-	public float field_752_b = 0.0F;
-	public float destPos = 0.0F;
-	public float field_757_d;
-	public float field_756_e;
-	public float field_755_h = 1.0F;
-
-	/** The time until the next egg is spawned. */
-	public int timeUntilNextEgg;
 	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 
 	protected long animalID;
@@ -40,9 +30,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected int hunger;
 	protected long hasMilkTime;
 	protected int age;
-	protected boolean pregnant;
-	protected int pregnancyTime;
-	protected long conception;
 	protected float mateSizeMod;
 	public float size_mod;
 	public boolean inLove;
@@ -95,11 +82,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		super.onLivingUpdate();
 
-		this.field_756_e = this.field_752_b;
-		this.field_757_d = this.destPos;
-		this.destPos = (float)(this.destPos + (this.onGround ? -1 : 4) * 0.3D);
-
-		if(pregnant)
+		/*if(pregnant)
 		{
 			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength)
 			{
@@ -116,31 +99,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				}
 				pregnant = false;
 			}
-		}
-
-		if (this.destPos < 0.0F)
-		{
-			this.destPos = 0.0F;
-		}
-
-		if (this.destPos > 1.0F)
-		{
-			this.destPos = 1.0F;
-		}
-
-		if (!this.onGround && this.field_755_h < 1.0F)
-		{
-			this.field_755_h = 1.0F;
-		}
-
-		this.field_755_h = (float)(this.field_755_h * 0.9D);
-
-		if (!this.onGround && this.motionY < 0.0D)
-		{
-			this.motionY *= 0.6D;
-		}
-
-		this.field_752_b += this.field_755_h * 2.0F;
+		}*/
 
 		if (isAdult() && getGender() == GenderEnum.FEMALE && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
 		{
@@ -151,54 +110,33 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	/**
-	 * Called when the mob is falling. Calculates and applies fall damage.
-	 */
-	@Override
-	protected void fall(float par1) {}
-
-	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setInteger("Age", getAge());
 	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-	}
-
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound()
-	{
-		return "mob.chicken.say";
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound()
-	{
-		return "mob.chicken.hurt";
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	@Override
-	protected String getDeathSound()
-	{
-		return "mob.chicken.hurt";
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		mateSizeMod = nbt.getFloat("MateSize");
+		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -265,13 +203,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override
 	public boolean isPregnant() 
 	{
-		return pregnant;
+		return false;
 	}
 
 	@Override
@@ -283,27 +221,13 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityChickenTFC) {
-			return true;
-		} else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
 	public void mate(IAnimal otherAnimal) 
 	{
-		if (sex == 0)
-		{
-			otherAnimal.mate(this);
-			return;
-		}
-		conception = TFC_Time.getTotalTicks();
-		pregnant = true;
-		//targetMate.setGrowingAge (TFC_Settings.dayLength);
-		resetInLove();
-		otherAnimal.setInLove(false);
-		mateSizeMod = otherAnimal.getSize();
+
 	}
 
 	@Override

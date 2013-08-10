@@ -94,23 +94,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 	}
 
-	/**
-	 * Returns true if the newer Entity AI code should be run
-	 */
-	@Override
-	public boolean isAIEnabled()
-	{
-		return true;
-	}
 
-	/**
-	 * main AI tick function, replaces updateEntityActionState
-	 */
-	@Override
-	protected void updateAITick()
-	{
-		this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
-	}
 	@Override
 	protected void func_110147_ax()
 	{
@@ -305,7 +289,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityChickenTFC(worldObj, this);
+		return new EntityWolfTFC(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
 	}
 
 	@Override
@@ -329,7 +313,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override

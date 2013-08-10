@@ -10,12 +10,10 @@ import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.API.Entities.IAnimal;
@@ -38,7 +36,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	protected int pregnancyTime;
 	protected long conception;
 	protected float mateSizeMod;
-	public float size_mod;
+	public float size_mod = 1f;
 	public boolean inLove;
 
 	public EntityDeer(World par1World)
@@ -52,16 +50,19 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, var2));
 		//this.tasks.addTask(3, new EntityAIPanicTFC(this, var2*2, false, true));
-		//this.tasks.addTask(3, new EntityAIAvoidEntityTFC(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
+		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityPlayer.class, 12.0F, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolfTFC.class, 8f, 0.5F, 0.7F));
 		this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityBear.class, 16f, 0.25F, 0.3F));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
+		//this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
 		//this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
-		//this.tasks.addTask(5, this.aiEatGrass);
+		this.tasks.addTask(5, this.aiEatGrass);
 		//this.tasks.addTask(5, new EntityAIRutt(this, var2));
 		this.tasks.addTask(1, new EntityAIWander(this, var2));
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		//this.tasks.addTask(8, new EntityAILookIdle(this));
+
+		int degreeOfDiversion = 1;
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 	}
 	public EntityDeer(World par1World, IAnimal mother, float F_size)
 	{
@@ -275,7 +276,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityChickenTFC(worldObj, this);
+		return new EntityDeer(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
 	}
 
 	@Override
@@ -299,7 +300,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override

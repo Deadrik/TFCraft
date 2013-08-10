@@ -251,7 +251,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override

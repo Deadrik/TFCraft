@@ -84,7 +84,7 @@ public class ModelCowTFC extends ModelQuadruped
 			}
 			sex = ((EntityAnimalTFC)par1Entity).sex;
 		}*/
-		float aa =  2F - (1.0F - age);
+		float aa =  2;//2F - (1.0F - age);
 		GL11.glPushMatrix ();
 		float ab = (float)Math.sqrt(1.0F / aa);
 		GL11.glScalef(ab, ab, ab);

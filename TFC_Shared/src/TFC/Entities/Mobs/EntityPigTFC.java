@@ -31,13 +31,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	protected long animalID;
 	protected int sex;
 	protected int hunger;
-	protected long hasMilkTime;
 	protected int age;
 	protected boolean pregnant;
 	protected int pregnancyTime;
 	protected long conception;
 	protected float mateSizeMod;
-	public float size_mod;
+	public float size_mod = 1f;
 	public boolean inLove;
 
 	public EntityPigTFC(World par1World)
@@ -119,7 +118,6 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setLong("ConceptionTime",conception);
 		nbt.setInteger("Age", getAge());
-		nbt.setLong("HasMilkTime", hasMilkTime);
 		nbt.setBoolean("Saddle", this.getSaddled());
 	}
 
@@ -134,36 +132,8 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
 		conception = nbt.getLong("ConceptionTime");
-		hasMilkTime = nbt.getLong("HasMilkTime");
 		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
 		this.setSaddled(nbt.getBoolean("Saddle"));
-	}
-
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound()
-	{
-		return "mob.pig.say";
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound()
-	{
-		return "mob.pig.say";
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	@Override
-	protected String getDeathSound()
-	{
-		return "mob.pig.death";
 	}
 
 	/**
@@ -313,7 +283,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public float getSize() 
 	{
-		return 0.5f;
+		return size_mod;
 	}
 
 	@Override
