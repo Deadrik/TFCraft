@@ -9,20 +9,9 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
-import TFC.Entities.Mobs.EntitySheepTFC;
 
 public class EntitySpawnHandler
 {
-	@ForgeSubscribe
-	public void onEntitySpawn(LivingSpawnEvent event) 
-	{
-		EntityLivingBase entity = event.entityLiving;
-
-		if (entity instanceof EntitySheepTFC)
-		{
-			((EntitySheepTFC)entity).setFleeceColor(EntitySheepTFC.getRandomFleeceColor(entity.worldObj.rand));
-		}
-	}
 
 	@ForgeSubscribe
 	public void onCheckSpawn(LivingSpawnEvent.CheckSpawn event) 

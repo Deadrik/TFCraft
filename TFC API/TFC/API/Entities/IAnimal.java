@@ -12,7 +12,7 @@ public interface IAnimal
 
 	public GenderEnum getGender();
 
-	public int getAge();
+	public int getBirthDay();
 	/**
 	 * @return The length of time (in days) until this type of animal reatures maturity
 	 */

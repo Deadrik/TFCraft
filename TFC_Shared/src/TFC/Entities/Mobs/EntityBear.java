@@ -149,7 +149,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setLong("ConceptionTime",conception);
-		nbt.setInteger("Age", getAge());
+		nbt.setInteger("Age", getBirthDay());
 	}
 
 
@@ -355,7 +355,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
-	public int getAge() 
+	public int getBirthDay() 
 	{
 		return this.dataWatcher.getWatchableObjectInt(12);
 	}
@@ -369,7 +369,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() >= getNumberOfDaysToAdult();
+		return getBirthDay() >= getNumberOfDaysToAdult();
 	}
 
 	@Override

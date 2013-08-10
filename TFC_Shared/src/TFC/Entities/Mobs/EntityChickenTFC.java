@@ -121,7 +121,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		nbt.setFloat ("Size Modifier", size_mod);
 		nbt.setInteger ("Hunger", hunger);
 		nbt.setFloat("MateSize", mateSizeMod);
-		nbt.setInteger("Age", getAge());
+		nbt.setInteger("Age", getBirthDay());
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
-	public int getAge() 
+	public int getBirthDay() 
 	{
 		return this.dataWatcher.getWatchableObjectInt(12);
 	}
@@ -197,7 +197,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() >= getNumberOfDaysToAdult();
+		return getBirthDay() >= getNumberOfDaysToAdult();
 	}
 
 	@Override

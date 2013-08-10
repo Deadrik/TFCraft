@@ -6,6 +6,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -19,6 +21,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.Constant.Global;
+import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
 import TFC.Blocks.BlockSlab;
 import TFC.Food.FoodStatsTFC;
@@ -40,21 +43,21 @@ public class TFC_Core
 				Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 		int i = scaledresolution.getScaledWidth();
 		int k = Mouse.getX() * i / Minecraft.getMinecraft().displayWidth;
-		
+
 		return k;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public static int getMouseY()
 	{
 		ScaledResolution scaledresolution = new ScaledResolution(
 				Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 		int j = scaledresolution.getScaledHeight();
-        int l = j - Mouse.getY() * j / Minecraft.getMinecraft().displayHeight - 1;
-        
-        return l;
+		int l = j - Mouse.getY() * j / Minecraft.getMinecraft().displayHeight - 1;
+
+		return l;
 	}
-	
+
 	static Boolean isBlockAboveSolid(IBlockAccess blockAccess, int i, int j, int k)
 	{
 		if(TerraFirmaCraft.proxy.getCurrentWorld().isBlockOpaqueCube(i, j+1, k)) {
@@ -248,37 +251,77 @@ public class TFC_Core
 
 	}
 
+	public static boolean isLushGrass(int id)
+	{
+		return (id == TFCBlocks.Grass.blockID || id == TFCBlocks.Grass2.blockID ||
+				id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID ||
+				id == TFCBlocks.PeatGrass.blockID);
+
+	}
+
+	public static boolean isClayGrass(int id)
+	{
+		return (id == TFCBlocks.ClayGrass.blockID || id == TFCBlocks.ClayGrass2.blockID);
+
+	}
+
+	public static boolean isPeatGrass(int id)
+	{
+		return (id == TFCBlocks.PeatGrass.blockID);
+
+	}
+
 	public static boolean isDryGrass(int id)
 	{
 		return (id == TFCBlocks.DryGrass.blockID || id == TFCBlocks.DryGrass2.blockID);
 
 	}
 
+	public static boolean isGrassType1(int id)
+	{
+		return (id == TFCBlocks.Grass.blockID ||
+				id == TFCBlocks.ClayGrass.blockID ||
+				id == TFCBlocks.DryGrass.blockID);
+
+	}
+
+	public static boolean isGrassType2(int id)
+	{
+		return (id == TFCBlocks.Grass2.blockID ||
+				id == TFCBlocks.ClayGrass2.blockID ||
+				id == TFCBlocks.DryGrass2.blockID);
+
+	}
+
 	public static boolean isClay(int id)
 	{
-		if(id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID)
+		if(id == TFCBlocks.Clay.blockID || id == TFCBlocks.Clay2.blockID) {
 			return true;
+		}
 		return false;
 	}
 
 	public static boolean isSand(int id)
 	{
-		if(id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID)
+		if(id == TFCBlocks.Sand.blockID || id == TFCBlocks.Sand2.blockID) {
 			return true;
+		}
 		return false;
 	}
 
 	public static boolean isPeat(int id)
 	{
-		if(id == TFCBlocks.Peat.blockID)
+		if(id == TFCBlocks.Peat.blockID) {
 			return true;
+		}
 		return false;
 	}
 
 	public static boolean isWater(int id)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID || id == TFCBlocks.finiteWater.blockID)
+		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID || id == TFCBlocks.finiteWater.blockID) {
 			return true;
+		}
 		return false;
 	}
 
@@ -289,95 +332,124 @@ public class TFC_Core
 
 	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID)
+		if(inType == TFCBlocks.StoneIgIn.blockID) {
 			return inMeta;
-		else if(inType == TFCBlocks.StoneSed.blockID)
+		} else if(inType == TFCBlocks.StoneSed.blockID) {
 			return inMeta+3;
-		else if(inType == TFCBlocks.StoneIgEx.blockID)
+		} else if(inType == TFCBlocks.StoneIgEx.blockID)
 		{
-			if(inMeta == 3)
+			if(inMeta == 3) {
 				return 0;
+			}
 			return inMeta+13;
-		}
-		else
+		} else {
 			return inMeta+1;
+		}
 	}
 
 	public static int getItemMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID)
+		if(inType == TFCBlocks.StoneIgIn.blockID) {
 			return inMeta;
-		else if(inType == TFCBlocks.StoneSed.blockID)
+		} else if(inType == TFCBlocks.StoneSed.blockID) {
 			return inMeta+3;
-		else if(inType == TFCBlocks.StoneIgEx.blockID)
+		} else if(inType == TFCBlocks.StoneIgEx.blockID) {
 			return inMeta+13;
-		else if(inType == TFCBlocks.StoneMM.blockID)
+		} else if(inType == TFCBlocks.StoneMM.blockID) {
 			return inMeta+17;
-		else return 0;
+		} else {
+			return 0;
+		}
 	}
 
 	public static int getTypeForGrassWithRain(int inMeta, float rain)
 	{
-		if(rain >= 500)
+		if(rain >= 500) {
 			return getTypeForGrass(inMeta);
+		}
 		return getTypeForDryGrass(inMeta);
 
 	}
 
 	public static int getTypeForGrass(int inMeta)
 	{
-		if(inMeta < 16)
+		if(inMeta < 16) {
 			return TFCBlocks.Grass.blockID;
+		}
 		return TFCBlocks.Grass2.blockID;
 	}
 
 	public static int getTypeForDryGrass(int inMeta)
 	{
-		if(inMeta < 16)
+		if(inMeta < 16) {
 			return TFCBlocks.DryGrass.blockID;
+		}
 		return TFCBlocks.DryGrass2.blockID;
 	}
 
 	public static int getTypeForClayGrass(int inMeta)
 	{
-		if(inMeta < 16)
+		if(inMeta < 16) {
 			return TFCBlocks.ClayGrass.blockID;
+		}
 		return TFCBlocks.ClayGrass2.blockID;
 	}
 
 	public static int getTypeForDirt(int inMeta)
 	{
-		if(inMeta < 16)
+		if(inMeta < 16) {
 			return TFCBlocks.Dirt.blockID;
+		}
 		return TFCBlocks.Dirt2.blockID;
 	}
 
 	public static int getTypeForClay(int inMeta)
 	{
-		if(inMeta < 16)
-
+		if(inMeta < 16) {
 			return TFCBlocks.Clay.blockID;
+		}
 		return TFCBlocks.Clay2.blockID;
 
 	}
 
 	public static int getTypeForSand(int inMeta)
 	{
-		if(inMeta < 16)
-
+		if(inMeta < 16) {
 			return TFCBlocks.Sand.blockID;
+		}
 		return TFCBlocks.Sand2.blockID;
 
 	}
 
 	public static int getRockLayerFromHeight( int y)
 	{
-		if(y <= TFC_Settings.RockLayer3Height)
+		if(y <= TFC_Settings.RockLayer3Height) {
 			return 2;
-		else if(y <= TFC_Settings.RockLayer2Height)
+		} else if(y <= TFC_Settings.RockLayer2Height) {
 			return 1;
-		else
+		} else {
 			return 0;
+		}
+	}
+
+	public static boolean convertGrassToDirt(World world, int i, int j, int k)
+	{
+		int id = world.getBlockId(i, j, k);
+		int meta = world.getBlockMetadata(i, j, k);
+		if(TFC_Core.isGrass(id))
+		{
+			if(TFC_Core.isGrassType1(id)) 
+			{
+				world.setBlock(i, j, k, TFCBlocks.Dirt.blockID, meta, 2);
+				return true;
+			}
+			else if(TFC_Core.isGrassType2(id)) 
+			{
+				world.setBlock(i, j, k, TFCBlocks.Dirt2.blockID, meta, 2);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static EnumWoodMaterial getWoodMaterial(ItemStack is)
@@ -472,12 +544,12 @@ public class TFC_Core
 		foodstats.readNBT(player.getEntityData());
 		return foodstats;
 	}
-	
+
 	public static void setPlayerFoodStats(EntityPlayer player, FoodStatsTFC foodstats)
 	{
 		foodstats.writeNBT(player.getEntityData());
 	}
-	
+
 	public static boolean isNorthSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x, y, z-1))
@@ -485,17 +557,17 @@ public class TFC_Core
 			return true;
 		}
 		else if(world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
-    		if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    		return true;
-    	}
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z-1);
+			if(BlockSlab.getNorthChiselLevel(te.extraData) != 0)
+			{
+				return false;
+			}
+			return true;
+		}
 		return false;
 	}
-	
+
 	public static boolean isSouthSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x, y, z+1))
@@ -503,17 +575,17 @@ public class TFC_Core
 			return true;
 		}
 		else if(world.getBlockId(x, y, z+1) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
-    		if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    		return true;
-    	}
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x, y, z+1);
+			if(BlockSlab.getSouthChiselLevel(te.extraData) != 0)
+			{
+				return false;
+			}
+			return true;
+		}
 		return false;
 	}
-	
+
 	public static boolean isEastSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x-1, y, z))
@@ -521,17 +593,17 @@ public class TFC_Core
 			return true;
 		}
 		else if(world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
-    		if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    		return true;
-    	}
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x-1, y, z);
+			if(BlockSlab.getEastChiselLevel(te.extraData) != 0)
+			{
+				return false;
+			}
+			return true;
+		}
 		return false;
 	}
-	
+
 	public static boolean isWestSolid(World world, int x, int y, int z)
 	{
 		if(world.isBlockNormalCube(x+1, y, z))
@@ -539,17 +611,17 @@ public class TFC_Core
 			return true;
 		}
 		else if(world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID)
-    	{
-    		TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
-    		if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
-    		{
-    			return false;
-    		}
-    		return true;
-    	}
+		{
+			TileEntityPartial te = (TileEntityPartial) world.getBlockTileEntity(x+1, y, z);
+			if(BlockSlab.getWestChiselLevel(te.extraData) != 0)
+			{
+				return false;
+			}
+			return true;
+		}
 		return false;
 	}
-	
+
 	public static boolean isOreIron(ItemStack is)
 	{
 		if(is.getItem() instanceof ItemOre && ((ItemOre)is.getItem()).GetMetalType(is) == Global.PIGIRON)
@@ -557,5 +629,18 @@ public class TFC_Core
 			return true;
 		}
 		return false;
+	}
+
+	public static float getEntityMaxHealth(EntityLivingBase entity)
+	{
+		return (float) entity.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111126_e();
+	}
+
+	public static float getPercentGrown(IAnimal animal)
+	{
+		float birth = animal.getBirthDay();
+		float time = (int) TFC_Time.getTotalDays();
+		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
+		return Math.min(percent, 1f);
 	}
 }

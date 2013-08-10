@@ -116,7 +116,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 		par1NBTTagCompound.setBoolean("Pregnant", pregnant);
 		par1NBTTagCompound.setFloat("MateSize", mateSizeMod);
 		par1NBTTagCompound.setLong("ConceptionTime",conception);
-		par1NBTTagCompound.setInteger("Age", getAge());
+		par1NBTTagCompound.setInteger("Age", getBirthDay());
 		par1NBTTagCompound.setLong("HasMilkTime", hasMilkTime);
 	}
 
@@ -231,7 +231,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public int getAge() 
+	public int getBirthDay() 
 	{
 		return this.dataWatcher.getWatchableObjectInt(12);
 	}
@@ -245,7 +245,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() >= getNumberOfDaysToAdult();
+		return getBirthDay() >= getNumberOfDaysToAdult();
 	}
 
 	@Override

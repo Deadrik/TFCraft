@@ -117,7 +117,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setLong("ConceptionTime",conception);
-		nbt.setInteger("Age", getAge());
+		nbt.setInteger("Age", getBirthDay());
 		nbt.setBoolean("Saddle", this.getSaddled());
 	}
 
@@ -171,7 +171,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		int var3 = 1;
 		int var4;
 		float ga = getGrowingAge();
-		float ageMod = ga<0 ? 1+(ga/(getAge()*TFC_Time.dayLength)) : 1;
+		float ageMod = ga<0 ? 1+(ga/(getBirthDay()*TFC_Time.dayLength)) : 1;
 
 		for (var4 = 0; var4 < var3; ++var4)
 		{
@@ -263,7 +263,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	}
 
 	@Override
-	public int getAge() 
+	public int getBirthDay() 
 	{
 		return this.dataWatcher.getWatchableObjectInt(12);
 	}
@@ -277,7 +277,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() >= getNumberOfDaysToAdult();
+		return getBirthDay() >= getNumberOfDaysToAdult();
 	}
 
 	@Override

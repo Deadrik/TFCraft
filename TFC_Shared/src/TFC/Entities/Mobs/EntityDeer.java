@@ -280,7 +280,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	}
 
 	@Override
-	public int getAge() 
+	public int getBirthDay() 
 	{
 		return this.dataWatcher.getWatchableObjectInt(12);
 	}
@@ -294,7 +294,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() >= getNumberOfDaysToAdult();
+		return getBirthDay() >= getNumberOfDaysToAdult();
 	}
 
 	@Override

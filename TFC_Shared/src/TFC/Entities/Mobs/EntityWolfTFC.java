@@ -118,7 +118,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		nbt.setBoolean("Pregnant", pregnant);
 		nbt.setFloat("MateSize", mateSizeMod);
 		nbt.setLong("ConceptionTime",conception);
-		nbt.setInteger("Age", getAge());
+		nbt.setInteger("Age", getBirthDay());
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	}
 
 	@Override
-	public int getAge() 
+	public int getBirthDay() 
 	{
 		return this.dataWatcher.getWatchableObjectInt(12);
 	}
@@ -307,7 +307,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getAge() >= getNumberOfDaysToAdult();
+		return getBirthDay() >= getNumberOfDaysToAdult();
 	}
 
 	@Override
