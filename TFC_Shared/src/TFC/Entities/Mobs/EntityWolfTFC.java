@@ -3,28 +3,10 @@ package TFC.Entities.Mobs;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.block.BlockColored;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
+import TFC.*;
 import TFC.Core.TFC_MobDamage;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
+import TFC.Core.TFC_Settings;
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.EntityTameableTFC;
 import TFC.Entities.AI.EntityAIBegTFC;
@@ -34,6 +16,38 @@ import TFC.Entities.AI.EntityAIMateTFC;
 import TFC.Entities.AI.EntityAIOwnerHurtByTargetTFC;
 import TFC.Entities.AI.EntityAIOwnerHurtTargetTFC;
 import TFC.Entities.AI.EntityAITargetNonTamedTFC;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.crash.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.packet.*;
+import net.minecraft.pathfinding.*;
+import net.minecraft.potion.*;
+import net.minecraft.server.*;
+import net.minecraft.stats.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.village.*;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
 public class EntityWolfTFC extends EntityTameableTFC
 {
@@ -61,16 +75,18 @@ public class EntityWolfTFC extends EntityTameableTFC
 		super(par1World);
 		fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
+		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
+		this.moveSpeed = 0.4F;
 		warning = -121;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1, true));
-		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, 1, 10.0F, 2.0F));
-		this.tasks.addTask(6, new EntityAIMateTFC(this, 1));
-		this.tasks.addTask(7, new EntityAIWander(this, 1));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
+		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, this.moveSpeed, 10.0F, 2.0F));
+		this.tasks.addTask(6, new EntityAIMateTFC(this, this.moveSpeed));
+		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
 		this.tasks.addTask(8, new EntityAIBegTFC(this, 8.0F));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -86,16 +102,18 @@ public class EntityWolfTFC extends EntityTameableTFC
 		super(par1World,mother,F_size);
 		fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
+		this.texture = "/mob/wolf.png";
 		this.setSize(0.6F, 0.8F);
+		this.moveSpeed = 0.4F;
 		warning = -121;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0, true));
-		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, 1.0f, 10.0F, 2.0F));
-		this.tasks.addTask(6, new EntityAIMateTFC(this, 1.0f));
-		this.tasks.addTask(7, new EntityAIWander(this, 1f));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
+		this.tasks.addTask(5, new EntityAIFollowOwnerTFC(this, this.moveSpeed, 10.0F, 2.0F));
+		this.tasks.addTask(6, new EntityAIMateTFC(this, this.moveSpeed));
+		this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
 		this.tasks.addTask(8, new EntityAIBegTFC(this, 8.0F));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -117,12 +135,26 @@ public class EntityWolfTFC extends EntityTameableTFC
 	}
 
 	/**
+	 * Sets the active target the Task system uses for tracking
+	 */
+	@Override
+	public void setAttackTarget(EntityLiving par1EntityLiving)
+	{
+		super.setAttackTarget(par1EntityLiving);
+
+		if (par1EntityLiving instanceof EntityPlayer)
+		{
+			this.setAngry(true);
+		}
+	}
+
+	/**
 	 * main AI tick function, replaces updateEntityActionState
 	 */
 	@Override
 	protected void updateAITick()
 	{
-		this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
+		this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
 	}
 	@Override
 	public int getMaxHealth()
@@ -133,9 +165,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(18, this.func_110143_aJ());
-		this.dataWatcher.addObject(19, new Byte((byte)0));
-		this.dataWatcher.addObject(20, new Byte((byte)BlockColored.getBlockFromDye(1)));
+		this.dataWatcher.addObject(18, new Integer(this.getHealth()));
 	}
 
 	/**
@@ -146,6 +176,15 @@ public class EntityWolfTFC extends EntityTameableTFC
 	protected boolean canTriggerWalking()
 	{
 		return false;
+	}
+
+	/**
+	 * Returns the texture's file path as a String.
+	 */
+	@Override
+	public String getTexture()
+	{
+		return this.isTamed() ? "/mob/wolf_tame.png" : (this.isAngry() ? "/mob/wolf_angry.png" : texture);
 	}
 
 	/**
@@ -290,7 +329,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 						 * Removed to hopefully stop the annoying constant growl at owners
 						 */
 						//this.worldObj.playSoundAtEntity(this, "mob.wolf.growl", this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-
+						
 					}
 					if (warning == -121){
 						warning = TFC_Time.getTotalTicks();
@@ -341,7 +380,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 				{
 					float var4 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
 					float var5 = (this.rand.nextFloat() * 2.0F - 1.0F) * this.width * 0.5F;
-					this.worldObj.spawnParticle("splash", this.posX + var4, var1 + 0.8F, this.posZ + var5, this.motionX, this.motionY, this.motionZ);
+					this.worldObj.spawnParticle("splash", this.posX + (double)var4, (double)(var1 + 0.8F), this.posZ + (double)var5, this.motionX, this.motionY, this.motionZ);
 				}
 			}
 		}
@@ -396,6 +435,22 @@ public class EntityWolfTFC extends EntityTameableTFC
 		return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
 	}
 
+	/**
+	 * Called when the entity is attacked.
+	 */
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+	{
+		Entity var3 = par1DamageSource.getEntity();
+		this.aiSit.setIsSitting(false);
+
+		if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
+		{
+			par2 = (par2 + 1) / 2;
+		}
+
+		return super.attackEntityFrom(par1DamageSource, par2);
+	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
@@ -499,7 +554,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	}
 	public float getTailRotation()
 	{
-		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (20 - this.dataWatcher.getWatchableObjectInt(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
+		return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (float)(20 - this.dataWatcher.getWatchableObjectInt(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
 	}
 
 	/**
@@ -562,7 +617,7 @@ public class EntityWolfTFC extends EntityTameableTFC
 	{
 		return looksWithInterest;
 	}
-
+	
 	public void setLooksWithInterest(boolean b)
 	{
 		looksWithInterest = b;

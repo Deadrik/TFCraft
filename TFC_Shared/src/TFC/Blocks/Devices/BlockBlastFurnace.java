@@ -3,7 +3,7 @@ package TFC.Blocks.Devices;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -34,11 +34,10 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	public int getLightValue(IBlockAccess world, int x, int y, int z) 
 	{
 		int meta = world.getBlockMetadata(x, y, z) & 4;
-		if(meta == 0) {
+		if(meta == 0)
 			return 0;
-		} else {
+		else
 			return 15;
-		}
 	}
 
 	@Override
@@ -107,19 +106,17 @@ public class BlockBlastFurnace extends BlockTerraContainer
 
 		if(i == 0 || i == 1) 
 		{
-			if(lit == 1) {
+			if(lit == 1)
 				return textureSide[1];
-			} else {
+			else 
 				return textureSide[0];
-			}
 		}
 		else
 		{
-			if(lit == 1) {
+			if(lit == 1)
 				return textureOn;
-			} else {
+			else 
 				return textureOff;
-			}
 		}
 	}
 
@@ -134,7 +131,7 @@ public class BlockBlastFurnace extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack par6ItemStack)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack par6ItemStack)
 	{
 		if(!world.isRemote)
 		{

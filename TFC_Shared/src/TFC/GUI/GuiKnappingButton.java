@@ -2,7 +2,6 @@ package TFC.GUI;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
@@ -25,7 +24,7 @@ public class GuiKnappingButton extends GuiButton
         	Icon icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingType.getIconIndex();
         	if(!this.enabled && PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate != null)
         		icon = PlayerManagerTFC.getInstance().getClientPlayer().specialCraftingTypeAlternate.getIconIndex();
-            par1Minecraft.func_110434_K().func_110577_a(TextureMap.field_110576_c);
+            par1Minecraft.renderEngine.bindTexture("/gui/items.png");
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_82253_i = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
             int k = this.getHoverState(this.field_82253_i);

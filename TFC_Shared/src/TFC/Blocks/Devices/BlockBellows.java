@@ -3,7 +3,7 @@ package TFC.Blocks.Devices;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -44,7 +44,7 @@ public class BlockBellows extends BlockTerraContainer {
 		}
 		return true;
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
@@ -132,7 +132,7 @@ public class BlockBellows extends BlockTerraContainer {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is) {
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving, ItemStack is) {
 		super.onBlockPlacedBy(world, i, j, k, entityliving, is);
 		int l = MathHelper.floor_double(entityliving.rotationYaw * 4F / 360F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(i, j, k, l, 0x2);

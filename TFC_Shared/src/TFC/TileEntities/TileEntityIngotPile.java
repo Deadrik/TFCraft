@@ -295,7 +295,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) 
 	{
 		return false;
 	}

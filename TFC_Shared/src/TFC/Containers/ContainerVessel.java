@@ -60,8 +60,8 @@ public class ContainerVessel extends ContainerTFC {
 	 * Callback for when the crafting gui is closed.
 	 */
 	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
+	public void onCraftGuiClosed(EntityPlayer player) {
+		super.onCraftGuiClosed(player);
 		if (!this.world.isRemote)
 		{
 			NBTTagList nbttaglist = new NBTTagList();
@@ -77,9 +77,8 @@ public class ContainerVessel extends ContainerTFC {
 			}
 			if(player.inventory.getStackInSlot(bagsSlotNum) != null)
 			{
-				if(!player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound()) {
+				if(!player.inventory.getStackInSlot(bagsSlotNum).hasTagCompound())
 					player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(new NBTTagCompound());
-				}
 				player.inventory.getStackInSlot(bagsSlotNum).getTagCompound().setTag("Items", nbttaglist);
 
 			}
@@ -103,11 +102,10 @@ public class ContainerVessel extends ContainerTFC {
 
 		for (row = 0; row < 9; ++row) 
 		{
-			if(row == bagsSlotNum) {
+			if(row == bagsSlotNum)
 				this.addSlotToContainer(new SlotForShowOnly(playerInventory, row, 8 + row * 18, 142));
-			} else {
+			else
 				this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
-			}
 		}
 
 		for (row = 0; row < 3; ++row) 
@@ -131,7 +129,7 @@ public class ContainerVessel extends ContainerTFC {
 		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
 
 		if (clickedSlot != null
-				&& clickedSlot.getHasStack())
+			&& clickedSlot.getHasStack())
 		{
 			ItemStack clickedStack = clickedSlot.getStack();
 			returnedStack = clickedStack.copy();

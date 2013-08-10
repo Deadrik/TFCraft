@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
@@ -30,7 +29,7 @@ import TFC.Items.ItemTerra;
 
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 {
-	public float weaponDamage;
+	public int weaponDamage;
 	public final EnumToolMaterial toolMaterial;
 	public EnumDamageType damageType = EnumDamageType.SLASHING;
 
@@ -78,6 +77,23 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
     }
 
+	/**
+	 * Returns if the item (tool) can harvest results from the block type.
+	 */
+	@Override
+	public boolean canHarvestBlock(Block par1Block)
+	{
+		return par1Block.blockID == Block.web.blockID;
+	}
+
+	/**
+	 * Returns the damage against a given entity.
+	 */
+	@Override
+	public int getDamageVsEntity(Entity par1Entity)
+	{
+		return this.weaponDamage;
+	}
 	@Override
 	public int getItemStackLimit()
     {
@@ -100,6 +116,67 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
          
          player.setItemInUse(is, this.getMaxItemUseDuration(is));
         return is;
+    }
+
+	/**
+	 * Return the enchantability factor of the item, most of the time is based on material.
+	 */
+	@Override
+	public int getItemEnchantability()
+	{
+		return this.toolMaterial.getEnchantability();
+	}
+	@Override
+	public EnumAction getItemUseAction(ItemStack par1ItemStack)
+	{
+		return EnumAction.block;
+	}
+	@Override
+	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+	{
+		return 72000;
+	}
+
+	/**
+	 * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
+	 * sword
+	 */
+	@Override
+	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
+	{
+		return par2Block.blockID == Block.web.blockID ? 15.0F : 1.5F;
+	}
+
+
+	/**
+	 * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
+	 * the damage on the stack.
+	 */
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+	{
+		par1ItemStack.damageItem(1, par3EntityLiving);
+		return true;
+	}
+
+	/**
+	 * Returns True is the item is renderer in full 3D when hold.
+	 */
+	@Override
+	public boolean isFull3D()
+	{
+		return true;
+	}
+	
+	@Override
+	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+    {
+        if (Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
+        {
+            par1ItemStack.damageItem(2, par7EntityLiving);
+        }
+
+        return true;
     }
 
 	@Override

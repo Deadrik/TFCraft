@@ -32,11 +32,10 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
+		if(canStack())
 			return this.getSize().stackSize * getWeight().multiplier;
-		} else {
+		else
 			return 1;
-		}
 	}
 
 	@Override
@@ -82,24 +81,24 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		else
 		{
 			arraylist.add(EnumChatFormatting.DARK_GRAY + StringUtil.localize("gui.Armor.Advanced") + ": (" + StringUtil.localize("gui.Armor.Hold") + " " + 
-					EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
-					EnumChatFormatting.DARK_GRAY + ")");
+		EnumChatFormatting.GRAY + StringUtil.localize("gui.Armor.Shift") + 
+		EnumChatFormatting.DARK_GRAY + ")");
 		}
 
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack)
+	public int getItemMaxDamageFromStack(ItemStack stack)
 	{
 		if(stack.hasTagCompound())
 		{
 			NBTTagCompound nbt = stack.getTagCompound();
 			if(nbt.hasKey("armorDuraBuff"))
 			{
-				return super.getMaxDamage(stack) + nbt.getShort("armorDuraBuff");
+				return super.getItemMaxDamageFromStack(stack) + nbt.getShort("armorDuraBuff");
 			}
 		}
-		return super.getMaxDamage(stack);
+		return super.getItemMaxDamageFromStack(stack);
 	}
 
 	@Override
@@ -107,7 +106,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
-
+	
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{

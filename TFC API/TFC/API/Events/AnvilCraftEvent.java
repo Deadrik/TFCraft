@@ -1,7 +1,6 @@
 package TFC.API.Events;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.Cancelable;
@@ -26,13 +25,13 @@ public class AnvilCraftEvent extends EntityEvent
 	
 	/**
 	 * Fires when an item has finished crafting 
-	 * @param entityplayer is the player who is doing the crafting
+	 * @param player is the player who is doing the crafting
 	 * @param i1 is the item which is currently being worked
 	 * @param r is the result item from the crafting process if allowed to finish
 	 */
-	public AnvilCraftEvent(EntityPlayer entityplayer, TileEntity te, ItemStack i1, ItemStack r)
+	public AnvilCraftEvent(EntityLiving player, TileEntity te, ItemStack i1, ItemStack r)
 	{
-		super(entityplayer);
+		super(player);
 		input1 = i1;
 		result = r;
 		anvilTE = te;

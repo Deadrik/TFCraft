@@ -21,7 +21,7 @@ public class WeatherManager
     
     public float getDailyTemp()
     {
-        Random r = new Random(seed+TFC_Time.getTotalDays());
+        Random r = new Random(seed+TFC_Time.totalDays());
 
         return (r.nextInt(200)-100)/10;
     }

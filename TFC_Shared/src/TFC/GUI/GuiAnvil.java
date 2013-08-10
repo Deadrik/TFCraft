@@ -8,10 +8,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -103,8 +101,7 @@ public class GuiAnvil extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		this.mc.renderEngine.func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png"));
-		//this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
+		this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);
 		int w = (width - this.xSize) / 2;
 		int h = (height - this.ySize) / 2;
@@ -140,12 +137,12 @@ public class GuiAnvil extends GuiContainer
 			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe != null ? AnvilEntity.workRecipe.getRules() : null;
 			int[] ItemRules = AnvilEntity.getItemRules();
 			
-			this.mc.func_110434_K().func_110577_a(TextureMap.field_110575_b);
+			this.mc.renderEngine.bindTexture("/terrain.png");
 			this.drawTexturedModelRectFromIcon(w + 80, h + 31, getIconFromRule(ItemRules[0]), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 99, h + 31, getIconFromRule(ItemRules[1]), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 118, h + 31, getIconFromRule(ItemRules[2]), 10, 10);
 			
-			this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png"));
+			this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
 			
 			if(Rules != null && Rules[0].matches(ItemRules, 0))
 				GL11.glColor4f(0.0F, 1.0F, 0.0F, 1.0F);
@@ -173,11 +170,11 @@ public class GuiAnvil extends GuiContainer
 		{
 			CraftingRuleEnum[] Rules = AnvilEntity.workRecipe.getRules();
 			int[] ItemRules = AnvilEntity.getItemRules();
-			this.mc.func_110434_K().func_110577_a(TextureMap.field_110575_b);
+			this.mc.renderEngine.bindTexture("/terrain.png");
 			this.drawTexturedModelRectFromIcon(w + 80, h + 10, getIconFromRule(Rules[0].Action), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 99, h + 10, getIconFromRule(Rules[1].Action), 10, 10);
 			this.drawTexturedModelRectFromIcon(w + 118, h + 10, getIconFromRule(Rules[2].Action), 10, 10);
-			this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_anvil.png"));
+			this.mc.renderEngine.bindTexture(Reference.AssetPathGui + "gui_anvil.png");
 			//Bottom Row
 			GL11.glColor4ub(TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2], (byte)255);
 			if(Rules[0].Min == 0)

@@ -9,22 +9,23 @@ import net.minecraft.client.renderer.entity.RenderBlaze;
 import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.client.renderer.entity.RenderGhast;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
-import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
 import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
-import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StringTranslate;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
 import TFC.Core.ColorizerFoliageTFC;
+import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.KeyBindings;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
@@ -65,6 +66,7 @@ import TFC.GUI.GuiFoodPrep;
 import TFC.GUI.GuiForge;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
+import TFC.GUI.GuiLeatherWorking;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMetallurgy;
 import TFC.GUI.GuiMold;
@@ -84,6 +86,7 @@ import TFC.Handlers.Client.SoundHandler;
 import TFC.Render.RenderBear;
 import TFC.Render.RenderChickenTFC;
 import TFC.Render.RenderCowTFC;
+import TFC.Render.RenderCustomMinecart;
 import TFC.Render.RenderDeer;
 import TFC.Render.RenderPigTFC;
 import TFC.Render.RenderPlayerTFC;
@@ -91,6 +94,7 @@ import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderSquidTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
+import TFC.Render.TileEntityChestRendererTFC;
 import TFC.Render.TileEntityFoodPrepRenderer;
 import TFC.Render.TileEntityIngotPileRenderer;
 import TFC.Render.TileEntityPotteryRenderer;
@@ -144,19 +148,19 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderInformation() 
 	{
 
-		//ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
-		//ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
+		ColorizerFoliageTFC.getFoilageBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/foliagecolor.png"));
+		ColorizerGrassTFC.setGrassBiomeColorizer(ModLoader.getMinecraftInstance().renderEngine.getTextureContents("/misc/grasscolor.png"));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityTerraJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(),new ModelSheep1TFC(), 0.7F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(),new ModelWolfTFC(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWolfTFC.class, new RenderWolfTFC(new ModelWolfTFC(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBear.class, new RenderBear(new ModelBear(), 0.9F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityChickenTFC.class, new RenderChickenTFC(new ModelChickenTFC(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPigTFC.class, new RenderPigTFC(new ModelPigTFC(), new ModelPigTFC(0.5F), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer(new ModelDeer(), 0.9F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderMinecart());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderCustomMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class,new RenderPlayerTFC());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeleton());
@@ -216,7 +220,7 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRenderer());
+		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
@@ -241,7 +245,7 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public File getMinecraftDir() {
-		return ModLoader.getMinecraftInstance().mcDataDir;
+		return ModLoader.getMinecraftInstance().getMinecraftDir();
 	}
 
 	@Override
@@ -334,7 +338,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 36:
 		{
-			return null;
+			return new GuiLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
 		}
 		case 37:
 		{
@@ -348,7 +352,7 @@ public class ClientProxy extends CommonProxy
 		{
 			return new GuiVessel(player.inventory, world, x, y, z);
 		}
-
+		
 		default:
 		{
 			return null;
@@ -369,8 +373,8 @@ public class ClientProxy extends CommonProxy
 			{
 				int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).waterColorMultiplier;
 				var5 += (var10 & 16711680) >> 16;
-			var6 += (var10 & 65280) >> 8;
-			var7 += var10 & 255;
+				var6 += (var10 & 65280) >> 8;
+				var7 += var10 & 255;
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
@@ -644,13 +648,13 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public String getCurrentLanguage()
 	{
-		return null;
+		return StringTranslate.getInstance().getCurrentLanguage();
 	}
-
+	
 	@Override
 	public void registerTranslations() {
 		LanguageRegistry LR = LanguageRegistry.instance();
-
+		
 		LR.addStringLocalization("entity.Bear.name", StringUtil.localize("entity.Bear"));
 		LR.addStringLocalization("entity.Deer.name", StringUtil.localize("entity.Deer"));
 		LR.addStringLocalization("entity.irongolem.name", StringUtil.localize("entity.irongolem"));
@@ -660,9 +664,9 @@ public class ClientProxy extends CommonProxy
 		LR.addStringLocalization("Key_LockTool", StringUtil.localize("Key_LockTool"));
 		LR.addStringLocalization("generator.DEFAULT", StringUtil.localize("generator.DEFAULT"));
 		LR.addStringLocalization("effect.bleed",StringUtil.localize("effect.bleed"));
-
+		
 	}
-
+	
 	@Override
 	public boolean getGraphicsLevel()
 	{

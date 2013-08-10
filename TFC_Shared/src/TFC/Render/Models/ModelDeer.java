@@ -5,7 +5,6 @@
 // - ZeuX
 package TFC.Render.Models;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
@@ -16,7 +15,7 @@ import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.EntityAnimalTFC;
 import TFC.Entities.Mobs.EntityDeer;
-public class ModelDeer extends ModelBase
+public class ModelDeer extends ModelBaseTFC
 {
 	//fields
 	ModelRenderer Antler24;
@@ -347,16 +346,13 @@ public class ModelDeer extends ModelBase
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		running = false;
 		running = ((EntityDeer)entity).getRunning();
-		float age = 0;
-		int sex = 0;
-		long tempAge = 0;
-		if (entity instanceof EntityAnimalTFC){
-			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
-			if(tempAge < 0) {
-				age = (-1F)*tempAge / (((EntityAnimalTFC)entity).adultAge * TFC_Settings.dayLength);
-			}
-			sex = ((EntityAnimalTFC)entity).sex;
-		}
+		age = 0;
+        long tempAge = 0;
+        if (entity instanceof EntityAnimalTFC){
+        	tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
+        	if(tempAge < 0)
+        	age = (-1F)*tempAge / (((EntityAnimalTFC)entity).adultAge * TFC_Settings.dayLength);
+        }
 		if (true)
 		{
 			float aa =  2F - (1.0F - age);
@@ -394,7 +390,7 @@ public class ModelDeer extends ModelBase
 			UpperLeg4.render(f5);
 			UpperLeg3.render(f5);
 			Thigh2.render(f5);
-
+			
 			//snout.render(f5);
 			//Ear2.render(f5);
 			//Ear1.render(f5);
@@ -432,8 +428,7 @@ public class ModelDeer extends ModelBase
 		}
 		else
 		{
-			if (sex == 0)
-			{
+			if (sex == 0){
 				Antler12.showModel = true;
 				Antler22.showModel = true;
 				Antler13.showModel = true;
@@ -485,21 +480,21 @@ public class ModelDeer extends ModelBase
 
 	@Override
 	public void setRotationAngles (float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
-		super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
+    {
+	super.setRotationAngles (f, f1, f2, f3, f4, f5, entity);
 
-		//System.out.println("f: "+f+"; f1: "+f1+"; f2: "+f2+"; f3: "+f3+"; f4: "+f4+"; f5: "+f5);
-		f1 = Math.min(f1*7.5f, 0.75f);
-		f*=0.95f;
-
-		Antler11.isHidden = true;
-		Antler12.isHidden = true;
-		Antler13.isHidden = true;
-		Antler14.isHidden = true;
-		Antler21.isHidden = true;
-		Antler22.isHidden = true;
-		Antler23.isHidden = true;
-		Antler24.isHidden = true;
+	//System.out.println("f: "+f+"; f1: "+f1+"; f2: "+f2+"; f3: "+f3+"; f4: "+f4+"; f5: "+f5);
+	f1 = Math.min(f1*7.5f, 0.75f);
+	f*=0.95f;
+	
+	Antler11.isHidden = true;
+	Antler12.isHidden = true;
+	Antler13.isHidden = true;
+	Antler14.isHidden = true;
+	Antler21.isHidden = true;
+	Antler22.isHidden = true;
+	Antler23.isHidden = true;
+	Antler24.isHidden = true;
 		setRotation(Antler21,f4 / (180F / (float)Math.PI), f3 / (180F / (float)Math.PI), 0F);
 		setRotation(head,f4 / (180F / (float)Math.PI)+ 0.1570796F, f3 / (180F / (float)Math.PI), 0F);
 		setRotation(Antler11,f4 / (180F / (float)Math.PI), f3 / (180F / (float)Math.PI), 0F);
@@ -522,7 +517,7 @@ public class ModelDeer extends ModelBase
 		setRotation(leg2, -22F/180F * (float)Math.PI, 0F, 0F);
 		setRotation(leg3, -0.3490659F, 0F,0.0349066F);
 		setRotation(leg4, -0.3490659F, 0F,-0.0349066F);
-
+		
 		setRotation(UpperLeg4, 0.3490659F, 0F, 0.0349066F);
 		setRotation(UpperLeg3, 0.3490659F, 0F, -0.0349066F);
 		setRotation(Thigh1, -0.1745329F, 0F, 0.1745329F);
@@ -564,8 +559,8 @@ public class ModelDeer extends ModelBase
 				setRotation(leg4,-MathHelper.sin(f/1.5F + 5F*(float)Math.PI/4F - 3F*(float)Math.PI/8) * 3.5F * f1  -0.3490659F, 0F,-0.0349066F);
 				setRotation(Toes4,MathHelper.sin(f/1.5F + 5F*(float)Math.PI/4F - 3F*(float)Math.PI/8) * 2.1F * f1 + 1.134464F,0,0);
 			}
-
-
+			
+						
 			if (MathHelper.cos(f/1.5F + (float)Math.PI/2F) > -Math.sqrt(0.5) && MathHelper.cos(f/1.5F + (float)Math.PI/2F) < Math.sqrt(0.5)){
 				setRotation(UpperLeg3,MathHelper.cos(f/1.5F + (float)Math.PI/2F) * 2.8F * f1+ 0.3490659F, 0F, -0.0349066F);
 			}
@@ -574,7 +569,7 @@ public class ModelDeer extends ModelBase
 				setRotation(leg3,-MathHelper.sin(f/1.5F + (float)Math.PI/2F - 3F*(float)Math.PI/8)* 3.5F * f1  -0.3490659F, 0F,0.0349066F);
 				setRotation(Toes3,MathHelper.sin(f/1.5F + (float)Math.PI/2F - 3F*(float)Math.PI/8) * 2.1F * f1 + 1.134464F,0,0);
 			}
-
+			
 			setRotation(Thigh1,MathHelper.cos(f/1.5F  + (float)Math.PI*7F/4F) * 2.8F * f1 -0.1745329F, 0F, 0.1745329F);
 			setRotation(Thigh2, MathHelper.cos(f/1.5F + 3f*(float)Math.PI/4F) * 2.8F * f1 -0.1745329F, 0F, -0.1745329F);
 		}

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -63,11 +63,11 @@ public class BlockCrucible extends BlockTerraContainer
 		}
 		super.breakBlock(world, i, j, k, par5, par6);
 	}
-
+	
 	@Override
 	protected void dropBlockAsItem_do(World par1World, int par2, int par3, int par4, ItemStack par5ItemStack)
-	{
-		/*if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
+    {
+        /*if (!par1World.isRemote && par1World.getGameRules().getGameRuleBooleanValue("doTileDrops"))
         {
         	TECrucible te = (TECrucible)par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -84,7 +84,7 @@ public class BlockCrucible extends BlockTerraContainer
             entityitem.delayBeforeCanPickup = 10;
             par1World.spawnEntityInWorld(entityitem);
         }*/
-	}
+    }
 
 	public NBTTagCompound writeCrucibleToNBT(TECrucible te)
 	{
@@ -124,7 +124,7 @@ public class BlockCrucible extends BlockTerraContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase player, ItemStack is)
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving player, ItemStack is)
 	{
 		super.onBlockPlacedBy(world, i, j, k, player, is);
 		TECrucible te = (TECrucible)world.getBlockTileEntity(i, j, k);
@@ -152,9 +152,8 @@ public class BlockCrucible extends BlockTerraContainer
 	@Override
 	public Icon getIcon(int i, int j) 
 	{
-		if(i < 2) {
+		if(i < 2)
 			return icons[0];
-		}
 
 		return icons[1];
 	}

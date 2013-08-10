@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -53,10 +52,10 @@ public class RenderOverlayHandler
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			
 			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
-			Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png"));
+			Minecraft.getMinecraft().renderEngine.bindTexture(Reference.AssetPathGui + "icons.png");
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = Minecraft.getMinecraft().thePlayer.getMaxHealth();
-			float percentHealth = Minecraft.getMinecraft().thePlayer.func_110143_aJ()/maxHealth;
+			float percentHealth = Minecraft.getMinecraft().thePlayer.getHealth()/maxHealth;
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
 
 			//Draw Food and Water
@@ -100,7 +99,7 @@ public class RenderOverlayHandler
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 			}
 		}
-		//Minecraft.getMinecraft().renderEngine.resetBoundTexture();
+		Minecraft.getMinecraft().renderEngine.resetBoundTexture();
 	}
 
 	@ForgeSubscribe
@@ -117,7 +116,7 @@ public class RenderOverlayHandler
 					TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord), 
 					TFC_Climate.manager.getEVTLayerAt(xCoord, zCoord).floatdata1}));
 			
-			event.left.add("Health: " + player.func_110143_aJ());
+			event.left.add("Health: " + player.getHealth());
 		}
 	}
 

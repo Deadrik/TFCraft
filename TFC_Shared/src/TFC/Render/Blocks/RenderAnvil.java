@@ -3,7 +3,6 @@ package TFC.Render.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
@@ -89,7 +88,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 					int state = tessellator.drawMode;
 					tessellator.draw();
 					tessellator.startDrawingQuads();
-					ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110576_c);
+					ModLoader.getMinecraftInstance().renderEngine.bindTexture("/gui/items.png");
 					renderblocks.overrideBlockTexture = te.anvilItemStacks[0].getIconIndex();
 					tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, i, j, k));
 					tessellator.setColorRGBA_F(1, 1, 1, 1);
@@ -111,7 +110,7 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 					tessellator.startDrawing(state);
 
 				}
-				ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(TextureMap.field_110575_b);
+				ModLoader.getMinecraftInstance().renderEngine.bindTexture("/terrain.png");
 				renderblocks.clearOverrideBlockTexture();
 			}
 		}

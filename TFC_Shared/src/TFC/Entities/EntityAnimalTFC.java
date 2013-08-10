@@ -77,8 +77,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		mate = null;
 		sex = rand.nextInt (2);
 		//tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
-		/**This Task was removed during the update to 1.6.2*/
-		//tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
+		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
 		//tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		birthTime = TFC_Time.getTotalTicks();
@@ -108,8 +107,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		mate = null;
 		sex = rand.nextInt (2);
 		//tasks.addTask (1, new EntityAIMoveTowardsFood (this, 0.4F, 20F));
-		/**This Task was removed during the update to 1.6.2*/
-		//tasks.addTask(3, new EntityAITargetTFC(this,false));
+		tasks.addTask(3, new EntityAITargetTFC(this,12.0F,false));
 		//tasks.addTask(2, new EntityAIFollowParentTFC(this,0.2F));
 		size_mod = (((rand.nextInt (getDegree()+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.size_mod + F_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
@@ -162,7 +160,7 @@ public class EntityAnimalTFC extends EntityAnimal
 		//System.out.println("yep");
 		if (entity.getClass() == getClass() && (((EntityAnimalTFC)entity).rutting)){
 			setAttackTarget((EntityLiving)entity);
-			if (func_110143_aJ() <= getMaxHealth()/4){
+			if (getHealth() <= getMaxHealth()/4){
 				((EntityAnimalTFC)getAttackTarget()).ruttVictor = true;
 			}
 		}
@@ -251,9 +249,9 @@ public class EntityAnimalTFC extends EntityAnimal
 		{
 			pickUp--;
 		}
-		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < getMaxHealth () && !isDead)
+		if (hunger > 144000 && rand.nextInt (100) == 0 && health < getMaxHealth () && !isDead)
 		{
-			this.heal(1);
+			health++;
 		}
 		for(EntityItem ei : this.capturedDrops)
 		{
@@ -269,7 +267,7 @@ public class EntityAnimalTFC extends EntityAnimal
 				}
 			}
 		}
-		if (func_110143_aJ() > 0)
+		if (getHealth () > 0)
 		{
 			List list = worldObj.getEntitiesWithinAABBExcludingEntity (this, boundingBox.expand (1.0D, 0.0D, 1.0D));
 
@@ -502,15 +500,20 @@ public class EntityAnimalTFC extends EntityAnimal
 		mateSizeMod = targetMate.size_mod;
 	}
 
-	public void giveBirth (EntityAnimalTFC entityanimal)
-	{
+	public void giveBirth (EntityAnimalTFC entityanimal){
 		
+		
+		//System.out.println("yep");
+		//System.out.println(posX);
 		entityanimal.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
 		entityanimal.rotationYawHead = entityanimal.rotationYaw;
 		entityanimal.renderYawOffset = entityanimal.rotationYaw;
-		//entityanimal.initCreature();
+		entityanimal.initCreature();
 		worldObj.spawnEntityInWorld(entityanimal);
 		entityanimal.setGrowingAge(entityanimal.adultAge * -TFC_Settings.dayLength);
+		//if(worldObj.spawnEntityInWorld (entityanimal)){
+		//	children.add(entityanimal);
+		//}
 		
 	}
 

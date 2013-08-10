@@ -1,7 +1,6 @@
 package TFC.Handlers;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -29,13 +28,13 @@ public class EntityLivingHandler
 	@ForgeSubscribe
 	public void onEntityLivingUpdate(LivingUpdateEvent event) 
 	{
-		EntityLivingBase entity = event.entityLiving;
+		EntityLiving entity = event.entityLiving;
 		NBTTagCompound nbt = entity.getEntityData();
 		if (entity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)entity;
-			//Set Max Health
-			player.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(getMaxHealth(player));
+			player.maxHealth = getMaxHealth(player);
+			
 			if(!player.worldObj.isRemote)
 			{
 				//Nullify the Old Food
@@ -45,7 +44,7 @@ public class EntityLivingHandler
 				foodstats.onUpdate(player);
 				TFC_Core.setPlayerFoodStats(player, foodstats);
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
-
+				
 				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f && player.worldObj.difficultySetting >= 1)
 				{
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,1,1));
@@ -57,29 +56,29 @@ public class EntityLivingHandler
 						player.setSprinting(false);
 					}
 				}
-
+				
 				//Handle Spawn Protection
 				long spawnProtectionTimer = nbt.hasKey("spawnProtectionTimer") ? 
 						nbt.getLong("spawnProtectionTimer") : TFC_Time.getTotalTicks() + TFC_Time.hourLength;
-
-						if(spawnProtectionTimer < TFC_Time.getTotalTicks())
+				
+				if(spawnProtectionTimer < TFC_Time.getTotalTicks())
+				{
+					//Add protection time to the chunks
+					for(int i = -1; i < 2; i++)
+					{
+						for(int k = -1; k < 2; k++)
 						{
-							//Add protection time to the chunks
-							for(int i = -1; i < 2; i++)
-							{
-								for(int k = -1; k < 2; k++)
-								{
-									int lastChunkX = (int)player.posX >> 4;
-								int lastChunkZ = (int)player.posZ >> 4;
-						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFC_Settings.protectionGain);
-								}
-							}
-
-							spawnProtectionTimer += TFC_Time.hourLength;
+							int lastChunkX = (int)player.posX >> 4;
+							int lastChunkZ = (int)player.posZ >> 4;
+							ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFC_Settings.protectionGain);
 						}
-
-						//Handle Temperature
-						handleBodyTemp(player);	
+					}
+					
+					spawnProtectionTimer += TFC_Time.hourLength;
+				}
+			
+				//Handle Temperature
+				handleBodyTemp(player);	
 			}
 			else
 			{
@@ -106,14 +105,14 @@ public class EntityLivingHandler
 					playerclient.guishowFoodRestoreAmount = false;
 				}
 			}
-
+			
 		}
 	}
-
+	
 	public void handleBodyTemp(EntityPlayer player)
 	{
 		float bodyTemp = player.getEntityData().hasKey("bodyTemp") ? player.getEntityData().getFloat("bodyTemp") : 37;
-
+		
 		TileEntityFireEntity te = null;
 		for (int i = -10;i<10;i++){
 			for(int j = -2; j < 3;j++){
@@ -126,27 +125,20 @@ public class EntityLivingHandler
 		}
 		double netBodyTemp = 0;
 		double distanceTE = 0;
-		if (te!=null) {
-			distanceTE = Math.sqrt(Math.pow(player.posX-te.xCoord,2)+Math.pow(player.posY-te.yCoord,2)+Math.pow(player.posZ-te.zCoord,2));
-		}
+		if (te!=null)distanceTE = Math.sqrt(Math.pow(player.posX-te.xCoord,2)+Math.pow(player.posY-te.yCoord,2)+Math.pow(player.posZ-te.zCoord,2));
 		float temp =TFC_Climate.getHeightAdjustedTemp((int)player.posX, (int)player.posY, (int)player.posZ);
-		if(temp<25) {
-			netBodyTemp-= (12*(te!=null&&te.fireTemperature>100?Math.pow(1d/(11-distanceTE),3):1))/(60*20*5*10*(Math.pow(5, temp<0?0:temp/10d)/temp<0?Math.abs(temp)/10d:1d));
-		} else if(temp>=30) {
-			netBodyTemp+=((temp+7)/bodyTemp)/(60*15*20);
-		}
+		if(temp<25)netBodyTemp-= (12*(te!=null&&te.fireTemperature>100?Math.pow(1d/(11-distanceTE),3):1))/(60*20*5*10*(Math.pow(5, temp<0?0:temp/10d)/temp<0?Math.abs(temp)/10d:1d));
+		else if(temp>=30)netBodyTemp+=((temp+7)/bodyTemp)/(60*15*20);
 		netBodyTemp+=0.000017889*0.2D*(player.isSprinting()?12:1)*(player.inventory.armorInventory[3]!=null &&player.inventory.armorInventory[3].getItem() ==Item.helmetLeather?2.24:1)*(player.inventory.armorInventory[2]!=null &&player.inventory.armorInventory[2].getItem() ==Item.plateLeather?2.24:1)
 				*(player.inventory.armorInventory[1]!=null &&player.inventory.armorInventory[1].getItem() ==Item.legsLeather?2.24:1)*(player.inventory.armorInventory[0]!=null &&player.inventory.armorInventory[0].getItem() ==Item.bootsLeather?2.24:1);
 		bodyTemp+=netBodyTemp;
-		if(temp<25) {
-			bodyTemp=Math.max(temp, bodyTemp);
-		}
-
+		if(temp<25)bodyTemp=Math.max(temp, bodyTemp);
+		
 		player.getEntityData().setFloat("bodyTemp", bodyTemp);
 	}
-
+	
 	public int getMaxHealth(EntityPlayer player)
-	{
+    {
 		return Math.min(1000+(player.experienceLevel * TFC_Settings.HealthGainRate), TFC_Settings.HealthGainCap);
-	}
+    }
 }
