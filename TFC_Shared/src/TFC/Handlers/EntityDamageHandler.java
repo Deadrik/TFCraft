@@ -25,6 +25,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
+import TFC.Core.TFC_MobDamage;
 import TFC.Items.ItemTFCArmor;
 
 public class EntityDamageHandler
@@ -207,7 +208,7 @@ public class EntityDamageHandler
 		{
 			if (!target.func_85031_j(target))
 			{
-				float i = 10f;
+				float i = TFC_MobDamage.SteveDamage;
 				if(stack != null) {
 					i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
 				}

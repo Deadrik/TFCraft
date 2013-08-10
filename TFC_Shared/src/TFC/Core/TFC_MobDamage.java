@@ -2,6 +2,7 @@ package TFC.Core;
 
 public class TFC_MobDamage 
 {
+	public static final float SteveDamage = 10f;
 	public static final int ZombieDamage = 100;
 	public static final int WolfDamage = 80;
 	public static final int SpiderDamage = 80;

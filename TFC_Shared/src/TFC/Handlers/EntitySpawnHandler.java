@@ -5,7 +5,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
@@ -22,13 +22,6 @@ public class EntitySpawnHandler
 		{
 			((EntitySheepTFC)entity).setFleeceColor(EntitySheepTFC.getRandomFleeceColor(entity.worldObj.rand));
 		}
-		else if (entity instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer)entity;
-			//player.maxHealth = 1000;
-			//player.setEntityHealth(1000);
-			player.getFoodStats().setFoodLevel(100);
-		}
 	}
 
 	@ForgeSubscribe
@@ -39,12 +32,6 @@ public class EntitySpawnHandler
 		int x = (int)entity.posX >> 4;
 		int z = (int)entity.posZ >> 4;
 
-		if (entity instanceof EntityPlayer)
-		{
-			entity.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
-			entity.setEntityHealth(1000);
-		}
-
 		ChunkData data = (ChunkData) ChunkDataManager.chunkmap.get(x + "," + z);
 		if(!(data == null || data.getSpawnProtectionWithUpdate() <= 0))
 		{
@@ -53,15 +40,12 @@ public class EntitySpawnHandler
 	}
 
 	@ForgeSubscribe
-	public void onConstructing(EntityEvent.EntityConstructing event) 
+	public void onJoinWorld(EntityJoinWorldEvent event)
 	{
 		if (event.entity instanceof EntityPlayer)
 		{
-			EntityPlayer entity = (EntityPlayer) event.entity;
-			//entity.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
-			//entity.setEntityHealth(1000);
+			((EntityPlayer)event.entity).func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);
+			((EntityPlayer)event.entity).setEntityHealth(1000);
 		}
-
-
 	}
 }
