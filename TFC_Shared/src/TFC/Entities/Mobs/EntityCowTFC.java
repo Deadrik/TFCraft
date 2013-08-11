@@ -2,16 +2,10 @@ package TFC.Entities.Mobs;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,19 +13,20 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.Core.TFC_Settings;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
 
-public class EntityCowTFC extends EntityAnimal implements IAnimal
+public class EntityCowTFC extends EntityCow implements IAnimal
 {
-	private final EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+	private final AIEatGrass aiEatGrass = new AIEatGrass(this);
 	protected long animalID;
-	protected int sex;
-	protected int hunger;
+	protected int sex = 0;
+	protected int hunger = 0;
 	protected long hasMilkTime;
 	protected boolean pregnant;
-	protected int pregnancyTime;
+	protected int pregnancyRequiredTime;
 	protected long conception;
 	protected float mateSizeMod;
 	public float size_mod;
@@ -43,59 +38,104 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 		animalID = TFC_Time.getTotalTicks() + entityId;
 		hunger = 168000;
 		pregnant = false;
-		pregnancyTime = 4 * TFC_Time.daysInMonth;
+		pregnancyRequiredTime = 4 * TFC_Time.daysInMonth;
 		conception = 0;
 		mateSizeMod = 0;
+		sex = rand.nextInt(2);
 		int degreeOfDiversion = 1;
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 0.2F));
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
 		this.tasks.addTask(6, this.aiEatGrass);
-		this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		//For Testing Only(makes spawned animals into babies)
+		this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
 	public EntityCowTFC(World par1World, IAnimal mother, float father_size)
 	{
 		this(par1World);
+		this.posX = ((EntityLivingBase)mother).posX;
+		this.posY = ((EntityLivingBase)mother).posY;
+		this.posZ = ((EntityLivingBase)mother).posZ;
 		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+		this.setGrowingAge((int) TFC_Time.getTotalDays());
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(13, Integer.valueOf(0));
+		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
-		super.onLivingUpdate();
-
-		if(pregnant) 
+		//Handle Hunger ticking
+		if (hunger > 168000)
 		{
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength)
+			hunger = 168000;
+		}
+		if (hunger > 0)
+		{
+			hunger--;
+		}
+
+		syncData();
+
+
+		if(isPregnant()) 
+		{
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyRequiredTime)
 			{
 				EntityCowTFC baby = (EntityCowTFC) createChild(this);
 				baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
 				baby.rotationYawHead = baby.rotationYaw;
 				baby.renderYawOffset = baby.rotationYaw;
-				//entityanimal.initCreature();
 				worldObj.spawnEntityInWorld(baby);
-				baby.setGrowingAge( (int)TFC_Time.getTotalDays() + this.getNumberOfDaysToAdult());
+				baby.setGrowingAge((int)TFC_Time.getTotalDays());
 				pregnant = false;
+			}
+		}
+
+		/**
+		 * This Cancels out the growingAge from EntityAgeable
+		 * */
+		int age = this.getGrowingAge();
+		super.onLivingUpdate();
+		this.setGrowingAge(age);
+
+		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		{
+			this.heal(1);
+		}
+	}
+
+	public void syncData()
+	{
+		if(dataWatcher!= null)
+		{
+			if(!this.worldObj.isRemote){
+				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
+				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
+			}
+			else{
+				sex = this.dataWatcher.getWatchableObjectInt(13);
+				size_mod = this.dataWatcher.func_111145_d(14);
 			}
 		}
 	}
 
-	/**
-	 * Returns true if the newer Entity AI code should be run
-	 */
-	@Override
-	public boolean isAIEnabled()
+	private float getPercentGrown(IAnimal animal)
 	{
-		return true;
+		float birth = animal.getBirthDay();
+		float time = (int) TFC_Time.getTotalDays();
+		float percent =(time-birth)/animal.getNumberOfDaysToAdult();
+		return Math.min(percent, 1f);
 	}
 
 	@Override
@@ -132,43 +172,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 		mateSizeMod = nbt.getFloat("MateSize");
 		conception = nbt.getLong("ConceptionTime");
 		hasMilkTime = nbt.getLong("HasMilkTime");
-		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
-	}
-
-	/**
-	 * Returns the sound this mob makes while it's alive.
-	 */
-	@Override
-	protected String getLivingSound()
-	{
-		return "mob.cow.say";
-	}
-
-	/**
-	 * Returns the sound this mob makes when it is hurt.
-	 */
-	@Override
-	protected String getHurtSound()
-	{
-		return "mob.cow.hurt";
-	}
-
-	/**
-	 * Returns the sound this mob makes on death.
-	 */
-	@Override
-	protected String getDeathSound()
-	{
-		return "mob.cow.hurt";
-	}
-
-	/**
-	 * Returns the volume for the sounds this mob makes.
-	 */
-	@Override
-	protected float getSoundVolume()
-	{
-		return 0.4F;
+		this.setGrowingAge(nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -227,7 +231,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityCowTFC(worldObj);
+		return new EntityCowTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
 	}
 
 	@Override
@@ -245,7 +249,7 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getBirthDay() >= getNumberOfDaysToAdult();
+		return getBirthDay()+getNumberOfDaysToAdult() < TFC_Time.getTotalDays();
 	}
 
 	@Override
@@ -279,14 +283,13 @@ public class EntityCowTFC extends EntityAnimal implements IAnimal
 	@Override
 	public void mate(IAnimal otherAnimal) 
 	{
-		if (sex == 0)
+		if (getGender() == GenderEnum.MALE)
 		{
 			otherAnimal.mate(this);
 			return;
 		}
 		conception = TFC_Time.getTotalTicks();
 		pregnant = true;
-		//targetMate.setGrowingAge (TFC_Settings.dayLength);
 		resetInLove();
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();

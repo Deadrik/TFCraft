@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Core.TFC_Core;
 public class ModelCowTFC extends ModelQuadruped
 {
 	public ModelRenderer udders;
@@ -68,36 +69,28 @@ public class ModelCowTFC extends ModelQuadruped
 	}
 
 	@Override
-	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
 
-		float age = 0;
-		long tempAge = 0;
-		int sex = 0;
-		/*if (par1Entity instanceof EntityAnimalTFC)
-		{
-			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
-			if(tempAge < 0){
-				age = (-1F)*tempAge / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
-				//System.out.print("completed; "+age+", "+tempAge);
-			}
-			sex = ((EntityAnimalTFC)par1Entity).sex;
-		}*/
-		float aa =  1;//2F - (1.0F - age);
+		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
+		float ageScale = 2.0F-percent;
+		float offset = 1.4f - percent;
+
 		GL11.glPushMatrix ();
-		float ab = (float)Math.sqrt(1.0F / aa);
-		GL11.glScalef(ab, ab, ab);
-		GL11.glTranslatef (0.0F, 32F * par7 * age/aa,2F*par7*age/ab);
-		if(aa>1.5F){
+
+		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
+
+		if(percent > 0.5){
 			horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
 			horn2.isHidden = true;//rotateAngleX = -(float)Math.PI;
-			if(aa>1.25F){
+			if(percent > 0.75){
 				horn1b.isHidden = true;
 				horn2b.isHidden = true;
 			}
 		}
-		if(((IAnimal)par1Entity).getGender()==GenderEnum.MALE){
+		if(((IAnimal)entity).getGender()==GenderEnum.MALE){
 			udders.isHidden = true;
 		}
 		else{
@@ -105,10 +98,6 @@ public class ModelCowTFC extends ModelQuadruped
 			horn2b.isHidden = true;
 		}
 		head.render(par7);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-		GL11.glTranslatef(0.0F, 24F * par7 * age, 0.0F);
 		body.render(par7);			
 		udders.render(par7);
 		leg1.render(par7);

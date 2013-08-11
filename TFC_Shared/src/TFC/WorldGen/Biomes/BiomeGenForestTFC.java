@@ -5,40 +5,10 @@
 package TFC.WorldGen.Biomes;
 
 import java.util.Random;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.feature.*;
-import TFC.Entities.*;
-import TFC.Entities.Mobs.EntityBear;
-import TFC.Entities.Mobs.EntityDeer;
+
+import net.minecraft.world.World;
+import net.minecraft.world.biome.SpawnListEntry;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
@@ -63,9 +33,9 @@ public class BiomeGenForestTFC extends TFCBiome
 	{
 		super(i);
 		spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 5, 1, 5));
-		spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 5, 1, 2));
-        spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 10, 3, 8));
-        
+		//spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 5, 1, 2));
+		//spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 10, 3, 8));
+
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 10;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 2;
 		treeCommon1 = -1;
@@ -73,9 +43,10 @@ public class BiomeGenForestTFC extends TFCBiome
 		treeUncommon = -1;
 		treeRare = -1;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 4;
-        ((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
+		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
 	}
 
+	@Override
 	public WorldGenerator getRandomWorldGenForTrees(Random random, World world)
 	{    	
 		int rand = random.nextInt(100);
@@ -91,63 +62,64 @@ public class BiomeGenForestTFC extends TFCBiome
 	}
 
 	public void SetupTrees(World world, Random R)
-    {
-        treeCommon1 = R.nextInt(13);
-        treeCommon1Size = R.nextBoolean();
-        treeCommon2 = R.nextInt(13);
-        treeCommon2Size = R.nextBoolean();
-        treeUncommon = R.nextInt(13);
-        treeUncommonSize = R.nextBoolean();
-        treeRare = R.nextInt(13);
-        treeRareSize = R.nextBoolean();
-        
-        if(treeCommon1 == 15 || treeCommon1 == 9) {
-            treeCommon1 = R.nextInt(8);
-        }
-        if(treeCommon2 == 15 || treeCommon2 == 9) {
-            treeCommon2 = R.nextInt(8);
-        }
-        if(treeUncommon == 15) {
-            treeUncommon = R.nextInt(13);
-        }
-        if(treeRare == 15) {
-            treeRare = R.nextInt(13);
-        }
+	{
+		treeCommon1 = R.nextInt(13);
+		treeCommon1Size = R.nextBoolean();
+		treeCommon2 = R.nextInt(13);
+		treeCommon2Size = R.nextBoolean();
+		treeUncommon = R.nextInt(13);
+		treeUncommonSize = R.nextBoolean();
+		treeRare = R.nextInt(13);
+		treeRareSize = R.nextBoolean();
 
-        //System.out.println("treeCommon1:" + treeCommon1+" "+"treeCommon2:" + treeCommon2+" "+"treeUncommon:" + treeUncommon+" "+"treeRare:" + treeRare);
-    }
-	
+		if(treeCommon1 == 15 || treeCommon1 == 9) {
+			treeCommon1 = R.nextInt(8);
+		}
+		if(treeCommon2 == 15 || treeCommon2 == 9) {
+			treeCommon2 = R.nextInt(8);
+		}
+		if(treeUncommon == 15) {
+			treeUncommon = R.nextInt(13);
+		}
+		if(treeRare == 15) {
+			treeRare = R.nextInt(13);
+		}
+
+		//System.out.println("treeCommon1:" + treeCommon1+" "+"treeCommon2:" + treeCommon2+" "+"treeUncommon:" + treeUncommon+" "+"treeRare:" + treeRare);
+	}
+
+	@Override
 	protected float getMonthTemp(int month)
-    {
-        switch(month)
-        {
-            case 11:
-                return -0.1F;
-            case 0:
-                return 0.15F;
-            case 1:
-                return 0.25F;
-            case 2:
-                return 0.8F;
-            case 3:
-                return 0.75F; 
-            case 4:
-                return 1F;
-            case 5:
-                return 0.85F;
-            case 6:
-                return 0.6F;
-            case 7:
-                return 0.3F;
-            case 8:
-                return -0.1F;
-            case 9:
-                return -0.2F;
-            case 10:
-                return -0.3F;
-            default:
-                return 1F;
-        }
-    }
+	{
+		switch(month)
+		{
+		case 11:
+			return -0.1F;
+		case 0:
+			return 0.15F;
+		case 1:
+			return 0.25F;
+		case 2:
+			return 0.8F;
+		case 3:
+			return 0.75F; 
+		case 4:
+			return 1F;
+		case 5:
+			return 0.85F;
+		case 6:
+			return 0.6F;
+		case 7:
+			return 0.3F;
+		case 8:
+			return -0.1F;
+		case 9:
+			return -0.2F;
+		case 10:
+			return -0.3F;
+		default:
+			return 1F;
+		}
+	}
 
 }

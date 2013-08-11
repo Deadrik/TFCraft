@@ -2,24 +2,18 @@ package TFC.Entities.Mobs;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
-import TFC.Entities.AI.EntityAIMateTFC;
 
 public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
@@ -34,27 +28,43 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public float size_mod;
 	public boolean inLove;
 
+	int degreeOfDiversion = 4;
+
 	public EntityChickenTFC(World par1World)
 	{
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
-		float var2 = 0.25F;
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, var2));
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-		this.tasks.addTask(6, this.aiEatGrass);
-		this.tasks.addTask(5, new EntityAIWander(this, var2));
-		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		this.tasks.addTask(8, new EntityAILookIdle(this));
+		//this.tasks.addTask(6, this.aiEatGrass);
+
+		hunger = 168000;
+		animalID = TFC_Time.getTotalTicks() + entityId;
+		mateSizeMod = 0;
+		sex = rand.nextInt(2);
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		//For Testing Only(makes spawned animals into babies)
+		this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityChickenTFC(World world, IAnimal mate)
+	public EntityChickenTFC(World world, IAnimal mother)
 	{
 		this(world);
-		mateSizeMod = mate.getSize();
+		this.posX = ((EntityLivingBase)mother).posX;
+		this.posY = ((EntityLivingBase)mother).posY;
+		this.posZ = ((EntityLivingBase)mother).posZ;
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + 1)/1.9F);
+		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+		this.setGrowingAge((int) TFC_Time.getTotalDays());
+	}
+
+	@Override
+	protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(13, Integer.valueOf(0));
+		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
 	}
 
 	/**
@@ -80,32 +90,49 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public void onLivingUpdate()
 	{
-		super.onLivingUpdate();
-
-		/*if(pregnant)
+		//Handle Hunger ticking
+		if (hunger > 168000)
 		{
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength)
-			{
-				int i = rand.nextInt(4) + 9;
-				for (int x = 0; x<i;x++)
-				{
-					EntityChickenTFC baby = (EntityChickenTFC) createChild(this);
-					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
-					baby.rotationYawHead = baby.rotationYaw;
-					baby.renderYawOffset = baby.rotationYaw;
-					//entityanimal.initCreature();
-					worldObj.spawnEntityInWorld(baby);
-					baby.setGrowingAge( (int)TFC_Time.getTotalDays() + this.getNumberOfDaysToAdult());
-				}
-				pregnant = false;
-			}
-		}*/
+			hunger = 168000;
+		}
+		if (hunger > 0)
+		{
+			hunger--;
+		}
+
+		syncData();
 
 		if (isAdult() && getGender() == GenderEnum.FEMALE && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
 		{
 			this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			this.dropItem(Item.egg.itemID, 1);
 			this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+		}
+		/**
+		 * This Cancels out the growingAge from EntityAgeable
+		 * */
+		int age = this.getGrowingAge();
+		super.onLivingUpdate();
+		this.setGrowingAge(age);
+
+		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		{
+			this.heal(1);
+		}
+	}
+
+	public void syncData()
+	{
+		if(dataWatcher!= null)
+		{
+			if(!this.worldObj.isRemote){
+				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
+				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
+			}
+			else{
+				sex = this.dataWatcher.getWatchableObjectInt(13);
+				size_mod = this.dataWatcher.func_111145_d(14);
+			}
 		}
 	}
 
@@ -173,7 +200,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public GenderEnum getGender() 
 	{
-		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
+		return GenderEnum.genders[sex];
 	}
 
 	@Override
@@ -197,7 +224,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getBirthDay() >= getNumberOfDaysToAdult();
+		return getBirthDay()+getNumberOfDaysToAdult() < TFC_Time.getTotalDays();
 	}
 
 	@Override
@@ -221,7 +248,11 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean canMateWith(IAnimal animal) 
 	{
-		return false;
+		if(animal.getGender() != this.getGender() && animal.isAdult() && animal instanceof EntityChickenTFC) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

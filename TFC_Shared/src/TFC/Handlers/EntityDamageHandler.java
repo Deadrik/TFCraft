@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityMultiPart;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -209,8 +210,14 @@ public class EntityDamageHandler
 			if (!target.func_85031_j(target))
 			{
 				float i = TFC_MobDamage.SteveDamage;
-				if(stack != null) {
-					i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
+				if(stack != null) 
+				{
+					i = (float)event.entityPlayer.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+					if(i == 1.0f)
+					{
+						i = TFC_MobDamage.SteveDamage;
+						//i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
+					}
 				}
 
 				if (event.entityPlayer.isPotionActive(Potion.damageBoost))

@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Core.TFC_Core;
 
 public class ModelPigTFC extends ModelPig
 {
@@ -42,15 +43,13 @@ public class ModelPigTFC extends ModelPig
 	@Override
 	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
-		float age = 1;
+		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
+		float ageScale = 2.0F-percent;
+		float offset = 1.4f - percent;
+
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 		if(entity instanceof IAnimal)
 		{
-			/*float tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)entity).adultTime,0);
-
-			if(tempAge <= 0)
-			{*/
-			//age = (-1F)*tempAge / (((EntityAnimalTFC)entity).adultAge * TFC_Settings.dayLength);
 			if(((IAnimal)entity).getGender() == GenderEnum.MALE)
 			{
 				if(((IAnimal)entity).isAdult()){
@@ -58,16 +57,10 @@ public class ModelPigTFC extends ModelPig
 					tusk2.isHidden = false;
 				}
 			}
-			float aa =  2F - (1.0F - age);
 			GL11.glPushMatrix ();
-			float ab = (float)Math.sqrt(1.0F / aa);
-			GL11.glScalef(ab, ab, ab);
-			GL11.glTranslatef (0.0F, 24F * par7 * age/aa,2F*par7*age/ab);            
+			GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+			GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);          
 			head.render(par7);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-			GL11.glTranslatef(0.0F, 24F * par7 * age, 0.0F);
 			body.render(par7);
 			leg1.render(par7);
 			leg2.render(par7);
