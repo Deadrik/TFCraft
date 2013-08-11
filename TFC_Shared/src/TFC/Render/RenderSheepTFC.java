@@ -3,11 +3,14 @@ package TFC.Render;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderSheep;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.API.Entities.IAnimal;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntitySheepTFC;
 
 public class RenderSheepTFC extends RenderSheep
@@ -46,5 +49,12 @@ public class RenderSheepTFC extends RenderSheep
 	protected ResourceLocation func_110775_a(Entity par1Entity)
 	{
 		return this.getTexture((EntitySheep)par1Entity);
+	}
+
+	@Override
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+	{
+		this.shadowSize = 0.35f + (TFC_Core.getPercentGrown((IAnimal)par1Entity)*0.35f);
+		this.doRenderLiving((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
 	}
 }
