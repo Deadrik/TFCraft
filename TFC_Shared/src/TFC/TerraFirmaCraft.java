@@ -71,7 +71,7 @@ public class TerraFirmaCraft
 		
 	}
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		instance = this;
@@ -119,7 +119,7 @@ public class TerraFirmaCraft
 		proxy.registerSoundHandler();
 	}
 
-	@Init
+	@EventHandler
 	public void initialize(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
@@ -189,13 +189,13 @@ public class TerraFirmaCraft
 		TFC_Climate.initCache();
 	}
 
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
 
 	}
 
-	@ServerStarting
+	@EventHandler
 	public void serverStarting(FMLServerStartingEvent evt)
 	{
 		evt.registerServerCommand(new GetBioTempCommand());
