@@ -1,47 +1,21 @@
-package TFC.Items;
+package TFC.Items.ItemBlocks;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 
-public class ItemBellows extends ItemTerra
+public class ItemBellows extends ItemTerraBlock
 {
-	public Icon icon;
-	public ItemBellows(int i) 
+	public ItemBellows(int par1)
 	{
-		super(i);
-		this.setCreativeTab(CreativeTabs.tabMisc);
-		this.hasSubtypes = true;
+		super(par1);
+		this.setCreativeTab(TFCTabs.TFCTools);
 	}
-	
-	@Override
-	public EnumSize getSize() {
-		return EnumSize.HUGE;
-	}
-
-	@Override
-	public int getMetadata(int i) 
-	{		
-		return i;
-	}
-	@Override
-    public Icon getIconFromDamage(int i)
-    {
-        return icon;
-    }
-
-	@Override
-	public void registerIcons(IconRegister registerer)
-    {
-			icon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+"BellowsItem");
-    }
 	
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -57,7 +31,11 @@ public class ItemBellows extends ItemTerra
 				return true;
 			}
 		}
-
 		return false;
+	}
+	
+	@Override
+	public EnumSize getSize() {
+		return EnumSize.HUGE;
 	}
 }

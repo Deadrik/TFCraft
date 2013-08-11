@@ -288,7 +288,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
 
 		GameRegistry.registerBlock(Firepit, "Firepit");
-		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bellows");
+		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
 		GameRegistry.registerBlock(Anvil, TFC.Items.ItemBlocks.ItemAnvil.class, "Anvil");
 		GameRegistry.registerBlock(Anvil2, TFC.Items.ItemBlocks.ItemAnvil2.class, "Anvil2");
 		GameRegistry.registerBlock(Scribe, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Scribe");

@@ -61,10 +61,6 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
         {
             return TFC_CoreRender.renderForge(block, i, j, k, renderer);
         }
-//        else if (modelId == TFCBlocks.BellowsRenderId)
-//        {
-//            return TFC_CoreRender.renderBellows(block, i, j, k, renderer);
-//        }
         else if (modelId == TFCBlocks.AnvilRenderId)
         {
             return RenderAnvil.renderAnvil(block, i, j, k, renderer);

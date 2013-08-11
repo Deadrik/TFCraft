@@ -66,12 +66,12 @@ public class RenderBellows implements ISimpleBlockRenderingHandler {
 		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 1));
 		var14.draw();
 		var14.startDrawingQuads();
-		var14.setNormal(0.0F, 0.0F, -1.0F);
-		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 3));
+		var14.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 3));
 		var14.draw();
 		var14.startDrawingQuads();
-		var14.setNormal(-1.0F, 0.0F, 0.0F);
-		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 0));
+		var14.setNormal(0.0F, 0.0F, -1.0F);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, 0));
 		var14.draw();
 		var14.startDrawingQuads();
 		var14.setNormal(0.0F, 0.0F, 1.0F);
