@@ -3,14 +3,15 @@ package TFC.Handlers.Client;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
+
 import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraftforge.client.event.sound.PlayBackgroundMusicEvent;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
-import TFC.TerraFirmaCraft;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Sounds;
+
 import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class SoundHandler {
@@ -22,8 +23,7 @@ public class SoundHandler {
         for (String soundFile : TFC_Sounds.soundFiles) {
             // Try to add the custom sound file to the pool of sounds
             try {
-                //URL path = TerraFirmaCraft.instance.getClass().getResource("/" + soundFile);
-                event.manager.soundPoolSounds.addSound(soundFile);
+            	event.manager.addSound(soundFile);
             }
             // If we cannot add the custom sound file to the pool, log the exception
             catch (Exception e) {
@@ -47,7 +47,7 @@ public class SoundHandler {
 */
 
 		for (String soundFile : TFC_Sounds.musicFiles) {
-			TFCMusic.add(new SoundPoolEntry(soundFile.substring(1), this.getClass().getResource(soundFile)));
+			TFCMusic.add(new SoundPoolEntry(soundFile, this.getClass().getResource(soundFile)));
 		}
 	}
 
@@ -55,7 +55,7 @@ public class SoundHandler {
 	public void onBackgroundMusic(PlayBackgroundMusicEvent event) {
 		int m = new Random().nextInt(TFCMusic.size());
 		/*if(TFC_Settings.enableDebugMode)
-			System.out.println("Playing " + TFCMusic.get(m).soundName);*/
+			System.out.println("Playing " + TFCMusic.get(m).func_110458_a());*/
 		event.result = TFCMusic.get(m);
 	}
 }

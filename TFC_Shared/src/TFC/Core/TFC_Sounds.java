@@ -4,10 +4,8 @@ import TFC.Reference;
 
 public class TFC_Sounds 
 {
-	private static final String LOCATION = Reference.AssetPath + "sounds/";
-	private static final String PREFIX = Reference.AssetPathPrefix + "sounds.";
-	private static final String LOCATION_MUSIC = Reference.AssetPath + "sounds/m/";
-	private static final String PREFIX_MUSIC = Reference.AssetPathPrefix + "sounds.m.";
+	private static final String LOCATION = Reference.ModID + ":";
+	private static final String LOCATION_MUSIC = Reference.AssetPath + "sound/m/";
 	
 	public static String [] soundFiles = {
 			LOCATION + "fRockS1.ogg",
@@ -32,10 +30,10 @@ public class TFC_Sounds
 		LOCATION_MUSIC + "m4.ogg"
 	};
 	
-	public static final String FALLININGROCKSHORT = PREFIX + "fRockS";
-	public static final String FALLININGROCKLONG = PREFIX + "fRockL";
-	public static final String FALLININGDIRTSHORT = PREFIX + "fDirtS";
-	public static final String METALIMPACT = PREFIX + "metalimpact";
-	public static final String STONEDRAG = PREFIX + "stonedrag";
-	public static final String BELLOWS = PREFIX + "bellows";
+	public static final String FALLININGROCKSHORT = LOCATION + "fRockS";
+	public static final String FALLININGROCKLONG = LOCATION + "fRockL";
+	public static final String FALLININGDIRTSHORT = LOCATION + "fDirtS";
+	public static final String METALIMPACT = LOCATION + "metalimpact";
+	public static final String STONEDRAG = LOCATION + "stonedrag";
+	public static final String BELLOWS = LOCATION + "bellows";
 }
