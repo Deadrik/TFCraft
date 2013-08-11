@@ -24,6 +24,9 @@ import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityFarmland;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 public class ItemCustomHoe extends ItemHoe implements ISize
 {
 	public ItemCustomHoe(int i, EnumToolMaterial e)
@@ -33,11 +36,11 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-    public void registerIcons(IconRegister registerer)
-    {
-    	this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
-    }
-	
+	public void registerIcons(IconRegister registerer)
+	{
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "tools/"+this.getUnlocalizedName().replace("item.", ""));
+	}
+
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) 
 	{
@@ -48,22 +51,22 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 		else
 		{
 			UseHoeEvent event = new UseHoeEvent(player, stack, world, x, y, z);
-            if (MinecraftForge.EVENT_BUS.post(event))
-            {
-                return false;
-            }
+			if (MinecraftForge.EVENT_BUS.post(event))
+			{
+				return false;
+			}
 
-            if (event.getResult() == Result.ALLOW)
-            {
-                stack.damageItem(1, player);
-                return true;
-            }
-            
+			if (event.getResult() == Result.ALLOW)
+			{
+				stack.damageItem(1, player);
+				return true;
+			}
+
 			int var8 = world.getBlockId(x, y, z);
 			int var9 = world.getBlockId(x, y + 1, z);
 
 			boolean isDirt = TFC_Core.isDirt(var8);
-			
+
 			if (side != 1 || var9 != 0 || (!TFC_Core.isGrass(var8) && !isDirt))
 			{
 				return false;
@@ -88,7 +91,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 							world.setBlock(x, y, z, TFCBlocks.tilledSoil.blockID, meta, 0x2);
 							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
-							
+
 							if(isDirt)
 							{
 								TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(x, y, z);
@@ -112,7 +115,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 							world.setBlock(x, y, z, TFCBlocks.tilledSoil2.blockID, meta, 0x2);
 							world.markBlockForUpdate(x, y, z);
 							stack.damageItem(1, player);
-							
+
 							if(isDirt)
 							{
 								TileEntityFarmland te = (TileEntityFarmland) world.getBlockTileEntity(x, y, z);
@@ -128,29 +131,31 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
-    {
+	{
 		ItemTerra.addSizeInformation(this, arraylist);
-		
-        if(TFC_Settings.enableDebugMode)
-            arraylist.add("Damage: " + is.getItemDamage());
-    }
+
+		if(TFC_Settings.enableDebugMode) {
+			arraylist.add("Damage: " + is.getItemDamage());
+		}
+	}
 	@Override
 	public int getItemStackLimit()
-    {
-    	if(canStack())
-    		return this.getSize().stackSize * getWeight().multiplier;
-    	else
-    		return 1;
-    }
+	{
+		if(canStack()) {
+			return this.getSize().stackSize * getWeight().multiplier;
+		} else {
+			return 1;
+		}
+	}
 
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.LARGE;
 	}
-	
+
 	@Override
 	public boolean canStack() 
 	{
@@ -162,10 +167,17 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
-	
+
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
+	}
+
+	@Override
+	public Multimap func_111205_h()
+	{
+		Multimap multimap = HashMultimap.create();
+		return multimap;
 	}
 }

@@ -19,6 +19,9 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.TileEntities.TileEntityDetailed;
 import TFC.TileEntities.TileEntityPartial;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 public class ItemChisel extends ItemTerraTool implements IToolChisel
 {
 	static Random random = new Random();
@@ -35,14 +38,15 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 	public static void CreateSmooth(World world, int x, int y, int z, int id, int meta)
 	{
-		if(id == TFCBlocks.StoneIgIn.blockID)
+		if(id == TFCBlocks.StoneIgIn.blockID) {
 			world.setBlock(x, y, z, TFCBlocks.StoneIgInSmooth.blockID, meta, 0x2);
-		else if(id == TFCBlocks.StoneIgEx.blockID)
+		} else if(id == TFCBlocks.StoneIgEx.blockID) {
 			world.setBlock(x, y, z, TFCBlocks.StoneIgExSmooth.blockID, meta, 0x2);
-		else if(id == TFCBlocks.StoneSed.blockID)
+		} else if(id == TFCBlocks.StoneSed.blockID) {
 			world.setBlock(x, y, z, TFCBlocks.StoneSedSmooth.blockID, meta, 0x2);
-		else if(id == TFCBlocks.StoneMM.blockID)
+		} else if(id == TFCBlocks.StoneMM.blockID) {
 			world.setBlock(x, y, z, TFCBlocks.StoneMMSmooth.blockID, meta, 0x2);
+		}
 	}
 	public static void CreateStairs(World world, int x, int y, int z, int id, int meta, byte m)
 	{
@@ -76,8 +80,9 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				world.notifyBlockChange(x, y, z, SlabID);
 			}
 
-			if(TFC_Settings.enableDebugMode)
+			if(TFC_Settings.enableDebugMode) {
 				System.out.println(side);
+			}
 
 			long extraX = (te.extraData) & 0xf;
 			long extraY = (te.extraData >> 4) & 0xf;
@@ -93,10 +98,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 4);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getTopChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getTopChiselLevel(te.extraData) >= 8) {
 					world.setBlock(x, y, z, 0);
-				else
+				} else {
 					te.extraData =  old2;
+				}
 			}
 			else if(side == 1)
 			{
@@ -105,10 +111,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 16);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getBottomChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getBottomChiselLevel(te.extraData) >= 8) {
 					world.setBlock(x, y, z, 0);
-				else
+				} else {
 					te.extraData =  old2;
+				}
 			}
 			else if(side == 2)
 			{
@@ -117,10 +124,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 8);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getNorthChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getNorthChiselLevel(te.extraData) >= 8) {
 					world.setBlock(x, y, z, 0);
-				else
+				} else {
 					te.extraData =  old2;
+				}
 			}
 			else if(side == 3)
 			{
@@ -129,10 +137,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 20);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getSouthChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getSouthChiselLevel(te.extraData) >= 8) {
 					world.setBlock(x, y, z, 0);
-				else
+				} else {
 					te.extraData =  old2;
+				}
 			}
 			else if(side == 4)
 			{
@@ -141,10 +150,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getEastChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getEastChiselLevel(te.extraData) >= 8) {
 					world.setBlock(x, y, z, 0);
-				else
+				} else {
 					te.extraData =  old2;
+				}
 			}
 			else if(side == 5)
 			{
@@ -153,10 +163,11 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				long new2 = (e << 12);
 				long old2 = new2 | (te.extraData - new1);
 
-				if(e + BlockSlab.getWestChiselLevel(te.extraData) >= 8)
+				if(e + BlockSlab.getWestChiselLevel(te.extraData) >= 8) {
 					world.setBlock(x, y, z, 0);
-				else
+				} else {
 					te.extraData =  old2;
+				}
 			}
 
 			if(TFC_Settings.enableDebugMode)
@@ -166,8 +177,9 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 		}
 
 		te = (TileEntityPartial)world.getBlockTileEntity(x, y, z);
-		if(te != null)
+		if(te != null) {
 			te.broadcastPacketInRange(te.createUpdatePacket());
+		}
 
 		world.markBlockForUpdate(x, y, z);
 	}
@@ -271,68 +283,75 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 
 		for(int i = 0; i < 9;i++)
 		{
-			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer)
+			if(player.inventory.mainInventory[i] != null && player.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
 				hasHammer = i;
+			}
 		}
 
-		if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel)
+		if(player.inventory.mainInventory[player.inventory.currentItem] != null && player.inventory.mainInventory[player.inventory.currentItem].getItem() instanceof ItemChisel) {
 			hasChisel = player.inventory.currentItem;
+		}
 
 		if(!world.isRemote)
 		{
 			pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
 
-			if(pi != null) 
+			if(pi != null) {
 				mode = pi.ChiselMode;
+			}
 		}
 		else
 		{
 			pi = PlayerManagerTFC.getInstance().getClientPlayer();
 		}
 
-		if(pi != null) 
+		if(pi != null) {
 			mode = pi.ChiselMode;
+		}
 
 		if(hasChisel >= 0)
 		{
 			if(mode == 0)
 			{
-				if(side == 0 && world.getBlockId(x, y+1, z) == blockID)
+				if(side == 0 && world.getBlockId(x, y+1, z) == blockID) {
 					return false;
+				}
 
 				CreateSmooth(world, x, y, z, blockID, meta);
-				
+
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
+
 				return true;
 			}
 			else if(mode == 1)
 			{
-				if ((side == 0) && TFC_Core.isRawStone(blockID) && TFC_Core.isRawStone(world.getBlockId(x, y+1, z)))
+				if ((side == 0) && TFC_Core.isRawStone(blockID) && TFC_Core.isRawStone(world.getBlockId(x, y+1, z))) {
 					return false;
+				}
 
 				ItemChisel.CreateStairs(world, x, y, z, blockID, meta, rotation);
 
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
+
 				return true;
 			}
 			else if(mode == 2)
 			{
-				if ((side == 0) && TFC_Core.isRawStone(blockID) && TFC_Core.isRawStone(world.getBlockId(x, y+1, z)))
+				if ((side == 0) && TFC_Core.isRawStone(blockID) && TFC_Core.isRawStone(world.getBlockId(x, y+1, z))) {
 					return false;
+				}
 
 				ItemChisel.CreateSlab(world, x, y, z, blockID, meta, side);
 
 				player.inventory.mainInventory[hasChisel].damageItem(1, player);
-				
+
 				return true;
 			}
 			else if(mode == 3 && pi.lockMatches(x, y, z))
 			{
 				ItemChisel.CreateDetailed(world, x, y, z, blockID, meta, side, hitX, hitY, hitZ);
 				if (random.nextInt(4)==0){
-				player.inventory.mainInventory[hasChisel].damageItem(1, player);
+					player.inventory.mainInventory[hasChisel].damageItem(1, player);
 				}
 				return true;
 			}
@@ -344,5 +363,12 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	public boolean canChisel(EntityPlayer player, int x, int y, int z) 
 	{
 		return true;
+	}
+
+	@Override
+	public Multimap func_111205_h()
+	{
+		Multimap multimap = HashMultimap.create();
+		return multimap;
 	}
 }
