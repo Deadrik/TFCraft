@@ -2,17 +2,20 @@ package TFC.Items.Pottery;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
+import TFC.Food.FoodStatsTFC;
 
 public class ItemPotteryJug extends ItemPotteryBase
 {
@@ -32,17 +35,14 @@ public class ItemPotteryJug extends ItemPotteryBase
             if(par1ItemStack.getItemDamage() == 2)
             	TFC_Core.getPlayerFoodStats(par3EntityPlayer).restoreWater(par3EntityPlayer, 8000);
             
-            if (par1ItemStack.getItemDamage() > 1)
+            if (par1ItemStack.getItemDamage() > 1 && !par3EntityPlayer.capabilities.isCreativeMode)
             {
             	if(par2World.rand.nextInt(25) == 0)
             		par1ItemStack = null;
             	else
-            	{
             		par1ItemStack.setItemDamage(1);
-            	}
             }
         }
-
         return par1ItemStack;
     }
 
@@ -70,25 +70,56 @@ public class ItemPotteryJug extends ItemPotteryBase
     @Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer entity)
     {
-    	if(is.getItemDamage() > 1)
-    		entity.setItemInUse(is, this.getMaxItemUseDuration(is));
+    	MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, entity, true);
+    	FoodStatsTFC fs = TFC_Core.getPlayerFoodStats(entity);
+    	Boolean canDrink = fs.getMaxWater(entity) - 500 > fs.waterLevel;
+    	
+    	if(mop == null)
+    	{
+    		if(is.getItemDamage() > 1 && canDrink)
+    			entity.setItemInUse(is, this.getMaxItemUseDuration(is));
+    	}
+    	else
+    	{
+    		if(mop.typeOfHit == EnumMovingObjectType.TILE)
+    		{
+    			int x = mop.blockX;
+				int y = mop.blockY;
+				int z = mop.blockZ;
+				
+				if(!world.canMineBlock(entity, x, y, z))
+				{
+					return is;
+				}
+				
+				if(!entity.canPlayerEdit(x, y, z, mop.sideHit, is))
+				{
+					return is;
+				}
+				
+				if(!world.isRemote && world.getBlockMaterial(x, y, z) == Material.water && !entity.isSneaking())
+				{
+					if(is.getItemDamage() == 1)
+					{
+						is.setItemDamage(2);
+					}
+					else
+					{
+						if(canDrink)
+							entity.setItemInUse(is, this.getMaxItemUseDuration(is));
+					}
+				}
+				else
+				{
+					if(is.getItemDamage() == 2 && canDrink)
+					{
+						entity.setItemInUse(is, this.getMaxItemUseDuration(is));
+					}
+				}
+    		}
+    	}
         return is;
     }
-    
-    @Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float HitX, float HitY, float HitZ) 
-	{
-		int id = world.getBlockId(x, y+1, z);
-		if(!world.isRemote && (id == Block.waterStill.blockID || id == Block.waterMoving.blockID))
-		{
-			if(itemstack.getItemDamage() == 1)
-			{
-				itemstack.setItemDamage(2);
-				return true;
-			}
-		}
-		return super.onItemUse(itemstack, entityplayer, world, x, y, z, side, HitX, HitY, HitZ);
-	}
 
 	@Override
 	public Icon getIconFromDamage(int damage)
