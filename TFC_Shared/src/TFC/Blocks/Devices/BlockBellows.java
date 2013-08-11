@@ -39,7 +39,7 @@ public class BlockBellows extends BlockTerraContainer {
 			if (!te.shouldBlow) {
 				te.shouldBlow = true;
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(i, j, k, te.createUpdatePacket(), 160);
-				world.playSoundEffect(i, j, k, TFC_Sounds.BELLOWS, 0.3F, 1);
+				world.playSoundEffect(i, j, k, TFC_Sounds.BELLOWS, 0.4F, 1);
 			}
 		}
 		return true;
