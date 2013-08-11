@@ -28,8 +28,9 @@ public class ModelSheep2TFC extends ModelSheep2
 		}
 
 		GL11.glPushMatrix();
+		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
 		GL11.glScalef(1.0F / ageScale, 1.0F / ageScale, 1.0F / ageScale);
-		GL11.glTranslatef(0.0F, offset / ageScale, 0f);
+		//GL11.glTranslatef(0.0F, offset / ageScale, 0f);
 		this.head.render(par7);
 		this.body.render(par7);
 		this.leg1.render(par7);

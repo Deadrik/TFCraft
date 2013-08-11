@@ -14,7 +14,6 @@ import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
@@ -56,7 +55,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, var2));
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
-		this.tasks.addTask(6, this.aiEatGrass);
+		//this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + entityId;
@@ -68,7 +67,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
-		//this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 	public EntitySheepTFC(World par1World,IAnimal mother, float F_size)
 	{
@@ -85,8 +84,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	protected void entityInit()
 	{
 		super.entityInit();
-		this.dataWatcher.addObject(30, new Integer(0));
-		this.dataWatcher.addObject(31, new Float(1));
+		this.dataWatcher.addObject(13, new Integer(0));
+		this.dataWatcher.addObject(14, new Float(1));
 	}
 
 	@Override
@@ -96,14 +95,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(400);//MaxHealth
 	}
 
-	/**
-	 * Returns true if the newer Entity AI code should be run
-	 */
-	@Override
-	protected boolean isAIEnabled()
-	{
-		return true;
-	}
 	@Override
 	protected void updateAITasks()
 	{
@@ -130,8 +121,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		{
 			this.sheepTimer = Math.max(0, this.sheepTimer - 1);
 		}
-		float percent = getPercentGrown(this);
-		func_98055_j(Math.max(percent, 0.5f));
 
 		//Handle Hunger ticking
 		if (hunger > 168000)
@@ -145,10 +134,6 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 
 		syncData();
 
-		float negDay = -TFC_Settings.dayLength;
-		float ratio = TFC_Time.getYearRatio();
-		//float t = (1.0F-(getGrowingAge()/(ratio * adultAge * negDay)));
-		//float t = (1.0F-(getGrowingAge()/(-24000*adultAge)));
 		if(isPregnant())
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
@@ -181,12 +166,12 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		if(dataWatcher!= null)
 		{
 			if(!this.worldObj.isRemote){
-				this.dataWatcher.updateObject(30, Integer.valueOf(sex));
-				this.dataWatcher.updateObject(31, Float.valueOf(size_mod));
+				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
+				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
 			}
 			else{
-				sex = this.dataWatcher.getWatchableObjectInt(30);
-				size_mod = this.dataWatcher.func_111145_d(31);
+				sex = this.dataWatcher.getWatchableObjectInt(13);
+				size_mod = this.dataWatcher.func_111145_d(14);
 			}
 		}
 	}
@@ -272,9 +257,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		super.readEntityFromNBT(nbt);
 		animalID = nbt.getLong ("Animal ID");
 		sex = nbt.getInteger ("Sex");
-		//this.dataWatcher.updateObject(30, Integer.valueOf(sex));
 		size_mod = nbt.getFloat ("Size Modifier");
-		//this.dataWatcher.updateObject(31, Float.valueOf(size_mod));
 		hunger = nbt.getInteger ("Hunger");
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
@@ -298,7 +281,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntitySheepTFC(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
+		return new EntitySheepTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
 	}
 
 	@Override
