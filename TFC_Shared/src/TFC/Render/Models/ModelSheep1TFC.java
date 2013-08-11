@@ -19,9 +19,15 @@ public class ModelSheep1TFC extends ModelSheep1
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 
+		//Dunk fix this stuff here. works fine as babies then they sink into the ground.
 		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
 		float ageScale = 2.0F-percent;
-		float offset = -1 - percent;
+		float offset = 1.4f - percent;
+
+		if(((IAnimal)entity).isAdult()) {
+			offset = 0;
+		}
+
 		GL11.glPushMatrix();
 		GL11.glScalef(1.0F / ageScale, 1.0F / ageScale, 1.0F / ageScale);
 		GL11.glTranslatef(0.0F, offset, 0f);

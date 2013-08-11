@@ -67,8 +67,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		sex = rand.nextInt(2);
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
-		//For Testing Only
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		//For Testing Only(makes spawned animals into babies)
+		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 	public EntitySheepTFC(World par1World,IAnimal mother, float F_size)
 	{
