@@ -35,7 +35,6 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
-		float var2 = 0.25F;
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
 		//this.tasks.addTask(6, this.aiEatGrass);
 
