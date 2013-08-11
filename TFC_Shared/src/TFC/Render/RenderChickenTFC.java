@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import TFC.Reference;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Core.TFC_Core;
 public class RenderChickenTFC extends RenderChicken
 {
 	private static final ResourceLocation ChickenTexture = new ResourceLocation("textures/entity/chicken.png");
@@ -20,7 +21,9 @@ public class RenderChickenTFC extends RenderChicken
 
 	protected ResourceLocation getTexture(IAnimal entity)
 	{
-		if(entity.isAdult()){
+		float percent = TFC_Core.getPercentGrown(entity);
+
+		if(percent < 0.65f){
 			return ChickTexture;
 		}
 		else if(entity.getGender() == GenderEnum.MALE){

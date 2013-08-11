@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Core.TFC_Core;
 
 public class ModelChickenTFC extends ModelBase
 {
@@ -68,24 +69,19 @@ public class ModelChickenTFC extends ModelBase
 	 * Sets the models various rotation angles then renders the model.
 	 */
 	@Override
-	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
+	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-		float age = 1;
-		long tempAge = 0;
-		/*if (par1Entity instanceof IAnimal){
-			tempAge = Math.min(TFC_Time.getTotalTicks()-((EntityAnimalTFC)par1Entity).adultTime,0);
-			if(tempAge < 0) {
-				age = (-1F)*tempAge / (((EntityAnimalTFC)par1Entity).adultAge * TFC_Settings.dayLength);
-			}
-		}*/
-		float aa =  2F - (1.0F - age);
-		float var8 = 2.0F;
-		GL11.glPushMatrix();
-		float ab = 1.0F / aa;
-		GL11.glScalef(ab, ab, ab);
-		GL11.glTranslatef(0.0F, 44.0F * par7* age/aa, 1.0F * par7*age/ab);
-		if(aa <= 1.25 && ((IAnimal)par1Entity).getGender() == GenderEnum.MALE){
+		float percent = TFC_Core.getPercentGrown((IAnimal)entity);
+		float ageScale = 2.0F-percent;
+		float offset = 1.4f - percent;
+
+		GL11.glPushMatrix ();
+
+		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
+
+		if(percent >= 0.75 && ((IAnimal)entity).getGender() == GenderEnum.MALE){
 			crown.isHidden = false;
 			this.body.rotateAngleX = ((float)Math.PI / 4F);
 			this.rightWing.rotateAngleX = ((float)Math.PI / 4F);
@@ -99,14 +95,16 @@ public class ModelChickenTFC extends ModelBase
 		this.head.render(par7);
 		this.bill.render(par7);
 		this.chin.render(par7);
+
 		GL11.glPushMatrix();
 		GL11.glScalef(0.75f, 0.75f, 0.75f);
 		this.crown.render(par7);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
+
 		GL11.glPushMatrix();
-		GL11.glScalef(1.0F / aa, 1.0F / aa, 1.0F / aa);
-		GL11.glTranslatef(0.0F, 24.0F * par7* age, 0.0F);
+		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
+		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 		this.body.render(par7);
 		this.rightLeg.render(par7);
 		this.leftLeg.render(par7);
@@ -114,7 +112,7 @@ public class ModelChickenTFC extends ModelBase
 		this.leftWing.render(par7);
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
-		GL11.glScalef(0.25F / aa, 0.5F / aa, 0.25F / aa);
+		GL11.glScalef(0.25F / percent, 0.5F / percent, 0.25F / percent);
 		for(int i = 0;i<32;i++){
 			tails[i].render(par7);
 		}

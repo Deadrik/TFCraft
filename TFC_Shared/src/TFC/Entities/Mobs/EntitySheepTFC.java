@@ -55,7 +55,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, var2));
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
-		//this.tasks.addTask(6, this.aiEatGrass);
+		this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + entityId;
