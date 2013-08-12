@@ -26,7 +26,11 @@ public interface IAnimal
 
 	public boolean isPregnant();
 
-	public boolean isInLove();
+	//	It would be nice to call this isInLove() except that would shadow
+	//	EntityAnimal.isInLove() causing MCP to obfuscate this method, which
+	//	we don't want because the callers won't be obfuscated.
+	//	
+	public boolean getInLove();
 
 	public void setInLove(boolean b);
 

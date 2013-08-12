@@ -382,6 +382,12 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	}
 
 	@Override
+	public boolean getInLove()
+	{
+		return inLove;
+	}
+
+	@Override
 	public void setInLove(boolean b) 
 	{
 		this.inLove = b;
