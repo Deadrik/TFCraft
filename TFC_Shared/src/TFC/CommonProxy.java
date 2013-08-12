@@ -128,7 +128,6 @@ public class CommonProxy implements IGuiHandler
 		ModLoader.registerTileEntity(TileEntitySpawnMeter.class, "SpawnMeter");
 
 		ModLoader.registerTileEntity(TileEntityQuern.class, "Quern");
-		ModLoader.registerTileEntity(TileEntityBellows.class, "Bellows");
 		ModLoader.registerTileEntity(TileEntitySapling.class, "Sapling");
 
 		ModLoader.registerTileEntity(TileEntityWoodConstruct.class, "Wood Construct");
@@ -142,6 +141,7 @@ public class CommonProxy implements IGuiHandler
 			ModLoader.registerTileEntity(TileEntityPottery.class, "Pottery");
 			ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest");
 			ModLoader.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep");
+			ModLoader.registerTileEntity(TileEntityBellows.class, "Bellows");
 		}
 
 

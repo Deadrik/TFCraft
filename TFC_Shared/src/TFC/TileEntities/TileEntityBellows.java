@@ -35,7 +35,7 @@ public class TileEntityBellows extends NetworkTileEntity {
 					shouldBlow = false;
 				}
 			}
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+//			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); // Needed only if RenderBellows is being used.
 		}
 	}
 
