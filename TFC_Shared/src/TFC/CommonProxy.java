@@ -144,7 +144,7 @@ public class CommonProxy implements IGuiHandler
 			ModLoader.registerTileEntity(TileEntityBellows.class, "Bellows");
 		}
 
-
+		EntityRegistry.registerGlobalEntityID(EntityWolfTFC.class, "Wolf", ModLoader.getUniqueEntityId(), 0xffffff, 0xaaaaaa);
 		EntityRegistry.registerGlobalEntityID(EntityCowTFC.class, "Cow", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntitySheepTFC.class, "Sheep", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);
 		EntityRegistry.registerGlobalEntityID(EntityBear.class, "Bear", ModLoader.getUniqueEntityId(), 0xffffff, 0xbbbbbb);

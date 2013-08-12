@@ -68,7 +68,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
 	public EntityPigTFC(World par1World, IAnimal mother, float F_size)

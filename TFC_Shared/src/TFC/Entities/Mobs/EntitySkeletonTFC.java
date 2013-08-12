@@ -24,7 +24,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
 import TFC.TFCItems;
-import TFC.Entities.EntityArrowTFC;
+import TFC.Entities.EntityProjectileTFC;
 
 public class EntitySkeletonTFC extends EntitySkeleton
 {
@@ -321,7 +321,9 @@ public class EntitySkeletonTFC extends EntitySkeleton
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLiving,float par2)
 	{
-		EntityArrowTFC arrow = new EntityArrowTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F);
+		EntityProjectileTFC arrow = new EntityProjectileTFC(this.worldObj, this, par1EntityLiving, 1.6F, 12.0F, Item.arrow.itemID);
+		arrow.setDamage(65.0);
+
 		int var3 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
 		int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
 		arrow.setDamage(arrow.getDamage() * 1.0F + this.rand.nextGaussian() * 0.25D + this.worldObj.difficultySetting * 0.11F);
@@ -329,7 +331,7 @@ public class EntitySkeletonTFC extends EntitySkeleton
 
 		if (var3 > 0)
 		{
-			arrow.setDamage(arrow.getDamage() + var3 * 0.5D + 0.5D);
+			arrow.setDamage(arrow.getDamage() + var3 * 0.5D);
 		}
 
 		if (var4 > 0)

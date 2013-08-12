@@ -50,7 +50,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 		//For Testing Only(makes spawned animals into babies)
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
 	public EntityCowTFC(World par1World, IAnimal mother, float father_size)
