@@ -145,7 +145,7 @@ public class EntityDamageHandler
 				}
 
 				//5. Damage the armor that was hit
-				armor[location].damageItem((int) processArmorDamage(armor[location], originalDamage), entity);
+				armor[location].damageItem((int) processArmorDamage(armor[location], damage), entity);
 			}
 			else if(armor[location] == null || (armor[location] != null && !(armor[location].getItem() instanceof ItemTFCArmor)))
 			{
@@ -157,7 +157,7 @@ public class EntityDamageHandler
 				}
 				else if(location == 3)
 				{
-					entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 600, 1));
+					entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 100, 1));
 				}
 			}
 			//6. Apply the damage to the player
@@ -193,7 +193,7 @@ public class EntityDamageHandler
 			if(nbt.hasKey("armorReductionBuff"))
 			{
 				float reductBuff = nbt.getByte("armorReductionBuff")/100f;
-				return baseDamage - (int)(baseDamage * reductBuff);
+				return baseDamage - (baseDamage * reductBuff);
 			}
 		}
 
