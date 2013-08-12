@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
-import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.client.resources.ReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
@@ -95,6 +94,7 @@ import TFC.Render.RenderSheepTFC;
 import TFC.Render.RenderSquidTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
+import TFC.Render.TileEntityChestRendererTFC;
 import TFC.Render.TileEntityFoodPrepRenderer;
 import TFC.Render.TileEntityIngotPileRenderer;
 import TFC.Render.TileEntityPotteryRenderer;
@@ -219,7 +219,7 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRenderer());
+		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
 		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());

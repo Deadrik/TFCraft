@@ -82,18 +82,23 @@ public class ModelCowTFC extends ModelQuadruped
 		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
 		GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 
-		if(percent > 0.5){
+		if(percent < 0.5)
+		{
 			horn1.isHidden = true;//rotateAngleX = (float)Math.PI;
 			horn2.isHidden = true;//rotateAngleX = -(float)Math.PI;
-			if(percent > 0.75){
+			if(percent < 0.75)
+			{
 				horn1b.isHidden = true;
 				horn2b.isHidden = true;
 			}
 		}
-		if(((IAnimal)entity).getGender()==GenderEnum.MALE){
+
+		if(((IAnimal)entity).getGender()==GenderEnum.MALE)
+		{
 			udders.isHidden = true;
 		}
-		else{
+		else
+		{
 			horn1b.isHidden = true;
 			horn2b.isHidden = true;
 		}
