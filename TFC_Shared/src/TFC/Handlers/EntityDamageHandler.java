@@ -11,6 +11,7 @@ import net.minecraft.entity.IEntityMultiPart;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -18,6 +19,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -27,6 +29,7 @@ import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
 import TFC.Core.TFC_MobDamage;
+import TFC.Entities.EntityTerraJavelin;
 import TFC.Items.ItemTFCArmor;
 
 public class EntityDamageHandler
@@ -67,8 +70,20 @@ public class EntityDamageHandler
 		}
 		else if(event.source.damageType == "player" || event.source.damageType == "mob" || event.source.damageType == "arrow")
 		{
-			applyArmorCalculations(entity, event.source, event.ammount);
-			event.ammount = 0;
+			event.ammount = applyArmorCalculations(entity, event.source, event.ammount);
+			if(event.source.damageType == "arrow")
+			{
+				Entity e = ((EntityDamageSourceIndirect)event.source).getSourceOfDamage();
+				if(e instanceof EntityTerraJavelin)
+				{
+					((EntityTerraJavelin)e).setDamageTaken((short) (((EntityTerraJavelin) e).damageTaken+10));
+
+					if(((EntityTerraJavelin)e).damageTaken >= Item.itemsList[((EntityTerraJavelin)e).itemID].getMaxDamage()) 
+					{
+						e.setDead();
+					}
+				}
+			}
 		}
 	}
 
@@ -149,7 +164,6 @@ public class EntityDamageHandler
 			EntityArmorCalcEvent eventPost = new EntityArmorCalcEvent(entity, originalDamage, EntityArmorCalcEvent.EventType.POST);
 			MinecraftForge.EVENT_BUS.post(eventPost);
 			entity.setEntityHealth(entity.func_110143_aJ()-eventPost.incomingDamage);
-
 		}
 
 		return 0;

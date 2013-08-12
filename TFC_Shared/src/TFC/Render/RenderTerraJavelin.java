@@ -21,13 +21,18 @@ public class RenderTerraJavelin extends Render
 		GL11.glTranslatef((float)x, (float)y, (float)z);
 		GL11.glRotatef(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par9, 0.0F, 0.0F, 1.0F);
-		Tessellator var10 = Tessellator.instance;
+		Tessellator tessellator = Tessellator.instance;
 		byte var11 = 0;
-		float var12 = 0.0F;
-		float var13 = 0.5F;
-		float var14 = (0 + var11 * 10) / 32.0F;
-		float var15 = (5 + var11 * 10) / 32.0F;
-		float var20 = 0.05625F;
+		float f2 = 0.0F;
+		float f3 = 0.5F;
+		float f4 = (0 + var11 * 10) / 32.0F;
+		float f5 = (5 + var11 * 10) / 32.0F;
+		float f6 = 0.0F;
+		float f7 = 0.15625F;
+		float f8 = (5 + var11 * 10) / 32.0F;
+		float f9 = (10 + var11 * 10) / 32.0F;
+		float f10 = 0.05625F;
+
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		float var21 = entity.arrowShake - par9;
 
@@ -38,19 +43,19 @@ public class RenderTerraJavelin extends Render
 		}
 
 		GL11.glRotatef(45.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glScalef(var20, var20, var20);
+		GL11.glScalef(f10, f10, f10);
 		GL11.glTranslatef(-4.0F, 0.0F, 0.0F);
 
-		for (int var23 = 0; var23 < 4; ++var23)
+		for (int i = 0; i < 4; ++i)
 		{
 			GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glNormal3f(0.0F, 0.0F, var20);
-			var10.startDrawingQuads();
-			var10.addVertexWithUV(-45.0D, -2.0D, 0.0D, var12, var14);
-			var10.addVertexWithUV(8.0D, -2.0D, 0.0D, var13, var14);
-			var10.addVertexWithUV(8.0D, 2.0D, 0.0D, var13, var15);
-			var10.addVertexWithUV(-45.0D, 2.0D, 0.0D, var12, var15);
-			var10.draw();
+			GL11.glNormal3f(0.0F, 0.0F, f10);
+			tessellator.startDrawingQuads();
+			tessellator.addVertexWithUV(-35.0D, -2.0D, 0.0D, f2, f4);
+			tessellator.addVertexWithUV(8.0D, -2.0D, 0.0D, f3, f4);
+			tessellator.addVertexWithUV(8.0D, 2.0D, 0.0D, f3, f5);
+			tessellator.addVertexWithUV(-35.0D, 2.0D, 0.0D, f2, f5);
+			tessellator.draw();
 		}
 
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);

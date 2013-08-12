@@ -23,6 +23,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
 import TFC.Core.ColorizerFoliageTFC;
@@ -31,7 +32,7 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Util.StringUtil;
-import TFC.Entities.EntityArrowTFC;
+import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityStand;
 import TFC.Entities.EntityTerraJavelin;
@@ -177,7 +178,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityIronGolemTFC.class, new RenderIronGolem());
 		//RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderPlayerTFC());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityArrowTFC.class, new RenderArrow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityProjectileTFC.class, new RenderArrow());
 
 		RenderingRegistry.registerBlockHandler(TFCBlocks.clayGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
 		RenderingRegistry.registerBlockHandler(TFCBlocks.peatGrassRenderId = RenderingRegistry.getNextAvailableRenderId(), new BlockRenderHandler());
@@ -373,10 +374,14 @@ public class ClientProxy extends CommonProxy
 		{
 			for (int var9 = -1; var9 <= 1; ++var9)
 			{
-				int var10 = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8).waterColorMultiplier;
-				var5 += (var10 & 16711680) >> 16;
+				BiomeGenBase biome = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+				if(biome != null)
+				{
+					int var10 = biome.getWaterColorMultiplier();
+					var5 += (var10 & 16711680) >> 16;
 			var6 += (var10 & 65280) >> 8;
 			var7 += var10 & 255;
+				}
 			}
 		}
 		return (var5 / 9 & 255) << 16 | (var6 / 9 & 255) << 8 | var7 / 9 & 255;
