@@ -1811,9 +1811,12 @@ public class TFCItems
 				MealFireResist, MealWaterBreathing, MealNightVision};
 
 		((TFCTabs)TFCTabs.TFCTools).setTabIconItemIndex(TFCItems.SteelHammer.itemID);
-		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.Spindle.itemID);
+		((TFCTabs)TFCTabs.TFCMaterials).setTabIconItemIndex(TFCItems.LeadIngot.itemID);
 		((TFCTabs)TFCTabs.TFCUnfinished).setTabIconItemIndex(TFCItems.SteelHammerHead.itemID);
-		((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);        
+		((TFCTabs)TFCTabs.TFCArmor).setTabIconItemIndex(TFCItems.SteelHelmet.itemID);      
+		((TFCTabs)TFCTabs.TFCMisc).setTabIconItemIndex(TFCItems.Spindle.itemID);  
+		((TFCTabs)TFCTabs.TFCPottery).setTabIconItemStack(new ItemStack(PotteryJug, 1, 1));  
+		((TFCTabs)TFCTabs.TFCWeapons).setTabIconItemStack(new ItemStack(SteelSword, 1));  
 
 		registerMetals();
 

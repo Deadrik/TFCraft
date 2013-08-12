@@ -34,7 +34,7 @@ public class ItemTerra extends Item implements ISize
 	public ItemTerra(int id) 
 	{
 		super(id);
-		this.setCreativeTab(TFCTabs.TFCMaterials);
+		this.setCreativeTab(TFCTabs.TFCMisc);
 		textureFolder = "";
 	}
 

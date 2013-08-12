@@ -9,6 +9,7 @@ import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -33,13 +34,14 @@ public class ItemOre extends ItemTerra implements ISmeltable
 				"Poor Native Silver", "Poor Cassiterite", "Poor Galena", "Poor Bismuthinite", "Poor Garnierite", "Poor Malachite", 
 				"Poor Magnetite", "Poor Limonite", "Poor Sphalerite", "Poor Tetrahedrite"};
 		setFolder("ore/");
+		setCreativeTab(TFCTabs.TFCMaterials);
 	}
-	
+
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.SMALL;
 	}
-	
+
 	@Override
 	public EnumWeight getWeight() {
 		// TODO Auto-generated method stub
@@ -53,28 +55,30 @@ public class ItemOre extends ItemTerra implements ISmeltable
 			list.add(new ItemStack(this,1,i));
 		}
 	}
-	
+
 	@Override
 	public Icon getIconFromDamage(int meta)
 	{
 		return icons[meta];
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister registerer)
-    {
+	{
 		icons = new Icon[MetaNames.length];
-		for(int i = 0; i < MetaNames.length; i++)
+		for(int i = 0; i < MetaNames.length; i++) {
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i]+" Ore");
-    }
-	
+		}
+	}
+
 	@Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
-    	if(MetaNames != null)
-    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
-    	return super.getUnlocalizedName(itemstack);
-    }
+	public String getUnlocalizedName(ItemStack itemstack)
+	{
+		if(MetaNames != null) {
+			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+		}
+		return super.getUnlocalizedName(itemstack);
+	}
 
 	@Override
 	public Metal GetMetalType(ItemStack is) 

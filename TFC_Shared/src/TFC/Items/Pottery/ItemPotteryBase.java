@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
@@ -37,7 +38,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		super(id);
 		this.hasSubtypes = true;
 		this.setFolder("pottery/");
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(TFCTabs.TFCPottery);
 		this.MetaNames = new String[]{"",""};
 	}
 
@@ -55,14 +56,16 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			list.add(new ItemStack(this,1,i));
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage)
 	{
-		if(damage == 0)
+		if(damage == 0) {
 			return this.ClayIcon;
-		else return this.CeramicIcon;    		
+		} else {
+			return this.CeramicIcon;
+		}    		
 	}
 
 	@Override
@@ -75,10 +78,10 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 	{
 		return EnumWeight.MEDIUM;
 	}
-	
+
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
-    {
+	{
 		if (TFC_Core.showExtraInformation()) 
 		{
 			arraylist.add(StringUtil.localize("gui.Help"));
@@ -88,7 +91,7 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		{
 			arraylist.add(StringUtil.localize("gui.ShowHelp"));
 		}
-    }
+	}
 
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
@@ -104,9 +107,9 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 					world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
 					offset = 1;
 				}
-				
+
 				te = (TileEntityPottery) world.getBlockTileEntity(x, y+offset, z);
-				
+
 				if(hitX < 0.5 && hitZ < 0.5)
 				{
 					if(te.inventory[0] == null)
@@ -161,15 +164,15 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Called when the pottery object is done being cooked in a kiln.
 	 */
 	public void onDoneCooking(World world, ItemStack is, Alloy.EnumTier furnaceTier)
 	{
-		
+
 	}
-	
+
 	private Packet sendInitPacket(NetworkTileEntity te, int x, int y, int z) throws IOException
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);

@@ -2,11 +2,11 @@ package TFC.Items;
 
 import java.util.List;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -18,7 +18,7 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	{
 		super(i);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setCreativeTab(TFCTabs.TFCMaterials);
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	{
 		return EnumWeight.HEAVY;
 	}
-	
+
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
-    {
+	{
 		arraylist.add(is.getItemDamage()+"%");
-    }
+	}
 
 	public void addCreativeItems(java.util.ArrayList list)
 	{

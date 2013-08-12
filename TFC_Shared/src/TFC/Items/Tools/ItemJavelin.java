@@ -12,6 +12,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.TFCTabs;
 import TFC.Entities.EntityTerraJavelin;
 
 public class ItemJavelin extends ItemTerraTool
@@ -26,6 +27,7 @@ public class ItemJavelin extends ItemTerraTool
 		this.weaponDamage = Math.round(par2EnumToolMaterial.getDamageVsEntity()*0.4f);
 		this.weaponRangeDamage = par2EnumToolMaterial.getDamageVsEntity()*0.5D;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses()/2);
+		setCreativeTab(TFCTabs.TFCWeapons);
 	}
 
 	@Override

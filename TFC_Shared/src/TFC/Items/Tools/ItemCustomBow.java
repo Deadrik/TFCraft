@@ -31,7 +31,7 @@ public class ItemCustomBow extends ItemBow implements ISize
 		super(par1);
 		this.maxStackSize = 1;
 		this.setMaxDamage(384);
-		setCreativeTab(TFCTabs.TFCTools);
+		setCreativeTab(TFCTabs.TFCWeapons);
 	}
 
 	@Override

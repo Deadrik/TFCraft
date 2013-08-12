@@ -11,6 +11,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -23,7 +24,7 @@ public class ItemLogs extends ItemTerra
 		super(i);
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = Global.WOOD_ALL;
 	}
 
@@ -31,7 +32,7 @@ public class ItemLogs extends ItemTerra
 	public EnumSize getSize() {
 		return EnumSize.MEDIUM;
 	}
-	
+
 	@Override
 	public EnumWeight getWeight() {
 		return EnumWeight.MEDIUM;
@@ -51,43 +52,49 @@ public class ItemLogs extends ItemTerra
 		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
 		{
 			world.setBlock( x, y-1, z, TFCBlocks.LogPile.blockID, l, 0x2);
-			if(world.isRemote)
+			if(world.isRemote) {
 				world.markBlockForUpdate(x, y-1, z);
+			}
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y-1, z);
 		}
 		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
 		{
 			world.setBlock( x, y+1, z, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote)
+			if(world.isRemote) {
 				world.markBlockForUpdate(x, y+1, z);
+			}
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y+1, z);
 		}
 		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
 		{
 			world.setBlock( x, y, z-1, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote)
+			if(world.isRemote) {
 				world.markBlockForUpdate(x, y, z-1);
+			}
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z-1);
 		}
 		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
 		{
 			world.setBlock( x, y, z+1, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote)
+			if(world.isRemote) {
 				world.markBlockForUpdate(x, y, z+1);
+			}
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z+1);
 		}
 		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
 		{
 			world.setBlock( x-1, y, z, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote)
+			if(world.isRemote) {
 				world.markBlockForUpdate(x-1, y, z);
+			}
 			te = (TileEntityLogPile)world.getBlockTileEntity(x-1, y, z);
 		}
 		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
 		{
 			world.setBlock( x+1, y, z, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote)
+			if(world.isRemote) {
 				world.markBlockForUpdate(x+1, y, z);
+			}
 			te = (TileEntityLogPile)world.getBlockTileEntity(x+1, y, z);
 		}
 		else
@@ -115,14 +122,15 @@ public class ItemLogs extends ItemTerra
 	{        
 		return icons[meta];
 	}
-	
+
 	Icon[] icons = new Icon[Global.WOOD_ALL.length];
 	@Override
 	public void registerIcons(IconRegister registerer)
-    {
-		for(int i = 0; i < 16; i++)
+	{
+		for(int i = 0; i < 16; i++) {
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/"+Global.WOOD_ALL[i]+" Log");
-    }
+		}
+	}
 
 
 	@Override
@@ -134,8 +142,9 @@ public class ItemLogs extends ItemTerra
 
 			if(entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.LogPile.blockID || (side != 1 && side != 0)))
 			{
-				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))
+				if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) {
 					itemstack.stackSize = itemstack.stackSize-1;
+				}
 				return true;
 			}
 			else if(world.getBlockId(x, y, z) == TFCBlocks.LogPile.blockID)
@@ -161,11 +170,12 @@ public class ItemLogs extends ItemTerra
 						te.addContents(3, new ItemStack(this,1, itemstack.getItemDamage()));
 					} else
 					{
-						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir))						
+						if(CreatePile(itemstack, entityplayer, world, x, y, z, side, dir)) {
 							itemstack.stackSize = itemstack.stackSize-1;
-						
+						}
+
 						return true;
-						
+
 					}
 					itemstack.stackSize = itemstack.stackSize-1;
 					return true;
@@ -206,23 +216,25 @@ public class ItemLogs extends ItemTerra
 		}
 		return false;
 	}
-	
+
 	public void setSide(World world, ItemStack itemstack, int m, int dir, int x, int y, int z, int i, int j, int k)
 	{
 		if(m < 8)
 		{
-			if(dir == 0 || dir == 2)
+			if(dir == 0 || dir == 2) {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m, 0x2);
-			else
+			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz.blockID, m | 8, 0x2);
+			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 		else if(m >= 8)
 		{
-			if(dir == 0 || dir == 2)
+			if(dir == 0 || dir == 2) {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8, 0x2);
-			else
+			} else {
 				world.setBlock(x+i, y+j, z+k, TFCBlocks.WoodHoriz2.blockID, m-8 | 8, 0x2);
+			}
 			itemstack.stackSize = itemstack.stackSize-1;
 		}
 	}

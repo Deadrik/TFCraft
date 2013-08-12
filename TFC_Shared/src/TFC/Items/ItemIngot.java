@@ -3,7 +3,6 @@ package TFC.Items;
 import java.awt.image.BufferedImage;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +12,7 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Metal.MetalRegistry;
@@ -27,7 +27,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	public ItemIngot(int i) 
 	{
 		super(i);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setFolder("ingots/");
 
 	}
@@ -56,6 +56,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		return EnumWeight.MEDIUM;
 	}
 
+	@Override
 	public ItemIngot setSize(EnumSize s)
 	{
 		size = s;

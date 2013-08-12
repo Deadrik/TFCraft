@@ -3,12 +3,12 @@ package TFC.Items;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
@@ -19,12 +19,12 @@ import TFC.Core.Util.StringUtil;
 
 public class ItemMeltedMetal extends ItemTerra
 {
-	
+
 	public ItemMeltedMetal(int i) 
 	{
 		super(i);
 		setMaxDamage(100);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setFolder("ingots/");
 	}	
 
@@ -62,8 +62,9 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{		
-		if(is.getItemDamage() != 0)
+		if(is.getItemDamage() != 0) {
 			arraylist.add(StringUtil.localize("gui.MeltedMetal.NotFull"));
+		}
 	}
 
 	@Override
@@ -86,9 +87,10 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if(itemstack.stackSize <= 0)
+		if(itemstack.stackSize <= 0) {
 			itemstack.stackSize = 1;
-		
+		}
+
 		if(TFC_ItemHeat.getIsLiquid(itemstack))
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 
 public class ItemStoneBrick extends ItemTerra
@@ -19,7 +20,7 @@ public class ItemStoneBrick extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = Global.STONE_ALL;
 		this.icons = new Icon[MetaNames.length];
 	}
@@ -92,7 +93,7 @@ public class ItemStoneBrick extends ItemTerra
 		return false;
 	}*/
 
-	
+
 	@Override
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) 
 	{
@@ -104,13 +105,14 @@ public class ItemStoneBrick extends ItemTerra
 	{
 		return icons[meta];
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister registerer)
-    {
-		for(int i = 0; i < MetaNames.length; i++)
+	{
+		for(int i = 0; i < MetaNames.length; i++) {
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "rocks/"+MetaNames[i]+" Brick");
-    }
+		}
+	}
 
 	@Override
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List list)
