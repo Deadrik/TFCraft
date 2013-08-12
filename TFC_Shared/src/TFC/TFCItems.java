@@ -26,7 +26,6 @@ import TFC.Core.Metal.MetalRegistry;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemAlcohol;
-import TFC.Items.ItemBellows;
 import TFC.Items.ItemBloom;
 import TFC.Items.ItemBlueprint;
 import TFC.Items.ItemClay;
@@ -360,7 +359,6 @@ public class TFCItems
 	public static Item ZincKnife;
 
 	public static Item FireStarter;
-	public static Item BellowsItem;
 
 	public static Item StoneHammer;
 	public static Item BismuthHammer;
@@ -1406,8 +1404,6 @@ public class TFCItems
 		ZincHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","ZincHammer",16384),TFCItems.ZincToolMaterial).setUnlocalizedName("Zinc Hammer").setMaxDamage(TFCItems.ZincUses);
 
 		Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391)).setUnlocalizedName("Ink");
-
-		BellowsItem = new ItemBellows(TFC_Settings.getIntFor(config,"item","BellowsItem",16406)).setUnlocalizedName("Bellows");
 
 		FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","FireStarter",16407)).setFolder("tools/").setUnlocalizedName("Firestarter");
 
