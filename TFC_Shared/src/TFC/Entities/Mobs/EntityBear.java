@@ -334,7 +334,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			return false;
 		}
 		EntityBear entitybear = (EntityBear) par1EntityAnimal;
-		return isInLove () && entitybear.isInLove ();
+		return getInLove () && entitybear.getInLove ();
 	}
 
 	@Override
@@ -414,6 +414,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		resetInLove();
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();
+	}
+
+	@Override
+	public boolean getInLove()
+	{
+		return inLove;
 	}
 
 	@Override
