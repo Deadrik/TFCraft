@@ -2003,15 +2003,15 @@ public class TFCItems
 		RyeWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","RyeWhole",num++)).setFolder("food/").setUnlocalizedName("Rye Whole");
 		RiceWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","RiceWhole",num++)).setFolder("food/").setUnlocalizedName("Rice Whole");
 
-		MealGeneric = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealGeneric",num++)).setUnlocalizedName("MealGeneric");
-		MealMoveSpeed = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealMoveSpeed",num++)).setPotionEffect(new PotionEffect(Potion.moveSpeed.id,8000,4)).setUnlocalizedName("MealGeneric");
-		MealDigSpeed = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDigSpeed",num++)).setPotionEffect(new PotionEffect(Potion.digSpeed.id,8000,4)).setUnlocalizedName("MealGeneric");
-		MealDamageBoost = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDamageBoost",num++)).setPotionEffect(new PotionEffect(Potion.damageBoost.id,4000,4)).setUnlocalizedName("MealGeneric");
-		MealJump = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealJump",num++)).setPotionEffect(new PotionEffect(Potion.jump.id,8000,4)).setUnlocalizedName("MealGeneric");
-		MealDamageResist = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDamageResist",num++)).setPotionEffect(new PotionEffect(Potion.resistance.id,8000,4)).setUnlocalizedName("MealGeneric");
-		MealFireResist = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealFireResist",num++)).setPotionEffect(new PotionEffect(Potion.fireResistance.id,8000,4)).setUnlocalizedName("MealGeneric");
-		MealWaterBreathing = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealWaterBreathing",num++)).setPotionEffect(new PotionEffect(Potion.waterBreathing.id,8000,4)).setUnlocalizedName("MealGeneric");
-		MealNightVision = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealNightVision",num++)).setPotionEffect(new PotionEffect(Potion.nightVision.id,4000,4)).setUnlocalizedName("MealGeneric");
+		MealGeneric = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealGeneric",num++), 0).setUnlocalizedName("MealGeneric");
+		MealMoveSpeed = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealMoveSpeed",num++), 1).setPotionEffect(new PotionEffect(Potion.moveSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealDigSpeed = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDigSpeed",num++), 2).setPotionEffect(new PotionEffect(Potion.digSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealDamageBoost = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDamageBoost",num++), 3).setPotionEffect(new PotionEffect(Potion.damageBoost.id,4000,1)).setUnlocalizedName("MealGeneric");
+		MealJump = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealJump",num++), 4).setPotionEffect(new PotionEffect(Potion.jump.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealDamageResist = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDamageResist",num++), 5).setPotionEffect(new PotionEffect(Potion.resistance.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealFireResist = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealFireResist",num++), 6).setPotionEffect(new PotionEffect(Potion.fireResistance.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealWaterBreathing = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealWaterBreathing",num++), 7).setPotionEffect(new PotionEffect(Potion.waterBreathing.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealNightVision = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealNightVision",num++), 8).setPotionEffect(new PotionEffect(Potion.nightVision.id,4000,1)).setUnlocalizedName("MealGeneric");
 
 		WheatGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","WheatGround",num++)).setFolder("food/").setUnlocalizedName("Wheat Ground");
 		BarleyGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","BarleyGround",num++)).setFolder("food/").setUnlocalizedName("Barley Ground");

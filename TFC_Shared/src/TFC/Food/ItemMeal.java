@@ -25,11 +25,13 @@ public class ItemMeal extends ItemTerraFood
 	PotionEffect foodEffect;
 
 	private boolean alwaysEdible = false;
+	private int iconid;
 
-	public ItemMeal(int id) 
+	public ItemMeal(int id, int icon) 
 	{
 		super(id, 0);
 		this.hasSubtypes = true;
+		iconid = icon;
 	}
 
 	@Override
@@ -37,33 +39,33 @@ public class ItemMeal extends ItemTerraFood
 	{        
 		return icons[meta];
 	}
-	
+
 	Icon[] icons = new Icon[11];
 	@Override
 	public void registerIcons(IconRegister registerer)
-    {
-		for(int i = 0; i < 11; i++)
-			icons[i]= registerer.registerIcon(Reference.ModID + ":" + "food/Meal"+i);
-    }
+	{
+		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "food/Meal"+iconid);
+	}
 
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		ItemTerraFood.addFoodTempInformation(is, arraylist);
-		
+
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
 
-			
 
-			if(foodEffect != null)
+
+			if(foodEffect != null) {
 				arraylist.add(StringUtil.localize("gui.FoodPrep.Effect") + ": " + StatCollector.translateToLocal(foodEffect.getEffectName()));
+			}
 
 			int energy = getMealEnergy(is)/10;
 			int power = getMealPower(is)/10;
 			int filling = getMealFilling(is)/10;
-			
+
 			if(energy > 0)
 			{
 				String stars = "";
@@ -142,7 +144,7 @@ public class ItemMeal extends ItemTerraFood
 		this.addFoodEffect(is, world, player);
 		if(!world.isRemote)
 		{
-			
+
 			int energy = getMealEnergy(is);
 			int filling = getMealFilling(is);
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
@@ -153,12 +155,14 @@ public class ItemMeal extends ItemTerraFood
 		is.stackSize--;
 		return is;
 	}
-	
+
 	public static boolean isWarm(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1)
+		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) * 0.1) {
 			return true;
-		else return false;
+		} else {
+			return false;
+		}
 	}
 
 	public static int getMealPower(ItemStack is)
@@ -175,8 +179,9 @@ public class ItemMeal extends ItemTerraFood
 					power /= 2;
 				}
 				return power;
+			} else {
+				return -1;
 			}
-			else return -1;
 		}
 		return -1;
 	}
@@ -195,8 +200,9 @@ public class ItemMeal extends ItemTerraFood
 					filling /= 2;
 				}
 				return filling;
+			} else {
+				return -1;
 			}
-			else return -1;
 		}
 		return -1;
 	}
@@ -218,8 +224,9 @@ public class ItemMeal extends ItemTerraFood
 					energy /= 2;
 				}
 				return energy;
+			} else {
+				return -1;
 			}
-			else return -1;
 		}
 		return -1;
 	}
@@ -308,7 +315,7 @@ public class ItemMeal extends ItemTerraFood
 		this.alwaysEdible = true;
 		return this;
 	}
-	
+
 	@Override
 	public EnumSize getSize() 
 	{
@@ -319,5 +326,5 @@ public class ItemMeal extends ItemTerraFood
 	{
 		return EnumWeight.MEDIUM;
 	}
-	
+
 }
