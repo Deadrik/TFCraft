@@ -1743,8 +1743,7 @@ public class TFCItems
 		UnknownIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","UnknownIngot",num++)).setUnlocalizedName("Unknown Ingot");
 		UnknownUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnknownUnshaped",num++)).setUnlocalizedName("Unknown Unshaped");
 
-		CalamariRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","CalamariRaw",num++)).setFolder("").setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CalamariCooked",num++), 29, 0.6F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
+
 
 		/**Plans*/
 		num = 20000;
@@ -2030,6 +2029,9 @@ public class TFCItems
 		RyeBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RyeBread",num++), 25, 0.6F, false, 45).setUnlocalizedName("Rye Bread");
 		RiceBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RiceBread",num++), 25, 0.6F, false, 46).setUnlocalizedName("Rice Bread");
 		CornBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CornBread",num++), 25, 0.6F, false, 47).setUnlocalizedName("Corn Bread");
+
+		CalamariRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","CalamariRaw",num++)).setFolder("").setUnlocalizedName("Calamari Raw");
+		CalamariCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CalamariCooked",num++), 29, 0.6F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
 
 		num = 18900;
 		SeedsWheat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWheat",num++),0).setUnlocalizedName("Seeds Wheat");
