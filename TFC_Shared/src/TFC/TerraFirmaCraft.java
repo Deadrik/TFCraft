@@ -121,7 +121,7 @@ public class TerraFirmaCraft
 	public void initialize(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
-		Localization.addLocalization("/lang/", "en_US");
+		Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
 		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
 		proxy.registerTranslations();
 
