@@ -277,7 +277,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		else
 		{
 			EntityWolfTFC var2 = (EntityWolfTFC)par1EntityAnimal;
-			return !var2.isTamed() ? false : (var2.isSitting() ? false : this.isInLove() && var2.isInLove());
+			return !var2.isTamed() ? false : (var2.isSitting() ? false : this.getInLove() && var2.getInLove());
 		}
 	}
 	@Override
@@ -352,6 +352,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		resetInLove();
 		otherAnimal.setInLove(false);
 		mateSizeMod = otherAnimal.getSize();
+	}
+
+	@Override
+	public boolean getInLove()
+	{
+		return inLove;
 	}
 
 	@Override
