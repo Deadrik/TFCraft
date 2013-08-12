@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TFCProvider extends WorldProvider
 {	
 	public IRenderHandler skyprovider;
-	
+
 	@Override
 	protected void registerWorldChunkManager()
 	{
@@ -31,12 +31,12 @@ public class TFCProvider extends WorldProvider
 		TFC_Climate.manager = (TFCWorldChunkManager) worldChunkMgr;
 		TFC_Climate.worldObj = worldObj;
 	}
-	
+
 	@Override
 	public IChunkProvider createChunkGenerator()
-    {
-        return new TFCChunkProviderGenerate(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
-    }
+	{
+		return new TFCChunkProviderGenerate(worldObj, worldObj.getSeed(), worldObj.getWorldInfo().isMapFeaturesEnabled());
+	}
 
 	@Override
 	public boolean canCoordinateBeSpawn(int par1, int par2)
@@ -77,37 +77,38 @@ public class TFCProvider extends WorldProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
-    {
-        return worldObj.getSkyColorBody(cameraEntity, partialTicks);
-    }
+	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
+	{
+		return worldObj.getSkyColorBody(cameraEntity, partialTicks);
+	}
 
 	@Override
 	public float getCloudHeight()
 	{
 		return 256.0F;
 	}
-	
+
 	@Override
 	public BiomeGenBase getBiomeGenForCoords(int x, int z)
-    {
-		BiomeGenBase biome = null;
+	{
+		BiomeGenBase biome = TFCBiome.ocean;
 		try
 		{
 			biome = worldObj.getBiomeGenForCoordsBody(x, z);
+			if(canSnowAtTemp(x,145,z)){biome.temperature = 0;}
+			else{biome.temperature = 0.16f;}
 		}
 		catch(Exception Ex)
 		{
-			biome = worldObj.getBiomeGenForCoordsBody(x, z);
+
 		}
-        if(canSnowAtTemp(x,145,z)){biome.temperature = 0;}
-        else{biome.temperature = 0.16f;}
-        return biome;
-    }
-	
+
+		return biome;
+	}
+
 	@Override
 	public ChunkCoordinates getRandomizedSpawnPoint()
-    {
+	{
 		TFCWorldChunkManager var2 = (TFCWorldChunkManager) worldChunkMgr;
 		List var3 = var2.getBiomesToSpawnIn();
 		long seed = worldObj.getWorldInfo().getSeed();
@@ -150,39 +151,42 @@ public class TFCProvider extends WorldProvider
 			}
 		}
 
-        return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
-    }
-	
+		return new ChunkCoordinates(var6, this.worldObj.getHeightValue(var6, var8), var8);
+	}
+
 	@Override
 	public ChunkCoordinates getSpawnPoint()
-    {
+	{
 		WorldInfo info = worldObj.getWorldInfo();
-        return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
-    }
-	
+		return new ChunkCoordinates(info.getSpawnX(), info.getSpawnY(), info.getSpawnZ());
+	}
+
 	@Override
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
-    {
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0 && (worldObj.getBlockMaterial(x, y, z) == Material.water || worldObj.getBlockMaterial(x, y, z) == Material.ice))
+	{
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0 && (worldObj.getBlockMaterial(x, y, z) == Material.water || worldObj.getBlockMaterial(x, y, z) == Material.ice)) {
 			return true;
+		}
 		return false;
-    }
+	}
 
-    @Override
-    public boolean canSnowAt(int x, int y, int z)
-    {
-    	if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0
-				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z))
+	@Override
+	public boolean canSnowAt(int x, int y, int z)
+	{
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0
+				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z)) {
 			return true;
+		}
 		return false;
-    }
+	}
 
-    private boolean canSnowAtTemp(int x, int y, int z)
-    {
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+	private boolean canSnowAtTemp(int x, int y, int z)
+	{
+		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0) {
 			return true;
+		}
 		return false;
-    }
+	}
 
 	@Override
 	public String getDimensionName() {
