@@ -106,7 +106,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		{
 			this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			this.dropItem(Item.egg.itemID, 1);
-			this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+			this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
 		}
 		/**
 		 * This Cancels out the growingAge from EntityAgeable

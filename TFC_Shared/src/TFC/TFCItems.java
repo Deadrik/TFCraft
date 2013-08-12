@@ -1072,6 +1072,7 @@ public class TFCItems
 		Item.itemsList[Item.stick.itemID] = null; Item.itemsList[Item.stick.itemID] = new ItemStick(24).setFull3D().setUnlocalizedName("stick");
 		Item.itemsList[Item.leather.itemID] = null; Item.itemsList[Item.leather.itemID] = new ItemTerra(Item.leather.itemID).setFull3D().setUnlocalizedName("leather");
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
+		Item.itemsList[Item.egg.itemID] = new ItemTerra(88).setSize(EnumSize.SMALL).setUnlocalizedName("egg").func_111206_d("egg");
 
 		minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setUnlocalizedName("minecartChest").func_111206_d("minecart_chest");
 

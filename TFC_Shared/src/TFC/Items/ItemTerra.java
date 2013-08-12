@@ -24,6 +24,9 @@ import TFC.Core.Util.StringUtil;
 public class ItemTerra extends Item implements ISize
 {
 	protected boolean stackable = true;
+	protected EnumSize size = EnumSize.TINY;
+	protected EnumWeight weight = EnumWeight.LIGHT;
+
 	public String[] MetaNames;
 	public Icon[] MetaIcons;
 	public String textureFolder;
@@ -60,10 +63,11 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack())
+		if(canStack()) {
 			return this.getSize().stackSize * getWeight().multiplier <= 64 ? this.getSize().stackSize * getWeight().multiplier : 64;
-			else
-				return 1;
+		} else {
+			return 1;
+		}
 	}
 
 	public ItemTerra setFolder(String s)
@@ -75,9 +79,9 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		if(this.MetaNames == null)
+		if(this.MetaNames == null) {
 			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder + this.getUnlocalizedName().replace("item.", ""));
-		else
+		} else
 		{
 			MetaIcons = new Icon[MetaNames.length];
 			for(int i = 0; i < MetaNames.length; i++) 
@@ -86,21 +90,23 @@ public class ItemTerra extends Item implements ISize
 			}
 		}
 	}
-	
+
 	@Override
 	public Icon getIconFromDamage(int i)
 	{
-		if(MetaNames != null)
+		if(MetaNames != null) {
 			return MetaIcons[i];
-		else
+		} else {
 			return this.itemIcon;
+		}
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack)
 	{
-		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length)
+		if(MetaNames != null && itemstack.getItemDamage() < MetaNames.length) {
 			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+		}
 		return super.getUnlocalizedName(itemstack);
 	}
 
@@ -119,8 +125,9 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public void onUpdate(ItemStack is, World world, Entity entity, int i, boolean isSelected) 
 	{
-		if(is.stackSize == 0)
+		if(is.stackSize == 0) {
 			is.stackSize = 1;
+		}
 		if (!world.isRemote && is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
@@ -134,8 +141,9 @@ public class ItemTerra extends Item implements ISize
 
 	public static void addSizeInformation(ISize object, List arraylist)
 	{
-		if(object.getSize()!= null && object.getWeight() != null)
+		if(object.getSize()!= null && object.getWeight() != null) {
 			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + object.getWeight().getName()) + " \u21F2" + StringUtil.localize("gui.Size." + object.getSize().getName().replace(" ", "")));
+		}
 	}
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
@@ -182,10 +190,11 @@ public class ItemTerra extends Item implements ISize
 
 				if(meltTemp != -1)
 				{
-					if(is.itemID == Item.stick.itemID)
+					if(is.itemID == Item.stick.itemID) {
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-					else
+					} else {
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
+					}
 				}
 			}
 		}
@@ -230,12 +239,24 @@ public class ItemTerra extends Item implements ISize
 	@Override
 	public EnumSize getSize() 
 	{
-		return EnumSize.TINY;
+		return size;
 	}
 	@Override
 	public EnumWeight getWeight() 
 	{
-		return EnumWeight.MEDIUM;
+		return weight;
+	}
+
+	public ItemTerra setSize(EnumSize e)
+	{
+		size = e;
+		return this;
+	}
+
+	public ItemTerra setWeight(EnumWeight e)
+	{
+		weight = e;
+		return this;
 	}
 
 }
