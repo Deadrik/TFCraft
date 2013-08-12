@@ -16,6 +16,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.TerraFirmaCraft;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
@@ -23,9 +24,11 @@ import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.Helper;
+import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
@@ -143,8 +146,12 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	@Override
 	public Multimap func_111205_h()
 	{
-		Multimap multimap = super.func_111205_h();
-		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		Multimap multimap = HashMultimap.create();
+		if(!TerraFirmaCraft.proxy.isRemote() || TFC_Settings.enableDebugMode) 
+		{
+			multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		}
+
 		return multimap;
 	}
 }
