@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.API.Tools.IToolChisel;
 import TFC.Blocks.BlockTerra;
-import TFC.Core.Helper;
+import TFC.Core.Util.Helper;
 import TFC.Items.Tools.ItemHammer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

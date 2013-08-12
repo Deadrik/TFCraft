@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.Core.Util;
 
 import java.lang.reflect.Field;
 

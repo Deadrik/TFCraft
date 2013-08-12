@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCTabs;
-import TFC.Core.Helper;
+import TFC.Core.Util.Helper;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;

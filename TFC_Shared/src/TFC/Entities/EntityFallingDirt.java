@@ -2,7 +2,7 @@ package TFC.Entities;
 
 import TFC.*;
 import TFC.Blocks.Terrain.BlockCollapsable;
-import TFC.Core.Helper;
+import TFC.Core.Util.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

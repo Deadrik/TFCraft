@@ -5,7 +5,7 @@ import java.util.List;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.Helper;
+import TFC.Core.Util.Helper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

@@ -55,7 +55,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		super.writeToNBT(nbt);
 
 		nbt.setInteger("temp", temperature);
-		
+
 		NBTTagList nbttaglist = new NBTTagList();
 		Iterator iter = metals.values().iterator();
 		while(iter.hasNext())
@@ -93,11 +93,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 		readFromItemNBT(nbt);
 	}
-	
+
 	public void readFromItemNBT(NBTTagCompound nbt)
 	{
 		temperature = nbt.getInteger("temp");
-		
+
 		NBTTagList nbttaglist = nbt.getTagList("Metals");
 
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
@@ -135,35 +135,39 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			if(worldObj.getBlockId(xCoord,yCoord-1,zCoord) == TFCBlocks.Forge.blockID)
 			{
 				TileEntityForge te = (TileEntityForge) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
-				if(te.fireTemperature > temperature)
+				if(te.fireTemperature > temperature) {
 					temperature++;
+				}
 			}
 			if(tempTick > 22)
 			{
 				tempTick = 0;
-				if(temperature > TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord))
+				if(temperature > TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord)) {
 					temperature--;
+				}
 			}
 
 			if(storage[0] != null && storage[0].getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 			{
 				if(inputTick > 5)
 				{
-					if(currentAlloy.outputType != null && storage[0].getItem().itemID == currentAlloy.outputType.MeltedItemID)
+					if(currentAlloy != null && currentAlloy.outputType != null && storage[0].getItem().itemID == currentAlloy.outputType.MeltedItemID)
 					{
 						currentAlloy.outputAmount++;
-						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage())
+						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage()) {
 							storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
-						else
+						} else {
 							storage[0].setItemDamage(storage[0].getItemDamage() + 1);
+						}
 					}
 					else
 					{
 						this.addMetal(MetalRegistry.instance.getMetalFromItem(storage[0].getItem()), (short) 1);
-						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage())
+						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage()) {
 							storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
-						else
+						} else {
 							storage[0].setItemDamage(storage[0].getItemDamage() + 1);
+						}
 					}
 					inputTick = 0;
 					updateGui((byte) 0);
@@ -175,10 +179,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				if(addMetal(mType, ((ISmeltable)storage[0].getItem()).GetMetalReturnAmount(storage[0])))
 				{
 					temperature *= 0.9f;
-					
-					if(storage[0].stackSize <= 1)
+
+					if(storage[0].stackSize <= 1) {
 						storage[0] = null;
-					
+					}
+
 					updateGui((byte) 0);
 				}
 			}
@@ -201,13 +206,16 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				}
 				outputTick = 0;
 			}
-			
-			if(storage[1] != null && storage[1].stackSize <= 0)
+
+			if(storage[1] != null && storage[1].stackSize <= 0) {
 				storage[1].stackSize = 1;
-			if(inputTick > 5)
+			}
+			if(inputTick > 5) {
 				inputTick = 0;
-			if(outputTick >= 3)
+			}
+			if(outputTick >= 3) {
 				outputTick = 0;
+			}
 		}
 	}
 
@@ -215,10 +223,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	{
 		if(getTotalMetal()+amt <= 3000 && m.Name != "Unknown")
 		{
-			if(metals.containsKey(m.Name))
+			if(metals.containsKey(m.Name)) {
 				((MetalPair)metals.get(m.Name)).amount += amt;
-			else
+			} else {
 				metals.put(m.Name, new MetalPair(m, amt));
+			}
 
 			updateCurrentAlloy();
 
@@ -276,9 +285,9 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
 		byte id = inStream.readByte();
-		if(id == 0 && inStream.available() > 0)
+		if(id == 0 && inStream.available() > 0) {
 			this.currentAlloy = new Alloy().fromPacket(inStream);
-		else if(id == 1)
+		} else if(id == 1)
 		{
 			currentAlloy.outputAmount = inStream.readInt();
 		}
@@ -317,8 +326,9 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
-		if(storage[i] != null)
+		if(storage[i] != null) {
 			storage[i].stackSize -= j;
+		}
 		return storage[i];
 	}
 
@@ -403,9 +413,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public int getOutCountScaled(int length)
 	{
-		if(currentAlloy != null)
+		if(currentAlloy != null) {
 			return (this.currentAlloy.outputAmount * length)/3000;
-		else return 0;
+		} else {
+			return 0;
+		}
 	}
 
 	public int getTemperatureScaled(int s)
@@ -415,7 +427,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	public void updateGui(byte id)
 	{
-		if(!worldObj.isRemote)
+		if(!worldObj.isRemote) {
 			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(id), 5);
+		}
 	}
 }

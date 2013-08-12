@@ -11,7 +11,7 @@ import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import TFC.TFCItems;
 import TFC.API.Enums.EnumSize;
-import TFC.Core.Helper;
+import TFC.Core.Util.Helper;
 import TFC.Items.ItemTerra;
 
 public class ItemCustomBlueSteelBucket extends ItemTerra

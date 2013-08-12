@@ -38,8 +38,9 @@ public class CraftingHandler implements ICraftingHandler
 					itemstack.itemID == TFCItems.RiceGrain.itemID)
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Knives);
-				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4)))
+				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Straw,4))) {
 					entityplayer.dropItem(TFCItems.Straw.itemID,4);
+				}
 			}
 			else if(itemstack.itemID == TFCBlocks.WoodSupportH.blockID || itemstack.itemID == TFCBlocks.WoodSupportV.blockID)
 			{
@@ -64,15 +65,16 @@ public class CraftingHandler implements ICraftingHandler
 						}
 						if(true)//iinventory.getStackInSlot(i).itemID == TFCItems.TerraLeather.shiftedIndex)
 						{
-							if(iinventory.getStackInSlot(i).stackSize == 1)
+							if(iinventory.getStackInSlot(i).stackSize == 1) {
 								iinventory.setInventorySlotContents(i, null);
-							else
+							} else
 							{
 								ItemStack is = iinventory.getStackInSlot(i); is.stackSize-=1;
-								if(is.stackSize > 0)
+								if(is.stackSize > 0) {
 									iinventory.setInventorySlotContents(i, is);
+								}
 							}
-							
+
 							openGui = true;
 							//itemstack.stackSize = -1;
 						}
@@ -107,7 +109,7 @@ public class CraftingHandler implements ICraftingHandler
 						iinventory.getStackInSlot(i).itemID = TFCItems.Limewater.itemID;
 					}
 				}
-				
+
 			}
 			else if(itemstack.itemID == TFCItems.Limewater.itemID)
 			{
@@ -122,14 +124,17 @@ public class CraftingHandler implements ICraftingHandler
 						iinventory.getStackInSlot(i).itemID = TFCItems.Mortar.itemID;
 					}
 				}
-				
+
 			}
 			else if(itemstack.getItem() instanceof ItemIngot)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1)))
-					entityplayer.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
+				if(entityplayer.worldObj.rand.nextInt(20) != 0 && 
+						!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1))) 
+				{
+					entityplayer.dropItem(TFCItems.CeramicMold.itemID, 1);
+				}
 			}
-			
+
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 
 			{             
 				if(iinventory.getStackInSlot(i) == null) 
@@ -138,19 +143,21 @@ public class CraftingHandler implements ICraftingHandler
 				}
 				if(iinventory.getStackInSlot(i).itemID == TFCItems.WoodenBucketWater.itemID)
 				{
-					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1)))
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.WoodenBucketEmpty,1))) {
 						entityplayer.dropItem(TFCItems.WoodenBucketEmpty.itemID, 1);
+					}
 				}
 				else if(iinventory.getStackInSlot(i).itemID == TFCItems.RedSteelBucketWater.itemID)
 				{
-					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1)))
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketEmpty,1))) {
 						entityplayer.dropItem(TFCItems.RedSteelBucketEmpty.itemID, 1);
+					}
 				}
-						
+
 			}
 		}
 	}
-	
+
 	public static void HandleItem(EntityPlayer entityplayer, IInventory iinventory, Item[] Items)
 	{
 		ItemStack item = null;
@@ -179,8 +186,9 @@ public class CraftingHandler implements ICraftingHandler
 				{
 					iinventory.setInventorySlotContents(index, item);
 					iinventory.getStackInSlot(index).stackSize = iinventory.getStackInSlot(index).stackSize + 1;
-					if(iinventory.getStackInSlot(index).stackSize > 2)
+					if(iinventory.getStackInSlot(index).stackSize > 2) {
 						iinventory.getStackInSlot(index).stackSize = 2;
+					}
 				}
 			}
 		}
@@ -189,7 +197,7 @@ public class CraftingHandler implements ICraftingHandler
 	@Override
 	public void onSmelting(EntityPlayer player, ItemStack item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

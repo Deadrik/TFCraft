@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import TFC.TerraFirmaCraft;
-import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
+import TFC.Core.Util.Helper;
 import TFC.Items.Tools.ItemChisel;
 import TFC.Items.Tools.ItemHammer;
 import TFC.TileEntities.TileEntityPartial;

@@ -15,8 +15,8 @@ import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
-import TFC.Core.Helper;
 import TFC.Core.TFC_Core;
+import TFC.Core.Util.Helper;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityPottery;
 

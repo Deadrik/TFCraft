@@ -23,8 +23,8 @@ import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.Helper;
 import TFC.Core.TFC_Settings;
+import TFC.Core.Util.Helper;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
