@@ -11,7 +11,9 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.Containers.Slots.SlotBlocked;
 import TFC.Containers.Slots.SlotMoldTool;
+import TFC.Containers.Slots.SlotMoldTool2;
 import TFC.Core.CraftingManagerTFC;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Items.ItemMeltedMetal;
@@ -69,7 +71,7 @@ public class ContainerMold extends ContainerTFC {
 
 	protected void layoutContainer(IInventory playerInventory, int xSize, int ySize) {
 		this.addSlotToContainer(new SlotMoldTool(containerInv, 0, 41, 17));
-		this.addSlotToContainer(new SlotMoldTool(containerInv, 1, 62, 17));
+		this.addSlotToContainer(new SlotMoldTool2(containerInv, 1, 62, 17));
 		this.addSlotToContainer(new SlotBlocked(craftResult, 0, 116, 17));
 
 		int row;
@@ -93,6 +95,28 @@ public class ContainerMold extends ContainerTFC {
 		if(craftResult.getStackInSlot(0) == null)
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+
+			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null)
+			{
+				if(containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal && 
+						containerInv.getStackInSlot(1).getItem().itemID == TFCItems.CeramicMold.itemID && 
+						containerInv.getStackInSlot(1).getItemDamage() == 1 &&
+						TFC_ItemHeat.getIsLiquid(containerInv.getStackInSlot(0)))
+				{
+					ItemStack is = containerInv.getStackInSlot(0).copy();
+					is.setItemDamage(100);
+					containerInv.setInventorySlotContents(1,is);
+					pi.moldTransferTimer = 100;
+				}
+				else if(containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal && 
+						containerInv.getStackInSlot(1).getItem() instanceof ItemMeltedMetal && 
+						containerInv.getStackInSlot(0).getItem().itemID == containerInv.getStackInSlot(1).getItem().itemID && 
+						containerInv.getStackInSlot(1).getItemDamage() != 0)
+				{
+					pi.moldTransferTimer = 100;
+				}
+			}
+
 			if(containerInv.getStackInSlot(1) != null && pi.moldTransferTimer < 100) {
 				pi.moldTransferTimer++;
 			}
@@ -104,8 +128,24 @@ public class ContainerMold extends ContainerTFC {
 			if(containerInv.getStackInSlot(0) == null || containerInv.getStackInSlot(1) == null) {
 				pi.moldTransferTimer = 1000;
 			}
+			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100 &&
+					containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal && 
+					containerInv.getStackInSlot(1).getItem() instanceof ItemMeltedMetal)
+			{
+				if(containerInv.getStackInSlot(0).getItem().itemID == containerInv.getStackInSlot(1).getItem().itemID && containerInv.getStackInSlot(1).getItemDamage() != 0)
+				{
+					int s0 = containerInv.getStackInSlot(0).getItemDamage();
+					int s1 = containerInv.getStackInSlot(1).getItemDamage();
 
-			if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100 && CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world) != null)
+					containerInv.getStackInSlot(0).setItemDamage(s0+1);
+					containerInv.getStackInSlot(1).setItemDamage(s1-1);
+					if(containerInv.getStackInSlot(0).getItemDamage() == containerInv.getStackInSlot(0).getMaxDamage())
+					{
+						containerInv.setInventorySlotContents(0, new ItemStack(TFCItems.CeramicMold, 1, 1));
+					}
+				}
+			}
+			else if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100 && CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world) != null)
 			{
 				ItemStack is = CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world);
 				is.setTagCompound(containerInv.getStackInSlot(1).stackTagCompound);
@@ -113,82 +153,42 @@ public class ContainerMold extends ContainerTFC {
 				containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.CeramicMold, 1, 1));
 				containerInv.setInventorySlotContents(0, null);
 			}
-			else if(containerInv.getStackInSlot(0) != null && containerInv.getStackInSlot(1) != null && pi.moldTransferTimer == 100)
-			{
-				if(containerInv.getStackInSlot(0).getItem() instanceof ItemMeltedMetal && 
-						containerInv.getStackInSlot(1).getItem() instanceof ItemMeltedMetal)
-				{
-					if(containerInv.getStackInSlot(0).getItem().itemID == containerInv.getStackInSlot(1).getItem().itemID)
-					{
-						int s0 = 100-containerInv.getStackInSlot(0).getItemDamage();
-						int s1 = 100-containerInv.getStackInSlot(1).getItemDamage();
-						int total = s0 + s1;
-						if(total <= 100)
-						{
-							ItemStack is = containerInv.getStackInSlot(0).copy();
-							is.setItemDamage(100-total);
-							craftResult.setInventorySlotContents(0, is);
-							containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.CeramicMold, 1));
-							containerInv.setInventorySlotContents(0, null);
-						}
-						else
-						{
-							ItemStack is = containerInv.getStackInSlot(0).copy();
-							is.setItemDamage(0);
-							craftResult.setInventorySlotContents(0, is);
-
-							is = containerInv.getStackInSlot(0).copy();
-							is.setItemDamage(100-(total-100));
-							containerInv.setInventorySlotContents(1, is);
-
-							containerInv.setInventorySlotContents(0, null);
-
-						}
-					}
-				}
-			}
 		}
 	}
 
-	//Removed because I don't write shift click code. This needs to be worked on. -Bioxx
-	/*@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex) {
-		ItemStack returnedStack = null;
-		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
-
-		if (clickedSlot != null
-			&& clickedSlot.getHasStack()
-			&& (clickedSlot.getStack().getItem() instanceof ItemTerraFood || clickedSlot.getStack().itemID == Item.bowlEmpty.itemID))
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int clickedSlot)
+	{
+		Slot slot = (Slot)inventorySlots.get(clickedSlot);
+		Slot slot1 = (Slot)inventorySlots.get(0);
+		if(slot != null && slot.getHasStack())
 		{
-			ItemStack clickedStack = clickedSlot.getStack();
-			returnedStack = clickedStack.copy();
-
-			if (clickedIndex < 6)
+			ItemStack itemstack1 = slot.getStack();
+			if(clickedSlot <= 1)
 			{
-				if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), true)) {
+				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
+				{
 					return null;
 				}
+				slot.putStack(null);
 			}
-			else if (clickedIndex >= 6 && clickedIndex < inventorySlots.size()) {
-				if (!this.mergeItemStack(clickedStack, 0, 6, false)) {
+			else
+			{
+				if(slot1.getHasStack())
+				{
 					return null;
-				}
+				}                     
+				slot1.putStack(itemstack1.copy());                          
+				itemstack1.stackSize--;
 			}
-			else if (!this.mergeItemStack(clickedStack, 6, inventorySlots.size(), false)) {
-				return null;
+			if(itemstack1.stackSize == 0)
+			{
+				slot.putStack(null);
+			} else
+			{
+				slot.onSlotChanged();
 			}
-
-			if (clickedStack.stackSize == 0) {
-				clickedSlot.putStack((ItemStack)null);
-			} else {
-				clickedSlot.onSlotChanged();
-			}
-
-			if (clickedStack.stackSize == returnedStack.stackSize) {
-				return null;
-			}
-			clickedSlot.onPickupFromSlot(player, clickedStack);
 		}
-		return returnedStack;
-	}*/
+		return null;
+	}
 }
