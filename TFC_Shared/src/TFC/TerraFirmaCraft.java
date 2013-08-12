@@ -114,7 +114,7 @@ public class TerraFirmaCraft
 		proxy.registerTileEntities(true);
 
 		//Register Sound Handler (Client only)
-		//proxy.registerSoundHandler();
+		proxy.registerSoundHandler();
 	}
 
 	@EventHandler
