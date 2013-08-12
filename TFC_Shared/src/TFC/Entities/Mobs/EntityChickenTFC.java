@@ -262,6 +262,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
+	public boolean getInLove()
+	{
+		return inLove;
+	}
+
+	@Override
 	public void setInLove(boolean b) 
 	{
 		this.inLove = b;
