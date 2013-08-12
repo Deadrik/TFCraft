@@ -3,31 +3,21 @@ package TFC.Render;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderCow;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import TFC.Reference;
+import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
+import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityCowTFC;
 
 public class RenderCowTFC extends RenderCow
 {
 	private static final ResourceLocation CowTex = new ResourceLocation("textures/entity/cow/cow.png");
-	private static final ResourceLocation BullTex = new ResourceLocation(Reference.ModID, "mob/cow.png");
+	private static final ResourceLocation BullTex = new ResourceLocation(Reference.ModID, "mob/bull.png");
 
 	public RenderCowTFC(ModelBase par1ModelBase, float par2)
 	{
 		super(par1ModelBase, par2);
-	}
-
-	public void renderCow(EntityCowTFC par1EntityCow, double par2, double par4, double par6, float par8, float par9)
-	{
-		super.doRenderLiving(par1EntityCow, par2, par4, par6, par8, par9);
-	}
-
-	@Override
-	public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-	{
-		this.renderCow((EntityCowTFC)par1EntityLiving, par2, par4, par6, par8, par9);
 	}
 
 	/**
@@ -39,7 +29,8 @@ public class RenderCowTFC extends RenderCow
 	@Override
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
-		this.renderCow((EntityCowTFC)par1Entity, par2, par4, par6, par8, par9);
+		this.shadowSize = 0.35f + (TFC_Core.getPercentGrown((IAnimal)par1Entity)*0.35f);
+		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
 
 	protected ResourceLocation getTexture(EntityCowTFC entity)

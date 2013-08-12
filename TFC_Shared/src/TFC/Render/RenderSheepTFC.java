@@ -3,7 +3,6 @@ package TFC.Render;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderSheep;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 
@@ -55,6 +54,6 @@ public class RenderSheepTFC extends RenderSheep
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
 		this.shadowSize = 0.35f + (TFC_Core.getPercentGrown((IAnimal)par1Entity)*0.35f);
-		this.doRenderLiving((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
+		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
 }

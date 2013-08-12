@@ -41,11 +41,8 @@ import TFC.WorldGen.Generators.WorldGenCaveDecor;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenOreSurface;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -72,7 +69,7 @@ public class TerraFirmaCraft
 
 	}
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		instance = this;
@@ -120,7 +117,7 @@ public class TerraFirmaCraft
 		//proxy.registerSoundHandler();
 	}
 
-	@Init
+	@EventHandler
 	public void initialize(FMLInitializationEvent evt)
 	{
 		//Add Item Name Localizations
@@ -194,13 +191,13 @@ public class TerraFirmaCraft
 		TFC_Climate.initCache();
 	}
 
-	@PostInit
+	@EventHandler
 	public void modsLoaded(FMLPostInitializationEvent evt) 
 	{
 
 	}
 
-	@ServerStarting
+	@EventHandler
 	public void serverStarting(FMLServerStartingEvent evt)
 	{
 		evt.registerServerCommand(new GetBioTempCommand());
