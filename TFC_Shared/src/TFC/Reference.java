@@ -11,5 +11,5 @@ public class Reference
 	public static final String CLIENT_PROXY_CLASS = "TFC.ClientProxy";
 
 	public static final String AssetPath = "/assets/" + ModID + "/";
-	public static final String AssetPathGui = "/textures/gui/";
+	public static final String AssetPathGui = "textures/gui/";
 }
