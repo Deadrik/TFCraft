@@ -51,10 +51,10 @@ public class RenderTerraJavelin extends Render
 			GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
 			GL11.glNormal3f(0.0F, 0.0F, f10);
 			tessellator.startDrawingQuads();
-			tessellator.addVertexWithUV(-35.0D, -2.0D, 0.0D, f2, f4);
+			tessellator.addVertexWithUV(-28.0D, -2.0D, 0.0D, f2, f4);
 			tessellator.addVertexWithUV(8.0D, -2.0D, 0.0D, f3, f4);
 			tessellator.addVertexWithUV(8.0D, 2.0D, 0.0D, f3, f5);
-			tessellator.addVertexWithUV(-35.0D, 2.0D, 0.0D, f2, f5);
+			tessellator.addVertexWithUV(-28.0D, 2.0D, 0.0D, f2, f5);
 			tessellator.draw();
 		}
 

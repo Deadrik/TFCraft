@@ -25,7 +25,7 @@ public class ContainerCrucible extends Container
 
 		addSlotToContainer(new Slot(tileentityforge, 1, 152, 90));
 
-		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 112, 8, 170);
+		PlayerInventory.buildInventoryLayout(this, inventoryplayer, 8, 112);
 
 		te.updateGui((byte) 0);
 	}
