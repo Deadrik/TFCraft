@@ -4,6 +4,7 @@
 package TFC;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
@@ -120,6 +121,10 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void initialize(FMLInitializationEvent evt)
 	{
+		GuiIngameForge.renderHealth = false;
+		GuiIngameForge.renderArmor = false;
+		GuiIngameForge.renderFood = false;
+
 		//Add Item Name Localizations
 		Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
 		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);

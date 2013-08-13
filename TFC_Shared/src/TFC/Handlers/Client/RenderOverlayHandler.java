@@ -23,21 +23,20 @@ import TFC.Items.Tools.ItemCustomHoe;
 
 public class RenderOverlayHandler 
 {
+	public static ResourceLocation tfcicons = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
+
 	@ForgeSubscribe
 	public void render(RenderGameOverlayEvent.Pre event)
 	{
-		if(event.type == ElementType.HEALTH || event.type == ElementType.FOOD)
-		{
-			event.setCanceled(true);
-		}
+
 	}
 
 	@ForgeSubscribe
 	public void render(RenderGameOverlayEvent.Post event)
 	{
-		if(event.type == ElementType.HEALTH || event.type == ElementType.FOOD)
+		if(event.type != ElementType.ALL)
 		{
-			event.setCanceled(true);
+			return;
 		}
 
 		ScaledResolution sr = event.resolution;
@@ -51,9 +50,7 @@ public class RenderOverlayHandler
 		{
 			//Draw Health
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
-			Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png"));
+			Minecraft.getMinecraft().func_110434_K().func_110577_a(tfcicons);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = Minecraft.getMinecraft().thePlayer.func_110138_aP();
 			float percentHealth = Minecraft.getMinecraft().thePlayer.func_110143_aJ()/maxHealth;
@@ -70,17 +67,14 @@ public class RenderOverlayHandler
 			float percentWater = waterLevel/foodstats.getMaxWater(Minecraft.getMinecraft().thePlayer);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 18, 90, 5);
 			if(playerclient.guishowFoodRestoreAmount)
 			{
 				float percentFood2 = Math.min(percentFood + playerclient.guiFoodRestoreAmount/100f, 1);
 				GL11.glColor4f(0.0F, 0.6F, 0.0F, 0.3F);
-				//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 23, (int) (90*(percentFood2)), 5);
 			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			//GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft().renderEngine.getTexture("/bioxx/icons.png"));
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 23, (int) (90*percentFood), 5);
 
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 28, 90, 5);
@@ -100,7 +94,7 @@ public class RenderOverlayHandler
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 			}
 		}
-		//Minecraft.getMinecraft().renderEngine.resetBoundTexture();
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/widgets.png"));
 	}
 
 	@ForgeSubscribe
