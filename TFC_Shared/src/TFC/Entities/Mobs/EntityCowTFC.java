@@ -118,7 +118,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
 		super.onLivingUpdate();
-		TFC_Core.PreventEntityDataUpdate = true;
+		TFC_Core.PreventEntityDataUpdate = false;
 
 		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
@@ -220,6 +220,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer player)
 	{
+		if(!worldObj.isRemote){
+			player.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+		}
 		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
 		{
 			ItemStack var2 = player.inventory.getCurrentItem();
@@ -230,7 +233,30 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				return true;
 			}
 		}
-		return super.interact(player);
+		ItemStack itemstack = player.inventory.getCurrentItem();
+
+        if (itemstack != null && this.isBreedingItem(itemstack) && this.isAdult() && super.inLove <= 0)
+        {
+            if (!player.capabilities.isCreativeMode)
+            {
+                --itemstack.stackSize;
+
+                if (itemstack.stackSize <= 0)
+                {
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+                }
+            }
+
+            this.func_110196_bT();
+            super.inLove = 0;
+            return true;
+        }
+        else
+        {
+        	super.inLove = 1;
+    		return super.interact(player);
+        }
+		
 	}
 
 	@Override

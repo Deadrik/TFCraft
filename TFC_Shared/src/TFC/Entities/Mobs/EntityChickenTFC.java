@@ -123,7 +123,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
 		super.onLivingUpdate();
-		TFC_Core.PreventEntityDataUpdate = true;
+		TFC_Core.PreventEntityDataUpdate = false;
 
 		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{

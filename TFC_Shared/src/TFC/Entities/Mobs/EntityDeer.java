@@ -126,7 +126,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
 		super.onLivingUpdate();
-		TFC_Core.PreventEntityDataUpdate = true;
+		TFC_Core.PreventEntityDataUpdate = false;
 	}
 
 	@Override
@@ -305,10 +305,18 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
 	}
 
+	/*
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
 		return new EntityDeer(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
+	}*/
+	
+	//Commented out old method, the third variable should be the size modifier of the father, not the mother
+	@Override
+	public EntityAgeable createChild(EntityAgeable entityageable) 
+	{
+		return new EntityDeer(worldObj, this, mateSizeMod);
 	}
 
 	@Override

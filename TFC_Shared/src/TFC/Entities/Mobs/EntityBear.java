@@ -258,7 +258,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		TFC_Core.PreventEntityDataUpdate = true;
 		super.onLivingUpdate();
-		TFC_Core.PreventEntityDataUpdate = true;
+		TFC_Core.PreventEntityDataUpdate = false;
 		//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
 		if (!worldObj.isRemote && !field_25052_g && !hasPath () && onGround)
 		{
