@@ -344,6 +344,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
+	public boolean isChild()
+	{
+		return !isAdult();
+	}
+
+	@Override
 	public EnumDamageType GetDamageType() {
 		return EnumDamageType.SLASHING;
 	}

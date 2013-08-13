@@ -204,6 +204,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	}
 
 	@Override
+	public boolean isChild()
+	{
+		return !isAdult();
+	}
+
+	@Override
 	public GenderEnum getGender() 
 	{
 		return GenderEnum.genders[sex];

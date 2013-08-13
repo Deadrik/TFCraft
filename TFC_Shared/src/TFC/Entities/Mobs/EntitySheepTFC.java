@@ -279,6 +279,12 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	}
 
 	@Override
+	public boolean isChild()
+	{
+		return !isAdult();
+	}
+
+	@Override
 	public GenderEnum getGender() 
 	{
 		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
