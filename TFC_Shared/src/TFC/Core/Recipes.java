@@ -170,7 +170,7 @@ public class Recipes
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 34)});
 
 		// Stone Bricks
-		for(int i = 0; i < 13; i++)
+		for(int i = 0; i < Chisels.length; i++)
 		{			
 			for(int j = 0; j < Global.STONE_IGIN.length; j++)
 			{
