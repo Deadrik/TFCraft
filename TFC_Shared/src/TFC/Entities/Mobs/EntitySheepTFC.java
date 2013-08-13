@@ -65,9 +65,15 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+
+		//	We hijack the growingAge to hold the day of birth rather
+		//	than number of ticks to next growth event. We want spawned
+		//	animals to be adults, so we set their birthdays far enough back
+		//	in time such that they reach adulthood now.
+		//
 		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 	public EntitySheepTFC(World par1World,IAnimal mother, float F_size)
 	{
@@ -77,6 +83,10 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.posZ = ((EntityLivingBase)mother).posZ;
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + F_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+
+		//	We hijack the growingAge to hold the day of birth rather
+		//	than number of ticks to next growth event.
+		//
 		this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
@@ -149,7 +159,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		}
 
 		/**
-		 * This Cancels out the growingAge from EntityAgeable
+		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
 		int age = this.getGrowingAge();
 		super.onLivingUpdate();
@@ -311,7 +321,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean isAdult() 
 	{
-		return getBirthDay()+getNumberOfDaysToAdult() < TFC_Time.getTotalDays();
+		return getBirthDay()+getNumberOfDaysToAdult() <= TFC_Time.getTotalDays();
 	}
 
 	@Override
