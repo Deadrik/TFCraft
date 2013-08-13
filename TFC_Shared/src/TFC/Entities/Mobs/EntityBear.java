@@ -338,6 +338,12 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	}
 
 	@Override
+	public void setGrowingAge(int par1)
+	{
+		this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+	}
+
+	@Override
 	public EnumDamageType GetDamageType() {
 		return EnumDamageType.SLASHING;
 	}

@@ -194,6 +194,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	}
 
 	@Override
+	public void setGrowingAge(int par1)
+	{
+		this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+	}
+
+	@Override
 	public GenderEnum getGender() 
 	{
 		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];

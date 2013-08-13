@@ -163,7 +163,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		size_mod = nbt.getFloat ("Size Modifier");
 		hunger = nbt.getInteger ("Hunger");
 		mateSizeMod = nbt.getFloat("MateSize");
-		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
+		this.setGrowingAge(nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -195,6 +195,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 				this.dropItem(Item.chickenRaw.itemID, 1);
 			}
 		}
+	}
+
+	@Override
+	public void setGrowingAge(int par1)
+	{
+		this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 	}
 
 	@Override
