@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.API.Entities.IAnimal;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
 
@@ -108,7 +109,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			}
 		}*/
 
+		TFC_Core.PreventEntityDataUpdate = true;
 		super.onLivingUpdate();
+		TFC_Core.PreventEntityDataUpdate = true;
 	}
 
 	@Override
@@ -270,7 +273,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		if(!TFC_Core.PreventEntityDataUpdate) {
+			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		}
 	}
 
 	@Override

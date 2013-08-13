@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumDamageType;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobDamage;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
@@ -243,7 +244,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void onLivingUpdate ()
 	{
-		super.onLivingUpdate ();
+		TFC_Core.PreventEntityDataUpdate = true;
+		super.onLivingUpdate();
+		TFC_Core.PreventEntityDataUpdate = true;
 		//		float t = (1.0F-(getGrowingAge()/(TFC_Time.getYearRatio() * adultAge * -TFC_Settings.dayLength)));
 		if (!worldObj.isRemote && !field_25052_g && !hasPath () && onGround)
 		{
@@ -340,7 +343,9 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		if(!TFC_Core.PreventEntityDataUpdate) {
+			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		}
 	}
 
 	@Override

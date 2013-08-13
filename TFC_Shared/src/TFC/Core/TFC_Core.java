@@ -36,6 +36,8 @@ public class TFC_Core
 {
 	public enum Direction{PosX,PosZ,NegX,NegZ,None,PosXPosZ,PosXNegZ,NegXPosZ,NegXNegZ,NegY,PosY}
 
+	public static boolean PreventEntityDataUpdate = false;
+
 	@SideOnly(Side.CLIENT)
 	public static int getMouseX()
 	{

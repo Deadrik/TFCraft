@@ -139,9 +139,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		/**
 		 * This Cancels out the growingAge from EntityAgeable
 		 * */
-		int age = this.getGrowingAge();
+		TFC_Core.PreventEntityDataUpdate = true;
 		super.onLivingUpdate();
-		this.setGrowingAge(age);
+		TFC_Core.PreventEntityDataUpdate = true;
 
 		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
 		{
@@ -311,7 +311,9 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public void setGrowingAge(int par1)
 	{
-		this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		if(!TFC_Core.PreventEntityDataUpdate) {
+			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+		}
 	}
 
 	@Override
