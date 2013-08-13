@@ -44,7 +44,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	private int numAirBlocks;
 
 	public String OreType;
-	
+
 	//We dont save this since its purpose is to just mkae certain parts of the code not run every single tick
 	private int slowCounter = 0;
 
@@ -86,8 +86,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		{
 			float c = (float)charcoalCount/(float)oreCount;
 			mod = (mod * c)*3;
-			if(mod > 1)
+			if(mod > 1) {
 				mod = 1;
+			}
 		}
 
 		if(fireItemStacks[i]!= null && fireItemStacks[i].hasTagCompound())
@@ -175,7 +176,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	{
 		HeatRegistry manager = HeatRegistry.getInstance();
 		Random R = new Random();
-		if(fireItemStacks[i] != null)
+		TECrucible te = (TECrucible) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+		if(fireItemStacks[i] != null && te != null)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			if(index != null && inputItemTemps[i] >= index.meltTemp)
@@ -193,12 +195,11 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					charcoalCount--;
 				}
 
-				TECrucible te = (TECrucible) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
-				
-				ItemStack output = index.getOutput(R);
+				ItemStack output = index.getOutput(fireItemStacks[i], R);
 				Metal m = MetalRegistry.instance.getMetalFromItem(output.getItem());
-				if(m != null)
+				if(m != null) {
 					te.addMetal(m, (short)(100-output.getItemDamage()));
+				}
 				te.temperature = (int)this.fireTemperature;
 			}
 		}
@@ -321,9 +322,10 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				t*= 0.05F;
 				t = 1 - t;
 			}
-			if(this.input[1] == null && airFromBellows > 0)
+			if(this.input[1] == null && airFromBellows > 0) {
 				airFromBellows = 0;
-			
+			}
+
 			float bAir = airFromBellows*(1+airFromBellowsTime/120);
 
 			AddedAir = (numAirBlocks+bAir)/25/16;
@@ -420,8 +422,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		{
 			return false;
 		}
-		if(input[1] == null)
+		if(input[1] == null) {
 			return false;
+		}
 
 		return true;
 	}
@@ -497,8 +500,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			{
 				ItemStack output = index.getOutput(worldObj.rand);
 
-				if(outMetal1 == null)
+				if(outMetal1 == null) {
 					outMetal1 = output;
+				}
 			}
 		}
 
@@ -524,12 +528,14 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						outMetal1Count = 0;
 					}  
 
-					if(outMetal1 != null)
+					if(outMetal1 != null) {
 						input[0] = outMetal1.copy();
+					}
 				}
 
-				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID)
+				if(input[0] != null && input[0].itemID != TFCItems.CeramicMold.itemID) {
 					input[0].setItemDamage(100-dam);
+				}
 
 				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
 
@@ -554,8 +560,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					outMetal1Count -= j;
 				}
 
-				if(outMetal1Count == 0)
-					outMetal1 = null; 
+				if(outMetal1Count == 0) {
+					outMetal1 = null;
+				} 
 
 				TFC_ItemHeat.SetTemperature(input[0], fireTemperature);
 
@@ -581,7 +588,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	{
 		numAirBlocks = n;
 	}
-	
+
 	public void CreateTuyereBlock()
 	{
 		/**
@@ -592,7 +599,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		{
 			//get the direction that the bloomery is facing
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
-			
+
 			if((meta == 0 || meta == 2) && worldObj.getBlockId(xCoord+1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID && 
 					worldObj.getBlockId(xCoord-1, yCoord, zCoord) != TFCBlocks.Tuyere.blockID)
 			{
@@ -648,10 +655,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		{
 			CreateTuyereBlock();
 
-			if(oreCount < 0)
+			if(oreCount < 0) {
 				oreCount = 0;
-			if(charcoalCount < 0)
+			}
+			if(charcoalCount < 0) {
 				charcoalCount = 0;
+			}
 
 			//Do the funky math to find how many molten blocks should be placed
 			float count = charcoalCount+oreCount;
@@ -683,8 +692,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					xCoord, yCoord+moltenCount, zCoord, 
 					xCoord+1, yCoord+moltenCount+1.1, zCoord+1));
 
-			if(moltenCount == 0)
+			if(moltenCount == 0) {
 				moltenCount = 1;
+			}
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
 			if (list != null && !list.isEmpty() && isStackValid(xCoord, yCoord+moltenCount, zCoord))
 			{
@@ -722,9 +732,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 						}
 						if(c == 0) {
 							entity.setDead();
-						}
-						else
-							entity.getEntityItem().stackSize = c; 
+						} else {
+							entity.getEntityItem().stackSize = c;
+						} 
 					}
 				}
 			}
@@ -757,8 +767,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				//Only allow the ore to smelt if there is a valid Tuyere associated with the furnace
 				if(input[1] != null)
 				{
-					if(RemoveOre())
+					if(RemoveOre()) {
 						input[1].setItemDamage(input[1].getItemDamage()+1);
+					}
 				}
 			}
 			slowCounter++;
@@ -870,8 +881,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 
 	public void updateGui()
 	{
-		if(!worldObj.isRemote)
+		if(!worldObj.isRemote) {
 			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+		}
 	}
 
 	@Override
