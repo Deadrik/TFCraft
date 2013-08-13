@@ -196,7 +196,6 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerToolClasses() {
 		//pickaxes
-		MinecraftForge.setToolClass(TFCItems.BismuthPick, "pickaxe", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzePick, "pickaxe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackBronzePick, "pickaxe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackSteelPick, "pickaxe", 5);
@@ -205,16 +204,12 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.CopperPick, "pickaxe", 1);
 		MinecraftForge.setToolClass(TFCItems.WroughtIronPick, "pickaxe", 3);
 		MinecraftForge.setToolClass(TFCItems.RedSteelPick, "pickaxe", 6);
-		MinecraftForge.setToolClass(TFCItems.RoseGoldPick, "pickaxe", 2);
 		MinecraftForge.setToolClass(TFCItems.SteelPick, "pickaxe", 4);
-		MinecraftForge.setToolClass(TFCItems.TinPick, "pickaxe", 1);
-		MinecraftForge.setToolClass(TFCItems.ZincPick, "pickaxe", 1);
 		//shovels
 		MinecraftForge.setToolClass(TFCItems.IgInShovel, "shovel", 1);
 		MinecraftForge.setToolClass(TFCItems.IgExShovel, "shovel", 1);
 		MinecraftForge.setToolClass(TFCItems.SedShovel, "shovel", 1);
 		MinecraftForge.setToolClass(TFCItems.MMShovel, "shovel", 1);
-		MinecraftForge.setToolClass(TFCItems.BismuthShovel, "shovel", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzeShovel, "shovel", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackBronzeShovel, "shovel", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackSteelShovel, "shovel", 5);
@@ -223,16 +218,12 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.CopperShovel, "shovel", 1);
 		MinecraftForge.setToolClass(TFCItems.WroughtIronShovel, "shovel", 3);
 		MinecraftForge.setToolClass(TFCItems.RedSteelShovel, "shovel", 6);
-		MinecraftForge.setToolClass(TFCItems.RoseGoldShovel, "shovel", 2);
 		MinecraftForge.setToolClass(TFCItems.SteelShovel, "shovel", 4);
-		MinecraftForge.setToolClass(TFCItems.TinShovel, "shovel", 1);
-		MinecraftForge.setToolClass(TFCItems.ZincShovel, "shovel", 1);
 		//Axes
 		MinecraftForge.setToolClass(TFCItems.IgInAxe, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.IgExAxe, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.SedAxe, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.MMAxe, "axe", 1);
-		MinecraftForge.setToolClass(TFCItems.BismuthAxe, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzeAxe, "axe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackBronzeAxe, "axe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackSteelAxe, "axe", 5);
@@ -241,12 +232,8 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.CopperAxe, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.WroughtIronAxe, "axe", 3);
 		MinecraftForge.setToolClass(TFCItems.RedSteelAxe, "axe", 6);
-		MinecraftForge.setToolClass(TFCItems.RoseGoldAxe, "axe", 2);
 		MinecraftForge.setToolClass(TFCItems.SteelAxe, "axe", 4);
-		MinecraftForge.setToolClass(TFCItems.TinAxe, "axe", 1);
-		MinecraftForge.setToolClass(TFCItems.ZincAxe, "axe", 1);
 
-		MinecraftForge.setToolClass(TFCItems.BismuthSaw, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzeSaw, "axe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackBronzeSaw, "axe", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackSteelSaw, "axe", 5);
@@ -255,13 +242,9 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.CopperSaw, "axe", 1);
 		MinecraftForge.setToolClass(TFCItems.WroughtIronSaw, "axe", 3);
 		MinecraftForge.setToolClass(TFCItems.RedSteelSaw, "axe", 6);
-		MinecraftForge.setToolClass(TFCItems.RoseGoldSaw, "axe", 2);
 		MinecraftForge.setToolClass(TFCItems.SteelSaw, "axe", 4);
-		MinecraftForge.setToolClass(TFCItems.TinSaw, "axe", 1);
-		MinecraftForge.setToolClass(TFCItems.ZincSaw, "axe", 1);
 
 		MinecraftForge.setToolClass(TFCItems.StoneHammer, "hammer", 1);
-		MinecraftForge.setToolClass(TFCItems.BismuthHammer, "hammer", 1);
 		MinecraftForge.setToolClass(TFCItems.BismuthBronzeHammer, "hammer", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackBronzeHammer, "hammer", 2);
 		MinecraftForge.setToolClass(TFCItems.BlackSteelHammer, "hammer", 5);
@@ -270,10 +253,7 @@ public class CommonProxy implements IGuiHandler
 		MinecraftForge.setToolClass(TFCItems.CopperHammer, "hammer", 1);
 		MinecraftForge.setToolClass(TFCItems.WroughtIronHammer, "hammer", 3);
 		MinecraftForge.setToolClass(TFCItems.RedSteelHammer, "hammer", 6);
-		MinecraftForge.setToolClass(TFCItems.RoseGoldHammer, "hammer", 2);
 		MinecraftForge.setToolClass(TFCItems.SteelHammer, "hammer", 4);
-		MinecraftForge.setToolClass(TFCItems.TinHammer, "hammer", 1);
-		MinecraftForge.setToolClass(TFCItems.ZincHammer, "hammer", 1);
 	}
 
 	public void onClientLogin()

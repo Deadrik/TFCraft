@@ -170,10 +170,6 @@ public class TFCItems
 	public static Item MMAxe;
 	public static Item MMHoe;
 
-	public static Item BismuthPick;
-	public static Item BismuthShovel;
-	public static Item BismuthAxe;
-	public static Item BismuthHoe;
 	public static Item BismuthBronzePick;
 	public static Item BismuthBronzeShovel;
 	public static Item BismuthBronzeAxe;
@@ -206,25 +202,12 @@ public class TFCItems
 	public static Item RedSteelShovel;
 	public static Item RedSteelAxe;
 	public static Item RedSteelHoe;
-	public static Item RoseGoldPick;
-	public static Item RoseGoldShovel;
-	public static Item RoseGoldAxe;
-	public static Item RoseGoldHoe;
 	public static Item SteelPick;
 	public static Item SteelShovel;
 	public static Item SteelAxe;
 	public static Item SteelHoe;
-	public static Item TinPick;
-	public static Item TinShovel;
-	public static Item TinAxe;
-	public static Item TinHoe;
-	public static Item ZincPick;
-	public static Item ZincShovel;
-	public static Item ZincAxe;
-	public static Item ZincHoe;
 
-	public static Item StoneChisel;
-	public static Item BismuthChisel;
+
 	public static Item BismuthBronzeChisel;
 	public static Item BlackBronzeChisel;
 	public static Item BlackSteelChisel;
@@ -233,16 +216,8 @@ public class TFCItems
 	public static Item CopperChisel;
 	public static Item WroughtIronChisel;
 	public static Item RedSteelChisel;
-	public static Item RoseGoldChisel;
 	public static Item SteelChisel;
-	public static Item TinChisel;
-	public static Item ZincChisel;
 
-	public static Item IgInStoneSword;
-	public static Item IgExStoneSword;
-	public static Item SedStoneSword;
-	public static Item MMStoneSword;
-	public static Item BismuthSword;
 	public static Item BismuthBronzeSword;
 	public static Item BlackBronzeSword;
 	public static Item BlackSteelSword;
@@ -251,16 +226,12 @@ public class TFCItems
 	public static Item CopperSword;
 	public static Item WroughtIronSword;
 	public static Item RedSteelSword;
-	public static Item RoseGoldSword;
 	public static Item SteelSword;
-	public static Item TinSword;
-	public static Item ZincSword;
 
 	public static Item IgInStoneMace;
 	public static Item IgExStoneMace;
 	public static Item SedStoneMace;
 	public static Item MMStoneMace; 
-	public static Item BismuthMace;
 	public static Item BismuthBronzeMace;
 	public static Item BlackBronzeMace;
 	public static Item BlackSteelMace;
@@ -269,12 +240,8 @@ public class TFCItems
 	public static Item CopperMace;
 	public static Item WroughtIronMace;
 	public static Item RedSteelMace;
-	public static Item RoseGoldMace;
 	public static Item SteelMace;
-	public static Item TinMace;
-	public static Item ZincMace;
 
-	public static Item BismuthSaw;
 	public static Item BismuthBronzeSaw;
 	public static Item BlackBronzeSaw;
 	public static Item BlackSteelSaw;
@@ -283,10 +250,7 @@ public class TFCItems
 	public static Item CopperSaw;
 	public static Item WroughtIronSaw;
 	public static Item RedSteelSaw;
-	public static Item RoseGoldSaw;
 	public static Item SteelSaw;
-	public static Item TinSaw;
-	public static Item ZincSaw;
 
 	public static Item OreChunk;
 	public static Item Logs;
@@ -322,7 +286,6 @@ public class TFCItems
 	public static Item BlueSteelJavelinHead;
 	public static Item RedSteelJavelinHead;
 
-	public static Item BismuthScythe;
 	public static Item BismuthBronzeScythe;
 	public static Item BlackBronzeScythe;
 	public static Item BlackSteelScythe;
@@ -331,12 +294,8 @@ public class TFCItems
 	public static Item CopperScythe;
 	public static Item WroughtIronScythe;
 	public static Item RedSteelScythe;
-	public static Item RoseGoldScythe;
 	public static Item SteelScythe;
-	public static Item TinScythe;
-	public static Item ZincScythe;
 
-	public static Item BismuthKnife;
 	public static Item BismuthBronzeKnife;
 	public static Item BlackBronzeKnife;
 	public static Item BlackSteelKnife;
@@ -345,15 +304,11 @@ public class TFCItems
 	public static Item CopperKnife;
 	public static Item WroughtIronKnife;
 	public static Item RedSteelKnife;
-	public static Item RoseGoldKnife;
 	public static Item SteelKnife;
-	public static Item TinKnife;
-	public static Item ZincKnife;
 
 	public static Item FireStarter;
 
 	public static Item StoneHammer;
-	public static Item BismuthHammer;
 	public static Item BismuthBronzeHammer;
 	public static Item BlackBronzeHammer;
 	public static Item BlackSteelHammer;
@@ -362,10 +317,7 @@ public class TFCItems
 	public static Item CopperHammer;
 	public static Item WroughtIronHammer;
 	public static Item RedSteelHammer;
-	public static Item RoseGoldHammer;
 	public static Item SteelHammer;
-	public static Item TinHammer;
-	public static Item ZincHammer;
 
 	public static Item BismuthUnshaped;
 	public static Item BismuthBronzeUnshaped;
@@ -419,7 +371,6 @@ public class TFCItems
 	public static Item JavelinHeadPlan;
 
 	//Tool Heads
-	public static Item BismuthPickaxeHead;
 	public static Item BismuthBronzePickaxeHead;
 	public static Item BlackBronzePickaxeHead;
 	public static Item BlackSteelPickaxeHead;
@@ -428,12 +379,8 @@ public class TFCItems
 	public static Item CopperPickaxeHead;
 	public static Item WroughtIronPickaxeHead;
 	public static Item RedSteelPickaxeHead;
-	public static Item RoseGoldPickaxeHead;
 	public static Item SteelPickaxeHead;
-	public static Item TinPickaxeHead;
-	public static Item ZincPickaxeHead;
 
-	public static Item BismuthShovelHead;
 	public static Item BismuthBronzeShovelHead;
 	public static Item BlackBronzeShovelHead;
 	public static Item BlackSteelShovelHead;
@@ -442,13 +389,9 @@ public class TFCItems
 	public static Item CopperShovelHead;
 	public static Item WroughtIronShovelHead;
 	public static Item RedSteelShovelHead;
-	public static Item RoseGoldShovelHead;
 	public static Item SilverShovelHead;
 	public static Item SteelShovelHead;
-	public static Item TinShovelHead;
-	public static Item ZincShovelHead;
 
-	public static Item BismuthHoeHead;
 	public static Item BismuthBronzeHoeHead;
 	public static Item BlackBronzeHoeHead;
 	public static Item BlackSteelHoeHead;
@@ -457,12 +400,8 @@ public class TFCItems
 	public static Item CopperHoeHead;
 	public static Item WroughtIronHoeHead;
 	public static Item RedSteelHoeHead;
-	public static Item RoseGoldHoeHead;
 	public static Item SteelHoeHead;
-	public static Item TinHoeHead;
-	public static Item ZincHoeHead;
 
-	public static Item BismuthAxeHead;
 	public static Item BismuthBronzeAxeHead;
 	public static Item BlackBronzeAxeHead;
 	public static Item BlackSteelAxeHead;
@@ -471,12 +410,8 @@ public class TFCItems
 	public static Item CopperAxeHead;
 	public static Item WroughtIronAxeHead;
 	public static Item RedSteelAxeHead;
-	public static Item RoseGoldAxeHead;
 	public static Item SteelAxeHead;
-	public static Item TinAxeHead;
-	public static Item ZincAxeHead;
 
-	public static Item BismuthHammerHead;
 	public static Item BismuthBronzeHammerHead;
 	public static Item BlackBronzeHammerHead;
 	public static Item BlackSteelHammerHead;
@@ -485,12 +420,8 @@ public class TFCItems
 	public static Item CopperHammerHead;
 	public static Item WroughtIronHammerHead;
 	public static Item RedSteelHammerHead;
-	public static Item RoseGoldHammerHead;
 	public static Item SteelHammerHead;
-	public static Item TinHammerHead;
-	public static Item ZincHammerHead;
 
-	public static Item BismuthChiselHead;
 	public static Item BismuthBronzeChiselHead;
 	public static Item BlackBronzeChiselHead;
 	public static Item BlackSteelChiselHead;
@@ -499,12 +430,8 @@ public class TFCItems
 	public static Item CopperChiselHead;
 	public static Item WroughtIronChiselHead;
 	public static Item RedSteelChiselHead;
-	public static Item RoseGoldChiselHead;
 	public static Item SteelChiselHead;
-	public static Item TinChiselHead;
-	public static Item ZincChiselHead;
 
-	public static Item BismuthSwordHead;
 	public static Item BismuthBronzeSwordHead;
 	public static Item BlackBronzeSwordHead;
 	public static Item BlackSteelSwordHead;
@@ -513,12 +440,8 @@ public class TFCItems
 	public static Item CopperSwordHead;
 	public static Item WroughtIronSwordHead;
 	public static Item RedSteelSwordHead;
-	public static Item RoseGoldSwordHead;
 	public static Item SteelSwordHead;
-	public static Item TinSwordHead;
-	public static Item ZincSwordHead;
 
-	public static Item BismuthMaceHead;
 	public static Item BismuthBronzeMaceHead;
 	public static Item BlackBronzeMaceHead;
 	public static Item BlackSteelMaceHead;
@@ -527,12 +450,8 @@ public class TFCItems
 	public static Item CopperMaceHead;
 	public static Item WroughtIronMaceHead;
 	public static Item RedSteelMaceHead;
-	public static Item RoseGoldMaceHead;
 	public static Item SteelMaceHead;
-	public static Item TinMaceHead;
-	public static Item ZincMaceHead;
 
-	public static Item BismuthSawHead;
 	public static Item BismuthBronzeSawHead;
 	public static Item BlackBronzeSawHead;
 	public static Item BlackSteelSawHead;
@@ -541,12 +460,8 @@ public class TFCItems
 	public static Item CopperSawHead;
 	public static Item WroughtIronSawHead;
 	public static Item RedSteelSawHead;
-	public static Item RoseGoldSawHead;
 	public static Item SteelSawHead;
-	public static Item TinSawHead;
-	public static Item ZincSawHead;
 
-	public static Item BismuthProPickHead;
 	public static Item BismuthBronzeProPickHead;
 	public static Item BlackBronzeProPickHead;
 	public static Item BlackSteelProPickHead;
@@ -555,12 +470,8 @@ public class TFCItems
 	public static Item CopperProPickHead;
 	public static Item WroughtIronProPickHead;
 	public static Item RedSteelProPickHead;
-	public static Item RoseGoldProPickHead;
 	public static Item SteelProPickHead;
-	public static Item TinProPickHead;
-	public static Item ZincProPickHead;
 
-	public static Item BismuthScytheHead;
 	public static Item BismuthBronzeScytheHead;
 	public static Item BlackBronzeScytheHead;
 	public static Item BlackSteelScytheHead;
@@ -569,12 +480,8 @@ public class TFCItems
 	public static Item CopperScytheHead;
 	public static Item WroughtIronScytheHead;
 	public static Item RedSteelScytheHead;
-	public static Item RoseGoldScytheHead;
 	public static Item SteelScytheHead;
-	public static Item TinScytheHead;
-	public static Item ZincScytheHead;
 
-	public static Item BismuthKnifeHead;
 	public static Item BismuthBronzeKnifeHead;
 	public static Item BlackBronzeKnifeHead;
 	public static Item BlackSteelKnifeHead;
@@ -583,10 +490,7 @@ public class TFCItems
 	public static Item CopperKnifeHead;
 	public static Item WroughtIronKnifeHead;
 	public static Item RedSteelKnifeHead;
-	public static Item RoseGoldKnifeHead;
 	public static Item SteelKnifeHead;
-	public static Item TinKnifeHead;
-	public static Item ZincKnifeHead;
 
 	public static Item Coke;
 	public static Item Powder;
@@ -597,7 +501,6 @@ public class TFCItems
 	public static Item SluiceItem;
 
 	public static Item ProPickStone;
-	public static Item ProPickBismuth; 
 	public static Item ProPickBismuthBronze;   
 	public static Item ProPickBlackBronze;
 	public static Item ProPickBlackSteel;
@@ -606,10 +509,7 @@ public class TFCItems
 	public static Item ProPickCopper;
 	public static Item ProPickIron;
 	public static Item ProPickRedSteel;
-	public static Item ProPickRoseGold;
 	public static Item ProPickSteel;
-	public static Item ProPickTin;
-	public static Item ProPickZinc;
 
 	/**Armor Crafting related items*/
 	public static Item BismuthSheet;
@@ -1015,7 +915,6 @@ public class TFCItems
 	public static EnumToolMaterial IgExToolMaterial;
 	public static EnumToolMaterial MMToolMaterial;
 
-	public static EnumToolMaterial BismuthToolMaterial;
 	public static EnumToolMaterial BismuthBronzeToolMaterial;
 	public static EnumToolMaterial BlackBronzeToolMaterial;
 	public static EnumToolMaterial BlackSteelToolMaterial;
@@ -1024,10 +923,7 @@ public class TFCItems
 	public static EnumToolMaterial CopperToolMaterial;
 	public static EnumToolMaterial IronToolMaterial;
 	public static EnumToolMaterial RedSteelToolMaterial;
-	public static EnumToolMaterial RoseGoldToolMaterial;
 	public static EnumToolMaterial SteelToolMaterial;
-	public static EnumToolMaterial TinToolMaterial;
-	public static EnumToolMaterial ZincToolMaterial;
 
 
 
@@ -1051,19 +947,15 @@ public class TFCItems
 		IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 10, 5);
 		MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 10, 5);
 
-		BismuthToolMaterial = EnumHelper.addToolMaterial("Bismuth", 2, BismuthUses, BismuthEff, 65, 10);
-		BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, BismuthBronzeUses, BismuthBronzeEff, 85, 10);
-		BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, BlackBronzeUses, BlackBronzeEff, 100, 10);
-		BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, BlackSteelUses, BlackSteelEff, 165, 12);
-		BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, BlueSteelUses, BlueSteelEff, 185, 22);
-		BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, BronzeUses, BronzeEff, 100, 13);
-		CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, CopperUses, CopperEff, 85, 8);
-		IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, WroughtIronUses, WroughtIronEff, 135, 10);
-		RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, RedSteelUses, RedSteelEff, 185, 22);
-		RoseGoldToolMaterial = EnumHelper.addToolMaterial("RoseGold", 2, RoseGoldUses, RoseGoldEff, 100, 20);
-		SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, SteelUses, SteelEff, 150, 10);
-		TinToolMaterial = EnumHelper.addToolMaterial("Tin", 2, TinUses, TinEff, 65, 8);
-		ZincToolMaterial = EnumHelper.addToolMaterial("Zinc", 2, ZincUses, ZincEff, 65, 8);
+		BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, 	BismuthBronzeUses, 	BismuthBronzeEff, 	85, 10);
+		BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, 		BlackBronzeUses, 	BlackBronzeEff, 	100, 10);
+		BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, 		BlackSteelUses, 	BlackSteelEff, 		165, 12);
+		BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, 			BlueSteelUses, 		BlueSteelEff, 		185, 22);
+		BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, 				BronzeUses, 		BronzeEff, 			100, 13);
+		CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, 				CopperUses, 		CopperEff, 			85, 8);
+		IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, 					WroughtIronUses, 	WroughtIronEff, 	135, 10);
+		RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, 			RedSteelUses, 		RedSteelEff, 		185, 22);
+		SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, 					SteelUses, 			SteelEff, 			150, 10);
 
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 
@@ -1096,7 +988,6 @@ public class TFCItems
 		GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","GoldPan",16001)).setUnlocalizedName("GoldPan");
 		SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","SluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
 
-		ProPickBismuth = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuth",16004)).setUnlocalizedName("Bismuth ProPick").setMaxDamage(BismuthUses);
 		ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
 		ProPickBlackBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackBronze",16006)).setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
 		ProPickBlackSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackSteel",16007)).setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses);
@@ -1105,10 +996,7 @@ public class TFCItems
 		ProPickCopper = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickCopper",16010)).setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses);
 		ProPickIron = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickWroughtIron",16012)).setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses);
 		ProPickRedSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRedSteel",16016)).setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses);
-		ProPickRoseGold = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRoseGold",16017)).setUnlocalizedName("Rose Gold ProPick").setMaxDamage(RoseGoldUses);
 		ProPickSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickSteel",16019)).setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses);
-		ProPickTin = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickTin",16021)).setUnlocalizedName("Tin ProPick").setMaxDamage(TinUses);
-		ProPickZinc = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickZinc",16022)).setUnlocalizedName("Zinc ProPick").setMaxDamage(ZincUses);
 
 		BismuthIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot",16028)).setUnlocalizedName("Bismuth Ingot");
 		BismuthBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot",16029)).setUnlocalizedName("Bismuth Bronze Ingot");
@@ -1186,11 +1074,6 @@ public class TFCItems
 		MMAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","MMAxe",16114),MMToolMaterial).setUnlocalizedName("Stone Axe").setMaxDamage(MMStoneUses);
 		MMHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","MMHoe",16115),MMToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(MMStoneUses);
 
-		BismuthPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BismuthPick",16116),BismuthToolMaterial).setUnlocalizedName("Bismuth Pick").setMaxDamage(BismuthUses);
-		BismuthShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BismuthShovel",16117),BismuthToolMaterial).setUnlocalizedName("Bismuth Shovel").setMaxDamage(BismuthUses);
-		BismuthAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BismuthAxe",16118),BismuthToolMaterial).setUnlocalizedName("Bismuth Axe").setMaxDamage(BismuthUses);
-		BismuthHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BismuthHoe",16119),BismuthToolMaterial).setUnlocalizedName("Bismuth Hoe").setMaxDamage(BismuthUses);
-
 		BismuthBronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BismuthBronzePick",16120),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Pick").setMaxDamage(BismuthBronzeUses);
 		BismuthBronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BismuthBronzeShovel",16121),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Shovel").setMaxDamage(BismuthBronzeUses);
 		BismuthBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BismuthBronzeAxe",16122),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Axe").setMaxDamage(BismuthBronzeUses);
@@ -1231,28 +1114,12 @@ public class TFCItems
 		RedSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","RedSteelAxe",16170),RedSteelToolMaterial).setUnlocalizedName("Red Steel Axe").setMaxDamage(RedSteelUses);
 		RedSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","RedSteelHoe",16171),RedSteelToolMaterial).setUnlocalizedName("Red Steel Hoe").setMaxDamage(RedSteelUses);
 
-		RoseGoldPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","RoseGoldPick",16172),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Pick").setMaxDamage(RoseGoldUses);
-		RoseGoldShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","RoseGoldShovel",16173),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Shovel").setMaxDamage(RoseGoldUses);
-		RoseGoldAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","RoseGoldAxe",16174),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Axe").setMaxDamage(RoseGoldUses);
-		RoseGoldHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","RoseGoldHoe",16175),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Hoe").setMaxDamage(RoseGoldUses);
-
 		SteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","SteelPick",16180),SteelToolMaterial).setUnlocalizedName("Steel Pick").setMaxDamage(SteelUses);
 		SteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","SteelShovel",16181),SteelToolMaterial).setUnlocalizedName("Steel Shovel").setMaxDamage(SteelUses);
 		SteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","SteelAxe",16182),SteelToolMaterial).setUnlocalizedName("Steel Axe").setMaxDamage(SteelUses);
 		SteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","SteelHoe",16183),SteelToolMaterial).setUnlocalizedName("Steel Hoe").setMaxDamage(SteelUses);
 
-		TinPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","TinPick",16188),TinToolMaterial).setUnlocalizedName("Tin Pick").setMaxDamage(TinUses);
-		TinShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","TinShovel",16189),TinToolMaterial).setUnlocalizedName("Tin Shovel").setMaxDamage(TinUses);
-		TinAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","TinAxe",16190),TinToolMaterial).setUnlocalizedName("Tin Axe").setMaxDamage(TinUses);
-		TinHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","TinHoe",16191),TinToolMaterial).setUnlocalizedName("Tin Hoe").setMaxDamage(TinUses);
-
-		ZincPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","ZincPick",16192),ZincToolMaterial).setUnlocalizedName("Zinc Pick").setMaxDamage(ZincUses);
-		ZincShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","ZincShovel",16193),ZincToolMaterial).setUnlocalizedName("Zinc Shovel").setMaxDamage(ZincUses);
-		ZincAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","ZincAxe",16194),ZincToolMaterial).setUnlocalizedName("Zinc Axe").setMaxDamage(ZincUses);
-		ZincHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","ZincHoe",16195),ZincToolMaterial).setUnlocalizedName("Zinc Hoe").setMaxDamage(ZincUses);
-
 		//chisels
-		BismuthChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BismuthChisel",16226),BismuthToolMaterial).setUnlocalizedName("Bismuth Chisel").setMaxDamage(BismuthUses);
 		BismuthBronzeChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BismuthBronzeChisel",16227),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Chisel").setMaxDamage(BismuthBronzeUses);
 		BlackBronzeChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BlackBronzeChisel",16228),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Chisel").setMaxDamage(BlackBronzeUses);
 		BlackSteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BlackSteelChisel",16230),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Chisel").setMaxDamage(BlackSteelUses);
@@ -1261,13 +1128,8 @@ public class TFCItems
 		CopperChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","CopperChisel",16233),CopperToolMaterial).setUnlocalizedName("Copper Chisel").setMaxDamage(CopperUses);
 		WroughtIronChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","WroughtIronChisel",16234),IronToolMaterial).setUnlocalizedName("Wrought Iron Chisel").setMaxDamage(WroughtIronUses);
 		RedSteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","RedSteelChisel",16235),RedSteelToolMaterial).setUnlocalizedName("Red Steel Chisel").setMaxDamage(RedSteelUses);
-		RoseGoldChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","RoseGoldChisel",16236),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Chisel").setMaxDamage(RoseGoldUses);
 		SteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","SteelChisel",16237),SteelToolMaterial).setUnlocalizedName("Steel Chisel").setMaxDamage(SteelUses);
-		TinChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","TinChisel",16238),TinToolMaterial).setUnlocalizedName("Tin Chisel").setMaxDamage(TinUses);
-		ZincChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","ZincChisel",16239),ZincToolMaterial).setUnlocalizedName("Zinc Chisel").setMaxDamage(ZincUses);
-		StoneChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","StoneChisel",16240),IgInToolMaterial).setUnlocalizedName("Stone Chisel").setMaxDamage(IgInStoneUses);
 
-		BismuthSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BismuthSword",16245),BismuthToolMaterial).setUnlocalizedName("Bismuth Sword").setMaxDamage(BismuthUses);
 		BismuthBronzeSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BismuthBronzeSword",16246),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses);
 		BlackBronzeSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackBronzeSword",16247),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Sword").setMaxDamage(BlackBronzeUses);
 		BlackSteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackSteelSword",16248),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Sword").setMaxDamage(BlackSteelUses);
@@ -1276,12 +1138,8 @@ public class TFCItems
 		CopperSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","CopperSword",16251),CopperToolMaterial).setUnlocalizedName("Copper Sword").setMaxDamage(CopperUses);
 		WroughtIronSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","WroughtIronSword",16252),IronToolMaterial).setUnlocalizedName("Wrought Iron Sword").setMaxDamage(WroughtIronUses);
 		RedSteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","RedSteelSword",16253),RedSteelToolMaterial).setUnlocalizedName("Red Steel Sword").setMaxDamage(RedSteelUses);
-		RoseGoldSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","RoseGoldSword",16254),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Sword").setMaxDamage(RoseGoldUses);
 		SteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","SteelSword",16255),SteelToolMaterial).setUnlocalizedName("Steel Sword").setMaxDamage(SteelUses);
-		TinSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","TinSword",16256),TinToolMaterial).setUnlocalizedName("Tin Sword").setMaxDamage(TinUses);
-		ZincSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","ZincSword",16257),ZincToolMaterial).setUnlocalizedName("Zinc Sword").setMaxDamage(ZincUses);
 
-		BismuthMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BismuthMace",16262),BismuthToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Bismuth Mace").setMaxDamage(BismuthUses);
 		BismuthBronzeMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BismuthBronzeMace",16263),BismuthBronzeToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Bismuth Bronze Mace").setMaxDamage(BismuthBronzeUses);
 		BlackBronzeMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackBronzeMace",16264),BlackBronzeToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Black Bronze Mace").setMaxDamage(BlackBronzeUses);
 		BlackSteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackSteelMace",16265),BlackSteelToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Black Steel Mace").setMaxDamage(BlackSteelUses);
@@ -1290,12 +1148,8 @@ public class TFCItems
 		CopperMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","CopperMace",16268),CopperToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Copper Mace").setMaxDamage(CopperUses);
 		WroughtIronMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","WroughtIronMace",16269),IronToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Wrought Iron Mace").setMaxDamage(WroughtIronUses);
 		RedSteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","RedSteelMace",16270),RedSteelToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Red Steel Mace").setMaxDamage(RedSteelUses);
-		RoseGoldMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","RoseGoldMace",16271),RoseGoldToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Rose Gold Mace").setMaxDamage(RoseGoldUses);
 		SteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","SteelMace",16272),SteelToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Steel Mace").setMaxDamage(SteelUses);
-		TinMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","TinMace",16273),TinToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Tin Mace").setMaxDamage(TinUses);
-		ZincMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","ZincMace",16274),ZincToolMaterial, EnumDamageType.CRUSHING).setUnlocalizedName("Zinc Mace").setMaxDamage(ZincUses);
 
-		BismuthSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BismuthSaw",16275),BismuthToolMaterial).setUnlocalizedName("Bismuth Saw").setMaxDamage(BismuthUses);
 		BismuthBronzeSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BismuthBronzeSaw",16276),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Saw").setMaxDamage(BismuthBronzeUses);
 		BlackBronzeSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BlackBronzeSaw",16277),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Saw").setMaxDamage(BlackBronzeUses);
 		BlackSteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BlackSteelSaw",16278),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Saw").setMaxDamage(BlackSteelUses);
@@ -1304,10 +1158,7 @@ public class TFCItems
 		CopperSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","CopperSaw",16281),CopperToolMaterial).setUnlocalizedName("Copper Saw").setMaxDamage(CopperUses);
 		WroughtIronSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","WroughtIronSaw",16282),IronToolMaterial).setUnlocalizedName("Wrought Iron Saw").setMaxDamage(WroughtIronUses);
 		RedSteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","RedSteelSaw",16283),RedSteelToolMaterial).setUnlocalizedName("Red Steel Saw").setMaxDamage(RedSteelUses);
-		RoseGoldSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","RoseGoldSaw",16284),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Saw").setMaxDamage(RoseGoldUses);
 		SteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","SteelSaw",16285),SteelToolMaterial).setUnlocalizedName("Steel Saw").setMaxDamage(SteelUses);
-		TinSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","TinSaw",16286),TinToolMaterial).setUnlocalizedName("Tin Saw").setMaxDamage(TinUses);
-		ZincSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","ZincSaw",16287),ZincToolMaterial).setUnlocalizedName("Zinc Saw").setMaxDamage(ZincUses);
 
 		HCBlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlackSteelIngot",16290)).setUnlocalizedName("HC Black Steel Ingot");
 		WeakBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakBlueSteelIngot",16291)).setUnlocalizedName("Weak Blue Steel Ingot");
@@ -1374,7 +1225,6 @@ public class TFCItems
 
 		//Hammers
 		StoneHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","StoneHammer",16371),TFCItems.IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
-		BismuthHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BismuthHammer",16372),TFCItems.BismuthToolMaterial).setUnlocalizedName("Bismuth Hammer").setMaxDamage(TFCItems.BismuthUses);
 		BismuthBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BismuthBronzeHammer",16373),TFCItems.BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
 		BlackBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlackBronzeHammer",16374),TFCItems.BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
 		BlackSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlackSteelHammer",16375),TFCItems.BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
@@ -1383,17 +1233,13 @@ public class TFCItems
 		CopperHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","CopperHammer",16378),TFCItems.CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
 		WroughtIronHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","WroughtIronHammer",16379),TFCItems.IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
 		RedSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","RedSteelHammer",16380),TFCItems.RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
-		RoseGoldHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","RoseGoldHammer",16381),TFCItems.RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Hammer").setMaxDamage(TFCItems.RoseGoldUses);
 		SteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","SteelHammer",16382),TFCItems.SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
-		TinHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","TinHammer",16383),TFCItems.TinToolMaterial).setUnlocalizedName("Tin Hammer").setMaxDamage(TFCItems.TinUses);
-		ZincHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","ZincHammer",16384),TFCItems.ZincToolMaterial).setUnlocalizedName("Zinc Hammer").setMaxDamage(TFCItems.ZincUses);
 
 		Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391)).setUnlocalizedName("Ink");
 
 		FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","FireStarter",16407)).setFolder("tools/").setUnlocalizedName("Firestarter");
 
 		//Tool heads
-		BismuthPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthPickaxeHead",16500)).setUnlocalizedName("Bismuth Pick Head");
 		BismuthBronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzePickaxeHead",16501)).setUnlocalizedName("Bismuth Bronze Pick Head");
 		BlackBronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzePickaxeHead",16502)).setUnlocalizedName("Black Bronze Pick Head");
 		BlackSteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelPickaxeHead",16503)).setUnlocalizedName("Black Steel Pick Head");
@@ -1402,12 +1248,8 @@ public class TFCItems
 		CopperPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperPickaxeHead",16506)).setUnlocalizedName("Copper Pick Head");
 		WroughtIronPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronPickaxeHead",16507)).setUnlocalizedName("Wrought Iron Pick Head");
 		RedSteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelPickaxeHead",16508)).setUnlocalizedName("Red Steel Pick Head");
-		RoseGoldPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldPickaxeHead",16509)).setUnlocalizedName("Rose Gold Pick Head");
 		SteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelPickaxeHead",16510)).setUnlocalizedName("Steel Pick Head");
-		TinPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinPickaxeHead",16511)).setUnlocalizedName("Tin Pick Head");
-		ZincPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincPickaxeHead",16512)).setUnlocalizedName("Zinc Pick Head");
 
-		BismuthShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthShovelHead",16513)).setUnlocalizedName("Bismuth Shovel Head");
 		BismuthBronzeShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeShovelHead",16514)).setUnlocalizedName("Bismuth Bronze Shovel Head");
 		BlackBronzeShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeShovelHead",16515)).setUnlocalizedName("Black Bronze Shovel Head");
 		BlackSteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelShovelHead",16516)).setUnlocalizedName("Black Steel Shovel Head");
@@ -1416,12 +1258,8 @@ public class TFCItems
 		CopperShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperShovelHead",16519)).setUnlocalizedName("Copper Shovel Head");
 		WroughtIronShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronShovelHead",16520)).setUnlocalizedName("Wrought Iron Shovel Head");
 		RedSteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelShovelHead",16521)).setUnlocalizedName("Red Steel Shovel Head");
-		RoseGoldShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldShovelHead",16522)).setUnlocalizedName("Rose Gold Shovel Head");
 		SteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelShovelHead",16523)).setUnlocalizedName("Steel Shovel Head");
-		TinShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinShovelHead",16524)).setUnlocalizedName("Tin Shovel Head");
-		ZincShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincShovelHead",16525)).setUnlocalizedName("Zinc Shovel Head");
 
-		BismuthHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthHoeHead",16526)).setUnlocalizedName("Bismuth Hoe Head");
 		BismuthBronzeHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeHoeHead",16527)).setUnlocalizedName("Bismuth Bronze Hoe Head");
 		BlackBronzeHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeHoeHead",16528)).setUnlocalizedName("Black Bronze Hoe Head");
 		BlackSteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelHoeHead",16529)).setUnlocalizedName("Black Steel Hoe Head");
@@ -1430,12 +1268,8 @@ public class TFCItems
 		CopperHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperHoeHead",16532)).setUnlocalizedName("Copper Hoe Head");
 		WroughtIronHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronHoeHead",16533)).setUnlocalizedName("Wrought Iron Hoe Head");
 		RedSteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelHoeHead",16534)).setUnlocalizedName("Red Steel Hoe Head");
-		RoseGoldHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldHoeHead",16535)).setUnlocalizedName("Rose Gold Hoe Head");
 		SteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelHoeHead",16536)).setUnlocalizedName("Steel Hoe Head");
-		TinHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinHoeHead",16537)).setUnlocalizedName("Tin Hoe Head");
-		ZincHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincHoeHead",16538)).setUnlocalizedName("Zinc Hoe Head");
 
-		BismuthAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthAxeHead",16539)).setUnlocalizedName("Bismuth Axe Head");
 		BismuthBronzeAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeAxeHead",16540)).setUnlocalizedName("Bismuth Bronze Axe Head");
 		BlackBronzeAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeAxeHead",16541)).setUnlocalizedName("Black Bronze Axe Head");
 		BlackSteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelAxeHead",16542)).setUnlocalizedName("Black Steel Axe Head");
@@ -1444,12 +1278,8 @@ public class TFCItems
 		CopperAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperAxeHead",16545)).setUnlocalizedName("Copper Axe Head");
 		WroughtIronAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronAxeHead",16546)).setUnlocalizedName("Wrought Iron Axe Head");
 		RedSteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelAxeHead",16547)).setUnlocalizedName("Red Steel Axe Head");
-		RoseGoldAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldAxeHead",16548)).setUnlocalizedName("Rose Gold Axe Head");
 		SteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelAxeHead",16549)).setUnlocalizedName("Steel Axe Head");
-		TinAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinAxeHead",16550)).setUnlocalizedName("Tin Axe Head");
-		ZincAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincAxeHead",16551)).setUnlocalizedName("Zinc Axe Head");
 
-		BismuthHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthHammerHead",16552)).setUnlocalizedName("Bismuth Hammer Head");
 		BismuthBronzeHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeHammerHead",16553)).setUnlocalizedName("Bismuth Bronze Hammer Head");
 		BlackBronzeHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeHammerHead",16554)).setUnlocalizedName("Black Bronze Hammer Head");
 		BlackSteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelHammerHead",16555)).setUnlocalizedName("Black Steel Hammer Head");
@@ -1458,13 +1288,9 @@ public class TFCItems
 		CopperHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperHammerHead",16558)).setUnlocalizedName("Copper Hammer Head");
 		WroughtIronHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronHammerHead",16559)).setUnlocalizedName("Wrought Iron Hammer Head");
 		RedSteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelHammerHead",16560)).setUnlocalizedName("Red Steel Hammer Head");
-		RoseGoldHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldHammerHead",16561)).setUnlocalizedName("Rose Gold Hammer Head");
 		SteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelHammerHead",16562)).setUnlocalizedName("Steel Hammer Head");
-		TinHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinHammerHead",16563)).setUnlocalizedName("Tin Hammer Head");
-		ZincHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincHammerHead",16564)).setUnlocalizedName("Zinc Hammer Head");
 
 		//chisel heads
-		BismuthChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthChiselHead",16565)).setUnlocalizedName("Bismuth Chisel Head");
 		BismuthBronzeChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeChiselHead",16566)).setUnlocalizedName("Bismuth Bronze Chisel Head");
 		BlackBronzeChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeChiselHead",16567)).setUnlocalizedName("Black Bronze Chisel Head");
 		BlackSteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelChiselHead",16568)).setUnlocalizedName("Black Steel Chisel Head");
@@ -1473,12 +1299,8 @@ public class TFCItems
 		CopperChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperChiselHead",16571)).setUnlocalizedName("Copper Chisel Head");
 		WroughtIronChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronChiselHead",16572)).setUnlocalizedName("Wrought Iron Chisel Head");
 		RedSteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelChiselHead",16573)).setUnlocalizedName("Red Steel Chisel Head");
-		RoseGoldChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldChiselHead",16574)).setUnlocalizedName("Rose Gold Chisel Head");
 		SteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelChiselHead",16575)).setUnlocalizedName("Steel Chisel Head");
-		TinChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinChiselHead",16576)).setUnlocalizedName("Tin Chisel Head");
-		ZincChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincChiselHead",16577)).setUnlocalizedName("Zinc Chisel Head");
 
-		BismuthSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthSwordHead",16578)).setUnlocalizedName("Bismuth Sword Blade");
 		BismuthBronzeSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeSwordHead",16579)).setUnlocalizedName("Bismuth Bronze Sword Blade");
 		BlackBronzeSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeSwordHead",16580)).setUnlocalizedName("Black Bronze Sword Blade");
 		BlackSteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelSwordHead",16581)).setUnlocalizedName("Black Steel Sword Blade");
@@ -1487,12 +1309,8 @@ public class TFCItems
 		CopperSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperSwordHead",16584)).setUnlocalizedName("Copper Sword Blade");
 		WroughtIronSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronSwordHead",16585)).setUnlocalizedName("Wrought Iron Sword Blade");
 		RedSteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelSwordHead",16586)).setUnlocalizedName("Red Steel Sword Blade");
-		RoseGoldSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldSwordHead",16587)).setUnlocalizedName("Rose Gold Sword Blade");
 		SteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelSwordHead",16588)).setUnlocalizedName("Steel Sword Blade");
-		TinSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinSwordHead",16589)).setUnlocalizedName("Tin Sword Blade");
-		ZincSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincSwordHead",16590)).setUnlocalizedName("Zinc Sword Blade");
 
-		BismuthMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthMaceHead",16591)).setUnlocalizedName("Bismuth Mace Head");
 		BismuthBronzeMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeMaceHead",16592)).setUnlocalizedName("Bismuth Bronze Mace Head");
 		BlackBronzeMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeMaceHead",16593)).setUnlocalizedName("Black Bronze Mace Head");
 		BlackSteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelMaceHead",16594)).setUnlocalizedName("Black Steel Mace Head");
@@ -1501,12 +1319,8 @@ public class TFCItems
 		CopperMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperMaceHead",16597)).setUnlocalizedName("Copper Mace Head");
 		WroughtIronMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronMaceHead",16598)).setUnlocalizedName("Wrought Iron Mace Head");
 		RedSteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelMaceHead",16599)).setUnlocalizedName("Red Steel Mace Head");
-		RoseGoldMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldMaceHead",16600)).setUnlocalizedName("Rose Gold Mace Head");
 		SteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelMaceHead",16601)).setUnlocalizedName("Steel Mace Head");
-		TinMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinMaceHead",16602)).setUnlocalizedName("Tin Mace Head");
-		ZincMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincMaceHead",16603)).setUnlocalizedName("Zinc Mace Head");
 
-		BismuthSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthSawHead",16604)).setUnlocalizedName("Bismuth Saw Blade");
 		BismuthBronzeSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeSawHead",16605)).setUnlocalizedName("Bismuth Bronze Saw Blade");
 		BlackBronzeSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeSawHead",16606)).setUnlocalizedName("Black Bronze Saw Blade");
 		BlackSteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelSawHead",16607)).setUnlocalizedName("Black Steel Saw Blade");
@@ -1515,10 +1329,7 @@ public class TFCItems
 		CopperSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperSawHead",16610)).setUnlocalizedName("Copper Saw Blade");
 		WroughtIronSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronSawHead",16611)).setUnlocalizedName("Wrought Iron Saw Blade");
 		RedSteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelSawHead",16612)).setUnlocalizedName("Red Steel Saw Blade");
-		RoseGoldSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldSawHead",16613)).setUnlocalizedName("Rose Gold Saw Blade");
 		SteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelSawHead",16614)).setUnlocalizedName("Steel Saw Blade");
-		TinSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinSawHead",16615)).setUnlocalizedName("Tin Saw Blade");
-		ZincSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincSawHead",16616)).setUnlocalizedName("Zinc Saw Blade");
 
 		HCBlackSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCBlackSteel",16617)).setUnlocalizedName("HC Black Steel Unshaped");
 		WeakBlueSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedWeakBlueSteel",16618)).setUnlocalizedName("Weak Blue Steel Unshaped");
@@ -1529,7 +1340,6 @@ public class TFCItems
 		HCSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCSteel",16624)).setUnlocalizedName("HC Steel Unshaped");
 		Coke = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Coke",16625)).setUnlocalizedName("Coke"));
 
-		BismuthProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthProPickHead",16626)).setUnlocalizedName("Bismuth ProPick Head");
 		BismuthBronzeProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeProPickHead",16627)).setUnlocalizedName("Bismuth Bronze ProPick Head");
 		BlackBronzeProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeProPickHead",16628)).setUnlocalizedName("Black Bronze ProPick Head");
 		BlackSteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelProPickHead",16629)).setUnlocalizedName("Black Steel ProPick Head");
@@ -1538,10 +1348,7 @@ public class TFCItems
 		CopperProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperProPickHead",16632)).setUnlocalizedName("Copper ProPick Head");
 		WroughtIronProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronProPickHead",16633)).setUnlocalizedName("Wrought Iron ProPick Head");
 		RedSteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelProPickHead",16634)).setUnlocalizedName("Red Steel ProPick Head");
-		RoseGoldProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldProPickHead",16635)).setUnlocalizedName("Rose Gold ProPick Head");
 		SteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelProPickHead",16636)).setUnlocalizedName("Steel ProPick Head");
-		TinProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinProPickHead",16637)).setUnlocalizedName("Tin ProPick Head");
-		ZincProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincProPickHead",16638)).setUnlocalizedName("Zinc ProPick Head");
 
 		Powder = new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]
 				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}).setUnlocalizedName("Powder");
@@ -1550,7 +1357,6 @@ public class TFCItems
 		 * Scythe
 		 * */
 		int num = 16643;
-		BismuthScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BismuthScythe",num),BismuthToolMaterial).setUnlocalizedName("Bismuth Scythe").setMaxDamage(BismuthUses);num++;
 		BismuthBronzeScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BismuthBronzeScythe",num),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Scythe").setMaxDamage(BismuthBronzeUses);num++;
 		BlackBronzeScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BlackBronzeScythe",num),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Scythe").setMaxDamage(BlackBronzeUses);num++;
 		BlackSteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BlackSteelScythe",num),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Scythe").setMaxDamage(BlackSteelUses);num++;
@@ -1559,12 +1365,8 @@ public class TFCItems
 		CopperScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","CopperScythe",num),CopperToolMaterial).setUnlocalizedName("Copper Scythe").setMaxDamage(CopperUses);num++;
 		WroughtIronScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","WroughtIronScythe",num),IronToolMaterial).setUnlocalizedName("Wrought Iron Scythe").setMaxDamage(WroughtIronUses);num++;
 		RedSteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","RedSteelScythe",num),RedSteelToolMaterial).setUnlocalizedName("Red Steel Scythe").setMaxDamage(RedSteelUses);num++;
-		RoseGoldScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","RoseGoldScythe",num),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Scythe").setMaxDamage(RoseGoldUses);num++;
 		SteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","SteelScythe",num),SteelToolMaterial).setUnlocalizedName("Steel Scythe").setMaxDamage(SteelUses);num++;
-		TinScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","TinScythe",num),TinToolMaterial).setUnlocalizedName("Tin Scythe").setMaxDamage(TinUses);num++;
-		ZincScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","ZincScythe",num),ZincToolMaterial).setUnlocalizedName("Zinc Scythe").setMaxDamage(ZincUses);num++;
 
-		BismuthScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthScytheHead",num)).setUnlocalizedName("Bismuth Scythe Blade");num++;
 		BismuthBronzeScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeScytheHead",num)).setUnlocalizedName("Bismuth Bronze Scythe Blade");num++;
 		BlackBronzeScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeScytheHead",num)).setUnlocalizedName("Black Bronze Scythe Blade");num++;
 		BlackSteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelScytheHead",num)).setUnlocalizedName("Black Steel Scythe Blade");num++;
@@ -1573,16 +1375,12 @@ public class TFCItems
 		CopperScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperScytheHead",num)).setUnlocalizedName("Copper Scythe Blade");num++;
 		WroughtIronScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronScytheHead",num)).setUnlocalizedName("Wrought Iron Scythe Blade");num++;
 		RedSteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelScytheHead",num)).setUnlocalizedName("Red Steel Scythe Blade");num++;
-		RoseGoldScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldScytheHead",num)).setUnlocalizedName("Rose Gold Scythe Blade");num++;
 		SteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelScytheHead",num)).setUnlocalizedName("Steel Scythe Blade");num++;
-		TinScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinScytheHead",num)).setUnlocalizedName("Tin Scythe Blade");num++;
-		ZincScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincScytheHead",num)).setUnlocalizedName("Zinc Scythe Blade");num++;
 
 		WoodenBucketEmpty = (new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","WoodenBucketEmpty",num), 0)).setUnlocalizedName("Wooden Bucket Empty");num++;
 		WoodenBucketWater = (new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","WoodenBucketWater",num), TFCBlocks.finiteWater.blockID)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);num++;
 		WoodenBucketMilk = (new ItemCustomBucketMilk(TFC_Settings.getIntFor(config,"item","WoodenBucketMilk",num))).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty);num++;
 
-		BismuthKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthKnifeHead",num)).setUnlocalizedName("Bismuth Knife Blade");num++;
 		BismuthBronzeKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeKnifeHead",num)).setUnlocalizedName("Bismuth Bronze Knife Blade");num++;
 		BlackBronzeKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeKnifeHead",num)).setUnlocalizedName("Black Bronze Knife Blade");num++;
 		BlackSteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelKnifeHead",num)).setUnlocalizedName("Black Steel Knife Blade");num++;
@@ -1591,12 +1389,8 @@ public class TFCItems
 		CopperKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperKnifeHead",num)).setUnlocalizedName("Copper Knife Blade");num++;
 		WroughtIronKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronKnifeHead",num)).setUnlocalizedName("Wrought Iron Knife Blade");num++;
 		RedSteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelKnifeHead",num)).setUnlocalizedName("Red Steel Knife Blade");num++;
-		RoseGoldKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RoseGoldKnifeHead",num)).setUnlocalizedName("Rose Gold Knife Blade");num++;
 		SteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelKnifeHead",num)).setUnlocalizedName("Steel Knife Blade");num++;
-		TinKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","TinKnifeHead",num)).setUnlocalizedName("Tin Knife Blade");num++;
-		ZincKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","ZincKnifeHead",num)).setUnlocalizedName("Zinc Knife Blade");num++;
 
-		BismuthKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BismuthKnife",num),BismuthToolMaterial).setUnlocalizedName("Bismuth Knife").setMaxDamage(BismuthUses);num++;
 		BismuthBronzeKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BismuthBronzeKnife",num),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Knife").setMaxDamage(BismuthBronzeUses);num++;
 		BlackBronzeKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BlackBronzeKnife",num),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Knife").setMaxDamage(BlackBronzeUses);num++;
 		BlackSteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BlackSteelKnife",num),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Knife").setMaxDamage(BlackSteelUses);num++;
@@ -1605,10 +1399,7 @@ public class TFCItems
 		CopperKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","CopperKnife",num),CopperToolMaterial).setUnlocalizedName("Copper Knife").setMaxDamage(CopperUses);num++;
 		WroughtIronKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","WroughtIronKnife",num),IronToolMaterial).setUnlocalizedName("Wrought Iron Knife").setMaxDamage(WroughtIronUses);num++;
 		RedSteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","RedSteelKnife",num),RedSteelToolMaterial).setUnlocalizedName("Red Steel Knife").setMaxDamage(RedSteelUses);num++;
-		RoseGoldKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","RoseGoldKnife",num),RoseGoldToolMaterial).setUnlocalizedName("Rose Gold Knife").setMaxDamage(RoseGoldUses);num++;
 		SteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","SteelKnife",num),SteelToolMaterial).setUnlocalizedName("Steel Knife").setMaxDamage(SteelUses);num++;
-		TinKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","TinKnife",num),TinToolMaterial).setUnlocalizedName("Tin Knife").setMaxDamage(TinUses);num++;
-		ZincKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","ZincKnife",num),ZincToolMaterial).setUnlocalizedName("Zinc Knife").setMaxDamage(ZincUses);num++;
 
 		FlatRock = (new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setFolder("rocks/flatrocks/").setUnlocalizedName("FlatRock"));num++;
 		LooseRock = (new ItemLooseRock(TFC_Settings.getIntFor(config,"item","LooseRock",num)).setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));num++;
@@ -1760,25 +1551,21 @@ public class TFCItems
 				DoorWhiteCedar, DoorWhiteElm, DoorWillow, DoorKapok};
 
 		Recipes.Axes = new Item[]{SedAxe,IgInAxe,IgExAxe,MMAxe,
-				BismuthAxe,BismuthBronzeAxe,BlackBronzeAxe,
+				BismuthBronzeAxe,BlackBronzeAxe,
 				BlackSteelAxe,BlueSteelAxe,BronzeAxe,CopperAxe,
-				WroughtIronAxe,RedSteelAxe,RoseGoldAxe,SteelAxe,
-				TinAxe,ZincAxe};
+				WroughtIronAxe,RedSteelAxe,SteelAxe};
 
-		Recipes.Chisels = new Item[]{BismuthChisel,BismuthBronzeChisel,BlackBronzeChisel,
+		Recipes.Chisels = new Item[]{BismuthBronzeChisel,BlackBronzeChisel,
 				BlackSteelChisel,BlueSteelChisel,BronzeChisel,CopperChisel,
-				WroughtIronChisel,RedSteelChisel,RoseGoldChisel,SteelChisel,
-				TinChisel,ZincChisel};
+				WroughtIronChisel,RedSteelChisel,SteelChisel};
 
-		Recipes.Saws = new Item[]{BismuthSaw,BismuthBronzeSaw,BlackBronzeSaw,
+		Recipes.Saws = new Item[]{BismuthBronzeSaw,BlackBronzeSaw,
 				BlackSteelSaw,BlueSteelSaw,BronzeSaw,CopperSaw,
-				WroughtIronSaw,RedSteelSaw,RoseGoldSaw,SteelSaw,
-				TinSaw,ZincSaw};
+				WroughtIronSaw,RedSteelSaw,SteelSaw};
 
-		Recipes.Knives = new Item[]{StoneKnife,BismuthKnife,BismuthBronzeKnife,BlackBronzeKnife,
+		Recipes.Knives = new Item[]{StoneKnife,BismuthBronzeKnife,BlackBronzeKnife,
 				BlackSteelKnife,BlueSteelKnife,BronzeKnife,CopperKnife,
-				WroughtIronKnife,RedSteelKnife,RoseGoldKnife,SteelKnife,
-				TinKnife,ZincKnife};
+				WroughtIronKnife,RedSteelKnife,SteelKnife};
 
 		Recipes.MeltedMetal = new Item[]{BismuthUnshaped, BismuthBronzeUnshaped,BlackBronzeUnshaped,
 				TFCItems.BlackSteelUnshaped,TFCItems.BlueSteelUnshaped,TFCItems.BrassUnshaped,TFCItems.BronzeUnshaped,
@@ -1790,15 +1577,13 @@ public class TFCItems
 				TFCItems.HCBlackSteelUnshaped, TFCItems.HCBlueSteelUnshaped, TFCItems.HCRedSteelUnshaped, 
 				TFCItems.WeakBlueSteelUnshaped, TFCItems.WeakRedSteelUnshaped};
 
-		Recipes.Hammers  = new Item[]{TFCItems.StoneHammer,TFCItems.BismuthHammer,TFCItems.BismuthBronzeHammer,TFCItems.BlackBronzeHammer,
+		Recipes.Hammers  = new Item[]{TFCItems.StoneHammer,TFCItems.BismuthBronzeHammer,TFCItems.BlackBronzeHammer,
 				TFCItems.BlackSteelHammer,TFCItems.BlueSteelHammer,TFCItems.BronzeHammer,TFCItems.CopperHammer,
-				TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.RoseGoldHammer,TFCItems.SteelHammer,
-				TFCItems.TinHammer,TFCItems.ZincHammer};
+				TFCItems.WroughtIronHammer,TFCItems.RedSteelHammer,TFCItems.SteelHammer};
 
-		Recipes.Scythes = new Item[]{TFCItems.BismuthScythe,TFCItems.BismuthBronzeScythe,TFCItems.BlackBronzeScythe,
+		Recipes.Scythes = new Item[]{TFCItems.BismuthBronzeScythe,TFCItems.BlackBronzeScythe,
 				TFCItems.BlackSteelScythe,TFCItems.BlueSteelScythe,TFCItems.BronzeScythe,TFCItems.CopperScythe,
-				TFCItems.WroughtIronScythe,TFCItems.RedSteelScythe,TFCItems.RoseGoldScythe,TFCItems.SteelScythe,
-				TFCItems.TinScythe,TFCItems.ZincScythe};
+				TFCItems.WroughtIronScythe,TFCItems.RedSteelScythe,TFCItems.SteelScythe};
 
 		Recipes.Spindle = new Item[]{TFCItems.Spindle};
 
