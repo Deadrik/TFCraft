@@ -21,10 +21,8 @@ import TFC.Containers.ContainerCrucible;
 import TFC.Containers.ContainerFirepit;
 import TFC.Containers.ContainerFoodPrep;
 import TFC.Containers.ContainerForge;
-import TFC.Containers.ContainerLeatherWorking;
 import TFC.Containers.ContainerLiquidVessel;
 import TFC.Containers.ContainerLogPile;
-import TFC.Containers.ContainerMetallurgy;
 import TFC.Containers.ContainerMold;
 import TFC.Containers.ContainerQuern;
 import TFC.Containers.ContainerScribe;
@@ -398,7 +396,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 24:
 		{
-			return new ContainerMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
+			return null;//was metallurgy table
 		}
 		case 25:
 		{
@@ -439,7 +437,7 @@ public class CommonProxy implements IGuiHandler
 		}
 		case 36:
 		{
-			return new ContainerLeatherWorking(player.inventory, new ItemStack(TFCItems.FlatLeather,1) , world, x, y, z);
+			return null;//was leatherworking
 		}
 		case 37:
 		{

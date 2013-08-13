@@ -19,7 +19,7 @@ public class ContainerForge extends ContainerTFC
 	private int coolTime;
 	private int freezeTime;
 	private int itemFreezeTime;
-    private float firetemp;
+	private float firetemp;
 
 
 	public ContainerForge(InventoryPlayer inventoryplayer, TileEntityForge tileentityforge, World world, int x, int y, int z)
@@ -136,7 +136,7 @@ public class ContainerForge extends ContainerTFC
 						{
 							j++;
 						}
-						else
+						else if(itemstack1 != null)
 						{
 							ItemStack stack = itemstack1.copy();
 							stack.stackSize = 1;
@@ -186,7 +186,7 @@ public class ContainerForge extends ContainerTFC
 					}
 				}
 			}
-			if(itemstack1.stackSize == 0)
+			if(itemstack1.stackSize <= 0)
 			{
 				slot.putStack(null);
 			} else
@@ -200,41 +200,26 @@ public class ContainerForge extends ContainerTFC
 	@Override
 	public void detectAndSendChanges()
 	{
-	    for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
-        {
-            ItemStack var2 = ((Slot)this.inventorySlots.get(var1)).getStack();
-            ItemStack var3 = (ItemStack)this.inventoryItemStacks.get(var1);
+		super.detectAndSendChanges();
 
-            if (!ItemStack.areItemStacksEqual(var3, var2))
-            {
-                var3 = var2 == null ? null : var2.copy();
-                this.inventoryItemStacks.set(var1, var3);
-
-                for (int var4 = 0; var4 < this.crafters.size(); ++var4)
-                {
-                    ((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
-                }
-            }
-        }
-		
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
-        {
-            ICrafting var2 = (ICrafting)this.crafters.get(var1);
-            if (this.firetemp != this.forge.fireTemperature)
-            {
-                var2.sendProgressBarUpdate(this, 0, (int)this.forge.fireTemperature);
-            }
-        }
-        
-        firetemp = this.forge.fireTemperature;
+		{
+			ICrafting var2 = (ICrafting)this.crafters.get(var1);
+			if (this.firetemp != this.forge.fireTemperature)
+			{
+				var2.sendProgressBarUpdate(this, 0, (int)this.forge.fireTemperature);
+			}
+		}
+
+		firetemp = this.forge.fireTemperature;
 	}
 	@Override
 	public void updateProgressBar(int par1, int par2)
-    {
-        if (par1 == 0)
-        {
-            this.forge.fireTemperature = par2;
-        }
+	{
+		if (par1 == 0)
+		{
+			this.forge.fireTemperature = par2;
+		}
 
-    }
+	}
 }

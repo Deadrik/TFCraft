@@ -32,8 +32,8 @@ import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Core.Util.StringUtil;
-import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityCustomMinecart;
+import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityStand;
 import TFC.Entities.EntityTerraJavelin;
 import TFC.Entities.Mobs.EntityBear;
@@ -68,7 +68,6 @@ import TFC.GUI.GuiForge;
 import TFC.GUI.GuiInventoryTFC;
 import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLogPile;
-import TFC.GUI.GuiMetallurgy;
 import TFC.GUI.GuiMold;
 import TFC.GUI.GuiQuern;
 import TFC.GUI.GuiScribe;
@@ -130,7 +129,6 @@ import TFC.TileEntities.TileEntityFoodPrep;
 import TFC.TileEntities.TileEntityForge;
 import TFC.TileEntities.TileEntityIngotPile;
 import TFC.TileEntities.TileEntityLogPile;
-import TFC.TileEntities.TileEntityMetallurgy;
 import TFC.TileEntities.TileEntityPottery;
 import TFC.TileEntities.TileEntityQuern;
 import TFC.TileEntities.TileEntityScribe;
@@ -297,7 +295,7 @@ public class ClientProxy extends CommonProxy
 		}
 		case 24:
 		{
-			return new GuiMetallurgy(player.inventory, (TileEntityMetallurgy) te, world, x, y, z);
+			return null;//was metallurgy table
 		}
 		case 25:
 		{

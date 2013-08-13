@@ -1,39 +1,13 @@
 package TFC.Containers;
 
-import TFC.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotSluice;
 import TFC.TileEntities.TileEntitySluice;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
 
 public class ContainerSluice extends ContainerTFC
 {
@@ -101,54 +75,55 @@ public class ContainerSluice extends ContainerTFC
 		}
 		return null;
 	}
-	
+
 	private int soilamt = 0;
 	private int progress = 0;
 	@Override
 	public void detectAndSendChanges()
-    {
-        for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
-        {
-            ItemStack var2 = ((Slot)this.inventorySlots.get(var1)).getStack();
-            ItemStack var3 = (ItemStack)this.inventoryItemStacks.get(var1);
+	{
+		super.detectAndSendChanges();
+		for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1)
+		{
+			ItemStack var2 = ((Slot)this.inventorySlots.get(var1)).getStack();
+			ItemStack var3 = (ItemStack)this.inventoryItemStacks.get(var1);
 
-            if (!ItemStack.areItemStacksEqual(var3, var2))
-            {
-                var3 = var2 == null ? null : var2.copy();
-                this.inventoryItemStacks.set(var1, var3);
+			if (!ItemStack.areItemStacksEqual(var3, var2))
+			{
+				var3 = var2 == null ? null : var2.copy();
+				this.inventoryItemStacks.set(var1, var3);
 
-                for (int var4 = 0; var4 < this.crafters.size(); ++var4)
-                {
-                    ((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
-                }
-            }
-        }
-        for (int var1 = 0; var1 < this.crafters.size(); ++var1)
-        {
-            ICrafting var2 = (ICrafting)this.crafters.get(var1);
-            if (this.soilamt != this.sluice.soilAmount)
-            {
-                var2.sendProgressBarUpdate(this, 0, this.sluice.soilAmount);
-            }
-            if (this.progress != this.sluice.processTimeRemaining)
-            {
-                var2.sendProgressBarUpdate(this, 1, this.sluice.processTimeRemaining);
-            }
-        }
+				for (int var4 = 0; var4 < this.crafters.size(); ++var4)
+				{
+					((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
+				}
+			}
+		}
+		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
+		{
+			ICrafting var2 = (ICrafting)this.crafters.get(var1);
+			if (this.soilamt != this.sluice.soilAmount)
+			{
+				var2.sendProgressBarUpdate(this, 0, this.sluice.soilAmount);
+			}
+			if (this.progress != this.sluice.processTimeRemaining)
+			{
+				var2.sendProgressBarUpdate(this, 1, this.sluice.processTimeRemaining);
+			}
+		}
 
-        soilamt = this.sluice.soilAmount;
-        progress = this.sluice.processTimeRemaining;
-    }
+		soilamt = this.sluice.soilAmount;
+		progress = this.sluice.processTimeRemaining;
+	}
 	@Override
 	public void updateProgressBar(int par1, int par2)
-    {
-        if (par1 == 0)
-        {
-            this.sluice.soilAmount = par2;
-        }
-        if (par1 == 1)
-        {
-            this.sluice.processTimeRemaining = par2;
-        }
-    }
+	{
+		if (par1 == 0)
+		{
+			this.sluice.soilAmount = par2;
+		}
+		if (par1 == 1)
+		{
+			this.sluice.processTimeRemaining = par2;
+		}
+	}
 }

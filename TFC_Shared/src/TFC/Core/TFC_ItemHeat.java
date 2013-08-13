@@ -18,7 +18,6 @@ import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
-import TFC.WorldGen.TFCBiome;
 
 public class TFC_ItemHeat 
 {
@@ -100,7 +99,7 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCBlueSteelIngot,1), BlueSteelRaw,new ItemStack(TFCItems.HCBlueSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCRedSteelIngot,1), RedSteelRaw,new ItemStack(TFCItems.HCRedSteelUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.HCSteelIngot,1), SteelRaw,new ItemStack(TFCItems.HCSteelUnshaped,1)));
-		
+
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.UnknownIngot,1), CopperRaw,new ItemStack(TFCItems.UnknownUnshaped,1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.UnknownUnshaped,1), CopperRaw,new ItemStack(TFCItems.UnknownUnshaped,1)).setMorph(new ItemStack(TFCItems.CeramicMold)));
 
@@ -304,14 +303,14 @@ public class TFC_ItemHeat
 		manager.addIndex(new HeatIndex(new ItemStack(Item.chickenRaw, 1), 0.85F, 120.5F, new ItemStack(Item.chickenCooked, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Item.fishRaw, 1), 0.85F, 120.5F, new ItemStack(Item.fishCooked, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(Item.egg, 1), 0.90F, 110.5F, new ItemStack(TFCItems.EggCooked, 1)));
-		
+
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.WheatDough, 1), 0.90F, 130.5F, new ItemStack(Item.bread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.BarleyDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.BarleyBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RyeDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RyeBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.OatDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.OatBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.RiceDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.RiceBread, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.CornmealDough, 1), 0.90F, 130.5F, new ItemStack(TFCItems.CornBread, 1)));
-		
+
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealGeneric, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageBoost, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
 		manager.addIndex(new HeatIndex(new ItemStack(TFCItems.MealDamageResist, 1), 0.85F, 135.5F, new ItemStack(Item.bowlEmpty, 1)));
@@ -343,88 +342,168 @@ public class TFC_ItemHeat
 		if(temp < 80)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.Warming");
-			if(temp>(80 * 0.2)) phrase = phrase + "\u2605";
-			if(temp>(80 * 0.4)) phrase = phrase + "\u2605";
-			if(temp>(80 * 0.6)) phrase = phrase + "\u2605";
-			if(temp>(80 * 0.8)) phrase = phrase + "\u2605";
+			if(temp>(80 * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>(80 * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>(80 * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>(80 * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 80 && temp < 210)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.Hot");
-			if(temp>80+((210-80) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>80+((210-80) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>80+((210-80) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>80+((210-80) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>80+((210-80) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>80+((210-80) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>80+((210-80) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>80+((210-80) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 210 &&  temp < 480)
 		{
 			phrase = StringUtil.localize("gui.ItemHeat.VeryHot");
-			if(temp>210+((480-210) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>210+((480-210) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>210+((480-210) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>210+((480-210) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>210+((480-210) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>210+((480-210) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>210+((480-210) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>210+((480-210) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 480 &&  temp < 580)
 		{
 			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.FaintRed");
-			if(temp>480+((580-480) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>480+((580-480) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>480+((580-480) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>480+((580-480) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>480+((580-480) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>480+((580-480) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>480+((580-480) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>480+((580-480) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 580 &&  temp < 730)
 		{
 			phrase = "\2474" + StringUtil.localize("gui.ItemHeat.DarkRed");
-			if(temp>580+((730-580) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>580+((730-580) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>580+((730-580) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>580+((730-580) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>580+((730-580) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>580+((730-580) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>580+((730-580) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>580+((730-580) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 730 &&  temp < 930)
 		{
 			phrase = "\247c" + StringUtil.localize("gui.ItemHeat.BrightRed");
-			if(temp>730+((930-730) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>730+((930-730) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>730+((930-730) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>730+((930-730) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>730+((930-730) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>730+((930-730) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>730+((930-730) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>730+((930-730) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 930 &&  temp < 1100)
 		{
 			phrase = "\2476" + StringUtil.localize("gui.ItemHeat.Orange");
-			if(temp>930+((1100-930) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>930+((1100-930) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>930+((1100-930) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>930+((1100-930) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>930+((1100-930) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>930+((1100-930) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>930+((1100-930) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>930+((1100-930) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 1100 &&  temp < 1300)
 		{
 			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.Yellow");
-			if(temp>1100+((1300-1100) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>1100+((1300-1100) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>1100+((1300-1100) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>1100+((1300-1100) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>1100+((1300-1100) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1100+((1300-1100) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1100+((1300-1100) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1100+((1300-1100) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 1300 &&  temp < 1400)
 		{
 			phrase = "\247e" + StringUtil.localize("gui.ItemHeat.YellowWhite");
-			if(temp>1300+((1400-1300) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>1300+((1400-1300) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>1300+((1400-1300) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>1300+((1400-1300) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>1300+((1400-1300) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1300+((1400-1300) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1300+((1400-1300) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1300+((1400-1300) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 1400 &&  temp < 1500)
 		{
 			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.White");
-			if(temp>1400+((1500-1400) * 0.2)) phrase = phrase + "\u2605";
-			if(temp>1400+((1500-1400) * 0.4)) phrase = phrase + "\u2605";
-			if(temp>1400+((1500-1400) * 0.6)) phrase = phrase + "\u2605";
-			if(temp>1400+((1500-1400) * 0.8)) phrase = phrase + "\u2605";
+			if(temp>1400+((1500-1400) * 0.2)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1400+((1500-1400) * 0.4)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1400+((1500-1400) * 0.6)) {
+				phrase = phrase + "\u2605";
+			}
+			if(temp>1400+((1500-1400) * 0.8)) {
+				phrase = phrase + "\u2605";
+			}
 		}
 		else if(temp >= 1500)
 		{
 			phrase = "\247f" + StringUtil.localize("gui.ItemHeat.BrilliantWhite");
 		}
-		
+
 		if(temp > meltTemp)
 		{
 			phrase = phrase + "\247f - " + StringUtil.localize("gui.ItemHeat.Liquid");
@@ -474,7 +553,7 @@ public class TFC_ItemHeat
 
 		return StringUtil.localize("gui.ClearSlot");
 	}
-	
+
 	public static Boolean getIsLiquid(ItemStack is)
 	{       
 		HeatRegistry manager = HeatRegistry.getInstance();
@@ -484,11 +563,13 @@ public class TFC_ItemHeat
 			if(hi != null && is.hasTagCompound())
 			{
 				float temp = 0;
-				if(is.getTagCompound().hasKey("temperature"))
+				if(is.getTagCompound().hasKey("temperature")) {
 					temp = is.getTagCompound().getFloat("temperature");
+				}
 				return temp >= hi.meltTemp;
+			} else {
+				return false;
 			}
-			else return false;
 		} 
 		else 
 		{
@@ -505,15 +586,16 @@ public class TFC_ItemHeat
 			if(hi != null)
 			{
 				return hi.meltTemp;
+			} else {
+				return -1;
 			}
-			else return -1;
 		} 
 		else 
 		{
 			return -1;
 		}
 	}
-	
+
 	public static float getMeltingPoint(Metal m)
 	{       
 		HeatRegistry manager = HeatRegistry.getInstance();
@@ -523,8 +605,9 @@ public class TFC_ItemHeat
 			if(hi != null)
 			{
 				return hi.meltTemp;
+			} else {
+				return -1;
 			}
-			else return -1;
 		} 
 		else 
 		{
@@ -541,8 +624,9 @@ public class TFC_ItemHeat
 			if(hi != null)
 			{
 				return hi.specificHeat;
+			} else {
+				return 0.7F;
 			}
-			else return 0.7F;
 		} 
 		else 
 		{
@@ -576,28 +660,26 @@ public class TFC_ItemHeat
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
 		byte debugBump = 0;
-		if(TFC_Settings.enableDebugMode)
+		if(TFC_Settings.enableDebugMode) {
 			debugBump = 5;
+		}
 		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;
 	}
 
 	public static void HandleItemHeat(ItemStack is, int xCoord, int yCoord, int zCoord)
 	{
-		float ambient = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
-
 		if(is.hasTagCompound())
 		{
 			NBTTagCompound comp = is.getTagCompound();
 			if(comp.hasKey("temperature"))
 			{
 				float temp = comp.getFloat("temperature");
-				if(temp > ambient)
+				if(temp > 0)
 				{
 					temp -= TFC_ItemHeat.getTempDecrease(is);
 					comp.setFloat("temperature",temp);
 				}
-				//is.setTagCompound(comp);
-				if(temp <= ambient)
+				if(temp <= 0)
 				{
 					comp.removeTag("temperature");
 				}
@@ -611,8 +693,6 @@ public class TFC_ItemHeat
 
 	public static void HandleContainerHeat(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
-		float ambient = TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord);
-
 		for(int i = 0; i < inventory.length; i++)
 		{
 			if(inventory[i] != null && inventory[i].stackSize <= 0) 
@@ -626,13 +706,13 @@ public class TFC_ItemHeat
 				if(comp.hasKey("temperature"))
 				{
 					float temp = comp.getFloat("temperature");
-					if(temp > ambient)
+					if(temp > 0)
 					{
 						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
 						comp.setFloat("temperature",temp);
 					}
-					inventory[i].setTagCompound(comp);
-					if(temp <= ambient)
+					//inventory[i].setTagCompound(comp);
+					if(temp <= 0)
 					{
 						Collection C = comp.getTags();
 						Iterator itr = C.iterator();
@@ -657,8 +737,6 @@ public class TFC_ItemHeat
 
 	public static void HandleContainerHeatChest(World world, ItemStack[] inventory, int xCoord, int yCoord, int zCoord)
 	{
-		float ambient = ((TFCBiome)world.getWorldChunkManager().getBiomeGenAt(xCoord, zCoord)).getHeightAdjustedTemperature(yCoord);
-
 		for(int i = 0; i < inventory.length; i++)
 		{
 			if(inventory[i] != null && inventory[i].stackSize <= 0) 
@@ -672,15 +750,12 @@ public class TFC_ItemHeat
 				if(comp.hasKey("temperature"))
 				{
 					float temp = comp.getFloat("temperature");
-					if(temp > ambient)
+					if(temp > 0)
 					{
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
-						temp -= TFC_ItemHeat.getTempDecrease(inventory[i]);
+						temp -= TFC_ItemHeat.getTempDecrease(inventory[i])*3;
 						comp.setFloat("temperature",temp);
 					}
-					inventory[i].setTagCompound(comp);
-					if(temp <= ambient)
+					if(temp <= 0)
 					{
 						Collection C = comp.getTags();
 						Iterator itr = C.iterator();

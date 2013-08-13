@@ -2,7 +2,6 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -10,7 +9,7 @@ import net.minecraft.world.World;
 import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TECrucible;
 
-public class ContainerCrucible extends Container
+public class ContainerCrucible extends ContainerTFC
 {
 	private TECrucible te;
 	private float firetemp;

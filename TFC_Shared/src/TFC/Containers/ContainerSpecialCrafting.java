@@ -2,7 +2,6 @@ package TFC.Containers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
@@ -12,7 +11,7 @@ import net.minecraft.world.World;
 import TFC.Containers.Slots.SlotCraftingMetal;
 import TFC.Core.CraftingManagerTFC;
 
-public class ContainerSpecialCrafting extends Container
+public class ContainerSpecialCrafting extends ContainerTFC
 {
 	/** The crafting matrix inventory (3x3). */
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 5, 5);
@@ -29,8 +28,9 @@ public class ContainerSpecialCrafting extends Container
 	{
 		for (int j1 = 0; j1 < 25; j1++)
 		{
-			if(is != null)
+			if(is != null) {
 				craftMatrix.setInventorySlotContents(j1, is.copy());
+			}
 		}
 		this.worldObj = world;
 
