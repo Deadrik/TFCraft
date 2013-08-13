@@ -1743,8 +1743,6 @@ public class TFCItems
 		UnknownIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","UnknownIngot",num++)).setUnlocalizedName("Unknown Ingot");
 		UnknownUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnknownUnshaped",num++)).setUnlocalizedName("Unknown Unshaped");
 
-
-
 		/**Plans*/
 		num = 20000;
 		SetupPlans(num);

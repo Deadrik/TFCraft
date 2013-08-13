@@ -139,11 +139,13 @@ public class FoodStatsTFC
 				{
 					this.restoreWater(player, 20);
 				}
-				if(waterLevel < 0) {
+				if(waterLevel < 0) 
+				{
 					waterLevel = 0;
 				}
-				if(waterLevel == 0 && (temp > 30 || difficulty > 1)) {
-					player.attackEntityFrom(DamageSource.generic, 1);
+				if(waterLevel == 0 && temp > 30) 
+				{
+					player.attackEntityFrom(DamageSource.generic, 2);
 				}
 			}
 		}
@@ -151,7 +153,7 @@ public class FoodStatsTFC
 
 	public int getMaxWater(EntityPlayer player)
 	{
-		return (int) ((TFC_Time.dayLength)+(200*player.experienceLevel));
+		return (TFC_Time.dayLength)+(200*player.experienceLevel);
 	}
 
 	/**
