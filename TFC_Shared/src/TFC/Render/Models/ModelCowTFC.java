@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
+import TFC.Entities.Mobs.EntityCowTFC;
 public class ModelCowTFC extends ModelQuadruped
 {
 	public ModelRenderer udders;
@@ -77,7 +78,6 @@ public class ModelCowTFC extends ModelQuadruped
 		float ageScale = 2.0F-percent;
 		float ageHeadScale = (float)Math.sqrt(1/ageScale);
 		float offset = 1.4f - percent;
-
 		GL11.glPushMatrix ();
 
 		GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
