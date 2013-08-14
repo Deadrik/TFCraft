@@ -7,7 +7,7 @@ public interface IAnimal
 	public enum GenderEnum
 	{
 		MALE,FEMALE;
-		public static final GenderEnum[] genders = {FEMALE, MALE};
+		public static final GenderEnum[] genders = {MALE, FEMALE};
 	}
 
 	public GenderEnum getGender();
@@ -19,6 +19,8 @@ public interface IAnimal
 	public int getNumberOfDaysToAdult();
 
 	public boolean isAdult();
+	
+	//public int getSex();
 	/**
 	 * @return Size modifier of the animal. Used for rendering and various other purposes.
 	 */
