@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -16,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.util.AxisAlignedBB;
 import TFC.TFCItems;
 import TFC.Core.KilnCraftingManager;
 import TFC.Core.KilnRecipe;
@@ -46,28 +43,16 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 		//If there are no logs for burning then we dont need to tick at all
 		if(!worldObj.isRemote && logsForBurn > 0)
 		{			
-			//Check for any Logs that may have been thrown in the fire and add them to the fuel supply
-			List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord+1, zCoord, xCoord+1, yCoord+2, zCoord+1));
-			if(list != null && !list.isEmpty())
-			{
-				for (Iterator iterator = list.iterator(); iterator.hasNext();)
-				{
-					EntityItem entity = (EntityItem)iterator.next();
-					if(entity.getEntityItem().itemID == TFCItems.Logs.itemID)
-					{
-						logsForBurn += entity.getEntityItem().stackSize;
-					}
-				}
-			}
 
 			int blockAboveID = worldObj.getBlockId(xCoord, yCoord+1, zCoord);
 			//Make sure to keep the fire going throughout the length of the burn
 			if(blockAboveID != Block.fire.blockID && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFC_Settings.pitKilnBurnTime)
 			{
-				if(blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn())
+				if(blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn()) {
 					worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
-				else
+				} else {
 					logsForBurn = 0;
+				}
 			}
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
@@ -110,7 +95,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 				}
 
 				logsForBurn = 0;
-				
+
 				broadcastPacketInRange(createUpdatePacket());
 			}
 
@@ -133,6 +118,11 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			int burnLength = (int) (TFC_Time.hourLength * (logsForBurn == 16 ? TFC_Settings.pitKilnBurnTime : ratio * logsForBurn));
 			burnStart = TFC_Time.getTotalTicks();
 		}
+	}
+
+	public boolean isValid()
+	{
+		return true;
 	}
 
 	@Override
@@ -166,7 +156,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			if(m > 0)
 			{
 				entityitem = new EntityItem(
-					worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.Straw, m));
+						worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, new ItemStack(TFCItems.Straw, m));
 				entityitem.lifespan = 48000;
 				worldObj.spawnEntityInWorld(entityitem);
 			}
