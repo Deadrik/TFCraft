@@ -22,7 +22,7 @@ public class AnvilCraftingHandler
 			{
 				event.entity.worldObj.spawnEntityInWorld(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, out1));
 			}
-			
+
 			if(!((EntityPlayer)event.entity).inventory.addItemStackToInventory(out2))
 			{
 				event.entity.worldObj.spawnEntityInWorld(new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, out2));
@@ -30,18 +30,21 @@ public class AnvilCraftingHandler
 			event.result = null;
 		}
 	}
-	
+
 	@ForgeSubscribe
 	public void onItemMelt(ItemMeltEvent event) 
 	{
-		if((event.input1.itemID == TFCItems.Bloom.itemID || event.input1.itemID == TFCItems.RawBloom.itemID) && event.result.getItemDamage() > 100)
+		if(event.input1 != null)
 		{
-			event.result = event.input1;
-			event.result.setItemDamage(event.result.getItemDamage()-1);
-		}
-		else if((event.input1.itemID == TFCItems.Bloom.itemID || event.input1.itemID == TFCItems.RawBloom.itemID) && event.result.getItemDamage() <= 100)
-		{
-			event.result.setItemDamage(100-event.input1.getItemDamage());
+			if((event.input1.itemID == TFCItems.Bloom.itemID || event.input1.itemID == TFCItems.RawBloom.itemID) && event.result.getItemDamage() > 100)
+			{
+				event.result = event.input1;
+				event.result.setItemDamage(event.result.getItemDamage()-1);
+			}
+			else if((event.input1.itemID == TFCItems.Bloom.itemID || event.input1.itemID == TFCItems.RawBloom.itemID) && event.result.getItemDamage() <= 100)
+			{
+				event.result.setItemDamage(100-event.input1.getItemDamage());
+			}
 		}
 	}
 }
