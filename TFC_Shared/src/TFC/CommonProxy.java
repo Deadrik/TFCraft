@@ -57,6 +57,7 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
+import TFC.Handlers.BiomeEventHandler;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TileEntityAnvil;
@@ -94,6 +95,16 @@ public class CommonProxy implements IGuiHandler
 {
 
 	public void registerRenderInformation() {
+		// NOOP on server
+	}
+	
+	public void registerBiomeEventHandler()
+	{
+		// NOOP on server
+	}
+	
+	public void setupGuiIngameForge()
+	{
 		// NOOP on server
 	}
 

@@ -24,6 +24,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Enums.EnumTree;
 import TFC.Core.ColorizerFoliageTFC;
@@ -75,6 +76,7 @@ import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiVessel;
 import TFC.GUI.GuiVesselLiquid;
 import TFC.GUI.GuiWorkbench;
+import TFC.Handlers.BiomeEventHandler;
 import TFC.Handlers.Client.BlockRenderHandler;
 import TFC.Handlers.Client.ChiselHighlightHandler;
 import TFC.Handlers.Client.FarmlandHighlightHandler;
@@ -214,6 +216,23 @@ public class ClientProxy extends CommonProxy
 
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBiomeEventHandler()
+	{
+		// Register the Biome Event Handler
+		MinecraftForge.EVENT_BUS.register(new BiomeEventHandler());
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setupGuiIngameForge()
+	{
+		GuiIngameForge.renderHealth = false;
+		GuiIngameForge.renderArmor = false;
+		GuiIngameForge.renderFood = false;
 	}
 
 	@Override
