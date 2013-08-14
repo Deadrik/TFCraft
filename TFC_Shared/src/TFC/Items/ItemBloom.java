@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import TFC.TFCItems;
 import TFC.API.ISmeltable;
 import TFC.API.Metal;
 import TFC.API.TFCTabs;
@@ -44,26 +45,29 @@ public class ItemBloom extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is) {
-		// TODO Auto-generated method stub
+	public Metal GetMetalType(ItemStack is) 
+	{
 		return Global.WROUGHTIRON;
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is) {
-		// TODO Auto-generated method stub
+	public short GetMetalReturnAmount(ItemStack is) 
+	{
 		return (short) is.getItemDamage();
 	}
 
 	@Override
-	public boolean isSmeltable(ItemStack is) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean isSmeltable(ItemStack is) 
+	{
+		if(this.itemID == TFCItems.Bloom.itemID) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is) {
-		// TODO Auto-generated method stub
+	public EnumTier GetSmeltTier(ItemStack is) 
+	{
 		return EnumTier.TierIII;
 	}
 
