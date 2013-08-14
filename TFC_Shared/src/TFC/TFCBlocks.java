@@ -37,7 +37,6 @@ import TFC.Blocks.Devices.BlockCrucible;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Blocks.Devices.BlockFirepit;
 import TFC.Blocks.Devices.BlockForge;
-import TFC.Blocks.Devices.BlockMetallurgy;
 import TFC.Blocks.Devices.BlockPottery;
 import TFC.Blocks.Devices.BlockQuern;
 import TFC.Blocks.Devices.BlockScribe;
@@ -175,7 +174,6 @@ public class TFCBlocks
 	public static Block Scribe;
 	public static Block Forge;
 	public static Block BlastFurnace;
-	public static Block MetalTable;
 	public static Block Molten;
 	public static Block Sluice;
 	public static Block fruitTreeWood;
@@ -293,7 +291,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Anvil2, TFC.Items.ItemBlocks.ItemAnvil2.class, "Anvil2");
 		GameRegistry.registerBlock(Scribe, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Scribe");
 		GameRegistry.registerBlock(Forge, "Forge");
-		GameRegistry.registerBlock(MetalTable, TFC.Items.ItemBlocks.ItemTerraBlock.class, "MetalTable");
+
 		GameRegistry.registerBlock(Molten, "Molten");
 		GameRegistry.registerBlock(BlastFurnace, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bloomery");
 		GameRegistry.registerBlock(EarlyBloomery, TFC.Items.ItemBlocks.ItemTerraBlock.class, "EarlyBloomery");
@@ -485,7 +483,6 @@ public class TFCBlocks
 		TFCBlocks.Anvil = new TFC.Blocks.Devices.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil", 2011)).setUnlocalizedName("Anvil").setHardness(3).setResistance(100F);
 		TFCBlocks.Anvil2 = new TFC.Blocks.Devices.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil2", 2010), 8).setUnlocalizedName("Anvil2").setHardness(3).setResistance(100F);
 
-		TFCBlocks.MetalTable = new BlockMetallurgy(TFC_Settings.getIntFor(config,"block","Metallurgy", 2009)).setUnlocalizedName("Metallurgy").setHardness(3);
 		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setUnlocalizedName("Molten").setHardness(20);
 		TFCBlocks.BlastFurnace = new BlockBlastFurnace(TFC_Settings.getIntFor(config,"block","BlastFurnace", 2007)).setUnlocalizedName("BlastFurnace").setHardness(20).setLightValue(0F);
 		TFCBlocks.EarlyBloomery = new BlockEarlyBloomery(TFC_Settings.getIntFor(config,"block","EarlyBloomery", 2006)).setUnlocalizedName("EarlyBloomery").setHardness(20).setLightValue(0F);
