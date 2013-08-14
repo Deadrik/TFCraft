@@ -10,7 +10,7 @@ public class Armor
 	public static Armor BismuthBronzePlate = 	new Armor(1, 600, 400, 330, "Bismuth Bronze");//Tier 1
 	public static Armor BlackBronzePlate = 		new Armor(2, 400, 600, 330, "Black Bronze");//Tier 1
 	public static Armor BronzePlate = 			new Armor(3, 500, 500, 330, "Bronze");//Tier 1
-	public static Armor WroughtIronPlate = 		new Armor(4, 800, 800, 528, "Iron");//Tier 2
+	public static Armor WroughtIronPlate = 		new Armor(4, 800, 800, 528, "Wrought Iron");//Tier 2
 	public static Armor SteelPlate = 			new Armor(5, 1000, 1200, 660, "Steel");//Tier 3
 	public static Armor BlackSteelPlate = 		new Armor(6, 2000, 1800, 1320, "Black Steel");//Tier 4
 	public static Armor BlueSteelPlate = 		new Armor(7, 2500, 2000, 2000, "Blue Steel");//Tier 5
