@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
@@ -233,6 +234,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		if(!worldObj.isRemote){
 			player.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				player.addChatMessage("Pregnant");
+			}
 			player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
@@ -252,8 +256,8 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
     {
-		return par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
-				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain;
+		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
+				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
     }
 
 	@Override
