@@ -121,10 +121,6 @@ public class TerraFirmaCraft
 	@EventHandler
 	public void initialize(FMLInitializationEvent evt)
 	{
-		GuiIngameForge.renderHealth = false;
-		GuiIngameForge.renderArmor = false;
-		GuiIngameForge.renderFood = false;
-
 		//Add Item Name Localizations
 		Localization.addLocalization("/assets/terrafirmacraft/lang/", "en_US");
 		//LanguageRegistry.instance().loadLocalization("assets/terrafirmacraft/lang/", "en_US", false);
@@ -174,9 +170,10 @@ public class TerraFirmaCraft
 
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
-
-		// Register the Biome Event Handler
-		MinecraftForge.EVENT_BUS.register(new BiomeEventHandler());
+		
+		proxy.registerBiomeEventHandler();
+		
+		proxy.setupGuiIngameForge();
 
 		//Setup custom potion effects
 		TFCPotion.Setup();
