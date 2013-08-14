@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
@@ -369,5 +370,11 @@ public class BlockAnvil extends BlockTerraContainer
 		TFC_Textures.AnvilBend = registerer.registerIcon(Reference.ModID + ":" + "Anvil Bend");
 		TFC_Textures.AnvilUpset = registerer.registerIcon(Reference.ModID + ":" + "Anvil Upset");
 		TFC_Textures.AnvilShrink = registerer.registerIcon(Reference.ModID + ":" + "Anvil Shrink");
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return null;
 	}
 }
