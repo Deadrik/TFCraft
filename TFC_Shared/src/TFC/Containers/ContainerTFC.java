@@ -187,6 +187,6 @@ public class ContainerTFC extends Container
 		is3Tags.removeTag("temperature");
 		is4Tags.removeTag("temperature");
 
-		return is3Tags.equals(is4Tags) &&  (((temp3 - temp4) < 5) || ((temp3 - temp4) > -5));
+		return is3Tags.equals(is4Tags) &&  !(((temp3 - temp4) < 5) || ((temp3 - temp4) > -5));
 	}
 }
