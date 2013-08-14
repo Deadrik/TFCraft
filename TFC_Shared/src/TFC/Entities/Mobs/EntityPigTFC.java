@@ -17,11 +17,13 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
@@ -72,7 +74,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
@@ -89,7 +91,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
 	/**
@@ -114,6 +116,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		super.entityInit();
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
 	}
 
 	@Override
@@ -129,19 +132,30 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			hunger--;
 		}
 
-		syncData();
+		if(super.inLove > 0){
+			setInLove(true);
+		}
 
+		syncData();
+		if(isAdult()){
+			setGrowingAge(0);
+		}
+		else{
+			setGrowingAge(-1);
+		}
 
 		if(isPregnant()) 
 		{
 			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime)
 			{
-				EntityCowTFC baby = (EntityCowTFC) createChild(this);
-				baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
-				baby.rotationYawHead = baby.rotationYaw;
-				baby.renderYawOffset = baby.rotationYaw;
-				worldObj.spawnEntityInWorld(baby);
-				baby.setGrowingAge((int)TFC_Time.getTotalDays());
+				for(int i = 0; i < 8 + rand.nextInt(5);i++){
+					EntityPigTFC baby = (EntityPigTFC) createChildTFC(this);
+					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+					baby.rotationYawHead = baby.rotationYaw;
+					baby.renderYawOffset = baby.rotationYaw;
+					worldObj.spawnEntityInWorld(baby);
+					baby.setAge((int)TFC_Time.getTotalDays());
+				}
 				pregnant = false;
 			}
 		}
@@ -200,7 +214,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
 		timeOfConception = nbt.getLong("ConceptionTime");
-		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 		this.setSaddled(nbt.getBoolean("Saddle"));
 	}
 
@@ -210,6 +224,13 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
 		if (super.interact(par1EntityPlayer))
 		{
 			return true;
@@ -319,11 +340,25 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	}
 
 	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
+				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
+	}
+
+	@Override
 	public void setGrowingAge(int par1)
 	{
 		if(!TFC_Core.PreventEntityDataUpdate) {
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 		}
+	}
+
+	public void setAge(int par1)
+	{
+		//if(!TFC_Core.PreventEntityDataUpdate) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+		//}
 	}
 
 	@Override
@@ -335,19 +370,28 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	@Override
 	public GenderEnum getGender() 
 	{
-		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
+		return GenderEnum.genders[getSex()];
+	}
+
+	public int getSex(){
+		return dataWatcher.getWatchableObjectInt(13);
 	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityCowTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+		return null;
+	}
+
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
+	{
+		return new EntityPigTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
 	}
 
 	@Override
 	public int getBirthDay() 
 	{
-		return this.dataWatcher.getWatchableObjectInt(12);
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override

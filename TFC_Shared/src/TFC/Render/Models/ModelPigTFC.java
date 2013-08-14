@@ -59,7 +59,7 @@ public class ModelPigTFC extends ModelPig
 			}
 			GL11.glPushMatrix ();
 			GL11.glTranslatef (0.0F, (0.75f-(0.75f*percent)), 0f);
-			GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);          
+			GL11.glScalef(1/ageScale, 1/ageScale, 1/ageScale);
 			head.render(par7);
 			body.render(par7);
 			leg1.render(par7);

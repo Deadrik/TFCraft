@@ -41,7 +41,7 @@ public class EntityAIMateTFC extends EntityAIBase
 		{
 			targetMate = getLocalMate();
 			if (targetMate != null){
-				if ((targetMate.getGender() == GenderEnum.MALE && theAnimal.getGender() == GenderEnum.MALE) 
+				if ((targetMate.getGender() ==  theAnimal.getGender()) 
 						|| (theAnimal.isPregnant() || targetMate.isPregnant())){
 					return false;
 				}

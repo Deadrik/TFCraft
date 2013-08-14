@@ -3,12 +3,16 @@ package TFC.Render;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.util.ResourceLocation;
+import TFC.Reference;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 
 public class RenderPigTFC extends RenderPig
 {
 
+	private static final ResourceLocation pigSkinTFC = new ResourceLocation(Reference.ModID, "mob/pig.png");
 	public RenderPigTFC(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{
 		super(par1ModelBase,par2ModelBase, par3);
@@ -26,4 +30,10 @@ public class RenderPigTFC extends RenderPig
 		this.shadowSize = 0.35f + (TFC_Core.getPercentGrown((IAnimal)par1Entity)*0.35f);
 		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
+	
+	@Override
+	protected ResourceLocation func_110886_a(EntityPig par1EntityPig)
+    {
+        return pigSkinTFC;
+    }
 }
