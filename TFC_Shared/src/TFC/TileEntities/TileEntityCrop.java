@@ -39,8 +39,8 @@ public class TileEntityCrop extends NetworkTileEntity
 		if(!worldObj.isRemote)
 		{
 			float timeMultiplier = 360/TFC_Time.daysInYear;
-			
-			
+
+
 			CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
 
 			long time = TFC_Time.getTotalTicks();
@@ -50,12 +50,15 @@ public class TileEntityCrop extends NetworkTileEntity
 				if(crop.needsSunlight && worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord))
 				{
 					sunLevel++;
-					if(sunLevel > 30) sunLevel = 30;
+					if(sunLevel > 30) {
+						sunLevel = 30;
+					}
 				}
-				
+
 				TileEntityFarmland tef = null;
-				if(worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) != null)
+				if(worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) != null) {
 					tef = (TileEntityFarmland) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+				}
 
 				float ambientTemp = TFC_Climate.getHeightAdjustedTempSpecificDay(TFC_Time.getDayOfYearFromTick(growthTimer), xCoord, yCoord, zCoord);
 				float tempAdded = 0;
@@ -66,8 +69,9 @@ public class TileEntityCrop extends NetworkTileEntity
 				}
 				else if(crop.dormantInFrost && ambientTemp < crop.minGrowthTemp)
 				{
-					if(growth > 1)
+					if(growth > 1) {
 						tempAdded = -0.03f * (crop.minGrowthTemp - ambientTemp);
+					}
 				}
 				else if(ambientTemp < 28)
 				{
@@ -92,14 +96,17 @@ public class TileEntityCrop extends NetworkTileEntity
 
 				int nutriType = crop.cycleType;
 				int nutri = tef != null ? tef.nutrients[nutriType] : 18000;
-				float waterBoost = TFC.Blocks.BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.3f : 0;
+				int soilMax = tef != null ? tef.getSoilMax() : 18000;
+				//waterBoost only helps if you are playing on a longer than default year length.
+				float waterBoost = TFC.Blocks.BlockFarmland.isWaterNearby(worldObj, xCoord, yCoord, zCoord) ? 0.1f : 0;
 
-				float nutriMult = (0.2f + ((float)nutri >= 18000 ? 1 : (float)nutri/18000) * 0.5f);
+				float nutriMult = (0.2f + ((float)nutri/(float)soilMax) * 0.5f) + waterBoost;
 
 				if(tef != null)
 				{
-					if(tef.nutrients[nutriType] > 0)
+					if(tef.nutrients[nutriType] > 0) {
 						tef.DrainNutrients(nutriType, crop.nutrientUsageMult);
+					}
 				}
 
 				float growthRate = (((crop.numGrowthStages/(crop.growthTime*TFC_Time.timeRatio))+tempAdded)*nutriMult) * timeMultiplier;
@@ -124,11 +131,12 @@ public class TileEntityCrop extends NetworkTileEntity
 			{
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 			}
-			
+
 			if(worldObj.isRaining() && TFC_Climate.getHeightAdjustedTemp(xCoord, yCoord, zCoord) < 0)
 			{
-				if(!crop.dormantInFrost || growth > 1)
+				if(!crop.dormantInFrost || growth > 1) {
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+				}
 			}
 		}
 	}
@@ -141,7 +149,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	/**
 	 * Reads a tile entity from NBT.
 	 */
-	 @Override
+	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
 	{
 		super.readFromNBT(par1NBTTagCompound);
@@ -154,7 +162,7 @@ public class TileEntityCrop extends NetworkTileEntity
 	/**
 	 * Writes a tile entity to NBT.
 	 */
-	 @Override
+	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
@@ -184,7 +192,7 @@ public class TileEntityCrop extends NetworkTileEntity
 		growth = inStream.readFloat();
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
+
 	public Packet createCropUpdatePacket()
 	{
 		ByteArrayOutputStream bos=new ByteArrayOutputStream(140);
@@ -205,6 +213,6 @@ public class TileEntityCrop extends NetworkTileEntity
 	public void handleDataPacketServer(DataInputStream inStream)
 			throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
