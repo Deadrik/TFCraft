@@ -10,11 +10,11 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import TFC.Reference;
-import TFC.Entities.EntityTerraJavelin;
+import TFC.Entities.EntityJavelin;
 
 public class RenderTerraJavelin extends Render
 {
-	public void render(EntityTerraJavelin entity, double x, double y, double z, float par8, float par9)
+	public void render(EntityJavelin entity, double x, double y, double z, float par8, float par9)
 	{
 		func_110777_b(entity);
 		GL11.glPushMatrix();
@@ -71,7 +71,7 @@ public class RenderTerraJavelin extends Render
 	@Override
 	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
 	{
-		this.render((EntityTerraJavelin)par1Entity, par2, par4, par6, par8, par9);
+		this.render((EntityJavelin)par1Entity, par2, par4, par6, par8, par9);
 	}
 
 	@Override

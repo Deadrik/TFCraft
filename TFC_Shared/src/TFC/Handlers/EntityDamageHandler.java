@@ -29,7 +29,7 @@ import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
 import TFC.Core.TFC_MobDamage;
-import TFC.Entities.EntityTerraJavelin;
+import TFC.Entities.EntityJavelin;
 import TFC.Items.ItemTFCArmor;
 
 public class EntityDamageHandler
@@ -74,11 +74,11 @@ public class EntityDamageHandler
 			if(event.source.damageType == "arrow")
 			{
 				Entity e = ((EntityDamageSourceIndirect)event.source).getSourceOfDamage();
-				if(e instanceof EntityTerraJavelin)
+				if(e instanceof EntityJavelin)
 				{
-					((EntityTerraJavelin)e).setDamageTaken((short) (((EntityTerraJavelin) e).damageTaken+10));
+					((EntityJavelin)e).setDamageTaken((short) (((EntityJavelin) e).damageTaken+10));
 
-					if(((EntityTerraJavelin)e).damageTaken >= Item.itemsList[((EntityTerraJavelin)e).itemID].getMaxDamage()) 
+					if(((EntityJavelin)e).damageTaken >= Item.itemsList[((EntityJavelin)e).itemID].getMaxDamage()) 
 					{
 						e.setDead();
 					}

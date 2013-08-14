@@ -53,10 +53,9 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			boolean inground = nbt.hasKey("inGround") && nbt.getByte("inGround") == 1;
 			if(inground)
 			{
-				boolean flag = inground && this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
-				boolean pickedUp = player.inventory.addItemStackToInventory(new ItemStack(Item.itemsList[this.itemID], 1, damageTaken));
+				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
-				if (this.canBePickedUp == 1 && !pickedUp)
+				if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(new ItemStack(Item.itemsList[this.itemID], 1, damageTaken)))
 				{
 					flag = false;
 				}

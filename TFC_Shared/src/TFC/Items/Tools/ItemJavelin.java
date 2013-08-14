@@ -6,26 +6,29 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.ICausesDamage;
+import TFC.API.IProjectile;
 import TFC.API.TFCTabs;
-import TFC.Entities.EntityTerraJavelin;
+import TFC.API.Enums.EnumDamageType;
+import TFC.Entities.EntityJavelin;
 
-public class ItemJavelin extends ItemTerraTool
+public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjectile
 {
-	private static int weaponDamage;
-	private static double weaponRangeDamage;
+	public float weaponDamage;
+	private float weaponRangeDamage;
 
 	public ItemJavelin(int par1, EnumToolMaterial par2EnumToolMaterial)
 	{
-		super(par1, weaponDamage, par2EnumToolMaterial, new Block[0]);
+		super(par1, 10, par2EnumToolMaterial, new Block[0]);
 		this.maxStackSize = 1;
 		this.weaponDamage = Math.round(par2EnumToolMaterial.getDamageVsEntity()*0.4f);
-		this.weaponRangeDamage = par2EnumToolMaterial.getDamageVsEntity()*0.5D;
+		this.damageVsEntity = this.weaponDamage;
+		this.weaponRangeDamage = par2EnumToolMaterial.getDamageVsEntity()*0.5f;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses()/2);
 		setCreativeTab(TFCTabs.TFCWeapons);
 	}
@@ -43,14 +46,6 @@ public class ItemJavelin extends ItemTerraTool
 	public int getItemEnchantability()
 	{
 		return 1;
-	}
-
-	/**
-	 * Returns the damage against a given entity.
-	 */
-	public int getDamageVsEntity(Entity par1Entity)
-	{
-		return this.weaponDamage;
 	}
 
 	/**
@@ -95,8 +90,8 @@ public class ItemJavelin extends ItemTerraTool
 		int var6 = this.getMaxItemUseDuration(itemstack) - itemInUseCount;
 		float force = Math.min(var6/20.0f, 1.0f);
 
-		EntityTerraJavelin javelin = new EntityTerraJavelin(world, player, 1.5f*force, this.itemID);
-		javelin.setDamage(this.weaponRangeDamage);
+		EntityJavelin javelin = new EntityJavelin(world, player, 1.5f*force, this.itemID);
+		javelin.setDamage(getRangedDamage());
 
 		int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
 
@@ -130,5 +125,17 @@ public class ItemJavelin extends ItemTerraTool
 	public boolean isFull3D()
 	{
 		return true;
+	}
+
+	@Override
+	public EnumDamageType GetDamageType() 
+	{
+		return EnumDamageType.PIERCING;
+	}
+
+	@Override
+	public float getRangedDamage() 
+	{
+		return weaponRangeDamage;
 	}
 }

@@ -36,7 +36,7 @@ import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
 import TFC.Entities.EntityProjectileTFC;
-import TFC.Entities.EntityTerraJavelin;
+import TFC.Entities.EntityJavelin;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityBlazeTFC;
 import TFC.Entities.Mobs.EntityCaveSpiderTFC;
@@ -176,7 +176,7 @@ public class CommonProxy implements IGuiHandler
 		EntityRegistry.registerGlobalEntityID(EntityCreeperTFC.class, "Creeper", ModLoader.getUniqueEntityId(), 0xffffff, 0x105510);
 		EntityRegistry.registerGlobalEntityID(EntityProjectileTFC.class, "arrow", ModLoader.getUniqueEntityId());
 
-		EntityRegistry.registerModEntity(EntityTerraJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
+		EntityRegistry.registerModEntity(EntityJavelin.class, "javelin", 1,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntitySquidTFC.class, "squid", 2,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityFallingStone.class, "fallingstone", 3,TerraFirmaCraft.instance, 160, 5, true);
 		EntityRegistry.registerModEntity(EntityFallingDirt.class, "fallingdirt", 4,TerraFirmaCraft.instance, 160, 5, true);

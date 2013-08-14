@@ -5,24 +5,24 @@ import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 
-public class EntityTerraJavelin extends EntityProjectileTFC implements ICausesDamage
+public class EntityJavelin extends EntityProjectileTFC implements ICausesDamage
 {
-	public EntityTerraJavelin(World par1World)
+	public EntityJavelin(World par1World)
 	{
 		super(par1World);
 	}
 
-	public EntityTerraJavelin(World par1World, double i, double j, double k)
+	public EntityJavelin(World par1World, double i, double j, double k)
 	{
 		super(par1World, i , j, k);
 	}
 
-	public EntityTerraJavelin(World world, EntityLivingBase shooter, EntityLivingBase victim, float force, float forceVariation, int itemID)
+	public EntityJavelin(World world, EntityLivingBase shooter, EntityLivingBase victim, float force, float forceVariation, int itemID)
 	{
 		super(world, shooter, victim, force, forceVariation, itemID);
 	}
 
-	public EntityTerraJavelin(World par1World, EntityLivingBase shooter, float force, int itemID)
+	public EntityJavelin(World par1World, EntityLivingBase shooter, float force, int itemID)
 	{
 		super(par1World, shooter, force, itemID);
 	}

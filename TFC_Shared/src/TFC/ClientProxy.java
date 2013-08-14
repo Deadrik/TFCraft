@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.entity.RenderGhast;
 import net.minecraft.client.renderer.entity.RenderIronGolem;
 import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.client.renderer.entity.RenderSilverfish;
-import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.client.renderer.entity.RenderSpider;
 import net.minecraft.client.renderer.entity.RenderZombie;
@@ -36,7 +35,7 @@ import TFC.Core.Util.StringUtil;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityStand;
-import TFC.Entities.EntityTerraJavelin;
+import TFC.Entities.EntityJavelin;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityBlazeTFC;
 import TFC.Entities.Mobs.EntityCaveSpiderTFC;
@@ -93,6 +92,7 @@ import TFC.Render.RenderDeer;
 import TFC.Render.RenderPigTFC;
 import TFC.Render.RenderPlayerTFC;
 import TFC.Render.RenderSheepTFC;
+import TFC.Render.RenderSkeletonTFC;
 import TFC.Render.RenderSquidTFC;
 import TFC.Render.RenderTerraJavelin;
 import TFC.Render.RenderWolfTFC;
@@ -153,7 +153,7 @@ public class ClientProxy extends CommonProxy
 		((ReloadableResourceManager)Minecraft.getMinecraft().func_110442_L()).func_110542_a(new GrassColorReloadListener());
 		((ReloadableResourceManager)Minecraft.getMinecraft().func_110442_L()).func_110542_a(new FoliageColorReloadListener());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityTerraJavelin.class, new RenderTerraJavelin());
+		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderTerraJavelin());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySquidTFC.class, new RenderSquidTFC(new ModelSquidTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCowTFC.class, new RenderCowTFC(new ModelCowTFC(), 0.7F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySheepTFC.class, new RenderSheepTFC(new ModelSheep2TFC(),new ModelSheep1TFC(), 0.4F));
@@ -165,7 +165,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityCustomMinecart.class, new RenderMinecart());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStand.class,new RenderPlayerTFC());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeleton());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonTFC.class, new RenderSkeletonTFC());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieTFC.class, new RenderZombie());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpiderTFC.class, new RenderSpider());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySlimeTFC.class, new RenderSlime(new ModelSlime(16), new ModelSlime(0), 0.25F));
@@ -217,7 +217,7 @@ public class ClientProxy extends CommonProxy
 		//Register our overlay changes
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBiomeEventHandler()
@@ -225,7 +225,7 @@ public class ClientProxy extends CommonProxy
 		// Register the Biome Event Handler
 		MinecraftForge.EVENT_BUS.register(new BiomeEventHandler());
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void setupGuiIngameForge()
