@@ -71,40 +71,44 @@ public class ContainerLiquidVessel extends ContainerTFC
 	{
 		//Load the metal info from the liquid container
 		NBTTagCompound nbt = player.inventory.getStackInSlot(bagsSlotNum).getTagCompound();
-		Metal m = MetalRegistry.instance.getMetalFromString((nbt.getString("MetalType")));
-		metalAmount = nbt.getInteger("MetalAmount");
 
-		if(!world.isRemote && m != null)
+		if(nbt != null)
 		{
-			ItemStack input = containerInv.getStackInSlot(0);
-			if(input != null && input.getItem().itemID == TFCItems.CeramicMold.itemID && input.getItemDamage() == 1 && metalAmount > 0)
+			Metal m = MetalRegistry.instance.getMetalFromString((nbt.getString("MetalType")));
+			metalAmount = nbt.getInteger("MetalAmount");
+
+			if(!world.isRemote && m != null)
 			{
-				int amt = 99;
-				containerInv.setInventorySlotContents(0, new ItemStack(m.MeltedItemID, 1, amt));
-				if(metalAmount-1 <= 0)
+				ItemStack input = containerInv.getStackInSlot(0);
+				if(input != null && input.getItem().itemID == TFCItems.CeramicMold.itemID && input.getItemDamage() == 1 && metalAmount > 0)
 				{
-					nbt.removeTag("MetalType");
-					nbt.removeTag("MetalAmount");
-					player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
-				} else 
-				{
-					nbt.setInteger("MetalAmount", metalAmount-2);
+					int amt = 99;
+					containerInv.setInventorySlotContents(0, new ItemStack(m.MeltedItemID, 1, amt));
+					if(metalAmount-1 <= 0)
+					{
+						nbt.removeTag("MetalType");
+						nbt.removeTag("MetalAmount");
+						player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
+					} else 
+					{
+						nbt.setInteger("MetalAmount", metalAmount-2);
+					}
+
+					player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(nbt);
 				}
-
-				player.inventory.getStackInSlot(bagsSlotNum).setTagCompound(nbt);
-			}
-			else if(input != null && input.getItem().itemID == m.MeltedItemID && input.getItemDamage() > 0)
-			{
-				input.setItemDamage(input.getItemDamage() - 1);
-
-				if(metalAmount-1 <= 0)
+				else if(input != null && input.getItem().itemID == m.MeltedItemID && input.getItemDamage() > 0)
 				{
-					nbt.removeTag("MetalType");
-					nbt.removeTag("MetalAmount");
-					player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
-				} else 
-				{
-					nbt.setInteger("MetalAmount", metalAmount-1);
+					input.setItemDamage(input.getItemDamage() - 1);
+
+					if(metalAmount-1 <= 0)
+					{
+						nbt.removeTag("MetalType");
+						nbt.removeTag("MetalAmount");
+						player.inventory.getStackInSlot(bagsSlotNum).setItemDamage(1);
+					} else 
+					{
+						nbt.setInteger("MetalAmount", metalAmount-1);
+					}
 				}
 			}
 		}

@@ -4,6 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -44,10 +45,11 @@ public class GuiVesselLiquid extends GuiContainer
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;
         drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-        if(player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().hasKey("MetalType"))
-        	drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getString("MetalType"), l+87, i1+13, 0);
-        if(player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().hasKey("MetalAmount"))
-        	drawCenteredString(this.fontRenderer, player.inventory.mainInventory[this.bagsSlotNum].getTagCompound().getInteger("MetalAmount")+" Units", l+87, i1+23, 0);
+        NBTTagCompound tags = player.inventory.mainInventory[this.bagsSlotNum].getTagCompound();
+        if((tags != null) && tags.hasKey("MetalType"))
+        	drawCenteredString(this.fontRenderer, tags.getString("MetalType"), l+87, i1+13, 0);
+        if((tags != null) && tags.hasKey("MetalAmount"))
+        	drawCenteredString(this.fontRenderer, tags.getInteger("MetalAmount")+" Units", l+87, i1+23, 0);
     }
     
     @Override

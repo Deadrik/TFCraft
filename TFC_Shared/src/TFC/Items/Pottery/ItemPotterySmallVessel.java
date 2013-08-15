@@ -89,9 +89,9 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					types[2] = null;
 					metalAmounts[2] = 0;
 				}
-				if(mergeMetals(types[1], types[2], metalAmounts[0], metalAmounts[2]) != metalAmounts[1])
+				if(mergeMetals(types[1], types[2], metalAmounts[1], metalAmounts[2]) != metalAmounts[1])
 				{
-					metalAmounts[0] = mergeMetals(types[1], types[2], metalAmounts[1], metalAmounts[2]);
+					metalAmounts[1] = mergeMetals(types[1], types[2], metalAmounts[1], metalAmounts[2]);
 					types[2] = null;
 					metalAmounts[2] = 0;
 				}
