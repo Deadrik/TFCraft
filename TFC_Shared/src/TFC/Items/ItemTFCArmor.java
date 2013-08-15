@@ -118,7 +118,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		String m = ArmorType.metaltype.replace(" ", "");
+		String m = ArmorType.metaltype.replace(" ", "").toLowerCase();
 		return Reference.ModID+String.format(":textures/models/armor/%s_%d%s.png",
 				m, (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
 	}
