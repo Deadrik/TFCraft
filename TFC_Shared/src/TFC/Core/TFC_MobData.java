@@ -38,7 +38,6 @@ public class TFC_MobData
 	public static final int SlimeHealth = 350;
 
 	public static final int SkeletonHealth = 1500;
-	public static final int SkeletonJavHealth = 2500;
 
 	public static final int GhastHealth = 1000;
 }

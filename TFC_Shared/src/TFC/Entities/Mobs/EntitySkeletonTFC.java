@@ -154,8 +154,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(
-				this.getSkeletonType() == 0 ? TFC_MobData.SkeletonHealth : TFC_MobData.SkeletonJavHealth);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.SkeletonHealth);//MaxHealth
 	}
 
 	@Override
