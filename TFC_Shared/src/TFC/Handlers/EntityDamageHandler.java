@@ -28,7 +28,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Events.EntityArmorCalcEvent;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 import TFC.Entities.EntityJavelin;
 import TFC.Items.ItemTFCArmor;
 
@@ -228,14 +228,14 @@ public class EntityDamageHandler
 		{
 			if (!target.func_85031_j(target))
 			{
-				float i = TFC_MobDamage.SteveDamage;
+				float i = TFC_MobData.SteveDamage;
 				if(stack != null) 
 				{
 					i = (float)event.entityPlayer.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
 					event.entityPlayer.addChatMessage("Damage: " + i);
 					if(i == 1.0f)
 					{
-						i = TFC_MobDamage.SteveDamage;
+						i = TFC_MobData.SteveDamage;
 						//i = event.entityPlayer.inventory.getCurrentItem().getItem().getDamageVsEntity(target, event.entityPlayer.inventory.getCurrentItem());
 					}
 				}

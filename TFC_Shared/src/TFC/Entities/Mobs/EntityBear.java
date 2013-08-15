@@ -26,7 +26,7 @@ import TFC.API.ICausesDamage;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 
@@ -133,7 +133,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		super.func_110147_ax();
 		//this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.BearDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1200);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.BearHealth);//MaxHealth
 	}
 
 
@@ -310,7 +310,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	@Override
 	public boolean attackEntityAsMob (Entity par1Entity)
 	{
-		int dam =  TFC_MobDamage.BearDamage;
+		int dam =  TFC_MobData.BearDamage;
 		return par1Entity.attackEntityFrom (DamageSource.causeMobDamage (this), dam);
 	}
 

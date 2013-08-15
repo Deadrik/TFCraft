@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
@@ -80,7 +80,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.WolfHealth);//MaxHealth
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity)
 	{
-		int var2 = TFC_MobDamage.WolfDamage;
+		int var2 = TFC_MobData.WolfDamage;
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
 

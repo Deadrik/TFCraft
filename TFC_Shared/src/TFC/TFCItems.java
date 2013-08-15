@@ -864,15 +864,10 @@ public class TFCItems
 	public static int SedStoneUses = 50;
 	public static int MMStoneUses = 55; 
 
-	//Tier 0
-	public static int BismuthUses = 300;
-	public static int TinUses = 290;
-	public static int ZincUses = 250;
 	//Tier 1
 	public static int CopperUses = 600;
 	//Tier 2
 	public static int BronzeUses = 1300;
-	public static int RoseGoldUses = 1140;
 	public static int BismuthBronzeUses = 1200;
 	public static int BlackBronzeUses = 1460;
 	//Tier 3
@@ -886,19 +881,14 @@ public class TFCItems
 	public static int RedSteelUses = 6500;
 
 
-	//Tier 0
-	public static float BismuthEff = 4;
-	public static float TinEff = 3.5f;
-	public static float ZincEff = 3;
 	//Tier 1
-	public static float CopperEff = 5;
+	public static float CopperEff = 8;
 	//Tier 2
-	public static float BronzeEff = 8;
-	public static float RoseGoldEff = 6;
-	public static float BismuthBronzeEff = 8;
-	public static float BlackBronzeEff = 8;
+	public static float BronzeEff = 11;
+	public static float BismuthBronzeEff = 10;
+	public static float BlackBronzeEff = 9;
 	//Tier 3
-	public static float WroughtIronEff = 10;
+	public static float WroughtIronEff = 12;
 	//Tier 4
 	public static float SteelEff = 14;
 	//Tier 5
@@ -941,21 +931,27 @@ public class TFCItems
 			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
 			config = null;
 		} 
-
+		//Tier 0
 		IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 10, 5);
 		SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 10, 5);
 		IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 10, 5);
 		MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 10, 5);
-
-		BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, 	BismuthBronzeUses, 	BismuthBronzeEff, 	85, 10);
-		BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, 		BlackBronzeUses, 	BlackBronzeEff, 	100, 10);
-		BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, 		BlackSteelUses, 	BlackSteelEff, 		165, 12);
-		BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, 			BlueSteelUses, 		BlueSteelEff, 		185, 22);
+		//Tier 1
+		CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, 				CopperUses, 		CopperEff, 			65, 8);
+		//Tier 2
 		BronzeToolMaterial = EnumHelper.addToolMaterial("Bronze", 2, 				BronzeUses, 		BronzeEff, 			100, 13);
-		CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, 				CopperUses, 		CopperEff, 			85, 8);
+		BismuthBronzeToolMaterial = EnumHelper.addToolMaterial("BismuthBronze", 2, 	BismuthBronzeUses, 	BismuthBronzeEff, 	90, 10);
+		BlackBronzeToolMaterial = EnumHelper.addToolMaterial("BlackBronze", 2, 		BlackBronzeUses, 	BlackBronzeEff, 	95, 10);
+		//Tier 3
 		IronToolMaterial = EnumHelper.addToolMaterial("Iron", 2, 					WroughtIronUses, 	WroughtIronEff, 	135, 10);
-		RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, 			RedSteelUses, 		RedSteelEff, 		185, 22);
-		SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, 					SteelUses, 			SteelEff, 			150, 10);
+		//Tier 4
+		SteelToolMaterial = EnumHelper.addToolMaterial("Steel", 2, 					SteelUses, 			SteelEff, 			170, 10);
+		//Tier 5
+		BlackSteelToolMaterial = EnumHelper.addToolMaterial("BlackSteel", 2, 		BlackSteelUses, 	BlackSteelEff, 		205, 12);
+		//Tier 6
+		BlueSteelToolMaterial = EnumHelper.addToolMaterial("BlueSteel", 3, 			BlueSteelUses, 		BlueSteelEff, 		240, 22);
+		RedSteelToolMaterial = EnumHelper.addToolMaterial("RedSteel", 3, 			RedSteelUses, 		RedSteelEff, 		240, 22);
+
 
 		System.out.println(new StringBuilder().append("[TFC] Loading Items").toString());
 

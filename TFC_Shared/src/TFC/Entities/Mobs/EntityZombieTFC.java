@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,8 +23,8 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.ZombieDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.ZombieDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.ZombieHealth);//MaxHealth
 	}
 
 	/**

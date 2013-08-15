@@ -10,7 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,8 +28,8 @@ public class EntityIronGolemTFC extends EntityIronGolem
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.IronGolemDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(5000);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.IronGolemDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.IronGolemHealth);//MaxHealth
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class EntityIronGolemTFC extends EntityIronGolem
 	{
 		this.attackTimer = 10;
 		this.worldObj.setEntityState(this, (byte)4);
-		boolean var2 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), TFC_MobDamage.IronGolemDamage + this.rand.nextInt(150));
+		boolean var2 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), TFC_MobData.IronGolemDamage + this.rand.nextInt(150));
 
 		if (var2)
 		{

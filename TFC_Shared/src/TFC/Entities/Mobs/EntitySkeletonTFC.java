@@ -33,6 +33,7 @@ import TFC.TFCItems;
 import TFC.API.ICausesDamage;
 import TFC.API.IProjectile;
 import TFC.API.Enums.EnumDamageType;
+import TFC.Core.TFC_MobData;
 import TFC.Entities.EntityJavelin;
 import TFC.Entities.EntityProjectileTFC;
 import TFC.Items.Tools.ItemCustomBow;
@@ -153,7 +154,8 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(1000);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(
+				this.getSkeletonType() == 0 ? TFC_MobData.SkeletonHealth : TFC_MobData.SkeletonJavHealth);//MaxHealth
 	}
 
 	@Override

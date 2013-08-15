@@ -5,7 +5,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 
 public class EntityPigZombieTFC extends EntityZombieTFC
 {
@@ -77,6 +77,7 @@ public class EntityPigZombieTFC extends EntityZombieTFC
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.PigZombieDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.PigZombieDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.PigZombieHealth);//MaxHealth
 	}
 }

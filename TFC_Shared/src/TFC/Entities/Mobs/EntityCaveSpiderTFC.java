@@ -3,7 +3,7 @@ package TFC.Entities.Mobs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.world.World;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 
 public class EntityCaveSpiderTFC extends EntitySpider
 {
@@ -16,7 +16,7 @@ public class EntityCaveSpiderTFC extends EntitySpider
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobDamage.CaveSpiderDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(600);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.CaveSpiderDamage);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.CaveSpiderHealth);//MaxHealth
 	}
 }

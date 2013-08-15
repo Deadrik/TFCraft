@@ -5,7 +5,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import TFC.Core.TFC_MobDamage;
+import TFC.Core.TFC_MobData;
 
 public class EntitySlimeTFC extends EntitySlime
 {
@@ -20,7 +20,7 @@ public class EntitySlimeTFC extends EntitySlime
 	@Override
 	protected void setSlimeSize(int par1)
 	{
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(par1*350);
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(par1*TFC_MobData.SlimeHealth);
 		this.setEntityHealth(this.func_110138_aP());
 	}
 
@@ -88,6 +88,6 @@ public class EntitySlimeTFC extends EntitySlime
 	@Override
 	protected int getAttackStrength()
 	{
-		return this.getSlimeSize() * TFC_MobDamage.SlimeDamage;
+		return this.getSlimeSize() * TFC_MobData.SlimeDamage;
 	}
 }
