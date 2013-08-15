@@ -37,10 +37,9 @@ public class ItemMeal extends ItemTerraFood
 	@Override
 	public Icon getIconFromDamage(int meta)
 	{        
-		return icons[meta];
+		return itemIcon;
 	}
 
-	Icon[] icons = new Icon[11];
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
