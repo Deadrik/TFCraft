@@ -33,8 +33,8 @@ public class FoodStatsTFC
 	private float foodExhaustionLevel;
 
 	/** The player's food timer value. */
-	private long foodTimer = 0;
-	private long foodHealTimer = 0;
+	public long foodTimer = 0;
+	public long foodHealTimer = 0;
 
 	public float waterLevel = TFC_Time.dayLength;
 	public long waterTimer = 0;

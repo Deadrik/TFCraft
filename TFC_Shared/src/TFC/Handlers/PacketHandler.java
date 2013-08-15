@@ -69,6 +69,7 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 		DataOutputStream dos=new DataOutputStream(bos);
 		EntityPlayerMP player = (EntityPlayerMP)p;
 		FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
+		foodstats.foodTimer = TFC_Time.getTotalTicks();
 		foodstats.waterTimer = TFC_Time.getTotalTicks();
 		foodstats.writeNBT(player.getEntityData());
 		World world= player.worldObj;
