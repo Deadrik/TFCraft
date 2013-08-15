@@ -34,7 +34,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	{
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
-		this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
 		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
 		//this.tasks.addTask(6, this.aiEatGrass);
 
@@ -112,7 +112,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 		syncData();
 
-		if (isAdult() && getGender() == GenderEnum.FEMALE && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
+		if (isAdult() && getGender() == GenderEnum.FEMALE && !this.worldObj.isRemote && --this.timeUntilNextEgg == 0)
 		{
 			this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 			this.dropItem(Item.egg.itemID, 1);
