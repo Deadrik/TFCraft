@@ -202,12 +202,20 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				else if(storage[1].itemID == currentAlloy.outputType.MeltedItemID && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
-					TFC_ItemHeat.SetTemperature(storage[1], Math.abs(temperature - TFC_ItemHeat.GetTemperature(storage[1])) / 2);
+					float inTemp =TFC_ItemHeat.GetTemperature(storage[1]);
+					float temp = Math.abs(temperature - inTemp) / 2;
+					TFC_ItemHeat.SetTemperature(storage[1], inTemp+temp);
 					currentAlloy.outputAmount--;
 					storage[1].stackSize = 1;
 					updateGui((byte) 1);
 				}
 				outputTick = 0;
+			}
+
+			if(currentAlloy != null && currentAlloy.outputAmount <= 0) {
+				metals = new HashMap();
+				updateCurrentAlloy();
+				this.updateGui((byte) 2);
 			}
 
 			if(storage[1] != null && storage[1].stackSize <= 0) {
@@ -288,11 +296,17 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	public void handleDataPacket(DataInputStream inStream) throws IOException 
 	{
 		byte id = inStream.readByte();
-		if(id == 0 && inStream.available() > 0) {
+		if(id == 0 && inStream.available() > 0) 
+		{
 			this.currentAlloy = new Alloy().fromPacket(inStream);
-		} else if(id == 1)
+		} 
+		else if(id == 1)
 		{
 			currentAlloy.outputAmount = inStream.readInt();
+		}
+		else if(id == 2)
+		{
+			currentAlloy = null;
 		}
 	}
 
@@ -407,6 +421,10 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 			{
 				dos.writeByte(1);
 				dos.writeInt(currentAlloy.outputAmount);
+			}
+			else if(id == 2)
+			{
+				dos.writeByte(2);
 			}
 		} 
 		catch (IOException e) {
