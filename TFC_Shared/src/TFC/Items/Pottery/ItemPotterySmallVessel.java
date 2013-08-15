@@ -63,18 +63,21 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				types[0] = ((ISmeltable)bag[0].getItem()).GetMetalType(bag[0]);
 				metalAmounts[0] = ((ISmeltable)bag[0].getItem()).GetMetalReturnAmount(bag[0]) * bag[0].stackSize;
+System.out.println("bag 0: " + bag[0].stackSize + " " + types[0].Name + " -> " + metalAmounts[0]);
 			}
 
 			if(bag[1] != null)
 			{
 				types[1] = ((ISmeltable)bag[1].getItem()).GetMetalType(bag[1]);
 				metalAmounts[1] = ((ISmeltable)bag[1].getItem()).GetMetalReturnAmount(bag[1]) * bag[1].stackSize;
+System.out.println("bag 1: " + bag[1].stackSize + " " + types[1].Name + " -> " + metalAmounts[1]);
 
 				if(mergeMetals(types[0], types[1], metalAmounts[0], metalAmounts[1]) != metalAmounts[0])
 				{
 					metalAmounts[0] = mergeMetals(types[0], types[1], metalAmounts[0], metalAmounts[1]);
 					types[1] = null;
 					metalAmounts[1] = 0;
+System.out.println("merge 1 into 0 -> " + metalAmounts[0] + " " + types[0].Name);
 				}
 			}
 
@@ -82,42 +85,49 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				types[2] = ((ISmeltable)bag[2].getItem()).GetMetalType(bag[2]);
 				metalAmounts[2] = ((ISmeltable)bag[2].getItem()).GetMetalReturnAmount(bag[2]) * bag[2].stackSize;
+System.out.println("bag 2: " + bag[2].stackSize + " " + types[2].Name + " -> " + metalAmounts[2]);
 
 				if(mergeMetals(types[0], types[2], metalAmounts[0], metalAmounts[2]) != metalAmounts[0])
 				{
 					metalAmounts[0] = mergeMetals(types[0], types[2], metalAmounts[0], metalAmounts[2]);
 					types[2] = null;
 					metalAmounts[2] = 0;
+System.out.println("merge 2 into 0 -> " + metalAmounts[0] + " " + types[0].Name);
 				}
-				if(mergeMetals(types[1], types[2], metalAmounts[0], metalAmounts[2]) != metalAmounts[1])
+				if(mergeMetals(types[1], types[2], metalAmounts[1], metalAmounts[2]) != metalAmounts[1])
 				{
-					metalAmounts[0] = mergeMetals(types[1], types[2], metalAmounts[1], metalAmounts[2]);
+					metalAmounts[1] = mergeMetals(types[1], types[2], metalAmounts[1], metalAmounts[2]);
 					types[2] = null;
 					metalAmounts[2] = 0;
+System.out.println("merge 2 into 1 -> " + metalAmounts[1] + " " + types[1].Name);
 				}
 			}
 			if(bag[3] != null)
 			{
 				types[3] = ((ISmeltable)bag[3].getItem()).GetMetalType(bag[3]);
 				metalAmounts[3] = ((ISmeltable)bag[3].getItem()).GetMetalReturnAmount(bag[3]) * bag[3].stackSize;
+System.out.println("bag 3: " + bag[3].stackSize + " " + types[3].Name + " -> " + metalAmounts[3]);
 
 				if(mergeMetals(types[0], types[3], metalAmounts[0], metalAmounts[3]) != metalAmounts[0])
 				{
 					metalAmounts[0] = mergeMetals(types[0], types[3], metalAmounts[0], metalAmounts[3]);
 					types[3] = null;
 					metalAmounts[3] = 0;
+System.out.println("merge 3 into 0 -> " + metalAmounts[0] + " " + types[0].Name);
 				}
 				if(mergeMetals(types[1], types[3], metalAmounts[1], metalAmounts[3]) != metalAmounts[1])
 				{
 					metalAmounts[1] = mergeMetals(types[1], types[3], metalAmounts[1], metalAmounts[3]);
 					types[3] = null;
 					metalAmounts[3] = 0;
+System.out.println("merge 3 into 1 -> " + metalAmounts[1] + " " + types[1].Name);
 				}
 				if(mergeMetals(types[2], types[3], metalAmounts[2], metalAmounts[3]) != metalAmounts[2])
 				{
 					metalAmounts[2] = mergeMetals(types[2], types[3], metalAmounts[2], metalAmounts[3]);
 					types[3] = null;
 					metalAmounts[3] = 0;
+System.out.println("merge 3 into 2 -> " + metalAmounts[2] + " " + types[2].Name);
 				}
 			}
 			int total = metalAmounts[0] + metalAmounts[1] + metalAmounts[2] + metalAmounts[3];
@@ -127,6 +137,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			if(metalAmounts[2] > 0) numMetals++;
 			if(metalAmounts[3] > 0) numMetals++;
 
+System.out.println("" + numMetals + " metals totalling " + total);
 			if(total > 0 && numMetals > 1)
 			{
 				float[] metalPercent = new float[4];
@@ -135,6 +146,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				metalPercent[2] = ((float)metalAmounts[2] / (float)total) * 100f;
 				metalPercent[3] = ((float)metalAmounts[3] / (float)total) * 100f;
 
+System.out.println("%ages: " + metalPercent[0] + " " + metalPercent[1] + " "+ metalPercent[2] + " "+ metalPercent[3]);
 				List<AlloyMetal> a = new ArrayList<AlloyMetal>();
 				if(types[0] != null) a.add(new AlloyMetal(types[0], metalPercent[0]));
 				if(types[1] != null) a.add(new AlloyMetal(types[1], metalPercent[1]));
@@ -145,6 +157,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				if(match != null)
 				{
 					Alloy output = new Alloy(match, total); 
+System.out.println("output: " + output.outputAmount + ", " + output.outputType.Name);
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", output.outputType.Name);
 					tag.setInteger("MetalAmount", output.outputAmount);
