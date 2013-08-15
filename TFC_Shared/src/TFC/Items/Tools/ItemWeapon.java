@@ -32,13 +32,11 @@ import com.google.common.collect.Multimap;
 public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 {
 	public float weaponDamage;
-	public final EnumToolMaterial toolMaterial;
 	public EnumDamageType damageType = EnumDamageType.SLASHING;
 
-	public ItemWeapon(int par1, EnumToolMaterial par2EnumToolMaterial)
+	public ItemWeapon(int par1, EnumToolMaterial par2EnumToolMaterial, float damage)
 	{
 		super(par1, par2EnumToolMaterial);
-		this.toolMaterial = par2EnumToolMaterial;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
 		this.weaponDamage = par2EnumToolMaterial.getDamageVsEntity();
 		setCreativeTab(TFCTabs.TFCWeapons);

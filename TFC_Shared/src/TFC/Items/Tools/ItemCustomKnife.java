@@ -16,11 +16,10 @@ import TFC.TileEntities.TileEntityFoodPrep;
 
 public class ItemCustomKnife extends ItemWeapon
 {
-	public ItemCustomKnife(int i, EnumToolMaterial e)
+	public ItemCustomKnife(int i, EnumToolMaterial e, float damage)
 	{
-		super(i, e);
+		super(i, e, damage);
 		this.setMaxDamage(e.getMaxUses());
-		this.weaponDamage = 75 + e.getDamageVsEntity();
 		this.damageType = EnumDamageType.PIERCING;
 	}
 
@@ -46,10 +45,11 @@ public class ItemCustomKnife extends ItemWeapon
 
 			for(int i = 0; i < 36 && hasBowl == -1;i++)
 			{
-				if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem().itemID == Item.bowlEmpty.itemID)
+				if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem().itemID == Item.bowlEmpty.itemID) {
 					hasBowl = i;
+				}
 			}
-			
+
 			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.getBlockId(x, y+1, z) == 0 && hasBowl != -1)
 			{
 				world.setBlock(x, y+1, z, TFCBlocks.FoodPrep.blockID);
@@ -64,7 +64,7 @@ public class ItemCustomKnife extends ItemWeapon
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{

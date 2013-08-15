@@ -20,7 +20,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 {
 	public ItemCustomSaw(int i, EnumToolMaterial e)
 	{
-		super(i, e);
+		super(i, e, 0);
 		this.setMaxDamage((int)(e.getMaxUses()*0.85));
 		this.efficiencyOnProperMaterial = e.getEfficiencyOnProperMaterial()*1.35F;
 	}

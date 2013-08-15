@@ -25,11 +25,11 @@ import com.google.common.collect.Multimap;
 
 public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 {	
-	public ItemCustomAxe(int i, EnumToolMaterial e)
+	public ItemCustomAxe(int i, EnumToolMaterial e, float damage)
 	{
 		super(i, e);
 		this.setMaxDamage(e.getMaxUses());
-		this.damageVsEntity = 100 + e.getDamageVsEntity();
+		this.damageVsEntity = damage;
 		setCreativeTab(TFCTabs.TFCTools);
 	}
 
