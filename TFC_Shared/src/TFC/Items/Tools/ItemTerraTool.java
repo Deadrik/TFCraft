@@ -13,13 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumChatFormatting;
 import TFC.Reference;
-import TFC.TerraFirmaCraft;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -109,11 +107,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public Multimap func_111205_h()
 	{
 		Multimap multimap = HashMultimap.create();
-		if(!TerraFirmaCraft.proxy.isRemote() || TFC_Settings.enableDebugMode) 
-		{
-			multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
-		}
-
+		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
 		return multimap;
 	}
 }

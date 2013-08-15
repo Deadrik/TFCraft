@@ -8,6 +8,7 @@ import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -35,8 +36,8 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityFallingDirt;
 import TFC.Entities.EntityFallingStone;
-import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityJavelin;
+import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.Mobs.EntityBear;
 import TFC.Entities.Mobs.EntityBlazeTFC;
 import TFC.Entities.Mobs.EntityCaveSpiderTFC;
@@ -57,7 +58,6 @@ import TFC.Entities.Mobs.EntitySpiderTFC;
 import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.Entities.Mobs.EntityZombieTFC;
-import TFC.Handlers.BiomeEventHandler;
 import TFC.TileEntities.TEBlastFurnace;
 import TFC.TileEntities.TECrucible;
 import TFC.TileEntities.TileEntityAnvil;
@@ -97,12 +97,12 @@ public class CommonProxy implements IGuiHandler
 	public void registerRenderInformation() {
 		// NOOP on server
 	}
-	
+
 	public void registerBiomeEventHandler()
 	{
 		// NOOP on server
 	}
-	
+
 	public void setupGuiIngameForge()
 	{
 		// NOOP on server
@@ -289,7 +289,7 @@ public class CommonProxy implements IGuiHandler
 	}
 
 	public World getCurrentWorld() {
-		return null;
+		return MinecraftServer.getServer().func_130014_f_();
 	}
 
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)

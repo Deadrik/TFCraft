@@ -10,7 +10,6 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import TFC.Reference;
-import TFC.TerraFirmaCraft;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
@@ -93,11 +92,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	public Multimap func_111205_h()
 	{
 		Multimap multimap = HashMultimap.create();
-		if(!TerraFirmaCraft.proxy.isRemote() || TFC_Settings.enableDebugMode) 
-		{
-			multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
-		}
-
+		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Tool modifier", this.damageVsEntity, 0));
 		return multimap;
 	}
 }

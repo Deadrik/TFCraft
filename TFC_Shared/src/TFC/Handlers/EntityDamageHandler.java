@@ -212,6 +212,11 @@ public class EntityDamageHandler
 	@ForgeSubscribe
 	public void onAttackEntity(AttackEntityEvent event)
 	{
+		if(event.entityLiving.worldObj.isRemote)
+		{
+			return;
+		}
+
 		EntityLivingBase attacker = event.entityLiving;
 		Entity target = event.target;
 		ItemStack stack = attacker.getCurrentItemOrArmor(0);
@@ -227,6 +232,7 @@ public class EntityDamageHandler
 				if(stack != null) 
 				{
 					i = (float)event.entityPlayer.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+					event.entityPlayer.addChatMessage("Damage: " + i);
 					if(i == 1.0f)
 					{
 						i = TFC_MobDamage.SteveDamage;
