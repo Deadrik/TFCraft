@@ -173,7 +173,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					updateGui((byte) 0);
 				}
 			}
-			else if(storage[0] != null && storage[0].getItem() instanceof ISmeltable && !TFC_Core.isOreIron(storage[0]))
+			else if(storage[0] != null && storage[0].getItem() instanceof ISmeltable && !TFC_Core.isOreIron(storage[0]) 
+					&& temperature >= TFC_ItemHeat.getMeltingPoint(storage[0]))
 			{
 				Metal mType =((ISmeltable)storage[0].getItem()).GetMetalType(storage[0]);
 				if(addMetal(mType, ((ISmeltable)storage[0].getItem()).GetMetalReturnAmount(storage[0])))
@@ -194,12 +195,14 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				if(storage[1].itemID == TFCItems.CeramicMold.itemID)
 				{
 					storage[1] = new ItemStack(Item.itemsList[currentAlloy.outputType.MeltedItemID], 1, 99);
+					TFC_ItemHeat.SetTemperature(storage[1], temperature);
 					currentAlloy.outputAmount--;
 					updateGui((byte) 1);
 				}
 				else if(storage[1].itemID == currentAlloy.outputType.MeltedItemID && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
+					TFC_ItemHeat.SetTemperature(storage[1], Math.abs(temperature - TFC_ItemHeat.GetTemperature(storage[1])) / 2);
 					currentAlloy.outputAmount--;
 					storage[1].stackSize = 1;
 					updateGui((byte) 1);
