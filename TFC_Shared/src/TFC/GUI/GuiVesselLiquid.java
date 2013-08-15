@@ -45,7 +45,7 @@ public class GuiVesselLiquid extends GuiContainer
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;
         drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-		NBTTagCompound tags = player.inventory.mainInventory[this.bagsSlotNum].getTagCompound();
+        NBTTagCompound tags = player.inventory.mainInventory[this.bagsSlotNum].getTagCompound();
         if((tags != null) && tags.hasKey("MetalType"))
         	drawCenteredString(this.fontRenderer, tags.getString("MetalType"), l+87, i1+13, 0);
         if((tags != null) && tags.hasKey("MetalAmount"))
