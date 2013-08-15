@@ -197,7 +197,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					currentAlloy.outputAmount--;
 					updateGui((byte) 1);
 				}
-				else if(storage[1].itemID == currentAlloy.outputType.MeltedItemID)
+				else if(storage[1].itemID == currentAlloy.outputType.MeltedItemID && storage[1].getItemDamage() > 0)
 				{
 					storage[1].setItemDamage(storage[1].getItemDamage()-1);
 					currentAlloy.outputAmount--;
