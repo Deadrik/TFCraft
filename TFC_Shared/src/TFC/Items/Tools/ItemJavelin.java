@@ -113,12 +113,48 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		}
 
 		world.playSoundAtEntity(player, "random.bow", 1.0F, 0.3F);
-		player.inventory.consumeInventoryItem(this.itemID);
 		javelin.setDamageTaken((short) itemstack.getItemDamage());
+		consumeJavelin(player);
+
 		if (!world.isRemote)
 		{
 			world.spawnEntityInWorld(javelin);
 		}
+
+	}
+
+	private int getInventorySlotContainJavelin(EntityPlayer player)
+	{
+		for (int j = 0; j < player.inventory.mainInventory.length; ++j)
+		{
+			if (player.inventory.mainInventory[j] != null && player.inventory.mainInventory[j].getItem() instanceof ItemJavelin)
+			{
+				return j;
+			}
+		}
+
+		return -1;
+	}
+
+	public boolean consumeJavelin(EntityPlayer player)
+	{
+		int active = player.inventory.currentItem;
+		int nextJav = getInventorySlotContainJavelin(player);
+
+		if (nextJav < 0)
+		{
+			player.inventory.mainInventory[active] = null;
+			return false;
+		}
+		else
+		{
+			player.inventory.mainInventory[active] = player.inventory.mainInventory[nextJav].copy();
+			if (--player.inventory.mainInventory[nextJav].stackSize <= 0)
+			{
+				player.inventory.mainInventory[nextJav] = null;
+			}
+		}
+		return true;
 	}
 
 	@Override
