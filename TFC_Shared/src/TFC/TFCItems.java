@@ -1168,19 +1168,19 @@ public class TFCItems
 		Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
 
 		//javelins
-		IgInStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","IgInJavelin",16316),IgInToolMaterial).setUnlocalizedName("Stone Javelin");
-		SedStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","SedJavelin",16317),SedToolMaterial).setUnlocalizedName("Stone Javelin");
-		IgExStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","IgExJavelin",16318),IgExToolMaterial).setUnlocalizedName("Stone Javelin");
-		MMStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","MMJavelin",16319),MMToolMaterial).setUnlocalizedName("Stone Javelin");        
-		CopperJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","CopperJavelin",16323),CopperToolMaterial).setUnlocalizedName("Copper Javelin");
-		BismuthBronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BismuthBronzeJavelin",16324), BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Javelin");
-		BronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BronzeJavelin",16325),BronzeToolMaterial).setUnlocalizedName("Bronze Javelin");
-		BlackBronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlackBronzeJavelin",16326), BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Javelin");
-		WroughtIronJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","WroughtIronJavelin",16328),IronToolMaterial).setUnlocalizedName("Wrought Iron Javelin");
-		SteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","SteelJavelin",16329),SteelToolMaterial).setUnlocalizedName("Steel Javelin");
-		BlackSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlackSteelJavelin",16330),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Javelin");
-		BlueSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlueSteelJavelin",16331),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Javelin");
-		RedSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","RedSteelJavelin",16332),RedSteelToolMaterial).setUnlocalizedName("Red Steel Javelin");
+		IgInStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","IgInJavelin",16316),IgInToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
+		SedStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","SedJavelin",16317),SedToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
+		IgExStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","IgExJavelin",16318),IgExToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
+		MMStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","MMJavelin",16319),MMToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");        
+		CopperJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","CopperJavelin",16323),CopperToolMaterial, 65, 50).setUnlocalizedName("Copper Javelin");
+		BismuthBronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BismuthBronzeJavelin",16324), BismuthBronzeToolMaterial, 90, 75).setUnlocalizedName("Bismuth Bronze Javelin");
+		BronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BronzeJavelin",16325),BronzeToolMaterial, 100, 85).setUnlocalizedName("Bronze Javelin");
+		BlackBronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlackBronzeJavelin",16326), BlackBronzeToolMaterial, 95, 80).setUnlocalizedName("Black Bronze Javelin");
+		WroughtIronJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","WroughtIronJavelin",16328),IronToolMaterial, 135, 120).setUnlocalizedName("Wrought Iron Javelin");
+		SteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","SteelJavelin",16329),SteelToolMaterial, 170, 155).setUnlocalizedName("Steel Javelin");
+		BlackSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlackSteelJavelin",16330),BlackSteelToolMaterial, 205, 190).setUnlocalizedName("Black Steel Javelin");
+		BlueSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlueSteelJavelin",16331),BlueSteelToolMaterial, 240, 225).setUnlocalizedName("Blue Steel Javelin");
+		RedSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","RedSteelJavelin",16332),RedSteelToolMaterial, 240, 225).setUnlocalizedName("Red Steel Javelin");
 
 		//javelin heads
 		IgInStoneJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInJavelinHead",16333)).setUnlocalizedName("Stone Javelin Head");
