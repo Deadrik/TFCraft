@@ -131,7 +131,7 @@ public class CraftingHandler implements ICraftingHandler
 				if(entityplayer.worldObj.rand.nextInt(20) != 0 && 
 						!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1))) 
 				{
-					entityplayer.dropItem(TFCItems.CeramicMold.itemID, 1);
+					entityplayer.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 				}
 			}
 
