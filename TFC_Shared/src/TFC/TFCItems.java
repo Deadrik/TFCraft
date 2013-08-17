@@ -1448,13 +1448,13 @@ public class TFCItems
 		DoorWillow = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWillow", num++), 14).setUnlocalizedName("Willow Door");
 		DoorKapok = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorKapok", num++), 15).setUnlocalizedName("Kapok Door");
 
-		Beer = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Beer",num++)).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
-		Cider = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Cider",num++)).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);
-		Rum = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Rum",num++)).setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);
-		RyeWhiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","RyeWhiskey",num++)).setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);
-		Sake = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Sake",num++)).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
-		Vodka = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Vodka",num++)).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
-		Whiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Whiskey",num++)).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
+		Beer = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Beer",num++)).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);num++;
+		Cider = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Cider",num++)).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);num++;
+		Rum = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Rum",num++)).setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);num++;
+		RyeWhiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","RyeWhiskey",num++)).setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);num++;
+		Sake = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Sake",num++)).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);num++;
+		Vodka = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Vodka",num++)).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);num++;
+		Whiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Whiskey",num++)).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);num++;
 
 		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
 		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++),"Fix Me I'm Broken").setUnlocalizedName("book");
