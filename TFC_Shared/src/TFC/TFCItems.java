@@ -1,7 +1,5 @@
 package TFC;
 
-import java.io.File;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
@@ -10,16 +8,15 @@ import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.Metal;
 import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
+import TFC.API.Constant.TFCItemID;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.Core.Recipes;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.MetalRegistry;
@@ -496,12 +493,11 @@ public class TFCItems
 	public static Item Powder;
 
 	//Formerly TFC_Mining
-
 	public static Item GoldPan;
 	public static Item SluiceItem;
 
 	public static Item ProPickStone;
-	public static Item ProPickBismuthBronze;   
+	public static Item ProPickBismuthBronze;
 	public static Item ProPickBlackBronze;
 	public static Item ProPickBlackSteel;
 	public static Item ProPickBlueSteel;
@@ -730,7 +726,6 @@ public class TFCItems
 	public static Item LooseRock;
 	public static Item FlatRock;
 
-
 	public static Item IgInStoneShovelHead;
 	public static Item SedStoneShovelHead;
 	public static Item IgExStoneShovelHead;
@@ -898,8 +893,6 @@ public class TFCItems
 	public static float RedSteelEff = 18;
 
 
-
-
 	public static EnumToolMaterial IgInToolMaterial;
 	public static EnumToolMaterial SedToolMaterial;
 	public static EnumToolMaterial IgExToolMaterial;
@@ -916,21 +909,8 @@ public class TFCItems
 	public static EnumToolMaterial SteelToolMaterial;
 
 
-
-	static Configuration config;
-
-
 	public static void Setup()
 	{
-		try
-		{
-			config = new net.minecraftforge.common.Configuration(
-					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
-			config.load();
-		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
-			config = null;
-		} 
 		//Tier 0
 		IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 10, 5);
 		SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 10, 5);
@@ -962,7 +942,7 @@ public class TFCItems
 		Item.itemsList[Block.vine.blockID] = new ItemColored(Block.vine.blockID - 256, false);
 		Item.itemsList[Item.egg.itemID] = new ItemTerra(88).setSize(EnumSize.SMALL).setUnlocalizedName("egg").func_111206_d("egg");
 
-		minecartCrate = (new ItemCustomMinecart(TFC_Settings.getIntFor(config,"item","minecartCrate",16000), 1)).setUnlocalizedName("minecartChest").func_111206_d("minecart_chest");
+		minecartCrate = (new ItemCustomMinecart(TFCItemID.minecartCrate, 1)).setUnlocalizedName("minecartChest").func_111206_d("minecart_chest");
 
 		Item.itemsList[Item.bow.itemID] = null; Item.itemsList[Item.bow.itemID] = (new ItemCustomBow(5)).setUnlocalizedName("bow").func_111206_d("bow");
 		Item.itemsList[63+256] = null; Item.itemsList[63+256] = new ItemTerra(63).setUnlocalizedName("porkchopRaw");
@@ -980,567 +960,668 @@ public class TFCItems
 
 		Item.itemsList[Block.tallGrass.blockID] = null; Item.itemsList[Block.tallGrass.blockID] = (new ItemColored(Block.tallGrass.blockID - 256, true)).setBlockNames(new String[] {"shrub", "grass", "fern"});
 
+		GoldPan = new ItemGoldPan(TFCItemID.GoldPan).setUnlocalizedName("GoldPan");
+		SluiceItem = new ItemSluice(TFCItemID.SluiceItem).setFolder("devices/").setUnlocalizedName("SluiceItem");
 
-		GoldPan = new ItemGoldPan(TFC_Settings.getIntFor(config,"item","GoldPan",16001)).setUnlocalizedName("GoldPan");
-		SluiceItem = new ItemSluice(TFC_Settings.getIntFor(config,"item","SluiceItem",16002)).setFolder("devices/").setUnlocalizedName("SluiceItem");
+		ProPickBismuthBronze = new ItemProPick(TFCItemID.ProPickBismuthBronze).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
+		ProPickBlackBronze = new ItemProPick(TFCItemID.ProPickBlackBronze).setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
+		ProPickBlackSteel = new ItemProPick(TFCItemID.ProPickBlackSteel).setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses);
+		ProPickBlueSteel = new ItemProPick(TFCItemID.ProPickBlueSteel).setUnlocalizedName("Blue Steel ProPick").setMaxDamage(BlueSteelUses);
+		ProPickBronze = new ItemProPick(TFCItemID.ProPickBronze).setUnlocalizedName("Bronze ProPick").setMaxDamage(BronzeUses);
+		ProPickCopper = new ItemProPick(TFCItemID.ProPickCopper).setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses);
+		ProPickIron = new ItemProPick(TFCItemID.ProPickWroughtIron).setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses);
+		ProPickRedSteel = new ItemProPick(TFCItemID.ProPickRedSteel).setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses);
+		ProPickSteel = new ItemProPick(TFCItemID.ProPickSteel).setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses);
 
-		ProPickBismuthBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBismuthBronze",16005)).setUnlocalizedName("Bismuth Bronze ProPick").setMaxDamage(BismuthBronzeUses);
-		ProPickBlackBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackBronze",16006)).setUnlocalizedName("Black Bronze ProPick").setMaxDamage(BlackBronzeUses);
-		ProPickBlackSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlackSteel",16007)).setUnlocalizedName("Black Steel ProPick").setMaxDamage(BlackSteelUses);
-		ProPickBlueSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBlueSteel",16008)).setUnlocalizedName("Blue Steel ProPick").setMaxDamage(BlueSteelUses);
-		ProPickBronze = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickBronze",16009)).setUnlocalizedName("Bronze ProPick").setMaxDamage(BronzeUses);
-		ProPickCopper = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickCopper",16010)).setUnlocalizedName("Copper ProPick").setMaxDamage(CopperUses);
-		ProPickIron = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickWroughtIron",16012)).setUnlocalizedName("Wrought Iron ProPick").setMaxDamage(WroughtIronUses);
-		ProPickRedSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickRedSteel",16016)).setUnlocalizedName("Red Steel ProPick").setMaxDamage(RedSteelUses);
-		ProPickSteel = new ItemProPick(TFC_Settings.getIntFor(config,"item","ProPickSteel",16019)).setUnlocalizedName("Steel ProPick").setMaxDamage(SteelUses);
+		BismuthIngot = new ItemIngot(TFCItemID.BismuthIngot).setUnlocalizedName("Bismuth Ingot");
+		BismuthBronzeIngot = new ItemIngot(TFCItemID.BismuthBronzeIngot).setUnlocalizedName("Bismuth Bronze Ingot");
+		BlackBronzeIngot = new ItemIngot(TFCItemID.BlackBronzeIngot).setUnlocalizedName("Black Bronze Ingot");
+		BlackSteelIngot = new ItemIngot(TFCItemID.BlackSteelIngot).setUnlocalizedName("Black Steel Ingot");
+		BlueSteelIngot = new ItemIngot(TFCItemID.BlueSteelIngot).setUnlocalizedName("Blue Steel Ingot");
+		BrassIngot = new ItemIngot(TFCItemID.BrassIngot).setUnlocalizedName("Brass Ingot");
+		BronzeIngot = new ItemIngot(TFCItemID.BronzeIngot).setUnlocalizedName("Bronze Ingot");
+		CopperIngot = new ItemIngot(TFCItemID.CopperIngot).setUnlocalizedName("Copper Ingot");
+		GoldIngot = new ItemIngot(TFCItemID.GoldIngot).setUnlocalizedName("Gold Ingot");
+		WroughtIronIngot = new ItemIngot(TFCItemID.WroughtIronIngot).setUnlocalizedName("Wrought Iron Ingot");
+		LeadIngot = new ItemIngot(TFCItemID.LeadIngot).setUnlocalizedName("Lead Ingot");
+		NickelIngot = new ItemIngot(TFCItemID.NickelIngot).setUnlocalizedName("Nickel Ingot");
+		PigIronIngot = new ItemIngot(TFCItemID.PigIronIngot).setUnlocalizedName("Pig Iron Ingot");
+		PlatinumIngot = new ItemIngot(TFCItemID.PlatinumIngot).setUnlocalizedName("Platinum Ingot");
+		RedSteelIngot = new ItemIngot(TFCItemID.RedSteelIngot).setUnlocalizedName("Red Steel Ingot");
+		RoseGoldIngot = new ItemIngot(TFCItemID.RoseGoldIngot).setUnlocalizedName("Rose Gold Ingot");
+		SilverIngot = new ItemIngot(TFCItemID.SilverIngot).setUnlocalizedName("Silver Ingot");
+		SteelIngot = new ItemIngot(TFCItemID.SteelIngot).setUnlocalizedName("Steel Ingot");
+		SterlingSilverIngot = new ItemIngot(TFCItemID.SterlingSilverIngot).setUnlocalizedName("Sterling Silver Ingot");
+		TinIngot = new ItemIngot(TFCItemID.TinIngot).setUnlocalizedName("Tin Ingot");
+		ZincIngot = new ItemIngot(TFCItemID.ZincIngot).setUnlocalizedName("Zinc Ingot");
 
-		BismuthIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot",16028)).setUnlocalizedName("Bismuth Ingot");
-		BismuthBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot",16029)).setUnlocalizedName("Bismuth Bronze Ingot");
-		BlackBronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot",16030)).setUnlocalizedName("Black Bronze Ingot");
-		BlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot",16031)).setUnlocalizedName("Black Steel Ingot");
-		BlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot",16032)).setUnlocalizedName("Blue Steel Ingot");
-		BrassIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot",16033)).setUnlocalizedName("Brass Ingot");
-		BronzeIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot",16034)).setUnlocalizedName("Bronze Ingot");
-		CopperIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot",16035)).setUnlocalizedName("Copper Ingot");
-		GoldIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot",16036)).setUnlocalizedName("Gold Ingot");
-		WroughtIronIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot",16037)).setUnlocalizedName("Wrought Iron Ingot");
-		LeadIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot",16038)).setUnlocalizedName("Lead Ingot");
-		NickelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot",16039)).setUnlocalizedName("Nickel Ingot");
-		PigIronIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot",16040)).setUnlocalizedName("Pig Iron Ingot");
-		PlatinumIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot",16041)).setUnlocalizedName("Platinum Ingot");
-		RedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot",16042)).setUnlocalizedName("Red Steel Ingot");
-		RoseGoldIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot",16043)).setUnlocalizedName("Rose Gold Ingot");
-		SilverIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot",16044)).setUnlocalizedName("Silver Ingot");
-		SteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot",16045)).setUnlocalizedName("Steel Ingot");
-		SterlingSilverIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot",16046)).setUnlocalizedName("Sterling Silver Ingot");
-		TinIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot",16047)).setUnlocalizedName("Tin Ingot");
-		ZincIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot",16048)).setUnlocalizedName("Zinc Ingot");
+		BismuthIngot2x = ((ItemIngot)new ItemIngot(TFCItemID.BismuthIngot2x).setUnlocalizedName("Bismuth Double Ingot")).setSize(EnumSize.LARGE);
+		BismuthBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.BismuthBronzeIngot2x).setUnlocalizedName("Bismuth Bronze Double Ingot")).setSize(EnumSize.LARGE);
+		BlackBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.BlackBronzeIngot2x).setUnlocalizedName("Black Bronze Double Ingot")).setSize(EnumSize.LARGE);
+		BlackSteelIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.BlackSteelIngot2x).setUnlocalizedName("Black Steel Double Ingot")).setSize(EnumSize.LARGE);
+		BlueSteelIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.BlueSteelIngot2x).setUnlocalizedName("Blue Steel Double Ingot")).setSize(EnumSize.LARGE);
+		BrassIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.BrassIngot2x).setUnlocalizedName("Brass Double Ingot")).setSize(EnumSize.LARGE);
+		BronzeIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.BronzeIngot2x).setUnlocalizedName("Bronze Double Ingot")).setSize(EnumSize.LARGE);
+		CopperIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.CopperIngot2x).setUnlocalizedName("Copper Double Ingot")).setSize(EnumSize.LARGE);
+		GoldIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.GoldIngot2x).setUnlocalizedName("Gold Double Ingot")).setSize(EnumSize.LARGE);
+		WroughtIronIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.WroughtIronIngot2x).setUnlocalizedName("Wrought Iron Double Ingot")).setSize(EnumSize.LARGE);
+		LeadIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.LeadIngot2x).setUnlocalizedName("Lead Double Ingot")).setSize(EnumSize.LARGE);
+		NickelIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.NickelIngot2x).setUnlocalizedName("Nickel Double Ingot")).setSize(EnumSize.LARGE);
+		PigIronIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.PigIronIngot2x).setUnlocalizedName("Pig Iron Double Ingot")).setSize(EnumSize.LARGE);
+		PlatinumIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.PlatinumIngot2x).setUnlocalizedName("Platinum Double Ingot")).setSize(EnumSize.LARGE);
+		RedSteelIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.RedSteelIngot2x).setUnlocalizedName("Red Steel Double Ingot")).setSize(EnumSize.LARGE);
+		RoseGoldIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.RoseGoldIngot2x).setUnlocalizedName("Rose Gold Double Ingot")).setSize(EnumSize.LARGE);
+		SilverIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.SilverIngot2x).setUnlocalizedName("Silver Double Ingot")).setSize(EnumSize.LARGE);
+		SteelIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.SteelIngot2x).setUnlocalizedName("Steel Double Ingot")).setSize(EnumSize.LARGE);
+		SterlingSilverIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.SterlingSilverIngot2x).setUnlocalizedName("Sterling Silver Double Ingot")).setSize(EnumSize.LARGE);
+		TinIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.TinIngot2x).setUnlocalizedName("Tin Double Ingot")).setSize(EnumSize.LARGE);
+		ZincIngot2x  = ((ItemIngot)new ItemIngot(TFCItemID.ZincIngot2x).setUnlocalizedName("Zinc Double Ingot")).setSize(EnumSize.LARGE);
 
-		BismuthIngot2x = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthIngot2x",16049)).setUnlocalizedName("Bismuth Double Ingot")).setSize(EnumSize.LARGE);
-		BismuthBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BismuthBronzeIngot2x",16050)).setUnlocalizedName("Bismuth Bronze Double Ingot")).setSize(EnumSize.LARGE);
-		BlackBronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackBronzeIngot2x",16051)).setUnlocalizedName("Black Bronze Double Ingot")).setSize(EnumSize.LARGE);
-		BlackSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlackSteelIngot2x",16052)).setUnlocalizedName("Black Steel Double Ingot")).setSize(EnumSize.LARGE);
-		BlueSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BlueSteelIngot2x",16053)).setUnlocalizedName("Blue Steel Double Ingot")).setSize(EnumSize.LARGE);
-		BrassIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BrassIngot2x",16054)).setUnlocalizedName("Brass Double Ingot")).setSize(EnumSize.LARGE);
-		BronzeIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","BronzeIngot2x",16055)).setUnlocalizedName("Bronze Double Ingot")).setSize(EnumSize.LARGE);
-		CopperIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","CopperIngot2x",16056)).setUnlocalizedName("Copper Double Ingot")).setSize(EnumSize.LARGE);
-		GoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","GoldIngot2x",16057)).setUnlocalizedName("Gold Double Ingot")).setSize(EnumSize.LARGE);
-		WroughtIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","WroughtIronIngot2x",16058)).setUnlocalizedName("Wrought Iron Double Ingot")).setSize(EnumSize.LARGE);
-		LeadIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","LeadIngot2x",16059)).setUnlocalizedName("Lead Double Ingot")).setSize(EnumSize.LARGE);
-		NickelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","NickelIngot2x",16060)).setUnlocalizedName("Nickel Double Ingot")).setSize(EnumSize.LARGE);
-		PigIronIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PigIronIngot2x",16061)).setUnlocalizedName("Pig Iron Double Ingot")).setSize(EnumSize.LARGE);
-		PlatinumIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","PlatinumIngot2x",16062)).setUnlocalizedName("Platinum Double Ingot")).setSize(EnumSize.LARGE);
-		RedSteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RedSteelIngot2x",16063)).setUnlocalizedName("Red Steel Double Ingot")).setSize(EnumSize.LARGE);
-		RoseGoldIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","RoseGoldIngot2x",16064)).setUnlocalizedName("Rose Gold Double Ingot")).setSize(EnumSize.LARGE);
-		SilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SilverIngot2x",16065)).setUnlocalizedName("Silver Double Ingot")).setSize(EnumSize.LARGE);
-		SteelIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SteelIngot2x",16066)).setUnlocalizedName("Steel Double Ingot")).setSize(EnumSize.LARGE);
-		SterlingSilverIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","SterlingSilverIngot2x",16067)).setUnlocalizedName("Sterling Silver Double Ingot")).setSize(EnumSize.LARGE);
-		TinIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","TinIngot2x",16068)).setUnlocalizedName("Tin Double Ingot")).setSize(EnumSize.LARGE);
-		ZincIngot2x  = ((ItemIngot)new ItemIngot(TFC_Settings.getIntFor(config,"item","ZincIngot2x",16069)).setUnlocalizedName("Zinc Double Ingot")).setSize(EnumSize.LARGE);
-
-		GemRuby = new ItemGem(TFC_Settings.getIntFor(config,"item","GemRuby",16080)).setUnlocalizedName("Ruby");
-		GemSapphire = new ItemGem(TFC_Settings.getIntFor(config,"item","GemSapphire",16081)).setUnlocalizedName("Sapphire");
-		GemEmerald = new ItemGem(TFC_Settings.getIntFor(config,"item","GemEmerald",16082)).setUnlocalizedName("Emerald");
-		GemTopaz = new ItemGem(TFC_Settings.getIntFor(config,"item","GemTopaz",16083)).setUnlocalizedName("Topaz");
-		GemTourmaline = new ItemGem(TFC_Settings.getIntFor(config,"item","GemTourmaline",16084)).setUnlocalizedName("Tourmaline");
-		GemJade = new ItemGem(TFC_Settings.getIntFor(config,"item","GemJade",16085)).setUnlocalizedName("Jade");
-		GemBeryl = new ItemGem(TFC_Settings.getIntFor(config,"item","GemBeryl",16086)).setUnlocalizedName("Beryl");
-		GemAgate = new ItemGem(TFC_Settings.getIntFor(config,"item","GemAgate",16087)).setUnlocalizedName("Agate");
-		GemOpal = new ItemGem(TFC_Settings.getIntFor(config,"item","GemOpal",16088)).setUnlocalizedName("Opal");
-		GemGarnet = new ItemGem(TFC_Settings.getIntFor(config,"item","GemGarnet",16089)).setUnlocalizedName("Garnet");
-		GemJasper = new ItemGem(TFC_Settings.getIntFor(config,"item","GemJasper",16090)).setUnlocalizedName("Jasper");
-		GemAmethyst = new ItemGem(TFC_Settings.getIntFor(config,"item","GemAmethyst",16091)).setUnlocalizedName("Amethyst");
-		GemDiamond = new ItemGem(TFC_Settings.getIntFor(config,"item","GemDiamond",16092)).setUnlocalizedName("Diamond");
+		GemRuby = new ItemGem(TFCItemID.GemRuby).setUnlocalizedName("Ruby");
+		GemSapphire = new ItemGem(TFCItemID.GemSapphire).setUnlocalizedName("Sapphire");
+		GemEmerald = new ItemGem(TFCItemID.GemEmerald).setUnlocalizedName("Emerald");
+		GemTopaz = new ItemGem(TFCItemID.GemTopaz).setUnlocalizedName("Topaz");
+		GemTourmaline = new ItemGem(TFCItemID.GemTourmaline).setUnlocalizedName("Tourmaline");
+		GemJade = new ItemGem(TFCItemID.GemJade).setUnlocalizedName("Jade");
+		GemBeryl = new ItemGem(TFCItemID.GemBeryl).setUnlocalizedName("Beryl");
+		GemAgate = new ItemGem(TFCItemID.GemAgate).setUnlocalizedName("Agate");
+		GemOpal = new ItemGem(TFCItemID.GemOpal).setUnlocalizedName("Opal");
+		GemGarnet = new ItemGem(TFCItemID.GemGarnet).setUnlocalizedName("Garnet");
+		GemJasper = new ItemGem(TFCItemID.GemJasper).setUnlocalizedName("Jasper");
+		GemAmethyst = new ItemGem(TFCItemID.GemAmethyst).setUnlocalizedName("Amethyst");
+		GemDiamond = new ItemGem(TFCItemID.GemDiamond).setUnlocalizedName("Diamond");
 
 		//Tools
+		IgInShovel = new ItemCustomShovel(TFCItemID.IgInShovel,IgInToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgInStoneUses);
+		IgInAxe = new ItemCustomAxe(TFCItemID.IgInAxe,IgInToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(IgInStoneUses);
+		IgInHoe = new ItemCustomHoe(TFCItemID.IgInHoe,IgInToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgInStoneUses);
 
-		IgInShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","IgInShovel",16101),IgInToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgInStoneUses);
-		IgInAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","IgInAxe",16102),IgInToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(IgInStoneUses);
-		IgInHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","IgInHoe",16103),IgInToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgInStoneUses);
+		SedShovel= new ItemCustomShovel(TFCItemID.SedShovel,SedToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(SedStoneUses);
+		SedAxe = new ItemCustomAxe(TFCItemID.SedAxe,SedToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(SedStoneUses);
+		SedHoe = new ItemCustomHoe(TFCItemID.SedHoe,SedToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(SedStoneUses);
 
-		SedShovel= new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","SedShovel",16105),SedToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(SedStoneUses);
-		SedAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","SedAxe",16106),SedToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(SedStoneUses);
-		SedHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","SedHoe",16107),SedToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(SedStoneUses);
+		IgExShovel= new ItemCustomShovel(TFCItemID.IgExShovel,IgExToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgExStoneUses);
+		IgExAxe = new ItemCustomAxe(TFCItemID.IgExAxe,IgExToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(IgExStoneUses);
+		IgExHoe = new ItemCustomHoe(TFCItemID.IgExHoe,IgExToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgExStoneUses);
 
-		IgExShovel= new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","IgExShovel",16109),IgExToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(IgExStoneUses);
-		IgExAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","IgExAxe",16110),IgExToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(IgExStoneUses);
-		IgExHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","IgExHoe",16111),IgExToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(IgExStoneUses);
+		MMShovel = new ItemCustomShovel(TFCItemID.MMShovel,MMToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(MMStoneUses);
+		MMAxe = new ItemCustomAxe(TFCItemID.MMAxe,MMToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(MMStoneUses);
+		MMHoe = new ItemCustomHoe(TFCItemID.MMHoe,MMToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(MMStoneUses);
 
-		MMShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","MMShovel",16113),MMToolMaterial).setUnlocalizedName("Stone Shovel").setMaxDamage(MMStoneUses);
-		MMAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","MMAxe",16114),MMToolMaterial, 75).setUnlocalizedName("Stone Axe").setMaxDamage(MMStoneUses);
-		MMHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","MMHoe",16115),MMToolMaterial).setUnlocalizedName("Stone Hoe").setMaxDamage(MMStoneUses);
+		BismuthBronzePick = new ItemCustomPickaxe(TFCItemID.BismuthBronzePick,BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Pick").setMaxDamage(BismuthBronzeUses);
+		BismuthBronzeShovel = new ItemCustomShovel(TFCItemID.BismuthBronzeShovel,BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Shovel").setMaxDamage(BismuthBronzeUses);
+		BismuthBronzeAxe = new ItemCustomAxe(TFCItemID.BismuthBronzeAxe,BismuthBronzeToolMaterial, 150).setUnlocalizedName("Bismuth Bronze Axe").setMaxDamage(BismuthBronzeUses);
+		BismuthBronzeHoe = new ItemCustomHoe(TFCItemID.BismuthBronzeHoe,BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hoe").setMaxDamage(BismuthBronzeUses);
 
-		BismuthBronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BismuthBronzePick",16120),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Pick").setMaxDamage(BismuthBronzeUses);
-		BismuthBronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BismuthBronzeShovel",16121),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Shovel").setMaxDamage(BismuthBronzeUses);
-		BismuthBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BismuthBronzeAxe",16122),BismuthBronzeToolMaterial, 150).setUnlocalizedName("Bismuth Bronze Axe").setMaxDamage(BismuthBronzeUses);
-		BismuthBronzeHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BismuthBronzeHoe",16123),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hoe").setMaxDamage(BismuthBronzeUses);
+		BlackBronzePick = new ItemCustomPickaxe(TFCItemID.BlackBronzePick,BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Pick").setMaxDamage(BlackBronzeUses);
+		BlackBronzeShovel = new ItemCustomShovel(TFCItemID.BlackBronzeShovel,BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Shovel").setMaxDamage(BlackBronzeUses);
+		BlackBronzeAxe = new ItemCustomAxe(TFCItemID.BlackBronzeAxe,BlackBronzeToolMaterial, 170).setUnlocalizedName("Black Bronze Axe").setMaxDamage(BlackBronzeUses);
+		BlackBronzeHoe = new ItemCustomHoe(TFCItemID.BlackBronzeHoe,BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hoe").setMaxDamage(BlackBronzeUses);
 
-		BlackBronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BlackBronzePick",16124),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Pick").setMaxDamage(BlackBronzeUses);
-		BlackBronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BlackBronzeShovel",16125),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Shovel").setMaxDamage(BlackBronzeUses);
-		BlackBronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BlackBronzeAxe",16126),BlackBronzeToolMaterial, 170).setUnlocalizedName("Black Bronze Axe").setMaxDamage(BlackBronzeUses);
-		BlackBronzeHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BlackBronzeHoe",16127),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hoe").setMaxDamage(BlackBronzeUses);
+		BlackSteelPick = new ItemCustomPickaxe(TFCItemID.BlackSteelPick,BlackSteelToolMaterial).setUnlocalizedName("Black Steel Pick").setMaxDamage(BlackSteelUses);
+		BlackSteelShovel = new ItemCustomShovel(TFCItemID.BlackSteelShovel,BlackSteelToolMaterial).setUnlocalizedName("Black Steel Shovel").setMaxDamage(BlackSteelUses);
+		BlackSteelAxe = new ItemCustomAxe(TFCItemID.BlackSteelAxe,BlackSteelToolMaterial, 245).setUnlocalizedName("Black Steel Axe").setMaxDamage(BlackSteelUses);
+		BlackSteelHoe = new ItemCustomHoe(TFCItemID.BlackSteelHoe,BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hoe").setMaxDamage(BlackSteelUses);
 
-		BlackSteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BlackSteelPick",16128),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Pick").setMaxDamage(BlackSteelUses);
-		BlackSteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BlackSteelShovel",16129),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Shovel").setMaxDamage(BlackSteelUses);
-		BlackSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BlackSteelAxe",16130),BlackSteelToolMaterial, 245).setUnlocalizedName("Black Steel Axe").setMaxDamage(BlackSteelUses);
-		BlackSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BlackSteelHoe",16131),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hoe").setMaxDamage(BlackSteelUses);
+		BlueSteelPick = new ItemCustomPickaxe(TFCItemID.BlueSteelPick,BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Pick").setMaxDamage(BlueSteelUses);
+		BlueSteelShovel = new ItemCustomShovel(TFCItemID.BlueSteelShovel,BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Shovel").setMaxDamage(BlueSteelUses);
+		BlueSteelAxe = new ItemCustomAxe(TFCItemID.BlueSteelAxe,BlueSteelToolMaterial, 270).setUnlocalizedName("Blue Steel Axe").setMaxDamage(BlueSteelUses);
+		BlueSteelHoe = new ItemCustomHoe(TFCItemID.BlueSteelHoe,BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hoe").setMaxDamage(BlueSteelUses);
 
-		BlueSteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BlueSteelPick",16132),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Pick").setMaxDamage(BlueSteelUses);
-		BlueSteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BlueSteelShovel",16133),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Shovel").setMaxDamage(BlueSteelUses);
-		BlueSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BlueSteelAxe",16134),BlueSteelToolMaterial, 270).setUnlocalizedName("Blue Steel Axe").setMaxDamage(BlueSteelUses);
-		BlueSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BlueSteelHoe",16135),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hoe").setMaxDamage(BlueSteelUses);
+		BronzePick = new ItemCustomPickaxe(TFCItemID.BronzePick,BronzeToolMaterial).setUnlocalizedName("Bronze Pick").setMaxDamage(BronzeUses);
+		BronzeShovel = new ItemCustomShovel(TFCItemID.BronzeShovel,BronzeToolMaterial).setUnlocalizedName("Bronze Shovel").setMaxDamage(BronzeUses);
+		BronzeAxe = new ItemCustomAxe(TFCItemID.BronzeAxe,BronzeToolMaterial, 160).setUnlocalizedName("Bronze Axe").setMaxDamage(BronzeUses);
+		BronzeHoe = new ItemCustomHoe(TFCItemID.BronzeHoe,BronzeToolMaterial).setUnlocalizedName("Bronze Hoe").setMaxDamage(BronzeUses);
 
-		BronzePick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","BronzePick",16136),BronzeToolMaterial).setUnlocalizedName("Bronze Pick").setMaxDamage(BronzeUses);
-		BronzeShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","BronzeShovel",16137),BronzeToolMaterial).setUnlocalizedName("Bronze Shovel").setMaxDamage(BronzeUses);
-		BronzeAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","BronzeAxe",16138),BronzeToolMaterial, 160).setUnlocalizedName("Bronze Axe").setMaxDamage(BronzeUses);
-		BronzeHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","BronzeHoe",16139),BronzeToolMaterial).setUnlocalizedName("Bronze Hoe").setMaxDamage(BronzeUses);
+		CopperPick = new ItemCustomPickaxe(TFCItemID.CopperPick,CopperToolMaterial).setUnlocalizedName("Copper Pick").setMaxDamage(CopperUses);
+		CopperShovel = new ItemCustomShovel(TFCItemID.CopperShovel,CopperToolMaterial).setUnlocalizedName("Copper Shovel").setMaxDamage(CopperUses);
+		CopperAxe = new ItemCustomAxe(TFCItemID.CopperAxe,CopperToolMaterial, 115).setUnlocalizedName("Copper Axe").setMaxDamage(CopperUses);
+		CopperHoe = new ItemCustomHoe(TFCItemID.CopperHoe,CopperToolMaterial).setUnlocalizedName("Copper Hoe").setMaxDamage(CopperUses);
 
-		CopperPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","CopperPick",16140),CopperToolMaterial).setUnlocalizedName("Copper Pick").setMaxDamage(CopperUses);
-		CopperShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","CopperShovel",16141),CopperToolMaterial).setUnlocalizedName("Copper Shovel").setMaxDamage(CopperUses);
-		CopperAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","CopperAxe",16142),CopperToolMaterial, 115).setUnlocalizedName("Copper Axe").setMaxDamage(CopperUses);
-		CopperHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","CopperHoe",16143),CopperToolMaterial).setUnlocalizedName("Copper Hoe").setMaxDamage(CopperUses);
+		WroughtIronPick = new ItemCustomPickaxe(TFCItemID.WroughtIronPick,IronToolMaterial).setUnlocalizedName("Wrought Iron Pick").setMaxDamage(WroughtIronUses);
+		WroughtIronShovel = new ItemCustomShovel(TFCItemID.WroughtIronShovel,IronToolMaterial).setUnlocalizedName("Wrought Iron Shovel").setMaxDamage(WroughtIronUses);
+		WroughtIronAxe = new ItemCustomAxe(TFCItemID.WroughtIronAxe,IronToolMaterial, 185).setUnlocalizedName("Wrought Iron Axe").setMaxDamage(WroughtIronUses);
+		WroughtIronHoe = new ItemCustomHoe(TFCItemID.WroughtIronHoe,IronToolMaterial).setUnlocalizedName("Wrought Iron Hoe").setMaxDamage(WroughtIronUses);;
 
-		WroughtIronPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","WroughtIronPick",16148),IronToolMaterial).setUnlocalizedName("Wrought Iron Pick").setMaxDamage(WroughtIronUses);
-		WroughtIronShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","WroughtIronShovel",16149),IronToolMaterial).setUnlocalizedName("Wrought Iron Shovel").setMaxDamage(WroughtIronUses);
-		WroughtIronAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","WroughtIronAxe",16150),IronToolMaterial, 185).setUnlocalizedName("Wrought Iron Axe").setMaxDamage(WroughtIronUses);
-		WroughtIronHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","WroughtIronHoe",16151),IronToolMaterial).setUnlocalizedName("Wrought Iron Hoe").setMaxDamage(WroughtIronUses);;
+		RedSteelPick = new ItemCustomPickaxe(TFCItemID.RedSteelPick,RedSteelToolMaterial).setUnlocalizedName("Red Steel Pick").setMaxDamage(RedSteelUses);
+		RedSteelShovel = new ItemCustomShovel(TFCItemID.RedSteelShovel,RedSteelToolMaterial).setUnlocalizedName("Red Steel Shovel").setMaxDamage(RedSteelUses);
+		RedSteelAxe = new ItemCustomAxe(TFCItemID.RedSteelAxe,RedSteelToolMaterial, 270).setUnlocalizedName("Red Steel Axe").setMaxDamage(RedSteelUses);
+		RedSteelHoe = new ItemCustomHoe(TFCItemID.RedSteelHoe,RedSteelToolMaterial).setUnlocalizedName("Red Steel Hoe").setMaxDamage(RedSteelUses);
 
-		RedSteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","RedSteelPick",16168),RedSteelToolMaterial).setUnlocalizedName("Red Steel Pick").setMaxDamage(RedSteelUses);
-		RedSteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","RedSteelShovel",16169),RedSteelToolMaterial).setUnlocalizedName("Red Steel Shovel").setMaxDamage(RedSteelUses);
-		RedSteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","RedSteelAxe",16170),RedSteelToolMaterial, 270).setUnlocalizedName("Red Steel Axe").setMaxDamage(RedSteelUses);
-		RedSteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","RedSteelHoe",16171),RedSteelToolMaterial).setUnlocalizedName("Red Steel Hoe").setMaxDamage(RedSteelUses);
-
-		SteelPick = new ItemCustomPickaxe(TFC_Settings.getIntFor(config,"item","SteelPick",16180),SteelToolMaterial).setUnlocalizedName("Steel Pick").setMaxDamage(SteelUses);
-		SteelShovel = new ItemCustomShovel(TFC_Settings.getIntFor(config,"item","SteelShovel",16181),SteelToolMaterial).setUnlocalizedName("Steel Shovel").setMaxDamage(SteelUses);
-		SteelAxe = new ItemCustomAxe(TFC_Settings.getIntFor(config,"item","SteelAxe",16182),SteelToolMaterial, 210).setUnlocalizedName("Steel Axe").setMaxDamage(SteelUses);
-		SteelHoe = new ItemCustomHoe(TFC_Settings.getIntFor(config,"item","SteelHoe",16183),SteelToolMaterial).setUnlocalizedName("Steel Hoe").setMaxDamage(SteelUses);
+		SteelPick = new ItemCustomPickaxe(TFCItemID.SteelPick,SteelToolMaterial).setUnlocalizedName("Steel Pick").setMaxDamage(SteelUses);
+		SteelShovel = new ItemCustomShovel(TFCItemID.SteelShovel,SteelToolMaterial).setUnlocalizedName("Steel Shovel").setMaxDamage(SteelUses);
+		SteelAxe = new ItemCustomAxe(TFCItemID.SteelAxe,SteelToolMaterial, 210).setUnlocalizedName("Steel Axe").setMaxDamage(SteelUses);
+		SteelHoe = new ItemCustomHoe(TFCItemID.SteelHoe,SteelToolMaterial).setUnlocalizedName("Steel Hoe").setMaxDamage(SteelUses);
 
 		//chisels
-		BismuthBronzeChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BismuthBronzeChisel",16227),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Chisel").setMaxDamage(BismuthBronzeUses);
-		BlackBronzeChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BlackBronzeChisel",16228),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Chisel").setMaxDamage(BlackBronzeUses);
-		BlackSteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BlackSteelChisel",16230),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Chisel").setMaxDamage(BlackSteelUses);
-		BlueSteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BlueSteelChisel",16231),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Chisel").setMaxDamage(BlueSteelUses);
-		BronzeChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","BronzeChisel",16232),BronzeToolMaterial).setUnlocalizedName("Bronze Chisel").setMaxDamage(BronzeUses);
-		CopperChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","CopperChisel",16233),CopperToolMaterial).setUnlocalizedName("Copper Chisel").setMaxDamage(CopperUses);
-		WroughtIronChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","WroughtIronChisel",16234),IronToolMaterial).setUnlocalizedName("Wrought Iron Chisel").setMaxDamage(WroughtIronUses);
-		RedSteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","RedSteelChisel",16235),RedSteelToolMaterial).setUnlocalizedName("Red Steel Chisel").setMaxDamage(RedSteelUses);
-		SteelChisel = new ItemChisel(TFC_Settings.getIntFor(config,"item","SteelChisel",16237),SteelToolMaterial).setUnlocalizedName("Steel Chisel").setMaxDamage(SteelUses);
+		BismuthBronzeChisel = new ItemChisel(TFCItemID.BismuthBronzeChisel,BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Chisel").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeChisel = new ItemChisel(TFCItemID.BlackBronzeChisel,BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Chisel").setMaxDamage(BlackBronzeUses);
+		BlackSteelChisel = new ItemChisel(TFCItemID.BlackSteelChisel,BlackSteelToolMaterial).setUnlocalizedName("Black Steel Chisel").setMaxDamage(BlackSteelUses);
+		BlueSteelChisel = new ItemChisel(TFCItemID.BlueSteelChisel,BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Chisel").setMaxDamage(BlueSteelUses);
+		BronzeChisel = new ItemChisel(TFCItemID.BronzeChisel,BronzeToolMaterial).setUnlocalizedName("Bronze Chisel").setMaxDamage(BronzeUses);
+		CopperChisel = new ItemChisel(TFCItemID.CopperChisel,CopperToolMaterial).setUnlocalizedName("Copper Chisel").setMaxDamage(CopperUses);
+		WroughtIronChisel = new ItemChisel(TFCItemID.WroughtIronChisel,IronToolMaterial).setUnlocalizedName("Wrought Iron Chisel").setMaxDamage(WroughtIronUses);
+		RedSteelChisel = new ItemChisel(TFCItemID.RedSteelChisel,RedSteelToolMaterial).setUnlocalizedName("Red Steel Chisel").setMaxDamage(RedSteelUses);
+		SteelChisel = new ItemChisel(TFCItemID.SteelChisel,SteelToolMaterial).setUnlocalizedName("Steel Chisel").setMaxDamage(SteelUses);
 
-		BismuthBronzeSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BismuthBronzeSword",16246),BismuthBronzeToolMaterial, 	210).setUnlocalizedName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses);
-		BlackBronzeSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackBronzeSword",16247),BlackBronzeToolMaterial, 			230).setUnlocalizedName("Black Bronze Sword").setMaxDamage(BlackBronzeUses);
-		BlackSteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackSteelSword",16248),BlackSteelToolMaterial, 			270).setUnlocalizedName("Black Steel Sword").setMaxDamage(BlackSteelUses);
-		BlueSteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlueSteelSword",16249),BlueSteelToolMaterial,				315).setUnlocalizedName("Blue Steel Sword").setMaxDamage(BlueSteelUses);
-		BronzeSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BronzeSword",16250),BronzeToolMaterial,							220).setUnlocalizedName("Bronze Sword").setMaxDamage(BronzeUses);
-		CopperSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","CopperSword",16251),CopperToolMaterial, 						165).setUnlocalizedName("Copper Sword").setMaxDamage(CopperUses);
-		WroughtIronSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","WroughtIronSword",16252),IronToolMaterial,					240).setUnlocalizedName("Wrought Iron Sword").setMaxDamage(WroughtIronUses);
-		RedSteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","RedSteelSword",16253),RedSteelToolMaterial,					305).setUnlocalizedName("Red Steel Sword").setMaxDamage(RedSteelUses);
-		SteelSword = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","SteelSword",16255),SteelToolMaterial,							265).setUnlocalizedName("Steel Sword").setMaxDamage(SteelUses);
+		BismuthBronzeSword = new ItemCustomSword(TFCItemID.BismuthBronzeSword,BismuthBronzeToolMaterial, 	210).setUnlocalizedName("Bismuth Bronze Sword").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeSword = new ItemCustomSword(TFCItemID.BlackBronzeSword,BlackBronzeToolMaterial, 		230).setUnlocalizedName("Black Bronze Sword").setMaxDamage(BlackBronzeUses);
+		BlackSteelSword = new ItemCustomSword(TFCItemID.BlackSteelSword,BlackSteelToolMaterial, 			270).setUnlocalizedName("Black Steel Sword").setMaxDamage(BlackSteelUses);
+		BlueSteelSword = new ItemCustomSword(TFCItemID.BlueSteelSword,BlueSteelToolMaterial,				315).setUnlocalizedName("Blue Steel Sword").setMaxDamage(BlueSteelUses);
+		BronzeSword = new ItemCustomSword(TFCItemID.BronzeSword,BronzeToolMaterial,						220).setUnlocalizedName("Bronze Sword").setMaxDamage(BronzeUses);
+		CopperSword = new ItemCustomSword(TFCItemID.CopperSword,CopperToolMaterial, 						165).setUnlocalizedName("Copper Sword").setMaxDamage(CopperUses);
+		WroughtIronSword = new ItemCustomSword(TFCItemID.WroughtIronSword,IronToolMaterial,				240).setUnlocalizedName("Wrought Iron Sword").setMaxDamage(WroughtIronUses);
+		RedSteelSword = new ItemCustomSword(TFCItemID.RedSteelSword,RedSteelToolMaterial,					305).setUnlocalizedName("Red Steel Sword").setMaxDamage(RedSteelUses);
+		SteelSword = new ItemCustomSword(TFCItemID.SteelSword,SteelToolMaterial,							265).setUnlocalizedName("Steel Sword").setMaxDamage(SteelUses);
 
-		BismuthBronzeMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BismuthBronzeMace",16263),BismuthBronzeToolMaterial, 		210,EnumDamageType.CRUSHING).setUnlocalizedName("Bismuth Bronze Mace").setMaxDamage(BismuthBronzeUses);
-		BlackBronzeMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackBronzeMace",16264),BlackBronzeToolMaterial, 			230,EnumDamageType.CRUSHING).setUnlocalizedName("Black Bronze Mace").setMaxDamage(BlackBronzeUses);
-		BlackSteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlackSteelMace",16265),BlackSteelToolMaterial, 			   	270,EnumDamageType.CRUSHING).setUnlocalizedName("Black Steel Mace").setMaxDamage(BlackSteelUses);
-		BlueSteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BlueSteelMace",16266),BlueSteelToolMaterial, 					315,EnumDamageType.CRUSHING).setUnlocalizedName("Blue Steel Mace").setMaxDamage(BlueSteelUses);
-		BronzeMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","BronzeMace",16267),BronzeToolMaterial, 							220,EnumDamageType.CRUSHING).setUnlocalizedName("Bronze Mace").setMaxDamage(BronzeUses);
-		CopperMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","CopperMace",16268),CopperToolMaterial, 							165,EnumDamageType.CRUSHING).setUnlocalizedName("Copper Mace").setMaxDamage(CopperUses);
-		WroughtIronMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","WroughtIronMace",16269),IronToolMaterial, 					240,EnumDamageType.CRUSHING).setUnlocalizedName("Wrought Iron Mace").setMaxDamage(WroughtIronUses);
-		RedSteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","RedSteelMace",16270),RedSteelToolMaterial, 					305,EnumDamageType.CRUSHING).setUnlocalizedName("Red Steel Mace").setMaxDamage(RedSteelUses);
-		SteelMace = new ItemCustomSword(TFC_Settings.getIntFor(config,"item","SteelMace",16272),SteelToolMaterial, 								265,EnumDamageType.CRUSHING).setUnlocalizedName("Steel Mace").setMaxDamage(SteelUses);
+		BismuthBronzeMace = new ItemCustomSword(TFCItemID.BismuthBronzeMace,BismuthBronzeToolMaterial, 	210,EnumDamageType.CRUSHING).setUnlocalizedName("Bismuth Bronze Mace").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeMace = new ItemCustomSword(TFCItemID.BlackBronzeMace,BlackBronzeToolMaterial, 			230,EnumDamageType.CRUSHING).setUnlocalizedName("Black Bronze Mace").setMaxDamage(BlackBronzeUses);
+		BlackSteelMace = new ItemCustomSword(TFCItemID.BlackSteelMace,BlackSteelToolMaterial, 				270,EnumDamageType.CRUSHING).setUnlocalizedName("Black Steel Mace").setMaxDamage(BlackSteelUses);
+		BlueSteelMace = new ItemCustomSword(TFCItemID.BlueSteelMace,BlueSteelToolMaterial, 				315,EnumDamageType.CRUSHING).setUnlocalizedName("Blue Steel Mace").setMaxDamage(BlueSteelUses);
+		BronzeMace = new ItemCustomSword(TFCItemID.BronzeMace,BronzeToolMaterial, 							220,EnumDamageType.CRUSHING).setUnlocalizedName("Bronze Mace").setMaxDamage(BronzeUses);
+		CopperMace = new ItemCustomSword(TFCItemID.CopperMace,CopperToolMaterial, 							165,EnumDamageType.CRUSHING).setUnlocalizedName("Copper Mace").setMaxDamage(CopperUses);
+		WroughtIronMace = new ItemCustomSword(TFCItemID.WroughtIronMace,IronToolMaterial, 					240,EnumDamageType.CRUSHING).setUnlocalizedName("Wrought Iron Mace").setMaxDamage(WroughtIronUses);
+		RedSteelMace = new ItemCustomSword(TFCItemID.RedSteelMace,RedSteelToolMaterial, 					305,EnumDamageType.CRUSHING).setUnlocalizedName("Red Steel Mace").setMaxDamage(RedSteelUses);
+		SteelMace = new ItemCustomSword(TFCItemID.SteelMace,SteelToolMaterial, 							265,EnumDamageType.CRUSHING).setUnlocalizedName("Steel Mace").setMaxDamage(SteelUses);
 
-		BismuthBronzeSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BismuthBronzeSaw",16276),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Saw").setMaxDamage(BismuthBronzeUses);
-		BlackBronzeSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BlackBronzeSaw",16277),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Saw").setMaxDamage(BlackBronzeUses);
-		BlackSteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BlackSteelSaw",16278),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Saw").setMaxDamage(BlackSteelUses);
-		BlueSteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BlueSteelSaw",16279),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Saw").setMaxDamage(BlueSteelUses);
-		BronzeSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","BronzeSaw",16280),BronzeToolMaterial).setUnlocalizedName("Bronze Saw").setMaxDamage(BronzeUses);
-		CopperSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","CopperSaw",16281),CopperToolMaterial).setUnlocalizedName("Copper Saw").setMaxDamage(CopperUses);
-		WroughtIronSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","WroughtIronSaw",16282),IronToolMaterial).setUnlocalizedName("Wrought Iron Saw").setMaxDamage(WroughtIronUses);
-		RedSteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","RedSteelSaw",16283),RedSteelToolMaterial).setUnlocalizedName("Red Steel Saw").setMaxDamage(RedSteelUses);
-		SteelSaw = new ItemCustomSaw(TFC_Settings.getIntFor(config,"item","SteelSaw",16285),SteelToolMaterial).setUnlocalizedName("Steel Saw").setMaxDamage(SteelUses);
+		BismuthBronzeSaw = new ItemCustomSaw(TFCItemID.BismuthBronzeSaw,BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Saw").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeSaw = new ItemCustomSaw(TFCItemID.BlackBronzeSaw,BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Saw").setMaxDamage(BlackBronzeUses);
+		BlackSteelSaw = new ItemCustomSaw(TFCItemID.BlackSteelSaw,BlackSteelToolMaterial).setUnlocalizedName("Black Steel Saw").setMaxDamage(BlackSteelUses);
+		BlueSteelSaw = new ItemCustomSaw(TFCItemID.BlueSteelSaw,BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Saw").setMaxDamage(BlueSteelUses);
+		BronzeSaw = new ItemCustomSaw(TFCItemID.BronzeSaw,BronzeToolMaterial).setUnlocalizedName("Bronze Saw").setMaxDamage(BronzeUses);
+		CopperSaw = new ItemCustomSaw(TFCItemID.CopperSaw,CopperToolMaterial).setUnlocalizedName("Copper Saw").setMaxDamage(CopperUses);
+		WroughtIronSaw = new ItemCustomSaw(TFCItemID.WroughtIronSaw,IronToolMaterial).setUnlocalizedName("Wrought Iron Saw").setMaxDamage(WroughtIronUses);
+		RedSteelSaw = new ItemCustomSaw(TFCItemID.RedSteelSaw,RedSteelToolMaterial).setUnlocalizedName("Red Steel Saw").setMaxDamage(RedSteelUses);
+		SteelSaw = new ItemCustomSaw(TFCItemID.SteelSaw,SteelToolMaterial).setUnlocalizedName("Steel Saw").setMaxDamage(SteelUses);
 
-		HCBlackSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlackSteelIngot",16290)).setUnlocalizedName("HC Black Steel Ingot");
-		WeakBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakBlueSteelIngot",16291)).setUnlocalizedName("Weak Blue Steel Ingot");
-		WeakRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakRedSteelIngot",16292)).setUnlocalizedName("Weak Red Steel Ingot");
-		WeakSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","WeakSteelIngot",16293)).setUnlocalizedName("Weak Steel Ingot");
-		HCBlueSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCBlueSteelIngot",16294)).setUnlocalizedName("HC Blue Steel Ingot");
-		HCRedSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCRedSteelIngot",16295)).setUnlocalizedName("HC Red Steel Ingot");
-		HCSteelIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","HCSteelIngot",16296)).setUnlocalizedName("HC Steel Ingot");
+		HCBlackSteelIngot = new ItemIngot(TFCItemID.HCBlackSteelIngot).setUnlocalizedName("HC Black Steel Ingot");
+		WeakBlueSteelIngot = new ItemIngot(TFCItemID.WeakBlueSteelIngot).setUnlocalizedName("Weak Blue Steel Ingot");
+		WeakRedSteelIngot = new ItemIngot(TFCItemID.WeakRedSteelIngot).setUnlocalizedName("Weak Red Steel Ingot");
+		WeakSteelIngot = new ItemIngot(TFCItemID.WeakSteelIngot).setUnlocalizedName("Weak Steel Ingot");
+		HCBlueSteelIngot = new ItemIngot(TFCItemID.HCBlueSteelIngot).setUnlocalizedName("HC Blue Steel Ingot");
+		HCRedSteelIngot = new ItemIngot(TFCItemID.HCRedSteelIngot).setUnlocalizedName("HC Red Steel Ingot");
+		HCSteelIngot = new ItemIngot(TFCItemID.HCSteelIngot).setUnlocalizedName("HC Steel Ingot");
 
-		OreChunk = new ItemOre(TFC_Settings.getIntFor(config,"item","OreChunk",16297)).setFolder("ore/").setUnlocalizedName("Ore");
-		Logs = new ItemLogs(TFC_Settings.getIntFor(config,"item","Logs",16298)).setUnlocalizedName("Log");
+		OreChunk = new ItemOre(TFCItemID.OreChunk).setFolder("ore/").setUnlocalizedName("Ore");
+		Logs = new ItemLogs(TFCItemID.Logs).setUnlocalizedName("Log");
 
 		//javelins
-		IgInStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","IgInJavelin",16316),IgInToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
-		SedStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","SedJavelin",16317),SedToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
-		IgExStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","IgExJavelin",16318),IgExToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
-		MMStoneJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","MMJavelin",16319),MMToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");        
-		CopperJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","CopperJavelin",16323),CopperToolMaterial, 65, 50).setUnlocalizedName("Copper Javelin");
-		BismuthBronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BismuthBronzeJavelin",16324), BismuthBronzeToolMaterial, 90, 75).setUnlocalizedName("Bismuth Bronze Javelin");
-		BronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BronzeJavelin",16325),BronzeToolMaterial, 100, 85).setUnlocalizedName("Bronze Javelin");
-		BlackBronzeJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlackBronzeJavelin",16326), BlackBronzeToolMaterial, 95, 80).setUnlocalizedName("Black Bronze Javelin");
-		WroughtIronJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","WroughtIronJavelin",16328),IronToolMaterial, 135, 120).setUnlocalizedName("Wrought Iron Javelin");
-		SteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","SteelJavelin",16329),SteelToolMaterial, 170, 155).setUnlocalizedName("Steel Javelin");
-		BlackSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlackSteelJavelin",16330),BlackSteelToolMaterial, 205, 190).setUnlocalizedName("Black Steel Javelin");
-		BlueSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","BlueSteelJavelin",16331),BlueSteelToolMaterial, 240, 225).setUnlocalizedName("Blue Steel Javelin");
-		RedSteelJavelin = new ItemJavelin(TFC_Settings.getIntFor(config,"item","RedSteelJavelin",16332),RedSteelToolMaterial, 240, 225).setUnlocalizedName("Red Steel Javelin");
+		IgInStoneJavelin = new ItemJavelin(TFCItemID.IgInJavelin,IgInToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
+		SedStoneJavelin = new ItemJavelin(TFCItemID.SedJavelin,SedToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
+		IgExStoneJavelin = new ItemJavelin(TFCItemID.IgExJavelin,IgExToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
+		MMStoneJavelin = new ItemJavelin(TFCItemID.MMJavelin,MMToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");        
+		CopperJavelin = new ItemJavelin(TFCItemID.CopperJavelin,CopperToolMaterial, 65, 50).setUnlocalizedName("Copper Javelin");
+		BismuthBronzeJavelin = new ItemJavelin(TFCItemID.BismuthBronzeJavelin, BismuthBronzeToolMaterial, 90, 75).setUnlocalizedName("Bismuth Bronze Javelin");
+		BronzeJavelin = new ItemJavelin(TFCItemID.BronzeJavelin,BronzeToolMaterial, 100, 85).setUnlocalizedName("Bronze Javelin");
+		BlackBronzeJavelin = new ItemJavelin(TFCItemID.BlackBronzeJavelin, BlackBronzeToolMaterial, 95, 80).setUnlocalizedName("Black Bronze Javelin");
+		WroughtIronJavelin = new ItemJavelin(TFCItemID.WroughtIronJavelin,IronToolMaterial, 135, 120).setUnlocalizedName("Wrought Iron Javelin");
+		SteelJavelin = new ItemJavelin(TFCItemID.SteelJavelin,SteelToolMaterial, 170, 155).setUnlocalizedName("Steel Javelin");
+		BlackSteelJavelin = new ItemJavelin(TFCItemID.BlackSteelJavelin,BlackSteelToolMaterial, 205, 190).setUnlocalizedName("Black Steel Javelin");
+		BlueSteelJavelin = new ItemJavelin(TFCItemID.BlueSteelJavelin,BlueSteelToolMaterial, 240, 225).setUnlocalizedName("Blue Steel Javelin");
+		RedSteelJavelin = new ItemJavelin(TFCItemID.RedSteelJavelin,RedSteelToolMaterial, 240, 225).setUnlocalizedName("Red Steel Javelin");
 
 		//javelin heads
-		IgInStoneJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInJavelinHead",16333)).setUnlocalizedName("Stone Javelin Head");
-		SedStoneJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedJavelinHead",16334)).setUnlocalizedName("Stone Javelin Head");
-		IgExStoneJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgExJavelinHead",16335)).setUnlocalizedName("Stone Javelin Head");
-		MMStoneJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","MMJavelinHead",16336)).setUnlocalizedName("Stone Javelin Head");
-		CopperJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperJavelinHead",16340)).setUnlocalizedName("Copper Javelin Head");
-		BismuthBronzeJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeJavelinHead",16341)).setUnlocalizedName("Bismuth Bronze Javelin Head");
-		BronzeJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeJavelinHead",16342)).setUnlocalizedName("Bronze Javelin Head");
-		BlackBronzeJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeJavelinHead",16344)).setUnlocalizedName("Black Bronze Javelin Head");
-		WroughtIronJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronJavelinHead",16345)).setUnlocalizedName("Wrought Iron Javelin Head");
-		SteelJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelJavelinHead",16346)).setUnlocalizedName("Steel Javelin Head");
-		BlackSteelJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelJavelinHead",16347)).setUnlocalizedName("Black Steel Javelin Head");
-		BlueSteelJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelJavelinHead",16348)).setUnlocalizedName("Blue Steel Javelin Head");
-		RedSteelJavelinHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelJavelinHead",16349)).setUnlocalizedName("Red Steel Javelin Head");
+		IgInStoneJavelinHead = new ItemMiscToolHead(TFCItemID.IgInJavelinHead).setUnlocalizedName("Stone Javelin Head");
+		SedStoneJavelinHead = new ItemMiscToolHead(TFCItemID.SedJavelinHead).setUnlocalizedName("Stone Javelin Head");
+		IgExStoneJavelinHead = new ItemMiscToolHead(TFCItemID.IgExJavelinHead).setUnlocalizedName("Stone Javelin Head");
+		MMStoneJavelinHead = new ItemMiscToolHead(TFCItemID.MMJavelinHead).setUnlocalizedName("Stone Javelin Head");
+		CopperJavelinHead = new ItemMiscToolHead(TFCItemID.CopperJavelinHead).setUnlocalizedName("Copper Javelin Head");
+		BismuthBronzeJavelinHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeJavelinHead).setUnlocalizedName("Bismuth Bronze Javelin Head");
+		BronzeJavelinHead = new ItemMiscToolHead(TFCItemID.BronzeJavelinHead).setUnlocalizedName("Bronze Javelin Head");
+		BlackBronzeJavelinHead = new ItemMiscToolHead(TFCItemID.BlackBronzeJavelinHead).setUnlocalizedName("Black Bronze Javelin Head");
+		WroughtIronJavelinHead = new ItemMiscToolHead(TFCItemID.WroughtIronJavelinHead).setUnlocalizedName("Wrought Iron Javelin Head");
+		SteelJavelinHead = new ItemMiscToolHead(TFCItemID.SteelJavelinHead).setUnlocalizedName("Steel Javelin Head");
+		BlackSteelJavelinHead = new ItemMiscToolHead(TFCItemID.BlackSteelJavelinHead).setUnlocalizedName("Black Steel Javelin Head");
+		BlueSteelJavelinHead = new ItemMiscToolHead(TFCItemID.BlueSteelJavelinHead).setUnlocalizedName("Blue Steel Javelin Head");
+		RedSteelJavelinHead = new ItemMiscToolHead(TFCItemID.RedSteelJavelinHead).setUnlocalizedName("Red Steel Javelin Head");
 
-		BismuthUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBismuth",16350)).setUnlocalizedName("Bismuth Unshaped");
-		BismuthBronzeUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBismuthBronze",16351)).setUnlocalizedName("Bismuth Bronze Unshaped");
-		BlackBronzeUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBlackBronze",16352)).setUnlocalizedName("Black Bronze Unshaped");
-		BlackSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBlackSteel",16353)).setUnlocalizedName("Black Steel Unshaped");
-		BlueSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBlueSteel",16354)).setUnlocalizedName("Blue Steel Unshaped");
-		BrassUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBrass",16355)).setUnlocalizedName("Brass Unshaped");
-		BronzeUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedBronze",16356)).setUnlocalizedName("Bronze Unshaped");
-		CopperUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedCopper",16357)).setUnlocalizedName("Copper Unshaped");
-		GoldUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedGold",16358)).setUnlocalizedName("Gold Unshaped");
-		WroughtIronUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedIron",16359)).setUnlocalizedName("Wrought Iron Unshaped");
-		LeadUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedLead",16360)).setUnlocalizedName("Lead Unshaped");
-		NickelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedNickel",16361)).setUnlocalizedName("Nickel Unshaped");
-		PigIronUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedPigIron",16362)).setUnlocalizedName("Pig Iron Unshaped");
-		PlatinumUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedPlatinum",16363)).setUnlocalizedName("Platinum Unshaped");
-		RedSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedRedSteel",16364)).setUnlocalizedName("Red Steel Unshaped");
-		RoseGoldUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedRoseGold",16365)).setUnlocalizedName("Rose Gold Unshaped");
-		SilverUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedSilver",16366)).setUnlocalizedName("Silver Unshaped");
-		SteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedSteel",16367)).setUnlocalizedName("Steel Unshaped");
-		SterlingSilverUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedSterlingSilver",16368)).setUnlocalizedName("Sterling Silver Unshaped");
-		TinUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedTin",16369)).setUnlocalizedName("Tin Unshaped");
-		ZincUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedZinc",16370)).setUnlocalizedName("Zinc Unshaped");
+		BismuthUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBismuth).setUnlocalizedName("Bismuth Unshaped");
+		BismuthBronzeUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBismuthBronze).setUnlocalizedName("Bismuth Bronze Unshaped");
+		BlackBronzeUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBlackBronze).setUnlocalizedName("Black Bronze Unshaped");
+		BlackSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBlackSteel).setUnlocalizedName("Black Steel Unshaped");
+		BlueSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBlueSteel).setUnlocalizedName("Blue Steel Unshaped");
+		BrassUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBrass).setUnlocalizedName("Brass Unshaped");
+		BronzeUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedBronze).setUnlocalizedName("Bronze Unshaped");
+		CopperUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedCopper).setUnlocalizedName("Copper Unshaped");
+		GoldUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedGold).setUnlocalizedName("Gold Unshaped");
+		WroughtIronUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedIron).setUnlocalizedName("Wrought Iron Unshaped");
+		LeadUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedLead).setUnlocalizedName("Lead Unshaped");
+		NickelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedNickel).setUnlocalizedName("Nickel Unshaped");
+		PigIronUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedPigIron).setUnlocalizedName("Pig Iron Unshaped");
+		PlatinumUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedPlatinum).setUnlocalizedName("Platinum Unshaped");
+		RedSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedRedSteel).setUnlocalizedName("Red Steel Unshaped");
+		RoseGoldUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedRoseGold).setUnlocalizedName("Rose Gold Unshaped");
+		SilverUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedSilver).setUnlocalizedName("Silver Unshaped");
+		SteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedSteel).setUnlocalizedName("Steel Unshaped");
+		SterlingSilverUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedSterlingSilver).setUnlocalizedName("Sterling Silver Unshaped");
+		TinUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedTin).setUnlocalizedName("Tin Unshaped");
+		ZincUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedZinc).setUnlocalizedName("Zinc Unshaped");
 
 		//Hammers
-		StoneHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","StoneHammer",16371),TFCItems.IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
-		BismuthBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BismuthBronzeHammer",16373),TFCItems.BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
-		BlackBronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlackBronzeHammer",16374),TFCItems.BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
-		BlackSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlackSteelHammer",16375),TFCItems.BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
-		BlueSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BlueSteelHammer",16376),TFCItems.BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(TFCItems.BlueSteelUses);
-		BronzeHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","BronzeHammer",16377),TFCItems.BronzeToolMaterial).setUnlocalizedName("Bronze Hammer").setMaxDamage(TFCItems.BronzeUses);
-		CopperHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","CopperHammer",16378),TFCItems.CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
-		WroughtIronHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","WroughtIronHammer",16379),TFCItems.IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
-		RedSteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","RedSteelHammer",16380),TFCItems.RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
-		SteelHammer = new ItemHammer(TFC_Settings.getIntFor(config,"item","SteelHammer",16382),TFCItems.SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
+		StoneHammer = new ItemHammer(TFCItemID.StoneHammer,TFCItems.IgInToolMaterial).setUnlocalizedName("Stone Hammer").setMaxDamage(TFCItems.IgInStoneUses);
+		BismuthBronzeHammer = new ItemHammer(TFCItemID.BismuthBronzeHammer,TFCItems.BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Hammer").setMaxDamage(TFCItems.BismuthBronzeUses);
+		BlackBronzeHammer = new ItemHammer(TFCItemID.BlackBronzeHammer,TFCItems.BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Hammer").setMaxDamage(TFCItems.BlackBronzeUses);
+		BlackSteelHammer = new ItemHammer(TFCItemID.BlackSteelHammer,TFCItems.BlackSteelToolMaterial).setUnlocalizedName("Black Steel Hammer").setMaxDamage(TFCItems.BlackSteelUses);
+		BlueSteelHammer = new ItemHammer(TFCItemID.BlueSteelHammer,TFCItems.BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Hammer").setMaxDamage(TFCItems.BlueSteelUses);
+		BronzeHammer = new ItemHammer(TFCItemID.BronzeHammer,TFCItems.BronzeToolMaterial).setUnlocalizedName("Bronze Hammer").setMaxDamage(TFCItems.BronzeUses);
+		CopperHammer = new ItemHammer(TFCItemID.CopperHammer,TFCItems.CopperToolMaterial).setUnlocalizedName("Copper Hammer").setMaxDamage(TFCItems.CopperUses);
+		WroughtIronHammer = new ItemHammer(TFCItemID.WroughtIronHammer,TFCItems.IronToolMaterial).setUnlocalizedName("Wrought Iron Hammer").setMaxDamage(TFCItems.WroughtIronUses);
+		RedSteelHammer = new ItemHammer(TFCItemID.RedSteelHammer,TFCItems.RedSteelToolMaterial).setUnlocalizedName("Red Steel Hammer").setMaxDamage(TFCItems.RedSteelUses);
+		SteelHammer = new ItemHammer(TFCItemID.SteelHammer,TFCItems.SteelToolMaterial).setUnlocalizedName("Steel Hammer").setMaxDamage(TFCItems.SteelUses);
 
-		Ink = new ItemTerra(TFC_Settings.getIntFor(config,"item","Ink",16391)).setUnlocalizedName("Ink");
-
-		FireStarter = new ItemFirestarter(TFC_Settings.getIntFor(config,"item","FireStarter",16407)).setFolder("tools/").setUnlocalizedName("Firestarter");
+		Ink = new ItemTerra(TFCItemID.Ink).setUnlocalizedName("Ink");
+		FireStarter = new ItemFirestarter(TFCItemID.FireStarter).setFolder("tools/").setUnlocalizedName("Firestarter");
 
 		//Tool heads
-		BismuthBronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzePickaxeHead",16501)).setUnlocalizedName("Bismuth Bronze Pick Head");
-		BlackBronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzePickaxeHead",16502)).setUnlocalizedName("Black Bronze Pick Head");
-		BlackSteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelPickaxeHead",16503)).setUnlocalizedName("Black Steel Pick Head");
-		BlueSteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelPickaxeHead",16504)).setUnlocalizedName("Blue Steel Pick Head");
-		BronzePickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzePickaxeHead",16505)).setUnlocalizedName("Bronze Pick Head");
-		CopperPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperPickaxeHead",16506)).setUnlocalizedName("Copper Pick Head");
-		WroughtIronPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronPickaxeHead",16507)).setUnlocalizedName("Wrought Iron Pick Head");
-		RedSteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelPickaxeHead",16508)).setUnlocalizedName("Red Steel Pick Head");
-		SteelPickaxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelPickaxeHead",16510)).setUnlocalizedName("Steel Pick Head");
+		BismuthBronzePickaxeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzePickaxeHead).setUnlocalizedName("Bismuth Bronze Pick Head");
+		BlackBronzePickaxeHead = new ItemMiscToolHead(TFCItemID.BlackBronzePickaxeHead).setUnlocalizedName("Black Bronze Pick Head");
+		BlackSteelPickaxeHead = new ItemMiscToolHead(TFCItemID.BlackSteelPickaxeHead).setUnlocalizedName("Black Steel Pick Head");
+		BlueSteelPickaxeHead = new ItemMiscToolHead(TFCItemID.BlueSteelPickaxeHead).setUnlocalizedName("Blue Steel Pick Head");
+		BronzePickaxeHead = new ItemMiscToolHead(TFCItemID.BronzePickaxeHead).setUnlocalizedName("Bronze Pick Head");
+		CopperPickaxeHead = new ItemMiscToolHead(TFCItemID.CopperPickaxeHead).setUnlocalizedName("Copper Pick Head");
+		WroughtIronPickaxeHead = new ItemMiscToolHead(TFCItemID.WroughtIronPickaxeHead).setUnlocalizedName("Wrought Iron Pick Head");
+		RedSteelPickaxeHead = new ItemMiscToolHead(TFCItemID.RedSteelPickaxeHead).setUnlocalizedName("Red Steel Pick Head");
+		SteelPickaxeHead = new ItemMiscToolHead(TFCItemID.SteelPickaxeHead).setUnlocalizedName("Steel Pick Head");
 
-		BismuthBronzeShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeShovelHead",16514)).setUnlocalizedName("Bismuth Bronze Shovel Head");
-		BlackBronzeShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeShovelHead",16515)).setUnlocalizedName("Black Bronze Shovel Head");
-		BlackSteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelShovelHead",16516)).setUnlocalizedName("Black Steel Shovel Head");
-		BlueSteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelShovelHead",16517)).setUnlocalizedName("Blue Steel Shovel Head");
-		BronzeShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeShovelHead",16518)).setUnlocalizedName("Bronze Shovel Head");
-		CopperShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperShovelHead",16519)).setUnlocalizedName("Copper Shovel Head");
-		WroughtIronShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronShovelHead",16520)).setUnlocalizedName("Wrought Iron Shovel Head");
-		RedSteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelShovelHead",16521)).setUnlocalizedName("Red Steel Shovel Head");
-		SteelShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelShovelHead",16523)).setUnlocalizedName("Steel Shovel Head");
+		BismuthBronzeShovelHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeShovelHead).setUnlocalizedName("Bismuth Bronze Shovel Head");
+		BlackBronzeShovelHead = new ItemMiscToolHead(TFCItemID.BlackBronzeShovelHead).setUnlocalizedName("Black Bronze Shovel Head");
+		BlackSteelShovelHead = new ItemMiscToolHead(TFCItemID.BlackSteelShovelHead).setUnlocalizedName("Black Steel Shovel Head");
+		BlueSteelShovelHead = new ItemMiscToolHead(TFCItemID.BlueSteelShovelHead).setUnlocalizedName("Blue Steel Shovel Head");
+		BronzeShovelHead = new ItemMiscToolHead(TFCItemID.BronzeShovelHead).setUnlocalizedName("Bronze Shovel Head");
+		CopperShovelHead = new ItemMiscToolHead(TFCItemID.CopperShovelHead).setUnlocalizedName("Copper Shovel Head");
+		WroughtIronShovelHead = new ItemMiscToolHead(TFCItemID.WroughtIronShovelHead).setUnlocalizedName("Wrought Iron Shovel Head");
+		RedSteelShovelHead = new ItemMiscToolHead(TFCItemID.RedSteelShovelHead).setUnlocalizedName("Red Steel Shovel Head");
+		SteelShovelHead = new ItemMiscToolHead(TFCItemID.SteelShovelHead).setUnlocalizedName("Steel Shovel Head");
 
-		BismuthBronzeHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeHoeHead",16527)).setUnlocalizedName("Bismuth Bronze Hoe Head");
-		BlackBronzeHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeHoeHead",16528)).setUnlocalizedName("Black Bronze Hoe Head");
-		BlackSteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelHoeHead",16529)).setUnlocalizedName("Black Steel Hoe Head");
-		BlueSteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelHoeHead",16530)).setUnlocalizedName("Blue Steel Hoe Head");
-		BronzeHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeHoeHead",16531)).setUnlocalizedName("Bronze Hoe Head");
-		CopperHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperHoeHead",16532)).setUnlocalizedName("Copper Hoe Head");
-		WroughtIronHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronHoeHead",16533)).setUnlocalizedName("Wrought Iron Hoe Head");
-		RedSteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelHoeHead",16534)).setUnlocalizedName("Red Steel Hoe Head");
-		SteelHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelHoeHead",16536)).setUnlocalizedName("Steel Hoe Head");
+		BismuthBronzeHoeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeHoeHead).setUnlocalizedName("Bismuth Bronze Hoe Head");
+		BlackBronzeHoeHead = new ItemMiscToolHead(TFCItemID.BlackBronzeHoeHead).setUnlocalizedName("Black Bronze Hoe Head");
+		BlackSteelHoeHead = new ItemMiscToolHead(TFCItemID.BlackSteelHoeHead).setUnlocalizedName("Black Steel Hoe Head");
+		BlueSteelHoeHead = new ItemMiscToolHead(TFCItemID.BlueSteelHoeHead).setUnlocalizedName("Blue Steel Hoe Head");
+		BronzeHoeHead = new ItemMiscToolHead(TFCItemID.BronzeHoeHead).setUnlocalizedName("Bronze Hoe Head");
+		CopperHoeHead = new ItemMiscToolHead(TFCItemID.CopperHoeHead).setUnlocalizedName("Copper Hoe Head");
+		WroughtIronHoeHead = new ItemMiscToolHead(TFCItemID.WroughtIronHoeHead).setUnlocalizedName("Wrought Iron Hoe Head");
+		RedSteelHoeHead = new ItemMiscToolHead(TFCItemID.RedSteelHoeHead).setUnlocalizedName("Red Steel Hoe Head");
+		SteelHoeHead = new ItemMiscToolHead(TFCItemID.SteelHoeHead).setUnlocalizedName("Steel Hoe Head");
 
-		BismuthBronzeAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeAxeHead",16540)).setUnlocalizedName("Bismuth Bronze Axe Head");
-		BlackBronzeAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeAxeHead",16541)).setUnlocalizedName("Black Bronze Axe Head");
-		BlackSteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelAxeHead",16542)).setUnlocalizedName("Black Steel Axe Head");
-		BlueSteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelAxeHead",16543)).setUnlocalizedName("Blue Steel Axe Head");
-		BronzeAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeAxeHead",16544)).setUnlocalizedName("Bronze Axe Head");
-		CopperAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperAxeHead",16545)).setUnlocalizedName("Copper Axe Head");
-		WroughtIronAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronAxeHead",16546)).setUnlocalizedName("Wrought Iron Axe Head");
-		RedSteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelAxeHead",16547)).setUnlocalizedName("Red Steel Axe Head");
-		SteelAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelAxeHead",16549)).setUnlocalizedName("Steel Axe Head");
+		BismuthBronzeAxeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeAxeHead).setUnlocalizedName("Bismuth Bronze Axe Head");
+		BlackBronzeAxeHead = new ItemMiscToolHead(TFCItemID.BlackBronzeAxeHead).setUnlocalizedName("Black Bronze Axe Head");
+		BlackSteelAxeHead = new ItemMiscToolHead(TFCItemID.BlackSteelAxeHead).setUnlocalizedName("Black Steel Axe Head");
+		BlueSteelAxeHead = new ItemMiscToolHead(TFCItemID.BlueSteelAxeHead).setUnlocalizedName("Blue Steel Axe Head");
+		BronzeAxeHead = new ItemMiscToolHead(TFCItemID.BronzeAxeHead).setUnlocalizedName("Bronze Axe Head");
+		CopperAxeHead = new ItemMiscToolHead(TFCItemID.CopperAxeHead).setUnlocalizedName("Copper Axe Head");
+		WroughtIronAxeHead = new ItemMiscToolHead(TFCItemID.WroughtIronAxeHead).setUnlocalizedName("Wrought Iron Axe Head");
+		RedSteelAxeHead = new ItemMiscToolHead(TFCItemID.RedSteelAxeHead).setUnlocalizedName("Red Steel Axe Head");
+		SteelAxeHead = new ItemMiscToolHead(TFCItemID.SteelAxeHead).setUnlocalizedName("Steel Axe Head");
 
-		BismuthBronzeHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeHammerHead",16553)).setUnlocalizedName("Bismuth Bronze Hammer Head");
-		BlackBronzeHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeHammerHead",16554)).setUnlocalizedName("Black Bronze Hammer Head");
-		BlackSteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelHammerHead",16555)).setUnlocalizedName("Black Steel Hammer Head");
-		BlueSteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelHammerHead",16556)).setUnlocalizedName("Blue Steel Hammer Head");
-		BronzeHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeHammerHead",16557)).setUnlocalizedName("Bronze Hammer Head");
-		CopperHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperHammerHead",16558)).setUnlocalizedName("Copper Hammer Head");
-		WroughtIronHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronHammerHead",16559)).setUnlocalizedName("Wrought Iron Hammer Head");
-		RedSteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelHammerHead",16560)).setUnlocalizedName("Red Steel Hammer Head");
-		SteelHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelHammerHead",16562)).setUnlocalizedName("Steel Hammer Head");
+		BismuthBronzeHammerHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeHammerHead).setUnlocalizedName("Bismuth Bronze Hammer Head");
+		BlackBronzeHammerHead = new ItemMiscToolHead(TFCItemID.BlackBronzeHammerHead).setUnlocalizedName("Black Bronze Hammer Head");
+		BlackSteelHammerHead = new ItemMiscToolHead(TFCItemID.BlackSteelHammerHead).setUnlocalizedName("Black Steel Hammer Head");
+		BlueSteelHammerHead = new ItemMiscToolHead(TFCItemID.BlueSteelHammerHead).setUnlocalizedName("Blue Steel Hammer Head");
+		BronzeHammerHead = new ItemMiscToolHead(TFCItemID.BronzeHammerHead).setUnlocalizedName("Bronze Hammer Head");
+		CopperHammerHead = new ItemMiscToolHead(TFCItemID.CopperHammerHead).setUnlocalizedName("Copper Hammer Head");
+		WroughtIronHammerHead = new ItemMiscToolHead(TFCItemID.WroughtIronHammerHead).setUnlocalizedName("Wrought Iron Hammer Head");
+		RedSteelHammerHead = new ItemMiscToolHead(TFCItemID.RedSteelHammerHead).setUnlocalizedName("Red Steel Hammer Head");
+		SteelHammerHead = new ItemMiscToolHead(TFCItemID.SteelHammerHead).setUnlocalizedName("Steel Hammer Head");
 
 		//chisel heads
-		BismuthBronzeChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeChiselHead",16566)).setUnlocalizedName("Bismuth Bronze Chisel Head");
-		BlackBronzeChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeChiselHead",16567)).setUnlocalizedName("Black Bronze Chisel Head");
-		BlackSteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelChiselHead",16568)).setUnlocalizedName("Black Steel Chisel Head");
-		BlueSteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelChiselHead",16569)).setUnlocalizedName("Blue Steel Chisel Head");
-		BronzeChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeChiselHead",16570)).setUnlocalizedName("Bronze Chisel Head");
-		CopperChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperChiselHead",16571)).setUnlocalizedName("Copper Chisel Head");
-		WroughtIronChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronChiselHead",16572)).setUnlocalizedName("Wrought Iron Chisel Head");
-		RedSteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelChiselHead",16573)).setUnlocalizedName("Red Steel Chisel Head");
-		SteelChiselHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelChiselHead",16575)).setUnlocalizedName("Steel Chisel Head");
+		BismuthBronzeChiselHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeChiselHead).setUnlocalizedName("Bismuth Bronze Chisel Head");
+		BlackBronzeChiselHead = new ItemMiscToolHead(TFCItemID.BlackBronzeChiselHead).setUnlocalizedName("Black Bronze Chisel Head");
+		BlackSteelChiselHead = new ItemMiscToolHead(TFCItemID.BlackSteelChiselHead).setUnlocalizedName("Black Steel Chisel Head");
+		BlueSteelChiselHead = new ItemMiscToolHead(TFCItemID.BlueSteelChiselHead).setUnlocalizedName("Blue Steel Chisel Head");
+		BronzeChiselHead = new ItemMiscToolHead(TFCItemID.BronzeChiselHead).setUnlocalizedName("Bronze Chisel Head");
+		CopperChiselHead = new ItemMiscToolHead(TFCItemID.CopperChiselHead).setUnlocalizedName("Copper Chisel Head");
+		WroughtIronChiselHead = new ItemMiscToolHead(TFCItemID.WroughtIronChiselHead).setUnlocalizedName("Wrought Iron Chisel Head");
+		RedSteelChiselHead = new ItemMiscToolHead(TFCItemID.RedSteelChiselHead).setUnlocalizedName("Red Steel Chisel Head");
+		SteelChiselHead = new ItemMiscToolHead(TFCItemID.SteelChiselHead).setUnlocalizedName("Steel Chisel Head");
 
-		BismuthBronzeSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeSwordHead",16579)).setUnlocalizedName("Bismuth Bronze Sword Blade");
-		BlackBronzeSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeSwordHead",16580)).setUnlocalizedName("Black Bronze Sword Blade");
-		BlackSteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelSwordHead",16581)).setUnlocalizedName("Black Steel Sword Blade");
-		BlueSteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelSwordHead",16582)).setUnlocalizedName("Blue Steel Sword Blade");
-		BronzeSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeSwordHead",16583)).setUnlocalizedName("Bronze Sword Blade");
-		CopperSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperSwordHead",16584)).setUnlocalizedName("Copper Sword Blade");
-		WroughtIronSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronSwordHead",16585)).setUnlocalizedName("Wrought Iron Sword Blade");
-		RedSteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelSwordHead",16586)).setUnlocalizedName("Red Steel Sword Blade");
-		SteelSwordHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelSwordHead",16588)).setUnlocalizedName("Steel Sword Blade");
+		BismuthBronzeSwordHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeSwordHead).setUnlocalizedName("Bismuth Bronze Sword Blade");
+		BlackBronzeSwordHead = new ItemMiscToolHead(TFCItemID.BlackBronzeSwordHead).setUnlocalizedName("Black Bronze Sword Blade");
+		BlackSteelSwordHead = new ItemMiscToolHead(TFCItemID.BlackSteelSwordHead).setUnlocalizedName("Black Steel Sword Blade");
+		BlueSteelSwordHead = new ItemMiscToolHead(TFCItemID.BlueSteelSwordHead).setUnlocalizedName("Blue Steel Sword Blade");
+		BronzeSwordHead = new ItemMiscToolHead(TFCItemID.BronzeSwordHead).setUnlocalizedName("Bronze Sword Blade");
+		CopperSwordHead = new ItemMiscToolHead(TFCItemID.CopperSwordHead).setUnlocalizedName("Copper Sword Blade");
+		WroughtIronSwordHead = new ItemMiscToolHead(TFCItemID.WroughtIronSwordHead).setUnlocalizedName("Wrought Iron Sword Blade");
+		RedSteelSwordHead = new ItemMiscToolHead(TFCItemID.RedSteelSwordHead).setUnlocalizedName("Red Steel Sword Blade");
+		SteelSwordHead = new ItemMiscToolHead(TFCItemID.SteelSwordHead).setUnlocalizedName("Steel Sword Blade");
 
-		BismuthBronzeMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeMaceHead",16592)).setUnlocalizedName("Bismuth Bronze Mace Head");
-		BlackBronzeMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeMaceHead",16593)).setUnlocalizedName("Black Bronze Mace Head");
-		BlackSteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelMaceHead",16594)).setUnlocalizedName("Black Steel Mace Head");
-		BlueSteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelMaceHead",16595)).setUnlocalizedName("Blue Steel Mace Head");
-		BronzeMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeMaceHead",16596)).setUnlocalizedName("Bronze Mace Head");
-		CopperMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperMaceHead",16597)).setUnlocalizedName("Copper Mace Head");
-		WroughtIronMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronMaceHead",16598)).setUnlocalizedName("Wrought Iron Mace Head");
-		RedSteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelMaceHead",16599)).setUnlocalizedName("Red Steel Mace Head");
-		SteelMaceHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelMaceHead",16601)).setUnlocalizedName("Steel Mace Head");
+		BismuthBronzeMaceHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeMaceHead).setUnlocalizedName("Bismuth Bronze Mace Head");
+		BlackBronzeMaceHead = new ItemMiscToolHead(TFCItemID.BlackBronzeMaceHead).setUnlocalizedName("Black Bronze Mace Head");
+		BlackSteelMaceHead = new ItemMiscToolHead(TFCItemID.BlackSteelMaceHead).setUnlocalizedName("Black Steel Mace Head");
+		BlueSteelMaceHead = new ItemMiscToolHead(TFCItemID.BlueSteelMaceHead).setUnlocalizedName("Blue Steel Mace Head");
+		BronzeMaceHead = new ItemMiscToolHead(TFCItemID.BronzeMaceHead).setUnlocalizedName("Bronze Mace Head");
+		CopperMaceHead = new ItemMiscToolHead(TFCItemID.CopperMaceHead).setUnlocalizedName("Copper Mace Head");
+		WroughtIronMaceHead = new ItemMiscToolHead(TFCItemID.WroughtIronMaceHead).setUnlocalizedName("Wrought Iron Mace Head");
+		RedSteelMaceHead = new ItemMiscToolHead(TFCItemID.RedSteelMaceHead).setUnlocalizedName("Red Steel Mace Head");
+		SteelMaceHead = new ItemMiscToolHead(TFCItemID.SteelMaceHead).setUnlocalizedName("Steel Mace Head");
 
-		BismuthBronzeSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeSawHead",16605)).setUnlocalizedName("Bismuth Bronze Saw Blade");
-		BlackBronzeSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeSawHead",16606)).setUnlocalizedName("Black Bronze Saw Blade");
-		BlackSteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelSawHead",16607)).setUnlocalizedName("Black Steel Saw Blade");
-		BlueSteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelSawHead",16608)).setUnlocalizedName("Blue Steel Saw Blade");
-		BronzeSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeSawHead",16609)).setUnlocalizedName("Bronze Saw Blade");
-		CopperSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperSawHead",16610)).setUnlocalizedName("Copper Saw Blade");
-		WroughtIronSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronSawHead",16611)).setUnlocalizedName("Wrought Iron Saw Blade");
-		RedSteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelSawHead",16612)).setUnlocalizedName("Red Steel Saw Blade");
-		SteelSawHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelSawHead",16614)).setUnlocalizedName("Steel Saw Blade");
+		BismuthBronzeSawHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeSawHead).setUnlocalizedName("Bismuth Bronze Saw Blade");
+		BlackBronzeSawHead = new ItemMiscToolHead(TFCItemID.BlackBronzeSawHead).setUnlocalizedName("Black Bronze Saw Blade");
+		BlackSteelSawHead = new ItemMiscToolHead(TFCItemID.BlackSteelSawHead).setUnlocalizedName("Black Steel Saw Blade");
+		BlueSteelSawHead = new ItemMiscToolHead(TFCItemID.BlueSteelSawHead).setUnlocalizedName("Blue Steel Saw Blade");
+		BronzeSawHead = new ItemMiscToolHead(TFCItemID.BronzeSawHead).setUnlocalizedName("Bronze Saw Blade");
+		CopperSawHead = new ItemMiscToolHead(TFCItemID.CopperSawHead).setUnlocalizedName("Copper Saw Blade");
+		WroughtIronSawHead = new ItemMiscToolHead(TFCItemID.WroughtIronSawHead).setUnlocalizedName("Wrought Iron Saw Blade");
+		RedSteelSawHead = new ItemMiscToolHead(TFCItemID.RedSteelSawHead).setUnlocalizedName("Red Steel Saw Blade");
+		SteelSawHead = new ItemMiscToolHead(TFCItemID.SteelSawHead).setUnlocalizedName("Steel Saw Blade");
 
-		HCBlackSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCBlackSteel",16617)).setUnlocalizedName("HC Black Steel Unshaped");
-		WeakBlueSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedWeakBlueSteel",16618)).setUnlocalizedName("Weak Blue Steel Unshaped");
-		HCBlueSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCBlueSteel",16619)).setUnlocalizedName("HC Blue Steel Unshaped");
-		WeakRedSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedWeakRedSteel",16621)).setUnlocalizedName("Weak Red Steel Unshaped");
-		HCRedSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCRedSteel",16622)).setUnlocalizedName("HC Red Steel Unshaped");
-		WeakSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedWeakSteel",16623)).setUnlocalizedName("Weak Steel Unshaped");
-		HCSteelUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnshapedHCSteel",16624)).setUnlocalizedName("HC Steel Unshaped");
-		Coke = (new ItemTerra(TFC_Settings.getIntFor(config,"item","Coke",16625)).setUnlocalizedName("Coke"));
+		HCBlackSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedHCBlackSteel).setUnlocalizedName("HC Black Steel Unshaped");
+		WeakBlueSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedWeakBlueSteel).setUnlocalizedName("Weak Blue Steel Unshaped");
+		HCBlueSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedHCBlueSteel).setUnlocalizedName("HC Blue Steel Unshaped");
+		WeakRedSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedWeakRedSteel).setUnlocalizedName("Weak Red Steel Unshaped");
+		HCRedSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedHCRedSteel).setUnlocalizedName("HC Red Steel Unshaped");
+		WeakSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedWeakSteel).setUnlocalizedName("Weak Steel Unshaped");
+		HCSteelUnshaped = new ItemMeltedMetal(TFCItemID.UnshapedHCSteel).setUnlocalizedName("HC Steel Unshaped");
+		Coke = (new ItemTerra(TFCItemID.Coke).setUnlocalizedName("Coke"));
 
-		BismuthBronzeProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeProPickHead",16627)).setUnlocalizedName("Bismuth Bronze ProPick Head");
-		BlackBronzeProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeProPickHead",16628)).setUnlocalizedName("Black Bronze ProPick Head");
-		BlackSteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelProPickHead",16629)).setUnlocalizedName("Black Steel ProPick Head");
-		BlueSteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelProPickHead",16630)).setUnlocalizedName("Blue Steel ProPick Head");
-		BronzeProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeProPickHead",16631)).setUnlocalizedName("Bronze ProPick Head");
-		CopperProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperProPickHead",16632)).setUnlocalizedName("Copper ProPick Head");
-		WroughtIronProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronProPickHead",16633)).setUnlocalizedName("Wrought Iron ProPick Head");
-		RedSteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelProPickHead",16634)).setUnlocalizedName("Red Steel ProPick Head");
-		SteelProPickHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelProPickHead",16636)).setUnlocalizedName("Steel ProPick Head");
+		BismuthBronzeProPickHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeProPickHead).setUnlocalizedName("Bismuth Bronze ProPick Head");
+		BlackBronzeProPickHead = new ItemMiscToolHead(TFCItemID.BlackBronzeProPickHead).setUnlocalizedName("Black Bronze ProPick Head");
+		BlackSteelProPickHead = new ItemMiscToolHead(TFCItemID.BlackSteelProPickHead).setUnlocalizedName("Black Steel ProPick Head");
+		BlueSteelProPickHead = new ItemMiscToolHead(TFCItemID.BlueSteelProPickHead).setUnlocalizedName("Blue Steel ProPick Head");
+		BronzeProPickHead = new ItemMiscToolHead(TFCItemID.BronzeProPickHead).setUnlocalizedName("Bronze ProPick Head");
+		CopperProPickHead = new ItemMiscToolHead(TFCItemID.CopperProPickHead).setUnlocalizedName("Copper ProPick Head");
+		WroughtIronProPickHead = new ItemMiscToolHead(TFCItemID.WroughtIronProPickHead).setUnlocalizedName("Wrought Iron ProPick Head");
+		RedSteelProPickHead = new ItemMiscToolHead(TFCItemID.RedSteelProPickHead).setUnlocalizedName("Red Steel ProPick Head");
+		SteelProPickHead = new ItemMiscToolHead(TFCItemID.SteelProPickHead).setUnlocalizedName("Steel ProPick Head");
 
-		Powder = new ItemTerra(TFC_Settings.getIntFor(config,"item","Flux",16639)).setMetaNames(new String[]
+		Powder = new ItemTerra(TFCItemID.Flux).setMetaNames(new String[]
 				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}).setUnlocalizedName("Powder");
 
 		/**
 		 * Scythe
 		 * */
-		int num = 16643;
-		BismuthBronzeScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BismuthBronzeScythe",num),BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Scythe").setMaxDamage(BismuthBronzeUses);num++;
-		BlackBronzeScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BlackBronzeScythe",num),BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Scythe").setMaxDamage(BlackBronzeUses);num++;
-		BlackSteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BlackSteelScythe",num),BlackSteelToolMaterial).setUnlocalizedName("Black Steel Scythe").setMaxDamage(BlackSteelUses);num++;
-		BlueSteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BlueSteelScythe",num),BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Scythe").setMaxDamage(BlueSteelUses);num++;
-		BronzeScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","BronzeScythe",num),BronzeToolMaterial).setUnlocalizedName("Bronze Scythe").setMaxDamage(BronzeUses);num++;
-		CopperScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","CopperScythe",num),CopperToolMaterial).setUnlocalizedName("Copper Scythe").setMaxDamage(CopperUses);num++;
-		WroughtIronScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","WroughtIronScythe",num),IronToolMaterial).setUnlocalizedName("Wrought Iron Scythe").setMaxDamage(WroughtIronUses);num++;
-		RedSteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","RedSteelScythe",num),RedSteelToolMaterial).setUnlocalizedName("Red Steel Scythe").setMaxDamage(RedSteelUses);num++;
-		SteelScythe = new ItemCustomScythe(TFC_Settings.getIntFor(config,"item","SteelScythe",num),SteelToolMaterial).setUnlocalizedName("Steel Scythe").setMaxDamage(SteelUses);num++;
+		BismuthBronzeScythe = new ItemCustomScythe(TFCItemID.BismuthBronzeScythe,BismuthBronzeToolMaterial).setUnlocalizedName("Bismuth Bronze Scythe").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeScythe = new ItemCustomScythe(TFCItemID.BlackBronzeScythe,BlackBronzeToolMaterial).setUnlocalizedName("Black Bronze Scythe").setMaxDamage(BlackBronzeUses);
+		BlackSteelScythe = new ItemCustomScythe(TFCItemID.BlackSteelScythe,BlackSteelToolMaterial).setUnlocalizedName("Black Steel Scythe").setMaxDamage(BlackSteelUses);
+		BlueSteelScythe = new ItemCustomScythe(TFCItemID.BlueSteelScythe,BlueSteelToolMaterial).setUnlocalizedName("Blue Steel Scythe").setMaxDamage(BlueSteelUses);
+		BronzeScythe = new ItemCustomScythe(TFCItemID.BronzeScythe,BronzeToolMaterial).setUnlocalizedName("Bronze Scythe").setMaxDamage(BronzeUses);
+		CopperScythe = new ItemCustomScythe(TFCItemID.CopperScythe,CopperToolMaterial).setUnlocalizedName("Copper Scythe").setMaxDamage(CopperUses);
+		WroughtIronScythe = new ItemCustomScythe(TFCItemID.WroughtIronScythe,IronToolMaterial).setUnlocalizedName("Wrought Iron Scythe").setMaxDamage(WroughtIronUses);
+		RedSteelScythe = new ItemCustomScythe(TFCItemID.RedSteelScythe,RedSteelToolMaterial).setUnlocalizedName("Red Steel Scythe").setMaxDamage(RedSteelUses);
+		SteelScythe = new ItemCustomScythe(TFCItemID.SteelScythe,SteelToolMaterial).setUnlocalizedName("Steel Scythe").setMaxDamage(SteelUses);
 
-		BismuthBronzeScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeScytheHead",num)).setUnlocalizedName("Bismuth Bronze Scythe Blade");num++;
-		BlackBronzeScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeScytheHead",num)).setUnlocalizedName("Black Bronze Scythe Blade");num++;
-		BlackSteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelScytheHead",num)).setUnlocalizedName("Black Steel Scythe Blade");num++;
-		BlueSteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelScytheHead",num)).setUnlocalizedName("Blue Steel Scythe Blade");num++;
-		BronzeScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeScytheHead",num)).setUnlocalizedName("Bronze Scythe Blade");num++;
-		CopperScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperScytheHead",num)).setUnlocalizedName("Copper Scythe Blade");num++;
-		WroughtIronScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronScytheHead",num)).setUnlocalizedName("Wrought Iron Scythe Blade");num++;
-		RedSteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelScytheHead",num)).setUnlocalizedName("Red Steel Scythe Blade");num++;
-		SteelScytheHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelScytheHead",num)).setUnlocalizedName("Steel Scythe Blade");num++;
+		BismuthBronzeScytheHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeScytheHead).setUnlocalizedName("Bismuth Bronze Scythe Blade");
+		BlackBronzeScytheHead = new ItemMiscToolHead(TFCItemID.BlackBronzeScytheHead).setUnlocalizedName("Black Bronze Scythe Blade");
+		BlackSteelScytheHead = new ItemMiscToolHead(TFCItemID.BlackSteelScytheHead).setUnlocalizedName("Black Steel Scythe Blade");
+		BlueSteelScytheHead = new ItemMiscToolHead(TFCItemID.BlueSteelScytheHead).setUnlocalizedName("Blue Steel Scythe Blade");
+		BronzeScytheHead = new ItemMiscToolHead(TFCItemID.BronzeScytheHead).setUnlocalizedName("Bronze Scythe Blade");
+		CopperScytheHead = new ItemMiscToolHead(TFCItemID.CopperScytheHead).setUnlocalizedName("Copper Scythe Blade");
+		WroughtIronScytheHead = new ItemMiscToolHead(TFCItemID.WroughtIronScytheHead).setUnlocalizedName("Wrought Iron Scythe Blade");
+		RedSteelScytheHead = new ItemMiscToolHead(TFCItemID.RedSteelScytheHead).setUnlocalizedName("Red Steel Scythe Blade");
+		SteelScytheHead = new ItemMiscToolHead(TFCItemID.SteelScytheHead).setUnlocalizedName("Steel Scythe Blade");
 
-		WoodenBucketEmpty = (new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","WoodenBucketEmpty",num), 0)).setUnlocalizedName("Wooden Bucket Empty");num++;
-		WoodenBucketWater = (new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","WoodenBucketWater",num), TFCBlocks.finiteWater.blockID)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);num++;
-		WoodenBucketMilk = (new ItemCustomBucketMilk(TFC_Settings.getIntFor(config,"item","WoodenBucketMilk",num))).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty);num++;
+		WoodenBucketEmpty = (new ItemCustomBucket(TFCItemID.WoodenBucketEmpty, 0)).setUnlocalizedName("Wooden Bucket Empty");
+		WoodenBucketWater = (new ItemCustomBucket(TFCItemID.WoodenBucketWater, TFCBlocks.finiteWater.blockID)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketMilk = (new ItemCustomBucketMilk(TFCItemID.WoodenBucketMilk)).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty);
 
-		BismuthBronzeKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BismuthBronzeKnifeHead",num)).setUnlocalizedName("Bismuth Bronze Knife Blade");num++;
-		BlackBronzeKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackBronzeKnifeHead",num)).setUnlocalizedName("Black Bronze Knife Blade");num++;
-		BlackSteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlackSteelKnifeHead",num)).setUnlocalizedName("Black Steel Knife Blade");num++;
-		BlueSteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BlueSteelKnifeHead",num)).setUnlocalizedName("Blue Steel Knife Blade");num++;
-		BronzeKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","BronzeKnifeHead",num)).setUnlocalizedName("Bronze Knife Blade");num++;
-		CopperKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","CopperKnifeHead",num)).setUnlocalizedName("Copper Knife Blade");num++;
-		WroughtIronKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","WroughtIronKnifeHead",num)).setUnlocalizedName("Wrought Iron Knife Blade");num++;
-		RedSteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","RedSteelKnifeHead",num)).setUnlocalizedName("Red Steel Knife Blade");num++;
-		SteelKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SteelKnifeHead",num)).setUnlocalizedName("Steel Knife Blade");num++;
+		BismuthBronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeKnifeHead).setUnlocalizedName("Bismuth Bronze Knife Blade");
+		BlackBronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BlackBronzeKnifeHead).setUnlocalizedName("Black Bronze Knife Blade");
+		BlackSteelKnifeHead = new ItemMiscToolHead(TFCItemID.BlackSteelKnifeHead).setUnlocalizedName("Black Steel Knife Blade");
+		BlueSteelKnifeHead = new ItemMiscToolHead(TFCItemID.BlueSteelKnifeHead).setUnlocalizedName("Blue Steel Knife Blade");
+		BronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BronzeKnifeHead).setUnlocalizedName("Bronze Knife Blade");
+		CopperKnifeHead = new ItemMiscToolHead(TFCItemID.CopperKnifeHead).setUnlocalizedName("Copper Knife Blade");
+		WroughtIronKnifeHead = new ItemMiscToolHead(TFCItemID.WroughtIronKnifeHead).setUnlocalizedName("Wrought Iron Knife Blade");
+		RedSteelKnifeHead = new ItemMiscToolHead(TFCItemID.RedSteelKnifeHead).setUnlocalizedName("Red Steel Knife Blade");
+		SteelKnifeHead = new ItemMiscToolHead(TFCItemID.SteelKnifeHead).setUnlocalizedName("Steel Knife Blade");
 
-		BismuthBronzeKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BismuthBronzeKnife",num),BismuthBronzeToolMaterial, 	155).setUnlocalizedName("Bismuth Bronze Knife").setMaxDamage(BismuthBronzeUses);num++;
-		BlackBronzeKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BlackBronzeKnife",num),BlackBronzeToolMaterial, 		165).setUnlocalizedName("Black Bronze Knife").setMaxDamage(BlackBronzeUses);num++;
-		BlackSteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BlackSteelKnife",num),BlackSteelToolMaterial, 			205).setUnlocalizedName("Black Steel Knife").setMaxDamage(BlackSteelUses);num++;
-		BlueSteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BlueSteelKnife",num),BlueSteelToolMaterial, 				250).setUnlocalizedName("Blue Steel Knife").setMaxDamage(BlueSteelUses);num++;
-		BronzeKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","BronzeKnife",num),BronzeToolMaterial, 						150).setUnlocalizedName("Bronze Knife").setMaxDamage(BronzeUses);num++;
-		CopperKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","CopperKnife",num),CopperToolMaterial, 						100).setUnlocalizedName("Copper Knife").setMaxDamage(CopperUses);num++;
-		WroughtIronKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","WroughtIronKnife",num),IronToolMaterial, 				175).setUnlocalizedName("Wrought Iron Knife").setMaxDamage(WroughtIronUses);num++;
-		RedSteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","RedSteelKnife",num),RedSteelToolMaterial, 				250).setUnlocalizedName("Red Steel Knife").setMaxDamage(RedSteelUses);num++;
-		SteelKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","SteelKnife",num),SteelToolMaterial,							200).setUnlocalizedName("Steel Knife").setMaxDamage(SteelUses);num++;
+		BismuthBronzeKnife = new ItemCustomKnife(TFCItemID.BismuthBronzeKnife,BismuthBronzeToolMaterial, 	155).setUnlocalizedName("Bismuth Bronze Knife").setMaxDamage(BismuthBronzeUses);
+		BlackBronzeKnife = new ItemCustomKnife(TFCItemID.BlackBronzeKnife,BlackBronzeToolMaterial, 		165).setUnlocalizedName("Black Bronze Knife").setMaxDamage(BlackBronzeUses);
+		BlackSteelKnife = new ItemCustomKnife(TFCItemID.BlackSteelKnife,BlackSteelToolMaterial, 			205).setUnlocalizedName("Black Steel Knife").setMaxDamage(BlackSteelUses);
+		BlueSteelKnife = new ItemCustomKnife(TFCItemID.BlueSteelKnife,BlueSteelToolMaterial, 				250).setUnlocalizedName("Blue Steel Knife").setMaxDamage(BlueSteelUses);
+		BronzeKnife = new ItemCustomKnife(TFCItemID.BronzeKnife,BronzeToolMaterial, 						150).setUnlocalizedName("Bronze Knife").setMaxDamage(BronzeUses);
+		CopperKnife = new ItemCustomKnife(TFCItemID.CopperKnife,CopperToolMaterial, 						100).setUnlocalizedName("Copper Knife").setMaxDamage(CopperUses);
+		WroughtIronKnife = new ItemCustomKnife(TFCItemID.WroughtIronKnife,IronToolMaterial, 				175).setUnlocalizedName("Wrought Iron Knife").setMaxDamage(WroughtIronUses);
+		RedSteelKnife = new ItemCustomKnife(TFCItemID.RedSteelKnife,RedSteelToolMaterial, 					250).setUnlocalizedName("Red Steel Knife").setMaxDamage(RedSteelUses);
+		SteelKnife = new ItemCustomKnife(TFCItemID.SteelKnife,SteelToolMaterial,							200).setUnlocalizedName("Steel Knife").setMaxDamage(SteelUses);
 
-		FlatRock = (new ItemFlatRock(TFC_Settings.getIntFor(config,"item","FlatRock",num)).setFolder("rocks/flatrocks/").setUnlocalizedName("FlatRock"));num++;
-		LooseRock = (new ItemLooseRock(TFC_Settings.getIntFor(config,"item","LooseRock",num)).setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));num++;
+		FlatRock = (new ItemFlatRock(TFCItemID.FlatRock).setFolder("rocks/flatrocks/").setUnlocalizedName("FlatRock"));
+		LooseRock = (new ItemLooseRock(TFCItemID.LooseRock).setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));
 
-		IgInStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
-		SedStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
-		IgExStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgExStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
-		MMStoneShovelHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","MMStoneShovelHead",num)).setUnlocalizedName("Stone Shovel Head");num++;
+		IgInStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgInStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
+		SedStoneShovelHead = new ItemMiscToolHead(TFCItemID.SedStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
+		IgExStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgExStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
+		MMStoneShovelHead = new ItemMiscToolHead(TFCItemID.MMStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
 
-		IgInStoneAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStoneAxeHead",num)).setUnlocalizedName("Stone Axe Head");num++;
-		SedStoneAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStoneAxeHead",num)).setUnlocalizedName("Stone Axe Head");num++;
-		IgExStoneAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgExStoneAxeHead",num)).setUnlocalizedName("Stone Axe Head");num++;
-		MMStoneAxeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","MMStoneAxeHead",num)).setUnlocalizedName("Stone Axe Head");num++;
+		IgInStoneAxeHead = new ItemMiscToolHead(TFCItemID.IgInStoneAxeHead).setUnlocalizedName("Stone Axe Head");
+		SedStoneAxeHead = new ItemMiscToolHead(TFCItemID.SedStoneAxeHead).setUnlocalizedName("Stone Axe Head");
+		IgExStoneAxeHead = new ItemMiscToolHead(TFCItemID.IgExStoneAxeHead).setUnlocalizedName("Stone Axe Head");
+		MMStoneAxeHead = new ItemMiscToolHead(TFCItemID.MMStoneAxeHead).setUnlocalizedName("Stone Axe Head");
 
-		IgInStoneHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgInStoneHoeHead",num)).setUnlocalizedName("Stone Hoe Head");num++;
-		SedStoneHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","SedStoneHoeHead",num)).setUnlocalizedName("Stone Hoe Head");num++;
-		IgExStoneHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","IgExStoneHoeHead",num)).setUnlocalizedName("Stone Hoe Head");num++;
-		MMStoneHoeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","MMStoneHoeHead",num)).setUnlocalizedName("Stone Hoe Head");num++;
+		IgInStoneHoeHead = new ItemMiscToolHead(TFCItemID.IgInStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
+		SedStoneHoeHead = new ItemMiscToolHead(TFCItemID.SedStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
+		IgExStoneHoeHead = new ItemMiscToolHead(TFCItemID.IgExStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
+		MMStoneHoeHead = new ItemMiscToolHead(TFCItemID.MMStoneHoeHead).setUnlocalizedName("Stone Hoe Head");
 
-		StoneKnifeHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","StoneKnifeHead",num)).setUnlocalizedName("Stone Knife Blade");num++;
-		StoneHammerHead = new ItemMiscToolHead(TFC_Settings.getIntFor(config,"item","StoneHammerHead",num)).setUnlocalizedName("Stone Hammer Head");num++;
+		StoneKnifeHead = new ItemMiscToolHead(TFCItemID.StoneKnifeHead).setUnlocalizedName("Stone Knife Blade");
+		StoneHammerHead = new ItemMiscToolHead(TFCItemID.StoneHammerHead).setUnlocalizedName("Stone Hammer Head");
 
-		StoneKnife = new ItemCustomKnife(TFC_Settings.getIntFor(config,"item","StoneKnife",num),IgExToolMaterial, 100).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);num++;
-		SmallOreChunk = new ItemOreSmall(TFC_Settings.getIntFor(config,"item","SmallOreChunk",num++)).setUnlocalizedName("Small Ore");
-		SinglePlank = new ItemPlank(TFC_Settings.getIntFor(config,"item","SinglePlank",num++)).setUnlocalizedName("SinglePlank");
+		StoneKnife = new ItemCustomKnife(TFCItemID.StoneKnife,IgExToolMaterial, 100).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
+		SmallOreChunk = new ItemOreSmall(TFCItemID.SmallOreChunk).setUnlocalizedName("Small Ore");
+		SinglePlank = new ItemPlank(TFCItemID.SinglePlank).setUnlocalizedName("SinglePlank");
 
-		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketEmpty",num++), 0)).setUnlocalizedName("Red Steel Bucket Empty");
-		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFC_Settings.getIntFor(config,"item","RedSteelBucketWater",num++), Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
+		RedSteelBucketEmpty = (new ItemCustomRedSteelBucket(TFCItemID.RedSteelBucketEmpty, 0)).setUnlocalizedName("Red Steel Bucket Empty");
+		RedSteelBucketWater = (new ItemCustomRedSteelBucket(TFCItemID.RedSteelBucketWater, Block.waterMoving.blockID)).setUnlocalizedName("Red Steel Bucket Water").setContainerItem(RedSteelBucketEmpty);
 
-		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketEmpty",num++), 0)).setUnlocalizedName("Blue Steel Bucket Empty");
-		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFC_Settings.getIntFor(config,"item","BlueSteelBucketLava",num++), Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
+		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketEmpty, 0)).setUnlocalizedName("Blue Steel Bucket Empty");
+		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketLava, Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
 
-		Quern = new ItemTerra(TFC_Settings.getIntFor(config,"item","Quern",num++)).setUnlocalizedName("Quern").setMaxDamage(250);
-		FlintSteel = new ItemFlintSteel(TFC_Settings.getIntFor(config,"item","FlintSteel",num++)).setUnlocalizedName("flintAndSteel").setMaxDamage(200).func_111206_d("flint_and_steel");
+		Quern = new ItemTerra(TFCItemID.Quern).setUnlocalizedName("Quern").setMaxDamage(250);
+		FlintSteel = new ItemFlintSteel(TFCItemID.FlintSteel).setUnlocalizedName("flintAndSteel").setMaxDamage(200).func_111206_d("flint_and_steel");
 
-		DoorOak = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorOak", num++), 0).setUnlocalizedName("Oak Door");
-		DoorAspen = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorAspen", num++), 1).setUnlocalizedName("Aspen Door");
-		DoorBirch = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorBirch", num++), 2).setUnlocalizedName("Birch Door");
-		DoorChestnut = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorChestnut", num++), 3).setUnlocalizedName("Chestnut Door");
-		DoorDouglasFir = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorDouglasFir", num++), 4).setUnlocalizedName("Douglas Fir Door");
-		DoorHickory = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorHickory", num++), 5).setUnlocalizedName("Hickory Door");
-		DoorMaple = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorMaple", num++), 6).setUnlocalizedName("Maple Door");
-		DoorAsh = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorAsh", num++), 7).setUnlocalizedName("Ash Door");
-		DoorPine = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorPine", num++), 8).setUnlocalizedName("Pine Door");
-		DoorSequoia = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorSequoia", num++), 9).setUnlocalizedName("Sequoia Door");
-		DoorSpruce = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorSpruce", num++), 10).setUnlocalizedName("Spruce Door");
-		DoorSycamore = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorSycamore", num++), 11).setUnlocalizedName("Sycamore Door");
-		DoorWhiteCedar = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWhiteCedar", num++), 12).setUnlocalizedName("White Cedar Door");
-		DoorWhiteElm = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWhiteElm", num++), 13).setUnlocalizedName("White Elm Door");
-		DoorWillow = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorWillow", num++), 14).setUnlocalizedName("Willow Door");
-		DoorKapok = new ItemWoodDoor(TFC_Settings.getIntFor(config,"item","DoorKapok", num++), 15).setUnlocalizedName("Kapok Door");
+		DoorOak = new ItemWoodDoor(TFCItemID.DoorOak, 0).setUnlocalizedName("Oak Door");
+		DoorAspen = new ItemWoodDoor(TFCItemID.DoorAspen, 1).setUnlocalizedName("Aspen Door");
+		DoorBirch = new ItemWoodDoor(TFCItemID.DoorBirch, 2).setUnlocalizedName("Birch Door");
+		DoorChestnut = new ItemWoodDoor(TFCItemID.DoorChestnut, 3).setUnlocalizedName("Chestnut Door");
+		DoorDouglasFir = new ItemWoodDoor(TFCItemID.DoorDouglasFir, 4).setUnlocalizedName("Douglas Fir Door");
+		DoorHickory = new ItemWoodDoor(TFCItemID.DoorHickory, 5).setUnlocalizedName("Hickory Door");
+		DoorMaple = new ItemWoodDoor(TFCItemID.DoorMaple, 6).setUnlocalizedName("Maple Door");
+		DoorAsh = new ItemWoodDoor(TFCItemID.DoorAsh, 7).setUnlocalizedName("Ash Door");
+		DoorPine = new ItemWoodDoor(TFCItemID.DoorPine, 8).setUnlocalizedName("Pine Door");
+		DoorSequoia = new ItemWoodDoor(TFCItemID.DoorSequoia, 9).setUnlocalizedName("Sequoia Door");
+		DoorSpruce = new ItemWoodDoor(TFCItemID.DoorSpruce, 10).setUnlocalizedName("Spruce Door");
+		DoorSycamore = new ItemWoodDoor(TFCItemID.DoorSycamore, 11).setUnlocalizedName("Sycamore Door");
+		DoorWhiteCedar = new ItemWoodDoor(TFCItemID.DoorWhiteCedar, 12).setUnlocalizedName("White Cedar Door");
+		DoorWhiteElm = new ItemWoodDoor(TFCItemID.DoorWhiteElm, 13).setUnlocalizedName("White Elm Door");
+		DoorWillow = new ItemWoodDoor(TFCItemID.DoorWillow, 14).setUnlocalizedName("Willow Door");
+		DoorKapok = new ItemWoodDoor(TFCItemID.DoorKapok, 15).setUnlocalizedName("Kapok Door");
 
-		Beer = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Beer",num++)).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);num++;
-		Cider = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Cider",num++)).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);num++;
-		Rum = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Rum",num++)).setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);num++;
-		RyeWhiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","RyeWhiskey",num++)).setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);num++;
-		Sake = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Sake",num++)).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);num++;
-		Vodka = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Vodka",num++)).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);num++;
-		Whiskey = new ItemAlcohol(TFC_Settings.getIntFor(config,"item","Whiskey",num++)).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);num++;
+		Beer = new ItemAlcohol(TFCItemID.Beer).setUnlocalizedName("Beer").setCreativeTab(CreativeTabs.tabFood);
+		Cider = new ItemAlcohol(TFCItemID.Cider).setUnlocalizedName("Cider").setCreativeTab(CreativeTabs.tabFood);
+		Rum = new ItemAlcohol(TFCItemID.Rum).setUnlocalizedName("Rum").setCreativeTab(CreativeTabs.tabFood);
+		RyeWhiskey = new ItemAlcohol(TFCItemID.RyeWhiskey).setUnlocalizedName("RyeWhiskey").setCreativeTab(CreativeTabs.tabFood);
+		Sake = new ItemAlcohol(TFCItemID.Sake).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
+		Vodka = new ItemAlcohol(TFCItemID.Vodka).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
+		Whiskey = new ItemAlcohol(TFCItemID.Whiskey).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
 
-		Blueprint = new ItemBlueprint(TFC_Settings.getIntFor(config,"item","Blueprint", num++));
-		writabeBookTFC = new ItemWritableBookTFC(TFC_Settings.getIntFor(config,"item","WritableBookTFC", num++),"Fix Me I'm Broken").setUnlocalizedName("book");
-		WoolYarn = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolYarn", num++)).setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
-		Wool = new ItemTerra(TFC_Settings.getIntFor(config,"item","Wool",num++)).setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
-		WoolCloth = new ItemTerra(TFC_Settings.getIntFor(config, "item", "WoolCloth", num++)).setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
-		Spindle = new ItemSpindle(TFC_Settings.getIntFor(config,"item","Spindle",num++),SedToolMaterial).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
+		Blueprint = new ItemBlueprint(TFCItemID.Blueprint);
+		writabeBookTFC = new ItemWritableBookTFC(TFCItemID.WritableBookTFC,"Fix Me I'm Broken").setUnlocalizedName("book");
+		WoolYarn = new ItemTerra(TFCItemID.WoolYarn).setUnlocalizedName("WoolYarn").setCreativeTab(TFCTabs.TFCMaterials);
+		Wool = new ItemTerra(TFCItemID.Wool).setUnlocalizedName("Wool").setCreativeTab(TFCTabs.TFCMaterials);
+		WoolCloth = new ItemTerra(TFCItemID.WoolCloth).setUnlocalizedName("WoolCloth").setCreativeTab(TFCTabs.TFCMaterials);
+		Spindle = new ItemSpindle(TFCItemID.Spindle,SedToolMaterial).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
 
-		SpindleHead = new ItemPotteryBase(TFC_Settings.getIntFor(config, "item", "SpindleHead", num++)).setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
-		StoneBrick = (new ItemStoneBrick(TFC_Settings.getIntFor(config,"item","ItemStoneBrick2",num++)).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
-		Mortar = new ItemTerra(TFC_Settings.getIntFor(config,"item","Mortar",num++)).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
-		Limewater = new ItemCustomBucket(TFC_Settings.getIntFor(config,"item","Limewater",num++),2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
-		Hide = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hide",num++)).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		SoakedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","SoakedHide",num++)).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		ScrapedHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","ScrapedHide",num++)).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
-		PrepHide = new ItemTerra(TFC_Settings.getIntFor(config,"item","PrepHide",num++)).setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		SpindleHead = new ItemPotteryBase(TFCItemID.SpindleHead).setMetaNames(new String[]{"Clay Spindle", "Spindle Head"}).setUnlocalizedName("Spindle").setCreativeTab(TFCTabs.TFCMaterials);
+		StoneBrick = (new ItemStoneBrick(TFCItemID.ItemStoneBrick2).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
+		Mortar = new ItemTerra(TFCItemID.Mortar).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
+		Limewater = new ItemCustomBucket(TFCItemID.Limewater,2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
+		Hide = new ItemTerra(TFCItemID.Hide).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		SoakedHide = new ItemTerra(TFCItemID.SoakedHide).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		ScrapedHide = new ItemTerra(TFCItemID.ScrapedHide).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
+		PrepHide = new ItemTerra(TFCItemID.PrepHide).setFolder("tools/").setFolder("tools/").setUnlocalizedName("Prep Hide").setCreativeTab(TFCTabs.TFCMaterials);
 
-		SheepSkin = new ItemTerra(TFC_Settings.getIntFor(config,"item","SheepSkin",num++)).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
-		muttonRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","muttonRaw",num++)).setFolder("food/").setUnlocalizedName("Mutton Raw");
-		muttonCooked =  new ItemTerraFood(TFC_Settings.getIntFor(config,"item","muttonCooked",num++), 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
-		FlatLeather = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatLeather2",num++)).setFolder("tools/").setUnlocalizedName("Flat Leather"));
-		TerraLeather = new ItemLeather(TFC_Settings.getIntFor(config,"item","TFCLeather",num++)).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
+		SheepSkin = new ItemTerra(TFCItemID.SheepSkin).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
+		muttonRaw = new ItemTerra(TFCItemID.muttonRaw).setFolder("food/").setUnlocalizedName("Mutton Raw");
+		muttonCooked =  new ItemTerraFood(TFCItemID.muttonCooked, 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
+		FlatLeather = (new ItemFlatLeather(TFCItemID.FlatLeather2).setFolder("tools/").setUnlocalizedName("Flat Leather"));
+		TerraLeather = new ItemLeather(TFCItemID.TFCLeather).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
 
-		Straw = new ItemTerra(TFC_Settings.getIntFor(config,"item","Straw",num++)).setFolder("plants/").setUnlocalizedName("Straw");
-		FlatClay = (new ItemFlatLeather(TFC_Settings.getIntFor(config,"item","FlatClay",num++)).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
+		Straw = new ItemTerra(TFCItemID.Straw).setFolder("plants/").setUnlocalizedName("Straw");
+		FlatClay = (new ItemFlatLeather(TFCItemID.FlatClay).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
 
-		PotteryJug = new ItemPotteryJug(TFC_Settings.getIntFor(config,"item","PotteryJug",num++)).setUnlocalizedName("Jug");
-		PotterySmallVessel = new ItemPotterySmallVessel(TFC_Settings.getIntFor(config,"items","PotterySmallVessel",num++)).setUnlocalizedName("Small Vessel");
-		PotteryLargeVessel = new ItemPotteryLargeVessel(TFC_Settings.getIntFor(config,"items","PotteryLargeVessel",num++)).setUnlocalizedName("Large Vessel");
-		PotteryPot = new ItemPotteryPot(TFC_Settings.getIntFor(config,"item","PotteryPot",num++)).setUnlocalizedName("Pot");
-		CeramicMold = new ItemPotteryBase(TFC_Settings.getIntFor(config,"item","CeramicMold",16409)).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
+		PotteryJug = new ItemPotteryJug(TFCItemID.PotteryJug).setUnlocalizedName("Jug");
+		PotterySmallVessel = new ItemPotterySmallVessel(TFCItemID.PotterySmallVessel).setUnlocalizedName("Small Vessel");
+		PotteryLargeVessel = new ItemPotteryLargeVessel(TFCItemID.PotteryLargeVessel).setUnlocalizedName("Large Vessel");
+		PotteryPot = new ItemPotteryPot(TFCItemID.PotteryPot).setUnlocalizedName("Pot");
+		CeramicMold = new ItemPotteryBase(TFCItemID.CeramicMold).setMetaNames(new String[]{"Clay Mold","Ceramic Mold"}).setUnlocalizedName("Mold");
 		Item.itemsList[Item.clay.itemID] = null; Item.itemsList[Item.clay.itemID] = (new ItemClay(Item.clay.itemID).setSpecialCraftingType(FlatClay, new ItemStack(FlatClay, 1, 1))).setMetaNames(new String[]{"Clay", "Fire Clay"}).setUnlocalizedName("clay").setCreativeTab(CreativeTabs.tabMaterials);
-		ClayMoldAxe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldAxe",num++)).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
+		ClayMoldAxe = new ItemPotteryMold(TFCItemID.ClayMoldAxe).setMetaNames(new String[]{"Clay Mold Axe","Ceramic Mold Axe",
 				"Ceramic Mold Axe Copper","Ceramic Mold Axe Bronze","Ceramic Mold Axe Bismuth Bronze","Ceramic Mold Axe Black Bronze"}).setUnlocalizedName("Axe Mold");
-		ClayMoldChisel = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldChisel",num++)).setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
+		ClayMoldChisel = new ItemPotteryMold(TFCItemID.ClayMoldChisel).setMetaNames(new String[]{"Clay Mold Chisel","Ceramic Mold Chisel",
 				"Ceramic Mold Chisel Copper","Ceramic Mold Chisel Bronze","Ceramic Mold Chisel Bismuth Bronze","Ceramic Mold Chisel Black Bronze"}).setUnlocalizedName("Chisel Mold");
-		ClayMoldHammer = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldHammer",num++)).setMetaNames(new String[]{"Clay Mold Hammer","Ceramic Mold Hammer",
+		ClayMoldHammer = new ItemPotteryMold(TFCItemID.ClayMoldHammer).setMetaNames(new String[]{"Clay Mold Hammer","Ceramic Mold Hammer",
 				"Ceramic Mold Hammer Copper","Ceramic Mold Hammer Bronze","Ceramic Mold Hammer Bismuth Bronze","Ceramic Mold Hammer Black Bronze"}).setUnlocalizedName("Hammer Mold");
-		ClayMoldHoe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldHoe",num++)).setMetaNames(new String[]{"Clay Mold Hoe","Ceramic Mold Hoe",
+		ClayMoldHoe = new ItemPotteryMold(TFCItemID.ClayMoldHoe).setMetaNames(new String[]{"Clay Mold Hoe","Ceramic Mold Hoe",
 				"Ceramic Mold Hoe Copper","Ceramic Mold Hoe Bronze","Ceramic Mold Hoe Bismuth Bronze","Ceramic Mold Hoe Black Bronze"}).setUnlocalizedName("Hoe Mold");
-		ClayMoldKnife = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldKnife",num++)).setMetaNames(new String[]{"Clay Mold Knife","Ceramic Mold Knife",
+		ClayMoldKnife = new ItemPotteryMold(TFCItemID.ClayMoldKnife).setMetaNames(new String[]{"Clay Mold Knife","Ceramic Mold Knife",
 				"Ceramic Mold Knife Copper","Ceramic Mold Knife Bronze","Ceramic Mold Knife Bismuth Bronze","Ceramic Mold Knife Black Bronze"}).setUnlocalizedName("Knife Mold");
-		ClayMoldMace = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldMace",num++)).setMetaNames(new String[]{"Clay Mold Mace","Ceramic Mold Mace",
+		ClayMoldMace = new ItemPotteryMold(TFCItemID.ClayMoldMace).setMetaNames(new String[]{"Clay Mold Mace","Ceramic Mold Mace",
 				"Ceramic Mold Mace Copper","Ceramic Mold Mace Bronze","Ceramic Mold Mace Bismuth Bronze","Ceramic Mold Mace Black Bronze"}).setUnlocalizedName("Mace Mold");
-		ClayMoldPick = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldPick",num++)).setMetaNames(new String[]{"Clay Mold Pick","Ceramic Mold Pick",
+		ClayMoldPick = new ItemPotteryMold(TFCItemID.ClayMoldPick).setMetaNames(new String[]{"Clay Mold Pick","Ceramic Mold Pick",
 				"Ceramic Mold Pick Copper","Ceramic Mold Pick Bronze","Ceramic Mold Pick Bismuth Bronze","Ceramic Mold Pick Black Bronze"}).setUnlocalizedName("Pick Mold");
-		ClayMoldProPick = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldProPick",num++)).setMetaNames(new String[]{"Clay Mold ProPick","Ceramic Mold ProPick",
+		ClayMoldProPick = new ItemPotteryMold(TFCItemID.ClayMoldProPick).setMetaNames(new String[]{"Clay Mold ProPick","Ceramic Mold ProPick",
 				"Ceramic Mold ProPick Copper","Ceramic Mold ProPick Bronze","Ceramic Mold ProPick Bismuth Bronze","Ceramic Mold ProPick Black Bronze"}).setUnlocalizedName("ProPick Mold");
-		ClayMoldSaw = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldSaw",num++)).setMetaNames(new String[]{"Clay Mold Saw","Ceramic Mold Saw",
+		ClayMoldSaw = new ItemPotteryMold(TFCItemID.ClayMoldSaw).setMetaNames(new String[]{"Clay Mold Saw","Ceramic Mold Saw",
 				"Ceramic Mold Saw Copper","Ceramic Mold Saw Bronze","Ceramic Mold Saw Bismuth Bronze","Ceramic Mold Saw Black Bronze"}).setUnlocalizedName("Saw Mold");
-		ClayMoldScythe = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldScythe",num++)).setMetaNames(new String[]{"Clay Mold Scythe","Ceramic Mold Scythe",
+		ClayMoldScythe = new ItemPotteryMold(TFCItemID.ClayMoldScythe).setMetaNames(new String[]{"Clay Mold Scythe","Ceramic Mold Scythe",
 				"Ceramic Mold Scythe Copper","Ceramic Mold Scythe Bronze","Ceramic Mold Scythe Bismuth Bronze","Ceramic Mold Scythe Black Bronze"}).setUnlocalizedName("Scythe Mold");
-		ClayMoldShovel = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldShovel",num++)).setMetaNames(new String[]{"Clay Mold Shovel","Ceramic Mold Shovel",
+		ClayMoldShovel = new ItemPotteryMold(TFCItemID.ClayMoldShovel).setMetaNames(new String[]{"Clay Mold Shovel","Ceramic Mold Shovel",
 				"Ceramic Mold Shovel Copper","Ceramic Mold Shovel Bronze","Ceramic Mold Shovel Bismuth Bronze","Ceramic Mold Shovel Black Bronze"}).setUnlocalizedName("Shovel Mold");
-		ClayMoldSword = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldSword",num++)).setMetaNames(new String[]{"Clay Mold Sword","Ceramic Mold Sword",
+		ClayMoldSword = new ItemPotteryMold(TFCItemID.ClayMoldSword).setMetaNames(new String[]{"Clay Mold Sword","Ceramic Mold Sword",
 				"Ceramic Mold Sword Copper","Ceramic Mold Sword Bronze","Ceramic Mold Sword Bismuth Bronze","Ceramic Mold Sword Black Bronze"}).setUnlocalizedName("Sword Mold");
-		ClayMoldJavelin = new ItemPotteryMold(TFC_Settings.getIntFor(config,"item","ClayMoldJavelin",num++)).setMetaNames(new String[]{"Clay Mold Javelin","Ceramic Mold Javelin",
+		ClayMoldJavelin = new ItemPotteryMold(TFCItemID.ClayMoldJavelin).setMetaNames(new String[]{"Clay Mold Javelin","Ceramic Mold Javelin",
 				"Ceramic Mold Javelin Copper","Ceramic Mold Javelin Bronze","Ceramic Mold Javelin Bismuth Bronze","Ceramic Mold Javelin Black Bronze"}).setUnlocalizedName("Javelin Mold");
 
-		TuyereCopper = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereCopper",num++), 40, 0).setUnlocalizedName("Copper Tuyere");
-		TuyereBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBronze",num++), 80, 1).setUnlocalizedName("Bronze Tuyere");
-		TuyereBlackBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackBronze",num++), 80, 1).setUnlocalizedName("Black Bronze Tuyere");
-		TuyereBismuthBronze = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBismuthBronze",num++), 80, 1).setUnlocalizedName("Bismuth Bronze Tuyere");
-		TuyereWroughtIron = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereWroughtIron",num++), 120, 2).setUnlocalizedName("Wrought Iron Tuyere");
-		TuyereSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereSteel",num++), 180, 3).setUnlocalizedName("Steel Tuyere");
-		TuyereBlackSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlackSteel",num++), 260, 4).setUnlocalizedName("Black Steel Tuyere");
-		TuyereRedSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereRedSteel",num++), 400, 5).setUnlocalizedName("Red Steel Tuyere");
-		TuyereBlueSteel = new ItemTuyere(TFC_Settings.getIntFor(config,"item","TuyereBlueSteel",num++), 500, 6).setUnlocalizedName("Blue Steel Tuyere");
+		TuyereCopper = new ItemTuyere(TFCItemID.TuyereCopper, 40, 0).setUnlocalizedName("Copper Tuyere");
+		TuyereBronze = new ItemTuyere(TFCItemID.TuyereBronze, 80, 1).setUnlocalizedName("Bronze Tuyere");
+		TuyereBlackBronze = new ItemTuyere(TFCItemID.TuyereBlackBronze, 80, 1).setUnlocalizedName("Black Bronze Tuyere");
+		TuyereBismuthBronze = new ItemTuyere(TFCItemID.TuyereBismuthBronze, 80, 1).setUnlocalizedName("Bismuth Bronze Tuyere");
+		TuyereWroughtIron = new ItemTuyere(TFCItemID.TuyereWroughtIron, 120, 2).setUnlocalizedName("Wrought Iron Tuyere");
+		TuyereSteel = new ItemTuyere(TFCItemID.TuyereSteel, 180, 3).setUnlocalizedName("Steel Tuyere");
+		TuyereBlackSteel = new ItemTuyere(TFCItemID.TuyereBlackSteel, 260, 4).setUnlocalizedName("Black Steel Tuyere");
+		TuyereRedSteel = new ItemTuyere(TFCItemID.TuyereRedSteel, 400, 5).setUnlocalizedName("Red Steel Tuyere");
+		TuyereBlueSteel = new ItemTuyere(TFCItemID.TuyereBlueSteel, 500, 6).setUnlocalizedName("Blue Steel Tuyere");
 
-		Bloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","Bloom",num++)).setFolder("ingots/").setUnlocalizedName("Iron Bloom");
-		RawBloom = new ItemBloom(TFC_Settings.getIntFor(config,"item","RawBloom",num++)).setFolder("ingots/").setUnlocalizedName("Raw Iron Bloom");
+		Bloom = new ItemBloom(TFCItemID.Bloom).setFolder("ingots/").setUnlocalizedName("Iron Bloom");
+		RawBloom = new ItemBloom(TFCItemID.RawBloom).setFolder("ingots/").setUnlocalizedName("Raw Iron Bloom");
 
-		UnknownIngot = new ItemIngot(TFC_Settings.getIntFor(config,"item","UnknownIngot",num++)).setUnlocalizedName("Unknown Ingot");
-		UnknownUnshaped = new ItemMeltedMetal(TFC_Settings.getIntFor(config,"item","UnknownUnshaped",num++)).setUnlocalizedName("Unknown Unshaped");
+		UnknownIngot = new ItemIngot(TFCItemID.UnknownIngot).setUnlocalizedName("Unknown Ingot");
+		UnknownUnshaped = new ItemMeltedMetal(TFCItemID.UnknownUnshaped).setUnlocalizedName("Unknown Unshaped");
 
-		/**Plans*/
-		num = 20000;
-		SetupPlans(num);
+		// Plans
+		PickaxeHeadPlan = new ItemPlan(TFCItemID.PickaxeHeadPlan).setUnlocalizedName("PickaxeHeadPlan");
+		ShovelHeadPlan = new ItemPlan(TFCItemID.ShovelHeadPlan).setUnlocalizedName("ShovelHeadPlan");
+		HoeHeadPlan = new ItemPlan(TFCItemID.HoeHeadPlan).setUnlocalizedName("HoeHeadPlan");
+		AxeHeadPlan = new ItemPlan(TFCItemID.AxeHeadPlan).setUnlocalizedName("AxeHeadPlan");
+		HammerHeadPlan = new ItemPlan(TFCItemID.HammerHeadPlan).setUnlocalizedName("HammerHeadPlan");
+		ChiselHeadPlan = new ItemPlan(TFCItemID.ChiselHeadPlan).setUnlocalizedName("ChiselHeadPlan");
+		SwordBladePlan = new ItemPlan(TFCItemID.SwordBladePlan).setUnlocalizedName("SwordBladePlan");
+		MaceHeadPlan = new ItemPlan(TFCItemID.MaceHeadPlan).setUnlocalizedName("MaceHeadPlan");
+		SawBladePlan = new ItemPlan(TFCItemID.SawBladePlan).setUnlocalizedName("SawBladePlan");
+		ProPickHeadPlan = new ItemPlan(TFCItemID.ProPickHeadPlan).setUnlocalizedName("ProPickHeadPlan");
+		HelmetPlan = new ItemPlan(TFCItemID.HelmetPlan).setUnlocalizedName("HelmetPlan");
+		ChestplatePlan = new ItemPlan(TFCItemID.ChestplatePlan).setUnlocalizedName("ChestplatePlan");
+		GreavesPlan = new ItemPlan(TFCItemID.GreavesPlan).setUnlocalizedName("GreavesPlan");
+		BootsPlan = new ItemPlan(TFCItemID.BootsPlan).setUnlocalizedName("BootsPlan");
+		ScythePlan = new ItemPlan(TFCItemID.ScythePlan).setUnlocalizedName("ScythePlan");
+		KnifePlan = new ItemPlan(TFCItemID.KnifePlan).setUnlocalizedName("KnifePlan");
+		BucketPlan = new ItemPlan(TFCItemID.BucketPlan).setUnlocalizedName("BucketPlan");
+		JavelinHeadPlan = new ItemPlan(TFCItemID.JavelinHeadPlan).setUnlocalizedName("JavelinHeadPlan");
 
-		/**Food related items*/
-		num = 18000;
-		SetupFood(num);
+		// Food related items
+		FruitTreeSapling1 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling1, 0).setUnlocalizedName("FruitSapling1");
+		FruitTreeSapling2 = new ItemFruitTreeSapling(TFCItemID.FruitTreeSapling2, 8).setUnlocalizedName("FruitSapling2");
+		RedApple = new ItemTerraFood(TFCItemID.RedApple, 15, 0.1F, false, 2).setUnlocalizedName("Red Apple");
+		Banana = new ItemTerraFood(TFCItemID.Banana, 10, 0.1F, false, 3).setUnlocalizedName("Banana");
+		Orange = new ItemTerraFood(TFCItemID.Orange, 10, 0.1F, false, 4).setUnlocalizedName("Orange");
+		GreenApple = new ItemTerraFood(TFCItemID.GreenApple, 15, 0.1F, false, 5).setUnlocalizedName("Green Apple");
+		Lemon = new ItemTerraFood(TFCItemID.Lemon, 10, 0.03F, false, 6).setUnlocalizedName("Lemon");
+		Olive = new ItemTerraFood(TFCItemID.Olive, 10, 0.05F, false, 7).setUnlocalizedName("Olive");
+		Cherry = new ItemTerraFood(TFCItemID.Cherry, 10, 0.03F, false, 8).setUnlocalizedName("Cherry");
+		Peach = new ItemTerraFood(TFCItemID.Peach, 12, 0.1F, false, 9).setUnlocalizedName("Peach");
+		Plum = new ItemTerraFood(TFCItemID.Plum, 10, 0.1F, false, 10).setUnlocalizedName("Plum");
+		EggCooked = new ItemTerraFood(TFCItemID.EggCooked, 25, 0.4F, false, 11).setUnlocalizedName("Egg Cooked");
+
+		WheatGrain = new ItemTerraFood(TFCItemID.WheatGrain, 1, 0.4F, false, 12).setUnlocalizedName("Wheat Grain");
+		BarleyGrain = new ItemTerraFood(TFCItemID.BarleyGrain, 1, 0.4F, false, 14).setUnlocalizedName("Barley Grain");
+		OatGrain = new ItemTerraFood(TFCItemID.OatGrain, 1, 0.4F, false, 16).setUnlocalizedName("Oat Grain");
+		RyeGrain = new ItemTerraFood(TFCItemID.RyeGrain, 1, 0.4F, false, 18).setUnlocalizedName("Rye Grain");
+		RiceGrain = new ItemTerraFood(TFCItemID.RiceGrain, 1, 0.4F, false, 20).setUnlocalizedName("Rice Grain");
+		MaizeEar = new ItemTerraFood(TFCItemID.MaizeEar, 10, 0.4F, false, 22).setUnlocalizedName("Maize Ear");
+		Tomato = new ItemTerraFood(TFCItemID.Tomato, 15, 0.4F, false, 24).setUnlocalizedName("Tomato");
+		Potato = new ItemTerraFood(TFCItemID.Potato, 22, 0.4F, false, 25).setUnlocalizedName("Potato");
+		Onion = new ItemTerraFood(TFCItemID.Onion, 10, 0.4F, false, 27).setUnlocalizedName("Onion");
+		Cabbage = new ItemTerraFood(TFCItemID.Cabbage, 20, 0.4F, false, 28).setUnlocalizedName("Cabbage");
+		Garlic = new ItemTerraFood(TFCItemID.Garlic, 10, 0.4F, false, 29).setUnlocalizedName("Garlic");
+		Carrot = new ItemTerraFood(TFCItemID.Carrot, 5, 0.4F, false, 30).setUnlocalizedName("Carrot");
+		Sugarcane = new ItemTerra(TFCItemID.Sugarcane).setFolder("plants/").setUnlocalizedName("Sugarcane");
+		Hemp = new ItemTerra(TFCItemID.Hemp).setFolder("plants/").setUnlocalizedName("Hemp");
+		Soybean = new ItemTerraFood(TFCItemID.Soybean, 10, 0.4F, false, 31).setUnlocalizedName("Soybeans");
+		Greenbeans = new ItemTerraFood(TFCItemID.Greenbeans, 10, 0.4F, false, 32).setUnlocalizedName("Greenbeans");
+		GreenBellPepper = new ItemTerraFood(TFCItemID.GreenBellPepper, 10, 0.4F, false, 34).setUnlocalizedName("Green Bell Pepper");
+		YellowBellPepper = new ItemTerraFood(TFCItemID.YellowBellPepper, 10, 0.4F, false, 35).setUnlocalizedName("Yellow Bell Pepper");
+		RedBellPepper = new ItemTerraFood(TFCItemID.RedBellPepper, 10, 0.4F, false, 36).setUnlocalizedName("Red Bell Pepper");
+		Squash = new ItemTerraFood(TFCItemID.Squash, 12, 0.4F, false, 37).setUnlocalizedName("Squash");
+
+		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
+		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");
+		OatWhole = new ItemTerra(TFCItemID.OatWhole).setFolder("food/").setUnlocalizedName("Oat Whole");
+		RyeWhole = new ItemTerra(TFCItemID.RyeWhole).setFolder("food/").setUnlocalizedName("Rye Whole");
+		RiceWhole = new ItemTerra(TFCItemID.RiceWhole).setFolder("food/").setUnlocalizedName("Rice Whole");
+
+		MealGeneric = new ItemMeal(TFCItemID.MealGeneric, 0).setUnlocalizedName("MealGeneric");
+		MealMoveSpeed = new ItemMeal(TFCItemID.MealMoveSpeed, 1).setPotionEffect(new PotionEffect(Potion.moveSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealDigSpeed = new ItemMeal(TFCItemID.MealDigSpeed, 2).setPotionEffect(new PotionEffect(Potion.digSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealDamageBoost = new ItemMeal(TFCItemID.MealDamageBoost, 3).setPotionEffect(new PotionEffect(Potion.damageBoost.id,4000,1)).setUnlocalizedName("MealGeneric");
+		MealJump = new ItemMeal(TFCItemID.MealJump, 4).setPotionEffect(new PotionEffect(Potion.jump.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealDamageResist = new ItemMeal(TFCItemID.MealDamageResist, 5).setPotionEffect(new PotionEffect(Potion.resistance.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealFireResist = new ItemMeal(TFCItemID.MealFireResist, 6).setPotionEffect(new PotionEffect(Potion.fireResistance.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealWaterBreathing = new ItemMeal(TFCItemID.MealWaterBreathing, 7).setPotionEffect(new PotionEffect(Potion.waterBreathing.id,8000,1)).setUnlocalizedName("MealGeneric");
+		MealNightVision = new ItemMeal(TFCItemID.MealNightVision, 8).setPotionEffect(new PotionEffect(Potion.nightVision.id,4000,1)).setUnlocalizedName("MealGeneric");
+
+		WheatGround = new ItemTerra(TFCItemID.WheatGround).setFolder("food/").setUnlocalizedName("Wheat Ground");
+		BarleyGround = new ItemTerra(TFCItemID.BarleyGround).setFolder("food/").setUnlocalizedName("Barley Ground");
+		OatGround = new ItemTerra(TFCItemID.OatGround).setFolder("food/").setUnlocalizedName("Oat Ground");
+		RyeGround = new ItemTerra(TFCItemID.RyeGround).setFolder("food/").setUnlocalizedName("Rye Ground");
+		RiceGround = new ItemTerra(TFCItemID.RiceGround).setFolder("food/").setUnlocalizedName("Rice Ground");
+		CornmealGround = new ItemTerra(TFCItemID.CornmealGround).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
+
+		WheatDough = new ItemTerraFood(TFCItemID.WheatDough, 1, 0.0F, false, 0).setUnlocalizedName("Wheat Dough");
+		BarleyDough = new ItemTerraFood(TFCItemID.BarleyDough, 1, 0.0F, false, 0).setUnlocalizedName("Barley Dough");
+		OatDough = new ItemTerraFood(TFCItemID.OatDough, 1, 0.0F, false, 0).setUnlocalizedName("Oat Dough");
+		RyeDough = new ItemTerraFood(TFCItemID.RyeDough, 1, 0.0F, false, 0).setUnlocalizedName("Rye Dough");
+		RiceDough = new ItemTerraFood(TFCItemID.RiceDough, 1, 0.0F, false, 0).setUnlocalizedName("Rice Dough");
+		CornmealDough = new ItemTerraFood(TFCItemID.CornmealDough, 1, 0.0F, false, 0).setUnlocalizedName("Cornmeal Dough");
+
+		BarleyBread = new ItemTerraFood(TFCItemID.BarleyBread, 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
+		OatBread = new ItemTerraFood(TFCItemID.OatBread, 25, 0.6F, false, 44).setUnlocalizedName("Oat Bread");
+		RyeBread = new ItemTerraFood(TFCItemID.RyeBread, 25, 0.6F, false, 45).setUnlocalizedName("Rye Bread");
+		RiceBread = new ItemTerraFood(TFCItemID.RiceBread, 25, 0.6F, false, 46).setUnlocalizedName("Rice Bread");
+		CornBread = new ItemTerraFood(TFCItemID.CornBread, 25, 0.6F, false, 47).setUnlocalizedName("Corn Bread");
+
+		CalamariRaw = new ItemTerra(TFCItemID.CalamariRaw).setFolder("").setUnlocalizedName("Calamari Raw");
+		CalamariCooked = new ItemTerraFood(TFCItemID.CalamariCooked, 29, 0.6F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
+
+		SeedsWheat = new ItemCustomSeeds(TFCItemID.SeedsWheat,0).setUnlocalizedName("Seeds Wheat");
+		SeedsBarley = new ItemCustomSeeds(TFCItemID.SeedsBarley,5).setUnlocalizedName("Seeds Barley");
+		SeedsRye = new ItemCustomSeeds(TFCItemID.SeedsRye,7).setUnlocalizedName("Seeds Rye");
+		SeedsOat = new ItemCustomSeeds(TFCItemID.SeedsOat,9).setUnlocalizedName("Seeds Oat");
+		SeedsRice = new ItemCustomSeeds(TFCItemID.SeedsRice,11).setUnlocalizedName("Seeds Rice");
+		SeedsMaize = new ItemCustomSeeds(TFCItemID.SeedsMaize,2).setUnlocalizedName("Seeds Maize");
+		SeedsPotato = new ItemCustomSeeds(TFCItemID.SeedsPotato,13).setUnlocalizedName("Seeds Potato");
+		SeedsOnion = new ItemCustomSeeds(TFCItemID.SeedsOnion,15).setUnlocalizedName("Seeds Onion");
+		SeedsCabbage = new ItemCustomSeeds(TFCItemID.SeedsCabbage,16).setUnlocalizedName("Seeds Cabbage");
+		SeedsGarlic = new ItemCustomSeeds(TFCItemID.SeedsGarlic,17).setUnlocalizedName("Seeds Garlic");
+		SeedsCarrot = new ItemCustomSeeds(TFCItemID.SeedsCarrot,18).setUnlocalizedName("Seeds Carrot");
+		SeedsSugarcane = new ItemCustomSeeds(TFCItemID.SeedsSugarcane,21).setUnlocalizedName("Seeds Sugarcane");
+		SeedsHemp = new ItemCustomSeeds(TFCItemID.SeedsHemp,22).setUnlocalizedName("Seeds Hemp");
+		SeedsTomato = new ItemCustomSeeds(TFCItemID.SeedsTomato,4).setUnlocalizedName("Seeds Tomato");
+		SeedsYellowBellPepper = new ItemCustomSeeds(TFCItemID.SeedsYellowBellPepper,19).setUnlocalizedName("Seeds Yellow Bell Pepper");
+		SeedsRedBellPepper = new ItemCustomSeeds(TFCItemID.SeedsRedBellPepper,20).setUnlocalizedName("Seeds Red Bell Pepper");
+		SeedsSoybean = new ItemCustomSeeds(TFCItemID.SeedsSoybean,21).setUnlocalizedName("Seeds Soybean");
+		SeedsGreenbean = new ItemCustomSeeds(TFCItemID.SeedsGreenbean,22).setUnlocalizedName("Seeds Greenbean");
+		SeedsSquash = new ItemCustomSeeds(TFCItemID.SeedsSquash,23).setUnlocalizedName("Seeds Squash");
 
 		/**Armor Crafting related items*/
-		num = 19000;
-		SetupArmor(num);
+		SetupArmor();
 
 		Recipes.Doors = new Item[]{DoorOak, DoorAspen, DoorBirch, DoorChestnut, DoorDouglasFir, 
 				DoorHickory, DoorMaple, DoorAsh, DoorPine, DoorSequoia, DoorSpruce, DoorSycamore, 
@@ -1600,9 +1681,6 @@ public class TFCItems
 		registerMetals();
 
 		System.out.println(new StringBuilder().append("[TFC] Done Loading Items").toString());
-		if (config != null) {
-			config.save();
-		}
 	}
 
 	private static void registerMetals() 
@@ -1718,264 +1796,147 @@ public class TFCItems
 		AlloyManager.instance.addAlloy(WeakBlueSteel);
 	}
 
-	public static void SetupPlans(int num)
+	public static void SetupArmor()
 	{
-		PickaxeHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","PickaxeHeadPlan",num)).setUnlocalizedName("PickaxeHeadPlan");num++;
-		ShovelHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","ShovelHeadPlan",num)).setUnlocalizedName("ShovelHeadPlan");num++;
-		HoeHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","HoeHeadPlan",num)).setUnlocalizedName("HoeHeadPlan");num++;
-		AxeHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","AxeHeadPlan",num)).setUnlocalizedName("AxeHeadPlan");num++;
-		HammerHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","HammerHeadPlan",num)).setUnlocalizedName("HammerHeadPlan");num++;
-		ChiselHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","ChiselHeadPlan",num)).setUnlocalizedName("ChiselHeadPlan");num++;
-		SwordBladePlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","SwordBladePlan",num)).setUnlocalizedName("SwordBladePlan");num++;
-		MaceHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","MaceHeadPlan",num)).setUnlocalizedName("MaceHeadPlan");num++;
-		SawBladePlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","SawBladePlan",num)).setUnlocalizedName("SawBladePlan");num++;
-		ProPickHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","ProPickHeadPlan",num)).setUnlocalizedName("ProPickHeadPlan");num++;
-		HelmetPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","HelmetPlan",num)).setUnlocalizedName("HelmetPlan");num++;
-		ChestplatePlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","ChestplatePlan",num)).setUnlocalizedName("ChestplatePlan");num++;
-		GreavesPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","GreavesPlan",num)).setUnlocalizedName("GreavesPlan");num++;
-		BootsPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","BootsPlan",num)).setUnlocalizedName("BootsPlan");num++;
-		ScythePlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","ScythePlan",num)).setUnlocalizedName("ScythePlan");num++;
-		KnifePlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","KnifePlan",num)).setUnlocalizedName("KnifePlan");num++;
-		BucketPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","BucketPlan",num)).setUnlocalizedName("BucketPlan");num++;
-		JavelinHeadPlan = new ItemPlan(TFC_Settings.getIntFor(config,"item","JavelinHeadPlan",num)).setUnlocalizedName("JavelinHeadPlan");num++;
-	}
-
-	public static void SetupFood(int num)
-	{
-		FruitTreeSapling1 = new ItemFruitTreeSapling(TFC_Settings.getIntFor(config,"item","FruitSapling1", num), 0).setUnlocalizedName("FruitSapling1");num++;
-		FruitTreeSapling2 = new ItemFruitTreeSapling(TFC_Settings.getIntFor(config,"item","FruitSapling2", num), 8).setUnlocalizedName("FruitSapling2");num++;
-		RedApple = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Red Apple",num), 15, 0.1F, false, 2).setUnlocalizedName("Red Apple");num++;
-		Banana = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Banana",num), 10, 0.1F, false, 3).setUnlocalizedName("Banana");num++;
-		Orange = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Orange",num), 10, 0.1F, false, 4).setUnlocalizedName("Orange");num++;
-		GreenApple = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Green Apple",num), 15, 0.1F, false, 5).setUnlocalizedName("Green Apple");num++;
-		Lemon = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Lemon",num), 10, 0.03F, false, 6).setUnlocalizedName("Lemon");num++;
-		Olive = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Olive",num), 10, 0.05F, false, 7).setUnlocalizedName("Olive");num++;
-		Cherry = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Cherry",num), 10, 0.03F, false, 8).setUnlocalizedName("Cherry");num++;
-		Peach = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Peach",num), 12, 0.1F, false, 9).setUnlocalizedName("Peach");num++;
-		Plum = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Fruit.Plum",num), 10, 0.1F, false, 10).setUnlocalizedName("Plum");num++;
-		EggCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Meat.EggCooked",num), 25, 0.4F, false, 11).setUnlocalizedName("Egg Cooked");num++;
-
-		WheatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WheatGrain",num++), 1, 0.4F, false, 12).setUnlocalizedName("Wheat Grain");
-		BarleyGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","BarleyGrain",num++), 1, 0.4F, false, 14).setUnlocalizedName("Barley Grain");
-		OatGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","OatGrain",num++), 1, 0.4F, false, 16).setUnlocalizedName("Oat Grain");
-		RyeGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RyeGrain",num++), 1, 0.4F, false, 18).setUnlocalizedName("Rye Grain");
-		RiceGrain = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RiceGrain",num++), 1, 0.4F, false, 20).setUnlocalizedName("Rice Grain");
-		MaizeEar = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","MaizeEar",num++), 10, 0.4F, false, 22).setUnlocalizedName("Maize Ear");
-		Tomato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Tomato",num++), 15, 0.4F, false, 24).setUnlocalizedName("Tomato");
-		Potato = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Potato",num++), 22, 0.4F, false, 25).setUnlocalizedName("Potato");
-		Onion = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Onion",num++), 10, 0.4F, false, 27).setUnlocalizedName("Onion");
-		Cabbage = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Cabbage",num++), 20, 0.4F, false, 28).setUnlocalizedName("Cabbage");
-		Garlic = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Garlic",num++), 10, 0.4F, false, 29).setUnlocalizedName("Garlic");
-		Carrot = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Carrot",num++), 5, 0.4F, false, 30).setUnlocalizedName("Carrot");
-		Sugarcane = new ItemTerra(TFC_Settings.getIntFor(config,"item","Sugarcane",num++)).setFolder("plants/").setUnlocalizedName("Sugarcane");
-		Hemp = new ItemTerra(TFC_Settings.getIntFor(config,"item","Hemp",num++)).setFolder("plants/").setUnlocalizedName("Hemp");
-		Soybean = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Soybeans",num++), 10, 0.4F, false, 31).setUnlocalizedName("Soybeans");
-		Greenbeans = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Greenbeans",num++), 10, 0.4F, false, 32).setUnlocalizedName("Greenbeans");
-		GreenBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","GreenBellPepper",num++), 10, 0.4F, false, 34).setUnlocalizedName("Green Bell Pepper");
-		YellowBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","YellowBellPepper",num++), 10, 0.4F, false, 35).setUnlocalizedName("Yellow Bell Pepper");
-		RedBellPepper = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RedBellPepper",num++), 10, 0.4F, false, 36).setUnlocalizedName("Red Bell Pepper");
-		Squash = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","Squash",num++), 12, 0.4F, false, 37).setUnlocalizedName("Squash");
-
-		WheatWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","WheatWhole",num++)).setFolder("food/").setUnlocalizedName("Wheat Whole");
-		BarleyWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","BarleyWhole",num++)).setFolder("food/").setUnlocalizedName("Barley Whole");
-		OatWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","OatWhole",num++)).setFolder("food/").setUnlocalizedName("Oat Whole");
-		RyeWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","RyeWhole",num++)).setFolder("food/").setUnlocalizedName("Rye Whole");
-		RiceWhole = new ItemTerra(TFC_Settings.getIntFor(config,"item","RiceWhole",num++)).setFolder("food/").setUnlocalizedName("Rice Whole");
-
-		MealGeneric = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealGeneric",num++), 0).setUnlocalizedName("MealGeneric");
-		MealMoveSpeed = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealMoveSpeed",num++), 1).setPotionEffect(new PotionEffect(Potion.moveSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealDigSpeed = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDigSpeed",num++), 2).setPotionEffect(new PotionEffect(Potion.digSpeed.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealDamageBoost = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDamageBoost",num++), 3).setPotionEffect(new PotionEffect(Potion.damageBoost.id,4000,1)).setUnlocalizedName("MealGeneric");
-		MealJump = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealJump",num++), 4).setPotionEffect(new PotionEffect(Potion.jump.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealDamageResist = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealDamageResist",num++), 5).setPotionEffect(new PotionEffect(Potion.resistance.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealFireResist = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealFireResist",num++), 6).setPotionEffect(new PotionEffect(Potion.fireResistance.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealWaterBreathing = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealWaterBreathing",num++), 7).setPotionEffect(new PotionEffect(Potion.waterBreathing.id,8000,1)).setUnlocalizedName("MealGeneric");
-		MealNightVision = new ItemMeal(TFC_Settings.getIntFor(config,"item","MealNightVision",num++), 8).setPotionEffect(new PotionEffect(Potion.nightVision.id,4000,1)).setUnlocalizedName("MealGeneric");
-
-		WheatGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","WheatGround",num++)).setFolder("food/").setUnlocalizedName("Wheat Ground");
-		BarleyGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","BarleyGround",num++)).setFolder("food/").setUnlocalizedName("Barley Ground");
-		OatGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","OatGround",num++)).setFolder("food/").setUnlocalizedName("Oat Ground");
-		RyeGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","RyeGround",num++)).setFolder("food/").setUnlocalizedName("Rye Ground");
-		RiceGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","RiceGround",num++)).setFolder("food/").setUnlocalizedName("Rice Ground");
-		CornmealGround = new ItemTerra(TFC_Settings.getIntFor(config,"item","CornmealGround",num++)).setFolder("food/").setUnlocalizedName("Cornmeal Ground");
-
-		WheatDough = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","WheatDough",num++), 1, 0.0F, false, 0).setUnlocalizedName("Wheat Dough");
-		BarleyDough = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","BarleyDough",num++), 1, 0.0F, false, 0).setUnlocalizedName("Barley Dough");
-		OatDough = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","OatDough",num++), 1, 0.0F, false, 0).setUnlocalizedName("Oat Dough");
-		RyeDough = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RyeDough",num++), 1, 0.0F, false, 0).setUnlocalizedName("Rye Dough");
-		RiceDough = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RiceDough",num++), 1, 0.0F, false, 0).setUnlocalizedName("Rice Dough");
-		CornmealDough = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CornmealDough",num++), 1, 0.0F, false, 0).setUnlocalizedName("Cornmeal Dough");
-
-		BarleyBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","BarleyBread",num++), 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
-		OatBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","OatBread",num++), 25, 0.6F, false, 44).setUnlocalizedName("Oat Bread");
-		RyeBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RyeBread",num++), 25, 0.6F, false, 45).setUnlocalizedName("Rye Bread");
-		RiceBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","RiceBread",num++), 25, 0.6F, false, 46).setUnlocalizedName("Rice Bread");
-		CornBread = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CornBread",num++), 25, 0.6F, false, 47).setUnlocalizedName("Corn Bread");
-
-		CalamariRaw = new ItemTerra(TFC_Settings.getIntFor(config,"item","CalamariRaw",num++)).setFolder("").setUnlocalizedName("Calamari Raw");
-		CalamariCooked = new ItemTerraFood(TFC_Settings.getIntFor(config,"item","CalamariCooked",num++), 29, 0.6F, true, 49).setFolder("").setUnlocalizedName("Calamari Cooked");
-
-		num = 18900;
-		SeedsWheat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsWheat",num++),0).setUnlocalizedName("Seeds Wheat");
-		SeedsBarley = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsBarley",num++),5).setUnlocalizedName("Seeds Barley");
-		SeedsRye = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRye",num++),7).setUnlocalizedName("Seeds Rye");
-		SeedsOat = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsOat",num++),9).setUnlocalizedName("Seeds Oat");
-		SeedsRice = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRice",num++),11).setUnlocalizedName("Seeds Rice");
-		SeedsMaize = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsMaize",num++),2).setUnlocalizedName("Seeds Maize");
-		SeedsPotato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsPotato",num++),13).setUnlocalizedName("Seeds Potato");
-		SeedsOnion = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsOnion",num++),15).setUnlocalizedName("Seeds Onion");
-		SeedsCabbage = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsCabbage",num++),16).setUnlocalizedName("Seeds Cabbage");
-		SeedsGarlic = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsGarlic",num++),17).setUnlocalizedName("Seeds Garlic");
-		SeedsCarrot = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsCarrot",num++),18).setUnlocalizedName("Seeds Carrot");
-		SeedsSugarcane = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSugarcane",num++),21).setUnlocalizedName("Seeds Sugarcane");
-		SeedsHemp = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsHemp",num++),22).setUnlocalizedName("Seeds Hemp");
-		SeedsTomato = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsTomato",num++),4).setUnlocalizedName("Seeds Tomato");
-		SeedsYellowBellPepper = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsYellowBellPepper",num++),19).setUnlocalizedName("Seeds Yellow Bell Pepper");
-		SeedsRedBellPepper = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsRedBellPepper",num++),20).setUnlocalizedName("Seeds Red Bell Pepper");
-		SeedsSoybean = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSoybean",num++),21).setUnlocalizedName("Seeds Soybean");
-		SeedsGreenbean = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsGreenbean",num++),22).setUnlocalizedName("Seeds Greenbean");
-		SeedsSquash = new ItemCustomSeeds(TFC_Settings.getIntFor(config,"item","SeedsSquash",num++),23).setUnlocalizedName("Seeds Squash");
-	}
-
-	public static void SetupArmor(int num)
-	{		
 		String[] Names = {"Bismuth Bronze", "Black Bronze", "Black Steel", "Blue Steel", "Bronze", "Copper", "Wrought Iron", "Red Steel", "Steel"};
-		String[] NamesNS = {"Bismuth", "BismuthBronze", "BlackBronze", "BlackSteel", "BlueSteel", "Bronze", "Copper", "WroughtIron", "RedSteel", "RoseGold", "Steel", "Tin", "Zinc"};
 		String[] NamesNSO = {"Brass", "Gold", "Lead", "Nickel", "Pig Iron", "Platinum", "Silver", "Sterling Silver"};
-		CommonProxy proxy = TerraFirmaCraft.proxy;      
+		CommonProxy proxy = TerraFirmaCraft.proxy;
+
+		TFCItems.BismuthSheet = 		(new ItemMetalSheet(TFCItemID.BismuthSheet).setUnlocalizedName("Bismuth Sheet"));
+		TFCItems.BismuthBronzeSheet = 	(new ItemMetalSheet(TFCItemID.BismuthBronzeSheet).setUnlocalizedName("Bismuth Bronze Sheet"));
+		TFCItems.BlackBronzeSheet = 	(new ItemMetalSheet(TFCItemID.BlackBronzeSheet).setUnlocalizedName("Black Bronze Sheet"));
+		TFCItems.BlackSteelSheet = 		(new ItemMetalSheet(TFCItemID.BlackSteelSheet).setUnlocalizedName("Black Steel Sheet"));
+		TFCItems.BlueSteelSheet = 		(new ItemMetalSheet(TFCItemID.BlueSteelSheet).setUnlocalizedName("Blue Steel Sheet"));
+		TFCItems.BronzeSheet = 			(new ItemMetalSheet(TFCItemID.BronzeSheet).setUnlocalizedName("Bronze Sheet"));
+		TFCItems.CopperSheet = 			(new ItemMetalSheet(TFCItemID.CopperSheet).setUnlocalizedName("Copper Sheet"));
+		TFCItems.WroughtIronSheet = 	(new ItemMetalSheet(TFCItemID.WroughtIronSheet).setUnlocalizedName("Wrought Iron Sheet"));
+		TFCItems.RedSteelSheet = 		(new ItemMetalSheet(TFCItemID.RedSteelSheet).setUnlocalizedName("Red Steel Sheet"));
+		TFCItems.RoseGoldSheet = 		(new ItemMetalSheet(TFCItemID.RoseGoldSheet).setUnlocalizedName("Rose Gold Sheet"));
+		TFCItems.SteelSheet = 			(new ItemMetalSheet(TFCItemID.SteelSheet).setUnlocalizedName("Steel Sheet"));
+		TFCItems.TinSheet = 			(new ItemMetalSheet(TFCItemID.TinSheet).setUnlocalizedName("Tin Sheet"));
+		TFCItems.ZincSheet = 			(new ItemMetalSheet(TFCItemID.ZincSheet).setUnlocalizedName("Zinc Sheet"));
+
+		TFCItems.BismuthSheet2x = 		(new ItemMetalSheet2x(TFCItemID.BismuthSheet2x).setUnlocalizedName("Bismuth Double Sheet"));
+		TFCItems.BismuthBronzeSheet2x = (new ItemMetalSheet2x(TFCItemID.BismuthBronzeSheet2x).setUnlocalizedName("Bismuth Bronze Double Sheet"));
+		TFCItems.BlackBronzeSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlackBronzeSheet2x).setUnlocalizedName("Black Bronze Double Sheet"));
+		TFCItems.BlackSteelSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlackSteelSheet2x).setUnlocalizedName("Black Steel Double Sheet"));
+		TFCItems.BlueSteelSheet2x = 	(new ItemMetalSheet2x(TFCItemID.BlueSteelSheet2x).setUnlocalizedName("Blue Steel Double Sheet"));
+		TFCItems.BronzeSheet2x = 		(new ItemMetalSheet2x(TFCItemID.BronzeSheet2x).setUnlocalizedName("Bronze Double Sheet"));
+		TFCItems.CopperSheet2x = 		(new ItemMetalSheet2x(TFCItemID.CopperSheet2x).setUnlocalizedName("Copper Double Sheet"));
+		TFCItems.WroughtIronSheet2x = 	(new ItemMetalSheet2x(TFCItemID.WroughtIronSheet2x).setUnlocalizedName("Wrought Iron Double Sheet"));
+		TFCItems.RedSteelSheet2x = 		(new ItemMetalSheet2x(TFCItemID.RedSteelSheet2x).setUnlocalizedName("Red Steel Double Sheet"));
+		TFCItems.RoseGoldSheet2x = 		(new ItemMetalSheet2x(TFCItemID.RoseGoldSheet2x).setUnlocalizedName("Rose Gold Double Sheet"));
+		TFCItems.SteelSheet2x = 		(new ItemMetalSheet2x(TFCItemID.SteelSheet2x).setUnlocalizedName("Steel Double Sheet"));
+		TFCItems.TinSheet2x = 			(new ItemMetalSheet2x(TFCItemID.TinSheet2x).setUnlocalizedName("Tin Double Sheet"));
+		TFCItems.ZincSheet2x = 			(new ItemMetalSheet2x(TFCItemID.ZincSheet2x).setUnlocalizedName("Zinc Double Sheet"));
 
 		int i = 0;
-		TFCItems.BismuthSheet = 		(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bismuth Sheet"));num++;
-		TFCItems.BismuthBronzeSheet = 	(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bismuth Bronze Sheet"));num++;
-		TFCItems.BlackBronzeSheet = 	(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Black Bronze Sheet"));num++;
-		TFCItems.BlackSteelSheet = 		(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Black Steel Sheet"));num++;
-		TFCItems.BlueSteelSheet = 		(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Blue Steel Sheet"));num++;
-		TFCItems.BronzeSheet = 			(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Bronze Sheet"));num++;
-		TFCItems.CopperSheet = 			(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Copper Sheet"));num++;
-		TFCItems.WroughtIronSheet = 	(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Wrought Iron Sheet"));num++;
-		TFCItems.RedSteelSheet = 		(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Red Steel Sheet"));num++;
-		TFCItems.RoseGoldSheet = 		(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Rose Gold Sheet"));num++;
-		TFCItems.SteelSheet = 			(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Steel Sheet"));num++;
-		TFCItems.TinSheet = 			(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Tin Sheet"));num++;
-		TFCItems.ZincSheet = 			(new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+" Sheet",num)).setUnlocalizedName("Zinc Sheet"));num++;
+		TFCItems.BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.BlackBronzeUnfinishedBoots = 		(new ItemUnfinishedArmor(TFCItemID.BlackBronzeUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.BlackSteelUnfinishedBoots = 		(new ItemUnfinishedArmor(TFCItemID.BlackSteelUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.BlueSteelUnfinishedBoots = 		(new ItemUnfinishedArmor(TFCItemID.BlueSteelUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.BronzeUnfinishedBoots = 			(new ItemUnfinishedArmor(TFCItemID.BronzeUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.CopperUnfinishedBoots = 			(new ItemUnfinishedArmor(TFCItemID.CopperUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.WroughtIronUnfinishedBoots = 		(new ItemUnfinishedArmor(TFCItemID.WroughtIronUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.RedSteelUnfinishedBoots = 			(new ItemUnfinishedArmor(TFCItemID.RedSteelUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots")); i++;
+		TFCItems.SteelUnfinishedBoots = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedBoots).setUnlocalizedName(Names[i]+" Unfinished Boots"));
 
 		i = 0;
-		TFCItems.BismuthSheet2x = 		(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bismuth Double Sheet"));num++;
-		TFCItems.BismuthBronzeSheet2x = (new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bismuth Bronze Double Sheet"));num++;
-		TFCItems.BlackBronzeSheet2x = 	(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Black Bronze Double Sheet"));num++;
-		TFCItems.BlackSteelSheet2x = 	(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Black Steel Double Sheet"));num++;
-		TFCItems.BlueSteelSheet2x = 	(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Blue Steel Double Sheet"));num++;
-		TFCItems.BronzeSheet2x = 		(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Bronze Double Sheet"));num++;
-		TFCItems.CopperSheet2x = 		(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Copper Double Sheet"));num++;
-		TFCItems.WroughtIronSheet2x = 	(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Wrought Iron Double Sheet"));num++;
-		TFCItems.RedSteelSheet2x = 		(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Red Steel Double Sheet"));num++;
-		TFCItems.RoseGoldSheet2x = 		(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Rose Gold Double Sheet"));num++;
-		TFCItems.SteelSheet2x = 		(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Steel Double Sheet"));num++;
-		TFCItems.TinSheet2x = 			(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Tin Double Sheet"));num++;
-		TFCItems.ZincSheet2x = 			(new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNS[i++]+"Sheet2x",num)).setUnlocalizedName("Zinc Double Sheet"));num++;
+		TFCItems.BismuthBronzeBoots = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeBoots, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BlackBronzeBoots = 	(new ItemTFCArmor(TFCItemID.BlackBronzeBoots, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BlackSteelBoots = 		(new ItemTFCArmor(TFCItemID.BlackSteelBoots, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BlueSteelBoots = 		(new ItemTFCArmor(TFCItemID.BlueSteelBoots, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.BronzeBoots = 			(new ItemTFCArmor(TFCItemID.BronzeBoots, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.CopperBoots = 			(new ItemTFCArmor(TFCItemID.CopperBoots, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.WroughtIronBoots = 	(new ItemTFCArmor(TFCItemID.WroughtIronBoots, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.RedSteelBoots = 		(new ItemTFCArmor(TFCItemID.RedSteelBoots, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 3).setUnlocalizedName(Names[i]+" Boots")); i++;
+		TFCItems.SteelBoots = 			(new ItemTFCArmor(TFCItemID.SteelBoots, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 3).setUnlocalizedName(Names[i]+" Boots"));
 
 		i = 0;
-		TFCItems.BismuthBronzeUnfinishedBoots = 	(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.BlackBronzeUnfinishedBoots = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.BlackSteelUnfinishedBoots = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.BlueSteelUnfinishedBoots = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.BronzeUnfinishedBoots = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.CopperUnfinishedBoots = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.WroughtIronUnfinishedBoots = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.RedSteelUnfinishedBoots = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		TFCItems.SteelUnfinishedBoots = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Boots",num)).setUnlocalizedName(Names[i]+" Unfinished Boots")); num++;i++;
-		i = 0;
-
-		TFCItems.BismuthBronzeBoots = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.BlackBronzeBoots = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.BlackSteelBoots = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.BlueSteelBoots = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.BronzeBoots = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.CopperBoots = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.CopperPlate, proxy.getArmorRenderID("copper"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.WroughtIronBoots = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.RedSteelBoots = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
-		TFCItems.SteelBoots = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Boots",num), Armor.SteelPlate, proxy.getArmorRenderID("steel"), 3).setUnlocalizedName(Names[i]+" Boots")); num++;i++;
+		TFCItems.BismuthBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.BlackBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFCItemID.BlackBronzeUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.BlackSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor(TFCItemID.BlackSteelUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.BlueSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor(TFCItemID.BlueSteelUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.BronzeUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFCItemID.BronzeUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.CopperUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFCItemID.CopperUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.WroughtIronUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFCItemID.WroughtIronUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.RedSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor(TFCItemID.RedSteelUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves")); i++;
+		TFCItems.SteelUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedGreaves).setUnlocalizedName(Names[i]+" Unfinished Greaves"));
 
 		i = 0;
-		TFCItems.BismuthBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.BlackBronzeUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.BlackSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.BlueSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.BronzeUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.CopperUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.WroughtIronUnfinishedGreaves = 	(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.RedSteelUnfinishedGreaves = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		TFCItems.SteelUnfinishedGreaves = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Greaves",num)).setUnlocalizedName(Names[i]+" Unfinished Greaves")); num++;i++;
-		i = 0;
-		TFCItems.BismuthBronzeGreaves = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.BlackBronzeGreaves = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.BlackSteelGreaves = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.BlueSteelGreaves = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.BronzeGreaves = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.CopperGreaves = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.CopperPlate, proxy.getArmorRenderID("copper"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.WroughtIronGreaves =		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.RedSteelGreaves = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		TFCItems.SteelGreaves = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Greaves",num), Armor.SteelPlate, proxy.getArmorRenderID("steel"), 2).setUnlocalizedName(Names[i]+" Greaves")); num++;i++;
-		i = 0;
-		TFCItems.BismuthBronzeUnfinishedChestplate = 	(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.BlackBronzeUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.BlackSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.BlueSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.BronzeUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.CopperUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.WroughtIronUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.RedSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		TFCItems.SteelUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Chestplate",num)).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); num++;i++;
-		i = 0;
-		TFCItems.BismuthBronzeChestplate =	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.BlackBronzeChestplate = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.BlackSteelChestplate = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.BlueSteelChestplate = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.BronzeChestplate = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.CopperChestplate = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.CopperPlate, proxy.getArmorRenderID("copper"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.WroughtIronChestplate = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.RedSteelChestplate = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		TFCItems.SteelChestplate = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Chestplate",num), Armor.SteelPlate, proxy.getArmorRenderID("steel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); num++;i++;
-		i = 0;
-		TFCItems.BismuthBronzeUnfinishedHelmet = 	(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.BlackBronzeUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.BlackSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.BlueSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.BronzeUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.CopperUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.WroughtIronUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.RedSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		TFCItems.SteelUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Unfinished Helmet",num)).setUnlocalizedName(Names[i]+" Unfinished Helmet")); num++;i++;
-		i = 0;
-		TFCItems.BismuthBronzeHelmet = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.BlackBronzeHelmet = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.BlackSteelHelmet = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.BlueSteelHelmet = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.BronzeHelmet = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.CopperHelmet = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.CopperPlate, proxy.getArmorRenderID("copper"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.WroughtIronHelmet = 	(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.RedSteelHelmet = 		(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
-		TFCItems.SteelHelmet = 			(new ItemTFCArmor(TFC_Settings.getIntFor(config,"item",NamesNS[i]+" Helmet",num), Armor.SteelPlate, proxy.getArmorRenderID("steel"), 0).setUnlocalizedName(Names[i]+" Helmet")); num++;i++;
+		TFCItems.BismuthBronzeGreaves = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeGreaves, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BlackBronzeGreaves = 		(new ItemTFCArmor(TFCItemID.BlackBronzeGreaves, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BlackSteelGreaves = 		(new ItemTFCArmor(TFCItemID.BlackSteelGreaves, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BlueSteelGreaves = 		(new ItemTFCArmor(TFCItemID.BlueSteelGreaves, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.BronzeGreaves = 			(new ItemTFCArmor(TFCItemID.BronzeGreaves, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.CopperGreaves = 			(new ItemTFCArmor(TFCItemID.CopperGreaves, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.WroughtIronGreaves =		(new ItemTFCArmor(TFCItemID.WroughtIronGreaves, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.RedSteelGreaves = 			(new ItemTFCArmor(TFCItemID.RedSteelGreaves, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 2).setUnlocalizedName(Names[i]+" Greaves")); i++;
+		TFCItems.SteelGreaves = 			(new ItemTFCArmor(TFCItemID.SteelGreaves, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 2).setUnlocalizedName(Names[i]+" Greaves"));
 
 		i = 0;
-		TFCItems.BrassSheet = 			new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.GoldSheet = 			new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.LeadSheet = 			new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.NickelSheet = 			new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.PigIronSheet = 		new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.PlatinumSheet = 		new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.SilverSheet = 			new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
-		TFCItems.SterlingSilverSheet = 	new ItemMetalSheet(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+" Sheet",num++)).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.BismuthBronzeUnfinishedChestplate = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.BlackBronzeUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFCItemID.BlackBronzeUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.BlackSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFCItemID.BlackSteelUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.BlueSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFCItemID.BlueSteelUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.BronzeUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFCItemID.BronzeUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.CopperUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFCItemID.CopperUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.WroughtIronUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFCItemID.WroughtIronUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.RedSteelUnfinishedChestplate = 		(new ItemUnfinishedArmor(TFCItemID.RedSteelUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate")); i++;
+		TFCItems.SteelUnfinishedChestplate = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedChestplate).setUnlocalizedName(Names[i]+" Unfinished Chestplate"));
 
 		i = 0;
-		TFCItems.BrassSheet2x = 			new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.GoldSheet2x = 				new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.LeadSheet2x = 				new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.NickelSheet2x = 			new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.PigIronSheet2x = 			new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.PlatinumSheet2x = 			new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
-		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFC_Settings.getIntFor(config,"item",NamesNSO[i]+"Sheet2x",num++)).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.BismuthBronzeChestplate =	(new ItemTFCArmor(TFCItemID.BismuthBronzeChestplate, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BlackBronzeChestplate = 	(new ItemTFCArmor(TFCItemID.BlackBronzeChestplate, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BlackSteelChestplate = 	(new ItemTFCArmor(TFCItemID.BlackSteelChestplate, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BlueSteelChestplate = 		(new ItemTFCArmor(TFCItemID.BlueSteelChestplate, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.BronzeChestplate = 		(new ItemTFCArmor(TFCItemID.BronzeChestplate, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.CopperChestplate = 		(new ItemTFCArmor(TFCItemID.CopperChestplate, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.WroughtIronChestplate = 	(new ItemTFCArmor(TFCItemID.WroughtIronChestplate, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.RedSteelChestplate = 		(new ItemTFCArmor(TFCItemID.RedSteelChestplate, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 1).setUnlocalizedName(Names[i]+" Chestplate")); i++;
+		TFCItems.SteelChestplate = 			(new ItemTFCArmor(TFCItemID.SteelChestplate, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 1).setUnlocalizedName(Names[i]+" Chestplate"));
+
+		i = 0;
+		TFCItems.BismuthBronzeUnfinishedHelmet = 	(new ItemUnfinishedArmor(TFCItemID.BismuthBronzeUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.BlackBronzeUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFCItemID.BlackBronzeUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.BlackSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFCItemID.BlackSteelUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.BlueSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFCItemID.BlueSteelUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.BronzeUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFCItemID.BronzeUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.CopperUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFCItemID.CopperUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.WroughtIronUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFCItemID.WroughtIronUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.RedSteelUnfinishedHelmet = 		(new ItemUnfinishedArmor(TFCItemID.RedSteelUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet")); i++;
+		TFCItems.SteelUnfinishedHelmet = 			(new ItemUnfinishedArmor(TFCItemID.SteelUnfinishedHelmet).setUnlocalizedName(Names[i]+" Unfinished Helmet"));
+
+		i = 0;
+		TFCItems.BismuthBronzeHelmet = 	(new ItemTFCArmor(TFCItemID.BismuthBronzeHelmet, Armor.BismuthBronzePlate, proxy.getArmorRenderID("bismuthbronze"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BlackBronzeHelmet = 	(new ItemTFCArmor(TFCItemID.BlackBronzeHelmet, Armor.BlackBronzePlate, proxy.getArmorRenderID("blackbronze"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BlackSteelHelmet = 	(new ItemTFCArmor(TFCItemID.BlackSteelHelmet, Armor.BlackSteelPlate, proxy.getArmorRenderID("blacksteel"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BlueSteelHelmet = 		(new ItemTFCArmor(TFCItemID.BlueSteelHelmet, Armor.BlueSteelPlate, proxy.getArmorRenderID("bluesteel"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.BronzeHelmet = 		(new ItemTFCArmor(TFCItemID.BronzeHelmet, Armor.BronzePlate, proxy.getArmorRenderID("bronze"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.CopperHelmet = 		(new ItemTFCArmor(TFCItemID.CopperHelmet, Armor.CopperPlate, proxy.getArmorRenderID("copper"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.WroughtIronHelmet = 	(new ItemTFCArmor(TFCItemID.WroughtIronHelmet, Armor.WroughtIronPlate, proxy.getArmorRenderID("wroughtiron"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.RedSteelHelmet = 		(new ItemTFCArmor(TFCItemID.RedSteelHelmet, Armor.RedSteelPlate, proxy.getArmorRenderID("redsteel"), 0).setUnlocalizedName(Names[i]+" Helmet")); i++;
+		TFCItems.SteelHelmet = 			(new ItemTFCArmor(TFCItemID.SteelHelmet, Armor.SteelPlate, proxy.getArmorRenderID("steel"), 0).setUnlocalizedName(Names[i]+" Helmet")); 
+
+		i = 0;
+		TFCItems.BrassSheet = 			new ItemMetalSheet(TFCItemID.BrassSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.GoldSheet = 			new ItemMetalSheet(TFCItemID.GoldSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.LeadSheet = 			new ItemMetalSheet(TFCItemID.LeadSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.NickelSheet = 			new ItemMetalSheet(TFCItemID.NickelSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.PigIronSheet = 		new ItemMetalSheet(TFCItemID.PigIronSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.PlatinumSheet = 		new ItemMetalSheet(TFCItemID.PlatinumSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.SilverSheet = 			new ItemMetalSheet(TFCItemID.SilverSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+		TFCItems.SterlingSilverSheet = 	new ItemMetalSheet(TFCItemID.SterlingSilverSheet).setUnlocalizedName(NamesNSO[i++]+" Sheet");
+
+		i = 0;
+		TFCItems.BrassSheet2x = 			new ItemMetalSheet2x(TFCItemID.BrassSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.GoldSheet2x = 				new ItemMetalSheet2x(TFCItemID.GoldSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.LeadSheet2x = 				new ItemMetalSheet2x(TFCItemID.LeadSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.NickelSheet2x = 			new ItemMetalSheet2x(TFCItemID.NickelSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.PigIronSheet2x = 			new ItemMetalSheet2x(TFCItemID.PigIronSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.PlatinumSheet2x = 			new ItemMetalSheet2x(TFCItemID.PlatinumSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFCItemID.SilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFCItemID.SterlingSilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 	}
 
 	public static Item[] Meals;
