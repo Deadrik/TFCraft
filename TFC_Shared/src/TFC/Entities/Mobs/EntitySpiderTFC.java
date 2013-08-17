@@ -2,6 +2,7 @@ package TFC.Entities.Mobs;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
@@ -14,7 +15,7 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 		super(par1World);
 		this.setSize(0.5F, 0.3F);
 	}
-
+	
 	@Override
 	protected void func_110147_ax()
 	{
@@ -28,4 +29,12 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 		return EnumDamageType.PIERCING;
 	}
 
+/*	Moves Spawning Underground
+
+	public boolean getCanSpawnHere()
+    {
+		int i = MathHelper.floor_double(this.posY);
+        return super.getCanSpawnHere() && i < 144;
+    }
+*/	
 }

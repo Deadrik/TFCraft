@@ -2,6 +2,7 @@ package TFC.Entities.Mobs;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
@@ -18,6 +19,16 @@ public class EntityEndermanTFC extends EntityEnderman implements ICausesDamage
 
 	}
 
+	/**
+	 * Moves Spawning Underground
+	 */
+
+	public boolean getCanSpawnHere()
+    {
+		int i = MathHelper.floor_double(this.posY);
+        return super.getCanSpawnHere() && i < 144;
+    }
+	
 	@Override
 	protected void func_110147_ax()
 	{

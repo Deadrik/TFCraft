@@ -83,6 +83,16 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 	}
 
 	/**
+	 * Moves Spawning Underground
+	 */
+
+	public boolean getCanSpawnHere()
+    {
+		int i = MathHelper.floor_double(this.posY);
+        return super.getCanSpawnHere() && i < 144;
+    }
+	
+	/**
 	 * Returns true if the newer Entity AI code should be run
 	 */
 	@Override
