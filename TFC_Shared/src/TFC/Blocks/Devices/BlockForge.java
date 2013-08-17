@@ -6,7 +6,6 @@ import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -19,6 +18,7 @@ import TFC.TerraFirmaCraft;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.TFC_Core;
 import TFC.Items.Tools.ItemFirestarter;
+import TFC.Items.Tools.ItemFlintSteel;
 import TFC.TileEntities.TileEntityForge;
 
 public class BlockForge extends BlockTerraContainer
@@ -52,7 +52,7 @@ public class BlockForge extends BlockTerraContainer
 		{
 			return true;
 		} 
-		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintAndSteel))
+		else if(equippedItem != null && (equippedItem.getItem() instanceof ItemFirestarter || equippedItem.getItem() instanceof ItemFlintSteel))
 		{
 			if((TileEntityForge)world.getBlockTileEntity(i, j, k) != null)
 			{
@@ -100,8 +100,9 @@ public class BlockForge extends BlockTerraContainer
 	@Override
 	public Icon getIcon(int i, int j)
 	{
-		if(j > 0)
+		if(j > 0) {
 			return textureOn;
+		}
 
 		return textureOff;
 	}
@@ -139,7 +140,7 @@ public class BlockForge extends BlockTerraContainer
 					world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
 					world.isBlockNormalCube(x, y-1, z) && (world.isBlockNormalCube(x+1, y, z) && world.isBlockNormalCube(x-1, y, z) && 
 							world.isBlockNormalCube(x, y, z+1) && world.isBlockNormalCube(x, y, z-1)));
-			
+
 			boolean rockXP = world.getBlockId(x+1, y, z) == TFCBlocks.stoneSlabs.blockID || 
 					(world.getBlockMaterial(x+1, y, z) == Material.rock && world.isBlockNormalCube(x+1, y, z));
 			boolean rockXN = world.getBlockId(x-1, y, z) == TFCBlocks.stoneSlabs.blockID || 
@@ -148,11 +149,11 @@ public class BlockForge extends BlockTerraContainer
 					(world.getBlockMaterial(x, y, z+1) == Material.rock && world.isBlockNormalCube(x, y, z+1));
 			boolean rockZN = world.getBlockId(x, y, z-1) == TFCBlocks.stoneSlabs.blockID || 
 					(world.getBlockMaterial(x, y, z-1) == Material.rock && world.isBlockNormalCube(x, y, z-1));
-			
-			
+
+
 			boolean validSlabs = TFC_Core.isNorthSolid(world, x, y, z) && TFC_Core.isSouthSolid(world, x, y, z) && 
 					TFC_Core.isEastSolid(world, x, y, z) && TFC_Core.isWestSolid(world, x, y, z);	
-					
+
 			if(!(rockXP && rockXN && rockZP && rockZN) || !validSlabs)	
 			{
 				((TileEntityForge)world.getBlockTileEntity(x, y, z)).ejectContents();
@@ -226,12 +227,13 @@ public class BlockForge extends BlockTerraContainer
 	public int getLightValue(IBlockAccess world, int x, int y, int z) 
 	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if(meta == 0)
+		if(meta == 0) {
 			return 0;
-		else if(meta == 1)
+		} else if(meta == 1) {
 			return 15;
-		else
+		} else {
 			return 10;
+		}
 	}
 
 	/**

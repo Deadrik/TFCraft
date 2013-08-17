@@ -27,7 +27,7 @@ public class BlockFirepit extends BlockTerraContainer
 
 	Icon textureOn;
 	Icon textureOff;
-	
+
 	public BlockFirepit(int i)
 	{
 		super(i, Material.ground);
@@ -54,7 +54,7 @@ public class BlockFirepit extends BlockTerraContainer
 		{
 			return true;
 		} 
-		else if(itemid == TFCItems.FireStarter.itemID)
+		else if(itemid == TFCItems.FireStarter.itemID || itemid == TFCItems.FlintSteel.itemID )
 		{
 			if((TileEntityFirepit)world.getBlockTileEntity(i, j, k) != null)
 			{
@@ -89,33 +89,34 @@ public class BlockFirepit extends BlockTerraContainer
 	@Override
 	public Icon getIcon(int i, int j)
 	{
-		if(j > 0)
+		if(j > 0) {
 			return textureOn;
-		
+		}
+
 		return textureOff;
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
-    {
-        if(entity instanceof EntityItem && ((EntityItem)entity).getEntityItem().getItem() instanceof ItemLogs)
-        {
-            if((TileEntityFirepit)world.getBlockTileEntity(i, j, k)!=null)
-            {
-                ItemStack is = ((EntityItem)entity).getEntityItem();
-                TileEntityFirepit te;
-                te = (TileEntityFirepit)world.getBlockTileEntity(i, j, k);
-                if(te.fireItemStacks[0] == null)
-                {
-                    if(is.stackSize == 1)
-                    {
-                        te.fireItemStacks[0] = is;
-                        entity.setDead();
-                    }
-                }
-            }   
-        }
-    }
+	{
+		if(entity instanceof EntityItem && ((EntityItem)entity).getEntityItem().getItem() instanceof ItemLogs)
+		{
+			if((TileEntityFirepit)world.getBlockTileEntity(i, j, k)!=null)
+			{
+				ItemStack is = ((EntityItem)entity).getEntityItem();
+				TileEntityFirepit te;
+				te = (TileEntityFirepit)world.getBlockTileEntity(i, j, k);
+				if(te.fireItemStacks[0] == null)
+				{
+					if(is.stackSize == 1)
+					{
+						te.fireItemStacks[0] = is;
+						entity.setDead();
+					}
+				}
+			}   
+		}
+	}
 
 	@Override
 	public int getRenderType()
@@ -128,12 +129,12 @@ public class BlockFirepit extends BlockTerraContainer
 	{
 		return false;
 	}
-	
+
 	@Override
 	public int quantityDropped(Random par1Random)
-    {
-        return 0;
-    }
+	{
+		return 0;
+	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
@@ -152,11 +153,11 @@ public class BlockFirepit extends BlockTerraContainer
 		int meta = world.getBlockMetadata(i, j, k);
 		if (meta >= 1)
 		{
-		    if (random.nextInt(24) == 0)
-	        {
-		        world.playSoundEffect(i,j,k, "fire.fire", 0.4F + (random.nextFloat()/2), 0.7F + random.nextFloat());
-	        }
-		    
+			if (random.nextInt(24) == 0)
+			{
+				world.playSoundEffect(i,j,k, "fire.fire", 0.4F + (random.nextFloat()/2), 0.7F + random.nextFloat());
+			}
+
 			float f = i + 0.5F;
 			float f1 = j + 0.1F + random.nextFloat() * 6F / 16F;
 			float f2 = k + 0.5F;
@@ -183,80 +184,81 @@ public class BlockFirepit extends BlockTerraContainer
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) 
-    {
+	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if(meta == 0)
+		if(meta == 0) {
 			return 0;
-		else if(meta == 1)
+		} else if(meta == 1) {
 			return 10;
-		else
+		} else {
 			return 15;
-    }
-	
+		}
+	}
+
 	/**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
+	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
+	 * cleared to be reused)
+	 */
 	@Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
-        return null;
-    }
-    
-    @Override
-    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {       
-        Eject(world,i,j,k);
-    }
-    
-    @Override
-    public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
-        Eject(par1World,par2,par3,par4);
-    }
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+	{
+		return null;
+	}
 
-    @Override
-    public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
-        Eject(par1World,par2,par3,par4);
-    }
+	@Override
+	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
+	{       
+		Eject(world,i,j,k);
+	}
 
-    //public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
-    
-    public void Eject(World par1World, int par2, int par3, int par4)
-    {
-        if((TileEntityFirepit)par1World.getBlockTileEntity(par2, par3, par4)!=null)
-        {
-            TileEntityFirepit tileentityanvil;
-            tileentityanvil = (TileEntityFirepit)par1World.getBlockTileEntity(par2, par3, par4);
-            tileentityanvil.ejectContents();
-            par1World.removeBlockTileEntity(par2, par3, par4);
-        }
-    }
-    
-    @Override
-    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
-    {
-        return true;
-    }
+	@Override
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		Eject(par1World,par2,par3,par4);
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+		Eject(par1World,par2,par3,par4);
+	}
+
+	//public void onBlockRemoval(World par1World, int par2, int par3, int par4) {Eject(par1World,par2,par3,par4);}
+
+	public void Eject(World par1World, int par2, int par3, int par4)
+	{
+		if((TileEntityFirepit)par1World.getBlockTileEntity(par2, par3, par4)!=null)
+		{
+			TileEntityFirepit tileentityanvil;
+			tileentityanvil = (TileEntityFirepit)par1World.getBlockTileEntity(par2, par3, par4);
+			tileentityanvil.ejectContents();
+			par1World.removeBlockTileEntity(par2, par3, par4);
+		}
+	}
+
+	@Override
+	public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int i, int j, int k)
+	{
+		return true;
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) 
 	{
 		return new TileEntityFirepit();
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		textureOn = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Firepit On");
 		textureOff = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Firepit Off");
-    }
+	}
 }
