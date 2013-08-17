@@ -12,11 +12,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.ISize;
 import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
 import TFC.TileEntities.TileEntityPottery;
 
-public class ItemFlintSteel extends ItemFlintAndSteel{
+public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
+{
 
 	public ItemFlintSteel(int par1) {
 		super(par1);
@@ -70,8 +74,9 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 
 				itemstack.setItemDamage(itemstack.getItemDamage()+1);
 
-				if(itemstack.getItemDamage() >= itemstack.getMaxDamage())
+				if(itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
 					itemstack.stackSize = 0;
+				}
 
 
 				if(numsticks >= 3)
@@ -90,8 +95,9 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 					}
 					itemstack.setItemDamage(itemstack.getItemDamage()+1);
 					world.setBlock(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 0x2);
-					if(world.isRemote)
+					if(world.isRemote) {
 						world.markBlockForUpdate(x, y+1, z);
+					}
 				}
 				else if(numcoal >= 7 && world.getBlockMaterial(x, y, z) == Material.rock && 
 						world.getBlockMaterial(x+1, y+1, z) == Material.rock && world.getBlockMaterial(x-1, y+1, z) == Material.rock && 
@@ -146,6 +152,24 @@ public class ItemFlintSteel extends ItemFlintAndSteel{
 		}
 		return false;
 	}
-	
-	
+
+	@Override
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.VERYSMALL;
+	}
+
+	@Override
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
+		return EnumWeight.LIGHT;
+	}
+
+	@Override
+	public boolean canStack() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }
