@@ -1,5 +1,6 @@
 package TFC.Render.Models;
 
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSheep1;
 import net.minecraft.entity.Entity;
 
@@ -9,9 +10,196 @@ import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 public class ModelSheep1TFC extends ModelSheep1
 {
+	
+	ModelRenderer horn1;
+	ModelRenderer horn2;
+	ModelRenderer horn3;
+	ModelRenderer horn4;
+	ModelRenderer horn5;
+	ModelRenderer horn6;
+	ModelRenderer horn1b;
+	ModelRenderer horn2b;
+	ModelRenderer horn3b;
+	ModelRenderer horn4b;
+	ModelRenderer horn5b;
+	ModelRenderer horn6b;
+	
+	ModelRenderer ear;
+	ModelRenderer earb;
 	public ModelSheep1TFC()
 	{
 		super();
+		/*
+		horn1 = new ModelRenderer(this,28,14);
+		horn1.addBox(0F, 0F, 0F, 2, 3, 2, 0);
+		horn1.setRotationPoint(0F, -10F, 0F);
+		horn1.rotateAngleX = (float)(-28f*Math.PI/180f);
+		horn1.rotateAngleY = (float)(70f*Math.PI/180f);
+		horn1.rotateAngleZ = (float)(155f*Math.PI/180f);
+		
+		horn2 = new ModelRenderer(this,28,14);
+		horn2.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn2.setRotationPoint(0F, -3F, 0F);
+		horn2.rotateAngleX = (float)(-10f*Math.PI/180f);
+		horn2.rotateAngleY = (float)(-110f*Math.PI/180f);
+		horn2.rotateAngleZ = (float)(-160f*Math.PI/180f);
+		
+		horn3 = new ModelRenderer(this,28,14);
+		horn3.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn3.setRotationPoint(0F, -2F, 0F);
+		horn3.rotateAngleX = (float)(-52f*Math.PI/180f);
+		horn3.rotateAngleY = (float)((-20f)*Math.PI/180f);
+		horn3.rotateAngleZ = (float)((5f)*Math.PI/180f);
+		
+		horn4 = new ModelRenderer(this,28,14);
+		horn4.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn4.setRotationPoint(0F, -2F, 0F);
+		horn4.rotateAngleX = (float)(-76f*Math.PI/180f);
+		horn4.rotateAngleY = (float)(240f*Math.PI/180f);
+		horn4.rotateAngleZ = (float)(50f*Math.PI/180f);
+		
+		horn5 = new ModelRenderer(this,28,14);
+		horn5.addBox(0F, 0F, 0F, 2, 2, 1, 0);
+		horn5.setRotationPoint(0F, -2F, 0F);
+		horn5.rotateAngleX = (float)(90f*Math.PI/180f);
+		horn5.rotateAngleY = (float)(-90f*Math.PI/180f);
+		horn5.rotateAngleZ = (float)(28f*Math.PI/180f);
+		
+		horn6 = new ModelRenderer(this,28,14);
+		horn6.addBox(0F, 0F, 0F, 2, 1, 1, 0);
+		horn6.setRotationPoint(0F, -2F, 0F);
+		horn6.rotateAngleX = (float)(90f*Math.PI/180f);
+		//horn6.rotateAngleY = (float)(0f*Math.PI/180f);
+		horn6.rotateAngleZ = (float)(-213f*Math.PI/180f);
+		
+		horn5.addChild(horn6);
+		horn4.addChild(horn5);
+		horn3.addChild(horn4);
+		horn2.addChild(horn3);
+		horn1.addChild(horn2);
+		head.addChild(horn1);
+		
+		float locHornX1 = -3;
+		float locHornY1 = 4;
+		float locHornZ1 = -3;
+		
+		ear = new ModelRenderer(this,28,14);
+		ear.addBox(0F, 0F, 0F, 3, 2, 1, -0.2f);
+		ear.setRotationPoint(-3.5f + locHornX1,locHornY1 -8F,locHornZ1 + 0.5F);
+		
+		horn1 = new ModelRenderer(this,28,14);
+		horn1.addBox(0F, 0F, 0F, 2, 3, 2, 0);
+		horn1.rotateAngleX = (float)(-20f*Math.PI/180f);
+		horn1.rotateAngleY = (float)(-20f*Math.PI/180f);
+		horn1.rotateAngleZ = (float)(0f*Math.PI/180f);
+		horn1.setRotationPoint(0F + locHornX1,locHornY1 -10F,locHornZ1 + 0F);
+		
+		horn2 = new ModelRenderer(this,28,14);
+		horn2.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn2.rotateAngleX = (float)(38f*Math.PI/180f);
+		horn2.rotateAngleY = (float)(-40f*Math.PI/180f);
+		horn2.rotateAngleZ = (float)(0f*Math.PI/180f);
+		horn2.setRotationPoint(0F + locHornX1,locHornY1 -10F,locHornZ1 + 0F);
+		
+		horn3 = new ModelRenderer(this,28,14);
+		horn3.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn3.rotateAngleX = (float)(-14f*Math.PI/180f);
+		horn3.rotateAngleY = (float)((-60f)*Math.PI/180f);
+		horn3.rotateAngleZ = (float)((0f)*Math.PI/180f);
+		horn3.setRotationPoint(-1F + locHornX1,locHornY1 -11F,locHornZ1 + 1F);
+		
+		horn4 = new ModelRenderer(this,28,14);
+		horn4.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn4.rotateAngleX = (float)(-90f*Math.PI/180f);
+		horn4.rotateAngleY = (float)(0f*Math.PI/180f);
+		horn4.rotateAngleZ = (float)(50f*Math.PI/180f);
+		horn4.setRotationPoint(-2.5F + locHornX1,locHornY1 -10.5F,locHornZ1 + 3.7F);
+		
+		horn5 = new ModelRenderer(this,28,14);
+		horn5.addBox(0F, 0F, 0F, 2, 2, 1, 0);		
+		horn5.rotateAngleX = (float)(78f*Math.PI/180f);
+		horn5.rotateAngleY = (float)(0f*Math.PI/180f);
+		horn5.rotateAngleZ = (float)(90f*Math.PI/180f);
+		horn5.setRotationPoint(-4F + locHornX1,locHornY1 -9F,locHornZ1 + 1.5F);
+		
+		horn6 = new ModelRenderer(this,28,14);
+		horn6.addBox(0F, 0F, 0F, 1, 2, 1, 0);		
+		horn6.rotateAngleX = (float)(-55f*Math.PI/180f);
+		horn6.rotateAngleY = (float)(0f*Math.PI/180f);
+		horn6.rotateAngleZ = (float)(0f*Math.PI/180f);
+		horn6.setRotationPoint(-4F + locHornX1,locHornY1 -7.5F,locHornZ1 + 2.5F);
+		
+		head.addChild(horn6);
+		head.addChild(horn5);
+		head.addChild(horn4);
+		head.addChild(horn3);
+		head.addChild(horn2);
+		head.addChild(horn1);
+		head.addChild(ear);
+		
+		locHornX1 = 5;
+		locHornY1 = 4;
+		locHornZ1 = -3;
+		
+		earb = new ModelRenderer(this,28,14);
+		earb.addBox(0F, 0F, 0F, 3, 2, 1, -0.2f);
+		earb.setRotationPoint(-3.5f + locHornX1,locHornY1 -8F,locHornZ1 + 0.5F);
+		
+		horn1b = new ModelRenderer(this,28,14);
+		horn1b.addBox(0F, 0F, 0F, 2, 3, 2, 0);
+		horn1b.setRotationPoint(0F,-2F,0F);
+		horn1b.rotateAngleX = (float)(-20f*Math.PI/180f);
+		horn1b.rotateAngleY = -(float)(-20f*Math.PI/180f);
+		horn1b.rotateAngleZ = -(float)(0f*Math.PI/180f);
+		horn1b.setRotationPoint(0F + locHornX1,locHornY1 -10F,locHornZ1 + 0F);
+		
+		horn2b = new ModelRenderer(this,28,14);
+		horn2b.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn2b.setRotationPoint(-1F,0F,-1F);
+		horn2b.rotateAngleX = -(float)(38f*Math.PI/180f);
+		horn2b.rotateAngleY = (float)(-40f*Math.PI/180f);
+		horn2b.rotateAngleZ = -(float)(0f*Math.PI/180f);
+		horn2b.setRotationPoint(0F + locHornX1,locHornY1 -10F,locHornZ1 + 0F);
+		
+		horn3b = new ModelRenderer(this,28,14);
+		horn3b.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn3b.setRotationPoint(-1F,0F,-1F);
+		horn3b.rotateAngleX = (float)(-14f*Math.PI/180f);
+		horn3b.rotateAngleY = -(float)((-60f)*Math.PI/180f);
+		horn3b.rotateAngleZ = -(float)((0f)*Math.PI/180f);
+		horn3b.setRotationPoint(1F + locHornX1,locHornY1 -11F,locHornZ1 + 1F);
+		
+		horn4b = new ModelRenderer(this,28,14);
+		horn4b.addBox(0F, 0F, 0F, 2, 2, 2, 0);
+		horn4b.setRotationPoint(-1F,0F,-1F);
+		horn4b.rotateAngleX = (float)(-90f*Math.PI/180f);
+		horn4b.rotateAngleY = -(float)(0f*Math.PI/180f);
+		horn4b.rotateAngleZ = -(float)(50f*Math.PI/180f);
+		horn4b.setRotationPoint(1.5F + locHornX1,locHornY1 -10.5F,locHornZ1 + 3.7F);
+		
+		horn5b = new ModelRenderer(this,28,14);
+		horn5b.addBox(0F, 0F, 0F, 2, 2, 1, 0);
+		horn5b.setRotationPoint(-1F,0F,-0.5F);
+		horn5b.rotateAngleX = (float)(78f*Math.PI/180f);
+		horn5b.rotateAngleY = -(float)(0f*Math.PI/180f);
+		horn5b.rotateAngleZ = -(float)(90f*Math.PI/180f);
+		horn5b.setRotationPoint(4F + locHornX1,locHornY1 -9F,locHornZ1 + 1.5F);
+		
+		horn6b = new ModelRenderer(this,28,14);
+		horn6b.addBox(0F, 0F, 0F, 1, 2, 1, 0);
+		horn6b.setRotationPoint(-0.5F,0F,-0.5F);
+		horn6b.rotateAngleX = (float)(-55f*Math.PI/180f);
+		horn6b.rotateAngleY = -(float)(0f*Math.PI/180f);
+		horn6b.rotateAngleZ = -(float)(0f*Math.PI/180f);
+		horn6b.setRotationPoint(4F + locHornX1,locHornY1 -7.5F,locHornZ1 + 2.5F);*/
+		
+		//head.addChild(horn6b);
+		//head.addChild(horn5b);
+		//head.addChild(horn4b);
+		//head.addChild(horn3b);
+		//head.addChild(horn2b);
+		//head.addChild(horn1b);
+		//head.addChild(earb);
 	}
 
 	@Override

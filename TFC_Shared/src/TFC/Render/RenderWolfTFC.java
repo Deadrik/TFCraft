@@ -1,10 +1,16 @@
 package TFC.Render;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderWolf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
+import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntityWolfTFC;
 
 public class RenderWolfTFC extends RenderWolf
 {
@@ -26,4 +32,11 @@ public class RenderWolfTFC extends RenderWolf
 		this.shadowSize = 0.35f + (TFC_Core.getPercentGrown((IAnimal)par1Entity)*0.35f);
 		super.doRender(par1Entity, par2, par4, par6, par8, par9);
 	}
+
+	@Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    {
+		float scale = (((EntityWolfTFC)par1EntityLivingBase).size_mod/2)+0.5f;
+		GL11.glScalef(scale, scale, scale);
+    }
 }

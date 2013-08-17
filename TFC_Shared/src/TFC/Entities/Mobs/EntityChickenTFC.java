@@ -7,11 +7,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 
@@ -40,7 +42,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 
 		hunger = 168000;
 		animalID = TFC_Time.getTotalTicks() + entityId;
-		mateSizeMod = 0;
+		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 
@@ -49,24 +51,24 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
 
-	public EntityChickenTFC(World world, IAnimal mother)
+	public EntityChickenTFC(World world, IAnimal mother, float f_size)
 	{
 		this(world);
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + 1)/1.9F);
+		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + f_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
 	@Override
@@ -75,6 +77,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		super.entityInit();
 		this.dataWatcher.addObject(13, Integer.valueOf(0));
 		this.dataWatcher.addObject(14, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
 	}
 
 	/**
@@ -173,7 +176,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		size_mod = nbt.getFloat ("Size Modifier");
 		hunger = nbt.getInteger ("Hunger");
 		mateSizeMod = nbt.getFloat("MateSize");
-		this.setGrowingAge(nbt.getInteger ("Age"));
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -191,8 +194,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
-
-		this.dropItem(Item.feather.itemID,(int) (this.size_mod * (5+this.rand.nextInt(10))));
+		float ageMod = TFC_Core.getPercentGrown(this);
+		this.dropItem(Item.feather.itemID,(int) (ageMod * this.size_mod * (5+this.rand.nextInt(10))));
 
 		if(isAdult())
 		{
@@ -204,6 +207,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			{
 				this.dropItem(Item.chickenRaw.itemID, 1);
 			}
+			this.dropItem(Item.bone.itemID, rand.nextInt(2)+1);
 		}
 	}
 
@@ -221,22 +225,18 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		return !isAdult();
 	}
 
-	@Override
-	public GenderEnum getGender() 
-	{
-		return GenderEnum.genders[sex];
-	}
+
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityChickenTFC(worldObj, this);
+		return new EntityChickenTFC(worldObj, this, mateSizeMod);
 	}
 
 	@Override
 	public int getBirthDay() 
 	{
-		return this.dataWatcher.getWatchableObjectInt(12);
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override
@@ -318,5 +318,38 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public void setHunger(int h) 
 	{
 		hunger = h;
+	}
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[getSex()];
+	}
+	@Override
+	public int getSex() {
+		return dataWatcher.getWatchableObjectInt(13);
+	}
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+		return new EntityChickenTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+	}
+	@Override
+	public void setAge(int par1) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+	}
+	
+	/**
+	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+	 */
+	@Override
+	public boolean interact(EntityPlayer par1EntityPlayer)
+	{
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			//if(getGender()==GenderEnum.FEMALE && pregnant){
+			//	par1EntityPlayer.addChatMessage("Pregnant");
+			//}
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+		return super.interact(par1EntityPlayer);
 	}
 }

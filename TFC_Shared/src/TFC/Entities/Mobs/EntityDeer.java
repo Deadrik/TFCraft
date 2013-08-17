@@ -14,9 +14,12 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
@@ -29,12 +32,13 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	private boolean running;
 
 	protected long animalID;
-	protected int sex;
+	protected int sex = 0;
 	protected int hunger;
 	protected long hasMilkTime;
 	protected int age;
 	protected boolean pregnant;
 	protected int pregnancyTime;
+	protected int pregnancyRequiredTime;
 	protected long conception;
 	protected float mateSizeMod;
 	public float size_mod = 1f;
@@ -46,6 +50,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		running = false;
 		this.setSize(0.9F, 1.3F);
 		float var2 = 0.23F / 1.1F;
+		sex = rand.nextInt(2);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
@@ -62,6 +67,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		//this.tasks.addTask(8, new EntityAILookIdle(this));
 
+		pregnancyRequiredTime = 4 * TFC_Time.daysInMonth;
+		
 		int degreeOfDiversion = 1;
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 
@@ -70,7 +77,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 	}
 	public EntityDeer(World par1World, IAnimal mother, float F_size)
 	{
@@ -81,7 +88,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
 	/**
@@ -100,6 +107,21 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 
 	public boolean getRunning(){
 		return running;
+	}
+	
+	public void syncData()
+	{
+		if(dataWatcher!= null)
+		{
+			if(!this.worldObj.isRemote){
+				this.dataWatcher.updateObject(13, Integer.valueOf(sex));
+				this.dataWatcher.updateObject(14, Float.valueOf(size_mod));
+			}
+			else{
+				sex = this.dataWatcher.getWatchableObjectInt(13);
+				size_mod = this.dataWatcher.func_111145_d(14);
+			}
+		}
 	}
 
 	public void setRunning(boolean r){
@@ -121,6 +143,32 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			}
 		}*/
 
+		syncData();
+		
+		if(isAdult()){
+			setGrowingAge(0);
+		}
+		else{
+			setGrowingAge(-1);
+		}
+		if(isPregnant()) 
+		{
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyRequiredTime)
+			{
+				EntityCowTFC baby = (EntityCowTFC) createChildTFC(this);
+				baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+				baby.rotationYawHead = baby.rotationYaw;
+				baby.renderYawOffset = baby.rotationYaw;
+				worldObj.spawnEntityInWorld(baby);
+				baby.setAge((int)TFC_Time.getTotalDays());
+				pregnant = false;
+			}
+		}
+
+		if (hunger > 144000 && rand.nextInt (100) == 0 && func_110143_aJ() < TFC_Core.getEntityMaxHealth(this) && !isDead)
+		{
+			this.heal(1);
+		}
 		TFC_Core.PreventEntityDataUpdate = true;
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable
@@ -141,6 +189,9 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	{
 		super.entityInit();
 		this.dataWatcher.addObject(16, new Byte((byte)0));
+		this.dataWatcher.addObject(13, new Integer(0));
+		this.dataWatcher.addObject(14, new Float(1));
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
 	}
 
 	/**
@@ -149,6 +200,11 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
+		if(isAdult())
+		{
+			this.dropItem(TFCItems.Hide.itemID,1);
+			this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
+		}
 	}
 
 	/**
@@ -166,6 +222,13 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
 		return super.interact(par1EntityPlayer);
 	}
 
@@ -173,22 +236,38 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setBoolean("Sheared", this.getSheared());
-		par1NBTTagCompound.setByte("Color", (byte)this.getFleeceColor());
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger ("Sex", sex);
+		nbt.setLong ("Animal ID", animalID);
+		nbt.setFloat ("Size Modifier", size_mod);
+		nbt.setInteger ("Hunger", hunger);
+		nbt.setBoolean("Pregnant", pregnant);
+		nbt.setFloat("MateSize", mateSizeMod);
+		nbt.setLong("ConceptionTime",conception);
+		nbt.setInteger("Age", getBirthDay());
+		nbt.setBoolean("Sheared", this.getSheared());
+		nbt.setByte("Color", (byte)this.getFleeceColor());
 	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+	public void readEntityFromNBT(NBTTagCompound nbt)
 	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		this.setSheared(par1NBTTagCompound.getBoolean("Sheared"));
-		this.setFleeceColor(par1NBTTagCompound.getByte("Color"));
+		super.readEntityFromNBT(nbt);
+		animalID = nbt.getLong ("Animal ID");
+		sex = nbt.getInteger ("Sex");
+		size_mod = nbt.getFloat ("Size Modifier");
+		hunger = nbt.getInteger ("Hunger");
+		pregnant = nbt.getBoolean("Pregnant");
+		mateSizeMod = nbt.getFloat("MateSize");
+		conception = nbt.getLong("ConceptionTime");
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
+		this.setSheared(nbt.getBoolean("Sheared"));
+		this.setFleeceColor(nbt.getByte("Color"));
 	}
 
 	/**
@@ -271,18 +350,6 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public void eatGrassBonus()
 	{
 		this.setSheared(false);
-
-		if (this.isChild())
-		{
-			int var1 = this.getGrowingAge() + 1200;
-
-			if (var1 > 0)
-			{
-				var1 = 0;
-			}
-
-			this.setGrowingAge(var1);
-		}
 	}
 
 	@Override
@@ -299,11 +366,6 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		return !isAdult();
 	}
 
-	@Override
-	public GenderEnum getGender() 
-	{
-		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
-	}
 
 	/*
 	@Override
@@ -322,7 +384,7 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	public int getBirthDay() 
 	{
-		return this.dataWatcher.getWatchableObjectInt(12);
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override
@@ -414,6 +476,23 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	public void setHunger(int h) 
 	{
 		hunger = h;
+	}
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[getSex()];
+	}
+	@Override
+	public int getSex() {
+		return dataWatcher.getWatchableObjectInt(13);
+	}
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+		return new EntityDeer(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+	}
+	@Override
+	public void setAge(int par1) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 	}
 
 }

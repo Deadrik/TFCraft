@@ -264,7 +264,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
                         fireItemStacks[i].stackTagCompound = nbt;
                     }
                 }
-                else
+                else if(index.hasOutput())
                 {
                     ItemStack output = index.getOutput(inputCopy, R);
                     int count = 1;

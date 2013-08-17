@@ -1,5 +1,6 @@
 package TFC.API.Entities;
 
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 
 public interface IAnimal
@@ -11,6 +12,8 @@ public interface IAnimal
 	}
 
 	public GenderEnum getGender();
+	
+	public int getSex();
 
 	public int getBirthDay();
 	/**
@@ -27,6 +30,8 @@ public interface IAnimal
 	public float getSize();
 
 	public boolean isPregnant();
+	
+	public EntityAgeable createChildTFC(EntityAgeable entityageable);
 
 	//	It would be nice to call this isInLove() except that would shadow
 	//	EntityAnimal.isInLove() causing MCP to obfuscate this method, which
@@ -43,6 +48,8 @@ public interface IAnimal
 	public void mate(IAnimal animal);
 
 	public long getAnimalID();
+	
+	public void setAge(int par1);
 
 	public void setAnimalID(long id);
 

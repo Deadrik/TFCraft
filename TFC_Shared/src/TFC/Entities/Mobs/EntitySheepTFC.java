@@ -7,12 +7,14 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
@@ -71,7 +73,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 		//For Testing Only(makes spawned animals into babies)
 		//this.setGrowingAge((int) TFC_Time.getTotalDays());
 	}
@@ -87,7 +89,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
 	@Override
@@ -96,6 +98,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		super.entityInit();
 		this.dataWatcher.addObject(13, new Integer(0));
 		this.dataWatcher.addObject(14, new Float(1));
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
 	}
 
 	@Override
@@ -199,18 +202,20 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
+		float ageMod = TFC_Core.getPercentGrown(this);
 		if(this.isAdult()){
 			if(!this.getSheared()) {
 				this.entityDropItem(new ItemStack(TFCItems.SheepSkin,1), 0.0F);
 			} else {
 				this.dropItem(TFCItems.Hide.itemID,1);
 			}
+			this.dropItem(Item.bone.itemID, rand.nextInt(5)+2);
 		}
 
 		if (this.isBurning()) {
-			this.dropItem(TFCItems.muttonCooked.itemID,(int)(size_mod*(5+rand.nextInt(5))));
+			this.dropItem(TFCItems.muttonCooked.itemID,(int)(ageMod*this.size_mod *(5+rand.nextInt(5))));
 		} else {
-			this.dropItem(TFCItems.muttonRaw.itemID,(int)(size_mod*(5+rand.nextInt(5))));
+			this.dropItem(TFCItems.muttonRaw.itemID,(int)(ageMod*this.size_mod *(5+rand.nextInt(5))));
 		}
 	}
 
@@ -229,7 +234,13 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
 		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks()){
 			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) {
@@ -272,7 +283,8 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
 		timeOfConception = nbt.getLong("ConceptionTime");
-		this.setGrowingAge(nbt.getInteger ("Age"));
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
+		this.setAge(nbt.getInteger ("Age"));
 	}
 
 
@@ -296,11 +308,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return !isAdult();
 	}
 
-	@Override
-	public GenderEnum getGender() 
-	{
-		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
-	}
+	
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
@@ -311,7 +319,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public int getBirthDay() 
 	{
-		return this.dataWatcher.getWatchableObjectInt(12);
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override
@@ -402,5 +410,23 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	public void setHunger(int h) 
 	{
 		hunger = h;
+	}
+	
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[getSex()];
+	}
+	@Override
+	public int getSex() {
+		return dataWatcher.getWatchableObjectInt(13);
+	}
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+		return new EntitySheepTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+	}
+	@Override
+	public void setAge(int par1) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 	}
 }
