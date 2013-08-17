@@ -96,7 +96,7 @@ public class TFCProvider extends WorldProvider
 		{
 			biome = worldObj.getBiomeGenForCoordsBody(x, z);
 			if(canSnowAtTemp(x,145,z)){biome.temperature = 0;}
-			else{biome.temperature = 0.16f;}
+			else{biome.temperature = 0.21f;}
 		}
 		catch(Exception Ex)
 		{
