@@ -29,6 +29,7 @@ public class ItemAlcohol extends ItemTerra
 	public ItemAlcohol(int par1)
 	{
 		super(par1);
+		this.setFolder("food/");
 	}
 
 	@Override
@@ -43,12 +44,14 @@ public class ItemAlcohol extends ItemTerra
 		return StringUtil.localize(getUnlocalizedName(itemstack).replace(" ", ""));
 	}
 
+/*	
 	@Override
 	public Icon getIconFromDamage(int par1)
 	{
 		return this.field_94590_d;
 	}
 
+*/
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
@@ -63,7 +66,7 @@ public class ItemAlcohol extends ItemTerra
 	{
 		return 32;
 	}
-
+/*
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
@@ -77,7 +80,7 @@ public class ItemAlcohol extends ItemTerra
 
 	/**
 	 * Gets an icon index based on an item's damage value and the given render pass
-	 */
+
 	public Icon getIconFromDamageForRenderPass(int par1, int par2)
 	{
 		return par2 == 0 ? this.field_94592_ct : super.getIconFromDamageForRenderPass(par1, par2);
@@ -96,7 +99,8 @@ public class ItemAlcohol extends ItemTerra
 	{
 		return true;
 	}
-
+*/
+	
 	@Override
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
 	{
