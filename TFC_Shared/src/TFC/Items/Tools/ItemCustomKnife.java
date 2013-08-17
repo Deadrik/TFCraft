@@ -2,6 +2,7 @@ package TFC.Items.Tools;
 
 import java.util.List;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -50,7 +51,10 @@ public class ItemCustomKnife extends ItemWeapon
 				}
 			}
 
-			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.getBlockId(x, y+1, z) == 0 && hasBowl != -1)
+			Material mat = world.getBlockMaterial(x, y, z);
+
+			if(side == 1 && !TFC_Core.isSoil(id) && !TFC_Core.isWater(id) && world.getBlockId(x, y+1, z) == 0 && hasBowl != -1 &&
+					(mat == Material.wood || mat == Material.rock || mat == Material.iron))
 			{
 				world.setBlock(x, y+1, z, TFCBlocks.FoodPrep.blockID);
 				TileEntityFoodPrep te = (TileEntityFoodPrep) world.getBlockTileEntity(x, y+1, z);
