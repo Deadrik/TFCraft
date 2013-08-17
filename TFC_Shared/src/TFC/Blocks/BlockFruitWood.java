@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
@@ -210,7 +211,13 @@ public class BlockFruitWood extends BlockTerraContainer
         return false;
     }
 
-    @Override
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return true;
+	}
+
+
+	@Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
     {
         if(world.getBlockId(i, j-1, k) == this.blockID || world.isBlockOpaqueCube(i, j-1, k))
