@@ -336,7 +336,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 			if(canBeWorked())
 			{
 				workedRecently = LAG_FIX_DELAY;
-				setItemCraftingValue(6);
+				setItemCraftingValue(-6);
 				updateRules(0,1);
 				damageHammer();
 			}
