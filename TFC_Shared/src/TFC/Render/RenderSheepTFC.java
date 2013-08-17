@@ -3,6 +3,7 @@ package TFC.Render;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderSheep;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 
@@ -10,6 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
+import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntitySheepTFC;
 
 public class RenderSheepTFC extends RenderSheep
@@ -43,6 +46,13 @@ public class RenderSheepTFC extends RenderSheep
 	{
 		return SheepTexture;
 	}
+	
+	@Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    {
+		float scale = (((EntitySheepTFC)par1EntityLivingBase).size_mod/2)+0.5f;
+		GL11.glScalef(scale, scale, scale);
+    }
 
 	@Override
 	protected ResourceLocation func_110775_a(Entity par1Entity)

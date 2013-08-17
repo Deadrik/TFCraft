@@ -19,11 +19,14 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.API.ICausesDamage;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
@@ -64,6 +67,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		getNavigator ().setAvoidsWater (true);
 		tasks.addTask (1, new EntityAISwimming (this));
 		tasks.addTask (4, new EntityAIAttackOnCollide (this, moveSpeed * 1.5F, true));
+		size_mod = (((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 		if (getGender() == GenderEnum.MALE)
 		{
 			tasks.addTask (6, new EntityAIMate (this, moveSpeed));
@@ -73,10 +77,13 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		tasks.addTask (9, new EntityAILookIdle (this));
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntitySheepTFC.class,200, false));
+		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityDeer.class,200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
 		targetTasks.addTask (4, new EntityAITargetNonTamed(this, EntityPlayer.class, 200, false));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(2, new EntityAIPanic(this,moveSpeed*1.5F));
+
+		mateSizeMod = 1f;
 		/*fooditems.add(Item.beefRaw.itemID);
 		fooditems.add(Item.porkRaw.itemID);
 		fooditems.add(Item.fishRaw.itemID);*/
@@ -86,7 +93,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 	}
 
 
@@ -99,7 +106,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
 
@@ -126,7 +133,11 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	{
 		super.entityInit ();
 		dataWatcher.addObject (18,func_110143_aJ());
+		this.dataWatcher.addObject(13, new Integer(0));
+		this.dataWatcher.addObject(14, new Float(1));
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
 	}
+
 
 	@Override
 	protected void func_110147_ax()
@@ -180,7 +191,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
 		conception = nbt.getLong("ConceptionTime");
-		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
 
 
@@ -246,6 +257,18 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	protected int getDropItemId ()
 	{
 		return -1;
+	}
+	
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		if(isAdult())
+		{
+			this.dropItem(TFCItems.Hide.itemID,1);
+			this.dropItem(Item.bone.itemID, rand.nextInt(6)+2);
+		}
+		
+		
 	}
 
 
@@ -371,22 +394,18 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 		return EnumDamageType.SLASHING;
 	}
 
-	@Override
-	public GenderEnum getGender() 
-	{
-		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
-	}
+
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityChickenTFC(worldObj, this);
+		return new EntityBear(worldObj, this,mateSizeMod);
 	}
 
 	@Override
 	public int getBirthDay() 
 	{
-		return this.dataWatcher.getWatchableObjectInt(12);
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override
@@ -478,5 +497,35 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 	public void setHunger(int h) 
 	{
 		hunger = h;
+	}
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[getSex()];
+	}
+	@Override
+	public int getSex() {
+		return dataWatcher.getWatchableObjectInt(13);
+	}
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+		return new EntityBear(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+	}
+	@Override
+	public void setAge(int par1) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+	}
+
+	@Override
+	public boolean interact(EntityPlayer par1EntityPlayer)
+	{
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+		return true;
 	}
 }

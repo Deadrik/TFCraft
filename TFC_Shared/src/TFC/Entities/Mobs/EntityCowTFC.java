@@ -102,6 +102,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			hunger--;
 		}
+		
+		if(super.inLove > 0){
+			super.inLove = 0;
+			setInLove(true);
+		}
 
 		syncData();
 		if(isAdult()){
@@ -212,16 +217,20 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
+		float ageMod = TFC_Core.getPercentGrown(this);
 		if(isAdult())
 		{
 			this.dropItem(TFCItems.Hide.itemID,1);
+			this.dropItem(Item.bone.itemID, rand.nextInt(6)+3);
+			
+			if (this.isBurning()) {
+				this.dropItem(Item.beefCooked.itemID, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
+			} else {
+				this.dropItem(Item.beefRaw.itemID, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
+			}
 		}
 
-		if (this.isBurning()) {
-			this.dropItem(Item.beefCooked.itemID, (int) (getSize() * (15+this.rand.nextInt(10))));
-		} else {
-			this.dropItem(Item.beefRaw.itemID, (int) (getSize() * (15+this.rand.nextInt(10))));
-		}
+		
 
 	}
 
@@ -237,7 +246,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			if(getGender()==GenderEnum.FEMALE && pregnant){
 				player.addChatMessage("Pregnant");
 			}
-			player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+			//player.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks())
 		{

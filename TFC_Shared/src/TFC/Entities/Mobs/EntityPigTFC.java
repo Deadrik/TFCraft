@@ -133,6 +133,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		}
 
 		if(super.inLove > 0){
+			super.inLove = 0;
 			setInLove(true);
 		}
 
@@ -229,7 +230,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 			if(getGender()==GenderEnum.FEMALE && pregnant){
 				par1EntityPlayer.addChatMessage("Pregnant");
 			}
-			par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
 		}
 		if (super.interact(par1EntityPlayer))
 		{
@@ -259,13 +260,13 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 	{
 		int var3 = 1;
 		int var4;
-		float ga = getGrowingAge();
-		float ageMod = ga<0 ? 1+(ga/(getBirthDay()*TFC_Time.dayLength)) : 1;
+		float ageMod = TFC_Core.getPercentGrown(this);
 
 		for (var4 = 0; var4 < var3; ++var4)
 		{
 			if(ageMod > 0.9){
 				this.dropItem(TFCItems.Hide.itemID,1);
+				this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
 			}
 		}
 

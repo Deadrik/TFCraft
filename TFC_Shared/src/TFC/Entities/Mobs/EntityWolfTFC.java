@@ -7,10 +7,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
+import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Settings;
@@ -40,6 +45,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		super(par1World);
 		this.tasks.addTask(6, new EntityAIMateTFC(this, worldObj, 1));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheepTFC.class, 200, false));
+		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityChickenTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityPigTFC.class, 200, false));
 		this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDeer.class, 200, false));
 
@@ -48,7 +54,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		pregnant = false;
 		pregnancyRequiredTime = (int) (4 * TFC_Time.ticksInMonth);
 		timeOfConception = 0;
-		mateSizeMod = 0;
+		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
 		size_mod = (((rand.nextInt (degreeofdiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
 
@@ -57,7 +63,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		//	animals to be adults, so we set their birthdays far enough back
 		//	in time such that they reach adulthood now.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
+		this.setAge((int) TFC_Time.getTotalDays() - getNumberOfDaysToAdult());
 
 	}
 	public EntityWolfTFC(World par1World, IAnimal mother, float F_size)
@@ -72,7 +78,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
 		//
-		this.setGrowingAge((int) TFC_Time.getTotalDays());
+		this.setAge((int) TFC_Time.getTotalDays());
 	}
 
 
@@ -89,6 +95,9 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		super.entityInit();
 		this.dataWatcher.addObject(21, Integer.valueOf(0));
 		this.dataWatcher.addObject(22, Float.valueOf(1.0f));
+		this.dataWatcher.addObject(13, new Integer(0));
+		this.dataWatcher.addObject(14, new Float(1));
+		this.dataWatcher.addObject(15, Integer.valueOf(0));
 	}
 
 
@@ -125,7 +134,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		pregnant = nbt.getBoolean("Pregnant");
 		mateSizeMod = nbt.getFloat("MateSize");
 		timeOfConception = nbt.getLong("ConceptionTime");
-		this.dataWatcher.updateObject(12, nbt.getInteger ("Age"));
+		this.dataWatcher.updateObject(15, nbt.getInteger ("Age"));
 	}
 
 	/**
@@ -144,8 +153,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		{
 			hunger--;
 		}
+		
+		if(super.inLove > 0){
+			setInLove(true);
+		}
 
 		syncData();
+		if(isAdult()){
+			setGrowingAge(0);
+		}
+		else{
+			setGrowingAge(-1);
+		}
 
 
 		if(pregnant){
@@ -202,6 +221,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		int var2 = TFC_MobData.WolfDamage;
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+    {
+		return !pregnant&&(par1ItemStack.getItem() == Item.porkRaw||par1ItemStack.getItem() == Item.beefRaw||par1ItemStack.getItem() == TFCItems.muttonRaw);
+    }
 
 	@Override
 	public void setGrowingAge(int par1)
@@ -217,22 +242,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		return !isAdult();
 	}
 
-	@Override
-	public GenderEnum getGender() 
-	{
-		return GenderEnum.genders[this.getEntityData().getInteger("Sex")];
-	}
+
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityWolfTFC(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
+		return null;
 	}
 
 	@Override
 	public int getBirthDay() 
 	{
-		return this.dataWatcher.getWatchableObjectInt(12);
+		return this.dataWatcher.getWatchableObjectInt(15);
 	}
 
 	@Override
@@ -241,6 +262,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		return TFC_Time.daysInMonth * 3;
 	}
 
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		if(isAdult())
+		{
+			this.dropItem(TFCItems.Hide.itemID,1);
+			this.dropItem(Item.bone.itemID, rand.nextInt(3)+1);
+		}
+		
+		
+	}
+	
 	@Override
 	public boolean isAdult() 
 	{
@@ -324,5 +357,39 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	public void setHunger(int h) 
 	{
 		hunger = h;
+	}
+	@Override
+	public GenderEnum getGender() 
+	{
+		return GenderEnum.genders[getSex()];
+	}
+	@Override
+	public int getSex() {
+		return dataWatcher.getWatchableObjectInt(13);
+	}
+
+	
+	@Override
+	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
+		return new EntityWolfTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+	}
+	@Override
+	public void setAge(int par1) {
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+	}
+	/**
+	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+	 */
+	@Override
+	public boolean interact(EntityPlayer par1EntityPlayer)
+	{
+		if(!worldObj.isRemote){
+			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+			if(getGender()==GenderEnum.FEMALE && pregnant){
+				par1EntityPlayer.addChatMessage("Pregnant");
+			}
+			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		}
+		return super.interact(par1EntityPlayer);
 	}
 }

@@ -38,6 +38,10 @@ public class HeatIndex
         outputMax = 0;
         output = out;
     }
+    
+    public boolean hasOutput(){
+    	return output != null;
+    }
 
     public Item getOutputItem()
     {

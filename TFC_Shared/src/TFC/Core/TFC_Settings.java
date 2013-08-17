@@ -73,7 +73,7 @@ public class TFC_Settings
 		//Caveins
 		minimumRockLoad = getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
 		initialCollapseRatio = getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
-		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",35, "This number is the likelyhood for each block to propogate the collapse farther.");
+		propogateCollapseChance = getIntFor(config,"Cavein Options","propogateCollapseChance",35, "This number is the likelihood for each block to propagate the collapse farther.");
 
 		cropNutrientAColor[0] = (byte)getIntFor(config,"ColorNutrientA","Red", 237);
 		cropNutrientAColor[1] = (byte)getIntFor(config,"ColorNutrientA","Green", 28);
@@ -108,7 +108,7 @@ public class TFC_Settings
 		maxProtectionMonths = getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
 		protectionGain = getIntFor(config,"Protection","protectionGain", 8, "The number of hours of protection gained in the 3x3 chunk area for spending 1 hour in that chunk.");
 		
-		HealthGainRate = getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experiance level. Set to 0 to turn off.");
+		HealthGainRate = getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experience level. Set to 0 to turn off.");
 		HealthGainCap = getIntFor(config,"Player","HealthGainCap", 3000, "The maximum achievable health pool total.");
 		
 		/**Always end with this*/
