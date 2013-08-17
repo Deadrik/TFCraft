@@ -25,10 +25,10 @@ def build(build_num=0):
     print '=================================== Build Start ================================='   
     print '\nsrc -> backup'
     copytree(src_dir, backup_dir, 0)    
-    print '\ntfc_shared -> minecraft'
-    copytree(os.path.join(forge_dir, 'tfc_shared'), os.path.join(src_dir, 'minecraft'), 0)
-    print '\ntfc api -> minecraft'
-    copytree(os.path.join(forge_dir, 'tfc api'), os.path.join(src_dir, 'minecraft'), 0)
+    print '\nTFC_Shared -> minecraft'
+    copytree(os.path.join(forge_dir, 'TFC_Shared'), os.path.join(src_dir, 'minecraft'), 0)
+    print '\nTFC API -> minecraft'
+    copytree(os.path.join(forge_dir, 'TFC API'), os.path.join(src_dir, 'minecraft'), 0)
     print
     
     error_level = 0

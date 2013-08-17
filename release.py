@@ -49,7 +49,7 @@ def main():
     
     version = load_version(build_num)
         
-    out_folder = os.path.join(forge_dir, 'TFC Build')
+    out_folder = os.path.join(mcp_dir, 'TFC Build')
     if os.path.isdir(out_folder):
         shutil.rmtree(out_folder)
         
