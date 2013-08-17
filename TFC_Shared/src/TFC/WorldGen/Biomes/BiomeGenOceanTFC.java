@@ -1,5 +1,7 @@
 package TFC.WorldGen.Biomes;
 
+import net.minecraft.world.biome.SpawnListEntry;
+import TFC.Entities.Mobs.EntitySquidTFC;
 import TFC.WorldGen.TFCBiome;
 
 public class BiomeGenOceanTFC extends TFCBiome
@@ -9,6 +11,7 @@ public class BiomeGenOceanTFC extends TFCBiome
 		super(i);
 		spawnableCreatureList.clear();
 		setColor(ForestColor);
+		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 6, 1, 3));
 	}
 	
 	protected float getMonthTemp(int month)

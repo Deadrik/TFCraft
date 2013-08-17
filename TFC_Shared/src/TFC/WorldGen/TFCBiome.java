@@ -184,12 +184,16 @@ public class TFCBiome extends BiomeGenBase
 		worldGenWillowShortTrees = new WorldGenCustomWillowTrees(false,14);
 
 		this.waterColorMultiplier = ForestWater;
-
+		//Default spawns. I didn't delete them so they could be referenced in the future. Nerfing animal spawns.
 		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 4, 4));
 		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 10, 4, 4));
+		this.spawnableCreatureList.clear();
+		//This is to balance out the spawning, so that entities with weight 1 spawn less
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,16,0,0));
+		this.spawnableWaterCreatureList.clear();
 
 		this.spawnableMonsterList.clear();
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 4, 4));

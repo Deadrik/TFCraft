@@ -34,6 +34,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.Generators.WorldGenCustomShrub;
@@ -49,8 +50,10 @@ public class BiomeGenJungleTFC extends TFCBiome
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 50;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 25;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).flowersPerChunk = 4;
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 4, 4));
+		((BiomeDecoratorTFC)this.theBiomeDecorator).waterlilyPerChunk = 4;
+		//this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 3, 1, 3));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2, 1, 3));
 
 	}
 

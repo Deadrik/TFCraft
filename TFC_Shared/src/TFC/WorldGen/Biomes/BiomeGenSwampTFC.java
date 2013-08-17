@@ -2,6 +2,7 @@ package TFC.WorldGen.Biomes;
 
 import java.util.Random;
 
+import TFC.Entities.Mobs.EntityPigTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 import cpw.mods.fml.relauncher.Side;
@@ -62,11 +63,12 @@ public class BiomeGenSwampTFC extends TFCBiome
     public BiomeGenSwampTFC(int i)
     {
         super(i);
+        this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2, 1, 3));
         ((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 4;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).flowersPerChunk = -999;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).deadBushPerChunk = 1;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).mushroomsPerChunk = 8;
-        ((BiomeDecoratorTFC)this.theBiomeDecorator).reedsPerChunk = 10;
+        ((BiomeDecoratorTFC)this.theBiomeDecorator).reedsPerChunk = 2;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).clayPerChunk = 2;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).waterlilyPerChunk = 4;
         swampType = -1;

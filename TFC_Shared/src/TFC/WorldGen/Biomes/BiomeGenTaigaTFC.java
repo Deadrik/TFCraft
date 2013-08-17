@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntityDeer;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
@@ -28,9 +30,9 @@ public class BiomeGenTaigaTFC extends TFCBiome
 	public BiomeGenTaigaTFC(int i)
 	{
 		super(i);
-		spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 6, 1, 5));
-		//spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 6, 1, 2));
-		//spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 10, 3, 8));
+		spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 2, 4));
+		spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 2, 1, 2));
+		spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1, 2, 5));
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 10;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).grassPerChunk = 1;
 		treeCommon1 = 0;

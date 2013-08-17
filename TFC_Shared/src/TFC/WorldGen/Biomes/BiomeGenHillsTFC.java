@@ -37,6 +37,7 @@ import net.minecraft.world.biome.*;
 import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.feature.*;
 import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
@@ -61,9 +62,10 @@ public class BiomeGenHillsTFC extends TFCBiome
     public BiomeGenHillsTFC(int i)
     {
         super(i);
-        spawnableCreatureList.clear();
-        spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 3, 1, 3));
-        spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 7, 2, 3));
+        //spawnableCreatureList.clear();
+        spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 1, 3));
+        spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
+        this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
         ((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 6;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
         ((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 11;

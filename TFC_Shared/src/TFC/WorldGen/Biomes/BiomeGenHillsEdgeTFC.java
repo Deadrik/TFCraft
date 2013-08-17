@@ -6,6 +6,8 @@ package TFC.WorldGen.Biomes;
 
 import java.util.Random;
 
+import TFC.Entities.Mobs.EntitySheepTFC;
+import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.TFCBiome;
 import cpw.mods.fml.relauncher.Side;
@@ -59,6 +61,8 @@ public class BiomeGenHillsEdgeTFC extends TFCBiome
 	public BiomeGenHillsEdgeTFC(int i)
 	{
 		super(i);
+		spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 1, 1, 2));
 		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 4;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
 		((BiomeDecoratorTFC)this.theBiomeDecorator).treesPerChunk = 2;
