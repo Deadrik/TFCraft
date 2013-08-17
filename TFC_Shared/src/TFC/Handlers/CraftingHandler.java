@@ -8,6 +8,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
@@ -128,8 +129,11 @@ public class CraftingHandler implements ICraftingHandler
 			}
 			else if(itemstack.getItem() instanceof ItemIngot)
 			{
-				if(entityplayer.worldObj.rand.nextInt(20) != 0 && 
-						!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1))) 
+				if(entityplayer.worldObj.rand.nextInt(20) == 0)
+				{
+					entityplayer.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, entityplayer.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+				}
+				else if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.CeramicMold, 1, 1))) 
 				{
 					entityplayer.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 				}
