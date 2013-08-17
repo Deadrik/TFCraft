@@ -114,6 +114,12 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		}
 
 		syncData();
+		if(isAdult()){
+			setGrowingAge(0);
+		}
+		else{
+			setGrowingAge(-1);
+		}
 
 		if (isAdult() && getGender() == GenderEnum.FEMALE && !this.worldObj.isRemote && --this.timeUntilNextEgg == 0)
 		{

@@ -133,6 +133,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		}
 
 		if(super.inLove > 0){
+			super.inLove = 0;
 			setInLove(true);
 		}
 

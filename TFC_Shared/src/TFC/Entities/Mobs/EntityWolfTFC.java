@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -152,8 +153,18 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		{
 			hunger--;
 		}
+		
+		if(super.inLove > 0){
+			setInLove(true);
+		}
 
 		syncData();
+		if(isAdult()){
+			setGrowingAge(0);
+		}
+		else{
+			setGrowingAge(-1);
+		}
 
 
 		if(pregnant){
@@ -210,6 +221,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		int var2 = TFC_MobData.WolfDamage;
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+    {
+		return !pregnant&&(par1ItemStack.getItem() == Item.porkRaw||par1ItemStack.getItem() == Item.beefRaw||par1ItemStack.getItem() == TFCItems.muttonRaw);
+    }
 
 	@Override
 	public void setGrowingAge(int par1)
@@ -230,7 +247,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntityWolfTFC(worldObj, this, entityageable.getEntityData().getInteger("Size Modifier"));
+		return null;
 	}
 
 	@Override
@@ -350,6 +367,8 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	public int getSex() {
 		return dataWatcher.getWatchableObjectInt(13);
 	}
+
+	
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
 		return new EntityWolfTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));

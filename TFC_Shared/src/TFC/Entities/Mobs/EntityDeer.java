@@ -144,6 +144,10 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 		}*/
 
 		syncData();
+		if(super.inLove > 0){
+			super.inLove = 0;
+			setInLove(true);
+		}
 		
 		if(isAdult()){
 			setGrowingAge(0);

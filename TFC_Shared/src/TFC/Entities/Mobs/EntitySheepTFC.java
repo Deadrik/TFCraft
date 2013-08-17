@@ -144,8 +144,19 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		{
 			hunger--;
 		}
+		
+		if(super.inLove > 0){
+			super.inLove = 0;
+			setInLove(true);
+		}
 
 		syncData();
+		if(isAdult()){
+			setGrowingAge(0);
+		}
+		else{
+			setGrowingAge(-1);
+		}
 
 		if(isPregnant())
 		{
@@ -217,6 +228,13 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		} else {
 			this.dropItem(TFCItems.muttonRaw.itemID,(int)(ageMod*this.size_mod *(5+rand.nextInt(5))));
 		}
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack)
+	{
+		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
+				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
 	}
 
 	/**
@@ -313,7 +331,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
 	{
-		return new EntitySheepTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
+		return null;
 	}
 
 	@Override

@@ -102,6 +102,11 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			hunger--;
 		}
+		
+		if(super.inLove > 0){
+			super.inLove = 0;
+			setInLove(true);
+		}
 
 		syncData();
 		if(isAdult()){
