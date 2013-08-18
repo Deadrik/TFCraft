@@ -103,7 +103,7 @@ public class ItemLogs extends ItemTerra
 
 	public boolean isValid(World world, int i, int j, int k)
 	{
-		if(world.getBlockId(i, j-1, k)==TFCBlocks.Firepit.blockID){
+		if(world.getBlockId(i, j-1, k)==TFCBlocks.Firepit.blockID ||world.getBlockId(i, j-1, k) == TFCBlocks.Pottery.blockID){
 			return true;
 		}
 		else if(world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
