@@ -21,6 +21,9 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.API.ISmeltable;
+import TFC.API.Metal;
+import TFC.API.Constant.Global;
 import TFC.Blocks.BlockTerraContainer;
 import TFC.Core.AnvilReq;
 import TFC.Core.TFC_Textures;
@@ -28,7 +31,7 @@ import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockAnvil extends BlockTerraContainer
+public class BlockAnvil extends BlockTerraContainer implements ISmeltable
 {
 	private int anvilId = 0;
 
@@ -376,5 +379,41 @@ public class BlockAnvil extends BlockTerraContainer
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
 	{
 		return null;
+	}
+
+	@Override
+	public Metal GetMetalType(ItemStack is) {
+		
+		switch(anvilId){
+		case 1: return Global.COPPER;
+		case 2: return Global.BRONZE;
+		case 3: return Global.WROUGHTIRON;
+		case 4: return Global.STEEL;
+		case 5: return Global.BLACKSTEEL;
+		case 6: return Global.BLUESTEEL;
+		case 7: return Global.REDSTEEL;
+		case 8: return Global.ROSEGOLD;
+		case 9: return Global.BISMUTHBRONZE;
+		case 10: return Global.BLACKBRONZE;
+		default : return Global.UNKNOWN;
+		}
+	}
+
+	@Override
+	public short GetMetalReturnAmount(ItemStack is) {
+		
+		return 1400;
+	}
+
+	@Override
+	public boolean isSmeltable(ItemStack is) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public EnumTier GetSmeltTier(ItemStack is) {
+		// TODO Auto-generated method stub
+		return EnumTier.TierI;
 	}
 }
