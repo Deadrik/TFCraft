@@ -506,6 +506,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.clay,1,1), 
 				new Object[] {"PXP","XCX","PXP",Character.valueOf('P'),new ItemStack(TFCItems.Powder,1,1),Character.valueOf('X'),new ItemStack(TFCItems.Powder,1,2),Character.valueOf('C'),new ItemStack(Item.clay,1,0)});
 
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Thatch,1), 
+				new Object[] {"PP","PP",Character.valueOf('P'),new ItemStack(TFCItems.Straw, 1)});
 
 		RegisterToolRecipes();
 		registerFoodRecipes();
