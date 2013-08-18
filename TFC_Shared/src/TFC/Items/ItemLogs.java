@@ -102,7 +102,10 @@ public class ItemLogs extends ItemTerra
 
 	public boolean isValid(World world, int i, int j, int k)
 	{
-		if(world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
+		if(world.getBlockId(i, j-1, k)==TFCBlocks.Firepit.blockID){
+			return true;
+		}
+		else if(world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
 		{
 			TileEntityLogPile te = (TileEntityLogPile) world.getBlockTileEntity(i, j-1, k);
 			if(te != null)
