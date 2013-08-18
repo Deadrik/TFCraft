@@ -720,20 +720,24 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 					else if(TFC_ItemHeat.getMeltingPoint(entity.getEntityItem()) != -1 && TFC_Core.isOreIron(entity.getEntityItem()))
 					{
 						int c = entity.getEntityItem().stackSize;
+						int nonConsumedOre = 0;
 						for(; c > 0; c--)
 						{
 							if(charcoalCount+oreCount < 40 && oreCount < 20)
 							{
-								if(AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
+								if(foundFlux(moltenCount) && AddOreToFire(new ItemStack(entity.getEntityItem().getItem(),1,entity.getEntityItem().getItemDamage()))) 
 								{
 									oreCount+=1;
+								}
+								else{
+									nonConsumedOre++;
 								}
 							}
 						}
 						if(c == 0) {
 							entity.setDead();
 						} else {
-							entity.getEntityItem().stackSize = c;
+							entity.getEntityItem().stackSize = c+nonConsumedOre;
 						} 
 					}
 				}
@@ -774,6 +778,24 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			}
 			slowCounter++;
 		}
+	}
+	
+	private boolean foundFlux(int moltenCount){
+		List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
+				xCoord, yCoord+moltenCount, zCoord, 
+				xCoord+1, yCoord+moltenCount+1.1, zCoord+1));
+		for (Iterator iterator = list.iterator(); iterator.hasNext();)
+		{
+			EntityItem entity = (EntityItem)iterator.next();
+			if((entity.getEntityItem().getItemDamage() == 0)&&entity.getEntityItem().itemID == TFCItems.Powder.itemID)
+			{				
+				entity.getEntityItem().stackSize--;
+				if(entity.getEntityItem().stackSize == 0) {
+					entity.setDead();
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override
