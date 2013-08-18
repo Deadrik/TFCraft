@@ -232,7 +232,7 @@ public class EntityDamageHandler
 				if(stack != null) 
 				{
 					i = (float)event.entityPlayer.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
-					event.entityPlayer.addChatMessage("Damage: " + i);
+					//event.entityPlayer.addChatMessage("Damage: " + i);
 					if(i == 1.0f)
 					{
 						i = TFC_MobData.SteveDamage;

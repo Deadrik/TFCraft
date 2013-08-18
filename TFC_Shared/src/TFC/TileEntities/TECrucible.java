@@ -153,6 +153,7 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				{
 					if(currentAlloy != null && currentAlloy.outputType != null && storage[0].getItem().itemID == currentAlloy.outputType.MeltedItemID)
 					{
+						this.addMetal(MetalRegistry.instance.getMetalFromItem(storage[0].getItem()), (short) 1);
 						currentAlloy.outputAmount++;
 						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage()) {
 							storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
