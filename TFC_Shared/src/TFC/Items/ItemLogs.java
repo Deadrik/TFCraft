@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.TFCTabs;
@@ -49,52 +50,34 @@ public class ItemLogs extends ItemTerra
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
 			int z, int side, int l) {
 		TileEntityLogPile te = null;
-		if(side == 0 && world.getBlockId(x, y-1, z) == 0)
+		if(side == 0 && world.getBlockId(x, y-1, z) == 0 && isValid(world, x, y-1, z))
 		{
-			world.setBlock( x, y-1, z, TFCBlocks.LogPile.blockID, l, 0x2);
-			if(world.isRemote) {
-				world.markBlockForUpdate(x, y-1, z);
-			}
+			world.setBlock( x, y-1, z, TFCBlocks.LogPile.blockID, l, 3);
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y-1, z);
 		}
-		else if(side == 1 && world.getBlockId(x, y+1, z) == 0)
+		else if(side == 1 && world.getBlockId(x, y+1, z) == 0 && isValid(world, x, y+1, z))
 		{
-			world.setBlock( x, y+1, z, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote) {
-				world.markBlockForUpdate(x, y+1, z);
-			}
+			world.setBlock( x, y+1, z, TFCBlocks.LogPile.blockID, l, 3);
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y+1, z);
 		}
-		else if(side == 2 && world.getBlockId(x, y, z-1) == 0)
+		else if(side == 2 && world.getBlockId(x, y, z-1) == 0 && isValid(world, x, y, z-1))
 		{
-			world.setBlock( x, y, z-1, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote) {
-				world.markBlockForUpdate(x, y, z-1);
-			}
+			world.setBlock( x, y, z-1, TFCBlocks.LogPile.blockID, l, 3);
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z-1);
 		}
-		else if(side == 3 && world.getBlockId(x, y, z+1) == 0)
+		else if(side == 3 && world.getBlockId(x, y, z+1) == 0 && isValid(world, x, y, z+1))
 		{
-			world.setBlock( x, y, z+1, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote) {
-				world.markBlockForUpdate(x, y, z+1);
-			}
+			world.setBlock( x, y, z+1, TFCBlocks.LogPile.blockID, l, 3);
 			te = (TileEntityLogPile)world.getBlockTileEntity(x, y, z+1);
 		}
-		else if(side == 4 && world.getBlockId(x-1, y, z) == 0)
+		else if(side == 4 && world.getBlockId(x-1, y, z) == 0 && isValid(world, x-1, y, z))
 		{
-			world.setBlock( x-1, y, z, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote) {
-				world.markBlockForUpdate(x-1, y, z);
-			}
+			world.setBlock( x-1, y, z, TFCBlocks.LogPile.blockID, l, 3);
 			te = (TileEntityLogPile)world.getBlockTileEntity(x-1, y, z);
 		}
-		else if(side == 5 && world.getBlockId(x+1, y, z) == 0)
+		else if(side == 5 && world.getBlockId(x+1, y, z) == 0 && isValid(world, x+1, y, z))
 		{
-			world.setBlock( x+1, y, z, TFCBlocks.LogPile.blockID, l,0x2);
-			if(world.isRemote) {
-				world.markBlockForUpdate(x+1, y, z);
-			}
+			world.setBlock( x+1, y, z, TFCBlocks.LogPile.blockID, l, 3);
 			te = (TileEntityLogPile)world.getBlockTileEntity(x+1, y, z);
 		}
 		else
@@ -115,6 +98,31 @@ public class ItemLogs extends ItemTerra
 		}
 
 		return true;
+	}
+
+	public boolean isValid(World world, int i, int j, int k)
+	{
+		if(world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
+		{
+			TileEntityLogPile te = (TileEntityLogPile) world.getBlockTileEntity(i, j-1, k);
+			if(te != null)
+			{
+				if(te.storage[0] == null || te.storage[0].stackSize < 4) {
+					return false;
+				}
+				if(te.storage[1] == null || te.storage[1].stackSize < 4) {
+					return false;
+				}
+				if(te.storage[2] == null || te.storage[2].stackSize < 4) {
+					return false;
+				}
+				if(te.storage[3] == null || te.storage[3].stackSize < 4) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override
