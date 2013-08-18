@@ -68,4 +68,10 @@ public class BlockStalactite extends BlockSlab
             world.spawnParticle("dripWater", f+f4 - 0.3F, f1,  f2 + f5 + 0.3F, 0.0D, 0.0D, 0.0D);
         }
     }
+    
+    @Override
+    public boolean canDropFromExplosion(Explosion ex)
+    {
+    	return false;
+    }
 }
