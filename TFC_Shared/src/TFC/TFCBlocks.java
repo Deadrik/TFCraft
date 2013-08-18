@@ -1,12 +1,10 @@
 package TFC;
 
-import java.io.File;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import TFC.API.Constant.Global;
+import TFC.API.Constant.TFCBlockID;
 import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
@@ -81,7 +79,6 @@ import TFC.Blocks.Vanilla.BlockCustomStationary;
 import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Blocks.Vanilla.BlockCustomVine;
 import TFC.Blocks.Vanilla.BlockCustomWall;
-import TFC.Core.TFC_Settings;
 import TFC.Items.ItemBarrels;
 import TFC.Items.ItemToolRack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -228,8 +225,6 @@ public class TFCBlocks
 	public static Block Bloom;
 	public static Block Crucible;
 
-	static Configuration config;
-
 	public static void RegisterBlocks()
 	{
 		GameRegistry.registerBlock(Ore, TFC.Items.ItemOre1.class, "Ore1");
@@ -349,16 +344,7 @@ public class TFCBlocks
 
 	public static void LoadBlocks()
 	{
-		try
-		{
-			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
-			config.load();
-		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access block configuration: " + e.getLocalizedMessage()).toString());
-			config = null;
-		}
-
-		System.out.println(new StringBuilder().append("[TFC] Loading Blocks").toString());		
+		System.out.println(new StringBuilder().append("[TFC] Loading Blocks").toString());
 
 		Block.blocksList[5] = null;
 		Block.blocksList[6] = null;
@@ -419,128 +405,128 @@ public class TFCBlocks
 		TFCBlocks.Leaves = Block.blocksList[18];
 		TFCBlocks.Sapling = Block.blocksList[6];
 
-		TFCBlocks.StoneIgInCobble = new BlockIgInCobble(TFC_Settings.getIntFor(config,"block","StoneIgInCobble", 2068), Material.rock).setHardness(13F).setResistance(10F).setUnlocalizedName("IgInRockCobble");
-		TFCBlocks.StoneIgIn = new BlockIgIn(TFC_Settings.getIntFor(config,"block","StoneIgIn", 2069), Material.rock, TFCBlocks.StoneIgInCobble.blockID).setHardness(13F).setResistance(10F).setUnlocalizedName("IgInRock");	
-		TFCBlocks.StoneIgInSmooth = new BlockIgInSmooth(TFC_Settings.getIntFor(config,"block","StoneIgInSmooth", 2070)).setHardness(13F).setResistance(20F).setUnlocalizedName("IgInRockSmooth");
-		TFCBlocks.StoneIgInBrick = new BlockIgInBrick(TFC_Settings.getIntFor(config,"block","StoneIgInBrick", 2071)).setHardness(13F).setResistance(15F).setUnlocalizedName("IgInRockBrick");
+		TFCBlocks.StoneIgInCobble = new BlockIgInCobble(TFCBlockID.StoneIgInCobble, Material.rock).setHardness(13F).setResistance(10F).setUnlocalizedName("IgInRockCobble");
+		TFCBlocks.StoneIgIn = new BlockIgIn(TFCBlockID.StoneIgIn, Material.rock, TFCBlocks.StoneIgInCobble.blockID).setHardness(13F).setResistance(10F).setUnlocalizedName("IgInRock");	
+		TFCBlocks.StoneIgInSmooth = new BlockIgInSmooth(TFCBlockID.StoneIgInSmooth).setHardness(13F).setResistance(20F).setUnlocalizedName("IgInRockSmooth");
+		TFCBlocks.StoneIgInBrick = new BlockIgInBrick(TFCBlockID.StoneIgInBrick).setHardness(13F).setResistance(15F).setUnlocalizedName("IgInRockBrick");
 
-		TFCBlocks.StoneSedCobble = new BlockSedCobble(TFC_Settings.getIntFor(config,"block","StoneSedCobble", 2072), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("SedRockCobble");
-		TFCBlocks.StoneSed = new BlockSed(TFC_Settings.getIntFor(config,"block","StoneSed", 2073), Material.rock, TFCBlocks.StoneSedCobble.blockID).setHardness(10F).setResistance(7F).setUnlocalizedName("SedRock");
-		TFCBlocks.StoneSedSmooth = new BlockSedSmooth(TFC_Settings.getIntFor(config,"block","StoneSedSmooth", 2074)).setHardness(10F).setResistance(20F).setUnlocalizedName("SedRockSmooth");
-		TFCBlocks.StoneSedBrick = new BlockSedBrick(TFC_Settings.getIntFor(config,"block","StoneSedBrick", 2075)).setHardness(10F).setResistance(15F).setUnlocalizedName("SedRockBrick");
+		TFCBlocks.StoneSedCobble = new BlockSedCobble(TFCBlockID.StoneSedCobble, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("SedRockCobble");
+		TFCBlocks.StoneSed = new BlockSed(TFCBlockID.StoneSed, Material.rock, TFCBlocks.StoneSedCobble.blockID).setHardness(10F).setResistance(7F).setUnlocalizedName("SedRock");
+		TFCBlocks.StoneSedSmooth = new BlockSedSmooth(TFCBlockID.StoneSedSmooth).setHardness(10F).setResistance(20F).setUnlocalizedName("SedRockSmooth");
+		TFCBlocks.StoneSedBrick = new BlockSedBrick(TFCBlockID.StoneSedBrick).setHardness(10F).setResistance(15F).setUnlocalizedName("SedRockBrick");
 
-		TFCBlocks.StoneIgExCobble = new BlockIgExCobble(TFC_Settings.getIntFor(config,"block","StoneIgExCobble", 2076), Material.rock).setHardness(13F).setResistance(10F).setUnlocalizedName("IgExRockCobble");
-		TFCBlocks.StoneIgEx = new BlockIgEx(TFC_Settings.getIntFor(config,"block","StoneIgEx", 2077), Material.rock, TFCBlocks.StoneIgExCobble.blockID).setHardness(13F).setResistance(10F).setUnlocalizedName("IgExRock");
-		TFCBlocks.StoneIgExSmooth = new BlockIgExSmooth(TFC_Settings.getIntFor(config,"block","StoneIgExSmooth", 2078)).setHardness(13F).setResistance(20F).setUnlocalizedName("IgExRockSmooth");
-		TFCBlocks.StoneIgExBrick = new BlockIgExBrick(TFC_Settings.getIntFor(config,"block","StoneIgExBrick", 2079)).setHardness(13F).setResistance(15F).setUnlocalizedName("IgExRockBrick");
+		TFCBlocks.StoneIgExCobble = new BlockIgExCobble(TFCBlockID.StoneIgExCobble, Material.rock).setHardness(13F).setResistance(10F).setUnlocalizedName("IgExRockCobble");
+		TFCBlocks.StoneIgEx = new BlockIgEx(TFCBlockID.StoneIgEx, Material.rock, TFCBlocks.StoneIgExCobble.blockID).setHardness(13F).setResistance(10F).setUnlocalizedName("IgExRock");
+		TFCBlocks.StoneIgExSmooth = new BlockIgExSmooth(TFCBlockID.StoneIgExSmooth).setHardness(13F).setResistance(20F).setUnlocalizedName("IgExRockSmooth");
+		TFCBlocks.StoneIgExBrick = new BlockIgExBrick(TFCBlockID.StoneIgExBrick).setHardness(13F).setResistance(15F).setUnlocalizedName("IgExRockBrick");
 
-		TFCBlocks.StoneMMCobble = new BlockMMCobble(TFC_Settings.getIntFor(config,"block","StoneMMCobble", 2080), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("MMRockCobble");
-		TFCBlocks.StoneMM = new BlockMM(TFC_Settings.getIntFor(config,"block","StoneMM", 2081), Material.rock, TFCBlocks.StoneMMCobble.blockID).setHardness(10F).setResistance(8F).setUnlocalizedName("MMRock");
-		TFCBlocks.StoneMMSmooth = new BlockMMSmooth(TFC_Settings.getIntFor(config,"block","StoneMMSmooth", 2082)).setHardness(10F).setResistance(20F).setUnlocalizedName("MMRockSmooth");
-		TFCBlocks.StoneMMBrick = new BlockMMBrick(TFC_Settings.getIntFor(config,"block","StoneMMBrick", 2083)).setHardness(10F).setResistance(15F).setUnlocalizedName("MMRockBrick");
+		TFCBlocks.StoneMMCobble = new BlockMMCobble(TFCBlockID.StoneMMCobble, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("MMRockCobble");
+		TFCBlocks.StoneMM = new BlockMM(TFCBlockID.StoneMM, Material.rock, TFCBlocks.StoneMMCobble.blockID).setHardness(10F).setResistance(8F).setUnlocalizedName("MMRock");
+		TFCBlocks.StoneMMSmooth = new BlockMMSmooth(TFCBlockID.StoneMMSmooth).setHardness(10F).setResistance(20F).setUnlocalizedName("MMRockSmooth");
+		TFCBlocks.StoneMMBrick = new BlockMMBrick(TFCBlockID.StoneMMBrick).setHardness(10F).setResistance(15F).setUnlocalizedName("MMRockBrick");
 
-		TFCBlocks.Dirt = (new TFC.Blocks.Terrain.BlockDirt(TFC_Settings.getIntFor(config,"block","Dirt", 2084), 0, TFCBlocks.tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
-		TFCBlocks.Dirt2 = (new TFC.Blocks.Terrain.BlockDirt2(TFC_Settings.getIntFor(config,"block","Dirt2", 2085), 16, TFCBlocks.tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
-		TFCBlocks.Clay = (new TFC.Blocks.Terrain.BlockClay(TFC_Settings.getIntFor(config,"block","Clay", 2086))).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
-		TFCBlocks.Clay2 = (new TFC.Blocks.Terrain.BlockClay2(TFC_Settings.getIntFor(config,"block","Clay2", 2087))).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
-		TFCBlocks.ClayGrass = new TFC.Blocks.Terrain.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass", 2088), 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
-		TFCBlocks.ClayGrass2 = new TFC.Blocks.Terrain.BlockClayGrass(TFC_Settings.getIntFor(config,"block","ClayGrass2", 2089), 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
-		TFCBlocks.Grass = (new TFC.Blocks.Terrain.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass", 2090))).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
-		TFCBlocks.Grass2 = new TFC.Blocks.Terrain.BlockGrass(TFC_Settings.getIntFor(config,"block","Grass2", 2091), 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
-		TFCBlocks.Peat = new TFC.Blocks.Terrain.BlockPeat(TFC_Settings.getIntFor(config,"block","Peat", 2092)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("Peat");
-		TFCBlocks.PeatGrass = new TFC.Blocks.Terrain.BlockPeatGrass(TFC_Settings.getIntFor(config,"block","PeatGrass", 2093)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("PeatGrass");
-		TFCBlocks.DryGrass = new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass", 2094), 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("DryGrass");
-		TFCBlocks.DryGrass2 =new BlockDryGrass(TFC_Settings.getIntFor(config,"block","DryGrass2", 2095), 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("DryGrass");
+		TFCBlocks.Dirt = (new TFC.Blocks.Terrain.BlockDirt(TFCBlockID.Dirt, 0, TFCBlocks.tilledSoil)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
+		TFCBlocks.Dirt2 = (new TFC.Blocks.Terrain.BlockDirt2(TFCBlockID.Dirt2, 16, TFCBlocks.tilledSoil2)).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("dirt");
+		TFCBlocks.Clay = (new TFC.Blocks.Terrain.BlockClay(TFCBlockID.Clay)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
+		TFCBlocks.Clay2 = (new TFC.Blocks.Terrain.BlockClay2(TFCBlockID.Clay2)).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("clay");
+		TFCBlocks.ClayGrass = new TFC.Blocks.Terrain.BlockClayGrass(TFCBlockID.ClayGrass, 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
+		TFCBlocks.ClayGrass2 = new TFC.Blocks.Terrain.BlockClayGrass(TFCBlockID.ClayGrass2, 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("ClayGrass"); 
+		TFCBlocks.Grass = (new TFC.Blocks.Terrain.BlockGrass(TFCBlockID.Grass)).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
+		TFCBlocks.Grass2 = new TFC.Blocks.Terrain.BlockGrass(TFCBlockID.Grass2, 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("Grass");
+		TFCBlocks.Peat = new TFC.Blocks.Terrain.BlockPeat(TFCBlockID.Peat).setHardness(3F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("Peat");
+		TFCBlocks.PeatGrass = new TFC.Blocks.Terrain.BlockPeatGrass(TFCBlockID.PeatGrass).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("PeatGrass");
+		TFCBlocks.DryGrass = new BlockDryGrass(TFCBlockID.DryGrass, 0).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("DryGrass");
+		TFCBlocks.DryGrass2 =new BlockDryGrass(TFCBlockID.DryGrass2, 16).setHardness(3F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("DryGrass");
 
-		TFCBlocks.Ore = new BlockOre(TFC_Settings.getIntFor(config,"block","Ore", 2096), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
-		TFCBlocks.Ore2 = new BlockOre2(TFC_Settings.getIntFor(config,"block","Ore2", 2097), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
-		TFCBlocks.Ore3 = new BlockOre3(TFC_Settings.getIntFor(config,"block","Ore3", 2098), Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
-		TFCBlocks.LooseRock = new BlockLooseRock(TFC_Settings.getIntFor(config,"block","LooseRock", 2099)).setHardness(0.05F).setResistance(1F).setUnlocalizedName("LooseRock");
-		TFCBlocks.LogPile = new BlockLogPile(TFC_Settings.getIntFor(config,"block","LogPile", 2100)).setHardness(10F).setResistance(1F).setUnlocalizedName("LogPile");
+		TFCBlocks.Ore = new BlockOre(TFCBlockID.Ore, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
+		TFCBlocks.Ore2 = new BlockOre2(TFCBlockID.Ore2, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
+		TFCBlocks.Ore3 = new BlockOre3(TFCBlockID.Ore3, Material.rock).setHardness(10F).setResistance(10F).setUnlocalizedName("Ore");
+		TFCBlocks.LooseRock = new BlockLooseRock(TFCBlockID.LooseRock).setHardness(0.05F).setResistance(1F).setUnlocalizedName("LooseRock");
+		TFCBlocks.LogPile = new BlockLogPile(TFCBlockID.LogPile).setHardness(10F).setResistance(1F).setUnlocalizedName("LogPile");
 
-		TFCBlocks.Sulfur = new BlockSulfur(TFC_Settings.getIntFor(config,"block","Sulfur", 2101), Material.rock).setUnlocalizedName("Sulfur").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFC_Settings.getIntFor(config,"block","WoodSupportV", 2102), Material.wood).setUnlocalizedName("WoodSupportV").setHardness(0.5F).setResistance(1F);
-		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFC_Settings.getIntFor(config,"block","WoodSupportH", 2103), Material.wood).setUnlocalizedName("WoodSupportH").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.Sulfur = new BlockSulfur(TFCBlockID.Sulfur, Material.rock).setUnlocalizedName("Sulfur").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportV = new BlockWoodSupport(TFCBlockID.WoodSupportV, Material.wood).setUnlocalizedName("WoodSupportV").setHardness(0.5F).setResistance(1F);
+		TFCBlocks.WoodSupportH = new BlockWoodSupport(TFCBlockID.WoodSupportH, Material.wood).setUnlocalizedName("WoodSupportH").setHardness(0.5F).setResistance(1F);
 
-		TFCBlocks.tilledSoil = new TFC.Blocks.BlockFarmland(TFC_Settings.getIntFor(config,"block","tilledSoil", 2104), TFCBlocks.Dirt.blockID, 0).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil");
-		TFCBlocks.tilledSoil2 = new TFC.Blocks.BlockFarmland(TFC_Settings.getIntFor(config,"block","tilledSoil2", 2105), TFCBlocks.Dirt2.blockID, 16).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil2");
+		TFCBlocks.tilledSoil = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil, TFCBlocks.Dirt.blockID, 0).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil");
+		TFCBlocks.tilledSoil2 = new TFC.Blocks.BlockFarmland(TFCBlockID.tilledSoil2, TFCBlocks.Dirt2.blockID, 16).setHardness(2F).setStepSound(Block.soundGravelFootstep).setUnlocalizedName("tilledSoil2");
 
-		TFCBlocks.fruitTreeWood = new BlockFruitWood(TFC_Settings.getIntFor(config,"block","fruitTreeWood", 2106)).setUnlocalizedName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
-		TFCBlocks.fruitTreeLeaves = new BlockFruitLeaves(TFC_Settings.getIntFor(config,"block","fruitTreeLeaves", 2107), 0).setUnlocalizedName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
-		TFCBlocks.fruitTreeLeaves2 = new BlockFruitLeaves(TFC_Settings.getIntFor(config,"block","fruitTreeLeaves2", 2108), 8).setUnlocalizedName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
+		TFCBlocks.fruitTreeWood = new BlockFruitWood(TFCBlockID.fruitTreeWood).setUnlocalizedName("fruitTreeWood").setHardness(5.5F).setResistance(2F);
+		TFCBlocks.fruitTreeLeaves = new BlockFruitLeaves(TFCBlockID.fruitTreeLeaves, 0).setUnlocalizedName("fruitTreeLeaves").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
+		TFCBlocks.fruitTreeLeaves2 = new BlockFruitLeaves(TFCBlockID.fruitTreeLeaves2, 8).setUnlocalizedName("fruitTreeLeaves2").setHardness(0.5F).setResistance(1F).setStepSound(Block.soundGrassFootstep);
 
-		TFCBlocks.Sand = new TFC.Blocks.Terrain.BlockSand(TFC_Settings.getIntFor(config,"block","Sand", 2109)).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
-		TFCBlocks.Sand2 = new BlockSand2(TFC_Settings.getIntFor(config,"block","Sand2", 2110)).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
+		TFCBlocks.Sand = new TFC.Blocks.Terrain.BlockSand(TFCBlockID.Sand).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
+		TFCBlocks.Sand2 = new BlockSand2(TFCBlockID.Sand2).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
 
-		TFCBlocks.WoodConstruct = (new TFC.Blocks.BlockWoodConstruct(TFC_Settings.getIntFor(config,"block","WoodConstruct", 2200))).setHardness(4F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("WoodConstruct");
+		TFCBlocks.WoodConstruct = (new TFC.Blocks.BlockWoodConstruct(TFCBlockID.WoodConstruct)).setHardness(4F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("WoodConstruct");
 
-		TFCBlocks.finiteWater = new BlockFiniteWater(TFC_Settings.getIntFor(config,"block","bucketWater", 2111)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("bucketWater");
+		TFCBlocks.finiteWater = new BlockFiniteWater(TFCBlockID.bucketWater).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("bucketWater");
 
-		TFCBlocks.Firepit = new BlockFirepit(TFC_Settings.getIntFor(config,"block","Firepit", 2015)).setUnlocalizedName("Firepit").setHardness(1).setLightValue(0F);
-		TFCBlocks.Bellows = new BlockBellows(TFC_Settings.getIntFor(config,"block","Bellows", 2014),Material.wood).setUnlocalizedName("Bellows").setHardness(2);
-		TFCBlocks.Forge= new BlockForge(TFC_Settings.getIntFor(config,"block","Forge", 2013)).setUnlocalizedName("Forge").setHardness(20).setLightValue(0F);
-		TFCBlocks.Scribe = new BlockScribe(TFC_Settings.getIntFor(config,"block","Scribe", 2012)).setUnlocalizedName("Scribe").setHardness(2);
-		TFCBlocks.Anvil = new TFC.Blocks.Devices.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil", 2011)).setUnlocalizedName("Anvil").setHardness(3).setResistance(100F);
-		TFCBlocks.Anvil2 = new TFC.Blocks.Devices.BlockAnvil(TFC_Settings.getIntFor(config,"block","Anvil2", 2010), 8).setUnlocalizedName("Anvil2").setHardness(3).setResistance(100F);
+		TFCBlocks.Firepit = new BlockFirepit(TFCBlockID.Firepit).setUnlocalizedName("Firepit").setHardness(1).setLightValue(0F);
+		TFCBlocks.Bellows = new BlockBellows(TFCBlockID.Bellows,Material.wood).setUnlocalizedName("Bellows").setHardness(2);
+		TFCBlocks.Forge= new BlockForge(TFCBlockID.Forge).setUnlocalizedName("Forge").setHardness(20).setLightValue(0F);
+		TFCBlocks.Scribe = new BlockScribe(TFCBlockID.Scribe).setUnlocalizedName("Scribe").setHardness(2);
+		TFCBlocks.Anvil = new TFC.Blocks.Devices.BlockAnvil(TFCBlockID.Anvil).setUnlocalizedName("Anvil").setHardness(3).setResistance(100F);
+		TFCBlocks.Anvil2 = new TFC.Blocks.Devices.BlockAnvil(TFCBlockID.Anvil2, 8).setUnlocalizedName("Anvil2").setHardness(3).setResistance(100F);
 
-		TFCBlocks.Molten = new BlockMolten(TFC_Settings.getIntFor(config,"block","Molten", 2008)).setUnlocalizedName("Molten").setHardness(20);
-		TFCBlocks.BlastFurnace = new BlockBlastFurnace(TFC_Settings.getIntFor(config,"block","BlastFurnace", 2007)).setUnlocalizedName("BlastFurnace").setHardness(20).setLightValue(0F);
-		TFCBlocks.EarlyBloomery = new BlockEarlyBloomery(TFC_Settings.getIntFor(config,"block","EarlyBloomery", 2006)).setUnlocalizedName("EarlyBloomery").setHardness(20).setLightValue(0F);
-		TFCBlocks.Bloom = new BlockBloom(TFC_Settings.getIntFor(config,"block","Bloom", 2005)).setUnlocalizedName("Bloom").setHardness(20).setLightValue(0F);
-		TFCBlocks.Sluice = new BlockSluice(TFC_Settings.getIntFor(config,"block","Sluice", 2003)).setUnlocalizedName("Sluice").setHardness(2F).setResistance(20F);
+		TFCBlocks.Molten = new BlockMolten(TFCBlockID.Molten).setUnlocalizedName("Molten").setHardness(20);
+		TFCBlocks.BlastFurnace = new BlockBlastFurnace(TFCBlockID.BlastFurnace).setUnlocalizedName("BlastFurnace").setHardness(20).setLightValue(0F);
+		TFCBlocks.EarlyBloomery = new BlockEarlyBloomery(TFCBlockID.EarlyBloomery).setUnlocalizedName("EarlyBloomery").setHardness(20).setLightValue(0F);
+		TFCBlocks.Bloom = new BlockBloom(TFCBlockID.Bloom).setUnlocalizedName("Bloom").setHardness(20).setLightValue(0F);
+		TFCBlocks.Sluice = new BlockSluice(TFCBlockID.Sluice).setUnlocalizedName("Sluice").setHardness(2F).setResistance(20F);
 
-		TFCBlocks.stoneStairs = new BlockStair(TFC_Settings.getIntFor(config,"block","stoneStairs", 2000), Material.rock).setUnlocalizedName("stoneStairs").setHardness(10).setResistance(15F);
-		TFCBlocks.stoneSlabs = new BlockSlab(TFC_Settings.getIntFor(config,"block","stoneSlabs", 2001)).setUnlocalizedName("stoneSlabs").setHardness(10).setResistance(15F);
-		TFCBlocks.stoneStalac = new BlockStalactite(TFC_Settings.getIntFor(config,"block","stoneStalac", 2002)).setUnlocalizedName("stoneStalac").setHardness(5);
+		TFCBlocks.stoneStairs = new BlockStair(TFCBlockID.stoneStairs, Material.rock).setUnlocalizedName("stoneStairs").setHardness(10).setResistance(15F);
+		TFCBlocks.stoneSlabs = new BlockSlab(TFCBlockID.stoneSlabs).setUnlocalizedName("stoneSlabs").setHardness(10).setResistance(15F);
+		TFCBlocks.stoneStalac = new BlockStalactite(TFCBlockID.stoneStalac).setUnlocalizedName("stoneStalac").setHardness(5);
 
-		TFCBlocks.Charcoal = new BlockCharcoal(TFC_Settings.getIntFor(config,"block","Charcoal", 2016)).setHardness(3F).setResistance(10F).setUnlocalizedName("Charcoal");
+		TFCBlocks.Charcoal = new BlockCharcoal(TFCBlockID.Charcoal).setHardness(3F).setResistance(10F).setUnlocalizedName("Charcoal");
 
-		TFCBlocks.Detailed = new BlockDetailed(TFC_Settings.getIntFor(config,"block","StoneDetailed", 2017)).setUnlocalizedName("StoneDetailed").setHardness(10).setResistance(15F);
+		TFCBlocks.Detailed = new BlockDetailed(TFCBlockID.StoneDetailed).setUnlocalizedName("StoneDetailed").setHardness(10).setResistance(15F);
 
-		TFCBlocks.WoodVert = new BlockLogVert(TFC_Settings.getIntFor(config,"block","WoodVert", 2018)).setUnlocalizedName("WoodVert").setHardness(40).setResistance(15F);
-		TFCBlocks.WoodHoriz = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz", 2019), 0).setUnlocalizedName("WoodHoriz").setHardness(40).setResistance(15F);
-		TFCBlocks.WoodHoriz2 = new BlockLogHoriz(TFC_Settings.getIntFor(config,"block","WoodHoriz2", 2020), 8).setUnlocalizedName("WoodHoriz2").setHardness(40).setResistance(15F);
+		TFCBlocks.WoodVert = new BlockLogVert(TFCBlockID.WoodVert).setUnlocalizedName("WoodVert").setHardness(40).setResistance(15F);
+		TFCBlocks.WoodHoriz = new BlockLogHoriz(TFCBlockID.WoodHoriz, 0).setUnlocalizedName("WoodHoriz").setHardness(40).setResistance(15F);
+		TFCBlocks.WoodHoriz2 = new BlockLogHoriz(TFCBlockID.WoodHoriz2, 8).setUnlocalizedName("WoodHoriz2").setHardness(40).setResistance(15F);
 
-		TFCBlocks.ToolRack = new BlockToolRack(TFC_Settings.getIntFor(config,"block","ToolRack", 2021)).setHardness(3F).setUnlocalizedName("Toolrack");
-		TFCBlocks.SpawnMeter = new BlockSpawnMeter(TFC_Settings.getIntFor(config,"block","SpawnMeter", 2022)).setHardness(3F).setUnlocalizedName("SpawnMeter");
-		TFCBlocks.FoodPrep = new BlockFoodPrep(TFC_Settings.getIntFor(config,"block","FoodPrep", 2023)).setHardness(1F).setUnlocalizedName("FoodPrep");
-		TFCBlocks.Quern = new BlockQuern(TFC_Settings.getIntFor(config,"block","Quern", 2024)).setHardness(3F).setUnlocalizedName("Quern");
+		TFCBlocks.ToolRack = new BlockToolRack(TFCBlockID.ToolRack).setHardness(3F).setUnlocalizedName("Toolrack");
+		TFCBlocks.SpawnMeter = new BlockSpawnMeter(TFCBlockID.SpawnMeter).setHardness(3F).setUnlocalizedName("SpawnMeter");
+		TFCBlocks.FoodPrep = new BlockFoodPrep(TFCBlockID.FoodPrep).setHardness(1F).setUnlocalizedName("FoodPrep");
+		TFCBlocks.Quern = new BlockQuern(TFCBlockID.Quern).setHardness(3F).setUnlocalizedName("Quern");
 
-		TFCBlocks.WallCobbleIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleIgIn", 2025), StoneIgInCobble, 3).setUnlocalizedName("WallCobble");
-		TFCBlocks.WallCobbleIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleIgEx", 2026), StoneIgExCobble, 4).setUnlocalizedName("WallCobble");
-		TFCBlocks.WallCobbleSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleSed", 2027), StoneSedCobble, 10).setUnlocalizedName("WallCobble");
-		TFCBlocks.WallCobbleMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallCobbleMM", 2028), StoneMMCobble, 6).setUnlocalizedName("WallCobble");
-		TFCBlocks.WallRawIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawIgIn", 2029), StoneIgIn, 3).setUnlocalizedName("WallRaw");
-		TFCBlocks.WallRawIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawIgEx", 2030), StoneIgEx, 4).setUnlocalizedName("WallRaw");
-		TFCBlocks.WallRawSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawSed", 2031), StoneSed, 10).setUnlocalizedName("WallRaw");
-		TFCBlocks.WallRawMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallRawMM", 2032), StoneMM, 6).setUnlocalizedName("WallRaw");
-		TFCBlocks.WallBrickIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickIgIn", 2033), StoneIgInBrick, 3).setUnlocalizedName("WallBrick");
-		TFCBlocks.WallBrickIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickIgEx", 2034), StoneIgExBrick, 4).setUnlocalizedName("WallBrick");
-		TFCBlocks.WallBrickSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickSed", 2035), StoneSedBrick, 10).setUnlocalizedName("WallBrick");
-		TFCBlocks.WallBrickMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallBrickMM", 2036), StoneMMBrick, 6).setUnlocalizedName("WallBrick");
-		TFCBlocks.WallSmoothIgIn = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothIgIn", 2037), StoneIgInSmooth, 3).setUnlocalizedName("WallSmooth");
-		TFCBlocks.WallSmoothIgEx = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothIgEx", 2038), StoneIgExSmooth, 4).setUnlocalizedName("WallSmooth");
-		TFCBlocks.WallSmoothSed = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothSed", 2039), StoneSedSmooth, 10).setUnlocalizedName("WallSmooth");
-		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFC_Settings.getIntFor(config,"block","WallSmoothMM", 2040), StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
+		TFCBlocks.WallCobbleIgIn = new BlockCustomWall(TFCBlockID.WallCobbleIgIn, StoneIgInCobble, 3).setUnlocalizedName("WallCobble");
+		TFCBlocks.WallCobbleIgEx = new BlockCustomWall(TFCBlockID.WallCobbleIgEx, StoneIgExCobble, 4).setUnlocalizedName("WallCobble");
+		TFCBlocks.WallCobbleSed = new BlockCustomWall(TFCBlockID.WallCobbleSed, StoneSedCobble, 10).setUnlocalizedName("WallCobble");
+		TFCBlocks.WallCobbleMM = new BlockCustomWall(TFCBlockID.WallCobbleMM, StoneMMCobble, 6).setUnlocalizedName("WallCobble");
+		TFCBlocks.WallRawIgIn = new BlockCustomWall(TFCBlockID.WallRawIgIn, StoneIgIn, 3).setUnlocalizedName("WallRaw");
+		TFCBlocks.WallRawIgEx = new BlockCustomWall(TFCBlockID.WallRawIgEx, StoneIgEx, 4).setUnlocalizedName("WallRaw");
+		TFCBlocks.WallRawSed = new BlockCustomWall(TFCBlockID.WallRawSed, StoneSed, 10).setUnlocalizedName("WallRaw");
+		TFCBlocks.WallRawMM = new BlockCustomWall(TFCBlockID.WallRawMM, StoneMM, 6).setUnlocalizedName("WallRaw");
+		TFCBlocks.WallBrickIgIn = new BlockCustomWall(TFCBlockID.WallBrickIgIn, StoneIgInBrick, 3).setUnlocalizedName("WallBrick");
+		TFCBlocks.WallBrickIgEx = new BlockCustomWall(TFCBlockID.WallBrickIgEx, StoneIgExBrick, 4).setUnlocalizedName("WallBrick");
+		TFCBlocks.WallBrickSed = new BlockCustomWall(TFCBlockID.WallBrickSed, StoneSedBrick, 10).setUnlocalizedName("WallBrick");
+		TFCBlocks.WallBrickMM = new BlockCustomWall(TFCBlockID.WallBrickMM, StoneMMBrick, 6).setUnlocalizedName("WallBrick");
+		TFCBlocks.WallSmoothIgIn = new BlockCustomWall(TFCBlockID.WallSmoothIgIn, StoneIgInSmooth, 3).setUnlocalizedName("WallSmooth");
+		TFCBlocks.WallSmoothIgEx = new BlockCustomWall(TFCBlockID.WallSmoothIgEx, StoneIgExSmooth, 4).setUnlocalizedName("WallSmooth");
+		TFCBlocks.WallSmoothSed = new BlockCustomWall(TFCBlockID.WallSmoothSed, StoneSedSmooth, 10).setUnlocalizedName("WallSmooth");
+		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFCBlockID.WallSmoothMM, StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
-			TFCBlocks.Doors[i] = new BlockCustomDoor(TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), 2041+i), i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
+			TFCBlocks.Doors[i] = new BlockCustomDoor(TFCBlockID.Doors[i], i*2).setUnlocalizedName("Door "+Global.WOOD_ALL[i]);
 		}
 
-		TFCBlocks.IngotPile =  new BlockIngotPile(TFC_Settings.getIntFor(config, "block", "IngotPile", 2060)).setUnlocalizedName("ingotpile").setHardness(3);
+		TFCBlocks.IngotPile =  new BlockIngotPile(TFCBlockID.IngotPile).setUnlocalizedName("ingotpile").setHardness(3);
 
 
-		TFCBlocks.Barrel = new BlockBarrel(TFC_Settings.getIntFor(config, "block", "Barrel", 2061)).setUnlocalizedName("Barrel").setHardness(2);
-		TFCBlocks.Thatch =  new BlockThatch(TFC_Settings.getIntFor(config, "block", "Thatch", 2062)).setUnlocalizedName("Thatch").setHardness(1);
-		TFCBlocks.Moss =  new BlockMoss(TFC_Settings.getIntFor(config, "block", "Moss", 2063)).setUnlocalizedName("Moss").setHardness(1);
+		TFCBlocks.Barrel = new BlockBarrel(TFCBlockID.Barrel).setUnlocalizedName("Barrel").setHardness(2);
+		TFCBlocks.Thatch =  new BlockThatch(TFCBlockID.Thatch).setUnlocalizedName("Thatch").setHardness(1);
+		TFCBlocks.Moss =  new BlockMoss(TFCBlockID.Moss).setUnlocalizedName("Moss").setHardness(1);
 
 
-		TFCBlocks.Flora = new BlockFlora(TFC_Settings.getIntFor(config, "block", "Flora", 2064)).setUnlocalizedName("Flora");
-		TFCBlocks.Pottery = new BlockPottery(TFC_Settings.getIntFor(config, "block", "Pottery", 2065)).setUnlocalizedName("Pottery").setHardness(1.0f);
+		TFCBlocks.Flora = new BlockFlora(TFCBlockID.Flora).setUnlocalizedName("Flora");
+		TFCBlocks.Pottery = new BlockPottery(TFCBlockID.Pottery).setUnlocalizedName("Pottery").setHardness(1.0f);
 
-		TFCBlocks.Tuyere = new BlockTuyere(TFC_Settings.getIntFor(config, "block", "Tuyere", 2066)).setUnlocalizedName("Tuyere");
-		TFCBlocks.Crucible = new BlockCrucible(TFC_Settings.getIntFor(config, "block", "Crucible", 2067)).setUnlocalizedName("Crucible").setHardness(4.0f);
+		TFCBlocks.Tuyere = new BlockTuyere(TFCBlockID.Tuyere).setUnlocalizedName("Tuyere");
+		TFCBlocks.Crucible = new BlockCrucible(TFCBlockID.Crucible).setUnlocalizedName("Crucible").setHardness(4.0f);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
@@ -576,9 +562,6 @@ public class TFCBlocks
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.Detailed, "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(Block.blocksList[53], "axe", 0);
 
-		if (config != null) {
-			config.save();
-		}
 	}
 
 }

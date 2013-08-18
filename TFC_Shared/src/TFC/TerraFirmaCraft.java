@@ -4,12 +4,13 @@
 package TFC;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
+import TFC.API.Constant.TFCBlockID;
+import TFC.API.Constant.TFCItemID;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -23,7 +24,6 @@ import TFC.Core.Player.PlayerTracker;
 import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
-import TFC.Handlers.BiomeEventHandler;
 import TFC.Handlers.ChatListenerTFC;
 import TFC.Handlers.ChunkDataEventHandler;
 import TFC.Handlers.ChunkEventHandler;
@@ -79,10 +79,12 @@ public class TerraFirmaCraft
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
 		//Load Blocks
+		TFCBlockID.Setup();
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();
 
 		//Load Items
+		TFCItemID.Setup();
 		TFCItems.Setup();
 
 		//Register Generators
