@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -107,20 +108,26 @@ public class ItemLogs extends ItemTerra
 		}
 		else if(world.isBlockSolidOnSide(i, j-1, k, ForgeDirection.UP))
 		{
-			TileEntityLogPile te = (TileEntityLogPile) world.getBlockTileEntity(i, j-1, k);
-			if(te != null)
+			TileEntity te = world.getBlockTileEntity(i, j-1, k);
+
+			if (te instanceof TileEntityLogPile)
 			{
-				if(te.storage[0] == null || te.storage[0].stackSize < 4) {
-					return false;
-				}
-				if(te.storage[1] == null || te.storage[1].stackSize < 4) {
-					return false;
-				}
-				if(te.storage[2] == null || te.storage[2].stackSize < 4) {
-					return false;
-				}
-				if(te.storage[3] == null || te.storage[3].stackSize < 4) {
-					return false;
+				TileEntityLogPile lp = (TileEntityLogPile)te;
+
+				if(lp != null)
+				{
+					if(lp.storage[0] == null || lp.storage[0].stackSize < 4) {
+						return false;
+					}
+					if(lp.storage[1] == null || lp.storage[1].stackSize < 4) {
+						return false;
+					}
+					if(lp.storage[2] == null || lp.storage[2].stackSize < 4) {
+						return false;
+					}
+					if(lp.storage[3] == null || lp.storage[3].stackSize < 4) {
+						return false;
+					}
 				}
 			}
 			return true;
