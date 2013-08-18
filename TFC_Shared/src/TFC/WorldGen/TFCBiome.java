@@ -199,7 +199,7 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 4, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityZombieTFC.class, 10, 4, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonTFC.class, 10, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeperTFC.class, 10, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeperTFC.class, 3, 1, 2));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 10, 4, 4));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 4));
 	}
