@@ -33,6 +33,7 @@ import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.PlayerTossEventHandler;
 import TFC.Handlers.ServerTickHandler;
 import TFC.Handlers.Client.ClientTickHandler;
 import TFC.WorldGen.TFCProvider;
@@ -145,6 +146,9 @@ public class TerraFirmaCraft
 
 		// Register the Entity Hurt Handler
 		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
+		
+		// Register the Player Toss Event Handler, workaround for a crash fix
+		MinecraftForge.EVENT_BUS.register(new PlayerTossEventHandler());
 
 		// Register Gui Handler
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
