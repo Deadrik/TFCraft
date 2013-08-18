@@ -81,23 +81,30 @@ public class BlockWoodConstruct extends BlockTerraContainer
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
-		Eject(world,i,j,k);
+
 	}
 	@Override
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) 
 	{
-		Eject(par1World,par2,par3,par4);
+
 	}
 	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) 
 	{
-		Eject(par1World,par2,par3,par4);
+
 	}
+	
 	@Override
-	public boolean removeBlockByPlayer(World par1World, EntityPlayer player, int par2, int par3, int par4) 
+	public void breakBlock(World world, int x, int y, int z, int blockId, int metadata)
 	{
-		Eject(par1World,par2,par3,par4);
-		return true;
+		Eject(world,x,y,z);
+		super.breakBlock(world, x, y, z, blockId, metadata);
+	}
+	
+	@Override
+	public boolean canDropFromExplosion(Explosion ex)
+	{
+		return false;
 	}
 	
 	@Override

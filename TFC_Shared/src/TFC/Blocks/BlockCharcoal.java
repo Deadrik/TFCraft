@@ -1,5 +1,7 @@
 package TFC.Blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -215,10 +217,33 @@ public class BlockCharcoal extends BlockTerra {
 	}
 	
 	@Override
-	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
+	public boolean canDropFromExplosion(Explosion ex)
+	{
+		return false;
+	}
+	
+	@Override
+	public void onBlockExploded(World world, int x, int y, int z, Explosion ex)
 	{
 		if(!world.isRemote)
 		{
+			int amount = world.getBlockMetadata(x, y, z);
+			
+			if(amount > 0)
+			{
+				Random rand = new Random();
+				// Between 50% and 100% of the amount
+				amount = rand.nextInt(amount + 1) + (amount/2);	
+				dropBlockAsItem_do(world, x, y, z, new ItemStack(Item.coal,amount,1));
+			}
 		}
+		
+		super.onBlockExploded(world, x, y, z, ex);
+	}
+	
+	@Override
+	public void onBlockDestroyedByExplosion(World world, int i, int j, int k, Explosion ex) 
+	{
+		
 	}
 }
