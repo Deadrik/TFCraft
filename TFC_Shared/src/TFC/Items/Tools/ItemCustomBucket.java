@@ -98,20 +98,20 @@ public class ItemCustomBucket extends ItemTerra
 							return par1ItemStack;
 						}
 
-						return new ItemStack(TFCItems.WoodenBucketWater);
+						return new ItemStack(this.getContainerItem());
 					}
 				}
 				else
 				{
 					if (this.isFull < 0)
 					{
-						return new ItemStack(TFCItems.WoodenBucketEmpty);
+						return new ItemStack(this.getContainerItem());
 					}
 
 					if(world.getBlockId(i,j,k)==TFCBlocks.Barrel.blockID){
 						TileEntityBarrel te = (TileEntityBarrel)world.getBlockTileEntity(i, j, k);
 						if(te.checkValidAddition(this.isFull)){
-							return new ItemStack(TFCItems.WoodenBucketEmpty);
+							return new ItemStack(this.getContainerItem());
 						}
 					}
 
@@ -175,10 +175,10 @@ public class ItemCustomBucket extends ItemTerra
 									world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID, 0, 0x02);
 								}
 							}
-							else if(this.isFull != 1)
+							/*else if(this.isFull != 1)
 							{
 								world.setBlock(i, j, k, this.isFull);
-							}
+							}*/
 						}
 
 						if (par3EntityPlayer.capabilities.isCreativeMode)
@@ -186,7 +186,7 @@ public class ItemCustomBucket extends ItemTerra
 							return par1ItemStack;
 						}
 
-						return new ItemStack(TFCItems.WoodenBucketEmpty);
+						return new ItemStack(this.getContainerItem());
 					}
 				}
 			}
