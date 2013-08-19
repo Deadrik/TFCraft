@@ -11,10 +11,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
+import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Util.StringUtil;
 import TFC.Items.Tools.ItemCustomKnife;
 
 public class ItemLeather extends ItemLooseRock

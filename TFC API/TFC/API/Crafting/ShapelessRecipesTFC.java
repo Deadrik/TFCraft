@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API.Crafting;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import TFC.API.HeatRegistry;
 
 public class ShapelessRecipesTFC implements IRecipe
 {
@@ -70,15 +71,13 @@ public class ShapelessRecipesTFC implements IRecipe
 
 					while (var7.hasNext())
 					{
-						ItemStack var8 = (ItemStack)var7.next();
+						ItemStack recipeIS = (ItemStack)var7.next();
 
-						if (inputIS.itemID == var8.itemID && (var8.getItemDamage() == -1 || inputIS.getItemDamage() == var8.getItemDamage()) &&
-								(var8.hasTagCompound() && var8.getTagCompound().hasKey("noTemp") && 
-										(!inputIS.hasTagCompound() || (inputIS.hasTagCompound() && !var8.getTagCompound().hasKey("temperature"))))/*&& 
-								((!var8.hasTagCompound() && !inputIS.hasTagCompound()) || (var8.hasTagCompound() && NBTMatches(var8, inputIS)))*/)
+						if (inputIS.itemID == recipeIS.itemID && (recipeIS.getItemDamage() == 32767 || inputIS.getItemDamage() == recipeIS.getItemDamage()) &&
+								tempMatch(recipeIS, inputIS))
 						{
 							var6 = true;
-							var2.remove(var8);
+							var2.remove(recipeIS);
 							break;
 						}
 					}
@@ -93,22 +92,55 @@ public class ShapelessRecipesTFC implements IRecipe
 
 		return var2.isEmpty();
 	}
-	
+
+	private boolean tempMatch(ItemStack recipeIS, ItemStack inputIS)
+	{
+		NBTTagCompound rnbt = recipeIS.getTagCompound();
+		NBTTagCompound inbt = inputIS.getTagCompound();
+
+		if(rnbt != null && rnbt.hasKey("noTemp"))
+		{
+			if(inbt == null || (inbt != null && !inbt.hasKey("temperature")))
+			{
+				return true;//Recipe expects a cold item and either the input has not tag at all or at the least is missing a temperature tag
+			}
+			else {
+				return false;//Recipe expects a cold item and the input is not cold
+			}
+		}
+
+		if(rnbt != null && rnbt.hasKey("temperature"))
+		{			
+			if(inbt != null && inbt.hasKey("temperature"))
+			{				
+				return HeatRegistry.getInstance().getIsLiquid(inputIS);//Recipe expects a hot item and the input is liquid
+			}
+			else {
+				return false;//Recipe expects a cold item and the input is not cold
+			}
+		}
+
+		return true;
+	}
+
 	private boolean NBTMatches(ItemStack recipeIS, ItemStack inputIS)
 	{
 		NBTTagCompound nbt = recipeIS.getTagCompound();
 		NBTTagCompound inbt = inputIS.getTagCompound();
 		Iterator i = nbt.getTags().iterator();
-		
-		if(inbt == null)
+
+		if(inbt == null) {
 			return false;
-		
+		}
+
 		while(i.hasNext())
 		{
 			NBTBase tag = (NBTBase)i.next();
-			if(inbt.hasKey(tag.getName()))
-				if(!inbt.getTag(tag.getName()).equals(tag))
+			if(inbt.hasKey(tag.getName())) {
+				if(!inbt.getTag(tag.getName()).equals(tag)) {
 					return false;
+				}
+			}
 		}
 		return true;
 	}

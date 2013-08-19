@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
 import TFC.TFCBlocks;
+import TFC.API.Crafting.AnvilReq;
 import TFC.Blocks.Devices.BlockAnvil;
-import TFC.Core.AnvilReq;
 import TFC.TileEntities.TileEntityAnvil;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 

@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerFoodPrep;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityFoodPrep;
 
 public class GuiFoodPrep extends GuiContainer

@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API.Crafting;
 
 import java.util.ArrayList;
 import java.util.List;

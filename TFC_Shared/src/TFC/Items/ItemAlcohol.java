@@ -11,8 +11,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

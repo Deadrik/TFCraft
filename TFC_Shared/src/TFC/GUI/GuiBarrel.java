@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerBarrel;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityBarrel;
 
 public class GuiBarrel extends GuiContainer

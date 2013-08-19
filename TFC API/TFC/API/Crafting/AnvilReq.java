@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API.Crafting;
 
 public enum AnvilReq
 {

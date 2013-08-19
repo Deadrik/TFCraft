@@ -6,7 +6,7 @@ import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.Util.StringUtil;
+import TFC.API.Util.StringUtil;
 
 public class ItemSapling extends ItemTerraBlock
 {

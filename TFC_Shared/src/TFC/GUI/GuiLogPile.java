@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerLogPile;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityLogPile;
 
 public class GuiLogPile extends GuiContainer

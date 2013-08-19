@@ -16,8 +16,8 @@ import TFC.API.ISize;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
-import TFC.Core.Util.StringUtil;
 
 public class ItemTFCArmor extends ItemArmor implements ISize
 {

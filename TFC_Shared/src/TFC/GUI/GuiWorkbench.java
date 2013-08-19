@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerWorkbench;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityWorkbench;
 
 public class GuiWorkbench extends GuiContainer

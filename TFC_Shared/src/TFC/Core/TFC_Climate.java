@@ -5,7 +5,7 @@ import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import TFC.Core.Util.Helper;
+import TFC.API.Util.Helper;
 import TFC.WorldGen.TFCBiome;
 import TFC.WorldGen.TFCWorldChunkManager;
 import cpw.mods.fml.relauncher.Side;

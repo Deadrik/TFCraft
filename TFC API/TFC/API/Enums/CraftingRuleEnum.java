@@ -1,6 +1,6 @@
 package TFC.API.Enums;
 
-import TFC.Core.Util.StringUtil;
+import TFC.API.Util.StringUtil;
 
 public enum CraftingRuleEnum
 {

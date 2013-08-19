@@ -8,8 +8,8 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.Crafting.CraftingManagerTFC;
 import TFC.Containers.Slots.SlotCraftingMetal;
-import TFC.Core.CraftingManagerTFC;
 
 public class ContainerSpecialCrafting extends ContainerTFC
 {

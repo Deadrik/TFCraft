@@ -14,6 +14,12 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
+import TFC.API.Crafting.AnvilCraftingManagerTFC;
+import TFC.API.Crafting.AnvilRecipe;
+import TFC.API.Crafting.AnvilReq;
+import TFC.API.Crafting.CraftingManagerTFC;
+import TFC.API.Crafting.KilnCraftingManager;
+import TFC.API.Crafting.KilnRecipe;
 import TFC.API.Enums.CraftingRuleEnum;
 import cpw.mods.fml.common.registry.GameRegistry;
 

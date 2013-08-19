@@ -22,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
-import TFC.Core.Util.StringUtil;
+import TFC.API.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
 
 public class GuiBlueprint extends GuiScreen

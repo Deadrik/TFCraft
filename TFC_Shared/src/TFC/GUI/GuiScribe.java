@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
 import TFC.TFCItems;
+import TFC.API.Util.StringUtil;
 import TFC.Containers.ContainerScribe;
-import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityScribe;
 
 

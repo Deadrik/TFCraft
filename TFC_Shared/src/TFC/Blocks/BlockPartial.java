@@ -3,11 +3,11 @@ package TFC.Blocks;
 import java.util.ArrayList;
 
 import TFC.*;
+import TFC.API.Util.Helper;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Textures;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
-import TFC.Core.Util.Helper;
 import TFC.Items.Tools.ItemChisel;
 import TFC.TileEntities.TileEntityPartial;
 import cpw.mods.fml.relauncher.Side;

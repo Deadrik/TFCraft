@@ -1,10 +1,11 @@
-package TFC.Core;
+package TFC.API.Crafting;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import TFC.Items.ItemMeltedMetal;
+import TFC.API.HeatRegistry;
 
 public class ShapedRecipesTFC implements IRecipe
 {
@@ -60,8 +61,7 @@ public class ShapedRecipesTFC implements IRecipe
 				{
 					return false;
 				}
-				if(recipeIS.getItem() instanceof ItemMeltedMetal && recipeIS.hasTagCompound() && 
-						recipeIS.getTagCompound().hasKey("temperature") && !TFC_ItemHeat.getIsLiquid(inputIS))
+				if(!tempMatch(recipeIS, inputIS))
 				{
 					return false;
 				}
@@ -108,5 +108,35 @@ public class ShapedRecipesTFC implements IRecipe
 		}
 
 		return false;
+	}
+
+	private boolean tempMatch(ItemStack recipeIS, ItemStack inputIS)
+	{
+		NBTTagCompound rnbt = recipeIS.getTagCompound();
+		NBTTagCompound inbt = inputIS.getTagCompound();
+
+		if(rnbt != null && rnbt.hasKey("noTemp"))
+		{
+			if(inbt == null || (inbt != null && !inbt.hasKey("temperature")))
+			{
+				return true;//Recipe expects a cold item and either the input has not tag at all or at the least is missing a temperature tag
+			}
+			else {
+				return false;//Recipe expects a cold item and the input is not cold
+			}
+		}
+
+		if(rnbt != null && rnbt.hasKey("temperature"))
+		{			
+			if(inbt != null && inbt.hasKey("temperature"))
+			{				
+				return HeatRegistry.getInstance().getIsLiquid(inputIS);//Recipe expects a hot item and the input is liquid
+			}
+			else {
+				return false;//Recipe expects a cold item and the input is not cold
+			}
+		}
+
+		return true;
 	}
 }

@@ -9,10 +9,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.API.Crafting.CraftingManagerTFC;
 import TFC.Containers.Slots.SlotCraftingScribe;
 import TFC.Containers.Slots.SlotScribeCrafting;
 import TFC.Containers.Slots.SlotScribePaper;
-import TFC.Core.CraftingManagerTFC;
 import TFC.GUI.GuiScribe;
 import TFC.TileEntities.TileEntityScribe;
 

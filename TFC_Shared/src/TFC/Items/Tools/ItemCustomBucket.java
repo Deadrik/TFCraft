@@ -12,7 +12,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.API.Enums.EnumSize;
-import TFC.Core.Util.Helper;
+import TFC.API.Util.Helper;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityBarrel;

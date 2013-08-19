@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.API.TFCOptions;
+import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Time;
-import TFC.Core.Util.StringUtil;
 
 public class GuiCalendar extends GuiScreen
 {

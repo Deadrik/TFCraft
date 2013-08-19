@@ -18,7 +18,7 @@ import TFC.API.ISize;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.Util.StringUtil;
+import TFC.API.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;

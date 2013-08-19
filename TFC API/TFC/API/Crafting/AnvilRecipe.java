@@ -1,4 +1,4 @@
-package TFC.Core;
+package TFC.API.Crafting;
 
 import net.minecraft.item.ItemStack;
 import TFC.API.Enums.CraftingRuleEnum;
