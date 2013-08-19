@@ -26,6 +26,7 @@ public class ItemPotteryJug extends ItemPotteryBase
 	{
 		super(id);
 		this.MetaNames = new String[]{"Clay Jug", "Ceramic Jug", "Water Jug"};
+		this.stackable = false;
 	}
 
 	@Override
