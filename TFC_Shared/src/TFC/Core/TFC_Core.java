@@ -322,7 +322,7 @@ public class TFC_Core
 
 	public static boolean isWater(int id)
 	{
-		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID || id == TFCBlocks.finiteWater.blockID) {
+		if(id == Block.waterMoving.blockID || id == Block.waterMoving.blockID) {
 			return true;
 		}
 		return false;

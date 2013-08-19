@@ -89,7 +89,7 @@ public class ItemCustomBucket extends ItemTerra
 						return event.result;
 					}
 
-					if ((world.getBlockId(i, j, k) == Block.waterStill.blockID || world.getBlockId(i, j, k) == TFCBlocks.finiteWater.blockID) && world.getBlockMetadata(i, j, k) <=2)
+					if ((world.getBlockId(i, j, k) == Block.waterStill.blockID) && world.getBlockMetadata(i, j, k) <=2)
 					{
 						world.setBlock(i, j, k, 0);
 
@@ -98,14 +98,14 @@ public class ItemCustomBucket extends ItemTerra
 							return is;
 						}
 
-						return new ItemStack(this.getContainerItem());
+						return new ItemStack(TFCItems.WoodenBucketWater);
 					}
 				}
 				else
 				{
 					if (this.isFull < 0)
 					{
-						return new ItemStack(this.getContainerItem());
+						return new ItemStack(TFCItems.WoodenBucketEmpty);
 					}
 
 					if(world.getBlockId(i,j,k)==TFCBlocks.Barrel.blockID)
@@ -116,80 +116,7 @@ public class ItemCustomBucket extends ItemTerra
 							return new ItemStack(TFCItems.WoodenBucketEmpty);
 						}
 					}
-
-					if (var12.sideHit == 0)
-					{
-						--j;
-					}
-					else if (var12.sideHit == 1)
-					{
-						++j;
-					}
-					else if (var12.sideHit == 2)
-					{
-						--k;
-					}
-					else if (var12.sideHit == 3)
-					{
-						++k;
-					}
-					else if (var12.sideHit == 4)
-					{
-						--i;
-					}
-					else if (var12.sideHit == 5)
-					{
-						++i;
-					}
-
-
-
-					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, is))
-					{
-						return is;
-					}
-
-					if (world.isAirBlock(i, j, k) || !world.getBlockMaterial(i, j, k).isSolid())
-					{
-						if (world.provider.isHellWorld && this.isFull == TFCBlocks.finiteWater.blockID)
-						{
-							world.playSoundEffect(var5 + 0.5D, var7 + 0.5D, var9 + 0.5D, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-
-							for (int var16 = 0; var16 < 8; ++var16)
-							{
-								world.spawnParticle("largesmoke", i + Math.random(), j + Math.random(), k + Math.random(), 0.0D, 0.0D, 0.0D);
-							}
-						}
-						else
-						{
-							if(world.getBlockId(i, j, k) == TFCBlocks.finiteWater.blockID)
-							{
-								int bucketMeta = 0;
-								int blockMeta = world.getBlockMetadata(i, j, k);
-								if(blockMeta > 0)
-								{
-									bucketMeta = bucketMeta + blockMeta;
-									world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID);
-									world.setBlock(i, j+1, k, TFCBlocks.finiteWater.blockID, bucketMeta, 0x02);
-								}
-								else
-								{
-									world.setBlock(i, j, k, TFCBlocks.finiteWater.blockID, 0, 0x02);
-								}
-							}
-							/*else if(this.isFull != 1)
-							{
-								world.setBlock(i, j, k, this.isFull);
-							}*/
-						}
-
-						if (par3EntityPlayer.capabilities.isCreativeMode)
-						{
-							return is;
-						}
-
-						return new ItemStack(TFCItems.WoodenBucketEmpty);
-					}
+					return new ItemStack(TFCItems.WoodenBucketEmpty);
 				}
 			}
 			else if (this.isFull == 0 && var12.entityHit instanceof EntityCowTFC && ((EntityCowTFC)var12.entityHit).getGender() == GenderEnum.FEMALE)

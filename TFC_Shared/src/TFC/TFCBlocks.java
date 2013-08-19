@@ -9,7 +9,6 @@ import TFC.Blocks.BlockBloom;
 import TFC.Blocks.BlockCharcoal;
 import TFC.Blocks.BlockCrop;
 import TFC.Blocks.BlockDetailed;
-import TFC.Blocks.BlockFiniteWater;
 import TFC.Blocks.BlockFlora;
 import TFC.Blocks.BlockFoodPrep;
 import TFC.Blocks.BlockFruitLeaves;
@@ -163,7 +162,6 @@ public class TFCBlocks
 	public static Block LogPile;
 	public static Block tilledSoil;
 	public static Block tilledSoil2;
-	public static Block finiteWater;
 	public static Block Firepit;
 	public static Block Bellows;
 	public static Block Anvil;
@@ -269,8 +267,6 @@ public class TFCBlocks
 
 		GameRegistry.registerBlock(tilledSoil, "tilledSoil");
 		GameRegistry.registerBlock(tilledSoil2, "tilledSoil2");
-
-		GameRegistry.registerBlock(finiteWater, "finiteWater");
 
 		GameRegistry.registerBlock(WoodSupportV, TFC.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV");
 		GameRegistry.registerBlock(WoodSupportH, TFC.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH");
@@ -459,8 +455,6 @@ public class TFCBlocks
 		TFCBlocks.Sand2 = new BlockSand2(TFCBlockID.Sand2).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("sand");
 
 		TFCBlocks.WoodConstruct = (new TFC.Blocks.BlockWoodConstruct(TFCBlockID.WoodConstruct)).setHardness(4F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("WoodConstruct");
-
-		TFCBlocks.finiteWater = new BlockFiniteWater(TFCBlockID.bucketWater).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("bucketWater");
 
 		TFCBlocks.Firepit = new BlockFirepit(TFCBlockID.Firepit).setUnlocalizedName("Firepit").setHardness(1).setLightValue(0F);
 		TFCBlocks.Bellows = new BlockBellows(TFCBlockID.Bellows,Material.wood).setUnlocalizedName("Bellows").setHardness(2);

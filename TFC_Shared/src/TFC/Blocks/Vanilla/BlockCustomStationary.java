@@ -8,10 +8,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import TFC.TFCBlocks;
-import TFC.WorldGen.Biomes.BiomeGenOceanTFC;
-import TFC.WorldGen.Biomes.BiomeGenRiverTFC;
-import TFC.WorldGen.Biomes.BiomeGenSwampTFC;
 
 public class BlockCustomStationary extends BlockCustomFluid
 {
@@ -58,65 +54,13 @@ public class BlockCustomStationary extends BlockCustomFluid
 	/**
 	 * Changes the block ID to that of an updating fluid.
 	 */
-	private void setNotStationary(World par1World, int par2, int par3, int par4)
+	private void setNotStationary(World world, int i, int j, int k)
 	{
-		BiomeGenBase biome = par1World.getBiomeGenForCoords(par2, par4);
+		BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 
-		boolean finite = false;
-
-		if(!finite)
-		{
-			int var5 = par1World.getBlockMetadata(par2, par3, par4);
-			par1World.setBlock(par2, par3, par4, this.blockID - 1, var5, 0x2);
-			par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID - 1, this.tickRate(par1World));
-		}
-		else
-		{
-			if(biome instanceof BiomeGenRiverTFC || biome instanceof BiomeGenOceanTFC || biome instanceof BiomeGenSwampTFC)
-			{
-				if(par1World.getBlockId(par2+1, par3, par4) == 0 || 
-						(par1World.getBlockId(par2+1, par3, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2+1, par3, par4) != 0))
-				{
-					par1World.setBlock(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, 0, 2);
-
-					par1World.scheduleBlockUpdate(par2+1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate(par1World));
-				}
-				else if(par1World.getBlockId(par2-1, par3, par4) == 0 || 
-						(par1World.getBlockId(par2-1, par3, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2-1, par3, par4) != 0))
-				{
-					par1World.setBlock(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, 0, 2);
-
-					par1World.scheduleBlockUpdate(par2-1, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate(par1World));
-				}
-				else if(par1World.getBlockId(par2, par3, par4+1) == 0 || 
-						(par1World.getBlockId(par2, par3, par4+1) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4+1) != 0))
-				{
-					par1World.setBlock(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, 0, 2);
-
-					par1World.scheduleBlockUpdate(par2, par3, par4+1, TFCBlocks.finiteWater.blockID, this.tickRate(par1World));
-				}
-				else if(par1World.getBlockId(par2, par3, par4-1) == 0 || 
-						(par1World.getBlockId(par2, par3, par4-1) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3, par4-1) != 0))
-				{
-					par1World.setBlock(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, 0, 2);
-
-					par1World.scheduleBlockUpdate(par2, par3, par4-1, TFCBlocks.finiteWater.blockID, this.tickRate(par1World));
-				}
-				else if(par1World.getBlockId(par2, par3-1, par4) == 0 || 
-						(par1World.getBlockId(par2, par3-1, par4) == TFCBlocks.finiteWater.blockID && par1World.getBlockMetadata(par2, par3-1, par4) != 0))
-				{
-					par1World.setBlock(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, 0, 2);
-
-					par1World.scheduleBlockUpdate(par2, par3-1, par4, TFCBlocks.finiteWater.blockID, this.tickRate(par1World));
-				}
-			}
-			else
-			{
-				par1World.setBlock(par2, par3, par4, TFCBlocks.finiteWater.blockID, 0, 2);
-
-				par1World.scheduleBlockUpdate(par2, par3, par4, TFCBlocks.finiteWater.blockID, this.tickRate(par1World));
-			}
-		}
+		int var5 = world.getBlockMetadata(i, j, k);
+		world.setBlock(i, j, k, this.blockID - 1, var5, 0x2);
+		world.scheduleBlockUpdate(i, j, k, this.blockID - 1, this.tickRate(world));
 	}
 
 	/**

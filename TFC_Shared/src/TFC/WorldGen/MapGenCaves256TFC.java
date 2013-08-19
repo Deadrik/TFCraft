@@ -2,58 +2,31 @@ package TFC.WorldGen;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.MapGenBase;
 import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.feature.*;
 
 public class MapGenCaves256TFC extends MapGenBase
 {
-    
-    private byte[] metaArray;
-    
-    public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
-    {
-        metaArray = meta;
-        super.generate(par1IChunkProvider, par2World, par3, par4, id);
-    }
+
+	private byte[] metaArray;
+
+	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+	{
+		metaArray = meta;
+		super.generate(par1IChunkProvider, par2World, par3, par4, id);
+	}
 	/**
 	 * Generates a node in the current cave system recursion tree.
 	 */
 	protected void generateCaveNode(long par1, int par3, int par4, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
 	{
-		double var19 = (double)(par3 * 16 + 8);
-		double var21 = (double)(par4 * 16 + 8);
+		double var19 = par3 * 16 + 8;
+		double var21 = par4 * 16 + 8;
 		float var23 = 0.0F;
 		float var24 = 0.0F;
 		Random var25 = new Random(par1);
@@ -76,13 +49,13 @@ public class MapGenCaves256TFC extends MapGenBase
 
 		for (boolean var28 = var25.nextInt(6) == 0; par15 < par16; ++par15)
 		{
-			double var29 = width + (double)(MathHelper.sin((float)par15 * (float)Math.PI / (float)par16) * par12 * 1.0F);
+			double var29 = width + MathHelper.sin(par15 * (float)Math.PI / par16) * par12 * 1.0F;
 			double var31 = var29 * par17;
 			float var33 = MathHelper.cos(par14);
 			float var34 = MathHelper.sin(par14);
-			par6 += (double)(MathHelper.cos(par13) * var33);
-			par8 += (double)var34;
-			par10 += (double)(MathHelper.sin(par13) * var33);
+			par6 += MathHelper.cos(par13) * var33;
+			par8 += var34;
+			par10 += MathHelper.sin(par13) * var33;
 
 			if (var28)
 			{
@@ -111,8 +84,8 @@ public class MapGenCaves256TFC extends MapGenBase
 			{
 				double var35 = par6 - var19;
 				double var37 = par10 - var21;
-				double var39 = (double)(par16 - par15);
-				double var41 = (double)(par12 + 2.0F + 16.0F);
+				double var39 = par16 - par15;
+				double var41 = par12 + 2.0F + 16.0F;
 
 				if (var35 * var35 + var37 * var37 - var39 * var39 > var41 * var41)
 				{
@@ -172,7 +145,7 @@ public class MapGenCaves256TFC extends MapGenBase
 
 								if (var44 >= 0 && var44 < 256)
 								{
-									if (blockArray[var45] == Block.waterMoving.blockID || blockArray[var45] == Block.waterStill.blockID  || blockArray[var45] == TFCBlocks.finiteWater.blockID)
+									if (blockArray[var45] == Block.waterMoving.blockID || blockArray[var45] == Block.waterStill.blockID)
 									{
 										var58 = true;
 									}
@@ -190,11 +163,11 @@ public class MapGenCaves256TFC extends MapGenBase
 					{
 						for (var42 = var55; var42 < var36; ++var42)
 						{
-							double var59 = ((double)(var42 + par3 * 16) + 0.5D - par6) / var29;
+							double var59 = (var42 + par3 * 16 + 0.5D - par6) / var29;
 
 							for (var45 = var56; var45 < var40; ++var45)
 							{
-								double var46 = ((double)(var45 + par4 * 16) + 0.5D - par10) / var29;
+								double var46 = (var45 + par4 * 16 + 0.5D - par10) / var29;
 								int var48 = (var42 * 16 + var45) * 256 + yCoord;
 								boolean var49 = false;
 
@@ -202,7 +175,7 @@ public class MapGenCaves256TFC extends MapGenBase
 								{
 									for (int var50 = yCoord - 1; var50 >= var57; --var50)
 									{
-										double var51 = ((double)var50 + 0.5D - par8) / var31;
+										double var51 = (var50 + 0.5D - par8) / var31;
 
 										if (var51 > -0.7D && var59 * var59 + var51 * var51 + var46 * var46 < 1.0D)
 										{
@@ -223,25 +196,25 @@ public class MapGenCaves256TFC extends MapGenBase
 												}
 												else
 												{
-												    byte meta = 0;
-                                                    if(var49)
-                                                    {
-                                                        meta = metaArray[var48];
-                                                    }
-                                                    
+													byte meta = 0;
+													if(var49)
+													{
+														meta = metaArray[var48];
+													}
+
 													blockArray[var48] = 0;
 													metaArray[var48] = 0;
 
-//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
-//													{
-//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
-//														metaArray[var48-1] = meta;
-//													}
-//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
-//													{
-//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
-//														metaArray[var48-1] = meta;
-//													}
+													//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
+														//													{
+														//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
+													//														metaArray[var48-1] = meta;
+													//													}
+													//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
+													//													{
+													//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
+													//														metaArray[var48-1] = meta;
+													//													}
 												}
 											}
 										}
@@ -273,10 +246,11 @@ public class MapGenCaves256TFC extends MapGenBase
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
+	@Override
 	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
-		
+
 		if (this.rand.nextInt(100) <= 10)
 		{
 			var7 = 0;
@@ -284,34 +258,37 @@ public class MapGenCaves256TFC extends MapGenBase
 
 		for (int var8 = 0; var8 < var7; ++var8)
 		{
-			double xCoord = (double)(par2 * 16 + this.rand.nextInt(16));
-			double height = (double)this.rand.nextInt(this.rand.nextInt(247) + 8);
-			double zCoord = (double)(par4 * 16 + this.rand.nextInt(16));
+			double xCoord = par2 * 16 + this.rand.nextInt(16);
+			double height = this.rand.nextInt(this.rand.nextInt(247) + 8);
+			double zCoord = par4 * 16 + this.rand.nextInt(16);
 			int var15 = 1;
-			
+
 			DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt((int)xCoord, (int)zCoord, 0);
-			
+
 			double width = 2;
-			if(height < 32)
-			    width = 4.5;
-			else if (height < 64)
-			    width = 3.0;
-			else if (height < 96)
-                width = 2.5;
-			
+			if(height < 32) {
+				width = 4.5;
+			} else if (height < 64) {
+				width = 3.0;
+			} else if (height < 96) {
+				width = 2.5;
+			}
+
 			int layerID = rockLayer1.data1;
-			
-			if(layerID == TFCBlocks.StoneIgEx.blockID)
-			    width -= 0.55;
-			else if(layerID == TFCBlocks.StoneIgIn.blockID)
-                width -= 0.55;
-			else if(layerID == TFCBlocks.StoneSed.blockID)
-                width -= 0.3;
-			else if(layerID == TFCBlocks.StoneMM.blockID)
-                width -= 0.2;
-			
-			if(this.rand.nextInt(8) == 0)
-			    width += 1;
+
+			if(layerID == TFCBlocks.StoneIgEx.blockID) {
+				width -= 0.55;
+			} else if(layerID == TFCBlocks.StoneIgIn.blockID) {
+				width -= 0.55;
+			} else if(layerID == TFCBlocks.StoneSed.blockID) {
+				width -= 0.3;
+			} else if(layerID == TFCBlocks.StoneMM.blockID) {
+				width -= 0.2;
+			}
+
+			if(this.rand.nextInt(8) == 0) {
+				width += 1;
+			}
 
 			if (this.rand.nextInt(4) == 0)
 			{

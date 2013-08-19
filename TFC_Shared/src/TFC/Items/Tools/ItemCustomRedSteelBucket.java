@@ -1,45 +1,17 @@
 package TFC.Items.Tools;
 
-import TFC.*;
-import TFC.API.Enums.EnumSize;
-import TFC.API.Util.Helper;
-import TFC.Entities.Mobs.EntityCowTFC;
-import TFC.Items.ItemTerra;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.entity.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.crash.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.effect.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.packet.*;
-import net.minecraft.pathfinding.*;
-import net.minecraft.potion.*;
-import net.minecraft.server.*;
-import net.minecraft.stats.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.village.*;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.chunk.*;
-import net.minecraft.world.gen.*;
-import net.minecraft.world.gen.feature.*;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumMovingObjectType;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import TFC.TFCItems;
+import TFC.API.Enums.EnumSize;
+import TFC.API.Util.Helper;
+import TFC.Items.ItemTerra;
 
 public class ItemCustomRedSteelBucket extends ItemTerra
 {
@@ -68,12 +40,13 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 	/**
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer par3EntityPlayer)
 	{
 		float var4 = 1.0F;
-		double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double)var4;
-		double var7 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * (double)var4 + 1.62D - (double)par3EntityPlayer.yOffset;
-		double var9 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * (double)var4;
+		double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * var4;
+		double var7 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * var4 + 1.62D - par3EntityPlayer.yOffset;
+		double var9 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * var4;
 		boolean var11 = this.isFull == 0;
 		MovingObjectPosition var12 = Helper.getMovingObjectPositionFromPlayer(world, par3EntityPlayer, var11);
 
@@ -112,27 +85,27 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 						return event.result;
 					}
 
-					if ((world.getBlockId(i, j, k) == Block.waterStill.blockID || world.getBlockId(i, j, k) == TFCBlocks.finiteWater.blockID) && world.getBlockMetadata(i, j, k) == 0)
-                    {
-                        world.setBlock(i, j, k, 0);
+					if ((world.getBlockId(i, j, k) == Block.waterStill.blockID) && world.getBlockMetadata(i, j, k) == 0)
+					{
+						world.setBlock(i, j, k, 0);
 
-                        if (par3EntityPlayer.capabilities.isCreativeMode)
-                        {
-                            return par1ItemStack;
-                        }
+						if (par3EntityPlayer.capabilities.isCreativeMode)
+						{
+							return par1ItemStack;
+						}
 
-                        if (--par1ItemStack.stackSize <= 0)
-                        {
-                            return new ItemStack(TFCItems.RedSteelBucketWater);
-                        }
+						if (--par1ItemStack.stackSize <= 0)
+						{
+							return new ItemStack(TFCItems.RedSteelBucketWater);
+						}
 
-                        if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketWater)))
-                        {
-                            par3EntityPlayer.dropPlayerItem(new ItemStack(TFCItems.RedSteelBucketWater.itemID, 1, 0));
-                        }
+						if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.RedSteelBucketWater)))
+						{
+							par3EntityPlayer.dropPlayerItem(new ItemStack(TFCItems.RedSteelBucketWater.itemID, 1, 0));
+						}
 
-                        return par1ItemStack;
-                    }
+						return par1ItemStack;
+					}
 				}
 				else
 				{
@@ -204,7 +177,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 
 				for (int var11 = 0; var11 < 8; ++var11)
 				{
-					par1World.spawnParticle("largesmoke", (double)par8 + Math.random(), (double)par9 + Math.random(), (double)par10 + Math.random(), 0.0D, 0.0D, 0.0D);
+					par1World.spawnParticle("largesmoke", par8 + Math.random(), par9 + Math.random(), par10 + Math.random(), 0.0D, 0.0D, 0.0D);
 				}
 			}
 			else

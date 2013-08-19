@@ -1350,7 +1350,7 @@ public class TFCItems
 		SteelScytheHead = new ItemMiscToolHead(TFCItemID.SteelScytheHead).setUnlocalizedName("Steel Scythe Blade");
 
 		WoodenBucketEmpty = (new ItemCustomBucket(TFCItemID.WoodenBucketEmpty, 0)).setUnlocalizedName("Wooden Bucket Empty");
-		WoodenBucketWater = (new ItemCustomBucket(TFCItemID.WoodenBucketWater, TFCBlocks.finiteWater.blockID)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
+		WoodenBucketWater = (new ItemCustomBucket(TFCItemID.WoodenBucketWater, 1)).setUnlocalizedName("Wooden Bucket Water").setContainerItem(WoodenBucketEmpty);
 		WoodenBucketMilk = (new ItemCustomBucketMilk(TFCItemID.WoodenBucketMilk)).setUnlocalizedName("Wooden Bucket Milk").setContainerItem(WoodenBucketEmpty);
 
 		BismuthBronzeKnifeHead = new ItemMiscToolHead(TFCItemID.BismuthBronzeKnifeHead).setUnlocalizedName("Bismuth Bronze Knife Blade");

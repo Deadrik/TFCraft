@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
-import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
@@ -47,7 +46,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		alcohols = new int[]{TFCItems.Beer.itemID,TFCItems.Cider.itemID,TFCItems.Vodka.itemID,TFCItems.Whiskey.itemID,
 				TFCItems.RyeWhiskey.itemID,TFCItems.Sake.itemID,TFCItems.Rum.itemID};
 	}
-	
+
 	public void careForInventorySlot()
 	{
 		if(Type ==1 && itemstack!=null&&  itemstack.getItem() instanceof ItemTerra )
@@ -204,7 +203,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			itemstack = null;
 		}
 	}
-	
+
 	public void setSealed(){
 		sealed = true;
 	}
@@ -350,15 +349,14 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 
 	}
-	
+
 	public boolean checkValidAddition(int i){
-		if(((i == Type)||(i==TFCBlocks.finiteWater.blockID && Type == 1)||(Type == 0)) && !sealed && liquidLevel < 256){
+		if(i == Type && !sealed && liquidLevel < 256)
+		{
 			liquidLevel = Math.min(liquidLevel+32, 256);
-			if(i == 2){
+			if(i == 2)
+			{
 				Type = 2;
-			}
-			if(i == TFCBlocks.finiteWater.blockID){
-				Type = 1;
 			}
 			return true;
 		}
@@ -418,8 +416,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					liquidLevel = Math.min(liquidLevel + 1, 256);
 					Type = 4;
 					itemstack.stackSize-=1;
-					if(itemstack.stackSize==0)
+					if(itemstack.stackSize==0) {
 						itemstack=null;
+					}
 				}
 				else if((Type>=5&&Type<=11 )&& itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize){
 					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
@@ -474,8 +473,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 
 	public void updateGui()
 	{
-		if(!worldObj.isRemote)
+		if(!worldObj.isRemote) {
 			TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createUpdatePacket(), 5);
+		}
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 
 public class MapGenRavine256TFC extends MapGenBaseTFC
@@ -139,7 +138,7 @@ public class MapGenRavine256TFC extends MapGenBaseTFC
 
 								if (var43 >= 0 && var43 < 256)
 								{
-									if (blockArray[var44] == Block.waterMoving.blockID || blockArray[var44] == Block.waterStill.blockID || blockArray[var44] == TFCBlocks.finiteWater.blockID)
+									if (blockArray[var44] == Block.waterMoving.blockID || blockArray[var44] == Block.waterStill.blockID)
 									{
 										var58 = true;
 									}
