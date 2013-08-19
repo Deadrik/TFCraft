@@ -30,8 +30,7 @@ import TFC.Items.ItemCustomMinecart;
 import TFC.Items.ItemCustomPotion;
 import TFC.Items.ItemCustomSeeds;
 import TFC.Items.ItemDyeCustom;
-import TFC.Items.ItemFlatLeather;
-import TFC.Items.ItemFlatRock;
+import TFC.Items.ItemFlatGeneric;
 import TFC.Items.ItemFruitTreeSapling;
 import TFC.Items.ItemGem;
 import TFC.Items.ItemIngot;
@@ -1373,7 +1372,7 @@ public class TFCItems
 		RedSteelKnife = new ItemCustomKnife(TFCItemID.RedSteelKnife,RedSteelToolMaterial, 					250).setUnlocalizedName("Red Steel Knife").setMaxDamage(RedSteelUses);
 		SteelKnife = new ItemCustomKnife(TFCItemID.SteelKnife,SteelToolMaterial,							200).setUnlocalizedName("Steel Knife").setMaxDamage(SteelUses);
 
-		FlatRock = (new ItemFlatRock(TFCItemID.FlatRock).setFolder("rocks/flatrocks/").setUnlocalizedName("FlatRock"));
+		FlatRock = (new ItemFlatGeneric(TFCItemID.FlatRock).setFolder("rocks/flatrocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("FlatRock"));
 		LooseRock = (new ItemLooseRock(TFCItemID.LooseRock).setSpecialCraftingType(FlatRock).setFolder("rocks/").setMetaNames(Global.STONE_ALL).setUnlocalizedName("LooseRock"));
 
 		IgInStoneShovelHead = new ItemMiscToolHead(TFCItemID.IgInStoneShovelHead).setUnlocalizedName("Stone Shovel Head");
@@ -1451,11 +1450,11 @@ public class TFCItems
 		SheepSkin = new ItemTerra(TFCItemID.SheepSkin).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
 		muttonRaw = new ItemTerra(TFCItemID.muttonRaw).setFolder("food/").setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemTerraFood(TFCItemID.muttonCooked, 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
-		FlatLeather = (new ItemFlatLeather(TFCItemID.FlatLeather2).setFolder("tools/").setUnlocalizedName("Flat Leather"));
+		FlatLeather = (new ItemFlatGeneric(TFCItemID.FlatLeather2).setFolder("tools/").setUnlocalizedName("Flat Leather"));
 		TerraLeather = new ItemLeather(TFCItemID.TFCLeather).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather").setCreativeTab(TFCTabs.TFCMaterials);
 
 		Straw = new ItemTerra(TFCItemID.Straw).setFolder("plants/").setUnlocalizedName("Straw");
-		FlatClay = (new ItemFlatLeather(TFCItemID.FlatClay).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
+		FlatClay = (new ItemFlatGeneric(TFCItemID.FlatClay).setFolder("pottery/").setMetaNames(new String[]{"clay flat light", "clay flat dark", "clay flat fire", "clay flat dark fire"}).setUnlocalizedName(""));
 
 		PotteryJug = new ItemPotteryJug(TFCItemID.PotteryJug).setUnlocalizedName("Jug");
 		PotterySmallVessel = new ItemPotterySmallVessel(TFCItemID.PotterySmallVessel).setUnlocalizedName("Small Vessel");
