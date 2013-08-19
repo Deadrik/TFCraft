@@ -15,9 +15,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
+import TFC.API.TFCOptions;
 import TFC.Core.KilnCraftingManager;
 import TFC.Core.KilnRecipe;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Handlers.PacketHandler;
@@ -46,7 +46,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 			int blockAboveID = worldObj.getBlockId(xCoord, yCoord+1, zCoord);
 			//Make sure to keep the fire going throughout the length of the burn
-			if(blockAboveID != Block.fire.blockID && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFC_Settings.pitKilnBurnTime)
+			if(blockAboveID != Block.fire.blockID && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
 				if(blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn()) {
 					worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
@@ -57,7 +57,7 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 			//If the total time passes then we complete the burn and turn the clay into ceramic
 			if(logsForBurn > 0 && blockAboveID == Block.fire.blockID && 
-					TFC_Time.getTotalTicks() > burnStart + (TFC_Settings.pitKilnBurnTime * TFC_Time.hourLength))
+					TFC_Time.getTotalTicks() > burnStart + (TFCOptions.pitKilnBurnTime * TFC_Time.hourLength))
 			{
 				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 				worldObj.setBlock(xCoord, yCoord+1, zCoord, 0);
@@ -113,9 +113,9 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			telp.clearContents();
 			worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
 
-			int ratio = TFC_Settings.pitKilnBurnTime / 16;
+			int ratio = TFCOptions.pitKilnBurnTime / 16;
 
-			int burnLength = (int) (TFC_Time.hourLength * (logsForBurn == 16 ? TFC_Settings.pitKilnBurnTime : ratio * logsForBurn));
+			int burnLength = (int) (TFC_Time.hourLength * (logsForBurn == 16 ? TFCOptions.pitKilnBurnTime : ratio * logsForBurn));
 			burnStart = TFC_Time.getTotalTicks();
 		}
 	}

@@ -5,8 +5,8 @@ import java.util.Random;
 
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Core;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.WorldProvider;

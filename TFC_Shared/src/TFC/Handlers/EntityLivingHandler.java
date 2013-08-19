@@ -12,10 +12,10 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCOptions;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -71,7 +71,7 @@ public class EntityLivingHandler
 								{
 									int lastChunkX = (int)player.posX >> 4;
 								int lastChunkZ = (int)player.posZ >> 4;
-						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFC_Settings.protectionGain);
+						ChunkDataManager.addProtection(lastChunkX + i, lastChunkZ + k, TFCOptions.protectionGain);
 								}
 							}
 
@@ -147,6 +147,6 @@ public class EntityLivingHandler
 
 	public int getMaxHealth(EntityPlayer player)
 	{
-		return Math.min(1000+(player.experienceLevel * TFC_Settings.HealthGainRate), TFC_Settings.HealthGainCap);
+		return Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap);
 	}
 }

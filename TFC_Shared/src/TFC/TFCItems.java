@@ -710,6 +710,7 @@ public class TFCItems
 	public static Item RiceDough;
 	public static Item CornmealDough;
 
+	public static Item WheatBread;
 	public static Item BarleyBread;
 	public static Item OatBread;
 	public static Item RyeBread;
@@ -1590,6 +1591,7 @@ public class TFCItems
 		RiceDough = new ItemTerraFood(TFCItemID.RiceDough, 1, 0.0F, false, 0).setUnlocalizedName("Rice Dough");
 		CornmealDough = new ItemTerraFood(TFCItemID.CornmealDough, 1, 0.0F, false, 0).setUnlocalizedName("Cornmeal Dough");
 
+		WheatBread = new ItemTerraFood(TFCItemID.BarleyBread, 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
 		BarleyBread = new ItemTerraFood(TFCItemID.BarleyBread, 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
 		OatBread = new ItemTerraFood(TFCItemID.OatBread, 25, 0.6F, false, 44).setUnlocalizedName("Oat Bread");
 		RyeBread = new ItemTerraFood(TFCItemID.RyeBread, 25, 0.6F, false, 45).setUnlocalizedName("Rye Bread");

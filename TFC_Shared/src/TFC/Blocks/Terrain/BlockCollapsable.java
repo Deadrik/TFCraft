@@ -12,8 +12,8 @@ import net.minecraft.stats.StatList;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.TFCOptions;
 import TFC.Blocks.BlockTerra;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Sounds;
 import TFC.TileEntities.TileEntityPartial;
 
@@ -177,7 +177,7 @@ public class BlockCollapsable extends BlockTerra
 
     public Boolean isUnderLoad(World world, int i, int j, int k)
     {
-        for(int x = 1; x <= TFC_Settings.minimumRockLoad; x++)
+        for(int x = 1; x <= TFCOptions.minimumRockLoad; x++)
         {
             if(!world.isBlockOpaqueCube(i, j+x, k))
             {
@@ -247,7 +247,7 @@ public class BlockCollapsable extends BlockTerra
             entityplayer.addExhaustion(0.075F);
         }
         Random R = new Random();
-        if(R.nextInt(TFC_Settings.initialCollapseRatio) == 0)
+        if(R.nextInt(TFCOptions.initialCollapseRatio) == 0)
         {
             for(int x1 = -1; x1 < 2; x1++)
             {
@@ -266,7 +266,7 @@ public class BlockCollapsable extends BlockTerra
                                 {
                                     double distance = Math.sqrt(Math.pow(i-(i+x),2) + Math.pow(j-(j+y),2) + Math.pow(k-(k+z),2));
                                     
-                                    if(R.nextInt(100) < TFC_Settings.propogateCollapseChance && distance < 35)
+                                    if(R.nextInt(100) < TFCOptions.propogateCollapseChance && distance < 35)
                                     {
                                         if(Block.blocksList[world.getBlockId(i+x, j+y, k+z)] instanceof BlockCollapsable && 
                                         		((BlockCollapsable)Block.blocksList[world.getBlockId(i+x, j+y, k+z)]).tryToFall(world, i+x, j+y, k+z, world.getBlockMetadata( i+x, j+y, k+z)))
@@ -275,7 +275,7 @@ public class BlockCollapsable extends BlockTerra
                                             while(done < height)
                                             {
                                                 done++;
-                                                if(Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)] instanceof BlockCollapsable && R.nextInt(100) < TFC_Settings.propogateCollapseChance) {
+                                                if(Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)] instanceof BlockCollapsable && R.nextInt(100) < TFCOptions.propogateCollapseChance) {
                                                 	((BlockCollapsable)Block.blocksList[world.getBlockId(i+x, j+y+done, k+z)]).tryToFall(world, i+x, j+y+done, k+z,world.getBlockMetadata( i+x, j+y+done, k+z));
                                                 } else {
                                                     done = height;

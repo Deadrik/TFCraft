@@ -9,7 +9,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import TFC.Core.TFC_Settings;
+import TFC.API.TFCOptions;
 
 public abstract class BlockTerraContainer extends BlockContainer
 {
@@ -28,7 +28,7 @@ public abstract class BlockTerraContainer extends BlockContainer
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack is) 
 	{
 		//TODO: Debug Message should go here if debug is toggled on
-		if(TFC_Settings.enableDebugMode && world.isRemote)
+		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(i, j, k);
 			System.out.println("Meta="+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());
@@ -44,7 +44,7 @@ public abstract class BlockTerraContainer extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)  
 	{
-		if(TFC_Settings.enableDebugMode && world.isRemote)
+		if(TFCOptions.enableDebugMode && world.isRemote)
 		{
 			int metadata = world.getBlockMetadata(x, y, z);
 			System.out.println("Meta = "+(new StringBuilder()).append(getUnlocalizedName()).append(":").append(metadata).toString());

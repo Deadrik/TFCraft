@@ -19,7 +19,7 @@ import net.minecraftforge.common.IShearable;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
-import TFC.Core.TFC_Settings;
+import TFC.API.TFCOptions;
 import TFC.Items.Tools.ItemCustomScythe;
 
 public class BlockCustomLeaves extends BlockLeaves implements IShearable
@@ -63,7 +63,7 @@ public class BlockCustomLeaves extends BlockLeaves implements IShearable
     @Override
     public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
     {
-        return TFC_Settings.enableInnerGrassFix;
+        return TFCOptions.enableInnerGrassFix;
     }
 
     @Override

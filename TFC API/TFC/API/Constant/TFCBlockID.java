@@ -4,7 +4,7 @@ import java.io.File;
 
 import net.minecraftforge.common.Configuration;
 import TFC.TerraFirmaCraft;
-import TFC.Core.TFC_Settings;
+import TFC.API.TFCOptions;
 
 public class TFCBlockID
 {
@@ -139,122 +139,122 @@ public class TFCBlockID
 			config = null;
 		}
 		
-		StoneIgInCobble	= TFC_Settings.getIntFor(config,"block", "StoneIgInCobble", StoneIgInCobble);
-		StoneIgIn = TFC_Settings.getIntFor(config, "block", "StoneIgIn", StoneIgIn);
-		StoneIgInSmooth = TFC_Settings.getIntFor(config, "block", "StoneIgInSmooth", StoneIgInSmooth);
-		StoneIgInBrick = TFC_Settings.getIntFor(config, "block", "StoneIgInBrick", StoneIgInBrick);
+		StoneIgInCobble	= TFCOptions.getIntFor(config,"block", "StoneIgInCobble", StoneIgInCobble);
+		StoneIgIn = TFCOptions.getIntFor(config, "block", "StoneIgIn", StoneIgIn);
+		StoneIgInSmooth = TFCOptions.getIntFor(config, "block", "StoneIgInSmooth", StoneIgInSmooth);
+		StoneIgInBrick = TFCOptions.getIntFor(config, "block", "StoneIgInBrick", StoneIgInBrick);
 
-		StoneSedCobble = TFC_Settings.getIntFor(config, "block", "StoneSedCobble", StoneSedCobble);
-		StoneSed = TFC_Settings.getIntFor(config, "block", "StoneSed", StoneSed);
-		StoneSedSmooth = TFC_Settings.getIntFor(config, "block", "StoneSedSmooth", StoneSedSmooth);
-		StoneSedBrick = TFC_Settings.getIntFor(config, "block", "StoneSedBrick", StoneSedBrick);
+		StoneSedCobble = TFCOptions.getIntFor(config, "block", "StoneSedCobble", StoneSedCobble);
+		StoneSed = TFCOptions.getIntFor(config, "block", "StoneSed", StoneSed);
+		StoneSedSmooth = TFCOptions.getIntFor(config, "block", "StoneSedSmooth", StoneSedSmooth);
+		StoneSedBrick = TFCOptions.getIntFor(config, "block", "StoneSedBrick", StoneSedBrick);
 
-		StoneIgExCobble = TFC_Settings.getIntFor(config, "block", "StoneIgExCobble", StoneIgExCobble);
-		StoneIgEx = TFC_Settings.getIntFor(config, "block", "StoneIgEx", StoneIgEx);
-		StoneIgExSmooth = TFC_Settings.getIntFor(config, "block", "StoneIgExSmooth", StoneIgExSmooth);
-		StoneIgExBrick = TFC_Settings.getIntFor(config, "block", "StoneIgExBrick", StoneIgExBrick);
+		StoneIgExCobble = TFCOptions.getIntFor(config, "block", "StoneIgExCobble", StoneIgExCobble);
+		StoneIgEx = TFCOptions.getIntFor(config, "block", "StoneIgEx", StoneIgEx);
+		StoneIgExSmooth = TFCOptions.getIntFor(config, "block", "StoneIgExSmooth", StoneIgExSmooth);
+		StoneIgExBrick = TFCOptions.getIntFor(config, "block", "StoneIgExBrick", StoneIgExBrick);
 
-		StoneMMCobble = TFC_Settings.getIntFor(config, "block", "StoneMMCobble", StoneMMCobble);
-		StoneMM = TFC_Settings.getIntFor(config, "block", "StoneMM", StoneMM);
-		StoneMMSmooth = TFC_Settings.getIntFor(config, "block", "StoneMMSmooth", StoneMMSmooth);
-		StoneMMBrick = TFC_Settings.getIntFor(config, "block", "StoneMMBrick", StoneMMBrick);
+		StoneMMCobble = TFCOptions.getIntFor(config, "block", "StoneMMCobble", StoneMMCobble);
+		StoneMM = TFCOptions.getIntFor(config, "block", "StoneMM", StoneMM);
+		StoneMMSmooth = TFCOptions.getIntFor(config, "block", "StoneMMSmooth", StoneMMSmooth);
+		StoneMMBrick = TFCOptions.getIntFor(config, "block", "StoneMMBrick", StoneMMBrick);
 
-		Dirt = TFC_Settings.getIntFor(config, "block", "Dirt", Dirt);
-		Dirt2 = TFC_Settings.getIntFor(config, "block", "Dirt2", Dirt2);
-		Clay = TFC_Settings.getIntFor(config, "block", "Clay", Clay);
-		Clay2 = TFC_Settings.getIntFor(config, "block", "Clay2", Clay2);
-		ClayGrass = TFC_Settings.getIntFor(config, "block", "ClayGrass", ClayGrass);
-		ClayGrass2 = TFC_Settings.getIntFor(config, "block", "ClayGrass2", ClayGrass2);
-		Grass = TFC_Settings.getIntFor(config, "block", "Grass", Grass);
-		Grass2 = TFC_Settings.getIntFor(config, "block", "Grass2", Grass2);
-		Peat = TFC_Settings.getIntFor(config, "block", "Peat", Peat);
-		PeatGrass = TFC_Settings.getIntFor(config, "block", "PeatGrass", PeatGrass);
-		DryGrass = TFC_Settings.getIntFor(config, "block", "DryGrass", DryGrass);
-		DryGrass2 = TFC_Settings.getIntFor(config, "block", "DryGrass2", DryGrass2);
+		Dirt = TFCOptions.getIntFor(config, "block", "Dirt", Dirt);
+		Dirt2 = TFCOptions.getIntFor(config, "block", "Dirt2", Dirt2);
+		Clay = TFCOptions.getIntFor(config, "block", "Clay", Clay);
+		Clay2 = TFCOptions.getIntFor(config, "block", "Clay2", Clay2);
+		ClayGrass = TFCOptions.getIntFor(config, "block", "ClayGrass", ClayGrass);
+		ClayGrass2 = TFCOptions.getIntFor(config, "block", "ClayGrass2", ClayGrass2);
+		Grass = TFCOptions.getIntFor(config, "block", "Grass", Grass);
+		Grass2 = TFCOptions.getIntFor(config, "block", "Grass2", Grass2);
+		Peat = TFCOptions.getIntFor(config, "block", "Peat", Peat);
+		PeatGrass = TFCOptions.getIntFor(config, "block", "PeatGrass", PeatGrass);
+		DryGrass = TFCOptions.getIntFor(config, "block", "DryGrass", DryGrass);
+		DryGrass2 = TFCOptions.getIntFor(config, "block", "DryGrass2", DryGrass2);
 
-		Ore = TFC_Settings.getIntFor(config, "block", "Ore", Ore);
-		Ore2 = TFC_Settings.getIntFor(config, "block", "Ore2", Ore2);
-		Ore3 = TFC_Settings.getIntFor(config, "block", "Ore3", Ore3);
-		LooseRock = TFC_Settings.getIntFor(config, "block", "LooseRock", LooseRock);
-		LogPile = TFC_Settings.getIntFor(config, "block", "LogPile", LogPile);
+		Ore = TFCOptions.getIntFor(config, "block", "Ore", Ore);
+		Ore2 = TFCOptions.getIntFor(config, "block", "Ore2", Ore2);
+		Ore3 = TFCOptions.getIntFor(config, "block", "Ore3", Ore3);
+		LooseRock = TFCOptions.getIntFor(config, "block", "LooseRock", LooseRock);
+		LogPile = TFCOptions.getIntFor(config, "block", "LogPile", LogPile);
 
-		Sulfur = TFC_Settings.getIntFor(config, "block", "Sulfur", Sulfur);
-		WoodSupportV = TFC_Settings.getIntFor(config, "block", "WoodSupportV", WoodSupportV);
-		WoodSupportH = TFC_Settings.getIntFor(config, "block", "WoodSupportH", WoodSupportH);
+		Sulfur = TFCOptions.getIntFor(config, "block", "Sulfur", Sulfur);
+		WoodSupportV = TFCOptions.getIntFor(config, "block", "WoodSupportV", WoodSupportV);
+		WoodSupportH = TFCOptions.getIntFor(config, "block", "WoodSupportH", WoodSupportH);
 
-		tilledSoil = TFC_Settings.getIntFor(config, "block", "tilledSoil", tilledSoil);
-		tilledSoil2 = TFC_Settings.getIntFor(config, "block", "tilledSoil2", tilledSoil2);
+		tilledSoil = TFCOptions.getIntFor(config, "block", "tilledSoil", tilledSoil);
+		tilledSoil2 = TFCOptions.getIntFor(config, "block", "tilledSoil2", tilledSoil2);
 
-		fruitTreeWood = TFC_Settings.getIntFor(config, "block", "fruitTreeWood", fruitTreeWood);
-		fruitTreeLeaves = TFC_Settings.getIntFor(config, "block", "fruitTreeLeaves", fruitTreeLeaves);
-		fruitTreeLeaves2 = TFC_Settings.getIntFor(config, "block", "fruitTreeLeaves2", fruitTreeLeaves2);
+		fruitTreeWood = TFCOptions.getIntFor(config, "block", "fruitTreeWood", fruitTreeWood);
+		fruitTreeLeaves = TFCOptions.getIntFor(config, "block", "fruitTreeLeaves", fruitTreeLeaves);
+		fruitTreeLeaves2 = TFCOptions.getIntFor(config, "block", "fruitTreeLeaves2", fruitTreeLeaves2);
 
-		Sand = TFC_Settings.getIntFor(config, "block", "Sand", Sand);
-		Sand2 = TFC_Settings.getIntFor(config, "block", "Sand2", Sand2);
+		Sand = TFCOptions.getIntFor(config, "block", "Sand", Sand);
+		Sand2 = TFCOptions.getIntFor(config, "block", "Sand2", Sand2);
 
-		WoodConstruct = TFC_Settings.getIntFor(config, "block", "WoodConstruct", WoodConstruct);
+		WoodConstruct = TFCOptions.getIntFor(config, "block", "WoodConstruct", WoodConstruct);
 
-		bucketWater = TFC_Settings.getIntFor(config, "block", "bucketWater", bucketWater);
+		bucketWater = TFCOptions.getIntFor(config, "block", "bucketWater", bucketWater);
 
-		Firepit = TFC_Settings.getIntFor(config, "block", "Firepit", Firepit);
-		Bellows = TFC_Settings.getIntFor(config, "block", "Bellows", Bellows);
-		Forge = TFC_Settings.getIntFor(config, "block", "Forge", Forge);
-		Scribe = TFC_Settings.getIntFor(config, "block", "Scribe", Scribe);
-		Anvil = TFC_Settings.getIntFor(config, "block", "Anvil", Anvil);
-		Anvil2 = TFC_Settings.getIntFor(config, "block", "Anvil2", Anvil2);
+		Firepit = TFCOptions.getIntFor(config, "block", "Firepit", Firepit);
+		Bellows = TFCOptions.getIntFor(config, "block", "Bellows", Bellows);
+		Forge = TFCOptions.getIntFor(config, "block", "Forge", Forge);
+		Scribe = TFCOptions.getIntFor(config, "block", "Scribe", Scribe);
+		Anvil = TFCOptions.getIntFor(config, "block", "Anvil", Anvil);
+		Anvil2 = TFCOptions.getIntFor(config, "block", "Anvil2", Anvil2);
 
-		Molten = TFC_Settings.getIntFor(config, "block", "Molten", Molten);
-		BlastFurnace = TFC_Settings.getIntFor(config, "block", "BlastFurnace", BlastFurnace);
-		EarlyBloomery = TFC_Settings.getIntFor(config, "block", "EarlyBloomery", EarlyBloomery);
-		Bloom = TFC_Settings.getIntFor(config, "block", "Bloom", Bloom);
-		Sluice = TFC_Settings.getIntFor(config, "block", "Sluice", Sluice);
+		Molten = TFCOptions.getIntFor(config, "block", "Molten", Molten);
+		BlastFurnace = TFCOptions.getIntFor(config, "block", "BlastFurnace", BlastFurnace);
+		EarlyBloomery = TFCOptions.getIntFor(config, "block", "EarlyBloomery", EarlyBloomery);
+		Bloom = TFCOptions.getIntFor(config, "block", "Bloom", Bloom);
+		Sluice = TFCOptions.getIntFor(config, "block", "Sluice", Sluice);
 
-		stoneStairs = TFC_Settings.getIntFor(config, "block", "stoneStairs", stoneStairs);
-		stoneSlabs = TFC_Settings.getIntFor(config, "block", "stoneSlabs", stoneSlabs);
-		stoneStalac = TFC_Settings.getIntFor(config, "block", "stoneStalac", stoneStalac);
+		stoneStairs = TFCOptions.getIntFor(config, "block", "stoneStairs", stoneStairs);
+		stoneSlabs = TFCOptions.getIntFor(config, "block", "stoneSlabs", stoneSlabs);
+		stoneStalac = TFCOptions.getIntFor(config, "block", "stoneStalac", stoneStalac);
 
-		Charcoal = TFC_Settings.getIntFor(config, "block", "Charcoal", Charcoal);
+		Charcoal = TFCOptions.getIntFor(config, "block", "Charcoal", Charcoal);
 
-		StoneDetailed = TFC_Settings.getIntFor(config, "block", "StoneDetailed", StoneDetailed);
+		StoneDetailed = TFCOptions.getIntFor(config, "block", "StoneDetailed", StoneDetailed);
 
-		WoodVert = TFC_Settings.getIntFor(config, "block", "WoodVert", WoodVert);
-		WoodHoriz = TFC_Settings.getIntFor(config, "block", "WoodHoriz", WoodHoriz);
-		WoodHoriz2 = TFC_Settings.getIntFor(config, "block", "WoodHoriz2", WoodHoriz2);
+		WoodVert = TFCOptions.getIntFor(config, "block", "WoodVert", WoodVert);
+		WoodHoriz = TFCOptions.getIntFor(config, "block", "WoodHoriz", WoodHoriz);
+		WoodHoriz2 = TFCOptions.getIntFor(config, "block", "WoodHoriz2", WoodHoriz2);
 
-		ToolRack = TFC_Settings.getIntFor(config, "block", "ToolRack", ToolRack);
-		SpawnMeter = TFC_Settings.getIntFor(config, "block", "SpawnMeter", SpawnMeter);
-		FoodPrep = TFC_Settings.getIntFor(config, "block", "FoodPrep", FoodPrep);
-		Quern = TFC_Settings.getIntFor(config, "block", "Quern", Quern);
+		ToolRack = TFCOptions.getIntFor(config, "block", "ToolRack", ToolRack);
+		SpawnMeter = TFCOptions.getIntFor(config, "block", "SpawnMeter", SpawnMeter);
+		FoodPrep = TFCOptions.getIntFor(config, "block", "FoodPrep", FoodPrep);
+		Quern = TFCOptions.getIntFor(config, "block", "Quern", Quern);
 
-		WallCobbleIgIn = TFC_Settings.getIntFor(config, "block", "WallCobbleIgIn", WallCobbleIgIn);
-		WallCobbleIgEx = TFC_Settings.getIntFor(config, "block", "WallCobbleIgEx", WallCobbleIgEx);
-		WallCobbleSed = TFC_Settings.getIntFor(config, "block", "WallCobbleSed", WallCobbleSed);
-		WallCobbleMM = TFC_Settings.getIntFor(config, "block", "WallCobbleMM", WallCobbleMM);
-		WallRawIgIn = TFC_Settings.getIntFor(config, "block", "WallRawIgIn", WallRawIgIn);
-		WallRawIgEx = TFC_Settings.getIntFor(config, "block", "WallRawIgEx", WallRawIgEx);
-		WallRawSed = TFC_Settings.getIntFor(config, "block", "WallRawSed", WallRawSed);
-		WallRawMM = TFC_Settings.getIntFor(config, "block", "WallRawMM", WallRawMM);
-		WallBrickIgIn = TFC_Settings.getIntFor(config, "block", "WallBrickIgIn", WallBrickIgIn);
-		WallBrickIgEx = TFC_Settings.getIntFor(config, "block", "WallBrickIgEx", WallBrickIgEx);
-		WallBrickSed = TFC_Settings.getIntFor(config, "block", "WallBrickSed", WallBrickSed);
-		WallBrickMM = TFC_Settings.getIntFor(config, "block", "WallBrickMM", WallBrickMM);
-		WallSmoothIgIn = TFC_Settings.getIntFor(config, "block", "WallSmoothIgIn", WallSmoothIgIn);
-		WallSmoothIgEx = TFC_Settings.getIntFor(config, "block", "WallSmoothIgEx", WallSmoothIgEx);
-		WallSmoothSed = TFC_Settings.getIntFor(config, "block", "WallSmoothSed", WallSmoothSed);
-		WallSmoothMM = TFC_Settings.getIntFor(config, "block", "WallSmoothMM", WallSmoothMM);
+		WallCobbleIgIn = TFCOptions.getIntFor(config, "block", "WallCobbleIgIn", WallCobbleIgIn);
+		WallCobbleIgEx = TFCOptions.getIntFor(config, "block", "WallCobbleIgEx", WallCobbleIgEx);
+		WallCobbleSed = TFCOptions.getIntFor(config, "block", "WallCobbleSed", WallCobbleSed);
+		WallCobbleMM = TFCOptions.getIntFor(config, "block", "WallCobbleMM", WallCobbleMM);
+		WallRawIgIn = TFCOptions.getIntFor(config, "block", "WallRawIgIn", WallRawIgIn);
+		WallRawIgEx = TFCOptions.getIntFor(config, "block", "WallRawIgEx", WallRawIgEx);
+		WallRawSed = TFCOptions.getIntFor(config, "block", "WallRawSed", WallRawSed);
+		WallRawMM = TFCOptions.getIntFor(config, "block", "WallRawMM", WallRawMM);
+		WallBrickIgIn = TFCOptions.getIntFor(config, "block", "WallBrickIgIn", WallBrickIgIn);
+		WallBrickIgEx = TFCOptions.getIntFor(config, "block", "WallBrickIgEx", WallBrickIgEx);
+		WallBrickSed = TFCOptions.getIntFor(config, "block", "WallBrickSed", WallBrickSed);
+		WallBrickMM = TFCOptions.getIntFor(config, "block", "WallBrickMM", WallBrickMM);
+		WallSmoothIgIn = TFCOptions.getIntFor(config, "block", "WallSmoothIgIn", WallSmoothIgIn);
+		WallSmoothIgEx = TFCOptions.getIntFor(config, "block", "WallSmoothIgEx", WallSmoothIgEx);
+		WallSmoothSed = TFCOptions.getIntFor(config, "block", "WallSmoothSed", WallSmoothSed);
+		WallSmoothMM = TFCOptions.getIntFor(config, "block", "WallSmoothMM", WallSmoothMM);
 
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
-			Doors[i] = TFC_Settings.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), Doors[i]);
+			Doors[i] = TFCOptions.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), Doors[i]);
 		}
 		
-		IngotPile = TFC_Settings.getIntFor(config, "block", "IngotPile", IngotPile);
-		Barrel = TFC_Settings.getIntFor(config, "block", "Barrel", Barrel);
-		Thatch = TFC_Settings.getIntFor(config, "block", "Thatch", Thatch);
-		Moss = TFC_Settings.getIntFor(config, "block", "Moss", Moss);
-		Flora = TFC_Settings.getIntFor(config, "block", "Flora", Flora);
-		Pottery = TFC_Settings.getIntFor(config, "block", "Pottery", Pottery);
-		Tuyere = TFC_Settings.getIntFor(config, "block", "Tuyere", Tuyere);
-		Crucible = TFC_Settings.getIntFor(config, "block", "Crucible", Crucible);
+		IngotPile = TFCOptions.getIntFor(config, "block", "IngotPile", IngotPile);
+		Barrel = TFCOptions.getIntFor(config, "block", "Barrel", Barrel);
+		Thatch = TFCOptions.getIntFor(config, "block", "Thatch", Thatch);
+		Moss = TFCOptions.getIntFor(config, "block", "Moss", Moss);
+		Flora = TFCOptions.getIntFor(config, "block", "Flora", Flora);
+		Pottery = TFCOptions.getIntFor(config, "block", "Pottery", Pottery);
+		Tuyere = TFCOptions.getIntFor(config, "block", "Tuyere", Tuyere);
+		Crucible = TFCOptions.getIntFor(config, "block", "Crucible", Crucible);
 
 
 		if (config != null) {

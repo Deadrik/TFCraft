@@ -25,12 +25,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.ICausesDamage;
+import TFC.API.TFCOptions;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 
 public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
@@ -289,7 +289,7 @@ public class EntityBear extends EntityTameable implements ICausesDamage, IAnimal
 			worldObj.setEntityState (this, (byte) 8);
 		}
 		if(this.isPregnant()){
-			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFC_Settings.dayLength){
+			if(TFC_Time.getTotalTicks() >= conception + pregnancyTime*TFCOptions.dayLength){
 				int i = rand.nextInt(3) + 1;
 				for (int x = 0; x<i;x++){
 					EntityBear baby = new EntityBear(worldObj, this,mateSizeMod);

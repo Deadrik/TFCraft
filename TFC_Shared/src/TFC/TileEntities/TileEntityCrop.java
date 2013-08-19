@@ -8,8 +8,8 @@ import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
@@ -120,7 +120,7 @@ public class TileEntityCrop extends NetworkTileEntity
 					this.broadcastPacketInRange(createCropUpdatePacket());
 				}
 
-				if((TFC_Settings.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)
+				if((TFCOptions.enableCropsDie && (crop.maxLifespan == -1 && growth > crop.numGrowthStages+((float)crop.numGrowthStages/2))) || growth < 0)
 				{
 					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				}

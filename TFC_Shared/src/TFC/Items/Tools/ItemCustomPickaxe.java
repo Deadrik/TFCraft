@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
 import TFC.Reference;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -40,7 +40,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
 
-		if(TFC_Settings.enableDebugMode) {
+		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: "+is.getItemDamage());
 		}
 	}

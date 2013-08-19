@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.CraftingRuleEnum;
 import TFC.Containers.ContainerAnvil;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Textures;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TileEntityAnvil;
@@ -53,9 +53,9 @@ public class GuiAnvil extends GuiContainer
 		buttonList.add(new GuiAnvilButton(1, guiLeft+87, guiTop + 64, 16, 16, TFC_Textures.AnvilHitMedium, 	208, 33, 16, 16, this, StringUtil.localize("gui.Anvil.MediumHit")));
 		buttonList.add(new GuiAnvilButton(0, guiLeft+69, guiTop + 64, 16, 16, TFC_Textures.AnvilHitLight, 	208, 33, 16, 16, this, StringUtil.localize("gui.Anvil.LightHit")));		
 		buttonList.add(new GuiButton(8, guiLeft + 13, guiTop + 53, 36, 20, StringUtil.localize("gui.Anvil.Weld")));
-		buttonList.add(new GuiAnvilButton(9, guiLeft+113, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 2, TFC_Settings.anvilRuleColor2[0], TFC_Settings.anvilRuleColor2[1], TFC_Settings.anvilRuleColor2[2]));
-		buttonList.add(new GuiAnvilButton(10, guiLeft+94, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 1, TFC_Settings.anvilRuleColor1[0], TFC_Settings.anvilRuleColor1[1], TFC_Settings.anvilRuleColor1[2]));
-		buttonList.add(new GuiAnvilButton(11, guiLeft+75, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 0, TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2]));
+		buttonList.add(new GuiAnvilButton(9, guiLeft+113, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 2, TFCOptions.anvilRuleColor2[0], TFCOptions.anvilRuleColor2[1], TFCOptions.anvilRuleColor2[2]));
+		buttonList.add(new GuiAnvilButton(10, guiLeft+94, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 1, TFCOptions.anvilRuleColor1[0], TFCOptions.anvilRuleColor1[1], TFCOptions.anvilRuleColor1[2]));
+		buttonList.add(new GuiAnvilButton(11, guiLeft+75, guiTop + 7, 19, 21,	208, 49, 19, 21, this, 0, TFCOptions.anvilRuleColor0[0], TFCOptions.anvilRuleColor0[1], TFCOptions.anvilRuleColor0[2]));
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class GuiAnvil extends GuiContainer
 
 			this.mc.func_110434_K().func_110577_a(texture);
 			//Bottom Row
-			GL11.glColor4ub(TFC_Settings.anvilRuleColor0[0], TFC_Settings.anvilRuleColor0[1], TFC_Settings.anvilRuleColor0[2], (byte)255);
+			GL11.glColor4ub(TFCOptions.anvilRuleColor0[0], TFCOptions.anvilRuleColor0[1], TFCOptions.anvilRuleColor0[2], (byte)255);
 			if(Rules[0].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 26, 228, 68, 19, 3);
 			}
@@ -194,7 +194,7 @@ public class GuiAnvil extends GuiContainer
 				drawTexturedModalRect(w + 113, h + 26, 228, 68, 19, 3);
 			}
 			//Middle Row
-			GL11.glColor4ub(TFC_Settings.anvilRuleColor1[0], TFC_Settings.anvilRuleColor1[1], TFC_Settings.anvilRuleColor1[2], (byte)255);
+			GL11.glColor4ub(TFCOptions.anvilRuleColor1[0], TFCOptions.anvilRuleColor1[1], TFCOptions.anvilRuleColor1[2], (byte)255);
 			if(Rules[1].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 24, 228, 68, 19, 3);
 			}
@@ -205,7 +205,7 @@ public class GuiAnvil extends GuiContainer
 				drawTexturedModalRect(w + 113, h + 24, 228, 68, 19, 3);
 			}
 			//Top Row
-			GL11.glColor4ub(TFC_Settings.anvilRuleColor2[0], TFC_Settings.anvilRuleColor2[1], TFC_Settings.anvilRuleColor2[2], (byte)255);
+			GL11.glColor4ub(TFCOptions.anvilRuleColor2[0], TFCOptions.anvilRuleColor2[1], TFCOptions.anvilRuleColor2[2], (byte)255);
 			if(Rules[2].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 22, 228, 68, 19, 3);
 			}

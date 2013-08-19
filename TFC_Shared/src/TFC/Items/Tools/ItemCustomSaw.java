@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import TFC.API.ISize;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
-import TFC.Core.TFC_Settings;
 import TFC.Items.ItemTerra;
 
 import com.google.common.collect.HashMultimap;
@@ -35,7 +35,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
 
-		if(TFC_Settings.enableDebugMode) {
+		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: "+is.getItemDamage());
 		}
 	}

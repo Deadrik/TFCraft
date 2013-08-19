@@ -18,8 +18,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Food.CropIndex;
 import TFC.Food.CropManager;
 import TFC.Items.Tools.ItemCustomScythe;
@@ -223,7 +223,7 @@ public class BlockCrop extends BlockContainer
 
 		}
 
-		if(TFC_Settings.enableDebugMode)
+		if(TFCOptions.enableDebugMode)
 		{
 			System.out.println("Crop ID: " + te.cropId);
 			System.out.println("Growth: " + te.growth);

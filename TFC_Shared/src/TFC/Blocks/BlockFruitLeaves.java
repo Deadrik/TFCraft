@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
@@ -96,7 +96,7 @@ public class BlockFruitLeaves extends BlockTerra
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
 	{
-		return TFC_Settings.enableInnerGrassFix;
+		return TFCOptions.enableInnerGrassFix;
 	}
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random rand)

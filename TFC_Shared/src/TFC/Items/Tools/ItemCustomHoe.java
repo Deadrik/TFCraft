@@ -16,10 +16,10 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
 import TFC.API.TFCTabs;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 import TFC.TileEntities.TileEntityFarmland;
@@ -137,7 +137,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	{
 		ItemTerra.addSizeInformation(this, arraylist);
 
-		if(TFC_Settings.enableDebugMode) {
+		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: " + is.getItemDamage());
 		}
 	}

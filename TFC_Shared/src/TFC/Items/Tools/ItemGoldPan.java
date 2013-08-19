@@ -16,10 +16,10 @@ import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.TFCTabs;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.Blocks.Terrain.BlockOre;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.Helper;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
@@ -184,12 +184,12 @@ public class ItemGoldPan extends ItemTerra
                 int blockAboveId = world.getBlockId(x, y+1, z);
                 int blockAboveMeta = world.getBlockMetadata(x, y+1, z);
 
-                if(TFC_Settings.enableDebugMode)
+                if(TFCOptions.enableDebugMode)
                     System.out.println(new StringBuilder().append(blockAboveId).append(" ").append(blockAboveMeta).toString());
 
                 if(blockAboveId == Block.waterStill.blockID && blockAboveMeta > 0)
                 {
-                	if(TFC_Settings.enableDebugMode)
+                	if(TFCOptions.enableDebugMode)
                 		System.out.println(new StringBuilder().append("True").toString());
                     useTimer = 20;
                     Random random = new Random();

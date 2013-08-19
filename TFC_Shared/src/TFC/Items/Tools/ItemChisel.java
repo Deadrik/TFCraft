@@ -9,11 +9,11 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
+import TFC.API.TFCOptions;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Tools.IToolChisel;
 import TFC.Blocks.BlockSlab;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.TileEntities.TileEntityDetailed;
@@ -80,7 +80,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				world.notifyBlockChange(x, y, z, SlabID);
 			}
 
-			if(TFC_Settings.enableDebugMode) {
+			if(TFCOptions.enableDebugMode) {
 				System.out.println(side);
 			}
 
@@ -170,7 +170,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 				}
 			}
 
-			if(TFC_Settings.enableDebugMode)
+			if(TFCOptions.enableDebugMode)
 			{
 				System.out.println("Extra ="+te.extraData);  
 			}

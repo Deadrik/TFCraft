@@ -24,9 +24,9 @@ import TFC.Reference;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.INetworkTE;
+import TFC.API.TFCOptions;
 import TFC.Containers.ContainerSpecialCrafting;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -86,8 +86,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 				dos.writeFloat(foodstats.foodLevel);
 				dos.writeFloat(foodstats.waterLevel);
 
-				dos.writeInt(TFC_Settings.HealthGainRate);
-				dos.writeInt(TFC_Settings.HealthGainCap);
+				dos.writeInt(TFCOptions.HealthGainRate);
+				dos.writeInt(TFCOptions.HealthGainCap);
 			} 
 			catch (IOException e)
 			{
@@ -208,8 +208,8 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 						foodstats.foodLevel = dis.readFloat();
 						foodstats.waterLevel = dis.readFloat();
 						TFC_Core.setPlayerFoodStats(player, foodstats);
-						TFC_Settings.HealthGainRate = dis.readInt();
-						TFC_Settings.HealthGainCap = dis.readInt();
+						TFCOptions.HealthGainRate = dis.readInt();
+						TFCOptions.HealthGainCap = dis.readInt();
 
 					} catch (IOException e) 
 					{

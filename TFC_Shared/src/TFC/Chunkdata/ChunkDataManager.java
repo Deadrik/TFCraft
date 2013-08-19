@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import TFC.Core.TFC_Settings;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Time;
 
 public class ChunkDataManager 
@@ -45,7 +45,7 @@ public class ChunkDataManager
 			ChunkData d = (ChunkData) chunkmap.get(x + "," + z);
 			if(d != null)
 			{
-				if(d.spawnProtection < 24*TFC_Time.daysInMonth*TFC_Settings.maxProtectionMonths)
+				if(d.spawnProtection < 24*TFC_Time.daysInMonth*TFCOptions.maxProtectionMonths)
 					d.setSpawnProtectionWithUpdate(amount);
 				return true;
 			}

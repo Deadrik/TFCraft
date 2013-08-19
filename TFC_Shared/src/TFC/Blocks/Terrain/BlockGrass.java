@@ -12,10 +12,10 @@ import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCOptions;
 import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Textures;
 import TFC.WorldGen.Generators.WorldGenGrowTrees;
 import cpw.mods.fml.relauncher.Side;
@@ -86,22 +86,22 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
         }
         else if (side == 2)//-Z
         {
-            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
+            if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord-1) == Material.grass)
                 return isSnow(access, xCoord, yCoord-1, zCoord-1) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         else if (side == 3)//+Z
         {
-            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
+            if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord, yCoord-1, zCoord+1) == Material.grass)
                 return isSnow(access, xCoord, yCoord-1, zCoord+1) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         else if (side == 4)//-X
         {
-            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
+            if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord-1, yCoord-1, zCoord) == Material.grass)
                 return isSnow(access, xCoord-1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         else if (side == 5)//+X
         {
-            if(TFC_Settings.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
+            if(TFCOptions.enableBetterGrass == true && access.getBlockMaterial(xCoord+1, yCoord-1, zCoord) == Material.grass)
                 return isSnow(access, xCoord+1, yCoord-1, zCoord) ? Block.snow.getBlockTextureFromSide(0) : GrassTopTexture;
         }
         

@@ -14,9 +14,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -49,8 +49,8 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public float calculateCelestialAngle(long par1, float par3)
 	{
-		int var4 = (int)(par1 % TFC_Settings.dayLength);
-		float var5 = (var4 + par3) / TFC_Settings.dayLength - 0.25F;
+		int var4 = (int)(par1 % TFCOptions.dayLength);
+		float var5 = (var4 + par3) / TFCOptions.dayLength - 0.25F;
 
 		if (var5 < 0.0F)
 		{
@@ -72,7 +72,7 @@ public class TFCProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public int getMoonPhase(long par1)
 	{
-		return (int)(par1 / TFC_Settings.dayLength) % 8;
+		return (int)(par1 / TFCOptions.dayLength) % 8;
 	}
 
 	@Override

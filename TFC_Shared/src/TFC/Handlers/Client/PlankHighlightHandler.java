@@ -3,8 +3,8 @@ package TFC.Handlers.Client;
 import org.lwjgl.opengl.GL11;
 
 import TFC.*;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;

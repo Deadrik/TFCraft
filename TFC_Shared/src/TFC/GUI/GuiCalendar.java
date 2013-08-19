@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
 
@@ -60,7 +60,7 @@ public class GuiCalendar extends GuiScreen
 	{
 		super.initGui();
 
-		if(TFC_Settings.enableDebugMode)
+		if(TFCOptions.enableDebugMode)
 		{
 			buttonList.clear();
 			int l = (width - xSize) / 2;

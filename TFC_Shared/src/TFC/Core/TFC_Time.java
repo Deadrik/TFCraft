@@ -1,6 +1,7 @@
 package TFC.Core;
 
 import net.minecraft.world.World;
+import TFC.API.TFCOptions;
 import TFC.Core.Util.StringUtil;
 
 
@@ -46,11 +47,11 @@ public class TFC_Time
 	public static final int November = 8;
 	public static final int December = 9;
 
-	public static final long hourLength = TFC_Settings.dayLength/24;
-	public static int dayLength = TFC_Settings.dayLength;
+	public static final long hourLength = TFCOptions.dayLength/24;
+	public static int dayLength = TFCOptions.dayLength;
 
-	public static float timeRatio = TFC_Settings.yearLength/360f;
-	public static int daysInYear = TFC_Settings.yearLength;
+	public static float timeRatio = TFCOptions.yearLength/360f;
+	public static int daysInYear = TFCOptions.yearLength;
 	public static int daysInMonth = daysInYear/12;
 	public static long ticksInYear = daysInYear * dayLength;
 	public static long ticksInMonth = daysInMonth * dayLength;

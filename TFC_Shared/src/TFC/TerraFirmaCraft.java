@@ -3,12 +3,16 @@
 //=======================================================
 package TFC;
 
+import java.io.File;
+
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
+import TFC.API.TFCOptions;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
 import TFC.Commands.GetBioTempCommand;
@@ -75,6 +79,8 @@ public class TerraFirmaCraft
 	public void preInit(FMLPreInitializationEvent event) 
 	{
 		instance = this;
+		//Load our settings from the TFCOptions file
+		loadSettings();
 
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
@@ -146,7 +152,7 @@ public class TerraFirmaCraft
 
 		// Register the Entity Hurt Handler
 		MinecraftForge.EVENT_BUS.register(new EntityDamageHandler());
-		
+
 		// Register the Player Toss Event Handler, workaround for a crash fix
 		MinecraftForge.EVENT_BUS.register(new PlayerTossEventHandler());
 
@@ -176,9 +182,9 @@ public class TerraFirmaCraft
 
 		//Register our player tracker
 		GameRegistry.registerPlayerTracker(new PlayerTracker());
-		
+
 		proxy.registerBiomeEventHandler();
-		
+
 		proxy.setupGuiIngameForge();
 
 		//Setup custom potion effects
@@ -215,4 +221,75 @@ public class TerraFirmaCraft
 		evt.registerServerCommand(new SetPlayerStatsCommand());
 		evt.registerServerCommand(new GetBodyTemp());
 	}	
+
+	public void loadSettings()
+	{
+		Configuration config;
+		try
+		{
+			config = new Configuration(new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFCOptions.cfg"));
+			config.load();
+		} catch (Exception e) {
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to access settings configuration!").toString());
+			config = null;
+		}
+		System.out.println(new StringBuilder().append("[TFC] Loading Settings").toString());
+		/**Start setup here*/
+		//General
+		TFCOptions.enableVanillaDiamondRecipe = TFCOptions.getBooleanFor(config, "General","enableVanillaDiamondRecipe",false);
+		TFCOptions.enableVanillaIronRecipe = TFCOptions.getBooleanFor(config,"General","enableVanillaIronRecipe",false);
+		TFCOptions.enableVanillaGoldRecipe = TFCOptions.getBooleanFor(config,"General","enableVanillaGoldRecipe",false);
+		TFCOptions.enableBetterGrass = TFCOptions.getBooleanFor(config,"General","enableBetterGrass", true);
+		TFCOptions.enableVanillaFurnaceRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaFurnaceRecipes",false);
+		TFCOptions.enableVanillaRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
+		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
+		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
+		TFCOptions.dayLength = TFCOptions.getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days.");
+		TFCOptions.yearLength = TFCOptions.getIntFor(config,"General","yearLength",96, "This is how many days are in a year. Keep this to multiples of 12.");
+		//Caveins
+		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");
+		TFCOptions.initialCollapseRatio = TFCOptions.getIntFor(config,"Cavein Options","initialCollapseRatio",40, "This number is a 1 in X chance that when you mine a block, a collapse will occur.");
+		TFCOptions.propogateCollapseChance = TFCOptions.getIntFor(config,"Cavein Options","propogateCollapseChance",35, "This number is the likelihood for each block to propagate the collapse farther.");
+
+		TFCOptions.cropNutrientAColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Red", 237);
+		TFCOptions.cropNutrientAColor[1] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Green", 28);
+		TFCOptions.cropNutrientAColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Blue", 36);
+		TFCOptions.cropNutrientAColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientA","Alpha", 200);
+
+		TFCOptions.cropNutrientBColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Red", 242);
+		TFCOptions.cropNutrientBColor[1] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Green", 101);
+		TFCOptions.cropNutrientBColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Blue", 34);
+		TFCOptions.cropNutrientBColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientB","Alpha", 200);
+
+		TFCOptions.cropNutrientCColor[0] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Red", 247);
+		TFCOptions.cropNutrientCColor[1] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Green", 148);
+		TFCOptions.cropNutrientCColor[2] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Blue", 49);
+		TFCOptions.cropNutrientCColor[3] = (byte)TFCOptions.getIntFor(config,"ColorNutrientC","Alpha", 200);
+
+		TFCOptions.anvilRuleColor0[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Red", 237);
+		TFCOptions.anvilRuleColor0[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Green", 28);
+		TFCOptions.anvilRuleColor0[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor0","Blue", 36);
+
+		TFCOptions.anvilRuleColor1[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor1","Red", 242);
+		TFCOptions.anvilRuleColor1[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor1","Green", 101);
+		TFCOptions.anvilRuleColor1[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor1","Blue", 34);
+
+		TFCOptions.anvilRuleColor2[0] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor2","Red", 247);
+		TFCOptions.anvilRuleColor2[1] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor2","Green", 148);
+		TFCOptions.anvilRuleColor2[2] = (byte)TFCOptions.getIntFor(config,"anvilRuleColor2","Blue", 49);
+
+		TFCOptions.enableCropsDie = TFCOptions.getBooleanFor(config, "Crops","enableCropsDie",false);
+
+		TFCOptions.pitKilnBurnTime = TFCOptions.getIntFor(config,"General","pitKilnBurnTime", 8, "This is the number of hours that the pit kiln should burn before being completed. Longer than 8 hours will require players to feed extra logs to the fire beyond the initial 16 in the full log pile. Logs burn for 30 minutes each.");
+		TFCOptions.maxProtectionMonths = TFCOptions.getIntFor(config,"Protection","maxProtectionMonths", 10, "The maximum number of months of spawn protection that can accumulate.");
+		TFCOptions.protectionGain = TFCOptions.getIntFor(config,"Protection","protectionGain", 8, "The number of hours of protection gained in the 3x3 chunk area for spending 1 hour in that chunk.");
+
+		TFCOptions.HealthGainRate = TFCOptions.getIntFor(config,"Player","HealthGainRate", 20, "The rate of Health Gain per experience level. Set to 0 to turn off.");
+		TFCOptions.HealthGainCap = TFCOptions.getIntFor(config,"Player","HealthGainCap", 3000, "The maximum achievable health pool total.");
+
+		/**Always end with this*/
+		if (config != null) {
+			config.save();
+		}
+	}
 }

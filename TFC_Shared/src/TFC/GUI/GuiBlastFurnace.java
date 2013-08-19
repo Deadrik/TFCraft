@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.TFCOptions;
 import TFC.Containers.ContainerBlastFurnace;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TEBlastFurnace;
 
@@ -58,7 +58,7 @@ public class GuiBlastFurnace extends GuiContainer
 		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Ore") ,40, 17, 0x000000);
 		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Charcoal") ,40, 35, 0x000000);
 		this.fontRenderer.drawString(StringUtil.localize("gui.Bloomery.Output"),40, 53, 0x000000);
-		if(TFC_Settings.enableDebugMode)
+		if(TFCOptions.enableDebugMode)
 			this.fontRenderer.drawString("Temp : " + bloomery.fireTemperature ,40, 71, 0x000000);
     }
 	

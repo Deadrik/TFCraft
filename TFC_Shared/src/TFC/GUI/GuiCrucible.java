@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.TFCOptions;
 import TFC.Containers.ContainerCrucible;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Util.StringUtil;
 import TFC.TileEntities.TECrucible;
 
@@ -68,7 +68,7 @@ public class GuiCrucible extends GuiContainer
 			}
 		}
 
-		if(TFC_Settings.enableDebugMode)
+		if(TFCOptions.enableDebugMode)
 			this.fontRenderer.drawString("Temp: " + te.temperature ,178, 8, 0xffffff);
     }
 	

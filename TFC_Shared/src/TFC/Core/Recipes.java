@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
+import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.CraftingRuleEnum;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -518,22 +519,22 @@ public class Recipes
 
 	private static void VanillaRecipes()
 	{
-		if(TFC_Settings.enableVanillaDiamondRecipe == true)
+		if(TFCOptions.enableVanillaDiamondRecipe == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Item.diamond, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,2)});
 			GameRegistry.addRecipe(new ItemStack(Item.diamond, 2), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,3)});
 			GameRegistry.addRecipe(new ItemStack(Item.diamond, 3), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GemDiamond,1,4)});
 		}
-		if(TFC_Settings.enableVanillaIronRecipe== true)
+		if(TFCOptions.enableVanillaIronRecipe== true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Item.ingotIron, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.WroughtIronIngot,1)});
 
 		}
-		if(TFC_Settings.enableVanillaGoldRecipe == true)
+		if(TFCOptions.enableVanillaGoldRecipe == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Item.ingotGold, 1), new Object[] {"1", Character.valueOf('1'),new ItemStack(TFCItems.GoldIngot,1)});
 		}
-		if(TFC_Settings.enableVanillaRecipes == true)
+		if(TFCOptions.enableVanillaRecipes == true)
 		{
 			GameRegistry.addRecipe(new ItemStack(Item.appleRed,1),new Object[]{"1",Character.valueOf('1'),new ItemStack(TFCItems.RedApple,1)});
 

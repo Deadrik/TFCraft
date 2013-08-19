@@ -16,6 +16,7 @@ import TFC.API.HeatIndex;
 import TFC.API.HeatRaw;
 import TFC.API.HeatRegistry;
 import TFC.API.Metal;
+import TFC.API.TFCOptions;
 import TFC.Core.Util.StringUtil;
 import TFC.Items.ItemTerra;
 
@@ -660,7 +661,7 @@ public class TFC_ItemHeat
 	public static float getTempIncrease(ItemStack is, float fireTemp, float fireMaxTemp)
 	{
 		byte debugBump = 0;
-		if(TFC_Settings.enableDebugMode) {
+		if(TFCOptions.enableDebugMode) {
 			debugBump = 5;
 		}
 		return ((fireTemp / fireMaxTemp)) * getSpecificHeat(is) + debugBump;

@@ -17,8 +17,8 @@ import net.minecraft.network.packet.Packet;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_ItemHeat;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Util.StringUtil;
 import TFC.Handlers.PacketHandler;
@@ -35,7 +35,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	private boolean sealed;
 	private int sealtimecounter;
 	public int[] alcohols;
-	public final int SEALTIME = TFC_Settings.enableDebugMode?0:(int)((TFC_Time.hourLength*12)/100);//default 80
+	public final int SEALTIME = TFCOptions.enableDebugMode?0:(int)((TFC_Time.hourLength*12)/100);//default 80
 
 	public TileEntityBarrel()
 	{

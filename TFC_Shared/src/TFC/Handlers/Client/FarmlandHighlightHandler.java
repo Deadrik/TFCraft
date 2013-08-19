@@ -3,8 +3,8 @@ package TFC.Handlers.Client;
 import org.lwjgl.opengl.GL11;
 
 import TFC.*;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -90,7 +90,7 @@ public class FarmlandHighlightHandler{
 				//Setup GL for the depthbox
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glColor4ub(TFC_Settings.cropNutrientAColor[0], TFC_Settings.cropNutrientAColor[1], TFC_Settings.cropNutrientAColor[2], TFC_Settings.cropNutrientAColor[3]);
+				GL11.glColor4ub(TFCOptions.cropNutrientAColor[0], TFCOptions.cropNutrientAColor[1], TFCOptions.cropNutrientAColor[2], TFCOptions.cropNutrientAColor[3]);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				//GL11.glLineWidth(6.0F);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -110,7 +110,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0.3333;
 				nutrient = 1.02 + ((double)te.nutrients[1] / (double)soilMax)*0.5;
-				GL11.glColor4ub(TFC_Settings.cropNutrientBColor[0], TFC_Settings.cropNutrientBColor[1], TFC_Settings.cropNutrientBColor[2], TFC_Settings.cropNutrientBColor[3]);
+				GL11.glColor4ub(TFCOptions.cropNutrientBColor[0], TFCOptions.cropNutrientBColor[1], TFCOptions.cropNutrientBColor[2], TFCOptions.cropNutrientBColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,
@@ -122,7 +122,7 @@ public class FarmlandHighlightHandler{
 				
 				offset = 0.6666;
 				nutrient = 1.02 + ((double)te.nutrients[2] / (double)soilMax)*0.5;
-				GL11.glColor4ub(TFC_Settings.cropNutrientCColor[0], TFC_Settings.cropNutrientCColor[1], TFC_Settings.cropNutrientCColor[2], TFC_Settings.cropNutrientCColor[3]);
+				GL11.glColor4ub(TFCOptions.cropNutrientCColor[0], TFCOptions.cropNutrientCColor[1], TFCOptions.cropNutrientCColor[2], TFCOptions.cropNutrientCColor[3]);
 				drawBox(AxisAlignedBB.getAABBPool().getAABB(
 						evt.target.blockX + offset,
 						evt.target.blockY + 1.01 - crop,

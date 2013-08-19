@@ -14,11 +14,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.TFCOptions;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
 import cpw.mods.fml.relauncher.Side;
@@ -168,7 +168,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 
 
 		if(pregnant){
-			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime*TFC_Settings.dayLength){
+			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime*TFCOptions.dayLength){
 				int i = rand.nextInt(5) + 3;
 				for (int x = 0; x<i;x++){
 					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);

@@ -17,9 +17,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 import org.lwjgl.opengl.GL11;
 
 import TFC.TFCBlocks;
+import TFC.API.TFCOptions;
 import TFC.Blocks.BlockFruitLeaves;
 import TFC.Blocks.Devices.BlockSluice;
-import TFC.Core.TFC_Settings;
 import TFC.Core.TFC_Time;
 import TFC.Food.FloraIndex;
 import TFC.Food.FloraManager;
@@ -316,9 +316,9 @@ public class TFC_CoreRender
 		DataLayer rockLayer2 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 1);
 		DataLayer rockLayer3 = ((TFCWorldChunkManager)worldObj.getWorldChunkManager()).getRockLayerAt(xCoord, zCoord, 2);
 
-		if(yCoord <= TFC_Settings.RockLayer3Height)
+		if(yCoord <= TFCOptions.RockLayer3Height)
 			var27 = Block.blocksList[rockLayer3.data1].getIcon(5, rockLayer3.data2);
-		else if(yCoord <= TFC_Settings.RockLayer2Height)
+		else if(yCoord <= TFCOptions.RockLayer2Height)
 			var27 = Block.blocksList[rockLayer2.data1].getIcon(5, rockLayer2.data2);
 		else
 			var27 = Block.blocksList[rockLayer1.data1].getIcon(5, rockLayer1.data2);

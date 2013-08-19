@@ -20,6 +20,7 @@ import org.lwjgl.input.Mouse;
 import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCOptions;
 import TFC.API.Constant.Global;
 import TFC.API.Entities.IAnimal;
 import TFC.API.Enums.EnumWoodMaterial;
@@ -425,9 +426,9 @@ public class TFC_Core
 
 	public static int getRockLayerFromHeight( int y)
 	{
-		if(y <= TFC_Settings.RockLayer3Height) {
+		if(y <= TFCOptions.RockLayer3Height) {
 			return 2;
-		} else if(y <= TFC_Settings.RockLayer2Height) {
+		} else if(y <= TFCOptions.RockLayer2Height) {
 			return 1;
 		} else {
 			return 0;

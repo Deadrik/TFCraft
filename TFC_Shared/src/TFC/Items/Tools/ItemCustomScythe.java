@@ -4,8 +4,8 @@ import java.util.List;
 
 import TFC.*;
 import TFC.API.TFCTabs;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.*;

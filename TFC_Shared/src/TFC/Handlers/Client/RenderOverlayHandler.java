@@ -12,9 +12,9 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.lwjgl.opengl.GL11;
 
 import TFC.Reference;
+import TFC.API.TFCOptions;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.Core.TFC_Settings;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.FoodStatsTFC;
@@ -100,7 +100,7 @@ public class RenderOverlayHandler
 	@ForgeSubscribe
 	public void renderText(RenderGameOverlayEvent.Text event)
 	{
-		if(Minecraft.getMinecraft().gameSettings.showDebugInfo || TFC_Settings.enableDebugMode)
+		if(Minecraft.getMinecraft().gameSettings.showDebugInfo || TFCOptions.enableDebugMode)
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			int xCoord = (int)player.posX;
