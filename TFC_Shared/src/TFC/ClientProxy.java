@@ -379,7 +379,10 @@ public class ClientProxy extends CommonProxy
 		}
 		}
 	}
-
+	
+	private BiomeGenBase lastBiomeGen;
+	private int waterColorMultiplier;
+	
 	@Override
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
@@ -392,12 +395,18 @@ public class ClientProxy extends CommonProxy
 			for (int var9 = -1; var9 <= 1; ++var9)
 			{
 				BiomeGenBase biome = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
+				
 				if(biome != null)
 				{
-					int var10 = biome.getWaterColorMultiplier();
-					var5 += (var10 & 16711680) >> 16;
-			var6 += (var10 & 65280) >> 8;
-			var7 += var10 & 255;
+					if(lastBiomeGen != biome)
+					{
+						waterColorMultiplier = biome.getWaterColorMultiplier();
+						lastBiomeGen = biome;
+					}
+					
+					var5 += (waterColorMultiplier & 16711680) >> 16;
+					var6 += (waterColorMultiplier & 65280) >> 8;
+					var7 += waterColorMultiplier & 255;
 				}
 			}
 		}
