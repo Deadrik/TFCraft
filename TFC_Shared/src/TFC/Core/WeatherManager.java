@@ -8,6 +8,7 @@ import TFC.TerraFirmaCraft;
 public class WeatherManager
 {
     protected static final WeatherManager instance = new WeatherManager();
+    private static Random rand = new Random();
     public static final WeatherManager getInstance()
     {
         return instance;
@@ -21,23 +22,23 @@ public class WeatherManager
     
     public float getDailyTemp()
     {
-        Random r = new Random(seed+TFC_Time.getTotalDays());
+    	rand.setSeed(seed+TFC_Time.getTotalDays());
 
-        return (r.nextInt(200)-100)/10;
+        return (rand.nextInt(200)-100)/10;
     }
     
     public float getDailyTemp(int day)
     {
-        Random r = new Random(seed + day);
+    	rand.setSeed(seed + day);
 
-        return (r.nextInt(200)-100)/20;
+        return (rand.nextInt(200)-100)/20;
     }
     
     public float getWeeklyTemp(int week)
     {
-        Random r = new Random(seed + week);
+    	rand.setSeed(seed + week);
 
-        return (r.nextInt(200)-100)/10;
+        return (rand.nextInt(200)-100)/10;
     }
     
     public static int getDayOfWeek(long day)
