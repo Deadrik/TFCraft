@@ -28,17 +28,6 @@ public class RenderOverlayHandler
 	@ForgeSubscribe
 	public void render(RenderGameOverlayEvent.Pre event)
 	{
-
-	}
-
-	@ForgeSubscribe
-	public void render(RenderGameOverlayEvent.Post event)
-	{
-		if(event.type != ElementType.ALL)
-		{
-			return;
-		}
-
 		ScaledResolution sr = event.resolution;
 
 		int healthRowHeight = sr.getScaledHeight() - 39;
@@ -94,7 +83,18 @@ public class RenderOverlayHandler
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 			}
 		}
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/widgets.png"));
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/icons.png"));
+	}
+
+	@ForgeSubscribe
+	public void render(RenderGameOverlayEvent.Post event)
+	{
+		if(event.type != ElementType.ALL)
+		{
+			return;
+		}
+
+
 	}
 
 	@ForgeSubscribe
