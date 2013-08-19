@@ -88,7 +88,7 @@ public class TerraFirmaCraft
 		//Load Blocks
 		TFCBlockID.Setup();
 		TFCBlocks.LoadBlocks();
-		TFCBlocks.RegisterBlocks();
+		TFCBlocks.RegisterBlocks(null);
 
 		//Load Items
 		TFCItemID.Setup();
