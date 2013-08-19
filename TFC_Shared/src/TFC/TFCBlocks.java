@@ -225,121 +225,121 @@ public class TFCBlocks
 	public static Block Bloom;
 	public static Block Crucible;
 
-	public static void RegisterBlocks()
+	public static void RegisterBlocks(GameRegistry greg)
 	{
-		GameRegistry.registerBlock(Ore, TFC.Items.ItemOre1.class, "Ore1");
-		GameRegistry.registerBlock(Ore2, TFC.Items.ItemOre2.class, "Ore2");
-		GameRegistry.registerBlock(Ore3, TFC.Items.ItemOre3.class, "Ore3");
-		GameRegistry.registerBlock(StoneIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgIn");
-		GameRegistry.registerBlock(StoneIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgEx");
-		GameRegistry.registerBlock(StoneSed, TFC.Items.ItemBlocks.ItemSed.class, "StoneSed");
-		GameRegistry.registerBlock(StoneMM, TFC.Items.ItemBlocks.ItemMM.class, "StoneMM");
+		greg.registerBlock(Ore, TFC.Items.ItemOre1.class, "Ore1");
+		greg.registerBlock(Ore2, TFC.Items.ItemOre2.class, "Ore2");
+		greg.registerBlock(Ore3, TFC.Items.ItemOre3.class, "Ore3");
+		greg.registerBlock(StoneIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgIn");
+		greg.registerBlock(StoneIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgEx");
+		greg.registerBlock(StoneSed, TFC.Items.ItemBlocks.ItemSed.class, "StoneSed");
+		greg.registerBlock(StoneMM, TFC.Items.ItemBlocks.ItemMM.class, "StoneMM");
 
-		GameRegistry.registerBlock(StoneIgInCobble, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgInCobble");
-		GameRegistry.registerBlock(StoneIgExCobble, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgExCobble");
-		GameRegistry.registerBlock(StoneSedCobble, TFC.Items.ItemBlocks.ItemSed.class, "StoneSedCobble");
-		GameRegistry.registerBlock(StoneMMCobble, TFC.Items.ItemBlocks.ItemMM.class, "StoneMMCobble");
-		GameRegistry.registerBlock(StoneIgInSmooth, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgInSmooth");
-		GameRegistry.registerBlock(StoneIgExSmooth, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgExSmooth");
-		GameRegistry.registerBlock(StoneSedSmooth, TFC.Items.ItemBlocks.ItemSed.class, "StoneSedSmooth");
-		GameRegistry.registerBlock(StoneMMSmooth, TFC.Items.ItemBlocks.ItemMM.class, "StoneMMSmooth");
-		GameRegistry.registerBlock(StoneIgInBrick, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgInBrick");
-		GameRegistry.registerBlock(StoneIgExBrick, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgExBrick");
-		GameRegistry.registerBlock(StoneSedBrick, TFC.Items.ItemBlocks.ItemSed.class, "StoneSedBrick");
-		GameRegistry.registerBlock(StoneMMBrick, TFC.Items.ItemBlocks.ItemMM.class, "StoneMMBrick");
+		greg.registerBlock(StoneIgInCobble, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgInCobble");
+		greg.registerBlock(StoneIgExCobble, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgExCobble");
+		greg.registerBlock(StoneSedCobble, TFC.Items.ItemBlocks.ItemSed.class, "StoneSedCobble");
+		greg.registerBlock(StoneMMCobble, TFC.Items.ItemBlocks.ItemMM.class, "StoneMMCobble");
+		greg.registerBlock(StoneIgInSmooth, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgInSmooth");
+		greg.registerBlock(StoneIgExSmooth, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgExSmooth");
+		greg.registerBlock(StoneSedSmooth, TFC.Items.ItemBlocks.ItemSed.class, "StoneSedSmooth");
+		greg.registerBlock(StoneMMSmooth, TFC.Items.ItemBlocks.ItemMM.class, "StoneMMSmooth");
+		greg.registerBlock(StoneIgInBrick, TFC.Items.ItemBlocks.ItemIgIn.class, "StoneIgInBrick");
+		greg.registerBlock(StoneIgExBrick, TFC.Items.ItemBlocks.ItemIgEx.class, "StoneIgExBrick");
+		greg.registerBlock(StoneSedBrick, TFC.Items.ItemBlocks.ItemSed.class, "StoneSedBrick");
+		greg.registerBlock(StoneMMBrick, TFC.Items.ItemBlocks.ItemMM.class, "StoneMMBrick");
 
-		GameRegistry.registerBlock(Dirt, TFC.Items.ItemBlocks.ItemDirt.class, "Dirt");
-		GameRegistry.registerBlock(Dirt2, TFC.Items.ItemBlocks.ItemDirt.class, "Dirt2");
-		GameRegistry.registerBlock(Sand, TFC.Items.ItemBlocks.ItemSand.class, "Sand");
-		GameRegistry.registerBlock(Sand2, TFC.Items.ItemBlocks.ItemSand.class, "Sand2");
-		GameRegistry.registerBlock(Clay, "Clay");
-		GameRegistry.registerBlock(Clay2, "Clay2");
-		GameRegistry.registerBlock(Grass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Grass");
-		GameRegistry.registerBlock(Grass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Grass2");
-		GameRegistry.registerBlock(ClayGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "ClayGrass");
-		GameRegistry.registerBlock(ClayGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "ClayGrass2");
-		GameRegistry.registerBlock(PeatGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "PeatGrass");
-		GameRegistry.registerBlock(Peat, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Peat");
-		GameRegistry.registerBlock(DryGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass");
-		GameRegistry.registerBlock(DryGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass2");
-		GameRegistry.registerBlock(LooseRock, "LooseRock");
-		GameRegistry.registerBlock(LogPile, "LogPile");
-		GameRegistry.registerBlock(Charcoal, "Charcoal");
-		GameRegistry.registerBlock(Detailed, "Detailed");
+		greg.registerBlock(Dirt, TFC.Items.ItemBlocks.ItemDirt.class, "Dirt");
+		greg.registerBlock(Dirt2, TFC.Items.ItemBlocks.ItemDirt.class, "Dirt2");
+		greg.registerBlock(Sand, TFC.Items.ItemBlocks.ItemSand.class, "Sand");
+		greg.registerBlock(Sand2, TFC.Items.ItemBlocks.ItemSand.class, "Sand2");
+		greg.registerBlock(Clay, "Clay");
+		greg.registerBlock(Clay2, "Clay2");
+		greg.registerBlock(Grass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Grass");
+		greg.registerBlock(Grass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Grass2");
+		greg.registerBlock(ClayGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "ClayGrass");
+		greg.registerBlock(ClayGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "ClayGrass2");
+		greg.registerBlock(PeatGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "PeatGrass");
+		greg.registerBlock(Peat, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Peat");
+		greg.registerBlock(DryGrass, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass");
+		greg.registerBlock(DryGrass2, TFC.Items.ItemBlocks.ItemTerraBlock.class, "DryGrass2");
+		greg.registerBlock(LooseRock, "LooseRock");
+		greg.registerBlock(LogPile, "LogPile");
+		greg.registerBlock(Charcoal, "Charcoal");
+		greg.registerBlock(Detailed, "Detailed");
 
-		GameRegistry.registerBlock(tilledSoil, "tilledSoil");
-		GameRegistry.registerBlock(tilledSoil2, "tilledSoil2");
+		greg.registerBlock(tilledSoil, "tilledSoil");
+		greg.registerBlock(tilledSoil2, "tilledSoil2");
 
-		GameRegistry.registerBlock(finiteWater, "finiteWater");
+		greg.registerBlock(finiteWater, "finiteWater");
 
-		GameRegistry.registerBlock(WoodSupportV, TFC.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV");
-		GameRegistry.registerBlock(WoodSupportH, TFC.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH");
-		GameRegistry.registerBlock(Sulfur, "Sulfur");
-		GameRegistry.registerBlock(Block.wood, TFC.Items.ItemBlocks.ItemCustomWood.class, "wood");
-		GameRegistry.registerBlock(Block.leaves, TFC.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");
-		GameRegistry.registerBlock(Block.sapling, TFC.Items.ItemBlocks.ItemSapling.class, "sapling");
-		GameRegistry.registerBlock(Block.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
+		greg.registerBlock(WoodSupportV, TFC.Items.ItemBlocks.ItemWoodSupport.class,"WoodSupportV");
+		greg.registerBlock(WoodSupportH, TFC.Items.ItemBlocks.ItemWoodSupport.class, "WoodSupportH");
+		greg.registerBlock(Sulfur, "Sulfur");
+		greg.registerBlock(Block.wood, TFC.Items.ItemBlocks.ItemCustomWood.class, "wood");
+		greg.registerBlock(Block.leaves, TFC.Items.ItemBlocks.ItemCustomLeaves.class, "leaves");
+		greg.registerBlock(Block.sapling, TFC.Items.ItemBlocks.ItemSapling.class, "sapling");
+		greg.registerBlock(Block.planks, TFC.Items.ItemBlocks.ItemPlankBlock.class, "planks");
 
-		GameRegistry.registerBlock(Firepit, "Firepit");
-		GameRegistry.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
-		GameRegistry.registerBlock(Anvil, TFC.Items.ItemBlocks.ItemAnvil.class, "Anvil");
-		GameRegistry.registerBlock(Anvil2, TFC.Items.ItemBlocks.ItemAnvil2.class, "Anvil2");
-		GameRegistry.registerBlock(Scribe, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Scribe");
-		GameRegistry.registerBlock(Forge, "Forge");
+		greg.registerBlock(Firepit, "Firepit");
+		greg.registerBlock(Bellows, TFC.Items.ItemBlocks.ItemBellows.class, "Bellows");
+		greg.registerBlock(Anvil, TFC.Items.ItemBlocks.ItemAnvil.class, "Anvil");
+		greg.registerBlock(Anvil2, TFC.Items.ItemBlocks.ItemAnvil2.class, "Anvil2");
+		greg.registerBlock(Scribe, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Scribe");
+		greg.registerBlock(Forge, "Forge");
 
-		GameRegistry.registerBlock(Molten, "Molten");
-		GameRegistry.registerBlock(BlastFurnace, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bloomery");
-		GameRegistry.registerBlock(EarlyBloomery, TFC.Items.ItemBlocks.ItemTerraBlock.class, "EarlyBloomery");
-		GameRegistry.registerBlock(Sluice, "Sluice");
+		greg.registerBlock(Molten, "Molten");
+		greg.registerBlock(BlastFurnace, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Bloomery");
+		greg.registerBlock(EarlyBloomery, TFC.Items.ItemBlocks.ItemTerraBlock.class, "EarlyBloomery");
+		greg.registerBlock(Sluice, "Sluice");
 
-		GameRegistry.registerBlock(fruitTreeWood, "fruitTreeWood");
-		GameRegistry.registerBlock(fruitTreeLeaves, "fruitTreeLeaves");
-		GameRegistry.registerBlock(fruitTreeLeaves2, "fruitTreeLeaves2");
+		greg.registerBlock(fruitTreeWood, "fruitTreeWood");
+		greg.registerBlock(fruitTreeLeaves, "fruitTreeLeaves");
+		greg.registerBlock(fruitTreeLeaves2, "fruitTreeLeaves2");
 
-		GameRegistry.registerBlock(stoneStairs, "stoneStairs");
-		GameRegistry.registerBlock(stoneSlabs, "stoneSlabs");
-		GameRegistry.registerBlock(stoneStalac, "stoneStalac");
+		greg.registerBlock(stoneStairs, "stoneStairs");
+		greg.registerBlock(stoneSlabs, "stoneSlabs");
+		greg.registerBlock(stoneStalac, "stoneStalac");
 
-		GameRegistry.registerBlock(WoodConstruct, "WoodConstruct");
-		GameRegistry.registerBlock(WoodVert, "WoodVert");
-		GameRegistry.registerBlock(WoodHoriz, "WoodHoriz");
-		GameRegistry.registerBlock(WoodHoriz2, "WoodHoriz2");
+		greg.registerBlock(WoodConstruct, "WoodConstruct");
+		greg.registerBlock(WoodVert, "WoodVert");
+		greg.registerBlock(WoodHoriz, "WoodHoriz");
+		greg.registerBlock(WoodHoriz2, "WoodHoriz2");
 
-		GameRegistry.registerBlock(ToolRack, ItemToolRack.class,"ToolRack");
-		GameRegistry.registerBlock(SpawnMeter, TFC.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
-		GameRegistry.registerBlock(FoodPrep, "FoodPrep");
-		GameRegistry.registerBlock(Quern, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
-		GameRegistry.registerBlock(WallCobbleIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallCobbleIgIn");
-		GameRegistry.registerBlock(WallCobbleIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallCobbleIgEx");
-		GameRegistry.registerBlock(WallCobbleSed, TFC.Items.ItemBlocks.ItemSed.class, "WallCobbleSed");
-		GameRegistry.registerBlock(WallCobbleMM, TFC.Items.ItemBlocks.ItemMM.class, "WallCobbleMM");
-		GameRegistry.registerBlock(WallRawIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallRawIgIn");
-		GameRegistry.registerBlock(WallRawIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallRawIgEx");
-		GameRegistry.registerBlock(WallRawSed, TFC.Items.ItemBlocks.ItemSed.class, "WallRawSed");
-		GameRegistry.registerBlock(WallRawMM, TFC.Items.ItemBlocks.ItemMM.class, "WallRawMM");
-		GameRegistry.registerBlock(WallBrickIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallBrickIgIn");
-		GameRegistry.registerBlock(WallBrickIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallBrickIgEx");
-		GameRegistry.registerBlock(WallBrickSed, TFC.Items.ItemBlocks.ItemSed.class, "WallBrickSed");
-		GameRegistry.registerBlock(WallBrickMM, TFC.Items.ItemBlocks.ItemMM.class, "WallBrickMM");
-		GameRegistry.registerBlock(WallSmoothIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallSmoothIgIn");
-		GameRegistry.registerBlock(WallSmoothIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallSmoothIgEx");
-		GameRegistry.registerBlock(WallSmoothSed, TFC.Items.ItemBlocks.ItemSed.class, "WallSmoothSed");
-		GameRegistry.registerBlock(WallSmoothMM, TFC.Items.ItemBlocks.ItemMM.class, "WallSmoothMM");
+		greg.registerBlock(ToolRack, ItemToolRack.class,"ToolRack");
+		greg.registerBlock(SpawnMeter, TFC.Items.ItemBlocks.ItemTerraBlock.class, "SpawnMeter");
+		greg.registerBlock(FoodPrep, "FoodPrep");
+		greg.registerBlock(Quern, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Quern");
+		greg.registerBlock(WallCobbleIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallCobbleIgIn");
+		greg.registerBlock(WallCobbleIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallCobbleIgEx");
+		greg.registerBlock(WallCobbleSed, TFC.Items.ItemBlocks.ItemSed.class, "WallCobbleSed");
+		greg.registerBlock(WallCobbleMM, TFC.Items.ItemBlocks.ItemMM.class, "WallCobbleMM");
+		greg.registerBlock(WallRawIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallRawIgIn");
+		greg.registerBlock(WallRawIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallRawIgEx");
+		greg.registerBlock(WallRawSed, TFC.Items.ItemBlocks.ItemSed.class, "WallRawSed");
+		greg.registerBlock(WallRawMM, TFC.Items.ItemBlocks.ItemMM.class, "WallRawMM");
+		greg.registerBlock(WallBrickIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallBrickIgIn");
+		greg.registerBlock(WallBrickIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallBrickIgEx");
+		greg.registerBlock(WallBrickSed, TFC.Items.ItemBlocks.ItemSed.class, "WallBrickSed");
+		greg.registerBlock(WallBrickMM, TFC.Items.ItemBlocks.ItemMM.class, "WallBrickMM");
+		greg.registerBlock(WallSmoothIgIn, TFC.Items.ItemBlocks.ItemIgIn.class, "WallSmoothIgIn");
+		greg.registerBlock(WallSmoothIgEx, TFC.Items.ItemBlocks.ItemIgEx.class, "WallSmoothIgEx");
+		greg.registerBlock(WallSmoothSed, TFC.Items.ItemBlocks.ItemSed.class, "WallSmoothSed");
+		greg.registerBlock(WallSmoothMM, TFC.Items.ItemBlocks.ItemMM.class, "WallSmoothMM");
 
 		// Wooden Doors
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
-			GameRegistry.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
+			greg.registerBlock(Doors[i], "Door"+Global.WOOD_ALL[i].replaceAll(" ", ""));
 		}
 
-		GameRegistry.registerBlock(IngotPile, "IngotPile");
-		GameRegistry.registerBlock(Barrel, ItemBarrels.class,"Barrel");
-		GameRegistry.registerBlock(Moss, "Moss");
+		greg.registerBlock(IngotPile, "IngotPile");
+		greg.registerBlock(Barrel, ItemBarrels.class,"Barrel");
+		greg.registerBlock(Moss, "Moss");
 
-		GameRegistry.registerBlock(Flora, "Flora");
-		GameRegistry.registerBlock(Pottery, "ClayPottery");
-		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
-		GameRegistry.registerBlock(Tuyere, "Tuyere");
-		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
+		greg.registerBlock(Flora, "Flora");
+		greg.registerBlock(Pottery, "ClayPottery");
+		greg.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
+		greg.registerBlock(Tuyere, "Tuyere");
+		greg.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
 	}
 
 	public static void LoadBlocks()
