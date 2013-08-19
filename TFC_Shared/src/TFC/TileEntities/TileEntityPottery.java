@@ -14,10 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
+import net.minecraftforge.common.ForgeDirection;
 import TFC.TFCItems;
 import TFC.API.TFCOptions;
 import TFC.API.Crafting.KilnCraftingManager;
 import TFC.API.Crafting.KilnRecipe;
+import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Handlers.PacketHandler;
@@ -48,9 +50,12 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			//Make sure to keep the fire going throughout the length of the burn
 			if(blockAboveID != Block.fire.blockID && TFC_Time.getTotalTicks() - burnStart < TFC_Time.hourLength * TFCOptions.pitKilnBurnTime)
 			{
-				if(blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn()) {
+				if((blockAboveID == 0 || worldObj.getBlockMaterial(xCoord, yCoord+1, zCoord).getCanBurn()) && isValid()) 
+				{
 					worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
-				} else {
+				} 
+				else 
+				{
 					logsForBurn = 0;
 				}
 			}
@@ -122,7 +127,11 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 	public boolean isValid()
 	{
-		return true;
+		boolean surroundSolids = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord, zCoord) && TFC_Core.isSouthSolid(worldObj, xCoord, yCoord, zCoord) && 
+				TFC_Core.isEastSolid(worldObj, xCoord, yCoord, zCoord) && TFC_Core.isWestSolid(worldObj, xCoord, yCoord, zCoord);
+		boolean surroundSolidsUp1 = TFC_Core.isNorthSolid(worldObj, xCoord, yCoord+1, zCoord) && TFC_Core.isSouthSolid(worldObj, xCoord, yCoord+1, zCoord) && 
+				TFC_Core.isEastSolid(worldObj, xCoord, yCoord+1, zCoord) && TFC_Core.isWestSolid(worldObj, xCoord, yCoord+1, zCoord);
+		return surroundSolids && surroundSolidsUp1 && worldObj.isBlockSolidOnSide(xCoord, yCoord-1, zCoord, ForgeDirection.UP);
 	}
 
 	@Override
