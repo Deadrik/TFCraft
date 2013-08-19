@@ -953,7 +953,7 @@ public class TFCItems
 		Item.itemsList[108+256] = null; Item.itemsList[108+256] = new ItemTerraFood(108, 40, 0.8F, true, 40).setFolder("").setUnlocalizedName("beefCooked");
 		Item.itemsList[109+256] = null; Item.itemsList[109+256] = new ItemTerra(109).setUnlocalizedName("chickenRaw");
 		Item.itemsList[110+256] = null; Item.itemsList[110+256] = new ItemTerraFood(110, 35, 0.6F, true, 41).setFolder("").setUnlocalizedName("chickenCooked");
-		Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
+		//Item.itemsList[41+256] = null; Item.itemsList[41+256] = (new ItemTerraFood(41, 25, 0.6F, false, 42)).setFolder("").setUnlocalizedName("bread");
 		Item.itemsList[88+256] = null; Item.itemsList[88+256] = (new ItemTerra(88)).setUnlocalizedName("egg");
 		Item.itemsList[Item.dyePowder.itemID] = null; Item.itemsList[Item.dyePowder.itemID] = new ItemDyeCustom(95).setUnlocalizedName("dyePowder").func_111206_d("dye_powder");
 		Item.itemsList[Item.potion.itemID] = null; Item.itemsList[Item.potion.itemID] = (new ItemCustomPotion(117)).setUnlocalizedName("potion").func_111206_d("potion");
@@ -1591,7 +1591,7 @@ public class TFCItems
 		RiceDough = new ItemTerraFood(TFCItemID.RiceDough, 1, 0.0F, false, 0).setUnlocalizedName("Rice Dough");
 		CornmealDough = new ItemTerraFood(TFCItemID.CornmealDough, 1, 0.0F, false, 0).setUnlocalizedName("Cornmeal Dough");
 
-		WheatBread = new ItemTerraFood(TFCItemID.BarleyBread, 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
+		WheatBread = new ItemTerraFood(TFCItemID.WheatBread, 25, 0.6F, false, 42).setUnlocalizedName("Wheat Bread");
 		BarleyBread = new ItemTerraFood(TFCItemID.BarleyBread, 25, 0.6F, false, 43).setUnlocalizedName("Barley Bread");
 		OatBread = new ItemTerraFood(TFCItemID.OatBread, 25, 0.6F, false, 44).setUnlocalizedName("Oat Bread");
 		RyeBread = new ItemTerraFood(TFCItemID.RyeBread, 25, 0.6F, false, 45).setUnlocalizedName("Rye Bread");
