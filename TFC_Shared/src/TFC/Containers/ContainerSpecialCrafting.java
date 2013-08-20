@@ -58,6 +58,20 @@ public class ContainerSpecialCrafting extends ContainerTFC
 		this.onCraftMatrixChanged(this.craftMatrix);
 	}
 
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		if (!this.worldObj.isRemote)
+		{
+			ItemStack itemstack2 = this.craftResult.getStackInSlotOnClosing(0);
+
+			if (itemstack2 != null)
+			{
+				player.dropPlayerItem(itemstack2);
+			}
+		}
+	}
+
 	/**
 	 * Callback for when the crafting matrix is changed.
 	 */
