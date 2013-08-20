@@ -82,7 +82,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 			if(!world.isRemote && m != null)
 			{
 				ItemStack input = containerInv.getStackInSlot(0);
-				if(input != null && input.getItem().itemID == TFCItems.CeramicMold.itemID && input.getItemDamage() == 1 && metalAmount > 0)
+				if(input != null && input.getItem().itemID == TFCItems.CeramicMold.itemID && input.getItemDamage() == 1 && input.stackSize == 1 && metalAmount > 0)
 				{
 					int amt = 99;
 					ItemStack is = new ItemStack(m.MeltedItemID, 1, amt);
