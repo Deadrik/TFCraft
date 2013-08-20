@@ -61,14 +61,16 @@ public class RenderCrucible  implements ISimpleBlockRenderingHandler
 		renderer.setRenderBounds(s1, s1, s13, s15, s15, s15);
 		renderInvBlock(block,metadata,renderer);
 	}
+	
 	@Override
-	public boolean shouldRender3DInInventory() {
-		// TODO Auto-generated method stub
+	public boolean shouldRender3DInInventory() 
+	{
 		return true;
 	}
+	
 	@Override
-	public int getRenderId() {
-		// TODO Auto-generated method stub
+	public int getRenderId() 
+	{
 		return 0;
 	}
 

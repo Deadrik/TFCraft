@@ -10,6 +10,7 @@ import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import TFC.TFCItems;
 import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Items.ItemTerra;
 
@@ -26,14 +27,20 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight()
+	{
+		return EnumWeight.MEDIUM;
+	}
+	
+	@Override
+	public EnumSize getSize() 
+	{
 		return EnumSize.LARGE;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack() 
+	{
 		return false;
 	}
 

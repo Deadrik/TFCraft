@@ -27,9 +27,9 @@ public class EntityEndermanTFC extends EntityEnderman implements ICausesDamage
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() {
-		// TODO Auto-generated method stub
-		return EnumDamageType.GENERIC;
+	public EnumDamageType GetDamageType() 
+	{
+		return EnumDamageType.SLASHING;
 	}
 
 }

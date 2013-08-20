@@ -242,8 +242,8 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void closeChest() {
-		// TODO Auto-generated method stub
+	public void closeChest() 
+	{
 
 	}
 
@@ -297,7 +297,6 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -316,25 +315,24 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return itemstack;
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1) 
+	{
 		return null;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
+	{
 		return false;
 	}
 
 	@Override
-	public void openChest() {
-		// TODO Auto-generated method stub
+	public void openChest() 
+	{
 
 	}
 

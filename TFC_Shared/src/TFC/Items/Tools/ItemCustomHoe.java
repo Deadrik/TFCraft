@@ -163,8 +163,8 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight() 
+	{
 		return EnumWeight.LIGHT;
 	}
 

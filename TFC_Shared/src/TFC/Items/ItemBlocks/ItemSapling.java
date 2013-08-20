@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Constant.Global;
+import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.StringUtil;
 
@@ -39,9 +40,16 @@ public class ItemSapling extends ItemTerraBlock
 			Icons[i] = registerer.registerIcon(Reference.ModID + ":" + "wood/trees/" + Global.WOOD_ALL[i] + " Sapling");
 		}
     }
+	
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumSize getSize()
+	{
+		return EnumSize.MEDIUM;
+	}
+	
+	@Override
+	public EnumWeight getWeight() 
+	{
 		return EnumWeight.MEDIUM;
 	}
 }

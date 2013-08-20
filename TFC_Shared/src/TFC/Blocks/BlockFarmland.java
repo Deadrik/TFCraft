@@ -146,8 +146,8 @@ public class BlockFarmland extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1)
+	{
 		return new TileEntityFarmland();
 	}
 }

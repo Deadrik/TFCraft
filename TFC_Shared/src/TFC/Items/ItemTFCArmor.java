@@ -104,8 +104,8 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight()
+	{
 		return EnumWeight.HEAVY;
 	}
 

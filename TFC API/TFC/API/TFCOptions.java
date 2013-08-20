@@ -20,6 +20,7 @@ public class TFCOptions
 	public static int initialCollapseRatio;
 	public static int propogateCollapseChance;
 
+	public static int dayLength;
 	public static int yearLength;
 
 	public static int maxProtectionMonths;

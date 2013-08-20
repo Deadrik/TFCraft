@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
 import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.TileEntities.TileEntityAnvil;
 
 public class ItemHammer extends ItemTerraTool
@@ -55,8 +56,14 @@ public class ItemHammer extends ItemTerraTool
     }
 	
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight()
+	{
+		return EnumWeight.MEDIUM;
+	}
+	
+	@Override
+	public EnumSize getSize() 
+	{
 		return EnumSize.SMALL;
 	}
 }

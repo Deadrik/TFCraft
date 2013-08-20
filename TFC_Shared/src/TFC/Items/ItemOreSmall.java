@@ -34,13 +34,14 @@ public class ItemOreSmall extends ItemOre
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize() 
+	{
 		return EnumSize.TINY;
 	}
 
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight() 
+	{
 		return EnumWeight.HEAVY;
 	}
 

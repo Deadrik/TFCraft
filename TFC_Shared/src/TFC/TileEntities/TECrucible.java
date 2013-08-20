@@ -312,22 +312,21 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream)
-			throws IOException {
-		// TODO Auto-generated method stub
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
+	{
 
 	}
 
 	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException {
-		// TODO Auto-generated method stub
+	public void createInitPacket(DataOutputStream outStream) throws IOException 
+	{
 
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleInitPacket(DataInputStream inStream) throws IOException {
-		// TODO Auto-generated method stub
+	public void handleInitPacket(DataInputStream inStream) throws IOException 
+	{
 
 	}
 
@@ -351,8 +350,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int i) 
+	{
 		return storage[i];
 	}
 
@@ -368,38 +367,38 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
-		// TODO Auto-generated method stub
+	public boolean isInvNameLocalized()
+	{
 		return false;
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
+	public int getInventoryStackLimit()
+	{
 		return 1;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
+	{
 		return true;
 	}
 
 	@Override
-	public void openChest() {
-		// TODO Auto-generated method stub
+	public void openChest() 
+	{
 
 	}
 
 	@Override
-	public void closeChest() {
-		// TODO Auto-generated method stub
+	public void closeChest() 
+	{
 
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
+	{
 		return true;
 	}
 

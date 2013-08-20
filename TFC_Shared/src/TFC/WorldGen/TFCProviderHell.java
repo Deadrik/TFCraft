@@ -110,8 +110,8 @@ public class TFCProviderHell extends TFCProvider
     }
 
 	@Override
-	public String getDimensionName() {
-		// TODO Auto-generated method stub
+	public String getDimensionName() 
+	{
 		return "Nether";
 	}
 	

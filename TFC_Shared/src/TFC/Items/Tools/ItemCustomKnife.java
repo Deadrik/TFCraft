@@ -31,8 +31,8 @@ public class ItemCustomKnife extends ItemWeapon
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack() 
+	{
 		return false;
 	}
 

@@ -12,6 +12,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.Helper;
 import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Items.ItemTerra;
@@ -30,14 +31,20 @@ public class ItemCustomBucket extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight()
+	{
+		return EnumWeight.MEDIUM;
+	}
+	
+	@Override
+	public EnumSize getSize() 
+	{
 		return EnumSize.MEDIUM;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack() 
+	{
 		return false;
 	}
 

@@ -162,7 +162,6 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     @Override
     public int getInventoryStackLimit()
     {
-        // TODO Auto-generated method stub
         return 4;
     }
 
@@ -185,8 +184,8 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int var1) {
-        // TODO Auto-generated method stub
+    public ItemStack getStackInSlotOnClosing(int var1) 
+    {
         return null;
     }
 
@@ -210,16 +209,17 @@ public class TileEntityLogPile extends TileEntity implements IInventory
 
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        // TODO Auto-generated method stub
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) 
+    {
         return false;
     }
 
     @Override
-    public void openChest() {
-        // TODO Auto-generated method stub
+    public void openChest()
+    {
     	++logPileOpeners;
     }
+    
     @Override
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
@@ -253,6 +253,7 @@ public class TileEntityLogPile extends TileEntity implements IInventory
     {
         TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
     }
+    
     @Override
     public void writeToNBT(NBTTagCompound nbttagcompound)
     {

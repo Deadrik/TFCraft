@@ -46,14 +46,20 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumSize getSize() 
+	{
 		return EnumSize.LARGE;
 	}
-
+	
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight() 
+	{
+		return EnumWeight.MEDIUM;
+	}
+	
+	@Override
+	public boolean canStack()
+	{
 		return false;
 	}
 
@@ -67,11 +73,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 		}
 	}
 
-	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
-		return EnumWeight.MEDIUM;
-	}
+
 
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 

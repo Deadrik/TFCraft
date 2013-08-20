@@ -152,8 +152,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
-	public void closeChest() {
-		// TODO Auto-generated method stub
+	public void closeChest() 
+	{
 
 	}
 
@@ -255,7 +255,6 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
@@ -274,13 +273,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
-		// TODO Auto-generated method stub
 		return input[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) {
-		// TODO Auto-generated method stub
+	public ItemStack getStackInSlotOnClosing(int var1) 
+	{
 		return null;
 	}
 
@@ -430,14 +428,14 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
+	{
 		return false;
 	}
 
 	@Override
-	public void openChest() {
-		// TODO Auto-generated method stub
+	public void openChest() 
+	{
 
 	}
 

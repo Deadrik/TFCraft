@@ -12,6 +12,7 @@ public class EntitySpiderTFC extends EntitySpider implements ICausesDamage
 	public EntitySpiderTFC(World par1World)
 	{
 		super(par1World);
+		this.setSize(0.5F, 0.3F);
 	}
 
 	@Override
