@@ -193,15 +193,15 @@ public class TFCBiome extends BiomeGenBase
 		this.spawnableCreatureList.clear();
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,16,0,0));
-		this.spawnableWaterCreatureList.clear();
+		//this.spawnableWaterCreatureList.clear();
 
 		this.spawnableMonsterList.clear();
-		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityZombieTFC.class, 10, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonTFC.class, 10, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntitySpiderTFC.class, 10, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityZombieTFC.class, 10, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeletonTFC.class, 10, 1, 3));
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeperTFC.class, 3, 1, 2));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 10, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlimeTFC.class, 8, 1, 2));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityEndermanTFC.class, 1, 1, 2));
 	}
 
 	/**
