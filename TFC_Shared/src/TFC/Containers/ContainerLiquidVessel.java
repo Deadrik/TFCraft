@@ -39,6 +39,20 @@ public class ContainerLiquidVessel extends ContainerTFC
 	}
 
 	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		if (!this.world.isRemote)
+		{
+			ItemStack itemstack2 = this.containerInv.getStackInSlotOnClosing(0);
+
+			if (itemstack2 != null)
+			{
+				player.dropPlayerItem(itemstack2);
+			}
+		}
+	}
+
+	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		return true;
 	}
