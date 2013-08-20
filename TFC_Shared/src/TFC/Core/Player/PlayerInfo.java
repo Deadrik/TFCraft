@@ -9,21 +9,23 @@ public class PlayerInfo
 	public String Name;
 	public byte ChiselMode;
 	public int hoeMode;
-	
+
 	public int lockX = -9999999;
 	public int lockY = -9999999;
 	public int lockZ = -9999999;
 
 	public ItemStack specialCraftingType;
 	public ItemStack specialCraftingTypeAlternate;
-	
+
 	public INetworkManager networkManager;
 	private long lastChange;
-	
+
+	public short moldTransferTimer = 1000;
+
+	//Clientside only variables
 	public boolean guishowFoodRestoreAmount = false;
 	public int guiFoodRestoreAmount = 0;
-	
-	public short moldTransferTimer = 1000;
+	public boolean[] knappingInterface;
 
 	public PlayerInfo(String name, INetworkManager nm)
 	{
@@ -34,8 +36,9 @@ public class PlayerInfo
 		networkManager = nm;
 		lastChange = 0;
 		hoeMode = 0;
+		knappingInterface = new boolean[25];
 	}
-	
+
 	public void switchHoeMode()
 	{
 		if(lastChange+3 < TFC_Time.getTotalTicks())
@@ -54,16 +57,17 @@ public class PlayerInfo
 		{
 			ChiselMode = (byte) (ChiselMode == 0 ? 1 : ChiselMode == 1 ? 2 : 
 				ChiselMode == 2 && allowDetailed ? 3 : 
-				ChiselMode == 3 && allowSuperDetailed ? 4 : 0);
+					ChiselMode == 3 && allowSuperDetailed ? 4 : 0);
 			lastChange = TFC_Time.getTotalTicks();
 		}
 	}
-	
+
 	public boolean lockMatches(int x, int y, int z)
 	{
-		if((lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z))
+		if((lockX == -9999999 || lockX == x) && (lockY == -9999999 || lockY == y) && (lockZ == -9999999 || lockZ == z)) {
 			return true;
-		
+		}
+
 		return false;
 	}
 }
