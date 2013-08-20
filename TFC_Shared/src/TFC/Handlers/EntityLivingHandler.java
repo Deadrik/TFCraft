@@ -46,9 +46,9 @@ public class EntityLivingHandler
 				TFC_Core.setPlayerFoodStats(player, foodstats);
 				TerraFirmaCraft.proxy.sendCustomPacketToPlayer((EntityPlayerMP)player, FoodStatsTFC.getStatusPacket(foodstats));
 
-				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f && player.worldObj.difficultySetting >= 1)
+				if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.25f)
 				{
-					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,1,1));
+					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id,20,1));
 				}
 				else if(foodstats.waterLevel / foodstats.getMaxWater(player) <= 0.5f)
 				{
