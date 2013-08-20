@@ -9,8 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
+import TFC.API.HeatRegistry;
 import TFC.API.Metal;
 import TFC.Containers.Slots.SlotForShowOnly;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 
 public class ContainerLiquidVessel extends ContainerTFC 
@@ -83,7 +85,9 @@ public class ContainerLiquidVessel extends ContainerTFC
 				if(input != null && input.getItem().itemID == TFCItems.CeramicMold.itemID && input.getItemDamage() == 1 && metalAmount > 0)
 				{
 					int amt = 99;
-					containerInv.setInventorySlotContents(0, new ItemStack(m.MeltedItemID, 1, amt));
+					ItemStack is = new ItemStack(m.MeltedItemID, 1, amt);
+					TFC_ItemHeat.SetTemperature(is, HeatRegistry.getInstance().getMeltingPoint(is)*1.5f);
+					containerInv.setInventorySlotContents(0, is);
 					if(metalAmount-1 <= 0)
 					{
 						nbt.removeTag("MetalType");
@@ -99,7 +103,7 @@ public class ContainerLiquidVessel extends ContainerTFC
 				else if(input != null && input.getItem().itemID == m.MeltedItemID && input.getItemDamage() > 0)
 				{
 					input.setItemDamage(input.getItemDamage() - 1);
-
+					TFC_ItemHeat.SetTemperature(input, HeatRegistry.getInstance().getMeltingPoint(input)*1.5f);
 					if(metalAmount-1 <= 0)
 					{
 						nbt.removeTag("MetalType");
