@@ -45,7 +45,7 @@ public class ItemCustomBucket extends ItemTerra
 	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer par3EntityPlayer)
 	{
 		float var4 = 1.0F;
 		double var5 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * var4;
@@ -56,7 +56,7 @@ public class ItemCustomBucket extends ItemTerra
 
 		if (var12 == null)
 		{
-			return par1ItemStack;
+			return is;
 		}
 		else
 		{
@@ -68,20 +68,20 @@ public class ItemCustomBucket extends ItemTerra
 
 				if (!world.canMineBlock(par3EntityPlayer, i, j, k))
 				{
-					return par1ItemStack;
+					return is;
 				}
 
 				if (this.isFull == 0)
 				{
-					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
+					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, is))
 					{
-						return par1ItemStack;
+						return is;
 					}
 
-					FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, par1ItemStack, world, var12);
+					FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, is, world, var12);
 					if (event.isCanceled())
 					{
-						return par1ItemStack;
+						return is;
 					}
 
 					if (event.getResult() == Event.Result.ALLOW)
@@ -95,7 +95,7 @@ public class ItemCustomBucket extends ItemTerra
 
 						if (par3EntityPlayer.capabilities.isCreativeMode)
 						{
-							return par1ItemStack;
+							return is;
 						}
 
 						return new ItemStack(this.getContainerItem());
@@ -108,10 +108,12 @@ public class ItemCustomBucket extends ItemTerra
 						return new ItemStack(this.getContainerItem());
 					}
 
-					if(world.getBlockId(i,j,k)==TFCBlocks.Barrel.blockID){
+					if(world.getBlockId(i,j,k)==TFCBlocks.Barrel.blockID)
+					{
 						TileEntityBarrel te = (TileEntityBarrel)world.getBlockTileEntity(i, j, k);
-						if(te.checkValidAddition(this.isFull)){
-							return new ItemStack(this.getContainerItem());
+						if(te.checkValidAddition(this.isFull))
+						{
+							return new ItemStack(TFCItems.WoodenBucketEmpty);
 						}
 					}
 
@@ -142,9 +144,9 @@ public class ItemCustomBucket extends ItemTerra
 
 
 
-					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, par1ItemStack))
+					if (!par3EntityPlayer.canPlayerEdit(i, j, k, var12.sideHit, is))
 					{
-						return par1ItemStack;
+						return is;
 					}
 
 					if (world.isAirBlock(i, j, k) || !world.getBlockMaterial(i, j, k).isSolid())
@@ -183,10 +185,10 @@ public class ItemCustomBucket extends ItemTerra
 
 						if (par3EntityPlayer.capabilities.isCreativeMode)
 						{
-							return par1ItemStack;
+							return is;
 						}
 
-						return new ItemStack(this.getContainerItem());
+						return new ItemStack(TFCItems.WoodenBucketEmpty);
 					}
 				}
 			}
@@ -195,7 +197,7 @@ public class ItemCustomBucket extends ItemTerra
 				return new ItemStack(TFCItems.WoodenBucketMilk);
 			}
 
-			return par1ItemStack;
+			return is;
 		}
 	}
 }
