@@ -118,9 +118,6 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 			telp.clearContents();
 			worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
 
-			int ratio = TFCOptions.pitKilnBurnTime / 16;
-
-			int burnLength = (int) (TFC_Time.hourLength * (logsForBurn == 16 ? TFCOptions.pitKilnBurnTime : ratio * logsForBurn));
 			burnStart = TFC_Time.getTotalTicks();
 		}
 	}
