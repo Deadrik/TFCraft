@@ -15,11 +15,8 @@ import TFC.Core.ColorizerGrassTFC;
 import TFC.Core.TFC_Time;
 import TFC.Core.WeatherManager;
 import TFC.Entities.Mobs.EntityChickenTFC;
-import TFC.Entities.Mobs.EntityCowTFC;
 import TFC.Entities.Mobs.EntityCreeperTFC;
 import TFC.Entities.Mobs.EntityEndermanTFC;
-import TFC.Entities.Mobs.EntityPigTFC;
-import TFC.Entities.Mobs.EntitySheepTFC;
 import TFC.Entities.Mobs.EntitySkeletonTFC;
 import TFC.Entities.Mobs.EntitySlimeTFC;
 import TFC.Entities.Mobs.EntitySpiderTFC;
@@ -185,11 +182,11 @@ public class TFCBiome extends BiomeGenBase
 
 		this.waterColorMultiplier = ForestWater;
 		//Default spawns. I didn't delete them so they could be referenced in the future. Nerfing animal spawns.
-		this.spawnableCreatureList.clear();
-		this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 6));
+		/*this.spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 12, 4, 6));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 10, 2, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 10, 2, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 8, 2, 4));*/
+		this.spawnableCreatureList.clear();
 		this.spawnableWaterCreatureList.add(new SpawnListEntry(EntitySquidTFC.class, 12, 2, 4));
 		//This is to balance out the spawning, so that entities with weight 1 spawn less
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,16,0,0));
