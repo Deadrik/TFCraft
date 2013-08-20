@@ -244,7 +244,6 @@ public class TerraFirmaCraft
 		TFCOptions.enableVanillaRecipes = TFCOptions.getBooleanFor(config,"General","enableVanillaRecipes",false, "Set this to true if you need recipes enabled for conversion from TFC to vanilla items.");
 		TFCOptions.enableInnerGrassFix = TFCOptions.getBooleanFor(config,"General","enableInnerGrassFix",true, "Set this to false if your computer has to run in fast mode and you get lag. This setting forces the sides of grass to render when viewing from the inside.");
 		TFCOptions.enableDebugMode = TFCOptions.getBooleanFor(config,"General","enableDebugMode",false, "Set this to true if you want to turn on debug mode which is useful for bug hunting");
-		TFCOptions.dayLength = TFCOptions.getIntFor(config,"General","dayLength",24000, "This is how many ticks are in a minecraft day. 24000 is a standard MC cycle. Setting to 48000 will double the length of days.");
 		TFCOptions.yearLength = TFCOptions.getIntFor(config,"General","yearLength",96, "This is how many days are in a year. Keep this to multiples of 12.");
 		//Caveins
 		TFCOptions.minimumRockLoad = TFCOptions.getIntFor(config,"Cavein Options","minimumRockLoad",1, "This is the minimum number of solid blocks that must be over a section in order for it to collapse.");

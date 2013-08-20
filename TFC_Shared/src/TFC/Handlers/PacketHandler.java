@@ -80,7 +80,6 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 			{
 				dos.writeByte(Packet_Init_World_Client);
 				dos.writeLong(world.getSeed());
-				dos.writeInt(TFC_Time.dayLength);
 				dos.writeInt(TFC_Time.daysInYear);
 
 				dos.writeFloat(foodstats.foodLevel);
@@ -202,7 +201,6 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 					try 
 					{
 						seed = dis.readLong();
-						TFC_Time.dayLength = dis.readInt();
 						TFC_Time.daysInYear = dis.readInt();
 						FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(player);
 						foodstats.foodLevel = dis.readFloat();

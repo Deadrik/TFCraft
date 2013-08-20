@@ -14,9 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.TFCItems;
-import TFC.API.TFCOptions;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_MobData;
 import TFC.Core.TFC_Time;
@@ -153,7 +151,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		{
 			hunger--;
 		}
-		
+
 		if(super.inLove > 0){
 			setInLove(true);
 		}
@@ -168,7 +166,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 
 
 		if(pregnant){
-			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime*TFCOptions.dayLength){
+			if(TFC_Time.getTotalTicks() >= timeOfConception + pregnancyRequiredTime*TFC_Time.dayLength){
 				int i = rand.nextInt(5) + 3;
 				for (int x = 0; x<i;x++){
 					EntityWolfTFC baby = new EntityWolfTFC(worldObj, this,mateSizeMod);
@@ -221,12 +219,12 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		int var2 = TFC_MobData.WolfDamage;
 		return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 	}
-	
+
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
-    {
+	{
 		return !pregnant&&(par1ItemStack.getItem() == Item.porkRaw||par1ItemStack.getItem() == Item.beefRaw||par1ItemStack.getItem() == TFCItems.muttonRaw);
-    }
+	}
 
 	@Override
 	public void setGrowingAge(int par1)
@@ -270,10 +268,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 			this.dropItem(TFCItems.Hide.itemID,1);
 			this.dropItem(Item.bone.itemID, rand.nextInt(3)+1);
 		}
-		
-		
+
+
 	}
-	
+
 	@Override
 	public boolean isAdult() 
 	{
@@ -368,7 +366,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		return dataWatcher.getWatchableObjectInt(13);
 	}
 
-	
+
 	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) {
 		return new EntityWolfTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));

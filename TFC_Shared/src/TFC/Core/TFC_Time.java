@@ -47,8 +47,8 @@ public class TFC_Time
 	public static final int November = 8;
 	public static final int December = 9;
 
-	public static final long hourLength = TFCOptions.dayLength/24;
-	public static int dayLength = TFCOptions.dayLength;
+	public static final long hourLength = 1000;
+	public static final int dayLength = 24000;
 
 	public static float timeRatio = TFCOptions.yearLength/360f;
 	public static int daysInYear = TFCOptions.yearLength;
