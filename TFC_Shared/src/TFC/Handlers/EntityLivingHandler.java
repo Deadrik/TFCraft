@@ -65,9 +65,9 @@ public class EntityLivingHandler
 						if(spawnProtectionTimer < TFC_Time.getTotalTicks())
 						{
 							//Add protection time to the chunks
-							for(int i = -1; i < 2; i++)
+							for(int i = -2; i < 3; i++)
 							{
-								for(int k = -1; k < 2; k++)
+								for(int k = -2; k < 3; k++)
 								{
 									int lastChunkX = (int)player.posX >> 4;
 								int lastChunkZ = (int)player.posZ >> 4;
