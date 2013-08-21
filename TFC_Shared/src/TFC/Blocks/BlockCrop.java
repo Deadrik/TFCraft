@@ -359,13 +359,15 @@ public class BlockCrop extends BlockContainer
 	{
 		return new TileEntityCrop();
 	}
+	
 	@Override
     @SideOnly(Side.CLIENT)
     public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
     {
         return true;
     }
-	@Override
+    
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
     {
