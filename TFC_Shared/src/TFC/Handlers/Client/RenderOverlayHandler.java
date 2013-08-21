@@ -1,6 +1,7 @@
 package TFC.Handlers.Client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,36 +25,38 @@ import TFC.Items.Tools.ItemCustomHoe;
 public class RenderOverlayHandler 
 {
 	public static ResourceLocation tfcicons = new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "icons.png");
+	private FontRenderer fontrenderer = null;
 
 	@ForgeSubscribe
 	public void render(RenderGameOverlayEvent.Pre event)
 	{
 		ScaledResolution sr = event.resolution;
+		Minecraft mc = Minecraft.getMinecraft();
 
 		int healthRowHeight = sr.getScaledHeight() - 39;
 		int armorRowHeight = healthRowHeight - 10;
 
-		//TFC_PlayerClient playerclient = ((TFC.Core.Player.TFC_PlayerClient)Minecraft.getMinecraft().thePlayer.getPlayerBase("TFC Player Client"));
+		//TFC_PlayerClient playerclient = ((TFC.Core.Player.TFC_PlayerClient)mc.thePlayer.getPlayerBase("TFC Player Client"));
 		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
-		if(playerclient != null)
+		if(playerclient != null && mc.playerController.func_78763_f())
 		{
 			//Draw Health
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			Minecraft.getMinecraft().func_110434_K().func_110577_a(tfcicons);
+			mc.func_110434_K().func_110577_a(tfcicons);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
-			float maxHealth = Minecraft.getMinecraft().thePlayer.func_110138_aP();
-			float percentHealth = Minecraft.getMinecraft().thePlayer.func_110143_aJ()/maxHealth;
+			float maxHealth = mc.thePlayer.func_110138_aP();
+			float percentHealth = mc.thePlayer.func_110143_aJ()/maxHealth;
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
-
+			
 			//Draw Food and Water
-			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(Minecraft.getMinecraft().thePlayer);
+			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(mc.thePlayer);
 			int foodLevel = foodstats.getFoodLevel();
 			int preFoodLevel = foodstats.getPrevFoodLevel();
 
 			float waterLevel = foodstats.waterLevel;
 
 			float percentFood = foodLevel/100f;
-			float percentWater = waterLevel/foodstats.getMaxWater(Minecraft.getMinecraft().thePlayer);
+			float percentWater = waterLevel/foodstats.getMaxWater(mc.thePlayer);
 
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight, 0, 18, 90, 5);
@@ -70,20 +73,55 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
 
 			//Render Tool Mode
-			if(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null && 
-					Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
+			if(mc.thePlayer.inventory.getCurrentItem() != null && 
+					mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
 			{
 				int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
 			}
-			else if(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null && 
-					Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
+			else if(mc.thePlayer.inventory.getCurrentItem() != null && 
+					mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
 			{
 				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
 				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
 			}
+		
+			mc.func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/icons.png"));
+			//Draw experience bar
+			int cap = 0;
+			if(mc.thePlayer.ridingEntity == null)
+			{
+				cap = mc.thePlayer.xpBarCap();
+				int left = sr.getScaledWidth() / 2 - 91;
+	
+				if (cap > 0)
+				{
+					short barWidth = 182;
+					int filled = (int)(mc.thePlayer.experience * (float)(barWidth + 1));
+					int top = sr.getScaledHeight() - 28;
+					drawTexturedModalRect(left, top, 0, 64, barWidth, 5);
+					if (filled > 0)
+					{
+						drawTexturedModalRect(left, top, 0, 69, filled, 5);
+					}
+				}
+				
+				if (mc.playerController.func_78763_f() && mc.thePlayer.experienceLevel > 0)
+				{
+					fontrenderer = mc.fontRenderer;
+					boolean flag1 = false;
+					int color = flag1 ? 16777215 : 8453920;
+					String text = "" + mc.thePlayer.experienceLevel;
+					int x = (sr.getScaledWidth() - fontrenderer.getStringWidth(text)) / 2;
+					int y = sr.getScaledHeight() - 29;
+					fontrenderer.drawString(text, x + 1, y, 0);
+					fontrenderer.drawString(text, x - 1, y, 0);
+					fontrenderer.drawString(text, x, y + 1, 0);
+					fontrenderer.drawString(text, x, y - 1, 0);
+					fontrenderer.drawString(text, x, y, color);
+				}
+			}
 		}
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/icons.png"));
 	}
 
 	@ForgeSubscribe
@@ -93,16 +131,15 @@ public class RenderOverlayHandler
 		{
 			return;
 		}
-
-
 	}
 
 	@ForgeSubscribe
 	public void renderText(RenderGameOverlayEvent.Text event)
 	{
-		if(Minecraft.getMinecraft().gameSettings.showDebugInfo || TFCOptions.enableDebugMode)
+		Minecraft mc = Minecraft.getMinecraft();
+		if(mc.gameSettings.showDebugInfo || TFCOptions.enableDebugMode)
 		{
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player = mc.thePlayer;
 			int xCoord = (int)player.posX;
 			int yCoord = (int)player.posY;
 			int zCoord = (int)player.posZ;
