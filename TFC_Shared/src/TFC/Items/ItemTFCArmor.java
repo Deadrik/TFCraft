@@ -10,6 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Icon;
 import TFC.Reference;
 import TFC.API.Armor;
 import TFC.API.ISize;
@@ -18,13 +19,26 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemTFCArmor extends ItemArmor implements ISize
 {
+	private static final String[] leatherNames = new String[] {"leather_helmet_overlay", "leather_chestplate_overlay", "leather_leggings_overlay", "leather_boots_overlay"};
 	public Armor ArmorType;
+	public Icon overlayIcon;
+
 	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot)
 	{
 		super(itemID,EnumArmorMaterial.IRON,renderIndex,armorSlot);
+		ArmorType = armor;
+		this.setCreativeTab(TFCTabs.TFCArmor);
+		this.setMaxDamage(ArmorType.getDurability(armorSlot));
+	}
+
+	public ItemTFCArmor(int itemID, Armor armor, int renderIndex, int armorSlot, EnumArmorMaterial m)
+	{
+		super(itemID, m, renderIndex, armorSlot);
 		ArmorType = armor;
 		this.setCreativeTab(TFCTabs.TFCArmor);
 		this.setMaxDamage(ArmorType.getDurability(armorSlot));
@@ -41,9 +55,28 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+
+	/**
+	 * Gets an icon index based on an item's damage value and the given render pass
+	 */
+	public Icon getIconFromDamageForRenderPass(int par1, int par2)
+	{
+		return par2 == 1 ? overlayIcon : super.getIconFromDamageForRenderPass(par1, par2);
+	}
+
+	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
+		if (this.getArmorMaterial() == EnumArmorMaterial.CLOTH)
+		{
+			this.itemIcon = registerer.registerIcon("minecraft:" + func_111208_A());
+			overlayIcon = registerer.registerIcon("minecraft:" + leatherNames[this.armorType]);
+		}
+		else
+		{
+			this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + "armor/"+this.getUnlocalizedName().replace("item.", ""));
+		}
 	}
 
 	@Override
@@ -105,7 +138,10 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 
 	@Override
 	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+		if (this.getArmorMaterial() == EnumArmorMaterial.CLOTH)
+		{
+			return EnumWeight.LIGHT;
+		}
 		return EnumWeight.HEAVY;
 	}
 

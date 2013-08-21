@@ -2,6 +2,7 @@ package TFC;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemColored;
@@ -1938,6 +1939,11 @@ public class TFCItems
 		TFCItems.PlatinumSheet2x = 			new ItemMetalSheet2x(TFCItemID.PlatinumSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 		TFCItems.SilverSheet2x = 			new ItemMetalSheet2x(TFCItemID.SilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
 		TFCItems.SterlingSilverSheet2x = 	new ItemMetalSheet2x(TFCItemID.SterlingSilverSheet2x).setUnlocalizedName(NamesNSO[i++]+" Double Sheet");
+
+		Item.itemsList[Item.helmetLeather.itemID] = null; Item.itemsList[Item.helmetLeather.itemID] = new ItemTFCArmor(Item.helmetLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 0, EnumArmorMaterial.CLOTH).setUnlocalizedName("helmetCloth").func_111206_d("leather_helmet");
+		Item.itemsList[Item.plateLeather.itemID] = null; Item.itemsList[Item.plateLeather.itemID] = new ItemTFCArmor(Item.plateLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 1, EnumArmorMaterial.CLOTH).setUnlocalizedName("chestplateCloth").func_111206_d("leather_chestplate");
+		Item.itemsList[Item.legsLeather.itemID] = null; Item.itemsList[Item.legsLeather.itemID] = new ItemTFCArmor(Item.legsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 2, EnumArmorMaterial.CLOTH).setUnlocalizedName("leggingsCloth").func_111206_d("leather_leggings");
+		Item.itemsList[Item.bootsLeather.itemID] = null; Item.itemsList[Item.bootsLeather.itemID] = new ItemTFCArmor(Item.bootsLeather.itemID, Armor.Leather, proxy.getArmorRenderID("leather"), 3, EnumArmorMaterial.CLOTH).setUnlocalizedName("bootsCloth").func_111206_d("leather_boots");
 	}
 
 	public static Item[] Meals;
