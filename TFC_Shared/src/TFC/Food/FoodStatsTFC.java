@@ -153,7 +153,7 @@ public class FoodStatsTFC
 
 	public int getMaxWater(EntityPlayer player)
 	{
-		return (TFC_Time.dayLength)+(200*player.experienceLevel);
+		return (TFC_Time.dayLength*2)+(200*player.experienceLevel);
 	}
 
 	/**
