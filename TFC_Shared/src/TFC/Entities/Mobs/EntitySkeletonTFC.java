@@ -549,7 +549,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				projectile.setKnockbackStrength(var4);
 			}
 
-			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0 || this.getSkeletonType() == 1)
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0)
 			{
 				projectile.setFire(100);
 			}
