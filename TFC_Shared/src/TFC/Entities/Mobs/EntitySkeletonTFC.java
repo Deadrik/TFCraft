@@ -358,6 +358,12 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		}
 	}
 
+	@Override
+	protected void enchantEquipment()
+	{
+
+	}
+
 	public static Item getArmorItemForSlot(int par0, int par1)
 	{
 		switch (par0)

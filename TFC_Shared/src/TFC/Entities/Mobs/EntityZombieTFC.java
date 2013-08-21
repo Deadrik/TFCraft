@@ -85,6 +85,13 @@ public class EntityZombieTFC extends EntityZombie implements ICausesDamage
 
 
 	@Override
+	protected void enchantEquipment()
+	{
+
+	}
+
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void handleHealthUpdate(byte par1)
 	{
