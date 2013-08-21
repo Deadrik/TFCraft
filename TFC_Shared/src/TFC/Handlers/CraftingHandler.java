@@ -199,8 +199,8 @@ public class CraftingHandler implements ICraftingHandler
 	}
 
 	@Override
-	public void onSmelting(EntityPlayer player, ItemStack item) 
-	{
+	public void onSmelting(EntityPlayer player, ItemStack item) {
+		// TODO Auto-generated method stub
 
 	}
 

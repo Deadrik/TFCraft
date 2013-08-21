@@ -228,14 +228,14 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
-	{
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void openChest()
-	{
+	public void openChest() {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -246,13 +246,14 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 
 	@Override
 	public ItemStack getStackInSlot(int i)
-	{  
+	{
+		// TODO Auto-generated method stub  
 		return inventory[i];
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1)
-	{
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

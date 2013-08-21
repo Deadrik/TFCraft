@@ -7,9 +7,9 @@ import TFC.Reference;
 public class BlockIgInBrick extends BlockIgInSmooth
 {
 	
-	public BlockIgInBrick(int i) 
-	{
+	public BlockIgInBrick(int i) {
 		super(i);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

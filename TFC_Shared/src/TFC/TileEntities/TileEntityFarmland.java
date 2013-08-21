@@ -160,21 +160,20 @@ public class TileEntityFarmland extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException
-	{
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
 		TerraFirmaCraft.proxy.sendCustomPacketToPlayersInRange(xCoord, yCoord, zCoord, createNutrientPacket(), 5);
 	}
 
 	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException
-	{
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleInitPacket(DataInputStream inStream) throws IOException
-	{
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
 
 	}
 

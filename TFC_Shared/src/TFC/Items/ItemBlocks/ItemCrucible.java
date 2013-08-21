@@ -137,20 +137,20 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 
 
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
 		return EnumSize.HUGE;
 	}
 
 	@Override
-	public boolean canStack() 
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
 

@@ -28,8 +28,8 @@ public class EntityJavelin extends EntityProjectileTFC implements ICausesDamage
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() 
-	{
+	public EnumDamageType GetDamageType() {
+		// TODO Auto-generated method stub
 		return EnumDamageType.PIERCING;
 	}
 }

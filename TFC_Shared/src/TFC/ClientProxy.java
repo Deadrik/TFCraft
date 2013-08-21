@@ -702,6 +702,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public boolean getGraphicsLevel()
 	{
+		// TODO Auto-generated method stub
 		return ModLoader.getMinecraftInstance().isFancyGraphicsEnabled();
 	}
 

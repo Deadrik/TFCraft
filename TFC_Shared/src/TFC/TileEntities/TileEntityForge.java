@@ -225,8 +225,8 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
     }
 
     @Override
-    public void closeChest()
-    {
+    public void closeChest() {
+        // TODO Auto-generated method stub
 
     }
 
@@ -390,6 +390,7 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
     @Override
     public int getInventoryStackLimit()
     {
+        // TODO Auto-generated method stub
         return 64;
     }
 
@@ -428,12 +429,13 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
     @Override
     public ItemStack getStackInSlot(int i)
     {
+        // TODO Auto-generated method stub
         return fireItemStacks[i];
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int var1)
-    {
+    public ItemStack getStackInSlotOnClosing(int var1) {
+        // TODO Auto-generated method stub
         return null;
     }
 
@@ -472,14 +474,14 @@ public class TileEntityForge extends TileEntityFireEntity implements IInventory
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) 
-    {
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public void openChest() 
-    {
+    public void openChest() {
+        // TODO Auto-generated method stub
 
     }
 

@@ -74,6 +74,7 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
+		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -96,20 +97,20 @@ public class TileEntityWorkbench extends TileEntity implements IInventory
 
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) 
-	{
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
-	{
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public void openChest() 
-	{
+	public void openChest() {
+		// TODO Auto-generated method stub
 
 	}
 

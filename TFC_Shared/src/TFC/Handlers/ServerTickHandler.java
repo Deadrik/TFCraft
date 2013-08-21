@@ -42,20 +42,20 @@ public class ServerTickHandler implements ITickHandler
 	}
 
 	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) 
-	{
+	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public EnumSet<TickType> ticks() 
-	{
+	public EnumSet<TickType> ticks() {
+		// TODO Auto-generated method stub
 		return EnumSet.of(TickType.WORLD, TickType.WORLDLOAD, TickType.PLAYER);
 	}
 
 	@Override
-	public String getLabel() 
-	{
+	public String getLabel() {
+		// TODO Auto-generated method stub
 		return "TFC Server";
 	}
 

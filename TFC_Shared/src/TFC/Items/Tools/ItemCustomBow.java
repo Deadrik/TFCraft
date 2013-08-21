@@ -117,22 +117,22 @@ public class ItemCustomBow extends ItemBow implements ISize
 
 
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}
 
 
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
 
 
 	@Override
-	public boolean canStack() 
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

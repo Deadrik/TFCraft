@@ -209,8 +209,9 @@ public class TileEntityPartial extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
-	{
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 	

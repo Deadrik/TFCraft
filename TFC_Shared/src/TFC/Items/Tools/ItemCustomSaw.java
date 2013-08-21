@@ -51,8 +51,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
 		return EnumSize.MEDIUM;
 	}
 
@@ -63,8 +62,8 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}
 

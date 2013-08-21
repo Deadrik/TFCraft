@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.API.Enums.EnumSize;
-import TFC.API.Enums.EnumWeight;
 import TFC.Entities.EntityCustomMinecart;
 
 public class ItemCustomMinecart extends ItemTerra
@@ -58,20 +57,14 @@ public class ItemCustomMinecart extends ItemTerra
 	}
 
 	@Override
-	public EnumWeight getWeight()
-	{
-		return EnumWeight.HEAVY;
-	}
-	
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.HUGE;
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
+		return EnumSize.MEDIUM;
 	}
 
 	@Override
-	public boolean canStack()
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

@@ -151,14 +151,13 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory() 
-	{
+	public boolean shouldRender3DInInventory() {
 		return true;
 	}
 
 	@Override
-	public int getRenderId() 
-	{
+	public int getRenderId() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 	

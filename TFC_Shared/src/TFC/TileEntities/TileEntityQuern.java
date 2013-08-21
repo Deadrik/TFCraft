@@ -282,13 +282,12 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	}
 
 	@Override
-	public void openChest() 
-	{
+	public void openChest() {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void closeChest() 
-	{
+	public void closeChest() {
 		//TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
@@ -325,9 +324,8 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException
-	{
-		
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override

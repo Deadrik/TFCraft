@@ -345,8 +345,8 @@ public class BlockAnvil extends BlockTerraContainer implements ISmeltable
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) 
-	{
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
 		return new TileEntityAnvil();
 	}
 
@@ -406,14 +406,14 @@ public class BlockAnvil extends BlockTerraContainer implements ISmeltable
 	}
 
 	@Override
-	public boolean isSmeltable(ItemStack is) 
-	{
+	public boolean isSmeltable(ItemStack is) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is) 
-	{
+	public EnumTier GetSmeltTier(ItemStack is) {
+		// TODO Auto-generated method stub
 		return EnumTier.TierI;
 	}
 }

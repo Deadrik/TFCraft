@@ -38,7 +38,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		super(par1, par2EnumToolMaterial);
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
-		this.weaponDamage = par2EnumToolMaterial.getDamageVsEntity();
+		this.weaponDamage = damage;
 		setCreativeTab(TFCTabs.TFCWeapons);
 	}
 
@@ -110,20 +110,20 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	}
 
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}
 
 	@Override
-	public boolean canStack() 
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}
 

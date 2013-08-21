@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumToolMaterial;
@@ -16,6 +18,9 @@ import TFC.API.IProjectile;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Entities.EntityJavelin;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjectile
 {
@@ -172,5 +177,13 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 	public float getRangedDamage() 
 	{
 		return weaponRangeDamage;
+	}
+
+	@Override
+	public Multimap func_111205_h()
+	{
+		Multimap multimap = HashMultimap.create();
+		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
+		return multimap;
 	}
 }

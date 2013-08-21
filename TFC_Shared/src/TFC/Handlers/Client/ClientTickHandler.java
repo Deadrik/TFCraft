@@ -31,14 +31,14 @@ public class ClientTickHandler implements ITickHandler
 	}
 
 	@Override
-	public EnumSet<TickType> ticks()
-	{
+	public EnumSet<TickType> ticks() {
+		// TODO Auto-generated method stub
 		return EnumSet.of(TickType.PLAYER, TickType.RENDER);
 	}
 
 	@Override
-	public String getLabel() 
-	{
+	public String getLabel() {
+		// TODO Auto-generated method stub
 		return "TFC Client";
 	}
 

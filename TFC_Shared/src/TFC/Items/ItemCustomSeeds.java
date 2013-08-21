@@ -34,14 +34,14 @@ public class ItemCustomSeeds extends ItemTerra
 	}
 	
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
 		return EnumSize.TINY;
 	}
 	
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
 

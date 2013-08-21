@@ -217,20 +217,18 @@ public class ItemTerraFood extends ItemFood implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
 		return size;
 	}
-	
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return weight;
 	}
-	
 	@Override
-	public boolean canStack() 
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 }

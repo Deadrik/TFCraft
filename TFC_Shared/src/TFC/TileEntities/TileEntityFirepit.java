@@ -144,8 +144,8 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
         }
     }
     @Override
-    public void closeChest() 
-    {
+    public void closeChest() {
+        // TODO Auto-generated method stub
 
     }
     public void combineMetals(ItemStack InputItem, ItemStack DestItem)
@@ -596,12 +596,13 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     @Override
     public ItemStack getStackInSlot(int i)
     {
+        // TODO Auto-generated method stub
         return fireItemStacks[i];
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int var1) 
-    {
+    public ItemStack getStackInSlotOnClosing(int var1) {
+        // TODO Auto-generated method stub
         return null;
     }
 
@@ -651,14 +652,14 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) 
-    {
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public void openChest() 
-    {
+    public void openChest() {
+        // TODO Auto-generated method stub
 
     }
 

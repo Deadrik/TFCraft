@@ -42,8 +42,8 @@ public class ItemFirestarter extends ItemTerra
 	}
 
 	@Override
-	public boolean canStack() 
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

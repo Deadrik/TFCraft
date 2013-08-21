@@ -135,6 +135,7 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
+		// TODO Auto-generated method stub
 		return 64;
 	}
 
@@ -157,8 +158,8 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1)
-	{
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -177,17 +178,15 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
-	{
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void openChest() 
-	{
+	public void openChest() {
 
 	}
-	
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
@@ -222,7 +221,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 	{
 		TFC_ItemHeat.HandleContainerHeat(this.worldObj,storage, xCoord,yCoord,zCoord);
 	}
-	
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
@@ -290,7 +288,6 @@ public class TileEntityIngotPile extends NetworkTileEntity implements IInventory
 
 		return this.setupCustomPacketData(bos.toByteArray(), bos.size());
 	}
-	
 	@Override
 	public boolean isInvNameLocalized() 
 	{

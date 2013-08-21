@@ -256,8 +256,8 @@ public class BlockForge extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) 
-	{
+	public TileEntity createNewTileEntity(World var1) {
+		// TODO Auto-generated method stub
 		return new TileEntityForge();
 	}
 

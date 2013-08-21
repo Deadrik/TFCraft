@@ -312,21 +312,22 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
-	{
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException 
-	{
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleInitPacket(DataInputStream inStream) throws IOException 
-	{
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -350,8 +351,8 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int i) 
-	{
+	public ItemStack getStackInSlotOnClosing(int i) {
+		// TODO Auto-generated method stub
 		return storage[i];
 	}
 
@@ -367,38 +368,38 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public boolean isInvNameLocalized()
-	{
+	public boolean isInvNameLocalized() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public int getInventoryStackLimit()
-	{
+	public int getInventoryStackLimit() {
+		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) 
-	{
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public void openChest() 
-	{
+	public void openChest() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void closeChest() 
-	{
+	public void closeChest() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) 
-	{
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 

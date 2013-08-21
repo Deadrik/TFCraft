@@ -302,26 +302,26 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public String getInvName() 
-	{
+	public String getInvName() {
+		// TODO Auto-generated method stub
 		return "FoodPrep";
 	}
 
 	@Override
-	public int getInventoryStackLimit() 
-	{
+	public int getInventoryStackLimit() {
+		// TODO Auto-generated method stub
 		return 64;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1) 
-	{
+	public boolean isUseableByPlayer(EntityPlayer var1) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void openChest() 
-	{
+	public void openChest() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -343,8 +343,8 @@ public class TileEntityFoodPrep extends NetworkTileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int var1) 
-	{
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -60,8 +60,8 @@ public class RenderChickenTFC extends RenderChicken
     }
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) 
-	{
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// TODO Auto-generated method stub
 		return getTexture((IAnimal)entity);
 	}
 }

@@ -175,8 +175,8 @@ public class ItemPlank extends ItemTerra
 	}
 
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
 

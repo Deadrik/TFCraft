@@ -129,14 +129,14 @@ public class BlockRenderHandler implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory() 
-	{
+	public boolean shouldRender3DInInventory() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public int getRenderId() 
-	{
+	public int getRenderId() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 

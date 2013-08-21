@@ -18,6 +18,7 @@ public class BlockStair extends BlockPartial
     public BlockStair(int par1, Material m)
     {
         super(par1, m);
+        // TODO Auto-generated constructor stub
     }
 
     @Override

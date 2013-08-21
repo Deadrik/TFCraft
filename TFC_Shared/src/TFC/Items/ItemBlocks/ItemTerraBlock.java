@@ -121,20 +121,20 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() 
-	{
+	public EnumSize getSize() {
+		// TODO Auto-generated method stub
 		return EnumSize.VERYSMALL;
 	}
 
 	@Override
-	public boolean canStack() 
-	{
+	public boolean canStack() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public EnumWeight getWeight() 
-	{
+	public EnumWeight getWeight() {
+		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
 	

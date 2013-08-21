@@ -6,8 +6,8 @@ public class TFC_MobData
 	public static final float SteveDamage = 10f;
 
 	//Zombie
-	public static final int ZombieDamage = 100;
-	public static final int ZombieHealth = 2500;
+	public static final int ZombieDamage = 40;
+	public static final int ZombieHealth = 900;
 
 	//Wolf
 	public static final int WolfDamage = 80;

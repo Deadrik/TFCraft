@@ -912,10 +912,10 @@ public class TFCItems
 	public static void Setup()
 	{
 		//Tier 0
-		IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 10, 5);
-		SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 10, 5);
-		IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 10, 5);
-		MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 10, 5);
+		IgInToolMaterial = EnumHelper.addToolMaterial("IgIn", 1, IgInStoneUses, 7F, 40, 5);
+		SedToolMaterial = EnumHelper.addToolMaterial("Sed", 1, SedStoneUses, 6F, 40, 5);
+		IgExToolMaterial = EnumHelper.addToolMaterial("IgEx", 1, IgExStoneUses, 7F, 40, 5);
+		MMToolMaterial = EnumHelper.addToolMaterial("MM", 1, MMStoneUses, 6.5F, 40, 5);
 		//Tier 1
 		CopperToolMaterial = EnumHelper.addToolMaterial("Copper", 2, 				CopperUses, 		CopperEff, 			65, 8);
 		//Tier 2
@@ -1146,10 +1146,10 @@ public class TFCItems
 		Logs = new ItemLogs(TFCItemID.Logs).setUnlocalizedName("Log");
 
 		//javelins
-		IgInStoneJavelin = new ItemJavelin(TFCItemID.IgInJavelin,IgInToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
-		SedStoneJavelin = new ItemJavelin(TFCItemID.SedJavelin,SedToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
-		IgExStoneJavelin = new ItemJavelin(TFCItemID.IgExJavelin,IgExToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");
-		MMStoneJavelin = new ItemJavelin(TFCItemID.MMJavelin,MMToolMaterial, 30, 30).setUnlocalizedName("Stone Javelin");        
+		IgInStoneJavelin = new ItemJavelin(TFCItemID.IgInJavelin,IgInToolMaterial, 45, 30).setUnlocalizedName("Stone Javelin");
+		SedStoneJavelin = new ItemJavelin(TFCItemID.SedJavelin,SedToolMaterial, 45, 30).setUnlocalizedName("Stone Javelin");
+		IgExStoneJavelin = new ItemJavelin(TFCItemID.IgExJavelin,IgExToolMaterial, 45, 30).setUnlocalizedName("Stone Javelin");
+		MMStoneJavelin = new ItemJavelin(TFCItemID.MMJavelin,MMToolMaterial, 45, 30).setUnlocalizedName("Stone Javelin");        
 		CopperJavelin = new ItemJavelin(TFCItemID.CopperJavelin,CopperToolMaterial, 65, 50).setUnlocalizedName("Copper Javelin");
 		BismuthBronzeJavelin = new ItemJavelin(TFCItemID.BismuthBronzeJavelin, BismuthBronzeToolMaterial, 90, 75).setUnlocalizedName("Bismuth Bronze Javelin");
 		BronzeJavelin = new ItemJavelin(TFCItemID.BronzeJavelin,BronzeToolMaterial, 100, 85).setUnlocalizedName("Bronze Javelin");
@@ -1394,7 +1394,7 @@ public class TFCItems
 		StoneKnifeHead = new ItemMiscToolHead(TFCItemID.StoneKnifeHead).setUnlocalizedName("Stone Knife Blade");
 		StoneHammerHead = new ItemMiscToolHead(TFCItemID.StoneHammerHead).setUnlocalizedName("Stone Hammer Head");
 
-		StoneKnife = new ItemCustomKnife(TFCItemID.StoneKnife,IgExToolMaterial, 100).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
+		StoneKnife = new ItemCustomKnife(TFCItemID.StoneKnife,IgExToolMaterial, 75).setUnlocalizedName("Stone Knife").setMaxDamage(IgExStoneUses);
 		SmallOreChunk = new ItemOreSmall(TFCItemID.SmallOreChunk).setUnlocalizedName("Small Ore");
 		SinglePlank = new ItemPlank(TFCItemID.SinglePlank).setUnlocalizedName("SinglePlank");
 

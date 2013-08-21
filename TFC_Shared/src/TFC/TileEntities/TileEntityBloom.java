@@ -20,27 +20,28 @@ public class TileEntityBloom extends NetworkTileEntity
 	}
 
 	@Override
-	public void handleDataPacket(DataInputStream inStream) throws IOException 
-	{
+	public void handleDataPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException 
-	{
+	public void handleDataPacketServer(DataInputStream inStream)
+			throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void createInitPacket(DataOutputStream outStream) throws IOException 
-	{
+	public void createInitPacket(DataOutputStream outStream) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void handleInitPacket(DataInputStream inStream) throws IOException 
-	{
+	public void handleInitPacket(DataInputStream inStream) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 }

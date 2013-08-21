@@ -69,8 +69,8 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public int getRenderId() 
-	{
+	public int getRenderId() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 	

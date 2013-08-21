@@ -7,9 +7,9 @@ import net.minecraft.util.Icon;
 
 public class BlockCustomFenceGate extends BlockFenceGate {
 
-	public BlockCustomFenceGate(int par1) 
-	{
+	public BlockCustomFenceGate(int par1) {
 		super(par1);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

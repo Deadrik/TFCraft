@@ -297,13 +297,13 @@ public class CommonProxy implements IGuiHandler
 		return 0;
 	}
 
-	public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) 
-	{
+	public int grassColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) 
-	{
+	public int foliageColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -320,6 +320,7 @@ public class CommonProxy implements IGuiHandler
 
 	public boolean getGraphicsLevel()
 	{
+		// TODO Auto-generated method stub
 		return false;
 	}
 

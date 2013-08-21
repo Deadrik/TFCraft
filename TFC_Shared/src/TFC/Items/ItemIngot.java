@@ -354,26 +354,26 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is) 
-	{
+	public Metal GetMetalType(ItemStack is) {
+		// TODO Auto-generated method stub
 		return MetalRegistry.instance.getMetalFromItem(this);
 	}
 
 	@Override
-	public short GetMetalReturnAmount(ItemStack is) 
-	{
+	public short GetMetalReturnAmount(ItemStack is) {
+		// TODO Auto-generated method stub
 		return 100;
 	}
 
 	@Override
-	public boolean isSmeltable(ItemStack is) 
-	{
+	public boolean isSmeltable(ItemStack is) {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
-	public EnumTier GetSmeltTier(ItemStack is) 
-	{
+	public EnumTier GetSmeltTier(ItemStack is) {
+		// TODO Auto-generated method stub
 		return EnumTier.TierI;
 	}
 }
