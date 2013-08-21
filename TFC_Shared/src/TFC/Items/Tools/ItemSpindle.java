@@ -12,6 +12,7 @@ public class ItemSpindle extends ItemTerra
 	{
 		super(i);
 		this.setMaxDamage(40);
+		this.setFolder("tools/");
 	}
 
 	@Override
