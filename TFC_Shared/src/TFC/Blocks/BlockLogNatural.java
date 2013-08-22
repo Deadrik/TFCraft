@@ -210,7 +210,7 @@ public class BlockLogNatural extends BlockTerra
 			y++;
 		}
 		while (y >= 0) {
-			scanLogs(world,i,j+y,k,l,checkArray,6,y--,6, stack);
+			scanLogs(world,i,j+y,k,l,checkArray,(byte)6,(byte)y--,(byte)6, stack);
 		}
 
 	}
@@ -245,25 +245,22 @@ public class BlockLogNatural extends BlockTerra
 		}
 	}
 
-	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray,int x, int y, int z, ItemStack stack)
+	private void scanLogs(World world, int i, int j, int k, int l, boolean[][][] checkArray,byte x, byte y, byte z, ItemStack stack)
 	{
 		if(y >= 0)
 		{
 			checkArray[x][y][z] = true;
 			int offsetX = 0;int offsetY = 0;int offsetZ = 0;
-
-			for (offsetY = 0; offsetY <= 1; offsetY++)
+			
+			for (offsetX = -2; offsetX <= 2; offsetX++)
 			{
-				for (offsetX = -2; offsetX <= 2; offsetX++)
+				for (offsetZ = -2; offsetZ <= 2; offsetZ++)
 				{
-					for (offsetZ = -2; offsetZ <= 2; offsetZ++)
+					if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0)
 					{
-						if(x+offsetX < 11 && x+offsetX >= 0 && z+offsetZ < 11 && z+offsetZ >= 0 && y+offsetY < 50 && y+offsetY >= 0)
+						if(checkOut(world, i+offsetX, j, k+offsetZ, l) && !checkArray[x+offsetX][y][z+offsetZ])
 						{
-							if(checkOut(world, i+offsetX, j+offsetY, k+offsetZ, l) && !checkArray[x+offsetX][y+offsetY][z+offsetZ])
-							{
-								scanLogs(world,i+offsetX, j+offsetY, k+offsetZ, l, checkArray,x+offsetX,y+offsetY,z+offsetZ, stack);
-							}
+							scanLogs(world,i+offsetX, j, k+offsetZ, l, checkArray,(byte)(x+offsetX),(byte)y,(byte)(z+offsetZ), stack);
 						}
 					}
 				}
