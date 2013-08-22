@@ -17,41 +17,41 @@ import TFC.Core.Player.PlayerManagerTFC;
 public class GuiMold extends GuiContainer
 {
 	EntityPlayer player;
-    public GuiMold(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
-    {
-        super(new ContainerMold(inventoryplayer, world, i, j, k));
-        this.xSize = 175;
-        this.ySize = 130;
-        player = inventoryplayer.player;
-    }
+	public GuiMold(InventoryPlayer inventoryplayer, World world, int i, int j, int k)
+	{
+		super(new ContainerMold(inventoryplayer, world, i, j, k));
+		this.xSize = 175;
+		this.ySize = 130;
+		player = inventoryplayer.player;
+	}
 
-    @Override
+	@Override
 	public void onGuiClosed()
-    {
-        super.onGuiClosed();
-    }
+	{
+		super.onGuiClosed();
+	}
 
-    @Override
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
-    {
-    	this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_mold.png"));
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int w = (width - xSize) / 2;
-        int h = (height - ySize) / 2;
-        drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
-        
-        drawTexturedModalRect(w+85, h+17, 176, 0, drawArrowScaled(21)+1, 14);
-    }
-    
-    private int drawArrowScaled(int scale)
-    {
-    	PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
-    	return (pi.moldTransferTimer == 1000 ? 0 : pi.moldTransferTimer * scale)/100;
-    }
-    
-    @Override
+	{
+		this.mc.func_110434_K().func_110577_a(new ResourceLocation(Reference.ModID, Reference.AssetPathGui + "gui_mold.png"));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		int w = (width - xSize) / 2;
+		int h = (height - ySize) / 2;
+		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+
+		drawTexturedModalRect(w+85, h+17, 176, 0, drawArrowScaled(21)+1, 15);
+	}
+
+	private int drawArrowScaled(int scale)
+	{
+		PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(player);
+		return (pi.moldTransferTimer == 1000 ? 0 : pi.moldTransferTimer * scale)/100;
+	}
+
+	@Override
 	public void drawCenteredString(FontRenderer fontrenderer, String s, int i, int j, int k)
-    {
-        fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
-    }
+	{
+		fontrenderer.drawString(s, i - fontrenderer.getStringWidth(s) / 2, j, k);
+	}
 }

@@ -1,30 +1,29 @@
 package TFC.Items.Tools;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.world.World;
 import TFC.API.Enums.EnumSize;
+import TFC.Items.ItemTerra;
 
-public class ItemSpindle extends ItemTerraTool
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+public class ItemSpindle extends ItemTerra
 {
-	static Random random = new Random();
-	public ItemSpindle(int i, EnumToolMaterial e)
+	public ItemSpindle(int i)
 	{
-		super(i, 0, e, new Block[] {});
-		this.setMaxDamage(e.getMaxUses()/2);
+		super(i);
+		this.setMaxDamage(40);
+		this.setFolder("tools/");
 	}
-		
+
 	@Override
 	public EnumSize getSize() {
 		return EnumSize.VERYSMALL;
 	}
-	
 
-	public static boolean handleActivation(World world, EntityPlayer player, int x, int y, int z, int blockID, int meta, int side, float hitX, float hitY, float hitZ)
+	@Override
+	public Multimap func_111205_h()
 	{
-		return true;
+		Multimap multimap = HashMultimap.create();
+		return multimap;
 	}
 }

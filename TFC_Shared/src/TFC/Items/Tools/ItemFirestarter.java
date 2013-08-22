@@ -42,8 +42,8 @@ public class ItemFirestarter extends ItemTerra
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return false;
 	}
 
@@ -99,7 +99,7 @@ public class ItemFirestarter extends ItemTerra
 					}
 				}
 
-				itemstack.setItemDamage(itemstack.getItemDamage()+1);
+				itemstack.damageItem(1, entityplayer);
 
 				if(itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
 					itemstack.stackSize = 0;
@@ -141,7 +141,7 @@ public class ItemFirestarter extends ItemTerra
 								entity.setDead();
 							}
 						}
-						itemstack.setItemDamage(itemstack.getItemDamage()+1);
+						itemstack.damageItem(1, entityplayer);
 						world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 2);
 					}
 
@@ -160,7 +160,7 @@ public class ItemFirestarter extends ItemTerra
 					{
 						world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 2);
 					}
-					itemstack.setItemDamage(itemstack.getItemDamage()+1);
+					itemstack.damageItem(1, entityplayer);
 					return true;
 				}
 			}
@@ -174,7 +174,8 @@ public class ItemFirestarter extends ItemTerra
 						TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
 						te.StartPitFire();
 					}
-					itemstack.setItemDamage(itemstack.getItemDamage()+1);
+					itemstack.damageItem(1, entityplayer);
+					return true;
 				}
 			}
 			return false;

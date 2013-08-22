@@ -126,6 +126,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
 	 */
+	
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
 	{
@@ -135,6 +136,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
+	
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
@@ -152,6 +154,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	 * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
 	 * blockID passed in. Args: blockID
 	 */
+	
 	protected boolean canThisPlantGrowOnThisBlockID(int par1)
 	{
 		return TFC_Core.isSoil(par1);
@@ -161,6 +164,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
 	 * cleared to be reused)
 	 */
+	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
 	{
@@ -170,6 +174,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * The type of render function that is called for this block
 	 */
+	
 	@Override
 	public int getRenderType()
 	{
@@ -180,6 +185,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	 * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
 	 * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
 	 */
+	
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -189,6 +195,7 @@ public class BlockCustomSapling extends BlockTerraContainer
 	/**
 	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
 	 */
+	
 	@Override
 	public boolean renderAsNormalBlock()
 	{
@@ -196,8 +203,8 @@ public class BlockCustomSapling extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TileEntitySapling();
 	}
     

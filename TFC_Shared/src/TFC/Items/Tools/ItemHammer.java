@@ -55,8 +55,8 @@ public class ItemHammer extends ItemTerraTool
     }
 	
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumSize getSize() 
+	{
 		return EnumSize.SMALL;
 	}
 }

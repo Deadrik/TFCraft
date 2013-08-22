@@ -98,8 +98,8 @@ public class RenderDeer extends RenderLiving
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
-		// TODO Auto-generated method stub
+	protected ResourceLocation func_110775_a(Entity entity) 
+	{
 		return getTexture((IAnimal)entity);
 	}
 }

@@ -150,6 +150,7 @@ public class ContainerMold extends ContainerTFC {
 				ItemStack is = CraftingManagerTFC.getInstance().findMatchingRecipe(this.containerInv, world);
 				is.setTagCompound(containerInv.getStackInSlot(1).stackTagCompound);
 				craftResult.setInventorySlotContents(0, is);
+				containerInv.setInventorySlotContents(1, null);
 				containerInv.setInventorySlotContents(1, new ItemStack(TFCItems.CeramicMold, 1, 1));
 				containerInv.setInventorySlotContents(0, null);
 			}

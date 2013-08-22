@@ -358,6 +358,12 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 		}
 	}
 
+	@Override
+	protected void enchantEquipment()
+	{
+
+	}
+
 	public static Item getArmorItemForSlot(int par0, int par1)
 	{
 		switch (par0)
@@ -549,7 +555,7 @@ public class EntitySkeletonTFC extends EntityMob implements IRangedAttackMob, IC
 				projectile.setKnockbackStrength(var4);
 			}
 
-			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0 || this.getSkeletonType() == 1)
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0)
 			{
 				projectile.setFire(100);
 			}

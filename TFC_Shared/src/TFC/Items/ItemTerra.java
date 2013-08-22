@@ -21,6 +21,9 @@ import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_ItemHeat;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 public class ItemTerra extends Item implements ISize
 {
 	protected boolean stackable = true;
@@ -205,29 +208,11 @@ public class ItemTerra extends Item implements ISize
 
 	}
 
-	public static String getRuleFromId(int id)
+	@Override
+	public Multimap func_111205_h()
 	{
-		switch(id)
-		{
-		case 0:
-			return "Hit";
-		case 1:
-			return "Draw";
-		case 2:
-			return "Quench";
-		case 3:
-			return "Punch";
-		case 4:
-			return "Bend";
-		case 5:
-			return "Upset";
-		case 6:
-			return "Shrink";
-		case 7:
-			return "Weld";
-		default:
-			return "";
-		}
+		Multimap multimap = HashMultimap.create();
+		return multimap;
 	}
 
 	@Override

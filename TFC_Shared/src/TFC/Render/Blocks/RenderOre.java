@@ -64,13 +64,14 @@ public class RenderOre implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory() {
+	public boolean shouldRender3DInInventory() 
+	{
 		return false;
 	}
 
 	@Override
-	public int getRenderId() {
-		// TODO Auto-generated method stub
+	public int getRenderId() 
+	{
 		return 0;
 	}
 	

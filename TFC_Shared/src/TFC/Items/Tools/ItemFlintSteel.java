@@ -93,7 +93,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 							entity.setDead();
 						}
 					}
-					itemstack.setItemDamage(itemstack.getItemDamage()+1);
+					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y+1, z, TFCBlocks.Firepit.blockID, 1, 0x2);
 					if(world.isRemote) {
 						world.markBlockForUpdate(x, y+1, z);
@@ -116,7 +116,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 							entity.setDead();
 						}
 					}
-					itemstack.setItemDamage(itemstack.getItemDamage()+1);
+					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y+1, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 
@@ -129,7 +129,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 						world.getBlockMaterial(x, y, z+1) == Material.rock && world.getBlockMaterial(x, y, z-1) == Material.rock &&
 						surroundSolids)
 				{
-					itemstack.setItemDamage(itemstack.getItemDamage()+1);
+					itemstack.damageItem(1, entityplayer);
 					world.setBlock(x, y, z, TFCBlocks.Forge.blockID, 1, 0x2);
 				}
 			}
@@ -141,7 +141,7 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 				{
 					TileEntityPottery te = (TileEntityPottery) world.getBlockTileEntity(x, y-1, z);
 					te.StartPitFire();					
-					itemstack.setItemDamage(itemstack.getItemDamage()+1);
+					itemstack.damageItem(1, entityplayer);
 				}
 			}
 			else
@@ -154,20 +154,20 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumSize getSize() 
+	{
 		return EnumSize.VERYSMALL;
 	}
 
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight() 
+	{
 		return EnumWeight.LIGHT;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack()
+	{
 		return false;
 	}
 
