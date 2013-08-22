@@ -5,12 +5,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.network.MemoryConnection;
 import net.minecraft.network.NetLoginHandler;
 import net.minecraft.network.NetServerHandler;
 import net.minecraft.network.packet.NetHandler;
@@ -413,14 +415,30 @@ public class PacketHandler implements IPacketHandler, IConnectionHandler {
 	@Override
 	public void connectionClosed(INetworkManager manager) 
 	{
-		PlayerInfo PI = new PlayerInfo("", manager);
-		for(int i = 0; i < PlayerManagerTFC.getInstance().Players.size() && PI != null; i++)
+		PlayerInfo playerToRemove = null;
+		
+		List<PlayerInfo> players = PlayerManagerTFC.getInstance().Players;
+		for(int i = 0; i < players.size(); i++)
 		{
-			if(PlayerManagerTFC.getInstance().Players.get(i).networkManager == manager)
+			playerToRemove = players.get(i);
+			if(playerToRemove.networkManager == manager)
 			{
-				System.out.println("PlayerManager Successfully removed player " + PlayerManagerTFC.getInstance().Players.get(i).Name);
-				PlayerManagerTFC.getInstance().Players.remove(i);
+				System.out.println("PlayerManager Successfully removed player " + playerToRemove.Name);
+				players.remove(i);
 			}  
+		}
+		
+		// Preventive cleanup of integrated server PlayerInfo instance in the case it doesn't call connectionClosed
+		if(playerToRemove != null && manager instanceof MemoryConnection)
+		{
+			for(int i = 0; i < players.size(); i++)
+			{
+				if(playerToRemove.Name == players.get(i).Name)
+				{
+					System.out.println("PlayerManager Successfully removed player " + players.get(i).Name);
+					players.remove(i);
+				}
+			}
 		}
 
 		//		if(TerraFirmaCraft.proxy.isRemote())
