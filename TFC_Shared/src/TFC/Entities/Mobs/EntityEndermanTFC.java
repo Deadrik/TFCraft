@@ -22,13 +22,13 @@ public class EntityEndermanTFC extends EntityEnderman implements ICausesDamage
 	protected void func_110147_ax()
 	{
 		super.func_110147_ax();
-		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.EndermanDamage);
-		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.EndermanHealth);//MaxHealth
+		this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(TFC_MobData.EndermanDamage); //Damage
+		this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(TFC_MobData.EndermanHealth); //MaxHealth
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() {
-		// TODO Auto-generated method stub
+	public EnumDamageType GetDamageType() 
+	{
 		return EnumDamageType.GENERIC;
 	}
 

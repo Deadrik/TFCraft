@@ -272,22 +272,26 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
+	public int getInventoryStackLimit() 
+	{
 		return 64;
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer var1) {
+	public boolean isUseableByPlayer(EntityPlayer var1)
+	{
 		return false;
 	}
 
 	@Override
-	public void openChest() {
-		// TODO Auto-generated method stub
+	public void openChest() 
+	{
+		
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeChest()
+	{
 		//TerraFirmaCraft.proxy.sendCustomPacket(createUpdatePacket());
 	}
 
@@ -324,8 +328,9 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 	}
 
 	@Override
-	public void handleDataPacketServer(DataInputStream inStream) throws IOException {
-		// TODO Auto-generated method stub
+	public void handleDataPacketServer(DataInputStream inStream) throws IOException
+	{
+		
 	}
 
 	@Override

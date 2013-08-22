@@ -30,14 +30,14 @@ public class ItemCustomBucket extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
+	public EnumSize getSize() 
+	{
 		return EnumSize.MEDIUM;
 	}
 
 	@Override
-	public boolean canStack() {
-		// TODO Auto-generated method stub
+	public boolean canStack() 
+	{
 		return false;
 	}
 

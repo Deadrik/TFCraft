@@ -156,8 +156,8 @@ public class RenderAnvil implements ISimpleBlockRenderingHandler{
 	}
 
 	@Override
-	public int getRenderId() {
-		// TODO Auto-generated method stub
+	public int getRenderId() 
+	{
 		return 0;
 	}
 	

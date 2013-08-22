@@ -195,13 +195,12 @@ public class TileEntitySluice extends TileEntity implements IInventory
     @Override
     public ItemStack getStackInSlot(int i)
     {
-        // TODO Auto-generated method stub
         return sluiceItemStacks[i];
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int var1) {
-        // TODO Auto-generated method stub
+    public ItemStack getStackInSlotOnClosing(int var1) 
+    {
         return null;
     }
 
@@ -219,7 +218,6 @@ public class TileEntitySluice extends TileEntity implements IInventory
     @Override
     public void openChest()
     {
-        // TODO Auto-generated method stub
 
     }
 

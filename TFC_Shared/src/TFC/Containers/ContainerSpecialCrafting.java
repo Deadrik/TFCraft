@@ -141,7 +141,6 @@ public class ContainerSpecialCrafting extends ContainerTFC
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
 	{
-		// TODO Auto-generated method stub
 		return true;
 	}
 }

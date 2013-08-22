@@ -49,30 +49,33 @@ public class BlockPartial extends BlockTerraContainer
     {
         super(par1, m);
     }
+    
     @Override
     public boolean isOpaqueCube()
     {
         return false;
     }
+    
     @Override
     public boolean renderAsNormalBlock()
     {
         return false;
     }
+    
 	@Override
     @SideOnly(Side.CLIENT)
     public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
     {
-		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
         return true;
     }
+	
 	@Override
     @SideOnly(Side.CLIENT)
     public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
     {
-		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
         return true;
     }
+	
     @Override
     public void onBlockAdded(World world, int par2, int par3, int par4)
     {
@@ -93,9 +96,10 @@ public class BlockPartial extends BlockTerraContainer
     {   
 
     }
+    
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TileEntityPartial();
 	}
 

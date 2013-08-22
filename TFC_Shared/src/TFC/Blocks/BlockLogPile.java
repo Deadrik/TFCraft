@@ -129,15 +129,18 @@ public class BlockLogPile extends BlockTerraContainer
     {
         return 0;
     }
+	
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{		
 		Eject(world,i,j,k);
 	}
+	
 	@Override
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion ex) {
 		Eject(par1World,par2,par3,par4);
 	}
+	
 	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
 		Eject(par1World,par2,par3,par4);
@@ -151,8 +154,8 @@ public class BlockLogPile extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TileEntityLogPile();
 	}
 	
