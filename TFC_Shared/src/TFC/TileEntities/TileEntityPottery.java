@@ -111,9 +111,9 @@ public class TileEntityPottery extends NetworkTileEntity implements IInventory
 	public void StartPitFire()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		if(meta == 15)
+		TileEntityLogPile telp = (TileEntityLogPile) worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
+		if(meta == 15 && telp.getNumberOfLogs() == 16)
 		{
-			TileEntityLogPile telp = (TileEntityLogPile) worldObj.getBlockTileEntity(xCoord, yCoord+1, zCoord);
 			logsForBurn = telp.getNumberOfLogs();
 			telp.clearContents();
 			worldObj.setBlock(xCoord, yCoord+1, zCoord, Block.fire.blockID);
