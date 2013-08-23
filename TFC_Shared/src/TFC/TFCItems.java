@@ -1761,9 +1761,9 @@ public class TFCItems
 		AlloyManager.instance.addAlloy(RoseGold);
 
 		Alloy BlackBronze = new Alloy(Global.BLACKBRONZE, Alloy.EnumTier.TierI);
-		BlackBronze.addIngred(Global.GOLD, 10, 20);
+		BlackBronze.addIngred(Global.GOLD, 10, 25);
 		BlackBronze.addIngred(Global.COPPER, 50, 70);
-		BlackBronze.addIngred(Global.SILVER, 10, 20);
+		BlackBronze.addIngred(Global.SILVER, 10, 25);
 		AlloyManager.instance.addAlloy(BlackBronze);
 
 		Alloy BismuthBronze = new Alloy(Global.BISMUTHBRONZE, Alloy.EnumTier.TierI);
