@@ -232,7 +232,6 @@ public class ClientProxy extends CommonProxy
 	{
 		GuiIngameForge.renderHealth = false;
 		GuiIngameForge.renderArmor = false;
-		GuiIngameForge.renderFood = false;
 		GuiIngameForge.renderExperiance = false;
 	}
 
