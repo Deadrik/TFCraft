@@ -38,15 +38,13 @@ public class BlockThatch extends BlockTerra
 	@Override
 	public Icon getIcon(int side, int meta)
 	{
-
 		return this.blockIcon;
-
 	}
 
 	@Override
 	public boolean isOpaqueCube()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -77,15 +75,6 @@ public class BlockThatch extends BlockTerra
 	{
 
 	}
-
-	/**
-	 * Returns the block texture based on the side being looked at.  Args: side
-	 */
-	/*@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1)
-	{
-		return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture - 1 : (par1 == 3 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture));
-	}*/
 
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
