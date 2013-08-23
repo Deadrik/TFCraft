@@ -79,14 +79,14 @@ public class FoodStatsTFC
 				soberTime--;
 			}
 			player.getEntityData().setLong("soberTime", soberTime);
-			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength && !player.capabilities.isCreativeMode)
+			if (TFC_Time.getTotalTicks() - this.foodTimer >= TFC_Time.hourLength)
 			{
 				this.foodTimer += TFC_Time.hourLength;
 				if (this.foodSaturationLevel > 0.0F)
 				{
 					this.foodSaturationLevel = Math.max(this.foodSaturationLevel - 1.0F, 0.0F);
 				}
-				else if (!player.capabilities.isCreativeMode)
+				else if(!player.capabilities.isCreativeMode)
 				{
 					this.foodLevel = Math.max(this.foodLevel - 1, 0);
 				}
@@ -130,22 +130,27 @@ public class FoodStatsTFC
 				waterLevel -= 5+(tempWaterMod);
 			}
 			long time = TFC_Time.getTotalTicks();
-			for(;waterTimer < time && !player.capabilities.isCreativeMode; waterTimer++)
+			
+			if(player.capabilities.isCreativeMode)
+				waterTimer = time;
+			else
 			{
-
-				/**Reduce the player's water for normal living*/
-				waterLevel -= 1+(tempWaterMod/2);
-				if(player.isInWater())
+				for(;waterTimer < time;  waterTimer++)
 				{
-					this.restoreWater(player, 20);
-				}
-				if(waterLevel < 0) 
-				{
-					waterLevel = 0;
-				}
-				if(waterLevel == 0 && temp > 30) 
-				{
-					player.attackEntityFrom(DamageSource.generic, 2);
+					/**Reduce the player's water for normal living*/
+					waterLevel -= 1+(tempWaterMod/2);
+					if(player.isInWater())
+					{
+						this.restoreWater(player, 20);
+					}
+					if(waterLevel < 0) 
+					{
+						waterLevel = 0;
+					}
+					if(waterLevel == 0 && temp > 30) 
+					{
+						player.attackEntityFrom(DamageSource.generic, 2);
+					}
 				}
 			}
 		}
