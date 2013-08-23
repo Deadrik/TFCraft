@@ -31,7 +31,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		this.MetaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
 		this.setMaxStackSize(1);
 	}
-	
+
 	@Override
 	public boolean canStack()
 	{
@@ -122,12 +122,20 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			}
 			int total = metalAmounts[0] + metalAmounts[1] + metalAmounts[2] + metalAmounts[3];
 			int numMetals = 0;
-			if(metalAmounts[0] > 0) numMetals++;
-			if(metalAmounts[1] > 0) numMetals++;
-			if(metalAmounts[2] > 0) numMetals++;
-			if(metalAmounts[3] > 0) numMetals++;
+			if(metalAmounts[0] > 0) {
+				numMetals++;
+			}
+			if(metalAmounts[1] > 0) {
+				numMetals++;
+			}
+			if(metalAmounts[2] > 0) {
+				numMetals++;
+			}
+			if(metalAmounts[3] > 0) {
+				numMetals++;
+			}
 
-			if(total > 0 && numMetals > 1)
+			if(total > 0)
 			{
 				float[] metalPercent = new float[4];
 				metalPercent[0] = ((float)metalAmounts[0] / (float)total) * 100f;
@@ -136,10 +144,18 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				metalPercent[3] = ((float)metalAmounts[3] / (float)total) * 100f;
 
 				List<AlloyMetal> a = new ArrayList<AlloyMetal>();
-				if(types[0] != null) a.add(new AlloyMetal(types[0], metalPercent[0]));
-				if(types[1] != null) a.add(new AlloyMetal(types[1], metalPercent[1]));
-				if(types[2] != null) a.add(new AlloyMetal(types[2], metalPercent[2]));
-				if(types[3] != null) a.add(new AlloyMetal(types[3], metalPercent[3]));
+				if(types[0] != null) {
+					a.add(new AlloyMetal(types[0], metalPercent[0]));
+				}
+				if(types[1] != null) {
+					a.add(new AlloyMetal(types[1], metalPercent[1]));
+				}
+				if(types[2] != null) {
+					a.add(new AlloyMetal(types[2], metalPercent[2]));
+				}
+				if(types[3] != null) {
+					a.add(new AlloyMetal(types[3], metalPercent[3]));
+				}
 
 				Metal match = AlloyManager.instance.matchesAlloy(a, furnaceTier);
 				if(match != null)
@@ -148,23 +164,6 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", output.outputType.Name);
 					tag.setInteger("MetalAmount", output.outputAmount);
-					is.getTagCompound().removeTag("Items");
-					is.setItemDamage(2);
-				}
-			}
-			else if(total > 0 && numMetals == 1)
-			{
-				Metal m = null;
-				if(types[0] != null) m = types[0];
-				else if(types[1] != null) m = types[1];
-				else if(types[2] != null) m = types[2];
-				else if(types[3] != null) m = types[3];
-
-				if(m != null)
-				{
-					NBTTagCompound tag = is.stackTagCompound;
-					tag.setString("MetalType", m.Name);
-					tag.setInteger("MetalAmount", total);
 					is.getTagCompound().removeTag("Items");
 					is.setItemDamage(2);
 				}
@@ -211,10 +210,11 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		if(!entityplayer.isSneaking())
 		{
-			if(itemstack.getItemDamage() == 2)
+			if(itemstack.getItemDamage() == 2) {
 				entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-			else if(itemstack.getItemDamage() == 1)
+			} else if(itemstack.getItemDamage() == 1) {
 				entityplayer.openGui(TerraFirmaCraft.instance, 39, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+			}
 		}
 		return itemstack;
 	}
