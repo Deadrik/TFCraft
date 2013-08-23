@@ -187,10 +187,10 @@ public class GuiAnvil extends GuiContainer
 			if(Rules[0].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 26, 228, 68, 19, 3);
 			}
-			if(Rules[0].Min <= 1 || Rules[0].Max == 1) {
+			if(Rules[0].Max > 0 && (Rules[0].Min <= 1 || Rules[0].Max == 1)) {
 				drawTexturedModalRect(w + 94, h + 26, 228, 68, 19, 3);
 			}
-			if(Rules[0].Min <= 2 || Rules[0].Max == 2) {
+			if(Rules[0].Max > 1 && (Rules[0].Min <= 2 || Rules[0].Max == 2)) {
 				drawTexturedModalRect(w + 113, h + 26, 228, 68, 19, 3);
 			}
 			//Middle Row
@@ -198,10 +198,10 @@ public class GuiAnvil extends GuiContainer
 			if(Rules[1].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 24, 228, 68, 19, 3);
 			}
-			if(Rules[1].Min <= 1 || Rules[1].Max == 1) {
+			if(Rules[1].Max > 0 && (Rules[1].Min <= 1 || Rules[1].Max == 1)) {
 				drawTexturedModalRect(w + 94, h + 24, 228, 68, 19, 3);
 			}
-			if(Rules[1].Min <= 2 || Rules[1].Max == 2) {
+			if(Rules[1].Max > 1 && (Rules[1].Min <= 2 || Rules[1].Max == 2)) {
 				drawTexturedModalRect(w + 113, h + 24, 228, 68, 19, 3);
 			}
 			//Top Row
@@ -209,10 +209,10 @@ public class GuiAnvil extends GuiContainer
 			if(Rules[2].Min == 0) {
 				drawTexturedModalRect(w + 75, h + 22, 228, 68, 19, 3);
 			}
-			if(Rules[2].Min <= 1 || Rules[2].Max == 1) {
+			if(Rules[2].Max > 0 && (Rules[2].Min <= 1 || Rules[2].Max == 1)) {
 				drawTexturedModalRect(w + 94, h + 22, 228, 68, 19, 3);
 			}
-			if(Rules[2].Min <= 2 || Rules[2].Max == 2) {
+			if(Rules[2].Max > 1 && (Rules[2].Min <= 2 || Rules[2].Max == 2)) {
 				drawTexturedModalRect(w + 113, h + 22, 228, 68, 19, 3);
 			}
 		}
