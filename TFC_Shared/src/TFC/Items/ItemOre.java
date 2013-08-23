@@ -38,13 +38,14 @@ public class ItemOre extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize() 
+	{
 		return EnumSize.SMALL;
 	}
 
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight()
+	{
 		return EnumWeight.HEAVY;
 	}
 

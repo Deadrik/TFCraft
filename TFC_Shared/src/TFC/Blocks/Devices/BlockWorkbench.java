@@ -25,6 +25,7 @@ public class BlockWorkbench extends BlockTerraContainer
 		super(i, Material.wood);
 		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
+	
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
@@ -52,8 +53,8 @@ public class BlockWorkbench extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TileEntityWorkbench();
 	}
 }

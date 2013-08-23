@@ -71,14 +71,14 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	}
 
 	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
+	public EnumWeight getWeight()
+	{
 		return EnumWeight.MEDIUM;
 	}
 
 	@Override
-	public EnumDamageType GetDamageType() {
-		// TODO Auto-generated method stub
+	public EnumDamageType GetDamageType()
+	{
 		return EnumDamageType.SLASHING;
 	}
 

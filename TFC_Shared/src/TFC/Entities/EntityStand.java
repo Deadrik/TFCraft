@@ -14,20 +14,20 @@ public class EntityStand extends Entity
 	}
 
 	@Override
-	protected void entityInit() {
-		// TODO Auto-generated method stub
+	protected void entityInit() 
+	{
 		
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		// TODO Auto-generated method stub
+	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) 
+	{
 		
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-		// TODO Auto-generated method stub
+	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) 
+	{
 		
 	}
 

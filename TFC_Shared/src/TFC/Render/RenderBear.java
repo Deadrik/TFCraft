@@ -66,8 +66,8 @@ public class RenderBear extends RenderLiving
 
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
-		// TODO Auto-generated method stub
+	protected ResourceLocation func_110775_a(Entity entity) 
+	{
 		return Texture;
 	}
 }

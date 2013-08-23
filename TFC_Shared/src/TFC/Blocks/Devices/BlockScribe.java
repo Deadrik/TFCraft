@@ -68,6 +68,7 @@ public class BlockScribe extends BlockTerraContainer
 			return true;
 		}
 	}
+	
 	@Override
 	public Icon getIcon(int i, int j)
 	{
@@ -83,11 +84,13 @@ public class BlockScribe extends BlockTerraContainer
 		iconTop = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Scribing Table Top");
 		iconSide = iconRegisterer.registerIcon(Reference.ModID + ":" + "devices/Scribing Table Side");
     }
+	
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
+	
 	@Override
 	public boolean renderAsNormalBlock()
 	{
@@ -95,8 +98,8 @@ public class BlockScribe extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TileEntityScribe();
 	}
 

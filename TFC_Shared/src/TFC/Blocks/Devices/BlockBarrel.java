@@ -180,15 +180,17 @@ public class BlockBarrel extends BlockTerraContainer
 			setDead();
 		}
 		@Override
-		protected void entityInit() {
-			// TODO Auto-generated method stub
+		protected void entityInit() 
+		{
 
 		}
+		
 		@Override
 		protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
 			this.fuse = par1NBTTagCompound.getByte("Fuse");
 
 		}
+		
 		@Override
 		protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 			par1NBTTagCompound.setByte("Fuse", (byte)this.fuse);
@@ -217,6 +219,7 @@ public class BlockBarrel extends BlockTerraContainer
 	/**
 	 * Called whenever the block is removed.
 	 */
+	
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
@@ -295,8 +298,8 @@ public class BlockBarrel extends BlockTerraContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		// TODO Auto-generated method stub
+	public TileEntity createNewTileEntity(World var1) 
+	{
 		return new TileEntityBarrel();
 	}
 
@@ -304,14 +307,13 @@ public class BlockBarrel extends BlockTerraContainer
 	@SideOnly(Side.CLIENT)
 	public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
 	{
-		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
 		return true;
 	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean addBlockHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
-		// TODO Include particle spawning logic, or replace this with a functional getBlockTextureFromSideAndMetadata 
 		return true;
 	}
 }

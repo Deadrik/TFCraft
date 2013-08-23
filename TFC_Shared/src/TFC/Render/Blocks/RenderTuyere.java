@@ -31,14 +31,16 @@ public class RenderTuyere  implements ISimpleBlockRenderingHandler
 		renderInvBlock(block,renderer);
 		
 	}
+	
 	@Override
-	public boolean shouldRender3DInInventory() {
-		// TODO Auto-generated method stub
+	public boolean shouldRender3DInInventory() 
+	{
 		return true;
 	}
+	
 	@Override
-	public int getRenderId() {
-		// TODO Auto-generated method stub
+	public int getRenderId() 
+	{
 		return 0;
 	}
 	

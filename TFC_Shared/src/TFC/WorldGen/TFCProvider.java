@@ -189,8 +189,8 @@ public class TFCProvider extends WorldProvider
 	}
 
 	@Override
-	public String getDimensionName() {
-		// TODO Auto-generated method stub
+	public String getDimensionName() 
+	{
 		return "DEFAULT";
 	}
 

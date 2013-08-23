@@ -94,8 +94,8 @@ public class KeyBindingHandler extends KeyBindingRegistry.KeyHandler
 	}
 
 	@Override
-	public EnumSet<TickType> ticks() {
-		// TODO Auto-generated method stub
+	public EnumSet<TickType> ticks() 
+	{
 		return EnumSet.of(TickType.WORLD, TickType.WORLDLOAD, TickType.CLIENT, TickType.PLAYER);
 	}
 
