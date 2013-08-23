@@ -6,6 +6,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -30,6 +31,15 @@ public class RenderOverlayHandler
 	@ForgeSubscribe
 	public void render(RenderGameOverlayEvent.Pre event)
 	{
+		GuiIngameForge.renderFood = false;
+		
+		// We check for crosshairs just because it's always drawn and is before air bar
+		if(event.type != ElementType.CROSSHAIRS)
+			return;
+		
+		// This is for air to be drawn above our bars
+		GuiIngameForge.right_height += 10;
+		
 		ScaledResolution sr = event.resolution;
 		Minecraft mc = Minecraft.getMinecraft();
 
@@ -106,7 +116,7 @@ public class RenderOverlayHandler
 					}
 				}
 				
-				if (mc.playerController.func_78763_f() && mc.thePlayer.experienceLevel > 0)
+				if (mc.thePlayer.experienceLevel > 0)
 				{
 					fontrenderer = mc.fontRenderer;
 					boolean flag1 = false;
@@ -120,16 +130,10 @@ public class RenderOverlayHandler
 					fontrenderer.drawString(text, x, y - 1, 0);
 					fontrenderer.drawString(text, x, y, color);
 				}
+				
+				// We have to reset the color back to white
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
-		}
-	}
-
-	@ForgeSubscribe
-	public void render(RenderGameOverlayEvent.Post event)
-	{
-		if(event.type != ElementType.ALL)
-		{
-			return;
 		}
 	}
 
