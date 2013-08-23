@@ -65,11 +65,11 @@ public class GuiAnvil extends GuiContainer
 		{
 			AnvilEntity.actionLightHammer();
 		}
-		else if (guibutton.id == 1)
+		else if (guibutton.id == 2)
 		{
 			AnvilEntity.actionHeavyHammer();
 		}
-		else if (guibutton.id == 2)
+		else if (guibutton.id == 1)
 		{
 			AnvilEntity.actionHammer();
 		}
