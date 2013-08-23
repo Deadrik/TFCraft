@@ -102,60 +102,62 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 			if(side == 1)
 			{
 				int offset = 0;
-				if(world.getBlockId(x, y, z) != TFCBlocks.Pottery.blockID)
+				if(world.getBlockId(x, y, z) != TFCBlocks.Pottery.blockID && world.isAirBlock(x, y+1, z))
 				{
 					world.setBlock(x, y+1, z, TFCBlocks.Pottery.blockID);
 					offset = 1;
 				}
 
 				te = (TileEntityPottery) world.getBlockTileEntity(x, y+offset, z);
-
-				if(hitX < 0.5 && hitZ < 0.5)
+				if(te != null) 
 				{
-					if(te.inventory[0] == null)
+					if(hitX < 0.5 && hitZ < 0.5)
 					{
-						te.inventory[0] = new ItemStack(this,1,itemstack.getItemDamage());
-						te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
-						itemstack.stackSize--;
-						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-						} catch (IOException e) {}
+						if(te.inventory[0] == null)
+						{
+							te.inventory[0] = new ItemStack(this,1,itemstack.getItemDamage());
+							te.inventory[0].stackTagCompound = itemstack.stackTagCompound;
+							itemstack.stackSize--;
+							try {
+								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+							} catch (IOException e) {}
+						}
 					}
-				}
-				else if(hitX > 0.5 && hitZ < 0.5)
-				{
-					if(te.inventory[1] == null)
+					else if(hitX > 0.5 && hitZ < 0.5)
 					{
-						te.inventory[1] = new ItemStack(this,1,itemstack.getItemDamage());
-						te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
-						itemstack.stackSize--;
-						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-						} catch (IOException e) {}
+						if(te.inventory[1] == null)
+						{
+							te.inventory[1] = new ItemStack(this,1,itemstack.getItemDamage());
+							te.inventory[1].stackTagCompound = itemstack.stackTagCompound;
+							itemstack.stackSize--;
+							try {
+								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+							} catch (IOException e) {}
+						}
 					}
-				}
-				else if(hitX < 0.5 && hitZ > 0.5)
-				{
-					if(te.inventory[2] == null)
+					else if(hitX < 0.5 && hitZ > 0.5)
 					{
-						te.inventory[2] = new ItemStack(this,1,itemstack.getItemDamage());
-						te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
-						itemstack.stackSize--;
-						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-						} catch (IOException e) {}
+						if(te.inventory[2] == null)
+						{
+							te.inventory[2] = new ItemStack(this,1,itemstack.getItemDamage());
+							te.inventory[2].stackTagCompound = itemstack.stackTagCompound;
+							itemstack.stackSize--;
+							try {
+								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+							} catch (IOException e) {}
+						}
 					}
-				}
-				else if(hitX > 0.5 && hitZ > 0.5)
-				{
-					if(te.inventory[3] == null)
+					else if(hitX > 0.5 && hitZ > 0.5)
 					{
-						te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
-						te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
-						itemstack.stackSize--;
-						try {
-							te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
-						} catch (IOException e) {}
+						if(te.inventory[3] == null)
+						{
+							te.inventory[3] = new ItemStack(this,1,itemstack.getItemDamage());
+							te.inventory[3].stackTagCompound = itemstack.stackTagCompound;
+							itemstack.stackSize--;
+							try {
+								te.broadcastPacketInRange(sendInitPacket(te, x, y+offset, z));
+							} catch (IOException e) {}
+						}
 					}
 				}
 				return true;
