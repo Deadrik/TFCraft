@@ -734,10 +734,12 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 								}
 							}
 						}
-						if(c == 0) {
+						if(c+nonConsumedOre == 0) {
 							entity.setDead();
 						} else {
-							entity.getEntityItem().stackSize = c+nonConsumedOre;
+							ItemStack is = entity.getEntityItem();
+							is.stackSize = c+nonConsumedOre;
+							entity.setEntityItemStack(is);
 						} 
 					}
 				}
@@ -779,23 +781,31 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			slowCounter++;
 		}
 	}
-	
+
 	private boolean foundFlux(int moltenCount){
 		List list = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(
 				xCoord, yCoord+moltenCount, zCoord, 
 				xCoord+1, yCoord+moltenCount+1.1, zCoord+1));
-		for (Iterator iterator = list.iterator(); iterator.hasNext();)
+		boolean found = false;
+		for (Iterator iterator = list.iterator(); iterator.hasNext() && !found;)
 		{
 			EntityItem entity = (EntityItem)iterator.next();
-			if((entity.getEntityItem().getItemDamage() == 0)&&entity.getEntityItem().itemID == TFCItems.Powder.itemID)
+			ItemStack is = entity.getEntityItem();
+			if(!entity.isDead && (is.getItemDamage() == 0) && is.itemID == TFCItems.Powder.itemID)
 			{				
-				entity.getEntityItem().stackSize--;
-				if(entity.getEntityItem().stackSize == 0) {
+				is.stackSize--;
+				if(is.stackSize == 0) 
+				{
 					entity.setDead();
 				}
+				else
+				{
+					entity.setEntityItemStack(is);
+				}
+				found = true;
 			}
 		}
-		return true;
+		return found;
 	}
 
 	@Override
