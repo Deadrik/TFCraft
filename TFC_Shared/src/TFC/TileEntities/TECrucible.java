@@ -146,50 +146,55 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					temperature--;
 				}
 			}
-
-			if(storage[0] != null && storage[0].getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
+			
+			ItemStack stackToSmelt = storage[0];
+			if(stackToSmelt != null)
 			{
-				if(inputTick > 5)
+				Item itemToSmelt = stackToSmelt.getItem();
+			
+				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 				{
-					if(currentAlloy != null && currentAlloy.outputType != null && storage[0].getItem().itemID == currentAlloy.outputType.MeltedItemID)
+					if(inputTick > 5)
 					{
-						this.addMetal(MetalRegistry.instance.getMetalFromItem(storage[0].getItem()), (short) 1);
-						currentAlloy.outputAmount++;
-						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage()) {
-							storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
-						} else {
-							storage[0].setItemDamage(storage[0].getItemDamage() + 1);
+						if(currentAlloy != null && currentAlloy.outputType != null && itemToSmelt.itemID == currentAlloy.outputType.MeltedItemID)
+						{
+							this.addMetal(MetalRegistry.instance.getMetalFromItem(itemToSmelt), (short) 1);
+							currentAlloy.outputAmount++;
+							if(stackToSmelt.getItemDamage()+1 >= storage[0].getMaxDamage()) {
+								storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
+							} else {
+								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
+							}
 						}
+						else
+						{
+							this.addMetal(MetalRegistry.instance.getMetalFromItem(itemToSmelt), (short) 1);
+							if(stackToSmelt.getItemDamage()+1 >= stackToSmelt.getMaxDamage()) {
+								storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
+							} else {
+								stackToSmelt.setItemDamage(stackToSmelt.getItemDamage() + 1);
+							}
+						}
+						inputTick = 0;
+						updateGui((byte) 0);
 					}
-					else
+				}
+				else if(itemToSmelt instanceof ISmeltable && ((ISmeltable)itemToSmelt).isSmeltable(stackToSmelt) && !TFC_Core.isOreIron(stackToSmelt) 
+						&& temperature >= TFC_ItemHeat.getMeltingPoint(stackToSmelt))
+				{
+					Metal mType =((ISmeltable)itemToSmelt).GetMetalType(stackToSmelt);
+					if(addMetal(mType, ((ISmeltable)itemToSmelt).GetMetalReturnAmount(stackToSmelt)))
 					{
-						this.addMetal(MetalRegistry.instance.getMetalFromItem(storage[0].getItem()), (short) 1);
-						if(storage[0].getItemDamage()+1 >= storage[0].getMaxDamage()) {
-							storage[0] = new ItemStack(TFCItems.CeramicMold,1,1);
-						} else {
-							storage[0].setItemDamage(storage[0].getItemDamage() + 1);
+						temperature *= 0.9f;
+	
+						if(stackToSmelt.stackSize <= 1) {
+							storage[0] = null;
 						}
+	
+						updateGui((byte) 0);
 					}
-					inputTick = 0;
-					updateGui((byte) 0);
 				}
 			}
-			else if(storage[0] != null && storage[0].getItem() instanceof ISmeltable && !TFC_Core.isOreIron(storage[0]) 
-					&& temperature >= TFC_ItemHeat.getMeltingPoint(storage[0]))
-			{
-				Metal mType =((ISmeltable)storage[0].getItem()).GetMetalType(storage[0]);
-				if(addMetal(mType, ((ISmeltable)storage[0].getItem()).GetMetalReturnAmount(storage[0])))
-				{
-					temperature *= 0.9f;
-
-					if(storage[0].stackSize <= 1) {
-						storage[0] = null;
-					}
-
-					updateGui((byte) 0);
-				}
-			}
-
 			//Metal Output handling
 			if(currentAlloy != null && storage[1] != null && currentAlloy.outputType != null && outputTick >= 3 && temperature >= TFC_ItemHeat.getMeltingPoint(currentAlloy.outputType))
 			{
