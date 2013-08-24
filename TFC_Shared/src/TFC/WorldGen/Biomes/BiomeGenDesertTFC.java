@@ -48,6 +48,7 @@ import net.minecraft.world.gen.feature.*;
 
 public class BiomeGenDesertTFC extends TFCBiome
 {
+	private WorldGenDesertWells desertWells;
 
 	public BiomeGenDesertTFC(int i)
 	{
@@ -71,8 +72,12 @@ public class BiomeGenDesertTFC extends TFCBiome
 		{
 			int var5 = par3 + par2Random.nextInt(16) + 8;
 			int var6 = par4 + par2Random.nextInt(16) + 8;
-			WorldGenDesertWells var7 = new WorldGenDesertWells();
-			var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
+
+			if (desertWells == null)
+			{
+				desertWells = new WorldGenDesertWells();
+			}
+			desertWells.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
 		}
 	}
 	
