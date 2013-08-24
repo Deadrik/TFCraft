@@ -59,7 +59,7 @@ public class BiomeGenJungleTFC extends TFCBiome
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 3, 1, 3));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2, 1, 3));
 		this.vinesGen = new WorldGenVines();
-		this.grass1Gen = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1)
+		this.grass1Gen = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);
 		this.grass2Gen = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 2);
 	}
 
