@@ -349,10 +349,24 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
-		if(storage[i] != null) {
-			storage[i].stackSize -= j;
-		}
-		return storage[i];
+		if(storage[i] != null)
+        {
+            if(storage[i].stackSize <= j)
+            {
+                ItemStack itemstack = storage[i];
+                storage[i] = null;
+                return itemstack;
+            }
+            ItemStack itemstack1 = storage[i].splitStack(j);
+            if(storage[i].stackSize == 0)
+            {
+            	storage[i] = null;
+            }
+            return itemstack1;
+        } else
+        {
+            return null;
+        }
 	}
 
 	@Override
