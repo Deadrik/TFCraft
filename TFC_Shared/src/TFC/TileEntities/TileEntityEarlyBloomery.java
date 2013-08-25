@@ -143,12 +143,15 @@ public class TileEntityEarlyBloomery extends TileEntity
 				}
 			}
 
-			if(outCount < 0)
+			if(outCount < 0) {
 				outCount = 0;
-			if(oreCount < 0)
+			}
+			if(oreCount < 0) {
 				oreCount = 0;
-			if(charcoalCount < 0)
+			}
+			if(charcoalCount < 0) {
 				charcoalCount = 0;
+			}
 
 
 			//Do the funky math to find how many molten blocks should be placed
@@ -183,8 +186,9 @@ public class TileEntityEarlyBloomery extends TileEntity
 					xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1], 
 					xCoord+direction[0]+1, yCoord+moltenCount+1.1, zCoord+direction[1]+1));
 
-			if(moltenCount == 0)
+			if(moltenCount == 0) {
 				moltenCount = 1;
+			}
 			/*Make sure the list isn't null or empty and that the stack is valid 1 layer above the Molten Ore*/
 			if (list != null && !list.isEmpty() && isStackValid(xCoord+direction[0], yCoord+moltenCount, zCoord+direction[1]) && !bloomeryLit)
 			{
@@ -218,16 +222,18 @@ public class TileEntityEarlyBloomery extends TileEntity
 								{
 									oreCount+=1;
 									c--;
+								} else {
+									break;
 								}
-								else break;
+							} else {
+								break;
 							}
-							else break;
 						}
 						if(c == 0) {
 							entity.setDead();
-						}
-						else
-							entity.getEntityItem().stackSize = c; 
+						} else {
+							entity.getEntityItem().stackSize = c;
+						} 
 					}
 					else if(entity.getEntityItem().getItem() instanceof ISmeltable && 
 							((ISmeltable)entity.getEntityItem().getItem()).isSmeltable(entity.getEntityItem()))
@@ -241,16 +247,18 @@ public class TileEntityEarlyBloomery extends TileEntity
 								{
 									oreCount+=1;
 									c--;
+								} else {
+									break;
 								}
-								else break;
+							} else {
+								break;
 							}
-							else break;
 						}
 						if(c == 0) {
 							entity.setDead();
-						}
-						else
-							entity.getEntityItem().stackSize = c; 
+						} else {
+							entity.getEntityItem().stackSize = c;
+						} 
 					}
 				}
 			}
@@ -267,6 +275,8 @@ public class TileEntityEarlyBloomery extends TileEntity
 		nbttagcompound.setBoolean("isValid", isValid);
 		nbttagcompound.setLong("fuelTimeLeft", fuelTimeLeft);
 		nbttagcompound.setInteger("charcoalCount", charcoalCount);
+		nbttagcompound.setInteger("outCount", outCount);
+		nbttagcompound.setInteger("oreCount", oreCount);
 		nbttagcompound.setBoolean("isLit",bloomeryLit);
 	}
 
