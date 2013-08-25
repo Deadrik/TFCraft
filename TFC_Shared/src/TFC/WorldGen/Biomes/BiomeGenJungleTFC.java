@@ -44,6 +44,10 @@ import TFC.WorldGen.Generators.Trees.WorldGenCustomShortTrees;
 
 public class BiomeGenJungleTFC extends TFCBiome
 {
+	private WorldGenVines vinesGen;
+	private WorldGenCustomTallGrass grass1Gen;
+	private WorldGenCustomTallGrass grass2Gen;
+
 	public BiomeGenJungleTFC(int id)
 	{
 		super(id);
@@ -54,26 +58,27 @@ public class BiomeGenJungleTFC extends TFCBiome
 		//this.spawnableMonsterList.add(new SpawnListEntry(EntityOcelot.class, 2, 1, 1));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 3, 1, 3));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2, 1, 3));
-
+		this.vinesGen = new WorldGenVines();
+		this.grass1Gen = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);
+		this.grass2Gen = new WorldGenCustomTallGrass(Block.tallGrass.blockID, 2);
 	}
 
 	public void decorate(World par1World, Random par2Random, int par3, int par4)
 	{
 		super.decorate(par1World, par2Random, par3, par4);
-		WorldGenVines var5 = new WorldGenVines();
 
 		for (int var6 = 0; var6 < 50; ++var6)
 		{
 			int var7 = par3 + par2Random.nextInt(16) + 8;
 			byte var8 = 64;
 			int var9 = par4 + par2Random.nextInt(16) + 8;
-			var5.generate(par1World, par2Random, var7, var8, var9);
+			vinesGen.generate(par1World, par2Random, var7, var8, var9);
 		}
 	}
 
 	public WorldGenerator func_48410_b(Random par1Random)
 	{
-		return par1Random.nextInt(4) == 0 ? new WorldGenCustomTallGrass(Block.tallGrass.blockID, 2) : new WorldGenCustomTallGrass(Block.tallGrass.blockID, 1);
+		return par1Random.nextInt(4) == 0 ? grass2Gen : grass1Gen;
 	}
 
 	/**

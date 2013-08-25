@@ -226,7 +226,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 */
 	public float[] getTemperatures(float[] par1ArrayOfFloat, int x, int z, int par4, int par5)
 	{
-		IntCache.resetIntCache();
+		//	IntCache.resetIntCache();
 
 		if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5)
 		{
@@ -289,8 +289,6 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 */
 	public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5, boolean par6)
 	{
-		IntCache.resetIntCache();
-
 		if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5)
 		{
 			par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
@@ -304,6 +302,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		}
 		else
 		{
+			IntCache.resetIntCache();
+
 			int[] var7 = this.biomeIndexLayer.getInts(par2, par3, par4, par5);
 
 			for (int var8 = 0; var8 < par4 * par5; ++var8)
@@ -328,6 +328,7 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 */
 	public boolean areBiomesViable(int par1, int par2, int par3, List par4List)
 	{
+        IntCache.resetIntCache();
 		int var5 = par1 - par3 >> 2;
 			int var6 = par2 - par3 >> 2;
 		int var7 = par1 + par3 >> 2;
@@ -355,7 +356,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 	 */
 	public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random)
 	{
-		int var6 = par1 - par3 >> 2;
+        IntCache.resetIntCache();
+ 		int var6 = par1 - par3 >> 2;
 		int var7 = par2 - par3 >> 2;
 		int var8 = par1 + par3 >> 2;
 		int var9 = par2 + par3 >> 2;
@@ -412,8 +414,6 @@ public class TFCWorldChunkManager extends WorldChunkManager
 
 	public DataLayer[] getDataLayerAt(DataCache[] cache, DataLayer[] layers, GenLayerTFC[] indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{
-		IntCache.resetIntCache();
-
 		if (layers == null || layers.length < width * height)
 		{
 			layers = new DataLayer[width * height];
@@ -427,6 +427,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		}
 		else
 		{
+			IntCache.resetIntCache();
+
 			int[] var7 = indexLayers[layer].getInts(x, y, width, height);
 
 			for (int var8 = 0; var8 < width * height; ++var8)
@@ -440,8 +442,6 @@ public class TFCWorldChunkManager extends WorldChunkManager
 
 	public DataLayer[] getDataLayerAt(DataCache cache, DataLayer[] layers, GenLayerTFC indexLayers, int x, int y, int width, int height, boolean par6, int layer)
 	{
-		IntCache.resetIntCache();
-
 		if (layers == null || layers.length < width * height)
 		{
 			layers = new DataLayer[width * height];
@@ -455,6 +455,8 @@ public class TFCWorldChunkManager extends WorldChunkManager
 		}
 		else
 		{
+			IntCache.resetIntCache();
+
 			int[] var7 = indexLayers.getInts(x, y, width, height);
 
 			for (int var8 = 0; var8 < width * height; ++var8)

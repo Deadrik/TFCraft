@@ -26,9 +26,10 @@ public class MapGenBaseTFC
 
 		for (int var11 = par3 - var6; var11 <= par3 + var6; ++var11)
 		{
+			long var13 = var11 * var7;
+
 			for (int var12 = par4 - var6; var12 <= par4 + var6; ++var12)
 			{
-				long var13 = var11 * var7;
 				long var15 = var12 * var9;
 				this.rand.setSeed(var13 ^ var15 ^ par2World.getSeed());
 				this.recursiveGenerate(par2World, var11, var12, par3, par4, idsBig);

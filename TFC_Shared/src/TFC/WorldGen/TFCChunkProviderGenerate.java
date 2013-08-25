@@ -1,5 +1,6 @@
 package TFC.WorldGen;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -58,6 +59,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	private DataLayer[] evtLayer;
 	private DataLayer[] rainfallLayer;
 
+	private short[] idsTop;
+	private short[] idsBig;
+	private byte[] metaBig;
+
 	/** A double array that hold terrain noise from noiseGen3 */
 	double[] noise3;
 
@@ -93,6 +98,10 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		this.noiseGen5 = new NoiseGeneratorOctaves(this.rand, 10);
 		this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 16);
 		this.mobSpawnerNoise = new NoiseGeneratorOctaves(this.rand, 8);
+
+		this.idsTop = new short[32768];
+		this.idsBig = new short[16*16*256];
+		this.metaBig = new byte[16*16*256];
 	}
 
 	@Override
@@ -100,13 +109,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		this.rand.setSeed(chunkX * 341873128712L + chunkZ * 132897987541L);
 
-		short[] ids = new short[32768];
-		short[] idsTop = new short[32768];
-		byte[] meta = new byte[32768];
-		byte[] metaTop = new byte[32768];
-
-		short[] idsBig = new short[16*16*256];
-		byte[] metaBig = new byte[16*16*256];
+		//	To reduce GC churn, we allocate these arrays once in the
+		//	constructor and then just clear them to all zeroes before each
+		//	use.
+		//
+		Arrays.fill(idsTop, (short)0);
+		Arrays.fill(idsBig, (short)0);
+		Arrays.fill(metaBig, (byte)0);
 
 		this.generateTerrainHigh(chunkX, chunkZ, idsTop);
 
@@ -118,8 +127,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		rainfallLayer = ((TFCWorldChunkManager)this.worldObj.getWorldChunkManager()).loadRainfallLayerGeneratorData(rainfallLayer, chunkX * 16, chunkZ * 16, 16, 16);
 
 		heightMap = new int[256];
-		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, metaTop, rand, idsBig, metaBig);
-		replaceBlocksForBiomeLow(chunkX, chunkZ, ids, meta, rand, idsBig, metaBig);
+		replaceBlocksForBiomeHigh(chunkX, chunkZ, idsTop, rand, idsBig, metaBig);
+		replaceBlocksForBiomeLow(chunkX, chunkZ, rand, idsBig, metaBig);
 
 
 		new MapGenCavesTFC().generate(this, this.worldObj, chunkX, chunkZ, idsBig, metaBig);
@@ -446,7 +455,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		return par1ArrayOfDouble;
 	}
 
-	public void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, short[] idsTop, byte[] metaTop, Random rand, short[] idsBig, byte[] metaBig)
+	private void replaceBlocksForBiomeHigh(int chunkX, int chunkZ, short[] idsTop, Random rand, short[] idsBig, byte[] metaBig)
 	{
 		int var5 = 16;
 		double var6 = 0.03125D;
@@ -484,7 +493,6 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 
 					int var18 = idsTop[index];
 					idsBig[indexBig] = idsTop[index];
-					metaBig[indexBig] = metaTop[index];
 
 					if (var18 == 0)
 					{
@@ -589,7 +597,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	}
 
 	private double[] layer2Noise = new double[256];
-	public void replaceBlocksForBiomeLow(int par1, int par2, short[] blockArray, byte[] metaArray,  Random rand, short[] idsBig, byte[] metaBig)
+	private void replaceBlocksForBiomeLow(int par1, int par2,  Random rand, short[] idsBig, byte[] metaBig)
 	{
 		int var5 = 63;
 		double var6 = 0.03125D;
