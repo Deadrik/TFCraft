@@ -25,12 +25,21 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 {
 	EnumSize size = EnumSize.SMALL;
 	BufferedImage bi;
+	String metal;
+	short metalAmount;
 	public ItemIngot(int i) 
 	{
 		super(i);
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setFolder("ingots/");
+		metalAmount = 100;
+	}
 
+	public ItemTerra setMetal(String m, int amt)
+	{
+		metal = m;
+		metalAmount = (short) amt;
+		return this;
 	}
 
 	@Override
@@ -310,15 +319,22 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public Metal GetMetalType(ItemStack is) {
-		// TODO Auto-generated method stub
-		return MetalRegistry.instance.getMetalFromItem(this);
+	public Metal GetMetalType(ItemStack is) 
+	{
+		if(metal == null) 
+		{
+			return MetalRegistry.instance.getMetalFromItem(this);
+		} 
+		else 
+		{
+			return MetalRegistry.instance.getMetalFromString(metal);
+		}
 	}
 
 	@Override
 	public short GetMetalReturnAmount(ItemStack is) {
 		// TODO Auto-generated method stub
-		return 100;
+		return metalAmount;
 	}
 
 	@Override
