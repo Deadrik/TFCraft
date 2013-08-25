@@ -56,8 +56,7 @@ public class TFCProvider extends WorldProvider
 		{
 			++var5;
 		}
-
-		if (var5 > 1.0F)
+		else if (var5 > 1.0F)
 		{
 			--var5;
 		}
@@ -164,9 +163,13 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canBlockFreeze(int x, int y, int z, boolean byWater)
 	{
-		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0 && (worldObj.getBlockMaterial(x, y, z) == Material.water || worldObj.getBlockMaterial(x, y, z) == Material.ice)) {
-			return true;
+		if (TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0)
+		{
+			Material mat = worldObj.getBlockMaterial(x, y, z);
+
+			return (mat == Material.water || mat == Material.ice);
 		}
+
 		return false;
 	}
 

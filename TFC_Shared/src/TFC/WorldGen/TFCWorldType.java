@@ -12,6 +12,10 @@ public class TFCWorldType extends WorldType
 	public static TFCWorldType DEFAULT;
 	public static TFCWorldType FLAT;
 	
+	private static final  BiomeGenBase[] tfcBiomes = new BiomeGenBase[] {
+		TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains,
+		TFCBiome.plains, TFCBiome.rollingHills, TFCBiome.Mountains };
+
 	public TFCWorldType(int par1, String par2Str, int par3) 
 	{
 		super(par1, par2Str, par3);
@@ -24,8 +28,7 @@ public class TFCWorldType extends WorldType
 	
 	@Override
 	public BiomeGenBase[] getBiomesForWorldType() {
-        return new BiomeGenBase[] {TFCBiome.HighHills, TFCBiome.swampland, TFCBiome.plains, TFCBiome.plains, 
-        		TFCBiome.rollingHills, TFCBiome.Mountains};
+        return tfcBiomes;
     }
 	
 	@Override

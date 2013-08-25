@@ -77,11 +77,11 @@ public class BiomeGenTaigaTFC extends TFCBiome
 				worldGenAspenTallTrees,
 				worldGenAspenShortTrees};
 
-		while(treeCommon1 == 0 || treeCommon2 == 0)
+		if (treeCommon1 == 0 || treeCommon2 == 0)
 		{
-			treeCommon1 = R.nextInt(ConiferGenList.length);
+			treeCommon1 = R.nextInt(ConiferGenList.length-1) + 1;
 			treeCommon1Size = R.nextBoolean();
-			treeCommon2 = R.nextInt(ConiferGenList.length);
+			treeCommon2 = R.nextInt(ConiferGenList.length-1) + 1;
 			treeCommon2Size = R.nextBoolean();
 			treeUncommon = R.nextInt(ConiferGenList.length);
 			treeUncommonSize = R.nextBoolean();
