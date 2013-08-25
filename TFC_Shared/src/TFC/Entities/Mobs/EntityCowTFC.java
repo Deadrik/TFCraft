@@ -43,7 +43,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		animalID = TFC_Time.getTotalTicks() + entityId;
 		hunger = 168000;
 		pregnant = false;
-		pregnancyRequiredTime = 4 * TFC_Time.daysInMonth;
+		pregnancyRequiredTime =(int)(4 * TFC_Time.ticksInMonth);
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
@@ -52,7 +52,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 0.2F));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 0.5F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		//	We hijack the growingAge to hold the day of birth rather

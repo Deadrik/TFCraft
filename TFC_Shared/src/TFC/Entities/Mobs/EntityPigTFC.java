@@ -53,7 +53,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, var2));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.25F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 0.5F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
 		this.tasks.addTask(5, new EntityAIWander(this, var2));
 		this.tasks.addTask(6, this.aiEatGrass);
