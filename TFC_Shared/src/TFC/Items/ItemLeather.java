@@ -43,6 +43,10 @@ public class ItemLeather extends ItemLooseRock
 		if(hasKnife)
 		{
 			itemstack.stackSize--;
+			if(specialCraftingTypeAlternate != null)
+				pi.specialCraftingTypeAlternate = specialCraftingTypeAlternate;
+			else
+				pi.specialCraftingTypeAlternate = null;
 			entityplayer.openGui(TerraFirmaCraft.instance, 28, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 		}
 		return itemstack;
