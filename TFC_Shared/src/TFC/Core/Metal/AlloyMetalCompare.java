@@ -22,9 +22,13 @@ public class AlloyMetalCompare extends AlloyMetal
 	
 	public boolean compare(AlloyMetal b)
 	{
-		if(this.metalType == b.metalType && b.metal >= this.metalMin && b.metal <= this.metalMax)
-			return true;
-			
-		return false;
+		//	Multiplying all the values by 1000 and then rounding to the
+		//	nearest int effectively rounds the float values to 3 decimal
+		//	places. We do this to avoid rounding errors in the further
+		//	decimal places.
+		//
+		return (this.metalType == b.metalType
+		&&	Math.round(b.metal * 1000f) >= Math.round(this.metalMin * 1000f)
+		&&	Math.round(b.metal * 1000f) <= Math.round(this.metalMax * 1000f));
 	}
 }
