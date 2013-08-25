@@ -132,7 +132,14 @@ public class FoodStatsTFC
 			long time = TFC_Time.getTotalTicks();
 			
 			if(player.capabilities.isCreativeMode)
+			{
+				long oldWaterTimer = waterTimer;
 				waterTimer = time;
+				if(player.isInWater())
+				{
+					this.restoreWater(player, 20*(int)(time - oldWaterTimer));
+				}
+			}
 			else
 			{
 				for(;waterTimer < time;  waterTimer++)
