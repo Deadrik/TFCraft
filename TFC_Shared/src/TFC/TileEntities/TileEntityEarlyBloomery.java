@@ -287,6 +287,8 @@ public class TileEntityEarlyBloomery extends TileEntity
 		isValid = nbttagcompound.getBoolean("isValid");
 		fuelTimeLeft = nbttagcompound.getLong("fuelTimeLeft");
 		charcoalCount = nbttagcompound.getInteger("charcoalCount");
+		outCount = nbttagcompound.getInteger("outCount");
+		oreCount = nbttagcompound.getInteger("oreCount");
 		bloomeryLit = nbttagcompound.getBoolean("isLit");
 	}
 }
