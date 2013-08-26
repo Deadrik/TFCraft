@@ -516,7 +516,7 @@ public class TFC_Climate
 	{
 		float rain = getRainfall(x,y,z);
 		float evt = manager.getEVTLayerAt(x, z).floatdata1;
-		if(rain >= 500 && evt < 0.5 && manager.getBiomeGenAt(x, z).maxHeight < 0.15)
+		if(rain >= 1000 && evt < 0.25 && manager.getBiomeGenAt(x, z).maxHeight < 0.15)
 		{
 			return true;
 		}

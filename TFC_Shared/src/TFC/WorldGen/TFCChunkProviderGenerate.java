@@ -1,6 +1,8 @@
 package TFC.WorldGen;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -9,6 +11,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
@@ -17,6 +20,13 @@ import TFC.Chunkdata.ChunkData;
 import TFC.Chunkdata.ChunkDataManager;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
+import TFC.Entities.Mobs.EntityBear;
+import TFC.Entities.Mobs.EntityChickenTFC;
+import TFC.Entities.Mobs.EntityCowTFC;
+import TFC.Entities.Mobs.EntityDeer;
+import TFC.Entities.Mobs.EntityPigTFC;
+import TFC.Entities.Mobs.EntitySheepTFC;
+import TFC.Entities.Mobs.EntityWolfTFC;
 import TFC.WorldGen.Generators.WorldGenLakesTFC;
 
 public class TFCChunkProviderGenerate extends ChunkProviderGenerate
@@ -184,7 +194,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 		}
 
 		var6.decorate(this.worldObj, this.rand, xCoord, zCoord);
-		SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, xCoord + 8, zCoord + 8, 16, 16, this.rand);
+		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, var6, xCoord + 8, zCoord + 8, 16, 16, this.rand);
 		xCoord += 8;
 		zCoord += 8;
 
@@ -205,6 +215,72 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 				}
 			}
 		}
+	}
+
+	public static List getCreatureSpawnsByChunk(World world,BiomeGenBase biome, int x, int z){
+		List spawnableCreatureList = new ArrayList();
+		spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class,24,0,0));
+		float temp = TFC_Climate.getBioTemperature(x, z);
+		float rain = TFC_Climate.getRainfall(x, 150, z);
+		float evt = TFC_Climate.manager.getEVTLayerAt(x, z).floatdata1;
+		boolean isMountainous = biome == TFCBiome.Mountains || biome == TFCBiome.HighHills;
+		//To adjust animal spawning at higher altitudes
+		int mountainousAreaModifier = isMountainous?-1:0;
+		if(isMountainous){
+			//Mountains, but not too hot or too dry
+			if(temp<25 && rain >250 && evt < 0.75 && temp > -10){
+				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2, 1, 3));
+				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
+				spawnableCreatureList.add(new SpawnListEntry(EntitySheepTFC.class, 2, 2, 4));
+			}
+		}
+		else{
+			//run of the mill plains, but not too cold
+			if(temp > 10 && rain < 250 && rain > 100){
+				if(temp < 30){
+					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 2, 2, 4));
+					spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
+				}
+				else{
+					spawnableCreatureList.add(new SpawnListEntry(EntityCowTFC.class, 1, 1, 2));
+				}
+			}
+		}
+		//regular temperate forest
+		if(temp > 15 &&temp < 28 && rain > 250){
+			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2+mountainousAreaModifier, 2+mountainousAreaModifier, 3+mountainousAreaModifier));
+			spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1, 1, 2+mountainousAreaModifier));
+			spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 1, 1, 1));
+			spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 2+mountainousAreaModifier, 1, 3+mountainousAreaModifier));
+			spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 1+mountainousAreaModifier, 1, 1));
+
+		}
+		//colder climate
+		if(temp > -10 && temp <=15){
+			//boreal forest
+			if(rain > 250){
+				spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1+mountainousAreaModifier, 1, 2));
+				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 2+mountainousAreaModifier, 1, 2+mountainousAreaModifier));
+				spawnableCreatureList.add(new SpawnListEntry(EntityBear.class, 2+mountainousAreaModifier, 1, 1));
+				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1+mountainousAreaModifier, 2, 3));
+			}
+			//closer to tundra or taiga
+			else if(rain >100){
+				spawnableCreatureList.add(new SpawnListEntry(EntityWolfTFC.class, 1+mountainousAreaModifier, 1, 1));
+				spawnableCreatureList.add(new SpawnListEntry(EntityDeer.class, 1+mountainousAreaModifier, 1, 1));
+			}
+		}
+		//Jungle
+		if(temp >= 28 && temp < 44 && rain > 1500){
+			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 2+mountainousAreaModifier, 2+mountainousAreaModifier, 4+mountainousAreaModifier));
+			spawnableCreatureList.add(new SpawnListEntry(EntityChickenTFC.class, 3+mountainousAreaModifier, 1, 4+mountainousAreaModifier));
+		}
+		//Swamp
+		if(TFC_Climate.isSwamp(x,150,z)){
+			spawnableCreatureList.add(new SpawnListEntry(EntityPigTFC.class, 1, 1, 2));
+		}
+
+		return spawnableCreatureList;
 	}
 
 	public boolean canSnowAt(World world, int par1, int par2, int par3)

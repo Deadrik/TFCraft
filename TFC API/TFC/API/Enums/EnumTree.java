@@ -10,19 +10,19 @@ public enum EnumTree
 	
 	CHESTNUT("CHESTNUT", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/3, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
 	
-	DOUGLASFIR("DOUGLASFIR", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, true),
+	DOUGLASFIR("DOUGLASFIR", /*minRain*/750f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, true),
 	
 	HICKORY("HICKORY", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, false),
 	
-	MAPLE("MAPLE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/3, /*maxTemp*/12, /*minEVT*/0, /*maxEVT*/1, false),
+	MAPLE("MAPLE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/3, /*maxTemp*/20, /*minEVT*/0, /*maxEVT*/1, false),
 	
 	ASH("ASH", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/2, false),
 	
-	PINE("PINE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/14, /*minEVT*/0, /*maxEVT*/1, true),
+	PINE("PINE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/-15, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, true),
 	
-	REDWOOD("REDWOOD", /*minRain*/850f, /*maxRain*/16000f, /*minTemp*/4, /*maxTemp*/15, /*minEVT*/0, /*maxEVT*/1, true),
+	REDWOOD("REDWOOD", /*minRain*/1000f, /*maxRain*/16000f, /*minTemp*/10, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/0.5f, true),
 	
-	SPRUCE("SPRUCE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/1, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, true),
+	SPRUCE("SPRUCE", /*minRain*/250f, /*maxRain*/16000f, /*minTemp*/-5, /*maxTemp*/24, /*minEVT*/0, /*maxEVT*/1, true),
 	
 	SYCAMORE("SYCAMORE", /*minRain*/400f, /*maxRain*/16000f, /*minTemp*/6, /*maxTemp*/30, /*minEVT*/0, /*maxEVT*/1, false),
 	
@@ -32,7 +32,7 @@ public enum EnumTree
 	
 	WILLOW("WILLOW", /*minRain*/1000f, /*maxRain*/16000f, /*minTemp*/6, /*maxTemp*/30, /*minEVT*/0, /*maxEVT*/1, false),
 	
-	KAPOK("KAPOK", /*minRain*/2000f, /*maxRain*/16000f, /*minTemp*/28, /*maxTemp*/44, /*minEVT*/0f, /*maxEVT*/1f, false);
+	KAPOK("KAPOK", /*minRain*/1500f, /*maxRain*/16000f, /*minTemp*/28, /*maxTemp*/44, /*minEVT*/0f, /*maxEVT*/1f, false);
 
 	public final float minRain;
 	public final float maxRain;

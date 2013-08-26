@@ -1,5 +1,7 @@
 package TFC.Entities.Mobs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -15,6 +17,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
@@ -23,6 +26,7 @@ import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Items.ItemTerra;
 
 public class EntityDeer extends EntityAnimal implements IAnimal
 {    
@@ -210,6 +214,8 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 			this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
 		}
 	}
+	
+	
 
 	/**
 	 * Returns the item ID for the item the mob drops on death.
