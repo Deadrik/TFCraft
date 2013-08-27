@@ -6,16 +6,15 @@ import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.MapGenBase;
 import TFC.TFCBlocks;
 import TFC.Core.TFC_Core;
 
-public class MapGenCaves256TFC extends MapGenBase
+public class MapGenCaves256TFC extends MapGenBaseTFC
 {
 
 	private byte[] metaArray;
 
-	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, byte[] id, byte[] meta)
+	public void generate(IChunkProvider par1IChunkProvider, World par2World, int par3, int par4, short[] id, byte[] meta)
 	{
 		metaArray = meta;
 		super.generate(par1IChunkProvider, par2World, par3, par4, id);
@@ -23,7 +22,7 @@ public class MapGenCaves256TFC extends MapGenBase
 	/**
 	 * Generates a node in the current cave system recursion tree.
 	 */
-	protected void generateCaveNode(long par1, int par3, int par4, byte[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
+	protected void generateCaveNode(long par1, int par3, int par4, short[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
 	{
 		double var19 = par3 * 16 + 8;
 		double var21 = par4 * 16 + 8;
@@ -132,25 +131,25 @@ public class MapGenCaves256TFC extends MapGenBase
 					}
 
 					boolean var58 = false;
-					int var42;
-					int var45;
+					int xCoord;
+					int zCoord;
 
-					for (var42 = var55; !var58 && var42 < var36; ++var42)
+					for (xCoord = var55; !var58 && xCoord < var36; ++xCoord)
 					{
 						for (int var43 = var56; !var58 && var43 < var40; ++var43)
 						{
 							for (int var44 = yCoord + 1; !var58 && var44 >= var57 - 1; --var44)
 							{
-								var45 = (var42 * 16 + var43) * 256 + var44;
+								zCoord = (xCoord * 16 + var43) * 256 + var44;
 
 								if (var44 >= 0 && var44 < 256)
 								{
-									if (blockArray[var45] == Block.waterMoving.blockID || blockArray[var45] == Block.waterStill.blockID)
+									if (blockArray[zCoord] == Block.waterMoving.blockID || blockArray[zCoord] == Block.waterStill.blockID)
 									{
 										var58 = true;
 									}
 
-									if (var44 != var57 - 1 && var42 != var55 && var42 != var36 - 1 && var43 != var56 && var43 != var40 - 1)
+									if (var44 != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && var43 != var56 && var43 != var40 - 1)
 									{
 										var44 = var57;
 									}
@@ -161,14 +160,14 @@ public class MapGenCaves256TFC extends MapGenBase
 
 					if (!var58)
 					{
-						for (var42 = var55; var42 < var36; ++var42)
+						for (xCoord = var55; xCoord < var36; ++xCoord)
 						{
-							double var59 = (var42 + par3 * 16 + 0.5D - par6) / var29;
+							double var59 = (xCoord + par3 * 16 + 0.5D - par6) / var29;
 
-							for (var45 = var56; var45 < var40; ++var45)
+							for (zCoord = var56; zCoord < var40; ++zCoord)
 							{
-								double var46 = (var45 + par4 * 16 + 0.5D - par10) / var29;
-								int var48 = (var42 * 16 + var45) * 256 + yCoord;
+								double var46 = (zCoord + par4 * 16 + 0.5D - par10) / var29;
+								int index = (xCoord * 16 + zCoord) * 256 + yCoord;
 								boolean var49 = false;
 
 								if (var59 * var59 + var46 * var46 < 1.0D)
@@ -179,47 +178,36 @@ public class MapGenCaves256TFC extends MapGenBase
 
 										if (var51 > -0.7D && var59 * var59 + var51 * var51 + var46 * var46 < 1.0D)
 										{
-											byte var53 = blockArray[var48];
+											short blockID = blockArray[index];
 
-											if (var53 == TFCBlocks.Grass.blockID || var53 == TFCBlocks.Grass2.blockID)
+											if (blockID == TFCBlocks.Grass.blockID || blockID == TFCBlocks.Grass2.blockID)
 											{
 												var49 = true;
 											}
 
-											if (TFC_Core.isRawStone(var53) ||
-													TFC_Core.isSoil(var53))
+											if (TFC_Core.isRawStone(blockID) ||
+													TFC_Core.isSoil(blockID))
 											{
 												if (var50 < 10)
 												{
-													blockArray[var48] = (byte)Block.lavaStill.blockID;
-													metaArray[var48] = 0;
+													blockArray[index] = (byte)Block.lavaStill.blockID;
+													metaArray[index] = 0;
 												}
 												else
 												{
 													byte meta = 0;
 													if(var49)
 													{
-														meta = metaArray[var48];
+														meta = metaArray[index];
 													}
 
-													blockArray[var48] = 0;
-													metaArray[var48] = 0;
-
-													//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt.blockID)
-														//													{
-														//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
-													//														metaArray[var48-1] = meta;
-													//													}
-													//													if (var49 && blockArray[var48 - 1] == (byte)mod_TFC_Core.terraDirt2.blockID)
-													//													{
-													//														blockArray[var48 - 1] = (byte) this.worldObj.getBiomeGenForCoords(var42 + par3 * 16, var45 + par4 * 16).GrassID;
-													//														metaArray[var48-1] = meta;
-													//													}
+													blockArray[index] = 0;
+													metaArray[index] = 0;
 												}
 											}
 										}
 
-										--var48;
+										--index;
 									}
 								}
 							}
@@ -238,7 +226,7 @@ public class MapGenCaves256TFC extends MapGenBase
 	/**
 	 * Generates a larger initial cave node than usual. Called 25% of the time.
 	 */
-	protected void generateLargeCaveNode(long par1, int par3, int par4, byte[] par5ArrayOfByte, double par6, double par8, double par10)
+	protected void generateLargeCaveNode(long par1, int par3, int par4, short[] par5ArrayOfByte, double par6, double par8, double par10)
 	{
 		this.generateCaveNode(par1, par3, par4, par5ArrayOfByte, par6, par8, par10, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D, 2.5D);
 	}
@@ -247,7 +235,7 @@ public class MapGenCaves256TFC extends MapGenBase
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
 	@Override
-	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte)
+	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, short[] par6ArrayOfByte)
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 

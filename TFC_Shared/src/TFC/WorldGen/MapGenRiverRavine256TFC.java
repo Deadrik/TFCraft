@@ -20,7 +20,7 @@ public class MapGenRiverRavine256TFC extends MapGenBaseTFC
 		super.generate(par1IChunkProvider, par2World, par3, par4, idsBig);
 	}
 
-	protected void generateRavine(long par1, int xCoord, int zCoord, int[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
+	protected void generateRavine(long par1, int xCoord, int zCoord, short[] blockArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double waterHeight)
 	{
 		Random var19 = new Random(par1);
 		double var20 = xCoord * 16 + 8;
@@ -228,7 +228,8 @@ public class MapGenRiverRavine256TFC extends MapGenBaseTFC
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, int[] par6ArrayOfByte)
+	@Override
+	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, short[] par6ArrayOfByte)
 	{
 		if (this.rand.nextInt(400) == 0)
 		{

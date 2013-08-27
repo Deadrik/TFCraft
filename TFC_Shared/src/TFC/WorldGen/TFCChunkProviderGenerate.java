@@ -8,7 +8,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.SpawnListEntry;
@@ -542,13 +541,13 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			for (int zCoord = 0; zCoord < 16; ++zCoord)
 			{
 				int arrayIndex = xCoord + zCoord * 16;
-				int arrayIndexDL = zCoord + xCoord * 16;
-				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndexDL];
-				DataLayer rock1 = rockLayer1[arrayIndexDL];
-				DataLayer rock2 = rockLayer2[arrayIndexDL];
-				DataLayer rock3 = rockLayer3[arrayIndexDL];
-				DataLayer evt = evtLayer[arrayIndexDL];
-				DataLayer rainfall = rainfallLayer[arrayIndexDL];
+				//int arrayIndex = zCoord + xCoord * 16;
+				BiomeGenBase biomegenbase = biomesForGeneration[arrayIndex];
+				DataLayer rock1 = rockLayer1[arrayIndex];
+				DataLayer rock2 = rockLayer2[arrayIndex];
+				DataLayer rock3 = rockLayer3[arrayIndex];
+				DataLayer evt = evtLayer[arrayIndex];
+				DataLayer rainfall = rainfallLayer[arrayIndex];
 
 				int var12 = (int)(stoneNoise[arrayIndex] / 3.0D + 6.0D + rand.nextDouble() * 0.25D);  
 				int var13 = -1;

@@ -21,7 +21,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 	/**
 	 * Generates a larger initial cave node than usual. Called 25% of the time.
 	 */
-	protected void generateLargeCaveNode(long par1, int par3, int par4, int[] par5ArrayOfByte, double par6, double par8, double par10)
+	protected void generateLargeCaveNode(long par1, int par3, int par4, short[] par5ArrayOfByte, double par6, double par8, double par10)
 	{
 		this.generateCaveNode(par1, par3, par4, par5ArrayOfByte, par6, par8, par10, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D, 2.5D);
 	}
@@ -29,7 +29,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 	/**
 	 * Generates a node in the current cave system recursion tree.
 	 */
-	protected void generateCaveNode(long par1, int par3, int par4, int[] idArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
+	protected void generateCaveNode(long par1, int par3, int par4, short[] idArray, double par6, double par8, double par10, float par12, float par13, float par14, int par15, int par16, double par17, double width)
 	{
 		double var19 = par3 * 16 + 8;
 		double var21 = par4 * 16 + 8;
@@ -143,20 +143,20 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 
 					for (xCoord = var55; !var58 && xCoord < var36; ++xCoord)
 					{
-						for (int z = var56; !var58 && z < var40; ++z)
+						for (zCoord = var56; !var58 && zCoord < var40; ++zCoord)
 						{
 							for (int y = yCoord + 1; !var58 && y >= var57 - 1; --y)
 							{
-								zCoord = (xCoord * 16 + z) * 256 + y;
+								int index = (xCoord * 16 + zCoord) * 256 + y;
 
 								if (y >= 0 && y < 256)
 								{
-									if (idArray[zCoord] == Block.waterMoving.blockID || idArray[zCoord] == Block.waterStill.blockID)
+									if (idArray[index] == Block.waterMoving.blockID || idArray[index] == Block.waterStill.blockID)
 									{
 										var58 = true;
 									}
 
-									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && z != var56 && z != var40 - 1)
+									if (y != var57 - 1 && xCoord != var55 && xCoord != var36 - 1 && zCoord != var56 && zCoord != var40 - 1)
 									{
 										y = var57;
 									}
@@ -175,7 +175,7 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 							{
 								double var46 = (zCoord + par4 * 16 + 0.5D - par10) / var29;
 								int var48 = (xCoord * 16 + zCoord) * 256 + yCoord;
-								boolean var49 = false;
+								boolean isGrass = false;
 
 								if (var59 * var59 + var46 * var46 < 1.0D)
 								{
@@ -187,16 +187,16 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 										{
 											int id = idArray[var48];
 
-											if (TFC_Core.isGrass(id+255))
+											if (TFC_Core.isGrass(id))
 											{
-												var49 = true;
+												isGrass = true;
 											}
 
-											if (TFC_Core.isGrass(id+255) || TFC_Core.isRawStone(id+255))
+											if (TFC_Core.isGrass(id) || TFC_Core.isRawStone(id))
 											{
 												if (var50 < 10)
 												{
-													idArray[var48] = Block.lavaMoving.blockID;
+													idArray[var48] = (short) Block.lavaMoving.blockID;
 													metaArray[var48] = 0;
 												}
 												else
@@ -204,10 +204,10 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 													idArray[var48] = 0;
 													metaArray[var48] = 0;
 
-													if (var49 && TFC_Core.isDirt(idArray[var48 - 1]))
+													if (isGrass && TFC_Core.isDirt(idArray[var48 - 1]))
 													{
 														int meta = metaArray[var48 - 1];
-														idArray[var48 - 1] = TFC_Core.getTypeForDirt(meta);
+														idArray[var48 - 1] = (short) TFC_Core.getTypeForDirt(meta);
 													}
 												}
 											}
@@ -232,7 +232,8 @@ public class MapGenCavesTFC extends MapGenBaseTFC
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, int[] ids)
+	@Override
+	protected void recursiveGenerate(World world, int par2, int par3, int par4, int par5, short[] ids)
 	{
 		int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 
