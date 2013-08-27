@@ -316,7 +316,7 @@ public class Recipes
 			Character.valueOf('Q'),new ItemStack(TFCItems.TerraLeather,1)});
 
 		//remove wool and book and quill recipes
-		RemoveRecipe(new ItemStack(Item.writableBook));
+		//RemoveRecipe(new ItemStack(Item.writableBook));
 		RemoveRecipe(new ItemStack(Block.cloth));
 
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.writabeBookTFC,1), new Object[]{new ItemStack(Item.book,1)});
