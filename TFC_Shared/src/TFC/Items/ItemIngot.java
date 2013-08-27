@@ -177,8 +177,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		{
 			return false;
 		}
-
+		else
+		{
 		return true;
+		}
 	}
 
 	@Override
