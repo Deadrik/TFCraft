@@ -1,5 +1,6 @@
 package TFC.Entities.Mobs;
 
+import java.util.ArrayList;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -311,6 +312,18 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return !getSheared() && isAdult();
 	}
+	
+	  @Override
+	    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune)
+	    {
+	        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+	        setSheared(true);
+
+	            ret.add(new ItemStack(TFCItems.Wool.itemID, 1, getFleeceColor()));
+
+	        this.worldObj.playSoundAtEntity(this, "mob.sheep.shear", 1.0F, 1.0F);
+	        return ret;
+	    }
 
 	@Override
 	public void setGrowingAge(int par1)
