@@ -261,7 +261,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				String name = tag.getString("MetalType");
 				name = name.replace(" ", "");
-				arraylist.add(StringUtil.localize("gui.metal."+name));
+				arraylist.add("§2" + StringUtil.localize("gui.metal."+name));
 			}
 
 			if(tag.hasKey("TempTimer"))
@@ -271,6 +271,21 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				if(total - temp < 11) 
 				{
 					arraylist.add("\247f" + StringUtil.localize("gui.ItemHeat.Liquid"));
+				}
+			}
+
+			if(tag.hasKey("Items"))
+			{
+				NBTTagList nbttaglist = tag.getTagList("Items");
+				for(int i = 0; i < nbttaglist.tagCount(); i++)
+				{
+					NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+					byte byte0 = nbttagcompound1.getByte("Slot");
+					if(byte0 >= 0 && byte0 < 4)
+					{
+						ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+						arraylist.add("§6" + itemstack.stackSize + "x " + itemstack.getItem().getItemDisplayName(itemstack));
+					}
 				}
 			}
 		}
