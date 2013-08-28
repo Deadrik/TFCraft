@@ -102,6 +102,11 @@ public class TileEntityEarlyBloomery extends TileEntity
 			int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord) & 3;
 			int[] direction = BlockEarlyBloomery.headBlockToFootBlockMap[meta];
 
+			if (this.charcoalCount < this.oreCount) 
+			{
+				return false;
+			}
+
 			if(worldObj.getBlockId(xCoord+direction[0], yCoord, zCoord+direction[1])==TFCBlocks.Charcoal.blockID && 
 					worldObj.getBlockMetadata(xCoord+direction[0], yCoord, zCoord+direction[1]) >= 7 && !bloomeryLit)
 			{
@@ -157,9 +162,9 @@ public class TileEntityEarlyBloomery extends TileEntity
 			//Do the funky math to find how many molten blocks should be placed
 			float count = charcoalCount+oreCount;
 
-			int moltenCount = 0;
-			if(count > 0 && count <= 8) {moltenCount = 1;} 
-			else if(count > 8 && count <= 16) {moltenCount = 2;} 
+			int moltenCount = 1;
+			/*if(count > 0 && count <= 8) {moltenCount = 1;} 
+			else if(count > 8 && count <= 16) {moltenCount = 2;} */
 
 
 			/*Fill the bloomery stack with molten ore. */
