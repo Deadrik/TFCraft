@@ -1135,13 +1135,13 @@ public class TFCItems
 		RedSteelSaw = new ItemCustomSaw(TFCItemID.RedSteelSaw,RedSteelToolMaterial).setUnlocalizedName("Red Steel Saw").setMaxDamage(RedSteelUses);
 		SteelSaw = new ItemCustomSaw(TFCItemID.SteelSaw,SteelToolMaterial).setUnlocalizedName("Steel Saw").setMaxDamage(SteelUses);
 
-		HCBlackSteelIngot = new ItemIngot(TFCItemID.HCBlackSteelIngot).setUnlocalizedName("HC Black Steel Ingot");
-		WeakBlueSteelIngot = new ItemIngot(TFCItemID.WeakBlueSteelIngot).setUnlocalizedName("Weak Blue Steel Ingot");
-		WeakRedSteelIngot = new ItemIngot(TFCItemID.WeakRedSteelIngot).setUnlocalizedName("Weak Red Steel Ingot");
-		WeakSteelIngot = new ItemIngot(TFCItemID.WeakSteelIngot).setUnlocalizedName("Weak Steel Ingot");
-		HCBlueSteelIngot = new ItemIngot(TFCItemID.HCBlueSteelIngot).setUnlocalizedName("HC Blue Steel Ingot");
-		HCRedSteelIngot = new ItemIngot(TFCItemID.HCRedSteelIngot).setUnlocalizedName("HC Red Steel Ingot");
-		HCSteelIngot = new ItemIngot(TFCItemID.HCSteelIngot).setUnlocalizedName("HC Steel Ingot");
+		HCBlackSteelIngot = new ItemIngot(TFCItemID.HCBlackSteelIngot, false).setUnlocalizedName("HC Black Steel Ingot");
+		WeakBlueSteelIngot = new ItemIngot(TFCItemID.WeakBlueSteelIngot, false).setUnlocalizedName("Weak Blue Steel Ingot");
+		WeakRedSteelIngot = new ItemIngot(TFCItemID.WeakRedSteelIngot, false).setUnlocalizedName("Weak Red Steel Ingot");
+		WeakSteelIngot = new ItemIngot(TFCItemID.WeakSteelIngot, false).setUnlocalizedName("Weak Steel Ingot");
+		HCBlueSteelIngot = new ItemIngot(TFCItemID.HCBlueSteelIngot, false).setUnlocalizedName("HC Blue Steel Ingot");
+		HCRedSteelIngot = new ItemIngot(TFCItemID.HCRedSteelIngot, false).setUnlocalizedName("HC Red Steel Ingot");
+		HCSteelIngot = new ItemIngot(TFCItemID.HCSteelIngot, false).setUnlocalizedName("HC Steel Ingot");
 
 		OreChunk = new ItemOre(TFCItemID.OreChunk).setFolder("ore/").setUnlocalizedName("Ore");
 		Logs = new ItemLogs(TFCItemID.Logs).setUnlocalizedName("Log");

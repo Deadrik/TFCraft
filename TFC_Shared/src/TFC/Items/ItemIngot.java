@@ -27,12 +27,18 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	BufferedImage bi;
 	String metal;
 	short metalAmount;
+	boolean smeltable = true;
 	public ItemIngot(int i) 
 	{
 		super(i);
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setFolder("ingots/");
 		metalAmount = 100;
+	}
+	public ItemIngot(int i, boolean canSmelt) 
+	{
+		this(i);
+		smeltable = canSmelt;
 	}
 
 	public ItemTerra setMetal(String m, int amt)
@@ -341,9 +347,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	}
 
 	@Override
-	public boolean isSmeltable(ItemStack is) {
+	public boolean isSmeltable(ItemStack is) 
+	{
 		// TODO Auto-generated method stub
-		return true;
+		return smeltable;
 	}
 
 	@Override
