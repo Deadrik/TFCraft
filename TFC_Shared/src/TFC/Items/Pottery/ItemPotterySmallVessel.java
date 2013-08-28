@@ -16,6 +16,7 @@ import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
+import TFC.Core.TFC_Time;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
 import TFC.Core.Metal.AlloyMetal;
@@ -52,6 +53,13 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					canCookAlloy = false;
 				}
 			}
+		}
+
+		if(is.getItemDamage() == 2)
+		{
+			NBTTagCompound tag = is.stackTagCompound;
+			long totalH =  TFC_Time.getTotalHours();
+			tag.setLong("TempTimer", totalH);
 		}
 
 		if(canCookAlloy)
@@ -164,6 +172,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					NBTTagCompound tag = is.stackTagCompound;
 					tag.setString("MetalType", output.outputType.Name);
 					tag.setInteger("MetalAmount", output.outputAmount);
+					long totalH =  TFC_Time.getTotalHours();
+					tag.setLong("TempTimer", totalH);
 					is.getTagCompound().removeTag("Items");
 					is.setItemDamage(2);
 				}
@@ -210,9 +220,20 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	{
 		if(!entityplayer.isSneaking())
 		{
-			if(itemstack.getItemDamage() == 2) {
-				entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
-			} else if(itemstack.getItemDamage() == 1) {
+			NBTTagCompound nbt = itemstack.getTagCompound();
+
+			if(itemstack.getItemDamage() == 2) 
+			{
+				if(nbt.hasKey("TempTimer"))
+				{
+					long temp = nbt.getLong("TempTimer");
+					if(TFC_Time.getTotalHours() - temp < 11) 
+					{
+						entityplayer.openGui(TerraFirmaCraft.instance, 19, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
+					}
+				}
+			} 
+			else if(itemstack.getItemDamage() == 1) {
 				entityplayer.openGui(TerraFirmaCraft.instance, 39, entityplayer.worldObj, (int)entityplayer.posX, (int)entityplayer.posY, (int)entityplayer.posZ);
 			}
 		}
@@ -228,6 +249,31 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 	public EnumWeight getWeight() 
 	{
 		return EnumWeight.MEDIUM;
+	}
+
+	@Override
+	public void addItemInformation(ItemStack is, EntityPlayer player, List arraylist)
+	{
+		NBTTagCompound tag = is.stackTagCompound;
+		if(tag != null)
+		{
+			if(tag.hasKey("MetalType"))
+			{
+				String name = tag.getString("MetalType");
+				name = name.replace(" ", "");
+				arraylist.add(StringUtil.localize("gui.metal."+name));
+			}
+
+			if(tag.hasKey("TempTimer"))
+			{
+				long total = TFC_Time.getTotalHours();
+				long temp = tag.getLong("TempTimer");
+				if(total - temp < 11) 
+				{
+					arraylist.add("\247f" + StringUtil.localize("gui.ItemHeat.Liquid"));
+				}
+			}
+		}
 	}
 
 	@Override
