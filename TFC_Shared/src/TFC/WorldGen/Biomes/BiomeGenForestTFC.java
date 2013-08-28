@@ -48,8 +48,6 @@ public class BiomeGenForestTFC extends TFCBiome
 		treeCommon2 = -1;
 		treeUncommon = -1;
 		treeRare = -1;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 4;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
 	}
 
 	@Override

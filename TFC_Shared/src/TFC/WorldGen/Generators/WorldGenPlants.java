@@ -4,13 +4,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
 import TFC.Blocks.Vanilla.BlockCustomTallGrass;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_Core;
-import TFC.WorldGen.BiomeDecoratorTFC;
 import TFC.WorldGen.DataLayer;
 import TFC.WorldGen.TFCWorldChunkManager;
 import TFC.WorldGen.Generators.Trees.WorldGenCustomFruitTree;
@@ -19,6 +17,23 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenPlants implements IWorldGenerator
 {
+	static WorldGenCustomFlowers plantYellowGen = new WorldGenCustomFlowers(Block.plantYellow.blockID);
+	static WorldGenCustomFlowers plantRedGen = new WorldGenCustomFlowers(Block.plantRed.blockID);
+	static WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Block.mushroomBrown.blockID);
+	static WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Block.mushroomRed.blockID);
+
+	static WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 0);
+	static WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 1);
+	static WorldGenCustomFruitTree orangeTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 2);
+	static WorldGenCustomFruitTree grappleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 3);
+	static WorldGenCustomFruitTree lemonTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 4);
+	static WorldGenCustomFruitTree oliveTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 5);
+	static WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 6);
+	static WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 7);
+
+	static WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
+	static WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
+
 	public WorldGenPlants()
 	{
 
@@ -29,26 +44,8 @@ public class WorldGenPlants implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		//		chunkX *= 16;
-		//		chunkZ *= 16;
-		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
-		WorldGenCustomFlowers plantYellowGen = new WorldGenCustomFlowers(Block.plantYellow.blockID);
-		WorldGenCustomFlowers plantRedGen = new WorldGenCustomFlowers(Block.plantRed.blockID);
-		WorldGenCustomFlowers mushroomBrownGen = new WorldGenCustomFlowers(Block.mushroomBrown.blockID);
-		WorldGenCustomFlowers mushroomRedGen = new WorldGenCustomFlowers(Block.mushroomRed.blockID);
-
-		WorldGenCustomFruitTree appleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 0);
-		WorldGenCustomFruitTree bananaTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 1);
-		WorldGenCustomFruitTree orangeTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 2);
-		WorldGenCustomFruitTree grappleTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 3);
-		WorldGenCustomFruitTree lemonTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 4);
-		WorldGenCustomFruitTree oliveTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 5);
-		WorldGenCustomFruitTree cherryTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 6);
-		WorldGenCustomFruitTree peachTree = new WorldGenCustomFruitTree(false, TFCBlocks.fruitTreeLeaves.blockID, 7);
-
-		WorldGenCustomFruitTree2 plumTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 0);
-		WorldGenCustomFruitTree2 cacaoTree = new WorldGenCustomFruitTree2(false, TFCBlocks.fruitTreeLeaves2.blockID, 1);
-
+		chunkX *= 16;
+		chunkZ *= 16;
 
 		int xCoord;
 		int yCoord;
@@ -56,6 +53,7 @@ public class WorldGenPlants implements IWorldGenerator
 
 		int grassPerChunk = 0;
 		int flowersPerChunk = 0;
+		int mushroomsPerChunk = 0;
 
 		DataLayer evt = ((TFCWorldChunkManager)world.provider.worldChunkMgr).getEVTLayerAt(chunkX, chunkZ);
 		DataLayer rainfall = ((TFCWorldChunkManager)world.provider.worldChunkMgr).getRainfallLayerAt(chunkX, chunkZ);
@@ -69,16 +67,27 @@ public class WorldGenPlants implements IWorldGenerator
 		{
 			grassPerChunk+=12;
 			flowersPerChunk += 1;
+			mushroomsPerChunk += 1;
 		}
 		if(rainfall.floatdata1 >= 250) 
 		{
 			grassPerChunk+=18;
 			flowersPerChunk += 1;
+			mushroomsPerChunk += 1;
 		}
 		if(rainfall.floatdata1 >= 500) 
 		{
 			grassPerChunk+=24;
 			flowersPerChunk += 1;
+			mushroomsPerChunk += 1;
+		}
+		if(rainfall.floatdata1 >= 1000) 
+		{
+			mushroomsPerChunk += 1;
+		}
+		if(rainfall.floatdata1 >= 2000) 
+		{
+			mushroomsPerChunk += 1;
 		}
 
 		for (int i = 0; i < flowersPerChunk; ++i)
@@ -128,7 +137,7 @@ public class WorldGenPlants implements IWorldGenerator
 			}
 		}
 
-		for (int i = 0; i < ((BiomeDecoratorTFC)biome.theBiomeDecorator).mushroomsPerChunk; ++i)
+		for (int i = 0; i < mushroomsPerChunk; ++i)
 		{
 			if (random.nextInt(4) == 0)
 			{
@@ -147,22 +156,6 @@ public class WorldGenPlants implements IWorldGenerator
 			}
 		}
 
-		if (random.nextInt(4) == 0)
-		{
-			xCoord = chunkX + random.nextInt(16) + 8;
-			zCoord = chunkZ + random.nextInt(16) + 8;
-			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-			mushroomBrownGen.generate(world, random, xCoord, yCoord, zCoord);
-		}
-
-		if (random.nextInt(8) == 0)
-		{
-			xCoord = chunkX + random.nextInt(16) + 8;
-			zCoord = chunkZ + random.nextInt(16) + 8;
-			yCoord = world.getTopSolidOrLiquidBlock(xCoord, zCoord);
-			mushroomRedGen.generate(world, random, xCoord, yCoord, zCoord);
-		}
-
 		if (random.nextInt(70) == 0  && rainfall.floatdata1 > 500)
 		{
 			xCoord = chunkX + random.nextInt(16) + 8;
@@ -172,56 +165,65 @@ public class WorldGenPlants implements IWorldGenerator
 			{
 			default:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					appleTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 1:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					bananaTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 2:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					orangeTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 3:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					grappleTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 4:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					lemonTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 5:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					oliveTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 6:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					cherryTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 7:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					peachTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			case 8:
 			{
-				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord)))
+				if(world.getBlockId(xCoord, yCoord, zCoord) == 0 && TFC_Core.isGrass(world.getBlockId(xCoord, yCoord-1, zCoord))) {
 					plumTree.generate(world, random, xCoord, yCoord, zCoord);
+				}
 				break;
 			}
 			//                case 9:

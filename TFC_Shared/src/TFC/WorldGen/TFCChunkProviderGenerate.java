@@ -161,7 +161,7 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 	{
 		int xCoord = chunkX * 16;
 		int zCoord = chunkZ * 16;
-		BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
+		BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(xCoord + 16, zCoord + 16);
 		this.rand.setSeed(this.worldObj.getSeed());
 		long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		long var9 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -192,8 +192,8 @@ public class TFCChunkProviderGenerate extends ChunkProviderGenerate
 			}
 		}
 
-		var6.decorate(this.worldObj, this.rand, xCoord, zCoord);
-		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, var6, xCoord + 8, zCoord + 8, 16, 16, this.rand);
+		biome.decorate(this.worldObj, this.rand, xCoord, zCoord);
+		SpawnerAnimalsTFC.performWorldGenSpawning(this.worldObj, biome, xCoord + 8, zCoord + 8, 16, 16, this.rand);
 		xCoord += 8;
 		zCoord += 8;
 

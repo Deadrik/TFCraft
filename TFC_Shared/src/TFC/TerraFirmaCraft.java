@@ -44,8 +44,13 @@ import TFC.WorldGen.TFCProvider;
 import TFC.WorldGen.TFCProviderHell;
 import TFC.WorldGen.TFCWorldType;
 import TFC.WorldGen.Generators.WorldGenCaveDecor;
+import TFC.WorldGen.Generators.WorldGenForests;
+import TFC.WorldGen.Generators.WorldGenLargeRock;
+import TFC.WorldGen.Generators.WorldGenLooseRocks;
 import TFC.WorldGen.Generators.WorldGenOre;
 import TFC.WorldGen.Generators.WorldGenOreSurface;
+import TFC.WorldGen.Generators.WorldGenPlants;
+import TFC.WorldGen.Generators.WorldGenSoilPits;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -100,6 +105,11 @@ public class TerraFirmaCraft
 		GameRegistry.registerWorldGenerator(new WorldGenOre(5,96));
 		GameRegistry.registerWorldGenerator(new WorldGenOre(60,130));
 		GameRegistry.registerWorldGenerator(new WorldGenCaveDecor());
+		GameRegistry.registerWorldGenerator(new WorldGenForests());
+		GameRegistry.registerWorldGenerator(new WorldGenLooseRocks());
+		GameRegistry.registerWorldGenerator(new WorldGenSoilPits());
+		GameRegistry.registerWorldGenerator(new WorldGenLargeRock());
+		GameRegistry.registerWorldGenerator(new WorldGenPlants());
 
 		TFCWorldType.DEFAULT = new TFCWorldType(0, "DEFAULT", 1);
 		TFCWorldType.FLAT = new TFCWorldType(1, "FLAT");

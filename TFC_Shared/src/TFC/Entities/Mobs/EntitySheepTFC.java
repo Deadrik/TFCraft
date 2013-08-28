@@ -1,6 +1,7 @@
 package TFC.Entities.Mobs;
 
 import java.util.ArrayList;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
@@ -57,7 +57,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		float var2 = 0.23F;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,worldObj, var2));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.5F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
@@ -145,7 +145,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		{
 			hunger--;
 		}
-		
+
 		if(super.inLove > 0){
 			super.inLove = 0;
 			setInLove(true);
@@ -230,7 +230,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 			this.dropItem(TFCItems.muttonRaw.itemID,(int)(ageMod*this.size_mod *(5+rand.nextInt(5))));
 		}
 	}
-	
+
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
 	{
@@ -312,18 +312,18 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		return !getSheared() && isAdult();
 	}
-	
-	  @Override
-	    public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune)
-	    {
-	        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-	        setSheared(true);
 
-	            ret.add(new ItemStack(TFCItems.Wool.itemID, 1, getFleeceColor()));
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune)
+	{
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		setSheared(true);
 
-	        this.worldObj.playSoundAtEntity(this, "mob.sheep.shear", 1.0F, 1.0F);
-	        return ret;
-	    }
+		ret.add(new ItemStack(TFCItems.Wool.itemID, 1, getFleeceColor()));
+
+		this.worldObj.playSoundAtEntity(this, "mob.sheep.shear", 1.0F, 1.0F);
+		return ret;
+	}
 
 	@Override
 	public void setGrowingAge(int par1)
@@ -339,7 +339,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		return !isAdult();
 	}
 
-	
+
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) 
@@ -442,7 +442,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 	{
 		hunger = h;
 	}
-	
+
 	@Override
 	public GenderEnum getGender() 
 	{

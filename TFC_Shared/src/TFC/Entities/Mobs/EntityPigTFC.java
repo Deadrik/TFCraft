@@ -23,7 +23,6 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.EntityAIMateTFC;
@@ -53,7 +52,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		this.tasks.addTask(2, new EntityAIMateTFC(this, worldObj, var2));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.5F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
 		this.tasks.addTask(5, new EntityAIWander(this, var2));
 		this.tasks.addTask(6, this.aiEatGrass);
@@ -355,6 +354,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		}
 	}
 
+	@Override
 	public void setAge(int par1)
 	{
 		//if(!TFC_Core.PreventEntityDataUpdate) {
@@ -374,6 +374,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		return GenderEnum.genders[getSex()];
 	}
 
+	@Override
 	public int getSex(){
 		return dataWatcher.getWatchableObjectInt(13);
 	}
@@ -384,6 +385,7 @@ public class EntityPigTFC extends EntityPig implements IAnimal
 		return null;
 	}
 
+	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
 	{
 		return new EntityPigTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));
