@@ -9,19 +9,12 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenDeadBush;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import TFC.Core.TFC_Climate;
-import TFC.Core.TFC_Core;
 import TFC.WorldGen.Generators.WorldGenCustomCactus;
 import TFC.WorldGen.Generators.WorldGenCustomPumpkin;
 import TFC.WorldGen.Generators.WorldGenCustomReed;
 import TFC.WorldGen.Generators.WorldGenCustomSand;
-import TFC.WorldGen.Generators.WorldGenForests;
 import TFC.WorldGen.Generators.WorldGenGrowCrops;
-import TFC.WorldGen.Generators.WorldGenJungle;
-import TFC.WorldGen.Generators.WorldGenLargeRock;
 import TFC.WorldGen.Generators.WorldGenLiquidsTFC;
-import TFC.WorldGen.Generators.WorldGenLooseRocks;
-import TFC.WorldGen.Generators.WorldGenPlants;
-import TFC.WorldGen.Generators.WorldGenSoilPits;
 
 public class BiomeDecoratorTFC extends BiomeDecorator
 {
@@ -59,8 +52,6 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 
 
 	/**Added By TFC**/
-	public int looseRocksPerChunk;
-	public int looseRocksChancePerChunk;
 
 	public BiomeDecoratorTFC(BiomeGenBase par1BiomeGenBase)
 	{
@@ -69,7 +60,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		this.grassPerChunk = 1;
 		this.mushroomsPerChunk = 0;
 		treesPerChunk = 30;
-		looseRocksPerChunk = 10;
+
 		this.cactiPerChunk = 2;
 
 		this.reedGen = new WorldGenCustomReed();
@@ -90,7 +81,7 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 		int yCoord;
 		int zCoord;
 
-		for (var2 = 0; var2 < 1; ++var2)
+		/*for (var2 = 0; var2 < 1; ++var2)
 		{
 			xCoord = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
 			zCoord = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
@@ -104,19 +95,10 @@ public class BiomeDecoratorTFC extends BiomeDecorator
 			if(randomGenerator.nextInt(20) == 0 && TFC_Core.isSoil(currentWorld.getBlockId(xCoord, yCoord, zCoord))) {
 				new WorldGenLargeRock(x1,x2,z1,z2, 3).generate(this.currentWorld, this.randomGenerator, xCoord, yCoord, zCoord);
 			}
-		}
+		}*/
 
 		//new WorldGenFixGrass().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
 
-		if(!(new WorldGenJungle().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld)))
-		{
-			new WorldGenForests().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-		}
-		new WorldGenLooseRocks().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-
-		new WorldGenPlants().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);
-
-		new WorldGenSoilPits().generate(this.randomGenerator,chunk_X, chunk_Z, this.currentWorld, null, null);		
 
 		Random rand = new Random((chunk_X-chunk_Z)*chunk_Z);
 		int crop = rand.nextInt(24);

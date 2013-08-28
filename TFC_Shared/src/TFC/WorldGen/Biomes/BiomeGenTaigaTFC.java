@@ -40,8 +40,6 @@ public class BiomeGenTaigaTFC extends TFCBiome
 		treeUncommon = 0;
 		treeRare = 0;
 		setMinMaxHeight(0.2F, 0.4F);
-		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksPerChunk = 4;
-		((BiomeDecoratorTFC)this.theBiomeDecorator).looseRocksChancePerChunk = 90;
 	}
 
 	@Override
