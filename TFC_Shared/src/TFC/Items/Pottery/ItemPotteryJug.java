@@ -35,12 +35,12 @@ public class ItemPotteryJug extends ItemPotteryBase
 		if (!world.isRemote)
 		{
 			if(is.getItemDamage() == 2) {
-				TFC_Core.getPlayerFoodStats(player).restoreWater(player, 8000);
+				TFC_Core.getPlayerFoodStats(player).restoreWater(player, 24000);
 			}
 
 			if (is.getItemDamage() > 1 && !player.capabilities.isCreativeMode)
 			{
-				if(world.rand.nextInt(25) == 0)
+				if(world.rand.nextInt(50) == 0)
 				{
 					is.stackSize--;
 					player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
