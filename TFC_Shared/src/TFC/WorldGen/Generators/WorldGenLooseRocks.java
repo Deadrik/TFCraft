@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import TFC.TFCBlocks;
+import TFC.WorldGen.TFCBiome;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenLooseRocks implements IWorldGenerator
@@ -39,7 +40,9 @@ public class WorldGenLooseRocks implements IWorldGenerator
 		chunkX *= 16;
 		chunkZ *= 16;
 		BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
-
+		if(biome == TFCBiome.ocean) {
+			return;
+		}
 
 		for (int var2 = 0; var2 < 8; var2++)
 		{
