@@ -178,7 +178,10 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 			return false;
 		}
 
-		return true;
+		else
+		{
+			return true;
+		}
 	}
 
 	@Override
@@ -186,7 +189,7 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		NBTTagCompound stackTagCompound = itemstack.getTagCompound();
 
-		if(entityplayer.isSneaking() && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1))
+		if(entityplayer.isSneaking() && stackTagCompound == null && (itemstack.getItem().getUnlocalizedName().indexOf("Double")==-1) && this.isPlaceable(itemstack))
 		{
 			int dir = MathHelper.floor_double(entityplayer.rotationYaw * 4F / 360F + 0.5D) & 3;
 			if(!world.isRemote && entityplayer.isSneaking() && (world.getBlockId(x, y, z) != TFCBlocks.IngotPile.blockID || (side != 1 && side != 0)))
