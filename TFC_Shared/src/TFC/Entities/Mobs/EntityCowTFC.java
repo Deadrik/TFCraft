@@ -1,14 +1,10 @@
 package TFC.Entities.Mobs;
 
-import java.util.Random;
-
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -17,7 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
@@ -52,7 +47,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(2, new EntityAIMateTFC(this,this.worldObj, 0.2F));
-		this.tasks.addTask(3, new EntityAITempt(this, 0.5F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		this.tasks.addTask(6, this.aiEatGrass);
 
 		//	We hijack the growingAge to hold the day of birth rather
@@ -102,7 +97,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			hunger--;
 		}
-		
+
 		if(super.inLove > 0){
 			super.inLove = 0;
 			setInLove(true);
@@ -222,7 +217,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		{
 			this.dropItem(TFCItems.Hide.itemID,1);
 			this.dropItem(Item.bone.itemID, rand.nextInt(6)+3);
-			
+
 			if (this.isBurning()) {
 				this.dropItem(Item.beefCooked.itemID, (int) (ageMod*this.size_mod *(15+this.rand.nextInt(10))));
 			} else {
@@ -230,7 +225,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			}
 		}
 
-		
+
 
 	}
 
@@ -258,16 +253,16 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 				return true;
 			}
 		}
-	
-    		return super.interact(player);
+
+		return super.interact(player);
 	}
-	
+
 	@Override
 	public boolean isBreedingItem(ItemStack par1ItemStack)
-    {
+	{
 		return !pregnant&&(par1ItemStack.getItem() == TFCItems.WheatGrain ||par1ItemStack.getItem() == TFCItems.OatGrain||par1ItemStack.getItem() == TFCItems.RiceGrain||
 				par1ItemStack.getItem() == TFCItems.BarleyGrain||par1ItemStack.getItem() == TFCItems.RyeGrain);
-    }
+	}
 
 	@Override
 	public void setGrowingAge(int par1)
@@ -276,11 +271,12 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 			this.dataWatcher.updateObject(12, Integer.valueOf(par1));
 		}
 	}
-	
+
+	@Override
 	public void setAge(int par1)
 	{
 		//if(!TFC_Core.PreventEntityDataUpdate) {
-			this.dataWatcher.updateObject(15, Integer.valueOf(par1));
+		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 		//}
 	}
 
@@ -295,7 +291,8 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		return GenderEnum.genders[getSex()];
 	}
-	
+
+	@Override
 	public int getSex(){
 		return dataWatcher.getWatchableObjectInt(13);
 	}
@@ -305,8 +302,9 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	{
 		return null;
 	}
-	
-	
+
+
+	@Override
 	public EntityAgeable createChildTFC(EntityAgeable entityageable) 
 	{
 		return new EntityCowTFC(worldObj, this, entityageable.getEntityData().getFloat("MateSize"));

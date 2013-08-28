@@ -13,7 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
-import TFC.API.Entities.IAnimal.GenderEnum;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 
@@ -37,7 +36,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		super(par1World);
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
-		this.tasks.addTask(3, new EntityAITempt(this, 0.5F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
 		//this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
@@ -342,7 +341,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public void setAge(int par1) {
 		this.dataWatcher.updateObject(15, Integer.valueOf(par1));
 	}
-	
+
 	/**
 	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
 	 */
