@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import TFC.TerraFirmaCraft;
 import TFC.API.IBag;
@@ -261,7 +262,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			{
 				String name = tag.getString("MetalType");
 				name = name.replace(" ", "");
-				arraylist.add("§2" + StringUtil.localize("gui.metal."+name));
+				arraylist.add(EnumChatFormatting.DARK_GREEN + StringUtil.localize("gui.metal."+name));
 			}
 
 			if(tag.hasKey("TempTimer"))
@@ -270,7 +271,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				long temp = tag.getLong("TempTimer");
 				if(total - temp < 11) 
 				{
-					arraylist.add("\247f" + StringUtil.localize("gui.ItemHeat.Liquid"));
+					arraylist.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.ItemHeat.Liquid"));
 				}
 			}
 
@@ -284,7 +285,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 					if(byte0 >= 0 && byte0 < 4)
 					{
 						ItemStack itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-						arraylist.add("§6" + itemstack.stackSize + "x " + itemstack.getItem().getItemDisplayName(itemstack));
+						arraylist.add(EnumChatFormatting.GOLD + "" + itemstack.stackSize + "x " + itemstack.getItem().getItemDisplayName(itemstack));
 					}
 				}
 			}
