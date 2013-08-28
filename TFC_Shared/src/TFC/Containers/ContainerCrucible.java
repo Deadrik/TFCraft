@@ -6,6 +6,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import TFC.TFCItems;
 import TFC.Core.Player.PlayerInventory;
 import TFC.TileEntities.TECrucible;
 
@@ -36,39 +37,47 @@ public class ContainerCrucible extends ContainerTFC
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entityplayer, int clickedSlot)
+	public ItemStack transferStackInSlot(EntityPlayer player, int clickedIndex)
 	{
-		Slot slot = (Slot)inventorySlots.get(clickedSlot);
-		Slot slot1 = (Slot)inventorySlots.get(0);
-		if(slot != null && slot.getHasStack())
+		ItemStack returnedStack = null;
+		Slot clickedSlot = (Slot)this.inventorySlots.get(clickedIndex);
+
+		if (clickedSlot != null
+				&& clickedSlot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
-			if(clickedSlot <= 1)
+			ItemStack clickedStack = clickedSlot.getStack();
+			returnedStack = clickedStack.copy();
+
+			if (clickedIndex <= 1)
 			{
-				if(!entityplayer.inventory.addItemStackToInventory(itemstack1.copy()))
-				{
+				if (!this.mergeItemStack(clickedStack, 2, inventorySlots.size(), true)) {
 					return null;
 				}
-				slot.putStack(null);
 			}
-			else
-			{
-				if(slot1.getHasStack())
-				{
+			else if (clickedIndex > 1 && clickedIndex < inventorySlots.size() && clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && 
+					clickedStack.getItemDamage() == 1) {
+				if (!this.mergeItemStack(clickedStack, 1, 2, true)) {
 					return null;
-				}                     
-				slot1.putStack(itemstack1.copy());                          
-				itemstack1.stackSize--;
+				}
 			}
-			if(itemstack1.stackSize == 0)
-			{
-				slot.putStack(null);
-			} else
-			{
-				slot.onSlotChanged();
+			else if (clickedIndex > 1 && clickedIndex < inventorySlots.size()) {
+				if (!this.mergeItemStack(clickedStack, 0, 1, true)) {
+					return null;
+				}
 			}
+
+			if (clickedStack.stackSize == 0) {
+				clickedSlot.putStack((ItemStack)null);
+			} else {
+				clickedSlot.onSlotChanged();
+			}
+
+			if (clickedStack.stackSize == returnedStack.stackSize) {
+				return null;
+			}
+			clickedSlot.onPickupFromSlot(player, clickedStack);
 		}
-		return null;
+		return returnedStack;
 	}
 
 	@Override

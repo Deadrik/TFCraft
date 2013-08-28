@@ -91,9 +91,11 @@ public class ContainerTFC extends Container
 				slotstack = slot.getStack();
 				if (slotstack == null && slot.isItemValid(is) && slot.getSlotStackLimit() < is.stackSize)
 				{
-					slot.putStack(is.copy());
-					slot.onSlotChanged();
+					ItemStack copy = is.copy();
+					copy.stackSize = slot.getSlotStackLimit();
 					is.stackSize -= slot.getSlotStackLimit();
+					slot.putStack(copy);
+					slot.onSlotChanged();
 					var5 = true;
 					break;
 				}
