@@ -532,7 +532,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 	public int getInventoryStackLimit()
 	{
 		// TODO Auto-generated method stub
-		return 1;
+		return 64;
 	}
 
 	@Override
