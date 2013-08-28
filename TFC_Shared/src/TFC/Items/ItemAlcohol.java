@@ -158,6 +158,7 @@ public class ItemAlcohol extends ItemTerra
 						if(soberTime > 10000+levelMod){
 							soberTime = 0;
 							//((EntityPlayerMP)player).mcServer.getConfigurationManager().sendChatMsg(player.username+" died of alcohol poisoning.");
+							player.inventory.dropAllItems();
 							player.setEntityHealth(0);
 						}
 					}

@@ -200,7 +200,7 @@ public class WorldGenForests implements IWorldGenerator
 
 				if(randomNumber < 40 && gen0 != null)
 				{
-					if(canSpawnTemp0 && canSpawnEVTRain0 > 0)
+					if(canSpawnTemp0 && canSpawnEVTRain0 > 1)
 					{							
 						gen0.setScale(1.0D, 1.0D, 1.0D);
 						gen0.generate(world, random, xCoord, yCoord, zCoord);
@@ -208,7 +208,7 @@ public class WorldGenForests implements IWorldGenerator
 				}
 				else if(randomNumber < 70 && gen1 != null)
 				{
-					if(canSpawnTemp1)
+					if(canSpawnTemp1 && canSpawnEVTRain1 > 1)
 					{
 						gen1.setScale(1.0D, 1.0D, 1.0D);
 						gen1.generate(world, random, xCoord, yCoord, zCoord);
@@ -216,7 +216,7 @@ public class WorldGenForests implements IWorldGenerator
 				}
 				else if(randomNumber < 100 && gen2 != null)
 				{
-					if(canSpawnTemp2)
+					if(canSpawnTemp2 && canSpawnEVTRain2 > 1)
 					{
 						gen2.setScale(1.0D, 1.0D, 1.0D);
 						gen2.generate(world, random, xCoord, yCoord, zCoord);
