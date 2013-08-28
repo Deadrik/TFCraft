@@ -32,32 +32,48 @@ public class RenderOverlayHandler
 	public void render(RenderGameOverlayEvent.Pre event)
 	{
 		GuiIngameForge.renderFood = false;
-		
+
 		// We check for crosshairs just because it's always drawn and is before air bar
-		if(event.type != ElementType.CROSSHAIRS)
+		if(event.type != ElementType.CROSSHAIRS) {
 			return;
-		
+		}
+
 		// This is for air to be drawn above our bars
 		GuiIngameForge.right_height += 10;
-		
+
 		ScaledResolution sr = event.resolution;
 		Minecraft mc = Minecraft.getMinecraft();
 
 		int healthRowHeight = sr.getScaledHeight() - 39;
 		int armorRowHeight = healthRowHeight - 10;
 
-		//TFC_PlayerClient playerclient = ((TFC.Core.Player.TFC_PlayerClient)mc.thePlayer.getPlayerBase("TFC Player Client"));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		mc.func_110434_K().func_110577_a(tfcicons);
+
+		//Render Tool Mode
+		if(mc.thePlayer.inventory.getCurrentItem() != null && 
+				mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
+		{
+			int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
+			this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
+		}
+		else if(mc.thePlayer.inventory.getCurrentItem() != null && 
+				mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
+		{
+			int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
+			this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
+		}
+
 		PlayerInfo playerclient = PlayerManagerTFC.getInstance().getClientPlayer();
 		if(playerclient != null && mc.playerController.func_78763_f())
 		{
 			//Draw Health
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			mc.func_110434_K().func_110577_a(tfcicons);
+
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 0, 90, 10);
 			float maxHealth = mc.thePlayer.func_110138_aP();
 			float percentHealth = mc.thePlayer.func_110143_aJ()/maxHealth;
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2-91, healthRowHeight, 0, 9, (int) (90*percentHealth), 9);
-			
+
 			//Draw Food and Water
 			FoodStatsTFC foodstats = TFC_Core.getPlayerFoodStats(mc.thePlayer);
 			int foodLevel = foodstats.getFoodLevel();
@@ -82,20 +98,6 @@ public class RenderOverlayHandler
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 28, 90, 5);
 			this.drawTexturedModalRect(sr.getScaledWidth() / 2, healthRowHeight+5, 0, 33, (int) (90*percentWater), 5);
 
-			//Render Tool Mode
-			if(mc.thePlayer.inventory.getCurrentItem() != null && 
-					mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemCustomHoe)
-			{
-				int mode = PlayerManagerTFC.getInstance().getClientPlayer().hoeMode;
-				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 38, 20, 20);
-			}
-			else if(mc.thePlayer.inventory.getCurrentItem() != null && 
-					mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemChisel)
-			{
-				int mode = PlayerManagerTFC.getInstance().getClientPlayer().ChiselMode;
-				this.drawTexturedModalRect(sr.getScaledWidth() / 2 + 95, sr.getScaledHeight() - 21, 0+(20*mode), 58, 20, 20);
-			}
-		
 			mc.func_110434_K().func_110577_a(new ResourceLocation("minecraft:textures/gui/icons.png"));
 			//Draw experience bar
 			int cap = 0;
@@ -103,11 +105,11 @@ public class RenderOverlayHandler
 			{
 				cap = mc.thePlayer.xpBarCap();
 				int left = sr.getScaledWidth() / 2 - 91;
-	
+
 				if (cap > 0)
 				{
 					short barWidth = 182;
-					int filled = (int)(mc.thePlayer.experience * (float)(barWidth + 1));
+					int filled = (int)(mc.thePlayer.experience * (barWidth + 1));
 					int top = sr.getScaledHeight() - 28;
 					drawTexturedModalRect(left, top, 0, 64, barWidth, 5);
 					if (filled > 0)
@@ -115,7 +117,7 @@ public class RenderOverlayHandler
 						drawTexturedModalRect(left, top, 0, 69, filled, 5);
 					}
 				}
-				
+
 				if (mc.thePlayer.experienceLevel > 0)
 				{
 					fontrenderer = mc.fontRenderer;
@@ -130,7 +132,7 @@ public class RenderOverlayHandler
 					fontrenderer.drawString(text, x, y - 1, 0);
 					fontrenderer.drawString(text, x, y, color);
 				}
-				
+
 				// We have to reset the color back to white
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			}
