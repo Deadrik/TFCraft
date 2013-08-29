@@ -25,7 +25,7 @@ public class ItemCustomKnife extends ItemWeapon
 	}
 
 	@Override
-	public EnumSize getSize()
+	public EnumSize getSize(ItemStack is)
 	{
 		return EnumSize.SMALL;
 	}

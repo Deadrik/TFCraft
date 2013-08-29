@@ -34,7 +34,7 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 		this.setCreativeTab(CreativeTabs.tabBlock);
 		folder = "";
 	}
-	
+
 	public ItemTerraBlock setFolder(String f)
 	{
 		folder = f;
@@ -42,13 +42,14 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
-    	if(MetaNames != null)
-    		return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
-    	return super.getUnlocalizedName(itemstack);
-    }
-	
+	public String getUnlocalizedName(ItemStack itemstack)
+	{
+		if(MetaNames != null) {
+			return getUnlocalizedName().concat("."+ MetaNames[itemstack.getItemDamage()]);
+		}
+		return super.getUnlocalizedName(itemstack);
+	}
+
 	@Override
 	public String getItemDisplayName(ItemStack itemstack) 
 	{
@@ -78,8 +79,8 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
-		
+		ItemTerra.addSizeInformation(is, arraylist);
+
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
@@ -96,10 +97,11 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 
 				if(meltTemp != -1)
 				{
-					if(is.itemID == Item.stick.itemID)
+					if(is.itemID == Item.stick.itemID) {
 						arraylist.add(TFC_ItemHeat.getHeatColorTorch(temp, meltTemp));
-					else
+					} else {
 						arraylist.add(TFC_ItemHeat.getHeatColor(temp, meltTemp));
+					}
 				}
 			}
 		}
@@ -114,14 +116,15 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack())
-			return this.getSize().stackSize * getWeight().multiplier;
-		else
+		if(canStack()) {
+			return this.getSize(null).stackSize * getWeight(null).multiplier;
+		} else {
 			return 1;
+		}
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.VERYSMALL;
 	}
@@ -133,11 +136,11 @@ public class ItemTerraBlock extends ItemBlock implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{

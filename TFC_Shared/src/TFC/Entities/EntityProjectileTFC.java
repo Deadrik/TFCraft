@@ -1,12 +1,15 @@
 package TFC.Entities;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import TFC.API.ICausesDamage;
 import TFC.API.Enums.EnumDamageType;
 
@@ -55,7 +58,21 @@ public class EntityProjectileTFC extends EntityArrow implements ICausesDamage
 			{
 				boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
-				if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(new ItemStack(Item.itemsList[this.itemID], 1, damageTaken)))
+				EntityItem ei = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(Item.itemsList[this.itemID], 1, this.damageTaken));
+
+				EntityItemPickupEvent event = new EntityItemPickupEvent(player, ei);
+
+				if (MinecraftForge.EVENT_BUS.post(event))
+				{
+					return;
+				}
+
+				ItemStack itemstack = ei.getEntityItem();
+				if(itemstack.stackSize <= 0) 
+				{
+					flag = true;
+				} 
+				else if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(itemstack))
 				{
 					flag = false;
 				}

@@ -5,11 +5,14 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import TFC.TFCBlocks;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
@@ -22,6 +25,9 @@ import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.FoodStatsTFC;
 import TFC.Food.ItemMeal;
 import TFC.Food.ItemTerraFood;
+import TFC.Items.ItemArrow;
+import TFC.Items.ItemQuiver;
+import TFC.Items.Tools.ItemJavelin;
 import TFC.TileEntities.TileEntityFireEntity;
 
 public class EntityLivingHandler
@@ -148,5 +154,56 @@ public class EntityLivingHandler
 	public int getMaxHealth(EntityPlayer player)
 	{
 		return Math.min(1000+(player.experienceLevel * TFCOptions.HealthGainRate), TFCOptions.HealthGainCap);
+	}
+
+	@ForgeSubscribe
+	public void handleItemPickup(EntityItemPickupEvent event)
+	{
+		EntityPlayer player = event.entityPlayer;
+		ItemStack quiver = null;
+		ItemStack ammo = event.item.getEntityItem();
+		boolean foundJav = false;
+		for(int i = 0; i < 9; i++) 
+		{
+			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
+			{
+				quiver = player.inventory.getStackInSlot(i);
+				break;
+			}
+			else if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemJavelin)
+			{
+				foundJav = true;
+			}
+		}
+
+		if(quiver != null && ammo.getItem() instanceof ItemArrow)
+		{
+			ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, ammo);
+			if(is != null)
+			{
+				event.item.setEntityItemStack(is);
+			}
+			else
+			{
+				is = event.item.getEntityItem();
+				is.stackSize = 0;
+				event.item.setEntityItemStack(is);
+				event.setResult(Result.DENY);
+			}
+		}
+		else if(quiver != null && ammo.getItem() instanceof ItemJavelin)
+		{
+			if(foundJav)
+			{
+				ItemStack is = ((ItemQuiver)quiver.getItem()).addItem(quiver, ammo);
+				if(is == null)
+				{
+					is = event.item.getEntityItem();
+					is.stackSize = 0;
+					event.item.setEntityItemStack(is);
+					event.setResult(Result.DENY);
+				}
+			}
+		}
 	}
 }

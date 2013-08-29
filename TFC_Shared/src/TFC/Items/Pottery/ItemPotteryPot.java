@@ -10,32 +10,21 @@ import TFC.API.Enums.EnumWeight;
 public class ItemPotteryPot extends ItemPotteryBase
 {
 
-    public ItemPotteryPot(int id) 
-    {
-        super(id);
-        this.MetaNames = new String[]{"Clay Pot", "Ceramic Pot"};
-    }
-
-    @Override
-    public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
-    {
-    	super.addInformation(is, player, arraylist, flag);
-    	if(is.hasTagCompound() && is.stackTagCompound.hasKey("LiquidType"))
-    	{
-    		arraylist.add(is.stackTagCompound.getString("LiquidType"));
-    	}
-    }
-
-    	
-	@Override
-	public EnumSize getSize() 
+	public ItemPotteryPot(int id) 
 	{
-		return EnumSize.SMALL;
-	}
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.LIGHT;
+		super(id);
+		this.MetaNames = new String[]{"Clay Pot", "Ceramic Pot"};
+		this.setWeight(EnumWeight.LIGHT);
+		this.setSize(EnumSize.SMALL);
 	}
 
+	@Override
+	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
+	{
+		super.addInformation(is, player, arraylist, flag);
+		if(is.hasTagCompound() && is.stackTagCompound.hasKey("LiquidType"))
+		{
+			arraylist.add(is.stackTagCompound.getString("LiquidType"));
+		}
+	}
 }

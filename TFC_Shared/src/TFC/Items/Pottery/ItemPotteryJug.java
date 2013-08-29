@@ -27,6 +27,9 @@ public class ItemPotteryJug extends ItemPotteryBase
 		super(id);
 		this.MetaNames = new String[]{"Clay Jug", "Ceramic Jug", "Water Jug"};
 		this.stackable = false;
+
+		this.setWeight(EnumWeight.LIGHT);
+		this.setSize(EnumSize.SMALL);
 	}
 
 	@Override
@@ -161,16 +164,4 @@ public class ItemPotteryJug extends ItemPotteryBase
 			arraylist.add(is.stackTagCompound.getString("LiquidType"));
 		}
 	}
-
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.SMALL;
-	}
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.LIGHT;
-	}
-
 }

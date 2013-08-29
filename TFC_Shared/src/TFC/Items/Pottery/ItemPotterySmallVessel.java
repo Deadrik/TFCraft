@@ -32,6 +32,8 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 		super(id);
 		this.MetaNames = new String[]{"Clay Vessel", "Ceramic Vessel", "Ceramic Vessel"};
 		this.setMaxStackSize(1);
+		this.setWeight(EnumWeight.MEDIUM);
+		this.setSize(EnumSize.SMALL);
 	}
 
 	@Override
@@ -239,17 +241,6 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 			}
 		}
 		return itemstack;
-	}
-
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.SMALL;
-	}
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.MEDIUM;
 	}
 
 	@Override

@@ -48,14 +48,14 @@ public class ItemHammer extends ItemTerraTool
 		}
 		return false;
 	}
-	
+
 	public boolean onBlockDestroyed(ItemStack stack, EntityPlayer player, World world, int i, int j, int k, int side, EntityLiving entity)
-    {
-        return false;
-    }
-	
+	{
+		return false;
+	}
+
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.SMALL;
 	}

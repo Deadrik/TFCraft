@@ -26,7 +26,7 @@ public class ItemCustomRedSteelBucket extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}

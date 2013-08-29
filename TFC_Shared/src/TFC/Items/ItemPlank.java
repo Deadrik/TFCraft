@@ -26,6 +26,8 @@ public class ItemPlank extends ItemTerra
 		this.setMaxDamage(0);
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = Global.WOOD_ALL;
+		this.setWeight(EnumWeight.LIGHT);
+		this.setSize(EnumSize.MEDIUM);
 	}
 
 	@Override
@@ -167,17 +169,6 @@ public class ItemPlank extends ItemTerra
 		}
 		//world.markBlockForRenderUpdate(i, j, k);
 		return false;
-	}
-
-	@Override
-	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
-	}
-
-	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
-		return EnumWeight.LIGHT;
 	}
 
 	@Override

@@ -20,6 +20,8 @@ public class ItemCoal extends ItemTerra {
 		this.setMaxDamage(0);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 		this.MetaNames = new String[] {"coal", "charcoal"};
+		this.setWeight(EnumWeight.LIGHT);
+		this.setSize(EnumSize.TINY);
 	}
 
 	int[][] map = 
@@ -30,18 +32,6 @@ public class ItemCoal extends ItemTerra {
 			{-1,0,0},
 			{1,0,0},
 		};
-
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.TINY;
-	}
-
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.LIGHT;
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

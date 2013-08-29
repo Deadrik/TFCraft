@@ -31,20 +31,9 @@ public class ItemCustomSeeds extends ItemTerra
 		this.cropId = cropId;
 		this.setCreativeTab(CreativeTabs.tabFood);
 		this.setFolder("food/");
+		this.setWeight(EnumWeight.LIGHT);
+		this.setSize(EnumSize.TINY);
 	}
-	
-	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
-		return EnumSize.TINY;
-	}
-	
-	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
-		return EnumWeight.LIGHT;
-	}
-
 
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -64,10 +53,11 @@ public class ItemCustomSeeds extends ItemTerra
 			if ((var8 == this.soilBlockID || var8 == this.soilBlockID2) && world.isAirBlock(x, y+1, z))
 			{
 				CropIndex crop = CropManager.getInstance().getCropFromId(cropId);
-				
-				if(crop.needsSunlight && !world.canBlockSeeTheSky(x, y+1, z))
+
+				if(crop.needsSunlight && !world.canBlockSeeTheSky(x, y+1, z)) {
 					return false;
-				
+				}
+
 				world.setBlock(x, y+1, z, Block.crops.blockID);
 				//world.setBlock(x, y+2, z, Block.crops.blockID, 8, 0x2);
 				TileEntityCrop te = ((TileEntityCrop)world.getBlockTileEntity(x, y+1, z));

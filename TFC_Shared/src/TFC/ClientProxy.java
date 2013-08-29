@@ -34,6 +34,7 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityJavelin;
+import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityStand;
 import TFC.Entities.Mobs.EntityBear;
@@ -70,6 +71,7 @@ import TFC.GUI.GuiKnapping;
 import TFC.GUI.GuiLogPile;
 import TFC.GUI.GuiMold;
 import TFC.GUI.GuiQuern;
+import TFC.GUI.GuiQuiver;
 import TFC.GUI.GuiScribe;
 import TFC.GUI.GuiSluice;
 import TFC.GUI.GuiVessel;
@@ -371,6 +373,10 @@ public class ClientProxy extends CommonProxy
 		case 39:
 		{
 			return new GuiVessel(player.inventory, world, x, y, z);
+		}
+		case 40:
+		{
+			return new GuiQuiver(player.inventory, world, x, y, z);
 		}
 
 		default:

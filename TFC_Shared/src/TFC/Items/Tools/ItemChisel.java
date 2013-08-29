@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCBlocks;
@@ -32,7 +33,7 @@ public class ItemChisel extends ItemTerraTool implements IToolChisel
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.VERYSMALL;
 	}
 

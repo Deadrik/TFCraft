@@ -11,6 +11,7 @@ public class TFCItemID {
 	public static int minecartCrate				= 16000;
 	public static int GoldPan					= 16001;
 	public static int SluiceItem				= 16002;
+	public static int Quiver					= 16003;
 	// ProPicks
 	public static int ProPickBismuthBronze		= 16005;
 	public static int ProPickBlackBronze		= 16006;

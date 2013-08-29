@@ -40,6 +40,8 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		this.setFolder("pottery/");
 		setCreativeTab(TFCTabs.TFCPottery);
 		this.MetaNames = new String[]{"",""};
+		this.setWeight(EnumWeight.MEDIUM);
+		this.setSize(EnumSize.SMALL);
 	}
 
 	@Override
@@ -66,17 +68,6 @@ public class ItemPotteryBase extends ItemTerra implements ISize
 		} else {
 			return this.CeramicIcon;
 		}    		
-	}
-
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.SMALL;
-	}
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.MEDIUM;
 	}
 
 	@Override

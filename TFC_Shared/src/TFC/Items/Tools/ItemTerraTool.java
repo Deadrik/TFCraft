@@ -39,7 +39,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	{
 		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		ItemTerra.addHeatInformation(is, arraylist);
 
@@ -67,7 +67,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	public int getItemStackLimit()
 	{
 		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
+			return this.getSize(null).stackSize * getWeight(null).multiplier;
 		} else {
 			return 1;
 		}
@@ -86,7 +86,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}
@@ -98,7 +98,7 @@ public class ItemTerraTool extends ItemTool implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}

@@ -1,7 +1,6 @@
 package TFC.Items.Tools;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
@@ -27,7 +26,7 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.LARGE;
 	}
 
@@ -85,26 +84,26 @@ public class ItemCustomBlueSteelBucket extends ItemTerra
 					}
 
 					if (world.getBlockId(i, j, k) == Block.lavaStill.blockID && world.getBlockMetadata(i, j, k) == 0)
-                    {
-                        world.setBlock(i, j, k, 0);
+					{
+						world.setBlock(i, j, k, 0);
 
-                        if (par3EntityPlayer.capabilities.isCreativeMode)
-                        {
-                            return par1ItemStack;
-                        }
+						if (par3EntityPlayer.capabilities.isCreativeMode)
+						{
+							return par1ItemStack;
+						}
 
-                        if (--par1ItemStack.stackSize <= 0)
-                        {
-                            return new ItemStack(TFCItems.BlueSteelBucketLava);
-                        }
+						if (--par1ItemStack.stackSize <= 0)
+						{
+							return new ItemStack(TFCItems.BlueSteelBucketLava);
+						}
 
-                        if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.BlueSteelBucketLava)))
-                        {
-                            par3EntityPlayer.dropPlayerItem(new ItemStack(TFCItems.BlueSteelBucketLava.itemID, 1, 0));
-                        }
+						if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.BlueSteelBucketLava)))
+						{
+							par3EntityPlayer.dropPlayerItem(new ItemStack(TFCItems.BlueSteelBucketLava.itemID, 1, 0));
+						}
 
-                        return par1ItemStack;
-                    }
+						return par1ItemStack;
+					}
 				}
 				else
 				{

@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import net.minecraft.item.ItemStack;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -13,12 +14,12 @@ public class ItemToolRack extends ItemTerraBlock
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.HUGE;
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		return EnumWeight.LIGHT;
 	}
 

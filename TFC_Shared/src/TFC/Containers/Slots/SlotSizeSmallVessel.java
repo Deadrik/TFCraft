@@ -22,16 +22,18 @@ public class SlotSizeSmallVessel extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 		if(itemstack.getItem() instanceof IBag || itemstack.getItem() instanceof ItemMeltedMetal || 
-				itemstack.getItem() instanceof ItemPotteryBase)
+				itemstack.getItem() instanceof ItemPotteryBase) {
 			return false;
-		
-		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize)
+		}
+
+		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(itemstack).stackSize >= size.stackSize)
 		{
 			return true;
 		}
-		else if (!(itemstack.getItem() instanceof ISize))
+		else if (!(itemstack.getItem() instanceof ISize)) {
 			return true;
-		
+		}
+
 		return false;
 	}
 

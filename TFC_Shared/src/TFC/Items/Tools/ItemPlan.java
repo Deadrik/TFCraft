@@ -15,23 +15,19 @@ public class ItemPlan extends ItemTerra
 		setCreativeTab(TFCTabs.TFCTools);
 		setHasSubtypes(true);
 		setFolder("tools/");
+		this.setSize(EnumSize.MEDIUM);
 	}
-	
+
 	@Override
-    public Icon getIconFromDamage(int i)
-    {
-        return icons;
-    }
-	
+	public Icon getIconFromDamage(int i)
+	{
+		return icons;
+	}
+
 	@Override
-    public void registerIcons(IconRegister registerer)
-    {
+	public void registerIcons(IconRegister registerer)
+	{
 		//registerer.registerIcon(textureFolder+"Blueprint");
 		icons = registerer.registerIcon(Reference.ModID + ":" + "tools/Blueprint");
-    }
-	
-	@Override
-	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
 	}
 }

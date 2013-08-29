@@ -37,6 +37,7 @@ import TFC.Handlers.EntityDamageHandler;
 import TFC.Handlers.EntityLivingHandler;
 import TFC.Handlers.EntitySpawnHandler;
 import TFC.Handlers.PacketHandler;
+import TFC.Handlers.PickupHandler;
 import TFC.Handlers.PlayerTossEventHandler;
 import TFC.Handlers.ServerTickHandler;
 import TFC.Handlers.Client.ClientTickHandler;
@@ -196,6 +197,8 @@ public class TerraFirmaCraft
 		proxy.registerBiomeEventHandler();
 
 		proxy.setupGuiIngameForge();
+
+		GameRegistry.registerPickupHandler(new PickupHandler());
 
 		//Setup custom potion effects
 		TFCPotion.Setup();

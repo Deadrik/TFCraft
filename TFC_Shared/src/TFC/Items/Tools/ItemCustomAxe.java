@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import TFC.Reference;
 import TFC.API.ICausesDamage;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.TFCOptions;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
@@ -42,7 +42,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: " + is.getItemDamage());
@@ -52,15 +52,11 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
-		} else {
-			return 1;
-		}
+		return 1;
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.LARGE;
 	}
 
@@ -71,7 +67,7 @@ public class ItemCustomAxe extends ItemAxe implements ISize, ICausesDamage
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}

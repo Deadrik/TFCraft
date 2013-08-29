@@ -15,24 +15,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.API.ICausesDamage;
 import TFC.API.IProjectile;
+import TFC.API.IQuiverAmmo;
 import TFC.API.TFCTabs;
+import TFC.API.Enums.EnumAmmo;
 import TFC.API.Enums.EnumDamageType;
 import TFC.Entities.EntityJavelin;
+import TFC.Items.ItemQuiver;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjectile
+public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjectile, IQuiverAmmo
 {
 	public float weaponDamage;
 	private float weaponRangeDamage;
 
-	public ItemJavelin(int par1, EnumToolMaterial par2EnumToolMaterial, float damage, float rangedDamage)
+	public ItemJavelin(int par1, EnumToolMaterial par2EnumToolMaterial, float damage)
 	{
 		super(par1, 10, par2EnumToolMaterial, new Block[0]);
 		this.maxStackSize = 1;
 		this.weaponDamage = damage;
-		this.weaponRangeDamage = rangedDamage;
+		this.weaponRangeDamage = damage;
 		this.setMaxDamage(par2EnumToolMaterial.getMaxUses()/2);
 		setCreativeTab(TFCTabs.TFCWeapons);
 	}
@@ -118,7 +121,13 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 
 		world.playSoundAtEntity(player, "random.bow", 1.0F, 0.3F);
 		javelin.setDamageTaken((short) itemstack.getItemDamage());
-		consumeJavelin(player);
+
+		player.inventory.mainInventory[player.inventory.currentItem] = null;
+
+		if(!consumeJavelin(player))
+		{
+			player.inventory.mainInventory[player.inventory.currentItem] = consumeJavelinInQuiver(player, true);
+		}
 
 		if (!world.isRemote)
 		{
@@ -138,6 +147,24 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		}
 
 		return -1;
+	}
+
+	public ItemStack consumeJavelinInQuiver(EntityPlayer player, boolean shouldConsume)
+	{
+		ItemStack quiver = null;
+		for(int i = 0; i < 9; i++) 
+		{
+			if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof ItemQuiver)
+			{
+				quiver = player.inventory.getStackInSlot(i);
+				break;
+			}
+		}
+		if(quiver != null && quiver.getItem() instanceof ItemQuiver)
+		{
+			return ((ItemQuiver)quiver.getItem()).consumeAmmo(quiver, EnumAmmo.JAVELIN, shouldConsume);
+		}
+		return null;
 	}
 
 	public boolean consumeJavelin(EntityPlayer player)
@@ -185,5 +212,11 @@ public class ItemJavelin extends ItemTerraTool implements ICausesDamage, IProjec
 		Multimap multimap = HashMultimap.create();
 		multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", this.weaponDamage, 0));
 		return multimap;
+	}
+
+	@Override
+	public EnumAmmo getAmmoType() 
+	{
+		return EnumAmmo.JAVELIN;
 	}
 }
