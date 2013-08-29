@@ -316,12 +316,12 @@ public class ItemMeal extends ItemTerraFood
 	}
 
 	@Override
-	public EnumSize getSize() 
+	public EnumSize getSize(ItemStack is) 
 	{
 		return EnumSize.SMALL;
 	}
 	@Override
-	public EnumWeight getWeight() 
+	public EnumWeight getWeight(ItemStack is) 
 	{
 		return EnumWeight.MEDIUM;
 	}

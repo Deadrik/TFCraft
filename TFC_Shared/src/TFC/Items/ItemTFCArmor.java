@@ -48,7 +48,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	public int getItemStackLimit()
 	{
 		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
+			return this.getSize(null).stackSize * getWeight(null).multiplier;
 		} else {
 			return 1;
 		}
@@ -80,7 +80,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.LARGE;
 	}
 
@@ -93,7 +93,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 		ItemTerra.addHeatInformation(is, arraylist);
 
 		if (TFC_Core.showExtraInformation()) 
@@ -137,7 +137,7 @@ public class ItemTFCArmor extends ItemArmor implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		if (this.getArmorMaterial() == EnumArmorMaterial.CLOTH)
 		{
 			return EnumWeight.LIGHT;

@@ -1,7 +1,5 @@
 package TFC.Items;
 
-import java.awt.image.BufferedImage;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,8 +21,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemIngot extends ItemTerra implements ISmeltable
 {
-	EnumSize size = EnumSize.SMALL;
-	BufferedImage bi;
 	String metal;
 	short metalAmount;
 	boolean smeltable = true;
@@ -34,6 +30,8 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setFolder("ingots/");
 		metalAmount = 100;
+		this.setWeight(EnumWeight.MEDIUM);
+		this.setSize(EnumSize.SMALL);
 	}
 	public ItemIngot(int i, boolean canSmelt) 
 	{
@@ -59,17 +57,6 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	public boolean requiresMultipleRenderPasses()
 	{
 		return true;
-	}
-
-	@Override
-	public EnumSize getSize() {
-		return size;
-	}
-
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.MEDIUM;
 	}
 
 	@Override

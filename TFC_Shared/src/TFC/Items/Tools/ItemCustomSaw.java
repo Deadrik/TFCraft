@@ -33,7 +33,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: "+is.getItemDamage());
@@ -41,17 +41,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	}
 
 	@Override
-	public int getItemStackLimit()
-	{
-		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
-		} else {
-			return 1;
-		}
-	}
-
-	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.MEDIUM;
 	}
 
@@ -62,7 +52,7 @@ public class ItemCustomSaw extends ItemCustomAxe implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}

@@ -154,13 +154,13 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.VERYSMALL;
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}
@@ -170,6 +170,4 @@ public class ItemFlintSteel extends ItemFlintAndSteel implements ISize
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 }

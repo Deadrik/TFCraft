@@ -26,6 +26,7 @@ import TFC.Containers.ContainerLiquidVessel;
 import TFC.Containers.ContainerLogPile;
 import TFC.Containers.ContainerMold;
 import TFC.Containers.ContainerQuern;
+import TFC.Containers.ContainerQuiver;
 import TFC.Containers.ContainerScribe;
 import TFC.Containers.ContainerSluice;
 import TFC.Containers.ContainerSpecialCrafting;
@@ -441,6 +442,10 @@ public class CommonProxy implements IGuiHandler
 		case 39:
 		{
 			return new ContainerVessel(player.inventory, world, x, y, z);
+		}
+		case 40:
+		{
+			return new ContainerQuiver(player.inventory, world, x, y, z);
 		}
 
 		default:

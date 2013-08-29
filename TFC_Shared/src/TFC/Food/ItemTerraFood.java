@@ -77,11 +77,11 @@ public class ItemTerraFood extends ItemFood implements ISize
 	public Item setIconCoord(int i, int j)
 	{return this;}
 
-    @Override
-    public void registerIcons(IconRegister registerer)
-    {
+	@Override
+	public void registerIcons(IconRegister registerer)
+	{
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + folder + this.getUnlocalizedName().replace("item.", ""));
-    }
+	}
 
 	public static void addFoodTempInformation(ItemStack is, List arraylist)
 	{
@@ -107,7 +107,7 @@ public class ItemTerraFood extends ItemFood implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		this.addFoodTempInformation(is, arraylist);
 
@@ -191,17 +191,20 @@ public class ItemTerraFood extends ItemFood implements ISize
 	@Override
 	public int getItemStackLimit()
 	{
-		if(canStack())
-			return this.getSize().stackSize * getWeight().multiplier <= 64 ? this.getSize().stackSize * getWeight().multiplier : 64;
-			else
-				return 1;
+		if(canStack()) {
+			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
+		} else {
+			return 1;
+		}
 	}
 
 	public boolean isHot(ItemStack is)
 	{
-		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8)
+		if(TFC_ItemHeat.GetTemperature(is) > TFC_ItemHeat.getMeltingPoint(is) *0.8) {
 			return true;
-		else return false;
+		} else {
+			return false;
+		}
 	}
 
 	public Item setSize(EnumSize s)
@@ -217,12 +220,12 @@ public class ItemTerraFood extends ItemFood implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return size;
 	}
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return weight;
 	}

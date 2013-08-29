@@ -53,7 +53,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	{
 		Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
 
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		ItemTerra.addHeatInformation(is, arraylist);
 
@@ -87,7 +87,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	public int getItemStackLimit()
 	{
 		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
+			return this.getSize(null).stackSize * getWeight(null).multiplier;
 		} else {
 			return 1;
 		}
@@ -110,7 +110,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}
@@ -122,7 +122,7 @@ public class ItemWeapon extends ItemSword implements ISize, ICausesDamage
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}

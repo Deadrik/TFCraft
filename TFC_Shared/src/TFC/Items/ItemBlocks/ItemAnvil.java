@@ -16,12 +16,12 @@ public class ItemAnvil extends ItemTerraBlock implements ISmeltable
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.HUGE;
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		return EnumWeight.HEAVY;
 	}
 

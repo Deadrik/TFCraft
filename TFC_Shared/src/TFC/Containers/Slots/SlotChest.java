@@ -17,9 +17,9 @@ import TFC.Items.Tools.ItemWeapon;
 public class SlotChest extends Slot
 {
 	EnumSize size = EnumSize.LARGE;
-	
+
 	List excpetions;
-	
+
 	public SlotChest(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
@@ -29,28 +29,30 @@ public class SlotChest extends Slot
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
 		boolean except = excpetions.contains(itemstack.getItem());
-		
+
 		if((itemstack.getItem() instanceof ItemTool || itemstack.getItem() instanceof ItemTerraTool || itemstack.getItem() instanceof ItemWeapon ||
 				itemstack.getItem() instanceof ItemHoe) && itemstack.getItem() instanceof ISize && 
-				((ISize)itemstack.getItem()).getSize().stackSize < EnumSize.SMALL.stackSize )
+				((ISize)itemstack.getItem()).getSize(null).stackSize < EnumSize.SMALL.stackSize ) {
 			return false;
-		
-		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize().stackSize >= size.stackSize && !except)
+		}
+
+		if(itemstack.getItem() instanceof ISize && ((ISize)itemstack.getItem()).getSize(null).stackSize >= size.stackSize && !except)
 		{
 			return true;
 		}
-		else if (!(itemstack.getItem() instanceof ISize) && !except)
+		else if (!(itemstack.getItem() instanceof ISize) && !except) {
 			return true;
-		
+		}
+
 		return false;
 	}
-	
+
 	public SlotChest setSize(EnumSize s)
 	{
 		size = s;
 		return this;
 	}
-	
+
 	public SlotChest addItemException(ArrayList<Item> ex)
 	{
 		excpetions = ex;

@@ -6,21 +6,11 @@ import TFC.API.Enums.EnumWeight;
 public class ItemPotteryLargeVessel extends ItemPotteryBase
 {
 
-    public ItemPotteryLargeVessel(int id) 
-    {
-        super(id);
-        this.MetaNames = new String[]{"Clay Vessel [Large]", "Ceramic Vessel [Large]"};
-    }
-    	
-	@Override
-	public EnumSize getSize() 
+	public ItemPotteryLargeVessel(int id) 
 	{
-		return EnumSize.HUGE;
+		super(id);
+		this.MetaNames = new String[]{"Clay Vessel [Large]", "Ceramic Vessel [Large]"};
+		this.setWeight(EnumWeight.HEAVY);
+		this.setSize(EnumSize.HUGE);
 	}
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.HEAVY;
-	}
-
 }

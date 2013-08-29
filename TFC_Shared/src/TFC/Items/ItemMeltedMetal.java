@@ -26,6 +26,8 @@ public class ItemMeltedMetal extends ItemTerra
 		setMaxDamage(100);
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.setFolder("ingots/");
+		this.setWeight(EnumWeight.HEAVY);
+		this.setSize(EnumSize.SMALL);
 	}	
 
 	@Override
@@ -34,17 +36,6 @@ public class ItemMeltedMetal extends ItemTerra
 		this.itemIcon = registerer.registerIcon(Reference.ModID + ":" + textureFolder+this.getUnlocalizedName().replace("item.", "").replace("Weak ", "").replace("HC ", ""));
 	}
 
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.HEAVY;
-	}
-
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.SMALL;
-	}
 	@Override
 	public boolean canStack() 
 	{

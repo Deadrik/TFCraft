@@ -32,7 +32,7 @@ public class ItemFirestarter extends ItemTerra
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.SMALL;
 	}
 

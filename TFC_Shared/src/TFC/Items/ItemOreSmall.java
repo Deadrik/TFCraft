@@ -15,6 +15,8 @@ public class ItemOreSmall extends ItemOre
 	public ItemOreSmall(int i)
 	{
 		super(i);
+		this.setWeight(EnumWeight.HEAVY);
+		this.setSize(EnumSize.TINY);
 	}
 
 	@Override
@@ -31,17 +33,6 @@ public class ItemOreSmall extends ItemOre
 		for(int i = 0; i < 14; i++) {
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + textureFolder+MetaNames[i]+" Small Ore");
 		}
-	}
-
-	@Override
-	public EnumSize getSize() {
-		return EnumSize.TINY;
-	}
-
-	@Override
-	public EnumWeight getWeight() {
-		// TODO Auto-generated method stub
-		return EnumWeight.HEAVY;
 	}
 
 	@Override

@@ -15,8 +15,8 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import TFC.Reference;
 import TFC.TFCBlocks;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.TFCOptions;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.StringUtil;
@@ -135,7 +135,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: " + is.getItemDamage());
@@ -145,14 +145,14 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	public int getItemStackLimit()
 	{
 		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
+			return this.getSize(null).stackSize * getWeight(null).multiplier;
 		} else {
 			return 1;
 		}
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.LARGE;
 	}
 
@@ -163,7 +163,7 @@ public class ItemCustomHoe extends ItemHoe implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.LIGHT;
 	}

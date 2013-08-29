@@ -11,8 +11,8 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import TFC.Reference;
 import TFC.API.ISize;
-import TFC.API.TFCTabs;
 import TFC.API.TFCOptions;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 import TFC.API.Util.StringUtil;
@@ -38,7 +38,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		if(TFCOptions.enableDebugMode) {
 			arraylist.add("Damage: "+is.getItemDamage());
@@ -46,7 +46,7 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.LARGE;
 	}
@@ -61,14 +61,14 @@ public class ItemCustomPickaxe extends ItemPickaxe implements ISize
 	public int getItemStackLimit()
 	{
 		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier;
+			return this.getSize(null).stackSize * getWeight(null).multiplier;
 		} else {
 			return 1;
 		}
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.MEDIUM;
 	}

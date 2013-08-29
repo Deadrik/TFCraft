@@ -1,6 +1,5 @@
 package TFC.Items.ItemBlocks;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -16,7 +15,7 @@ public class ItemBellows extends ItemTerraBlock
 		super(par1);
 		this.setCreativeTab(TFCTabs.TFCTools);
 	}
-	
+
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
@@ -33,9 +32,9 @@ public class ItemBellows extends ItemTerraBlock
 		}
 		return false;
 	}
-	
+
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.HUGE;
 	}
 }

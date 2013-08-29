@@ -14,23 +14,13 @@ import TFC.API.Enums.EnumWeight;
 
 public class ItemBloom extends ItemTerra implements ISmeltable
 {
-	EnumSize size = EnumSize.LARGE;
 	public ItemBloom(int i) 
 	{
 		super(i);
 		setHasSubtypes(true);
 		setCreativeTab(TFCTabs.TFCMaterials);
-	}
-
-	@Override
-	public EnumSize getSize() {
-		return size;
-	}
-
-	@Override
-	public EnumWeight getWeight() 
-	{
-		return EnumWeight.HEAVY;
+		this.setWeight(EnumWeight.HEAVY);
+		this.setSize(EnumSize.LARGE);
 	}
 
 	@Override

@@ -22,6 +22,8 @@ public class ItemCustomMinecart extends ItemTerra
 		this.maxStackSize = 1;
 		this.minecartType = par2;
 		this.setCreativeTab(CreativeTabs.tabTransport);
+		this.setWeight(EnumWeight.HEAVY);
+		this.setSize(EnumSize.HUGE);
 	}
 
 	@Override
@@ -55,18 +57,6 @@ public class ItemCustomMinecart extends ItemTerra
 	public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		par3List.add(new ItemStack(par1, 1, 0));
-	}
-
-	@Override
-	public EnumWeight getWeight()
-	{
-		return EnumWeight.HEAVY;
-	}
-	
-	@Override
-	public EnumSize getSize() 
-	{
-		return EnumSize.HUGE;
 	}
 
 	@Override

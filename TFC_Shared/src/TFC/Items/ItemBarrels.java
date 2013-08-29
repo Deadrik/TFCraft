@@ -21,12 +21,12 @@ public class ItemBarrels extends ItemTerraBlock
 	}
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.LARGE;
 	}
-	
+
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		return EnumWeight.HEAVY;
 	}
 

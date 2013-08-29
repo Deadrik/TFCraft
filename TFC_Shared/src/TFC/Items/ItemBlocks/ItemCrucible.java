@@ -35,7 +35,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		readFromItemNBT(is.getTagCompound(), arraylist);
 	}
@@ -137,7 +137,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 
 
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumSize.HUGE;
 	}
@@ -149,7 +149,7 @@ public class ItemCrucible extends ItemTerraBlock implements ISize
 	}
 
 	@Override
-	public EnumWeight getWeight() {
+	public EnumWeight getWeight(ItemStack is) {
 		// TODO Auto-generated method stub
 		return EnumWeight.HEAVY;
 	}

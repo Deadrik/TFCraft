@@ -67,7 +67,7 @@ public class ItemTerra extends Item implements ISize
 	public int getItemStackLimit()
 	{
 		if(canStack()) {
-			return this.getSize().stackSize * getWeight().multiplier <= 64 ? this.getSize().stackSize * getWeight().multiplier : 64;
+			return this.getSize(null).stackSize * getWeight(null).multiplier <= 64 ? this.getSize(null).stackSize * getWeight(null).multiplier : 64;
 		} else {
 			return 1;
 		}
@@ -142,17 +142,18 @@ public class ItemTerra extends Item implements ISize
 		}
 	}
 
-	public static void addSizeInformation(ISize object, List arraylist)
+	public static void addSizeInformation(ItemStack object, List arraylist)
 	{
-		if(object.getSize()!= null && object.getWeight() != null) {
-			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + object.getWeight().getName()) + " \u21F2" + StringUtil.localize("gui.Size." + object.getSize().getName().replace(" ", "")));
+		if(((ISize)object.getItem()).getSize(object)!= null && ((ISize)object.getItem()).getWeight(object) != null) {
+			arraylist.add("\u2696" + StringUtil.localize("gui.Weight." + ((ISize)object.getItem()).getWeight(object).getName()) + " \u21F2" + 
+					StringUtil.localize("gui.Size." + ((ISize)object.getItem()).getSize(object).getName().replace(" ", "")));
 		}
 	}
 	@Override
 	public void addInformation(ItemStack is, EntityPlayer player, List arraylist, boolean flag) 
 	{
 		//Minecraft.getMinecraft().gameSettings.advancedItemTooltips = false;
-		ItemTerra.addSizeInformation(this, arraylist);
+		ItemTerra.addSizeInformation(is, arraylist);
 
 		addHeatInformation(is, arraylist);
 
@@ -222,12 +223,12 @@ public class ItemTerra extends Item implements ISize
 	}
 
 	@Override
-	public EnumSize getSize() 
+	public EnumSize getSize(ItemStack is) 
 	{
 		return size;
 	}
 	@Override
-	public EnumWeight getWeight() 
+	public EnumWeight getWeight(ItemStack is) 
 	{
 		return weight;
 	}
@@ -243,5 +244,7 @@ public class ItemTerra extends Item implements ISize
 		weight = e;
 		return this;
 	}
+
+
 
 }

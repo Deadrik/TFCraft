@@ -28,16 +28,8 @@ public class ItemLogs extends ItemTerra
 		setHasSubtypes(true);
 		setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = Global.WOOD_ALL;
-	}
-
-	@Override
-	public EnumSize getSize() {
-		return EnumSize.MEDIUM;
-	}
-
-	@Override
-	public EnumWeight getWeight() {
-		return EnumWeight.MEDIUM;
+		this.setWeight(EnumWeight.MEDIUM);
+		this.setSize(EnumSize.MEDIUM);
 	}
 
 	@Override

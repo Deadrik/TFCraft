@@ -3,13 +3,13 @@ package TFC.Containers.Slots;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import TFC.Core.TFC_ItemHeat;
-import TFC.Items.ItemMeltedMetal;
+import TFC.Items.ItemArrow;
+import TFC.Items.Tools.ItemJavelin;
 
-public class SlotMoldMetal extends Slot
+public class SlotQuiver extends Slot
 
 {
-	public SlotMoldMetal(IInventory iinventory, int i, int j, int k)
+	public SlotQuiver(IInventory iinventory, int i, int j, int k)
 	{
 		super(iinventory, i, j, k);
 
@@ -18,7 +18,7 @@ public class SlotMoldMetal extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{    	
-		if(itemstack.getItem() instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(itemstack))
+		if(itemstack.getItem() instanceof ItemJavelin || itemstack.getItem() instanceof ItemArrow)
 		{
 			return true;
 		}

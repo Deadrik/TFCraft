@@ -27,12 +27,7 @@ public class ItemCustomBucket extends ItemTerra
 		super(par1);
 		this.isFull = par2;
 		this.setFolder("tools/");
-	}
-
-	@Override
-	public EnumSize getSize() {
-		// TODO Auto-generated method stub
-		return EnumSize.MEDIUM;
+		this.setSize(EnumSize.MEDIUM);
 	}
 
 	@Override

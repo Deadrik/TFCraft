@@ -1,5 +1,6 @@
 package TFC.Items.ItemBlocks;
 
+import net.minecraft.item.ItemStack;
 import TFC.API.Constant.Global;
 import TFC.API.Enums.EnumSize;
 
@@ -12,9 +13,9 @@ public class ItemWoodSupport extends ItemTerraBlock
 		this.setMaxDamage(0);
 		this.MetaNames = Global.WOOD_ALL;
 	}
-	
+
 	@Override
-	public EnumSize getSize() {
+	public EnumSize getSize(ItemStack is) {
 		return EnumSize.MEDIUM;
 	}
 }
