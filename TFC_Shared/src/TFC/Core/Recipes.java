@@ -906,7 +906,7 @@ public class Recipes
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.legsLeather, 1), new Object[] { "#####","#####","## ##","## ##","## ##", Character.valueOf('#'), TFCItems.FlatLeather});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(Item.bootsLeather, 1), new Object[] { "##   ","##   ","##   ","#### ","#####", Character.valueOf('#'), TFCItems.FlatLeather});
 
-
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.Quiver, 1), new Object[] { "#### ","# ###","#### ","###  "," #   ",Character.valueOf('#'), TFCItems.FlatLeather});
 
 	}
 
