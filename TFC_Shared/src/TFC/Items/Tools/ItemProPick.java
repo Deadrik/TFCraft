@@ -1,6 +1,5 @@
 package TFC.Items.Tools;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -28,8 +27,8 @@ public class ItemProPick extends ItemTerra
         }
     }
     
-    HashMap<Integer, ProspectResult> results =
-            new HashMap<Integer, ProspectResult>();
+    HashMap<String, ProspectResult> results =
+            new HashMap<String, ProspectResult>();
     Random random = null;
 
     public ItemProPick(int i) 
@@ -98,14 +97,17 @@ public class ItemProPick extends ItemTerra
                             blockID != TFCBlocks.Ore3.blockID)
                         continue;
                     
-                    if (results.containsKey(blockID))
-                        results.get(blockID).Count++;
-                    else {
-                        meta = world.getBlockMetadata(blockX, blockY, blockZ);
-                        ItemStack ore = new ItemStack(blockID, 1, meta);
-                        results.put(blockID, new ProspectResult(ore, 1));
-                        ore = null;
-                    }
+                    meta = world.getBlockMetadata(blockX, blockY, blockZ);
+                    ItemStack ore = new ItemStack(blockID, 1, meta);
+                    String oreName = ore.getDisplayName();
+                    
+                    if (results.containsKey(oreName))
+                        results.get(oreName).Count++;
+                    else
+                        results.put(oreName, new ProspectResult(ore, 1));
+                    
+                    ore = null;
+                    oreName = null;
                 }
             }
         }
