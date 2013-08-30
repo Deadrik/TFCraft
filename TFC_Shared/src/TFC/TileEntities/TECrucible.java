@@ -84,6 +84,15 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 		}
 
 		nbt.setTag("Items", nbttaglist);
+
+		if(currentAlloy != null)
+		{
+			nbt.setInteger("outputAmount", currentAlloy.outputAmount);
+		}
+		else
+		{
+			nbt.setInteger("outputAmount", 0);
+		}
 	}
 
 	@Override
@@ -121,6 +130,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 				storage[byte0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
+
+		if(currentAlloy != null)
+		{
+			currentAlloy.outputAmount = nbt.getInteger("outputAmount");
+		}
 	}
 
 	@Override
@@ -146,12 +160,12 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					temperature--;
 				}
 			}
-			
+
 			ItemStack stackToSmelt = storage[0];
 			if(stackToSmelt != null)
 			{
 				Item itemToSmelt = stackToSmelt.getItem();
-			
+
 				if(itemToSmelt instanceof ItemMeltedMetal && TFC_ItemHeat.getIsLiquid(storage[0]))
 				{
 					if(inputTick > 5)
@@ -186,11 +200,11 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 					if(addMetal(mType, ((ISmeltable)itemToSmelt).GetMetalReturnAmount(stackToSmelt)))
 					{
 						temperature *= 0.9f;
-	
+
 						if(stackToSmelt.stackSize <= 1) {
 							storage[0] = null;
 						}
-	
+
 						updateGui((byte) 0);
 					}
 				}
@@ -350,23 +364,23 @@ public class TECrucible extends NetworkTileEntity implements IInventory
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
 		if(storage[i] != null)
-        {
-            if(storage[i].stackSize <= j)
-            {
-                ItemStack itemstack = storage[i];
-                storage[i] = null;
-                return itemstack;
-            }
-            ItemStack itemstack1 = storage[i].splitStack(j);
-            if(storage[i].stackSize == 0)
-            {
-            	storage[i] = null;
-            }
-            return itemstack1;
-        } else
-        {
-            return null;
-        }
+		{
+			if(storage[i].stackSize <= j)
+			{
+				ItemStack itemstack = storage[i];
+				storage[i] = null;
+				return itemstack;
+			}
+			ItemStack itemstack1 = storage[i].splitStack(j);
+			if(storage[i].stackSize == 0)
+			{
+				storage[i] = null;
+			}
+			return itemstack1;
+		} else
+		{
+			return null;
+		}
 	}
 
 	@Override

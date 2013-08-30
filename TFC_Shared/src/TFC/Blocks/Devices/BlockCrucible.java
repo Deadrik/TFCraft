@@ -60,9 +60,10 @@ public class BlockCrucible extends BlockTerraContainer
 			is.setTagCompound(nbt);
 			EntityItem ei = new EntityItem(world,i,j,k,is);
 			world.spawnEntityInWorld(ei);
-			
-			for(int s = 0; s < te.getSizeInventory(); ++s)
+
+			for(int s = 0; s < te.getSizeInventory(); ++s) {
 				te.setInventorySlotContents(s, null);
+			}
 		}
 		super.breakBlock(world, i, j, k, par5, par6);
 	}
@@ -123,6 +124,15 @@ public class BlockCrucible extends BlockTerraContainer
 		}
 
 		nbt.setTag("Items", nbttaglist);
+
+		if(te.currentAlloy != null)
+		{
+			nbt.setInteger("outputAmount", te.currentAlloy.outputAmount);
+		}
+		else
+		{
+			nbt.setInteger("outputAmount", 0);
+		}
 		return nbt;
 	}
 
