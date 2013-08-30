@@ -176,8 +176,10 @@ public class TFCProvider extends WorldProvider
 	@Override
 	public boolean canSnowAt(int x, int y, int z)
 	{
+		int id = worldObj.getBlockId(x, y, z);
 		if(TFC_Climate.getHeightAdjustedTemp(x, y, z) <= 0
-				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z)) {
+				&& Block.blocksList[Block.snow.blockID].canPlaceBlockAt(worldObj, x, y, z) && worldObj.getBlockMaterial(x, y, z).isReplaceable()) 
+		{
 			return true;
 		}
 		return false;
