@@ -170,9 +170,7 @@ public class Recipes
 		//Chest
 		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 
-		//Red Stone		
-		GameRegistry.addRecipe(new ItemStack(Item.redstone, 8), new Object[] { 
-			"1", Character.valueOf('1'),new ItemStack(TFCItems.OreChunk, 1, 28)});
+
 		//Lapis Lazuli	
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 34)});
 
@@ -252,7 +250,6 @@ public class Recipes
 		}
 		GameRegistry.addShapelessRecipe(new ItemStack(TFCItems.Powder, 4, 0), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 32), new ItemStack(TFCItems.StoneHammer, 1, 32767)});
 
-		GameRegistry.addRecipe(new ItemStack(Item.redstone, 8, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(TFCItems.OreChunk,1,27)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.Ink, 16, 0), new Object[] { "2", Character.valueOf('2'), new ItemStack(Item.dyePowder,1,0)});
 		GameRegistry.addRecipe(new ItemStack(TFCItems.FireStarter, 1, 0), new Object[] { "2 "," 2", Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.Bellows, 1, 0), new Object[] { "###","???","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank,1,32767), Character.valueOf('?'), TFCItems.TerraLeather});
@@ -592,6 +589,7 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Item.stick,4));
 			RemoveRecipe(new ItemStack(Block.planks,4));
 			RemoveRecipe(new ItemStack(Item.minecartCrate, 1));
+			RemoveRecipe(new ItemStack(Item.dyePowder,3, 15));
 		}
 	}
 
