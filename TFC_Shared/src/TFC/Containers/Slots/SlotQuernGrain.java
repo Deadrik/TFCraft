@@ -2,6 +2,7 @@ package TFC.Containers.Slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import TFC.TFCItems;
 
@@ -19,7 +20,10 @@ public class SlotQuernGrain extends Slot {
 				|| itemstack.getItem() == TFCItems.RiceGrain
 				|| itemstack.getItem() == TFCItems.MaizeEar
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 16)//Kaolinite
-				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 20))//Graphite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 20)//Graphite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 27)//Cinnabar
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 28)//Cryolite
+				|| itemstack.getItem() == Item.bone)
 		{
 			return true;
 		}
