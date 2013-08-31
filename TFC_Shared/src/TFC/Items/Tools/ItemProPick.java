@@ -86,9 +86,9 @@ public class ItemProPick extends ItemTerra
         }
         
         // Check all blocks in the 25x25 area, centered on the targeted block.
-        for (int i = -12; i < 12; i++) {
-            for (int j = -12; j < 12; j++) {
-                for(int k = -12; k < 12; k++) {
+        for (int i = -12; i <= 12; i++) {
+            for (int j = -12; j <= 12; j++) {
+                for(int k = -12; k <= 12; k++) {
                     int blockX = x + i, 
                             blockY = y + j,
                             blockZ = z + k;
