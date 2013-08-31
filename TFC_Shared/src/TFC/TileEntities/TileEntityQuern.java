@@ -9,11 +9,13 @@ import java.util.Random;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import TFC.TFCItems;
+import TFC.Items.ItemDyeCustom;
 import TFC.TerraFirmaCraft;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Entities.Mobs.EntityCowTFC;
@@ -133,6 +135,42 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[1] = new ItemStack(TFCItems.Powder, 1, 2);
 								else if(storage[1].stackSize < 64)
 									storage[1].stackSize++;
+							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 27 &&
+									(storage[1] == null || storage[1].getItem() == Item.redstone))
+							{
+								if(storage[0].stackSize == 1)
+									storage[0] = null;
+								else
+									storage[0].stackSize--;
+								if(storage[1] == null)
+									storage[1] = new ItemStack(Item.redstone, 8);
+								else if(storage[1].stackSize < 56)
+									storage[1].stackSize += 8;
+							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 28 &&
+									(storage[1] == null || storage[1].getItem() == Item.redstone))
+							{
+								if(storage[0].stackSize == 1)
+									storage[0] = null;
+								else
+									storage[0].stackSize--;
+								if(storage[1] == null)
+									storage[1] = new ItemStack(Item.redstone, 8);
+								else if(storage[1].stackSize < 56)
+									storage[1].stackSize += 8;
+							}
+							else if(storage[0].getItem() == Item.bone && 
+									(storage[1] == null || storage[1].getItemDamage() == 15))
+							{
+								if(storage[0].stackSize == 1)
+									storage[0] = null;
+								else
+									storage[0].stackSize--;
+								if(storage[1] == null)
+									storage[1] = new ItemStack(Item.dyePowder, 3, 15);
+								else if(storage[1].stackSize < 61)
+									storage[1].stackSize += 3;
 							}
 						}
 						
