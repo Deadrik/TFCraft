@@ -51,18 +51,21 @@ public class ItemProPick extends ItemTerra
         // Negated the old condition and exiting the method here instead.
         if (blockID == TFCBlocks.ToolRack.blockID)
             return true;
-        
-        // Getting the meta data only when we actually need it.
-        int meta = world.getBlockMetadata(x, y, z);
-        
+
         // Damage the item on prospecting use.
         if (!world.isRemote) {
-            itemStack.damageItem(1, player);
-            if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
-                player.destroyCurrentEquippedItem();
+            // Don't apply damage in creative mode.
+            if (!player.capabilities.isCreativeMode) {
+                itemStack.damageItem(1, player);
+                if (itemStack.getItemDamage() >= itemStack.getMaxDamage())
+                    player.destroyCurrentEquippedItem();
+            }
             
             return true;
         }
+
+        // Getting the meta data only when we actually need it.
+        int meta = world.getBlockMetadata(x, y, z);
         
         // If an ore block is targeted directly, it'll tell you what it is.
         if (blockID == TFCBlocks.Ore.blockID ||
@@ -98,6 +101,10 @@ public class ItemProPick extends ItemTerra
                         continue;
                     
                     meta = world.getBlockMetadata(blockX, blockY, blockZ);
+                    
+                    if (blockID == TFCBlocks.Ore2.blockID && meta == 6)
+                        continue;
+                        
                     ItemStack ore = new ItemStack(blockID, 1, meta);
                     String oreName = ore.getDisplayName();
                     
