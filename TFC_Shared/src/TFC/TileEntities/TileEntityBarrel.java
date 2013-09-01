@@ -434,7 +434,13 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack.setItemDamage(2);
 					updateGui();
 				}
-
+				/*Fill water bottle*/
+				else if(Type == 1 && itemstack.getItem() == Item.glassBottle && liquidLevel >9*itemstack.stackSize)
+				{
+					liquidLevel = Math.max(0, liquidLevel-9*itemstack.stackSize);
+					itemstack.itemID = Item.potion.itemID;
+					updateGui();
+				}
 			}
 		}
 	}
