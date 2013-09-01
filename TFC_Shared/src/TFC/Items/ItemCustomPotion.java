@@ -61,7 +61,7 @@ public class ItemCustomPotion extends ItemPotion
 			boolean broken = false;
 			if(world.rand.nextInt(50) == 0)
 			{
-				player.playSound(TFC_Sounds.CERAMICBREAK, 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
+				player.playSound("random.glass", 0.7f, player.worldObj.rand.nextFloat() * 0.2F + 0.8F);
 				broken = true;
 			}
 
@@ -69,8 +69,6 @@ public class ItemCustomPotion extends ItemPotion
 			{
 				return new ItemStack(Item.glassBottle);
 			}
-
-			player.inventory.addItemStackToInventory(new ItemStack(Item.glassBottle));
 		}
 
 		return is;
