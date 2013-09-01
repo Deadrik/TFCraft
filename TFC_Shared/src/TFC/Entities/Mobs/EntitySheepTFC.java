@@ -167,7 +167,11 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				for (int x = 0; x<i;x++)
 				{
 					EntitySheepTFC baby = new EntitySheepTFC(worldObj, this, mateSizeMod);
+					baby.setLocationAndAngles (posX+(rand.nextFloat()-0.5F)*2F,posY,posZ+(rand.nextFloat()-0.5F)*2F, 0.0F, 0.0F);
+					baby.rotationYawHead = baby.rotationYaw;
+					baby.renderYawOffset = baby.rotationYaw;
 					worldObj.spawnEntityInWorld(baby);
+					baby.setAge((int)TFC_Time.getTotalDays());
 				}
 				pregnant = false;
 			}
