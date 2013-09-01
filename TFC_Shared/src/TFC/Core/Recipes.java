@@ -170,10 +170,6 @@ public class Recipes
 		//Chest
 		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 
-
-		//Lapis Lazuli	
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder, 4,4), new Object[] {new ItemStack(TFCItems.OreChunk, 1, 34)});
-
 		// Stone Bricks
 		for(int i = 0; i < Chisels.length; i++)
 		{			
@@ -590,6 +586,8 @@ public class Recipes
 			RemoveRecipe(new ItemStack(Block.planks,4));
 			RemoveRecipe(new ItemStack(Item.minecartCrate, 1));
 			RemoveRecipe(new ItemStack(Item.dyePowder,3, 15));
+			RemoveRecipe(new ItemStack(Item.dyePowder,2, 1));
+			RemoveRecipe(new ItemStack(Item.dyePowder,2, 11));
 		}
 	}
 

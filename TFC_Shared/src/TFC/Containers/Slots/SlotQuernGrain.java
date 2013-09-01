@@ -19,11 +19,14 @@ public class SlotQuernGrain extends Slot {
 				|| itemstack.getItem() == TFCItems.OatGrain
 				|| itemstack.getItem() == TFCItems.RiceGrain
 				|| itemstack.getItem() == TFCItems.MaizeEar
+				|| itemstack.getItem() == Item.bone
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 16)//Kaolinite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 20)//Graphite
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 27)//Cinnabar
 				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 28)//Cryolite
-				|| itemstack.getItem() == Item.bone)
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 34)//Lapis Lazuli
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 9)//Malachite
+				|| (itemstack.getItem() == TFCItems.OreChunk && itemstack.getItemDamage() == 3))//Hematite
 		{
 			return true;
 		}
