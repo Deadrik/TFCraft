@@ -671,6 +671,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
         fuelTimeLeft = nbttagcompound.getFloat("fuelTimeLeft");
         fuelBurnTemp = nbttagcompound.getFloat("fuelBurnTemp");
         charcoalCounter = nbttagcompound.getInteger("charcoalCounter");
+        externalWoodCount = nbttagcompound.getInteger("externalWoodCount");
         airFromBellowsTime = nbttagcompound.getFloat("airFromBellowsTime");
         airFromBellows = nbttagcompound.getFloat("airFromBellows");
 
@@ -883,6 +884,7 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
         nbttagcompound.setFloat("fuelTimeLeft", fuelTimeLeft);
         nbttagcompound.setFloat("fuelBurnTemp", fuelBurnTemp);
         nbttagcompound.setInteger("charcoalCounter", charcoalCounter);
+        nbttagcompound.setInteger("externalWoodCount", externalWoodCount);
         nbttagcompound.setFloat("airFromBellowsTime", airFromBellowsTime);
         nbttagcompound.setFloat("airFromBellows", airFromBellows);
 
