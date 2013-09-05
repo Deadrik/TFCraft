@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
@@ -144,10 +145,11 @@ public class BlockBarrel extends BlockTerraContainer
 
 	public class BarrelEntity extends Entity{
 		public int fuse;
+		World world;
 		public BarrelEntity(World par1World)
 		{
 			super(par1World);
-			this.fuse = 15;
+			this.fuse = 60;
 			this.preventEntitySpawning = true;
 			this.setSize(0.98F, 0.98F);
 			this.yOffset = this.height / 2.0F;
@@ -157,6 +159,7 @@ public class BlockBarrel extends BlockTerraContainer
 		{
 			this(par1World);
 			this.setPosition(par2, par4, par6);
+			world = par1World;
 			float f = (float)(Math.random() * Math.PI * 2.0D);
 			this.motionX = -((float)Math.sin(f)) * 0.02F;
 			this.motionY = 0.20000000298023224D;
@@ -169,6 +172,7 @@ public class BlockBarrel extends BlockTerraContainer
 		@Override
 		public void onUpdate(){
 			fuse--;
+			world.playSoundAtEntity(this, "random.fuse", 1.0F, 1.0F);
 			if(fuse == 0){
 				explode();
 			}
@@ -282,8 +286,17 @@ public class BlockBarrel extends BlockTerraContainer
 		}
 		else
 		{
+			
 			if(world.getBlockTileEntity(x, y, z) != null){
 				TileEntityBarrel TeBarrel = (TileEntityBarrel)(world.getBlockTileEntity(x, y, z));
+				if(TeBarrel.liquidLevel == 256 && TeBarrel.Type == 4 && TeBarrel.getSealed()){
+					List<Entity> list = world.getEntitiesWithinAABB(BarrelEntity.class, AxisAlignedBB.getBoundingBox(x,y,z,x+1,y+1,z+1));
+					for(Entity entity : list){
+						entity.setDead();
+					}
+					TeBarrel.setUnsealed("killing fuse");
+					return true;
+				}
 				if (TeBarrel.getSealed()||entityplayer.isSneaking()){
 					return false;
 				}

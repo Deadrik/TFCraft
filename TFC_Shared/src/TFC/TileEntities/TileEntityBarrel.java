@@ -195,6 +195,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	public void setSealed(){
 		sealed = true;
 	}
+	
+	public void setUnsealed(String reason){
+		if(reason.equals("killing fuse")){
+		sealed = false;
+		}
+	}
 
 	public String getType()
 	{
