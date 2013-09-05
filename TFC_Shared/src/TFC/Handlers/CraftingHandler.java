@@ -8,6 +8,7 @@ import TFC.TFCBlocks;
 import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.Core.Recipes;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Core.TFC_Sounds;
 import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
@@ -137,6 +138,36 @@ public class CraftingHandler implements ICraftingHandler
 				{
 					entityplayer.entityDropItem(new ItemStack(TFCItems.CeramicMold, 1, 1), 1);
 				}
+				float temperature = 0;
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{       
+					if(iinventory.getStackInSlot(i) == null) 
+					{
+						continue;
+					}
+					if(iinventory.getStackInSlot(i).getItem().getUnlocalizedName().contains("Unshaped") )
+					{
+						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
+					}
+				}
+				TFC_ItemHeat.SetTemperature(itemstack, temperature);				
+			}
+			else if(itemstack.getItem().getUnlocalizedName().contains("Unshaped"))
+			{
+				float temperature = 0;
+				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
+				{       
+					if(iinventory.getStackInSlot(i) == null) 
+					{
+						continue;
+					}
+					if(iinventory.getStackInSlot(i).getItem().getUnlocalizedName().contains("Unshaped") )
+					{
+						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
+					}
+				}
+				TFC_ItemHeat.SetTemperature(itemstack, temperature);
+				
 			}
 
 			for(int i = 0; i < iinventory.getSizeInventory(); i++) 

@@ -534,6 +534,13 @@ public class Recipes
 		registerKilnRecipes();
 		registerToolMolds();
 	}
+	
+	private static ItemStack checkMelted(ItemStack is){
+		if(TFC_ItemHeat.GetTemperature(is)>TFC_ItemHeat.getMeltingPoint(is)){
+			return null;
+		}
+		return is;
+	}
 
 	private static void VanillaRecipes()
 	{

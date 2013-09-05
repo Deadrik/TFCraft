@@ -3,6 +3,7 @@ package TFC.Items;
 import java.awt.image.BufferedImage;
 
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,6 +17,7 @@ import TFC.API.Metal;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
+import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Metal.MetalRegistry;
 import TFC.TileEntities.TileEntityIngotPile;
 import cpw.mods.fml.relauncher.Side;
@@ -83,7 +85,6 @@ public class ItemIngot extends ItemTerra implements ISmeltable
 	{
 		list.add(new ItemStack(this));
 	}
-
 
 	private boolean CreatePile(ItemStack itemstack, EntityPlayer entityplayer, World world, int x, int y,
 			int z, int side, int l) 
