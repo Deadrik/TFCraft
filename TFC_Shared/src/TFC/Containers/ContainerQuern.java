@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
@@ -93,7 +94,16 @@ public class ContainerQuern extends ContainerTFC {
 					|| clickedStack.getItem() == TFCItems.RyeGrain
 					|| clickedStack.getItem() == TFCItems.OatGrain
 					|| clickedStack.getItem() == TFCItems.RiceGrain
-					|| clickedStack.getItem() == TFCItems.MaizeEar)
+					|| clickedStack.getItem() == TFCItems.MaizeEar		
+					|| clickedStack.getItem() == Item.bone
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 16)//Kaolinite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 20)//Graphite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 27)//Cinnabar
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 28)//Cryolite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 34)//Lapis Lazuli
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 9)//Malachite
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 3))//Hematite
+
 			{
 				if (!this.mergeItemStack(clickedStack, 0, 1, false)) {
 					return null;
