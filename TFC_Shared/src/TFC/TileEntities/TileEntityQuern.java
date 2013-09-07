@@ -179,6 +179,7 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[1].stackSize += 8;
 								}
 							}
+							/*Dyes*/
 							else if(storage[0].getItem() == Item.bone && 
 									(storage[1] == null || (storage[1].getItem().itemID == Item.dyePowder.itemID && 
 									storage[1].getItemDamage() == 15)))
@@ -189,9 +190,51 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[0].stackSize--;
 								}
 								if(storage[1] == null) {
-									storage[1] = new ItemStack(Item.dyePowder, 3, 15);
-								} else if(storage[1].stackSize < 61) {
-									storage[1].stackSize += 3;
+									storage[1] = new ItemStack(Item.dyePowder, 2, 15);//White
+								} else if(storage[1].stackSize < 64) {
+									storage[1].stackSize += 2;
+								}
+							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 34 && //Lapis
+									(storage[1] == null || (storage[1].getItem().itemID == Item.dyePowder.itemID && storage[1].getItemDamage() == 4)))
+							{
+								if(storage[0].stackSize == 1) {
+									storage[0] = null;
+								} else {
+									storage[0].stackSize--;
+								}
+								if(storage[1] == null) {
+									storage[1] = new ItemStack(Item.dyePowder,4,4); //Blue
+								} else if(storage[1].stackSize < 64) {
+									storage[1].stackSize += 4;
+								}
+							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 9 && //Malachite
+									(storage[1] == null || (storage[1].getItem().itemID == Item.dyePowder.itemID && storage[1].getItemDamage() == 2)))
+							{
+								if(storage[0].stackSize == 1) {
+									storage[0] = null;
+								} else {
+									storage[0].stackSize--;
+								}
+								if(storage[1] == null) {
+									storage[1] = new ItemStack(Item.dyePowder,1,2); //Green
+								} else if(storage[1].stackSize < 64) {
+									storage[1].stackSize ++;
+								}
+							}
+							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 3 && //Hematite
+									(storage[1] == null || (storage[1].getItem().itemID == Item.dyePowder.itemID && storage[1].getItemDamage() == 1)))
+							{
+								if(storage[0].stackSize == 1) {
+									storage[0] = null;
+								} else {
+									storage[0].stackSize--;
+								}
+								if(storage[1] == null) {
+									storage[1] = new ItemStack(Item.dyePowder,1,1); //Red
+								} else if(storage[1].stackSize < 64) {
+									storage[1].stackSize ++;
 								}
 							}
 						}
