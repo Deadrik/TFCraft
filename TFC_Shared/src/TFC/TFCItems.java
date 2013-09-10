@@ -1614,7 +1614,7 @@ public class TFCItems
 		SeedsRice = new ItemCustomSeeds(TFCItemID.SeedsRice,11).setUnlocalizedName("Seeds Rice");
 		SeedsMaize = new ItemCustomSeeds(TFCItemID.SeedsMaize,2).setUnlocalizedName("Seeds Maize");
 		SeedsPotato = new ItemCustomSeeds(TFCItemID.SeedsPotato,13).setUnlocalizedName("Seeds Potato");
-		SeedsOnion = new ItemCustomSeeds(TFCItemID.SeedsOnion,15).setUnlocalizedName("Seeds Onion");
+		SeedsOnion = new ItemCustomSeeds(TFCItemID.SeedsOnion,15).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Seeds Rutabaga":"Seeds Onion");
 		SeedsCabbage = new ItemCustomSeeds(TFCItemID.SeedsCabbage,16).setUnlocalizedName("Seeds Cabbage");
 		SeedsGarlic = new ItemCustomSeeds(TFCItemID.SeedsGarlic,17).setUnlocalizedName("Seeds Garlic");
 		SeedsCarrot = new ItemCustomSeeds(TFCItemID.SeedsCarrot,18).setUnlocalizedName("Seeds Carrot");
