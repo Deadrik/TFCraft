@@ -14,6 +14,7 @@ import TFC.Core.Player.PlayerInfo;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Food.ItemTerraFood;
 import TFC.Items.ItemIngot;
+import TFC.Items.ItemMeltedMetal;
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class CraftingHandler implements ICraftingHandler
@@ -148,14 +149,14 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						continue;
 					}
-					if(iinventory.getStackInSlot(i).getItem().getUnlocalizedName().contains("Unshaped") )
+					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal)
 					{
 						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
 					}
 				}
 				TFC_ItemHeat.SetTemperature(itemstack, temperature);				
 			}
-			else if(itemstack.getItem().getUnlocalizedName().contains("Unshaped"))
+			else if(itemstack.getItem() instanceof ItemMeltedMetal)
 			{
 				float temperature = 0;
 				for(int i = 0; i < iinventory.getSizeInventory(); i++) 
@@ -164,7 +165,7 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						continue;
 					}
-					if(iinventory.getStackInSlot(i).getItem().getUnlocalizedName().contains("Unshaped") )
+					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal )
 					{
 						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
 					}
