@@ -130,6 +130,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
+		timeUntilNextEgg=10000;
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 

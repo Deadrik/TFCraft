@@ -12,6 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.EnumHelper;
 import TFC.API.Armor;
 import TFC.API.Metal;
+import TFC.API.TFCOptions;
 import TFC.API.TFCTabs;
 import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCItemID;
@@ -1552,7 +1553,7 @@ public class TFCItems
 		MaizeEar = new ItemTerraFood(TFCItemID.MaizeEar, 10, 0.4F, false, 22).setUnlocalizedName("Maize Ear");
 		Tomato = new ItemTerraFood(TFCItemID.Tomato, 15, 0.4F, false, 24).setUnlocalizedName("Tomato");
 		Potato = new ItemTerraFood(TFCItemID.Potato, 22, 0.4F, false, 25).setUnlocalizedName("Potato");
-		Onion = new ItemTerraFood(TFCItemID.Onion, 10, 0.4F, false, 27).setUnlocalizedName("Onion");
+		Onion = new ItemTerraFood(TFCItemID.Onion, 10, 0.4F, false, 27).setUnlocalizedName(TFCOptions.iDontLikeOnions?"Rutabaga":"Onion");
 		Cabbage = new ItemTerraFood(TFCItemID.Cabbage, 20, 0.4F, false, 28).setUnlocalizedName("Cabbage");
 		Garlic = new ItemTerraFood(TFCItemID.Garlic, 10, 0.4F, false, 29).setUnlocalizedName("Garlic");
 		Carrot = new ItemTerraFood(TFCItemID.Carrot, 5, 0.4F, false, 30).setUnlocalizedName("Carrot");
