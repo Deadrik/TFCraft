@@ -146,6 +146,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				}
 				Type = 11;
 			}
+			
 		}
 		else if(itemstack != null && Type == 2)
 		{
@@ -182,6 +183,23 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 				}
 			}
 		}
+		else if(itemstack == null && Type >= 5 && Type <= 11)
+		{
+			Type = 12;
+		}
+		else if(itemstack == null && Type == 14)
+		{
+			itemstack2 = new ItemStack(TFCItems.Cheese,0,0);
+			while(liquidLevel >= 16)
+			{
+				liquidLevel-=16;
+				itemstack2.stackSize++;
+			}
+			if(itemstack2.stackSize > 0)
+			{
+				output = itemstack2;
+			}
+		}
 		if (liquidLevel == 0)
 		{
 			Type = 0;
@@ -190,6 +208,7 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		{
 			itemstack = null;
 		}
+		
 	}
 
 	public void setSealed(){
@@ -230,6 +249,12 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 			return StringUtil.localize("gui.Barrel.Sake");
 		case 11:
 			return StringUtil.localize("gui.Barrel.Rum");
+		case 12:
+			return StringUtil.localize("gui.Barrel.Vinegar");
+		case 13:
+			return StringUtil.localize("gui.Barrel.Milk");
+		case 14:
+			return StringUtil.localize("gui.Barrel.CurdledMilk");
 		default:
 			return "";
 		}
@@ -447,6 +472,24 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 					itemstack.itemID = Item.potion.itemID;
 					updateGui();
 				}
+				else if((Type == 0||Type == 13 || Type == 14) && itemstack.getItem() == TFCItems.WoodenBucketMilk && liquidLevel < 256){
+					liquidLevel = Math.min(liquidLevel + 32, 256);
+					Type = Math.max(13, Type);
+					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+					updateGui();
+				}
+				else if(Type == 12 && itemstack.getItem() == TFCItems.WoodenBucketEmpty && liquidLevel >=32){
+					liquidLevel = Math.max(liquidLevel - 32, 0);
+					Type = liquidLevel>0?Type:0;
+					itemstack.itemID = TFCItems.Vinegar.itemID;
+					updateGui();
+				}
+				else if(Type == 13 && itemstack.getItem() == TFCItems.Vinegar && liquidLevel < 256){
+					liquidLevel = Math.min(liquidLevel + 32, 256);
+					Type = 14;
+					itemstack.itemID = TFCItems.WoodenBucketEmpty.itemID;
+					updateGui();
+				}
 			}
 		}
 	}
@@ -576,7 +619,10 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	private boolean isItemValid() {
-		if(itemstack == null){
+		if(itemstack == null && ((Type >=5&& Type <=11)||Type == 14)){
+			return true;
+		}
+		else if(itemstack == null){
 			return false;
 		}
 		else{
@@ -605,7 +651,21 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 	}
 
 	public void actionEmpty() {
-		if(liquidLevel >0){
+		if(itemstack!=null && itemstack.getItem()==TFCItems.WoodenBucketEmpty && liquidLevel >= 32){
+			if(Type == 1){
+				itemstack.itemID = TFCItems.WoodenBucketWater.itemID;
+			}
+			else if(Type == 2){
+				itemstack.itemID = TFCItems.Limewater.itemID;
+			}
+			else if(Type == 12){
+				itemstack.itemID = TFCItems.Vinegar.itemID;
+			}
+			else if(Type == 13){
+				itemstack.itemID = TFCItems.WoodenBucketMilk.itemID;
+			}
+		}
+		else if(liquidLevel >0){
 			liquidLevel =0;
 			Type = 0;
 			updateGui();

@@ -55,7 +55,10 @@ public class CraftingHandler implements ICraftingHandler
 			{
 				HandleItem(entityplayer, iinventory, Recipes.Knives);
 				if (itemstack.itemID == TFCItems.Wool.itemID && !entityplayer.worldObj.isRemote){
-					entityplayer.dropItem(TFCItems.Hide.itemID, 1);
+					if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(TFCItems.Hide, 1, 0))) 
+					{
+						entityplayer.entityDropItem(new ItemStack(TFCItems.Hide, 1, 0), 1);
+					}
 				}
 				else if(itemstack.itemID == TFCItems.TerraLeather.itemID){
 					boolean openGui = false;

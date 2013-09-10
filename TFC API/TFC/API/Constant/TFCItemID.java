@@ -734,6 +734,10 @@ public class TFCItemID {
 	public static int PlatinumSheet2x			= 19111;
 	public static int SilverSheet2x				= 19112;
 	public static int SterlingSilverSheet2x		= 19113;
+	
+	//additional foods + food stuffs
+	public static int Cheese 					= 19114;
+	public static int Vinegar					= 19115;
 
 
 	static Configuration config;

@@ -20,6 +20,7 @@ import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
 import TFC.Entities.AI.AIEatGrass;
 import TFC.Entities.AI.EntityAIMateTFC;
+import TFC.Items.Tools.ItemCustomKnife;
 
 public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 {
@@ -263,14 +264,14 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 				par1EntityPlayer.addChatMessage("Pregnant");
 			}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
-		}
-		if(getGender() == GenderEnum.FEMALE && isAdult() && hasMilkTime < TFC_Time.getTotalTicks()){
-			ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-			if (var2 != null && var2.itemID == TFCItems.WoodenBucketEmpty.itemID) {
-				par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(TFCItems.WoodenBucketMilk));
-				hasMilkTime = TFC_Time.getTotalTicks() + (3*TFC_Time.dayLength); //Can be milked ones every 3 days
-				return true;
+		
+		if(par1EntityPlayer.getHeldItem()!=null&&par1EntityPlayer.getHeldItem().getItem() instanceof ItemCustomKnife && !getSheared() && getPercentGrown(this) > 0.95F){
+			setSheared(true);
+			this.entityDropItem(new ItemStack(TFCItems.Wool,1), 0.0F);
+			if(!par1EntityPlayer.capabilities.isCreativeMode){
+				par1EntityPlayer.getHeldItem().damageItem(1, par1EntityPlayer);
 			}
+		}
 		}
 		return super.interact(par1EntityPlayer);
 	}
@@ -323,7 +324,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		setSheared(true);
 
-		ret.add(new ItemStack(TFCItems.Wool.itemID, 1, getFleeceColor()));
+		ret.add(new ItemStack(TFCItems.Wool.itemID, 2, getFleeceColor()));
 
 		this.worldObj.playSoundAtEntity(this, "mob.sheep.shear", 1.0F, 1.0F);
 		return ret;

@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import TFC.Reference;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 import TFC.Entities.Mobs.EntityChickenTFC;
@@ -18,7 +19,7 @@ import TFC.Entities.Mobs.EntitySheepTFC;
 public class RenderSheepTFC extends RenderSheep
 {
 	private static final ResourceLocation SheepFurTexture = new ResourceLocation("textures/entity/sheep/sheep_fur.png");
-	private static final ResourceLocation SheepTexture = new ResourceLocation("textures/entity/sheep/sheep.png");
+	private static final ResourceLocation SheepTexture = new ResourceLocation(Reference.ModID, "mob/sheep.png");
 
 	public RenderSheepTFC(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{

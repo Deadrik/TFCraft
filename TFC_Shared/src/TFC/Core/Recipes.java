@@ -166,7 +166,12 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(Item.itemFrame,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.TerraLeather,1)});
 		GameRegistry.addRecipe(new ItemStack(Item.painting,1),new Object[]{"###","#$#","###",Character.valueOf('#'),new ItemStack(Item.stick,1),Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
-
+		
+		GameRegistry.addRecipe(new ItemStack(Block.field_111031_cC,2,0),new Object[]{"$$",Character.valueOf('$'),new ItemStack(TFCItems.WoolCloth,1)});
+		for(int i = 0; i < 16;i++){
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.field_111031_cC,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.field_111031_cC,1,32767)});
+		}
+		
 		//Chest
 		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 

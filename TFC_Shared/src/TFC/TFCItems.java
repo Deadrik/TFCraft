@@ -675,6 +675,7 @@ public class TFCItems
 	public static Item Plum;
 	public static Item Egg;
 	public static Item EggCooked;
+	public static Item Cheese;
 
 	public static Item WheatGrain;
 	public static Item BarleyGrain;
@@ -796,6 +797,7 @@ public class TFCItems
 	public static Item StoneBrick;
 	public static Item Mortar;
 	public static Item Limewater;
+	public static Item Vinegar;
 	public static Item Hide;
 	public static Item SoakedHide;
 	public static Item ScrapedHide;
@@ -1444,6 +1446,7 @@ public class TFCItems
 		StoneBrick = (new ItemStoneBrick(TFCItemID.ItemStoneBrick2).setFolder("tools/").setUnlocalizedName("ItemStoneBrick"));
 		Mortar = new ItemTerra(TFCItemID.Mortar).setFolder("tools/").setUnlocalizedName("Mortar").setCreativeTab(TFCTabs.TFCMaterials);
 		Limewater = new ItemCustomBucket(TFCItemID.Limewater,2).setFolder("tools/").setUnlocalizedName("Lime Water").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
+		Vinegar = new ItemCustomBucket(TFCItemID.Vinegar,2).setFolder("food/").setUnlocalizedName("Vinegar").setContainerItem(WoodenBucketEmpty).setCreativeTab(TFCTabs.TFCMaterials);
 		Hide = new ItemTerra(TFCItemID.Hide).setFolder("tools/").setUnlocalizedName("Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		SoakedHide = new ItemTerra(TFCItemID.SoakedHide).setFolder("tools/").setUnlocalizedName("Soaked Hide").setCreativeTab(TFCTabs.TFCMaterials);
 		ScrapedHide = new ItemTerra(TFCItemID.ScrapedHide).setFolder("tools/").setUnlocalizedName("Scraped Hide").setCreativeTab(TFCTabs.TFCMaterials);
@@ -1561,6 +1564,7 @@ public class TFCItems
 		YellowBellPepper = new ItemTerraFood(TFCItemID.YellowBellPepper, 10, 0.4F, false, 35).setUnlocalizedName("Yellow Bell Pepper");
 		RedBellPepper = new ItemTerraFood(TFCItemID.RedBellPepper, 10, 0.4F, false, 36).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemTerraFood(TFCItemID.Squash, 12, 0.4F, false, 37).setUnlocalizedName("Squash");
+		Cheese = new ItemTerraFood(TFCItemID.Cheese, 20, 0.6F, false, 38).setUnlocalizedName("Cheese");
 
 		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
 		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");
