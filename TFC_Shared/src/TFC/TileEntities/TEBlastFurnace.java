@@ -177,7 +177,8 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 		HeatRegistry manager = HeatRegistry.getInstance();
 		Random R = new Random();
 		TECrucible te = (TECrucible) worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
-		if(fireItemStacks[i] != null && te != null)
+		//Only allow the ore to smelt if there is a valid Tuyere associated with the furnace
+		if(fireItemStacks[i] != null && te != null && input[1] != null)
 		{
 			HeatIndex index = manager.findMatchingIndex(fireItemStacks[i]);
 			if(index != null && inputItemTemps[i] >= index.meltTemp)
@@ -200,6 +201,7 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 				if(m != null) {
 					te.addMetal(m, (short)(100-output.getItemDamage()));
 				}
+				input[1].setItemDamage(input[1].getItemDamage()+1);
 				te.temperature = (int)this.fireTemperature;
 			}
 		}
@@ -770,15 +772,9 @@ public class TEBlastFurnace extends TileEntityFireEntity implements IInventory
 			{
 				//Here we make sure that the forge is valid
 				isValid = CheckValidity();
-				//Only allow the ore to smelt if there is a valid Tuyere associated with the furnace
-				if(input[1] != null)
-				{
-					if(RemoveOre()) {
-						input[1].setItemDamage(input[1].getItemDamage()+1);
-					}
-				}
 			}
 			slowCounter++;
+
 		}
 	}
 
