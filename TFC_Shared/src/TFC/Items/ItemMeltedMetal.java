@@ -78,17 +78,17 @@ public class ItemMeltedMetal extends ItemTerra
 		if (is.hasTagCompound())
 		{
 			NBTTagCompound stackTagCompound = is.getTagCompound();
-
+			System.out.println(stackTagCompound.getFloat("temperature"));
 			if(stackTagCompound.hasKey("temperature") && stackTagCompound.getFloat("temperature") >= TFC_ItemHeat.getMeltingPoint(is))
 			{
 				if(is.getItemDamage()==0){
 				is.setItemDamage(1);
-				System.out.println(is.getItemDamage());
+				//System.out.println(is.getItemDamage());
 				}
 			}
 			else if(is.getItemDamage()==1){
 				is.setItemDamage(0);
-				System.out.println(is.getItemDamage());
+				//System.out.println(is.getItemDamage());
 			}
 
 		}
