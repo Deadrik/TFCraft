@@ -190,9 +190,9 @@ public class TileEntityBarrel extends NetworkTileEntity implements IInventory
 		else if(itemstack == null && Type == 14)
 		{
 			itemstack2 = new ItemStack(TFCItems.Cheese,0,0);
-			while(liquidLevel >= 16)
+			while(liquidLevel >= 32)
 			{
-				liquidLevel-=16;
+				liquidLevel-=32;
 				itemstack2.stackSize++;
 			}
 			if(itemstack2.stackSize > 0)
