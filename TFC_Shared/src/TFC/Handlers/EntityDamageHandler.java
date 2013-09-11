@@ -172,16 +172,15 @@ public class EntityDamageHandler
 	private int getRandomSlot(Random rand)
 	{
 		int chance = rand.nextInt(100);
-
 		if(chance < 10) {
-			return 0;//Helm
+			return 3;//Helm
 		} else if(chance < 20) {
-			return 3;//Feet
+			return 0;//Feet
 		} else if(chance < 80) {
-			return 1;//Chest
+			return 2;//Chest
 		}
 		else {
-			return 2;//Legs
+			return 1;//Legs
 		}
 	}
 

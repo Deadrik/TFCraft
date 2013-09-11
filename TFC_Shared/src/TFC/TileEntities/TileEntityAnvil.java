@@ -148,6 +148,7 @@ public class TileEntityAnvil extends NetworkTileEntity implements IInventory
 								anvilItemStacks[INPUT_SLOT].setItemDamage((int)(pct));
 							}
 						}
+						
 					}
 					workRecipe = null;
 					craftingValue = 0;

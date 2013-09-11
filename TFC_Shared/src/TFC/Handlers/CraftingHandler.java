@@ -24,7 +24,6 @@ public class CraftingHandler implements ICraftingHandler
 	public void onCrafting(EntityPlayer entityplayer, ItemStack itemstack, IInventory iinventory) 
 	{
 		int index = 0;
-
 		if(iinventory != null)
 		{
 			if(itemstack.itemID == TFCItems.StoneBrick.itemID)
