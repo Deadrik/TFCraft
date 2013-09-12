@@ -218,9 +218,9 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[0].stackSize--;
 								}
 								if(storage[1] == null) {
-									storage[1] = new ItemStack(Item.dyePowder,1,2); //Green
+									storage[1] = new ItemStack(Item.dyePowder,4,2); //Green
 								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize ++;
+									storage[1].stackSize += 4;
 								}
 							}
 							else if(storage[0].getItem() == TFCItems.OreChunk && storage[0].getItemDamage() == 3 && //Hematite
@@ -232,9 +232,9 @@ public class TileEntityQuern extends NetworkTileEntity implements IInventory {
 									storage[0].stackSize--;
 								}
 								if(storage[1] == null) {
-									storage[1] = new ItemStack(Item.dyePowder,1,1); //Red
+									storage[1] = new ItemStack(Item.dyePowder,4,1); //Red
 								} else if(storage[1].stackSize < 64) {
-									storage[1].stackSize ++;
+									storage[1].stackSize += 4;
 								}
 							}
 						}
