@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.Core.Player.PlayerInventory;
+import TFC.Items.ItemMeltedMetal;
 import TFC.TileEntities.TECrucible;
 
 public class ContainerCrucible extends ContainerTFC
@@ -54,8 +55,9 @@ public class ContainerCrucible extends ContainerTFC
 					return null;
 				}
 			}
-			else if (clickedIndex > 1 && clickedIndex < inventorySlots.size() && clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && 
-					clickedStack.getItemDamage() == 1) {
+			else if (clickedIndex > 1 && clickedIndex < inventorySlots.size() && 
+					((clickedStack.getItem().itemID == TFCItems.CeramicMold.itemID && clickedStack.getItemDamage() == 1) || 
+					clickedStack.getItem() instanceof ItemMeltedMetal)) {
 				if (!this.mergeItemStack(clickedStack, 1, 2, true)) {
 					return null;
 				}
