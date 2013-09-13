@@ -26,70 +26,70 @@ public class WorldGenOreSurface implements IWorldGenerator
 		chunkX *= 16;
 		chunkZ *= 16;
 		int height = Min-Max;
-        //============Copper
-        createOre(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1},//IgEx veins
-                /*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Native Copper");
+		//============Copper
+		createOre(TFCBlocks.Ore.blockID, 0,new int[]{TFCBlocks.StoneIgEx.blockID,-1},//IgEx veins
+				/*rarity*/35,/*veinSize*/20,/*veinAmt*/15,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Native Copper");
 
-        //============Cassiterite
-        createOre(TFCBlocks.Ore.blockID, 5,new int[]{TFCBlocks.StoneIgIn.blockID,0},//Granite Veins
-                /*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, Min, Max, "Cassiterite");
+		//============Cassiterite
+		createOre(TFCBlocks.Ore.blockID, 5,new int[]{TFCBlocks.StoneIgIn.blockID,0},//Granite Veins
+				/*rarity*/20,/*veinSize*/15,/*veinAmt*/20,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/50,         world, rand, chunkX, chunkZ, Min, Max, "Cassiterite");
 
-        //============Bismuthinite
-        createOre(TFCBlocks.Ore.blockID, 7,new int[]{TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//Granite Veins
-                /*rarity*/25,/*veinSize*/10,/*veinAmt*/25,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Bismuthinite");
+		//============Bismuthinite
+		createOre(TFCBlocks.Ore.blockID, 7,new int[]{TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//Granite Veins
+				/*rarity*/25,/*veinSize*/10,/*veinAmt*/25,/*height*/height,/*diameter*/40,/*vDensity*/30,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Bismuthinite");
 
-        //============Sphalerite
-        createOre(TFCBlocks.Ore.blockID, 12,new int[]{TFCBlocks.StoneMM.blockID,-1},//mm, veins
-                /*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Sphalerite");
-        
-      //============Tetrahedrite
-      		createOreVein(TFCBlocks.Ore.blockID, 13,new int[]{TFCBlocks.StoneIgEx.blockID,-1,TFCBlocks.StoneMM.blockID,-1,
-      				TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//everything, veins
-      				/*rarity*/50,/*veinSize*/85,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, Min, Max, "Tetrahedrite");
-		
+		//============Sphalerite
+		createOre(TFCBlocks.Ore.blockID, 12,new int[]{TFCBlocks.StoneMM.blockID,-1},//mm, veins
+				/*rarity*/20,/*veinSize*/10,/*veinAmt*/18,/*height*/height,/*diameter*/40,/*vDensity*/60,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Sphalerite");
+
+		//============Tetrahedrite
+		createOreVein(TFCBlocks.Ore.blockID, 13,new int[]{TFCBlocks.StoneIgEx.blockID,-1,TFCBlocks.StoneMM.blockID,-1,
+				TFCBlocks.StoneIgIn.blockID,-1,TFCBlocks.StoneSed.blockID,-1},//everything, veins
+				/*rarity*/50,/*veinSize*/85,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/30,         world, rand, chunkX, chunkZ, Min, Max, "Tetrahedrite");
+
 	}
-	
+
 	private static void createOre(int i, int j, int[] Layers, int rarity, int veinSize, 
-            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
-    {
+			int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
+	{
 		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
 		{
-        for(int n = 0; n < Layers.length/2;)
-        {
-            DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
-            DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
-            DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
-            if((rockLayer1.data1 == Layers[n] && (rockLayer1.data2 == Layers[n+1] || Layers[n+1] == -1)) || 
-                    (rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
-            {
-                new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generate(
-                        world, rand, chunkX, chunkZ, min, max, name);
-            }
-            n+=2;
-        }
+			for(int n = 0; n < Layers.length/2;)
+			{
+				DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
+				DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
+				DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
+				if((rockLayer1.data1 == Layers[n] && (rockLayer1.data2 == Layers[n+1] || Layers[n+1] == -1)) || 
+						(rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
+						(rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
+				{
+					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, false).generate(
+							world, rand, chunkX, chunkZ, min, max, name);
+				}
+				n+=2;
+			}
 		}
-    }
+	}
 
-    private static void createOreVein(int i, int j, int[] Layers, int rarity, int veinSize, 
-            int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
-    {
-    	if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
+	private static void createOreVein(int i, int j, int[] Layers, int rarity, int veinSize, 
+			int veinAmount, int height, int diameter, int vDensity, int hDensity,World world, Random rand, int chunkX, int chunkZ, int min, int max, String name)
+	{
+		if(world.getWorldChunkManager() instanceof TFCWorldChunkManager)
 		{
-        for(int n = 0; n < Layers.length/2;)
-        {
-        	DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
-            DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
-            DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
-            if((rockLayer1.data1 == Layers[n] && (rockLayer1.data2 == Layers[n+1] || Layers[n+1] == -1)) || 
-                    (rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
-                    (rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
-            {
-                new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generateVein(
-                        world, rand, chunkX, chunkZ, min, max, name);
-            }
-            n+=2;
-        }
+			for(int n = 0; n < Layers.length/2;)
+			{
+				DataLayer rockLayer1 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 0);
+				DataLayer rockLayer2 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 1);
+				DataLayer rockLayer3 = ((TFCWorldChunkManager)world.getWorldChunkManager()).getRockLayerAt(chunkX, chunkZ, 2);
+				if((rockLayer1.data1 == Layers[n] && (rockLayer1.data2 == Layers[n+1] || Layers[n+1] == -1)) || 
+						(rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
+						(rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
+				{
+					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, true).generate(
+							world, rand, chunkX, chunkZ, min, max, name);
+				}
+				n+=2;
+			}
 		}
-    }
+	}
 }
