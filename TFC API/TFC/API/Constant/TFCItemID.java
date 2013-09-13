@@ -736,6 +736,9 @@ public class TFCItemID {
 	//additional foods + food stuffs
 	public static int Cheese 					= 19114;
 	public static int Vinegar					= 19115;
+	
+	//b78 additions
+	public static int rope						= 19116;
 
 
 	public static void Setup(Configuration config)

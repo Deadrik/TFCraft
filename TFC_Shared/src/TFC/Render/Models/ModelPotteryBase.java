@@ -2,6 +2,8 @@ package TFC.Render.Models;
 
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.PositionTextureVertex;
@@ -24,7 +26,7 @@ public class ModelPotteryBase extends ModelBox
 
 	public ModelPotteryBase(ModelRenderer renderer, int textureOffsetX, int textureOffsetY,
 			float originX, float originY, float originZ, int width, int height, int depth,
-			float scale) {
+			float scale, Object[] dataArray) {
 		super(renderer, textureOffsetX, textureOffsetY, originX, originY, originZ, width, height, depth, scale);
 		/*
         this.vertexPositions = new PositionTextureVertex[8];
@@ -69,15 +71,19 @@ public class ModelPotteryBase extends ModelBox
         this.quadList[5] = new TexturedQuad(new PositionTextureVertex[] {vert4, vert5, vert6, vert7}, 
         		textureOffsetX + depth + width + depth, textureOffsetY + depth, textureOffsetX + depth + width + depth + width, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight);
 		 */
-		rings = new Object[7];
+		rings = new Object[dataArray.length];
 		
-		rings[0] = newRing(originX,originY,originZ,8,0,8,8);
+		for(int i = 0; i < dataArray.length;i ++){
+		/*rings[0] = newRing(originX,originY,originZ,8,0+0.01f,8,8);
 		rings[1] = newRing(originX,originY,originZ,8,3,8,12);
 		rings[2] = newRing(originX,originY,originZ,8,6,8,14);
 		rings[3] = newRing(originX,originY,originZ,8,9,8,14);
 		rings[4] = newRing(originX,originY,originZ,8,12,8,12);
 		rings[5] = newRing(originX,originY,originZ,8,14,8,6);
-		rings[6] = newRing(originX,originY,originZ,8,16,8,6);
+		rings[6] = newRing(originX,originY,originZ,8,16,8,6);*/
+			float[] data = (float[])dataArray[i];
+			rings[i] = newRing(data[0],data[1],data[2],data[3],data[4],data[5],data[6]);
+		}
 
 		polygons = buildSides(rings,renderer, textureOffsetX,  textureOffsetY,
 			 originX,  originY, originZ,  width,  height,  depth,
@@ -109,7 +115,10 @@ public class ModelPotteryBase extends ModelBox
 						textureOffsetX + depth + width, textureOffsetY + depth, textureOffsetX + depth + width + depth, textureOffsetY + depth + height, renderer.textureWidth, renderer.textureHeight));
 			}
 		}
-
+		PositionTextureVertex [] baseRing = (PositionTextureVertex [])(vertices[0]);
+		aList.add(new TexturedQuad(new PositionTextureVertex[]{baseRing[1],baseRing[2],baseRing[3],baseRing[0]}));
+		aList.add(new TexturedQuad(new PositionTextureVertex[]{baseRing[0],baseRing[3],baseRing[4],baseRing[7]}));
+		aList.add(new TexturedQuad(new PositionTextureVertex[]{baseRing[5],baseRing[6],baseRing[7],baseRing[4]}));
 		return aList;
 	}
 
@@ -121,9 +130,11 @@ public class ModelPotteryBase extends ModelBox
 		{
 			this.quadList[var3].draw(par1Tessellator, par2);
 		}*/
+		GL11.glDisable(GL11.GL_CULL_FACE);
 		for (TexturedQuad quad : polygons){
 			quad.draw(par1Tessellator, par2);
 		}
+		GL11.glEnable(GL11.GL_CULL_FACE);
 	}
 
 }

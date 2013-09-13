@@ -15,6 +15,7 @@ import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
 import TFC.Core.TFC_Core;
 import TFC.Core.TFC_Time;
+import TFC.Entities.AI.EntityAIFindNest;
 
 public class EntityChickenTFC extends EntityChicken implements IAnimal
 {
@@ -37,6 +38,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.setSize(0.3F, 0.7F);
 		this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
 		this.tasks.addTask(3, new EntityAITempt(this, 1.2F, TFCItems.WheatGrain.itemID, false));
+		this.tasks.addTask(3, new EntityAIFindNest(this,1.2F));
 		//this.tasks.addTask(6, this.aiEatGrass);
 
 		hunger = 168000;
@@ -69,6 +71,8 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		//
 		this.setAge((int) TFC_Time.getTotalDays());
 	}
+	
+	
 
 	@Override
 	protected void entityInit()
