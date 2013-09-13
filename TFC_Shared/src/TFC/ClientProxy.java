@@ -34,7 +34,6 @@ import TFC.Core.TFC_Time;
 import TFC.Core.Player.PlayerManagerTFC;
 import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityJavelin;
-import TFC.Entities.EntityCustomMinecart;
 import TFC.Entities.EntityProjectileTFC;
 import TFC.Entities.EntityStand;
 import TFC.Entities.Mobs.EntityBear;
@@ -244,8 +243,8 @@ public class ClientProxy extends CommonProxy
 	public void registerTileEntities(boolean b)
 	{
 		super.registerTileEntities(false);
-		ModLoader.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
-		ModLoader.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
+		ClientRegistry.registerTileEntity(TileEntityChestTFC.class, "chest", new TileEntityChestRendererTFC());
+		ClientRegistry.registerTileEntity(TileEntityIngotPile.class, "ingotPile2",new TileEntityIngotPileRenderer());
 		//ModLoader.registerTileEntity(TileEntityBarrel.class, "barrel", new TileEntityBarrelRendererTFC());
 		ClientRegistry.registerTileEntity(TileEntityPottery.class, "Pottery", new TileEntityPotteryRenderer());
 		ClientRegistry.registerTileEntity(TileEntityFoodPrep.class, "FoodPrep", new TileEntityFoodPrepRenderer());
@@ -388,10 +387,10 @@ public class ClientProxy extends CommonProxy
 		}
 		}
 	}
-	
+
 	private BiomeGenBase lastBiomeGen;
 	private int waterColorMultiplier;
-	
+
 	@Override
 	public int waterColorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
@@ -404,7 +403,7 @@ public class ClientProxy extends CommonProxy
 			for (int var9 = -1; var9 <= 1; ++var9)
 			{
 				BiomeGenBase biome = par1IBlockAccess.getBiomeGenForCoords(par2 + var9, par4 + var8);
-				
+
 				if(biome != null)
 				{
 					if(lastBiomeGen != biome)
@@ -412,10 +411,10 @@ public class ClientProxy extends CommonProxy
 						waterColorMultiplier = biome.getWaterColorMultiplier();
 						lastBiomeGen = biome;
 					}
-					
+
 					var5 += (waterColorMultiplier & 16711680) >> 16;
-					var6 += (waterColorMultiplier & 65280) >> 8;
-					var7 += waterColorMultiplier & 255;
+			var6 += (waterColorMultiplier & 65280) >> 8;
+			var7 += waterColorMultiplier & 255;
 				}
 			}
 		}

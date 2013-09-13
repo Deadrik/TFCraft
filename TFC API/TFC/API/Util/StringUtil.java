@@ -1,5 +1,7 @@
 package TFC.API.Util;
 
+import TFC.Core.Util.Localization;
+
 public class StringUtil 
 {
 

@@ -44,6 +44,7 @@ public class ItemTerra extends Item implements ISize
 	public ItemTerra setMetaNames(String[] metanames)
 	{
 		MetaNames = metanames;
+		this.hasSubtypes = true;
 		return this;
 	}
 

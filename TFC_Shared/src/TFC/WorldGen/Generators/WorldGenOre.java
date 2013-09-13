@@ -192,7 +192,7 @@ public class WorldGenOre implements IWorldGenerator
 						(rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
 						(rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
 				{
-					new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generate(
+					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, false).generate(
 							world, rand, chunkX, chunkZ, min, max, name);
 				}
 				n+=2;
@@ -214,7 +214,7 @@ public class WorldGenOre implements IWorldGenerator
 						(rockLayer2.data1 == Layers[n] && (rockLayer2.data2 == Layers[n+1] || Layers[n+1] == -1)) ||
 						(rockLayer3.data1 == Layers[n] && (rockLayer3.data2 == Layers[n+1] || Layers[n+1] == -1)))
 				{
-					new WorldGenMinableTFC(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity).generateVein(
+					new WorldGenMinable(i, j,Layers[n],Layers[n+1],rarity,veinSize,veinAmount,height,diameter,vDensity,hDensity, true).generate(
 							world, rand, chunkX, chunkZ, min, max, name);
 				}
 				n+=2;

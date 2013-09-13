@@ -15,7 +15,6 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import TFC.API.TFCOptions;
 import TFC.API.Constant.TFCBlockID;
 import TFC.API.Constant.TFCItemID;
-import TFC.API.Util.Localization;
 import TFC.Commands.GetBioTempCommand;
 import TFC.Commands.GetBodyTemp;
 import TFC.Commands.GetRocksCommand;
@@ -26,6 +25,7 @@ import TFC.Core.Recipes;
 import TFC.Core.TFC_Climate;
 import TFC.Core.TFC_ItemHeat;
 import TFC.Core.Player.PlayerTracker;
+import TFC.Core.Util.Localization;
 import TFC.Food.TFCPotion;
 import TFC.Handlers.AnvilCraftingHandler;
 import TFC.Handlers.ChatListenerTFC;
@@ -92,12 +92,37 @@ public class TerraFirmaCraft
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
 		//Load Blocks
-		TFCBlockID.Setup();
+		Configuration config;
+		try
+		{
+			config = new net.minecraftforge.common.Configuration(
+					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
+			config.load();
+			TFCBlockID.Setup(config);
+			config.save();
+		} 
+		catch (Exception e) 
+		{
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
+		}
+
 		TFCBlocks.LoadBlocks();
 		TFCBlocks.RegisterBlocks();
 
 		//Load Items
-		TFCItemID.Setup();
+		try
+		{
+			config = new net.minecraftforge.common.Configuration(
+					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
+			config.load();
+			TFCItemID.Setup(config);
+			config.save();
+		} 
+		catch (Exception e) 
+		{
+			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
+		}
+
 		TFCItems.Setup();
 
 		//Register Generators
