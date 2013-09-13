@@ -276,6 +276,8 @@ public class Recipes
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.EarlyBloomery, 1), new Object[] { "PPP","P P","PPP", Character.valueOf('P'), new ItemStack(TFCItems.BlackBronzeSheet2x, 1)});
 		GameRegistry.addRecipe(new ItemStack(TFCBlocks.BlastFurnace, 1), new Object[] { "PPP","PCP","PPP", Character.valueOf('P'), new ItemStack(TFCItems.WroughtIronSheet2x, 1),Character.valueOf('C'), new ItemStack(TFCBlocks.Crucible, 1)});
 
+		GameRegistry.addRecipe(new ItemStack(TFCBlocks.NestBox,1), new Object[] {"S S","PSP","PPP",Character.valueOf('S'), new ItemStack(TFCItems.Straw,1),Character.valueOf('P'),new ItemStack(TFCItems.SinglePlank,1,32767)});
+		
 		GameRegistry.addRecipe(new ItemStack(Block.rail, 64), new Object[] { "PsP","PsP", Character.valueOf('P'), TFCItems.WroughtIronIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,32767)});
 		GameRegistry.addRecipe(new ItemStack(Block.railPowered, 64), new Object[] { " r ","PsP","PsP", Character.valueOf('P'), TFCItems.GoldIngot, Character.valueOf('s'), new ItemStack(Item.stick,1,32767), Character.valueOf('r'), Item.redstone});
 		GameRegistry.addRecipe(new ItemStack(Item.minecartEmpty, 1), new Object[] { "P P","PPP", Character.valueOf('P'), TFCItems.WroughtIronSheet});

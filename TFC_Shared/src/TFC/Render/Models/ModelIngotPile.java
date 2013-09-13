@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ModelIngotPile extends ModelBase
 {
 	public ModelRendererTFC[] renderer = new ModelRendererTFC[64];
+	
 	public ModelIngotPile()
 	{
 		for (int n = 0; n < 64; n++){
@@ -21,13 +22,23 @@ public class ModelIngotPile extends ModelBase
 			int ingotWidth = 7;
 			int ingotDepth = 15;
 
+			
+			Object[] basicVesselData = new Object[]{
+				new float[]{0.5F + x, y, z + 0.5f,8,0+0.01f,8,8},
+				new float[]{0.5F + x, y, z + 0.5f,8,3,8,12},
+				new float[]{0.5F + x, y, z + 0.5f,8,6,8,14},
+				new float[]{0.5F + x, y, z + 0.5f,8,9,8,14},
+				new float[]{0.5F + x, y, z + 0.5f,8,12,8,12},
+				new float[]{0.5F + x, y, z + 0.5f,8,14,8,6},
+				new float[]{0.5F + x, y, z + 0.5f,8,16,8,6}
+			};
 			if (n%8 >=4){
 				z = 16f;
 			}
 			if (m %2 == 1)
 			{
 				renderer[n].cubeList.add(
-						//new ModelPotteryBase(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, 0.5F + x, y, z + 0.5f, ingotWidth, ingotHeight, ingotDepth, 0f));
+						//new ModelPotteryBase(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, 0.5F + x, y, z + 0.5f, ingotWidth, ingotHeight, ingotDepth, 0f,basicVesselData));
 						new ModelIngot(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, 0.5F + x, y, z + 0.5f, ingotWidth, ingotHeight, ingotDepth, 0f));
 						//new ModelFrond(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, 0.5F + x, y, z + 0.5f, ingotWidth, ingotHeight, ingotDepth, 0f));
 
@@ -35,7 +46,7 @@ public class ModelIngotPile extends ModelBase
 			else
 			{
 				renderer[n].cubeList.add(
-						//new ModelPotteryBase(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, z + 0.5f, y, 0.5f + x, ingotDepth, ingotHeight, ingotWidth, 0f));
+						//new ModelPotteryBase(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, z + 0.5f, y, 0.5f + x, ingotDepth, ingotHeight, ingotWidth, 0f,basicVesselData));
 						new ModelIngot(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, z + 0.5f, y, 0.5f + x, ingotDepth, ingotHeight, ingotWidth, 0f));
 						//new ModelFrond(renderer[n],renderer[n].textureOffsetX, renderer[n].textureOffsetY, z + 0.5f, y, 0.5f + x, ingotDepth, ingotHeight, ingotWidth, 0f));
 			}

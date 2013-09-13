@@ -34,6 +34,7 @@ import TFC.Blocks.Devices.BlockCrucible;
 import TFC.Blocks.Devices.BlockEarlyBloomery;
 import TFC.Blocks.Devices.BlockFirepit;
 import TFC.Blocks.Devices.BlockForge;
+import TFC.Blocks.Devices.BlockNestBox;
 import TFC.Blocks.Devices.BlockPottery;
 import TFC.Blocks.Devices.BlockQuern;
 import TFC.Blocks.Devices.BlockScribe;
@@ -101,6 +102,7 @@ public class TFCBlocks
 	public static int FirepitRenderId;
 	public static int AnvilRenderId;
 	public static int barrelRenderId;
+	public static int NestBoxRenderId;
 	public static int BellowsRenderId;
 	public static int ScribeRenderId;
 	public static int ForgeRenderId;
@@ -222,6 +224,8 @@ public class TFCBlocks
 	public static Block EarlyBloomery;
 	public static Block Bloom;
 	public static Block Crucible;
+	
+	public static Block NestBox;
 
 	public static void RegisterBlocks()
 	{
@@ -336,6 +340,7 @@ public class TFCBlocks
 		GameRegistry.registerBlock(Thatch, TFC.Items.ItemBlocks.ItemTerraBlock.class, "Thatch");
 		GameRegistry.registerBlock(Tuyere, "Tuyere");
 		GameRegistry.registerBlock(Crucible, TFC.Items.ItemBlocks.ItemCrucible.class, "Crucible");
+		GameRegistry.registerBlock(NestBox, TFC.Items.ItemBlocks.ItemTerraBlock.class, "NestBox");
 	}
 
 	public static void LoadBlocks()
@@ -521,6 +526,8 @@ public class TFCBlocks
 
 		TFCBlocks.Tuyere = new BlockTuyere(TFCBlockID.Tuyere).setUnlocalizedName("Tuyere");
 		TFCBlocks.Crucible = new BlockCrucible(TFCBlockID.Crucible).setUnlocalizedName("Crucible").setHardness(4.0f);
+		
+		TFCBlocks.NestBox = new BlockNestBox(TFCBlockID.NestBox).setUnlocalizedName("NestBox").setHardness(1);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgEx, "pickaxe", 0);
