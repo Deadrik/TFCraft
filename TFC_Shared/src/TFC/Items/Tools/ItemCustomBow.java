@@ -164,19 +164,19 @@ public class ItemCustomBow extends ItemBow implements ISize
 	{
 		float speed = 60.0f;
 		ItemStack[] armor = player.inventory.armorInventory;
-		if(armor[0].getItem() instanceof ISize)
+		if(armor[0] != null && armor[0].getItem() instanceof ISize)
 		{
 			speed += 20.0f / ((ISize)armor[0].getItem()).getWeight(armor[0]).multiplier;
 		}
-		if(armor[1].getItem() instanceof ISize)
+		if(armor[1] != null && armor[1].getItem() instanceof ISize)
 		{
 			speed += 20.0f / ((ISize)armor[1].getItem()).getWeight(armor[1]).multiplier;
 		}
-		if(armor[2].getItem() instanceof ISize)
+		if(armor[2] != null && armor[2].getItem() instanceof ISize)
 		{
 			speed += 20.0f / ((ISize)armor[2].getItem()).getWeight(armor[2]).multiplier;
 		}
-		if(armor[3].getItem() instanceof ISize)
+		if(armor[3] != null && armor[3].getItem() instanceof ISize)
 		{
 			speed += 20.0f / ((ISize)armor[3].getItem()).getWeight(armor[3]).multiplier;
 		}
