@@ -57,7 +57,7 @@ public class BlockCobble extends BlockTerra
 	@Override
 	public Icon getIcon(int i, int j) 
 	{
-		return icons[j];
+		return icons[j & 7];
 	}
 
 	@Override

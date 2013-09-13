@@ -22,48 +22,49 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockStone extends BlockCollapsable
 {
-    public BlockStone(int i, Material material, int id) {
-        super(i, material, id);
-    }
-    
+	public BlockStone(int i, Material material, int id) {
+		super(i, material, id);
+	}
+
 	protected String[] names;
-    public Icon[] icons;
-    protected int looseStart = 0;
-    protected int gemChance = 0;
+	public Icon[] icons;
+	protected int looseStart = 0;
+	protected int gemChance = 0;
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-    	for(int i = 0; i < names.length; i++)
-    		par3List.add(new ItemStack(par1, 1, i));
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+	 */
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+	{
+		for(int i = 0; i < names.length; i++) {
+			par3List.add(new ItemStack(par1, 1, i));
+		}
+	}
 
-    /*
-     * Mapping from metadata value to damage value
-     */
-    @Override
-    public int damageDropped(int i) {
-        return i;
-    }
+	/*
+	 * Mapping from metadata value to damage value
+	 */
+	@Override
+	public int damageDropped(int i) {
+		return i;
+	}
 
-    @Override
+	@Override
 	public Icon getIcon(int i, int j) 
 	{
-		return icons[j];
+		return icons[j & 7];
 	}
 
 	@Override
 	public void registerIcons(IconRegister iconRegisterer)
-    {
+	{
 		for(int i = 0; i < names.length; i++)
 		{
 			icons[i] = iconRegisterer.registerIcon(Reference.ModID + ":" + "rocks/"+names[i]+" Raw");
 		}
-    }
+	}
 
 
 	@Override
@@ -92,32 +93,33 @@ public class BlockStone extends BlockCollapsable
 		}
 	}
 
-    @Override
+	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l)
-    {
-        DropCarvedStone(world, i, j, k);
-    }
-    
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
-    {
-        boolean hasHammer = false;
-        for(int i = 0; i < 9; i++)
-        {
-            if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer)
-                hasHammer = true;
-        }
-        if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
-        		hasHammer && !world.isRemote && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
-        {
-            int id = world.getBlockId(x, y, z);
-            byte meta = (byte) world.getBlockMetadata(x, y, z);
+	{
+		DropCarvedStone(world, i, j, k);
+	}
 
-            return ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).onUsed(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
-        }
-        return false;
-    }
-    
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int side, float par7, float par8, float par9) 
+	{
+		boolean hasHammer = false;
+		for(int i = 0; i < 9; i++)
+		{
+			if(entityplayer.inventory.mainInventory[i] != null && entityplayer.inventory.mainInventory[i].getItem() instanceof ItemHammer) {
+				hasHammer = true;
+			}
+		}
+		if(entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof IToolChisel && 
+				hasHammer && !world.isRemote && ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).canChisel(entityplayer, x, y, z))
+		{
+			int id = world.getBlockId(x, y, z);
+			byte meta = (byte) world.getBlockMetadata(x, y, z);
+
+			return ((IToolChisel)entityplayer.getCurrentEquippedItem().getItem()).onUsed(world, entityplayer, x, y, z, id, meta, side, par7, par8, par9);
+		}
+		return false;
+	}
+
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
 	{	
