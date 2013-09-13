@@ -53,7 +53,7 @@ public class WorldGenOre implements IWorldGenerator
 
 		//============Galena
 		createOreVein(TFCBlocks.Ore.blockID, 6,new int[]{TFCBlocks.StoneIgEx.blockID,-1,TFCBlocks.StoneMM.blockID,-1,
-				TFCBlocks.StoneIgIn.blockID,0,TFCBlocks.StoneSed.blockID,5},//igex, mm, granite, limestone as veins
+				TFCBlocks.StoneIgIn.blockID,0,TFCBlocks.StoneSed.blockID,3},//igex, mm, granite, limestone as veins
 				/*rarity*/120,/*veinSize*/80,/*veinAmt*/55,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Galena");
 
 		//============Bismuthinite
@@ -65,7 +65,7 @@ public class WorldGenOre implements IWorldGenerator
 				/*rarity*/160,/*veinSize*/40,/*veinAmt*/35,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/10,         world, rand, chunkX, chunkZ, Min, Max, "Garnierite");
 
 		//============Malachite
-		createOreVein(TFCBlocks.Ore.blockID, 9,new int[]{TFCBlocks.StoneSed.blockID,5,TFCBlocks.StoneMM.blockID,5},//limestone and marble veins
+		createOreVein(TFCBlocks.Ore.blockID, 9,new int[]{TFCBlocks.StoneSed.blockID,3,TFCBlocks.StoneMM.blockID,5},//limestone and marble veins
 				/*rarity*/140,/*veinSize*/80,/*veinAmt*/45,/*height*/height,/*diameter*/100,/*vDensity*/50,/*hDensity*/20,         world, rand, chunkX, chunkZ, Min, Max, "Malachite");
 
 		//============Magnetite
@@ -139,7 +139,7 @@ public class WorldGenOre implements IWorldGenerator
 				/*rarity*/100,/*veinSize*/10,/*veinAmt*/10,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Pithcblende");
 
 		//============Cinnabar
-		createOreVein(TFCBlocks.Ore2.blockID, 11,new int[]{TFCBlocks.StoneIgEx.blockID,-1,TFCBlocks.StoneSed.blockID,2,
+		createOreVein(TFCBlocks.Ore2.blockID, 11,new int[]{TFCBlocks.StoneIgEx.blockID,-1,TFCBlocks.StoneSed.blockID,0,
 				TFCBlocks.StoneMM.blockID,0},//igex, shale, quartzite small clusters
 				/*rarity*/60,/*veinSize*/35,/*veinAmt*/30,/*height*/height,/*diameter*/50,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Cinnabar");
 
@@ -160,11 +160,11 @@ public class WorldGenOre implements IWorldGenerator
 				/*rarity*/2,/*veinSize*/10,/*veinAmt*/8,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Serpentine");
 
 		//============Sylvite
-		createOre(TFCBlocks.Ore2.blockID, 15,new int[]{TFCBlocks.StoneSed.blockID,4},//Rock Salt, large clusters 
+		createOre(TFCBlocks.Ore2.blockID, 15,new int[]{TFCBlocks.StoneSed.blockID,2},//Rock Salt, large clusters 
 				/*rarity*/80,/*veinSize*/40,/*veinAmt*/14,/*height*/height,/*diameter*/50,/*vDensity*/10,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Sylvite");
 
 		//============Borax
-		createOre(TFCBlocks.Ore3.blockID, 0,new int[]{TFCBlocks.StoneSed.blockID,4},//Rock Salt, large clusters 
+		createOre(TFCBlocks.Ore3.blockID, 0,new int[]{TFCBlocks.StoneSed.blockID,2},//Rock Salt, large clusters 
 				/*rarity*/50,/*veinSize*/50,/*veinAmt*/24,/*height*/height,/*diameter*/200,/*vDensity*/50,/*hDensity*/60,         world, rand, chunkX, chunkZ, Min, Max, "Borax");
 		createOre(TFCBlocks.Ore3.blockID, 0,new int[]{TFCBlocks.Ore2.blockID,1},//Gypsum, small clusters 
 				/*rarity*/3,/*veinSize*/12,/*veinAmt*/22,/*height*/height,/*diameter*/200,/*vDensity*/40,/*hDensity*/40,         world, rand, chunkX, chunkZ, Min, Max, "Borax");

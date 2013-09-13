@@ -10,10 +10,10 @@ public class Global
 {
 	/* Stone Types */
 	public static final String[] STONE_IGIN = {"Granite", "Diorite", "Gabbro"};
-	public static final String[] STONE_SED  = {"Siltstone", "Mudstone", "Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};
+	public static final String[] STONE_SED  = {"Shale", "Claystone", "Rock Salt", "Limestone", "Conglomerate", "Dolomite", "Chert", "Chalk"};
 	public static final String[] STONE_IGEX = {"Rhyolite", "Basalt", "Andesite", "Dacite"};
 	public static final String[] STONE_MM   = {"Quartzite", "Slate", "Phyllite", "Schist", "Gneiss", "Marble"};
-	
+
 	// Used for loose rocks and other places where the stone list is combined
 	public static final int STONE_IGIN_START = 0;
 	public static final int STONE_SED_START = STONE_IGIN_START + STONE_IGIN.length;
@@ -28,30 +28,30 @@ public class Global
 		Arrays.asList(STONE_ALL).indexOf("Chalk"),
 		Arrays.asList(STONE_ALL).indexOf("Marble")
 	};
-	
+
 	/* Ore Types */
 	public static final String[] ORE_METAL = {
 		"Native Copper", "Native Gold", "Native Platinum", "Hematite",
 		"Native Silver", "Cassiterite", "Galena", "Bismuthinite",
 		"Garnierite", "Malachite", "Magnetite", "Limonite",
 		"Sphalerite", "Tetrahedrite", "Bituminous Coal", "Lignite"
-		};
+	};
 	public static final String[] ORE_MINERAL = {
 		"Kaolinite", "Gypsum", "Satinspar", "Selenite",
 		"Graphite", "Kimberlite", "Petrified Wood", "Sulfur",
 		"Jet", "Microcline", "Pitchblende", "Cinnabar",
 		"Cryolite", "Saltpeter", "Serpentine", "Sylvite"
-		};
+	};
 	public static final String[] ORE_MINERAL2 = {"Borax", "Olivine", "Lapis Lazuli"};
-	
+
 	public static final String[] WOOD_ALL = {
 		"Oak","Aspen","Birch","Chestnut",
 		"Douglas Fir","Hickory","Maple","Ash",
 		"Pine","Sequoia","Spruce","Sycamore",
 		"White Cedar","White Elm","Willow","Kapok"
-		};
-	
-	
+	};
+
+
 	public static Metal BISMUTH;
 	public static Metal BISMUTHBRONZE;
 	public static Metal BLACKBRONZE; 

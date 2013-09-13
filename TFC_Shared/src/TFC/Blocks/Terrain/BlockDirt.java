@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDirt extends BlockTerra
 {
-	protected Icon[] icons = new Icon[23];
+	protected Icon[] icons = new Icon[21];
 	protected int textureOffset = 0;
 
 	public BlockDirt(int i, int texOff, Block Farm)
@@ -82,7 +82,7 @@ public class BlockDirt extends BlockTerra
 	@Override
 	public void registerIcons(IconRegister registerer)
 	{
-		for(int i = 0; i < 23; i++)
+		for(int i = 0; i < 21; i++)
 		{
 			icons[i] = registerer.registerIcon(Reference.ModID + ":" + "soil/Dirt"+i);
 		}
