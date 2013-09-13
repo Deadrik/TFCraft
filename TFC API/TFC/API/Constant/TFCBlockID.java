@@ -1,9 +1,6 @@
 package TFC.API.Constant;
 
-import java.io.File;
-
 import net.minecraftforge.common.Configuration;
-import TFC.TerraFirmaCraft;
 import TFC.API.TFCOptions;
 
 public class TFCBlockID
@@ -113,7 +110,7 @@ public class TFCBlockID
 	public static int WallSmoothMM				= 2040;
 
 	public static int[] Doors = {2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048,
-								 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056}; // 16 Doors
+		2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056}; // 16 Doors
 
 	public static int IngotPile					= 2060;
 	public static int Barrel					= 2061;
@@ -124,21 +121,12 @@ public class TFCBlockID
 	public static int Tuyere					= 2066;
 	public static int Crucible					= 2067;
 
-	
+
 	static Configuration config;
-	
-	public static void Setup()
+
+	public static void Setup(Configuration config)
 	{
-		try
-		{
-			config = new net.minecraftforge.common.Configuration(
-					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
-			config.load();
-		} catch (Exception e) {
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
-			config = null;
-		}
-		
+
 		StoneIgInCobble	= TFCOptions.getIntFor(config,"block", "StoneIgInCobble", StoneIgInCobble);
 		StoneIgIn = TFCOptions.getIntFor(config, "block", "StoneIgIn", StoneIgIn);
 		StoneIgInSmooth = TFCOptions.getIntFor(config, "block", "StoneIgInSmooth", StoneIgInSmooth);
@@ -246,7 +234,7 @@ public class TFCBlockID
 		for (int i=0; i < Global.WOOD_ALL.length; i++) {
 			Doors[i] = TFCOptions.getIntFor(config,"block","Door"+Global.WOOD_ALL[i].replaceAll(" ", ""), Doors[i]);
 		}
-		
+
 		IngotPile = TFCOptions.getIntFor(config, "block", "IngotPile", IngotPile);
 		Barrel = TFCOptions.getIntFor(config, "block", "Barrel", Barrel);
 		Thatch = TFCOptions.getIntFor(config, "block", "Thatch", Thatch);
@@ -256,9 +244,5 @@ public class TFCBlockID
 		Tuyere = TFCOptions.getIntFor(config, "block", "Tuyere", Tuyere);
 		Crucible = TFCOptions.getIntFor(config, "block", "Crucible", Crucible);
 
-
-		if (config != null) {
-			config.save();
-		}
 	}
 }
