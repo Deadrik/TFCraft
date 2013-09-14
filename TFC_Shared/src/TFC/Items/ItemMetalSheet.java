@@ -45,7 +45,7 @@ public class ItemMetalSheet extends ItemTerra
 	{
 		super(i);
 		setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 		setFolder("ingots/");
 	}
 

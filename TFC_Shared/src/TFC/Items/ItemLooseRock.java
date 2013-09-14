@@ -28,7 +28,7 @@ public class ItemLooseRock extends ItemTerra
 		super(id);
 		this.hasSubtypes = true;
 		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = Global.STONE_ALL;
 		icons = new Icon[MetaNames.length];
 	}

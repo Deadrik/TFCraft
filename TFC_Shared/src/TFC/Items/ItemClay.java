@@ -21,7 +21,7 @@ public class ItemClay extends ItemLooseRock
 	public ItemClay(int id) 
 	{
 		super(id);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCPottery);
 		this.icons = new Icon[2];
 	}
 
