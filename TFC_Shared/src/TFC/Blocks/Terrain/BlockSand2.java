@@ -25,7 +25,7 @@ public class BlockSand2 extends TFC.Blocks.Terrain.BlockSand
 	 */
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 5; i++) {
 			par3List.add(new ItemStack(par1, 1, i));
 		}
 	}
@@ -48,7 +48,7 @@ public class BlockSand2 extends TFC.Blocks.Terrain.BlockSand
 		return icons[par2];
 	}
 
-	Icon[] icons = new Icon[7];
+	Icon[] icons = new Icon[5];
 
 	@Override
 	public void registerIcons(IconRegister registerer)

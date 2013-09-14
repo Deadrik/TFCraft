@@ -335,18 +335,24 @@ public class TFC_Core
 
 	public static int getSoilMetaFromStone(int inType, int inMeta)
 	{
-		if(inType == TFCBlocks.StoneIgIn.blockID) {
-			return inMeta;
-		} else if(inType == TFCBlocks.StoneSed.blockID) {
-			return inMeta+3;
-		} else if(inType == TFCBlocks.StoneIgEx.blockID)
+		if(inType == TFCBlocks.StoneIgIn.blockID) 
 		{
-			if(inMeta == 3) {
-				return 0;
+			return inMeta;
+		} 
+		else if(inType == TFCBlocks.StoneSed.blockID) 
+		{
+			return inMeta+3;
+		} 
+		else if(inType == TFCBlocks.StoneIgEx.blockID)
+		{
+			return inMeta+11;
+		}
+		else 
+		{
+			if(inMeta == 0) {
+				return inMeta+15;
 			}
-			return inMeta+13;
-		} else {
-			return inMeta+1;
+			return inMeta;
 		}
 	}
 
@@ -357,9 +363,9 @@ public class TFC_Core
 		} else if(inType == TFCBlocks.StoneSed.blockID) {
 			return inMeta+3;
 		} else if(inType == TFCBlocks.StoneIgEx.blockID) {
-			return inMeta+13;
+			return inMeta+11;
 		} else if(inType == TFCBlocks.StoneMM.blockID) {
-			return inMeta+17;
+			return inMeta+15;
 		} else {
 			return 0;
 		}
