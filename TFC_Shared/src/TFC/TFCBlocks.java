@@ -224,7 +224,7 @@ public class TFCBlocks
 	public static Block EarlyBloomery;
 	public static Block Bloom;
 	public static Block Crucible;
-	
+
 	public static Block NestBox;
 
 	public static void RegisterBlocks()
@@ -493,19 +493,19 @@ public class TFCBlocks
 
 		TFCBlocks.WallCobbleIgIn = new BlockCustomWall(TFCBlockID.WallCobbleIgIn, StoneIgInCobble, 3).setUnlocalizedName("WallCobble");
 		TFCBlocks.WallCobbleIgEx = new BlockCustomWall(TFCBlockID.WallCobbleIgEx, StoneIgExCobble, 4).setUnlocalizedName("WallCobble");
-		TFCBlocks.WallCobbleSed = new BlockCustomWall(TFCBlockID.WallCobbleSed, StoneSedCobble, 10).setUnlocalizedName("WallCobble");
+		TFCBlocks.WallCobbleSed = new BlockCustomWall(TFCBlockID.WallCobbleSed, StoneSedCobble, 8).setUnlocalizedName("WallCobble");
 		TFCBlocks.WallCobbleMM = new BlockCustomWall(TFCBlockID.WallCobbleMM, StoneMMCobble, 6).setUnlocalizedName("WallCobble");
 		TFCBlocks.WallRawIgIn = new BlockCustomWall(TFCBlockID.WallRawIgIn, StoneIgIn, 3).setUnlocalizedName("WallRaw");
 		TFCBlocks.WallRawIgEx = new BlockCustomWall(TFCBlockID.WallRawIgEx, StoneIgEx, 4).setUnlocalizedName("WallRaw");
-		TFCBlocks.WallRawSed = new BlockCustomWall(TFCBlockID.WallRawSed, StoneSed, 10).setUnlocalizedName("WallRaw");
+		TFCBlocks.WallRawSed = new BlockCustomWall(TFCBlockID.WallRawSed, StoneSed, 8).setUnlocalizedName("WallRaw");
 		TFCBlocks.WallRawMM = new BlockCustomWall(TFCBlockID.WallRawMM, StoneMM, 6).setUnlocalizedName("WallRaw");
 		TFCBlocks.WallBrickIgIn = new BlockCustomWall(TFCBlockID.WallBrickIgIn, StoneIgInBrick, 3).setUnlocalizedName("WallBrick");
 		TFCBlocks.WallBrickIgEx = new BlockCustomWall(TFCBlockID.WallBrickIgEx, StoneIgExBrick, 4).setUnlocalizedName("WallBrick");
-		TFCBlocks.WallBrickSed = new BlockCustomWall(TFCBlockID.WallBrickSed, StoneSedBrick, 10).setUnlocalizedName("WallBrick");
+		TFCBlocks.WallBrickSed = new BlockCustomWall(TFCBlockID.WallBrickSed, StoneSedBrick, 8).setUnlocalizedName("WallBrick");
 		TFCBlocks.WallBrickMM = new BlockCustomWall(TFCBlockID.WallBrickMM, StoneMMBrick, 6).setUnlocalizedName("WallBrick");
 		TFCBlocks.WallSmoothIgIn = new BlockCustomWall(TFCBlockID.WallSmoothIgIn, StoneIgInSmooth, 3).setUnlocalizedName("WallSmooth");
 		TFCBlocks.WallSmoothIgEx = new BlockCustomWall(TFCBlockID.WallSmoothIgEx, StoneIgExSmooth, 4).setUnlocalizedName("WallSmooth");
-		TFCBlocks.WallSmoothSed = new BlockCustomWall(TFCBlockID.WallSmoothSed, StoneSedSmooth, 10).setUnlocalizedName("WallSmooth");
+		TFCBlocks.WallSmoothSed = new BlockCustomWall(TFCBlockID.WallSmoothSed, StoneSedSmooth, 8).setUnlocalizedName("WallSmooth");
 		TFCBlocks.WallSmoothMM = new BlockCustomWall(TFCBlockID.WallSmoothMM, StoneMMSmooth, 6).setUnlocalizedName("WallSmooth");
 
 		// Wooden Doors
@@ -526,7 +526,7 @@ public class TFCBlocks
 
 		TFCBlocks.Tuyere = new BlockTuyere(TFCBlockID.Tuyere).setUnlocalizedName("Tuyere");
 		TFCBlocks.Crucible = new BlockCrucible(TFCBlockID.Crucible).setUnlocalizedName("Crucible").setHardness(4.0f);
-		
+
 		TFCBlocks.NestBox = new BlockNestBox(TFCBlockID.NestBox).setUnlocalizedName("NestBox").setHardness(1);
 
 		MinecraftForge.setBlockHarvestLevel(TFCBlocks.StoneIgIn, "pickaxe", 0);

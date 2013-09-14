@@ -242,7 +242,7 @@ public class BlockCollapsable extends BlockTerra
 		{
 			if (!world.isRemote && fallingBlockID != -1)
 			{
-				EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlockID, meta);
+				EntityFallingStone ent = new EntityFallingStone(world, i + 0.5F, j + 0.5F, k + 0.5F, fallingBlockID, meta+8);
 				ent.fallTime = -5000;
 				world.spawnEntityInWorld(ent);
 				Random R = new Random(i*j+k);

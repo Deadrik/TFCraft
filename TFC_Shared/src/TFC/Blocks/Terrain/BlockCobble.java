@@ -46,12 +46,20 @@ public class BlockCobble extends BlockTerra
 		}
 	}
 
+	@Override
+	protected void dropBlockAsItem_do(World par1World, int par2, int par3, int par4, ItemStack is)
+	{
+		if(is.getItemDamage() < 8) {
+			super.dropBlockAsItem_do(par1World, par2, par3, par4, is);
+		}
+	}
+
 	/*
 	 * Mapping from metadata value to damage value
 	 */
 	@Override
 	public int damageDropped(int i) {
-		return i;
+		return i & 7;
 	}
 
 	@Override
