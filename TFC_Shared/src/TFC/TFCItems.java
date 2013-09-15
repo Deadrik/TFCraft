@@ -18,6 +18,7 @@ import TFC.API.Constant.Global;
 import TFC.API.Constant.TFCItemID;
 import TFC.API.Enums.EnumDamageType;
 import TFC.API.Enums.EnumSize;
+import TFC.API.Enums.EnumWeight;
 import TFC.Core.Recipes;
 import TFC.Core.Metal.Alloy;
 import TFC.Core.Metal.AlloyManager;
@@ -1413,7 +1414,7 @@ public class TFCItems
 		BlueSteelBucketEmpty = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketEmpty, 0)).setUnlocalizedName("Blue Steel Bucket Empty");
 		BlueSteelBucketLava = (new ItemCustomBlueSteelBucket(TFCItemID.BlueSteelBucketLava, Block.lavaMoving.blockID)).setUnlocalizedName("Blue Steel Bucket Lava").setContainerItem(BlueSteelBucketEmpty);
 
-		Quern = new ItemTerra(TFCItemID.Quern).setUnlocalizedName("Quern").setMaxDamage(250);
+		Quern = ((ItemTerra) new ItemTerra(TFCItemID.Quern).setUnlocalizedName("Quern").setMaxDamage(250)).setSize(EnumSize.MEDIUM).setWeight(EnumWeight.HEAVY);
 		FlintSteel = new ItemFlintSteel(TFCItemID.FlintSteel).setUnlocalizedName("flintAndSteel").setMaxDamage(200).func_111206_d("flint_and_steel");
 
 		DoorOak = new ItemWoodDoor(TFCItemID.DoorOak, 0).setUnlocalizedName("Oak Door");
