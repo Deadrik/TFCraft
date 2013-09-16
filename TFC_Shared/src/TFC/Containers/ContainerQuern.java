@@ -101,6 +101,7 @@ public class ContainerQuern extends ContainerTFC {
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 27)//Cinnabar
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 28)//Cryolite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 34)//Lapis Lazuli
+					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 11)//Limonite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 9)//Malachite
 					|| (clickedStack.getItem() == TFCItems.OreChunk && clickedStack.getItemDamage() == 3))//Hematite
 
