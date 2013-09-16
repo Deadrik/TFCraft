@@ -129,6 +129,7 @@ public class Recipes
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.StoneKnife, 1, 0), new Object[] { 
 			"1","2", Character.valueOf('1'), TFCItems.StoneKnifeHead,Character.valueOf('2'), new ItemStack(Item.stick,1,32767)});
+		
 
 
 		GameRegistry.addRecipe(new ItemStack(TFCItems.WoodenBucketEmpty, 1), new Object[] { "w w","w w"," w ", Character.valueOf('w'), new ItemStack(TFCItems.SinglePlank, 1, 32767) });
@@ -932,6 +933,10 @@ public class Recipes
 
 	private static void registerKnapping() {
 		//Knapping
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneKnifeHead, 2), new Object[] { " #  #","## ##","## ##","## ##","## ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, 32767)});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneKnifeHead, 2), new Object[] { "#  # ","## ##","## ##","## ##","## ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, 32767)});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneKnifeHead, 2), new Object[] { "#   #","## ##","## ##","## ##","## ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, 32767)});
+		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneKnifeHead, 2), new Object[] { " # # ","## ##","## ##","## ##","## ##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, 32767)});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneKnifeHead, 1), new Object[] { " #","##","##","##","##", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, 32767)});
 		CraftingManagerTFC.getInstance().addRecipe(new ItemStack(TFCItems.StoneHammerHead, 1), new Object[] { "#####","#####","  #  ", Character.valueOf('#'), new ItemStack(TFCItems.FlatRock, 1, 32767)});
 
