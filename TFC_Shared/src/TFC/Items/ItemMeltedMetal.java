@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.Reference;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
@@ -102,7 +103,8 @@ public class ItemMeltedMetal extends ItemTerra
 	@Override
 	public void addExtraInformation(ItemStack is, EntityPlayer player, List arraylist)
 	{	
-		if(TFC_ItemHeat.getIsLiquid(is))
+		if(TFC_ItemHeat.getIsLiquid(is) && (is.getItem().getUnlocalizedName().contains("Bronze") ||
+				is.getItem().getUnlocalizedName().contains("Copper")))
 		{
 			if (TFC_Core.showExtraInformation()) 
 			{
@@ -123,7 +125,8 @@ public class ItemMeltedMetal extends ItemTerra
 			itemstack.stackSize = 1;
 		}
 
-		if(TFC_ItemHeat.getIsLiquid(itemstack))
+		if(TFC_ItemHeat.getIsLiquid(itemstack) && (itemstack.getItem().getUnlocalizedName().contains("Bronze")  ||
+				itemstack.getItem().getUnlocalizedName().contains("Copper")))
 		{
 			PlayerInfo pi = PlayerManagerTFC.getInstance().getPlayerInfoFromPlayer(entityplayer);
 			pi.specialCraftingType = itemstack.copy();
