@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.API.TFCTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
