@@ -22,7 +22,7 @@ public class ItemLeather extends ItemLooseRock
 	public ItemLeather(int id) 
 	{
 		super(id);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 		this.MetaNames = null;
 	}
 

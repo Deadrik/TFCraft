@@ -45,7 +45,7 @@ public class ItemMetalSheet2x extends ItemMetalSheet
 	{
 		super(i);
 		setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 	}
 
 	@Override
