@@ -92,6 +92,10 @@ public class ItemMeltedMetal extends ItemTerra
 			}
 
 		}
+		else if(is.getItemDamage()==1){
+			is.setItemDamage(0);
+			//System.out.println(is.getItemDamage());
+		}
 	}
 	
 	@Override
