@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.Reference;
-import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
