@@ -86,7 +86,7 @@ public class EntitySheepTFC extends EntitySheep implements IShearable, IAnimal
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
 		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + F_size)/1.9F);
-		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
+		
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.

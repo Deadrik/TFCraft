@@ -68,7 +68,6 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
 		size_mod = (float)Math.sqrt((((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.95F));
-		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
