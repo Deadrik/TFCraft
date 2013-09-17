@@ -739,6 +739,8 @@ public class TFCItemID {
 	
 	//b78 additions
 	public static int rope						= 19116;
+	public static int venisonRaw				= 19117;
+	public static int venisonCooked				= 19118;
 
 
 	public static void Setup(Configuration config)

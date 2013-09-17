@@ -208,10 +208,20 @@ public class EntityDeer extends EntityAnimal implements IAnimal
 	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
+		float ageMod = TFC_Core.getPercentGrown(this);
 		if(isAdult())
 		{
 			this.dropItem(TFCItems.Hide.itemID,1);
 			this.dropItem(Item.bone.itemID, rand.nextInt(4)+2);
+		}
+		if (this.isBurning())
+		{
+
+			this.dropItem(TFCItems.venisonCooked.itemID, (int) (ageMod*this.size_mod *(6+this.rand.nextInt(5))));
+		}
+		else
+		{
+			this.dropItem(TFCItems.venisonRaw.itemID, (int) (ageMod*this.size_mod *(6+this.rand.nextInt(5))));
 		}
 	}
 	

@@ -125,7 +125,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 		}
 		
-		if(TFC_Time.getTotalTicks()%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE){
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE){
 			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
 
