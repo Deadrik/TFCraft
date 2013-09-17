@@ -18,6 +18,7 @@ public class TFC_Sounds
 		LOCATION + "metalimpact2.ogg",
 		LOCATION + "metalimpact3.ogg",
 		LOCATION + "metalimpact4.ogg",
+		LOCATION + "rooster1.ogg",
 		LOCATION + "stonedrag1.ogg",
 		LOCATION + "stonedrag2.ogg",
 		LOCATION + "bellows1.ogg",
@@ -36,6 +37,7 @@ public class TFC_Sounds
 	public static final String FALLININGDIRTSHORT = LOCATION + "fDirtS";
 	public static final String METALIMPACT = LOCATION + "metalimpact";
 	public static final String STONEDRAG = LOCATION + "stonedrag";
+	public static final String ROOSTERCROW = LOCATION + "rooster";
 	public static final String BELLOWS = LOCATION + "bellows";
 	public static final String CERAMICBREAK = LOCATION + "ceramicbreak";
 }
