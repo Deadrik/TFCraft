@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import TFC.TFCItems;
@@ -124,17 +125,20 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 		}
 
-		if (isAdult() && getGender() == GenderEnum.FEMALE && !this.worldObj.isRemote && --this.timeUntilNextEgg == 0)
+		if (--this.timeUntilNextEgg < 0)
 		{
-			this.worldObj.playSoundAtEntity(this, "mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-			this.dropItem(Item.egg.itemID, 1);
-			this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
+			this.timeUntilNextEgg = 0;
 		}
 		/**
 		 * This Cancels out the changes made to growingAge by EntityAgeable
 		 * */
 		TFC_Core.PreventEntityDataUpdate = true;
+		if(getGender()==GenderEnum.MALE){
 		timeUntilNextEgg=10000;
+		}
+		else if(timeUntilNextEgg == 0){
+			timeUntilNextEgg = 2;
+		}
 		super.onLivingUpdate();
 		TFC_Core.PreventEntityDataUpdate = false;
 
@@ -196,6 +200,14 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	protected int getDropItemId()
 	{
 		return Item.feather.itemID;
+	}
+	
+	public ItemStack getEggs(){
+		if(--this.timeUntilNextEgg == 0){			
+			this.timeUntilNextEgg = this.rand.nextInt(6000) + 24000;
+			return new ItemStack(Item.egg, 1);
+		}		
+		return null;
 	}
 
 	/**

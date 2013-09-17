@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
@@ -80,6 +81,13 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	}
 
 
+	@Override
+	public void setEntityHealth(float par1)
+    {
+        this.dataWatcher.updateObject(6, Float.valueOf(MathHelper.clamp_float(par1, 0.0F, 
+        		TFC_MobData.WolfHealth)));
+    }
+	
 	@Override
 	protected void func_110147_ax()
 	{

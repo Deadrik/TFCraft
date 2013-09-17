@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -29,7 +30,7 @@ import TFC.Items.ItemTerra;
 public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 {
 
-	private ItemStack itemstack;
+	private ItemStack[] itemstack = new ItemStack[4];
 	private ItemStack output;
 
 	public TileEntityNestBox()
@@ -56,6 +57,16 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 			return true;
 		}
 		return false;	
+	}
+	
+	public EntityAnimal getBird(){
+		List list = worldObj.getEntitiesWithinAABB(EntityChickenTFC.class, AxisAlignedBB.getBoundingBox(
+				xCoord, yCoord, zCoord, 
+				xCoord+0.5, yCoord+1.1, zCoord+0.5));
+		if(list.size()!=0){
+			return (EntityAnimal)list.get(0);
+		}
+		return null;
 	}
 
 	@Override
@@ -85,7 +96,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 			if(itemstack != null)
 			{
 				entityitem = new EntityItem(worldObj, xCoord + f, yCoord + f1, zCoord + f2, 
-						itemstack);
+						itemstack[i]);
 				entityitem.motionX = (float)rand.nextGaussian() * f3;
 				entityitem.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 				entityitem.motionZ = (float)rand.nextGaussian() * f3;
@@ -110,14 +121,14 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
-		return 1;
+		return 4;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
 		// TODO Auto-generated method stub
-		return itemstack;
+		return itemstack[i];
 	}
 
 	@Override
@@ -141,7 +152,7 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
-		this.itemstack = itemstack;
+		this.itemstack[i] = (ItemStack) itemstack;
 		if(itemstack != null && itemstack.stackSize > getInventoryStackLimit())
 		{
 			itemstack.stackSize = getInventoryStackLimit();
@@ -157,19 +168,18 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 		if(!worldObj.isRemote)
 		{
 			careForInventorySlot();
-			
-
-
-			
-			if(itemstack == null)
-			{
-				if(output != null)
-				{
-					itemstack = output;
-					output = null;
+			EntityAnimal bird = getBird();
+			if(bird!=null){
+				ItemStack item = ((EntityChickenTFC)bird).getEggs();
+				if(item!=null){
+					for(int i = 0; i< this.getSizeInventory();i++){
+						if(itemstack[i]==null){
+							setInventorySlotContents(i,item);
+							break;
+						}
+					}
 				}
 			}
-			
 		}
 	}
 
@@ -180,9 +190,21 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 		NBTTagList nbttaglist = new NBTTagList();
 
 		NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-		nbttagcompound1.setByte("Slot", (byte)1);
-		if(itemstack != null){
-			itemstack.writeToNBT(nbttagcompound1);
+		nbttagcompound1.setByte("Slot0", (byte)1);
+		if(itemstack[0] != null){
+			itemstack[0].writeToNBT(nbttagcompound1);
+		}
+		nbttagcompound1.setByte("Slot1", (byte)1);
+		if(itemstack[1] != null){
+			itemstack[1].writeToNBT(nbttagcompound1);
+		}
+		nbttagcompound1.setByte("Slot2", (byte)1);
+		if(itemstack[2] != null){
+			itemstack[2].writeToNBT(nbttagcompound1);
+		}
+		nbttagcompound1.setByte("Slot3", (byte)1);
+		if(itemstack[3] != null){
+			itemstack[3].writeToNBT(nbttagcompound1);
 		}
 		nbttaglist.appendTag(nbttagcompound1);
 
@@ -196,8 +218,14 @@ public class TileEntityNestBox extends NetworkTileEntity implements IInventory
 		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
 
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(0);
-		byte byte0 = nbttagcompound1.getByte("Slot");
-		itemstack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		byte byte0 = nbttagcompound1.getByte("Slot0");
+		itemstack[0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		byte byte1 = nbttagcompound1.getByte("Slot1");
+		itemstack[1] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		byte byte2 = nbttagcompound1.getByte("Slot2");
+		itemstack[2] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+		byte byte3 = nbttagcompound1.getByte("Slot3");
+		itemstack[3] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 	}
 
 	public void updateGui()

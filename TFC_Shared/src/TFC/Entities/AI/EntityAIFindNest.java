@@ -30,13 +30,13 @@ public class EntityAIFindNest extends EntityAIBase
     private int maxSittingTicks;
     
     /** X Coordinate of a nearby sitable block */
-    private int sitableBlockX;
+    private int sitableBlockX = -1;
 
     /** Y Coordinate of a nearby sitable block */
-    private int sitableBlockY;
+    private int sitableBlockY =-1;
 
     /** Z Coordinate of a nearby sitable block */
-    private int sitableBlockZ;
+    private int sitableBlockZ =-1;
 
     public EntityAIFindNest(EntityAnimal par1EntityAnimal, double par2)
     {
@@ -57,28 +57,18 @@ public class EntityAIFindNest extends EntityAIBase
         		this.theWorld.getBlockId((int)theCreature.posX, (int)theCreature.posY-1,(int)theCreature.posZ) != TFCBlocks.NestBox.blockID
         		 && this.getNearbySitableBlockDistance() &&
         		 ((EntityChickenTFC)theCreature).getGender()==GenderEnum.FEMALE){
+        	return true;
         }else{
         	return false;
         }
-        
-            Vec3 vec3 = this.findPossibleShelter();
-
-            if (vec3 == null)
-            {
-                return false;
-            }
-            else
-            {
-                this.shelterX = vec3.xCoord;
-                this.shelterY = vec3.yCoord;
-                this.shelterZ = vec3.zCoord;
-                return true;
-            }
         
     }
 
     public boolean continueExecuting()
     {
+    	if(this.theCreature.getDistanceSq((double)sitableBlockX+0.5, (double)sitableBlockY, (double)sitableBlockZ+0.5)<0.2){
+    		this.theCreature.getNavigator().clearPathEntity();
+    	}
         return this.currentTick <= this.maxSittingTicks && this.field_75402_d <= 60 && this.isSittableBlock(this.theCreature.worldObj, this.sitableBlockX, this.sitableBlockY, this.sitableBlockZ);
     }
     
@@ -87,9 +77,9 @@ public class EntityAIFindNest extends EntityAIBase
         int i = (int)this.theCreature.posY;
         double d0 = 2.147483647E9D;
 
-        for (int j = (int)this.theCreature.posX - 8; (double)j < this.theCreature.posX + 8.0D; ++j)
+        for (int j = (int)this.theCreature.posX - 16; (double)j < this.theCreature.posX + 16.0D; ++j)
         {
-            for (int k = (int)this.theCreature.posZ - 8; (double)k < this.theCreature.posZ + 8.0D; ++k)
+            for (int k = (int)this.theCreature.posZ - 16; (double)k < this.theCreature.posZ + 16.0D; ++k)
             {
                 if (this.isSittableBlock(this.theCreature.worldObj, j, i, k) && this.theCreature.worldObj.isAirBlock(j, i + 1, k))
                 {
@@ -135,25 +125,6 @@ public class EntityAIFindNest extends EntityAIBase
             --this.field_75402_d;
         }
     }
-
-    private Vec3 findPossibleShelter()
-    {
-        Random random = this.theCreature.getRNG();
-
-        for (int i = 0; i < 100; ++i)
-        {
-            int j = MathHelper.floor_double(this.theCreature.posX + (double)random.nextInt(20) - 10.0D);
-            int k = MathHelper.floor_double(this.theCreature.boundingBox.minY + (double)random.nextInt(6) - 3.0D);
-            int l = MathHelper.floor_double(this.theCreature.posZ + (double)random.nextInt(20) - 10.0D);
-
-            if (this.theWorld.getBlockId(j, k, l) == TFCBlocks.NestBox.blockID && this.theCreature.getBlockPathWeight(j, k, l) < 0.0F)
-            {
-                return this.theWorld.getWorldVec3Pool().getVecFromPool((double)j, (double)k, (double)l);
-            }
-        }
-
-        return null;
-    }
     
     /**
      * Determines whether the creature wants to sit on the block at given coordinate
@@ -167,7 +138,7 @@ public class EntityAIFindNest extends EntityAIBase
         {
             TileEntityNestBox tileentitynest = (TileEntityNestBox)par1World.getBlockTileEntity(par2, par3, par4);
 
-            if (!tileentitynest.hasBird())
+            if (!tileentitynest.hasBird()||(this.theCreature.getDistanceSq((double)sitableBlockX+0.5, (double)sitableBlockY, (double)sitableBlockZ+0.5)<1))
             {
                 return true;
             }
