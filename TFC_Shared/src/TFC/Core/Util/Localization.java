@@ -1,4 +1,4 @@
-package TFC.API.Util;
+package TFC.Core.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
