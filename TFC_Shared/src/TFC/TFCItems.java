@@ -1580,7 +1580,7 @@ public class TFCItems
 		YellowBellPepper = new ItemTerraFood(TFCItemID.YellowBellPepper, 10, 0.4F, false, 35).setUnlocalizedName("Yellow Bell Pepper");
 		RedBellPepper = new ItemTerraFood(TFCItemID.RedBellPepper, 10, 0.4F, false, 36).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemTerraFood(TFCItemID.Squash, 12, 0.4F, false, 37).setUnlocalizedName("Squash");
-		Cheese = new ItemTerraFood(TFCItemID.Cheese, 20, 0.6F, false, 38).setUnlocalizedName("Cheese");
+		Cheese = new ItemTerraFood(TFCItemID.Cheese, 20, 0.6F, false, 50).setUnlocalizedName("Cheese");
 
 		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
 		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");
