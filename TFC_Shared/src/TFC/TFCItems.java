@@ -1337,7 +1337,7 @@ public class TFCItems
 		SteelProPickHead = new ItemMiscToolHead(TFCItemID.SteelProPickHead).setUnlocalizedName("Steel ProPick Head");
 
 		Powder = new ItemTerra(TFCItemID.Flux).setMetaNames(new String[]
-				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}).setUnlocalizedName("Powder");
+				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder","Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder"}).setUnlocalizedName("Powder");
 
 		/**
 		 * Scythe

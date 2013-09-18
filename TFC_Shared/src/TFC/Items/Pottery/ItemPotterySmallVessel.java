@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import TFC.TFCBlocks;
+import TFC.TFCItems;
 import TFC.TerraFirmaCraft;
 import TFC.API.IBag;
 import TFC.API.ISmeltable;
@@ -182,6 +185,7 @@ public class ItemPotterySmallVessel extends ItemPotteryBase implements IBag
 				}
 			}
 		}
+		
 	}
 
 	private int mergeMetals(Metal mt0, Metal mt1, int m0, int m1)
