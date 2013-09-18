@@ -164,7 +164,7 @@ public class CraftingHandler implements ICraftingHandler
 					{
 						continue;
 					}
-					if(iinventory.getStackInSlot(i).getItem() instanceof ItemMeltedMetal )
+					if(iinventory.getStackInSlot(i).getItem() instanceof ItemIngot )
 					{
 						temperature = TFC_ItemHeat.GetTemperature(iinventory.getStackInSlot(i));
 					}

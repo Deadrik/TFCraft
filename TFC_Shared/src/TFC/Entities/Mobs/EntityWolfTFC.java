@@ -229,9 +229,10 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack par1ItemStack)
+	public boolean isBreedingItem(ItemStack is)
 	{
-		return !pregnant&&(par1ItemStack.getItem() == Item.porkRaw||par1ItemStack.getItem() == Item.beefRaw||par1ItemStack.getItem() == TFCItems.muttonRaw);
+		return !pregnant && is != null &&
+				(is.getItem() == Item.porkRaw || is.getItem() == Item.beefRaw || is.getItem() == TFCItems.muttonRaw);
 	}
 
 	@Override

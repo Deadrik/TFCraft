@@ -1,5 +1,6 @@
 package TFC.Items;
 
+import TFC.API.TFCTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,7 @@ public class ItemWoolYarn extends ItemTerra
 		super(id);
 		this.hasSubtypes = false;
 		this.setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 	}	
 
 	@Override

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import TFC.API.TFCTabs;
 import TFC.API.Enums.EnumSize;
 import TFC.API.Enums.EnumWeight;
 
@@ -14,7 +15,7 @@ public class ItemMetalSheet extends ItemTerra
 	{
 		super(i);
 		setMaxDamage(0);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCMaterials);
 		setFolder("ingots/");
 		this.setWeight(EnumWeight.MEDIUM);
 		this.setSize(EnumSize.MEDIUM);

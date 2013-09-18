@@ -10,6 +10,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import TFC.Reference;
 import TFC.TerraFirmaCraft;
+import TFC.API.TFCTabs;
 import TFC.API.Util.StringUtil;
 import TFC.Core.TFC_Core;
 import TFC.Core.Player.PlayerInfo;
@@ -21,7 +22,7 @@ public class ItemClay extends ItemLooseRock
 	public ItemClay(int id) 
 	{
 		super(id);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(TFCTabs.TFCPottery);
 		this.icons = new Icon[2];
 	}
 
