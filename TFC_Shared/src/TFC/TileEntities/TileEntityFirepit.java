@@ -1,6 +1,8 @@
 package TFC.TileEntities;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
@@ -446,34 +448,33 @@ public class TileEntityFirepit extends TileEntityFireEntity implements IInventor
     {       
         if(worldObj.getBlockId(i, j, k) == TFCBlocks.LogPile.blockID)
         {
-        	ArrayList<Vector3f> blocksOnFire = new ArrayList<Vector3f>();
-            if(!empty)
-            {
-                if(worldObj.getBlockId(i+1, j, k) == 0)
-                	blocksOnFire.add(new Vector3f(i+1, j, k));
-                if(worldObj.getBlockId(i-1, j, k) == 0)
-                	blocksOnFire.add(new Vector3f(i-1, j, k));
-                if(worldObj.getBlockId(i, j, k+1) == 0)
-                	blocksOnFire.add(new Vector3f(i, j, k+1));
-                if(worldObj.getBlockId(i, j, k-1) == 0)
-                	blocksOnFire.add(new Vector3f(i, j, k-1));
-                if(worldObj.getBlockId(i, j+1, k) == 0)
-                	blocksOnFire.add(new Vector3f(i, j+1, k));
-                if(worldObj.getBlockId(i, j-1, k) == 0)
-                	blocksOnFire.add(new Vector3f(i, j-1, k));
-            }
-
-            TileEntityLogPile te = (TileEntityLogPile)worldObj.getBlockTileEntity(i, j, k);
+        	TileEntityLogPile te = (TileEntityLogPile)worldObj.getBlockTileEntity(i, j, k);
+        	
             int count = 0;
             if(te != null)
             {
             	if(!empty)
+            	{
+            		Queue<Vector3f> blocksOnFire = new ArrayDeque<Vector3f>();
+            		
+            		if(worldObj.getBlockId(i+1, j, k) == 0)
+                    	blocksOnFire.add(new Vector3f(i+1, j, k));
+                    if(worldObj.getBlockId(i-1, j, k) == 0)
+                    	blocksOnFire.add(new Vector3f(i-1, j, k));
+                    if(worldObj.getBlockId(i, j, k+1) == 0)
+                    	blocksOnFire.add(new Vector3f(i, j, k+1));
+                    if(worldObj.getBlockId(i, j, k-1) == 0)
+                    	blocksOnFire.add(new Vector3f(i, j, k-1));
+                    if(worldObj.getBlockId(i, j+1, k) == 0)
+                    	blocksOnFire.add(new Vector3f(i, j+1, k));
+                    if(worldObj.getBlockId(i, j-1, k) == 0)
+                    	blocksOnFire.add(new Vector3f(i, j-1, k));
+                    
+                    te.blocksToBeSetOnFire = blocksOnFire;
             		te.setCharcoalFirepit(this);
+            	}
             	else 
             		te.setCharcoalFirepit(null);
-            	
-            	if(blocksOnFire.size() > 0)
-            		te.setOnFire(blocksOnFire);
             	
                 if(te.storage[0] != null) 
                 {
