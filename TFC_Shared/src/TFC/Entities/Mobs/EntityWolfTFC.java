@@ -37,7 +37,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 	public float size_mod;
 	public boolean inLove;
 
-	private int degreeofdiversion = 1;
+	private int degreeOfDiversion = 2;
 
 	public EntityWolfTFC(World par1World)
 	{
@@ -55,7 +55,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		timeOfConception = 0;
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
-		size_mod = (((rand.nextInt (degreeofdiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event. We want spawned
@@ -71,7 +71,7 @@ public class EntityWolfTFC extends EntityWolf implements IAnimal
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (((rand.nextInt (1+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + F_size)/1.9F);
+		size_mod = (((rand.nextInt((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + F_size)/1.9F);
 		size_mod = Math.min(Math.max(size_mod, 0.7F),1.3f);
 
 		//	We hijack the growingAge to hold the day of birth rather
