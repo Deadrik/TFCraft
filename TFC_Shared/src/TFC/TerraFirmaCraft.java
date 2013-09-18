@@ -90,7 +90,7 @@ public class TerraFirmaCraft
 		TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
 		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
-		//Load Blocks
+		//Load IDs
 		Configuration config;
 		try
 		{
@@ -98,6 +98,7 @@ public class TerraFirmaCraft
 					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
 			config.load();
 			TFCBlockID.Setup(config);
+			TFCItemID.Setup(config);
 			config.save();
 		} 
 		catch (Exception e) 
@@ -109,19 +110,6 @@ public class TerraFirmaCraft
 		TFCBlocks.RegisterBlocks();
 
 		//Load Items
-		try
-		{
-			config = new net.minecraftforge.common.Configuration(
-					new File(TerraFirmaCraft.proxy.getMinecraftDir(), "/config/TFC.cfg"));
-			config.load();
-			TFCItemID.Setup(config);
-			config.save();
-		} 
-		catch (Exception e) 
-		{
-			System.out.println(new StringBuilder().append("[TFC] Error while trying to access item configuration!").toString());
-		}
-
 		TFCItems.Setup();
 
 		//Register Generators
