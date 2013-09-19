@@ -173,6 +173,13 @@ public class Recipes
 			GameRegistry.addShapelessRecipe(new ItemStack(Block.field_111031_cC,1,i),new Object[] {new ItemStack(Item.dyePowder,1,15-i),new ItemStack(Block.field_111031_cC,1,32767)});
 		}
 		
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,4),new Object[]{new ItemStack(TFCItems.Powder,1,6)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,2),new Object[]{new ItemStack(TFCItems.Powder,1,8)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,1),new Object[]{new ItemStack(TFCItems.Powder,1,5)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,11),new Object[]{new ItemStack(TFCItems.Powder,1,7)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand,1,32767)});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder,1,12),new Object[]{new ItemStack(TFCItems.Powder,1,8),new ItemStack(TFCItems.Powder,1,0),new ItemStack(TFCBlocks.Sand2,1,32767)});
+		
 		//Chest
 		GameRegistry.addRecipe(new ItemStack(Block.chest, 1), new Object[] { "###","# #","###", Character.valueOf('#'), new ItemStack(TFCItems.SinglePlank, 1, 32767)});
 

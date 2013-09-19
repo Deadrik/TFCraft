@@ -728,6 +728,9 @@ public class TFCItems
 	public static Item OatWhole;
 	public static Item RyeWhole;
 	public static Item RiceWhole;
+	
+	public static Item venisonRaw;
+	public static Item venisonCooked;
 
 	public static Item LooseRock;
 	public static Item FlatRock;
@@ -1334,7 +1337,7 @@ public class TFCItems
 		SteelProPickHead = new ItemMiscToolHead(TFCItemID.SteelProPickHead).setUnlocalizedName("Steel ProPick Head");
 
 		Powder = new ItemTerra(TFCItemID.Flux).setMetaNames(new String[]
-				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder"}).setUnlocalizedName("Powder");
+				{"Flux", "Kaolinite Powder", "Graphite Powder", "Sulfur Powder", "Saltpeter Powder","Hematite Powder", "Lapis Lazuli Powder", "Limonite Powder", "Malachite Powder"}).setUnlocalizedName("Powder");
 
 		/**
 		 * Scythe
@@ -1441,6 +1444,8 @@ public class TFCItems
 		Sake = new ItemAlcohol(TFCItemID.Sake).setUnlocalizedName("Sake").setCreativeTab(CreativeTabs.tabFood);
 		Vodka = new ItemAlcohol(TFCItemID.Vodka).setUnlocalizedName("Vodka").setCreativeTab(CreativeTabs.tabFood);
 		Whiskey = new ItemAlcohol(TFCItemID.Whiskey).setUnlocalizedName("Whiskey").setCreativeTab(CreativeTabs.tabFood);
+		
+		
 
 		Blueprint = new ItemBlueprint(TFCItemID.Blueprint);
 		writabeBookTFC = new ItemWritableBookTFC(TFCItemID.WritableBookTFC,"Fix Me I'm Broken").setUnlocalizedName("book");
@@ -1462,6 +1467,8 @@ public class TFCItems
 		SheepSkin = new ItemTerra(TFCItemID.SheepSkin).setFolder("tools/").setUnlocalizedName("Sheep Skin").setCreativeTab(TFCTabs.TFCMaterials);
 		muttonRaw = new ItemTerra(TFCItemID.muttonRaw).setFolder("food/").setUnlocalizedName("Mutton Raw");
 		muttonCooked =  new ItemTerraFood(TFCItemID.muttonCooked, 40, 0.8F, true, 48).setUnlocalizedName("Mutton Cooked");
+		venisonRaw = new ItemTerra(TFCItemID.venisonRaw).setFolder("food/").setUnlocalizedName("Venison");
+		venisonCooked =  new ItemTerraFood(TFCItemID.venisonCooked, 40, 0.8F, true, 49).setUnlocalizedName("VenisonCooked");
 		FlatLeather = (new ItemFlatGeneric(TFCItemID.FlatLeather2).setFolder("tools/").setUnlocalizedName("Flat Leather"));
 		TerraLeather = new ItemLeather(TFCItemID.TFCLeather).setSpecialCraftingType(FlatLeather).setFolder("tools/").setUnlocalizedName("TFC Leather");
 
@@ -1573,7 +1580,7 @@ public class TFCItems
 		YellowBellPepper = new ItemTerraFood(TFCItemID.YellowBellPepper, 10, 0.4F, false, 35).setUnlocalizedName("Yellow Bell Pepper");
 		RedBellPepper = new ItemTerraFood(TFCItemID.RedBellPepper, 10, 0.4F, false, 36).setUnlocalizedName("Red Bell Pepper");
 		Squash = new ItemTerraFood(TFCItemID.Squash, 12, 0.4F, false, 37).setUnlocalizedName("Squash");
-		Cheese = new ItemTerraFood(TFCItemID.Cheese, 20, 0.6F, false, 38).setUnlocalizedName("Cheese");
+		Cheese = new ItemTerraFood(TFCItemID.Cheese, 20, 0.6F, false, 50).setUnlocalizedName("Cheese");
 
 		WheatWhole = new ItemTerra(TFCItemID.WheatWhole).setFolder("food/").setUnlocalizedName("Wheat Whole");
 		BarleyWhole = new ItemTerra(TFCItemID.BarleyWhole).setFolder("food/").setUnlocalizedName("Barley Whole");

@@ -31,6 +31,8 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 	protected float mateSizeMod;
 	public float size_mod;
 	public boolean inLove;
+	
+	int degreeOfDiversion = 2;
 
 	public EntityCowTFC(World par1World)
 	{
@@ -42,7 +44,6 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		conception = 0;
 		mateSizeMod = 0;
 		sex = rand.nextInt(2);
-		int degreeOfDiversion = 1;
 		size_mod =(float)Math.sqrt((((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) * 0.1f) + 1F) * (1.0F - 0.1F * sex));
 		this.setSize(0.9F, 1.3F);
 		this.getNavigator().setAvoidsWater(true);
@@ -67,7 +68,7 @@ public class EntityCowTFC extends EntityCow implements IAnimal
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (float)Math.sqrt((((rand.nextInt (4+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.95F));
+		size_mod = (float)Math.sqrt((((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + father_size)/1.95F));
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.

@@ -5,12 +5,14 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import TFC.TFCItems;
 import TFC.API.Entities.IAnimal;
@@ -32,7 +34,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	public float size_mod;
 	public boolean inLove;
 
-	int degreeOfDiversion = 4;
+	int degreeOfDiversion = 2;
 
 	public EntityChickenTFC(World par1World)
 	{
@@ -47,7 +49,10 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		animalID = TFC_Time.getTotalTicks() + entityId;
 		mateSizeMod = 1f;
 		sex = rand.nextInt(2);
-		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex);
+		if(sex==0){
+			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		}
+		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event. We want spawned
@@ -65,7 +70,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 		this.posX = ((EntityLivingBase)mother).posX;
 		this.posY = ((EntityLivingBase)mother).posY;
 		this.posZ = ((EntityLivingBase)mother).posZ;
-		size_mod = (((rand.nextInt (degreeOfDiversion+1)*(rand.nextBoolean()?1:-1)) / 10f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + f_size)/1.9F);
+		size_mod = (((rand.nextInt ((degreeOfDiversion+1)*10)*(rand.nextBoolean()?1:-1)) / 100f) + 1F) * (1.0F - 0.1F * sex) * (float)Math.sqrt((mother.getSize() + f_size)/1.9F);
 
 		//	We hijack the growingAge to hold the day of birth rather
 		//	than number of ticks to next growth event.
@@ -125,7 +130,7 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 			setGrowingAge(-1);
 		}
 		
-		if(TFC_Time.getTotalTicks()%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE){
+		if((TFC_Time.getTotalTicks()-15)%TFC_Time.dayLength == 0 && getGender() == GenderEnum.MALE){
 			this.playSound(TFC_Sounds.ROOSTERCROW, 10, rand.nextFloat()+0.5F);
 		}
 
@@ -369,12 +374,15 @@ public class EntityChickenTFC extends EntityChicken implements IAnimal
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer)
 	{
-		if(!worldObj.isRemote){
-			par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
+		//if(!worldObj.isRemote){
+			//par1EntityPlayer.addChatMessage(getGender()==GenderEnum.FEMALE?"Female":"Male");
 			//if(getGender()==GenderEnum.FEMALE && pregnant){
 			//	par1EntityPlayer.addChatMessage("Pregnant");
 			//}
 			//par1EntityPlayer.addChatMessage("12: "+dataWatcher.getWatchableObjectInt(12)+", 15: "+dataWatcher.getWatchableObjectInt(15));
+		if(!worldObj.isRemote && isAdult() && attackEntityFrom(DamageSource.generic, 25)) {
+			par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.feather, 1));
+
 		}
 		return super.interact(par1EntityPlayer);
 	}
