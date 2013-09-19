@@ -34,6 +34,7 @@ public class ContainerVessel extends ContainerTFC {
 		{
 			loadBagInventory();
 		}
+		this.doItemSaving = true;
 	}
 
 	public void loadBagInventory()

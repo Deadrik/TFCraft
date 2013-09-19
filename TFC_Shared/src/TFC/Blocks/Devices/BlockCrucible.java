@@ -105,7 +105,7 @@ public class BlockCrucible extends BlockTerraContainer
 			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setInteger("ID", m.type.IngotID);
-				nbttagcompound1.setShort("Amount", m.amount);
+				nbttagcompound1.setFloat("AmountF", m.amount);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}

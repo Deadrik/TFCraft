@@ -12,6 +12,7 @@ public class ContainerTFC extends Container
 	public int bagsSlotNum = 0;
 	public EntityPlayer player;
 	protected boolean isLoading = false;
+	protected boolean doItemSaving = false;
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
 		// TODO Auto-generated method stub
@@ -160,7 +161,7 @@ public class ContainerTFC extends Container
 
 			if (!areItemStacksEqual(itemstack1, itemstack))
 			{
-				if(i < inventoryItemStacks.size()-36 && !isLoading) 
+				if(doItemSaving && i < inventoryItemStacks.size()-36 && !isLoading) 
 				{
 					_shouldSave = true;
 				}
