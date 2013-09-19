@@ -16,12 +16,6 @@ public class GuiQuiver extends GuiContainerTFC
 	}
 
 	@Override
-	public void onGuiClosed()
-	{
-		super.onGuiClosed();
-	}
-
-	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		this.drawGui(GuiTex);

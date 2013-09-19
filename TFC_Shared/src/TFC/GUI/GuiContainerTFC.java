@@ -17,22 +17,23 @@ public class GuiContainerTFC extends GuiContainer
 		super(par1Container);
 		xSize = xsize;
 		ySize = ysize+PlayerInventory.invYSize;
-
-		guiLeft = (width - xSize) / 2;
-		guiTop = (height - ySize) / 2;
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		// TODO Auto-generated method stub
-
+		drawGui(null);
 	}
 
 	protected void drawGui(ResourceLocation rl)
 	{
-		bindTexture(rl);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		if(rl != null)
+		{
+			bindTexture(rl);
+			guiLeft = (width - xSize) / 2;
+			guiTop = (height - ySize) / 2;
+			drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		}
 		PlayerInventory.drawInventory(this, width, height, ySize-PlayerInventory.invYSize);
 	}
 
